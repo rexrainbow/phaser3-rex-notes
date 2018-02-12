@@ -7,12 +7,10 @@ import DeepClone from './../utils/object/DeepClone.js'
 import IsEmpty from './../utils/Object/IsEmpty.js';
 
 /**
+ * Create Gashapon object with configuration
+ * @class
  * @classdesc Gashapon in shuffle or random mode
  */
-const MODE = {
-    shuffle: 0,
-    random: 1
-};
 class Gashapon {
     constructor(config) {
         this.cfg = {
@@ -26,6 +24,10 @@ class Gashapon {
         this.resetFromJSON(config);
     }
 
+    /**
+    * Return status in JSON object
+    * @returns JSON object
+    */
     toJSON() {
         // pure JSON part
         var o = {
@@ -55,6 +57,11 @@ class Gashapon {
         return o;
     };
 
+    /**
+    * Reset status by JSON object
+    * @param {object} JSON object
+    * @returns {object} this object
+    */
     resetFromJSON(o) {
         // configuration
         this.setMode(GetFastValue(o, 'mode', 0));
@@ -84,6 +91,10 @@ class Gashapon {
         return this;
     }
 
+    /**
+    * Restart generator
+    * @returns {object} this object
+    */    
     startGen() {
         var name;
         // clean remain items
@@ -108,7 +119,11 @@ class Gashapon {
     }
 
 
-    // configuration
+    /**
+    * Set mode
+    * @param {number|string} m - 'shuffle'(0) or 'random'(1)
+    * @returns {object} this object
+    */ 
     setMode(m) {
         if (typeof (m) == 'string') {
             m = MODE[m];
@@ -117,18 +132,34 @@ class Gashapon {
         this.cfg.mode = m;
         return this;
     }
+
+    /**
+    * Set reload mode
+    * @param {boolean} isReload - reload items when empty
+    * @returns {object} this object
+    */
     setReload(isReload) {
         this.cfg.reload = !!isReload;
         return this;
     }
 
-    // data
+    /**
+    * Set item
+    * @param {string} name - item name
+    * @param {number} count - item count
+    * @returns {object} this object
+    */ 
     setItem(name, count) {
         this._restartFlag = (this.items[name] !== count);
         this.items[name] = count;
         return this;
     }
 
+    /**
+    * Remove item
+    * @param {string} name - item name
+    * @returns {object} this object
+    */     
     removeItem(name) {
         if (this.items.hasOwnProperty(name)) {
             delete this.items[name];
@@ -137,6 +168,10 @@ class Gashapon {
         return this;
     }
 
+    /**
+    * Remove all items
+    * @returns {object} this object
+    */     
     removeAllItems() {
         for (var name in this.items) {
             delete this.items[name];
@@ -145,22 +180,46 @@ class Gashapon {
         return this;
     }
 
+    /**
+    * Return clone items
+    * @returns {object} Cloned items
+    */ 
     getItems() {
         return Clone(this.items);
     }
 
+    /**
+    * Return clone remaining items
+    * @returns {object} Cloned remaining items
+    */ 
     getRemain() {
         return Clone(this.remain);
     }
 
+    /**
+    * Return amount of an item
+    * @param {string} name - item name
+    * @returns {number} Amount of an item
+    */     
     getItemCount(name) {
         return this.items[name] || 0;
     }
 
+    /**
+    * Return amount of a remaining item
+    * @param {string} name - remaining item name
+    * @returns {number} Amount of a remaining item
+    */        
     getRemainCount(name) {
         return this.remain[name] || 0;
     }
 
+    /**
+    * Add item without changing remaining items
+    * @param {string} name - item name
+    * @param {number} count - item count
+    * @returns {object} this object
+    */      
     addItem(name, count) {
         if (name == "")
             return;
@@ -180,6 +239,12 @@ class Gashapon {
         return this;
     }
 
+    /**
+    * Add remaining items without max items
+    * @param {string} name - item name
+    * @param {number} count - item count
+    * @returns {object} this object
+    */       
     putItemBack(name, count) {
         if (this.cfg.mode == 1) // random mode
             return;
@@ -201,7 +266,10 @@ class Gashapon {
         return this;
     };
 
-    // get next random item
+    /**
+    * Return a random item
+    * @returns {string} item name
+    */ 
     next(name) {
         var result;
         if (this._restartFlag) {
@@ -234,14 +302,19 @@ class Gashapon {
         return result;
     }
 
-    // custom random generator
+    /**
+    * Set custom random generator
+    * @param {function} fn - random generator function
+    * @param {object} ctx - context of random generator object
+    * @returns {object} this object
+    */ 
     setRandomGen(fn, context) {
         this.customRnd.fn = fn;
         this.customRnd.context = context;
         return this;
     }
 
-    // internal
+    /** @private */
     resetItemList(items) {
         // clean list
         this.list.length = 0;
@@ -265,6 +338,7 @@ class Gashapon {
         return this;
     }
 
+    /** @private */
     addRemainItem(name, inc, maxCount) {
         if ((name == null) || (inc == 0))
             return this;
@@ -285,6 +359,7 @@ class Gashapon {
         return this;
     }
 
+    /** @private */
     getRndValue() {
         var value;
         if (this.customRnd.fn) {
@@ -295,6 +370,7 @@ class Gashapon {
         return value;
     };
 
+    /** @private */
     getRndItem(list) {
         var value = this.getRndValue();
         var result,
@@ -312,5 +388,11 @@ class Gashapon {
     };
 
 }
+
+/** @private */
+const MODE = {
+    shuffle: 0,
+    random: 1
+};
 
 export default Gashapon;
