@@ -1,7 +1,9 @@
 'use strict'
 
 import GetFastValue from './../utils/object/GetFastValue.js';
+import GetValue from './../utils/object/GetValue';
 import Clone from './../utils/object/Clone.js';
+import DeepClone from './../utils/object/DeepClone.js'
 import IsEmpty from './../utils/Object/IsEmpty.js';
 
 /**
@@ -16,12 +18,17 @@ class Gashapon {
         this.cfg = {
             mode: null,
             reload: null
-        }
+        };
+        this.customRnd = {
+            fn: null,
+            ctx: null
+        };
         this.resetFromJSON(config);
     }
 
     toJSON() {
-        return {
+        // pure JSON part
+        var o = {
             // configuration
             mode: this.cfg.mode,
             reload: this.cfg.reload,
@@ -38,11 +45,19 @@ class Gashapon {
             // flags
             restart: this._restartFlag
         };
+        o = DeepClone(o);
+
+        // object references
+        o.rnd = {
+            fn: this.customRnd.fn,
+            ctx: this.customRnd.ctx
+        };
+        return o;
     };
 
     resetFromJSON(o) {
         // configuration
-        this.setMode(GetFastValue(o, 'mode', 'shuffle'));
+        this.setMode(GetFastValue(o, 'mode', 0));
         this.setReload(GetFastValue(o, 'reload', true));
 
         // data
@@ -58,10 +73,8 @@ class Gashapon {
         this._restartFlag = GetFastValue(o, 'restart', true);
 
         // custom function to return random real number between 0 and 1
-        this.customRnd = {
-            fn: null,
-            ctx: null
-        };
+        this.customRnd.fn = GetValue(o, 'rnd.fn', null);
+        this.customRnd.ctx = GetValue(o, 'rnd.ctx', null);
 
         // initialize
         if (this._restartFlag) {
@@ -97,7 +110,9 @@ class Gashapon {
 
     // configuration
     setMode(m) {
-        m = MODE[m];
+        if (typeof (m) == 'string') {
+            m = MODE[m];
+        }
         this._restartFlag = (this.cfg.mode !== m);
         this.cfg.mode = m;
         return this;
