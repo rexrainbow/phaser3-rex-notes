@@ -1,11 +1,8 @@
 'use strict'
 
-// 'GetFastValue' from phaser module
-import 'phaser';
-import IsEmpty from './../utils/IsEmpty.js';
-
-const GetFastValue = Phaser.Utils.Objects.GetFastValue;
-const Clone = Phaser.Utils.Objects.Clone;
+import GetFastValue from './../utils/object/GetFastValue.js';
+import Clone from './../utils/object/Clone.js';
+import IsEmpty from './../utils/Object/IsEmpty.js';
 
 /**
  * @classdesc Gashapon in shuffle or random mode
