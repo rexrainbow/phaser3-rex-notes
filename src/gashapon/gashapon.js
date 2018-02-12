@@ -37,12 +37,11 @@ class Gashapon {
 
             // data
             items: this.items,
-            list: this.list,
+            list: this._list,
             remain: this.remain,
 
             // result
             result: this.result,
-            preResult: this.preResult,
 
             // flags
             restart: this._restartFlag
@@ -69,12 +68,11 @@ class Gashapon {
 
         // data
         this.items = GetFastValue(o, 'items', {});
-        this.list = GetFastValue(o, 'list', []);
+        this._list = GetFastValue(o, 'list', []);
         this.remain = GetFastValue(o, 'remain', {});
 
         // result
         this.result = GetFastValue(o, 'result', null);
-        this.preResult = GetFastValue(o, 'preResult', null);
 
         // flags
         this._restartFlag = GetFastValue(o, 'restart', true);
@@ -279,10 +277,10 @@ class Gashapon {
         if (name == null) {
             if (this.cfg.mode == 0) { // shuffle mode
                 this.resetItemList(this.remain);
-                result = this.getRndItem(this.list);
+                result = this.getRndItem(this._list);
                 this.addRemainItem(result, -1);
             } else { // random mode
-                result = this.getRndItem(this.list);
+                result = this.getRndItem(this._list);
             }
 
         } else { // force pick
@@ -296,9 +294,7 @@ class Gashapon {
             }
         }
 
-        this.preResult = this.result;
         this.result = result;
-
         return result;
     }
 
@@ -317,7 +313,7 @@ class Gashapon {
     /** @private */
     resetItemList(items) {
         // clean list
-        this.list.length = 0;
+        this._list.length = 0;
         var name, count, totalCount = 0;
         // get total count
         for (name in items) {
@@ -329,7 +325,7 @@ class Gashapon {
         for (name in items) {
             count = items[name];
             if (count > 0) {
-                this.list.push([
+                this._list.push([
                     name,
                     count / totalCount
                 ]);

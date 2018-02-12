@@ -1,2 +1,2 @@
-import gashapon from './gashapon/gashapon.js';
+import gashapon from './gashapon/Gashapon.js';
 export default gashapon;
