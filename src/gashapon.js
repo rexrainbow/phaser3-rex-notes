@@ -1,2 +1,4 @@
-import gashapon from './gashapon/Gashapon.js';
-export default gashapon;
+import Gashapon from './gashapon/Gashapon.js';
+import GashaponPlugin from './gashapon/GashaponPlugin.js';
+
+export {Gashapon, GashaponPlugin};
