@@ -3,6 +3,7 @@
 import Gashapon from './Gashapon.js';
 
 class GashaponPlugin extends Gashapon {
+    // TBD: constructor could not have other parameters?
     constructor(scene, config) {
         super(config);
 
@@ -40,18 +41,16 @@ class GashaponPlugin extends Gashapon {
         eventEmitter.on('destroy', this.destroy, this);
     }
 
-    shutdown ()
-    {
+    shutdown() {
         //  Should we reset the events?
     }
 
-    destroy ()
-    {
+    destroy() {
         Gashapon.destroy.call(this);
 
         this.scene = undefined;
         this.systems = undefined;
-    }        
+    }
 }
 
 export default GashaponPlugin;

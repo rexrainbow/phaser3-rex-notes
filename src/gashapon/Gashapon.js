@@ -213,17 +213,15 @@ class Gashapon {
      * @param {object} [scope] - value to use as `this` when executing callback.
      * @param {...*} [arguments] - additional arguments that will be passed to the callback, after item name, and amount.
      * @returns {object} this object
-     */    
+     */
     eachItem(callback, scope) {
-        var args = [ null, undefined ];
+        var args = [null, undefined];
 
-        for (var i = 2; i < arguments.length; i++)
-        {
+        for (var i = 2; i < arguments.length; i++) {
             args.push(arguments[i]);
         }
 
-        for (var name in this.items)
-        {
+        for (var name in this.items) {
             args[0] = name;
             args[1] = this.items[name];
 
@@ -239,17 +237,15 @@ class Gashapon {
      * @param {object} [scope] - value to use as `this` when executing callback.
      * @param {...*} [arguments] - additional arguments that will be passed to the callback, after item name, and amount.
      * @returns {object} this object
-     */        
+     */
     eachRemain(callback, scope) {
-        var args = [ null, undefined ];
+        var args = [null, undefined];
 
-        for (var i = 1; i < arguments.length; i++)
-        {
+        for (var i = 1; i < arguments.length; i++) {
             args.push(arguments[i]);
         }
 
-        for (var name in this.remain)
-        {
+        for (var name in this.remain) {
             args[1] = name;
             args[2] = this.remain[name];
 
@@ -257,7 +253,7 @@ class Gashapon {
         }
 
         return this;
-    }    
+    }
 
     /**
      * Add item without changing remaining items
@@ -438,7 +434,7 @@ class Gashapon {
             value = Math.random();
         }
         return value;
-    };
+    }
 
     /** @private */
     getRndItem(list) {
@@ -455,7 +451,7 @@ class Gashapon {
             }
         }
         return result;
-    };
+    }
 
 }
 
