@@ -1,4 +1,4 @@
-import Gashapon from './../../src/gashapon.js';
+import Gashapon from './../../plugins/gashapon.js';
 
 function preload() {
 }
