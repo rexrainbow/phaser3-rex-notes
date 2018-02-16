@@ -47,7 +47,7 @@ class Gashapon {
         o = DeepClone(o);
 
         // object references
-        o.rnd = [this.customRnd.fn, this.customRnd.ctx];
+        o.rnd = [this.customRnd[0], this.customRnd[1]];
         return o;
     };
 

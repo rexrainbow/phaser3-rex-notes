@@ -12,7 +12,7 @@
         }, 
         {
             "location": "/gashapon/index.html", 
-            "text": "Introduction\n\n\nGashapon in shuffle or random mode.\n\n\nDependence\n\n\nNone\n\n\nUsage\n\n\nCreate instance\n\n\nvar\n \ngashapon\n \n=\n \nnew\n \nGashapon\n({\n\n    \nmode\n:\n \nshuffle\n,\n  \n// 0|\nshuffle\n|1|\nrandom\n\n    \nitems\n:\n \n{\n\n        \na\n:\n1\n,\n \nb\n:\n2\n,\n \nc\n:\n3\n  \n// itemName:count\n\n    \n},\n\n    \nreload\n:\n \ntrue\n,\n     \n// true|false\n\n\n});\n\n\n\n\n\nPick item\n\n\nPick a random item\n\n\ngashapon\n.\nnext\n();\n  \n// return null if pick nothing\n\n\n\n\n\nTry pick specific item\n\n\ngashapon\n.\nnext\n(\na\n);\n  \n// return null if pick nothing\n\n\n\n\n\nSet item\n\n\nSet item\n\n\ngashapon\n.\nsetItem\n(\na\n,\n \n1\n);\n\n\n// gashapon.setItem(\na\n, 1).setItem(\nb\n, 2).setItem(\nc\n, 3);\n\n\n\n\n\nRemove item\n\n\nRemove item\n\n\ngashapon\n.\nremoveItem\n(\na\n);\n\n\n// gashapon.removeItem(\nb\n).gashapon.removeItem(\nc\n);\n\n\n\n\n\nRemove all items\n\n\ngashapon\n.\nremoveAllItems\n();", 
+            "text": "Introduction\n\n\nGashapon in shuffle or random mode.\n\n\nDependence\n\n\nNone\n\n\nUsage\n\n\nCreate instance\n\n\nvar\n \ngashapon\n \n=\n \nnew\n \nGashapon\n({\n\n    \nmode\n:\n \nshuffle\n,\n  \n// 0|\nshuffle\n|1|\nrandom\n\n    \nitems\n:\n \n{\n\n        \na\n:\n1\n,\n \nb\n:\n2\n,\n \nc\n:\n3\n  \n// itemName:count\n\n    \n},\n\n    \nreload\n:\n \ntrue\n,\n     \n// true|false\n\n\n});\n\n\n\n\n\nPick item\n\n\nPick a random item\n\n\ngashapon\n.\nnext\n();\n  \n// return null if pick nothing\n\n\n\n\n\nTry pick specific item\n\n\ngashapon\n.\nnext\n(\na\n);\n  \n// return null if pick nothing\n\n\n\n\n\nLast picked item\n\n\nvar\n \nitem\n \n=\n \ngashapon\n.\nresult\n;\n\n\n\n\n\nSet item\n\n\nSet item\n\n\ngashapon\n.\nsetItem\n(\na\n,\n \n1\n);\n\n\n// gashapon.setItem(\na\n, 1).setItem(\nb\n, 2).setItem(\nc\n, 3);\n\n\n\n\n\nRemove item\n\n\nRemove item\n\n\ngashapon\n.\nremoveItem\n(\na\n);\n\n\n// gashapon.removeItem(\nb\n).gashapon.removeItem(\nc\n);\n\n\n\n\n\nRemove all items\n\n\ngashapon\n.\nremoveAllItems\n();\n\n\n\n\n\nGet current status in JSON object\n\n\nvar\n \nstatus\n \n=\n \ngashapon\n.\ntoJSON\n();\n\n\n// var gashapon2 = new Gashapon(status); // create new Gashapon object using previous status", 
             "title": "Gashapon"
         }, 
         {
@@ -51,6 +51,11 @@
             "title": "Try pick specific item"
         }, 
         {
+            "location": "/gashapon/index.html#last-picked-item", 
+            "text": "var   item   =   gashapon . result ;", 
+            "title": "Last picked item"
+        }, 
+        {
             "location": "/gashapon/index.html#set-item", 
             "text": "", 
             "title": "Set item"
@@ -74,6 +79,11 @@
             "location": "/gashapon/index.html#remove-all-items", 
             "text": "gashapon . removeAllItems ();", 
             "title": "Remove all items"
+        }, 
+        {
+            "location": "/gashapon/index.html#get-current-status-in-json-object", 
+            "text": "var   status   =   gashapon . toJSON ();  // var gashapon2 = new Gashapon(status); // create new Gashapon object using previous status", 
+            "title": "Get current status in JSON object"
         }
     ]
 }

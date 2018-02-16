@@ -258,6 +258,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#last-picked-item" title="Last picked item" class="md-nav__link">
+    Last picked item
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -306,6 +313,13 @@
           <li class="md-nav__item">
   <a href="#remove-all-items" title="Remove all items" class="md-nav__link">
     Remove all items
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-current-status-in-json-object" title="Get current status in JSON object" class="md-nav__link">
+    Get current status in JSON object
   </a>
   
 </li>
@@ -398,6 +412,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#last-picked-item" title="Last picked item" class="md-nav__link">
+    Last picked item
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -450,6 +471,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#get-current-status-in-json-object" title="Get current status in JSON object" class="md-nav__link">
+    Get current status in JSON object
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -496,6 +524,10 @@
 <div class="codehilite"><pre><span></span><span class="nx">gashapon</span><span class="p">.</span><span class="nx">next</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">);</span>  <span class="c1">// return null if pick nothing</span>
 </pre></div>
 
+<h4 id="last-picked-item">Last picked item<a class="headerlink" href="#last-picked-item" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">gashapon</span><span class="p">.</span><span class="nx">result</span><span class="p">;</span>
+</pre></div>
+
 <h3 id="set-item">Set item<a class="headerlink" href="#set-item" title="Permanent link">&para;</a></h3>
 <h4 id="set-item_1">Set item<a class="headerlink" href="#set-item_1" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><span class="nx">gashapon</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
@@ -510,6 +542,11 @@
 
 <h3 id="remove-all-items">Remove all items<a class="headerlink" href="#remove-all-items" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="nx">gashapon</span><span class="p">.</span><span class="nx">removeAllItems</span><span class="p">();</span>
+</pre></div>
+
+<h3 id="get-current-status-in-json-object">Get current status in JSON object<a class="headerlink" href="#get-current-status-in-json-object" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">status</span> <span class="o">=</span> <span class="nx">gashapon</span><span class="p">.</span><span class="nx">toJSON</span><span class="p">();</span>
+<span class="c1">// var gashapon2 = new Gashapon(status); // create new Gashapon object using previous status</span>
 </pre></div>
                 
                   

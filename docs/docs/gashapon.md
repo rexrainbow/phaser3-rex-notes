@@ -34,6 +34,12 @@ gashapon.next();  // return null if pick nothing
 gashapon.next('a');  // return null if pick nothing
 ```
 
+#### Last picked item
+
+```javascript
+var item = gashapon.result;
+```
+
 ### Set item
 
 #### Set item
@@ -56,4 +62,11 @@ gashapon.removeItem('a');
 
 ```javascript
 gashapon.removeAllItems();
+```
+
+### Get current status in JSON object
+
+```javascript
+var status = gashapon.toJSON();
+// var gashapon2 = new Gashapon(status); // create new Gashapon object using previous status
 ```
