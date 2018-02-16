@@ -1,8 +1,7 @@
 ## Prepare
 
 1.  install [node.js](https://nodejs.org/en/)
-2.  go to project-template folder
-3.  Click `install.bat`
+2.  Click `install.bat`
     -   `npm install`
 
 
