@@ -8,16 +8,17 @@ function create() {
         mode: 'shuffle',  // 0|'shuffle'|1|'random
         items: {
             a:1, b:2, c:3
-        }
+        },
+        reload: false
     });
 
-    // another way to add items:
-    // var myObj = new Gashapon({mode:0});
-    // myObj.addItem('a', 1).addItem('b', 2).addItem('c', 3);
-
-    for(var i=0; i<12; i++){
+    console.log("Pick a: " + myObj.next('a'));  
+        
+    for(var i=0; i<6; i++){
         console.log("Random pick: " + myObj.next());
     }
+
+    console.log("Pick a: " + myObj.next('a'));
 }
 
 var config = {

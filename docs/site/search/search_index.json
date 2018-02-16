@@ -9,6 +9,46 @@
             "location": "/index.html#about-me", 
             "text": "Plugin maker of Phaser 3 game engine.   TODO  on trello", 
             "title": "About me"
+        }, 
+        {
+            "location": "/gashapon/index.html", 
+            "text": "Introduction\n\n\nGashapon in shuffle or random mode.\n\n\nDependence\n\n\nNone\n\n\nUsage\n\n\nCreate instance\n\n\nvar\n \ngashapon\n \n=\n \nnew\n \nGashapon\n({\n\n    \nmode\n:\n \nshuffle\n,\n  \n// 0|\nshuffle\n|1|\nrandom\n\n    \nitems\n:\n \n{\n\n        \na\n:\n1\n,\n \nb\n:\n2\n,\n \nc\n:\n3\n  \n// itemName:count\n\n    \n},\n\n    \nreload\n:\n \ntrue\n,\n     \n// true|false\n\n\n});\n\n\n\n\n\nPick item\n\n\nPick a random item\n\n\ngashapon\n.\nnext\n();\n  \n// return null if pick nothing\n\n\n\n\n\nTry pick specific item\n\n\ngashapon\n.\nnext\n(\na\n);\n  \n// return null if pick nothing", 
+            "title": "Gashapon"
+        }, 
+        {
+            "location": "/gashapon/index.html#introduction", 
+            "text": "Gashapon in shuffle or random mode.", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/gashapon/index.html#dependence", 
+            "text": "None", 
+            "title": "Dependence"
+        }, 
+        {
+            "location": "/gashapon/index.html#usage", 
+            "text": "", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/gashapon/index.html#create-instance", 
+            "text": "var   gashapon   =   new   Gashapon ({ \n     mode :   shuffle ,    // 0| shuffle |1| random \n     items :   { \n         a : 1 ,   b : 2 ,   c : 3    // itemName:count \n     }, \n     reload :   true ,       // true|false  });", 
+            "title": "Create instance"
+        }, 
+        {
+            "location": "/gashapon/index.html#pick-item", 
+            "text": "", 
+            "title": "Pick item"
+        }, 
+        {
+            "location": "/gashapon/index.html#pick-a-random-item", 
+            "text": "gashapon . next ();    // return null if pick nothing", 
+            "title": "Pick a random item"
+        }, 
+        {
+            "location": "/gashapon/index.html#try-pick-specific-item", 
+            "text": "gashapon . next ( a );    // return null if pick nothing", 
+            "title": "Try pick specific item"
         }
     ]
 }

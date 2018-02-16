@@ -13,10 +13,10 @@ function create() {
     });
 
     for(var i=0; i<12; i++){
-        console.log(myObj.next());
+        console.log("Random pick: " + myObj.next());
     }
 
-    // return 'undefined' when Gashapon is empty
+    // return null when Gashapon is empty
 }
 
 var config = {

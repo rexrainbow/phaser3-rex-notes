@@ -3,6 +3,8 @@ theme: 'material'
 
 pages:
 - Home: index.md
+- Random:
+    - Gashapon: gashapon.md
 
 extra_javascript:
 - js/mermaid/mermaid.min.js

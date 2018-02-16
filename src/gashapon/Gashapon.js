@@ -439,7 +439,7 @@ class Gashapon {
     /** @private */
     getRndItem(list) {
         var value = this.getRndValue();
-        var result,
+        var result = null,
             i, cnt = list.length,
             item
         for (i = 0; i < cnt; i++) {
