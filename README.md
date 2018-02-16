@@ -20,6 +20,6 @@
 
 ## File structure
 
--   Folder `src` : source code of plugins
+-   Folder `plugins` : source code of plugins
 -   Folder `demo` : demo code
 -   Folder `docs` : document
