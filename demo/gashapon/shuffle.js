@@ -4,7 +4,7 @@ function preload() {
 }
 
 function create() {
-    var myObj = new Gashapon({
+    var gashapon = new Gashapon({
         mode: 'shuffle',  // 0|'shuffle'|1|'random
         items: {
             a:1, b:2, c:3
@@ -12,11 +12,11 @@ function create() {
     });
 
     // another way to add items:
-    // var myObj = new Gashapon({mode:0});
-    // myObj.addItem('a', 1).addItem('b', 2).addItem('c', 3);
+    // var gashapon = new Gashapon({mode:0});
+    // gashapon.addItem('a', 1).addItem('b', 2).addItem('c', 3);
 
     for(var i=0; i<12; i++){
-        console.log("Random pick: " + myObj.next());
+        console.log("Random pick: " + gashapon.next());
     }
 }
 
