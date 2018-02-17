@@ -12,12 +12,12 @@
         }, 
         {
             "location": "/gashapon/index.html", 
-            "text": "Introduction\n\n\nGashapon in shuffle or random mode.\n\n\nDependence\n\n\nNone\n\n\nUsage\n\n\nCreate instance\n\n\nvar\n \ngashapon\n \n=\n \nnew\n \nGashapon\n({\n\n    \nmode\n:\n \nshuffle\n,\n  \n// 0|\nshuffle\n|1|\nrandom\n\n    \nitems\n:\n \n{\n\n        \na\n:\n1\n,\n \nb\n:\n2\n,\n \nc\n:\n3\n  \n// itemName:count\n\n    \n},\n\n    \nreload\n:\n \ntrue\n,\n     \n// true|false\n\n\n});\n\n\n\n\n\nPick item\n\n\nPick a random item\n\n\ngashapon\n.\nnext\n();\n  \n// return null if pick nothing\n\n\n\n\n\nTry pick specific item\n\n\ngashapon\n.\nnext\n(\na\n);\n  \n// return null if pick nothing\n\n\n\n\n\nLast picked item\n\n\nvar\n \nitem\n \n=\n \ngashapon\n.\nresult\n;\n\n\n\n\n\nSet item\n\n\nSet item\n\n\ngashapon\n.\nsetItem\n(\na\n,\n \n1\n);\n\n\n// gashapon.setItem(\na\n, 1).setItem(\nb\n, 2).setItem(\nc\n, 3);\n\n\n\n\n\nRemove item\n\n\nRemove item\n\n\ngashapon\n.\nremoveItem\n(\na\n);\n\n\n// gashapon.removeItem(\nb\n).gashapon.removeItem(\nc\n);\n\n\n\n\n\nRemove all items\n\n\ngashapon\n.\nremoveAllItems\n();\n\n\n\n\n\nGet current status in JSON object\n\n\nvar\n \nstatus\n \n=\n \ngashapon\n.\ntoJSON\n();\n\n\n// var gashapon2 = new Gashapon(status); // create new Gashapon object using previous status", 
+            "text": "Introduction\n\n\nPick random item from box.\n\n\nDependence\n\n\nNone\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\nvar\n \ngashapon\n \n=\n \nnew\n \nGashapon\n({\n\n    \nmode\n:\n \nshuffle\n,\n  \n// 0|\nshuffle\n|1|\nrandom\n\n    \nitems\n:\n \n{\n\n        \na\n:\n1\n,\n \nb\n:\n2\n,\n \nc\n:\n3\n  \n// itemName:count\n\n    \n},\n\n    \nreload\n:\n \ntrue\n,\n     \n// true|false\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\nmode : \n\n\n'shuffle'\n, or \n0\n : pick item from box without put it back.\n\n\n'random'\n, or \n1\n : pick item from box then put it back.\n\n\n\n\n\n\nreload : set \ntrue\n to reload items when box is empty for \nshuffle\n mode.\n\n\nitems : initial items in box\n\n\n\n\nPick item\n\n\nPick a random item\n\n\nvar\n \nitem\n \n=\n \ngashapon\n.\nnext\n();\n  \n// return null if pick nothing\n\n\n\n\n\nTry pick specific item\n\n\nvar\n \nitem\n \n=\n \ngashapon\n.\nnext\n(\na\n);\n  \n// return null if pick nothing\n\n\n\n\n\nLast picked item\n\n\nvar\n \nitem\n \n=\n \ngashapon\n.\nresult\n;\n\n\n\n\n\nSet item\n\n\nSet item\n\n\ngashapon\n.\nsetItem\n(\na\n,\n \n1\n);\n\n\n// gashapon.setItem(\na\n, 1).setItem(\nb\n, 2).setItem(\nc\n, 3);\n\n\n\n\n\nRemove item\n\n\nRemove item\n\n\ngashapon\n.\nremoveItem\n(\na\n);\n\n\n// gashapon.removeItem(\nb\n).gashapon.removeItem(\nc\n);\n\n\n\n\n\nRemove all items\n\n\ngashapon\n.\nremoveAllItems\n();\n\n\n\n\n\nGet current status in JSON object\n\n\nvar\n \nstatus\n \n=\n \ngashapon\n.\ntoJSON\n();\n\n\n// var gashapon2 = new Gashapon(status); // create new Gashapon object using previous status\n\n\n\n\n\nGet items\n\n\nFor each item\n\n\ngashapon\n.\neachItem\n(\nfunction\n(\nname\n,\n \ncount\n){\n\n    \nconsole\n.\nlog\n(\nname\n \n+\n \n: \n \n+\n \ncount\n);\n\n\n});\n\n\n\n\n\nGet items\n\n\nvar\n \nitems\n \n=\n \ngashapon\n.\ngetItems\n();", 
             "title": "Gashapon"
         }, 
         {
             "location": "/gashapon/index.html#introduction", 
-            "text": "Gashapon in shuffle or random mode.", 
+            "text": "Pick random item from box.", 
             "title": "Introduction"
         }, 
         {
@@ -26,13 +26,18 @@
             "title": "Dependence"
         }, 
         {
+            "location": "/gashapon/index.html#source-code", 
+            "text": "Link", 
+            "title": "Source code"
+        }, 
+        {
             "location": "/gashapon/index.html#usage", 
             "text": "", 
             "title": "Usage"
         }, 
         {
             "location": "/gashapon/index.html#create-instance", 
-            "text": "var   gashapon   =   new   Gashapon ({ \n     mode :   shuffle ,    // 0| shuffle |1| random \n     items :   { \n         a : 1 ,   b : 2 ,   c : 3    // itemName:count \n     }, \n     reload :   true ,       // true|false  });", 
+            "text": "var   gashapon   =   new   Gashapon ({ \n     mode :   shuffle ,    // 0| shuffle |1| random \n     items :   { \n         a : 1 ,   b : 2 ,   c : 3    // itemName:count \n     }, \n     reload :   true ,       // true|false  });   Properties   mode :   'shuffle' , or  0  : pick item from box without put it back.  'random' , or  1  : pick item from box then put it back.    reload : set  true  to reload items when box is empty for  shuffle  mode.  items : initial items in box", 
             "title": "Create instance"
         }, 
         {
@@ -42,12 +47,12 @@
         }, 
         {
             "location": "/gashapon/index.html#pick-a-random-item", 
-            "text": "gashapon . next ();    // return null if pick nothing", 
+            "text": "var   item   =   gashapon . next ();    // return null if pick nothing", 
             "title": "Pick a random item"
         }, 
         {
             "location": "/gashapon/index.html#try-pick-specific-item", 
-            "text": "gashapon . next ( a );    // return null if pick nothing", 
+            "text": "var   item   =   gashapon . next ( a );    // return null if pick nothing", 
             "title": "Try pick specific item"
         }, 
         {
@@ -84,6 +89,21 @@
             "location": "/gashapon/index.html#get-current-status-in-json-object", 
             "text": "var   status   =   gashapon . toJSON ();  // var gashapon2 = new Gashapon(status); // create new Gashapon object using previous status", 
             "title": "Get current status in JSON object"
+        }, 
+        {
+            "location": "/gashapon/index.html#get-items", 
+            "text": "", 
+            "title": "Get items"
+        }, 
+        {
+            "location": "/gashapon/index.html#for-each-item", 
+            "text": "gashapon . eachItem ( function ( name ,   count ){ \n     console . log ( name   +   :    +   count );  });", 
+            "title": "For each item"
+        }, 
+        {
+            "location": "/gashapon/index.html#get-items_1", 
+            "text": "var   items   =   gashapon . getItems ();", 
+            "title": "Get items"
         }
     ]
 }

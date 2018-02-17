@@ -222,6 +222,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#usage" title="Usage" class="md-nav__link">
     Usage
   </a>
@@ -321,6 +328,33 @@
   <a href="#get-current-status-in-json-object" title="Get current status in JSON object" class="md-nav__link">
     Get current status in JSON object
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-items" title="Get items" class="md-nav__link">
+    Get items
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-each-item" title="For each item" class="md-nav__link">
+    For each item
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-items_1" title="Get items" class="md-nav__link">
+    Get items
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -376,6 +410,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#usage" title="Usage" class="md-nav__link">
     Usage
   </a>
@@ -478,6 +519,33 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#get-items" title="Get items" class="md-nav__link">
+    Get items
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-each-item" title="For each item" class="md-nav__link">
+    For each item
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-items_1" title="Get items" class="md-nav__link">
+    Get items
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -501,9 +569,11 @@
                   <h1>Gashapon</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Gashapon in shuffle or random mode.</p>
+<p>Pick random item from box.</p>
 <h2 id="dependence">Dependence<a class="headerlink" href="#dependence" title="Permanent link">&para;</a></h2>
 <p>None</p>
+<h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-plugins/blob/master/plugins/gashapon/Gashapon.js">Link</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gashapon</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Gashapon</span><span class="p">({</span>
@@ -515,13 +585,23 @@
 <span class="p">});</span>
 </pre></div>
 
+<p>Properties</p>
+<ul>
+<li>mode : <ul>
+<li><code>'shuffle'</code>, or <code>0</code> : pick item from box without put it back.</li>
+<li><code>'random'</code>, or <code>1</code> : pick item from box then put it back.</li>
+</ul>
+</li>
+<li>reload : set <code>true</code> to reload items when box is empty for <code>shuffle</code> mode.</li>
+<li>items : initial items in box</li>
+</ul>
 <h3 id="pick-item">Pick item<a class="headerlink" href="#pick-item" title="Permanent link">&para;</a></h3>
 <h4 id="pick-a-random-item">Pick a random item<a class="headerlink" href="#pick-a-random-item" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">gashapon</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span>  <span class="c1">// return null if pick nothing</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">gashapon</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span>  <span class="c1">// return null if pick nothing</span>
 </pre></div>
 
 <h4 id="try-pick-specific-item">Try pick specific item<a class="headerlink" href="#try-pick-specific-item" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">gashapon</span><span class="p">.</span><span class="nx">next</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">);</span>  <span class="c1">// return null if pick nothing</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">gashapon</span><span class="p">.</span><span class="nx">next</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">);</span>  <span class="c1">// return null if pick nothing</span>
 </pre></div>
 
 <h4 id="last-picked-item">Last picked item<a class="headerlink" href="#last-picked-item" title="Permanent link">&para;</a></h4>
@@ -547,6 +627,17 @@
 <h3 id="get-current-status-in-json-object">Get current status in JSON object<a class="headerlink" href="#get-current-status-in-json-object" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">status</span> <span class="o">=</span> <span class="nx">gashapon</span><span class="p">.</span><span class="nx">toJSON</span><span class="p">();</span>
 <span class="c1">// var gashapon2 = new Gashapon(status); // create new Gashapon object using previous status</span>
+</pre></div>
+
+<h3 id="get-items">Get items<a class="headerlink" href="#get-items" title="Permanent link">&para;</a></h3>
+<h4 id="for-each-item">For each item<a class="headerlink" href="#for-each-item" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">gashapon</span><span class="p">.</span><span class="nx">eachItem</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">count</span><span class="p">){</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">name</span> <span class="o">+</span> <span class="s2">&quot;: &quot;</span> <span class="o">+</span> <span class="nx">count</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+
+<h4 id="get-items_1">Get items<a class="headerlink" href="#get-items_1" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">items</span> <span class="o">=</span> <span class="nx">gashapon</span><span class="p">.</span><span class="nx">getItems</span><span class="p">();</span>
 </pre></div>
                 
                   
