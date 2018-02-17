@@ -1,3 +1,5 @@
+'use strict'
+
 import IsArray from './../array/IsArray.js';
 var Clean = function (obj) {
     if (IsArray(obj)) {

@@ -40,7 +40,7 @@ Properties
 var item = gashapon.next();  // return null if pick nothing
 ```
 
-#### Try pick specific item
+#### Pick specific item
 
 ```javascript
 var item = gashapon.next('a');  // return null if pick nothing

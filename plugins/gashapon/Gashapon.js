@@ -3,9 +3,8 @@
 import GetFastValue from './../utils/object/GetFastValue.js';
 import GetValue from './../utils/object/GetValue';
 import Clone from './../utils/object/Clone.js';
-import DeepClone from './../utils/object/DeepClone.js'
 import IsEmpty from './../utils/Object/IsEmpty.js';
-import Clean from './../utils/object/Clean.js'
+import Clean from './../utils/object/Clean.js';
 
 /**
  * Create Gashapon object with configuration
@@ -18,7 +17,11 @@ class Gashapon {
             mode: null,
             reload: null
         };
+        this.items = {};
+        this.remain = {};
+        this._list = [];
         this.customRnd = [null, null];
+
         this.resetFromJSON(config);
     }
 
@@ -27,33 +30,29 @@ class Gashapon {
      * @returns JSON object
      */
     toJSON() {
-        // pure JSON part
-        var o = {
+        return {
             // configuration
             mode: this.cfg.mode,
             reload: this.cfg.reload,
 
             // data
-            items: this.items,
-            list: this._list,
-            remain: this.remain,
+            items: Clone(this.items),
+            remain: Clone(this.remain),
 
             // result
             result: this.result,
 
             // flags
-            restart: this._restartFlag
-        };
-        o = DeepClone(o);
+            restart: true,  // force restart to rebuild this._list
 
-        // object references
-        o.rnd = [this.customRnd[0], this.customRnd[1]];
-        return o;
+            // custom function to return random real number between 0 and 1
+            rnd: Clone(this.customRnd)
+        };
     };
 
     /**
      * Reset status by JSON object
-     * @param {object} JSON object
+     * @param {object} o JSON object
      * @returns {object} this object
      */
     resetFromJSON(o) {
@@ -62,15 +61,15 @@ class Gashapon {
         this.setReload(GetFastValue(o, 'reload', true));
 
         // data
-        this.items = GetFastValue(o, 'items', {});
-        this.remain = GetFastValue(o, 'remain', {});
-        this._list = GetFastValue(o, 'list', []);
+        this.items = Clone(GetFastValue(o, 'items', {}), this.items);
+        this.remain = Clone(GetFastValue(o, 'remain', {}), this.remain);
+        this._list.length = 0;
 
         // result
         this.result = GetFastValue(o, 'result', null);
 
         // flags
-        this._restartFlag = GetFastValue(o, 'restart', true);
+        this._restartFlag = true;  // force restart to rebuild this._list
 
         // custom function to return random real number between 0 and 1
         this.customRnd[0] = GetValue(o, 'rnd.fn', null);
@@ -114,7 +113,7 @@ class Gashapon {
 
     /**
      * Set mode
-     * @param {number|string} m - 'shuffle'(0) or 'random'(1)
+     * @param {number|string} m 'shuffle'(0) or 'random'(1)
      * @returns {object} this object
      */
     setMode(m) {
@@ -128,7 +127,7 @@ class Gashapon {
 
     /**
      * Set reload mode
-     * @param {boolean} isReload - reload items when empty
+     * @param {boolean} isReload reload items when empty
      * @returns {object} this object
      */
     setReload(isReload) {
@@ -138,8 +137,8 @@ class Gashapon {
 
     /**
      * Set item
-     * @param {string} name - item name
-     * @param {number} count - item count
+     * @param {string} name item name
+     * @param {number} count item count
      * @returns {object} this object
      */
     setItem(name, count) {
@@ -150,7 +149,7 @@ class Gashapon {
 
     /**
      * Remove item
-     * @param {string} name - item name
+     * @param {string} name item name
      * @returns {object} this object
      */
     removeItem(name) {
@@ -191,7 +190,7 @@ class Gashapon {
 
     /**
      * Return amount of an item
-     * @param {string} name - item name
+     * @param {string} name item name
      * @returns {number} Amount of an item
      */
     getItemCount(name) {
@@ -200,7 +199,7 @@ class Gashapon {
 
     /**
      * Return amount of a remaining item
-     * @param {string} name - remaining item name
+     * @param {string} name remaining item name
      * @returns {number} Amount of a remaining item
      */
     getRemainCount(name) {
@@ -209,9 +208,9 @@ class Gashapon {
 
     /**
      * Passes all items to the given callback
-     * @param {function} callback - the function to call
-     * @param {object} [scope] - value to use as `this` when executing callback.
-     * @param {...*} [arguments] - additional arguments that will be passed to the callback, after item name, and amount.
+     * @param {function} callback the function to call
+     * @param {object} [scope] value to use as `this` when executing callback.
+     * @param {...*} [arguments] additional arguments that will be passed to the callback, after item name, and amount.
      * @returns {object} this object
      */
     eachItem(callback, scope) {
@@ -233,9 +232,9 @@ class Gashapon {
 
     /**
      * Passes all remaining items to the given callback
-     * @param {function} callback - the function to call
-     * @param {object} [scope] - value to use as `this` when executing callback.
-     * @param {...*} [arguments] - additional arguments that will be passed to the callback, after item name, and amount.
+     * @param {function} callback the function to call
+     * @param {object} [scope] value to use as `this` when executing callback.
+     * @param {...*} [arguments] additional arguments that will be passed to the callback, after item name, and amount.
      * @returns {object} this object
      */
     eachRemain(callback, scope) {
@@ -257,8 +256,8 @@ class Gashapon {
 
     /**
      * Add item without changing remaining items
-     * @param {string} name - item name
-     * @param {number} count - item count
+     * @param {string} name item name
+     * @param {number} count item count
      * @returns {object} this object
      */
     addItem(name, count) {
@@ -282,8 +281,8 @@ class Gashapon {
 
     /**
      * Add remaining items without max items
-     * @param {string} name - item name
-     * @param {number} count - item count
+     * @param {string} name item name
+     * @param {number} count item count
      * @returns {object} this object
      */
     putItemBack(name, count) {
@@ -343,8 +342,8 @@ class Gashapon {
 
     /**
      * Set custom random generator
-     * @param {function} callback - the function to call
-     * @param {object} scope - value to use as `this` when executing callback
+     * @param {function} callback the function to call
+     * @param {object} scope value to use as `this` when executing callback
      * @returns {object} this object
      */
     setRandomGen(callback, scope) {

@@ -1,25 +1,29 @@
+'use strict'
+
+import Clean from './Clean.js';
+import IsArray from './../array/IsArray.js';
+
 /**
  * Shallow Object Clone. Will not clone nested objects.
- *
- * @function Phaser.Utils.Object.Clone
- * @since 3.0.0
- *
- * @param {object} obj - [description]
- *
- * @return {object} [description]
+ * @param {object} obj JSON object
+ * @param {object} ret JSON object to return, set null to return a new object
+ * @returns {object} this object
  */
-var Clone = function (obj)
-{
-    var clone = {};
+var Clone = function (obj, ret) {
+    var clone;
 
-    for (var key in obj)
-    {
-        if (Array.isArray(obj[key]))
-        {
+    if (ret != null) {
+        clone = ret;
+        Clean(clone);
+    } else {
+        clone = (IsArray(obj)) ? [] : {};
+    }
+
+    for (var key in obj) {
+        if (IsArray(obj[key])) {
             clone[key] = obj[key].slice(0);
         }
-        else
-        {
+        else {
             clone[key] = obj[key];
         }
     }
@@ -27,4 +31,4 @@ var Clone = function (obj)
     return clone;
 };
 
-module.exports = Clone;
+export default Clone;
