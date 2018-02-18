@@ -647,7 +647,7 @@
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gashapon</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Gashapon</span><span class="p">({</span>
     <span class="nx">mode</span><span class="o">:</span> <span class="s1">&#39;shuffle&#39;</span><span class="p">,</span>  <span class="c1">// 0|&#39;shuffle&#39;|1|&#39;random</span>
     <span class="nx">items</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">a</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span><span class="mi">2</span><span class="p">,</span> <span class="nx">c</span><span class="o">:</span><span class="mi">3</span>  <span class="c1">// itemName:count</span>
+        <span class="nx">a</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span><span class="mi">2</span><span class="p">,</span> <span class="nx">c</span><span class="o">:</span><span class="mi">3</span>  <span class="c1">// name:count</span>
     <span class="p">},</span>
     <span class="nx">reload</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>     <span class="c1">// true|false</span>
 <span class="p">});</span>
@@ -665,13 +665,19 @@
 </ul>
 <h3 id="pick-item">Pick item<a class="headerlink" href="#pick-item" title="Permanent link">&para;</a></h3>
 <h4 id="pick-a-random-item">Pick a random item<a class="headerlink" href="#pick-a-random-item" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">gashapon</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span>  <span class="c1">// return null if pick nothing</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">gashapon</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span>
 </pre></div>
 
+<ul>
+<li>return <code>null</code> if pick nothing</li>
+</ul>
 <h4 id="pick-specific-item">Pick specific item<a class="headerlink" href="#pick-specific-item" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">gashapon</span><span class="p">.</span><span class="nx">next</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">);</span>  <span class="c1">// return null if pick nothing</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">gashapon</span><span class="p">.</span><span class="nx">next</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">);</span>
 </pre></div>
 
+<ul>
+<li>return <code>null</code> if pick nothing</li>
+</ul>
 <h4 id="last-picked-item">Last picked item<a class="headerlink" href="#last-picked-item" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">gashapon</span><span class="p">.</span><span class="nx">result</span><span class="p">;</span>
 </pre></div>

@@ -18,7 +18,7 @@ None
 var gashapon = new Gashapon({
     mode: 'shuffle',  // 0|'shuffle'|1|'random
     items: {
-        a:1, b:2, c:3  // itemName:count
+        a:1, b:2, c:3  // name:count
     },
     reload: true,     // true|false
 });
@@ -37,14 +37,18 @@ Properties
 #### Pick a random item
 
 ```javascript
-var item = gashapon.next();  // return null if pick nothing
+var item = gashapon.next();
 ```
+
+- return `null` if pick nothing
 
 #### Pick specific item
 
 ```javascript
-var item = gashapon.next('a');  // return null if pick nothing
+var item = gashapon.next('a');
 ```
+
+- return `null` if pick nothing
 
 #### Last picked item
 
