@@ -61,6 +61,12 @@ gashapon.setItem('a', 1);
 // gashapon.setItem('a', 1).setItem('b', 2).setItem('c', 3);
 ```
 
+#### Add item
+
+```javascript
+gashapon.addItem('a',1);
+```
+
 ### Remove item
 
 #### Remove item
@@ -70,17 +76,33 @@ gashapon.removeItem('a');
 // gashapon.removeItem('b').gashapon.removeItem('c');
 ```
 
-### Remove all items
+#### Remove all items
 
 ```javascript
 gashapon.removeAllItems();
 ```
 
-### Get current status in JSON object
+### Current status
+
+#### Get current status
 
 ```javascript
 var status = gashapon.toJSON();
-// var gashapon2 = new Gashapon(status); // create new Gashapon object using previous status
+```
+
+#### Clone object
+
+```javascript
+var status = gashapon.toJSON();
+var gashapon2 = new Gashapon(status);
+```
+
+#### Overwrite current status
+
+```javascript
+var status = gashapon.toJSON();
+// gashapon.next()...
+gashapon.resetFromJSON(status);
 ```
 
 ### Get items

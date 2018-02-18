@@ -292,6 +292,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#add-item" title="Add item" class="md-nav__link">
+    Add item
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -312,11 +319,6 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-        
           <li class="md-nav__item">
   <a href="#remove-all-items" title="Remove all items" class="md-nav__link">
     Remove all items
@@ -324,10 +326,42 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+        
           <li class="md-nav__item">
-  <a href="#get-current-status-in-json-object" title="Get current status in JSON object" class="md-nav__link">
-    Get current status in JSON object
+  <a href="#current-status" title="Current status" class="md-nav__link">
+    Current status
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-current-status" title="Get current status" class="md-nav__link">
+    Get current status
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clone-object" title="Clone object" class="md-nav__link">
+    Clone object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#overwrite-current-status" title="Overwrite current status" class="md-nav__link">
+    Overwrite current status
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -480,6 +514,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#add-item" title="Add item" class="md-nav__link">
+    Add item
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -500,11 +541,6 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-        
           <li class="md-nav__item">
   <a href="#remove-all-items" title="Remove all items" class="md-nav__link">
     Remove all items
@@ -512,10 +548,42 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+        
           <li class="md-nav__item">
-  <a href="#get-current-status-in-json-object" title="Get current status in JSON object" class="md-nav__link">
-    Get current status in JSON object
+  <a href="#current-status" title="Current status" class="md-nav__link">
+    Current status
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-current-status" title="Get current status" class="md-nav__link">
+    Get current status
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clone-object" title="Clone object" class="md-nav__link">
+    Clone object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#overwrite-current-status" title="Overwrite current status" class="md-nav__link">
+    Overwrite current status
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -614,19 +682,34 @@
 <span class="c1">// gashapon.setItem(&#39;a&#39;, 1).setItem(&#39;b&#39;, 2).setItem(&#39;c&#39;, 3);</span>
 </pre></div>
 
+<h4 id="add-item">Add item<a class="headerlink" href="#add-item" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">gashapon</span><span class="p">.</span><span class="nx">addItem</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+</pre></div>
+
 <h3 id="remove-item">Remove item<a class="headerlink" href="#remove-item" title="Permanent link">&para;</a></h3>
 <h4 id="remove-item_1">Remove item<a class="headerlink" href="#remove-item_1" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><span class="nx">gashapon</span><span class="p">.</span><span class="nx">removeItem</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">);</span>
 <span class="c1">// gashapon.removeItem(&#39;b&#39;).gashapon.removeItem(&#39;c&#39;);</span>
 </pre></div>
 
-<h3 id="remove-all-items">Remove all items<a class="headerlink" href="#remove-all-items" title="Permanent link">&para;</a></h3>
+<h4 id="remove-all-items">Remove all items<a class="headerlink" href="#remove-all-items" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><span class="nx">gashapon</span><span class="p">.</span><span class="nx">removeAllItems</span><span class="p">();</span>
 </pre></div>
 
-<h3 id="get-current-status-in-json-object">Get current status in JSON object<a class="headerlink" href="#get-current-status-in-json-object" title="Permanent link">&para;</a></h3>
+<h3 id="current-status">Current status<a class="headerlink" href="#current-status" title="Permanent link">&para;</a></h3>
+<h4 id="get-current-status">Get current status<a class="headerlink" href="#get-current-status" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">status</span> <span class="o">=</span> <span class="nx">gashapon</span><span class="p">.</span><span class="nx">toJSON</span><span class="p">();</span>
-<span class="c1">// var gashapon2 = new Gashapon(status); // create new Gashapon object using previous status</span>
+</pre></div>
+
+<h4 id="clone-object">Clone object<a class="headerlink" href="#clone-object" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">status</span> <span class="o">=</span> <span class="nx">gashapon</span><span class="p">.</span><span class="nx">toJSON</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">gashapon2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Gashapon</span><span class="p">(</span><span class="nx">status</span><span class="p">);</span>
+</pre></div>
+
+<h4 id="overwrite-current-status">Overwrite current status<a class="headerlink" href="#overwrite-current-status" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">status</span> <span class="o">=</span> <span class="nx">gashapon</span><span class="p">.</span><span class="nx">toJSON</span><span class="p">();</span>
+<span class="c1">// gashapon.next()...</span>
+<span class="nx">gashapon</span><span class="p">.</span><span class="nx">resetFromJSON</span><span class="p">(</span><span class="nx">status</span><span class="p">);</span>
 </pre></div>
 
 <h3 id="get-items">Get items<a class="headerlink" href="#get-items" title="Permanent link">&para;</a></h3>
