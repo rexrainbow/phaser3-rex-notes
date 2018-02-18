@@ -11,6 +11,51 @@
             "title": "About me"
         }, 
         {
+            "location": "/date/index.html", 
+            "text": "Introduction\n\n\nGet current date or unix-timestamp.\n\n\nDependence\n\n\nNone\n\n\nSource code\n\n\nBuilt-in javascript function.\n\n\nUsage\n\n\nReference\n\n\nCreate instance\n\n\nvar\n \nd\n \n=\n \nnew\n \nDate\n();\n\n\nvar\n \nd\n \n=\n \nnew\n \nDate\n(\ntimestamp\n);\n\n\nvar\n \nd\n \n=\n \nnew\n \nDate\n(\ndateString\n);\n\n\nvar\n \nd\n \n=\n \nnew\n \nDate\n(\nyear\n,\n \nmonth\n,\n \nday\n,\n \nhours\n,\n \nminutes\n,\n \nseconds\n,\n \nmilliseconds\n);\n\n\n\n\n\nGet date\n\n\nd\n.\ngetFullYear\n();\n     \n// returns the year\n\n\nd\n.\ngetMonth\n();\n        \n// returns the month (0-11)\n\n\nd\n.\ngetDate\n();\n         \n// returns the day of the month (1-31)\n\n\nd\n.\ngetDay\n();\n          \n// returns the day of the week\n\n\nd\n.\ngetHours\n();\n        \n// returns the hour (0-23)\n\n\nd\n.\ngetMinutes\n();\n      \n// returns the minutes (0-59)\n\n\nd\n.\ngetSeconds\n();\n      \n// returns the seconds (0-59)\n\n\nd\n.\ngetMilliseconds\n();\n \n// returns the milliseconds (0-999)\n\n\n\n\n\nGet unix-timestamp\n\n\nd\n.\nnow\n();\n         \n// unix-timestamp in milliseconds\n\n\n\n\n\nTo string\n\n\nd\n.\ntoLocaleString\n();\n  \n// locale conventions\n\n\nd\n.\ntoISOString\n();\n     \n// ISO standard", 
+            "title": "Date"
+        }, 
+        {
+            "location": "/date/index.html#introduction", 
+            "text": "Get current date or unix-timestamp.", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/date/index.html#dependence", 
+            "text": "None", 
+            "title": "Dependence"
+        }, 
+        {
+            "location": "/date/index.html#source-code", 
+            "text": "Built-in javascript function.", 
+            "title": "Source code"
+        }, 
+        {
+            "location": "/date/index.html#usage", 
+            "text": "Reference", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/date/index.html#create-instance", 
+            "text": "var   d   =   new   Date ();  var   d   =   new   Date ( timestamp );  var   d   =   new   Date ( dateString );  var   d   =   new   Date ( year ,   month ,   day ,   hours ,   minutes ,   seconds ,   milliseconds );", 
+            "title": "Create instance"
+        }, 
+        {
+            "location": "/date/index.html#get-date", 
+            "text": "d . getFullYear ();       // returns the year  d . getMonth ();          // returns the month (0-11)  d . getDate ();           // returns the day of the month (1-31)  d . getDay ();            // returns the day of the week  d . getHours ();          // returns the hour (0-23)  d . getMinutes ();        // returns the minutes (0-59)  d . getSeconds ();        // returns the seconds (0-59)  d . getMilliseconds ();   // returns the milliseconds (0-999)", 
+            "title": "Get date"
+        }, 
+        {
+            "location": "/date/index.html#get-unix-timestamp", 
+            "text": "d . now ();           // unix-timestamp in milliseconds", 
+            "title": "Get unix-timestamp"
+        }, 
+        {
+            "location": "/date/index.html#to-string", 
+            "text": "d . toLocaleString ();    // locale conventions  d . toISOString ();       // ISO standard", 
+            "title": "To string"
+        }, 
+        {
             "location": "/gashapon/index.html", 
             "text": "Introduction\n\n\nPick random item from box.\n\n\nDependence\n\n\nNone\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\nvar\n \ngashapon\n \n=\n \nnew\n \nGashapon\n({\n\n    \nmode\n:\n \nshuffle\n,\n  \n// 0|\nshuffle\n|1|\nrandom\n\n    \nitems\n:\n \n{\n\n        \na\n:\n1\n,\n \nb\n:\n2\n,\n \nc\n:\n3\n  \n// name:count\n\n    \n},\n\n    \nreload\n:\n \ntrue\n,\n     \n// true|false\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\nmode : \n\n\n'shuffle'\n, or \n0\n : pick item from box without put it back.\n\n\n'random'\n, or \n1\n : pick item from box then put it back.\n\n\n\n\n\n\nreload : set \ntrue\n to reload items when box is empty for \nshuffle\n mode.\n\n\nitems : initial items in box\n\n\n\n\nPick item\n\n\nPick a random item\n\n\nvar\n \nitem\n \n=\n \ngashapon\n.\nnext\n();\n\n\n\n\n\n\n\nreturn \nnull\n if pick nothing\n\n\n\n\nPick specific item\n\n\nvar\n \nitem\n \n=\n \ngashapon\n.\nnext\n(\na\n);\n\n\n\n\n\n\n\nreturn \nnull\n if pick nothing\n\n\n\n\nLast picked item\n\n\nvar\n \nitem\n \n=\n \ngashapon\n.\nresult\n;\n\n\n\n\n\nSet item\n\n\nSet item\n\n\ngashapon\n.\nsetItem\n(\na\n,\n \n1\n);\n\n\n// gashapon.setItem(\na\n, 1).setItem(\nb\n, 2).setItem(\nc\n, 3);\n\n\n\n\n\nAdd item\n\n\ngashapon\n.\naddItem\n(\na\n,\n1\n);\n\n\n\n\n\nRemove item\n\n\nRemove item\n\n\ngashapon\n.\nremoveItem\n(\na\n);\n\n\n// gashapon.removeItem(\nb\n).gashapon.removeItem(\nc\n);\n\n\n\n\n\nRemove all items\n\n\ngashapon\n.\nremoveAllItems\n();\n\n\n\n\n\nCurrent status\n\n\nGet current status\n\n\nvar\n \nstatus\n \n=\n \ngashapon\n.\ntoJSON\n();\n\n\n\n\n\nClone object\n\n\nvar\n \nstatus\n \n=\n \ngashapon\n.\ntoJSON\n();\n\n\nvar\n \ngashapon2\n \n=\n \nnew\n \nGashapon\n(\nstatus\n);\n\n\n\n\n\nOverwrite current status\n\n\nvar\n \nstatus\n \n=\n \ngashapon\n.\ntoJSON\n();\n\n\n// gashapon.next()...\n\n\ngashapon\n.\nresetFromJSON\n(\nstatus\n);\n\n\n\n\n\nGet items\n\n\nFor each item\n\n\ngashapon\n.\neachItem\n(\nfunction\n(\nname\n,\n \ncount\n){\n\n    \nconsole\n.\nlog\n(\nname\n \n+\n \n: \n \n+\n \ncount\n);\n\n\n});\n\n\n\n\n\nGet items\n\n\nvar\n \nitems\n \n=\n \ngashapon\n.\ngetItems\n();", 
             "title": "Gashapon"
