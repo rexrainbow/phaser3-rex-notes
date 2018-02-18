@@ -1,6 +1,7 @@
 ## Introduction
 
 Get current date or unix-timestamp.
+Author: Built-in javascript function
 
 ## Dependence
 
@@ -26,25 +27,25 @@ var d = new Date(year, month, day, hours, minutes, seconds, milliseconds);
 ### Get date
 
 ```javascript
-d.getFullYear();     // returns the year
-d.getMonth();        // returns the month (0-11)
-d.getDate();         // returns the day of the month (1-31)
-d.getDay();          // returns the day of the week
-d.getHours();        // returns the hour (0-23)
-d.getMinutes();      // returns the minutes (0-59)
-d.getSeconds();      // returns the seconds (0-59)
-d.getMilliseconds(); // returns the milliseconds (0-999)
+var year = d.getFullYear();    // returns the year
+var month = d.getMonth();      // returns the month (0-11)
+var date = d.getDate();        // returns the day of the month (1-31)
+var day = d.getDay();          // returns the day of the week
+var hour = d.getHours();       // returns the hour (0-23)
+var min = d.getMinutes();      // returns the minutes (0-59)
+var sec = d.getSeconds();      // returns the seconds (0-59)
+var ms = d.getMilliseconds();  // returns the milliseconds (0-999)
 ```
 
 ### Get unix-timestamp
 
 ```javascript
-d.now();         // unix-timestamp in milliseconds
+var timestamp = d.now();       // unix-timestamp in milliseconds
 ```
 
 ### To string
 
 ```javascript
-d.toLocaleString();  // locale conventions
-d.toISOString();     // ISO standard
+var s = d.toLocaleString();   // locale conventions
+var iso = d.toISOString();    // ISO standard
 ```

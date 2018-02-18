@@ -1,6 +1,7 @@
 ## Introduction
 
 Pick random item from box.
+Author: Rex
 
 ## Dependence
 

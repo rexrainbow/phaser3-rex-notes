@@ -32,7 +32,7 @@
     
     
       
-        <title>Date - Rex's Phaser 3 plugins</title>
+        <title>Date - Phaser 3 plugins</title>
       
     
     
@@ -69,7 +69,7 @@
   <nav class="md-header-nav md-grid">
     <div class="md-flex">
       <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="../index.html" title="Rex's Phaser 3 plugins" class="md-header-nav__button md-logo">
+        <a href="../index.html" title="Phaser 3 plugins" class="md-header-nav__button md-logo">
           
             <i class="md-icon"></i>
           
@@ -83,7 +83,7 @@
           
             
               <span class="md-header-nav__topic">
-                Rex's Phaser 3 plugins
+                Phaser 3 plugins
               </span>
               <span class="md-header-nav__topic">
                 Date
@@ -141,7 +141,7 @@
         <i class="md-icon"></i>
       
     </span>
-    Rex's Phaser 3 plugins
+    Phaser 3 plugins
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -417,7 +417,8 @@
                   <h1>Date</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Get current date or unix-timestamp.</p>
+<p>Get current date or unix-timestamp.
+Author: Built-in javascript function</p>
 <h2 id="dependence">Dependence<a class="headerlink" href="#dependence" title="Permanent link">&para;</a></h2>
 <p>None</p>
 <h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
@@ -432,23 +433,23 @@
 </pre></div>
 
 <h3 id="get-date">Get date<a class="headerlink" href="#get-date" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">d</span><span class="p">.</span><span class="nx">getFullYear</span><span class="p">();</span>     <span class="c1">// returns the year</span>
-<span class="nx">d</span><span class="p">.</span><span class="nx">getMonth</span><span class="p">();</span>        <span class="c1">// returns the month (0-11)</span>
-<span class="nx">d</span><span class="p">.</span><span class="nx">getDate</span><span class="p">();</span>         <span class="c1">// returns the day of the month (1-31)</span>
-<span class="nx">d</span><span class="p">.</span><span class="nx">getDay</span><span class="p">();</span>          <span class="c1">// returns the day of the week</span>
-<span class="nx">d</span><span class="p">.</span><span class="nx">getHours</span><span class="p">();</span>        <span class="c1">// returns the hour (0-23)</span>
-<span class="nx">d</span><span class="p">.</span><span class="nx">getMinutes</span><span class="p">();</span>      <span class="c1">// returns the minutes (0-59)</span>
-<span class="nx">d</span><span class="p">.</span><span class="nx">getSeconds</span><span class="p">();</span>      <span class="c1">// returns the seconds (0-59)</span>
-<span class="nx">d</span><span class="p">.</span><span class="nx">getMilliseconds</span><span class="p">();</span> <span class="c1">// returns the milliseconds (0-999)</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">year</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getFullYear</span><span class="p">();</span>    <span class="c1">// returns the year</span>
+<span class="kd">var</span> <span class="nx">month</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getMonth</span><span class="p">();</span>      <span class="c1">// returns the month (0-11)</span>
+<span class="kd">var</span> <span class="nx">date</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getDate</span><span class="p">();</span>        <span class="c1">// returns the day of the month (1-31)</span>
+<span class="kd">var</span> <span class="nx">day</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getDay</span><span class="p">();</span>          <span class="c1">// returns the day of the week</span>
+<span class="kd">var</span> <span class="nx">hour</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getHours</span><span class="p">();</span>       <span class="c1">// returns the hour (0-23)</span>
+<span class="kd">var</span> <span class="nx">min</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getMinutes</span><span class="p">();</span>      <span class="c1">// returns the minutes (0-59)</span>
+<span class="kd">var</span> <span class="nx">sec</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getSeconds</span><span class="p">();</span>      <span class="c1">// returns the seconds (0-59)</span>
+<span class="kd">var</span> <span class="nx">ms</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getMilliseconds</span><span class="p">();</span>  <span class="c1">// returns the milliseconds (0-999)</span>
 </pre></div>
 
 <h3 id="get-unix-timestamp">Get unix-timestamp<a class="headerlink" href="#get-unix-timestamp" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">d</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>         <span class="c1">// unix-timestamp in milliseconds</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">timestamp</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>       <span class="c1">// unix-timestamp in milliseconds</span>
 </pre></div>
 
 <h3 id="to-string">To string<a class="headerlink" href="#to-string" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">d</span><span class="p">.</span><span class="nx">toLocaleString</span><span class="p">();</span>  <span class="c1">// locale conventions</span>
-<span class="nx">d</span><span class="p">.</span><span class="nx">toISOString</span><span class="p">();</span>     <span class="c1">// ISO standard</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">toLocaleString</span><span class="p">();</span>   <span class="c1">// locale conventions</span>
+<span class="kd">var</span> <span class="nx">iso</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">toISOString</span><span class="p">();</span>    <span class="c1">// ISO standard</span>
 </pre></div>
                 
                   
