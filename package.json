@@ -1,5 +1,5 @@
 {
-  "name": "Phaser3ES6Webpack",
+  "name": "phaser3-es6-webpack",
   "version": "1.0.0",
   "description": "",
   "author": "niklas berg <me@niklasberg.se>",
@@ -31,6 +31,7 @@
     "html-webpack-plugin": "^2.30.1"
   },
   "dependencies": {
-    "phaser": "^3.0.0"
+    "phaser": "latest",
+    "webfontloader": "^1.6.28"    
   }
 }
