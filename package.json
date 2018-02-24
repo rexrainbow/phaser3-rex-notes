@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack",
-    "test": "eslint ./src/**/**.js"
+    "test": "eslint ./plugins/**/**.js"
   },
   "license": "MIT",
   "devDependencies": {
