@@ -117,7 +117,7 @@ class Gashapon {
      * @returns {object} this object
      */
     setMode(m) {
-        if (typeof (m) == 'string') {
+        if (typeof (m) === 'string') {
             m = MODE[m];
         }
         this._restartFlag = (this.cfg.mode !== m);
@@ -261,8 +261,6 @@ class Gashapon {
      * @returns {object} this object
      */
     addItem(name, count) {
-        if (name == "")
-            return;
         if (!this.items.hasOwnProperty(name)) {
             this.items[name] = 0;
         }
@@ -271,7 +269,7 @@ class Gashapon {
         if (this._restartFlag)
             return;
 
-        if (this.cfg.mode == 0) { // shuffle mode
+        if (this.cfg.mode === 0) { // shuffle mode
             this.addRemainItem(name, count);
         } else { // random mode
             this.resetItemList(this.remain);
@@ -286,16 +284,13 @@ class Gashapon {
      * @returns {object} this object
      */
     putItemBack(name, count) {
-        if (this.cfg.mode == 1) // random mode
-            return;
-
-        if (name == "")
+        if (this.cfg.mode === 1) // random mode
             return;
 
         if (!this.items.hasOwnProperty(name))
             return;
 
-        if ((this.cfg.mode == 2) && this.restartGenFlg)
+        if ((this.cfg.mode === 2) && this.restartGenFlg)
             return;
 
         // generator had started  
@@ -317,7 +312,7 @@ class Gashapon {
         }
 
         if (name == null) {
-            if (this.cfg.mode == 0) { // shuffle mode
+            if (this.cfg.mode === 0) { // shuffle mode
                 this.resetItemList(this.remain);
                 result = this.getRndItem(this._list);
                 this.addRemainItem(result, -1);
@@ -405,7 +400,7 @@ class Gashapon {
 
     /** @private */
     addRemainItem(name, inc, maxCount) {
-        if ((name == null) || (inc == 0))
+        if ((name == null) || (inc === 0))
             return this;
 
         if (!this.remain.hasOwnProperty(name))
