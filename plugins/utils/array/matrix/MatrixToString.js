@@ -1,3 +1,9 @@
+/**
+ * @author       Richard Davey <rich@photonstorm.com>
+ * @copyright    2018 Photon Storm Ltd.
+ * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
+ */
+
 var Pad = require('../../string/Pad');
 var CheckMatrix = require('./CheckMatrix');
 
@@ -14,8 +20,8 @@ var CheckMatrix = require('./CheckMatrix');
  *
  * @return {string} [description]
  */
- var MatrixToString = function (matrix)
- {
+var MatrixToString = function (matrix)
+{
     var str = '';
 
     if (!CheckMatrix(matrix))
