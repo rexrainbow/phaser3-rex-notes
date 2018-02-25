@@ -1,29 +1,22 @@
 'use strict'
 
-class DragCursorPlugin extends Gashapon {
-    constructor(scene, config) {
+import CursorKeysManager from './../utils/input/CursorKeysManager.js';
+import GetEventEmmiter from './../utils/GetEventEmmiter.js';
+
+class DragCursorPlugin extends CursorKeysManager {
+    constructor(parent, config) {
         super(config);
+        this.parent = parent;
 
-        //  The Scene that owns this plugin
-        this.scene = scene;
-
-        this.systems = scene.sys;
-
-        if (!scene.sys.settings.isBooted) {
-            scene.sys.events.once('boot', this.boot, this);
-        }
+        this.boot();
     }
 
-    //  Called when the Plugin is booted by the PluginManager.
-    //  If you need to reference other systems in the Scene (like the Loader or DisplayList) then set-up those references now, not in the constructor.
     boot() {
-        var eventEmitter = this.systems.events;
-
-        //  Listening to the following events is entirely optional, although we would recommend cleanly shutting down and destroying at least.
-        //  If you don't need any of these events then remove the listeners and the relevant methods too.
-
-        eventEmitter.on('shutdown', this.shutdown, this);
-        eventEmitter.on('destroy', this.destroy, this);
+        var eventEmitter = GetEventEmmiter(this.parent);
+        if (eventEmitter) {
+            eventEmitter.on('shutdown', this.shutdown, this);
+            eventEmitter.on('destroy', this.destroy, this);
+        }
     }
 
     shutdown() {
