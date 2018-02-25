@@ -12,13 +12,12 @@ function create() {
         mode: 'shuffle',  // 0|'shuffle'|1|'random
         items: {
             a:1, b:2, c:3
-        },
-        reload: false
+        }
     });
 
     for(var i=0; i<12; i++){
         console.log("Random pick: " + game.gashapon.next());
-        console.log("Last picked item: " + game.gashapon.result);
+        //console.log("Last picked item: " + game.gashapon.result);
     }        
 }
 
