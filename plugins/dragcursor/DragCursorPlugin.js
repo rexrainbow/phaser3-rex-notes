@@ -20,15 +20,10 @@ class DragCursorPlugin extends CursorKeysManager {
     }
 
     shutdown() {
-        //  Should we reset the events?
     }
 
     destroy() {
-        Gashapon.destroy.call(this);
-
-        this.scene = undefined;
-        this.systems = undefined;
     }
 }
 
-export default GashaponPlugin;
+export default DragCursorPlugin;

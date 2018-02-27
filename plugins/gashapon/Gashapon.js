@@ -216,7 +216,7 @@ class Gashapon {
     eachItem(callback, scope) {
         var args = [null, undefined];
 
-        for (var i = 2; i < arguments.length; i++) {
+        for (var i = 2, len = arguments.length; i < len; i++) {
             args.push(arguments[i]);
         }
 
