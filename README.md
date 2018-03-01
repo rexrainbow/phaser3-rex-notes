@@ -16,7 +16,6 @@
 ### Run demo
 
 1.  Click `*.bat` in folder `demo`, it will open application on browser
-    -   `webpack path/to/demo.js `
 
 ## File structure
 
