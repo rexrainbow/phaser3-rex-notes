@@ -1,9 +1,9 @@
 'use strict'
 
-import IsFunction from './object/IsFunction.js';
+import IsFunction from './../object/IsFunction.js';
 /**
- * Return event emmiter from gameobject,scene, or game
- * @returns {object} parent gameobject,scene, or game
+ * Return event emmiter from scene, or gameobject
+ * @returns {object} parent scene, or gameobject
  */
 var GetEventEmmiter = function (parent) {
     if (parent == null) {
@@ -13,9 +13,6 @@ var GetEventEmmiter = function (parent) {
     } else if (parent.systems && parent.systems.events &&
         IsFunction(parent.systems.events.on)) {  // scene.systems.events.on
         return parent.systems.events;
-    } else if (parent.events &&
-        IsFunction(parent.events.on)) {  // game.events.on
-        return parent.events;
     } else {
         return null;
     }

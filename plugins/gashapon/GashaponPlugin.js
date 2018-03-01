@@ -1,13 +1,13 @@
 'use strict'
 
 import Gashapon from './Gashapon.js';
-import GetEventEmmiter from './../utils/GetEventEmmiter.js';
+import GetEventEmmiter from './../utils/system/GetEventEmmiter.js';
 
 class GashaponPlugin extends Gashapon {
     constructor(parent, config) {
         super(config);
+        
         this.parent = parent;
-
         this.boot();
     }
 
@@ -20,7 +20,7 @@ class GashaponPlugin extends Gashapon {
     }
 
     shutdown() {
-        Gashapon.destroy.call(this);
+        Gashapon.destroy.apply(this);
     }
 
     destroy() {

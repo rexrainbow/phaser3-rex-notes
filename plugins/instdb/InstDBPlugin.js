@@ -1,11 +1,11 @@
 'use strict'
 
-import GetEventEmmiter from './../utils/GetEventEmmiter.js';
+import GetEventEmmiter from './../utils/system/GetEventEmmiter.js';
 
 class InstDBPlugin {
     constructor(parent, config) {
+        
         this.parent = parent;
-
         this.boot();
     }
 

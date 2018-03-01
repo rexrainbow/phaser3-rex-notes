@@ -1,14 +1,53 @@
 'use strict'
 
-import CursorKeysManager from './../utils/input/CursorKeysManager.js';
-import GetEventEmmiter from './../utils/GetEventEmmiter.js';
+import Phaser from 'phaser';
+import GetEventEmmiter from './../utils/system/GetEventEmmiter.js';
+import VectorToCursorKeys from './../utils/input/VectorToCursorKeys.js';
 
-class DragCursorPlugin extends CursorKeysManager {
+const GetValue = Phaser.Utils.Objects.GetValue;
+
+class DragCursorPlugin extends VectorToCursorKeys {
     constructor(parent, config) {
         super(config);
-        this.parent = parent;
+        //this.resetFromJSON(config); // this function had been called in super(config)
 
+        this.parent = parent;
         this.boot();
+    }
+
+    /**
+     * Reset status by JSON object
+     * @param {object} o JSON object
+     * @returns {object} this object
+     */
+    resetFromJSON(o) {
+        super.resetFromJSON(o);
+
+        this.pointerId = null;
+        if (this.cfg.origin == undefined) {
+            this.cfg.origin = {};
+        }
+        if (this.origin == undefined) {
+            this.origin = {};
+        }
+
+        var ox = GetValue(o, 'origin.x', null);
+        var oy = GetValue(o, 'origin.y', null);
+        this.setOrigin(ox, oy);
+    }
+
+    /**
+     * Return status in JSON object
+     * @returns JSON object
+     */
+    toJSON() {
+        var o = super.toJSON();
+        o.origin = {
+            x: this.cfg.origin.x,
+            y: this.cfg.origin.y
+        };
+
+        return o;
     }
 
     boot() {
@@ -17,13 +56,69 @@ class DragCursorPlugin extends CursorKeysManager {
             eventEmitter.on('shutdown', this.shutdown, this);
             eventEmitter.on('destroy', this.destroy, this);
         }
+
+        this.init();
     }
 
-    shutdown() {
+    init() {
+        if (!this.parent || !this.parent.input) {
+            return;
+        }
+
+        var self = this;
+        var input = this.parent.input;
+        if (input instanceof Phaser.Input.InputPlugin) { // parent is scene      
+            input.on('pointerdown', function (pointer) {
+                self.onDragStart(pointer);
+            });
+            input.on('pointerup', function (pointer) {
+                self.onDrop(pointer);
+            });
+            input.on('pointermove', function (pointer) {
+                self.onDragging(pointer);
+            });
+        } else { // parent is gameobject
+            // TODO
+        }
     }
 
-    destroy() {
+    setOrigin(x, y) {
+        var o = this.cfg.origin;
+        o.x = x;
+        o.y = y;
+        return this;
     }
+
+    onDragStart(pointer) {
+        if (this.pointerId !== null) {
+            return;
+        }
+        this.pointerId = pointer.id;
+        var defaultOriginMode = (this.cfg.origin.x !== null);
+        this.origin.x = (defaultOriginMode) ? this.cfg.origin.x : pointer.x;
+        this.origin.y = (defaultOriginMode) ? this.cfg.origin.y : pointer.y;
+    }
+
+    onDragging(pointer) {
+        if ((this.pointerId !== pointer.id) || (!pointer.isDown)) {
+            return;
+        }
+        this.setVector(this.origin.x, this.origin.y, pointer.x, pointer.y);
+    }
+
+    onDrop(pointer) {
+        if (this.pointerId !== pointer.id) {
+            return;
+        }
+        this.pointerId = null;
+        this.origin.x = null;
+        this.origin.y = null;
+        this.cleanVector();
+    }
+
+    shutdown() {}
+
+    destroy() {}
 }
 
 export default DragCursorPlugin;

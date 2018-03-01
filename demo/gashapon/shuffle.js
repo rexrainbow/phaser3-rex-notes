@@ -1,24 +1,39 @@
+'use strict'
+
 import Gashapon from './../../plugins/gashapon.js';
 
-function preload() {
-}
+class Demo extends Phaser.Scene {
+    constructor() {
+        super({
+            key: 'demo'
+        })
+    }
 
-function create() {
-    var gashapon = new Gashapon({
-        mode: 'shuffle',  // 0|'shuffle'|1|'random
-        items: {
-            a:1, b:2, c:3
+    preload() {}
+
+    create() {
+        var gashapon = new Gashapon({
+            mode: 'shuffle', // 0|'shuffle'|1|'random
+            items: {
+                a: 1,
+                b: 2,
+                c: 3
+            }
+        });
+
+        // another way to add items:
+        // var gashapon = new Gashapon({mode:0});
+        // gashapon.addItem('a', 1).addItem('b', 2).addItem('c', 3);
+
+        for (var i = 0; i < 12; i++) {
+            console.log("Random pick: " + gashapon.next());
+            console.log("Last picked item: " + gashapon.result);
         }
-    });
+    }
 
-    // another way to add items:
-    // var gashapon = new Gashapon({mode:0});
-    // gashapon.addItem('a', 1).addItem('b', 2).addItem('c', 3);
+    update() {
 
-    for(var i=0; i<12; i++){
-        console.log("Random pick: " + gashapon.next());
-        console.log("Last picked item: " + gashapon.result);
-    }    
+    }
 }
 
 var config = {
@@ -26,10 +41,7 @@ var config = {
     parent: 'phaser-example',
     width: 800,
     height: 600,
-    scene: {
-        preload: preload,
-        create: create
-    }
+    scene: Demo
 };
 
 var game = new Phaser.Game(config);

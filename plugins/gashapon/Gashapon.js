@@ -1,11 +1,12 @@
 'use strict'
 
-import GetFastValue from './../utils/object/GetFastValue.js';
-import GetValue from './../utils/object/GetValue';
+import Phaser from 'phaser';
 import Clone from './../utils/object/Clone.js';
 import IsEmpty from './../utils/Object/IsEmpty.js';
 import Clean from './../utils/object/Clean.js';
 
+const GetFastValue = Phaser.Utils.Objects.GetFastValue;
+const GetValue = Phaser.Utils.Objects.GetValue;
 /**
  * Create Gashapon object with configuration
  * @class
@@ -13,16 +14,57 @@ import Clean from './../utils/object/Clean.js';
  */
 class Gashapon {
     constructor(config) {
-        this.cfg = {
-            mode: null,
-            reload: null
-        };
-        this.items = {};
-        this.remain = {};
-        this._list = [];
-        this.customRnd = [null, null];
-
         this.resetFromJSON(config);
+    }
+
+    /**
+     * Reset status by JSON object
+     * @param {object} o JSON object
+     * @returns {object} this object
+     */
+    resetFromJSON(o) {
+        // configuration
+        if (this.cfg == undefined) {
+            this.cfg = {};
+        }
+        if (this.items == undefined) {
+            this.items = {};
+        }
+        if (this.remain == undefined) {
+            this.remain = {};
+        }
+        if (this._list == undefined) {
+            this._list = [];
+        }
+        if (this.customRnd == undefined) {
+            this.customRnd = [null, null];
+        }        
+
+        this.setMode(GetFastValue(o, 'mode', 0));
+        this.setReload(GetFastValue(o, 'reload', true));
+
+        // data
+
+        this.items = Clone(GetFastValue(o, 'items', {}), this.items);
+        this.remain = Clone(GetFastValue(o, 'remain', {}), this.remain);
+        this._list.length = 0;
+
+        // result
+        this.result = GetFastValue(o, 'result', null);
+
+        // flags
+        this._restartFlag = true; // force restart to rebuild this._list
+
+        // custom function to return random real number between 0 and 1
+        this.customRnd[0] = GetValue(o, 'rnd.fn', null);
+        this.customRnd[1] = GetValue(o, 'rnd.ctx', null);
+
+        // initialize
+        if (this._restartFlag) {
+            this.startGen();
+        }
+
+        return this;
     }
 
     /**
@@ -43,45 +85,12 @@ class Gashapon {
             result: this.result,
 
             // flags
-            restart: true,  // force restart to rebuild this._list
+            restart: true, // force restart to rebuild this._list
 
             // custom function to return random real number between 0 and 1
             rnd: Clone(this.customRnd)
         };
     };
-
-    /**
-     * Reset status by JSON object
-     * @param {object} o JSON object
-     * @returns {object} this object
-     */
-    resetFromJSON(o) {
-        // configuration
-        this.setMode(GetFastValue(o, 'mode', 0));
-        this.setReload(GetFastValue(o, 'reload', true));
-
-        // data
-        this.items = Clone(GetFastValue(o, 'items', {}), this.items);
-        this.remain = Clone(GetFastValue(o, 'remain', {}), this.remain);
-        this._list.length = 0;
-
-        // result
-        this.result = GetFastValue(o, 'result', null);
-
-        // flags
-        this._restartFlag = true;  // force restart to rebuild this._list
-
-        // custom function to return random real number between 0 and 1
-        this.customRnd[0] = GetValue(o, 'rnd.fn', null);
-        this.customRnd[1] = GetValue(o, 'rnd.ctx', null);
-
-        // initialize
-        if (this._restartFlag) {
-            this.startGen();
-        }
-
-        return this;
-    }
 
     /**
      * Restart generator

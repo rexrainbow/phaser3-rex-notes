@@ -1,19 +1,32 @@
 import Gashapon from './../../plugins/gashapon.js';
 
-function preload() {
-}
+class Demo extends Phaser.Scene {
+    constructor() {
+        super({
+            key: 'demo'
+        })
+    }
 
-function create() {
-    var gashapon = new Gashapon({
-        mode: 'shuffle',  // 0|'shuffle'|1|'random
-        items: {
-            a:1, b:2, c:3
-        }
-    });
+    preload() {}
 
-    gashapon.eachItem(function(name, count){
-        console.log(name + ": " + count);
-    });
+    create() {
+        var gashapon = new Gashapon({
+            mode: 'shuffle', // 0|'shuffle'|1|'random
+            items: {
+                a: 1,
+                b: 2,
+                c: 3
+            }
+        });
+
+        gashapon.eachItem(function (name, count) {
+            console.log(name + ": " + count);
+        });
+    }
+
+    update() {
+
+    }
 }
 
 var config = {
@@ -21,10 +34,7 @@ var config = {
     parent: 'phaser-example',
     width: 800,
     height: 600,
-    scene: {
-        preload: preload,
-        create: create
-    }
+    scene: Demo
 };
 
 var game = new Phaser.Game(config);

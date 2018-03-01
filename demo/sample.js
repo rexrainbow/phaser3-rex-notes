@@ -1,9 +1,23 @@
-function preload() {
-    console.log('preLoad');
-}
+'use strict'
 
-function create() {
-    console.log('create')
+import Gashapon from './../../plugins/gashapon.js';
+
+class Demo extends Phaser.Scene {
+    constructor() {
+        super({
+            key: 'demo'
+        })
+    }
+
+    preload() {
+        console.log('preLoad');
+    }
+
+    create() {
+        console.log('create')
+    }
+
+    update() {}
 }
 
 var config = {
@@ -11,10 +25,7 @@ var config = {
     parent: 'phaser-example',
     width: 800,
     height: 600,
-    scene: {
-        preload: preload,
-        create: create
-    }
+    scene: Demo
 };
 
 var game = new Phaser.Game(config);
