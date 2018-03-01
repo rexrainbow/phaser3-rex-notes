@@ -36,7 +36,7 @@ class VectorToCursorKeys {
 
         this.enable(GetFastValue(o, 'enable', true));
         this.setMode(GetFastValue(o, 'dir', '8dir'));
-        this.setDistanceThreshold(GetFastValue(o, 'distanceThreshold', 16))
+        this.setDistanceThreshold(GetFastValue(o, 'distanceMin', 16));
 
         var startX = GetValue(o, "start.x", null);
         var startY = GetValue(o, "start.y", null);
@@ -59,7 +59,7 @@ class VectorToCursorKeys {
     toJSON() {
         return {
             dir: this.cfg.dirMode,
-            distanceThreshold: this.cfg.distanceThreshold,
+            distanceMin: this.cfg.distanceMin,
 
             start: {
                 x: this.start.x,
@@ -169,9 +169,9 @@ class VectorToCursorKeys {
         var deg = RadToDeg(Math.atan2(dy, dx)); // -180 ~ 180
         deg = (360 + deg) % 360;
 
-        if (dist < this.cfg.distanceThreshold) {
+        if (dist < this.cfg.distanceMin) {
             return this;
-        }        
+        }
         switch (this.cfg.dirMode) {
             case 0: // up & down
                 var keyName = (deg < 180) ? 'down' : 'up';
