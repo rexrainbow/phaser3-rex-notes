@@ -7,6 +7,8 @@ pages:
     - Date: date.md
 - Random:
     - Gashapon: gashaponplugin.md
+- Input:
+    - Drag to CursorKeys: dragcursorplugin.md
 
 extra_javascript:
 - js/mermaid/mermaid.min.js

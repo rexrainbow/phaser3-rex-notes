@@ -18,7 +18,7 @@ class Demo extends Phaser.Scene {
 
     create() {
         this.dragCursor = new DragCursorPlugin(this, {
-            dir: '8dir',
+            dir: '8dir',     // 0|'up&down'|1|'left&right|2|'4dir'|3|'8dir'
             distanceMin: 30
         });
 

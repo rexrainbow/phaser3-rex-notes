@@ -32,7 +32,7 @@
     
     
       
-        <title>Date - Phaser 3 plugins</title>
+        <title>Drag to CursorKeys - Phaser 3 plugins</title>
       
     
     
@@ -86,7 +86,7 @@
                 Phaser 3 plugins
               </span>
               <span class="md-header-nav__topic">
-                Date
+                Drag to CursorKeys
               </span>
             
           
@@ -162,12 +162,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
     
     <label class="md-nav__link" for="nav-2">
       Date
@@ -183,98 +181,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="toc">
-        Date
-      </label>
-    
-    <a href="index.html" title="Date" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../date/index.html" title="Date" class="md-nav__link">
       Date
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#dependence" title="Dependence" class="md-nav__link">
-    Dependence
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#source-code" title="Source code" class="md-nav__link">
-    Source code
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-date" title="Get date" class="md-nav__link">
-    Get date
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-unix-timestamp" title="Get unix-timestamp" class="md-nav__link">
-    Get unix-timestamp
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#to-string" title="To string" class="md-nav__link">
-    To string
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -323,10 +234,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
     
     <label class="md-nav__link" for="nav-4">
       Input
@@ -342,11 +255,91 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../dragcursorplugin/index.html" title="Drag to CursorKeys" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Drag to CursorKeys
+      </label>
+    
+    <a href="index.html" title="Drag to CursorKeys" class="md-nav__link md-nav__link--active">
       Drag to CursorKeys
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dependence" title="Dependence" class="md-nav__link">
+    Dependence
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-instance" title="Create instance" class="md-nav__link">
+    Create instance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-state-of-cursor-keys" title="Get state of cursor keys" class="md-nav__link">
+    Get state of cursor keys
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-dragging-point" title="Get dragging point" class="md-nav__link">
+    Get dragging point
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -410,22 +403,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-date" title="Get date" class="md-nav__link">
-    Get date
+  <a href="#get-state-of-cursor-keys" title="Get state of cursor keys" class="md-nav__link">
+    Get state of cursor keys
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-unix-timestamp" title="Get unix-timestamp" class="md-nav__link">
-    Get unix-timestamp
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#to-string" title="To string" class="md-nav__link">
-    To string
+  <a href="#get-dragging-point" title="Get dragging point" class="md-nav__link">
+    Get dragging point
   </a>
   
 </li>
@@ -450,42 +436,48 @@
               
                 
                 
-                  <h1>Date</h1>
+                  <h1>Drag to CursorKeys</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Get current date or unix-timestamp.
-Author: Built-in javascript function</p>
+<p>Simulate curosr keys according dragging events.<br />
+Author: Rex</p>
 <h2 id="dependence">Dependence<a class="headerlink" href="#dependence" title="Permanent link">&para;</a></h2>
-<p>None</p>
+<p>A plugin of scene.</p>
 <h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p>Built-in javascript function.</p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-plugins/blob/master/plugins/dragcursor/DragCursorPlugin.js">Link</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://www.w3schools.com/jsref/jsref_obj_date.asp">Reference</a></p>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
-<span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">timestamp</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">dateString</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">year</span><span class="p">,</span> <span class="nx">month</span><span class="p">,</span> <span class="nx">day</span><span class="p">,</span> <span class="nx">hours</span><span class="p">,</span> <span class="nx">minutes</span><span class="p">,</span> <span class="nx">seconds</span><span class="p">,</span> <span class="nx">milliseconds</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">dragCursor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DragCursorPlugin</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">dir</span><span class="o">:</span> <span class="s1">&#39;8dir&#39;</span><span class="p">,</span>    <span class="c1">// 0|&#39;up&amp;down&#39;|1|&#39;left&amp;right|2|&#39;4dir&#39;|3|&#39;8dir&#39;</span>
+    <span class="nx">distanceMin</span><span class="o">:</span> <span class="mi">30</span>        
+<span class="p">});</span>
 </pre></div>
 
-<h3 id="get-date">Get date<a class="headerlink" href="#get-date" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">year</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getFullYear</span><span class="p">();</span>    <span class="c1">// returns the year</span>
-<span class="kd">var</span> <span class="nx">month</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getMonth</span><span class="p">();</span>      <span class="c1">// returns the month (0-11)</span>
-<span class="kd">var</span> <span class="nx">date</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getDate</span><span class="p">();</span>        <span class="c1">// returns the day of the month (1-31)</span>
-<span class="kd">var</span> <span class="nx">day</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getDay</span><span class="p">();</span>          <span class="c1">// returns the day of the week</span>
-<span class="kd">var</span> <span class="nx">hour</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getHours</span><span class="p">();</span>       <span class="c1">// returns the hour (0-23)</span>
-<span class="kd">var</span> <span class="nx">min</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getMinutes</span><span class="p">();</span>      <span class="c1">// returns the minutes (0-59)</span>
-<span class="kd">var</span> <span class="nx">sec</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getSeconds</span><span class="p">();</span>      <span class="c1">// returns the seconds (0-59)</span>
-<span class="kd">var</span> <span class="nx">ms</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getMilliseconds</span><span class="p">();</span>  <span class="c1">// returns the milliseconds (0-999)</span>
+<p>Properties</p>
+<ul>
+<li>mode : <ul>
+<li><code>'up&amp;down'</code>, or <code>0</code> : simulate up or down cursor keys only.</li>
+<li><code>'left&amp;right'</code>, or <code>1</code> : simulate left or right cursor keys only.</li>
+<li><code>'4dir'</code>, or <code>2</code> : simulate up, down, left or right cursor keys.</li>
+<li><code>'8dir'</code>, or <code>3</code> : simulate up, up-left, up-right, down, down-left, down-right, left, or right cursor keys.</li>
+</ul>
+</li>
+<li>distanceMin : cursor keys will be pressed when dragging distance is larger then this value.</li>
+</ul>
+<h3 id="get-state-of-cursor-keys">Get state of cursor keys<a class="headerlink" href="#get-state-of-cursor-keys" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cursorKeys</span> <span class="o">=</span> <span class="nx">dragCursor</span><span class="p">.</span><span class="nx">createCursorKeys</span><span class="p">();</span>
+
+<span class="kd">var</span> <span class="nx">isLeftKeyDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">left</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">isRightKeyDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">right</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">isUpKeyDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">up</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">isDownKeyDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">down</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
 </pre></div>
 
-<h3 id="get-unix-timestamp">Get unix-timestamp<a class="headerlink" href="#get-unix-timestamp" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">timestamp</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>       <span class="c1">// unix-timestamp in milliseconds</span>
-</pre></div>
-
-<h3 id="to-string">To string<a class="headerlink" href="#to-string" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">toLocaleString</span><span class="p">();</span>   <span class="c1">// locale conventions</span>
-<span class="kd">var</span> <span class="nx">iso</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">toISOString</span><span class="p">();</span>    <span class="c1">// ISO standard</span>
+<h3 id="get-dragging-point">Get dragging point<a class="headerlink" href="#get-dragging-point" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">dragStartX</span> <span class="o">=</span> <span class="nx">dragCursor</span><span class="p">.</span><span class="nx">start</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">dragStartY</span> <span class="o">=</span> <span class="nx">dragCursor</span><span class="p">.</span><span class="nx">start</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">dragEndX</span> <span class="o">=</span> <span class="nx">dragCursor</span><span class="p">.</span><span class="nx">end</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">dragEndY</span> <span class="o">=</span> <span class="nx">dragCursor</span><span class="p">.</span><span class="nx">end</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
 </pre></div>
                 
                   
@@ -505,7 +497,7 @@ Author: Built-in javascript function</p>
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../index.html" title="Home" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../gashaponplugin/index.html" title="Gashapon" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -514,25 +506,11 @@ Author: Built-in javascript function</p>
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Home
-              </span>
-            </div>
-          </a>
-        
-        
-          <a href="../gashaponplugin/index.html" title="Gashapon" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
-                  Next
-                </span>
                 Gashapon
               </span>
             </div>
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
-            </div>
           </a>
+        
         
       </nav>
     </div>
