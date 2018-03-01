@@ -1,3 +1,4 @@
 cd ..
 cd ..
-webpack demo/gashapon/member-of-game.js
+set myproj=./demo/gashapon/member-of-game.js
+webpack

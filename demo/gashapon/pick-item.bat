@@ -1,3 +1,4 @@
 cd ..
 cd ..
-webpack demo/gashapon/pick-item.js
+set myproj=./demo/gashapon/pick-item.js
+webpack

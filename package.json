@@ -31,6 +31,6 @@
     "html-webpack-plugin": "^2.30.1"
   },
   "dependencies": {
-    "phaser": "latest" 
+    "phaser": "latest"
   }
 }

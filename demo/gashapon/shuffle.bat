@@ -1,3 +1,4 @@
 cd ..
 cd ..
-webpack demo/gashapon/shuffle.js
+set myproj=./demo/gashapon/shuffle.js
+webpack

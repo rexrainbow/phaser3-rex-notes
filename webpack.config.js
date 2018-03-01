@@ -13,13 +13,13 @@ var definePlugin = new webpack.DefinePlugin({
     CANVAS_RENDERER: true // I did this to make webpack work, but I'm not really sure it should always be true
 })
 
-var entryPath = process.argv[2] || 'demo/sample.js';
+var projectName = process.env.myproj;
 
 module.exports = {
     entry: {
         app: [
             'babel-polyfill',
-            path.resolve(__dirname, entryPath)
+            projectName
         ],
         vendor: ['phaser']
     },

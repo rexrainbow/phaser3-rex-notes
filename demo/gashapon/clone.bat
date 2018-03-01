@@ -1,3 +1,4 @@
 cd ..
 cd ..
-webpack demo/gashapon/clone.js
+set myproj=./demo/gashapon/clone.js
+webpack

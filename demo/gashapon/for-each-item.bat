@@ -1,3 +1,4 @@
 cd ..
 cd ..
-webpack demo/gashapon/for-each-item.js
+set myproj=./demo/gashapon/for-each-item.js
+webpack
