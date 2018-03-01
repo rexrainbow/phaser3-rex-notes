@@ -34,7 +34,7 @@ class VectorToCursorKeys {
             }
         }
 
-        this.enable(GetFastValue(o, 'enable', true));
+        this.setEnable(GetFastValue(o, 'enable', true));
         this.setMode(GetFastValue(o, 'dir', '8dir'));
         this.setDistanceThreshold(GetFastValue(o, 'distanceMin', 16));
 
@@ -85,7 +85,7 @@ class VectorToCursorKeys {
         return this;
     }
 
-    enable(e) {
+    setEnable(e) {
         if (e == undefined) {
             e = true;
         } else {
