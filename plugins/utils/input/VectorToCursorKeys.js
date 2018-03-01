@@ -58,8 +58,9 @@ class VectorToCursorKeys {
      */
     toJSON() {
         return {
+            enable: this.cfg.enable,
             dir: this.cfg.dirMode,
-            distanceMin: this.cfg.distanceMin,
+            distanceMin: this.cfg.distanceMin,            
 
             start: {
                 x: this.start.x,
