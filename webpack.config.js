@@ -13,7 +13,7 @@ var definePlugin = new webpack.DefinePlugin({
     CANVAS_RENDERER: true // I did this to make webpack work, but I'm not really sure it should always be true
 })
 
-var projectName = process.env.myproj;
+var projectName = process.env.myproj || "./demo/sample.js"
 
 module.exports = {
     entry: {
