@@ -1,25 +1,27 @@
 ## Introduction
 
-Pick random item from box.
+Pick random item from box.  
 Author: Rex
 
 ## Dependence
 
-None
+A plugin of scene.
 
 ## Source code
 
-[Link](https://github.com/rexrainbow/phaser3-rex-plugins/blob/master/plugins/gashapon/Gashapon.js)
+[Link](https://github.com/rexrainbow/phaser3-rex-plugins/blob/master/plugins/gashapon/GashaponPlugin.js)
 
 ## Usage
 
 ### Create instance
 
 ```javascript
-var gashapon = new Gashapon({
+var gashapon = new GashaponPlugin(scene, {
     mode: 'shuffle',  // 0|'shuffle'|1|'random
-    items: {
-        a:1, b:2, c:3  // name:count
+    items: {  // name:count
+        a:1, 
+        b:2, 
+        c:3 
     },
     reload: true,     // true|false
 });

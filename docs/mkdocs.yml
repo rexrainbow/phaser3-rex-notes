@@ -6,7 +6,7 @@ pages:
 - Date:
     - Date: date.md
 - Random:
-    - Gashapon: gashapon.md
+    - Gashapon: gashaponplugin.md
 
 extra_javascript:
 - js/mermaid/mermaid.min.js

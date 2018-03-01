@@ -673,18 +673,20 @@
                   <h1>Gashapon</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Pick random item from box.
+<p>Pick random item from box.<br />
 Author: Rex</p>
 <h2 id="dependence">Dependence<a class="headerlink" href="#dependence" title="Permanent link">&para;</a></h2>
-<p>None</p>
+<p>A plugin of scene.</p>
 <h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-plugins/blob/master/plugins/gashapon/Gashapon.js">Link</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-plugins/blob/master/plugins/gashapon/GashaponPlugin.js">Link</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gashapon</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Gashapon</span><span class="p">({</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gashapon</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">GashaponPlugin</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
     <span class="nx">mode</span><span class="o">:</span> <span class="s1">&#39;shuffle&#39;</span><span class="p">,</span>  <span class="c1">// 0|&#39;shuffle&#39;|1|&#39;random</span>
-    <span class="nx">items</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">a</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> <span class="nx">b</span><span class="o">:</span><span class="mi">2</span><span class="p">,</span> <span class="nx">c</span><span class="o">:</span><span class="mi">3</span>  <span class="c1">// name:count</span>
+    <span class="nx">items</span><span class="o">:</span> <span class="p">{</span>  <span class="c1">// name:count</span>
+        <span class="nx">a</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> 
+        <span class="nx">b</span><span class="o">:</span><span class="mi">2</span><span class="p">,</span> 
+        <span class="nx">c</span><span class="o">:</span><span class="mi">3</span> 
     <span class="p">},</span>
     <span class="nx">reload</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>     <span class="c1">// true|false</span>
 <span class="p">});</span>

@@ -1,18 +1,20 @@
 'use strict'
 
-import Gashapon from './../../plugins/gashapon.js';
+import GashaponPlugin from './../../plugins/gashapon-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
         super({
             key: 'demo'
-        })
+        });
+        this.gashapon;
+        this.gashapon2;
     }
 
     preload() {}
 
     create() {
-        var gashapon = new Gashapon({
+        this.gashapon = new GashaponPlugin(this, {
             mode: 'shuffle', // 0|'shuffle'|1|'random
             items: {
                 a: 1,
@@ -23,14 +25,14 @@ class Demo extends Phaser.Scene {
         });
 
         for (var i = 0; i < 3; i++) {
-            console.log("Random pick: " + gashapon.next());
+            console.log("Random pick: " + this.gashapon.next());
         }
 
-        var status = gashapon.toJSON(); // get current status of gashapon
+        var status = this.gashapon.toJSON(); // get current status of gashapon
         console.log(status);
-        var gashapon2 = new Gashapon(status); // create new Gashapon object using previous status
+        this.gashapon2 = new Gashapon(status); // create new Gashapon object using previous status
         for (var i = 0; i < 3; i++) {
-            console.log("Random pick: " + gashapon.next());
+            console.log("Random pick: " + this.gashapon2.next());
         }
     }
 

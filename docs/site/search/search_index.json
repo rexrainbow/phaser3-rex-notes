@@ -56,117 +56,117 @@
             "title": "To string"
         }, 
         {
-            "location": "/gashapon/index.html", 
-            "text": "Introduction\n\n\nPick random item from box.\nAuthor: Rex\n\n\nDependence\n\n\nNone\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\nvar\n \ngashapon\n \n=\n \nnew\n \nGashapon\n({\n\n    \nmode\n:\n \nshuffle\n,\n  \n// 0|\nshuffle\n|1|\nrandom\n\n    \nitems\n:\n \n{\n\n        \na\n:\n1\n,\n \nb\n:\n2\n,\n \nc\n:\n3\n  \n// name:count\n\n    \n},\n\n    \nreload\n:\n \ntrue\n,\n     \n// true|false\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\nmode : \n\n\n'shuffle'\n, or \n0\n : pick item from box without put it back.\n\n\n'random'\n, or \n1\n : pick item from box then put it back.\n\n\n\n\n\n\nreload : set \ntrue\n to reload items when box is empty for \nshuffle\n mode.\n\n\nitems : initial items in box\n\n\n\n\nPick item\n\n\nPick a random item\n\n\nvar\n \nitem\n \n=\n \ngashapon\n.\nnext\n();\n\n\n\n\n\n\n\nreturn \nnull\n if pick nothing\n\n\n\n\nPick specific item\n\n\nvar\n \nitem\n \n=\n \ngashapon\n.\nnext\n(\na\n);\n\n\n\n\n\n\n\nreturn \nnull\n if pick nothing\n\n\n\n\nLast picked item\n\n\nvar\n \nitem\n \n=\n \ngashapon\n.\nresult\n;\n\n\n\n\n\nSet item\n\n\nSet item\n\n\ngashapon\n.\nsetItem\n(\na\n,\n \n1\n);\n\n\n// gashapon.setItem(\na\n, 1).setItem(\nb\n, 2).setItem(\nc\n, 3);\n\n\n\n\n\nAdd item\n\n\ngashapon\n.\naddItem\n(\na\n,\n1\n);\n\n\n\n\n\nRemove item\n\n\nRemove item\n\n\ngashapon\n.\nremoveItem\n(\na\n);\n\n\n// gashapon.removeItem(\nb\n).gashapon.removeItem(\nc\n);\n\n\n\n\n\nRemove all items\n\n\ngashapon\n.\nremoveAllItems\n();\n\n\n\n\n\nCurrent status\n\n\nGet current status\n\n\nvar\n \nstatus\n \n=\n \ngashapon\n.\ntoJSON\n();\n\n\n\n\n\nClone object\n\n\nvar\n \nstatus\n \n=\n \ngashapon\n.\ntoJSON\n();\n\n\nvar\n \ngashapon2\n \n=\n \nnew\n \nGashapon\n(\nstatus\n);\n\n\n\n\n\nOverwrite current status\n\n\nvar\n \nstatus\n \n=\n \ngashapon\n.\ntoJSON\n();\n\n\n// gashapon.next()...\n\n\ngashapon\n.\nresetFromJSON\n(\nstatus\n);\n\n\n\n\n\nGet items\n\n\nFor each item\n\n\ngashapon\n.\neachItem\n(\nfunction\n(\nname\n,\n \ncount\n){\n\n    \nconsole\n.\nlog\n(\nname\n \n+\n \n: \n \n+\n \ncount\n);\n\n\n});\n\n\n\n\n\nGet items\n\n\nvar\n \nitems\n \n=\n \ngashapon\n.\ngetItems\n();", 
+            "location": "/gashaponplugin/index.html", 
+            "text": "Introduction\n\n\nPick random item from box.\n\nAuthor: Rex\n\n\nDependence\n\n\nA plugin of scene.\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\nvar\n \ngashapon\n \n=\n \nnew\n \nGashaponPlugin\n(\nscene\n,\n \n{\n\n    \nmode\n:\n \nshuffle\n,\n  \n// 0|\nshuffle\n|1|\nrandom\n\n    \nitems\n:\n \n{\n  \n// name:count\n\n        \na\n:\n1\n,\n \n        \nb\n:\n2\n,\n \n        \nc\n:\n3\n \n    \n},\n\n    \nreload\n:\n \ntrue\n,\n     \n// true|false\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\nmode : \n\n\n'shuffle'\n, or \n0\n : pick item from box without put it back.\n\n\n'random'\n, or \n1\n : pick item from box then put it back.\n\n\n\n\n\n\nreload : set \ntrue\n to reload items when box is empty for \nshuffle\n mode.\n\n\nitems : initial items in box\n\n\n\n\nPick item\n\n\nPick a random item\n\n\nvar\n \nitem\n \n=\n \ngashapon\n.\nnext\n();\n\n\n\n\n\n\n\nreturn \nnull\n if pick nothing\n\n\n\n\nPick specific item\n\n\nvar\n \nitem\n \n=\n \ngashapon\n.\nnext\n(\na\n);\n\n\n\n\n\n\n\nreturn \nnull\n if pick nothing\n\n\n\n\nLast picked item\n\n\nvar\n \nitem\n \n=\n \ngashapon\n.\nresult\n;\n\n\n\n\n\nSet item\n\n\nSet item\n\n\ngashapon\n.\nsetItem\n(\na\n,\n \n1\n);\n\n\n// gashapon.setItem(\na\n, 1).setItem(\nb\n, 2).setItem(\nc\n, 3);\n\n\n\n\n\nAdd item\n\n\ngashapon\n.\naddItem\n(\na\n,\n1\n);\n\n\n\n\n\nRemove item\n\n\nRemove item\n\n\ngashapon\n.\nremoveItem\n(\na\n);\n\n\n// gashapon.removeItem(\nb\n).gashapon.removeItem(\nc\n);\n\n\n\n\n\nRemove all items\n\n\ngashapon\n.\nremoveAllItems\n();\n\n\n\n\n\nCurrent status\n\n\nGet current status\n\n\nvar\n \nstatus\n \n=\n \ngashapon\n.\ntoJSON\n();\n\n\n\n\n\nClone object\n\n\nvar\n \nstatus\n \n=\n \ngashapon\n.\ntoJSON\n();\n\n\nvar\n \ngashapon2\n \n=\n \nnew\n \nGashapon\n(\nstatus\n);\n\n\n\n\n\nOverwrite current status\n\n\nvar\n \nstatus\n \n=\n \ngashapon\n.\ntoJSON\n();\n\n\n// gashapon.next()...\n\n\ngashapon\n.\nresetFromJSON\n(\nstatus\n);\n\n\n\n\n\nGet items\n\n\nFor each item\n\n\ngashapon\n.\neachItem\n(\nfunction\n(\nname\n,\n \ncount\n){\n\n    \nconsole\n.\nlog\n(\nname\n \n+\n \n: \n \n+\n \ncount\n);\n\n\n});\n\n\n\n\n\nGet items\n\n\nvar\n \nitems\n \n=\n \ngashapon\n.\ngetItems\n();", 
             "title": "Gashapon"
         }, 
         {
-            "location": "/gashapon/index.html#introduction", 
-            "text": "Pick random item from box.\nAuthor: Rex", 
+            "location": "/gashaponplugin/index.html#introduction", 
+            "text": "Pick random item from box. \nAuthor: Rex", 
             "title": "Introduction"
         }, 
         {
-            "location": "/gashapon/index.html#dependence", 
-            "text": "None", 
+            "location": "/gashaponplugin/index.html#dependence", 
+            "text": "A plugin of scene.", 
             "title": "Dependence"
         }, 
         {
-            "location": "/gashapon/index.html#source-code", 
+            "location": "/gashaponplugin/index.html#source-code", 
             "text": "Link", 
             "title": "Source code"
         }, 
         {
-            "location": "/gashapon/index.html#usage", 
+            "location": "/gashaponplugin/index.html#usage", 
             "text": "", 
             "title": "Usage"
         }, 
         {
-            "location": "/gashapon/index.html#create-instance", 
-            "text": "var   gashapon   =   new   Gashapon ({ \n     mode :   shuffle ,    // 0| shuffle |1| random \n     items :   { \n         a : 1 ,   b : 2 ,   c : 3    // name:count \n     }, \n     reload :   true ,       // true|false  });   Properties   mode :   'shuffle' , or  0  : pick item from box without put it back.  'random' , or  1  : pick item from box then put it back.    reload : set  true  to reload items when box is empty for  shuffle  mode.  items : initial items in box", 
+            "location": "/gashaponplugin/index.html#create-instance", 
+            "text": "var   gashapon   =   new   GashaponPlugin ( scene ,   { \n     mode :   shuffle ,    // 0| shuffle |1| random \n     items :   {    // name:count \n         a : 1 ,  \n         b : 2 ,  \n         c : 3  \n     }, \n     reload :   true ,       // true|false  });   Properties   mode :   'shuffle' , or  0  : pick item from box without put it back.  'random' , or  1  : pick item from box then put it back.    reload : set  true  to reload items when box is empty for  shuffle  mode.  items : initial items in box", 
             "title": "Create instance"
         }, 
         {
-            "location": "/gashapon/index.html#pick-item", 
+            "location": "/gashaponplugin/index.html#pick-item", 
             "text": "", 
             "title": "Pick item"
         }, 
         {
-            "location": "/gashapon/index.html#pick-a-random-item", 
+            "location": "/gashaponplugin/index.html#pick-a-random-item", 
             "text": "var   item   =   gashapon . next ();    return  null  if pick nothing", 
             "title": "Pick a random item"
         }, 
         {
-            "location": "/gashapon/index.html#pick-specific-item", 
+            "location": "/gashaponplugin/index.html#pick-specific-item", 
             "text": "var   item   =   gashapon . next ( a );    return  null  if pick nothing", 
             "title": "Pick specific item"
         }, 
         {
-            "location": "/gashapon/index.html#last-picked-item", 
+            "location": "/gashaponplugin/index.html#last-picked-item", 
             "text": "var   item   =   gashapon . result ;", 
             "title": "Last picked item"
         }, 
         {
-            "location": "/gashapon/index.html#set-item", 
+            "location": "/gashaponplugin/index.html#set-item", 
             "text": "", 
             "title": "Set item"
         }, 
         {
-            "location": "/gashapon/index.html#set-item_1", 
+            "location": "/gashaponplugin/index.html#set-item_1", 
             "text": "gashapon . setItem ( a ,   1 );  // gashapon.setItem( a , 1).setItem( b , 2).setItem( c , 3);", 
             "title": "Set item"
         }, 
         {
-            "location": "/gashapon/index.html#add-item", 
+            "location": "/gashaponplugin/index.html#add-item", 
             "text": "gashapon . addItem ( a , 1 );", 
             "title": "Add item"
         }, 
         {
-            "location": "/gashapon/index.html#remove-item", 
+            "location": "/gashaponplugin/index.html#remove-item", 
             "text": "", 
             "title": "Remove item"
         }, 
         {
-            "location": "/gashapon/index.html#remove-item_1", 
+            "location": "/gashaponplugin/index.html#remove-item_1", 
             "text": "gashapon . removeItem ( a );  // gashapon.removeItem( b ).gashapon.removeItem( c );", 
             "title": "Remove item"
         }, 
         {
-            "location": "/gashapon/index.html#remove-all-items", 
+            "location": "/gashaponplugin/index.html#remove-all-items", 
             "text": "gashapon . removeAllItems ();", 
             "title": "Remove all items"
         }, 
         {
-            "location": "/gashapon/index.html#current-status", 
+            "location": "/gashaponplugin/index.html#current-status", 
             "text": "", 
             "title": "Current status"
         }, 
         {
-            "location": "/gashapon/index.html#get-current-status", 
+            "location": "/gashaponplugin/index.html#get-current-status", 
             "text": "var   status   =   gashapon . toJSON ();", 
             "title": "Get current status"
         }, 
         {
-            "location": "/gashapon/index.html#clone-object", 
+            "location": "/gashaponplugin/index.html#clone-object", 
             "text": "var   status   =   gashapon . toJSON ();  var   gashapon2   =   new   Gashapon ( status );", 
             "title": "Clone object"
         }, 
         {
-            "location": "/gashapon/index.html#overwrite-current-status", 
+            "location": "/gashaponplugin/index.html#overwrite-current-status", 
             "text": "var   status   =   gashapon . toJSON ();  // gashapon.next()...  gashapon . resetFromJSON ( status );", 
             "title": "Overwrite current status"
         }, 
         {
-            "location": "/gashapon/index.html#get-items", 
+            "location": "/gashaponplugin/index.html#get-items", 
             "text": "", 
             "title": "Get items"
         }, 
         {
-            "location": "/gashapon/index.html#for-each-item", 
+            "location": "/gashaponplugin/index.html#for-each-item", 
             "text": "gashapon . eachItem ( function ( name ,   count ){ \n     console . log ( name   +   :    +   count );  });", 
             "title": "For each item"
         }, 
         {
-            "location": "/gashapon/index.html#get-items_1", 
+            "location": "/gashaponplugin/index.html#get-items_1", 
             "text": "var   items   =   gashapon . getItems ();", 
             "title": "Get items"
         }

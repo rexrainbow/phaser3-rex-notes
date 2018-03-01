@@ -1,18 +1,19 @@
 'use strict'
 
-import Gashapon from './../../plugins/gashapon.js';
+import GashaponPlugin from './../../plugins/gashapon-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
         super({
             key: 'demo'
         })
+        this.gashapon;
     }
 
     preload() {}
 
     create() {
-        var gashapon = new Gashapon({
+        this.gashapon = new GashaponPlugin(this, {
             mode: 'shuffle', // 0|'shuffle'|1|'random
             items: {
                 a: 1,
@@ -26,8 +27,8 @@ class Demo extends Phaser.Scene {
         // gashapon.addItem('a', 1).addItem('b', 2).addItem('c', 3);
 
         for (var i = 0; i < 12; i++) {
-            console.log("Random pick: " + gashapon.next());
-            console.log("Last picked item: " + gashapon.result);
+            console.log("Random pick: " + this.gashapon.next());
+            console.log("Last picked item: " + this.gashapon.result);
         }
     }
 
