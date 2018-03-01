@@ -329,6 +329,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#assign-origin-point" title="Assign origin point" class="md-nav__link">
+    Assign origin point
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -416,6 +423,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#assign-origin-point" title="Assign origin point" class="md-nav__link">
+    Assign origin point
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -478,6 +492,21 @@ Author: Rex</p>
 <span class="kd">var</span> <span class="nx">dragStartY</span> <span class="o">=</span> <span class="nx">dragCursor</span><span class="p">.</span><span class="nx">start</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">dragEndX</span> <span class="o">=</span> <span class="nx">dragCursor</span><span class="p">.</span><span class="nx">end</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">dragEndY</span> <span class="o">=</span> <span class="nx">dragCursor</span><span class="p">.</span><span class="nx">end</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+</pre></div>
+
+<h3 id="assign-origin-point">Assign origin point<a class="headerlink" href="#assign-origin-point" title="Permanent link">&para;</a></h3>
+<p>Origin point is the dragging start point, or assign origin point when creating instance.</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">dragCursor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DragCursorPlugin</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nx">origin</span><span class="o">:</span> <span class="p">{</span>       <span class="c1">// assign origin point to (400,300)</span>
+        <span class="nx">x</span><span class="o">:</span> <span class="mi">400</span><span class="p">,</span>
+        <span class="nx">y</span><span class="o">:</span> <span class="mi">300</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+
+<p>Or assign origin point by <code>setOrigin(x, y)</code> function.</p>
+<div class="codehilite"><pre><span></span><span class="nx">dragCursor</span><span class="p">.</span><span class="nx">setOrigin</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">300</span><span class="p">);</span>  <span class="c1">// assign origin point to (400,300)</span>
 </pre></div>
                 
                   

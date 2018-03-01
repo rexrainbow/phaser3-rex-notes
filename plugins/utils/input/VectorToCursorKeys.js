@@ -104,7 +104,7 @@ class VectorToCursorKeys {
         if (d < 0) {
             d = 0;
         }
-        this.cfg.distanceThreshold = d;
+        this.cfg.distanceMin = d;
         return this;
     }
 

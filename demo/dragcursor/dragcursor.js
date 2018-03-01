@@ -19,8 +19,13 @@ class Demo extends Phaser.Scene {
     create() {
         this.dragCursor = new DragCursorPlugin(this, {
             dir: '8dir',     // 0|'up&down'|1|'left&right|2|'4dir'|3|'8dir'
-            distanceMin: 30
+            distanceMin: 30,
+            //origin:{       // assign origin point to (400,300)
+            //    x:400,
+            //    y:300
+            //}
         });
+        //this.dragCursor.setOrigin(400, 300);
 
         this.cursorKeys = this.dragCursor.createCursorKeys();
         this.text = this.add.text(100, 100, '--');
@@ -39,15 +44,13 @@ class Demo extends Phaser.Scene {
         if (keyDownList.length === 0) {
             s = '--';
         } else {
-            s = keyDownList.join(",") + "\n"
-            s += "(" + this.dragCursor.start.x + "," + this.dragCursor.start.y + ")" + " , " + 
-            "(" + this.dragCursor.end.x + "," + this.dragCursor.end.y + ")";
+            s = keyDownList.join(",");
         }
         this.text.setText(s);
 
         this.graphics.clear();        
-        if (keyDownList.length > 0) {
-            this.graphics.lineStyle(6, 0xffffff, 1);
+        if (this.dragCursor.start.x != null) {
+            this.graphics.lineStyle(3, 0xffffff, 1);
             this.graphics.lineBetween(
                 this.dragCursor.start.x,
                 this.dragCursor.start.y,

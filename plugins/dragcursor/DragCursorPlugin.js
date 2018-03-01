@@ -91,6 +91,7 @@ class DragCursorPlugin extends VectorToCursorKeys {
         var defaultOriginMode = (this.cfg.origin.x !== null);
         this.origin.x = (defaultOriginMode) ? this.cfg.origin.x : pointer.x;
         this.origin.y = (defaultOriginMode) ? this.cfg.origin.y : pointer.y;
+        this.setVector(this.origin.x, this.origin.y, pointer.x, pointer.y);
     }
 
     onDragging(pointer) {

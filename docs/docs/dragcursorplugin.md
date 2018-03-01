@@ -50,3 +50,23 @@ var dragStartY = dragCursor.start.y;
 var dragEndX = dragCursor.end.x;
 var dragEndY = dragCursor.end.y;
 ```
+
+### Assign origin point
+
+Origin point is the dragging start point, or assign origin point when creating instance.
+
+```javascript
+var dragCursor = new DragCursorPlugin(scene, {
+    // ...
+    origin: {       // assign origin point to (400,300)
+        x: 400,
+        y: 300
+    }
+});
+```
+
+Or assign origin point by `setOrigin(x, y)` function.
+
+```javascript
+dragCursor.setOrigin(400, 300);  // assign origin point to (400,300)
+```
