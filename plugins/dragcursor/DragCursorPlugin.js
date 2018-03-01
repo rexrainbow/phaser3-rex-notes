@@ -68,15 +68,9 @@ class DragCursorPlugin extends VectorToCursorKeys {
         var self = this;
         var input = this.parent.input;
         if (input instanceof Phaser.Input.InputPlugin) { // parent is scene      
-            input.on('pointerdown', function (pointer) {
-                self.onDragStart(pointer);
-            });
-            input.on('pointerup', function (pointer) {
-                self.onDrop(pointer);
-            });
-            input.on('pointermove', function (pointer) {
-                self.onDragging(pointer);
-            });
+            input.on('pointerdown', this.onDragStart, this);
+            input.on('pointerup', this.onDrop, this);
+            input.on('pointermove', this.onDragging, this);
         } else { // parent is gameobject
             // TODO
         }
@@ -116,9 +110,16 @@ class DragCursorPlugin extends VectorToCursorKeys {
         this.cleanVector();
     }
 
-    shutdown() {}
+    shutdown() {
+        var input = this.parent.input;
+        input.removeListener('pointerdown', this.onDragStart, this);
+        input.removeListener('pointerup', this.onDragStart, this);
+        input.removeListener('pointermove', this.onDragStart, this);
+    }
 
-    destroy() {}
+    destroy() {
+        this.shutdown();
+    }
 }
 
 export default DragCursorPlugin;
