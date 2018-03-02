@@ -36,7 +36,7 @@ class Demo extends Phaser.Scene {
     test() {
         var coll = this.instdb.getCollection();
 
-        var allInsts = coll.find();
+        //var allInsts = coll.find();
         Phaser.Actions.SetTint(coll.find(), 0xffffff);
 
         var query = {
@@ -44,6 +44,7 @@ class Demo extends Phaser.Scene {
                 '$gt': 400
             }
         };
+        // var res = coll.find(query);
         Phaser.Actions.SetTint(coll.find(query), 0xff0000);
     }
 
