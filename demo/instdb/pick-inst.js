@@ -8,6 +8,7 @@ class Demo extends Phaser.Scene {
             key: 'demo'
         })
         this.instdb;
+        this.text;
     }
 
     preload() {
@@ -15,40 +16,45 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
+        this.text = this.add.text(30, 30, "--");
+
         this.instdb = new InstDBPlugin(this);
+
+        var inst;
+
         for (var i = 0; i < 20; i++) {
-            var inst = this.add.image(
-                Phaser.Math.Between(0, 800),
-                Phaser.Math.Between(0, 600),
-                'mushroom').setInteractive();
-            this.input.setDraggable(inst);
+            inst = this.add.image(0, 0, 'mushroom').
+                setInteractive().
+                on('pointerover', function (event) {                    
+                    this.scene.text.setText(InstDBPlugin.getId(this)); // this.$loki
+                });
+
             this.instdb.addInst(inst);
         }
-        this.test();
+        this.shuffle();
 
-        this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
-            gameObject.x = dragX;
-            gameObject.y = dragY;
-        });
-        this.input.on('dragend', this.test, this);
+        this.input.on('pointerdown', this.shuffle, this);
+
     }
 
-    test() {
-        var coll = this.instdb.getCollection();
-
-        //var allInsts = coll.find();
-        Phaser.Actions.SetTint(coll.find(), 0xffffff);
+    shuffle() {
+        var allInsts = this.instdb.getAll();
+        allInsts.forEach(function (inst) {
+            inst.x = Phaser.Math.Between(0, 800);
+            inst.y = Phaser.Math.Between(0, 600);
+            inst.clearTint();
+        });
 
         var query = {
             x: {
                 '$gt': 400
             }
         };
-        // var res = coll.find(query);
+        var coll = this.instdb.getCollection();
         Phaser.Actions.SetTint(coll.find(query), 0xff0000);
     }
 
-    update() {}
+    update() { }
 }
 
 var config = {

@@ -62,6 +62,19 @@ class InstDBPlugin {
         return this;
     }
 
+    getAll(tableName) {
+        var coll = this.getCollection(tableName);
+        return coll.find();
+    }
+
+    get(id, tableName) {
+        var coll = this.getCollection(tableName);
+        return coll.get(id);
+    }
+
+    static getId(inst) {
+        return inst.$loki;
+    }
 }
 
 export default InstDBPlugin;
