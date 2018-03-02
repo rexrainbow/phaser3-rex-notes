@@ -28,10 +28,10 @@ class InstDBPlugin {
     destroy() {}
 
     getCollection(tableName) {
-        if (((tableName === undefined) ||
-                (tableName === this.curCollName)
-            ) &&
-            this.curColl) {
+        if (tableName === undefined) {
+            tableName = this.curCollName;
+        }
+        if ((tableName === this.curCollName) && this.curColl) {
             return this.curColl;
         }
 
