@@ -1,4 +1,4 @@
-set myproj=./demo/test/test.js
+set myproj=./demo/instdb/pick-inst.js
 cd ..
 cd ..
 webpack
