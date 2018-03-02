@@ -1,7 +1,5 @@
 'use strict'
 
-import Gashapon from './../../plugins/gashapon.js';
-
 class Demo extends Phaser.Scene {
     constructor() {
         super({
