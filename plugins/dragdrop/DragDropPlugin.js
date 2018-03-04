@@ -34,7 +34,7 @@ class DragDropPlugin {
         return {
             enable: this.enable,
             axis: this.axisMode,
-            rotation: this.axisRad
+            rotation: this.axisDeg
         };
     }
 
@@ -82,6 +82,7 @@ class DragDropPlugin {
     }
 
     setAxisRotation(a) {
+        this.axisDeg = a;
         this.axisRad = Phaser.Math.DegToRad(a);
         return this;
     }
