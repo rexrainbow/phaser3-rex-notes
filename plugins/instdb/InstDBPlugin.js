@@ -2,74 +2,85 @@
 
 import Phaser from 'phaser';
 import loki from './../utils/lokijs/lokijs.min.js';
-import GetEventEmmiter from './../utils/system/GetEventEmmiter.js';
+import IsArray from './../utils/array/IsArray.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
+const instDB = new loki();   // global db for all scenes
 class InstDBPlugin {
-    constructor(parent, config) {
-        this.db = new loki();
-        this.curColl = null;
-        this.curCollName = GetFastValue(config, "table", "_");
+    constructor(scene, config) {
+        this.scene = scene;
+        this.systems = scene.sys;
 
-        this.parent = parent;
+        this.collName = scene.sys.settings.key;
+        this.coll = instDB.addCollection(this.collName, {
+            disableMeta: true
+        });
+
         this.boot();
     }
 
     boot() {
-        var eventEmitter = GetEventEmmiter(this.parent);
+        var eventEmitter = this.systems.events;
         if (eventEmitter) {
             eventEmitter.on('shutdown', this.shutdown, this);
             eventEmitter.on('destroy', this.destroy, this);
         }
     }
 
-    shutdown() {}
-
-    destroy() {}
-
-    getCollection(tableName) {
-        if (tableName === undefined) {
-            tableName = this.curCollName;
-        }
-        if ((tableName === this.curCollName) && this.curColl) {
-            return this.curColl;
-        }
-
-        var coll = this.db.getCollection(tableName);
-        if (coll == null) {
-            coll = this.db.addCollection(tableName, {
-                disableMeta: true
-            });
-        }
-        this.curColl = coll;
-        this.curCollName = tableName;
-        return coll;
+    shutdown() {
+        instDB.removeCollection(this.collName);
     }
 
-    addInst(inst, tableName) {
-        var coll = this.getCollection(tableName);
-        coll.insert(inst);
+    destroy() {
+        this.shutdown();
+    }
+
+    getCollection(sceneKey) {
+        if (sceneKey === undefined) {
+            return this.coll;
+        }
+
+        return instDB.getCollection(sceneKey);
+    }
+
+    addInst(inst, destroyable) {
+        if (destroyable === undefined) { destroyable = true; }
+
+        this.coll.insert(inst);
         // TODO: remove record when destroy event fired
-        inst.on('destroy',
-            this.removeInst, this,
-            inst, this.tableName);
+        if (destroyable) {
+            inst.on('destroy',
+                this.removeInst, this,
+                inst, this.collName);
+        }
         return this;
     }
 
-    removeInst(inst, tableName) {
-        var coll = this.getCollection(tableName);
-        coll.remove(inst);
+    removeInst(inst) {
+        this.coll.remove(inst);
         return this;
     }
 
-    getAll(tableName) {
-        var coll = this.getCollection(tableName);
+    getAll(sceneKey) {
+        var coll = this.getCollection(sceneKey);
         return coll.find();
     }
 
-    get(id, tableName) {
-        var coll = this.getCollection(tableName);
-        return coll.get(id);
+    get(id, sceneKey) {
+        var coll = this.getCollection(sceneKey);
+        if (IsArray(id)) {
+            var retInsts = [], inst;
+            for (var i = 0, len = id.length; i < len; i++) {
+                inst = coll.get(id[i]);
+                if (inst) {
+                    retInsts.push(inst);
+                }
+            }
+            return retInsts;
+        } else {
+            return coll.get(id);
+        }
+
     }
 
     static getId(inst) {

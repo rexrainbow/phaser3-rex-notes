@@ -3,7 +3,7 @@
 ## Links
 
 - [Phaser3](https://github.com/photonstorm/phaser)
-- [Document](https://rexrainbow.github.io/phaser3-rex-plugins/docs/site/)
+- [Notes](https://rexrainbow.github.io/phaser3-rex-plugins/docs/site/)
 
 ## Demo
 
@@ -21,4 +21,4 @@
 
 -   Folder `plugins` : source code of plugins
 -   Folder `demo` : demo code
--   Folder `docs` : document
+-   Folder `docs` : notes
