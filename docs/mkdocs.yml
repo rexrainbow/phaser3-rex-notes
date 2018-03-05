@@ -3,6 +3,8 @@ theme: 'material'
 
 pages:
 - Home: index.md
+- Data structure:
+    - Filter: filter.md
 - Date:
     - Date: date.md
 - Random:
