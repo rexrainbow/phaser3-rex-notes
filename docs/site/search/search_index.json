@@ -12,12 +12,12 @@
         }, 
         {
             "location": "/filter/index.html", 
-            "text": "Introduction\n\n\nCreates a new array with all elements that pass the test function.\n\n\nAuthor: Built-in javascript function\n\n\nDependence\n\n\nNone\n\n\nSource code\n\n\nBuilt-in javascript function.\n\n\nUsage\n\n\nReference\n\n\nFilter elements\n\n\n// var elems = [...]\n\n\nvar\n \nresult\n \n=\n \nelems\n.\nfilter\n(\nfunction\n(\nel\n){\n\n    \nreturn\n \n(\nel\n.\nx\n \n \n400\n);\n\n\n});", 
+            "text": "Introduction\n\n\nCreates a new array with all elements that pass the test function.\n\nAuthor: Built-in javascript function\n\n\nDependence\n\n\nNone\n\n\nSource code\n\n\nBuilt-in javascript function.\n\n\nUsage\n\n\nReference\n\n\nFilter elements\n\n\n// var elems = [...]\n\n\nvar\n \nresult\n \n=\n \nelems\n.\nfilter\n(\nfunction\n(\nel\n){\n\n    \nreturn\n \n(\nel\n.\nx\n \n \n400\n);\n\n\n});", 
             "title": "Filter"
         }, 
         {
             "location": "/filter/index.html#introduction", 
-            "text": "Creates a new array with all elements that pass the test function.  Author: Built-in javascript function", 
+            "text": "Creates a new array with all elements that pass the test function. \nAuthor: Built-in javascript function", 
             "title": "Introduction"
         }, 
         {
@@ -42,12 +42,12 @@
         }, 
         {
             "location": "/date/index.html", 
-            "text": "Introduction\n\n\nGet current date or unix-timestamp.\n\n\nAuthor: Built-in javascript function\n\n\nDependence\n\n\nNone\n\n\nSource code\n\n\nBuilt-in javascript function.\n\n\nUsage\n\n\nReference\n\n\nCreate instance\n\n\nvar\n \nd\n \n=\n \nnew\n \nDate\n();\n\n\nvar\n \nd\n \n=\n \nnew\n \nDate\n(\ntimestamp\n);\n\n\nvar\n \nd\n \n=\n \nnew\n \nDate\n(\ndateString\n);\n\n\nvar\n \nd\n \n=\n \nnew\n \nDate\n(\nyear\n,\n \nmonth\n,\n \nday\n,\n \nhours\n,\n \nminutes\n,\n \nseconds\n,\n \nmilliseconds\n);\n\n\n\n\n\nGet date\n\n\nvar\n \nyear\n \n=\n \nd\n.\ngetFullYear\n();\n    \n// returns the year\n\n\nvar\n \nmonth\n \n=\n \nd\n.\ngetMonth\n();\n      \n// returns the month (0-11)\n\n\nvar\n \ndate\n \n=\n \nd\n.\ngetDate\n();\n        \n// returns the day of the month (1-31)\n\n\nvar\n \nday\n \n=\n \nd\n.\ngetDay\n();\n          \n// returns the day of the week\n\n\nvar\n \nhour\n \n=\n \nd\n.\ngetHours\n();\n       \n// returns the hour (0-23)\n\n\nvar\n \nmin\n \n=\n \nd\n.\ngetMinutes\n();\n      \n// returns the minutes (0-59)\n\n\nvar\n \nsec\n \n=\n \nd\n.\ngetSeconds\n();\n      \n// returns the seconds (0-59)\n\n\nvar\n \nms\n \n=\n \nd\n.\ngetMilliseconds\n();\n  \n// returns the milliseconds (0-999)\n\n\n\n\n\nGet unix-timestamp\n\n\nvar\n \ntimestamp\n \n=\n \nd\n.\nnow\n();\n       \n// unix-timestamp in milliseconds\n\n\n\n\n\nTo string\n\n\nvar\n \ns\n \n=\n \nd\n.\ntoLocaleString\n();\n   \n// locale conventions\n\n\nvar\n \niso\n \n=\n \nd\n.\ntoISOString\n();\n    \n// ISO standard", 
+            "text": "Introduction\n\n\nGet current date or unix-timestamp.\n\nAuthor: Built-in javascript function\n\n\nDependence\n\n\nNone\n\n\nSource code\n\n\nBuilt-in javascript function.\n\n\nUsage\n\n\nReference\n\n\nCreate instance\n\n\nvar\n \nd\n \n=\n \nnew\n \nDate\n();\n\n\nvar\n \nd\n \n=\n \nnew\n \nDate\n(\ntimestamp\n);\n\n\nvar\n \nd\n \n=\n \nnew\n \nDate\n(\ndateString\n);\n\n\nvar\n \nd\n \n=\n \nnew\n \nDate\n(\nyear\n,\n \nmonth\n,\n \nday\n,\n \nhours\n,\n \nminutes\n,\n \nseconds\n,\n \nmilliseconds\n);\n\n\n\n\n\nGet date\n\n\nvar\n \nyear\n \n=\n \nd\n.\ngetFullYear\n();\n    \n// returns the year\n\n\nvar\n \nmonth\n \n=\n \nd\n.\ngetMonth\n();\n      \n// returns the month (0-11)\n\n\nvar\n \ndate\n \n=\n \nd\n.\ngetDate\n();\n        \n// returns the day of the month (1-31)\n\n\nvar\n \nday\n \n=\n \nd\n.\ngetDay\n();\n          \n// returns the day of the week\n\n\nvar\n \nhour\n \n=\n \nd\n.\ngetHours\n();\n       \n// returns the hour (0-23)\n\n\nvar\n \nmin\n \n=\n \nd\n.\ngetMinutes\n();\n      \n// returns the minutes (0-59)\n\n\nvar\n \nsec\n \n=\n \nd\n.\ngetSeconds\n();\n      \n// returns the seconds (0-59)\n\n\nvar\n \nms\n \n=\n \nd\n.\ngetMilliseconds\n();\n  \n// returns the milliseconds (0-999)\n\n\n\n\n\nGet unix-timestamp\n\n\nvar\n \ntimestamp\n \n=\n \nd\n.\nnow\n();\n       \n// unix-timestamp in milliseconds\n\n\n\n\n\nTo string\n\n\nvar\n \ns\n \n=\n \nd\n.\ntoLocaleString\n();\n   \n// locale conventions\n\n\nvar\n \niso\n \n=\n \nd\n.\ntoISOString\n();\n    \n// ISO standard", 
             "title": "Date"
         }, 
         {
             "location": "/date/index.html#introduction", 
-            "text": "Get current date or unix-timestamp.  Author: Built-in javascript function", 
+            "text": "Get current date or unix-timestamp. \nAuthor: Built-in javascript function", 
             "title": "Introduction"
         }, 
         {
