@@ -1,6 +1,7 @@
 ## Introduction
 
 Creates a new array with all elements that pass the test function.
+
 Author: Built-in javascript function
 
 ## Dependence
