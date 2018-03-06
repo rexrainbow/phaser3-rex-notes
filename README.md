@@ -1,4 +1,4 @@
-# Rex's plugins of Phaser3 engine
+# Notes of Phaser3 engine
 
 ## Links
 
