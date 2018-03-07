@@ -11,6 +11,8 @@ class DragDropPlugin {
         this.scene = gameobject.scene;
         this.boot();
 
+        this.enable = null;
+        this.isDragging = false;
         this.resetFromJSON(config);
     }
 
@@ -20,7 +22,6 @@ class DragDropPlugin {
      * @returns {object} this object
      */
     resetFromJSON(o) {
-        this.enable = null;
         this.setEnable(GetFastValue(o, "enable", true));
         this.setAxisMode(GetFastValue(o, "axis", 0));
         this.setAxisRotation(GetFastValue(o, "rotation", 0));
@@ -33,8 +34,9 @@ class DragDropPlugin {
     toJSON() {
         return {
             enable: this.enable,
+            isDragging: this.isDragging,
             axis: this.axisMode,
-            rotation: this.axisDeg
+            rotation: this.axisRotation
         };
     }
 
@@ -49,7 +51,9 @@ class DragDropPlugin {
     }
 
     init() {
+        this.gameobject.on('drag', this.onDraggingStart, this);
         this.gameobject.on('drag', this.onDragging, this);
+        this.gameobject.on('drop', this.onDrop, this);
     }
 
     shutdown() {
@@ -62,11 +66,13 @@ class DragDropPlugin {
 
     setEnable(e) {
         if (this.enable === null) {
-            this.gameobject.setInteractive();  // only need setInteractive once
+            this.gameobject.setInteractive(); // only need setInteractive once
         }
 
         e = !!e;
-        if (this.enable === e) { return this; }
+        if (this.enable === e) {
+            return this;
+        }
 
         this.enable = e;
         this.scene.input.setDraggable(this.gameobject, e);
@@ -82,17 +88,28 @@ class DragDropPlugin {
     }
 
     setAxisRotation(a) {
-        this.axisDeg = a;
-        this.axisRad = Phaser.Math.DegToRad(a);
+        this.axisRotation = a;
         return this;
     }
 
+    forceDropping() {
+        this.isDragging = false;
+    }
+
+    onDraggingStart(pointer, dragX, dragY) {
+        this.isDragging = true;
+    }
+
     onDragging(pointer, dragX, dragY) {
+        if (!this.isDragging) {
+            return;
+        }
+
         var gameobject = this.gameobject;
         if (this.axisMode === 0) {
             gameobject.x = dragX;
             gameobject.y = dragY;
-        } else if (this.axisRad === 0) {
+        } else if (this.axisRotation === 0) {
             if (this.axisMode === 1) {
                 gameobject.x = dragX;
             } else if (this.axisMode === 2) {
@@ -103,18 +120,22 @@ class DragDropPlugin {
             P0.y = gameobject.y;
             P1.x = dragX;
             P1.y = dragY;
-            rotatePoint(P1, P0, -this.axisRad);
+            rotatePoint(P1, P0, -this.axisRotation);
 
             if (this.axisMode === 1) {
                 P1.y = P0.y;
             } else if (this.axisMode === 2) {
                 P1.x = P0.x;
             }
-            rotatePoint(P1, P0, this.axisRad);
+            rotatePoint(P1, P0, this.axisRotation);
             gameobject.x = P1.x;
             gameobject.y = P1.y;
         }
 
+    }
+
+    onDrop (pointer, target) {
+        this.isDragging = false;
     }
 }
 

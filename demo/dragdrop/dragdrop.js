@@ -18,7 +18,7 @@ class Demo extends Phaser.Scene {
         inst.dragdrop = new DragDropPlugin(inst, {
             // enable: true,
             axis: 1,
-            rotation: 45
+            rotation: Phaser.Math.DegToRad(45)
         });
     }
 }
