@@ -44,7 +44,7 @@ var Canvas = new Phaser.Class({
                 width = 256;
             }
             if (height === undefined) {
-                height = 25;
+                height = 256;
             }
 
             GameObject.call(this, scene, 'Canvas');
