@@ -3,7 +3,7 @@
 import Phaser from 'phaser';
 import Render from './Render.js';
 import GameObject from './../utils/system/GameObject.js'; // TODO:
-import BuildGameObject from './../utils/system/BuildGameObject';  // TODO:
+import BuildGameObject from './../utils/system/BuildGameObject'; // TODO:
 
 const CanvasPool = Phaser.Display.Canvas.Pool;
 const Components = Phaser.GameObjects.Components;
@@ -132,13 +132,11 @@ var Canvas = new Phaser.Class({
 
 });
 
-Phaser.GameObjects.GameObjectFactory.register('rexCanvas', function (x, y, width, height)
-{
+Phaser.GameObjects.GameObjectFactory.register('rexCanvas', function (x, y, width, height) {
     return this.displayList.add(new Canvas(this.scene, x, y, width, height));
 });
 
-Phaser.GameObjects.GameObjectCreator.register('rexCanvas', function (config)
-{
+Phaser.GameObjects.GameObjectCreator.register('rexCanvas', function (config) {
     var width = GetAdvancedValue(config, 'width', 256);
     var height = GetAdvancedValue(config, 'height', 256);
     var canvas = new Canvas(this.scene, 0, 0, width, height)
