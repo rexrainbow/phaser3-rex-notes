@@ -71,10 +71,9 @@ var Canvas = new Phaser.Class({
         },
 
     getCanvas: function (readOnly) {
-        if (readOnly === undefined) {
-            readOnly = false;
+        if (!readOnly) {
+            this.dirty = true;
         }
-        this.dirty |= (!readOnly);
         return this.canvas;
     },
 
