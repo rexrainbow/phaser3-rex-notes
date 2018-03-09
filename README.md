@@ -3,7 +3,7 @@
 ## Links
 
 - [Phaser3](https://github.com/photonstorm/phaser)
-- [Notes](https://rexrainbow.github.io/phaser3-rex-plugins/docs/site/)
+- [Notes](https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html)
 
 ## Demo
 
