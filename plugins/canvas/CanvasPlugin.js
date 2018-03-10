@@ -49,19 +49,16 @@ var Canvas = new Phaser.Class({
 
             GameObject.call(this, scene, 'Canvas');
 
-            this.setPosition(x, y);
-            this.initPipeline('TextureTintPipeline');
-
+            this.resolution = 1; // TODO
             this.canvas = CanvasPool.create(this, width, height);
             this.context = this.canvas.getContext('2d');
-
-            this.resolution = 1; // TODO
-
-            this.width = width;
-            this.height = height;
             this.canvasTexture = null;
-
             this.dirty = true;
+
+            this.setPosition(x, y);
+            this.setSize(width, height);
+            this.setOrigin();
+            this.initPipeline('TextureTintPipeline');
 
             var self = this;
             scene.sys.game.renderer.onContextRestored(function () {
@@ -79,6 +76,23 @@ var Canvas = new Phaser.Class({
 
     needRedraw: function () {
         this.dirty = true;
+    },
+
+    clear: function() {        
+        return this.fill();
+    },
+
+    fill: function (color) {
+        var src = this.getCanvas();
+        var ctx = src.getContext('2d');
+
+        if (color) {
+            ctx.fillStyle = color;
+            ctx.fillRect(0, 0, src.width, src.height);
+        } else {
+            ctx.clearRect(0, 0, src.width, src.height)
+        }
+        return this;
     },
 
     preDestroy: function () {
@@ -122,6 +136,7 @@ var Canvas = new Phaser.Class({
         }
 
         var destCtx = destCanvas.getContext('2d');
+        destCtx.clearRect(0, 0, width, height)
         destCtx.drawImage(srcCanvas, x, y, width, height);
         if (sys.game.renderer.gl && texture) {
             texture.source[0].glTexture = sys.game.renderer.canvasToTexture(destCanvas, texture.source[0].glTexture, true, 0);
@@ -141,6 +156,8 @@ Phaser.GameObjects.GameObjectCreator.register('rexCanvas', function (config) {
     var height = GetAdvancedValue(config, 'height', 256);
     var canvas = new Canvas(this.scene, 0, 0, width, height)
     BuildGameObject(this.scene, canvas, config);
+    var fillColor = GetAdvancedValue(config, 'fillColor', null);
+    canvas.fill(fillColor);
     return canvas;
 });
 
