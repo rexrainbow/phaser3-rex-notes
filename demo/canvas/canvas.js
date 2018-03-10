@@ -9,18 +9,14 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {}
+    preload() { }
 
     create() {
         var canvas = this.add.rexCanvas(300, 300, 200, 200)
+            .fill('dimgray')
             .setInteractive()
             .on('pointerdown', drawCircle);
         canvas.rotation = Phaser.Math.DegToRad(45);
-
-        var src = canvas.getCanvas();
-        var ctx = src.getContext('2d');
-        ctx.fillStyle = 'dimgray';
-        ctx.fillRect(0, 0, src.width, src.height);
 
         // create or update texture from canvas
         canvas.generateTexture('canvas');
@@ -28,7 +24,7 @@ class Demo extends Phaser.Scene {
         this.add.image(100, 100, 'canvas');
     }
 
-    update() {}
+    update() { }
 }
 
 var drawCircle = function (pointer, localX, localY) {
