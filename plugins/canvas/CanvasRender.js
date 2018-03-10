@@ -5,8 +5,8 @@
  */
 
 import Phaser from 'phaser';
-import WebGLRenderer from './WebGLRenderer.js';
-import CanvasRenderer from './CanvasRenderer.js';
+import WebGLRenderer from './CanvasWebGLRenderer.js';
+import CanvasRenderer from './CanvasCanvasRenderer.js';
 
 const NOOP = Phaser.Utils.NOOP;
 var renderWebGL = NOOP;

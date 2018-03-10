@@ -1,7 +1,7 @@
 // copy from Phaser.GameObjects.Text
 
 import Phaser from 'phaser';
-import Render from './Render.js';
+import Render from './CanvasRender.js';
 import GameObject from './../utils/system/GameObject.js'; // TODO:
 import BuildGameObject from './../utils/system/BuildGameObject'; // TODO:
 
@@ -61,7 +61,7 @@ var Canvas = new Phaser.Class({
             this.height = height;
             this.canvasTexture = null;
 
-            this.dirty = false;
+            this.dirty = true;
 
             var self = this;
             scene.sys.game.renderer.onContextRestored(function () {
