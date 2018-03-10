@@ -99,4 +99,3 @@ var config = {
 };
 
 var game = new Phaser.Game(config);
-document.body.style.backgroundColor = "black";

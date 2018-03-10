@@ -79,19 +79,17 @@ var Canvas = new Phaser.Class({
     },
 
     clear: function () {
-        return this.fill();
+        var canvas = this.canvas;
+        var ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        return this;
     },
 
     fill: function (color) {
-        var src = this.getCanvas();
-        var ctx = src.getContext('2d');
-
-        if (color) {
-            ctx.fillStyle = color;
-            ctx.fillRect(0, 0, src.width, src.height);
-        } else {
-            ctx.clearRect(0, 0, src.width, src.height)
-        }
+        var canvas = this.canvas;
+        var ctx = canvas.getContext('2d');
+        ctx.fillStyle = color;
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
         return this;
     },
 
