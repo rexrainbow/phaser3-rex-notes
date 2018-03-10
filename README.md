@@ -22,3 +22,7 @@
 -   Folder `plugins` : source code of plugins
 -   Folder `demo` : demo code
 -   Folder `docs` : notes
+
+## App
+
+[Kaleidoscope](https://rexrainbow.github.io/phaser3-rex-notes/app/kaleidoscope/index.html)
