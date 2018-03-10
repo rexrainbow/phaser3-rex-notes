@@ -18,7 +18,7 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        this.canvas = this.add.rexCanvas(300, 300, 600, 600)
+        this.canvas = this.add.rexCanvas(300, 350, 600, 600)
             .generateTexture('canvas')
             .setInteractive();
         this.input.setDraggable(this.canvas);
@@ -31,8 +31,8 @@ class Demo extends Phaser.Scene {
             visible: false,
             repeat: imageNum - 1,
             setXY: {
-                x: 300,
-                y: 300
+                x: this.canvas.x,
+                y: this.canvas.y
             },
             setRotation: {
                 value: 0,
@@ -40,7 +40,7 @@ class Demo extends Phaser.Scene {
             }
         });
 
-        this.btnRun = this.add.text(30, 700, 'Drag above then press here', { fontSize: 22 })
+        this.btnRun = this.add.text(30, 750, 'Drag above then press here', { fontSize: 22 })
             .setInteractive()
             .on('pointerdown', this.drawToImages, this);
 
