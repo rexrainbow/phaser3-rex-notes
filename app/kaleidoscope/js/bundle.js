@@ -9741,7 +9741,7 @@ class Demo extends Phaser.Scene {
         super({
             key: 'demo'
         })
-
+        this.bg;
         this.canvas;      // canvas object
         this.imageGroup;  // image group
         this.btnRun;      // draw to image objects
@@ -9751,7 +9751,9 @@ class Demo extends Phaser.Scene {
 
     preload() { }
 
-    create() {
+    create() {        
+        this.bg = this.add.rexCanvas(300, 350, 600, 600)
+            .fill('#050505');
         this.canvas = this.add.rexCanvas(300, 350, 600, 600)
             .generateTexture('canvas')
             .setInteractive();
@@ -9788,6 +9790,7 @@ class Demo extends Phaser.Scene {
     }
 
     drawStart() {
+        this.bg.visible = true;
         this.canvas.clear();
         this.canvas.generateTexture('canvas');
         Phaser.Actions.SetVisible(this.imageGroup.getChildren(), false);
@@ -9809,6 +9812,7 @@ class Demo extends Phaser.Scene {
     drawToImages() {
         if (this.isDone) { return; }
 
+        this.bg.visible = false;
         this.canvas.generateTexture('canvas');
         this.canvas.clear();
         Phaser.Actions.SetVisible(this.imageGroup.getChildren(), true);
