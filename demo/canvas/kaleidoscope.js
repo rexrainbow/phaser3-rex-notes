@@ -12,14 +12,13 @@ class Demo extends Phaser.Scene {
         this.imageGroup;  // image group
         this.btnRun;      // draw to image objects
         this.isDone = false;
+        this.hue = 0;
     }
 
     preload() { }
 
     create() {
-        debugger
         this.canvas = this.add.rexCanvas(300, 300, 600, 600)
-            .setData('hue', 0)
             .generateTexture('canvas')
             .setInteractive();
         this.input.setDraggable(this.canvas);
@@ -68,10 +67,9 @@ class Demo extends Phaser.Scene {
 
         var canvas = this.canvas;
         var ctx = canvas.getCanvas().getContext('2d');
-        var hue = canvas.getData('hue');
-        var color = "hsl( " + hue + " , 50%, 50%)";
+        var color = "hsl( " + this.hue + " , 50%, 50%)";
         drawCircle(ctx, localX, localY, 3, color);
-        canvas.setData('hue', (hue + 3) % 360);
+        this.hue = (this.hue + 3) % 360;
     }
 
     drawToImages() {

@@ -78,7 +78,7 @@ var Canvas = new Phaser.Class({
         this.dirty = true;
     },
 
-    clear: function() {        
+    clear: function () {
         return this.fill();
     },
 
@@ -142,6 +142,32 @@ var Canvas = new Phaser.Class({
             texture.source[0].glTexture = sys.game.renderer.canvasToTexture(destCanvas, texture.source[0].glTexture, true, 0);
         }
 
+        return this;
+    },
+
+    loadTexture: function (key, resize) {
+        var sys = this.scene.sys;
+        if (!sys.textures.exists(key)) {
+            return this;
+        }
+
+        if (resize === undefined) { resize = true; }
+        var srcCanvas = sys.textures.get(key).getSourceImage();
+        var srcCtx = srcCanvas.getContext('2d');
+        var destCanvas = this.canvas;
+        if (destCanvas.width !== srcCanvas.width) {
+            destCanvas.width = srcCanvas.width;
+        }
+        if (destCanvas.height !== srcCanvas.height) {
+            destCanvas.height = srcCanvas.height;
+        }
+        destCtx.clearRect(0, 0, destCanvas.width, destCanvas.height);
+        destCtx.drawImage(srcCanvas, 0, 0, destCanvas.width, destCanvas.height);
+        this.dirty = true;
+
+        if (resize) {
+            this.setSize(destCanvas.width, destCanvas.height);
+        }
         return this;
     }
 
