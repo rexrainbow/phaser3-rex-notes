@@ -28,7 +28,8 @@
     "webpack": "^3.4.1",
     "clean-webpack-plugin": "^0.1.17",
     "copy-webpack-plugin": "^4.3.1",
-    "html-webpack-plugin": "^2.30.1"
+    "html-webpack-plugin": "^2.30.1",
+    "uglifyjs-webpack-plugin": "^1.1.2"
   },
   "dependencies": {
     "phaser": "latest"
