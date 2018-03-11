@@ -7,6 +7,9 @@ class Demo extends Phaser.Scene {
         super({
             key: 'demo'
         })
+
+        this.img;
+        this.text;
     }
 
     preload() {
@@ -14,12 +17,18 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var inst = this.add.image(400, 300, 'mushroom');
-        inst.drag = new DragPlugin(inst, {
+        this.img = this.add.image(400, 300, 'mushroom');
+        this.img.drag = new DragPlugin(this.img, {
             //enable: true,
             axis: 1,
             rotation: Phaser.Math.DegToRad(45)
         });
+
+        this.text = this.add.text(100, 100, '');
+    }
+
+    update() {
+        this.text.setText(this.img.drag.isDragging? 'Dragging':'--');
     }
 }
 
