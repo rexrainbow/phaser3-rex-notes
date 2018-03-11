@@ -4,7 +4,7 @@
     
     <url>
      <loc>/index.html</loc>
-     <lastmod>2018-03-05</lastmod>
+     <lastmod>2018-03-12</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -13,7 +13,7 @@
         
     <url>
      <loc>/filter/index.html</loc>
-     <lastmod>2018-03-05</lastmod>
+     <lastmod>2018-03-12</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -23,7 +23,7 @@
         
     <url>
      <loc>/date/index.html</loc>
-     <lastmod>2018-03-05</lastmod>
+     <lastmod>2018-03-12</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -33,7 +33,7 @@
         
     <url>
      <loc>/gashaponplugin/index.html</loc>
-     <lastmod>2018-03-05</lastmod>
+     <lastmod>2018-03-12</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -42,8 +42,14 @@
     
         
     <url>
+     <loc>/dragplugin/index.html</loc>
+     <lastmod>2018-03-12</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
      <loc>/dragcursorplugin/index.html</loc>
-     <lastmod>2018-03-05</lastmod>
+     <lastmod>2018-03-12</lastmod>
      <changefreq>daily</changefreq>
     </url>
         

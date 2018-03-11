@@ -142,6 +142,7 @@ class DragDropPlugin {
         }
 
     }
+    
     get isDragging() {
         return (this.gameobject.input.dragState > 0);
     }

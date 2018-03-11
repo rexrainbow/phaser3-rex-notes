@@ -32,7 +32,7 @@
     
     
       
-        <title>Date - Notes of Phaser 3</title>
+        <title>Drag - Notes of Phaser 3</title>
       
     
     
@@ -86,7 +86,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Date
+                Drag
               </span>
             
           
@@ -198,12 +198,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
     
     <label class="md-nav__link" for="nav-3">
       Date
@@ -219,98 +217,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="toc">
-        Date
-      </label>
-    
-    <a href="index.html" title="Date" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../date/index.html" title="Date" class="md-nav__link">
       Date
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#dependence" title="Dependence" class="md-nav__link">
-    Dependence
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#source-code" title="Source code" class="md-nav__link">
-    Source code
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-date" title="Get date" class="md-nav__link">
-    Get date
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-unix-timestamp" title="Get unix-timestamp" class="md-nav__link">
-    Get unix-timestamp
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#to-string" title="To string" class="md-nav__link">
-    To string
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -359,10 +270,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
     
     <label class="md-nav__link" for="nav-5">
       Input
@@ -378,11 +291,119 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../dragplugin/index.html" title="Drag" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Drag
+      </label>
+    
+    <a href="index.html" title="Drag" class="md-nav__link md-nav__link--active">
       Drag
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dependence" title="Dependence" class="md-nav__link">
+    Dependence
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-instance" title="Create instance" class="md-nav__link">
+    Create instance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dragging-events" title="Dragging events" class="md-nav__link">
+    Dragging events
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-dragging-state" title="Get dragging state" class="md-nav__link">
+    Get dragging state
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-rotation-of-axis" title="Set rotation of axis" class="md-nav__link">
+    Set rotation of axis
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-axis-mode" title="Set axis mode" class="md-nav__link">
+    Set axis mode
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#try-drag" title="Try drag" class="md-nav__link">
+    Try drag
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drop" title="Drop" class="md-nav__link">
+    Drop
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -458,22 +479,43 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-date" title="Get date" class="md-nav__link">
-    Get date
+  <a href="#dragging-events" title="Dragging events" class="md-nav__link">
+    Dragging events
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-unix-timestamp" title="Get unix-timestamp" class="md-nav__link">
-    Get unix-timestamp
+  <a href="#get-dragging-state" title="Get dragging state" class="md-nav__link">
+    Get dragging state
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#to-string" title="To string" class="md-nav__link">
-    To string
+  <a href="#set-rotation-of-axis" title="Set rotation of axis" class="md-nav__link">
+    Set rotation of axis
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-axis-mode" title="Set axis mode" class="md-nav__link">
+    Set axis mode
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#try-drag" title="Try drag" class="md-nav__link">
+    Try drag
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drop" title="Drop" class="md-nav__link">
+    Drop
   </a>
   
 </li>
@@ -498,42 +540,62 @@
               
                 
                 
-                  <h1>Date</h1>
+                  <h1>Drag</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Get current date or unix-timestamp.<br />
-Author: Built-in javascript function</p>
+<p>Drag game object.<br />
+Author: Rex</p>
 <h2 id="dependence">Dependence<a class="headerlink" href="#dependence" title="Permanent link">&para;</a></h2>
-<p>None</p>
+<p>A plugin of game object.</p>
 <h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p>Built-in javascript function.</p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/drag/DragPlugin.js">Link</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date">Reference</a></p>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
-<span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">timestamp</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">dateString</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">year</span><span class="p">,</span> <span class="nx">month</span><span class="p">,</span> <span class="nx">day</span><span class="p">,</span> <span class="nx">hours</span><span class="p">,</span> <span class="nx">minutes</span><span class="p">,</span> <span class="nx">seconds</span><span class="p">,</span> <span class="nx">milliseconds</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">drag</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DragPlugin</span><span class="p">(</span><span class="nx">gameobject</span><span class="p">,</span> <span class="p">{</span>
+    <span class="c1">//enable: true,</span>
+    <span class="c1">//axis: 0,      //0|&#39;both&#39;|&#39;h&amp;v&#39;|1|&#39;horizontal&#39;|&#39;h&#39;|2|&#39;vertical&#39;|&#39;v&#39;</span>
+    <span class="c1">//rotation: Phaser.Math.DegToRad(45)  // axis rotation in rad</span>
+<span class="p">});</span>
 </pre></div>
 
-<h3 id="get-date">Get date<a class="headerlink" href="#get-date" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">year</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getFullYear</span><span class="p">();</span>    <span class="c1">// returns the year</span>
-<span class="kd">var</span> <span class="nx">month</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getMonth</span><span class="p">();</span>      <span class="c1">// returns the month (0-11)</span>
-<span class="kd">var</span> <span class="nx">date</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getDate</span><span class="p">();</span>        <span class="c1">// returns the day of the month (1-31)</span>
-<span class="kd">var</span> <span class="nx">day</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getDay</span><span class="p">();</span>          <span class="c1">// returns the day of the week</span>
-<span class="kd">var</span> <span class="nx">hour</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getHours</span><span class="p">();</span>       <span class="c1">// returns the hour (0-23)</span>
-<span class="kd">var</span> <span class="nx">min</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getMinutes</span><span class="p">();</span>      <span class="c1">// returns the minutes (0-59)</span>
-<span class="kd">var</span> <span class="nx">sec</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getSeconds</span><span class="p">();</span>      <span class="c1">// returns the seconds (0-59)</span>
-<span class="kd">var</span> <span class="nx">ms</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getMilliseconds</span><span class="p">();</span>  <span class="c1">// returns the milliseconds (0-999)</span>
+<p>Properties</p>
+<ul>
+<li>enable: drag-able</li>
+<li>axis : <ul>
+<li><code>'both'</code>,<code>'h&amp;v'</code>, or <code>0</code> : dragging on all directions.</li>
+<li><code>'horizontal'</code>,<code>'h'</code>, or <code>1</code> : dragging on horizontal axis.</li>
+<li><code>'vertical'</code>,<code>'v'</code>, or <code>2</code> : dragging on vertical axis.</li>
+</ul>
+</li>
+<li>rotation : axis rotation in rad, available in horizontal or vertical axis mode.</li>
+</ul>
+<h3 id="dragging-events">Dragging events<a class="headerlink" href="#dragging-events" title="Permanent link">&para;</a></h3>
+<p>Built-in dragging events</p>
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;dragstart&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">dragX</span><span class="p">,</span> <span class="nx">dragY</span><span class="p">){</span> <span class="cm">/*...*/</span> <span class="p">});</span>
+<span class="nx">gameobject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;drag&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">dragX</span><span class="p">,</span> <span class="nx">dragY</span><span class="p">){</span> <span class="cm">/*...*/</span> <span class="p">});</span>
+<span class="nx">gameobject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;dragend&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">dragX</span><span class="p">,</span> <span class="nx">dragY</span><span class="p">,</span> <span class="nx">dropped</span><span class="p">){</span> <span class="cm">/*...*/</span> <span class="p">});</span>
 </pre></div>
 
-<h3 id="get-unix-timestamp">Get unix-timestamp<a class="headerlink" href="#get-unix-timestamp" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">timestamp</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>       <span class="c1">// unix-timestamp in milliseconds</span>
+<h3 id="get-dragging-state">Get dragging state<a class="headerlink" href="#get-dragging-state" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isDragging</span> <span class="o">=</span> <span class="nx">gameobject</span><span class="p">.</span><span class="nx">drag</span><span class="p">.</span><span class="nx">isDragging</span><span class="p">;</span>
 </pre></div>
 
-<h3 id="to-string">To string<a class="headerlink" href="#to-string" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">toLocaleString</span><span class="p">();</span>   <span class="c1">// locale conventions</span>
-<span class="kd">var</span> <span class="nx">iso</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">toISOString</span><span class="p">();</span>    <span class="c1">// ISO standard</span>
+<h3 id="set-rotation-of-axis">Set rotation of axis<a class="headerlink" href="#set-rotation-of-axis" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">drag</span><span class="p">.</span><span class="nx">setAxisRotation</span><span class="p">(</span><span class="nx">rad</span><span class="p">);</span>
+</pre></div>
+
+<h3 id="set-axis-mode">Set axis mode<a class="headerlink" href="#set-axis-mode" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">drag</span><span class="p">.</span><span class="nx">setAxisMode</span><span class="p">(</span><span class="nx">m</span><span class="p">);</span>  <span class="c1">//0|&#39;both&#39;|&#39;h&amp;v&#39;|1|&#39;horizontal&#39;|&#39;h&#39;|2|&#39;vertical&#39;|&#39;v&#39;</span>
+</pre></div>
+
+<h3 id="try-drag">Try drag<a class="headerlink" href="#try-drag" title="Permanent link">&para;</a></h3>
+<p>Game object will be dragged if there is any point above it.</p>
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">drag</span><span class="p">.</span><span class="nx">drag</span><span class="p">();</span>
+</pre></div>
+
+<h3 id="drop">Drop<a class="headerlink" href="#drop" title="Permanent link">&para;</a></h3>
+<p>Game object will be dropped(dragend) manually.</p>
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">drag</span><span class="p">.</span><span class="nx">dragend</span><span class="p">();</span>
 </pre></div>
                 
                   
@@ -553,7 +615,7 @@ Author: Built-in javascript function</p>
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../filter/index.html" title="Filter" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../gashaponplugin/index.html" title="Gashapon" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -562,19 +624,19 @@ Author: Built-in javascript function</p>
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Filter
+                Gashapon
               </span>
             </div>
           </a>
         
         
-          <a href="../gashaponplugin/index.html" title="Gashapon" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../dragcursorplugin/index.html" title="Drag to CursorKeys" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Gashapon
+                Drag to CursorKeys
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

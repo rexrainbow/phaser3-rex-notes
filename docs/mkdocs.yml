@@ -10,6 +10,7 @@ pages:
 - Random:
     - Gashapon: gashaponplugin.md
 - Input:
+    - Drag: dragplugin.md
     - Drag to CursorKeys: dragcursorplugin.md
 
 extra_javascript:
