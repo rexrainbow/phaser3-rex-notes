@@ -12,7 +12,6 @@ class DragDropPlugin {
         this.boot();
 
         this.enable = null;
-        this.isDragging = false;
         this.resetFromJSON(config);
     }
 
@@ -34,7 +33,6 @@ class DragDropPlugin {
     toJSON() {
         return {
             enable: this.enable,
-            isDragging: this.isDragging,
             axis: this.axisMode,
             rotation: this.axisRotation
         };
@@ -51,9 +49,7 @@ class DragDropPlugin {
     }
 
     init() {
-        this.gameobject.on('drag', this.onDraggingStart, this);
         this.gameobject.on('drag', this.onDragging, this);
-        this.gameobject.on('drop', this.onDrop, this);
     }
 
     shutdown() {
@@ -92,19 +88,33 @@ class DragDropPlugin {
         return this;
     }
 
-    forceDropping() {
-        this.isDragging = false;
+    drag() {
+        var activePointer = this.gameobject.scene.input.activePointer;
+        if ((activePointer.dragState === 0) &&
+            activePointer.primaryDown &&
+            activePointer.justDown &&
+            this.hitTest(activePointer)) {
+            activePointer.dragState = 1;
+        }
     }
 
-    onDraggingStart(pointer, dragX, dragY) {
-        this.isDragging = true;
+    hitTest(pointer) {
+        var gameobject = this.gameobject;
+        var manager = pointer.manager;
+        var camera = gameobject.scene.cameras.getCameraBelowPointer(pointer);
+        var output = manager.hitTest(pointer.x, pointer.y, [gameobject], camera);
+        return (output.length > 0);
+    }
+
+    dragend() {
+        var activePointer = this.gameobject.scene.input.activePointer;
+        if (activePointer.dragState > 0) {
+            activePointer.dragState = 5;
+        }
+        debugger
     }
 
     onDragging(pointer, dragX, dragY) {
-        if (!this.isDragging) {
-            return;
-        }
-
         var gameobject = this.gameobject;
         if (this.axisMode === 0) {
             gameobject.x = dragX;
@@ -132,10 +142,6 @@ class DragDropPlugin {
             gameobject.y = P1.y;
         }
 
-    }
-
-    onDrop (pointer, target) {
-        this.isDragging = false;
     }
 }
 

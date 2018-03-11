@@ -1,6 +1,6 @@
 'use strict'
 
-import DragDropPlugin from './../../plugins/dragdrop-plugin.js';
+import DragPlugin from './../../plugins/drag-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -14,12 +14,11 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var inst = this.add.image(400, 300, 'mushroom');
-        inst.dragdrop = new DragDropPlugin(inst, {
-            // enable: true,
-            axis: 1,
-            rotation: Phaser.Math.DegToRad(45)
-        });
+        var img = this.add.image(300, 300, 'mushroom');
+        img.drag = new DragPlugin(img);
+
+        img.on('drag', img.drag.dragend, img.drag);
+        img.on('dragend', function(){console.log('dragend')});
     }
 }
 
