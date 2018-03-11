@@ -111,7 +111,6 @@ class DragDropPlugin {
         if (activePointer.dragState > 0) {
             activePointer.dragState = 5;
         }
-        debugger
     }
 
     onDragging(pointer, dragX, dragY) {

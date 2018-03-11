@@ -17,7 +17,7 @@ class Demo extends Phaser.Scene {
         var img = this.add.image(300, 300, 'mushroom');
         img.drag = new DragPlugin(img);
 
-        img.on('drag', img.drag.dragend, img.drag);
+        img.on('pointerdown', img.drag.dragend, img.drag);
         img.on('dragend', function(){console.log('dragend')});
     }
 }
