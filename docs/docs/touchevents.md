@@ -1,8 +1,8 @@
 ## Introduction
 
-Events of mouse/touch, or keyboard.
+Built-in touch/mouse events of phaser.
 
-- Author: Built-in phaser3 events
+- Author: Richard Davey
 
 ## Usage
 
@@ -53,6 +53,8 @@ scene.input.on('gameobjectout', function(pointer, gameObject){ /* ... */ });
 ```javascript
 gameObject.setInteractive();           // enable touching interactive
 scene.input.setDraggable(gameObject);  // enable dragging
+// scene.input.dragDistanceThreshold = 16;
+// scene.input.dragTimeThreshold = 500;
 
 // gameObject.setInteractive(false);             // disable
 // scene.input.setDraggable(gameObject, false);  // disable dragging
@@ -69,3 +71,30 @@ scene.input.on('dragstart', function(pointer, gameObject){ /* ... */ });
 scene.input.on('drag', function(pointer, gameObject, dragX, dragY){ /* ... */ });
 scene.input.on('dragend', function(pointer, gameObject, dropped){ /* ... */ });
 ```
+
+### Drop events
+
+```javascript
+gameObject.on('drop', function(pointer, target){ /* ... */ });
+
+gameObject.on('dragenter', function(pointer, target){ /* ... */ });
+gameObject.on('dragover', function(pointer, target){ /* ... */ });
+gameObject.on('dragleave', function(pointer, target){ /* ... */ });
+```
+
+```javascript
+scene.input.on('drop', function(pointer, gameObject, target){ /* ... */ });
+
+scene.input.on('dragenter', function(pointer, gameObject, target){ /* ... */ });
+scene.input.on('dragover', function(pointer, gameObject, target){ /* ... */ });
+scene.input.on('dragleave', function(pointer, gameObject, target){ /* ... */ });
+```
+
+### Properties of point
+
+- Position of current touching: `pointer.x` , `pointer.y`
+- Position of touching start: `pointer.downX`, `pointer.downY`
+- Position of touching end: `pointer.upX`, `pointer.upY`
+- No botton down: `pointer.noButtonDown()`
+- Is left botton down: `pointer.leftButtonDown()`
+- Is right botton down: `pointer.rightButtonDown()`

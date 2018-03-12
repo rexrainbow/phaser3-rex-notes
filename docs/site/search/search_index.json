@@ -2,13 +2,8 @@
     "docs": [
         {
             "location": "/index.html", 
-            "text": "About me\n\n\nPlugin maker of Phaser 3 game engine.\n\n\n\n\nTODO\n on trello", 
+            "text": "Phaser 3 engine", 
             "title": "Home"
-        }, 
-        {
-            "location": "/index.html#about-me", 
-            "text": "Plugin maker of Phaser 3 game engine.   TODO  on trello", 
-            "title": "About me"
         }, 
         {
             "location": "/filter/index.html", 
@@ -176,34 +171,84 @@
             "title": "Get items"
         }, 
         {
-            "location": "/inputevents/index.html", 
-            "text": "Introduction\n\n\nEvents of mouse/touch, or keyboard.\n\n\n\n\nAuthor: Built-in phaser3 events\n\n\n\n\nUsage\n\n\nMouse/touch events\n\n\nscene\n.\ninput\n.\non\n(\npointerdown\n,\n \nfunction\n(\npointer\n,\n \ncurrentlyOver\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\npointerup\n,\n \nfunction\n(\npointer\n,\n \ncurrentlyOver\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\npointermove\n,\n \nfunction\n(\npointer\n,\n \ncurrentlyOver\n){\n \n/* ... */\n \n});\n\n\n\nscene\n.\ninput\n.\non\n(\npointerover\n,\n \nfunction\n(\npointer\n,\n \njustOver\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\npointerout\n,\n \nfunction\n(\npointer\n,\n \njustOut\n){\n \n/* ... */\n \n});\n\n\n\n\n\nMouse/touch events of game object\n\n\n\n\nRegister game object\n\n\n\n\ngameObject\n.\nsetInteractive\n();\n       \n// enable\n\n\n// gameObject.setInteractive(false);  // disable\n\n\n\n\n\n\n\nMouse/touch events of a game object\n\n\n\n\ngameObject\n.\non\n(\npointerdown\n,\n \nfunction\n(\npointer\n,\n \nlocalX\n,\n \nlocalY\n,\n \ncamera\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\npointerup\n,\n \nfunction\n(\npointer\n,\n \nlocalX\n,\n \nlocalY\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\npointermove\n,\n \nfunction\n(\npointer\n,\n \nlocalX\n,\n \nlocalY\n){\n \n/* ... */\n \n});\n\n\n\ngameObject\n.\non\n(\npointerover\n,\n \nfunction\n(\npointer\n,\n \nlocalX\n,\n \nlocalY\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\npointerout\n,\n \nfunction\n(\npointer\n){\n \n/* ... */\n \n});\n\n\n\n\n\nscene\n.\ninput\n.\non\n(\ngameobjectdown\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ngameobjectup\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ngameobjectmove\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n){\n \n/* ... */\n \n});\n\n\n\nscene\n.\ninput\n.\non\n(\ngameobjectover\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ngameobjectout\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n){\n \n/* ... */\n \n});\n\n\n\n\n\nDrag events\n\n\n\n\nRegister game object and enable dragging\n\n\n\n\ngameObject\n.\nsetInteractive\n();\n           \n// enable touching interactive\n\n\nscene\n.\ninput\n.\nsetDraggable\n(\ngameObject\n);\n  \n// enable dragging\n\n\n\n// gameObject.setInteractive(false);             // disable\n\n\n// scene.input.setDraggable(gameObject, false);  // disable dragging\n\n\n\n\n\ngameObject\n.\non\n(\ndragstart\n,\n \nfunction\n(\npointer\n,\n \ndragX\n,\n \ndragY\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\ndrag\n,\n \nfunction\n(\npointer\n,\n \ndragX\n,\n \ndragY\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\ndragend\n,\n \nfunction\n(\npointer\n,\n \ndragX\n,\n \ndragY\n,\n \ndropped\n{\n \n/* ... */\n \n});\n\n\n\n\n\nscene\n.\ninput\n.\non\n(\ndragstart\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ndrag\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n,\n \ndragX\n,\n \ndragY\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ndragend\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n,\n \ndropped\n){\n \n/* ... */\n \n});", 
-            "title": "Input events"
+            "location": "/touchevents/index.html", 
+            "text": "Introduction\n\n\nBuilt-in touch/mouse events of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nMouse/touch events\n\n\nscene\n.\ninput\n.\non\n(\npointerdown\n,\n \nfunction\n(\npointer\n,\n \ncurrentlyOver\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\npointerup\n,\n \nfunction\n(\npointer\n,\n \ncurrentlyOver\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\npointermove\n,\n \nfunction\n(\npointer\n,\n \ncurrentlyOver\n){\n \n/* ... */\n \n});\n\n\n\nscene\n.\ninput\n.\non\n(\npointerover\n,\n \nfunction\n(\npointer\n,\n \njustOver\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\npointerout\n,\n \nfunction\n(\npointer\n,\n \njustOut\n){\n \n/* ... */\n \n});\n\n\n\n\n\nMouse/touch events of game object\n\n\n\n\nRegister game object\n\n\n\n\ngameObject\n.\nsetInteractive\n();\n       \n// enable\n\n\n// gameObject.setInteractive(false);  // disable\n\n\n\n\n\n\n\nMouse/touch events of a game object\n\n\n\n\ngameObject\n.\non\n(\npointerdown\n,\n \nfunction\n(\npointer\n,\n \nlocalX\n,\n \nlocalY\n,\n \ncamera\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\npointerup\n,\n \nfunction\n(\npointer\n,\n \nlocalX\n,\n \nlocalY\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\npointermove\n,\n \nfunction\n(\npointer\n,\n \nlocalX\n,\n \nlocalY\n){\n \n/* ... */\n \n});\n\n\n\ngameObject\n.\non\n(\npointerover\n,\n \nfunction\n(\npointer\n,\n \nlocalX\n,\n \nlocalY\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\npointerout\n,\n \nfunction\n(\npointer\n){\n \n/* ... */\n \n});\n\n\n\n\n\nscene\n.\ninput\n.\non\n(\ngameobjectdown\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ngameobjectup\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ngameobjectmove\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n){\n \n/* ... */\n \n});\n\n\n\nscene\n.\ninput\n.\non\n(\ngameobjectover\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ngameobjectout\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n){\n \n/* ... */\n \n});\n\n\n\n\n\nDrag events\n\n\n\n\nRegister game object and enable dragging\n\n\n\n\ngameObject\n.\nsetInteractive\n();\n           \n// enable touching interactive\n\n\nscene\n.\ninput\n.\nsetDraggable\n(\ngameObject\n);\n  \n// enable dragging\n\n\n// scene.input.dragDistanceThreshold = 16;\n\n\n// scene.input.dragTimeThreshold = 500;\n\n\n\n// gameObject.setInteractive(false);             // disable\n\n\n// scene.input.setDraggable(gameObject, false);  // disable dragging\n\n\n\n\n\ngameObject\n.\non\n(\ndragstart\n,\n \nfunction\n(\npointer\n,\n \ndragX\n,\n \ndragY\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\ndrag\n,\n \nfunction\n(\npointer\n,\n \ndragX\n,\n \ndragY\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\ndragend\n,\n \nfunction\n(\npointer\n,\n \ndragX\n,\n \ndragY\n,\n \ndropped\n{\n \n/* ... */\n \n});\n\n\n\n\n\nscene\n.\ninput\n.\non\n(\ndragstart\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ndrag\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n,\n \ndragX\n,\n \ndragY\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ndragend\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n,\n \ndropped\n){\n \n/* ... */\n \n});\n\n\n\n\n\nDrop events\n\n\ngameObject\n.\non\n(\ndrop\n,\n \nfunction\n(\npointer\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\n\ngameObject\n.\non\n(\ndragenter\n,\n \nfunction\n(\npointer\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\ndragover\n,\n \nfunction\n(\npointer\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\ndragleave\n,\n \nfunction\n(\npointer\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\n\n\n\nscene\n.\ninput\n.\non\n(\ndrop\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\n\nscene\n.\ninput\n.\non\n(\ndragenter\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ndragover\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ndragleave\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\n\n\n\nProperties of point\n\n\n\n\nPosition of current touching: \npointer.x\n , \npointer.y\n\n\nPosition of touching start: \npointer.downX\n, \npointer.downY\n\n\nPosition of touching end: \npointer.upX\n, \npointer.upY\n\n\nNo botton down: \npointer.noButtonDown()\n\n\nIs left botton down: \npointer.leftButtonDown()\n\n\nIs right botton down: \npointer.rightButtonDown()", 
+            "title": "Touch events"
         }, 
         {
-            "location": "/inputevents/index.html#introduction", 
-            "text": "Events of mouse/touch, or keyboard.   Author: Built-in phaser3 events", 
+            "location": "/touchevents/index.html#introduction", 
+            "text": "Built-in touch/mouse events of phaser.   Author: Richard Davey", 
             "title": "Introduction"
         }, 
         {
-            "location": "/inputevents/index.html#usage", 
+            "location": "/touchevents/index.html#usage", 
             "text": "", 
             "title": "Usage"
         }, 
         {
-            "location": "/inputevents/index.html#mousetouch-events", 
+            "location": "/touchevents/index.html#mousetouch-events", 
             "text": "scene . input . on ( pointerdown ,   function ( pointer ,   currentlyOver ){   /* ... */   });  scene . input . on ( pointerup ,   function ( pointer ,   currentlyOver ){   /* ... */   });  scene . input . on ( pointermove ,   function ( pointer ,   currentlyOver ){   /* ... */   });  scene . input . on ( pointerover ,   function ( pointer ,   justOver ){   /* ... */   });  scene . input . on ( pointerout ,   function ( pointer ,   justOut ){   /* ... */   });", 
             "title": "Mouse/touch events"
         }, 
         {
-            "location": "/inputevents/index.html#mousetouch-events-of-game-object", 
+            "location": "/touchevents/index.html#mousetouch-events-of-game-object", 
             "text": "Register game object   gameObject . setInteractive ();         // enable  // gameObject.setInteractive(false);  // disable    Mouse/touch events of a game object   gameObject . on ( pointerdown ,   function ( pointer ,   localX ,   localY ,   camera ){   /* ... */   });  gameObject . on ( pointerup ,   function ( pointer ,   localX ,   localY ){   /* ... */   });  gameObject . on ( pointermove ,   function ( pointer ,   localX ,   localY ){   /* ... */   });  gameObject . on ( pointerover ,   function ( pointer ,   localX ,   localY ){   /* ... */   });  gameObject . on ( pointerout ,   function ( pointer ){   /* ... */   });   scene . input . on ( gameobjectdown ,   function ( pointer ,   gameObject ){   /* ... */   });  scene . input . on ( gameobjectup ,   function ( pointer ,   gameObject ){   /* ... */   });  scene . input . on ( gameobjectmove ,   function ( pointer ,   gameObject ){   /* ... */   });  scene . input . on ( gameobjectover ,   function ( pointer ,   gameObject ){   /* ... */   });  scene . input . on ( gameobjectout ,   function ( pointer ,   gameObject ){   /* ... */   });", 
             "title": "Mouse/touch events of game object"
         }, 
         {
-            "location": "/inputevents/index.html#drag-events", 
-            "text": "Register game object and enable dragging   gameObject . setInteractive ();             // enable touching interactive  scene . input . setDraggable ( gameObject );    // enable dragging  // gameObject.setInteractive(false);             // disable  // scene.input.setDraggable(gameObject, false);  // disable dragging   gameObject . on ( dragstart ,   function ( pointer ,   dragX ,   dragY ){   /* ... */   });  gameObject . on ( drag ,   function ( pointer ,   dragX ,   dragY ){   /* ... */   });  gameObject . on ( dragend ,   function ( pointer ,   dragX ,   dragY ,   dropped {   /* ... */   });   scene . input . on ( dragstart ,   function ( pointer ,   gameObject ){   /* ... */   });  scene . input . on ( drag ,   function ( pointer ,   gameObject ,   dragX ,   dragY ){   /* ... */   });  scene . input . on ( dragend ,   function ( pointer ,   gameObject ,   dropped ){   /* ... */   });", 
+            "location": "/touchevents/index.html#drag-events", 
+            "text": "Register game object and enable dragging   gameObject . setInteractive ();             // enable touching interactive  scene . input . setDraggable ( gameObject );    // enable dragging  // scene.input.dragDistanceThreshold = 16;  // scene.input.dragTimeThreshold = 500;  // gameObject.setInteractive(false);             // disable  // scene.input.setDraggable(gameObject, false);  // disable dragging   gameObject . on ( dragstart ,   function ( pointer ,   dragX ,   dragY ){   /* ... */   });  gameObject . on ( drag ,   function ( pointer ,   dragX ,   dragY ){   /* ... */   });  gameObject . on ( dragend ,   function ( pointer ,   dragX ,   dragY ,   dropped {   /* ... */   });   scene . input . on ( dragstart ,   function ( pointer ,   gameObject ){   /* ... */   });  scene . input . on ( drag ,   function ( pointer ,   gameObject ,   dragX ,   dragY ){   /* ... */   });  scene . input . on ( dragend ,   function ( pointer ,   gameObject ,   dropped ){   /* ... */   });", 
             "title": "Drag events"
+        }, 
+        {
+            "location": "/touchevents/index.html#drop-events", 
+            "text": "gameObject . on ( drop ,   function ( pointer ,   target ){   /* ... */   });  gameObject . on ( dragenter ,   function ( pointer ,   target ){   /* ... */   });  gameObject . on ( dragover ,   function ( pointer ,   target ){   /* ... */   });  gameObject . on ( dragleave ,   function ( pointer ,   target ){   /* ... */   });   scene . input . on ( drop ,   function ( pointer ,   gameObject ,   target ){   /* ... */   });  scene . input . on ( dragenter ,   function ( pointer ,   gameObject ,   target ){   /* ... */   });  scene . input . on ( dragover ,   function ( pointer ,   gameObject ,   target ){   /* ... */   });  scene . input . on ( dragleave ,   function ( pointer ,   gameObject ,   target ){   /* ... */   });", 
+            "title": "Drop events"
+        }, 
+        {
+            "location": "/touchevents/index.html#properties-of-point", 
+            "text": "Position of current touching:  pointer.x  ,  pointer.y  Position of touching start:  pointer.downX ,  pointer.downY  Position of touching end:  pointer.upX ,  pointer.upY  No botton down:  pointer.noButtonDown()  Is left botton down:  pointer.leftButtonDown()  Is right botton down:  pointer.rightButtonDown()", 
+            "title": "Properties of point"
+        }, 
+        {
+            "location": "/keyboardevents/index.html", 
+            "text": "Introduction\n\n\nBuilt-in keyboard events of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nAny key down/up events\n\n\nscene\n.\ninput\n.\nkeyboard\n.\non\n(\nkeydown\n,\n \nfunction\n \n(\nevent\n)\n \n{\n \n/* ... */\n});\n\n\nscene\n.\ninput\n.\nkeyboard\n.\non\n(\nkeyup\n,\n \nfunction\n \n(\nevent\n)\n \n{\n \n/* ... */\n});\n\n\n\n\n\nSpecific key down/up events\n\n\nscene\n.\ninput\n.\nkeyboard\n.\non\n(\nkeydown_\n \n+\n \nA\n,\n \nfunction\n \n(\nevent\n)\n \n{\n \n/* ... */\n});\n\n\nscene\n.\ninput\n.\nkeyboard\n.\non\n(\nkeyup_\n \n+\n \nA\n,\n \nfunction\n \n(\nevent\n)\n \n{\n \n/* ... */\n});\n\n\n\n\n\nGet state of specific key\n\n\n\n\nGet key state object\n\n\n\n\nvar\n \nBKey\n \n=\n \nscene\n.\ninput\n.\nkeyboard\n.\naddKey\n(\nPhaser\n.\nInput\n.\nKeyboard\n.\nKeyCodes\n.\nB\n);\n\n\n\n\n\n\n\nGet key state\n\n\n\n\nvar\n \nisDown\n \n=\n \nBKey\n.\nisDown\n;\n\n\nvar\n \nisUp\n \n=\n \nBKey\n.\nisUp\n;\n\n\n\n\n\nGet state of cursorkeys\n\n\n\n\nGet key state object\n\n\n\n\nvar\n \ncursorKeys\n \n=\n \nscene\n.\ninput\n.\nkeyboard\n.\ncreateCursorKeys\n();\n\n\n\n\n\n\n\nGet key state\n\n\n\n\nvar\n \nisUpDown\n \n=\n \ncursorKeys\n.\nup\n.\nisDown\n;\n\n\nvar\n \nisDownDown\n \n=\n \ncursorKeys\n.\ndown\n.\nisDown\n;\n\n\nvar\n \nisLeftDown\n \n=\n \ncursorKeys\n.\nleft\n.\nisDown\n;\n\n\nvar\n \nisRightDown\n \n=\n \ncursorKeys\n.\nright\n.\nisDown\n;\n\n\nvar\n \nisSpaceDown\n \n=\n \ncursorKeys\n.\nspace\n.\nisDown\n;\n\n\nvar\n \nisShiftDown\n \n=\n \ncursorKeys\n.\nshift\n.\nisDown\n;\n\n\n\n\n\nKey map\n\n\n\n\nA\n ~ \nZ\n\n\nF1\n ~ \nF12\n\n\nBACKSPACE\n\n\nTAB\n\n\nENTER\n\n\nSHIFT\n\n\nCTRL\n. \nALT\n\n\nPAUSE\n\n\nCAPS_LOCK\n\n\nESC\n\n\nSPACE\n\n\nPAGE_UP\n, \nPAGE_DOWN\n\n\nEND\n, \nHOME\n\n\nLEFT\n, \nUP\n, \nRIGHT\n,\nDOWN\n\n\nPRINT_SCREEN\n\n\nINSERT\n, \nDELETE\n\n\nZERO\n, \nONE\n, \nTWO\n, \nTHREE\n, \nFOUR\n, \nFIVE\n, \nSIX\n, \nSEVEN\n, \nEIGHT\n, \nNINE\n\n\nOPEN_BRACKET\n, \nCLOSED_BRACKET", 
+            "title": "Keyboard events"
+        }, 
+        {
+            "location": "/keyboardevents/index.html#introduction", 
+            "text": "Built-in keyboard events of phaser.   Author: Richard Davey", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/keyboardevents/index.html#usage", 
+            "text": "", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/keyboardevents/index.html#any-key-downup-events", 
+            "text": "scene . input . keyboard . on ( keydown ,   function   ( event )   {   /* ... */ });  scene . input . keyboard . on ( keyup ,   function   ( event )   {   /* ... */ });", 
+            "title": "Any key down/up events"
+        }, 
+        {
+            "location": "/keyboardevents/index.html#specific-key-downup-events", 
+            "text": "scene . input . keyboard . on ( keydown_   +   A ,   function   ( event )   {   /* ... */ });  scene . input . keyboard . on ( keyup_   +   A ,   function   ( event )   {   /* ... */ });", 
+            "title": "Specific key down/up events"
+        }, 
+        {
+            "location": "/keyboardevents/index.html#get-state-of-specific-key", 
+            "text": "Get key state object   var   BKey   =   scene . input . keyboard . addKey ( Phaser . Input . Keyboard . KeyCodes . B );    Get key state   var   isDown   =   BKey . isDown ;  var   isUp   =   BKey . isUp ;", 
+            "title": "Get state of specific key"
+        }, 
+        {
+            "location": "/keyboardevents/index.html#get-state-of-cursorkeys", 
+            "text": "Get key state object   var   cursorKeys   =   scene . input . keyboard . createCursorKeys ();    Get key state   var   isUpDown   =   cursorKeys . up . isDown ;  var   isDownDown   =   cursorKeys . down . isDown ;  var   isLeftDown   =   cursorKeys . left . isDown ;  var   isRightDown   =   cursorKeys . right . isDown ;  var   isSpaceDown   =   cursorKeys . space . isDown ;  var   isShiftDown   =   cursorKeys . shift . isDown ;", 
+            "title": "Get state of cursorkeys"
+        }, 
+        {
+            "location": "/keyboardevents/index.html#key-map", 
+            "text": "A  ~  Z  F1  ~  F12  BACKSPACE  TAB  ENTER  SHIFT  CTRL .  ALT  PAUSE  CAPS_LOCK  ESC  SPACE  PAGE_UP ,  PAGE_DOWN  END ,  HOME  LEFT ,  UP ,  RIGHT , DOWN  PRINT_SCREEN  INSERT ,  DELETE  ZERO ,  ONE ,  TWO ,  THREE ,  FOUR ,  FIVE ,  SIX ,  SEVEN ,  EIGHT ,  NINE  OPEN_BRACKET ,  CLOSED_BRACKET", 
+            "title": "Key map"
         }, 
         {
             "location": "/dragplugin/index.html", 

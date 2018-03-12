@@ -42,7 +42,13 @@
     
         
     <url>
-     <loc>/inputevents/index.html</loc>
+     <loc>/touchevents/index.html</loc>
+     <lastmod>2018-03-12</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>/keyboardevents/index.html</loc>
      <lastmod>2018-03-12</lastmod>
      <changefreq>daily</changefreq>
     </url>

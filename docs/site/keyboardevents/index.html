@@ -32,7 +32,7 @@
     
     
       
-        <title>Input events - Notes of Phaser 3</title>
+        <title>Keyboard events - Notes of Phaser 3</title>
       
     
     
@@ -86,7 +86,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Input events
+                Keyboard events
               </span>
             
           
@@ -291,6 +291,18 @@
           
           
 
+
+  <li class="md-nav__item">
+    <a href="../touchevents/index.html" title="Touch events" class="md-nav__link">
+      Touch events
+    </a>
+  </li>
+
+        
+          
+          
+          
+
   
 
 
@@ -300,11 +312,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="toc">
-        Input events
+        Keyboard events
       </label>
     
-    <a href="index.html" title="Input events" class="md-nav__link md-nav__link--active">
-      Input events
+    <a href="index.html" title="Keyboard events" class="md-nav__link md-nav__link--active">
+      Keyboard events
     </a>
     
       
@@ -331,22 +343,36 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#mousetouch-events" title="Mouse/touch events" class="md-nav__link">
-    Mouse/touch events
+  <a href="#any-key-downup-events" title="Any key down/up events" class="md-nav__link">
+    Any key down/up events
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#mousetouch-events-of-game-object" title="Mouse/touch events of game object" class="md-nav__link">
-    Mouse/touch events of game object
+  <a href="#specific-key-downup-events" title="Specific key down/up events" class="md-nav__link">
+    Specific key down/up events
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#drag-events" title="Drag events" class="md-nav__link">
-    Drag events
+  <a href="#get-state-of-specific-key" title="Get state of specific key" class="md-nav__link">
+    Get state of specific key
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-state-of-cursorkeys" title="Get state of cursorkeys" class="md-nav__link">
+    Get state of cursorkeys
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-map" title="Key map" class="md-nav__link">
+    Key map
   </a>
   
 </li>
@@ -428,22 +454,36 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#mousetouch-events" title="Mouse/touch events" class="md-nav__link">
-    Mouse/touch events
+  <a href="#any-key-downup-events" title="Any key down/up events" class="md-nav__link">
+    Any key down/up events
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#mousetouch-events-of-game-object" title="Mouse/touch events of game object" class="md-nav__link">
-    Mouse/touch events of game object
+  <a href="#specific-key-downup-events" title="Specific key down/up events" class="md-nav__link">
+    Specific key down/up events
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#drag-events" title="Drag events" class="md-nav__link">
-    Drag events
+  <a href="#get-state-of-specific-key" title="Get state of specific key" class="md-nav__link">
+    Get state of specific key
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-state-of-cursorkeys" title="Get state of cursorkeys" class="md-nav__link">
+    Get state of cursorkeys
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#key-map" title="Key map" class="md-nav__link">
+    Key map
   </a>
   
 </li>
@@ -468,70 +508,77 @@
               
                 
                 
-                  <h1>Input events</h1>
+                  <h1>Keyboard events</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Events of mouse/touch, or keyboard.</p>
+<p>Built-in keyboard events of phaser.</p>
 <ul>
-<li>Author: Built-in phaser3 events</li>
+<li>Author: Richard Davey</li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<h3 id="mousetouch-events">Mouse/touch events<a class="headerlink" href="#mousetouch-events" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerdown&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">currentlyOver</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerup&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">currentlyOver</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointermove&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">currentlyOver</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-
-<span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerover&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">justOver</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerout&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">justOut</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<h3 id="any-key-downup-events">Any key down/up events<a class="headerlink" href="#any-key-downup-events" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;keydown&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span><span class="p">});</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;keyup&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span><span class="p">});</span>
 </pre></div>
 
-<h3 id="mousetouch-events-of-game-object">Mouse/touch events of game object<a class="headerlink" href="#mousetouch-events-of-game-object" title="Permanent link">&para;</a></h3>
+<h3 id="specific-key-downup-events">Specific key down/up events<a class="headerlink" href="#specific-key-downup-events" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;keydown_&#39;</span> <span class="o">+</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span><span class="p">});</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;keyup_&#39;</span> <span class="o">+</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span><span class="p">});</span>
+</pre></div>
+
+<h3 id="get-state-of-specific-key">Get state of specific key<a class="headerlink" href="#get-state-of-specific-key" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Register game object</li>
+<li>Get key state object</li>
 </ul>
-<div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setInteractive</span><span class="p">();</span>       <span class="c1">// enable</span>
-<span class="c1">// gameObject.setInteractive(false);  // disable</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">BKey</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">addKey</span><span class="p">(</span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Input</span><span class="p">.</span><span class="nx">Keyboard</span><span class="p">.</span><span class="nx">KeyCodes</span><span class="p">.</span><span class="nx">B</span><span class="p">);</span>
 </pre></div>
 
 <ul>
-<li>Mouse/touch events of a game object</li>
+<li>Get key state</li>
 </ul>
-<div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerdown&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">localX</span><span class="p">,</span> <span class="nx">localY</span><span class="p">,</span> <span class="nx">camera</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-<span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerup&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">localX</span><span class="p">,</span> <span class="nx">localY</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-<span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointermove&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">localX</span><span class="p">,</span> <span class="nx">localY</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-
-<span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerover&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">localX</span><span class="p">,</span> <span class="nx">localY</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-<span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerout&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isDown</span> <span class="o">=</span> <span class="nx">BKey</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">isUp</span> <span class="o">=</span> <span class="nx">BKey</span><span class="p">.</span><span class="nx">isUp</span><span class="p">;</span>
 </pre></div>
 
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;gameobjectdown&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;gameobjectup&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;gameobjectmove&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-
-<span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;gameobjectover&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;gameobjectout&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-</pre></div>
-
-<h3 id="drag-events">Drag events<a class="headerlink" href="#drag-events" title="Permanent link">&para;</a></h3>
+<h3 id="get-state-of-cursorkeys">Get state of cursorkeys<a class="headerlink" href="#get-state-of-cursorkeys" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Register game object and enable dragging</li>
+<li>Get key state object</li>
 </ul>
-<div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setInteractive</span><span class="p">();</span>           <span class="c1">// enable touching interactive</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">setDraggable</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>  <span class="c1">// enable dragging</span>
-
-<span class="c1">// gameObject.setInteractive(false);             // disable</span>
-<span class="c1">// scene.input.setDraggable(gameObject, false);  // disable dragging</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cursorKeys</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">createCursorKeys</span><span class="p">();</span>
 </pre></div>
 
-<div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;dragstart&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">dragX</span><span class="p">,</span> <span class="nx">dragY</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-<span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;drag&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">dragX</span><span class="p">,</span> <span class="nx">dragY</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-<span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;dragend&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">dragX</span><span class="p">,</span> <span class="nx">dragY</span><span class="p">,</span> <span class="nx">dropped</span><span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<ul>
+<li>Get key state</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isUpDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">up</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">isDownDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">down</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">isLeftDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">left</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">isRightDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">right</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">isSpaceDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">space</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">isShiftDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">shift</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
 </pre></div>
 
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;dragstart&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;drag&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">,</span> <span class="nx">dragX</span><span class="p">,</span> <span class="nx">dragY</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;dragend&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">,</span> <span class="nx">dropped</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-</pre></div>
+<h3 id="key-map">Key map<a class="headerlink" href="#key-map" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>A</code> ~ <code>Z</code></li>
+<li><code>F1</code> ~ <code>F12</code></li>
+<li><code>BACKSPACE</code></li>
+<li><code>TAB</code></li>
+<li><code>ENTER</code></li>
+<li><code>SHIFT</code></li>
+<li><code>CTRL</code>. <code>ALT</code></li>
+<li><code>PAUSE</code></li>
+<li><code>CAPS_LOCK</code></li>
+<li><code>ESC</code></li>
+<li><code>SPACE</code></li>
+<li><code>PAGE_UP</code>, <code>PAGE_DOWN</code></li>
+<li><code>END</code>, <code>HOME</code></li>
+<li><code>LEFT</code>, <code>UP</code>, <code>RIGHT</code>,<code>DOWN</code></li>
+<li><code>PRINT_SCREEN</code></li>
+<li><code>INSERT</code>, <code>DELETE</code></li>
+<li><code>ZERO</code>, <code>ONE</code>, <code>TWO</code>, <code>THREE</code>, <code>FOUR</code>, <code>FIVE</code>, <code>SIX</code>, <code>SEVEN</code>, <code>EIGHT</code>, <code>NINE</code></li>
+<li><code>OPEN_BRACKET</code>, <code>CLOSED_BRACKET</code></li>
+</ul>
                 
                   
                 
@@ -550,7 +597,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../gashaponplugin/index.html" title="Gashapon" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../touchevents/index.html" title="Touch events" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -559,7 +606,7 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Gashapon
+                Touch events
               </span>
             </div>
           </a>
