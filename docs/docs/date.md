@@ -1,15 +1,8 @@
 ## Introduction
 
-Get current date or unix-timestamp.  
-Author: Built-in javascript function
+Get current date or unix-timestamp.
 
-## Dependence
-
-None
-
-## Source code
-
-Built-in javascript function.
+- Author: Built-in javascript function
 
 ## Usage
 

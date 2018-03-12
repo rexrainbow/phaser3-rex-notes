@@ -1,11 +1,9 @@
 ## Introduction
 
-Drag game object.  
-Author: Rex
+Drag game object.
 
-## Dependence
-
-A plugin of game object.
+- Author: Rex
+- A plugin of game object
 
 ## Source code
 

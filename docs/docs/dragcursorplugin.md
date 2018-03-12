@@ -1,11 +1,9 @@
 ## Introduction
 
-Simulate curosr keys according dragging events.  
-Author: Rex
+Simulate curosr keys according dragging events.
 
-## Dependence
-
-A plugin of scene.
+- Author: Rex
+- A plugin of scene
 
 ## Source code
 

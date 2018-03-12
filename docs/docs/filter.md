@@ -1,15 +1,8 @@
 ## Introduction
 
-Creates a new array with all elements that pass the test function.  
-Author: Built-in javascript function
+Creates a new array with all elements that pass the test function.
 
-## Dependence
-
-None
-
-## Source code
-
-Built-in javascript function.
+- Author: Built-in javascript function
 
 ## Usage
 

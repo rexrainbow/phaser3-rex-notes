@@ -1,11 +1,9 @@
 ## Introduction
 
-Pick random item from box.  
-Author: Rex
+Pick random item from box.
 
-## Dependence
-
-A plugin of scene.
+- Author: Rex
+- A plugin of scene
 
 ## Source code
 

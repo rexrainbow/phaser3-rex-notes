@@ -42,6 +42,12 @@
     
         
     <url>
+     <loc>/inputevents/index.html</loc>
+     <lastmod>2018-03-12</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
      <loc>/dragplugin/index.html</loc>
      <lastmod>2018-03-12</lastmod>
      <changefreq>daily</changefreq>
