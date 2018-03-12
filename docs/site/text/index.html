@@ -32,7 +32,7 @@
     
     
       
-        <title>Date - Notes of Phaser 3</title>
+        <title>Text - Notes of Phaser 3</title>
       
     
     
@@ -86,7 +86,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Date
+                Text
               </span>
             
           
@@ -162,10 +162,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
     
     <label class="md-nav__link" for="nav-2">
       Game object
@@ -193,11 +195,76 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../text/index.html" title="Text" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Text
+      </label>
+    
+    <a href="index.html" title="Text" class="md-nav__link md-nav__link--active">
       Text
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-text-object" title="Add text object" class="md-nav__link">
+    Add text object
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-text-from-json" title="Add text from JSON" class="md-nav__link">
+    Add text from JSON
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -246,12 +313,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
     
     <label class="md-nav__link" for="nav-4">
       Date
@@ -267,84 +332,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="toc">
-        Date
-      </label>
-    
-    <a href="index.html" title="Date" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../date/index.html" title="Date" class="md-nav__link">
       Date
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-date" title="Get date" class="md-nav__link">
-    Get date
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-unix-timestamp" title="Get unix-timestamp" class="md-nav__link">
-    Get unix-timestamp
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#to-string" title="To string" class="md-nav__link">
-    To string
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -495,30 +487,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
+  <a href="#add-text-object" title="Add text object" class="md-nav__link">
+    Add text object
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-text-from-json" title="Add text from JSON" class="md-nav__link">
+    Add text from JSON
   </a>
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#get-date" title="Get date" class="md-nav__link">
-    Get date
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-unix-timestamp" title="Get unix-timestamp" class="md-nav__link">
-    Get unix-timestamp
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#to-string" title="To string" class="md-nav__link">
-    To string
-  </a>
+      </ul>
+    </nav>
   
 </li>
         
@@ -542,40 +526,64 @@
               
                 
                 
-                  <h1>Date</h1>
+                  <h1>Text</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Get current date or unix-timestamp.</p>
+<p>Drawing text on canvas, built-in game object of phaser.</p>
 <ul>
-<li>Author: Built-in javascript function</li>
+<li>Author: Richard Davey</li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date">Reference</a></p>
-<h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
-<span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">timestamp</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">dateString</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">d</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="nx">year</span><span class="p">,</span> <span class="nx">month</span><span class="p">,</span> <span class="nx">day</span><span class="p">,</span> <span class="nx">hours</span><span class="p">,</span> <span class="nx">minutes</span><span class="p">,</span> <span class="nx">seconds</span><span class="p">,</span> <span class="nx">milliseconds</span><span class="p">);</span>
+<h3 id="add-text-object">Add text object<a class="headerlink" href="#add-text-object" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">text</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">text</span><span class="p">);</span>
+<span class="c1">// scene.add.text(x, y, text, { fontFamily: &#39;Arial&#39;, fontSize: 64, color: &#39;#00ff00&#39; });</span>
 </pre></div>
 
-<h3 id="get-date">Get date<a class="headerlink" href="#get-date" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">year</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getFullYear</span><span class="p">();</span>    <span class="c1">// returns the year</span>
-<span class="kd">var</span> <span class="nx">month</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getMonth</span><span class="p">();</span>      <span class="c1">// returns the month (0-11)</span>
-<span class="kd">var</span> <span class="nx">date</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getDate</span><span class="p">();</span>        <span class="c1">// returns the day of the month (1-31)</span>
-<span class="kd">var</span> <span class="nx">day</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getDay</span><span class="p">();</span>          <span class="c1">// returns the day of the week</span>
-<span class="kd">var</span> <span class="nx">hour</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getHours</span><span class="p">();</span>       <span class="c1">// returns the hour (0-23)</span>
-<span class="kd">var</span> <span class="nx">min</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getMinutes</span><span class="p">();</span>      <span class="c1">// returns the minutes (0-59)</span>
-<span class="kd">var</span> <span class="nx">sec</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getSeconds</span><span class="p">();</span>      <span class="c1">// returns the seconds (0-59)</span>
-<span class="kd">var</span> <span class="nx">ms</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">getMilliseconds</span><span class="p">();</span>  <span class="c1">// returns the milliseconds (0-999)</span>
+<p>Default style</p>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nx">fontFamily</span><span class="o">:</span> <span class="s1">&#39;Courier&#39;</span><span class="p">,</span>
+    <span class="nx">fontSize</span><span class="o">:</span> <span class="s1">&#39;16px&#39;</span><span class="p">,</span>
+    <span class="nx">fontStyle</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="nx">backgroundColor</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
+    <span class="nx">stroke</span><span class="o">:</span> <span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
+    <span class="nx">strokeThickness</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">shadow</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">offsetX</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">offsetY</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;#000&#39;</span><span class="p">,</span>
+        <span class="nx">blur</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">stroke</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nx">fill</span><span class="o">:</span> <span class="kc">false</span>
+    <span class="p">},</span>
+    <span class="nx">align</span><span class="o">:</span> <span class="s1">&#39;left&#39;</span><span class="p">,</span>
+    <span class="nx">maxLines</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">fixedWidth</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">fixedHeight</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">rtl</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">testString</span><span class="o">:</span> <span class="s1">&#39;|MÉqgy&#39;</span><span class="p">,</span>
+    <span class="nx">wordWrap</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">width</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nx">callback</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nx">callbackScope</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nx">useAdvancedWrap</span><span class="o">:</span> <span class="kc">false</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 
-<h3 id="get-unix-timestamp">Get unix-timestamp<a class="headerlink" href="#get-unix-timestamp" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">timestamp</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>       <span class="c1">// unix-timestamp in milliseconds</span>
-</pre></div>
-
-<h3 id="to-string">To string<a class="headerlink" href="#to-string" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">toLocaleString</span><span class="p">();</span>   <span class="c1">// locale conventions</span>
-<span class="kd">var</span> <span class="nx">iso</span> <span class="o">=</span> <span class="nx">d</span><span class="p">.</span><span class="nx">toISOString</span><span class="p">();</span>    <span class="c1">// ISO standard</span>
+<h4 id="add-text-from-json">Add text from JSON<a class="headerlink" href="#add-text-from-json" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">text</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">text</span><span class="p">({</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;Text\nGame Object\nCreated from config&#39;</span><span class="p">,</span>
+    <span class="nx">style</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">fontSize</span><span class="o">:</span> <span class="s1">&#39;64px&#39;</span><span class="p">,</span>
+        <span class="nx">fontFamily</span><span class="o">:</span> <span class="s1">&#39;Arial&#39;</span><span class="p">,</span>
+        <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;#ffffff&#39;</span><span class="p">,</span>
+        <span class="nx">align</span><span class="o">:</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span>
+        <span class="nx">backgroundColor</span><span class="o">:</span> <span class="s1">&#39;#ff00ff&#39;</span>
+    <span class="p">}</span>
+<span class="p">});</span>
 </pre></div>
                 
                   
@@ -595,7 +603,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../filter/index.html" title="Filter" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../image/index.html" title="Image" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -604,19 +612,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Filter
+                Image
               </span>
             </div>
           </a>
         
         
-          <a href="../gashaponplugin/index.html" title="Gashapon" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../filter/index.html" title="Filter" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Gashapon
+                Filter
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

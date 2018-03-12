@@ -6,6 +6,61 @@
             "title": "Home"
         }, 
         {
+            "location": "/image/index.html", 
+            "text": "Introduction\n\n\nDisplay of static images, built-in game object of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nLoad texture\n\n\nscene\n.\nload\n.\nimage\n(\nkey\n,\n \npath\n/\nto\n/\nimage\n);\n\n\n\n\n\nAdd image object\n\n\nvar\n \nimage\n \n=\n \nscene\n.\nadd\n.\nimage\n(\nx\n,\n \ny\n,\n \nkey\n);\n\n\n\n\n\nAdd image from JSON\n\n\nvar\n \nimage\n \n=\n \nscene\n.\nmake\n.\nimage\n({\n\n    \nx\n:\n \n100\n,\n\n    \ny\n:\n \n100\n,\n\n    \nkey\n:\n \n\n\n});", 
+            "title": "Image"
+        }, 
+        {
+            "location": "/image/index.html#introduction", 
+            "text": "Display of static images, built-in game object of phaser.   Author: Richard Davey", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/image/index.html#usage", 
+            "text": "", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/image/index.html#load-texture", 
+            "text": "scene . load . image ( key ,   path / to / image );", 
+            "title": "Load texture"
+        }, 
+        {
+            "location": "/image/index.html#add-image-object", 
+            "text": "var   image   =   scene . add . image ( x ,   y ,   key );", 
+            "title": "Add image object"
+        }, 
+        {
+            "location": "/image/index.html#add-image-from-json", 
+            "text": "var   image   =   scene . make . image ({ \n     x :   100 , \n     y :   100 , \n     key :    });", 
+            "title": "Add image from JSON"
+        }, 
+        {
+            "location": "/text/index.html", 
+            "text": "Introduction\n\n\nDrawing text on canvas, built-in game object of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nAdd text object\n\n\nvar\n \ntext\n \n=\n \nscene\n.\nadd\n.\ntext\n(\nx\n,\n \ny\n,\n \ntext\n);\n\n\n// scene.add.text(x, y, text, { fontFamily: \nArial\n, fontSize: 64, color: \n#00ff00\n });\n\n\n\n\n\nDefault style\n\n\n{\n\n    \nfontFamily\n:\n \nCourier\n,\n\n    \nfontSize\n:\n \n16px\n,\n\n    \nfontStyle\n:\n \n,\n\n    \nbackgroundColor\n:\n \nnull\n,\n\n    \ncolor\n:\n \n#fff\n,\n\n    \nstroke\n:\n \n#fff\n,\n\n    \nstrokeThickness\n:\n \n0\n,\n\n    \nshadow\n:\n \n{\n\n        \noffsetX\n:\n \n0\n,\n\n        \noffsetY\n:\n \n0\n,\n\n        \ncolor\n:\n \n#000\n,\n\n        \nblur\n:\n \n0\n,\n\n        \nstroke\n:\n \nfalse\n,\n\n        \nfill\n:\n \nfalse\n\n    \n},\n\n    \nalign\n:\n \nleft\n,\n\n    \nmaxLines\n:\n \n0\n,\n\n    \nfixedWidth\n:\n \n0\n,\n\n    \nfixedHeight\n:\n \n0\n,\n\n    \nrtl\n:\n \nfalse\n,\n\n    \ntestString\n:\n \n|M\u00c9qgy\n,\n\n    \nwordWrap\n:\n \n{\n\n        \nwidth\n:\n \nnull\n,\n\n        \ncallback\n:\n \nnull\n,\n\n        \ncallbackScope\n:\n \nnull\n,\n\n        \nuseAdvancedWrap\n:\n \nfalse\n\n    \n}\n\n\n}\n\n\n\n\n\nAdd text from JSON\n\n\nvar\n \ntext\n \n=\n \nscene\n.\nmake\n.\ntext\n({\n\n    \nx\n:\n \n100\n,\n\n    \ny\n:\n \n100\n,\n\n    \ntext\n:\n \nText\\nGame Object\\nCreated from config\n,\n\n    \nstyle\n:\n \n{\n\n        \nfontSize\n:\n \n64px\n,\n\n        \nfontFamily\n:\n \nArial\n,\n\n        \ncolor\n:\n \n#ffffff\n,\n\n        \nalign\n:\n \ncenter\n,\n\n        \nbackgroundColor\n:\n \n#ff00ff\n\n    \n}\n\n\n});", 
+            "title": "Text"
+        }, 
+        {
+            "location": "/text/index.html#introduction", 
+            "text": "Drawing text on canvas, built-in game object of phaser.   Author: Richard Davey", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/text/index.html#usage", 
+            "text": "", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/text/index.html#add-text-object", 
+            "text": "var   text   =   scene . add . text ( x ,   y ,   text );  // scene.add.text(x, y, text, { fontFamily:  Arial , fontSize: 64, color:  #00ff00  });   Default style  { \n     fontFamily :   Courier , \n     fontSize :   16px , \n     fontStyle :   , \n     backgroundColor :   null , \n     color :   #fff , \n     stroke :   #fff , \n     strokeThickness :   0 , \n     shadow :   { \n         offsetX :   0 , \n         offsetY :   0 , \n         color :   #000 , \n         blur :   0 , \n         stroke :   false , \n         fill :   false \n     }, \n     align :   left , \n     maxLines :   0 , \n     fixedWidth :   0 , \n     fixedHeight :   0 , \n     rtl :   false , \n     testString :   |M\u00c9qgy , \n     wordWrap :   { \n         width :   null , \n         callback :   null , \n         callbackScope :   null , \n         useAdvancedWrap :   false \n     }  }", 
+            "title": "Add text object"
+        }, 
+        {
+            "location": "/text/index.html#add-text-from-json", 
+            "text": "var   text   =   scene . make . text ({ \n     x :   100 , \n     y :   100 , \n     text :   Text\\nGame Object\\nCreated from config , \n     style :   { \n         fontSize :   64px , \n         fontFamily :   Arial , \n         color :   #ffffff , \n         align :   center , \n         backgroundColor :   #ff00ff \n     }  });", 
+            "title": "Add text from JSON"
+        }, 
+        {
             "location": "/filter/index.html", 
             "text": "Introduction\n\n\nCreates a new array with all elements that pass the test function.\n\n\n\n\nAuthor: Built-in javascript function\n\n\n\n\nUsage\n\n\nReference\n\n\nFilter elements\n\n\n// var elems = [...]\n\n\nvar\n \nresult\n \n=\n \nelems\n.\nfilter\n(\nfunction\n(\nel\n){\n\n    \nreturn\n \n(\nel\n.\nx\n \n \n400\n);\n\n\n});", 
             "title": "Filter"

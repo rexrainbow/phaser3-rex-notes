@@ -3,6 +3,9 @@ theme: 'material'
 
 pages:
 - Home: index.md
+- Game object:
+    - Image: image.md
+    - Text: text.md
 - Data structure:
     - Filter: filter.md
 - Date:
