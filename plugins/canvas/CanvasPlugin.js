@@ -60,11 +60,14 @@ var Canvas = new Phaser.Class({
             this.setOrigin();
             this.initPipeline('TextureTintPipeline');
 
-            var self = this;
-            scene.sys.game.renderer.onContextRestored(function () {
-                self.canvasTexture = null;
-                self.dirty = true;
-            });
+            if (scene.sys.game.config.renderType === CONST.WEBGL)
+            {
+                scene.sys.game.renderer.onContextRestored(function ()
+                {
+                    this.canvasTexture = null;
+                    this.dirty = true;
+                }, this);
+            }            
         },
 
     getCanvas: function (readOnly) {
@@ -180,7 +183,7 @@ Phaser.GameObjects.GameObjectCreator.register('rexCanvas', function (config) {
     var height = GetAdvancedValue(config, 'height', 256);
     var canvas = new Canvas(this.scene, 0, 0, width, height)
     BuildGameObject(this.scene, canvas, config);
-    var fillColor = GetAdvancedValue(config, 'fillColor', null);
+    var fillColor = GetAdvancedValue(config, 'fill', null);
     canvas.fill(fillColor);
     return canvas;
 });
