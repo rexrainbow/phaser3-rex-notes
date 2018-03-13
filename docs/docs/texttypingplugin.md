@@ -45,7 +45,7 @@ txt.typing.start('ABCDEFG');
 
 ### Events
 
-- On typing event :
+- On typing :
 
 ```javascript
 txt.on('typing', function(){});
