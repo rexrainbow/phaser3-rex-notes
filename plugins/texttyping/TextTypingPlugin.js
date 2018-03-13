@@ -169,8 +169,7 @@ class TextTypingPlugin {
         this.textLen = this.getTextLength(text);
     }
 
-    onTyping() {
-        this.timer.delay = this.speed;        
+    onTyping() {      
         var newText = this.getTypingString(this.text, this.typingIdx, this.textLen, this.typeMode);
         this.setText(newText);
         this.gameobject.emit('typing');
@@ -179,8 +178,9 @@ class TextTypingPlugin {
             this.freeTimer();
             this.gameobject.emit('typingcompleted');
         } else {
-            this.typingIdx++;
-        }
+            this.timer.delay = this.speed;  // delay of next typing            
+            this.typingIdx++;          
+        }        
     }
 
     getTypingString(text, typeIdx, textLen, typeMode) {
