@@ -72,7 +72,7 @@ txt.typing.stop();
 // txt.typing.stop(true);;  // stop and show all text
 ```
 
-- Pause/resume typing
+- Pause typing
 
 ```javascript
 txt.typing.pause();
