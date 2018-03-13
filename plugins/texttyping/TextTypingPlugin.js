@@ -20,7 +20,9 @@ class TextTypingPlugin {
      */
     resetFromJSON(o) {
         this.setTypeMode(GetFastValue(o, 'typeMode', 0));
-        this.setTypeSpeed(GetFastValue(o, 'speed', 500));
+        this.setTypeSpeed(GetFastValue(o, 'speed', 333));
+        this.setTextCallback = GetFastValue(o, 'setTextCallback', null);
+        this.setTextCallbackScope = GetFastValue(o, 'setTextCallbackScope', null);        
 
         this.typingIdx = GetFastValue(o, 'typingIdx', 0);
         this.text = GetFastValue(o, 'text', '');
@@ -31,9 +33,6 @@ class TextTypingPlugin {
         if (elapsed !== null) {
             this.start(undefined, undefined, this.typingIdx, elapsed);
         }
-
-        this.setTextCallback = GetFastValue(o, 'setTextCallback', null);
-        this.setTextCallbackScope = GetFastValue(o, 'setTextCallbackScope', null);
     }
 
     /**
@@ -52,16 +51,14 @@ class TextTypingPlugin {
         return {
             typeMode: this.typeMode,
             speed: this.speed,
+            setTextCallback: this.setTextCallback,
+            setTextCallbackScope: this.setTextCallbackScope,
 
             typingIdx: this.typingIdx,
             text: this.text,
             textLen: this.textLen,
             insertIdx: this.insertIdx,
-
-            elapsed: elapsed,
-
-            setTextCallback: this.setTextCallback,
-            setTextCallbackScope: this.setTextCallbackScope
+            elapsed: elapsed
         };
     }
 

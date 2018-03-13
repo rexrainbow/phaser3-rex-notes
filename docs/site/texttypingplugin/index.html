@@ -32,7 +32,7 @@
     
     
       
-        <title>Drag to CursorKeys - Notes of Phaser 3</title>
+        <title>Typing - Notes of Phaser 3</title>
       
     
     
@@ -86,7 +86,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Drag to CursorKeys
+                Typing
               </span>
             
           
@@ -198,12 +198,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
     
     <label class="md-nav__link" for="nav-3">
       Input
@@ -255,6 +253,56 @@
           
           
 
+
+  <li class="md-nav__item">
+    <a href="../dragcursorplugin/index.html" title="Drag to CursorKeys" class="md-nav__link">
+      Drag to CursorKeys
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+    
+    <label class="md-nav__link" for="nav-4">
+      Text
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Text
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../text/index.html" title="Text" class="md-nav__link">
+      Text
+    </a>
+  </li>
+
+        
+          
+          
+          
+
   
 
 
@@ -264,11 +312,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="toc">
-        Drag to CursorKeys
+        Typing
       </label>
     
-    <a href="index.html" title="Drag to CursorKeys" class="md-nav__link md-nav__link--active">
-      Drag to CursorKeys
+    <a href="index.html" title="Typing" class="md-nav__link md-nav__link--active">
+      Typing
     </a>
     
       
@@ -309,22 +357,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-state-of-cursor-keys" title="Get state of cursor keys" class="md-nav__link">
-    Get state of cursor keys
+  <a href="#start-typing" title="Start typing" class="md-nav__link">
+    Start typing
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-dragging-point" title="Get dragging point" class="md-nav__link">
-    Get dragging point
+  <a href="#events" title="Events" class="md-nav__link">
+    Events
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#assign-origin-point" title="Assign origin point" class="md-nav__link">
-    Assign origin point
+  <a href="#other-commands" title="Other commands" class="md-nav__link">
+    Other commands
   </a>
   
 </li>
@@ -340,54 +388,6 @@
   
 </nav>
     
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
-    
-    <label class="md-nav__link" for="nav-4">
-      Text
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-4">
-        Text
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../text/index.html" title="Text" class="md-nav__link">
-      Text
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../texttypingplugin/index.html" title="Typing" class="md-nav__link">
-      Typing
-    </a>
   </li>
 
         
@@ -552,22 +552,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-state-of-cursor-keys" title="Get state of cursor keys" class="md-nav__link">
-    Get state of cursor keys
+  <a href="#start-typing" title="Start typing" class="md-nav__link">
+    Start typing
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-dragging-point" title="Get dragging point" class="md-nav__link">
-    Get dragging point
+  <a href="#events" title="Events" class="md-nav__link">
+    Events
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#assign-origin-point" title="Assign origin point" class="md-nav__link">
-    Assign origin point
+  <a href="#other-commands" title="Other commands" class="md-nav__link">
+    Other commands
   </a>
   
 </li>
@@ -592,64 +592,102 @@
               
                 
                 
-                  <h1>Drag to CursorKeys</h1>
+                  <h1>Typing</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Simulate curosr keys according dragging events.</p>
+<p>Typing on text object.</p>
 <ul>
 <li>Author: Rex</li>
-<li>A plugin of scene</li>
+<li>A plugin of text object</li>
 </ul>
 <h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dragcursor/DragCursorPlugin.js">Link</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/texttyping/TextTypingPlugin.js">Link</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">dragCursor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DragCursorPlugin</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
-    <span class="nx">dir</span><span class="o">:</span> <span class="s1">&#39;8dir&#39;</span><span class="p">,</span>    <span class="c1">// 0|&#39;up&amp;down&#39;|1|&#39;left&amp;right|2|&#39;4dir&#39;|3|&#39;8dir&#39;</span>
-    <span class="nx">distanceMin</span><span class="o">:</span> <span class="mi">30</span>        
+<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">typing</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TextTypingPlugin</span><span class="p">(</span><span class="nx">txt</span><span class="p">,</span> <span class="p">{</span>
+    <span class="c1">//speed: 333,       // typing speed in ms</span>
+    <span class="c1">//typeMode: 0,      //0|&#39;left-to-right&#39;|1|&#39;right-to-left&#39;|2|&#39;middle-to-sides&#39;|3|&#39;sides-to-middle&#39;</span>
+    <span class="c1">//setTextCallback: function(text, isLastChar, insertIdx){ return text; }  // callback before set-text</span>
+    <span class="c1">//setTextCallbackScope: null</span>
 <span class="p">});</span>
 </pre></div>
 
 <p>Properties</p>
 <ul>
-<li>mode : <ul>
-<li><code>'up&amp;down'</code>, or <code>0</code> : simulate up or down cursor keys only.</li>
-<li><code>'left&amp;right'</code>, or <code>1</code> : simulate left or right cursor keys only.</li>
-<li><code>'4dir'</code>, or <code>2</code> : simulate up, down, left or right cursor keys.</li>
-<li><code>'8dir'</code>, or <code>3</code> : simulate up, up-left, up-right, down, down-left, down-right, left, or right cursor keys.</li>
+<li>speed: typing speed in ms</li>
+<li>typeMode :<ul>
+<li><code>'left-to-right'</code>, or <code>0</code> : typing characters from left to right.</li>
+<li><code>'right-to-left'</code>, or <code>1</code> : typing characters from right to left.</li>
+<li><code>'middle-to-sides'</code>, or <code>2</code> : typing characters from middle to sides, optional.</li>
+<li><code>'sides-to-middle'</code>, or <code>3</code> : typing characters from sides to middle.    </li>
 </ul>
 </li>
-<li>distanceMin : cursor keys will be pressed when dragging distance is larger then this value.</li>
+<li>setTextCallback : callback befor set-text, to decorate display text.
+    <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">text</span><span class="p">,</span> <span class="nx">isLastChar</span><span class="p">,</span> <span class="nx">insertIdx</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">text</span><span class="p">;</span> <span class="p">}</span>
+</pre></div></li>
+<li>setTextCallbackScope : scope of setTextCallback function.</li>
 </ul>
-<h3 id="get-state-of-cursor-keys">Get state of cursor keys<a class="headerlink" href="#get-state-of-cursor-keys" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cursorKeys</span> <span class="o">=</span> <span class="nx">dragCursor</span><span class="p">.</span><span class="nx">createCursorKeys</span><span class="p">();</span>
-
-<span class="kd">var</span> <span class="nx">isLeftKeyDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">left</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">isRightKeyDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">right</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">isUpKeyDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">up</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">isDownKeyDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">down</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
+<h3 id="start-typing">Start typing<a class="headerlink" href="#start-typing" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">typing</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="s1">&#39;ABCDEFG&#39;</span><span class="p">);</span>
+<span class="c1">// txt.typing.start(&#39;ABCDEFG&#39;, 333);  // speed in ms</span>
 </pre></div>
 
-<h3 id="get-dragging-point">Get dragging point<a class="headerlink" href="#get-dragging-point" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">dragStartX</span> <span class="o">=</span> <span class="nx">dragCursor</span><span class="p">.</span><span class="nx">start</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">dragStartY</span> <span class="o">=</span> <span class="nx">dragCursor</span><span class="p">.</span><span class="nx">start</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">dragEndX</span> <span class="o">=</span> <span class="nx">dragCursor</span><span class="p">.</span><span class="nx">end</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">dragEndY</span> <span class="o">=</span> <span class="nx">dragCursor</span><span class="p">.</span><span class="nx">end</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
+<ul>
+<li>On typing event :</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;typing&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
 </pre></div>
 
-<h3 id="assign-origin-point">Assign origin point<a class="headerlink" href="#assign-origin-point" title="Permanent link">&para;</a></h3>
-<p>Origin point is the dragging start point, or assign origin point when creating instance.</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">dragCursor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DragCursorPlugin</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
-    <span class="c1">// ...</span>
-    <span class="nx">origin</span><span class="o">:</span> <span class="p">{</span>       <span class="c1">// assign origin point to (400,300)</span>
-        <span class="nx">x</span><span class="o">:</span> <span class="mi">400</span><span class="p">,</span>
-        <span class="nx">y</span><span class="o">:</span> <span class="mi">300</span>
-    <span class="p">}</span>
-<span class="p">});</span>
+<ul>
+<li>On typing completed :</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;typingcompleted&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
 </pre></div>
 
-<p>Or assign origin point by <code>setOrigin(x, y)</code> function.</p>
-<div class="codehilite"><pre><span></span><span class="nx">dragCursor</span><span class="p">.</span><span class="nx">setOrigin</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">300</span><span class="p">);</span>  <span class="c1">// assign origin point to (400,300)</span>
+<h3 id="other-commands">Other commands<a class="headerlink" href="#other-commands" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Is-typing state</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isTyping</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">typing</span><span class="p">.</span><span class="nx">isTyping</span><span class="p">;</span>
+</pre></div>
+
+<ul>
+<li>Stop typing</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">typing</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
+<span class="c1">// txt.typing.stop(true);;  // stop and show all text</span>
+</pre></div>
+
+<ul>
+<li>Pause/resume typing</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">typing</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
+</pre></div>
+
+<ul>
+<li>Resume typing</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">typing</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
+</pre></div>
+
+<ul>
+<li>Set typing speed</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">typing</span><span class="p">.</span><span class="nx">setTypeSpeed</span><span class="p">(</span><span class="nx">speed</span><span class="p">);</span>  <span class="c1">// speed in ms</span>
+</pre></div>
+
+<p>Set speed in <code>typing</code> event or setTextCallback to change typing speed of remaining text.</p>
+<ul>
+<li>Typing more text</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">typing</span><span class="p">.</span><span class="nx">appendText</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
+</pre></div>
+
+<ul>
+<li>Set typing mode</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">typing</span><span class="p">.</span><span class="nx">setTypeMode</span><span class="p">(</span><span class="nx">mode</span><span class="p">);</span>  <span class="c1">//0|&#39;left-to-right&#39;|1|&#39;right-to-left&#39;|2|&#39;middle-to-sides&#39;|3|&#39;sides-to-middle&#39;</span>
 </pre></div>
                 
                   
@@ -669,7 +707,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../dragplugin/index.html" title="Drag" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../text/index.html" title="Text" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -678,19 +716,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Drag
+                Text
               </span>
             </div>
           </a>
         
         
-          <a href="../text/index.html" title="Text" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../image/index.html" title="Image" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Text
+                Image
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

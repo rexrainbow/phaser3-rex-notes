@@ -7,7 +7,7 @@ Simulate curosr keys according dragging events.
 
 ## Source code
 
-[Link](https://github.com/rexrainbow/phaser3-rex-plugins/blob/master/plugins/dragcursor/DragCursorPlugin.js)
+[Link](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dragcursor/DragCursorPlugin.js)
 
 ## Usage
 

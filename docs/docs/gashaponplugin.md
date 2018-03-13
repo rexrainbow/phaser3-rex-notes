@@ -7,7 +7,7 @@ Pick random item from box.
 
 ## Source code
 
-[Link](https://github.com/rexrainbow/phaser3-rex-plugins/blob/master/plugins/gashapon/GashaponPlugin.js)
+[Link](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/gashapon/GashaponPlugin.js)
 
 ## Usage
 

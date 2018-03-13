@@ -12,6 +12,7 @@ pages:
     - Drag to CursorKeys: dragcursorplugin.md
 - Text:
     - Text: text.md
+    - Typing: texttypingplugin.md
 - Sprite:
     - Image: image.md
 - Date:
