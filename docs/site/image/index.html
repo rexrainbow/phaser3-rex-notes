@@ -271,46 +271,10 @@
       
 
 
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
-    
-    <label class="md-nav__link" for="nav-4">
-      Text
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-4">
-        Text
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
   <li class="md-nav__item">
-    <a href="../text/index.html" title="Text" class="md-nav__link">
-      Text
+    <a href="../gameobject/index.html" title="Game object" class="md-nav__link">
+      Game object
     </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../texttypingplugin/index.html" title="Typing" class="md-nav__link">
-      Typing
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
   </li>
 
     
@@ -390,18 +354,12 @@
     Add image object
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#add-image-from-json" title="Add image from JSON" class="md-nav__link">
-    Add image from JSON
-  </a>
-  
 </li>
         
-      </ul>
-    </nav>
+          <li class="md-nav__item">
+  <a href="#other-properties" title="Other properties" class="md-nav__link">
+    Other properties
+  </a>
   
 </li>
         
@@ -434,10 +392,58 @@
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
     
     <label class="md-nav__link" for="nav-6">
-      Date
+      Text
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
       <label class="md-nav__title" for="nav-6">
+        Text
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../text/index.html" title="Text" class="md-nav__link">
+      Text
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../texttypingplugin/index.html" title="Typing" class="md-nav__link">
+      Typing
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Date
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
         Date
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -467,13 +473,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
     
-    <label class="md-nav__link" for="nav-7">
+    <label class="md-nav__link" for="nav-8">
       Random
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-7">
+      <label class="md-nav__title" for="nav-8">
         Random
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -541,18 +547,12 @@
     Add image object
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#add-image-from-json" title="Add image from JSON" class="md-nav__link">
-    Add image from JSON
-  </a>
-  
 </li>
         
-      </ul>
-    </nav>
+          <li class="md-nav__item">
+  <a href="#other-properties" title="Other properties" class="md-nav__link">
+    Other properties
+  </a>
   
 </li>
         
@@ -592,13 +592,21 @@
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">image</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
 </pre></div>
 
-<h4 id="add-image-from-json">Add image from JSON<a class="headerlink" href="#add-image-from-json" title="Permanent link">&para;</a></h4>
+<p>Add image from JSON</p>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">image</span><span class="p">({</span>
     <span class="nx">x</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
     <span class="nx">y</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
-    <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;&#39;</span>
+    <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+
+    <span class="c1">// angle: 90,</span>
+    <span class="c1">// alpha: 0.75</span>
+    <span class="c1">// flipX: true,</span>
+    <span class="c1">// flipY: true</span>
 <span class="p">});</span>
 </pre></div>
+
+<h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
+<p>See <a href="../gameobject/index.html">game object</a></p>
                 
                   
                 
@@ -617,7 +625,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../texttypingplugin/index.html" title="Typing" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../gameobject/index.html" title="Game object" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -626,19 +634,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Typing
+                Game object
               </span>
             </div>
           </a>
         
         
-          <a href="../date/index.html" title="Date" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../text/index.html" title="Text" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Date
+                Text
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

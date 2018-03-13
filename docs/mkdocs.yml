@@ -10,11 +10,12 @@ pages:
     - Keyboard events: keyboardevents.md
     - Drag: dragplugin.md
     - Drag to CursorKeys: dragcursorplugin.md
-- Text:
-    - Text: text.md
-    - Typing: texttypingplugin.md
+- Game object: gameobject.md
 - Sprite:
     - Image: image.md
+- Text:
+    - Text: text.md
+    - Typing: texttypingplugin.md    
 - Date:
     - Date: date.md
 - Random:

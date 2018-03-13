@@ -18,12 +18,21 @@ scene.load.image(key, path/to/image);
 var image = scene.add.image(x, y, key);
 ```
 
-#### Add image from JSON
+Add image from JSON
 
 ```javascript
 var image = scene.make.image({
     x: 100,
     y: 100,
-    key: ''
+    key: '',
+
+    // angle: 90,
+    // alpha: 0.75
+    // flipX: true,
+    // flipY: true
 });
 ```
+
+### Other properties
+
+See [game object](gameobject.md)
