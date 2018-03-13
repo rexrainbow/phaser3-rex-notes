@@ -6,101 +6,6 @@
             "title": "Home"
         }, 
         {
-            "location": "/image/index.html", 
-            "text": "Introduction\n\n\nDisplay of static images, built-in game object of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nLoad texture\n\n\nscene\n.\nload\n.\nimage\n(\nkey\n,\n \npath\n/\nto\n/\nimage\n);\n\n\n\n\n\nAdd image object\n\n\nvar\n \nimage\n \n=\n \nscene\n.\nadd\n.\nimage\n(\nx\n,\n \ny\n,\n \nkey\n);\n\n\n\n\n\nAdd image from JSON\n\n\nvar\n \nimage\n \n=\n \nscene\n.\nmake\n.\nimage\n({\n\n    \nx\n:\n \n100\n,\n\n    \ny\n:\n \n100\n,\n\n    \nkey\n:\n \n\n\n});", 
-            "title": "Image"
-        }, 
-        {
-            "location": "/image/index.html#introduction", 
-            "text": "Display of static images, built-in game object of phaser.   Author: Richard Davey", 
-            "title": "Introduction"
-        }, 
-        {
-            "location": "/image/index.html#usage", 
-            "text": "", 
-            "title": "Usage"
-        }, 
-        {
-            "location": "/image/index.html#load-texture", 
-            "text": "scene . load . image ( key ,   path / to / image );", 
-            "title": "Load texture"
-        }, 
-        {
-            "location": "/image/index.html#add-image-object", 
-            "text": "var   image   =   scene . add . image ( x ,   y ,   key );", 
-            "title": "Add image object"
-        }, 
-        {
-            "location": "/image/index.html#add-image-from-json", 
-            "text": "var   image   =   scene . make . image ({ \n     x :   100 , \n     y :   100 , \n     key :    });", 
-            "title": "Add image from JSON"
-        }, 
-        {
-            "location": "/text/index.html", 
-            "text": "Introduction\n\n\nDrawing text on canvas, built-in game object of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nSnapshot\n\n\nvar\n \ntxt\n \n=\n \nscene\n.\nadd\n.\ntext\n(\nx\n,\n \ny\n,\n \nhello\n);\n\n\ntxt\n.\nsetText\n(\nworld\n);\n\n\n\n\n\nAdd text object\n\n\nvar\n \ntxt\n \n=\n \nscene\n.\nadd\n.\ntext\n(\nx\n,\n \ny\n,\n \nhello\n);\n\n\n// var txt = scene.add.text(x, y, \nhello\n, { fontFamily: \nArial\n, fontSize: 64, color: \n#00ff00\n });\n\n\n\n\n\nDefault style\n\n\n{\n\n    \nfontFamily\n:\n \nCourier\n,\n\n    \nfontSize\n:\n \n16px\n,\n\n    \nfontStyle\n:\n \n,\n\n    \nbackgroundColor\n:\n \nnull\n,\n\n    \ncolor\n:\n \n#fff\n,\n\n    \nstroke\n:\n \n#fff\n,\n\n    \nstrokeThickness\n:\n \n0\n,\n\n    \nshadow\n:\n \n{\n\n        \noffsetX\n:\n \n0\n,\n\n        \noffsetY\n:\n \n0\n,\n\n        \ncolor\n:\n \n#000\n,\n\n        \nblur\n:\n \n0\n,\n\n        \nstroke\n:\n \nfalse\n,\n\n        \nfill\n:\n \nfalse\n\n    \n},\n\n    \nalign\n:\n \nleft\n,\n  \n// align only works with multi-lined text\n\n    \nmaxLines\n:\n \n0\n,\n\n    \nfixedWidth\n:\n \n0\n,\n\n    \nfixedHeight\n:\n \n0\n,\n\n    \nrtl\n:\n \nfalse\n,\n\n    \ntestString\n:\n \n|M\u00c9qgy\n,\n\n    \nwordWrap\n:\n \n{\n\n        \nwidth\n:\n \nnull\n,\n\n        \ncallback\n:\n \nnull\n,\n\n        \ncallbackScope\n:\n \nnull\n,\n\n        \nuseAdvancedWrap\n:\n \nfalse\n\n    \n}\n\n\n}\n\n\n\n\n\nAdd text from JSON\n\n\nvar\n \ntxt\n \n=\n \nscene\n.\nmake\n.\ntext\n({\n\n    \nx\n:\n \n100\n,\n\n    \ny\n:\n \n100\n,\n\n    \npadding\n:\n \n{\n\n        \nleft\n:\n \n64\n,\n\n        \nright\n:\n \n16\n,\n\n        \ntop\n:\n \n20\n,\n\n        \nbottom\n:\n \n40\n        \n        \n//x: 32,    // 32px padding on the left/right\n\n        \n//y: 16     // 16px padding on the top/bottom\n\n    \n},\n\n    \ntext\n:\n \nText\\nGame Object\\nCreated from config\n,\n\n    \nstyle\n:\n \n{\n\n        \nfontSize\n:\n \n64px\n,\n\n        \nfontFamily\n:\n \nArial\n,\n\n        \ncolor\n:\n \n#ffffff\n,\n\n        \nalign\n:\n \ncenter\n,\n\n        \nbackgroundColor\n:\n \n#ff00ff\n\n    \n}\n\n\n});\n\n\n\n\n\nWord wrap\n\n\nWrap by width\n\n\nvar\n \ntxt\n \n=\n \nscene\n.\nmake\n.\ntext\n({\n\n    \nx\n:\n \n400\n,\n\n    \ny\n:\n \n100\n,\n\n    \ntext\n:\n \nThe sky above the port was the color of television, tuned to a dead channel.\n,\n\n    \norigin\n:\n \n{\n \nx\n:\n \n0.5\n,\n \ny\n:\n \n0.5\n \n},\n\n    \nstyle\n:\n \n{\n\n        \nfont\n:\n \nbold 25px Arial\n,\n\n        \nfill\n:\n \nwhite\n,\n\n        \nwordWrap\n:\n \n{\n \nwidth\n:\n \n300\n \n}\n\n    \n}\n\n\n});\n\n\n\n\n\nWrap by callback\n\n\nvar\n \ntxt\n \n=\n \nscene\n.\nmake\n.\ntext\n({\n\n    \nx\n:\n \n400\n,\n\n    \ny\n:\n \n300\n,\n\n    \ntext\n:\n \nThe sky above the port was the color of television, tuned to a dead channel.\n,\n\n    \norigin\n:\n \n0.5\n,\n\n    \nstyle\n:\n \n{\n\n        \nfont\n:\n \nbold 30px Arial\n,\n\n        \nfill\n:\n \nwhite\n,\n\n        \nwordWrap\n:\n \n{\n \ncallback\n:\n \nwordWrap\n,\n \nscope\n:\n \nthis\n \n}\n\n    \n}\n\n\n});\n\n\n\nfunction\n \nwordWrap\n \n(\ntext\n,\n \ntextObject\n)\n\n\n{\n\n    \n// First parameter will be the string that needs to be wrapped\n\n    \n// Second parameter will be the Text game object that is being wrapped currently\n\n\n    \n// This wrap just puts each word on a separate line, but you could inject your own\n\n    \n// language-specific logic here.\n\n    \nvar\n \nwords\n \n=\n \ntext\n.\nsplit\n(\n \n);\n\n\n    \n// You can return either an array of individual lines or a string with line breaks (e.g. \\n) in\n\n    \n// the correct place.\n\n    \nreturn\n \nwords\n;\n\n\n}\n\n\n\n\n\nSet text\n\n\ntxt\n.\nsetText\n(\nworld\n);\n\n\n// var curContent = txt.text;\n\n\n\n\n\nSet style\n\n\ntxt\n.\nsetStyle\n(\nstyle\n);\n\n\ntxt\n.\nsetFont\n(\nfont\n);\n\n\ntxt\n.\nsetFontFamily\n(\nfamily\n);\n\n\ntxt\n.\nsetFontSize\n(\nsize\n);\n\n\ntxt\n.\nsetFontStyle\n(\nstyle\n);\n\n\n\n\n\nSet color\n\n\ntxt\n.\nsetColor\n(\ncolor\n);\n\n\ntxt\n.\nsetStroke\n(\ncolor\n,\n \nthickness\n);\n\n\ntxt\n.\nsetBackgroundColor\n(\ncolor\n);\n\n\ntxt\n.\nsetFill\n(\ncolor\n);\n\n\n\n\n\nSet shadow\n\n\ntxt\n.\nsetShadow\n(\nx\n,\n \ny\n,\n \ncolor\n,\n \nblur\n,\n \nshadowStroke\n,\n \nshadowFill\n);\n\n\ntxt\n.\nsetShadowOffset\n(\nx\n,\n \ny\n);\n\n\ntxt\n.\nsetShadowColor\n(\ncolor\n);\n\n\ntxt\n.\nsetShadowBlur\n(\nblur\n);\n\n\ntxt\n.\nsetShadowStroke\n(\nenabled\n);\n\n\ntxt\n.\nsetShadowFill\n(\nenabled\n);\n\n\n\n\n\nSet padding\n\n\ntxt\n.\nsetPadding\n(\nleft\n,\n \ntop\n,\n \nright\n,\n \nbottom\n);\n\n\ntxt\n.\nsetPadding\n({});\n\n\n\n\n\nSet max lines\n\n\ntxt\n.\nsetMaxLines\n(\nmax\n);\n\n\n\n\n\nSet canvas size\n\n\ntxt\n.\nsetFixedSize\n(\nwidth\n,\n \nheight\n);", 
-            "title": "Text"
-        }, 
-        {
-            "location": "/text/index.html#introduction", 
-            "text": "Drawing text on canvas, built-in game object of phaser.   Author: Richard Davey", 
-            "title": "Introduction"
-        }, 
-        {
-            "location": "/text/index.html#usage", 
-            "text": "", 
-            "title": "Usage"
-        }, 
-        {
-            "location": "/text/index.html#snapshot", 
-            "text": "var   txt   =   scene . add . text ( x ,   y ,   hello );  txt . setText ( world );", 
-            "title": "Snapshot"
-        }, 
-        {
-            "location": "/text/index.html#add-text-object", 
-            "text": "var   txt   =   scene . add . text ( x ,   y ,   hello );  // var txt = scene.add.text(x, y,  hello , { fontFamily:  Arial , fontSize: 64, color:  #00ff00  });   Default style  { \n     fontFamily :   Courier , \n     fontSize :   16px , \n     fontStyle :   , \n     backgroundColor :   null , \n     color :   #fff , \n     stroke :   #fff , \n     strokeThickness :   0 , \n     shadow :   { \n         offsetX :   0 , \n         offsetY :   0 , \n         color :   #000 , \n         blur :   0 , \n         stroke :   false , \n         fill :   false \n     }, \n     align :   left ,    // align only works with multi-lined text \n     maxLines :   0 , \n     fixedWidth :   0 , \n     fixedHeight :   0 , \n     rtl :   false , \n     testString :   |M\u00c9qgy , \n     wordWrap :   { \n         width :   null , \n         callback :   null , \n         callbackScope :   null , \n         useAdvancedWrap :   false \n     }  }   Add text from JSON  var   txt   =   scene . make . text ({ \n     x :   100 , \n     y :   100 , \n     padding :   { \n         left :   64 , \n         right :   16 , \n         top :   20 , \n         bottom :   40         \n         //x: 32,    // 32px padding on the left/right \n         //y: 16     // 16px padding on the top/bottom \n     }, \n     text :   Text\\nGame Object\\nCreated from config , \n     style :   { \n         fontSize :   64px , \n         fontFamily :   Arial , \n         color :   #ffffff , \n         align :   center , \n         backgroundColor :   #ff00ff \n     }  });", 
-            "title": "Add text object"
-        }, 
-        {
-            "location": "/text/index.html#word-wrap", 
-            "text": "Wrap by width  var   txt   =   scene . make . text ({ \n     x :   400 , \n     y :   100 , \n     text :   The sky above the port was the color of television, tuned to a dead channel. , \n     origin :   {   x :   0.5 ,   y :   0.5   }, \n     style :   { \n         font :   bold 25px Arial , \n         fill :   white , \n         wordWrap :   {   width :   300   } \n     }  });   Wrap by callback  var   txt   =   scene . make . text ({ \n     x :   400 , \n     y :   300 , \n     text :   The sky above the port was the color of television, tuned to a dead channel. , \n     origin :   0.5 , \n     style :   { \n         font :   bold 30px Arial , \n         fill :   white , \n         wordWrap :   {   callback :   wordWrap ,   scope :   this   } \n     }  });  function   wordWrap   ( text ,   textObject )  { \n     // First parameter will be the string that needs to be wrapped \n     // Second parameter will be the Text game object that is being wrapped currently \n\n     // This wrap just puts each word on a separate line, but you could inject your own \n     // language-specific logic here. \n     var   words   =   text . split (   ); \n\n     // You can return either an array of individual lines or a string with line breaks (e.g. \\n) in \n     // the correct place. \n     return   words ;  }", 
-            "title": "Word wrap"
-        }, 
-        {
-            "location": "/text/index.html#set-text", 
-            "text": "txt . setText ( world );  // var curContent = txt.text;", 
-            "title": "Set text"
-        }, 
-        {
-            "location": "/text/index.html#set-style", 
-            "text": "txt . setStyle ( style );  txt . setFont ( font );  txt . setFontFamily ( family );  txt . setFontSize ( size );  txt . setFontStyle ( style );", 
-            "title": "Set style"
-        }, 
-        {
-            "location": "/text/index.html#set-color", 
-            "text": "txt . setColor ( color );  txt . setStroke ( color ,   thickness );  txt . setBackgroundColor ( color );  txt . setFill ( color );", 
-            "title": "Set color"
-        }, 
-        {
-            "location": "/text/index.html#set-shadow", 
-            "text": "txt . setShadow ( x ,   y ,   color ,   blur ,   shadowStroke ,   shadowFill );  txt . setShadowOffset ( x ,   y );  txt . setShadowColor ( color );  txt . setShadowBlur ( blur );  txt . setShadowStroke ( enabled );  txt . setShadowFill ( enabled );", 
-            "title": "Set shadow"
-        }, 
-        {
-            "location": "/text/index.html#set-padding", 
-            "text": "txt . setPadding ( left ,   top ,   right ,   bottom );  txt . setPadding ({});", 
-            "title": "Set padding"
-        }, 
-        {
-            "location": "/text/index.html#set-max-lines", 
-            "text": "txt . setMaxLines ( max );", 
-            "title": "Set max lines"
-        }, 
-        {
-            "location": "/text/index.html#set-canvas-size", 
-            "text": "txt . setFixedSize ( width ,   height );", 
-            "title": "Set canvas size"
-        }, 
-        {
             "location": "/filter/index.html", 
             "text": "Introduction\n\n\nCreates a new array with all elements that pass the test function.\n\n\n\n\nAuthor: Built-in javascript function\n\n\n\n\nUsage\n\n\nReference\n\n\nFilter elements\n\n\n// var elems = [...]\n\n\nvar\n \nresult\n \n=\n \nelems\n.\nfilter\n(\nfunction\n(\nel\n){\n\n    \nreturn\n \n(\nel\n.\nx\n \n \n400\n);\n\n\n});", 
             "title": "Filter"
@@ -119,151 +24,6 @@
             "location": "/filter/index.html#filter-elements", 
             "text": "// var elems = [...]  var   result   =   elems . filter ( function ( el ){ \n     return   ( el . x     400 );  });", 
             "title": "Filter elements"
-        }, 
-        {
-            "location": "/date/index.html", 
-            "text": "Introduction\n\n\nGet current date or unix-timestamp.\n\n\n\n\nAuthor: Built-in javascript function\n\n\n\n\nUsage\n\n\nReference\n\n\nCreate instance\n\n\nvar\n \nd\n \n=\n \nnew\n \nDate\n();\n\n\nvar\n \nd\n \n=\n \nnew\n \nDate\n(\ntimestamp\n);\n\n\nvar\n \nd\n \n=\n \nnew\n \nDate\n(\ndateString\n);\n\n\nvar\n \nd\n \n=\n \nnew\n \nDate\n(\nyear\n,\n \nmonth\n,\n \nday\n,\n \nhours\n,\n \nminutes\n,\n \nseconds\n,\n \nmilliseconds\n);\n\n\n\n\n\nGet date\n\n\nvar\n \nyear\n \n=\n \nd\n.\ngetFullYear\n();\n    \n// returns the year\n\n\nvar\n \nmonth\n \n=\n \nd\n.\ngetMonth\n();\n      \n// returns the month (0-11)\n\n\nvar\n \ndate\n \n=\n \nd\n.\ngetDate\n();\n        \n// returns the day of the month (1-31)\n\n\nvar\n \nday\n \n=\n \nd\n.\ngetDay\n();\n          \n// returns the day of the week\n\n\nvar\n \nhour\n \n=\n \nd\n.\ngetHours\n();\n       \n// returns the hour (0-23)\n\n\nvar\n \nmin\n \n=\n \nd\n.\ngetMinutes\n();\n      \n// returns the minutes (0-59)\n\n\nvar\n \nsec\n \n=\n \nd\n.\ngetSeconds\n();\n      \n// returns the seconds (0-59)\n\n\nvar\n \nms\n \n=\n \nd\n.\ngetMilliseconds\n();\n  \n// returns the milliseconds (0-999)\n\n\n\n\n\nGet unix-timestamp\n\n\nvar\n \ntimestamp\n \n=\n \nd\n.\nnow\n();\n       \n// unix-timestamp in milliseconds\n\n\n\n\n\nTo string\n\n\nvar\n \ns\n \n=\n \nd\n.\ntoLocaleString\n();\n   \n// locale conventions\n\n\nvar\n \niso\n \n=\n \nd\n.\ntoISOString\n();\n    \n// ISO standard", 
-            "title": "Date"
-        }, 
-        {
-            "location": "/date/index.html#introduction", 
-            "text": "Get current date or unix-timestamp.   Author: Built-in javascript function", 
-            "title": "Introduction"
-        }, 
-        {
-            "location": "/date/index.html#usage", 
-            "text": "Reference", 
-            "title": "Usage"
-        }, 
-        {
-            "location": "/date/index.html#create-instance", 
-            "text": "var   d   =   new   Date ();  var   d   =   new   Date ( timestamp );  var   d   =   new   Date ( dateString );  var   d   =   new   Date ( year ,   month ,   day ,   hours ,   minutes ,   seconds ,   milliseconds );", 
-            "title": "Create instance"
-        }, 
-        {
-            "location": "/date/index.html#get-date", 
-            "text": "var   year   =   d . getFullYear ();      // returns the year  var   month   =   d . getMonth ();        // returns the month (0-11)  var   date   =   d . getDate ();          // returns the day of the month (1-31)  var   day   =   d . getDay ();            // returns the day of the week  var   hour   =   d . getHours ();         // returns the hour (0-23)  var   min   =   d . getMinutes ();        // returns the minutes (0-59)  var   sec   =   d . getSeconds ();        // returns the seconds (0-59)  var   ms   =   d . getMilliseconds ();    // returns the milliseconds (0-999)", 
-            "title": "Get date"
-        }, 
-        {
-            "location": "/date/index.html#get-unix-timestamp", 
-            "text": "var   timestamp   =   d . now ();         // unix-timestamp in milliseconds", 
-            "title": "Get unix-timestamp"
-        }, 
-        {
-            "location": "/date/index.html#to-string", 
-            "text": "var   s   =   d . toLocaleString ();     // locale conventions  var   iso   =   d . toISOString ();      // ISO standard", 
-            "title": "To string"
-        }, 
-        {
-            "location": "/gashaponplugin/index.html", 
-            "text": "Introduction\n\n\nPick random item from box.\n\n\n\n\nAuthor: Rex\n\n\nA plugin of scene\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\nvar\n \ngashapon\n \n=\n \nnew\n \nGashaponPlugin\n(\nscene\n,\n \n{\n\n    \nmode\n:\n \nshuffle\n,\n  \n// 0|\nshuffle\n|1|\nrandom\n\n    \nitems\n:\n \n{\n  \n// name:count\n\n        \na\n:\n1\n,\n \n        \nb\n:\n2\n,\n \n        \nc\n:\n3\n \n    \n},\n\n    \nreload\n:\n \ntrue\n,\n     \n// true|false\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\nmode : \n\n\n'shuffle'\n, or \n0\n : pick item from box without put it back.\n\n\n'random'\n, or \n1\n : pick item from box then put it back.\n\n\n\n\n\n\nreload : set \ntrue\n to reload items when box is empty for \nshuffle\n mode.\n\n\nitems : initial items in box\n\n\n\n\nPick item\n\n\nPick a random item\n\n\nvar\n \nitem\n \n=\n \ngashapon\n.\nnext\n();\n\n\n\n\n\n\n\nreturn \nnull\n if pick nothing\n\n\n\n\nPick specific item\n\n\nvar\n \nitem\n \n=\n \ngashapon\n.\nnext\n(\na\n);\n\n\n\n\n\n\n\nreturn \nnull\n if pick nothing\n\n\n\n\nLast picked item\n\n\nvar\n \nitem\n \n=\n \ngashapon\n.\nresult\n;\n\n\n\n\n\nSet item\n\n\nSet item\n\n\ngashapon\n.\nsetItem\n(\na\n,\n \n1\n);\n\n\n// gashapon.setItem(\na\n, 1).setItem(\nb\n, 2).setItem(\nc\n, 3);\n\n\n\n\n\nAdd item\n\n\ngashapon\n.\naddItem\n(\na\n,\n1\n);\n\n\n\n\n\nRemove item\n\n\nRemove item\n\n\ngashapon\n.\nremoveItem\n(\na\n);\n\n\n// gashapon.removeItem(\nb\n).gashapon.removeItem(\nc\n);\n\n\n\n\n\nRemove all items\n\n\ngashapon\n.\nremoveAllItems\n();\n\n\n\n\n\nCurrent status\n\n\nGet current status\n\n\nvar\n \nstatus\n \n=\n \ngashapon\n.\ntoJSON\n();\n\n\n\n\n\nClone object\n\n\nvar\n \nstatus\n \n=\n \ngashapon\n.\ntoJSON\n();\n\n\nvar\n \ngashapon2\n \n=\n \nnew\n \nGashapon\n(\nstatus\n);\n\n\n\n\n\nOverwrite current status\n\n\nvar\n \nstatus\n \n=\n \ngashapon\n.\ntoJSON\n();\n\n\n// gashapon.next()...\n\n\ngashapon\n.\nresetFromJSON\n(\nstatus\n);\n\n\n\n\n\nGet items\n\n\nFor each item\n\n\ngashapon\n.\neachItem\n(\nfunction\n(\nname\n,\n \ncount\n){\n\n    \nconsole\n.\nlog\n(\nname\n \n+\n \n: \n \n+\n \ncount\n);\n\n\n});\n\n\n\n\n\nGet items\n\n\nvar\n \nitems\n \n=\n \ngashapon\n.\ngetItems\n();", 
-            "title": "Gashapon"
-        }, 
-        {
-            "location": "/gashaponplugin/index.html#introduction", 
-            "text": "Pick random item from box.   Author: Rex  A plugin of scene", 
-            "title": "Introduction"
-        }, 
-        {
-            "location": "/gashaponplugin/index.html#source-code", 
-            "text": "Link", 
-            "title": "Source code"
-        }, 
-        {
-            "location": "/gashaponplugin/index.html#usage", 
-            "text": "", 
-            "title": "Usage"
-        }, 
-        {
-            "location": "/gashaponplugin/index.html#create-instance", 
-            "text": "var   gashapon   =   new   GashaponPlugin ( scene ,   { \n     mode :   shuffle ,    // 0| shuffle |1| random \n     items :   {    // name:count \n         a : 1 ,  \n         b : 2 ,  \n         c : 3  \n     }, \n     reload :   true ,       // true|false  });   Properties   mode :   'shuffle' , or  0  : pick item from box without put it back.  'random' , or  1  : pick item from box then put it back.    reload : set  true  to reload items when box is empty for  shuffle  mode.  items : initial items in box", 
-            "title": "Create instance"
-        }, 
-        {
-            "location": "/gashaponplugin/index.html#pick-item", 
-            "text": "", 
-            "title": "Pick item"
-        }, 
-        {
-            "location": "/gashaponplugin/index.html#pick-a-random-item", 
-            "text": "var   item   =   gashapon . next ();    return  null  if pick nothing", 
-            "title": "Pick a random item"
-        }, 
-        {
-            "location": "/gashaponplugin/index.html#pick-specific-item", 
-            "text": "var   item   =   gashapon . next ( a );    return  null  if pick nothing", 
-            "title": "Pick specific item"
-        }, 
-        {
-            "location": "/gashaponplugin/index.html#last-picked-item", 
-            "text": "var   item   =   gashapon . result ;", 
-            "title": "Last picked item"
-        }, 
-        {
-            "location": "/gashaponplugin/index.html#set-item", 
-            "text": "", 
-            "title": "Set item"
-        }, 
-        {
-            "location": "/gashaponplugin/index.html#set-item_1", 
-            "text": "gashapon . setItem ( a ,   1 );  // gashapon.setItem( a , 1).setItem( b , 2).setItem( c , 3);", 
-            "title": "Set item"
-        }, 
-        {
-            "location": "/gashaponplugin/index.html#add-item", 
-            "text": "gashapon . addItem ( a , 1 );", 
-            "title": "Add item"
-        }, 
-        {
-            "location": "/gashaponplugin/index.html#remove-item", 
-            "text": "", 
-            "title": "Remove item"
-        }, 
-        {
-            "location": "/gashaponplugin/index.html#remove-item_1", 
-            "text": "gashapon . removeItem ( a );  // gashapon.removeItem( b ).gashapon.removeItem( c );", 
-            "title": "Remove item"
-        }, 
-        {
-            "location": "/gashaponplugin/index.html#remove-all-items", 
-            "text": "gashapon . removeAllItems ();", 
-            "title": "Remove all items"
-        }, 
-        {
-            "location": "/gashaponplugin/index.html#current-status", 
-            "text": "", 
-            "title": "Current status"
-        }, 
-        {
-            "location": "/gashaponplugin/index.html#get-current-status", 
-            "text": "var   status   =   gashapon . toJSON ();", 
-            "title": "Get current status"
-        }, 
-        {
-            "location": "/gashaponplugin/index.html#clone-object", 
-            "text": "var   status   =   gashapon . toJSON ();  var   gashapon2   =   new   Gashapon ( status );", 
-            "title": "Clone object"
-        }, 
-        {
-            "location": "/gashaponplugin/index.html#overwrite-current-status", 
-            "text": "var   status   =   gashapon . toJSON ();  // gashapon.next()...  gashapon . resetFromJSON ( status );", 
-            "title": "Overwrite current status"
-        }, 
-        {
-            "location": "/gashaponplugin/index.html#get-items", 
-            "text": "", 
-            "title": "Get items"
-        }, 
-        {
-            "location": "/gashaponplugin/index.html#for-each-item", 
-            "text": "gashapon . eachItem ( function ( name ,   count ){ \n     console . log ( name   +   :    +   count );  });", 
-            "title": "For each item"
-        }, 
-        {
-            "location": "/gashaponplugin/index.html#get-items_1", 
-            "text": "var   items   =   gashapon . getItems ();", 
-            "title": "Get items"
         }, 
         {
             "location": "/touchevents/index.html", 
@@ -439,6 +199,246 @@
             "location": "/dragcursorplugin/index.html#assign-origin-point", 
             "text": "Origin point is the dragging start point, or assign origin point when creating instance.  var   dragCursor   =   new   DragCursorPlugin ( scene ,   { \n     // ... \n     origin :   {         // assign origin point to (400,300) \n         x :   400 , \n         y :   300 \n     }  });   Or assign origin point by  setOrigin(x, y)  function.  dragCursor . setOrigin ( 400 ,   300 );    // assign origin point to (400,300)", 
             "title": "Assign origin point"
+        }, 
+        {
+            "location": "/text/index.html", 
+            "text": "Introduction\n\n\nDrawing text on canvas, built-in game object of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nSnapshot\n\n\nvar\n \ntxt\n \n=\n \nscene\n.\nadd\n.\ntext\n(\nx\n,\n \ny\n,\n \nhello\n);\n\n\ntxt\n.\nsetText\n(\nworld\n);\n\n\n\n\n\nAdd text object\n\n\nvar\n \ntxt\n \n=\n \nscene\n.\nadd\n.\ntext\n(\nx\n,\n \ny\n,\n \nhello\n);\n\n\n// var txt = scene.add.text(x, y, \nhello\n, { fontFamily: \nArial\n, fontSize: 64, color: \n#00ff00\n });\n\n\n\n\n\nDefault style\n\n\n{\n\n    \nfontFamily\n:\n \nCourier\n,\n\n    \nfontSize\n:\n \n16px\n,\n\n    \nfontStyle\n:\n \n,\n\n    \nbackgroundColor\n:\n \nnull\n,\n\n    \ncolor\n:\n \n#fff\n,\n\n    \nstroke\n:\n \n#fff\n,\n\n    \nstrokeThickness\n:\n \n0\n,\n\n    \nshadow\n:\n \n{\n\n        \noffsetX\n:\n \n0\n,\n\n        \noffsetY\n:\n \n0\n,\n\n        \ncolor\n:\n \n#000\n,\n\n        \nblur\n:\n \n0\n,\n\n        \nstroke\n:\n \nfalse\n,\n\n        \nfill\n:\n \nfalse\n\n    \n},\n\n    \nalign\n:\n \nleft\n,\n  \n// align only works with multi-lined text\n\n    \nmaxLines\n:\n \n0\n,\n\n    \nfixedWidth\n:\n \n0\n,\n\n    \nfixedHeight\n:\n \n0\n,\n\n    \nrtl\n:\n \nfalse\n,\n\n    \ntestString\n:\n \n|M\u00c9qgy\n,\n\n    \nwordWrap\n:\n \n{\n\n        \nwidth\n:\n \nnull\n,\n\n        \ncallback\n:\n \nnull\n,\n\n        \ncallbackScope\n:\n \nnull\n,\n\n        \nuseAdvancedWrap\n:\n \nfalse\n\n    \n}\n\n\n}\n\n\n\n\n\nAdd text from JSON\n\n\nvar\n \ntxt\n \n=\n \nscene\n.\nmake\n.\ntext\n({\n\n    \nx\n:\n \n100\n,\n\n    \ny\n:\n \n100\n,\n\n    \npadding\n:\n \n{\n\n        \nleft\n:\n \n64\n,\n\n        \nright\n:\n \n16\n,\n\n        \ntop\n:\n \n20\n,\n\n        \nbottom\n:\n \n40\n        \n        \n//x: 32,    // 32px padding on the left/right\n\n        \n//y: 16     // 16px padding on the top/bottom\n\n    \n},\n\n    \ntext\n:\n \nText\\nGame Object\\nCreated from config\n,\n\n    \nstyle\n:\n \n{\n\n        \nfontSize\n:\n \n64px\n,\n\n        \nfontFamily\n:\n \nArial\n,\n\n        \ncolor\n:\n \n#ffffff\n,\n\n        \nalign\n:\n \ncenter\n,\n\n        \nbackgroundColor\n:\n \n#ff00ff\n\n    \n}\n\n\n});\n\n\n\n\n\nWord wrap\n\n\nWrap by width\n\n\nvar\n \ntxt\n \n=\n \nscene\n.\nmake\n.\ntext\n({\n\n    \nx\n:\n \n400\n,\n\n    \ny\n:\n \n100\n,\n\n    \ntext\n:\n \nThe sky above the port was the color of television, tuned to a dead channel.\n,\n\n    \norigin\n:\n \n{\n \nx\n:\n \n0.5\n,\n \ny\n:\n \n0.5\n \n},\n\n    \nstyle\n:\n \n{\n\n        \nfont\n:\n \nbold 25px Arial\n,\n\n        \nfill\n:\n \nwhite\n,\n\n        \nwordWrap\n:\n \n{\n \nwidth\n:\n \n300\n \n}\n\n    \n}\n\n\n});\n\n\n\n\n\nWrap by callback\n\n\nvar\n \ntxt\n \n=\n \nscene\n.\nmake\n.\ntext\n({\n\n    \nx\n:\n \n400\n,\n\n    \ny\n:\n \n300\n,\n\n    \ntext\n:\n \nThe sky above the port was the color of television, tuned to a dead channel.\n,\n\n    \norigin\n:\n \n0.5\n,\n\n    \nstyle\n:\n \n{\n\n        \nfont\n:\n \nbold 30px Arial\n,\n\n        \nfill\n:\n \nwhite\n,\n\n        \nwordWrap\n:\n \n{\n \ncallback\n:\n \nwordWrap\n,\n \nscope\n:\n \nthis\n \n}\n\n    \n}\n\n\n});\n\n\n\nfunction\n \nwordWrap\n \n(\ntext\n,\n \ntextObject\n)\n\n\n{\n\n    \n// First parameter will be the string that needs to be wrapped\n\n    \n// Second parameter will be the Text game object that is being wrapped currently\n\n\n    \n// This wrap just puts each word on a separate line, but you could inject your own\n\n    \n// language-specific logic here.\n\n    \nvar\n \nwords\n \n=\n \ntext\n.\nsplit\n(\n \n);\n\n\n    \n// You can return either an array of individual lines or a string with line breaks (e.g. \\n) in\n\n    \n// the correct place.\n\n    \nreturn\n \nwords\n;\n\n\n}\n\n\n\n\n\nSet text\n\n\ntxt\n.\nsetText\n(\nworld\n);\n\n\n// var curContent = txt.text;\n\n\n\n\n\nSet style\n\n\ntxt\n.\nsetStyle\n(\nstyle\n);\n\n\ntxt\n.\nsetFont\n(\nfont\n);\n\n\ntxt\n.\nsetFontFamily\n(\nfamily\n);\n\n\ntxt\n.\nsetFontSize\n(\nsize\n);\n\n\ntxt\n.\nsetFontStyle\n(\nstyle\n);\n\n\n\n\n\nSet color\n\n\ntxt\n.\nsetColor\n(\ncolor\n);\n\n\ntxt\n.\nsetStroke\n(\ncolor\n,\n \nthickness\n);\n\n\ntxt\n.\nsetBackgroundColor\n(\ncolor\n);\n\n\ntxt\n.\nsetFill\n(\ncolor\n);\n\n\n\n\n\nSet shadow\n\n\ntxt\n.\nsetShadow\n(\nx\n,\n \ny\n,\n \ncolor\n,\n \nblur\n,\n \nshadowStroke\n,\n \nshadowFill\n);\n\n\ntxt\n.\nsetShadowOffset\n(\nx\n,\n \ny\n);\n\n\ntxt\n.\nsetShadowColor\n(\ncolor\n);\n\n\ntxt\n.\nsetShadowBlur\n(\nblur\n);\n\n\ntxt\n.\nsetShadowStroke\n(\nenabled\n);\n\n\ntxt\n.\nsetShadowFill\n(\nenabled\n);\n\n\n\n\n\nSet padding\n\n\ntxt\n.\nsetPadding\n(\nleft\n,\n \ntop\n,\n \nright\n,\n \nbottom\n);\n\n\ntxt\n.\nsetPadding\n({});\n\n\n\n\n\nSet max lines\n\n\ntxt\n.\nsetMaxLines\n(\nmax\n);\n\n\n\n\n\nSet canvas size\n\n\ntxt\n.\nsetFixedSize\n(\nwidth\n,\n \nheight\n);", 
+            "title": "Text"
+        }, 
+        {
+            "location": "/text/index.html#introduction", 
+            "text": "Drawing text on canvas, built-in game object of phaser.   Author: Richard Davey", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/text/index.html#usage", 
+            "text": "", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/text/index.html#snapshot", 
+            "text": "var   txt   =   scene . add . text ( x ,   y ,   hello );  txt . setText ( world );", 
+            "title": "Snapshot"
+        }, 
+        {
+            "location": "/text/index.html#add-text-object", 
+            "text": "var   txt   =   scene . add . text ( x ,   y ,   hello );  // var txt = scene.add.text(x, y,  hello , { fontFamily:  Arial , fontSize: 64, color:  #00ff00  });   Default style  { \n     fontFamily :   Courier , \n     fontSize :   16px , \n     fontStyle :   , \n     backgroundColor :   null , \n     color :   #fff , \n     stroke :   #fff , \n     strokeThickness :   0 , \n     shadow :   { \n         offsetX :   0 , \n         offsetY :   0 , \n         color :   #000 , \n         blur :   0 , \n         stroke :   false , \n         fill :   false \n     }, \n     align :   left ,    // align only works with multi-lined text \n     maxLines :   0 , \n     fixedWidth :   0 , \n     fixedHeight :   0 , \n     rtl :   false , \n     testString :   |M\u00c9qgy , \n     wordWrap :   { \n         width :   null , \n         callback :   null , \n         callbackScope :   null , \n         useAdvancedWrap :   false \n     }  }   Add text from JSON  var   txt   =   scene . make . text ({ \n     x :   100 , \n     y :   100 , \n     padding :   { \n         left :   64 , \n         right :   16 , \n         top :   20 , \n         bottom :   40         \n         //x: 32,    // 32px padding on the left/right \n         //y: 16     // 16px padding on the top/bottom \n     }, \n     text :   Text\\nGame Object\\nCreated from config , \n     style :   { \n         fontSize :   64px , \n         fontFamily :   Arial , \n         color :   #ffffff , \n         align :   center , \n         backgroundColor :   #ff00ff \n     }  });", 
+            "title": "Add text object"
+        }, 
+        {
+            "location": "/text/index.html#word-wrap", 
+            "text": "Wrap by width  var   txt   =   scene . make . text ({ \n     x :   400 , \n     y :   100 , \n     text :   The sky above the port was the color of television, tuned to a dead channel. , \n     origin :   {   x :   0.5 ,   y :   0.5   }, \n     style :   { \n         font :   bold 25px Arial , \n         fill :   white , \n         wordWrap :   {   width :   300   } \n     }  });   Wrap by callback  var   txt   =   scene . make . text ({ \n     x :   400 , \n     y :   300 , \n     text :   The sky above the port was the color of television, tuned to a dead channel. , \n     origin :   0.5 , \n     style :   { \n         font :   bold 30px Arial , \n         fill :   white , \n         wordWrap :   {   callback :   wordWrap ,   scope :   this   } \n     }  });  function   wordWrap   ( text ,   textObject )  { \n     // First parameter will be the string that needs to be wrapped \n     // Second parameter will be the Text game object that is being wrapped currently \n\n     // This wrap just puts each word on a separate line, but you could inject your own \n     // language-specific logic here. \n     var   words   =   text . split (   ); \n\n     // You can return either an array of individual lines or a string with line breaks (e.g. \\n) in \n     // the correct place. \n     return   words ;  }", 
+            "title": "Word wrap"
+        }, 
+        {
+            "location": "/text/index.html#set-text", 
+            "text": "txt . setText ( world );  // var curContent = txt.text;", 
+            "title": "Set text"
+        }, 
+        {
+            "location": "/text/index.html#set-style", 
+            "text": "txt . setStyle ( style );  txt . setFont ( font );  txt . setFontFamily ( family );  txt . setFontSize ( size );  txt . setFontStyle ( style );", 
+            "title": "Set style"
+        }, 
+        {
+            "location": "/text/index.html#set-color", 
+            "text": "txt . setColor ( color );  txt . setStroke ( color ,   thickness );  txt . setBackgroundColor ( color );  txt . setFill ( color );", 
+            "title": "Set color"
+        }, 
+        {
+            "location": "/text/index.html#set-shadow", 
+            "text": "txt . setShadow ( x ,   y ,   color ,   blur ,   shadowStroke ,   shadowFill );  txt . setShadowOffset ( x ,   y );  txt . setShadowColor ( color );  txt . setShadowBlur ( blur );  txt . setShadowStroke ( enabled );  txt . setShadowFill ( enabled );", 
+            "title": "Set shadow"
+        }, 
+        {
+            "location": "/text/index.html#set-padding", 
+            "text": "txt . setPadding ( left ,   top ,   right ,   bottom );  txt . setPadding ({});", 
+            "title": "Set padding"
+        }, 
+        {
+            "location": "/text/index.html#set-max-lines", 
+            "text": "txt . setMaxLines ( max );", 
+            "title": "Set max lines"
+        }, 
+        {
+            "location": "/text/index.html#set-canvas-size", 
+            "text": "txt . setFixedSize ( width ,   height );", 
+            "title": "Set canvas size"
+        }, 
+        {
+            "location": "/image/index.html", 
+            "text": "Introduction\n\n\nDisplay of static images, built-in game object of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nLoad texture\n\n\nscene\n.\nload\n.\nimage\n(\nkey\n,\n \npath\n/\nto\n/\nimage\n);\n\n\n\n\n\nAdd image object\n\n\nvar\n \nimage\n \n=\n \nscene\n.\nadd\n.\nimage\n(\nx\n,\n \ny\n,\n \nkey\n);\n\n\n\n\n\nAdd image from JSON\n\n\nvar\n \nimage\n \n=\n \nscene\n.\nmake\n.\nimage\n({\n\n    \nx\n:\n \n100\n,\n\n    \ny\n:\n \n100\n,\n\n    \nkey\n:\n \n\n\n});", 
+            "title": "Image"
+        }, 
+        {
+            "location": "/image/index.html#introduction", 
+            "text": "Display of static images, built-in game object of phaser.   Author: Richard Davey", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/image/index.html#usage", 
+            "text": "", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/image/index.html#load-texture", 
+            "text": "scene . load . image ( key ,   path / to / image );", 
+            "title": "Load texture"
+        }, 
+        {
+            "location": "/image/index.html#add-image-object", 
+            "text": "var   image   =   scene . add . image ( x ,   y ,   key );", 
+            "title": "Add image object"
+        }, 
+        {
+            "location": "/image/index.html#add-image-from-json", 
+            "text": "var   image   =   scene . make . image ({ \n     x :   100 , \n     y :   100 , \n     key :    });", 
+            "title": "Add image from JSON"
+        }, 
+        {
+            "location": "/date/index.html", 
+            "text": "Introduction\n\n\nGet current date or unix-timestamp.\n\n\n\n\nAuthor: Built-in javascript function\n\n\n\n\nUsage\n\n\nReference\n\n\nCreate instance\n\n\nvar\n \nd\n \n=\n \nnew\n \nDate\n();\n\n\nvar\n \nd\n \n=\n \nnew\n \nDate\n(\ntimestamp\n);\n\n\nvar\n \nd\n \n=\n \nnew\n \nDate\n(\ndateString\n);\n\n\nvar\n \nd\n \n=\n \nnew\n \nDate\n(\nyear\n,\n \nmonth\n,\n \nday\n,\n \nhours\n,\n \nminutes\n,\n \nseconds\n,\n \nmilliseconds\n);\n\n\n\n\n\nGet date\n\n\nvar\n \nyear\n \n=\n \nd\n.\ngetFullYear\n();\n    \n// returns the year\n\n\nvar\n \nmonth\n \n=\n \nd\n.\ngetMonth\n();\n      \n// returns the month (0-11)\n\n\nvar\n \ndate\n \n=\n \nd\n.\ngetDate\n();\n        \n// returns the day of the month (1-31)\n\n\nvar\n \nday\n \n=\n \nd\n.\ngetDay\n();\n          \n// returns the day of the week\n\n\nvar\n \nhour\n \n=\n \nd\n.\ngetHours\n();\n       \n// returns the hour (0-23)\n\n\nvar\n \nmin\n \n=\n \nd\n.\ngetMinutes\n();\n      \n// returns the minutes (0-59)\n\n\nvar\n \nsec\n \n=\n \nd\n.\ngetSeconds\n();\n      \n// returns the seconds (0-59)\n\n\nvar\n \nms\n \n=\n \nd\n.\ngetMilliseconds\n();\n  \n// returns the milliseconds (0-999)\n\n\n\n\n\nGet unix-timestamp\n\n\nvar\n \ntimestamp\n \n=\n \nd\n.\nnow\n();\n       \n// unix-timestamp in milliseconds\n\n\n\n\n\nTo string\n\n\nvar\n \ns\n \n=\n \nd\n.\ntoLocaleString\n();\n   \n// locale conventions\n\n\nvar\n \niso\n \n=\n \nd\n.\ntoISOString\n();\n    \n// ISO standard", 
+            "title": "Date"
+        }, 
+        {
+            "location": "/date/index.html#introduction", 
+            "text": "Get current date or unix-timestamp.   Author: Built-in javascript function", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/date/index.html#usage", 
+            "text": "Reference", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/date/index.html#create-instance", 
+            "text": "var   d   =   new   Date ();  var   d   =   new   Date ( timestamp );  var   d   =   new   Date ( dateString );  var   d   =   new   Date ( year ,   month ,   day ,   hours ,   minutes ,   seconds ,   milliseconds );", 
+            "title": "Create instance"
+        }, 
+        {
+            "location": "/date/index.html#get-date", 
+            "text": "var   year   =   d . getFullYear ();      // returns the year  var   month   =   d . getMonth ();        // returns the month (0-11)  var   date   =   d . getDate ();          // returns the day of the month (1-31)  var   day   =   d . getDay ();            // returns the day of the week  var   hour   =   d . getHours ();         // returns the hour (0-23)  var   min   =   d . getMinutes ();        // returns the minutes (0-59)  var   sec   =   d . getSeconds ();        // returns the seconds (0-59)  var   ms   =   d . getMilliseconds ();    // returns the milliseconds (0-999)", 
+            "title": "Get date"
+        }, 
+        {
+            "location": "/date/index.html#get-unix-timestamp", 
+            "text": "var   timestamp   =   d . now ();         // unix-timestamp in milliseconds", 
+            "title": "Get unix-timestamp"
+        }, 
+        {
+            "location": "/date/index.html#to-string", 
+            "text": "var   s   =   d . toLocaleString ();     // locale conventions  var   iso   =   d . toISOString ();      // ISO standard", 
+            "title": "To string"
+        }, 
+        {
+            "location": "/gashaponplugin/index.html", 
+            "text": "Introduction\n\n\nPick random item from box.\n\n\n\n\nAuthor: Rex\n\n\nA plugin of scene\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\nvar\n \ngashapon\n \n=\n \nnew\n \nGashaponPlugin\n(\nscene\n,\n \n{\n\n    \nmode\n:\n \nshuffle\n,\n  \n// 0|\nshuffle\n|1|\nrandom\n\n    \nitems\n:\n \n{\n  \n// name:count\n\n        \na\n:\n1\n,\n \n        \nb\n:\n2\n,\n \n        \nc\n:\n3\n \n    \n},\n\n    \nreload\n:\n \ntrue\n,\n     \n// true|false\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\nmode : \n\n\n'shuffle'\n, or \n0\n : pick item from box without put it back.\n\n\n'random'\n, or \n1\n : pick item from box then put it back.\n\n\n\n\n\n\nreload : set \ntrue\n to reload items when box is empty for \nshuffle\n mode.\n\n\nitems : initial items in box\n\n\n\n\nPick item\n\n\nPick a random item\n\n\nvar\n \nitem\n \n=\n \ngashapon\n.\nnext\n();\n\n\n\n\n\n\n\nreturn \nnull\n if pick nothing\n\n\n\n\nPick specific item\n\n\nvar\n \nitem\n \n=\n \ngashapon\n.\nnext\n(\na\n);\n\n\n\n\n\n\n\nreturn \nnull\n if pick nothing\n\n\n\n\nLast picked item\n\n\nvar\n \nitem\n \n=\n \ngashapon\n.\nresult\n;\n\n\n\n\n\nSet item\n\n\nSet item\n\n\ngashapon\n.\nsetItem\n(\na\n,\n \n1\n);\n\n\n// gashapon.setItem(\na\n, 1).setItem(\nb\n, 2).setItem(\nc\n, 3);\n\n\n\n\n\nAdd item\n\n\ngashapon\n.\naddItem\n(\na\n,\n1\n);\n\n\n\n\n\nRemove item\n\n\nRemove item\n\n\ngashapon\n.\nremoveItem\n(\na\n);\n\n\n// gashapon.removeItem(\nb\n).gashapon.removeItem(\nc\n);\n\n\n\n\n\nRemove all items\n\n\ngashapon\n.\nremoveAllItems\n();\n\n\n\n\n\nCurrent status\n\n\nGet current status\n\n\nvar\n \nstatus\n \n=\n \ngashapon\n.\ntoJSON\n();\n\n\n\n\n\nClone object\n\n\nvar\n \nstatus\n \n=\n \ngashapon\n.\ntoJSON\n();\n\n\nvar\n \ngashapon2\n \n=\n \nnew\n \nGashapon\n(\nstatus\n);\n\n\n\n\n\nOverwrite current status\n\n\nvar\n \nstatus\n \n=\n \ngashapon\n.\ntoJSON\n();\n\n\n// gashapon.next()...\n\n\ngashapon\n.\nresetFromJSON\n(\nstatus\n);\n\n\n\n\n\nGet items\n\n\nFor each item\n\n\ngashapon\n.\neachItem\n(\nfunction\n(\nname\n,\n \ncount\n){\n\n    \nconsole\n.\nlog\n(\nname\n \n+\n \n: \n \n+\n \ncount\n);\n\n\n});\n\n\n\n\n\nGet items\n\n\nvar\n \nitems\n \n=\n \ngashapon\n.\ngetItems\n();", 
+            "title": "Gashapon"
+        }, 
+        {
+            "location": "/gashaponplugin/index.html#introduction", 
+            "text": "Pick random item from box.   Author: Rex  A plugin of scene", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/gashaponplugin/index.html#source-code", 
+            "text": "Link", 
+            "title": "Source code"
+        }, 
+        {
+            "location": "/gashaponplugin/index.html#usage", 
+            "text": "", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/gashaponplugin/index.html#create-instance", 
+            "text": "var   gashapon   =   new   GashaponPlugin ( scene ,   { \n     mode :   shuffle ,    // 0| shuffle |1| random \n     items :   {    // name:count \n         a : 1 ,  \n         b : 2 ,  \n         c : 3  \n     }, \n     reload :   true ,       // true|false  });   Properties   mode :   'shuffle' , or  0  : pick item from box without put it back.  'random' , or  1  : pick item from box then put it back.    reload : set  true  to reload items when box is empty for  shuffle  mode.  items : initial items in box", 
+            "title": "Create instance"
+        }, 
+        {
+            "location": "/gashaponplugin/index.html#pick-item", 
+            "text": "", 
+            "title": "Pick item"
+        }, 
+        {
+            "location": "/gashaponplugin/index.html#pick-a-random-item", 
+            "text": "var   item   =   gashapon . next ();    return  null  if pick nothing", 
+            "title": "Pick a random item"
+        }, 
+        {
+            "location": "/gashaponplugin/index.html#pick-specific-item", 
+            "text": "var   item   =   gashapon . next ( a );    return  null  if pick nothing", 
+            "title": "Pick specific item"
+        }, 
+        {
+            "location": "/gashaponplugin/index.html#last-picked-item", 
+            "text": "var   item   =   gashapon . result ;", 
+            "title": "Last picked item"
+        }, 
+        {
+            "location": "/gashaponplugin/index.html#set-item", 
+            "text": "", 
+            "title": "Set item"
+        }, 
+        {
+            "location": "/gashaponplugin/index.html#set-item_1", 
+            "text": "gashapon . setItem ( a ,   1 );  // gashapon.setItem( a , 1).setItem( b , 2).setItem( c , 3);", 
+            "title": "Set item"
+        }, 
+        {
+            "location": "/gashaponplugin/index.html#add-item", 
+            "text": "gashapon . addItem ( a , 1 );", 
+            "title": "Add item"
+        }, 
+        {
+            "location": "/gashaponplugin/index.html#remove-item", 
+            "text": "", 
+            "title": "Remove item"
+        }, 
+        {
+            "location": "/gashaponplugin/index.html#remove-item_1", 
+            "text": "gashapon . removeItem ( a );  // gashapon.removeItem( b ).gashapon.removeItem( c );", 
+            "title": "Remove item"
+        }, 
+        {
+            "location": "/gashaponplugin/index.html#remove-all-items", 
+            "text": "gashapon . removeAllItems ();", 
+            "title": "Remove all items"
+        }, 
+        {
+            "location": "/gashaponplugin/index.html#current-status", 
+            "text": "", 
+            "title": "Current status"
+        }, 
+        {
+            "location": "/gashaponplugin/index.html#get-current-status", 
+            "text": "var   status   =   gashapon . toJSON ();", 
+            "title": "Get current status"
+        }, 
+        {
+            "location": "/gashaponplugin/index.html#clone-object", 
+            "text": "var   status   =   gashapon . toJSON ();  var   gashapon2   =   new   Gashapon ( status );", 
+            "title": "Clone object"
+        }, 
+        {
+            "location": "/gashaponplugin/index.html#overwrite-current-status", 
+            "text": "var   status   =   gashapon . toJSON ();  // gashapon.next()...  gashapon . resetFromJSON ( status );", 
+            "title": "Overwrite current status"
+        }, 
+        {
+            "location": "/gashaponplugin/index.html#get-items", 
+            "text": "", 
+            "title": "Get items"
+        }, 
+        {
+            "location": "/gashaponplugin/index.html#for-each-item", 
+            "text": "gashapon . eachItem ( function ( name ,   count ){ \n     console . log ( name   +   :    +   count );  });", 
+            "title": "For each item"
+        }, 
+        {
+            "location": "/gashaponplugin/index.html#get-items_1", 
+            "text": "var   items   =   gashapon . getItems ();", 
+            "title": "Get items"
         }
     ]
 }

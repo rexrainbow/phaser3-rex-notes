@@ -3,20 +3,21 @@ theme: 'material'
 
 pages:
 - Home: index.md
-- Game object:
-    - Image: image.md
-    - Text: text.md
 - Data structure:
     - Filter: filter.md
-- Date:
-    - Date: date.md
-- Random:
-    - Gashapon: gashaponplugin.md
 - Input:
     - Touch events: touchevents.md
     - Keyboard events: keyboardevents.md
     - Drag: dragplugin.md
     - Drag to CursorKeys: dragcursorplugin.md
+- Text:
+    - Text: text.md
+- Sprite:
+    - Image: image.md
+- Date:
+    - Date: date.md
+- Random:
+    - Gashapon: gashaponplugin.md    
 
 extra_javascript:
 - js/mermaid/mermaid.min.js
