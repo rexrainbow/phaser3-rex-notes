@@ -1,7 +1,6 @@
 'use strict'
 
 import Phaser from 'phaser';
-//import GetEventEmmiter from './../utils/system/GetEventEmmiter.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 
@@ -39,7 +38,7 @@ class DragDropPlugin {
     }
 
     boot() {
-        //var eventEmitter = GetEventEmmiter(this.gameobject);
+        //var eventEmitter = this.gameobject;
         //if (eventEmitter) {
         //    eventEmitter.on('shutdown', this.shutdown, this);
         //    eventEmitter.on('destroy', this.destroy, this);
