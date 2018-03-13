@@ -2,8 +2,18 @@
     "docs": [
         {
             "location": "/index.html", 
-            "text": "Phaser 3 engine", 
+            "text": "Phaser\n\n\nPhaser\n is a fun, free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering.\n\n\nList of my plugins\n\n\n\n\nDrag\n: Drag game object.\n\n\nDrag-cursor\n: Simulate curosr keys according dragging events.\n\n\nGashapon\n: Pick random item from box.\n\n\nTyping\n: Typing text on text object.", 
             "title": "Home"
+        }, 
+        {
+            "location": "/index.html#phaser", 
+            "text": "Phaser  is a fun, free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering.", 
+            "title": "Phaser"
+        }, 
+        {
+            "location": "/index.html#list-of-my-plugins", 
+            "text": "Drag : Drag game object.  Drag-cursor : Simulate curosr keys according dragging events.  Gashapon : Pick random item from box.  Typing : Typing text on text object.", 
+            "title": "List of my plugins"
         }, 
         {
             "location": "/filter/index.html", 
@@ -267,12 +277,12 @@
         }, 
         {
             "location": "/texttypingplugin/index.html", 
-            "text": "Introduction\n\n\nTyping on text object.\n\n\n\n\nAuthor: Rex\n\n\nA plugin of text object\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\ntxt\n.\ntyping\n \n=\n \nnew\n \nTextTypingPlugin\n(\ntxt\n,\n \n{\n\n    \n//speed: 333,       // typing speed in ms\n\n    \n//typeMode: 0,      //0|\nleft-to-right\n|1|\nright-to-left\n|2|\nmiddle-to-sides\n|3|\nsides-to-middle\n\n    \n//setTextCallback: function(text, isLastChar, insertIdx){ return text; }  // callback before set-text\n\n    \n//setTextCallbackScope: null\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\nspeed: typing speed in ms\n\n\ntypeMode :\n\n\n'left-to-right'\n, or \n0\n : typing characters from left to right.\n\n\n'right-to-left'\n, or \n1\n : typing characters from right to left.\n\n\n'middle-to-sides'\n, or \n2\n : typing characters from middle to sides, optional.\n\n\n'sides-to-middle'\n, or \n3\n : typing characters from sides to middle.    \n\n\n\n\n\n\nsetTextCallback : callback befor set-text, to decorate display text.\n    \nfunction\n(\ntext\n,\n \nisLastChar\n,\n \ninsertIdx\n)\n \n{\n \nreturn\n \ntext\n;\n \n}\n\n\n\n\nsetTextCallbackScope : scope of setTextCallback function.\n\n\n\n\nStart typing\n\n\ntxt\n.\ntyping\n.\nstart\n(\nABCDEFG\n);\n\n\n// txt.typing.start(\nABCDEFG\n, 333);  // speed in ms\n\n\n\n\n\nEvents\n\n\n\n\nOn typing :\n\n\n\n\ntxt\n.\non\n(\ntyping\n,\n \nfunction\n(){});\n\n\n\n\n\n\n\nOn typing completed :\n\n\n\n\ntxt\n.\non\n(\ntypingcompleted\n,\n \nfunction\n(){});\n\n\n\n\n\nOther commands\n\n\n\n\nIs-typing state\n\n\n\n\nvar\n \nisTyping\n \n=\n \ntxt\n.\ntyping\n.\nisTyping\n;\n\n\n\n\n\n\n\nStop typing\n\n\n\n\ntxt\n.\ntyping\n.\nstop\n();\n\n\n// txt.typing.stop(true);;  // stop and show all text\n\n\n\n\n\n\n\nPause typing\n\n\n\n\ntxt\n.\ntyping\n.\npause\n();\n\n\n\n\n\n\n\nResume typing\n\n\n\n\ntxt\n.\ntyping\n.\nresume\n();\n\n\n\n\n\n\n\nSet typing speed\n\n\n\n\ntxt\n.\ntyping\n.\nsetTypeSpeed\n(\nspeed\n);\n  \n// speed in ms\n\n\n\n\n\nSet speed in \ntyping\n event or setTextCallback to change typing speed of remaining text.\n\n\n\n\nTyping more text\n\n\n\n\ntxt\n.\ntyping\n.\nappendText\n(\ntext\n);\n\n\n\n\n\n\n\nSet typing mode\n\n\n\n\ntxt\n.\ntyping\n.\nsetTypeMode\n(\nmode\n);\n  \n//0|\nleft-to-right\n|1|\nright-to-left\n|2|\nmiddle-to-sides\n|3|\nsides-to-middle", 
+            "text": "Introduction\n\n\nTyping text on text object.\n\n\n\n\nAuthor: Rex\n\n\nA plugin of text object\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\ntxt\n.\ntyping\n \n=\n \nnew\n \nTextTypingPlugin\n(\ntxt\n,\n \n{\n\n    \n//speed: 333,       // typing speed in ms\n\n    \n//typeMode: 0,      //0|\nleft-to-right\n|1|\nright-to-left\n|2|\nmiddle-to-sides\n|3|\nsides-to-middle\n\n    \n//setTextCallback: function(text, isLastChar, insertIdx){ return text; }  // callback before set-text\n\n    \n//setTextCallbackScope: null\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\nspeed: typing speed in ms\n\n\ntypeMode :\n\n\n'left-to-right'\n, or \n0\n : typing characters from left to right.\n\n\n'right-to-left'\n, or \n1\n : typing characters from right to left.\n\n\n'middle-to-sides'\n, or \n2\n : typing characters from middle to sides, optional.\n\n\n'sides-to-middle'\n, or \n3\n : typing characters from sides to middle.    \n\n\n\n\n\n\nsetTextCallback : callback befor set-text, to decorate display text.\n    \nfunction\n(\ntext\n,\n \nisLastChar\n,\n \ninsertIdx\n)\n \n{\n \nreturn\n \ntext\n;\n \n}\n\n\n\n\nsetTextCallbackScope : scope of setTextCallback function.\n\n\n\n\nStart typing\n\n\ntxt\n.\ntyping\n.\nstart\n(\nABCDEFG\n);\n\n\n// txt.typing.start(\nABCDEFG\n, 333);  // speed in ms\n\n\n\n\n\nEvents\n\n\n\n\nOn typing :\n\n\n\n\ntxt\n.\non\n(\ntyping\n,\n \nfunction\n(){});\n\n\n\n\n\n\n\nOn typing completed :\n\n\n\n\ntxt\n.\non\n(\ntypingcompleted\n,\n \nfunction\n(){});\n\n\n\n\n\nOther commands\n\n\n\n\nIs-typing state\n\n\n\n\nvar\n \nisTyping\n \n=\n \ntxt\n.\ntyping\n.\nisTyping\n;\n\n\n\n\n\n\n\nStop typing\n\n\n\n\ntxt\n.\ntyping\n.\nstop\n();\n\n\n// txt.typing.stop(true);;  // stop and show all text\n\n\n\n\n\n\n\nPause typing\n\n\n\n\ntxt\n.\ntyping\n.\npause\n();\n\n\n\n\n\n\n\nResume typing\n\n\n\n\ntxt\n.\ntyping\n.\nresume\n();\n\n\n\n\n\n\n\nSet typing speed\n\n\n\n\ntxt\n.\ntyping\n.\nsetTypeSpeed\n(\nspeed\n);\n  \n// speed in ms\n\n\n\n\n\nSet speed in \ntyping\n event or setTextCallback to change typing speed of remaining text.\n\n\n\n\nTyping more text\n\n\n\n\ntxt\n.\ntyping\n.\nappendText\n(\ntext\n);\n\n\n\n\n\n\n\nSet typing mode\n\n\n\n\ntxt\n.\ntyping\n.\nsetTypeMode\n(\nmode\n);\n  \n//0|\nleft-to-right\n|1|\nright-to-left\n|2|\nmiddle-to-sides\n|3|\nsides-to-middle", 
             "title": "Typing"
         }, 
         {
             "location": "/texttypingplugin/index.html#introduction", 
-            "text": "Typing on text object.   Author: Rex  A plugin of text object", 
+            "text": "Typing text on text object.   Author: Rex  A plugin of text object", 
             "title": "Introduction"
         }, 
         {

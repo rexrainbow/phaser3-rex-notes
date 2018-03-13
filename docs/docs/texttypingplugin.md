@@ -1,6 +1,6 @@
 ## Introduction
 
-Typing on text object.
+Typing text on text object.
 
 - Author: Rex
 - A plugin of text object
