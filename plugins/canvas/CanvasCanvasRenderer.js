@@ -1,7 +1,7 @@
 // copy from Phaser.GameObjects.Text
 
 import Phaser from 'phaser';
-import GameObject from './../utils/system/GameObject.js';  // TODO:
+const GameObject = Phaser.GameObjects.GameObject;
 
 var CanvasRenderer = function (renderer, src, interpolationPercentage, camera)
 {

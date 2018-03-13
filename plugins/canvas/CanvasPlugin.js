@@ -2,13 +2,12 @@
 
 import Phaser from 'phaser';
 import Render from './CanvasRender.js';
-import GameObject from './../utils/system/GameObject.js'; // TODO:
-import BuildGameObject from './../utils/system/BuildGameObject'; // TODO:
 
 const CanvasPool = Phaser.Display.Canvas.Pool;
 const Components = Phaser.GameObjects.Components;
-// const GameObject = Phaser.GameObjects.GameObject;
-const GetAdvancedValue = Phaser.Utils.GetAdvancedValue;
+const GameObject = Phaser.GameObjects.GameObject;
+const BuildGameObject = Phaser.GameObjects.BuildGameObject;
+const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 
 var Canvas = new Phaser.Class({
 
@@ -60,7 +59,7 @@ var Canvas = new Phaser.Class({
             this.setOrigin();
             this.initPipeline('TextureTintPipeline');
 
-            if (scene.sys.game.config.renderType === CONST.WEBGL)
+            if (scene.sys.game.config.renderType === Phaser.WEBGL)
             {
                 scene.sys.game.renderer.onContextRestored(function ()
                 {
