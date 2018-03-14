@@ -24,7 +24,7 @@ class TextPagePlugin {
      */
     resetFromJSON(o) {
         this.setWordWrapProperties(GetFastValue(o, 'wordWrap', null));
-        this.setText(GetAdvancedValue(o, 'text', ''));
+        this.setText(GetFastValue(o, 'text', ''));
         this.setStartIdx(GetFastValue(o, 'start', 0));
         this.setPageIdx(GetFastValue(o, 'page', 0));
         return this;
