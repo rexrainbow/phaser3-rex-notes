@@ -48,13 +48,13 @@ txt.typing.start('ABCDEFG');
 - On typing :
 
 ```javascript
-txt.on('typing', function(){});
+txt.typing.on('typing', function(){});
 ```
 
 - On typing completed :
 
 ```javascript
-txt.on('typingcompleted', function(){});
+txt.typing.on('typingcompleted', function(){});
 ```
 
 ### Other commands

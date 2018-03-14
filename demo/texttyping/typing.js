@@ -23,7 +23,7 @@ class Demo extends Phaser.Scene {
             txt.typing.start('ABCDEFG');
         }, this);
 
-        txt.on('typing', function () {
+        txt.typing.on('typing', function () {
             console.log(txt.text);
         }, txt);
 

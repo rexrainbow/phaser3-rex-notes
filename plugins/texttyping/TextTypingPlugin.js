@@ -1,10 +1,14 @@
 'use strict'
 
 import Phaser from 'phaser';
+import EE from 'eventemitter3';
+
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 
-class TextTypingPlugin {
+class TextTypingPlugin extends EE{
     constructor(gameobject, config) {
+        super();
+
         this.gameobject = gameobject;
         this.scene = gameobject.scene;
         this.boot();
@@ -73,6 +77,7 @@ class TextTypingPlugin {
 
     shutdown() {
         this.freeTimer();
+        this.removeAllListeners();
     }
 
     destroy() {
@@ -138,8 +143,8 @@ class TextTypingPlugin {
             this.typingIdx = this.textLen;
             var newText = this.getSubString(this.text, 0, this.typingIdx);
             this.setText(newText);
-            this.gameobject.emit('typing');
-            this.gameobject.emit('typingcompleted');
+            this.emit('typing');
+            this.emit('typingcompleted');
         }
 
         return this;
@@ -169,11 +174,11 @@ class TextTypingPlugin {
     onTyping() {      
         var newText = this.getTypingString(this.text, this.typingIdx, this.textLen, this.typeMode);
         this.setText(newText);
-        this.gameobject.emit('typing');
+        this.emit('typing');
 
         if (this.isLastChar) {
             this.freeTimer();
-            this.gameobject.emit('typingcompleted');
+            this.emit('typingcompleted');
         } else {
             this.timer.delay = this.speed;  // delay of next typing            
             this.typingIdx++;          
