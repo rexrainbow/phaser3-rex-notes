@@ -4,7 +4,7 @@ import Phaser from 'phaser';
 import GetEventEmmiter from './../utils/system/GetEventEmmiter.js';
 import VectorToCursorKeys from './../utils/input/VectorToCursorKeys.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 
 class DragCursorPlugin extends VectorToCursorKeys {
     constructor(parent, config) {
@@ -31,8 +31,8 @@ class DragCursorPlugin extends VectorToCursorKeys {
             this.origin = {};
         }
 
-        var ox = GetValue(o, 'origin.x', null);
-        var oy = GetValue(o, 'origin.y', null);
+        var ox = GetAdvancedValue(o, 'origin.x', null);
+        var oy = GetAdvancedValue(o, 'origin.y', null);
         this.setOrigin(ox, oy);
 
         return this;

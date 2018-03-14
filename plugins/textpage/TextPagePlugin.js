@@ -3,6 +3,8 @@
 import Phaser from 'phaser';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
+const GetValue = Phaser.Utils.Objects.GetValue;
+const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 const Clamp = Phaser.Math.Clamp;
 
 class TextPagePlugin {
@@ -11,6 +13,7 @@ class TextPagePlugin {
         this.scene = gameobject.scene;
         this.boot();
 
+        this.wordWrap = {};
         this.resetFromJSON(config);
     }
 
@@ -20,7 +23,8 @@ class TextPagePlugin {
      * @returns {object} this object
      */
     resetFromJSON(o) {
-        this.setText(GetFastValue(o, 'text', ''));
+        this.setWordWrapProperties(GetFastValue(o, 'wordWrap', null));
+        this.setText(GetAdvancedValue(o, 'text', ''));
         this.setStartIdx(GetFastValue(o, 'start', 0));
         this.setPageIdx(GetFastValue(o, 'page', 0));
         return this;
@@ -32,6 +36,12 @@ class TextPagePlugin {
      */
     toJSON() {
         return {
+            wordWrap: {
+                width: this.wordWrapWidth,
+                callback: this.wordWrapCallback,
+                callbackScope: this.wordWrapCallbackScope,
+                useAdvancedWrap: this.wordWrapUseAdvanced
+            },
             text: this.text,
             start: this.startIdx,
             page: this.pageIdx,
@@ -54,9 +64,9 @@ class TextPagePlugin {
     shutdown() {
         this.text = '';
         this.lines.length = 0;
-        
+
         this.gameobject = undefined;
-        this.scene = undefined;         
+        this.scene = undefined;
     }
 
     destroy() {
@@ -72,10 +82,8 @@ class TextPagePlugin {
     }
 
     setText(text) {
-        text = transferText(text);
-        this.text = text;
-        this.lines = this.gameobject.getWrappedText(text);
-
+        this.text = transferText(text);
+        this.lines = this.getWrappedText(this.text);
         this.pageLineNum = this.getPageLineNum();
         this.pageNum = Math.ceil(this.lines.length / this.pageLineNum);
         return this;
@@ -99,7 +107,7 @@ class TextPagePlugin {
 
     getPreviousPage() {
         return this.getPage(this.pageIdx - 1);
-    }    
+    }
 
     showPage(idx) {
         this.gameobject.setText(this.getPage());
@@ -131,6 +139,53 @@ class TextPagePlugin {
         return this;
     }
 
+    // wrapped text
+    getWrappedText(text) {
+        // TBD
+        this.gameobject.style.syncFont(this.gameobject.canvas, this.gameobject.context);
+        // TBD
+
+        this.setTextWrapProperties();
+        var lines = this.gameobject.getWrappedText(text);
+        this.cleanTextWrapProperties();
+        return lines;
+    }
+
+    setWordWrapProperties(wordWrap) {
+        var pageStyle = this.wordWrap;
+        if (wordWrap == null) {
+            var textStyle = this.gameobject.style;
+            pageStyle.wordWrapWidth = textStyle.wordWrapWidth;
+            pageStyle.wordWrapCallback = textStyle.wordWrapCallback;
+            pageStyle.wordWrapCallbackScope = textStyle.wordWrapCallbackScope;
+            pageStyle.wordWrapUseAdvanced = textStyle.wordWrapUseAdvanced;
+        } else {
+            pageStyle.wordWrapWidth = GetAdvancedValue(wordWrap, 'wordWrap.width', null);
+            pageStyle.wordWrapCallback = GetValue(wordWrap, 'wordWrap.callback', null);
+            pageStyle.wordWrapCallbackScope = GetValue(wordWrap, 'wordWrap.callbackScope', null);
+            pageStyle.wordWrapUseAdvanced = GetAdvancedValue(wordWrap, 'wordWrap.useAdvancedWrap', false);
+        }
+        this.cleanTextWrapProperties();
+    }
+
+    setTextWrapProperties() {
+        var textStyle = this.gameobject.style;
+        var pageStyle = this.wordWrap;
+        textStyle.wordWrapWidth = pageStyle.wordWrapWidth;
+        textStyle.wordWrapCallback = pageStyle.wordWrapCallback;
+        textStyle.wordWrapCallbackScope = pageStyle.wordWrapCallbackScope;
+        textStyle.wordWrapUseAdvanced = pageStyle.wordWrapUseAdvanced;
+    }
+
+    cleanTextWrapProperties() {
+        var textStyle = this.gameobject.style;
+        textStyle.wordWrapWidth = null;
+        textStyle.wordWrapCallback = null;
+        textStyle.wordWrapCallbackScope = null;
+        textStyle.wordWrapUseAdvanced = false;
+    }
+    // wrapped text    
+
     setStartIdx(idx) {
         idx = Clamp(idx, 0, this.lines.length - 1);
         this.startIdx = idx;
@@ -159,8 +214,8 @@ class TextPagePlugin {
         if (startIdx === undefined) {
             startIdx = this.startIdx;
         }
-        var endIdx = startIdx + this.pageLineNum;
-        return this.lines.slice(startIdx, endIdx);
+        var lines = this.lines.slice(startIdx, startIdx + this.pageLineNum);
+        return lines;
     }
 
 }

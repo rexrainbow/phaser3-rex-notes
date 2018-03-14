@@ -1,8 +1,10 @@
 import Phaser from 'phaser';
 
-const Key = Phaser.Input.Keyboard.Key;
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 const GetValue = Phaser.Utils.Objects.GetValue;
+const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
+
+const Key = Phaser.Input.Keyboard.Key;
 const RadToDeg = Phaser.Math.RadToDeg;
 
 class VectorToCursorKeys {
@@ -34,9 +36,9 @@ class VectorToCursorKeys {
             }
         }
 
-        this.setEnable(GetFastValue(o, 'enable', true));
-        this.setMode(GetFastValue(o, 'dir', '8dir'));
-        this.setDistanceThreshold(GetFastValue(o, 'distanceMin', 16));
+        this.setEnable(GetAdvancedValue(o, 'enable', true));
+        this.setMode(GetAdvancedValue(o, 'dir', '8dir'));
+        this.setDistanceThreshold(GetAdvancedValue(o, 'distanceMin', 16));
 
         var startX = GetValue(o, "start.x", null);
         var startY = GetValue(o, "start.y", null);

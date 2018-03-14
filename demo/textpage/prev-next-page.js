@@ -9,7 +9,7 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {}
+    preload() { }
 
     create() {
         var lines = [];
@@ -18,6 +18,9 @@ class Demo extends Phaser.Scene {
         }
 
         var txt = this.add.text(100, 100, '', {
+            wordWrap: {
+                width: 500
+            },
             maxLines: 7
         });
         txt.page = new TextPagePlugin(txt, {
@@ -30,7 +33,7 @@ class Demo extends Phaser.Scene {
         this.input.keyboard.on('keydown_UP', txt.page.showPreviousPage, txt.page);
 
 
-        var printPageIdx = function(){
+        var printPageIdx = function () {
             var page = txt.page;
             var s = page.pageIdx + "/" + page.pageNum
             if (page.isLastPage) {
@@ -40,10 +43,10 @@ class Demo extends Phaser.Scene {
         }
         printPageIdx();
         this.input.keyboard.on('keydown_UP', printPageIdx);
-        this.input.keyboard.on('keydown_DOWN', printPageIdx);         
+        this.input.keyboard.on('keydown_DOWN', printPageIdx);
     }
 
-    update() {}
+    update() { }
 }
 
 var config = {

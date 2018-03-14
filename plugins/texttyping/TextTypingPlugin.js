@@ -4,6 +4,8 @@ import Phaser from 'phaser';
 import EE from 'eventemitter3';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
+const GetValue = Phaser.Utils.Objects.GetValue;
+const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 
 class TextTypingPlugin extends EE {
     constructor(gameobject, config) {
@@ -23,8 +25,8 @@ class TextTypingPlugin extends EE {
      * @returns {object} this object
      */
     resetFromJSON(o) {
-        this.setTypeMode(GetFastValue(o, 'typeMode', 0));
-        this.setTypeSpeed(GetFastValue(o, 'speed', 333));
+        this.setTypeMode(GetAdvancedValue(o, 'typeMode', 0));
+        this.setTypeSpeed(GetAdvancedValue(o, 'speed', 333));
         this.setTextCallback = GetFastValue(o, 'setTextCallback', null);
         this.setTextCallbackScope = GetFastValue(o, 'setTextCallbackScope', null);
 

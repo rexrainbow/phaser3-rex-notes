@@ -2,7 +2,7 @@
 
 import Phaser from 'phaser';
 
-const GetFastValue = Phaser.Utils.Objects.GetFastValue;
+const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 
 class DragDropPlugin {
     constructor(gameobject, config) {
@@ -20,9 +20,9 @@ class DragDropPlugin {
      * @returns {object} this object
      */
     resetFromJSON(o) {
-        this.setEnable(GetFastValue(o, "enable", true));
-        this.setAxisMode(GetFastValue(o, "axis", 0));
-        this.setAxisRotation(GetFastValue(o, "rotation", 0));
+        this.setEnable(GetAdvancedValue(o, "enable", true));
+        this.setAxisMode(GetAdvancedValue(o, "axis", 0));
+        this.setAxisRotation(GetAdvancedValue(o, "rotation", 0));
         return this;
     }
 
