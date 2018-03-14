@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/index.html", 
-            "text": "Phaser\n\n\nPhaser\n is a fun, free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering.\n\n\nList of my plugins\n\n\n\n\nDrag\n: Drag game object.\n\n\nDrag-cursor\n: Simulate curosr keys according dragging events.\n\n\nGashapon\n: Pick random item from box.\n\n\nTyping\n: Typing text on text object.", 
+            "text": "Phaser\n\n\nPhaser\n is a fun, free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering.\n\n\nList of my plugins\n\n\n\n\nDrag\n: Drag game object.\n\n\nDrag-cursor\n: Simulate curosr keys according dragging events.\n\n\nGashapon\n: Pick random item from box.\n\n\nPage\n: Display text page by page on text object.\n\n\nTyping\n: Typing text on text object.", 
             "title": "Home"
         }, 
         {
@@ -12,7 +12,7 @@
         }, 
         {
             "location": "/index.html#list-of-my-plugins", 
-            "text": "Drag : Drag game object.  Drag-cursor : Simulate curosr keys according dragging events.  Gashapon : Pick random item from box.  Typing : Typing text on text object.", 
+            "text": "Drag : Drag game object.  Drag-cursor : Simulate curosr keys according dragging events.  Gashapon : Pick random item from box.  Page : Display text page by page on text object.  Typing : Typing text on text object.", 
             "title": "List of my plugins"
         }, 
         {
@@ -389,6 +389,51 @@
             "location": "/texttypingplugin/index.html#other-commands", 
             "text": "Is-typing state   var   isTyping   =   txt . typing . isTyping ;    Stop typing   txt . typing . stop ();  // txt.typing.stop(true);;  // stop and show all text    Pause typing   txt . typing . pause ();    Resume typing   txt . typing . resume ();    Set typing speed   txt . typing . setTypeSpeed ( speed );    // speed in ms   Set speed in  typing  event or setTextCallback to change typing speed of remaining text.   Typing more text   txt . typing . appendText ( text );    Set typing mode   txt . typing . setTypeMode ( mode );    //0| left-to-right |1| right-to-left |2| middle-to-sides |3| sides-to-middle", 
             "title": "Other commands"
+        }, 
+        {
+            "location": "/textpageplugin/index.html", 
+            "text": "Introduction\n\n\nDisplay text page by page on text object.\n\n\n\n\nAuthor: Rex\n\n\nA plugin of text object\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\ntxt\n.\npage\n \n=\n \nnew\n \nTextPagePlugin\n(\ntxt\n,\n \n{\n\n    \n//text: \n,       // content in string or array\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\ntext: content in string or array\n\n\n\n\nSet content\n\n\ntxt\n.\npage\n.\nsetText\n(\ntext\n);\n   \n// content in string or array\n\n\n\n\n\n\n\nAppend text\n\n\n\n\ntxt\n.\npage\n.\nappendText\n(\ntext\n);\n \n// content in string or array\n\n\n\n\n\nShow page\n\n\ntxt\n.\npage\n.\nshowPage\n();\n         \n// display current page\n\n\ntxt\n.\npage\n.\nshowNextPage\n();\n     \n// display next page\n\n\ntxt\n.\npage\n.\nshowPreviousPage\n();\n \n// display previous page\n\n\n\n\n\nGet page\n\n\nvar\n \nlines\n \n=\n \ntxt\n.\npage\n.\ngetPage\n();\n         \n// get lines of current page\n\n\nvar\n \nlines\n \n=\n \ntxt\n.\npage\n.\ngetNextPage\n();\n     \n// get lines of next page\n\n\nvar\n \nlines\n \n=\n \ntxt\n.\npage\n.\ngetPreviousPage\n();\n \n// get lines of previous page\n\n\n\n\n\nOther properties\n\n\n\n\nCurrent page index : \ntxt.page.pageIdx\n\n\nNumber of pages : \ntxt.page.pageNum\n\n\nIs last page: \ntxt.page.isLastPage\n\n\nIs first page: \ntxt.page.isFirstPage", 
+            "title": "Page"
+        }, 
+        {
+            "location": "/textpageplugin/index.html#introduction", 
+            "text": "Display text page by page on text object.   Author: Rex  A plugin of text object", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/textpageplugin/index.html#source-code", 
+            "text": "Link", 
+            "title": "Source code"
+        }, 
+        {
+            "location": "/textpageplugin/index.html#usage", 
+            "text": "", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/textpageplugin/index.html#create-instance", 
+            "text": "txt . page   =   new   TextPagePlugin ( txt ,   { \n     //text:  ,       // content in string or array  });   Properties   text: content in string or array", 
+            "title": "Create instance"
+        }, 
+        {
+            "location": "/textpageplugin/index.html#set-content", 
+            "text": "txt . page . setText ( text );     // content in string or array    Append text   txt . page . appendText ( text );   // content in string or array", 
+            "title": "Set content"
+        }, 
+        {
+            "location": "/textpageplugin/index.html#show-page", 
+            "text": "txt . page . showPage ();           // display current page  txt . page . showNextPage ();       // display next page  txt . page . showPreviousPage ();   // display previous page", 
+            "title": "Show page"
+        }, 
+        {
+            "location": "/textpageplugin/index.html#get-page", 
+            "text": "var   lines   =   txt . page . getPage ();           // get lines of current page  var   lines   =   txt . page . getNextPage ();       // get lines of next page  var   lines   =   txt . page . getPreviousPage ();   // get lines of previous page", 
+            "title": "Get page"
+        }, 
+        {
+            "location": "/textpageplugin/index.html#other-properties", 
+            "text": "Current page index :  txt.page.pageIdx  Number of pages :  txt.page.pageNum  Is last page:  txt.page.isLastPage  Is first page:  txt.page.isFirstPage", 
+            "title": "Other properties"
         }, 
         {
             "location": "/date/index.html", 

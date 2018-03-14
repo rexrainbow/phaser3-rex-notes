@@ -5,7 +5,7 @@ import EE from 'eventemitter3';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 
-class TextTypingPlugin extends EE{
+class TextTypingPlugin extends EE {
     constructor(gameobject, config) {
         super();
 
@@ -26,10 +26,10 @@ class TextTypingPlugin extends EE{
         this.setTypeMode(GetFastValue(o, 'typeMode', 0));
         this.setTypeSpeed(GetFastValue(o, 'speed', 333));
         this.setTextCallback = GetFastValue(o, 'setTextCallback', null);
-        this.setTextCallbackScope = GetFastValue(o, 'setTextCallbackScope', null);        
+        this.setTextCallbackScope = GetFastValue(o, 'setTextCallbackScope', null);
 
         this.typingIdx = GetFastValue(o, 'typingIdx', 0);
-        this.text = GetFastValue(o, 'text', '');
+        this.text = transferText(GetFastValue(o, 'text', ''));
         this.textLen = GetFastValue(o, 'textLen', 0);
         this.insertIdx = GetFastValue(o, 'insertIdx', null);
 
@@ -37,6 +37,8 @@ class TextTypingPlugin extends EE{
         if (elapsed !== null) {
             this.start(undefined, undefined, this.typingIdx, elapsed);
         }
+
+        return this;
     }
 
     /**
@@ -126,7 +128,7 @@ class TextTypingPlugin extends EE{
     }
 
     appendText(text) {
-        var newText = this.text + text;
+        var newText = this.text + transferText(text);
         if (this.isTyping) {
             this.setTypingContent(newText);
         } else {
@@ -167,11 +169,11 @@ class TextTypingPlugin extends EE{
     }
 
     setTypingContent(text) {
-        this.text = text;
+        this.text = transferText(text);
         this.textLen = this.getTextLength(text);
     }
 
-    onTyping() {      
+    onTyping() {
         var newText = this.getTypingString(this.text, this.typingIdx, this.textLen, this.typeMode);
         this.setText(newText);
         this.emit('typing');
@@ -180,9 +182,9 @@ class TextTypingPlugin extends EE{
             this.freeTimer();
             this.emit('typingcompleted');
         } else {
-            this.timer.delay = this.speed;  // delay of next typing            
-            this.typingIdx++;          
-        }        
+            this.timer.delay = this.speed; // delay of next typing            
+            this.typingIdx++;
+        }
     }
 
     getTypingString(text, typeIdx, textLen, typeMode) {
@@ -300,6 +302,15 @@ class TextTypingPlugin extends EE{
 
         return result;
     }
+}
+
+var transferText = function (text) {
+    if (Array.isArray(text)) {
+        text = text.join('\n');
+    } else if (typeof (text) === 'number') {
+        text = text.toString();
+    }
+    return text;
 }
 
 /** @private */

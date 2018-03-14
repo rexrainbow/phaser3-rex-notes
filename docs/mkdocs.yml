@@ -16,6 +16,7 @@ pages:
 - Text:
     - Text: text.md
     - Typing: texttypingplugin.md    
+    - Page: textpageplugin.md
 - Date:
     - Date: date.md
 - Random:

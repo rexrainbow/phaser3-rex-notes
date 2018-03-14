@@ -34,6 +34,8 @@ class DragCursorPlugin extends VectorToCursorKeys {
         var ox = GetValue(o, 'origin.x', null);
         var oy = GetValue(o, 'origin.y', null);
         this.setOrigin(ox, oy);
+
+        return this;
     }
 
     /**

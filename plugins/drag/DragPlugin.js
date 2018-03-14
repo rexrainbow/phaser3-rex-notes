@@ -23,6 +23,7 @@ class DragDropPlugin {
         this.setEnable(GetFastValue(o, "enable", true));
         this.setAxisMode(GetFastValue(o, "axis", 0));
         this.setAxisRotation(GetFastValue(o, "rotation", 0));
+        return this;
     }
 
     /**
@@ -128,14 +129,14 @@ class DragDropPlugin {
             P0.y = gameobject.y;
             P1.x = dragX;
             P1.y = dragY;
-            rotatePoint(P1, P0, -this.axisRotation);
+            P1 = rotatePoint(P1, P0, -this.axisRotation);
 
             if (this.axisMode === 1) {
                 P1.y = P0.y;
             } else if (this.axisMode === 2) {
                 P1.x = P0.x;
             }
-            rotatePoint(P1, P0, this.axisRotation);
+            P1 = rotatePoint(P1, P0, this.axisRotation);
             gameobject.x = P1.x;
             gameobject.y = P1.y;
         }
