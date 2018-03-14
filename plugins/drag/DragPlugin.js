@@ -53,7 +53,9 @@ class DragDropPlugin {
     }
 
     shutdown() {
-        // gameobject event 'drag' will be removed when this gameobject destroyed
+        this.gameobject = undefined;
+        this.scene = undefined;         
+        // gameobject event 'drag' will be removed when this gameobject destroyed 
     }
 
     destroy() {

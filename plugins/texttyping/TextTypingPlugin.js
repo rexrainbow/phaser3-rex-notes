@@ -80,6 +80,9 @@ class TextTypingPlugin extends EE {
     shutdown() {
         this.freeTimer();
         this.removeAllListeners();
+        
+        this.gameobject = undefined;
+        this.scene = undefined;         
     }
 
     destroy() {

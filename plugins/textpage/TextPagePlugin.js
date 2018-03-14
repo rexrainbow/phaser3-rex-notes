@@ -54,6 +54,9 @@ class TextPagePlugin {
     shutdown() {
         this.text = '';
         this.lines.length = 0;
+        
+        this.gameobject = undefined;
+        this.scene = undefined;         
     }
 
     destroy() {
