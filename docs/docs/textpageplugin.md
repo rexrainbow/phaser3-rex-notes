@@ -7,7 +7,7 @@ Display text page by page on text object.
 
 ## Source code
 
-[Link](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/texttyping/TextPagePlugin.js)
+[Link](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/textpage/TextPagePlugin.js)
 
 ## Usage
 
@@ -43,7 +43,7 @@ txt.page.showNextPage();     // display next page
 txt.page.showPreviousPage(); // display previous page
 ```
 
-### Get page
+### Get lines of page
 
 ```javascript
 var lines = txt.page.getPage();         // get lines of current page

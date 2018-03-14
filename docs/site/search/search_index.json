@@ -392,7 +392,7 @@
         }, 
         {
             "location": "/textpageplugin/index.html", 
-            "text": "Introduction\n\n\nDisplay text page by page on text object.\n\n\n\n\nAuthor: Rex\n\n\nA plugin of text object\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\ntxt\n.\npage\n \n=\n \nnew\n \nTextPagePlugin\n(\ntxt\n,\n \n{\n\n    \n//text: \n,       // content in string or array\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\ntext: content in string or array\n\n\n\n\nSet content\n\n\ntxt\n.\npage\n.\nsetText\n(\ntext\n);\n   \n// content in string or array\n\n\n\n\n\n\n\nAppend text\n\n\n\n\ntxt\n.\npage\n.\nappendText\n(\ntext\n);\n \n// content in string or array\n\n\n\n\n\nShow page\n\n\ntxt\n.\npage\n.\nshowPage\n();\n         \n// display current page\n\n\ntxt\n.\npage\n.\nshowNextPage\n();\n     \n// display next page\n\n\ntxt\n.\npage\n.\nshowPreviousPage\n();\n \n// display previous page\n\n\n\n\n\nGet page\n\n\nvar\n \nlines\n \n=\n \ntxt\n.\npage\n.\ngetPage\n();\n         \n// get lines of current page\n\n\nvar\n \nlines\n \n=\n \ntxt\n.\npage\n.\ngetNextPage\n();\n     \n// get lines of next page\n\n\nvar\n \nlines\n \n=\n \ntxt\n.\npage\n.\ngetPreviousPage\n();\n \n// get lines of previous page\n\n\n\n\n\nOther properties\n\n\n\n\nCurrent page index : \ntxt.page.pageIdx\n\n\nNumber of pages : \ntxt.page.pageNum\n\n\nIs last page: \ntxt.page.isLastPage\n\n\nIs first page: \ntxt.page.isFirstPage", 
+            "text": "Introduction\n\n\nDisplay text page by page on text object.\n\n\n\n\nAuthor: Rex\n\n\nA plugin of text object\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\ntxt\n.\npage\n \n=\n \nnew\n \nTextPagePlugin\n(\ntxt\n,\n \n{\n\n    \n//text: \n,       // content in string or array\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\ntext: content in string or array\n\n\n\n\nSet content\n\n\ntxt\n.\npage\n.\nsetText\n(\ntext\n);\n   \n// content in string or array\n\n\n\n\n\n\n\nAppend text\n\n\n\n\ntxt\n.\npage\n.\nappendText\n(\ntext\n);\n \n// content in string or array\n\n\n\n\n\nShow page\n\n\ntxt\n.\npage\n.\nshowPage\n();\n         \n// display current page\n\n\ntxt\n.\npage\n.\nshowNextPage\n();\n     \n// display next page\n\n\ntxt\n.\npage\n.\nshowPreviousPage\n();\n \n// display previous page\n\n\n\n\n\nGet lines of page\n\n\nvar\n \nlines\n \n=\n \ntxt\n.\npage\n.\ngetPage\n();\n         \n// get lines of current page\n\n\nvar\n \nlines\n \n=\n \ntxt\n.\npage\n.\ngetNextPage\n();\n     \n// get lines of next page\n\n\nvar\n \nlines\n \n=\n \ntxt\n.\npage\n.\ngetPreviousPage\n();\n \n// get lines of previous page\n\n\n\n\n\nOther properties\n\n\n\n\nCurrent page index : \ntxt.page.pageIdx\n\n\nNumber of pages : \ntxt.page.pageNum\n\n\nIs last page: \ntxt.page.isLastPage\n\n\nIs first page: \ntxt.page.isFirstPage", 
             "title": "Page"
         }, 
         {
@@ -426,9 +426,9 @@
             "title": "Show page"
         }, 
         {
-            "location": "/textpageplugin/index.html#get-page", 
+            "location": "/textpageplugin/index.html#get-lines-of-page", 
             "text": "var   lines   =   txt . page . getPage ();           // get lines of current page  var   lines   =   txt . page . getNextPage ();       // get lines of next page  var   lines   =   txt . page . getPreviousPage ();   // get lines of previous page", 
-            "title": "Get page"
+            "title": "Get lines of page"
         }, 
         {
             "location": "/textpageplugin/index.html#other-properties", 
