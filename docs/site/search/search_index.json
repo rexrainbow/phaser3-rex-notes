@@ -392,7 +392,7 @@
         }, 
         {
             "location": "/textpageplugin/index.html", 
-            "text": "Introduction\n\n\nDisplay text page by page on text object.\n\n\n\n\nAuthor: Rex\n\n\nA plugin of text object\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\ntxt\n.\npage\n \n=\n \nnew\n \nTextPagePlugin\n(\ntxt\n,\n \n{\n\n    \n//text: \n,       // content in string or array\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\ntext: content in string or array\n\n\n\n\nSet content\n\n\ntxt\n.\npage\n.\nsetText\n(\ntext\n);\n   \n// content in string or array\n\n\n\n\n\n\n\nAppend text\n\n\n\n\ntxt\n.\npage\n.\nappendText\n(\ntext\n);\n \n// content in string or array\n\n\n\n\n\nShow page\n\n\ntxt\n.\npage\n.\nshowPage\n();\n         \n// display current page\n\n\ntxt\n.\npage\n.\nshowNextPage\n();\n     \n// display next page\n\n\ntxt\n.\npage\n.\nshowPreviousPage\n();\n \n// display previous page\n\n\n\n\n\nGet lines of page\n\n\nvar\n \nlines\n \n=\n \ntxt\n.\npage\n.\ngetPage\n();\n         \n// get lines of current page\n\n\nvar\n \nlines\n \n=\n \ntxt\n.\npage\n.\ngetNextPage\n();\n     \n// get lines of next page\n\n\nvar\n \nlines\n \n=\n \ntxt\n.\npage\n.\ngetPreviousPage\n();\n \n// get lines of previous page\n\n\n\n\n\nOther properties\n\n\n\n\nCurrent page index : \ntxt.page.pageIdx\n\n\nNumber of pages : \ntxt.page.pageNum\n\n\nIs last page: \ntxt.page.isLastPage\n\n\nIs first page: \ntxt.page.isFirstPage", 
+            "text": "Introduction\n\n\nDisplay text page by page on text object.\n\n\n\n\nAuthor: Rex\n\n\nA plugin of text object\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\nvar\n \nwordWrap\n \n=\n \n{\n\n    \nwidth\n:\n \n500\n\n\n};\n\n\nvar\n \ntxt\n \n=\n \nscene\n.\nadd\n.\ntext\n(\nx\n,\n \ny\n,\n \n,\n \n{\n\n    \nwordWrap\n:\n \nwordWrap\n,\n\n    \nmaxLines\n:\n \n7\n\n\n});\n\n\ntxt\n.\npage\n \n=\n \nnew\n \nTextPagePlugin\n(\ntxt\n,\n \n{\n\n    \n//text: \n,       // content in string or array\n\n    \n//wordWrap: wordWrap\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\ntext: content in string or array, optional\n\n\nwordWrap: the same as \nwordWrap\n of text style, which included\n\n\nwidth\n\n\ncallback\n\n\ncallbackScope\n\n\nuseAdvancedWrap\n\n\n\n\n\n\n\n\nWord wrap\n\n\nAssign \nwordWrap\n in page object, otherwise this page object will get wordWrap from text object.\n\n\nWordWrap properties of text objecct will be moved to page object to avoid word-wrapping again when displaying text.\n\n\nSet content\n\n\ntxt\n.\npage\n.\nsetText\n(\ntext\n);\n   \n// content in string or array\n\n\n\n\n\n\n\nAppend text\n\n\n\n\ntxt\n.\npage\n.\nappendText\n(\ntext\n);\n \n// content in string or array\n\n\n\n\n\nShow page\n\n\ntxt\n.\npage\n.\nshowPage\n();\n         \n// display current page\n\n\ntxt\n.\npage\n.\nshowNextPage\n();\n     \n// display next page\n\n\ntxt\n.\npage\n.\nshowPreviousPage\n();\n \n// display previous page\n\n\n\n\n\nInitial page index is \n-1\n, so user could call \ntxt.page.showNextPage()\n to display first page.\n\n\nGet lines of page\n\n\nvar\n \nlines\n \n=\n \ntxt\n.\npage\n.\ngetPage\n();\n         \n// get lines of current page\n\n\nvar\n \nlines\n \n=\n \ntxt\n.\npage\n.\ngetNextPage\n();\n     \n// get lines of next page\n\n\nvar\n \nlines\n \n=\n \ntxt\n.\npage\n.\ngetPreviousPage\n();\n \n// get lines of previous page\n\n\n\n\n\nOther properties\n\n\n\n\nCurrent page index : \ntxt.page.pageIdx\n\n\nNumber of pages : \ntxt.page.pageNum\n\n\nIs last page: \ntxt.page.isLastPage\n\n\nIs first page: \ntxt.page.isFirstPage\n\n\n\n\nSet wordWrap properties\n\n\n\n\nWidth: \ntxt.page.setWordWrapWidth(width)\n\n\nCallback: \ntxt.page.setWordWrapCallback(callback, callbackScope)\n\n\nUseAdvanced: \ntxt.page.setWordWrapUseAdvanced(true)", 
             "title": "Page"
         }, 
         {
@@ -412,8 +412,13 @@
         }, 
         {
             "location": "/textpageplugin/index.html#create-instance", 
-            "text": "txt . page   =   new   TextPagePlugin ( txt ,   { \n     //text:  ,       // content in string or array  });   Properties   text: content in string or array", 
+            "text": "var   wordWrap   =   { \n     width :   500  };  var   txt   =   scene . add . text ( x ,   y ,   ,   { \n     wordWrap :   wordWrap , \n     maxLines :   7  });  txt . page   =   new   TextPagePlugin ( txt ,   { \n     //text:  ,       // content in string or array \n     //wordWrap: wordWrap  });   Properties   text: content in string or array, optional  wordWrap: the same as  wordWrap  of text style, which included  width  callback  callbackScope  useAdvancedWrap", 
             "title": "Create instance"
+        }, 
+        {
+            "location": "/textpageplugin/index.html#word-wrap", 
+            "text": "Assign  wordWrap  in page object, otherwise this page object will get wordWrap from text object.  WordWrap properties of text objecct will be moved to page object to avoid word-wrapping again when displaying text.", 
+            "title": "Word wrap"
         }, 
         {
             "location": "/textpageplugin/index.html#set-content", 
@@ -422,7 +427,7 @@
         }, 
         {
             "location": "/textpageplugin/index.html#show-page", 
-            "text": "txt . page . showPage ();           // display current page  txt . page . showNextPage ();       // display next page  txt . page . showPreviousPage ();   // display previous page", 
+            "text": "txt . page . showPage ();           // display current page  txt . page . showNextPage ();       // display next page  txt . page . showPreviousPage ();   // display previous page   Initial page index is  -1 , so user could call  txt.page.showNextPage()  to display first page.", 
             "title": "Show page"
         }, 
         {
@@ -434,6 +439,11 @@
             "location": "/textpageplugin/index.html#other-properties", 
             "text": "Current page index :  txt.page.pageIdx  Number of pages :  txt.page.pageNum  Is last page:  txt.page.isLastPage  Is first page:  txt.page.isFirstPage", 
             "title": "Other properties"
+        }, 
+        {
+            "location": "/textpageplugin/index.html#set-wordwrap-properties", 
+            "text": "Width:  txt.page.setWordWrapWidth(width)  Callback:  txt.page.setWordWrapCallback(callback, callbackScope)  UseAdvanced:  txt.page.setWordWrapUseAdvanced(true)", 
+            "title": "Set wordWrap properties"
         }, 
         {
             "location": "/date/index.html", 

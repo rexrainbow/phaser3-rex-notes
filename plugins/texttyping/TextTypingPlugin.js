@@ -175,7 +175,7 @@ class TextTypingPlugin extends EE {
 
     setTypingContent(text) {
         this.text = transferText(text);
-        this.textLen = this.getTextLength(text);
+        this.textLen = this.getTextLength(this.text);
     }
 
     onTyping() {

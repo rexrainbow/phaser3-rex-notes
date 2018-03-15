@@ -414,6 +414,19 @@
     Create instance
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#word-wrap" title="Word wrap" class="md-nav__link">
+    Word wrap
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -440,6 +453,13 @@
           <li class="md-nav__item">
   <a href="#other-properties" title="Other properties" class="md-nav__link">
     Other properties
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-wordwrap-properties" title="Set wordWrap properties" class="md-nav__link">
+    Set wordWrap properties
   </a>
   
 </li>
@@ -580,6 +600,19 @@
     Create instance
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#word-wrap" title="Word wrap" class="md-nav__link">
+    Word wrap
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -606,6 +639,13 @@
           <li class="md-nav__item">
   <a href="#other-properties" title="Other properties" class="md-nav__link">
     Other properties
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-wordwrap-properties" title="Set wordWrap properties" class="md-nav__link">
+    Set wordWrap properties
   </a>
   
 </li>
@@ -642,15 +682,33 @@
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/textpage/TextPagePlugin.js">Link</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">page</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TextPagePlugin</span><span class="p">(</span><span class="nx">txt</span><span class="p">,</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">wordWrap</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="mi">500</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">wordWrap</span><span class="o">:</span> <span class="nx">wordWrap</span><span class="p">,</span>
+    <span class="nx">maxLines</span><span class="o">:</span> <span class="mi">7</span>
+<span class="p">});</span>
+<span class="nx">txt</span><span class="p">.</span><span class="nx">page</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TextPagePlugin</span><span class="p">(</span><span class="nx">txt</span><span class="p">,</span> <span class="p">{</span>
     <span class="c1">//text: &#39;&#39;,       // content in string or array</span>
+    <span class="c1">//wordWrap: wordWrap</span>
 <span class="p">});</span>
 </pre></div>
 
 <p>Properties</p>
 <ul>
-<li>text: content in string or array</li>
+<li>text: content in string or array, optional</li>
+<li>wordWrap: the same as <code>wordWrap</code> of text style, which included<ul>
+<li>width</li>
+<li>callback</li>
+<li>callbackScope</li>
+<li>useAdvancedWrap</li>
 </ul>
+</li>
+</ul>
+<h4 id="word-wrap">Word wrap<a class="headerlink" href="#word-wrap" title="Permanent link">&para;</a></h4>
+<p>Assign <code>wordWrap</code> in page object, otherwise this page object will get wordWrap from text object.</p>
+<p>WordWrap properties of text objecct will be moved to page object to avoid word-wrapping again when displaying text.</p>
 <h3 id="set-content">Set content<a class="headerlink" href="#set-content" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">page</span><span class="p">.</span><span class="nx">setText</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>   <span class="c1">// content in string or array</span>
 </pre></div>
@@ -667,6 +725,7 @@
 <span class="nx">txt</span><span class="p">.</span><span class="nx">page</span><span class="p">.</span><span class="nx">showPreviousPage</span><span class="p">();</span> <span class="c1">// display previous page</span>
 </pre></div>
 
+<p>Initial page index is <code>-1</code>, so user could call <code>txt.page.showNextPage()</code> to display first page.</p>
 <h3 id="get-lines-of-page">Get lines of page<a class="headerlink" href="#get-lines-of-page" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">lines</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">page</span><span class="p">.</span><span class="nx">getPage</span><span class="p">();</span>         <span class="c1">// get lines of current page</span>
 <span class="kd">var</span> <span class="nx">lines</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">page</span><span class="p">.</span><span class="nx">getNextPage</span><span class="p">();</span>     <span class="c1">// get lines of next page</span>
@@ -679,6 +738,12 @@
 <li>Number of pages : <code>txt.page.pageNum</code></li>
 <li>Is last page: <code>txt.page.isLastPage</code></li>
 <li>Is first page: <code>txt.page.isFirstPage</code></li>
+</ul>
+<h3 id="set-wordwrap-properties">Set wordWrap properties<a class="headerlink" href="#set-wordwrap-properties" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Width: <code>txt.page.setWordWrapWidth(width)</code></li>
+<li>Callback: <code>txt.page.setWordWrapCallback(callback, callbackScope)</code></li>
+<li>UseAdvanced: <code>txt.page.setWordWrapUseAdvanced(true)</code></li>
 </ul>
                 
                   

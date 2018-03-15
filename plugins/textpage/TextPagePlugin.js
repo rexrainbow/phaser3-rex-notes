@@ -26,7 +26,7 @@ class TextPagePlugin {
         this.setWordWrapProperties(GetFastValue(o, 'wordWrap', null));
         this.setText(GetFastValue(o, 'text', ''));
         this.setStartIdx(GetFastValue(o, 'start', 0));
-        this.setPageIdx(GetFastValue(o, 'page', 0));
+        this.setPageIdx(GetFastValue(o, 'page', -1));
         return this;
     }
 
@@ -74,18 +74,24 @@ class TextPagePlugin {
     }
 
     get isFirstPage() {
-        return (this.pageIdx === 0);
+        return (this.pageIdx <= 0);
     }
 
     get isLastPage() {
-        return (this.pageIdx === (this.pageNum - 1));
+        return (this.pageIdx >= (this.pageNum - 1));
     }
 
-    setText(text) {
+    setText(text, resetPageIdx) {
+        if (resetPageIdx === undefined) {
+            resetPageIdx = true;
+        }
         this.text = transferText(text);
         this.lines = this.getWrappedText(this.text);
         this.pageLineNum = this.getPageLineNum();
         this.pageNum = Math.ceil(this.lines.length / this.pageLineNum);
+        if (resetPageIdx) {
+            this.resetPageIdx();
+        }
         return this;
     }
 
@@ -140,6 +146,19 @@ class TextPagePlugin {
     }
 
     // wrapped text
+    setWordWrapWidth(width) {
+        this.wordWrapWidth = width;
+    }
+
+    setWordWrapCallback(callback, callbackScope) {
+        this.wordWrapCallback = callback;
+        this.wordWrapCallbackScope = callbackScope;
+    }
+
+    setWordWrapUseAdvanced(enabled) {
+        this.wordWrapUseAdvanced = enabled;
+    }
+        
     getWrappedText(text) {
         // TBD
         this.gameobject.style.syncFont(this.gameobject.canvas, this.gameobject.context);
@@ -190,6 +209,10 @@ class TextPagePlugin {
         idx = Clamp(idx, 0, this.lines.length - 1);
         this.startIdx = idx;
         return this;
+    }
+
+    resetPageIdx() {
+        this.pageIdx = -1;
     }
 
     setPageIdx(idx) {
