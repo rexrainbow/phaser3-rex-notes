@@ -6,7 +6,7 @@ Load assets, built-in object of phaser.
 
 ## Usage
 
-### Load assets in preload stage
+### Loading in preload stage
 
 ```javascript
 scene.load.image(key, path/to/image);
@@ -14,7 +14,7 @@ scene.load.image(key, path/to/image);
 
 Loader in 'preload' stage will start loading automatically by scene, and transfer to 'create' stage when loading completed.
 
-### Load assets after preload stage
+### Loading after preload stage
 
 ```javascript
 scene.load.image(key, path/to/image);   // add task
