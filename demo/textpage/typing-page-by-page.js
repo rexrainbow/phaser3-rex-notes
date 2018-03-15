@@ -11,7 +11,7 @@ class PageTypingText extends Phaser.GameObjects.Text {
         super(scene, x, y, text, config);
 
         this.page = new TextPagePlugin(this, GetFastValue(config, 'page', undefined));
-        this.typing = new TextTypingPlugin(this, GetFastValue(config, 'typing', undefined));
+        this.typing = new TextTypingPlugin(this, GetFastValue(config, 'type', undefined));
 
         this.typing.on('complete', this.typeNextPage, this);
     }

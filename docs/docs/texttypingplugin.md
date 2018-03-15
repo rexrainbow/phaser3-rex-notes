@@ -48,7 +48,7 @@ txt.typing.start('ABCDEFG');
 - On typing :
 
 ```javascript
-txt.typing.on('typing', function(){});
+txt.typing.on('type', function(){});
 ```
 
 - On typing completed :

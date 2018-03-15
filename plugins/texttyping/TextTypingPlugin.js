@@ -150,7 +150,7 @@ class TextTypingPlugin extends EE {
             this.typingIdx = this.textLen;
             var newText = this.getSubString(this.text, 0, this.typingIdx);
             this.setText(newText);
-            this.emit('typing');
+            this.emit('type');
             this.emit('complete');
         }
 
@@ -181,7 +181,7 @@ class TextTypingPlugin extends EE {
     onTyping() {
         var newText = this.getTypingString(this.text, this.typingIdx, this.textLen, this.typeMode);
         this.setText(newText);
-        this.emit('typing');
+        this.emit('type');
 
         if (this.isLastChar) {
             this.freeTimer();
