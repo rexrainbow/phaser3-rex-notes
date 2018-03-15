@@ -96,7 +96,7 @@ class TextPagePlugin {
     }
 
     appendText(text) {
-        this.setText(this.text + text);
+        this.setText(this.text.concat(transferText(text)));
         return this;
     }
 

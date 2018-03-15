@@ -133,7 +133,7 @@ class TextTypingPlugin extends EE {
     }
 
     appendText(text) {
-        var newText = this.text + transferText(text);
+        var newText = this.text.concat(transferText(text));
         if (this.isTyping) {
             this.setTypingContent(newText);
         } else {
