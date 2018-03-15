@@ -32,7 +32,7 @@
     
     
       
-        <title>Drag to CursorKeys - Notes of Phaser 3</title>
+        <title>Loader - Notes of Phaser 3</title>
       
     
     
@@ -86,7 +86,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Drag to CursorKeys
+                Loader
               </span>
             
           
@@ -198,12 +198,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
     
     <label class="md-nav__link" for="nav-3">
       Input
@@ -255,6 +253,23 @@
           
           
 
+
+  <li class="md-nav__item">
+    <a href="../dragcursorplugin/index.html" title="Drag to CursorKeys" class="md-nav__link">
+      Drag to CursorKeys
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
   
 
 
@@ -264,11 +279,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="toc">
-        Drag to CursorKeys
+        Loader
       </label>
     
-    <a href="index.html" title="Drag to CursorKeys" class="md-nav__link md-nav__link--active">
-      Drag to CursorKeys
+    <a href="index.html" title="Loader" class="md-nav__link md-nav__link--active">
+      Loader
     </a>
     
       
@@ -287,13 +302,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#source-code" title="Source code" class="md-nav__link">
-    Source code
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#usage" title="Usage" class="md-nav__link">
     Usage
   </a>
@@ -302,29 +310,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
+  <a href="#load-assets-in-preload-stage" title="Load assets in preload stage" class="md-nav__link">
+    Load assets in preload stage
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-state-of-cursor-keys" title="Get state of cursor keys" class="md-nav__link">
-    Get state of cursor keys
+  <a href="#load-assets-after-preload-stage" title="Load assets after preload stage" class="md-nav__link">
+    Load assets after preload stage
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-dragging-point" title="Get dragging point" class="md-nav__link">
-    Get dragging point
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#assign-origin-point" title="Assign origin point" class="md-nav__link">
-    Assign origin point
+  <a href="#events" title="Events" class="md-nav__link">
+    Events
   </a>
   
 </li>
@@ -340,23 +341,6 @@
   
 </nav>
     
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../loader/index.html" title="Loader" class="md-nav__link">
-      Loader
-    </a>
   </li>
 
     
@@ -566,13 +550,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#source-code" title="Source code" class="md-nav__link">
-    Source code
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#usage" title="Usage" class="md-nav__link">
     Usage
   </a>
@@ -581,29 +558,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
+  <a href="#load-assets-in-preload-stage" title="Load assets in preload stage" class="md-nav__link">
+    Load assets in preload stage
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-state-of-cursor-keys" title="Get state of cursor keys" class="md-nav__link">
-    Get state of cursor keys
+  <a href="#load-assets-after-preload-stage" title="Load assets after preload stage" class="md-nav__link">
+    Load assets after preload stage
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-dragging-point" title="Get dragging point" class="md-nav__link">
-    Get dragging point
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#assign-origin-point" title="Assign origin point" class="md-nav__link">
-    Assign origin point
+  <a href="#events" title="Events" class="md-nav__link">
+    Events
   </a>
   
 </li>
@@ -628,64 +598,54 @@
               
                 
                 
-                  <h1>Drag to CursorKeys</h1>
+                  <h1>Loader</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Simulate curosr keys according dragging events.</p>
+<p>Load assets, built-in object of phaser.</p>
 <ul>
-<li>Author: Rex</li>
-<li>A plugin of scene</li>
+<li>Author: Richard Davey</li>
 </ul>
-<h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dragcursor/DragCursorPlugin.js">Link</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">dragCursor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DragCursorPlugin</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
-    <span class="nx">dir</span><span class="o">:</span> <span class="s1">&#39;8dir&#39;</span><span class="p">,</span>    <span class="c1">// 0|&#39;up&amp;down&#39;|1|&#39;left&amp;right|2|&#39;4dir&#39;|3|&#39;8dir&#39;</span>
-    <span class="nx">distanceMin</span><span class="o">:</span> <span class="mi">30</span>        
-<span class="p">});</span>
+<h3 id="load-assets-in-preload-stage">Load assets in preload stage<a class="headerlink" href="#load-assets-in-preload-stage" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">image</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">path</span><span class="o">/</span><span class="nx">to</span><span class="o">/</span><span class="nx">image</span><span class="p">);</span>
 </pre></div>
 
-<p>Properties</p>
+<p>Loader in 'preload' stage will start loading automatically by scene, and transfer to 'create' stage when loading completed.</p>
+<h3 id="load-assets-after-preload-stage">Load assets after preload stage<a class="headerlink" href="#load-assets-after-preload-stage" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">image</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">path</span><span class="o">/</span><span class="nx">to</span><span class="o">/</span><span class="nx">image</span><span class="p">);</span>   <span class="c1">// add task</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>  <span class="c1">// add callback of &#39;complete&#39; event</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>                     <span class="c1">// start loading</span>
+</pre></div>
+
+<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
-<li>mode : <ul>
-<li><code>'up&amp;down'</code>, or <code>0</code> : simulate up or down cursor keys only.</li>
-<li><code>'left&amp;right'</code>, or <code>1</code> : simulate left or right cursor keys only.</li>
-<li><code>'4dir'</code>, or <code>2</code> : simulate up, down, left or right cursor keys.</li>
-<li><code>'8dir'</code>, or <code>3</code> : simulate up, up-left, up-right, down, down-left, down-right, left, or right cursor keys.</li>
+<li>Start loading</li>
 </ul>
-</li>
-<li>distanceMin : cursor keys will be pressed when dragging distance is larger then this value.</li>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
+</pre></div>
+
+<ul>
+<li>Loading progressing</li>
 </ul>
-<h3 id="get-state-of-cursor-keys">Get state of cursor keys<a class="headerlink" href="#get-state-of-cursor-keys" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cursorKeys</span> <span class="o">=</span> <span class="nx">dragCursor</span><span class="p">.</span><span class="nx">createCursorKeys</span><span class="p">();</span>
-
-<span class="kd">var</span> <span class="nx">isLeftKeyDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">left</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">isRightKeyDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">right</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">isUpKeyDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">up</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">isDownKeyDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">down</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;progress&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">progress</span><span class="p">){});</span>
 </pre></div>
 
-<h3 id="get-dragging-point">Get dragging point<a class="headerlink" href="#get-dragging-point" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">dragStartX</span> <span class="o">=</span> <span class="nx">dragCursor</span><span class="p">.</span><span class="nx">start</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">dragStartY</span> <span class="o">=</span> <span class="nx">dragCursor</span><span class="p">.</span><span class="nx">start</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">dragEndX</span> <span class="o">=</span> <span class="nx">dragCursor</span><span class="p">.</span><span class="nx">end</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">dragEndY</span> <span class="o">=</span> <span class="nx">dragCursor</span><span class="p">.</span><span class="nx">end</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+<ul>
+<li>Loading a file object successful</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fileObj</span><span class="p">){});</span>
 </pre></div>
 
-<h3 id="assign-origin-point">Assign origin point<a class="headerlink" href="#assign-origin-point" title="Permanent link">&para;</a></h3>
-<p>Origin point is the dragging start point, or assign origin point when creating instance.</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">dragCursor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DragCursorPlugin</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
-    <span class="c1">// ...</span>
-    <span class="nx">origin</span><span class="o">:</span> <span class="p">{</span>       <span class="c1">// assign origin point to (400,300)</span>
-        <span class="nx">x</span><span class="o">:</span> <span class="mi">400</span><span class="p">,</span>
-        <span class="nx">y</span><span class="o">:</span> <span class="mi">300</span>
-    <span class="p">}</span>
-<span class="p">});</span>
+<ul>
+<li>Loading a file object failed</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;loaderror&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fileObj</span><span class="p">){});</span>
 </pre></div>
 
-<p>Or assign origin point by <code>setOrigin(x, y)</code> function.</p>
-<div class="codehilite"><pre><span></span><span class="nx">dragCursor</span><span class="p">.</span><span class="nx">setOrigin</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">300</span><span class="p">);</span>  <span class="c1">// assign origin point to (400,300)</span>
+<ul>
+<li>All loading completed</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
 </pre></div>
                 
                   
@@ -705,7 +665,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../dragplugin/index.html" title="Drag" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../dragcursorplugin/index.html" title="Drag to CursorKeys" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -714,19 +674,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Drag
+                Drag to CursorKeys
               </span>
             </div>
           </a>
         
         
-          <a href="../loader/index.html" title="Loader" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../gameobject/index.html" title="Game object" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Loader
+                Game object
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
