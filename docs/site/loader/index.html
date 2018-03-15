@@ -310,15 +310,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#load-assets-in-preload-stage" title="Load assets in preload stage" class="md-nav__link">
-    Load assets in preload stage
+  <a href="#loading-in-preload-stage" title="Loading in preload stage" class="md-nav__link">
+    Loading in preload stage
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#load-assets-after-preload-stage" title="Load assets after preload stage" class="md-nav__link">
-    Load assets after preload stage
+  <a href="#loading-after-preload-stage" title="Loading after preload stage" class="md-nav__link">
+    Loading after preload stage
   </a>
   
 </li>
@@ -558,15 +558,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#load-assets-in-preload-stage" title="Load assets in preload stage" class="md-nav__link">
-    Load assets in preload stage
+  <a href="#loading-in-preload-stage" title="Loading in preload stage" class="md-nav__link">
+    Loading in preload stage
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#load-assets-after-preload-stage" title="Load assets after preload stage" class="md-nav__link">
-    Load assets after preload stage
+  <a href="#loading-after-preload-stage" title="Loading after preload stage" class="md-nav__link">
+    Loading after preload stage
   </a>
   
 </li>
@@ -606,12 +606,12 @@
 <li>Author: Richard Davey</li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<h3 id="load-assets-in-preload-stage">Load assets in preload stage<a class="headerlink" href="#load-assets-in-preload-stage" title="Permanent link">&para;</a></h3>
+<h3 id="loading-in-preload-stage">Loading in preload stage<a class="headerlink" href="#loading-in-preload-stage" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">image</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">path</span><span class="o">/</span><span class="nx">to</span><span class="o">/</span><span class="nx">image</span><span class="p">);</span>
 </pre></div>
 
 <p>Loader in 'preload' stage will start loading automatically by scene, and transfer to 'create' stage when loading completed.</p>
-<h3 id="load-assets-after-preload-stage">Load assets after preload stage<a class="headerlink" href="#load-assets-after-preload-stage" title="Permanent link">&para;</a></h3>
+<h3 id="loading-after-preload-stage">Loading after preload stage<a class="headerlink" href="#loading-after-preload-stage" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">image</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">path</span><span class="o">/</span><span class="nx">to</span><span class="o">/</span><span class="nx">image</span><span class="p">);</span>   <span class="c1">// add task</span>
 <span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>  <span class="c1">// add callback of &#39;complete&#39; event</span>
 <span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>                     <span class="c1">// start loading</span>

@@ -212,7 +212,7 @@
         }, 
         {
             "location": "/loader/index.html", 
-            "text": "Introduction\n\n\nLoad assets, built-in object of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nLoad assets in preload stage\n\n\nscene\n.\nload\n.\nimage\n(\nkey\n,\n \npath\n/\nto\n/\nimage\n);\n\n\n\n\n\nLoader in 'preload' stage will start loading automatically by scene, and transfer to 'create' stage when loading completed.\n\n\nLoad assets after preload stage\n\n\nscene\n.\nload\n.\nimage\n(\nkey\n,\n \npath\n/\nto\n/\nimage\n);\n   \n// add task\n\n\nscene\n.\nload\n.\nonce\n(\ncomplete\n,\n \ncallback\n);\n  \n// add callback of \ncomplete\n event\n\n\nscene\n.\nload\n.\nstart\n();\n                     \n// start loading\n\n\n\n\n\nEvents\n\n\n\n\nStart loading\n\n\n\n\nscene\n.\nload\n.\nonce\n(\nstart\n,\n \nfunction\n(){});\n\n\n\n\n\n\n\nLoading progressing\n\n\n\n\nscene\n.\nload\n.\nonce\n(\nprogress\n,\n \nfunction\n(\nprogress\n){});\n\n\n\n\n\n\n\nLoading a file object successful\n\n\n\n\nscene\n.\nload\n.\nonce\n(\nload\n,\n \nfunction\n(\nfileObj\n){});\n\n\n\n\n\n\n\nLoading a file object failed\n\n\n\n\nscene\n.\nload\n.\nonce\n(\nloaderror\n,\n \nfunction\n(\nfileObj\n){});\n\n\n\n\n\n\n\nAll loading completed\n\n\n\n\nscene\n.\nload\n.\nonce\n(\ncomplete\n,\n \nfunction\n(){});", 
+            "text": "Introduction\n\n\nLoad assets, built-in object of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nLoading in preload stage\n\n\nscene\n.\nload\n.\nimage\n(\nkey\n,\n \npath\n/\nto\n/\nimage\n);\n\n\n\n\n\nLoader in 'preload' stage will start loading automatically by scene, and transfer to 'create' stage when loading completed.\n\n\nLoading after preload stage\n\n\nscene\n.\nload\n.\nimage\n(\nkey\n,\n \npath\n/\nto\n/\nimage\n);\n   \n// add task\n\n\nscene\n.\nload\n.\nonce\n(\ncomplete\n,\n \ncallback\n);\n  \n// add callback of \ncomplete\n event\n\n\nscene\n.\nload\n.\nstart\n();\n                     \n// start loading\n\n\n\n\n\nEvents\n\n\n\n\nStart loading\n\n\n\n\nscene\n.\nload\n.\nonce\n(\nstart\n,\n \nfunction\n(){});\n\n\n\n\n\n\n\nLoading progressing\n\n\n\n\nscene\n.\nload\n.\nonce\n(\nprogress\n,\n \nfunction\n(\nprogress\n){});\n\n\n\n\n\n\n\nLoading a file object successful\n\n\n\n\nscene\n.\nload\n.\nonce\n(\nload\n,\n \nfunction\n(\nfileObj\n){});\n\n\n\n\n\n\n\nLoading a file object failed\n\n\n\n\nscene\n.\nload\n.\nonce\n(\nloaderror\n,\n \nfunction\n(\nfileObj\n){});\n\n\n\n\n\n\n\nAll loading completed\n\n\n\n\nscene\n.\nload\n.\nonce\n(\ncomplete\n,\n \nfunction\n(){});", 
             "title": "Loader"
         }, 
         {
@@ -226,14 +226,14 @@
             "title": "Usage"
         }, 
         {
-            "location": "/loader/index.html#load-assets-in-preload-stage", 
+            "location": "/loader/index.html#loading-in-preload-stage", 
             "text": "scene . load . image ( key ,   path / to / image );   Loader in 'preload' stage will start loading automatically by scene, and transfer to 'create' stage when loading completed.", 
-            "title": "Load assets in preload stage"
+            "title": "Loading in preload stage"
         }, 
         {
-            "location": "/loader/index.html#load-assets-after-preload-stage", 
+            "location": "/loader/index.html#loading-after-preload-stage", 
             "text": "scene . load . image ( key ,   path / to / image );     // add task  scene . load . once ( complete ,   callback );    // add callback of  complete  event  scene . load . start ();                       // start loading", 
-            "title": "Load assets after preload stage"
+            "title": "Loading after preload stage"
         }, 
         {
             "location": "/loader/index.html#events", 
