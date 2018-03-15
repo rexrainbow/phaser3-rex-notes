@@ -151,7 +151,7 @@ class TextTypingPlugin extends EE {
             var newText = this.getSubString(this.text, 0, this.typingIdx);
             this.setText(newText);
             this.emit('typing');
-            this.emit('typingcompleted');
+            this.emit('complete');
         }
 
         return this;
@@ -185,7 +185,7 @@ class TextTypingPlugin extends EE {
 
         if (this.isLastChar) {
             this.freeTimer();
-            this.emit('typingcompleted');
+            this.emit('complete');
         } else {
             this.timer.delay = this.speed; // delay of next typing            
             this.typingIdx++;

@@ -13,7 +13,7 @@ class PageTypingText extends Phaser.GameObjects.Text {
         this.page = new TextPagePlugin(this, GetFastValue(config, 'page', undefined));
         this.typing = new TextTypingPlugin(this, GetFastValue(config, 'typing', undefined));
 
-        this.typing.on('typingcompleted', this.typeNextPage, this);
+        this.typing.on('complete', this.typeNextPage, this);
     }
 
     start(text, speed) {
@@ -25,7 +25,7 @@ class PageTypingText extends Phaser.GameObjects.Text {
         if (!this.page.isLastPage) {
             this.typing.start(this.page.getNextPage(), speed);
         } else {
-            this.emit('typingcompleted');
+            this.emit('complete');
         }
     }
 
@@ -67,10 +67,9 @@ Grab the source and join the fun!`;
             maxLines: 7
         });
         this.add.existing(txt);
-        txt.once('typingcompleted', function () {
+        txt.once('complete', function () {
             console.log('done');
-        });
-        txt.start(content, 50);
+        }).start(content, 50);
 
     }
 

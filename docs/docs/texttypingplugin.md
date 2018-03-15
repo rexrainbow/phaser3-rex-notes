@@ -54,7 +54,7 @@ txt.typing.on('typing', function(){});
 - On typing completed :
 
 ```javascript
-txt.typing.on('typingcompleted', function(){});
+txt.typing.on('complete', function(){});
 ```
 
 ### Other commands
