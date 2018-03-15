@@ -50,6 +50,18 @@ var flipY = gameobject.flipY;
 gameobject.flipY = false;
 ```
 
+### Scroll factor
+
+```javascript
+gameobject.setScrollFactor(f);
+```
+
+factor: 0~1
+
+- 0= fixed to camera
+- 0.25= quarter the speed of the camera
+- 0.5= half the speed of the camera
+
 ### Edges
 
 ```javascript

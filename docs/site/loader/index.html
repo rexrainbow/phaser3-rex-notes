@@ -610,7 +610,7 @@
 <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">image</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">path</span><span class="o">/</span><span class="nx">to</span><span class="o">/</span><span class="nx">image</span><span class="p">);</span>
 </pre></div>
 
-<p>Loader in 'preload' stage will start loading automatically by scene, and transfer to 'create' stage when loading completed.</p>
+<p>Loader in preload stage will start loading automatically by scene, and transfer to create stage when loading completed.</p>
 <h3 id="loading-after-preload-stage">Loading after preload stage<a class="headerlink" href="#loading-after-preload-stage" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">image</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">path</span><span class="o">/</span><span class="nx">to</span><span class="o">/</span><span class="nx">image</span><span class="p">);</span>   <span class="c1">// add task</span>
 <span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>  <span class="c1">// add callback of &#39;complete&#39; event</span>

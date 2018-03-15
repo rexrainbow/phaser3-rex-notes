@@ -212,7 +212,7 @@
         }, 
         {
             "location": "/loader/index.html", 
-            "text": "Introduction\n\n\nLoad assets, built-in object of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nLoading in preload stage\n\n\nscene\n.\nload\n.\nimage\n(\nkey\n,\n \npath\n/\nto\n/\nimage\n);\n\n\n\n\n\nLoader in 'preload' stage will start loading automatically by scene, and transfer to 'create' stage when loading completed.\n\n\nLoading after preload stage\n\n\nscene\n.\nload\n.\nimage\n(\nkey\n,\n \npath\n/\nto\n/\nimage\n);\n   \n// add task\n\n\nscene\n.\nload\n.\nonce\n(\ncomplete\n,\n \ncallback\n);\n  \n// add callback of \ncomplete\n event\n\n\nscene\n.\nload\n.\nstart\n();\n                     \n// start loading\n\n\n\n\n\nEvents\n\n\n\n\nStart loading\n\n\n\n\nscene\n.\nload\n.\nonce\n(\nstart\n,\n \nfunction\n(){});\n\n\n\n\n\n\n\nLoading progressing\n\n\n\n\nscene\n.\nload\n.\nonce\n(\nprogress\n,\n \nfunction\n(\nprogress\n){});\n\n\n\n\n\n\n\nLoading a file object successful\n\n\n\n\nscene\n.\nload\n.\nonce\n(\nload\n,\n \nfunction\n(\nfileObj\n){});\n\n\n\n\n\n\n\nLoading a file object failed\n\n\n\n\nscene\n.\nload\n.\nonce\n(\nloaderror\n,\n \nfunction\n(\nfileObj\n){});\n\n\n\n\n\n\n\nAll loading completed\n\n\n\n\nscene\n.\nload\n.\nonce\n(\ncomplete\n,\n \nfunction\n(){});", 
+            "text": "Introduction\n\n\nLoad assets, built-in object of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nLoading in preload stage\n\n\nscene\n.\nload\n.\nimage\n(\nkey\n,\n \npath\n/\nto\n/\nimage\n);\n\n\n\n\n\nLoader in preload stage will start loading automatically by scene, and transfer to create stage when loading completed.\n\n\nLoading after preload stage\n\n\nscene\n.\nload\n.\nimage\n(\nkey\n,\n \npath\n/\nto\n/\nimage\n);\n   \n// add task\n\n\nscene\n.\nload\n.\nonce\n(\ncomplete\n,\n \ncallback\n);\n  \n// add callback of \ncomplete\n event\n\n\nscene\n.\nload\n.\nstart\n();\n                     \n// start loading\n\n\n\n\n\nEvents\n\n\n\n\nStart loading\n\n\n\n\nscene\n.\nload\n.\nonce\n(\nstart\n,\n \nfunction\n(){});\n\n\n\n\n\n\n\nLoading progressing\n\n\n\n\nscene\n.\nload\n.\nonce\n(\nprogress\n,\n \nfunction\n(\nprogress\n){});\n\n\n\n\n\n\n\nLoading a file object successful\n\n\n\n\nscene\n.\nload\n.\nonce\n(\nload\n,\n \nfunction\n(\nfileObj\n){});\n\n\n\n\n\n\n\nLoading a file object failed\n\n\n\n\nscene\n.\nload\n.\nonce\n(\nloaderror\n,\n \nfunction\n(\nfileObj\n){});\n\n\n\n\n\n\n\nAll loading completed\n\n\n\n\nscene\n.\nload\n.\nonce\n(\ncomplete\n,\n \nfunction\n(){});", 
             "title": "Loader"
         }, 
         {
@@ -227,7 +227,7 @@
         }, 
         {
             "location": "/loader/index.html#loading-in-preload-stage", 
-            "text": "scene . load . image ( key ,   path / to / image );   Loader in 'preload' stage will start loading automatically by scene, and transfer to 'create' stage when loading completed.", 
+            "text": "scene . load . image ( key ,   path / to / image );   Loader in preload stage will start loading automatically by scene, and transfer to create stage when loading completed.", 
             "title": "Loading in preload stage"
         }, 
         {
@@ -242,7 +242,7 @@
         }, 
         {
             "location": "/gameobject/index.html", 
-            "text": "Introduction\n\n\nBase class of all game object in phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nPosition\n\n\nvar\n \nx\n \n=\n \ngameobject\n.\nx\n;\n\n\nvar\n \ny\n \n=\n \ngameobject\n.\ny\n;\n\n\ngameobject\n.\nx\n \n=\n \n100\n;\n\n\ngameobject\n.\ny\n \n=\n \n100\n;\n\n\n\n\n\nAngle\n\n\nvar\n \nangle\n \n=\n \ngameobject\n.\nangle\n;\n\n\ngameobject\n.\nangle\n \n=\n \n90\n;\n\n\n\n// angle in radians\n\n\nvar\n \nrad\n \n=\n \ngameobject\n.\nrotation\n;\n\n\ngameobject\n.\nrotation\n \n=\n \nPhaser\n.\nMath\n.\nDegToRad\n(\n90\n);\n\n\n\n\n\nVisible\n\n\nvar\n \nvisible\n \n=\n \ngameobject\n.\nvisible\n;\n\n\ngameobject\n.\nvisible\n \n=\n \ntrue\n;\n\n\n\n\n\nAlpha\n\n\nvar\n \nalpha\n \n=\n \ngameobject\n.\nalpha\n;\n\n\ngameobject\n.\nalpha\n \n=\n \n0.5\n;\n\n\n\n\n\nFlipX, FlipY\n\n\nvar\n \nflipX\n \n=\n \ngameobject\n.\nflipX\n;\n\n\ngameobject\n.\nflipX\n \n=\n \nfalse\n;\n\n\n\nvar\n \nflipY\n \n=\n \ngameobject\n.\nflipY\n;\n\n\ngameobject\n.\nflipY\n \n=\n \nfalse\n;\n\n\n\n\n\nEdges\n\n\nvar\n \ntopLeft\n \n=\n \ngameobject\n.\ngetTopLeft\n();\n         \n// topLeft.x, topLeft.y\n\n\nvar\n \ntopRight\n \n=\n \ngameobject\n.\ngetTopRight\n();\n       \n// topRight.x, topRight.y\n\n\nvar\n \nbottomLeft\n \n=\n \ngameobject\n.\ngetBottomLeft\n();\n   \n// bottomLeft.x, bottomLeft.y\n\n\nvar\n \nbottomRight\n \n=\n \ngameobject\n.\ngetBottomRight\n();\n \n// bottomRight.x, bottomRight.y", 
+            "text": "Introduction\n\n\nBase class of all game object in phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nPosition\n\n\nvar\n \nx\n \n=\n \ngameobject\n.\nx\n;\n\n\nvar\n \ny\n \n=\n \ngameobject\n.\ny\n;\n\n\ngameobject\n.\nx\n \n=\n \n100\n;\n\n\ngameobject\n.\ny\n \n=\n \n100\n;\n\n\n\n\n\nAngle\n\n\nvar\n \nangle\n \n=\n \ngameobject\n.\nangle\n;\n\n\ngameobject\n.\nangle\n \n=\n \n90\n;\n\n\n\n// angle in radians\n\n\nvar\n \nrad\n \n=\n \ngameobject\n.\nrotation\n;\n\n\ngameobject\n.\nrotation\n \n=\n \nPhaser\n.\nMath\n.\nDegToRad\n(\n90\n);\n\n\n\n\n\nVisible\n\n\nvar\n \nvisible\n \n=\n \ngameobject\n.\nvisible\n;\n\n\ngameobject\n.\nvisible\n \n=\n \ntrue\n;\n\n\n\n\n\nAlpha\n\n\nvar\n \nalpha\n \n=\n \ngameobject\n.\nalpha\n;\n\n\ngameobject\n.\nalpha\n \n=\n \n0.5\n;\n\n\n\n\n\nFlipX, FlipY\n\n\nvar\n \nflipX\n \n=\n \ngameobject\n.\nflipX\n;\n\n\ngameobject\n.\nflipX\n \n=\n \nfalse\n;\n\n\n\nvar\n \nflipY\n \n=\n \ngameobject\n.\nflipY\n;\n\n\ngameobject\n.\nflipY\n \n=\n \nfalse\n;\n\n\n\n\n\nScroll factor\n\n\ngameobject\n.\nsetScrollFactor\n(\nf\n);\n\n\n\n\n\nfactor: 0~1\n\n\n\n\n0= fixed to camera\n\n\n0.25= quarter the speed of the camera\n\n\n0.5= half the speed of the camera\n\n\n\n\nEdges\n\n\nvar\n \ntopLeft\n \n=\n \ngameobject\n.\ngetTopLeft\n();\n         \n// topLeft.x, topLeft.y\n\n\nvar\n \ntopRight\n \n=\n \ngameobject\n.\ngetTopRight\n();\n       \n// topRight.x, topRight.y\n\n\nvar\n \nbottomLeft\n \n=\n \ngameobject\n.\ngetBottomLeft\n();\n   \n// bottomLeft.x, bottomLeft.y\n\n\nvar\n \nbottomRight\n \n=\n \ngameobject\n.\ngetBottomRight\n();\n \n// bottomRight.x, bottomRight.y", 
             "title": "Game object"
         }, 
         {
@@ -279,6 +279,11 @@
             "location": "/gameobject/index.html#flipx-flipy", 
             "text": "var   flipX   =   gameobject . flipX ;  gameobject . flipX   =   false ;  var   flipY   =   gameobject . flipY ;  gameobject . flipY   =   false ;", 
             "title": "FlipX, FlipY"
+        }, 
+        {
+            "location": "/gameobject/index.html#scroll-factor", 
+            "text": "gameobject . setScrollFactor ( f );   factor: 0~1   0= fixed to camera  0.25= quarter the speed of the camera  0.5= half the speed of the camera", 
+            "title": "Scroll factor"
         }, 
         {
             "location": "/gameobject/index.html#edges", 
