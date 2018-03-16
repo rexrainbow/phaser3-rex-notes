@@ -212,7 +212,7 @@
         }, 
         {
             "location": "/loader/index.html", 
-            "text": "Introduction\n\n\nLoad assets, built-in object of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nLoading in preload stage\n\n\nscene\n.\nload\n.\nimage\n(\nkey\n,\n \npath\n/\nto\n/\nimage\n);\n\n\n\n\n\nLoader in preload stage will start loading automatically by scene, and transfer to create stage when loading completed.\n\n\nLoading after preload stage\n\n\nscene\n.\nload\n.\nimage\n(\nkey\n,\n \npath\n/\nto\n/\nimage\n);\n   \n// add task\n\n\nscene\n.\nload\n.\nonce\n(\ncomplete\n,\n \ncallback\n);\n  \n// add callback of \ncomplete\n event\n\n\nscene\n.\nload\n.\nstart\n();\n                     \n// start loading\n\n\n\n\n\nEvents\n\n\n\n\nStart loading\n\n\n\n\nscene\n.\nload\n.\nonce\n(\nstart\n,\n \nfunction\n(){});\n\n\n\n\n\n\n\nLoading progressing\n\n\n\n\nscene\n.\nload\n.\nonce\n(\nprogress\n,\n \nfunction\n(\nprogress\n){});\n\n\n\n\n\n\n\nLoading a file object successful\n\n\n\n\nscene\n.\nload\n.\nonce\n(\nload\n,\n \nfunction\n(\nfileObj\n){});\n\n\n\n\n\n\n\nLoading a file object failed\n\n\n\n\nscene\n.\nload\n.\nonce\n(\nloaderror\n,\n \nfunction\n(\nfileObj\n){});\n\n\n\n\n\n\n\nAll loading completed\n\n\n\n\nscene\n.\nload\n.\nonce\n(\ncomplete\n,\n \nfunction\n(){});", 
+            "text": "Introduction\n\n\nLoad assets, built-in object of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nLoading in preload stage\n\n\nscene\n.\nload\n.\nimage\n(\nkey\n,\n \nurl\n);\n\n\n\n\n\nLoader in preload stage will start loading automatically by scene.\n\n\nLoading after preload stage\n\n\nscene\n.\nload\n.\nimage\n(\nkey\n,\n \nurl\n);\n   \n// add task\n\n\nscene\n.\nload\n.\nonce\n(\ncomplete\n,\n \ncallback\n);\n  \n// add callback of \ncomplete\n event\n\n\nscene\n.\nload\n.\nstart\n();\n                     \n// start loading\n\n\n\n\n\nEvents\n\n\n\n\n\n\nStart loading\n\n\nscene\n.\nload\n.\nonce\n(\nstart\n,\n \nfunction\n(){});\n\n\n\n\n\n\n\n\n\nLoading progressing\n\n\nscene\n.\nload\n.\nonce\n(\nprogress\n,\n \nfunction\n(\nprogress\n){});\n\n\n\n\n\n\n\n\n\nLoading a file object successful\n\n\nscene\n.\nload\n.\nonce\n(\nload\n,\n \nfunction\n(\nfileObj\n){});\n\n\n\n\n\n\n\n\n\nLoading a file object failed\n\n\nscene\n.\nload\n.\nonce\n(\nloaderror\n,\n \nfunction\n(\nfileObj\n){});\n\n\n\n\n\n\n\n\n\nAll loading completed\n\n\nscene\n.\nload\n.\nonce\n(\ncomplete\n,\n \nfunction\n(){});\n\n\n\n\n\n\n\n\n\nStatus of loader\n\n\n\n\n\n\nReady to start loading\n\n\nvar\n \nisReady\n \n=\n \nscene\n.\nload\n.\nisReady\n();\n\n\n\n\n\n\n\n\n\nIs loading\n\n\nvar\n \nisLoading\n \n=\n \nscene\n.\nload\n.\nisLoading\n();\n\n\n\n\n\n\n\n\n\nFile types\n\n\nImage\n\n\nscene\n.\nload\n.\nimage\n(\nkey\n,\n \nurl\n);\n  \n// image\n\n\nscene\n.\nload\n.\nsvg\n(\nkey\n,\n \nurl\n);\n    \n// image in svg format\n\n\nscene\n.\nload\n.\nhtml\n(\nkey\n,\n \nurl\n,\n \nwidth\n,\n \nheight\n);\n  \n// image in html format\n\n\n\n\n\nGet data from texture cache\n\n\nvar\n \ncache\n \n=\n \nscene\n.\ntextures\n;\n\n\nvar\n \ndata\n \n=\n \ncache\n.\nget\n(\nkey\n);\n\n\n\n\n\nSprite sheet\n\n\nscene\n.\nload\n.\nspritesheet\n(\nkey\n,\n \nurl\n,\n \n{\n\n    \n// frameWidth: frameWidth,\n\n    \n// frameHeight: frameHeight,\n\n    \n// startFrame: startFrame,\n\n    \n// endFrame: endFrame,\n\n    \n// margin: margin,\n\n    \n// spacing: spacing\n\n\n});\n\n\n\n\n\nGet data from texture cache\n\n\nvar\n \ncache\n \n=\n \nscene\n.\ntextures\n;\n\n\nvar\n \ndata\n \n=\n \ncache\n.\nget\n(\nkey\n);\n\n\n\n\n\nTexture atlas\n\n\nscene\n.\nload\n.\natlas\n(\nkey\n,\n \ntextureURL\n,\n \natlasURL\n);\n\n\n\n\n\nGet data from texture cache\n\n\nvar\n \ncache\n \n=\n \nscene\n.\ntextures\n;\n\n\nvar\n \ndata\n \n=\n \ncache\n.\nget\n(\nkey\n);\n\n\n\n\n\nMulti file texture atlas\n\n\nscene\n.\nload\n.\nmultiatlas\n(\nkey\n,\n \ntextureURLs\n,\n \natlasURLs\n);\n\n\n\n\n\nUnity texture atlas\n\n\nscene\n.\nload\n.\nunityAtlas\n(\nkey\n,\n \ntextureURL\n,\n \natlasURL\n);\n\n\n\n\n\nAnimation\n\n\nscene\n.\nload\n.\nanimation\n(\nkey\n,\n \nurl\n);\n\n\n\n\n\nAudio\n\n\nscene\n.\nload\n.\naudio\n(\nkey\n,\n \nurls\n);\n\n\n\n\n\nGet data from cache\n\n\nvar\n \ncache\n \n=\n \nscene\n.\ncache\n.\naudio\n;\n\n\nvar\n \ndata\n \n=\n \ncache\n.\nget\n(\nkey\n);\n\n\n\n\n\nAudio sprite\n\n\nscene\n.\nload\n.\naudioSprite\n(\nkey\n,\n \nurls\n,\n \njson\n,\n \nconfig\n);\n\n\n\n\n\nBitmap font\n\n\nscene\n.\nload\n.\nbitmapFont\n(\nkey\n,\n \ntextureURL\n,\n \nxmlURL\n);\n\n\n\n\n\nGet data from cache\n\n\nvar\n \ncache\n \n=\n \nscene\n.\ncache\n.\nbitmapFont\n;\n\n\nvar\n \ndata\n \n=\n \ncache\n.\nget\n(\nkey\n);\n\n\n\n\n\nTile map\n\n\nscene\n.\nload\n.\ntilemapWeltmeister\n(\nkey\n,\n \nurl\n);\n  \n// JSON\n\n\nscene\n.\nload\n.\ntilemapCSV\n(\nkey\n,\n \nurl\n);\n          \n// CSV\n\n\n\n\n\nGet data from cache\n\n\nvar\n \ncache\n \n=\n \nscene\n.\ncache\n.\ntilemap\n;\n\n\nvar\n \ndata\n \n=\n \ncache\n.\nget\n(\nkey\n);\n\n\n\n\n\nText\n\n\nscene\n.\nload\n.\ntext\n(\nkey\n,\n \nurl\n);\n\n\n\n\n\nGet data from cache\n\n\nvar\n \ncache\n \n=\n \nscene\n.\ncache\n.\ntext\n;\n\n\nvar\n \ndata\n \n=\n \ncache\n.\nget\n(\nkey\n);\n\n\n\n\n\nJSON\n\n\nscene\n.\nload\n.\njson\n(\nkey\n,\n \nurl\n);\n\n\n\n\n\nGet data from cache\n\n\nvar\n \ncache\n \n=\n \nscene\n.\ncache\n.\njson\n;\n\n\nvar\n \ndata\n \n=\n \ncache\n.\nget\n(\nkey\n);\n\n\n\n\n\nXML\n\n\nscene\n.\nload\n.\nxml\n(\nkey\n,\n \nurl\n);\n\n\n\n\n\nGet data from cache\n\n\nvar\n \ncache\n \n=\n \nscene\n.\ncache\n.\nxml\n;\n\n\nvar\n \ndata\n \n=\n \ncache\n.\nget\n(\nkey\n);\n\n\n\n\n\nScript\n\n\nscene\n.\nload\n.\nscript\n(\nkey\n,\n \nurl\n);\n\n\n\n\n\nGLSL\n\n\nscene\n.\nload\n.\nglsl\n(\nkey\n,\n \nurl\n);\n\n\n\n\n\nGet data from cache\n\n\nvar\n \ncache\n \n=\n \nscene\n.\ncache\n.\nshader\n;\n\n\nvar\n \ndata\n \n=\n \ncache\n.\nget\n(\nkey\n);\n\n\n\n\n\nBinary\n\n\nscene\n.\nload\n.\nbinary\n(\nkey\n,\n \nurl\n);\n\n\n\n\n\nGet data from cache\n\n\nvar\n \ncache\n \n=\n \nscene\n.\ncache\n.\nbinary\n;\n\n\nvar\n \ndata\n \n=\n \ncache\n.\nget\n(\nkey\n);\n\n\n\n\n\nPlugin\n\n\nscene\n.\nload\n.\nplugin\n(\nkey\n,\n \nurl\n);\n\n\n\n\n\nRelease data\n\n\nvar cache = scene.cache.text;\ncache.remove(key);\n\n\n\n\nData in cache\n\n\nvar cache = scene.cache.text;\nvar hasData = cache.has(key);", 
             "title": "Loader"
         }, 
         {
@@ -227,18 +227,123 @@
         }, 
         {
             "location": "/loader/index.html#loading-in-preload-stage", 
-            "text": "scene . load . image ( key ,   path / to / image );   Loader in preload stage will start loading automatically by scene, and transfer to create stage when loading completed.", 
+            "text": "scene . load . image ( key ,   url );   Loader in preload stage will start loading automatically by scene.", 
             "title": "Loading in preload stage"
         }, 
         {
             "location": "/loader/index.html#loading-after-preload-stage", 
-            "text": "scene . load . image ( key ,   path / to / image );     // add task  scene . load . once ( complete ,   callback );    // add callback of  complete  event  scene . load . start ();                       // start loading", 
+            "text": "scene . load . image ( key ,   url );     // add task  scene . load . once ( complete ,   callback );    // add callback of  complete  event  scene . load . start ();                       // start loading", 
             "title": "Loading after preload stage"
         }, 
         {
             "location": "/loader/index.html#events", 
-            "text": "Start loading   scene . load . once ( start ,   function (){});    Loading progressing   scene . load . once ( progress ,   function ( progress ){});    Loading a file object successful   scene . load . once ( load ,   function ( fileObj ){});    Loading a file object failed   scene . load . once ( loaderror ,   function ( fileObj ){});    All loading completed   scene . load . once ( complete ,   function (){});", 
+            "text": "Start loading  scene . load . once ( start ,   function (){});     Loading progressing  scene . load . once ( progress ,   function ( progress ){});     Loading a file object successful  scene . load . once ( load ,   function ( fileObj ){});     Loading a file object failed  scene . load . once ( loaderror ,   function ( fileObj ){});     All loading completed  scene . load . once ( complete ,   function (){});", 
             "title": "Events"
+        }, 
+        {
+            "location": "/loader/index.html#status-of-loader", 
+            "text": "Ready to start loading  var   isReady   =   scene . load . isReady ();     Is loading  var   isLoading   =   scene . load . isLoading ();", 
+            "title": "Status of loader"
+        }, 
+        {
+            "location": "/loader/index.html#file-types", 
+            "text": "", 
+            "title": "File types"
+        }, 
+        {
+            "location": "/loader/index.html#image", 
+            "text": "scene . load . image ( key ,   url );    // image  scene . load . svg ( key ,   url );      // image in svg format  scene . load . html ( key ,   url ,   width ,   height );    // image in html format   Get data from texture cache  var   cache   =   scene . textures ;  var   data   =   cache . get ( key );", 
+            "title": "Image"
+        }, 
+        {
+            "location": "/loader/index.html#sprite-sheet", 
+            "text": "scene . load . spritesheet ( key ,   url ,   { \n     // frameWidth: frameWidth, \n     // frameHeight: frameHeight, \n     // startFrame: startFrame, \n     // endFrame: endFrame, \n     // margin: margin, \n     // spacing: spacing  });   Get data from texture cache  var   cache   =   scene . textures ;  var   data   =   cache . get ( key );", 
+            "title": "Sprite sheet"
+        }, 
+        {
+            "location": "/loader/index.html#texture-atlas", 
+            "text": "scene . load . atlas ( key ,   textureURL ,   atlasURL );   Get data from texture cache  var   cache   =   scene . textures ;  var   data   =   cache . get ( key );", 
+            "title": "Texture atlas"
+        }, 
+        {
+            "location": "/loader/index.html#multi-file-texture-atlas", 
+            "text": "scene . load . multiatlas ( key ,   textureURLs ,   atlasURLs );", 
+            "title": "Multi file texture atlas"
+        }, 
+        {
+            "location": "/loader/index.html#unity-texture-atlas", 
+            "text": "scene . load . unityAtlas ( key ,   textureURL ,   atlasURL );", 
+            "title": "Unity texture atlas"
+        }, 
+        {
+            "location": "/loader/index.html#animation", 
+            "text": "scene . load . animation ( key ,   url );", 
+            "title": "Animation"
+        }, 
+        {
+            "location": "/loader/index.html#audio", 
+            "text": "scene . load . audio ( key ,   urls );   Get data from cache  var   cache   =   scene . cache . audio ;  var   data   =   cache . get ( key );", 
+            "title": "Audio"
+        }, 
+        {
+            "location": "/loader/index.html#audio-sprite", 
+            "text": "scene . load . audioSprite ( key ,   urls ,   json ,   config );", 
+            "title": "Audio sprite"
+        }, 
+        {
+            "location": "/loader/index.html#bitmap-font", 
+            "text": "scene . load . bitmapFont ( key ,   textureURL ,   xmlURL );   Get data from cache  var   cache   =   scene . cache . bitmapFont ;  var   data   =   cache . get ( key );", 
+            "title": "Bitmap font"
+        }, 
+        {
+            "location": "/loader/index.html#tile-map", 
+            "text": "scene . load . tilemapWeltmeister ( key ,   url );    // JSON  scene . load . tilemapCSV ( key ,   url );            // CSV   Get data from cache  var   cache   =   scene . cache . tilemap ;  var   data   =   cache . get ( key );", 
+            "title": "Tile map"
+        }, 
+        {
+            "location": "/loader/index.html#text", 
+            "text": "scene . load . text ( key ,   url );   Get data from cache  var   cache   =   scene . cache . text ;  var   data   =   cache . get ( key );", 
+            "title": "Text"
+        }, 
+        {
+            "location": "/loader/index.html#json", 
+            "text": "scene . load . json ( key ,   url );   Get data from cache  var   cache   =   scene . cache . json ;  var   data   =   cache . get ( key );", 
+            "title": "JSON"
+        }, 
+        {
+            "location": "/loader/index.html#xml", 
+            "text": "scene . load . xml ( key ,   url );   Get data from cache  var   cache   =   scene . cache . xml ;  var   data   =   cache . get ( key );", 
+            "title": "XML"
+        }, 
+        {
+            "location": "/loader/index.html#script", 
+            "text": "scene . load . script ( key ,   url );", 
+            "title": "Script"
+        }, 
+        {
+            "location": "/loader/index.html#glsl", 
+            "text": "scene . load . glsl ( key ,   url );   Get data from cache  var   cache   =   scene . cache . shader ;  var   data   =   cache . get ( key );", 
+            "title": "GLSL"
+        }, 
+        {
+            "location": "/loader/index.html#binary", 
+            "text": "scene . load . binary ( key ,   url );   Get data from cache  var   cache   =   scene . cache . binary ;  var   data   =   cache . get ( key );", 
+            "title": "Binary"
+        }, 
+        {
+            "location": "/loader/index.html#plugin", 
+            "text": "scene . load . plugin ( key ,   url );", 
+            "title": "Plugin"
+        }, 
+        {
+            "location": "/loader/index.html#release-data", 
+            "text": "var cache = scene.cache.text;\ncache.remove(key);", 
+            "title": "Release data"
+        }, 
+        {
+            "location": "/loader/index.html#data-in-cache", 
+            "text": "var cache = scene.cache.text;\nvar hasData = cache.has(key);", 
+            "title": "Data in cache"
         }, 
         {
             "location": "/gameobject/index.html", 
@@ -292,7 +397,7 @@
         }, 
         {
             "location": "/image/index.html", 
-            "text": "Introduction\n\n\nDisplay of static images, built-in game object of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nLoad texture\n\n\nscene\n.\nload\n.\nimage\n(\nkey\n,\n \npath\n/\nto\n/\nimage\n);\n\n\n\n\n\nAdd image object\n\n\nvar\n \nimage\n \n=\n \nscene\n.\nadd\n.\nimage\n(\nx\n,\n \ny\n,\n \nkey\n);\n\n\n\n\n\nAdd image from JSON\n\n\nvar\n \nimage\n \n=\n \nscene\n.\nmake\n.\nimage\n({\n\n    \nx\n:\n \n100\n,\n\n    \ny\n:\n \n100\n,\n\n    \nkey\n:\n \n,\n\n\n    \n// angle: 90,\n\n    \n// alpha: 0.75\n\n    \n// flipX: true,\n\n    \n// flipY: true\n\n\n});\n\n\n\n\n\nOther properties\n\n\nSee \ngame object", 
+            "text": "Introduction\n\n\nDisplay of static images, built-in game object of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nLoad texture\n\n\nscene\n.\nload\n.\nimage\n(\nkey\n,\n \nurl\n);\n\n\n\n\n\nSee \nloader\n\n\nAdd image object\n\n\nvar\n \nimage\n \n=\n \nscene\n.\nadd\n.\nimage\n(\nx\n,\n \ny\n,\n \nkey\n);\n\n\n\n\n\nAdd image from JSON\n\n\nvar\n \nimage\n \n=\n \nscene\n.\nmake\n.\nimage\n({\n\n    \nx\n:\n \n100\n,\n\n    \ny\n:\n \n100\n,\n\n    \nkey\n:\n \n,\n\n\n    \n// angle: 90,\n\n    \n// alpha: 0.75\n\n    \n// flipX: true,\n\n    \n// flipY: true\n\n\n});\n\n\n\n\n\nOther properties\n\n\nSee \ngame object", 
             "title": "Image"
         }, 
         {
@@ -307,7 +412,7 @@
         }, 
         {
             "location": "/image/index.html#load-texture", 
-            "text": "scene . load . image ( key ,   path / to / image );", 
+            "text": "scene . load . image ( key ,   url );   See  loader", 
             "title": "Load texture"
         }, 
         {

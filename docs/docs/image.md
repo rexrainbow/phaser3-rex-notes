@@ -9,8 +9,10 @@ Display of static images, built-in game object of phaser.
 ### Load texture
 
 ```javascript
-scene.load.image(key, path/to/image);
+scene.load.image(key, url);
 ```
+
+See [loader](loader.md#image)
 
 ### Add image object
 
