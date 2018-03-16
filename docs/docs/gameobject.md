@@ -70,3 +70,12 @@ var topRight = gameobject.getTopRight();       // topRight.x, topRight.y
 var bottomLeft = gameobject.getBottomLeft();   // bottomLeft.x, bottomLeft.y
 var bottomRight = gameobject.getBottomRight(); // bottomRight.x, bottomRight.y
 ```
+
+### Private data
+
+```javascript
+gameobject.data.set(key, value);
+var value = gameobject.data.get(key);
+```
+
+See [data manager](datamanager.md)

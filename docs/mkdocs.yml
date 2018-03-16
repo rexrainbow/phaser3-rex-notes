@@ -3,7 +3,8 @@ theme: 'material'
 
 pages:
 - Home: index.md
-- Data structure:
+- Data:
+    - Data manager: datamanager.md
     - Filter: filter.md
 - Input:
     - Touch events: touchevents.md

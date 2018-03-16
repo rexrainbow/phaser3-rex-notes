@@ -32,7 +32,7 @@
     
     
       
-        <title>Drag to CursorKeys - Notes of Phaser 3</title>
+        <title>Data manager - Notes of Phaser 3</title>
       
     
     
@@ -86,7 +86,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Drag to CursorKeys
+                Data manager
               </span>
             
           
@@ -162,10 +162,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
     
     <label class="md-nav__link" for="nav-2">
       Data
@@ -181,11 +183,133 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../datamanager/index.html" title="Data manager" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Data manager
+      </label>
+    
+    <a href="index.html" title="Data manager" class="md-nav__link md-nav__link--active">
       Data manager
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set-value" title="Set value" class="md-nav__link">
+    Set value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pop-key" title="Pop key" class="md-nav__link">
+    Pop key
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-key" title="Remove key" class="md-nav__link">
+    Remove key
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-value" title="Get value" class="md-nav__link">
+    Get value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#query" title="Query" class="md-nav__link">
+    Query
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#freeze" title="Freeze" class="md-nav__link">
+    Freeze
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#has-key" title="Has key" class="md-nav__link">
+    Has key
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-each-key" title="For each key" class="md-nav__link">
+    For each key
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#count-of-data" title="Count of data" class="md-nav__link">
+    Count of data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reset" title="Reset" class="md-nav__link">
+    Reset
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#event-of-changing-data" title="Event of changing data" class="md-nav__link">
+    Event of changing data
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -210,12 +334,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
     
     <label class="md-nav__link" for="nav-3">
       Input
@@ -267,91 +389,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="toc">
-        Drag to CursorKeys
-      </label>
-    
-    <a href="index.html" title="Drag to CursorKeys" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../dragcursorplugin/index.html" title="Drag to CursorKeys" class="md-nav__link">
       Drag to CursorKeys
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#source-code" title="Source code" class="md-nav__link">
-    Source code
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-state-of-cursor-keys" title="Get state of cursor keys" class="md-nav__link">
-    Get state of cursor keys
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-dragging-point" title="Get dragging point" class="md-nav__link">
-    Get dragging point
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#assign-origin-point" title="Assign origin point" class="md-nav__link">
-    Assign origin point
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -578,13 +620,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#source-code" title="Source code" class="md-nav__link">
-    Source code
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#usage" title="Usage" class="md-nav__link">
     Usage
   </a>
@@ -593,29 +628,78 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
+  <a href="#set-value" title="Set value" class="md-nav__link">
+    Set value
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-state-of-cursor-keys" title="Get state of cursor keys" class="md-nav__link">
-    Get state of cursor keys
+  <a href="#pop-key" title="Pop key" class="md-nav__link">
+    Pop key
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-dragging-point" title="Get dragging point" class="md-nav__link">
-    Get dragging point
+  <a href="#remove-key" title="Remove key" class="md-nav__link">
+    Remove key
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#assign-origin-point" title="Assign origin point" class="md-nav__link">
-    Assign origin point
+  <a href="#get-value" title="Get value" class="md-nav__link">
+    Get value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#query" title="Query" class="md-nav__link">
+    Query
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#freeze" title="Freeze" class="md-nav__link">
+    Freeze
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#has-key" title="Has key" class="md-nav__link">
+    Has key
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-each-key" title="For each key" class="md-nav__link">
+    For each key
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#count-of-data" title="Count of data" class="md-nav__link">
+    Count of data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reset" title="Reset" class="md-nav__link">
+    Reset
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#event-of-changing-data" title="Event of changing data" class="md-nav__link">
+    Event of changing data
   </a>
   
 </li>
@@ -640,64 +724,73 @@
               
                 
                 
-                  <h1>Drag to CursorKeys</h1>
+                  <h1>Data manager</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Simulate curosr keys according dragging events.</p>
+<p>Save data in key-value pairs, built-inobject of phaser.</p>
 <ul>
-<li>Author: Rex</li>
-<li>A plugin of scene</li>
+<li>Author: Richard Davey</li>
 </ul>
-<h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dragcursor/DragCursorPlugin.js">Link</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">dragCursor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DragCursorPlugin</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
-    <span class="nx">dir</span><span class="o">:</span> <span class="s1">&#39;8dir&#39;</span><span class="p">,</span>    <span class="c1">// 0|&#39;up&amp;down&#39;|1|&#39;left&amp;right|2|&#39;4dir&#39;|3|&#39;8dir&#39;</span>
-    <span class="nx">distanceMin</span><span class="o">:</span> <span class="mi">30</span>        
-<span class="p">});</span>
+<h3 id="set-value">Set value<a class="headerlink" href="#set-value" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+<span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">merge</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>     <span class="c1">// {}</span>
 </pre></div>
 
-<p>Properties</p>
-<ul>
-<li>mode : <ul>
-<li><code>'up&amp;down'</code>, or <code>0</code> : simulate up or down cursor keys only.</li>
-<li><code>'left&amp;right'</code>, or <code>1</code> : simulate left or right cursor keys only.</li>
-<li><code>'4dir'</code>, or <code>2</code> : simulate up, down, left or right cursor keys.</li>
-<li><code>'8dir'</code>, or <code>3</code> : simulate up, up-left, up-right, down, down-left, down-right, left, or right cursor keys.</li>
-</ul>
-</li>
-<li>distanceMin : cursor keys will be pressed when dragging distance is larger then this value.</li>
-</ul>
-<h3 id="get-state-of-cursor-keys">Get state of cursor keys<a class="headerlink" href="#get-state-of-cursor-keys" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cursorKeys</span> <span class="o">=</span> <span class="nx">dragCursor</span><span class="p">.</span><span class="nx">createCursorKeys</span><span class="p">();</span>
-
-<span class="kd">var</span> <span class="nx">isLeftKeyDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">left</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">isRightKeyDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">right</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">isUpKeyDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">up</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">isDownKeyDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">down</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
+<h3 id="pop-key">Pop key<a class="headerlink" href="#pop-key" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">pop</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </pre></div>
 
-<h3 id="get-dragging-point">Get dragging point<a class="headerlink" href="#get-dragging-point" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">dragStartX</span> <span class="o">=</span> <span class="nx">dragCursor</span><span class="p">.</span><span class="nx">start</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">dragStartY</span> <span class="o">=</span> <span class="nx">dragCursor</span><span class="p">.</span><span class="nx">start</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">dragEndX</span> <span class="o">=</span> <span class="nx">dragCursor</span><span class="p">.</span><span class="nx">end</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">dragEndY</span> <span class="o">=</span> <span class="nx">dragCursor</span><span class="p">.</span><span class="nx">end</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+<p>Get and remove that key.</p>
+<h3 id="remove-key">Remove key<a class="headerlink" href="#remove-key" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </pre></div>
 
-<h3 id="assign-origin-point">Assign origin point<a class="headerlink" href="#assign-origin-point" title="Permanent link">&para;</a></h3>
-<p>Origin point is the dragging start point, or assign origin point when creating instance.</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">dragCursor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DragCursorPlugin</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
-    <span class="c1">// ...</span>
-    <span class="nx">origin</span><span class="o">:</span> <span class="p">{</span>       <span class="c1">// assign origin point to (400,300)</span>
-        <span class="nx">x</span><span class="o">:</span> <span class="mi">400</span><span class="p">,</span>
-        <span class="nx">y</span><span class="o">:</span> <span class="mi">300</span>
-    <span class="p">}</span>
-<span class="p">});</span>
+<h3 id="get-value">Get value<a class="headerlink" href="#get-value" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">allValues</span> <span class="o">=</span> <span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">getAll</span><span class="p">();</span>  <span class="c1">// return a copy of data</span>
 </pre></div>
 
-<p>Or assign origin point by <code>setOrigin(x, y)</code> function.</p>
-<div class="codehilite"><pre><span></span><span class="nx">dragCursor</span><span class="p">.</span><span class="nx">setOrigin</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">300</span><span class="p">);</span>  <span class="c1">// assign origin point to (400,300)</span>
+<h3 id="query">Query<a class="headerlink" href="#query" title="Permanent link">&para;</a></h3>
+<p>Using <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match">string.match()</a> to pick matched keys.</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">query</span><span class="p">(</span><span class="nx">rgExp</span><span class="p">);</span>
+</pre></div>
+
+<h3 id="freeze">Freeze<a class="headerlink" href="#freeze" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isFrozen</span> <span class="o">=</span> <span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">freeze</span><span class="p">;</span>
+<span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">freeze</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</pre></div>
+
+<p>No changes can be written to it.</p>
+<h3 id="has-key">Has key<a class="headerlink" href="#has-key" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">hasKey</span> <span class="o">=</span> <span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</pre></div>
+
+<h3 id="for-each-key">For each key<a class="headerlink" href="#for-each-key" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">parent</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">){</span>
+    <span class="cm">/* ... */</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div>
+
+<h3 id="count-of-data">Count of data<a class="headerlink" href="#count-of-data" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cnt</span> <span class="o">=</span> <span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">count</span><span class="p">;</span>
+</pre></div>
+
+<h3 id="reset">Reset<a class="headerlink" href="#reset" title="Permanent link">&para;</a></h3>
+<p>Reset status and clean all keys.</p>
+<div class="codehilite"><pre><span></span><span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">reset</span><span class="p">()</span>
+</pre></div>
+
+<h3 id="event-of-changing-data">Event of changing data<a class="headerlink" href="#event-of-changing-data" title="Permanent link">&para;</a></h3>
+<p>Event 'setdata', 'changedata' will be fired when invoking <code>parent.data.set(key, value)</code>.</p>
+<div class="codehilite"><pre><span></span><span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">event</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;setdata&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">parent</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">){</span>
+    <span class="cm">/* ... */</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">parent</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">event</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;changedata&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">parent</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">resetValue</span><span class="p">){</span>
+    <span class="c1">// resetValue(newValue);  // overwrite value to newValue</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </pre></div>
                 
                   
@@ -717,7 +810,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../dragplugin/index.html" title="Drag" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../index.html" title="Home" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -726,19 +819,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Drag
+                Home
               </span>
             </div>
           </a>
         
         
-          <a href="../loader/index.html" title="Loader" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../filter/index.html" title="Filter" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Loader
+                Filter
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
