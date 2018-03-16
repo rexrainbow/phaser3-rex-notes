@@ -1,6 +1,6 @@
 ## Introduction
 
-Save data in key-value pairs, built-inobject of phaser.
+Store data in key-value pairs, built-inobject of phaser.
 
 - Author: Richard Davey
 
