@@ -3,34 +3,29 @@
 import Phaser from 'phaser';
 const GameObject = Phaser.GameObjects.GameObject;
 
-var CanvasRenderer = function (renderer, src, interpolationPercentage, camera)
-{
-    if (GameObject.RENDER_MASK !== src.renderFlags || (src.cameraFilter > 0 && (src.cameraFilter & camera._id)))
-    {
+var CanvasRenderer = function (renderer, src, interpolationPercentage, camera) {
+    if (GameObject.RENDER_MASK !== src.renderFlags || (src.cameraFilter > 0 && (src.cameraFilter & camera._id))) {
         return;
     }
-    
+
     var ctx = renderer.currentContext;
 
     // var resolution = src.resolution;
 
     //  Blend Mode
-    if (renderer.currentBlendMode !== src.blendMode)
-    {
+    if (renderer.currentBlendMode !== src.blendMode) {
         renderer.currentBlendMode = src.blendMode;
         ctx.globalCompositeOperation = renderer.blendModes[src.blendMode];
     }
 
     //  Alpha
-    if (renderer.currentAlpha !== src.alpha)
-    {
+    if (renderer.currentAlpha !== src.alpha) {
         renderer.currentAlpha = src.alpha;
         ctx.globalAlpha = src.alpha;
     }
 
     //  Smoothing
-    if (renderer.currentScaleMode !== src.scaleMode)
-    {
+    if (renderer.currentScaleMode !== src.scaleMode) {
         renderer.currentScaleMode = src.scaleMode;
     }
 
@@ -41,8 +36,7 @@ var CanvasRenderer = function (renderer, src, interpolationPercentage, camera)
     var tx = src.x - camera.scrollX * src.scrollFactorX;
     var ty = src.y - camera.scrollY * src.scrollFactorY;
 
-    if (renderer.config.roundPixels)
-    {
+    if (renderer.config.roundPixels) {
         tx |= 0;
         ty |= 0;
     }

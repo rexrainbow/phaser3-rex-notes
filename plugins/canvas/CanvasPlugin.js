@@ -59,14 +59,12 @@ var Canvas = new Phaser.Class({
             this.setOrigin();
             this.initPipeline('TextureTintPipeline');
 
-            if (scene.sys.game.config.renderType === Phaser.WEBGL)
-            {
-                scene.sys.game.renderer.onContextRestored(function ()
-                {
+            if (scene.sys.game.config.renderType === Phaser.WEBGL) {
+                scene.sys.game.renderer.onContextRestored(function () {
                     this.canvasTexture = null;
                     this.dirty = true;
                 }, this);
-            }            
+            }
         },
 
     getCanvas: function (readOnly) {
@@ -151,7 +149,9 @@ var Canvas = new Phaser.Class({
             return this;
         }
 
-        if (resize === undefined) { resize = true; }
+        if (resize === undefined) {
+            resize = true;
+        }
         var srcCanvas = sys.textures.get(key).getSourceImage();
         var srcCtx = srcCanvas.getContext('2d');
         var destCanvas = this.canvas;

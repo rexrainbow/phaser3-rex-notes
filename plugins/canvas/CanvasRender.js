@@ -12,13 +12,11 @@ const NOOP = Phaser.Utils.NOOP;
 var renderWebGL = NOOP;
 var renderCanvas = NOOP;
 
-if (WEBGL_RENDERER)
-{
+if (WEBGL_RENDERER) {
     renderWebGL = WebGLRenderer;
 }
 
-if (CANVAS_RENDERER)
-{
+if (CANVAS_RENDERER) {
     renderCanvas = CanvasRenderer;
 }
 

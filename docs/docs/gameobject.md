@@ -74,8 +74,8 @@ var bottomRight = gameobject.getBottomRight(); // bottomRight.x, bottomRight.y
 ### Private data
 
 ```javascript
-gameobject.data.set(key, value);
-var value = gameobject.data.get(key);
+gameobject.setData(key, value);
+var value = gameobject.getData(key);
 ```
 
 See [data manager](datamanager.md)
