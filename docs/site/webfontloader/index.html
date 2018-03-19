@@ -36,7 +36,7 @@
     
     
       
-        <title>Typing - Notes of Phaser 3</title>
+        <title>Webfont loader - Notes of Phaser 3</title>
       
     
     
@@ -96,7 +96,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Typing
+                Webfont loader
               </span>
             
           
@@ -297,10 +297,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
     
     <label class="md-nav__link" for="nav-4">
       Loader
@@ -328,11 +330,79 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../webfontloader/index.html" title="Webfont loader" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Webfont loader
+      </label>
+    
+    <a href="index.html" title="Webfont loader" class="md-nav__link md-nav__link--active">
       Webfont loader
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-webfont" title="Load webfont" class="md-nav__link">
+    Load webfont
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" title="Events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -393,12 +463,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
     
     <label class="md-nav__link" for="nav-7">
       Text
@@ -426,93 +494,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="toc">
-        Typing
-      </label>
-    
-    <a href="index.html" title="Typing" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../texttypingplugin/index.html" title="Typing" class="md-nav__link">
       Typing
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#source-code" title="Source code" class="md-nav__link">
-    Source code
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#start-typing" title="Start typing" class="md-nav__link">
-    Start typing
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#events" title="Events" class="md-nav__link">
-    Events
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#other-commands" title="Other commands" class="md-nav__link">
-    Other commands
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -646,15 +632,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#start-typing" title="Start typing" class="md-nav__link">
-    Start typing
+  <a href="#load-webfont" title="Load webfont" class="md-nav__link">
+    Load webfont
   </a>
   
 </li>
@@ -662,13 +641,6 @@
           <li class="md-nav__item">
   <a href="#events" title="Events" class="md-nav__link">
     Events
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#other-commands" title="Other commands" class="md-nav__link">
-    Other commands
   </a>
   
 </li>
@@ -695,103 +667,43 @@
               
                 
                 
-                  <h1>Typing</h1>
+                  <h1>Webfont loader</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Typing text on text object.</p>
+<p>Load web font by <a href="https://github.com/typekit/webfontloader">google webfont loader</a> in preload stage.</p>
 <ul>
 <li>Author: Rex</li>
-<li>A plugin of text object</li>
+<li>A plugin of loader</li>
 </ul>
 <h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/texttyping/TextTypingPlugin.js">Link</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/webfontloader/webFontLoaderPlugin.js">Link</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">typing</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TextTypingPlugin</span><span class="p">(</span><span class="nx">txt</span><span class="p">,</span> <span class="p">{</span>
-    <span class="c1">//speed: 333,       // typing speed in ms</span>
-    <span class="c1">//typeMode: 0,      //0|&#39;left-to-right&#39;|1|&#39;right-to-left&#39;|2|&#39;middle-to-sides&#39;|3|&#39;sides-to-middle&#39;</span>
-    <span class="c1">//setTextCallback: function(text, isLastChar, insertIdx){ return text; }  // callback before set-text</span>
-    <span class="c1">//setTextCallbackScope: null</span>
+<h3 id="load-webfont">Load webfont<a class="headerlink" href="#load-webfont" title="Permanent link">&para;</a></h3>
+<p>In preload stage:</p>
+<div class="codehilite"><pre><span></span><span class="k">this</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">webFont</span><span class="p">(</span><span class="s1">&#39;bangers&#39;</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">google</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">families</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;Bangers&#39;</span><span class="p">]</span>
+    <span class="p">}</span>
 <span class="p">});</span>
-</pre></div>
-
-<p>Properties</p>
-<ul>
-<li>speed: typing speed in ms</li>
-<li>typeMode :<ul>
-<li><code>'left-to-right'</code>, or <code>0</code> : typing characters from left to right.</li>
-<li><code>'right-to-left'</code>, or <code>1</code> : typing characters from right to left.</li>
-<li><code>'middle-to-sides'</code>, or <code>2</code> : typing characters from middle to sides, optional.</li>
-<li><code>'sides-to-middle'</code>, or <code>3</code> : typing characters from sides to middle.    </li>
-</ul>
-</li>
-<li>setTextCallback : callback befor set-text, to decorate display text.
-    <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">text</span><span class="p">,</span> <span class="nx">isLastChar</span><span class="p">,</span> <span class="nx">insertIdx</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nx">text</span><span class="p">;</span> <span class="p">}</span>
-</pre></div></li>
-<li>setTextCallbackScope : scope of setTextCallback function.</li>
-</ul>
-<h3 id="start-typing">Start typing<a class="headerlink" href="#start-typing" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">typing</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="s1">&#39;ABCDEFG&#39;</span><span class="p">);</span>
-<span class="c1">// txt.typing.start(&#39;ABCDEFG&#39;, 333);  // speed in ms</span>
 </pre></div>
 
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
-<li>On typing :</li>
-</ul>
-<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">typing</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
+<li>
+<p><code>fontactive</code> event</p>
+<div class="codehilite"><pre><span></span><span class="k">this</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;webfontactive&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fileObj</span><span class="p">,</span> <span class="nx">familyName</span><span class="p">){</span>
+<span class="p">});</span>
 </pre></div>
 
-<ul>
-<li>On typing completed :</li>
-</ul>
-<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">typing</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
+</li>
+<li>
+<p><code>fontinactive</code> event</p>
+<div class="codehilite"><pre><span></span><span class="k">this</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;webfontinactive&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fileObj</span><span class="p">,</span> <span class="nx">familyName</span><span class="p">){</span>
+<span class="p">})</span>
 </pre></div>
 
-<h3 id="other-commands">Other commands<a class="headerlink" href="#other-commands" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Is-typing state</li>
+</li>
 </ul>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isTyping</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">typing</span><span class="p">.</span><span class="nx">isTyping</span><span class="p">;</span>
-</pre></div>
-
-<ul>
-<li>Stop typing</li>
-</ul>
-<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">typing</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
-<span class="c1">// txt.typing.stop(true);;  // stop and show all text</span>
-</pre></div>
-
-<ul>
-<li>Pause typing</li>
-</ul>
-<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">typing</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
-</pre></div>
-
-<ul>
-<li>Resume typing</li>
-</ul>
-<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">typing</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
-</pre></div>
-
-<ul>
-<li>Set typing speed</li>
-</ul>
-<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">typing</span><span class="p">.</span><span class="nx">setTypeSpeed</span><span class="p">(</span><span class="nx">speed</span><span class="p">);</span>  <span class="c1">// speed in ms</span>
-</pre></div>
-
-<p>Set speed in <code>typing</code> event or setTextCallback to change typing speed of remaining text.</p>
-<ul>
-<li>Typing more text</li>
-</ul>
-<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">typing</span><span class="p">.</span><span class="nx">appendText</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
-</pre></div>
-
-<ul>
-<li>Set typing mode</li>
-</ul>
-<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">typing</span><span class="p">.</span><span class="nx">setTypeMode</span><span class="p">(</span><span class="nx">mode</span><span class="p">);</span>  <span class="c1">//0|&#39;left-to-right&#39;|1|&#39;right-to-left&#39;|2|&#39;middle-to-sides&#39;|3|&#39;sides-to-middle&#39;</span>
-</pre></div>
                 
                   
                 
@@ -810,7 +722,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../text/index.html" title="Text" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../loader/index.html" title="Loader" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -819,19 +731,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Text
+                Loader
               </span>
             </div>
           </a>
         
         
-          <a href="../textpageplugin/index.html" title="Page" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../gameobject/index.html" title="Game object" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Page
+                Game object
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

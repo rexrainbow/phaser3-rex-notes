@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/index.html", 
-            "text": "Phaser\n\n\nPhaser\n is a fun, free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering.\n\n\nList of my plugins\n\n\n\n\nDrag\n: Drag game object.\n\n\nDrag-cursor\n: Simulate curosr keys according dragging events.\n\n\nGashapon\n: Pick random item from box.\n\n\nPage\n: Display text page by page on text object.\n\n\nTyping\n: Typing text on text object.", 
+            "text": "Phaser\n\n\nPhaser\n is a fun, free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering.\n\n\nList of my plugins\n\n\n\n\nDrag\n: Drag game object.\n\n\nDrag-cursor\n: Simulate curosr keys according dragging events.\n\n\nGashapon\n: Pick random item from box.\n\n\nPage\n: Display text page by page on text object.\n\n\nTyping\n: Typing text on text object.\n\n\nWebfont-loader\n: Load web font by \ngoogle webfont loader\n in preload stage.", 
             "title": "Home"
         }, 
         {
@@ -12,7 +12,7 @@
         }, 
         {
             "location": "/index.html#list-of-my-plugins", 
-            "text": "Drag : Drag game object.  Drag-cursor : Simulate curosr keys according dragging events.  Gashapon : Pick random item from box.  Page : Display text page by page on text object.  Typing : Typing text on text object.", 
+            "text": "Drag : Drag game object.  Drag-cursor : Simulate curosr keys according dragging events.  Gashapon : Pick random item from box.  Page : Display text page by page on text object.  Typing : Typing text on text object.  Webfont-loader : Load web font by  google webfont loader  in preload stage.", 
             "title": "List of my plugins"
         }, 
         {
@@ -414,6 +414,36 @@
             "location": "/loader/index.html#data-in-cache", 
             "text": "var cache = scene.cache.text;\nvar hasData = cache.has(key);", 
             "title": "Data in cache"
+        }, 
+        {
+            "location": "/webfontloader/index.html", 
+            "text": "Introduction\n\n\nLoad web font by \ngoogle webfont loader\n in preload stage.\n\n\n\n\nAuthor: Rex\n\n\nA plugin of loader\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nLoad webfont\n\n\nIn preload stage:\n\n\nthis\n.\nload\n.\nwebFont\n(\nbangers\n,\n \n{\n\n    \ngoogle\n:\n \n{\n\n        \nfamilies\n:\n \n[\nBangers\n]\n\n    \n}\n\n\n});\n\n\n\n\n\nEvents\n\n\n\n\n\n\nfontactive\n event\n\n\nthis\n.\nload\n.\non\n(\nwebfontactive\n,\n \nfunction\n(\nfileObj\n,\n \nfamilyName\n){\n\n\n});\n\n\n\n\n\n\n\n\n\nfontinactive\n event\n\n\nthis\n.\nload\n.\non\n(\nwebfontinactive\n,\n \nfunction\n(\nfileObj\n,\n \nfamilyName\n){\n\n\n})", 
+            "title": "Webfont loader"
+        }, 
+        {
+            "location": "/webfontloader/index.html#introduction", 
+            "text": "Load web font by  google webfont loader  in preload stage.   Author: Rex  A plugin of loader", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/webfontloader/index.html#source-code", 
+            "text": "Link", 
+            "title": "Source code"
+        }, 
+        {
+            "location": "/webfontloader/index.html#usage", 
+            "text": "", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/webfontloader/index.html#load-webfont", 
+            "text": "In preload stage:  this . load . webFont ( bangers ,   { \n     google :   { \n         families :   [ Bangers ] \n     }  });", 
+            "title": "Load webfont"
+        }, 
+        {
+            "location": "/webfontloader/index.html#events", 
+            "text": "fontactive  event  this . load . on ( webfontactive ,   function ( fileObj ,   familyName ){  });     fontinactive  event  this . load . on ( webfontinactive ,   function ( fileObj ,   familyName ){  })", 
+            "title": "Events"
         }, 
         {
             "location": "/gameobject/index.html", 

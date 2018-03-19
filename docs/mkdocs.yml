@@ -11,7 +11,9 @@ pages:
     - Keyboard events: keyboardevents.md
     - Drag: dragplugin.md
     - Drag to CursorKeys: dragcursorplugin.md
-- Loader: loader.md
+- Loader:
+    - Loader: loader.md
+    - Webfont loader: webfontloader.md
 - Game object: gameobject.md
 - Sprite:
     - Image: image.md
