@@ -3,7 +3,7 @@
 import Phaser from 'phaser';
 import WebFont from './../utils/webfontloader/webfontloader.js';
 
-//const CONST = Phaser.Loader.CONST;
+//const FILE_POPULATED = Phaser.Loader.FILE_POPULATED;
 
 class WebFontLoader extends Phaser.Loader.File {
     constructor(key, config) {
