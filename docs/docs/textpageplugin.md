@@ -3,7 +3,7 @@
 Display text page by page on text object.
 
 - Author: Rex
-- A plugin of text object
+- Member of text object
 
 ## Source code
 

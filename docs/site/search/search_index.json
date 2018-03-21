@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/index.html", 
-            "text": "Phaser\n\n\nPhaser\n is a fun, free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering.\n\n\nList of my plugins\n\n\n\n\nDrag\n: Drag game object.\n\n\nDrag-cursor\n: Simulate curosr keys according dragging events.\n\n\nGashapon\n: Pick random item from box.\n\n\nPage\n: Display text page by page on text object.\n\n\nTyping\n: Typing text on text object.\n\n\nWebfont-loader\n: Load web font by \ngoogle webfont loader\n in preload stage.", 
+            "text": "Phaser\n\n\nPhaser\n is a fun, free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering.\n\n\nList of my plugins\n\n\n\n\nCanvas\n: Drawing on \ncanvas\n.\n\n\nDrag\n: Drag game object.\n\n\nDrag-cursor\n: Simulate curosr keys according dragging events.\n\n\nGashapon\n: Pick random item from box.\n\n\nPage\n: Display text page by page on text object.\n\n\nTyping\n: Typing text on text object.\n\n\nWebfont-loader\n: Load web font by \ngoogle webfont loader\n in preload stage.", 
             "title": "Home"
         }, 
         {
@@ -12,7 +12,7 @@
         }, 
         {
             "location": "/index.html#list-of-my-plugins", 
-            "text": "Drag : Drag game object.  Drag-cursor : Simulate curosr keys according dragging events.  Gashapon : Pick random item from box.  Page : Display text page by page on text object.  Typing : Typing text on text object.  Webfont-loader : Load web font by  google webfont loader  in preload stage.", 
+            "text": "Canvas : Drawing on  canvas .  Drag : Drag game object.  Drag-cursor : Simulate curosr keys according dragging events.  Gashapon : Pick random item from box.  Page : Display text page by page on text object.  Typing : Typing text on text object.  Webfont-loader : Load web font by  google webfont loader  in preload stage.", 
             "title": "List of my plugins"
         }, 
         {
@@ -187,12 +187,12 @@
         }, 
         {
             "location": "/dragplugin/index.html", 
-            "text": "Introduction\n\n\nDrag game object.\n\n\n\n\nAuthor: Rex\n\n\nA plugin of game object\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\ngameobject\n.\ndrag\n \n=\n \nnew\n \nDragPlugin\n(\ngameobject\n,\n \n{\n\n    \n//enable: true,\n\n    \n//axis: 0,      //0|\nboth\n|\nh\nv\n|1|\nhorizontal\n|\nh\n|2|\nvertical\n|\nv\n\n    \n//rotation: Phaser.Math.DegToRad(45)  // axis rotation in rad\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\nenable: drag-able\n\n\naxis : \n\n\n'both'\n,\n'h\nv'\n, or \n0\n : dragging on all directions.\n\n\n'horizontal'\n,\n'h'\n, or \n1\n : dragging on horizontal axis.\n\n\n'vertical'\n,\n'v'\n, or \n2\n : dragging on vertical axis.\n\n\n\n\n\n\nrotation : axis rotation in rad, available in horizontal or vertical axis mode.\n\n\n\n\nDragging events\n\n\nBuilt-in dragging events\n\n\ngameobject\n.\non\n(\ndragstart\n,\n \nfunction\n(\npointer\n,\n \ndragX\n,\n \ndragY\n){\n \n/*...*/\n \n});\n\n\ngameobject\n.\non\n(\ndrag\n,\n \nfunction\n(\npointer\n,\n \ndragX\n,\n \ndragY\n){\n \n/*...*/\n \n});\n\n\ngameobject\n.\non\n(\ndragend\n,\n \nfunction\n(\npointer\n,\n \ndragX\n,\n \ndragY\n,\n \ndropped\n){\n \n/*...*/\n \n});\n\n\n\n\n\nGet dragging state\n\n\nvar\n \nisDragging\n \n=\n \ngameobject\n.\ndrag\n.\nisDragging\n;\n\n\n\n\n\nSet rotation of axis\n\n\ngameobject\n.\ndrag\n.\nsetAxisRotation\n(\nrad\n);\n\n\n\n\n\nSet axis mode\n\n\ngameobject\n.\ndrag\n.\nsetAxisMode\n(\nm\n);\n  \n//0|\nboth\n|\nh\nv\n|1|\nhorizontal\n|\nh\n|2|\nvertical\n|\nv\n\n\n\n\n\nTry drag\n\n\nGame object will be dragged if there is any point above it.\n\n\ngameobject\n.\ndrag\n.\ndrag\n();\n\n\n\n\n\nDrop\n\n\nGame object will be dropped(dragend) manually.\n\n\ngameobject\n.\ndrag\n.\ndragend\n();", 
+            "text": "Introduction\n\n\nDrag game object.\n\n\n\n\nAuthor: Rex\n\n\nMember of game object\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\ngameobject\n.\ndrag\n \n=\n \nnew\n \nDragPlugin\n(\ngameobject\n,\n \n{\n\n    \n//enable: true,\n\n    \n//axis: 0,      //0|\nboth\n|\nh\nv\n|1|\nhorizontal\n|\nh\n|2|\nvertical\n|\nv\n\n    \n//rotation: Phaser.Math.DegToRad(45)  // axis rotation in rad\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\nenable: drag-able\n\n\naxis : \n\n\n'both'\n,\n'h\nv'\n, or \n0\n : dragging on all directions.\n\n\n'horizontal'\n,\n'h'\n, or \n1\n : dragging on horizontal axis.\n\n\n'vertical'\n,\n'v'\n, or \n2\n : dragging on vertical axis.\n\n\n\n\n\n\nrotation : axis rotation in rad, available in horizontal or vertical axis mode.\n\n\n\n\nDragging events\n\n\nBuilt-in dragging events\n\n\ngameobject\n.\non\n(\ndragstart\n,\n \nfunction\n(\npointer\n,\n \ndragX\n,\n \ndragY\n){\n \n/*...*/\n \n});\n\n\ngameobject\n.\non\n(\ndrag\n,\n \nfunction\n(\npointer\n,\n \ndragX\n,\n \ndragY\n){\n \n/*...*/\n \n});\n\n\ngameobject\n.\non\n(\ndragend\n,\n \nfunction\n(\npointer\n,\n \ndragX\n,\n \ndragY\n,\n \ndropped\n){\n \n/*...*/\n \n});\n\n\n\n\n\nGet dragging state\n\n\nvar\n \nisDragging\n \n=\n \ngameobject\n.\ndrag\n.\nisDragging\n;\n\n\n\n\n\nSet rotation of axis\n\n\ngameobject\n.\ndrag\n.\nsetAxisRotation\n(\nrad\n);\n\n\n\n\n\nSet axis mode\n\n\ngameobject\n.\ndrag\n.\nsetAxisMode\n(\nm\n);\n  \n//0|\nboth\n|\nh\nv\n|1|\nhorizontal\n|\nh\n|2|\nvertical\n|\nv\n\n\n\n\n\nTry drag\n\n\nGame object will be dragged if there is any point above it.\n\n\ngameobject\n.\ndrag\n.\ndrag\n();\n\n\n\n\n\nDrop\n\n\nGame object will be dropped(dragend) manually.\n\n\ngameobject\n.\ndrag\n.\ndragend\n();", 
             "title": "Drag"
         }, 
         {
             "location": "/dragplugin/index.html#introduction", 
-            "text": "Drag game object.   Author: Rex  A plugin of game object", 
+            "text": "Drag game object.   Author: Rex  Member of game object", 
             "title": "Introduction"
         }, 
         {
@@ -242,12 +242,12 @@
         }, 
         {
             "location": "/dragcursorplugin/index.html", 
-            "text": "Introduction\n\n\nSimulate curosr keys according dragging events.\n\n\n\n\nAuthor: Rex\n\n\nA plugin of scene\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\nvar\n \ndragCursor\n \n=\n \nnew\n \nDragCursorPlugin\n(\nscene\n,\n \n{\n\n    \ndir\n:\n \n8dir\n,\n    \n// 0|\nup\ndown\n|1|\nleft\nright|2|\n4dir\n|3|\n8dir\n\n    \ndistanceMin\n:\n \n30\n        \n\n});\n\n\n\n\n\nProperties\n\n\n\n\nmode : \n\n\n'up\ndown'\n, or \n0\n : simulate up or down cursor keys only.\n\n\n'left\nright'\n, or \n1\n : simulate left or right cursor keys only.\n\n\n'4dir'\n, or \n2\n : simulate up, down, left or right cursor keys.\n\n\n'8dir'\n, or \n3\n : simulate up, up-left, up-right, down, down-left, down-right, left, or right cursor keys.\n\n\n\n\n\n\ndistanceMin : cursor keys will be pressed when dragging distance is larger then this value.\n\n\n\n\nGet state of cursor keys\n\n\nvar\n \ncursorKeys\n \n=\n \ndragCursor\n.\ncreateCursorKeys\n();\n\n\n\nvar\n \nisLeftKeyDown\n \n=\n \ncursorKeys\n.\nleft\n.\nisDown\n;\n\n\nvar\n \nisRightKeyDown\n \n=\n \ncursorKeys\n.\nright\n.\nisDown\n;\n\n\nvar\n \nisUpKeyDown\n \n=\n \ncursorKeys\n.\nup\n.\nisDown\n;\n\n\nvar\n \nisDownKeyDown\n \n=\n \ncursorKeys\n.\ndown\n.\nisDown\n;\n\n\n\n\n\nGet dragging point\n\n\nvar\n \ndragStartX\n \n=\n \ndragCursor\n.\nstart\n.\nx\n;\n\n\nvar\n \ndragStartY\n \n=\n \ndragCursor\n.\nstart\n.\ny\n;\n\n\nvar\n \ndragEndX\n \n=\n \ndragCursor\n.\nend\n.\nx\n;\n\n\nvar\n \ndragEndY\n \n=\n \ndragCursor\n.\nend\n.\ny\n;\n\n\n\n\n\nAssign origin point\n\n\nOrigin point is the dragging start point, or assign origin point when creating instance.\n\n\nvar\n \ndragCursor\n \n=\n \nnew\n \nDragCursorPlugin\n(\nscene\n,\n \n{\n\n    \n// ...\n\n    \norigin\n:\n \n{\n       \n// assign origin point to (400,300)\n\n        \nx\n:\n \n400\n,\n\n        \ny\n:\n \n300\n\n    \n}\n\n\n});\n\n\n\n\n\nOr assign origin point by \nsetOrigin(x, y)\n function.\n\n\ndragCursor\n.\nsetOrigin\n(\n400\n,\n \n300\n);\n  \n// assign origin point to (400,300)", 
+            "text": "Introduction\n\n\nSimulate curosr keys according dragging events.\n\n\n\n\nAuthor: Rex\n\n\nMember of scene\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\nvar\n \ndragCursor\n \n=\n \nnew\n \nDragCursorPlugin\n(\nscene\n,\n \n{\n\n    \ndir\n:\n \n8dir\n,\n    \n// 0|\nup\ndown\n|1|\nleft\nright|2|\n4dir\n|3|\n8dir\n\n    \ndistanceMin\n:\n \n30\n        \n\n});\n\n\n\n\n\nProperties\n\n\n\n\nmode : \n\n\n'up\ndown'\n, or \n0\n : simulate up or down cursor keys only.\n\n\n'left\nright'\n, or \n1\n : simulate left or right cursor keys only.\n\n\n'4dir'\n, or \n2\n : simulate up, down, left or right cursor keys.\n\n\n'8dir'\n, or \n3\n : simulate up, up-left, up-right, down, down-left, down-right, left, or right cursor keys.\n\n\n\n\n\n\ndistanceMin : cursor keys will be pressed when dragging distance is larger then this value.\n\n\n\n\nGet state of cursor keys\n\n\nvar\n \ncursorKeys\n \n=\n \ndragCursor\n.\ncreateCursorKeys\n();\n\n\n\nvar\n \nisLeftKeyDown\n \n=\n \ncursorKeys\n.\nleft\n.\nisDown\n;\n\n\nvar\n \nisRightKeyDown\n \n=\n \ncursorKeys\n.\nright\n.\nisDown\n;\n\n\nvar\n \nisUpKeyDown\n \n=\n \ncursorKeys\n.\nup\n.\nisDown\n;\n\n\nvar\n \nisDownKeyDown\n \n=\n \ncursorKeys\n.\ndown\n.\nisDown\n;\n\n\n\n\n\nGet dragging point\n\n\nvar\n \ndragStartX\n \n=\n \ndragCursor\n.\nstart\n.\nx\n;\n\n\nvar\n \ndragStartY\n \n=\n \ndragCursor\n.\nstart\n.\ny\n;\n\n\nvar\n \ndragEndX\n \n=\n \ndragCursor\n.\nend\n.\nx\n;\n\n\nvar\n \ndragEndY\n \n=\n \ndragCursor\n.\nend\n.\ny\n;\n\n\n\n\n\nAssign origin point\n\n\nOrigin point is the dragging start point, or assign origin point when creating instance.\n\n\nvar\n \ndragCursor\n \n=\n \nnew\n \nDragCursorPlugin\n(\nscene\n,\n \n{\n\n    \n// ...\n\n    \norigin\n:\n \n{\n       \n// assign origin point to (400,300)\n\n        \nx\n:\n \n400\n,\n\n        \ny\n:\n \n300\n\n    \n}\n\n\n});\n\n\n\n\n\nOr assign origin point by \nsetOrigin(x, y)\n function.\n\n\ndragCursor\n.\nsetOrigin\n(\n400\n,\n \n300\n);\n  \n// assign origin point to (400,300)", 
             "title": "Drag to CursorKeys"
         }, 
         {
             "location": "/dragcursorplugin/index.html#introduction", 
-            "text": "Simulate curosr keys according dragging events.   Author: Rex  A plugin of scene", 
+            "text": "Simulate curosr keys according dragging events.   Author: Rex  Member of scene", 
             "title": "Introduction"
         }, 
         {
@@ -417,12 +417,12 @@
         }, 
         {
             "location": "/webfontloader/index.html", 
-            "text": "Introduction\n\n\nLoad web font by \ngoogle webfont loader\n in preload stage.\n\n\n\n\nAuthor: Rex\n\n\nA plugin of loader\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nLoad webfont\n\n\nIn preload stage:\n\n\nthis\n.\nload\n.\nwebFont\n(\nbangers\n,\n \n{\n\n    \ngoogle\n:\n \n{\n\n        \nfamilies\n:\n \n[\nBangers\n]\n\n    \n}\n\n\n});\n\n\n\n\n\nEvents\n\n\n\n\n\n\nfontactive\n event\n\n\nthis\n.\nload\n.\non\n(\nwebfontactive\n,\n \nfunction\n(\nfileObj\n,\n \nfamilyName\n){\n\n\n});\n\n\n\n\n\n\n\n\n\nfontinactive\n event\n\n\nthis\n.\nload\n.\non\n(\nwebfontinactive\n,\n \nfunction\n(\nfileObj\n,\n \nfamilyName\n){\n\n\n})", 
+            "text": "Introduction\n\n\nLoad web font by \ngoogle webfont loader\n in preload stage.\n\n\n\n\nAuthor: Rex\n\n\nCustomize File of loader\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nLoad webfont\n\n\nIn preload stage:\n\n\nthis\n.\nload\n.\nwebFont\n(\nbangers\n,\n \n{\n\n    \ngoogle\n:\n \n{\n\n        \nfamilies\n:\n \n[\nBangers\n]\n\n    \n}\n\n\n});\n\n\n\n\n\nEvents\n\n\n\n\n\n\nfontactive\n event\n\n\nthis\n.\nload\n.\non\n(\nwebfontactive\n,\n \nfunction\n(\nfileObj\n,\n \nfamilyName\n){\n\n\n});\n\n\n\n\n\n\n\n\n\nfontinactive\n event\n\n\nthis\n.\nload\n.\non\n(\nwebfontinactive\n,\n \nfunction\n(\nfileObj\n,\n \nfamilyName\n){\n\n\n})", 
             "title": "Webfont loader"
         }, 
         {
             "location": "/webfontloader/index.html#introduction", 
-            "text": "Load web font by  google webfont loader  in preload stage.   Author: Rex  A plugin of loader", 
+            "text": "Load web font by  google webfont loader  in preload stage.   Author: Rex  Customize File of loader", 
             "title": "Introduction"
         }, 
         {
@@ -597,12 +597,12 @@
         }, 
         {
             "location": "/texttypingplugin/index.html", 
-            "text": "Introduction\n\n\nTyping text on text object.\n\n\n\n\nAuthor: Rex\n\n\nA plugin of text object\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\ntxt\n.\ntyping\n \n=\n \nnew\n \nTextTypingPlugin\n(\ntxt\n,\n \n{\n\n    \n//speed: 333,       // typing speed in ms\n\n    \n//typeMode: 0,      //0|\nleft-to-right\n|1|\nright-to-left\n|2|\nmiddle-to-sides\n|3|\nsides-to-middle\n\n    \n//setTextCallback: function(text, isLastChar, insertIdx){ return text; }  // callback before set-text\n\n    \n//setTextCallbackScope: null\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\nspeed: typing speed in ms\n\n\ntypeMode :\n\n\n'left-to-right'\n, or \n0\n : typing characters from left to right.\n\n\n'right-to-left'\n, or \n1\n : typing characters from right to left.\n\n\n'middle-to-sides'\n, or \n2\n : typing characters from middle to sides, optional.\n\n\n'sides-to-middle'\n, or \n3\n : typing characters from sides to middle.    \n\n\n\n\n\n\nsetTextCallback : callback befor set-text, to decorate display text.\n    \nfunction\n(\ntext\n,\n \nisLastChar\n,\n \ninsertIdx\n)\n \n{\n \nreturn\n \ntext\n;\n \n}\n\n\n\n\nsetTextCallbackScope : scope of setTextCallback function.\n\n\n\n\nStart typing\n\n\ntxt\n.\ntyping\n.\nstart\n(\nABCDEFG\n);\n\n\n// txt.typing.start(\nABCDEFG\n, 333);  // speed in ms\n\n\n\n\n\nEvents\n\n\n\n\nOn typing :\n\n\n\n\ntxt\n.\ntyping\n.\non\n(\ntype\n,\n \nfunction\n(){});\n\n\n\n\n\n\n\nOn typing completed :\n\n\n\n\ntxt\n.\ntyping\n.\non\n(\ncomplete\n,\n \nfunction\n(){});\n\n\n\n\n\nOther commands\n\n\n\n\nIs-typing state\n\n\n\n\nvar\n \nisTyping\n \n=\n \ntxt\n.\ntyping\n.\nisTyping\n;\n\n\n\n\n\n\n\nStop typing\n\n\n\n\ntxt\n.\ntyping\n.\nstop\n();\n\n\n// txt.typing.stop(true);;  // stop and show all text\n\n\n\n\n\n\n\nPause typing\n\n\n\n\ntxt\n.\ntyping\n.\npause\n();\n\n\n\n\n\n\n\nResume typing\n\n\n\n\ntxt\n.\ntyping\n.\nresume\n();\n\n\n\n\n\n\n\nSet typing speed\n\n\n\n\ntxt\n.\ntyping\n.\nsetTypeSpeed\n(\nspeed\n);\n  \n// speed in ms\n\n\n\n\n\nSet speed in \ntyping\n event or setTextCallback to change typing speed of remaining text.\n\n\n\n\nTyping more text\n\n\n\n\ntxt\n.\ntyping\n.\nappendText\n(\ntext\n);\n\n\n\n\n\n\n\nSet typing mode\n\n\n\n\ntxt\n.\ntyping\n.\nsetTypeMode\n(\nmode\n);\n  \n//0|\nleft-to-right\n|1|\nright-to-left\n|2|\nmiddle-to-sides\n|3|\nsides-to-middle", 
+            "text": "Introduction\n\n\nTyping text on text object.\n\n\n\n\nAuthor: Rex\n\n\nMember of text object\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\ntxt\n.\ntyping\n \n=\n \nnew\n \nTextTypingPlugin\n(\ntxt\n,\n \n{\n\n    \n//speed: 333,       // typing speed in ms\n\n    \n//typeMode: 0,      //0|\nleft-to-right\n|1|\nright-to-left\n|2|\nmiddle-to-sides\n|3|\nsides-to-middle\n\n    \n//setTextCallback: function(text, isLastChar, insertIdx){ return text; }  // callback before set-text\n\n    \n//setTextCallbackScope: null\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\nspeed: typing speed in ms\n\n\ntypeMode :\n\n\n'left-to-right'\n, or \n0\n : typing characters from left to right.\n\n\n'right-to-left'\n, or \n1\n : typing characters from right to left.\n\n\n'middle-to-sides'\n, or \n2\n : typing characters from middle to sides, optional.\n\n\n'sides-to-middle'\n, or \n3\n : typing characters from sides to middle.    \n\n\n\n\n\n\nsetTextCallback : callback befor set-text, to decorate display text.\n    \nfunction\n(\ntext\n,\n \nisLastChar\n,\n \ninsertIdx\n)\n \n{\n \nreturn\n \ntext\n;\n \n}\n\n\n\n\nsetTextCallbackScope : scope of setTextCallback function.\n\n\n\n\nStart typing\n\n\ntxt\n.\ntyping\n.\nstart\n(\nABCDEFG\n);\n\n\n// txt.typing.start(\nABCDEFG\n, 333);  // speed in ms\n\n\n\n\n\nEvents\n\n\n\n\nOn typing :\n\n\n\n\ntxt\n.\ntyping\n.\non\n(\ntype\n,\n \nfunction\n(){});\n\n\n\n\n\n\n\nOn typing completed :\n\n\n\n\ntxt\n.\ntyping\n.\non\n(\ncomplete\n,\n \nfunction\n(){});\n\n\n\n\n\nOther commands\n\n\n\n\nIs-typing state\n\n\n\n\nvar\n \nisTyping\n \n=\n \ntxt\n.\ntyping\n.\nisTyping\n;\n\n\n\n\n\n\n\nStop typing\n\n\n\n\ntxt\n.\ntyping\n.\nstop\n();\n\n\n// txt.typing.stop(true);;  // stop and show all text\n\n\n\n\n\n\n\nPause typing\n\n\n\n\ntxt\n.\ntyping\n.\npause\n();\n\n\n\n\n\n\n\nResume typing\n\n\n\n\ntxt\n.\ntyping\n.\nresume\n();\n\n\n\n\n\n\n\nSet typing speed\n\n\n\n\ntxt\n.\ntyping\n.\nsetTypeSpeed\n(\nspeed\n);\n  \n// speed in ms\n\n\n\n\n\nSet speed in \ntyping\n event or setTextCallback to change typing speed of remaining text.\n\n\n\n\nTyping more text\n\n\n\n\ntxt\n.\ntyping\n.\nappendText\n(\ntext\n);\n\n\n\n\n\n\n\nSet typing mode\n\n\n\n\ntxt\n.\ntyping\n.\nsetTypeMode\n(\nmode\n);\n  \n//0|\nleft-to-right\n|1|\nright-to-left\n|2|\nmiddle-to-sides\n|3|\nsides-to-middle", 
             "title": "Typing"
         }, 
         {
             "location": "/texttypingplugin/index.html#introduction", 
-            "text": "Typing text on text object.   Author: Rex  A plugin of text object", 
+            "text": "Typing text on text object.   Author: Rex  Member of text object", 
             "title": "Introduction"
         }, 
         {
@@ -637,12 +637,12 @@
         }, 
         {
             "location": "/textpageplugin/index.html", 
-            "text": "Introduction\n\n\nDisplay text page by page on text object.\n\n\n\n\nAuthor: Rex\n\n\nA plugin of text object\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\nvar\n \nwordWrap\n \n=\n \n{\n\n    \nwidth\n:\n \n500\n\n\n};\n\n\nvar\n \ntxt\n \n=\n \nscene\n.\nadd\n.\ntext\n(\nx\n,\n \ny\n,\n \n,\n \n{\n\n    \nwordWrap\n:\n \nwordWrap\n,\n\n    \nmaxLines\n:\n \n7\n\n\n});\n\n\ntxt\n.\npage\n \n=\n \nnew\n \nTextPagePlugin\n(\ntxt\n,\n \n{\n\n    \n//text: \n,       // content in string or array\n\n    \n//wordWrap: wordWrap\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\ntext: content in string or array, optional\n\n\nwordWrap: the same as \nwordWrap\n of text style, which included\n\n\nwidth\n\n\ncallback\n\n\ncallbackScope\n\n\nuseAdvancedWrap\n\n\n\n\n\n\n\n\nWord wrap\n\n\nAssign \nwordWrap\n in page object, otherwise this page object will get wordWrap from text object.\n\n\nWordWrap properties of text objecct will be moved to page object to avoid word-wrapping again when displaying text.\n\n\nSet content\n\n\ntxt\n.\npage\n.\nsetText\n(\ntext\n);\n   \n// content in string or array\n\n\n\n\n\n\n\nAppend text\n\n\n\n\ntxt\n.\npage\n.\nappendText\n(\ntext\n);\n \n// content in string or array\n\n\n\n\n\nShow page\n\n\ntxt\n.\npage\n.\nshowPage\n();\n         \n// display current page\n\n\ntxt\n.\npage\n.\nshowNextPage\n();\n     \n// display next page\n\n\ntxt\n.\npage\n.\nshowPreviousPage\n();\n \n// display previous page\n\n\n\n\n\nInitial page index is \n-1\n, so user could call \ntxt.page.showNextPage()\n to display first page.\n\n\nGet lines of page\n\n\nvar\n \nlines\n \n=\n \ntxt\n.\npage\n.\ngetPage\n();\n         \n// get lines of current page\n\n\nvar\n \nlines\n \n=\n \ntxt\n.\npage\n.\ngetNextPage\n();\n     \n// get lines of next page\n\n\nvar\n \nlines\n \n=\n \ntxt\n.\npage\n.\ngetPreviousPage\n();\n \n// get lines of previous page\n\n\n\n\n\nOther properties\n\n\n\n\nCurrent page index : \ntxt.page.pageIdx\n\n\nNumber of pages : \ntxt.page.pageNum\n\n\nIs last page: \ntxt.page.isLastPage\n\n\nIs first page: \ntxt.page.isFirstPage\n\n\n\n\nSet wordWrap properties\n\n\n\n\nWidth: \ntxt.page.setWordWrapWidth(width)\n\n\nCallback: \ntxt.page.setWordWrapCallback(callback, callbackScope)\n\n\nUseAdvanced: \ntxt.page.setWordWrapUseAdvanced(true)", 
+            "text": "Introduction\n\n\nDisplay text page by page on text object.\n\n\n\n\nAuthor: Rex\n\n\nMember of text object\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\nvar\n \nwordWrap\n \n=\n \n{\n\n    \nwidth\n:\n \n500\n\n\n};\n\n\nvar\n \ntxt\n \n=\n \nscene\n.\nadd\n.\ntext\n(\nx\n,\n \ny\n,\n \n,\n \n{\n\n    \nwordWrap\n:\n \nwordWrap\n,\n\n    \nmaxLines\n:\n \n7\n\n\n});\n\n\ntxt\n.\npage\n \n=\n \nnew\n \nTextPagePlugin\n(\ntxt\n,\n \n{\n\n    \n//text: \n,       // content in string or array\n\n    \n//wordWrap: wordWrap\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\ntext: content in string or array, optional\n\n\nwordWrap: the same as \nwordWrap\n of text style, which included\n\n\nwidth\n\n\ncallback\n\n\ncallbackScope\n\n\nuseAdvancedWrap\n\n\n\n\n\n\n\n\nWord wrap\n\n\nAssign \nwordWrap\n in page object, otherwise this page object will get wordWrap from text object.\n\n\nWordWrap properties of text objecct will be moved to page object to avoid word-wrapping again when displaying text.\n\n\nSet content\n\n\ntxt\n.\npage\n.\nsetText\n(\ntext\n);\n   \n// content in string or array\n\n\n\n\n\n\n\nAppend text\n\n\n\n\ntxt\n.\npage\n.\nappendText\n(\ntext\n);\n \n// content in string or array\n\n\n\n\n\nShow page\n\n\ntxt\n.\npage\n.\nshowPage\n();\n         \n// display current page\n\n\ntxt\n.\npage\n.\nshowNextPage\n();\n     \n// display next page\n\n\ntxt\n.\npage\n.\nshowPreviousPage\n();\n \n// display previous page\n\n\n\n\n\nInitial page index is \n-1\n, so user could call \ntxt.page.showNextPage()\n to display first page.\n\n\nGet lines of page\n\n\nvar\n \nlines\n \n=\n \ntxt\n.\npage\n.\ngetPage\n();\n         \n// get lines of current page\n\n\nvar\n \nlines\n \n=\n \ntxt\n.\npage\n.\ngetNextPage\n();\n     \n// get lines of next page\n\n\nvar\n \nlines\n \n=\n \ntxt\n.\npage\n.\ngetPreviousPage\n();\n \n// get lines of previous page\n\n\n\n\n\nOther properties\n\n\n\n\nCurrent page index : \ntxt.page.pageIdx\n\n\nNumber of pages : \ntxt.page.pageNum\n\n\nIs last page: \ntxt.page.isLastPage\n\n\nIs first page: \ntxt.page.isFirstPage\n\n\n\n\nSet wordWrap properties\n\n\n\n\nWidth: \ntxt.page.setWordWrapWidth(width)\n\n\nCallback: \ntxt.page.setWordWrapCallback(callback, callbackScope)\n\n\nUseAdvanced: \ntxt.page.setWordWrapUseAdvanced(true)", 
             "title": "Page"
         }, 
         {
             "location": "/textpageplugin/index.html#introduction", 
-            "text": "Display text page by page on text object.   Author: Rex  A plugin of text object", 
+            "text": "Display text page by page on text object.   Author: Rex  Member of text object", 
             "title": "Introduction"
         }, 
         {
@@ -691,6 +691,141 @@
             "title": "Set wordWrap properties"
         }, 
         {
+            "location": "/graphics/index.html", 
+            "text": "Introduction\n\n\nDrawing on webgl or canvas, built-in game object of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nAdd graphics object\n\n\nvar\n \ngraphics\n \n=\n \nscene\n.\nadd\n.\ngraphics\n();\n\n\n// var graphics = scene.add.graphics(x, y);\n\n\n\n\n\nDrawing commands\n\n\nSet style\n\n\n\n\n\n\nSet line style and fill style\n\n\ngraphics\n.\nsetDefaultStyles\n({\n\n    \nlineStyle\n:\n \n{\n\n        \nwidth\n:\n \n1\n,\n\n        \ncolor\n:\n \n0xffffff\n,\n\n        \nalpha\n:\n \n1\n\n    \n},\n\n    \nfillStyle\n:\n \n{\n\n        \ncolor\n:\n \n0xffffff\n,\n\n        \nalpha\n:\n \n1\n\n    \n}\n\n\n});\n\n\n\n\n\n\n\n\n\nSet line style\n\n\ngraphics\n.\nlineStyle\n(\nlineWidth\n,\n \ncolor\n,\n \nalpha\n);\n   \n// color: 0xRRGGBB\n\n\n\n\n\n\n\n\n\nSet fill style\n\n\ngraphics\n.\nfillStyle\n(\ncolor\n,\n \nalpha\n);\n   \n// color: 0xRRGGBB\n\n\n\n\n\n\n\n\n\nClear\n\n\ngraphics\n.\nclear\n();\n\n\n\n\n\nPath\n\n\ngraphics\n.\nbeginPath\n();\n\n\ngraphics\n.\nclosePath\n();\n\n\ngraphics\n.\nfillPath\n();\n\n\ngraphics\n.\nstrokePath\n();\n\n\n\n\n\nRectangle\n\n\ngraphics\n.\nfillRectShape\n(\nrect\n);\n \n// rect: {x, y, width, height}\n\n\ngraphics\n.\nfillRect\n(\nx\n,\n \ny\n,\n \nwidth\n,\n \nheight\n);\n\n\ngraphics\n.\nstrokeRectShape\n(\nrect\n);\n  \n// rect: {x, y, width, height}\n\n\ngraphics\n.\nstrokeRect\n(\nx\n,\n \ny\n,\n \nwidth\n,\n \nheight\n);\n\n\n\n\n\nTriangle\n\n\ngraphics\n.\nfillTriangleShape\n(\ntriangle\n);\n \n// triangle: {x1, y1, x2, y2, x3, y3}\n\n\ngraphics\n.\nfillTriangle\n(\nx1\n,\n \ny1\n,\n \nx2\n,\n \ny2\n,\n \nx3\n,\n \ny3\n);\n\n\ngraphics\n.\nstrokeTriangleShape\n(\ntriangle\n);\n \n// triangle: {x1, y1, x2, y2, x3, y3}\n\n\ngraphics\n.\nstrokeTriangle\n(\nx1\n,\n \ny1\n,\n \nx2\n,\n \ny2\n,\n \nx3\n,\n \ny3\n);\n\n\n\n\n\nPoint\n\n\ngraphics\n.\nfillPointShape\n(\npoint\n,\n \nsize\n);\n \n// point: {x, y}\n\n\ngraphics\n.\nfillPoint\n(\nx\n,\n \ny\n,\n \nsize\n);\n\n\n\n\n\nLine\n\n\ngraphics\n.\nstrokeLineShape\n(\nline\n);\n \n// point: {x1, y1, x2, y2}\n\n\ngraphics\n.\nlineBetween\n(\nx1\n,\n \ny1\n,\n \nx2\n,\n \ny2\n);\n\n\ngraphics\n.\nlineTo\n(\nx\n,\n \ny\n);\n\n\ngraphics\n.\nmoveTo\n(\nx\n,\n \ny\n);\n\n\ngraphics\n.\nlineFxTo\n(\nx\n,\n \ny\n,\n \nwidth\n,\n \nrgb\n);\n  \n// gradient width and color\n\n\ngraphics\n.\nmoveFxTo\n(\nx\n,\n \ny\n,\n \nwidth\n,\n \nrgb\n);\n  \n// gradient width and color\n\n\n\n\n\n\n\ngraphics.lineFxTo\n is equal to \ngraphics.lineTo\n in CANVAS render mode\n\n\ngraphics.moveFxTo\n is equal to \ngraphics.moveTo\n in CANVAS render mode\n\n\n\n\nLines\n\n\ngraphics\n.\nstrokePoints\n(\npoints\n,\n \nautoClose\n,\n \nendIndex\n);\n  \n// points: [{x, y}, ...]\n\n\ngraphics\n.\nfillPoints\n(\npoints\n,\n \nautoClose\n,\n \nendIndex\n);\n  \n// points: [{x, y}, ...]\n\n\n\n\n\nCircle\n\n\ngraphics\n.\nfillCircleShape\n(\ncircle\n);\n \n// circle: {x, y, radius}\n\n\ngraphics\n.\nfillCircle\n(\nx\n,\n \ny\n,\n \nradius\n);\n\n\ngraphics\n.\nstrokeCircleShape\n(\ncircle\n);\n  \n// circle: {x, y, radius}\n\n\ngraphics\n.\nfillCircle\n(\nx\n,\n \ny\n,\n \nradius\n);\n\n\ngraphics\n.\narc\n(\nx\n,\n \ny\n,\n \nradius\n,\n \nstartAngle\n,\n \nendAngle\n,\n \nanticlockwise\n);\n\n\n\n\n\nDraw or fill circle shape by points.\n\n\nEllipse\n\n\ngraphics\n.\nstrokeEllipseShape\n(\nellipse\n,\n \nsmoothness\n);\n   \n// ellipse: Phaser.Geom.Ellipse\n\n\ngraphics\n.\nstrokeEllipse\n(\nx\n,\n \ny\n,\n \nwidth\n,\n \nheight\n,\n \nsmoothness\n);\n\n\ngraphics\n.\nfillEllipseShape\n(\nellipse\n,\n \nsmoothness\n);\n    \n// ellipse: Phaser.Geom.Ellipse\n\n\ngraphics\n.\nfillEllipse\n(\nx\n,\n \ny\n,\n \nwidth\n,\n \nheight\n,\n \nsmoothness\n);\n\n\n\n\n\nDraw or fill ellipse shape by points.\n\n\nTransfer\n\n\ngraphics\n.\nsave\n();\n\n\ngraphics\n.\nrestore\n();\n\n\ngraphics\n.\ntranslate\n(\nx\n,\n \ny\n);\n\n\ngraphics\n.\nscale\n(\nx\n,\n \ny\n);\n\n\ngraphics\n.\nrotate\n(\nradians\n);\n\n\n\n\n\nGenerate texture\n\n\ngraphics\n.\ngenerateTexture\n(\nkey\n,\n \nwidth\n,\n \nheight\n);\n  \n// key: texture key", 
+            "title": "Graphics"
+        }, 
+        {
+            "location": "/graphics/index.html#introduction", 
+            "text": "Drawing on webgl or canvas, built-in game object of phaser.   Author: Richard Davey", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/graphics/index.html#usage", 
+            "text": "", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/graphics/index.html#add-graphics-object", 
+            "text": "var   graphics   =   scene . add . graphics ();  // var graphics = scene.add.graphics(x, y);", 
+            "title": "Add graphics object"
+        }, 
+        {
+            "location": "/graphics/index.html#drawing-commands", 
+            "text": "", 
+            "title": "Drawing commands"
+        }, 
+        {
+            "location": "/graphics/index.html#set-style", 
+            "text": "Set line style and fill style  graphics . setDefaultStyles ({ \n     lineStyle :   { \n         width :   1 , \n         color :   0xffffff , \n         alpha :   1 \n     }, \n     fillStyle :   { \n         color :   0xffffff , \n         alpha :   1 \n     }  });     Set line style  graphics . lineStyle ( lineWidth ,   color ,   alpha );     // color: 0xRRGGBB     Set fill style  graphics . fillStyle ( color ,   alpha );     // color: 0xRRGGBB", 
+            "title": "Set style"
+        }, 
+        {
+            "location": "/graphics/index.html#clear", 
+            "text": "graphics . clear ();", 
+            "title": "Clear"
+        }, 
+        {
+            "location": "/graphics/index.html#path", 
+            "text": "graphics . beginPath ();  graphics . closePath ();  graphics . fillPath ();  graphics . strokePath ();", 
+            "title": "Path"
+        }, 
+        {
+            "location": "/graphics/index.html#rectangle", 
+            "text": "graphics . fillRectShape ( rect );   // rect: {x, y, width, height}  graphics . fillRect ( x ,   y ,   width ,   height );  graphics . strokeRectShape ( rect );    // rect: {x, y, width, height}  graphics . strokeRect ( x ,   y ,   width ,   height );", 
+            "title": "Rectangle"
+        }, 
+        {
+            "location": "/graphics/index.html#triangle", 
+            "text": "graphics . fillTriangleShape ( triangle );   // triangle: {x1, y1, x2, y2, x3, y3}  graphics . fillTriangle ( x1 ,   y1 ,   x2 ,   y2 ,   x3 ,   y3 );  graphics . strokeTriangleShape ( triangle );   // triangle: {x1, y1, x2, y2, x3, y3}  graphics . strokeTriangle ( x1 ,   y1 ,   x2 ,   y2 ,   x3 ,   y3 );", 
+            "title": "Triangle"
+        }, 
+        {
+            "location": "/graphics/index.html#point", 
+            "text": "graphics . fillPointShape ( point ,   size );   // point: {x, y}  graphics . fillPoint ( x ,   y ,   size );", 
+            "title": "Point"
+        }, 
+        {
+            "location": "/graphics/index.html#line", 
+            "text": "graphics . strokeLineShape ( line );   // point: {x1, y1, x2, y2}  graphics . lineBetween ( x1 ,   y1 ,   x2 ,   y2 );  graphics . lineTo ( x ,   y );  graphics . moveTo ( x ,   y );  graphics . lineFxTo ( x ,   y ,   width ,   rgb );    // gradient width and color  graphics . moveFxTo ( x ,   y ,   width ,   rgb );    // gradient width and color    graphics.lineFxTo  is equal to  graphics.lineTo  in CANVAS render mode  graphics.moveFxTo  is equal to  graphics.moveTo  in CANVAS render mode", 
+            "title": "Line"
+        }, 
+        {
+            "location": "/graphics/index.html#lines", 
+            "text": "graphics . strokePoints ( points ,   autoClose ,   endIndex );    // points: [{x, y}, ...]  graphics . fillPoints ( points ,   autoClose ,   endIndex );    // points: [{x, y}, ...]", 
+            "title": "Lines"
+        }, 
+        {
+            "location": "/graphics/index.html#circle", 
+            "text": "graphics . fillCircleShape ( circle );   // circle: {x, y, radius}  graphics . fillCircle ( x ,   y ,   radius );  graphics . strokeCircleShape ( circle );    // circle: {x, y, radius}  graphics . fillCircle ( x ,   y ,   radius );  graphics . arc ( x ,   y ,   radius ,   startAngle ,   endAngle ,   anticlockwise );   Draw or fill circle shape by points.", 
+            "title": "Circle"
+        }, 
+        {
+            "location": "/graphics/index.html#ellipse", 
+            "text": "graphics . strokeEllipseShape ( ellipse ,   smoothness );     // ellipse: Phaser.Geom.Ellipse  graphics . strokeEllipse ( x ,   y ,   width ,   height ,   smoothness );  graphics . fillEllipseShape ( ellipse ,   smoothness );      // ellipse: Phaser.Geom.Ellipse  graphics . fillEllipse ( x ,   y ,   width ,   height ,   smoothness );   Draw or fill ellipse shape by points.", 
+            "title": "Ellipse"
+        }, 
+        {
+            "location": "/graphics/index.html#transfer", 
+            "text": "graphics . save ();  graphics . restore ();  graphics . translate ( x ,   y );  graphics . scale ( x ,   y );  graphics . rotate ( radians );", 
+            "title": "Transfer"
+        }, 
+        {
+            "location": "/graphics/index.html#generate-texture", 
+            "text": "graphics . generateTexture ( key ,   width ,   height );    // key: texture key", 
+            "title": "Generate texture"
+        }, 
+        {
+            "location": "/canvas/index.html", 
+            "text": "Introduction\n\n\nDrawing on \ncanvas\n.\n\n\n\n\nAuthor: Rex\n\n\nA kind of game object\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\nvar\n \ncanvas\n \n=\n \nscene\n.\nadd\n.\nrexCanvas\n(\nx\n,\n \ny\n,\n \nwidth\n,\n \nheight\n);\n\n\n\n\n\nAdd canvas from JSON\n\n\nvar\n \nimage\n \n=\n \nscene\n.\nmake\n.\nrexCanvas\n({\n\n    \nx\n:\n \n0\n,\n\n    \ny\n:\n \n0\n,\n\n    \nwidth\n:\n \n256\n,\n\n    \nheight\n:\n \n256\n,\n\n\n    \n//fill: null\n\n\n});\n\n\n\n\n\nClear or fill canvas\n\n\n\n\n\n\nClear\n\n\ncanvas\n.\nclear\n();\n\n\n\n\n\n\n\n\n\nFill color\n\n\ncanvas\n.\nfill\n(\ncolor\n);\n\n\n\n\n\n\n\n\n\nGet canvas elemet\n\n\nvar\n \ncanvasElem\n \n=\n \ncanvas\n.\ngetCanvas\n();\n\n\n// var context = canvasElem.getContext(\n2d\n);\n\n\n// Drawing on context\n\n\n\n\n\nUpdate display texture\n\n\ncanvas\n.\nneedRedraw\n();\n\n\n\n\n\nLoad or save texture\n\n\n\n\n\n\nSave canvas to texuture\n\n\ncanvas\n.\ngenerateTexture\n(\nkey\n,\n \nx\n,\n \ny\n,\n \nwidth\n,\n \nheight\n);\n\n\n\n\n\n\n\n\n\nCopy canvas from texture\n\n\ncanvas\n.\nloadTexture\n(\nkey\n,\n \nresize\n);\n\n\n\n\n\n\n\n\n\nCompare with \nGraphics object\n\n\n\n\n\n\nDrawing method\n\n\n\n\nThis canvas object draws stuff on canvas in WEBGL or CANVAS render mode.  \n\n\nGraphics object draws stuff on webgl render pipeline n WEBGL render mode.\n\n\n\n\n\n\n\n\nSize\n\n\n\n\nThis canvas object has size (width, height) and origin.  \n\n\nGraphics object does not have size and origin.", 
+            "title": "Canvas"
+        }, 
+        {
+            "location": "/canvas/index.html#introduction", 
+            "text": "Drawing on  canvas .   Author: Rex  A kind of game object", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/canvas/index.html#source-code", 
+            "text": "Link", 
+            "title": "Source code"
+        }, 
+        {
+            "location": "/canvas/index.html#usage", 
+            "text": "", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/canvas/index.html#create-instance", 
+            "text": "var   canvas   =   scene . add . rexCanvas ( x ,   y ,   width ,   height );   Add canvas from JSON  var   image   =   scene . make . rexCanvas ({ \n     x :   0 , \n     y :   0 , \n     width :   256 , \n     height :   256 , \n\n     //fill: null  });", 
+            "title": "Create instance"
+        }, 
+        {
+            "location": "/canvas/index.html#clear-or-fill-canvas", 
+            "text": "Clear  canvas . clear ();     Fill color  canvas . fill ( color );", 
+            "title": "Clear or fill canvas"
+        }, 
+        {
+            "location": "/canvas/index.html#get-canvas-elemet", 
+            "text": "var   canvasElem   =   canvas . getCanvas ();  // var context = canvasElem.getContext( 2d );  // Drawing on context", 
+            "title": "Get canvas elemet"
+        }, 
+        {
+            "location": "/canvas/index.html#update-display-texture", 
+            "text": "canvas . needRedraw ();", 
+            "title": "Update display texture"
+        }, 
+        {
+            "location": "/canvas/index.html#load-or-save-texture", 
+            "text": "Save canvas to texuture  canvas . generateTexture ( key ,   x ,   y ,   width ,   height );     Copy canvas from texture  canvas . loadTexture ( key ,   resize );", 
+            "title": "Load or save texture"
+        }, 
+        {
+            "location": "/canvas/index.html#compare-with-graphics-object", 
+            "text": "Drawing method   This canvas object draws stuff on canvas in WEBGL or CANVAS render mode.    Graphics object draws stuff on webgl render pipeline n WEBGL render mode.     Size   This canvas object has size (width, height) and origin.    Graphics object does not have size and origin.", 
+            "title": "Compare with Graphics object"
+        }, 
+        {
             "location": "/date/index.html", 
             "text": "Introduction\n\n\nGet current date or unix-timestamp.\n\n\n\n\nAuthor: Built-in javascript function\n\n\n\n\nUsage\n\n\nReference\n\n\nCreate instance\n\n\nvar\n \nd\n \n=\n \nnew\n \nDate\n();\n\n\nvar\n \nd\n \n=\n \nnew\n \nDate\n(\ntimestamp\n);\n\n\nvar\n \nd\n \n=\n \nnew\n \nDate\n(\ndateString\n);\n\n\nvar\n \nd\n \n=\n \nnew\n \nDate\n(\nyear\n,\n \nmonth\n,\n \nday\n,\n \nhours\n,\n \nminutes\n,\n \nseconds\n,\n \nmilliseconds\n);\n\n\n\n\n\nGet date\n\n\nvar\n \nyear\n \n=\n \nd\n.\ngetFullYear\n();\n    \n// returns the year\n\n\nvar\n \nmonth\n \n=\n \nd\n.\ngetMonth\n();\n      \n// returns the month (0-11)\n\n\nvar\n \ndate\n \n=\n \nd\n.\ngetDate\n();\n        \n// returns the day of the month (1-31)\n\n\nvar\n \nday\n \n=\n \nd\n.\ngetDay\n();\n          \n// returns the day of the week\n\n\nvar\n \nhour\n \n=\n \nd\n.\ngetHours\n();\n       \n// returns the hour (0-23)\n\n\nvar\n \nmin\n \n=\n \nd\n.\ngetMinutes\n();\n      \n// returns the minutes (0-59)\n\n\nvar\n \nsec\n \n=\n \nd\n.\ngetSeconds\n();\n      \n// returns the seconds (0-59)\n\n\nvar\n \nms\n \n=\n \nd\n.\ngetMilliseconds\n();\n  \n// returns the milliseconds (0-999)\n\n\n\n\n\nGet unix-timestamp\n\n\nvar\n \ntimestamp\n \n=\n \nd\n.\nnow\n();\n       \n// unix-timestamp in milliseconds\n\n\n\n\n\nTo string\n\n\nvar\n \ns\n \n=\n \nd\n.\ntoLocaleString\n();\n   \n// locale conventions\n\n\nvar\n \niso\n \n=\n \nd\n.\ntoISOString\n();\n    \n// ISO standard", 
             "title": "Date"
@@ -727,12 +862,12 @@
         }, 
         {
             "location": "/gashaponplugin/index.html", 
-            "text": "Introduction\n\n\nPick random item from box.\n\n\n\n\nAuthor: Rex\n\n\nA plugin of scene\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\nvar\n \ngashapon\n \n=\n \nnew\n \nGashaponPlugin\n(\nscene\n,\n \n{\n\n    \nmode\n:\n \nshuffle\n,\n  \n// 0|\nshuffle\n|1|\nrandom\n\n    \nitems\n:\n \n{\n  \n// name:count\n\n        \na\n:\n1\n,\n \n        \nb\n:\n2\n,\n \n        \nc\n:\n3\n \n    \n},\n\n    \nreload\n:\n \ntrue\n,\n     \n// true|false\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\nmode : \n\n\n'shuffle'\n, or \n0\n : pick item from box without put it back.\n\n\n'random'\n, or \n1\n : pick item from box then put it back.\n\n\n\n\n\n\nreload : set \ntrue\n to reload items when box is empty for \nshuffle\n mode.\n\n\nitems : initial items in box\n\n\n\n\nPick item\n\n\nPick a random item\n\n\nvar\n \nitem\n \n=\n \ngashapon\n.\nnext\n();\n\n\n\n\n\n\n\nreturn \nnull\n if pick nothing\n\n\n\n\nPick specific item\n\n\nvar\n \nitem\n \n=\n \ngashapon\n.\nnext\n(\na\n);\n\n\n\n\n\n\n\nreturn \nnull\n if pick nothing\n\n\n\n\nLast picked item\n\n\nvar\n \nitem\n \n=\n \ngashapon\n.\nresult\n;\n\n\n\n\n\nSet item\n\n\nSet item\n\n\ngashapon\n.\nsetItem\n(\na\n,\n \n1\n);\n\n\n// gashapon.setItem(\na\n, 1).setItem(\nb\n, 2).setItem(\nc\n, 3);\n\n\n\n\n\nAdd item\n\n\ngashapon\n.\naddItem\n(\na\n,\n1\n);\n\n\n\n\n\nRemove item\n\n\nRemove item\n\n\ngashapon\n.\nremoveItem\n(\na\n);\n\n\n// gashapon.removeItem(\nb\n).gashapon.removeItem(\nc\n);\n\n\n\n\n\nRemove all items\n\n\ngashapon\n.\nremoveAllItems\n();\n\n\n\n\n\nCurrent status\n\n\nGet current status\n\n\nvar\n \nstatus\n \n=\n \ngashapon\n.\ntoJSON\n();\n\n\n\n\n\nClone object\n\n\nvar\n \nstatus\n \n=\n \ngashapon\n.\ntoJSON\n();\n\n\nvar\n \ngashapon2\n \n=\n \nnew\n \nGashapon\n(\nstatus\n);\n\n\n\n\n\nOverwrite current status\n\n\nvar\n \nstatus\n \n=\n \ngashapon\n.\ntoJSON\n();\n\n\n// gashapon.next()...\n\n\ngashapon\n.\nresetFromJSON\n(\nstatus\n);\n\n\n\n\n\nGet items\n\n\nFor each item\n\n\ngashapon\n.\neachItem\n(\nfunction\n(\nname\n,\n \ncount\n){\n\n    \nconsole\n.\nlog\n(\nname\n \n+\n \n: \n \n+\n \ncount\n);\n\n\n});\n\n\n\n\n\nGet items\n\n\nvar\n \nitems\n \n=\n \ngashapon\n.\ngetItems\n();", 
+            "text": "Introduction\n\n\nPick random item from box.\n\n\n\n\nAuthor: Rex\n\n\nMember of scene, or game object\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\nvar\n \ngashapon\n \n=\n \nnew\n \nGashaponPlugin\n(\nscene\n,\n \n{\n\n    \nmode\n:\n \nshuffle\n,\n  \n// 0|\nshuffle\n|1|\nrandom\n\n    \nitems\n:\n \n{\n  \n// name:count\n\n        \na\n:\n1\n,\n \n        \nb\n:\n2\n,\n \n        \nc\n:\n3\n \n    \n},\n\n    \nreload\n:\n \ntrue\n,\n     \n// true|false\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\nmode : \n\n\n'shuffle'\n, or \n0\n : pick item from box without put it back.\n\n\n'random'\n, or \n1\n : pick item from box then put it back.\n\n\n\n\n\n\nreload : set \ntrue\n to reload items when box is empty for \nshuffle\n mode.\n\n\nitems : initial items in box\n\n\n\n\nPick item\n\n\nPick a random item\n\n\nvar\n \nitem\n \n=\n \ngashapon\n.\nnext\n();\n\n\n\n\n\n\n\nreturn \nnull\n if pick nothing\n\n\n\n\nPick specific item\n\n\nvar\n \nitem\n \n=\n \ngashapon\n.\nnext\n(\na\n);\n\n\n\n\n\n\n\nreturn \nnull\n if pick nothing\n\n\n\n\nLast picked item\n\n\nvar\n \nitem\n \n=\n \ngashapon\n.\nresult\n;\n\n\n\n\n\nSet item\n\n\nSet item\n\n\ngashapon\n.\nsetItem\n(\na\n,\n \n1\n);\n\n\n// gashapon.setItem(\na\n, 1).setItem(\nb\n, 2).setItem(\nc\n, 3);\n\n\n\n\n\nAdd item\n\n\ngashapon\n.\naddItem\n(\na\n,\n1\n);\n\n\n\n\n\nRemove item\n\n\nRemove item\n\n\ngashapon\n.\nremoveItem\n(\na\n);\n\n\n// gashapon.removeItem(\nb\n).gashapon.removeItem(\nc\n);\n\n\n\n\n\nRemove all items\n\n\ngashapon\n.\nremoveAllItems\n();\n\n\n\n\n\nCurrent status\n\n\nGet current status\n\n\nvar\n \nstatus\n \n=\n \ngashapon\n.\ntoJSON\n();\n\n\n\n\n\nClone object\n\n\nvar\n \nstatus\n \n=\n \ngashapon\n.\ntoJSON\n();\n\n\nvar\n \ngashapon2\n \n=\n \nnew\n \nGashapon\n(\nstatus\n);\n\n\n\n\n\nOverwrite current status\n\n\nvar\n \nstatus\n \n=\n \ngashapon\n.\ntoJSON\n();\n\n\n// gashapon.next()...\n\n\ngashapon\n.\nresetFromJSON\n(\nstatus\n);\n\n\n\n\n\nGet items\n\n\nFor each item\n\n\ngashapon\n.\neachItem\n(\nfunction\n(\nname\n,\n \ncount\n){\n\n    \nconsole\n.\nlog\n(\nname\n \n+\n \n: \n \n+\n \ncount\n);\n\n\n});\n\n\n\n\n\nGet items\n\n\nvar\n \nitems\n \n=\n \ngashapon\n.\ngetItems\n();", 
             "title": "Gashapon"
         }, 
         {
             "location": "/gashaponplugin/index.html#introduction", 
-            "text": "Pick random item from box.   Author: Rex  A plugin of scene", 
+            "text": "Pick random item from box.   Author: Rex  Member of scene, or game object", 
             "title": "Introduction"
         }, 
         {

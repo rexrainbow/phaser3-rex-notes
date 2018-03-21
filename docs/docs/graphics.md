@@ -1,6 +1,6 @@
 ## Introduction
 
-Built-in game object of phaser.
+Drawing on webgl or canvas, built-in game object of phaser.
 
 - Author: Richard Davey
 
@@ -13,7 +13,9 @@ var graphics = scene.add.graphics();
 // var graphics = scene.add.graphics(x, y);
 ```
 
-### Set style
+### Drawing commands
+
+#### Set style
 
 - Set line style and fill style
 
@@ -34,16 +36,20 @@ var graphics = scene.add.graphics();
 - Set line style
 
     ```javascript
-    graphics.lineStyle(lineWidth, color, alpha)
+    graphics.lineStyle(lineWidth, color, alpha);   // color: 0xRRGGBB
     ```
 
 - Set fill style
 
     ```javascript
-    graphics.fillStyle(color, alpha)
+    graphics.fillStyle(color, alpha);   // color: 0xRRGGBB
     ```
 
-### Drawing commands
+#### Clear
+
+```javascript
+graphics.clear();
+```
 
 #### Path
 
@@ -52,15 +58,6 @@ graphics.beginPath();
 graphics.closePath();
 graphics.fillPath();
 graphics.strokePath();
-```
-
-#### Circle
-
-```javascript
-graphics.fillCircleShape(circle); // circle: {x, y, radius}
-graphics.fillCircle(x, y, radius);
-graphics.strokeCircleShape(circle);  // circle: {x, y, radius}
-graphics.fillCircle(x, y, radius);
 ```
 
 #### Rectangle
@@ -95,6 +92,55 @@ graphics.strokeLineShape(line); // point: {x1, y1, x2, y2}
 graphics.lineBetween(x1, y1, x2, y2);
 graphics.lineTo(x, y);
 graphics.moveTo(x, y);
-graphics.lineFxTo(x, y, width, rgb);
-graphics.moveFxTo(x, y, width, rgb);
+graphics.lineFxTo(x, y, width, rgb);  // gradient width and color
+graphics.moveFxTo(x, y, width, rgb);  // gradient width and color
+```
+
+- `graphics.lineFxTo` is equal to `graphics.lineTo` in CANVAS render mode
+- `graphics.moveFxTo` is equal to `graphics.moveTo` in CANVAS render mode
+
+#### Lines
+
+```javascript
+graphics.strokePoints(points, autoClose, endIndex);  // points: [{x, y}, ...]
+graphics.fillPoints(points, autoClose, endIndex);  // points: [{x, y}, ...]
+```
+
+#### Circle
+
+```javascript
+graphics.fillCircleShape(circle); // circle: {x, y, radius}
+graphics.fillCircle(x, y, radius);
+graphics.strokeCircleShape(circle);  // circle: {x, y, radius}
+graphics.fillCircle(x, y, radius);
+graphics.arc(x, y, radius, startAngle, endAngle, anticlockwise);
+```
+
+Draw or fill circle shape by points.
+
+#### Ellipse
+
+```javascript
+graphics.strokeEllipseShape(ellipse, smoothness);   // ellipse: Phaser.Geom.Ellipse
+graphics.strokeEllipse(x, y, width, height, smoothness);
+graphics.fillEllipseShape(ellipse, smoothness);    // ellipse: Phaser.Geom.Ellipse
+graphics.fillEllipse(x, y, width, height, smoothness);
+```
+
+Draw or fill ellipse shape by points.
+
+#### Transfer
+
+```javascript
+graphics.save();
+graphics.restore();
+graphics.translate(x, y);
+graphics.scale(x, y);
+graphics.rotate(radians);
+```
+
+### Generate texture
+
+```javascript
+graphics.generateTexture(key, width, height);  // key: texture key
 ```

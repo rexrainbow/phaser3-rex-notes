@@ -3,7 +3,7 @@
 Simulate curosr keys according dragging events.
 
 - Author: Rex
-- A plugin of scene
+- Member of scene
 
 ## Source code
 

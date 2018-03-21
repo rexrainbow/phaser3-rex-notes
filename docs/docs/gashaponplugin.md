@@ -3,7 +3,7 @@
 Pick random item from box.
 
 - Author: Rex
-- A plugin of scene
+- Member of scene, or game object
 
 ## Source code
 

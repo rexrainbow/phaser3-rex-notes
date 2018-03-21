@@ -21,6 +21,9 @@ pages:
     - Text: text.md
     - Typing: texttypingplugin.md    
     - Page: textpageplugin.md
+- Canvas:
+    - Graphics: graphics.md
+    - Canvas: canvas.md
 - Date:
     - Date: date.md
 - Random:

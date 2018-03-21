@@ -3,7 +3,7 @@
 Drag game object.
 
 - Author: Rex
-- A plugin of game object
+- Member of game object
 
 ## Source code
 
