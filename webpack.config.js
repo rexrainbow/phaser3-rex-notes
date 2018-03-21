@@ -13,7 +13,7 @@ var definePlugin = new webpack.DefinePlugin({
     CANVAS_RENDERER: true // I did this to make webpack work, but I'm not really sure it should always be true
 })
 
-var projectName = process.env.myproj || "./demo/sample.js"
+var projectName = process.env.myproj || "./examples/sample.js"
 
 module.exports = {
     entry: {
@@ -36,7 +36,7 @@ module.exports = {
         new webpack.optimize.CommonsChunkPlugin({ name: 'vendor'/* chunkName= */, filename: 'vendor.bundle.js'/* filename= */ }),
         new HtmlWebpackPlugin({
             filename: '../index.html',
-            template: './demo/index.html',
+            template: './examples/index.html',
             chunks: ['vendor', 'app'],
             chunksSortMode: 'manual',
             minify: {

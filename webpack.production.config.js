@@ -56,7 +56,7 @@ module.exports = {
     new webpack.optimize.CommonsChunkPlugin({ name: 'vendor' /* chunkName= */, filename: 'js/vendor.bundle.js' /* filename= */ }),
     new HtmlWebpackPlugin({
       filename: distFolder + '/index.html',
-      template: './demo/index.html',
+      template: './examples/index.html',
       chunks: ['vendor', 'app'],
       chunksSortMode: 'manual',
       minify: {

@@ -13,7 +13,7 @@
 2.  Click `install.bat`
     -   `npm install`
 
-### Run demo
+### Run examples
 
 1.  Click `*.bat` in folder `examples`, it will open application on browser
 
