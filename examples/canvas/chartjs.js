@@ -51,7 +51,16 @@ class Demo extends Phaser.Scene {
                         }
                     }]
                 },
-                responsive: false   // set to false because of this canvas element has no parent node
+                animation: {                                
+                    onProgress: function(animation) {
+                        //console.log(animation.animationObject.currentStep / animation.animationObject.numSteps);
+                        canvas.needRedraw();  // update texture in webgl mode
+                    },
+                    onComplete: function() {
+                        //console.log('onComplete');
+                    }
+                },
+                responsive: false   // set to false because of this canvas element has no parent node         
             }
         });
         //console.log(ctx.canvas.toDataURL());
@@ -61,7 +70,7 @@ class Demo extends Phaser.Scene {
 }
 
 var config = {
-    type: Phaser.CANVAS,
+    type: Phaser.WEBGL,
     parent: 'phaser-example',
     width: 800,
     height: 600,
