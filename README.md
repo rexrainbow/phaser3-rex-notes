@@ -15,12 +15,12 @@
 
 ### Run demo
 
-1.  Click `*.bat` in folder `demo`, it will open application on browser
+1.  Click `*.bat` in folder `examples`, it will open application on browser
 
 ## File structure
 
 -   Folder `plugins` : source code of plugins
--   Folder `demo` : demo code
+-   Folder `examples` : examples
 -   Folder `docs` : notes
 
 ## Showcase

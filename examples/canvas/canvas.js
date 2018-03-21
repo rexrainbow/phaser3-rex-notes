@@ -1,0 +1,50 @@
+'use strict'
+
+import Canvas from './../../plugins/canvas-plugin.js'
+
+class Demo extends Phaser.Scene {
+    constructor() {
+        super({
+            key: 'examples'
+        })
+    }
+
+    preload() { }
+
+    create() {
+        var canvas = this.add.rexCanvas(300, 300, 200, 200)
+            .fill('dimgray')
+            .setInteractive()
+            .on('pointerdown', drawCircle);
+        canvas.rotation = Phaser.Math.DegToRad(45);
+
+        // create or update texture from canvas
+        canvas.generateTexture('canvas');
+        // create Image object using that texture
+        this.add.image(100, 100, 'canvas');
+    }
+
+    update() { }
+}
+
+var drawCircle = function (pointer, localX, localY) {
+    var src = this.getCanvas();
+    var ctx = src.getContext('2d');
+    ctx.beginPath();
+    ctx.arc(localX, localY, 10, 0, Phaser.Math.PI2, false);
+    ctx.strokeStyle = 'red';
+    ctx.lineWidth = 3;
+    ctx.stroke();
+
+    this.generateTexture('canvas');
+}
+
+var config = {
+    type: Phaser.AUTO,
+    parent: 'phaser-example',
+    width: 800,
+    height: 600,
+    scene: Demo
+};
+
+var game = new Phaser.Game(config);
