@@ -16,96 +16,6 @@
             "title": "List of my plugins"
         }, 
         {
-            "location": "/datamanager/index.html", 
-            "text": "Introduction\n\n\nStore data in key-value pairs, built-inobject of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nSet value\n\n\nparent\n.\ndata\n.\nset\n(\nkey\n,\n \nvalue\n);\n\n\nparent\n.\ndata\n.\nmerge\n(\ndata\n);\n     \n// {}\n\n\n\n\n\nPop key\n\n\nvar\n \nvalue\n \n=\n \nparent\n.\ndata\n.\npop\n(\nkey\n);\n\n\n\n\n\nGet and remove that key.\n\n\nRemove key\n\n\nparent\n.\ndata\n.\nremove\n(\nkey\n);\n\n\n\n\n\nGet value\n\n\nvar\n \nvalue\n \n=\n \nparent\n.\ndata\n.\nget\n(\nkey\n);\n\n\nvar\n \nallValues\n \n=\n \nparent\n.\ndata\n.\ngetAll\n();\n  \n// return a copy of data\n\n\n\n\n\nQuery\n\n\nUsing \nstring.match()\n to pick matched keys.\n\n\nvar\n \nresult\n \n=\n \nparent\n.\ndata\n.\nquery\n(\nrgExp\n);\n\n\n\n\n\nFreeze\n\n\nvar\n \nisFrozen\n \n=\n \nparent\n.\ndata\n.\nfreeze\n;\n\n\nparent\n.\ndata\n.\nfreeze\n \n=\n \ntrue\n;\n\n\n\n\n\nNo changes can be written to it.\n\n\nHas key\n\n\nvar\n \nhasKey\n \n=\n \nparent\n.\ndata\n.\nhas\n(\nkey\n);\n\n\n\n\n\nFor each key\n\n\nparent\n.\ndata\n.\neach\n(\nfunction\n(\nparent\n,\n \nkey\n,\n \nvalue\n){\n\n    \n/* ... */\n\n\n},\n \nscope\n);\n\n\n\n\n\nCount of data\n\n\nvar\n \ncnt\n \n=\n \nparent\n.\ndata\n.\ncount\n;\n\n\n\n\n\nReset\n\n\nReset status and clean all keys.\n\n\nparent\n.\ndata\n.\nreset\n()\n\n\n\n\n\nEvent of changing data\n\n\nEvent 'setdata', 'changedata' will be fired when invoking \nparent.data.set(key, value)\n.\n\n\nparent\n.\ndata\n.\nevent\n.\non\n(\nsetdata\n,\n \nfunction\n(\nparent\n,\n \nkey\n,\n \nvalue\n){\n\n    \n/* ... */\n\n\n},\n \nscope\n);\n\n\n\n\n\nparent\n.\ndata\n.\nevent\n.\non\n(\nchangedata\n,\n \nfunction\n(\nparent\n,\n \nkey\n,\n \nvalue\n,\n \nresetValue\n){\n\n    \n// resetValue(newValue);  // overwrite value to newValue\n\n\n},\n \nscope\n);", 
-            "title": "Data manager"
-        }, 
-        {
-            "location": "/datamanager/index.html#introduction", 
-            "text": "Store data in key-value pairs, built-inobject of phaser.   Author: Richard Davey", 
-            "title": "Introduction"
-        }, 
-        {
-            "location": "/datamanager/index.html#usage", 
-            "text": "", 
-            "title": "Usage"
-        }, 
-        {
-            "location": "/datamanager/index.html#set-value", 
-            "text": "parent . data . set ( key ,   value );  parent . data . merge ( data );       // {}", 
-            "title": "Set value"
-        }, 
-        {
-            "location": "/datamanager/index.html#pop-key", 
-            "text": "var   value   =   parent . data . pop ( key );   Get and remove that key.", 
-            "title": "Pop key"
-        }, 
-        {
-            "location": "/datamanager/index.html#remove-key", 
-            "text": "parent . data . remove ( key );", 
-            "title": "Remove key"
-        }, 
-        {
-            "location": "/datamanager/index.html#get-value", 
-            "text": "var   value   =   parent . data . get ( key );  var   allValues   =   parent . data . getAll ();    // return a copy of data", 
-            "title": "Get value"
-        }, 
-        {
-            "location": "/datamanager/index.html#query", 
-            "text": "Using  string.match()  to pick matched keys.  var   result   =   parent . data . query ( rgExp );", 
-            "title": "Query"
-        }, 
-        {
-            "location": "/datamanager/index.html#freeze", 
-            "text": "var   isFrozen   =   parent . data . freeze ;  parent . data . freeze   =   true ;   No changes can be written to it.", 
-            "title": "Freeze"
-        }, 
-        {
-            "location": "/datamanager/index.html#has-key", 
-            "text": "var   hasKey   =   parent . data . has ( key );", 
-            "title": "Has key"
-        }, 
-        {
-            "location": "/datamanager/index.html#for-each-key", 
-            "text": "parent . data . each ( function ( parent ,   key ,   value ){ \n     /* ... */  },   scope );", 
-            "title": "For each key"
-        }, 
-        {
-            "location": "/datamanager/index.html#count-of-data", 
-            "text": "var   cnt   =   parent . data . count ;", 
-            "title": "Count of data"
-        }, 
-        {
-            "location": "/datamanager/index.html#reset", 
-            "text": "Reset status and clean all keys.  parent . data . reset ()", 
-            "title": "Reset"
-        }, 
-        {
-            "location": "/datamanager/index.html#event-of-changing-data", 
-            "text": "Event 'setdata', 'changedata' will be fired when invoking  parent.data.set(key, value) .  parent . data . event . on ( setdata ,   function ( parent ,   key ,   value ){ \n     /* ... */  },   scope );   parent . data . event . on ( changedata ,   function ( parent ,   key ,   value ,   resetValue ){ \n     // resetValue(newValue);  // overwrite value to newValue  },   scope );", 
-            "title": "Event of changing data"
-        }, 
-        {
-            "location": "/filter/index.html", 
-            "text": "Introduction\n\n\nCreates a new array with all elements that pass the test function.\n\n\n\n\nAuthor: Built-in javascript function\n\n\n\n\nUsage\n\n\nReference\n\n\nFilter elements\n\n\n// var elems = [...]\n\n\nvar\n \nresult\n \n=\n \nelems\n.\nfilter\n(\nfunction\n(\nel\n){\n\n    \nreturn\n \n(\nel\n.\nx\n \n \n400\n);\n\n\n});", 
-            "title": "Filter"
-        }, 
-        {
-            "location": "/filter/index.html#introduction", 
-            "text": "Creates a new array with all elements that pass the test function.   Author: Built-in javascript function", 
-            "title": "Introduction"
-        }, 
-        {
-            "location": "/filter/index.html#usage", 
-            "text": "Reference", 
-            "title": "Usage"
-        }, 
-        {
-            "location": "/filter/index.html#filter-elements", 
-            "text": "// var elems = [...]  var   result   =   elems . filter ( function ( el ){ \n     return   ( el . x     400 );  });", 
-            "title": "Filter elements"
-        }, 
-        {
             "location": "/touchevents/index.html", 
             "text": "Introduction\n\n\nBuilt-in touch/mouse events of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nMouse/touch events\n\n\nscene\n.\ninput\n.\non\n(\npointerdown\n,\n \nfunction\n(\npointer\n,\n \ncurrentlyOver\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\npointerup\n,\n \nfunction\n(\npointer\n,\n \ncurrentlyOver\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\npointermove\n,\n \nfunction\n(\npointer\n,\n \ncurrentlyOver\n){\n \n/* ... */\n \n});\n\n\n\nscene\n.\ninput\n.\non\n(\npointerover\n,\n \nfunction\n(\npointer\n,\n \njustOver\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\npointerout\n,\n \nfunction\n(\npointer\n,\n \njustOut\n){\n \n/* ... */\n \n});\n\n\n\n\n\nMouse/touch events of game object\n\n\n\n\nRegister game object\n\n\n\n\ngameObject\n.\nsetInteractive\n();\n       \n// enable\n\n\n// gameObject.setInteractive(false);  // disable\n\n\n\n\n\n\n\nMouse/touch events of a game object\n\n\n\n\ngameObject\n.\non\n(\npointerdown\n,\n \nfunction\n(\npointer\n,\n \nlocalX\n,\n \nlocalY\n,\n \ncamera\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\npointerup\n,\n \nfunction\n(\npointer\n,\n \nlocalX\n,\n \nlocalY\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\npointermove\n,\n \nfunction\n(\npointer\n,\n \nlocalX\n,\n \nlocalY\n){\n \n/* ... */\n \n});\n\n\n\ngameObject\n.\non\n(\npointerover\n,\n \nfunction\n(\npointer\n,\n \nlocalX\n,\n \nlocalY\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\npointerout\n,\n \nfunction\n(\npointer\n){\n \n/* ... */\n \n});\n\n\n\n\n\nscene\n.\ninput\n.\non\n(\ngameobjectdown\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ngameobjectup\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ngameobjectmove\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n){\n \n/* ... */\n \n});\n\n\n\nscene\n.\ninput\n.\non\n(\ngameobjectover\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ngameobjectout\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n){\n \n/* ... */\n \n});\n\n\n\n\n\nDrag events\n\n\n\n\nRegister game object and enable dragging\n\n\n\n\ngameObject\n.\nsetInteractive\n();\n           \n// enable touching interactive\n\n\nscene\n.\ninput\n.\nsetDraggable\n(\ngameObject\n);\n  \n// enable dragging\n\n\n// scene.input.dragDistanceThreshold = 16;\n\n\n// scene.input.dragTimeThreshold = 500;\n\n\n\n// gameObject.setInteractive(false);             // disable\n\n\n// scene.input.setDraggable(gameObject, false);  // disable dragging\n\n\n\n\n\ngameObject\n.\non\n(\ndragstart\n,\n \nfunction\n(\npointer\n,\n \ndragX\n,\n \ndragY\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\ndrag\n,\n \nfunction\n(\npointer\n,\n \ndragX\n,\n \ndragY\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\ndragend\n,\n \nfunction\n(\npointer\n,\n \ndragX\n,\n \ndragY\n,\n \ndropped\n{\n \n/* ... */\n \n});\n\n\n\n\n\nscene\n.\ninput\n.\non\n(\ndragstart\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ndrag\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n,\n \ndragX\n,\n \ndragY\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ndragend\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n,\n \ndropped\n){\n \n/* ... */\n \n});\n\n\n\n\n\nDrop events\n\n\ngameObject\n.\non\n(\ndrop\n,\n \nfunction\n(\npointer\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\n\ngameObject\n.\non\n(\ndragenter\n,\n \nfunction\n(\npointer\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\ndragover\n,\n \nfunction\n(\npointer\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\ndragleave\n,\n \nfunction\n(\npointer\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\n\n\n\nscene\n.\ninput\n.\non\n(\ndrop\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\n\nscene\n.\ninput\n.\non\n(\ndragenter\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ndragover\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ndragleave\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\n\n\n\nProperties of point\n\n\n\n\nPosition of current touching: \npointer.x\n , \npointer.y\n\n\nPosition of touching start: \npointer.downX\n, \npointer.downY\n\n\nPosition of touching end: \npointer.upX\n, \npointer.upY\n\n\nNo botton down: \npointer.noButtonDown()\n\n\nIs left botton down: \npointer.leftButtonDown()\n\n\nIs right botton down: \npointer.rightButtonDown()", 
             "title": "Touch events"
@@ -824,6 +734,96 @@
             "location": "/canvas/index.html#compare-with-graphics-object", 
             "text": "Drawing method   This canvas object draws stuff on canvas in WEBGL or CANVAS render mode.    Graphics object draws stuff on webgl render pipeline n WEBGL render mode.     Size   This canvas object has size (width, height) and origin.    Graphics object does not have size and origin.", 
             "title": "Compare with Graphics object"
+        }, 
+        {
+            "location": "/datamanager/index.html", 
+            "text": "Introduction\n\n\nStore data in key-value pairs, built-inobject of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nSet value\n\n\nparent\n.\ndata\n.\nset\n(\nkey\n,\n \nvalue\n);\n\n\nparent\n.\ndata\n.\nmerge\n(\ndata\n);\n     \n// {}\n\n\n\n\n\nPop key\n\n\nvar\n \nvalue\n \n=\n \nparent\n.\ndata\n.\npop\n(\nkey\n);\n\n\n\n\n\nGet and remove that key.\n\n\nRemove key\n\n\nparent\n.\ndata\n.\nremove\n(\nkey\n);\n\n\n\n\n\nGet value\n\n\nvar\n \nvalue\n \n=\n \nparent\n.\ndata\n.\nget\n(\nkey\n);\n\n\nvar\n \nallValues\n \n=\n \nparent\n.\ndata\n.\ngetAll\n();\n  \n// return a copy of data\n\n\n\n\n\nQuery\n\n\nUsing \nstring.match()\n to pick matched keys.\n\n\nvar\n \nresult\n \n=\n \nparent\n.\ndata\n.\nquery\n(\nrgExp\n);\n\n\n\n\n\nFreeze\n\n\nvar\n \nisFrozen\n \n=\n \nparent\n.\ndata\n.\nfreeze\n;\n\n\nparent\n.\ndata\n.\nfreeze\n \n=\n \ntrue\n;\n\n\n\n\n\nNo changes can be written to it.\n\n\nHas key\n\n\nvar\n \nhasKey\n \n=\n \nparent\n.\ndata\n.\nhas\n(\nkey\n);\n\n\n\n\n\nFor each key\n\n\nparent\n.\ndata\n.\neach\n(\nfunction\n(\nparent\n,\n \nkey\n,\n \nvalue\n){\n\n    \n/* ... */\n\n\n},\n \nscope\n);\n\n\n\n\n\nCount of data\n\n\nvar\n \ncnt\n \n=\n \nparent\n.\ndata\n.\ncount\n;\n\n\n\n\n\nReset\n\n\nReset status and clean all keys.\n\n\nparent\n.\ndata\n.\nreset\n()\n\n\n\n\n\nEvent of changing data\n\n\nEvent 'setdata', 'changedata' will be fired when invoking \nparent.data.set(key, value)\n.\n\n\nparent\n.\ndata\n.\nevent\n.\non\n(\nsetdata\n,\n \nfunction\n(\nparent\n,\n \nkey\n,\n \nvalue\n){\n\n    \n/* ... */\n\n\n},\n \nscope\n);\n\n\n\n\n\nparent\n.\ndata\n.\nevent\n.\non\n(\nchangedata\n,\n \nfunction\n(\nparent\n,\n \nkey\n,\n \nvalue\n,\n \nresetValue\n){\n\n    \n// resetValue(newValue);  // overwrite value to newValue\n\n\n},\n \nscope\n);", 
+            "title": "Data manager"
+        }, 
+        {
+            "location": "/datamanager/index.html#introduction", 
+            "text": "Store data in key-value pairs, built-inobject of phaser.   Author: Richard Davey", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/datamanager/index.html#usage", 
+            "text": "", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/datamanager/index.html#set-value", 
+            "text": "parent . data . set ( key ,   value );  parent . data . merge ( data );       // {}", 
+            "title": "Set value"
+        }, 
+        {
+            "location": "/datamanager/index.html#pop-key", 
+            "text": "var   value   =   parent . data . pop ( key );   Get and remove that key.", 
+            "title": "Pop key"
+        }, 
+        {
+            "location": "/datamanager/index.html#remove-key", 
+            "text": "parent . data . remove ( key );", 
+            "title": "Remove key"
+        }, 
+        {
+            "location": "/datamanager/index.html#get-value", 
+            "text": "var   value   =   parent . data . get ( key );  var   allValues   =   parent . data . getAll ();    // return a copy of data", 
+            "title": "Get value"
+        }, 
+        {
+            "location": "/datamanager/index.html#query", 
+            "text": "Using  string.match()  to pick matched keys.  var   result   =   parent . data . query ( rgExp );", 
+            "title": "Query"
+        }, 
+        {
+            "location": "/datamanager/index.html#freeze", 
+            "text": "var   isFrozen   =   parent . data . freeze ;  parent . data . freeze   =   true ;   No changes can be written to it.", 
+            "title": "Freeze"
+        }, 
+        {
+            "location": "/datamanager/index.html#has-key", 
+            "text": "var   hasKey   =   parent . data . has ( key );", 
+            "title": "Has key"
+        }, 
+        {
+            "location": "/datamanager/index.html#for-each-key", 
+            "text": "parent . data . each ( function ( parent ,   key ,   value ){ \n     /* ... */  },   scope );", 
+            "title": "For each key"
+        }, 
+        {
+            "location": "/datamanager/index.html#count-of-data", 
+            "text": "var   cnt   =   parent . data . count ;", 
+            "title": "Count of data"
+        }, 
+        {
+            "location": "/datamanager/index.html#reset", 
+            "text": "Reset status and clean all keys.  parent . data . reset ()", 
+            "title": "Reset"
+        }, 
+        {
+            "location": "/datamanager/index.html#event-of-changing-data", 
+            "text": "Event 'setdata', 'changedata' will be fired when invoking  parent.data.set(key, value) .  parent . data . event . on ( setdata ,   function ( parent ,   key ,   value ){ \n     /* ... */  },   scope );   parent . data . event . on ( changedata ,   function ( parent ,   key ,   value ,   resetValue ){ \n     // resetValue(newValue);  // overwrite value to newValue  },   scope );", 
+            "title": "Event of changing data"
+        }, 
+        {
+            "location": "/filter/index.html", 
+            "text": "Introduction\n\n\nCreates a new array with all elements that pass the test function.\n\n\n\n\nAuthor: Built-in javascript function\n\n\n\n\nUsage\n\n\nReference\n\n\nFilter elements\n\n\n// var elems = [...]\n\n\nvar\n \nresult\n \n=\n \nelems\n.\nfilter\n(\nfunction\n(\nel\n){\n\n    \nreturn\n \n(\nel\n.\nx\n \n \n400\n);\n\n\n});", 
+            "title": "Filter"
+        }, 
+        {
+            "location": "/filter/index.html#introduction", 
+            "text": "Creates a new array with all elements that pass the test function.   Author: Built-in javascript function", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/filter/index.html#usage", 
+            "text": "Reference", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/filter/index.html#filter-elements", 
+            "text": "// var elems = [...]  var   result   =   elems . filter ( function ( el ){ \n     return   ( el . x     400 );  });", 
+            "title": "Filter elements"
         }, 
         {
             "location": "/date/index.html", 

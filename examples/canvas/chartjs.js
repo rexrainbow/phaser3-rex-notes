@@ -13,13 +13,10 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var canvas = this.add.rexCanvas(0, 0, 400, 400).setOrigin(0);
+        var canvas = this.add.rexCanvas(0, 0, 800, 600).setOrigin(0);
 
         var src = canvas.getCanvas();
         var ctx = src.getContext('2d');
-        //ctx.fillStyle = 'dimgray';
-        //ctx.fillRect(0, 0, src.width, src.height);
-        debugger
         var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
@@ -54,19 +51,10 @@ class Demo extends Phaser.Scene {
                         }
                     }]
                 },
-                animation: {
-                    duration: 0,
-                    onProgress: function(animation) {
-                        console.log(animation.animationObject.currentStep / animation.animationObject.numSteps)
-                        canvas.needRedraw();
-                    },
-                    onComplete: function() {
-                        console.log('onComplete')
-                    }
-                }                
+                responsive: false   // set to false because of this canvas element has no parent node
             }
         });
-        console.log(ctx.canvas.toDataURL());
+        //console.log(ctx.canvas.toDataURL());
     }
 
     update() { }
@@ -77,6 +65,7 @@ var config = {
     parent: 'phaser-example',
     width: 800,
     height: 600,
+    backgroundColor: 0xffffff,
     scene: Demo
 };
 

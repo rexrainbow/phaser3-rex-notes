@@ -12,22 +12,6 @@
     
         
     <url>
-     <loc>/datamanager/index.html</loc>
-     <lastmod>2018-03-21</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>/filter/index.html</loc>
-     <lastmod>2018-03-21</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    
-
-    
-        
-    <url>
      <loc>/touchevents/index.html</loc>
      <lastmod>2018-03-21</lastmod>
      <changefreq>daily</changefreq>
@@ -119,6 +103,22 @@
         
     <url>
      <loc>/canvas/index.html</loc>
+     <lastmod>2018-03-21</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    
+
+    
+        
+    <url>
+     <loc>/datamanager/index.html</loc>
+     <lastmod>2018-03-21</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>/filter/index.html</loc>
      <lastmod>2018-03-21</lastmod>
      <changefreq>daily</changefreq>
     </url>

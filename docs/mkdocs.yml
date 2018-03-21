@@ -3,9 +3,6 @@ theme: 'material'
 
 pages:
 - Home: index.md
-- Data:
-    - Data manager: datamanager.md
-    - Filter: filter.md
 - Input:
     - Touch events: touchevents.md
     - Keyboard events: keyboardevents.md
@@ -13,7 +10,7 @@ pages:
     - Drag to CursorKeys: dragcursorplugin.md
 - Loader:
     - Loader: loader.md
-    - Webfont loader: webfontloader.md
+    - Webfont loader: webfontloader.md    
 - Game object: gameobject.md
 - Sprite:
     - Image: image.md
@@ -24,6 +21,9 @@ pages:
 - Canvas:
     - Graphics: graphics.md
     - Canvas: canvas.md
+- Data:
+    - Data manager: datamanager.md
+    - Filter: filter.md    
 - Date:
     - Date: date.md
 - Random:
