@@ -1,6 +1,6 @@
 'use strict'
 
-import runCmd from './../../plugins/utils/commandqueue/commandqueue.js';
+import runCmd from './../../plugins/runcommands.js';
 
 const Map = Phaser.Structs.Map;
 
