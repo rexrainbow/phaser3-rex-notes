@@ -23,7 +23,7 @@ pages:
     - Canvas: canvas.md
 - Data:
     - Data manager: datamanager.md
-    - Filter: filter.md        
+    - Array: array.md
 - Time:
     - Date: date.md
     - Timer: timer.md
