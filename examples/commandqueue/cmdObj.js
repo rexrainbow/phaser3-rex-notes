@@ -4,38 +4,19 @@ import runCmd from './../../plugins/utils/commandqueue/commandqueue.js';
 
 const Map = Phaser.Structs.Map;
 
-class Demo extends Phaser.Scene {
-
-    constructor() {
-        super({
-            key: 'examples'
-        })
-
+class CmdKlass {
+    constructor(scene) {
+        this.scene = scene;
         this.objs = new Map();
-    }
 
-    preload() {
-        this.load.image('mushroom', 'assets/images/mushroom.png');
-    }
-
-    create() {
         // alias function name
         this['create-sprite'] = this.createSprite;
-        this['move-sprite-to'] = this.moveSpriteTo;
-
-        var cmds = [
-            ['print', 'hello'],
-            ['print', 'world'],
-            [
-                ['create-sprite', 'A', 100, 100, 'mushroom'],
-                ['move-sprite-to', 'A', 300, 200, 1]
-            ]
-
-        ];
-        runCmd(cmds, this);
+        this['move-sprite-to'] = this.moveSpriteTo;        
     }
 
-    update() {}
+    run(cmds) {
+        runCmd(cmds, this);
+    }
 
     // callbacks
     print(msg) {
@@ -46,7 +27,7 @@ class Demo extends Phaser.Scene {
         if (this.objs.has(name)) {
             return;
         }
-        this.objs.set(name, this.add.sprite(x, y, key));
+        this.objs.set(name, this.scene.add.sprite(x, y, key));
     }
 
     moveSpriteTo(name, x, y, duration) {
@@ -54,13 +35,42 @@ class Demo extends Phaser.Scene {
         if (sprite == null) {
             return;
         }
-        this.tweens.add({
+        this.scene.tweens.add({
             targets: sprite,
             x: x,
             y: y,
             duration: duration * 1000
         })
     }
+}
+class Demo extends Phaser.Scene {
+
+    constructor() {
+        super({
+            key: 'examples'
+        })
+    }
+
+    preload() {
+        this.load.image('mushroom', 'assets/images/mushroom.png');
+    }
+
+    create() {
+        this.myCmds = new CmdKlass(this);        
+
+        var cmds = [
+            ['print', 'hello'],
+            ['print', 'world'],
+            [
+                ['create-sprite', 'A', 100, 100, 'mushroom'],
+                ['move-sprite-to', 'A', 300, 200, 1]
+            ]
+
+        ];
+        this.myCmds.run(cmds);
+    }
+
+    update() {}
 }
 
 var config = {
