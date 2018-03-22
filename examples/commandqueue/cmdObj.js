@@ -13,11 +13,7 @@ class CmdKlass {
         this['create-sprite'] = this.createSprite;
         this['move-sprite-to'] = this.moveSpriteTo;        
     }
-
-    run(cmds) {
-        runCmd(cmds, this);
-    }
-
+    
     // callbacks
     print(msg) {
         console.log(msg);
@@ -67,7 +63,8 @@ class Demo extends Phaser.Scene {
             ]
 
         ];
-        this.myCmds.run(cmds);
+
+        runCmd(cmds, this.myCmds);
     }
 
     update() {}
