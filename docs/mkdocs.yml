@@ -23,9 +23,11 @@ pages:
     - Canvas: canvas.md
 - Data:
     - Data manager: datamanager.md
-    - Filter: filter.md    
-- Date:
+    - Filter: filter.md        
+- Time:
     - Date: date.md
+    - Timer: timer.md
+    - Timeline: timeline.md
 - Random:
     - Gashapon: gashaponplugin.md    
 

@@ -861,6 +861,66 @@
             "title": "To string"
         }, 
         {
+            "location": "/timer/index.html", 
+            "text": "Introduction\n\n\nExecute callback when time-out, built-in object of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nStart timer\n\n\n\n\n\n\nLooped timer\n\n\nvar\n \ntimer\n \n=\n \nscene\n.\ntime\n.\naddEvent\n({\n\n    \ndelay\n:\n \n500\n,\n                \n// ms\n\n    \ncallback\n:\n \ncallback\n,\n\n    \n//args: [],\n\n    \ncallbackScope\n:\n \nthisArg\n,\n\n    \nloop\n:\n \ntrue\n\n\n});\n\n\n\n\n\n\n\n\n\nRepeat timer\n\n\nvar\n \ntimer\n \n=\n \nscene\n.\ntime\n.\naddEvent\n({\n\n    \ndelay\n:\n \n500\n,\n                \n// ms\n\n    \ncallback\n:\n \ncallback\n,\n\n    \n//args: [],\n\n    \ncallbackScope\n:\n \nthisArg\n,\n\n    \nrepeat\n:\n \n4\n\n\n});\n\n\n\n\n\n\n\n\n\nOneshot timer\n\n\nvar\n \ntimer\n \n=\n \nscene\n.\ntime\n.\ndelayedCall\n(\ndelay\n,\n \ncallback\n,\n \nargs\n,\n \ncallbackscope\n);\n  \n// delay in ms\n\n\n\n\n\n\n\n\n\nAll properties of timer\n\n\nvar\n \ntimer\n \n=\n \nscene\n.\ntime\n.\naddEvent\n({\n\n    \ndelay\n:\n \n500\n,\n                \n// ms\n\n    \ncallback\n:\n \ncallback\n,\n\n    \nargs\n:\n \n[],\n\n    \ncallbackScope\n:\n \nthisArg\n,\n\n    \nloop\n:\n \nfasle\n,\n\n    \nrepeat\n:\n \n0\n,\n\n    \nstartAt\n:\n \n0\n,\n\n    \ntimeScale\n:\n \n1\n,\n\n    \npaused\n:\n \nfalse\n\n\n});\n\n\n\n\n\n\n\n\n\nStatus of timer\n\n\n\n\n\n\nGet elapsed time\n\n\nvar\n \nelapsed\n \n=\n \ntimer\n.\ngetElapsed\n();\n   \n// ms\n\n\nvar\n \nelapsed\n \n=\n \ntimer\n.\ngetElapsedSeconds\n();\n \n// sec\n\n\n\n\n\n\n\n\n\nGet repeat count\n\n\nvar\n \nrepeat\n \n=\n \ntimer\n.\ngetRepeatCount\n();\n\n\n\n\n\n\n\n\n\nGets the progress of the current iteration\n\n\nvar\n \nprogress\n \n=\n \ntimer\n.\ngetProgress\n();\n  \n// elapsed / delay\n\n\n\n\n\n\n\n\n\nGets the progress of the timer overall, factoring in repeats.\n\n\nvar\n \nprogress\n \n=\n \ntimer\n.\ngetOverallProgress\n();\n  \n// totalElapsed / totalDuration\n\n\n\n\n\n\n\n\n\nGet delay time\n\n\nvar\n \ndelay\n \n=\n \ntimer\n.\ndelay\n;\n   \n// ms\n\n\n\n\n\n\n\n\n\nIs paused\n\n\nvar\n \nisPaused\n \n=\n \ntimer\n.\npaused\n;\n\n\n\n\n\n\n\n\n\nGet time-scale\n\n\nvar\n \ntimeScale\n \n=\n \ntimer\n.\ntimeScale\n;\n\n\n\n\n\n\n\n\n\nCommands of timer\n\n\n\n\n\n\nPause timer\n\n\ntimer\n.\npaused\n \n=\n \ntrue\n;\n\n\n\n\n\n\n\n\n\nResume timer\n\n\ntimer\n.\npaused\n \n=\n \nfalse\n;\n\n\n\n\n\n\n\n\n\nRemove timer from timeline\n\n\ntimer\n.\nremove\n();\n\n\n\n\n\n\n\n\n\nSet time-scale\n\n\ntimer\n.\ntimeScale\n \n=\n \n2\n;", 
+            "title": "Timer"
+        }, 
+        {
+            "location": "/timer/index.html#introduction", 
+            "text": "Execute callback when time-out, built-in object of phaser.   Author: Richard Davey", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/timer/index.html#usage", 
+            "text": "", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/timer/index.html#start-timer", 
+            "text": "Looped timer  var   timer   =   scene . time . addEvent ({ \n     delay :   500 ,                  // ms \n     callback :   callback , \n     //args: [], \n     callbackScope :   thisArg , \n     loop :   true  });     Repeat timer  var   timer   =   scene . time . addEvent ({ \n     delay :   500 ,                  // ms \n     callback :   callback , \n     //args: [], \n     callbackScope :   thisArg , \n     repeat :   4  });     Oneshot timer  var   timer   =   scene . time . delayedCall ( delay ,   callback ,   args ,   callbackscope );    // delay in ms     All properties of timer  var   timer   =   scene . time . addEvent ({ \n     delay :   500 ,                  // ms \n     callback :   callback , \n     args :   [], \n     callbackScope :   thisArg , \n     loop :   fasle , \n     repeat :   0 , \n     startAt :   0 , \n     timeScale :   1 , \n     paused :   false  });", 
+            "title": "Start timer"
+        }, 
+        {
+            "location": "/timer/index.html#status-of-timer", 
+            "text": "Get elapsed time  var   elapsed   =   timer . getElapsed ();     // ms  var   elapsed   =   timer . getElapsedSeconds ();   // sec     Get repeat count  var   repeat   =   timer . getRepeatCount ();     Gets the progress of the current iteration  var   progress   =   timer . getProgress ();    // elapsed / delay     Gets the progress of the timer overall, factoring in repeats.  var   progress   =   timer . getOverallProgress ();    // totalElapsed / totalDuration     Get delay time  var   delay   =   timer . delay ;     // ms     Is paused  var   isPaused   =   timer . paused ;     Get time-scale  var   timeScale   =   timer . timeScale ;", 
+            "title": "Status of timer"
+        }, 
+        {
+            "location": "/timer/index.html#commands-of-timer", 
+            "text": "Pause timer  timer . paused   =   true ;     Resume timer  timer . paused   =   false ;     Remove timer from timeline  timer . remove ();     Set time-scale  timer . timeScale   =   2 ;", 
+            "title": "Commands of timer"
+        }, 
+        {
+            "location": "/timeline/index.html", 
+            "text": "Introduction\n\n\nUpdate timers, built-in object of phaser. Each scene has a timeline (\nscene.time\n) already.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nTime-scale\n\n\n\n\n\n\nGet time-scale\n\n\nvar\n \ntimeScale\n \n=\n \nscene\n.\ntime\n.\ntimeScale\n;\n\n\n\n\n\n\n\n\n\nSet time-scale\n\n\nscene\n.\ntime\n.\ntimeScale\n \n=\n \n2\n;\n\n\n\n\n\n\n\n\n\nPause or resume\n\n\n\n\n\n\nPause\n\n\nscene\n.\ntime\n.\npaused\n \n=\n \ntrue\n;\n\n\n\n\n\n\n\n\n\nResume\n\n\nscene\n.\ntime\n.\npaused\n \n=\n \nfalse\n;\n\n\n\n\n\n\n\n\n\nCreate timeline object\n\n\nvar\n \ntimeline\n \n=\n \nnew\n \nPhaser\n.\nTime\n.\nClock\n(\nscene\n);", 
+            "title": "Timeline"
+        }, 
+        {
+            "location": "/timeline/index.html#introduction", 
+            "text": "Update timers, built-in object of phaser. Each scene has a timeline ( scene.time ) already.   Author: Richard Davey", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/timeline/index.html#usage", 
+            "text": "", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/timeline/index.html#time-scale", 
+            "text": "Get time-scale  var   timeScale   =   scene . time . timeScale ;     Set time-scale  scene . time . timeScale   =   2 ;", 
+            "title": "Time-scale"
+        }, 
+        {
+            "location": "/timeline/index.html#pause-or-resume", 
+            "text": "Pause  scene . time . paused   =   true ;     Resume  scene . time . paused   =   false ;", 
+            "title": "Pause or resume"
+        }, 
+        {
+            "location": "/timeline/index.html#create-timeline-object", 
+            "text": "var   timeline   =   new   Phaser . Time . Clock ( scene );", 
+            "title": "Create timeline object"
+        }, 
+        {
             "location": "/gashaponplugin/index.html", 
             "text": "Introduction\n\n\nPick random item from box.\n\n\n\n\nAuthor: Rex\n\n\nMember of scene, or game object\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\nvar\n \ngashapon\n \n=\n \nnew\n \nGashaponPlugin\n(\nscene\n,\n \n{\n\n    \nmode\n:\n \nshuffle\n,\n  \n// 0|\nshuffle\n|1|\nrandom\n\n    \nitems\n:\n \n{\n  \n// name:count\n\n        \na\n:\n1\n,\n \n        \nb\n:\n2\n,\n \n        \nc\n:\n3\n \n    \n},\n\n    \nreload\n:\n \ntrue\n,\n     \n// true|false\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\nmode : \n\n\n'shuffle'\n, or \n0\n : pick item from box without put it back.\n\n\n'random'\n, or \n1\n : pick item from box then put it back.\n\n\n\n\n\n\nreload : set \ntrue\n to reload items when box is empty for \nshuffle\n mode.\n\n\nitems : initial items in box\n\n\n\n\nPick item\n\n\nPick a random item\n\n\nvar\n \nitem\n \n=\n \ngashapon\n.\nnext\n();\n\n\n\n\n\n\n\nreturn \nnull\n if pick nothing\n\n\n\n\nPick specific item\n\n\nvar\n \nitem\n \n=\n \ngashapon\n.\nnext\n(\na\n);\n\n\n\n\n\n\n\nreturn \nnull\n if pick nothing\n\n\n\n\nLast picked item\n\n\nvar\n \nitem\n \n=\n \ngashapon\n.\nresult\n;\n\n\n\n\n\nSet item\n\n\nSet item\n\n\ngashapon\n.\nsetItem\n(\na\n,\n \n1\n);\n\n\n// gashapon.setItem(\na\n, 1).setItem(\nb\n, 2).setItem(\nc\n, 3);\n\n\n\n\n\nAdd item\n\n\ngashapon\n.\naddItem\n(\na\n,\n1\n);\n\n\n\n\n\nRemove item\n\n\nRemove item\n\n\ngashapon\n.\nremoveItem\n(\na\n);\n\n\n// gashapon.removeItem(\nb\n).gashapon.removeItem(\nc\n);\n\n\n\n\n\nRemove all items\n\n\ngashapon\n.\nremoveAllItems\n();\n\n\n\n\n\nCurrent status\n\n\nGet current status\n\n\nvar\n \nstatus\n \n=\n \ngashapon\n.\ntoJSON\n();\n\n\n\n\n\nClone object\n\n\nvar\n \nstatus\n \n=\n \ngashapon\n.\ntoJSON\n();\n\n\nvar\n \ngashapon2\n \n=\n \nnew\n \nGashapon\n(\nstatus\n);\n\n\n\n\n\nOverwrite current status\n\n\nvar\n \nstatus\n \n=\n \ngashapon\n.\ntoJSON\n();\n\n\n// gashapon.next()...\n\n\ngashapon\n.\nresetFromJSON\n(\nstatus\n);\n\n\n\n\n\nGet items\n\n\nFor each item\n\n\ngashapon\n.\neachItem\n(\nfunction\n(\nname\n,\n \ncount\n){\n\n    \nconsole\n.\nlog\n(\nname\n \n+\n \n: \n \n+\n \ncount\n);\n\n\n});\n\n\n\n\n\nGet items\n\n\nvar\n \nitems\n \n=\n \ngashapon\n.\ngetItems\n();", 
             "title": "Gashapon"

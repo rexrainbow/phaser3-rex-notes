@@ -32,7 +32,7 @@
     
     
       
-        <title>Game object - Notes of Phaser 3</title>
+        <title>Timer - Notes of Phaser 3</title>
       
     
     
@@ -86,7 +86,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Game object
+                Timer
               </span>
             
           
@@ -282,112 +282,11 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="toc">
-        Game object
-      </label>
-    
-    <a href="index.html" title="Game object" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../gameobject/index.html" title="Game object" class="md-nav__link">
       Game object
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#position" title="Position" class="md-nav__link">
-    Position
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#angle" title="Angle" class="md-nav__link">
-    Angle
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#visible" title="Visible" class="md-nav__link">
-    Visible
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#alpha" title="Alpha" class="md-nav__link">
-    Alpha
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#flipx-flipy" title="FlipX, FlipY" class="md-nav__link">
-    FlipX, FlipY
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scroll-factor" title="Scroll factor" class="md-nav__link">
-    Scroll factor
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#edges" title="Edges" class="md-nav__link">
-    Edges
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#private-data" title="Private data" class="md-nav__link">
-    Private data
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
     
@@ -587,10 +486,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9" checked>
     
     <label class="md-nav__link" for="nav-9">
       Time
@@ -618,11 +519,77 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../timer/index.html" title="Timer" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Timer
+      </label>
+    
+    <a href="index.html" title="Timer" class="md-nav__link md-nav__link--active">
       Timer
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#start-timer" title="Start timer" class="md-nav__link">
+    Start timer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#status-of-timer" title="Status of timer" class="md-nav__link">
+    Status of timer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#commands-of-timer" title="Commands of timer" class="md-nav__link">
+    Commands of timer
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -713,57 +680,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#position" title="Position" class="md-nav__link">
-    Position
+  <a href="#start-timer" title="Start timer" class="md-nav__link">
+    Start timer
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#angle" title="Angle" class="md-nav__link">
-    Angle
+  <a href="#status-of-timer" title="Status of timer" class="md-nav__link">
+    Status of timer
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#visible" title="Visible" class="md-nav__link">
-    Visible
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#alpha" title="Alpha" class="md-nav__link">
-    Alpha
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#flipx-flipy" title="FlipX, FlipY" class="md-nav__link">
-    FlipX, FlipY
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scroll-factor" title="Scroll factor" class="md-nav__link">
-    Scroll factor
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#edges" title="Edges" class="md-nav__link">
-    Edges
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#private-data" title="Private data" class="md-nav__link">
-    Private data
+  <a href="#commands-of-timer" title="Commands of timer" class="md-nav__link">
+    Commands of timer
   </a>
   
 </li>
@@ -788,71 +720,136 @@
               
                 
                 
-                  <h1>Game object</h1>
+                  <h1>Timer</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Base class of all game object in phaser.</p>
+<p>Execute callback when time-out, built-in object of phaser.</p>
 <ul>
 <li>Author: Richard Davey</li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<h3 id="position">Position<a class="headerlink" href="#position" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">gameobject</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">gameobject</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
-<span class="nx">gameobject</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
-<span class="nx">gameobject</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
-</pre></div>
-
-<h3 id="angle">Angle<a class="headerlink" href="#angle" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">angle</span> <span class="o">=</span> <span class="nx">gameobject</span><span class="p">.</span><span class="nx">angle</span><span class="p">;</span>
-<span class="nx">gameobject</span><span class="p">.</span><span class="nx">angle</span> <span class="o">=</span> <span class="mi">90</span><span class="p">;</span>
-
-<span class="c1">// angle in radians</span>
-<span class="kd">var</span> <span class="nx">rad</span> <span class="o">=</span> <span class="nx">gameobject</span><span class="p">.</span><span class="nx">rotation</span><span class="p">;</span>
-<span class="nx">gameobject</span><span class="p">.</span><span class="nx">rotation</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">DegToRad</span><span class="p">(</span><span class="mi">90</span><span class="p">);</span>
-</pre></div>
-
-<h3 id="visible">Visible<a class="headerlink" href="#visible" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">visible</span> <span class="o">=</span> <span class="nx">gameobject</span><span class="p">.</span><span class="nx">visible</span><span class="p">;</span>
-<span class="nx">gameobject</span><span class="p">.</span><span class="nx">visible</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-</pre></div>
-
-<h3 id="alpha">Alpha<a class="headerlink" href="#alpha" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">alpha</span> <span class="o">=</span> <span class="nx">gameobject</span><span class="p">.</span><span class="nx">alpha</span><span class="p">;</span>
-<span class="nx">gameobject</span><span class="p">.</span><span class="nx">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">;</span>
-</pre></div>
-
-<h3 id="flipx-flipy">FlipX, FlipY<a class="headerlink" href="#flipx-flipy" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">flipX</span> <span class="o">=</span> <span class="nx">gameobject</span><span class="p">.</span><span class="nx">flipX</span><span class="p">;</span>
-<span class="nx">gameobject</span><span class="p">.</span><span class="nx">flipX</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-
-<span class="kd">var</span> <span class="nx">flipY</span> <span class="o">=</span> <span class="nx">gameobject</span><span class="p">.</span><span class="nx">flipY</span><span class="p">;</span>
-<span class="nx">gameobject</span><span class="p">.</span><span class="nx">flipY</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-</pre></div>
-
-<h3 id="scroll-factor">Scroll factor<a class="headerlink" href="#scroll-factor" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">setScrollFactor</span><span class="p">(</span><span class="nx">f</span><span class="p">);</span>
-</pre></div>
-
-<p>factor: 0~1</p>
+<h3 id="start-timer">Start timer<a class="headerlink" href="#start-timer" title="Permanent link">&para;</a></h3>
 <ul>
-<li>0= fixed to camera</li>
-<li>0.25= quarter the speed of the camera</li>
-<li>0.5= half the speed of the camera</li>
+<li>
+<p>Looped timer</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">timer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">time</span><span class="p">.</span><span class="nx">addEvent</span><span class="p">({</span>
+    <span class="nx">delay</span><span class="o">:</span> <span class="mi">500</span><span class="p">,</span>                <span class="c1">// ms</span>
+    <span class="nx">callback</span><span class="o">:</span> <span class="nx">callback</span><span class="p">,</span>
+    <span class="c1">//args: [],</span>
+    <span class="nx">callbackScope</span><span class="o">:</span> <span class="nx">thisArg</span><span class="p">,</span>
+    <span class="nx">loop</span><span class="o">:</span> <span class="kc">true</span>
+<span class="p">});</span>
+</pre></div>
+
+</li>
+<li>
+<p>Repeat timer</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">timer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">time</span><span class="p">.</span><span class="nx">addEvent</span><span class="p">({</span>
+    <span class="nx">delay</span><span class="o">:</span> <span class="mi">500</span><span class="p">,</span>                <span class="c1">// ms</span>
+    <span class="nx">callback</span><span class="o">:</span> <span class="nx">callback</span><span class="p">,</span>
+    <span class="c1">//args: [],</span>
+    <span class="nx">callbackScope</span><span class="o">:</span> <span class="nx">thisArg</span><span class="p">,</span>
+    <span class="nx">repeat</span><span class="o">:</span> <span class="mi">4</span>
+<span class="p">});</span>
+</pre></div>
+
+</li>
+<li>
+<p>Oneshot timer</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">timer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">time</span><span class="p">.</span><span class="nx">delayedCall</span><span class="p">(</span><span class="nx">delay</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">args</span><span class="p">,</span> <span class="nx">callbackscope</span><span class="p">);</span>  <span class="c1">// delay in ms</span>
+</pre></div>
+
+</li>
+<li>
+<p>All properties of timer</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">timer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">time</span><span class="p">.</span><span class="nx">addEvent</span><span class="p">({</span>
+    <span class="nx">delay</span><span class="o">:</span> <span class="mi">500</span><span class="p">,</span>                <span class="c1">// ms</span>
+    <span class="nx">callback</span><span class="o">:</span> <span class="nx">callback</span><span class="p">,</span>
+    <span class="nx">args</span><span class="o">:</span> <span class="p">[],</span>
+    <span class="nx">callbackScope</span><span class="o">:</span> <span class="nx">thisArg</span><span class="p">,</span>
+    <span class="nx">loop</span><span class="o">:</span> <span class="nx">fasle</span><span class="p">,</span>
+    <span class="nx">repeat</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">startAt</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">timeScale</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nx">paused</span><span class="o">:</span> <span class="kc">false</span>
+<span class="p">});</span>
+</pre></div>
+
+</li>
 </ul>
-<h3 id="edges">Edges<a class="headerlink" href="#edges" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">topLeft</span> <span class="o">=</span> <span class="nx">gameobject</span><span class="p">.</span><span class="nx">getTopLeft</span><span class="p">();</span>         <span class="c1">// topLeft.x, topLeft.y</span>
-<span class="kd">var</span> <span class="nx">topRight</span> <span class="o">=</span> <span class="nx">gameobject</span><span class="p">.</span><span class="nx">getTopRight</span><span class="p">();</span>       <span class="c1">// topRight.x, topRight.y</span>
-<span class="kd">var</span> <span class="nx">bottomLeft</span> <span class="o">=</span> <span class="nx">gameobject</span><span class="p">.</span><span class="nx">getBottomLeft</span><span class="p">();</span>   <span class="c1">// bottomLeft.x, bottomLeft.y</span>
-<span class="kd">var</span> <span class="nx">bottomRight</span> <span class="o">=</span> <span class="nx">gameobject</span><span class="p">.</span><span class="nx">getBottomRight</span><span class="p">();</span> <span class="c1">// bottomRight.x, bottomRight.y</span>
+<h3 id="status-of-timer">Status of timer<a class="headerlink" href="#status-of-timer" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>Get elapsed time</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">elapsed</span> <span class="o">=</span> <span class="nx">timer</span><span class="p">.</span><span class="nx">getElapsed</span><span class="p">();</span>   <span class="c1">// ms</span>
+<span class="kd">var</span> <span class="nx">elapsed</span> <span class="o">=</span> <span class="nx">timer</span><span class="p">.</span><span class="nx">getElapsedSeconds</span><span class="p">();</span> <span class="c1">// sec</span>
 </pre></div>
 
-<h3 id="private-data">Private data<a class="headerlink" href="#private-data" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">setData</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">gameobject</span><span class="p">.</span><span class="nx">getData</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</li>
+<li>
+<p>Get repeat count</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">repeat</span> <span class="o">=</span> <span class="nx">timer</span><span class="p">.</span><span class="nx">getRepeatCount</span><span class="p">();</span>
 </pre></div>
 
-<p>See <a href="../datamanager/index.html">data manager</a></p>
+</li>
+<li>
+<p>Gets the progress of the current iteration</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">progress</span> <span class="o">=</span> <span class="nx">timer</span><span class="p">.</span><span class="nx">getProgress</span><span class="p">();</span>  <span class="c1">// elapsed / delay</span>
+</pre></div>
+
+</li>
+<li>
+<p>Gets the progress of the timer overall, factoring in repeats.</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">progress</span> <span class="o">=</span> <span class="nx">timer</span><span class="p">.</span><span class="nx">getOverallProgress</span><span class="p">();</span>  <span class="c1">// totalElapsed / totalDuration</span>
+</pre></div>
+
+</li>
+<li>
+<p>Get delay time</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">delay</span> <span class="o">=</span> <span class="nx">timer</span><span class="p">.</span><span class="nx">delay</span><span class="p">;</span>   <span class="c1">// ms</span>
+</pre></div>
+
+</li>
+<li>
+<p>Is paused</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isPaused</span> <span class="o">=</span> <span class="nx">timer</span><span class="p">.</span><span class="nx">paused</span><span class="p">;</span>
+</pre></div>
+
+</li>
+<li>
+<p>Get time-scale</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">timeScale</span> <span class="o">=</span> <span class="nx">timer</span><span class="p">.</span><span class="nx">timeScale</span><span class="p">;</span>
+</pre></div>
+
+</li>
+</ul>
+<h3 id="commands-of-timer">Commands of timer<a class="headerlink" href="#commands-of-timer" title="Permanent link">&para;</a></h3>
+<ul>
+<li>
+<p>Pause timer</p>
+<div class="codehilite"><pre><span></span><span class="nx">timer</span><span class="p">.</span><span class="nx">paused</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</pre></div>
+
+</li>
+<li>
+<p>Resume timer</p>
+<div class="codehilite"><pre><span></span><span class="nx">timer</span><span class="p">.</span><span class="nx">paused</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</pre></div>
+
+</li>
+<li>
+<p>Remove timer from timeline</p>
+<div class="codehilite"><pre><span></span><span class="nx">timer</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
+</pre></div>
+
+</li>
+<li>
+<p>Set time-scale</p>
+<div class="codehilite"><pre><span></span><span class="nx">timer</span><span class="p">.</span><span class="nx">timeScale</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</pre></div>
+
+</li>
+</ul>
                 
                   
                 
@@ -871,7 +868,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../webfontloader/index.html" title="Webfont loader" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../date/index.html" title="Date" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -880,19 +877,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Webfont loader
+                Date
               </span>
             </div>
           </a>
         
         
-          <a href="../image/index.html" title="Image" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../timeline/index.html" title="Timeline" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Image
+                Timeline
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
