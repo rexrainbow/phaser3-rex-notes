@@ -1,12 +1,15 @@
 'use strict'
 
-import Clone from './../object/Clone.js';
+import Phaser from 'phaser';
+const GetValue = Phaser.Utils.Objects.GetValue;
 
 var runCmd = function (cmd, scope) {
-    cmd = Clone(cmd);
-    var fnName = cmd.shift();
-    var args = cmd;
+    var fnName = cmd[0];
+    var args = cmd.slice(1);
     var fn = scope[fnName];
+    if (fn == null) {
+        fn = GetValue(scope, fnName, null);
+    }
     fn.apply(scope, args);
 }
 
