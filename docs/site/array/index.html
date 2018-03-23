@@ -32,7 +32,7 @@
     
     
       
-        <title>Filter - Notes of Phaser 3</title>
+        <title>Array - Notes of Phaser 3</title>
       
     
     
@@ -86,7 +86,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Filter
+                Array
               </span>
             
           
@@ -219,8 +219,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../dragcursorplugin/index.html" title="Drag to CursorKeys" class="md-nav__link">
-      Drag to CursorKeys
+    <a href="../dragcursorplugin/index.html" title="Drag to cursorKeys" class="md-nav__link">
+      Drag to cursorKeys
     </a>
   </li>
 
@@ -480,11 +480,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="toc">
-        Filter
+        Array
       </label>
     
-    <a href="index.html" title="Filter" class="md-nav__link md-nav__link--active">
-      Filter
+    <a href="index.html" title="Array" class="md-nav__link md-nav__link--active">
+      Array
     </a>
     
       
@@ -632,6 +632,42 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11">
+    
+    <label class="md-nav__link" for="nav-11">
+      Logic
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-11">
+        Logic
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../runcommands/index.html" title="Run commands" class="md-nav__link">
+      Run commands
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -692,16 +728,16 @@
               
                 
                 
-                  <h1>Filter</h1>
+                  <h1>Array</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Creates a new array with all elements that pass the test function.</p>
+<p>Built-in javascript object.</p>
 <ul>
 <li>Author: Built-in javascript function</li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter">Reference</a></p>
 <h3 id="filter-elements">Filter elements<a class="headerlink" href="#filter-elements" title="Permanent link">&para;</a></h3>
+<p>Creates a new array with all elements that pass the test function. <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter">Reference</a></p>
 <div class="codehilite"><pre><span></span><span class="c1">// var elems = [...]</span>
 <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">elems</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">el</span><span class="p">){</span>
     <span class="k">return</span> <span class="p">(</span><span class="nx">el</span><span class="p">.</span><span class="nx">x</span> <span class="o">&gt;</span> <span class="mi">400</span><span class="p">);</span>

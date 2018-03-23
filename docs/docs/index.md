@@ -9,5 +9,6 @@
 1. [Drag-cursor](dragcursorplugin.md): Simulate curosr keys according dragging events.
 1. [Gashapon](gashaponplugin.md): Pick random item from box.
 1. [Page](textpageplugin.md): Display text page by page on text object.
+1. [Run-commands](runcommands.md): Run commands in array.
 1. [Typing](texttypingplugin.md): Typing text on text object.
 1. [Webfont-loader](webfontloader.md): Load web font by [google webfont loader](https://github.com/typekit/webfontloader) in preload stage.

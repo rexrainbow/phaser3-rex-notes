@@ -1,6 +1,6 @@
 'use strict'
 
-import runCmd from './../../plugins/runcommands.js';
+import runCommands from './../../plugins/runcommands.js';
 
 const Map = Phaser.Structs.Map;
 
@@ -64,7 +64,7 @@ class Demo extends Phaser.Scene {
 
         ];
 
-        runCmd(cmds, this.myCmds);
+        runCommands(cmds, this.myCmds);
     }
 
     update() {}

@@ -7,7 +7,7 @@ pages:
     - Touch events: touchevents.md
     - Keyboard events: keyboardevents.md
     - Drag: dragplugin.md
-    - Drag to CursorKeys: dragcursorplugin.md
+    - Drag to cursorKeys: dragcursorplugin.md
 - Loader:
     - Loader: loader.md
     - Webfont loader: webfontloader.md    
@@ -29,7 +29,9 @@ pages:
     - Timer: timer.md
     - Timeline: timeline.md
 - Random:
-    - Gashapon: gashaponplugin.md    
+    - Gashapon: gashaponplugin.md
+- Logic:
+    - Run commands: runcommands.md
 
 extra_javascript:
 - js/mermaid/mermaid.min.js
