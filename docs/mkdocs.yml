@@ -24,6 +24,7 @@ pages:
 - Data:
     - Data manager: datamanager.md
     - Array: array.md
+    - CSV to array: csvtoarray.md
 - Time:
     - Date: date.md
     - Timer: timer.md
