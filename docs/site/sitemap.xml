@@ -112,6 +112,28 @@
     
         
     <url>
+     <loc>/date/index.html</loc>
+     <lastmod>2018-03-23</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>/timer/index.html</loc>
+     <lastmod>2018-03-23</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>/timeline/index.html</loc>
+     <lastmod>2018-03-23</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    
+
+    
+        
+    <url>
      <loc>/datamanager/index.html</loc>
      <lastmod>2018-03-23</lastmod>
      <changefreq>daily</changefreq>
@@ -134,19 +156,7 @@
     
         
     <url>
-     <loc>/date/index.html</loc>
-     <lastmod>2018-03-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>/timer/index.html</loc>
-     <lastmod>2018-03-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>/timeline/index.html</loc>
+     <loc>/lzstring/index.html</loc>
      <lastmod>2018-03-23</lastmod>
      <changefreq>daily</changefreq>
     </url>

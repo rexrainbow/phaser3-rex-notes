@@ -21,14 +21,16 @@ pages:
 - Canvas:
     - Graphics: graphics.md
     - Canvas: canvas.md
+- Time:
+    - Date: date.md
+    - Timer: timer.md
+    - Timeline: timeline.md    
 - Data:
     - Data manager: datamanager.md
     - Array: array.md
     - CSV to array: csvtoarray.md
-- Time:
-    - Date: date.md
-    - Timer: timer.md
-    - Timeline: timeline.md
+- String:
+    - LZ string: lzstring.md
 - Random:
     - Gashapon: gashaponplugin.md
 - Logic:

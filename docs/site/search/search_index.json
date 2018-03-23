@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/index.html", 
-            "text": "Phaser\n\n\nPhaser\n is a fun, free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering.\n\n\nList of my plugins\n\n\n\n\nCanvas\n: Drawing on \ncanvas\n.\n\n\nCSV-to-array\n: Generate array from csv string.\n\n\nDrag\n: Drag game object.\n\n\nDrag-cursor\n: Simulate curosr keys according dragging events.\n\n\nGashapon\n: Pick random item from box.\n\n\nPage\n: Display text page by page on text object.\n\n\nRun-commands\n: Run commands in array.\n\n\nTyping\n: Typing text on text object.\n\n\nWebfont-loader\n: Load web font by \ngoogle webfont loader\n in preload stage.", 
+            "text": "Phaser\n\n\nPhaser\n is a fun, free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering.\n\n\nList of my plugins\n\n\n\n\nCanvas\n: Drawing on \ncanvas\n.\n\n\nCSV-to-array\n: Generate array from csv string.\n\n\nDrag\n: Drag game object.\n\n\nDrag-cursor\n: Simulate curosr keys according dragging events.\n\n\nGashapon\n: Pick random item from box.\n\n\nLZ-string\n: Compress string using LZ-based compression algorithm.\n\n\nPage\n: Display text page by page on text object.\n\n\nRun-commands\n: Run commands in array.\n\n\nTyping\n: Typing text on text object.\n\n\nWebfont-loader\n: Load web font by \ngoogle webfont loader\n in preload stage.", 
             "title": "Home"
         }, 
         {
@@ -12,7 +12,7 @@
         }, 
         {
             "location": "/index.html#list-of-my-plugins", 
-            "text": "Canvas : Drawing on  canvas .  CSV-to-array : Generate array from csv string.  Drag : Drag game object.  Drag-cursor : Simulate curosr keys according dragging events.  Gashapon : Pick random item from box.  Page : Display text page by page on text object.  Run-commands : Run commands in array.  Typing : Typing text on text object.  Webfont-loader : Load web font by  google webfont loader  in preload stage.", 
+            "text": "Canvas : Drawing on  canvas .  CSV-to-array : Generate array from csv string.  Drag : Drag game object.  Drag-cursor : Simulate curosr keys according dragging events.  Gashapon : Pick random item from box.  LZ-string : Compress string using LZ-based compression algorithm.  Page : Display text page by page on text object.  Run-commands : Run commands in array.  Typing : Typing text on text object.  Webfont-loader : Load web font by  google webfont loader  in preload stage.", 
             "title": "List of my plugins"
         }, 
         {
@@ -736,6 +736,101 @@
             "title": "Compare with Graphics object"
         }, 
         {
+            "location": "/date/index.html", 
+            "text": "Introduction\n\n\nGet current date or unix-timestamp.\n\n\n\n\nAuthor: Built-in javascript function\n\n\n\n\nUsage\n\n\nReference\n\n\nCreate instance\n\n\nvar\n \nd\n \n=\n \nnew\n \nDate\n();\n\n\nvar\n \nd\n \n=\n \nnew\n \nDate\n(\ntimestamp\n);\n\n\nvar\n \nd\n \n=\n \nnew\n \nDate\n(\ndateString\n);\n\n\nvar\n \nd\n \n=\n \nnew\n \nDate\n(\nyear\n,\n \nmonth\n,\n \nday\n,\n \nhours\n,\n \nminutes\n,\n \nseconds\n,\n \nmilliseconds\n);\n\n\n\n\n\nGet date\n\n\nvar\n \nyear\n \n=\n \nd\n.\ngetFullYear\n();\n    \n// returns the year\n\n\nvar\n \nmonth\n \n=\n \nd\n.\ngetMonth\n();\n      \n// returns the month (0-11)\n\n\nvar\n \ndate\n \n=\n \nd\n.\ngetDate\n();\n        \n// returns the day of the month (1-31)\n\n\nvar\n \nday\n \n=\n \nd\n.\ngetDay\n();\n          \n// returns the day of the week\n\n\nvar\n \nhour\n \n=\n \nd\n.\ngetHours\n();\n       \n// returns the hour (0-23)\n\n\nvar\n \nmin\n \n=\n \nd\n.\ngetMinutes\n();\n      \n// returns the minutes (0-59)\n\n\nvar\n \nsec\n \n=\n \nd\n.\ngetSeconds\n();\n      \n// returns the seconds (0-59)\n\n\nvar\n \nms\n \n=\n \nd\n.\ngetMilliseconds\n();\n  \n// returns the milliseconds (0-999)\n\n\n\n\n\nGet unix-timestamp\n\n\nvar\n \ntimestamp\n \n=\n \nd\n.\nnow\n();\n       \n// unix-timestamp in milliseconds\n\n\n\n\n\nTo string\n\n\nvar\n \ns\n \n=\n \nd\n.\ntoLocaleString\n();\n   \n// locale conventions\n\n\nvar\n \niso\n \n=\n \nd\n.\ntoISOString\n();\n    \n// ISO standard", 
+            "title": "Date"
+        }, 
+        {
+            "location": "/date/index.html#introduction", 
+            "text": "Get current date or unix-timestamp.   Author: Built-in javascript function", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/date/index.html#usage", 
+            "text": "Reference", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/date/index.html#create-instance", 
+            "text": "var   d   =   new   Date ();  var   d   =   new   Date ( timestamp );  var   d   =   new   Date ( dateString );  var   d   =   new   Date ( year ,   month ,   day ,   hours ,   minutes ,   seconds ,   milliseconds );", 
+            "title": "Create instance"
+        }, 
+        {
+            "location": "/date/index.html#get-date", 
+            "text": "var   year   =   d . getFullYear ();      // returns the year  var   month   =   d . getMonth ();        // returns the month (0-11)  var   date   =   d . getDate ();          // returns the day of the month (1-31)  var   day   =   d . getDay ();            // returns the day of the week  var   hour   =   d . getHours ();         // returns the hour (0-23)  var   min   =   d . getMinutes ();        // returns the minutes (0-59)  var   sec   =   d . getSeconds ();        // returns the seconds (0-59)  var   ms   =   d . getMilliseconds ();    // returns the milliseconds (0-999)", 
+            "title": "Get date"
+        }, 
+        {
+            "location": "/date/index.html#get-unix-timestamp", 
+            "text": "var   timestamp   =   d . now ();         // unix-timestamp in milliseconds", 
+            "title": "Get unix-timestamp"
+        }, 
+        {
+            "location": "/date/index.html#to-string", 
+            "text": "var   s   =   d . toLocaleString ();     // locale conventions  var   iso   =   d . toISOString ();      // ISO standard", 
+            "title": "To string"
+        }, 
+        {
+            "location": "/timer/index.html", 
+            "text": "Introduction\n\n\nExecute callback when time-out, built-in object of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nStart timer\n\n\n\n\n\n\nLooped timer\n\n\nvar\n \ntimer\n \n=\n \nscene\n.\ntime\n.\naddEvent\n({\n\n    \ndelay\n:\n \n500\n,\n                \n// ms\n\n    \ncallback\n:\n \ncallback\n,\n\n    \n//args: [],\n\n    \ncallbackScope\n:\n \nthisArg\n,\n\n    \nloop\n:\n \ntrue\n\n\n});\n\n\n\n\n\n\n\n\n\nRepeat timer\n\n\nvar\n \ntimer\n \n=\n \nscene\n.\ntime\n.\naddEvent\n({\n\n    \ndelay\n:\n \n500\n,\n                \n// ms\n\n    \ncallback\n:\n \ncallback\n,\n\n    \n//args: [],\n\n    \ncallbackScope\n:\n \nthisArg\n,\n\n    \nrepeat\n:\n \n4\n\n\n});\n\n\n\n\n\n\n\n\n\nOneshot timer\n\n\nvar\n \ntimer\n \n=\n \nscene\n.\ntime\n.\ndelayedCall\n(\ndelay\n,\n \ncallback\n,\n \nargs\n,\n \ncallbackscope\n);\n  \n// delay in ms\n\n\n\n\n\n\n\n\n\nAll properties of timer\n\n\nvar\n \ntimer\n \n=\n \nscene\n.\ntime\n.\naddEvent\n({\n\n    \ndelay\n:\n \n500\n,\n                \n// ms\n\n    \ncallback\n:\n \ncallback\n,\n\n    \nargs\n:\n \n[],\n\n    \ncallbackScope\n:\n \nthisArg\n,\n\n    \nloop\n:\n \nfasle\n,\n\n    \nrepeat\n:\n \n0\n,\n\n    \nstartAt\n:\n \n0\n,\n\n    \ntimeScale\n:\n \n1\n,\n\n    \npaused\n:\n \nfalse\n\n\n});\n\n\n\n\n\n\n\n\n\nStatus of timer\n\n\n\n\n\n\nGet elapsed time\n\n\nvar\n \nelapsed\n \n=\n \ntimer\n.\ngetElapsed\n();\n   \n// ms\n\n\nvar\n \nelapsed\n \n=\n \ntimer\n.\ngetElapsedSeconds\n();\n \n// sec\n\n\n\n\n\n\n\n\n\nGet repeat count\n\n\nvar\n \nrepeat\n \n=\n \ntimer\n.\ngetRepeatCount\n();\n\n\n\n\n\n\n\n\n\nGets the progress of the current iteration\n\n\nvar\n \nprogress\n \n=\n \ntimer\n.\ngetProgress\n();\n  \n// elapsed / delay\n\n\n\n\n\n\n\n\n\nGets the progress of the timer overall, factoring in repeats.\n\n\nvar\n \nprogress\n \n=\n \ntimer\n.\ngetOverallProgress\n();\n  \n// totalElapsed / totalDuration\n\n\n\n\n\n\n\n\n\nGet delay time\n\n\nvar\n \ndelay\n \n=\n \ntimer\n.\ndelay\n;\n   \n// ms\n\n\n\n\n\n\n\n\n\nIs paused\n\n\nvar\n \nisPaused\n \n=\n \ntimer\n.\npaused\n;\n\n\n\n\n\n\n\n\n\nGet time-scale\n\n\nvar\n \ntimeScale\n \n=\n \ntimer\n.\ntimeScale\n;\n\n\n\n\n\n\n\n\n\nCommands of timer\n\n\n\n\n\n\nPause timer\n\n\ntimer\n.\npaused\n \n=\n \ntrue\n;\n\n\n\n\n\n\n\n\n\nResume timer\n\n\ntimer\n.\npaused\n \n=\n \nfalse\n;\n\n\n\n\n\n\n\n\n\nRemove timer from timeline\n\n\ntimer\n.\nremove\n();\n\n\n\n\n\n\n\n\n\nSet time-scale\n\n\ntimer\n.\ntimeScale\n \n=\n \n2\n;", 
+            "title": "Timer"
+        }, 
+        {
+            "location": "/timer/index.html#introduction", 
+            "text": "Execute callback when time-out, built-in object of phaser.   Author: Richard Davey", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/timer/index.html#usage", 
+            "text": "", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/timer/index.html#start-timer", 
+            "text": "Looped timer  var   timer   =   scene . time . addEvent ({ \n     delay :   500 ,                  // ms \n     callback :   callback , \n     //args: [], \n     callbackScope :   thisArg , \n     loop :   true  });     Repeat timer  var   timer   =   scene . time . addEvent ({ \n     delay :   500 ,                  // ms \n     callback :   callback , \n     //args: [], \n     callbackScope :   thisArg , \n     repeat :   4  });     Oneshot timer  var   timer   =   scene . time . delayedCall ( delay ,   callback ,   args ,   callbackscope );    // delay in ms     All properties of timer  var   timer   =   scene . time . addEvent ({ \n     delay :   500 ,                  // ms \n     callback :   callback , \n     args :   [], \n     callbackScope :   thisArg , \n     loop :   fasle , \n     repeat :   0 , \n     startAt :   0 , \n     timeScale :   1 , \n     paused :   false  });", 
+            "title": "Start timer"
+        }, 
+        {
+            "location": "/timer/index.html#status-of-timer", 
+            "text": "Get elapsed time  var   elapsed   =   timer . getElapsed ();     // ms  var   elapsed   =   timer . getElapsedSeconds ();   // sec     Get repeat count  var   repeat   =   timer . getRepeatCount ();     Gets the progress of the current iteration  var   progress   =   timer . getProgress ();    // elapsed / delay     Gets the progress of the timer overall, factoring in repeats.  var   progress   =   timer . getOverallProgress ();    // totalElapsed / totalDuration     Get delay time  var   delay   =   timer . delay ;     // ms     Is paused  var   isPaused   =   timer . paused ;     Get time-scale  var   timeScale   =   timer . timeScale ;", 
+            "title": "Status of timer"
+        }, 
+        {
+            "location": "/timer/index.html#commands-of-timer", 
+            "text": "Pause timer  timer . paused   =   true ;     Resume timer  timer . paused   =   false ;     Remove timer from timeline  timer . remove ();     Set time-scale  timer . timeScale   =   2 ;", 
+            "title": "Commands of timer"
+        }, 
+        {
+            "location": "/timeline/index.html", 
+            "text": "Introduction\n\n\nUpdate timers, built-in object of phaser. Each scene has a timeline (\nscene.time\n) already.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nTime-scale\n\n\n\n\n\n\nGet time-scale\n\n\nvar\n \ntimeScale\n \n=\n \nscene\n.\ntime\n.\ntimeScale\n;\n\n\n\n\n\n\n\n\n\nSet time-scale\n\n\nscene\n.\ntime\n.\ntimeScale\n \n=\n \n2\n;\n\n\n\n\n\n\n\n\n\nPause or resume\n\n\n\n\n\n\nPause\n\n\nscene\n.\ntime\n.\npaused\n \n=\n \ntrue\n;\n\n\n\n\n\n\n\n\n\nResume\n\n\nscene\n.\ntime\n.\npaused\n \n=\n \nfalse\n;\n\n\n\n\n\n\n\n\n\nCreate timeline object\n\n\nvar\n \ntimeline\n \n=\n \nnew\n \nPhaser\n.\nTime\n.\nClock\n(\nscene\n);", 
+            "title": "Timeline"
+        }, 
+        {
+            "location": "/timeline/index.html#introduction", 
+            "text": "Update timers, built-in object of phaser. Each scene has a timeline ( scene.time ) already.   Author: Richard Davey", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/timeline/index.html#usage", 
+            "text": "", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/timeline/index.html#time-scale", 
+            "text": "Get time-scale  var   timeScale   =   scene . time . timeScale ;     Set time-scale  scene . time . timeScale   =   2 ;", 
+            "title": "Time-scale"
+        }, 
+        {
+            "location": "/timeline/index.html#pause-or-resume", 
+            "text": "Pause  scene . time . paused   =   true ;     Resume  scene . time . paused   =   false ;", 
+            "title": "Pause or resume"
+        }, 
+        {
+            "location": "/timeline/index.html#create-timeline-object", 
+            "text": "var   timeline   =   new   Phaser . Time . Clock ( scene );", 
+            "title": "Create timeline object"
+        }, 
+        {
             "location": "/datamanager/index.html", 
             "text": "Introduction\n\n\nStore data in key-value pairs, built-inobject of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nSet value\n\n\nparent\n.\ndata\n.\nset\n(\nkey\n,\n \nvalue\n);\n\n\nparent\n.\ndata\n.\nmerge\n(\ndata\n);\n     \n// {}\n\n\n\n\n\nPop key\n\n\nvar\n \nvalue\n \n=\n \nparent\n.\ndata\n.\npop\n(\nkey\n);\n\n\n\n\n\nGet and remove that key.\n\n\nRemove key\n\n\nparent\n.\ndata\n.\nremove\n(\nkey\n);\n\n\n\n\n\nGet value\n\n\nvar\n \nvalue\n \n=\n \nparent\n.\ndata\n.\nget\n(\nkey\n);\n\n\nvar\n \nallValues\n \n=\n \nparent\n.\ndata\n.\ngetAll\n();\n  \n// return a copy of data\n\n\n\n\n\nQuery\n\n\nUsing \nstring.match()\n to pick matched keys.\n\n\nvar\n \nresult\n \n=\n \nparent\n.\ndata\n.\nquery\n(\nrgExp\n);\n\n\n\n\n\nFreeze\n\n\nvar\n \nisFrozen\n \n=\n \nparent\n.\ndata\n.\nfreeze\n;\n\n\nparent\n.\ndata\n.\nfreeze\n \n=\n \ntrue\n;\n\n\n\n\n\nNo changes can be written to it.\n\n\nHas key\n\n\nvar\n \nhasKey\n \n=\n \nparent\n.\ndata\n.\nhas\n(\nkey\n);\n\n\n\n\n\nFor each key\n\n\nparent\n.\ndata\n.\neach\n(\nfunction\n(\nparent\n,\n \nkey\n,\n \nvalue\n){\n\n    \n/* ... */\n\n\n},\n \nscope\n);\n\n\n\n\n\nCount of data\n\n\nvar\n \ncnt\n \n=\n \nparent\n.\ndata\n.\ncount\n;\n\n\n\n\n\nReset\n\n\nReset status and clean all keys.\n\n\nparent\n.\ndata\n.\nreset\n()\n\n\n\n\n\nEvent of changing data\n\n\nEvent 'setdata', 'changedata' will be fired when invoking \nparent.data.set(key, value)\n.\n\n\nparent\n.\ndata\n.\nevent\n.\non\n(\nsetdata\n,\n \nfunction\n(\nparent\n,\n \nkey\n,\n \nvalue\n){\n\n    \n/* ... */\n\n\n},\n \nscope\n);\n\n\n\n\n\nparent\n.\ndata\n.\nevent\n.\non\n(\nchangedata\n,\n \nfunction\n(\nparent\n,\n \nkey\n,\n \nvalue\n,\n \nresetValue\n){\n\n    \n// resetValue(newValue);  // overwrite value to newValue\n\n\n},\n \nscope\n);", 
             "title": "Data manager"
@@ -851,99 +946,44 @@
             "title": "Generate array"
         }, 
         {
-            "location": "/date/index.html", 
-            "text": "Introduction\n\n\nGet current date or unix-timestamp.\n\n\n\n\nAuthor: Built-in javascript function\n\n\n\n\nUsage\n\n\nReference\n\n\nCreate instance\n\n\nvar\n \nd\n \n=\n \nnew\n \nDate\n();\n\n\nvar\n \nd\n \n=\n \nnew\n \nDate\n(\ntimestamp\n);\n\n\nvar\n \nd\n \n=\n \nnew\n \nDate\n(\ndateString\n);\n\n\nvar\n \nd\n \n=\n \nnew\n \nDate\n(\nyear\n,\n \nmonth\n,\n \nday\n,\n \nhours\n,\n \nminutes\n,\n \nseconds\n,\n \nmilliseconds\n);\n\n\n\n\n\nGet date\n\n\nvar\n \nyear\n \n=\n \nd\n.\ngetFullYear\n();\n    \n// returns the year\n\n\nvar\n \nmonth\n \n=\n \nd\n.\ngetMonth\n();\n      \n// returns the month (0-11)\n\n\nvar\n \ndate\n \n=\n \nd\n.\ngetDate\n();\n        \n// returns the day of the month (1-31)\n\n\nvar\n \nday\n \n=\n \nd\n.\ngetDay\n();\n          \n// returns the day of the week\n\n\nvar\n \nhour\n \n=\n \nd\n.\ngetHours\n();\n       \n// returns the hour (0-23)\n\n\nvar\n \nmin\n \n=\n \nd\n.\ngetMinutes\n();\n      \n// returns the minutes (0-59)\n\n\nvar\n \nsec\n \n=\n \nd\n.\ngetSeconds\n();\n      \n// returns the seconds (0-59)\n\n\nvar\n \nms\n \n=\n \nd\n.\ngetMilliseconds\n();\n  \n// returns the milliseconds (0-999)\n\n\n\n\n\nGet unix-timestamp\n\n\nvar\n \ntimestamp\n \n=\n \nd\n.\nnow\n();\n       \n// unix-timestamp in milliseconds\n\n\n\n\n\nTo string\n\n\nvar\n \ns\n \n=\n \nd\n.\ntoLocaleString\n();\n   \n// locale conventions\n\n\nvar\n \niso\n \n=\n \nd\n.\ntoISOString\n();\n    \n// ISO standard", 
-            "title": "Date"
+            "location": "/lzstring/index.html", 
+            "text": "Introduction\n\n\nCompress string using LZ-based compression algorithm. \nReference\n\n\n\n\nAuthor: Rex\n\n\nMember of scene\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\nvar\n \nlzstring\n \n=\n \nnew\n \nLZStringPlugin\n(\nscene\n,\n \n{\n\n    \n//encoding: 0,    // 0|\nnone\n|1|\nbase64\n|2|\nutf16\n|3|\nuri\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\nencoding : \n\n\n'none'\n, or \n0\n : no encoding.\n\n\n'base64'\n, or \n1\n : base64 encoding.\n\n\n'utf16'\n, or \n2\n : UTF16 encoding.\n\n\n'uri'\n, or \n3\n : URI encoding.\n\n\n\n\n\n\n\n\nCompression\n\n\nvar\n \ncompressionResult\n \n=\n \nlzstring\n.\ncompress\n(\nsrc\n);\n\n\n\n\n\nDecompression\n\n\nvar\n \ndecompressionResult\n \n=\n \nlzstring\n.\ndecompress\n(\ncompressionResult\n);\n\n\n\n\n\nSet encoding\n\n\nlzstring\n.\nsetEncoding\n(\nm\n);\n  \n// 0|\nnone\n|1|\nbase64\n|2|\nutf16\n|3|\nuri", 
+            "title": "LZ string"
         }, 
         {
-            "location": "/date/index.html#introduction", 
-            "text": "Get current date or unix-timestamp.   Author: Built-in javascript function", 
+            "location": "/lzstring/index.html#introduction", 
+            "text": "Compress string using LZ-based compression algorithm.  Reference   Author: Rex  Member of scene", 
             "title": "Introduction"
         }, 
         {
-            "location": "/date/index.html#usage", 
-            "text": "Reference", 
+            "location": "/lzstring/index.html#source-code", 
+            "text": "Link", 
+            "title": "Source code"
+        }, 
+        {
+            "location": "/lzstring/index.html#usage", 
+            "text": "", 
             "title": "Usage"
         }, 
         {
-            "location": "/date/index.html#create-instance", 
-            "text": "var   d   =   new   Date ();  var   d   =   new   Date ( timestamp );  var   d   =   new   Date ( dateString );  var   d   =   new   Date ( year ,   month ,   day ,   hours ,   minutes ,   seconds ,   milliseconds );", 
+            "location": "/lzstring/index.html#create-instance", 
+            "text": "var   lzstring   =   new   LZStringPlugin ( scene ,   { \n     //encoding: 0,    // 0| none |1| base64 |2| utf16 |3| uri  });   Properties   encoding :   'none' , or  0  : no encoding.  'base64' , or  1  : base64 encoding.  'utf16' , or  2  : UTF16 encoding.  'uri' , or  3  : URI encoding.", 
             "title": "Create instance"
         }, 
         {
-            "location": "/date/index.html#get-date", 
-            "text": "var   year   =   d . getFullYear ();      // returns the year  var   month   =   d . getMonth ();        // returns the month (0-11)  var   date   =   d . getDate ();          // returns the day of the month (1-31)  var   day   =   d . getDay ();            // returns the day of the week  var   hour   =   d . getHours ();         // returns the hour (0-23)  var   min   =   d . getMinutes ();        // returns the minutes (0-59)  var   sec   =   d . getSeconds ();        // returns the seconds (0-59)  var   ms   =   d . getMilliseconds ();    // returns the milliseconds (0-999)", 
-            "title": "Get date"
+            "location": "/lzstring/index.html#compression", 
+            "text": "var   compressionResult   =   lzstring . compress ( src );", 
+            "title": "Compression"
         }, 
         {
-            "location": "/date/index.html#get-unix-timestamp", 
-            "text": "var   timestamp   =   d . now ();         // unix-timestamp in milliseconds", 
-            "title": "Get unix-timestamp"
+            "location": "/lzstring/index.html#decompression", 
+            "text": "var   decompressionResult   =   lzstring . decompress ( compressionResult );", 
+            "title": "Decompression"
         }, 
         {
-            "location": "/date/index.html#to-string", 
-            "text": "var   s   =   d . toLocaleString ();     // locale conventions  var   iso   =   d . toISOString ();      // ISO standard", 
-            "title": "To string"
-        }, 
-        {
-            "location": "/timer/index.html", 
-            "text": "Introduction\n\n\nExecute callback when time-out, built-in object of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nStart timer\n\n\n\n\n\n\nLooped timer\n\n\nvar\n \ntimer\n \n=\n \nscene\n.\ntime\n.\naddEvent\n({\n\n    \ndelay\n:\n \n500\n,\n                \n// ms\n\n    \ncallback\n:\n \ncallback\n,\n\n    \n//args: [],\n\n    \ncallbackScope\n:\n \nthisArg\n,\n\n    \nloop\n:\n \ntrue\n\n\n});\n\n\n\n\n\n\n\n\n\nRepeat timer\n\n\nvar\n \ntimer\n \n=\n \nscene\n.\ntime\n.\naddEvent\n({\n\n    \ndelay\n:\n \n500\n,\n                \n// ms\n\n    \ncallback\n:\n \ncallback\n,\n\n    \n//args: [],\n\n    \ncallbackScope\n:\n \nthisArg\n,\n\n    \nrepeat\n:\n \n4\n\n\n});\n\n\n\n\n\n\n\n\n\nOneshot timer\n\n\nvar\n \ntimer\n \n=\n \nscene\n.\ntime\n.\ndelayedCall\n(\ndelay\n,\n \ncallback\n,\n \nargs\n,\n \ncallbackscope\n);\n  \n// delay in ms\n\n\n\n\n\n\n\n\n\nAll properties of timer\n\n\nvar\n \ntimer\n \n=\n \nscene\n.\ntime\n.\naddEvent\n({\n\n    \ndelay\n:\n \n500\n,\n                \n// ms\n\n    \ncallback\n:\n \ncallback\n,\n\n    \nargs\n:\n \n[],\n\n    \ncallbackScope\n:\n \nthisArg\n,\n\n    \nloop\n:\n \nfasle\n,\n\n    \nrepeat\n:\n \n0\n,\n\n    \nstartAt\n:\n \n0\n,\n\n    \ntimeScale\n:\n \n1\n,\n\n    \npaused\n:\n \nfalse\n\n\n});\n\n\n\n\n\n\n\n\n\nStatus of timer\n\n\n\n\n\n\nGet elapsed time\n\n\nvar\n \nelapsed\n \n=\n \ntimer\n.\ngetElapsed\n();\n   \n// ms\n\n\nvar\n \nelapsed\n \n=\n \ntimer\n.\ngetElapsedSeconds\n();\n \n// sec\n\n\n\n\n\n\n\n\n\nGet repeat count\n\n\nvar\n \nrepeat\n \n=\n \ntimer\n.\ngetRepeatCount\n();\n\n\n\n\n\n\n\n\n\nGets the progress of the current iteration\n\n\nvar\n \nprogress\n \n=\n \ntimer\n.\ngetProgress\n();\n  \n// elapsed / delay\n\n\n\n\n\n\n\n\n\nGets the progress of the timer overall, factoring in repeats.\n\n\nvar\n \nprogress\n \n=\n \ntimer\n.\ngetOverallProgress\n();\n  \n// totalElapsed / totalDuration\n\n\n\n\n\n\n\n\n\nGet delay time\n\n\nvar\n \ndelay\n \n=\n \ntimer\n.\ndelay\n;\n   \n// ms\n\n\n\n\n\n\n\n\n\nIs paused\n\n\nvar\n \nisPaused\n \n=\n \ntimer\n.\npaused\n;\n\n\n\n\n\n\n\n\n\nGet time-scale\n\n\nvar\n \ntimeScale\n \n=\n \ntimer\n.\ntimeScale\n;\n\n\n\n\n\n\n\n\n\nCommands of timer\n\n\n\n\n\n\nPause timer\n\n\ntimer\n.\npaused\n \n=\n \ntrue\n;\n\n\n\n\n\n\n\n\n\nResume timer\n\n\ntimer\n.\npaused\n \n=\n \nfalse\n;\n\n\n\n\n\n\n\n\n\nRemove timer from timeline\n\n\ntimer\n.\nremove\n();\n\n\n\n\n\n\n\n\n\nSet time-scale\n\n\ntimer\n.\ntimeScale\n \n=\n \n2\n;", 
-            "title": "Timer"
-        }, 
-        {
-            "location": "/timer/index.html#introduction", 
-            "text": "Execute callback when time-out, built-in object of phaser.   Author: Richard Davey", 
-            "title": "Introduction"
-        }, 
-        {
-            "location": "/timer/index.html#usage", 
-            "text": "", 
-            "title": "Usage"
-        }, 
-        {
-            "location": "/timer/index.html#start-timer", 
-            "text": "Looped timer  var   timer   =   scene . time . addEvent ({ \n     delay :   500 ,                  // ms \n     callback :   callback , \n     //args: [], \n     callbackScope :   thisArg , \n     loop :   true  });     Repeat timer  var   timer   =   scene . time . addEvent ({ \n     delay :   500 ,                  // ms \n     callback :   callback , \n     //args: [], \n     callbackScope :   thisArg , \n     repeat :   4  });     Oneshot timer  var   timer   =   scene . time . delayedCall ( delay ,   callback ,   args ,   callbackscope );    // delay in ms     All properties of timer  var   timer   =   scene . time . addEvent ({ \n     delay :   500 ,                  // ms \n     callback :   callback , \n     args :   [], \n     callbackScope :   thisArg , \n     loop :   fasle , \n     repeat :   0 , \n     startAt :   0 , \n     timeScale :   1 , \n     paused :   false  });", 
-            "title": "Start timer"
-        }, 
-        {
-            "location": "/timer/index.html#status-of-timer", 
-            "text": "Get elapsed time  var   elapsed   =   timer . getElapsed ();     // ms  var   elapsed   =   timer . getElapsedSeconds ();   // sec     Get repeat count  var   repeat   =   timer . getRepeatCount ();     Gets the progress of the current iteration  var   progress   =   timer . getProgress ();    // elapsed / delay     Gets the progress of the timer overall, factoring in repeats.  var   progress   =   timer . getOverallProgress ();    // totalElapsed / totalDuration     Get delay time  var   delay   =   timer . delay ;     // ms     Is paused  var   isPaused   =   timer . paused ;     Get time-scale  var   timeScale   =   timer . timeScale ;", 
-            "title": "Status of timer"
-        }, 
-        {
-            "location": "/timer/index.html#commands-of-timer", 
-            "text": "Pause timer  timer . paused   =   true ;     Resume timer  timer . paused   =   false ;     Remove timer from timeline  timer . remove ();     Set time-scale  timer . timeScale   =   2 ;", 
-            "title": "Commands of timer"
-        }, 
-        {
-            "location": "/timeline/index.html", 
-            "text": "Introduction\n\n\nUpdate timers, built-in object of phaser. Each scene has a timeline (\nscene.time\n) already.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nTime-scale\n\n\n\n\n\n\nGet time-scale\n\n\nvar\n \ntimeScale\n \n=\n \nscene\n.\ntime\n.\ntimeScale\n;\n\n\n\n\n\n\n\n\n\nSet time-scale\n\n\nscene\n.\ntime\n.\ntimeScale\n \n=\n \n2\n;\n\n\n\n\n\n\n\n\n\nPause or resume\n\n\n\n\n\n\nPause\n\n\nscene\n.\ntime\n.\npaused\n \n=\n \ntrue\n;\n\n\n\n\n\n\n\n\n\nResume\n\n\nscene\n.\ntime\n.\npaused\n \n=\n \nfalse\n;\n\n\n\n\n\n\n\n\n\nCreate timeline object\n\n\nvar\n \ntimeline\n \n=\n \nnew\n \nPhaser\n.\nTime\n.\nClock\n(\nscene\n);", 
-            "title": "Timeline"
-        }, 
-        {
-            "location": "/timeline/index.html#introduction", 
-            "text": "Update timers, built-in object of phaser. Each scene has a timeline ( scene.time ) already.   Author: Richard Davey", 
-            "title": "Introduction"
-        }, 
-        {
-            "location": "/timeline/index.html#usage", 
-            "text": "", 
-            "title": "Usage"
-        }, 
-        {
-            "location": "/timeline/index.html#time-scale", 
-            "text": "Get time-scale  var   timeScale   =   scene . time . timeScale ;     Set time-scale  scene . time . timeScale   =   2 ;", 
-            "title": "Time-scale"
-        }, 
-        {
-            "location": "/timeline/index.html#pause-or-resume", 
-            "text": "Pause  scene . time . paused   =   true ;     Resume  scene . time . paused   =   false ;", 
-            "title": "Pause or resume"
-        }, 
-        {
-            "location": "/timeline/index.html#create-timeline-object", 
-            "text": "var   timeline   =   new   Phaser . Time . Clock ( scene );", 
-            "title": "Create timeline object"
+            "location": "/lzstring/index.html#set-encoding", 
+            "text": "lzstring . setEncoding ( m );    // 0| none |1| base64 |2| utf16 |3| uri", 
+            "title": "Set encoding"
         }, 
         {
             "location": "/gashaponplugin/index.html", 
