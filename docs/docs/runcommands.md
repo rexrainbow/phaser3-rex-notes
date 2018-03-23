@@ -7,7 +7,7 @@ Run commands in array.
 
 ## Source code
 
-[Link](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/runcommands/runcommands.js)
+[Link](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/runcommands/RunCommands.js)
 
 ## Usage
 
