@@ -160,10 +160,6 @@ class TextPagePlugin {
     }
         
     getWrappedText(text) {
-        // TBD
-        this.gameobject.style.syncFont(this.gameobject.canvas, this.gameobject.context);
-        // TBD
-
         this.setTextWrapProperties();
         var lines = this.gameobject.getWrappedText(text);
         this.cleanTextWrapProperties();

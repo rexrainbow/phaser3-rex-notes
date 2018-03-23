@@ -3,7 +3,7 @@
 import Phaser from 'phaser';
 import WebFont from './../utils/webfontloader/webfontloader.js';
 
-//const FILE_POPULATED = Phaser.Loader.FILE_POPULATED;
+const FILE_POPULATED = Phaser.Loader.FILE_POPULATED;
 
 class WebFontLoader extends Phaser.Loader.File {
     constructor(key, config) {
@@ -20,7 +20,7 @@ class WebFontLoader extends Phaser.Loader.File {
     load(loader) {
         this.loader = loader;
 
-        if (this.state === 19) {  // CONST.FILE_POPULATED = 19
+        if (this.state === FILE_POPULATED) {
             this.onComplete();
 
             loader.nextFile(this);
