@@ -2,8 +2,6 @@
 
 import CSVToArray from './../../plugins/csvtoarray.js';
 
-const Map = Phaser.Structs.Map;
-
 class Demo extends Phaser.Scene {
 
     constructor() {
