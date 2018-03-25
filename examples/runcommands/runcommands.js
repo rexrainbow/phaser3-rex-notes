@@ -52,7 +52,7 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        this.myCmds = new CmdKlass(this);        
+        var myCmds = new CmdKlass(this);        
 
         var cmds = [
             ['print', 'hello'],
@@ -64,7 +64,7 @@ class Demo extends Phaser.Scene {
 
         ];
 
-        runCommands(cmds, this.myCmds);
+        runCommands(cmds, myCmds);
     }
 
     update() {}

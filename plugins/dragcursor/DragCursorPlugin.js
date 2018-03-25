@@ -2,7 +2,7 @@
 
 import Phaser from 'phaser';
 import GetEventEmmiter from './../utils/system/GetEventEmmiter.js';
-import VectorToCursorKeys from './../utils/input/VectorToCursorKeys.js';
+import VectorToCursorKeys from './../utils/vectortocursorkeys/VectorToCursorKeys.js';
 
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 
@@ -61,6 +61,17 @@ class DragCursorPlugin extends VectorToCursorKeys {
 
         this.init();
     }
+    
+    shutdown() {
+        var input = this.parent.input;
+        input.removeListener('pointerdown', this.onDragStart, this);
+        input.removeListener('pointerup', this.onDragStart, this);
+        input.removeListener('pointermove', this.onDragStart, this);
+    }
+
+    destroy() {
+        this.shutdown();
+    }    
 
     init() {
         if (!this.parent || !this.parent.input) {
@@ -113,16 +124,6 @@ class DragCursorPlugin extends VectorToCursorKeys {
         this.cleanVector();
     }
 
-    shutdown() {
-        var input = this.parent.input;
-        input.removeListener('pointerdown', this.onDragStart, this);
-        input.removeListener('pointerup', this.onDragStart, this);
-        input.removeListener('pointermove', this.onDragStart, this);
-    }
-
-    destroy() {
-        this.shutdown();
-    }
 }
 
 export default DragCursorPlugin;

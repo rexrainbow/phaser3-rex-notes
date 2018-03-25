@@ -10,9 +10,9 @@ var GetEventEmmiter = function (parent) {
         return null;
     } else if (IsFunction(parent.on)) {  // gameobject.on
         return parent;
-    } else if (parent.systems && parent.systems.events &&
-        IsFunction(parent.systems.events.on)) {  // scene.systems.events.on
-        return parent.systems.events;
+    } else if (parent.sys && parent.sys.events &&
+        IsFunction(parent.sys.events.on)) {  // scene.systems.events.on
+        return parent.sys.events;
     } else {
         return null;
     }

@@ -20,8 +20,7 @@ class GashaponPlugin extends Gashapon {
     }
 
     shutdown() {
-        this.gameobject = undefined;
-        this.scene = undefined;         
+        this.parent = undefined;         
         Gashapon.destroy.apply(this);
     }
 

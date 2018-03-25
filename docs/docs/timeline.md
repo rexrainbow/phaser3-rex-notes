@@ -34,6 +34,14 @@ Update timers, built-in object of phaser. Each scene has a timeline (`scene.time
     scene.time.paused = false;
     ```
 
+### Get current game-time
+
+```javascript
+var time = scene.time.now;
+```
+
+Game-time is not system time.
+
 ### Create timeline object
 
 ```javascript
