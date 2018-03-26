@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/index.html", 
-            "text": "Phaser\n\n\nPhaser\n is a fun, free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering.\n\n\nList of my plugins\n\n\n\n\nCanvas\n: Drawing on \ncanvas\n.\n\n\nCSV-to-array\n: Generate array from csv string.\n\n\nDrag\n: Drag game object.\n\n\nDrag-cursor\n: Simulate curosr keys according dragging events.\n\n\nGashapon\n: Pick random item from box.\n\n\nLZ-string\n: Compress string using LZ-based compression algorithm.\n\n\nPage\n: Display text page by page on text object.\n\n\nRun-commands\n: Run commands in array.\n\n\nTyping\n: Typing text on text object.\n\n\nWebfont-loader\n: Load web font by \ngoogle webfont loader\n in preload stage.", 
+            "text": "Phaser\n\n\nPhaser\n is a fun, free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering.\n\n\nList of my plugins\n\n\n\n\nCanvas\n: Drawing on \ncanvas\n.\n\n\nClock\n: A clock to count elapsed time.\n\n\nCSV-to-array\n: Generate array from csv string.\n\n\nDrag\n: Drag game object.\n\n\nDrag-cursor\n: Simulate curosr keys according dragging events.\n\n\nGashapon\n: Pick random item from box.\n\n\nLZ-string\n: Compress string using LZ-based compression algorithm.\n\n\nPage\n: Display text page by page on text object.\n\n\nRun-commands\n: Run commands in array.\n\n\nTyping\n: Typing text on text object.\n\n\nWebfont-loader\n: Load web font by \ngoogle webfont loader\n in preload stage.", 
             "title": "Home"
         }, 
         {
@@ -12,7 +12,7 @@
         }, 
         {
             "location": "/index.html#list-of-my-plugins", 
-            "text": "Canvas : Drawing on  canvas .  CSV-to-array : Generate array from csv string.  Drag : Drag game object.  Drag-cursor : Simulate curosr keys according dragging events.  Gashapon : Pick random item from box.  LZ-string : Compress string using LZ-based compression algorithm.  Page : Display text page by page on text object.  Run-commands : Run commands in array.  Typing : Typing text on text object.  Webfont-loader : Load web font by  google webfont loader  in preload stage.", 
+            "text": "Canvas : Drawing on  canvas .  Clock : A clock to count elapsed time.  CSV-to-array : Generate array from csv string.  Drag : Drag game object.  Drag-cursor : Simulate curosr keys according dragging events.  Gashapon : Pick random item from box.  LZ-string : Compress string using LZ-based compression algorithm.  Page : Display text page by page on text object.  Run-commands : Run commands in array.  Typing : Typing text on text object.  Webfont-loader : Load web font by  google webfont loader  in preload stage.", 
             "title": "List of my plugins"
         }, 
         {
@@ -891,6 +891,61 @@
             "title": "Create timeline object"
         }, 
         {
+            "location": "/clockplugin/index.html", 
+            "text": "Introduction\n\n\nA clock to count elapsed time.\n\n\n\n\nAuthor: Rex\n\n\nMember of scene\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\nvar\n \nclock\n \n=\n \nnew\n \nClockPlugin\n(\nscene\n,\n \n{\n\n    \n// timeScale: 1\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\ntimeScale : time-scale for counting elapsed time.\n\n\n\n\nStart counting\n\n\nclock\n.\nstart\n();\n\n\n// clock.start(startAt);  // start-at time in ms\n\n\n\n\n\nGet elapsed time\n\n\nvar\n \nnow\n \n=\n \nclock\n.\nnow\n;\n  \n// elapsed time in ms\n\n\n\n\n\nPause, Resume, stop counting\n\n\nclock\n.\npause\n();\n\n\nclock\n.\nresume\n();\n\n\nclock\n.\nstop\n();\n\n\n\n\n\nSeek elapsed time\n\n\nclock\n.\nseek\n(\ntime\n);\n   \n// elapsed time in ms\n\n\n\n\n\nState of counting\n\n\nvar\n \nisRunning\n \n=\n \nclock\n.\nisRunning\n;\n\n\n\n\n\nTime-scale\n\n\nvar\n \ntimeScale\n \n=\n \nclock\n.\ntimeScale\n;\n\n\nclock\n.\ntimeScale\n \n=\n \n0.5\n;", 
+            "title": "Clock"
+        }, 
+        {
+            "location": "/clockplugin/index.html#introduction", 
+            "text": "A clock to count elapsed time.   Author: Rex  Member of scene", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/clockplugin/index.html#source-code", 
+            "text": "Link", 
+            "title": "Source code"
+        }, 
+        {
+            "location": "/clockplugin/index.html#usage", 
+            "text": "", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/clockplugin/index.html#create-instance", 
+            "text": "var   clock   =   new   ClockPlugin ( scene ,   { \n     // timeScale: 1  });   Properties   timeScale : time-scale for counting elapsed time.", 
+            "title": "Create instance"
+        }, 
+        {
+            "location": "/clockplugin/index.html#start-counting", 
+            "text": "clock . start ();  // clock.start(startAt);  // start-at time in ms", 
+            "title": "Start counting"
+        }, 
+        {
+            "location": "/clockplugin/index.html#get-elapsed-time", 
+            "text": "var   now   =   clock . now ;    // elapsed time in ms", 
+            "title": "Get elapsed time"
+        }, 
+        {
+            "location": "/clockplugin/index.html#pause-resume-stop-counting", 
+            "text": "clock . pause ();  clock . resume ();  clock . stop ();", 
+            "title": "Pause, Resume, stop counting"
+        }, 
+        {
+            "location": "/clockplugin/index.html#seek-elapsed-time", 
+            "text": "clock . seek ( time );     // elapsed time in ms", 
+            "title": "Seek elapsed time"
+        }, 
+        {
+            "location": "/clockplugin/index.html#state-of-counting", 
+            "text": "var   isRunning   =   clock . isRunning ;", 
+            "title": "State of counting"
+        }, 
+        {
+            "location": "/clockplugin/index.html#time-scale", 
+            "text": "var   timeScale   =   clock . timeScale ;  clock . timeScale   =   0.5 ;", 
+            "title": "Time-scale"
+        }, 
+        {
             "location": "/datamanager/index.html", 
             "text": "Introduction\n\n\nStore data in key-value pairs, built-inobject of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nSet value\n\n\nparent\n.\ndata\n.\nset\n(\nkey\n,\n \nvalue\n);\n\n\nparent\n.\ndata\n.\nmerge\n(\ndata\n);\n     \n// {}\n\n\n\n\n\nPop key\n\n\nvar\n \nvalue\n \n=\n \nparent\n.\ndata\n.\npop\n(\nkey\n);\n\n\n\n\n\nGet and remove that key.\n\n\nRemove key\n\n\nparent\n.\ndata\n.\nremove\n(\nkey\n);\n\n\n\n\n\nGet value\n\n\nvar\n \nvalue\n \n=\n \nparent\n.\ndata\n.\nget\n(\nkey\n);\n\n\nvar\n \nallValues\n \n=\n \nparent\n.\ndata\n.\ngetAll\n();\n  \n// return a copy of data\n\n\n\n\n\nQuery\n\n\nUsing \nstring.match()\n to pick matched keys.\n\n\nvar\n \nresult\n \n=\n \nparent\n.\ndata\n.\nquery\n(\nrgExp\n);\n\n\n\n\n\nFreeze\n\n\nvar\n \nisFrozen\n \n=\n \nparent\n.\ndata\n.\nfreeze\n;\n\n\nparent\n.\ndata\n.\nfreeze\n \n=\n \ntrue\n;\n\n\n\n\n\nNo changes can be written to it.\n\n\nHas key\n\n\nvar\n \nhasKey\n \n=\n \nparent\n.\ndata\n.\nhas\n(\nkey\n);\n\n\n\n\n\nFor each key\n\n\nparent\n.\ndata\n.\neach\n(\nfunction\n(\nparent\n,\n \nkey\n,\n \nvalue\n){\n\n    \n/* ... */\n\n\n},\n \nscope\n);\n\n\n\n\n\nCount of data\n\n\nvar\n \ncnt\n \n=\n \nparent\n.\ndata\n.\ncount\n;\n\n\n\n\n\nReset\n\n\nReset status and clean all keys.\n\n\nparent\n.\ndata\n.\nreset\n()\n\n\n\n\n\nEvent of changing data\n\n\nEvent 'setdata', 'changedata' will be fired when invoking \nparent.data.set(key, value)\n.\n\n\nparent\n.\ndata\n.\nevent\n.\non\n(\nsetdata\n,\n \nfunction\n(\nparent\n,\n \nkey\n,\n \nvalue\n){\n\n    \n/* ... */\n\n\n},\n \nscope\n);\n\n\n\n\n\nparent\n.\ndata\n.\nevent\n.\non\n(\nchangedata\n,\n \nfunction\n(\nparent\n,\n \nkey\n,\n \nvalue\n,\n \nresetValue\n){\n\n    \n// resetValue(newValue);  // overwrite value to newValue\n\n\n},\n \nscope\n);", 
             "title": "Data manager"
@@ -1006,42 +1061,42 @@
             "title": "Generate array"
         }, 
         {
-            "location": "/lzstring/index.html", 
+            "location": "/lzstringplugin/index.html", 
             "text": "Introduction\n\n\nCompress string using LZ-based compression algorithm. \nReference\n\n\n\n\nAuthor: Rex\n\n\nMember of scene\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\nvar\n \nlzstring\n \n=\n \nnew\n \nLZStringPlugin\n(\nscene\n,\n \n{\n\n    \n//encoding: 0,    // 0|\nnone\n|1|\nbase64\n|2|\nutf16\n|3|\nuri\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\nencoding : \n\n\n'none'\n, or \n0\n : no encoding.\n\n\n'base64'\n, or \n1\n : base64 encoding.\n\n\n'utf16'\n, or \n2\n : UTF16 encoding.\n\n\n'uri'\n, or \n3\n : URI encoding.\n\n\n\n\n\n\n\n\nCompression\n\n\nvar\n \ncompressionResult\n \n=\n \nlzstring\n.\ncompress\n(\nsrc\n);\n\n\n\n\n\nDecompression\n\n\nvar\n \ndecompressionResult\n \n=\n \nlzstring\n.\ndecompress\n(\ncompressionResult\n);\n\n\n\n\n\nSet encoding\n\n\nlzstring\n.\nsetEncoding\n(\nm\n);\n  \n// 0|\nnone\n|1|\nbase64\n|2|\nutf16\n|3|\nuri", 
             "title": "LZ string"
         }, 
         {
-            "location": "/lzstring/index.html#introduction", 
+            "location": "/lzstringplugin/index.html#introduction", 
             "text": "Compress string using LZ-based compression algorithm.  Reference   Author: Rex  Member of scene", 
             "title": "Introduction"
         }, 
         {
-            "location": "/lzstring/index.html#source-code", 
+            "location": "/lzstringplugin/index.html#source-code", 
             "text": "Link", 
             "title": "Source code"
         }, 
         {
-            "location": "/lzstring/index.html#usage", 
+            "location": "/lzstringplugin/index.html#usage", 
             "text": "", 
             "title": "Usage"
         }, 
         {
-            "location": "/lzstring/index.html#create-instance", 
+            "location": "/lzstringplugin/index.html#create-instance", 
             "text": "var   lzstring   =   new   LZStringPlugin ( scene ,   { \n     //encoding: 0,    // 0| none |1| base64 |2| utf16 |3| uri  });   Properties   encoding :   'none' , or  0  : no encoding.  'base64' , or  1  : base64 encoding.  'utf16' , or  2  : UTF16 encoding.  'uri' , or  3  : URI encoding.", 
             "title": "Create instance"
         }, 
         {
-            "location": "/lzstring/index.html#compression", 
+            "location": "/lzstringplugin/index.html#compression", 
             "text": "var   compressionResult   =   lzstring . compress ( src );", 
             "title": "Compression"
         }, 
         {
-            "location": "/lzstring/index.html#decompression", 
+            "location": "/lzstringplugin/index.html#decompression", 
             "text": "var   decompressionResult   =   lzstring . decompress ( compressionResult );", 
             "title": "Decompression"
         }, 
         {
-            "location": "/lzstring/index.html#set-encoding", 
+            "location": "/lzstringplugin/index.html#set-encoding", 
             "text": "lzstring . setEncoding ( m );    // 0| none |1| base64 |2| utf16 |3| uri", 
             "title": "Set encoding"
         }, 

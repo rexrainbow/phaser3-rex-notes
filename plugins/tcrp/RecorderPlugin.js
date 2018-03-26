@@ -74,9 +74,17 @@ class RecorderPlugin {
         return this.clock.isRunning;
     }
 
+    get timeScale() {
+        return this.clock.timeScale;
+    }
+
+    set timeScale(timeScale) {
+        this.clock.timeScale = timeScale;
+    }    
+
     get now() {
         return this.clock.now;
-    }
+    }    
 
     addCommand(command, offset) {
         if (!this.isRecording) {

@@ -26,12 +26,13 @@ pages:
     - Date: date.md
     - Timer: timer.md
     - Timeline: timeline.md    
+    - Clock: clockplugin.md
 - Data:
     - Data manager: datamanager.md
     - Array: array.md
     - CSV to array: csvtoarray.md
 - String:
-    - LZ string: lzstring.md
+    - LZ string: lzstringplugin.md
 - Random:
     - Gashapon: gashaponplugin.md
 - Logic:

@@ -137,6 +137,12 @@
      <changefreq>daily</changefreq>
     </url>
         
+    <url>
+     <loc>/clockplugin/index.html</loc>
+     <lastmod>2018-03-26</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
     
 
     
@@ -164,7 +170,7 @@
     
         
     <url>
-     <loc>/lzstring/index.html</loc>
+     <loc>/lzstringplugin/index.html</loc>
      <lastmod>2018-03-26</lastmod>
      <changefreq>daily</changefreq>
     </url>

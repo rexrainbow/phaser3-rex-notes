@@ -107,12 +107,20 @@ class PlayerPlugin extends EE {
         return this.clock.isRunning;
     }
 
-    get now() {
-        return this.clock.now;
-    }    
-
     get isComplete() {
         return (this.index >= this.commands.length);
+    }
+
+    get timeScale() {
+        return this.clock.timeScale;
+    }
+
+    set timeScale(timeScale) {
+        this.clock.timeScale = timeScale;
+    }
+
+    get now() {
+        return this.clock.now;
     }
 
     runNextCommands() {
@@ -135,6 +143,11 @@ class PlayerPlugin extends EE {
 
         var item = this.commands[this.index];
         var dt = item[0];
+        if (isNaN(dt)) {
+            // skip current command
+            this.index++; // point to next item
+            return true;  // continue
+        }
         if (typeof (dt) === 'string') {
             dt = parseFloat(dt);
         }
@@ -150,7 +163,7 @@ class PlayerPlugin extends EE {
         runCommands(command, this.scope);
         this.emit('runcommand', command, this.scope);
         this.index++; // point to next item
-        return true; // continue
+        return true;  // continue
     }
 }
 
