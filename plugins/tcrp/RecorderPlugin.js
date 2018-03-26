@@ -5,13 +5,11 @@ import ClcokPlugin from './../clock-plugin.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 
-class RecorderPlugin extends ClcokPlugin {
+class RecorderPlugin {
     constructor(parent, config) {
-        super(parent, config);
-        //this.resetFromJSON(config);  // this function had been called in super(config)
-
+        this.clock = new ClcokPlugin(parent);
         this.parent = parent;
-        this.boot();
+        this.resetFromJSON(config); // this function had been called in super(config)
     }
 
     /**
@@ -20,7 +18,8 @@ class RecorderPlugin extends ClcokPlugin {
      * @returns {object} this object
      */
     resetFromJSON(o) {
-        super.resetFromJSON(o);
+        var clockConfig = GetFastValue(o, 'clock', undefined);
+        this.clock.resetFromJSON(clockConfig);
         this.commands = GetFastValue(o, 'commands', []); // [[dt, cmd], [dt, cmd], ...]
         return this;
     }
@@ -30,24 +29,53 @@ class RecorderPlugin extends ClcokPlugin {
      * @returns JSON object
      */
     toJSON() {
-        var o = ClcokPlugin.toJSON.call(this);
-        o.commands = this.commands;
-        return o;
+        return {
+            clock: this.clock.toJSON(),
+            commands: this.commands
+        };
     }
 
     shutdown() {
-        super.shutdown();
+        this.clock.shutdown();
         this.commands = undefined;
     }
 
+    destroy() {
+        this.shutdown();
+    }    
+
     start(startAt) {
-        super.start(startAt);
+        this.clock.start(startAt);
         this.clean();
         return this;
     }
 
+    pause() {
+        this.clock.pause();
+        return this;
+    }
+
+    resume() {
+        this.clock.resume();
+        return this;
+    }
+
+    stop() {
+        this.clock.stop();
+        return this;
+    }
+
+    seek(time) {
+        this.clock.seek(time);
+        return this;
+    }    
+
     get isRecording() {
-        return this.isRunning;
+        return this.clock.isRunning;
+    }
+
+    get now() {
+        return this.clock.now;
     }
 
     addCommand(command, offset) {
@@ -57,7 +85,7 @@ class RecorderPlugin extends ClcokPlugin {
         if (offset === undefined) {
             offset = 0;
         }
-        var dt = this.now + offset;
+        var dt = this.clock.now + offset;
         this.commands.push([dt, command]);
         return this;
     }
@@ -68,7 +96,7 @@ class RecorderPlugin extends ClcokPlugin {
 
     clean() {
         this.commands.length = 0;
-    }    
+    }
 }
 
 export default RecorderPlugin;

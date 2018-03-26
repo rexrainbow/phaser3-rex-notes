@@ -13,8 +13,6 @@ class TextTypingPlugin extends EE {
 
         this.gameobject = gameobject;
         this.scene = gameobject.scene;
-        this.boot();
-
         this.timer = null;
         this.resetFromJSON(config);
     }
@@ -70,21 +68,12 @@ class TextTypingPlugin extends EE {
         };
     }
 
-    boot() {
-        var eventEmitter = this.gameobject;
-        if (eventEmitter) {
-            eventEmitter.on('shutdown', this.shutdown, this);
-            eventEmitter.on('destroy', this.destroy, this);
-        }
-
-    }
-
     shutdown() {
         this.freeTimer();
         this.removeAllListeners();
-        
+
         this.gameobject = undefined;
-        this.scene = undefined;         
+        this.scene = undefined;
     }
 
     destroy() {

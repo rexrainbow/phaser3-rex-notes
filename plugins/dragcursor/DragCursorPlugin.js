@@ -1,7 +1,7 @@
 'use strict'
 
 import Phaser from 'phaser';
-import GetEventEmmiter from './../utils/system/GetEventEmmiter.js';
+import GetSceneObject from './../utils/system/GetSceneObject.js';
 import VectorToCursorKeys from './../utils/vectortocursorkeys/VectorToCursorKeys.js';
 
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
@@ -9,9 +9,8 @@ const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 class DragCursorPlugin extends VectorToCursorKeys {
     constructor(parent, config) {
         super(config);
+        this.parent = parent;        
         //this.resetFromJSON(config); // this function had been called in super(config)
-
-        this.parent = parent;
         this.boot();
     }
 
@@ -53,13 +52,18 @@ class DragCursorPlugin extends VectorToCursorKeys {
     }
 
     boot() {
-        var eventEmitter = GetEventEmmiter(this.parent);
-        if (eventEmitter) {
-            eventEmitter.on('shutdown', this.shutdown, this);
-            eventEmitter.on('destroy', this.destroy, this);
+        if (!this.parent || !this.parent.input) {
+            return;
         }
 
-        this.init();
+        var input = this.parent.input;
+        if (input instanceof Phaser.Input.InputPlugin) { // parent is scene      
+            input.on('pointerdown', this.onDragStart, this);
+            input.on('pointerup', this.onDrop, this);
+            input.on('pointermove', this.onDragging, this);
+        } else { // parent is gameobject
+            // TODO
+        }
     }
     
     shutdown() {
@@ -71,23 +75,7 @@ class DragCursorPlugin extends VectorToCursorKeys {
 
     destroy() {
         this.shutdown();
-    }    
-
-    init() {
-        if (!this.parent || !this.parent.input) {
-            return;
-        }
-
-        var self = this;
-        var input = this.parent.input;
-        if (input instanceof Phaser.Input.InputPlugin) { // parent is scene      
-            input.on('pointerdown', this.onDragStart, this);
-            input.on('pointerup', this.onDrop, this);
-            input.on('pointermove', this.onDragging, this);
-        } else { // parent is gameobject
-            // TODO
-        }
-    }
+    } 
 
     setOrigin(x, y) {
         var o = this.cfg.origin;

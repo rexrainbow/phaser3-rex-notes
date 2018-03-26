@@ -11,8 +11,6 @@ class TextPagePlugin {
     constructor(gameobject, config) {
         this.gameobject = gameobject;
         this.scene = gameobject.scene;
-        this.boot();
-
         this.wordWrap = {};
         this.resetFromJSON(config);
     }
@@ -50,15 +48,6 @@ class TextPagePlugin {
             pageNum: this.pageNum
 
         };
-    }
-
-    boot() {
-        var eventEmitter = this.gameobject;
-        if (eventEmitter) {
-            eventEmitter.on('shutdown', this.shutdown, this);
-            eventEmitter.on('destroy', this.destroy, this);
-        }
-
     }
 
     shutdown() {
@@ -158,7 +147,7 @@ class TextPagePlugin {
     setWordWrapUseAdvanced(enabled) {
         this.wordWrapUseAdvanced = enabled;
     }
-        
+
     getWrappedText(text) {
         this.setTextWrapProperties();
         var lines = this.gameobject.getWrappedText(text);

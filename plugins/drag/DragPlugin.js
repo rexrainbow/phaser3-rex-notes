@@ -8,10 +8,9 @@ class DragDropPlugin {
     constructor(gameobject, config) {
         this.gameobject = gameobject;
         this.scene = gameobject.scene;
-        this.boot();
-
         this.enable = null;
         this.resetFromJSON(config);
+        this.boot();        
     }
 
     /**
@@ -39,16 +38,6 @@ class DragDropPlugin {
     }
 
     boot() {
-        //var eventEmitter = this.gameobject;
-        //if (eventEmitter) {
-        //    eventEmitter.on('shutdown', this.shutdown, this);
-        //    eventEmitter.on('destroy', this.destroy, this);
-        //}                
-
-        this.init();
-    }
-
-    init() {
         this.gameobject.on('drag', this.onDragging, this);
     }
 

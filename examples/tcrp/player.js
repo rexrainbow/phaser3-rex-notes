@@ -29,11 +29,20 @@ class Demo extends Phaser.Scene {
     create() {
         var myCmds = new CmdKlass(this);
         var commands = [
-            [0, 'print', 'hello'],
-            [2000, 'print', 'world']
+            [0, 'print', 'hello'],        // [dt, fnName, param0, param1, ...]
+            [1000, ['print', 'world']],   // [dt, [fnName, param0, param1, ...]]
+            [3000, [                      // [dt, [command0, command1, ...]]
+                ['print', '--'],
+                ['print', 'phaser3'],
+            ]]
         ];
         var player = new PlayerPlugin(this);
-        player.load(commands, myCmds).start();
+        player
+            .load(commands, myCmds)
+            .start()
+            .on('complete', function(){
+                console.log(player.now * 0.001);
+            });
     }
 
     update() {}

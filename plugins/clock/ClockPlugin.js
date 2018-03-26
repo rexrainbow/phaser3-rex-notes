@@ -1,15 +1,14 @@
 'use strict'
 
 import Phaser from 'phaser';
-import GetEventEmmiter from './../utils/system/GetEventEmmiter.js';
+import GetSceneObject from './../utils/system/GetSceneObject.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 
 class ClockPlugin {
     constructor(parent, config) {
+        this.parent = parent;        
         this.resetFromJSON(config);
-
-        this.parent = parent;
         this.boot();
     }
 
@@ -38,13 +37,13 @@ class ClockPlugin {
     }
 
     boot() {
-        var eventEmitter = GetEventEmmiter(this.parent);
-        eventEmitter.on('preupdate', this.updateNowTime, this); 
-        eventEmitter.on('shutdown', this.shutdown, this);
-        eventEmitter.on('destroy', this.destroy, this);
+        var scene = GetSceneObject(this.parent);    
+        scene.sys.events.on('preupdate', this.updateNowTime, this); 
     }
 
     shutdown() {
+        var scene = GetSceneObject(this.parent);   
+        scene.sys.events.removeListener('preupdate', this.updateNowTime, this);
         this.parent = undefined;
     }
 
@@ -73,7 +72,6 @@ class ClockPlugin {
 
     stop() {
         this.state = 0;
-        this.now = 0;
         return this;
     }
 

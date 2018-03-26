@@ -1,18 +1,19 @@
 'use strict'
 
 import Phaser from 'phaser';
+import EE from 'eventemitter3';
 import ClcokPlugin from './../clock-plugin.js';
-import GetEventEmmiter from './../utils/system/GetEventEmmiter.js';
+import GetSceneObject from './../utils/system/GetSceneObject.js';
 import runCommands from './../../plugins/runcommands.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 
-class PlayerPlugin extends ClcokPlugin {
+class PlayerPlugin extends EE {
     constructor(parent, config) {
-        super(parent, config);
-        //this.resetFromJSON(config);  // this function had been called in super(config)
-
+        super();
+        this.clock = new ClcokPlugin(parent);
         this.parent = parent;
+        this.resetFromJSON(config); // this function had been called in super(config)
         this.boot();
     }
 
@@ -22,7 +23,8 @@ class PlayerPlugin extends ClcokPlugin {
      * @returns {object} this object
      */
     resetFromJSON(o) {
-        super.resetFromJSON(o);
+        var clockConfig = GetFastValue(o, 'clock', undefined);
+        this.clock.resetFromJSON(clockConfig);
         this.commands = GetFastValue(o, 'commands', []); // [[dt, cmds], [dt, cmds], ...]
         this.scope = GetFastValue(o, 'scope', undefined);
         this.index = GetFastValue(o, 'index', 0);
@@ -35,23 +37,30 @@ class PlayerPlugin extends ClcokPlugin {
      * @returns JSON object
      */
     toJSON() {
-        var o = ClcokPlugin.toJSON.call(this);
-        o.commands = this.commands;
-        o.scope = this.scope;
-        o.index = this.index;
-        return o;
+        return {
+            clock: this.clock.toJSON(),
+            commands: this.commands,
+            scope: this.scope,
+            index: this.index
+        };
     }
 
     boot() {
-        super.boot();
-        var eventEmitter = GetEventEmmiter(this.parent);
-        eventEmitter.on('update', this.runNextCommands, this);
+        var scene = GetSceneObject(this.parent);
+        scene.sys.events.on('update', this.runNextCommands, this);
 
     }
 
     shutdown() {
-        super.shutdown();
+        this.clock.shutdown();
+        var scene = GetSceneObject(this.parent);
+        scene.sys.events.removeListener('update', this.runNextCommands, this);
+        this.removeAllListeners();
         this.commands = undefined;
+    }
+
+    destroy() {
+        this.shutdown();
     }
 
     load(commands, scope) {
@@ -68,23 +77,46 @@ class PlayerPlugin extends ClcokPlugin {
     }
 
     start(startAt) {
-        super.start(startAt);
         this.index = 0;
         this.nextDt = undefined;
-        this.runNextCommands();
+        this.clock.start(startAt);
+        return this;
+    }
+
+    pause() {
+        this.clock.pause();
+        return this;
+    }
+
+    resume() {
+        this.clock.resume();
+        return this;
+    }
+
+    stop() {
+        this.clock.stop();
+        return this;
+    }
+
+    seek(time) {
+        this.clock.seek(time);
         return this;
     }
 
     get isPlaying() {
-        return this.isRunning;
+        return this.clock.isRunning;
     }
+
+    get now() {
+        return this.clock.now;
+    }    
 
     get isComplete() {
         return (this.index >= this.commands.length);
     }
 
     runNextCommands() {
-        if (!this.isRunning) {
+        if (!this.clock.isRunning) {
             return;
         }
         if ((this.nextDt !== undefined) &&
@@ -96,14 +128,17 @@ class PlayerPlugin extends ClcokPlugin {
 
     runCommand() {
         if (this.isComplete) {
-            // TODO: emit complete event
-            this.stop();
+            this.clock.stop();
+            this.emit('complete');
             return false;
         }
 
         var item = this.commands[this.index];
         var dt = item[0];
-        if (dt > this.now) {
+        if (typeof (dt) === 'string') {
+            dt = parseFloat(dt);
+        }
+        if (dt > this.clock.now) {
             this.nextDt = dt;
             return false; // exit
         }
@@ -113,6 +148,7 @@ class PlayerPlugin extends ClcokPlugin {
             command = item.slice(1);
         }
         runCommands(command, this.scope);
+        this.emit('runcommand', command, this.scope);
         this.index++; // point to next item
         return true; // continue
     }
