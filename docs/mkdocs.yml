@@ -3,7 +3,7 @@ theme: 'material'
 
 pages:
 - Home: index.md
-- Event emmiter: eventemitter3.md
+- Event emitter: eventemitter3.md
 - Input:
     - Touch events: touchevents.md
     - Keyboard events: keyboardevents.md
