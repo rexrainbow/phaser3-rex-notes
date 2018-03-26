@@ -1,6 +1,6 @@
 ## Introduction
 
-[Event emmiter](https://github.com/primus/eventemitter3).
+[Event emitter](https://github.com/primus/eventemitter3).
 
 ## Usage
 
