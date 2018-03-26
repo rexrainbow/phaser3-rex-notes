@@ -68,9 +68,9 @@ class DragCursorPlugin extends VectorToCursorKeys {
     
     shutdown() {
         var input = this.parent.input;
-        input.removeListener('pointerdown', this.onDragStart, this);
-        input.removeListener('pointerup', this.onDragStart, this);
-        input.removeListener('pointermove', this.onDragStart, this);
+        input.off('pointerdown', this.onDragStart, this);
+        input.off('pointerup', this.onDragStart, this);
+        input.off('pointermove', this.onDragStart, this);
     }
 
     destroy() {

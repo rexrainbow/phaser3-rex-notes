@@ -16,6 +16,61 @@
             "title": "List of my plugins"
         }, 
         {
+            "location": "/eventemitter3/index.html", 
+            "text": "Introduction\n\n\nEvent emmiter\n.\n\n\nUsage\n\n\nGet event emitter\n\n\n\n\nScene: \n    \nvar\n \nee\n \n=\n \nscene\n.\nsys\n.\nevents\n;\n\n\n\n\nGame object:\n    \nvar\n \nee\n \n=\n \ngameobject\n;\n\n\n\n\n\n\nAttach listener\n\n\nee\n.\non\n(\neventName\n,\n \ncallback\n,\n \ncallbackScope\n);\n\n\nee\n.\nonce\n(\neventName\n,\n \ncallback\n,\n \ncallbackScope\n);\n  \n// only fire listeners one time\n\n\n\n\n\nAlias\n\n\nee\n.\naddListener\n(\neventName\n,\n \ncallback\n,\n \ncallbackScope\n);\n\n\nee\n.\naddListener\n(\neventName\n,\n \ncallback\n,\n \ncallbackScope\n,\n \ntrue\n);\n  \n// only fire listeners one time\n\n\n\n\n\nFire event\n\n\nee\n.\nemit\n(\neventName\n);\n\n\n\n\n\nRemove listeners\n\n\nee\n.\noff\n(\neventName\n,\n \ncallback\n,\n \ncallbackScope\n);\n\n\nee\n.\noff\n(\neventName\n,\n \ncallback\n,\n \ncallbackScope\n,\n \ntrue\n);\n   \n// only remove one-time listeners\n\n\n\n\n\nAlias\n\n\nee\n.\nremoveListener\n(\neventName\n,\n \ncallback\n,\n \ncallbackScope\n);\n \n\nee\n.\nremoveListener\n(\neventName\n,\n \ncallback\n,\n \ncallbackScope\n,\n \ntrue\n);\n  \n// only remove one-time listeners\n\n\n\n\n\nRemove all listeners\n\n\nee\n.\nremoveAllListeners\n();\n\n\n\n\n\nGet listeners count\n\n\nvar\n \ncount\n \n=\n \nee\n.\nlistenerCount\n(\neventName\n);\n\n\n//var noListener = (ee.listenerCount(eventName) === 0);\n\n\n\n\n\nGet listeners\n\n\nvar\n \nlisteners\n \n=\n \nee\n.\nlisteners\n(\neventName\n);\n\n\n\n\n\nListener\n\n\n{\n\n    \nfn\n:\n \ncallback\n,\n\n    \ncontext\n:\n \ncallbackScope\n,\n\n    \nonce\n:\n \nonce\n\n\n}", 
+            "title": "Event emmiter"
+        }, 
+        {
+            "location": "/eventemitter3/index.html#introduction", 
+            "text": "Event emmiter .", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/eventemitter3/index.html#usage", 
+            "text": "", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/eventemitter3/index.html#get-event-emitter", 
+            "text": "Scene: \n     var   ee   =   scene . sys . events ;   Game object:\n     var   ee   =   gameobject ;", 
+            "title": "Get event emitter"
+        }, 
+        {
+            "location": "/eventemitter3/index.html#attach-listener", 
+            "text": "ee . on ( eventName ,   callback ,   callbackScope );  ee . once ( eventName ,   callback ,   callbackScope );    // only fire listeners one time   Alias  ee . addListener ( eventName ,   callback ,   callbackScope );  ee . addListener ( eventName ,   callback ,   callbackScope ,   true );    // only fire listeners one time", 
+            "title": "Attach listener"
+        }, 
+        {
+            "location": "/eventemitter3/index.html#fire-event", 
+            "text": "ee . emit ( eventName );", 
+            "title": "Fire event"
+        }, 
+        {
+            "location": "/eventemitter3/index.html#remove-listeners", 
+            "text": "ee . off ( eventName ,   callback ,   callbackScope );  ee . off ( eventName ,   callback ,   callbackScope ,   true );     // only remove one-time listeners   Alias  ee . removeListener ( eventName ,   callback ,   callbackScope );   ee . removeListener ( eventName ,   callback ,   callbackScope ,   true );    // only remove one-time listeners", 
+            "title": "Remove listeners"
+        }, 
+        {
+            "location": "/eventemitter3/index.html#remove-all-listeners", 
+            "text": "ee . removeAllListeners ();", 
+            "title": "Remove all listeners"
+        }, 
+        {
+            "location": "/eventemitter3/index.html#get-listeners-count", 
+            "text": "var   count   =   ee . listenerCount ( eventName );  //var noListener = (ee.listenerCount(eventName) === 0);", 
+            "title": "Get listeners count"
+        }, 
+        {
+            "location": "/eventemitter3/index.html#get-listeners", 
+            "text": "var   listeners   =   ee . listeners ( eventName );", 
+            "title": "Get listeners"
+        }, 
+        {
+            "location": "/eventemitter3/index.html#listener", 
+            "text": "{ \n     fn :   callback , \n     context :   callbackScope , \n     once :   once  }", 
+            "title": "Listener"
+        }, 
+        {
             "location": "/touchevents/index.html", 
             "text": "Introduction\n\n\nBuilt-in touch/mouse events of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nMouse/touch events\n\n\nscene\n.\ninput\n.\non\n(\npointerdown\n,\n \nfunction\n(\npointer\n,\n \ncurrentlyOver\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\npointerup\n,\n \nfunction\n(\npointer\n,\n \ncurrentlyOver\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\npointermove\n,\n \nfunction\n(\npointer\n,\n \ncurrentlyOver\n){\n \n/* ... */\n \n});\n\n\n\nscene\n.\ninput\n.\non\n(\npointerover\n,\n \nfunction\n(\npointer\n,\n \njustOver\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\npointerout\n,\n \nfunction\n(\npointer\n,\n \njustOut\n){\n \n/* ... */\n \n});\n\n\n\n\n\nMouse/touch events of game object\n\n\n\n\nRegister game object\n\n\n\n\ngameObject\n.\nsetInteractive\n();\n       \n// enable\n\n\n// gameObject.setInteractive(false);  // disable\n\n\n\n\n\n\n\nMouse/touch events of a game object\n\n\n\n\ngameObject\n.\non\n(\npointerdown\n,\n \nfunction\n(\npointer\n,\n \nlocalX\n,\n \nlocalY\n,\n \ncamera\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\npointerup\n,\n \nfunction\n(\npointer\n,\n \nlocalX\n,\n \nlocalY\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\npointermove\n,\n \nfunction\n(\npointer\n,\n \nlocalX\n,\n \nlocalY\n){\n \n/* ... */\n \n});\n\n\n\ngameObject\n.\non\n(\npointerover\n,\n \nfunction\n(\npointer\n,\n \nlocalX\n,\n \nlocalY\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\npointerout\n,\n \nfunction\n(\npointer\n){\n \n/* ... */\n \n});\n\n\n\n\n\nscene\n.\ninput\n.\non\n(\ngameobjectdown\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ngameobjectup\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ngameobjectmove\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n){\n \n/* ... */\n \n});\n\n\n\nscene\n.\ninput\n.\non\n(\ngameobjectover\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ngameobjectout\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n){\n \n/* ... */\n \n});\n\n\n\n\n\nDrag events\n\n\n\n\nRegister game object and enable dragging\n\n\n\n\ngameObject\n.\nsetInteractive\n();\n           \n// enable touching interactive\n\n\nscene\n.\ninput\n.\nsetDraggable\n(\ngameObject\n);\n  \n// enable dragging\n\n\n// scene.input.dragDistanceThreshold = 16;\n\n\n// scene.input.dragTimeThreshold = 500;\n\n\n\n// gameObject.setInteractive(false);             // disable\n\n\n// scene.input.setDraggable(gameObject, false);  // disable dragging\n\n\n\n\n\ngameObject\n.\non\n(\ndragstart\n,\n \nfunction\n(\npointer\n,\n \ndragX\n,\n \ndragY\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\ndrag\n,\n \nfunction\n(\npointer\n,\n \ndragX\n,\n \ndragY\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\ndragend\n,\n \nfunction\n(\npointer\n,\n \ndragX\n,\n \ndragY\n,\n \ndropped\n{\n \n/* ... */\n \n});\n\n\n\n\n\nscene\n.\ninput\n.\non\n(\ndragstart\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ndrag\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n,\n \ndragX\n,\n \ndragY\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ndragend\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n,\n \ndropped\n){\n \n/* ... */\n \n});\n\n\n\n\n\nDrop events\n\n\ngameObject\n.\non\n(\ndrop\n,\n \nfunction\n(\npointer\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\n\ngameObject\n.\non\n(\ndragenter\n,\n \nfunction\n(\npointer\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\ndragover\n,\n \nfunction\n(\npointer\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\ndragleave\n,\n \nfunction\n(\npointer\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\n\n\n\nscene\n.\ninput\n.\non\n(\ndrop\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\n\nscene\n.\ninput\n.\non\n(\ndragenter\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ndragover\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ndragleave\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\n\n\n\nProperties of point\n\n\n\n\nPosition of current touching: \npointer.x\n , \npointer.y\n\n\nPosition of touching start: \npointer.downX\n, \npointer.downY\n\n\nPosition of touching end: \npointer.upX\n, \npointer.upY\n\n\nNo botton down: \npointer.noButtonDown()\n\n\nIs left botton down: \npointer.leftButtonDown()\n\n\nIs right botton down: \npointer.rightButtonDown()", 
             "title": "Touch events"
@@ -802,7 +857,7 @@
         }, 
         {
             "location": "/timeline/index.html", 
-            "text": "Introduction\n\n\nUpdate timers, built-in object of phaser. Each scene has a timeline (\nscene.time\n) already.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nTime-scale\n\n\n\n\n\n\nGet time-scale\n\n\nvar\n \ntimeScale\n \n=\n \nscene\n.\ntime\n.\ntimeScale\n;\n\n\n\n\n\n\n\n\n\nSet time-scale\n\n\nscene\n.\ntime\n.\ntimeScale\n \n=\n \n2\n;\n\n\n\n\n\n\n\n\n\nPause or resume\n\n\n\n\n\n\nPause\n\n\nscene\n.\ntime\n.\npaused\n \n=\n \ntrue\n;\n\n\n\n\n\n\n\n\n\nResume\n\n\nscene\n.\ntime\n.\npaused\n \n=\n \nfalse\n;\n\n\n\n\n\n\n\n\n\nCreate timeline object\n\n\nvar\n \ntimeline\n \n=\n \nnew\n \nPhaser\n.\nTime\n.\nClock\n(\nscene\n);", 
+            "text": "Introduction\n\n\nUpdate timers, built-in object of phaser. Each scene has a timeline (\nscene.time\n) already.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nTime-scale\n\n\n\n\n\n\nGet time-scale\n\n\nvar\n \ntimeScale\n \n=\n \nscene\n.\ntime\n.\ntimeScale\n;\n\n\n\n\n\n\n\n\n\nSet time-scale\n\n\nscene\n.\ntime\n.\ntimeScale\n \n=\n \n2\n;\n\n\n\n\n\n\n\n\n\nPause or resume\n\n\n\n\n\n\nPause\n\n\nscene\n.\ntime\n.\npaused\n \n=\n \ntrue\n;\n\n\n\n\n\n\n\n\n\nResume\n\n\nscene\n.\ntime\n.\npaused\n \n=\n \nfalse\n;\n\n\n\n\n\n\n\n\n\nGet current game-time\n\n\nvar\n \ntime\n \n=\n \nscene\n.\ntime\n.\nnow\n;\n\n\n\n\n\nGame-time is not system time.\n\n\nCreate timeline object\n\n\nvar\n \ntimeline\n \n=\n \nnew\n \nPhaser\n.\nTime\n.\nClock\n(\nscene\n);", 
             "title": "Timeline"
         }, 
         {
@@ -824,6 +879,11 @@
             "location": "/timeline/index.html#pause-or-resume", 
             "text": "Pause  scene . time . paused   =   true ;     Resume  scene . time . paused   =   false ;", 
             "title": "Pause or resume"
+        }, 
+        {
+            "location": "/timeline/index.html#get-current-game-time", 
+            "text": "var   time   =   scene . time . now ;   Game-time is not system time.", 
+            "title": "Get current game-time"
         }, 
         {
             "location": "/timeline/index.html#create-timeline-object", 

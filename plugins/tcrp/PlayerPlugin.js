@@ -54,7 +54,7 @@ class PlayerPlugin extends EE {
     shutdown() {
         this.clock.shutdown();
         var scene = GetSceneObject(this.parent);
-        scene.sys.events.removeListener('update', this.runNextCommands, this);
+        scene.sys.events.off('update', this.runNextCommands, this);
         this.removeAllListeners();
         this.commands = undefined;
     }

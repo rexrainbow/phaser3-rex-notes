@@ -43,7 +43,7 @@ class ClockPlugin {
 
     shutdown() {
         var scene = GetSceneObject(this.parent);   
-        scene.sys.events.removeListener('preupdate', this.updateNowTime, this);
+        scene.sys.events.off('preupdate', this.updateNowTime, this);
         this.parent = undefined;
     }
 
