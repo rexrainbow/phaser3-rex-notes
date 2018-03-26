@@ -65,6 +65,10 @@ class PlayerPlugin extends EE {
     }
 
     load(commands, scope) {
+        commands = commands.filter(function(item){
+            var dt = item[0];
+            return !isNaN(dt);
+        });
         commands.sort(function (itemA, itemB) {
             var dtA = itemA[0],
                 dtB = itemB[0];

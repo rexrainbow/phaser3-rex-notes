@@ -29,6 +29,7 @@ class Demo extends Phaser.Scene {
     create() {
         var myCmds = new CmdKlass(this);
         var commands = [
+            ['// comment'],               // [NaN, ...] -> ignored
             [0, 'print', 'hello'],        // [dt, fnName, param0, param1, ...]
             [1000, ['print', 'world']],   // [dt, [fnName, param0, param1, ...]]
             [3000, [                      // [dt, [command0, command1, ...]]
