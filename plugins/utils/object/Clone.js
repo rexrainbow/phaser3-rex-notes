@@ -11,21 +11,20 @@ import IsArray from './../array/IsArray.js';
  */
 var Clone = function (obj, ret) {
     var clone;
+    var objIsArray = IsArray(obj);
 
     if (ret != null) {
         clone = ret;
         Clean(clone);
     } else {
-        clone = (IsArray(obj)) ? [] : {};
+        clone = (objIsArray) ? [] : {};
     }
 
+    if (objIsArray) {
+        clone.length = obj.length;
+    }
     for (var key in obj) {
-        if (IsArray(obj[key])) {
-            clone[key] = obj[key].slice(0);
-        }
-        else {
-            clone[key] = obj[key];
-        }
+        clone[key] = obj[key];
     }
 
     return clone;

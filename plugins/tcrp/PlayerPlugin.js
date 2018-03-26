@@ -8,6 +8,7 @@ import runCommands from './../../plugins/runcommands.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 
+var CMD = []; // reuse this array
 class PlayerPlugin extends EE {
     constructor(parent, config) {
         super();
@@ -146,7 +147,7 @@ class PlayerPlugin extends EE {
         if (isNaN(dt)) {
             // skip current command
             this.index++; // point to next item
-            return true;  // continue
+            return true; // continue
         }
         if (typeof (dt) === 'string') {
             dt = parseFloat(dt);
@@ -158,12 +159,16 @@ class PlayerPlugin extends EE {
 
         var command = item[1];
         if (typeof (command) === 'string') { // [dt, fnName, param0, param1, ...]
-            command = item.slice(1);
+            CMD.length = item.length - 1;
+            for (var i = 0, len = CMD.length; i < len; i++) {
+                CMD[i] = item[i + 1];
+            }
+            command = CMD;
         }
         runCommands(command, this.scope);
         this.emit('runcommand', command, this.scope);
         this.index++; // point to next item
-        return true;  // continue
+        return true; // continue
     }
 }
 

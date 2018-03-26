@@ -2,6 +2,7 @@
 
 import Phaser from 'phaser';
 import ClcokPlugin from './../clock-plugin.js';
+import Clone from './../../plugins/utils/object/Clone.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 
@@ -42,7 +43,7 @@ class RecorderPlugin {
 
     destroy() {
         this.shutdown();
-    }    
+    }
 
     start(startAt) {
         this.clock.start(startAt);
@@ -68,7 +69,7 @@ class RecorderPlugin {
     seek(time) {
         this.clock.seek(time);
         return this;
-    }    
+    }
 
     get isRecording() {
         return this.clock.isRunning;
@@ -80,11 +81,11 @@ class RecorderPlugin {
 
     set timeScale(timeScale) {
         this.clock.timeScale = timeScale;
-    }    
+    }
 
     get now() {
         return this.clock.now;
-    }    
+    }
 
     addCommand(command, offset) {
         if (!this.isRecording) {
@@ -98,8 +99,17 @@ class RecorderPlugin {
         return this;
     }
 
-    getCommands() {
-        return this.commands;
+    getCommands(isRef) {
+        if (isRef === undefined) {
+            isRef = false;
+        }
+        var commands;
+        if (isRef) {
+            commands = this.commands;
+        } else {
+            commands = Clone(this.commands);
+        }
+        return commands;
     }
 
     clean() {
