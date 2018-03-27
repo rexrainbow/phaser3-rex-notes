@@ -32,7 +32,7 @@
     
     
       
-        <title>Array - Notes of Phaser 3</title>
+        <title>Mustache - Notes of Phaser 3</title>
       
     
     
@@ -86,7 +86,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Array
+                Mustache
               </span>
             
           
@@ -522,12 +522,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
     
     <label class="md-nav__link" for="nav-10">
       Data
@@ -555,63 +553,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="toc">
-        Array
-      </label>
-    
-    <a href="index.html" title="Array" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../array/index.html" title="Array" class="md-nav__link">
       Array
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#filter-elements" title="Filter elements" class="md-nav__link">
-    Filter elements
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -636,10 +582,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11" checked>
     
     <label class="md-nav__link" for="nav-11">
       String
@@ -667,11 +615,50 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../mustache/index.html" title="Mustache" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Mustache
+      </label>
+    
+    <a href="index.html" title="Mustache" class="md-nav__link md-nav__link--active">
       Mustache
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -854,19 +841,6 @@
     Usage
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#filter-elements" title="Filter elements" class="md-nav__link">
-    Filter elements
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
       
@@ -884,20 +858,17 @@
               
                 
                 
-                  <h1>Array</h1>
+                  <h1>Mustache</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Built-in javascript object.</p>
-<ul>
-<li>Author: Built-in javascript function</li>
-</ul>
+<p>Format string with variables.<br />
+<a href="https://github.com/janl/mustache.js">Reference</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<h3 id="filter-elements">Filter elements<a class="headerlink" href="#filter-elements" title="Permanent link">&para;</a></h3>
-<p>Creates a new array with all elements that pass the test function. <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter">Reference</a></p>
-<div class="codehilite"><pre><span></span><span class="c1">// var elems = [...]</span>
-<span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">elems</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">el</span><span class="p">){</span>
-    <span class="k">return</span> <span class="p">(</span><span class="nx">el</span><span class="p">.</span><span class="nx">x</span> <span class="o">&gt;</span> <span class="mi">400</span><span class="p">);</span>
-<span class="p">});</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">template</span> <span class="o">=</span> <span class="s1">&#39;hello, {{name}}&#39;</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">view</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;rex&#39;</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">Mustache</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="nx">template</span><span class="p">,</span> <span class="nx">view</span><span class="p">);</span>
 </pre></div>
                 
                   
@@ -917,7 +888,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../datamanager/index.html" title="Data manager" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../format/index.html" title="Format" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -926,19 +897,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Data manager
+                Format
               </span>
             </div>
           </a>
         
         
-          <a href="../csvtoarray/index.html" title="CSV to array" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../lzstringplugin/index.html" title="LZ string" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                CSV to array
+                LZ string
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

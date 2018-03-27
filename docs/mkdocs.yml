@@ -32,6 +32,8 @@ pages:
     - Array: array.md
     - CSV to array: csvtoarray.md
 - String:
+    - Format: format.md
+    - Mustache: mustache.md
     - LZ string: lzstringplugin.md
     - XOR: xorplugin.md
 - Random:

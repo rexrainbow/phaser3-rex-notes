@@ -1061,6 +1061,36 @@
             "title": "Generate array"
         }, 
         {
+            "location": "/format/index.html", 
+            "text": "Introduction\n\n\nFormat string with variables.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nReplace \n%x\n from an array. \nx\n starts from \n1\n.\n\n\n// const Format = Phaser.Utils.String.Format;\n\n\nvar\n \ntemplate\n \n=\n \nhello, %1\n;\n\n\nvar\n \nview\n \n=\n \n[\nrex\n];\n\n\nvar\n \nresult\n \n=\n \nFormat\n(\ntemplate\n,\n \nview\n);", 
+            "title": "Format"
+        }, 
+        {
+            "location": "/format/index.html#introduction", 
+            "text": "Format string with variables.   Author: Richard Davey", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/format/index.html#usage", 
+            "text": "Replace  %x  from an array.  x  starts from  1 .  // const Format = Phaser.Utils.String.Format;  var   template   =   hello, %1 ;  var   view   =   [ rex ];  var   result   =   Format ( template ,   view );", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/mustache/index.html", 
+            "text": "Introduction\n\n\nFormat string with variables.\n\n\nReference\n\n\nUsage\n\n\nvar\n \ntemplate\n \n=\n \nhello, {{name}}\n;\n\n\nvar\n \nview\n \n=\n \n{\n\n    \nname\n:\n \nrex\n\n\n};\n\n\nvar\n \nresult\n \n=\n \nMustache\n.\nrender\n(\ntemplate\n,\n \nview\n);", 
+            "title": "Mustache"
+        }, 
+        {
+            "location": "/mustache/index.html#introduction", 
+            "text": "Format string with variables.  Reference", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/mustache/index.html#usage", 
+            "text": "var   template   =   hello, {{name}} ;  var   view   =   { \n     name :   rex  };  var   result   =   Mustache . render ( template ,   view );", 
+            "title": "Usage"
+        }, 
+        {
             "location": "/lzstringplugin/index.html", 
             "text": "Introduction\n\n\nCompress string using LZ-based compression algorithm. \nReference\n\n\n\n\nAuthor: Rex\n\n\nMember of scene\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\nvar\n \nlzstring\n \n=\n \nnew\n \nLZStringPlugin\n(\nscene\n,\n \n{\n\n    \n//encoding: 0,    // 0|\nnone\n|1|\nbase64\n|2|\nutf16\n|3|\nuri\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\nencoding : \n\n\n'none'\n, or \n0\n : no encoding.\n\n\n'base64'\n, or \n1\n : base64 encoding.\n\n\n'utf16'\n, or \n2\n : UTF16 encoding.\n\n\n'uri'\n, or \n3\n : URI encoding.\n\n\n\n\n\n\n\n\nCompression\n\n\nvar\n \ncompressionResult\n \n=\n \nlzstring\n.\ncompress\n(\nsrc\n);\n\n\n\n\n\nDecompression\n\n\nvar\n \ndecompressionResult\n \n=\n \nlzstring\n.\ndecompress\n(\ncompressionResult\n);\n\n\n\n\n\nSet encoding\n\n\nlzstring\n.\nsetEncoding\n(\nm\n);\n  \n// 0|\nnone\n|1|\nbase64\n|2|\nutf16\n|3|\nuri", 
             "title": "LZ string"
