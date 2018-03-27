@@ -6,7 +6,6 @@
 
 1. [Canvas](canvas.md): Drawing on [canvas](https://www.w3schools.com/html/html5_canvas.asp).
 1. [Clock](clockplugin.md): A clock to count elapsed time.
-1. [CSV-to-array](csvtoarray.md): Generate array from csv string.
 1. [Drag](dragplugin.md): Drag game object.
 1. [Drag-cursor](dragcursorplugin.md): Simulate curosr keys according dragging events.
 1. [Gashapon](gashaponplugin.md): Pick random item from box.
