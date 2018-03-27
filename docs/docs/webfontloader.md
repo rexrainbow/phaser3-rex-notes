@@ -28,13 +28,11 @@ this.load.webFont('bangers', {
 - `fontactive` event
 
     ```javascript
-    this.load.on('webfontactive', function(fileObj, familyName){
-    });
+    this.load.on('webfontactive', function(fileObj, familyName){});
     ```
 
 - `fontinactive` event
 
     ```javascript
-    this.load.on('webfontinactive', function(fileObj, familyName){
-    })
+    this.load.on('webfontinactive', function(fileObj, familyName){});
     ```

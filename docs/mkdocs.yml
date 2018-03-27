@@ -37,6 +37,9 @@ pages:
     - Gashapon: gashaponplugin.md
 - Logic:
     - Run commands: runcommands.md
+    - TCRP:
+        - Recoder: tcrprecoderplugin.md
+        - Player: tcrpplayerplugin.md
 
 extra_javascript:
 - js/mermaid/mermaid.min.js

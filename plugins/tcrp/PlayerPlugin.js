@@ -210,8 +210,8 @@ const TIMEUNITMODE = {
 const DTMODE = {
     abs: 0,
     absolute: 0,
-    acc: 1,
-    accumulation: 1
+    inc: 1,
+    increment: 1
 };
 
 export default PlayerPlugin;

@@ -41,7 +41,7 @@ class Demo extends Phaser.Scene {
         player
             .load(commands, myCmds, {
                 // timeUnit: 0,        // 'ms'|0|'s'|'sec'|1
-                // dtMode: 0           // 'abs'|'absolute'|0|'acc'|'accumulation'|1
+                // dtMode: 0           // 'abs'|'absolute'|0|'inc'|'increment'|1
             })
             .start()
             .on('complete', function(){

@@ -13,5 +13,7 @@
 1. [LZ-string](lzstring.md): Compress string using LZ-based compression algorithm.
 1. [Page](textpageplugin.md): Display text page by page on text object.
 1. [Run-commands](runcommands.md): Run commands in array.
+1. [TCRP.Player](tcrpplayerplugin.md): Run commands on time.
+1. [TCRP.Recorder](tcrpplayerplugin.md): Store commands with time.
 1. [Typing](texttypingplugin.md): Typing text on text object.
-1. [Webfont-loader](webfontloader.md): Load web font by [google webfont loader](https://github.com/typekit/webfontloader) in preload stage.
+1. [Webfont-loader](webfontloader.md): Load web font by google webfont loader in preload stage.

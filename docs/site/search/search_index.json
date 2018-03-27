@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/index.html", 
-            "text": "Phaser\n\n\nPhaser\n is a fun, free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering.\n\n\nList of my plugins\n\n\n\n\nCanvas\n: Drawing on \ncanvas\n.\n\n\nClock\n: A clock to count elapsed time.\n\n\nCSV-to-array\n: Generate array from csv string.\n\n\nDrag\n: Drag game object.\n\n\nDrag-cursor\n: Simulate curosr keys according dragging events.\n\n\nGashapon\n: Pick random item from box.\n\n\nLZ-string\n: Compress string using LZ-based compression algorithm.\n\n\nPage\n: Display text page by page on text object.\n\n\nRun-commands\n: Run commands in array.\n\n\nTyping\n: Typing text on text object.\n\n\nWebfont-loader\n: Load web font by \ngoogle webfont loader\n in preload stage.", 
+            "text": "Phaser\n\n\nPhaser\n is a fun, free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering.\n\n\nList of my plugins\n\n\n\n\nCanvas\n: Drawing on \ncanvas\n.\n\n\nClock\n: A clock to count elapsed time.\n\n\nCSV-to-array\n: Generate array from csv string.\n\n\nDrag\n: Drag game object.\n\n\nDrag-cursor\n: Simulate curosr keys according dragging events.\n\n\nGashapon\n: Pick random item from box.\n\n\nLZ-string\n: Compress string using LZ-based compression algorithm.\n\n\nPage\n: Display text page by page on text object.\n\n\nRun-commands\n: Run commands in array.\n\n\nTCRP.Player\n: Run commands on time.\n\n\nTCRP.Recorder\n: Store commands with time.\n\n\nTyping\n: Typing text on text object.\n\n\nWebfont-loader\n: Load web font by google webfont loader in preload stage.", 
             "title": "Home"
         }, 
         {
@@ -12,7 +12,7 @@
         }, 
         {
             "location": "/index.html#list-of-my-plugins", 
-            "text": "Canvas : Drawing on  canvas .  Clock : A clock to count elapsed time.  CSV-to-array : Generate array from csv string.  Drag : Drag game object.  Drag-cursor : Simulate curosr keys according dragging events.  Gashapon : Pick random item from box.  LZ-string : Compress string using LZ-based compression algorithm.  Page : Display text page by page on text object.  Run-commands : Run commands in array.  Typing : Typing text on text object.  Webfont-loader : Load web font by  google webfont loader  in preload stage.", 
+            "text": "Canvas : Drawing on  canvas .  Clock : A clock to count elapsed time.  CSV-to-array : Generate array from csv string.  Drag : Drag game object.  Drag-cursor : Simulate curosr keys according dragging events.  Gashapon : Pick random item from box.  LZ-string : Compress string using LZ-based compression algorithm.  Page : Display text page by page on text object.  Run-commands : Run commands in array.  TCRP.Player : Run commands on time.  TCRP.Recorder : Store commands with time.  Typing : Typing text on text object.  Webfont-loader : Load web font by google webfont loader in preload stage.", 
             "title": "List of my plugins"
         }, 
         {
@@ -382,7 +382,7 @@
         }, 
         {
             "location": "/webfontloader/index.html", 
-            "text": "Introduction\n\n\nLoad web font by \ngoogle webfont loader\n in preload stage.\n\n\n\n\nAuthor: Rex\n\n\nCustomize File of loader\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nLoad webfont\n\n\nIn preload stage:\n\n\nthis\n.\nload\n.\nwebFont\n(\nbangers\n,\n \n{\n\n    \ngoogle\n:\n \n{\n\n        \nfamilies\n:\n \n[\nBangers\n]\n\n    \n}\n\n\n});\n\n\n\n\n\nEvents\n\n\n\n\n\n\nfontactive\n event\n\n\nthis\n.\nload\n.\non\n(\nwebfontactive\n,\n \nfunction\n(\nfileObj\n,\n \nfamilyName\n){\n\n\n});\n\n\n\n\n\n\n\n\n\nfontinactive\n event\n\n\nthis\n.\nload\n.\non\n(\nwebfontinactive\n,\n \nfunction\n(\nfileObj\n,\n \nfamilyName\n){\n\n\n})", 
+            "text": "Introduction\n\n\nLoad web font by \ngoogle webfont loader\n in preload stage.\n\n\n\n\nAuthor: Rex\n\n\nCustomize File of loader\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nLoad webfont\n\n\nIn preload stage:\n\n\nthis\n.\nload\n.\nwebFont\n(\nbangers\n,\n \n{\n\n    \ngoogle\n:\n \n{\n\n        \nfamilies\n:\n \n[\nBangers\n]\n\n    \n}\n\n\n});\n\n\n\n\n\nEvents\n\n\n\n\n\n\nfontactive\n event\n\n\nthis\n.\nload\n.\non\n(\nwebfontactive\n,\n \nfunction\n(\nfileObj\n,\n \nfamilyName\n){});\n\n\n\n\n\n\n\n\n\nfontinactive\n event\n\n\nthis\n.\nload\n.\non\n(\nwebfontinactive\n,\n \nfunction\n(\nfileObj\n,\n \nfamilyName\n){});", 
             "title": "Webfont loader"
         }, 
         {
@@ -407,7 +407,7 @@
         }, 
         {
             "location": "/webfontloader/index.html#events", 
-            "text": "fontactive  event  this . load . on ( webfontactive ,   function ( fileObj ,   familyName ){  });     fontinactive  event  this . load . on ( webfontinactive ,   function ( fileObj ,   familyName ){  })", 
+            "text": "fontactive  event  this . load . on ( webfontactive ,   function ( fileObj ,   familyName ){});     fontinactive  event  this . load . on ( webfontinactive ,   function ( fileObj ,   familyName ){});", 
             "title": "Events"
         }, 
         {
@@ -1234,6 +1234,126 @@
             "location": "/runcommands/index.html#run-commands", 
             "text": "runCommands ( commands ,   scope );    Format of command :\n     [ fnName ,   param0 ,   param1 ,   ...]   Commands in nested array :\n     [ \n     command0 , \n     command1 \n     [ \n         command2 , \n         command3 \n     ]  ]   Run command :\n     scope [ fnName ]. call ( scope ,   param0 ,   param1   ...)", 
             "title": "Run commands"
+        }, 
+        {
+            "location": "/tcrprecoderplugin/index.html", 
+            "text": "Introduction\n\n\nRecorder of \nT\n ime-\nC\n ommand-\nR\n ecorder-\nP\n layer, to store commands with time.\n\n\n\n\nAuthor: Rex\n\n\nMember of scene\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\nvar\n \nrecorder\n \n=\n \nnew\n \nRecorderPlugin\n(\nscene\n);\n\n\n\n\n\nStart recording\n\n\nrecorder\n.\nstart\n();\n\n\n// recorder.start(startAt);  // start-at time in ms\n\n\n\n\n\nPush commands\n\n\nrecorder\n.\naddCommand\n([\nfnName\n,\n \nparam0\n,\n \nparam1\n,\n \n...]);\n\n\n// recorder.addCommand([command0, command1, ...]);\n\n\n// recorder.addCommand([fnName, param0, param1, ...], offset);  // time-offset in ms\n\n\n\n\n\nSee also \nRun commands\n\n\nGet commands\n\n\nvar\n \ncommands\n \n=\n \nrecorder\n.\ngetCommands\n();\n        \n// get a shallow copy of commands\n\n\n// var commands = recorder.getCommands(true); // get reference of commands\n\n\n\n\n\nFormat of return commands:\n\n\n[\n\n    \n[\ndt\n,\n \n[\ncommand\n]],\n\n    \n[\ndt\n,\n \n[\ncommand0\n,\ncommand1\n]],\n\n    \n...\n\n\n]\n\n\n\n\n\nPause, Resume, stop recording\n\n\nrecorder\n.\npause\n();\n\n\nrecorder\n.\nresume\n();\n\n\nrecorder\n.\nstop\n();\n\n\n\n\n\nSeek elapsed time\n\n\nrecorder\n.\nseek\n(\ntime\n);\n   \n// elapsed time in ms\n\n\n\n\n\nState of recorder\n\n\nvar\n \nisRecording\n \n=\n \nrecorder\n.\nisRecording\n;\n\n\nvar\n \nnow\n \n=\n \nrecorder\n.\nnow\n;\n\n\n\n\n\nTime-scale\n\n\nvar\n \ntimeScale\n \n=\n \nrecorder\n.\ntimeScale\n;\n\n\nrecorder\n.\ntimeScale\n \n=\n \n0.5\n;", 
+            "title": "Recoder"
+        }, 
+        {
+            "location": "/tcrprecoderplugin/index.html#introduction", 
+            "text": "Recorder of  T  ime- C  ommand- R  ecorder- P  layer, to store commands with time.   Author: Rex  Member of scene", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/tcrprecoderplugin/index.html#source-code", 
+            "text": "Link", 
+            "title": "Source code"
+        }, 
+        {
+            "location": "/tcrprecoderplugin/index.html#usage", 
+            "text": "", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/tcrprecoderplugin/index.html#create-instance", 
+            "text": "var   recorder   =   new   RecorderPlugin ( scene );", 
+            "title": "Create instance"
+        }, 
+        {
+            "location": "/tcrprecoderplugin/index.html#start-recording", 
+            "text": "recorder . start ();  // recorder.start(startAt);  // start-at time in ms", 
+            "title": "Start recording"
+        }, 
+        {
+            "location": "/tcrprecoderplugin/index.html#push-commands", 
+            "text": "recorder . addCommand ([ fnName ,   param0 ,   param1 ,   ...]);  // recorder.addCommand([command0, command1, ...]);  // recorder.addCommand([fnName, param0, param1, ...], offset);  // time-offset in ms   See also  Run commands", 
+            "title": "Push commands"
+        }, 
+        {
+            "location": "/tcrprecoderplugin/index.html#get-commands", 
+            "text": "var   commands   =   recorder . getCommands ();          // get a shallow copy of commands  // var commands = recorder.getCommands(true); // get reference of commands   Format of return commands:  [ \n     [ dt ,   [ command ]], \n     [ dt ,   [ command0 , command1 ]], \n     ...  ]", 
+            "title": "Get commands"
+        }, 
+        {
+            "location": "/tcrprecoderplugin/index.html#pause-resume-stop-recording", 
+            "text": "recorder . pause ();  recorder . resume ();  recorder . stop ();", 
+            "title": "Pause, Resume, stop recording"
+        }, 
+        {
+            "location": "/tcrprecoderplugin/index.html#seek-elapsed-time", 
+            "text": "recorder . seek ( time );     // elapsed time in ms", 
+            "title": "Seek elapsed time"
+        }, 
+        {
+            "location": "/tcrprecoderplugin/index.html#state-of-recorder", 
+            "text": "var   isRecording   =   recorder . isRecording ;  var   now   =   recorder . now ;", 
+            "title": "State of recorder"
+        }, 
+        {
+            "location": "/tcrprecoderplugin/index.html#time-scale", 
+            "text": "var   timeScale   =   recorder . timeScale ;  recorder . timeScale   =   0.5 ;", 
+            "title": "Time-scale"
+        }, 
+        {
+            "location": "/tcrpplayerplugin/index.html", 
+            "text": "Introduction\n\n\nPlayer of \nT\n ime-\nC\n ommand-\nR\n ecorder-\nP\n layer, to run commands on time.\n\n\n\n\nAuthor: Rex\n\n\nMember of scene\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\nvar\n \nplayer\n \n=\n \nnew\n \nPlayerPlugin\n(\nscene\n,\n \n{\n\n    \n// timeUnit: 0,        // \nms\n|0|\ns\n|\nsec\n|1\n\n    \n// dtMode: 0,          // \nabs\n|\nabsolute\n|0|\ninc\n|\nincrement\n|1\n\n    \n// commands: [],       // [[dt, command], [dt, command], ...]\n\n    \n// scope: undefined\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\ntimeUnit: see \nnext section\n\n\ndtMode: see \nnext section\n\n\ncommands: see \nnext section\n\n\n\n\nLoad commands\n\n\nplayer\n.\nload\n(\ncommands\n,\n \nscope\n,\n \n{\n\n    \n// timeUnit: 0,        // \nms\n|0|\ns\n|\nsec\n|1\n\n    \n// dtMode: 0           // \nabs\n|\nabsolute\n|0|\ninc\n|\nincrement\n|1\n\n\n});\n\n\n\n\n\n\n\nCommands : see also \nRun commands\n\n    \n[\n\n    \n[\ndt\n,\n \ncommand\n],\n\n    \n[\ndt\n,\n \ncommand\n],\n\n    \n...\n\n\n]\n\n\n\n\nFormat of each row :\n    \n[\ndt\n,\n \nfnName\n,\n \nparam0\n,\n \nparam1\n,\n \n...]\n\n\n\n    \n[\ndt\n,\n \n[\nfnName\n,\n \nparam0\n,\n \nparam1\n,\n \n...]]\n\n\n\n    \n[\ndt\n,\n \n[\ncommand0\n,\n \ncommand1\n,\n \n...]]\n\n\n\n\n\n\n\n\ntimeUnit: time-unit of dt\n\n\n'ms'\n, or \n0\n : dt in millisecond\n\n\n's'\n, \n'sec'\n, or 1 : dt in second\n\n\n\n\n\n\ndtMode: mode of counting dt\n\n\n'abs'\n, \n'absolute'\n, or \n0\n : timeout = dt\n\n\n'inc'\n, \n'increment'\n, \n1\n : timeout = dt + previous-timeout\n\n\n\n\n\n\n\n\nStart playing\n\n\nplayer\n.\nstart\n();\n\n\n// player.start(startAt);  // start-at time in ms\n\n\n\n\n\nEvents\n\n\n\n\nComplete\n    \nplayer\n.\non\n(\ncomplete\n,\n \nfunction\n(){});\n\n\n\n\nRun command\n    \nplayer\n.\non\n(\nruncommand\n,\n \nfunction\n(\ncommands\n,\n \nscope\n){});\n\n\n\n\n\n\nPause, Resume, stop playing\n\n\nplayer\n.\npause\n();\n\n\nplayer\n.\nresume\n();\n\n\nplayer\n.\nstop\n();\n\n\n\n\n\nSeek elapsed time\n\n\nplayer\n.\nseek\n(\ntime\n);\n   \n// elapsed time in ms\n\n\n\n\n\nState of player\n\n\nvar\n \nisPlaying\n \n=\n \nplayer\n.\nisPlaying\n;\n\n\nvar\n \nisComplete\n \n=\n \nplayer\n.\nisComplate\n;\n\n\nvar\n \nnow\n \n=\n \nplayer\n.\nnow\n;\n\n\n\n\n\nTime-scale\n\n\nvar\n \ntimeScale\n \n=\n \nplayer\n.\ntimeScale\n;\n\n\nplayer\n.\ntimeScale\n \n=\n \n0.5\n;", 
+            "title": "Player"
+        }, 
+        {
+            "location": "/tcrpplayerplugin/index.html#introduction", 
+            "text": "Player of  T  ime- C  ommand- R  ecorder- P  layer, to run commands on time.   Author: Rex  Member of scene", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/tcrpplayerplugin/index.html#source-code", 
+            "text": "Link", 
+            "title": "Source code"
+        }, 
+        {
+            "location": "/tcrpplayerplugin/index.html#usage", 
+            "text": "", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/tcrpplayerplugin/index.html#create-instance", 
+            "text": "var   player   =   new   PlayerPlugin ( scene ,   { \n     // timeUnit: 0,        //  ms |0| s | sec |1 \n     // dtMode: 0,          //  abs | absolute |0| inc | increment |1 \n     // commands: [],       // [[dt, command], [dt, command], ...] \n     // scope: undefined  });   Properties   timeUnit: see  next section  dtMode: see  next section  commands: see  next section", 
+            "title": "Create instance"
+        }, 
+        {
+            "location": "/tcrpplayerplugin/index.html#load-commands", 
+            "text": "player . load ( commands ,   scope ,   { \n     // timeUnit: 0,        //  ms |0| s | sec |1 \n     // dtMode: 0           //  abs | absolute |0| inc | increment |1  });    Commands : see also  Run commands \n     [ \n     [ dt ,   command ], \n     [ dt ,   command ], \n     ...  ]   Format of each row :\n     [ dt ,   fnName ,   param0 ,   param1 ,   ...]  \n     [ dt ,   [ fnName ,   param0 ,   param1 ,   ...]]  \n     [ dt ,   [ command0 ,   command1 ,   ...]]     timeUnit: time-unit of dt  'ms' , or  0  : dt in millisecond  's' ,  'sec' , or 1 : dt in second    dtMode: mode of counting dt  'abs' ,  'absolute' , or  0  : timeout = dt  'inc' ,  'increment' ,  1  : timeout = dt + previous-timeout", 
+            "title": "Load commands"
+        }, 
+        {
+            "location": "/tcrpplayerplugin/index.html#start-playing", 
+            "text": "player . start ();  // player.start(startAt);  // start-at time in ms", 
+            "title": "Start playing"
+        }, 
+        {
+            "location": "/tcrpplayerplugin/index.html#events", 
+            "text": "Complete\n     player . on ( complete ,   function (){});   Run command\n     player . on ( runcommand ,   function ( commands ,   scope ){});", 
+            "title": "Events"
+        }, 
+        {
+            "location": "/tcrpplayerplugin/index.html#pause-resume-stop-playing", 
+            "text": "player . pause ();  player . resume ();  player . stop ();", 
+            "title": "Pause, Resume, stop playing"
+        }, 
+        {
+            "location": "/tcrpplayerplugin/index.html#seek-elapsed-time", 
+            "text": "player . seek ( time );     // elapsed time in ms", 
+            "title": "Seek elapsed time"
+        }, 
+        {
+            "location": "/tcrpplayerplugin/index.html#state-of-player", 
+            "text": "var   isPlaying   =   player . isPlaying ;  var   isComplete   =   player . isComplate ;  var   now   =   player . now ;", 
+            "title": "State of player"
+        }, 
+        {
+            "location": "/tcrpplayerplugin/index.html#time-scale", 
+            "text": "var   timeScale   =   player . timeScale ;  player . timeScale   =   0.5 ;", 
+            "title": "Time-scale"
         }
     ]
 }
