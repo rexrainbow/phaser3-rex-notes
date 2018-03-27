@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/index.html", 
-            "text": "Phaser\n\n\nPhaser\n is a fun, free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering.\n\n\nList of my plugins\n\n\n\n\nCanvas\n: Drawing on \ncanvas\n.\n\n\nClock\n: A clock to count elapsed time.\n\n\nCSV-to-array\n: Generate array from csv string.\n\n\nDrag\n: Drag game object.\n\n\nDrag-cursor\n: Simulate curosr keys according dragging events.\n\n\nGashapon\n: Pick random item from box.\n\n\nLZ-string\n: Compress string using LZ-based compression algorithm.\n\n\nPage\n: Display text page by page on text object.\n\n\nRun-commands\n: Run commands in array.\n\n\nTCRP.Player\n: Run commands on time.\n\n\nTCRP.Recorder\n: Store commands with time.\n\n\nTyping\n: Typing text on text object.\n\n\nWebfont-loader\n: Load web font by google webfont loader in preload stage.", 
+            "text": "Phaser\n\n\nPhaser\n is a fun, free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering.\n\n\nList of my plugins\n\n\n\n\nCanvas\n: Drawing on \ncanvas\n.\n\n\nClock\n: A clock to count elapsed time.\n\n\nCSV-to-array\n: Generate array from csv string.\n\n\nDrag\n: Drag game object.\n\n\nDrag-cursor\n: Simulate curosr keys according dragging events.\n\n\nGashapon\n: Pick random item from box.\n\n\nLZ-string\n: Compress string using LZ-based compression algorithm.\n\n\nPage\n: Display text page by page on text object.\n\n\nRun-commands\n: Run commands in array.\n\n\nTCRP.Player\n: Run commands on time.\n\n\nTCRP.Recorder\n: Store commands with time.\n\n\nTyping\n: Typing text on text object.\n\n\nWebfont-loader\n: Load web font by google webfont loader in preload stage.\n\n\nXOR\n: Encrypt or decrypt string by XOR algorithm.", 
             "title": "Home"
         }, 
         {
@@ -12,7 +12,7 @@
         }, 
         {
             "location": "/index.html#list-of-my-plugins", 
-            "text": "Canvas : Drawing on  canvas .  Clock : A clock to count elapsed time.  CSV-to-array : Generate array from csv string.  Drag : Drag game object.  Drag-cursor : Simulate curosr keys according dragging events.  Gashapon : Pick random item from box.  LZ-string : Compress string using LZ-based compression algorithm.  Page : Display text page by page on text object.  Run-commands : Run commands in array.  TCRP.Player : Run commands on time.  TCRP.Recorder : Store commands with time.  Typing : Typing text on text object.  Webfont-loader : Load web font by google webfont loader in preload stage.", 
+            "text": "Canvas : Drawing on  canvas .  Clock : A clock to count elapsed time.  CSV-to-array : Generate array from csv string.  Drag : Drag game object.  Drag-cursor : Simulate curosr keys according dragging events.  Gashapon : Pick random item from box.  LZ-string : Compress string using LZ-based compression algorithm.  Page : Display text page by page on text object.  Run-commands : Run commands in array.  TCRP.Player : Run commands on time.  TCRP.Recorder : Store commands with time.  Typing : Typing text on text object.  Webfont-loader : Load web font by google webfont loader in preload stage.  XOR : Encrypt or decrypt string by XOR algorithm.", 
             "title": "List of my plugins"
         }, 
         {
@@ -1099,6 +1099,36 @@
             "location": "/lzstringplugin/index.html#set-encoding", 
             "text": "lzstring . setEncoding ( m );    // 0| none |1| base64 |2| utf16 |3| uri", 
             "title": "Set encoding"
+        }, 
+        {
+            "location": "/xorplugin/index.html", 
+            "text": "Introduction\n\n\nEncrypt or decrypt string by XOR algorithm.\n\n\n\n\nAuthor: Rex\n\n\nMember of scene\n\n\n\n\nSource code\n\n\nEncrypt\n\n\nDecrypt\n\n\nUsage\n\n\nEncrypt\n\n\nvar\n \nencResult\n \n=\n \nXOR\n.\nEncrypt\n(\nsrc\n,\n \npwd\n);\n\n\n\n\n\nDecrypt\n\n\nvar\n \ndecResult\n \n=\n \nXOR\n.\nDecrypt\n(\nencResult\n,\n \npwd\n);", 
+            "title": "XOR"
+        }, 
+        {
+            "location": "/xorplugin/index.html#introduction", 
+            "text": "Encrypt or decrypt string by XOR algorithm.   Author: Rex  Member of scene", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/xorplugin/index.html#source-code", 
+            "text": "Encrypt  Decrypt", 
+            "title": "Source code"
+        }, 
+        {
+            "location": "/xorplugin/index.html#usage", 
+            "text": "", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/xorplugin/index.html#encrypt", 
+            "text": "var   encResult   =   XOR . Encrypt ( src ,   pwd );", 
+            "title": "Encrypt"
+        }, 
+        {
+            "location": "/xorplugin/index.html#decrypt", 
+            "text": "var   decResult   =   XOR . Decrypt ( encResult ,   pwd );", 
+            "title": "Decrypt"
         }, 
         {
             "location": "/gashaponplugin/index.html", 

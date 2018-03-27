@@ -33,6 +33,7 @@ pages:
     - CSV to array: csvtoarray.md
 - String:
     - LZ string: lzstringplugin.md
+    - XOR: xorplugin.md
 - Random:
     - Gashapon: gashaponplugin.md
 - Logic:

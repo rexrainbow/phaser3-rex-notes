@@ -17,3 +17,4 @@
 1. [TCRP.Recorder](tcrpplayerplugin.md): Store commands with time.
 1. [Typing](texttypingplugin.md): Typing text on text object.
 1. [Webfont-loader](webfontloader.md): Load web font by google webfont loader in preload stage.
+1. [XOR](xorplugin.md): Encrypt or decrypt string by XOR algorithm.

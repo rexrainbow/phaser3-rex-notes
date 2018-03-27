@@ -32,7 +32,7 @@
     
     
       
-        <title>Recoder - Notes of Phaser 3</title>
+        <title>XOR - Notes of Phaser 3</title>
       
     
     
@@ -86,7 +86,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Recoder
+                XOR
               </span>
             
           
@@ -582,10 +582,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11" checked>
     
     <label class="md-nav__link" for="nav-11">
       String
@@ -613,11 +615,77 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../xorplugin/index.html" title="XOR" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        XOR
+      </label>
+    
+    <a href="index.html" title="XOR" class="md-nav__link md-nav__link--active">
       XOR
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#encrypt" title="Encrypt" class="md-nav__link">
+    Encrypt
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#decrypt" title="Decrypt" class="md-nav__link">
+    Decrypt
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -666,12 +734,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-13" type="checkbox" id="nav-13" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-13" type="checkbox" id="nav-13">
     
     <label class="md-nav__link" for="nav-13">
       Logic
@@ -699,12 +765,10 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-13-2" type="checkbox" id="nav-13-2" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-13-2" type="checkbox" id="nav-13-2">
     
     <label class="md-nav__link" for="nav-13-2">
       TCRP
@@ -720,119 +784,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="toc">
-        Recoder
-      </label>
-    
-    <a href="index.html" title="Recoder" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../tcrprecoderplugin/index.html" title="Recoder" class="md-nav__link">
       Recoder
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#source-code" title="Source code" class="md-nav__link">
-    Source code
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#start-recording" title="Start recording" class="md-nav__link">
-    Start recording
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#push-commands" title="Push commands" class="md-nav__link">
-    Push commands
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-commands" title="Get commands" class="md-nav__link">
-    Get commands
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pause-resume-stop-recording" title="Pause, Resume, stop recording" class="md-nav__link">
-    Pause, Resume, stop recording
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#seek-elapsed-time" title="Seek elapsed time" class="md-nav__link">
-    Seek elapsed time
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#state-of-recorder" title="State of recorder" class="md-nav__link">
-    State of recorder
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#time-scale" title="Time-scale" class="md-nav__link">
-    Time-scale
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -899,57 +855,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
+  <a href="#encrypt" title="Encrypt" class="md-nav__link">
+    Encrypt
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#start-recording" title="Start recording" class="md-nav__link">
-    Start recording
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#push-commands" title="Push commands" class="md-nav__link">
-    Push commands
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-commands" title="Get commands" class="md-nav__link">
-    Get commands
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pause-resume-stop-recording" title="Pause, Resume, stop recording" class="md-nav__link">
-    Pause, Resume, stop recording
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#seek-elapsed-time" title="Seek elapsed time" class="md-nav__link">
-    Seek elapsed time
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#state-of-recorder" title="State of recorder" class="md-nav__link">
-    State of recorder
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#time-scale" title="Time-scale" class="md-nav__link">
-    Time-scale
+  <a href="#decrypt" title="Decrypt" class="md-nav__link">
+    Decrypt
   </a>
   
 </li>
@@ -974,64 +888,24 @@
               
                 
                 
-                  <h1>Recoder</h1>
+                  <h1>XOR</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Recorder of <strong>T</strong> ime-<strong>C</strong> ommand-<strong>R</strong> ecorder-<strong>P</strong> layer, to store commands with time.</p>
+<p>Encrypt or decrypt string by XOR algorithm.</p>
 <ul>
 <li>Author: Rex</li>
 <li>Member of scene</li>
 </ul>
 <h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/tcrp/RecorderPlugin.js">Link</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/xor/Encrypt.js">Encrypt</a><br />
+<a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/xor/Decrypt.js">Decrypt</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">recorder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">RecorderPlugin</span><span class="p">(</span><span class="nx">scene</span><span class="p">);</span>
+<h3 id="encrypt">Encrypt<a class="headerlink" href="#encrypt" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">encResult</span> <span class="o">=</span> <span class="nx">XOR</span><span class="p">.</span><span class="nx">Encrypt</span><span class="p">(</span><span class="nx">src</span><span class="p">,</span> <span class="nx">pwd</span><span class="p">);</span>
 </pre></div>
 
-<h3 id="start-recording">Start recording<a class="headerlink" href="#start-recording" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">recorder</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
-<span class="c1">// recorder.start(startAt);  // start-at time in ms</span>
-</pre></div>
-
-<h3 id="push-commands">Push commands<a class="headerlink" href="#push-commands" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">recorder</span><span class="p">.</span><span class="nx">addCommand</span><span class="p">([</span><span class="nx">fnName</span><span class="p">,</span> <span class="nx">param0</span><span class="p">,</span> <span class="nx">param1</span><span class="p">,</span> <span class="p">...]);</span>
-<span class="c1">// recorder.addCommand([command0, command1, ...]);</span>
-<span class="c1">// recorder.addCommand([fnName, param0, param1, ...], offset);  // time-offset in ms</span>
-</pre></div>
-
-<p>See also <a href="../runcommands/index.html">Run commands</a></p>
-<h3 id="get-commands">Get commands<a class="headerlink" href="#get-commands" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">commands</span> <span class="o">=</span> <span class="nx">recorder</span><span class="p">.</span><span class="nx">getCommands</span><span class="p">();</span>        <span class="c1">// get a shallow copy of commands</span>
-<span class="c1">// var commands = recorder.getCommands(true); // get reference of commands</span>
-</pre></div>
-
-<p>Format of return commands:</p>
-<div class="codehilite"><pre><span></span><span class="p">[</span>
-    <span class="p">[</span><span class="nx">dt</span><span class="p">,</span> <span class="p">[</span><span class="nx">command</span><span class="p">]],</span>
-    <span class="p">[</span><span class="nx">dt</span><span class="p">,</span> <span class="p">[</span><span class="nx">command0</span><span class="p">,</span><span class="nx">command1</span><span class="p">]],</span>
-    <span class="p">...</span>
-<span class="p">]</span>
-</pre></div>
-
-<h3 id="pause-resume-stop-recording">Pause, Resume, stop recording<a class="headerlink" href="#pause-resume-stop-recording" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">recorder</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
-<span class="nx">recorder</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
-<span class="nx">recorder</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
-</pre></div>
-
-<h3 id="seek-elapsed-time">Seek elapsed time<a class="headerlink" href="#seek-elapsed-time" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">recorder</span><span class="p">.</span><span class="nx">seek</span><span class="p">(</span><span class="nx">time</span><span class="p">);</span>   <span class="c1">// elapsed time in ms</span>
-</pre></div>
-
-<h3 id="state-of-recorder">State of recorder<a class="headerlink" href="#state-of-recorder" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isRecording</span> <span class="o">=</span> <span class="nx">recorder</span><span class="p">.</span><span class="nx">isRecording</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">now</span> <span class="o">=</span> <span class="nx">recorder</span><span class="p">.</span><span class="nx">now</span><span class="p">;</span>
-</pre></div>
-
-<h3 id="time-scale">Time-scale<a class="headerlink" href="#time-scale" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">timeScale</span> <span class="o">=</span> <span class="nx">recorder</span><span class="p">.</span><span class="nx">timeScale</span><span class="p">;</span>
-<span class="nx">recorder</span><span class="p">.</span><span class="nx">timeScale</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">;</span>
+<h3 id="decrypt">Decrypt<a class="headerlink" href="#decrypt" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">decResult</span> <span class="o">=</span> <span class="nx">XOR</span><span class="p">.</span><span class="nx">Decrypt</span><span class="p">(</span><span class="nx">encResult</span><span class="p">,</span> <span class="nx">pwd</span><span class="p">);</span>
 </pre></div>
                 
                   
@@ -1051,7 +925,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../runcommands/index.html" title="Run commands" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../lzstringplugin/index.html" title="LZ string" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -1060,19 +934,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Run commands
+                LZ string
               </span>
             </div>
           </a>
         
         
-          <a href="../tcrpplayerplugin/index.html" title="Player" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../gashaponplugin/index.html" title="Gashapon" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Player
+                Gashapon
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
