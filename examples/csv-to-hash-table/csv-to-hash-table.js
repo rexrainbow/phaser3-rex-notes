@@ -1,6 +1,6 @@
 'use strict'
 
-import CsvToHashTable from './../../plugins/csvtohashtable.js';
+import HashTable from './../../plugins/csvtohashtable-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -15,7 +15,7 @@ class Demo extends Phaser.Scene {
         var csvString = `,a,b
 c,1,2
 d,3,4`;
-        var table = new CsvToHashTable(this);
+        var table = new HashTable(this);
         table.loadCSV(csvString).convert();
         console.log(table.table);
         console.log(table.get('a', 'd'));

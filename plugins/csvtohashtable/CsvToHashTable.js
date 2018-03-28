@@ -10,7 +10,6 @@ const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 
 class CsvToHashTable {
     constructor(parent, config) {
-        this.parent = parent;
         this.resetFromJSON(config);
     }
 
