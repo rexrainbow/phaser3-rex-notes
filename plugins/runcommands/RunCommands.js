@@ -1,15 +1,13 @@
 'use strict'
 
 import Phaser from 'phaser';
+import ArrCopy from './../utils/array/Copy.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 var ARGS = [];  // reuse this array
 var runCommand = function (cmd, scope) {
     var fnName = cmd[0];
-    ARGS.length = cmd.length - 1;
-    for (var i = 0, len = ARGS.length; i < len; i++) {
-        ARGS[i] = cmd[i + 1];
-    }
+    ARGS = ArrCopy(ARGS, cmd, 1);
     var fn = scope[fnName];
     if (fn == null) {
         fn = GetValue(scope, fnName, null);

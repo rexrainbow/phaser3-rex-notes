@@ -4,6 +4,7 @@ import Phaser from 'phaser';
 import EE from 'eventemitter3';
 import ClcokPlugin from './../clock-plugin.js';
 import GetSceneObject from './../utils/system/GetSceneObject.js';
+import ArrCopy from './../utils/array/Copy.js';
 import runCommands from './../../plugins/runcommands.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
@@ -164,11 +165,7 @@ class PlayerPlugin extends EE {
             var item = this.commands[this.index];
             var command = item[1];
             if (typeof (command) === 'string') { // [dt, fnName, param0, param1, ...]
-                CMD.length = item.length - 1;
-                for (var i = 0, len = CMD.length; i < len; i++) {
-                    CMD[i] = item[i + 1];
-                }
-                command = CMD;
+                command = ArrCopy(CMD, item, 1);
             }
             runCommands(command, this.scope);
             this.emit('runcommand', command, this.scope);
