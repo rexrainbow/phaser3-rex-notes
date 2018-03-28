@@ -22,6 +22,8 @@ pages:
 - Canvas:
     - Graphics: graphics.md
     - Canvas: canvas.md
+- Group:
+    - Group: group.md
 - Time:
     - Date: date.md
     - Timer: timer.md

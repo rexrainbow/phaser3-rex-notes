@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/index.html", 
-            "text": "Phaser\n\n\nPhaser\n is a fun, free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering.\n\n\nList of my plugins\n\n\n\n\nCanvas\n: Drawing on \ncanvas\n.\n\n\nClock\n: A clock to count elapsed time.\n\n\nCSV-to-array\n: Generate array from csv string.\n\n\nDrag\n: Drag game object.\n\n\nDrag-cursor\n: Simulate curosr keys according dragging events.\n\n\nGashapon\n: Pick random item from box.\n\n\nLZ-string\n: Compress string using LZ-based compression algorithm.\n\n\nPage\n: Display text page by page on text object.\n\n\nRun-commands\n: Run commands in array.\n\n\nTCRP.Player\n: Run commands on time.\n\n\nTCRP.Recorder\n: Store commands with time.\n\n\nTyping\n: Typing text on text object.\n\n\nWebfont-loader\n: Load web font by google webfont loader in preload stage.\n\n\nXOR\n: Encrypt or decrypt string by XOR algorithm.", 
+            "text": "Phaser\n\n\nPhaser\n is a fun, free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering.\n\n\nList of my plugins\n\n\n\n\nCanvas\n: Drawing on \ncanvas\n.\n\n\nClock\n: A clock to count elapsed time.\n\n\nDrag\n: Drag game object.\n\n\nDrag-cursor\n: Simulate curosr keys according dragging events.\n\n\nGashapon\n: Pick random item from box.\n\n\nLZ-string\n: Compress string using LZ-based compression algorithm.\n\n\nPage\n: Display text page by page on text object.\n\n\nRun-commands\n: Run commands in array.\n\n\nTCRP.Player\n: Run commands on time.\n\n\nTCRP.Recorder\n: Store commands with time.\n\n\nTyping\n: Typing text on text object.\n\n\nWebfont-loader\n: Load web font by google webfont loader in preload stage.\n\n\nXOR\n: Encrypt or decrypt string by XOR algorithm.", 
             "title": "Home"
         }, 
         {
@@ -12,7 +12,7 @@
         }, 
         {
             "location": "/index.html#list-of-my-plugins", 
-            "text": "Canvas : Drawing on  canvas .  Clock : A clock to count elapsed time.  CSV-to-array : Generate array from csv string.  Drag : Drag game object.  Drag-cursor : Simulate curosr keys according dragging events.  Gashapon : Pick random item from box.  LZ-string : Compress string using LZ-based compression algorithm.  Page : Display text page by page on text object.  Run-commands : Run commands in array.  TCRP.Player : Run commands on time.  TCRP.Recorder : Store commands with time.  Typing : Typing text on text object.  Webfont-loader : Load web font by google webfont loader in preload stage.  XOR : Encrypt or decrypt string by XOR algorithm.", 
+            "text": "Canvas : Drawing on  canvas .  Clock : A clock to count elapsed time.  Drag : Drag game object.  Drag-cursor : Simulate curosr keys according dragging events.  Gashapon : Pick random item from box.  LZ-string : Compress string using LZ-based compression algorithm.  Page : Display text page by page on text object.  Run-commands : Run commands in array.  TCRP.Player : Run commands on time.  TCRP.Recorder : Store commands with time.  Typing : Typing text on text object.  Webfont-loader : Load web font by google webfont loader in preload stage.  XOR : Encrypt or decrypt string by XOR algorithm.", 
             "title": "List of my plugins"
         }, 
         {
@@ -789,6 +789,61 @@
             "location": "/canvas/index.html#compare-with-graphics-object", 
             "text": "Drawing method   This canvas object draws stuff on canvas in WEBGL or CANVAS render mode.    Graphics object draws stuff on webgl render pipeline n WEBGL render mode.     Size   This canvas object has size (width, height) and origin.    Graphics object does not have size and origin.", 
             "title": "Compare with Graphics object"
+        }, 
+        {
+            "location": "/group/index.html", 
+            "text": "Introduction\n\n\nContainer of game objects, built-in game object of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nAdd group object\n\n\nvar\n \ngroup\n \n=\n \nscene\n.\nadd\n.\ngroup\n(\nconfig\n);\n\n\n// var group = scene.add.group(gameobjects, config);  // add game objects into group\n\n\n\n\n\nConfiguration\n\n\n{\n\n    \nclassType\n:\n \nPhaser\n.\nGameObjects\n.\nSprite\n,\n\n    \ndefaultKey\n:\n \nnull\n,\n\n    \ndefaultFrame\n:\n \nnull\n,\n\n    \nmaxSize\n:\n \n-\n1\n,\n\n    \nrunChildUpdate\n:\n \nfalse\n    \n// run gameobject.update() if true\n\n\n}\n\n\n\n\n\nAdd game object\n\n\ngroup\n.\nadd\n(\ngameobject\n);\n\n\n// group.add(gameobject, true);  // add this game object to display and update list of scene\n\n\n\n\n\ngroup\n.\naddMultiple\n(\ngameobjects\n);\n   \n// array of game objects\n\n\n// group.addMultiple(gameobjects, true);\n\n\n\n\n\nGame object will only be added once.\n\n\nRemove game object\n\n\ngroup\n.\nremove\n(\ngameobject\n);\n\n\n// group.remove(gameobject, true);  // also remove this game object from display and update list of scene\n\n\n\n\n\nRemove all game objects\n\n\ngroup\n.\nclear\n();\n\n\n// group.clear(true);  // also remove this game object from display and update list of scene\n\n\n\n\n\nGet game objects\n\n\nvar\n \ngameobjects\n \n=\n \ngroup\n.\ngetChildren\n();\n  \n// array of game objects\n\n\n\n\n\n\n\n\n\nAmount of game objects.\n\n\nvar\n \nlen\n \n=\n \ngroup\n.\ngetLength\n();\n\n\n\n\n\n\n\n\n\nGroup is full. Maximun size is set in \nmaxSize\n.\n\n\nvar\n \nisFull\n \n=\n \ngroup\n.\nisFull\n();\n\n\n\n\n\n\n\n\n\nGame object is in group.\n\n\nvar\n \nisInGroup\n \n=\n \ngroup\n.\ncontains\n();\n\n\n\n\n\n\n\n\n\nGroup actions\n\n\ngroup\n.\nplayAnimation\n(\nkey\n,\n \nstartFrame\n);\n\n\ngroup\n.\ntoggleVisible\n();\n\n\ngroup\n.\nsetDepth\n(\nvalue\n,\n \nstep\n);\n\n\n\n\n\nActive/inactive game objects\n\n\nAmount of active/inactive game objects\n\n\nvar\n \nactiveCount\n \n=\n \ngroup\n.\ncountActive\n();\n\n\n// var inactiveCount = group.countActive(false);  // get amount of inactive game objects\n\n\n\n\n\nvar\n \nactiveCount\n \n=\n \ngroup\n.\ngetTotalUsed\n();\n        \n// equal to group.countActive()\n\n\nvar\n \nfreeCount\n \n=\n \ngroup\n.\ngetTotalFree\n();\n          \n// group.maxSize - group.getTotalUsed()\n\n\n\n\n\ngroup\n.\nkill\n(\ngameobject\n);\n         \n// gameobject.setActive(false)\n\n\ngroup\n.\nkillAndHide\n(\ngameobject\n);\n  \n// gameObject.setActive(false).setVisible(false)\n\n\n\n\n\nGet first active/inactive game object, create one if \ncreateIfNull\n is \ntrue\n\n\nvar\n \ngameobject\n \n=\n \ngroup\n.\ngetFirst\n(\nactive\n,\n \ncreateIfNull\n,\n \nx\n,\n \ny\n,\n \nkey\n,\n \nframe\n,\n \nvisible\n);\n  \n// active = true/false\n\n\nvar\n \ngameobject\n \n=\n \ngroup\n.\ngetFirstAlive\n(\ncreateIfNull\n,\n \nx\n,\n \ny\n,\n \nkey\n,\n \nframe\n,\n \nvisible\n);\n \n// equal to group.getFirst(true, ...)\n\n\nvar\n \ngameobject\n \n=\n \ngroup\n.\ngetFirstDead\n(\ncreateIfNull\n,\n \nx\n,\n \ny\n,\n \nkey\n,\n \nframe\n,\n \nvisible\n);\n \n// equal to group.getFirst(false, ...)\n\n\nvar\n \ngameobject\n \n=\n \ngroup\n.\nget\n(\nx\n,\n \ny\n,\n \nkey\n,\n \nframe\n,\n \nvisible\n);\n \n// equal to group.getFirst(false, true, ...)\n\n\n\n\n\nCreate game objects\n\n\nvar\n \ngameobjects\n \n=\n \ngroup\n.\ncreateFromConfig\n({\n\n    \nclassType\n:\n \nthis\n.\nclassType\n,\n\n    \nkey\n:\n \nundefined\n,\n\n    \nframe\n:\n \nnull\n,\n\n    \nvisible\n:\n \ntrue\n,\n\n    \nactive\n:\n \ntrue\n,\n\n    \nrepeat\n:\n \n0\n,\n\n\n    \nsetXY\n:\n \n{\n\n        \nx\n:\n0\n,\n\n        \ny\n:\n0\n,\n\n        \nstepX\n:\n0\n,\n\n        \nstepY\n:\n0\n\n    \n},\n\n    \nsetRotation\n:\n \n{\n\n        \nvalue\n:\n \n0\n,\n\n        \nstep\n:\n\n    \n},\n\n    \nsetScale\n:\n \n{\n\n        \nx\n:\n0\n,\n\n        \ny\n:\n0\n,\n\n        \nstepX\n:\n0\n,\n\n        \nstepY\n:\n0\n\n    \n},\n\n    \nsetAlpha\n:\n \n{\n\n        \nvalue\n:\n \n0\n,\n\n        \nstep\n:\n\n    \n},\n\n    \ngridAlign\n:\n \nfalse\n,\n\n    \nhitArea\n:\n \nnull\n,\n\n    \nhitAreaCallback\n:\n \nnull\n\n\n});", 
+            "title": "Group"
+        }, 
+        {
+            "location": "/group/index.html#introduction", 
+            "text": "Container of game objects, built-in game object of phaser.   Author: Richard Davey", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/group/index.html#usage", 
+            "text": "", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/group/index.html#add-group-object", 
+            "text": "var   group   =   scene . add . group ( config );  // var group = scene.add.group(gameobjects, config);  // add game objects into group", 
+            "title": "Add group object"
+        }, 
+        {
+            "location": "/group/index.html#configuration", 
+            "text": "{ \n     classType :   Phaser . GameObjects . Sprite , \n     defaultKey :   null , \n     defaultFrame :   null , \n     maxSize :   - 1 , \n     runChildUpdate :   false      // run gameobject.update() if true  }", 
+            "title": "Configuration"
+        }, 
+        {
+            "location": "/group/index.html#add-game-object", 
+            "text": "group . add ( gameobject );  // group.add(gameobject, true);  // add this game object to display and update list of scene   group . addMultiple ( gameobjects );     // array of game objects  // group.addMultiple(gameobjects, true);   Game object will only be added once.", 
+            "title": "Add game object"
+        }, 
+        {
+            "location": "/group/index.html#remove-game-object", 
+            "text": "group . remove ( gameobject );  // group.remove(gameobject, true);  // also remove this game object from display and update list of scene   Remove all game objects  group . clear ();  // group.clear(true);  // also remove this game object from display and update list of scene", 
+            "title": "Remove game object"
+        }, 
+        {
+            "location": "/group/index.html#get-game-objects", 
+            "text": "var   gameobjects   =   group . getChildren ();    // array of game objects     Amount of game objects.  var   len   =   group . getLength ();     Group is full. Maximun size is set in  maxSize .  var   isFull   =   group . isFull ();     Game object is in group.  var   isInGroup   =   group . contains ();", 
+            "title": "Get game objects"
+        }, 
+        {
+            "location": "/group/index.html#group-actions", 
+            "text": "group . playAnimation ( key ,   startFrame );  group . toggleVisible ();  group . setDepth ( value ,   step );", 
+            "title": "Group actions"
+        }, 
+        {
+            "location": "/group/index.html#activeinactive-game-objects", 
+            "text": "Amount of active/inactive game objects  var   activeCount   =   group . countActive ();  // var inactiveCount = group.countActive(false);  // get amount of inactive game objects   var   activeCount   =   group . getTotalUsed ();          // equal to group.countActive()  var   freeCount   =   group . getTotalFree ();            // group.maxSize - group.getTotalUsed()   group . kill ( gameobject );           // gameobject.setActive(false)  group . killAndHide ( gameobject );    // gameObject.setActive(false).setVisible(false)   Get first active/inactive game object, create one if  createIfNull  is  true  var   gameobject   =   group . getFirst ( active ,   createIfNull ,   x ,   y ,   key ,   frame ,   visible );    // active = true/false  var   gameobject   =   group . getFirstAlive ( createIfNull ,   x ,   y ,   key ,   frame ,   visible );   // equal to group.getFirst(true, ...)  var   gameobject   =   group . getFirstDead ( createIfNull ,   x ,   y ,   key ,   frame ,   visible );   // equal to group.getFirst(false, ...)  var   gameobject   =   group . get ( x ,   y ,   key ,   frame ,   visible );   // equal to group.getFirst(false, true, ...)", 
+            "title": "Active/inactive game objects"
+        }, 
+        {
+            "location": "/group/index.html#create-game-objects", 
+            "text": "var   gameobjects   =   group . createFromConfig ({ \n     classType :   this . classType , \n     key :   undefined , \n     frame :   null , \n     visible :   true , \n     active :   true , \n     repeat :   0 , \n\n     setXY :   { \n         x : 0 , \n         y : 0 , \n         stepX : 0 , \n         stepY : 0 \n     }, \n     setRotation :   { \n         value :   0 , \n         step : \n     }, \n     setScale :   { \n         x : 0 , \n         y : 0 , \n         stepX : 0 , \n         stepY : 0 \n     }, \n     setAlpha :   { \n         value :   0 , \n         step : \n     }, \n     gridAlign :   false , \n     hitArea :   null , \n     hitAreaCallback :   null  });", 
+            "title": "Create game objects"
         }, 
         {
             "location": "/date/index.html", 

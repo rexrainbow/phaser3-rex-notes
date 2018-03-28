@@ -58,7 +58,7 @@ class Demo extends Phaser.Scene {
         this.bg.visible = true;
         this.canvas.clear();
         this.canvas.generateTexture('canvas');
-        Phaser.Actions.SetVisible(this.imageGroup.getChildren(), false);
+        this.imageGroup.toggleVisible();
     }
 
     drawCanvas(localX, localY) {
@@ -80,7 +80,7 @@ class Demo extends Phaser.Scene {
         this.bg.visible = false;
         this.canvas.generateTexture('canvas');
         this.canvas.clear();
-        Phaser.Actions.SetVisible(this.imageGroup.getChildren(), true);
+        this.imageGroup.toggleVisible();
         this.isDone = true;
     }
 
