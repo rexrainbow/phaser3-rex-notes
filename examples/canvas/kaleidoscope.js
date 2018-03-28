@@ -26,8 +26,7 @@ class Demo extends Phaser.Scene {
         this.input.setDraggable(this.canvas);
 
         var imageNum = 12;
-        this.imageGroup = this.add.group();
-        this.imageGroup.createFromConfig({
+        this.imageGroup = this.add.group({
             classType: Phaser.GameObjects.Image,
             key: 'canvas',
             visible: false,
