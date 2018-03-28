@@ -16,61 +16,6 @@
             "title": "List of my plugins"
         }, 
         {
-            "location": "/eventemitter3/index.html", 
-            "text": "Introduction\n\n\nEvent emitter\n.\n\n\nUsage\n\n\nGet event emitter\n\n\n\n\nScene: \n    \nvar\n \nee\n \n=\n \nscene\n.\nsys\n.\nevents\n;\n\n\n\n\nGame object:\n    \nvar\n \nee\n \n=\n \ngameobject\n;\n\n\n\n\n\n\nAttach listener\n\n\nee\n.\non\n(\neventName\n,\n \ncallback\n,\n \ncallbackScope\n);\n\n\nee\n.\nonce\n(\neventName\n,\n \ncallback\n,\n \ncallbackScope\n);\n  \n// only fire listeners one time\n\n\n\n\n\nAlias\n\n\nee\n.\naddListener\n(\neventName\n,\n \ncallback\n,\n \ncallbackScope\n);\n\n\nee\n.\naddListener\n(\neventName\n,\n \ncallback\n,\n \ncallbackScope\n,\n \ntrue\n);\n  \n// only fire listeners one time\n\n\n\n\n\nFire event\n\n\nee\n.\nemit\n(\neventName\n);\n\n\n\n\n\nRemove listeners\n\n\nee\n.\noff\n(\neventName\n,\n \ncallback\n,\n \ncallbackScope\n);\n\n\nee\n.\noff\n(\neventName\n,\n \ncallback\n,\n \ncallbackScope\n,\n \ntrue\n);\n   \n// only remove one-time listeners\n\n\n\n\n\nAlias\n\n\nee\n.\nremoveListener\n(\neventName\n,\n \ncallback\n,\n \ncallbackScope\n);\n \n\nee\n.\nremoveListener\n(\neventName\n,\n \ncallback\n,\n \ncallbackScope\n,\n \ntrue\n);\n  \n// only remove one-time listeners\n\n\n\n\n\nRemove all listeners\n\n\nee\n.\nremoveAllListeners\n();\n\n\n\n\n\nGet listeners count\n\n\nvar\n \ncount\n \n=\n \nee\n.\nlistenerCount\n(\neventName\n);\n\n\n//var noListener = (ee.listenerCount(eventName) === 0);\n\n\n\n\n\nGet listeners\n\n\nvar\n \nlisteners\n \n=\n \nee\n.\nlisteners\n(\neventName\n);\n\n\n\n\n\nListener\n\n\n{\n\n    \nfn\n:\n \ncallback\n,\n\n    \ncontext\n:\n \ncallbackScope\n,\n\n    \nonce\n:\n \nonce\n\n\n}", 
-            "title": "Event emitter"
-        }, 
-        {
-            "location": "/eventemitter3/index.html#introduction", 
-            "text": "Event emitter .", 
-            "title": "Introduction"
-        }, 
-        {
-            "location": "/eventemitter3/index.html#usage", 
-            "text": "", 
-            "title": "Usage"
-        }, 
-        {
-            "location": "/eventemitter3/index.html#get-event-emitter", 
-            "text": "Scene: \n     var   ee   =   scene . sys . events ;   Game object:\n     var   ee   =   gameobject ;", 
-            "title": "Get event emitter"
-        }, 
-        {
-            "location": "/eventemitter3/index.html#attach-listener", 
-            "text": "ee . on ( eventName ,   callback ,   callbackScope );  ee . once ( eventName ,   callback ,   callbackScope );    // only fire listeners one time   Alias  ee . addListener ( eventName ,   callback ,   callbackScope );  ee . addListener ( eventName ,   callback ,   callbackScope ,   true );    // only fire listeners one time", 
-            "title": "Attach listener"
-        }, 
-        {
-            "location": "/eventemitter3/index.html#fire-event", 
-            "text": "ee . emit ( eventName );", 
-            "title": "Fire event"
-        }, 
-        {
-            "location": "/eventemitter3/index.html#remove-listeners", 
-            "text": "ee . off ( eventName ,   callback ,   callbackScope );  ee . off ( eventName ,   callback ,   callbackScope ,   true );     // only remove one-time listeners   Alias  ee . removeListener ( eventName ,   callback ,   callbackScope );   ee . removeListener ( eventName ,   callback ,   callbackScope ,   true );    // only remove one-time listeners", 
-            "title": "Remove listeners"
-        }, 
-        {
-            "location": "/eventemitter3/index.html#remove-all-listeners", 
-            "text": "ee . removeAllListeners ();", 
-            "title": "Remove all listeners"
-        }, 
-        {
-            "location": "/eventemitter3/index.html#get-listeners-count", 
-            "text": "var   count   =   ee . listenerCount ( eventName );  //var noListener = (ee.listenerCount(eventName) === 0);", 
-            "title": "Get listeners count"
-        }, 
-        {
-            "location": "/eventemitter3/index.html#get-listeners", 
-            "text": "var   listeners   =   ee . listeners ( eventName );", 
-            "title": "Get listeners"
-        }, 
-        {
-            "location": "/eventemitter3/index.html#listener", 
-            "text": "{ \n     fn :   callback , \n     context :   callbackScope , \n     once :   once  }", 
-            "title": "Listener"
-        }, 
-        {
             "location": "/touchevents/index.html", 
             "text": "Introduction\n\n\nBuilt-in touch/mouse events of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nMouse/touch events\n\n\nscene\n.\ninput\n.\non\n(\npointerdown\n,\n \nfunction\n(\npointer\n,\n \ncurrentlyOver\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\npointerup\n,\n \nfunction\n(\npointer\n,\n \ncurrentlyOver\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\npointermove\n,\n \nfunction\n(\npointer\n,\n \ncurrentlyOver\n){\n \n/* ... */\n \n});\n\n\n\nscene\n.\ninput\n.\non\n(\npointerover\n,\n \nfunction\n(\npointer\n,\n \njustOver\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\npointerout\n,\n \nfunction\n(\npointer\n,\n \njustOut\n){\n \n/* ... */\n \n});\n\n\n\n\n\nMouse/touch events of game object\n\n\n\n\nRegister game object\n\n\n\n\ngameObject\n.\nsetInteractive\n();\n       \n// enable\n\n\n// gameObject.setInteractive(false);  // disable\n\n\n\n\n\n\n\nMouse/touch events of a game object\n\n\n\n\ngameObject\n.\non\n(\npointerdown\n,\n \nfunction\n(\npointer\n,\n \nlocalX\n,\n \nlocalY\n,\n \ncamera\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\npointerup\n,\n \nfunction\n(\npointer\n,\n \nlocalX\n,\n \nlocalY\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\npointermove\n,\n \nfunction\n(\npointer\n,\n \nlocalX\n,\n \nlocalY\n){\n \n/* ... */\n \n});\n\n\n\ngameObject\n.\non\n(\npointerover\n,\n \nfunction\n(\npointer\n,\n \nlocalX\n,\n \nlocalY\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\npointerout\n,\n \nfunction\n(\npointer\n){\n \n/* ... */\n \n});\n\n\n\n\n\nscene\n.\ninput\n.\non\n(\ngameobjectdown\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ngameobjectup\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ngameobjectmove\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n){\n \n/* ... */\n \n});\n\n\n\nscene\n.\ninput\n.\non\n(\ngameobjectover\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ngameobjectout\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n){\n \n/* ... */\n \n});\n\n\n\n\n\nDrag events\n\n\n\n\nRegister game object and enable dragging\n\n\n\n\ngameObject\n.\nsetInteractive\n();\n           \n// enable touching interactive\n\n\nscene\n.\ninput\n.\nsetDraggable\n(\ngameObject\n);\n  \n// enable dragging\n\n\n// scene.input.dragDistanceThreshold = 16;\n\n\n// scene.input.dragTimeThreshold = 500;\n\n\n\n// gameObject.setInteractive(false);             // disable\n\n\n// scene.input.setDraggable(gameObject, false);  // disable dragging\n\n\n\n\n\ngameObject\n.\non\n(\ndragstart\n,\n \nfunction\n(\npointer\n,\n \ndragX\n,\n \ndragY\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\ndrag\n,\n \nfunction\n(\npointer\n,\n \ndragX\n,\n \ndragY\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\ndragend\n,\n \nfunction\n(\npointer\n,\n \ndragX\n,\n \ndragY\n,\n \ndropped\n{\n \n/* ... */\n \n});\n\n\n\n\n\nscene\n.\ninput\n.\non\n(\ndragstart\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ndrag\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n,\n \ndragX\n,\n \ndragY\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ndragend\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n,\n \ndropped\n){\n \n/* ... */\n \n});\n\n\n\n\n\nDrop events\n\n\ngameObject\n.\non\n(\ndrop\n,\n \nfunction\n(\npointer\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\n\ngameObject\n.\non\n(\ndragenter\n,\n \nfunction\n(\npointer\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\ndragover\n,\n \nfunction\n(\npointer\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\ndragleave\n,\n \nfunction\n(\npointer\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\n\n\n\nscene\n.\ninput\n.\non\n(\ndrop\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\n\nscene\n.\ninput\n.\non\n(\ndragenter\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ndragover\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ndragleave\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\n\n\n\nProperties of point\n\n\n\n\nPosition of current touching: \npointer.x\n , \npointer.y\n\n\nPosition of touching start: \npointer.downX\n, \npointer.downY\n\n\nPosition of touching end: \npointer.upX\n, \npointer.upY\n\n\nNo botton down: \npointer.noButtonDown()\n\n\nIs left botton down: \npointer.leftButtonDown()\n\n\nIs right botton down: \npointer.rightButtonDown()", 
             "title": "Touch events"
@@ -792,7 +737,7 @@
         }, 
         {
             "location": "/group/index.html", 
-            "text": "Introduction\n\n\nContainer of game objects, built-in game object of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nAdd group object\n\n\nvar\n \ngroup\n \n=\n \nscene\n.\nadd\n.\ngroup\n(\nconfig\n);\n\n\n// var group = scene.add.group(gameobjects, config);  // add game objects into group\n\n\n\n\n\nConfiguration\n\n\n{\n\n    \nclassType\n:\n \nPhaser\n.\nGameObjects\n.\nSprite\n,\n\n    \ndefaultKey\n:\n \nnull\n,\n\n    \ndefaultFrame\n:\n \nnull\n,\n\n    \nmaxSize\n:\n \n-\n1\n,\n\n    \nrunChildUpdate\n:\n \nfalse\n    \n// run gameobject.update() if true\n\n\n}\n\n\n\n\n\nAdd game object\n\n\ngroup\n.\nadd\n(\ngameobject\n);\n\n\n// group.add(gameobject, true);  // add this game object to display and update list of scene\n\n\n\n\n\ngroup\n.\naddMultiple\n(\ngameobjects\n);\n   \n// array of game objects\n\n\n// group.addMultiple(gameobjects, true);\n\n\n\n\n\nGame object will only be added once.\n\n\nRemove game object\n\n\ngroup\n.\nremove\n(\ngameobject\n);\n\n\n// group.remove(gameobject, true);  // also remove this game object from display and update list of scene\n\n\n\n\n\nRemove all game objects\n\n\ngroup\n.\nclear\n();\n\n\n// group.clear(true);  // also remove this game object from display and update list of scene\n\n\n\n\n\nGet game objects\n\n\nvar\n \ngameobjects\n \n=\n \ngroup\n.\ngetChildren\n();\n  \n// array of game objects\n\n\n\n\n\n\n\n\n\nAmount of game objects.\n\n\nvar\n \nlen\n \n=\n \ngroup\n.\ngetLength\n();\n\n\n\n\n\n\n\n\n\nGroup is full. Maximun size is set in \nmaxSize\n.\n\n\nvar\n \nisFull\n \n=\n \ngroup\n.\nisFull\n();\n\n\n\n\n\n\n\n\n\nGame object is in group.\n\n\nvar\n \nisInGroup\n \n=\n \ngroup\n.\ncontains\n();\n\n\n\n\n\n\n\n\n\nGroup actions\n\n\ngroup\n.\nplayAnimation\n(\nkey\n,\n \nstartFrame\n);\n\n\ngroup\n.\ntoggleVisible\n();\n\n\ngroup\n.\nsetDepth\n(\nvalue\n,\n \nstep\n);\n\n\n\n\n\nActive/inactive game objects\n\n\nAmount of active/inactive game objects\n\n\nvar\n \nactiveCount\n \n=\n \ngroup\n.\ncountActive\n();\n\n\n// var inactiveCount = group.countActive(false);  // get amount of inactive game objects\n\n\n\n\n\nvar\n \nactiveCount\n \n=\n \ngroup\n.\ngetTotalUsed\n();\n        \n// equal to group.countActive()\n\n\nvar\n \nfreeCount\n \n=\n \ngroup\n.\ngetTotalFree\n();\n          \n// group.maxSize - group.getTotalUsed()\n\n\n\n\n\ngroup\n.\nkill\n(\ngameobject\n);\n         \n// gameobject.setActive(false)\n\n\ngroup\n.\nkillAndHide\n(\ngameobject\n);\n  \n// gameObject.setActive(false).setVisible(false)\n\n\n\n\n\nGet first active/inactive game object, create one if \ncreateIfNull\n is \ntrue\n\n\nvar\n \ngameobject\n \n=\n \ngroup\n.\ngetFirst\n(\nactive\n,\n \ncreateIfNull\n,\n \nx\n,\n \ny\n,\n \nkey\n,\n \nframe\n,\n \nvisible\n);\n  \n// active = true/false\n\n\nvar\n \ngameobject\n \n=\n \ngroup\n.\ngetFirstAlive\n(\ncreateIfNull\n,\n \nx\n,\n \ny\n,\n \nkey\n,\n \nframe\n,\n \nvisible\n);\n \n// equal to group.getFirst(true, ...)\n\n\nvar\n \ngameobject\n \n=\n \ngroup\n.\ngetFirstDead\n(\ncreateIfNull\n,\n \nx\n,\n \ny\n,\n \nkey\n,\n \nframe\n,\n \nvisible\n);\n \n// equal to group.getFirst(false, ...)\n\n\nvar\n \ngameobject\n \n=\n \ngroup\n.\nget\n(\nx\n,\n \ny\n,\n \nkey\n,\n \nframe\n,\n \nvisible\n);\n \n// equal to group.getFirst(false, true, ...)\n\n\n\n\n\nCreate game objects\n\n\nvar\n \ngameobjects\n \n=\n \ngroup\n.\ncreateFromConfig\n({\n\n    \nclassType\n:\n \nthis\n.\nclassType\n,\n\n    \nkey\n:\n \nundefined\n,\n\n    \nframe\n:\n \nnull\n,\n\n    \nvisible\n:\n \ntrue\n,\n\n    \nactive\n:\n \ntrue\n,\n\n    \nrepeat\n:\n \n0\n,\n\n\n    \nsetXY\n:\n \n{\n\n        \nx\n:\n0\n,\n\n        \ny\n:\n0\n,\n\n        \nstepX\n:\n0\n,\n\n        \nstepY\n:\n0\n\n    \n},\n\n    \nsetRotation\n:\n \n{\n\n        \nvalue\n:\n \n0\n,\n\n        \nstep\n:\n\n    \n},\n\n    \nsetScale\n:\n \n{\n\n        \nx\n:\n0\n,\n\n        \ny\n:\n0\n,\n\n        \nstepX\n:\n0\n,\n\n        \nstepY\n:\n0\n\n    \n},\n\n    \nsetAlpha\n:\n \n{\n\n        \nvalue\n:\n \n0\n,\n\n        \nstep\n:\n\n    \n},\n\n    \ngridAlign\n:\n \nfalse\n,\n\n    \nhitArea\n:\n \nnull\n,\n\n    \nhitAreaCallback\n:\n \nnull\n\n\n});", 
+            "text": "Introduction\n\n\nContainer of game objects, built-in game object of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nAdd group object\n\n\nvar\n \ngroup\n \n=\n \nscene\n.\nadd\n.\ngroup\n(\nconfig\n);\n\n\n// var group = scene.add.group(gameobjects, config);  // add game objects into group\n\n\n\n\n\nConfiguration\n\n\n{\n\n    \nclassType\n:\n \nPhaser\n.\nGameObjects\n.\nSprite\n,\n\n    \ndefaultKey\n:\n \nnull\n,\n\n    \ndefaultFrame\n:\n \nnull\n,\n\n    \nmaxSize\n:\n \n-\n1\n,\n\n    \nrunChildUpdate\n:\n \nfalse\n    \n// run gameobject.update() if true\n\n\n}\n\n\n\n\n\nAdd game object\n\n\ngroup\n.\nadd\n(\ngameobject\n);\n\n\n// group.add(gameobject, true);  // add this game object to display and update list of scene\n\n\n\n\n\ngroup\n.\naddMultiple\n(\ngameobjects\n);\n   \n// array of game objects\n\n\n// group.addMultiple(gameobjects, true);\n\n\n\n\n\nGame object will only be added once.\n\n\nRemove game object\n\n\ngroup\n.\nremove\n(\ngameobject\n);\n\n\n// group.remove(gameobject, true);  // also remove this game object from display and update list of scene\n\n\n\n\n\nRemove all game objects\n\n\ngroup\n.\nclear\n();\n\n\n// group.clear(true);  // also remove this game object from display and update list of scene\n\n\n\n\n\nGet game objects\n\n\nvar\n \ngameobjects\n \n=\n \ngroup\n.\ngetChildren\n();\n  \n// array of game objects\n\n\n\n\n\n\n\n\n\nAmount of game objects.\n\n\nvar\n \nlen\n \n=\n \ngroup\n.\ngetLength\n();\n\n\n\n\n\n\n\n\n\nGroup is full. Maximun size is set in \nmaxSize\n.\n\n\nvar\n \nisFull\n \n=\n \ngroup\n.\nisFull\n();\n\n\n\n\n\n\n\n\n\nGame object is in group.\n\n\nvar\n \nisInGroup\n \n=\n \ngroup\n.\ncontains\n();\n\n\n\n\n\n\n\n\n\nGroup actions\n\n\ngroup\n.\nplayAnimation\n(\nkey\n,\n \nstartFrame\n);\n\n\ngroup\n.\ntoggleVisible\n();\n\n\ngroup\n.\nsetDepth\n(\nvalue\n,\n \nstep\n);\n\n\n\n\n\nActive/inactive game objects\n\n\nAmount of active/inactive game objects\n\n\nvar\n \nactiveCount\n \n=\n \ngroup\n.\ncountActive\n();\n\n\n// var inactiveCount = group.countActive(false);  // get amount of inactive game objects\n\n\n\n\n\nvar\n \nactiveCount\n \n=\n \ngroup\n.\ngetTotalUsed\n();\n        \n// equal to group.countActive()\n\n\nvar\n \nfreeCount\n \n=\n \ngroup\n.\ngetTotalFree\n();\n          \n// group.maxSize - group.getTotalUsed()\n\n\n\n\n\ngroup\n.\nkill\n(\ngameobject\n);\n         \n// gameobject.setActive(false)\n\n\ngroup\n.\nkillAndHide\n(\ngameobject\n);\n  \n// gameObject.setActive(false).setVisible(false)\n\n\n\n\n\nGet first active/inactive game object, create one if \ncreateIfNull\n is \ntrue\n\n\nvar\n \ngameobject\n \n=\n \ngroup\n.\ngetFirst\n(\nactive\n,\n \ncreateIfNull\n,\n \nx\n,\n \ny\n,\n \nkey\n,\n \nframe\n,\n \nvisible\n);\n  \n// active = true/false\n\n\nvar\n \ngameobject\n \n=\n \ngroup\n.\ngetFirstAlive\n(\ncreateIfNull\n,\n \nx\n,\n \ny\n,\n \nkey\n,\n \nframe\n,\n \nvisible\n);\n \n// equal to group.getFirst(true, ...)\n\n\nvar\n \ngameobject\n \n=\n \ngroup\n.\ngetFirstDead\n(\ncreateIfNull\n,\n \nx\n,\n \ny\n,\n \nkey\n,\n \nframe\n,\n \nvisible\n);\n \n// equal to group.getFirst(false, ...)\n\n\nvar\n \ngameobject\n \n=\n \ngroup\n.\nget\n(\nx\n,\n \ny\n,\n \nkey\n,\n \nframe\n,\n \nvisible\n);\n \n// equal to group.getFirst(false, true, ...)\n\n\n\n\n\nCreate game objects\n\n\nvar\n \ngameobjects\n \n=\n \ngroup\n.\ncreateFromConfig\n(\nconfig\n);\n\n\nvar\n \ngameobjects\n \n=\n \ngroup\n.\ncreateMultiple\n(\nconfig\n);\n    \n// config in array\n\n\n\n\n\nConfiguration\n\n\n{\n\n    \nclassType\n:\n \nthis\n.\nclassType\n,\n\n    \nkey\n:\n \nundefined\n,\n             \n// required\n\n    \nframe\n:\n \nnull\n,\n\n    \nvisible\n:\n \ntrue\n,\n\n    \nactive\n:\n \ntrue\n,\n\n    \nrepeat\n:\n \n0\n,\n                  \n// create (1 + repeat) game objects\n\n\n    \nsetXY\n:\n \n{\n\n        \nx\n:\n0\n,\n\n        \ny\n:\n0\n,\n\n        \nstepX\n:\n0\n,\n\n        \nstepY\n:\n0\n\n    \n},\n\n    \n// Actions.SetXY(gameobjects, x, y, stepX, stepY)\n\n\n    \nsetRotation\n:\n \n{\n\n        \nvalue\n:\n \n0\n,\n\n        \nstep\n:\n\n    \n},\n\n    \n// Actions.SetRotation(gameobjects, value, step)\n\n\n    \nsetScale\n:\n \n{\n\n        \nx\n:\n0\n,\n\n        \ny\n:\n0\n,\n\n        \nstepX\n:\n0\n,\n\n        \nstepY\n:\n0\n\n    \n},\n\n    \n// Actions.SetScale(gameobjects, x, y, stepX, stepY)\n\n\n    \nsetAlpha\n:\n \n{\n\n        \nvalue\n:\n \n0\n,\n\n        \nstep\n:\n\n    \n},\n\n    \n// Actions.SetAlpha(gameobjects, value, step)\n\n\n    \nhitArea\n:\n \nnull\n,\n\n    \nhitAreaCallback\n:\n \nnull\n,\n\n    \n// Actions.SetHitArea(gameobjects, hitArea, hitAreaCallback);\n\n\n    \ngridAlign\n:\n \nfalse\n\n    \n// {\n\n    \n//     width: -1,\n\n    \n//     height: -1,\n\n    \n//     cellWidth: 1,\n\n    \n//     cellHeight: 1,\n\n    \n//     position: Phaser.Display.Align.TOP_LEFT,\n\n    \n//     x: 0,\n\n    \n//     y: 0\n\n    \n// }\n\n\n}", 
             "title": "Group"
         }, 
         {
@@ -842,8 +787,13 @@
         }, 
         {
             "location": "/group/index.html#create-game-objects", 
-            "text": "var   gameobjects   =   group . createFromConfig ({ \n     classType :   this . classType , \n     key :   undefined , \n     frame :   null , \n     visible :   true , \n     active :   true , \n     repeat :   0 , \n\n     setXY :   { \n         x : 0 , \n         y : 0 , \n         stepX : 0 , \n         stepY : 0 \n     }, \n     setRotation :   { \n         value :   0 , \n         step : \n     }, \n     setScale :   { \n         x : 0 , \n         y : 0 , \n         stepX : 0 , \n         stepY : 0 \n     }, \n     setAlpha :   { \n         value :   0 , \n         step : \n     }, \n     gridAlign :   false , \n     hitArea :   null , \n     hitAreaCallback :   null  });", 
+            "text": "var   gameobjects   =   group . createFromConfig ( config );  var   gameobjects   =   group . createMultiple ( config );      // config in array", 
             "title": "Create game objects"
+        }, 
+        {
+            "location": "/group/index.html#configuration_1", 
+            "text": "{ \n     classType :   this . classType , \n     key :   undefined ,               // required \n     frame :   null , \n     visible :   true , \n     active :   true , \n     repeat :   0 ,                    // create (1 + repeat) game objects \n\n     setXY :   { \n         x : 0 , \n         y : 0 , \n         stepX : 0 , \n         stepY : 0 \n     }, \n     // Actions.SetXY(gameobjects, x, y, stepX, stepY) \n\n     setRotation :   { \n         value :   0 , \n         step : \n     }, \n     // Actions.SetRotation(gameobjects, value, step) \n\n     setScale :   { \n         x : 0 , \n         y : 0 , \n         stepX : 0 , \n         stepY : 0 \n     }, \n     // Actions.SetScale(gameobjects, x, y, stepX, stepY) \n\n     setAlpha :   { \n         value :   0 , \n         step : \n     }, \n     // Actions.SetAlpha(gameobjects, value, step) \n\n     hitArea :   null , \n     hitAreaCallback :   null , \n     // Actions.SetHitArea(gameobjects, hitArea, hitAreaCallback); \n\n     gridAlign :   false \n     // { \n     //     width: -1, \n     //     height: -1, \n     //     cellWidth: 1, \n     //     cellHeight: 1, \n     //     position: Phaser.Display.Align.TOP_LEFT, \n     //     x: 0, \n     //     y: 0 \n     // }  }", 
+            "title": "Configuration"
         }, 
         {
             "location": "/date/index.html", 
@@ -1116,214 +1066,59 @@
             "title": "Generate array"
         }, 
         {
-            "location": "/format/index.html", 
-            "text": "Introduction\n\n\nFormat string with variables.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nReplace \n%x\n from an array. \nx\n starts from \n1\n.\n\n\n// const Format = Phaser.Utils.String.Format;\n\n\nvar\n \ntemplate\n \n=\n \nhello, %1\n;\n\n\nvar\n \nview\n \n=\n \n[\nrex\n];\n\n\nvar\n \nresult\n \n=\n \nFormat\n(\ntemplate\n,\n \nview\n);", 
-            "title": "Format"
+            "location": "/eventemitter3/index.html", 
+            "text": "Introduction\n\n\nEvent emitter\n.\n\n\nUsage\n\n\nGet event emitter\n\n\n\n\nScene: \n    \nvar\n \nee\n \n=\n \nscene\n.\nsys\n.\nevents\n;\n\n\n\n\nGame object:\n    \nvar\n \nee\n \n=\n \ngameobject\n;\n\n\n\n\n\n\nAttach listener\n\n\nee\n.\non\n(\neventName\n,\n \ncallback\n,\n \ncallbackScope\n);\n\n\nee\n.\nonce\n(\neventName\n,\n \ncallback\n,\n \ncallbackScope\n);\n  \n// only fire listeners one time\n\n\n\n\n\nAlias\n\n\nee\n.\naddListener\n(\neventName\n,\n \ncallback\n,\n \ncallbackScope\n);\n\n\nee\n.\naddListener\n(\neventName\n,\n \ncallback\n,\n \ncallbackScope\n,\n \ntrue\n);\n  \n// only fire listeners one time\n\n\n\n\n\nFire event\n\n\nee\n.\nemit\n(\neventName\n);\n\n\n\n\n\nRemove listeners\n\n\nee\n.\noff\n(\neventName\n,\n \ncallback\n,\n \ncallbackScope\n);\n\n\nee\n.\noff\n(\neventName\n,\n \ncallback\n,\n \ncallbackScope\n,\n \ntrue\n);\n   \n// only remove one-time listeners\n\n\n\n\n\nAlias\n\n\nee\n.\nremoveListener\n(\neventName\n,\n \ncallback\n,\n \ncallbackScope\n);\n \n\nee\n.\nremoveListener\n(\neventName\n,\n \ncallback\n,\n \ncallbackScope\n,\n \ntrue\n);\n  \n// only remove one-time listeners\n\n\n\n\n\nRemove all listeners\n\n\nee\n.\nremoveAllListeners\n();\n\n\n\n\n\nGet listeners count\n\n\nvar\n \ncount\n \n=\n \nee\n.\nlistenerCount\n(\neventName\n);\n\n\n//var noListener = (ee.listenerCount(eventName) === 0);\n\n\n\n\n\nGet listeners\n\n\nvar\n \nlisteners\n \n=\n \nee\n.\nlisteners\n(\neventName\n);\n\n\n\n\n\nListener\n\n\n{\n\n    \nfn\n:\n \ncallback\n,\n\n    \ncontext\n:\n \ncallbackScope\n,\n\n    \nonce\n:\n \nonce\n\n\n}", 
+            "title": "Event emitter"
         }, 
         {
-            "location": "/format/index.html#introduction", 
-            "text": "Format string with variables.   Author: Richard Davey", 
+            "location": "/eventemitter3/index.html#introduction", 
+            "text": "Event emitter .", 
             "title": "Introduction"
         }, 
         {
-            "location": "/format/index.html#usage", 
-            "text": "Replace  %x  from an array.  x  starts from  1 .  // const Format = Phaser.Utils.String.Format;  var   template   =   hello, %1 ;  var   view   =   [ rex ];  var   result   =   Format ( template ,   view );", 
-            "title": "Usage"
-        }, 
-        {
-            "location": "/mustache/index.html", 
-            "text": "Introduction\n\n\nFormat string with variables.\n\n\nReference\n\n\nUsage\n\n\nvar\n \ntemplate\n \n=\n \nhello, {{name}}\n;\n\n\nvar\n \nview\n \n=\n \n{\n\n    \nname\n:\n \nrex\n\n\n};\n\n\nvar\n \nresult\n \n=\n \nMustache\n.\nrender\n(\ntemplate\n,\n \nview\n);", 
-            "title": "Mustache"
-        }, 
-        {
-            "location": "/mustache/index.html#introduction", 
-            "text": "Format string with variables.  Reference", 
-            "title": "Introduction"
-        }, 
-        {
-            "location": "/mustache/index.html#usage", 
-            "text": "var   template   =   hello, {{name}} ;  var   view   =   { \n     name :   rex  };  var   result   =   Mustache . render ( template ,   view );", 
-            "title": "Usage"
-        }, 
-        {
-            "location": "/lzstringplugin/index.html", 
-            "text": "Introduction\n\n\nCompress string using LZ-based compression algorithm. \nReference\n\n\n\n\nAuthor: Rex\n\n\nMember of scene\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\nvar\n \nlzstring\n \n=\n \nnew\n \nLZStringPlugin\n(\nscene\n,\n \n{\n\n    \n//encoding: 0,    // 0|\nnone\n|1|\nbase64\n|2|\nutf16\n|3|\nuri\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\nencoding : \n\n\n'none'\n, or \n0\n : no encoding.\n\n\n'base64'\n, or \n1\n : base64 encoding.\n\n\n'utf16'\n, or \n2\n : UTF16 encoding.\n\n\n'uri'\n, or \n3\n : URI encoding.\n\n\n\n\n\n\n\n\nCompression\n\n\nvar\n \ncompressionResult\n \n=\n \nlzstring\n.\ncompress\n(\nsrc\n);\n\n\n\n\n\nDecompression\n\n\nvar\n \ndecompressionResult\n \n=\n \nlzstring\n.\ndecompress\n(\ncompressionResult\n);\n\n\n\n\n\nSet encoding\n\n\nlzstring\n.\nsetEncoding\n(\nm\n);\n  \n// 0|\nnone\n|1|\nbase64\n|2|\nutf16\n|3|\nuri", 
-            "title": "LZ string"
-        }, 
-        {
-            "location": "/lzstringplugin/index.html#introduction", 
-            "text": "Compress string using LZ-based compression algorithm.  Reference   Author: Rex  Member of scene", 
-            "title": "Introduction"
-        }, 
-        {
-            "location": "/lzstringplugin/index.html#source-code", 
-            "text": "Link", 
-            "title": "Source code"
-        }, 
-        {
-            "location": "/lzstringplugin/index.html#usage", 
+            "location": "/eventemitter3/index.html#usage", 
             "text": "", 
             "title": "Usage"
         }, 
         {
-            "location": "/lzstringplugin/index.html#create-instance", 
-            "text": "var   lzstring   =   new   LZStringPlugin ( scene ,   { \n     //encoding: 0,    // 0| none |1| base64 |2| utf16 |3| uri  });   Properties   encoding :   'none' , or  0  : no encoding.  'base64' , or  1  : base64 encoding.  'utf16' , or  2  : UTF16 encoding.  'uri' , or  3  : URI encoding.", 
-            "title": "Create instance"
+            "location": "/eventemitter3/index.html#get-event-emitter", 
+            "text": "Scene: \n     var   ee   =   scene . sys . events ;   Game object:\n     var   ee   =   gameobject ;", 
+            "title": "Get event emitter"
         }, 
         {
-            "location": "/lzstringplugin/index.html#compression", 
-            "text": "var   compressionResult   =   lzstring . compress ( src );", 
-            "title": "Compression"
+            "location": "/eventemitter3/index.html#attach-listener", 
+            "text": "ee . on ( eventName ,   callback ,   callbackScope );  ee . once ( eventName ,   callback ,   callbackScope );    // only fire listeners one time   Alias  ee . addListener ( eventName ,   callback ,   callbackScope );  ee . addListener ( eventName ,   callback ,   callbackScope ,   true );    // only fire listeners one time", 
+            "title": "Attach listener"
         }, 
         {
-            "location": "/lzstringplugin/index.html#decompression", 
-            "text": "var   decompressionResult   =   lzstring . decompress ( compressionResult );", 
-            "title": "Decompression"
+            "location": "/eventemitter3/index.html#fire-event", 
+            "text": "ee . emit ( eventName );", 
+            "title": "Fire event"
         }, 
         {
-            "location": "/lzstringplugin/index.html#set-encoding", 
-            "text": "lzstring . setEncoding ( m );    // 0| none |1| base64 |2| utf16 |3| uri", 
-            "title": "Set encoding"
+            "location": "/eventemitter3/index.html#remove-listeners", 
+            "text": "ee . off ( eventName ,   callback ,   callbackScope );  ee . off ( eventName ,   callback ,   callbackScope ,   true );     // only remove one-time listeners   Alias  ee . removeListener ( eventName ,   callback ,   callbackScope );   ee . removeListener ( eventName ,   callback ,   callbackScope ,   true );    // only remove one-time listeners", 
+            "title": "Remove listeners"
         }, 
         {
-            "location": "/xorplugin/index.html", 
-            "text": "Introduction\n\n\nEncrypt or decrypt string by XOR algorithm.\n\n\n\n\nAuthor: Rex\n\n\nMember of scene\n\n\n\n\nSource code\n\n\nEncrypt\n\n\nDecrypt\n\n\nUsage\n\n\nEncrypt\n\n\nvar\n \nencResult\n \n=\n \nXOR\n.\nEncrypt\n(\nsrc\n,\n \npwd\n);\n\n\n\n\n\nDecrypt\n\n\nvar\n \ndecResult\n \n=\n \nXOR\n.\nDecrypt\n(\nencResult\n,\n \npwd\n);", 
-            "title": "XOR"
+            "location": "/eventemitter3/index.html#remove-all-listeners", 
+            "text": "ee . removeAllListeners ();", 
+            "title": "Remove all listeners"
         }, 
         {
-            "location": "/xorplugin/index.html#introduction", 
-            "text": "Encrypt or decrypt string by XOR algorithm.   Author: Rex  Member of scene", 
-            "title": "Introduction"
+            "location": "/eventemitter3/index.html#get-listeners-count", 
+            "text": "var   count   =   ee . listenerCount ( eventName );  //var noListener = (ee.listenerCount(eventName) === 0);", 
+            "title": "Get listeners count"
         }, 
         {
-            "location": "/xorplugin/index.html#source-code", 
-            "text": "Encrypt  Decrypt", 
-            "title": "Source code"
+            "location": "/eventemitter3/index.html#get-listeners", 
+            "text": "var   listeners   =   ee . listeners ( eventName );", 
+            "title": "Get listeners"
         }, 
         {
-            "location": "/xorplugin/index.html#usage", 
-            "text": "", 
-            "title": "Usage"
-        }, 
-        {
-            "location": "/xorplugin/index.html#encrypt", 
-            "text": "var   encResult   =   XOR . Encrypt ( src ,   pwd );", 
-            "title": "Encrypt"
-        }, 
-        {
-            "location": "/xorplugin/index.html#decrypt", 
-            "text": "var   decResult   =   XOR . Decrypt ( encResult ,   pwd );", 
-            "title": "Decrypt"
-        }, 
-        {
-            "location": "/gashaponplugin/index.html", 
-            "text": "Introduction\n\n\nPick random item from box.\n\n\n\n\nAuthor: Rex\n\n\nMember of scene, or game object\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\nvar\n \ngashapon\n \n=\n \nnew\n \nGashaponPlugin\n(\nscene\n,\n \n{\n\n    \nmode\n:\n \nshuffle\n,\n  \n// 0|\nshuffle\n|1|\nrandom\n\n    \nitems\n:\n \n{\n  \n// name:count\n\n        \na\n:\n1\n,\n \n        \nb\n:\n2\n,\n \n        \nc\n:\n3\n \n    \n},\n\n    \nreload\n:\n \ntrue\n,\n     \n// true|false\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\nmode : \n\n\n'shuffle'\n, or \n0\n : pick item from box without put it back.\n\n\n'random'\n, or \n1\n : pick item from box then put it back.\n\n\n\n\n\n\nreload : set \ntrue\n to reload items when box is empty for \nshuffle\n mode.\n\n\nitems : initial items in box\n\n\n\n\nPick item\n\n\nPick a random item\n\n\nvar\n \nitem\n \n=\n \ngashapon\n.\nnext\n();\n\n\n\n\n\n\n\nreturn \nnull\n if pick nothing\n\n\n\n\nPick specific item\n\n\nvar\n \nitem\n \n=\n \ngashapon\n.\nnext\n(\na\n);\n\n\n\n\n\n\n\nreturn \nnull\n if pick nothing\n\n\n\n\nLast picked item\n\n\nvar\n \nitem\n \n=\n \ngashapon\n.\nresult\n;\n\n\n\n\n\nSet item\n\n\nSet item\n\n\ngashapon\n.\nsetItem\n(\na\n,\n \n1\n);\n\n\n// gashapon.setItem(\na\n, 1).setItem(\nb\n, 2).setItem(\nc\n, 3);\n\n\n\n\n\nAdd item\n\n\ngashapon\n.\naddItem\n(\na\n,\n1\n);\n\n\n\n\n\nRemove item\n\n\nRemove item\n\n\ngashapon\n.\nremoveItem\n(\na\n);\n\n\n// gashapon.removeItem(\nb\n).gashapon.removeItem(\nc\n);\n\n\n\n\n\nRemove all items\n\n\ngashapon\n.\nremoveAllItems\n();\n\n\n\n\n\nCurrent status\n\n\nGet current status\n\n\nvar\n \nstatus\n \n=\n \ngashapon\n.\ntoJSON\n();\n\n\n\n\n\nClone object\n\n\nvar\n \nstatus\n \n=\n \ngashapon\n.\ntoJSON\n();\n\n\nvar\n \ngashapon2\n \n=\n \nnew\n \nGashapon\n(\nstatus\n);\n\n\n\n\n\nOverwrite current status\n\n\nvar\n \nstatus\n \n=\n \ngashapon\n.\ntoJSON\n();\n\n\n// gashapon.next()...\n\n\ngashapon\n.\nresetFromJSON\n(\nstatus\n);\n\n\n\n\n\nGet items\n\n\nFor each item\n\n\ngashapon\n.\neachItem\n(\nfunction\n(\nname\n,\n \ncount\n){\n\n    \nconsole\n.\nlog\n(\nname\n \n+\n \n: \n \n+\n \ncount\n);\n\n\n});\n\n\n\n\n\nGet items\n\n\nvar\n \nitems\n \n=\n \ngashapon\n.\ngetItems\n();", 
-            "title": "Gashapon"
-        }, 
-        {
-            "location": "/gashaponplugin/index.html#introduction", 
-            "text": "Pick random item from box.   Author: Rex  Member of scene, or game object", 
-            "title": "Introduction"
-        }, 
-        {
-            "location": "/gashaponplugin/index.html#source-code", 
-            "text": "Link", 
-            "title": "Source code"
-        }, 
-        {
-            "location": "/gashaponplugin/index.html#usage", 
-            "text": "", 
-            "title": "Usage"
-        }, 
-        {
-            "location": "/gashaponplugin/index.html#create-instance", 
-            "text": "var   gashapon   =   new   GashaponPlugin ( scene ,   { \n     mode :   shuffle ,    // 0| shuffle |1| random \n     items :   {    // name:count \n         a : 1 ,  \n         b : 2 ,  \n         c : 3  \n     }, \n     reload :   true ,       // true|false  });   Properties   mode :   'shuffle' , or  0  : pick item from box without put it back.  'random' , or  1  : pick item from box then put it back.    reload : set  true  to reload items when box is empty for  shuffle  mode.  items : initial items in box", 
-            "title": "Create instance"
-        }, 
-        {
-            "location": "/gashaponplugin/index.html#pick-item", 
-            "text": "", 
-            "title": "Pick item"
-        }, 
-        {
-            "location": "/gashaponplugin/index.html#pick-a-random-item", 
-            "text": "var   item   =   gashapon . next ();    return  null  if pick nothing", 
-            "title": "Pick a random item"
-        }, 
-        {
-            "location": "/gashaponplugin/index.html#pick-specific-item", 
-            "text": "var   item   =   gashapon . next ( a );    return  null  if pick nothing", 
-            "title": "Pick specific item"
-        }, 
-        {
-            "location": "/gashaponplugin/index.html#last-picked-item", 
-            "text": "var   item   =   gashapon . result ;", 
-            "title": "Last picked item"
-        }, 
-        {
-            "location": "/gashaponplugin/index.html#set-item", 
-            "text": "", 
-            "title": "Set item"
-        }, 
-        {
-            "location": "/gashaponplugin/index.html#set-item_1", 
-            "text": "gashapon . setItem ( a ,   1 );  // gashapon.setItem( a , 1).setItem( b , 2).setItem( c , 3);", 
-            "title": "Set item"
-        }, 
-        {
-            "location": "/gashaponplugin/index.html#add-item", 
-            "text": "gashapon . addItem ( a , 1 );", 
-            "title": "Add item"
-        }, 
-        {
-            "location": "/gashaponplugin/index.html#remove-item", 
-            "text": "", 
-            "title": "Remove item"
-        }, 
-        {
-            "location": "/gashaponplugin/index.html#remove-item_1", 
-            "text": "gashapon . removeItem ( a );  // gashapon.removeItem( b ).gashapon.removeItem( c );", 
-            "title": "Remove item"
-        }, 
-        {
-            "location": "/gashaponplugin/index.html#remove-all-items", 
-            "text": "gashapon . removeAllItems ();", 
-            "title": "Remove all items"
-        }, 
-        {
-            "location": "/gashaponplugin/index.html#current-status", 
-            "text": "", 
-            "title": "Current status"
-        }, 
-        {
-            "location": "/gashaponplugin/index.html#get-current-status", 
-            "text": "var   status   =   gashapon . toJSON ();", 
-            "title": "Get current status"
-        }, 
-        {
-            "location": "/gashaponplugin/index.html#clone-object", 
-            "text": "var   status   =   gashapon . toJSON ();  var   gashapon2   =   new   Gashapon ( status );", 
-            "title": "Clone object"
-        }, 
-        {
-            "location": "/gashaponplugin/index.html#overwrite-current-status", 
-            "text": "var   status   =   gashapon . toJSON ();  // gashapon.next()...  gashapon . resetFromJSON ( status );", 
-            "title": "Overwrite current status"
-        }, 
-        {
-            "location": "/gashaponplugin/index.html#get-items", 
-            "text": "", 
-            "title": "Get items"
-        }, 
-        {
-            "location": "/gashaponplugin/index.html#for-each-item", 
-            "text": "gashapon . eachItem ( function ( name ,   count ){ \n     console . log ( name   +   :    +   count );  });", 
-            "title": "For each item"
-        }, 
-        {
-            "location": "/gashaponplugin/index.html#get-items_1", 
-            "text": "var   items   =   gashapon . getItems ();", 
-            "title": "Get items"
+            "location": "/eventemitter3/index.html#listener", 
+            "text": "{ \n     fn :   callback , \n     context :   callbackScope , \n     once :   once  }", 
+            "title": "Listener"
         }, 
         {
             "location": "/runcommands/index.html", 
@@ -1469,6 +1264,216 @@
             "location": "/tcrpplayerplugin/index.html#time-scale", 
             "text": "var   timeScale   =   player . timeScale ;  player . timeScale   =   0.5 ;", 
             "title": "Time-scale"
+        }, 
+        {
+            "location": "/gashaponplugin/index.html", 
+            "text": "Introduction\n\n\nPick random item from box.\n\n\n\n\nAuthor: Rex\n\n\nMember of scene, or game object\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\nvar\n \ngashapon\n \n=\n \nnew\n \nGashaponPlugin\n(\nscene\n,\n \n{\n\n    \nmode\n:\n \nshuffle\n,\n  \n// 0|\nshuffle\n|1|\nrandom\n\n    \nitems\n:\n \n{\n  \n// name:count\n\n        \na\n:\n1\n,\n \n        \nb\n:\n2\n,\n \n        \nc\n:\n3\n \n    \n},\n\n    \nreload\n:\n \ntrue\n,\n     \n// true|false\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\nmode : \n\n\n'shuffle'\n, or \n0\n : pick item from box without put it back.\n\n\n'random'\n, or \n1\n : pick item from box then put it back.\n\n\n\n\n\n\nreload : set \ntrue\n to reload items when box is empty for \nshuffle\n mode.\n\n\nitems : initial items in box\n\n\n\n\nPick item\n\n\nPick a random item\n\n\nvar\n \nitem\n \n=\n \ngashapon\n.\nnext\n();\n\n\n\n\n\n\n\nreturn \nnull\n if pick nothing\n\n\n\n\nPick specific item\n\n\nvar\n \nitem\n \n=\n \ngashapon\n.\nnext\n(\na\n);\n\n\n\n\n\n\n\nreturn \nnull\n if pick nothing\n\n\n\n\nLast picked item\n\n\nvar\n \nitem\n \n=\n \ngashapon\n.\nresult\n;\n\n\n\n\n\nSet item\n\n\nSet item\n\n\ngashapon\n.\nsetItem\n(\na\n,\n \n1\n);\n\n\n// gashapon.setItem(\na\n, 1).setItem(\nb\n, 2).setItem(\nc\n, 3);\n\n\n\n\n\nAdd item\n\n\ngashapon\n.\naddItem\n(\na\n,\n1\n);\n\n\n\n\n\nRemove item\n\n\nRemove item\n\n\ngashapon\n.\nremoveItem\n(\na\n);\n\n\n// gashapon.removeItem(\nb\n).gashapon.removeItem(\nc\n);\n\n\n\n\n\nRemove all items\n\n\ngashapon\n.\nremoveAllItems\n();\n\n\n\n\n\nCurrent status\n\n\nGet current status\n\n\nvar\n \nstatus\n \n=\n \ngashapon\n.\ntoJSON\n();\n\n\n\n\n\nClone object\n\n\nvar\n \nstatus\n \n=\n \ngashapon\n.\ntoJSON\n();\n\n\nvar\n \ngashapon2\n \n=\n \nnew\n \nGashapon\n(\nstatus\n);\n\n\n\n\n\nOverwrite current status\n\n\nvar\n \nstatus\n \n=\n \ngashapon\n.\ntoJSON\n();\n\n\n// gashapon.next()...\n\n\ngashapon\n.\nresetFromJSON\n(\nstatus\n);\n\n\n\n\n\nGet items\n\n\nFor each item\n\n\ngashapon\n.\neachItem\n(\nfunction\n(\nname\n,\n \ncount\n){\n\n    \nconsole\n.\nlog\n(\nname\n \n+\n \n: \n \n+\n \ncount\n);\n\n\n});\n\n\n\n\n\nGet items\n\n\nvar\n \nitems\n \n=\n \ngashapon\n.\ngetItems\n();", 
+            "title": "Gashapon"
+        }, 
+        {
+            "location": "/gashaponplugin/index.html#introduction", 
+            "text": "Pick random item from box.   Author: Rex  Member of scene, or game object", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/gashaponplugin/index.html#source-code", 
+            "text": "Link", 
+            "title": "Source code"
+        }, 
+        {
+            "location": "/gashaponplugin/index.html#usage", 
+            "text": "", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/gashaponplugin/index.html#create-instance", 
+            "text": "var   gashapon   =   new   GashaponPlugin ( scene ,   { \n     mode :   shuffle ,    // 0| shuffle |1| random \n     items :   {    // name:count \n         a : 1 ,  \n         b : 2 ,  \n         c : 3  \n     }, \n     reload :   true ,       // true|false  });   Properties   mode :   'shuffle' , or  0  : pick item from box without put it back.  'random' , or  1  : pick item from box then put it back.    reload : set  true  to reload items when box is empty for  shuffle  mode.  items : initial items in box", 
+            "title": "Create instance"
+        }, 
+        {
+            "location": "/gashaponplugin/index.html#pick-item", 
+            "text": "", 
+            "title": "Pick item"
+        }, 
+        {
+            "location": "/gashaponplugin/index.html#pick-a-random-item", 
+            "text": "var   item   =   gashapon . next ();    return  null  if pick nothing", 
+            "title": "Pick a random item"
+        }, 
+        {
+            "location": "/gashaponplugin/index.html#pick-specific-item", 
+            "text": "var   item   =   gashapon . next ( a );    return  null  if pick nothing", 
+            "title": "Pick specific item"
+        }, 
+        {
+            "location": "/gashaponplugin/index.html#last-picked-item", 
+            "text": "var   item   =   gashapon . result ;", 
+            "title": "Last picked item"
+        }, 
+        {
+            "location": "/gashaponplugin/index.html#set-item", 
+            "text": "", 
+            "title": "Set item"
+        }, 
+        {
+            "location": "/gashaponplugin/index.html#set-item_1", 
+            "text": "gashapon . setItem ( a ,   1 );  // gashapon.setItem( a , 1).setItem( b , 2).setItem( c , 3);", 
+            "title": "Set item"
+        }, 
+        {
+            "location": "/gashaponplugin/index.html#add-item", 
+            "text": "gashapon . addItem ( a , 1 );", 
+            "title": "Add item"
+        }, 
+        {
+            "location": "/gashaponplugin/index.html#remove-item", 
+            "text": "", 
+            "title": "Remove item"
+        }, 
+        {
+            "location": "/gashaponplugin/index.html#remove-item_1", 
+            "text": "gashapon . removeItem ( a );  // gashapon.removeItem( b ).gashapon.removeItem( c );", 
+            "title": "Remove item"
+        }, 
+        {
+            "location": "/gashaponplugin/index.html#remove-all-items", 
+            "text": "gashapon . removeAllItems ();", 
+            "title": "Remove all items"
+        }, 
+        {
+            "location": "/gashaponplugin/index.html#current-status", 
+            "text": "", 
+            "title": "Current status"
+        }, 
+        {
+            "location": "/gashaponplugin/index.html#get-current-status", 
+            "text": "var   status   =   gashapon . toJSON ();", 
+            "title": "Get current status"
+        }, 
+        {
+            "location": "/gashaponplugin/index.html#clone-object", 
+            "text": "var   status   =   gashapon . toJSON ();  var   gashapon2   =   new   Gashapon ( status );", 
+            "title": "Clone object"
+        }, 
+        {
+            "location": "/gashaponplugin/index.html#overwrite-current-status", 
+            "text": "var   status   =   gashapon . toJSON ();  // gashapon.next()...  gashapon . resetFromJSON ( status );", 
+            "title": "Overwrite current status"
+        }, 
+        {
+            "location": "/gashaponplugin/index.html#get-items", 
+            "text": "", 
+            "title": "Get items"
+        }, 
+        {
+            "location": "/gashaponplugin/index.html#for-each-item", 
+            "text": "gashapon . eachItem ( function ( name ,   count ){ \n     console . log ( name   +   :    +   count );  });", 
+            "title": "For each item"
+        }, 
+        {
+            "location": "/gashaponplugin/index.html#get-items_1", 
+            "text": "var   items   =   gashapon . getItems ();", 
+            "title": "Get items"
+        }, 
+        {
+            "location": "/format/index.html", 
+            "text": "Introduction\n\n\nFormat string with variables.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nReplace \n%x\n from an array. \nx\n starts from \n1\n.\n\n\n// const Format = Phaser.Utils.String.Format;\n\n\nvar\n \ntemplate\n \n=\n \nhello, %1\n;\n\n\nvar\n \nview\n \n=\n \n[\nrex\n];\n\n\nvar\n \nresult\n \n=\n \nFormat\n(\ntemplate\n,\n \nview\n);", 
+            "title": "Format"
+        }, 
+        {
+            "location": "/format/index.html#introduction", 
+            "text": "Format string with variables.   Author: Richard Davey", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/format/index.html#usage", 
+            "text": "Replace  %x  from an array.  x  starts from  1 .  // const Format = Phaser.Utils.String.Format;  var   template   =   hello, %1 ;  var   view   =   [ rex ];  var   result   =   Format ( template ,   view );", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/mustache/index.html", 
+            "text": "Introduction\n\n\nFormat string with variables.\n\n\nReference\n\n\nUsage\n\n\nvar\n \ntemplate\n \n=\n \nhello, {{name}}\n;\n\n\nvar\n \nview\n \n=\n \n{\n\n    \nname\n:\n \nrex\n\n\n};\n\n\nvar\n \nresult\n \n=\n \nMustache\n.\nrender\n(\ntemplate\n,\n \nview\n);", 
+            "title": "Mustache"
+        }, 
+        {
+            "location": "/mustache/index.html#introduction", 
+            "text": "Format string with variables.  Reference", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/mustache/index.html#usage", 
+            "text": "var   template   =   hello, {{name}} ;  var   view   =   { \n     name :   rex  };  var   result   =   Mustache . render ( template ,   view );", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/lzstringplugin/index.html", 
+            "text": "Introduction\n\n\nCompress string using LZ-based compression algorithm. \nReference\n\n\n\n\nAuthor: Rex\n\n\nMember of scene\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\nvar\n \nlzstring\n \n=\n \nnew\n \nLZStringPlugin\n(\nscene\n,\n \n{\n\n    \n//encoding: 0,    // 0|\nnone\n|1|\nbase64\n|2|\nutf16\n|3|\nuri\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\nencoding : \n\n\n'none'\n, or \n0\n : no encoding.\n\n\n'base64'\n, or \n1\n : base64 encoding.\n\n\n'utf16'\n, or \n2\n : UTF16 encoding.\n\n\n'uri'\n, or \n3\n : URI encoding.\n\n\n\n\n\n\n\n\nCompression\n\n\nvar\n \ncompressionResult\n \n=\n \nlzstring\n.\ncompress\n(\nsrc\n);\n\n\n\n\n\nDecompression\n\n\nvar\n \ndecompressionResult\n \n=\n \nlzstring\n.\ndecompress\n(\ncompressionResult\n);\n\n\n\n\n\nSet encoding\n\n\nlzstring\n.\nsetEncoding\n(\nm\n);\n  \n// 0|\nnone\n|1|\nbase64\n|2|\nutf16\n|3|\nuri", 
+            "title": "LZ string"
+        }, 
+        {
+            "location": "/lzstringplugin/index.html#introduction", 
+            "text": "Compress string using LZ-based compression algorithm.  Reference   Author: Rex  Member of scene", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/lzstringplugin/index.html#source-code", 
+            "text": "Link", 
+            "title": "Source code"
+        }, 
+        {
+            "location": "/lzstringplugin/index.html#usage", 
+            "text": "", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/lzstringplugin/index.html#create-instance", 
+            "text": "var   lzstring   =   new   LZStringPlugin ( scene ,   { \n     //encoding: 0,    // 0| none |1| base64 |2| utf16 |3| uri  });   Properties   encoding :   'none' , or  0  : no encoding.  'base64' , or  1  : base64 encoding.  'utf16' , or  2  : UTF16 encoding.  'uri' , or  3  : URI encoding.", 
+            "title": "Create instance"
+        }, 
+        {
+            "location": "/lzstringplugin/index.html#compression", 
+            "text": "var   compressionResult   =   lzstring . compress ( src );", 
+            "title": "Compression"
+        }, 
+        {
+            "location": "/lzstringplugin/index.html#decompression", 
+            "text": "var   decompressionResult   =   lzstring . decompress ( compressionResult );", 
+            "title": "Decompression"
+        }, 
+        {
+            "location": "/lzstringplugin/index.html#set-encoding", 
+            "text": "lzstring . setEncoding ( m );    // 0| none |1| base64 |2| utf16 |3| uri", 
+            "title": "Set encoding"
+        }, 
+        {
+            "location": "/xorplugin/index.html", 
+            "text": "Introduction\n\n\nEncrypt or decrypt string by XOR algorithm.\n\n\n\n\nAuthor: Rex\n\n\nMember of scene\n\n\n\n\nSource code\n\n\nEncrypt\n\n\nDecrypt\n\n\nUsage\n\n\nEncrypt\n\n\nvar\n \nencResult\n \n=\n \nXOR\n.\nEncrypt\n(\nsrc\n,\n \npwd\n);\n\n\n\n\n\nDecrypt\n\n\nvar\n \ndecResult\n \n=\n \nXOR\n.\nDecrypt\n(\nencResult\n,\n \npwd\n);", 
+            "title": "XOR"
+        }, 
+        {
+            "location": "/xorplugin/index.html#introduction", 
+            "text": "Encrypt or decrypt string by XOR algorithm.   Author: Rex  Member of scene", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/xorplugin/index.html#source-code", 
+            "text": "Encrypt  Decrypt", 
+            "title": "Source code"
+        }, 
+        {
+            "location": "/xorplugin/index.html#usage", 
+            "text": "", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/xorplugin/index.html#encrypt", 
+            "text": "var   encResult   =   XOR . Encrypt ( src ,   pwd );", 
+            "title": "Encrypt"
+        }, 
+        {
+            "location": "/xorplugin/index.html#decrypt", 
+            "text": "var   decResult   =   XOR . Decrypt ( encResult ,   pwd );", 
+            "title": "Decrypt"
         }
     ]
 }

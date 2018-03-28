@@ -3,7 +3,6 @@ theme: 'material'
 
 pages:
 - Home: index.md
-- Event emitter: eventemitter3.md
 - Input:
     - Touch events: touchevents.md
     - Keyboard events: keyboardevents.md
@@ -12,18 +11,19 @@ pages:
 - Loader:
     - Loader: loader.md
     - Webfont loader: webfontloader.md    
-- Game object: gameobject.md
-- Sprite:
-    - Image: image.md
-- Text:
-    - Text: text.md
-    - Typing: texttypingplugin.md    
-    - Page: textpageplugin.md
-- Canvas:
-    - Graphics: graphics.md
-    - Canvas: canvas.md
-- Group:
-    - Group: group.md
+- Game object:
+    - Game object: gameobject.md
+    - Sprite:
+        - Image: image.md
+    - Text:
+        - Text: text.md
+        - Typing: texttypingplugin.md    
+        - Page: textpageplugin.md
+    - Canvas:
+        - Graphics: graphics.md
+        - Canvas: canvas.md
+    - Group:
+        - Group: group.md
 - Time:
     - Date: date.md
     - Timer: timer.md
@@ -33,18 +33,20 @@ pages:
     - Data manager: datamanager.md
     - Array: array.md
     - CSV to array: csvtoarray.md
+- Logic:
+    - Event emitter: eventemitter3.md
+    - Run commands: runcommands.md
+    - TCRP:
+        - Recoder: tcrprecoderplugin.md
+        - Player: tcrpplayerplugin.md    
+- Math:
+    - Random:
+        - Gashapon: gashaponplugin.md
 - String:
     - Format: format.md
     - Mustache: mustache.md
     - LZ string: lzstringplugin.md
     - XOR: xorplugin.md
-- Random:
-    - Gashapon: gashaponplugin.md
-- Logic:
-    - Run commands: runcommands.md
-    - TCRP:
-        - Recoder: tcrprecoderplugin.md
-        - Player: tcrpplayerplugin.md
 
 extra_javascript:
 - js/mermaid/mermaid.min.js

@@ -9,7 +9,7 @@
 1. [Drag](dragplugin.md): Drag game object.
 1. [Drag-cursor](dragcursorplugin.md): Simulate curosr keys according dragging events.
 1. [Gashapon](gashaponplugin.md): Pick random item from box.
-1. [LZ-string](lzstring.md): Compress string using LZ-based compression algorithm.
+1. [LZ-string](lzstringplugin.md): Compress string using LZ-based compression algorithm.
 1. [Page](textpageplugin.md): Display text page by page on text object.
 1. [Run-commands](runcommands.md): Run commands in array.
 1. [TCRP.Player](tcrpplayerplugin.md): Run commands on time.

@@ -116,13 +116,20 @@ var gameobject = group.get(x, y, key, frame, visible); // equal to group.getFirs
 ### Create game objects
 
 ```javascript
-var gameobjects = group.createFromConfig({
+var gameobjects = group.createFromConfig(config);
+var gameobjects = group.createMultiple(config);    // config in array
+```
+
+#### Configuration
+
+```javascript
+{
     classType: this.classType,
-    key: undefined,
+    key: undefined,             // required
     frame: null,
     visible: true,
     active: true,
-    repeat: 0,
+    repeat: 0,                  // create (1 + repeat) game objects
 
     setXY: {
         x:0,
@@ -130,22 +137,41 @@ var gameobjects = group.createFromConfig({
         stepX:0,
         stepY:0
     },
+    // Actions.SetXY(gameobjects, x, y, stepX, stepY)
+
     setRotation: {
         value: 0,
         step:
     },
+    // Actions.SetRotation(gameobjects, value, step)
+
     setScale: {
         x:0,
         y:0,
         stepX:0,
         stepY:0
     },
+    // Actions.SetScale(gameobjects, x, y, stepX, stepY)
+
     setAlpha: {
         value: 0,
         step:
     },
-    gridAlign: false,
+    // Actions.SetAlpha(gameobjects, value, step)
+
     hitArea: null,
-    hitAreaCallback: null
-});
+    hitAreaCallback: null,
+    // Actions.SetHitArea(gameobjects, hitArea, hitAreaCallback);
+
+    gridAlign: false
+    // {
+    //     width: -1,
+    //     height: -1,
+    //     cellWidth: 1,
+    //     cellHeight: 1,
+    //     position: Phaser.Display.Align.TOP_LEFT,
+    //     x: 0,
+    //     y: 0
+    // }
+}
 ```
