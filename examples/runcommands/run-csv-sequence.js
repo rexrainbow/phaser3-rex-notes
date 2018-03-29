@@ -2,6 +2,7 @@
 
 import SequencePlugin from './../../plugins/sequence-plugin.js';
 import EE from 'eventemitter3';
+import CSVToArray from './../../plugins/csvtoarray.js';
 
 class CmdKlass {
     constructor(scene) {
@@ -45,16 +46,16 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
+        var csvString = `print,hello
+wait-click,
+print,world
+wait-click,
+print,phaser3
+wait-time,1`;
+
         var myCmds = new CmdKlass(this);
 
-        var cmds = [
-            ['print', 'hello'],
-            ['wait-click'],
-            ['print', 'world'],
-            ['wait-click'],
-            ['print', 'phaser3'],
-            ['wait-time', 1],
-        ];
+        var cmds = CSVToArray(csvString);
 
         var seq = new SequencePlugin(this);
         seq
