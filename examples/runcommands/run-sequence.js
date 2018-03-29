@@ -3,9 +3,10 @@
 import SequencePlugin from './../../plugins/sequence-plugin.js';
 import EE from 'eventemitter3';
 
-class CmdKlass {
+class CmdKlass extends EE{
     constructor(scene) {
-        this.event = new EE();
+        super();
+
         this.scene = scene;
         this.myConsole = scene.add.text(100, 100, '');
 
@@ -20,12 +21,12 @@ class CmdKlass {
 
     waitClick() {
         this.scene.input.once('pointerup', this.complete, this);
-        return this.event;
+        return this;
     }
 
     waitTime(delay) {
         this.scene.time.delayedCall(delay * 1000, this.complete, [], this);
-        return this.event;
+        return this;
     }
 
     complete() {
