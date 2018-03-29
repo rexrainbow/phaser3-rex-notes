@@ -24,7 +24,7 @@ class CmdKlass {
     }
 
     waitTime(delay) {
-        this.scene.time.delayedCall(delay*1000, this.complete, [], this);
+        this.scene.time.delayedCall(delay * 1000, this.complete, [], this);
         return this.event;
     }
 

@@ -25,7 +25,7 @@ class CmdKlass {
     }
 
     waitTime(delay) {
-        this.scene.time.delayedCall(delay*1000, this.complete, [], this);
+        this.scene.time.delayedCall(delay * 1000, this.complete, [], this);
         return this.event;
     }
 
@@ -59,7 +59,9 @@ wait-time,1`;
 
         var seq = new SequencePlugin(this);
         seq
-            .load(cmds, myCmds)
+            .load(cmds, myCmds, {
+                argsConvert: true
+            })
             .once('complete', myCmds.print.bind(myCmds, 'completed...'))
             .start();
     }

@@ -11,9 +11,9 @@ class CmdKlass {
 
         // alias function name
         this['create-sprite'] = this.createSprite;
-        this['move-sprite-to'] = this.moveSpriteTo;        
+        this['move-sprite-to'] = this.moveSpriteTo;
     }
-    
+
     // callbacks
     print(msg) {
         console.log(msg);
@@ -52,7 +52,7 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var myCmds = new CmdKlass(this);        
+        var myCmds = new CmdKlass(this);
 
         var cmds = [
             ['print', 'hello'],

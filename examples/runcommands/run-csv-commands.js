@@ -12,9 +12,9 @@ class CmdKlass {
 
         // alias function name
         this['create-sprite'] = this.createSprite;
-        this['move-sprite-to'] = this.moveSpriteTo;        
+        this['move-sprite-to'] = this.moveSpriteTo;
     }
-    
+
     // callbacks
     print(msg) {
         console.log(msg);
@@ -58,7 +58,7 @@ print,world
 create-sprite,A,100,100,mushroom
 move-sprite-to,A,300,200,1`;
 
-        var myCmds = new CmdKlass(this);        
+        var myCmds = new CmdKlass(this);
 
         var cmds = CSVToArray(csvString);
 
