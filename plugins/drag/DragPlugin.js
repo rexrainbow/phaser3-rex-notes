@@ -3,6 +3,13 @@
 import Phaser from 'phaser';
 
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
+const DistanceBetween = Phaser.Math.Distance.Between;
+const RotateAroundDistance = Phaser.Math.RotateAroundDistance;
+
+var P1 = {
+    x: 0,
+    y: 0
+}; // reuse this point object
 
 class DragDropPlugin {
     constructor(gameobject, config) {
@@ -10,7 +17,7 @@ class DragDropPlugin {
         this.scene = gameobject.scene;
         this.enable = null;
         this.resetFromJSON(config);
-        this.boot();        
+        this.boot();
     }
 
     /**
@@ -116,18 +123,21 @@ class DragDropPlugin {
                 gameobject.y = dragY;
             }
         } else {
-            P0.x = gameobject.x;
-            P0.y = gameobject.y;
+            var dist;
             P1.x = dragX;
             P1.y = dragY;
-            P1 = rotatePoint(P1, P0, -this.axisRotation);
+
+            dist = DistanceBetween(P1.x, P1.y, gameobject.x, gameobject.y);
+            P1 = RotateAroundDistance(P1, gameobject.x, gameobject.y, -this.axisRotation, dist);
 
             if (this.axisMode === 1) {
-                P1.y = P0.y;
+                P1.y = gameobject.y;
             } else if (this.axisMode === 2) {
-                P1.x = P0.x;
+                P1.x = gameobject.x;
             }
-            P1 = rotatePoint(P1, P0, this.axisRotation);
+            dist = DistanceBetween(P1.x, P1.y, gameobject.x, gameobject.y);
+            P1 = RotateAroundDistance(P1, gameobject.x, gameobject.y, this.axisRotation, dist);
+
             gameobject.x = P1.x;
             gameobject.y = P1.y;
         }
@@ -137,18 +147,6 @@ class DragDropPlugin {
     get isDragging() {
         return (this.gameobject.input.dragState > 0);
     }
-}
-
-var P0 = {};
-var P1 = {};
-var rotatePoint = function (p1, p0, rad) {
-    var dx = p1.x - p0.x;
-    var dy = p1.y - p0.y;
-    var dist = Math.sqrt(dx * dx + dy * dy);
-    var newRad = Math.atan2(dy, dx) + rad;
-    p1.x = p0.x + (dist * Math.cos(newRad));
-    p1.y = p0.y + (dist * Math.sin(newRad));
-    return p1;
 }
 
 /** @private */
