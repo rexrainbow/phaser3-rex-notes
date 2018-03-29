@@ -22,7 +22,7 @@ class SequencePlugin extends EE {
         this.config = config;
         return this;
     }
-    
+
     start() {
         this.index = 0;
         this.runNextCommands();
@@ -36,28 +36,32 @@ class SequencePlugin extends EE {
         return this;
     }
 
-    resume() {   
+    resume() {
         if (this.curTask && this.curTask.resume) {
             this.curTask.resume();
         }
-        return this;             
+        return this;
     }
 
     get completed() {
         return (this.index >= this.commands.length);
-    }    
+    }
+
+    get currentCommandIndex() {
+        return (this.index - 1);
+    }
 
     runNextCommands() {
         var task;
-        while(1) {
+        while (1) {
             if (this.completed) {
                 this.emit('complete');
                 return this;
             }
 
             task = runCommands(this.commands[this.index], this.scope);
-            this.index ++;
-            if (task && (typeof(task.once) === 'function')) {
+            this.index++;
+            if (task && (typeof (task.once) === 'function')) {
                 task.once('complete', this.runNextCommands, this);
                 this.curTask = task;
                 return this;
@@ -66,4 +70,4 @@ class SequencePlugin extends EE {
     }
 }
 
-export default SequencePlugin;    
+export default SequencePlugin;

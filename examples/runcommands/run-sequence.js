@@ -3,10 +3,9 @@
 import SequencePlugin from './../../plugins/sequence-plugin.js';
 import EE from 'eventemitter3';
 
-class CmdKlass extends EE {
+class CmdKlass {
     constructor(scene) {
-        super();
-
+        this.event = new EE();
         this.scene = scene;
         this.myConsole = scene.add.text(100, 100, '');
 
@@ -21,16 +20,16 @@ class CmdKlass extends EE {
 
     waitClick() {
         this.scene.input.once('pointerup', this.complete, this);
-        return this;
+        return this.event;
     }
 
     waitTime(delay) {
         this.scene.time.delayedCall(delay*1000, this.complete, [], this);
-        return this;
+        return this.event;
     }
 
     complete() {
-        this.emit('complete');
+        this.event.emit('complete');
     }
 }
 class Demo extends Phaser.Scene {
