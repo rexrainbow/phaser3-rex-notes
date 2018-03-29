@@ -2,7 +2,10 @@
 
 var FLOAT = /^\s*-?(\d*\.?\d+|\d+\.?\d*)(e[-+]?\d+)?\s*$/i;
 var convert = function (s) {
-    //var val = s.toLowerCase();
+    if (typeof (s) !== 'string') {
+        return s;
+    }
+
     if (s === '') {
         s = null;
     } else if (FLOAT.test(s)) {

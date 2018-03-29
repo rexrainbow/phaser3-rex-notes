@@ -79,11 +79,18 @@ class PlayerPlugin extends EE {
         if (typeof (this.dtMode) === 'string') {
             this.dtMode = DTMODE[this.dtMode];
         }
-
-        commands = commands.filter(function (item) {
-            var dt = item[0];
-            return !isNaN(dt);
-        });
+        commands = commands
+            .filter(function (item) {
+                var dt = item[0];
+                return !isNaN(dt);
+            })
+            .map(function (item) {
+                var dt = item[0];
+                if (typeof (dt) === 'string') {
+                    item[0] = parseFloat(item[0]);
+                }
+                return item;
+            });
 
         if (this.dtMode === 0) {
             commands.sort(function (itemA, itemB) {
@@ -130,7 +137,7 @@ class PlayerPlugin extends EE {
         return this.clock.isRunning;
     }
 
-    get isComplete() {
+    get completed() {
         return (this.index >= this.commands.length);
     }
 
@@ -154,7 +161,7 @@ class PlayerPlugin extends EE {
 
         while (1) {
             // complete
-            if (this.isComplete) {
+            if (this.completed) {
                 this.clock.stop();
                 this.emit('complete');
                 return;
@@ -182,7 +189,7 @@ class PlayerPlugin extends EE {
     }
 
     getNextDt(currentDt) {
-        if (this.isComplete) {
+        if (this.completed) {
             return currentDt;
         }
         var dt = this.commands[this.index][0];

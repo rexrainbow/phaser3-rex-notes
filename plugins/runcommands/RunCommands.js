@@ -30,6 +30,7 @@ var runCommands = function (queue, scope, config) {
 var ARGS = []; // reuse this array
 var runCommand = function (cmd, scope, config) {
     var argsConvertCallback = GetValue(config, 'argsConvert', undefined);
+    var argsConvertCallbackScope = GetValue(config, 'argsConvertScope', undefined);
 
     var fnName = cmd[0];
 
@@ -40,7 +41,7 @@ var runCommand = function (cmd, scope, config) {
             argsConvertCallback = defaultTypeConvert;
         }
         for (var i = 0, len = ARGS.length; i < len; i++) {
-            ARGS[i] = argsConvertCallback.call(null, cmd, ARGS[i]);
+            ARGS[i] = argsConvertCallback.call(argsConvertCallbackScope, cmd, ARGS[i]);
         }
     }
 
