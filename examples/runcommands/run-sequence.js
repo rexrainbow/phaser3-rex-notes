@@ -9,12 +9,23 @@ class CmdKlass extends EE {
 
         this.scene = scene;
         this.myConsole = scene.add.text(100, 100, '');
+
+        this['wait-click'] = this.waitClick;
+        this['wait-time'] = this.waitTime;
     }
 
     // callbacks
     print(msg) {
         this.myConsole.setText(msg);
+    }
+
+    waitClick() {
         this.scene.input.once('pointerup', this.complete, this);
+        return this;
+    }
+
+    waitTime(delay) {
+        this.scene.time.delayedCall(delay*1000, this.complete, [], this);
         return this;
     }
 
@@ -39,8 +50,11 @@ class Demo extends Phaser.Scene {
 
         var cmds = [
             ['print', 'hello'],
+            ['wait-click'],
             ['print', 'world'],
+            ['wait-click'],
             ['print', 'phaser3'],
+            ['wait-time', 1],
         ];
 
         var seq = new SequencePlugin(this);
