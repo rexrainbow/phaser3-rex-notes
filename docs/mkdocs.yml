@@ -24,6 +24,7 @@ pages:
         - Canvas: canvas.md
     - Group:
         - Group: group.md
+        - Group actions: groupactions.md
 - Time:
     - Date: date.md
     - Timer: timer.md

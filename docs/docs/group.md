@@ -81,7 +81,13 @@ var gameobjects = group.getChildren();  // array of game objects
 
 ```javascript
 group.playAnimation(key, startFrame);
+```
+
+```javascript
 group.toggleVisible();
+```
+
+```javascript
 group.setDepth(value, step);
 ```
 

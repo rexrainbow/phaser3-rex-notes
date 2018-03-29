@@ -737,7 +737,7 @@
         }, 
         {
             "location": "/group/index.html", 
-            "text": "Introduction\n\n\nContainer of game objects, built-in game object of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nAdd group object\n\n\nvar\n \ngroup\n \n=\n \nscene\n.\nadd\n.\ngroup\n(\nconfig\n);\n\n\n// var group = scene.add.group(gameobjects, config);  // add game objects into group\n\n\n\n\n\nConfiguration\n\n\n{\n\n    \nclassType\n:\n \nPhaser\n.\nGameObjects\n.\nSprite\n,\n\n    \ndefaultKey\n:\n \nnull\n,\n\n    \ndefaultFrame\n:\n \nnull\n,\n\n    \nmaxSize\n:\n \n-\n1\n,\n\n    \nrunChildUpdate\n:\n \nfalse\n    \n// run gameobject.update() if true\n\n\n}\n\n\n\n\n\nAdd game object\n\n\ngroup\n.\nadd\n(\ngameobject\n);\n\n\n// group.add(gameobject, true);  // add this game object to display and update list of scene\n\n\n\n\n\ngroup\n.\naddMultiple\n(\ngameobjects\n);\n   \n// array of game objects\n\n\n// group.addMultiple(gameobjects, true);\n\n\n\n\n\nGame object will only be added once.\n\n\nRemove game object\n\n\ngroup\n.\nremove\n(\ngameobject\n);\n\n\n// group.remove(gameobject, true);  // also remove this game object from display and update list of scene\n\n\n\n\n\nRemove all game objects\n\n\ngroup\n.\nclear\n();\n\n\n// group.clear(true);  // also remove this game object from display and update list of scene\n\n\n\n\n\nGet game objects\n\n\nvar\n \ngameobjects\n \n=\n \ngroup\n.\ngetChildren\n();\n  \n// array of game objects\n\n\n\n\n\n\n\n\n\nAmount of game objects.\n\n\nvar\n \nlen\n \n=\n \ngroup\n.\ngetLength\n();\n\n\n\n\n\n\n\n\n\nGroup is full. Maximun size is set in \nmaxSize\n.\n\n\nvar\n \nisFull\n \n=\n \ngroup\n.\nisFull\n();\n\n\n\n\n\n\n\n\n\nGame object is in group.\n\n\nvar\n \nisInGroup\n \n=\n \ngroup\n.\ncontains\n();\n\n\n\n\n\n\n\n\n\nGroup actions\n\n\ngroup\n.\nplayAnimation\n(\nkey\n,\n \nstartFrame\n);\n\n\ngroup\n.\ntoggleVisible\n();\n\n\ngroup\n.\nsetDepth\n(\nvalue\n,\n \nstep\n);\n\n\n\n\n\nActive/inactive game objects\n\n\nAmount of active/inactive game objects\n\n\nvar\n \nactiveCount\n \n=\n \ngroup\n.\ncountActive\n();\n\n\n// var inactiveCount = group.countActive(false);  // get amount of inactive game objects\n\n\n\n\n\nvar\n \nactiveCount\n \n=\n \ngroup\n.\ngetTotalUsed\n();\n        \n// equal to group.countActive()\n\n\nvar\n \nfreeCount\n \n=\n \ngroup\n.\ngetTotalFree\n();\n          \n// group.maxSize - group.getTotalUsed()\n\n\n\n\n\ngroup\n.\nkill\n(\ngameobject\n);\n         \n// gameobject.setActive(false)\n\n\ngroup\n.\nkillAndHide\n(\ngameobject\n);\n  \n// gameObject.setActive(false).setVisible(false)\n\n\n\n\n\nGet first active/inactive game object, create one if \ncreateIfNull\n is \ntrue\n\n\nvar\n \ngameobject\n \n=\n \ngroup\n.\ngetFirst\n(\nactive\n,\n \ncreateIfNull\n,\n \nx\n,\n \ny\n,\n \nkey\n,\n \nframe\n,\n \nvisible\n);\n  \n// active = true/false\n\n\nvar\n \ngameobject\n \n=\n \ngroup\n.\ngetFirstAlive\n(\ncreateIfNull\n,\n \nx\n,\n \ny\n,\n \nkey\n,\n \nframe\n,\n \nvisible\n);\n \n// equal to group.getFirst(true, ...)\n\n\nvar\n \ngameobject\n \n=\n \ngroup\n.\ngetFirstDead\n(\ncreateIfNull\n,\n \nx\n,\n \ny\n,\n \nkey\n,\n \nframe\n,\n \nvisible\n);\n \n// equal to group.getFirst(false, ...)\n\n\nvar\n \ngameobject\n \n=\n \ngroup\n.\nget\n(\nx\n,\n \ny\n,\n \nkey\n,\n \nframe\n,\n \nvisible\n);\n \n// equal to group.getFirst(false, true, ...)\n\n\n\n\n\nCreate game objects\n\n\nvar\n \ngameobjects\n \n=\n \ngroup\n.\ncreateFromConfig\n(\nconfig\n);\n\n\nvar\n \ngameobjects\n \n=\n \ngroup\n.\ncreateMultiple\n(\nconfig\n);\n    \n// config in array\n\n\n\n\n\nConfiguration\n\n\n{\n\n    \nclassType\n:\n \nthis\n.\nclassType\n,\n\n    \nkey\n:\n \nundefined\n,\n             \n// required\n\n    \nframe\n:\n \nnull\n,\n\n    \nvisible\n:\n \ntrue\n,\n\n    \nactive\n:\n \ntrue\n,\n\n    \nrepeat\n:\n \n0\n,\n                  \n// create (1 + repeat) game objects\n\n\n    \nsetXY\n:\n \n{\n\n        \nx\n:\n0\n,\n\n        \ny\n:\n0\n,\n\n        \nstepX\n:\n0\n,\n\n        \nstepY\n:\n0\n\n    \n},\n\n    \n// Actions.SetXY(gameobjects, x, y, stepX, stepY)\n\n\n    \nsetRotation\n:\n \n{\n\n        \nvalue\n:\n \n0\n,\n\n        \nstep\n:\n\n    \n},\n\n    \n// Actions.SetRotation(gameobjects, value, step)\n\n\n    \nsetScale\n:\n \n{\n\n        \nx\n:\n0\n,\n\n        \ny\n:\n0\n,\n\n        \nstepX\n:\n0\n,\n\n        \nstepY\n:\n0\n\n    \n},\n\n    \n// Actions.SetScale(gameobjects, x, y, stepX, stepY)\n\n\n    \nsetAlpha\n:\n \n{\n\n        \nvalue\n:\n \n0\n,\n\n        \nstep\n:\n\n    \n},\n\n    \n// Actions.SetAlpha(gameobjects, value, step)\n\n\n    \nhitArea\n:\n \nnull\n,\n\n    \nhitAreaCallback\n:\n \nnull\n,\n\n    \n// Actions.SetHitArea(gameobjects, hitArea, hitAreaCallback);\n\n\n    \ngridAlign\n:\n \nfalse\n\n    \n// {\n\n    \n//     width: -1,\n\n    \n//     height: -1,\n\n    \n//     cellWidth: 1,\n\n    \n//     cellHeight: 1,\n\n    \n//     position: Phaser.Display.Align.TOP_LEFT,\n\n    \n//     x: 0,\n\n    \n//     y: 0\n\n    \n// }\n\n\n}", 
+            "text": "Introduction\n\n\nContainer of game objects, built-in game object of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nAdd group object\n\n\nvar\n \ngroup\n \n=\n \nscene\n.\nadd\n.\ngroup\n(\nconfig\n);\n\n\n// var group = scene.add.group(gameobjects, config);  // add game objects into group\n\n\n\n\n\nConfiguration\n\n\n{\n\n    \nclassType\n:\n \nPhaser\n.\nGameObjects\n.\nSprite\n,\n\n    \ndefaultKey\n:\n \nnull\n,\n\n    \ndefaultFrame\n:\n \nnull\n,\n\n    \nmaxSize\n:\n \n-\n1\n,\n\n    \nrunChildUpdate\n:\n \nfalse\n    \n// run gameobject.update() if true\n\n\n}\n\n\n\n\n\nAdd game object\n\n\ngroup\n.\nadd\n(\ngameobject\n);\n\n\n// group.add(gameobject, true);  // add this game object to display and update list of scene\n\n\n\n\n\ngroup\n.\naddMultiple\n(\ngameobjects\n);\n   \n// array of game objects\n\n\n// group.addMultiple(gameobjects, true);\n\n\n\n\n\nGame object will only be added once.\n\n\nRemove game object\n\n\ngroup\n.\nremove\n(\ngameobject\n);\n\n\n// group.remove(gameobject, true);  // also remove this game object from display and update list of scene\n\n\n\n\n\nRemove all game objects\n\n\ngroup\n.\nclear\n();\n\n\n// group.clear(true);  // also remove this game object from display and update list of scene\n\n\n\n\n\nGet game objects\n\n\nvar\n \ngameobjects\n \n=\n \ngroup\n.\ngetChildren\n();\n  \n// array of game objects\n\n\n\n\n\n\n\n\n\nAmount of game objects.\n\n\nvar\n \nlen\n \n=\n \ngroup\n.\ngetLength\n();\n\n\n\n\n\n\n\n\n\nGroup is full. Maximun size is set in \nmaxSize\n.\n\n\nvar\n \nisFull\n \n=\n \ngroup\n.\nisFull\n();\n\n\n\n\n\n\n\n\n\nGame object is in group.\n\n\nvar\n \nisInGroup\n \n=\n \ngroup\n.\ncontains\n();\n\n\n\n\n\n\n\n\n\nGroup actions\n\n\ngroup\n.\nplayAnimation\n(\nkey\n,\n \nstartFrame\n);\n\n\n\n\n\ngroup\n.\ntoggleVisible\n();\n\n\n\n\n\ngroup\n.\nsetDepth\n(\nvalue\n,\n \nstep\n);\n\n\n\n\n\nActive/inactive game objects\n\n\nAmount of active/inactive game objects\n\n\nvar\n \nactiveCount\n \n=\n \ngroup\n.\ncountActive\n();\n\n\n// var inactiveCount = group.countActive(false);  // get amount of inactive game objects\n\n\n\n\n\nvar\n \nactiveCount\n \n=\n \ngroup\n.\ngetTotalUsed\n();\n        \n// equal to group.countActive()\n\n\nvar\n \nfreeCount\n \n=\n \ngroup\n.\ngetTotalFree\n();\n          \n// group.maxSize - group.getTotalUsed()\n\n\n\n\n\ngroup\n.\nkill\n(\ngameobject\n);\n         \n// gameobject.setActive(false)\n\n\ngroup\n.\nkillAndHide\n(\ngameobject\n);\n  \n// gameObject.setActive(false).setVisible(false)\n\n\n\n\n\nGet first active/inactive game object, create one if \ncreateIfNull\n is \ntrue\n\n\nvar\n \ngameobject\n \n=\n \ngroup\n.\ngetFirst\n(\nactive\n,\n \ncreateIfNull\n,\n \nx\n,\n \ny\n,\n \nkey\n,\n \nframe\n,\n \nvisible\n);\n  \n// active = true/false\n\n\nvar\n \ngameobject\n \n=\n \ngroup\n.\ngetFirstAlive\n(\ncreateIfNull\n,\n \nx\n,\n \ny\n,\n \nkey\n,\n \nframe\n,\n \nvisible\n);\n \n// equal to group.getFirst(true, ...)\n\n\nvar\n \ngameobject\n \n=\n \ngroup\n.\ngetFirstDead\n(\ncreateIfNull\n,\n \nx\n,\n \ny\n,\n \nkey\n,\n \nframe\n,\n \nvisible\n);\n \n// equal to group.getFirst(false, ...)\n\n\nvar\n \ngameobject\n \n=\n \ngroup\n.\nget\n(\nx\n,\n \ny\n,\n \nkey\n,\n \nframe\n,\n \nvisible\n);\n \n// equal to group.getFirst(false, true, ...)\n\n\n\n\n\nCreate game objects\n\n\nvar\n \ngameobjects\n \n=\n \ngroup\n.\ncreateFromConfig\n(\nconfig\n);\n\n\nvar\n \ngameobjects\n \n=\n \ngroup\n.\ncreateMultiple\n(\nconfig\n);\n    \n// config in array\n\n\n\n\n\nConfiguration\n\n\n{\n\n    \nclassType\n:\n \nthis\n.\nclassType\n,\n\n    \nkey\n:\n \nundefined\n,\n             \n// required\n\n    \nframe\n:\n \nnull\n,\n\n    \nvisible\n:\n \ntrue\n,\n\n    \nactive\n:\n \ntrue\n,\n\n    \nrepeat\n:\n \n0\n,\n                  \n// create (1 + repeat) game objects\n\n\n    \nsetXY\n:\n \n{\n\n        \nx\n:\n0\n,\n\n        \ny\n:\n0\n,\n\n        \nstepX\n:\n0\n,\n\n        \nstepY\n:\n0\n\n    \n},\n\n    \n// Actions.SetXY(gameobjects, x, y, stepX, stepY)\n\n\n    \nsetRotation\n:\n \n{\n\n        \nvalue\n:\n \n0\n,\n\n        \nstep\n:\n\n    \n},\n\n    \n// Actions.SetRotation(gameobjects, value, step)\n\n\n    \nsetScale\n:\n \n{\n\n        \nx\n:\n0\n,\n\n        \ny\n:\n0\n,\n\n        \nstepX\n:\n0\n,\n\n        \nstepY\n:\n0\n\n    \n},\n\n    \n// Actions.SetScale(gameobjects, x, y, stepX, stepY)\n\n\n    \nsetAlpha\n:\n \n{\n\n        \nvalue\n:\n \n0\n,\n\n        \nstep\n:\n\n    \n},\n\n    \n// Actions.SetAlpha(gameobjects, value, step)\n\n\n    \nhitArea\n:\n \nnull\n,\n\n    \nhitAreaCallback\n:\n \nnull\n,\n\n    \n// Actions.SetHitArea(gameobjects, hitArea, hitAreaCallback);\n\n\n    \ngridAlign\n:\n \nfalse\n\n    \n// {\n\n    \n//     width: -1,\n\n    \n//     height: -1,\n\n    \n//     cellWidth: 1,\n\n    \n//     cellHeight: 1,\n\n    \n//     position: Phaser.Display.Align.TOP_LEFT,\n\n    \n//     x: 0,\n\n    \n//     y: 0\n\n    \n// }\n\n\n}", 
             "title": "Group"
         }, 
         {
@@ -777,7 +777,7 @@
         }, 
         {
             "location": "/group/index.html#group-actions", 
-            "text": "group . playAnimation ( key ,   startFrame );  group . toggleVisible ();  group . setDepth ( value ,   step );", 
+            "text": "group . playAnimation ( key ,   startFrame );   group . toggleVisible ();   group . setDepth ( value ,   step );", 
             "title": "Group actions"
         }, 
         {
@@ -794,6 +794,116 @@
             "location": "/group/index.html#configuration_1", 
             "text": "{ \n     classType :   this . classType , \n     key :   undefined ,               // required \n     frame :   null , \n     visible :   true , \n     active :   true , \n     repeat :   0 ,                    // create (1 + repeat) game objects \n\n     setXY :   { \n         x : 0 , \n         y : 0 , \n         stepX : 0 , \n         stepY : 0 \n     }, \n     // Actions.SetXY(gameobjects, x, y, stepX, stepY) \n\n     setRotation :   { \n         value :   0 , \n         step : \n     }, \n     // Actions.SetRotation(gameobjects, value, step) \n\n     setScale :   { \n         x : 0 , \n         y : 0 , \n         stepX : 0 , \n         stepY : 0 \n     }, \n     // Actions.SetScale(gameobjects, x, y, stepX, stepY) \n\n     setAlpha :   { \n         value :   0 , \n         step : \n     }, \n     // Actions.SetAlpha(gameobjects, value, step) \n\n     hitArea :   null , \n     hitAreaCallback :   null , \n     // Actions.SetHitArea(gameobjects, hitArea, hitAreaCallback); \n\n     gridAlign :   false \n     // { \n     //     width: -1, \n     //     height: -1, \n     //     cellWidth: 1, \n     //     cellHeight: 1, \n     //     position: Phaser.Display.Align.TOP_LEFT, \n     //     x: 0, \n     //     y: 0 \n     // }  }", 
             "title": "Configuration"
+        }, 
+        {
+            "location": "/groupactions/index.html", 
+            "text": "Introduction\n\n\nSet properties of game objects, built-in methods of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nCall\n\n\nPhaser\n.\nActions\n.\nCall\n(\ngameobjects\n,\n \ncallback\n,\n \ncontext\n);\n\n\n\n\n\nAny property\n\n\nPhaser\n.\nActions\n.\nPropertyValueSet\n(\ngameobjects\n,\n \nkey\n,\n \nvalue\n,\n \nstep\n,\n \nindex\n,\n \ndirection\n);\n\n\n\n\n\n\n\ngameobjects : The array of game objects to be updated by this action.\n\n\nkey : The property to be updated.\n\n\nvalue : The amount to be added to the property.\n\n\nstep : This is added to the \nvalue\n amount, multiplied by the iteration counter.\n\n\nindex : An optional offset to start searching from within the items array.\n\n\ndirection :\n\n\n1\n : from beginning to end.\n\n\n-1\n: from end to beginning.\n\n\n\n\n\n\n\n\nPhaser\n.\nActions\n.\nPropertyValueInc\n(\ngameobjects\n,\n \nkey\n,\n \nvalue\n,\n \nstep\n,\n \nindex\n,\n \ndirection\n);\n\n\n\n\n\nPhaser\n.\nActions\n.\nSmootherStep\n(\ngameobjects\n,\n \nkey\n,\n \nmin\n,\n \nmax\n,\n \ninc\n));\n\n\nPhaser\n.\nActions\n.\nSmoothStep\n(\ngameobjects\n,\n \nkey\n,\n \nmin\n,\n \nmax\n,\n \ninc\n));\n\n\nPhaser\n.\nActions\n.\nSpread\n(\ngameobjects\n,\n \nkey\n,\n \nmin\n,\n \nmax\n,\n \ninc\n));\n\n\n\n\n\nPosition\n\n\nPhaser\n.\nActions\n.\nSetX\n(\ngameobjects\n,\n \nvalue\n,\n \nstep\n,\n \nindex\n,\n \ndirection\n);\n\n\n\n\n\nPhaser\n.\nActions\n.\nIncX\n(\ngameobjects\n,\n \nvalue\n,\n \nstep\n,\n \nindex\n,\n \ndirection\n);\n\n\n\n\n\nPhaser\n.\nActions\n.\nSetY\n(\ngameobjects\n,\n \nvalue\n,\n \nstep\n,\n \nindex\n,\n \ndirection\n);\n\n\n\n\n\nPhaser\n.\nActions\n.\nIncY\n(\ngameobjects\n,\n \nvalue\n,\n \nstep\n,\n \nindex\n,\n \ndirection\n);\n\n\n\n\n\nPhaser\n.\nActions\n.\nSetXY\n(\ngameobjects\n,\n \nx\n,\n \ny\n,\n \nstepX\n,\n \nstepY\n,\n \nindex\n,\n \ndirection\n);\n\n\n\n\n\nPhaser\n.\nActions\n.\nIncXY\n(\ngameobjects\n,\n \nx\n,\n \ny\n,\n \nstepX\n,\n \nstepY\n,\n \nindex\n,\n \ndirection\n);\n\n\n\n\n\nPosition on shape\n\n\nGrid align\n\n\nPhaser\n.\nActions\n.\nGridAlign\n(\ngameobjects\n,\n \n{\n\n    \nwidth\n:\n \n-\n1\n,\n\n    \nheight\n:\n \n-\n1\n,\n\n    \ncellWidth\n:\n \n1\n,\n\n    \ncellHeight\n:\n \n1\n,\n\n    \nposition\n:\n \nPhaser\n.\nDisplay\n.\nAlign\n.\nTOP_LEFT\n,\n\n    \nx\n:\n \n0\n,\n\n    \ny\n:\n \n0\n\n\n});\n\n\n\n\n\nLine\n\n\nPhaser\n.\nActions\n.\nPlaceOnLine\n(\ngameobjects\n,\n \nline\n);\n \n// line: Phaser.Geom.Line\n\n\n\n\n\nPhaser\n.\nActions\n.\nRandomLine\n(\ngameobjects\n,\n \nline\n);\n \n// line: Phaser.Geom.Line\n\n\n\n\n\nCircle\n\n\nPhaser\n.\nActions\n.\nPlaceOnCircle\n(\ngameobjects\n,\n \ncircle\n,\n \nstartAngle\n,\n \nendAngle\n);\n \n// circle: Phaser.Geom.Circle\n\n\n\n\n\nPhaser\n.\nActions\n.\nRandomCircle\n(\ngameobjects\n,\n \ncircle\n);\n \n// circle: Phaser.Geom.Circle\n\n\n\n\n\nEllipse\n\n\nPhaser\n.\nActions\n.\nPlaceOnEllipse\n(\ngameobjects\n,\n \nellipse\n,\n \nstartAngle\n,\n \nendAngle\n);\n \n// ellipse: Phaser.Geom.Ellipse\n\n\n\n\n\nTriangle\n\n\nPhaser\n.\nActions\n.\nPlaceOnTriangle\n(\ngameobjects\n,\n \ntriangle\n,\n \nstepRate\n);\n \n// triangle: Phaser.Geom.Triangle\n\n\n\n\n\nPhaser\n.\nActions\n.\nRandomTriangle\n(\ngameobjects\n,\n \ntriangle\n);\n \n// triangle: Phaser.Geom.Triangle\n\n\n\n\n\nRectangle\n\n\nPhaser\n.\nActions\n.\nPlaceOnRectangle\n(\ngameobjects\n,\n \nrect\n,\n \nshift\n;\n \n// rect: Phaser.Geom.Rectangle\n\n\n\n\n\nPhaser\n.\nActions\n.\nRandomRectangle\n(\ngameobjects\n,\n \nrect\n);\n \n// rect: Phaser.Geom.Rectangle\n\n\n\n\n\nPhaser\n.\nActions\n.\nWrapInRectangle\n(\ngameobjects\n,\n \nrect\n,\n \npadding\n);\n \n// rect: Phaser.Geom.Rectangle\n\n\n\n\n\nAngle\n\n\nPhaser\n.\nActions\n.\nAngle\n(\ngameobjects\n,\n \nvalue\n,\n \nstep\n,\n \nindex\n,\n \ndirection\n);\n\n\n\n\n\nPhaser\n.\nActions\n.\nRotate\n(\ngameobjects\n,\n \nvalue\n,\n \nstep\n,\n \nindex\n,\n \ndirection\n);\n\n\n\n\n\nVisible\n\n\nPhaser\n.\nActions\n.\nSetVisible\n(\ngameobjects\n,\n \nvalue\n,\n \nindex\n,\n \ndirection\n);\n\n\n\n\n\nPhaser\n.\nActions\n.\nToggleVisible\n(\ngameobjects\n);\n\n\n\n\n\nAlpha\n\n\nPhaser\n.\nActions\n.\nSetAlpha\n(\ngameobjects\n,\n \nvalue\n,\n \nstep\n,\n \nindex\n,\n \ndirection\n);\n\n\n\n\n\nTint\n\n\nPhaser\n.\nActions\n.\nsetTint\n(\ngameobjects\n,\n \nvalue\n);\n\n\n//Phaser.Actions.setTint(gameobjects, topLeft, topRight, bottomLeft, bottomRight);\n\n\n\n\n\nOrigin\n\n\nPhaser\n.\nActions\n.\nSetOrigin\n(\ngameobjects\n,\n \noriginX\n,\n \noriginY\n,\n \nstepX\n,\n \nstepY\n,\n \nindex\n,\n \ndirection\n);\n\n\n\n\n\nScale\n\n\nPhaser\n.\nActions\n.\nScaleX\n(\ngameobjects\n,\n \nvalue\n,\n \nstep\n,\n \nindex\n,\n \ndirection\n);\n\n\n\n\n\nPhaser\n.\nActions\n.\nScaleY\n(\ngameobjects\n,\n \nvalue\n,\n \nstep\n,\n \nindex\n,\n \ndirection\n);\n\n\n\n\n\nPhaser\n.\nActions\n.\nScaleXY\n(\ngameobjects\n,\n \nx\n,\n \ny\n,\n \nstepX\n,\n \nstepY\n,\n \nindex\n,\n \ndirection\n);\n\n\n\n\n\nDepth\n\n\nPhaser\n.\nActions\n.\nSetDepth\n(\ngameobjects\n,\n \nvalue\n,\n \nstep\n,\n \nindex\n,\n \ndirection\n);\n\n\n\n\n\nPlay animation\n\n\nPhaser\n.\nActions\n.\nPlayAnimation\n(\ngameobjects\n,\n \nkey\n,\n \nstartFrame\n);\n\n\n\n\n\nShuffle\n\n\nPhaser\n.\nActions\n.\nShuffle\n(\ngameobjects\n);", 
+            "title": "Group actions"
+        }, 
+        {
+            "location": "/groupactions/index.html#introduction", 
+            "text": "Set properties of game objects, built-in methods of phaser.   Author: Richard Davey", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/groupactions/index.html#usage", 
+            "text": "", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/groupactions/index.html#call", 
+            "text": "Phaser . Actions . Call ( gameobjects ,   callback ,   context );", 
+            "title": "Call"
+        }, 
+        {
+            "location": "/groupactions/index.html#any-property", 
+            "text": "Phaser . Actions . PropertyValueSet ( gameobjects ,   key ,   value ,   step ,   index ,   direction );    gameobjects : The array of game objects to be updated by this action.  key : The property to be updated.  value : The amount to be added to the property.  step : This is added to the  value  amount, multiplied by the iteration counter.  index : An optional offset to start searching from within the items array.  direction :  1  : from beginning to end.  -1 : from end to beginning.     Phaser . Actions . PropertyValueInc ( gameobjects ,   key ,   value ,   step ,   index ,   direction );   Phaser . Actions . SmootherStep ( gameobjects ,   key ,   min ,   max ,   inc ));  Phaser . Actions . SmoothStep ( gameobjects ,   key ,   min ,   max ,   inc ));  Phaser . Actions . Spread ( gameobjects ,   key ,   min ,   max ,   inc ));", 
+            "title": "Any property"
+        }, 
+        {
+            "location": "/groupactions/index.html#position", 
+            "text": "Phaser . Actions . SetX ( gameobjects ,   value ,   step ,   index ,   direction );   Phaser . Actions . IncX ( gameobjects ,   value ,   step ,   index ,   direction );   Phaser . Actions . SetY ( gameobjects ,   value ,   step ,   index ,   direction );   Phaser . Actions . IncY ( gameobjects ,   value ,   step ,   index ,   direction );   Phaser . Actions . SetXY ( gameobjects ,   x ,   y ,   stepX ,   stepY ,   index ,   direction );   Phaser . Actions . IncXY ( gameobjects ,   x ,   y ,   stepX ,   stepY ,   index ,   direction );", 
+            "title": "Position"
+        }, 
+        {
+            "location": "/groupactions/index.html#position-on-shape", 
+            "text": "", 
+            "title": "Position on shape"
+        }, 
+        {
+            "location": "/groupactions/index.html#grid-align", 
+            "text": "Phaser . Actions . GridAlign ( gameobjects ,   { \n     width :   - 1 , \n     height :   - 1 , \n     cellWidth :   1 , \n     cellHeight :   1 , \n     position :   Phaser . Display . Align . TOP_LEFT , \n     x :   0 , \n     y :   0  });", 
+            "title": "Grid align"
+        }, 
+        {
+            "location": "/groupactions/index.html#line", 
+            "text": "Phaser . Actions . PlaceOnLine ( gameobjects ,   line );   // line: Phaser.Geom.Line   Phaser . Actions . RandomLine ( gameobjects ,   line );   // line: Phaser.Geom.Line", 
+            "title": "Line"
+        }, 
+        {
+            "location": "/groupactions/index.html#circle", 
+            "text": "Phaser . Actions . PlaceOnCircle ( gameobjects ,   circle ,   startAngle ,   endAngle );   // circle: Phaser.Geom.Circle   Phaser . Actions . RandomCircle ( gameobjects ,   circle );   // circle: Phaser.Geom.Circle", 
+            "title": "Circle"
+        }, 
+        {
+            "location": "/groupactions/index.html#ellipse", 
+            "text": "Phaser . Actions . PlaceOnEllipse ( gameobjects ,   ellipse ,   startAngle ,   endAngle );   // ellipse: Phaser.Geom.Ellipse", 
+            "title": "Ellipse"
+        }, 
+        {
+            "location": "/groupactions/index.html#triangle", 
+            "text": "Phaser . Actions . PlaceOnTriangle ( gameobjects ,   triangle ,   stepRate );   // triangle: Phaser.Geom.Triangle   Phaser . Actions . RandomTriangle ( gameobjects ,   triangle );   // triangle: Phaser.Geom.Triangle", 
+            "title": "Triangle"
+        }, 
+        {
+            "location": "/groupactions/index.html#rectangle", 
+            "text": "Phaser . Actions . PlaceOnRectangle ( gameobjects ,   rect ,   shift ;   // rect: Phaser.Geom.Rectangle   Phaser . Actions . RandomRectangle ( gameobjects ,   rect );   // rect: Phaser.Geom.Rectangle   Phaser . Actions . WrapInRectangle ( gameobjects ,   rect ,   padding );   // rect: Phaser.Geom.Rectangle", 
+            "title": "Rectangle"
+        }, 
+        {
+            "location": "/groupactions/index.html#angle", 
+            "text": "Phaser . Actions . Angle ( gameobjects ,   value ,   step ,   index ,   direction );   Phaser . Actions . Rotate ( gameobjects ,   value ,   step ,   index ,   direction );", 
+            "title": "Angle"
+        }, 
+        {
+            "location": "/groupactions/index.html#visible", 
+            "text": "Phaser . Actions . SetVisible ( gameobjects ,   value ,   index ,   direction );   Phaser . Actions . ToggleVisible ( gameobjects );", 
+            "title": "Visible"
+        }, 
+        {
+            "location": "/groupactions/index.html#alpha", 
+            "text": "Phaser . Actions . SetAlpha ( gameobjects ,   value ,   step ,   index ,   direction );", 
+            "title": "Alpha"
+        }, 
+        {
+            "location": "/groupactions/index.html#tint", 
+            "text": "Phaser . Actions . setTint ( gameobjects ,   value );  //Phaser.Actions.setTint(gameobjects, topLeft, topRight, bottomLeft, bottomRight);", 
+            "title": "Tint"
+        }, 
+        {
+            "location": "/groupactions/index.html#origin", 
+            "text": "Phaser . Actions . SetOrigin ( gameobjects ,   originX ,   originY ,   stepX ,   stepY ,   index ,   direction );", 
+            "title": "Origin"
+        }, 
+        {
+            "location": "/groupactions/index.html#scale", 
+            "text": "Phaser . Actions . ScaleX ( gameobjects ,   value ,   step ,   index ,   direction );   Phaser . Actions . ScaleY ( gameobjects ,   value ,   step ,   index ,   direction );   Phaser . Actions . ScaleXY ( gameobjects ,   x ,   y ,   stepX ,   stepY ,   index ,   direction );", 
+            "title": "Scale"
+        }, 
+        {
+            "location": "/groupactions/index.html#depth", 
+            "text": "Phaser . Actions . SetDepth ( gameobjects ,   value ,   step ,   index ,   direction );", 
+            "title": "Depth"
+        }, 
+        {
+            "location": "/groupactions/index.html#play-animation", 
+            "text": "Phaser . Actions . PlayAnimation ( gameobjects ,   key ,   startFrame );", 
+            "title": "Play animation"
+        }, 
+        {
+            "location": "/groupactions/index.html#shuffle", 
+            "text": "Phaser . Actions . Shuffle ( gameobjects );", 
+            "title": "Shuffle"
         }, 
         {
             "location": "/date/index.html", 
