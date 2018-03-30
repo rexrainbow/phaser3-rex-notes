@@ -32,7 +32,7 @@
     
     
       
-        <title>Gashapon - Notes of Phaser 3</title>
+        <title>Scene manager - Notes of Phaser 3</title>
       
     
     
@@ -86,7 +86,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Gashapon
+                Scene manager
               </span>
             
           
@@ -162,10 +162,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
     
     <label class="md-nav__link" for="nav-2">
       System
@@ -193,11 +195,98 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../scenemanager/index.html" title="Scene manager" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Scene manager
+      </label>
+    
+    <a href="index.html" title="Scene manager" class="md-nav__link md-nav__link--active">
       Scene manager
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#add-new-scene" title="Add new scene" class="md-nav__link">
+    Add new scene
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#remove-scene" title="Remove scene" class="md-nav__link">
+    Remove scene
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#start-scene" title="Start scene" class="md-nav__link">
+    Start scene
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pauseresume-scene" title="Pause/Resume scene" class="md-nav__link">
+    Pause/Resume scene
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#read-status" title="Read status" class="md-nav__link">
+    Read status
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stop-scene" title="Stop scene" class="md-nav__link">
+    Stop scene
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#get-scene" title="Get scene" class="md-nav__link">
+    Get scene
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#order-of-scenes" title="Order of scenes" class="md-nav__link">
+    Order of scenes
+  </a>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -786,12 +875,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
     
     <label class="md-nav__link" for="nav-9">
       Math
@@ -807,12 +894,10 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-1" type="checkbox" id="nav-9-1" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-1" type="checkbox" id="nav-9-1">
     
     <label class="md-nav__link" for="nav-9-1">
       Random
@@ -828,219 +913,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="toc">
-        Gashapon
-      </label>
-    
-    <a href="index.html" title="Gashapon" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../gashaponplugin/index.html" title="Gashapon" class="md-nav__link">
       Gashapon
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#source-code" title="Source code" class="md-nav__link">
-    Source code
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pick-item" title="Pick item" class="md-nav__link">
-    Pick item
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#pick-a-random-item" title="Pick a random item" class="md-nav__link">
-    Pick a random item
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pick-specific-item" title="Pick specific item" class="md-nav__link">
-    Pick specific item
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#last-picked-item" title="Last picked item" class="md-nav__link">
-    Last picked item
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set-item" title="Set item" class="md-nav__link">
-    Set item
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#set-item_1" title="Set item" class="md-nav__link">
-    Set item
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#add-item" title="Add item" class="md-nav__link">
-    Add item
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#remove-item" title="Remove item" class="md-nav__link">
-    Remove item
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#remove-item_1" title="Remove item" class="md-nav__link">
-    Remove item
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#remove-all-items" title="Remove all items" class="md-nav__link">
-    Remove all items
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#current-status" title="Current status" class="md-nav__link">
-    Current status
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#get-current-status" title="Get current status" class="md-nav__link">
-    Get current status
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#clone-object" title="Clone object" class="md-nav__link">
-    Clone object
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#overwrite-current-status" title="Overwrite current status" class="md-nav__link">
-    Overwrite current status
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-items" title="Get items" class="md-nav__link">
-    Get items
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#for-each-item" title="For each item" class="md-nav__link">
-    For each item
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-items_1" title="Get items" class="md-nav__link">
-    Get items
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -1145,59 +1022,37 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
+  <a href="#add-new-scene" title="Add new scene" class="md-nav__link">
+    Add new scene
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#source-code" title="Source code" class="md-nav__link">
-    Source code
+  <a href="#remove-scene" title="Remove scene" class="md-nav__link">
+    Remove scene
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
+  <a href="#start-scene" title="Start scene" class="md-nav__link">
+    Start scene
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pauseresume-scene" title="Pause/Resume scene" class="md-nav__link">
+    Pause/Resume scene
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pick-item" title="Pick item" class="md-nav__link">
-    Pick item
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#pick-a-random-item" title="Pick a random item" class="md-nav__link">
-    Pick a random item
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pick-specific-item" title="Pick specific item" class="md-nav__link">
-    Pick specific item
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#last-picked-item" title="Last picked item" class="md-nav__link">
-    Last picked item
+  <a href="#read-status" title="Read status" class="md-nav__link">
+    Read status
   </a>
   
 </li>
@@ -1206,124 +1061,25 @@
     </nav>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#set-item" title="Set item" class="md-nav__link">
-    Set item
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#set-item_1" title="Set item" class="md-nav__link">
-    Set item
+      
+        <li class="md-nav__item">
+  <a href="#stop-scene" title="Stop scene" class="md-nav__link">
+    Stop scene
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#add-item" title="Add item" class="md-nav__link">
-    Add item
+      
+        <li class="md-nav__item">
+  <a href="#get-scene" title="Get scene" class="md-nav__link">
+    Get scene
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#remove-item" title="Remove item" class="md-nav__link">
-    Remove item
+      
+        <li class="md-nav__item">
+  <a href="#order-of-scenes" title="Order of scenes" class="md-nav__link">
+    Order of scenes
   </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#remove-item_1" title="Remove item" class="md-nav__link">
-    Remove item
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#remove-all-items" title="Remove all items" class="md-nav__link">
-    Remove all items
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#current-status" title="Current status" class="md-nav__link">
-    Current status
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#get-current-status" title="Get current status" class="md-nav__link">
-    Get current status
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#clone-object" title="Clone object" class="md-nav__link">
-    Clone object
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#overwrite-current-status" title="Overwrite current status" class="md-nav__link">
-    Overwrite current status
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-items" title="Get items" class="md-nav__link">
-    Get items
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#for-each-item" title="For each item" class="md-nav__link">
-    For each item
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-items_1" title="Get items" class="md-nav__link">
-    Get items
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1342,103 +1098,109 @@
               
                 
                 
-                  <h1>Gashapon</h1>
+                  <h1>Scene manager</h1>
                 
-                <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Pick random item from box.</p>
+                <p>Scene manager:</p>
 <ul>
-<li>Author: Rex</li>
-<li>Member of scene, or game object</li>
+<li>In Game instance : <code>game.scene</code></li>
+<li>In each scene instance: <code>scene.scene</code></li>
 </ul>
-<h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/gashapon/GashaponPlugin.js">Link</a></p>
-<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gashapon</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">GashaponPlugin</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
-    <span class="nx">mode</span><span class="o">:</span> <span class="s1">&#39;shuffle&#39;</span><span class="p">,</span>  <span class="c1">// 0|&#39;shuffle&#39;|1|&#39;random</span>
-    <span class="nx">items</span><span class="o">:</span> <span class="p">{</span>  <span class="c1">// name:count</span>
-        <span class="nx">a</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> 
-        <span class="nx">b</span><span class="o">:</span><span class="mi">2</span><span class="p">,</span> 
-        <span class="nx">c</span><span class="o">:</span><span class="mi">3</span> 
-    <span class="p">},</span>
-    <span class="nx">reload</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>     <span class="c1">// true|false</span>
-<span class="p">});</span>
+<h2 id="add-new-scene">Add new scene<a class="headerlink" href="#add-new-scene" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">sceneConfig</span><span class="p">,</span> <span class="nx">autoStart</span><span class="p">);</span>
+<span class="c1">// game.scene.add(key, sceneConfig, autoStart);</span>
 </pre></div>
 
-<p>Properties</p>
-<ul>
-<li>mode : <ul>
-<li><code>'shuffle'</code>, or <code>0</code> : pick item from box without put it back.</li>
-<li><code>'random'</code>, or <code>1</code> : pick item from box then put it back.</li>
-</ul>
-</li>
-<li>reload : set <code>true</code> to reload items when box is empty for <code>shuffle</code> mode.</li>
-<li>items : initial items in box</li>
-</ul>
-<h3 id="pick-item">Pick item<a class="headerlink" href="#pick-item" title="Permanent link">&para;</a></h3>
-<h4 id="pick-a-random-item">Pick a random item<a class="headerlink" href="#pick-a-random-item" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">gashapon</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span>
+<h2 id="remove-scene">Remove scene<a class="headerlink" href="#remove-scene" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </pre></div>
 
-<ul>
-<li>return <code>null</code> if pick nothing</li>
-</ul>
-<h4 id="pick-specific-item">Pick specific item<a class="headerlink" href="#pick-specific-item" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">gashapon</span><span class="p">.</span><span class="nx">next</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">);</span>
+<h2 id="start-scene">Start scene<a class="headerlink" href="#start-scene" title="Permanent link">&para;</a></h2>
+<p>Launch the given Scene and run it in parallel with this one.</p>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">launch</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
 </pre></div>
 
-<ul>
-<li>return <code>null</code> if pick nothing</li>
-</ul>
-<h4 id="last-picked-item">Last picked item<a class="headerlink" href="#last-picked-item" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">gashapon</span><span class="p">.</span><span class="nx">result</span><span class="p">;</span>
+<p>Shutdown this Scene and run the given one.</p>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
 </pre></div>
 
-<h3 id="set-item">Set item<a class="headerlink" href="#set-item" title="Permanent link">&para;</a></h3>
-<h4 id="set-item_1">Set item<a class="headerlink" href="#set-item_1" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">gashapon</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
-<span class="c1">// gashapon.setItem(&#39;a&#39;, 1).setItem(&#39;b&#39;, 2).setItem(&#39;c&#39;, 3);</span>
+<h2 id="pauseresume-scene">Pause/Resume scene<a class="headerlink" href="#pauseresume-scene" title="Permanent link">&para;</a></h2>
+<p>Pause : stops the update step but still renders.</p>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">pause</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+<span class="c1">// scene.scene.pause();  // pause myself</span>
 </pre></div>
 
-<h4 id="add-item">Add item<a class="headerlink" href="#add-item" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">gashapon</span><span class="p">.</span><span class="nx">addItem</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<p>Resume : starts the update loop again.</p>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">resume</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+<span class="c1">// scene.scene.resume();  // resume myself</span>
 </pre></div>
 
-<h3 id="remove-item">Remove item<a class="headerlink" href="#remove-item" title="Permanent link">&para;</a></h3>
-<h4 id="remove-item_1">Remove item<a class="headerlink" href="#remove-item_1" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">gashapon</span><span class="p">.</span><span class="nx">removeItem</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">);</span>
-<span class="c1">// gashapon.removeItem(&#39;b&#39;).gashapon.removeItem(&#39;c&#39;);</span>
+<p>Sleep : no update, no render but doesn't shutdown.</p>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">sleep</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+<span class="c1">// scene.scene.sleep();  // sleep myself</span>
 </pre></div>
 
-<h4 id="remove-all-items">Remove all items<a class="headerlink" href="#remove-all-items" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">gashapon</span><span class="p">.</span><span class="nx">removeAllItems</span><span class="p">();</span>
+<p>Wake-up: starts update and render</p>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">wake</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+<span class="c1">// scene.scene.wake();  // wake-up myself</span>
 </pre></div>
 
-<h3 id="current-status">Current status<a class="headerlink" href="#current-status" title="Permanent link">&para;</a></h3>
-<h4 id="get-current-status">Get current status<a class="headerlink" href="#get-current-status" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">status</span> <span class="o">=</span> <span class="nx">gashapon</span><span class="p">.</span><span class="nx">toJSON</span><span class="p">();</span>
+<p>Makes this Scene sleep then starts the Scene given.</p>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="k">switch</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </pre></div>
 
-<h4 id="clone-object">Clone object<a class="headerlink" href="#clone-object" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">status</span> <span class="o">=</span> <span class="nx">gashapon</span><span class="p">.</span><span class="nx">toJSON</span><span class="p">();</span>
-<span class="kd">var</span> <span class="nx">gashapon2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Gashapon</span><span class="p">(</span><span class="nx">status</span><span class="p">);</span>
+<h3 id="read-status">Read status<a class="headerlink" href="#read-status" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isSleep</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">isSleeping</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+<span class="c1">// var isSleep = scene.scene.isSleeping();</span>
 </pre></div>
 
-<h4 id="overwrite-current-status">Overwrite current status<a class="headerlink" href="#overwrite-current-status" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">status</span> <span class="o">=</span> <span class="nx">gashapon</span><span class="p">.</span><span class="nx">toJSON</span><span class="p">();</span>
-<span class="c1">// gashapon.next()...</span>
-<span class="nx">gashapon</span><span class="p">.</span><span class="nx">resetFromJSON</span><span class="p">(</span><span class="nx">status</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isActive</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">isActive</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+<span class="c1">// var isActive = scene.scene.isActive();</span>
 </pre></div>
 
-<h3 id="get-items">Get items<a class="headerlink" href="#get-items" title="Permanent link">&para;</a></h3>
-<h4 id="for-each-item">For each item<a class="headerlink" href="#for-each-item" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">gashapon</span><span class="p">.</span><span class="nx">eachItem</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">count</span><span class="p">){</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">name</span> <span class="o">+</span> <span class="s2">&quot;: &quot;</span> <span class="o">+</span> <span class="nx">count</span><span class="p">);</span>
-<span class="p">});</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isVisible</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">isVisible</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+<span class="c1">// var isVisible = scene.scene.isVisible();</span>
 </pre></div>
 
-<h4 id="get-items_1">Get items<a class="headerlink" href="#get-items_1" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">items</span> <span class="o">=</span> <span class="nx">gashapon</span><span class="p">.</span><span class="nx">getItems</span><span class="p">();</span>
+<h2 id="stop-scene">Stop scene<a class="headerlink" href="#stop-scene" title="Permanent link">&para;</a></h2>
+<p>Stop : shutdown the Scene, clearing display list, timers, etc.</p>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">stop</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+<span class="c1">// scene.scene.stop();  // stop myself</span>
+</pre></div>
+
+<h2 id="get-scene">Get scene<a class="headerlink" href="#get-scene" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">scene</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</pre></div>
+
+<h2 id="order-of-scenes">Order of scenes<a class="headerlink" href="#order-of-scenes" title="Permanent link">&para;</a></h2>
+<p>Swaps the position of two scenes in the Scenes list.</p>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">swapPosition</span><span class="p">(</span><span class="nx">keyA</span><span class="p">,</span> <span class="nx">keyB</span><span class="p">);</span>
+<span class="c1">// scene.scene.stop(keyA);</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">moveAbove</span><span class="p">(</span><span class="nx">keyA</span><span class="p">,</span> <span class="nx">keyB</span><span class="p">);</span>
+<span class="c1">// scene.scene.moveAbove(keyA);</span>
+</pre></div>
+
+<p>Scene B is directly above Scene A.</p>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">moveBelow</span><span class="p">(</span><span class="nx">keyA</span><span class="p">,</span> <span class="nx">keyB</span><span class="p">);</span>
+<span class="c1">// scene.scene.moveBelow(keyA);</span>
+</pre></div>
+
+<p>Scene B is directly below Scene A.</p>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">moveUp</span><span class="p">(</span><span class="nx">keyA</span><span class="p">);</span>
+<span class="c1">// scene.scene.moveBelow();</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">moveDown</span><span class="p">(</span><span class="nx">keyA</span><span class="p">);</span>
+<span class="c1">// scene.scene.moveDown();</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">bringToTop</span><span class="p">(</span><span class="nx">keyA</span><span class="p">);</span>
+<span class="c1">// scene.scene.bringToTop();</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">sendToBack</span><span class="p">(</span><span class="nx">keyA</span><span class="p">);</span>
+<span class="c1">// scene.scene.sendToBack();</span>
 </pre></div>
                 
                   
@@ -1458,7 +1220,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../tcrpplayerplugin/index.html" title="Player" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../game/index.html" title="Game" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -1467,19 +1229,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Player
+                Game
               </span>
             </div>
           </a>
         
         
-          <a href="../format/index.html" title="Format" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../touchevents/index.html" title="Touch events" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Format
+                Touch events
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

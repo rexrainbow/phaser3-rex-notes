@@ -50,6 +50,16 @@ var flipY = gameobject.flipY;
 gameobject.flipY = false;
 ```
 
+### Depth (z-index)
+
+The depth starts from zero (the default value) and increases from that point. A game object with a higher depth value will always render in front of one with a lower value.
+
+```javascript
+var alpha = gameobject.depth;
+gameobject.depth = 0;
+// gameobject.setDepth(value);
+```
+
 ### Scroll factor
 
 ```javascript

@@ -12,6 +12,22 @@
     
         
     <url>
+     <loc>/game/index.html</loc>
+     <lastmod>2018-03-30</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>/scenemanager/index.html</loc>
+     <lastmod>2018-03-30</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    
+
+    
+        
+    <url>
      <loc>/touchevents/index.html</loc>
      <lastmod>2018-03-30</lastmod>
      <changefreq>daily</changefreq>

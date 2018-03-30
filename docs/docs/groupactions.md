@@ -33,7 +33,13 @@ Phaser.Actions.PropertyValueInc(gameobjects, key, value, step, index, direction)
 
 ```javascript
 Phaser.Actions.SmootherStep(gameobjects, key, min, max, inc));
+```
+
+```javascript
 Phaser.Actions.SmoothStep(gameobjects, key, min, max, inc));
+```
+
+```javascript
 Phaser.Actions.Spread(gameobjects, key, min, max, inc));
 ```
 
@@ -63,6 +69,14 @@ Phaser.Actions.SetXY(gameobjects, x, y, stepX, stepY, index, direction);
 Phaser.Actions.IncXY(gameobjects, x, y, stepX, stepY, index, direction);
 ```
 
+### Shift position
+
+Set the position of first game object to (x, y), others to the position of previous game object.
+
+```javascript
+Phaser.Actions.ShiftPosition(gameobjects, x, y, direction, output);
+```
+
 ### Position on shape
 
 #### Grid align
@@ -82,61 +96,93 @@ Phaser.Actions.GridAlign(gameobjects, {
 #### Line
 
 ```javascript
-Phaser.Actions.PlaceOnLine(gameobjects, line); // line: Phaser.Geom.Line
+var line = new Phaser.Geom.Line(x1, y1, x2, y2);
 ```
 
 ```javascript
-Phaser.Actions.RandomLine(gameobjects, line); // line: Phaser.Geom.Line
+Phaser.Actions.PlaceOnLine(gameobjects, line);
+```
+
+```javascript
+Phaser.Actions.RandomLine(gameobjects, line);
 ```
 
 #### Circle
 
 ```javascript
-Phaser.Actions.PlaceOnCircle(gameobjects, circle, startAngle, endAngle); // circle: Phaser.Geom.Circle
+var circle = new Phaser.Geom.Circle(x, y, radius);
 ```
 
 ```javascript
-Phaser.Actions.RandomCircle(gameobjects, circle); // circle: Phaser.Geom.Circle
+Phaser.Actions.PlaceOnCircle(gameobjects, circle, startAngle, endAngle);
+```
+
+```javascript
+Phaser.Actions.RandomCircle(gameobjects, circle);
 ```
 
 #### Ellipse
 
 ```javascript
-Phaser.Actions.PlaceOnEllipse(gameobjects, ellipse, startAngle, endAngle); // ellipse: Phaser.Geom.Ellipse
+var ellipse = new Phaser.Geom.Ellipse(x, y, width, height);
+```
+
+```javascript
+Phaser.Actions.PlaceOnEllipse(gameobjects, ellipse, startAngle, endAngle);
 ```
 
 #### Triangle
 
 ```javascript
-Phaser.Actions.PlaceOnTriangle(gameobjects, triangle, stepRate); // triangle: Phaser.Geom.Triangle
+var triangle = new Phaser.Geom.Triangle(x1, y1, x2, y2, x3, y3);
 ```
 
 ```javascript
-Phaser.Actions.RandomTriangle(gameobjects, triangle); // triangle: Phaser.Geom.Triangle
+Phaser.Actions.PlaceOnTriangle(gameobjects, triangle, stepRate);
+```
+
+```javascript
+Phaser.Actions.RandomTriangle(gameobjects, triangle);
 ```
 
 #### Rectangle
 
 ```javascript
-Phaser.Actions.PlaceOnRectangle(gameobjects, rect, shift; // rect: Phaser.Geom.Rectangle
+var rect = new Phaser.Geom.Rectangle(x, y, width, height);
 ```
 
 ```javascript
-Phaser.Actions.RandomRectangle(gameobjects, rect); // rect: Phaser.Geom.Rectangle
+Phaser.Actions.PlaceOnRectangle(gameobjects, rect, shift;
 ```
 
 ```javascript
-Phaser.Actions.WrapInRectangle(gameobjects, rect, padding); // rect: Phaser.Geom.Rectangle
+Phaser.Actions.RandomRectangle(gameobjects, rect);
+```
+
+```javascript
+Phaser.Actions.WrapInRectangle(gameobjects, rect, padding);
 ```
 
 ### Angle
 
 ```javascript
 Phaser.Actions.Angle(gameobjects, value, step, index, direction);
+// value: angle in radians
 ```
 
 ```javascript
 Phaser.Actions.Rotate(gameobjects, value, step, index, direction);
+// value: angle in degree
+```
+
+```javascript
+Phaser.Actions.RotateAround(gameobjects, point, angle);
+// point: {x, y}, angle: angle in radians
+```
+
+```javascript
+Phaser.Actions.RotateAroundDistance(gameobjects, point, angle, distance);
+// point: {x, y}, angle: angle in radians
 ```
 
 ### Visible
@@ -154,7 +200,6 @@ Phaser.Actions.ToggleVisible(gameobjects);
 ```javascript
 Phaser.Actions.SetAlpha(gameobjects, value, step, index, direction);
 ```
-
 
 ### Tint
 
@@ -189,6 +234,39 @@ Phaser.Actions.ScaleXY(gameobjects, x, y, stepX, stepY, index, direction);
 Phaser.Actions.SetDepth(gameobjects, value, step, index, direction);
 ```
 
+### Hit area
+
+```javascript
+Phaser.Actions.SetHitArea(gameobjects, hitArea, hitAreaCallback);
+```
+
+### Blend mode
+
+```javascript
+Phaser.Actions.SetHitArea(gameobjects, value, index, direction);
+```
+
+Blend mode :
+
+- Phaser.BlendModes.SKIP_CHECK
+- Phaser.BlendModes.NORMAL
+- Phaser.BlendModes.ADD
+- Phaser.BlendModes.MULTIPLY
+- Phaser.BlendModes.SCREEN
+- Phaser.BlendModes.OVERLAY
+- Phaser.BlendModes.DARKEN
+- Phaser.BlendModes.LIGHTEN
+- Phaser.BlendModes.COLOR_DODGE
+- Phaser.BlendModes.COLOR_BURN
+- Phaser.BlendModes.HARD_LIGHT
+- Phaser.BlendModes.SOFT_LIGHT
+- Phaser.BlendModes.DIFFERENCE
+- Phaser.BlendModes.EXCLUSION
+- Phaser.BlendModes.HUE
+- Phaser.BlendModes.SATURATION
+- Phaser.BlendModes.COLOR
+- Phaser.BlendModes.LUMINOSITY
+
 ### Play animation
 
 ```javascript
@@ -200,6 +278,3 @@ Phaser.Actions.PlayAnimation(gameobjects, key, startFrame);
 ```javascript
 Phaser.Actions.Shuffle(gameobjects);
 ```
-
-
-

@@ -3,6 +3,9 @@ theme: 'material'
 
 pages:
 - Home: index.md
+- System:
+    - Game: game.md
+    - Scene manager: scenemanager.md
 - Input:
     - Touch events: touchevents.md
     - Keyboard events: keyboardevents.md
