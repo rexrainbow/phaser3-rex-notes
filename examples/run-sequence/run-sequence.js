@@ -30,7 +30,7 @@ class CmdKlass extends EE{
     }
 
     complete() {
-        this.event.emit('complete');
+        this.emit('complete');
     }
 }
 class Demo extends Phaser.Scene {

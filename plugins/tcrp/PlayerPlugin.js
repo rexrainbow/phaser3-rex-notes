@@ -32,6 +32,7 @@ class PlayerPlugin extends EE {
         this.timeUnit = GetFastValue(o, 'timeUnit', 0);
         this.dtMode = GetFastValue(o, 'dtMode', 0);
         this.index = GetFastValue(o, 'index', 0);
+        this.state = GetFastValue(o, 'state', 0); // 0= idle, 1= run
         this.nextDt = GetFastValue(o, 'nextDt', 0);
         return this;
     }
@@ -48,6 +49,7 @@ class PlayerPlugin extends EE {
             timeUnit: this.timeUnit,
             dtMode: this.dtMode,
             index: this.index,
+            state: this.state,
             nextDt: this.nextDt
         };
     }
@@ -71,6 +73,7 @@ class PlayerPlugin extends EE {
     }
 
     load(commands, scope, config) {
+        this.stop();
         this.timeUnit = GetFastValue(config, 'timeUnit', this.timeUnit);
         if (typeof (this.timeUnit) === 'string') {
             this.timeUnit = TIMEUNITMODE[this.timeUnit];
@@ -107,9 +110,16 @@ class PlayerPlugin extends EE {
     }
 
     start(startAt) {
+        this.stop();
+        
         this.index = 0;
-        this.nextDt = this.getNextDt(0);
-        this.clock.start(startAt);
+        this.state = 1;
+        if (this.commands.length === 0) {
+            this.complete();
+        } else {
+            this.nextDt = this.getNextDt(0);
+            this.clock.start(startAt);
+        }
         return this;
     }
 
@@ -124,6 +134,7 @@ class PlayerPlugin extends EE {
     }
 
     stop() {
+        this.state = 0;
         this.clock.stop();
         return this;
     }
@@ -138,7 +149,7 @@ class PlayerPlugin extends EE {
     }
 
     get completed() {
-        return (this.index >= this.commands.length);
+        return (this.state === 0);
     }
 
     get timeScale() {
@@ -160,14 +171,6 @@ class PlayerPlugin extends EE {
         }
 
         while (1) {
-            // complete
-            if (this.completed) {
-                this.clock.stop();
-                this.emit('complete');
-                return;
-            }
-            // complete            
-
             // run a row
             var item = this.commands[this.index];
             var command = item[1];
@@ -178,20 +181,29 @@ class PlayerPlugin extends EE {
             this.emit('runcommand', command, this.scope);
             // run a row
 
-            // next dt
-            this.index++; // point to next item
-            this.nextDt = this.getNextDt(this.nextDt);
-            if (this.nextDt > this.clock.now) {
+            if (this.index === (this.commands.length - 1)) {
+                this.complete();
                 return;
+            } else {
+                // next dt
+                this.index++; // point to next item
+                this.nextDt = this.getNextDt(this.nextDt);
+                if (this.nextDt > this.clock.now) {
+                    return;
+                }
+                // next dt
             }
-            // next dt
+
         }
     }
 
+    complete() {
+        this.state = 0;
+        this.clock.stop();
+        this.emit('complete');
+    }
+
     getNextDt(currentDt) {
-        if (this.completed) {
-            return currentDt;
-        }
         var dt = this.commands[this.index][0];
         if (this.timeUnit === 1) { // sec mode
             dt = dt * 1000;
