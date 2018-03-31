@@ -268,7 +268,11 @@ class TextTypingPlugin extends EE {
 
     setText(text) {
         if (this.setTextCallback) {
-            text = this.setTextCallback.call(this.setTextCallbackScope, text, this.isLastChar, this.insertIdx);
+            if (this.setTextCallbackScope) {
+                text = this.setTextCallback.call(this.setTextCallbackScope, text, this.isLastChar, this.insertIdx);
+            } else {
+                text = this.setTextCallback(text, this.isLastChar, this.insertIdx);
+            }
         }
         this.gameobject.setText(text);
     }

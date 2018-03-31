@@ -38,7 +38,7 @@ class Gashapon {
         }
         if (this.customRnd == undefined) {
             this.customRnd = [null, null];
-        }        
+        }
 
         this.setMode(GetFastValue(o, 'mode', 0));
         this.setReload(GetFastValue(o, 'reload', true));
@@ -229,11 +229,20 @@ class Gashapon {
             args.push(arguments[i]);
         }
 
-        for (var name in this.items) {
-            args[0] = name;
-            args[1] = this.items[name];
+        if (scope) {
+            for (var name in this.items) {
+                args[0] = name;
+                args[1] = this.items[name];
 
-            callback.apply(scope, args);
+                callback.apply(scope, args);
+            }
+        } else {
+            for (var name in this.items) {
+                args[0] = name;
+                args[1] = this.items[name];
+
+                callback(args);
+            }
         }
 
         return this;
@@ -253,11 +262,20 @@ class Gashapon {
             args.push(arguments[i]);
         }
 
-        for (var name in this.remain) {
-            args[1] = name;
-            args[2] = this.remain[name];
+        if (scope) {
+            for (var name in this.remain) {
+                args[1] = name;
+                args[2] = this.remain[name];
 
-            callback.apply(scope, args);
+                callback.apply(scope, args);
+            }
+        } else {
+            for (var name in this.remain) {
+                args[1] = name;
+                args[2] = this.remain[name];
+
+                callback(args);
+            }
         }
 
         return this;
@@ -432,7 +450,11 @@ class Gashapon {
     getRndValue() {
         var value;
         if (this.customRnd[0]) {
-            value = this.customRnd[0].call(this.customRnd[1]);
+            if (this.customRnd[1]) {
+                value = this.customRnd[0].call(this.customRnd[1]);
+            } else {
+                value = this.customRnd[0]();
+            }
         } else {
             value = Math.random();
         }

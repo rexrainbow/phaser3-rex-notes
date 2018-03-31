@@ -39,17 +39,32 @@ var runCommand = function (cmd, scope, config) {
         // convert string to floating number, boolean, null, or string        
         if (argsConvertCallback === true) {
             argsConvertCallback = defaultTypeConvert;
+            argsConvertCallbackScope = undefined;
         }
-        for (var i = 0, len = ARGS.length; i < len; i++) {
-            ARGS[i] = argsConvertCallback.call(argsConvertCallbackScope, cmd, ARGS[i]);
+        if (argsConvertCallbackScope) {
+            for (var i = 0, len = ARGS.length; i < len; i++) {
+                ARGS[i] = argsConvertCallback.call(argsConvertCallbackScope, cmd, ARGS[i]);
+            }
+        } else {
+            for (var i = 0, len = ARGS.length; i < len; i++) {
+                ARGS[i] = argsConvertCallback(cmd, ARGS[i]);
+            }            
         }
+
     }
 
     var fn = scope[fnName];
     if (fn == null) {
         fn = GetValue(scope, fnName, null);
     }
-    return fn.apply(scope, ARGS);
+
+    var retValue;
+    if (scope) {
+        retValue = fn.apply(scope, ARGS);
+    } else {
+        retValue = fn(ARGS);
+    }
+    return retValue;
 }
 
 const defaultTypeConvert = function (command, value) {

@@ -178,13 +178,21 @@ class CsvToHashTable {
         var rowKeys = this.rowKeys,
             rowKey;
 
-        var isCallbackMode = (typeof (callback) === 'function');
-        var initValue = (isCallbackMode) ? undefined : callback;
-        for (var i = 0, len = rowKeys.length; i < len; i++) {
-            rowKey = rowKeys[i];
-            if (isCallbackMode) {
-                col[rowKey] = callback.call(scope, this, colKey, rowKey);
+        if (typeof (callback) === 'function') {
+            if (scope) {
+                for (var i = 0, len = rowKeys.length; i < len; i++) {
+                    rowKey = rowKeys[i];
+                    col[rowKey] = callback.call(scope, this, colKey, rowKey);
+                }
             } else {
+                for (var i = 0, len = rowKeys.length; i < len; i++) {
+                    rowKey = rowKeys[i];
+                    col[rowKey] = callback(this, colKey, rowKey);
+                }
+            }
+        } else {
+            var initValue = callback;
+            for (var i = 0, len = rowKeys.length; i < len; i++) {
                 col[rowKey] = initValue;
             }
         }
@@ -203,12 +211,26 @@ class CsvToHashTable {
 
         var isCallbackMode = (typeof (callback) === 'function');
         var initValue = (isCallbackMode) ? undefined : callback;
-        for (var i = 0, len = colKeys.length; i < len; i++) {
-            colKey = colKeys[i];
-            col = table[colKey];
-            if (isCallbackMode) {
-                col[rowKey] = callback.call(scope, this, colKey, rowKey);
+
+        if (typeof (callback) === 'function') {
+            if (scope) {
+                for (var i = 0, len = colKeys.length; i < len; i++) {
+                    colKey = colKeys[i];
+                    col = table[colKey];
+                    col[rowKey] = callback.call(scope, this, colKey, rowKey);
+                }
             } else {
+                for (var i = 0, len = colKeys.length; i < len; i++) {
+                    colKey = colKeys[i];
+                    col = table[colKey];
+                    col[rowKey] = callback(this, colKey, rowKey);
+                }
+            }
+        } else {
+            var initValue = callback;
+            for (var i = 0, len = colKeys.length; i < len; i++) {
+                colKey = colKeys[i];
+                col = table[colKey];
                 col[rowKey] = initValue;
             }
         }
@@ -247,12 +269,23 @@ class CsvToHashTable {
         var colKeys = this.colKeys,
             colKey, value;
         var isValidRowKey = this.hasRowKey(rowKey);
-        for (var i = 0, len = colKeys.length; i < len; i++) {
-            colKey = colKeys[i];
-            if (isValidRowKey) {
-                value = this.get(colKey, rowKey);
+
+        if (scope) {
+            for (var i = 0, len = colKeys.length; i < len; i++) {
+                colKey = colKeys[i];
+                if (isValidRowKey) {
+                    value = this.get(colKey, rowKey);
+                }
+                callback.call(scope, this, colKey, rowKey, value);
             }
-            callback.call(scope, this, colKey, rowKey, value);
+        } else {
+            for (var i = 0, len = colKeys.length; i < len; i++) {
+                colKey = colKeys[i];
+                if (isValidRowKey) {
+                    value = this.get(colKey, rowKey);
+                }
+                callback(scope, this, colKey, rowKey, value);
+            }
         }
         return this;
     }
@@ -261,13 +294,24 @@ class CsvToHashTable {
         var rowKeys = this.rowKeys,
             rowKey, value;
         var isValidColKey = this.hasColKey(colKey);
-        for (var i = 0, len = rowKeys.length; i < len; i++) {
-            rowKey = rowKeys[i];
-            if (isValidColKey) {
-                value = this.get(colKey, rowKey);
+        if (scope) {
+            for (var i = 0, len = rowKeys.length; i < len; i++) {
+                rowKey = rowKeys[i];
+                if (isValidColKey) {
+                    value = this.get(colKey, rowKey);
+                }
+                callback.call(scope, this, colKey, rowKey, value);
             }
-            callback.call(scope, this, colKey, rowKey, value);
+        } else {
+            for (var i = 0, len = rowKeys.length; i < len; i++) {
+                rowKey = rowKeys[i];
+                if (isValidColKey) {
+                    value = this.get(colKey, rowKey);
+                }
+                callback(this, colKey, rowKey, value);
+            }
         }
+
         return this;
     }
 
@@ -280,15 +324,28 @@ class CsvToHashTable {
         var colKey, rowKey, col, value,
             colKeys = this.colKeys,
             rowKeys = this.rowKeys;
-        for (var c = 0, clen = colKeys.length; c < clen; c++) {
-            colKey = colKeys[c];
-            col = table[colKey];
-            for (var r = 0, rlen = rowKeys.length; r < rlen; r++) {
-                rowKey = rowKeys[r];
-                value = col[rowKey];
-                col[rowKey] = callback.call(scope, this, colKey, rowKey, value);
+        if (scope) {
+            for (var c = 0, clen = colKeys.length; c < clen; c++) {
+                colKey = colKeys[c];
+                col = table[colKey];
+                for (var r = 0, rlen = rowKeys.length; r < rlen; r++) {
+                    rowKey = rowKeys[r];
+                    value = col[rowKey];
+                    col[rowKey] = callback.call(scope, this, colKey, rowKey, value);
+                }
+            }
+        } else {
+            for (var c = 0, clen = colKeys.length; c < clen; c++) {
+                colKey = colKeys[c];
+                col = table[colKey];
+                for (var r = 0, rlen = rowKeys.length; r < rlen; r++) {
+                    rowKey = rowKeys[r];
+                    value = col[rowKey];
+                    col[rowKey] = callback(this, colKey, rowKey, value);
+                }
             }
         }
+
         return this;
     }
 
@@ -311,10 +368,18 @@ class CsvToHashTable {
         var col = this.table[colKey];
         var rowKey, rowKeys = this.rowKeys,
             value;
-        for (var r = 0, rlen = rowKeys.length; r < rlen; r++) {
-            rowKey = rowKeys[r];
-            value = col[rowKey];
-            col[rowKey] = callback.call(scope, this, colKey, rowKey, value);
+        if (scope) {
+            for (var r = 0, rlen = rowKeys.length; r < rlen; r++) {
+                rowKey = rowKeys[r];
+                value = col[rowKey];
+                col[rowKey] = callback.call(scope, this, colKey, rowKey, value);
+            }
+        } else {
+            for (var r = 0, rlen = rowKeys.length; r < rlen; r++) {
+                rowKey = rowKeys[r];
+                value = col[rowKey];
+                col[rowKey] = callback(this, colKey, rowKey, value);
+            }
         }
         return this;
     }
@@ -334,10 +399,18 @@ class CsvToHashTable {
         var table = this.table;
         var colKey, colKeys = this.colKeys,
             value;
-        for (var c = 0, clen = colKeys.length; c < clen; c++) {
-            colKey = colKeys[c];
-            value = table[colKey][rowKey];
-            table[colKey][rowKey] = callback.call(scope, this, colKey, rowKey, value);
+        if (scope) {
+            for (var c = 0, clen = colKeys.length; c < clen; c++) {
+                colKey = colKeys[c];
+                value = table[colKey][rowKey];
+                table[colKey][rowKey] = callback.call(scope, this, colKey, rowKey, value);
+            }
+        } else {
+            for (var c = 0, clen = colKeys.length; c < clen; c++) {
+                colKey = colKeys[c];
+                value = table[colKey][rowKey];
+                table[colKey][rowKey] = callback(this, colKey, rowKey, value);
+            }
         }
         return this;
 
@@ -364,7 +437,7 @@ class CsvToHashTable {
         if (idx === -1) {
             return undefined;
         }
-        return colKeys[idx+step];
+        return colKeys[idx + step];
     }
 
     nextRowKey(rowKey, step) {
@@ -373,14 +446,14 @@ class CsvToHashTable {
         }
         if (step === undefined) {
             step = 1;
-        }        
+        }
 
         var rowKeys = this.rowKeys;
         var idx = rowKeys.indexOf(rowKey);
         if (idx === -1) {
             return undefined;
         }
-        return rowKeys[idx+1];
+        return rowKeys[idx + 1];
     }
 
     previousColKey(colKey, step) {
