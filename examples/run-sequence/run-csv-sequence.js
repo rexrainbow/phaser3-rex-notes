@@ -43,7 +43,7 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('mushroom', 'assets/images/mushroom.png');
+        this.load.image('arrow', 'assets/images/arrow.png');
     }
 
     create() {

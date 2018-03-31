@@ -48,7 +48,7 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('mushroom', 'assets/images/mushroom.png');
+        this.load.image('arrow', 'assets/images/arrow.png');
     }
 
     create() {
@@ -58,7 +58,7 @@ class Demo extends Phaser.Scene {
             ['print', 'hello'],
             ['print', 'world'],
             [
-                ['create-sprite', 'A', 100, 100, 'mushroom'],
+                ['create-sprite', 'A', 100, 100, 'arrow'],
                 ['move-sprite-to', 'A', 300, 200, 1]
             ]
 

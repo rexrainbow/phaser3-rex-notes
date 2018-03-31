@@ -10,7 +10,7 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('mushroom', 'assets/images/mushroom.png');
+        this.load.image('arrow', 'assets/images/arrow.png');
     }
 
     create() {
@@ -18,7 +18,7 @@ class Demo extends Phaser.Scene {
     }
 
     createImg(pointer) {
-        var img = this.add.image(pointer.x, pointer.y, 'mushroom');
+        var img = this.add.image(pointer.x, pointer.y, 'arrow');
         img.drag = new DragPlugin(img);
         img.drag.drag();
 

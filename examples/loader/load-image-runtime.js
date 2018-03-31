@@ -12,11 +12,11 @@ class Demo extends Phaser.Scene {
 
     preload() {
         // load image in preload stage
-        this.load.image('mushroom', 'assets/images/mushroom.png');
+        this.load.image('arrow', 'assets/images/arrow.png');
     }
 
     create() {
-        this.add.image(700, 500, 'mushroom');
+        this.add.image(700, 500, 'arrow');
 
         // load image in update loop
         this.input.on('pointerdown', function () {

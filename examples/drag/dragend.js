@@ -10,11 +10,11 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('mushroom', 'assets/images/mushroom.png');
+        this.load.image('arrow', 'assets/images/arrow.png');
     }
 
     create() {
-        var img = this.add.image(300, 300, 'mushroom');
+        var img = this.add.image(300, 300, 'arrow');
         img.drag = new DragPlugin(img);
 
         img.on('pointerdown', img.drag.dragend, img.drag);

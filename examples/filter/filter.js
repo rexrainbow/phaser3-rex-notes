@@ -9,7 +9,7 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('mushroom', 'assets/images/mushroom.png');
+        this.load.image('arrow', 'assets/images/arrow.png');
     }
 
     create() {
@@ -18,7 +18,7 @@ class Demo extends Phaser.Scene {
             var inst = this.add.image(
                 Phaser.Math.Between(0, 800),
                 Phaser.Math.Between(0, 600),
-                'mushroom');
+                'arrow');
             this.mushrooms.add(inst);
         }
         
