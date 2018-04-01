@@ -180,3 +180,7 @@ Also fires game.events `destroy` event.
 
 - Pause (window is invisible) : game.events `pause` event
 - Resume (window is visible) : game.events `resume` event
+
+## Global data
+
+Insatance of [data manager](datamanager.md) in `game.registry`, or `scene.registry` in each scene.

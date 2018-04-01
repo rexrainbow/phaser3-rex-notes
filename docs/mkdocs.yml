@@ -6,6 +6,7 @@ pages:
 - System:
     - Game: game.md
     - Scene manager: scenemanager.md
+    - Scene: scene.md
 - Input:
     - Touch events: touchevents.md
     - Keyboard events: keyboardevents.md
@@ -33,6 +34,10 @@ pages:
     - Timer: timer.md
     - Timeline: timeline.md    
     - Clock: clockplugin.md
+- Behavior:
+    - Tween: tween.md
+    - Arcade:
+        - Physics: arcade.md
 - Data:
     - Data manager: datamanager.md
     - Array: array.md

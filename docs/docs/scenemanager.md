@@ -10,6 +10,19 @@ scene.scene.add(key, sceneConfig, autoStart);
 // game.scene.add(key, sceneConfig, autoStart);
 ```
 
+### Load scene from external files
+
+1. [load script](loader.md#script)
+    ```javascript
+    scene.load.script(key, url);
+    ```
+
+2. add new scene
+    ```javascript
+    scene.scene.add(key, sceneConfig, autoStart);
+    // game.scene.add(key, sceneConfig, autoStart);
+    ```
+
 ## Remove scene
 
 ```javascript
