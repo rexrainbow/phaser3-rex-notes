@@ -35,7 +35,8 @@ pages:
     - Timeline: timeline.md    
     - Clock: clockplugin.md
 - Behavior:
-    - Tween: tween.md
+    - Tween: 
+       - Tween: tween.md
     - Arcade:
         - Physics: arcade.md
 - Data:
@@ -47,7 +48,9 @@ pages:
     - Run commands: runcommands.md
     - TCRP:
         - Recoder: tcrprecoderplugin.md
-        - Player: tcrpplayerplugin.md    
+        - Player: tcrpplayerplugin.md
+- Camera:
+    - Camera: camera.md
 - Math:
     - Random:
         - Gashapon: gashaponplugin.md

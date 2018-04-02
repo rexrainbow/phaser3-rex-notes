@@ -1207,7 +1207,7 @@
         }, 
         {
             "location": "/tween/index.html", 
-            "text": "Introduction\n\n\nChange properties by tween equations, built-in object of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nCreate tween task\n\n\nvar\n \ntween\n \n=\n \nscene\n.\ntweens\n.\nadd\n({\n\n    \ntargets\n:\n \ngameobject\n,\n\n    \n// delay: 0,\n\n    \n// duration: 1000,             // ms\n\n    \n// ease: \nPower0\n,\n\n    \n// easeParams: null,\n\n    \n// hold: 0,\n\n    \n// repeat: 0,\n\n    \n// repeatDelay: 0,\n\n    \n// yoyo: false,\n\n    \n// flipX: false,\n\n    \n// flipY: false,\n\n\n    \n// offset: null,\n\n    \n// completeDelay: 0,\n\n    \n// loop: 0\n\n    \n// loopDelay: 0,\n\n    \n// paused: false,\n\n    \n// useFrames: false,\n\n\n    \n// properties:\n\n    \n// x: \n+=600\n\n    \n// y: 500\n\n    \n// rotation:\n\n    \n// angle:\n\n    \n// alpha:\n\n    \n// ...\n\n\n    \n// or\n\n    \n// props: {\n\n    \n//     x: { value: \n+=600\n, duration: 3000, ease: \nPower2\n },\n\n    \n//     y: { value: \n500\n, duration: 1500, ease: \nBounce.easeOut\n }\n\n    \n// }, \n\n\n    \n// onStart: function () {},\n\n    \n// onComplete: function () {},\n\n    \n// onYoyo: function () {},\n\n    \n// onRepeat: function () {}\n\n\n});\n\n\n\n\n\nEase equations\n\n\n\n\nPower0\n : Linear\n\n\nPower1\n : Quadratic.Out\n\n\nPower2\n : Cubic.Out\n\n\nPower3\n : Quartic.Out\n\n\nPower4\n : Quintic.Out\n\n\nLinear\n\n\nQuad\n : Quadratic.Out\n\n\nCubic\n : Cubic.Out\n\n\nQuart\n : Quartic.Out\n\n\nQuint\n : Quintic.Out\n\n\nSine\n : Sine.Out\n\n\nExpo\n : Expo.Out\n\n\nCirc\n : Circular.Out\n\n\nElastic\n : Elastic.Out\n\n\nBack\n : Back.Out\n\n\nBounce\n : Bounce.Out\n\n\nStepped\n\n\nQuad.easeIn\n\n\nCubic.easeIn\n\n\nQuart.easeIn\n\n\nQuint.easeIn\n\n\nSine.easeIn\n\n\nExpo.easeIn\n\n\nCirc.easeIn\n\n\nBack.easeIn\n\n\nBounce.easeIn\n\n\nQuad.easeOut\n\n\nCubic.easeOut\n\n\nQuart.easeOut\n\n\nQuint.easeOut\n\n\nSine.easeOut\n\n\nExpo.easeOut\n\n\nCirc.easeOut\n\n\nBack.easeOut\n\n\nBounce.easeOut\n\n\nQuad.easeInOut\n\n\nCubic.easeInOut\n\n\nQuart.easeInOut\n\n\nQuint.easeInOut\n\n\nSine.easeInOut\n\n\nExpo.easeInOut\n\n\nCirc.easeInOut\n\n\nBack.easeInOut\n\n\nBounce.easeInOut\n\n\n\n\nPause / Resume task\n\n\ntween\n.\npause\n();\n\n\n\n\n\ntween\n.\nresume\n();\n\n\n\n\n\nvar\n \nisPlaying\n \n=\n \ntween\n.\nisPlaying\n()", 
+            "text": "Introduction\n\n\nChange properties by tween equations, built-in object of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nCreate tween task\n\n\nvar\n \ntween\n \n=\n \nscene\n.\ntweens\n.\nadd\n({\n\n    \ntargets\n:\n \ngameobject\n,\n\n    \n// delay: 0,\n\n    \n// duration: 1000,\n\n    \n// ease: \nPower0\n,\n\n    \n// easeParams: null,\n\n    \n// hold: 0,\n\n    \n// repeat: 0,\n\n    \n// repeatDelay: 0,\n\n    \n// yoyo: false,\n\n    \n// flipX: false,\n\n    \n// flipY: false,\n\n\n    \n// offset: null,\n\n    \n// completeDelay: 0,\n\n    \n// loop: 0\n\n    \n// loopDelay: 0,\n\n    \n// paused: false,\n\n    \n// useFrames: false,\n\n\n    \n// properties:\n\n    \n// x: \n+=600\n\n    \n// y: 500\n\n    \n// rotation:\n\n    \n// angle:\n\n    \n// alpha:\n\n    \n// ...\n\n\n    \n// or\n\n    \n// props: {\n\n    \n//     x: { value: \n+=600\n, duration: 3000, ease: \nPower2\n },\n\n    \n//     y: { value: \n500\n, duration: 1500, ease: \nBounce.easeOut\n }\n\n    \n// },\n\n\n    \n// onStart: function () {},\n\n    \n// onComplete: function () {},\n\n    \n// onYoyo: function () {},\n\n    \n// onRepeat: function () {}\n\n\n});\n\n\n\n\n\n\n\ntargets: The targets the tween is updating.\n\n\ndelay: The time the tween will wait before it first starts\n\n\nduration: The duration of the tween\n\n\nease: The ease function used by the tween\n\n\neaseParams: The parameters to go with the ease function (if any)\n\n\nhold: The time the tween will pause before running a yoyo\n\n\nrepeat: The number of times the tween will repeat itself (a value of 1 means the tween will play twice, as it repeated once)\n\n\nrepeatDelay: The time the tween will pause for before starting a repeat. The tween holds in the start state.\n\n\nyoyo: boolean - Does the tween reverse itself (yoyo) when it reaches the end?\n\n\nflipX: flip X the GameObject on tween end\n\n\nflipY: flip Y the GameObject on tween end\n\n\noffset: Used when the Tween is part of a Timeline\n\n\ncompleteDelay: The time the tween will wait before the onComplete event is dispatched once it has completed\n\n\nloop: The time the tween will pause before starting either a yoyo or returning to the start for a repeat\n\n\nloopDelay:\n\n\npaused: Does the tween start in a paused state, or playing?\n\n\nuseFrames: Use frames or milliseconds?\n\n\nprops: The properties being tweened by the tween\n\n\nonStart: callback which fired when tween task started\n\n\nonComplete: callback which fired when tween task done\n\n\nonYoyo: callback which fired when tween reversed (yoyo)\n\n\nonRepeat: callback which fired when repeat started\n\n\n\n\nEase equations\n\n\n\n\nPower0\n : Linear\n\n\nPower1\n : Quadratic.Out\n\n\nPower2\n : Cubic.Out\n\n\nPower3\n : Quartic.Out\n\n\nPower4\n : Quintic.Out\n\n\nLinear\n\n\nQuad\n : Quadratic.Out\n\n\nCubic\n : Cubic.Out\n\n\nQuart\n : Quartic.Out\n\n\nQuint\n : Quintic.Out\n\n\nSine\n : Sine.Out\n\n\nExpo\n : Expo.Out\n\n\nCirc\n : Circular.Out\n\n\nElastic\n : Elastic.Out\n\n\nBack\n : Back.Out\n\n\nBounce\n : Bounce.Out\n\n\nStepped\n\n\nQuad.easeIn\n\n\nCubic.easeIn\n\n\nQuart.easeIn\n\n\nQuint.easeIn\n\n\nSine.easeIn\n\n\nExpo.easeIn\n\n\nCirc.easeIn\n\n\nBack.easeIn\n\n\nBounce.easeIn\n\n\nQuad.easeOut\n\n\nCubic.easeOut\n\n\nQuart.easeOut\n\n\nQuint.easeOut\n\n\nSine.easeOut\n\n\nExpo.easeOut\n\n\nCirc.easeOut\n\n\nBack.easeOut\n\n\nBounce.easeOut\n\n\nQuad.easeInOut\n\n\nCubic.easeInOut\n\n\nQuart.easeInOut\n\n\nQuint.easeInOut\n\n\nSine.easeInOut\n\n\nExpo.easeInOut\n\n\nCirc.easeInOut\n\n\nBack.easeInOut\n\n\nBounce.easeInOut\n\n\n\n\nPause / Resume task\n\n\ntween\n.\npause\n();\n\n\n\n\n\ntween\n.\nresume\n();\n\n\n\n\n\nvar\n \nisPlaying\n \n=\n \ntween\n.\nisPlaying\n()\n\n\n\n\n\nTime-scale\n\n\nvar\n \ntimeScale\n \n=\n \ntween\n.\ntimeScale\n;\n\n\n\n\n\ntween\n.\ntimeScale\n \n=\n \ntimescale\n;\n\n\n\n\n\nGlobal time-scale\n\n\nvar\n \ntimeScale\n \n=\n \nscene\n.\ntweens\n.\ntimeScale\n;\n\n\n\n\n\nscene\n.\ntweens\n.\ntimeScale\n \n=\n \ntimescale\n;", 
             "title": "Tween"
         }, 
         {
@@ -1222,7 +1222,7 @@
         }, 
         {
             "location": "/tween/index.html#create-tween-task", 
-            "text": "var   tween   =   scene . tweens . add ({ \n     targets :   gameobject , \n     // delay: 0, \n     // duration: 1000,             // ms \n     // ease:  Power0 , \n     // easeParams: null, \n     // hold: 0, \n     // repeat: 0, \n     // repeatDelay: 0, \n     // yoyo: false, \n     // flipX: false, \n     // flipY: false, \n\n     // offset: null, \n     // completeDelay: 0, \n     // loop: 0 \n     // loopDelay: 0, \n     // paused: false, \n     // useFrames: false, \n\n     // properties: \n     // x:  +=600 \n     // y: 500 \n     // rotation: \n     // angle: \n     // alpha: \n     // ... \n\n     // or \n     // props: { \n     //     x: { value:  +=600 , duration: 3000, ease:  Power2  }, \n     //     y: { value:  500 , duration: 1500, ease:  Bounce.easeOut  } \n     // },  \n\n     // onStart: function () {}, \n     // onComplete: function () {}, \n     // onYoyo: function () {}, \n     // onRepeat: function () {}  });", 
+            "text": "var   tween   =   scene . tweens . add ({ \n     targets :   gameobject , \n     // delay: 0, \n     // duration: 1000, \n     // ease:  Power0 , \n     // easeParams: null, \n     // hold: 0, \n     // repeat: 0, \n     // repeatDelay: 0, \n     // yoyo: false, \n     // flipX: false, \n     // flipY: false, \n\n     // offset: null, \n     // completeDelay: 0, \n     // loop: 0 \n     // loopDelay: 0, \n     // paused: false, \n     // useFrames: false, \n\n     // properties: \n     // x:  +=600 \n     // y: 500 \n     // rotation: \n     // angle: \n     // alpha: \n     // ... \n\n     // or \n     // props: { \n     //     x: { value:  +=600 , duration: 3000, ease:  Power2  }, \n     //     y: { value:  500 , duration: 1500, ease:  Bounce.easeOut  } \n     // }, \n\n     // onStart: function () {}, \n     // onComplete: function () {}, \n     // onYoyo: function () {}, \n     // onRepeat: function () {}  });    targets: The targets the tween is updating.  delay: The time the tween will wait before it first starts  duration: The duration of the tween  ease: The ease function used by the tween  easeParams: The parameters to go with the ease function (if any)  hold: The time the tween will pause before running a yoyo  repeat: The number of times the tween will repeat itself (a value of 1 means the tween will play twice, as it repeated once)  repeatDelay: The time the tween will pause for before starting a repeat. The tween holds in the start state.  yoyo: boolean - Does the tween reverse itself (yoyo) when it reaches the end?  flipX: flip X the GameObject on tween end  flipY: flip Y the GameObject on tween end  offset: Used when the Tween is part of a Timeline  completeDelay: The time the tween will wait before the onComplete event is dispatched once it has completed  loop: The time the tween will pause before starting either a yoyo or returning to the start for a repeat  loopDelay:  paused: Does the tween start in a paused state, or playing?  useFrames: Use frames or milliseconds?  props: The properties being tweened by the tween  onStart: callback which fired when tween task started  onComplete: callback which fired when tween task done  onYoyo: callback which fired when tween reversed (yoyo)  onRepeat: callback which fired when repeat started", 
             "title": "Create tween task"
         }, 
         {
@@ -1236,9 +1236,209 @@
             "title": "Pause / Resume task"
         }, 
         {
+            "location": "/tween/index.html#time-scale", 
+            "text": "var   timeScale   =   tween . timeScale ;   tween . timeScale   =   timescale ;", 
+            "title": "Time-scale"
+        }, 
+        {
+            "location": "/tween/index.html#global-time-scale", 
+            "text": "var   timeScale   =   scene . tweens . timeScale ;   scene . tweens . timeScale   =   timescale ;", 
+            "title": "Global time-scale"
+        }, 
+        {
             "location": "/arcade/index.html", 
-            "text": "", 
+            "text": "Introduction\n\n\nArcade physics engine in phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nConfiguration\n\n\nvar\n \nconfig\n \n=\n \n{\n\n    \n// ...\n\n    \nphysics\n:\n \n{\n\n        \ndefault\n:\n \narcade\n,\n\n        \narcade\n:\n \n{\n\n            \nx\n:\n \n0\n,\n\n            \ny\n:\n \n0\n,\n\n            \nwidth\n:\n \nscene\n.\nsys\n.\ngame\n.\nconfig\n.\nwidth\n,\n\n            \nheight\n:\n \nscene\n.\nsys\n.\ngame\n.\nconfig\n.\nheight\n,\n\n            \ngravity\n:\n \n{\n\n                \nx\n:\n \n0\n,\n\n                \ny\n:\n \n0\n\n            \n},\n\n            \ncheckCollision\n:\n \n{\n\n                \nup\n:\n \ntrue\n,\n\n                \ndown\n:\n \ntrue\n,\n\n                \nleft\n:\n \ntrue\n,\n\n                \nright\n:\n \ntrue\n\n            \n},\n\n            \noverlapBias\n:\n \n4\n,\n\n            \ntileBias\n:\n \n16\n,\n\n            \nforceX\n:\n \nfalse\n,\n\n            \nisPaused\n:\n \nfalse\n,\n\n\n            \ndebug\n:\n \nfalse\n,\n\n            \ndebugShowBody\n:\n \ntrue\n,\n\n            \ndebugShowStaticBody\n:\n \ntrue\n,\n\n            \ndebugShowVelocity\n:\n \ntrue\n,\n\n            \ndebugBodyColor\n:\n \n0xff00ff\n,\n\n            \ndebugStaticBodyColor\n:\n \n0x0000ff\n,\n\n            \ndebugVelocityColor\n:\n \n0x00ff00\n,\n\n\n            \nmaxEntries\n:\n \n16\n\n        \n}\n\n    \n}\n\n    \n// ...\n\n\n};\n\n\nvar\n \ngame\n \n=\n \nnew\n \nPhaser\n.\nGame\n(\nconfig\n);\n\n\n\n\n\nPause / Resume\n\n\nscene\n.\nphysics\n.\npause\n();\n\n\n\n\n\nscene\n.\nphysics\n.\nresume\n();\n\n\n\n\n\nAdd physics object\n\n\nImage object\n\n\nStatic object\n\n\nvar\n \nimage\n \n=\n \nscene\n.\nphysics\n.\nadd\n.\nstaticImage\n(\nx\n,\n \ny\n,\n \nkey\n);\n\n\n\n\n\nDynamic object\n\n\nvar\n \nimage\n \n=\n \nscene\n.\nphysics\n.\nadd\n.\nimage\n(\nx\n,\n \ny\n,\n \nkey\n);\n\n\n\n\n\nSprite object\n\n\nStatic object\n\n\nvar\n \nimage\n \n=\n \nscene\n.\nphysics\n.\nadd\n.\nstaticSprite\n(\nx\n,\n \ny\n,\n \nkey\n,\n \nframe\n);\n\n\n\n\n\nDynamic object\n\n\nvar\n \nimage\n \n=\n \nscene\n.\nphysics\n.\nadd\n.\nsprite\n(\nx\n,\n \ny\n,\n \nkey\n,\n \nframe\n);\n\n\n\n\n\nGroup\n\n\nStatic sprite objects\n\n\nvar\n \ngroup\n \n=\n \nscene\n.\nphysics\n.\nadd\n.\nstaticGroup\n(\nchildren\n,\n \nconfig\n);\n\n\n// var group = scene.physics.add.staticGroup(config);\n\n\n\n\n\nDynamic sprite objects\n\n\nvar\n \ngroup\n \n=\n \nscene\n.\nphysics\n.\nadd\n.\ngroup\n(\nchildren\n,\n \nconfig\n);\n\n\n// var group = scene.physics.add.staticGroup(config);\n\n\n\n\n\nConfiugration\n\n\nvar\n \nconfig\n \n=\n \n{\n\n    \nsetCollideWorldBounds\n:\n \nfalse\n,\n\n    \nsetAccelerationX\n:\n \n0\n,\n\n    \nsetAccelerationY\n:\n \n0\n,\n\n    \nsetBounceX\n:\n \n0\n,\n\n    \nsetBounceY\n:\n \n0\n,\n\n    \nsetDragX\n:\n \n0\n,\n\n    \nsetDragY\n:\n \n0\n,\n\n    \nsetGravityX\n:\n \n0\n,\n\n    \nsetGravityY\n:\n \n0\n,\n\n    \nsetFrictionX\n:\n \n0\n,\n\n    \nsetFrictionY\n:\n \n0\n,\n\n    \nsetVelocityX\n:\n \n0\n,\n\n    \nsetVelocityY\n:\n \n0\n,\n\n    \nsetAngularVelocity\n:\n \n0\n,\n\n    \nsetAngularAcceleration\n:\n \n0\n,\n\n    \nsetAngularDrag\n:\n \n0\n,\n\n    \nsetMass\n:\n \n1\n,\n\n    \nsetImmovable\n:\n \nfalse\n\n\n};\n\n\n\n\n\nDestroy object\n\n\ngameobject\n.\ndestroy\n();\n\n\n\n\n\nCollision\n\n\nvar\n \ncollider\n \n=\n \nscene\n.\nphysics\n.\nadd\n.\ncollider\n(\nobjectsA\n,\n \nobjectsB\n,\n \ncollideCallback\n,\n \nprocessCallback\n,\n \ncallbackContext\n);\n\n\n// var collider = scene.physics.add.addOverlap(objectsA, objectsB, collideCallback, processCallback, callbackContext);\n\n\n\n\n\n\n\nobjectsA, objectsB\n\n\na game object\n\n\ngame objects in array\n\n\ngroup\n\n\n\n\n\n\ncollideCallback:\n    \nfunction\n(\ngameobject1\n,\n \ngameobject2\n){}\n\n\n\n\nprocessCallback: fired when gameobject1 intersects gameobject2\n    \nfunction\n(\ngameobject1\n,\n \ngameobject2\n){\n\n    \nreturn\n \ntrue\n;\n  \n// return false will discard remaining collision checking\n\n\n}\n\n\n\n\n\n\nMethods of game object\n\n\nSize\n\n\ngameobject\n.\nsetSize\n(\nwidth\n,\n \nheight\n,\n \nisCenter\n);\n  \n// isCenter: boolean\n\n\n\n\n\ngameobject\n.\nsetCircle\n(\nradius\n,\n \noffsetX\n,\n \noffsetY\n);\n\n\n\n\n\ngameobject\n.\nsetOffset\n(\nx\n,\n \ny\n);\n\n\n\n\n\nSync body\n\n\nSyncs the Bodies position and size in static game object.\n\n\ngameobject\n.\nrefreshBody\n();\n\n\n\n\n\nVelocity\n\n\ngameobject\n.\nsetVelocity\n(\nx\n,\n \ny\n);\n\n\n\n\n\ngameobject\n.\nsetVelocityX\n(\nx\n);\n\n\n\n\n\ngameobject\n.\nsetVelocityY\n(\nx\n);\n\n\n\n\n\ngameobject\n.\nsetMaxVelocity\n(\ny\n);\n\n\n\n\n\nMass\n\n\ngameobject\n.\nsetMass\n(\nv\n);\n\n\n\n\n\nAcceleration\n\n\ngameobject\n.\nsetAcceleration\n(\nx\n,\n \ny\n);\n\n\n\n\n\ngameobject\n.\nsetAccelerationX\n(\nx\n);\n\n\n\n\n\ngameobject\n.\nsetAccelerationY\n(\ny\n);\n\n\n\n\n\nGravity\n\n\ngameobject\n.\nsetGravity\n(\nx\n,\n \ny\n);\n\n\n\n\n\ngameobject\n.\nsetGravityX\n(\nx\n);\n\n\n\n\n\ngameobject\n.\nsetGravityY\n(\ny\n);\n\n\n\n\n\nFriction\n\n\ngameobject\n.\nsetFriction\n(\nx\n,\n \ny\n);\n\n\n\n\n\ngameobject\n.\nsetFrictionX\n(\nx\n);\n\n\n\n\n\ngameobject\n.\nsetFrictionY\n(\ny\n);\n\n\n\n\n\nDrag\n\n\ngameobject\n.\nsetDrag\n(\nx\n,\n \ny\n);\n\n\n\n\n\ngameobject\n.\nsetDragX\n(\nx\n);\n\n\n\n\n\ngameobject\n.\nsetDragY\n(\ny\n);\n\n\n\n\n\nAngular\n\n\ngameobject\n.\nsetAngularVelocity\n(\nv\n);\n\n\n\n\n\ngameobject\n.\nsetAngularAcceleration\n(\nv\n);\n\n\n\n\n\ngameobject\n.\nsetAngularDrag\n(\nv\n);\n\n\n\n\n\nBounce\n\n\ngameobject\n.\nsetBounce\n(\nx\n,\n \ny\n);\n\n\n\n\n\ngameobject\n.\nsetBounceX\n(\nx\n);\n\n\n\n\n\ngameobject\n.\nsetBounceY\n(\ny\n);\n\n\n\n\n\ngameobject\n.\nsetCollideWorldBounds\n(\nboolean\n);\n\n\n\n\n\nImmovable\n\n\ngameobject\n.\nsetImmovable\n(\nboolean\n);\n\n\n\n\n\nMethods of group\n\n\ngroup\n.\nsetVelocity\n(\nx\n,\n \ny\n,\n \nstep\n);\n\n\n\n\n\ngroup\n.\nsetVelocityX\n(\nvalue\n,\n \nstep\n);\n\n\n\n\n\ngroup\n.\nsetVelocityY\n(\nvalue\n,\n \nstep\n);\n\n\n\n\n\ngroup\n.\nrefresh\n();\n  \n// call this method when position of game objects were changed in static object group\n\n\n\n\n\nAdd a game object to physics world\n\n\nscene\n.\nphysics\n.\nexisting\n(\ngameObject\n,\n \nisStatic\n);\n\n\n// var body = gameObject.body;\n\n\n\n\n\nGet physics body\n\n\nvar\n \nbody\n \n=\n \ngameObject\n.\nbody\n;\n\n\n\n\n\nSize\n\n\nbody\n.\nsetSize\n(\nwidth\n,\n \nheight\n,\n \ncenter\n);\n\n\n\n\n\nbody\n.\nsetCircle\n(\nradius\n,\n \noffsetX\n,\n \noffsetY\n);\n\n\n\n\n\nbody\n.\nsetOffset\n(\nx\n,\n \ny\n);\n\n\n\n\n\nReset position\n\n\nbody\n.\nreset\n(\nx\n,\n \ny\n);\n\n\n\n\n\nVelocity\n\n\nbody\n.\nvelocity\n.\nset\n(\nx\n,\n \ny\n);\n\n\n\n\n\nbody\n.\nvelocity\n.\nx\n \n=\n \nx\n;\n\n\n\n\n\nbody\n.\nvelocity\n.\ny\n \n=\n \ny\n;\n\n\n\n\n\nbody\n.\nmaxVelocity\n.\nset\n(\nx\n,\n \ny\n);\n\n\n\n\n\nMass\n\n\nbody\n.\nmass\n \n=\n \nv\n;\n\n\n\n\n\nAcceleration\n\n\nbody\n.\nacceleration\n.\nset\n(\nx\n,\n \ny\n);\n\n\n\n\n\nbody\n.\nacceleration\n.\nx\n \n=\n \nx\n;\n\n\n\n\n\nbody\n.\nacceleration\n.\ny\n \n=\n \ny\n;\n\n\n\n\n\nGravity\n\n\nbody\n.\ngravity\n.\nset\n(\nx\n,\n \ny\n);\n\n\n\n\n\nbody\n.\ngravity\n.\nx\n \n=\n \nx\n;\n\n\n\n\n\nbody\n.\ngravity\n.\ny\n \n=\n \ny\n;\n\n\n\n\n\nFriction\n\n\nbody\n.\nfriction\n.\nset\n(\nx\n,\n \ny\n);\n\n\n\n\n\nbody\n.\nfriction\n.\nx\n \n=\n \nx\n;\n\n\n\n\n\nbody\n.\nfriction\n.\ny\n \n=\n \ny\n;\n\n\n\n\n\nDrag\n\n\nbody\n.\ndrag\n.\nset\n(\nx\n,\n \ny\n);\n\n\n\n\n\nbody\n.\ndrag\n.\nx\n \n=\n \nx\n;\n\n\n\n\n\nbody\n.\ndrag\n.\ny\n \n=\n \ny\n;\n\n\n\n\n\nAngular\n\n\nbody\n.\nangularVelocity\n \n=\n \nv\n;\n\n\n\n\n\nbody\n.\nangularAcceleration\n \n=\n \nv\n;\n\n\n\n\n\nbody\n.\nangularDrag\n \n=\n \nv\n;\n\n\n\n\n\nBounce\n\n\nbody\n.\nbounce\n.\nset\n(\nx\n,\n \ny\n);\n\n\n\n\n\nbody\n.\nbounce\n.\nx\n \n=\n \nx\n;\n\n\n\n\n\nbody\n.\nbounce\n.\ny\n \n=\n \ny\n;\n\n\n\n\n\nbody\n.\ncollideWorldBounds\n \n=\n \nboolean\n;\n\n\n\n\n\nImmovable\n\n\nbody\n.\nimmovable\n \n=\n \nboolean\n;\n\n\n\n\n\nMethods of World\n\n\nWrap\n\n\nscene\n.\nphysics\n.\nworld\n.\nwrap\n(\ngameobject\n,\n \npadding\n);\n\n\n\n\n\n\n\ngameobject:\n\n\ngame object (image, sprite)\n\n\ngroup\n\n\narray of game objects", 
             "title": "Physics"
+        }, 
+        {
+            "location": "/arcade/index.html#introduction", 
+            "text": "Arcade physics engine in phaser.   Author: Richard Davey", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/arcade/index.html#usage", 
+            "text": "", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/arcade/index.html#configuration", 
+            "text": "var   config   =   { \n     // ... \n     physics :   { \n         default :   arcade , \n         arcade :   { \n             x :   0 , \n             y :   0 , \n             width :   scene . sys . game . config . width , \n             height :   scene . sys . game . config . height , \n             gravity :   { \n                 x :   0 , \n                 y :   0 \n             }, \n             checkCollision :   { \n                 up :   true , \n                 down :   true , \n                 left :   true , \n                 right :   true \n             }, \n             overlapBias :   4 , \n             tileBias :   16 , \n             forceX :   false , \n             isPaused :   false , \n\n             debug :   false , \n             debugShowBody :   true , \n             debugShowStaticBody :   true , \n             debugShowVelocity :   true , \n             debugBodyColor :   0xff00ff , \n             debugStaticBodyColor :   0x0000ff , \n             debugVelocityColor :   0x00ff00 , \n\n             maxEntries :   16 \n         } \n     } \n     // ...  };  var   game   =   new   Phaser . Game ( config );", 
+            "title": "Configuration"
+        }, 
+        {
+            "location": "/arcade/index.html#pause-resume", 
+            "text": "scene . physics . pause ();   scene . physics . resume ();", 
+            "title": "Pause / Resume"
+        }, 
+        {
+            "location": "/arcade/index.html#add-physics-object", 
+            "text": "", 
+            "title": "Add physics object"
+        }, 
+        {
+            "location": "/arcade/index.html#image-object", 
+            "text": "Static object  var   image   =   scene . physics . add . staticImage ( x ,   y ,   key );   Dynamic object  var   image   =   scene . physics . add . image ( x ,   y ,   key );", 
+            "title": "Image object"
+        }, 
+        {
+            "location": "/arcade/index.html#sprite-object", 
+            "text": "Static object  var   image   =   scene . physics . add . staticSprite ( x ,   y ,   key ,   frame );   Dynamic object  var   image   =   scene . physics . add . sprite ( x ,   y ,   key ,   frame );", 
+            "title": "Sprite object"
+        }, 
+        {
+            "location": "/arcade/index.html#group", 
+            "text": "Static sprite objects  var   group   =   scene . physics . add . staticGroup ( children ,   config );  // var group = scene.physics.add.staticGroup(config);   Dynamic sprite objects  var   group   =   scene . physics . add . group ( children ,   config );  // var group = scene.physics.add.staticGroup(config);   Confiugration  var   config   =   { \n     setCollideWorldBounds :   false , \n     setAccelerationX :   0 , \n     setAccelerationY :   0 , \n     setBounceX :   0 , \n     setBounceY :   0 , \n     setDragX :   0 , \n     setDragY :   0 , \n     setGravityX :   0 , \n     setGravityY :   0 , \n     setFrictionX :   0 , \n     setFrictionY :   0 , \n     setVelocityX :   0 , \n     setVelocityY :   0 , \n     setAngularVelocity :   0 , \n     setAngularAcceleration :   0 , \n     setAngularDrag :   0 , \n     setMass :   1 , \n     setImmovable :   false  };", 
+            "title": "Group"
+        }, 
+        {
+            "location": "/arcade/index.html#destroy-object", 
+            "text": "gameobject . destroy ();", 
+            "title": "Destroy object"
+        }, 
+        {
+            "location": "/arcade/index.html#collision", 
+            "text": "var   collider   =   scene . physics . add . collider ( objectsA ,   objectsB ,   collideCallback ,   processCallback ,   callbackContext );  // var collider = scene.physics.add.addOverlap(objectsA, objectsB, collideCallback, processCallback, callbackContext);    objectsA, objectsB  a game object  game objects in array  group    collideCallback:\n     function ( gameobject1 ,   gameobject2 ){}   processCallback: fired when gameobject1 intersects gameobject2\n     function ( gameobject1 ,   gameobject2 ){ \n     return   true ;    // return false will discard remaining collision checking  }", 
+            "title": "Collision"
+        }, 
+        {
+            "location": "/arcade/index.html#methods-of-game-object", 
+            "text": "", 
+            "title": "Methods of game object"
+        }, 
+        {
+            "location": "/arcade/index.html#size", 
+            "text": "gameobject . setSize ( width ,   height ,   isCenter );    // isCenter: boolean   gameobject . setCircle ( radius ,   offsetX ,   offsetY );   gameobject . setOffset ( x ,   y );", 
+            "title": "Size"
+        }, 
+        {
+            "location": "/arcade/index.html#sync-body", 
+            "text": "Syncs the Bodies position and size in static game object.  gameobject . refreshBody ();", 
+            "title": "Sync body"
+        }, 
+        {
+            "location": "/arcade/index.html#velocity", 
+            "text": "gameobject . setVelocity ( x ,   y );   gameobject . setVelocityX ( x );   gameobject . setVelocityY ( x );   gameobject . setMaxVelocity ( y );", 
+            "title": "Velocity"
+        }, 
+        {
+            "location": "/arcade/index.html#mass", 
+            "text": "gameobject . setMass ( v );", 
+            "title": "Mass"
+        }, 
+        {
+            "location": "/arcade/index.html#acceleration", 
+            "text": "gameobject . setAcceleration ( x ,   y );   gameobject . setAccelerationX ( x );   gameobject . setAccelerationY ( y );", 
+            "title": "Acceleration"
+        }, 
+        {
+            "location": "/arcade/index.html#gravity", 
+            "text": "gameobject . setGravity ( x ,   y );   gameobject . setGravityX ( x );   gameobject . setGravityY ( y );", 
+            "title": "Gravity"
+        }, 
+        {
+            "location": "/arcade/index.html#friction", 
+            "text": "gameobject . setFriction ( x ,   y );   gameobject . setFrictionX ( x );   gameobject . setFrictionY ( y );", 
+            "title": "Friction"
+        }, 
+        {
+            "location": "/arcade/index.html#drag", 
+            "text": "gameobject . setDrag ( x ,   y );   gameobject . setDragX ( x );   gameobject . setDragY ( y );", 
+            "title": "Drag"
+        }, 
+        {
+            "location": "/arcade/index.html#angular", 
+            "text": "gameobject . setAngularVelocity ( v );   gameobject . setAngularAcceleration ( v );   gameobject . setAngularDrag ( v );", 
+            "title": "Angular"
+        }, 
+        {
+            "location": "/arcade/index.html#bounce", 
+            "text": "gameobject . setBounce ( x ,   y );   gameobject . setBounceX ( x );   gameobject . setBounceY ( y );   gameobject . setCollideWorldBounds ( boolean );", 
+            "title": "Bounce"
+        }, 
+        {
+            "location": "/arcade/index.html#immovable", 
+            "text": "gameobject . setImmovable ( boolean );", 
+            "title": "Immovable"
+        }, 
+        {
+            "location": "/arcade/index.html#methods-of-group", 
+            "text": "group . setVelocity ( x ,   y ,   step );   group . setVelocityX ( value ,   step );   group . setVelocityY ( value ,   step );   group . refresh ();    // call this method when position of game objects were changed in static object group", 
+            "title": "Methods of group"
+        }, 
+        {
+            "location": "/arcade/index.html#add-a-game-object-to-physics-world", 
+            "text": "scene . physics . existing ( gameObject ,   isStatic );  // var body = gameObject.body;", 
+            "title": "Add a game object to physics world"
+        }, 
+        {
+            "location": "/arcade/index.html#get-physics-body", 
+            "text": "var   body   =   gameObject . body ;", 
+            "title": "Get physics body"
+        }, 
+        {
+            "location": "/arcade/index.html#size_1", 
+            "text": "body . setSize ( width ,   height ,   center );   body . setCircle ( radius ,   offsetX ,   offsetY );   body . setOffset ( x ,   y );", 
+            "title": "Size"
+        }, 
+        {
+            "location": "/arcade/index.html#reset-position", 
+            "text": "body . reset ( x ,   y );", 
+            "title": "Reset position"
+        }, 
+        {
+            "location": "/arcade/index.html#velocity_1", 
+            "text": "body . velocity . set ( x ,   y );   body . velocity . x   =   x ;   body . velocity . y   =   y ;   body . maxVelocity . set ( x ,   y );", 
+            "title": "Velocity"
+        }, 
+        {
+            "location": "/arcade/index.html#mass_1", 
+            "text": "body . mass   =   v ;", 
+            "title": "Mass"
+        }, 
+        {
+            "location": "/arcade/index.html#acceleration_1", 
+            "text": "body . acceleration . set ( x ,   y );   body . acceleration . x   =   x ;   body . acceleration . y   =   y ;", 
+            "title": "Acceleration"
+        }, 
+        {
+            "location": "/arcade/index.html#gravity_1", 
+            "text": "body . gravity . set ( x ,   y );   body . gravity . x   =   x ;   body . gravity . y   =   y ;", 
+            "title": "Gravity"
+        }, 
+        {
+            "location": "/arcade/index.html#friction_1", 
+            "text": "body . friction . set ( x ,   y );   body . friction . x   =   x ;   body . friction . y   =   y ;", 
+            "title": "Friction"
+        }, 
+        {
+            "location": "/arcade/index.html#drag_1", 
+            "text": "body . drag . set ( x ,   y );   body . drag . x   =   x ;   body . drag . y   =   y ;", 
+            "title": "Drag"
+        }, 
+        {
+            "location": "/arcade/index.html#angular_1", 
+            "text": "body . angularVelocity   =   v ;   body . angularAcceleration   =   v ;   body . angularDrag   =   v ;", 
+            "title": "Angular"
+        }, 
+        {
+            "location": "/arcade/index.html#bounce_1", 
+            "text": "body . bounce . set ( x ,   y );   body . bounce . x   =   x ;   body . bounce . y   =   y ;   body . collideWorldBounds   =   boolean ;", 
+            "title": "Bounce"
+        }, 
+        {
+            "location": "/arcade/index.html#immovable_1", 
+            "text": "body . immovable   =   boolean ;", 
+            "title": "Immovable"
+        }, 
+        {
+            "location": "/arcade/index.html#methods-of-world", 
+            "text": "", 
+            "title": "Methods of World"
+        }, 
+        {
+            "location": "/arcade/index.html#wrap", 
+            "text": "scene . physics . world . wrap ( gameobject ,   padding );    gameobject:  game object (image, sprite)  group  array of game objects", 
+            "title": "Wrap"
         }, 
         {
             "location": "/datamanager/index.html", 
@@ -1554,6 +1754,11 @@
             "location": "/tcrpplayerplugin/index.html#time-scale", 
             "text": "var   timeScale   =   player . timeScale ;  player . timeScale   =   0.5 ;", 
             "title": "Time-scale"
+        }, 
+        {
+            "location": "/camera/index.html", 
+            "text": "", 
+            "title": "Camera"
         }, 
         {
             "location": "/gashaponplugin/index.html", 

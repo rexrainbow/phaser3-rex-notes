@@ -19,10 +19,6 @@
       
         <meta name="lang:search.language" content="en">
       
-        <meta name="lang:search.pipeline.stopwords" content="True">
-      
-        <meta name="lang:search.pipeline.trimmer" content="True">
-      
         <meta name="lang:search.result.none" content="No matching documents">
       
         <meta name="lang:search.result.one" content="1 matching document">
@@ -32,7 +28,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-0.17.3, mkdocs-material-2.7.0">
+      <meta name="generator" content="mkdocs-0.17.1, mkdocs-material-2.1.0">
     
     
       
@@ -40,14 +36,13 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application.78aab2dc.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application-3368aa6b74.css">
       
     
     
-      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
+      <script src="../assets/javascripts/modernizr-e826f8942a.js"></script>
     
     
-      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
       
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
@@ -58,7 +53,7 @@
     
   </head>
   
-    <body dir="ltr">
+    <body>
   
     <svg class="md-svg">
       <defs>
@@ -69,7 +64,6 @@
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search">
     <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
-    
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid">
@@ -105,13 +99,11 @@
             
 <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="search"></label>
-  <div class="md-search__inner" role="search">
+  <div class="md-search__inner">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <input type="text" class="md-search__input" name="query" required placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
       <label class="md-icon md-search__icon" for="search"></label>
-      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
-        &#xE5CD;
-      </button>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset">&#xE5CD;</button>
     </form>
     <div class="md-search__output">
       <div class="md-search__scrollwrap" data-md-scrollfix>
@@ -134,9 +126,6 @@
 </header>
     
     <div class="md-container">
-      
-        
-      
       
       <main class="md-main">
         <div class="md-main__inner md-grid" data-md-component="container">
@@ -392,7 +381,7 @@
     <label class="md-nav__link" for="nav-5-2">
       Sprite
     </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
       <label class="md-nav__title" for="nav-5-2">
         Sprite
       </label>
@@ -428,7 +417,7 @@
     <label class="md-nav__link" for="nav-5-3">
       Text
     </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
       <label class="md-nav__title" for="nav-5-3">
         Text
       </label>
@@ -488,7 +477,7 @@
     <label class="md-nav__link" for="nav-5-4">
       Canvas
     </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="5">
       <label class="md-nav__title" for="nav-5-4">
         Canvas
       </label>
@@ -536,7 +525,7 @@
     <label class="md-nav__link" for="nav-5-5">
       Group
     </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="6">
       <label class="md-nav__title" for="nav-5-5">
         Group
       </label>
@@ -675,10 +664,34 @@
           
 
 
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-1" type="checkbox" id="nav-7-1">
+    
+    <label class="md-nav__link" for="nav-7-1">
+      Tween
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-7-1">
+        Tween
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
   <li class="md-nav__item">
     <a href="../tween/index.html" title="Tween" class="md-nav__link">
       Tween
     </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
         
@@ -696,7 +709,7 @@
     <label class="md-nav__link" for="nav-7-2">
       Arcade
     </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
       <label class="md-nav__title" for="nav-7-2">
         Arcade
       </label>
@@ -715,9 +728,329 @@
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
     
     
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Physics
+      </label>
+    
     <a href="index.html" title="Physics" class="md-nav__link md-nav__link--active">
       Physics
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuration" title="Configuration" class="md-nav__link">
+    Configuration
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pause-resume" title="Pause / Resume" class="md-nav__link">
+    Pause / Resume
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-physics-object" title="Add physics object" class="md-nav__link">
+    Add physics object
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#image-object" title="Image object" class="md-nav__link">
+    Image object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sprite-object" title="Sprite object" class="md-nav__link">
+    Sprite object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#group" title="Group" class="md-nav__link">
+    Group
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#destroy-object" title="Destroy object" class="md-nav__link">
+    Destroy object
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#collision" title="Collision" class="md-nav__link">
+    Collision
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods-of-game-object" title="Methods of game object" class="md-nav__link">
+    Methods of game object
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#size" title="Size" class="md-nav__link">
+    Size
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sync-body" title="Sync body" class="md-nav__link">
+    Sync body
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#velocity" title="Velocity" class="md-nav__link">
+    Velocity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mass" title="Mass" class="md-nav__link">
+    Mass
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#acceleration" title="Acceleration" class="md-nav__link">
+    Acceleration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gravity" title="Gravity" class="md-nav__link">
+    Gravity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#friction" title="Friction" class="md-nav__link">
+    Friction
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drag" title="Drag" class="md-nav__link">
+    Drag
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#angular" title="Angular" class="md-nav__link">
+    Angular
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bounce" title="Bounce" class="md-nav__link">
+    Bounce
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#immovable" title="Immovable" class="md-nav__link">
+    Immovable
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods-of-group" title="Methods of group" class="md-nav__link">
+    Methods of group
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-a-game-object-to-physics-world" title="Add a game object to physics world" class="md-nav__link">
+    Add a game object to physics world
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-physics-body" title="Get physics body" class="md-nav__link">
+    Get physics body
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#size_1" title="Size" class="md-nav__link">
+    Size
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reset-position" title="Reset position" class="md-nav__link">
+    Reset position
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#velocity_1" title="Velocity" class="md-nav__link">
+    Velocity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mass_1" title="Mass" class="md-nav__link">
+    Mass
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#acceleration_1" title="Acceleration" class="md-nav__link">
+    Acceleration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gravity_1" title="Gravity" class="md-nav__link">
+    Gravity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#friction_1" title="Friction" class="md-nav__link">
+    Friction
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drag_1" title="Drag" class="md-nav__link">
+    Drag
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#angular_1" title="Angular" class="md-nav__link">
+    Angular
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bounce_1" title="Bounce" class="md-nav__link">
+    Bounce
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#immovable_1" title="Immovable" class="md-nav__link">
+    Immovable
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods-of-world" title="Methods of World" class="md-nav__link">
+    Methods of World
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wrap" title="Wrap" class="md-nav__link">
+    Wrap
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
     
   </li>
 
@@ -847,7 +1180,7 @@
     <label class="md-nav__link" for="nav-9-3">
       TCRP
     </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
       <label class="md-nav__title" for="nav-9-3">
         TCRP
       </label>
@@ -898,10 +1231,46 @@
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
     
     <label class="md-nav__link" for="nav-10">
-      Math
+      Camera
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
       <label class="md-nav__title" for="nav-10">
+        Camera
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../camera/index.html" title="Camera" class="md-nav__link">
+      Camera
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11">
+    
+    <label class="md-nav__link" for="nav-11">
+      Math
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-11">
         Math
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -914,13 +1283,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10-1" type="checkbox" id="nav-10-1">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11-1" type="checkbox" id="nav-11-1">
     
-    <label class="md-nav__link" for="nav-10-1">
+    <label class="md-nav__link" for="nav-11-1">
       Random
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-10-1">
+      <label class="md-nav__title" for="nav-11-1">
         Random
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -955,13 +1324,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-12" type="checkbox" id="nav-12">
     
-    <label class="md-nav__link" for="nav-11">
+    <label class="md-nav__link" for="nav-12">
       String
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-11">
+      <label class="md-nav__title" for="nav-12">
         String
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1027,6 +1396,328 @@
               </div>
             
             
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuration" title="Configuration" class="md-nav__link">
+    Configuration
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pause-resume" title="Pause / Resume" class="md-nav__link">
+    Pause / Resume
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-physics-object" title="Add physics object" class="md-nav__link">
+    Add physics object
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#image-object" title="Image object" class="md-nav__link">
+    Image object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sprite-object" title="Sprite object" class="md-nav__link">
+    Sprite object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#group" title="Group" class="md-nav__link">
+    Group
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#destroy-object" title="Destroy object" class="md-nav__link">
+    Destroy object
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#collision" title="Collision" class="md-nav__link">
+    Collision
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods-of-game-object" title="Methods of game object" class="md-nav__link">
+    Methods of game object
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#size" title="Size" class="md-nav__link">
+    Size
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sync-body" title="Sync body" class="md-nav__link">
+    Sync body
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#velocity" title="Velocity" class="md-nav__link">
+    Velocity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mass" title="Mass" class="md-nav__link">
+    Mass
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#acceleration" title="Acceleration" class="md-nav__link">
+    Acceleration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gravity" title="Gravity" class="md-nav__link">
+    Gravity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#friction" title="Friction" class="md-nav__link">
+    Friction
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drag" title="Drag" class="md-nav__link">
+    Drag
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#angular" title="Angular" class="md-nav__link">
+    Angular
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bounce" title="Bounce" class="md-nav__link">
+    Bounce
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#immovable" title="Immovable" class="md-nav__link">
+    Immovable
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods-of-group" title="Methods of group" class="md-nav__link">
+    Methods of group
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-a-game-object-to-physics-world" title="Add a game object to physics world" class="md-nav__link">
+    Add a game object to physics world
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-physics-body" title="Get physics body" class="md-nav__link">
+    Get physics body
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#size_1" title="Size" class="md-nav__link">
+    Size
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reset-position" title="Reset position" class="md-nav__link">
+    Reset position
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#velocity_1" title="Velocity" class="md-nav__link">
+    Velocity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mass_1" title="Mass" class="md-nav__link">
+    Mass
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#acceleration_1" title="Acceleration" class="md-nav__link">
+    Acceleration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gravity_1" title="Gravity" class="md-nav__link">
+    Gravity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#friction_1" title="Friction" class="md-nav__link">
+    Friction
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drag_1" title="Drag" class="md-nav__link">
+    Drag
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#angular_1" title="Angular" class="md-nav__link">
+    Angular
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bounce_1" title="Bounce" class="md-nav__link">
+    Bounce
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#immovable_1" title="Immovable" class="md-nav__link">
+    Immovable
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods-of-world" title="Methods of World" class="md-nav__link">
+    Methods of World
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#wrap" title="Wrap" class="md-nav__link">
+    Wrap
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content">
             <article class="md-content__inner md-typeset">
@@ -1035,7 +1726,371 @@
                 
                   <h1>Physics</h1>
                 
-                
+                <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
+<p>Arcade physics engine in phaser.</p>
+<ul>
+<li>Author: Richard Davey</li>
+</ul>
+<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<h3 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nx">physics</span><span class="o">:</span> <span class="p">{</span>
+        <span class="k">default</span><span class="o">:</span> <span class="s1">&#39;arcade&#39;</span><span class="p">,</span>
+        <span class="nx">arcade</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="nx">width</span><span class="o">:</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">sys</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span>
+            <span class="nx">height</span><span class="o">:</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">sys</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">config</span><span class="p">.</span><span class="nx">height</span><span class="p">,</span>
+            <span class="nx">gravity</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span>
+            <span class="p">},</span>
+            <span class="nx">checkCollision</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">up</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+                <span class="nx">down</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+                <span class="nx">left</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+                <span class="nx">right</span><span class="o">:</span> <span class="kc">true</span>
+            <span class="p">},</span>
+            <span class="nx">overlapBias</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="nx">tileBias</span><span class="o">:</span> <span class="mi">16</span><span class="p">,</span>
+            <span class="nx">forceX</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="nx">isPaused</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+
+            <span class="nx">debug</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="nx">debugShowBody</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="nx">debugShowStaticBody</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="nx">debugShowVelocity</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="nx">debugBodyColor</span><span class="o">:</span> <span class="mh">0xff00ff</span><span class="p">,</span>
+            <span class="nx">debugStaticBodyColor</span><span class="o">:</span> <span class="mh">0x0000ff</span><span class="p">,</span>
+            <span class="nx">debugVelocityColor</span><span class="o">:</span> <span class="mh">0x00ff00</span><span class="p">,</span>
+
+            <span class="nx">maxEntries</span><span class="o">:</span> <span class="mi">16</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</pre></div>
+
+<h4 id="pause-resume">Pause / Resume<a class="headerlink" href="#pause-resume" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
+</pre></div>
+
+<h3 id="add-physics-object">Add physics object<a class="headerlink" href="#add-physics-object" title="Permanent link">&para;</a></h3>
+<h4 id="image-object">Image object<a class="headerlink" href="#image-object" title="Permanent link">&para;</a></h4>
+<p>Static object</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">staticImage</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
+</pre></div>
+
+<p>Dynamic object</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">image</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
+</pre></div>
+
+<h4 id="sprite-object">Sprite object<a class="headerlink" href="#sprite-object" title="Permanent link">&para;</a></h4>
+<p>Static object</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">staticSprite</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>
+</pre></div>
+
+<p>Dynamic object</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">sprite</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>
+</pre></div>
+
+<h4 id="group">Group<a class="headerlink" href="#group" title="Permanent link">&para;</a></h4>
+<p>Static sprite objects</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">group</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">staticGroup</span><span class="p">(</span><span class="nx">children</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+<span class="c1">// var group = scene.physics.add.staticGroup(config);</span>
+</pre></div>
+
+<p>Dynamic sprite objects</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">group</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">group</span><span class="p">(</span><span class="nx">children</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+<span class="c1">// var group = scene.physics.add.staticGroup(config);</span>
+</pre></div>
+
+<p>Confiugration</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">setCollideWorldBounds</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">setAccelerationX</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">setAccelerationY</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">setBounceX</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">setBounceY</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">setDragX</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">setDragY</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">setGravityX</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">setGravityY</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">setFrictionX</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">setFrictionY</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">setVelocityX</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">setVelocityY</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">setAngularVelocity</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">setAngularAcceleration</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">setAngularDrag</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">setMass</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nx">setImmovable</span><span class="o">:</span> <span class="kc">false</span>
+<span class="p">};</span>
+</pre></div>
+
+<h4 id="destroy-object">Destroy object<a class="headerlink" href="#destroy-object" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
+</pre></div>
+
+<h3 id="collision">Collision<a class="headerlink" href="#collision" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">collider</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">collider</span><span class="p">(</span><span class="nx">objectsA</span><span class="p">,</span> <span class="nx">objectsB</span><span class="p">,</span> <span class="nx">collideCallback</span><span class="p">,</span> <span class="nx">processCallback</span><span class="p">,</span> <span class="nx">callbackContext</span><span class="p">);</span>
+<span class="c1">// var collider = scene.physics.add.addOverlap(objectsA, objectsB, collideCallback, processCallback, callbackContext);</span>
+</pre></div>
+
+<ul>
+<li>objectsA, objectsB<ul>
+<li>a game object</li>
+<li>game objects in array</li>
+<li>group</li>
+</ul>
+</li>
+<li>collideCallback:
+    <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">gameobject1</span><span class="p">,</span> <span class="nx">gameobject2</span><span class="p">){}</span>
+</pre></div></li>
+<li>processCallback: fired when gameobject1 intersects gameobject2
+    <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">gameobject1</span><span class="p">,</span> <span class="nx">gameobject2</span><span class="p">){</span>
+    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>  <span class="c1">// return false will discard remaining collision checking</span>
+<span class="p">}</span>
+</pre></div></li>
+</ul>
+<h3 id="methods-of-game-object">Methods of game object<a class="headerlink" href="#methods-of-game-object" title="Permanent link">&para;</a></h3>
+<h4 id="size">Size<a class="headerlink" href="#size" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">setSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">isCenter</span><span class="p">);</span>  <span class="c1">// isCenter: boolean</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">setCircle</span><span class="p">(</span><span class="nx">radius</span><span class="p">,</span> <span class="nx">offsetX</span><span class="p">,</span> <span class="nx">offsetY</span><span class="p">);</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">setOffset</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</pre></div>
+
+<h4 id="sync-body">Sync body<a class="headerlink" href="#sync-body" title="Permanent link">&para;</a></h4>
+<p>Syncs the Bodies position and size in static game object.</p>
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">refreshBody</span><span class="p">();</span>
+</pre></div>
+
+<h4 id="velocity">Velocity<a class="headerlink" href="#velocity" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">setVelocity</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">setVelocityX</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">setVelocityY</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">setMaxVelocity</span><span class="p">(</span><span class="nx">y</span><span class="p">);</span>
+</pre></div>
+
+<h4 id="mass">Mass<a class="headerlink" href="#mass" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">setMass</span><span class="p">(</span><span class="nx">v</span><span class="p">);</span>
+</pre></div>
+
+<h4 id="acceleration">Acceleration<a class="headerlink" href="#acceleration" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">setAcceleration</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">setAccelerationX</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">setAccelerationY</span><span class="p">(</span><span class="nx">y</span><span class="p">);</span>
+</pre></div>
+
+<h4 id="gravity">Gravity<a class="headerlink" href="#gravity" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">setGravity</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">setGravityX</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">setGravityY</span><span class="p">(</span><span class="nx">y</span><span class="p">);</span>
+</pre></div>
+
+<h4 id="friction">Friction<a class="headerlink" href="#friction" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">setFriction</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">setFrictionX</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">setFrictionY</span><span class="p">(</span><span class="nx">y</span><span class="p">);</span>
+</pre></div>
+
+<h4 id="drag">Drag<a class="headerlink" href="#drag" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">setDrag</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">setDragX</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">setDragY</span><span class="p">(</span><span class="nx">y</span><span class="p">);</span>
+</pre></div>
+
+<h4 id="angular">Angular<a class="headerlink" href="#angular" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">setAngularVelocity</span><span class="p">(</span><span class="nx">v</span><span class="p">);</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">setAngularAcceleration</span><span class="p">(</span><span class="nx">v</span><span class="p">);</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">setAngularDrag</span><span class="p">(</span><span class="nx">v</span><span class="p">);</span>
+</pre></div>
+
+<h4 id="bounce">Bounce<a class="headerlink" href="#bounce" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">setBounce</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">setBounceX</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">setBounceY</span><span class="p">(</span><span class="nx">y</span><span class="p">);</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">setCollideWorldBounds</span><span class="p">(</span><span class="kr">boolean</span><span class="p">);</span>
+</pre></div>
+
+<h4 id="immovable">Immovable<a class="headerlink" href="#immovable" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">setImmovable</span><span class="p">(</span><span class="kr">boolean</span><span class="p">);</span>
+</pre></div>
+
+<h3 id="methods-of-group">Methods of group<a class="headerlink" href="#methods-of-group" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">group</span><span class="p">.</span><span class="nx">setVelocity</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">step</span><span class="p">);</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">group</span><span class="p">.</span><span class="nx">setVelocityX</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">step</span><span class="p">);</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">group</span><span class="p">.</span><span class="nx">setVelocityY</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">step</span><span class="p">);</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">group</span><span class="p">.</span><span class="nx">refresh</span><span class="p">();</span>  <span class="c1">// call this method when position of game objects were changed in static object group</span>
+</pre></div>
+
+<h3 id="add-a-game-object-to-physics-world">Add a game object to physics world<a class="headerlink" href="#add-a-game-object-to-physics-world" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">isStatic</span><span class="p">);</span>
+<span class="c1">// var body = gameObject.body;</span>
+</pre></div>
+
+<h4 id="get-physics-body">Get physics body<a class="headerlink" href="#get-physics-body" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">body</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">body</span><span class="p">;</span>
+</pre></div>
+
+<h4 id="size_1">Size<a class="headerlink" href="#size_1" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">body</span><span class="p">.</span><span class="nx">setSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">center</span><span class="p">);</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">body</span><span class="p">.</span><span class="nx">setCircle</span><span class="p">(</span><span class="nx">radius</span><span class="p">,</span> <span class="nx">offsetX</span><span class="p">,</span> <span class="nx">offsetY</span><span class="p">);</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">body</span><span class="p">.</span><span class="nx">setOffset</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</pre></div>
+
+<h4 id="reset-position">Reset position<a class="headerlink" href="#reset-position" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">body</span><span class="p">.</span><span class="nx">reset</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</pre></div>
+
+<h4 id="velocity_1">Velocity<a class="headerlink" href="#velocity_1" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">body</span><span class="p">.</span><span class="nx">velocity</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">body</span><span class="p">.</span><span class="nx">velocity</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">body</span><span class="p">.</span><span class="nx">velocity</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">body</span><span class="p">.</span><span class="nx">maxVelocity</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</pre></div>
+
+<h4 id="mass_1">Mass<a class="headerlink" href="#mass_1" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">body</span><span class="p">.</span><span class="nx">mass</span> <span class="o">=</span> <span class="nx">v</span><span class="p">;</span>
+</pre></div>
+
+<h4 id="acceleration_1">Acceleration<a class="headerlink" href="#acceleration_1" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">body</span><span class="p">.</span><span class="nx">acceleration</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">body</span><span class="p">.</span><span class="nx">acceleration</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">body</span><span class="p">.</span><span class="nx">acceleration</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
+</pre></div>
+
+<h4 id="gravity_1">Gravity<a class="headerlink" href="#gravity_1" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">body</span><span class="p">.</span><span class="nx">gravity</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">body</span><span class="p">.</span><span class="nx">gravity</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">body</span><span class="p">.</span><span class="nx">gravity</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
+</pre></div>
+
+<h4 id="friction_1">Friction<a class="headerlink" href="#friction_1" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">body</span><span class="p">.</span><span class="nx">friction</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">body</span><span class="p">.</span><span class="nx">friction</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">body</span><span class="p">.</span><span class="nx">friction</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
+</pre></div>
+
+<h4 id="drag_1">Drag<a class="headerlink" href="#drag_1" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">body</span><span class="p">.</span><span class="nx">drag</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">body</span><span class="p">.</span><span class="nx">drag</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">body</span><span class="p">.</span><span class="nx">drag</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
+</pre></div>
+
+<h4 id="angular_1">Angular<a class="headerlink" href="#angular_1" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">body</span><span class="p">.</span><span class="nx">angularVelocity</span> <span class="o">=</span> <span class="nx">v</span><span class="p">;</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">body</span><span class="p">.</span><span class="nx">angularAcceleration</span> <span class="o">=</span> <span class="nx">v</span><span class="p">;</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">body</span><span class="p">.</span><span class="nx">angularDrag</span> <span class="o">=</span> <span class="nx">v</span><span class="p">;</span>
+</pre></div>
+
+<h4 id="bounce_1">Bounce<a class="headerlink" href="#bounce_1" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">body</span><span class="p">.</span><span class="nx">bounce</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">body</span><span class="p">.</span><span class="nx">bounce</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">body</span><span class="p">.</span><span class="nx">bounce</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">body</span><span class="p">.</span><span class="nx">collideWorldBounds</span> <span class="o">=</span> <span class="kr">boolean</span><span class="p">;</span>
+</pre></div>
+
+<h4 id="immovable_1">Immovable<a class="headerlink" href="#immovable_1" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">body</span><span class="p">.</span><span class="nx">immovable</span> <span class="o">=</span> <span class="kr">boolean</span><span class="p">;</span>
+</pre></div>
+
+<h3 id="methods-of-world">Methods of World<a class="headerlink" href="#methods-of-world" title="Permanent link">&para;</a></h3>
+<h4 id="wrap">Wrap<a class="headerlink" href="#wrap" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">wrap</span><span class="p">(</span><span class="nx">gameobject</span><span class="p">,</span> <span class="nx">padding</span><span class="p">);</span>
+</pre></div>
+
+<ul>
+<li>gameobject:<ul>
+<li>game object (image, sprite)</li>
+<li>group</li>
+<li>array of game objects</li>
+</ul>
+</li>
+</ul>
                 
                   
                 
@@ -1105,9 +2160,9 @@
       
     </div>
     
-      <script src="../assets/javascripts/application.8eb9be28.js"></script>
+      <script src="../assets/javascripts/application-a5397a53ce.js"></script>
       
-      <script>app.initialize({version:"0.17.3",url:{base:".."}})</script>
+      <script>app.initialize({version:"0.17.1",url:{base:".."}})</script>
       
         <script src="../js/mermaid/mermaid.min.js"></script>
       
