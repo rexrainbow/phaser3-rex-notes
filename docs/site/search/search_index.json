@@ -142,7 +142,7 @@
         }, 
         {
             "location": "/touchevents/index.html", 
-            "text": "Introduction\n\n\nBuilt-in touch/mouse events of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nMouse/touch events\n\n\nscene\n.\ninput\n.\non\n(\npointerdown\n,\n \nfunction\n(\npointer\n,\n \ncurrentlyOver\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\npointerup\n,\n \nfunction\n(\npointer\n,\n \ncurrentlyOver\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\npointermove\n,\n \nfunction\n(\npointer\n,\n \ncurrentlyOver\n){\n \n/* ... */\n \n});\n\n\n\nscene\n.\ninput\n.\non\n(\npointerover\n,\n \nfunction\n(\npointer\n,\n \njustOver\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\npointerout\n,\n \nfunction\n(\npointer\n,\n \njustOut\n){\n \n/* ... */\n \n});\n\n\n\n\n\nMouse/touch events of game object\n\n\n\n\nRegister game object\n\n\n\n\ngameObject\n.\nsetInteractive\n();\n       \n// enable\n\n\n// gameObject.setInteractive(false);  // disable\n\n\n\n\n\n\n\nMouse/touch events of a game object\n\n\n\n\ngameObject\n.\non\n(\npointerdown\n,\n \nfunction\n(\npointer\n,\n \nlocalX\n,\n \nlocalY\n,\n \ncamera\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\npointerup\n,\n \nfunction\n(\npointer\n,\n \nlocalX\n,\n \nlocalY\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\npointermove\n,\n \nfunction\n(\npointer\n,\n \nlocalX\n,\n \nlocalY\n){\n \n/* ... */\n \n});\n\n\n\ngameObject\n.\non\n(\npointerover\n,\n \nfunction\n(\npointer\n,\n \nlocalX\n,\n \nlocalY\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\npointerout\n,\n \nfunction\n(\npointer\n){\n \n/* ... */\n \n});\n\n\n\n\n\nscene\n.\ninput\n.\non\n(\ngameobjectdown\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ngameobjectup\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ngameobjectmove\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n){\n \n/* ... */\n \n});\n\n\n\nscene\n.\ninput\n.\non\n(\ngameobjectover\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ngameobjectout\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n){\n \n/* ... */\n \n});\n\n\n\n\n\nDrag events\n\n\n\n\nRegister game object and enable dragging\n\n\n\n\ngameObject\n.\nsetInteractive\n();\n           \n// enable touching interactive\n\n\nscene\n.\ninput\n.\nsetDraggable\n(\ngameObject\n);\n  \n// enable dragging\n\n\n// scene.input.dragDistanceThreshold = 16;\n\n\n// scene.input.dragTimeThreshold = 500;\n\n\n\n// gameObject.setInteractive(false);             // disable\n\n\n// scene.input.setDraggable(gameObject, false);  // disable dragging\n\n\n\n\n\ngameObject\n.\non\n(\ndragstart\n,\n \nfunction\n(\npointer\n,\n \ndragX\n,\n \ndragY\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\ndrag\n,\n \nfunction\n(\npointer\n,\n \ndragX\n,\n \ndragY\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\ndragend\n,\n \nfunction\n(\npointer\n,\n \ndragX\n,\n \ndragY\n,\n \ndropped\n{\n \n/* ... */\n \n});\n\n\n\n\n\nscene\n.\ninput\n.\non\n(\ndragstart\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ndrag\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n,\n \ndragX\n,\n \ndragY\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ndragend\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n,\n \ndropped\n){\n \n/* ... */\n \n});\n\n\n\n\n\nDrop events\n\n\ngameObject\n.\non\n(\ndrop\n,\n \nfunction\n(\npointer\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\n\ngameObject\n.\non\n(\ndragenter\n,\n \nfunction\n(\npointer\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\ndragover\n,\n \nfunction\n(\npointer\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\ndragleave\n,\n \nfunction\n(\npointer\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\n\n\n\nscene\n.\ninput\n.\non\n(\ndrop\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\n\nscene\n.\ninput\n.\non\n(\ndragenter\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ndragover\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ndragleave\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\n\n\n\nProperties of point\n\n\n\n\nPosition of current touching: \npointer.x\n , \npointer.y\n\n\nPosition of touching start: \npointer.downX\n, \npointer.downY\n\n\nPosition of touching end: \npointer.upX\n, \npointer.upY\n\n\nNo botton down: \npointer.noButtonDown()\n\n\nIs left botton down: \npointer.leftButtonDown()\n\n\nIs right botton down: \npointer.rightButtonDown()", 
+            "text": "Introduction\n\n\nBuilt-in touch/mouse events of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nMouse/touch events\n\n\nscene\n.\ninput\n.\non\n(\npointerdown\n,\n \nfunction\n(\npointer\n,\n \ncurrentlyOver\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\npointerup\n,\n \nfunction\n(\npointer\n,\n \ncurrentlyOver\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\npointermove\n,\n \nfunction\n(\npointer\n,\n \ncurrentlyOver\n){\n \n/* ... */\n \n});\n\n\n\nscene\n.\ninput\n.\non\n(\npointerover\n,\n \nfunction\n(\npointer\n,\n \njustOver\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\npointerout\n,\n \nfunction\n(\npointer\n,\n \njustOut\n){\n \n/* ... */\n \n});\n\n\n\n\n\nActive pointer\n\n\nvar\n \npointer\n \n=\n \nscene\n.\ninput\n.\nactivePointer\n;\n\n\n// var x = pointer.x;\n\n\n// var y = pointer.y;\n\n\n\n\n\nCurrently just 1 pointer supported.\n\n\nMouse/touch events of game object\n\n\n\n\nRegister game object\n\n\n\n\ngameObject\n.\nsetInteractive\n();\n       \n// enable\n\n\n// gameObject.setInteractive(false);  // disable\n\n\n\n\n\n\n\nMouse/touch events of a game object\n\n\n\n\ngameObject\n.\non\n(\npointerdown\n,\n \nfunction\n(\npointer\n,\n \nlocalX\n,\n \nlocalY\n,\n \ncamera\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\npointerup\n,\n \nfunction\n(\npointer\n,\n \nlocalX\n,\n \nlocalY\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\npointermove\n,\n \nfunction\n(\npointer\n,\n \nlocalX\n,\n \nlocalY\n){\n \n/* ... */\n \n});\n\n\n\ngameObject\n.\non\n(\npointerover\n,\n \nfunction\n(\npointer\n,\n \nlocalX\n,\n \nlocalY\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\npointerout\n,\n \nfunction\n(\npointer\n){\n \n/* ... */\n \n});\n\n\n\n\n\nscene\n.\ninput\n.\non\n(\ngameobjectdown\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ngameobjectup\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ngameobjectmove\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n){\n \n/* ... */\n \n});\n\n\n\nscene\n.\ninput\n.\non\n(\ngameobjectover\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ngameobjectout\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n){\n \n/* ... */\n \n});\n\n\n\n\n\nDrag events\n\n\n\n\nRegister game object and enable dragging\n\n\n\n\ngameObject\n.\nsetInteractive\n();\n           \n// enable touching interactive\n\n\nscene\n.\ninput\n.\nsetDraggable\n(\ngameObject\n);\n  \n// enable dragging\n\n\n// scene.input.dragDistanceThreshold = 16;\n\n\n// scene.input.dragTimeThreshold = 500;\n\n\n\n// gameObject.setInteractive(false);             // disable\n\n\n// scene.input.setDraggable(gameObject, false);  // disable dragging\n\n\n\n\n\ngameObject\n.\non\n(\ndragstart\n,\n \nfunction\n(\npointer\n,\n \ndragX\n,\n \ndragY\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\ndrag\n,\n \nfunction\n(\npointer\n,\n \ndragX\n,\n \ndragY\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\ndragend\n,\n \nfunction\n(\npointer\n,\n \ndragX\n,\n \ndragY\n,\n \ndropped\n{\n \n/* ... */\n \n});\n\n\n\n\n\nscene\n.\ninput\n.\non\n(\ndragstart\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ndrag\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n,\n \ndragX\n,\n \ndragY\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ndragend\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n,\n \ndropped\n){\n \n/* ... */\n \n});\n\n\n\n\n\nDrop events\n\n\ngameObject\n.\non\n(\ndrop\n,\n \nfunction\n(\npointer\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\n\ngameObject\n.\non\n(\ndragenter\n,\n \nfunction\n(\npointer\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\ndragover\n,\n \nfunction\n(\npointer\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\ngameObject\n.\non\n(\ndragleave\n,\n \nfunction\n(\npointer\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\n\n\n\nscene\n.\ninput\n.\non\n(\ndrop\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\n\nscene\n.\ninput\n.\non\n(\ndragenter\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ndragover\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\nscene\n.\ninput\n.\non\n(\ndragleave\n,\n \nfunction\n(\npointer\n,\n \ngameObject\n,\n \ntarget\n){\n \n/* ... */\n \n});\n\n\n\n\n\nProperties of point\n\n\n\n\nPosition of current touching: \npointer.x\n , \npointer.y\n\n\nPosition of touching start: \npointer.downX\n, \npointer.downY\n\n\nPosition of touching end: \npointer.upX\n, \npointer.upY\n\n\nNo botton down: \npointer.noButtonDown()\n\n\nIs left botton down: \npointer.leftButtonDown()\n\n\nIs right botton down: \npointer.rightButtonDown()", 
             "title": "Touch events"
         }, 
         {
@@ -159,6 +159,11 @@
             "location": "/touchevents/index.html#mousetouch-events", 
             "text": "scene . input . on ( pointerdown ,   function ( pointer ,   currentlyOver ){   /* ... */   });  scene . input . on ( pointerup ,   function ( pointer ,   currentlyOver ){   /* ... */   });  scene . input . on ( pointermove ,   function ( pointer ,   currentlyOver ){   /* ... */   });  scene . input . on ( pointerover ,   function ( pointer ,   justOver ){   /* ... */   });  scene . input . on ( pointerout ,   function ( pointer ,   justOut ){   /* ... */   });", 
             "title": "Mouse/touch events"
+        }, 
+        {
+            "location": "/touchevents/index.html#active-pointer", 
+            "text": "var   pointer   =   scene . input . activePointer ;  // var x = pointer.x;  // var y = pointer.y;   Currently just 1 pointer supported.", 
+            "title": "Active pointer"
         }, 
         {
             "location": "/touchevents/index.html#mousetouch-events-of-game-object", 
@@ -542,7 +547,7 @@
         }, 
         {
             "location": "/image/index.html", 
-            "text": "Introduction\n\n\nDisplay of static images, built-in game object of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nLoad texture\n\n\nscene\n.\nload\n.\nimage\n(\nkey\n,\n \nurl\n);\n\n\n\n\n\nSee \nloader\n\n\nAdd image object\n\n\nvar\n \nimage\n \n=\n \nscene\n.\nadd\n.\nimage\n(\nx\n,\n \ny\n,\n \nkey\n);\n\n\n\n\n\nAdd image from JSON\n\n\nvar\n \nimage\n \n=\n \nscene\n.\nmake\n.\nimage\n({\n\n    \nx\n:\n \n100\n,\n\n    \ny\n:\n \n100\n,\n\n    \nkey\n:\n \n,\n\n\n    \n// angle: 90,\n\n    \n// alpha: 0.75\n\n    \n// flipX: true,\n\n    \n// flipY: true\n\n\n});\n\n\n\n\n\nOther properties\n\n\nSee \ngame object", 
+            "text": "Introduction\n\n\nDisplay of static images, built-in game object of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nLoad texture\n\n\nscene\n.\nload\n.\nimage\n(\nkey\n,\n \nurl\n);\n\n\n\n\n\nSee \nloader\n\n\nAdd image object\n\n\nvar\n \nimage\n \n=\n \nscene\n.\nadd\n.\nimage\n(\nx\n,\n \ny\n,\n \nkey\n);\n\n\n\n\n\nAdd image from JSON\n\n\nvar\n \nimage\n \n=\n \nscene\n.\nmake\n.\nimage\n({\n\n    \nx\n:\n \n0\n,\n\n    \ny\n:\n \n0\n,\n\n    \nkey\n:\n \n,\n\n\n    \n// angle: 0,\n\n    \n// alpha: 1\n\n    \n// flipX: true,\n\n    \n// flipY: true\n\n\n});\n\n\n\n\n\nOther properties\n\n\nSee \ngame object", 
             "title": "Image"
         }, 
         {
@@ -562,13 +567,88 @@
         }, 
         {
             "location": "/image/index.html#add-image-object", 
-            "text": "var   image   =   scene . add . image ( x ,   y ,   key );   Add image from JSON  var   image   =   scene . make . image ({ \n     x :   100 , \n     y :   100 , \n     key :   , \n\n     // angle: 90, \n     // alpha: 0.75 \n     // flipX: true, \n     // flipY: true  });", 
+            "text": "var   image   =   scene . add . image ( x ,   y ,   key );   Add image from JSON  var   image   =   scene . make . image ({ \n     x :   0 , \n     y :   0 , \n     key :   , \n\n     // angle: 0, \n     // alpha: 1 \n     // flipX: true, \n     // flipY: true  });", 
             "title": "Add image object"
         }, 
         {
             "location": "/image/index.html#other-properties", 
             "text": "See  game object", 
             "title": "Other properties"
+        }, 
+        {
+            "location": "/blitter/index.html", 
+            "text": "Introduction\n\n\nDisplay of static images, built-in game object of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nLoad texture\n\n\nscene\n.\nload\n.\nimage\n(\nkey\n,\n \nurl\n);\n\n\n\n\n\nSee \nloader\n\n\nAdd blitter container\n\n\nAdd blitter container\n\n\nvar\n \nblitter\n \n=\n \nscene\n.\nadd\n.\nblitter\n(\nx\n,\n \ny\n,\n \nkey\n);\n\n\n\n\n\nAdd blitter container from JSON\n\n\nvar\n \nblitter\n \n=\n \nscene\n.\nmake\n.\nblitter\n({\n\n    \nx\n:\n \n0\n,\n\n    \ny\n:\n \n0\n,\n\n    \nkey\n:\n \n,\n\n\n    \n// angle: 0,\n\n    \n// alpha: 1\n\n    \n// flipX: true,\n\n    \n// flipY: true\n\n\n});\n\n\n\n\n\nAdd bob object\n\n\nvar\n \nbob\n \n=\n \nblitter\n.\ncreate\n(\nx\n,\n \ny\n);\n\n\n// var bob = blitter.create(x, y, frame, visible, index);\n\n\n\n\n\n\n\nframe : The Frame the Bob will use. It must be part of the Texture the parent Blitter object is using.\n\n\nvisible : Should the created Bob render or not?\n\n\nindex : The position in the Blitters Display List to add the new Bob at. Defaults to the top of the list.\n\n\n\n\nAdd mutiple bob objects\n\n\nvar\n \nbobs\n \n=\n \nblitter\n.\ncreateMultiple\n(\nquantity\n,\n \nframe\n,\n \nvisible\n);\n\n\n\n\n\n\n\nquantity : The quantity of Bob objects to create.\n\n\n\n\nAdd bob object from callback\n\n\nvar\n \nbobs\n \n=\n \nblitter\n.\ncreateFromCallback\n(\ncallback\n,\n \nquantity\n,\n \nframe\n,\n \nvisible\n)\n\n\n// var callback = function(bob, i){};\n\n\n\n\n\nClear all bob objects\n\n\nblitter\n.\nclear\n();\n\n\n\n\n\nBob object\n\n\nA Bob has a position, alpha value and a frame from a texture that it uses to render with. You can also toggle the flipped and visible state of the Bob.\n\n\nPosition, frame\n\n\nbob\n.\nreset\n(\nx\n,\n \ny\n,\n \nframe\n);\n\n\n\n\n\nbob\n.\nsetFrame\n(\nframe\n);\n\n\n\n\n\nFlip\n\n\nbob\n.\nresetFlip\n();\n\n\n\n\n\nbob\n.\nsetFlip\n(\nboolX\n,\n \nboolY\n);\n\n\n\n\n\nbob\n.\nsetFlipX\n(\nboolean\n);\n\n\n\n\n\nbob\n.\nsetFlipY\n(\nboolean\n);\n\n\n\n\n\nVisible, alpha\n\n\nbob\n.\nsetVisible\n(\nboolean\n);\n\n\n// bob.visible = v;\n\n\n// var visible = bob.visible;\n\n\n\n\n\nbob\n.\nsetAlpha\n(\nv\n);\n\n\n// bob.aplha = v;\n\n\n// var alpha = bob.alpha;\n\n\n\n\n\nDestroy\n\n\nbob\n.\ndestroy\n();\n\n\n\n\n\nData\n\n\nvar\n \ndata\n \n=\n \nbob\n.\ndata\n;\n  \n// {}", 
+            "title": "Blitter"
+        }, 
+        {
+            "location": "/blitter/index.html#introduction", 
+            "text": "Display of static images, built-in game object of phaser.   Author: Richard Davey", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/blitter/index.html#usage", 
+            "text": "", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/blitter/index.html#load-texture", 
+            "text": "scene . load . image ( key ,   url );   See  loader", 
+            "title": "Load texture"
+        }, 
+        {
+            "location": "/blitter/index.html#add-blitter-container", 
+            "text": "Add blitter container  var   blitter   =   scene . add . blitter ( x ,   y ,   key );   Add blitter container from JSON  var   blitter   =   scene . make . blitter ({ \n     x :   0 , \n     y :   0 , \n     key :   , \n\n     // angle: 0, \n     // alpha: 1 \n     // flipX: true, \n     // flipY: true  });", 
+            "title": "Add blitter container"
+        }, 
+        {
+            "location": "/blitter/index.html#add-bob-object", 
+            "text": "var   bob   =   blitter . create ( x ,   y );  // var bob = blitter.create(x, y, frame, visible, index);    frame : The Frame the Bob will use. It must be part of the Texture the parent Blitter object is using.  visible : Should the created Bob render or not?  index : The position in the Blitters Display List to add the new Bob at. Defaults to the top of the list.", 
+            "title": "Add bob object"
+        }, 
+        {
+            "location": "/blitter/index.html#add-mutiple-bob-objects", 
+            "text": "var   bobs   =   blitter . createMultiple ( quantity ,   frame ,   visible );    quantity : The quantity of Bob objects to create.", 
+            "title": "Add mutiple bob objects"
+        }, 
+        {
+            "location": "/blitter/index.html#add-bob-object-from-callback", 
+            "text": "var   bobs   =   blitter . createFromCallback ( callback ,   quantity ,   frame ,   visible )  // var callback = function(bob, i){};", 
+            "title": "Add bob object from callback"
+        }, 
+        {
+            "location": "/blitter/index.html#clear-all-bob-objects", 
+            "text": "blitter . clear ();", 
+            "title": "Clear all bob objects"
+        }, 
+        {
+            "location": "/blitter/index.html#bob-object", 
+            "text": "A Bob has a position, alpha value and a frame from a texture that it uses to render with. You can also toggle the flipped and visible state of the Bob.", 
+            "title": "Bob object"
+        }, 
+        {
+            "location": "/blitter/index.html#position-frame", 
+            "text": "bob . reset ( x ,   y ,   frame );   bob . setFrame ( frame );", 
+            "title": "Position, frame"
+        }, 
+        {
+            "location": "/blitter/index.html#flip", 
+            "text": "bob . resetFlip ();   bob . setFlip ( boolX ,   boolY );   bob . setFlipX ( boolean );   bob . setFlipY ( boolean );", 
+            "title": "Flip"
+        }, 
+        {
+            "location": "/blitter/index.html#visible-alpha", 
+            "text": "bob . setVisible ( boolean );  // bob.visible = v;  // var visible = bob.visible;   bob . setAlpha ( v );  // bob.aplha = v;  // var alpha = bob.alpha;", 
+            "title": "Visible, alpha"
+        }, 
+        {
+            "location": "/blitter/index.html#destroy", 
+            "text": "bob . destroy ();", 
+            "title": "Destroy"
+        }, 
+        {
+            "location": "/blitter/index.html#data", 
+            "text": "var   data   =   bob . data ;    // {}", 
+            "title": "Data"
         }, 
         {
             "location": "/text/index.html", 

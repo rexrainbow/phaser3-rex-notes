@@ -17,6 +17,16 @@ scene.input.on('pointerover', function(pointer, justOver){ /* ... */ });
 scene.input.on('pointerout', function(pointer, justOut){ /* ... */ });
 ```
 
+### Active pointer
+
+```javascript
+var pointer = scene.input.activePointer;
+// var x = pointer.x;
+// var y = pointer.y;
+```
+
+Currently just 1 pointer supported.
+
 ### Mouse/touch events of game object
 
 - Register game object

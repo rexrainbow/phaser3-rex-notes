@@ -19,6 +19,7 @@ pages:
     - Game object: gameobject.md
     - Sprite:
         - Image: image.md
+        - Blitter: blitter.md
     - Text:
         - Text: text.md
         - Typing: texttypingplugin.md    

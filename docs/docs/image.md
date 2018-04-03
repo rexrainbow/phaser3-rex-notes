@@ -24,12 +24,12 @@ Add image from JSON
 
 ```javascript
 var image = scene.make.image({
-    x: 100,
-    y: 100,
+    x: 0,
+    y: 0,
     key: '',
 
-    // angle: 90,
-    // alpha: 0.75
+    // angle: 0,
+    // alpha: 1
     // flipX: true,
     // flipY: true
 });
