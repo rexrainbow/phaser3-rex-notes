@@ -29,8 +29,11 @@ class FadeOutPlugin {
      */
     resetFromJSON(o) {
         this.setMode(GetValue(o, 'mode', 1));
-        this.setAlphaRange(GetAdvancedValue(o, 'alpha.start', 1), GetAdvancedValue(o, 'alpha.end', 0));
-        this.setDelay(GetAdvancedValue(o, 'delay', 0));        
+        this.setAlphaRange(
+            GetAdvancedValue(o, 'alpha.start', this.gameobject.alpha),
+            GetAdvancedValue(o, 'alpha.end', 0)
+        );
+        this.setDelay(GetAdvancedValue(o, 'delay', 0));
         this.setFadeOutTime(GetAdvancedValue(o, 'duration', 1000));
         return this;
     }
