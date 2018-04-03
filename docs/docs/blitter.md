@@ -87,6 +87,13 @@ A Bob has a position, alpha value and a frame from a texture that it uses to ren
 #### Position, frame
 
 ```javascript
+bob.x = 0;
+bob.y = 0;
+// var x = bob.x;
+// var y = bob.y;
+```
+
+```javascript
 bob.reset(x, y, frame);
 ```
 

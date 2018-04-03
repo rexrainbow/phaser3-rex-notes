@@ -8,6 +8,8 @@ var GetSceneObject = function (parent) {
         return parent;
     } else if (parent.scene && (parent.scene instanceof SceneKlass)) { // parent = game object
         return parent.scene;
+    } else if (parent.parent && parent.parent.scene && (parent.parent.scene instanceof SceneKlass)) { // parent = bob object
+        return parent.parent.scene;
     }
 }
 

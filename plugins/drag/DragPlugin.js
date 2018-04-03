@@ -1,6 +1,7 @@
 'use strict'
 
 import Phaser from 'phaser';
+import GetSceneObject from './../utils/system/GetSceneObject.js';
 
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 const DistanceBetween = Phaser.Math.Distance.Between;
@@ -14,7 +15,8 @@ var P1 = {
 class DragDropPlugin {
     constructor(gameobject, config) {
         this.gameobject = gameobject;
-        this.scene = gameobject.scene;
+        this.scene = GetSceneObject(gameobject);
+        
         this.enable = null;
         this.resetFromJSON(config);
         this.boot();

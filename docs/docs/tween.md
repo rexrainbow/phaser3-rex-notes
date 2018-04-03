@@ -131,17 +131,38 @@ tween.resume();
 ```
 
 ```javascript
-var isPlaying = tween.isPlaying()
+var isPlaying = tween.isPlaying();
+var isPaused = tween.isPaused();
+```
+
+### Stop task
+
+```javascript
+tween.stop();
+```
+
+### Play task
+
+```javascript
+tween.play();
+```
+
+### Restart task
+
+```javascript
+tween.restart();
 ```
 
 ### Time-scale
 
 ```javascript
-var timeScale = tween.timeScale;
+tween.setTimeScale(v);
+// tween.timeScale = timescale;
 ```
 
 ```javascript
-tween.timeScale = timescale;
+var timeScale = tween.getTimeScale();
+// var timeScale = tween.timeScale;
 ```
 
 #### Global time-scale

@@ -1,6 +1,7 @@
 'use strict'
 
 import Phaser from 'phaser';
+import GetSceneObject from './../utils/system/GetSceneObject.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -10,7 +11,8 @@ const Clamp = Phaser.Math.Clamp;
 class TextPagePlugin {
     constructor(gameobject, config) {
         this.gameobject = gameobject;
-        this.scene = gameobject.scene;
+        this.scene = GetSceneObject(gameobject);
+        
         this.wordWrap = {};
         this.resetFromJSON(config);
     }

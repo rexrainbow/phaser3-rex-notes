@@ -763,6 +763,27 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#stop-task" title="Stop task" class="md-nav__link">
+    Stop task
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#play-task" title="Play task" class="md-nav__link">
+    Play task
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#restart-task" title="Restart task" class="md-nav__link">
+    Restart task
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#time-scale" title="Time-scale" class="md-nav__link">
     Time-scale
   </a>
@@ -1227,6 +1248,27 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#stop-task" title="Stop task" class="md-nav__link">
+    Stop task
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#play-task" title="Play task" class="md-nav__link">
+    Play task
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#restart-task" title="Restart task" class="md-nav__link">
+    Restart task
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#time-scale" title="Time-scale" class="md-nav__link">
     Time-scale
   </a>
@@ -1394,14 +1436,29 @@
 <div class="codehilite"><pre><span></span><span class="nx">tween</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
 </pre></div>
 
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isPlaying</span> <span class="o">=</span> <span class="nx">tween</span><span class="p">.</span><span class="nx">isPlaying</span><span class="p">()</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isPlaying</span> <span class="o">=</span> <span class="nx">tween</span><span class="p">.</span><span class="nx">isPlaying</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">isPaused</span> <span class="o">=</span> <span class="nx">tween</span><span class="p">.</span><span class="nx">isPaused</span><span class="p">();</span>
+</pre></div>
+
+<h3 id="stop-task">Stop task<a class="headerlink" href="#stop-task" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">tween</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
+</pre></div>
+
+<h3 id="play-task">Play task<a class="headerlink" href="#play-task" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">tween</span><span class="p">.</span><span class="nx">play</span><span class="p">();</span>
+</pre></div>
+
+<h3 id="restart-task">Restart task<a class="headerlink" href="#restart-task" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">tween</span><span class="p">.</span><span class="nx">restart</span><span class="p">();</span>
 </pre></div>
 
 <h3 id="time-scale">Time-scale<a class="headerlink" href="#time-scale" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">timeScale</span> <span class="o">=</span> <span class="nx">tween</span><span class="p">.</span><span class="nx">timeScale</span><span class="p">;</span>
+<div class="codehilite"><pre><span></span><span class="nx">tween</span><span class="p">.</span><span class="nx">setTimeScale</span><span class="p">(</span><span class="nx">v</span><span class="p">);</span>
+<span class="c1">// tween.timeScale = timescale;</span>
 </pre></div>
 
-<div class="codehilite"><pre><span></span><span class="nx">tween</span><span class="p">.</span><span class="nx">timeScale</span> <span class="o">=</span> <span class="nx">timescale</span><span class="p">;</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">timeScale</span> <span class="o">=</span> <span class="nx">tween</span><span class="p">.</span><span class="nx">getTimeScale</span><span class="p">();</span>
+<span class="c1">// var timeScale = tween.timeScale;</span>
 </pre></div>
 
 <h4 id="global-time-scale">Global time-scale<a class="headerlink" href="#global-time-scale" title="Permanent link">&para;</a></h4>

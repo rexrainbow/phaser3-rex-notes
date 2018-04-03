@@ -2,6 +2,7 @@
 
 import Phaser from 'phaser';
 import EE from 'eventemitter3';
+import GetSceneObject from './../utils/system/GetSceneObject.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -12,7 +13,8 @@ class TextTypingPlugin extends EE {
         super();
 
         this.gameobject = gameobject;
-        this.scene = gameobject.scene;
+        this.scene = GetSceneObject(gameobject);
+        
         this.timer = null;
         this.resetFromJSON(config);
     }
