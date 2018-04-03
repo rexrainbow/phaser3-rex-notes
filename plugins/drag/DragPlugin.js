@@ -48,6 +48,7 @@ class DragDropPlugin {
 
     boot() {
         this.gameobject.on('drag', this.onDragging, this);
+        this.gameobject.once('destroy', this.destroy, this);     
     }
 
     shutdown() {

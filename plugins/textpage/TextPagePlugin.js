@@ -15,6 +15,7 @@ class TextPagePlugin {
         
         this.wordWrap = {};
         this.resetFromJSON(config);
+        this.boot();        
     }
 
     /**
@@ -52,6 +53,12 @@ class TextPagePlugin {
         };
     }
 
+    boot() {
+        if (this.gameobject.once) { // oops, bob object does not have event emitter
+            this.gameobject.once('destroy', this.destroy, this);
+        }
+    }
+    
     shutdown() {
         this.text = '';
         this.lines.length = 0;

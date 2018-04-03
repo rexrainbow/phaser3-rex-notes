@@ -9,7 +9,6 @@ class Demo extends Phaser.Scene {
         super({
             key: 'examples'
         })
-        this.blitter;
     }
 
     preload() {
@@ -17,21 +16,18 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        this.blitter = this.add.blitter(0, 0, 'dot');
-        this.blitter.createFromCallback(function (bob, i) {
-            bob.x = Between(50, 750);
-            bob.y = Between(50, 550);
-            bob.alpha = 0;
-            bob.fade = new FadePlugin(bob, {
+        for (var i = 0; i < 500; i++) {
+            var img = this.add.image(Between(5, 795), Between(5, 595), 'dot').setAlpha(0);
+            img.fade = new FadePlugin(img, {
                 delay: Between(0, 100),
                 duration: Between(500, 1000),
                 alpha: {
-                    start: Between(0, 1),
-                    end: Between(0, 1)
+                    start: Math.random(),
+                    end: Math.random()
                 },
                 mode: 'yoyo'
-            })
-        }, 500);
+            });
+        }
     }
 }
 

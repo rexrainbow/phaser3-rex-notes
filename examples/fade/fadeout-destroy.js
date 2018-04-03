@@ -1,6 +1,6 @@
 'use strict'
 
-import FadePlugin from './../../plugins/fade-plugin.js';
+import fadeOutDestroy from './../../plugins/fade-out-destroy.js'
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -8,26 +8,25 @@ class Demo extends Phaser.Scene {
             key: 'examples'
         })
         this.txt;
-        this.blitter;
+        this.group;
     }
 
     preload() {
-        this.load.image('dot', 'assets/images/white-dot.png');
+        this.load.image('dot', 'assets/images/white-dot.png');        
     }
 
     create() {
         this.txt = this.add.text(0, 0, '????');
-        this.blitter = this.add.blitter(0, 0, 'dot');
+        this.group = this.add.group();
     }
 
     update() {
         var pointer = this.input.activePointer;
-        var dot = this.blitter.create(pointer.x, pointer.y);
-        dot.fadeOut = new FadePlugin(dot, {
-            duration: 2000
-        });
+        var img = this.add.image(pointer.x, pointer.y, 'dot');
+        fadeOutDestroy(img, 2000);
 
-        this.txt.setText(this.blitter.children.length.toString());
+        this.group.add(img);        
+        this.txt.setText(this.group.getLength().toString());
     }
 }
 

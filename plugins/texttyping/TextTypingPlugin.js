@@ -17,6 +17,7 @@ class TextTypingPlugin extends EE {
         
         this.timer = null;
         this.resetFromJSON(config);
+        this.boot();
     }
 
     /**
@@ -68,6 +69,12 @@ class TextTypingPlugin extends EE {
             insertIdx: this.insertIdx,
             elapsed: elapsed
         };
+    }
+
+    boot() {
+        if (this.gameobject.once) { // oops, bob object does not have event emitter
+            this.gameobject.once('destroy', this.destroy, this);
+        }
     }
 
     shutdown() {
