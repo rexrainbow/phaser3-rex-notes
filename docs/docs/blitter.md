@@ -63,6 +63,17 @@ var bobs = blitter.createFromCallback(callback, quantity, frame, visible)
 // var callback = function(bob, i){};
 ```
 
+### Get bob objects
+
+```javascript
+var bobs = blitter.children;
+// bobs = blitter.getRenderList();
+```
+
+```javascript
+bobs = blitter.getRenderList();
+```
+
 ### Clear all bob objects
 
 ```javascript

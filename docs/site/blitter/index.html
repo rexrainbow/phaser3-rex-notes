@@ -489,6 +489,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#get-bob-objects" title="Get bob objects" class="md-nav__link">
+    Get bob objects
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#clear-all-bob-objects" title="Clear all bob objects" class="md-nav__link">
     Clear all bob objects
   </a>
@@ -1290,6 +1297,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#get-bob-objects" title="Get bob objects" class="md-nav__link">
+    Get bob objects
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#clear-all-bob-objects" title="Clear all bob objects" class="md-nav__link">
     Clear all bob objects
   </a>
@@ -1415,6 +1429,14 @@
 <h4 id="add-bob-object-from-callback">Add bob object from callback<a class="headerlink" href="#add-bob-object-from-callback" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bobs</span> <span class="o">=</span> <span class="nx">blitter</span><span class="p">.</span><span class="nx">createFromCallback</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">quantity</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">visible</span><span class="p">)</span>
 <span class="c1">// var callback = function(bob, i){};</span>
+</pre></div>
+
+<h3 id="get-bob-objects">Get bob objects<a class="headerlink" href="#get-bob-objects" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bobs</span> <span class="o">=</span> <span class="nx">blitter</span><span class="p">.</span><span class="nx">children</span><span class="p">;</span>
+<span class="c1">// bobs = blitter.getRenderList();</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">bobs</span> <span class="o">=</span> <span class="nx">blitter</span><span class="p">.</span><span class="nx">getRenderList</span><span class="p">();</span>
 </pre></div>
 
 <h3 id="clear-all-bob-objects">Clear all bob objects<a class="headerlink" href="#clear-all-bob-objects" title="Permanent link">&para;</a></h3>
