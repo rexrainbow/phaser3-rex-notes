@@ -36,7 +36,7 @@
     
     
       
-        <title>XOR - Notes of Phaser 3</title>
+        <title>Random number - Notes of Phaser 3</title>
       
     
     
@@ -96,7 +96,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                XOR
+                Random number
               </span>
             
           
@@ -957,10 +957,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11" checked>
     
     <label class="md-nav__link" for="nav-11">
       Math
@@ -976,10 +978,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11-1" type="checkbox" id="nav-11-1">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11-1" type="checkbox" id="nav-11-1" checked>
     
     <label class="md-nav__link" for="nav-11-1">
       Random
@@ -995,11 +999,86 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../random/index.html" title="Random number" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Random number
+      </label>
+    
+    <a href="index.html" title="Random number" class="md-nav__link md-nav__link--active">
       Random number
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-random-integer-between-min-max" title="Get random integer between (min, max)" class="md-nav__link">
+    Get random integer between (min, max)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-random-vector" title="Get random vector" class="md-nav__link">
+    Get random vector
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shuffle" title="Shuffle" class="md-nav__link">
+    Shuffle
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-random-item" title="Remove random item" class="md-nav__link">
+    Remove random item
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -1029,12 +1108,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-12" type="checkbox" id="nav-12" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-12" type="checkbox" id="nav-12">
     
     <label class="md-nav__link" for="nav-12">
       String
@@ -1086,79 +1163,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="toc">
-        XOR
-      </label>
-    
-    <a href="index.html" title="XOR" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../xorplugin/index.html" title="XOR" class="md-nav__link">
       XOR
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#source-code" title="Source code" class="md-nav__link">
-    Source code
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#encrypt" title="Encrypt" class="md-nav__link">
-    Encrypt
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#decrypt" title="Decrypt" class="md-nav__link">
-    Decrypt
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -1193,13 +1202,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#source-code" title="Source code" class="md-nav__link">
-    Source code
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#usage" title="Usage" class="md-nav__link">
     Usage
   </a>
@@ -1208,15 +1210,29 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#encrypt" title="Encrypt" class="md-nav__link">
-    Encrypt
+  <a href="#get-random-integer-between-min-max" title="Get random integer between (min, max)" class="md-nav__link">
+    Get random integer between (min, max)
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#decrypt" title="Decrypt" class="md-nav__link">
-    Decrypt
+  <a href="#get-random-vector" title="Get random vector" class="md-nav__link">
+    Get random vector
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shuffle" title="Shuffle" class="md-nav__link">
+    Shuffle
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-random-item" title="Remove random item" class="md-nav__link">
+    Remove random item
   </a>
   
 </li>
@@ -1243,24 +1259,29 @@
               
                 
                 
-                  <h1>XOR</h1>
+                  <h1>Random number</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Encrypt or decrypt string by XOR algorithm.</p>
+<p>Get random value, built-in methods of phaser.</p>
 <ul>
-<li>Author: Rex</li>
-<li>Member of scene</li>
+<li>Author: Richard Davey</li>
 </ul>
-<h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/xor/Encrypt.js">Encrypt</a><br />
-<a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/xor/Decrypt.js">Decrypt</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<h3 id="encrypt">Encrypt<a class="headerlink" href="#encrypt" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">encResult</span> <span class="o">=</span> <span class="nx">XOR</span><span class="p">.</span><span class="nx">Encrypt</span><span class="p">(</span><span class="nx">src</span><span class="p">,</span> <span class="nx">pwd</span><span class="p">);</span>
+<h3 id="get-random-integer-between-min-max">Get random integer between (min, max)<a class="headerlink" href="#get-random-integer-between-min-max" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">Between</span><span class="p">(</span><span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span>
 </pre></div>
 
-<h3 id="decrypt">Decrypt<a class="headerlink" href="#decrypt" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">decResult</span> <span class="o">=</span> <span class="nx">XOR</span><span class="p">.</span><span class="nx">Decrypt</span><span class="p">(</span><span class="nx">encResult</span><span class="p">,</span> <span class="nx">pwd</span><span class="p">);</span>
+<h3 id="get-random-vector">Get random vector<a class="headerlink" href="#get-random-vector" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">vec</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">RandomXY</span><span class="p">(</span><span class="nx">vec</span><span class="p">);</span>    <span class="c1">// return vec {x, y}</span>
+<span class="c1">// var vec = Phaser.Math.RandomXY(vec, scale);</span>
+</pre></div>
+
+<h3 id="shuffle">Shuffle<a class="headerlink" href="#shuffle" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Utils</span><span class="p">.</span><span class="nb">Array</span><span class="p">.</span><span class="nx">Shuffle</span><span class="p">(</span><span class="nx">arr</span><span class="p">);</span>
+</pre></div>
+
+<h3 id="remove-random-item">Remove random item<a class="headerlink" href="#remove-random-item" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Utils</span><span class="p">.</span><span class="nb">Array</span><span class="p">.</span><span class="nx">RemoveRandomElement</span><span class="p">(</span><span class="nx">arr</span><span class="p">);</span>
 </pre></div>
                 
                   
@@ -1280,7 +1301,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../lzstringplugin/index.html" title="LZ string" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../camera/index.html" title="Camera" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -1289,11 +1310,25 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                LZ string
+                Camera
               </span>
             </div>
           </a>
         
+        
+          <a href="../gashaponplugin/index.html" title="Gashapon" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Gashapon
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
         
       </nav>
     </div>

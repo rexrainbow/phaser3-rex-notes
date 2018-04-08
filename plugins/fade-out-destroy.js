@@ -1,8 +1,8 @@
 import FadePlugin from './fade/FadePlugin.js';
+
+var CONFIG = {};  // reuse this config
 var fadeOutDestroy = function (gameobject, duration) {
-    var fadeOut = new FadePlugin(gameobject, {
-        duration: duration
-    })
-    return fadeOut;
+    CONFIG.duration = duration;
+    return new FadePlugin(gameobject, CONFIG);
 };
 export default fadeOutDestroy;

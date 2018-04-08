@@ -14,34 +14,32 @@ var config = {
     physics: {
         default: 'arcade',
         arcade: {
-            x: 0,
-            y: 0,
-            width: scene.sys.game.config.width,
-            height: scene.sys.game.config.height,
-            gravity: {
-                x: 0,
-                y: 0
-            },
-            checkCollision: {
-                up: true,
-                down: true,
-                left: true,
-                right: true
-            },
-            overlapBias: 4,
-            tileBias: 16,
-            forceX: false,
-            isPaused: false,
-
-            debug: false,
-            debugShowBody: true,
-            debugShowStaticBody: true,
-            debugShowVelocity: true,
-            debugBodyColor: 0xff00ff,
-            debugStaticBodyColor: 0x0000ff,
-            debugVelocityColor: 0x00ff00,
-
-            maxEntries: 16
+        //    x: 0,
+        //    y: 0,
+        //    width: scene.sys.game.config.width,
+        //    height: scene.sys.game.config.height,
+        //    gravity: {
+        //        x: 0,
+        //        y: 0
+        //    },
+        //    checkCollision: {
+        //        up: true,
+        //        down: true,
+        //        left: true,
+        //        right: true
+        //    },
+        //    overlapBias: 4,
+        //    tileBias: 16,
+        //    forceX: false,
+        //    isPaused: false,
+        //    debug: false,
+        //    debugShowBody: true,
+        //    debugShowStaticBody: true,
+        //    debugShowVelocity: true,
+        //    debugBodyColor: 0xff00ff,
+        //    debugStaticBodyColor: 0x0000ff,
+        //    debugVelocityColor: 0x00ff00,
+        //    maxEntries: 16
         }
     }
     // ...

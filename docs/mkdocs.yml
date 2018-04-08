@@ -54,6 +54,7 @@ pages:
     - Camera: camera.md
 - Math:
     - Random:
+        - Random number: random.md
         - Gashapon: gashaponplugin.md
 - String:
     - Format: format.md

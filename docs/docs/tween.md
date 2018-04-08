@@ -30,11 +30,11 @@ var tween = scene.tweens.add({
     // useFrames: false,
 
     // properties:
-    // x: '+=600'
-    // y: 500
-    // rotation:
-    // angle:
-    // alpha:
+    // x: '+=600',        // start from current value
+    // y: 500,
+    // rotation: ...
+    // angle: ...
+    // alpha: ...
     // ...
 
     // or
@@ -43,10 +43,44 @@ var tween = scene.tweens.add({
     //     y: { value: '500', duration: 1500, ease: 'Bounce.easeOut' }
     // },
 
+    // or     
+    // props: {
+    //    x: {
+    //        duration: 400,
+    //        yoyo: true,
+    //        repeat: 8,
+    //        ease: 'Sine.easeInOut',
+    //        value: {
+    //            getEnd: function (target, key, value)
+    //            {
+    //                destX -= 30;
+    //                return destX;
+    //            },
+    //            getStart: function (target, key, value)
+    //            {
+    //                return value + 30;
+    //            }
+    //        }
+    //    },
+    //    ....
+    // },
+
+    // callbackScope: timeline,
+
     // onStart: function () {},
+    // onStartScope: callbackScope,
+
+    // onUpdate: function () {},
+    // onUpdateScope: callbackScope,
+
     // onComplete: function () {},
+    // onCompleteScope: callbackScope,
+
     // onYoyo: function () {},
-    // onRepeat: function () {}
+    // onYoyoScope: callbackScope,
+
+    // onRepeat: function () {},
+    // onRepeatScope: callbackScope
 });
 ```
 
@@ -173,4 +207,58 @@ var timeScale = scene.tweens.timeScale;
 
 ```javascript
 scene.tweens.timeScale = timescale;
+```
+
+### Tween value
+
+```javascript
+var tween = scene.tweens.addCounter({
+    // from: 0,
+    // to: 1,
+    // delay: 0,
+    // duration: 1000,
+    // easeParams: null,
+    // ease: 'Power0',
+    // hold: 0,
+    // repeat: 0,
+    // repeatDelay: 0,
+    // yoyo: false,
+
+    // offset: null,
+    // completeDelay: 0,
+    // loop: 0,
+    // loopDelay: 0,
+    // paused: false,
+    // useFrames: false,
+
+    // callbackScope: timeline,
+
+    // onStart: function () {},
+    // onStartScope: callbackScope,
+
+    // onUpdate: function () {},
+    // onUpdateScope: callbackScope,
+
+    // onComplete: function () {},
+    // onCompleteScope: callbackScope,
+
+    // onYoyo: function () {},
+    // onYoyoScope: callbackScope,
+
+    // onRepeat: function () {},
+    // onRepeatScope: callbackScope
+});
+```
+
+### Custom ease function
+
+```javascript
+var tween = scene.tweens.add({
+    targets: gameobject,
+    // ...
+    ease: function (t) {  // t: 0~1
+        return value;     // value: 0~1
+    },
+    // ...
+});
 ```

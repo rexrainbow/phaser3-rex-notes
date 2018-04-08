@@ -101,7 +101,8 @@ class FadeOutPlugin {
             ease: 'Power0',
             yoyo: (this.mode == 2),
             repeat: ((this.mode == 2) ? -1 : 0),
-            onComplete: (this.mode == 1) ? this.complete.bind(this) : undefined
+            onComplete: this.complete,
+            onCompleteScope: this
         });
     }
 
@@ -115,7 +116,7 @@ class FadeOutPlugin {
     }
 
     complete() {
-        if (this.mode == 1) {
+        if (this.mode === 1) {
             this.gameobject.destroy();
         }
     }
