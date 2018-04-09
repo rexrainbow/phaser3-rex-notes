@@ -205,3 +205,19 @@ scene.update = function (time, delta) {
     controls.update(delta);
 }
 ```
+
+#### Start / stop
+
+```javascript
+controls.start();
+```
+
+```javascript
+controls.stop();
+```
+
+#### Other methods
+
+```javascript
+controls.setCamera(camera);
+```
