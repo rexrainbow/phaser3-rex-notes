@@ -44,7 +44,7 @@ class CsvToHashTable {
     destroy() {}
 
     loadCSV(csvString, strDelimiter) {
-        this.clear();
+        this.clean();
         var arr = CSVToArray(csvString, strDelimiter);
 
         var table = this.table;
@@ -72,7 +72,7 @@ class CsvToHashTable {
         return this;
     }
 
-    clear() {
+    clean() {
         var table = this.table;
         for (var key in table) {
             delete table[key];
@@ -472,16 +472,111 @@ class CsvToHashTable {
         return this.nextRowlKey(rowKey, step);
     }
 
+    sortCol(callback, scope) {
+        if (typeof (callback) === 'function') {
+            if (scope) {
+                callback = callback.bind(scope);
+            }
+        } else {
+            var colKey = callback;
+            var mode = sceop;
+            if (typeof (mode) === 'string') {
+                mode = SORTMODE[mode];
+            }
+            if (!this.hasRowKey(rowKey)) {
+                return this;
+            }
+            var table = this;
+            callback = function (rowKeyA, rowKeyB) {
+                var valA = table.get(rowKeyA, rowKey);
+                var valB = table.get(rowKeyB, rowKey);
+                var retVal;
+                if (mode >= 2) {
+                    valA = parseFloat(valA);
+                    valB = parseFloat(valB);
+                }
+                switch (mode) {
+                    case 0:
+                    case 2:
+                        retVal = (valA > valB) ? 1 :
+                            (valA < valB) ? -1 : 0;
+                        break;
+
+                    case 1:
+                    case 3:
+                        retVal = (valA < valB) ? 1 :
+                            (valA > valB) ? -1 : 0;
+                        break;
+                }
+                return retVal;
+            }
+        }
+
+        this.rowKeys.sort(callback);
+        return this;
+    }
+
+    sortRow(callback, scope) {
+        if (typeof (callback) === 'function') {
+            if (scope) {
+                callback = callback.bind(scope);
+            }
+        } else {
+            var rowKey = callback;
+            var mode = sceop;
+            if (typeof (mode) === 'string') {
+                mode = SORTMODE[mode];
+            }
+            if (!this.hasRowKey(rowKey)) {
+                return this;
+            }
+            var table = this;
+            callback = function (colKeyA, colKeyB) {
+                var valA = table.get(colKeyA, rowKey);
+                var valB = table.get(colKeyB, rowKey);
+                var retVal;
+                if (mode >= 2) {
+                    valA = parseFloat(valA);
+                    valB = parseFloat(valB);
+                }
+                switch (mode) {
+                    case 0:
+                    case 2:
+                        retVal = (valA > valB) ? 1 :
+                            (valA < valB) ? -1 : 0;
+                        break;
+
+                    case 1:
+                    case 3:
+                        retVal = (valA < valB) ? 1 :
+                            (valA > valB) ? -1 : 0;
+                        break;
+                }
+                return retVal;
+            }
+        }
+
+        this.colKeys.sort(callback);
+        return this;
+    }
+
     setCursor(colKey, rowKey) {
         var cursor = this.cursor;
         cursor.colKey = colKey;
         cursor.rowKey = rowKey;
         return this;
     }
+
 }
 
 const defaultTypeConvert = function (table, colKey, rowKey, value) {
     return TypeConvert(value);
 }
 
+const SORTMODE = {
+    'ascending': 0,
+    'descending': 1,
+    'logical ascending': 2,
+    'logical descending': 3
+}
 export default CsvToHashTable;

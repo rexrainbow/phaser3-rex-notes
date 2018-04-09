@@ -38,12 +38,14 @@ pages:
 - Behavior:
     - Tween: 
        - Tween: tween.md
+       - Fade out destroy: fadeoutdestroy.md
     - Arcade:
         - Physics: arcade.md
 - Data:
     - Data manager: datamanager.md
     - Array: array.md
     - CSV to array: csvtoarray.md
+    - CSV to hash table: csvtohashtable.md
 - Logic:
     - Event emitter: eventemitter3.md
     - Run commands: runcommands.md

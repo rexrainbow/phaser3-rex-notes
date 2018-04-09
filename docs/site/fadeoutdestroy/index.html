@@ -32,7 +32,7 @@
     
     
       
-        <title>Gashapon - Notes of Phaser 3</title>
+        <title>Fade out destroy - Notes of Phaser 3</title>
       
     
     
@@ -86,7 +86,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Gashapon
+                Fade out destroy
               </span>
             
           
@@ -654,10 +654,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7" checked>
     
     <label class="md-nav__link" for="nav-7">
       Behavior
@@ -673,10 +675,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-1" type="checkbox" id="nav-7-1">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-1" type="checkbox" id="nav-7-1" checked>
     
     <label class="md-nav__link" for="nav-7-1">
       Tween
@@ -704,11 +708,57 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../fadeoutdestroy/index.html" title="Fade out destroy" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Fade out destroy
+      </label>
+    
+    <a href="index.html" title="Fade out destroy" class="md-nav__link md-nav__link--active">
       Fade out destroy
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -966,12 +1016,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11">
     
     <label class="md-nav__link" for="nav-11">
       Math
@@ -987,12 +1035,10 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11-1" type="checkbox" id="nav-11-1" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11-1" type="checkbox" id="nav-11-1">
     
     <label class="md-nav__link" for="nav-11-1">
       Random
@@ -1020,219 +1066,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="toc">
-        Gashapon
-      </label>
-    
-    <a href="index.html" title="Gashapon" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../gashaponplugin/index.html" title="Gashapon" class="md-nav__link">
       Gashapon
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#source-code" title="Source code" class="md-nav__link">
-    Source code
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pick-item" title="Pick item" class="md-nav__link">
-    Pick item
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#pick-a-random-item" title="Pick a random item" class="md-nav__link">
-    Pick a random item
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pick-specific-item" title="Pick specific item" class="md-nav__link">
-    Pick specific item
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#last-picked-item" title="Last picked item" class="md-nav__link">
-    Last picked item
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set-item" title="Set item" class="md-nav__link">
-    Set item
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#set-item_1" title="Set item" class="md-nav__link">
-    Set item
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#add-item" title="Add item" class="md-nav__link">
-    Add item
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#remove-item" title="Remove item" class="md-nav__link">
-    Remove item
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#remove-item_1" title="Remove item" class="md-nav__link">
-    Remove item
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#remove-all-items" title="Remove all items" class="md-nav__link">
-    Remove all items
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#current-status" title="Current status" class="md-nav__link">
-    Current status
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#get-current-status" title="Get current status" class="md-nav__link">
-    Get current status
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#clone-object" title="Clone object" class="md-nav__link">
-    Clone object
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#overwrite-current-status" title="Overwrite current status" class="md-nav__link">
-    Overwrite current status
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-items" title="Get items" class="md-nav__link">
-    Get items
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#for-each-item" title="For each item" class="md-nav__link">
-    For each item
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-items_1" title="Get items" class="md-nav__link">
-    Get items
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -1355,168 +1193,6 @@
     Usage
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pick-item" title="Pick item" class="md-nav__link">
-    Pick item
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#pick-a-random-item" title="Pick a random item" class="md-nav__link">
-    Pick a random item
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pick-specific-item" title="Pick specific item" class="md-nav__link">
-    Pick specific item
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#last-picked-item" title="Last picked item" class="md-nav__link">
-    Last picked item
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set-item" title="Set item" class="md-nav__link">
-    Set item
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#set-item_1" title="Set item" class="md-nav__link">
-    Set item
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#add-item" title="Add item" class="md-nav__link">
-    Add item
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#remove-item" title="Remove item" class="md-nav__link">
-    Remove item
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#remove-item_1" title="Remove item" class="md-nav__link">
-    Remove item
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#remove-all-items" title="Remove all items" class="md-nav__link">
-    Remove all items
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#current-status" title="Current status" class="md-nav__link">
-    Current status
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#get-current-status" title="Get current status" class="md-nav__link">
-    Get current status
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#clone-object" title="Clone object" class="md-nav__link">
-    Clone object
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#overwrite-current-status" title="Overwrite current status" class="md-nav__link">
-    Overwrite current status
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-items" title="Get items" class="md-nav__link">
-    Get items
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#for-each-item" title="For each item" class="md-nav__link">
-    For each item
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-items_1" title="Get items" class="md-nav__link">
-    Get items
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
       
@@ -1534,103 +1210,18 @@
               
                 
                 
-                  <h1>Gashapon</h1>
+                  <h1>Fade out destroy</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Pick random item from box.</p>
+<p>Fade out game object then destroy it.</p>
 <ul>
 <li>Author: Rex</li>
-<li>Member of scene, or game object</li>
+<li>Method only</li>
 </ul>
 <h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/gashapon/GashaponPlugin.js">Link</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/fade-out-destroy.js">Link</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gashapon</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">GashaponPlugin</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
-    <span class="nx">mode</span><span class="o">:</span> <span class="s1">&#39;shuffle&#39;</span><span class="p">,</span>  <span class="c1">// 0|&#39;shuffle&#39;|1|&#39;random</span>
-    <span class="nx">items</span><span class="o">:</span> <span class="p">{</span>  <span class="c1">// name:count</span>
-        <span class="nx">a</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> 
-        <span class="nx">b</span><span class="o">:</span><span class="mi">2</span><span class="p">,</span> 
-        <span class="nx">c</span><span class="o">:</span><span class="mi">3</span> 
-    <span class="p">},</span>
-    <span class="nx">reload</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>     <span class="c1">// true|false</span>
-<span class="p">});</span>
-</pre></div>
-
-<p>Properties</p>
-<ul>
-<li>mode : <ul>
-<li><code>'shuffle'</code>, or <code>0</code> : pick item from box without put it back.</li>
-<li><code>'random'</code>, or <code>1</code> : pick item from box then put it back.</li>
-</ul>
-</li>
-<li>reload : set <code>true</code> to reload items when box is empty for <code>shuffle</code> mode.</li>
-<li>items : initial items in box</li>
-</ul>
-<h3 id="pick-item">Pick item<a class="headerlink" href="#pick-item" title="Permanent link">&para;</a></h3>
-<h4 id="pick-a-random-item">Pick a random item<a class="headerlink" href="#pick-a-random-item" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">gashapon</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span>
-</pre></div>
-
-<ul>
-<li>return <code>null</code> if pick nothing</li>
-</ul>
-<h4 id="pick-specific-item">Pick specific item<a class="headerlink" href="#pick-specific-item" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">gashapon</span><span class="p">.</span><span class="nx">next</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">);</span>
-</pre></div>
-
-<ul>
-<li>return <code>null</code> if pick nothing</li>
-</ul>
-<h4 id="last-picked-item">Last picked item<a class="headerlink" href="#last-picked-item" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">gashapon</span><span class="p">.</span><span class="nx">result</span><span class="p">;</span>
-</pre></div>
-
-<h3 id="set-item">Set item<a class="headerlink" href="#set-item" title="Permanent link">&para;</a></h3>
-<h4 id="set-item_1">Set item<a class="headerlink" href="#set-item_1" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">gashapon</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
-<span class="c1">// gashapon.setItem(&#39;a&#39;, 1).setItem(&#39;b&#39;, 2).setItem(&#39;c&#39;, 3);</span>
-</pre></div>
-
-<h4 id="add-item">Add item<a class="headerlink" href="#add-item" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">gashapon</span><span class="p">.</span><span class="nx">addItem</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
-</pre></div>
-
-<h3 id="remove-item">Remove item<a class="headerlink" href="#remove-item" title="Permanent link">&para;</a></h3>
-<h4 id="remove-item_1">Remove item<a class="headerlink" href="#remove-item_1" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">gashapon</span><span class="p">.</span><span class="nx">removeItem</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">);</span>
-<span class="c1">// gashapon.removeItem(&#39;b&#39;).gashapon.removeItem(&#39;c&#39;);</span>
-</pre></div>
-
-<h4 id="remove-all-items">Remove all items<a class="headerlink" href="#remove-all-items" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">gashapon</span><span class="p">.</span><span class="nx">removeAllItems</span><span class="p">();</span>
-</pre></div>
-
-<h3 id="current-status">Current status<a class="headerlink" href="#current-status" title="Permanent link">&para;</a></h3>
-<h4 id="get-current-status">Get current status<a class="headerlink" href="#get-current-status" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">status</span> <span class="o">=</span> <span class="nx">gashapon</span><span class="p">.</span><span class="nx">toJSON</span><span class="p">();</span>
-</pre></div>
-
-<h4 id="clone-object">Clone object<a class="headerlink" href="#clone-object" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">status</span> <span class="o">=</span> <span class="nx">gashapon</span><span class="p">.</span><span class="nx">toJSON</span><span class="p">();</span>
-<span class="kd">var</span> <span class="nx">gashapon2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Gashapon</span><span class="p">(</span><span class="nx">status</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="overwrite-current-status">Overwrite current status<a class="headerlink" href="#overwrite-current-status" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">status</span> <span class="o">=</span> <span class="nx">gashapon</span><span class="p">.</span><span class="nx">toJSON</span><span class="p">();</span>
-<span class="c1">// gashapon.next()...</span>
-<span class="nx">gashapon</span><span class="p">.</span><span class="nx">resetFromJSON</span><span class="p">(</span><span class="nx">status</span><span class="p">);</span>
-</pre></div>
-
-<h3 id="get-items">Get items<a class="headerlink" href="#get-items" title="Permanent link">&para;</a></h3>
-<h4 id="for-each-item">For each item<a class="headerlink" href="#for-each-item" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">gashapon</span><span class="p">.</span><span class="nx">eachItem</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">count</span><span class="p">){</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">name</span> <span class="o">+</span> <span class="s2">&quot;: &quot;</span> <span class="o">+</span> <span class="nx">count</span><span class="p">);</span>
-<span class="p">});</span>
-</pre></div>
-
-<h4 id="get-items_1">Get items<a class="headerlink" href="#get-items_1" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">items</span> <span class="o">=</span> <span class="nx">gashapon</span><span class="p">.</span><span class="nx">getItems</span><span class="p">();</span>
+<div class="codehilite"><pre><span></span><span class="nx">fadeOutDestroy</span><span class="p">(</span><span class="nx">gameobject</span><span class="p">,</span> <span class="nx">duration</span><span class="p">);</span>
 </pre></div>
                 
                   
@@ -1650,7 +1241,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../random/index.html" title="Random number" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../tween/index.html" title="Tween" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -1659,19 +1250,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Random number
+                Tween
               </span>
             </div>
           </a>
         
         
-          <a href="../format/index.html" title="Format" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../arcade/index.html" title="Physics" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Format
+                Physics
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

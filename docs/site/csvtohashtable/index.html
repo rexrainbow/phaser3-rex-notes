@@ -32,7 +32,7 @@
     
     
       
-        <title>Gashapon - Notes of Phaser 3</title>
+        <title>CSV to hash table - Notes of Phaser 3</title>
       
     
     
@@ -86,7 +86,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Gashapon
+                CSV to hash table
               </span>
             
           
@@ -762,10 +762,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8" checked>
     
     <label class="md-nav__link" for="nav-8">
       Data
@@ -817,11 +819,174 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../csvtohashtable/index.html" title="CSV to hash table" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        CSV to hash table
+      </label>
+    
+    <a href="index.html" title="CSV to hash table" class="md-nav__link md-nav__link--active">
       CSV to hash table
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-instance" title="Create instance" class="md-nav__link">
+    Create instance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load-table-from-csv-string" title="Load table from csv string" class="md-nav__link">
+    Load table from csv string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#convert-value-type" title="Convert value type" class="md-nav__link">
+    Convert value type
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-value" title="Get value" class="md-nav__link">
+    Get value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-value" title="Set value" class="md-nav__link">
+    Set value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#has-columnrow-key" title="Has column/row key" class="md-nav__link">
+    Has column/row key
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#value-in-column-or-row" title="Value in column or row" class="md-nav__link">
+    Value in column or row
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-table" title="Create table" class="md-nav__link">
+    Create table
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clean-table" title="Clean table" class="md-nav__link">
+    Clean table
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#append-a-column" title="Append a column" class="md-nav__link">
+    Append a column
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#append-a-row" title="Append a row" class="md-nav__link">
+    Append a row
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-a-column" title="Remove a column" class="md-nav__link">
+    Remove a column
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-a-row" title="Remove a row" class="md-nav__link">
+    Remove a row
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sort-column-or-row" title="Sort column or row" class="md-nav__link">
+    Sort column or row
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retrieve-columns-or-rows" title="Retrieve columns or rows" class="md-nav__link">
+    Retrieve columns or rows
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -966,12 +1131,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11">
     
     <label class="md-nav__link" for="nav-11">
       Math
@@ -987,12 +1150,10 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11-1" type="checkbox" id="nav-11-1" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11-1" type="checkbox" id="nav-11-1">
     
     <label class="md-nav__link" for="nav-11-1">
       Random
@@ -1020,219 +1181,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="toc">
-        Gashapon
-      </label>
-    
-    <a href="index.html" title="Gashapon" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../gashaponplugin/index.html" title="Gashapon" class="md-nav__link">
       Gashapon
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#source-code" title="Source code" class="md-nav__link">
-    Source code
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pick-item" title="Pick item" class="md-nav__link">
-    Pick item
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#pick-a-random-item" title="Pick a random item" class="md-nav__link">
-    Pick a random item
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pick-specific-item" title="Pick specific item" class="md-nav__link">
-    Pick specific item
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#last-picked-item" title="Last picked item" class="md-nav__link">
-    Last picked item
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set-item" title="Set item" class="md-nav__link">
-    Set item
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#set-item_1" title="Set item" class="md-nav__link">
-    Set item
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#add-item" title="Add item" class="md-nav__link">
-    Add item
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#remove-item" title="Remove item" class="md-nav__link">
-    Remove item
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#remove-item_1" title="Remove item" class="md-nav__link">
-    Remove item
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#remove-all-items" title="Remove all items" class="md-nav__link">
-    Remove all items
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#current-status" title="Current status" class="md-nav__link">
-    Current status
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#get-current-status" title="Get current status" class="md-nav__link">
-    Get current status
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#clone-object" title="Clone object" class="md-nav__link">
-    Clone object
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#overwrite-current-status" title="Overwrite current status" class="md-nav__link">
-    Overwrite current status
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-items" title="Get items" class="md-nav__link">
-    Get items
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#for-each-item" title="For each item" class="md-nav__link">
-    For each item
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-items_1" title="Get items" class="md-nav__link">
-    Get items
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -1366,30 +1319,86 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#pick-item" title="Pick item" class="md-nav__link">
-    Pick item
+  <a href="#load-table-from-csv-string" title="Load table from csv string" class="md-nav__link">
+    Load table from csv string
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#convert-value-type" title="Convert value type" class="md-nav__link">
+    Convert value type
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-value" title="Get value" class="md-nav__link">
+    Get value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-value" title="Set value" class="md-nav__link">
+    Set value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#has-columnrow-key" title="Has column/row key" class="md-nav__link">
+    Has column/row key
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#value-in-column-or-row" title="Value in column or row" class="md-nav__link">
+    Value in column or row
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-table" title="Create table" class="md-nav__link">
+    Create table
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#pick-a-random-item" title="Pick a random item" class="md-nav__link">
-    Pick a random item
+  <a href="#clean-table" title="Clean table" class="md-nav__link">
+    Clean table
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#pick-specific-item" title="Pick specific item" class="md-nav__link">
-    Pick specific item
+  <a href="#append-a-column" title="Append a column" class="md-nav__link">
+    Append a column
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#last-picked-item" title="Last picked item" class="md-nav__link">
-    Last picked item
+  <a href="#append-a-row" title="Append a row" class="md-nav__link">
+    Append a row
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-a-column" title="Remove a column" class="md-nav__link">
+    Remove a column
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-a-row" title="Remove a row" class="md-nav__link">
+    Remove a row
   </a>
   
 </li>
@@ -1400,117 +1409,16 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#set-item" title="Set item" class="md-nav__link">
-    Set item
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#set-item_1" title="Set item" class="md-nav__link">
-    Set item
+  <a href="#sort-column-or-row" title="Sort column or row" class="md-nav__link">
+    Sort column or row
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-item" title="Add item" class="md-nav__link">
-    Add item
+  <a href="#retrieve-columns-or-rows" title="Retrieve columns or rows" class="md-nav__link">
+    Retrieve columns or rows
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#remove-item" title="Remove item" class="md-nav__link">
-    Remove item
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#remove-item_1" title="Remove item" class="md-nav__link">
-    Remove item
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#remove-all-items" title="Remove all items" class="md-nav__link">
-    Remove all items
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#current-status" title="Current status" class="md-nav__link">
-    Current status
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#get-current-status" title="Get current status" class="md-nav__link">
-    Get current status
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#clone-object" title="Clone object" class="md-nav__link">
-    Clone object
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#overwrite-current-status" title="Overwrite current status" class="md-nav__link">
-    Overwrite current status
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-items" title="Get items" class="md-nav__link">
-    Get items
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#for-each-item" title="For each item" class="md-nav__link">
-    For each item
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-items_1" title="Get items" class="md-nav__link">
-    Get items
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -1534,103 +1442,117 @@
               
                 
                 
-                  <h1>Gashapon</h1>
+                  <h1>CSV to hash table</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Pick random item from box.</p>
+<p>Hash table indexed by (col-key, row-key) from csv string.</p>
 <ul>
 <li>Author: Rex</li>
-<li>Member of scene, or game object</li>
+<li>Member of scene</li>
 </ul>
 <h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/gashapon/GashaponPlugin.js">Link</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/csvtohashtable/CsvToHashTable.js">Link</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gashapon</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">GashaponPlugin</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
-    <span class="nx">mode</span><span class="o">:</span> <span class="s1">&#39;shuffle&#39;</span><span class="p">,</span>  <span class="c1">// 0|&#39;shuffle&#39;|1|&#39;random</span>
-    <span class="nx">items</span><span class="o">:</span> <span class="p">{</span>  <span class="c1">// name:count</span>
-        <span class="nx">a</span><span class="o">:</span><span class="mi">1</span><span class="p">,</span> 
-        <span class="nx">b</span><span class="o">:</span><span class="mi">2</span><span class="p">,</span> 
-        <span class="nx">c</span><span class="o">:</span><span class="mi">3</span> 
-    <span class="p">},</span>
-    <span class="nx">reload</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>     <span class="c1">// true|false</span>
-<span class="p">});</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">table</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">HashTable</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
 </pre></div>
 
-<p>Properties</p>
+<h3 id="load-table-from-csv-string">Load table from csv string<a class="headerlink" href="#load-table-from-csv-string" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">loadCSV</span><span class="p">(</span><span class="nx">csvString</span><span class="p">);</span>
+<span class="c1">// table.loadCSV(csvString, delimiter);</span>
+</pre></div>
+
+<p>All values in table are string after loading.</p>
+<h3 id="convert-value-type">Convert value type<a class="headerlink" href="#convert-value-type" title="Permanent link">&para;</a></h3>
 <ul>
-<li>mode : <ul>
-<li><code>'shuffle'</code>, or <code>0</code> : pick item from box without put it back.</li>
-<li><code>'random'</code>, or <code>1</code> : pick item from box then put it back.</li>
+<li>Convert all values
+    <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">convert</span><span class="p">();</span>  <span class="c1">// convert true, false, null, number</span>
+<span class="c1">// table.convert(callback, scope); // convert by custom function</span>
+<span class="c1">// callback = function(table, colKey, rowKey, value) {};</span>
+</pre></div></li>
+<li>convert values in column
+    <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">convertCol</span><span class="p">(</span><span class="nx">colKey</span><span class="p">);</span>  <span class="c1">// colKey: a colKey, or an array of colKeys</span>
+<span class="c1">// table.convertCol(colKey, callback, scope);</span>
+<span class="c1">// callback = function(table, colKey, rowKey, value) {};</span>
+</pre></div></li>
+<li>convert values in row
+    <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">convertRow</span><span class="p">(</span><span class="nx">rowKey</span><span class="p">);</span>  <span class="c1">// rowKey: a rowKey, or an array of rowKeys</span>
+<span class="c1">// table.convertRow(rowKey, callback, scope);</span>
+<span class="c1">// callback = function(table, colKey, rowKey, value) {};</span>
+</pre></div></li>
 </ul>
-</li>
-<li>reload : set <code>true</code> to reload items when box is empty for <code>shuffle</code> mode.</li>
-<li>items : initial items in box</li>
-</ul>
-<h3 id="pick-item">Pick item<a class="headerlink" href="#pick-item" title="Permanent link">&para;</a></h3>
-<h4 id="pick-a-random-item">Pick a random item<a class="headerlink" href="#pick-a-random-item" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">gashapon</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span>
+<h3 id="get-value">Get value<a class="headerlink" href="#get-value" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">val</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">colKey</span><span class="p">,</span> <span class="nx">rowKey</span><span class="p">);</span>
 </pre></div>
 
-<ul>
-<li>return <code>null</code> if pick nothing</li>
-</ul>
-<h4 id="pick-specific-item">Pick specific item<a class="headerlink" href="#pick-specific-item" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">gashapon</span><span class="p">.</span><span class="nx">next</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">);</span>
+<h3 id="set-value">Set value<a class="headerlink" href="#set-value" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">colKey</span><span class="p">,</span> <span class="nx">rowKey</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
 </pre></div>
 
-<ul>
-<li>return <code>null</code> if pick nothing</li>
-</ul>
-<h4 id="last-picked-item">Last picked item<a class="headerlink" href="#last-picked-item" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">gashapon</span><span class="p">.</span><span class="nx">result</span><span class="p">;</span>
+<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">colKey</span><span class="p">,</span> <span class="nx">rowKey</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+<span class="c1">// equal to table.set(colKey, rowKey, table.get(colKey, rowKey) + value);</span>
 </pre></div>
 
-<h3 id="set-item">Set item<a class="headerlink" href="#set-item" title="Permanent link">&para;</a></h3>
-<h4 id="set-item_1">Set item<a class="headerlink" href="#set-item_1" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">gashapon</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
-<span class="c1">// gashapon.setItem(&#39;a&#39;, 1).setItem(&#39;b&#39;, 2).setItem(&#39;c&#39;, 3);</span>
+<h3 id="has-columnrow-key">Has column/row key<a class="headerlink" href="#has-columnrow-key" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">hasRow</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">hasColKey</span><span class="p">(</span><span class="nx">colKey</span><span class="p">);</span>
 </pre></div>
 
-<h4 id="add-item">Add item<a class="headerlink" href="#add-item" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">gashapon</span><span class="p">.</span><span class="nx">addItem</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">hasRow</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">hasRowKey</span><span class="p">(</span><span class="nx">rowKey</span><span class="p">);</span>
 </pre></div>
 
-<h3 id="remove-item">Remove item<a class="headerlink" href="#remove-item" title="Permanent link">&para;</a></h3>
-<h4 id="remove-item_1">Remove item<a class="headerlink" href="#remove-item_1" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">gashapon</span><span class="p">.</span><span class="nx">removeItem</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">);</span>
-<span class="c1">// gashapon.removeItem(&#39;b&#39;).gashapon.removeItem(&#39;c&#39;);</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">hasRow</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">hasKey</span><span class="p">(</span><span class="nx">colKey</span><span class="p">,</span> <span class="nx">rowKey</span><span class="p">);</span>
 </pre></div>
 
-<h4 id="remove-all-items">Remove all items<a class="headerlink" href="#remove-all-items" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">gashapon</span><span class="p">.</span><span class="nx">removeAllItems</span><span class="p">();</span>
+<h3 id="value-in-column-or-row">Value in column or row<a class="headerlink" href="#value-in-column-or-row" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">hasValue</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">isValueInCol</span><span class="p">(</span><span class="nx">colKey</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
 </pre></div>
 
-<h3 id="current-status">Current status<a class="headerlink" href="#current-status" title="Permanent link">&para;</a></h3>
-<h4 id="get-current-status">Get current status<a class="headerlink" href="#get-current-status" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">status</span> <span class="o">=</span> <span class="nx">gashapon</span><span class="p">.</span><span class="nx">toJSON</span><span class="p">();</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">existed</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">isValueInRol</span><span class="p">(</span><span class="nx">rowKey</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
 </pre></div>
 
-<h4 id="clone-object">Clone object<a class="headerlink" href="#clone-object" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">status</span> <span class="o">=</span> <span class="nx">gashapon</span><span class="p">.</span><span class="nx">toJSON</span><span class="p">();</span>
-<span class="kd">var</span> <span class="nx">gashapon2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Gashapon</span><span class="p">(</span><span class="nx">status</span><span class="p">);</span>
+<h3 id="create-table">Create table<a class="headerlink" href="#create-table" title="Permanent link">&para;</a></h3>
+<h4 id="clean-table">Clean table<a class="headerlink" href="#clean-table" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">clean</span><span class="p">();</span>
 </pre></div>
 
-<h4 id="overwrite-current-status">Overwrite current status<a class="headerlink" href="#overwrite-current-status" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">status</span> <span class="o">=</span> <span class="nx">gashapon</span><span class="p">.</span><span class="nx">toJSON</span><span class="p">();</span>
-<span class="c1">// gashapon.next()...</span>
-<span class="nx">gashapon</span><span class="p">.</span><span class="nx">resetFromJSON</span><span class="p">(</span><span class="nx">status</span><span class="p">);</span>
+<h4 id="append-a-column">Append a column<a class="headerlink" href="#append-a-column" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">appendCol</span><span class="p">(</span><span class="nx">colKey</span><span class="p">,</span> <span class="nx">initValue</span><span class="p">);</span>
+<span class="c1">// table.appendCol(colKey, callback, scope);  // get initValue from callback</span>
+<span class="c1">// callback = function (table, colKey, rowKey) { }</span>
 </pre></div>
 
-<h3 id="get-items">Get items<a class="headerlink" href="#get-items" title="Permanent link">&para;</a></h3>
-<h4 id="for-each-item">For each item<a class="headerlink" href="#for-each-item" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">gashapon</span><span class="p">.</span><span class="nx">eachItem</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">count</span><span class="p">){</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">name</span> <span class="o">+</span> <span class="s2">&quot;: &quot;</span> <span class="o">+</span> <span class="nx">count</span><span class="p">);</span>
-<span class="p">});</span>
+<h4 id="append-a-row">Append a row<a class="headerlink" href="#append-a-row" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">appendRow</span><span class="p">(</span><span class="nx">colKey</span><span class="p">,</span> <span class="nx">initValue</span><span class="p">);</span>
+<span class="c1">// table.appendRow(colKey, callback, scope);  // get initValue from callback</span>
+<span class="c1">// callback = function (table, colKey, rowKey) { }</span>
 </pre></div>
 
-<h4 id="get-items_1">Get items<a class="headerlink" href="#get-items_1" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">items</span> <span class="o">=</span> <span class="nx">gashapon</span><span class="p">.</span><span class="nx">getItems</span><span class="p">();</span>
+<h4 id="remove-a-column">Remove a column<a class="headerlink" href="#remove-a-column" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">removeCol</span><span class="p">(</span><span class="nx">colKey</span><span class="p">);</span>
+</pre></div>
+
+<h4 id="remove-a-row">Remove a row<a class="headerlink" href="#remove-a-row" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">removeRol</span><span class="p">(</span><span class="nx">colKey</span><span class="p">);</span>
+</pre></div>
+
+<h3 id="sort-column-or-row">Sort column or row<a class="headerlink" href="#sort-column-or-row" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">sortCol</span><span class="p">(</span><span class="nx">colKey</span><span class="p">,</span> <span class="nx">mode</span><span class="p">);</span> <span class="c1">// mode: &#39;ascending&#39;|0|&#39;descending&#39;|1|&#39;logical ascending&#39;|2|&#39;logical descending&#39;|3</span>
+<span class="c1">// table.sortCol(callback, scope);  // sort column by callback</span>
+<span class="c1">// callback = function(rowKeyA, rowKeyB) {}</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">sortRow</span><span class="p">(</span><span class="nx">rowKey</span><span class="p">,</span> <span class="nx">mode</span><span class="p">);</span> <span class="c1">// mode: &#39;ascending&#39;|0|&#39;descending&#39;|1|&#39;logical ascending&#39;|2|&#39;logical descending&#39;|3</span>
+<span class="c1">// table.sortRow(callback, scope);  // sort column by callback</span>
+<span class="c1">// callback = function(colKeyA, colKeyB) {}</span>
+</pre></div>
+
+<h3 id="retrieve-columns-or-rows">Retrieve columns or rows<a class="headerlink" href="#retrieve-columns-or-rows" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">eachCol</span><span class="p">(</span><span class="nx">rowKey</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>
+<span class="c1">// callback = function(table, colKey, rowKey, value) {}</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">eachRow</span><span class="p">(</span><span class="nx">colKey</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>
+<span class="c1">// callback = function(table, colKey, rowKey, value) {}</span>
 </pre></div>
                 
                   
@@ -1650,7 +1572,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../random/index.html" title="Random number" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../csvtoarray/index.html" title="CSV to array" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -1659,19 +1581,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Random number
+                CSV to array
               </span>
             </div>
           </a>
         
         
-          <a href="../format/index.html" title="Format" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../eventemitter3/index.html" title="Event emitter" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Format
+                Event emitter
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

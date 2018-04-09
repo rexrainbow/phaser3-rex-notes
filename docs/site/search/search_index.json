@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/index.html", 
-            "text": "Phaser\n\n\nPhaser\n is a fun, free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering.\n\n\nList of my plugins\n\n\n\n\nCanvas\n: Drawing on \ncanvas\n.\n\n\nClock\n: A clock to count elapsed time.\n\n\nDrag\n: Drag game object.\n\n\nDrag-cursor\n: Simulate curosr keys according dragging events.\n\n\nGashapon\n: Pick random item from box.\n\n\nLZ-string\n: Compress string using LZ-based compression algorithm.\n\n\nPage\n: Display text page by page on text object.\n\n\nRun-commands\n: Run commands in array.\n\n\nTCRP.Player\n: Run commands on time.\n\n\nTCRP.Recorder\n: Store commands with time.\n\n\nTyping\n: Typing text on text object.\n\n\nWebfont-loader\n: Load web font by google webfont loader in preload stage.\n\n\nXOR\n: Encrypt or decrypt string by XOR algorithm.", 
+            "text": "Phaser\n\n\nPhaser\n is a fun, free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering.\n\n\nList of my plugins\n\n\n\n\nCanvas\n: Drawing on \ncanvas\n.\n\n\nClock\n: A clock to count elapsed time.\n\n\nCSV-to-hash-table\n: Hash table indexed by (col-key, row-key) from csv string.\n\n\nDrag\n: Drag game object.\n\n\nDrag-cursor\n: Simulate curosr keys according dragging events.\n\n\nFade-out-destroy\n: Fade out game object then destroy it.\n\n\nGashapon\n: Pick random item from box.\n\n\nLZ-string\n: Compress string using LZ-based compression algorithm.\n\n\nPage\n: Display text page by page on text object.\n\n\nRun-commands\n: Run commands in array.\n\n\nTCRP.Player\n: Run commands on time.\n\n\nTCRP.Recorder\n: Store commands with time.\n\n\nTyping\n: Typing text on text object.\n\n\nWebfont-loader\n: Load web font by google webfont loader in preload stage.\n\n\nXOR\n: Encrypt or decrypt string by XOR algorithm.", 
             "title": "Home"
         }, 
         {
@@ -12,7 +12,7 @@
         }, 
         {
             "location": "/index.html#list-of-my-plugins", 
-            "text": "Canvas : Drawing on  canvas .  Clock : A clock to count elapsed time.  Drag : Drag game object.  Drag-cursor : Simulate curosr keys according dragging events.  Gashapon : Pick random item from box.  LZ-string : Compress string using LZ-based compression algorithm.  Page : Display text page by page on text object.  Run-commands : Run commands in array.  TCRP.Player : Run commands on time.  TCRP.Recorder : Store commands with time.  Typing : Typing text on text object.  Webfont-loader : Load web font by google webfont loader in preload stage.  XOR : Encrypt or decrypt string by XOR algorithm.", 
+            "text": "Canvas : Drawing on  canvas .  Clock : A clock to count elapsed time.  CSV-to-hash-table : Hash table indexed by (col-key, row-key) from csv string.  Drag : Drag game object.  Drag-cursor : Simulate curosr keys according dragging events.  Fade-out-destroy : Fade out game object then destroy it.  Gashapon : Pick random item from box.  LZ-string : Compress string using LZ-based compression algorithm.  Page : Display text page by page on text object.  Run-commands : Run commands in array.  TCRP.Player : Run commands on time.  TCRP.Recorder : Store commands with time.  Typing : Typing text on text object.  Webfont-loader : Load web font by google webfont loader in preload stage.  XOR : Encrypt or decrypt string by XOR algorithm.", 
             "title": "List of my plugins"
         }, 
         {
@@ -1356,6 +1356,26 @@
             "title": "Custom ease function"
         }, 
         {
+            "location": "/fadeoutdestroy/index.html", 
+            "text": "Introduction\n\n\nFade out game object then destroy it.\n\n\n\n\nAuthor: Rex\n\n\nMethod only\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nfadeOutDestroy\n(\ngameobject\n,\n \nduration\n);", 
+            "title": "Fade out destroy"
+        }, 
+        {
+            "location": "/fadeoutdestroy/index.html#introduction", 
+            "text": "Fade out game object then destroy it.   Author: Rex  Method only", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/fadeoutdestroy/index.html#source-code", 
+            "text": "Link", 
+            "title": "Source code"
+        }, 
+        {
+            "location": "/fadeoutdestroy/index.html#usage", 
+            "text": "fadeOutDestroy ( gameobject ,   duration );", 
+            "title": "Usage"
+        }, 
+        {
             "location": "/arcade/index.html", 
             "text": "Introduction\n\n\nArcade physics engine in phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nConfiguration\n\n\nvar\n \nconfig\n \n=\n \n{\n\n    \n// ...\n\n    \nphysics\n:\n \n{\n\n        \ndefault\n:\n \narcade\n,\n\n        \narcade\n:\n \n{\n\n        \n//    x: 0,\n\n        \n//    y: 0,\n\n        \n//    width: scene.sys.game.config.width,\n\n        \n//    height: scene.sys.game.config.height,\n\n        \n//    gravity: {\n\n        \n//        x: 0,\n\n        \n//        y: 0\n\n        \n//    },\n\n        \n//    checkCollision: {\n\n        \n//        up: true,\n\n        \n//        down: true,\n\n        \n//        left: true,\n\n        \n//        right: true\n\n        \n//    },\n\n        \n//    overlapBias: 4,\n\n        \n//    tileBias: 16,\n\n        \n//    forceX: false,\n\n        \n//    isPaused: false,\n\n        \n//    debug: false,\n\n        \n//    debugShowBody: true,\n\n        \n//    debugShowStaticBody: true,\n\n        \n//    debugShowVelocity: true,\n\n        \n//    debugBodyColor: 0xff00ff,\n\n        \n//    debugStaticBodyColor: 0x0000ff,\n\n        \n//    debugVelocityColor: 0x00ff00,\n\n        \n//    maxEntries: 16\n\n        \n}\n\n    \n}\n\n    \n// ...\n\n\n};\n\n\nvar\n \ngame\n \n=\n \nnew\n \nPhaser\n.\nGame\n(\nconfig\n);\n\n\n\n\n\nPause / Resume\n\n\nscene\n.\nphysics\n.\npause\n();\n\n\n\n\n\nscene\n.\nphysics\n.\nresume\n();\n\n\n\n\n\nAdd physics object\n\n\nImage object\n\n\nStatic object\n\n\nvar\n \nimage\n \n=\n \nscene\n.\nphysics\n.\nadd\n.\nstaticImage\n(\nx\n,\n \ny\n,\n \nkey\n);\n\n\n\n\n\nDynamic object\n\n\nvar\n \nimage\n \n=\n \nscene\n.\nphysics\n.\nadd\n.\nimage\n(\nx\n,\n \ny\n,\n \nkey\n);\n\n\n\n\n\nSprite object\n\n\nStatic object\n\n\nvar\n \nimage\n \n=\n \nscene\n.\nphysics\n.\nadd\n.\nstaticSprite\n(\nx\n,\n \ny\n,\n \nkey\n,\n \nframe\n);\n\n\n\n\n\nDynamic object\n\n\nvar\n \nimage\n \n=\n \nscene\n.\nphysics\n.\nadd\n.\nsprite\n(\nx\n,\n \ny\n,\n \nkey\n,\n \nframe\n);\n\n\n\n\n\nGroup\n\n\nStatic sprite objects\n\n\nvar\n \ngroup\n \n=\n \nscene\n.\nphysics\n.\nadd\n.\nstaticGroup\n(\nchildren\n,\n \nconfig\n);\n\n\n// var group = scene.physics.add.staticGroup(config);\n\n\n\n\n\nDynamic sprite objects\n\n\nvar\n \ngroup\n \n=\n \nscene\n.\nphysics\n.\nadd\n.\ngroup\n(\nchildren\n,\n \nconfig\n);\n\n\n// var group = scene.physics.add.staticGroup(config);\n\n\n\n\n\nConfiugration\n\n\nvar\n \nconfig\n \n=\n \n{\n\n    \nsetCollideWorldBounds\n:\n \nfalse\n,\n\n    \nsetAccelerationX\n:\n \n0\n,\n\n    \nsetAccelerationY\n:\n \n0\n,\n\n    \nsetBounceX\n:\n \n0\n,\n\n    \nsetBounceY\n:\n \n0\n,\n\n    \nsetDragX\n:\n \n0\n,\n\n    \nsetDragY\n:\n \n0\n,\n\n    \nsetGravityX\n:\n \n0\n,\n\n    \nsetGravityY\n:\n \n0\n,\n\n    \nsetFrictionX\n:\n \n0\n,\n\n    \nsetFrictionY\n:\n \n0\n,\n\n    \nsetVelocityX\n:\n \n0\n,\n\n    \nsetVelocityY\n:\n \n0\n,\n\n    \nsetAngularVelocity\n:\n \n0\n,\n\n    \nsetAngularAcceleration\n:\n \n0\n,\n\n    \nsetAngularDrag\n:\n \n0\n,\n\n    \nsetMass\n:\n \n1\n,\n\n    \nsetImmovable\n:\n \nfalse\n\n\n};\n\n\n\n\n\nDestroy object\n\n\ngameobject\n.\ndestroy\n();\n\n\n\n\n\nCollision\n\n\nvar\n \ncollider\n \n=\n \nscene\n.\nphysics\n.\nadd\n.\ncollider\n(\nobjectsA\n,\n \nobjectsB\n,\n \ncollideCallback\n,\n \nprocessCallback\n,\n \ncallbackContext\n);\n\n\n// var collider = scene.physics.add.addOverlap(objectsA, objectsB, collideCallback, processCallback, callbackContext);\n\n\n\n\n\n\n\nobjectsA, objectsB\n\n\na game object\n\n\ngame objects in array\n\n\ngroup\n\n\n\n\n\n\ncollideCallback:\n    \nfunction\n(\ngameobject1\n,\n \ngameobject2\n){}\n\n\n\n\nprocessCallback: fired when gameobject1 intersects gameobject2\n    \nfunction\n(\ngameobject1\n,\n \ngameobject2\n){\n\n    \nreturn\n \ntrue\n;\n  \n// return false will discard remaining collision checking\n\n\n}\n\n\n\n\n\n\nMethods of game object\n\n\nSize\n\n\ngameobject\n.\nsetSize\n(\nwidth\n,\n \nheight\n,\n \nisCenter\n);\n  \n// isCenter: boolean\n\n\n\n\n\ngameobject\n.\nsetCircle\n(\nradius\n,\n \noffsetX\n,\n \noffsetY\n);\n\n\n\n\n\ngameobject\n.\nsetOffset\n(\nx\n,\n \ny\n);\n\n\n\n\n\nSync body\n\n\nSyncs the Bodies position and size in static game object.\n\n\ngameobject\n.\nrefreshBody\n();\n\n\n\n\n\nVelocity\n\n\ngameobject\n.\nsetVelocity\n(\nx\n,\n \ny\n);\n\n\n\n\n\ngameobject\n.\nsetVelocityX\n(\nx\n);\n\n\n\n\n\ngameobject\n.\nsetVelocityY\n(\nx\n);\n\n\n\n\n\ngameobject\n.\nsetMaxVelocity\n(\ny\n);\n\n\n\n\n\nMass\n\n\ngameobject\n.\nsetMass\n(\nv\n);\n\n\n\n\n\nAcceleration\n\n\ngameobject\n.\nsetAcceleration\n(\nx\n,\n \ny\n);\n\n\n\n\n\ngameobject\n.\nsetAccelerationX\n(\nx\n);\n\n\n\n\n\ngameobject\n.\nsetAccelerationY\n(\ny\n);\n\n\n\n\n\nGravity\n\n\ngameobject\n.\nsetGravity\n(\nx\n,\n \ny\n);\n\n\n\n\n\ngameobject\n.\nsetGravityX\n(\nx\n);\n\n\n\n\n\ngameobject\n.\nsetGravityY\n(\ny\n);\n\n\n\n\n\nFriction\n\n\ngameobject\n.\nsetFriction\n(\nx\n,\n \ny\n);\n\n\n\n\n\ngameobject\n.\nsetFrictionX\n(\nx\n);\n\n\n\n\n\ngameobject\n.\nsetFrictionY\n(\ny\n);\n\n\n\n\n\nDrag\n\n\ngameobject\n.\nsetDrag\n(\nx\n,\n \ny\n);\n\n\n\n\n\ngameobject\n.\nsetDragX\n(\nx\n);\n\n\n\n\n\ngameobject\n.\nsetDragY\n(\ny\n);\n\n\n\n\n\nAngular\n\n\ngameobject\n.\nsetAngularVelocity\n(\nv\n);\n\n\n\n\n\ngameobject\n.\nsetAngularAcceleration\n(\nv\n);\n\n\n\n\n\ngameobject\n.\nsetAngularDrag\n(\nv\n);\n\n\n\n\n\nBounce\n\n\ngameobject\n.\nsetBounce\n(\nx\n,\n \ny\n);\n\n\n\n\n\ngameobject\n.\nsetBounceX\n(\nx\n);\n\n\n\n\n\ngameobject\n.\nsetBounceY\n(\ny\n);\n\n\n\n\n\ngameobject\n.\nsetCollideWorldBounds\n(\nboolean\n);\n\n\n\n\n\nImmovable\n\n\ngameobject\n.\nsetImmovable\n(\nboolean\n);\n\n\n\n\n\nMethods of group\n\n\ngroup\n.\nsetVelocity\n(\nx\n,\n \ny\n,\n \nstep\n);\n\n\n\n\n\ngroup\n.\nsetVelocityX\n(\nvalue\n,\n \nstep\n);\n\n\n\n\n\ngroup\n.\nsetVelocityY\n(\nvalue\n,\n \nstep\n);\n\n\n\n\n\ngroup\n.\nrefresh\n();\n  \n// call this method when position of game objects were changed in static object group\n\n\n\n\n\nAdd a game object to physics world\n\n\nscene\n.\nphysics\n.\nexisting\n(\ngameObject\n,\n \nisStatic\n);\n\n\n// var body = gameObject.body;\n\n\n\n\n\nGet physics body\n\n\nvar\n \nbody\n \n=\n \ngameObject\n.\nbody\n;\n\n\n\n\n\nSize\n\n\nbody\n.\nsetSize\n(\nwidth\n,\n \nheight\n,\n \ncenter\n);\n\n\n\n\n\nbody\n.\nsetCircle\n(\nradius\n,\n \noffsetX\n,\n \noffsetY\n);\n\n\n\n\n\nbody\n.\nsetOffset\n(\nx\n,\n \ny\n);\n\n\n\n\n\nReset position\n\n\nbody\n.\nreset\n(\nx\n,\n \ny\n);\n\n\n\n\n\nVelocity\n\n\nbody\n.\nvelocity\n.\nset\n(\nx\n,\n \ny\n);\n\n\n\n\n\nbody\n.\nvelocity\n.\nx\n \n=\n \nx\n;\n\n\n\n\n\nbody\n.\nvelocity\n.\ny\n \n=\n \ny\n;\n\n\n\n\n\nbody\n.\nmaxVelocity\n.\nset\n(\nx\n,\n \ny\n);\n\n\n\n\n\nMass\n\n\nbody\n.\nmass\n \n=\n \nv\n;\n\n\n\n\n\nAcceleration\n\n\nbody\n.\nacceleration\n.\nset\n(\nx\n,\n \ny\n);\n\n\n\n\n\nbody\n.\nacceleration\n.\nx\n \n=\n \nx\n;\n\n\n\n\n\nbody\n.\nacceleration\n.\ny\n \n=\n \ny\n;\n\n\n\n\n\nGravity\n\n\nbody\n.\ngravity\n.\nset\n(\nx\n,\n \ny\n);\n\n\n\n\n\nbody\n.\ngravity\n.\nx\n \n=\n \nx\n;\n\n\n\n\n\nbody\n.\ngravity\n.\ny\n \n=\n \ny\n;\n\n\n\n\n\nFriction\n\n\nbody\n.\nfriction\n.\nset\n(\nx\n,\n \ny\n);\n\n\n\n\n\nbody\n.\nfriction\n.\nx\n \n=\n \nx\n;\n\n\n\n\n\nbody\n.\nfriction\n.\ny\n \n=\n \ny\n;\n\n\n\n\n\nDrag\n\n\nbody\n.\ndrag\n.\nset\n(\nx\n,\n \ny\n);\n\n\n\n\n\nbody\n.\ndrag\n.\nx\n \n=\n \nx\n;\n\n\n\n\n\nbody\n.\ndrag\n.\ny\n \n=\n \ny\n;\n\n\n\n\n\nAngular\n\n\nbody\n.\nangularVelocity\n \n=\n \nv\n;\n\n\n\n\n\nbody\n.\nangularAcceleration\n \n=\n \nv\n;\n\n\n\n\n\nbody\n.\nangularDrag\n \n=\n \nv\n;\n\n\n\n\n\nBounce\n\n\nbody\n.\nbounce\n.\nset\n(\nx\n,\n \ny\n);\n\n\n\n\n\nbody\n.\nbounce\n.\nx\n \n=\n \nx\n;\n\n\n\n\n\nbody\n.\nbounce\n.\ny\n \n=\n \ny\n;\n\n\n\n\n\nbody\n.\ncollideWorldBounds\n \n=\n \nboolean\n;\n\n\n\n\n\nImmovable\n\n\nbody\n.\nimmovable\n \n=\n \nboolean\n;\n\n\n\n\n\nMethods of World\n\n\nWrap\n\n\nscene\n.\nphysics\n.\nworld\n.\nwrap\n(\ngameobject\n,\n \npadding\n);\n\n\n\n\n\n\n\ngameobject:\n\n\ngame object (image, sprite)\n\n\ngroup\n\n\narray of game objects", 
             "title": "Physics"
@@ -1666,6 +1686,101 @@
             "title": "Generate array"
         }, 
         {
+            "location": "/csvtohashtable/index.html", 
+            "text": "Introduction\n\n\nHash table indexed by (col-key, row-key) from csv string.\n\n\n\n\nAuthor: Rex\n\n\nMember of scene\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\nvar\n \ntable\n \n=\n \nnew\n \nHashTable\n(\nthis\n);\n\n\n\n\n\nLoad table from csv string\n\n\ntable\n.\nloadCSV\n(\ncsvString\n);\n\n\n// table.loadCSV(csvString, delimiter);\n\n\n\n\n\nAll values in table are string after loading.\n\n\nConvert value type\n\n\n\n\nConvert all values\n    \ntable\n.\nconvert\n();\n  \n// convert true, false, null, number\n\n\n// table.convert(callback, scope); // convert by custom function\n\n\n// callback = function(table, colKey, rowKey, value) {};\n\n\n\n\nconvert values in column\n    \ntable\n.\nconvertCol\n(\ncolKey\n);\n  \n// colKey: a colKey, or an array of colKeys\n\n\n// table.convertCol(colKey, callback, scope);\n\n\n// callback = function(table, colKey, rowKey, value) {};\n\n\n\n\nconvert values in row\n    \ntable\n.\nconvertRow\n(\nrowKey\n);\n  \n// rowKey: a rowKey, or an array of rowKeys\n\n\n// table.convertRow(rowKey, callback, scope);\n\n\n// callback = function(table, colKey, rowKey, value) {};\n\n\n\n\n\n\nGet value\n\n\nvar\n \nval\n \n=\n \ntable\n.\nget\n(\ncolKey\n,\n \nrowKey\n);\n\n\n\n\n\nSet value\n\n\ntable\n.\nset\n(\ncolKey\n,\n \nrowKey\n,\n \nvalue\n);\n\n\n\n\n\ntable\n.\nadd\n(\ncolKey\n,\n \nrowKey\n,\n \nvalue\n);\n\n\n// equal to table.set(colKey, rowKey, table.get(colKey, rowKey) + value);\n\n\n\n\n\nHas column/row key\n\n\nvar\n \nhasRow\n \n=\n \ntable\n.\nhasColKey\n(\ncolKey\n);\n\n\n\n\n\nvar\n \nhasRow\n \n=\n \ntable\n.\nhasRowKey\n(\nrowKey\n);\n\n\n\n\n\nvar\n \nhasRow\n \n=\n \ntable\n.\nhasKey\n(\ncolKey\n,\n \nrowKey\n);\n\n\n\n\n\nValue in column or row\n\n\nvar\n \nhasValue\n \n=\n \ntable\n.\nisValueInCol\n(\ncolKey\n,\n \ndata\n);\n\n\n\n\n\nvar\n \nexisted\n \n=\n \ntable\n.\nisValueInRol\n(\nrowKey\n,\n \ndata\n);\n\n\n\n\n\nCreate table\n\n\nClean table\n\n\ntable\n.\nclean\n();\n\n\n\n\n\nAppend a column\n\n\ntable\n.\nappendCol\n(\ncolKey\n,\n \ninitValue\n);\n\n\n// table.appendCol(colKey, callback, scope);  // get initValue from callback\n\n\n// callback = function (table, colKey, rowKey) { }\n\n\n\n\n\nAppend a row\n\n\ntable\n.\nappendRow\n(\ncolKey\n,\n \ninitValue\n);\n\n\n// table.appendRow(colKey, callback, scope);  // get initValue from callback\n\n\n// callback = function (table, colKey, rowKey) { }\n\n\n\n\n\nRemove a column\n\n\ntable\n.\nremoveCol\n(\ncolKey\n);\n\n\n\n\n\nRemove a row\n\n\ntable\n.\nremoveRol\n(\ncolKey\n);\n\n\n\n\n\nSort column or row\n\n\ntable\n.\nsortCol\n(\ncolKey\n,\n \nmode\n);\n \n// mode: \nascending\n|0|\ndescending\n|1|\nlogical ascending\n|2|\nlogical descending\n|3\n\n\n// table.sortCol(callback, scope);  // sort column by callback\n\n\n// callback = function(rowKeyA, rowKeyB) {}\n\n\n\n\n\ntable\n.\nsortRow\n(\nrowKey\n,\n \nmode\n);\n \n// mode: \nascending\n|0|\ndescending\n|1|\nlogical ascending\n|2|\nlogical descending\n|3\n\n\n// table.sortRow(callback, scope);  // sort column by callback\n\n\n// callback = function(colKeyA, colKeyB) {}\n\n\n\n\n\nRetrieve columns or rows\n\n\ntable\n.\neachCol\n(\nrowKey\n,\n \ncallback\n,\n \nscope\n);\n\n\n// callback = function(table, colKey, rowKey, value) {}\n\n\n\n\n\ntable\n.\neachRow\n(\ncolKey\n,\n \ncallback\n,\n \nscope\n);\n\n\n// callback = function(table, colKey, rowKey, value) {}", 
+            "title": "CSV to hash table"
+        }, 
+        {
+            "location": "/csvtohashtable/index.html#introduction", 
+            "text": "Hash table indexed by (col-key, row-key) from csv string.   Author: Rex  Member of scene", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/csvtohashtable/index.html#source-code", 
+            "text": "Link", 
+            "title": "Source code"
+        }, 
+        {
+            "location": "/csvtohashtable/index.html#usage", 
+            "text": "", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/csvtohashtable/index.html#create-instance", 
+            "text": "var   table   =   new   HashTable ( this );", 
+            "title": "Create instance"
+        }, 
+        {
+            "location": "/csvtohashtable/index.html#load-table-from-csv-string", 
+            "text": "table . loadCSV ( csvString );  // table.loadCSV(csvString, delimiter);   All values in table are string after loading.", 
+            "title": "Load table from csv string"
+        }, 
+        {
+            "location": "/csvtohashtable/index.html#convert-value-type", 
+            "text": "Convert all values\n     table . convert ();    // convert true, false, null, number  // table.convert(callback, scope); // convert by custom function  // callback = function(table, colKey, rowKey, value) {};   convert values in column\n     table . convertCol ( colKey );    // colKey: a colKey, or an array of colKeys  // table.convertCol(colKey, callback, scope);  // callback = function(table, colKey, rowKey, value) {};   convert values in row\n     table . convertRow ( rowKey );    // rowKey: a rowKey, or an array of rowKeys  // table.convertRow(rowKey, callback, scope);  // callback = function(table, colKey, rowKey, value) {};", 
+            "title": "Convert value type"
+        }, 
+        {
+            "location": "/csvtohashtable/index.html#get-value", 
+            "text": "var   val   =   table . get ( colKey ,   rowKey );", 
+            "title": "Get value"
+        }, 
+        {
+            "location": "/csvtohashtable/index.html#set-value", 
+            "text": "table . set ( colKey ,   rowKey ,   value );   table . add ( colKey ,   rowKey ,   value );  // equal to table.set(colKey, rowKey, table.get(colKey, rowKey) + value);", 
+            "title": "Set value"
+        }, 
+        {
+            "location": "/csvtohashtable/index.html#has-columnrow-key", 
+            "text": "var   hasRow   =   table . hasColKey ( colKey );   var   hasRow   =   table . hasRowKey ( rowKey );   var   hasRow   =   table . hasKey ( colKey ,   rowKey );", 
+            "title": "Has column/row key"
+        }, 
+        {
+            "location": "/csvtohashtable/index.html#value-in-column-or-row", 
+            "text": "var   hasValue   =   table . isValueInCol ( colKey ,   data );   var   existed   =   table . isValueInRol ( rowKey ,   data );", 
+            "title": "Value in column or row"
+        }, 
+        {
+            "location": "/csvtohashtable/index.html#create-table", 
+            "text": "", 
+            "title": "Create table"
+        }, 
+        {
+            "location": "/csvtohashtable/index.html#clean-table", 
+            "text": "table . clean ();", 
+            "title": "Clean table"
+        }, 
+        {
+            "location": "/csvtohashtable/index.html#append-a-column", 
+            "text": "table . appendCol ( colKey ,   initValue );  // table.appendCol(colKey, callback, scope);  // get initValue from callback  // callback = function (table, colKey, rowKey) { }", 
+            "title": "Append a column"
+        }, 
+        {
+            "location": "/csvtohashtable/index.html#append-a-row", 
+            "text": "table . appendRow ( colKey ,   initValue );  // table.appendRow(colKey, callback, scope);  // get initValue from callback  // callback = function (table, colKey, rowKey) { }", 
+            "title": "Append a row"
+        }, 
+        {
+            "location": "/csvtohashtable/index.html#remove-a-column", 
+            "text": "table . removeCol ( colKey );", 
+            "title": "Remove a column"
+        }, 
+        {
+            "location": "/csvtohashtable/index.html#remove-a-row", 
+            "text": "table . removeRol ( colKey );", 
+            "title": "Remove a row"
+        }, 
+        {
+            "location": "/csvtohashtable/index.html#sort-column-or-row", 
+            "text": "table . sortCol ( colKey ,   mode );   // mode:  ascending |0| descending |1| logical ascending |2| logical descending |3  // table.sortCol(callback, scope);  // sort column by callback  // callback = function(rowKeyA, rowKeyB) {}   table . sortRow ( rowKey ,   mode );   // mode:  ascending |0| descending |1| logical ascending |2| logical descending |3  // table.sortRow(callback, scope);  // sort column by callback  // callback = function(colKeyA, colKeyB) {}", 
+            "title": "Sort column or row"
+        }, 
+        {
+            "location": "/csvtohashtable/index.html#retrieve-columns-or-rows", 
+            "text": "table . eachCol ( rowKey ,   callback ,   scope );  // callback = function(table, colKey, rowKey, value) {}   table . eachRow ( colKey ,   callback ,   scope );  // callback = function(table, colKey, rowKey, value) {}", 
+            "title": "Retrieve columns or rows"
+        }, 
+        {
             "location": "/eventemitter3/index.html", 
             "text": "Introduction\n\n\nEvent emitter\n.\n\n\nUsage\n\n\nGet event emitter\n\n\n\n\nScene: \n    \nvar\n \nee\n \n=\n \nscene\n.\nsys\n.\nevents\n;\n\n\n\n\nGame object:\n    \nvar\n \nee\n \n=\n \ngameobject\n;\n\n\n\n\n\n\nAttach listener\n\n\nee\n.\non\n(\neventName\n,\n \ncallback\n,\n \ncallbackScope\n);\n\n\nee\n.\nonce\n(\neventName\n,\n \ncallback\n,\n \ncallbackScope\n);\n  \n// only fire listeners one time\n\n\n\n\n\nAlias\n\n\nee\n.\naddListener\n(\neventName\n,\n \ncallback\n,\n \ncallbackScope\n);\n\n\nee\n.\naddListener\n(\neventName\n,\n \ncallback\n,\n \ncallbackScope\n,\n \ntrue\n);\n  \n// only fire listeners one time\n\n\n\n\n\nFire event\n\n\nee\n.\nemit\n(\neventName\n);\n\n\n\n\n\nRemove listeners\n\n\nee\n.\noff\n(\neventName\n,\n \ncallback\n,\n \ncallbackScope\n);\n\n\nee\n.\noff\n(\neventName\n,\n \ncallback\n,\n \ncallbackScope\n,\n \ntrue\n);\n   \n// only remove one-time listeners\n\n\n\n\n\nAlias\n\n\nee\n.\nremoveListener\n(\neventName\n,\n \ncallback\n,\n \ncallbackScope\n);\n \n\nee\n.\nremoveListener\n(\neventName\n,\n \ncallback\n,\n \ncallbackScope\n,\n \ntrue\n);\n  \n// only remove one-time listeners\n\n\n\n\n\nRemove all listeners\n\n\nee\n.\nremoveAllListeners\n();\n\n\n\n\n\nGet listeners count\n\n\nvar\n \ncount\n \n=\n \nee\n.\nlistenerCount\n(\neventName\n);\n\n\n//var noListener = (ee.listenerCount(eventName) === 0);\n\n\n\n\n\nGet listeners\n\n\nvar\n \nlisteners\n \n=\n \nee\n.\nlisteners\n(\neventName\n);\n\n\n\n\n\nListener\n\n\n{\n\n    \nfn\n:\n \ncallback\n,\n\n    \ncontext\n:\n \ncallbackScope\n,\n\n    \nonce\n:\n \nonce\n\n\n}", 
             "title": "Event emitter"
@@ -1867,8 +1982,108 @@
         }, 
         {
             "location": "/camera/index.html", 
-            "text": "", 
+            "text": "Introduction\n\n\nCamera to display game objects, built-in object of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nGet camera\n\n\nEach scene has one or more cameras.\n\n\n\n\nMain camera\n    \nvar\n \ncamera\n \n=\n \nscene\n.\ncameras\n.\nmain\n;\n\n\n\n\n\n\nAdd new camera\n    \nvar\n \ncamera\n \n=\n \nscene\n.\ncameras\n.\nadd\n(\nx\n,\n \ny\n,\n \nwidth\n,\n \nheight\n);\n\n\n\n\n\n\n\n\nAdd existed camera\n    \nscene\n.\ncameras\n.\naddExisting\n(\ncamera\n);\n\n\n\n\n\n\n\n\nRemove camera\n\n\nscene\n.\ncameras\n.\nremove\n(\ncamera\n);\n\n\n\n\n\nSet view port\n\n\ncamera\n.\nsetViewport\n(\nx\n,\n \ny\n,\n \nwidth\n,\n \nheight\n);\n\n\n\n\n\ncamera\n.\nsetPosition\n(\nx\n,\n \ny\n);\n\n\n// camera.x = x;\n\n\n// camera.y = y;\n\n\n// var x = camera.x;\n\n\n// var y = camera.y;\n\n\n\n\n\ncamera\n.\nsetSize\n(\nwidth\n,\n \nheight\n);\n\n\n// camera.width = width;\n\n\n// camera.height = height;\n\n\n// var width = camera.width;\n\n\n// var height = camera.height;\n\n\n\n\n\nScroll camera\n\n\ncamera\n.\nsetScroll\n(\nx\n,\n \ny\n)\n\n\n\n\n\ncamera\n.\nscrollX\n \n=\n \nscrollX\n;\n\n\ncamera\n.\nscrollY\n \n=\n \nscrollY\n;\n\n\n\n\n\ncamera\n.\ncenterToBounds\n();\n\n\n\n\n\ncamera\n.\ncenterToSize\n();\n\n\n\n\n\nFollow game object\n\n\n\n\nStart following\n    \ncamera\n.\nstartFollow\n(\ngameobject\n);\n\n\n// camera.startFollow(gameobject, roundPx);\n\n\n\n\nStop following\n    \ncamera\n.\nstopFollow\n();\n\n\n\n\n\n\nScroll factor\n\n\nSee \nScroll factor\n in game object.\n\n\nSet bounds\n\n\ncamera\n.\nsetBounds\n(\nx\n,\n \ny\n,\n \nwidth\n,\n \nheight\n)\n\n\n\n\n\nZoom\n\n\ncamera\n.\nsetZoom\n(\nv\n);\n\n\n// camera.zoom = v;\n\n\n// var zoom = camera.zoom;\n\n\n\n\n\nRotation\n\n\nSpin camera around center.\n\n\ncamera\n.\nsetRotation\n(\nrad\n);\n\n\n// camera.setAngle(degree);\n\n\n// camera.rotation = rad;\n\n\n\n\n\nEffects\n\n\nFade-in / fade-out\n\n\ncamera\n.\nfadeIn\n(\nduration\n);\n   \n// duration in ms\n\n\n// camera.fadeIn(duration, callback);  // callback: invoked when completed\n\n\n// camera.fadeIn(duration, callback, red, green, blue);\n\n\n// red/green/blue: the value to fade the red/green/blue channel from. A value between 0 and 1.\n\n\n\n\n\ncamera\n.\nfadeOut\n(\nduration\n);\n   \n// duration in ms\n\n\n// camera.fadeOut(duration, callback);  // callback: invoked when completed\n\n\n// camera.fadeOut(duration, callback, red, green, blue);\n\n\n// red/green/blue: the value to fade the red/green/blue channel from. A value between 0 and 1.\n\n\n\n\n\nFlash\n\n\ncamera\n.\nflash\n(\nduration\n);\n   \n// duration in ms\n\n\n// camera.flash(duration, red, green, blue, force, callback);\n\n\n\n\n\nShake\n\n\ncamera\n.\nshake\n(\nduration\n);\n   \n// duration in ms\n\n\n// camera.shake(duration, intensity);  // intensity: the intensity of the shake.\n\n\n// camera.shake(duration, intensity, force);  // force: force the shake effect to start immediately, even if already running.\n\n\n// camera.shake(duration, intensity, force, callback);  // callback: invoked when completed\n\n\n\n\n\nSet background color\n\n\ncamera\n.\nsetBackgroundColor\n(\ncolor\n);\n\n\n\n\n\nIgnore game object\n\n\nIgnored game objects won't show at that camera.\n\n\ncamera\n.\nignore\n(\ngameobject\n);\n  \n// a game object, or an array of game objects\n\n\n\n\n\nCamera Controllor\n\n\nCreate controllor\n\n\n// var cursors = scene.input.keyboard.createCursorKeys();\n\n\nvar\n \nconfig\n \n=\n \n{\n\n    \ncamera\n:\n \ncamera\n,\n\n\n    \nleft\n:\n \ncursors\n.\nleft\n,\n    \n// { isDown, isUp }\n\n    \nright\n:\n \ncursors\n.\nright\n,\n  \n// { isDown, isUp }\n\n    \nup\n:\n \ncursors\n.\nup\n,\n        \n// { isDown, isUp }\n\n    \ndown\n:\n \ncursors\n.\ndown\n,\n    \n// { isDown, isUp }\n\n    \nzoomIn\n:\n \nnull\n,\n          \n// { isDown, isUp }\n\n    \nzoomOut\n:\n \nnull\n,\n         \n// { isDown, isUp }\n\n\n    \nzoomSpeed\n:\n \n0.01\n,\n\n\n    \nacceleration\n:\n \nnull\n,\n\n    \n// acceleration: {\n\n    \n//    x: 0,\n\n    \n//    y: 0\n\n    \n// }\n\n\n    \ndrag\n:\n \nnull\n,\n\n    \n// drag: {\n\n    \n//    x: 0,\n\n    \n//    y: 0\n\n    \n// }\n\n\n    \nmaxSpeed\n:\n \nnull\n\n    \n// maxSpeed: {\n\n    \n//    x: 0,\n\n    \n//    y: 0\n\n    \n// }\n\n\n};\n\n\nvar\n \ncontrols\n \n=\n \nnew\n \nPhaser\n.\nCameras\n.\nControls\n.\nSmoothed\n(\nconfig\n);\n\n\n\n\n\nUpdate\n\n\nscene\n.\nupdate\n \n=\n \nfunction\n \n(\ntime\n,\n \ndelta\n)\n \n{\n\n    \ncontrols\n.\nupdate\n(\ndelta\n);\n\n\n}", 
             "title": "Camera"
+        }, 
+        {
+            "location": "/camera/index.html#introduction", 
+            "text": "Camera to display game objects, built-in object of phaser.   Author: Richard Davey", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/camera/index.html#usage", 
+            "text": "", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/camera/index.html#get-camera", 
+            "text": "Each scene has one or more cameras.   Main camera\n     var   camera   =   scene . cameras . main ;    Add new camera\n     var   camera   =   scene . cameras . add ( x ,   y ,   width ,   height );     Add existed camera\n     scene . cameras . addExisting ( camera );", 
+            "title": "Get camera"
+        }, 
+        {
+            "location": "/camera/index.html#remove-camera", 
+            "text": "scene . cameras . remove ( camera );", 
+            "title": "Remove camera"
+        }, 
+        {
+            "location": "/camera/index.html#set-view-port", 
+            "text": "camera . setViewport ( x ,   y ,   width ,   height );   camera . setPosition ( x ,   y );  // camera.x = x;  // camera.y = y;  // var x = camera.x;  // var y = camera.y;   camera . setSize ( width ,   height );  // camera.width = width;  // camera.height = height;  // var width = camera.width;  // var height = camera.height;", 
+            "title": "Set view port"
+        }, 
+        {
+            "location": "/camera/index.html#scroll-camera", 
+            "text": "camera . setScroll ( x ,   y )   camera . scrollX   =   scrollX ;  camera . scrollY   =   scrollY ;   camera . centerToBounds ();   camera . centerToSize ();", 
+            "title": "Scroll camera"
+        }, 
+        {
+            "location": "/camera/index.html#follow-game-object", 
+            "text": "Start following\n     camera . startFollow ( gameobject );  // camera.startFollow(gameobject, roundPx);   Stop following\n     camera . stopFollow ();", 
+            "title": "Follow game object"
+        }, 
+        {
+            "location": "/camera/index.html#scroll-factor", 
+            "text": "See  Scroll factor  in game object.", 
+            "title": "Scroll factor"
+        }, 
+        {
+            "location": "/camera/index.html#set-bounds", 
+            "text": "camera . setBounds ( x ,   y ,   width ,   height )", 
+            "title": "Set bounds"
+        }, 
+        {
+            "location": "/camera/index.html#zoom", 
+            "text": "camera . setZoom ( v );  // camera.zoom = v;  // var zoom = camera.zoom;", 
+            "title": "Zoom"
+        }, 
+        {
+            "location": "/camera/index.html#rotation", 
+            "text": "Spin camera around center.  camera . setRotation ( rad );  // camera.setAngle(degree);  // camera.rotation = rad;", 
+            "title": "Rotation"
+        }, 
+        {
+            "location": "/camera/index.html#effects", 
+            "text": "", 
+            "title": "Effects"
+        }, 
+        {
+            "location": "/camera/index.html#fade-in-fade-out", 
+            "text": "camera . fadeIn ( duration );     // duration in ms  // camera.fadeIn(duration, callback);  // callback: invoked when completed  // camera.fadeIn(duration, callback, red, green, blue);  // red/green/blue: the value to fade the red/green/blue channel from. A value between 0 and 1.   camera . fadeOut ( duration );     // duration in ms  // camera.fadeOut(duration, callback);  // callback: invoked when completed  // camera.fadeOut(duration, callback, red, green, blue);  // red/green/blue: the value to fade the red/green/blue channel from. A value between 0 and 1.", 
+            "title": "Fade-in / fade-out"
+        }, 
+        {
+            "location": "/camera/index.html#flash", 
+            "text": "camera . flash ( duration );     // duration in ms  // camera.flash(duration, red, green, blue, force, callback);", 
+            "title": "Flash"
+        }, 
+        {
+            "location": "/camera/index.html#shake", 
+            "text": "camera . shake ( duration );     // duration in ms  // camera.shake(duration, intensity);  // intensity: the intensity of the shake.  // camera.shake(duration, intensity, force);  // force: force the shake effect to start immediately, even if already running.  // camera.shake(duration, intensity, force, callback);  // callback: invoked when completed", 
+            "title": "Shake"
+        }, 
+        {
+            "location": "/camera/index.html#set-background-color", 
+            "text": "camera . setBackgroundColor ( color );", 
+            "title": "Set background color"
+        }, 
+        {
+            "location": "/camera/index.html#ignore-game-object", 
+            "text": "Ignored game objects won't show at that camera.  camera . ignore ( gameobject );    // a game object, or an array of game objects", 
+            "title": "Ignore game object"
+        }, 
+        {
+            "location": "/camera/index.html#camera-controllor", 
+            "text": "", 
+            "title": "Camera Controllor"
+        }, 
+        {
+            "location": "/camera/index.html#create-controllor", 
+            "text": "// var cursors = scene.input.keyboard.createCursorKeys();  var   config   =   { \n     camera :   camera , \n\n     left :   cursors . left ,      // { isDown, isUp } \n     right :   cursors . right ,    // { isDown, isUp } \n     up :   cursors . up ,          // { isDown, isUp } \n     down :   cursors . down ,      // { isDown, isUp } \n     zoomIn :   null ,            // { isDown, isUp } \n     zoomOut :   null ,           // { isDown, isUp } \n\n     zoomSpeed :   0.01 , \n\n     acceleration :   null , \n     // acceleration: { \n     //    x: 0, \n     //    y: 0 \n     // } \n\n     drag :   null , \n     // drag: { \n     //    x: 0, \n     //    y: 0 \n     // } \n\n     maxSpeed :   null \n     // maxSpeed: { \n     //    x: 0, \n     //    y: 0 \n     // }  };  var   controls   =   new   Phaser . Cameras . Controls . Smoothed ( config );", 
+            "title": "Create controllor"
+        }, 
+        {
+            "location": "/camera/index.html#update", 
+            "text": "scene . update   =   function   ( time ,   delta )   { \n     controls . update ( delta );  }", 
+            "title": "Update"
         }, 
         {
             "location": "/random/index.html", 
