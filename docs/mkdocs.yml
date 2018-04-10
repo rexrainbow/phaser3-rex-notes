@@ -41,6 +41,8 @@ pages:
        - Fade out destroy: fadeoutdestroy.md
     - Arcade:
         - Physics: arcade.md
+- Audio:
+    - Web audio: webaudio.md
 - Data:
     - Data manager: datamanager.md
     - Array: array.md

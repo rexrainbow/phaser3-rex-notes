@@ -32,7 +32,7 @@
     
     
       
-        <title>Run commands - Notes of Phaser 3</title>
+        <title>Web audio - Notes of Phaser 3</title>
       
     
     
@@ -86,7 +86,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Run commands
+                Web audio
               </span>
             
           
@@ -762,10 +762,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8" checked>
     
     <label class="md-nav__link" for="nav-8">
       Audio
@@ -781,11 +783,84 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../webaudio/index.html" title="Web audio" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Web audio
+      </label>
+    
+    <a href="index.html" title="Web audio" class="md-nav__link md-nav__link--active">
       Web audio
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuration" title="Configuration" class="md-nav__link">
+    Configuration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load-audio-file" title="Load audio file" class="md-nav__link">
+    Load audio file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#play-audio" title="Play audio" class="md-nav__link">
+    Play audio
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load-audio-sprite" title="Load audio sprite" class="md-nav__link">
+    Load audio sprite
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -870,12 +945,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
     
     <label class="md-nav__link" for="nav-10">
       Logic
@@ -903,70 +976,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="toc">
-        Run commands
-      </label>
-    
-    <a href="index.html" title="Run commands" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../runcommands/index.html" title="Run commands" class="md-nav__link">
       Run commands
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#source-code" title="Source code" class="md-nav__link">
-    Source code
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#run-commands" title="Run commands" class="md-nav__link">
-    Run commands
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -1229,13 +1243,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#source-code" title="Source code" class="md-nav__link">
-    Source code
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#usage" title="Usage" class="md-nav__link">
     Usage
   </a>
@@ -1244,8 +1251,29 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#run-commands" title="Run commands" class="md-nav__link">
-    Run commands
+  <a href="#configuration" title="Configuration" class="md-nav__link">
+    Configuration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load-audio-file" title="Load audio file" class="md-nav__link">
+    Load audio file
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#play-audio" title="Play audio" class="md-nav__link">
+    Play audio
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load-audio-sprite" title="Load audio sprite" class="md-nav__link">
+    Load audio sprite
   </a>
   
 </li>
@@ -1270,39 +1298,31 @@
               
                 
                 
-                  <h1>Run commands</h1>
+                  <h1>Web audio</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Run commands in array.</p>
+<p>Play sounds, built-in object of phaser.</p>
 <ul>
-<li>Author: Rex</li>
-<li>Method only</li>
+<li>Author: Richard Davey</li>
 </ul>
-<h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/runcommands/RunCommands.js">Link</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<h3 id="run-commands">Run commands<a class="headerlink" href="#run-commands" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">runCommands</span><span class="p">(</span><span class="nx">commands</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>
+<h3 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h3>
+<p>Web audio is the default audio context.</p>
+<h3 id="load-audio-file">Load audio file<a class="headerlink" href="#load-audio-file" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">audio</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">urls</span><span class="p">);</span>  <span class="c1">// urls: an array of file url</span>
 </pre></div>
 
-<ul>
-<li>Format of command :
-    <div class="codehilite"><pre><span></span><span class="p">[</span><span class="nx">fnName</span><span class="p">,</span> <span class="nx">param0</span><span class="p">,</span> <span class="nx">param1</span><span class="p">,</span> <span class="p">...]</span>
-</pre></div></li>
-<li>Commands in nested array :
-    <div class="codehilite"><pre><span></span><span class="p">[</span>
-    <span class="nx">command0</span><span class="p">,</span>
-    <span class="nx">command1</span>
-    <span class="p">[</span>
-        <span class="nx">command2</span><span class="p">,</span>
-        <span class="nx">command3</span>
-    <span class="p">]</span>
-<span class="p">]</span>
-</pre></div></li>
-<li>Run command :
-    <div class="codehilite"><pre><span></span><span class="nx">scope</span><span class="p">[</span><span class="nx">fnName</span><span class="p">].</span><span class="nx">call</span><span class="p">(</span><span class="nx">scope</span><span class="p">,</span> <span class="nx">param0</span><span class="p">,</span> <span class="nx">param1</span> <span class="p">...)</span>
-</pre></div></li>
-</ul>
+<p>See <a href="../loader/index.html#audio">loader</a></p>
+<h3 id="play-audio">Play audio<a class="headerlink" href="#play-audio" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">music</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">sound</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">&#39;key&#39;</span><span class="p">);</span>
+<span class="nx">music</span><span class="p">.</span><span class="nx">play</span><span class="p">();</span>
+</pre></div>
+
+<h3 id="load-audio-sprite">Load audio sprite<a class="headerlink" href="#load-audio-sprite" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">audioSprite</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">urls</span><span class="p">,</span> <span class="nx">json</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</pre></div>
+
+<p>See <a href="../loader/index.html#audio-sprite">loader</a></p>
                 
                   
                 
@@ -1321,7 +1341,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../eventemitter3/index.html" title="Event emitter" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../arcade/index.html" title="Physics" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -1330,19 +1350,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Event emitter
+                Physics
               </span>
             </div>
           </a>
         
         
-          <a href="../tcrprecoderplugin/index.html" title="Recoder" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../datamanager/index.html" title="Data manager" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Recoder
+                Data manager
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

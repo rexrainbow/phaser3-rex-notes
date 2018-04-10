@@ -30,6 +30,12 @@ Each scene has one or more cameras.
 scene.cameras.remove(camera);
 ```
 
+### Destroy camera
+
+```javascript
+camera.destroy();
+```
+
 ### Set view port
 
 ```javascript

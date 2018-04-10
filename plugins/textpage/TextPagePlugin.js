@@ -54,8 +54,8 @@ class TextPagePlugin {
     }
 
     boot() {
-        if (this.gameobject.once) { // oops, bob object does not have event emitter
-            this.gameobject.once('destroy', this.destroy, this);
+        if (this.gameobject.on) { // oops, bob object does not have event emitter
+            this.gameobject.on('destroy', this.destroy, this);
         }
     }
     
