@@ -1572,7 +1572,7 @@
         }, 
         {
             "location": "/webaudio/index.html", 
-            "text": "Introduction\n\n\nPlay sounds, built-in object of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nConfiguration\n\n\nWeb audio is the default audio context.\n\n\nLoad audio file\n\n\nscene\n.\nload\n.\naudio\n(\nkey\n,\n \nurls\n);\n  \n// urls: an array of file url\n\n\n\n\n\nSee \nloader\n\n\nPlay audio\n\n\nvar\n \nmusic\n \n=\n \nthis\n.\nsound\n.\nadd\n(\nkey\n);\n\n\nmusic\n.\nplay\n();\n\n\n\n\n\nLoad audio sprite\n\n\nscene\n.\nload\n.\naudioSprite\n(\nkey\n,\n \nurls\n,\n \njson\n,\n \nconfig\n);\n\n\n\n\n\nSee \nloader", 
+            "text": "Introduction\n\n\nPlay sounds, built-in object of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nConfiguration\n\n\nWeb audio is the default audio context.\n\n\nLoad audio file\n\n\nscene\n.\nload\n.\naudio\n(\nkey\n,\n \nurls\n);\n  \n// urls: an array of file url\n\n\n\n\n\nSee \nloader\n\n\nPlay sound\n\n\nSound instance will be destroyed when playback ends.\n\n\nscene\n.\nsound\n.\nplay\n(\nkey\n);\n\n\n\n\n\nSound instance\n\n\nCreate sound instance\n\n\nvar\n \nmusic\n \n=\n \nthis\n.\nsound\n.\nadd\n(\nkey\n);\n\n\n\n\n\nvar\n \nmusic\n \n=\n \nthis\n.\nsound\n.\nadd\n(\nkey\n,\n \nconfig\n);\n\n\n\n\n\nConfiguration\n\n\n{\n\n    \nmute\n:\n \nfalse\n,\n\n    \nvolume\n:\n \n1\n,\n\n    \nrate\n:\n \n1\n,\n\n    \ndetune\n:\n \n0\n,\n\n    \nseek\n:\n \n0\n,\n\n    \nloop\n:\n \nfalse\n,\n\n    \ndelay\n:\n \n0\n\n\n}\n\n\n\n\n\nPlay sound instance\n\n\n\n\nStart playing\n    \nmusic\n.\nplay\n();\n\n\n\n\nStart playing with configuration\n    \nmusic\n.\nplay\n(\nconfig\n);\n\n\n\n\nconfig\n\n\n\n\n\n\nStop\n    \nmusic\n.\nstop\n();\n\n\n\n\nPause\n    \nmusic\n.\npause\n();\n\n\n\n\nResume\n    \nmusic\n.\nresume\n();\n\n\n\n\n\n\nOther methods\n\n\nMute\n\n\n\n\nSet mute\n    \nmusic\n.\nsetMute\n(\nmute\n);\n \n// mute: true/false\n\n\n// music.mute = mute;\n\n\n\n\nGet mute\n    \nvar\n \nmute\n \n=\n \nmusic\n.\nmute\n;\n\n\n\n\n\n\nVolume\n\n\n\n\nSet volume\n    \nmusic\n.\nsetVolume\n(\nvolume\n);\n \n// volume: 0 to 1\n\n\n// music.volume = volume;\n\n\n\n\nGet volume\n    \nvar\n \nvolume\n \n=\n \nmusic\n.\nvolume\n;\n\n\n\n\n\n\nDetune\n\n\n\n\nSet detune\n    \nmusic\n.\nsetDetune\n(\ndetune\n);\n \n// detune: -1200 to 1200\n\n\n// music.detune = detune;\n\n\n\n\nGet detune\n    \nvar\n \ndetune\n \n=\n \nmusic\n.\ndetune\n;\n\n\n\n\n\n\nPlay-rate\n\n\n\n\nSet play-rate\n    \nmusic\n.\nsetRate\n(\nrate\n);\n \n// rate: 1.0(normal speed), 0.5(half speed), 2.0(double speed)\n\n\n// music.rate = rate;\n\n\n\n\nGet play-rate\n    \nvar\n \nrate\n \n=\n \nmusic\n.\nrate\n;\n\n\n\n\n\n\nSeek to\n\n\n\n\nSeek to\n    \nmusic\n.\nsetSeek\n(\ntime\n);\n \n// seek: playback time\n\n\n// music.seek = seek;\n\n\n\n\nGet current playback time\n    \nvar\n \ntime\n \n=\n \nmusic\n.\nseek\n;\n  \n// return 0 when playback ends\n\n\n\n\n\n\nLoop\n\n\n\n\nSet loop\n    \nmusic\n.\nsetLoop\n(\nloop\n);\n \n// loop: true/false\n\n\n// music.loop = loop;\n\n\n\n\nGet loop\n    \nvar\n \nloop\n \n=\n \nmusic\n.\nloop\n;\n\n\n\n\n\n\nOther properties\n\n\n\n\nDuration : duration of this sound\n    \nvar\n \nduratuin\n \n=\n \nmusic\n.\nduration\n;\n\n\n\n\nIs playing\n    \nvar\n \nisPlaying\n \n=\n \nmusic\n.\nisPlaying\n;\n\n\n\n\nIs paused\n    \nvar\n \nisPaused\n \n=\n \nmusic\n.\nisPaused\n;\n\n\n\n\n\n\nEvents\n\n\n\n\nStart playing\n    \nmusic\n.\nonce\n(\nplay\n,\n \nfunction\n(\nmusic\n){});\n\n\n\n\nPlayback end\n    \nmusic\n.\nonce\n(\nended\n,\n \nfunction\n(\nmusic\n){});\n\n\n\n\nLooping\n    \nmusic\n.\nonce\n(\nlooped\n,\n \nfunction\n(\nmusic\n){});\n\n\n\n\nPause\n    \nmusic\n.\nonce\n(\npause\n,\n \nfunction\n(\nmusic\n){});\n\n\n\n\nResume\n    \nmusic\n.\nonce\n(\nresume\n,\n \nfunction\n(\nmusic\n){});\n\n\n\n\nStop\n    \nmusic\n.\nonce\n(\nstop\n,\n \nfunction\n(\nmusic\n){});\n\n\n\n\nSet mute\n    \nmusic\n.\nonce\n(\nmute\n,\n \nfunction\n(\nmusic\n,\n \nmute\n){});\n\n\n\n\nSet volume\n    \nmusic\n.\nonce\n(\nvolume\n,\n \nfunction\n(\nmusic\n,\n \nvolume\n){});\n\n\n\n\nSet detune\n    \nmusic\n.\nonce\n(\ndetune\n,\n \nfunction\n(\nmusic\n,\n \ndetune\n){});\n\n\n\n\nSet play-rate\n    \nmusic\n.\nonce\n(\nrate\n,\n \nfunction\n(\nmusic\n,\n \nrate\n){});\n\n\n\n\nSeek to\n    \nmusic\n.\nonce\n(\nseek\n,\n \nfunction\n(\nmusic\n,\n \ntime\n){});\n\n\n\n\nset loop\n    \nmusic\n.\nonce\n(\nloop\n,\n \nfunction\n(\nmusic\n,\n \nloop\n){});\n\n\n\n\n\n\nPlay marked sound\n\n\nSound instance will be destroyed when playback ends.\n\n\nscene\n.\nsound\n.\nplay\n(\nkey\n,\n \nmarker\n);\n\n\n\n\n\nMarker\n\n\n{\n\n    \nname\n:\n \n,\n\n    \nstart\n:\n \n0\n,\n\n    \nduration\n:\n \nmusic\n.\nduration\n,\n\n    \nconfig\n:\n \n{\n\n        \nmute\n:\n \nfalse\n,\n\n        \nvolume\n:\n \n1\n,\n\n        \nrate\n:\n \n1\n,\n\n        \ndetune\n:\n \n0\n,\n\n        \nseek\n:\n \n0\n,\n\n        \nloop\n:\n \nfalse\n,\n\n        \ndelay\n:\n \n0\n\n    \n}\n\n\n}\n\n\n\n\n\nMarkers in sound instance\n\n\nAdd marker\n\n\nmusic\n.\naddMarker\n(\nmarker\n);\n\n\n\n\n\nMarker\n\n\nPlay marked sound\n\n\nmusic\n.\nplay\n(\nmarkerName\n);\n\n\n\n\n\nmusic\n.\nplay\n(\nmarkerName\n,\n \nconfig\n);\n\n\n\n\n\nconfig\n\n\nLoad audio sprite\n\n\nscene\n.\nload\n.\naudioSprite\n(\nkey\n,\n \nurls\n,\n \njson\n,\n \nconfig\n);\n\n\n\n\n\nSee \nloader\n\n\nMethods in sound manager\n\n\nMute\n\n\n\n\nSet mute\n    \nscene\n.\nsound\n.\nsetMute\n(\nmute\n);\n \n// mute: true/false\n\n\n// scene.sound.mute = mute;\n\n\n\n\nGet mute\n    \nvar\n \nmute\n \n=\n \nscene\n.\nsound\n.\nmute\n;\n\n\n\n\n\n\nVolume\n\n\n\n\nSet volume\n    \nscene\n.\nsound\n.\nsetVolume\n(\nvolume\n);\n \n// volume: 0 to 1\n\n\n// scene.sound.volume = volume;\n\n\n\n\nGet volume\n    \nvar\n \nvolume\n \n=\n \nscene\n.\nsound\n.\nvolume\n;\n\n\n\n\n\n\nDetune\n\n\n\n\nSet detune\n    \nscene\n.\nsound\n.\nsetDetune\n(\ndetune\n);\n \n// detune: -1200 to 1200\n\n\n// scene.sound.detune = detune;\n\n\n\n\nGet detune\n    \nvar\n \ndetune\n \n=\n \nscene\n.\nsound\n.\ndetune\n;\n\n\n\n\n\n\nPlay-rate\n\n\n\n\nSet play-rate\n    \nscene\n.\nsound\n.\nsetRate\n(\nrate\n);\n \n// rate: 1.0(normal speed), 0.5(half speed), 2.0(double speed)\n\n\n// scene.sound.rate = rate;\n\n\n\n\nGet play-rate\n    \nvar\n \nrate\n \n=\n \nscene\n.\nsound\n.\nrate\n;", 
             "title": "Web audio"
         }, 
         {
@@ -1596,14 +1596,129 @@
             "title": "Load audio file"
         }, 
         {
-            "location": "/webaudio/index.html#play-audio", 
-            "text": "var   music   =   this . sound . add ( key );  music . play ();", 
-            "title": "Play audio"
+            "location": "/webaudio/index.html#play-sound", 
+            "text": "Sound instance will be destroyed when playback ends.  scene . sound . play ( key );", 
+            "title": "Play sound"
+        }, 
+        {
+            "location": "/webaudio/index.html#sound-instance", 
+            "text": "", 
+            "title": "Sound instance"
+        }, 
+        {
+            "location": "/webaudio/index.html#create-sound-instance", 
+            "text": "var   music   =   this . sound . add ( key );   var   music   =   this . sound . add ( key ,   config );", 
+            "title": "Create sound instance"
+        }, 
+        {
+            "location": "/webaudio/index.html#configuration_1", 
+            "text": "{ \n     mute :   false , \n     volume :   1 , \n     rate :   1 , \n     detune :   0 , \n     seek :   0 , \n     loop :   false , \n     delay :   0  }", 
+            "title": "Configuration"
+        }, 
+        {
+            "location": "/webaudio/index.html#play-sound-instance", 
+            "text": "Start playing\n     music . play ();   Start playing with configuration\n     music . play ( config );   config    Stop\n     music . stop ();   Pause\n     music . pause ();   Resume\n     music . resume ();", 
+            "title": "Play sound instance"
+        }, 
+        {
+            "location": "/webaudio/index.html#other-methods", 
+            "text": "", 
+            "title": "Other methods"
+        }, 
+        {
+            "location": "/webaudio/index.html#mute", 
+            "text": "Set mute\n     music . setMute ( mute );   // mute: true/false  // music.mute = mute;   Get mute\n     var   mute   =   music . mute ;", 
+            "title": "Mute"
+        }, 
+        {
+            "location": "/webaudio/index.html#volume", 
+            "text": "Set volume\n     music . setVolume ( volume );   // volume: 0 to 1  // music.volume = volume;   Get volume\n     var   volume   =   music . volume ;", 
+            "title": "Volume"
+        }, 
+        {
+            "location": "/webaudio/index.html#detune", 
+            "text": "Set detune\n     music . setDetune ( detune );   // detune: -1200 to 1200  // music.detune = detune;   Get detune\n     var   detune   =   music . detune ;", 
+            "title": "Detune"
+        }, 
+        {
+            "location": "/webaudio/index.html#play-rate", 
+            "text": "Set play-rate\n     music . setRate ( rate );   // rate: 1.0(normal speed), 0.5(half speed), 2.0(double speed)  // music.rate = rate;   Get play-rate\n     var   rate   =   music . rate ;", 
+            "title": "Play-rate"
+        }, 
+        {
+            "location": "/webaudio/index.html#seek-to", 
+            "text": "Seek to\n     music . setSeek ( time );   // seek: playback time  // music.seek = seek;   Get current playback time\n     var   time   =   music . seek ;    // return 0 when playback ends", 
+            "title": "Seek to"
+        }, 
+        {
+            "location": "/webaudio/index.html#loop", 
+            "text": "Set loop\n     music . setLoop ( loop );   // loop: true/false  // music.loop = loop;   Get loop\n     var   loop   =   music . loop ;", 
+            "title": "Loop"
+        }, 
+        {
+            "location": "/webaudio/index.html#other-properties", 
+            "text": "Duration : duration of this sound\n     var   duratuin   =   music . duration ;   Is playing\n     var   isPlaying   =   music . isPlaying ;   Is paused\n     var   isPaused   =   music . isPaused ;", 
+            "title": "Other properties"
+        }, 
+        {
+            "location": "/webaudio/index.html#events", 
+            "text": "Start playing\n     music . once ( play ,   function ( music ){});   Playback end\n     music . once ( ended ,   function ( music ){});   Looping\n     music . once ( looped ,   function ( music ){});   Pause\n     music . once ( pause ,   function ( music ){});   Resume\n     music . once ( resume ,   function ( music ){});   Stop\n     music . once ( stop ,   function ( music ){});   Set mute\n     music . once ( mute ,   function ( music ,   mute ){});   Set volume\n     music . once ( volume ,   function ( music ,   volume ){});   Set detune\n     music . once ( detune ,   function ( music ,   detune ){});   Set play-rate\n     music . once ( rate ,   function ( music ,   rate ){});   Seek to\n     music . once ( seek ,   function ( music ,   time ){});   set loop\n     music . once ( loop ,   function ( music ,   loop ){});", 
+            "title": "Events"
+        }, 
+        {
+            "location": "/webaudio/index.html#play-marked-sound", 
+            "text": "Sound instance will be destroyed when playback ends.  scene . sound . play ( key ,   marker );", 
+            "title": "Play marked sound"
+        }, 
+        {
+            "location": "/webaudio/index.html#marker", 
+            "text": "{ \n     name :   , \n     start :   0 , \n     duration :   music . duration , \n     config :   { \n         mute :   false , \n         volume :   1 , \n         rate :   1 , \n         detune :   0 , \n         seek :   0 , \n         loop :   false , \n         delay :   0 \n     }  }", 
+            "title": "Marker"
+        }, 
+        {
+            "location": "/webaudio/index.html#markers-in-sound-instance", 
+            "text": "", 
+            "title": "Markers in sound instance"
+        }, 
+        {
+            "location": "/webaudio/index.html#add-marker", 
+            "text": "music . addMarker ( marker );   Marker", 
+            "title": "Add marker"
+        }, 
+        {
+            "location": "/webaudio/index.html#play-marked-sound_1", 
+            "text": "music . play ( markerName );   music . play ( markerName ,   config );   config", 
+            "title": "Play marked sound"
         }, 
         {
             "location": "/webaudio/index.html#load-audio-sprite", 
             "text": "scene . load . audioSprite ( key ,   urls ,   json ,   config );   See  loader", 
             "title": "Load audio sprite"
+        }, 
+        {
+            "location": "/webaudio/index.html#methods-in-sound-manager", 
+            "text": "", 
+            "title": "Methods in sound manager"
+        }, 
+        {
+            "location": "/webaudio/index.html#mute_1", 
+            "text": "Set mute\n     scene . sound . setMute ( mute );   // mute: true/false  // scene.sound.mute = mute;   Get mute\n     var   mute   =   scene . sound . mute ;", 
+            "title": "Mute"
+        }, 
+        {
+            "location": "/webaudio/index.html#volume_1", 
+            "text": "Set volume\n     scene . sound . setVolume ( volume );   // volume: 0 to 1  // scene.sound.volume = volume;   Get volume\n     var   volume   =   scene . sound . volume ;", 
+            "title": "Volume"
+        }, 
+        {
+            "location": "/webaudio/index.html#detune_1", 
+            "text": "Set detune\n     scene . sound . setDetune ( detune );   // detune: -1200 to 1200  // scene.sound.detune = detune;   Get detune\n     var   detune   =   scene . sound . detune ;", 
+            "title": "Detune"
+        }, 
+        {
+            "location": "/webaudio/index.html#play-rate_1", 
+            "text": "Set play-rate\n     scene . sound . setRate ( rate );   // rate: 1.0(normal speed), 0.5(half speed), 2.0(double speed)  // scene.sound.rate = rate;   Get play-rate\n     var   rate   =   scene . sound . rate ;", 
+            "title": "Play-rate"
         }, 
         {
             "location": "/datamanager/index.html", 
