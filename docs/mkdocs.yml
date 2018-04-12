@@ -42,7 +42,7 @@ pages:
     - Arcade:
         - Physics: arcade.md
 - Audio:
-    - Web audio: webaudio.md
+    - Audio: audio.md
 - Data:
     - Data manager: datamanager.md
     - Array: array.md

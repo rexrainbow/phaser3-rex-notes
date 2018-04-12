@@ -8,7 +8,35 @@ Play sounds, built-in object of phaser.
 
 ### Configuration
 
+#### Web audio
+
 Web audio is the default audio context.
+
+#### Html5 audio
+
+```javascript
+var config = {
+    // ....
+    audio: {
+        disableWebAudio: true
+    }
+    // ....
+};
+var game = new Phaser.Game(config);
+```
+
+#### No audio
+
+```javascript
+var config = {
+    // ....
+    audio: {
+        noAudio: true
+    }
+    // ....
+};
+var game = new Phaser.Game(config);
+```
 
 ### Load audio file
 
@@ -76,7 +104,7 @@ var music = this.sound.add(key, config);
     music.resume();
     ```
 
-#### Other methods
+#### Methods
 
 ##### Mute
 
@@ -150,7 +178,7 @@ var music = this.sound.add(key, config);
     var loop = music.loop;
     ```
 
-#### Other properties
+#### Properties
 
 - Duration : duration of this sound
     ```javascript
@@ -265,17 +293,71 @@ music.play(markerName, config);
 
 [config](webaudio.md#configuration_1)
 
-### Load audio sprite
+### Audio sprite
+
+#### Load audio sprite
 
 ```javascript
-scene.load.audioSprite(key, urls, json, config);
+scene.load.audioSprite(key, urls, markersConfig, config);
 ```
 
 See [loader](loader.md#audio-sprite)
 
-### Methods in sound manager
+Format of markersConfig
+```javascript
+{
+    resources: urls, // an array of audio files
+    spritemap: {
+        markerName0: {
+            start: 0,
+            end: 0
+        },
+        markerName1: {
+            start: 0,
+            end: 0
+        }
+        // ...
+    }
+}
+```
 
-#### Mute
+#### Play sound
+
+Create a sound instance then play the marked section, this sound instance will be destroyed when playback ends.
+
+```javascript
+scene.sound.playAudioSprite(key, markerName, config);
+```
+
+[config](webaudio.md#configuration_1)
+
+#### Sound instance
+
+Create a sound instance with markers.
+
+```javascript
+var music = scene.sound.addAudioSprite(key, config);
+```
+
+[config](webaudio.md#configuration_1)
+
+#### Play sound instance
+
+```javascript
+music.play(markerName);
+```
+
+```javascript
+music.play(markerName, config);
+```
+
+[config](webaudio.md#configuration_1)
+
+### Sound manager
+
+#### Methods
+
+##### Mute
 
 - Set mute
     ```javascript
@@ -287,7 +369,7 @@ See [loader](loader.md#audio-sprite)
     var mute = scene.sound.mute;
     ```
 
-#### Volume
+##### Volume
 
 - Set volume
     ```javascript
@@ -299,7 +381,7 @@ See [loader](loader.md#audio-sprite)
     var volume = scene.sound.volume;
     ```
 
-#### Detune
+##### Detune
 
 - Set detune
     ```javascript
@@ -311,7 +393,7 @@ See [loader](loader.md#audio-sprite)
     var detune = scene.sound.detune;
     ```
 
-#### Play-rate
+##### Play-rate
 
 - Set play-rate
     ```javascript
