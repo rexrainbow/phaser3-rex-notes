@@ -3,7 +3,7 @@
 import Phaser from 'phaser';
 const GameObject = Phaser.GameObjects.GameObject;
 
-var CanvasRenderer = function (renderer, src, interpolationPercentage, camera) {
+var CanvasRenderer = function (renderer, src, interpolationPercentage, camera, parentMatrix) {
     if (GameObject.RENDER_MASK !== src.renderFlags || (src.cameraFilter > 0 && (src.cameraFilter & camera._id))) {
         return;
     }
@@ -32,6 +32,12 @@ var CanvasRenderer = function (renderer, src, interpolationPercentage, camera) {
     var canvas = src.canvas;
 
     ctx.save();
+
+    if (parentMatrix !== undefined) {
+        var matrix = parentMatrix.matrix;
+        ctx.transform(matrix[0], matrix[1], matrix[2], matrix[3], matrix[4], matrix[5]);
+    }
+
 
     var tx = src.x - camera.scrollX * src.scrollFactorX;
     var ty = src.y - camera.scrollY * src.scrollFactorY;

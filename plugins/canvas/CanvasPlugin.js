@@ -16,6 +16,7 @@ var Canvas = new Phaser.Class({
     Mixins: [
         Components.Alpha,
         Components.BlendMode,
+        Components.ComputedSize,
         Components.Depth,
         Components.Flip,
         Components.GetBounds,
@@ -23,7 +24,6 @@ var Canvas = new Phaser.Class({
         Components.Pipeline,
         Components.ScaleMode,
         Components.ScrollFactor,
-        Components.Size,
         Components.Tint,
         Components.Transform,
         Components.Visible,

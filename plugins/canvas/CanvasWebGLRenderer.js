@@ -3,7 +3,7 @@
 import Phaser from 'phaser';
 const GameObject = Phaser.GameObjects.GameObject;
 
-var WebGLRenderer = function (renderer, src, interpolationPercentage, camera) {
+var WebGLRenderer = function (renderer, src, interpolationPercentage, camera, parentMatrix) {
     if (GameObject.RENDER_MASK !== src.renderFlags || (src.cameraFilter > 0 && (src.cameraFilter & camera._id))) {
         return;
     }
@@ -13,7 +13,7 @@ var WebGLRenderer = function (renderer, src, interpolationPercentage, camera) {
         src.dirty = false;
     }
 
-    this.pipeline.batchText(this, camera);
+    this.pipeline.batchText(this, camera, parentMatrix);
 };
 
 export default WebGLRenderer;
