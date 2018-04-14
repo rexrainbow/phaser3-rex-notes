@@ -6,12 +6,12 @@ import GetSceneObject from './../utils/system/GetSceneObject.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 
-class FadeOutPlugin {
-    constructor(gameobject, config) {
-        this.gameobject = gameobject;
-        this.scene = GetSceneObject(gameobject);
+class FadePlugin {
+    constructor(scene, sound, config) {
+        this.sound = sound;
+        this.scene = scene;
 
-        this.alpha = {};
+        this.volume = {};
         this.tween = undefined;
         this.resetFromJSON(config);
         this.boot();
@@ -29,10 +29,10 @@ class FadeOutPlugin {
      */
     resetFromJSON(o) {
         this.setMode(GetValue(o, 'mode', 0));
-        this.setAlphaRange(
-            GetAdvancedValue(o, 'alpha.start', this.gameobject.alpha),
-            GetAdvancedValue(o, 'alpha.end', 0)
-        );
+        this.setVolumeRange(
+            GetAdvancedValue(o, 'volume.start', this.sound.volume),
+            GetAdvancedValue(o, 'volume.end', 0)
+        );        
         this.setDelay(GetAdvancedValue(o, 'delay', 0));
         this.setFadeOutTime(GetAdvancedValue(o, 'duration', 1000));
         return this;
@@ -45,21 +45,22 @@ class FadeOutPlugin {
     toJSON() {
         return {
             mode: this.mode,
-            alpha: this.alpha,
+            volume: this.volume,
             delay: this.delay,
             duration: this.duration
         };
     }
 
     boot() {
-        if (this.gameobject.on) { // oops, bob object does not have event emitter
-            this.gameobject.on('destroy', this.destroy, this);
+        this.scene.events.on('destroy', this.destroy, this);
+        if (this.sound.on) {
+            this.sound.on('destroy', this.destroy, this);
         }
     }
 
     shutdown() {
         this.stop();
-        this.gameobject = undefined;
+        this.sound = undefined;
         this.scene = undefined;
     }
 
@@ -74,9 +75,9 @@ class FadeOutPlugin {
         this.mode = m;
         return this;        
     }
-    setAlphaRange(start, end) {
-        this.alpha.start = start;
-        this.alpha.end = end;
+    setVolumeRange(start, end) {
+        this.volume.start = start;
+        this.volume.end = end;
         return this;        
     }
     setDelay(time) {
@@ -93,27 +94,26 @@ class FadeOutPlugin {
             return;
         }
 
-        var alpha = this.alpha;
+        var volume = this.volume;
         this.tween = this.scene.tweens.add({
-            targets: this.gameobject,
-            alpha: {
+            targets: this.sound,
+            volume: {
                 getStart: function () {
-                    return alpha.start;
+                    return volume.start;
                 },
                 getEnd: function () {
-                    return alpha.end;
+                    return volume.end;
                 }
             },
 
             delay: this.delay,
             duration: this.duration,
             ease: 'Power0',
-            yoyo: (this.mode == 2),
-            repeat: ((this.mode == 2) ? -1 : 0),
             onComplete: this.complete,
             onCompleteScope: this
         });
-        return this;        
+
+        return this;
     }
 
     stop() {
@@ -123,21 +123,19 @@ class FadeOutPlugin {
 
         this.tween.stop();
         this.tween = undefined;
-        return this;        
+        return this;
     }
 
     complete() {
         if (this.mode === 1) {
-            this.gameobject.destroy();
+            this.sound.destroy();
         }
     }
 
 }
 
 const MODE = {
-    stop: 0,
-    destroy: 1,
-    yoyo: 2
+    destroy: 1
 }
 
-export default FadeOutPlugin;
+export default FadePlugin;
