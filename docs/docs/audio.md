@@ -90,7 +90,7 @@ var music = this.sound.add(key, config);
     ```javascript
     music.play(config);
     ```
-    - [config](webaudio.md#configuration_1)
+    - [config](audio.md#configuration_1)
 - Stop
     ```javascript
     music.stop();
@@ -279,7 +279,7 @@ scene.sound.play(key, marker);
 music.addMarker(marker);
 ```
 
-[Marker](webaudio.md#marker)
+[Marker](audio.md#marker)
 
 #### Play marked sound
 
@@ -291,7 +291,7 @@ music.play(markerName);
 music.play(markerName, config);
 ```
 
-[config](webaudio.md#configuration_1)
+[config](audio.md#configuration_1)
 
 ### Audio sprite
 
@@ -329,7 +329,7 @@ Create a sound instance then play the marked section, this sound instance will b
 scene.sound.playAudioSprite(key, markerName, config);
 ```
 
-[config](webaudio.md#configuration_1)
+[config](audio.md#configuration_1)
 
 #### Sound instance
 
@@ -339,7 +339,7 @@ Create a sound instance with markers.
 var music = scene.sound.addAudioSprite(key, config);
 ```
 
-[config](webaudio.md#configuration_1)
+[config](audio.md#configuration_1)
 
 #### Play sound instance
 
@@ -351,7 +351,7 @@ music.play(markerName);
 music.play(markerName, config);
 ```
 
-[config](webaudio.md#configuration_1)
+[config](audio.md#configuration_1)
 
 ### Sound manager
 

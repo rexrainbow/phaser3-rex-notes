@@ -98,6 +98,11 @@ Preserve word in a scene.
     scene.events.on('start', function(){});
     ```
 
+- destroy
+    ```javascript
+    scene.events.on('destroy', function(){});
+    ```    
+
 - preupdate
     ```javascript
     scene.events.on('preupdate', function(time, delta){});
@@ -111,6 +116,11 @@ Preserve word in a scene.
 - postupdate
     ```javascript
     scene.events.on('postupdate', function(time, delta){});
+    ```
+
+- render
+    ```javascript
+    scene.events.on('render', function(){});
     ```
 
 - pause
@@ -132,3 +142,18 @@ Preserve word in a scene.
     ```javascript
     scene.events.on('wake', function(){});
     ```
+
+- resize
+    ```javascript
+    scene.events.on('resize', function(){});
+    ```
+
+- boot
+    ```javascript
+    scene.events.on('boot', function(){});
+    ```
+
+- shutdown
+    ```javascript
+    scene.events.on('shutdown', function(){});
+    ```    
