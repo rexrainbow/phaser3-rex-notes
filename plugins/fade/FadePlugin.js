@@ -107,7 +107,7 @@ class FadeOutPlugin {
 
             delay: this.delay,
             duration: this.duration,
-            ease: 'Power0',
+            ease: 'Linear',
             yoyo: (this.mode == 2),
             repeat: ((this.mode == 2) ? -1 : 0),
             onComplete: this.complete,

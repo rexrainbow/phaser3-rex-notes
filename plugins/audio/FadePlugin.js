@@ -108,7 +108,7 @@ class FadePlugin {
 
             delay: this.delay,
             duration: this.duration,
-            ease: 'Power0',
+            ease: 'Linear',
             onComplete: this.complete,
             onCompleteScope: this
         });

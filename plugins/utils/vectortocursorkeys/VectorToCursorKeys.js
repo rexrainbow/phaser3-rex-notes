@@ -54,6 +54,7 @@ class VectorToCursorKeys {
         } else {
             this.cleanVector();
         }
+        return this;        
     }
 
     /**

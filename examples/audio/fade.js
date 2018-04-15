@@ -26,13 +26,18 @@ class Demo extends Phaser.Scene {
 
         this.txt = this.add.text(0, 0, '');
 
-        
-        this.music = soundFadeIn(scene, 'fate', 2000)
-            .on('destroy', function () {
-                scene.music = undefined;
-            });
+        this.music = this.sound.add('fate');
+        soundFadeIn(scene, this.music, 3000);
 
-        this.time.delayedCall(3000, soundFadeOut, [scene, this.music, 2000]);
+        // or
+        //this.music = soundFadeIn(scene, 'fate', 2000);        
+
+        this.music.on('destroy', function () {
+            scene.music = undefined;
+        });
+
+        // fade-out volume then destroy sound instance
+        this.time.delayedCall(4000, soundFadeOut, [scene, this.music, 3000]);
     }
 
     update() {
