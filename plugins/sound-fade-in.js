@@ -22,12 +22,13 @@ var soundFadeIn = function (scene, sound, duration, endVolume, startVolume) {
     var fade;
     if (sound.hasOwnProperty('_fade')) {
         fade = sound._fade;
-        fade.stop().resetFromJSON(CONFIG).start();
+        fade.stop().resetFromJSON(CONFIG);
     } else {
         fade = new FadePlugin(scene, sound, CONFIG);
         sound._fade = fade;
     }
 
+    fade.start();
     if (!sound.isPlaying) {
         sound.setVolume(startVolume).play();
     }

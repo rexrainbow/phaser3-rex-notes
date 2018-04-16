@@ -15,11 +15,6 @@ class FadePlugin {
         this.tween = undefined;
         this.resetFromJSON(config);
         this.boot();
-
-        var activate = GetValue(config, 'activate', true);
-        if (activate) {
-            this.start();
-        }
     }
 
     /**
@@ -32,7 +27,7 @@ class FadePlugin {
         this.setVolumeRange(
             GetAdvancedValue(o, 'volume.start', this.sound.volume),
             GetAdvancedValue(o, 'volume.end', 0)
-        );        
+        );
         this.setDelay(GetAdvancedValue(o, 'delay', 0));
         this.setFadeOutTime(GetAdvancedValue(o, 'duration', 1000));
         return this;
@@ -73,20 +68,20 @@ class FadePlugin {
             m = MODE[m];
         }
         this.mode = m;
-        return this;        
+        return this;
     }
     setVolumeRange(start, end) {
         this.volume.start = start;
         this.volume.end = end;
-        return this;        
+        return this;
     }
     setDelay(time) {
         this.delay = time;
-        return this;        
+        return this;
     }
     setFadeOutTime(time) {
         this.duration = time;
-        return this;        
+        return this;
     }
 
     start() {

@@ -15,11 +15,6 @@ class FadeOutPlugin {
         this.tween = undefined;
         this.resetFromJSON(config);
         this.boot();
-
-        var activate = GetValue(config, 'activate', true);
-        if (activate) {
-            this.start();
-        }
     }
 
     /**

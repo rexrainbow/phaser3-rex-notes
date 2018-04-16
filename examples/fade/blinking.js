@@ -18,7 +18,7 @@ class Demo extends Phaser.Scene {
     create() {
         for (var i = 0; i < 500; i++) {
             var img = this.add.image(Between(5, 795), Between(5, 595), 'dot').setAlpha(0);
-            img.fade = new FadePlugin(img, {
+            var fade = new FadePlugin(img, {
                 delay: Between(0, 100),
                 duration: Between(500, 1000),
                 alpha: {
@@ -27,6 +27,7 @@ class Demo extends Phaser.Scene {
                 },
                 mode: 'yoyo'
             });
+            fade.start();
         }
     }
 }
