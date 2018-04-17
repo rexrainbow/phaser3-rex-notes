@@ -8,6 +8,7 @@ pages:
     - Scene manager: scenemanager.md
     - Scene: scene.md
 - Input:
+    - Input: input.md
     - Touch events: touchevents.md
     - Keyboard events: keyboardevents.md
     - Drag: dragplugin.md

@@ -123,32 +123,57 @@ camera.setRotation(rad);
 
 ```javascript
 camera.fadeIn(duration);   // duration in ms
-// camera.fadeIn(duration, callback);  // callback: invoked when completed
-// camera.fadeIn(duration, callback, red, green, blue);
-// red/green/blue: the value to fade the red/green/blue channel from. A value between 0 and 1.
+// camera.fadeIn(duration, red, green, blue, callback, context);
+// red/green/blue: the value to fade the red/green/blue channel from. A value between 0 and 255.
 ```
 
 ```javascript
 camera.fadeOut(duration);   // duration in ms
-// camera.fadeOut(duration, callback);  // callback: invoked when completed
-// camera.fadeOut(duration, callback, red, green, blue);
-// red/green/blue: the value to fade the red/green/blue channel from. A value between 0 and 1.
+// camera.fadeOut(duration, red, green, blue, callback, context);
+```
+
+##### Events
+
+```javascript
+camera.on('camerafadeincomplete', camera, fade);
+```
+
+```javascript
+camera.on('camerafadeoutcomplete', camera, fade);
 ```
 
 #### Flash
 
 ```javascript
 camera.flash(duration);   // duration in ms
-// camera.flash(duration, red, green, blue, force, callback);
+// camera.flash(duration, red, green, blue, force, callback, context);
+```
+
+##### Events
+
+```javascript
+camera.on('cameraflashstart', camera, flash, duration, red, green, blue);
+```
+
+```javascript
+camera.on('cameraflashcomplete', camera, flash);
 ```
 
 #### Shake
 
 ```javascript
 camera.shake(duration);   // duration in ms
-// camera.shake(duration, intensity);  // intensity: the intensity of the shake.
-// camera.shake(duration, intensity, force);  // force: force the shake effect to start immediately, even if already running.
-// camera.shake(duration, intensity, force, callback);  // callback: invoked when completed
+// camera.shake(duration, intensity, force, callback, context);  // callback: invoked when completed
+```
+
+##### Events
+
+```javascript
+camera.on('camerashakestart', camera, shake, duration, intensity);
+```
+
+```javascript
+camera.on('camerashakecomplete', camera, shake);
 ```
 
 ### Set background color

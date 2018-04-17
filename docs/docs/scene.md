@@ -101,7 +101,7 @@ Preserve word in a scene.
 - destroy
     ```javascript
     scene.events.on('destroy', function(){});
-    ```    
+    ```
 
 - preupdate
     ```javascript
@@ -156,4 +156,4 @@ Preserve word in a scene.
 - shutdown
     ```javascript
     scene.events.on('shutdown', function(){});
-    ```    
+    ```

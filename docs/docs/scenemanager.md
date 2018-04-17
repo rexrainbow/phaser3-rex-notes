@@ -43,6 +43,12 @@ Shutdown this Scene and run the given one.
 scene.scene.start(key, data);
 ```
 
+Restarts this Scene.
+
+```javascript
+scene.scene.restart(data);
+```
+
 ## Pause/Resume scene
 
 Pause : stops the update step but still renders.
@@ -153,3 +159,45 @@ scene.scene.bringToTop(keyA);
 scene.scene.sendToBack(keyA);
 // scene.scene.sendToBack();
 ```
+
+## Transition
+
+```javascript
+scene.scene.transition({
+    target: nextSceneClass,   // the Scene key to transition to
+    // data: null,            // an object containing any data you wish to be passed to the target scenes init / create methods.
+    // moveAbove: false,      // move the target Scene to be above this current scene before the transition starts
+    // moveBelow: false,      // move the target Scene to be below this current scene before the transition starts
+
+    duration: 1000,           // the duration, in ms
+
+    // sleep: false,          // set true to sleep this scene, set false to stop this scene
+    // allowInput: false,     // set true to enable input system of current scene and target scene
+
+    // onUpdate: null,
+    // onUpdateScope: scene
+})
+```
+
+### Events
+
+- boot
+    ```javascript
+    scene.events.on('transitioninit', function(fromScene, duration)){});
+    ```
+- start
+    ```javascript
+    scene.events.on('transitionstart', function(fromScene, duration){});
+    ```
+- transition-out
+    ```javascript
+    scene.events.on('transitionout', function(targetScene){});
+    ```
+- complete
+    ```javascript
+    scene.events.on('transitioncomplete', function(scene){});
+    ```
+- wake : wake-up target scene if it was previously asleep
+    ```javascript
+    scene.events.on('transitionwake', function(fromScene, duration){});
+    ```
