@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/index.html", 
-            "text": "Phaser\n\n\nPhaser\n is a fun, free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering.\n\n\nList of my plugins\n\n\n\n\nCanvas\n: Drawing on \ncanvas\n.\n\n\nClock\n: A clock to count elapsed time.\n\n\nCSV-to-hash-table\n: Hash table indexed by (col-key, row-key) from csv string.\n\n\nDrag\n: Drag game object.\n\n\nDrag-cursor\n: Simulate curosr keys according dragging events.\n\n\nFade-out-destroy\n: Fade out game object then destroy it.\n\n\nGashapon\n: Pick random item from box.\n\n\nLZ-string\n: Compress string using LZ-based compression algorithm.\n\n\nPage\n: Display text page by page on text object.\n\n\nRun-commands\n: Run commands in array.\n\n\nTCRP.Player\n: Run commands on time.\n\n\nTCRP.Recorder\n: Store commands with time.\n\n\nTyping\n: Typing text on text object.\n\n\nWebfont-loader\n: Load web font by google webfont loader in preload stage.\n\n\nXOR\n: Encrypt or decrypt string by XOR algorithm.", 
+            "text": "Phaser\n\n\nPhaser\n is a fun, free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering.\n\n\nList of my plugins\n\n\n\n\nCanvas\n: Drawing on \ncanvas\n.\n\n\nClock\n: A clock to count elapsed time.\n\n\nCSV-to-hash-table\n: Hash table indexed by (col-key, row-key) from csv string.\n\n\nDrag\n: Drag game object.\n\n\nDrag-cursor\n: Simulate curosr keys according dragging events.\n\n\nFade-out-destroy\n: Fade out game object then destroy it.\n\n\nFade-volume\n: Fade-in/fade-out volume of sound.\n\n\nGashapon\n: Pick random item from box.\n\n\nLZ-string\n: Compress string using LZ-based compression algorithm.\n\n\nPage\n: Display text page by page on text object.\n\n\nRun-commands\n: Run commands in array.\n\n\nTCRP.Player\n: Run commands on time.\n\n\nTCRP.Recorder\n: Store commands with time.\n\n\nTyping\n: Typing text on text object.\n\n\nWebfont-loader\n: Load web font by google webfont loader in preload stage.\n\n\nXOR\n: Encrypt or decrypt string by XOR algorithm.", 
             "title": "Home"
         }, 
         {
@@ -12,7 +12,7 @@
         }, 
         {
             "location": "/index.html#list-of-my-plugins", 
-            "text": "Canvas : Drawing on  canvas .  Clock : A clock to count elapsed time.  CSV-to-hash-table : Hash table indexed by (col-key, row-key) from csv string.  Drag : Drag game object.  Drag-cursor : Simulate curosr keys according dragging events.  Fade-out-destroy : Fade out game object then destroy it.  Gashapon : Pick random item from box.  LZ-string : Compress string using LZ-based compression algorithm.  Page : Display text page by page on text object.  Run-commands : Run commands in array.  TCRP.Player : Run commands on time.  TCRP.Recorder : Store commands with time.  Typing : Typing text on text object.  Webfont-loader : Load web font by google webfont loader in preload stage.  XOR : Encrypt or decrypt string by XOR algorithm.", 
+            "text": "Canvas : Drawing on  canvas .  Clock : A clock to count elapsed time.  CSV-to-hash-table : Hash table indexed by (col-key, row-key) from csv string.  Drag : Drag game object.  Drag-cursor : Simulate curosr keys according dragging events.  Fade-out-destroy : Fade out game object then destroy it.  Fade-volume : Fade-in/fade-out volume of sound.  Gashapon : Pick random item from box.  LZ-string : Compress string using LZ-based compression algorithm.  Page : Display text page by page on text object.  Run-commands : Run commands in array.  TCRP.Player : Run commands on time.  TCRP.Recorder : Store commands with time.  Typing : Typing text on text object.  Webfont-loader : Load web font by google webfont loader in preload stage.  XOR : Encrypt or decrypt string by XOR algorithm.", 
             "title": "List of my plugins"
         }, 
         {
@@ -1791,22 +1791,22 @@
             "title": "Play-rate"
         }, 
         {
-            "location": "/volumefade/index.html", 
+            "location": "/fadevolume/index.html", 
             "text": "Introduction\n\n\nFade-in/fade-out volume of sound.\n\n\n\n\nAuthor: Rex\n\n\nMethod only\n\n\n\n\nSource code\n\n\n\n\nFade-in\n\n\nFade-out\n\n\n\n\nUsage\n\n\n\n\nPlay and fade in voluem\n    \nvar\n \nsound\n \n=\n \nsoundFadeIn\n(\nscene\n,\n \nsound\n,\n \nduration\n);\n  \n// sound: sound instance, or a key of audio cache\n\n\n// var sound = soundFadeIn(scene, sound, duration, endVolume, startVolume);\n\n\n\n\nFade out volume then destroy it\n    \nsoundFadeOut\n(\nscene\n,\n \nsound\n,\n \nduration\n);\n  \n// sound: sound instance\n\n\n\n\nFade out volume then stop it\n    \nsoundFadeOut\n(\nscene\n,\n \nsound\n,\n \nduration\n,\n \nfalse\n);\n  \n// sound: sound instance", 
             "title": "Volume fading"
         }, 
         {
-            "location": "/volumefade/index.html#introduction", 
+            "location": "/fadevolume/index.html#introduction", 
             "text": "Fade-in/fade-out volume of sound.   Author: Rex  Method only", 
             "title": "Introduction"
         }, 
         {
-            "location": "/volumefade/index.html#source-code", 
+            "location": "/fadevolume/index.html#source-code", 
             "text": "Fade-in  Fade-out", 
             "title": "Source code"
         }, 
         {
-            "location": "/volumefade/index.html#usage", 
+            "location": "/fadevolume/index.html#usage", 
             "text": "Play and fade in voluem\n     var   sound   =   soundFadeIn ( scene ,   sound ,   duration );    // sound: sound instance, or a key of audio cache  // var sound = soundFadeIn(scene, sound, duration, endVolume, startVolume);   Fade out volume then destroy it\n     soundFadeOut ( scene ,   sound ,   duration );    // sound: sound instance   Fade out volume then stop it\n     soundFadeOut ( scene ,   sound ,   duration ,   false );    // sound: sound instance", 
             "title": "Usage"
         }, 

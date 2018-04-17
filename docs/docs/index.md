@@ -10,6 +10,7 @@
 1. [Drag](dragplugin.md): Drag game object.
 1. [Drag-cursor](dragcursorplugin.md): Simulate curosr keys according dragging events.
 1. [Fade-out-destroy](fadeoutdestroy.md): Fade out game object then destroy it.
+1. [Fade-volume](fadevolume.md): Fade-in/fade-out volume of sound.
 1. [Gashapon](gashaponplugin.md): Pick random item from box.
 1. [LZ-string](lzstringplugin.md): Compress string using LZ-based compression algorithm.
 1. [Page](textpageplugin.md): Display text page by page on text object.
