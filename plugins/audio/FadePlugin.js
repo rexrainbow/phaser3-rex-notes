@@ -122,15 +122,21 @@ class FadePlugin {
     }
 
     complete() {
-        if (this.mode === 1) {
-            this.sound.destroy();
+        switch (this.mode) {
+            case 1:
+                this.sound.stop();
+                break;
+            case 2:
+                this.sound.destroy();
+                break;
         }
     }
 
 }
 
 const MODE = {
-    destroy: 1
+    stop: 1,
+    destroy: 2
 }
 
 export default FadePlugin;

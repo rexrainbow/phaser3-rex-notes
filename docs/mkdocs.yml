@@ -44,6 +44,7 @@ pages:
         - Physics: arcade.md
 - Audio:
     - Audio: audio.md
+    - Volume fading: volumefade.md
 - Data:
     - Data manager: datamanager.md
     - Array: array.md

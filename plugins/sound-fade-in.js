@@ -10,7 +10,8 @@ var soundFadeIn = function (scene, sound, duration, endVolume, startVolume) {
     if (startVolume === undefined) {
         startVolume = 0;
     }
-    CONFIG.volume.start = 0;
+    CONFIG.mode = 0;
+    CONFIG.volume.start = startVolume;
     CONFIG.volume.end = endVolume;
     CONFIG.duration = duration;
 

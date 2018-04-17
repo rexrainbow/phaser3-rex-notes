@@ -7,7 +7,7 @@ var soundFadeOut = function (scene, sound, duration, destroy) {
     if (destroy === undefined) {
         destroy = true;
     }
-    CONFIG.mode = (destroy) ? 1 : 0;    
+    CONFIG.mode = (destroy) ? 2 : 1;     // 1: stop, 2: destroy
     CONFIG.volume.start = sound.volume;
     CONFIG.volume.end = 0;    
     CONFIG.duration = duration;
