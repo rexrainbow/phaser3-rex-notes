@@ -14,8 +14,8 @@ Fade-in/fade-out volume of sound.
 
 - Play and fade in voluem
     ```javascript
-    soundFadeIn(scene, sound, duration);  // sound: sound instance, or a key of audio cache
-    // soundFadeIn(scene, sound, duration, endVolume, startVolume);
+    var sound = soundFadeIn(scene, sound, duration);  // sound: sound instance, or a key of audio cache
+    // var sound = soundFadeIn(scene, sound, duration, endVolume, startVolume);
     ```
 - Fade out volume then destroy it
     ```javascript

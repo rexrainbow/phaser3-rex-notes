@@ -1792,7 +1792,7 @@
         }, 
         {
             "location": "/volumefade/index.html", 
-            "text": "Introduction\n\n\nFade-in/fade-out volume of sound.\n\n\n\n\nAuthor: Rex\n\n\nMethod only\n\n\n\n\nSource code\n\n\n\n\nFade-in\n\n\nFade-out\n\n\n\n\nUsage\n\n\n\n\nPlay and fade in voluem\n    \nsoundFadeIn\n(\nscene\n,\n \nsound\n,\n \nduration\n);\n  \n// sound: sound instance, or a key of audio cache\n\n\n// soundFadeIn(scene, sound, duration, endVolume, startVolume);\n\n\n\n\nFade out volume then destroy it\n    \nsoundFadeOut\n(\nscene\n,\n \nsound\n,\n \nduration\n);\n  \n// sound: sound instance\n\n\n\n\nFade out volume then stop it\n    \nsoundFadeOut\n(\nscene\n,\n \nsound\n,\n \nduration\n,\n \nfalse\n);\n  \n// sound: sound instance", 
+            "text": "Introduction\n\n\nFade-in/fade-out volume of sound.\n\n\n\n\nAuthor: Rex\n\n\nMethod only\n\n\n\n\nSource code\n\n\n\n\nFade-in\n\n\nFade-out\n\n\n\n\nUsage\n\n\n\n\nPlay and fade in voluem\n    \nvar\n \nsound\n \n=\n \nsoundFadeIn\n(\nscene\n,\n \nsound\n,\n \nduration\n);\n  \n// sound: sound instance, or a key of audio cache\n\n\n// var sound = soundFadeIn(scene, sound, duration, endVolume, startVolume);\n\n\n\n\nFade out volume then destroy it\n    \nsoundFadeOut\n(\nscene\n,\n \nsound\n,\n \nduration\n);\n  \n// sound: sound instance\n\n\n\n\nFade out volume then stop it\n    \nsoundFadeOut\n(\nscene\n,\n \nsound\n,\n \nduration\n,\n \nfalse\n);\n  \n// sound: sound instance", 
             "title": "Volume fading"
         }, 
         {
@@ -1807,7 +1807,7 @@
         }, 
         {
             "location": "/volumefade/index.html#usage", 
-            "text": "Play and fade in voluem\n     soundFadeIn ( scene ,   sound ,   duration );    // sound: sound instance, or a key of audio cache  // soundFadeIn(scene, sound, duration, endVolume, startVolume);   Fade out volume then destroy it\n     soundFadeOut ( scene ,   sound ,   duration );    // sound: sound instance   Fade out volume then stop it\n     soundFadeOut ( scene ,   sound ,   duration ,   false );    // sound: sound instance", 
+            "text": "Play and fade in voluem\n     var   sound   =   soundFadeIn ( scene ,   sound ,   duration );    // sound: sound instance, or a key of audio cache  // var sound = soundFadeIn(scene, sound, duration, endVolume, startVolume);   Fade out volume then destroy it\n     soundFadeOut ( scene ,   sound ,   duration );    // sound: sound instance   Fade out volume then stop it\n     soundFadeOut ( scene ,   sound ,   duration ,   false );    // sound: sound instance", 
             "title": "Usage"
         }, 
         {
