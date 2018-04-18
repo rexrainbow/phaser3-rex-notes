@@ -7,22 +7,22 @@ module.exports = {
     entry: {
         'canvas.min': './plugins/canvas-plugin.js',
         'clock.min': './plugins/clock-plugin.js',
-        'csvtoarray.min': './plugins/csvtoarray.js',        
-        'csvtohashtable.min': './plugins/csvtohashtable-plugin.js', 
-        'drag.min': './plugins/drag-plugin.js', 
-        'dragcursor.min': './plugins/dragcursor-plugin.js', 
-        'fadeoutdestroy.min': './plugins/fade-out-destroy.js', 
-        'fade.min': './plugins/fade-plugin.js', 
-        'gashapon.min': './plugins/gashapon-plugin.js', 
-        'lzstring.min': './plugins/lzstring-plugin.js', 
-        'runcommands.min': './plugins/runcommands.js', 
-        'sequence.min': './plugins/sequence-plugin.js', 
-        'soundfadein.min': './plugins/sound-fade-in.js', 
-        'soundfadeout.min': './plugins/sound-fade-out.js', 
-        'tcrp.min': './plugins/tcrp-plugin.js', 
-        'textpage.min': './plugins/textpage-plugin.js', 
-        'texttyping.min': './plugins/texttyping-plugin.js', 
-        'webfontloader.min': './plugins/webfontloader-plugin.js', 
+        'csvtoarray.min': './plugins/csvtoarray.js',
+        'csvtohashtable.min': './plugins/csvtohashtable-plugin.js',
+        'drag.min': './plugins/drag-plugin.js',
+        'dragcursor.min': './plugins/dragcursor-plugin.js',
+        'fadeoutdestroy.min': './plugins/fade-out-destroy.js',
+        'fade.min': './plugins/fade-plugin.js',
+        'gashapon.min': './plugins/gashapon-plugin.js',
+        'lzstring.min': './plugins/lzstring-plugin.js',
+        'runcommands.min': './plugins/runcommands.js',
+        'sequence.min': './plugins/sequence-plugin.js',
+        'soundfadein.min': './plugins/sound-fade-in.js',
+        'soundfadeout.min': './plugins/sound-fade-out.js',
+        'tcrp.min': './plugins/tcrp-plugin.js',
+        'textpage.min': './plugins/textpage-plugin.js',
+        'texttyping.min': './plugins/texttyping-plugin.js',
+        'webfontloader.min': './plugins/webfontloader-plugin.js',
         'xor.min': './plugins/xor-plugin.js'
     },
     output: {
@@ -33,6 +33,11 @@ module.exports = {
         umdNamedDefine: true
     },
     plugins: [
+        new webpack.DefinePlugin({
+            __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV || 'true')),
+            WEBGL_RENDERER: true,
+            CANVAS_RENDERER: true
+        }),
         new CleanWebpackPlugin(['./plugins/dist']),
         new UglifyJSPlugin({
             include: /\.min\.js$/,
