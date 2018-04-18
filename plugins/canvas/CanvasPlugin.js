@@ -1,6 +1,5 @@
 // copy from Phaser.GameObjects.Text
 
-import Phaser from 'phaser';
 import Render from './CanvasRender.js';
 
 const CanvasPool = Phaser.Display.Canvas.Pool;

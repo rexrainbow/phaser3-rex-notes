@@ -1,6 +1,5 @@
 'use strict'
 
-import Phaser from 'phaser';
 import EE from 'eventemitter3';
 import runCommands from './../../plugins/runcommands.js';
 import ArrCopy from './../../plugins/utils/array/Copy.js';

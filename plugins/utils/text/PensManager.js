@@ -1,15 +1,14 @@
 'use strict'
 
-import Phaser from 'phaser';
-import Cache from './../object/Cache.js';
+import Pool from './../object/Pool.js';
 import PenKlass from './Pen.js';
 import CONST from './const.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 const NO_NEWLINE = CONST.NO_NEWLINE;
 
-var PensCache = new Cache();
-var LinesCache = new Cache();
+var PensPool = new Pool();
+var LinesPool = new Pool();
 class PensManager {
     constructor() {
         this.pens = []; // all pens
@@ -20,12 +19,12 @@ class PensManager {
         for (var i = 0, len = this.lines.length; i < len; i++)
             this.lines[i].length = 0;
 
-        PensCache.freeArr(this.pens);
-        LinesCache.freeArr(this.lines);
+        PensPool.freeArr(this.pens);
+        LinesPool.freeArr(this.lines);
     }
 
     addPen(config) { // txt, x, y, width, prop, newLineMode
-        var pen = PensCache.allocate();
+        var pen = PensPool.allocate();
         if (pen == null) {
             pen = new PenKlass();
         }
@@ -41,14 +40,14 @@ class PensManager {
         // maintan lines
         var line = this.lastLine;
         if (line == null) {
-            line = LinesCache.allocate() || [];
+            line = LinesPool.allocate() || [];
             this.lines.push(line);
         }
         line.push(pen);
 
         // new line, add an empty line
         if (pen.newLineMode !== NO_NEWLINE) {
-            line = LinesCache.allocate() || [];
+            line = LinesPool.allocate() || [];
             this.lines.push(line);
         }
     }

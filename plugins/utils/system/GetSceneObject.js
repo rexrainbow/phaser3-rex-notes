@@ -1,6 +1,5 @@
 'use strict'
 
-import Phaser from 'phaser';
 const SceneKlass = Phaser.Scene;
 
 var GetSceneObject = function (parent) {

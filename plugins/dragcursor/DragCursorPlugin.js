@@ -1,6 +1,5 @@
 'use strict'
 
-import Phaser from 'phaser';
 import GetSceneObject from './../utils/system/GetSceneObject.js';
 import VectorToCursorKeys from './../utils/vectortocursorkeys/VectorToCursorKeys.js';
 

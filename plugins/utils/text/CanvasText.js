@@ -1,6 +1,5 @@
 'use strict'
 
-import Phaser from 'phaser';
 import PensManagerKlass from './PensManager.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
@@ -51,14 +50,6 @@ class CanvasText {
 
         return pensManager.lastPen;
     }
-};
-
-var isValidColor = function (color) {
-    if (typeof (color) == 'string') {
-        return (color.toLowerCase() !== 'none');
-    }
-
-    return true;
 };
 
 export default CanvasText;

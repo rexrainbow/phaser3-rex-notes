@@ -1,6 +1,5 @@
 'use strict'
 
-import Phaser from 'phaser';
 import Clone from './../utils/object/Clone.js';
 import IsEmpty from './../utils/Object/IsEmpty.js';
 import Clean from './../utils/object/Clean.js';

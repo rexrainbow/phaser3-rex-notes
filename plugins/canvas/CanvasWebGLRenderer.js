@@ -1,6 +1,5 @@
 // copy from Phaser.GameObjects.Text
 
-import Phaser from 'phaser';
 const GameObject = Phaser.GameObjects.GameObject;
 
 var WebGLRenderer = function (renderer, src, interpolationPercentage, camera, parentMatrix) {

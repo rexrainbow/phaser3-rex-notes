@@ -1,7 +1,6 @@
 'use strict'
 
 import LZString from './../utils/lzstring/lz-string.min.js';
-import Phaser from 'phaser';
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 
 class LZStringPlugin {

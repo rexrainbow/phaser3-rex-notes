@@ -1,6 +1,5 @@
 'use strict'
 
-import Phaser from 'phaser';
 import ArrCopy from './../utils/array/Copy.js';
 import TypeConvert from './../utils/string/TypeConvert.js';
 

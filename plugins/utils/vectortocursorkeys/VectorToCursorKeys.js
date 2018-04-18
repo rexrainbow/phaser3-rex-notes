@@ -1,7 +1,5 @@
 'use strict'
 
-import Phaser from 'phaser';
-
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;

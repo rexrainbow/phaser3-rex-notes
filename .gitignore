@@ -2,3 +2,4 @@
 /dist/*
 /index.html
 /examples/test/*
+package-lock.json

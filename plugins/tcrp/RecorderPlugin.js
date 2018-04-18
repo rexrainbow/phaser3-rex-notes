@@ -1,6 +1,5 @@
 'use strict'
 
-import Phaser from 'phaser';
 import ClcokPlugin from './../clock-plugin.js';
 import Clone from './../../plugins/utils/object/Clone.js';
 

@@ -1,6 +1,5 @@
 'use strict'
 
-import Phaser from 'phaser';
 import CONST from './const.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;

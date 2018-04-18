@@ -1,6 +1,5 @@
 'use strict'
 
-import Phaser from 'phaser';
 import EE from 'eventemitter3';
 import ClcokPlugin from './../clock-plugin.js';
 import GetSceneObject from './../utils/system/GetSceneObject.js';

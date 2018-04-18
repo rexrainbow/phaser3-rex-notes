@@ -1,6 +1,6 @@
 'use strict'
 
-class Cache {
+class Pool {
     constructor() {
         this.items = [];
     }
@@ -21,4 +21,4 @@ class Cache {
     }
 }
 
-export default Cache;
+export default Pool;
