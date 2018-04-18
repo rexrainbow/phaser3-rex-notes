@@ -20,7 +20,7 @@ var canvas = scene.add.rexCanvas(x, y, width, height);
 Add canvas from JSON
 
 ```javascript
-var image = scene.make.rexCanvas({
+var canvas = scene.make.rexCanvas({
     x: 0,
     y: 0,
     width: 256,
