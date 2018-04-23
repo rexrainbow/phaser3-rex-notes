@@ -75,12 +75,14 @@ var Canvas = new Phaser.Class({
 
     needRedraw: function () {
         this.dirty = true;
+        return this;
     },
 
     clear: function () {
         var canvas = this.canvas;
         var ctx = canvas.getContext('2d');
         ctx.clearRect(0, 0, canvas.width, canvas.height);
+        this.dirty = true;
         return this;
     },
 
@@ -89,6 +91,7 @@ var Canvas = new Phaser.Class({
         var ctx = canvas.getContext('2d');
         ctx.fillStyle = color;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
+        this.dirty = true;
         return this;
     },
 
