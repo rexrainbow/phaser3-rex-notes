@@ -7,24 +7,27 @@ import CONST from './const.js';
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 const NO_NEWLINE = CONST.NO_NEWLINE;
 
-var PensPool = new Pool();
-var LinesPool = new Pool();
+var PensPool = new Pool();    // default pens pool
+var LinesPool = new Pool();   // default lines pool
 class PensManager {
-    constructor() {
+    constructor(config) {
         this.pens = []; // all pens
         this.lines = []; // pens in lines [ [],[],[],.. ]
+
+        this.PensPool = GetFastValue(config, 'pensPool', PensPool);
+        this.LinesPool = GetFastValue(config, 'linesPool', LinesPool);
     }
 
     freePens() {
         for (var i = 0, len = this.lines.length; i < len; i++)
             this.lines[i].length = 0;
 
-        PensPool.freeArr(this.pens);
-        LinesPool.freeArr(this.lines);
+        this.PensPool.freeArr(this.pens);
+        this.LinesPool.freeArr(this.lines);
     }
 
     addPen(config) { // txt, x, y, width, prop, newLineMode
-        var pen = PensPool.allocate();
+        var pen = this.PensPool.allocate();
         if (pen == null) {
             pen = new PenKlass();
         }
@@ -40,14 +43,14 @@ class PensManager {
         // maintan lines
         var line = this.lastLine;
         if (line == null) {
-            line = LinesPool.allocate() || [];
+            line = this.LinesPool.allocate() || [];
             this.lines.push(line);
         }
         line.push(pen);
 
         // new line, add an empty line
         if (pen.newLineMode !== NO_NEWLINE) {
-            line = LinesPool.allocate() || [];
+            line = this.LinesPool.allocate() || [];
             this.lines.push(line);
         }
     }
@@ -180,7 +183,7 @@ class PensManager {
             if (!isInRange) {
                 penTxt = penTxt.substring(start - penStartIdx, end - penStartIdx);
             }
-            
+
             if (scope) {
                 txt += callback.apply(scope, penTxt, currentProp, previousProp);
             } else {

@@ -6,7 +6,7 @@ const CanvasPool = Phaser.Display.Canvas.Pool;
 const Components = Phaser.GameObjects.Components;
 const GameObject = Phaser.GameObjects.GameObject;
 const BuildGameObject = Phaser.GameObjects.BuildGameObject;
-const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
+const GetValue = Phaser.Utils.Objects.GetValue;
 
 var Canvas = new Phaser.Class({
 
@@ -180,11 +180,11 @@ Phaser.GameObjects.GameObjectFactory.register('rexCanvas', function (x, y, width
 });
 
 Phaser.GameObjects.GameObjectCreator.register('rexCanvas', function (config) {
-    var width = GetAdvancedValue(config, 'width', 256);
-    var height = GetAdvancedValue(config, 'height', 256);
+    var width = GetValue(config, 'width', 256);
+    var height = GetValue(config, 'height', 256);
     var canvas = new Canvas(this.scene, 0, 0, width, height)
     BuildGameObject(this.scene, canvas, config);
-    var fillColor = GetAdvancedValue(config, 'fill', null);
+    var fillColor = GetValue(config, 'fill', null);
     canvas.fill(fillColor);
     return canvas;
 });
