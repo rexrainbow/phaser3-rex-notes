@@ -11,8 +11,8 @@ Base class of all game object in phaser.
 ```javascript
 var x = gameobject.x;
 var y = gameobject.y;
-gameobject.x = 100;
-gameobject.y = 100;
+gameobject.x = 0;
+gameobject.y = 0;
 ```
 
 ### Angle

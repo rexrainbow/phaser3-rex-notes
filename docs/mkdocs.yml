@@ -28,7 +28,8 @@ pages:
     - Canvas:
         - Graphics: graphics.md
         - Canvas: canvas.md
-    - Group:
+    - Container:
+        - Container: container.md        
         - Group: group.md
         - Group actions: groupactions.md
 - Time:

@@ -517,7 +517,7 @@
         }, 
         {
             "location": "/gameobject/index.html", 
-            "text": "Introduction\n\n\nBase class of all game object in phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nPosition\n\n\nvar\n \nx\n \n=\n \ngameobject\n.\nx\n;\n\n\nvar\n \ny\n \n=\n \ngameobject\n.\ny\n;\n\n\ngameobject\n.\nx\n \n=\n \n100\n;\n\n\ngameobject\n.\ny\n \n=\n \n100\n;\n\n\n\n\n\nAngle\n\n\nvar\n \nangle\n \n=\n \ngameobject\n.\nangle\n;\n\n\ngameobject\n.\nangle\n \n=\n \n90\n;\n\n\n\n// angle in radians\n\n\nvar\n \nrad\n \n=\n \ngameobject\n.\nrotation\n;\n\n\ngameobject\n.\nrotation\n \n=\n \nPhaser\n.\nMath\n.\nDegToRad\n(\n90\n);\n\n\n\n\n\nVisible\n\n\nvar\n \nvisible\n \n=\n \ngameobject\n.\nvisible\n;\n\n\ngameobject\n.\nvisible\n \n=\n \ntrue\n;\n\n\n\n\n\nAlpha\n\n\nvar\n \nalpha\n \n=\n \ngameobject\n.\nalpha\n;\n\n\ngameobject\n.\nalpha\n \n=\n \n0.5\n;\n\n\n\n\n\nFlipX, FlipY\n\n\nvar\n \nflipX\n \n=\n \ngameobject\n.\nflipX\n;\n\n\ngameobject\n.\nflipX\n \n=\n \nfalse\n;\n\n\n\nvar\n \nflipY\n \n=\n \ngameobject\n.\nflipY\n;\n\n\ngameobject\n.\nflipY\n \n=\n \nfalse\n;\n\n\n\n\n\nDepth (z-index)\n\n\nThe depth starts from zero (the default value) and increases from that point. A game object with a higher depth value will always render in front of one with a lower value.\n\n\nvar\n \nalpha\n \n=\n \ngameobject\n.\ndepth\n;\n\n\ngameobject\n.\ndepth\n \n=\n \n0\n;\n\n\n// gameobject.setDepth(value);\n\n\n\n\n\nScroll factor\n\n\ngameobject\n.\nsetScrollFactor\n(\nf\n);\n\n\n\n\n\nfactor: 0~1\n\n\n\n\n0= fixed to camera\n\n\n0.25= quarter the speed of the camera\n\n\n0.5= half the speed of the camera\n\n\n\n\nEdges\n\n\nvar\n \ntopLeft\n \n=\n \ngameobject\n.\ngetTopLeft\n();\n         \n// topLeft.x, topLeft.y\n\n\nvar\n \ntopRight\n \n=\n \ngameobject\n.\ngetTopRight\n();\n       \n// topRight.x, topRight.y\n\n\nvar\n \nbottomLeft\n \n=\n \ngameobject\n.\ngetBottomLeft\n();\n   \n// bottomLeft.x, bottomLeft.y\n\n\nvar\n \nbottomRight\n \n=\n \ngameobject\n.\ngetBottomRight\n();\n \n// bottomRight.x, bottomRight.y\n\n\n\n\n\nPrivate data\n\n\ngameobject\n.\nsetData\n(\nkey\n,\n \nvalue\n);\n\n\nvar\n \nvalue\n \n=\n \ngameobject\n.\ngetData\n(\nkey\n);\n\n\n\n\n\nSee \ndata manager", 
+            "text": "Introduction\n\n\nBase class of all game object in phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nPosition\n\n\nvar\n \nx\n \n=\n \ngameobject\n.\nx\n;\n\n\nvar\n \ny\n \n=\n \ngameobject\n.\ny\n;\n\n\ngameobject\n.\nx\n \n=\n \n0\n;\n\n\ngameobject\n.\ny\n \n=\n \n0\n;\n\n\n\n\n\nAngle\n\n\nvar\n \nangle\n \n=\n \ngameobject\n.\nangle\n;\n\n\ngameobject\n.\nangle\n \n=\n \n90\n;\n\n\n\n// angle in radians\n\n\nvar\n \nrad\n \n=\n \ngameobject\n.\nrotation\n;\n\n\ngameobject\n.\nrotation\n \n=\n \nPhaser\n.\nMath\n.\nDegToRad\n(\n90\n);\n\n\n\n\n\nVisible\n\n\nvar\n \nvisible\n \n=\n \ngameobject\n.\nvisible\n;\n\n\ngameobject\n.\nvisible\n \n=\n \ntrue\n;\n\n\n\n\n\nAlpha\n\n\nvar\n \nalpha\n \n=\n \ngameobject\n.\nalpha\n;\n\n\ngameobject\n.\nalpha\n \n=\n \n0.5\n;\n\n\n\n\n\nFlipX, FlipY\n\n\nvar\n \nflipX\n \n=\n \ngameobject\n.\nflipX\n;\n\n\ngameobject\n.\nflipX\n \n=\n \nfalse\n;\n\n\n\nvar\n \nflipY\n \n=\n \ngameobject\n.\nflipY\n;\n\n\ngameobject\n.\nflipY\n \n=\n \nfalse\n;\n\n\n\n\n\nDepth (z-index)\n\n\nThe depth starts from zero (the default value) and increases from that point. A game object with a higher depth value will always render in front of one with a lower value.\n\n\nvar\n \nalpha\n \n=\n \ngameobject\n.\ndepth\n;\n\n\ngameobject\n.\ndepth\n \n=\n \n0\n;\n\n\n// gameobject.setDepth(value);\n\n\n\n\n\nScroll factor\n\n\ngameobject\n.\nsetScrollFactor\n(\nf\n);\n\n\n\n\n\nfactor: 0~1\n\n\n\n\n0= fixed to camera\n\n\n0.25= quarter the speed of the camera\n\n\n0.5= half the speed of the camera\n\n\n\n\nEdges\n\n\nvar\n \ntopLeft\n \n=\n \ngameobject\n.\ngetTopLeft\n();\n         \n// topLeft.x, topLeft.y\n\n\nvar\n \ntopRight\n \n=\n \ngameobject\n.\ngetTopRight\n();\n       \n// topRight.x, topRight.y\n\n\nvar\n \nbottomLeft\n \n=\n \ngameobject\n.\ngetBottomLeft\n();\n   \n// bottomLeft.x, bottomLeft.y\n\n\nvar\n \nbottomRight\n \n=\n \ngameobject\n.\ngetBottomRight\n();\n \n// bottomRight.x, bottomRight.y\n\n\n\n\n\nPrivate data\n\n\ngameobject\n.\nsetData\n(\nkey\n,\n \nvalue\n);\n\n\nvar\n \nvalue\n \n=\n \ngameobject\n.\ngetData\n(\nkey\n);\n\n\n\n\n\nSee \ndata manager", 
             "title": "Game object"
         }, 
         {
@@ -532,7 +532,7 @@
         }, 
         {
             "location": "/gameobject/index.html#position", 
-            "text": "var   x   =   gameobject . x ;  var   y   =   gameobject . y ;  gameobject . x   =   100 ;  gameobject . y   =   100 ;", 
+            "text": "var   x   =   gameobject . x ;  var   y   =   gameobject . y ;  gameobject . x   =   0 ;  gameobject . y   =   0 ;", 
             "title": "Position"
         }, 
         {
@@ -979,6 +979,96 @@
             "location": "/canvas/index.html#compare-with-graphics-object", 
             "text": "Drawing method   This canvas object draws stuff on canvas in WEBGL or CANVAS render mode.    Graphics object draws stuff on webgl render pipeline n WEBGL render mode.     Size   This canvas object has size (width, height) and origin.    Graphics object does not have size and origin.", 
             "title": "Compare with Graphics object"
+        }, 
+        {
+            "location": "/container/index.html", 
+            "text": "Introduction\n\n\nControl the position and angle of children game object, built-in game object of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nContainer\n\n\nAdd container object\n\n\nvar\n \nimage\n \n=\n \nscene\n.\nadd\n.\ncontainer\n(\nx\n,\n \ny\n);\n\n\n// var image = scene.add.container(x, y, children); // children: an array of game object\n\n\n\n\n\nDestroy\n\n\ncontainer\n.\ndestroy\n();\n\n\n\n\n\nAlso destroy all children game object.\n\n\nSet properties\n\n\nReference \ngame object\n, to set position, angle, visible, alpha, etc...\n\n\nSet size\n\n\ncontainer\n.\nsetSize\n(\nwidth\n,\n \nheight\n);\n\n\n\n\n\nDefault size is 0x0.\n\n\nHit area\n\n\ncontainer\n.\nsetInteractive\n();\n \n// enable\n\n\n// container.setInteractive(false); // disable\n\n\n\n\n\nSee \ntouch events\n.\n\n\ncontainer\n.\nsetInteractive\n(\nnew\n \nPhaser\n.\nGeom\n.\nCircle\n(\n0\n,\n \n0\n,\n \nradius\n),\n \nPhaser\n.\nGeom\n.\nCircle\n.\nContains\n);\n\n\n\n\n\nAssign hit area as a circle.\n\n\nNon-exclusive\n\n\ncontainer\n.\nsetExclusive\n(\nfalse\n);\n\n\n\n\n\nAllows a game object added to container many times.\n\n\nChildren\n\n\nAdd child\n\n\ncontainer\n.\nadd\n(\nchild\n);\n  \n// child: a game object or an array of game objects\n\n\n\n\n\ncontainer\n.\naddAt\n(\nchild\n,\n \nindex\n);\n\n\n\n\n\nExist\n\n\nvar\n \nhasChild\n \n=\n \ncontainer\n.\nexists\n(\nchild\n);\n\n\n\n\n\nGet child\n\n\nvar\n \nfirstChild\n \n=\n \ncontainer\n.\nfirst\n;\n\n\nvar\n \nnextChild\n \n=\n \ncontainer\n.\nnext\n;\n\n\nvar\n \nprevChild\n \n=\n \ncontainer\n.\nprevious\n;\n\n\nvar\n \nlastChild\n \n=\n \ncontainer\n.\nlast\n;\n\n\n\n\n\nvar\n \nchild\n \n=\n \ncontainer\n.\ngetByName\n(\nname\n);\n\n\n\n\n\nvar\n \nchild\n \n=\n \ncontainer\n.\ngetRandom\n(\nstartIndex\n,\n \nlength\n);\n\n\n\n\n\nvar\n \nchild\n \n=\n \ncontainer\n.\ngetFirst\n(\nproperty\n,\n \nvalue\n,\n \nstartIndex\n,\n \nendIndex\n);\n\n\n// value: the value to test the property against. Must pass a strict (`===`) comparison check.\n\n\n\n\n\nvar\n \nchildren\n \n=\n \ncontainer\n.\ngetAll\n(\nproperty\n,\n \nvalue\n,\n \nstartIndex\n,\n \nendIndex\n);\n\n\n// value: the value to test the property against. Must pass a strict (`===`) comparison check.\n\n\n\n\n\nvar\n \namount\n \n=\n \ncontainer\n.\ncount\n(\nproperty\n,\n \nvalue\n,\n \nstartIndex\n,\n \nendIndex\n);\n\n\n// value: the value to test the property against. Must pass a strict (`===`) comparison check.\n\n\n\n\n\nRemove child\n\n\ncontainer\n.\nremove\n(\nchild\n);\n\n\n// container.remove(child, true);  // remove child object and destroy it\n\n\n\n\n\ncontainer\n.\nremoveAt\n(\nindex\n);\n\n\n// container.removeAt(index, true);  // remove child object and destroy it\n\n\n\n\n\ncontainer\n.\nremoveBetween\n(\nstartIndex\n,\n \nendIndex\n);\n\n\n// container.removeBetween(startIndex, endIndex, true);  // remove children objects and destroy them\n\n\n\n\n\ncontainer\n.\nremoveAll\n();\n\n\n// container.removeAll(true);  // remove all children objects and destroy them\n\n\n\n\n\nReplace child\n\n\ncontainer\n.\nreplace\n(\noldChild\n,\n \nnewChild\n);\n\n\n// container.replace(oldChild, newChild, true);  // destroy oldChild\n\n\n\n\n\nOrder of child\n\n\ncontainer\n.\nmoveTo\n(\nchild\n,\n \nindex\n);\n\n\n\n\n\ncontainer\n.\nbringToTop\n(\nchild\n);\n\n\n\n\n\ncontainer\n.\nsendToBack\n(\nchild\n);\n\n\n\n\n\ncontainer\n.\nmoveUp\n(\nchild\n);\n\n\n\n\n\ncontainer\n.\nmoveDown\n(\nchild\n);\n\n\n\n\n\ncontainer\n.\nswap\n(\nchild1\n,\n \nchild2\n);\n\n\n\n\n\ncontainer\n.\nreverse\n();\n\n\n\n\n\ncontainer\n.\nshuffle\n();\n\n\n\n\n\nSet properties\n\n\ncontainer\n.\nsetAll\n(\nproperty\n,\n \nvalue\n,\n \nstartIndex\n,\n \nendIndex\n);", 
+            "title": "Container"
+        }, 
+        {
+            "location": "/container/index.html#introduction", 
+            "text": "Control the position and angle of children game object, built-in game object of phaser.   Author: Richard Davey", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/container/index.html#usage", 
+            "text": "", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/container/index.html#container", 
+            "text": "", 
+            "title": "Container"
+        }, 
+        {
+            "location": "/container/index.html#add-container-object", 
+            "text": "var   image   =   scene . add . container ( x ,   y );  // var image = scene.add.container(x, y, children); // children: an array of game object", 
+            "title": "Add container object"
+        }, 
+        {
+            "location": "/container/index.html#destroy", 
+            "text": "container . destroy ();   Also destroy all children game object.", 
+            "title": "Destroy"
+        }, 
+        {
+            "location": "/container/index.html#set-properties", 
+            "text": "Reference  game object , to set position, angle, visible, alpha, etc...", 
+            "title": "Set properties"
+        }, 
+        {
+            "location": "/container/index.html#set-size", 
+            "text": "container . setSize ( width ,   height );   Default size is 0x0.", 
+            "title": "Set size"
+        }, 
+        {
+            "location": "/container/index.html#hit-area", 
+            "text": "container . setInteractive ();   // enable  // container.setInteractive(false); // disable   See  touch events .  container . setInteractive ( new   Phaser . Geom . Circle ( 0 ,   0 ,   radius ),   Phaser . Geom . Circle . Contains );   Assign hit area as a circle.", 
+            "title": "Hit area"
+        }, 
+        {
+            "location": "/container/index.html#non-exclusive", 
+            "text": "container . setExclusive ( false );   Allows a game object added to container many times.", 
+            "title": "Non-exclusive"
+        }, 
+        {
+            "location": "/container/index.html#children", 
+            "text": "", 
+            "title": "Children"
+        }, 
+        {
+            "location": "/container/index.html#add-child", 
+            "text": "container . add ( child );    // child: a game object or an array of game objects   container . addAt ( child ,   index );", 
+            "title": "Add child"
+        }, 
+        {
+            "location": "/container/index.html#exist", 
+            "text": "var   hasChild   =   container . exists ( child );", 
+            "title": "Exist"
+        }, 
+        {
+            "location": "/container/index.html#get-child", 
+            "text": "var   firstChild   =   container . first ;  var   nextChild   =   container . next ;  var   prevChild   =   container . previous ;  var   lastChild   =   container . last ;   var   child   =   container . getByName ( name );   var   child   =   container . getRandom ( startIndex ,   length );   var   child   =   container . getFirst ( property ,   value ,   startIndex ,   endIndex );  // value: the value to test the property against. Must pass a strict (`===`) comparison check.   var   children   =   container . getAll ( property ,   value ,   startIndex ,   endIndex );  // value: the value to test the property against. Must pass a strict (`===`) comparison check.   var   amount   =   container . count ( property ,   value ,   startIndex ,   endIndex );  // value: the value to test the property against. Must pass a strict (`===`) comparison check.", 
+            "title": "Get child"
+        }, 
+        {
+            "location": "/container/index.html#remove-child", 
+            "text": "container . remove ( child );  // container.remove(child, true);  // remove child object and destroy it   container . removeAt ( index );  // container.removeAt(index, true);  // remove child object and destroy it   container . removeBetween ( startIndex ,   endIndex );  // container.removeBetween(startIndex, endIndex, true);  // remove children objects and destroy them   container . removeAll ();  // container.removeAll(true);  // remove all children objects and destroy them", 
+            "title": "Remove child"
+        }, 
+        {
+            "location": "/container/index.html#replace-child", 
+            "text": "container . replace ( oldChild ,   newChild );  // container.replace(oldChild, newChild, true);  // destroy oldChild", 
+            "title": "Replace child"
+        }, 
+        {
+            "location": "/container/index.html#order-of-child", 
+            "text": "container . moveTo ( child ,   index );   container . bringToTop ( child );   container . sendToBack ( child );   container . moveUp ( child );   container . moveDown ( child );   container . swap ( child1 ,   child2 );   container . reverse ();   container . shuffle ();", 
+            "title": "Order of child"
+        }, 
+        {
+            "location": "/container/index.html#set-properties_1", 
+            "text": "container . setAll ( property ,   value ,   startIndex ,   endIndex );", 
+            "title": "Set properties"
         }, 
         {
             "location": "/group/index.html", 
