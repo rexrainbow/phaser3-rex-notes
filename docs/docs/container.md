@@ -171,7 +171,7 @@ container.reverse();
 container.shuffle();
 ```
 
-### Set properties
+#### Set properties
 
 ```javascript
 container.setAll(property, value, startIndex, endIndex);
