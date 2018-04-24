@@ -176,3 +176,27 @@ container.shuffle();
 ```javascript
 container.setAll(property, value, startIndex, endIndex);
 ```
+
+#### For each child
+
+- Iterate current children list
+    ```javascript
+    container.iterate(callback);
+    // container.iterate(callback, context);
+    // container.iterate(callback, context, arg0, arg1, ...);
+    // var callback = function(child, arg0, arg1, ...) {};
+    ```
+- Iterate a copy of current children list
+    ```javascript
+    container.each(callback);
+    // container.each(callback, context);
+    // container.each(callback, context, arg0, arg1, ...);
+    // var callback = function(child, arg0, arg1, ...) {};
+    ```
+
+## Compare with [group object](group.md)
+
+- Container and group objects are all has a children list.
+- Container has position, angle, alpha, visible, ...etc, but group does not have.
+- Container controls properties of children (position, angle, alpha, visible, ...etc), but group won't.
+- A game object could be added to many group, but it only could be added to a container (`exclusive` mode).

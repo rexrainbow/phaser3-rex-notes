@@ -715,6 +715,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#for-each-child" title="For each child" class="md-nav__link">
+    For each child
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -722,6 +729,13 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compare-with-group-object" title="Compare with group object" class="md-nav__link">
+    Compare with group object
+  </a>
   
 </li>
       
@@ -1489,6 +1503,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#for-each-child" title="For each child" class="md-nav__link">
+    For each child
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1496,6 +1517,13 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compare-with-group-object" title="Compare with group object" class="md-nav__link">
+    Compare with group object
+  </a>
   
 </li>
       
@@ -1642,6 +1670,29 @@
 <h4 id="set-properties_1">Set properties<a class="headerlink" href="#set-properties_1" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">setAll</span><span class="p">(</span><span class="nx">property</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">startIndex</span><span class="p">,</span> <span class="nx">endIndex</span><span class="p">);</span>
 </pre></div>
+
+<h4 id="for-each-child">For each child<a class="headerlink" href="#for-each-child" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Iterate current children list
+    <div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">iterate</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
+<span class="c1">// container.iterate(callback, context);</span>
+<span class="c1">// container.iterate(callback, context, arg0, arg1, ...);</span>
+<span class="c1">// var callback = function(child, arg0, arg1, ...) {};</span>
+</pre></div></li>
+<li>Iterate a copy of current children list
+    <div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
+<span class="c1">// container.each(callback, context);</span>
+<span class="c1">// container.each(callback, context, arg0, arg1, ...);</span>
+<span class="c1">// var callback = function(child, arg0, arg1, ...) {};</span>
+</pre></div></li>
+</ul>
+<h2 id="compare-with-group-object">Compare with <a href="../group/index.html">group object</a><a class="headerlink" href="#compare-with-group-object" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Container and group objects are all has a children list.</li>
+<li>Container has position, angle, alpha, visible, ...etc, but group does not have.</li>
+<li>Container controls properties of children (position, angle, alpha, visible, ...etc), but group won't.</li>
+<li>A game object could be added to many group, but it only could be added to a container (<code>exclusive</code> mode).</li>
+</ul>
                 
                   
                 
