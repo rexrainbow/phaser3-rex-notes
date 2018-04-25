@@ -8,7 +8,7 @@ const WRAPPED_NEWLINE = CONST.WRAPPED_NEWLINE;
 const splitRegExp = CONST.SPLITREGEXP;
 
 var WRAP_RESULT = [];
-var WrapText = function (text, context, config) {
+var WrapText = function (text, ctx, config) {
     var wrapMode = GetValue(config, 'wrapMode', 0);
     if (typeof (wrapMode) === 'string') {
         wrapMode = WRAP_MODE[wrapMode];
@@ -30,7 +30,7 @@ var WrapText = function (text, context, config) {
     if ((text.length <= 100) && (text.indexOf('\n') === -1)) {
         // short string testing
         var remainWidth = wrapWidth - offset;
-        var textWidth = context.measureText(text).width;
+        var textWidth = ctx.measureText(text).width;
         if (textWidth <= remainWidth) {
             retLines.push(LinesPool.newline(text, textWidth, NO_NEWLINE));
             return retLines;
@@ -51,7 +51,7 @@ var WrapText = function (text, context, config) {
 
         // short string testing
         if (line.length <= 100) {
-            var textWidth = context.measureText(line).width;
+            var textWidth = ctx.measureText(line).width;
             if (textWidth <= remainWidth) {
                 retLines.push(LinesPool.newline(text, textWidth, newLineMode));
                 continue;
@@ -80,14 +80,14 @@ var WrapText = function (text, context, config) {
                 curLineText += token;
             }
 
-            currLineWidth = context.measureText(curLineText).width;
+            currLineWidth = ctx.measureText(curLineText).width;
             if (currLineWidth > remainWidth) {
                 retLines.push(LinesPool.newline(lineText, lineWidth, WRAPPED_NEWLINE));
                 remainWidth = wrapWidth;
 
                 // new line
                 curLineText = token;
-                currLineWidth = context.measureText(curLineText).width;
+                currLineWidth = ctx.measureText(curLineText).width;
             }
 
             lineText = curLineText;

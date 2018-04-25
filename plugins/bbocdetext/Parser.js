@@ -7,7 +7,11 @@ var GETPROP_RESULT = {
 };
 
 var STYLE_RESULT = new TextStyle();
-STYLE_RESULT.underline = [null, null, null];
+STYLE_RESULT.underline = {
+    color: '#000',
+    thickness: 0,
+    offset: 0
+};
 var EMPTYPROP = {};
 
 var parser = {
@@ -134,7 +138,11 @@ var parser = {
             }
 
             if (prop.hasOwnProperty('size')) {
-                result.fontSize = prop.size;
+                var size = prop.size;
+                if (typeof (size) === 'number') {
+                    size = size.toString() + 'px';
+                }
+                result.fontSize = size;
             } else {
                 result.fontSize = defaultStyle.fontSize;
             }
@@ -187,12 +195,16 @@ var parser = {
         if (prop.hasOwnProperty('u')) {
             var underline = prop.u.split(' '); // [color, thickness, offset]
             var len = underline.length;
-            result.underline[0] = (len >= 1) ? underline[0] : defaultStyle.underline[0];
-            result.underline[1] = (len >= 2) ? parseFloat(underline[1].replace("px", "")) : defaultStyle.underline[1];
-            result.underline[2] = (len >= 3) ? parseFloat(underline[2].replace("px", "")) : defaultStyle.underline[2];
+            result.underline.color = (len >= 1) ? underline[0] : defaultStyle.underline.color;
+            result.underline.thickness = (len >= 2) ? parseFloat(underline[1].replace("px", "")) : defaultStyle.underline.thickness;
+            result.underline.offset = (len >= 3) ? parseFloat(underline[2].replace("px", "")) : defaultStyle.underline.offset;
         } else {
-            result.underline[0] = null;
+            result.underline.color = '#000';
+            result.underline.thickness = 0;
+            result.underline.offset = 0;
         }
+
+        return result;
     },
 
     propToTagText: function (txt, prop, prevProp) {
