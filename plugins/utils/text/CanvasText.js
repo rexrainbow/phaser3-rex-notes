@@ -31,7 +31,7 @@ class CanvasText {
         return TMPPENSMGR.getSliceTagText(start, end, this.parser.prop2TagText);
     }
 
-    copyPensManager = function (pensManager) {
+    copyPensManager(pensManager) {
         return this.pensManager.copy(pensManager);
     }
 

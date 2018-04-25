@@ -38,17 +38,11 @@ Default size is 0x0.
 #### Hit area
 
 ```javascript
-container.setInteractive(); // enable
+container.setInteractive(new Phaser.Geom.Circle(0, 0, radius), Phaser.Geom.Circle.Contains);
 // container.setInteractive(false); // disable
 ```
 
-See [touch events](touchevents.md#mousetouch-events-of-game-object).
-
-```javascript
-container.setInteractive(new Phaser.Geom.Circle(0, 0, radius), Phaser.Geom.Circle.Contains);
-```
-
-Assign hit area as a circle.
+Assign hit area with a circle shape.
 
 #### Non-exclusive
 

@@ -1569,15 +1569,11 @@
 
 <p>Default size is 0x0.</p>
 <h4 id="hit-area">Hit area<a class="headerlink" href="#hit-area" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">setInteractive</span><span class="p">();</span> <span class="c1">// enable</span>
+<div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">setInteractive</span><span class="p">(</span><span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Circle</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">radius</span><span class="p">),</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Circle</span><span class="p">.</span><span class="nx">Contains</span><span class="p">);</span>
 <span class="c1">// container.setInteractive(false); // disable</span>
 </pre></div>
 
-<p>See <a href="../touchevents/index.html#mousetouch-events-of-game-object">touch events</a>.</p>
-<div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">setInteractive</span><span class="p">(</span><span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Circle</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">radius</span><span class="p">),</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Circle</span><span class="p">.</span><span class="nx">Contains</span><span class="p">);</span>
-</pre></div>
-
-<p>Assign hit area as a circle.</p>
+<p>Assign hit area with a circle shape.</p>
 <h4 id="non-exclusive">Non-exclusive<a class="headerlink" href="#non-exclusive" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">setExclusive</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
 </pre></div>

@@ -10,8 +10,8 @@ var STYLE_RESULT = new TextStyle();
 STYLE_RESULT.underline = [null, null, null];
 var EMPTYPROP = {};
 
-class Parser {
-    splitText(txt, mode) {
+var parser = {
+    splitText: function (txt, mode) {
         var result = SPLITTEXT_RESULT;
         var arr, m, charIdx = 0,
             totalLen = txt.length,
@@ -41,9 +41,9 @@ class Parser {
             result.push(txt.substring(charIdx, totalLen));
         }
         return result; // [txt,...]
-    }
+    },
 
-    tagTextToProp(txt, prevProp) {
+    tagTextToProp: function (txt, prevProp) {
         var rawText, innerMatch;
 
         if (prevProp == null) {
@@ -120,23 +120,9 @@ class Parser {
         result.rawText = rawText;
         result.prop = prevProp;
         return result;
-    }
+    },
 
-    updateProp(prop, op, key, value) {
-        if (op === PROP_ADD) {
-            // PROP_ADD     
-            prop[key] = value;
-        } else {
-            // PROP_REMOVE        
-            if (prop.hasOwnProperty(key)) {
-                delete prop[key];
-            }
-        }
-
-        return prop;
-    }
-
-    propToContextStyle(defaultStyle, prop, noRawText) {
+    propToContextStyle: function (defaultStyle, prop, noRawText) {
         var result = STYLE_RESULT;
         if (!prop.hasOwnProperty('img')) {
             result.image = null;
@@ -179,37 +165,37 @@ class Parser {
                 result.shadowColor = defaultStyle.shadowColor;
                 result.shadowBlur = defaultStyle.shadowBlur;
                 result.shadowStroke = true;
-                result.shadowFill = true;    
+                result.shadowFill = true;
             } else {
-                var shadow = prop.shadow.split(' ');  // 2px 2px 2px #000
+                var shadow = prop.shadow.split(' '); // 2px 2px 2px #000
                 result.shadowOffsetX = parseFloat(shadow[0].replace("px", ""));
                 result.shadowOffsetY = parseFloat(shadow[1].replace("px", ""));
                 result.shadowColor = shadow[3];
                 result.shadowBlur = parseFloat(shadow[2].replace("px", ""));
                 result.shadowStroke = true;
-                result.shadowFill = true;                   
+                result.shadowFill = true;
             }
         } else {
             result.shadowOffsetX = 0;
             result.shadowOffsetY = 0;
             result.shadowColor = '#000';
-            result.shadowBlur = 0;            
+            result.shadowBlur = 0;
             result.shadowStroke = false;
-            result.shadowFill = false;              
+            result.shadowFill = false;
         }
 
         if (prop.hasOwnProperty('u')) {
             var underline = prop.u.split(' '); // [color, thickness, offset]
             var len = underline.length;
-            result.underline[0] = (len >= 1)? underline[0] : defaultStyle.underline[0];
-            result.underline[1] = (len >= 2)? parseFloat(underline[1].replace("px", "")) : defaultStyle.underline[1];
-            result.underline[2] = (len >= 3)? parseFloat(underline[2].replace("px", "")) : defaultStyle.underline[2];
+            result.underline[0] = (len >= 1) ? underline[0] : defaultStyle.underline[0];
+            result.underline[1] = (len >= 2) ? parseFloat(underline[1].replace("px", "")) : defaultStyle.underline[1];
+            result.underline[2] = (len >= 3) ? parseFloat(underline[2].replace("px", "")) : defaultStyle.underline[2];
         } else {
             result.underline[0] = null;
         }
-    }
+    },
 
-    propToTagText(txt, prop, prevProp) {
+    propToTagText: function (txt, prop, prevProp) {
         if (prevProp == null)
             prevProp = EMPTYPROP;
 
@@ -242,7 +228,21 @@ class Parser {
 
         return txt;
     }
-}
+};
+
+var updateProp = function (prop, op, key, value) {
+    if (op === PROP_ADD) {
+        // PROP_ADD     
+        prop[key] = value;
+    } else {
+        // PROP_REMOVE        
+        if (prop.hasOwnProperty(key)) {
+            delete prop[key];
+        }
+    }
+
+    return prop;
+};
 
 var getFontStyle = function (isBold, isItalic) {
     if (isBold && isItalic)
@@ -277,4 +277,4 @@ var RE_IMAGE_CLOSE = /\[\/img\]/i;
 const PROP_REMOVE = false;
 const PROP_ADD = true;
 
-export default Parser;
+export default parser;
