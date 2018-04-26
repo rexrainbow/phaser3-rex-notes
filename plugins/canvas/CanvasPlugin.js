@@ -47,8 +47,8 @@ var Canvas = new Phaser.Class({
 
             GameObject.call(this, scene, 'Canvas');
 
-            this.resolution = 1; // TODO
-            this.canvas = CanvasPool.create(this, width, height);
+            this.resolution = 1;
+            this.canvas = CanvasPool.create(this, this.resolution * width, this.resolution * height);
             this.context = this.canvas.getContext('2d');
             this.canvasTexture = null;
             this.dirty = true;
@@ -114,17 +114,21 @@ var Canvas = new Phaser.Class({
 
         if (width === undefined) {
             width = srcCanvas.width;
+        } else {
+            width *= this.resolution;
         }
 
         if (height === undefined) {
             height = srcCanvas.height;
+        } else {
+            height *= this.resolution;
         }
 
 
         if (sys.textures.exists(key)) {
             texture = sys.textures.get(key);
         } else {
-            texture = sys.textures.createCanvas(key, srcCanvas.width, srcCanvas.height);
+            texture = sys.textures.createCanvas(key, width, height);
         }
 
         var destCanvas = texture.getSourceImage();
@@ -167,8 +171,8 @@ var Canvas = new Phaser.Class({
         destCtx.drawImage(srcCanvas, 0, 0, destCanvas.width, destCanvas.height);
         this.dirty = true;
 
-        if (resize) {
-            this.setSize(destCanvas.width, destCanvas.height);
+        if (resize) {            
+            this.setSize(destCanvas.width/this.resolution, destCanvas.height/this.resolution);
         }
         return this;
     }

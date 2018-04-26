@@ -6,16 +6,11 @@ const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 const DistanceBetween = Phaser.Math.Distance.Between;
 const RotateAroundDistance = Phaser.Math.RotateAroundDistance;
 
-var P1 = {
-    x: 0,
-    y: 0
-}; // reuse this point object
-
 class DragDropPlugin {
     constructor(gameobject, config) {
         this.gameobject = gameobject;
         this.scene = GetSceneObject(gameobject);
-        
+
         this.enable = null;
         this.resetFromJSON(config);
         this.boot();
@@ -47,7 +42,7 @@ class DragDropPlugin {
 
     boot() {
         this.gameobject.on('drag', this.onDragging, this);
-        this.gameobject.on('destroy', this.destroy, this);     
+        this.gameobject.on('destroy', this.destroy, this);
     }
 
     shutdown() {
@@ -150,6 +145,8 @@ class DragDropPlugin {
         return (this.gameobject.input.dragState > 0);
     }
 }
+
+var P1 = {}; // reuse this point object
 
 /** @private */
 const AXISMODE = {

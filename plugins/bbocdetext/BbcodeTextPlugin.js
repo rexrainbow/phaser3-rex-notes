@@ -6,6 +6,10 @@ class BBCodeText extends Phaser.GameObjects.Text {
         this.canvasText = new CanvasTextKlass();
     }
 
+    updateText() {
+
+    }
+
     getRawText(text) {
         return this.canvasText.getRawText(text);
     }

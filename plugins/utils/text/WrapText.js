@@ -1,19 +1,18 @@
-import LinesPool from './LinesPool.js';
+import Pool from './../../object/Pool.js';
 import CONST from './../const.js';
 
 const GetValue = Phaser.Utils.GetValue;
 const NO_NEWLINE = CONST.NO_NEWLINE;
 const RAW_NEWLINE = CONST.RAW_NEWLINE;
 const WRAPPED_NEWLINE = CONST.WRAPPED_NEWLINE;
+const WORD_WRAP = CONST.WORD_WRAP;
+const CHAR_WRAP = CONST.CHAR_WRAP;
 const splitRegExp = CONST.SPLITREGEXP;
 
 var WRAP_RESULT = [];
 var WrapText = function (text, ctx, config) {
-    var wrapMode = GetValue(config, 'wrapMode', 0);
-    if (typeof (wrapMode) === 'string') {
-        wrapMode = WRAP_MODE[wrapMode];
-    }
-    var wrapWidth = GetValue(config, 'width', null);
+    var wrapMode = GetValue(config, 'wrapMode', WORD_WRAP);
+    var wrapWidth = GetValue(config, 'wrapWidth', null);
     var offset = GetValue(config, 'offset', 0);
 
     var retLines = WRAP_RESULT;
@@ -60,7 +59,7 @@ var WrapText = function (text, ctx, config) {
 
         // character mode
         var tokenArray;
-        if (wrapMode === 0) {
+        if (wrapMode === WORD_WRAP) {
             // word mode
             tokenArray = line.split(' ');
         } else {
@@ -73,7 +72,7 @@ var WrapText = function (text, ctx, config) {
         for (var j, tokenLen = tokenArray.length; j < tokenLen; j++) {
             token = tokenArray[j];
 
-            if ((wrapMode === 0) && (j > 0)) {
+            if ((wrapMode === WORD_WRAP) && (j > 0)) {
                 // word mode
                 curLineText += (' ' + token);
             } else {
@@ -104,9 +103,16 @@ var WrapText = function (text, ctx, config) {
     return retLines;
 };
 
-const WRAP_MODE = {
-    word: 0,
-    character: 1
-}
+var LinesPool = new Pool();
+LinesPool.newline = function (text, width, newLineMode) {
+    var l = this.allocate();
+    if (l === null) {
+        l = {};
+    }
+    l.text = text;
+    l.width = width;
+    l.newLineMode = newLineMode;
+    return l;
+};
 
 export default WrapText;

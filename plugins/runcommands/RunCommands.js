@@ -26,7 +26,6 @@ var runCommands = function (queue, scope, config) {
     return retVal;
 }
 
-var ARGS = []; // reuse this array
 var runCommand = function (cmd, scope, config) {
     var argsConvertCallback = GetValue(config, 'argsConvert', undefined);
     var argsConvertCallbackScope = GetValue(config, 'argsConvertScope', undefined);
@@ -47,7 +46,7 @@ var runCommand = function (cmd, scope, config) {
         } else {
             for (var i = 0, len = ARGS.length; i < len; i++) {
                 ARGS[i] = argsConvertCallback(cmd, ARGS[i]);
-            }            
+            }
         }
 
     }
@@ -65,6 +64,7 @@ var runCommand = function (cmd, scope, config) {
     }
     return retValue;
 }
+var ARGS = []; // reuse this array
 
 const defaultTypeConvert = function (command, value) {
     return TypeConvert(value);

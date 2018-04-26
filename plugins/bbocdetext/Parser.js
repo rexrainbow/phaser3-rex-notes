@@ -7,11 +7,6 @@ var GETPROP_RESULT = {
 };
 
 var STYLE_RESULT = new TextStyle();
-STYLE_RESULT.underline = {
-    color: '#000',
-    thickness: 0,
-    offset: 0
-};
 var EMPTYPROP = {};
 
 var parser = {
@@ -35,7 +30,7 @@ var parser = {
 
             }
 
-            if (mode == null)
+            if (mode === undefined)
                 result.push(m);
 
             charIdx = RE_SPLITTEXT.lastIndex;
@@ -126,7 +121,7 @@ var parser = {
         return result;
     },
 
-    propToContextStyle: function (defaultStyle, prop, noRawText) {
+    propToContextStyle: function (defaultStyle, prop) {
         var result = STYLE_RESULT;
         if (!prop.hasOwnProperty('img')) {
             result.image = null;
@@ -195,13 +190,13 @@ var parser = {
         if (prop.hasOwnProperty('u')) {
             var underline = prop.u.split(' '); // [color, thickness, offset]
             var len = underline.length;
-            result.underline.color = (len >= 1) ? underline[0] : defaultStyle.underline.color;
-            result.underline.thickness = (len >= 2) ? parseFloat(underline[1].replace("px", "")) : defaultStyle.underline.thickness;
-            result.underline.offset = (len >= 3) ? parseFloat(underline[2].replace("px", "")) : defaultStyle.underline.offset;
+            result.underlineColor = (len >= 1) ? underline[0] : defaultStyle.underlineColor;
+            result.underlineThickness = (len >= 2) ? parseFloat(underline[1].replace("px", "")) : defaultStyle.underlineThickness;
+            result.underlineOffset = (len >= 3) ? parseFloat(underline[2].replace("px", "")) : defaultStyle.underlineOffset;
         } else {
-            result.underline.color = '#000';
-            result.underline.thickness = 0;
-            result.underline.offset = 0;
+            result.underlineColor = '#000';
+            result.underlineThickness = 0;
+            result.underlineOffset = 0;
         }
 
         return result;

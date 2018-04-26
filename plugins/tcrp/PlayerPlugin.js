@@ -8,7 +8,6 @@ import runCommands from './../../plugins/runcommands.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 
-var CMD = []; // reuse this array
 class PlayerPlugin extends EE {
     constructor(parent, config) {
         super();
@@ -110,7 +109,7 @@ class PlayerPlugin extends EE {
 
     start(startAt) {
         this.stop();
-        
+
         this.index = 0;
         this.state = 1;
         if (this.commands.length === 0) {
@@ -215,6 +214,8 @@ class PlayerPlugin extends EE {
         return dt;
     }
 }
+
+var CMD = []; // reuse this array
 
 const TIMEUNITMODE = {
     ms: 0,

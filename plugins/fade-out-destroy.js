@@ -1,8 +1,5 @@
 import FadePlugin from './fade/FadePlugin.js';
 
-var CONFIG = {
-    alpha: {}
-}; // reuse this config
 var fadeOutDestroy = function (gameobject, duration) {
     CONFIG.mode = 1;
     CONFIG.alpha.start = gameobject.alpha;
@@ -12,4 +9,9 @@ var fadeOutDestroy = function (gameobject, duration) {
     fade.start();
     return fade;
 };
+
+var CONFIG = {
+    alpha: {}
+}; // reuse this config
+
 export default fadeOutDestroy;

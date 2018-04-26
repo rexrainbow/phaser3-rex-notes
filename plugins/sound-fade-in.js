@@ -1,8 +1,5 @@
 import FadePlugin from './audio/FadePlugin.js';
 
-var CONFIG = {
-    volume: {}
-}; // reuse this config
 var soundFadeIn = function (scene, sound, duration, endVolume, startVolume) {
     if (endVolume === undefined) {
         endVolume = 1;
@@ -35,4 +32,9 @@ var soundFadeIn = function (scene, sound, duration, endVolume, startVolume) {
     }
     return sound;
 };
+
+var CONFIG = {
+    volume: {}
+}; // reuse this config
+
 export default soundFadeIn;

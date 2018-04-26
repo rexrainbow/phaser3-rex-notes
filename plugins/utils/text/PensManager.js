@@ -7,12 +7,13 @@ import CONST from './const.js';
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 const NO_NEWLINE = CONST.NO_NEWLINE;
 
-var PensPool = new Pool();    // default pens pool
-var LinesPool = new Pool();   // default lines pool
+var PensPool = new Pool(); // default pens pool
+var LinesPool = new Pool(); // default lines pool
 class PensManager {
     constructor(config) {
         this.pens = []; // all pens
         this.lines = []; // pens in lines [ [],[],[],.. ]
+        this.maxLinesWidth = undefined;
 
         this.PensPool = GetFastValue(config, 'pensPool', PensPool);
         this.LinesPool = GetFastValue(config, 'linesPool', LinesPool);
@@ -24,6 +25,7 @@ class PensManager {
 
         this.PensPool.freeArr(this.pens);
         this.LinesPool.freeArr(this.lines);
+        this.maxLinesWidth = undefined;
     }
 
     addPen(config) { // txt, x, y, width, prop, newLineMode
@@ -53,6 +55,7 @@ class PensManager {
             line = this.LinesPool.allocate() || [];
             this.lines.push(line);
         }
+        this.maxLinesWidth = undefined;
     }
 
     clone(targetPensManager) {
@@ -76,7 +79,7 @@ class PensManager {
         }
 
         return targetPensManager;
-    };
+    }
 
     get lastPen() {
         return this.pens[this.pens.length - 1];
@@ -92,7 +95,7 @@ class PensManager {
             return 0;
 
         return line[0].startIndex;
-    };
+    }
 
     get lineEndIndex(i) {
         var li, hasLastPen = false,
@@ -108,7 +111,7 @@ class PensManager {
 
         var lastPen = line[line.length - 1];
         return lastPen.endIndex;
-    };
+    }
 
     getLineWidth(i) {
         var line = this.lines[i];
@@ -121,18 +124,33 @@ class PensManager {
 
         var lineWidth = lastPen.lastX; // start from 0
         return lineWidth;
-    };
+    }
 
     getMaxLineWidth() {
+        if (this.maxLinesWidth !== undefined) {
+            return this.maxLinesWidth;
+        }
         var w, maxW = 0;
         for (var i = 0, len = this.lines.length; i < len; i++) {
             w = this.getLineWidth(i);
             if (w > maxW)
                 maxW = w;
         }
-
+        this.maxLinesWidth = maxW;
         return maxW;
-    };
+    }
+
+    getLineWidths() {
+        var result = [];
+        for (var i = 0, len = this.lines.length; i < len; i++) {
+            result.push(this.getLineWidth(i));
+        }
+        return result;
+    }
+
+    get linesNum() {
+        return this.lines.length;
+    }
 
     get rawText() {
         var txt = "",
@@ -142,7 +160,7 @@ class PensManager {
         }
 
         return txt;
-    };
+    }
 
     get rawTextLength() {
         var l = 0,
@@ -152,7 +170,7 @@ class PensManager {
         }
 
         return l;
-    };
+    }
 
     getSliceTagText(start, end, callback, scope) {
         if (start == null)
@@ -197,7 +215,7 @@ class PensManager {
         }
 
         return txt;
-    };
+    }
 };
 
 export default PensManager;

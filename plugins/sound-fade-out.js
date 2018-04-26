@@ -1,15 +1,12 @@
 import FadePlugin from './audio/FadePlugin.js';
 
-var CONFIG = {
-    volume: {}
-}; // reuse this config
 var soundFadeOut = function (scene, sound, duration, destroy) {
     if (destroy === undefined) {
         destroy = true;
     }
-    CONFIG.mode = (destroy) ? 2 : 1;     // 1: stop, 2: destroy
+    CONFIG.mode = (destroy) ? 2 : 1; // 1: stop, 2: destroy
     CONFIG.volume.start = sound.volume;
-    CONFIG.volume.end = 0;    
+    CONFIG.volume.end = 0;
     CONFIG.duration = duration;
 
     var fade;
@@ -27,4 +24,9 @@ var soundFadeOut = function (scene, sound, duration, destroy) {
     }
     return sound;
 };
+
+var CONFIG = {
+    volume: {}
+}; // reuse this config
+
 export default soundFadeOut;
