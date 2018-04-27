@@ -39,7 +39,7 @@ class PensManager {
         PEN_CONFIG.y = y;
         PEN_CONFIG.width = width;
         PEN_CONFIG.prop = prop;
-        PEN_CONFIG.newLineMode = newLineMode;        
+        PEN_CONFIG.newLineMode = newLineMode;
         pen.resetFromJSON(PEN_CONFIG);
 
         var previousPen = this.lastPen;
@@ -126,7 +126,7 @@ class PensManager {
         if (!line)
             return 0;
 
-        var lastPen = this.lastPen;
+        var lastPen = line[line.length - 1];
         if (lastPen == null)
             return 0;
 

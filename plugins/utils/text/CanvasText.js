@@ -136,7 +136,7 @@ class CanvasText {
         } else {
             offsetY = 0;
         }
-        offsetY += startY;
+        offsetY = startY;
         for (var lineIdx = drawLineStartIdx; lineIdx < drawLineEndIdx; lineIdx++) {
             lineWidth = pensManager.getLineWidth(lineIdx);
             if (lineWidth === 0)
