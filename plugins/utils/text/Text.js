@@ -1,6 +1,7 @@
 import Render from './TextRender.js'; // copy from text object
 import TextStyle from './TextStyle.js'; // extended
 import CanvasTextKlass from './CanvasText.js';
+import PoolKlass from './../object/Pool.js';
 
 const AddToDOM = Phaser.DOM.AddToDOM;
 const RemoveFromDOM = Phaser.DOM.RemoveFromDOM;
@@ -10,6 +11,7 @@ const GameObject = Phaser.GameObjects.GameObject;
 const BuildGameObject = Phaser.GameObjects.BuildGameObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
+var PensPools = {};
 var Text = new Phaser.Class({
 
     Extends: GameObject,
@@ -75,6 +77,10 @@ var Text = new Phaser.Class({
             this.dirty = false;
 
             this.parser = parser;
+            if (!PensPools.hasOwnProperty(type)) {
+                PensPools[type] = new PoolKlass();
+            }
+            this.pensPool = PensPools[type];
             this.canvasText = new CanvasTextKlass(this);
 
             this.initRTL();

@@ -12,7 +12,7 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var s = "[color=blue]AA[/color][i][color=red]BB[/color][b]CC[/b][/i]DD";
+        var s = '[color=blue]AA[/color]\n[i][color=red]BB[/color][b]CC[/b][/i]DD';
         this.add.rexBBCodeText(100, 100, s, {
             backgroundColor: '#555',
             fontSize: '60px',

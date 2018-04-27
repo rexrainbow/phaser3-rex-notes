@@ -19,25 +19,9 @@ var WrapText = function (text, ctx, wrapMode, wrapWidth, offset) {
         return retLines;
     }
 
-    if (text.indexOf('\n') === -1) {
-        if (wrapMode === NO_WRAP) {
-            var textWidth = ctx.measureText(text).width;
-            retLines.push(LinesPool.newline(text, textWidth, NO_NEWLINE));
-            return retLines;
-        } else if (text.length <= 100) {
-            // short string testing
-            var remainWidth = wrapWidth - offset;
-            var textWidth = ctx.measureText(text).width;
-            if (textWidth <= remainWidth) {
-                retLines.push(LinesPool.newline(text, textWidth, NO_NEWLINE));
-                return retLines;
-            }
-        }
-    }
-
     var lines = text.split(splitRegExp),
         line, remainWidth, isLaseLine, newLineMode;
-    for (var i, linesLen = lines.length; i < linesLen; i++) {
+    for (var i = 0, linesLen = lines.length; i < linesLen; i++) {
         line = lines[i];
         newLineMode = (i === (linesLen - 1)) ? NO_NEWLINE : RAW_NEWLINE;
 

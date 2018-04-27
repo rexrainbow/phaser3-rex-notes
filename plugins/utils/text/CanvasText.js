@@ -18,7 +18,8 @@ class CanvasText {
         this.defatultStyle = GetValue(config, 'style', null);
         this.autoRound = true;
 
-        this.pensManager = new PensManagerKlass();
+        this.pensPool = GetValue(config, 'pensPool', null);
+        this.pensManager = new PensManagerKlass(this);
     }
 
     updatePensManager(text, wrapMode, wrapWidth, lineHeight, pensManager) {
