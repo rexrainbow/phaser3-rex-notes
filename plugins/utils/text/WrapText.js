@@ -1,5 +1,5 @@
-import Pool from './../../object/Pool.js';
-import CONST from './../const.js';
+import Pool from './../object/Pool.js';
+import CONST from './const.js';
 
 const GetValue = Phaser.Utils.GetValue;
 const NO_NEWLINE = CONST.NO_NEWLINE;
@@ -10,11 +10,7 @@ const CHAR_WRAP = CONST.CHAR_WRAP;
 const splitRegExp = CONST.SPLITREGEXP;
 
 var WRAP_RESULT = [];
-var WrapText = function (text, ctx, config) {
-    var wrapMode = GetValue(config, 'wrapMode', WORD_WRAP);
-    var wrapWidth = GetValue(config, 'wrapWidth', null);
-    var offset = GetValue(config, 'offset', 0);
-
+var WrapText = function (text, ctx, wrapMode, wrapWidth, offset) {
     var retLines = WRAP_RESULT;
     LinesPool.freeArr(retLines);
 

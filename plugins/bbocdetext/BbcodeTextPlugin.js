@@ -1,23 +1,9 @@
-import CanvasTextKlass from './../utils/text/CanvasText.js';
+import Text from './../utils/text/Text.js';
+import Parser from './Parser.js';
 
-class BBCodeText extends Phaser.GameObjects.Text {
+class BBCodeText extends Text {
     constructor(scene, x, y, text, style) {
-        super(scene, x, y, text, style);
-        this.canvasText = new CanvasTextKlass();
-    }
-
-    updateText() {
-
-    }
-
-    getRawText(text) {
-        return this.canvasText.getRawText(text);
-    }
-    getSubText(start, end, text) {
-        return this.canvasText.getSubText(start, end, text);
-    }
-    copyPensManager(PensManager) {
-        return this.canvasText.copyPensManager(PensManager);
+        super(scene, x, y, text, style, 'BBCodeText', Parser);
     }
 }
 

@@ -1,300 +1,387 @@
-'use strict'
+import Render from './TextRender.js'; // copy from text object
+import TextStyle from './TextStyle.js'; // extended
+import CanvasTextKlass from './CanvasText.js';
 
-import PensManagerKlass from './PensManager.js';
-import CONST from './const.js';
-import WrapText from './WrapText/WrapText.js';
-
+const AddToDOM = Phaser.DOM.AddToDOM;
+const RemoveFromDOM = Phaser.DOM.RemoveFromDOM;
+const CanvasPool = Phaser.Display.Canvas.Pool;
+const Components = Phaser.GameObjects.Components;
+const GameObject = Phaser.GameObjects.GameObject;
+const BuildGameObject = Phaser.GameObjects.BuildGameObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
-const NO_WRAP = CONST.NO_WRAP;
-const NO_NEWLINE = CONST.NO_NEWLINE;
 
-var TMPPENSMGR = null;
-class Text {
-    constructor(config) {
-        this.context = GetValue(config, 'context', null);
-        this.canvas = this.context.canvas;
-        this.parser = GetValue(config, 'parser', null);
-        this.defatultStyle = GetValue(config, 'style', null);
-        this.textChanged = true;
+var Text = new Phaser.Class({
 
-        this.pensManager = new PensManagerKlass();
-    }
+    Extends: GameObject,
 
-    updatePensManager(pensManager, config) {
-        pensManager.freePens();
-        var txt = GetValue(config, 'text', '');
-        if (txt === "") {
-            return pensManager;
+    Mixins: [
+        Components.Alpha,
+        Components.BlendMode,
+        Components.ComputedSize,
+        Components.Depth,
+        Components.Flip,
+        Components.GetBounds,
+        Components.Origin,
+        Components.Pipeline,
+        Components.ScaleMode,
+        Components.ScrollFactor,
+        Components.Tint,
+        Components.Transform,
+        Components.Visible,
+        Render
+    ],
+
+    initialize:
+
+        function Text(scene, x, y, text, style, type, parser) {
+            if (x === undefined) {
+                x = 0;
+            }
+            if (y === undefined) {
+                y = 0;
+            }
+
+            GameObject.call(this, scene, type);
+
+            this.setPosition(x, y);
+            this.setOrigin(0, 0);
+            this.initPipeline('TextureTintPipeline');
+
+            this.canvas = CanvasPool.create(this);
+
+            this.context = this.canvas.getContext('2d');
+
+            this.style = new TextStyle(this, style);
+
+            this.autoRound = true;
+
+            this.text = '';
+
+            this.resolution = 1;
+
+            this.padding = {
+                left: 0,
+                right: 0,
+                top: 0,
+                bottom: 0
+            };
+
+            this.width = 1;
+
+            this.height = 1;
+
+            this.canvasTexture = null;
+
+            this.dirty = false;
+
+            this.parser = parser;
+            this.canvasText = new CanvasTextKlass(this);
+
+            this.initRTL();
+
+            if (style && style.padding) {
+                this.setPadding(style.padding);
+            }
+
+            this.setText(text);
+
+            if (scene.sys.game.config.renderType === Phaser.WEBGL) {
+                scene.sys.game.renderer.onContextRestored(function () {
+                    this.canvasTexture = null;
+                    this.dirty = true;
+                }, this);
+            }
+        },
+
+    initRTL: function () {
+        if (!this.style.rtl) {
+            return;
         }
 
-        var wrapMode = GetValue(config, 'wrapMode', NO_WRAP);
-        var wrapWidth = GetValue(config, 'wrapWidth', 0);
-        var lineHeight = GetValue(config, 'lineHeight', 0);
+        //  Here is where the crazy starts.
+        //
+        //  Due to browser implementation issues, you cannot fillText BiDi text to a canvas
+        //  that is not part of the DOM. It just completely ignores the direction property.
+
+        this.canvas.dir = 'rtl';
+
+        //  Experimental atm, but one day ...
+        this.context.direction = 'rtl';
+
+        //  Add it to the DOM, but hidden within the parent canvas.
+        this.canvas.style.display = 'none';
+
+        AddToDOM(this.canvas, this.scene.sys.canvas);
+
+        //  And finally we set the x origin
+        this.originX = 1;
+    },
+
+    // TODO
+    //getWrappedText: function (text) {
+    //    if (text === undefined) {
+    //        text = this.text;
+    //    }
+    //    var style = this.style;
+    //    this.canvasText.updatePensManager(
+    //        this.text,
+    //        style.wrapMode,
+    //        style.wrapWidth,
+    //        style.lineHeight
+    //    );
+    //    return;
+    //},
+
+    setText: function (value) {
+        if (!value && value !== 0) {
+            value = '';
+        }
+
+        if (Array.isArray(value)) {
+            value = value.join('\n');
+        }
+
+        if (value !== this.text) {
+            this.text = value.toString();
+
+            this.updateText();
+        }
+
+        return this;
+    },
+
+    setStyle: function (style) {
+        return this.style.setStyle(style);
+    },
+
+    setFont: function (font) {
+        return this.style.setFont(font);
+    },
+
+    setFontFamily: function (family) {
+        return this.style.setFontFamily(family);
+    },
+
+    setFontSize: function (size) {
+        return this.style.setFontSize(size);
+    },
+
+    setFontStyle: function (style) {
+        return this.style.setFontStyle(style);
+    },
+
+    setFixedSize: function (width, height) {
+        return this.style.setFixedSize(width, height);
+    },
+
+    setBackgroundColor: function (color) {
+        return this.style.setBackgroundColor(color);
+    },
+
+    setFill: function (color) {
+        return this.style.setFill(color);
+    },
+
+    setColor: function (color) {
+        return this.style.setColor(color);
+    },
+
+    setStroke: function (color, thickness) {
+        return this.style.setStroke(color, thickness);
+    },
+
+    setShadow: function (x, y, color, blur, shadowStroke, shadowFill) {
+        return this.style.setShadow(x, y, color, blur, shadowStroke, shadowFill);
+    },
+
+    setShadowOffset: function (x, y) {
+        return this.style.setShadowOffset(x, y);
+    },
+
+    setShadowColor: function (color) {
+        return this.style.setShadowColor(color);
+    },
+
+    setShadowBlur: function (blur) {
+        return this.style.setShadowBlur(blur);
+    },
+
+    setShadowStroke: function (enabled) {
+        return this.style.setShadowStroke(enabled);
+    },
+
+    setShadowFill: function (enabled) {
+        return this.style.setShadowFill(enabled);
+    },
+
+    setWordWrapWidth: function (width, useAdvancedWrap) {
+        return this.style.setWordWrapWidth(width, useAdvancedWrap);
+    },
+
+    setWordWrapCallback: function (callback, scope) {
+        return this.style.setWordWrapCallback(callback, scope);
+    },
+
+    setAlign: function (align) {
+        return this.style.setAlign(align);
+    },
+
+    setPadding: function (left, top, right, bottom) {
+        if (typeof left === 'object') {
+            var config = left;
+
+            //  If they specify x and/or y this applies to all
+            var x = GetValue(config, 'x', null);
+
+            if (x !== null) {
+                left = x;
+                right = x;
+            } else {
+                left = GetValue(config, 'left', 0);
+                right = GetValue(config, 'right', left);
+            }
+
+            var y = GetValue(config, 'y', null);
+
+            if (y !== null) {
+                top = y;
+                bottom = y;
+            } else {
+                top = GetValue(config, 'top', 0);
+                bottom = GetValue(config, 'bottom', top);
+            }
+        } else {
+            if (left === undefined) {
+                left = 0;
+            }
+            if (top === undefined) {
+                top = left;
+            }
+            if (right === undefined) {
+                right = left;
+            }
+            if (bottom === undefined) {
+                bottom = top;
+            }
+        }
+
+        this.padding.left = left;
+        this.padding.top = top;
+        this.padding.right = right;
+        this.padding.bottom = bottom;
+
+        return this.updateText();
+    },
+
+    setMaxLines: function (max) {
+        return this.style.setMaxLines(max);
+    },
+
+    // TODO
+    updateText: function () {
+        var canvasText = this.canvasText;
+
+        // wrap text to pens
+        var style = this.style;
+        canvasText.updatePensManager(
+            this.text,
+            style.wrapMode,
+            style.wrapWidth,
+            style.lineHeight
+        );
+
+        // resize
+        var padding = this.padding;
+        var w = canvasText.linesWidth + padding.left + padding.right;
+        var h = canvasText.linesHeight + padding.top + padding.bottom;
+
+        if (style.fixedWidth === 0) {
+            this.width = w;
+        }
+
+        if (style.fixedHeight === 0) {
+            this.height = h;
+        }
+
+        this.updateDisplayOrigin();
+
+        var resolution = this.resolution;
+        w *= resolution;
+        h *= resolution;
+
+        w = Math.max(w, 1);
+        h = Math.max(h, 1);
 
         var canvas = this.canvas;
-        var ctx = this.context;
-
-        var noWrap = (wrapMode === NO_WRAP);
-        var startX = 0,
-            startY = 0;
-        var cursorX = startX,
-            cursorY = startY;
-
-        var rawText, curProp, curStyle;
-        var match = this.parser.splitText(txt);
-        for (var i = 0, len = match.length; i < len; i++) {
-            var result = this.parser.tagText2Prop(match[i], curProp);
-            rawText = result.rawText;
-            curProp = result.prop;
-            curStyle = this.parser.propToContextStyle(
-                this.defatultStyle,
-                curProp
-            );
-
-            if (rawText !== "") {
-                if (!noWrap) {
-                    // Save the current context.
-                    this.context.save();
-                    curStyle.syncStyle(canvas, ctx);
-
-                    // wrap text to lines
-                    WRAPTEXT_CONFIG.wrapMode = wrapMode;
-                    WRAPTEXT_CONFIG.wrapWidth = wrapWidth;
-                    WRAPTEXT_CONFIG.offset = cursorX - startX;
-                    var wrapLines = WrapText(rawText, ctx, WRAPTEXT_CONFIG);
-
-                    // add pens
-                    for (var j = 0, jLen = wrapLines.length; j < jLen; j++) {
-                        var n = wrapLines[j];
-                        PEN_CONFIG.text = n.text;
-                        PEN_CONFIG.x = cursorX;
-                        PEN_CONFIG.y = cursorY;
-                        PEN_CONFIG.width = n.width;
-                        PEN_CONFIG.prop = curProp;
-                        PEN_CONFIG.newLineMode = n.newLineMode;
-                        pensManager.addPen(PEN_CONFIG);
-
-                        if (n.newLineMode !== NO_NEWLINE) {
-                            cursorX = startX;
-                            cursorY += lineHeight;
-                        } else {
-                            cursorX += n.width;
-                        }
-
-                    }
-                    this.context.restore();
-                } else {
-                    PEN_CONFIG.text = rawText;
-                    PEN_CONFIG.x = null;
-                    PEN_CONFIG.y = null;
-                    PEN_CONFIG.width = null;
-                    PEN_CONFIG.prop = curProp;
-                    PEN_CONFIG.newLineMode = NO_NEWLINE;
-                    pensManager.addPen(PEN_CONFIG);
-                }
-            }
+        var context = this.context;
+        if (canvas.width !== w || canvas.height !== h) {
+            canvas.width = w;
+            canvas.height = h;
         }
 
-        return pensManager;
-    }
-
-    draw() {
-        if (this.textChanged) {
-            this.updatePensManager(this.pensManager, this.defatultStyle);
-            this.textChanged = false;
-        }
-
-        var linesWidth = this.pensManager.getMaxLineWidth();
-        var linesNum, maxLines = this.defatultStyle.maxLines;
-        if (maxLines > 0) {
-            linesNum = Math.min(maxLines, this.pensManager.linesNum);
-        } else {
-            linesNum = this.pensManager.linesNum;
-        }
-        var linesHeight = (this.defatultStyle.lineHeight * linesNum);
-        if (linesNum > 0) {
-            linesHeight -= this.defatultStyle.lineSpacing;
-        }
-
-        var padding = this.padding;
-        var w = linesWidth + padding.left + padding.right;
-        var h = linesHeight + padding.top + padding.bottom;
-
-        this.drawBackground();
-
-        var lines = this.pensManager.lines;
-        var drawLinesCnt = lines.length,
-            maxDrawLines = this.defatultStyle.maxLines;
-        if ((maxDrawLines > 0) && (drawLinesCnt > maxDrawLines)) {
-            drawLinesCnt = maxDrawLines;
-        }
-
-
-        var pens, pen;
-        var startX, startY;
-        var lineWidth, boxWidth, offsetX;
-        var halign, valign;
-        for (var lineIdx = 0, drawLinesCnt; lineIdx < linesLen; lineIdx++) {
-            lineWidth = pensMgr.getLineWidth(lineIdx);
-            if (lineWidth === 0)
-                continue;
-
-            offsetX = 0;
-            //if (halign === 1) // center
-            //    offsetX = (boxWidth - lineWidth) / 2;
-            //else if (halign === 2) // right
-            //    offsetX = boxWidth - lineWidth;
-            //else
-            //    offsetX = 0;
-
-            offsetX += startX;
-
-            pens = lines[lineIdx];
-            for (var penIdx = 0, pensLen = pens.length; penIdx < pensLen; penIdx++) {
-                pen = pens[penIdx];
-                this.drawPen(pen, offsetX, offsetY);
-            }
-        }
-    }
-
-    drawBackground() {
-        var color = this.defatultStyle.backgroundColor;
-        if (color === null) {
-            return;
-        }
-        var ctx = this.context;
-        ctx.fillStyle = this.backgroundColor;
-        ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-    }
-
-    drawPen(pen, offsetX, offsetY) {
-        var ctx = this.context;
-        ctx.save();
-
-        var curStyle = this.parser.propToContextStyle(
-            this.defatultStyle,
-            pen.prop
+        context.save();
+        context.scale(resolution, resolution);
+        context.translate(padding.left, padding.top);
+        // draw
+        context.textBaseline = 'alphabetic';
+        canvasText.draw(
+            (w - padding.right),
+            (h - padding.bottom)
         );
-        curStyle.syncStyle(this.canvas, this.context);
+        context.restore();
 
-        var startX = offsetX + pen.x;
-        var startY = offsetY + pen.y;
-        var text = pen.text;
+        this.dirty = true;
 
-        // underline        
-        UNDERLINE_PROP.color = curStyle.underlineColor;
-        UNDERLINE_PROP.thickness = curStyle.underlineThickness;
-        UNDERLINE_PROP.offset = curStyle.underlineOffset;
-        this.drawUnderline(text, startX, startY, UNDERLINE_PROP);
+        return this;
+    },
 
-        // draw image: TODO
+    getTextMetrics: function () {
+        return this.style.getTextMetrics();
+    },
 
-        // draw text
-        if (curStyle.strokeThickness) {
-            curStyle.syncShadow(ctx, curStyle.shadowStroke);
+    toJSON: function () {
+        var out = Components.ToJSON(this);
 
-            ctx.strokeText(text, startX, startY);
+        //  Extra Text data is added here
+
+        var data = {
+            autoRound: this.autoRound,
+            text: this.text,
+            style: this.style.toJSON(),
+            resolution: this.resolution,
+            padding: {
+                left: this.padding.left,
+                right: this.padding.right,
+                top: this.padding.top,
+                bottom: this.padding.bottom
+            }
+        };
+
+        out.data = data;
+
+        return out;
+    },
+
+    preDestroy: function () {
+        if (this.style.rtl) {
+            RemoveFromDOM(this.canvas);
         }
 
-        if (curStyle.color) {
-            curStyle.syncShadow(ctx, curStyle.shadowFill);
+        CanvasPool.remove(this.canvas);
+    },
 
-            ctx.fillText(text, startX, startY);
-        }
+    getRawText: function (text) {
+        return this.canvasText.getRawText(text);
+    },
 
-        ctx.restore();
+    getSubText: function (start, end, text) {
+        return this.canvasText.getSubText(start, end, text);
+    },
+
+    copyPensManager: function (PensManager) {
+        return this.canvasText.copyPensManager(PensManager);
     }
 
-    drawUnderline(text, x, y, underlineProp) {
-        var thickness = underlineProp.thickness;
-        if (thickness <= 0) {
-            return;
-        }
-        var ctx = this.context;
-        var width = ctx.measureText(text).width;
-        //switch(ctx.textAlign)
-        //{
-        //case "center": x -= (width/2); break;
-        //case "right": x -= width; break;
-        //}
-        y += underlineProp.offset;
-
-        ctx.beginPath();
-        ctx.strokeStyle = underlineProp.color;
-        ctx.lineWidth = thickness;
-        ctx.moveTo(x, y);
-        ctx.lineTo(x + width, y);
-        ctx.stroke();
-    }
-
-    destroy() {
-        this.context = undefined;
-        this.canvas = undefined;
-        this.parser = undefined;
-        this.defatultStyle = undefined;
-
-        this.pensManager = undefined;
-    }
-
-    get lines() {
-        return this.pensManager.lines;
-    }
-
-    getRawText(text) {
-        if (text === undefined) {
-            return this.pensMgr.getRawText();
-        }
-
-        var m, match = this.parser.splitText(text, 1); // RAWTEXTONLY_MODE
-        var result = "";
-        for (var i = 0, len = match.length; i < len; i++) {
-            result += match[i];
-        }
-
-        return result;
-    }
-
-    getSubText(start, end, text) {
-        if (text === undefined) {
-            return this.pensManager.getSliceTagText(start, end, this.parser.prop2TagText);
-        }
-
-        if (TMPPENSMGR === null) {
-            TMPPENSMGR = new PensManagerKlass();
-        }
-
-        // TODO
-        //var textSave = this.textInfo.text;
-        //this.textInfo.text = text;
-        //this.updatePens(TMPPENSMGR, this.textInfo, true);
-        //this.textInfo.text = textSave;
-
-        return TMPPENSMGR.getSliceTagText(start, end, this.parser.prop2TagText);
-    }
-
-    copyPensManager(pensManager) {
-        return this.pensManager.copy(pensManager);
-    }
-
-    getTextWidth(pensManager) {
-        if (pensManager === undefined) {
-            pensManager = this.pensManager;
-        }
-
-        return pensManager.getMaxLineWidth();
-    }
-
-    getLastPen(pensManager) {
-        if (pensManager === undefined) {
-            pensManager = this.pensManager;
-        }
-
-        return pensManager.lastPen;
-    }
-};
-
-var UNDERLINE_PROP = {};
-var WRAPTEXT_CONFIG = {};
-var PEN_CONFIG = {};
+});
 
 export default Text;

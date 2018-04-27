@@ -1,14 +1,15 @@
 'use strict'
 
-import Pool from './../object/Pool.js';
+import PoolKlass from './../object/Pool.js';
 import PenKlass from './Pen.js';
 import CONST from './const.js';
+import Clone from './../object/Clone.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 const NO_NEWLINE = CONST.NO_NEWLINE;
 
-var PensPool = new Pool(); // default pens pool
-var LinesPool = new Pool(); // default lines pool
+var PensPool = new PoolKlass(); // default pens pool
+var LinesPool = new PoolKlass(); // default lines pool
 class PensManager {
     constructor(config) {
         this.pens = []; // all pens
@@ -28,12 +29,18 @@ class PensManager {
         this.maxLinesWidth = undefined;
     }
 
-    addPen(config) { // txt, x, y, width, prop, newLineMode
+    addPen(text, x, y, width, prop, newLineMode) {
         var pen = this.PensPool.allocate();
         if (pen == null) {
             pen = new PenKlass();
         }
-        pen.resetFromJSON(config);
+        PEN_CONFIG.text = text;
+        PEN_CONFIG.x = x;
+        PEN_CONFIG.y = y;
+        PEN_CONFIG.width = width;
+        PEN_CONFIG.prop = prop;
+        PEN_CONFIG.newLineMode = newLineMode;        
+        pen.resetFromJSON(PEN_CONFIG);
 
         var previousPen = this.lastPen;
         if (previousPen == null)
@@ -64,17 +71,18 @@ class PensManager {
 
         targetPensManager.freePens();
 
-        var config = {};
         for (var li = 0, llen = this.lines.length; li < llen; li++) {
             var pens = this.lines[li];
             for (var pi = 0, plen = pens.length; pi < plen; pi++) {
                 var pen = pens[pi];
-                config.x = pen.x;
-                config.y = pen.y;
-                config.width = pen.width;
-                config.prop = pen.prop;
-                config.newLineMode = pen.newLineMode;
-                targetPensManager.addPen(config);
+                targetPensManager.addPen(
+                    pen.text,
+                    pen.x,
+                    pen.y,
+                    pen.width,
+                    Clone(pen.prop),
+                    pen.newLineMode
+                );
             }
         }
 
@@ -89,7 +97,7 @@ class PensManager {
         return this.lines[this.lines.length - 1];
     }
 
-    get lineStartIndex(i) {
+    getLineStartIndex(i) {
         var line = this.lines[i];
         if (line == null)
             return 0;
@@ -97,7 +105,7 @@ class PensManager {
         return line[0].startIndex;
     }
 
-    get lineEndIndex(i) {
+    getLineEndIndex(i) {
         var li, hasLastPen = false,
             line;
         for (li = i; li >= 0; li--) {
@@ -217,5 +225,7 @@ class PensManager {
         return txt;
     }
 };
+
+var PEN_CONFIG = {};
 
 export default PensManager;

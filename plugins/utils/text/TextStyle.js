@@ -6,9 +6,8 @@
 
 import MeasureText from './MeasureText.js';
 
-var Class = Phaser.Class;
-var GetAdvancedValue = Phaser.Utils.GetAdvancedValue;
-var GetValue = Phaser.Utils.GetValue;
+const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
+const GetValue = Phaser.Utils.Objects.GetValue;
 
 //  Key: [ Object Key, Default Value ]
 
