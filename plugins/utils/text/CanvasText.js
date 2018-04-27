@@ -3,6 +3,7 @@
 import PensManagerKlass from './PensManager.js';
 import CONST from './const.js';
 import WrapText from './WrapText.js';
+import Clone from './../object/Clone.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const NO_WRAP = CONST.NO_WRAP;
@@ -30,9 +31,8 @@ class CanvasText {
         }
 
         var canvas = this.canvas;
-        var ctx = this.context;
+        var context = this.context;
 
-        var noWrap = (wrapMode === NO_WRAP);
         var cursorX = 0,
             cursorY = 0;
 
@@ -42,58 +42,48 @@ class CanvasText {
             var result = this.parser.tagTextToProp(match[i], curProp);
             rawText = result.rawText;
             curProp = result.prop;
-            curStyle = this.parser.propToContextStyle(
-                this.defatultStyle,
-                curProp
-            );
 
-            if (rawText !== "") {
-                if (!noWrap) {
-                    // Save the current context.
-                    this.context.save();
-                    curStyle.syncStyle(canvas, ctx);
+            // wrap text to lines
+            if (rawText !== '') {
+                // Save the current context.
+                this.context.save();
+                curStyle = this.parser.propToContextStyle(
+                    this.defatultStyle,
+                    curProp
+                );
+                curStyle.syncFont(canvas, context, true);
+                curStyle.syncStyle(canvas, context);
+                var wrapLines = WrapText(
+                    rawText,
+                    context,
+                    wrapMode,
+                    wrapWidth,
+                    cursorX
+                );
 
-                    // wrap text to lines
-                    var wrapLines = WrapText(
-                        rawText,
-                        ctx,
-                        wrapMode,
-                        wrapWidth,
-                        cursorX
-                    );
-
-                    // add pens
-                    for (var j = 0, jLen = wrapLines.length; j < jLen; j++) {
-                        var n = wrapLines[j];
-                        pensManager.addPen(
-                            n.text,
-                            cursorX,
-                            cursorY,
-                            n.width,
-                            curProp,
-                            n.newLineMode
-                        );
-
-                        if (n.newLineMode !== NO_NEWLINE) {
-                            cursorX = 0;
-                            cursorY += lineHeight;
-                        } else {
-                            cursorX += n.width;
-                        }
-
-                    }
-                    this.context.restore();
-                } else {
+                // add pens
+                for (var j = 0, jLen = wrapLines.length; j < jLen; j++) {
+                    var n = wrapLines[j];
                     pensManager.addPen(
-                        rawText,
-                        null,
-                        null,
-                        null,
-                        curProp,
-                        NO_NEWLINE
+                        n.text,
+                        cursorX,
+                        cursorY,
+                        n.width,
+                        Clone(curProp),
+                        n.newLineMode
                     );
+
+                    if (n.newLineMode !== NO_NEWLINE) {
+                        cursorX = 0;
+                        cursorY += lineHeight;
+                    } else {
+                        cursorX += n.width;
+                    }
+
                 }
+                this.context.restore();
             }
+
         }
 
         return pensManager;
@@ -178,10 +168,10 @@ class CanvasText {
         if (color === null) {
             return;
         }
-        var ctx = this.context;
+        var context = this.context;
         var canvas = this.canvas;
-        ctx.fillStyle = this.backgroundColor;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        context.fillStyle = color;
+        context.fillRect(0, 0, canvas.width, canvas.height);
     }
 
     drawUnderline(x, y, width, thickness, color) {
@@ -189,24 +179,26 @@ class CanvasText {
             return;
         }
 
-        var ctx = this.context;
-        ctx.beginPath();
-        ctx.strokeStyle = color;
-        ctx.lineWidth = thickness;
-        ctx.moveTo(x, y);
-        ctx.lineTo(x + width, y);
-        ctx.stroke();
+        var context = this.context;
+        context.beginPath();
+        context.strokeStyle = color;
+        context.lineWidth = thickness;
+        context.moveTo(x, y);
+        context.lineTo(x + width, y);
+        context.stroke();
     }
 
     drawPen(pen, offsetX, offsetY) {
-        var ctx = this.context;
-        ctx.save();
+        var canvas = this.canvas;        
+        var context = this.context;
+        context.save();
 
         var curStyle = this.parser.propToContextStyle(
             this.defatultStyle,
             pen.prop
         );
-        curStyle.syncStyle(this.canvas, this.context);
+        curStyle.syncFont(canvas, context, true);
+        curStyle.syncStyle(canvas, context); 
 
         var startX = offsetX + pen.x;
         var startY = offsetY + pen.y;
@@ -224,24 +216,24 @@ class CanvasText {
             (startY + curStyle.underlineOffset),
             penWidth,
             curStyle.underlineThickness,
-            color);
+            curStyle.underlineColor);
 
         // draw image: TODO
 
         // draw text
         if (curStyle.strokeThickness) {
-            curStyle.syncShadow(ctx, curStyle.shadowStroke);
+            curStyle.syncShadow(context, curStyle.shadowStroke);
 
-            ctx.strokeText(text, startX, startY);
+            context.strokeText(text, startX, startY);
         }
 
         if (curStyle.color) {
-            curStyle.syncShadow(ctx, curStyle.shadowFill);
+            curStyle.syncShadow(context, curStyle.shadowFill);
 
-            ctx.fillText(text, startX, startY);
+            context.fillText(text, startX, startY);
         }
 
-        ctx.restore();
+        context.restore();
     }
 
     destroy() {

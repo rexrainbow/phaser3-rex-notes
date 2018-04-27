@@ -40,6 +40,11 @@ var propertyMap = {
     shadowStroke: ['shadow.stroke', false],
     shadowFill: ['shadow.fill', false],
 
+    // underline
+    underlineColor: ['underline.color', '#000'],
+    underlineThickness: ['underline.thickness', 0],
+    underlineOffset: ['underline.offset', 0],
+
     // align
     halign: ['halign', 'left'],
     valign: ['valign', 'top'],
@@ -80,6 +85,10 @@ class TextStyle {
         this.shadowBlur;
         this.shadowStroke;
         this.shadowFill;
+
+        this.underlineColor;
+        this.underlineThickness;
+        this.underlineOffset;
 
         this.halign;
         this.valign;
@@ -139,7 +148,7 @@ class TextStyle {
         var font = GetValue(style, 'font', null);
 
         if (font === null) {
-            this._font = [this.fontStyle, this.fontSize, this.fontFamily].join(' ');
+            this._font = this.fontStyle + ' ' + this.fontSize + ' ' + this.fontFamily;
         } else {
             this._font = font;
         }
@@ -158,7 +167,10 @@ class TextStyle {
         }
     }
 
-    syncFont(canvas, context) {
+    syncFont(canvas, context, rebuildFont) {
+        if (rebuildFont) {
+            this._font = this.fontStyle + ' ' + this.fontSize + ' ' + this.fontFamily;
+        }
         context.font = this._font;
     }
 
@@ -189,7 +201,7 @@ class TextStyle {
 
     update(recalculateMetrics) {
         if (recalculateMetrics) {
-            this._font = [this.fontStyle, this.fontSize, this.fontFamily].join(' ');
+            this._font = this.fontStyle + ' ' + this.fontSize + ' ' + this.fontFamily;
 
             this.metrics = MeasureText(this);
         }

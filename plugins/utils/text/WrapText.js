@@ -5,6 +5,7 @@ const GetValue = Phaser.Utils.GetValue;
 const NO_NEWLINE = CONST.NO_NEWLINE;
 const RAW_NEWLINE = CONST.RAW_NEWLINE;
 const WRAPPED_NEWLINE = CONST.WRAPPED_NEWLINE;
+const NO_WRAP = CONST.NO_WRAP;
 const WORD_WRAP = CONST.WORD_WRAP;
 const CHAR_WRAP = CONST.CHAR_WRAP;
 const splitRegExp = CONST.SPLITREGEXP;
@@ -18,17 +19,19 @@ var WrapText = function (text, ctx, wrapMode, wrapWidth, offset) {
         return retLines;
     }
 
-    if (wrapWidth <= 2.0) {
-        return retLines;
-    }
-
-    if ((text.length <= 100) && (text.indexOf('\n') === -1)) {
-        // short string testing
-        var remainWidth = wrapWidth - offset;
-        var textWidth = ctx.measureText(text).width;
-        if (textWidth <= remainWidth) {
+    if (text.indexOf('\n') === -1) {
+        if (wrapMode === NO_WRAP) {
+            var textWidth = ctx.measureText(text).width;
             retLines.push(LinesPool.newline(text, textWidth, NO_NEWLINE));
             return retLines;
+        } else if (text.length <= 100) {
+            // short string testing
+            var remainWidth = wrapWidth - offset;
+            var textWidth = ctx.measureText(text).width;
+            if (textWidth <= remainWidth) {
+                retLines.push(LinesPool.newline(text, textWidth, NO_NEWLINE));
+                return retLines;
+            }
         }
     }
 
@@ -44,11 +47,18 @@ var WrapText = function (text, ctx, wrapMode, wrapWidth, offset) {
             remainWidth = wrapWidth;
         }
 
+
+        if (wrapMode === NO_WRAP) {
+            var textWidth = ctx.measureText(line).width;
+            retLines.push(LinesPool.newline(line, textWidth, newLineMode));
+            continue;
+        }
+
         // short string testing
         if (line.length <= 100) {
             var textWidth = ctx.measureText(line).width;
             if (textWidth <= remainWidth) {
-                retLines.push(LinesPool.newline(text, textWidth, newLineMode));
+                retLines.push(LinesPool.newline(line, textWidth, newLineMode));
                 continue;
             }
         }

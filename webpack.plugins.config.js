@@ -5,6 +5,7 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
     entry: {
+        'bbcodetext.min': './plugins/bbcodetext-plugin.js',
         'canvas.min': './plugins/canvas-plugin.js',
         'clock.min': './plugins/clock-plugin.js',
         'csvtoarray.min': './plugins/csvtoarray.js',

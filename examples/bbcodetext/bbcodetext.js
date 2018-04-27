@@ -12,8 +12,13 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        debugger
-        var txt = new BBCodeText(this, 100, 100, 'ABC');
+        var s = "[color=blue]AA[/color][i][color=red]BB[/color][b]CC[/b][/i]DD";
+        this.add.rexBBCodeText(100, 100, s, {
+            backgroundColor: '#555',
+            fontSize: '60px',
+            fixedWidth: 300,
+            fixedHeight: 300
+        });
     }
 
     update() {}

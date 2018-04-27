@@ -18,6 +18,10 @@ class Pen {
         this.width = GetValue(o, 'width', 0);
 
         var prop = GetValue(o, 'prop', null);
+        if (prop === null) {
+            prop = {};
+        }
+        this.prop = prop;
         this.newLineMode = GetValue(o, 'newLineMode', 0);
         this.startIndex = GetValue(o, 'startIndex', 0);
     }

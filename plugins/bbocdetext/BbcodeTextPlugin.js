@@ -7,4 +7,8 @@ class BBCodeText extends Text {
     }
 }
 
+Phaser.GameObjects.GameObjectFactory.register('rexBBCodeText', function (x, y, text, style) {
+    return this.displayList.add(new BBCodeText(this.scene, x, y, text, style));
+});
+
 export default BBCodeText;

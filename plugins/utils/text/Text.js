@@ -309,8 +309,8 @@ var Text = new Phaser.Class({
         w *= resolution;
         h *= resolution;
 
-        w = Math.max(w, 1);
-        h = Math.max(h, 1);
+        w = Math.max(Math.ceil(w), 1);
+        h = Math.max(Math.ceil(h), 1);
 
         var canvas = this.canvas;
         var context = this.context;
@@ -323,7 +323,6 @@ var Text = new Phaser.Class({
         context.scale(resolution, resolution);
         context.translate(padding.left, padding.top);
         // draw
-        context.textBaseline = 'alphabetic';
         canvasText.draw(
             (w - padding.right),
             (h - padding.bottom)
