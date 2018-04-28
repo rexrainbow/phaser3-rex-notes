@@ -11,7 +11,7 @@ const CHAR_WRAP = CONST.CHAR_WRAP;
 const splitRegExp = CONST.SPLITREGEXP;
 
 var WRAP_RESULT = [];
-var WrapText = function (text, ctx, wrapMode, wrapWidth, offset) {
+var WrapText = function (text, getTextWidth, wrapMode, wrapWidth, offset) {
     var retLines = WRAP_RESULT;
     LinesPool.freeArr(retLines);
 
@@ -33,14 +33,14 @@ var WrapText = function (text, ctx, wrapMode, wrapWidth, offset) {
 
 
         if (wrapMode === NO_WRAP) {
-            var textWidth = ctx.measureText(line).width;
+            var textWidth = getTextWidth(line);
             retLines.push(LinesPool.newline(line, textWidth, newLineMode));
             continue;
         }
 
         // short string testing
         if (line.length <= 100) {
-            var textWidth = ctx.measureText(line).width;
+            var textWidth = getTextWidth(line);
             if (textWidth <= remainWidth) {
                 retLines.push(LinesPool.newline(line, textWidth, newLineMode));
                 continue;
@@ -69,14 +69,14 @@ var WrapText = function (text, ctx, wrapMode, wrapWidth, offset) {
                 curLineText += token;
             }
 
-            currLineWidth = ctx.measureText(curLineText).width;
+            currLineWidth = getTextWidth(curLineText);
             if ((j > 0) && (currLineWidth > remainWidth)) {
                 retLines.push(LinesPool.newline(lineText, lineWidth, WRAPPED_NEWLINE));
                 remainWidth = wrapWidth;
 
                 // new line
                 curLineText = token;
-                currLineWidth = ctx.measureText(curLineText).width;
+                currLineWidth = getTextWidth(curLineText);
             }
 
             lineText = curLineText;

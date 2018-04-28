@@ -26,6 +26,11 @@ class CanvasText {
 
         this.pensPool = GetValue(config, 'pensPool', null);
         this.pensManager = new PensManagerKlass(this);
+
+        var context = this.context;
+        this.getTextWidth = function (text) {
+            return context.measureText(text).width;
+        }
     }
 
     updatePensManager(text, wrapMode, wrapWidth, lineHeight, pensManager) {
@@ -62,7 +67,7 @@ class CanvasText {
                 curStyle.syncStyle(canvas, context);
                 var wrapLines = WrapText(
                     rawText,
-                    context,
+                    this.getTextWidth,
                     wrapMode,
                     wrapWidth,
                     cursorX
