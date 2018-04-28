@@ -16,7 +16,7 @@ class Demo extends Phaser.Scene {
         this.add.rexBBCodeText(100, 100, s, {
             backgroundColor: '#555',
             fontSize: '60px',
-            halign: 'right'
+            align: 'right'
         });
     }
 

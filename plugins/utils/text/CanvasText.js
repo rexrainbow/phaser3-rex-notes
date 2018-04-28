@@ -8,6 +8,12 @@ import Clone from './../object/Clone.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 const NO_WRAP = CONST.NO_WRAP;
 const NO_NEWLINE = CONST.NO_NEWLINE;
+const HALIGN_LEFT = CONST.hleft;
+const HALIGN_CENTER = CONST.hcenter;
+const HALIGN_RIGHT = CONST.hright;
+const VALIGN_TOP = CONST.vtop;
+const VALIGN_CENTER = CONST.vcenter;
+const VALIGN_BOTTOM = CONST.vbottom;
 
 var TMPPENSMGR = null;
 class CanvasText {
@@ -113,9 +119,9 @@ class CanvasText {
         var drawLinesNum, drawLineStartIdx, drawLineEndIdx;
         if ((maxLines > 0) && (totalLinesNum > maxLines)) {
             drawLinesNum = maxLines;
-            if (valign === 'center') { // center
+            if (valign === VALIGN_CENTER) { // center
                 drawLineStartIdx = Math.floor((totalLinesNum - drawLinesNum) / 2);
-            } else if (valign === 'bottom') { // bottom
+            } else if (valign === VALIGN_BOTTOM) { // bottom
                 drawLineStartIdx = totalLinesNum - drawLinesNum;
             } else {
                 drawLineStartIdx = 0;
@@ -129,9 +135,9 @@ class CanvasText {
         var startX = (defatultStyle.strokeThickness / 2);
         var startY = (defatultStyle.strokeThickness / 2) + defatultStyle.metrics.ascent;
         var offsetX, offsetY;
-        if (valign === 'center') { // center
+        if (valign === VALIGN_CENTER) { // center
             offsetY = Math.max((boxHeight - (drawLinesNum * lineHeight)) / 2, 0);
-        } else if (valign === 'bottom') { // bottom
+        } else if (valign === VALIGN_BOTTOM) { // bottom
             offsetY = Math.max(boxHeight - (drawLinesNum * lineHeight) - 2, 0);
         } else {
             offsetY = 0;
@@ -142,9 +148,9 @@ class CanvasText {
             if (lineWidth === 0)
                 continue;
 
-            if (halign === 'center') // center
+            if (halign === HALIGN_CENTER) // center
                 offsetX = (boxWidth - lineWidth) / 2;
-            else if (halign === 'right') // right
+            else if (halign === HALIGN_RIGHT) // right
                 offsetX = boxWidth - lineWidth;
             else
                 offsetX = 0;
@@ -243,6 +249,7 @@ class CanvasText {
         this.parser = undefined;
         this.defatultStyle = undefined;
 
+        this.pensManager.destroy();
         this.pensManager = undefined;
     }
 

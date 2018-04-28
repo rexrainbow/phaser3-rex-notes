@@ -46,8 +46,8 @@ var propertyMap = {
     underlineOffset: ['underline.offset', 0],
 
     // align
-    halign: ['halign', 'left'],
-    valign: ['valign', 'top'],
+    halign: ['halign', 0],
+    valign: ['valign', 0],
 
     // size
     maxLines: ['maxLines', 0],
@@ -128,6 +128,13 @@ class TextStyle {
     setStyle(style, updateText) {
         if (updateText === undefined) {
             updateText = true;
+        }
+
+        if (style && style.hasOwnProperty('halign') && typeof style.halign === 'string') {
+            style.halign = HALIGN_MAP[style.halign.toLowerCase()] || 0;
+        }
+        if (style && style.hasOwnProperty('valign') && typeof style.valign === 'string') {
+            style.valign = VALIGN_MAP[style.valign.toLowerCase()] || 0;
         }
 
         //  Avoid type mutation
@@ -395,12 +402,18 @@ class TextStyle {
 
     setAlign(halign, valign) {
         if (halign === undefined) {
-            halign = 'left';
+            halign = 0;
         }
         if (valign === undefined) {
-            valign = 'top';
+            valign = 0;
         }
 
+        if (typeof halign === 'string') {
+            halign = HALIGN_MAP[halign.toLowerCase()] || 0;
+        }
+        if (typeof valign === 'string') {
+            valign = HALIGN_MAP[valign.toLowerCase()] || 0;
+        }
         this.halign = halign;
         this.valign = valign;
 
@@ -409,9 +422,11 @@ class TextStyle {
 
     setHAlign(halign) {
         if (halign === undefined) {
-            halign = 'left';
+            halign = 0;
         }
-
+        if (typeof halign === 'string') {
+            halign = HALIGN_MAP[halign.toLowerCase()] || 0;
+        }
         this.halign = halign;
 
         return this.update(false);
@@ -419,9 +434,11 @@ class TextStyle {
 
     setVAlign(valign) {
         if (valign === undefined) {
-            valign = 'top';
+            valign = 0;
         }
-
+        if (typeof valign === 'string') {
+            valign = HALIGN_MAP[valign.toLowerCase()] || 0;
+        }
         this.valign = valign;
 
         return this.update(false);
@@ -470,5 +487,16 @@ class TextStyle {
     }
 
 }
+
+const HALIGN_MAP = {
+    'left': 0,
+    'center': 1,
+    'right': 2
+};
+const VALIGN_MAP = {
+    'top': 0,
+    'center': 1,
+    'bottom': 2
+};
 
 export default TextStyle;

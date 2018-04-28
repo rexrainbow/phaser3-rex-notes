@@ -53,6 +53,11 @@ var Text = new Phaser.Class({
 
             this.context = this.canvas.getContext('2d');
 
+            if (style.hasOwnProperty('align')) {
+                var halign = style.align;
+                delete style.align;
+                style.halign = halign;
+            }
             this.style = new TextStyle(this, style);
 
             this.autoRound = true;
@@ -229,7 +234,7 @@ var Text = new Phaser.Class({
     },
 
     setAlign: function (align) {
-        return this.style.setAlign(align);
+        return this.style.setHAlign(align);
     },
 
     setPadding: function (left, top, right, bottom) {

@@ -20,6 +20,10 @@ class PensManager {
         this.LinesPool = GetFastValue(config, 'linesPool', LinesPool);
     }
 
+    destroy() {
+        this.freePens();
+    }
+
     freePens() {
         for (var i = 0, len = this.lines.length; i < len; i++)
             this.lines[i].length = 0;
