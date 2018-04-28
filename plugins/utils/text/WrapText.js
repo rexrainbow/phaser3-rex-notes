@@ -59,7 +59,7 @@ var WrapText = function (text, ctx, wrapMode, wrapWidth, offset) {
         var curLineText = '',
             lineText = '',
             currLineWidth, lineWidth = 0;
-        for (var j, tokenLen = tokenArray.length; j < tokenLen; j++) {
+        for (var j = 0, tokenLen = tokenArray.length; j < tokenLen; j++) {
             token = tokenArray[j];
 
             if ((wrapMode === WORD_WRAP) && (j > 0)) {
@@ -70,7 +70,7 @@ var WrapText = function (text, ctx, wrapMode, wrapWidth, offset) {
             }
 
             currLineWidth = ctx.measureText(curLineText).width;
-            if (currLineWidth > remainWidth) {
+            if ((j > 0) && (currLineWidth > remainWidth)) {
                 retLines.push(LinesPool.newline(lineText, lineWidth, WRAPPED_NEWLINE));
                 remainWidth = wrapWidth;
 
@@ -83,7 +83,7 @@ var WrapText = function (text, ctx, wrapMode, wrapWidth, offset) {
             lineWidth = currLineWidth;
         } // for token in tokenArray
 
-        if (curLineText.length > 0) {
+        if (lineWidth <= remainWidth) {
             // remain text in this line
             retLines.push(LinesPool.newline(lineText, lineWidth, newLineMode));
         }

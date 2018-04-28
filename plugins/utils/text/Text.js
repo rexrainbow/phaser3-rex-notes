@@ -128,21 +128,6 @@ var Text = new Phaser.Class({
         this.originX = 1;
     },
 
-    // TODO
-    //getWrappedText: function (text) {
-    //    if (text === undefined) {
-    //        text = this.text;
-    //    }
-    //    var style = this.style;
-    //    this.canvasText.updatePensManager(
-    //        this.text,
-    //        style.wrapMode,
-    //        style.wrapWidth,
-    //        style.lineHeight
-    //    );
-    //    return;
-    //},
-
     setText: function (value) {
         if (!value && value !== 0) {
             value = '';
@@ -387,6 +372,21 @@ var Text = new Phaser.Class({
     getSubText: function (start, end, text) {
         return this.canvasText.getSubText(start, end, text);
     },
+
+    //getWrappedText: function (text) {
+    //    return this.canvasText.getWrappedText(text);
+    //    if (text === undefined) {
+    //        text = this.text;
+    //    }
+    //    var style = this.style;
+    //    this.canvasText.updatePensManager(
+    //        this.text,
+    //        style.wrapMode,
+    //        style.wrapWidth,
+    //        style.lineHeight
+    //    );
+    //    return;
+    //},    
 
     copyPensManager: function (PensManager) {
         return this.canvasText.copyPensManager(PensManager);

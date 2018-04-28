@@ -167,7 +167,7 @@ class PensManager {
     get rawText() {
         var txt = "",
             pens = this.pens;
-        for (var i = 0, len = this.pens.lenth; i < len; i++) {
+        for (var i = 0, len = pens.length; i < len; i++) {
             txt += pens[i].rawText;
         }
 
@@ -177,7 +177,7 @@ class PensManager {
     get rawTextLength() {
         var l = 0,
             pens = this.pens;
-        for (var i = 0, len = this.pens.lenth; i < len; i++) {
+        for (var i = 0, len = this.pens.length; i < len; i++) {
             l += pens[i].rawTextLength;
         }
 
@@ -185,8 +185,9 @@ class PensManager {
     }
 
     getSliceTagText(start, end, callback, scope) {
-        if (start == null)
+        if (start == null) {
             start = 0;
+        }
         if (end == null) {
             var lastPen = this.lastPen;
             if (lastPen == null)

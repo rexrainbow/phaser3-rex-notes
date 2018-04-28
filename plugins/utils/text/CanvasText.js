@@ -281,7 +281,7 @@ class CanvasText {
 
     getRawText(text) {
         if (text === undefined) {
-            return this.pensMgr.getRawText();
+            return this.pensManager.rawText;
         }
 
         var m, match = this.parser.splitText(text, 1); // RAWTEXTONLY_MODE
@@ -295,20 +295,23 @@ class CanvasText {
 
     getSubText(start, end, text) {
         if (text === undefined) {
-            return this.pensManager.getSliceTagText(start, end, this.parser.prop2TagText);
+            return this.pensManager.getSliceTagText(start, end, this.parser.propToTagText);
         }
 
         if (TMPPENSMGR === null) {
             TMPPENSMGR = new PensManagerKlass();
         }
 
-        // TODO
-        //var textSave = this.textInfo.text;
-        //this.textInfo.text = text;
-        //this.updatePens(TMPPENSMGR, this.textInfo, true);
-        //this.textInfo.text = textSave;
+        var defatultStyle = this.defatultStyle;
+        this.updatePensManager(
+            text,
+            defatultStyle.wrapMode,
+            defatultStyle.wrapWidth,
+            defatultStyle.lineHeight,
+            TMPPENSMGR
+        );
 
-        return TMPPENSMGR.getSliceTagText(start, end, this.parser.prop2TagText);
+        return TMPPENSMGR.getSliceTagText(start, end, this.parser.propToTagText);
     }
 
     copyPensManager(pensManager) {

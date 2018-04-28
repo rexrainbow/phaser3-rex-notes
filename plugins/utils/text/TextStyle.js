@@ -136,6 +136,19 @@ class TextStyle {
         if (style && style.hasOwnProperty('valign') && typeof style.valign === 'string') {
             style.valign = VALIGN_MAP[style.valign.toLowerCase()] || 0;
         }
+        if (style && style.hasOwnProperty('wrap')) {
+            var wrap = style.wrap;            
+            if (wrap.hasOwnProperty('mode')) {
+                var wrapMode = wrap.mode;
+                if (typeof wrapMode === 'string') {
+                    wrap.mode = WRAPMODE_MAP[wrapMode.toLowerCase()] || 0;
+                }
+            } else {
+                if (wrap.hasOwnProperty('width')) {
+                    wrap.mode = 1;
+                }
+            }
+        }
 
         //  Avoid type mutation
         if (style && style.hasOwnProperty('fontSize') && typeof style.fontSize === 'number') {
@@ -489,14 +502,20 @@ class TextStyle {
 }
 
 const HALIGN_MAP = {
-    'left': 0,
-    'center': 1,
-    'right': 2
+    left: 0,
+    center: 1,
+    right: 2
 };
 const VALIGN_MAP = {
-    'top': 0,
-    'center': 1,
-    'bottom': 2
+    top: 0,
+    center: 1,
+    bottom: 2
+};
+const WRAPMODE_MAP = {
+    none: 0,
+    word: 1,
+    char: 2,
+    character: 2
 };
 
 export default TextStyle;
