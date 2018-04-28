@@ -8,16 +8,21 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {
-    }
+    preload() {}
 
     create() {
-        var s = '[color=blue]AA[/color]\n[i][color=red]B\nB[/color][b]CC[/b][/i]DD';
-        this.add.rexBBCodeText(100, 100, s, {
+        var s = '[color=blue]AA[/color]\n[i][color=red]B\nB[/color][b]CC[/b][/i]DDDDDDDD';
+        var text = this.add.rexBBCodeText(100, 100, s, {
             backgroundColor: '#555',
             fontSize: '60px',
-            align: 'right'
+            align: 'right',
+            wrap: {
+                mode: 'char',
+                width: 200
+            }
         });
+        console.log(text.getRawText());
+        console.log(text.getSubText(1, 4));
     }
 
     update() {}

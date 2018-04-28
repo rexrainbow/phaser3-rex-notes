@@ -83,10 +83,8 @@ var WrapText = function (text, ctx, wrapMode, wrapWidth, offset) {
             lineWidth = currLineWidth;
         } // for token in tokenArray
 
-        if (lineWidth <= remainWidth) {
-            // remain text in this line
-            retLines.push(LinesPool.newline(lineText, lineWidth, newLineMode));
-        }
+        // flush remain text
+        retLines.push(LinesPool.newline(lineText, lineWidth, newLineMode));
 
     } // for each line in lines
 
