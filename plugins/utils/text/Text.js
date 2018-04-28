@@ -375,7 +375,6 @@ var Text = new Phaser.Class({
     },
 
     getSubString: function(text, start, end) {
-        debugger
         return this.getText(text, start, end);
     },
 
