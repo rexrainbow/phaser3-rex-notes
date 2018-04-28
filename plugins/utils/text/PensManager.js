@@ -184,7 +184,7 @@ class PensManager {
         return l;
     }
 
-    getSliceTagText(start, end, callback, scope) {
+    getSliceTagText(start, end, wrap, callback, scope) {
         if (start == null) {
             start = 0;
         }
@@ -193,7 +193,10 @@ class PensManager {
             if (lastPen == null)
                 return "";
 
-            end = lastPen.endIndex;
+            end = lastPen.nextStartIndex;
+        }
+        if (wrap == null) {
+            wrap = false;
         }
 
         var txt = "",
@@ -202,7 +205,7 @@ class PensManager {
         var currentProp, previousProp;
         for (var i = 0, len = this.pens.length; i < len; i++) {
             pen = this.pens[i];
-            penTxt = pen.rawText;
+            penTxt = (!wrap) ? pen.rawText : pen.wrapText;
             currentProp = pen.prop;
             penStartIdx = pen.startIndex;
             penEndIdx = pen.nextStartIndex;

@@ -3,6 +3,7 @@
 import CONST from './const.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
+const NO_NEWLINE = CONST.NO_NEWLINE;
 const RAW_NEWLINE = CONST.RAW_NEWLINE;
 
 class Pen {
@@ -35,6 +36,15 @@ class Pen {
         return txt;
     }
 
+    get wrapText() {
+        var txt = this.text;
+        if (this.newLineMode !== NO_NEWLINE) {
+            txt += "\n";
+        }
+
+        return txt;
+    }
+
     get rawTextLength() {
         var len = this.text.length;
         if (this.newLineMode === RAW_NEWLINE) {
@@ -49,7 +59,7 @@ class Pen {
 
 
     get endIndex() {
-        return this.getNextStartIndex() - 1;
+        return this.startIndex + this.rawTextLength - 1;
     }
 
     get lastX() {

@@ -298,9 +298,9 @@ class CanvasText {
         return result;
     }
 
-    getSubText(start, end, text) {
+    getSubText(start, end, text, wrap) {
         if (text === undefined) {
-            return this.pensManager.getSliceTagText(start, end, this.parser.propToTagText);
+            return this.pensManager.getSliceTagText(start, end, wrap, this.parser.propToTagText);
         }
 
         if (TMPPENSMGR === null) {
@@ -316,7 +316,7 @@ class CanvasText {
             TMPPENSMGR
         );
 
-        return TMPPENSMGR.getSliceTagText(start, end, this.parser.propToTagText);
+        return TMPPENSMGR.getSliceTagText(start, end, wrap, this.parser.propToTagText);
     }
 
     copyPensManager(pensManager) {

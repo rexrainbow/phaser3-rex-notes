@@ -88,7 +88,7 @@ var Text = new Phaser.Class({
             this.pensPool = PensPools[type];
             this.canvasText = new CanvasTextKlass(this);
 
-            this.initRTL();
+            //this.initRTL();
 
             if (style && style.padding) {
                 this.setPadding(style.padding);
@@ -363,30 +363,30 @@ var Text = new Phaser.Class({
         }
 
         CanvasPool.remove(this.canvas);
+        this.canvasText.destroy();
     },
 
-    getRawText: function (text) {
-        return this.canvasText.getRawText(text);
+    getRawText: function (text, start, end) {
+        var rawText = this.canvasText.getRawText(text);
+        if ((start != null) || (end != null)) {
+            if (start == null) {
+                start = 0;
+            }
+            if (end == null) {
+                end = rawText.length;
+            }
+            rawText = rawText.substring(start, end);
+        }
+        return rawText;
     },
 
-    getSubText: function (start, end, text) {
-        return this.canvasText.getSubText(start, end, text);
+    getText: function (text, start, end) {
+        return this.canvasText.getSubText(start, end, text, false);
     },
 
-    //getWrappedText: function (text) {
-    //    return this.canvasText.getWrappedText(text);
-    //    if (text === undefined) {
-    //        text = this.text;
-    //    }
-    //    var style = this.style;
-    //    this.canvasText.updatePensManager(
-    //        this.text,
-    //        style.wrapMode,
-    //        style.wrapWidth,
-    //        style.lineHeight
-    //    );
-    //    return;
-    //},    
+    getWrappedText: function (text, start, end) {
+        return this.canvasText.getSubText(start, end, text, true);
+    },
 
     copyPensManager: function (PensManager) {
         return this.canvasText.copyPensManager(PensManager);

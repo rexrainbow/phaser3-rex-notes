@@ -17,12 +17,13 @@ class Demo extends Phaser.Scene {
             fontSize: '60px',
             align: 'right',
             wrap: {
-                mode: 'word',
+                mode: 'char',
                 width: 200
             }
         });
+        console.log(text.getWrappedText());
         console.log(text.getRawText());
-        console.log(text.getSubText(1, 4));
+        console.log(text.getText(undefined, 1, 4));
 
         var s2 = 'AA\nB\n\BCCDDDDDDDD'
         this.add.text(100, 400, s2, {

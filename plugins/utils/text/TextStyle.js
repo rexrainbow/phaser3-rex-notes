@@ -5,6 +5,7 @@
  */
 
 import MeasureText from './MeasureText.js';
+import CONST from './const.js';
 
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -502,20 +503,20 @@ class TextStyle {
 }
 
 const HALIGN_MAP = {
-    left: 0,
-    center: 1,
-    right: 2
+    left: CONST.hleft,
+    center: CONST.hcenter,
+    right: CONST.hright,
 };
 const VALIGN_MAP = {
-    top: 0,
-    center: 1,
-    bottom: 2
+    top: CONST.vtop,
+    center: CONST.vcenter,
+    bottom: CONST.vbottom,
 };
 const WRAPMODE_MAP = {
-    none: 0,
-    word: 1,
-    char: 2,
-    character: 2
+    none: CONST.NO_WRAP,
+    word: CONST.WORD_WRAP,
+    char: CONST.CHAR_WRAP,
+    character: CONST.CHAR_WRAP
 };
 
 export default TextStyle;
