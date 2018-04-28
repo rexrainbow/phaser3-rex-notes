@@ -57,7 +57,6 @@ class Pen {
         return this.startIndex + this.rawTextLength;
     }
 
-
     get endIndex() {
         return this.startIndex + this.rawTextLength - 1;
     }

@@ -309,13 +309,13 @@ class CanvasText {
         return rawText;
     }
 
-    getSubText(text, start, end, wrap) {
+    getText(text, start, end, wrap) {
         if (text == null) {
             return this.pensManager.getSliceTagText(start, end, wrap, this.parser.propToTagText);
         }
 
         if (TMPPENSMGR === null) {
-            TMPPENSMGR = new PensManagerKlass();
+            TMPPENSMGR = new PensManagerKlass(this);
         }
 
         var defatultStyle = this.defatultStyle;

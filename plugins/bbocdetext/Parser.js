@@ -11,7 +11,7 @@ var EMPTYPROP = {};
 
 var parser = {
     splitText: function (txt, mode) {
-        var result = SPLITTEXT_RESULT;
+        var result = [];
         var arr, m, charIdx = 0,
             totalLen = txt.length,
             matchStart = totalLen;

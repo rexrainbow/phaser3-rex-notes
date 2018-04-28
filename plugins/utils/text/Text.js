@@ -53,7 +53,7 @@ var Text = new Phaser.Class({
 
             this.context = this.canvas.getContext('2d');
 
-            if (style.hasOwnProperty('align')) {
+            if (style && style.hasOwnProperty('align')) {
                 var halign = style.align;
                 delete style.align;
                 style.halign = halign;
@@ -371,11 +371,16 @@ var Text = new Phaser.Class({
     },
 
     getText: function (text, start, end) {
-        return this.canvasText.getSubText(text, start, end, false);
+        return this.canvasText.getText(text, start, end, false);
+    },
+
+    getSubString: function(text, start, end) {
+        debugger
+        return this.getText(text, start, end);
     },
 
     getWrappedText: function (text, start, end) {
-        return this.canvasText.getSubText(text, start, end, true);
+        return this.canvasText.getText(text, start, end, true);
     },
 
     copyPensManager: function (PensManager) {
