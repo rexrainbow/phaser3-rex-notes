@@ -367,25 +367,15 @@ var Text = new Phaser.Class({
     },
 
     getRawText: function (text, start, end) {
-        var rawText = this.canvasText.getRawText(text);
-        if ((start != null) || (end != null)) {
-            if (start == null) {
-                start = 0;
-            }
-            if (end == null) {
-                end = rawText.length;
-            }
-            rawText = rawText.substring(start, end);
-        }
-        return rawText;
+        return this.canvasText.getRawText(text, start, end);
     },
 
     getText: function (text, start, end) {
-        return this.canvasText.getSubText(start, end, text, false);
+        return this.canvasText.getSubText(text, start, end, false);
     },
 
     getWrappedText: function (text, start, end) {
-        return this.canvasText.getSubText(start, end, text, true);
+        return this.canvasText.getSubText(text, start, end, true);
     },
 
     copyPensManager: function (PensManager) {

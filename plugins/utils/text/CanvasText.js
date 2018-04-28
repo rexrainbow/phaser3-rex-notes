@@ -201,7 +201,7 @@ class CanvasText {
     }
 
     drawPen(pen, offsetX, offsetY) {
-        var canvas = this.canvas;        
+        var canvas = this.canvas;
         var context = this.context;
         context.save();
 
@@ -210,7 +210,7 @@ class CanvasText {
             pen.prop
         );
         curStyle.syncFont(canvas, context, true);
-        curStyle.syncStyle(canvas, context); 
+        curStyle.syncStyle(canvas, context);
 
         var startX = offsetX + pen.x;
         var startY = offsetY + pen.y;
@@ -284,22 +284,33 @@ class CanvasText {
         return linesHeight;
     }
 
-    getRawText(text) {
-        if (text === undefined) {
-            return this.pensManager.rawText;
+    getRawText(text, start, end) {
+        var rawText;
+        if (text == null) {
+            rawText = this.pensManager.rawText;
+        } else {
+            var m, match = this.parser.splitText(text, 1); // RAWTEXTONLY_MODE
+            rawTextt = "";
+            for (var i = 0, len = match.length; i < len; i++) {
+                rawText += match[i];
+            }
         }
 
-        var m, match = this.parser.splitText(text, 1); // RAWTEXTONLY_MODE
-        var result = "";
-        for (var i = 0, len = match.length; i < len; i++) {
-            result += match[i];
+        if ((start != null) || (end != null)) {
+            if (start == null) {
+                start = 0;
+            }
+            if (end == null) {
+                end = rawText.length;
+            }
+            rawText = rawText.substring(start, end);
         }
 
-        return result;
+        return rawText;
     }
 
-    getSubText(start, end, text, wrap) {
-        if (text === undefined) {
+    getSubText(text, start, end, wrap) {
+        if (text == null) {
             return this.pensManager.getSliceTagText(start, end, wrap, this.parser.propToTagText);
         }
 
