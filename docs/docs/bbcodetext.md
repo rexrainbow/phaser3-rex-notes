@@ -17,23 +17,24 @@ Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
 - italic: `[i]text[/i]`
 - color: `[color=red]text[/color]`
 - size: `[size=18]text[/text]`
-- stroke with color setting: `[stroke=red]text[/stroke]`
+- stroke: `[stroke]text[/stroke]`  
+    - stroke with color setting: `[stroke=red]text[/stroke]`
 - shadow: `[shadow]text[/shadow]`
 - underline: `[u]text[/u]`
-- underline with color setting: `[u=red]text[/u]`
+    - underline with color setting: `[u=red]text[/u]`
 
 ### Snapshot
 
 ```javascript
-var txt = scene.add.rexBBCodeText(x, y, 'hello');
-txt.setText('world');
+var txt = scene.add.rexBBCodeText(x, y, '[b]h[/b]ello');
+txt.setText('[i]wor[/i]ld');
 ```
 
 ### Add text object
 
 ```javascript
-var txt = scene.add.rexBBCodeText(x, y, 'hello');
-// var txt = scene.add.rexBBCodeText(x, y, 'hello', { fontFamily: 'Arial', fontSize: 64, color: '#00ff00' });
+var txt = scene.add.rexBBCodeText(x, y, '[b]h[/b]ello');
+// var txt = scene.add.rexBBCodeText(x, y, '[b]h[/b]ello', { fontFamily: 'Arial', fontSize: 64, color: '#00ff00' });
 ```
 
 Default style
@@ -116,7 +117,7 @@ var txt = scene.make.text({
 ### Set text
 
 ```javascript
-txt.setText('world');
+txt.setText('[b]h[/b]ello');
 // var curContent = txt.text;
 ```
 

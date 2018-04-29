@@ -1496,19 +1496,24 @@
 <li>italic: <code>[i]text[/i]</code></li>
 <li>color: <code>[color=red]text[/color]</code></li>
 <li>size: <code>[size=18]text[/text]</code></li>
+<li>stroke: <code>[stroke]text[/stroke]</code>  <ul>
 <li>stroke with color setting: <code>[stroke=red]text[/stroke]</code></li>
+</ul>
+</li>
 <li>shadow: <code>[shadow]text[/shadow]</code></li>
-<li>underline: <code>[u]text[/u]</code></li>
+<li>underline: <code>[u]text[/u]</code><ul>
 <li>underline with color setting: <code>[u=red]text[/u]</code></li>
 </ul>
+</li>
+</ul>
 <h3 id="snapshot">Snapshot<a class="headerlink" href="#snapshot" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexBBCodeText</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="s1">&#39;hello&#39;</span><span class="p">);</span>
-<span class="nx">txt</span><span class="p">.</span><span class="nx">setText</span><span class="p">(</span><span class="s1">&#39;world&#39;</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexBBCodeText</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="s1">&#39;[b]h[/b]ello&#39;</span><span class="p">);</span>
+<span class="nx">txt</span><span class="p">.</span><span class="nx">setText</span><span class="p">(</span><span class="s1">&#39;[i]wor[/i]ld&#39;</span><span class="p">);</span>
 </pre></div>
 
 <h3 id="add-text-object">Add text object<a class="headerlink" href="#add-text-object" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexBBCodeText</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="s1">&#39;hello&#39;</span><span class="p">);</span>
-<span class="c1">// var txt = scene.add.rexBBCodeText(x, y, &#39;hello&#39;, { fontFamily: &#39;Arial&#39;, fontSize: 64, color: &#39;#00ff00&#39; });</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexBBCodeText</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="s1">&#39;[b]h[/b]ello&#39;</span><span class="p">);</span>
+<span class="c1">// var txt = scene.add.rexBBCodeText(x, y, &#39;[b]h[/b]ello&#39;, { fontFamily: &#39;Arial&#39;, fontSize: 64, color: &#39;#00ff00&#39; });</span>
 </pre></div>
 
 <p>Default style</p>
@@ -1582,7 +1587,7 @@
 </pre></div>
 
 <h3 id="set-text">Set text<a class="headerlink" href="#set-text" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">setText</span><span class="p">(</span><span class="s1">&#39;world&#39;</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">setText</span><span class="p">(</span><span class="s1">&#39;[b]h[/b]ello&#39;</span><span class="p">);</span>
 <span class="c1">// var curContent = txt.text;</span>
 </pre></div>
 
