@@ -239,7 +239,7 @@ class CanvasText {
             context.strokeText(text, startX, startY);
         }
 
-        if (curStyle.color) {
+        if (curStyle.color && (curStyle.color !== 'none')) {
             curStyle.syncShadow(context, curStyle.shadowFill);
 
             context.fillText(text, startX, startY);

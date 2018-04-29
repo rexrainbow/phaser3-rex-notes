@@ -11,7 +11,10 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        var s1 = '[color=blue]AA[/color]\n[i][color=red]B\nB[/color][b]CC[/b][/i]DDDDDDDD';
+        var s1 = `[color=blue]AA[/color]
+[i][color=red]B
+B[/color][b]CC[/b][/i]DD[size=10]D[size=20]D[size=30][u]D[size=40]D[/u][size=50]D[/size]D
+[size=20][u=red]EEE[/u][/size][shadow]FFF[/shadow][stroke=blue][color=none]GGG[/stroke]`;
         var text = this.add.rexBBCodeText(100, 100, s1, {
             backgroundColor: '#555',
             fontSize: '60px',
@@ -19,21 +22,21 @@ class Demo extends Phaser.Scene {
             wrap: {
                 mode: 'char',
                 width: 200
+            },
+
+            stroke: 'red',
+            strokeThickness: 1,
+            shadow:{
+                offsetX: 5,
+                offsetY: 5,
+                blur: 5,
+                color: 'yellow'
             }
         });
         console.log(text.getWrappedText());
         console.log(text.getRawText());
         console.log(text.getText(undefined, 1, 4));
 
-        var s2 = 'AA\nB\n\BCCDDDDDDDD'
-        this.add.text(100, 400, s2, {
-            backgroundColor: '#555',
-            fontSize: '60px',
-            align: 'right',
-            wordWrap: {
-                width: 200
-            }
-        });
     }
 
     update() {}

@@ -23,6 +23,7 @@ pages:
         - Blitter: blitter.md
     - Text:
         - Text: text.md
+        - BBCode Text: bbcodetext.md
         - Typing: texttypingplugin.md    
         - Page: textpageplugin.md
     - Canvas:

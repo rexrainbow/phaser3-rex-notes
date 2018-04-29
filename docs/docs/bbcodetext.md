@@ -1,23 +1,39 @@
 ## Introduction
 
-Drawing text on canvas, built-in game object of phaser.
+Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
 
-- Author: Richard Davey
+- Author: Rex
+- A kind of game object
+
+## Source code
+
+[Link](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/bbocdetext/BbcodeTextPlugin.js)
 
 ## Usage
+
+### BBCode
+
+- bold: `[b]text[/b]`
+- italic: `[i]text[/i]`
+- color: `[color=red]text[/color]`
+- size: `[size=18]text[/text]`
+- stroke with color setting: `[stroke=red]text[/stroke]`
+- shadow: `[shadow]text[/shadow]`
+- underline: `[u]text[/u]`
+- underline with color setting: `[u=red]text[/u]`
 
 ### Snapshot
 
 ```javascript
-var txt = scene.add.text(x, y, 'hello');
+var txt = scene.add.rexBBCodeText(x, y, 'hello');
 txt.setText('world');
 ```
 
 ### Add text object
 
 ```javascript
-var txt = scene.add.text(x, y, 'hello');
-// var txt = scene.add.text(x, y, 'hello', { fontFamily: 'Arial', fontSize: 64, color: '#00ff00' });
+var txt = scene.add.rexBBCodeText(x, y, 'hello');
+// var txt = scene.add.rexBBCodeText(x, y, 'hello', { fontFamily: 'Arial', fontSize: 64, color: '#00ff00' });
 ```
 
 Default style
@@ -39,17 +55,14 @@ Default style
         stroke: false,
         fill: false
     },
-    align: 'left',  // 'left'|'center'|'right'
+    align: 'left',  // 0|'left'|1|'center'|2|'right'
     maxLines: 0,
     fixedWidth: 0,
     fixedHeight: 0,
-    rtl: false,
     testString: '|MÉqgy',
-    wordWrap: {
-        width: null,
-        callback: null,
-        callbackScope: null,
-        useAdvancedWrap: false
+    wrap: {
+        mode: 'none'     // 0|'none'|1|'word'|2|'char'|'character'
+        width: null
     }
 }
 ```
@@ -57,7 +70,7 @@ Default style
 Add text from JSON
 
 ```javascript
-var txt = scene.make.text({
+var txt = scene.make.rexBBCodeText({
     x: 100,
     y: 100,
     padding: {
@@ -81,7 +94,7 @@ var txt = scene.make.text({
 
 ### Word wrap
 
-Wrap by width
+Wrap by word or character.
 
 ```javascript
 var txt = scene.make.text({
@@ -92,39 +105,12 @@ var txt = scene.make.text({
     style: {
         font: 'bold 25px Arial',
         fill: 'white',
-        wordWrap: { width: 300 }
+        wrap: {
+            mode: 'word'     // 0|'none'|1|'word'|2|'char'|'character'
+            width: 300
+        }
     }
 });
-```
-
-Wrap by callback
-
-```javascript
-var txt = scene.make.text({
-    x: 400,
-    y: 300,
-    text: 'The sky above the port was the color of television, tuned to a dead channel.',
-    origin: 0.5,
-    style: {
-        font: 'bold 30px Arial',
-        fill: 'white',
-        wordWrap: { callback: wordWrap, scope: this }
-    }
-});
-
-function wordWrap (text, textObject)
-{
-    // First parameter will be the string that needs to be wrapped
-    // Second parameter will be the Text game object that is being wrapped currently
-
-    // This wrap just puts each word on a separate line, but you could inject your own
-    // language-specific logic here.
-    var words = text.split(' ');
-
-    // You can return either an array of individual lines or a string with line breaks (e.g. \n) in
-    // the correct place.
-    return words;
-}
 ```
 
 ### Set text
@@ -138,7 +124,7 @@ txt.setText('world');
 
 ```javascript
 txt.setStyle(style);
-txt.setFont(font);
+txt.setFont(font);  // font: {fontFamily, fontSize, fontStyle}
 txt.setFontFamily(family);
 txt.setFontSize(size);
 txt.setFontStyle(style);

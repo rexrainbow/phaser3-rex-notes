@@ -68,7 +68,7 @@ var parser = {
             rawText = "";
         } else if (RE_SIZE_OPEN.test(txt)) {
             innerMatch = txt.match(RE_SIZE_OPEN);
-            updateProp(prevProp, PROP_ADD, "size", innerMatch[1] + "pt");
+            updateProp(prevProp, PROP_ADD, "size", innerMatch[1] + "px");
             rawText = "";
         } else if (RE_SIZE_CLOSE.test(txt)) {
             updateProp(prevProp, PROP_REMOVE, "size");
@@ -98,7 +98,10 @@ var parser = {
             updateProp(prevProp, PROP_REMOVE, "shadow");
             rawText = "";
         } else if (RE_STROKE_OPEN.test(txt)) {
-            innerMatch = txt.match(RE_STROKE_OPEN);
+            updateProp(prevProp, PROP_ADD, "stroke", true);
+            rawText = "";            
+        } else if (RE_STROKE_OPENC.test(txt)) {
+            innerMatch = txt.match(RE_STROKE_OPENC);
             updateProp(prevProp, PROP_ADD, "stroke", innerMatch[1]);
             rawText = "";
         } else if (RE_STROKE_CLOSE.test(txt)) {
@@ -150,12 +153,16 @@ var parser = {
             }
 
             if (prop.hasOwnProperty('stroke')) {
-                var stroke = prop.stroke.split(' '); // yellow 1px
-                result.stroke = stroke[0];
-                result.strokeThickness = parseFloat(stroke[1].replace("px", ""));
+                if (prop.stroke === true) {
+                    result.stroke = defaultStyle.stroke;
+                    result.strokeThickness = defaultStyle.strokeThickness;
+                } else {
+                    result.stroke = prop.stroke;
+                    result.strokeThickness = defaultStyle.strokeThickness;
+                }
             } else {
                 result.stroke = defaultStyle.stroke;
-                result.strokeThickness = defaultStyle.strokeThickness;
+                result.strokeThickness = 0;
             }
         } else {
             result.image = prop.img;
@@ -188,11 +195,15 @@ var parser = {
         }
 
         if (prop.hasOwnProperty('u')) {
-            var underline = prop.u.split(' '); // [color, thickness, offset]
-            var len = underline.length;
-            result.underlineColor = (len >= 1) ? underline[0] : defaultStyle.underlineColor;
-            result.underlineThickness = (len >= 2) ? parseFloat(underline[1].replace("px", "")) : defaultStyle.underlineThickness;
-            result.underlineOffset = (len >= 3) ? parseFloat(underline[2].replace("px", "")) : defaultStyle.underlineOffset;
+            if (prop.u === true) {
+                result.underlineColor = defaultStyle.underlineColor;
+                result.underlineThickness = defaultStyle.underlineThickness;
+                result.underlineOffset = defaultStyle.underlineOffset;
+            } else {
+                result.underlineColor = prop.u;
+                result.underlineThickness = defaultStyle.underlineThickness;
+                result.underlineOffset = defaultStyle.underlineOffset;              
+            }
         } else {
             result.underlineColor = '#000';
             result.underlineThickness = 0;
@@ -277,7 +288,8 @@ var RE_UNDERLINE_OPENC = /\[u=([a-z]+|#[0-9abcdef]+)\]/i;
 var RE_UNDERLINE_CLOSE = /\[\/u\]/i;
 var RE_SHADOW_OPEN = /\[shadow\]/i;
 var RE_SHADOW_CLOSE = /\[\/shadow\]/i;
-var RE_STROKE_OPEN = /\[stroke=([a-z]+|#[0-9abcdef]+)\]/i;
+var RE_STROKE_OPEN = /\[stroke\]/i;
+var RE_STROKE_OPENC = /\[stroke=([a-z]+|#[0-9abcdef]+)\]/i;
 var RE_STROKE_CLOSE = /\[\/stroke\]/i;
 var RE_IMAGE_OPEN = /\[img=([^\]]+)\]/i;
 var RE_IMAGE_CLOSE = /\[\/img\]/i;

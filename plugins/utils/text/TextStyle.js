@@ -43,8 +43,8 @@ var propertyMap = {
 
     // underline
     underlineColor: ['underline.color', '#000'],
-    underlineThickness: ['underline.thickness', 0],
-    underlineOffset: ['underline.offset', 0],
+    underlineThickness: ['underline.thickness', 2],
+    underlineOffset: ['underline.offset', 1],
 
     // align
     halign: ['halign', 0],
