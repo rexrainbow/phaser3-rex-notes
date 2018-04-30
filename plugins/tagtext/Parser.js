@@ -46,6 +46,9 @@ class parser {
                 if (RE_CLASS_HEADER.test(m)) {
                     innerMatch = m.match(RE_CLASS);
                     result.push(innerMatch[2]);
+                } else if (RE_STYLE_HEADER.test(m)) {
+                    innerMatch = m.match(RE_STYLE);
+                    result.push(innerMatch[2]);
                 }
             }
 
@@ -70,8 +73,16 @@ class parser {
                     propOut = tags[name];
                 } else {
                     propOut = {};
-                }                
-                propOut.class = name;
+                }
+                propOut._class = name;
+                rawText = innerMatch[2];
+            }
+        } else if (RE_STYLE_HEADER.test(text)) {
+            var innerMatch = text.match(RE_STYLE);
+            if (innerMatch != null) {
+                var style = innerMatch[1];
+                propOut = styleToProp(style);
+                propOut._style = style;
                 rawText = innerMatch[2];
             }
         }
@@ -172,8 +183,10 @@ class parser {
     }
 
     propToTagText(text, prop, prevProp) {
-        if (prop.hasOwnProperty('class')) { // class mode
-            text = "<class='" + prop.class + "'>" + text + "</class>";
+        if (prop.hasOwnProperty('_class')) { // class mode
+            text = "<class='" + prop._class + "'>" + text + "</class>";
+        } else if (prop.hasOwnProperty('_style')) { // class mode
+            text = "<style='" + prop._style + "'>" + text + "</style>";
         }
         return text;
     }
@@ -183,8 +196,79 @@ class parser {
     }
 };
 
-var RE_SPLITTEXT = /<\s*class=["|']([^"|']+)["|']\s*\>([\s\S]*?)<\s*\/class\s*\>/g;
+var styleToProp = function (s) {
+    s = s.split(";");
+
+    var result = {},
+        prop, k, v;
+    for (var i = 0, slen = s.length; i < slen; i++) {
+        prop = s[i].split(":");
+        k = prop[0], v = prop[1];
+        if (isEmpty(k) || isEmpty(v)) {
+            continue;
+        }
+
+        switch (k) {
+            case 'stroke':
+                var stroke = v.split(' ');
+                var len = stroke.length;
+                v = {};
+                if (len >= 1) {
+                    v.color = stroke[0];
+                }
+                if (len >= 2) {
+                    v.thinkness = parseInt(stroke[1].replace('px', ''));
+                }
+                break;
+            case 'shadow':
+                var shadow = v.split(' ');
+                var len = shadow.length;
+                v = {};
+                if (len >= 1) {
+                    v.color = shadow[0];
+                }
+                if (len >= 2) {
+                    v.offsetX = parseInt(shadow[1].replace('px', ''));
+                }
+                if (len >= 3) {
+                    v.offsetY = parseInt(shadow[2].replace('px', ''));
+                }
+                if (len >= 4) {
+                    v.blur = parseInt(shadow[3].replace('px', ''));
+                }
+                break;
+            case 'u':
+            case 'underline':
+                var u = v.split(' ');
+                var len = u.length;
+                v = {};
+                if (len >= 1) {
+                    v.color = u[0];
+                }
+                if (len >= 2) {
+                    v.thinkness = parseInt(u[1].replace('px', ''));
+                }
+                if (len >= 3) {
+                    v.offset = parseInt(u[2].replace('px', ''));
+                }
+                break;
+        }
+        result[k] = v;
+    }
+    return result;
+};
+
+var isEmpty = function (s) {
+    // Remove white spaces.
+    s = s.replace(RE_SPACE, '');
+    return (s.length === 0);
+};
+
+var RE_SPLITTEXT = /<\s*class=["|']([^"|']+)["|']\s*\>([\s\S]*?)<\s*\/class\s*\>|<\s*style=["|']([^"|']+)["|']\s*\>([\s\S]*?)<\s*\/style\s*\>/g;
 var RE_CLASS_HEADER = /<\s*class=/i;
 var RE_CLASS = /<\s*class=["|']([^"|']+)["|']\s*\>([\s\S]*?)<\s*\/class\s*\>/;
+var RE_STYLE_HEADER = /<\s*style=/i;
+var RE_STYLE = /<\s*style=["|']([^"|']+)["|']\s*\>([\s\S]*?)<\s*\/style\s*\>/;
+var RE_SPACE = /^\s+|\s+$/;
 
 export default parser;

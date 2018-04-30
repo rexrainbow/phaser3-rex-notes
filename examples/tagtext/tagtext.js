@@ -31,7 +31,8 @@ class Demo extends Phaser.Scene {
                 }
             }
         };
-        var s1 = `<class='cap'>H</class><class='marker'>ell</class><class='tail'>o</class>`;
+        var s1 = `<class='cap'>H</class><class='marker'>ell</class><class='tail'>o</class>
+<style='color:red;size:30px'>W</style><style='size:40px'>o</style><style='size:50px'>r</style><style='u:green 30px -10px'>ld</style>`;
         var text = this.add.rexTagText(100, 100, s1, {
             backgroundColor: '#555',
             fontSize: '60px',
