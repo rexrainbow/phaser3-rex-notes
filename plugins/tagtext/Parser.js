@@ -106,15 +106,19 @@ class parser {
         if (!prop.hasOwnProperty('img')) {
             result.image = null;
 
-            if (prop.hasOwnProperty('family') || prop.hasOwnProperty('font-family')) {
-                var family = (prop.hasOwnProperty('family')) ? prop.family : prop['font-family'];
-                result.fontFamily = prop.family;
+            if (prop.hasOwnProperty('family') || prop.hasOwnProperty('fontFamily') || prop.hasOwnProperty('font-family')) {
+                var family = (prop.hasOwnProperty('family')) ? prop.family :
+                    (prop.hasOwnProperty('fontFamily')) ? prop.fontFamily :
+                    prop['font-family'];
+                result.fontFamily = family;
             } else {
                 result.fontFamily = defaultStyle.fontFamily;
             }
 
-            if (prop.hasOwnProperty('size') || prop.hasOwnProperty('font-size')) {
-                var size = (prop.hasOwnProperty('size')) ? prop.size : prop['font-size'];
+            if (prop.hasOwnProperty('size') || prop.hasOwnProperty('fontSize') || prop.hasOwnProperty('font-size')) {
+                var size = (prop.hasOwnProperty('size')) ? prop.size :
+                    (prop.hasOwnProperty('fontSize')) ? prop.fontSize :
+                    prop['font-size'];
                 if (typeof (size) === 'number') {
                     size = size.toString() + 'px';
                 }
@@ -210,7 +214,7 @@ var styleToProp = function (s) {
 
         switch (k) {
             case 'stroke':
-                var stroke = v.split(' ');
+                var stroke = v.split(' ');  // stroke:blue 1px
                 var len = stroke.length;
                 v = {};
                 if (len >= 1) {
@@ -221,7 +225,7 @@ var styleToProp = function (s) {
                 }
                 break;
             case 'shadow':
-                var shadow = v.split(' ');
+                var shadow = v.split(' ');  // shadow:blue 2px 2px 2px
                 var len = shadow.length;
                 v = {};
                 if (len >= 1) {
@@ -238,7 +242,7 @@ var styleToProp = function (s) {
                 }
                 break;
             case 'u':
-            case 'underline':
+            case 'underline':     // underline:blue 3px -1px
                 var u = v.split(' ');
                 var len = u.length;
                 v = {};

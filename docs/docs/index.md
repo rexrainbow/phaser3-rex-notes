@@ -16,6 +16,7 @@
 1. [LZ-string](lzstringplugin.md): Compress string using LZ-based compression algorithm.
 1. [Page](textpageplugin.md): Display text page by page on text object.
 1. [Run-commands](runcommands.md): Run commands in array.
+1. [TagText](tagtext.md): Displays text with multi-color, font face, or font size with tags.
 1. [TCRP.Player](tcrpplayerplugin.md): Run commands on time.
 1. [TCRP.Recorder](tcrpplayerplugin.md): Store commands with time.
 1. [Typing](texttypingplugin.md): Typing text on text object.

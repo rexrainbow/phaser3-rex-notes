@@ -24,6 +24,7 @@ pages:
     - Text:
         - Text: text.md
         - BBCode Text: bbcodetext.md
+        - Tag Text: tagtext.md
         - Typing: texttypingplugin.md    
         - Page: textpageplugin.md
     - Canvas:
