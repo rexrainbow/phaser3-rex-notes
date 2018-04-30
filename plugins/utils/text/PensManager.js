@@ -208,7 +208,7 @@ class PensManager {
             penTxt = (!wrap) ? pen.rawText : pen.wrapText;
             currentProp = pen.prop;
             penStartIdx = pen.startIndex;
-            penEndIdx = pen.nextStartIndex;
+            penEndIdx = pen.endIndex;
 
             if (penEndIdx < start)
                 continue;
