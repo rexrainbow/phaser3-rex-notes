@@ -12,7 +12,6 @@ const splitRegExp = CONST.SPLITREGEXP;
 
 var WRAP_RESULT = [];
 var WrapText = function (text, getTextWidth, wrapMode, wrapWidth, offset) {
-    debugger
     var retLines = WRAP_RESULT;
     LinesPool.freeArr(retLines);
 

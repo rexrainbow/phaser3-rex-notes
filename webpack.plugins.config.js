@@ -20,6 +20,7 @@ module.exports = {
         'sequence.min': './plugins/sequence-plugin.js',
         'soundfadein.min': './plugins/sound-fade-in.js',
         'soundfadeout.min': './plugins/sound-fade-out.js',
+        'tagtext.min': './plugins/tagtext-plugin.js',
         'tcrp.min': './plugins/tcrp-plugin.js',
         'textpage.min': './plugins/textpage-plugin.js',
         'texttyping.min': './plugins/texttyping-plugin.js',

@@ -192,14 +192,17 @@ class CanvasText {
         if (thickness <= 0) {
             return;
         }
-
+        
         var context = this.context;
+        var savedLineCap = context.lineCap;
+        context.lineCap = 'butt';
         context.beginPath();
         context.strokeStyle = color;
         context.lineWidth = thickness;
         context.moveTo(x, y);
-        context.lineTo(x + width, y);
+        context.lineTo((x + width), y);
         context.stroke();
+        context.lineCap = savedLineCap;
     }
 
     drawPen(pen, offsetX, offsetY) {
@@ -227,11 +230,12 @@ class CanvasText {
 
         // underline
         this.drawUnderline(
-            startX,
-            (startY + curStyle.underlineOffset),
-            penWidth,
-            curStyle.underlineThickness,
-            curStyle.underlineColor);
+            startX,                                   // x
+            (startY + curStyle.underlineOffset),      // y
+            penWidth,                                 // width
+            curStyle.underlineThickness,              // thinkness
+            curStyle.underlineColor                   // color
+        );               
 
         // draw image: TODO
 

@@ -1,18 +1,33 @@
 import Text from './../utils/text/Text.js';
-import parser from './Parser.js';
+import ParserKlass from './Parser.js';
 
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
+const GetValue = Phaser.Utils.Objects.GetValue;
 
-class BBCodeText extends Text {
+class TagText extends Text {
     constructor(scene, x, y, text, style) {
-        super(scene, x, y, text, style, 'BBCodeText', parser);
+        var tags = GetValue(style, 'tags', undefined);
+        var parser = new ParserKlass(tags);
+        super(scene, x, y, text, style, 'TagText', parser);
+        this.parser = parser;
+    }
+
+    addTag(name, prop) {
+        this.parser.addTag(name, prop);
+        return this;
+    }
+
+    preDestroy() {
+        super.preDestroy();
+        this.parser.destroy();
+        this.parser = undefined;
     }
 }
 
-Phaser.GameObjects.GameObjectFactory.register('rexBBCodeText', function (x, y, text, style) {
-    return this.displayList.add(new BBCodeText(this.scene, x, y, text, style));
+Phaser.GameObjects.GameObjectFactory.register('rexTagText', function (x, y, text, style) {
+    return this.displayList.add(new TagText(this.scene, x, y, text, style));
 });
-Phaser.GameObjects.GameObjectCreator.register('rexBBCodeText', function (config) {
+Phaser.GameObjects.GameObjectCreator.register('rexTagText', function (config) {
     // style Object = {
     //     font: [ 'font', '16px Courier' ],
     //     backgroundColor: [ 'backgroundColor', null ],
@@ -46,7 +61,7 @@ Phaser.GameObjects.GameObjectCreator.register('rexBBCodeText', function (config)
         style.padding = padding;
     }
 
-    var text = new BBCodeText(this.scene, 0, 0, content, style);
+    var text = new TagText(this.scene, 0, 0, content, style);
     BuildGameObject(this.scene, text, config);
 
     //  Text specific config options:
@@ -56,4 +71,4 @@ Phaser.GameObjects.GameObjectCreator.register('rexBBCodeText', function (config)
 
     return text;
 });
-export default BBCodeText;
+export default TagText;
