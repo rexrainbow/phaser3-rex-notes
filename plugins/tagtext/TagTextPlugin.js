@@ -14,7 +14,14 @@ class TagText extends Text {
 
     addTag(name, prop) {
         this.parser.addTag(name, prop);
-        return this;
+        return this.updateText(true);
+    }
+
+    addTags(tags) {
+        for(var name in tags){
+            this.parser.addTag(name, tags[name]);
+        }
+        return this.updateText(true);
     }
 
     preDestroy() {
