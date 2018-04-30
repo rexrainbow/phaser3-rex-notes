@@ -43,8 +43,8 @@ var propertyMap = {
 
     // underline
     underlineColor: ['underline.color', '#000'],
-    underlineThickness: ['underline.thickness', 2],
-    underlineOffset: ['underline.offset', 1],
+    underlineThickness: ['underline.thickness', 0],
+    underlineOffset: ['underline.offset', 0],
 
     // align
     halign: ['halign', 0],
@@ -63,9 +63,9 @@ var propertyMap = {
 
     // wrap
     wrapMode: ['wrap.mode', 0],
-    wrapWidth: ['wrap.width', null],
-    wrapCallback: ['wrap.callback', null],
-    wrapCallbackScope: ['wrap.callbackScope', null]
+    wrapWidth: ['wrap.width', null]
+    //wrapCallback: ['wrap.callback', null],
+    //wrapCallbackScope: ['wrap.callbackScope', null]
 };
 
 class TextStyle {
@@ -138,7 +138,7 @@ class TextStyle {
             style.valign = VALIGN_MAP[style.valign.toLowerCase()] || 0;
         }
         if (style && style.hasOwnProperty('wrap')) {
-            var wrap = style.wrap;            
+            var wrap = style.wrap;
             if (wrap.hasOwnProperty('mode')) {
                 var wrapMode = wrap.mode;
                 if (typeof wrapMode === 'string') {
@@ -188,10 +188,7 @@ class TextStyle {
         }
     }
 
-    syncFont(canvas, context, rebuildFont) {
-        if (rebuildFont) {
-            this._font = this.fontStyle + ' ' + this.fontSize + ' ' + this.fontFamily;
-        }
+    syncFont(canvas, context) {
         context.font = this._font;
     }
 
@@ -227,7 +224,16 @@ class TextStyle {
             this.metrics = MeasureText(this);
         }
 
-        return this.parent.updateText();
+        return this.parent.updateText(recalculateMetrics);
+    }
+
+    buildFont() {
+        var newFont = this.fontStyle + ' ' + this.fontSize + ' ' + this.fontFamily;
+        if (newFont !== this._font) {
+            this._font = newFont;
+            //this.metrics = MeasureText(this);
+        }
+        return this;
     }
 
     setFont(font) {
@@ -397,21 +403,63 @@ class TextStyle {
         return this.update(false);
     }
 
-    setWordWrapWidth(width) {
-        this.wrapWidth = width;
+    setUnderline(color, thickness, offset) {
+        if (color === undefined) {
+            color = '#000';
+        }
+        if (thickness === undefined) {
+            thickness = 0;
+        }
+        if (offset === undefined) {
+            offset = 0;
+        }
+
+        this.underlineColor = color;
+        this.underlineThickness = thickness;
+        this.underlineOffset = offset;
 
         return this.update(false);
     }
 
-    setWordWrapCallback(callback, scope) {
-        if (scope === undefined) {
-            scope = null;
+    setUnderlineColor(color) {
+        if (color === undefined) {
+            color = '#000';
         }
 
-        this.wrapCallback = callback;
-        this.wrapCallbackScope = scope;
-
+        this.underlineColor = color;
         return this.update(false);
+    }
+
+    setUnderlineThickness(thickness) {
+        if (thickness === undefined) {
+            thickness = 0;
+        }
+
+        this.underlineThickness = thickness;
+        return this.update(false);
+    }
+
+    setUnderlineOffset(offset) {
+        if (offset === undefined) {
+            offset = 0;
+        }
+
+        this.underlineOffset = offset;
+        return this.update(false);
+    }
+
+    setWrapMode(mode) {
+        if (typeof mode === 'string') {
+            mode = WRAPMODE_MAP[mode.toLowerCase()] || 0;
+        }
+        this.wrapMode = mode;
+        return this.update(true);
+    }
+
+    setWrapWidth(width) {
+        this.wrapWidth = width;
+        var runWrap = (this.wrapMode !== 0);
+        return this.update(runWrap);
     }
 
     setAlign(halign, valign) {
@@ -496,8 +544,6 @@ class TextStyle {
 
     destroy() {
         this.parent = undefined;
-        this.wrapCallback = undefined;
-        this.wrapCallbackScope = undefined;
     }
 
 }

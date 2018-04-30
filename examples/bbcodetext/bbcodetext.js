@@ -11,7 +11,7 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        var s1 = `[color=blue]AA[/color]
+        var s1 = `123456[color=blue]AA[/color]
 [i][color=red]B
 B[/color][b]CC[/b][/i]DD[size=10]D[size=20]D[size=30][u]D[size=40]D[/u][size=50]D[/size]D
 [size=20][u=red]EEE[/u][/size][shadow]FFF[/shadow][color=none][stroke]GGG[/stroke][stroke=blue]GGG[/stroke]`;
@@ -26,11 +26,17 @@ B[/color][b]CC[/b][/i]DD[size=10]D[size=20]D[size=30][u]D[size=40]D[/u][size=50]
 
             stroke: 'red',
             strokeThickness: 1,
-            shadow:{
+            shadow: {
                 offsetX: 5,
                 offsetY: 5,
                 blur: 5,
                 color: 'yellow'
+            },
+
+            underline: {
+                color: '#000',
+                thickness: 2,
+                offset: 1
             }
         });
         console.log(text.getWrappedText());

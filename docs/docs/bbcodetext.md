@@ -17,7 +17,7 @@ Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
 - italic: `[i]text[/i]`
 - color: `[color=red]text[/color]`
 - size: `[size=18]text[/text]`
-- stroke: `[stroke]text[/stroke]`  
+- stroke: `[stroke]text[/stroke]`
     - stroke with color setting: `[stroke=red]text[/stroke]`
 - shadow: `[shadow]text[/shadow]`
 - underline: `[u]text[/u]`
@@ -56,6 +56,11 @@ Default style
         stroke: false,
         fill: false
     },
+    underline: {
+        color: '#000',
+        thinkness: 0,
+        offset: 0
+    },
     align: 'left',  // 0|'left'|1|'center'|2|'right'
     maxLines: 0,
     fixedWidth: 0,
@@ -78,7 +83,7 @@ var txt = scene.make.rexBBCodeText({
         left: 64,
         right: 16,
         top: 20,
-        bottom: 40        
+        bottom: 40
         //x: 32,    // 32px padding on the left/right
         //y: 16     // 16px padding on the top/bottom
     },
@@ -151,6 +156,15 @@ txt.setShadowStroke(enabled);
 txt.setShadowFill(enabled);
 ```
 
+### Set underline
+
+```javascript
+txt.setUnderline(color, thinkness, ofset);
+txt.setUnderlineColor(color);
+txt.setUnderlineThinkness(thinkness);
+txt.setUnderlineOffset(ofset);
+```
+
 ### Set padding
 
 ```javascript
@@ -162,6 +176,13 @@ txt.setPadding(left, top, right, bottom);
 
 ```javascript
 txt.setMaxLines(max);
+```
+
+### Set wrap properties
+
+```javascript
+txt.setWrapMode(mode);  // mode: 0|'none'|1|'word'|2|'char'|'character'
+txt.setWrapWidth(width);
 ```
 
 ### Set object size

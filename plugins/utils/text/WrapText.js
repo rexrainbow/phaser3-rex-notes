@@ -12,6 +12,7 @@ const splitRegExp = CONST.SPLITREGEXP;
 
 var WRAP_RESULT = [];
 var WrapText = function (text, getTextWidth, wrapMode, wrapWidth, offset) {
+    debugger
     var retLines = WRAP_RESULT;
     LinesPool.freeArr(retLines);
 
@@ -70,13 +71,17 @@ var WrapText = function (text, getTextWidth, wrapMode, wrapWidth, offset) {
             }
 
             currLineWidth = getTextWidth(curLineText);
-            if ((j > 0) && (currLineWidth > remainWidth)) {
-                retLines.push(LinesPool.newline(lineText, lineWidth, WRAPPED_NEWLINE));
-                remainWidth = wrapWidth;
-
+            if (currLineWidth > remainWidth) {
                 // new line
-                curLineText = token;
-                currLineWidth = getTextWidth(curLineText);
+                if (j === 0) {
+                    retLines.push(LinesPool.newline('', 0, WRAPPED_NEWLINE));
+                } else {
+                    retLines.push(LinesPool.newline(lineText, lineWidth, WRAPPED_NEWLINE));
+                    curLineText = token;
+                    currLineWidth = getTextWidth(curLineText);                    
+                }
+
+                remainWidth = wrapWidth;
             }
 
             lineText = curLineText;

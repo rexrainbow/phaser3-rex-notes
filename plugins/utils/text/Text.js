@@ -81,12 +81,14 @@ var Text = new Phaser.Class({
 
             this.dirty = false;
 
-            this.parser = parser;
             if (!PensPools.hasOwnProperty(type)) {
                 PensPools[type] = new PoolKlass();
             }
-            this.pensPool = PensPools[type];
-            this.canvasText = new CanvasTextKlass(this);
+            CANVASTEXT_CONFIG.context = this.context;
+            CANVASTEXT_CONFIG.parser = parser;
+            CANVASTEXT_CONFIG.style = this.style;
+            CANVASTEXT_CONFIG.pensPool = PensPools[type];
+            this.canvasText = new CanvasTextKlass(CANVASTEXT_CONFIG);
 
             //this.initRTL();
 
@@ -140,7 +142,7 @@ var Text = new Phaser.Class({
         if (value !== this.text) {
             this.text = value.toString();
 
-            this.updateText();
+            this.updateText(true);
         }
 
         return this;
@@ -273,18 +275,22 @@ var Text = new Phaser.Class({
         return this.style.setMaxLines(max);
     },
 
-    // TODO
-    updateText: function () {
+    updateText: function (runWrap) {
+        if (runWrap === undefined) {
+            runWrap = false;
+        }
         var canvasText = this.canvasText;
 
         // wrap text to pens
         var style = this.style;
-        canvasText.updatePensManager(
-            this.text,
-            style.wrapMode,
-            style.wrapWidth,
-            style.lineHeight
-        );
+        if (runWrap) {
+            canvasText.updatePensManager(
+                this.text,
+                style.wrapMode,
+                style.wrapWidth,
+                style.lineHeight
+            );
+        }
 
         // resize
         var padding = this.padding;
@@ -374,7 +380,7 @@ var Text = new Phaser.Class({
         return this.canvasText.getText(text, start, end, false);
     },
 
-    getSubString: function(text, start, end) {
+    getSubString: function (text, start, end) {
         return this.getText(text, start, end);
     },
 
@@ -387,5 +393,7 @@ var Text = new Phaser.Class({
     }
 
 });
+
+var CANVASTEXT_CONFIG = {};
 
 export default Text;

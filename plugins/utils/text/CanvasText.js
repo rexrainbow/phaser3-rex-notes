@@ -15,7 +15,6 @@ const VALIGN_TOP = CONST.vtop;
 const VALIGN_CENTER = CONST.vcenter;
 const VALIGN_BOTTOM = CONST.vbottom;
 
-var TMPPENSMGR = null;
 class CanvasText {
     constructor(config) {
         this.context = GetValue(config, 'context', null);
@@ -25,7 +24,9 @@ class CanvasText {
         this.autoRound = true;
 
         this.pensPool = GetValue(config, 'pensPool', null);
-        this.pensManager = new PensManagerKlass(this);
+        PENSMANAGER_CONFIG.pensPool = this.pensPool;
+        this.pensManager = new PensManagerKlass(PENSMANAGER_CONFIG);
+        this.tmpPensManager = null;
 
         var context = this.context;
         this.getTextWidth = function (text) {
@@ -63,7 +64,8 @@ class CanvasText {
                     this.defatultStyle,
                     curProp
                 );
-                curStyle.syncFont(canvas, context, true);
+                curStyle.buildFont();
+                curStyle.syncFont(canvas, context);
                 curStyle.syncStyle(canvas, context);
                 var wrapLines = WrapText(
                     rawText,
@@ -209,7 +211,8 @@ class CanvasText {
             this.defatultStyle,
             pen.prop
         );
-        curStyle.syncFont(canvas, context, true);
+        curStyle.buildFont();
+        curStyle.syncFont(canvas, context);
         curStyle.syncStyle(canvas, context);
 
         var startX = offsetX + pen.x;
@@ -256,6 +259,10 @@ class CanvasText {
 
         this.pensManager.destroy();
         this.pensManager = undefined;
+        if (this.tmpPensManager) {
+            this.tmpPensManager.destroy();
+            this.tmpPensManager = undefined;
+        }
     }
 
     get lines() {
@@ -314,8 +321,9 @@ class CanvasText {
             return this.pensManager.getSliceTagText(start, end, wrap, this.parser.propToTagText);
         }
 
-        if (TMPPENSMGR === null) {
-            TMPPENSMGR = new PensManagerKlass(this);
+        if (this.tmpPensManager === null) {
+            PENSMANAGER_CONFIG.pensPool = this.pensPool;
+            this.tmpPensManager = new PensManagerKlass(PENSMANAGER_CONFIG);
         }
 
         var defatultStyle = this.defatultStyle;
@@ -324,10 +332,10 @@ class CanvasText {
             defatultStyle.wrapMode,
             defatultStyle.wrapWidth,
             defatultStyle.lineHeight,
-            TMPPENSMGR
+            this.tmpPensManager
         );
 
-        return TMPPENSMGR.getSliceTagText(start, end, wrap, this.parser.propToTagText);
+        return this.tmpPensManager.getSliceTagText(start, end, wrap, this.parser.propToTagText);
     }
 
     copyPensManager(pensManager) {
@@ -350,5 +358,7 @@ class CanvasText {
         return pensManager.lastPen;
     }
 };
+
+var PENSMANAGER_CONFIG = {};
 
 export default CanvasText;
