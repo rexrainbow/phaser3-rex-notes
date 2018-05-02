@@ -132,17 +132,17 @@ class TextStyle {
         }
 
         if (style && style.hasOwnProperty('halign') && typeof style.halign === 'string') {
-            style.halign = HALIGN_MAP[style.halign.toLowerCase()] || 0;
+            style.halign = HALIGNMODE[style.halign.toLowerCase()] || 0;
         }
         if (style && style.hasOwnProperty('valign') && typeof style.valign === 'string') {
-            style.valign = VALIGN_MAP[style.valign.toLowerCase()] || 0;
+            style.valign = VALIGNMODE[style.valign.toLowerCase()] || 0;
         }
         if (style && style.hasOwnProperty('wrap')) {
             var wrap = style.wrap;
             if (wrap.hasOwnProperty('mode')) {
-                var wrapMode = wrap.mode;
-                if (typeof wrapMode === 'string') {
-                    wrap.mode = WRAPMODE_MAP[wrapMode.toLowerCase()] || 0;
+                var mode = wrap.mode;
+                if (typeof mode === 'string') {
+                    wrap.mode = WRAPMODE[mode.toLowerCase()] || 0;
                 }
             } else {
                 if (wrap.hasOwnProperty('width')) {
@@ -450,7 +450,7 @@ class TextStyle {
 
     setWrapMode(mode) {
         if (typeof mode === 'string') {
-            mode = WRAPMODE_MAP[mode.toLowerCase()] || 0;
+            mode = WRAPMODE[mode.toLowerCase()] || 0;
         }
         this.wrapMode = mode;
         return this.update(true);
@@ -471,10 +471,10 @@ class TextStyle {
         }
 
         if (typeof halign === 'string') {
-            halign = HALIGN_MAP[halign.toLowerCase()] || 0;
+            halign = HALIGNMODE[halign.toLowerCase()] || 0;
         }
         if (typeof valign === 'string') {
-            valign = HALIGN_MAP[valign.toLowerCase()] || 0;
+            valign = HALIGNMODE[valign.toLowerCase()] || 0;
         }
         this.halign = halign;
         this.valign = valign;
@@ -487,7 +487,7 @@ class TextStyle {
             halign = 0;
         }
         if (typeof halign === 'string') {
-            halign = HALIGN_MAP[halign.toLowerCase()] || 0;
+            halign = HALIGNMODE[halign.toLowerCase()] || 0;
         }
         this.halign = halign;
 
@@ -499,7 +499,7 @@ class TextStyle {
             valign = 0;
         }
         if (typeof valign === 'string') {
-            valign = HALIGN_MAP[valign.toLowerCase()] || 0;
+            valign = HALIGNMODE[valign.toLowerCase()] || 0;
         }
         this.valign = valign;
 
@@ -548,17 +548,17 @@ class TextStyle {
 
 }
 
-const HALIGN_MAP = {
+const HALIGNMODE = {
     left: CONST.hleft,
     center: CONST.hcenter,
     right: CONST.hright,
 };
-const VALIGN_MAP = {
+const VALIGNMODE = {
     top: CONST.vtop,
     center: CONST.vcenter,
     bottom: CONST.vbottom,
 };
-const WRAPMODE_MAP = {
+const WRAPMODE = {
     none: CONST.NO_WRAP,
     word: CONST.WORD_WRAP,
     char: CONST.CHAR_WRAP,
