@@ -12,15 +12,42 @@ class Demo extends Phaser.Scene {
 
     create() {
         debugger
-        var callback = function (gridTable, idx) {
-            gridTable.addObjectToCell(
-                idx,
-                this.add.text(0, 0, idx.toString())
-            );
+        var newCellObject = function (scene, cell) {
+            var bg = scene.add.graphics(0, 0)
+                .fillStyle(0x333333)
+                .fillRect(2, 2, 28, 28);
+            var txt = scene.add.text(5, 5, cell.index.toString());
+            var container = scene.add.container(0, 0, [bg, txt]);
+            return container;
         }
-        var table = this.add.rexGridTable(100, 200, 50, 100, {
-            cellVisibleCallback: callback.bind(this)
-        });
+
+        var onCellVisible = function (cell) {
+            cell.setContainer(newCellObject(this, cell));
+            //console.log('Cell ' + cell.index + ' visible');
+        };
+        var onCellInvisible = function (cell) {
+            //console.log('Cell ' + cell.index + ' invisible');
+        }
+        var table = this.add.rexGridTable(100, 200, 200, 200, {
+                cellHeight: 30,
+                cellWidth: 30,
+                totalcells: 100,
+                columns: 4,
+                cellVisibleCallback: onCellVisible.bind(this),
+                cellInvisibleCallback: onCellInvisible.bind(this)
+            })
+            .setInteractive()
+            .on('drag', function (pointer, dragX, dragY) {
+                table.tableOX = dragX - pointer.downX;
+                table.tableOY = dragY - pointer.downY;
+            })
+        this.input.setDraggable(table);
+
+        var topLeftP = table.getTopLeft();
+        this.add.graphics()
+            .lineStyle(1, 0xcccccc)
+            .strokeRect(topLeftP.x, topLeftP.y, table.width, table.height);
+
     }
 
     update() {}

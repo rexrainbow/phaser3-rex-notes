@@ -2,19 +2,18 @@ import CellKlass from './Cell.js';
 import PoolKlass from './../utils/object/Pool.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
-
+var CellsPool = new PoolKlass();
 class Table {
     constructor(parent, config) {
-        this.parent = parent;   // parent: GridTable game object (container)
+        this.parent = parent; // parent: GridTable game object (container)
         this.cells = [];
-        this.cellsPool = new PoolKlass();
         this.resetFromJSON(config);
     }
 
     resetFromJSON(o) {
         this.colCount = undefined;
         this.defaultCellHeightMode = true;
-        this.totalRowsHeight = null;
+        this._totalRowsHeight = null;
         this.setDefaultCellHeight(GetValue(o, "cellHeight", 30));
         this.setDefaultCellWidth(GetValue(o, "cellWidth", 30));
         this.setCellCount(GetValue(o, "totalcells", 10));
@@ -54,7 +53,7 @@ class Table {
                     continue;
 
                 cell.free();
-                this.cellsPool.free(cell);
+                CellsPool.free(cell);
             }
             cells.length = cnt;
         } else if (end < cnt) {
@@ -65,7 +64,7 @@ class Table {
         }
 
         if (Math.floor(end / this.colCount) !== Math.floor(cnt / this.colCount))
-            this.totalRowsHeight = null;
+            this._totalRowsHeight = null;
 
         this.setUpdateFlag();
         return this;
@@ -75,7 +74,7 @@ class Table {
         this.setUpdateFlag(this.colCount !== cnt);
 
         this.colCount = cnt;
-        this.totalRowsHeight = null;
+        this._totalRowsHeight = null;
         return this;
     }
 
@@ -199,7 +198,7 @@ class Table {
 
     getColWidth(idx) {
         return this.defaultCellWidth;
-    }    
+    }
 
     getCellHeight(cellIdx) {
         if (!this.isValidCellIdx(cellIdx))
@@ -217,6 +216,17 @@ class Table {
         return cellHeight;
     }
 
+    get totalRowsHeight() {
+        if (this._totalRowsHeight === null)
+            this._totalRowsHeight = this.rowIndexToHeight(0, this.rowCount - 1);
+
+        return this._totalRowsHeight;
+    }
+
+    get totalColumnWidth() {
+        return this.colCount * this.defaultCellWidth;
+    }
+
     getCell(cellIdx, createNewCellInst) {
         if (!this.isValidCellIdx(cellIdx)) {
             return null;
@@ -226,23 +236,29 @@ class Table {
             createNewCellInst = true;
         }
         if ((this.cells[cellIdx] === null) && createNewCellInst) {
-            this.cells[cellIdx] = this.newCell();
+            this.cells[cellIdx] = this.newCell(cellIdx);
         }
 
         return this.cells[cellIdx];
     }
 
-    newCell() {
-        var cell = this.cellsPool.allocate();
+    newCell(cellIdx) {
+        CELL_CONFIG.idx = cellIdx;
+        CELL_CONFIG.rowIdx = Math.floor(cellIdx / this.colCount);
+        CELL_CONFIG.colIdx = cellIdx % this.colCount;
+
+        var cell = CellsPool.allocate();
         if (cell === null) {
-            cell = new CellKlass(this);
+            cell = new CellKlass(this, CELL_CONFIG);
         } else {
             cell.parent = this;
-            cell.deltaHeight = 0;
+            cell.resetFromJSON(CELL_CONFIG);
         }
 
         return cell;
-    };
+    }
 }
+
+var CELL_CONFIG = {};
 
 export default Table;

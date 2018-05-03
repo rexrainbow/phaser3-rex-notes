@@ -1,5 +1,6 @@
 import TableKlass from './Table.js';
 import Clean from './../utils/object/Clean.js';
+import IsArray from './../utils/array/IsArray.js';
 
 const Container = Phaser.GameObjects.Container;
 const Components = Phaser.GameObjects.Components;
@@ -18,6 +19,10 @@ class GridTable extends Container {
         this.visibleEndX = null;
         this.visibleStartY = null;
         this.visibleEndY = null;
+        this.execeedTopState = false;
+        this.execeedBottomState = false;
+        this.execeedLeftState = false;
+        this.execeedRightState = false;        
 
         if (width === undefined) {
             width = 0;
@@ -27,38 +32,137 @@ class GridTable extends Container {
         }
         this.setSize(width, height);
         this.setScrollMode(GetValue(config, 'scrollMode', 0));
-        this.table = new TableKlass(this, config);
-
+        this.setClampMode(GetValue(config, 'clamplTableOY', true));
         var callback = GetValue(config, 'cellVisibleCallback', null);
         if (callback !== null) {
             var scope = GetValue(config, 'cellVisibleCallbackScope', undefined);
             this.on('cellvisible', callback, scope);
         }
+        callback = GetValue(config, 'cellInvisibleCallback', null);
+        if (callback !== null) {
+            var scope = GetValue(config, 'cellInvisibleCallbackScope', undefined);
+            this.on('cellinvisible', callback, scope);
+        }
+        this.table = new TableKlass(this, config);
         this.updateTable();
     }
 
-    get tableOX() {
-        return this._tableOX;
+    setScrollMode(mode) {
+        if (typeof (mode) === 'string') {
+            mode = SCROLLMODE[mode.toLowerCase()];
+        }
+        this.scrollMode = mode;
+    }
+
+    setClampMode(mode) {
+        this.clampTableOXYMode = mode;
     }
 
     get tableOY() {
         return this._tableOY;
     }
 
-    set tableOX(ox) {
-
+    get tableOX() {
+        return this._tableOX;
     }
 
     set tableOY(oy) {
+        var table = this.table;
+        var topTableOY = this.topTableOY;
+        var bottomTableOY = this.bottomTableOY;
+        var tableOYExceedTop = this.tableOYExceedTop(oy);
+        var tableOYExeceedBottom = this.tableOYExeceedBottom(oy);
+        if (this.clampTableOXYMode) {
+            var rowCount = table.rowCount;
+            var visibleRowCount = table.heightToRowIndex(this.instHeight, true);
 
+            // less then 1 page            
+            if (rowCount < visibleRowCount) {
+                oy = 0;
+            } else if (tableOYExceedTop) {
+                oy = topTableOY
+            } else {
+                var tableVisibleHeight = this.tableVisibleHeight;
+                if (tableOYExeceedBottom)
+                    oy = bottomTableOY;
+            }
+        }
+
+        if (this._tableOY !== oy) {
+            this.updateFlag = true;
+            this._tableOY = oy;
+        }
+
+
+        if (tableOYExceedTop) {
+            if (!this.execeedTopState) {
+                this.emit('execeedtop', this, oy, topTableOY);
+            }
+        }
+        this.execeedTopState = tableOYExceedTop;
+
+        if (tableOYExeceedBottom) {
+            if (!this.execeedBottomState) {
+                this.emit('execeedbottom', this, oy, bottomTableOY);
+            }
+        }
+        this.execeedBottomState = tableOYExeceedBottom;
+
+        this.updateTable();
+    }
+
+    set tableOX(ox) {
+        var table = this.table;
+        var leftTableOX = this.leftTableOX;
+        var rightTableOX = this.rightTableOX;
+        var tableOXExeceedLeft = this.tableOXExeceedLeft(ox);
+        var tableOXExeceedRight = this.tableOXExeceedRight(ox);
+        if (this.clampTableOXYMode) {
+            var colCount = table.colCount;
+            var visibleColCount = table.widthToColIndex(this.instWidth, true);
+
+            // less then 1 page            
+            if (colCount < visibleColCount) {
+                ox = 0;
+            } else if (tableOXExeceedLeft) {
+                ox = leftTableOX
+            } else {
+                var tableVisibleWidth = this.tableVisibleWidth;
+                if (tableOXExeceedRight)
+                    ox = rightTableOX;
+            }
+        }
+
+        if (this._tableOY !== ox) {
+            this.updateFlag = true;
+            this._tableOY = ox;
+        }
+
+
+        if (tableOXExeceedLeft) {
+            if (!this.execeedLeftState) {
+                this.emit('execeedleft', this, ox, leftTableOX);
+            }
+        }
+        this.execeedLeftState = tableOXExeceedLeft;
+
+        if (tableOXExeceedRight) {
+            if (!this.execeedRightState) {
+                this.emit('execeedright', this, ox, rightTableOX);
+            }
+        }
+        this.execeedRightState = tableOXExeceedRight;
+
+        this.updateTable();
+    }
+
+    setTableOY(oy) {
+        this.tableOY = oy;
+        return this;
     }
 
     setTableOX(ox) {
         this.tableOY = ox;
-        return this;
-    }
-    setTableOY(oy) {
-        this.tableOY = oy;
         return this;
     }
 
@@ -81,17 +185,8 @@ class GridTable extends Container {
         return this;
     }
 
-    addObjectToCell(cellIdx, gameobject) {
-        if (!this.visibleCellIdx.hasOwnProperty(cellIdx)) {
-            return this;
-        }
-
-        var table = this.table;
-        var cell = table.getCell(cellIdx, true);
-        if (!cell) {
-            return this;
-        }
-        cell.addObject(gameobject);
+    getCell(cellIdx) {
+        return this.table.getCell(cellIdx, true);
     }
 
     cleanVisibleCellIndexes() {
@@ -143,10 +238,12 @@ class GridTable extends Container {
 
                 this.visibleCellIdx[cellIdx] = true;
 
+                var cell = table.getCell(cellIdx, true);
                 if (!this.preVisibleCellIdx.hasOwnProperty(cellIdx)) {
-                    this.showCell(cellIdx, cellTLX, cellTLY);
+                    console.log('Cell ' + cell.cellIdx + ' visible');
+                    this.showCell(cell);
                 }
-                table.getCell(cellIdx).setTLXY(cellTLX, cellTLY);
+                cell.setTLXY(cellTLX, cellTLY);
             }
 
             if ((cellTLX < rightBound) && (colIdx < lastColIdx)) {
@@ -164,30 +261,106 @@ class GridTable extends Container {
         }
     }
 
-    showCell(idx, tlx, tly) {
-        this.emit('cellvisible', this, idx);
+    showCell(cell) {
+        this.emit('cellvisible', cell);
     }
 
     hideCells() {
         var preList = this.preVisibleCellIdx;
         var curList = this.visibleCellIdx;
+        var cell;
         for (var idx in preList) {
             if (!curList.hasOwnProperty(idx)) {
-                this.hideCell(idx);
+                cell = this.table.getCell(idx, false);
+                console.log('Cell ' + cell.cellIdx + ' invisible');
+                this.hideCell(cell);
             }
         }
     }
 
-    hideCell(idx) {
-        this.emit('cellinvisible', idx);
+    hideCell(cell) {        
+        this.emit('cellinvisible', cell);
+        cell.hide();
     }
 
-    setScrollMode(mode) {
-        if (typeof (mode) === 'string') {
-            mode = SCROLLMODE[mode.toLowerCase()];
-        }
-        this.scrollMode = mode;
+
+
+    get instHeight() {
+        return (this.scrollMode === 0) ? this.height : this.width;
     }
+
+    get instWidth() {
+        return (this.scrollMode === 0) ? this.width : this.height;
+    }
+
+    get topTableOY() {
+        return 0;
+    }
+
+    get bottomTableOY() {
+        return -this.tableVisibleHeight;
+    }
+
+    get leftTableOX() {
+        return 0;
+    }
+
+    get rightTableOX() {
+        return -this.tableVisibleWidth;
+    }
+
+    tableOYExceedTop(oy) {
+        if (oy === undefined) {
+            oy = this.tableOY;
+        }
+        return (oy > this.topTableOY);
+    }
+
+    tableOYExeceedBottom(oy) {
+        if (oy === undefined) {
+            oy = this.tableOY;
+        }
+        return (oy < this.bottomTableOY);
+    }
+
+    tableOXExeceedLeft(ox) {
+        if (ox === undefined) {
+            ox = this.tableOX;
+        }
+        return (ox > this.leftTableOX);
+    }
+
+    tableOXExeceedRight(ox) {
+        if (ox === undefined) {
+            ox = this.tableOX;
+        }
+        return (ox < this.rightTableOX);
+    }
+
+    get tableVisibleHeight() {
+        var h;
+        var totalRowsHeight = this.table.totalRowsHeight;
+        var instHeight = this.instHeight;
+        if (totalRowsHeight > instHeight) {
+            h = totalRowsHeight - instHeight;
+        } else {
+            h = 0;
+        }
+
+        return h;
+    }
+
+    get tableVisibleWidth() {
+        var w;
+        var totalColumnWidth = this.table.totalColumnWidth;
+        var instWidth = this.instWidth;
+        if (totalColumnWidth > instWidth) {
+            w = totalColumnWidth - instWidth;
+        } else {
+            w = totalColumnWidth;
+        }
+        return w;
+    };
 
     get bottomLeftY() {
         return -(this.displayHeight * this.originY) + this.displayHeight;
@@ -242,10 +415,10 @@ Object.assign(
 );
 
 const SCROLLMODE = {
-    'v': 0,
-    'vertical': 0,
-    'h': 1,
-    'horizontal': 1
+    v: 0,
+    vertical: 0,
+    h: 1,
+    horizontal: 1
 };
 
 Phaser.GameObjects.GameObjectFactory.register('rexGridTable', function (x, y, width, height, config) {

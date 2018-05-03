@@ -73,7 +73,7 @@ scene.input.setDraggable(gameObject);  // enable dragging
 ```javascript
 gameObject.on('dragstart', function(pointer, dragX, dragY){ /* ... */ });
 gameObject.on('drag', function(pointer, dragX, dragY){ /* ... */ });
-gameObject.on('dragend', function(pointer, dragX, dragY, dropped{ /* ... */ });
+gameObject.on('dragend', function(pointer, dragX, dragY, dropped){ /* ... */ });
 ```
 
 ```javascript

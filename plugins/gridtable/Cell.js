@@ -1,4 +1,5 @@
 import Clean from './../utils/object/Clean.js';
+const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Cell {
     constructor(parent, config) {
@@ -9,18 +10,37 @@ class Cell {
     }
 
     resetFromJSON(o) {
+        this.index = GetValue(o, 'idx', 0);
+        this.colIdx = GetValue(o, 'colIdx', 0);
+        this.rowIdx = GetValue(o, 'rowIdx', 0);
         this.deltaHeight = 0;
         return this;
     }
 
-    addObject(gameobject) {
-        if (!this.container) {
-            var parentObject = this.parent.parent;
-            var scene = parentObject.scene;
-            this.container = scene.add.container(0, 0);
-            parentObject.add(this.container);
+    setContainer(container) {
+        if (this.container) {
+            this.container.destroy();
         }
-        this.container.add(gameobject);
+        this.rootContainer.add(container);
+        this.container = container;        
+        return this;
+    }
+
+    popContainer() {
+        if (this.container) {
+            var container = this.container;
+            this.container = null;
+            return container;
+        } else {
+            return null;
+        }
+    }
+
+    hide() {
+        if (this.container) {
+            this.container.destroy();
+            this.container = null;
+        } 
     }
 
     setTLXY(tlx, tly) {
@@ -53,10 +73,15 @@ class Cell {
     }
 
     free() {
+        this.hide();
         this.parent = undefined;
         if (this.data) {
             Clean(this.data);
         }
+    }
+
+    get rootContainer() {
+        return this.parent.parent;
     }
 };
 
