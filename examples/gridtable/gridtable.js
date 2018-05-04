@@ -12,7 +12,6 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        debugger
         var newCellObject = function (scene, cell) {
             var bg = scene.add.graphics(0, 0)
                 .fillStyle(0x555555)
