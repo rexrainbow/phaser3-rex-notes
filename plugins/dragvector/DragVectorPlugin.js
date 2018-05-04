@@ -55,7 +55,6 @@ class DragVectorPlugin extends EE {
         }
 
         this.enable = e;
-        this.scene.input.setDraggable(this.gameobject, e);
         return this;
     }
 
@@ -72,7 +71,6 @@ class DragVectorPlugin extends EE {
         var y = pointer.y;
         this.dX = x - this.preX;
         this.dY = y - this.preY;
-        console.log(x+','+y+ ' ->' + this.dX + ',' + this.dY);
         this.emit('dragdelta', this.dX, this.dY);
         this.preX = x;
         this.preY = y;

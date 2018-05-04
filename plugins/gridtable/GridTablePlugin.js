@@ -107,8 +107,6 @@ class GridTable extends Container {
             }
         }
         this.execeedBottomState = tableOYExeceedBottom;
-
-        this.updateTable();
     }
 
     set tableOX(ox) {
@@ -133,9 +131,9 @@ class GridTable extends Container {
             }
         }
 
-        if (this._tableOY !== ox) {
+        if (this._tableOX !== ox) {
             this.updateFlag = true;
-            this._tableOY = ox;
+            this._tableOX = ox;
         }
 
 
@@ -152,8 +150,6 @@ class GridTable extends Container {
             }
         }
         this.execeedRightState = tableOXExeceedRight;
-
-        this.updateTable();
     }
 
     setTableOY(oy) {
@@ -162,7 +158,29 @@ class GridTable extends Container {
     }
 
     setTableOX(ox) {
-        this.tableOY = ox;
+        this.tableOX = ox;
+        return this;
+    }
+
+    setTableOXY(ox, oy) {
+        this.tableOX = ox;
+        this.tableOY = oy;
+        return this;
+    }
+
+    addTableOX(dx) {
+        this.tableOX += dx;
+        return this;        
+    }
+
+    addTableOY(dy) {
+        this.tableOY += dy;
+        return this;
+    }
+
+    addTableOXY(dx, dy){
+        this.tableOX += dx;
+        this.tableOY += dy;
         return this;
     }
 
@@ -240,10 +258,9 @@ class GridTable extends Container {
 
                 var cell = table.getCell(cellIdx, true);
                 if (!this.preVisibleCellIdx.hasOwnProperty(cellIdx)) {
-                    console.log('Cell ' + cell.cellIdx + ' visible');
                     this.showCell(cell);
                 }
-                cell.setTLXY(cellTLX, cellTLY);
+                cell.setXY(cellTLX, cellTLY);
             }
 
             if ((cellTLX < rightBound) && (colIdx < lastColIdx)) {
@@ -262,6 +279,7 @@ class GridTable extends Container {
     }
 
     showCell(cell) {
+        // attach container to cell by cell.setContainer(container) under this event
         this.emit('cellvisible', cell);
     }
 
@@ -272,18 +290,16 @@ class GridTable extends Container {
         for (var idx in preList) {
             if (!curList.hasOwnProperty(idx)) {
                 cell = this.table.getCell(idx, false);
-                console.log('Cell ' + cell.cellIdx + ' invisible');
                 this.hideCell(cell);
             }
         }
     }
 
-    hideCell(cell) {        
-        this.emit('cellinvisible', cell);
-        cell.hide();
+    hideCell(cell) {
+        // option: pop container of cell by cell.popContainer() under this event 
+        this.emit('cellinvisible', cell);        
+        cell.destroyContainer();  // destroy container of cell
     }
-
-
 
     get instHeight() {
         return (this.scrollMode === 0) ? this.height : this.width;
@@ -423,6 +439,14 @@ const SCROLLMODE = {
 
 Phaser.GameObjects.GameObjectFactory.register('rexGridTable', function (x, y, width, height, config) {
     return this.displayList.add(new GridTable(this.scene, x, y, width, height, config));
+});
+
+Phaser.GameObjects.GameObjectCreator.register('rexGridTable', function (config) {
+    var width = GetValue(config, 'width', 256);
+    var height = GetValue(config, 'height', 256);
+    var table = new GridTable(this.scene, 0, 0, width, height, config);
+    BuildGameObject(this.scene, table, config);
+    return table;
 });
 
 export default GridTable;

@@ -15,6 +15,7 @@ module.exports = {
         'fadeoutdestroy.min': './plugins/fade-out-destroy.js',
         'fade.min': './plugins/fade-plugin.js',
         'gashapon.min': './plugins/gashapon-plugin.js',
+        'gridtable.min': '/plugins/gridtable-plugin.js',
         'lzstring.min': './plugins/lzstring-plugin.js',
         'runcommands.min': './plugins/runcommands.js',
         'sequence.min': './plugins/sequence-plugin.js',

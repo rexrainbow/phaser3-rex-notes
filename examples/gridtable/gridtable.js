@@ -8,14 +8,15 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {}
+    preload() {
+    }
 
     create() {
         debugger
         var newCellObject = function (scene, cell) {
             var bg = scene.add.graphics(0, 0)
-                .fillStyle(0x333333)
-                .fillRect(2, 2, 28, 28);
+                .fillStyle(0x555555)
+                .fillRect(2, 2, 58, 58);
             var txt = scene.add.text(5, 5, cell.index.toString());
             var container = scene.add.container(0, 0, [bg, txt]);
             return container;
@@ -25,31 +26,39 @@ class Demo extends Phaser.Scene {
             cell.setContainer(newCellObject(this, cell));
             //console.log('Cell ' + cell.index + ' visible');
         };
-        var onCellInvisible = function (cell) {
-            // var container = cell.popContainer();
-            //console.log('Cell ' + cell.index + ' invisible');
-        }
-        var table = this.add.rexGridTable(100, 200, 200, 200, {
-                cellHeight: 30,
-                cellWidth: 30,
-                totalcells: 100,
-                columns: 4,
-                cellVisibleCallback: onCellVisible.bind(this),
-                cellInvisibleCallback: onCellInvisible.bind(this)
-            })
-            .setInteractive()
-            .on('drag', function (pointer, dragX, dragY) {
-                table.tableOX = dragX - pointer.downX;
-                table.tableOY = dragY - pointer.downY;
-            })
-        this.input.setDraggable(table);
+        var table = this.add.rexGridTable(400, 300, 250, 400, {
+            cellHeight: 60,
+            cellWidth: 60,
+            totalcells: 100,
+            columns: 4,
+            cellVisibleCallback: onCellVisible.bind(this),
+        });
 
         // draw bound
-        var topLeftP = table.getTopLeft();
         this.add.graphics()
             .lineStyle(1, 0xcccccc)
-            .strokeRect(topLeftP.x, topLeftP.y, table.width, table.height);
+            .strokeRectShape(table.getBounds());
 
+        // drag table content
+        table.setInteractive();
+        table.on('pointerdown', function(pointer){
+            table.setData('preX', pointer.x);
+            table.setData('preY', pointer.y);
+        });
+        table.on('pointermove', function(pointer){
+            if (table.getData('preX') === undefined) {
+                return;
+            }
+            var dx = pointer.x - table.getData('preX');
+            var dy = pointer.y - table.getData('preY');
+            table.addTableOXY(dx, dy).updateTable();
+            table.setData('preX', pointer.x);
+            table.setData('preY', pointer.y);
+        });
+        table.on('pointerup', function(pointer){
+            table.setData('preX', undefined);
+            table.setData('preY', undefined);
+        });
     }
 
     update() {}

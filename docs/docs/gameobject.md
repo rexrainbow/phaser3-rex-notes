@@ -18,36 +18,36 @@ gameobject.y = 0;
 ### Angle
 
 ```javascript
-var angle = gameobject.angle;
 gameobject.angle = 90;
+var angle = gameobject.angle;
 
 // angle in radians
-var rad = gameobject.rotation;
 gameobject.rotation = Phaser.Math.DegToRad(90);
+var rad = gameobject.rotation;
 ```
 
 ### Visible
 
 ```javascript
-var visible = gameobject.visible;
 gameobject.visible = true;
+var visible = gameobject.visible;
 ```
 
 ### Alpha
 
 ```javascript
-var alpha = gameobject.alpha;
 gameobject.alpha = 0.5;
+var alpha = gameobject.alpha;
 ```
 
 ### FlipX, FlipY
 
 ```javascript
-var flipX = gameobject.flipX;
 gameobject.flipX = false;
+var flipX = gameobject.flipX;
 
-var flipY = gameobject.flipY;
 gameobject.flipY = false;
+var flipY = gameobject.flipY;
 ```
 
 ### Depth (z-index)
@@ -55,9 +55,9 @@ gameobject.flipY = false;
 The depth starts from zero (the default value) and increases from that point. A game object with a higher depth value will always render in front of one with a lower value.
 
 ```javascript
-var alpha = gameobject.depth;
 gameobject.depth = 0;
 // gameobject.setDepth(value);
+var depth = gameobject.depth;
 ```
 
 ### Scroll factor
@@ -72,13 +72,34 @@ factor: 0~1
 - 0.25= quarter the speed of the camera
 - 0.5= half the speed of the camera
 
-### Edges
+### Bounds
 
 ```javascript
-var topLeft = gameobject.getTopLeft();         // topLeft.x, topLeft.y
-var topRight = gameobject.getTopRight();       // topRight.x, topRight.y
-var bottomLeft = gameobject.getBottomLeft();   // bottomLeft.x, bottomLeft.y
-var bottomRight = gameobject.getBottomRight(); // bottomRight.x, bottomRight.y
+var output = gameobject.getTopLeft(output);     // output: {x, y}
+var output = gameobject.getTopRight(output);    // output: {x, y}
+var output = gameobject.getBottomLeft(output);  // output: {x, y}
+var output = gameobject.getBottomRight(output); // output: {x, y}
+var output = gameobject.getCenter(output);      // output: {x, y}
+var output = gameobject.getBounds(output);      // output: {x, y, width, height}
+```
+
+### Tint
+
+```javascript
+gameobject.setTint(color);  // color: 0xRRGGBB
+// gameobject.tint = color;
+gameobject.setTint(colorTopLeft, colorTopRight, colorBottomLeft, colorBottomRight);
+gameobject.clearTint();     // equal to `gameobject.setTint(0xffffff)`
+var color = gameobject.tintTopLeft;
+var color = gameobject.tintTopRight;
+var color = gameobject.tintBottomLeft;
+var color = gameobject.tintBottomRight;
+```
+
+### Size
+
+```javascript
+gameobject.setDisplaySize(width, height);
 ```
 
 ### Private data

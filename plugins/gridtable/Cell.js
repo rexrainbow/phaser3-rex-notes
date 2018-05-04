@@ -1,29 +1,36 @@
 import Clean from './../utils/object/Clean.js';
-const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Cell {
     constructor(parent, config) {
-        this.parent = parent; // parent: table
         this.container = null;
         this.data = null;
-        this.resetFromJSON(config);
+        this.setParent(parent);
+        //this.resetFromJSON(config);
     }
 
-    resetFromJSON(o) {
-        this.index = GetValue(o, 'idx', 0);
-        this.columnIndex = GetValue(o, 'colIdx', 0);
-        this.rowIndex = GetValue(o, 'rowIdx', 0);
-        this.deltaHeight = 0;
-        return this;
+    setParent(parent) {
+        this.parent = parent; // parent: table
+        this.parentContainer = parent.getParentContainer();
     }
+
+    //resetFromJSON(o) {
+    //    return this;
+    //}
 
     setContainer(container) {
         if (this.container) {
             this.container.destroy();
         }
-        this.rootContainer.add(container);
+        this.parentContainer.add(container);
         this.container = container;
         return this;
+    }
+
+    destroyContainer() {
+        if (this.container) {
+            this.container.destroy();
+            this.container = null;
+        }
     }
 
     popContainer() {
@@ -36,17 +43,10 @@ class Cell {
         }
     }
 
-    hide() {
+    setXY(x, y) {
         if (this.container) {
-            this.container.destroy();
-            this.container = null;
-        }
-    }
-
-    setTLXY(tlx, tly) {
-        if (this.container) {
-            this.container.x = tlx;
-            this.container.y = tly;
+            this.container.x = x;
+            this.container.y = y;
         }
     }
 
@@ -72,17 +72,19 @@ class Cell {
         }
     }
 
-    free() {
-        this.hide();
-        this.parent = undefined;
+    cleanData() {
         if (this.data) {
             Clean(this.data);
         }
     }
 
-    get rootContainer() {
-        return this.parent.parent;
+    destroy() {
+        this.cleanData();        
+        this.destroyContainer();
+        this.parent = undefined;
+        this.parentContainer = undefined;
     }
+
 };
 
 export default Cell;

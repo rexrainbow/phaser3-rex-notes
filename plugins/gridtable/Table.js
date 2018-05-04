@@ -52,7 +52,7 @@ class Table {
                 if (!cell)
                     continue;
 
-                cell.free();
+                cell.destroy();
                 CellsPool.free(cell);
             }
             cells.length = cnt;
@@ -209,7 +209,7 @@ class Table {
             cellHeight = this.defaultCellHeight;
         else {
             var cell = this.getCell(cellIdx, false);
-            var deltaHeight = (cell) ? cell.deltaHeight : 0;
+            var deltaHeight = (cell && cell.hasOwnProperty('deltaHeight')) ? cell.deltaHeight : 0;
             cellHeight = this.defaultCellHeight + deltaHeight;
         }
 
@@ -236,29 +236,35 @@ class Table {
             createNewCellInst = true;
         }
         if ((this.cells[cellIdx] === null) && createNewCellInst) {
-            this.cells[cellIdx] = this.newCell(cellIdx);
+            var cell = this.newCell();
+            this.setCellIndex(cell, cellIdx);
+            this.cells[cellIdx] = cell;
         }
 
         return this.cells[cellIdx];
     }
 
     newCell(cellIdx) {
-        CELL_CONFIG.idx = cellIdx;
-        CELL_CONFIG.rowIdx = Math.floor(cellIdx / this.colCount);
-        CELL_CONFIG.colIdx = cellIdx % this.colCount;
-
         var cell = CellsPool.allocate();
         if (cell === null) {
-            cell = new CellKlass(this, CELL_CONFIG);
+            cell = new CellKlass(this);
         } else {
-            cell.parent = this;
-            cell.resetFromJSON(CELL_CONFIG);
+            cell.setParent(this);
         }
 
         return cell;
     }
-}
 
-var CELL_CONFIG = {};
+    setCellIndex(cell, cellIdx) {
+        cell.index = cellIdx;
+        cell.rowIdx = Math.floor(cellIdx / this.colCount);
+        cell.colIdx = cellIdx % this.colCount;
+        return this;
+    }
+
+    getParentContainer() {
+        return this.parent;
+    }
+}
 
 export default Table;
