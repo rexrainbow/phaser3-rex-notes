@@ -1,4 +1,4 @@
-import Pool from './../object/Pool.js';
+import PoolKlass from './../../pool.js';
 import CONST from './const.js';
 
 const GetValue = Phaser.Utils.GetValue;
@@ -95,7 +95,7 @@ var WrapText = function (text, getTextWidth, wrapMode, wrapWidth, offset) {
     return retLines;
 };
 
-var LinesPool = new Pool();
+var LinesPool = new PoolKlass();
 LinesPool.newline = function (text, width, newLineMode) {
     var l = this.allocate();
     if (l === null) {

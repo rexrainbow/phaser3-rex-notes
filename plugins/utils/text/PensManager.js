@@ -1,6 +1,6 @@
 'use strict'
 
-import PoolKlass from './../object/Pool.js';
+import PoolKlass from './../../pool.js';
 import PenKlass from './Pen.js';
 import CONST from './const.js';
 import Clone from './../object/Clone.js';

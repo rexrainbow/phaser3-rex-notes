@@ -49,16 +49,17 @@ class DragVectorPlugin extends EE {
             this.gameobject.setInteractive(); // only need setInteractive once
         }
 
-        e = !!e;
-        if (this.enable === e) {
-            return this;
+        this.enable = !!e;
+        if (!this.enable) {
+            this.onDragEnd();
         }
-
-        this.enable = e;
         return this;
     }
 
     onDragStart(pointer) {
+        if (!this.enable) {
+            return;
+        }
         this.preX = pointer.x;
         this.preY = pointer.y;
     }
@@ -76,7 +77,7 @@ class DragVectorPlugin extends EE {
         this.preY = y;
     }
 
-    onDragEnd(pointer) {
+    onDragEnd() {
         this.preX = undefined;
         this.preY = undefined;
     }

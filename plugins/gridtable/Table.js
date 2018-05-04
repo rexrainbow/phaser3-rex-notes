@@ -1,5 +1,5 @@
 import CellKlass from './Cell.js';
-import PoolKlass from './../utils/object/Pool.js';
+import PoolKlass from './../pool.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 var CellsPool = new PoolKlass();
@@ -16,7 +16,7 @@ class Table {
         this._totalRowsHeight = null;
         this.setDefaultCellHeight(GetValue(o, "cellHeight", 30));
         this.setDefaultCellWidth(GetValue(o, "cellWidth", 30));
-        this.setCellCount(GetValue(o, "totalcells", 10));
+        this.setCellCount(GetValue(o, "cellsCount", 10));
         this.setColumnCount(GetValue(o, "columns", 1));
         return this;
     }
@@ -227,6 +227,14 @@ class Table {
         return this.colCount * this.defaultCellWidth;
     }
 
+    cellIndxeToColIndex(cellIdx) {
+        return cellIdx % this.colCount;
+    }
+
+    cellIndxeToRowIndex(cellIdx){
+        return Math.floor(cellIdx / this.colCount);
+    }
+
     getCell(cellIdx, createNewCellInst) {
         if (!this.isValidCellIdx(cellIdx)) {
             return null;
@@ -257,8 +265,8 @@ class Table {
 
     setCellIndex(cell, cellIdx) {
         cell.index = cellIdx;
-        cell.rowIdx = Math.floor(cellIdx / this.colCount);
-        cell.colIdx = cellIdx % this.colCount;
+        cell.rowIdx = this.cellIndxeToRowIndex(cellIdx);
+        cell.colIdx = this.cellIndxeToColIndex(cellIdx);
         return this;
     }
 

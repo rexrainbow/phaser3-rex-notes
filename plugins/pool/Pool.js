@@ -13,7 +13,7 @@ class Pool {
         this.items.push(l);
     }
 
-    freeArr(arr) {        
+    freeArr(arr) {
         for (var i = 0, len = arr.length; i < len; i++) {
             this.items.push(arr[i]);
         }
