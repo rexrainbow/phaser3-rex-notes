@@ -26,6 +26,7 @@ class Demo extends Phaser.Scene {
             //console.log('Cell ' + cell.index + ' visible');
         };
         var onCellInvisible = function (cell) {
+            // var container = cell.popContainer();
             //console.log('Cell ' + cell.index + ' invisible');
         }
         var table = this.add.rexGridTable(100, 200, 200, 200, {
@@ -43,6 +44,7 @@ class Demo extends Phaser.Scene {
             })
         this.input.setDraggable(table);
 
+        // draw bound
         var topLeftP = table.getTopLeft();
         this.add.graphics()
             .lineStyle(1, 0xcccccc)

@@ -11,8 +11,8 @@ class Cell {
 
     resetFromJSON(o) {
         this.index = GetValue(o, 'idx', 0);
-        this.colIdx = GetValue(o, 'colIdx', 0);
-        this.rowIdx = GetValue(o, 'rowIdx', 0);
+        this.columnIndex = GetValue(o, 'colIdx', 0);
+        this.rowIndex = GetValue(o, 'rowIdx', 0);
         this.deltaHeight = 0;
         return this;
     }
@@ -22,7 +22,7 @@ class Cell {
             this.container.destroy();
         }
         this.rootContainer.add(container);
-        this.container = container;        
+        this.container = container;
         return this;
     }
 
@@ -40,7 +40,7 @@ class Cell {
         if (this.container) {
             this.container.destroy();
             this.container = null;
-        } 
+        }
     }
 
     setTLXY(tlx, tly) {
