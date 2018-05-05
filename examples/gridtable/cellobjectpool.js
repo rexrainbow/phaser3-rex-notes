@@ -1,5 +1,6 @@
 'use strict'
 import GridTable from './../../plugins/gridtable-plugin.js';
+import DragVectorPlugin from './../../plugins/dragvector-plugin.js';
 import ObjectPoolPlugin from './../../plugins/objectpool-plugin.js';
 
 class Demo extends Phaser.Scene {
@@ -57,25 +58,16 @@ class Demo extends Phaser.Scene {
             .strokeRectShape(table.getBounds());
 
         // drag table content
-        table.setInteractive();
-        table.on('pointerdown', function (pointer) {
-            table.setData('preX', pointer.x);
-            table.setData('preY', pointer.y);
-        });
-        table.on('pointermove', function (pointer) {
-            if (table.getData('preX') === undefined) {
-                return;
-            }
-            var dx = pointer.x - table.getData('preX');
-            var dy = pointer.y - table.getData('preY');
+        var dragVector = new DragVectorPlugin(table);
+        dragVector.on('dragdelta', function (dx, dy) {
             table.addTableOXY(dx, dy).updateTable();
-            table.setData('preX', pointer.x);
-            table.setData('preY', pointer.y);
         });
-        table.on('pointerup', function (pointer) {
-            table.setData('preX', undefined);
-            table.setData('preY', undefined);
-        });
+
+        this.add.text(10, 10, 'Destroy')
+            .setInteractive()
+            .on('pointerdown', function () {
+                table.destroy();
+            });
     }
 
     update() {}

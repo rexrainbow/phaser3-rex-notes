@@ -476,6 +476,10 @@ class GridTable extends Container {
         return y;
     }
 
+    destroy() {
+        this.table.destroy();
+        super.destroy();
+    }
 };
 
 // mixin

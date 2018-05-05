@@ -52,6 +52,7 @@ class Table {
                 if (!cell)
                     continue;
 
+                this.parent.hideCell(cell);
                 cell.destroy();
                 CellsPool.free(cell);
             }
@@ -272,6 +273,11 @@ class Table {
 
     getParentContainer() {
         return this.parent;
+    }
+
+    destroy() {
+        this.setCellCount(0);
+        this.parent = undefined;
     }
 }
 
