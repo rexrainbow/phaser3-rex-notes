@@ -33,7 +33,7 @@ class GridTable extends Container {
         }
         this.setSize(width, height);
         this.setScrollMode(GetValue(config, 'scrollMode', 0));
-        this.setClampMode(GetValue(config, 'clamplTableOY', true));
+        this.setClampMode(GetValue(config, 'clamplTableOXY', true));
         var callback = GetValue(config, 'cellVisibleCallback', null);
         if (callback !== null) {
             var scope = GetValue(config, 'cellVisibleCallbackScope', undefined);
@@ -340,9 +340,10 @@ class GridTable extends Container {
     hideCells() {
         var preList = this.preVisibleCellIdx;
         var curList = this.visibleCellIdx;
+        var table = this.table;
         var cell;
         for (var idx in preList) {
-            if (!curList.hasOwnProperty(idx)) {
+            if (!curList.hasOwnProperty(idx) && table.isValidCellIdx(idx)) {
                 cell = this.table.getCell(idx, false);
                 this.hideCell(cell);
             }

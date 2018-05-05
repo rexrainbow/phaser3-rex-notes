@@ -34,6 +34,7 @@ pages:
         - Container: container.md        
         - Group: group.md
         - Group actions: groupactions.md
+        - Grid table: gridtable.md
 - Time:
     - Date: date.md
     - Timer: timer.md

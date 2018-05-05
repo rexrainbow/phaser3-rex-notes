@@ -36,7 +36,7 @@
     
     
       
-        <title>Canvas - Notes of Phaser 3</title>
+        <title>Grid table - Notes of Phaser 3</title>
       
     
     
@@ -96,7 +96,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Canvas
+                Grid table
               </span>
             
           
@@ -534,12 +534,10 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-4" type="checkbox" id="nav-5-4" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-4" type="checkbox" id="nav-5-4">
     
     <label class="md-nav__link" for="nav-5-4">
       Canvas
@@ -567,107 +565,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="toc">
-        Canvas
-      </label>
-    
-    <a href="index.html" title="Canvas" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../canvas/index.html" title="Canvas" class="md-nav__link">
       Canvas
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#source-code" title="Source code" class="md-nav__link">
-    Source code
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#clear-or-fill-canvas" title="Clear or fill canvas" class="md-nav__link">
-    Clear or fill canvas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-canvas-elemet" title="Get canvas elemet" class="md-nav__link">
-    Get canvas elemet
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#update-display-texture" title="Update display texture" class="md-nav__link">
-    Update display texture
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#load-or-save-texture" title="Load or save texture" class="md-nav__link">
-    Load or save texture
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#compare-with-graphics-object" title="Compare with Graphics object" class="md-nav__link">
-    Compare with Graphics object
-  </a>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -680,10 +582,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-5" type="checkbox" id="nav-5-5">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-5" type="checkbox" id="nav-5-5" checked>
     
     <label class="md-nav__link" for="nav-5-5">
       Container
@@ -735,11 +639,182 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../gridtable/index.html" title="Grid table" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Grid table
+      </label>
+    
+    <a href="index.html" title="Grid table" class="md-nav__link md-nav__link--active">
       Grid table
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-instance" title="Create instance" class="md-nav__link">
+    Create instance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cell-begins-visible" title="Cell begins visible" class="md-nav__link">
+    Cell begins visible
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cell-begins-invisible" title="Cell begins invisible" class="md-nav__link">
+    Cell begins invisible
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scroll-table-content" title="Scroll table content" class="md-nav__link">
+    Scroll table content
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#refresh-table-content" title="Refresh table content" class="md-nav__link">
+    Refresh table content
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-table-size" title="Set table size" class="md-nav__link">
+    Set table size
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set-total-cells-count" title="Set total cells count" class="md-nav__link">
+    Set total cells count
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-columns-count" title="Set columns count" class="md-nav__link">
+    Set columns count
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cell" title="Cell" class="md-nav__link">
+    Cell
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-cell" title="Get cell" class="md-nav__link">
+    Get cell
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is-cell-visible" title="Is cell visible" class="md-nav__link">
+    Is cell visible
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fore-each-visible-cell" title="Fore each visible cell" class="md-nav__link">
+    Fore each visible cell
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#properties" title="Properties" class="md-nav__link">
+    Properties
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#container" title="Container" class="md-nav__link">
+    Container
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-data" title="Custom data" class="md-nav__link">
+    Custom data
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -1377,29 +1452,51 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#clear-or-fill-canvas" title="Clear or fill canvas" class="md-nav__link">
-    Clear or fill canvas
+  <a href="#cell-begins-visible" title="Cell begins visible" class="md-nav__link">
+    Cell begins visible
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-canvas-elemet" title="Get canvas elemet" class="md-nav__link">
-    Get canvas elemet
+  <a href="#cell-begins-invisible" title="Cell begins invisible" class="md-nav__link">
+    Cell begins invisible
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#update-display-texture" title="Update display texture" class="md-nav__link">
-    Update display texture
+  <a href="#scroll-table-content" title="Scroll table content" class="md-nav__link">
+    Scroll table content
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#load-or-save-texture" title="Load or save texture" class="md-nav__link">
-    Load or save texture
+  <a href="#refresh-table-content" title="Refresh table content" class="md-nav__link">
+    Refresh table content
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-table-size" title="Set table size" class="md-nav__link">
+    Set table size
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set-total-cells-count" title="Set total cells count" class="md-nav__link">
+    Set total cells count
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-columns-count" title="Set columns count" class="md-nav__link">
+    Set columns count
   </a>
   
 </li>
@@ -1408,11 +1505,64 @@
     </nav>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#compare-with-graphics-object" title="Compare with Graphics object" class="md-nav__link">
-    Compare with Graphics object
+        
+          <li class="md-nav__item">
+  <a href="#cell" title="Cell" class="md-nav__link">
+    Cell
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-cell" title="Get cell" class="md-nav__link">
+    Get cell
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is-cell-visible" title="Is cell visible" class="md-nav__link">
+    Is cell visible
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fore-each-visible-cell" title="Fore each visible cell" class="md-nav__link">
+    Fore each visible cell
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#properties" title="Properties" class="md-nav__link">
+    Properties
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#container" title="Container" class="md-nav__link">
+    Container
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-data" title="Custom data" class="md-nav__link">
+    Custom data
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1433,89 +1583,149 @@
               
                 
                 
-                  <h1>Canvas</h1>
+                  <h1>Grid table</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Drawing on <a href="https://www.w3schools.com/html/html5_canvas.asp">canvas</a>.</p>
+<p>Manipulate game object of each cell in a grid table.</p>
 <ul>
 <li>Author: Rex</li>
 <li>A kind of game object</li>
 </ul>
 <h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/drag/DragPlugin.js">Link</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/gridtable/GridTablePlugin.js">Link</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">canvas</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexCanvas</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">table</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexGridTable</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </pre></div>
 
-<p>Add canvas from JSON</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">canvas</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">rexCanvas</span><span class="p">({</span>
+<p>Configuration</p>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nx">cellsCount</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>    <span class="c1">// total cells count</span>
+    <span class="nx">columns</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>       <span class="c1">// columns count of each row</span>
+    <span class="nx">cellHeight</span><span class="o">:</span> <span class="mi">30</span><span class="p">,</span>   <span class="c1">// default height of each cell</span>
+    <span class="nx">cellWidth</span><span class="o">:</span> <span class="mi">30</span><span class="p">,</span>    <span class="c1">// width of each cell</span>
+
+    <span class="nx">cellVisibleCallback</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="c1">// callback when cell begins visible</span>
+    <span class="nx">cellVisibleCallbackScope</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+
+    <span class="nx">cellInvisibleCallback</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="c1">// callback when cell begins invisible</span>
+    <span class="nx">cellInvisibleCallbackScope</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+
+    <span class="nx">clamplTableOXY</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> <span class="c1">// clamp tableOX, tableOY when out-of-bound</span>
+    <span class="nx">scrollMode</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>        <span class="c1">// 0|&#39;v&#39;|&#39;vertical&#39;|1|&#39;h&#39;|&#39;horizontal&#39;</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>Add grid table from JSON</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">table</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">rexGridTable</span><span class="p">({</span>
     <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">width</span><span class="o">:</span> <span class="mi">256</span><span class="p">,</span>
     <span class="nx">height</span><span class="o">:</span> <span class="mi">256</span><span class="p">,</span>
 
-    <span class="c1">//fill: null</span>
+    <span class="c1">// cellsCount: 0,   // total cells count</span>
+    <span class="c1">// ...</span>
 <span class="p">});</span>
 </pre></div>
 
-<h3 id="clear-or-fill-canvas">Clear or fill canvas<a class="headerlink" href="#clear-or-fill-canvas" title="Permanent link">&para;</a></h3>
-<ul>
-<li>
-<p>Clear</p>
-<div class="codehilite"><pre><span></span><span class="nx">canvas</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+<h3 id="cell-begins-visible">Cell begins visible<a class="headerlink" href="#cell-begins-visible" title="Permanent link">&para;</a></h3>
+<p>Add <a href="../container/index.html">container</a> of cell when it begins visible in event <code>cellvisible</code>. </p>
+<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cellvisible&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cell</span><span class="p">){</span>
+    <span class="nx">cell</span><span class="p">.</span><span class="nx">setContainer</span><span class="p">(</span><span class="nx">customContainer</span><span class="p">);</span>
+<span class="p">})</span>
 </pre></div>
 
-</li>
-<li>
-<p>Fill color</p>
-<div class="codehilite"><pre><span></span><span class="nx">canvas</span><span class="p">.</span><span class="nx">fill</span><span class="p">(</span><span class="nx">color</span><span class="p">);</span>
+<p>It is equal to <code>cellVisibleCallback</code> in configuration.</p>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nx">cellVisibleCallback</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cell</span><span class="p">)</span> <span class="p">{</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">setContainer</span><span class="p">(</span><span class="nx">customContainer</span><span class="p">);</span> <span class="p">},</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
 </pre></div>
 
-</li>
-</ul>
-<h3 id="get-canvas-elemet">Get canvas elemet<a class="headerlink" href="#get-canvas-elemet" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">canvasElem</span> <span class="o">=</span> <span class="nx">canvas</span><span class="p">.</span><span class="nx">getCanvas</span><span class="p">();</span>
-<span class="c1">// var context = canvasElem.getContext(&#39;2d&#39;);</span>
-<span class="c1">// Drawing on context</span>
+<p>Each cell only has <strong>one</strong> container gameobject, old container will be destroyed when assigning a new container.</p>
+<h3 id="cell-begins-invisible">Cell begins invisible<a class="headerlink" href="#cell-begins-invisible" title="Permanent link">&para;</a></h3>
+<p>Container of an invisible cell will be destroyed automatically.</p>
+<p>To resue container gameobject, user could pop that container by <code>cell.popContainer()</code> in event <code>cellinvisible</code>.</p>
+<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cellinvisible&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cell</span><span class="p">){</span>
+    <span class="kd">var</span> <span class="nx">container</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">popContainer</span><span class="p">();</span>
+    <span class="c1">// put this container into an object pool</span>
+<span class="p">})</span>
 </pre></div>
 
-<h3 id="update-display-texture">Update display texture<a class="headerlink" href="#update-display-texture" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">canvas</span><span class="p">.</span><span class="nx">needRedraw</span><span class="p">();</span>
+<p>It is equal to <code>cellInvisibleCallback</code> in configuration.</p>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nx">cellInvisibleCallback</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cell</span><span class="p">)</span> <span class="p">{</span> <span class="kd">var</span> <span class="nx">container</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">popContainer</span><span class="p">();</span> <span class="cm">/*... */</span> <span class="p">},</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
 </pre></div>
 
-<h3 id="load-or-save-texture">Load or save texture<a class="headerlink" href="#load-or-save-texture" title="Permanent link">&para;</a></h3>
-<ul>
-<li>
-<p>Save canvas to texuture</p>
-<div class="codehilite"><pre><span></span><span class="nx">canvas</span><span class="p">.</span><span class="nx">generateTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+<h3 id="scroll-table-content">Scroll table content<a class="headerlink" href="#scroll-table-content" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">setTableOY</span><span class="p">(</span><span class="nx">oy</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
+<span class="nx">table</span><span class="p">.</span><span class="nx">addTableOY</span><span class="p">(</span><span class="nx">dy</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
 </pre></div>
 
-</li>
-<li>
-<p>Copy canvas from texture</p>
-<div class="codehilite"><pre><span></span><span class="nx">canvas</span><span class="p">.</span><span class="nx">loadTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">resize</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">setTableOX</span><span class="p">(</span><span class="nx">ox</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
+<span class="nx">table</span><span class="p">.</span><span class="nx">addTableOX</span><span class="p">(</span><span class="nx">dx</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
 </pre></div>
 
-</li>
-</ul>
-<h2 id="compare-with-graphics-object">Compare with <a href="../graphics/index.html">Graphics object</a><a class="headerlink" href="#compare-with-graphics-object" title="Permanent link">&para;</a></h2>
-<ul>
-<li>
-<p>Drawing method</p>
-<ul>
-<li>This canvas object draws stuff on canvas in WEBGL or CANVAS render mode.  </li>
-<li>Graphics object draws stuff on webgl render pipeline n WEBGL render mode.</li>
-</ul>
-</li>
-<li>
-<p>Size</p>
-<ul>
-<li>This canvas object has size (width, height) and origin.  </li>
-<li>Graphics object does not have size and origin.</li>
-</ul>
-</li>
-</ul>
+<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">setTableOXY</span><span class="p">(</span><span class="nx">ox</span><span class="p">,</span> <span class="nx">oy</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
+<span class="nx">table</span><span class="p">.</span><span class="nx">addTableOXY</span><span class="p">(</span><span class="nx">dx</span><span class="p">,</span> <span class="nx">dy</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
+</pre></div>
+
+<p>These will trigger <code>cellvisible</code>, or <code>cellinvisible</code> events.</p>
+<h3 id="refresh-table-content">Refresh table content<a class="headerlink" href="#refresh-table-content" title="Permanent link">&para;</a></h3>
+<p>Refresh all visible cells.</p>
+<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">updateTable</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+</pre></div>
+
+<h3 id="set-table-size">Set table size<a class="headerlink" href="#set-table-size" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">setGridSize</span><span class="p">(</span><span class="nx">colCount</span><span class="p">,</span> <span class="nx">rowCount</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
+</pre></div>
+
+<h4 id="set-total-cells-count">Set total cells count<a class="headerlink" href="#set-total-cells-count" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">setCellsCunt</span><span class="p">(</span><span class="nx">count</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
+</pre></div>
+
+<h4 id="set-columns-count">Set columns count<a class="headerlink" href="#set-columns-count" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">setColumnCount</span><span class="p">(</span><span class="nx">count</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
+</pre></div>
+
+<h3 id="cell">Cell<a class="headerlink" href="#cell" title="Permanent link">&para;</a></h3>
+<h4 id="get-cell">Get cell<a class="headerlink" href="#get-cell" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cell</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">getCell</span><span class="p">(</span><span class="nx">cellIndxe</span><span class="p">);</span>
+</pre></div>
+
+<h4 id="is-cell-visible">Is cell visible<a class="headerlink" href="#is-cell-visible" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isVisible</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">isCellVisible</span><span class="p">(</span><span class="nx">cellIndex</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">isVisible</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">isCellVisible</span><span class="p">(</span><span class="nx">cell</span><span class="p">);</span>
+</pre></div>
+
+<h4 id="fore-each-visible-cell">Fore each visible cell<a class="headerlink" href="#fore-each-visible-cell" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">eachVisibleCell</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">cell</span><span class="p">){</span>
+    <span class="c1">// ...</span>
+<span class="p">});</span>
+</pre></div>
+
+<h4 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cellIndex</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">index</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">colIndex</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">celIdx</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">rowIndex</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">rowIdx</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">container</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">getContainer</span><span class="p">();</span>
+</pre></div>
+
+<h4 id="container">Container<a class="headerlink" href="#container" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">container</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">getContainer</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">container</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">popContainer</span><span class="p">();</span>
+<span class="nx">cell</span><span class="p">.</span><span class="nx">setContainer</span><span class="p">(</span><span class="nx">container</span><span class="p">);</span>
+<span class="nx">cell</span><span class="p">.</span><span class="nx">destroyContainer</span><span class="p">();</span>
+</pre></div>
+
+<h4 id="custom-data">Custom data<a class="headerlink" href="#custom-data" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">getData</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">defaultValue</span><span class="p">);</span>  <span class="c1">// return defaultValue if key does not exist</span>
+<span class="nx">cell</span><span class="p">.</span><span class="nx">setData</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+</pre></div>
                 
                   
                 
@@ -1534,7 +1744,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../graphics/index.html" title="Graphics" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../groupactions/index.html" title="Group actions" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -1543,19 +1753,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Graphics
+                Group actions
               </span>
             </div>
           </a>
         
         
-          <a href="../container/index.html" title="Container" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../date/index.html" title="Date" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Container
+                Date
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

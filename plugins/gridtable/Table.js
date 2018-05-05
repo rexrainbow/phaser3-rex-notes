@@ -16,7 +16,7 @@ class Table {
         this._totalRowsHeight = null;
         this.setDefaultCellHeight(GetValue(o, "cellHeight", 30));
         this.setDefaultCellWidth(GetValue(o, "cellWidth", 30));
-        this.setCellCount(GetValue(o, "cellsCount", 10));
+        this.setCellCount(GetValue(o, "cellsCount", 0));
         this.setColumnCount(GetValue(o, "columns", 1));
         return this;
     }

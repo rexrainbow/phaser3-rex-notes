@@ -17,6 +17,10 @@ class Cell {
     //    return this;
     //}
 
+    getContainer() {
+        return this.container;
+    }
+
     setContainer(container) {
         if (!this.parentContainer.isCellVisible(this)) {
             return this;

@@ -13,6 +13,7 @@
 1. [Fade-out-destroy](fadeoutdestroy.md): Fade out game object then destroy it.
 1. [Fade-volume](fadevolume.md): Fade-in/fade-out volume of sound.
 1. [Gashapon](gashaponplugin.md): Pick random item from box.
+1. [Grid table](gridtable.md): Manipulate game object of each cell in a grid table.
 1. [LZ-string](lzstringplugin.md): Compress string using LZ-based compression algorithm.
 1. [Page](textpageplugin.md): Display text page by page on text object.
 1. [Run-commands](runcommands.md): Run commands in array.
