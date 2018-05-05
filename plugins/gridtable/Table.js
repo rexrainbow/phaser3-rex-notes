@@ -246,7 +246,6 @@ class Table {
         }
         if ((this.cells[cellIdx] === null) && createNewCellInst) {
             var cell = this.newCell();
-            this.setCellIndex(cell, cellIdx);
             this.cells[cellIdx] = cell;
         }
 
@@ -262,13 +261,6 @@ class Table {
         }
 
         return cell;
-    }
-
-    setCellIndex(cell, cellIdx) {
-        cell.index = cellIdx;
-        cell.rowIdx = this.cellIndxeToRowIndex(cellIdx);
-        cell.colIdx = this.cellIndxeToColIndex(cellIdx);
-        return this;
     }
 
     getParentContainer() {

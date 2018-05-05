@@ -231,11 +231,6 @@ class GridTable extends Container {
         return this.table.getCell(cellIdx, true);
     }
 
-    isCellVisible(cell) {
-        var cellIdx = (typeof (cell) === 'number') ? cell : cell.index;
-        return this.visibleCellIdx.hasOwnProperty(cellIdx);
-    }
-
     eachVisibleCell(callback, scope) {
         var args = [null];
 
@@ -312,7 +307,7 @@ class GridTable extends Container {
 
                 var cell = table.getCell(cellIdx, true);
                 if (!this.preVisibleCellIdx.hasOwnProperty(cellIdx)) {
-                    this.showCell(cell);
+                    this.showCell(cell, cellIdx);
                 }
                 cell.setXY(cellTLX, cellTLY);
             }
@@ -332,9 +327,9 @@ class GridTable extends Container {
         }
     }
 
-    showCell(cell) {
+    showCell(cell, cellIdx) {
         // attach container to cell by cell.setContainer(container) under this event
-        this.emit('cellvisible', cell);
+        this.emit('cellvisible', cell, cellIdx);
     }
 
     hideCells() {
@@ -342,17 +337,17 @@ class GridTable extends Container {
         var curList = this.visibleCellIdx;
         var table = this.table;
         var cell;
-        for (var idx in preList) {
-            if (!curList.hasOwnProperty(idx) && table.isValidCellIdx(idx)) {
-                cell = this.table.getCell(idx, false);
-                this.hideCell(cell);
+        for (var cellIdx in preList) {
+            if (!curList.hasOwnProperty(cellIdx) && table.isValidCellIdx(cellIdx)) {
+                cell = this.table.getCell(cellIdx, false);
+                this.hideCell(cell, cellIdx);
             }
         }
     }
 
-    hideCell(cell) {
+    hideCell(cell, cellIdx) {
         // option: pop container of cell by cell.popContainer() under this event 
-        this.emit('cellinvisible', cell);
+        this.emit('cellinvisible', cell, cellIdx);
         cell.destroyContainer(); // destroy container of cell
     }
 

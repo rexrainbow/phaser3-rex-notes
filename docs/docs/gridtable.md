@@ -149,13 +149,6 @@ table.setColumnCount(count).updateTable();
 var cell = table.getCell(cellIndxe);
 ```
 
-#### Is cell visible
-
-```javascript
-var isVisible = table.isCellVisible(cellIndex);
-var isVisible = table.isCellVisible(cell);
-```
-
 #### Fore each visible cell
 
 ```javascript

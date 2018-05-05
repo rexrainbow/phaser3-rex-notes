@@ -22,9 +22,6 @@ class Cell {
     }
 
     setContainer(container) {
-        if (!this.parentContainer.isCellVisible(this)) {
-            return this;
-        }
         if (this.container) {
             this.container.destroy();
         }
