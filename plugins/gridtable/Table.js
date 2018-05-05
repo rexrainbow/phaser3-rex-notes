@@ -54,7 +54,7 @@ class Table {
 
                 this.parent.hideCell(cell);
                 cell.destroy();
-                CellsPool.free(cell);
+                CellsPool.push(cell);
             }
             cells.length = cnt;
         } else if (end < cnt) {
@@ -254,7 +254,7 @@ class Table {
     }
 
     newCell(cellIdx) {
-        var cell = CellsPool.allocate();
+        var cell = CellsPool.pop();
         if (cell === null) {
             cell = new CellKlass(this);
         } else {

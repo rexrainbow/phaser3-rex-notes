@@ -13,7 +13,7 @@ const splitRegExp = CONST.SPLITREGEXP;
 var WRAP_RESULT = [];
 var WrapText = function (text, getTextWidth, wrapMode, wrapWidth, offset) {
     var retLines = WRAP_RESULT;
-    LinesPool.freeArr(retLines);
+    LinesPool.pushMultiple(retLines);
 
     if (!text || !text.length) {
         return retLines;
@@ -97,7 +97,7 @@ var WrapText = function (text, getTextWidth, wrapMode, wrapWidth, offset) {
 
 var LinesPool = new PoolKlass();
 LinesPool.newline = function (text, width, newLineMode) {
-    var l = this.allocate();
+    var l = this.pop();
     if (l === null) {
         l = {};
     }

@@ -1,6 +1,6 @@
 'use strict'
 
-import PoolKlass from './Pool';
+import PoolKlass from './../pool.js';
 
 class ObjectPoolPlugin extends PoolKlass {
     constructor(scene, config) {

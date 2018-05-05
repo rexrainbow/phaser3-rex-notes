@@ -16,7 +16,7 @@ class Demo extends Phaser.Scene {
         var cellObjectsPool = new ObjectPoolPlugin(this);
 
         var newCellObject = function (scene, cell) {
-            var container = cellObjectsPool.allocate();
+            var container = cellObjectsPool.pop();
             if (container === null) {
                 console.log(cell.index + ': create new gameboject')
                 var bg = scene.add.graphics(0, 0)
@@ -40,7 +40,7 @@ class Demo extends Phaser.Scene {
         };
         var onCellInvisible = function (cell) {
             var container = cell.popContainer();
-            cellObjectsPool.free(container);
+            cellObjectsPool.push(container);
             console.log(cell.index + ': push to pool')
         }
         var table = this.add.rexGridTable(400, 300, 250, 400, {
