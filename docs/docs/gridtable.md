@@ -157,15 +157,6 @@ table.eachVisibleCell(function(cell){
 });
 ```
 
-#### Properties
-
-```javascript
-var cellIndex = cell.index;
-var colIndex = cell.celIdx;
-var rowIndex = cell.rowIdx;
-var container = cell.getContainer();
-```
-
 #### Container
 
 ```javascript
