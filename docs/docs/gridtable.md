@@ -1,6 +1,6 @@
 ## Introduction
 
-Viewer of grid table, to manipulate game object of each cell.
+Viewer of grid table, to manipulate game object of each visible cell.
 
 - Author: Rex
 - A kind of game object
