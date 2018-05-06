@@ -7,6 +7,7 @@ const Components = Phaser.GameObjects.Components;
 const Set = Phaser.Structs.Set;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Clamp = Phaser.Math.Clamp;
+const BuildGameObject = Phaser.GameObjects.BuildGameObject;
 
 class GridTable extends Container {
     constructor(scene, x, y, width, height, config) {
@@ -62,7 +63,7 @@ class GridTable extends Container {
         return this;
     }
 
-    setCellsCunt(count) {
+    setCellsCount(count) {
         var cellCount = this.table.cellCount;
         if (cellCount === count) {
             return this;
@@ -304,31 +305,17 @@ class GridTable extends Container {
         return this.table.getCell(cellIdx, true);
     }
 
+    // For when you know this Set will be modified during the iteration
     eachVisibleCell(callback, scope) {
-        // TODO
-        var args = [null];
-
-        for (var i = 2, len = arguments.length; i < len; i++) {
-            args.push(arguments[i]);
-        }
-
-        var cells = this.visibleCells;
-        if (scope) {
-            for (var idx in cells) {
-                args[0] = this.getCell(idx);
-
-                callback.apply(scope, args);
-            }
-        } else {
-            for (var idx in cells) {
-                args[0] = this.getCell(idx);
-
-                callback(args);
-            }
-        }
-
+        this.visibleCells.each(callback, scope);
         return this;
     }
+
+    // For when you absolutely know this Set won't be modified during the iteration
+    iterateVisibleCell(callback, scope) {
+        this.visibleCells.iterate(callback, scope);
+        return this;
+    }    
 
     cleanVisibleCellIndexes() {
         var tmp = this.preVisibleCells;

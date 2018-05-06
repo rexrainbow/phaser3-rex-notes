@@ -2,6 +2,7 @@ import Text from './../utils/text/Text.js';
 import parser from './Parser.js';
 
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
+const BuildGameObject = Phaser.GameObjects.BuildGameObject;
 
 class BBCodeText extends Text {
     constructor(scene, x, y, text, style) {

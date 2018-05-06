@@ -72,12 +72,12 @@ class Table {
             // remove until end of array
             this.cells.length = cellIdx;
         } else {
-            this.buildCellIndex(endIdx);
             if (count === 1) {
                 SpliceOne(this.cells, cellIdx);
             } else {
                 this.cells.splice(cellIdx, count);
             }
+            this.buildCellIndex(cellIdx);
         }
         return this;
     }
