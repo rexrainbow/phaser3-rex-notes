@@ -15,33 +15,33 @@ class Demo extends Phaser.Scene {
     create() {
         var cellObjectsPool = new ObjectPoolPlugin(this);
 
-        var newCellObject = function (scene, cell, cellIdx) {
+        var newCellObject = function (scene, cell) {
             var container = cellObjectsPool.pop();
             if (container === null) {
-                console.log(cellIdx + ': create new gameboject')
+                console.log(cell.index + ': create new gameboject')
                 var bg = scene.add.graphics(0, 0)
                     .fillStyle(0x555555)
                     .fillRect(2, 2, 58, 58)
                     .setName('background');
-                var txt = scene.add.text(5, 5, cellIdx)
+                var txt = scene.add.text(5, 5, cell.index)
                     .setName('index');
                 container = scene.add.container(0, 0, [bg, txt]);
             } else {
-                console.log(cellIdx + ': pop from pool')
-                container.getByName('index').setText(cellIdx);
+                console.log(cell.index + ': pop from pool')
+                container.getByName('index').setText(cell.index);
             }
 
             return container;
         }
 
-        var onCellVisible = function (cell, cellIdx) {
-            cell.setContainer(newCellObject(this, cell, cellIdx));
-            //console.log('Cell ' + cellIdx + ' visible');
+        var onCellVisible = function (cell) {
+            cell.setContainer(newCellObject(this, cell));
+            //console.log('Cell ' + cell.index + ' visible');
         };
-        var onCellInvisible = function (cell, cellIdx) {
+        var onCellInvisible = function (cell) {
             var container = cell.popContainer();
             cellObjectsPool.push(container);
-            console.log(cellIdx + ': push to pool')
+            console.log(cell.index + ': push to pool')
         }
         var table = this.add.rexGridTable(400, 300, 250, 400, {
             cellHeight: 60,

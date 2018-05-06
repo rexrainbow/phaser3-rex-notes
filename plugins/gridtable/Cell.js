@@ -17,6 +17,14 @@ class Cell {
     //    return this;
     //}
 
+    get colIndx() {
+        return this.parent.cellIndxeToColIndex(this.index);
+    }
+
+    get rowIndx() {
+        return this.parent.cellIndxeToRowIndex(this.index);
+    }
+
     getContainer() {
         return this.container;
     }
