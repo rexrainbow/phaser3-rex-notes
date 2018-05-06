@@ -1,6 +1,6 @@
 ## Introduction
 
-Manipulate game object of each cell in a grid table.
+Viewer of grid table, to manipulate game object of each cell.
 
 - Author: Rex
 - A kind of game object
@@ -123,16 +123,16 @@ Refresh all visible cells.
 table.updateTable(true);
 ```
 
-### Set table size
-
-```javascript
-table.setGridSize(colCount, rowCount).updateTable();
-```
-
 #### Set total cells count
 
 ```javascript
 table.setCellsCunt(count).updateTable();
+```
+
+### Set table size
+
+```javascript
+table.setGridSize(colCount, rowCount).updateTable();
 ```
 
 #### Set columns count
@@ -151,24 +151,38 @@ var cell = table.getCell(cellIndxe);
 
 #### Fore each visible cell
 
-```javascript
-table.eachVisibleCell(function(cell){
-    // ...
-});
-```
+- For when you absolutely know this Set won't be modified during the iteration
+    ```javascript
+    table.iterateVisibleCell(function(cell){
+        // ...
+    });
+    ```
+- For when you know this Set will be modified during the iteration.
+    ```javascript
+    table.eachVisibleCell(function(cell){
+        // ...
+    });
+    ```
 
 #### Container
 
 ```javascript
 var container = cell.getContainer();
+```
+
+```javascript
 var container = cell.popContainer();
+```
+
+```javascript
 cell.setContainer(container);
+```
+```javascript
 cell.destroyContainer();
 ```
 
-#### Custom data
+#### Properties
 
 ```javascript
-var data = cell.getData(key, defaultValue);  // return defaultValue if key does not exist
-cell.setData(key, value);
+var cellIndex = cell.index;
 ```

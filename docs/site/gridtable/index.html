@@ -718,13 +718,6 @@
     Refresh table content
   </a>
   
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set-table-size" title="Set table size" class="md-nav__link">
-    Set table size
-  </a>
-  
     <nav class="md-nav">
       <ul class="md-nav__list">
         
@@ -734,6 +727,19 @@
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-table-size" title="Set table size" class="md-nav__link">
+    Set table size
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#set-columns-count" title="Set columns count" class="md-nav__link">
@@ -777,8 +783,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#custom-data" title="Custom data" class="md-nav__link">
-    Custom data
+  <a href="#properties" title="Properties" class="md-nav__link">
+    Properties
   </a>
   
 </li>
@@ -1463,13 +1469,6 @@
     Refresh table content
   </a>
   
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set-table-size" title="Set table size" class="md-nav__link">
-    Set table size
-  </a>
-  
     <nav class="md-nav">
       <ul class="md-nav__list">
         
@@ -1479,6 +1478,19 @@
   </a>
   
 </li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-table-size" title="Set table size" class="md-nav__link">
+    Set table size
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#set-columns-count" title="Set columns count" class="md-nav__link">
@@ -1522,8 +1534,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#custom-data" title="Custom data" class="md-nav__link">
-    Custom data
+  <a href="#properties" title="Properties" class="md-nav__link">
+    Properties
   </a>
   
 </li>
@@ -1558,7 +1570,7 @@
                   <h1>Grid table</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Manipulate game object of each cell in a grid table.</p>
+<p>Viewer of grid table, to manipulate game object of each cell.</p>
 <ul>
 <li>Author: Rex</li>
 <li>A kind of game object</li>
@@ -1652,12 +1664,12 @@
 <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">updateTable</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
 </pre></div>
 
-<h3 id="set-table-size">Set table size<a class="headerlink" href="#set-table-size" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">setGridSize</span><span class="p">(</span><span class="nx">colCount</span><span class="p">,</span> <span class="nx">rowCount</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
-</pre></div>
-
 <h4 id="set-total-cells-count">Set total cells count<a class="headerlink" href="#set-total-cells-count" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">setCellsCunt</span><span class="p">(</span><span class="nx">count</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
+</pre></div>
+
+<h3 id="set-table-size">Set table size<a class="headerlink" href="#set-table-size" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">setGridSize</span><span class="p">(</span><span class="nx">colCount</span><span class="p">,</span> <span class="nx">rowCount</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
 </pre></div>
 
 <h4 id="set-columns-count">Set columns count<a class="headerlink" href="#set-columns-count" title="Permanent link">&para;</a></h4>
@@ -1670,21 +1682,31 @@
 </pre></div>
 
 <h4 id="fore-each-visible-cell">Fore each visible cell<a class="headerlink" href="#fore-each-visible-cell" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">eachVisibleCell</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">cell</span><span class="p">){</span>
+<ul>
+<li>For when you absolutely know this Set won't be modified during the iteration
+    <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">iterateVisibleCell</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">cell</span><span class="p">){</span>
     <span class="c1">// ...</span>
 <span class="p">});</span>
-</pre></div>
-
+</pre></div></li>
+<li>For when you know this Set will be modified during the iteration.
+    <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">eachVisibleCell</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">cell</span><span class="p">){</span>
+    <span class="c1">// ...</span>
+<span class="p">});</span>
+</pre></div></li>
+</ul>
 <h4 id="container">Container<a class="headerlink" href="#container" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">container</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">getContainer</span><span class="p">();</span>
-<span class="kd">var</span> <span class="nx">container</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">popContainer</span><span class="p">();</span>
-<span class="nx">cell</span><span class="p">.</span><span class="nx">setContainer</span><span class="p">(</span><span class="nx">container</span><span class="p">);</span>
-<span class="nx">cell</span><span class="p">.</span><span class="nx">destroyContainer</span><span class="p">();</span>
 </pre></div>
 
-<h4 id="custom-data">Custom data<a class="headerlink" href="#custom-data" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">getData</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">defaultValue</span><span class="p">);</span>  <span class="c1">// return defaultValue if key does not exist</span>
-<span class="nx">cell</span><span class="p">.</span><span class="nx">setData</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">container</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">popContainer</span><span class="p">();</span>
+</pre></div>
+
+<p><div class="codehilite"><pre><span></span><span class="nx">cell</span><span class="p">.</span><span class="nx">setContainer</span><span class="p">(</span><span class="nx">container</span><span class="p">);</span>
+</pre></div>
+<div class="codehilite"><pre><span></span><span class="nx">cell</span><span class="p">.</span><span class="nx">destroyContainer</span><span class="p">();</span>
+</pre></div></p>
+<h4 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cellIndex</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">index</span><span class="p">;</span>
 </pre></div>
                 
                   
