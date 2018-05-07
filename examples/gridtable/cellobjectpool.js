@@ -59,8 +59,8 @@ class Demo extends Phaser.Scene {
 
         // drag table content
         var dragDelta = new DragDeltaPlugin(table);
-        dragDelta.on('dragdelta', function (dx, dy) {
-            table.addTableOXY(dx, dy).updateTable();
+        dragDelta.on('dragdelta', function (pointer) {
+            table.addTableOXY(pointer.dx, pointer.dy).updateTable();
         });
 
         this.add.text(10, 10, 'Destroy')

@@ -3,6 +3,7 @@
 import EE from 'eventemitter3';
 import GetSceneObject from './../utils/system/GetSceneObject.js';
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
+const getDist = Phaser.Math.Distance.Power;
 
 class DragDeltaPlugin extends EE {
     constructor(gameobject, config) {
@@ -16,10 +17,12 @@ class DragDeltaPlugin extends EE {
     }
 
     resetFromJSON(o) {
+        this.x = undefined;
+        this.y = undefined;
         this.preX = undefined;
         this.preY = undefined;
-        this.dX = undefined;
-        this.dY = undefined;
+        this.dx = undefined;
+        this.dy = undefined;
         this.setEnable(GetAdvancedValue(o, "enable", true));
         return this;
     }
@@ -64,15 +67,17 @@ class DragDeltaPlugin extends EE {
         this.preY = pointer.y;
     }
 
-    onDragging(pointer) {
+    onDragging(pointer) {     
         if (this.preX === undefined) {
             return;
-        }        
-        var x = pointer.x;
-        var y = pointer.y;
-        this.dX = x - this.preX;
-        this.dY = y - this.preY;
-        this.emit('dragdelta', this.dX, this.dY);
+        }          
+        var x = pointer.x,
+            y = pointer.y;
+        this.x = x;
+        this.y = y;
+        this.dx = x - this.preX;
+        this.dy = y - this.preY;
+        this.emit('dragdelta', this);
         this.preX = x;
         this.preY = y;
     }
@@ -81,6 +86,18 @@ class DragDeltaPlugin extends EE {
         this.preX = undefined;
         this.preY = undefined;
     }
+
+    get dt() {
+        var game = this.scene.sys.game;
+        var delta = game.loop.delta;
+        return delta;
+    }
+
+    get speed() {
+        var d = getDist(this.x, this.preX, this.y, this.preY);
+        var speed = d/(this.dt* 0.001);
+        return speed;
+    }  
 }
 
 export default DragDeltaPlugin;

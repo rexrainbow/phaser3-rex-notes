@@ -1,6 +1,7 @@
 'use strict'
 
 import DragDeltaPlugin from './../../plugins/dragdelta-plugin.js';
+const getDist = Phaser.Math.Distance.Power;
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -20,9 +21,10 @@ class Demo extends Phaser.Scene {
             .setDisplaySize(300, 300)
             .setTint(0xcccccc);
         var dragDelta = new DragDeltaPlugin(bg);
-        dragDelta.on('dragdelta', function (dx, dy) {
-            star.x += dx;
-            star.y += dy;
+        dragDelta.on('dragdelta', function (pointer) {
+            console.log(pointer.speed);
+            star.x += pointer.dx;
+            star.y += pointer.dy;            
         });
 
         star = this.add.image(400, 300, 'bg')
