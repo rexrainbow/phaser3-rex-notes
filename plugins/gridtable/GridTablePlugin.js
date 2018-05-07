@@ -4,7 +4,10 @@ import IsArray from './../utils/array/IsArray.js';
 
 const Container = Phaser.GameObjects.Container;
 const Components = Phaser.GameObjects.Components;
+const Set = Phaser.Structs.Set;
 const GetValue = Phaser.Utils.Objects.GetValue;
+const Clamp = Phaser.Math.Clamp;
+const BuildGameObject = Phaser.GameObjects.BuildGameObject;
 
 class GridTable extends Container {
     constructor(scene, x, y, width, height, config) {
@@ -13,16 +16,17 @@ class GridTable extends Container {
         this.updateFlag = true;
         this._tableOX = 0;
         this._tableOY = 0;
-        this.visibleCellIdx = {};
-        this.preVisibleCellIdx = {};
+        this.visibleCells = new Set();
+        this.preVisibleCells = new Set();
         this.visibleStartX = null;
         this.visibleEndX = null;
         this.visibleStartY = null;
         this.visibleEndY = null;
+        this.lastVisibleCellIdx = null;
         this.execeedTopState = false;
         this.execeedBottomState = false;
         this.execeedLeftState = false;
-        this.execeedRightState = false;        
+        this.execeedRightState = false;
 
         if (width === undefined) {
             width = 0;
@@ -32,7 +36,7 @@ class GridTable extends Container {
         }
         this.setSize(width, height);
         this.setScrollMode(GetValue(config, 'scrollMode', 0));
-        this.setClampMode(GetValue(config, 'clamplTableOY', true));
+        this.setClampMode(GetValue(config, 'clamplTableOXY', true));
         var callback = GetValue(config, 'cellVisibleCallback', null);
         if (callback !== null) {
             var scope = GetValue(config, 'cellVisibleCallbackScope', undefined);
@@ -56,6 +60,94 @@ class GridTable extends Container {
 
     setClampMode(mode) {
         this.clampTableOXYMode = mode;
+        return this;
+    }
+
+    setCellsCount(count) {
+        var cellCount = this.table.cellCount;
+        if (cellCount === count) {
+            return this;
+        }
+
+        if (cellCount > count) {
+            this.removeCell(count, cellCount - count);
+        } else { // cellCount < count
+            this.insertNewCell(cellCount, count - cellCount);
+        }
+        return this;
+    }
+
+    setColumnCount(count) {
+        if (this.table.colCount === count) {
+            return this;
+        }
+        this.table.setColumnCount(count);
+        this.updateFlag = true;
+        return this;
+    }
+
+    setGridSize(colCount, rowCount) {
+        this.table.setCellsCunt(colCount * rowCount);
+        this.table.setColumnCount(colCount);
+        return this;
+    }
+
+    insertNewCell(cellIdx, count) {
+        if (typeof (cellIdx) === 'object') {
+            cellIdx = cellIdx.index;
+        }
+        if (count === undefined) {
+            count = 1;
+        }
+        if (count <= 0) {
+            return this;
+        }
+        cellIdx = Clamp(cellIdx, 0, this.table.cellCount);
+        this.table.insertNewCell(cellIdx, count);
+        if (cellIdx <= this.lastVisibleCellIdx) {
+            this.updateFlag = true;
+        }
+        return this;
+    }
+
+    removeCell(cellIdx, count) {
+        if (typeof (cellIdx) === 'object') {
+            cellIdx = cellIdx.index;
+        }
+        if (count === undefined) {
+            count = 1;
+        }
+        if (cellIdx < 0) {
+            count += cellIdx;
+            cellIdx = 0;
+        }
+        if (count <= 0) {
+            return this;
+        }
+        // out-of-range
+        if (cellIdx > this.table.cellCount) {
+            return this;
+        }
+
+        if (cellIdx <= this.lastVisibleCellIdx) {
+            var preList = this.preVisibleCells;
+            var curList = this.visibleCells;
+            var cell;
+            for (var i = cellIdx, endIdx = cellIdx + count; i < endIdx; i++) {
+                cell = this.getCell(i, false);
+                if (cell) {
+                    if (curList.contains(cell)) {
+                        this.hideCell(cell);
+                        this.updateFlag = true;
+                        curList.delete(cell);
+                    }
+                    preList.delete(cell);
+                }
+            }
+        }
+
+        this.table.removeCell(cellIdx, count);
+        return this;
     }
 
     get tableOY() {
@@ -170,7 +262,7 @@ class GridTable extends Container {
 
     addTableOX(dx) {
         this.tableOX += dx;
-        return this;        
+        return this;
     }
 
     addTableOY(dy) {
@@ -178,9 +270,15 @@ class GridTable extends Container {
         return this;
     }
 
-    addTableOXY(dx, dy){
+    addTableOXY(dx, dy) {
         this.tableOX += dx;
         this.tableOY += dy;
+        return this;
+    }
+
+    setTableOYByPercentage(percentage) {
+        percentage = Clamp(percentage, 0, 1);
+        this.setTableOY(-this.tableVisibleHeight * percentage);
         return this;
     }
 
@@ -207,11 +305,23 @@ class GridTable extends Container {
         return this.table.getCell(cellIdx, true);
     }
 
+    // For when you know this Set will be modified during the iteration
+    eachVisibleCell(callback, scope) {
+        this.visibleCells.each(callback, scope);
+        return this;
+    }
+
+    // For when you absolutely know this Set won't be modified during the iteration
+    iterateVisibleCell(callback, scope) {
+        this.visibleCells.iterate(callback, scope);
+        return this;
+    }    
+
     cleanVisibleCellIndexes() {
-        var tmp = this.preVisibleCellIdx;
-        this.preVisibleCellIdx = this.visibleCellIdx;
-        this.visibleCellIdx = tmp;
-        Clean(this.visibleCellIdx);
+        var tmp = this.preVisibleCells;
+        this.preVisibleCells = this.visibleCells;
+        this.visibleCells = tmp;
+        this.visibleCells.clear();
     }
 
     showCells() {
@@ -235,6 +345,11 @@ class GridTable extends Container {
         var cellTLX0 = this.getTLX(colIdx),
             cellTLX = cellTLX0;
         var cellTLY = this.getTLY(rowIdx);
+        this.visibleStartY = null;
+        this.visibleEndY = null;
+        this.visibleStartX = null;
+        this.visibleEndX = null;
+        this.lastVisibleCellIdx = null;
         while ((cellTLY < bottomBound) && (cellIdx <= lastIdx)) {
             if (this.table.isValidCellIdx(cellIdx)) {
                 if (this.visibleStartY === null) {
@@ -246,6 +361,10 @@ class GridTable extends Container {
                     this.visibleEndX = colIdx;
                 }
 
+                if (this.lastVisibleCellIdx === null) {
+                    this.lastVisibleCellIdx = cellIdx;
+                }
+
                 if (this.visibleEndY < rowIdx) {
                     this.visibleEndY = rowIdx;
                 }
@@ -254,10 +373,13 @@ class GridTable extends Container {
                     this.visibleEndX = colIdx;
                 }
 
-                this.visibleCellIdx[cellIdx] = true;
+                if (this.lastVisibleCellIdx < cellIdx) {
+                    this.lastVisibleCellIdx = cellIdx;
+                }
 
                 var cell = table.getCell(cellIdx, true);
-                if (!this.preVisibleCellIdx.hasOwnProperty(cellIdx)) {
+                this.visibleCells.set(cell);
+                if (!this.preVisibleCells.contains(cell)) {
                     this.showCell(cell);
                 }
                 cell.setXY(cellTLX, cellTLY);
@@ -284,21 +406,19 @@ class GridTable extends Container {
     }
 
     hideCells() {
-        var preList = this.preVisibleCellIdx;
-        var curList = this.visibleCellIdx;
-        var cell;
-        for (var idx in preList) {
-            if (!curList.hasOwnProperty(idx)) {
-                cell = this.table.getCell(idx, false);
+        var preList = this.preVisibleCells;
+        var curList = this.visibleCells;
+        preList.iterate(function (cell) {
+            if (!curList.contains(cell)) {
                 this.hideCell(cell);
             }
-        }
+        }, this);
     }
 
     hideCell(cell) {
         // option: pop container of cell by cell.popContainer() under this event 
-        this.emit('cellinvisible', cell);        
-        cell.destroyContainer();  // destroy container of cell
+        this.emit('cellinvisible', cell);
+        cell.destroyContainer(); // destroy container of cell
     }
 
     get instHeight() {
@@ -422,6 +542,11 @@ class GridTable extends Container {
         return y;
     }
 
+    destroy() {    
+        this.setCellsCunt(0);
+        this.table.destroy();
+        super.destroy();
+    }
 };
 
 // mixin

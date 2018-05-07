@@ -3,6 +3,7 @@ import ParserKlass from './Parser.js';
 
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 const GetValue = Phaser.Utils.Objects.GetValue;
+const BuildGameObject = Phaser.GameObjects.BuildGameObject;
 
 class TagText extends Text {
     constructor(scene, x, y, text, style) {

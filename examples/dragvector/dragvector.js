@@ -23,7 +23,7 @@ class Demo extends Phaser.Scene {
         bg.dragvector.on('dragdelta', function (dx, dy) {
             star.x += dx;
             star.y += dy;
-        })
+        });
 
         star = this.add.image(400, 300, 'bg')
             .setDisplaySize(10, 10)

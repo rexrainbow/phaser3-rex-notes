@@ -5,7 +5,10 @@ import Gashapon from './Gashapon.js';
 class GashaponPlugin extends Gashapon {
     constructor(parent, config) {
         super(config);
+        //this.boot();
     }
+
+    boot() {}
 
     shutdown() {
         super.destroy();

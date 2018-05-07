@@ -1,19 +1,19 @@
 'use strict'
 
-class Pool {
+class Stack {
     constructor() {
         this.items = [];
     }
 
-    allocate() {
+    pop() {
         return (this.items.length > 0) ? this.items.pop() : null;
     }
 
-    free(l) {
+    push(l) {
         this.items.push(l);
     }
 
-    freeArr(arr) {        
+    pushMultiple(arr) {
         for (var i = 0, len = arr.length; i < len; i++) {
             this.items.push(arr[i]);
         }
@@ -21,4 +21,4 @@ class Pool {
     }
 }
 
-export default Pool;
+export default Stack;

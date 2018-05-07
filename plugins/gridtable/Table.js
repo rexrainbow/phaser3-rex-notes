@@ -1,7 +1,9 @@
 import CellKlass from './Cell.js';
-import PoolKlass from './../utils/object/Pool.js';
+import PoolKlass from './../pool.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
+const SpliceOne = Phaser.Utils.Array.SpliceOne;
+
 var CellsPool = new PoolKlass();
 class Table {
     constructor(parent, config) {
@@ -16,16 +18,9 @@ class Table {
         this._totalRowsHeight = null;
         this.setDefaultCellHeight(GetValue(o, "cellHeight", 30));
         this.setDefaultCellWidth(GetValue(o, "cellWidth", 30));
-        this.setCellCount(GetValue(o, "totalcells", 10));
+        this.initCells(GetValue(o, "cellsCount", 0));
         this.setColumnCount(GetValue(o, "columns", 1));
         return this;
-    }
-
-    setUpdateFlag(flag) {
-        if (flag === undefined) {
-            flag = true;
-        }
-        this.parent.updateFlag |= flag;
     }
 
     setDefaultCellHeight(height) {
@@ -38,48 +33,63 @@ class Table {
         return this;
     }
 
-    setCellCount(cnt) {
-        var end = this.cellCount;
-        if (end === cnt)
-            return this;
+    initCells(size) {
+        var cells = this.cells;
+        cells.length = size;
+        for(var i=0; i<size; i++) {
+            cells[i] = null;
+        }
+        return this;
+    }
 
-        var cells = this.cells,
-            cell;
-        if (end > cnt) {
-            for (var i = cnt; i < end; i++) {
-                // release lines
-                cell = cells[i];
-                if (!cell)
-                    continue;
-
-                cell.destroy();
-                CellsPool.free(cell);
-            }
-            cells.length = cnt;
-        } else if (end < cnt) {
-            cells.length = cnt
-            for (var i = end; i < cnt; i++) {
+    insertNewCell(cellIdx, count) {
+        var cells = this.cells;
+        if (cellIdx === cells.length) {
+            // append at end of array
+            var endIdx = cellIdx + count;
+            cells.legth = endIdx;
+            for (var i = cellIdx; i < endIdx; i++) {
                 cells[i] = null;
             }
+        } else {
+            var newCells = [];
+            newCells.length = count;
+            for (var i = 0; i < count; i++) {
+                newCells[i] = null;
+            }
+            this.cells.splice(cellIdx, 0, ...newCells);
+        }
+        return this;
+    }
+
+    removeCell(cellIdx, count) {
+        var endIdx = cellIdx + count;
+        for (var i = cellIdx; i < endIdx; i++) {
+            this.freeCell(i);
         }
 
-        if (Math.floor(end / this.colCount) !== Math.floor(cnt / this.colCount))
-            this._totalRowsHeight = null;
-
-        this.setUpdateFlag();
+        if (endIdx === this.cells.length) {
+            // remove until end of array
+            this.cells.length = cellIdx;
+        } else {
+            if (count === 1) {
+                SpliceOne(this.cells, cellIdx);
+            } else {
+                this.cells.splice(cellIdx, count);
+            }
+            this.buildCellIndex(cellIdx);
+        }
         return this;
     }
 
     setColumnCount(cnt) {
-        this.setUpdateFlag(this.colCount !== cnt);
-
         this.colCount = cnt;
         this._totalRowsHeight = null;
         return this;
     }
 
     get rowCount() {
-        return Math.ceil(this.cellCount / this.colCount);
+        return Math.ceil(this.cells.length / this.colCount);
     }
 
     get cellCount() {
@@ -87,7 +97,7 @@ class Table {
     }
 
     isValidCellIdx(idx) {
-        return ((idx >= 0) && (idx < this.cellCount));
+        return ((idx >= 0) && (idx < this.cells.length));
     }
 
     heightToRowIndex(height, isCeil) {
@@ -227,6 +237,14 @@ class Table {
         return this.colCount * this.defaultCellWidth;
     }
 
+    cellIndxeToColIndex(cellIdx) {
+        return cellIdx % this.colCount;
+    }
+
+    cellIndxeToRowIndex(cellIdx) {
+        return Math.floor(cellIdx / this.colCount);
+    }
+
     getCell(cellIdx, createNewCellInst) {
         if (!this.isValidCellIdx(cellIdx)) {
             return null;
@@ -236,8 +254,7 @@ class Table {
             createNewCellInst = true;
         }
         if ((this.cells[cellIdx] === null) && createNewCellInst) {
-            var cell = this.newCell();
-            this.setCellIndex(cell, cellIdx);
+            var cell = this.newCell(cellIdx);
             this.cells[cellIdx] = cell;
         }
 
@@ -245,25 +262,55 @@ class Table {
     }
 
     newCell(cellIdx) {
-        var cell = CellsPool.allocate();
+        var cell = CellsPool.pop();
         if (cell === null) {
             cell = new CellKlass(this);
         } else {
             cell.setParent(this);
+            if (cell.hasOwnProperty('deltaHeight')) {
+                delete cell.deltaHeight;
+            }
         }
+        cell.index = cellIdx;
 
         return cell;
     }
 
-    setCellIndex(cell, cellIdx) {
-        cell.index = cellIdx;
-        cell.rowIdx = Math.floor(cellIdx / this.colCount);
-        cell.colIdx = cellIdx % this.colCount;
+    buildCellIndex(startIdx) {
+        if (startIdx === undefined) {
+            startIdx = 0;
+        }
+        var cells = this.cells,
+            cell;
+        for (var i = startIdx, len = cells.length; i < len; i++) {
+            cell = cells[i];
+            if (cell) {
+                cell.index = i;
+            }
+        }
         return this;
     }
 
     getParentContainer() {
         return this.parent;
+    }
+
+    freeCell(cell) {
+        if (typeof (cell) === 'number') {
+            cell = this.cells[cell];
+        }
+
+        if (!cell) {
+            return this;
+        }
+
+        cell.destroy();
+        CellsPool.push(cell);
+        return this;
+    }
+
+    destroy() {
+        this.parent = undefined;
     }
 }
 

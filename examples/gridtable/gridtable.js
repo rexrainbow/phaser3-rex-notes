@@ -8,15 +8,14 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {
-    }
+    preload() {}
 
     create() {
         var newCellObject = function (scene, cell) {
             var bg = scene.add.graphics(0, 0)
                 .fillStyle(0x555555)
                 .fillRect(2, 2, 58, 58);
-            var txt = scene.add.text(5, 5, cell.index.toString());
+            var txt = scene.add.text(5, 5, cell.index);
             var container = scene.add.container(0, 0, [bg, txt]);
             return container;
         }
@@ -28,23 +27,23 @@ class Demo extends Phaser.Scene {
         var table = this.add.rexGridTable(400, 300, 250, 400, {
             cellHeight: 60,
             cellWidth: 60,
-            totalcells: 100,
+            cellsCount: 100,
             columns: 4,
             cellVisibleCallback: onCellVisible.bind(this),
         });
 
         // draw bound
         this.add.graphics()
-            .lineStyle(1, 0xcccccc)
+            .lineStyle(3, 0xff0000)
             .strokeRectShape(table.getBounds());
 
         // drag table content
         table.setInteractive();
-        table.on('pointerdown', function(pointer){
+        table.on('pointerdown', function (pointer) {
             table.setData('preX', pointer.x);
             table.setData('preY', pointer.y);
         });
-        table.on('pointermove', function(pointer){
+        table.on('pointermove', function (pointer) {
             if (table.getData('preX') === undefined) {
                 return;
             }
@@ -54,7 +53,7 @@ class Demo extends Phaser.Scene {
             table.setData('preX', pointer.x);
             table.setData('preY', pointer.y);
         });
-        table.on('pointerup', function(pointer){
+        table.on('pointerup', function (pointer) {
             table.setData('preX', undefined);
             table.setData('preY', undefined);
         });

@@ -1,6 +1,6 @@
 'use strict'
 
-import PoolKlass from './../object/Pool.js';
+import PoolKlass from './../../pool.js';
 import PenKlass from './Pen.js';
 import CONST from './const.js';
 import Clone from './../object/Clone.js';
@@ -28,13 +28,13 @@ class PensManager {
         for (var i = 0, len = this.lines.length; i < len; i++)
             this.lines[i].length = 0;
 
-        this.PensPool.freeArr(this.pens);
-        this.LinesPool.freeArr(this.lines);
+        this.PensPool.pushMultiple(this.pens);
+        this.LinesPool.pushMultiple(this.lines);
         this.maxLinesWidth = undefined;
     }
 
     addPen(text, x, y, width, prop, newLineMode) {
-        var pen = this.PensPool.allocate();
+        var pen = this.PensPool.pop();
         if (pen == null) {
             pen = new PenKlass();
         }
@@ -56,14 +56,14 @@ class PensManager {
         // maintan lines
         var line = this.lastLine;
         if (line == null) {
-            line = this.LinesPool.allocate() || [];
+            line = this.LinesPool.pop() || [];
             this.lines.push(line);
         }
         line.push(pen);
 
         // new line, add an empty line
         if (pen.newLineMode !== NO_NEWLINE) {
-            line = this.LinesPool.allocate() || [];
+            line = this.LinesPool.pop() || [];
             this.lines.push(line);
         }
         this.maxLinesWidth = undefined;

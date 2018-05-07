@@ -1,7 +1,7 @@
 import Render from './TextRender.js'; // copy from text object
 import TextStyle from './TextStyle.js'; // extended
 import CanvasTextKlass from './CanvasText.js';
-import PoolKlass from './../object/Pool.js';
+import PoolKlass from './../../pool.js';
 
 const AddToDOM = Phaser.DOM.AddToDOM;
 const RemoveFromDOM = Phaser.DOM.RemoveFromDOM;

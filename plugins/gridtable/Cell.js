@@ -17,12 +17,24 @@ class Cell {
     //    return this;
     //}
 
+    get colIndx() {
+        return this.parent.cellIndxeToColIndex(this.index);
+    }
+
+    get rowIndx() {
+        return this.parent.cellIndxeToRowIndex(this.index);
+    }
+
+    getContainer() {
+        return this.container;
+    }
+
     setContainer(container) {
         if (this.container) {
             this.container.destroy();
         }
+        this.container = container;        
         this.parentContainer.add(container);
-        this.container = container;
         return this;
     }
 
@@ -37,6 +49,7 @@ class Cell {
         if (this.container) {
             var container = this.container;
             this.container = null;
+            this.parentContainer.remove(container);            
             return container;
         } else {
             return null;
@@ -79,7 +92,7 @@ class Cell {
     }
 
     destroy() {
-        this.cleanData();        
+        this.cleanData();
         this.destroyContainer();
         this.parent = undefined;
         this.parentContainer = undefined;
