@@ -1,6 +1,6 @@
 'use strict'
 import GridTable from './../../plugins/gridtable-plugin.js';
-import DragVectorPlugin from './../../plugins/dragvector-plugin.js';
+import DragDeltaPlugin from './../../plugins/dragdelta-plugin.js';
 import ObjectPoolPlugin from './../../plugins/objectpool-plugin.js';
 
 class Demo extends Phaser.Scene {
@@ -58,8 +58,8 @@ class Demo extends Phaser.Scene {
             .strokeRectShape(table.getBounds());
 
         // drag table content
-        var dragVector = new DragVectorPlugin(table);
-        dragVector.on('dragdelta', function (dx, dy) {
+        var dragDelta = new DragDeltaPlugin(table);
+        dragDelta.on('dragdelta', function (dx, dy) {
             table.addTableOXY(dx, dy).updateTable();
         });
 

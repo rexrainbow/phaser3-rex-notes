@@ -1,6 +1,6 @@
 'use strict'
 import GridTable from './../../plugins/gridtable-plugin.js';
-import DragVectorPlugin from './../../plugins/dragvector-plugin.js';
+import DragDeltaPlugin from './../../plugins/dragdelta-plugin.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -101,8 +101,8 @@ var newTable = function (scene, config) {
 }
 
 var addDragContentBehavior = function (table) {
-    var dragVector = new DragVectorPlugin(table);
-    dragVector.on('dragdelta', function (dx, dy) {
+    var dragDelta = new DragDeltaPlugin(table);
+    dragDelta.on('dragdelta', function (dx, dy) {
         table.addTableOXY(dx, dy).updateTable();
     });
     return table;

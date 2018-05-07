@@ -1,6 +1,6 @@
 'use strict'
 
-import DragVectorPlugin from './../../plugins/dragvector-plugin.js';
+import DragDeltaPlugin from './../../plugins/dragdelta-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -19,8 +19,8 @@ class Demo extends Phaser.Scene {
         var bg = this.add.image(400, 300, 'bg')
             .setDisplaySize(300, 300)
             .setTint(0xcccccc);
-        bg.dragvector = new DragVectorPlugin(bg);
-        bg.dragvector.on('dragdelta', function (dx, dy) {
+        var dragDelta = new DragDeltaPlugin(bg);
+        dragDelta.on('dragdelta', function (dx, dy) {
             star.x += dx;
             star.y += dy;
         });

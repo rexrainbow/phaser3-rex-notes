@@ -4,7 +4,7 @@ import EE from 'eventemitter3';
 import GetSceneObject from './../utils/system/GetSceneObject.js';
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 
-class DragVectorPlugin extends EE {
+class DragDeltaPlugin extends EE {
     constructor(gameobject, config) {
         super();
         this.gameobject = gameobject;
@@ -83,4 +83,4 @@ class DragVectorPlugin extends EE {
     }
 }
 
-export default DragVectorPlugin;
+export default DragDeltaPlugin;
