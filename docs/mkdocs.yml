@@ -15,7 +15,7 @@ pages:
     - Drag to cursorKeys: dragcursorplugin.md
 - Loader:
     - Loader: loader.md
-    - Webfont loader: webfontloader.md    
+    - Webfont loader: webfontloaderplugin.md    
 - Game object:
     - Game object: gameobject.md
     - Sprite:
@@ -23,18 +23,18 @@ pages:
         - Blitter: blitter.md
     - Text:
         - Text: text.md
-        - BBCode Text: bbcodetext.md
-        - Tag Text: tagtext.md
+        - BBCode Text: bbcodetextplugin.md
+        - Tag Text: tagtextplugin.md
         - Typing: texttypingplugin.md    
         - Page: textpageplugin.md
     - Canvas:
         - Graphics: graphics.md
-        - Canvas: canvas.md
+        - Canvas: canvasplugin.md
     - Container:
         - Container: container.md        
         - Group: group.md
         - Group actions: groupactions.md
-        - Grid table: gridtable.md
+        - Grid table: gridtableplugin.md
 - Time:
     - Date: date.md
     - Timer: timer.md

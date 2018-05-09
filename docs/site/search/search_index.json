@@ -486,32 +486,32 @@
             "title": "Data in cache"
         }, 
         {
-            "location": "/webfontloader/index.html", 
+            "location": "/webfontloaderplugin/index.html", 
             "text": "Introduction\n\n\nLoad web font by \ngoogle webfont loader\n in preload stage.\n\n\n\n\nAuthor: Rex\n\n\nCustomize File of loader\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nLoad webfont\n\n\nIn preload stage:\n\n\nthis\n.\nload\n.\nwebFont\n(\nbangers\n,\n \n{\n\n    \ngoogle\n:\n \n{\n\n        \nfamilies\n:\n \n[\nBangers\n]\n\n    \n}\n\n\n});\n\n\n\n\n\nEvents\n\n\n\n\n\n\nfontactive\n event\n\n\nthis\n.\nload\n.\non\n(\nwebfontactive\n,\n \nfunction\n(\nfileObj\n,\n \nfamilyName\n){});\n\n\n\n\n\n\n\n\n\nfontinactive\n event\n\n\nthis\n.\nload\n.\non\n(\nwebfontinactive\n,\n \nfunction\n(\nfileObj\n,\n \nfamilyName\n){});", 
             "title": "Webfont loader"
         }, 
         {
-            "location": "/webfontloader/index.html#introduction", 
+            "location": "/webfontloaderplugin/index.html#introduction", 
             "text": "Load web font by  google webfont loader  in preload stage.   Author: Rex  Customize File of loader", 
             "title": "Introduction"
         }, 
         {
-            "location": "/webfontloader/index.html#source-code", 
+            "location": "/webfontloaderplugin/index.html#source-code", 
             "text": "Link", 
             "title": "Source code"
         }, 
         {
-            "location": "/webfontloader/index.html#usage", 
+            "location": "/webfontloaderplugin/index.html#usage", 
             "text": "", 
             "title": "Usage"
         }, 
         {
-            "location": "/webfontloader/index.html#load-webfont", 
+            "location": "/webfontloaderplugin/index.html#load-webfont", 
             "text": "In preload stage:  this . load . webFont ( bangers ,   { \n     google :   { \n         families :   [ Bangers ] \n     }  });", 
             "title": "Load webfont"
         }, 
         {
-            "location": "/webfontloader/index.html#events", 
+            "location": "/webfontloaderplugin/index.html#events", 
             "text": "fontactive  event  this . load . on ( webfontactive ,   function ( fileObj ,   familyName ){});     fontinactive  event  this . load . on ( webfontinactive ,   function ( fileObj ,   familyName ){});", 
             "title": "Events"
         }, 
@@ -761,183 +761,183 @@
             "title": "Set object size"
         }, 
         {
-            "location": "/bbcodetext/index.html", 
+            "location": "/bbcodetextplugin/index.html", 
             "text": "Introduction\n\n\nDrawing text with \nBBCode\n protocol.\n\n\n\n\nAuthor: Rex\n\n\nA kind of game object\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nBBCode\n\n\n\n\nbold: \n[b]text[/b]\n\n\nitalic: \n[i]text[/i]\n\n\ncolor: \n[color=red]text[/color]\n\n\nsize: \n[size=18]text[/text]\n\n\nstroke: \n[stroke]text[/stroke]\n\n\nstroke with color setting: \n[stroke=red]text[/stroke]\n\n\n\n\n\n\nshadow: \n[shadow]text[/shadow]\n\n\nunderline: \n[u]text[/u]\n\n\nunderline with color setting: \n[u=red]text[/u]\n\n\n\n\n\n\n\n\nSnapshot\n\n\nvar\n \ntxt\n \n=\n \nscene\n.\nadd\n.\nrexBBCodeText\n(\nx\n,\n \ny\n,\n \n[b]h[/b]ello\n);\n\n\ntxt\n.\nsetText\n(\n[i]wor[/i]ld\n);\n\n\n\n\n\nAdd text object\n\n\nvar\n \ntxt\n \n=\n \nscene\n.\nadd\n.\nrexBBCodeText\n(\nx\n,\n \ny\n,\n \n[b]h[/b]ello\n);\n\n\n// var txt = scene.add.rexBBCodeText(x, y, \n[b]h[/b]ello\n, { fontFamily: \nArial\n, fontSize: 64, color: \n#00ff00\n });\n\n\n\n\n\nDefault style\n\n\n{\n\n    \nfontFamily\n:\n \nCourier\n,\n\n    \nfontSize\n:\n \n16px\n,\n\n    \nfontStyle\n:\n \n,\n\n    \nbackgroundColor\n:\n \nnull\n,\n\n    \ncolor\n:\n \n#fff\n,\n\n    \nstroke\n:\n \n#fff\n,\n\n    \nstrokeThickness\n:\n \n0\n,\n\n    \nshadow\n:\n \n{\n\n        \noffsetX\n:\n \n0\n,\n\n        \noffsetY\n:\n \n0\n,\n\n        \ncolor\n:\n \n#000\n,\n\n        \nblur\n:\n \n0\n,\n\n        \nstroke\n:\n \nfalse\n,\n\n        \nfill\n:\n \nfalse\n\n    \n},\n\n    \nunderline\n:\n \n{\n\n        \ncolor\n:\n \n#000\n,\n\n        \nthinkness\n:\n \n0\n,\n\n        \noffset\n:\n \n0\n\n    \n},\n\n    \nalign\n:\n \nleft\n,\n  \n// 0|\nleft\n|1|\ncenter\n|2|\nright\n\n    \nmaxLines\n:\n \n0\n,\n\n    \nfixedWidth\n:\n \n0\n,\n\n    \nfixedHeight\n:\n \n0\n,\n\n    \ntestString\n:\n \n|M\u00c9qgy\n,\n\n    \nwrap\n:\n \n{\n\n        \nmode\n:\n \nnone\n     \n// 0|\nnone\n|1|\nword\n|2|\nchar\n|\ncharacter\n\n        \nwidth\n:\n \nnull\n\n    \n}\n\n\n}\n\n\n\n\n\nAdd text from JSON\n\n\nvar\n \ntxt\n \n=\n \nscene\n.\nmake\n.\nrexBBCodeText\n({\n\n    \nx\n:\n \n100\n,\n\n    \ny\n:\n \n100\n,\n\n    \npadding\n:\n \n{\n\n        \nleft\n:\n \n64\n,\n\n        \nright\n:\n \n16\n,\n\n        \ntop\n:\n \n20\n,\n\n        \nbottom\n:\n \n40\n\n        \n//x: 32,    // 32px padding on the left/right\n\n        \n//y: 16     // 16px padding on the top/bottom\n\n    \n},\n\n    \ntext\n:\n \nText\\nGame Object\\nCreated from config\n,\n\n    \nstyle\n:\n \n{\n\n        \nfontSize\n:\n \n64px\n,\n\n        \nfontFamily\n:\n \nArial\n,\n\n        \ncolor\n:\n \n#ffffff\n,\n\n        \nalign\n:\n \ncenter\n,\n\n        \nbackgroundColor\n:\n \n#ff00ff\n\n    \n}\n\n\n});\n\n\n\n\n\nWord wrap\n\n\nWrap by word or character.\n\n\nvar\n \ntxt\n \n=\n \nscene\n.\nmake\n.\ntext\n({\n\n    \nx\n:\n \n400\n,\n\n    \ny\n:\n \n100\n,\n\n    \ntext\n:\n \nThe sky above the port was the color of television, tuned to a dead channel.\n,\n\n    \norigin\n:\n \n{\n \nx\n:\n \n0.5\n,\n \ny\n:\n \n0.5\n \n},\n\n    \nstyle\n:\n \n{\n\n        \nfont\n:\n \nbold 25px Arial\n,\n\n        \nfill\n:\n \nwhite\n,\n\n        \nwrap\n:\n \n{\n\n            \nmode\n:\n \nword\n     \n// 0|\nnone\n|1|\nword\n|2|\nchar\n|\ncharacter\n\n            \nwidth\n:\n \n300\n\n        \n}\n\n    \n}\n\n\n});\n\n\n\n\n\nSet text\n\n\ntxt\n.\nsetText\n(\n[b]h[/b]ello\n);\n\n\n// var curContent = txt.text;\n\n\n\n\n\nSet style\n\n\ntxt\n.\nsetStyle\n(\nstyle\n);\n\n\ntxt\n.\nsetFont\n(\nfont\n);\n  \n// font: {fontFamily, fontSize, fontStyle}\n\n\ntxt\n.\nsetFontFamily\n(\nfamily\n);\n\n\ntxt\n.\nsetFontSize\n(\nsize\n);\n\n\ntxt\n.\nsetFontStyle\n(\nstyle\n);\n\n\n\n\n\nSet color\n\n\ntxt\n.\nsetColor\n(\ncolor\n);\n\n\ntxt\n.\nsetStroke\n(\ncolor\n,\n \nthickness\n);\n\n\ntxt\n.\nsetBackgroundColor\n(\ncolor\n);\n\n\ntxt\n.\nsetFill\n(\ncolor\n);\n\n\n\n\n\nSet shadow\n\n\ntxt\n.\nsetShadow\n(\nx\n,\n \ny\n,\n \ncolor\n,\n \nblur\n,\n \nshadowStroke\n,\n \nshadowFill\n);\n\n\ntxt\n.\nsetShadowOffset\n(\nx\n,\n \ny\n);\n\n\ntxt\n.\nsetShadowColor\n(\ncolor\n);\n\n\ntxt\n.\nsetShadowBlur\n(\nblur\n);\n\n\ntxt\n.\nsetShadowStroke\n(\nenabled\n);\n\n\ntxt\n.\nsetShadowFill\n(\nenabled\n);\n\n\n\n\n\nSet underline\n\n\ntxt\n.\nsetUnderline\n(\ncolor\n,\n \nthinkness\n,\n \nofset\n);\n\n\ntxt\n.\nsetUnderlineColor\n(\ncolor\n);\n\n\ntxt\n.\nsetUnderlineThinkness\n(\nthinkness\n);\n\n\ntxt\n.\nsetUnderlineOffset\n(\nofset\n);\n\n\n\n\n\nSet padding\n\n\ntxt\n.\nsetPadding\n(\nleft\n,\n \ntop\n,\n \nright\n,\n \nbottom\n);\n\n\n// txt.setPadding(padding); // padding: {left, top, right, bottom}\n\n\n\n\n\nSet max lines\n\n\ntxt\n.\nsetMaxLines\n(\nmax\n);\n\n\n\n\n\nSet wrap properties\n\n\ntxt\n.\nsetWrapMode\n(\nmode\n);\n  \n// mode: 0|\nnone\n|1|\nword\n|2|\nchar\n|\ncharacter\n\n\ntxt\n.\nsetWrapWidth\n(\nwidth\n);\n\n\n\n\n\nSet object size\n\n\ntxt\n.\nsetFixedSize\n(\nwidth\n,\n \nheight\n);", 
             "title": "BBCode Text"
         }, 
         {
-            "location": "/bbcodetext/index.html#introduction", 
+            "location": "/bbcodetextplugin/index.html#introduction", 
             "text": "Drawing text with  BBCode  protocol.   Author: Rex  A kind of game object", 
             "title": "Introduction"
         }, 
         {
-            "location": "/bbcodetext/index.html#source-code", 
+            "location": "/bbcodetextplugin/index.html#source-code", 
             "text": "Link", 
             "title": "Source code"
         }, 
         {
-            "location": "/bbcodetext/index.html#usage", 
+            "location": "/bbcodetextplugin/index.html#usage", 
             "text": "", 
             "title": "Usage"
         }, 
         {
-            "location": "/bbcodetext/index.html#bbcode", 
+            "location": "/bbcodetextplugin/index.html#bbcode", 
             "text": "bold:  [b]text[/b]  italic:  [i]text[/i]  color:  [color=red]text[/color]  size:  [size=18]text[/text]  stroke:  [stroke]text[/stroke]  stroke with color setting:  [stroke=red]text[/stroke]    shadow:  [shadow]text[/shadow]  underline:  [u]text[/u]  underline with color setting:  [u=red]text[/u]", 
             "title": "BBCode"
         }, 
         {
-            "location": "/bbcodetext/index.html#snapshot", 
+            "location": "/bbcodetextplugin/index.html#snapshot", 
             "text": "var   txt   =   scene . add . rexBBCodeText ( x ,   y ,   [b]h[/b]ello );  txt . setText ( [i]wor[/i]ld );", 
             "title": "Snapshot"
         }, 
         {
-            "location": "/bbcodetext/index.html#add-text-object", 
+            "location": "/bbcodetextplugin/index.html#add-text-object", 
             "text": "var   txt   =   scene . add . rexBBCodeText ( x ,   y ,   [b]h[/b]ello );  // var txt = scene.add.rexBBCodeText(x, y,  [b]h[/b]ello , { fontFamily:  Arial , fontSize: 64, color:  #00ff00  });   Default style  { \n     fontFamily :   Courier , \n     fontSize :   16px , \n     fontStyle :   , \n     backgroundColor :   null , \n     color :   #fff , \n     stroke :   #fff , \n     strokeThickness :   0 , \n     shadow :   { \n         offsetX :   0 , \n         offsetY :   0 , \n         color :   #000 , \n         blur :   0 , \n         stroke :   false , \n         fill :   false \n     }, \n     underline :   { \n         color :   #000 , \n         thinkness :   0 , \n         offset :   0 \n     }, \n     align :   left ,    // 0| left |1| center |2| right \n     maxLines :   0 , \n     fixedWidth :   0 , \n     fixedHeight :   0 , \n     testString :   |M\u00c9qgy , \n     wrap :   { \n         mode :   none       // 0| none |1| word |2| char | character \n         width :   null \n     }  }   Add text from JSON  var   txt   =   scene . make . rexBBCodeText ({ \n     x :   100 , \n     y :   100 , \n     padding :   { \n         left :   64 , \n         right :   16 , \n         top :   20 , \n         bottom :   40 \n         //x: 32,    // 32px padding on the left/right \n         //y: 16     // 16px padding on the top/bottom \n     }, \n     text :   Text\\nGame Object\\nCreated from config , \n     style :   { \n         fontSize :   64px , \n         fontFamily :   Arial , \n         color :   #ffffff , \n         align :   center , \n         backgroundColor :   #ff00ff \n     }  });", 
             "title": "Add text object"
         }, 
         {
-            "location": "/bbcodetext/index.html#word-wrap", 
+            "location": "/bbcodetextplugin/index.html#word-wrap", 
             "text": "Wrap by word or character.  var   txt   =   scene . make . text ({ \n     x :   400 , \n     y :   100 , \n     text :   The sky above the port was the color of television, tuned to a dead channel. , \n     origin :   {   x :   0.5 ,   y :   0.5   }, \n     style :   { \n         font :   bold 25px Arial , \n         fill :   white , \n         wrap :   { \n             mode :   word       // 0| none |1| word |2| char | character \n             width :   300 \n         } \n     }  });", 
             "title": "Word wrap"
         }, 
         {
-            "location": "/bbcodetext/index.html#set-text", 
+            "location": "/bbcodetextplugin/index.html#set-text", 
             "text": "txt . setText ( [b]h[/b]ello );  // var curContent = txt.text;", 
             "title": "Set text"
         }, 
         {
-            "location": "/bbcodetext/index.html#set-style", 
+            "location": "/bbcodetextplugin/index.html#set-style", 
             "text": "txt . setStyle ( style );  txt . setFont ( font );    // font: {fontFamily, fontSize, fontStyle}  txt . setFontFamily ( family );  txt . setFontSize ( size );  txt . setFontStyle ( style );", 
             "title": "Set style"
         }, 
         {
-            "location": "/bbcodetext/index.html#set-color", 
+            "location": "/bbcodetextplugin/index.html#set-color", 
             "text": "txt . setColor ( color );  txt . setStroke ( color ,   thickness );  txt . setBackgroundColor ( color );  txt . setFill ( color );", 
             "title": "Set color"
         }, 
         {
-            "location": "/bbcodetext/index.html#set-shadow", 
+            "location": "/bbcodetextplugin/index.html#set-shadow", 
             "text": "txt . setShadow ( x ,   y ,   color ,   blur ,   shadowStroke ,   shadowFill );  txt . setShadowOffset ( x ,   y );  txt . setShadowColor ( color );  txt . setShadowBlur ( blur );  txt . setShadowStroke ( enabled );  txt . setShadowFill ( enabled );", 
             "title": "Set shadow"
         }, 
         {
-            "location": "/bbcodetext/index.html#set-underline", 
+            "location": "/bbcodetextplugin/index.html#set-underline", 
             "text": "txt . setUnderline ( color ,   thinkness ,   ofset );  txt . setUnderlineColor ( color );  txt . setUnderlineThinkness ( thinkness );  txt . setUnderlineOffset ( ofset );", 
             "title": "Set underline"
         }, 
         {
-            "location": "/bbcodetext/index.html#set-padding", 
+            "location": "/bbcodetextplugin/index.html#set-padding", 
             "text": "txt . setPadding ( left ,   top ,   right ,   bottom );  // txt.setPadding(padding); // padding: {left, top, right, bottom}", 
             "title": "Set padding"
         }, 
         {
-            "location": "/bbcodetext/index.html#set-max-lines", 
+            "location": "/bbcodetextplugin/index.html#set-max-lines", 
             "text": "txt . setMaxLines ( max );", 
             "title": "Set max lines"
         }, 
         {
-            "location": "/bbcodetext/index.html#set-wrap-properties", 
+            "location": "/bbcodetextplugin/index.html#set-wrap-properties", 
             "text": "txt . setWrapMode ( mode );    // mode: 0| none |1| word |2| char | character  txt . setWrapWidth ( width );", 
             "title": "Set wrap properties"
         }, 
         {
-            "location": "/bbcodetext/index.html#set-object-size", 
+            "location": "/bbcodetextplugin/index.html#set-object-size", 
             "text": "txt . setFixedSize ( width ,   height );", 
             "title": "Set object size"
         }, 
         {
-            "location": "/tagtext/index.html", 
+            "location": "/tagtextplugin/index.html", 
             "text": "Introduction\n\n\nDisplays text with multi-color, font face, or font size with tags.\n\n\n\n\nAuthor: Rex\n\n\nA kind of game object\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nSnapshot\n\n\nvar\n \ntags\n \n=\n \n{\n\n    \nname0\n:\n \n{\n\n        \ncolor\n:\n \nred\n,\n\n        \nfontStyle\n:\n \nbold italic\n\n    \n},\n\n    \nname1\n:\n \n{\n\n        \ncolor\n:\n \nnone\n,\n\n        \nstroke\n:\n \n{\n\n            \ncolor\n:\n \nyellow\n,\n\n            \nthinkness\n:\n \n1\n\n        \n}\n\n    \n}\n    \n\n}\n\n\nvar\n \ntxt\n \n=\n \nscene\n.\nadd\n.\nrexTagText\n(\nx\n,\n \ny\n,\n \nstyle=\nname0\nh\n/style\nello\n,\n \n{\ntags\n:\ntags\n});\n\n\ntxt\n.\nsetText\n(\nstyle=\nname1\nwor\n/style\nld\n);\n\n\n\n\n\nAdd text object\n\n\nvar\n \ntxt\n \n=\n \nscene\n.\nadd\n.\nrexTagText\n(\nx\n,\n \ny\n,\n \nstyle=\nname0\nh\n/style\nello\n,\n \n{\ntags\n:\ntags\n});\n\n\n// var txt = scene.add.rexTagText(x, y, \nstyle=\nname0\nh\n/style\nello\n, { fontFamily: \nArial\n, fontSize: 64, color: \n#00ff00\n, tags:tags });\n\n\n\nProperties of a tag\n\n\n{\n\n    \nfontFamily\n:\n \nCourier\n,\n   \n// or \nfamily\n, \nfont-family\n\n    \nfontSize\n:\n \n16px\n,\n        \n// or \nsize\n, \nfont-size\n\n    \nfontStyle\n:\n \nbold italic\n,\n// or \nstyle\n, \nfont-style\n\n    \ncolor\n:\n \nred\n,\n            \n// or \nfont-color\n\n    \nstroke\n:\n \n{\n\n        \ncolor\n:\n \nblue\n,\n\n        \nthinkness\n:\n \n1\n\n    \n},\n\n    \nshadow\n:\n \n{\n\n        \ncolor\n:\n \nblack\n,\n\n        \noffsetX\n:\n \n2\n,\n\n        \noffsetY\n:\n \n2\n,\n\n        \nblur\n:\n \n2\n\n    \n},\n\n    \nunderline\n:\n \n{\n            \n// or \nu\n\n        \ncolor\n:\n \nblue\n,\n\n        \nthinkness\n:\n \n3\n,\n\n        \noffset\n:\n \n-\n1\n\n    \n}\n\n\n}\n\n\n\n\n\nDefault style\n\n\n{\n\n    \nfontFamily\n:\n \nCourier\n,\n\n    \nfontSize\n:\n \n16px\n,\n\n    \nfontStyle\n:\n \n,\n\n    \nbackgroundColor\n:\n \nnull\n,\n\n    \ncolor\n:\n \n#fff\n,\n\n    \nstroke\n:\n \n#fff\n,\n\n    \nstrokeThickness\n:\n \n0\n,\n\n    \nshadow\n:\n \n{\n\n        \noffsetX\n:\n \n0\n,\n\n        \noffsetY\n:\n \n0\n,\n\n        \ncolor\n:\n \n#000\n,\n\n        \nblur\n:\n \n0\n,\n\n        \nstroke\n:\n \nfalse\n,\n\n        \nfill\n:\n \nfalse\n\n    \n},\n\n    \nunderline\n:\n \n{\n\n        \ncolor\n:\n \n#000\n,\n\n        \nthinkness\n:\n \n0\n,\n\n        \noffset\n:\n \n0\n\n    \n},\n\n    \nalign\n:\n \nleft\n,\n  \n// 0|\nleft\n|1|\ncenter\n|2|\nright\n\n    \nmaxLines\n:\n \n0\n,\n\n    \nfixedWidth\n:\n \n0\n,\n\n    \nfixedHeight\n:\n \n0\n,\n\n    \ntestString\n:\n \n|M\u00c9qgy\n,\n\n    \nwrap\n:\n \n{\n\n        \nmode\n:\n \nnone\n     \n// 0|\nnone\n|1|\nword\n|2|\nchar\n|\ncharacter\n\n        \nwidth\n:\n \nnull\n\n    \n}\n\n\n    \ntags\n:\n \n{\n\n\n    \n}\n\n\n}\n\n\n\n\n\nAdd text from JSON\n\n\nvar\n \ntxt\n \n=\n \nscene\n.\nmake\n.\nrexTagText\n({\n\n    \nx\n:\n \n100\n,\n\n    \ny\n:\n \n100\n,\n\n    \npadding\n:\n \n{\n\n        \nleft\n:\n \n64\n,\n\n        \nright\n:\n \n16\n,\n\n        \ntop\n:\n \n20\n,\n\n        \nbottom\n:\n \n40\n\n        \n//x: 32,    // 32px padding on the left/right\n\n        \n//y: 16     // 16px padding on the top/bottom\n\n    \n},\n\n    \ntext\n:\n \nText\\nGame Object\\nCreated from config\n,\n\n    \nstyle\n:\n \n{\n\n        \nfontSize\n:\n \n64px\n,\n\n        \nfontFamily\n:\n \nArial\n,\n\n        \ncolor\n:\n \n#ffffff\n,\n\n        \nalign\n:\n \ncenter\n,\n\n        \nbackgroundColor\n:\n \n#ff00ff\n,\n\n        \ntags\n:\n \n{}\n\n    \n}\n\n\n});\n\n\n\n\n\nWord wrap\n\n\nWrap by word or character.\n\n\nvar\n \ntxt\n \n=\n \nscene\n.\nmake\n.\ntext\n({\n\n    \nx\n:\n \n400\n,\n\n    \ny\n:\n \n100\n,\n\n    \ntext\n:\n \nThe sky above the port was the color of television, tuned to a dead channel.\n,\n\n    \norigin\n:\n \n{\n \nx\n:\n \n0.5\n,\n \ny\n:\n \n0.5\n \n},\n\n    \nstyle\n:\n \n{\n\n        \nfont\n:\n \nbold 25px Arial\n,\n\n        \nfill\n:\n \nwhite\n,\n\n        \nwrap\n:\n \n{\n\n            \nmode\n:\n \nword\n     \n// 0|\nnone\n|1|\nword\n|2|\nchar\n|\ncharacter\n\n            \nwidth\n:\n \n300\n\n        \n}\n\n    \n}\n\n\n});\n\n\n\n\n\nSet text\n\n\ntxt\n.\nsetText\n(\nstyle=\nname1\nwor\n/style\nld\n);\n\n\n// var curContent = txt.text;\n\n\n\n\n\nSet style\n\n\ntxt\n.\nsetStyle\n(\nstyle\n);\n\n\ntxt\n.\nsetFont\n(\nfont\n);\n  \n// font: {fontFamily, fontSize, fontStyle}\n\n\ntxt\n.\nsetFontFamily\n(\nfamily\n);\n\n\ntxt\n.\nsetFontSize\n(\nsize\n);\n\n\ntxt\n.\nsetFontStyle\n(\nstyle\n);\n\n\n\n\n\nSet color\n\n\ntxt\n.\nsetColor\n(\ncolor\n);\n\n\ntxt\n.\nsetStroke\n(\ncolor\n,\n \nthickness\n);\n\n\ntxt\n.\nsetBackgroundColor\n(\ncolor\n);\n\n\ntxt\n.\nsetFill\n(\ncolor\n);\n\n\n\n\n\nSet shadow\n\n\ntxt\n.\nsetShadow\n(\nx\n,\n \ny\n,\n \ncolor\n,\n \nblur\n,\n \nshadowStroke\n,\n \nshadowFill\n);\n\n\ntxt\n.\nsetShadowOffset\n(\nx\n,\n \ny\n);\n\n\ntxt\n.\nsetShadowColor\n(\ncolor\n);\n\n\ntxt\n.\nsetShadowBlur\n(\nblur\n);\n\n\ntxt\n.\nsetShadowStroke\n(\nenabled\n);\n\n\ntxt\n.\nsetShadowFill\n(\nenabled\n);\n\n\n\n\n\nSet underline\n\n\ntxt\n.\nsetUnderline\n(\ncolor\n,\n \nthinkness\n,\n \nofset\n);\n\n\ntxt\n.\nsetUnderlineColor\n(\ncolor\n);\n\n\ntxt\n.\nsetUnderlineThinkness\n(\nthinkness\n);\n\n\ntxt\n.\nsetUnderlineOffset\n(\nofset\n);\n\n\n\n\n\nSet padding\n\n\ntxt\n.\nsetPadding\n(\nleft\n,\n \ntop\n,\n \nright\n,\n \nbottom\n);\n\n\n// txt.setPadding(padding); // padding: {left, top, right, bottom}\n\n\n\n\n\nSet max lines\n\n\ntxt\n.\nsetMaxLines\n(\nmax\n);\n\n\n\n\n\nSet wrap properties\n\n\ntxt\n.\nsetWrapMode\n(\nmode\n);\n  \n// mode: 0|\nnone\n|1|\nword\n|2|\nchar\n|\ncharacter\n\n\ntxt\n.\nsetWrapWidth\n(\nwidth\n);\n\n\n\n\n\nSet object size\n\n\ntxt\n.\nsetFixedSize\n(\nwidth\n,\n \nheight\n);\n\n\n\n\n\nInline style\n\n\nDefine style inline text.\n\n\n\n\nstyle='color:red'\nSome text\n/style\n\n\nstyle='size:30px'\nSome text\n/style\n\n\nstyle='stroke:blue 1px'\nSome text\n/style\n (color thinkness)\n\n\nstyle='shadow:blue 2px 2px 2px'\nSome text\n/style\n (color offsetX offsetY blur)\n\n\nstyle='underline:blue 3px -1px'\nSome text\n/style\n (color thinkness offset)\n\n\n\n\nOr mix them\n\n\n\n\nstyle='color:red;size:30px'\nSome text\n/style", 
             "title": "Tag Text"
         }, 
         {
-            "location": "/tagtext/index.html#introduction", 
+            "location": "/tagtextplugin/index.html#introduction", 
             "text": "Displays text with multi-color, font face, or font size with tags.   Author: Rex  A kind of game object", 
             "title": "Introduction"
         }, 
         {
-            "location": "/tagtext/index.html#source-code", 
+            "location": "/tagtextplugin/index.html#source-code", 
             "text": "Link", 
             "title": "Source code"
         }, 
         {
-            "location": "/tagtext/index.html#usage", 
+            "location": "/tagtextplugin/index.html#usage", 
             "text": "", 
             "title": "Usage"
         }, 
         {
-            "location": "/tagtext/index.html#snapshot", 
+            "location": "/tagtextplugin/index.html#snapshot", 
             "text": "var   tags   =   { \n     name0 :   { \n         color :   red , \n         fontStyle :   bold italic \n     }, \n     name1 :   { \n         color :   none , \n         stroke :   { \n             color :   yellow , \n             thinkness :   1 \n         } \n     }      }  var   txt   =   scene . add . rexTagText ( x ,   y ,   style= name0 h /style ello ,   { tags : tags });  txt . setText ( style= name1 wor /style ld );", 
             "title": "Snapshot"
         }, 
         {
-            "location": "/tagtext/index.html#add-text-object", 
+            "location": "/tagtextplugin/index.html#add-text-object", 
             "text": "var   txt   =   scene . add . rexTagText ( x ,   y ,   style= name0 h /style ello ,   { tags : tags });  // var txt = scene.add.rexTagText(x, y,  style= name0 h /style ello , { fontFamily:  Arial , fontSize: 64, color:  #00ff00 , tags:tags });  \nProperties of a tag  { \n     fontFamily :   Courier ,     // or  family ,  font-family \n     fontSize :   16px ,          // or  size ,  font-size \n     fontStyle :   bold italic , // or  style ,  font-style \n     color :   red ,              // or  font-color \n     stroke :   { \n         color :   blue , \n         thinkness :   1 \n     }, \n     shadow :   { \n         color :   black , \n         offsetX :   2 , \n         offsetY :   2 , \n         blur :   2 \n     }, \n     underline :   {              // or  u \n         color :   blue , \n         thinkness :   3 , \n         offset :   - 1 \n     }  }   Default style  { \n     fontFamily :   Courier , \n     fontSize :   16px , \n     fontStyle :   , \n     backgroundColor :   null , \n     color :   #fff , \n     stroke :   #fff , \n     strokeThickness :   0 , \n     shadow :   { \n         offsetX :   0 , \n         offsetY :   0 , \n         color :   #000 , \n         blur :   0 , \n         stroke :   false , \n         fill :   false \n     }, \n     underline :   { \n         color :   #000 , \n         thinkness :   0 , \n         offset :   0 \n     }, \n     align :   left ,    // 0| left |1| center |2| right \n     maxLines :   0 , \n     fixedWidth :   0 , \n     fixedHeight :   0 , \n     testString :   |M\u00c9qgy , \n     wrap :   { \n         mode :   none       // 0| none |1| word |2| char | character \n         width :   null \n     } \n\n     tags :   { \n\n     }  }   Add text from JSON  var   txt   =   scene . make . rexTagText ({ \n     x :   100 , \n     y :   100 , \n     padding :   { \n         left :   64 , \n         right :   16 , \n         top :   20 , \n         bottom :   40 \n         //x: 32,    // 32px padding on the left/right \n         //y: 16     // 16px padding on the top/bottom \n     }, \n     text :   Text\\nGame Object\\nCreated from config , \n     style :   { \n         fontSize :   64px , \n         fontFamily :   Arial , \n         color :   #ffffff , \n         align :   center , \n         backgroundColor :   #ff00ff , \n         tags :   {} \n     }  });", 
             "title": "Add text object"
         }, 
         {
-            "location": "/tagtext/index.html#word-wrap", 
+            "location": "/tagtextplugin/index.html#word-wrap", 
             "text": "Wrap by word or character.  var   txt   =   scene . make . text ({ \n     x :   400 , \n     y :   100 , \n     text :   The sky above the port was the color of television, tuned to a dead channel. , \n     origin :   {   x :   0.5 ,   y :   0.5   }, \n     style :   { \n         font :   bold 25px Arial , \n         fill :   white , \n         wrap :   { \n             mode :   word       // 0| none |1| word |2| char | character \n             width :   300 \n         } \n     }  });", 
             "title": "Word wrap"
         }, 
         {
-            "location": "/tagtext/index.html#set-text", 
+            "location": "/tagtextplugin/index.html#set-text", 
             "text": "txt . setText ( style= name1 wor /style ld );  // var curContent = txt.text;", 
             "title": "Set text"
         }, 
         {
-            "location": "/tagtext/index.html#set-style", 
+            "location": "/tagtextplugin/index.html#set-style", 
             "text": "txt . setStyle ( style );  txt . setFont ( font );    // font: {fontFamily, fontSize, fontStyle}  txt . setFontFamily ( family );  txt . setFontSize ( size );  txt . setFontStyle ( style );", 
             "title": "Set style"
         }, 
         {
-            "location": "/tagtext/index.html#set-color", 
+            "location": "/tagtextplugin/index.html#set-color", 
             "text": "txt . setColor ( color );  txt . setStroke ( color ,   thickness );  txt . setBackgroundColor ( color );  txt . setFill ( color );", 
             "title": "Set color"
         }, 
         {
-            "location": "/tagtext/index.html#set-shadow", 
+            "location": "/tagtextplugin/index.html#set-shadow", 
             "text": "txt . setShadow ( x ,   y ,   color ,   blur ,   shadowStroke ,   shadowFill );  txt . setShadowOffset ( x ,   y );  txt . setShadowColor ( color );  txt . setShadowBlur ( blur );  txt . setShadowStroke ( enabled );  txt . setShadowFill ( enabled );", 
             "title": "Set shadow"
         }, 
         {
-            "location": "/tagtext/index.html#set-underline", 
+            "location": "/tagtextplugin/index.html#set-underline", 
             "text": "txt . setUnderline ( color ,   thinkness ,   ofset );  txt . setUnderlineColor ( color );  txt . setUnderlineThinkness ( thinkness );  txt . setUnderlineOffset ( ofset );", 
             "title": "Set underline"
         }, 
         {
-            "location": "/tagtext/index.html#set-padding", 
+            "location": "/tagtextplugin/index.html#set-padding", 
             "text": "txt . setPadding ( left ,   top ,   right ,   bottom );  // txt.setPadding(padding); // padding: {left, top, right, bottom}", 
             "title": "Set padding"
         }, 
         {
-            "location": "/tagtext/index.html#set-max-lines", 
+            "location": "/tagtextplugin/index.html#set-max-lines", 
             "text": "txt . setMaxLines ( max );", 
             "title": "Set max lines"
         }, 
         {
-            "location": "/tagtext/index.html#set-wrap-properties", 
+            "location": "/tagtextplugin/index.html#set-wrap-properties", 
             "text": "txt . setWrapMode ( mode );    // mode: 0| none |1| word |2| char | character  txt . setWrapWidth ( width );", 
             "title": "Set wrap properties"
         }, 
         {
-            "location": "/tagtext/index.html#set-object-size", 
+            "location": "/tagtextplugin/index.html#set-object-size", 
             "text": "txt . setFixedSize ( width ,   height );", 
             "title": "Set object size"
         }, 
         {
-            "location": "/tagtext/index.html#inline-style", 
+            "location": "/tagtextplugin/index.html#inline-style", 
             "text": "Define style inline text.   style='color:red' Some text /style  style='size:30px' Some text /style  style='stroke:blue 1px' Some text /style  (color thinkness)  style='shadow:blue 2px 2px 2px' Some text /style  (color offsetX offsetY blur)  style='underline:blue 3px -1px' Some text /style  (color thinkness offset)   Or mix them   style='color:red;size:30px' Some text /style", 
             "title": "Inline style"
         }, 
         {
             "location": "/texttypingplugin/index.html", 
-            "text": "Introduction\n\n\nTyping text on text object.\n\n\n\n\nAuthor: Rex\n\n\nMember of text object\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\ntxt\n.\ntyping\n \n=\n \nnew\n \nTextTypingPlugin\n(\ntxt\n,\n \n{\n\n    \n//speed: 333,       // typing speed in ms\n\n    \n//typeMode: 0,      //0|\nleft-to-right\n|1|\nright-to-left\n|2|\nmiddle-to-sides\n|3|\nsides-to-middle\n\n    \n//setTextCallback: function(text, isLastChar, insertIdx){ return text; }  // callback before set-text\n\n    \n//setTextCallbackScope: null\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\nspeed: typing speed in ms\n\n\ntypeMode :\n\n\n'left-to-right'\n, or \n0\n : typing characters from left to right.\n\n\n'right-to-left'\n, or \n1\n : typing characters from right to left.\n\n\n'middle-to-sides'\n, or \n2\n : typing characters from middle to sides, optional.\n\n\n'sides-to-middle'\n, or \n3\n : typing characters from sides to middle.    \n\n\n\n\n\n\nsetTextCallback : callback befor set-text, to decorate display text.\n    \nfunction\n(\ntext\n,\n \nisLastChar\n,\n \ninsertIdx\n)\n \n{\n \nreturn\n \ntext\n;\n \n}\n\n\n\n\nsetTextCallbackScope : scope of setTextCallback function.\n\n\n\n\nStart typing\n\n\ntxt\n.\ntyping\n.\nstart\n(\nABCDEFG\n);\n\n\n// txt.typing.start(\nABCDEFG\n, 333);  // speed in ms\n\n\n\n\n\nEvents\n\n\n\n\nOn typing :\n\n\n\n\ntxt\n.\ntyping\n.\non\n(\ntype\n,\n \nfunction\n(){});\n\n\n\n\n\n\n\nOn typing completed :\n\n\n\n\ntxt\n.\ntyping\n.\non\n(\ncomplete\n,\n \nfunction\n(){});\n\n\n\n\n\nOther commands\n\n\n\n\nIs-typing state\n\n\n\n\nvar\n \nisTyping\n \n=\n \ntxt\n.\ntyping\n.\nisTyping\n;\n\n\n\n\n\n\n\nStop typing\n\n\n\n\ntxt\n.\ntyping\n.\nstop\n();\n\n\n// txt.typing.stop(true);;  // stop and show all text\n\n\n\n\n\n\n\nPause typing\n\n\n\n\ntxt\n.\ntyping\n.\npause\n();\n\n\n\n\n\n\n\nResume typing\n\n\n\n\ntxt\n.\ntyping\n.\nresume\n();\n\n\n\n\n\n\n\nSet typing speed\n\n\n\n\ntxt\n.\ntyping\n.\nsetTypeSpeed\n(\nspeed\n);\n  \n// speed in ms\n\n\n\n\n\nSet speed in \ntyping\n event or setTextCallback to change typing speed of remaining text.\n\n\n\n\nTyping more text\n\n\n\n\ntxt\n.\ntyping\n.\nappendText\n(\ntext\n);\n\n\n\n\n\n\n\nSet typing mode\n\n\n\n\ntxt\n.\ntyping\n.\nsetTypeMode\n(\nmode\n);\n  \n//0|\nleft-to-right\n|1|\nright-to-left\n|2|\nmiddle-to-sides\n|3|\nsides-to-middle", 
+            "text": "Introduction\n\n\nTyping text on text object, \nbbcode text object\n, or \ntag text boject\n.\n\n\n\n\nAuthor: Rex\n\n\nMember of text object\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\ntxt\n.\ntyping\n \n=\n \nnew\n \nTextTypingPlugin\n(\ntxt\n,\n \n{\n\n    \n//speed: 333,       // typing speed in ms\n\n    \n//typeMode: 0,      //0|\nleft-to-right\n|1|\nright-to-left\n|2|\nmiddle-to-sides\n|3|\nsides-to-middle\n\n    \n//setTextCallback: function(text, isLastChar, insertIdx){ return text; }  // callback before set-text\n\n    \n//setTextCallbackScope: null\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\nspeed: typing speed in ms\n\n\ntypeMode :\n\n\n'left-to-right'\n, or \n0\n : typing characters from left to right.\n\n\n'right-to-left'\n, or \n1\n : typing characters from right to left.\n\n\n'middle-to-sides'\n, or \n2\n : typing characters from middle to sides, optional.\n\n\n'sides-to-middle'\n, or \n3\n : typing characters from sides to middle.    \n\n\n\n\n\n\nsetTextCallback : callback befor set-text, to decorate display text.\n    \nfunction\n(\ntext\n,\n \nisLastChar\n,\n \ninsertIdx\n)\n \n{\n \nreturn\n \ntext\n;\n \n}\n\n\n\n\nsetTextCallbackScope : scope of setTextCallback function.\n\n\n\n\nStart typing\n\n\ntxt\n.\ntyping\n.\nstart\n(\nABCDEFG\n);\n\n\n// txt.typing.start(\nABCDEFG\n, 333);  // speed in ms\n\n\n\n\n\nEvents\n\n\n\n\nOn typing :\n\n\n\n\ntxt\n.\ntyping\n.\non\n(\ntype\n,\n \nfunction\n(){});\n\n\n\n\n\n\n\nOn typing completed :\n\n\n\n\ntxt\n.\ntyping\n.\non\n(\ncomplete\n,\n \nfunction\n(){});\n\n\n\n\n\nOther commands\n\n\n\n\nIs-typing state\n\n\n\n\nvar\n \nisTyping\n \n=\n \ntxt\n.\ntyping\n.\nisTyping\n;\n\n\n\n\n\n\n\nStop typing\n\n\n\n\ntxt\n.\ntyping\n.\nstop\n();\n\n\n// txt.typing.stop(true);;  // stop and show all text\n\n\n\n\n\n\n\nPause typing\n\n\n\n\ntxt\n.\ntyping\n.\npause\n();\n\n\n\n\n\n\n\nResume typing\n\n\n\n\ntxt\n.\ntyping\n.\nresume\n();\n\n\n\n\n\n\n\nSet typing speed\n\n\n\n\ntxt\n.\ntyping\n.\nsetTypeSpeed\n(\nspeed\n);\n  \n// speed in ms\n\n\n\n\n\nSet speed in \ntyping\n event or setTextCallback to change typing speed of remaining text.\n\n\n\n\nTyping more text\n\n\n\n\ntxt\n.\ntyping\n.\nappendText\n(\ntext\n);\n\n\n\n\n\n\n\nSet typing mode\n\n\n\n\ntxt\n.\ntyping\n.\nsetTypeMode\n(\nmode\n);\n  \n//0|\nleft-to-right\n|1|\nright-to-left\n|2|\nmiddle-to-sides\n|3|\nsides-to-middle", 
             "title": "Typing"
         }, 
         {
             "location": "/texttypingplugin/index.html#introduction", 
-            "text": "Typing text on text object.   Author: Rex  Member of text object", 
+            "text": "Typing text on text object,  bbcode text object , or  tag text boject .   Author: Rex  Member of text object", 
             "title": "Introduction"
         }, 
         {
@@ -972,12 +972,12 @@
         }, 
         {
             "location": "/textpageplugin/index.html", 
-            "text": "Introduction\n\n\nDisplay text page by page on text object.\n\n\n\n\nAuthor: Rex\n\n\nMember of text object\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\nvar\n \ntxt\n \n=\n \nscene\n.\nadd\n.\ntext\n(\nx\n,\n \ny\n,\n \n,\n \n{\n\n    \nwordWrap\n:\n  \n{\n\n        \nwidth\n:\n \n500\n\n    \n},\n\n    \nmaxLines\n:\n \n7\n\n\n});\n\n\ntxt\n.\npage\n \n=\n \nnew\n \nTextPagePlugin\n(\ntxt\n,\n \n{\n\n    \n//text: \n,       // content in string or array\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\ntext: content in string or array, optional\n\n\n\n\nSet content\n\n\ntxt\n.\npage\n.\nsetText\n(\ntext\n);\n   \n// content in string or array\n\n\n\n\n\n\n\nAppend text\n\n\n\n\ntxt\n.\npage\n.\nappendText\n(\ntext\n);\n \n// content in string or array\n\n\n\n\n\nShow page\n\n\ntxt\n.\npage\n.\nshowPage\n();\n         \n// display current page\n\n\ntxt\n.\npage\n.\nshowNextPage\n();\n     \n// display next page\n\n\ntxt\n.\npage\n.\nshowPreviousPage\n();\n \n// display previous page\n\n\n\n\n\nInitial page index is \n-1\n, so user could call \ntxt.page.showNextPage()\n to display first page.\n\n\nGet lines of page\n\n\nvar\n \nlines\n \n=\n \ntxt\n.\npage\n.\ngetPage\n();\n         \n// get lines of current page\n\n\nvar\n \nlines\n \n=\n \ntxt\n.\npage\n.\ngetNextPage\n();\n     \n// get lines of next page\n\n\nvar\n \nlines\n \n=\n \ntxt\n.\npage\n.\ngetPreviousPage\n();\n \n// get lines of previous page\n\n\n\n\n\nOther properties\n\n\n\n\nCurrent page index : \ntxt.page.pageIdx\n\n\nNumber of pages : \ntxt.page.pageNum\n\n\nIs last page: \ntxt.page.isLastPage\n\n\nIs first page: \ntxt.page.isFirstPage", 
+            "text": "Introduction\n\n\nDisplay text page by page on text object, \nbbcode text object\n, or \ntag text boject\n.\n\n\n\n\nAuthor: Rex\n\n\nMember of text object\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\nvar\n \ntxt\n \n=\n \nscene\n.\nadd\n.\ntext\n(\nx\n,\n \ny\n,\n \n,\n \n{\n\n    \nwordWrap\n:\n  \n{\n\n        \nwidth\n:\n \n500\n\n    \n},\n\n    \nmaxLines\n:\n \n7\n\n\n});\n\n\ntxt\n.\npage\n \n=\n \nnew\n \nTextPagePlugin\n(\ntxt\n,\n \n{\n\n    \n//text: \n,       // content in string or array\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\ntext: content in string or array, optional\n\n\n\n\nSet content\n\n\ntxt\n.\npage\n.\nsetText\n(\ntext\n);\n   \n// content in string or array\n\n\n\n\n\n\n\nAppend text\n\n\n\n\ntxt\n.\npage\n.\nappendText\n(\ntext\n);\n \n// content in string or array\n\n\n\n\n\nShow page\n\n\ntxt\n.\npage\n.\nshowPage\n();\n         \n// display current page\n\n\ntxt\n.\npage\n.\nshowNextPage\n();\n     \n// display next page\n\n\ntxt\n.\npage\n.\nshowPreviousPage\n();\n \n// display previous page\n\n\n\n\n\nInitial page index is \n-1\n, so user could call \ntxt.page.showNextPage()\n to display first page.\n\n\nGet lines of page\n\n\nvar\n \nlines\n \n=\n \ntxt\n.\npage\n.\ngetPage\n();\n         \n// get lines of current page\n\n\nvar\n \nlines\n \n=\n \ntxt\n.\npage\n.\ngetNextPage\n();\n     \n// get lines of next page\n\n\nvar\n \nlines\n \n=\n \ntxt\n.\npage\n.\ngetPreviousPage\n();\n \n// get lines of previous page\n\n\n\n\n\nOther properties\n\n\n\n\nCurrent page index : \ntxt.page.pageIdx\n\n\nNumber of pages : \ntxt.page.pageCount\n\n\nIs last page: \ntxt.page.isLastPage\n\n\nIs first page: \ntxt.page.isFirstPage", 
             "title": "Page"
         }, 
         {
             "location": "/textpageplugin/index.html#introduction", 
-            "text": "Display text page by page on text object.   Author: Rex  Member of text object", 
+            "text": "Display text page by page on text object,  bbcode text object , or  tag text boject .   Author: Rex  Member of text object", 
             "title": "Introduction"
         }, 
         {
@@ -1012,7 +1012,7 @@
         }, 
         {
             "location": "/textpageplugin/index.html#other-properties", 
-            "text": "Current page index :  txt.page.pageIdx  Number of pages :  txt.page.pageNum  Is last page:  txt.page.isLastPage  Is first page:  txt.page.isFirstPage", 
+            "text": "Current page index :  txt.page.pageIdx  Number of pages :  txt.page.pageCount  Is last page:  txt.page.isLastPage  Is first page:  txt.page.isFirstPage", 
             "title": "Other properties"
         }, 
         {
@@ -1101,52 +1101,52 @@
             "title": "Generate texture"
         }, 
         {
-            "location": "/canvas/index.html", 
+            "location": "/canvasplugin/index.html", 
             "text": "Introduction\n\n\nDrawing on \ncanvas\n.\n\n\n\n\nAuthor: Rex\n\n\nA kind of game object\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\nvar\n \ncanvas\n \n=\n \nscene\n.\nadd\n.\nrexCanvas\n(\nx\n,\n \ny\n,\n \nwidth\n,\n \nheight\n);\n\n\n\n\n\nAdd canvas from JSON\n\n\nvar\n \ncanvas\n \n=\n \nscene\n.\nmake\n.\nrexCanvas\n({\n\n    \nx\n:\n \n0\n,\n\n    \ny\n:\n \n0\n,\n\n    \nwidth\n:\n \n256\n,\n\n    \nheight\n:\n \n256\n,\n\n\n    \n//fill: null\n\n\n});\n\n\n\n\n\nClear or fill canvas\n\n\n\n\n\n\nClear\n\n\ncanvas\n.\nclear\n();\n\n\n\n\n\n\n\n\n\nFill color\n\n\ncanvas\n.\nfill\n(\ncolor\n);\n\n\n\n\n\n\n\n\n\nGet canvas elemet\n\n\nvar\n \ncanvasElem\n \n=\n \ncanvas\n.\ngetCanvas\n();\n\n\n// var context = canvasElem.getContext(\n2d\n);\n\n\n// Drawing on context\n\n\n\n\n\nUpdate display texture\n\n\ncanvas\n.\nneedRedraw\n();\n\n\n\n\n\nLoad or save texture\n\n\n\n\n\n\nSave canvas to texuture\n\n\ncanvas\n.\ngenerateTexture\n(\nkey\n,\n \nx\n,\n \ny\n,\n \nwidth\n,\n \nheight\n);\n\n\n\n\n\n\n\n\n\nCopy canvas from texture\n\n\ncanvas\n.\nloadTexture\n(\nkey\n,\n \nresize\n);\n\n\n\n\n\n\n\n\n\nCompare with \nGraphics object\n\n\n\n\n\n\nDrawing method\n\n\n\n\nThis canvas object draws stuff on canvas in WEBGL or CANVAS render mode.  \n\n\nGraphics object draws stuff on webgl render pipeline n WEBGL render mode.\n\n\n\n\n\n\n\n\nSize\n\n\n\n\nThis canvas object has size (width, height) and origin.  \n\n\nGraphics object does not have size and origin.", 
             "title": "Canvas"
         }, 
         {
-            "location": "/canvas/index.html#introduction", 
+            "location": "/canvasplugin/index.html#introduction", 
             "text": "Drawing on  canvas .   Author: Rex  A kind of game object", 
             "title": "Introduction"
         }, 
         {
-            "location": "/canvas/index.html#source-code", 
+            "location": "/canvasplugin/index.html#source-code", 
             "text": "Link", 
             "title": "Source code"
         }, 
         {
-            "location": "/canvas/index.html#usage", 
+            "location": "/canvasplugin/index.html#usage", 
             "text": "", 
             "title": "Usage"
         }, 
         {
-            "location": "/canvas/index.html#create-instance", 
+            "location": "/canvasplugin/index.html#create-instance", 
             "text": "var   canvas   =   scene . add . rexCanvas ( x ,   y ,   width ,   height );   Add canvas from JSON  var   canvas   =   scene . make . rexCanvas ({ \n     x :   0 , \n     y :   0 , \n     width :   256 , \n     height :   256 , \n\n     //fill: null  });", 
             "title": "Create instance"
         }, 
         {
-            "location": "/canvas/index.html#clear-or-fill-canvas", 
+            "location": "/canvasplugin/index.html#clear-or-fill-canvas", 
             "text": "Clear  canvas . clear ();     Fill color  canvas . fill ( color );", 
             "title": "Clear or fill canvas"
         }, 
         {
-            "location": "/canvas/index.html#get-canvas-elemet", 
+            "location": "/canvasplugin/index.html#get-canvas-elemet", 
             "text": "var   canvasElem   =   canvas . getCanvas ();  // var context = canvasElem.getContext( 2d );  // Drawing on context", 
             "title": "Get canvas elemet"
         }, 
         {
-            "location": "/canvas/index.html#update-display-texture", 
+            "location": "/canvasplugin/index.html#update-display-texture", 
             "text": "canvas . needRedraw ();", 
             "title": "Update display texture"
         }, 
         {
-            "location": "/canvas/index.html#load-or-save-texture", 
+            "location": "/canvasplugin/index.html#load-or-save-texture", 
             "text": "Save canvas to texuture  canvas . generateTexture ( key ,   x ,   y ,   width ,   height );     Copy canvas from texture  canvas . loadTexture ( key ,   resize );", 
             "title": "Load or save texture"
         }, 
         {
-            "location": "/canvas/index.html#compare-with-graphics-object", 
+            "location": "/canvasplugin/index.html#compare-with-graphics-object", 
             "text": "Drawing method   This canvas object draws stuff on canvas in WEBGL or CANVAS render mode.    Graphics object draws stuff on webgl render pipeline n WEBGL render mode.     Size   This canvas object has size (width, height) and origin.    Graphics object does not have size and origin.", 
             "title": "Compare with Graphics object"
         }, 
@@ -1436,87 +1436,87 @@
             "title": "Shuffle"
         }, 
         {
-            "location": "/gridtable/index.html", 
+            "location": "/gridtableplugin/index.html", 
             "text": "Introduction\n\n\nViewer of grid table, to manipulate game object of each visible cell.\n\n\n\n\nAuthor: Rex\n\n\nA kind of game object\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\nvar\n \ntable\n \n=\n \nscene\n.\nadd\n.\nrexGridTable\n(\nx\n,\n \ny\n,\n \nwidth\n,\n \nheight\n,\n \nconfig\n);\n\n\n\n\n\nConfiguration\n\n\n{\n\n    \ncellsCount\n:\n \n0\n,\n    \n// total cells count\n\n    \ncolumns\n:\n \n1\n,\n       \n// columns count of each row\n\n    \ncellHeight\n:\n \n30\n,\n   \n// default height of each cell\n\n    \ncellWidth\n:\n \n30\n,\n    \n// width of each cell\n\n\n    \ncellVisibleCallback\n:\n \nnull\n,\n \n// callback when cell begins visible\n\n    \ncellVisibleCallbackScope\n:\n \nundefined\n,\n\n\n    \ncellInvisibleCallback\n:\n \nnull\n,\n \n// callback when cell begins invisible\n\n    \ncellInvisibleCallbackScope\n:\n \nundefined\n,\n\n\n    \nclamplTableOXY\n:\n \ntrue\n,\n \n// clamp tableOX, tableOY when out-of-bound\n\n    \nscrollMode\n:\n \n0\n,\n        \n// 0|\nv\n|\nvertical\n|1|\nh\n|\nhorizontal\n\n\n}\n\n\n\n\n\nAdd grid table from JSON\n\n\nvar\n \ntable\n \n=\n \nscene\n.\nmake\n.\nrexGridTable\n({\n\n    \nx\n:\n \n0\n,\n\n    \ny\n:\n \n0\n,\n\n    \nwidth\n:\n \n256\n,\n\n    \nheight\n:\n \n256\n,\n\n\n    \n// cellsCount: 0,   // total cells count\n\n    \n// ...\n\n\n});\n\n\n\n\n\nCell begins visible\n\n\nAdd \ncontainer\n of cell when it begins visible in event \ncellvisible\n. \n\n\ntable\n.\non\n(\ncellvisible\n,\n \nfunction\n(\ncell\n){\n\n    \ncell\n.\nsetContainer\n(\ncustomContainer\n);\n\n\n})\n\n\n\n\n\nIt is equal to \ncellVisibleCallback\n in configuration.\n\n\n{\n\n    \n// ...\n\n    \ncellVisibleCallback\n:\n \nfunction\n(\ncell\n)\n \n{\n \ncell\n.\nsetContainer\n(\ncustomContainer\n);\n \n},\n\n    \n// ...\n\n\n}\n\n\n\n\n\nEach cell only has \none\n container gameobject, old container will be destroyed when assigning a new container.\n\n\nCell begins invisible\n\n\nContainer of an invisible cell will be destroyed automatically.\n\n\nTo resue container gameobject, user could pop that container by \ncell.popContainer()\n in event \ncellinvisible\n.\n\n\ntable\n.\non\n(\ncellinvisible\n,\n \nfunction\n(\ncell\n){\n\n    \nvar\n \ncontainer\n \n=\n \ncell\n.\npopContainer\n();\n\n    \n// put this container into an object pool\n\n\n})\n\n\n\n\n\nIt is equal to \ncellInvisibleCallback\n in configuration.\n\n\n{\n\n    \n// ...\n\n    \ncellInvisibleCallback\n:\n \nfunction\n(\ncell\n)\n \n{\n \nvar\n \ncontainer\n \n=\n \ncell\n.\npopContainer\n();\n \n/*... */\n \n},\n\n    \n// ...\n\n\n}\n\n\n\n\n\nScroll table content\n\n\ntable\n.\nsetTableOY\n(\noy\n).\nupdateTable\n();\n\n\ntable\n.\naddTableOY\n(\ndy\n).\nupdateTable\n();\n\n\n\n\n\ntable\n.\nsetTableOX\n(\nox\n).\nupdateTable\n();\n\n\ntable\n.\naddTableOX\n(\ndx\n).\nupdateTable\n();\n\n\n\n\n\ntable\n.\nsetTableOXY\n(\nox\n,\n \noy\n).\nupdateTable\n();\n\n\ntable\n.\naddTableOXY\n(\ndx\n,\n \ndy\n).\nupdateTable\n();\n\n\n\n\n\nThese will trigger \ncellvisible\n, or \ncellinvisible\n events.\n\n\nRefresh table content\n\n\nRefresh all visible cells.\n\n\ntable\n.\nupdateTable\n(\ntrue\n);\n\n\n\n\n\nSet total cells count\n\n\ntable\n.\nsetCellsCunt\n(\ncount\n).\nupdateTable\n();\n\n\n\n\n\nSet table size\n\n\ntable\n.\nsetGridSize\n(\ncolCount\n,\n \nrowCount\n).\nupdateTable\n();\n\n\n\n\n\nSet columns count\n\n\ntable\n.\nsetColumnCount\n(\ncount\n).\nupdateTable\n();\n\n\n\n\n\nCell\n\n\nGet cell\n\n\nvar\n \ncell\n \n=\n \ntable\n.\ngetCell\n(\ncellIndxe\n);\n\n\n\n\n\nFore each visible cell\n\n\n\n\nFor when you absolutely know this Set won't be modified during the iteration\n    \ntable\n.\niterateVisibleCell\n(\nfunction\n(\ncell\n){\n\n    \n// ...\n\n\n});\n\n\n\n\nFor when you know this Set will be modified during the iteration.\n    \ntable\n.\neachVisibleCell\n(\nfunction\n(\ncell\n){\n\n    \n// ...\n\n\n});\n\n\n\n\n\n\nContainer\n\n\nvar\n \ncontainer\n \n=\n \ncell\n.\ngetContainer\n();\n\n\n\n\n\nvar\n \ncontainer\n \n=\n \ncell\n.\npopContainer\n();\n\n\n\n\n\ncell\n.\nsetContainer\n(\ncontainer\n);\n\n\n\n\ncell\n.\ndestroyContainer\n();\n\n\n\n\nProperties\n\n\nvar\n \ncellIndex\n \n=\n \ncell\n.\nindex\n;", 
             "title": "Grid table"
         }, 
         {
-            "location": "/gridtable/index.html#introduction", 
+            "location": "/gridtableplugin/index.html#introduction", 
             "text": "Viewer of grid table, to manipulate game object of each visible cell.   Author: Rex  A kind of game object", 
             "title": "Introduction"
         }, 
         {
-            "location": "/gridtable/index.html#source-code", 
+            "location": "/gridtableplugin/index.html#source-code", 
             "text": "Link", 
             "title": "Source code"
         }, 
         {
-            "location": "/gridtable/index.html#usage", 
+            "location": "/gridtableplugin/index.html#usage", 
             "text": "", 
             "title": "Usage"
         }, 
         {
-            "location": "/gridtable/index.html#create-instance", 
+            "location": "/gridtableplugin/index.html#create-instance", 
             "text": "var   table   =   scene . add . rexGridTable ( x ,   y ,   width ,   height ,   config );   Configuration  { \n     cellsCount :   0 ,      // total cells count \n     columns :   1 ,         // columns count of each row \n     cellHeight :   30 ,     // default height of each cell \n     cellWidth :   30 ,      // width of each cell \n\n     cellVisibleCallback :   null ,   // callback when cell begins visible \n     cellVisibleCallbackScope :   undefined , \n\n     cellInvisibleCallback :   null ,   // callback when cell begins invisible \n     cellInvisibleCallbackScope :   undefined , \n\n     clamplTableOXY :   true ,   // clamp tableOX, tableOY when out-of-bound \n     scrollMode :   0 ,          // 0| v | vertical |1| h | horizontal  }   Add grid table from JSON  var   table   =   scene . make . rexGridTable ({ \n     x :   0 , \n     y :   0 , \n     width :   256 , \n     height :   256 , \n\n     // cellsCount: 0,   // total cells count \n     // ...  });", 
             "title": "Create instance"
         }, 
         {
-            "location": "/gridtable/index.html#cell-begins-visible", 
+            "location": "/gridtableplugin/index.html#cell-begins-visible", 
             "text": "Add  container  of cell when it begins visible in event  cellvisible .   table . on ( cellvisible ,   function ( cell ){ \n     cell . setContainer ( customContainer );  })   It is equal to  cellVisibleCallback  in configuration.  { \n     // ... \n     cellVisibleCallback :   function ( cell )   {   cell . setContainer ( customContainer );   }, \n     // ...  }   Each cell only has  one  container gameobject, old container will be destroyed when assigning a new container.", 
             "title": "Cell begins visible"
         }, 
         {
-            "location": "/gridtable/index.html#cell-begins-invisible", 
+            "location": "/gridtableplugin/index.html#cell-begins-invisible", 
             "text": "Container of an invisible cell will be destroyed automatically.  To resue container gameobject, user could pop that container by  cell.popContainer()  in event  cellinvisible .  table . on ( cellinvisible ,   function ( cell ){ \n     var   container   =   cell . popContainer (); \n     // put this container into an object pool  })   It is equal to  cellInvisibleCallback  in configuration.  { \n     // ... \n     cellInvisibleCallback :   function ( cell )   {   var   container   =   cell . popContainer ();   /*... */   }, \n     // ...  }", 
             "title": "Cell begins invisible"
         }, 
         {
-            "location": "/gridtable/index.html#scroll-table-content", 
+            "location": "/gridtableplugin/index.html#scroll-table-content", 
             "text": "table . setTableOY ( oy ). updateTable ();  table . addTableOY ( dy ). updateTable ();   table . setTableOX ( ox ). updateTable ();  table . addTableOX ( dx ). updateTable ();   table . setTableOXY ( ox ,   oy ). updateTable ();  table . addTableOXY ( dx ,   dy ). updateTable ();   These will trigger  cellvisible , or  cellinvisible  events.", 
             "title": "Scroll table content"
         }, 
         {
-            "location": "/gridtable/index.html#refresh-table-content", 
+            "location": "/gridtableplugin/index.html#refresh-table-content", 
             "text": "Refresh all visible cells.  table . updateTable ( true );", 
             "title": "Refresh table content"
         }, 
         {
-            "location": "/gridtable/index.html#set-total-cells-count", 
+            "location": "/gridtableplugin/index.html#set-total-cells-count", 
             "text": "table . setCellsCunt ( count ). updateTable ();", 
             "title": "Set total cells count"
         }, 
         {
-            "location": "/gridtable/index.html#set-table-size", 
+            "location": "/gridtableplugin/index.html#set-table-size", 
             "text": "table . setGridSize ( colCount ,   rowCount ). updateTable ();", 
             "title": "Set table size"
         }, 
         {
-            "location": "/gridtable/index.html#set-columns-count", 
+            "location": "/gridtableplugin/index.html#set-columns-count", 
             "text": "table . setColumnCount ( count ). updateTable ();", 
             "title": "Set columns count"
         }, 
         {
-            "location": "/gridtable/index.html#cell", 
+            "location": "/gridtableplugin/index.html#cell", 
             "text": "", 
             "title": "Cell"
         }, 
         {
-            "location": "/gridtable/index.html#get-cell", 
+            "location": "/gridtableplugin/index.html#get-cell", 
             "text": "var   cell   =   table . getCell ( cellIndxe );", 
             "title": "Get cell"
         }, 
         {
-            "location": "/gridtable/index.html#fore-each-visible-cell", 
+            "location": "/gridtableplugin/index.html#fore-each-visible-cell", 
             "text": "For when you absolutely know this Set won't be modified during the iteration\n     table . iterateVisibleCell ( function ( cell ){ \n     // ...  });   For when you know this Set will be modified during the iteration.\n     table . eachVisibleCell ( function ( cell ){ \n     // ...  });", 
             "title": "Fore each visible cell"
         }, 
         {
-            "location": "/gridtable/index.html#container", 
+            "location": "/gridtableplugin/index.html#container", 
             "text": "var   container   =   cell . getContainer ();   var   container   =   cell . popContainer ();   cell . setContainer ( container );   cell . destroyContainer ();", 
             "title": "Container"
         }, 
         {
-            "location": "/gridtable/index.html#properties", 
+            "location": "/gridtableplugin/index.html#properties", 
             "text": "var   cellIndex   =   cell . index ;", 
             "title": "Properties"
         }, 

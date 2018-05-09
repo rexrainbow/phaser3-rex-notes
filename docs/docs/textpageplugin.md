@@ -1,6 +1,6 @@
 ## Introduction
 
-Display text page by page on text object.
+Display text page by page on text object, [bbcode text object](bbcodetextplugin.md), or [tag text boject](tagtextplugin.md).
 
 - Author: Rex
 - Member of text object
