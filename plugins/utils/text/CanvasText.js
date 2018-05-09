@@ -24,9 +24,8 @@ class CanvasText {
         this.autoRound = true;
 
         this.pensPool = GetValue(config, 'pensPool', null);
-        PENSMANAGER_CONFIG.pensPool = this.pensPool;
-        this.pensManager = new PensManagerKlass(PENSMANAGER_CONFIG);
-        this.tmpPensManager = null;
+        this.pensManager = this.newPenManager();
+        this._tmpPensManager = null;
 
         var context = this.context;
         this.getTextWidth = function (text) {
@@ -192,7 +191,7 @@ class CanvasText {
         if (thickness <= 0) {
             return;
         }
-        
+
         var context = this.context;
         var savedLineCap = context.lineCap;
         context.lineCap = 'butt';
@@ -230,12 +229,12 @@ class CanvasText {
 
         // underline
         this.drawUnderline(
-            startX,                                   // x
-            (startY + curStyle.underlineOffset),      // y
-            penWidth,                                 // width
-            curStyle.underlineThickness,              // thinkness
-            curStyle.underlineColor                   // color
-        );               
+            startX, // x
+            (startY + curStyle.underlineOffset), // y
+            penWidth, // width
+            curStyle.underlineThickness, // thinkness
+            curStyle.underlineColor // color
+        );
 
         // draw image: TODO
 
@@ -263,9 +262,9 @@ class CanvasText {
 
         this.pensManager.destroy();
         this.pensManager = undefined;
-        if (this.tmpPensManager) {
-            this.tmpPensManager.destroy();
-            this.tmpPensManager = undefined;
+        if (this._tmpPensManager) {
+            this._tmpPensManager.destroy();
+            this._tmpPensManager = undefined;
         }
     }
 
@@ -273,13 +272,13 @@ class CanvasText {
         return this.pensManager.lines;
     }
 
-    get desplayLinesNum() {
-        var linesNum = this.pensManager.linesNum,
+    get desplayLinesCount() {
+        var linesCount = this.pensManager.linesCount,
             maxLines = this.defatultStyle.maxLines;
-        if ((maxLines > 0) && (linesNum > maxLines)) {
-            linesNum = maxLines;
+        if ((maxLines > 0) && (linesCount > maxLines)) {
+            linesCount = maxLines;
         }
-        return linesNum;
+        return linesCount;
     }
 
     get linesWidth() {
@@ -287,12 +286,26 @@ class CanvasText {
     }
 
     get linesHeight() {
-        var linesNum = this.desplayLinesNum;
-        var linesHeight = (this.defatultStyle.lineHeight * linesNum);
-        if (linesNum > 0) {
+        var linesCount = this.desplayLinesCount;
+        var linesHeight = (this.defatultStyle.lineHeight * linesCount);
+        if (linesCount > 0) {
             linesHeight -= this.defatultStyle.lineSpacing;
         }
         return linesHeight;
+    }
+
+    newPenManager() {
+        PENSMANAGER_CONFIG.pensPool = this.pensPool;
+        PENSMANAGER_CONFIG.tagToText = this.parser.propToTagText;
+        PENSMANAGER_CONFIG.tagToTextScope = this.parser;
+        return new PensManagerKlass(PENSMANAGER_CONFIG);
+    }
+
+    get tmpPenManager() {
+        if (this._tmpPensManager === null) {           
+            this._tmpPensManager = this.newPenManager();
+        }
+        return this._tmpPensManager;
     }
 
     getRawText(text, start, end) {
@@ -320,14 +333,13 @@ class CanvasText {
         return rawText;
     }
 
-    getText(text, start, end, wrap) {
-        if (text == null) {
-            return this.pensManager.getSliceTagText(start, end, wrap, this.parser.propToTagText);
+    getPenManager(text, retPensManager) {
+        if (text === undefined) {
+            return this.copyPensManager(retPensManager, this.pensManager);
         }
 
-        if (this.tmpPensManager === null) {
-            PENSMANAGER_CONFIG.pensPool = this.pensPool;
-            this.tmpPensManager = new PensManagerKlass(PENSMANAGER_CONFIG);
+        if (retPensManager === undefined) {
+            retPensManager = this.newPenManager();
         }
 
         var defatultStyle = this.defatultStyle;
@@ -336,14 +348,34 @@ class CanvasText {
             defatultStyle.wrapMode,
             defatultStyle.wrapWidth,
             defatultStyle.lineHeight,
-            this.tmpPensManager
+            retPensManager
         );
-
-        return this.tmpPensManager.getSliceTagText(start, end, wrap, this.parser.propToTagText);
+        return retPensManager;
     }
 
-    copyPensManager(pensManager) {
-        return this.pensManager.copy(pensManager);
+    getText(text, start, end, wrap) {
+        if (text == null) {
+            return this.pensManager.getSliceTagText(start, end, wrap);
+        }
+
+        var penManager = this.tmpPenManager;
+        var defatultStyle = this.defatultStyle;
+        this.updatePensManager(
+            text,
+            defatultStyle.wrapMode,
+            defatultStyle.wrapWidth,
+            defatultStyle.lineHeight,
+            penManager
+        );
+
+        return penManager.getSliceTagText(start, end, wrap);
+    }
+
+    copyPensManager(ret, src) {
+        if (src === undefined) {
+            src = this.pensManager;
+        }
+        return src.copy(ret);
     }
 
     getTextWidth(pensManager) {

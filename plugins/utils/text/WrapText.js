@@ -25,17 +25,16 @@ var WrapText = function (text, getTextWidth, wrapMode, wrapWidth, offset) {
         line = lines[i];
         newLineMode = (i === (linesLen - 1)) ? NO_NEWLINE : RAW_NEWLINE;
 
-        if (i === 0) {
-            remainWidth = wrapWidth - offset;
-        } else {
-            remainWidth = wrapWidth;
-        }
-
-
         if (wrapMode === NO_WRAP) {
             var textWidth = getTextWidth(line);
             retLines.push(LinesPool.newline(line, textWidth, newLineMode));
             continue;
+        } else {
+            if (i === 0) {
+                remainWidth = wrapWidth - offset;
+            } else {
+                remainWidth = wrapWidth;
+            }
         }
 
         // short string testing
@@ -77,7 +76,7 @@ var WrapText = function (text, getTextWidth, wrapMode, wrapWidth, offset) {
                 } else {
                     retLines.push(LinesPool.newline(lineText, lineWidth, WRAPPED_NEWLINE));
                     curLineText = token;
-                    currLineWidth = getTextWidth(curLineText);                    
+                    currLineWidth = getTextWidth(curLineText);
                 }
 
                 remainWidth = wrapWidth;

@@ -62,6 +62,6 @@ var lines = txt.page.getPreviousPage(); // get lines of previous page
 ### Other properties
 
 - Current page index : `txt.page.pageIdx`
-- Number of pages : `txt.page.pageNum`
+- Number of pages : `txt.page.pageCount`
 - Is last page: `txt.page.isLastPage`
 - Is first page: `txt.page.isFirstPage`

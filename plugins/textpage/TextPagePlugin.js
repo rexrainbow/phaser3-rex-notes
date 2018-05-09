@@ -2,6 +2,7 @@
 
 import GetSceneObject from './../utils/system/GetSceneObject.js';
 
+const TextKlass = Phaser.GameObjects.Text;
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
@@ -11,10 +12,11 @@ class TextPagePlugin {
     constructor(gameobject, config) {
         this.gameobject = gameobject;
         this.scene = GetSceneObject(gameobject);
-        
-        this.wordWrap = {};
+        this.setTextObjectType();
+
+        this.lines = undefined; // array (default text object), or pens-manager (tag text object)
         this.resetFromJSON(config);
-        this.boot();        
+        this.boot();
     }
 
     /**
@@ -36,11 +38,10 @@ class TextPagePlugin {
     toJSON() {
         return {
             text: this.text,
-            start: this.startIdx,
+            start: this.startLineIdx,
             page: this.pageIdx,
 
-            pageLineNum: this.pageLineNum,
-            pageNum: this.pageNum
+            pageCount: this.pageCount
 
         };
     }
@@ -50,10 +51,14 @@ class TextPagePlugin {
             this.gameobject.on('destroy', this.destroy, this);
         }
     }
-    
+
     shutdown() {
         this.text = '';
-        this.lines.length = 0;
+        if (this.textObjectType === 0) {
+            this.lines.length = 0;
+        } else {
+            this.lines.destroy();
+        }
 
         this.gameobject = undefined;
         this.scene = undefined;
@@ -63,12 +68,20 @@ class TextPagePlugin {
         this.shutdown();
     }
 
+    setTextObjectType() {
+        if (this.gameobject instanceof TextKlass) {
+            this.textObjectType = 0;
+        } else {
+            this.textObjectType = 1;
+        }
+    }
+
     get isFirstPage() {
         return (this.pageIdx <= 0);
     }
 
     get isLastPage() {
-        return (this.pageIdx >= (this.pageNum - 1));
+        return (this.pageIdx >= (this.pageCount - 1));
     }
 
     setText(text, resetPageIdx) {
@@ -76,9 +89,15 @@ class TextPagePlugin {
             resetPageIdx = true;
         }
         this.text = transferText(text);
-        this.lines = this.gameobject.getWrappedText(this.text);
-        this.pageLineNum = this.getPageLineNum();
-        this.pageNum = Math.ceil(this.lines.length / this.pageLineNum);
+
+        // wrap content in lines
+        if (this.textObjectType === 0) {
+            this.lines = this.gameobject.getWrappedText(this.text);  // lines in array
+        } else {
+            this.lines = this.gameobject.getPenManager(this.text, this.lines);  // pen manager
+        }
+
+        this.pageCount = Math.ceil(this.totalLineCount / this.pageLineCount);
         if (resetPageIdx) {
             this.resetPageIdx();
         }
@@ -106,38 +125,38 @@ class TextPagePlugin {
     }
 
     showPage(idx) {
-        this.gameobject.setText(this.getPage());
+        this.displayText(this.getPage());
         return this;
     }
 
     showNextPage() {
-        this.gameobject.setText(this.getNextPage());
+        this.displayText(this.getNextPage());
         return this;
     }
 
     showPreviousPage() {
-        this.gameobject.setText(this.getPreviousPage());
+        this.displayText(this.getPreviousPage());
         return this;
     }
 
     show() {
-        this.gameobject.setText(this.getLines());
+        this.displayText(this.getLines());
         return this;
     }
 
     showNextLine() {
-        this.gameobject.setText(this.setStartIdx(this.startIdx + 1).getLines());
+        this.displayText(this.setStartIdx(this.startLineIdx + 1).getLines());
         return this;
     }
 
     showPreviousLine() {
-        this.gameobject.setText(this.setStartIdx(this.startIdx - 1).getLines());
+        this.displayText(this.setStartIdx(this.startLineIdx - 1).getLines());
         return this;
     }
 
     setStartIdx(idx) {
-        idx = Clamp(idx, 0, this.lines.length - 1);
-        this.startIdx = idx;
+        idx = Clamp(idx, 0, this.totalLineCount - 1);
+        this.startLineIdx = idx;
         return this;
     }
 
@@ -146,31 +165,53 @@ class TextPagePlugin {
     }
 
     setPageIdx(idx) {
-        idx = Clamp(idx, 0, this.pageNum - 1);
+        idx = Clamp(idx, 0, this.pageCount - 1);
         this.pageIdx = idx;
-        this.setStartIdx(this.pageIdx * this.pageLineNum);
+        this.setStartIdx(this.pageIdx * this.pageLineCount);
         return this;
     }
 
-    getPageLineNum() {
-        var num;
-        var maxLines = this.gameobject.style.maxLines;
-        if (maxLines <= 0) {
-            num = this.lines.length;
+    get totalLineCount() {
+        var count;
+        if (this.textObjectType === 0) {
+            count = this.lines.length;
         } else {
-            num = maxLines;
+            count = this.lines.linesCount;
         }
-        return num;
+        return count;
     }
 
-    getLines(startIdx) {
-        if (startIdx === undefined) {
-            startIdx = this.startIdx;
+    get pageLineCount() {
+        var count;
+        var maxLines = this.gameobject.style.maxLines;
+        if (maxLines > 0) {
+            count = maxLines;
+        } else {
+            count = this.totalLineCount;
         }
-        var lines = this.lines.slice(startIdx, startIdx + this.pageLineNum);
-        return lines;
+        return count;
     }
 
+    getLines(startLineIdx) {
+        if (startLineIdx === undefined) {
+            startLineIdx = this.startLineIdx;
+        }
+        var endLineIdx = startLineIdx + this.pageLineCount;
+        var text;
+        if (this.textObjectType === 0) {
+            text = this.lines.slice(startLineIdx, endLineIdx).join('\n');
+        } else {
+            var startIdx = this.lines.getLineStartIndex(startLineIdx);
+            var endIdx = this.lines.getLineEndIndex(endLineIdx - 1);
+            text = this.lines.getSliceTagText(startIdx, endIdx, false);
+        }
+        return text;
+    }
+
+    displayText(text) {
+        console.log(text)
+        this.gameobject.setText(text);
+    }
 }
 
 var transferText = function (text) {

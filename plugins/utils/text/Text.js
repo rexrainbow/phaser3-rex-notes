@@ -2,6 +2,7 @@ import Render from './TextRender.js'; // copy from text object
 import TextStyle from './TextStyle.js'; // extended
 import CanvasTextKlass from './CanvasText.js';
 import PoolKlass from './../../pool.js';
+import CONST from './const.js';
 
 const AddToDOM = Phaser.DOM.AddToDOM;
 const RemoveFromDOM = Phaser.DOM.RemoveFromDOM;
@@ -10,6 +11,7 @@ const Components = Phaser.GameObjects.Components;
 const GameObject = Phaser.GameObjects.GameObject;
 const BuildGameObject = Phaser.GameObjects.BuildGameObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
+const SPLITREGEXP = CONST.SPLITREGEXP;
 
 var PensPools = {};
 var Text = new Phaser.Class({
@@ -372,6 +374,11 @@ var Text = new Phaser.Class({
         this.canvasText.destroy();
     },
 
+    getWrappedText: function (text, start, end) {
+        text = this.canvasText.getText(text, start, end, true);
+        return text.split(SPLITREGEXP);
+    },    
+
     getRawText: function (text, start, end) {
         return this.canvasText.getRawText(text, start, end);
     },
@@ -384,12 +391,12 @@ var Text = new Phaser.Class({
         return this.getText(text, start, end);
     },
 
-    getWrappedText: function (text, start, end) {
-        return this.canvasText.getText(text, start, end, true);
+    copyPensManager: function (pensManager) {
+        return this.canvasText.copyPensManager(pensManager);
     },
 
-    copyPensManager: function (PensManager) {
-        return this.canvasText.copyPensManager(PensManager);
+    getPenManager: function(text, pensManager) {
+        return this.canvasText.getPenManager(text, pensManager);
     }
 
 });

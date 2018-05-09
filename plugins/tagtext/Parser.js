@@ -188,15 +188,28 @@ class parser {
 
     propToTagText(text, prop, prevProp) {
         if (prop.hasOwnProperty('_class')) { // class mode
-            text = "<class='" + prop._class + "'>" + text + "</class>";
+            if (text === '') {
+                if (this.isTextTag(prop._class)) {
+                    return '';
+                }
+            }
+            return "<class='" + prop._class + "'>" + text + "</class>";
         } else if (prop.hasOwnProperty('_style')) { // class mode
-            text = "<style='" + prop._style + "'>" + text + "</style>";
+            return "<style='" + prop._style + "'>" + text + "</style>";
         }
-        return text;
     }
 
     destroy() {
         this.tags = undefined;
+    }
+
+    isTextTag(tagName) {
+        var tag = this.tags[tagName];
+        if (tag) {
+            return (tag.img == null);
+        } else { // tag not found
+            return false;
+        }
     }
 };
 
@@ -214,7 +227,7 @@ var styleToProp = function (s) {
 
         switch (k) {
             case 'stroke':
-                var stroke = v.split(' ');  // stroke:blue 1px
+                var stroke = v.split(' '); // stroke:blue 1px
                 var len = stroke.length;
                 v = {};
                 if (len >= 1) {
@@ -225,7 +238,7 @@ var styleToProp = function (s) {
                 }
                 break;
             case 'shadow':
-                var shadow = v.split(' ');  // shadow:blue 2px 2px 2px
+                var shadow = v.split(' '); // shadow:blue 2px 2px 2px
                 var len = shadow.length;
                 v = {};
                 if (len >= 1) {
@@ -242,7 +255,7 @@ var styleToProp = function (s) {
                 }
                 break;
             case 'u':
-            case 'underline':     // underline:blue 3px -1px
+            case 'underline': // underline:blue 3px -1px
                 var u = v.split(' ');
                 var len = u.length;
                 v = {};

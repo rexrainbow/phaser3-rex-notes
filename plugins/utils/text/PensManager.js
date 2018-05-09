@@ -5,6 +5,7 @@ import PenKlass from './Pen.js';
 import CONST from './const.js';
 import Clone from './../object/Clone.js';
 
+const NOOP = Phaser.Utils.NOOP;
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 const NO_NEWLINE = CONST.NO_NEWLINE;
 
@@ -18,10 +19,14 @@ class PensManager {
 
         this.PensPool = GetFastValue(config, 'pensPool', PensPool);
         this.LinesPool = GetFastValue(config, 'linesPool', LinesPool);
+        this.tagToText = GetFastValue(config, 'tagToText', NOOP);
+        this.tagToTextScope = GetFastValue(config, 'tagToTextScope', undefined);
     }
 
     destroy() {
         this.freePens();
+        this.tagToText = undefined;
+        this.tagToTextScope = undefined;
     }
 
     freePens() {
@@ -50,7 +55,7 @@ class PensManager {
         if (previousPen == null)
             pen.startIndex = 0;
         else
-            pen.startIndex = previousPen.nextStartIndex;
+            pen.startIndex = previousPen.endIndex;
         this.pens.push(pen);
 
         // maintan lines
@@ -102,14 +107,18 @@ class PensManager {
     }
 
     getLineStartIndex(i) {
-        var line = this.lines[i];
-        if (line == null)
-            return 0;
-
-        return line[0].startIndex;
+        if (i >= this.lines.length) {
+            return this.getLineEndIndex(i);
+        } else {
+            var line = this.lines[i];
+            return (line[0])? line[0].startIndex : 0;
+        }
     }
 
     getLineEndIndex(i) {
+        if (i >= this.lines.length) {
+            i = this.lines.length - 1;
+        }
         var li, hasLastPen = false,
             line;
         for (li = i; li >= 0; li--) {
@@ -160,7 +169,7 @@ class PensManager {
         return result;
     }
 
-    get linesNum() {
+    get linesCount() {
         return this.lines.length;
     }
 
@@ -184,18 +193,18 @@ class PensManager {
         return l;
     }
 
-    getSliceTagText(start, end, wrap, callback, scope) {
-        if (start == null) {
+    getSliceTagText(start, end, wrap) {
+        if (start === undefined) {
             start = 0;
         }
-        if (end == null) {
+        if (end === undefined) {
             var lastPen = this.lastPen;
             if (lastPen == null)
                 return "";
 
-            end = lastPen.nextStartIndex;
+            end = lastPen.endIndex;
         }
-        if (wrap == null) {
+        if (wrap === undefined) {
             wrap = false;
         }
 
@@ -205,29 +214,30 @@ class PensManager {
         var currentProp, previousProp;
         for (var i = 0, len = this.pens.length; i < len; i++) {
             pen = this.pens[i];
+            penEndIdx = pen.endIndex;
+            if (penEndIdx < start) {
+                continue;
+            }
+            pen = this.pens[i];
             penTxt = (!wrap) ? pen.rawText : pen.wrapText;
             currentProp = pen.prop;
             penStartIdx = pen.startIndex;
-            penEndIdx = pen.endIndex;
 
-            if (penEndIdx < start)
-                continue;
-
-            isInRange = (penStartIdx >= start) && (penEndIdx < end);
+            isInRange = (penStartIdx >= start) && (penEndIdx <= end);
             if (!isInRange) {
                 penTxt = penTxt.substring(start - penStartIdx, end - penStartIdx);
             }
 
-            if (scope) {
-                txt += callback.apply(scope, penTxt, currentProp, previousProp);
+            if (this.tagToTextScope) {
+                txt += this.tagToText.call(this.tagToTextScope, penTxt, currentProp, previousProp);
             } else {
-                txt += callback(penTxt, currentProp, previousProp);
+                txt += this.tagToText(penTxt, currentProp, previousProp);
             }
 
             previousProp = currentProp;
-
-            if (penEndIdx >= end)
+            if (penEndIdx >= end) {
                 break;
+            }
         }
 
         return txt;

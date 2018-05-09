@@ -53,12 +53,8 @@ class Pen {
         return len;
     }
 
-    get nextStartIndex() {
-        return this.startIndex + this.rawTextLength;
-    }
-
     get endIndex() {
-        return this.startIndex + this.rawTextLength - 1;
+        return this.startIndex + this.rawTextLength;
     }
 
     get lastX() {

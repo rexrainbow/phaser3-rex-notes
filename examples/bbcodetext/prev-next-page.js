@@ -1,5 +1,5 @@
 'use strict'
-
+import BBCodeText from './../../plugins/bbcodetext-plugin.js';
 import TextPagePlugin from './../../plugins/textpage-plugin.js'
 
 class Demo extends Phaser.Scene {
@@ -9,15 +9,23 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() { }
+    preload() {}
 
     create() {
-        var lines = [];
+        var lines = [],
+            txt;
         for (var i = 0; i < 50; i++) {
-            lines.push(i.toString());
+            if ((i % 4) === 0) {
+                txt = '[color=yellow]' + i.toString() + ' :yellow';
+            } else if ((i % 3) === 0) {
+                txt = '[color=gray]' + i.toString() + ' :gray';
+            } else {
+                txt = i.toString();
+            }
+            lines.push(txt);
         }
 
-        var txt = this.add.text(100, 100, '', {
+        var txt = this.add.rexBBCodeText(100, 100, '', {
             wordWrap: {
                 width: 500
             },
@@ -46,7 +54,7 @@ class Demo extends Phaser.Scene {
         this.input.keyboard.on('keydown_DOWN', printPageIdx);
     }
 
-    update() { }
+    update() {}
 }
 
 var config = {
