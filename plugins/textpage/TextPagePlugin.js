@@ -209,7 +209,6 @@ class TextPagePlugin {
     }
 
     displayText(text) {
-        console.log(text)
         this.gameobject.setText(text);
     }
 }
