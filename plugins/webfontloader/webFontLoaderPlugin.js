@@ -5,24 +5,14 @@ import WebFont from './../utils/webfontloader/webfontloader.js';
 const FILE_POPULATED = Phaser.Loader.FILE_POPULATED;
 
 class WebFontLoader extends Phaser.Loader.File {
-    constructor(key, config) {
-        var fileConfig = {
-            type: 'webfont',
-            key: key,
-            url: '',
-            config: config
-        };
-
-        super(fileConfig);
+    constructor(loader, fileConfig) {
+        super(loader, fileConfig);
     }
 
-    load(loader) {
-        this.loader = loader;
-
+    load() {
         if (this.state === FILE_POPULATED) {
-            this.onComplete();
-
-            loader.nextFile(this);
+            //  Can happen for example in a JSONFile if they've provided a JSON object instead of a URL
+            this.loader.nextFile(this, true);
         } else {
             // start loading task
             var config = this.config;
@@ -48,14 +38,21 @@ class WebFontLoader extends Phaser.Loader.File {
 
     onFontInactive(familyName, fvd) {
         this.loader.emit('webfontinactive', this, familyName);
-    }    
+    }
 }
 
 Phaser.Loader.FileTypesManager.register('webFont', function (key, config) {
-    this.addFile(new WebFontLoader(key, config));
+    FILE_CONFIG.key = key;
+    FILE_CONFIG.config = config;
+    this.addFile(new WebFontLoader(this, FILE_CONFIG));
 
     //  For method chaining
     return this;
 });
+
+var FILE_CONFIG = {
+    type: 'webfont',
+    url: ''
+};
 
 export default WebFontLoader;
