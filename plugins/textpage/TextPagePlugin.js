@@ -23,7 +23,6 @@ class TextPagePlugin {
      * @returns {object} this object
      */
     resetFromJSON(o) {
-        this.setWordWrapProperties(GetFastValue(o, 'wordWrap', null));
         this.setText(GetFastValue(o, 'text', ''));
         this.setStartIdx(GetFastValue(o, 'start', 0));
         this.setPageIdx(GetFastValue(o, 'page', -1));
@@ -36,12 +35,6 @@ class TextPagePlugin {
      */
     toJSON() {
         return {
-            wordWrap: {
-                width: this.wordWrapWidth,
-                callback: this.wordWrapCallback,
-                callbackScope: this.wordWrapCallbackScope,
-                useAdvancedWrap: this.wordWrapUseAdvanced
-            },
             text: this.text,
             start: this.startIdx,
             page: this.pageIdx,
@@ -83,7 +76,7 @@ class TextPagePlugin {
             resetPageIdx = true;
         }
         this.text = transferText(text);
-        this.lines = this.getWrappedText(this.text);
+        this.lines = this.gameobject.getWrappedText(this.text);
         this.pageLineNum = this.getPageLineNum();
         this.pageNum = Math.ceil(this.lines.length / this.pageLineNum);
         if (resetPageIdx) {
@@ -141,62 +134,6 @@ class TextPagePlugin {
         this.gameobject.setText(this.setStartIdx(this.startIdx - 1).getLines());
         return this;
     }
-
-    // wrapped text
-    setWordWrapWidth(width) {
-        this.wordWrapWidth = width;
-    }
-
-    setWordWrapCallback(callback, callbackScope) {
-        this.wordWrapCallback = callback;
-        this.wordWrapCallbackScope = callbackScope;
-    }
-
-    setWordWrapUseAdvanced(enabled) {
-        this.wordWrapUseAdvanced = enabled;
-    }
-
-    getWrappedText(text) {
-        this.setTextWrapProperties();
-        var lines = this.gameobject.getWrappedText(text);
-        this.cleanTextWrapProperties();
-        return lines;
-    }
-
-    setWordWrapProperties(wordWrap) {
-        var pageStyle = this.wordWrap;
-        if (wordWrap == null) {
-            var textStyle = this.gameobject.style;
-            pageStyle.wordWrapWidth = textStyle.wordWrapWidth;
-            pageStyle.wordWrapCallback = textStyle.wordWrapCallback;
-            pageStyle.wordWrapCallbackScope = textStyle.wordWrapCallbackScope;
-            pageStyle.wordWrapUseAdvanced = textStyle.wordWrapUseAdvanced;
-        } else {
-            pageStyle.wordWrapWidth = GetAdvancedValue(wordWrap, 'wordWrap.width', null);
-            pageStyle.wordWrapCallback = GetValue(wordWrap, 'wordWrap.callback', null);
-            pageStyle.wordWrapCallbackScope = GetValue(wordWrap, 'wordWrap.callbackScope', null);
-            pageStyle.wordWrapUseAdvanced = GetAdvancedValue(wordWrap, 'wordWrap.useAdvancedWrap', false);
-        }
-        this.cleanTextWrapProperties();
-    }
-
-    setTextWrapProperties() {
-        var textStyle = this.gameobject.style;
-        var pageStyle = this.wordWrap;
-        textStyle.wordWrapWidth = pageStyle.wordWrapWidth;
-        textStyle.wordWrapCallback = pageStyle.wordWrapCallback;
-        textStyle.wordWrapCallbackScope = pageStyle.wordWrapCallbackScope;
-        textStyle.wordWrapUseAdvanced = pageStyle.wordWrapUseAdvanced;
-    }
-
-    cleanTextWrapProperties() {
-        var textStyle = this.gameobject.style;
-        textStyle.wordWrapWidth = null;
-        textStyle.wordWrapCallback = null;
-        textStyle.wordWrapCallbackScope = null;
-        textStyle.wordWrapUseAdvanced = false;
-    }
-    // wrapped text    
 
     setStartIdx(idx) {
         idx = Clamp(idx, 0, this.lines.length - 1);
