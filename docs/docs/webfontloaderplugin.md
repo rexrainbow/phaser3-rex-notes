@@ -16,25 +16,21 @@ Load web font by [google webfont loader](https://github.com/typekit/webfontloade
 In preload stage:
 
 ```javascript
-this.load.webFont('bangers', {
+this.load.webFont('webfont', {
     google: {
         families: ['Bangers']
     }
 });
 ```
 
-load webfont from object
+or
 
 ```javascript
-var obj = {
-    key: 'bangers',
-    config: {
-        google: {
-            families: ['Bangers']
-        }
+this.load.webFont({
+    google: {
+        families: ['Bangers']
     }
-};
-this.load.webFont(obj);
+});
 ```
 
 ### Events

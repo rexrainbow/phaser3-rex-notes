@@ -10,20 +10,12 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.webFont('bangers', {
+        var config = {
             google: {
                 families: ['Bangers']
             }
-        });
-        //var config = {
-        //    key: 'bangers',
-        //    config: {
-        //        google: {
-        //            families: ['Bangers']
-        //        }
-        //    }
-        //}
-        //this.load.webFont(config);
+        };
+        this.load.webFont(config);
         this.load.on('webfontactive', function (fileObj, familyName) {
             console.log('font-active: ' + familyName)
         });

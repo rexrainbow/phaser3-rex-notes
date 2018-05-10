@@ -43,14 +43,23 @@ class WebFontLoader extends Phaser.Loader.File {
 }
 
 Phaser.Loader.FileTypesManager.register('webFont', function (key, config) {
-    if (!IsPlainObject(key)) {
+    if (IsPlainObject(key)) {
+        config = key;
+        if (config.hasOwnProperty('config')) {
+            config.type = 'webfont';
+            config.url = '';
+        } else {
+            config = {
+                key: 'webfont',
+                type: 'webfont',
+                url: '',
+                config: config
+            };
+        }
+    } else {
         FILE_CONFIG.key = key;
         FILE_CONFIG.config = config;
         config = FILE_CONFIG;
-    } else {
-        config = key;
-        config.type = 'webfont';
-        config.url = '';
     }
     this.addFile(new WebFontLoader(this, config));
 
