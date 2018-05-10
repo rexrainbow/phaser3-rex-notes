@@ -3,6 +3,7 @@
 import WebFont from './../utils/webfontloader/webfontloader.js';
 
 const FILE_POPULATED = Phaser.Loader.FILE_POPULATED;
+const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
 class WebFontLoader extends Phaser.Loader.File {
     constructor(loader, fileConfig) {
@@ -42,9 +43,16 @@ class WebFontLoader extends Phaser.Loader.File {
 }
 
 Phaser.Loader.FileTypesManager.register('webFont', function (key, config) {
-    FILE_CONFIG.key = key;
-    FILE_CONFIG.config = config;
-    this.addFile(new WebFontLoader(this, FILE_CONFIG));
+    if (!IsPlainObject(key)) {
+        FILE_CONFIG.key = key;
+        FILE_CONFIG.config = config;
+        config = FILE_CONFIG;
+    } else {
+        config = key;
+        config.type = 'webfont';
+        config.url = '';
+    }
+    this.addFile(new WebFontLoader(this, config));
 
     //  For method chaining
     return this;

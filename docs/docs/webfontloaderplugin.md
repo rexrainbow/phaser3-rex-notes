@@ -23,6 +23,20 @@ this.load.webFont('bangers', {
 });
 ```
 
+load webfont from object
+
+```javascript
+var obj = {
+    key: 'bangers',
+    config: {
+        google: {
+            families: ['Bangers']
+        }
+    }
+};
+this.load.webFont(obj);
+```
+
 ### Events
 
 - `fontactive` event

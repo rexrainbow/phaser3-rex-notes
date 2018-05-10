@@ -15,6 +15,15 @@ class Demo extends Phaser.Scene {
                 families: ['Bangers']
             }
         });
+        //var config = {
+        //    key: 'bangers',
+        //    config: {
+        //        google: {
+        //            families: ['Bangers']
+        //        }
+        //    }
+        //}
+        //this.load.webFont(config);
         this.load.on('webfontactive', function (fileObj, familyName) {
             console.log('font-active: ' + familyName)
         });

@@ -492,7 +492,7 @@
         }, 
         {
             "location": "/webfontloaderplugin/index.html", 
-            "text": "Introduction\n\n\nLoad web font by \ngoogle webfont loader\n in preload stage.\n\n\n\n\nAuthor: Rex\n\n\nCustomize File of loader\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nLoad webfont\n\n\nIn preload stage:\n\n\nthis\n.\nload\n.\nwebFont\n(\nbangers\n,\n \n{\n\n    \ngoogle\n:\n \n{\n\n        \nfamilies\n:\n \n[\nBangers\n]\n\n    \n}\n\n\n});\n\n\n\n\n\nEvents\n\n\n\n\n\n\nfontactive\n event\n\n\nthis\n.\nload\n.\non\n(\nwebfontactive\n,\n \nfunction\n(\nfileObj\n,\n \nfamilyName\n){});\n\n\n\n\n\n\n\n\n\nfontinactive\n event\n\n\nthis\n.\nload\n.\non\n(\nwebfontinactive\n,\n \nfunction\n(\nfileObj\n,\n \nfamilyName\n){});", 
+            "text": "Introduction\n\n\nLoad web font by \ngoogle webfont loader\n in preload stage.\n\n\n\n\nAuthor: Rex\n\n\nCustomize File of loader\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nLoad webfont\n\n\nIn preload stage:\n\n\nthis\n.\nload\n.\nwebFont\n(\nbangers\n,\n \n{\n\n    \ngoogle\n:\n \n{\n\n        \nfamilies\n:\n \n[\nBangers\n]\n\n    \n}\n\n\n});\n\n\n\n\n\nload webfont from object\n\n\nvar\n \nobj\n \n=\n \n{\n\n    \nkey\n:\n \nbangers\n,\n\n    \nconfig\n:\n \n{\n\n        \ngoogle\n:\n \n{\n\n            \nfamilies\n:\n \n[\nBangers\n]\n\n        \n}\n\n    \n}\n\n\n};\n\n\nthis\n.\nload\n.\nwebFont\n(\nobj\n);\n\n\n\n\n\nEvents\n\n\n\n\n\n\nfontactive\n event\n\n\nthis\n.\nload\n.\non\n(\nwebfontactive\n,\n \nfunction\n(\nfileObj\n,\n \nfamilyName\n){});\n\n\n\n\n\n\n\n\n\nfontinactive\n event\n\n\nthis\n.\nload\n.\non\n(\nwebfontinactive\n,\n \nfunction\n(\nfileObj\n,\n \nfamilyName\n){});", 
             "title": "Webfont loader"
         }, 
         {
@@ -512,7 +512,7 @@
         }, 
         {
             "location": "/webfontloaderplugin/index.html#load-webfont", 
-            "text": "In preload stage:  this . load . webFont ( bangers ,   { \n     google :   { \n         families :   [ Bangers ] \n     }  });", 
+            "text": "In preload stage:  this . load . webFont ( bangers ,   { \n     google :   { \n         families :   [ Bangers ] \n     }  });   load webfont from object  var   obj   =   { \n     key :   bangers , \n     config :   { \n         google :   { \n             families :   [ Bangers ] \n         } \n     }  };  this . load . webFont ( obj );", 
             "title": "Load webfont"
         }, 
         {
