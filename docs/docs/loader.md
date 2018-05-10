@@ -10,6 +10,7 @@ Load assets, built-in object of phaser.
 
 ```javascript
 scene.load.image(key, url);
+// scene.load.image(config); // config: {key, url}
 ```
 
 Loader in preload stage will start loading automatically by scene.
@@ -18,6 +19,7 @@ Loader in preload stage will start loading automatically by scene.
 
 ```javascript
 scene.load.image(key, url);   // add task
+// scene.load.image(config); // config: {key, url}
 scene.load.once('complete', callback);  // add callback of 'complete' event
 scene.load.start();                     // start loading
 ```
@@ -74,6 +76,7 @@ scene.load.start();                     // start loading
 
 ```javascript
 scene.load.image(key, url);  // image
+// scene.load.image(config); // config: {key, url}
 scene.load.svg(key, url);    // image in svg format
 scene.load.html(key, url, width, height);  // image in html format
 ```
@@ -243,7 +246,8 @@ var data = cache.get(key);
 #### Binary
 
 ```javascript
-scene.load.binary(key, url);
+scene.load.binary(key, url, dataType);  // dataType: Uint8Array
+// scene.load.binary(config); // config: {key, url, dataType}
 ```
 
 Get data from cache
@@ -259,16 +263,78 @@ var data = cache.get(key);
 scene.load.plugin(key, url);
 ```
 
+#### File pack
+
+Load files in JSON format.
+
+```javascript
+scene.load.pack(key, url, dataKey);
+```
+
+JSON pack file:
+
+```javascript
+{
+    'dataKey': {
+        // "prefix": "...",          // optional, extend key by prefix
+        // "path": "...",            // optional, extend url by path
+        // "defaultType": "image",   // optional, default file type
+        'files': [ 
+            {
+                'type': 'image',
+                'key': '...',
+                'url': '...'
+            },
+            {
+                'type': 'image',
+                'key': '...',
+                'url': '...'
+            }            
+            // ...
+        ]
+    },
+
+    'node0': {
+        'node1': {
+            'node2': {
+                'files': [
+                    // ....
+                ]
+            }
+        }
+    }
+    // dataKey: 'node0.node1.node2'
+}
+```
+
+File type:
+
+- `animationJSON`
+- `audio`
+- `binary`
+- `glsl`
+- `html`
+- `image`
+- `json`
+- `script`
+- `spritesheet`
+- `svg`
+- `text`
+- `tilemapCSV`
+- `tilemapJSON`
+- `xml`
+
+
 ### Release data
 
-```javascritp
+```javascript
 var cache = scene.cache.text;
 cache.remove(key);
 ```
 
 ### Data in cache
 
-```javascritp
+```javascript
 var cache = scene.cache.text;
 var hasData = cache.has(key);
 ```
