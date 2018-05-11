@@ -25,7 +25,7 @@ scene.load.tilemapCSV(key, url);          // CSV
     var tileset = map.addTilesetImage(tilesetName, key); // key: texture key
     // var tileset = map.addTilesetImage(tilesetName);  // key = tilesetName
     ```
-3. create layer object to render tile image
+3. create layer object to render tile image, a tile map object could have many layers
     - static
         ```javascript
         var layer = map.createStaticLayer(layerID, tileset);
@@ -38,3 +38,24 @@ scene.load.tilemapCSV(key, url);          // CSV
         ```javascript
         var layer = map.createBlankDynamicLayer(layerID, tileset);
         ```
+
+### Collision
+
+#### Enable collision
+
+```javascript
+map.setCollision(index);   // indexes: tile index
+map.setCollision(indexes); // indexes: an array of tile index
+map.setCollisionBetween(start, stop); // indexes from `start` to `stop`
+map.setCollisionByExclusion(indexes); // indexes: an array of tile index
+map.setCollisionByProperty({key:value});  // enable collision if value of tile property 'key' is equal to 'value'
+```
+
+#### Disable collision
+
+```javascript
+map.setCollision(index, false);
+map.setCollision(indexes, false);
+map.setCollisionBetween(start, stop, false);
+map.setCollisionByProperty({key:value}, false);
+```
