@@ -33,6 +33,26 @@ this.load.webFont({
 });
 ```
 
+or load font in pack
+
+```javascript
+var sceneConfig = {
+    key: '...',
+    pack: {
+        files: [{
+                type: 'webFont',
+                key: 'webfont',
+                config: {
+                    google: {
+                        families: ['Bangers']
+                    }
+                }
+            }
+        ]
+    }
+};
+```
+
 ### Events
 
 - `fontactive` event
