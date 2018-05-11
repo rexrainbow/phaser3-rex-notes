@@ -4,8 +4,15 @@ var HtmlWebpackPlugin = require('html-webpack-plugin')
 var BrowserSyncPlugin = require('browser-sync-webpack-plugin')
 
 // Phaser webpack config
-var phaserModule = path.join(__dirname, '/node_modules/phaser/')
-var phaser = path.join(phaserModule, 'src/phaser.js')
+var phaser
+var testMode = process.env.testmode || false;
+if (!testMode) {
+    var phaserModule = path.join(__dirname, '/node_modules/phaser/')
+    phaser = path.join(phaserModule, 'src/phaser.js')
+} else {
+    var phaserModule = path.join(__dirname, '/../rex-phaser/')
+    phaser = path.join(phaserModule, 'build/phaser.js')
+}
 
 var definePlugin = new webpack.DefinePlugin({
     __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV || 'true')),
