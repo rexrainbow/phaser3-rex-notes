@@ -586,10 +586,46 @@
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-5" type="checkbox" id="nav-5-5">
     
     <label class="md-nav__link" for="nav-5-5">
-      Container
+      Tile map
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
       <label class="md-nav__title" for="nav-5-5">
+        Tile map
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tilemap/index.html" title="Tile map" class="md-nav__link">
+      Tile map
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-6" type="checkbox" id="nav-5-6">
+    
+    <label class="md-nav__link" for="nav-5-6">
+      Container
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-6">
         Container
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1185,8 +1221,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#shuffle" title="Shuffle" class="md-nav__link">
-    Shuffle
+  <a href="#get-random-item" title="Get random item" class="md-nav__link">
+    Get random item
   </a>
   
 </li>
@@ -1194,6 +1230,13 @@
           <li class="md-nav__item">
   <a href="#remove-random-item" title="Remove random item" class="md-nav__link">
     Remove random item
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shuffle" title="Shuffle" class="md-nav__link">
+    Shuffle
   </a>
   
 </li>
@@ -1356,8 +1399,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#shuffle" title="Shuffle" class="md-nav__link">
-    Shuffle
+  <a href="#get-random-item" title="Get random item" class="md-nav__link">
+    Get random item
   </a>
   
 </li>
@@ -1365,6 +1408,13 @@
           <li class="md-nav__item">
   <a href="#remove-random-item" title="Remove random item" class="md-nav__link">
     Remove random item
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shuffle" title="Shuffle" class="md-nav__link">
+    Shuffle
   </a>
   
 </li>
@@ -1408,12 +1458,16 @@
 <span class="c1">// var vec = Phaser.Math.RandomXY(vec, scale);</span>
 </pre></div>
 
-<h3 id="shuffle">Shuffle<a class="headerlink" href="#shuffle" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Utils</span><span class="p">.</span><span class="nb">Array</span><span class="p">.</span><span class="nx">Shuffle</span><span class="p">(</span><span class="nx">arr</span><span class="p">);</span>
+<h3 id="get-random-item">Get random item<a class="headerlink" href="#get-random-item" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Utils</span><span class="p">.</span><span class="nb">Array</span><span class="p">.</span><span class="nx">GetRandom</span><span class="p">(</span><span class="nx">array</span><span class="p">,</span> <span class="nx">startIndex</span><span class="p">,</span> <span class="nx">length</span><span class="p">);</span>
 </pre></div>
 
 <h3 id="remove-random-item">Remove random item<a class="headerlink" href="#remove-random-item" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Utils</span><span class="p">.</span><span class="nb">Array</span><span class="p">.</span><span class="nx">RemoveRandomElement</span><span class="p">(</span><span class="nx">arr</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Utils</span><span class="p">.</span><span class="nb">Array</span><span class="p">.</span><span class="nx">RemoveRandomElement</span><span class="p">(</span><span class="nx">array</span><span class="p">);</span>
+</pre></div>
+
+<h3 id="shuffle">Shuffle<a class="headerlink" href="#shuffle" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Utils</span><span class="p">.</span><span class="nb">Array</span><span class="p">.</span><span class="nx">Shuffle</span><span class="p">(</span><span class="nx">array</span><span class="p">);</span>
 </pre></div>
                 
                   

@@ -656,10 +656,46 @@
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-5" type="checkbox" id="nav-5-5">
     
     <label class="md-nav__link" for="nav-5-5">
-      Container
+      Tile map
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
       <label class="md-nav__title" for="nav-5-5">
+        Tile map
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tilemap/index.html" title="Tile map" class="md-nav__link">
+      Tile map
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-6" type="checkbox" id="nav-5-6">
+    
+    <label class="md-nav__link" for="nav-5-6">
+      Container
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-6">
         Container
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1401,6 +1437,24 @@
         <span class="nx">families</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;Bangers&#39;</span><span class="p">]</span>
     <span class="p">}</span>
 <span class="p">});</span>
+</pre></div>
+
+<p>or load font in pack</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">sceneConfig</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
+    <span class="nx">pack</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">files</span><span class="o">:</span> <span class="p">[{</span>
+                <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;webFont&#39;</span><span class="p">,</span>
+                <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;webfont&#39;</span><span class="p">,</span>
+                <span class="nx">config</span><span class="o">:</span> <span class="p">{</span>
+                    <span class="nx">google</span><span class="o">:</span> <span class="p">{</span>
+                        <span class="nx">families</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;Bangers&#39;</span><span class="p">]</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">};</span>
 </pre></div>
 
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>

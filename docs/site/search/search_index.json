@@ -492,7 +492,7 @@
         }, 
         {
             "location": "/webfontloaderplugin/index.html", 
-            "text": "Introduction\n\n\nLoad web font by \ngoogle webfont loader\n in preload stage.\n\n\n\n\nAuthor: Rex\n\n\nCustomize File of loader\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nLoad webfont\n\n\nIn preload stage:\n\n\nthis\n.\nload\n.\nwebFont\n(\nwebfont\n,\n \n{\n\n    \ngoogle\n:\n \n{\n\n        \nfamilies\n:\n \n[\nBangers\n]\n\n    \n}\n\n\n});\n\n\n\n\n\nor\n\n\nthis\n.\nload\n.\nwebFont\n({\n\n    \ngoogle\n:\n \n{\n\n        \nfamilies\n:\n \n[\nBangers\n]\n\n    \n}\n\n\n});\n\n\n\n\n\nEvents\n\n\n\n\n\n\nfontactive\n event\n\n\nthis\n.\nload\n.\non\n(\nwebfontactive\n,\n \nfunction\n(\nfileObj\n,\n \nfamilyName\n){});\n\n\n\n\n\n\n\n\n\nfontinactive\n event\n\n\nthis\n.\nload\n.\non\n(\nwebfontinactive\n,\n \nfunction\n(\nfileObj\n,\n \nfamilyName\n){});", 
+            "text": "Introduction\n\n\nLoad web font by \ngoogle webfont loader\n in preload stage.\n\n\n\n\nAuthor: Rex\n\n\nCustomize File of loader\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nLoad webfont\n\n\nIn preload stage:\n\n\nthis\n.\nload\n.\nwebFont\n(\nwebfont\n,\n \n{\n\n    \ngoogle\n:\n \n{\n\n        \nfamilies\n:\n \n[\nBangers\n]\n\n    \n}\n\n\n});\n\n\n\n\n\nor\n\n\nthis\n.\nload\n.\nwebFont\n({\n\n    \ngoogle\n:\n \n{\n\n        \nfamilies\n:\n \n[\nBangers\n]\n\n    \n}\n\n\n});\n\n\n\n\n\nor load font in pack\n\n\nvar\n \nsceneConfig\n \n=\n \n{\n\n    \nkey\n:\n \n...\n,\n\n    \npack\n:\n \n{\n\n        \nfiles\n:\n \n[{\n\n                \ntype\n:\n \nwebFont\n,\n\n                \nkey\n:\n \nwebfont\n,\n\n                \nconfig\n:\n \n{\n\n                    \ngoogle\n:\n \n{\n\n                        \nfamilies\n:\n \n[\nBangers\n]\n\n                    \n}\n\n                \n}\n\n            \n}\n\n        \n]\n\n    \n}\n\n\n};\n\n\n\n\n\nEvents\n\n\n\n\n\n\nfontactive\n event\n\n\nthis\n.\nload\n.\non\n(\nwebfontactive\n,\n \nfunction\n(\nfileObj\n,\n \nfamilyName\n){});\n\n\n\n\n\n\n\n\n\nfontinactive\n event\n\n\nthis\n.\nload\n.\non\n(\nwebfontinactive\n,\n \nfunction\n(\nfileObj\n,\n \nfamilyName\n){});", 
             "title": "Webfont loader"
         }, 
         {
@@ -512,7 +512,7 @@
         }, 
         {
             "location": "/webfontloaderplugin/index.html#load-webfont", 
-            "text": "In preload stage:  this . load . webFont ( webfont ,   { \n     google :   { \n         families :   [ Bangers ] \n     }  });   or  this . load . webFont ({ \n     google :   { \n         families :   [ Bangers ] \n     }  });", 
+            "text": "In preload stage:  this . load . webFont ( webfont ,   { \n     google :   { \n         families :   [ Bangers ] \n     }  });   or  this . load . webFont ({ \n     google :   { \n         families :   [ Bangers ] \n     }  });   or load font in pack  var   sceneConfig   =   { \n     key :   ... , \n     pack :   { \n         files :   [{ \n                 type :   webFont , \n                 key :   webfont , \n                 config :   { \n                     google :   { \n                         families :   [ Bangers ] \n                     } \n                 } \n             } \n         ] \n     }  };", 
             "title": "Load webfont"
         }, 
         {
@@ -1154,6 +1154,171 @@
             "location": "/canvasplugin/index.html#compare-with-graphics-object", 
             "text": "Drawing method   This canvas object draws stuff on canvas in WEBGL or CANVAS render mode.    Graphics object draws stuff on webgl render pipeline n WEBGL render mode.     Size   This canvas object has size (width, height) and origin.    Graphics object does not have size and origin.", 
             "title": "Compare with Graphics object"
+        }, 
+        {
+            "location": "/tilemap/index.html", 
+            "text": "Introduction\n\n\nDisplay of tiles map, built-in game object of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nLoad tile map\n\n\nscene\n.\nload\n.\ntilemapWeltmeister\n(\nkey\n,\n \nurl\n);\n  \n// JSON\n\n\nscene\n.\nload\n.\ntilemapCSV\n(\nkey\n,\n \nurl\n);\n          \n// CSV\n\n\n\n\n\nAdd tile map object\n\n\n\n\nCreate tile map\n\n\nCreate map from tiled\n    \nvar\n \nmap\n \n=\n \nscene\n.\nadd\n.\ntilemap\n(\nkey\n);\n\n\n// var map = this.make.tilemap({ key: \nmap\n });\n\n\n\n\nCreate map from 2d array\n    \nvar\n \nconfig\n \n=\n \n{\n\n    \ndata\n:\n \ntileIdxArray\n,\n  \n// [ [], [], ... ]\n\n    \ntileWidth\n:\n \n32\n,\n\n    \ntileHeight\n:\n \n32\n,\n\n    \nwidth\n:\n \n10\n,\n\n    \nheight\n:\n \n10\n\n\n}\n\n\nvar\n \nmap\n \n=\n \nthis\n.\nmake\n.\ntilemap\n(\nconfig\n);\n\n\n\n\nCreate map from csv\n    \nvar\n \nconfig\n \n=\n \n{\n\n    \nkey\n:\n \nmap\n,\n     \n// csv file\n\n    \ntileWidth\n:\n \n32\n,\n\n    \ntileHeight\n:\n \n32\n\n\n}\n\n\nvar\n \nmap\n \n=\n \nthis\n.\nmake\n.\ntilemap\n(\nconfig\n);\n\n\n\n\n\n\n\n\nAdd tile set image\n    \nvar\n \ntileset\n \n=\n \nmap\n.\naddTilesetImage\n(\ntilesetName\n,\n \nkey\n);\n \n// key: texture key\n\n\n// var tileset = map.addTilesetImage(tilesetName);  // key = tilesetName\n\n\n// var tileset = map.addTilesetImage(tilesetName, key, tileWidth, tileHeight, tileMargin, tileSpacing, gid);\n\n\n\n\nCreate layer object to render tile image, a tile map object could have many layers. Layer object is a kind of game object.\n\n\nStatic\n    \nvar\n \nlayer\n \n=\n \nmap\n.\ncreateStaticLayer\n(\nlayerID\n,\n \ntileset\n);\n\n\n// var layer = map.createStaticLayer(layerID, tileset, x, y); // x, y : offset in pxiels\n\n\n\n\nDynamic\n    \nvar\n \nlayer\n \n=\n \nmap\n.\ncreateDynamicLayer\n(\nlayerID\n,\n \ntileset\n);\n\n\n// var layer = map.createDynamicLayer(layerID, tileset, x, y); // x, y : offset in pxiels\n\n\n\n\nBlank dynamic\n    \nvar\n \nlayer\n \n=\n \nmap\n.\ncreateBlankDynamicLayer\n(\nlayerID\n,\n \ntileset\n);\n\n\n// var layer = map.createBlankDynamicLayer(layerID, tileset, x, y); // x, y : offset in pxiels\n\n\n\n\n\n\n\n\nCreate sprite objects with tile ID (optional)\n    \nvar\n \nsprites\n \n=\n \nmap\n.\ncreateFromObjects\n(\nname\n,\n \nid\n,\n \nspriteConfig\n);\n\n\n// var sprites = map.createFromObjects(name, id, spriteConfig, scene);\n\n\n\n\nname: name of the object layer\n\n\nid: gid (number), or id (number), or name (string)\n\n\nspriteConfig: The config object to pass into the Sprite creator (i.e. \nscene.make.sprite\n). Extend spriteConfig with properties of object (\ntype\n, \nx\n, \ny\n, \nrotation\n, \nvisible\n, \nwidth\n, \nheight\n, ... etc)\n\n\n\n\n\n\n\n\nMap\n\n\nSelect current layer\n\n\nmap\n.\nsetLayer\n(\nlayer\n);\n  \n// layer name, layer index\n\n\n// map.layer = layer;\n\n\n\n\n\nSet tile size\n\n\nmap\n.\nsetBaseTileSize\n(\ntileWidth\n,\n \ntileHeight\n);\n\n\n\n\n\nDraw on graphics\n\n\nvar\n \nstyleConfig\n \n=\n \n{\n\n    \ntileColor\n:\n \nnew\n \nPhaser\n.\nDisplay\n.\nColor\n(\n105\n,\n \n210\n,\n \n231\n,\n \n150\n),\n         \n// null\n\n    \ncollidingTileColor\n:\n \nnew\n \nPhaser\n.\nDisplay\n.\nColor\n(\n243\n,\n \n134\n,\n \n48\n,\n \n200\n),\n \n// null\n\n    \nfaceColor\n:\n \nnew\n \nPhaser\n.\nDisplay\n.\nColor\n(\n40\n,\n \n39\n,\n \n37\n,\n \n150\n)\n             \n// null\n\n\n}\n\n\nmap\n.\nrenderDebug\n(\ngraphics\n,\n \nstyleConfig\n);\n\n\n// map.renderDebug(graphics, styleConfig, layer);\n\n\n\n\n\nTile\n\n\nGet tile\n\n\nvar\n \ntile\n \n=\n \nmap\n.\ngetTileAt\n(\ntileX\n,\n \ntileY\n);\n\n\n// var tile = map.getTileAt(tileX, tileY, true);  // return a Tile object with an index of -1 for empty tile\n\n\n\n\n\nGet tiles within\n\n\nvar\n \ntiles\n \n=\n \nmap\n.\ngetTilesWithin\n(\ntileX\n,\n \ntileY\n,\n \nwidth\n,\n \nheight\n);\n\n\n\n\n\nvar\n \nfilteringOptions\n \n=\n \n{\n\n    \n// isNotEmpty: false,\n\n    \n// isColliding: false,\n\n    \n// hasInterestingFace: false\n\n\n};\n\n\nvar\n \ntiles\n \n=\n \nmap\n.\ngetTilesWithin\n(\ntileX\n,\n \ntileY\n,\n \nwidth\n,\n \nheight\n,\n \nfilteringOptions\n);\n\n\n\n\n\nGet tiles within world XY\n\n\nvar\n \ntiles\n \n=\n \nmap\n.\ngetTilesWithinWorldXY\n(\nworldX\n,\n \nworldY\n,\n \nwidth\n,\n \nheight\n);\n\n\n// var tiles = map.getTilesWithinWorldXY(worldX, worldY, width, height, filteringOptions, camera, layer);\n\n\n\n\n\nGet tiles within shape\n\n\nvat\n \ntiles\n \n=\n \nmap\n.\ngetTilesWithinShape\n(\nshape\n);\n\n\n// vat tiles = map.getTilesWithinShape(shape, filteringOptions, camera, layer);\n\n\n\n\n\nShape:\n\n\n\n\nnew Phaser.Geom.Rectangle(x0, y0, width, height)\n\n\nnew Phaser.Geom.Line(x0, y0, x1, y1)\n\n\nnew Phaser.Geom.Circle(x, y, radius)\n\n\nnew Phaser.Geom.Triangle(x0, y0, x1, y1, x2, y2)\n\n\n\n\nFor each tile in layer\n\n\nvar\n \ncallback\n \n=\n \nfunction\n \n(\ntile\n)\n \n{\n \n/* ... */\n};\n\n\nmap\n.\nforEachTile\n(\ncallback\n,\n \ncontext\n);\n\n\n// map.forEachTile(callback, context, tileX, tileY, width, height, filteringOptions);\n\n\n\n\n\nvar\n \ncallback\n \n=\n \nfunction\n \n(\ntile\n)\n \n{\n \n/* ... */\n};\n\n\nlayer\n.\nforEachTile\n(\ncallback\n,\n \ncontext\n);\n\n\n// layer.forEachTile(callback, context, tileX, tileY, width, height, filteringOptions);\n\n\n\n\n\nTiled index\n\n\nvar\n \nindex\n \n=\n \ntile\n.\nindex\n;\n\n\n\n\n\ntile\n.\nindex\n \n=\n \nindex\n;\n\n\n\n\n\nProperties\n\n\nvar\n \nproperties\n \n=\n \ntile\n.\nproperties\n;\n  \n// object or null\n\n\nvar\n \nvalue\n \n=\n \nproperties\n[\nkey\n];\n\n\n\n\n\ntile\n.\nproperties\n[\nkey\n]\n \n=\n \nvalue\n;\n\n\n\n\n\nTile at world XY\n\n\nWorld XY at map\n\n\nvar\n \nhasTile\n \n=\n \nmap\n.\nhasTileAtWorldXY\n(\nworldX\n,\n \nworldY\n);\n  \n// true/false\n\n\n// hasTile = map.hasTileAtWorldXY(worldX, worldY, camera, layer);\n\n\n\n\n\nXY at layer\n\n\nvar\n \nhasTile\n \n=\n \nlayer\n.\nhasTileAtWorldXY\n(\nworldX\n,\n \nworldY\n);\n  \n// true/false\n\n\n// hasTile = layer.hasTileAtWorldXY(worldX, worldY, camera);\n\n\n\n\n\nCollision\n\n\nEnable collision\n\n\nmap\n.\nsetCollision\n(\nindex\n);\n   \n// indexes: tile index\n\n\nmap\n.\nsetCollision\n(\nindexes\n);\n \n// indexes: an array of tile index\n\n\nmap\n.\nsetCollisionBetween\n(\nstart\n,\n \nstop\n);\n \n// indexes from `start` to `stop`\n\n\nmap\n.\nsetCollisionByExclusion\n(\nindexes\n);\n \n// indexes: an array of tile index\n\n\nmap\n.\nsetCollisionByProperty\n({\nkey\n:\nvalue\n});\n  \n// enable collision if value of tile property \nkey\n is equal to \nvalue\n\n\nmap\n.\nsetCollisionFromCollisionGroup\n();\n  \n// set by collision group data in tileset collision editor\n\n\n\n\n\nCollision editor\n\n\nDisable collision\n\n\nmap\n.\nsetCollision\n(\nindex\n,\n \nfalse\n);\n\n\nmap\n.\nsetCollision\n(\nindexes\n,\n \nfalse\n);\n\n\nmap\n.\nsetCollisionBetween\n(\nstart\n,\n \nstop\n,\n \nfalse\n);\n\n\nmap\n.\nsetCollisionByProperty\n({\nkey\n:\nvalue\n},\n \nfalse\n);\n\n\nmap\n.\nsetCollisionFromCollisionGroup\n(\nfalse\n);\n\n\n\n\n\nTile set\n\n\nGet collision group\n\n\nvar\n \ncollisionGroup\n \n=\n \ntileset\n.\ngetTileCollisionGroup\n(\ntile\n.\nindex\n);\n \n// array of collision shapes, or null\n\n\n\n\n\nTypes of collision shape (\ncollisionGroup.objects\n)\n\n\n\n\nobject.rectangle (object.x, object.y, object.width, object.height)\n\n\nobject.ellipse (object.x, object.y, object.width, object.height)\n\n\nobject.polygon (object.x, object.y, [{x,y}, {x,y}, ...])\n\n\nobject.polyline (object.x, object.y, [{x,y}, {x,y}, ...])\n\n\n\n\nChange texture of tileset\n\n\nvar\n \ntexture\n \n=\n \nscene\n.\nsys\n.\ntextures\n.\nget\n(\nkey\n);\n\n\ntileset\n.\nsetImage\n(\ntexture\n);\n\n\n\n\n\nDynamic layer\n\n\nFill tiles\n\n\nmap\n.\nfill\n(\nindex\n);\n\n\n// map.fill(index, tileX, tileY, width, height);\n\n\n\n\n\nlayer\n.\nfill\n(\nindex\n);\n\n\n// layer.fill(index, tileX, tileY, width, height);\n\n\n\n\n\nRandomize\n\n\nmap\n.\nrandomize\n(\ntileX\n,\n \ntileY\n,\n \nwidth\n,\n \nheight\n,\n \nindexes\n);\n \n// indexes: array of tile index\n\n\n\n\n\nlayer\n.\nrandomize\n(\ntileX\n,\n \ntileY\n,\n \nwidth\n,\n \nheight\n,\n \nindexes\n);\n\n\n\n\n\nvar\n \nweightedIndexes\n \n=\n \n[\n\n    \n{\n \nindex\n:\n \n0\n,\n \nweight\n:\n \n4\n \n},\n\n    \n{\n \nindex\n:\n \n[\n0\n,\n \n1\n],\n \nweight\n:\n \n4\n \n}\n\n\n]\n\n\nmap\n.\nweightedRandomize\n(\ntileX\n,\n \ntileY\n,\n \nwidth\n,\n \nheight\n,\n \nweightedIndexes\n);\n \n// weightedIndexes: [{index, weight}, ...]\n\n\n\n\n\nCopy tiles\n\n\nmap\n.\ncopy\n(\nsrcTileX\n,\n \nsrcTileY\n,\n \nwidth\n,\n \nheight\n,\n \ndestTileX\n,\n \ndestTileY\n);\n \n// indexes: array of tile index\n\n\n\n\n\nPut tile at\n\n\nmap\n.\nputTileAt\n(\ntile\n,\n \ntileX\n,\n \ntileY\n);\n  \n// tile: Tile object or tile index\n\n\n\n\n\nmap\n.\nputTilesAt\n(\ntilesArray\n,\n \ntileX\n,\n \ntileY\n);\n  \n// tilesArray: 1d/2d array of Tile object or tile index\n\n\n\n\n\nReplace tiles\n\n\nmap\n.\nreplaceByIndex\n(\nfindIndex\n,\n \nnewIndex\n);\n\n\n// map.replaceByIndex(findIndex, newIndex, tileX, tileY, width, height, layer);\n\n\n\n\n\nSwap tiles\n\n\nmap\n.\nreplaceByIndex\n(\nindexA\n,\n \nindexB\n);\n\n\n// map.replaceByIndex(indexA, indexB, tileX, tileY, width, height, layer);\n\n\n\n\n\nShuffle tiles\n\n\nmap\n.\nshuffle\n();\n\n\n// map.shuffle(tileX, tileY, width, height, layer);\n\n\n\n\n\nConvert to static layer\n\n\nstaticLayer\n \n=\n \nmap\n.\nconvertLayerToStatic\n(\ndynamicLayer\n);\n\n\n\n\n\ndynamicLayer will be destroyed.", 
+            "title": "Tile map"
+        }, 
+        {
+            "location": "/tilemap/index.html#introduction", 
+            "text": "Display of tiles map, built-in game object of phaser.   Author: Richard Davey", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/tilemap/index.html#usage", 
+            "text": "", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/tilemap/index.html#load-tile-map", 
+            "text": "scene . load . tilemapWeltmeister ( key ,   url );    // JSON  scene . load . tilemapCSV ( key ,   url );            // CSV", 
+            "title": "Load tile map"
+        }, 
+        {
+            "location": "/tilemap/index.html#add-tile-map-object", 
+            "text": "Create tile map  Create map from tiled\n     var   map   =   scene . add . tilemap ( key );  // var map = this.make.tilemap({ key:  map  });   Create map from 2d array\n     var   config   =   { \n     data :   tileIdxArray ,    // [ [], [], ... ] \n     tileWidth :   32 , \n     tileHeight :   32 , \n     width :   10 , \n     height :   10  }  var   map   =   this . make . tilemap ( config );   Create map from csv\n     var   config   =   { \n     key :   map ,       // csv file \n     tileWidth :   32 , \n     tileHeight :   32  }  var   map   =   this . make . tilemap ( config );     Add tile set image\n     var   tileset   =   map . addTilesetImage ( tilesetName ,   key );   // key: texture key  // var tileset = map.addTilesetImage(tilesetName);  // key = tilesetName  // var tileset = map.addTilesetImage(tilesetName, key, tileWidth, tileHeight, tileMargin, tileSpacing, gid);   Create layer object to render tile image, a tile map object could have many layers. Layer object is a kind of game object.  Static\n     var   layer   =   map . createStaticLayer ( layerID ,   tileset );  // var layer = map.createStaticLayer(layerID, tileset, x, y); // x, y : offset in pxiels   Dynamic\n     var   layer   =   map . createDynamicLayer ( layerID ,   tileset );  // var layer = map.createDynamicLayer(layerID, tileset, x, y); // x, y : offset in pxiels   Blank dynamic\n     var   layer   =   map . createBlankDynamicLayer ( layerID ,   tileset );  // var layer = map.createBlankDynamicLayer(layerID, tileset, x, y); // x, y : offset in pxiels     Create sprite objects with tile ID (optional)\n     var   sprites   =   map . createFromObjects ( name ,   id ,   spriteConfig );  // var sprites = map.createFromObjects(name, id, spriteConfig, scene);   name: name of the object layer  id: gid (number), or id (number), or name (string)  spriteConfig: The config object to pass into the Sprite creator (i.e.  scene.make.sprite ). Extend spriteConfig with properties of object ( type ,  x ,  y ,  rotation ,  visible ,  width ,  height , ... etc)", 
+            "title": "Add tile map object"
+        }, 
+        {
+            "location": "/tilemap/index.html#map", 
+            "text": "", 
+            "title": "Map"
+        }, 
+        {
+            "location": "/tilemap/index.html#select-current-layer", 
+            "text": "map . setLayer ( layer );    // layer name, layer index  // map.layer = layer;", 
+            "title": "Select current layer"
+        }, 
+        {
+            "location": "/tilemap/index.html#set-tile-size", 
+            "text": "map . setBaseTileSize ( tileWidth ,   tileHeight );", 
+            "title": "Set tile size"
+        }, 
+        {
+            "location": "/tilemap/index.html#draw-on-graphics", 
+            "text": "var   styleConfig   =   { \n     tileColor :   new   Phaser . Display . Color ( 105 ,   210 ,   231 ,   150 ),           // null \n     collidingTileColor :   new   Phaser . Display . Color ( 243 ,   134 ,   48 ,   200 ),   // null \n     faceColor :   new   Phaser . Display . Color ( 40 ,   39 ,   37 ,   150 )               // null  }  map . renderDebug ( graphics ,   styleConfig );  // map.renderDebug(graphics, styleConfig, layer);", 
+            "title": "Draw on graphics"
+        }, 
+        {
+            "location": "/tilemap/index.html#tile", 
+            "text": "", 
+            "title": "Tile"
+        }, 
+        {
+            "location": "/tilemap/index.html#get-tile", 
+            "text": "var   tile   =   map . getTileAt ( tileX ,   tileY );  // var tile = map.getTileAt(tileX, tileY, true);  // return a Tile object with an index of -1 for empty tile", 
+            "title": "Get tile"
+        }, 
+        {
+            "location": "/tilemap/index.html#get-tiles-within", 
+            "text": "var   tiles   =   map . getTilesWithin ( tileX ,   tileY ,   width ,   height );   var   filteringOptions   =   { \n     // isNotEmpty: false, \n     // isColliding: false, \n     // hasInterestingFace: false  };  var   tiles   =   map . getTilesWithin ( tileX ,   tileY ,   width ,   height ,   filteringOptions );", 
+            "title": "Get tiles within"
+        }, 
+        {
+            "location": "/tilemap/index.html#get-tiles-within-world-xy", 
+            "text": "var   tiles   =   map . getTilesWithinWorldXY ( worldX ,   worldY ,   width ,   height );  // var tiles = map.getTilesWithinWorldXY(worldX, worldY, width, height, filteringOptions, camera, layer);", 
+            "title": "Get tiles within world XY"
+        }, 
+        {
+            "location": "/tilemap/index.html#get-tiles-within-shape", 
+            "text": "vat   tiles   =   map . getTilesWithinShape ( shape );  // vat tiles = map.getTilesWithinShape(shape, filteringOptions, camera, layer);   Shape:   new Phaser.Geom.Rectangle(x0, y0, width, height)  new Phaser.Geom.Line(x0, y0, x1, y1)  new Phaser.Geom.Circle(x, y, radius)  new Phaser.Geom.Triangle(x0, y0, x1, y1, x2, y2)", 
+            "title": "Get tiles within shape"
+        }, 
+        {
+            "location": "/tilemap/index.html#for-each-tile-in-layer", 
+            "text": "var   callback   =   function   ( tile )   {   /* ... */ };  map . forEachTile ( callback ,   context );  // map.forEachTile(callback, context, tileX, tileY, width, height, filteringOptions);   var   callback   =   function   ( tile )   {   /* ... */ };  layer . forEachTile ( callback ,   context );  // layer.forEachTile(callback, context, tileX, tileY, width, height, filteringOptions);", 
+            "title": "For each tile in layer"
+        }, 
+        {
+            "location": "/tilemap/index.html#tiled-index", 
+            "text": "var   index   =   tile . index ;   tile . index   =   index ;", 
+            "title": "Tiled index"
+        }, 
+        {
+            "location": "/tilemap/index.html#properties", 
+            "text": "var   properties   =   tile . properties ;    // object or null  var   value   =   properties [ key ];   tile . properties [ key ]   =   value ;", 
+            "title": "Properties"
+        }, 
+        {
+            "location": "/tilemap/index.html#tile-at-world-xy", 
+            "text": "World XY at map  var   hasTile   =   map . hasTileAtWorldXY ( worldX ,   worldY );    // true/false  // hasTile = map.hasTileAtWorldXY(worldX, worldY, camera, layer);   XY at layer  var   hasTile   =   layer . hasTileAtWorldXY ( worldX ,   worldY );    // true/false  // hasTile = layer.hasTileAtWorldXY(worldX, worldY, camera);", 
+            "title": "Tile at world XY"
+        }, 
+        {
+            "location": "/tilemap/index.html#collision", 
+            "text": "", 
+            "title": "Collision"
+        }, 
+        {
+            "location": "/tilemap/index.html#enable-collision", 
+            "text": "map . setCollision ( index );     // indexes: tile index  map . setCollision ( indexes );   // indexes: an array of tile index  map . setCollisionBetween ( start ,   stop );   // indexes from `start` to `stop`  map . setCollisionByExclusion ( indexes );   // indexes: an array of tile index  map . setCollisionByProperty ({ key : value });    // enable collision if value of tile property  key  is equal to  value  map . setCollisionFromCollisionGroup ();    // set by collision group data in tileset collision editor   Collision editor", 
+            "title": "Enable collision"
+        }, 
+        {
+            "location": "/tilemap/index.html#disable-collision", 
+            "text": "map . setCollision ( index ,   false );  map . setCollision ( indexes ,   false );  map . setCollisionBetween ( start ,   stop ,   false );  map . setCollisionByProperty ({ key : value },   false );  map . setCollisionFromCollisionGroup ( false );", 
+            "title": "Disable collision"
+        }, 
+        {
+            "location": "/tilemap/index.html#tile-set", 
+            "text": "", 
+            "title": "Tile set"
+        }, 
+        {
+            "location": "/tilemap/index.html#get-collision-group", 
+            "text": "var   collisionGroup   =   tileset . getTileCollisionGroup ( tile . index );   // array of collision shapes, or null   Types of collision shape ( collisionGroup.objects )   object.rectangle (object.x, object.y, object.width, object.height)  object.ellipse (object.x, object.y, object.width, object.height)  object.polygon (object.x, object.y, [{x,y}, {x,y}, ...])  object.polyline (object.x, object.y, [{x,y}, {x,y}, ...])", 
+            "title": "Get collision group"
+        }, 
+        {
+            "location": "/tilemap/index.html#change-texture-of-tileset", 
+            "text": "var   texture   =   scene . sys . textures . get ( key );  tileset . setImage ( texture );", 
+            "title": "Change texture of tileset"
+        }, 
+        {
+            "location": "/tilemap/index.html#dynamic-layer", 
+            "text": "", 
+            "title": "Dynamic layer"
+        }, 
+        {
+            "location": "/tilemap/index.html#fill-tiles", 
+            "text": "map . fill ( index );  // map.fill(index, tileX, tileY, width, height);   layer . fill ( index );  // layer.fill(index, tileX, tileY, width, height);", 
+            "title": "Fill tiles"
+        }, 
+        {
+            "location": "/tilemap/index.html#randomize", 
+            "text": "map . randomize ( tileX ,   tileY ,   width ,   height ,   indexes );   // indexes: array of tile index   layer . randomize ( tileX ,   tileY ,   width ,   height ,   indexes );   var   weightedIndexes   =   [ \n     {   index :   0 ,   weight :   4   }, \n     {   index :   [ 0 ,   1 ],   weight :   4   }  ]  map . weightedRandomize ( tileX ,   tileY ,   width ,   height ,   weightedIndexes );   // weightedIndexes: [{index, weight}, ...]", 
+            "title": "Randomize"
+        }, 
+        {
+            "location": "/tilemap/index.html#copy-tiles", 
+            "text": "map . copy ( srcTileX ,   srcTileY ,   width ,   height ,   destTileX ,   destTileY );   // indexes: array of tile index", 
+            "title": "Copy tiles"
+        }, 
+        {
+            "location": "/tilemap/index.html#put-tile-at", 
+            "text": "map . putTileAt ( tile ,   tileX ,   tileY );    // tile: Tile object or tile index   map . putTilesAt ( tilesArray ,   tileX ,   tileY );    // tilesArray: 1d/2d array of Tile object or tile index", 
+            "title": "Put tile at"
+        }, 
+        {
+            "location": "/tilemap/index.html#replace-tiles", 
+            "text": "map . replaceByIndex ( findIndex ,   newIndex );  // map.replaceByIndex(findIndex, newIndex, tileX, tileY, width, height, layer);", 
+            "title": "Replace tiles"
+        }, 
+        {
+            "location": "/tilemap/index.html#swap-tiles", 
+            "text": "map . replaceByIndex ( indexA ,   indexB );  // map.replaceByIndex(indexA, indexB, tileX, tileY, width, height, layer);", 
+            "title": "Swap tiles"
+        }, 
+        {
+            "location": "/tilemap/index.html#shuffle-tiles", 
+            "text": "map . shuffle ();  // map.shuffle(tileX, tileY, width, height, layer);", 
+            "title": "Shuffle tiles"
+        }, 
+        {
+            "location": "/tilemap/index.html#convert-to-static-layer", 
+            "text": "staticLayer   =   map . convertLayerToStatic ( dynamicLayer );   dynamicLayer will be destroyed.", 
+            "title": "Convert to static layer"
         }, 
         {
             "location": "/container/index.html", 
@@ -2717,7 +2882,7 @@
         }, 
         {
             "location": "/random/index.html", 
-            "text": "Introduction\n\n\nGet random value, built-in methods of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nGet random integer between (min, max)\n\n\nvar\n \nvalue\n \n=\n \nPhaser\n.\nMath\n.\nBetween\n(\nmin\n,\n \nmax\n);\n\n\n\n\n\nGet random vector\n\n\nvar\n \nvec\n \n=\n \nPhaser\n.\nMath\n.\nRandomXY\n(\nvec\n);\n    \n// return vec {x, y}\n\n\n// var vec = Phaser.Math.RandomXY(vec, scale);\n\n\n\n\n\nShuffle\n\n\nvar\n \narr\n \n=\n \nPhaser\n.\nUtils\n.\nArray\n.\nShuffle\n(\narr\n);\n\n\n\n\n\nRemove random item\n\n\nvar\n \nitem\n \n=\n \nPhaser\n.\nUtils\n.\nArray\n.\nRemoveRandomElement\n(\narr\n);", 
+            "text": "Introduction\n\n\nGet random value, built-in methods of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nGet random integer between (min, max)\n\n\nvar\n \nvalue\n \n=\n \nPhaser\n.\nMath\n.\nBetween\n(\nmin\n,\n \nmax\n);\n\n\n\n\n\nGet random vector\n\n\nvar\n \nvec\n \n=\n \nPhaser\n.\nMath\n.\nRandomXY\n(\nvec\n);\n    \n// return vec {x, y}\n\n\n// var vec = Phaser.Math.RandomXY(vec, scale);\n\n\n\n\n\nGet random item\n\n\nvar\n \nitem\n \n=\n \nPhaser\n.\nUtils\n.\nArray\n.\nGetRandom\n(\narray\n,\n \nstartIndex\n,\n \nlength\n);\n\n\n\n\n\nRemove random item\n\n\nvar\n \nitem\n \n=\n \nPhaser\n.\nUtils\n.\nArray\n.\nRemoveRandomElement\n(\narray\n);\n\n\n\n\n\nShuffle\n\n\nvar\n \narr\n \n=\n \nPhaser\n.\nUtils\n.\nArray\n.\nShuffle\n(\narray\n);", 
             "title": "Random number"
         }, 
         {
@@ -2741,14 +2906,19 @@
             "title": "Get random vector"
         }, 
         {
-            "location": "/random/index.html#shuffle", 
-            "text": "var   arr   =   Phaser . Utils . Array . Shuffle ( arr );", 
-            "title": "Shuffle"
+            "location": "/random/index.html#get-random-item", 
+            "text": "var   item   =   Phaser . Utils . Array . GetRandom ( array ,   startIndex ,   length );", 
+            "title": "Get random item"
         }, 
         {
             "location": "/random/index.html#remove-random-item", 
-            "text": "var   item   =   Phaser . Utils . Array . RemoveRandomElement ( arr );", 
+            "text": "var   item   =   Phaser . Utils . Array . RemoveRandomElement ( array );", 
             "title": "Remove random item"
+        }, 
+        {
+            "location": "/random/index.html#shuffle", 
+            "text": "var   arr   =   Phaser . Utils . Array . Shuffle ( array );", 
+            "title": "Shuffle"
         }, 
         {
             "location": "/gashaponplugin/index.html", 

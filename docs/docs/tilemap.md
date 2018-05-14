@@ -15,13 +15,13 @@ scene.load.tilemapCSV(key, url);          // CSV
 
 ### Add tile map object
 
-1. create tile map
-    - create map from tiled
+1. Create tile map
+    - Create map from tiled
         ```javascript
         var map = scene.add.tilemap(key);
         // var map = this.make.tilemap({ key: 'map' });
         ```
-    - create map from 2d array
+    - Create map from 2d array
         ```javascript
         var config = {
             data: tileIdxArray,  // [ [], [], ... ]
@@ -32,7 +32,7 @@ scene.load.tilemapCSV(key, url);          // CSV
         }
         var map = this.make.tilemap(config);
         ```
-    - create map from csv
+    - Create map from csv
         ```javascript
         var config = {
             key: 'map',     // csv file
@@ -41,29 +41,29 @@ scene.load.tilemapCSV(key, url);          // CSV
         }
         var map = this.make.tilemap(config);
         ```
-2. add tile set image
+2. Add tile set image
     ```javascript
     var tileset = map.addTilesetImage(tilesetName, key); // key: texture key
     // var tileset = map.addTilesetImage(tilesetName);  // key = tilesetName
     // var tileset = map.addTilesetImage(tilesetName, key, tileWidth, tileHeight, tileMargin, tileSpacing, gid);
     ```
-3. create layer object to render tile image, a tile map object could have many layers
-    - static
+3. Create layer object to render tile image, a tile map object could have many layers. Layer object is a kind of game object.
+    - Static
         ```javascript
         var layer = map.createStaticLayer(layerID, tileset);
         // var layer = map.createStaticLayer(layerID, tileset, x, y); // x, y : offset in pxiels
         ```
-    - dynamic
+    - Dynamic
         ```javascript
         var layer = map.createDynamicLayer(layerID, tileset);
         // var layer = map.createDynamicLayer(layerID, tileset, x, y); // x, y : offset in pxiels
         ```
-    - blank dynamic
+    - Blank dynamic
         ```javascript
         var layer = map.createBlankDynamicLayer(layerID, tileset);
         // var layer = map.createBlankDynamicLayer(layerID, tileset, x, y); // x, y : offset in pxiels
         ```
-4. create sprite objects with tile ID (optional)
+4. Create sprite objects with tile ID (optional)
     ```javascript
     var sprites = map.createFromObjects(name, id, spriteConfig);
     // var sprites = map.createFromObjects(name, id, spriteConfig, scene);
@@ -72,17 +72,31 @@ scene.load.tilemapCSV(key, url);          // CSV
     - id: gid (number), or id (number), or name (string)
     - spriteConfig: The config object to pass into the Sprite creator (i.e. `scene.make.sprite`). Extend spriteConfig with properties of object (`type`, `x`, `y`, `rotation`, `visible`, `width`, `height`, ... etc)
 
-### Select current layer
+### Map
+
+#### Select current layer
 
 ```javascript
 map.setLayer(layer);  // layer name, layer index
 // map.layer = layer;
 ```
 
-### Set tile size
+#### Set tile size
 
 ```javascript
 map.setBaseTileSize(tileWidth, tileHeight);
+```
+
+#### Draw on graphics
+
+```javascript
+var styleConfig = {
+    tileColor: new Phaser.Display.Color(105, 210, 231, 150),         // null
+    collidingTileColor: new Phaser.Display.Color(243, 134, 48, 200), // null
+    faceColor: new Phaser.Display.Color(40, 39, 37, 150)             // null
+}
+map.renderDebug(graphics, styleConfig);
+// map.renderDebug(graphics, styleConfig, layer);
 ```
 
 ### Tile
@@ -165,19 +179,6 @@ var value = properties[key];
 tile.properties[key] = value;
 ```
 
-#### Get collision group
-
-```javascript
-var collisionGroup = tileset.getTileCollisionGroup(tile.index); // array of collision shapes, or null
-```
-
-Types of collision shape (`collisionGroup.objects`)
-
-- object.rectangle (object.x, object.y, object.width, object.height)
-- object.ellipse (object.x, object.y, object.width, object.height)
-- object.polygon (object.x, object.y, [{x,y}, {x,y}, ...])
-- object.polyline (object.x, object.y, [{x,y}, {x,y}, ...])
-
 #### Tile at world XY
 
 World XY at map
@@ -219,23 +220,26 @@ map.setCollisionByProperty({key:value}, false);
 map.setCollisionFromCollisionGroup(false);
 ```
 
-### Change texture of tileset
+### Tile set
+
+#### Get collision group
+
+```javascript
+var collisionGroup = tileset.getTileCollisionGroup(tile.index); // array of collision shapes, or null
+```
+
+Types of collision shape (`collisionGroup.objects`)
+
+- object.rectangle (object.x, object.y, object.width, object.height)
+- object.ellipse (object.x, object.y, object.width, object.height)
+- object.polygon (object.x, object.y, [{x,y}, {x,y}, ...])
+- object.polyline (object.x, object.y, [{x,y}, {x,y}, ...])
+
+#### Change texture of tileset
 
 ```javascript
 var texture = scene.sys.textures.get(key);
 tileset.setImage(texture);
-```
-
-### Draw on graphics
-
-```javascript
-var styleConfig = {
-    tileColor: new Phaser.Display.Color(105, 210, 231, 150),         // null
-    collidingTileColor: new Phaser.Display.Color(243, 134, 48, 200), // null
-    faceColor: new Phaser.Display.Color(40, 39, 37, 150)             // null
-}
-map.renderDebug(graphics, styleConfig);
-// map.renderDebug(graphics, styleConfig, layer);
 ```
 
 ### Dynamic layer
@@ -286,7 +290,28 @@ map.putTileAt(tile, tileX, tileY);  // tile: Tile object or tile index
 map.putTilesAt(tilesArray, tileX, tileY);  // tilesArray: 1d/2d array of Tile object or tile index
 ```
 
-### Convert to static layer
+#### Replace tiles
+
+```javascript
+map.replaceByIndex(findIndex, newIndex);
+// map.replaceByIndex(findIndex, newIndex, tileX, tileY, width, height, layer);
+```
+
+#### Swap tiles
+
+```javascript
+map.replaceByIndex(indexA, indexB);
+// map.replaceByIndex(indexA, indexB, tileX, tileY, width, height, layer);
+```
+
+#### Shuffle tiles
+
+```javascript
+map.shuffle();
+// map.shuffle(tileX, tileY, width, height, layer);
+```
+
+#### Convert to static layer
 
 ```javascript
 staticLayer = map.convertLayerToStatic(dynamicLayer);
