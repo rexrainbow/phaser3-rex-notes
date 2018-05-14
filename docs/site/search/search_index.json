@@ -2882,7 +2882,7 @@
         }, 
         {
             "location": "/random/index.html", 
-            "text": "Introduction\n\n\nGet random value, built-in methods of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nGet random integer between (min, max)\n\n\nvar\n \nvalue\n \n=\n \nPhaser\n.\nMath\n.\nBetween\n(\nmin\n,\n \nmax\n);\n\n\n\n\n\nGet random vector\n\n\nvar\n \nvec\n \n=\n \nPhaser\n.\nMath\n.\nRandomXY\n(\nvec\n);\n    \n// return vec {x, y}\n\n\n// var vec = Phaser.Math.RandomXY(vec, scale);\n\n\n\n\n\nGet random item\n\n\nvar\n \nitem\n \n=\n \nPhaser\n.\nUtils\n.\nArray\n.\nGetRandom\n(\narray\n,\n \nstartIndex\n,\n \nlength\n);\n\n\n\n\n\nRemove random item\n\n\nvar\n \nitem\n \n=\n \nPhaser\n.\nUtils\n.\nArray\n.\nRemoveRandomElement\n(\narray\n);\n\n\n\n\n\nShuffle\n\n\nvar\n \narr\n \n=\n \nPhaser\n.\nUtils\n.\nArray\n.\nShuffle\n(\narray\n);", 
+            "text": "Introduction\n\n\nGet random value, built-in methods of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nGet random integer between (min, max)\n\n\nvar\n \nvalue\n \n=\n \nPhaser\n.\nMath\n.\nBetween\n(\nmin\n,\n \nmax\n);\n\n\n\n\n\nGet random vector\n\n\nvar\n \nvec\n \n=\n \nPhaser\n.\nMath\n.\nRandomXY\n(\nvec\n);\n    \n// return vec {x, y}\n\n\n// var vec = Phaser.Math.RandomXY(vec, scale);\n\n\n\n\n\nGet random item\n\n\nvar\n \nitem\n \n=\n \nPhaser\n.\nUtils\n.\nArray\n.\nGetRandom\n(\narray\n);\n\n\n// var item = Phaser.Utils.Array.GetRandom(array, startIndex, length);\n\n\n\n\n\nRemove random item\n\n\nvar\n \nitem\n \n=\n \nPhaser\n.\nUtils\n.\nArray\n.\nRemoveRandomElement\n(\narray\n);\n\n\n\n\n\nShuffle\n\n\nvar\n \narr\n \n=\n \nPhaser\n.\nUtils\n.\nArray\n.\nShuffle\n(\narray\n);", 
             "title": "Random number"
         }, 
         {
@@ -2907,7 +2907,7 @@
         }, 
         {
             "location": "/random/index.html#get-random-item", 
-            "text": "var   item   =   Phaser . Utils . Array . GetRandom ( array ,   startIndex ,   length );", 
+            "text": "var   item   =   Phaser . Utils . Array . GetRandom ( array );  // var item = Phaser.Utils.Array.GetRandom(array, startIndex, length);", 
             "title": "Get random item"
         }, 
         {

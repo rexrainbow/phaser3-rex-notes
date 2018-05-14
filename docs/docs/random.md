@@ -22,7 +22,8 @@ var vec = Phaser.Math.RandomXY(vec);    // return vec {x, y}
 ### Get random item
 
 ```javascript
-var item = Phaser.Utils.Array.GetRandom(array, startIndex, length);
+var item = Phaser.Utils.Array.GetRandom(array);
+// var item = Phaser.Utils.Array.GetRandom(array, startIndex, length);
 ```
 
 ### Remove random item
