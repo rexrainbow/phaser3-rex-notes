@@ -30,6 +30,8 @@ pages:
     - Canvas:
         - Graphics: graphics.md
         - Canvas: canvasplugin.md
+    - Tile map:
+        - Tile map: tilemap.md
     - Container:
         - Container: container.md        
         - Group: group.md

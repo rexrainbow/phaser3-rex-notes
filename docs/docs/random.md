@@ -19,14 +19,20 @@ var vec = Phaser.Math.RandomXY(vec);    // return vec {x, y}
 // var vec = Phaser.Math.RandomXY(vec, scale);
 ```
 
-### Shuffle
+### Get random item
 
 ```javascript
-var arr = Phaser.Utils.Array.Shuffle(arr);
+var item = Phaser.Utils.Array.GetRandom(array, startIndex, length);
 ```
 
 ### Remove random item
 
 ```javascript
-var item = Phaser.Utils.Array.RemoveRandomElement(arr);
+var item = Phaser.Utils.Array.RemoveRandomElement(array);
+```
+
+### Shuffle
+
+```javascript
+var arr = Phaser.Utils.Array.Shuffle(array);
 ```
