@@ -26,8 +26,8 @@ class Demo extends Phaser.Scene {
 
     create() {
         this.add.text(100, 100, 'Hello ', {
-            font: '64px Bangers',
-            fill: '#7744ff'
+            fontFamily: 'Bangers',
+            fontSize: '64px'
         })
     }
 

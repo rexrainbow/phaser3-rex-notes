@@ -29,16 +29,27 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.add.text(100, 100, 'preload stage ', {
-            font: '64px Bangers',
-            fill: '#7744ff'
+        this.add.text(100, 0, 'default font', {
+            fontSize: '60px'
         });
+
+        this.add.text(100, 100, 'preload stage ', {
+            fontFamily: 'Bangers',
+            fontSize: '60px'
+        });
+
+        var config = {
+            google: {
+                families: ['Droid Sans']
+            }
+        };
+        this.load.webFont(config);
     }
 
     create() {
         this.add.text(100, 200, 'create stage ', {
-            font: '64px Bangers',
-            fill: '#7744ff'
+            fontFamily: 'Droid Sans',
+            fontSize: '60px'
         });
 
         this.add.image(700, 500, 'dot').setScale(10);
