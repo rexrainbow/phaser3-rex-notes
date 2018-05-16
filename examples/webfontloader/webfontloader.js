@@ -39,7 +39,14 @@ var config = {
     parent: 'phaser-example',
     width: 800,
     height: 600,
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'WebFontLoader',
+            plugin: WebFontLoaderPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

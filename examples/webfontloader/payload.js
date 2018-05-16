@@ -33,20 +33,10 @@ var sceneConfig = {
     create: create,
     pack: {
         files: [{
-                type: 'webFont',
-                key: 'webfont',
-                config: {
-                    google: {
-                        families: ['Bangers']
-                    }
-                }
-            },
-            {
-                type: 'image',
-                key: 'dot',
-                url: 'assets/images/white-dot.png'
-            }
-        ]
+            type: 'image',
+            key: 'dot',
+            url: 'assets/images/white-dot.png'
+        }]
     }
 };
 var config = {
@@ -54,6 +44,13 @@ var config = {
     parent: 'phaser-example',
     width: 800,
     height: 600,
-    scene: sceneConfig
+    scene: sceneConfig,
+    plugins: {
+        global: [{
+            key: 'WebFontLoader',
+            plugin: WebFontLoaderPlugin,
+            start: true
+        }]
+    }
 };
 var game = new Phaser.Game(config);

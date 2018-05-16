@@ -1,41 +1,37 @@
 'use strict'
 
-const Format = Phaser.Utils.String.Format;
+var preload = function () {
+    var config = {
+        google: {
+            families: ['Bangers']
+        }
+    };
+    this.load.webFont(config);
+};
+var create = function () {
+    this.add.text(100, 200, 'create stage ', {
+        font: '64px Bangers',
+        fill: '#7744ff'
+    });
+};
 
-class Demo extends Phaser.Scene {
-    constructor() {
-        super({
-            key: 'examples'
-        })
-        this.txt;
-        this.music;
+var sceneConfig = {
+    preload: preload,
+    create: create,
+    pack: {
+        files: [{
+            type: 'plugin',
+            key: 'webfontloader-plugin',
+            url: './plugins/dist/webfontloader.js',
+            start: true
+        }]
     }
-
-    preload() {
-        this.load.audio('fate', [
-            'assets/audio/fate.ogg',
-            'assets/audio/fate.mp3',
-        ]);
-    }
-
-    create() {
-        this.txt = this.add.text(0,0, '');
-        this.music = this.sound.add('fate');
-        this.music.play();
-    }
-
-    update() {
-        var s = Format('%1 (%2)', [this.music.playTime, this.music.duration]);
-        this.txt.setText(s);
-    }
-}
-
+};
 var config = {
     type: Phaser.AUTO,
     parent: 'phaser-example',
     width: 800,
     height: 600,
-    scene: Demo
+    scene: sceneConfig
 };
-
 var game = new Phaser.Game(config);
