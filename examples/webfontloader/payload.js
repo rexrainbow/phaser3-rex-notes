@@ -33,10 +33,20 @@ var sceneConfig = {
     create: create,
     pack: {
         files: [{
-            type: 'image',
-            key: 'dot',
-            url: 'assets/images/white-dot.png'
-        }]
+                type: 'webFont',
+                key: 'webfont',
+                config: {
+                    google: {
+                        families: ['Bangers']
+                    }
+                }
+            },
+            {
+                type: 'image',
+                key: 'dot',
+                url: 'assets/images/white-dot.png'
+            }
+        ]
     }
 };
 var config = {
