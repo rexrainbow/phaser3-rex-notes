@@ -31,9 +31,9 @@ module.exports = {
     output: {
         pathinfo: true,
         path: path.resolve(__dirname, './plugins/dist'),
-        filename: '[name].min.js',
+        filename: 'rex[name]plugin.min.js',
         library: {
-            root: 'rex[name]'
+            root: 'rex[name]plugin'
         },
         libraryTarget: 'umd',
         umdNamedDefine: true,
