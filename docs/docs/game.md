@@ -137,8 +137,10 @@ Also fires game.events `destroy` event.
 
 ## Main loop
 
-1.  game.input.update()
-1.  game.sound.update()
+1.  game.events `prestep` event
+    1.  trigger `game.input.update()`
+    1.  trigger `game.sound.update()`
+1.  game.events `step` event
 1.  SceneManager.update, for each active scene
     1.  scene.sys.events `preupdate` event
         1.  TweenManager.preUpdate() to arrange active targets
@@ -148,6 +150,7 @@ Also fires game.events `destroy` event.
         1.  UpdateList.update --> gameObject.preUpdate
     1.  scene.update
     1.  scene.sys.events `postupdate` event
+1.  game.events `poststep` event
 1.  game.renderer.preRender()
 1.  game.events `prerender` event
 1.  SceneManager.render()
