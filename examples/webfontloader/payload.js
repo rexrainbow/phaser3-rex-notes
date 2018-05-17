@@ -17,7 +17,7 @@ var preload = function () {
             families: ['Droid Sans']
         }
     };
-    this.load.webFont(config);
+    this.load.rexWebFont(config);
 };
 var create = function () {
     this.add.text(100, 200, 'create stage ', {
@@ -33,7 +33,7 @@ var sceneConfig = {
     create: create,
     pack: {
         files: [{
-                type: 'webFont',
+                type: 'rexWebFont',
                 key: 'webfont',
                 config: {
                     google: {

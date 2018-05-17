@@ -15,7 +15,7 @@ class Demo extends Phaser.Scene {
                 families: ['Bangers']
             }
         };
-        this.load.webFont(config);
+        this.load.rexWebFont(config);
         this.load.on('webfontactive', function (fileObj, familyName) {
             console.log('font-active: ' + familyName)
         });

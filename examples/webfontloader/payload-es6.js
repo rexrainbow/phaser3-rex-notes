@@ -6,7 +6,7 @@ var sceneConfig = {
     key: 'examples',
     pack: {
         files: [{
-                type: 'webFont',
+                type: 'rexWebFont',
                 key: 'webfont',
                 config: {
                     google: {
@@ -43,7 +43,7 @@ class Demo extends Phaser.Scene {
                 families: ['Droid Sans']
             }
         };
-        this.load.webFont(config);
+        this.load.rexWebFont(config);
     }
 
     create() {
