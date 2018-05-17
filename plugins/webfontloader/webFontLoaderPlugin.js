@@ -8,10 +8,10 @@ class WebFontLoaderPlugin extends Phaser.Plugins.BasePlugin {
     constructor(pluginManager) {
         super(pluginManager);
 
-        pluginManager.registerFileType('rexWebFont', this.load);
+        pluginManager.registerFileType('rexWebFont', this.loadWebFont);
     }
 
-    load(key, config) {
+    loadWebFont(key, config) {
         if (IsPlainObject(key)) {
             config = key;
             if (config.hasOwnProperty('config')) {

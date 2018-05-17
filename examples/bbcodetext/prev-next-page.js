@@ -1,5 +1,5 @@
 'use strict'
-import BBCodeText from './../../plugins/bbcodetext-plugin.js';
+import BBCodeTextPlugin from './../../plugins/bbcodetext-plugin.js';
 import TextPagePlugin from './../../plugins/textpage-plugin.js'
 
 class Demo extends Phaser.Scene {
@@ -62,7 +62,14 @@ var config = {
     parent: 'phaser-example',
     width: 800,
     height: 600,
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'BBCodeTextPlugin',
+            plugin: BBCodeTextPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

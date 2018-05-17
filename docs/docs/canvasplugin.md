@@ -7,9 +7,30 @@ Drawing on [canvas](https://www.w3schools.com/html/html5_canvas.asp).
 
 ## Source code
 
-[Link](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/drag/DragPlugin.js)
+[Link](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/canvas-plugin.js)
 
 ## Usage
+
+### Install plugin
+
+Install plugin in [configuration of game](game.md#configuration)
+
+```javascript
+var config = {
+    // ...
+    plugins: {
+        global: [{
+            key: 'CanvasPlugin',
+            plugin: CanvasPlugin,
+            start: true
+        },
+        // ...
+        ]
+    }
+    // ...
+};
+var game = new Phaser.Game(config);
+```
 
 ### Create instance
 

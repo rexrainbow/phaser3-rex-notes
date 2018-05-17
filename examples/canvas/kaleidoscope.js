@@ -1,6 +1,6 @@
 'use strict'
 
-import Canvas from './../../plugins/canvas-plugin.js'
+import CanvasPlugin from './../../plugins/canvas-plugin.js'
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -8,16 +8,16 @@ class Demo extends Phaser.Scene {
             key: 'examples'
         })
         this.bg;
-        this.canvas;      // canvas object
-        this.imageGroup;  // image group
-        this.btnRun;      // draw to image objects
+        this.canvas; // canvas object
+        this.imageGroup; // image group
+        this.btnRun; // draw to image objects
         this.isDone = false;
         this.hue = 0;
     }
 
-    preload() { }
+    preload() {}
 
-    create() {        
+    create() {
         this.bg = this.add.rexCanvas(300, 350, 600, 600)
             .fill('#050505');
         this.canvas = this.add.rexCanvas(300, 350, 600, 600)
@@ -41,7 +41,9 @@ class Demo extends Phaser.Scene {
             }
         });
 
-        this.btnRun = this.add.text(30, 750, 'Drag above then press here', { fontSize: 22 })
+        this.btnRun = this.add.text(30, 750, 'Drag above then press here', {
+                fontSize: 22
+            })
             .setInteractive()
             .on('pointerdown', this.drawToImages, this);
 
@@ -75,7 +77,9 @@ class Demo extends Phaser.Scene {
     }
 
     drawToImages() {
-        if (this.isDone) { return; }
+        if (this.isDone) {
+            return;
+        }
 
         this.bg.visible = false;
         this.canvas.generateTexture('canvas');
@@ -98,7 +102,14 @@ var config = {
     parent: 'phaser-example',
     width: 600,
     height: 800,
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'CanvasPlugin',
+            plugin: CanvasPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

@@ -1,6 +1,6 @@
 'use strict'
 
-import Canvas from './../../plugins/canvas-plugin.js'
+import CanvasPlugin from './../../plugins/canvas-plugin.js'
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -9,7 +9,7 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() { }
+    preload() {}
 
     create() {
         var canvas = this.add.rexCanvas(300, 300, 200, 200)
@@ -24,7 +24,7 @@ class Demo extends Phaser.Scene {
         this.add.image(100, 100, 'canvas');
     }
 
-    update() { }
+    update() {}
 }
 
 var drawCircle = function (pointer, localX, localY) {
@@ -44,7 +44,14 @@ var config = {
     parent: 'phaser-example',
     width: 800,
     height: 600,
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'CanvasPlugin',
+            plugin: CanvasPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

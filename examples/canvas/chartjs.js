@@ -1,6 +1,6 @@
 'use strict'
 
-import Canvas from './../../plugins/canvas-plugin.js';
+import CanvasPlugin from './../../plugins/canvas-plugin.js'
 import Chart from './../../plugins/utils/chartjs/Chart.js';
 
 class Demo extends Phaser.Scene {
@@ -10,7 +10,7 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() { }
+    preload() {}
 
     create() {
         var canvas = this.add.rexCanvas(0, 0, 800, 600).setOrigin(0);
@@ -51,22 +51,22 @@ class Demo extends Phaser.Scene {
                         }
                     }]
                 },
-                animation: {                                
-                    onProgress: function(animation) {
+                animation: {
+                    onProgress: function (animation) {
                         //console.log(animation.animationObject.currentStep / animation.animationObject.numSteps);
-                        canvas.needRedraw();  // update texture in webgl mode
+                        canvas.needRedraw(); // update texture in webgl mode
                     },
-                    onComplete: function() {
+                    onComplete: function () {
                         //console.log('onComplete');
                     }
                 },
-                responsive: false   // set to false because of this canvas element has no parent node         
+                responsive: false // set to false because of this canvas element has no parent node         
             }
         });
         //console.log(ctx.canvas.toDataURL());
     }
 
-    update() { }
+    update() {}
 }
 
 var config = {
@@ -75,7 +75,14 @@ var config = {
     width: 800,
     height: 600,
     backgroundColor: 0xffffff,
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'CanvasPlugin',
+            plugin: CanvasPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

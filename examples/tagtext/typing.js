@@ -1,6 +1,6 @@
 'use strict'
 
-import TagText from './../../plugins/tagtext-plugin.js';
+import TagTextPlugin from './../../plugins/tagtext-plugin.js';
 import TextTypingPlugin from './../../plugins/texttyping-plugin.js';
 
 class Demo extends Phaser.Scene {
@@ -81,7 +81,14 @@ var config = {
     parent: 'phaser-example',
     width: 800,
     height: 600,
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'TagTextPlugin',
+            plugin: TagTextPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);
