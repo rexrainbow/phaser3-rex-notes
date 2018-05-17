@@ -260,7 +260,7 @@ var data = cache.get(key);
 #### Plugin
 
 ```javascript
-scene.load.plugin(key, url);
+scene.load.plugin(key, url, true); // start plugin when loaded
 ```
 
 #### File pack

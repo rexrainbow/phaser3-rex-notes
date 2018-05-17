@@ -32,8 +32,12 @@ module.exports = {
         pathinfo: true,
         path: path.resolve(__dirname, './plugins/dist'),
         filename: '[name].js',
+        library: {
+            root: 'rex[name]'
+        },
         libraryTarget: 'umd',
-        umdNamedDefine: true
+        umdNamedDefine: true,
+        libraryExport: 'default'
     },
     plugins: [
         new webpack.DefinePlugin({
