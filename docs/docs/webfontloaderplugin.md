@@ -1,9 +1,9 @@
 ## Introduction
 
-Load web font by [google webfont loader](https://github.com/typekit/webfontloader) in preload stage.
+Load web font by [google webfont loader](https://github.com/typekit/webfontloader) in payload or preload stage.
 
 - Author: Rex
-- Customize File of loader
+- Global plugin, customize File of loader
 
 ## Source code
 
@@ -11,22 +11,33 @@ Load web font by [google webfont loader](https://github.com/typekit/webfontloade
 
 ## Usage
 
+### Install plugin
+
+Install plugin in [configuration of game](game.md#configuration)
+
+```javascript
+var config = {
+    // ...
+    plugins: {
+        global: [{
+            key: 'WebFontLoader',
+            plugin: WebFontLoaderPlugin,
+            start: true
+        },
+        // ...
+        ]
+    }
+    // ...
+};
+var game = new Phaser.Game(config);
+```
+
 ### Load webfont
 
 In preload stage:
 
 ```javascript
-this.load.webFont('webfont', {
-    google: {
-        families: ['Bangers']
-    }
-});
-```
-
-or
-
-```javascript
-this.load.webFont({
+this.load.rexWebfont({
     google: {
         families: ['Bangers']
     }
@@ -40,7 +51,7 @@ var sceneConfig = {
     key: '...',
     pack: {
         files: [{
-                type: 'webFont',
+                type: 'rexWebFont',
                 key: 'webfont',
                 config: {
                     google: {

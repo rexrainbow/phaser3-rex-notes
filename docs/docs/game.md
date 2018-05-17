@@ -89,30 +89,11 @@ var game = new Phaser.Game(config);
     },
 
     plugins: {
-        Global: [
-            'anims',
-            'cache',
-            'registry',
-            'sound',
-            'textures'
+        global: [
+            //{key, plugin, start}
         ],
-        CoreScene: [
-            'EventEmitter',
-            'CameraManager',
-            'GameObjectCreator',
-            'GameObjectFactory',
-            'ScenePlugin',
-            'DisplayList',
-            'UpdateList'
-        ],
-        DefaultScene: [
-            'CameraManager3D',
-            'Clock',
-            'DataManagerPlugin',
-            'InputPlugin',
-            'Loader',
-            'TweenManager',
-            'LightsPlugin'
+        scene: [
+            // ...
         ]
     },
 
