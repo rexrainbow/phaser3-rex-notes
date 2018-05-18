@@ -11,10 +11,47 @@ Typing text on text object, [bbcode text object](bbcodetextplugin.md), or [tag t
 
 ## Usage
 
+User could import object directly, or install it by global plugin.
+
+### Import object
+
+```javascript
+import rexTextTyping from './plugins/texttyping.js';
+```
+
+### Install global plugin
+
+Install plugin in [configuration of game](game.md#configuration)
+
+```javascript
+import TextTypingPlugin from './plugins/texttyping-plugin.js';
+
+var config = {
+    // ...
+    plugins: {
+        global: [{
+            key: 'rexTextTyping',
+            plugin: TextTypingPlugin,
+            start: true
+        },
+        // ...
+        ]
+    }
+    // ...
+};
+var game = new Phaser.Game(config);
+```
+
+### Get plugin instance
+
+```javascript
+this.textTyping = this.plugins.get('rexTextTyping');
+```
+
 ### Create instance
 
 ```javascript
-txt.typing = new TextTypingPlugin(txt, {
+txt.typing = this.textTyping(txt, {
     //speed: 333,       // typing speed in ms
     //typeMode: 0,      //0|'left-to-right'|1|'right-to-left'|2|'middle-to-sides'|3|'sides-to-middle'
     //setTextCallback: function(text, isLastChar, insertIdx){ return text; }  // callback before set-text
