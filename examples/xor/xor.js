@@ -1,18 +1,19 @@
 'use strict'
 
-import XOR from './../../plugins/xor-plugin.js';
+import XORPlugin from './../../plugins/xor-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
         super({
             key: 'examples'
         })
-        this.txt;
     }
 
     preload() {}
 
     create() {
+        var  XOR = this.plugins.get('rexXOR');
+        
         var src = 'Hello world';
         console.log('Source: ' + src);
         var pwd = 'aabbcc';
@@ -33,7 +34,14 @@ var config = {
     parent: 'phaser-example',
     width: 800,
     height: 600,
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexXOR',
+            plugin: XORPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

@@ -3,7 +3,7 @@
 Encrypt or decrypt string by XOR algorithm.
 
 - Author: Rex
-- Member of scene
+- Functions collection, installed by global plugin
 
 ## Source code
 
@@ -11,6 +11,33 @@ Encrypt or decrypt string by XOR algorithm.
 [Decrypt](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/xor/Decrypt.js)
 
 ## Usage
+
+### Install plugin
+
+Install plugin in [configuration of game](game.md#configuration)
+
+```javascript
+var config = {
+    // ...
+    plugins: {
+        global: [{
+            key: 'rexXOR',
+            plugin: XORPlugin,
+            start: true
+        },
+        // ...
+        ]
+    }
+    // ...
+};
+var game = new Phaser.Game(config);
+```
+
+### Get plugin instance
+
+```javascript
+var  XOR = this.plugins.get('rexXOR');
+```
 
 ### Encrypt
 
