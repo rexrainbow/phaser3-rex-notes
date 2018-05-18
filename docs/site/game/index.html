@@ -1570,8 +1570,12 @@
 <p>Also fires game.events <code>destroy</code> event.</p>
 <h2 id="main-loop">Main loop<a class="headerlink" href="#main-loop" title="Permanent link">&para;</a></h2>
 <ol>
-<li>game.input.update()</li>
-<li>game.sound.update()</li>
+<li>game.events <code>prestep</code> event<ol>
+<li>trigger <code>game.input.update()</code></li>
+<li>trigger <code>game.sound.update()</code></li>
+</ol>
+</li>
+<li>game.events <code>step</code> event</li>
 <li>SceneManager.update, for each active scene<ol>
 <li>scene.sys.events <code>preupdate</code> event<ol>
 <li>TweenManager.preUpdate() to arrange active targets</li>
@@ -1587,6 +1591,7 @@
 <li>scene.sys.events <code>postupdate</code> event</li>
 </ol>
 </li>
+<li>game.events <code>poststep</code> event</li>
 <li>game.renderer.preRender()</li>
 <li>game.events <code>prerender</code> event</li>
 <li>SceneManager.render()</li>

@@ -544,6 +544,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#install-plugin" title="Install plugin" class="md-nav__link">
+    Install plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#add-text-object" title="Add text object" class="md-nav__link">
     Add text object
   </a>
@@ -1469,6 +1476,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#install-plugin" title="Install plugin" class="md-nav__link">
+    Install plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#add-text-object" title="Add text object" class="md-nav__link">
     Add text object
   </a>
@@ -1573,7 +1587,7 @@
 <p>Drawing text with <a href="https://en.wikipedia.org/wiki/BBCode">BBCode</a> protocol.</p>
 <ul>
 <li>Author: Rex</li>
-<li>A kind of game object</li>
+<li>A kind of game object, installed by global plugin</li>
 </ul>
 <h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/bbocdetext/BbcodeTextPlugin.js">Link</a></p>
@@ -1597,6 +1611,24 @@
 <h3 id="snapshot">Snapshot<a class="headerlink" href="#snapshot" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexBBCodeText</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="s1">&#39;[b]h[/b]ello&#39;</span><span class="p">);</span>
 <span class="nx">txt</span><span class="p">.</span><span class="nx">setText</span><span class="p">(</span><span class="s1">&#39;[i]wor[/i]ld&#39;</span><span class="p">);</span>
+</pre></div>
+
+<h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
+<p>Install plugin in <a href="../game/index.html#configuration">configuration of game</a></p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;BBCodeTextPlugin&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">BBCodeTextPlugin</span><span class="p">,</span>
+            <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="p">},</span>
+        <span class="c1">// ...</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </pre></div>
 
 <h3 id="add-text-object">Add text object<a class="headerlink" href="#add-text-object" title="Permanent link">&para;</a></h3>

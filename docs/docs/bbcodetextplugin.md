@@ -3,7 +3,7 @@
 Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
 
 - Author: Rex
-- A kind of game object
+- A kind of game object, installed by global plugin
 
 ## Source code
 
@@ -28,6 +28,27 @@ Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
 ```javascript
 var txt = scene.add.rexBBCodeText(x, y, '[b]h[/b]ello');
 txt.setText('[i]wor[/i]ld');
+```
+
+### Install plugin
+
+Install plugin in [configuration of game](game.md#configuration)
+
+```javascript
+var config = {
+    // ...
+    plugins: {
+        global: [{
+            key: 'BBCodeTextPlugin',
+            plugin: BBCodeTextPlugin,
+            start: true
+        },
+        // ...
+        ]
+    }
+    // ...
+};
+var game = new Phaser.Game(config);
 ```
 
 ### Add text object

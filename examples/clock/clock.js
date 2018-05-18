@@ -33,10 +33,12 @@ var config = {
     height: 600,
     scene: Demo,
     plugins: {
-        scene: [
-            { key: 'rexClockPlugin', plugin: ClockPlugin, mapping: 'rexClock' }
-        ]
-    },    
+        scene: [{
+            key: 'rexClockPlugin',
+            plugin: ClockPlugin,
+            mapping: 'rexClock'
+        }]
+    },
 };
 
 var game = new Phaser.Game(config);

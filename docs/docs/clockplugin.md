@@ -3,7 +3,7 @@
 A clock to count elapsed time.
 
 - Author: Rex
-- Member of scene
+- Member of scene, installed by scene plugin
 
 ## Source code
 
@@ -11,10 +11,31 @@ A clock to count elapsed time.
 
 ## Usage
 
+### Install plugin
+
+Install plugin in [configuration of game](game.md#configuration)
+
+```javascript
+var config = {
+    // ...
+    plugins: {
+        scene: [{
+            key: 'rexClockPlugin',
+            plugin: ClockPlugin,
+            mapping: 'rexClock'
+        }
+        // ...
+        ]
+    }
+    // ...
+};
+var game = new Phaser.Game(config);
+```
+
 ### Create instance
 
 ```javascript
-var clock = new ClockPlugin(scene, {
+var clock = this.rexClock.add({
     // timeScale: 1
 });
 ```
