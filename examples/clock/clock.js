@@ -1,6 +1,6 @@
 'use strict'
 
-import ClockrPlugin from './../../plugins/clock-plugin.js';
+import ClockPlugin from './../../plugins/clock-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -14,7 +14,7 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        this.clock = new ClockrPlugin(this).start();
+        this.clock = this.rexClock.add().start();
         this.text = this.add.text(100, 100, '');
 
         this.input.on('pointerdown', this.clock.pause, this.clock);
@@ -31,7 +31,12 @@ var config = {
     parent: 'phaser-example',
     width: 800,
     height: 600,
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        scene: [
+            { key: 'rexClockPlugin', plugin: ClockPlugin, mapping: 'rexClock' }
+        ]
+    },    
 };
 
 var game = new Phaser.Game(config);
