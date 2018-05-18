@@ -32,6 +32,13 @@ var config = {
 var game = new Phaser.Game(config);
 ```
 
+or install it in previous scene (i.e. a preload scene).
+
+!!! warning
+    The best way of installing this plugin is to load it in game config. 
+
+    This custom file loader won't be added into loader of current scene after loader is created (i.e. loading plugin using `this.load.plugin(...)`, or loading in payload of scene)
+
 ### Load webfont
 
 In preload stage:

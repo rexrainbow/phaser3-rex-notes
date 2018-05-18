@@ -401,6 +401,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#install-plugin" title="Install plugin" class="md-nav__link">
+    Install plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#load-webfont" title="Load webfont" class="md-nav__link">
     Load webfont
   </a>
@@ -1376,6 +1383,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#install-plugin" title="Install plugin" class="md-nav__link">
+    Install plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#load-webfont" title="Load webfont" class="md-nav__link">
     Load webfont
   </a>
@@ -1414,25 +1428,41 @@
                   <h1>Webfont loader</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Load web font by <a href="https://github.com/typekit/webfontloader">google webfont loader</a> in preload stage.</p>
+<p>Load web font by <a href="https://github.com/typekit/webfontloader">google webfont loader</a> in payload or preload stage.</p>
 <ul>
 <li>Author: Rex</li>
-<li>Customize File of loader</li>
+<li>Global plugin, customize File of loader</li>
 </ul>
 <h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/webfontloader/webFontLoaderPlugin.js">Link</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<h3 id="load-webfont">Load webfont<a class="headerlink" href="#load-webfont" title="Permanent link">&para;</a></h3>
-<p>In preload stage:</p>
-<div class="codehilite"><pre><span></span><span class="k">this</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">webFont</span><span class="p">(</span><span class="s1">&#39;webfont&#39;</span><span class="p">,</span> <span class="p">{</span>
-    <span class="nx">google</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">families</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;Bangers&#39;</span><span class="p">]</span>
+<h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
+<p>Install plugin in <a href="../game/index.html#configuration">configuration of game</a></p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;WebFontLoader&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">WebFontLoaderPlugin</span><span class="p">,</span>
+            <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="p">},</span>
+        <span class="c1">// ...</span>
+        <span class="p">]</span>
     <span class="p">}</span>
-<span class="p">});</span>
+    <span class="c1">// ...</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </pre></div>
 
-<p>or</p>
-<div class="codehilite"><pre><span></span><span class="k">this</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">webFont</span><span class="p">({</span>
+<p>or install it in previous scene (i.e. a preload scene).</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The best way of installing this plugin is to load it in game config. </p>
+<p>This custom file loader won't be added into loader of current scene after loader is created (i.e. loading plugin using <code>this.load.plugin(...)</code>, or loading in payload of scene)</p>
+</div>
+<h3 id="load-webfont">Load webfont<a class="headerlink" href="#load-webfont" title="Permanent link">&para;</a></h3>
+<p>In preload stage:</p>
+<div class="codehilite"><pre><span></span><span class="k">this</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">rexWebfont</span><span class="p">({</span>
     <span class="nx">google</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">families</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;Bangers&#39;</span><span class="p">]</span>
     <span class="p">}</span>
@@ -1444,7 +1474,7 @@
     <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
     <span class="nx">pack</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">files</span><span class="o">:</span> <span class="p">[{</span>
-                <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;webFont&#39;</span><span class="p">,</span>
+                <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;rexWebFont&#39;</span><span class="p">,</span>
                 <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;webfont&#39;</span><span class="p">,</span>
                 <span class="nx">config</span><span class="o">:</span> <span class="p">{</span>
                     <span class="nx">google</span><span class="o">:</span> <span class="p">{</span>
