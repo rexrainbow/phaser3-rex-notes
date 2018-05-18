@@ -42,10 +42,16 @@ var config = {
 var game = new Phaser.Game(config);
 ```
 
+### Get plugin instance
+
+```javascript
+this.rexClock = this.plugins.get('rexClock');
+```
+
 ### Create instance
 
 ```javascript
-var clock = this.plugins.get('rexClock').add(scene, {
+var clock = this.rexClock.add(scene, {
     // timeScale: 1
 });
 ```

@@ -46,7 +46,7 @@ var game = new Phaser.Game(config);
 ### Get plugin instance
 
 ```javascript
-var  XOR = this.plugins.get('rexXOR');
+var XOR = this.plugins.get('rexXOR');
 ```
 
 ### Encrypt

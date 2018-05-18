@@ -1812,7 +1812,7 @@
         }, 
         {
             "location": "/clockplugin/index.html", 
-            "text": "Introduction\n\n\nA clock to count elapsed time.\n\n\n\n\nAuthor: Rex\n\n\nMember of scene\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nUser could import object directly, or install it by global plugin.\n\n\nImport object\n\n\nimport\n \nrexClock\n \nfrom\n \n./plugins/clock.js\n;\n\n\n\n\n\nInstall global plugin\n\n\nInstall plugin in \nconfiguration of game\n\n\nimport\n \nClockPlugin\n \nfrom\n \n./plugins/clock-plugin.js\n;\n\n\n\nvar\n \nconfig\n \n=\n \n{\n\n    \n// ...\n\n    \nplugins\n:\n \n{\n\n        \nglobal\n:\n \n[{\n\n            \nkey\n:\n \nrexClock\n,\n\n            \nplugin\n:\n \nClockPlugin\n,\n\n            \nstart\n:\n \ntrue\n\n        \n}\n\n        \n// ...\n\n        \n]\n\n    \n}\n\n    \n// ...\n\n\n};\n\n\nvar\n \ngame\n \n=\n \nnew\n \nPhaser\n.\nGame\n(\nconfig\n);\n\n\n\n\n\nCreate instance\n\n\nvar\n \nclock\n \n=\n \nthis\n.\nplugins\n.\nget\n(\nrexClock\n).\nadd\n(\nscene\n,\n \n{\n\n    \n// timeScale: 1\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\ntimeScale : time-scale for counting elapsed time.\n\n\n\n\nStart counting\n\n\nclock\n.\nstart\n();\n\n\n// clock.start(startAt);  // start-at time in ms\n\n\n\n\n\nGet elapsed time\n\n\nvar\n \nnow\n \n=\n \nclock\n.\nnow\n;\n  \n// elapsed time in ms\n\n\n\n\n\nPause, Resume, stop counting\n\n\nclock\n.\npause\n();\n\n\nclock\n.\nresume\n();\n\n\nclock\n.\nstop\n();\n\n\n\n\n\nSeek elapsed time\n\n\nclock\n.\nseek\n(\ntime\n);\n   \n// elapsed time in ms\n\n\n\n\n\nState of counting\n\n\nvar\n \nisRunning\n \n=\n \nclock\n.\nisRunning\n;\n\n\n\n\n\nTime-scale\n\n\nvar\n \ntimeScale\n \n=\n \nclock\n.\ntimeScale\n;\n\n\nclock\n.\ntimeScale\n \n=\n \n0.5\n;", 
+            "text": "Introduction\n\n\nA clock to count elapsed time.\n\n\n\n\nAuthor: Rex\n\n\nMember of scene\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nUser could import object directly, or install it by global plugin.\n\n\nImport object\n\n\nimport\n \nrexClock\n \nfrom\n \n./plugins/clock.js\n;\n\n\n\n\n\nInstall global plugin\n\n\nInstall plugin in \nconfiguration of game\n\n\nimport\n \nClockPlugin\n \nfrom\n \n./plugins/clock-plugin.js\n;\n\n\n\nvar\n \nconfig\n \n=\n \n{\n\n    \n// ...\n\n    \nplugins\n:\n \n{\n\n        \nglobal\n:\n \n[{\n\n            \nkey\n:\n \nrexClock\n,\n\n            \nplugin\n:\n \nClockPlugin\n,\n\n            \nstart\n:\n \ntrue\n\n        \n}\n\n        \n// ...\n\n        \n]\n\n    \n}\n\n    \n// ...\n\n\n};\n\n\nvar\n \ngame\n \n=\n \nnew\n \nPhaser\n.\nGame\n(\nconfig\n);\n\n\n\n\n\nGet plugin instance\n\n\nthis\n.\nrexClock\n \n=\n \nthis\n.\nplugins\n.\nget\n(\nrexClock\n);\n\n\n\n\n\nCreate instance\n\n\nvar\n \nclock\n \n=\n \nthis\n.\nrexClock\n.\nadd\n(\nscene\n,\n \n{\n\n    \n// timeScale: 1\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\ntimeScale : time-scale for counting elapsed time.\n\n\n\n\nStart counting\n\n\nclock\n.\nstart\n();\n\n\n// clock.start(startAt);  // start-at time in ms\n\n\n\n\n\nGet elapsed time\n\n\nvar\n \nnow\n \n=\n \nclock\n.\nnow\n;\n  \n// elapsed time in ms\n\n\n\n\n\nPause, Resume, stop counting\n\n\nclock\n.\npause\n();\n\n\nclock\n.\nresume\n();\n\n\nclock\n.\nstop\n();\n\n\n\n\n\nSeek elapsed time\n\n\nclock\n.\nseek\n(\ntime\n);\n   \n// elapsed time in ms\n\n\n\n\n\nState of counting\n\n\nvar\n \nisRunning\n \n=\n \nclock\n.\nisRunning\n;\n\n\n\n\n\nTime-scale\n\n\nvar\n \ntimeScale\n \n=\n \nclock\n.\ntimeScale\n;\n\n\nclock\n.\ntimeScale\n \n=\n \n0.5\n;", 
             "title": "Clock"
         }, 
         {
@@ -1841,8 +1841,13 @@
             "title": "Install global plugin"
         }, 
         {
+            "location": "/clockplugin/index.html#get-plugin-instance", 
+            "text": "this . rexClock   =   this . plugins . get ( rexClock );", 
+            "title": "Get plugin instance"
+        }, 
+        {
             "location": "/clockplugin/index.html#create-instance", 
-            "text": "var   clock   =   this . plugins . get ( rexClock ). add ( scene ,   { \n     // timeScale: 1  });   Properties   timeScale : time-scale for counting elapsed time.", 
+            "text": "var   clock   =   this . rexClock . add ( scene ,   { \n     // timeScale: 1  });   Properties   timeScale : time-scale for counting elapsed time.", 
             "title": "Create instance"
         }, 
         {
@@ -3132,7 +3137,7 @@
         }, 
         {
             "location": "/xorplugin/index.html", 
-            "text": "Introduction\n\n\nEncrypt or decrypt string by XOR algorithm.\n\n\n\n\nAuthor: Rex\n\n\nFunctions collection\n\n\n\n\nSource code\n\n\nEncrypt\n\n\nDecrypt\n\n\nUsage\n\n\nUser could import object directly, or install it by global plugin.\n\n\nImport object\n\n\nimport\n \nrexXOR\n \nfrom\n \n./plugins/xor.js\n;\n\n\n\n\n\nInstall global plugin\n\n\nInstall plugin in \nconfiguration of game\n\n\nimport\n \nXORPlugin\n \nfrom\n \n./plugins/xor-plugin.js\n;\n\n\n\nvar\n \nconfig\n \n=\n \n{\n\n    \n// ...\n\n    \nplugins\n:\n \n{\n\n        \nglobal\n:\n \n[{\n\n            \nkey\n:\n \nrexXOR\n,\n\n            \nplugin\n:\n \nXORPlugin\n,\n\n            \nstart\n:\n \ntrue\n\n        \n},\n\n        \n// ...\n\n        \n]\n\n    \n}\n\n    \n// ...\n\n\n};\n\n\nvar\n \ngame\n \n=\n \nnew\n \nPhaser\n.\nGame\n(\nconfig\n);\n\n\n\n\n\nGet plugin instance\n\n\nvar\n  \nXOR\n \n=\n \nthis\n.\nplugins\n.\nget\n(\nrexXOR\n);\n\n\n\n\n\nEncrypt\n\n\nvar\n \nencResult\n \n=\n \nXOR\n.\nEncrypt\n(\nsrc\n,\n \npwd\n);\n\n\n\n\n\nDecrypt\n\n\nvar\n \ndecResult\n \n=\n \nXOR\n.\nDecrypt\n(\nencResult\n,\n \npwd\n);", 
+            "text": "Introduction\n\n\nEncrypt or decrypt string by XOR algorithm.\n\n\n\n\nAuthor: Rex\n\n\nFunctions collection\n\n\n\n\nSource code\n\n\nEncrypt\n\n\nDecrypt\n\n\nUsage\n\n\nUser could import object directly, or install it by global plugin.\n\n\nImport object\n\n\nimport\n \nrexXOR\n \nfrom\n \n./plugins/xor.js\n;\n\n\n\n\n\nInstall global plugin\n\n\nInstall plugin in \nconfiguration of game\n\n\nimport\n \nXORPlugin\n \nfrom\n \n./plugins/xor-plugin.js\n;\n\n\n\nvar\n \nconfig\n \n=\n \n{\n\n    \n// ...\n\n    \nplugins\n:\n \n{\n\n        \nglobal\n:\n \n[{\n\n            \nkey\n:\n \nrexXOR\n,\n\n            \nplugin\n:\n \nXORPlugin\n,\n\n            \nstart\n:\n \ntrue\n\n        \n},\n\n        \n// ...\n\n        \n]\n\n    \n}\n\n    \n// ...\n\n\n};\n\n\nvar\n \ngame\n \n=\n \nnew\n \nPhaser\n.\nGame\n(\nconfig\n);\n\n\n\n\n\nGet plugin instance\n\n\nvar\n \nXOR\n \n=\n \nthis\n.\nplugins\n.\nget\n(\nrexXOR\n);\n\n\n\n\n\nEncrypt\n\n\nvar\n \nencResult\n \n=\n \nXOR\n.\nEncrypt\n(\nsrc\n,\n \npwd\n);\n\n\n\n\n\nDecrypt\n\n\nvar\n \ndecResult\n \n=\n \nXOR\n.\nDecrypt\n(\nencResult\n,\n \npwd\n);", 
             "title": "XOR"
         }, 
         {
@@ -3162,7 +3167,7 @@
         }, 
         {
             "location": "/xorplugin/index.html#get-plugin-instance", 
-            "text": "var    XOR   =   this . plugins . get ( rexXOR );", 
+            "text": "var   XOR   =   this . plugins . get ( rexXOR );", 
             "title": "Get plugin instance"
         }, 
         {
