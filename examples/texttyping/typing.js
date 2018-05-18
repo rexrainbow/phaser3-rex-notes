@@ -13,7 +13,8 @@ class Demo extends Phaser.Scene {
 
     create() {
         var txt = this.add.text(100, 100, 'Touch to start typing');
-        txt.typing = new TextTypingPlugin(txt, {
+        this.textTyping = this.plugins.get('rexTextTyping');
+        txt.typing = this.textTyping.add(txt, {
             speed: 0.3 * 1000,
             //typeMode: 'middle-to-sides',
             //setTextCallback: myTypingFn
@@ -48,7 +49,14 @@ var config = {
     parent: 'phaser-example',
     width: 800,
     height: 600,
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexTextTyping',
+            plugin: TextTypingPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

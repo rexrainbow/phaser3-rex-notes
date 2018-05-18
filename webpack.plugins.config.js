@@ -20,7 +20,11 @@ module.exports = {
 
         // member of scene 
         'clock': './plugins/clock.js',
-        'clockplugin': './plugins/clock-plugin.js'
+        'clockplugin': './plugins/clock-plugin.js',
+
+        // member of text
+        'texttyping': './plugins/texttyping.js',
+        'texttypingplugin': './plugins/texttyping-plugin.js',
     },
     output: {
         pathinfo: true,

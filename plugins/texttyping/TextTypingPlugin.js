@@ -2,10 +2,10 @@
 
 import TextTyping from './TextTyping.js';
 
-class TextTypingPlugin extends Phaser.Plugins.ScenePlugin {
+class TextTypingPlugin extends Phaser.Plugins.BasePlugin {
 
-    constructor(scene, pluginManager) {
-        super(scene, pluginManager);
+    constructor(pluginManager) {
+        super(pluginManager);
     }
 
     add(gameobject, config) {
