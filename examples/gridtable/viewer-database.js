@@ -1,5 +1,5 @@
 'use strict'
-import GridTable from './../../plugins/gridtable-plugin.js';
+import GridTablePlugin from './../../plugins/gridtable-plugin.js';
 import DragDeltaPlugin from './../../plugins/dragdelta-plugin.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -113,7 +113,14 @@ var config = {
     parent: 'phaser-example',
     width: 800,
     height: 600,
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'GridTablePlugin',
+            plugin: GridTablePlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);
