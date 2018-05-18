@@ -797,8 +797,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#install-plugin" title="Install plugin" class="md-nav__link">
-    Install plugin
+  <a href="#import-object" title="Import object" class="md-nav__link">
+    Import object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
+    Install global plugin
   </a>
   
 </li>
@@ -1418,8 +1425,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#install-plugin" title="Install plugin" class="md-nav__link">
-    Install plugin
+  <a href="#import-object" title="Import object" class="md-nav__link">
+    Import object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
+    Install global plugin
   </a>
   
 </li>
@@ -1501,20 +1515,27 @@
 <p>A clock to count elapsed time.</p>
 <ul>
 <li>Author: Rex</li>
-<li>Member of scene, installed by scene plugin</li>
+<li>Member of scene</li>
 </ul>
 <h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/clock/ClockPlugin.js">Link</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
+<p>User could import object directly, or install it by global plugin.</p>
+<h3 id="import-object">Import object<a class="headerlink" href="#import-object" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">rexClock</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/clock.js&#39;</span><span class="p">;</span>
+</pre></div>
+
+<h3 id="install-global-plugin">Install global plugin<a class="headerlink" href="#install-global-plugin" title="Permanent link">&para;</a></h3>
 <p>Install plugin in <a href="../game/index.html#configuration">configuration of game</a></p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">ClockPlugin</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/clock-plugin.js&#39;</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">scene</span><span class="o">:</span> <span class="p">[{</span>
-            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexClockPlugin&#39;</span><span class="p">,</span>
+        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexClock&#39;</span><span class="p">,</span>
             <span class="nx">plugin</span><span class="o">:</span> <span class="nx">ClockPlugin</span><span class="p">,</span>
-            <span class="nx">mapping</span><span class="o">:</span> <span class="s1">&#39;rexClock&#39;</span>
+            <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
         <span class="p">}</span>
         <span class="c1">// ...</span>
         <span class="p">]</span>
@@ -1525,7 +1546,7 @@
 </pre></div>
 
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">clock</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexClock</span><span class="p">.</span><span class="nx">add</span><span class="p">({</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">clock</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexClock&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
     <span class="c1">// timeScale: 1</span>
 <span class="p">});</span>
 </pre></div>

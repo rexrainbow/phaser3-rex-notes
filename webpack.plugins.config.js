@@ -5,35 +5,29 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
     entry: {
-        'bbcodetext': './plugins/bbcodetext-plugin.js',
-        'canvas': './plugins/canvas-plugin.js',
-        'clock': './plugins/clock-plugin.js',
-        'csvtoarray': './plugins/csvtoarray.js',
-        'csvtohashtable': './plugins/csvtohashtable-plugin.js',
-        'drag': './plugins/drag-plugin.js',
-        'dragcursor': './plugins/dragcursor-plugin.js',
-        'fadeoutdestroy': './plugins/fade-out-destroy.js',
-        'fade': './plugins/fade-plugin.js',
-        'gashapon': './plugins/gashapon-plugin.js',
-        'gridtable': './plugins/gridtable-plugin.js',
-        'lzstring': './plugins/lzstring-plugin.js',
-        'runcommands': './plugins/runcommands.js',
-        'sequence': './plugins/sequence-plugin.js',
-        'soundfadein': './plugins/sound-fade-in.js',
-        'soundfadeout': './plugins/sound-fade-out.js',
-        'tagtext': './plugins/tagtext-plugin.js',
-        'tcrp': './plugins/tcrp-plugin.js',
-        'textpage': './plugins/textpage-plugin.js',
-        'texttyping': './plugins/texttyping-plugin.js',
-        'webfontloader': './plugins/webfontloader-plugin.js',
-        'xor': './plugins/xor-plugin.js'
+        // game objects
+        'bbcodetextplugin': './plugins/bbcodetext-plugin.js',
+        'canvasplugin': './plugins/canvas-plugin.js',
+        'gridtableplugin': './plugins/gridtable-plugin.js',
+        'tagtextplugin': './plugins/tagtext-plugin.js',
+
+        // custom file loader
+        'webfontloaderplugin': './plugins/webfontloader-plugin.js',
+
+        // functions
+        'xor': './plugins/xor.js',        
+        'xorplugin': './plugins/xor-plugin.js',
+
+        // member of scene 
+        'clock': './plugins/clock.js',
+        'clockplugin': './plugins/clock-plugin.js'
     },
     output: {
         pathinfo: true,
         path: path.resolve(__dirname, './plugins/dist'),
-        filename: 'rex[name]plugin.min.js',
+        filename: 'rex[name].min.js',
         library: {
-            root: 'rex[name]plugin'
+            root: 'rex[name]'
         },
         libraryTarget: 'umd',
         umdNamedDefine: true,

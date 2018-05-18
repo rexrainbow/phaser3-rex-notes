@@ -2,16 +2,14 @@
 
 import Clock from './Clock.js';
 
-const GetFastValue = Phaser.Utils.Objects.GetFastValue;
+class ClockPlugin extends Phaser.Plugins.BasePlugin {
 
-class ClockPlugin extends Phaser.Plugins.ScenePlugin {
-
-    constructor(scene, pluginManager) {
-        super(scene, pluginManager);
+    constructor(pluginManager) {
+        super(pluginManager);
     }
 
-    add(config) {
-        return new Clock(this.scene, config);
+    add(scene, config) {
+        return new Clock(scene, config);
     }
 
 }

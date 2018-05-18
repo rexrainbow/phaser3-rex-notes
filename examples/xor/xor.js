@@ -12,7 +12,7 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        var  XOR = this.plugins.get('rexXOR');
+        var XOR = this.plugins.get('rexXOR');
         
         var src = 'Hello world';
         console.log('Source: ' + src);

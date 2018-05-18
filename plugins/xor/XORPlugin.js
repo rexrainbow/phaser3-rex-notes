@@ -1,5 +1,4 @@
-import Encrypt from './Encrypt.js';
-import Decrypt from './Decrypt.js';
+import XOR from './XOR.js';
 
 class XORPlugin extends Phaser.Plugins.BasePlugin {
     constructor(pluginManager) {
@@ -9,10 +8,8 @@ class XORPlugin extends Phaser.Plugins.BasePlugin {
 
 // mixin
 Object.assign(
-    XORPlugin.prototype, {
-        Encrypt: Encrypt,
-        Decrypt: Decrypt
-    }
+    XORPlugin.prototype,
+    XOR
 );
 
 export default XORPlugin;

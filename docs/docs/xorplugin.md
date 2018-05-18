@@ -3,7 +3,7 @@
 Encrypt or decrypt string by XOR algorithm.
 
 - Author: Rex
-- Functions collection, installed by global plugin
+- Functions collection
 
 ## Source code
 
@@ -12,11 +12,21 @@ Encrypt or decrypt string by XOR algorithm.
 
 ## Usage
 
-### Install plugin
+User could import object directly, or install it by global plugin.
+
+### Import object
+
+```javascript
+import rexXOR from './plugins/xor.js';
+```
+
+### Install global plugin
 
 Install plugin in [configuration of game](game.md#configuration)
 
 ```javascript
+import XORPlugin from './plugins/xor-plugin.js';
+
 var config = {
     // ...
     plugins: {

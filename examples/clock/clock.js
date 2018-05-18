@@ -14,7 +14,8 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        this.clock = this.rexClock.add().start();
+        this.rexClock = this.plugins.get('rexClock');
+        this.clock = this.rexClock.add(this).start();
         this.text = this.add.text(100, 100, '');
 
         this.input.on('pointerdown', this.clock.pause, this.clock);
@@ -33,12 +34,12 @@ var config = {
     height: 600,
     scene: Demo,
     plugins: {
-        scene: [{
-            key: 'rexClockPlugin',
+        global: [{
+            key: 'rexClock',
             plugin: ClockPlugin,
-            mapping: 'rexClock'
+            start: true
         }]
-    },
+    }
 };
 
 var game = new Phaser.Game(config);
