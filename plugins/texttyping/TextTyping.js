@@ -171,7 +171,6 @@ class TextTyping extends EE {
 
     setTypingContent(text) {
         this.text = transferText(text);
-        debugger
         this.textLen = this.getTextLength(this.text);
     }
 
