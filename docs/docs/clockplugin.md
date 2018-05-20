@@ -11,9 +11,9 @@ A clock to count elapsed time.
 
 ## Usage
 
-User could import object directly, or install it by global plugin.
+User could import class directly, or install it by global plugin.
 
-### Import object
+### Import class
 
 ```javascript
 import rexClock from './plugins/clock.js';
@@ -45,7 +45,7 @@ var game = new Phaser.Game(config);
 ### Get plugin instance
 
 ```javascript
-this.rexClock = this.plugins.get('rexClock');
+this.rexClock = scene.plugins.get('rexClock');
 ```
 
 ### Create instance

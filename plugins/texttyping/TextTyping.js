@@ -171,6 +171,7 @@ class TextTyping extends EE {
 
     setTypingContent(text) {
         this.text = transferText(text);
+        debugger
         this.textLen = this.getTextLength(this.text);
     }
 
@@ -287,8 +288,8 @@ class TextTyping extends EE {
     getTextLength(text) {
         var gameobject = this.gameobject;
         var len;
-        if (gameobject.getTextLength) {
-            len = gameobject.getTextLength(text);
+        if (gameobject.getRawText) {
+            len = gameobject.getRawText(text).length;
         } else {
             len = text.length;
         }

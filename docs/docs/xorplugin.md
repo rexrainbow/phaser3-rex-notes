@@ -12,9 +12,9 @@ Encrypt or decrypt string by XOR algorithm.
 
 ## Usage
 
-User could import object directly, or install it by global plugin.
+User could import class directly, or install it by global plugin.
 
-### Import object
+### Import class
 
 ```javascript
 import rexXOR from './plugins/xor.js';
@@ -46,7 +46,7 @@ var game = new Phaser.Game(config);
 ### Get plugin instance
 
 ```javascript
-var XOR = this.plugins.get('rexXOR');
+var XOR = scene.plugins.get('rexXOR');
 ```
 
 ### Encrypt

@@ -314,7 +314,7 @@ class CanvasText {
             rawText = this.pensManager.rawText;
         } else {
             var m, match = this.parser.splitText(text, 1); // RAWTEXTONLY_MODE
-            rawTextt = "";
+            rawText = "";
             for (var i = 0, len = match.length; i < len; i++) {
                 rawText += match[i];
             }

@@ -1,2 +1,7 @@
-import XOR from './xor/XOR.js';
-export default XOR;
+import Encrypt from './xor/Encrypt.js';
+import Decrypt from './xor/Decrypt.js';
+
+export default {
+    Encrypt: Encrypt,
+    Decrypt: Decrypt
+};

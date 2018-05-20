@@ -11,9 +11,9 @@ Typing text on text object, [bbcode text object](bbcodetextplugin.md), or [tag t
 
 ## Usage
 
-User could import object directly, or install it by global plugin.
+User could import class directly, or install it by global plugin.
 
-### Import object
+### Import class
 
 ```javascript
 import rexTextTyping from './plugins/texttyping.js';
@@ -45,7 +45,7 @@ var game = new Phaser.Game(config);
 ### Get plugin instance
 
 ```javascript
-this.textTyping = this.plugins.get('rexTextTyping');
+this.textTyping = scene.plugins.get('rexTextTyping');
 ```
 
 ### Create instance

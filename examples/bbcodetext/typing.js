@@ -13,6 +13,8 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
+        this.textTyping = this.plugins.get('rexTextTyping');
+
         var txt = this.add.rexBBCodeText(100, 100, 'Touch to start typing', {
             backgroundColor: '#555',
             fontSize: '30px',
@@ -22,9 +24,9 @@ class Demo extends Phaser.Scene {
                 width: 200
             }
         });
-        txt.typing = new TextTypingPlugin(txt, {
+        txt.typing = this.textTyping.add(txt, {
             speed: 0.3 * 1000,
-            //typeMode: 'middle-to-sides',
+            typeMode: 'right-to-left',
             //setTextCallback: myTypingFn
         });
 
@@ -61,10 +63,16 @@ var config = {
     scene: Demo,
     plugins: {
         global: [{
-            key: 'BBCodeTextPlugin',
-            plugin: BBCodeTextPlugin,
-            start: true
-        }]
+                key: 'BBCodeTextPlugin',
+                plugin: BBCodeTextPlugin,
+                start: true
+            },
+            {
+                key: 'rexTextTyping',
+                plugin: TextTypingPlugin,
+                start: true
+            }
+        ]
     }
 };
 
