@@ -63,11 +63,15 @@ Be awesome: Support the future of [color=red]Phaser[/color]
 Grab the source and join the fun!`;
 
         var txt = new PageTypingText(this, 100, 100, '', {
+            fontSize: '20px',
             wrap: {
                 mode: 'word',
                 width: 500
             },
-            maxLines: 7
+            maxLines: 7,
+            page: {
+                //wrap: false
+            }
         });
         this.add.existing(txt);
         txt.once('complete', function () {

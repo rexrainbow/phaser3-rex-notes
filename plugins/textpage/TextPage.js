@@ -26,6 +26,7 @@ class TextPagePlugin {
      */
     resetFromJSON(o) {
         this.setText(GetFastValue(o, 'text', ''));
+        this.setWrapMode(GetFastValue(o, 'wrap', true))
         this.setStartIdx(GetFastValue(o, 'start', 0));
         this.setPageIdx(GetFastValue(o, 'page', -1));
         return this;
@@ -105,6 +106,14 @@ class TextPagePlugin {
         if (resetPageIdx) {
             this.resetPageIdx();
         }
+        return this;
+    }
+
+    setWrapMode(en) {
+        if (en === undefined) {
+            en = true;
+        }
+        this.wrapMode = en;
         return this;
     }
 
@@ -207,7 +216,7 @@ class TextPagePlugin {
         } else {
             var startIdx = this.lines.getLineStartIndex(startLineIdx);
             var endIdx = this.lines.getLineEndIndex(endLineIdx - 1);
-            text = this.lines.getSliceTagText(startIdx, endIdx, false);
+            text = this.lines.getSliceTagText(startIdx, endIdx, this.wrapMode);
         }
         return text;
     }

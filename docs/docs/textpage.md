@@ -59,6 +59,7 @@ var txt = scene.add.text(x, y, '', {
 });
 txt.page = textPage.add(txt, {
     //text: '',       // content in string or array
+    //wrap: false     // set true to add '\n' in each line end
 });
 ```
 
