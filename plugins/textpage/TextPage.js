@@ -62,6 +62,8 @@ class TextPagePlugin {
 
         this.gameobject = undefined;
         this.scene = undefined;
+
+        return this;
     }
 
     destroy() {
@@ -74,6 +76,8 @@ class TextPagePlugin {
         } else {
             this.textObjectType = 1;
         }
+
+        return this;
     }
 
     get isFirstPage() {

@@ -73,6 +73,8 @@ class TextTyping extends EE {
         if (this.gameobject.on) { // oops, bob object does not have event emitter
             this.gameobject.on('destroy', this.destroy, this);
         }
+
+        return this;
     }
 
     shutdown() {
@@ -81,10 +83,14 @@ class TextTyping extends EE {
 
         this.gameobject = undefined;
         this.scene = undefined;
+
+        return this;
     }
 
     destroy() {
         this.shutdown();
+
+        return this;
     }
 
     setTypeMode(m) {
@@ -126,6 +132,7 @@ class TextTyping extends EE {
             this.startTimer(timerStartAt);
         }
 
+        return this;
     }
 
     appendText(text) {
@@ -135,6 +142,8 @@ class TextTyping extends EE {
         } else {
             this.start(newText, undefined, this.textLen);
         }
+
+        return this;
     }
 
     stop(showAllText) {
@@ -144,8 +153,7 @@ class TextTyping extends EE {
         }
         if (showAllText) {
             this.typingIdx = this.textLen;
-            var newText = this.getSubString(this.text, 0, this.typingIdx);
-            this.setText(newText);
+            this.setText(this.text);
             this.emit('type');
             this.emit('complete');
         }
@@ -172,6 +180,7 @@ class TextTyping extends EE {
     setTypingContent(text) {
         this.text = transferText(text);
         this.textLen = this.getTextLength(this.text);
+        return this;
     }
 
     onTyping() {

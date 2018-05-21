@@ -1,6 +1,5 @@
 'use strict'
 
-// PageTypingText class
 import TextPagePlugin from './../../plugins/textpage-plugin.js'
 import TextTypingPlugin from './../../plugins/texttyping-plugin.js';
 
@@ -23,8 +22,7 @@ class PageTypingText extends Phaser.GameObjects.Text {
 
     typeNextPage(speed) {
         //console.log('curText:\n' + this.text);
-        if (!this.page.isLastPage) {
-            debugger
+        if (!this.page.isLastPage) {            
             var txt = this.page.getNextPage();
             //console.log('nextText:\n' + txt.join('\n'));
             this.typing.start(txt, speed);

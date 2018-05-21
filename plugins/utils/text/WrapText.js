@@ -61,9 +61,12 @@ var WrapText = function (text, getTextWidth, wrapMode, wrapWidth, offset) {
         for (var j = 0, tokenLen = tokenArray.length; j < tokenLen; j++) {
             token = tokenArray[j];
 
-            if ((wrapMode === WORD_WRAP) && (j > 0)) {
-                // word mode
-                curLineText += (' ' + token);
+            if (wrapMode === WORD_WRAP) {
+                curLineText += token;
+
+                if (j < (tokenLen - 1)) {
+                    curLineText += ' ';
+                }
             } else {
                 curLineText += token;
             }
@@ -76,6 +79,9 @@ var WrapText = function (text, getTextWidth, wrapMode, wrapWidth, offset) {
                 } else {
                     retLines.push(LinesPool.newline(lineText, lineWidth, WRAPPED_NEWLINE));
                     curLineText = token;
+                    if (j < (tokenLen - 1)) {
+                        curLineText += ' ';
+                    }
                     currLineWidth = getTextWidth(curLineText);
                 }
 
