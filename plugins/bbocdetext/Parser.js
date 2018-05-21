@@ -228,7 +228,7 @@ var parser = {
                 continue;
 
             if (k === "size")
-                header += ("[size=" + prop[k].replace("pt", "") + "]");
+                header += ("[size=" + prop[k].replace("px", "") + "]");
             else if ((k === "color") || (k === "stroke") || (k === "img"))
                 header += ("[" + k + "=" + prop[k] + "]");
 

@@ -16,7 +16,7 @@ class PageTypingText extends BBCodeTextKlass {
         this.typing.on('complete', this.typeNextPage, this);
     }
 
-    start(text, speed) {      
+    start(text, speed) {        
         this.page.setText(text);
         this.typeNextPage(speed);
     }
@@ -24,7 +24,7 @@ class PageTypingText extends BBCodeTextKlass {
     typeNextPage(speed) {
         //console.log('curText:\n' + this.text);
         if (!this.page.isLastPage) {
-            var txt = this.page.getNextPage();            
+            var txt = this.page.getNextPage();
             this.typing.start(txt, speed);
         } else {
             this.emit('complete');
@@ -44,7 +44,7 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        var content = `[color=red]Phaser[/color] is a [color=yellow]fast[/color], [color=pink]free[/color], and [color=green]fun[/color] [b][i]open source[/b][/i] HTML5 game framework that offers WebGL and Canvas rendering across desktop and mobile web browsers. Games can be compiled to iOS, Android and native apps by using 3rd party tools. You can use JavaScript or TypeScript for development.
+        var content = `[b][i][size=24][color=red]Phaser[/color] is a [color=yellow]fast[/color], [color=pink]free[/color], and [color=green]fun[/color] open source HTML5 game framework[/size][/b][/i] [size=20]that offers WebGL and Canvas rendering across desktop and mobile web browsers. Games can be compiled to iOS, Android and native apps by using 3rd party tools. You can use JavaScript or TypeScript for development.
 
 [color=red]Phaser[/color] is available in two versions: [color=yellow]Phaser 3[/color] and [color=blue]Phaser CE[/color] - The Community Edition. [color=blue]Phaser CE[/color] is a community-lead continuation of the [color=blue]Phaser 2[/color] codebase and is hosted on a separate repo. [color=yellow]Phaser 3[/color] is the next generation of [color=red]Phaser[/color].
         
@@ -63,7 +63,7 @@ Be awesome: Support the future of [color=red]Phaser[/color]
 Grab the source and join the fun!`;
 
         var txt = new PageTypingText(this, 100, 100, '', {
-            fontSize: '20px',
+            fontSize: '24px',
             wrap: {
                 mode: 'word',
                 width: 500
