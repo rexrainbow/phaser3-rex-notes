@@ -4,7 +4,7 @@
 
 ## List of my plugins
 
-1. [BBCodeText](bbcodetextplugin.md): Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
+1. [BBCodeText](bbcodetext.md): Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
 1. [Canvas](canvasplugin.md): Drawing on [canvas](https://www.w3schools.com/html/html5_canvas.asp).
 1. [Clock](clockplugin.md): A clock to count elapsed time.
 1. [CSV-to-hash-table](csvtohashtable.md): Hash table indexed by (col-key, row-key) from csv string.
@@ -20,6 +20,6 @@
 1. [TagText](tagtextplugin.md): Displays text with multi-color, font face, or font size with tags.
 1. [TCRP.Player](tcrpplayerplugin.md): Run commands on time.
 1. [TCRP.Recorder](tcrpplayerplugin.md): Store commands with time.
-1. [Typing](texttypingplugin.md): Typing text on text object.
+1. [Typing](texttyping.md): Typing text on text object.
 1. [Webfont-loader](webfontloaderplugin.md): Load web font by google webfont loader in preload stage.
 1. [XOR](xorplugin.md): Encrypt or decrypt string by XOR algorithm.
