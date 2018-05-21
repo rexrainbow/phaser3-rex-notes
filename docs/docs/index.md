@@ -15,11 +15,11 @@
 1. [Gashapon](gashaponplugin.md): Pick random item from box.
 1. [Grid table](gridtableplugin.md): Viewer of grid table, to manipulate game object of each visible cell.
 1. [LZ-string](lzstringplugin.md): Compress string using LZ-based compression algorithm.
-1. [Page](textpageplugin.md): Display text page by page on text object.
+1. [Page](textpage.md): Display text page by page on text object.
 1. [Run-commands](runcommands.md): Run commands in array.
 1. [TagText](tagtext.md): Displays text with multi-color, font face, or font size with tags.
 1. [TCRP.Player](tcrpplayerplugin.md): Run commands on time.
 1. [TCRP.Recorder](tcrpplayerplugin.md): Store commands with time.
 1. [Typing](texttyping.md): Typing text on text object.
-1. [Webfont-loader](webfontloaderplugin.md): Load web font by google webfont loader in preload stage.
-1. [XOR](xorplugin.md): Encrypt or decrypt string by XOR algorithm.
+1. [Webfont-loader](webfontloader.md): Load web font by google webfont loader in preload stage.
+1. [XOR](xor.md): Encrypt or decrypt string by XOR algorithm.

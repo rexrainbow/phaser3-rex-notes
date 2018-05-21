@@ -1,7 +1,7 @@
 'use strict'
 
 // PageTypingText class
-import TextPagePlugin from './../../plugins/textpage-plugin.js';
+import TextPagePlugin from './../../plugins/textpage-plugin.js'
 import TextTypingPlugin from './../../plugins/texttyping-plugin.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
@@ -10,8 +10,8 @@ class PageTypingText extends Phaser.GameObjects.Text {
     constructor(scene, x, y, text, config) {
         super(scene, x, y, text, config);
 
-        this.page = new TextPagePlugin(this, GetFastValue(config, 'page', undefined));
-        this.typing = new TextTypingPlugin(this, GetFastValue(config, 'type', undefined));
+        this.page = scene.plugins.get('rexTextPage').add(this, GetFastValue(config, 'page', undefined));
+        this.typing = scene.plugins.get('rexTextTyping').add(this, GetFastValue(config, 'type', undefined));
 
         this.typing.on('complete', this.typeNextPage, this);
     }
@@ -85,7 +85,20 @@ var config = {
     parent: 'phaser-example',
     width: 800,
     height: 600,
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+                key: 'rexTextPage',
+                plugin: TextPagePlugin,
+                start: true
+            },
+            {
+                key: 'rexTextTyping',
+                plugin: TextTypingPlugin,
+                start: true
+            }
+        ]
+    }
 };
 
 var game = new Phaser.Game(config);

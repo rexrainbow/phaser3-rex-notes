@@ -11,6 +11,43 @@ Display text page by page on text object, [bbcode text object](bbcodetext.md), o
 
 ## Usage
 
+User could import class directly, or install it by global plugin.
+
+### Import class
+
+```javascript
+import rexTextPage from './plugins/textpage.js';
+```
+
+### Install global plugin
+
+Install plugin in [configuration of game](game.md#configuration)
+
+```javascript
+import TextPagePlugin from './plugins/textpage-plugin.js';
+
+var config = {
+    // ...
+    plugins: {
+        global: [{
+            key: 'rexTextPage',
+            plugin: TextPagePlugin,
+            start: true
+        },
+        // ...
+        ]
+    }
+    // ...
+};
+var game = new Phaser.Game(config);
+```
+
+### Get plugin instance
+
+```javascript
+var textPage = scene.plugins.get('rexTextPage');
+```
+
 ### Create instance
 
 ```javascript
@@ -20,7 +57,7 @@ var txt = scene.add.text(x, y, '', {
     },
     maxLines: 7
 });
-txt.page = new TextPagePlugin(txt, {
+txt.page = textPage.add(txt, {
     //text: '',       // content in string or array
 });
 ```

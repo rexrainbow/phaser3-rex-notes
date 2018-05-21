@@ -45,13 +45,13 @@ var game = new Phaser.Game(config);
 ### Get plugin instance
 
 ```javascript
-this.textTyping = scene.plugins.get('rexTextTyping');
+var textTyping = scene.plugins.get('rexTextTyping');
 ```
 
 ### Create instance
 
 ```javascript
-txt.typing = this.textTyping(txt, {
+txt.typing = textTyping.add(txt, {
     //speed: 333,       // typing speed in ms
     //typeMode: 0,      //0|'left-to-right'|1|'right-to-left'|2|'middle-to-sides'|3|'sides-to-middle'
     //setTextCallback: function(text, isLastChar, insertIdx){ return text; }  // callback before set-text

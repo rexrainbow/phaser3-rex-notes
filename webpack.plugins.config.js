@@ -25,6 +25,8 @@ module.exports = {
         // member of text
         'texttyping': './plugins/texttyping.js',
         'texttypingplugin': './plugins/texttyping-plugin.js',
+        'textpage': './plugins/textpage.js',
+        'textpageplugin': './plugins/textpage-plugin.js',        
     },
     output: {
         pathinfo: true,

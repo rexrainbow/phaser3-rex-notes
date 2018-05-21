@@ -9,9 +9,11 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() { }
+    preload() {}
 
     create() {
+        this.textPage = this.plugins.get('rexTextPage');
+
         var lines = [];
         for (var i = 0; i < 50; i++) {
             lines.push(i.toString());
@@ -23,7 +25,7 @@ class Demo extends Phaser.Scene {
             },
             maxLines: 7
         });
-        txt.page = new TextPagePlugin(txt, {
+        txt.page = this.textPage.add(txt, {
             //text: lines
         });
         txt.page.setText(lines);
@@ -46,7 +48,7 @@ class Demo extends Phaser.Scene {
         this.input.keyboard.on('keydown_DOWN', printPageIdx);
     }
 
-    update() { }
+    update() {}
 }
 
 var config = {
@@ -54,7 +56,14 @@ var config = {
     parent: 'phaser-example',
     width: 800,
     height: 600,
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexTextPage',
+            plugin: TextPagePlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

@@ -491,37 +491,37 @@
             "title": "Data in cache"
         }, 
         {
-            "location": "/webfontloaderplugin/index.html", 
+            "location": "/webfontloader/index.html", 
             "text": "Introduction\n\n\nLoad web font by \ngoogle webfont loader\n in payload or preload stage.\n\n\n\n\nAuthor: Rex\n\n\nCustom File of loader, installed by global plugin\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nInstall plugin\n\n\nInstall plugin in \nconfiguration of game\n\n\nvar\n \nconfig\n \n=\n \n{\n\n    \n// ...\n\n    \nplugins\n:\n \n{\n\n        \nglobal\n:\n \n[{\n\n            \nkey\n:\n \nWebFontLoader\n,\n\n            \nplugin\n:\n \nWebFontLoaderPlugin\n,\n\n            \nstart\n:\n \ntrue\n\n        \n},\n\n        \n// ...\n\n        \n]\n\n    \n}\n\n    \n// ...\n\n\n};\n\n\nvar\n \ngame\n \n=\n \nnew\n \nPhaser\n.\nGame\n(\nconfig\n);\n\n\n\n\n\nor install it in previous scene (i.e. a preload scene).\n\n\n\n\nWarning\n\n\nThe best way of installing this plugin is to load it in game config. \n\n\nThis custom file loader won't be added into loader of current scene after loader is created (i.e. loading plugin using \nthis.load.plugin(...)\n, or loading in payload of scene)\n\n\n\n\nLoad webfont\n\n\nIn preload stage:\n\n\nthis\n.\nload\n.\nrexWebfont\n({\n\n    \ngoogle\n:\n \n{\n\n        \nfamilies\n:\n \n[\nBangers\n]\n\n    \n}\n\n\n});\n\n\n\n\n\nor load font in pack\n\n\nvar\n \nsceneConfig\n \n=\n \n{\n\n    \nkey\n:\n \n...\n,\n\n    \npack\n:\n \n{\n\n        \nfiles\n:\n \n[{\n\n                \ntype\n:\n \nrexWebFont\n,\n\n                \nkey\n:\n \nwebfont\n,\n\n                \nconfig\n:\n \n{\n\n                    \ngoogle\n:\n \n{\n\n                        \nfamilies\n:\n \n[\nBangers\n]\n\n                    \n}\n\n                \n}\n\n            \n}\n\n        \n]\n\n    \n}\n\n\n};\n\n\n\n\n\nEvents\n\n\n\n\n\n\nfontactive\n event\n\n\nthis\n.\nload\n.\non\n(\nwebfontactive\n,\n \nfunction\n(\nfileObj\n,\n \nfamilyName\n){});\n\n\n\n\n\n\n\n\n\nfontinactive\n event\n\n\nthis\n.\nload\n.\non\n(\nwebfontinactive\n,\n \nfunction\n(\nfileObj\n,\n \nfamilyName\n){});", 
             "title": "Webfont loader"
         }, 
         {
-            "location": "/webfontloaderplugin/index.html#introduction", 
+            "location": "/webfontloader/index.html#introduction", 
             "text": "Load web font by  google webfont loader  in payload or preload stage.   Author: Rex  Custom File of loader, installed by global plugin", 
             "title": "Introduction"
         }, 
         {
-            "location": "/webfontloaderplugin/index.html#source-code", 
+            "location": "/webfontloader/index.html#source-code", 
             "text": "Link", 
             "title": "Source code"
         }, 
         {
-            "location": "/webfontloaderplugin/index.html#usage", 
+            "location": "/webfontloader/index.html#usage", 
             "text": "", 
             "title": "Usage"
         }, 
         {
-            "location": "/webfontloaderplugin/index.html#install-plugin", 
+            "location": "/webfontloader/index.html#install-plugin", 
             "text": "Install plugin in  configuration of game  var   config   =   { \n     // ... \n     plugins :   { \n         global :   [{ \n             key :   WebFontLoader , \n             plugin :   WebFontLoaderPlugin , \n             start :   true \n         }, \n         // ... \n         ] \n     } \n     // ...  };  var   game   =   new   Phaser . Game ( config );   or install it in previous scene (i.e. a preload scene).   Warning  The best way of installing this plugin is to load it in game config.   This custom file loader won't be added into loader of current scene after loader is created (i.e. loading plugin using  this.load.plugin(...) , or loading in payload of scene)", 
             "title": "Install plugin"
         }, 
         {
-            "location": "/webfontloaderplugin/index.html#load-webfont", 
+            "location": "/webfontloader/index.html#load-webfont", 
             "text": "In preload stage:  this . load . rexWebfont ({ \n     google :   { \n         families :   [ Bangers ] \n     }  });   or load font in pack  var   sceneConfig   =   { \n     key :   ... , \n     pack :   { \n         files :   [{ \n                 type :   rexWebFont , \n                 key :   webfont , \n                 config :   { \n                     google :   { \n                         families :   [ Bangers ] \n                     } \n                 } \n             } \n         ] \n     }  };", 
             "title": "Load webfont"
         }, 
         {
-            "location": "/webfontloaderplugin/index.html#events", 
+            "location": "/webfontloader/index.html#events", 
             "text": "fontactive  event  this . load . on ( webfontactive ,   function ( fileObj ,   familyName ){});     fontinactive  event  this . load . on ( webfontinactive ,   function ( fileObj ,   familyName ){});", 
             "title": "Events"
         }, 
@@ -952,7 +952,7 @@
         }, 
         {
             "location": "/texttyping/index.html", 
-            "text": "Introduction\n\n\nTyping text on text object, \nbbcode text object\n, or \ntag text boject\n.\n\n\n\n\nAuthor: Rex\n\n\nMember of text object\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nUser could import class directly, or install it by global plugin.\n\n\nImport class\n\n\nimport\n \nrexTextTyping\n \nfrom\n \n./plugins/texttyping.js\n;\n\n\n\n\n\nInstall global plugin\n\n\nInstall plugin in \nconfiguration of game\n\n\nimport\n \nTextTypingPlugin\n \nfrom\n \n./plugins/texttyping-plugin.js\n;\n\n\n\nvar\n \nconfig\n \n=\n \n{\n\n    \n// ...\n\n    \nplugins\n:\n \n{\n\n        \nglobal\n:\n \n[{\n\n            \nkey\n:\n \nrexTextTyping\n,\n\n            \nplugin\n:\n \nTextTypingPlugin\n,\n\n            \nstart\n:\n \ntrue\n\n        \n},\n\n        \n// ...\n\n        \n]\n\n    \n}\n\n    \n// ...\n\n\n};\n\n\nvar\n \ngame\n \n=\n \nnew\n \nPhaser\n.\nGame\n(\nconfig\n);\n\n\n\n\n\nGet plugin instance\n\n\nthis\n.\ntextTyping\n \n=\n \nscene\n.\nplugins\n.\nget\n(\nrexTextTyping\n);\n\n\n\n\n\nCreate instance\n\n\ntxt\n.\ntyping\n \n=\n \nthis\n.\ntextTyping\n(\ntxt\n,\n \n{\n\n    \n//speed: 333,       // typing speed in ms\n\n    \n//typeMode: 0,      //0|\nleft-to-right\n|1|\nright-to-left\n|2|\nmiddle-to-sides\n|3|\nsides-to-middle\n\n    \n//setTextCallback: function(text, isLastChar, insertIdx){ return text; }  // callback before set-text\n\n    \n//setTextCallbackScope: null\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\nspeed: typing speed in ms\n\n\ntypeMode :\n\n\n'left-to-right'\n, or \n0\n : typing characters from left to right.\n\n\n'right-to-left'\n, or \n1\n : typing characters from right to left.\n\n\n'middle-to-sides'\n, or \n2\n : typing characters from middle to sides, optional.\n\n\n'sides-to-middle'\n, or \n3\n : typing characters from sides to middle.    \n\n\n\n\n\n\nsetTextCallback : callback befor set-text, to decorate display text.\n    \nfunction\n(\ntext\n,\n \nisLastChar\n,\n \ninsertIdx\n)\n \n{\n \nreturn\n \ntext\n;\n \n}\n\n\n\n\nsetTextCallbackScope : scope of setTextCallback function.\n\n\n\n\nStart typing\n\n\ntxt\n.\ntyping\n.\nstart\n(\nABCDEFG\n);\n\n\n// txt.typing.start(\nABCDEFG\n, 333);  // speed in ms\n\n\n\n\n\nEvents\n\n\n\n\nOn typing :\n\n\n\n\ntxt\n.\ntyping\n.\non\n(\ntype\n,\n \nfunction\n(){});\n\n\n\n\n\n\n\nOn typing completed :\n\n\n\n\ntxt\n.\ntyping\n.\non\n(\ncomplete\n,\n \nfunction\n(){});\n\n\n\n\n\nOther commands\n\n\n\n\nIs-typing state\n\n\n\n\nvar\n \nisTyping\n \n=\n \ntxt\n.\ntyping\n.\nisTyping\n;\n\n\n\n\n\n\n\nStop typing\n\n\n\n\ntxt\n.\ntyping\n.\nstop\n();\n\n\n// txt.typing.stop(true);;  // stop and show all text\n\n\n\n\n\n\n\nPause typing\n\n\n\n\ntxt\n.\ntyping\n.\npause\n();\n\n\n\n\n\n\n\nResume typing\n\n\n\n\ntxt\n.\ntyping\n.\nresume\n();\n\n\n\n\n\n\n\nSet typing speed\n\n\n\n\ntxt\n.\ntyping\n.\nsetTypeSpeed\n(\nspeed\n);\n  \n// speed in ms\n\n\n\n\n\nSet speed in \ntyping\n event or setTextCallback to change typing speed of remaining text.\n\n\n\n\nTyping more text\n\n\n\n\ntxt\n.\ntyping\n.\nappendText\n(\ntext\n);\n\n\n\n\n\n\n\nSet typing mode\n\n\n\n\ntxt\n.\ntyping\n.\nsetTypeMode\n(\nmode\n);\n  \n//0|\nleft-to-right\n|1|\nright-to-left\n|2|\nmiddle-to-sides\n|3|\nsides-to-middle", 
+            "text": "Introduction\n\n\nTyping text on text object, \nbbcode text object\n, or \ntag text boject\n.\n\n\n\n\nAuthor: Rex\n\n\nMember of text object\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nUser could import class directly, or install it by global plugin.\n\n\nImport class\n\n\nimport\n \nrexTextTyping\n \nfrom\n \n./plugins/texttyping.js\n;\n\n\n\n\n\nInstall global plugin\n\n\nInstall plugin in \nconfiguration of game\n\n\nimport\n \nTextTypingPlugin\n \nfrom\n \n./plugins/texttyping-plugin.js\n;\n\n\n\nvar\n \nconfig\n \n=\n \n{\n\n    \n// ...\n\n    \nplugins\n:\n \n{\n\n        \nglobal\n:\n \n[{\n\n            \nkey\n:\n \nrexTextTyping\n,\n\n            \nplugin\n:\n \nTextTypingPlugin\n,\n\n            \nstart\n:\n \ntrue\n\n        \n},\n\n        \n// ...\n\n        \n]\n\n    \n}\n\n    \n// ...\n\n\n};\n\n\nvar\n \ngame\n \n=\n \nnew\n \nPhaser\n.\nGame\n(\nconfig\n);\n\n\n\n\n\nGet plugin instance\n\n\nvar\n \ntextTyping\n \n=\n \nscene\n.\nplugins\n.\nget\n(\nrexTextTyping\n);\n\n\n\n\n\nCreate instance\n\n\ntxt\n.\ntyping\n \n=\n \ntextTyping\n.\nadd\n(\ntxt\n,\n \n{\n\n    \n//speed: 333,       // typing speed in ms\n\n    \n//typeMode: 0,      //0|\nleft-to-right\n|1|\nright-to-left\n|2|\nmiddle-to-sides\n|3|\nsides-to-middle\n\n    \n//setTextCallback: function(text, isLastChar, insertIdx){ return text; }  // callback before set-text\n\n    \n//setTextCallbackScope: null\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\nspeed: typing speed in ms\n\n\ntypeMode :\n\n\n'left-to-right'\n, or \n0\n : typing characters from left to right.\n\n\n'right-to-left'\n, or \n1\n : typing characters from right to left.\n\n\n'middle-to-sides'\n, or \n2\n : typing characters from middle to sides, optional.\n\n\n'sides-to-middle'\n, or \n3\n : typing characters from sides to middle.    \n\n\n\n\n\n\nsetTextCallback : callback befor set-text, to decorate display text.\n    \nfunction\n(\ntext\n,\n \nisLastChar\n,\n \ninsertIdx\n)\n \n{\n \nreturn\n \ntext\n;\n \n}\n\n\n\n\nsetTextCallbackScope : scope of setTextCallback function.\n\n\n\n\nStart typing\n\n\ntxt\n.\ntyping\n.\nstart\n(\nABCDEFG\n);\n\n\n// txt.typing.start(\nABCDEFG\n, 333);  // speed in ms\n\n\n\n\n\nEvents\n\n\n\n\nOn typing :\n\n\n\n\ntxt\n.\ntyping\n.\non\n(\ntype\n,\n \nfunction\n(){});\n\n\n\n\n\n\n\nOn typing completed :\n\n\n\n\ntxt\n.\ntyping\n.\non\n(\ncomplete\n,\n \nfunction\n(){});\n\n\n\n\n\nOther commands\n\n\n\n\nIs-typing state\n\n\n\n\nvar\n \nisTyping\n \n=\n \ntxt\n.\ntyping\n.\nisTyping\n;\n\n\n\n\n\n\n\nStop typing\n\n\n\n\ntxt\n.\ntyping\n.\nstop\n();\n\n\n// txt.typing.stop(true);;  // stop and show all text\n\n\n\n\n\n\n\nPause typing\n\n\n\n\ntxt\n.\ntyping\n.\npause\n();\n\n\n\n\n\n\n\nResume typing\n\n\n\n\ntxt\n.\ntyping\n.\nresume\n();\n\n\n\n\n\n\n\nSet typing speed\n\n\n\n\ntxt\n.\ntyping\n.\nsetTypeSpeed\n(\nspeed\n);\n  \n// speed in ms\n\n\n\n\n\nSet speed in \ntyping\n event or setTextCallback to change typing speed of remaining text.\n\n\n\n\nTyping more text\n\n\n\n\ntxt\n.\ntyping\n.\nappendText\n(\ntext\n);\n\n\n\n\n\n\n\nSet typing mode\n\n\n\n\ntxt\n.\ntyping\n.\nsetTypeMode\n(\nmode\n);\n  \n//0|\nleft-to-right\n|1|\nright-to-left\n|2|\nmiddle-to-sides\n|3|\nsides-to-middle", 
             "title": "Typing"
         }, 
         {
@@ -982,12 +982,12 @@
         }, 
         {
             "location": "/texttyping/index.html#get-plugin-instance", 
-            "text": "this . textTyping   =   scene . plugins . get ( rexTextTyping );", 
+            "text": "var   textTyping   =   scene . plugins . get ( rexTextTyping );", 
             "title": "Get plugin instance"
         }, 
         {
             "location": "/texttyping/index.html#create-instance", 
-            "text": "txt . typing   =   this . textTyping ( txt ,   { \n     //speed: 333,       // typing speed in ms \n     //typeMode: 0,      //0| left-to-right |1| right-to-left |2| middle-to-sides |3| sides-to-middle \n     //setTextCallback: function(text, isLastChar, insertIdx){ return text; }  // callback before set-text \n     //setTextCallbackScope: null  });   Properties   speed: typing speed in ms  typeMode :  'left-to-right' , or  0  : typing characters from left to right.  'right-to-left' , or  1  : typing characters from right to left.  'middle-to-sides' , or  2  : typing characters from middle to sides, optional.  'sides-to-middle' , or  3  : typing characters from sides to middle.        setTextCallback : callback befor set-text, to decorate display text.\n     function ( text ,   isLastChar ,   insertIdx )   {   return   text ;   }   setTextCallbackScope : scope of setTextCallback function.", 
+            "text": "txt . typing   =   textTyping . add ( txt ,   { \n     //speed: 333,       // typing speed in ms \n     //typeMode: 0,      //0| left-to-right |1| right-to-left |2| middle-to-sides |3| sides-to-middle \n     //setTextCallback: function(text, isLastChar, insertIdx){ return text; }  // callback before set-text \n     //setTextCallbackScope: null  });   Properties   speed: typing speed in ms  typeMode :  'left-to-right' , or  0  : typing characters from left to right.  'right-to-left' , or  1  : typing characters from right to left.  'middle-to-sides' , or  2  : typing characters from middle to sides, optional.  'sides-to-middle' , or  3  : typing characters from sides to middle.        setTextCallback : callback befor set-text, to decorate display text.\n     function ( text ,   isLastChar ,   insertIdx )   {   return   text ;   }   setTextCallbackScope : scope of setTextCallback function.", 
             "title": "Create instance"
         }, 
         {
@@ -1006,47 +1006,62 @@
             "title": "Other commands"
         }, 
         {
-            "location": "/textpageplugin/index.html", 
-            "text": "Introduction\n\n\nDisplay text page by page on text object, \nbbcode text object\n, or \ntag text boject\n.\n\n\n\n\nAuthor: Rex\n\n\nMember of text object\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\nvar\n \ntxt\n \n=\n \nscene\n.\nadd\n.\ntext\n(\nx\n,\n \ny\n,\n \n,\n \n{\n\n    \nwordWrap\n:\n  \n{\n\n        \nwidth\n:\n \n500\n\n    \n},\n\n    \nmaxLines\n:\n \n7\n\n\n});\n\n\ntxt\n.\npage\n \n=\n \nnew\n \nTextPagePlugin\n(\ntxt\n,\n \n{\n\n    \n//text: \n,       // content in string or array\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\ntext: content in string or array, optional\n\n\n\n\nSet content\n\n\ntxt\n.\npage\n.\nsetText\n(\ntext\n);\n   \n// content in string or array\n\n\n\n\n\n\n\nAppend text\n\n\n\n\ntxt\n.\npage\n.\nappendText\n(\ntext\n);\n \n// content in string or array\n\n\n\n\n\nShow page\n\n\ntxt\n.\npage\n.\nshowPage\n();\n         \n// display current page\n\n\ntxt\n.\npage\n.\nshowNextPage\n();\n     \n// display next page\n\n\ntxt\n.\npage\n.\nshowPreviousPage\n();\n \n// display previous page\n\n\n\n\n\nInitial page index is \n-1\n, so user could call \ntxt.page.showNextPage()\n to display first page.\n\n\nGet lines of page\n\n\nvar\n \nlines\n \n=\n \ntxt\n.\npage\n.\ngetPage\n();\n         \n// get lines of current page\n\n\nvar\n \nlines\n \n=\n \ntxt\n.\npage\n.\ngetNextPage\n();\n     \n// get lines of next page\n\n\nvar\n \nlines\n \n=\n \ntxt\n.\npage\n.\ngetPreviousPage\n();\n \n// get lines of previous page\n\n\n\n\n\nOther properties\n\n\n\n\nCurrent page index : \ntxt.page.pageIdx\n\n\nNumber of pages : \ntxt.page.pageCount\n\n\nIs last page: \ntxt.page.isLastPage\n\n\nIs first page: \ntxt.page.isFirstPage", 
+            "location": "/textpage/index.html", 
+            "text": "Introduction\n\n\nDisplay text page by page on text object, \nbbcode text object\n, or \ntag text boject\n.\n\n\n\n\nAuthor: Rex\n\n\nMember of text object\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nUser could import class directly, or install it by global plugin.\n\n\nImport class\n\n\nimport\n \nrexTextPage\n \nfrom\n \n./plugins/textpage.js\n;\n\n\n\n\n\nInstall global plugin\n\n\nInstall plugin in \nconfiguration of game\n\n\nimport\n \nTextPagePlugin\n \nfrom\n \n./plugins/textpage-plugin.js\n;\n\n\n\nvar\n \nconfig\n \n=\n \n{\n\n    \n// ...\n\n    \nplugins\n:\n \n{\n\n        \nglobal\n:\n \n[{\n\n            \nkey\n:\n \nrexTextPage\n,\n\n            \nplugin\n:\n \nTextPagePlugin\n,\n\n            \nstart\n:\n \ntrue\n\n        \n},\n\n        \n// ...\n\n        \n]\n\n    \n}\n\n    \n// ...\n\n\n};\n\n\nvar\n \ngame\n \n=\n \nnew\n \nPhaser\n.\nGame\n(\nconfig\n);\n\n\n\n\n\nGet plugin instance\n\n\nvar\n \ntextPage\n \n=\n \nscene\n.\nplugins\n.\nget\n(\nrexTextPage\n);\n\n\n\n\n\nCreate instance\n\n\nvar\n \ntxt\n \n=\n \nscene\n.\nadd\n.\ntext\n(\nx\n,\n \ny\n,\n \n,\n \n{\n\n    \nwordWrap\n:\n  \n{\n\n        \nwidth\n:\n \n500\n\n    \n},\n\n    \nmaxLines\n:\n \n7\n\n\n});\n\n\ntxt\n.\npage\n \n=\n \ntextPage\n.\nadd\n(\ntxt\n,\n \n{\n\n    \n//text: \n,       // content in string or array\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\ntext: content in string or array, optional\n\n\n\n\nSet content\n\n\ntxt\n.\npage\n.\nsetText\n(\ntext\n);\n   \n// content in string or array\n\n\n\n\n\n\n\nAppend text\n\n\n\n\ntxt\n.\npage\n.\nappendText\n(\ntext\n);\n \n// content in string or array\n\n\n\n\n\nShow page\n\n\ntxt\n.\npage\n.\nshowPage\n();\n         \n// display current page\n\n\ntxt\n.\npage\n.\nshowNextPage\n();\n     \n// display next page\n\n\ntxt\n.\npage\n.\nshowPreviousPage\n();\n \n// display previous page\n\n\n\n\n\nInitial page index is \n-1\n, so user could call \ntxt.page.showNextPage()\n to display first page.\n\n\nGet lines of page\n\n\nvar\n \nlines\n \n=\n \ntxt\n.\npage\n.\ngetPage\n();\n         \n// get lines of current page\n\n\nvar\n \nlines\n \n=\n \ntxt\n.\npage\n.\ngetNextPage\n();\n     \n// get lines of next page\n\n\nvar\n \nlines\n \n=\n \ntxt\n.\npage\n.\ngetPreviousPage\n();\n \n// get lines of previous page\n\n\n\n\n\nOther properties\n\n\n\n\nCurrent page index : \ntxt.page.pageIdx\n\n\nNumber of pages : \ntxt.page.pageCount\n\n\nIs last page: \ntxt.page.isLastPage\n\n\nIs first page: \ntxt.page.isFirstPage", 
             "title": "Page"
         }, 
         {
-            "location": "/textpageplugin/index.html#introduction", 
+            "location": "/textpage/index.html#introduction", 
             "text": "Display text page by page on text object,  bbcode text object , or  tag text boject .   Author: Rex  Member of text object", 
             "title": "Introduction"
         }, 
         {
-            "location": "/textpageplugin/index.html#source-code", 
+            "location": "/textpage/index.html#source-code", 
             "text": "Link", 
             "title": "Source code"
         }, 
         {
-            "location": "/textpageplugin/index.html#usage", 
-            "text": "", 
+            "location": "/textpage/index.html#usage", 
+            "text": "User could import class directly, or install it by global plugin.", 
             "title": "Usage"
         }, 
         {
-            "location": "/textpageplugin/index.html#create-instance", 
-            "text": "var   txt   =   scene . add . text ( x ,   y ,   ,   { \n     wordWrap :    { \n         width :   500 \n     }, \n     maxLines :   7  });  txt . page   =   new   TextPagePlugin ( txt ,   { \n     //text:  ,       // content in string or array  });   Properties   text: content in string or array, optional", 
+            "location": "/textpage/index.html#import-class", 
+            "text": "import   rexTextPage   from   ./plugins/textpage.js ;", 
+            "title": "Import class"
+        }, 
+        {
+            "location": "/textpage/index.html#install-global-plugin", 
+            "text": "Install plugin in  configuration of game  import   TextPagePlugin   from   ./plugins/textpage-plugin.js ;  var   config   =   { \n     // ... \n     plugins :   { \n         global :   [{ \n             key :   rexTextPage , \n             plugin :   TextPagePlugin , \n             start :   true \n         }, \n         // ... \n         ] \n     } \n     // ...  };  var   game   =   new   Phaser . Game ( config );", 
+            "title": "Install global plugin"
+        }, 
+        {
+            "location": "/textpage/index.html#get-plugin-instance", 
+            "text": "var   textPage   =   scene . plugins . get ( rexTextPage );", 
+            "title": "Get plugin instance"
+        }, 
+        {
+            "location": "/textpage/index.html#create-instance", 
+            "text": "var   txt   =   scene . add . text ( x ,   y ,   ,   { \n     wordWrap :    { \n         width :   500 \n     }, \n     maxLines :   7  });  txt . page   =   textPage . add ( txt ,   { \n     //text:  ,       // content in string or array  });   Properties   text: content in string or array, optional", 
             "title": "Create instance"
         }, 
         {
-            "location": "/textpageplugin/index.html#set-content", 
+            "location": "/textpage/index.html#set-content", 
             "text": "txt . page . setText ( text );     // content in string or array    Append text   txt . page . appendText ( text );   // content in string or array", 
             "title": "Set content"
         }, 
         {
-            "location": "/textpageplugin/index.html#show-page", 
+            "location": "/textpage/index.html#show-page", 
             "text": "txt . page . showPage ();           // display current page  txt . page . showNextPage ();       // display next page  txt . page . showPreviousPage ();   // display previous page   Initial page index is  -1 , so user could call  txt.page.showNextPage()  to display first page.", 
             "title": "Show page"
         }, 
         {
-            "location": "/textpageplugin/index.html#get-lines-of-page", 
+            "location": "/textpage/index.html#get-lines-of-page", 
             "text": "var   lines   =   txt . page . getPage ();           // get lines of current page  var   lines   =   txt . page . getNextPage ();       // get lines of next page  var   lines   =   txt . page . getPreviousPage ();   // get lines of previous page", 
             "title": "Get lines of page"
         }, 
         {
-            "location": "/textpageplugin/index.html#other-properties", 
+            "location": "/textpage/index.html#other-properties", 
             "text": "Current page index :  txt.page.pageIdx  Number of pages :  txt.page.pageCount  Is last page:  txt.page.isLastPage  Is first page:  txt.page.isFirstPage", 
             "title": "Other properties"
         }, 
@@ -3151,47 +3166,47 @@
             "title": "Set encoding"
         }, 
         {
-            "location": "/xorplugin/index.html", 
+            "location": "/xor/index.html", 
             "text": "Introduction\n\n\nEncrypt or decrypt string by XOR algorithm.\n\n\n\n\nAuthor: Rex\n\n\nFunctions collection\n\n\n\n\nSource code\n\n\nEncrypt\n\n\nDecrypt\n\n\nUsage\n\n\nUser could import class directly, or install it by global plugin.\n\n\nImport class\n\n\nimport\n \nrexXOR\n \nfrom\n \n./plugins/xor.js\n;\n\n\n\n\n\nInstall global plugin\n\n\nInstall plugin in \nconfiguration of game\n\n\nimport\n \nXORPlugin\n \nfrom\n \n./plugins/xor-plugin.js\n;\n\n\n\nvar\n \nconfig\n \n=\n \n{\n\n    \n// ...\n\n    \nplugins\n:\n \n{\n\n        \nglobal\n:\n \n[{\n\n            \nkey\n:\n \nrexXOR\n,\n\n            \nplugin\n:\n \nXORPlugin\n,\n\n            \nstart\n:\n \ntrue\n\n        \n},\n\n        \n// ...\n\n        \n]\n\n    \n}\n\n    \n// ...\n\n\n};\n\n\nvar\n \ngame\n \n=\n \nnew\n \nPhaser\n.\nGame\n(\nconfig\n);\n\n\n\n\n\nGet plugin instance\n\n\nvar\n \nXOR\n \n=\n \nscene\n.\nplugins\n.\nget\n(\nrexXOR\n);\n\n\n\n\n\nEncrypt\n\n\nvar\n \nencResult\n \n=\n \nXOR\n.\nEncrypt\n(\nsrc\n,\n \npwd\n);\n\n\n\n\n\nDecrypt\n\n\nvar\n \ndecResult\n \n=\n \nXOR\n.\nDecrypt\n(\nencResult\n,\n \npwd\n);", 
             "title": "XOR"
         }, 
         {
-            "location": "/xorplugin/index.html#introduction", 
+            "location": "/xor/index.html#introduction", 
             "text": "Encrypt or decrypt string by XOR algorithm.   Author: Rex  Functions collection", 
             "title": "Introduction"
         }, 
         {
-            "location": "/xorplugin/index.html#source-code", 
+            "location": "/xor/index.html#source-code", 
             "text": "Encrypt  Decrypt", 
             "title": "Source code"
         }, 
         {
-            "location": "/xorplugin/index.html#usage", 
+            "location": "/xor/index.html#usage", 
             "text": "User could import class directly, or install it by global plugin.", 
             "title": "Usage"
         }, 
         {
-            "location": "/xorplugin/index.html#import-class", 
+            "location": "/xor/index.html#import-class", 
             "text": "import   rexXOR   from   ./plugins/xor.js ;", 
             "title": "Import class"
         }, 
         {
-            "location": "/xorplugin/index.html#install-global-plugin", 
+            "location": "/xor/index.html#install-global-plugin", 
             "text": "Install plugin in  configuration of game  import   XORPlugin   from   ./plugins/xor-plugin.js ;  var   config   =   { \n     // ... \n     plugins :   { \n         global :   [{ \n             key :   rexXOR , \n             plugin :   XORPlugin , \n             start :   true \n         }, \n         // ... \n         ] \n     } \n     // ...  };  var   game   =   new   Phaser . Game ( config );", 
             "title": "Install global plugin"
         }, 
         {
-            "location": "/xorplugin/index.html#get-plugin-instance", 
+            "location": "/xor/index.html#get-plugin-instance", 
             "text": "var   XOR   =   scene . plugins . get ( rexXOR );", 
             "title": "Get plugin instance"
         }, 
         {
-            "location": "/xorplugin/index.html#encrypt", 
+            "location": "/xor/index.html#encrypt", 
             "text": "var   encResult   =   XOR . Encrypt ( src ,   pwd );", 
             "title": "Encrypt"
         }, 
         {
-            "location": "/xorplugin/index.html#decrypt", 
+            "location": "/xor/index.html#decrypt", 
             "text": "var   decResult   =   XOR . Decrypt ( encResult ,   pwd );", 
             "title": "Decrypt"
         }
