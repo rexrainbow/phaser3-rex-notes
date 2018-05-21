@@ -1,0 +1,1865 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-0.17.3, mkdocs-material-2.7.0">
+    
+    
+      
+        <title>Container - Notes of Phaser 3</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.78aab2dc.css">
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <a href="#introduction" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../index.html" title="Notes of Phaser 3" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                Notes of Phaser 3
+              </span>
+              <span class="md-header-nav__topic">
+                Container
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </span>
+    Notes of Phaser 3
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../index.html" title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      System
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        System
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../game/index.html" title="Game" class="md-nav__link">
+      Game
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../scenemanager/index.html" title="Scene manager" class="md-nav__link">
+      Scene manager
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../scene/index.html" title="Scene" class="md-nav__link">
+      Scene
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Input
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Input
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../input/index.html" title="Input" class="md-nav__link">
+      Input
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../touchevents/index.html" title="Touch events" class="md-nav__link">
+      Touch events
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../keyboardevents/index.html" title="Keyboard events" class="md-nav__link">
+      Keyboard events
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../dragplugin/index.html" title="Drag" class="md-nav__link">
+      Drag
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../dragcursorplugin/index.html" title="Drag to cursorKeys" class="md-nav__link">
+      Drag to cursorKeys
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Loader
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Loader
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../loader/index.html" title="Loader" class="md-nav__link">
+      Loader
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../webfontloaderplugin/index.html" title="Webfont loader" class="md-nav__link">
+      Webfont loader
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
+    
+    <label class="md-nav__link" for="nav-5">
+      Game object
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Game object
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../gameobject/index.html" title="Game object" class="md-nav__link">
+      Game object
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2" type="checkbox" id="nav-5-2">
+    
+    <label class="md-nav__link" for="nav-5-2">
+      Sprite
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-2">
+        Sprite
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../image/index.html" title="Image" class="md-nav__link">
+      Image
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../blitter/index.html" title="Blitter" class="md-nav__link">
+      Blitter
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-3" type="checkbox" id="nav-5-3">
+    
+    <label class="md-nav__link" for="nav-5-3">
+      Text
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-3">
+        Text
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../text/index.html" title="Text" class="md-nav__link">
+      Text
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../bbcodetext/index.html" title="BBCode Text" class="md-nav__link">
+      BBCode Text
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tagtext/index.html" title="Tag Text" class="md-nav__link">
+      Tag Text
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../texttyping/index.html" title="Typing" class="md-nav__link">
+      Typing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../textpageplugin/index.html" title="Page" class="md-nav__link">
+      Page
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-4" type="checkbox" id="nav-5-4">
+    
+    <label class="md-nav__link" for="nav-5-4">
+      Canvas
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-4">
+        Canvas
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../graphics/index.html" title="Graphics" class="md-nav__link">
+      Graphics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../canvasplugin/index.html" title="Canvas" class="md-nav__link">
+      Canvas
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-5" type="checkbox" id="nav-5-5">
+    
+    <label class="md-nav__link" for="nav-5-5">
+      Tile map
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-5">
+        Tile map
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tilemap/index.html" title="Tile map" class="md-nav__link">
+      Tile map
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-6" type="checkbox" id="nav-5-6" checked>
+    
+    <label class="md-nav__link" for="nav-5-6">
+      Container
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-6">
+        Container
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Container
+      </label>
+    
+    <a href="index.html" title="Container" class="md-nav__link md-nav__link--active">
+      Container
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#container" title="Container" class="md-nav__link">
+    Container
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-container-object" title="Add container object" class="md-nav__link">
+    Add container object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#destroy" title="Destroy" class="md-nav__link">
+    Destroy
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-properties" title="Set properties" class="md-nav__link">
+    Set properties
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-size" title="Set size" class="md-nav__link">
+    Set size
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hit-area" title="Hit area" class="md-nav__link">
+    Hit area
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#non-exclusive" title="Non-exclusive" class="md-nav__link">
+    Non-exclusive
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#children" title="Children" class="md-nav__link">
+    Children
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-child" title="Add child" class="md-nav__link">
+    Add child
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exist" title="Exist" class="md-nav__link">
+    Exist
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-child" title="Get child" class="md-nav__link">
+    Get child
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-child" title="Remove child" class="md-nav__link">
+    Remove child
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#replace-child" title="Replace child" class="md-nav__link">
+    Replace child
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#order-of-child" title="Order of child" class="md-nav__link">
+    Order of child
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-properties_1" title="Set properties" class="md-nav__link">
+    Set properties
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-each-child" title="For each child" class="md-nav__link">
+    For each child
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compare-with-group-object" title="Compare with group object" class="md-nav__link">
+    Compare with group object
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../group/index.html" title="Group" class="md-nav__link">
+      Group
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../groupactions/index.html" title="Group actions" class="md-nav__link">
+      Group actions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../gridtableplugin/index.html" title="Grid table" class="md-nav__link">
+      Grid table
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Time
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        Time
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../date/index.html" title="Date" class="md-nav__link">
+      Date
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../timer/index.html" title="Timer" class="md-nav__link">
+      Timer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../timeline/index.html" title="Timeline" class="md-nav__link">
+      Timeline
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../clockplugin/index.html" title="Clock" class="md-nav__link">
+      Clock
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Behavior
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        Behavior
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-1" type="checkbox" id="nav-7-1">
+    
+    <label class="md-nav__link" for="nav-7-1">
+      Tween
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-7-1">
+        Tween
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tween/index.html" title="Tween" class="md-nav__link">
+      Tween
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../fadeoutdestroy/index.html" title="Fade out destroy" class="md-nav__link">
+      Fade out destroy
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2" type="checkbox" id="nav-7-2">
+    
+    <label class="md-nav__link" for="nav-7-2">
+      Arcade
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-7-2">
+        Arcade
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../arcade/index.html" title="Physics" class="md-nav__link">
+      Physics
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      Audio
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        Audio
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../audio/index.html" title="Audio" class="md-nav__link">
+      Audio
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../fadevolume/index.html" title="Volume fading" class="md-nav__link">
+      Volume fading
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
+      Data
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        Data
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../datamanager/index.html" title="Data manager" class="md-nav__link">
+      Data manager
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../array/index.html" title="Array" class="md-nav__link">
+      Array
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../csvtoarray/index.html" title="CSV to array" class="md-nav__link">
+      CSV to array
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../csvtohashtable/index.html" title="CSV to hash table" class="md-nav__link">
+      CSV to hash table
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
+    
+    <label class="md-nav__link" for="nav-10">
+      Logic
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-10">
+        Logic
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../eventemitter3/index.html" title="Event emitter" class="md-nav__link">
+      Event emitter
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../runcommands/index.html" title="Run commands" class="md-nav__link">
+      Run commands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10-3" type="checkbox" id="nav-10-3">
+    
+    <label class="md-nav__link" for="nav-10-3">
+      TCRP
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-10-3">
+        TCRP
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tcrprecoderplugin/index.html" title="Recoder" class="md-nav__link">
+      Recoder
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tcrpplayerplugin/index.html" title="Player" class="md-nav__link">
+      Player
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11">
+    
+    <label class="md-nav__link" for="nav-11">
+      Camera
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-11">
+        Camera
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../camera/index.html" title="Camera" class="md-nav__link">
+      Camera
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-12" type="checkbox" id="nav-12">
+    
+    <label class="md-nav__link" for="nav-12">
+      Math
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-12">
+        Math
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-12-1" type="checkbox" id="nav-12-1">
+    
+    <label class="md-nav__link" for="nav-12-1">
+      Random
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-12-1">
+        Random
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../random/index.html" title="Random number" class="md-nav__link">
+      Random number
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../gashaponplugin/index.html" title="Gashapon" class="md-nav__link">
+      Gashapon
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-13" type="checkbox" id="nav-13">
+    
+    <label class="md-nav__link" for="nav-13">
+      String
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-13">
+        String
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../format/index.html" title="Format" class="md-nav__link">
+      Format
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mustache/index.html" title="Mustache" class="md-nav__link">
+      Mustache
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lzstringplugin/index.html" title="LZ string" class="md-nav__link">
+      LZ string
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xorplugin/index.html" title="XOR" class="md-nav__link">
+      XOR
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#container" title="Container" class="md-nav__link">
+    Container
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-container-object" title="Add container object" class="md-nav__link">
+    Add container object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#destroy" title="Destroy" class="md-nav__link">
+    Destroy
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-properties" title="Set properties" class="md-nav__link">
+    Set properties
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-size" title="Set size" class="md-nav__link">
+    Set size
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hit-area" title="Hit area" class="md-nav__link">
+    Hit area
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#non-exclusive" title="Non-exclusive" class="md-nav__link">
+    Non-exclusive
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#children" title="Children" class="md-nav__link">
+    Children
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-child" title="Add child" class="md-nav__link">
+    Add child
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exist" title="Exist" class="md-nav__link">
+    Exist
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-child" title="Get child" class="md-nav__link">
+    Get child
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-child" title="Remove child" class="md-nav__link">
+    Remove child
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#replace-child" title="Replace child" class="md-nav__link">
+    Replace child
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#order-of-child" title="Order of child" class="md-nav__link">
+    Order of child
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-properties_1" title="Set properties" class="md-nav__link">
+    Set properties
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#for-each-child" title="For each child" class="md-nav__link">
+    For each child
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compare-with-group-object" title="Compare with group object" class="md-nav__link">
+    Compare with group object
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>Container</h1>
+                
+                <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
+<p>Control the position and angle of children game object, built-in game object of phaser.</p>
+<ul>
+<li>Author: Richard Davey</li>
+</ul>
+<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<h3 id="container">Container<a class="headerlink" href="#container" title="Permanent link">&para;</a></h3>
+<h4 id="add-container-object">Add container object<a class="headerlink" href="#add-container-object" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">container</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+<span class="c1">// var image = scene.add.container(x, y, children); // children: an array of game object</span>
+</pre></div>
+
+<h4 id="destroy">Destroy<a class="headerlink" href="#destroy" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
+</pre></div>
+
+<p>Also destroy all children game object.</p>
+<h4 id="set-properties">Set properties<a class="headerlink" href="#set-properties" title="Permanent link">&para;</a></h4>
+<p>Reference <a href="../gameobject/index.html">game object</a>, to set position, angle, visible, alpha, etc...</p>
+<h4 id="set-size">Set size<a class="headerlink" href="#set-size" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">setSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+</pre></div>
+
+<p>Default size is 0x0.</p>
+<h4 id="hit-area">Hit area<a class="headerlink" href="#hit-area" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">setInteractive</span><span class="p">(</span><span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Circle</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">radius</span><span class="p">),</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Circle</span><span class="p">.</span><span class="nx">Contains</span><span class="p">);</span>
+<span class="c1">// container.setInteractive(false); // disable</span>
+</pre></div>
+
+<p>Assign hit area with a circle shape.</p>
+<h4 id="non-exclusive">Non-exclusive<a class="headerlink" href="#non-exclusive" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">setExclusive</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</pre></div>
+
+<p>Allows a game object added to container many times.</p>
+<h3 id="children">Children<a class="headerlink" href="#children" title="Permanent link">&para;</a></h3>
+<h4 id="add-child">Add child<a class="headerlink" href="#add-child" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>  <span class="c1">// child: a game object or an array of game objects</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">addAt</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">index</span><span class="p">);</span>
+</pre></div>
+
+<h4 id="exist">Exist<a class="headerlink" href="#exist" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">hasChild</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">exists</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
+</pre></div>
+
+<h4 id="get-child">Get child<a class="headerlink" href="#get-child" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">firstChild</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">first</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">nextChild</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">next</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">prevChild</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">previous</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">lastChild</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">last</span><span class="p">;</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">child</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">getByName</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">child</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">getRandom</span><span class="p">(</span><span class="nx">startIndex</span><span class="p">,</span> <span class="nx">length</span><span class="p">);</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">child</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">getFirst</span><span class="p">(</span><span class="nx">property</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">startIndex</span><span class="p">,</span> <span class="nx">endIndex</span><span class="p">);</span>
+<span class="c1">// value: the value to test the property against. Must pass a strict (`===`) comparison check.</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">children</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">getAll</span><span class="p">(</span><span class="nx">property</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">startIndex</span><span class="p">,</span> <span class="nx">endIndex</span><span class="p">);</span>
+<span class="c1">// value: the value to test the property against. Must pass a strict (`===`) comparison check.</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">amount</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">count</span><span class="p">(</span><span class="nx">property</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">startIndex</span><span class="p">,</span> <span class="nx">endIndex</span><span class="p">);</span>
+<span class="c1">// value: the value to test the property against. Must pass a strict (`===`) comparison check.</span>
+</pre></div>
+
+<h4 id="remove-child">Remove child<a class="headerlink" href="#remove-child" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
+<span class="c1">// container.remove(child, true);  // remove child object and destroy it</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">removeAt</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+<span class="c1">// container.removeAt(index, true);  // remove child object and destroy it</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">removeBetween</span><span class="p">(</span><span class="nx">startIndex</span><span class="p">,</span> <span class="nx">endIndex</span><span class="p">);</span>
+<span class="c1">// container.removeBetween(startIndex, endIndex, true);  // remove children objects and destroy them</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">removeAll</span><span class="p">();</span>
+<span class="c1">// container.removeAll(true);  // remove all children objects and destroy them</span>
+</pre></div>
+
+<h4 id="replace-child">Replace child<a class="headerlink" href="#replace-child" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="nx">oldChild</span><span class="p">,</span> <span class="nx">newChild</span><span class="p">);</span>
+<span class="c1">// container.replace(oldChild, newChild, true);  // destroy oldChild</span>
+</pre></div>
+
+<h4 id="order-of-child">Order of child<a class="headerlink" href="#order-of-child" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">index</span><span class="p">);</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">bringToTop</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">sendToBack</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">moveUp</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">moveDown</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">swap</span><span class="p">(</span><span class="nx">child1</span><span class="p">,</span> <span class="nx">child2</span><span class="p">);</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">reverse</span><span class="p">();</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">shuffle</span><span class="p">();</span>
+</pre></div>
+
+<h4 id="set-properties_1">Set properties<a class="headerlink" href="#set-properties_1" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">setAll</span><span class="p">(</span><span class="nx">property</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">startIndex</span><span class="p">,</span> <span class="nx">endIndex</span><span class="p">);</span>
+</pre></div>
+
+<h4 id="for-each-child">For each child<a class="headerlink" href="#for-each-child" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Iterate current children list
+    <div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">iterate</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
+<span class="c1">// container.iterate(callback, context);</span>
+<span class="c1">// container.iterate(callback, context, arg0, arg1, ...);</span>
+<span class="c1">// var callback = function(child, arg0, arg1, ...) {};</span>
+</pre></div></li>
+<li>Iterate a copy of current children list
+    <div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
+<span class="c1">// container.each(callback, context);</span>
+<span class="c1">// container.each(callback, context, arg0, arg1, ...);</span>
+<span class="c1">// var callback = function(child, arg0, arg1, ...) {};</span>
+</pre></div></li>
+</ul>
+<h2 id="compare-with-group-object">Compare with <a href="../group/index.html">group object</a><a class="headerlink" href="#compare-with-group-object" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Container and group objects are all has a children list.</li>
+<li>Container has position, angle, alpha, visible, ...etc, but group does not have.</li>
+<li>Container controls properties of children (position, angle, alpha, visible, ...etc), but group won't.</li>
+<li>A game object could be added to many group, but it only could be added to a container (<code>exclusive</code> mode).</li>
+</ul>
+                
+                  
+                
+              
+              
+                
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../tilemap/index.html" title="Tile map" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Tile map
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../group/index.html" title="Group" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Group
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="http://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.8eb9be28.js"></script>
+      
+      <script>app.initialize({version:"0.17.3",url:{base:".."}})</script>
+      
+        <script src="../js/mermaid/mermaid.min.js"></script>
+      
+        <script src="../js/umlconvert.js"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>

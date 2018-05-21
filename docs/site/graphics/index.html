@@ -1,0 +1,1785 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-0.17.3, mkdocs-material-2.7.0">
+    
+    
+      
+        <title>Graphics - Notes of Phaser 3</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application.78aab2dc.css">
+      
+    
+    
+      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
+    
+    
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+      
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <a href="#introduction" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../index.html" title="Notes of Phaser 3" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            
+              <span class="md-header-nav__topic">
+                Notes of Phaser 3
+              </span>
+              <span class="md-header-nav__topic">
+                Graphics
+              </span>
+            
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          
+            <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+            
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+          
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    <span class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </span>
+    Notes of Phaser 3
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../index.html" title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      System
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        System
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../game/index.html" title="Game" class="md-nav__link">
+      Game
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../scenemanager/index.html" title="Scene manager" class="md-nav__link">
+      Scene manager
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../scene/index.html" title="Scene" class="md-nav__link">
+      Scene
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Input
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Input
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../input/index.html" title="Input" class="md-nav__link">
+      Input
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../touchevents/index.html" title="Touch events" class="md-nav__link">
+      Touch events
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../keyboardevents/index.html" title="Keyboard events" class="md-nav__link">
+      Keyboard events
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../dragplugin/index.html" title="Drag" class="md-nav__link">
+      Drag
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../dragcursorplugin/index.html" title="Drag to cursorKeys" class="md-nav__link">
+      Drag to cursorKeys
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Loader
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Loader
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../loader/index.html" title="Loader" class="md-nav__link">
+      Loader
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../webfontloaderplugin/index.html" title="Webfont loader" class="md-nav__link">
+      Webfont loader
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
+    
+    <label class="md-nav__link" for="nav-5">
+      Game object
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Game object
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../gameobject/index.html" title="Game object" class="md-nav__link">
+      Game object
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2" type="checkbox" id="nav-5-2">
+    
+    <label class="md-nav__link" for="nav-5-2">
+      Sprite
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-2">
+        Sprite
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../image/index.html" title="Image" class="md-nav__link">
+      Image
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../blitter/index.html" title="Blitter" class="md-nav__link">
+      Blitter
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-3" type="checkbox" id="nav-5-3">
+    
+    <label class="md-nav__link" for="nav-5-3">
+      Text
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-3">
+        Text
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../text/index.html" title="Text" class="md-nav__link">
+      Text
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../bbcodetext/index.html" title="BBCode Text" class="md-nav__link">
+      BBCode Text
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tagtext/index.html" title="Tag Text" class="md-nav__link">
+      Tag Text
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../texttyping/index.html" title="Typing" class="md-nav__link">
+      Typing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../textpageplugin/index.html" title="Page" class="md-nav__link">
+      Page
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-4" type="checkbox" id="nav-5-4" checked>
+    
+    <label class="md-nav__link" for="nav-5-4">
+      Canvas
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-4">
+        Canvas
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Graphics
+      </label>
+    
+    <a href="index.html" title="Graphics" class="md-nav__link md-nav__link--active">
+      Graphics
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-graphics-object" title="Add graphics object" class="md-nav__link">
+    Add graphics object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drawing-commands" title="Drawing commands" class="md-nav__link">
+    Drawing commands
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set-style" title="Set style" class="md-nav__link">
+    Set style
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clear" title="Clear" class="md-nav__link">
+    Clear
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#path" title="Path" class="md-nav__link">
+    Path
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rectangle" title="Rectangle" class="md-nav__link">
+    Rectangle
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#triangle" title="Triangle" class="md-nav__link">
+    Triangle
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#point" title="Point" class="md-nav__link">
+    Point
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#line" title="Line" class="md-nav__link">
+    Line
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lines" title="Lines" class="md-nav__link">
+    Lines
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#circle" title="Circle" class="md-nav__link">
+    Circle
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ellipse" title="Ellipse" class="md-nav__link">
+    Ellipse
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transfer" title="Transfer" class="md-nav__link">
+    Transfer
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generate-texture" title="Generate texture" class="md-nav__link">
+    Generate texture
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../canvasplugin/index.html" title="Canvas" class="md-nav__link">
+      Canvas
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-5" type="checkbox" id="nav-5-5">
+    
+    <label class="md-nav__link" for="nav-5-5">
+      Tile map
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-5">
+        Tile map
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tilemap/index.html" title="Tile map" class="md-nav__link">
+      Tile map
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-6" type="checkbox" id="nav-5-6">
+    
+    <label class="md-nav__link" for="nav-5-6">
+      Container
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-6">
+        Container
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../container/index.html" title="Container" class="md-nav__link">
+      Container
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../group/index.html" title="Group" class="md-nav__link">
+      Group
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../groupactions/index.html" title="Group actions" class="md-nav__link">
+      Group actions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../gridtableplugin/index.html" title="Grid table" class="md-nav__link">
+      Grid table
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Time
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        Time
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../date/index.html" title="Date" class="md-nav__link">
+      Date
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../timer/index.html" title="Timer" class="md-nav__link">
+      Timer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../timeline/index.html" title="Timeline" class="md-nav__link">
+      Timeline
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../clockplugin/index.html" title="Clock" class="md-nav__link">
+      Clock
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Behavior
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        Behavior
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-1" type="checkbox" id="nav-7-1">
+    
+    <label class="md-nav__link" for="nav-7-1">
+      Tween
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-7-1">
+        Tween
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tween/index.html" title="Tween" class="md-nav__link">
+      Tween
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../fadeoutdestroy/index.html" title="Fade out destroy" class="md-nav__link">
+      Fade out destroy
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2" type="checkbox" id="nav-7-2">
+    
+    <label class="md-nav__link" for="nav-7-2">
+      Arcade
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-7-2">
+        Arcade
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../arcade/index.html" title="Physics" class="md-nav__link">
+      Physics
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      Audio
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        Audio
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../audio/index.html" title="Audio" class="md-nav__link">
+      Audio
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../fadevolume/index.html" title="Volume fading" class="md-nav__link">
+      Volume fading
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
+      Data
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        Data
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../datamanager/index.html" title="Data manager" class="md-nav__link">
+      Data manager
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../array/index.html" title="Array" class="md-nav__link">
+      Array
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../csvtoarray/index.html" title="CSV to array" class="md-nav__link">
+      CSV to array
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../csvtohashtable/index.html" title="CSV to hash table" class="md-nav__link">
+      CSV to hash table
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
+    
+    <label class="md-nav__link" for="nav-10">
+      Logic
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-10">
+        Logic
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../eventemitter3/index.html" title="Event emitter" class="md-nav__link">
+      Event emitter
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../runcommands/index.html" title="Run commands" class="md-nav__link">
+      Run commands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10-3" type="checkbox" id="nav-10-3">
+    
+    <label class="md-nav__link" for="nav-10-3">
+      TCRP
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-10-3">
+        TCRP
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tcrprecoderplugin/index.html" title="Recoder" class="md-nav__link">
+      Recoder
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../tcrpplayerplugin/index.html" title="Player" class="md-nav__link">
+      Player
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11">
+    
+    <label class="md-nav__link" for="nav-11">
+      Camera
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-11">
+        Camera
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../camera/index.html" title="Camera" class="md-nav__link">
+      Camera
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-12" type="checkbox" id="nav-12">
+    
+    <label class="md-nav__link" for="nav-12">
+      Math
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-12">
+        Math
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-12-1" type="checkbox" id="nav-12-1">
+    
+    <label class="md-nav__link" for="nav-12-1">
+      Random
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-12-1">
+        Random
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../random/index.html" title="Random number" class="md-nav__link">
+      Random number
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../gashaponplugin/index.html" title="Gashapon" class="md-nav__link">
+      Gashapon
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-13" type="checkbox" id="nav-13">
+    
+    <label class="md-nav__link" for="nav-13">
+      String
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-13">
+        String
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../format/index.html" title="Format" class="md-nav__link">
+      Format
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mustache/index.html" title="Mustache" class="md-nav__link">
+      Mustache
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lzstringplugin/index.html" title="LZ string" class="md-nav__link">
+      LZ string
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../xorplugin/index.html" title="XOR" class="md-nav__link">
+      XOR
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-graphics-object" title="Add graphics object" class="md-nav__link">
+    Add graphics object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drawing-commands" title="Drawing commands" class="md-nav__link">
+    Drawing commands
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set-style" title="Set style" class="md-nav__link">
+    Set style
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clear" title="Clear" class="md-nav__link">
+    Clear
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#path" title="Path" class="md-nav__link">
+    Path
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rectangle" title="Rectangle" class="md-nav__link">
+    Rectangle
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#triangle" title="Triangle" class="md-nav__link">
+    Triangle
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#point" title="Point" class="md-nav__link">
+    Point
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#line" title="Line" class="md-nav__link">
+    Line
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lines" title="Lines" class="md-nav__link">
+    Lines
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#circle" title="Circle" class="md-nav__link">
+    Circle
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ellipse" title="Ellipse" class="md-nav__link">
+    Ellipse
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transfer" title="Transfer" class="md-nav__link">
+    Transfer
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generate-texture" title="Generate texture" class="md-nav__link">
+    Generate texture
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>Graphics</h1>
+                
+                <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
+<p>Drawing on webgl or canvas, built-in game object of phaser.</p>
+<ul>
+<li>Author: Richard Davey</li>
+</ul>
+<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<h3 id="add-graphics-object">Add graphics object<a class="headerlink" href="#add-graphics-object" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">graphics</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">graphics</span><span class="p">();</span>
+<span class="c1">// var graphics = scene.add.graphics(x, y);</span>
+</pre></div>
+
+<h3 id="drawing-commands">Drawing commands<a class="headerlink" href="#drawing-commands" title="Permanent link">&para;</a></h3>
+<h4 id="set-style">Set style<a class="headerlink" href="#set-style" title="Permanent link">&para;</a></h4>
+<ul>
+<li>
+<p>Set line style and fill style</p>
+<div class="codehilite"><pre><span></span><span class="nx">graphics</span><span class="p">.</span><span class="nx">setDefaultStyles</span><span class="p">({</span>
+    <span class="nx">lineStyle</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">width</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="nx">color</span><span class="o">:</span> <span class="mh">0xffffff</span><span class="p">,</span>
+        <span class="nx">alpha</span><span class="o">:</span> <span class="mi">1</span>
+    <span class="p">},</span>
+    <span class="nx">fillStyle</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">color</span><span class="o">:</span> <span class="mh">0xffffff</span><span class="p">,</span>
+        <span class="nx">alpha</span><span class="o">:</span> <span class="mi">1</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+
+</li>
+<li>
+<p>Set line style</p>
+<div class="codehilite"><pre><span></span><span class="nx">graphics</span><span class="p">.</span><span class="nx">lineStyle</span><span class="p">(</span><span class="nx">lineWidth</span><span class="p">,</span> <span class="nx">color</span><span class="p">,</span> <span class="nx">alpha</span><span class="p">);</span>   <span class="c1">// color: 0xRRGGBB</span>
+</pre></div>
+
+</li>
+<li>
+<p>Set fill style</p>
+<div class="codehilite"><pre><span></span><span class="nx">graphics</span><span class="p">.</span><span class="nx">fillStyle</span><span class="p">(</span><span class="nx">color</span><span class="p">,</span> <span class="nx">alpha</span><span class="p">);</span>   <span class="c1">// color: 0xRRGGBB</span>
+</pre></div>
+
+</li>
+</ul>
+<h4 id="clear">Clear<a class="headerlink" href="#clear" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">graphics</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+</pre></div>
+
+<h4 id="path">Path<a class="headerlink" href="#path" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">graphics</span><span class="p">.</span><span class="nx">beginPath</span><span class="p">();</span>
+<span class="nx">graphics</span><span class="p">.</span><span class="nx">closePath</span><span class="p">();</span>
+<span class="nx">graphics</span><span class="p">.</span><span class="nx">fillPath</span><span class="p">();</span>
+<span class="nx">graphics</span><span class="p">.</span><span class="nx">strokePath</span><span class="p">();</span>
+</pre></div>
+
+<h4 id="rectangle">Rectangle<a class="headerlink" href="#rectangle" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">graphics</span><span class="p">.</span><span class="nx">fillRectShape</span><span class="p">(</span><span class="nx">rect</span><span class="p">);</span> <span class="c1">// rect: {x, y, width, height}</span>
+<span class="nx">graphics</span><span class="p">.</span><span class="nx">fillRect</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+<span class="nx">graphics</span><span class="p">.</span><span class="nx">strokeRectShape</span><span class="p">(</span><span class="nx">rect</span><span class="p">);</span>  <span class="c1">// rect: {x, y, width, height}</span>
+<span class="nx">graphics</span><span class="p">.</span><span class="nx">strokeRect</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+</pre></div>
+
+<h4 id="triangle">Triangle<a class="headerlink" href="#triangle" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">graphics</span><span class="p">.</span><span class="nx">fillTriangleShape</span><span class="p">(</span><span class="nx">triangle</span><span class="p">);</span> <span class="c1">// triangle: {x1, y1, x2, y2, x3, y3}</span>
+<span class="nx">graphics</span><span class="p">.</span><span class="nx">fillTriangle</span><span class="p">(</span><span class="nx">x1</span><span class="p">,</span> <span class="nx">y1</span><span class="p">,</span> <span class="nx">x2</span><span class="p">,</span> <span class="nx">y2</span><span class="p">,</span> <span class="nx">x3</span><span class="p">,</span> <span class="nx">y3</span><span class="p">);</span>
+<span class="nx">graphics</span><span class="p">.</span><span class="nx">strokeTriangleShape</span><span class="p">(</span><span class="nx">triangle</span><span class="p">);</span> <span class="c1">// triangle: {x1, y1, x2, y2, x3, y3}</span>
+<span class="nx">graphics</span><span class="p">.</span><span class="nx">strokeTriangle</span><span class="p">(</span><span class="nx">x1</span><span class="p">,</span> <span class="nx">y1</span><span class="p">,</span> <span class="nx">x2</span><span class="p">,</span> <span class="nx">y2</span><span class="p">,</span> <span class="nx">x3</span><span class="p">,</span> <span class="nx">y3</span><span class="p">);</span>
+</pre></div>
+
+<h4 id="point">Point<a class="headerlink" href="#point" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">graphics</span><span class="p">.</span><span class="nx">fillPointShape</span><span class="p">(</span><span class="nx">point</span><span class="p">,</span> <span class="nx">size</span><span class="p">);</span> <span class="c1">// point: {x, y}</span>
+<span class="nx">graphics</span><span class="p">.</span><span class="nx">fillPoint</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">size</span><span class="p">);</span>
+</pre></div>
+
+<h4 id="line">Line<a class="headerlink" href="#line" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">graphics</span><span class="p">.</span><span class="nx">strokeLineShape</span><span class="p">(</span><span class="nx">line</span><span class="p">);</span> <span class="c1">// point: {x1, y1, x2, y2}</span>
+<span class="nx">graphics</span><span class="p">.</span><span class="nx">lineBetween</span><span class="p">(</span><span class="nx">x1</span><span class="p">,</span> <span class="nx">y1</span><span class="p">,</span> <span class="nx">x2</span><span class="p">,</span> <span class="nx">y2</span><span class="p">);</span>
+<span class="nx">graphics</span><span class="p">.</span><span class="nx">lineTo</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+<span class="nx">graphics</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+<span class="nx">graphics</span><span class="p">.</span><span class="nx">lineFxTo</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">rgb</span><span class="p">);</span>  <span class="c1">// gradient width and color</span>
+<span class="nx">graphics</span><span class="p">.</span><span class="nx">moveFxTo</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">rgb</span><span class="p">);</span>  <span class="c1">// gradient width and color</span>
+</pre></div>
+
+<ul>
+<li><code>graphics.lineFxTo</code> is equal to <code>graphics.lineTo</code> in CANVAS render mode</li>
+<li><code>graphics.moveFxTo</code> is equal to <code>graphics.moveTo</code> in CANVAS render mode</li>
+</ul>
+<h4 id="lines">Lines<a class="headerlink" href="#lines" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">graphics</span><span class="p">.</span><span class="nx">strokePoints</span><span class="p">(</span><span class="nx">points</span><span class="p">,</span> <span class="nx">autoClose</span><span class="p">,</span> <span class="nx">endIndex</span><span class="p">);</span>  <span class="c1">// points: [{x, y}, ...]</span>
+<span class="nx">graphics</span><span class="p">.</span><span class="nx">fillPoints</span><span class="p">(</span><span class="nx">points</span><span class="p">,</span> <span class="nx">autoClose</span><span class="p">,</span> <span class="nx">endIndex</span><span class="p">);</span>  <span class="c1">// points: [{x, y}, ...]</span>
+</pre></div>
+
+<h4 id="circle">Circle<a class="headerlink" href="#circle" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">graphics</span><span class="p">.</span><span class="nx">fillCircleShape</span><span class="p">(</span><span class="nx">circle</span><span class="p">);</span> <span class="c1">// circle: {x, y, radius}</span>
+<span class="nx">graphics</span><span class="p">.</span><span class="nx">fillCircle</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">);</span>
+<span class="nx">graphics</span><span class="p">.</span><span class="nx">strokeCircleShape</span><span class="p">(</span><span class="nx">circle</span><span class="p">);</span>  <span class="c1">// circle: {x, y, radius}</span>
+<span class="nx">graphics</span><span class="p">.</span><span class="nx">fillCircle</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">);</span>
+<span class="nx">graphics</span><span class="p">.</span><span class="nx">arc</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">startAngle</span><span class="p">,</span> <span class="nx">endAngle</span><span class="p">,</span> <span class="nx">anticlockwise</span><span class="p">);</span>
+</pre></div>
+
+<p>Draw or fill circle shape by points.</p>
+<h4 id="ellipse">Ellipse<a class="headerlink" href="#ellipse" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">graphics</span><span class="p">.</span><span class="nx">strokeEllipseShape</span><span class="p">(</span><span class="nx">ellipse</span><span class="p">,</span> <span class="nx">smoothness</span><span class="p">);</span>   <span class="c1">// ellipse: Phaser.Geom.Ellipse</span>
+<span class="nx">graphics</span><span class="p">.</span><span class="nx">strokeEllipse</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">smoothness</span><span class="p">);</span>
+<span class="nx">graphics</span><span class="p">.</span><span class="nx">fillEllipseShape</span><span class="p">(</span><span class="nx">ellipse</span><span class="p">,</span> <span class="nx">smoothness</span><span class="p">);</span>    <span class="c1">// ellipse: Phaser.Geom.Ellipse</span>
+<span class="nx">graphics</span><span class="p">.</span><span class="nx">fillEllipse</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">smoothness</span><span class="p">);</span>
+</pre></div>
+
+<p>Draw or fill ellipse shape by points.</p>
+<h4 id="transfer">Transfer<a class="headerlink" href="#transfer" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">graphics</span><span class="p">.</span><span class="nx">save</span><span class="p">();</span>
+<span class="nx">graphics</span><span class="p">.</span><span class="nx">restore</span><span class="p">();</span>
+<span class="nx">graphics</span><span class="p">.</span><span class="nx">translate</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+<span class="nx">graphics</span><span class="p">.</span><span class="nx">scale</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+<span class="nx">graphics</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="nx">radians</span><span class="p">);</span>
+</pre></div>
+
+<h3 id="generate-texture">Generate texture<a class="headerlink" href="#generate-texture" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">graphics</span><span class="p">.</span><span class="nx">generateTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>  <span class="c1">// key: texture key</span>
+</pre></div>
+                
+                  
+                
+              
+              
+                
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../textpageplugin/index.html" title="Page" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Page
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../canvasplugin/index.html" title="Canvas" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Canvas
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="http://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application.8eb9be28.js"></script>
+      
+      <script>app.initialize({version:"0.17.3",url:{base:".."}})</script>
+      
+        <script src="../js/mermaid/mermaid.min.js"></script>
+      
+        <script src="../js/umlconvert.js"></script>
+      
+    
+    
+      
+    
+  </body>
+</html>

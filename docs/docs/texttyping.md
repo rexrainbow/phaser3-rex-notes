@@ -1,6 +1,6 @@
 ## Introduction
 
-Typing text on text object, [bbcode text object](bbcodetextplugin.md), or [tag text boject](tagtextplugin.md).
+Typing text on text object, [bbcode text object](bbcodetext.md), or [tag text boject](tagtext.md).
 
 - Author: Rex
 - Member of text object
