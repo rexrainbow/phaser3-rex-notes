@@ -16,7 +16,7 @@ Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
 - bold: `[b]text[/b]`
 - italic: `[i]text[/i]`
 - color: `[color=red]text[/color]`
-- size: `[size=18]text[/text]`
+- size: `[size=18]text[/size]`
 - stroke: `[stroke]text[/stroke]`
     - stroke with color setting: `[stroke=red]text[/stroke]`
 - shadow: `[shadow]text[/shadow]`
