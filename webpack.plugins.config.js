@@ -6,9 +6,13 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 module.exports = {
     entry: {
         // game objects
+        'bbcodetext': './plugins/bbcodetext.js',
         'bbcodetextplugin': './plugins/bbcodetext-plugin.js',
+        'canvas': './plugins/canvas.js',
         'canvasplugin': './plugins/canvas-plugin.js',
+        'gridtable': './plugins/gridtable.js',
         'gridtableplugin': './plugins/gridtable-plugin.js',
+        'tagtext': './plugins/tagtext.js',
         'tagtextplugin': './plugins/tagtext-plugin.js',
 
         // custom file loader
