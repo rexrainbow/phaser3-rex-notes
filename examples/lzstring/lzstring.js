@@ -1,7 +1,8 @@
 'use strict'
 
 import LZStringPlugin from './../../plugins/lzstring-plugin.js';
-const GetRandomElement = Phaser.Utils.Array.GetRandomElement;
+
+const GetRandomElement = Phaser.Utils.Array.GetRandom;
 
 class Demo extends Phaser.Scene {
 
@@ -23,9 +24,8 @@ class Demo extends Phaser.Scene {
         }
 
       
-        var lzstring = new LZStringPlugin(this, {
-            //encoding: 'uri'      // 0|'none'|1|'base64'|2|'utf16'|3|'uri'
-        });
+        var lzstring = this.plugins.get('rexLZString');
+        //lzstring.setEncoding('uri');  // 'none', 'base64', 'utf16', 'uri'
         var compressResult = lzstring.compress(src);
         var decompressResult = lzstring.decompress(compressResult);
 
@@ -49,7 +49,14 @@ var config = {
     parent: 'phaser-example',
     width: 800,
     height: 600,
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexLZString',
+            plugin: LZStringPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

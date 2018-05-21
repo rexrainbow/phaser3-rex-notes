@@ -21,6 +21,8 @@ module.exports = {
         // functions
         'xor': './plugins/xor.js',        
         'xorplugin': './plugins/xor-plugin.js',
+        'lzstring': './plugins/lzstring.js',        
+        'lzstringplugin': './plugins/lzstring-plugin.js',        
 
         // member of scene 
         'clock': './plugins/clock.js',

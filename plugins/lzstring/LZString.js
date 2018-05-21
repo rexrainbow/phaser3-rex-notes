@@ -1,9 +1,9 @@
 'use strict'
 
-import LZString from './../utils/lzstring/lz-string.min.js';
+import lzstring from './../utils/lzstring/lz-string.min.js';
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 
-class LZStringPlugin {
+class LZStringKlass {
     constructor(scene, config) {
         this.resetFromJSON(config);
     }
@@ -35,16 +35,17 @@ class LZStringPlugin {
             m = ENCODINGMAP[m.toLowerCase()] || 0;
         }
         this.encoding = m;
+        return this;
     }
 
     compress(s) {
         var fnName = COMPRESSFNNAME[this.encoding];
-        return LZString[fnName](s);
+        return lzstring[fnName](s);
     }
 
     decompress(s) {
         var fnName = DECOMPRESSFNNAME[this.encoding];
-        return LZString[fnName](s);
+        return lzstring[fnName](s);
     }
 }
 
@@ -68,4 +69,4 @@ const DECOMPRESSFNNAME = [
     'decompressFromEncodedURIComponent'
 ];
 
-export default LZStringPlugin;
+export default LZStringKlass;
