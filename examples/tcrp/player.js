@@ -5,7 +5,7 @@ import TCRPPlugin from './../../plugins/tcrp-plugin.js';
 const PlayerPlugin = TCRPPlugin.Player;
 
 
-class CmdKlass {
+class ActionKlass {
     constructor(scene) {
         this.scene = scene;
         this.objs = new Map();
@@ -27,7 +27,7 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        var myCmds = new CmdKlass(this);
+        var myCmds = new ActionKlass(this);
         var commands = [
             ['// ??'],               // [NaN, ...] -> ignored
             [0, 'print', 'hello'],        // [dt, fnName, param0, param1, ...]

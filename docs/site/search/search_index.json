@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/index.html", 
-            "text": "Phaser\n\n\nPhaser\n is a fun, free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering.\n\n\nList of my plugins\n\n\n\n\nBBCodeText\n: Drawing text with \nBBCode\n protocol.\n\n\nCanvas\n: Drawing on \ncanvas\n.\n\n\nClock\n: A clock to count elapsed time.\n\n\nCSV-to-hash-table\n: Hash table indexed by (col-key, row-key) from csv string.\n\n\nDrag\n: Drag game object.\n\n\nDrag-cursor\n: Simulate curosr keys according dragging events.\n\n\nFade-out-destroy\n: Fade out game object then destroy it.\n\n\nFade-volume\n: Fade-in/fade-out volume of sound.\n\n\nGashapon\n: Pick random item from box.\n\n\nGrid table\n: Viewer of grid table, to manipulate game object of each visible cell.\n\n\nLZ-string\n: Compress string using LZ-based compression algorithm.\n\n\nPage\n: Display text page by page on text object.\n\n\nRun-commands\n: Run commands in array.\n\n\nTagText\n: Displays text with multi-color, font face, or font size with tags.\n\n\nTCRP.Player\n: Run commands on time.\n\n\nTCRP.Recorder\n: Store commands with time.\n\n\nTyping\n: Typing text on text object.\n\n\nWebfont-loader\n: Load web font by google webfont loader in preload stage.\n\n\nXOR\n: Encrypt or decrypt string by XOR algorithm.", 
+            "text": "Phaser\n\n\nPhaser\n is a fun, free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering.\n\n\nList of my plugins\n\n\n\n\nBBCodeText\n: Drawing text with \nBBCode\n protocol.\n\n\nCanvas\n: Drawing on \ncanvas\n.\n\n\nClock\n: A clock to count elapsed time.\n\n\nCSV-to-hash-table\n: Hash table indexed by (col-key, row-key) from csv string.\n\n\nDrag\n: Drag game object.\n\n\nDrag-cursor\n: Simulate curosr keys according dragging events.\n\n\nFade-out-destroy\n: Fade out game object then destroy it.\n\n\nFade-volume\n: Fade-in/fade-out volume of sound.\n\n\nGashapon\n: Pick random item from box.\n\n\nGrid table\n: Viewer of grid table, to manipulate game object of each visible cell.\n\n\nLZ-string\n: Compress string using LZ-based compression algorithm.\n\n\nPage\n: Display text page by page on text object.\n\n\nRun-commands\n: Run commands in array.\n\n\nSequence\n: Run sequence commands in array.\n\n\nTagText\n: Displays text with multi-color, font face, or font size with tags.\n\n\nTCRP.Player\n: Run commands on time.\n\n\nTCRP.Recorder\n: Store commands with time.\n\n\nTyping\n: Typing text on text object.\n\n\nWebfont-loader\n: Load web font by google webfont loader in preload stage.\n\n\nXOR\n: Encrypt or decrypt string by XOR algorithm.", 
             "title": "Home"
         }, 
         {
@@ -12,7 +12,7 @@
         }, 
         {
             "location": "/index.html#list-of-my-plugins", 
-            "text": "BBCodeText : Drawing text with  BBCode  protocol.  Canvas : Drawing on  canvas .  Clock : A clock to count elapsed time.  CSV-to-hash-table : Hash table indexed by (col-key, row-key) from csv string.  Drag : Drag game object.  Drag-cursor : Simulate curosr keys according dragging events.  Fade-out-destroy : Fade out game object then destroy it.  Fade-volume : Fade-in/fade-out volume of sound.  Gashapon : Pick random item from box.  Grid table : Viewer of grid table, to manipulate game object of each visible cell.  LZ-string : Compress string using LZ-based compression algorithm.  Page : Display text page by page on text object.  Run-commands : Run commands in array.  TagText : Displays text with multi-color, font face, or font size with tags.  TCRP.Player : Run commands on time.  TCRP.Recorder : Store commands with time.  Typing : Typing text on text object.  Webfont-loader : Load web font by google webfont loader in preload stage.  XOR : Encrypt or decrypt string by XOR algorithm.", 
+            "text": "BBCodeText : Drawing text with  BBCode  protocol.  Canvas : Drawing on  canvas .  Clock : A clock to count elapsed time.  CSV-to-hash-table : Hash table indexed by (col-key, row-key) from csv string.  Drag : Drag game object.  Drag-cursor : Simulate curosr keys according dragging events.  Fade-out-destroy : Fade out game object then destroy it.  Fade-volume : Fade-in/fade-out volume of sound.  Gashapon : Pick random item from box.  Grid table : Viewer of grid table, to manipulate game object of each visible cell.  LZ-string : Compress string using LZ-based compression algorithm.  Page : Display text page by page on text object.  Run-commands : Run commands in array.  Sequence : Run sequence commands in array.  TagText : Displays text with multi-color, font face, or font size with tags.  TCRP.Player : Run commands on time.  TCRP.Recorder : Store commands with time.  Typing : Typing text on text object.  Webfont-loader : Load web font by google webfont loader in preload stage.  XOR : Encrypt or decrypt string by XOR algorithm.", 
             "title": "List of my plugins"
         }, 
         {
@@ -2689,6 +2689,61 @@
             "location": "/runcommands/index.html#run-commands", 
             "text": "runCommands ( commands ,   scope );    Format of command :\n     [ fnName ,   param0 ,   param1 ,   ...]   Commands in nested array :\n     [ \n     command0 , \n     command1 \n     [ \n         command2 , \n         command3 \n     ]  ]   Run command :\n     scope [ fnName ]. call ( scope ,   param0 ,   param1   ...)", 
             "title": "Run commands"
+        }, 
+        {
+            "location": "/sequence/index.html", 
+            "text": "Introduction\n\n\nRun sequence commands in array.\n\n\n\n\nAuthor: Rex\n\n\nObject\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nUser could import class directly, or install it by global plugin.\n\n\nImport class\n\n\nimport\n \nSequence\n \nfrom\n \n./plugins/sequence.js\n;\n\n\n\n\n\nInstall global plugin\n\n\nInstall plugin in \nconfiguration of game\n\n\nimport\n \nSequencePlugin\n \nfrom\n \n./plugins/sequence-plugin.js\n;\n\n\n\nvar\n \nconfig\n \n=\n \n{\n\n    \n// ...\n\n    \nplugins\n:\n \n{\n\n        \nglobal\n:\n \n[{\n\n            \nkey\n:\n \nrexSequence\n,\n\n            \nplugin\n:\n \nSequencePlugin\n,\n\n            \nstart\n:\n \ntrue\n\n        \n},\n\n        \n// ...\n\n        \n]\n\n    \n}\n\n    \n// ...\n\n\n};\n\n\nvar\n \ngame\n \n=\n \nnew\n \nPhaser\n.\nGame\n(\nconfig\n);\n\n\n\n\n\nCreate sequence instance\n\n\nvar\n \nseq\n \n=\n \nthis\n.\nplugins\n.\nget\n(\nrexSequence\n).\nadd\n({\n\n    \n// yoyo: false  // reverse sequence when it reaches the end\n\n    \n// repeat: 0,   // repeat count\n\n    \n// loop: false  // repeat forever\n\n\n});\n\n\n\n\n\nLoad commands\n\n\nseq\n.\nload\n(\ncommands\n,\n \nactionScope\n);\n\n\n\n\n\n\n\nFormat of command :\n    \n[\nfnName\n,\n \nparam0\n,\n \nparam1\n,\n \n...]\n\n\n\n\nCommands in nested array :\n    \n[\n\n    \ncommand0\n,\n\n    \ncommand1\n\n    \n[\n\n        \ncommand2\n,\n\n        \ncommand3\n\n    \n]\n\n\n]\n\n\n\n\nActionScope\n\n\n\n\nFormat of command is the same as \nrun-command\n.\n\n\nRun commands\n\n\nseq\n.\nstart\n();\n\n\n\n\n\n\n\nRun command :\n    \nvar\n \neventEmitter\n \n=\n \nactionScope\n[\nfnName\n].\ncall\n(\nactionScope\n,\n \nparam0\n,\n \nparam1\n \n...);\n\n\n\n        - Return \neventEmitter\n to pause the sequence, otherwise run next command\n\n        - Sequence will continue when firing \ncomplete\n event (i.e. \neventEmitter.emit('complete')\n)\n\n\n\n\nEvents\n\n\n\n\nOn sequence completed :\n\n\n\n\nseq\n.\non\n(\ncomplete\n,\n \nfunction\n(){});\n\n\n\n\n\nAction of commands\n\n\nAction of commands, extended from \nPhaser.Events.EventEmitter\n.\n\n\nclass\n \nActionKlass\n \nextends\n \nPhaser\n.\nEvents\n.\nEventEmitter\n \n{\n\n    \nconstructor\n(\nscene\n)\n \n{\n\n        \nsuper\n();\n\n\n        \nthis\n.\nscene\n \n=\n \nscene\n;\n\n        \nthis\n.\nmyConsole\n \n=\n \nscene\n.\nadd\n.\ntext\n(\n100\n,\n \n100\n,\n \n);\n\n\n        \nthis\n[\nwait-click\n]\n \n=\n \nthis\n.\nwaitClick\n;\n\n        \nthis\n[\nwait-time\n]\n \n=\n \nthis\n.\nwaitTime\n;\n\n    \n}\n\n\n    \n// callbacks\n\n    \nprint\n(\nmsg\n)\n \n{\n\n        \nthis\n.\nmyConsole\n.\nsetText\n(\nmsg\n);\n\n        \n// return undefined to run next command\n\n    \n}\n\n\n    \nwaitClick\n()\n \n{\n\n        \nthis\n.\nscene\n.\ninput\n.\nonce\n(\npointerup\n,\n \nthis\n.\ncomplete\n,\n \nthis\n);\n\n        \nreturn\n \nthis\n;\n  \n// return eventEmitter to pause the sequence\n\n    \n}\n\n\n    \nwaitTime\n(\ndelay\n)\n \n{\n\n        \nthis\n.\nscene\n.\ntime\n.\ndelayedCall\n(\ndelay\n \n*\n \n1000\n,\n \nthis\n.\ncomplete\n,\n \n[],\n \nthis\n);\n\n        \nreturn\n \nthis\n;\n  \n// return eventEmitter to pause the sequence\n\n    \n}\n\n\n    \ncomplete\n()\n \n{\n\n        \nthis\n.\nemit\n(\ncomplete\n);\n  \n// resume sequence\n\n    \n}\n\n\n}\n\n\nvar\n \nactionScope\n \n=\n \nnew\n \nActionKlass\n(\nscene\n);\n\n\n\n\n\nNow this scope supports 3 commands\n\n\n\n\nprint(msg): \n['print', msg]\n\n\nwaitClick(): \n['wait-click']\n\n\nwaitTime(delay): \n['wait-time', delay]", 
+            "title": "Sequence"
+        }, 
+        {
+            "location": "/sequence/index.html#introduction", 
+            "text": "Run sequence commands in array.   Author: Rex  Object", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/sequence/index.html#source-code", 
+            "text": "Link", 
+            "title": "Source code"
+        }, 
+        {
+            "location": "/sequence/index.html#usage", 
+            "text": "User could import class directly, or install it by global plugin.", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/sequence/index.html#import-class", 
+            "text": "import   Sequence   from   ./plugins/sequence.js ;", 
+            "title": "Import class"
+        }, 
+        {
+            "location": "/sequence/index.html#install-global-plugin", 
+            "text": "Install plugin in  configuration of game  import   SequencePlugin   from   ./plugins/sequence-plugin.js ;  var   config   =   { \n     // ... \n     plugins :   { \n         global :   [{ \n             key :   rexSequence , \n             plugin :   SequencePlugin , \n             start :   true \n         }, \n         // ... \n         ] \n     } \n     // ...  };  var   game   =   new   Phaser . Game ( config );", 
+            "title": "Install global plugin"
+        }, 
+        {
+            "location": "/sequence/index.html#create-sequence-instance", 
+            "text": "var   seq   =   this . plugins . get ( rexSequence ). add ({ \n     // yoyo: false  // reverse sequence when it reaches the end \n     // repeat: 0,   // repeat count \n     // loop: false  // repeat forever  });", 
+            "title": "Create sequence instance"
+        }, 
+        {
+            "location": "/sequence/index.html#load-commands", 
+            "text": "seq . load ( commands ,   actionScope );    Format of command :\n     [ fnName ,   param0 ,   param1 ,   ...]   Commands in nested array :\n     [ \n     command0 , \n     command1 \n     [ \n         command2 , \n         command3 \n     ]  ]   ActionScope   Format of command is the same as  run-command .", 
+            "title": "Load commands"
+        }, 
+        {
+            "location": "/sequence/index.html#run-commands", 
+            "text": "seq . start ();    Run command :\n     var   eventEmitter   =   actionScope [ fnName ]. call ( actionScope ,   param0 ,   param1   ...);  \n        - Return  eventEmitter  to pause the sequence, otherwise run next command \n        - Sequence will continue when firing  complete  event (i.e.  eventEmitter.emit('complete') )", 
+            "title": "Run commands"
+        }, 
+        {
+            "location": "/sequence/index.html#events", 
+            "text": "On sequence completed :   seq . on ( complete ,   function (){});", 
+            "title": "Events"
+        }, 
+        {
+            "location": "/sequence/index.html#action-of-commands", 
+            "text": "Action of commands, extended from  Phaser.Events.EventEmitter .  class   ActionKlass   extends   Phaser . Events . EventEmitter   { \n     constructor ( scene )   { \n         super (); \n\n         this . scene   =   scene ; \n         this . myConsole   =   scene . add . text ( 100 ,   100 ,   ); \n\n         this [ wait-click ]   =   this . waitClick ; \n         this [ wait-time ]   =   this . waitTime ; \n     } \n\n     // callbacks \n     print ( msg )   { \n         this . myConsole . setText ( msg ); \n         // return undefined to run next command \n     } \n\n     waitClick ()   { \n         this . scene . input . once ( pointerup ,   this . complete ,   this ); \n         return   this ;    // return eventEmitter to pause the sequence \n     } \n\n     waitTime ( delay )   { \n         this . scene . time . delayedCall ( delay   *   1000 ,   this . complete ,   [],   this ); \n         return   this ;    // return eventEmitter to pause the sequence \n     } \n\n     complete ()   { \n         this . emit ( complete );    // resume sequence \n     }  }  var   actionScope   =   new   ActionKlass ( scene );   Now this scope supports 3 commands   print(msg):  ['print', msg]  waitClick():  ['wait-click']  waitTime(delay):  ['wait-time', delay]", 
+            "title": "Action of commands"
         }, 
         {
             "location": "/tcrprecoderplugin/index.html", 

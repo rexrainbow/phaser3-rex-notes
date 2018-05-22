@@ -5,7 +5,7 @@ import runCommands from './../../plugins/runcommands.js';
 
 const Map = Phaser.Structs.Map;
 
-class CmdKlass {
+class ActionKlass {
     constructor(scene) {
         this.scene = scene;
         this.objs = new Map();
@@ -58,7 +58,7 @@ print,world
 create-sprite,A,100,100,arrow
 move-sprite-to,A,300,200,1`;
 
-        var myCmds = new CmdKlass(this);
+        var myCmds = new ActionKlass(this);
 
         var cmds = CSVToArray(csvString);
 

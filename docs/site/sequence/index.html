@@ -32,7 +32,7 @@
     
     
       
-        <title>Array - Notes of Phaser 3</title>
+        <title>Sequence - Notes of Phaser 3</title>
       
     
     
@@ -86,7 +86,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Array
+                Sequence
               </span>
             
           
@@ -906,12 +906,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
     
     <label class="md-nav__link" for="nav-9">
       Data
@@ -939,63 +937,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="toc">
-        Array
-      </label>
-    
-    <a href="index.html" title="Array" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../array/index.html" title="Array" class="md-nav__link">
       Array
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#filter-elements" title="Filter elements" class="md-nav__link">
-    Filter elements
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -1032,10 +978,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10" checked>
     
     <label class="md-nav__link" for="nav-10">
       Logic
@@ -1063,10 +1011,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10-2" type="checkbox" id="nav-10-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10-2" type="checkbox" id="nav-10-2" checked>
     
     <label class="md-nav__link" for="nav-10-2">
       Array commands
@@ -1094,11 +1044,112 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../sequence/index.html" title="Sequence" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Sequence
+      </label>
+    
+    <a href="index.html" title="Sequence" class="md-nav__link md-nav__link--active">
       Sequence
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#import-class" title="Import class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
+    Install global plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-sequence-instance" title="Create sequence instance" class="md-nav__link">
+    Create sequence instance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load-commands" title="Load commands" class="md-nav__link">
+    Load commands
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-commands" title="Run commands" class="md-nav__link">
+    Run commands
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" title="Events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#action-of-commands" title="Action of commands" class="md-nav__link">
+    Action of commands
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -1366,6 +1417,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#usage" title="Usage" class="md-nav__link">
     Usage
   </a>
@@ -1374,8 +1432,50 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#filter-elements" title="Filter elements" class="md-nav__link">
-    Filter elements
+  <a href="#import-class" title="Import class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
+    Install global plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-sequence-instance" title="Create sequence instance" class="md-nav__link">
+    Create sequence instance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load-commands" title="Load commands" class="md-nav__link">
+    Load commands
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#run-commands" title="Run commands" class="md-nav__link">
+    Run commands
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" title="Events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#action-of-commands" title="Action of commands" class="md-nav__link">
+    Action of commands
   </a>
   
 </li>
@@ -1400,21 +1500,131 @@
               
                 
                 
-                  <h1>Array</h1>
+                  <h1>Sequence</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Built-in javascript object.</p>
+<p>Run sequence commands in array.</p>
 <ul>
-<li>Author: Built-in javascript function</li>
+<li>Author: Rex</li>
+<li>Object</li>
 </ul>
+<h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/runcommands/Sequence.js">Link</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<h3 id="filter-elements">Filter elements<a class="headerlink" href="#filter-elements" title="Permanent link">&para;</a></h3>
-<p>Creates a new array with all elements that pass the test function. <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter">Reference</a></p>
-<div class="codehilite"><pre><span></span><span class="c1">// var elems = [...]</span>
-<span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">elems</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">el</span><span class="p">){</span>
-    <span class="k">return</span> <span class="p">(</span><span class="nx">el</span><span class="p">.</span><span class="nx">x</span> <span class="o">&gt;</span> <span class="mi">400</span><span class="p">);</span>
+<p>User could import class directly, or install it by global plugin.</p>
+<h3 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">Sequence</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/sequence.js&#39;</span><span class="p">;</span>
+</pre></div>
+
+<h3 id="install-global-plugin">Install global plugin<a class="headerlink" href="#install-global-plugin" title="Permanent link">&para;</a></h3>
+<p>Install plugin in <a href="../game/index.html#configuration">configuration of game</a></p>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">SequencePlugin</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/sequence-plugin.js&#39;</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexSequence&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">SequencePlugin</span><span class="p">,</span>
+            <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="p">},</span>
+        <span class="c1">// ...</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</pre></div>
+
+<h3 id="create-sequence-instance">Create sequence instance<a class="headerlink" href="#create-sequence-instance" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">seq</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexSequence&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">({</span>
+    <span class="c1">// yoyo: false  // reverse sequence when it reaches the end</span>
+    <span class="c1">// repeat: 0,   // repeat count</span>
+    <span class="c1">// loop: false  // repeat forever</span>
 <span class="p">});</span>
 </pre></div>
+
+<h3 id="load-commands">Load commands<a class="headerlink" href="#load-commands" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">seq</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="nx">commands</span><span class="p">,</span> <span class="nx">actionScope</span><span class="p">);</span>
+</pre></div>
+
+<ul>
+<li>Format of command :
+    <div class="codehilite"><pre><span></span><span class="p">[</span><span class="nx">fnName</span><span class="p">,</span> <span class="nx">param0</span><span class="p">,</span> <span class="nx">param1</span><span class="p">,</span> <span class="p">...]</span>
+</pre></div></li>
+<li>Commands in nested array :
+    <div class="codehilite"><pre><span></span><span class="p">[</span>
+    <span class="nx">command0</span><span class="p">,</span>
+    <span class="nx">command1</span>
+    <span class="p">[</span>
+        <span class="nx">command2</span><span class="p">,</span>
+        <span class="nx">command3</span>
+    <span class="p">]</span>
+<span class="p">]</span>
+</pre></div></li>
+<li><a href="index.html#action-of-commands">ActionScope</a></li>
+</ul>
+<p>Format of command is the same as <a href="../runcommands#run-commands">run-command</a>.</p>
+<h3 id="run-commands">Run commands<a class="headerlink" href="#run-commands" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">seq</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
+</pre></div>
+
+<ul>
+<li>Run command :
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">eventEmitter</span> <span class="o">=</span> <span class="nx">actionScope</span><span class="p">[</span><span class="nx">fnName</span><span class="p">].</span><span class="nx">call</span><span class="p">(</span><span class="nx">actionScope</span><span class="p">,</span> <span class="nx">param0</span><span class="p">,</span> <span class="nx">param1</span> <span class="p">...);</span>
+</pre></div>
+        - Return <code>eventEmitter</code> to pause the sequence, otherwise run next command<br />
+        - Sequence will continue when firing <code>complete</code> event (i.e. <code>eventEmitter.emit('complete')</code>)</li>
+</ul>
+<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
+<ul>
+<li>On sequence completed :</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="nx">seq</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
+</pre></div>
+
+<h3 id="action-of-commands">Action of commands<a class="headerlink" href="#action-of-commands" title="Permanent link">&para;</a></h3>
+<p>Action of commands, extended from <code>Phaser.Events.EventEmitter</code>.</p>
+<div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">ActionKlass</span> <span class="kr">extends</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Events</span><span class="p">.</span><span class="nx">EventEmitter</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">();</span>
+
+        <span class="k">this</span><span class="p">.</span><span class="nx">scene</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">myConsole</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">);</span>
+
+        <span class="k">this</span><span class="p">[</span><span class="s1">&#39;wait-click&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">waitClick</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">[</span><span class="s1">&#39;wait-time&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">waitTime</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// callbacks</span>
+    <span class="nx">print</span><span class="p">(</span><span class="nx">msg</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">myConsole</span><span class="p">.</span><span class="nx">setText</span><span class="p">(</span><span class="nx">msg</span><span class="p">);</span>
+        <span class="c1">// return undefined to run next command</span>
+    <span class="p">}</span>
+
+    <span class="nx">waitClick</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;pointerup&#39;</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">complete</span><span class="p">,</span> <span class="k">this</span><span class="p">);</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">;</span>  <span class="c1">// return eventEmitter to pause the sequence</span>
+    <span class="p">}</span>
+
+    <span class="nx">waitTime</span><span class="p">(</span><span class="nx">delay</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">time</span><span class="p">.</span><span class="nx">delayedCall</span><span class="p">(</span><span class="nx">delay</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">,</span> <span class="k">this</span><span class="p">.</span><span class="nx">complete</span><span class="p">,</span> <span class="p">[],</span> <span class="k">this</span><span class="p">);</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">;</span>  <span class="c1">// return eventEmitter to pause the sequence</span>
+    <span class="p">}</span>
+
+    <span class="nx">complete</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">);</span>  <span class="c1">// resume sequence</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">actionScope</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ActionKlass</span><span class="p">(</span><span class="nx">scene</span><span class="p">);</span>
+</pre></div>
+
+<p>Now this scope supports 3 commands</p>
+<ul>
+<li>print(msg): <code>['print', msg]</code></li>
+<li>waitClick(): <code>['wait-click']</code></li>
+<li>waitTime(delay): <code>['wait-time', delay]</code></li>
+</ul>
                 
                   
                 
@@ -1433,7 +1643,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../datamanager/index.html" title="Data manager" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../runcommands/index.html" title="Run commands" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -1442,19 +1652,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Data manager
+                Run commands
               </span>
             </div>
           </a>
         
         
-          <a href="../csvtoarray/index.html" title="CSV to array" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../tcrprecoderplugin/index.html" title="Recoder" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                CSV to array
+                Recoder
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

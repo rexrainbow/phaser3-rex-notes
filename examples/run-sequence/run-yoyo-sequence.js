@@ -2,7 +2,7 @@
 
 import SequencePlugin from './../../plugins/sequence-plugin.js';
 
-class CmdKlass extends Phaser.Events.EventEmitter {
+class ActionKlass extends Phaser.Events.EventEmitter {
     constructor(scene) {
         super();
 
@@ -41,7 +41,7 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var myCmds = new CmdKlass(this);
+        var myCmds = new ActionKlass(this);
 
         var cmds = [
             ['print', 'A'],

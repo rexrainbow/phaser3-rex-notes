@@ -4,7 +4,7 @@ import runCommands from './../../plugins/runcommands.js';
 
 const Map = Phaser.Structs.Map;
 
-class CmdKlass {
+class ActionKlass {
     constructor(scene) {
         this.scene = scene;
         this.objs = new Map();
@@ -52,7 +52,7 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var myCmds = new CmdKlass(this);
+        var myCmds = new ActionKlass(this);
 
         var cmds = [
             ['print', 'hello'],

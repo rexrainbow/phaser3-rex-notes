@@ -7,7 +7,7 @@ Encrypt or decrypt string by XOR algorithm.
 
 ## Source code
 
-[Encrypt](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/xor/Encrypt.js)  
+[Encrypt](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/xor/Encrypt.js)
 [Decrypt](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/xor/Decrypt.js)
 
 ## Usage

@@ -7,7 +7,7 @@ import ArrayCopy from './../../plugins/utils/array/Copy.js';
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 
 class SequencePlugin extends EE {
-    constructor(parent, config) {
+    constructor(config) {
         super();
 
         this.commands = [];

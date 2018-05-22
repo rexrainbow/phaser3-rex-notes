@@ -6,7 +6,7 @@ import TCRPPlugin from './../../plugins/tcrp-plugin.js';
 const PlayerPlugin = TCRPPlugin.Player;
 
 
-class CmdKlass {
+class ActionKlass {
     constructor(scene) {
         this.scene = scene;
         this.objs = new Map();
@@ -33,7 +33,7 @@ class Demo extends Phaser.Scene {
 3000,print,--
 3000,print,phaser3`;
 
-        var myCmds = new CmdKlass(this);
+        var myCmds = new ActionKlass(this);
 
         var commands = CSVToArray(csvString);
         

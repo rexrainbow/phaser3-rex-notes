@@ -3,7 +3,7 @@
 import SequencePlugin from './../../plugins/sequence-plugin.js';
 import CSVToArrayPlugin from './../../plugins/csvtoarray-plugin.js';
 
-class CmdKlass extends Phaser.Events.EventEmitter {
+class ActionKlass extends Phaser.Events.EventEmitter {
     constructor(scene) {
         super();
 
@@ -53,7 +53,7 @@ wait-click,
 print,phaser3
 wait-time,1`;
 
-        var myCmds = new CmdKlass(this);
+        var myCmds = new ActionKlass(this);
 
         var cmds = this.plugins.get('rexCSVToArray').convert(csvString);
 

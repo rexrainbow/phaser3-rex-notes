@@ -58,7 +58,9 @@ pages:
     - CSV to hash table: csvtohashtable.md
 - Logic:
     - Event emitter: eventemitter3.md
-    - Run commands: runcommands.md
+    - Array commands:
+      - Run commands: runcommands.md
+      - Sequence: sequence.md
     - TCRP:
         - Recoder: tcrprecoderplugin.md
         - Player: tcrpplayerplugin.md
