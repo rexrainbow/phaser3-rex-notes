@@ -1,9 +1,8 @@
 'use strict'
 
 import SequencePlugin from './../../plugins/sequence-plugin.js';
-import EE from 'eventemitter3';
 
-class CmdKlass extends EE{
+class CmdKlass extends Phaser.Events.EventEmitter {
     constructor(scene) {
         super();
 
@@ -57,7 +56,7 @@ class Demo extends Phaser.Scene {
             ['wait-time', 1],
         ];
 
-        var seq = new SequencePlugin(this);
+        var seq = this.plugins.get('rexSequence').add();
         seq
             .load(cmds, myCmds)
             .once('complete', myCmds.print.bind(myCmds, 'completed...'))
@@ -72,7 +71,14 @@ var config = {
     parent: 'phaser-example',
     width: 800,
     height: 600,
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexSequence',
+            plugin: SequencePlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

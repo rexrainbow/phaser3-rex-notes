@@ -8,9 +8,12 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
+        this.load.tilemapTiledJSON('hexmap', 'assets/tilemaps/maps/hexagonal-mini.json');
     }
 
     create() {
+        debugger;
+        var map = this.add.tilemap('hexmap');
     }
 
     update() {}

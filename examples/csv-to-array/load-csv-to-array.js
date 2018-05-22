@@ -1,6 +1,6 @@
 'use strict'
 
-import CSVToArray from './../../plugins/csvtoarray.js';
+import CSVToArrayPlugin from './../../plugins/csvtoarray-plugin.js';
 
 class Demo extends Phaser.Scene {
 
@@ -18,7 +18,7 @@ class Demo extends Phaser.Scene {
     create() {
         // get csv string from text cache
         var csvString = this.cache.text.get('myArray');
-        var result = CSVToArray(csvString);
+        var result = this.plugins.get('rexCSVToArray').convert(csvString);
         // result is a 3x3 string array
         console.log(result);
     }
@@ -31,7 +31,14 @@ var config = {
     parent: 'phaser-example',
     width: 800,
     height: 600,
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexCSVToArray',
+            plugin: CSVToArrayPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

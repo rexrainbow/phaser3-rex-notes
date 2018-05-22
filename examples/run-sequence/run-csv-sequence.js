@@ -1,10 +1,9 @@
 'use strict'
 
 import SequencePlugin from './../../plugins/sequence-plugin.js';
-import EE from 'eventemitter3';
-import CSVToArray from './../../plugins/csvtoarray.js';
+import CSVToArrayPlugin from './../../plugins/csvtoarray-plugin.js';
 
-class CmdKlass extends EE{
+class CmdKlass extends Phaser.Events.EventEmitter {
     constructor(scene) {
         super();
 
@@ -56,9 +55,9 @@ wait-time,1`;
 
         var myCmds = new CmdKlass(this);
 
-        var cmds = CSVToArray(csvString);
+        var cmds = this.plugins.get('rexCSVToArray').convert(csvString);
 
-        var seq = new SequencePlugin(this);
+        var seq = this.plugins.get('rexSequence').add();
         seq
             .load(cmds, myCmds, {
                 argsConvert: true
@@ -75,7 +74,20 @@ var config = {
     parent: 'phaser-example',
     width: 800,
     height: 600,
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+                key: 'rexSequence',
+                plugin: SequencePlugin,
+                start: true
+            },
+            {
+                key: 'rexCSVToArray',
+                plugin: CSVToArrayPlugin,
+                start: true
+            }
+        ]
+    }
 };
 
 var game = new Phaser.Game(config);

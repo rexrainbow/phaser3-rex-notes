@@ -2,7 +2,7 @@
 
 import EE from 'eventemitter3';
 import runCommands from './../../plugins/runcommands.js';
-import ArrCopy from './../../plugins/utils/array/Copy.js';
+import ArrayCopy from './../../plugins/utils/array/Copy.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 
@@ -28,7 +28,7 @@ class SequencePlugin extends EE {
         this.setRepeat(GetFastValue(config, 'repeat', this.repeat));
         this.setLoop(GetFastValue(config, 'loop', this.loop));
 
-        this.commands = ArrCopy(this.commands, commands);
+        this.commands = ArrayCopy(this.commands, commands);
         this.scope = scope;
         this.config = config;
         return this;

@@ -1,31 +1,51 @@
 'use strict'
 
-var preload = function () {
-    var config = {
-        google: {
-            families: ['Bangers']
-        }
-    };
-    this.load.webFont(config);
-};
+var preload = function () {};
+
 var create = function () {
-    this.add.text(100, 200, 'create stage ', {
-        font: '64px Bangers',
-        fill: '#7744ff'
-    });
+    var shape = new Phaser.Geom.Rectangle(-200, -200, 400, 400);
+    debugger
+    var container = this.add.container(200, 200);
+
+    // draw bound
+    this.add.graphics()
+        .lineStyle(3, 0xff0000)
+        .strokeRect(0, 0, 400, 400);
+
+    var btn0 = this.add.text(-100, -100, 'Btn0', {
+        fontSize: '30px',
+        backgroundColor: 0xcccccc
+    })
+    container.add(btn0);
+
+    var btn1 = this.add.text(300, 300, 'Btn1', {
+        fontSize: '30px',
+        backgroundColor: 0xcccccc
+    })
+    container.add(btn1);
+
+    container.setInteractive(
+            shape,
+            Phaser.Geom.Rectangle.Contains)
+        .on('pointerup', function (pointer, localX, localY) {
+            console.log('click container ' + pointer.x + ' ,' + pointer.y);
+        });
+
+    btn0.setInteractive()
+        .on('pointerup', function (pointer, localX, localY) {
+            console.log('click btn0 ' + pointer.x + ' ,' + pointer.y);
+        });
+
+    btn1.setInteractive()
+        .on('pointerup', function (pointer, localX, localY) {
+            console.log('click btn1 ' + pointer.x + ' ,' + pointer.y);
+        });
+    //container.depth = 1000;
 };
 
 var sceneConfig = {
     preload: preload,
-    create: create,
-    pack: {
-        files: [{
-            type: 'plugin',
-            key: 'webfontloader-plugin',
-            url: './plugins/dist/webfontloader.js',
-            start: true
-        }]
-    }
+    create: create
 };
 var config = {
     type: Phaser.AUTO,

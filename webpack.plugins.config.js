@@ -19,10 +19,14 @@ module.exports = {
         'webfontloaderplugin': './plugins/webfontloader-plugin.js',
 
         // functions
-        'xor': './plugins/xor.js',        
+        'xor': './plugins/xor.js',
         'xorplugin': './plugins/xor-plugin.js',
-        'lzstring': './plugins/lzstring.js',        
-        'lzstringplugin': './plugins/lzstring-plugin.js',        
+        'lzstring': './plugins/lzstring.js',
+        'lzstringplugin': './plugins/lzstring-plugin.js',
+        'csvtoarray': './plugins/csvtoarray.js',
+        'csvtoarrayplugin': './plugins/csvtoarray-plugin.js',
+        'sequence': './plugins/sequence.js',
+        'sequenceplugin': './plugins/sequence-plugin.js',
 
         // member of scene 
         'clock': './plugins/clock.js',
@@ -32,7 +36,7 @@ module.exports = {
         'texttyping': './plugins/texttyping.js',
         'texttypingplugin': './plugins/texttyping-plugin.js',
         'textpage': './plugins/textpage.js',
-        'textpageplugin': './plugins/textpage-plugin.js',        
+        'textpageplugin': './plugins/textpage-plugin.js',
     },
     output: {
         pathinfo: true,
