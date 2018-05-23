@@ -42,12 +42,6 @@ var config = {
 var game = new Phaser.Game(config);
 ```
 
-### Get plugin instance
-
-```javascript
-var textPage = scene.plugins.get('rexTextPage');
-```
-
 ### Create instance
 
 ```javascript
@@ -57,7 +51,7 @@ var txt = scene.add.text(x, y, '', {
     },
     maxLines: 7
 });
-txt.page = textPage.add(txt, {
+txt.page = scene.plugins.get('rexTextPage').add(txt, {
     //text: '',       // content in string or array
     //wrap: false     // set true to add '\n' in each line end
 });

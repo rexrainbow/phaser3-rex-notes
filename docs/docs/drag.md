@@ -11,10 +11,41 @@ Drag game object.
 
 ## Usage
 
+User could import class directly, or install it by global plugin.
+
+### Import class
+
+```javascript
+import rexDrag from './plugins/drag.js';
+```
+
+### Install global plugin
+
+Install plugin in [configuration of game](game.md#configuration)
+
+```javascript
+import DragPlugin from './plugins/drag-plugin.js';
+
+var config = {
+    // ...
+    plugins: {
+        global: [{
+            key: 'rexDrag',
+            plugin: DragPlugin,
+            start: true
+        },
+        // ...
+        ]
+    }
+    // ...
+};
+var game = new Phaser.Game(config);
+```
+
 ### Create instance
 
 ```javascript
-gameobject.drag = new DragPlugin(gameobject, {
+gameobject.drag = scene.plugins.get('rexDrag').add(gameobject, {
     //enable: true,
     //axis: 0,      //0|'both'|'h&v'|1|'horizontal'|'h'|2|'vertical'|'v'
     //rotation: Phaser.Math.DegToRad(45)  // axis rotation in rad

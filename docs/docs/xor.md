@@ -43,20 +43,14 @@ var config = {
 var game = new Phaser.Game(config);
 ```
 
-### Get plugin instance
-
-```javascript
-var XOR = scene.plugins.get('rexXOR');
-```
-
 ### Encrypt
 
 ```javascript
-var encResult = XOR.Encrypt(src, pwd);
+var encResult = scene.plugins.get('rexXOR').Encrypt(src, pwd);
 ```
 
 ### Decrypt
 
 ```javascript
-var decResult = XOR.Decrypt(encResult, pwd);
+var decResult = scene.plugins.get('rexXOR').Decrypt(encResult, pwd);
 ```

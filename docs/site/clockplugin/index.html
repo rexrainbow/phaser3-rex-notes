@@ -796,13 +796,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-plugin-instance" title="Get plugin instance" class="md-nav__link">
-    Get plugin instance
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#create-instance" title="Create instance" class="md-nav__link">
     Create instance
   </a>
@@ -1465,13 +1458,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-plugin-instance" title="Get plugin instance" class="md-nav__link">
-    Get plugin instance
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#create-instance" title="Create instance" class="md-nav__link">
     Create instance
   </a>
@@ -1576,12 +1562,8 @@
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </pre></div>
 
-<h3 id="get-plugin-instance">Get plugin instance<a class="headerlink" href="#get-plugin-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="k">this</span><span class="p">.</span><span class="nx">rexClock</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexClock&#39;</span><span class="p">);</span>
-</pre></div>
-
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">clock</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">rexClock</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">clock</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexClock&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
     <span class="c1">// timeScale: 1</span>
 <span class="p">});</span>
 </pre></div>
