@@ -18,7 +18,7 @@ class Demo extends Phaser.Scene {
 
     create() {
         this.img = this.add.image(400, 300, 'arrow');
-        this.img.drag = new DragPlugin(this.img, {
+        this.img.drag = this.plugins.get('rexDrag').add(this.img, {
             //enable: true,
             axis: 1,
             rotation: Phaser.Math.DegToRad(45)
@@ -37,7 +37,14 @@ var config = {
     parent: 'phaser-example',
     width: 800,
     height: 600,
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexDrag',
+            plugin: DragPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

@@ -1,6 +1,6 @@
 'use strict'
 
-import Canvas from './canvas/Canvas.js';
+import Canvas from './gameobjects/canvas/Canvas.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const BuildGameObject = Phaser.GameObjects.BuildGameObject;

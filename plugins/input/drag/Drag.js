@@ -1,12 +1,12 @@
 'use strict'
 
-import GetSceneObject from './../utils/system/GetSceneObject.js';
+import GetSceneObject from './../../utils/system/GetSceneObject.js';
 
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 const DistanceBetween = Phaser.Math.Distance.Between;
 const RotateAroundDistance = Phaser.Math.RotateAroundDistance;
 
-class DragDropPlugin {
+class Drag {
     constructor(gameobject, config) {
         this.gameobject = gameobject;
         this.scene = GetSceneObject(gameobject);
@@ -161,4 +161,4 @@ const AXISMODE = {
 };
 
 
-export default DragDropPlugin;
+export default Drag;

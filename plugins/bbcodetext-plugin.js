@@ -1,6 +1,6 @@
 'use strict'
 
-import BBCodeText from './bbocdetext/BbcodeText.js';
+import BBCodeText from './gameobjects/bbocdetext/BbcodeText.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const BuildGameObject = Phaser.GameObjects.BuildGameObject;

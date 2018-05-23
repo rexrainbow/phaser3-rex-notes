@@ -1,2 +1,2 @@
-import LZString from './lzstring/LZString.js';
+import LZString from './string/lzstring/LZString.js';
 export default LZString;

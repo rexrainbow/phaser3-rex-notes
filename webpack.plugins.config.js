@@ -28,6 +28,14 @@ module.exports = {
         'sequence': './plugins/sequence.js',
         'sequenceplugin': './plugins/sequence-plugin.js',
 
+        // input
+        'drag': './plugins/drag.js',
+        'dragplugin': './plugins/drag-plugin.js',
+        'dragcursor': './plugins/dragcursor.js',
+        'dragcursorplugin': './plugins/dragcursor-plugin.js',
+        'dragdelta': './plugins/dragdelta.js',
+        'dragdeltaplugin': './plugins/dragdelta-plugin.js',
+
         // member of scene 
         'clock': './plugins/clock.js',
         'clockplugin': './plugins/clock-plugin.js',

@@ -20,7 +20,7 @@ class Demo extends Phaser.Scene {
         var bg = this.add.image(400, 300, 'bg')
             .setDisplaySize(300, 300)
             .setTint(0xcccccc);
-        var dragDelta = new DragDeltaPlugin(bg);
+        var dragDelta = this.plugins.get('rexDragDelta').add(bg);
         dragDelta.on('dragdelta', function (pointer) {
             console.log(pointer.speed);
             star.x += pointer.dx;
@@ -40,7 +40,14 @@ var config = {
     parent: 'phaser-example',
     width: 800,
     height: 600,
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexDragDelta',
+            plugin: DragDeltaPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

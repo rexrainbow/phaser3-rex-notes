@@ -1,4 +1,4 @@
-import Clean from './../utils/object/Clean.js';
+import Clean from './../../utils/object/Clean.js';
 
 class Cell {
     constructor(parent, config) {

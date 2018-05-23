@@ -17,7 +17,7 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        this.dragCursor = new DragCursorPlugin(this, {
+        this.dragCursor = this.plugins.get('rexDragCursor').add(this, {
             dir: '8dir',     // 0|'up&down'|1|'left&right|2|'4dir'|3|'8dir'
             distanceMin: 30,
             //origin:{       // assign origin point to (400,300)
@@ -66,7 +66,14 @@ var config = {
     parent: 'phaser-example',
     width: 800,
     height: 600,
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexDragCursor',
+            plugin: DragCursorPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

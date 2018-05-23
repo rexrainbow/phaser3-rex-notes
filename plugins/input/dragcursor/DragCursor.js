@@ -1,11 +1,11 @@
 'use strict'
 
-import GetSceneObject from './../utils/system/GetSceneObject.js';
-import VectorToCursorKeys from './../utils/vectortocursorkeys/VectorToCursorKeys.js';
+import GetSceneObject from './../../utils/system/GetSceneObject.js';
+import VectorToCursorKeys from './../../utils/vectortocursorkeys/VectorToCursorKeys.js';
 
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 
-class DragCursorPlugin extends VectorToCursorKeys {
+class DragCursor extends VectorToCursorKeys {
     constructor(parent, config) {
         super(config);
         this.parent = parent;        
@@ -113,4 +113,4 @@ class DragCursorPlugin extends VectorToCursorKeys {
 
 }
 
-export default DragCursorPlugin;
+export default DragCursor;

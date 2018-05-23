@@ -1,6 +1,6 @@
 'use strict'
 
-import TagText from './tagtext/TagText.js';
+import TagText from './gameobjects/tagtext/TagText.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const BuildGameObject = Phaser.GameObjects.BuildGameObject;

@@ -1,11 +1,11 @@
 'use strict'
 
 import EE from 'eventemitter3';
-import GetSceneObject from './../utils/system/GetSceneObject.js';
+import GetSceneObject from './../../utils/system/GetSceneObject.js';
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 const getDist = Phaser.Math.Distance.Power;
 
-class DragDeltaPlugin extends EE {
+class DragDelta extends EE {
     constructor(gameobject, config) {
         super();
         this.gameobject = gameobject;
@@ -100,4 +100,4 @@ class DragDeltaPlugin extends EE {
     }  
 }
 
-export default DragDeltaPlugin;
+export default DragDelta;

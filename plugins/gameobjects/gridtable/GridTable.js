@@ -1,8 +1,8 @@
 'use strict'
 
 import TableKlass from './Table.js';
-import Clean from './../utils/object/Clean.js';
-import IsArray from './../utils/array/IsArray.js';
+import Clean from './../../utils/object/Clean.js';
+import IsArray from './../../utils/array/IsArray.js';
 
 const Container = Phaser.GameObjects.Container;
 const Components = Phaser.GameObjects.Components;

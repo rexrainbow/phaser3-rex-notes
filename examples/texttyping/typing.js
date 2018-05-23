@@ -11,11 +11,9 @@ class Demo extends Phaser.Scene {
 
     preload() {}
 
-    create() {
-        this.textTyping = this.plugins.get('rexTextTyping');
-                
+    create() {                
         var txt = this.add.text(100, 100, 'Touch to start typing');
-        txt.typing = this.textTyping.add(txt, {
+        txt.typing = this.plugins.get('rexTextTyping').add(txt, {
             speed: 0.3 * 1000,
             //typeMode: 'middle-to-sides',
             //setTextCallback: myTypingFn

@@ -2,7 +2,7 @@
 
 'use strict'
 
-import GridTable from './gridtable/GridTable.js'
+import GridTable from './gameobjects/gridtable/GridTable.js'
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const BuildGameObject = Phaser.GameObjects.BuildGameObject;
