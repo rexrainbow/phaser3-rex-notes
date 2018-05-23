@@ -10,6 +10,11 @@ class DragDeltaPlugin extends Phaser.Plugins.BasePlugin {
         super(pluginManager);
     }
 
+    start() {
+        var eventEmitter = this.game.events;
+        eventEmitter.once('destroy', this.destroy, this);
+    }
+
     add(gameobject, config) {
         return new DragDelta(gameobject, config);
     }

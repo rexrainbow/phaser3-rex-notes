@@ -14,6 +14,11 @@ class CanvasPlugin extends Phaser.Plugins.BasePlugin {
         pluginManager.registerGameObject('rexCanvas', this.addCanvas, this.makeCanvas);
     }
 
+    start() {
+        var eventEmitter = this.game.events;
+        eventEmitter.once('destroy', this.destroy, this);
+    }
+
     addCanvas(x, y, width, height) {
         return this.displayList.add(new Canvas(this.scene, x, y, width, height));
     }

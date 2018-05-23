@@ -14,6 +14,11 @@ class TagTextPlugin extends Phaser.Plugins.BasePlugin {
         pluginManager.registerGameObject('rexTagText', this.addTagText, this.makeTagText);
     }
 
+    start() {
+        var eventEmitter = this.game.events;
+        eventEmitter.once('destroy', this.destroy, this);
+    }
+
     addTagText(x, y, text, style) {
         return this.displayList.add(new TagText(this.scene, x, y, text, style));
     }

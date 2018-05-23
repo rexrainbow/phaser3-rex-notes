@@ -16,6 +16,11 @@ class GridTablePlugin extends Phaser.Plugins.BasePlugin {
         pluginManager.registerGameObject('rexGridTable', this.addGridTable, this.makeGridTable);
     }
 
+    start() {
+        var eventEmitter = this.game.events;
+        eventEmitter.once('destroy', this.destroy, this);
+    }
+
     addGridTable(x, y, width, height, config) {
         return this.displayList.add(new GridTable(this.scene, x, y, width, height, config));
     }

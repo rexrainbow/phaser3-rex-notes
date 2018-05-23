@@ -14,6 +14,11 @@ class BBCodeTextPlugin extends Phaser.Plugins.BasePlugin {
         pluginManager.registerGameObject('rexBBCodeText', this.addBBCodeText, this.makeBBCodeText);
     }
 
+    start() {
+        var eventEmitter = this.game.events;
+        eventEmitter.once('destroy', this.destroy, this);
+    }
+
     addBBCodeText(x, y, text, style) {
         return this.displayList.add(new BBCodeText(this.scene, x, y, text, style));
     }

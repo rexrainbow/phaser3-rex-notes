@@ -7,6 +7,11 @@ class LZStringPlugin extends Phaser.Plugins.BasePlugin {
         this.lzstring = new LZString();
     }
 
+    start() {
+        var eventEmitter = this.game.events;
+        eventEmitter.once('destroy', this.destroy, this);
+    }
+
     setEncoding(m) {
         this.lzstring.setEncoding(m);
         return this;
