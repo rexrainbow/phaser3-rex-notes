@@ -32,7 +32,7 @@
     
     
       
-        <title>Grid table - Notes of Phaser 3</title>
+        <title>Drag to cursorKeys - Notes of Phaser 3</title>
       
     
     
@@ -86,7 +86,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Grid table
+                Drag to cursorKeys
               </span>
             
           
@@ -222,10 +222,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
     
     <label class="md-nav__link" for="nav-3">
       Input
@@ -279,7 +281,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../dragplugin/index.html" title="Drag" class="md-nav__link">
+    <a href="../drag/index.html" title="Drag" class="md-nav__link">
       Drag
     </a>
   </li>
@@ -289,11 +291,91 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../dragcursorplugin/index.html" title="Drag to cursorKeys" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Drag to cursorKeys
+      </label>
+    
+    <a href="index.html" title="Drag to cursorKeys" class="md-nav__link md-nav__link--active">
       Drag to cursorKeys
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-instance" title="Create instance" class="md-nav__link">
+    Create instance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-state-of-cursor-keys" title="Get state of cursor keys" class="md-nav__link">
+    Get state of cursor keys
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-dragging-point" title="Get dragging point" class="md-nav__link">
+    Get dragging point
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#assign-origin-point" title="Assign origin point" class="md-nav__link">
+    Assign origin point
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -354,12 +436,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
     
     <label class="md-nav__link" for="nav-5">
       Game object
@@ -552,7 +632,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../canvasplugin/index.html" title="Canvas" class="md-nav__link">
+    <a href="../canvas/index.html" title="Canvas" class="md-nav__link">
       Canvas
     </a>
   </li>
@@ -603,12 +683,10 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-6" type="checkbox" id="nav-5-6" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-6" type="checkbox" id="nav-5-6">
     
     <label class="md-nav__link" for="nav-5-6">
       Container
@@ -660,172 +738,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="toc">
-        Grid table
-      </label>
-    
-    <a href="index.html" title="Grid table" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../gridtable/index.html" title="Grid table" class="md-nav__link">
       Grid table
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#source-code" title="Source code" class="md-nav__link">
-    Source code
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cell-begins-visible" title="Cell begins visible" class="md-nav__link">
-    Cell begins visible
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cell-begins-invisible" title="Cell begins invisible" class="md-nav__link">
-    Cell begins invisible
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scroll-table-content" title="Scroll table content" class="md-nav__link">
-    Scroll table content
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#refresh-table-content" title="Refresh table content" class="md-nav__link">
-    Refresh table content
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#set-total-cells-count" title="Set total cells count" class="md-nav__link">
-    Set total cells count
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set-table-size" title="Set table size" class="md-nav__link">
-    Set table size
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#set-columns-count" title="Set columns count" class="md-nav__link">
-    Set columns count
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cell" title="Cell" class="md-nav__link">
-    Cell
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#get-cell" title="Get cell" class="md-nav__link">
-    Get cell
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#fore-each-visible-cell" title="Fore each visible cell" class="md-nav__link">
-    Fore each visible cell
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#container" title="Container" class="md-nav__link">
-    Container
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#properties" title="Properties" class="md-nav__link">
-    Properties
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -1499,104 +1416,23 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#cell-begins-visible" title="Cell begins visible" class="md-nav__link">
-    Cell begins visible
+  <a href="#get-state-of-cursor-keys" title="Get state of cursor keys" class="md-nav__link">
+    Get state of cursor keys
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#cell-begins-invisible" title="Cell begins invisible" class="md-nav__link">
-    Cell begins invisible
+  <a href="#get-dragging-point" title="Get dragging point" class="md-nav__link">
+    Get dragging point
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#scroll-table-content" title="Scroll table content" class="md-nav__link">
-    Scroll table content
+  <a href="#assign-origin-point" title="Assign origin point" class="md-nav__link">
+    Assign origin point
   </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#refresh-table-content" title="Refresh table content" class="md-nav__link">
-    Refresh table content
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#set-total-cells-count" title="Set total cells count" class="md-nav__link">
-    Set total cells count
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set-table-size" title="Set table size" class="md-nav__link">
-    Set table size
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#set-columns-count" title="Set columns count" class="md-nav__link">
-    Set columns count
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#cell" title="Cell" class="md-nav__link">
-    Cell
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#get-cell" title="Get cell" class="md-nav__link">
-    Get cell
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#fore-each-visible-cell" title="Fore each visible cell" class="md-nav__link">
-    Fore each visible cell
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#container" title="Container" class="md-nav__link">
-    Container
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#properties" title="Properties" class="md-nav__link">
-    Properties
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -1620,146 +1456,64 @@
               
                 
                 
-                  <h1>Grid table</h1>
+                  <h1>Drag to cursorKeys</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Viewer of grid table, to manipulate game object of each visible cell.</p>
+<p>Simulate curosr keys according dragging events.</p>
 <ul>
 <li>Author: Rex</li>
-<li>A kind of game object</li>
+<li>Member of scene</li>
 </ul>
 <h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/gridtable/GridTablePlugin.js">Link</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dragcursor-plugin.js">Link</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">table</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexGridTable</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
-</pre></div>
-
-<p>Configuration</p>
-<div class="codehilite"><pre><span></span><span class="p">{</span>
-    <span class="nx">cellsCount</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>    <span class="c1">// total cells count</span>
-    <span class="nx">columns</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>       <span class="c1">// columns count of each row</span>
-    <span class="nx">cellHeight</span><span class="o">:</span> <span class="mi">30</span><span class="p">,</span>   <span class="c1">// default height of each cell</span>
-    <span class="nx">cellWidth</span><span class="o">:</span> <span class="mi">30</span><span class="p">,</span>    <span class="c1">// width of each cell</span>
-
-    <span class="nx">cellVisibleCallback</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="c1">// callback when cell begins visible</span>
-    <span class="nx">cellVisibleCallbackScope</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-
-    <span class="nx">cellInvisibleCallback</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="c1">// callback when cell begins invisible</span>
-    <span class="nx">cellInvisibleCallbackScope</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-
-    <span class="nx">clamplTableOXY</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span> <span class="c1">// clamp tableOX, tableOY when out-of-bound</span>
-    <span class="nx">scrollMode</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>        <span class="c1">// 0|&#39;v&#39;|&#39;vertical&#39;|1|&#39;h&#39;|&#39;horizontal&#39;</span>
-<span class="p">}</span>
-</pre></div>
-
-<p>Add grid table from JSON</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">table</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">rexGridTable</span><span class="p">({</span>
-    <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">width</span><span class="o">:</span> <span class="mi">256</span><span class="p">,</span>
-    <span class="nx">height</span><span class="o">:</span> <span class="mi">256</span><span class="p">,</span>
-
-    <span class="c1">// cellsCount: 0,   // total cells count</span>
-    <span class="c1">// ...</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">dragCursor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DragCursorPlugin</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">dir</span><span class="o">:</span> <span class="s1">&#39;8dir&#39;</span><span class="p">,</span>    <span class="c1">// 0|&#39;up&amp;down&#39;|1|&#39;left&amp;right|2|&#39;4dir&#39;|3|&#39;8dir&#39;</span>
+    <span class="nx">distanceMin</span><span class="o">:</span> <span class="mi">30</span>        
 <span class="p">});</span>
 </pre></div>
 
-<h3 id="cell-begins-visible">Cell begins visible<a class="headerlink" href="#cell-begins-visible" title="Permanent link">&para;</a></h3>
-<p>Add <a href="../container/index.html">container</a> of cell when it begins visible in event <code>cellvisible</code>. </p>
-<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cellvisible&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cell</span><span class="p">){</span>
-    <span class="nx">cell</span><span class="p">.</span><span class="nx">setContainer</span><span class="p">(</span><span class="nx">customContainer</span><span class="p">);</span>
-<span class="p">})</span>
-</pre></div>
-
-<p>It is equal to <code>cellVisibleCallback</code> in configuration.</p>
-<div class="codehilite"><pre><span></span><span class="p">{</span>
-    <span class="c1">// ...</span>
-    <span class="nx">cellVisibleCallback</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cell</span><span class="p">)</span> <span class="p">{</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">setContainer</span><span class="p">(</span><span class="nx">customContainer</span><span class="p">);</span> <span class="p">},</span>
-    <span class="c1">// ...</span>
-<span class="p">}</span>
-</pre></div>
-
-<p>Each cell only has <strong>one</strong> container gameobject, old container will be destroyed when assigning a new container.</p>
-<h3 id="cell-begins-invisible">Cell begins invisible<a class="headerlink" href="#cell-begins-invisible" title="Permanent link">&para;</a></h3>
-<p>Container of an invisible cell will be destroyed automatically.</p>
-<p>To resue container gameobject, user could pop that container by <code>cell.popContainer()</code> in event <code>cellinvisible</code>.</p>
-<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cellinvisible&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cell</span><span class="p">){</span>
-    <span class="kd">var</span> <span class="nx">container</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">popContainer</span><span class="p">();</span>
-    <span class="c1">// put this container into an object pool</span>
-<span class="p">})</span>
-</pre></div>
-
-<p>It is equal to <code>cellInvisibleCallback</code> in configuration.</p>
-<div class="codehilite"><pre><span></span><span class="p">{</span>
-    <span class="c1">// ...</span>
-    <span class="nx">cellInvisibleCallback</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cell</span><span class="p">)</span> <span class="p">{</span> <span class="kd">var</span> <span class="nx">container</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">popContainer</span><span class="p">();</span> <span class="cm">/*... */</span> <span class="p">},</span>
-    <span class="c1">// ...</span>
-<span class="p">}</span>
-</pre></div>
-
-<h3 id="scroll-table-content">Scroll table content<a class="headerlink" href="#scroll-table-content" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">setTableOY</span><span class="p">(</span><span class="nx">oy</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
-<span class="nx">table</span><span class="p">.</span><span class="nx">addTableOY</span><span class="p">(</span><span class="nx">dy</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
-</pre></div>
-
-<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">setTableOX</span><span class="p">(</span><span class="nx">ox</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
-<span class="nx">table</span><span class="p">.</span><span class="nx">addTableOX</span><span class="p">(</span><span class="nx">dx</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
-</pre></div>
-
-<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">setTableOXY</span><span class="p">(</span><span class="nx">ox</span><span class="p">,</span> <span class="nx">oy</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
-<span class="nx">table</span><span class="p">.</span><span class="nx">addTableOXY</span><span class="p">(</span><span class="nx">dx</span><span class="p">,</span> <span class="nx">dy</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
-</pre></div>
-
-<p>These will trigger <code>cellvisible</code>, or <code>cellinvisible</code> events.</p>
-<h3 id="refresh-table-content">Refresh table content<a class="headerlink" href="#refresh-table-content" title="Permanent link">&para;</a></h3>
-<p>Refresh all visible cells.</p>
-<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">updateTable</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="set-total-cells-count">Set total cells count<a class="headerlink" href="#set-total-cells-count" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">setCellsCunt</span><span class="p">(</span><span class="nx">count</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
-</pre></div>
-
-<h3 id="set-table-size">Set table size<a class="headerlink" href="#set-table-size" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">setGridSize</span><span class="p">(</span><span class="nx">colCount</span><span class="p">,</span> <span class="nx">rowCount</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
-</pre></div>
-
-<h4 id="set-columns-count">Set columns count<a class="headerlink" href="#set-columns-count" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">setColumnCount</span><span class="p">(</span><span class="nx">count</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
-</pre></div>
-
-<h3 id="cell">Cell<a class="headerlink" href="#cell" title="Permanent link">&para;</a></h3>
-<h4 id="get-cell">Get cell<a class="headerlink" href="#get-cell" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cell</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">getCell</span><span class="p">(</span><span class="nx">cellIndxe</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="fore-each-visible-cell">Fore each visible cell<a class="headerlink" href="#fore-each-visible-cell" title="Permanent link">&para;</a></h4>
+<p>Properties</p>
 <ul>
-<li>For when you absolutely know this Set won't be modified during the iteration
-    <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">iterateVisibleCell</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">cell</span><span class="p">){</span>
-    <span class="c1">// ...</span>
-<span class="p">});</span>
-</pre></div></li>
-<li>For when you know this Set will be modified during the iteration.
-    <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">eachVisibleCell</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">cell</span><span class="p">){</span>
-    <span class="c1">// ...</span>
-<span class="p">});</span>
-</pre></div></li>
+<li>mode : <ul>
+<li><code>'up&amp;down'</code>, or <code>0</code> : simulate up or down cursor keys only.</li>
+<li><code>'left&amp;right'</code>, or <code>1</code> : simulate left or right cursor keys only.</li>
+<li><code>'4dir'</code>, or <code>2</code> : simulate up, down, left or right cursor keys.</li>
+<li><code>'8dir'</code>, or <code>3</code> : simulate up, up-left, up-right, down, down-left, down-right, left, or right cursor keys.</li>
 </ul>
-<h4 id="container">Container<a class="headerlink" href="#container" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">container</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">getContainer</span><span class="p">();</span>
+</li>
+<li>distanceMin : cursor keys will be pressed when dragging distance is larger then this value.</li>
+</ul>
+<h3 id="get-state-of-cursor-keys">Get state of cursor keys<a class="headerlink" href="#get-state-of-cursor-keys" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cursorKeys</span> <span class="o">=</span> <span class="nx">dragCursor</span><span class="p">.</span><span class="nx">createCursorKeys</span><span class="p">();</span>
+
+<span class="kd">var</span> <span class="nx">isLeftKeyDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">left</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">isRightKeyDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">right</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">isUpKeyDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">up</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">isDownKeyDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">down</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
 </pre></div>
 
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">container</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">popContainer</span><span class="p">();</span>
+<h3 id="get-dragging-point">Get dragging point<a class="headerlink" href="#get-dragging-point" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">dragStartX</span> <span class="o">=</span> <span class="nx">dragCursor</span><span class="p">.</span><span class="nx">start</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">dragStartY</span> <span class="o">=</span> <span class="nx">dragCursor</span><span class="p">.</span><span class="nx">start</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">dragEndX</span> <span class="o">=</span> <span class="nx">dragCursor</span><span class="p">.</span><span class="nx">end</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">dragEndY</span> <span class="o">=</span> <span class="nx">dragCursor</span><span class="p">.</span><span class="nx">end</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
 </pre></div>
 
-<p><div class="codehilite"><pre><span></span><span class="nx">cell</span><span class="p">.</span><span class="nx">setContainer</span><span class="p">(</span><span class="nx">container</span><span class="p">);</span>
+<h3 id="assign-origin-point">Assign origin point<a class="headerlink" href="#assign-origin-point" title="Permanent link">&para;</a></h3>
+<p>Origin point is the dragging start point, or assign origin point when creating instance.</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">dragCursor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DragCursorPlugin</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nx">origin</span><span class="o">:</span> <span class="p">{</span>       <span class="c1">// assign origin point to (400,300)</span>
+        <span class="nx">x</span><span class="o">:</span> <span class="mi">400</span><span class="p">,</span>
+        <span class="nx">y</span><span class="o">:</span> <span class="mi">300</span>
+    <span class="p">}</span>
+<span class="p">});</span>
 </pre></div>
-<div class="codehilite"><pre><span></span><span class="nx">cell</span><span class="p">.</span><span class="nx">destroyContainer</span><span class="p">();</span>
-</pre></div></p>
-<h4 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cellIndex</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">index</span><span class="p">;</span>
+
+<p>Or assign origin point by <code>setOrigin(x, y)</code> function.</p>
+<div class="codehilite"><pre><span></span><span class="nx">dragCursor</span><span class="p">.</span><span class="nx">setOrigin</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">300</span><span class="p">);</span>  <span class="c1">// assign origin point to (400,300)</span>
 </pre></div>
                 
                   
@@ -1779,7 +1533,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../groupactions/index.html" title="Group actions" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../drag/index.html" title="Drag" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -1788,19 +1542,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Group actions
+                Drag
               </span>
             </div>
           </a>
         
         
-          <a href="../date/index.html" title="Date" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../loader/index.html" title="Loader" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Date
+                Loader
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

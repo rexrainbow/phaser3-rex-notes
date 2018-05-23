@@ -7,7 +7,7 @@ Drag game object.
 
 ## Source code
 
-[Link](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/drag/DragPlugin.js)
+[Link](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/drag-plugin.js)
 
 ## Usage
 

@@ -32,7 +32,7 @@
     
     
       
-        <title>Drag to cursorKeys - Notes of Phaser 3</title>
+        <title>Drag - Notes of Phaser 3</title>
       
     
     
@@ -86,7 +86,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Drag to cursorKeys
+                Drag
               </span>
             
           
@@ -279,18 +279,6 @@
           
           
 
-
-  <li class="md-nav__item">
-    <a href="../dragplugin/index.html" title="Drag" class="md-nav__link">
-      Drag
-    </a>
-  </li>
-
-        
-          
-          
-          
-
   
 
 
@@ -300,11 +288,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="toc">
-        Drag to cursorKeys
+        Drag
       </label>
     
-    <a href="index.html" title="Drag to cursorKeys" class="md-nav__link md-nav__link--active">
-      Drag to cursorKeys
+    <a href="index.html" title="Drag" class="md-nav__link md-nav__link--active">
+      Drag
     </a>
     
       
@@ -345,22 +333,43 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-state-of-cursor-keys" title="Get state of cursor keys" class="md-nav__link">
-    Get state of cursor keys
+  <a href="#dragging-events" title="Dragging events" class="md-nav__link">
+    Dragging events
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-dragging-point" title="Get dragging point" class="md-nav__link">
-    Get dragging point
+  <a href="#get-dragging-state" title="Get dragging state" class="md-nav__link">
+    Get dragging state
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#assign-origin-point" title="Assign origin point" class="md-nav__link">
-    Assign origin point
+  <a href="#set-rotation-of-axis" title="Set rotation of axis" class="md-nav__link">
+    Set rotation of axis
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-axis-mode" title="Set axis mode" class="md-nav__link">
+    Set axis mode
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#try-drag" title="Try drag" class="md-nav__link">
+    Try drag
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drop" title="Drop" class="md-nav__link">
+    Drop
   </a>
   
 </li>
@@ -376,6 +385,18 @@
   
 </nav>
     
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../dragcursor/index.html" title="Drag to cursorKeys" class="md-nav__link">
+      Drag to cursorKeys
+    </a>
   </li>
 
         
@@ -632,7 +653,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../canvasplugin/index.html" title="Canvas" class="md-nav__link">
+    <a href="../canvas/index.html" title="Canvas" class="md-nav__link">
       Canvas
     </a>
   </li>
@@ -740,7 +761,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../gridtableplugin/index.html" title="Grid table" class="md-nav__link">
+    <a href="../gridtable/index.html" title="Grid table" class="md-nav__link">
       Grid table
     </a>
   </li>
@@ -1416,22 +1437,43 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-state-of-cursor-keys" title="Get state of cursor keys" class="md-nav__link">
-    Get state of cursor keys
+  <a href="#dragging-events" title="Dragging events" class="md-nav__link">
+    Dragging events
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-dragging-point" title="Get dragging point" class="md-nav__link">
-    Get dragging point
+  <a href="#get-dragging-state" title="Get dragging state" class="md-nav__link">
+    Get dragging state
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#assign-origin-point" title="Assign origin point" class="md-nav__link">
-    Assign origin point
+  <a href="#set-rotation-of-axis" title="Set rotation of axis" class="md-nav__link">
+    Set rotation of axis
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-axis-mode" title="Set axis mode" class="md-nav__link">
+    Set axis mode
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#try-drag" title="Try drag" class="md-nav__link">
+    Try drag
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drop" title="Drop" class="md-nav__link">
+    Drop
   </a>
   
 </li>
@@ -1456,64 +1498,63 @@
               
                 
                 
-                  <h1>Drag to cursorKeys</h1>
+                  <h1>Drag</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Simulate curosr keys according dragging events.</p>
+<p>Drag game object.</p>
 <ul>
 <li>Author: Rex</li>
-<li>Member of scene</li>
+<li>Member of game object</li>
 </ul>
 <h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dragcursor/DragCursorPlugin.js">Link</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/drag-plugin.js">Link</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">dragCursor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DragCursorPlugin</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
-    <span class="nx">dir</span><span class="o">:</span> <span class="s1">&#39;8dir&#39;</span><span class="p">,</span>    <span class="c1">// 0|&#39;up&amp;down&#39;|1|&#39;left&amp;right|2|&#39;4dir&#39;|3|&#39;8dir&#39;</span>
-    <span class="nx">distanceMin</span><span class="o">:</span> <span class="mi">30</span>        
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">drag</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DragPlugin</span><span class="p">(</span><span class="nx">gameobject</span><span class="p">,</span> <span class="p">{</span>
+    <span class="c1">//enable: true,</span>
+    <span class="c1">//axis: 0,      //0|&#39;both&#39;|&#39;h&amp;v&#39;|1|&#39;horizontal&#39;|&#39;h&#39;|2|&#39;vertical&#39;|&#39;v&#39;</span>
+    <span class="c1">//rotation: Phaser.Math.DegToRad(45)  // axis rotation in rad</span>
 <span class="p">});</span>
 </pre></div>
 
 <p>Properties</p>
 <ul>
-<li>mode : <ul>
-<li><code>'up&amp;down'</code>, or <code>0</code> : simulate up or down cursor keys only.</li>
-<li><code>'left&amp;right'</code>, or <code>1</code> : simulate left or right cursor keys only.</li>
-<li><code>'4dir'</code>, or <code>2</code> : simulate up, down, left or right cursor keys.</li>
-<li><code>'8dir'</code>, or <code>3</code> : simulate up, up-left, up-right, down, down-left, down-right, left, or right cursor keys.</li>
+<li>enable: drag-able</li>
+<li>axis : <ul>
+<li><code>'both'</code>,<code>'h&amp;v'</code>, or <code>0</code> : dragging on all directions.</li>
+<li><code>'horizontal'</code>,<code>'h'</code>, or <code>1</code> : dragging on horizontal axis.</li>
+<li><code>'vertical'</code>,<code>'v'</code>, or <code>2</code> : dragging on vertical axis.</li>
 </ul>
 </li>
-<li>distanceMin : cursor keys will be pressed when dragging distance is larger then this value.</li>
+<li>rotation : axis rotation in rad, available in horizontal or vertical axis mode.</li>
 </ul>
-<h3 id="get-state-of-cursor-keys">Get state of cursor keys<a class="headerlink" href="#get-state-of-cursor-keys" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cursorKeys</span> <span class="o">=</span> <span class="nx">dragCursor</span><span class="p">.</span><span class="nx">createCursorKeys</span><span class="p">();</span>
-
-<span class="kd">var</span> <span class="nx">isLeftKeyDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">left</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">isRightKeyDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">right</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">isUpKeyDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">up</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">isDownKeyDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">down</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
+<h3 id="dragging-events">Dragging events<a class="headerlink" href="#dragging-events" title="Permanent link">&para;</a></h3>
+<p>Built-in dragging events</p>
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;dragstart&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">dragX</span><span class="p">,</span> <span class="nx">dragY</span><span class="p">){</span> <span class="cm">/*...*/</span> <span class="p">});</span>
+<span class="nx">gameobject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;drag&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">dragX</span><span class="p">,</span> <span class="nx">dragY</span><span class="p">){</span> <span class="cm">/*...*/</span> <span class="p">});</span>
+<span class="nx">gameobject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;dragend&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">dragX</span><span class="p">,</span> <span class="nx">dragY</span><span class="p">,</span> <span class="nx">dropped</span><span class="p">){</span> <span class="cm">/*...*/</span> <span class="p">});</span>
 </pre></div>
 
-<h3 id="get-dragging-point">Get dragging point<a class="headerlink" href="#get-dragging-point" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">dragStartX</span> <span class="o">=</span> <span class="nx">dragCursor</span><span class="p">.</span><span class="nx">start</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">dragStartY</span> <span class="o">=</span> <span class="nx">dragCursor</span><span class="p">.</span><span class="nx">start</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">dragEndX</span> <span class="o">=</span> <span class="nx">dragCursor</span><span class="p">.</span><span class="nx">end</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">dragEndY</span> <span class="o">=</span> <span class="nx">dragCursor</span><span class="p">.</span><span class="nx">end</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+<h3 id="get-dragging-state">Get dragging state<a class="headerlink" href="#get-dragging-state" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isDragging</span> <span class="o">=</span> <span class="nx">gameobject</span><span class="p">.</span><span class="nx">drag</span><span class="p">.</span><span class="nx">isDragging</span><span class="p">;</span>
 </pre></div>
 
-<h3 id="assign-origin-point">Assign origin point<a class="headerlink" href="#assign-origin-point" title="Permanent link">&para;</a></h3>
-<p>Origin point is the dragging start point, or assign origin point when creating instance.</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">dragCursor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DragCursorPlugin</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
-    <span class="c1">// ...</span>
-    <span class="nx">origin</span><span class="o">:</span> <span class="p">{</span>       <span class="c1">// assign origin point to (400,300)</span>
-        <span class="nx">x</span><span class="o">:</span> <span class="mi">400</span><span class="p">,</span>
-        <span class="nx">y</span><span class="o">:</span> <span class="mi">300</span>
-    <span class="p">}</span>
-<span class="p">});</span>
+<h3 id="set-rotation-of-axis">Set rotation of axis<a class="headerlink" href="#set-rotation-of-axis" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">drag</span><span class="p">.</span><span class="nx">setAxisRotation</span><span class="p">(</span><span class="nx">rad</span><span class="p">);</span>
 </pre></div>
 
-<p>Or assign origin point by <code>setOrigin(x, y)</code> function.</p>
-<div class="codehilite"><pre><span></span><span class="nx">dragCursor</span><span class="p">.</span><span class="nx">setOrigin</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">300</span><span class="p">);</span>  <span class="c1">// assign origin point to (400,300)</span>
+<h3 id="set-axis-mode">Set axis mode<a class="headerlink" href="#set-axis-mode" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">drag</span><span class="p">.</span><span class="nx">setAxisMode</span><span class="p">(</span><span class="nx">m</span><span class="p">);</span>  <span class="c1">//0|&#39;both&#39;|&#39;h&amp;v&#39;|1|&#39;horizontal&#39;|&#39;h&#39;|2|&#39;vertical&#39;|&#39;v&#39;</span>
+</pre></div>
+
+<h3 id="try-drag">Try drag<a class="headerlink" href="#try-drag" title="Permanent link">&para;</a></h3>
+<p>Game object will be dragged if there is any point above it.</p>
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">drag</span><span class="p">.</span><span class="nx">drag</span><span class="p">();</span>
+</pre></div>
+
+<h3 id="drop">Drop<a class="headerlink" href="#drop" title="Permanent link">&para;</a></h3>
+<p>Game object will be dropped(dragend) manually.</p>
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">drag</span><span class="p">.</span><span class="nx">dragend</span><span class="p">();</span>
 </pre></div>
                 
                   
@@ -1533,7 +1574,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../dragplugin/index.html" title="Drag" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../keyboardevents/index.html" title="Keyboard events" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -1542,19 +1583,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Drag
+                Keyboard events
               </span>
             </div>
           </a>
         
         
-          <a href="../loader/index.html" title="Loader" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../dragcursor/index.html" title="Drag to cursorKeys" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Loader
+                Drag to cursorKeys
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

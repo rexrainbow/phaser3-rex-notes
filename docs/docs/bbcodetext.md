@@ -7,7 +7,7 @@ Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
 
 ## Source code
 
-[Link](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/bbocdetext/BbcodeTextPlugin.js)
+[Link](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/bbcodetext-plugin.js)
 
 ## Usage
 

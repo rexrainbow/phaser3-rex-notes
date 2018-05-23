@@ -11,8 +11,8 @@ pages:
     - Input: input.md
     - Touch events: touchevents.md
     - Keyboard events: keyboardevents.md
-    - Drag: dragplugin.md
-    - Drag to cursorKeys: dragcursorplugin.md
+    - Drag: drag.md
+    - Drag to cursorKeys: dragcursor.md
 - Loader:
     - Loader: loader.md
     - Webfont loader: webfontloader.md    
@@ -29,14 +29,14 @@ pages:
         - Page: textpage.md
     - Canvas:
         - Graphics: graphics.md
-        - Canvas: canvasplugin.md
+        - Canvas: canvas.md
     - Tile map:
         - Tile map: tilemap.md
     - Container:
         - Container: container.md        
         - Group: group.md
         - Group actions: groupactions.md
-        - Grid table: gridtableplugin.md
+        - Grid table: gridtable.md
 - Time:
     - Date: date.md
     - Timer: timer.md

@@ -5,15 +5,15 @@
 ## List of my plugins
 
 1. [BBCodeText](bbcodetext.md): Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
-1. [Canvas](canvasplugin.md): Drawing on [canvas](https://www.w3schools.com/html/html5_canvas.asp).
+1. [Canvas](canvas.md): Drawing on [canvas](https://www.w3schools.com/html/html5_canvas.asp).
 1. [Clock](clockplugin.md): A clock to count elapsed time.
 1. [CSV-to-hash-table](csvtohashtable.md): Hash table indexed by (col-key, row-key) from csv string.
-1. [Drag](dragplugin.md): Drag game object.
-1. [Drag-cursor](dragcursorplugin.md): Simulate curosr keys according dragging events.
+1. [Drag](drag.md): Drag game object.
+1. [Drag-cursor](dragcursor.md): Simulate curosr keys according dragging events.
 1. [Fade-out-destroy](fadeoutdestroy.md): Fade out game object then destroy it.
 1. [Fade-volume](fadevolume.md): Fade-in/fade-out volume of sound.
 1. [Gashapon](gashaponplugin.md): Pick random item from box.
-1. [Grid table](gridtableplugin.md): Viewer of grid table, to manipulate game object of each visible cell.
+1. [Grid table](gridtable.md): Viewer of grid table, to manipulate game object of each visible cell.
 1. [LZ-string](lzstringplugin.md): Compress string using LZ-based compression algorithm.
 1. [Page](textpage.md): Display text page by page on text object.
 1. [Run-commands](runcommands.md): Run commands in array.

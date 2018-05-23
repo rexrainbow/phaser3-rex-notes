@@ -256,97 +256,97 @@
             "title": "Key map"
         }, 
         {
-            "location": "/dragplugin/index.html", 
+            "location": "/drag/index.html", 
             "text": "Introduction\n\n\nDrag game object.\n\n\n\n\nAuthor: Rex\n\n\nMember of game object\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\ngameobject\n.\ndrag\n \n=\n \nnew\n \nDragPlugin\n(\ngameobject\n,\n \n{\n\n    \n//enable: true,\n\n    \n//axis: 0,      //0|\nboth\n|\nh\nv\n|1|\nhorizontal\n|\nh\n|2|\nvertical\n|\nv\n\n    \n//rotation: Phaser.Math.DegToRad(45)  // axis rotation in rad\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\nenable: drag-able\n\n\naxis : \n\n\n'both'\n,\n'h\nv'\n, or \n0\n : dragging on all directions.\n\n\n'horizontal'\n,\n'h'\n, or \n1\n : dragging on horizontal axis.\n\n\n'vertical'\n,\n'v'\n, or \n2\n : dragging on vertical axis.\n\n\n\n\n\n\nrotation : axis rotation in rad, available in horizontal or vertical axis mode.\n\n\n\n\nDragging events\n\n\nBuilt-in dragging events\n\n\ngameobject\n.\non\n(\ndragstart\n,\n \nfunction\n(\npointer\n,\n \ndragX\n,\n \ndragY\n){\n \n/*...*/\n \n});\n\n\ngameobject\n.\non\n(\ndrag\n,\n \nfunction\n(\npointer\n,\n \ndragX\n,\n \ndragY\n){\n \n/*...*/\n \n});\n\n\ngameobject\n.\non\n(\ndragend\n,\n \nfunction\n(\npointer\n,\n \ndragX\n,\n \ndragY\n,\n \ndropped\n){\n \n/*...*/\n \n});\n\n\n\n\n\nGet dragging state\n\n\nvar\n \nisDragging\n \n=\n \ngameobject\n.\ndrag\n.\nisDragging\n;\n\n\n\n\n\nSet rotation of axis\n\n\ngameobject\n.\ndrag\n.\nsetAxisRotation\n(\nrad\n);\n\n\n\n\n\nSet axis mode\n\n\ngameobject\n.\ndrag\n.\nsetAxisMode\n(\nm\n);\n  \n//0|\nboth\n|\nh\nv\n|1|\nhorizontal\n|\nh\n|2|\nvertical\n|\nv\n\n\n\n\n\nTry drag\n\n\nGame object will be dragged if there is any point above it.\n\n\ngameobject\n.\ndrag\n.\ndrag\n();\n\n\n\n\n\nDrop\n\n\nGame object will be dropped(dragend) manually.\n\n\ngameobject\n.\ndrag\n.\ndragend\n();", 
             "title": "Drag"
         }, 
         {
-            "location": "/dragplugin/index.html#introduction", 
+            "location": "/drag/index.html#introduction", 
             "text": "Drag game object.   Author: Rex  Member of game object", 
             "title": "Introduction"
         }, 
         {
-            "location": "/dragplugin/index.html#source-code", 
+            "location": "/drag/index.html#source-code", 
             "text": "Link", 
             "title": "Source code"
         }, 
         {
-            "location": "/dragplugin/index.html#usage", 
+            "location": "/drag/index.html#usage", 
             "text": "", 
             "title": "Usage"
         }, 
         {
-            "location": "/dragplugin/index.html#create-instance", 
+            "location": "/drag/index.html#create-instance", 
             "text": "gameobject . drag   =   new   DragPlugin ( gameobject ,   { \n     //enable: true, \n     //axis: 0,      //0| both | h v |1| horizontal | h |2| vertical | v \n     //rotation: Phaser.Math.DegToRad(45)  // axis rotation in rad  });   Properties   enable: drag-able  axis :   'both' , 'h v' , or  0  : dragging on all directions.  'horizontal' , 'h' , or  1  : dragging on horizontal axis.  'vertical' , 'v' , or  2  : dragging on vertical axis.    rotation : axis rotation in rad, available in horizontal or vertical axis mode.", 
             "title": "Create instance"
         }, 
         {
-            "location": "/dragplugin/index.html#dragging-events", 
+            "location": "/drag/index.html#dragging-events", 
             "text": "Built-in dragging events  gameobject . on ( dragstart ,   function ( pointer ,   dragX ,   dragY ){   /*...*/   });  gameobject . on ( drag ,   function ( pointer ,   dragX ,   dragY ){   /*...*/   });  gameobject . on ( dragend ,   function ( pointer ,   dragX ,   dragY ,   dropped ){   /*...*/   });", 
             "title": "Dragging events"
         }, 
         {
-            "location": "/dragplugin/index.html#get-dragging-state", 
+            "location": "/drag/index.html#get-dragging-state", 
             "text": "var   isDragging   =   gameobject . drag . isDragging ;", 
             "title": "Get dragging state"
         }, 
         {
-            "location": "/dragplugin/index.html#set-rotation-of-axis", 
+            "location": "/drag/index.html#set-rotation-of-axis", 
             "text": "gameobject . drag . setAxisRotation ( rad );", 
             "title": "Set rotation of axis"
         }, 
         {
-            "location": "/dragplugin/index.html#set-axis-mode", 
+            "location": "/drag/index.html#set-axis-mode", 
             "text": "gameobject . drag . setAxisMode ( m );    //0| both | h v |1| horizontal | h |2| vertical | v", 
             "title": "Set axis mode"
         }, 
         {
-            "location": "/dragplugin/index.html#try-drag", 
+            "location": "/drag/index.html#try-drag", 
             "text": "Game object will be dragged if there is any point above it.  gameobject . drag . drag ();", 
             "title": "Try drag"
         }, 
         {
-            "location": "/dragplugin/index.html#drop", 
+            "location": "/drag/index.html#drop", 
             "text": "Game object will be dropped(dragend) manually.  gameobject . drag . dragend ();", 
             "title": "Drop"
         }, 
         {
-            "location": "/dragcursorplugin/index.html", 
+            "location": "/dragcursor/index.html", 
             "text": "Introduction\n\n\nSimulate curosr keys according dragging events.\n\n\n\n\nAuthor: Rex\n\n\nMember of scene\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\nvar\n \ndragCursor\n \n=\n \nnew\n \nDragCursorPlugin\n(\nscene\n,\n \n{\n\n    \ndir\n:\n \n8dir\n,\n    \n// 0|\nup\ndown\n|1|\nleft\nright|2|\n4dir\n|3|\n8dir\n\n    \ndistanceMin\n:\n \n30\n        \n\n});\n\n\n\n\n\nProperties\n\n\n\n\nmode : \n\n\n'up\ndown'\n, or \n0\n : simulate up or down cursor keys only.\n\n\n'left\nright'\n, or \n1\n : simulate left or right cursor keys only.\n\n\n'4dir'\n, or \n2\n : simulate up, down, left or right cursor keys.\n\n\n'8dir'\n, or \n3\n : simulate up, up-left, up-right, down, down-left, down-right, left, or right cursor keys.\n\n\n\n\n\n\ndistanceMin : cursor keys will be pressed when dragging distance is larger then this value.\n\n\n\n\nGet state of cursor keys\n\n\nvar\n \ncursorKeys\n \n=\n \ndragCursor\n.\ncreateCursorKeys\n();\n\n\n\nvar\n \nisLeftKeyDown\n \n=\n \ncursorKeys\n.\nleft\n.\nisDown\n;\n\n\nvar\n \nisRightKeyDown\n \n=\n \ncursorKeys\n.\nright\n.\nisDown\n;\n\n\nvar\n \nisUpKeyDown\n \n=\n \ncursorKeys\n.\nup\n.\nisDown\n;\n\n\nvar\n \nisDownKeyDown\n \n=\n \ncursorKeys\n.\ndown\n.\nisDown\n;\n\n\n\n\n\nGet dragging point\n\n\nvar\n \ndragStartX\n \n=\n \ndragCursor\n.\nstart\n.\nx\n;\n\n\nvar\n \ndragStartY\n \n=\n \ndragCursor\n.\nstart\n.\ny\n;\n\n\nvar\n \ndragEndX\n \n=\n \ndragCursor\n.\nend\n.\nx\n;\n\n\nvar\n \ndragEndY\n \n=\n \ndragCursor\n.\nend\n.\ny\n;\n\n\n\n\n\nAssign origin point\n\n\nOrigin point is the dragging start point, or assign origin point when creating instance.\n\n\nvar\n \ndragCursor\n \n=\n \nnew\n \nDragCursorPlugin\n(\nscene\n,\n \n{\n\n    \n// ...\n\n    \norigin\n:\n \n{\n       \n// assign origin point to (400,300)\n\n        \nx\n:\n \n400\n,\n\n        \ny\n:\n \n300\n\n    \n}\n\n\n});\n\n\n\n\n\nOr assign origin point by \nsetOrigin(x, y)\n function.\n\n\ndragCursor\n.\nsetOrigin\n(\n400\n,\n \n300\n);\n  \n// assign origin point to (400,300)", 
             "title": "Drag to cursorKeys"
         }, 
         {
-            "location": "/dragcursorplugin/index.html#introduction", 
+            "location": "/dragcursor/index.html#introduction", 
             "text": "Simulate curosr keys according dragging events.   Author: Rex  Member of scene", 
             "title": "Introduction"
         }, 
         {
-            "location": "/dragcursorplugin/index.html#source-code", 
+            "location": "/dragcursor/index.html#source-code", 
             "text": "Link", 
             "title": "Source code"
         }, 
         {
-            "location": "/dragcursorplugin/index.html#usage", 
+            "location": "/dragcursor/index.html#usage", 
             "text": "", 
             "title": "Usage"
         }, 
         {
-            "location": "/dragcursorplugin/index.html#create-instance", 
+            "location": "/dragcursor/index.html#create-instance", 
             "text": "var   dragCursor   =   new   DragCursorPlugin ( scene ,   { \n     dir :   8dir ,      // 0| up down |1| left right|2| 4dir |3| 8dir \n     distanceMin :   30          });   Properties   mode :   'up down' , or  0  : simulate up or down cursor keys only.  'left right' , or  1  : simulate left or right cursor keys only.  '4dir' , or  2  : simulate up, down, left or right cursor keys.  '8dir' , or  3  : simulate up, up-left, up-right, down, down-left, down-right, left, or right cursor keys.    distanceMin : cursor keys will be pressed when dragging distance is larger then this value.", 
             "title": "Create instance"
         }, 
         {
-            "location": "/dragcursorplugin/index.html#get-state-of-cursor-keys", 
+            "location": "/dragcursor/index.html#get-state-of-cursor-keys", 
             "text": "var   cursorKeys   =   dragCursor . createCursorKeys ();  var   isLeftKeyDown   =   cursorKeys . left . isDown ;  var   isRightKeyDown   =   cursorKeys . right . isDown ;  var   isUpKeyDown   =   cursorKeys . up . isDown ;  var   isDownKeyDown   =   cursorKeys . down . isDown ;", 
             "title": "Get state of cursor keys"
         }, 
         {
-            "location": "/dragcursorplugin/index.html#get-dragging-point", 
+            "location": "/dragcursor/index.html#get-dragging-point", 
             "text": "var   dragStartX   =   dragCursor . start . x ;  var   dragStartY   =   dragCursor . start . y ;  var   dragEndX   =   dragCursor . end . x ;  var   dragEndY   =   dragCursor . end . y ;", 
             "title": "Get dragging point"
         }, 
         {
-            "location": "/dragcursorplugin/index.html#assign-origin-point", 
+            "location": "/dragcursor/index.html#assign-origin-point", 
             "text": "Origin point is the dragging start point, or assign origin point when creating instance.  var   dragCursor   =   new   DragCursorPlugin ( scene ,   { \n     // ... \n     origin :   {         // assign origin point to (400,300) \n         x :   400 , \n         y :   300 \n     }  });   Or assign origin point by  setOrigin(x, y)  function.  dragCursor . setOrigin ( 400 ,   300 );    // assign origin point to (400,300)", 
             "title": "Assign origin point"
         }, 
@@ -1151,57 +1151,57 @@
             "title": "Generate texture"
         }, 
         {
-            "location": "/canvasplugin/index.html", 
+            "location": "/canvas/index.html", 
             "text": "Introduction\n\n\nDrawing on \ncanvas\n.\n\n\n\n\nAuthor: Rex\n\n\nA kind of game object\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nInstall plugin\n\n\nInstall plugin in \nconfiguration of game\n\n\nvar\n \nconfig\n \n=\n \n{\n\n    \n// ...\n\n    \nplugins\n:\n \n{\n\n        \nglobal\n:\n \n[{\n\n            \nkey\n:\n \nCanvasPlugin\n,\n\n            \nplugin\n:\n \nCanvasPlugin\n,\n\n            \nstart\n:\n \ntrue\n\n        \n},\n\n        \n// ...\n\n        \n]\n\n    \n}\n\n    \n// ...\n\n\n};\n\n\nvar\n \ngame\n \n=\n \nnew\n \nPhaser\n.\nGame\n(\nconfig\n);\n\n\n\n\n\nCreate instance\n\n\nvar\n \ncanvas\n \n=\n \nscene\n.\nadd\n.\nrexCanvas\n(\nx\n,\n \ny\n,\n \nwidth\n,\n \nheight\n);\n\n\n\n\n\nAdd canvas from JSON\n\n\nvar\n \ncanvas\n \n=\n \nscene\n.\nmake\n.\nrexCanvas\n({\n\n    \nx\n:\n \n0\n,\n\n    \ny\n:\n \n0\n,\n\n    \nwidth\n:\n \n256\n,\n\n    \nheight\n:\n \n256\n,\n\n\n    \n//fill: null\n\n\n});\n\n\n\n\n\nClear or fill canvas\n\n\n\n\n\n\nClear\n\n\ncanvas\n.\nclear\n();\n\n\n\n\n\n\n\n\n\nFill color\n\n\ncanvas\n.\nfill\n(\ncolor\n);\n\n\n\n\n\n\n\n\n\nGet canvas elemet\n\n\nvar\n \ncanvasElem\n \n=\n \ncanvas\n.\ngetCanvas\n();\n\n\n// var context = canvasElem.getContext(\n2d\n);\n\n\n// Drawing on context\n\n\n\n\n\nUpdate display texture\n\n\ncanvas\n.\nneedRedraw\n();\n\n\n\n\n\nLoad or save texture\n\n\n\n\n\n\nSave canvas to texuture\n\n\ncanvas\n.\ngenerateTexture\n(\nkey\n,\n \nx\n,\n \ny\n,\n \nwidth\n,\n \nheight\n);\n\n\n\n\n\n\n\n\n\nCopy canvas from texture\n\n\ncanvas\n.\nloadTexture\n(\nkey\n,\n \nresize\n);\n\n\n\n\n\n\n\n\n\nCompare with \nGraphics object\n\n\n\n\n\n\nDrawing method\n\n\n\n\nThis canvas object draws stuff on canvas in WEBGL or CANVAS render mode.  \n\n\nGraphics object draws stuff on webgl render pipeline n WEBGL render mode.\n\n\n\n\n\n\n\n\nSize\n\n\n\n\nThis canvas object has size (width, height) and origin.  \n\n\nGraphics object does not have size and origin.", 
             "title": "Canvas"
         }, 
         {
-            "location": "/canvasplugin/index.html#introduction", 
+            "location": "/canvas/index.html#introduction", 
             "text": "Drawing on  canvas .   Author: Rex  A kind of game object", 
             "title": "Introduction"
         }, 
         {
-            "location": "/canvasplugin/index.html#source-code", 
+            "location": "/canvas/index.html#source-code", 
             "text": "Link", 
             "title": "Source code"
         }, 
         {
-            "location": "/canvasplugin/index.html#usage", 
+            "location": "/canvas/index.html#usage", 
             "text": "", 
             "title": "Usage"
         }, 
         {
-            "location": "/canvasplugin/index.html#install-plugin", 
+            "location": "/canvas/index.html#install-plugin", 
             "text": "Install plugin in  configuration of game  var   config   =   { \n     // ... \n     plugins :   { \n         global :   [{ \n             key :   CanvasPlugin , \n             plugin :   CanvasPlugin , \n             start :   true \n         }, \n         // ... \n         ] \n     } \n     // ...  };  var   game   =   new   Phaser . Game ( config );", 
             "title": "Install plugin"
         }, 
         {
-            "location": "/canvasplugin/index.html#create-instance", 
+            "location": "/canvas/index.html#create-instance", 
             "text": "var   canvas   =   scene . add . rexCanvas ( x ,   y ,   width ,   height );   Add canvas from JSON  var   canvas   =   scene . make . rexCanvas ({ \n     x :   0 , \n     y :   0 , \n     width :   256 , \n     height :   256 , \n\n     //fill: null  });", 
             "title": "Create instance"
         }, 
         {
-            "location": "/canvasplugin/index.html#clear-or-fill-canvas", 
+            "location": "/canvas/index.html#clear-or-fill-canvas", 
             "text": "Clear  canvas . clear ();     Fill color  canvas . fill ( color );", 
             "title": "Clear or fill canvas"
         }, 
         {
-            "location": "/canvasplugin/index.html#get-canvas-elemet", 
+            "location": "/canvas/index.html#get-canvas-elemet", 
             "text": "var   canvasElem   =   canvas . getCanvas ();  // var context = canvasElem.getContext( 2d );  // Drawing on context", 
             "title": "Get canvas elemet"
         }, 
         {
-            "location": "/canvasplugin/index.html#update-display-texture", 
+            "location": "/canvas/index.html#update-display-texture", 
             "text": "canvas . needRedraw ();", 
             "title": "Update display texture"
         }, 
         {
-            "location": "/canvasplugin/index.html#load-or-save-texture", 
+            "location": "/canvas/index.html#load-or-save-texture", 
             "text": "Save canvas to texuture  canvas . generateTexture ( key ,   x ,   y ,   width ,   height );     Copy canvas from texture  canvas . loadTexture ( key ,   resize );", 
             "title": "Load or save texture"
         }, 
         {
-            "location": "/canvasplugin/index.html#compare-with-graphics-object", 
+            "location": "/canvas/index.html#compare-with-graphics-object", 
             "text": "Drawing method   This canvas object draws stuff on canvas in WEBGL or CANVAS render mode.    Graphics object draws stuff on webgl render pipeline n WEBGL render mode.     Size   This canvas object has size (width, height) and origin.    Graphics object does not have size and origin.", 
             "title": "Compare with Graphics object"
         }, 
@@ -1656,87 +1656,87 @@
             "title": "Shuffle"
         }, 
         {
-            "location": "/gridtableplugin/index.html", 
+            "location": "/gridtable/index.html", 
             "text": "Introduction\n\n\nViewer of grid table, to manipulate game object of each visible cell.\n\n\n\n\nAuthor: Rex\n\n\nA kind of game object\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\nvar\n \ntable\n \n=\n \nscene\n.\nadd\n.\nrexGridTable\n(\nx\n,\n \ny\n,\n \nwidth\n,\n \nheight\n,\n \nconfig\n);\n\n\n\n\n\nConfiguration\n\n\n{\n\n    \ncellsCount\n:\n \n0\n,\n    \n// total cells count\n\n    \ncolumns\n:\n \n1\n,\n       \n// columns count of each row\n\n    \ncellHeight\n:\n \n30\n,\n   \n// default height of each cell\n\n    \ncellWidth\n:\n \n30\n,\n    \n// width of each cell\n\n\n    \ncellVisibleCallback\n:\n \nnull\n,\n \n// callback when cell begins visible\n\n    \ncellVisibleCallbackScope\n:\n \nundefined\n,\n\n\n    \ncellInvisibleCallback\n:\n \nnull\n,\n \n// callback when cell begins invisible\n\n    \ncellInvisibleCallbackScope\n:\n \nundefined\n,\n\n\n    \nclamplTableOXY\n:\n \ntrue\n,\n \n// clamp tableOX, tableOY when out-of-bound\n\n    \nscrollMode\n:\n \n0\n,\n        \n// 0|\nv\n|\nvertical\n|1|\nh\n|\nhorizontal\n\n\n}\n\n\n\n\n\nAdd grid table from JSON\n\n\nvar\n \ntable\n \n=\n \nscene\n.\nmake\n.\nrexGridTable\n({\n\n    \nx\n:\n \n0\n,\n\n    \ny\n:\n \n0\n,\n\n    \nwidth\n:\n \n256\n,\n\n    \nheight\n:\n \n256\n,\n\n\n    \n// cellsCount: 0,   // total cells count\n\n    \n// ...\n\n\n});\n\n\n\n\n\nCell begins visible\n\n\nAdd \ncontainer\n of cell when it begins visible in event \ncellvisible\n. \n\n\ntable\n.\non\n(\ncellvisible\n,\n \nfunction\n(\ncell\n){\n\n    \ncell\n.\nsetContainer\n(\ncustomContainer\n);\n\n\n})\n\n\n\n\n\nIt is equal to \ncellVisibleCallback\n in configuration.\n\n\n{\n\n    \n// ...\n\n    \ncellVisibleCallback\n:\n \nfunction\n(\ncell\n)\n \n{\n \ncell\n.\nsetContainer\n(\ncustomContainer\n);\n \n},\n\n    \n// ...\n\n\n}\n\n\n\n\n\nEach cell only has \none\n container gameobject, old container will be destroyed when assigning a new container.\n\n\nCell begins invisible\n\n\nContainer of an invisible cell will be destroyed automatically.\n\n\nTo resue container gameobject, user could pop that container by \ncell.popContainer()\n in event \ncellinvisible\n.\n\n\ntable\n.\non\n(\ncellinvisible\n,\n \nfunction\n(\ncell\n){\n\n    \nvar\n \ncontainer\n \n=\n \ncell\n.\npopContainer\n();\n\n    \n// put this container into an object pool\n\n\n})\n\n\n\n\n\nIt is equal to \ncellInvisibleCallback\n in configuration.\n\n\n{\n\n    \n// ...\n\n    \ncellInvisibleCallback\n:\n \nfunction\n(\ncell\n)\n \n{\n \nvar\n \ncontainer\n \n=\n \ncell\n.\npopContainer\n();\n \n/*... */\n \n},\n\n    \n// ...\n\n\n}\n\n\n\n\n\nScroll table content\n\n\ntable\n.\nsetTableOY\n(\noy\n).\nupdateTable\n();\n\n\ntable\n.\naddTableOY\n(\ndy\n).\nupdateTable\n();\n\n\n\n\n\ntable\n.\nsetTableOX\n(\nox\n).\nupdateTable\n();\n\n\ntable\n.\naddTableOX\n(\ndx\n).\nupdateTable\n();\n\n\n\n\n\ntable\n.\nsetTableOXY\n(\nox\n,\n \noy\n).\nupdateTable\n();\n\n\ntable\n.\naddTableOXY\n(\ndx\n,\n \ndy\n).\nupdateTable\n();\n\n\n\n\n\nThese will trigger \ncellvisible\n, or \ncellinvisible\n events.\n\n\nRefresh table content\n\n\nRefresh all visible cells.\n\n\ntable\n.\nupdateTable\n(\ntrue\n);\n\n\n\n\n\nSet total cells count\n\n\ntable\n.\nsetCellsCunt\n(\ncount\n).\nupdateTable\n();\n\n\n\n\n\nSet table size\n\n\ntable\n.\nsetGridSize\n(\ncolCount\n,\n \nrowCount\n).\nupdateTable\n();\n\n\n\n\n\nSet columns count\n\n\ntable\n.\nsetColumnCount\n(\ncount\n).\nupdateTable\n();\n\n\n\n\n\nCell\n\n\nGet cell\n\n\nvar\n \ncell\n \n=\n \ntable\n.\ngetCell\n(\ncellIndxe\n);\n\n\n\n\n\nFore each visible cell\n\n\n\n\nFor when you absolutely know this Set won't be modified during the iteration\n    \ntable\n.\niterateVisibleCell\n(\nfunction\n(\ncell\n){\n\n    \n// ...\n\n\n});\n\n\n\n\nFor when you know this Set will be modified during the iteration.\n    \ntable\n.\neachVisibleCell\n(\nfunction\n(\ncell\n){\n\n    \n// ...\n\n\n});\n\n\n\n\n\n\nContainer\n\n\nvar\n \ncontainer\n \n=\n \ncell\n.\ngetContainer\n();\n\n\n\n\n\nvar\n \ncontainer\n \n=\n \ncell\n.\npopContainer\n();\n\n\n\n\n\ncell\n.\nsetContainer\n(\ncontainer\n);\n\n\n\n\ncell\n.\ndestroyContainer\n();\n\n\n\n\nProperties\n\n\nvar\n \ncellIndex\n \n=\n \ncell\n.\nindex\n;", 
             "title": "Grid table"
         }, 
         {
-            "location": "/gridtableplugin/index.html#introduction", 
+            "location": "/gridtable/index.html#introduction", 
             "text": "Viewer of grid table, to manipulate game object of each visible cell.   Author: Rex  A kind of game object", 
             "title": "Introduction"
         }, 
         {
-            "location": "/gridtableplugin/index.html#source-code", 
+            "location": "/gridtable/index.html#source-code", 
             "text": "Link", 
             "title": "Source code"
         }, 
         {
-            "location": "/gridtableplugin/index.html#usage", 
+            "location": "/gridtable/index.html#usage", 
             "text": "", 
             "title": "Usage"
         }, 
         {
-            "location": "/gridtableplugin/index.html#create-instance", 
+            "location": "/gridtable/index.html#create-instance", 
             "text": "var   table   =   scene . add . rexGridTable ( x ,   y ,   width ,   height ,   config );   Configuration  { \n     cellsCount :   0 ,      // total cells count \n     columns :   1 ,         // columns count of each row \n     cellHeight :   30 ,     // default height of each cell \n     cellWidth :   30 ,      // width of each cell \n\n     cellVisibleCallback :   null ,   // callback when cell begins visible \n     cellVisibleCallbackScope :   undefined , \n\n     cellInvisibleCallback :   null ,   // callback when cell begins invisible \n     cellInvisibleCallbackScope :   undefined , \n\n     clamplTableOXY :   true ,   // clamp tableOX, tableOY when out-of-bound \n     scrollMode :   0 ,          // 0| v | vertical |1| h | horizontal  }   Add grid table from JSON  var   table   =   scene . make . rexGridTable ({ \n     x :   0 , \n     y :   0 , \n     width :   256 , \n     height :   256 , \n\n     // cellsCount: 0,   // total cells count \n     // ...  });", 
             "title": "Create instance"
         }, 
         {
-            "location": "/gridtableplugin/index.html#cell-begins-visible", 
+            "location": "/gridtable/index.html#cell-begins-visible", 
             "text": "Add  container  of cell when it begins visible in event  cellvisible .   table . on ( cellvisible ,   function ( cell ){ \n     cell . setContainer ( customContainer );  })   It is equal to  cellVisibleCallback  in configuration.  { \n     // ... \n     cellVisibleCallback :   function ( cell )   {   cell . setContainer ( customContainer );   }, \n     // ...  }   Each cell only has  one  container gameobject, old container will be destroyed when assigning a new container.", 
             "title": "Cell begins visible"
         }, 
         {
-            "location": "/gridtableplugin/index.html#cell-begins-invisible", 
+            "location": "/gridtable/index.html#cell-begins-invisible", 
             "text": "Container of an invisible cell will be destroyed automatically.  To resue container gameobject, user could pop that container by  cell.popContainer()  in event  cellinvisible .  table . on ( cellinvisible ,   function ( cell ){ \n     var   container   =   cell . popContainer (); \n     // put this container into an object pool  })   It is equal to  cellInvisibleCallback  in configuration.  { \n     // ... \n     cellInvisibleCallback :   function ( cell )   {   var   container   =   cell . popContainer ();   /*... */   }, \n     // ...  }", 
             "title": "Cell begins invisible"
         }, 
         {
-            "location": "/gridtableplugin/index.html#scroll-table-content", 
+            "location": "/gridtable/index.html#scroll-table-content", 
             "text": "table . setTableOY ( oy ). updateTable ();  table . addTableOY ( dy ). updateTable ();   table . setTableOX ( ox ). updateTable ();  table . addTableOX ( dx ). updateTable ();   table . setTableOXY ( ox ,   oy ). updateTable ();  table . addTableOXY ( dx ,   dy ). updateTable ();   These will trigger  cellvisible , or  cellinvisible  events.", 
             "title": "Scroll table content"
         }, 
         {
-            "location": "/gridtableplugin/index.html#refresh-table-content", 
+            "location": "/gridtable/index.html#refresh-table-content", 
             "text": "Refresh all visible cells.  table . updateTable ( true );", 
             "title": "Refresh table content"
         }, 
         {
-            "location": "/gridtableplugin/index.html#set-total-cells-count", 
+            "location": "/gridtable/index.html#set-total-cells-count", 
             "text": "table . setCellsCunt ( count ). updateTable ();", 
             "title": "Set total cells count"
         }, 
         {
-            "location": "/gridtableplugin/index.html#set-table-size", 
+            "location": "/gridtable/index.html#set-table-size", 
             "text": "table . setGridSize ( colCount ,   rowCount ). updateTable ();", 
             "title": "Set table size"
         }, 
         {
-            "location": "/gridtableplugin/index.html#set-columns-count", 
+            "location": "/gridtable/index.html#set-columns-count", 
             "text": "table . setColumnCount ( count ). updateTable ();", 
             "title": "Set columns count"
         }, 
         {
-            "location": "/gridtableplugin/index.html#cell", 
+            "location": "/gridtable/index.html#cell", 
             "text": "", 
             "title": "Cell"
         }, 
         {
-            "location": "/gridtableplugin/index.html#get-cell", 
+            "location": "/gridtable/index.html#get-cell", 
             "text": "var   cell   =   table . getCell ( cellIndxe );", 
             "title": "Get cell"
         }, 
         {
-            "location": "/gridtableplugin/index.html#fore-each-visible-cell", 
+            "location": "/gridtable/index.html#fore-each-visible-cell", 
             "text": "For when you absolutely know this Set won't be modified during the iteration\n     table . iterateVisibleCell ( function ( cell ){ \n     // ...  });   For when you know this Set will be modified during the iteration.\n     table . eachVisibleCell ( function ( cell ){ \n     // ...  });", 
             "title": "Fore each visible cell"
         }, 
         {
-            "location": "/gridtableplugin/index.html#container", 
+            "location": "/gridtable/index.html#container", 
             "text": "var   container   =   cell . getContainer ();   var   container   =   cell . popContainer ();   cell . setContainer ( container );   cell . destroyContainer ();", 
             "title": "Container"
         }, 
         {
-            "location": "/gridtableplugin/index.html#properties", 
+            "location": "/gridtable/index.html#properties", 
             "text": "var   cellIndex   =   cell . index ;", 
             "title": "Properties"
         }, 

@@ -7,7 +7,7 @@ Displays text with multi-color, font face, or font size with tags.
 
 ## Source code
 
-[Link](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/tagtext/TagTextPlugin.js)
+[Link](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/tagtext-plugin.js)
 
 ## Usage
 
