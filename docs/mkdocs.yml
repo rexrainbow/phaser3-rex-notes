@@ -1,6 +1,4 @@
 site_name: Notes of Phaser 3
-theme: 'material'
-
 pages:
 - Home: index.md
 - System:
@@ -76,9 +74,32 @@ pages:
     - LZ string: lzstringplugin.md
     - XOR: xor.md
 
+
+
+
 extra_javascript:
 - js/mermaid/mermaid.min.js
 - js/umlconvert.js 
+
+theme:
+    name: 'material'
+    logo: 'images/logo.svg'
+    palette:
+        primary: 'blue'
+        accent: 'blue'
+
+site_author: rexrainbow
+site_url: https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html
+
+extra:
+    social:
+        - type: github
+          link: https://github.com/rexrainbow/
+    disqus: 'notes-of-phaser3'
+
+google_analytics:
+    - 'UA-119804412-1'
+    - 'auto'      
 
 use_directory_urls: false
     

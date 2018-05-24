@@ -3,8 +3,8 @@
 
     
     <url>
-     <loc>/index.html</loc>
-     <lastmod>2018-05-23</lastmod>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/index.html</loc>
+     <lastmod>2018-05-24</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -12,54 +12,20 @@
     
         
     <url>
-     <loc>/game/index.html</loc>
-     <lastmod>2018-05-23</lastmod>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/game/index.html</loc>
+     <lastmod>2018-05-24</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>/scenemanager/index.html</loc>
-     <lastmod>2018-05-23</lastmod>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/scenemanager/index.html</loc>
+     <lastmod>2018-05-24</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>/scene/index.html</loc>
-     <lastmod>2018-05-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    
-
-    
-        
-    <url>
-     <loc>/input/index.html</loc>
-     <lastmod>2018-05-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>/touchevents/index.html</loc>
-     <lastmod>2018-05-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>/keyboardevents/index.html</loc>
-     <lastmod>2018-05-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>/drag/index.html</loc>
-     <lastmod>2018-05-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>/dragcursor/index.html</loc>
-     <lastmod>2018-05-23</lastmod>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/scene/index.html</loc>
+     <lastmod>2018-05-24</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -68,54 +34,32 @@
     
         
     <url>
-     <loc>/loader/index.html</loc>
-     <lastmod>2018-05-23</lastmod>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/input/index.html</loc>
+     <lastmod>2018-05-24</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>/webfontloader/index.html</loc>
-     <lastmod>2018-05-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    
-
-    
-        
-    <url>
-     <loc>/gameobject/index.html</loc>
-     <lastmod>2018-05-23</lastmod>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/touchevents/index.html</loc>
+     <lastmod>2018-05-24</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc></loc>
-     <lastmod></lastmod>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/keyboardevents/index.html</loc>
+     <lastmod>2018-05-24</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc></loc>
-     <lastmod></lastmod>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/drag/index.html</loc>
+     <lastmod>2018-05-24</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc></loc>
-     <lastmod></lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc></loc>
-     <lastmod></lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc></loc>
-     <lastmod></lastmod>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/dragcursor/index.html</loc>
+     <lastmod>2018-05-24</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -124,26 +68,14 @@
     
         
     <url>
-     <loc>/date/index.html</loc>
-     <lastmod>2018-05-23</lastmod>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/loader/index.html</loc>
+     <lastmod>2018-05-24</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>/timer/index.html</loc>
-     <lastmod>2018-05-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>/timeline/index.html</loc>
-     <lastmod>2018-05-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>/clockplugin/index.html</loc>
-     <lastmod>2018-05-23</lastmod>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/webfontloader/index.html</loc>
+     <lastmod>2018-05-24</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -152,13 +84,37 @@
     
         
     <url>
-     <loc></loc>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/gameobject/index.html</loc>
+     <lastmod>2018-05-24</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html</loc>
      <lastmod></lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc></loc>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html</loc>
+     <lastmod></lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html</loc>
+     <lastmod></lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html</loc>
+     <lastmod></lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html</loc>
      <lastmod></lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -168,42 +124,26 @@
     
         
     <url>
-     <loc>/audio/index.html</loc>
-     <lastmod>2018-05-23</lastmod>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/date/index.html</loc>
+     <lastmod>2018-05-24</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>/fadevolume/index.html</loc>
-     <lastmod>2018-05-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    
-
-    
-        
-    <url>
-     <loc>/datamanager/index.html</loc>
-     <lastmod>2018-05-23</lastmod>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/timer/index.html</loc>
+     <lastmod>2018-05-24</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>/array/index.html</loc>
-     <lastmod>2018-05-23</lastmod>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/timeline/index.html</loc>
+     <lastmod>2018-05-24</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>/csvtoarray/index.html</loc>
-     <lastmod>2018-05-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>/csvtohashtable/index.html</loc>
-     <lastmod>2018-05-23</lastmod>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/clockplugin/index.html</loc>
+     <lastmod>2018-05-24</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -212,19 +152,13 @@
     
         
     <url>
-     <loc>/eventemitter3/index.html</loc>
-     <lastmod>2018-05-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc></loc>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html</loc>
      <lastmod></lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc></loc>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html</loc>
      <lastmod></lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -234,8 +168,14 @@
     
         
     <url>
-     <loc>/camera/index.html</loc>
-     <lastmod>2018-05-23</lastmod>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/audio/index.html</loc>
+     <lastmod>2018-05-24</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/fadevolume/index.html</loc>
+     <lastmod>2018-05-24</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -244,7 +184,47 @@
     
         
     <url>
-     <loc></loc>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/datamanager/index.html</loc>
+     <lastmod>2018-05-24</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/array/index.html</loc>
+     <lastmod>2018-05-24</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/csvtoarray/index.html</loc>
+     <lastmod>2018-05-24</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/csvtohashtable/index.html</loc>
+     <lastmod>2018-05-24</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    
+
+    
+        
+    <url>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/eventemitter3/index.html</loc>
+     <lastmod>2018-05-24</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html</loc>
+     <lastmod></lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html</loc>
      <lastmod></lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -254,26 +234,46 @@
     
         
     <url>
-     <loc>/format/index.html</loc>
-     <lastmod>2018-05-23</lastmod>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/camera/index.html</loc>
+     <lastmod>2018-05-24</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    
+
+    
+        
+    <url>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html</loc>
+     <lastmod></lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    
+
+    
+        
+    <url>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/format/index.html</loc>
+     <lastmod>2018-05-24</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>/mustache/index.html</loc>
-     <lastmod>2018-05-23</lastmod>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/mustache/index.html</loc>
+     <lastmod>2018-05-24</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>/lzstringplugin/index.html</loc>
-     <lastmod>2018-05-23</lastmod>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/lzstringplugin/index.html</loc>
+     <lastmod>2018-05-24</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>/xor/index.html</loc>
-     <lastmod>2018-05-23</lastmod>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/xor/index.html</loc>
+     <lastmod>2018-05-24</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
