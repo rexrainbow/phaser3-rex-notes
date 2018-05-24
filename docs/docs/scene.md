@@ -12,7 +12,7 @@ class MyScene extends Phaser.Scene {
 
     preload () {}
     create ()  {}
-    update() {}
+    update(time, delta) {}
 
 }
 ```
@@ -33,7 +33,7 @@ var MyScene = new Phaser.Class({
 
     preload: function () {},
     create: function () {},
-    update: function () {}
+    update: function (time, delta) {}
 });
 ```
 
@@ -49,7 +49,7 @@ MyGame.Boot.prototype.constructor = MyGame.Boot;
 MyGame.Boot.prototype = {
     preload: function () {},
     create: function () {},
-    update: function () {}
+    update: function (time, delta) {}
 };
 ```
 
@@ -86,6 +86,7 @@ demo.update = function (){};
 - `time`
 - `tweens`
 - `physics` : arcadePhysics
+- `plugins`
 - `impact` : impactPhysics
 - `matter` :　matterPhysics
 

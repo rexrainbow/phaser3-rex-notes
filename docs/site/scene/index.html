@@ -1477,7 +1477,7 @@
 
     <span class="nx">preload</span> <span class="p">()</span> <span class="p">{}</span>
     <span class="nx">create</span> <span class="p">()</span>  <span class="p">{}</span>
-    <span class="nx">update</span><span class="p">()</span> <span class="p">{}</span>
+    <span class="nx">update</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">)</span> <span class="p">{}</span>
 
 <span class="p">}</span>
 </pre></div>
@@ -1496,7 +1496,7 @@
 
     <span class="nx">preload</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{},</span>
     <span class="nx">create</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{},</span>
-    <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{}</span>
+    <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">)</span> <span class="p">{}</span>
 <span class="p">});</span>
 </pre></div>
 
@@ -1511,7 +1511,7 @@
 <span class="nx">MyGame</span><span class="p">.</span><span class="nx">Boot</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
     <span class="nx">preload</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{},</span>
     <span class="nx">create</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{},</span>
-    <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{}</span>
+    <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">)</span> <span class="p">{}</span>
 <span class="p">};</span>
 </pre></div>
 
@@ -1546,6 +1546,7 @@
 <li><code>time</code></li>
 <li><code>tweens</code></li>
 <li><code>physics</code> : arcadePhysics</li>
+<li><code>plugins</code></li>
 <li><code>impact</code> : impactPhysics</li>
 <li><code>matter</code> :　matterPhysics</li>
 </ul>
