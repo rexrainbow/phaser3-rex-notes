@@ -1,7 +1,7 @@
 'use strict'
 
 import EE from 'eventemitter3';
-import ClcokPlugin from './../clock-plugin.js';
+import Clcok from './../clock.js';
 import GetSceneObject from './../utils/system/GetSceneObject.js';
 import ArrCopy from './../utils/array/Copy.js';
 import runCommands from './../../plugins/runcommands.js';
@@ -11,7 +11,7 @@ const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 class PlayerPlugin extends EE {
     constructor(parent, config) {
         super();
-        this.clock = new ClcokPlugin(parent);
+        this.clock = new Clcok(parent);
         this.parent = parent;
         this.resetFromJSON(config); // this function had been called in super(config)
         this.boot();
