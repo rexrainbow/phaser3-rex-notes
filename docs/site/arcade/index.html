@@ -987,6 +987,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#rotation" title="Rotation" class="md-nav__link">
+    Rotation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#mass" title="Mass" class="md-nav__link">
     Mass
   </a>
@@ -1764,6 +1771,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#rotation" title="Rotation" class="md-nav__link">
+    Rotation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#mass" title="Mass" class="md-nav__link">
     Mass
   </a>
@@ -2063,6 +2077,9 @@
     <span class="nx">setCollideWorldBounds</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="nx">setAccelerationX</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">setAccelerationY</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">allowDrag</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">allowGravity</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">allowRotation</span><span class="o">:</span> <span class="kc">true</span>
     <span class="nx">setBounceX</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">setBounceY</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">setDragX</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
@@ -2135,6 +2152,10 @@
 <div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">setMaxVelocity</span><span class="p">(</span><span class="nx">y</span><span class="p">);</span>
 </pre></div>
 
+<h4 id="rotation">Rotation<a class="headerlink" href="#rotation" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">body</span><span class="p">.</span><span class="nx">setAllowRotation</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>  <span class="c1">// true to allow rotation on this body (default:true)</span>
+</pre></div>
+
 <h4 id="mass">Mass<a class="headerlink" href="#mass" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">setMass</span><span class="p">(</span><span class="nx">v</span><span class="p">);</span>
 </pre></div>
@@ -2177,6 +2198,9 @@
 </pre></div>
 
 <div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">setDragY</span><span class="p">(</span><span class="nx">y</span><span class="p">);</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">body</span><span class="p">.</span><span class="nx">setAllowDrag</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>  <span class="c1">// true to allow drag on this body (default:true)</span>
 </pre></div>
 
 <h4 id="angular">Angular<a class="headerlink" href="#angular" title="Permanent link">&para;</a></h4>
@@ -2277,6 +2301,9 @@
 </pre></div>
 
 <div class="codehilite"><pre><span></span><span class="nx">body</span><span class="p">.</span><span class="nx">gravity</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">body</span><span class="p">.</span><span class="nx">setAllowGravity</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>  <span class="c1">// true to allow gravity on this body (default:true)</span>
 </pre></div>
 
 <h4 id="friction_1">Friction<a class="headerlink" href="#friction_1" title="Permanent link">&para;</a></h4>

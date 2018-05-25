@@ -82,11 +82,20 @@ camera.centerToSize();
 - Start following
     ```javascript
     camera.startFollow(gameobject);
-    // camera.startFollow(gameobject, roundPx);
+    // camera.startFollow(gameobject, roundPx, lerpX, lerpY, offsetX, offsetY);  // 
     ```
+    roundPx : set true to round the camera position to integers
 - Stop following
     ```javascript
     camera.stopFollow();
+    ```
+- Set follow offset
+    ```javascript
+    camera.setFollowOffset(x, y);
+    ```
+- Set lerp
+    ```javascript
+    camera.setLerp(x, y);
     ```
 
 #### Scroll factor

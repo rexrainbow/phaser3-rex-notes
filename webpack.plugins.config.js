@@ -16,6 +16,7 @@ module.exports = {
         'tagtextplugin': './plugins/tagtext-plugin.js',
 
         // custom file loader
+        'webfontloader': './plugins/webfontloader.js',        
         'webfontloaderplugin': './plugins/webfontloader-plugin.js',
 
         // functions

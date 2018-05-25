@@ -1885,10 +1885,17 @@
 <ul>
 <li>Start following
     <div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">startFollow</span><span class="p">(</span><span class="nx">gameobject</span><span class="p">);</span>
-<span class="c1">// camera.startFollow(gameobject, roundPx);</span>
-</pre></div></li>
+<span class="c1">// camera.startFollow(gameobject, roundPx, lerpX, lerpY, offsetX, offsetY);  // </span>
+</pre></div>
+    roundPx : set true to round the camera position to integers</li>
 <li>Stop following
     <div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">stopFollow</span><span class="p">();</span>
+</pre></div></li>
+<li>Set follow offset
+    <div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">setFollowOffset</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</pre></div></li>
+<li>Set lerp
+    <div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">setLerp</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 </pre></div></li>
 </ul>
 <h4 id="scroll-factor">Scroll factor<a class="headerlink" href="#scroll-factor" title="Permanent link">&para;</a></h4>

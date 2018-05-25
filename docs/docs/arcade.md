@@ -110,6 +110,9 @@ var config = {
     setCollideWorldBounds: false,
     setAccelerationX: 0,
     setAccelerationY: 0,
+    allowDrag: true,
+    allowGravity: true,
+    allowRotation: true
     setBounceX: 0,
     setBounceY: 0,
     setDragX: 0,
@@ -198,6 +201,12 @@ gameobject.setVelocityY(x);
 gameobject.setMaxVelocity(y);
 ```
 
+#### Rotation
+
+```javascript
+body.setAllowRotation(value);  // true to allow rotation on this body (default:true)
+```
+
 #### Mass
 
 ```javascript
@@ -258,6 +267,10 @@ gameobject.setDragX(x);
 
 ```javascript
 gameobject.setDragY(y);
+```
+
+```javascript
+body.setAllowDrag(value);  // true to allow drag on this body (default:true)
 ```
 
 #### Angular
@@ -399,6 +412,10 @@ body.gravity.x = x;
 
 ```javascript
 body.gravity.y = y;
+```
+
+```javascript
+body.setAllowGravity(value);  // true to allow gravity on this body (default:true)
 ```
 
 #### Friction
