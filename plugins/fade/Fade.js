@@ -5,7 +5,7 @@ import GetSceneObject from './../utils/system/GetSceneObject.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 
-class FadeOutPlugin {
+class Fade {
     constructor(gameobject, config) {
         this.gameobject = gameobject;
         this.scene = GetSceneObject(gameobject);
@@ -66,20 +66,20 @@ class FadeOutPlugin {
             m = MODE[m];
         }
         this.mode = m;
-        return this;        
+        return this;
     }
     setAlphaRange(start, end) {
         this.alpha.start = start;
         this.alpha.end = end;
-        return this;        
+        return this;
     }
     setDelay(time) {
         this.delay = time;
-        return this;        
+        return this;
     }
     setFadeOutTime(time) {
         this.duration = time;
-        return this;        
+        return this;
     }
 
     start() {
@@ -107,7 +107,7 @@ class FadeOutPlugin {
             onComplete: this.complete,
             onCompleteScope: this
         });
-        return this;        
+        return this;
     }
 
     stop() {
@@ -117,7 +117,7 @@ class FadeOutPlugin {
 
         this.tween.stop();
         this.tween = undefined;
-        return this;        
+        return this;
     }
 
     complete() {
@@ -134,4 +134,4 @@ const MODE = {
     yoyo: 2
 }
 
-export default FadeOutPlugin;
+export default Fade;

@@ -6,46 +6,34 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 module.exports = {
     entry: {
         // game objects
-        'bbcodetext': './plugins/bbcodetext.js',
         'bbcodetextplugin': './plugins/bbcodetext-plugin.js',
-        'canvas': './plugins/canvas.js',
         'canvasplugin': './plugins/canvas-plugin.js',
-        'gridtable': './plugins/gridtable.js',
         'gridtableplugin': './plugins/gridtable-plugin.js',
-        'tagtext': './plugins/tagtext.js',
         'tagtextplugin': './plugins/tagtext-plugin.js',
 
-        // custom file loader
-        'webfontloader': './plugins/webfontloader.js',        
+        // custom file loader      
         'webfontloaderplugin': './plugins/webfontloader-plugin.js',
 
         // functions
-        'xor': './plugins/xor.js',
         'xorplugin': './plugins/xor-plugin.js',
-        'lzstring': './plugins/lzstring.js',
         'lzstringplugin': './plugins/lzstring-plugin.js',
-        'csvtoarray': './plugins/csvtoarray.js',
         'csvtoarrayplugin': './plugins/csvtoarray-plugin.js',
-        'sequence': './plugins/sequence.js',
         'sequenceplugin': './plugins/sequence-plugin.js',
 
         // input
-        'drag': './plugins/drag.js',
         'dragplugin': './plugins/drag-plugin.js',
-        'dragcursor': './plugins/dragcursor.js',
         'dragcursorplugin': './plugins/dragcursor-plugin.js',
-        'dragdelta': './plugins/dragdelta.js',
         'dragdeltaplugin': './plugins/dragdelta-plugin.js',
 
-        // member of scene 
-        'clock': './plugins/clock.js',
-        'clockplugin': './plugins/clock-plugin.js',
+        // member of game object
+        'fadeplugin': './plugins/fade-plugin.js',
 
         // member of text
-        'texttyping': './plugins/texttyping.js',
         'texttypingplugin': './plugins/texttyping-plugin.js',
-        'textpage': './plugins/textpage.js',
         'textpageplugin': './plugins/textpage-plugin.js',
+
+        // member of scene 
+        'clockplugin': './plugins/clock-plugin.js',        
     },
     output: {
         pathinfo: true,

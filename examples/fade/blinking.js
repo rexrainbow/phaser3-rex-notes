@@ -18,7 +18,7 @@ class Demo extends Phaser.Scene {
     create() {
         for (var i = 0; i < 500; i++) {
             var img = this.add.image(Between(5, 795), Between(5, 595), 'dot').setAlpha(0);
-            var fade = new FadePlugin(img, {
+            var fade = this.plugins.get('rexFade').add(img, {
                 delay: Between(0, 100),
                 duration: Between(500, 1000),
                 alpha: {
@@ -37,7 +37,14 @@ var config = {
     parent: 'phaser-example',
     width: 800,
     height: 600,
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexFade',
+            plugin: FadePlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

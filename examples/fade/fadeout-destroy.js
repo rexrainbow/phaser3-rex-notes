@@ -1,6 +1,6 @@
 'use strict'
 
-import fadeOutDestroy from './../../plugins/fade-out-destroy.js'
+import FadePlugin from './../../plugins/fade-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -12,7 +12,7 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('dot', 'assets/images/white-dot.png');        
+        this.load.image('dot', 'assets/images/white-dot.png');
     }
 
     create() {
@@ -23,9 +23,9 @@ class Demo extends Phaser.Scene {
     update() {
         var pointer = this.input.activePointer;
         var img = this.add.image(pointer.x, pointer.y, 'dot');
-        fadeOutDestroy(img, 2000);
+        this.plugins.get('rexFade').fadeOutDestroy(img, 2000);
 
-        this.group.add(img);        
+        this.group.add(img);
         this.txt.setText(this.group.getLength().toString());
     }
 }
@@ -35,7 +35,14 @@ var config = {
     parent: 'phaser-example',
     width: 800,
     height: 600,
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexFade',
+            plugin: FadePlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);
