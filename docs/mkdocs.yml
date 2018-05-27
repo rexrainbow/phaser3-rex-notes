@@ -67,7 +67,7 @@ pages:
 - Math:
     - Random:
         - Random number: random.md
-        - Gashapon: gashaponplugin.md
+        - Gashapon: gashapon.md
 - String:
     - Format: format.md
     - Mustache: mustache.md

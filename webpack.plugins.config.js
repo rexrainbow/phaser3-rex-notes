@@ -18,7 +18,7 @@ module.exports = {
         'xorplugin': './plugins/xor-plugin.js',
         'lzstringplugin': './plugins/lzstring-plugin.js',
         'csvtoarrayplugin': './plugins/csvtoarray-plugin.js',
-        'sequenceplugin': './plugins/sequence-plugin.js',
+        'sequenceplugin': './plugins/sequence-plugin.js',        
 
         // input
         'dragplugin': './plugins/drag-plugin.js',
@@ -33,7 +33,9 @@ module.exports = {
         'textpageplugin': './plugins/textpage-plugin.js',
 
         // member of scene 
-        'clockplugin': './plugins/clock-plugin.js',        
+        'clockplugin': './plugins/clock-plugin.js',
+        'csvtohashtableplugin': './plugins/csvtohashtable-plugin.js',
+        'gashaponplugin': './plugins/gashapon-plugin.js'
     },
     output: {
         pathinfo: true,

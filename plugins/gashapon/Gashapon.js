@@ -45,7 +45,6 @@ class Gashapon {
         // data
 
         this.items = Clone(GetFastValue(o, 'items', {}), this.items);
-        this.remain = Clone(GetFastValue(o, 'remain', {}), this.remain);
         this._list.length = 0;
 
         // result
@@ -61,6 +60,10 @@ class Gashapon {
         // initialize
         if (this._restartFlag) {
             this.startGen();
+        }
+        var remain = GetFastValue(o, 'remain', undefined);
+        if (remain) {
+            this.remain = Clone(remain, this.remain);
         }
 
         return this;
@@ -227,21 +230,16 @@ class Gashapon {
         for (var i = 2, len = arguments.length; i < len; i++) {
             args.push(arguments[i]);
         }
+        for (var name in this.items) {
+            args[0] = name;
+            args[1] = this.items[name];
 
-        if (scope) {
-            for (var name in this.items) {
-                args[0] = name;
-                args[1] = this.items[name];
-
+            if (scope) {
                 callback.apply(scope, args);
-            }
-        } else {
-            for (var name in this.items) {
-                args[0] = name;
-                args[1] = this.items[name];
-
+            } else {
                 callback(args);
             }
+
         }
 
         return this;
@@ -260,21 +258,15 @@ class Gashapon {
         for (var i = 1; i < arguments.length; i++) {
             args.push(arguments[i]);
         }
-
-        if (scope) {
-            for (var name in this.remain) {
-                args[1] = name;
-                args[2] = this.remain[name];
-
+        for (var name in this.remain) {
+            args[1] = name;
+            args[2] = this.remain[name];
+            if (scope) {
                 callback.apply(scope, args);
-            }
-        } else {
-            for (var name in this.remain) {
-                args[1] = name;
-                args[2] = this.remain[name];
-
+            } else {
                 callback(args);
             }
+
         }
 
         return this;

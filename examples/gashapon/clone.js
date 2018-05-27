@@ -7,14 +7,12 @@ class Demo extends Phaser.Scene {
         super({
             key: 'examples'
         });
-        this.gashapon;
-        this.gashapon2;
     }
 
     preload() {}
 
     create() {
-        this.gashapon = new GashaponPlugin(this, {
+        var gashapon = this.plugins.get('rexGashapon').add({
             mode: 'shuffle', // 0|'shuffle'|1|'random
             items: {
                 a: 1,
@@ -25,14 +23,14 @@ class Demo extends Phaser.Scene {
         });
 
         for (var i = 0; i < 3; i++) {
-            console.log("Random pick: " + this.gashapon.next());
+            console.log("Random pick: " + gashapon.next());
         }
 
-        var status = this.gashapon.toJSON(); // get current status of gashapon
+        var status = gashapon.toJSON(); // get current status of gashapon
         console.log(status);
-        this.gashapon2 = new Gashapon(status); // create new Gashapon object using previous status
+        var gashapon2 = this.plugins.get('rexGashapon').add(status); // create new Gashapon object using previous status
         for (var i = 0; i < 3; i++) {
-            console.log("Random pick: " + this.gashapon2.next());
+            console.log("Random pick: " + gashapon2.next());
         }
     }
 
@@ -46,7 +44,14 @@ var config = {
     parent: 'phaser-example',
     width: 800,
     height: 600,
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexGashapon',
+            plugin: GashaponPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

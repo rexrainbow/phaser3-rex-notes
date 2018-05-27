@@ -11,10 +11,41 @@ Pick random item from box.
 
 ## Usage
 
+User could import class directly, or install it by global plugin.
+
+### Import class
+
+```javascript
+import rexGashapon from './plugins/gashapon.js';
+```
+
+### Install global plugin
+
+Install plugin in [configuration of game](game.md#configuration)
+
+```javascript
+import GashaponPlugin from './plugins/gashapon-plugin.js';
+
+var config = {
+    // ...
+    plugins: {
+        global: [{
+            key: 'rexGashapon',
+            plugin: GashaponPlugin,
+            start: true
+        },
+        // ...
+        ]
+    }
+    // ...
+};
+var game = new Phaser.Game(config);
+```
+
 ### Create instance
 
 ```javascript
-var gashapon = new GashaponPlugin(scene, {
+var gashapon = scene.plugins.get('rexGashapon').add({
     mode: 'shuffle',  // 0|'shuffle'|1|'random
     items: {  // name:count
         a:1, 
