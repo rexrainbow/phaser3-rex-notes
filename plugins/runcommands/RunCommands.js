@@ -39,16 +39,13 @@ var runCommand = function (cmd, scope, config) {
             argsConvertCallback = defaultTypeConvert;
             argsConvertCallbackScope = undefined;
         }
-        if (argsConvertCallbackScope) {
-            for (var i = 0, len = ARGS.length; i < len; i++) {
+        for (var i = 0, len = ARGS.length; i < len; i++) {
+            if (argsConvertCallbackScope) {
                 ARGS[i] = argsConvertCallback.call(argsConvertCallbackScope, cmd, ARGS[i]);
-            }
-        } else {
-            for (var i = 0, len = ARGS.length; i < len; i++) {
+            } else {
                 ARGS[i] = argsConvertCallback(cmd, ARGS[i]);
             }
         }
-
     }
 
     var fn = scope[fnName];

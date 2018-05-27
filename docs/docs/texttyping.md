@@ -53,7 +53,7 @@ txt.typing = scene.plugins.get('rexTextTyping').add(txt, {
 });
 ```
 
-Properties
+Configuration
 
 - speed: typing speed in ms
 - typeMode :

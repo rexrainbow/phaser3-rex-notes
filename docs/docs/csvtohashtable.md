@@ -20,72 +20,108 @@ var table = new HashTable(this);
 ### Load table from csv string
 
 ```javascript
-table.loadCSV(csvString);
-// table.loadCSV(csvString, delimiter);
+table.loadCSV(csvString, {
+    // delimiter: ',',
+    // convert: true,
+    // convertCallback: undefined
+    // convertCallbackScope: undefined
+});
 ```
 
-All values in table are string after loading.
+For exameple, csv string
+
+```json
+name,hp,mp
+Rex,100,20
+Alice,300,40
+```
+
+will be converted to 
+
+```json
+{
+    "Alice": {
+        "name": "Alice",
+        "hp": 300,
+        "mp": 40
+    },
+    "Rex": {
+        "name": "Rex",
+        "hp": 100,
+        "mp": 20
+    }
+}
+```
+
+Then get value by
+
+```javascript
+var value = table.get('Rex', 'hp');
+```
 
 ### Convert value type
 
-- Convert all values
-    ```javascript
-    table.convert();  // convert true, false, null, number
-    // table.convert(callback, scope); // convert by custom function
-    // callback = function(table, colKey, rowKey, value) {};
-    ```
+Values will be converted to *number*, *boolean*, *null*, or *string*, if `convert` is `true`, or assign your convert function by `convertCallback` and `convertCallbackScope` when loading table (`table.loadCSV(...)`).
+
+```javascript
+var convertCallback = function(table, rowKey, colKey, value) {
+    // value = ...
+    return value;
+};
+```
+
+Or uses these metheds to convert columns or rows.
+
 - convert values in column
     ```javascript
     table.convertCol(colKey);  // colKey: a colKey, or an array of colKeys
-    // table.convertCol(colKey, callback, scope);
-    // callback = function(table, colKey, rowKey, value) {};
+    // table.convertCol(colKey, convertCallback, convertCallbackScope);
     ```
 - convert values in row
     ```javascript
     table.convertRow(rowKey);  // rowKey: a rowKey, or an array of rowKeys
-    // table.convertRow(rowKey, callback, scope);
-    // callback = function(table, colKey, rowKey, value) {};
+    // table.convertRow(rowKey, convertCallback, convertCallbackScope);
     ```
 
 ### Get value
 
 ```javascript
-var val = table.get(colKey, rowKey);
+var val = table.get(rowKey, colKey);
 ```
 
 ### Set value
 
 ```javascript
-table.set(colKey, rowKey, value);
+table.set(rowKey, colKey, value);
 ```
 
 ```javascript
-table.add(colKey, rowKey, value);
-// equal to table.set(colKey, rowKey, table.get(colKey, rowKey) + value);
+table.add(rowKey, colKey, value);
+// equal to table.set(rowKey, colKey, table.get(rowKey, colKey) + value);
 ```
 
 ### Has column/row key
-
-```javascript
-var hasRow = table.hasColKey(colKey);
-```
 
 ```javascript
 var hasRow = table.hasRowKey(rowKey);
 ```
 
 ```javascript
-var hasRow = table.hasKey(colKey, rowKey);
+var hasCol = table.hasColKey(colKey);
+```
+
+```javascript
+var hasCell = table.hasKey(rowKey, colKey);
 ```
 
 ### Value in column or row
 
 ```javascript
-var hasValue = table.isValueInCol(colKey, data);
+var existed = table.isValueInRol(rowKey, data);
 ```
 
 ```javascript
-var existed = table.isValueInRol(rowKey, data);
+var existed = table.isValueInCol(colKey, data);
 ```
 
 ### Create table
@@ -101,7 +137,15 @@ table.clean();
 ```javascript
 table.appendCol(colKey, initValue);
 // table.appendCol(colKey, callback, scope);  // get initValue from callback
-// callback = function (table, colKey, rowKey) { }
+```
+
+Callback
+
+```javascript
+var callback = function (table, rowKey, colKey) { 
+    // value = ...
+    return value;
+};
 ```
 
 #### Append a row
@@ -109,13 +153,15 @@ table.appendCol(colKey, initValue);
 ```javascript
 table.appendRow(colKey, initValue);
 // table.appendRow(colKey, callback, scope);  // get initValue from callback
-// callback = function (table, colKey, rowKey) { }
 ```
 
-#### Remove a column
+Callback
 
 ```javascript
-table.removeCol(colKey);
+var callback = function (table, rowKey, colKey) { 
+    // value = ...
+    return value;
+};
 ```
 
 #### Remove a row
@@ -124,28 +170,53 @@ table.removeCol(colKey);
 table.removeRol(colKey);
 ```
 
+#### Remove a column
+
+```javascript
+table.removeCol(colKey);
+```
+
 ### Sort column or row
 
 ```javascript
-table.sortCol(colKey, mode); // mode: 'ascending'|0|'descending'|1|'logical ascending'|2|'logical descending'|3
+table.sortCol(colKey, mode);
 // table.sortCol(callback, scope);  // sort column by callback
-// callback = function(rowKeyA, rowKeyB) {}
 ```
 
 ```javascript
-table.sortRow(rowKey, mode); // mode: 'ascending'|0|'descending'|1|'logical ascending'|2|'logical descending'|3
+table.sortRow(rowKey, mode);
 // table.sortRow(callback, scope);  // sort column by callback
-// callback = function(colKeyA, colKeyB) {}
+```
+
+Mode:
+
+- `'ascending'`, or `0`
+- `'descending'`, or `1`
+- `'logical ascending'`, or `2`
+- `'logical descending'`, or `3`
+
+Sorting callback
+
+```javascript
+var callback = function(rowKeyA, rowKeyB) {
+    return result; // 1, -1, or 0
+};
 ```
 
 ### Retrieve columns or rows
 
 ```javascript
 table.eachCol(rowKey, callback, scope);
-// callback = function(table, colKey, rowKey, value) {}
 ```
 
 ```javascript
 table.eachRow(colKey, callback, scope);
-// callback = function(table, colKey, rowKey, value) {}
+```
+
+Callback
+
+```javascript
+var callback = function(table, rowKey, colKey, value) {
+    // ...
+};
 ```
