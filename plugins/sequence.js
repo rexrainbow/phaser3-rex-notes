@@ -1,2 +1,2 @@
-import Sequence from './runcommands/Sequence.js';
+import Sequence from './runcommands/sequence/Sequence.js';
 export default Sequence;

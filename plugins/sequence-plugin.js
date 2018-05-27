@@ -11,7 +11,7 @@ class SequencePlugin extends Phaser.Plugins.BasePlugin {
     }
 
     add(config) {
-        return new Sequence(undefined, config);
+        return new Sequence(config);
     }
 }
 

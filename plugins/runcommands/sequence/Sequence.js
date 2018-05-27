@@ -1,12 +1,12 @@
 'use strict'
 
 import EE from 'eventemitter3';
-import runCommands from './../../plugins/runcommands.js';
-import ArrayCopy from './../../plugins/utils/array/Copy.js';
+import RunCommands from './../../runcommands.js';
+import ArrayCopy from './../../utils/array/Copy.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 
-class SequencePlugin extends EE {
+class Sequence extends EE {
     constructor(config) {
         super();
 
@@ -110,7 +110,7 @@ class SequencePlugin extends EE {
                 return;
             }
 
-            task = runCommands(this.commands[this.index], this.scope);
+            task = RunCommands(this.commands[this.index], this.scope);
             if (task && (typeof (task.once) === 'function')) {
                 task.once('complete', this.runNextCommands, this);
                 this.task = task;
@@ -158,4 +158,4 @@ class SequencePlugin extends EE {
     }
 }
 
-export default SequencePlugin;
+export default Sequence;

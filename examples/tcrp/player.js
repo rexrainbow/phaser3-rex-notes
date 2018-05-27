@@ -37,7 +37,7 @@ class Demo extends Phaser.Scene {
                 ['print', 'phaser3'],
             ]]
         ];
-        var player = new PlayerPlugin(this);
+        var player = this.plugins.get('rexTCRP').addPlayer(this);
         player
             .load(commands, myCmds, {
                 // timeUnit: 0,        // 'ms'|0|'s'|'sec'|1
@@ -57,7 +57,14 @@ var config = {
     parent: 'phaser-example',
     width: 800,
     height: 600,
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexTCRP',
+            plugin: TCRPPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

@@ -1,6 +1,6 @@
 'use strict'
 
-import CSVToArray from './../../plugins/csvtoarray.js';
+import CSVToArrayPlugin from './../../plugins/csvtoarray-plugin.js';
 import TCRPPlugin from './../../plugins/tcrp-plugin.js';
 
 const PlayerPlugin = TCRPPlugin.Player;
@@ -35,16 +35,15 @@ class Demo extends Phaser.Scene {
 
         var myCmds = new ActionKlass(this);
 
-        var commands = CSVToArray(csvString);
-        
-        var player = new PlayerPlugin(this);
+        var commands = this.plugins.get('rexCSVToArray').convert(csvString);
+        var player = this.plugins.get('rexTCRP').addPlayer(this);
         player
             .load(commands, myCmds, {
                 // timeUnit: 0,        // 'ms'|0|'s'|'sec'|1
                 // dtMode: 0           // 'abs'|'absolute'|0|'inc'|'increment'|1
             })
             .start()
-            .on('complete', function(){
+            .on('complete', function () {
                 console.log(player.now * 0.001);
             });
     }
@@ -57,7 +56,20 @@ var config = {
     parent: 'phaser-example',
     width: 800,
     height: 600,
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+                key: 'rexCSVToArray',
+                plugin: CSVToArrayPlugin,
+                start: true
+            },
+            {
+                key: 'rexTCRP',
+                plugin: TCRPPlugin,
+                start: true
+            }
+        ]
+    }
 };
 
 var game = new Phaser.Game(config);

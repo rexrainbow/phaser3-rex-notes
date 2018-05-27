@@ -1,11 +1,11 @@
 'use strict'
 
-import Clcok from './../clock.js';
-import Clone from './../../plugins/utils/object/Clone.js';
+import Clcok from './../../clock.js';
+import Clone from './../../utils/object/Clone.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 
-class RecorderPlugin {
+class Recorder {
     constructor(parent, config) {
         this.clock = new Clcok(parent);
         this.parent = parent;
@@ -116,4 +116,4 @@ class RecorderPlugin {
     }
 }
 
-export default RecorderPlugin;
+export default Recorder;

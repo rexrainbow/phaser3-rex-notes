@@ -35,6 +35,7 @@ module.exports = {
         // member of scene 
         'clockplugin': './plugins/clock-plugin.js',
         'csvtohashtableplugin': './plugins/csvtohashtable-plugin.js',
+        'tcrpplugin': './plugins/tcrp-plugin.js',
         'gashaponplugin': './plugins/gashapon-plugin.js'
     },
     output: {

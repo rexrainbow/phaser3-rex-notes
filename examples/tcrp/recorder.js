@@ -1,7 +1,6 @@
 'use strict'
 
 import TCRPPlugin from './../../plugins/tcrp-plugin.js';
-const RecorderPlugin = TCRPPlugin.Recorder;
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -13,7 +12,7 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        var recorder = new RecorderPlugin(this).start();
+        var recorder = this.plugins.get('rexTCRP').addRecorder(this).start();
         recorder
             .addCommand(['print', 'hello'])
             .addCommand(['print', 'world']);
@@ -28,7 +27,14 @@ var config = {
     parent: 'phaser-example',
     width: 800,
     height: 600,
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexTCRP',
+            plugin: TCRPPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

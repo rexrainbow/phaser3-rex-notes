@@ -1,6 +1,6 @@
 'use strict'
 
-import ArrCopy from './../utils/array/Copy.js';
+import ArrayCopy from './../utils/array/Copy.js';
 import TypeConvert from './../utils/string/TypeConvert.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -32,7 +32,7 @@ var runCommand = function (cmd, scope, config) {
 
     var fnName = cmd[0];
 
-    ARGS = ArrCopy(ARGS, cmd, 1);
+    ARGS = ArrayCopy(ARGS, cmd, 1);
     if (argsConvertCallback !== undefined) {
         // convert string to floating number, boolean, null, or string        
         if (argsConvertCallback === true) {

@@ -1,14 +1,14 @@
 'use strict'
 
 import EE from 'eventemitter3';
-import Clcok from './../clock.js';
-import GetSceneObject from './../utils/system/GetSceneObject.js';
-import ArrCopy from './../utils/array/Copy.js';
-import runCommands from './../../plugins/runcommands.js';
+import Clcok from './../../clock.js';
+import GetSceneObject from './../../utils/system/GetSceneObject.js';
+import ArrayCopy from './../../utils/array/Copy.js';
+import RunCommands from './../../runcommands.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 
-class PlayerPlugin extends EE {
+class Player extends EE {
     constructor(parent, config) {
         super();
         this.clock = new Clcok(parent);
@@ -173,9 +173,9 @@ class PlayerPlugin extends EE {
             var item = this.commands[this.index];
             var command = item[1];
             if (typeof (command) === 'string') { // [dt, fnName, param0, param1, ...]
-                command = ArrCopy(CMD, item, 1);
+                command = ArrayCopy(CMD, item, 1);
             }
-            runCommands(command, this.scope);
+            RunCommands(command, this.scope);
             this.emit('runcommand', command, this.scope);
             // run a row
 
@@ -230,4 +230,4 @@ const DTMODE = {
     increment: 1
 };
 
-export default PlayerPlugin;
+export default Player;
