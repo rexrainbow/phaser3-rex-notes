@@ -98,7 +98,7 @@ var parser = {
             rawText = "";
         } else if (RE_STROKE_OPEN.test(text)) {
             updateProp(prevProp, PROP_ADD, "stroke", true);
-            rawText = "";            
+            rawText = "";
         } else if (RE_STROKE_OPENC.test(text)) {
             innerMatch = text.match(RE_STROKE_OPENC);
             updateProp(prevProp, PROP_ADD, "stroke", innerMatch[1]);
@@ -169,14 +169,14 @@ var parser = {
 
         if (prop.hasOwnProperty('shadow')) {
             if (prop.shadow === true) {
-                result.shadowColor = defaultStyle.shadowColor;                
+                result.shadowColor = defaultStyle.shadowColor;
                 result.shadowOffsetX = defaultStyle.shadowOffsetX;
                 result.shadowOffsetY = defaultStyle.shadowOffsetY;
                 result.shadowBlur = defaultStyle.shadowBlur;
                 result.shadowStroke = true;
                 result.shadowFill = true;
             } else {
-                result.shadowColor = prop.shadow;                
+                result.shadowColor = prop.shadow;
                 result.shadowOffsetX = defaultStyle.shadowOffsetX;
                 result.shadowOffsetY = defaultStyle.shadowOffsetY;
                 result.shadowBlur = defaultStyle.shadowBlur;
@@ -184,7 +184,7 @@ var parser = {
                 result.shadowFill = true;
             }
         } else {
-            result.shadowColor = '#000';            
+            result.shadowColor = '#000';
             result.shadowOffsetX = 0;
             result.shadowOffsetY = 0;
             result.shadowBlur = 0;
@@ -200,7 +200,7 @@ var parser = {
             } else {
                 result.underlineColor = prop.u;
                 result.underlineThickness = defaultStyle.underlineThickness;
-                result.underlineOffset = defaultStyle.underlineOffset;              
+                result.underlineOffset = defaultStyle.underlineOffset;
             }
         } else {
             result.underlineColor = '#000';

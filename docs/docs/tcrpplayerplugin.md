@@ -11,10 +11,41 @@ Player of **T** ime-**C** ommand-**R** ecorder-**P** layer, to run commands on t
 
 ## Usage
 
+User could import class directly, or install it by global plugin.
+
+### Import class
+
+```javascript
+import rexTCRP from './plugins/tcrp.js';
+```
+
+### Install global plugin
+
+Install plugin in [configuration of game](game.md#configuration)
+
+```javascript
+import TCRPPlugin from './plugins/tcrp-plugin.js';
+
+var config = {
+    // ...
+    plugins: {
+        global: [{
+            key: 'rexTCRP',
+            plugin: TCRPPlugin,
+            start: true
+        },
+        // ...
+        ]
+    }
+    // ...
+};
+var game = new Phaser.Game(config);
+```
+
 ### Create instance
 
 ```javascript
-var player = new PlayerPlugin(scene, {
+var player = scene.plugins.get('rexTextTyping').addPlayer(scene, {
     // timeUnit: 0,        // 'ms'|0|'s'|'sec'|1
     // dtMode: 0,          // 'abs'|'absolute'|0|'inc'|'increment'|1
     // commands: [],       // [[dt, command], [dt, command], ...]

@@ -1,13 +1,13 @@
 'use strict'
 
-import SequencePlugin from './../../plugins/sequence-plugin.js';
+import Scenario from './../../plugins/runcommands/csvscenario/CSVScenario.js';
 
 class ActionKlass extends Phaser.Events.EventEmitter {
     constructor(scene) {
         super();
 
         this.scene = scene;
-        this.myConsole = scene.add.text(100, 100, '');
+        //this.myConsole = scene.add.text(100, 100, '');
 
         this['wait-click'] = this.waitClick;
         this['wait-time'] = this.waitTime;
@@ -15,7 +15,8 @@ class ActionKlass extends Phaser.Events.EventEmitter {
 
     // callbacks
     print(msg) {
-        this.myConsole.setText(msg);
+        //this.myConsole.setText(msg);
+        console.log(msg);
     }
 
     waitClick() {
@@ -32,6 +33,7 @@ class ActionKlass extends Phaser.Events.EventEmitter {
         this.emit('complete');
     }
 }
+
 class Demo extends Phaser.Scene {
 
     constructor() {
@@ -41,23 +43,24 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('arrow', 'assets/images/arrow.png');
+
     }
 
     create() {
+        var csvString = `-,print,hello
+-,print,world
+-,print,scenario
+#label,AA,
+-,print,rex
+-,print,next
+#exit,,
+-,print,last`;
+        var scenario = new Scenario(this);
         var myCmds = new ActionKlass(this);
 
-        var cmds = [
-            ['print', 'hello'],
-            ['print', 'world'],
-            ['print', 'phaser3'],
-        ];
-
-        var seq = this.plugins.get('rexSequence').add();
-        seq
-            .load(cmds, myCmds)
-            .once('complete', myCmds.print.bind(myCmds, 'completed...'))
-            .start();
+        debugger        
+        scenario.load(csvString, myCmds);
+        scenario.start();
     }
 
     update() {}
@@ -68,14 +71,7 @@ var config = {
     parent: 'phaser-example',
     width: 800,
     height: 600,
-    scene: Demo,
-    plugins: {
-        global: [{
-            key: 'rexSequence',
-            plugin: SequencePlugin,
-            start: true
-        }]
-    }
+    scene: Demo
 };
 
 var game = new Phaser.Game(config);

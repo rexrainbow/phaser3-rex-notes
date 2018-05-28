@@ -11,10 +11,41 @@ Recorder of **T** ime-**C** ommand-**R** ecorder-**P** layer, to store commands 
 
 ## Usage
 
+User could import class directly, or install it by global plugin.
+
+### Import class
+
+```javascript
+import rexTCRP from './plugins/tcrp.js';
+```
+
+### Install global plugin
+
+Install plugin in [configuration of game](game.md#configuration)
+
+```javascript
+import TCRPPlugin from './plugins/tcrp-plugin.js';
+
+var config = {
+    // ...
+    plugins: {
+        global: [{
+            key: 'rexTCRP',
+            plugin: TCRPPlugin,
+            start: true
+        },
+        // ...
+        ]
+    }
+    // ...
+};
+var game = new Phaser.Game(config);
+```
+
 ### Create instance
 
 ```javascript
-var recorder = new RecorderPlugin(scene);
+var recorder = scene.plugins.get('rexTextTyping').addRecorder(scene);
 ```
 
 ### Start recording
