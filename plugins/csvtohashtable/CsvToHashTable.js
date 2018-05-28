@@ -44,13 +44,12 @@ class CsvToHashTable {
 
     loadCSV(csvString, config) {
         var delimiter = GetValue(config, 'delimiter', ',');
-        var convert = GetValue(config, 'convert', true);
-        var convertCallback = GetValue(config, 'convertCallback', undefined);
+        var convertCallback = GetValue(config, 'convertCallback', true);
         var convertCallbackScope = GetValue(config, 'convertCallbackScope', undefined);
-        if (!convert) {
+        if (!convertCallback) {
             convertCallback = undefined;
             convertCallbackScope = undefined;
-        } else if (!convertCallback) { // convert === true
+        } else if (convertCallback === true) {
             convertCallback = defaultTypeConvert;
             convertCallbackScope = undefined;
         }

@@ -23,7 +23,7 @@ class CommandsManager {
         return this;
     }
 
-    getHandler(cmdPack) {
+    get(cmdPack) {
         if (typeof (cmdPack) === 'string') {
             return this[CMDMAP[cmdPack]];
         }

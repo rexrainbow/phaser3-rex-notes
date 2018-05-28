@@ -163,8 +163,9 @@ class Player extends EE {
     }
 
     runNextCommands() {
+        var clockNowTime = this.clock.now;
         if (!this.clock.isRunning ||
-            (this.nextDt > this.clock.now)) {
+            (this.nextDt > clockNowTime)) {
             return;
         }
 
@@ -186,7 +187,7 @@ class Player extends EE {
                 // next dt
                 this.index++; // point to next item
                 this.nextDt = this.getNextDt(this.nextDt);
-                if (this.nextDt > this.clock.now) {
+                if (this.nextDt > clockNowTime) {
                     return;
                 }
                 // next dt

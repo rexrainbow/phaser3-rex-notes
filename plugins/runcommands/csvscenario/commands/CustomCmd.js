@@ -23,16 +23,25 @@ class CustomCmd extends BaseCmd {
     }
 
     run(cmdPack) {
-        var task = RunCommands(cmdPack[1], this.scenario.scope);
+        var scenario = this.scenario;
+        var task = RunCommands(cmdPack[1], scenario.scope);
         if (task && (typeof (task.once) === 'function')) {
-            // task.once('complete', this.runNextCommands, this);
+            task.once('complete', this.resume, this);
+            this.pause();
             this.task = task;
         } else {
             this.task = undefined;
         }
-        if (this.task) {
-            this.scenario.pause();
-        }
+    }
+
+    pause() {
+        this.scenario.pause();
+    }
+
+    resume() {
+        var scenario = this.scenario
+        scenario.resume();
+        scenario.runNextCmd();
     }
 }
 

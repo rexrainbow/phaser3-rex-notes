@@ -19,7 +19,7 @@ class WaitTimeCmd extends BaseCmd {
         var delayTime = this.getDelayTime(cmdPack);
         if (delayTime > 0) {
             this.scenario.log("#WAIT TIME:" + delayTime);
-            this.scenario.pause();
+            this.scenario.wait(delayTime);
         }
     }
 

@@ -9,10 +9,11 @@ import CommandsManager from './commands/CommandsManager.js';
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 
 class CSVScenario extends EE {
-    constructor(parent, config) {
+    constructor(scene, config) {
         super();
 
-        this.parent = parent;
+        this.scene = scene;
+        this.timer = undefined;
         this.cmdQueue = new CmdQueue(this);
         this.cmdHandlers = new CommandsManager(this);
         this.resetFromJSON(config);
@@ -22,9 +23,11 @@ class CSVScenario extends EE {
     resetFromJSON(o) {
         this.isRunning = false;
         this.isPaused = false;
+        this.waitEvent = undefined;
         this.cmdHandlers.resetFromJSON(o);
         this.cmdQueue.resetFromJSON(o);
         this.scope = undefined;
+        this.timeUnit = GetFastValue(o, 'timeUnit', 1);
         this.isDebugMode = GetFastValue(o, 'debug', false);
         return this;
     }
@@ -45,9 +48,13 @@ class CSVScenario extends EE {
 
     load(strCmd, scope, config) {
         this.stop();
+
+        this.timeUnit = GetFastValue(config, 'timeUnit', this.timeUnit);
+        if (typeof (this.timeUnit) === 'string') {
+            this.timeUnit = TIMEUNITMODE[this.timeUnit];
+        }
         this.scope = scope;
-        var arr = this.convert(strCmd, config);
-        this.parse(arr, config);
+        this.parse(CSVToArray(strCmd), config);
         return this;
     }
 
@@ -56,7 +63,7 @@ class CSVScenario extends EE {
         var label = GetFastValue(config, 'label', '');
         this.isRunning = true;
         this.isPaused = false;
-        var index = this.cmdHandlers.getHandler('label').getIndex(label);
+        var index = this.cmdHandlers.get('label').getIndex(label);
         if (index == null) {
             this.log('Label: ' + label + ' is not found');
             return;
@@ -66,8 +73,29 @@ class CSVScenario extends EE {
         this.runNextCmd(index);
     }
 
+    wait(eventName) {
+        this.waitEvent = eventName;
+        if (typeof (eventName) === 'number') {
+            var delay = eventName;
+            if (this.timeUnit === 1) {
+                delay *= 1000;
+            }
+            this.timer = this.scene.time.delayedCall(delay, this.resume, [eventName], this);
+        }
+
+    }
+
     stop() {
+        if (this.timer) {
+            this.timer.remove();
+            this.timer = undefined;
+        }
         this.isRunning = false;
+    }
+
+    complete() {
+        this.emit('complete');
+        this.stop();
     }
 
     append(commands) {
@@ -80,10 +108,36 @@ class CSVScenario extends EE {
 
     pause() {
         this.isPaused = true;
+        if (this.timer) {
+            this.timer.paused = true;
+        }
     }
 
-    resume() {
-        this.isPaused = false;
+    resume(eventName) {
+        if (!this.isRunning) {
+            return;
+        }
+
+        if (eventName === undefined) {
+            this.isPaused = false;
+            if (this.timer) {
+                this.timer.paused = false;
+            }
+        } else {
+            this.resumeFromEvent(eventName);
+        }
+    }
+
+    resumeFromEvent(eventName) {
+        if (this.isPaused) {
+            return;
+        }
+
+        if (eventName === this.waitEvent) {
+            this.timer = undefined;
+            this.waitEvent = undefined;
+            this.runNextCmd();
+        }
     }
 
     get lastLabel() {
@@ -94,45 +148,8 @@ class CSVScenario extends EE {
         return this.cmdHandlers.labelCmd.preLabel;
     }
 
-    runNextCmd(index) {
-        var cmdHandlers = this.cmdHandlers,
-            cmdQueue = this.cmdQueue;
-        var cmdPack, cmdHandler;
-        while (this.isRunning && !this.isPaused) {
-            if (cmdQueue.length === 0) {
-                this.stop();
-                return;
-            }
-            cmdPack = cmdQueue.get(index);
-            if (cmdPack == null) {
-                this.stop();
-                return;
-            }
-            cmdHandlers.getHandler(cmdPack).run(cmdPack);
-
-            index = undefined;
-        }
-    }
-
     getCmdHandler(name) {
-        return this.cmdHandlers.getHandler(name);
-    }
-
-    convert(strCmd, config) {
-        var format = GetFastValue(config, 'format', 0);
-        var arr;
-        if (typeof (format) === 'string') {
-            format = FORMATMODE[format.toLowerCase()];
-        }
-        if (format === 0) {
-            arr = CSVToArray(strCmd);
-        } else {
-            arr = JSON.parse(strCmd);
-            if (!IsArray(arr[0])) {
-                arr = [arr[0]];
-            }
-        }
-        return arr;
+        return this.cmdHandlers.get(name);
     }
 
     parse(arr, config) {
@@ -178,13 +195,33 @@ class CSVScenario extends EE {
     }
 
     appendCommand(cmdPack) {
-        var handler = this.cmdHandlers.getHandler(cmdPack);
+        var handler = this.cmdHandlers.get(cmdPack);
         if (!handler) {
             return false;
         }
         cmdPack = handler.parse(cmdPack, this.cmdQueue.length + 1);
         this.cmdQueue.append(cmdPack);
         return true;
+    }
+
+    runNextCmd(index) {
+        var cmdHandlers = this.cmdHandlers,
+            cmdQueue = this.cmdQueue;
+        var cmdPack, cmdHandler;
+        while (this.isRunning && (!this.isPaused) && (this.waitEvent === undefined)) {
+            if (cmdQueue.length === 0) {
+                this.complete();
+                return;
+            }
+            cmdPack = cmdQueue.get(index);
+            if (cmdPack == null) {
+                this.complete();
+                return;
+            }
+            cmdHandlers.get(cmdPack).run(cmdPack);
+
+            index = undefined;
+        }
     }
 
     log(msg) {
@@ -194,11 +231,11 @@ class CSVScenario extends EE {
     }
 }
 
-const FORMATMODE = {
-    'csv': 0,
-    'json': 1
-}
-
+const TIMEUNITMODE = {
+    ms: 0,
+    s: 1,
+    sec: 1
+};
 const DEFAULT_PREFIX = /^#([a-zA-Z]+)/;
 
 export default CSVScenario;
