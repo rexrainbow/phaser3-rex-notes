@@ -22,8 +22,7 @@ var table = new HashTable(this);
 ```javascript
 table.loadCSV(csvString, {
     // delimiter: ',',
-    // convert: true,
-    // convertCallback: undefined
+    // convertCallback: true
     // convertCallbackScope: undefined
 });
 ```
@@ -61,7 +60,7 @@ var value = table.get('Rex', 'hp');
 
 ### Convert value type
 
-Values will be converted to *number*, *boolean*, *null*, or *string*, if `convert` is `true`, or assign your convert function by `convertCallback` and `convertCallbackScope` when loading table (`table.loadCSV(...)`).
+Values will be converted to *number*, *boolean*, *null*, or *string*, if `convertCallback` is `true`, or assign your convert function by `convertCallback` and `convertCallbackScope` when loading table (`table.loadCSV(...)`).
 
 ```javascript
 var convertCallback = function(table, rowKey, colKey, value) {

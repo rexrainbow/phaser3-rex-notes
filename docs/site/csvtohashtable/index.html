@@ -1679,8 +1679,7 @@
 <h3 id="load-table-from-csv-string">Load table from csv string<a class="headerlink" href="#load-table-from-csv-string" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">loadCSV</span><span class="p">(</span><span class="nx">csvString</span><span class="p">,</span> <span class="p">{</span>
     <span class="c1">// delimiter: &#39;,&#39;,</span>
-    <span class="c1">// convert: true,</span>
-    <span class="c1">// convertCallback: undefined</span>
+    <span class="c1">// convertCallback: true</span>
     <span class="c1">// convertCallbackScope: undefined</span>
 <span class="p">});</span>
 </pre></div>
@@ -1711,7 +1710,7 @@
 </pre></div>
 
 <h3 id="convert-value-type">Convert value type<a class="headerlink" href="#convert-value-type" title="Permanent link">&para;</a></h3>
-<p>Values will be converted to <em>number</em>, <em>boolean</em>, <em>null</em>, or <em>string</em>, if <code>convert</code> is <code>true</code>, or assign your convert function by <code>convertCallback</code> and <code>convertCallbackScope</code> when loading table (<code>table.loadCSV(...)</code>).</p>
+<p>Values will be converted to <em>number</em>, <em>boolean</em>, <em>null</em>, or <em>string</em>, if <code>convertCallback</code> is <code>true</code>, or assign your convert function by <code>convertCallback</code> and <code>convertCallbackScope</code> when loading table (<code>table.loadCSV(...)</code>).</p>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">convertCallback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">table</span><span class="p">,</span> <span class="nx">rowKey</span><span class="p">,</span> <span class="nx">colKey</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// value = ...</span>
     <span class="k">return</span> <span class="nx">value</span><span class="p">;</span>
