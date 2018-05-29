@@ -6,7 +6,7 @@ import IsArray from './../../utils/array/IsArray.js';
 import CmdQueue from './CmdQueue.js';
 import CmdHandlers from './commands/CmdHandlers.js';
 
-const GetFastValue = Phaser.Utils.Objects.GetFastValue;
+const GetValue = Phaser.Utils.Objects.GetValue;
 
 class CSVScenario extends EE {
     constructor(scene, config) {
@@ -27,8 +27,10 @@ class CSVScenario extends EE {
         this.cmdHandlers.resetFromJSON(o);
         this.cmdQueue.resetFromJSON(o);
         this.scope = undefined;
-        this.timeUnit = GetFastValue(o, 'timeUnit', 0);
-        this.isDebugMode = GetFastValue(o, 'debug', false);
+        this.timeUnit = GetValue(o, 'timeUnit', 0);
+        this.argsConvert = GetValue(o, 'argsConvert', true);
+        this.argsConvertScope = GetValue(o, 'argsConvertScope', undefined);        
+        this.isDebugMode = GetValue(o, 'debug', false);
         return this;
     }
 
@@ -49,18 +51,20 @@ class CSVScenario extends EE {
     load(strCmd, scope, config) {
         this.stop();
 
-        this.timeUnit = GetFastValue(config, 'timeUnit', this.timeUnit);
+        this.timeUnit = GetValue(config, 'timeUnit', this.timeUnit);
         if (typeof (this.timeUnit) === 'string') {
             this.timeUnit = TIMEUNITMODE[this.timeUnit];
         }
+        this.argsConvert = GetValue(config, 'argsConvert', this.argsConvert);
+        this.argsConvertScope = GetValue(config, 'argsConvertScope', this.argsConvertScope);   
         this.scope = scope;
         this.parse(CSVToArray(strCmd), config);
         return this;
     }
 
     start(config) {
-        var label = GetFastValue(config, 'label', '');
-        // var offset = GetFastValue(config, 'offset', 0);        
+        var label = GetValue(config, 'label', '');
+        // var offset = GetValue(config, 'offset', 0);        
         this.isRunning = true;
         this.isPaused = false;
         var index = this.getCmdHandler('label').getIndex(label);
@@ -156,7 +160,7 @@ class CSVScenario extends EE {
     }
 
     parse(arr, config) {
-        var prefix = GetFastValue(config, 'prefix', DEFAULT_PREFIX);
+        var prefix = GetValue(config, 'prefix', DEFAULT_PREFIX);
         if (typeof (prefix) === 'string') {
             prefix = new RegExp(prefix);
         }

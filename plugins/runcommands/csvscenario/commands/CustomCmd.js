@@ -3,6 +3,7 @@
 import BaseCmd from './BaseCmd.js';
 import ArrayCopy from './../../../utils/array/Copy.js';
 import RunCommands from './../../../runcommands.js';
+import TypeConvert from './../../../utils/string/TypeConvert.js';
 
 const SpliceOne = Phaser.Utils.Array.SpliceOne;
 
@@ -21,6 +22,24 @@ class CustomCmd extends BaseCmd {
 
     parse(cmdPack, index) {
         var cmd = SpliceOne(cmdPack, 0);
+
+        var scenario = this.scenario;
+        var argsConvert = scenario.argsConvert;
+        var argsConvertScope = scenario.argsConvertScope;
+        if (argsConvert) {            
+            if (argsConvert === true) {
+                argsConvert = TypeConvert;
+                argsConvertScope = undefined;
+            }
+            for (var i = 1, len = cmdPack.length; i < len; i++) {
+                if (argsConvertScope) {
+                    cmdPack[i] = argsConvert.call(argsConvertScope, cmdPack[i], cmdPack);
+                } else {
+                    cmdPack[i] = argsConvert(cmdPack[i], cmdPack);
+                }
+            }
+        }
+
         cmdPack = [cmd, cmdPack];
         return cmdPack;
     }

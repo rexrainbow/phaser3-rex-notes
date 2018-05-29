@@ -5,7 +5,7 @@
 // This will parse a delimited string into an array of
 // arrays. The default delimiter is the comma, but this
 // can be overriden in the second argument.
-function CSVToArray(strData, strDelimiter, convertCallback, convertCallbackScope) {
+function CSVToArray(strData, strDelimiter, convert, convertScope) {
     // Check to see if the delimiter is defined. If not,
     // then default to comma.
     strDelimiter = (strDelimiter || ",");
@@ -66,11 +66,11 @@ function CSVToArray(strData, strDelimiter, convertCallback, convertCallbackScope
         // it to the data array.
 
         // rex: convert value
-        if (convertCallback) {
-            if (convertCallbackScope) {
-                strMatchedValue = convertCallback.call(convertCallbackScope, strMatchedValue);
+        if (convert) {
+            if (convertScope) {
+                strMatchedValue = convert.call(convertScope, strMatchedValue);
             } else {
-                strMatchedValue = convertCallback(strMatchedValue);
+                strMatchedValue = convert(strMatchedValue);
             }
         }
         arrLastRow.push(strMatchedValue);

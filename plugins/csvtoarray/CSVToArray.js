@@ -8,18 +8,17 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 
 var CSVToArray = function(csvString, config) {
     var delimiter = GetValue(config, 'delimiter', ',');
-    var convert = GetValue(config, 'convertCallback', true);
-    var convertCallback = GetValue(config, 'convertCallback', undefined);
-    var convertCallbackScope = GetValue(config, 'convertCallbackScope', undefined);
+    var convert = GetValue(config, 'convert', true);
+    var convertScope = GetValue(config, 'convertScope', undefined);
     if (!convert) {
-        convertCallback = undefined;
-        convertCallbackScope = undefined;
-    } else if (!convertCallback) { // convert === true
-        convertCallback = TypeConvert;
-        convertCallbackScope = undefined;
+        convert = undefined;
+        convertScope = undefined;
+    } else if (convert === true) {
+        convert = TypeConvert;
+        convertScope = undefined;
     }
 
-    return Converter(csvString, delimiter, convertCallback, convertCallbackScope);
+    return Converter(csvString, delimiter, convert, convertScope);
 };
 
 export default CSVToArray;

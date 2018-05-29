@@ -44,14 +44,14 @@ class CsvToHashTable {
 
     loadCSV(csvString, config) {
         var delimiter = GetValue(config, 'delimiter', ',');
-        var convertCallback = GetValue(config, 'convertCallback', true);
-        var convertCallbackScope = GetValue(config, 'convertCallbackScope', undefined);
-        if (!convertCallback) {
-            convertCallback = undefined;
-            convertCallbackScope = undefined;
-        } else if (convertCallback === true) {
-            convertCallback = defaultTypeConvert;
-            convertCallbackScope = undefined;
+        var convert = GetValue(config, 'convert', true);
+        var convertScope = GetValue(config, 'convertScope', undefined);
+        if (!convert) {
+            convert = undefined;
+            convertScope = undefined;
+        } else if (convert === true) {
+            convert = TypeConvert;
+            convertScope = undefined;
         }
 
         this.clean();
@@ -77,11 +77,11 @@ class CsvToHashTable {
                 value = arr[r + 1][c];
                 colKey = colKeys[c];
 
-                if (convertCallback) {
-                    if (convertCallbackScope) {
-                        value = convertCallback.call(convertCallbackScope, this, rowKey, colKey, value);
+                if (convert) {
+                    if (convertScope) {
+                        value = convert.call(convertScope, value, rowKey, colKey, this);
                     } else {
-                        value = convertCallback(this, rowKey, colKey, value);
+                        value = convert(value, rowKey, colKey, this);
                     }
                 }
                 row[colKey] = value;
@@ -316,7 +316,7 @@ class CsvToHashTable {
 
     convertCol(colKey, callback, scope) {
         if (callback === undefined) {
-            callback = defaultTypeConvert;
+            callback = TypeConvert;
         }
 
         if (IsArray(colKey)) {
@@ -351,7 +351,7 @@ class CsvToHashTable {
 
     convertRow(rowKey, callback, scope) {
         if (callback === undefined) {
-            callback = defaultTypeConvert;
+            callback = TypeConvert;
         }
 
         if (IsArray(rowKey)) {
@@ -532,7 +532,7 @@ class CsvToHashTable {
 
 }
 
-const defaultTypeConvert = function (table, colKey, rowKey, value) {
+const defaultTypeConvert = function (value, rowKey, colKey, table) {
     return TypeConvert(value);
 }
 

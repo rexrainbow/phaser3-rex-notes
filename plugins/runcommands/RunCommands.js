@@ -27,23 +27,23 @@ var runCommands = function (queue, scope, config) {
 }
 
 var runCommand = function (cmd, scope, config) {
-    var argsConvertCallback = GetValue(config, 'argsConvert', undefined);
-    var argsConvertCallbackScope = GetValue(config, 'argsConvertScope', undefined);
+    var argsConvert = GetValue(config, 'argsConvert', undefined);
+    var argsConvertScope = GetValue(config, 'argsConvertScope', undefined);
 
     var fnName = cmd[0];
 
     ARGS = ArrayCopy(ARGS, cmd, 1);
-    if (argsConvertCallback !== undefined) {
+    if (argsConvert) {
         // convert string to floating number, boolean, null, or string        
-        if (argsConvertCallback === true) {
-            argsConvertCallback = defaultTypeConvert;
-            argsConvertCallbackScope = undefined;
+        if (argsConvert === true) {
+            argsConvert = TypeConvert;
+            argsConvertScope = undefined;
         }
         for (var i = 0, len = ARGS.length; i < len; i++) {
-            if (argsConvertCallbackScope) {
-                ARGS[i] = argsConvertCallback.call(argsConvertCallbackScope, cmd, ARGS[i]);
+            if (argsConvertScope) {
+                ARGS[i] = argsConvert.call(argsConvertScope, ARGS[i], cmd);
             } else {
-                ARGS[i] = argsConvertCallback(cmd, ARGS[i]);
+                ARGS[i] = argsConvert(ARGS[i], cmd);
             }
         }
     }
@@ -62,9 +62,5 @@ var runCommand = function (cmd, scope, config) {
     return retValue;
 }
 var ARGS = []; // reuse this array
-
-const defaultTypeConvert = function (command, value) {
-    return TypeConvert(value);
-}
 
 export default runCommands;

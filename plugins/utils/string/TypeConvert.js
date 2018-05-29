@@ -10,8 +10,7 @@ var convert = function (s) {
         s = null;
     } else if (FLOAT.test(s)) {
         s = parseFloat(s);
-    } else {
-        var val = s.toLowerCase();
+    } else {        
         if (val === 'false') {
             s = false;
         } else if (val === 'true') {
