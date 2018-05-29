@@ -19,10 +19,14 @@ class WaitTimeCmd extends BaseCmd {
 
     run(cmdPack) {
         var delayTime = this.getDelayTime(cmdPack);
-        if (delayTime > 0) {
-            this.scenario.log("#WAIT TIME:" + delayTime);
+        if (delayTime > this.scenario.offset) {
+            delayTime -= this.scenario.offset;
+            this.scenario.offset = 0;
+            this.scenario.log("#WAIT TIME: " + delayTime);
             this.scenario.wait(delayTime);
-        }
+        } else {
+            this.scenario.offset -= delayTime;
+        } 
     }
 
     getDelayTime(cmdPack) {

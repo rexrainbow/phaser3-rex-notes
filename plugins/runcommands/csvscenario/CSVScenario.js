@@ -29,7 +29,7 @@ class CSVScenario extends EE {
         this.scope = undefined;
         this.timeUnit = GetValue(o, 'timeUnit', 0);
         this.argsConvert = GetValue(o, 'argsConvert', true);
-        this.argsConvertScope = GetValue(o, 'argsConvertScope', undefined);        
+        this.argsConvertScope = GetValue(o, 'argsConvertScope', undefined);
         this.isDebugMode = GetValue(o, 'debug', false);
         return this;
     }
@@ -56,7 +56,7 @@ class CSVScenario extends EE {
             this.timeUnit = TIMEUNITMODE[this.timeUnit];
         }
         this.argsConvert = GetValue(config, 'argsConvert', this.argsConvert);
-        this.argsConvertScope = GetValue(config, 'argsConvertScope', this.argsConvertScope);   
+        this.argsConvertScope = GetValue(config, 'argsConvertScope', this.argsConvertScope);
         this.scope = scope;
         this.parse(CSVToArray(strCmd), config);
         return this;
@@ -64,7 +64,7 @@ class CSVScenario extends EE {
 
     start(config) {
         var label = GetValue(config, 'label', '');
-        // var offset = GetValue(config, 'offset', 0);        
+        this.offset = GetValue(config, 'offset', 0);
         this.isRunning = true;
         this.isPaused = false;
         var index = this.getCmdHandler('label').getIndex(label);

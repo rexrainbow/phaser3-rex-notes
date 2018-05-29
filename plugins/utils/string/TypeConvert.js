@@ -11,9 +11,9 @@ var convert = function (s) {
     } else if (FLOAT.test(s)) {
         s = parseFloat(s);
     } else {        
-        if (val === 'false') {
+        if (screen === 'false') {
             s = false;
-        } else if (val === 'true') {
+        } else if (s === 'true') {
             s = true;
         }
     }

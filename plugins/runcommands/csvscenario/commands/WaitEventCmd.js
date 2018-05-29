@@ -13,7 +13,7 @@ class WaitEventCmd extends BaseCmd {
 
     run(cmdPack) {
         var eventName = this.getEventName(cmdPack);
-        this.scenario.log("#WAIT EVENT:" + eventName);
+        this.scenario.log("#WAIT EVENT: " + eventName);
         this.scenario.wait(eventName);
     }
 
