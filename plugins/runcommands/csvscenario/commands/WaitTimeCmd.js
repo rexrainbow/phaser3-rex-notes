@@ -11,6 +11,7 @@ class WaitTimeCmd extends BaseCmd {
     }
 
     parse(cmdPack, index) {
+        cmdPack[1] = parseFloat(cmdPack[1]);
         cmdPack.length = 2;
         return cmdPack;
     }    

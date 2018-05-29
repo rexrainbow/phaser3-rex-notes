@@ -4,7 +4,7 @@ import EE from 'eventemitter3';
 import CSVToArray from './../../utils/array/CSVToArray.js';
 import IsArray from './../../utils/array/IsArray.js';
 import CmdQueue from './CmdQueue.js';
-import CommandsManager from './commands/CommandsManager.js';
+import CmdHandlers from './commands/CmdHandlers.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 
@@ -15,7 +15,7 @@ class CSVScenario extends EE {
         this.scene = scene;
         this.timer = undefined;
         this.cmdQueue = new CmdQueue(this);
-        this.cmdHandlers = new CommandsManager(this);
+        this.cmdHandlers = new CmdHandlers(this);
         this.resetFromJSON(config);
         this.boot();
     }
@@ -63,7 +63,7 @@ class CSVScenario extends EE {
         var label = GetFastValue(config, 'label', '');
         this.isRunning = true;
         this.isPaused = false;
-        var index = this.cmdHandlers.get('label').getIndex(label);
+        var index = this.getCmdHandler('label').getIndex(label);
         if (index == null) {
             this.log('Label: ' + label + ' is not found');
             return;
@@ -149,6 +149,9 @@ class CSVScenario extends EE {
     }
 
     getCmdHandler(name) {
+        if (typeof (name) !== 'string') {
+            name = name[0];
+        }
         return this.cmdHandlers.get(name);
     }
 
@@ -195,8 +198,8 @@ class CSVScenario extends EE {
     }
 
     appendCommand(cmdPack) {
-        var handler = this.cmdHandlers.get(cmdPack);
-        if (!handler) {
+        var handler = this.getCmdHandler(cmdPack);
+        if (handler === null) {
             return false;
         }
         cmdPack = handler.parse(cmdPack, this.cmdQueue.length + 1);
@@ -205,8 +208,7 @@ class CSVScenario extends EE {
     }
 
     runNextCmd(index) {
-        var cmdHandlers = this.cmdHandlers,
-            cmdQueue = this.cmdQueue;
+        var cmdQueue = this.cmdQueue;
         var cmdPack, cmdHandler;
         while (this.isRunning && (!this.isPaused) && (this.waitEvent === undefined)) {
             if (cmdQueue.length === 0) {
@@ -218,7 +220,7 @@ class CSVScenario extends EE {
                 this.complete();
                 return;
             }
-            cmdHandlers.get(cmdPack).run(cmdPack);
+            this.getCmdHandler(cmdPack).run(cmdPack);
 
             index = undefined;
         }
