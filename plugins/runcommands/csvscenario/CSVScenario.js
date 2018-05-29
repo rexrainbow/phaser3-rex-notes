@@ -21,16 +21,16 @@ class CSVScenario extends EE {
     }
 
     resetFromJSON(o) {
-        this.isRunning = false;
-        this.isPaused = false;
-        this.waitEvent = undefined;
+        this.threadId = GetValue(o, 'threadId', 0);
+        this.isRunning = GetValue(o, 'state', false);
+        this.isPaused = GetValue(o, 'pause', false);
+        this.waitEvent = GetValue(o, 'wait', undefined);
         this.cmdHandlers.resetFromJSON(o);
         this.cmdQueue.resetFromJSON(o);
-        this.scope = undefined;
+        this.scope = GetValue(o, 'scope', undefined);
         this.timeUnit = GetValue(o, 'timeUnit', 0);
         this.argsConvert = GetValue(o, 'argsConvert', true);
         this.argsConvertScope = GetValue(o, 'argsConvertScope', undefined);
-        this.isDebugMode = GetValue(o, 'debug', false);
         return this;
     }
 
@@ -63,18 +63,30 @@ class CSVScenario extends EE {
     }
 
     start(config) {
+        this.stop();
         var label = GetValue(config, 'label', '');
         this.offset = GetValue(config, 'offset', 0);
         this.isRunning = true;
         this.isPaused = false;
+        if (this.threadId >= 99999999999) {
+            this.threadId = 0;
+        } else {
+            this.threadId++;
+        }
+        if (this.isDebugMode) {
+            this.log('Goto at Label: ' + label);
+        }
+        this.goto(label);
+    }
+
+    goto(label) {
         var index = this.getCmdHandler('label').getIndex(label);
         if (index == null) {
-            this.log('Label: ' + label + ' is not found');
-            return;
+            this.error('Label: ' + label + ' is not found');
+            this.stop();
         } else {
-            this.log('Start at Label: ' + label);
+            this.runNextCmd(index);
         }
-        this.runNextCmd(index);
     }
 
     wait(eventName) {
@@ -84,12 +96,16 @@ class CSVScenario extends EE {
             if (this.timeUnit === 1) {
                 delay *= 1000;
             }
-            this.timer = this.scene.time.delayedCall(delay, this.resume, [eventName], this);
+            this.timer = this.scene.time.delayedCall(delay, this.continue, [], this);
         }
 
     }
 
     stop() {
+        if (!this.isRunning) {
+            return;
+        }
+
         if (this.timer) {
             this.timer.remove();
             this.timer = undefined;
@@ -111,33 +127,43 @@ class CSVScenario extends EE {
     }
 
     pause() {
+        if (!this.isRunning) {
+            return;
+        }
+        if (this.isPaused) {
+            return;
+        }
+
         this.isPaused = true;
         if (this.timer) {
             this.timer.paused = true;
         }
     }
 
-    resume(eventName) {
+    resume() {
         if (!this.isRunning) {
             return;
         }
+        if (!this.isPaused) {
+            return;
+        }
 
-        if (eventName === undefined) {
-            this.isPaused = false;
-            if (this.timer) {
-                this.timer.paused = false;
-            }
-        } else {
-            this.resumeFromEvent(eventName);
+        this.isPaused = false;
+        if (this.timer) {
+            this.timer.paused = false;
         }
     }
 
-    resumeFromEvent(eventName) {
+    continue (eventName) {
+        if (!this.isRunning) {
+            return;
+        }
         if (this.isPaused) {
             return;
         }
 
-        if (eventName === this.waitEvent) {
+        if ((eventName === undefined) ||
+            (eventName === this.waitEvent)) {
             this.timer = undefined;
             this.waitEvent = undefined;
             this.runNextCmd();
@@ -187,7 +213,7 @@ class CSVScenario extends EE {
                 var isValid = this.appendCommand(item);
 
                 if (!isValid) {
-                    this.log('Line ' + i + ': ' + JSON.stringify(item) + ' is not a valid command');
+                    this.error('Line ' + i + ': ' + JSON.stringify(item) + ' is not a valid command');
                 }
 
             } else {
@@ -214,17 +240,23 @@ class CSVScenario extends EE {
     }
 
     runNextCmd(index) {
+        var threadId = this.threadId;
         var cmdQueue = this.cmdQueue;
         var cmdPack, cmdHandler;
-        while (this.isRunning && (!this.isPaused) && (this.waitEvent === undefined)) {
+        while (
+            this.isRunning &&
+            (!this.isPaused) &&
+            (this.waitEvent === undefined) &&
+            (threadId === this.threadId)
+        ) {
             if (cmdQueue.length === 0) {
                 this.complete();
-                return;
+                break;
             }
             cmdPack = cmdQueue.get(index);
             if (cmdPack == null) {
                 this.complete();
-                return;
+                break;
             }
             this.getCmdHandler(cmdPack).run(cmdPack);
 
@@ -233,9 +265,15 @@ class CSVScenario extends EE {
     }
 
     log(msg) {
-        if (this.isDebugMode) {
-            console.log(msg);
-        }
+        this.emit('log', msg, this);
+    }
+
+    get isDebugMode() {
+        return (this.listenerCount('log') > 0);
+    }
+
+    error(msg) {
+        this.emit('error', msg, this);
     }
 }
 

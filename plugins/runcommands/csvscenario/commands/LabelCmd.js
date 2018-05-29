@@ -27,7 +27,9 @@ class LabelCmd extends BaseCmd {
 
     run(cmdPack) {
         var label = this.getLabel(cmdPack);
-        this.scenario.log("#LABEL: " + label);
+        if (this.scenario.isDebugMode) {
+            this.scenario.log("#LABEL: " + label);
+        }
 
         this.prevLabel = this.lastLabel;
         this.lastLabel = label;

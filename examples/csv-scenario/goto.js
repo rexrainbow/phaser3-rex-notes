@@ -3,9 +3,11 @@
 import CSVScenarioPlugin from './../../plugins/csvscenario-plugin.js';
 
 var csvString = 
-`0,print,hello
-1.2,print,world
-click,print,scenario`;
+`-,print,start
+#LABEL,AA,
+1,print,hello
+1,print,world
+#GOTO,AA,`;
 
 class ActionKlass extends Phaser.Events.EventEmitter {
     constructor(scene) {
@@ -46,7 +48,12 @@ class Demo extends Phaser.Scene {
             .on('complete', function () {
                 console.log('scenario complete')
             })
-            .start();
+            .on('log', function(msg){
+                console.log(msg)
+            })
+            .start({
+                label: 'AA'
+            });
     }
 
     update() {}
