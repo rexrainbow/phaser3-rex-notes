@@ -3,7 +3,7 @@
 import CSVScenarioPlugin from './../../plugins/csvscenario-plugin.js';
 
 var csvString =
-    `-,print,hello
+`-,print,hello
 1,print,world
 1,print,scenario
 #label,AA,
