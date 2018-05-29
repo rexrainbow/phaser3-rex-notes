@@ -1,8 +1,9 @@
 'use strict'
 
-import Scenario from './../../plugins/runcommands/csvscenario/CSVScenario.js';
+import CSVScenarioPlugin from './../../plugins/csvscenario-plugin.js';
 
-var csvString = `-,print,hello
+var csvString = 
+`-,print,hello
 -,print,world
 -,print,scenario`;
 
@@ -42,10 +43,12 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var scenario = new Scenario(this);
+        var scenario = this.plugins.get('rexCSVScenario').add(this);
         var myCmds = new ActionKlass(this);
         scenario
-            .load(csvString, myCmds)
+            .load(csvString, myCmds, {
+                timeUnit: 'sec'
+            })
             .on('complete', function () {
                 console.log('scenario complete')
             })
@@ -60,7 +63,14 @@ var config = {
     parent: 'phaser-example',
     width: 800,
     height: 600,
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexCSVScenario',
+            plugin: CSVScenarioPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

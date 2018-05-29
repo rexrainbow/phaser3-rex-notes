@@ -3,7 +3,7 @@ import BaseCmd from './BaseCmd.js';
 
 class ExitCmd extends BaseCmd {
     constructor(scenario) {
-        super(scenario);
+        super(scenario, 'exit');
     }
 
     parse(cmdPack, index) {

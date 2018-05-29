@@ -3,7 +3,7 @@ import BaseCmd from './BaseCmd.js';
 
 class WaitCmd extends BaseCmd {
     constructor(scenario) {
-        super(scenario);
+        super(scenario, 'wait');
     }
 
     parse(cmdPack, index) {

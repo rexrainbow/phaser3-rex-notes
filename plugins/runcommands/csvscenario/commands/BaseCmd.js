@@ -1,7 +1,8 @@
 'use strict'
 class BaseCmd {
-    constructor(scenario) {
+    constructor(scenario, type) {
         this.scenario = scenario;
+        this.type = type;
     }
 
     resetFromJSON(o) {}

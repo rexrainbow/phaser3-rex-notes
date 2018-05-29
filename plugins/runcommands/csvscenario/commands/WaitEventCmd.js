@@ -3,11 +3,7 @@ import BaseCmd from './BaseCmd.js';
 
 class WaitEventCmd extends BaseCmd {
     constructor(scenario) {
-        super(scenario);
-    }
-
-    resetFromJSON(o) {
-        // TODO
+        super(scenario, 'waitevent');
     }
 
     parse(cmdPack, index) {

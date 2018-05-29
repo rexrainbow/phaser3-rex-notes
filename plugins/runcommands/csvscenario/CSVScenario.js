@@ -27,7 +27,7 @@ class CSVScenario extends EE {
         this.cmdHandlers.resetFromJSON(o);
         this.cmdQueue.resetFromJSON(o);
         this.scope = undefined;
-        this.timeUnit = GetFastValue(o, 'timeUnit', 1);
+        this.timeUnit = GetFastValue(o, 'timeUnit', 0);
         this.isDebugMode = GetFastValue(o, 'debug', false);
         return this;
     }
@@ -59,8 +59,8 @@ class CSVScenario extends EE {
     }
 
     start(config) {
-        var offset = GetFastValue(config, 'offset', 0);
         var label = GetFastValue(config, 'label', '');
+        // var offset = GetFastValue(config, 'offset', 0);        
         this.isRunning = true;
         this.isPaused = false;
         var index = this.getCmdHandler('label').getIndex(label);
@@ -199,11 +199,13 @@ class CSVScenario extends EE {
 
     appendCommand(cmdPack) {
         var handler = this.getCmdHandler(cmdPack);
-        if (handler === null) {
+        if (handler == null) {
             return false;
         }
-        cmdPack = handler.parse(cmdPack, this.cmdQueue.length + 1);
-        this.cmdQueue.append(cmdPack);
+        cmdPack = handler.parse(cmdPack, this.cmdQueue.length);
+        if (cmdPack) {
+            this.cmdQueue.append(cmdPack);
+        }
         return true;
     }
 

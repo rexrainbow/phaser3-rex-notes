@@ -8,12 +8,15 @@ const SpliceOne = Phaser.Utils.Array.SpliceOne;
 
 class CustomCmd extends BaseCmd {
     constructor(scenario) {
-        super(scenario);
+        super(scenario, '-');
         this.task = undefined;
     }
 
     resetFromJSON(o) {
-        // TODO
+        if (this.task) {
+            this.task.off('complete', this.resume, this);
+            this.task = undefined;
+        }
     }
 
     parse(cmdPack, index) {
@@ -39,6 +42,7 @@ class CustomCmd extends BaseCmd {
     }
 
     resume() {
+        this.task = undefined;
         var scenario = this.scenario
         scenario.resume();
         scenario.runNextCmd();

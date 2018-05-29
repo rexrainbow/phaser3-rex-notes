@@ -36,6 +36,7 @@ module.exports = {
         'clockplugin': './plugins/clock-plugin.js',
         'csvtohashtableplugin': './plugins/csvtohashtable-plugin.js',
         'tcrpplugin': './plugins/tcrp-plugin.js',
+        'csvscenarioplugin': './plugins/csvscenario-plugin.js',
         'gashaponplugin': './plugins/gashapon-plugin.js'
     },
     output: {

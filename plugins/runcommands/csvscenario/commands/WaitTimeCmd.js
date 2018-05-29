@@ -3,18 +3,19 @@ import BaseCmd from './BaseCmd.js';
 
 class WaitTimeCmd extends BaseCmd {
     constructor(scenario) {
-        super(scenario);
-    }
-
-    resetFromJSON(o) {
-        // TODO
+        super(scenario, 'waittime');
     }
 
     parse(cmdPack, index) {
-        cmdPack[1] = parseFloat(cmdPack[1]);
+        var delayTime = parseFloat(this.getDelayTime(cmdPack));
+        if (delayTime <= 0) {
+            return;  // ignore this command
+        }
+
+        cmdPack[1] = delayTime
         cmdPack.length = 2;
         return cmdPack;
-    }    
+    }
 
     run(cmdPack) {
         var delayTime = this.getDelayTime(cmdPack);

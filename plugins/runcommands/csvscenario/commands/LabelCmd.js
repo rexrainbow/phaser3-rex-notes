@@ -5,7 +5,7 @@ import Clean from './../../../utils/object/Clean.js';
 
 class LabelCmd extends BaseCmd {
     constructor(scenario) {
-        super(scenario);
+        super(scenario, 'label');
 
         this.labels = {};
         this.prevLabel = "";
@@ -32,7 +32,8 @@ class LabelCmd extends BaseCmd {
         this.prevLabel = this.lastLabel;
         this.lastLabel = label;
         //this.scenario.resetClock(); // TODO
-        //this.scenario.onLabelChanged(); // TODO        
+        var scenario = this.scenario;
+        scenario.emit('labelchange', scenario, this.prevLabel, this.lastLabel);
     }
 
     getLabel(cmdPack) {

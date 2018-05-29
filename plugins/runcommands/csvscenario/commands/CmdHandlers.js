@@ -8,44 +8,29 @@ import ExitCmd from './ExitCmd.js';
 
 class CmdHandlers {
     constructor(scenario) {
-        this.customCmd = new CustomCmd(scenario);
-        this.waitCmd = new WaitCmd(scenario);
-        this.waitTimeCmd = new WaitTimeCmd(scenario);
-        this.waitEventCmd = new WaitEventCmd(scenario);
-        this.labelCmd = new LabelCmd(scenario);
-        this.exitCmd = new ExitCmd(scenario);
-
+        this.cmds = {
+            '-': new CustomCmd(scenario),
+            'wait': new WaitCmd(scenario),
+            'waittime': new WaitTimeCmd(scenario),
+            'waitevent': new WaitEventCmd(scenario),
+            'label': new LabelCmd(scenario),
+            'exit': new ExitCmd(scenario)
+        };
     }
 
     resetFromJSON(o) {
-        this.customCmd.resetFromJSON(o);
-        this.waitCmd.resetFromJSON(o);
-        this.waitTimeCmd.resetFromJSON(o);
-        this.waitEventCmd.resetFromJSON(o);
-        this.labelCmd.resetFromJSON(o);
-        this.exitCmd.resetFromJSON(o);
+        for (var name in this.cmds) {
+            this.cmds[name].resetFromJSON(o);
+        }
         return this;
     }
 
     get(name) {
-        if (CMDMAP.hasOwnProperty(name)) {
-            return this[CMDMAP[name]];
-        }
-        return null;
+        return this.cmds[name];
     }
 
     isValidCmdName(name) {
-        return CMDMAP.hasOwnProperty(name);
+        return this.cmds.hasOwnProperty(name);
     }
-}
-
-const CMDMAP = {
-    '-': 'customCmd',
-    'wait': 'waitCmd',
-    'waittime': 'waitTimeCmd',
-    'waitevent': 'waitEventCmd',
-    'label': 'labelCmd',
-    'tag': 'labelCmd',
-    'exit': 'exitCmd'
 }
 export default CmdHandlers;

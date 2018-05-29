@@ -1,36 +1,30 @@
 'use strict'
 
-import Scenario from './../../plugins/runcommands/csvscenario/CSVScenario.js';
+import CSVScenarioPlugin from './../../plugins/csvscenario-plugin.js';
+
+var csvString =
+    `-,print,hello
+1,print,world
+1,print,scenario
+#label,AA,
+-,print,rex
+1,print,next
+#label,BB,
+-,print,phaser
+1,print,next
+#exit,,
+-,print,last`;
 
 class ActionKlass extends Phaser.Events.EventEmitter {
     constructor(scene) {
         super();
 
         this.scene = scene;
-        //this.myConsole = scene.add.text(100, 100, '');
-
-        this['wait-click'] = this.waitClick;
-        this['wait-time'] = this.waitTime;
     }
 
     // callbacks
     print(msg) {
-        //this.myConsole.setText(msg);
         console.log(msg);
-    }
-
-    waitClick() {
-        this.scene.input.once('pointerup', this.complete, this);
-        return this;
-    }
-
-    waitTime(delay) {
-        this.scene.time.delayedCall(delay * 1000, this.complete, [], this);
-        return this;
-    }
-
-    complete() {
-        this.emit('complete');
     }
 }
 
@@ -47,20 +41,22 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var csvString = `-,print,hello
--,print,world
--,print,scenario
-#label,AA,
--,print,rex
--,print,next
-#exit,,
--,print,last`;
-        var scenario = new Scenario(this);
+        var scenario = this.plugins.get('rexCSVScenario').add(this);
         var myCmds = new ActionKlass(this);
 
-        debugger        
-        scenario.load(csvString, myCmds);
-        scenario.start();
+        scenario
+            .load(csvString, myCmds, {
+                timeUnit: 'sec'
+            })
+            .on('complete', function () {
+                console.log('scenario complete')
+            })
+            .on('labelchange', function (scenario, prevLabel, curLabel) {
+                console.log('Label: "' + prevLabel + '"->"' + curLabel + '"')
+            })
+            .start({
+                label: 'AA'
+            });
     }
 
     update() {}
@@ -71,7 +67,14 @@ var config = {
     parent: 'phaser-example',
     width: 800,
     height: 600,
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexCSVScenario',
+            plugin: CSVScenarioPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);
