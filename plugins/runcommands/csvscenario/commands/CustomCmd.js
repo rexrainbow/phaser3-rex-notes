@@ -20,8 +20,8 @@ class CustomCmd extends BaseCmd {
         }
     }
 
-    parse(cmdPack, index) {
-        var cmd = SpliceOne(cmdPack, 0);
+    parse(inst, index) {
+        var cmd = SpliceOne(inst, 0);
 
         var scenario = this.scenario;
         var argsConvert = scenario.argsConvert;
@@ -31,22 +31,22 @@ class CustomCmd extends BaseCmd {
                 argsConvert = TypeConvert;
                 argsConvertScope = undefined;
             }
-            for (var i = 1, len = cmdPack.length; i < len; i++) {
+            for (var i = 1, len = inst.length; i < len; i++) {
                 if (argsConvertScope) {
-                    cmdPack[i] = argsConvert.call(argsConvertScope, cmdPack[i], cmdPack);
+                    inst[i] = argsConvert.call(argsConvertScope, inst[i], inst);
                 } else {
-                    cmdPack[i] = argsConvert(cmdPack[i], cmdPack);
+                    inst[i] = argsConvert(inst[i], inst);
                 }
             }
         }
 
-        cmdPack = [cmd, cmdPack];
-        return cmdPack;
+        inst = [cmd, inst];
+        return inst;
     }
 
-    run(cmdPack) {
+    run(inst) {
         var scenario = this.scenario;
-        var task = RunCommands(cmdPack[1], scenario.scope);
+        var task = RunCommands(inst[1], scenario.scope);
         if (task && (typeof (task.once) === 'function')) {
             task.once('complete', this.resume, this);
             this.pause();

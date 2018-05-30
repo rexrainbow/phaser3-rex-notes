@@ -39,7 +39,7 @@ pages:
     - Date: date.md
     - Timer: timer.md
     - Timeline: timeline.md    
-    - Clock: clockplugin.md
+    - Clock: clock.md
 - Behavior:
     - Tween: 
        - Tween: tween.md
@@ -56,9 +56,10 @@ pages:
     - CSV to hash table: csvtohashtable.md
 - Logic:
     - Event emitter: eventemitter3.md
-    - Array commands:
+    - Run commands:
       - Run commands: runcommands.md
       - Sequence: sequence.md
+      - CSV scenario: csvscenario.md
     - TCRP:
         - Recoder: tcrprecoderplugin.md
         - Player: tcrpplayerplugin.md

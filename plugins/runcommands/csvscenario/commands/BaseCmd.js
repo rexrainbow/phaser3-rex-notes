@@ -7,11 +7,11 @@ class BaseCmd {
 
     resetFromJSON(o) {}
 
-    parse(cmdPack, index) {
-        return cmdPack;
+    parse(inst, index) {
+        return inst;
     }
 
-    run(cmdPack) {}
+    run(inst) {}
 }
 
 export default BaseCmd;

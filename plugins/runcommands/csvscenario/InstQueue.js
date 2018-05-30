@@ -2,7 +2,7 @@
 
 import Clean from './../../utils/object/Clean.js';
 
-class CmdQueue {
+class InstQueue {
     constructor(scenario) {
         this.scenario = scenario;
         this.queue = [];
@@ -49,4 +49,4 @@ class CmdQueue {
     }
 }
 
-export default CmdQueue;
+export default InstQueue;

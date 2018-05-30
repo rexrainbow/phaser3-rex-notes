@@ -3,7 +3,7 @@
 import EE from 'eventemitter3';
 import CSVToArray from './../../utils/array/CSVToArray.js';
 import IsArray from './../../utils/array/IsArray.js';
-import CmdQueue from './CmdQueue.js';
+import InstQueue from './InstQueue.js';
 import CmdHandlers from './commands/CmdHandlers.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -14,7 +14,7 @@ class CSVScenario extends EE {
 
         this.scene = scene;
         this.timer = undefined;
-        this.cmdQueue = new CmdQueue(this);
+        this.instQueue = new InstQueue(this);
         this.cmdHandlers = new CmdHandlers(this);
         this.resetFromJSON(config);
         this.boot();
@@ -26,7 +26,7 @@ class CSVScenario extends EE {
         this.isPaused = GetValue(o, 'pause', false);
         this.waitEvent = GetValue(o, 'wait', undefined);
         this.cmdHandlers.resetFromJSON(o);
-        this.cmdQueue.resetFromJSON(o);
+        this.instQueue.resetFromJSON(o);
         this.scope = GetValue(o, 'scope', undefined);
         this.timeUnit = GetValue(o, 'timeUnit', 0);
         this.cmdPrefix = GetValue(o, 'prefix', DEFAULT_PREFIX);
@@ -50,7 +50,7 @@ class CSVScenario extends EE {
     }
 
     load(strCmd, scope, config) {
-        this.stop();
+        this.clean();
 
         this.timeUnit = GetValue(config, 'timeUnit', this.timeUnit);
         if (typeof (this.timeUnit) === 'string') {
@@ -64,10 +64,14 @@ class CSVScenario extends EE {
         this.argsConvertScope = GetValue(config, 'argsConvertScope', this.argsConvertScope);
         this.scope = scope;
 
-        this.cmdQueue.resetFromJSON();
-        this.cmdHandlers.resetFromJSON();
         this.append(strCmd);
         return this;
+    }
+
+    clean() {
+        this.stop();
+        this.instQueue.resetFromJSON();
+        this.cmdHandlers.resetFromJSON();
     }
 
     start(config) {
@@ -106,7 +110,7 @@ class CSVScenario extends EE {
         if (index == null) {
             return false;
         }
-        this.cmdQueue.setNextIndex(index);
+        this.instQueue.setNextIndex(index);
         return true;
     }
 
@@ -248,14 +252,14 @@ class CSVScenario extends EE {
         return this;
     }
 
-    appendCommand(cmdPack) {
-        var handler = this.getCmdHandler(cmdPack);
+    appendCommand(inst) {
+        var handler = this.getCmdHandler(inst);
         if (handler == null) {
             return false;
         }
-        cmdPack = handler.parse(cmdPack, this.cmdQueue.length);
-        if (cmdPack) {
-            this.cmdQueue.append(cmdPack);
+        inst = handler.parse(inst, this.instQueue.length);
+        if (inst) {
+            this.instQueue.append(inst);
         }
         return true;
     }
@@ -266,21 +270,21 @@ class CSVScenario extends EE {
         }
 
         var threadId = this.threadId;
-        var cmdQueue = this.cmdQueue;
-        var cmdPack, cmdHandler;
+        var instQueue = this.instQueue;
+        var inst, cmdHandler;
         this._inRunCmdLoop = true;
         while (
             this.isRunning &&
             (!this.isPaused) &&
             (this.waitEvent === undefined)
         ) {
-            cmdPack = cmdQueue.get();
-            cmdQueue.setNextIndex();
-            if (cmdPack == null) {
+            inst = instQueue.get();
+            instQueue.setNextIndex();
+            if (inst == null) {
                 this.complete();
                 break;
             }
-            this.getCmdHandler(cmdPack).run(cmdPack);
+            this.getCmdHandler(inst).run(inst);
         }
         this._inRunCmdLoop = false;
         return this;

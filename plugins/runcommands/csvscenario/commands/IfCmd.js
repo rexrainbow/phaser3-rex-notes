@@ -6,17 +6,17 @@ class IfCmd extends BaseCmd {
         super(scenario, 'if');
     }
 
-    parse(cmdPack, index) {
-        cmdPack.length = 4;
-        var cond = '(' + this.getCond(cmdPack) + ')';
-        cmdPack[1] = new Function('return ' + cond);
-        return cmdPack;
+    parse(inst, index) {
+        inst.length = 4;
+        var cond = '(' + this.getCond(inst) + ')';
+        inst[1] = new Function('return ' + cond);
+        return inst;
     }
 
-    run(cmdPack) {
-        var condFn = this.getCond(cmdPack);
+    run(inst) {
+        var condFn = this.getCond(inst);
         var result = condFn.call(this.scenario.scope);
-        var nextLabel = (result)? this.getTrueLabel(cmdPack) : this.getFalseLabel(cmdPack);
+        var nextLabel = (result)? this.getTrueLabel(inst) : this.getFalseLabel(inst);
         if (nextLabel !== '') {
             if (this.scenario.isDebugMode) {
                 this.scenario.log('#IF ' + result + '- GOTO label: ' + nextLabel);
@@ -25,29 +25,29 @@ class IfCmd extends BaseCmd {
         }
     }
 
-    getCond(cmdPack) {
-        var cond = cmdPack[1];
+    getCond(inst) {
+        var cond = inst[1];
         if ((cond == null) || (cond === '')) {
             cond = 'true';
-            cmdPack[1] = cond;
+            inst[1] = cond;
         }
         return cond;
     }
 
-    getTrueLabel(cmdPack) {
-        var label = cmdPack[2];
+    getTrueLabel(inst) {
+        var label = inst[2];
         if (label == null) {
             label = '';
-            cmdPack[2] = label;
+            inst[2] = label;
         }
         return label;
     }
 
-    getFalseLabel(cmdPack) {
-        var label = cmdPack[3];
+    getFalseLabel(inst) {
+        var label = inst[3];
         if (label == null) {
             label = '';
-            cmdPack[3] = label;
+            inst[3] = label;
         }
         return label;
     }

@@ -6,13 +6,13 @@ class WaitCmd extends BaseCmd {
         super(scenario, 'wait');
     }
 
-    parse(cmdPack, index) {
-        if (!isNaN(cmdPack[1])) {
-            cmdPack[0] = 'waittime';
+    parse(inst, index) {
+        if (!isNaN(inst[1])) {
+            inst[0] = 'waittime';
         } else {
-            cmdPack[0] = 'waitevent';
+            inst[0] = 'waitevent';
         }
-        return this.scenario.getCmdHandler(cmdPack).parse(cmdPack, index);
+        return this.scenario.getCmdHandler(inst).parse(inst, index);
     }
 }
 

@@ -17,18 +17,18 @@ class LabelCmd extends BaseCmd {
         Clean(this.labels);
         this.prevLabel = '';
         this.lastLabel = '';
-        this.scenario.cmdQueue.customData.labels = this.labels;
+        this.scenario.instQueue.customData.labels = this.labels;
     }
 
-    parse(cmdPack, index) {
-        cmdPack.length = 2;        
-        var label = this.getLabel(cmdPack);
+    parse(inst, index) {
+        inst.length = 2;        
+        var label = this.getLabel(inst);
         this.addLabel(label, index);
-        return cmdPack;
+        return inst;
     }
 
-    run(cmdPack) {
-        var label = this.getLabel(cmdPack);
+    run(inst) {
+        var label = this.getLabel(inst);
         if (this.scenario.isDebugMode) {
             this.scenario.log('#LABEL: ' + label);
         }
@@ -40,11 +40,11 @@ class LabelCmd extends BaseCmd {
         scenario.emit('labelchange', this.lastLabel, this.prevLabel, scenario);
     }
 
-    getLabel(cmdPack) {
-        var label = cmdPack[1];
+    getLabel(inst) {
+        var label = inst[1];
         if (label == null) {
             label = '';
-            cmdPack[1] = label;
+            inst[1] = label;
         }
         return label;
     }

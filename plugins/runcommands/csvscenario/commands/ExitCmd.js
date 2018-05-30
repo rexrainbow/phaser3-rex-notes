@@ -6,12 +6,12 @@ class ExitCmd extends BaseCmd {
         super(scenario, 'exit');
     }
 
-    parse(cmdPack, index) {
-        cmdPack.length = 1;
-        return cmdPack;
+    parse(inst, index) {
+        inst.length = 1;
+        return inst;
     }
 
-    run(cmdPack) {
+    run(inst) {
         this.scenario.log('#EXIT');
         this.scenario.complete();         
     }
