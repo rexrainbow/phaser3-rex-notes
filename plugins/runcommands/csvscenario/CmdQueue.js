@@ -28,13 +28,6 @@ class CmdQueue {
         return this;
     }
 
-    appendMultiple(queue) {
-        for (var i = 0, len = queue.length; i < len; i++) {
-            this.append(queue[i]);
-        }
-        return this;
-    }
-
     setNextIndex(index) {
         if (index === undefined) {
             index = this.currentIdx + 1;

@@ -7,7 +7,7 @@ var csvString =
 #IF,this.coin > 10,BB
 #IF,,CC
 #LABEL,AA,
--,print,I can eat 
+-,print,I can eat anything
 1,print,Ha
 #EXIT,,
 #LABEL,BB,
