@@ -66,6 +66,15 @@ class CSVScenario extends EE {
         this.stop();
         var label = GetValue(config, 'label', '');
         this.offset = GetValue(config, 'offset', 0);
+        if (this.isDebugMode) {
+            this.log('Start at Label: ' + label);
+        }
+
+        var result = this.goto(label);
+        if (!result) {
+            return false;
+        }
+
         this.isRunning = true;
         this.isPaused = false;
         if (this.threadId >= 99999999999) {
@@ -73,20 +82,31 @@ class CSVScenario extends EE {
         } else {
             this.threadId++;
         }
-        if (this.isDebugMode) {
-            this.log('Goto at Label: ' + label);
-        }
-        this.goto(label);
+
+        this.runNextCmd();
+        return true;
     }
 
-    goto(label) {
+    getIndex(label) {
         var index = this.getCmdHandler('label').getIndex(label);
         if (index == null) {
             this.error('Label: ' + label + ' is not found');
-            this.stop();
-        } else {
-            this.runNextCmd(index);
         }
+        return index;
+    }
+
+    goto(label) {
+        var index;
+        if (typeof (label) === 'string') {
+            index = this.getIndex(label);
+        } else {
+            index = label;
+        }
+        if (index == null) {
+            return false;
+        }
+        this.cmdQueue.setNextIndex(index);
+        return true;
     }
 
     wait(eventName) {
@@ -96,14 +116,14 @@ class CSVScenario extends EE {
             if (this.timeUnit === 1) {
                 delay *= 1000;
             }
-            this.timer = this.scene.time.delayedCall(delay, this.continue, [], this);
+            this.timer = this.scene.time.delayedCall(delay, this.continue, [eventName], this);
         }
-
+        return this;
     }
 
     stop() {
         if (!this.isRunning) {
-            return;
+            return this;
         }
 
         if (this.timer) {
@@ -111,11 +131,13 @@ class CSVScenario extends EE {
             this.timer = undefined;
         }
         this.isRunning = false;
+        return this;
     }
 
     complete() {
-        this.emit('complete');
+        this.emit('complete', this);
         this.stop();
+        return this;
     }
 
     append(commands) {
@@ -128,46 +150,48 @@ class CSVScenario extends EE {
 
     pause() {
         if (!this.isRunning) {
-            return;
+            return this;
         }
         if (this.isPaused) {
-            return;
+            return this;
         }
 
         this.isPaused = true;
         if (this.timer) {
             this.timer.paused = true;
         }
+        return this;
     }
 
     resume() {
         if (!this.isRunning) {
-            return;
+            return this;
         }
         if (!this.isPaused) {
-            return;
+            return this;
         }
 
         this.isPaused = false;
         if (this.timer) {
             this.timer.paused = false;
         }
+        return this;
     }
 
     continue (eventName) {
         if (!this.isRunning) {
-            return;
+            return this;
         }
-        if (this.isPaused) {
-            return;
+        if (this.isPaused || (this.waitEvent === undefined)) {
+            return this;
         }
 
-        if ((eventName === undefined) ||
-            (eventName === this.waitEvent)) {
+        if (eventName === this.waitEvent) {
             this.timer = undefined;
             this.waitEvent = undefined;
             this.runNextCmd();
         }
+        return this;
     }
 
     get lastLabel() {
@@ -239,7 +263,7 @@ class CSVScenario extends EE {
         return true;
     }
 
-    runNextCmd(index) {
+    runNextCmd() {
         var threadId = this.threadId;
         var cmdQueue = this.cmdQueue;
         var cmdPack, cmdHandler;
@@ -249,23 +273,20 @@ class CSVScenario extends EE {
             (this.waitEvent === undefined) &&
             (threadId === this.threadId)
         ) {
-            if (cmdQueue.length === 0) {
-                this.complete();
-                break;
-            }
-            cmdPack = cmdQueue.get(index);
+            cmdPack = cmdQueue.get();
+            cmdQueue.setNextIndex();
             if (cmdPack == null) {
                 this.complete();
                 break;
             }
             this.getCmdHandler(cmdPack).run(cmdPack);
-
-            index = undefined;
         }
+        return this;
     }
 
     log(msg) {
         this.emit('log', msg, this);
+        return this;
     }
 
     get isDebugMode() {
@@ -274,6 +295,7 @@ class CSVScenario extends EE {
 
     error(msg) {
         this.emit('error', msg, this);
+        return this;
     }
 }
 

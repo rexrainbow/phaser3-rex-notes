@@ -15,6 +15,7 @@ class CmdQueue {
     clean() {
         this.queue.length = 0;
         this.currentIdx = -1;
+        this.nextIdx = undefined;
         return this;
     }
 
@@ -30,9 +31,17 @@ class CmdQueue {
         return this;
     }
 
-    get(index) {
+    setNextIndex(index) {
         if (index === undefined) {
             index = this.currentIdx + 1;
+        }
+        this.nextIdx = index;
+        return this;
+    }
+
+    get(index) {
+        if (index === undefined) {
+            index = this.nextIdx;
         }
         this.currentIdx = index;
         return this.queue[index];
