@@ -12,7 +12,7 @@ class ExitCmd extends BaseCmd {
     }
 
     run(cmdPack) {
-        this.scenario.log("#EXIT");
+        this.scenario.log('#EXIT');
         this.scenario.complete();         
     }
 }

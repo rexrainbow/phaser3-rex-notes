@@ -3,7 +3,7 @@
 import CSVScenarioPlugin from './../../plugins/csvscenario-plugin.js';
 
 var csvString =
-`-,print,hello
+    `-,print,hello
 1,print,world
 1,print,scenario
 #label,AA,
@@ -45,14 +45,14 @@ class Demo extends Phaser.Scene {
         var myCmds = new ActionKlass(this);
 
         scenario
-            .load(csvString, myCmds, {
-                timeUnit: 'sec'
-            })
             .on('complete', function () {
                 console.log('scenario complete')
             })
             .on('labelchange', function (scenario, prevLabel, curLabel) {
                 console.log('Label: "' + prevLabel + '"->"' + curLabel + '"')
+            })
+            .load(csvString, myCmds, {
+                timeUnit: 'sec'
             })
             .start({
                 label: 'AA'

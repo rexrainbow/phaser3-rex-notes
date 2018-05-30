@@ -14,13 +14,18 @@ class GotoCmd extends BaseCmd {
     run(cmdPack) {
         var label = this.getLabel(cmdPack);
         if (this.scenario.isDebugMode) {
-            this.scenario.log("#GOTO label: " + label);
+            this.scenario.log('#GOTO label: ' + label);
         }
         this.scenario.goto(label);
     }
 
     getLabel(cmdPack) {
-        return cmdPack[1];
+        var label = cmdPack[1];
+        if (label == null) {
+            label = '';
+            cmdPack[1] = label;
+        }
+        return label;
     }
 }
 

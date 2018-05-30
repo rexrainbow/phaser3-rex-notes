@@ -23,7 +23,7 @@ class WaitTimeCmd extends BaseCmd {
             delayTime -= this.scenario.offset;
             this.scenario.offset = 0;
             if (this.scenario.isDebugMode) {
-                this.scenario.log("#WAIT TIME: " + delayTime);
+                this.scenario.log('#WAIT TIME: ' + delayTime);
             }
             this.scenario.wait(delayTime);
         } else {
@@ -32,7 +32,12 @@ class WaitTimeCmd extends BaseCmd {
     }
 
     getDelayTime(cmdPack) {
-        return cmdPack[1];
+        var delay = cmdPack[1];
+        if (delay == null) {
+            delay = 0;
+            cmdPack[1] = delay;
+        }
+        return delay;
     }
 }
 

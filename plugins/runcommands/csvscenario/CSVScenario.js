@@ -21,7 +21,7 @@ class CSVScenario extends EE {
     }
 
     resetFromJSON(o) {
-        this.threadId = GetValue(o, 'threadId', 0);
+        this._inRunCmdLoop = false;
         this.isRunning = GetValue(o, 'state', false);
         this.isPaused = GetValue(o, 'pause', false);
         this.waitEvent = GetValue(o, 'wait', undefined);
@@ -58,6 +58,9 @@ class CSVScenario extends EE {
         this.argsConvert = GetValue(config, 'argsConvert', this.argsConvert);
         this.argsConvertScope = GetValue(config, 'argsConvertScope', this.argsConvertScope);
         this.scope = scope;
+
+        this.cmdQueue.resetFromJSON();
+        this.cmdHandlers.resetFromJSON();
         this.parse(CSVToArray(strCmd), config);
         return this;
     }
@@ -76,13 +79,6 @@ class CSVScenario extends EE {
         }
 
         this.isRunning = true;
-        this.isPaused = false;
-        if (this.threadId >= 99999999999) {
-            this.threadId = 0;
-        } else {
-            this.threadId++;
-        }
-
         this.runNextCmd();
         return true;
     }
@@ -126,11 +122,16 @@ class CSVScenario extends EE {
             return this;
         }
 
+        this.isRunning = false;
+        this.isPaused = false;
+
+        // clear wait event
+        this.waitEvent = undefined;
         if (this.timer) {
             this.timer.remove();
             this.timer = undefined;
         }
-        this.isRunning = false;
+
         return this;
     }
 
@@ -179,10 +180,9 @@ class CSVScenario extends EE {
     }
 
     continue (eventName) {
-        if (!this.isRunning) {
-            return this;
-        }
-        if (this.isPaused || (this.waitEvent === undefined)) {
+        if ((!this.isRunning) ||
+            this.isPaused ||
+            (this.waitEvent === undefined)) {
             return this;
         }
 
@@ -264,14 +264,18 @@ class CSVScenario extends EE {
     }
 
     runNextCmd() {
+        if (this._inRunCmdLoop) { // prevent re-entry
+            return;
+        }
+
         var threadId = this.threadId;
         var cmdQueue = this.cmdQueue;
         var cmdPack, cmdHandler;
+        this._inRunCmdLoop = true;
         while (
             this.isRunning &&
             (!this.isPaused) &&
-            (this.waitEvent === undefined) &&
-            (threadId === this.threadId)
+            (this.waitEvent === undefined)
         ) {
             cmdPack = cmdQueue.get();
             cmdQueue.setNextIndex();
@@ -281,6 +285,7 @@ class CSVScenario extends EE {
             }
             this.getCmdHandler(cmdPack).run(cmdPack);
         }
+        this._inRunCmdLoop = false;
         return this;
     }
 

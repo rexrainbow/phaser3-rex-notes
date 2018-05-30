@@ -1,9 +1,12 @@
 'use strict'
 
+import Clean from './../../utils/object/Clean.js';
+
 class CmdQueue {
     constructor(scenario) {
         this.scenario = scenario;
         this.queue = [];
+        this.customData = {};
         this.resetFromJSON();
     }
 
@@ -15,7 +18,8 @@ class CmdQueue {
     clean() {
         this.queue.length = 0;
         this.currentIdx = -1;
-        this.nextIdx = undefined;
+        this.nextIdx = 0;
+        Clean(this.customData);
         return this;
     }
 

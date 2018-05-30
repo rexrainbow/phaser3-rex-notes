@@ -6,6 +6,7 @@ import WaitEventCmd from './WaitEventCmd.js';
 import LabelCmd from './LabelCmd.js';
 import ExitCmd from './ExitCmd.js';
 import GotoCmd from './GotoCmd.js';
+import IfCmd from './IfCmd.js';
 
 class CmdHandlers {
     constructor(scenario) {
@@ -16,7 +17,8 @@ class CmdHandlers {
             'waitevent': new WaitEventCmd(scenario),
             'label': new LabelCmd(scenario),
             'exit': new ExitCmd(scenario),
-            'goto': new GotoCmd(scenario)
+            'goto': new GotoCmd(scenario),
+            'if': new IfCmd(scenario)
         };
     }
 

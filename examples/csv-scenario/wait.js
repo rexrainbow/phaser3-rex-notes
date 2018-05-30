@@ -2,8 +2,8 @@
 
 import CSVScenarioPlugin from './../../plugins/csvscenario-plugin.js';
 
-var csvString = 
-`0,print,hello
+var csvString =
+    `0,print,hello
 1.2,print,world
 click,print,scenario`;
 
@@ -40,11 +40,11 @@ class Demo extends Phaser.Scene {
         });
 
         scenario
-            .load(csvString, myCmds, {
-                timeUnit: 'sec'
-            })
             .on('complete', function () {
                 console.log('scenario complete')
+            })
+            .load(csvString, myCmds, {
+                timeUnit: 'sec'
             })
             .start();
     }

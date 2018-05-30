@@ -8,27 +8,29 @@ class LabelCmd extends BaseCmd {
         super(scenario, 'label');
 
         this.labels = {};
-        this.prevLabel = "";
-        this.lastLabel = "";
+        this.labels = {};
+        this.prevLabel = '';
+        this.lastLabel = '';
     }
 
     resetFromJSON(o) {
         Clean(this.labels);
-        this.prevLabel = "";
-        this.lastLabel = "";
+        this.prevLabel = '';
+        this.lastLabel = '';
+        this.scenario.cmdQueue.customData.labels = this.labels;
     }
 
     parse(cmdPack, index) {
+        cmdPack.length = 2;        
         var label = this.getLabel(cmdPack);
         this.addLabel(label, index);
-        cmdPack.length = 2;
         return cmdPack;
     }
 
     run(cmdPack) {
         var label = this.getLabel(cmdPack);
         if (this.scenario.isDebugMode) {
-            this.scenario.log("#LABEL: " + label);
+            this.scenario.log('#LABEL: ' + label);
         }
 
         this.prevLabel = this.lastLabel;
@@ -39,7 +41,12 @@ class LabelCmd extends BaseCmd {
     }
 
     getLabel(cmdPack) {
-        return cmdPack[1];
+        var label = cmdPack[1];
+        if (label == null) {
+            label = '';
+            cmdPack[1] = label;
+        }
+        return label;
     }
 
     addLabel(name, index) {
