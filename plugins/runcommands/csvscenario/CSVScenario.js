@@ -29,6 +29,7 @@ class CSVScenario extends EE {
         this.cmdQueue.resetFromJSON(o);
         this.scope = GetValue(o, 'scope', undefined);
         this.timeUnit = GetValue(o, 'timeUnit', 0);
+        this.cmdPrefix = GetValue(o, 'prefix', DEFAULT_PREFIX);
         this.argsConvert = GetValue(o, 'argsConvert', true);
         this.argsConvertScope = GetValue(o, 'argsConvertScope', undefined);
         return this;
@@ -55,13 +56,17 @@ class CSVScenario extends EE {
         if (typeof (this.timeUnit) === 'string') {
             this.timeUnit = TIMEUNITMODE[this.timeUnit];
         }
+        this.cmdPrefix = GetValue(config, 'prefix', this.cmdPrefix);
+        if (typeof (this.cmdPrefix) === 'string') {
+            this.cmdPrefix = new RegExp(this.cmdPrefix);
+        }
         this.argsConvert = GetValue(config, 'argsConvert', this.argsConvert);
         this.argsConvertScope = GetValue(config, 'argsConvertScope', this.argsConvertScope);
         this.scope = scope;
 
         this.cmdQueue.resetFromJSON();
         this.cmdHandlers.resetFromJSON();
-        this.parse(CSVToArray(strCmd), config);
+        this.append(strCmd);
         return this;
     }
 
@@ -141,12 +146,9 @@ class CSVScenario extends EE {
         return this;
     }
 
-    append(commands) {
-
-    }
-
-    clean() {
-
+    append(strCmd) {
+        this.parse(CSVToArray(strCmd));
+        return this;
     }
 
     pause() {
@@ -209,13 +211,8 @@ class CSVScenario extends EE {
         return this.cmdHandlers.get(name);
     }
 
-    parse(arr, config) {
-        var prefix = GetValue(config, 'prefix', DEFAULT_PREFIX);
-        if (typeof (prefix) === 'string') {
-            prefix = new RegExp(prefix);
-        }
-
-        var item, name;
+    parse(arr) {
+        var item, name, prefix = this.cmdPrefix;
         for (var i = 0, len = arr.length; i < len; i++) {
             item = arr[i];
             name = item[0];

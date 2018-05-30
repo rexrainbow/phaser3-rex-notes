@@ -48,7 +48,7 @@ class Demo extends Phaser.Scene {
             .on('complete', function () {
                 console.log('scenario complete')
             })
-            .on('labelchange', function (scenario, prevLabel, curLabel) {
+            .on('labelchange', function (curLabel, prevLabel) {
                 console.log('Label: "' + prevLabel + '"->"' + curLabel + '"')
             })
             .load(csvString, myCmds, {

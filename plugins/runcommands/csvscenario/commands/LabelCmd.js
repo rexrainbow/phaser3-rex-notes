@@ -37,7 +37,7 @@ class LabelCmd extends BaseCmd {
         this.lastLabel = label;
         //this.scenario.resetClock(); // TODO
         var scenario = this.scenario;
-        scenario.emit('labelchange', scenario, this.prevLabel, this.lastLabel);
+        scenario.emit('labelchange', this.lastLabel, this.prevLabel, scenario);
     }
 
     getLabel(cmdPack) {

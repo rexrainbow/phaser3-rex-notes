@@ -7,13 +7,16 @@ var csvString =
 #IF,this.coin > 10,BB
 #IF,,CC
 #LABEL,AA,
--,print,I can eat anything
+-,print,I can eat 
+1,print,Ha
 #EXIT,,
 #LABEL,BB,
 -,print,I have a cup of tea
+1,print,Bla bla bla
 #EXIT,,
 #LABEL,CC,
 -,print,Game over
+1,print,Ouch
 #EXIT,,`;
 
 class ActionKlass extends Phaser.Events.EventEmitter {
