@@ -3,7 +3,7 @@
 import EE from 'eventemitter3';
 import CSVToArray from './../../utils/array/CSVToArray.js';
 import IsArray from './../../utils/array/IsArray.js';
-import InstQueue from './InstQueue.js';
+import InstMem from './InstMem.js';
 import CmdHandlers from './commands/CmdHandlers.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -14,7 +14,7 @@ class CSVScenario extends EE {
 
         this.scene = scene;
         this.timer = undefined;
-        this.instQueue = new InstQueue(this);
+        this.instMem = new InstMem(this);
         this.cmdHandlers = new CmdHandlers(this);
         this.resetFromJSON(config);
         this.boot();
@@ -26,7 +26,7 @@ class CSVScenario extends EE {
         this.isPaused = GetValue(o, 'pause', false);
         this.waitEvent = GetValue(o, 'wait', undefined);
         this.cmdHandlers.resetFromJSON(o);
-        this.instQueue.resetFromJSON(o);
+        this.instMem.resetFromJSON(o);
         this.scope = GetValue(o, 'scope', undefined);
         this.timeUnit = GetValue(o, 'timeUnit', 0);
         this.cmdPrefix = GetValue(o, 'prefix', DEFAULT_PREFIX);
@@ -70,7 +70,7 @@ class CSVScenario extends EE {
 
     clean() {
         this.stop();
-        this.instQueue.resetFromJSON();
+        this.instMem.resetFromJSON();
         this.cmdHandlers.resetFromJSON();
     }
 
@@ -110,7 +110,7 @@ class CSVScenario extends EE {
         if (index == null) {
             return false;
         }
-        this.instQueue.setNextIndex(index);
+        this.instMem.setNextIndex(index);
         return true;
     }
 
@@ -257,9 +257,9 @@ class CSVScenario extends EE {
         if (handler == null) {
             return false;
         }
-        inst = handler.parse(inst, this.instQueue.length);
+        inst = handler.parse(inst, this.instMem.length);
         if (inst) {
-            this.instQueue.append(inst);
+            this.instMem.append(inst);
         }
         return true;
     }
@@ -270,7 +270,7 @@ class CSVScenario extends EE {
         }
 
         var threadId = this.threadId;
-        var instQueue = this.instQueue;
+        var instMem = this.instMem;
         var inst, cmdHandler;
         this._inRunCmdLoop = true;
         while (
@@ -278,8 +278,8 @@ class CSVScenario extends EE {
             (!this.isPaused) &&
             (this.waitEvent === undefined)
         ) {
-            inst = instQueue.get();
-            instQueue.setNextIndex();
+            inst = instMem.get();
+            instMem.setNextIndex();
             if (inst == null) {
                 this.complete();
                 break;

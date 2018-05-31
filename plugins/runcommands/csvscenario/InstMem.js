@@ -2,7 +2,7 @@
 
 import Clean from './../../utils/object/Clean.js';
 
-class InstQueue {
+class InstMem {
     constructor(scenario) {
         this.scenario = scenario;
         this.queue = [];
@@ -49,4 +49,4 @@ class InstQueue {
     }
 }
 
-export default InstQueue;
+export default InstMem;

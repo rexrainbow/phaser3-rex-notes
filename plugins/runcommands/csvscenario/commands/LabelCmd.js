@@ -17,7 +17,7 @@ class LabelCmd extends BaseCmd {
         Clean(this.labels);
         this.prevLabel = '';
         this.lastLabel = '';
-        this.scenario.instQueue.customData.labels = this.labels;
+        this.scenario.instMem.customData.labels = this.labels;
     }
 
     parse(inst, index) {
