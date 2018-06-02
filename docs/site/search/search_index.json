@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/index.html", 
-            "text": "Phaser\n\n\nPhaser\n is a fun, free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering.\n\n\nList of my plugins\n\n\n\n\nBBCodeText\n: Drawing text with \nBBCode\n protocol.\n\n\nCanvas\n: Drawing on \ncanvas\n.\n\n\nClock\n: A clock to count elapsed time.\n\n\nCSV-to-hash-table\n: Hash table indexed by (col-key, row-key) from csv string.\n\n\nDrag\n: Drag game object.\n\n\nDrag-cursor\n: Simulate curosr keys according dragging events.\n\n\nFade-out-destroy\n: Fade out game object then destroy it.\n\n\nFade-volume\n: Fade-in/fade-out volume of sound.\n\n\nGashapon\n: Pick random item from box.\n\n\nGrid table\n: Viewer of grid table, to manipulate game object of each visible cell.\n\n\nLZ-string\n: Compress string using LZ-based compression algorithm.\n\n\nPage\n: Display text page by page on text object.\n\n\nRun-commands\n: Run commands in array.\n\n\nSequence\n: Run sequence commands in array.\n\n\nTagText\n: Displays text with multi-color, font face, or font size with tags.\n\n\nTCRP.Player\n: Run commands on time.\n\n\nTCRP.Recorder\n: Store commands with time.\n\n\nTyping\n: Typing text on text object.\n\n\nWebfont-loader\n: Load web font by google webfont loader in preload stage.\n\n\nXOR\n: Encrypt or decrypt string by XOR algorithm.", 
+            "text": "Phaser\n\n\nPhaser\n is a fun, free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering.\n\n\nList of my plugins\n\n\n\n\nBBCodeText\n: Drawing text with \nBBCode\n protocol.\n\n\nCanvas\n: Drawing on \ncanvas\n.\n\n\nClock\n: A clock to count elapsed time.\n\n\nCSV-scenario\n: Run script in csv format.\n\n\nCSV-to-hash-table\n: Hash table indexed by (col-key, row-key) from csv string.\n\n\nDrag\n: Drag game object.\n\n\nDrag-cursor\n: Simulate curosr keys according dragging events.\n\n\nFade-out-destroy\n: Fade out game object then destroy it.\n\n\nFade-volume\n: Fade-in/fade-out volume of sound.\n\n\nGashapon\n: Pick random item from box.\n\n\nGrid table\n: Viewer of grid table, to manipulate game object of each visible cell.\n\n\nLZ-string\n: Compress string using LZ-based compression algorithm.\n\n\nPage\n: Display text page by page on text object.\n\n\nRun-commands\n: Run commands in array.\n\n\nSequence\n: Run sequence commands in array.\n\n\nTagText\n: Displays text with multi-color, font face, or font size with tags.\n\n\nTCRP.Player\n: Run commands on time.\n\n\nTCRP.Recorder\n: Store commands with time.\n\n\nTyping\n: Typing text on text object.\n\n\nWebfont-loader\n: Load web font by google webfont loader in preload stage.\n\n\nXOR\n: Encrypt or decrypt string by XOR algorithm.", 
             "title": "Home"
         }, 
         {
@@ -12,7 +12,7 @@
         }, 
         {
             "location": "/index.html#list-of-my-plugins", 
-            "text": "BBCodeText : Drawing text with  BBCode  protocol.  Canvas : Drawing on  canvas .  Clock : A clock to count elapsed time.  CSV-to-hash-table : Hash table indexed by (col-key, row-key) from csv string.  Drag : Drag game object.  Drag-cursor : Simulate curosr keys according dragging events.  Fade-out-destroy : Fade out game object then destroy it.  Fade-volume : Fade-in/fade-out volume of sound.  Gashapon : Pick random item from box.  Grid table : Viewer of grid table, to manipulate game object of each visible cell.  LZ-string : Compress string using LZ-based compression algorithm.  Page : Display text page by page on text object.  Run-commands : Run commands in array.  Sequence : Run sequence commands in array.  TagText : Displays text with multi-color, font face, or font size with tags.  TCRP.Player : Run commands on time.  TCRP.Recorder : Store commands with time.  Typing : Typing text on text object.  Webfont-loader : Load web font by google webfont loader in preload stage.  XOR : Encrypt or decrypt string by XOR algorithm.", 
+            "text": "BBCodeText : Drawing text with  BBCode  protocol.  Canvas : Drawing on  canvas .  Clock : A clock to count elapsed time.  CSV-scenario : Run script in csv format.  CSV-to-hash-table : Hash table indexed by (col-key, row-key) from csv string.  Drag : Drag game object.  Drag-cursor : Simulate curosr keys according dragging events.  Fade-out-destroy : Fade out game object then destroy it.  Fade-volume : Fade-in/fade-out volume of sound.  Gashapon : Pick random item from box.  Grid table : Viewer of grid table, to manipulate game object of each visible cell.  LZ-string : Compress string using LZ-based compression algorithm.  Page : Display text page by page on text object.  Run-commands : Run commands in array.  Sequence : Run sequence commands in array.  TagText : Displays text with multi-color, font face, or font size with tags.  TCRP.Player : Run commands on time.  TCRP.Recorder : Store commands with time.  Typing : Typing text on text object.  Webfont-loader : Load web font by google webfont loader in preload stage.  XOR : Encrypt or decrypt string by XOR algorithm.", 
             "title": "List of my plugins"
         }, 
         {
@@ -1841,67 +1841,67 @@
             "title": "Create timeline object"
         }, 
         {
-            "location": "/clockplugin/index.html", 
+            "location": "/clock/index.html", 
             "text": "Introduction\n\n\nA clock to count elapsed time.\n\n\n\n\nAuthor: Rex\n\n\nMember of scene\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nUser could import class directly, or install it by global plugin.\n\n\nImport class\n\n\nimport\n \nrexClock\n \nfrom\n \n./plugins/clock.js\n;\n\n\n\n\n\nInstall global plugin\n\n\nInstall plugin in \nconfiguration of game\n\n\nimport\n \nClockPlugin\n \nfrom\n \n./plugins/clock-plugin.js\n;\n\n\n\nvar\n \nconfig\n \n=\n \n{\n\n    \n// ...\n\n    \nplugins\n:\n \n{\n\n        \nglobal\n:\n \n[{\n\n            \nkey\n:\n \nrexClock\n,\n\n            \nplugin\n:\n \nClockPlugin\n,\n\n            \nstart\n:\n \ntrue\n\n        \n}\n\n        \n// ...\n\n        \n]\n\n    \n}\n\n    \n// ...\n\n\n};\n\n\nvar\n \ngame\n \n=\n \nnew\n \nPhaser\n.\nGame\n(\nconfig\n);\n\n\n\n\n\nCreate instance\n\n\nvar\n \nclock\n \n=\n \nscene\n.\nplugins\n.\nget\n(\nrexClock\n).\nadd\n(\nscene\n,\n \n{\n\n    \n// timeScale: 1\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\ntimeScale : time-scale for counting elapsed time.\n\n\n\n\nStart counting\n\n\nclock\n.\nstart\n();\n\n\n// clock.start(startAt);  // start-at time in ms\n\n\n\n\n\nGet elapsed time\n\n\nvar\n \nnow\n \n=\n \nclock\n.\nnow\n;\n  \n// elapsed time in ms\n\n\n\n\n\nPause, Resume, stop counting\n\n\nclock\n.\npause\n();\n\n\nclock\n.\nresume\n();\n\n\nclock\n.\nstop\n();\n\n\n\n\n\nSeek elapsed time\n\n\nclock\n.\nseek\n(\ntime\n);\n   \n// elapsed time in ms\n\n\n\n\n\nState of counting\n\n\nvar\n \nisRunning\n \n=\n \nclock\n.\nisRunning\n;\n\n\n\n\n\nTime-scale\n\n\nvar\n \ntimeScale\n \n=\n \nclock\n.\ntimeScale\n;\n\n\nclock\n.\ntimeScale\n \n=\n \n0.5\n;", 
             "title": "Clock"
         }, 
         {
-            "location": "/clockplugin/index.html#introduction", 
+            "location": "/clock/index.html#introduction", 
             "text": "A clock to count elapsed time.   Author: Rex  Member of scene", 
             "title": "Introduction"
         }, 
         {
-            "location": "/clockplugin/index.html#source-code", 
+            "location": "/clock/index.html#source-code", 
             "text": "Link", 
             "title": "Source code"
         }, 
         {
-            "location": "/clockplugin/index.html#usage", 
+            "location": "/clock/index.html#usage", 
             "text": "User could import class directly, or install it by global plugin.", 
             "title": "Usage"
         }, 
         {
-            "location": "/clockplugin/index.html#import-class", 
+            "location": "/clock/index.html#import-class", 
             "text": "import   rexClock   from   ./plugins/clock.js ;", 
             "title": "Import class"
         }, 
         {
-            "location": "/clockplugin/index.html#install-global-plugin", 
+            "location": "/clock/index.html#install-global-plugin", 
             "text": "Install plugin in  configuration of game  import   ClockPlugin   from   ./plugins/clock-plugin.js ;  var   config   =   { \n     // ... \n     plugins :   { \n         global :   [{ \n             key :   rexClock , \n             plugin :   ClockPlugin , \n             start :   true \n         } \n         // ... \n         ] \n     } \n     // ...  };  var   game   =   new   Phaser . Game ( config );", 
             "title": "Install global plugin"
         }, 
         {
-            "location": "/clockplugin/index.html#create-instance", 
+            "location": "/clock/index.html#create-instance", 
             "text": "var   clock   =   scene . plugins . get ( rexClock ). add ( scene ,   { \n     // timeScale: 1  });   Properties   timeScale : time-scale for counting elapsed time.", 
             "title": "Create instance"
         }, 
         {
-            "location": "/clockplugin/index.html#start-counting", 
+            "location": "/clock/index.html#start-counting", 
             "text": "clock . start ();  // clock.start(startAt);  // start-at time in ms", 
             "title": "Start counting"
         }, 
         {
-            "location": "/clockplugin/index.html#get-elapsed-time", 
+            "location": "/clock/index.html#get-elapsed-time", 
             "text": "var   now   =   clock . now ;    // elapsed time in ms", 
             "title": "Get elapsed time"
         }, 
         {
-            "location": "/clockplugin/index.html#pause-resume-stop-counting", 
+            "location": "/clock/index.html#pause-resume-stop-counting", 
             "text": "clock . pause ();  clock . resume ();  clock . stop ();", 
             "title": "Pause, Resume, stop counting"
         }, 
         {
-            "location": "/clockplugin/index.html#seek-elapsed-time", 
+            "location": "/clock/index.html#seek-elapsed-time", 
             "text": "clock . seek ( time );     // elapsed time in ms", 
             "title": "Seek elapsed time"
         }, 
         {
-            "location": "/clockplugin/index.html#state-of-counting", 
+            "location": "/clock/index.html#state-of-counting", 
             "text": "var   isRunning   =   clock . isRunning ;", 
             "title": "State of counting"
         }, 
         {
-            "location": "/clockplugin/index.html#time-scale", 
+            "location": "/clock/index.html#time-scale", 
             "text": "var   timeScale   =   clock . timeScale ;  clock . timeScale   =   0.5 ;", 
             "title": "Time-scale"
         }, 
@@ -2517,7 +2517,7 @@
         }, 
         {
             "location": "/csvtohashtable/index.html", 
-            "text": "Introduction\n\n\nHash table indexed by (col-key, row-key) from csv string.\n\n\n\n\nAuthor: Rex\n\n\nMember of scene\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\nvar\n \ntable\n \n=\n \nnew\n \nHashTable\n(\nthis\n);\n\n\n\n\n\nLoad table from csv string\n\n\ntable\n.\nloadCSV\n(\ncsvString\n,\n \n{\n\n    \n// delimiter: \n,\n,\n\n    \n// convertCallback: true\n\n    \n// convertCallbackScope: undefined\n\n\n});\n\n\n\n\n\nFor exameple, csv string\n\n\nname,hp,mp\n\n\nRex,\n100\n,\n20\n\n\nAlice,\n300\n,\n40\n\n\n\n\n\nwill be converted to \n\n\n{\n\n    \nAlice\n:\n \n{\n\n        \nname\n:\n \nAlice\n,\n\n        \nhp\n:\n \n300\n,\n\n        \nmp\n:\n \n40\n\n    \n},\n\n    \nRex\n:\n \n{\n\n        \nname\n:\n \nRex\n,\n\n        \nhp\n:\n \n100\n,\n\n        \nmp\n:\n \n20\n\n    \n}\n\n\n}\n\n\n\n\n\nThen get value by\n\n\nvar\n \nvalue\n \n=\n \ntable\n.\nget\n(\nRex\n,\n \nhp\n);\n\n\n\n\n\nConvert value type\n\n\nValues will be converted to \nnumber\n, \nboolean\n, \nnull\n, or \nstring\n, if \nconvertCallback\n is \ntrue\n, or assign your convert function by \nconvertCallback\n and \nconvertCallbackScope\n when loading table (\ntable.loadCSV(...)\n).\n\n\nvar\n \nconvertCallback\n \n=\n \nfunction\n(\ntable\n,\n \nrowKey\n,\n \ncolKey\n,\n \nvalue\n)\n \n{\n\n    \n// value = ...\n\n    \nreturn\n \nvalue\n;\n\n\n};\n\n\n\n\n\nOr uses these metheds to convert columns or rows.\n\n\n\n\nconvert values in column\n    \ntable\n.\nconvertCol\n(\ncolKey\n);\n  \n// colKey: a colKey, or an array of colKeys\n\n\n// table.convertCol(colKey, convertCallback, convertCallbackScope);\n\n\n\n\nconvert values in row\n    \ntable\n.\nconvertRow\n(\nrowKey\n);\n  \n// rowKey: a rowKey, or an array of rowKeys\n\n\n// table.convertRow(rowKey, convertCallback, convertCallbackScope);\n\n\n\n\n\n\nGet value\n\n\nvar\n \nval\n \n=\n \ntable\n.\nget\n(\nrowKey\n,\n \ncolKey\n);\n\n\n\n\n\nSet value\n\n\ntable\n.\nset\n(\nrowKey\n,\n \ncolKey\n,\n \nvalue\n);\n\n\n\n\n\ntable\n.\nadd\n(\nrowKey\n,\n \ncolKey\n,\n \nvalue\n);\n\n\n// equal to table.set(rowKey, colKey, table.get(rowKey, colKey) + value);\n\n\n\n\n\nHas column/row key\n\n\nvar\n \nhasRow\n \n=\n \ntable\n.\nhasRowKey\n(\nrowKey\n);\n\n\n\n\n\nvar\n \nhasCol\n \n=\n \ntable\n.\nhasColKey\n(\ncolKey\n);\n\n\n\n\n\nvar\n \nhasCell\n \n=\n \ntable\n.\nhasKey\n(\nrowKey\n,\n \ncolKey\n);\n\n\n\n\n\nValue in column or row\n\n\nvar\n \nexisted\n \n=\n \ntable\n.\nisValueInRol\n(\nrowKey\n,\n \ndata\n);\n\n\n\n\n\nvar\n \nexisted\n \n=\n \ntable\n.\nisValueInCol\n(\ncolKey\n,\n \ndata\n);\n\n\n\n\n\nCreate table\n\n\nClean table\n\n\ntable\n.\nclean\n();\n\n\n\n\n\nAppend a column\n\n\ntable\n.\nappendCol\n(\ncolKey\n,\n \ninitValue\n);\n\n\n// table.appendCol(colKey, callback, scope);  // get initValue from callback\n\n\n\n\n\nCallback\n\n\nvar\n \ncallback\n \n=\n \nfunction\n \n(\ntable\n,\n \nrowKey\n,\n \ncolKey\n)\n \n{\n \n    \n// value = ...\n\n    \nreturn\n \nvalue\n;\n\n\n};\n\n\n\n\n\nAppend a row\n\n\ntable\n.\nappendRow\n(\ncolKey\n,\n \ninitValue\n);\n\n\n// table.appendRow(colKey, callback, scope);  // get initValue from callback\n\n\n\n\n\nCallback\n\n\nvar\n \ncallback\n \n=\n \nfunction\n \n(\ntable\n,\n \nrowKey\n,\n \ncolKey\n)\n \n{\n \n    \n// value = ...\n\n    \nreturn\n \nvalue\n;\n\n\n};\n\n\n\n\n\nRemove a row\n\n\ntable\n.\nremoveRol\n(\ncolKey\n);\n\n\n\n\n\nRemove a column\n\n\ntable\n.\nremoveCol\n(\ncolKey\n);\n\n\n\n\n\nSort column or row\n\n\ntable\n.\nsortCol\n(\ncolKey\n,\n \nmode\n);\n\n\n// table.sortCol(callback, scope);  // sort column by callback\n\n\n\n\n\ntable\n.\nsortRow\n(\nrowKey\n,\n \nmode\n);\n\n\n// table.sortRow(callback, scope);  // sort column by callback\n\n\n\n\n\nMode:\n\n\n\n\n'ascending'\n, or \n0\n\n\n'descending'\n, or \n1\n\n\n'logical ascending'\n, or \n2\n\n\n'logical descending'\n, or \n3\n\n\n\n\nSorting callback\n\n\nvar\n \ncallback\n \n=\n \nfunction\n(\nrowKeyA\n,\n \nrowKeyB\n)\n \n{\n\n    \nreturn\n \nresult\n;\n \n// 1, -1, or 0\n\n\n};\n\n\n\n\n\nRetrieve columns or rows\n\n\ntable\n.\neachCol\n(\nrowKey\n,\n \ncallback\n,\n \nscope\n);\n\n\n\n\n\ntable\n.\neachRow\n(\ncolKey\n,\n \ncallback\n,\n \nscope\n);\n\n\n\n\n\nCallback\n\n\nvar\n \ncallback\n \n=\n \nfunction\n(\ntable\n,\n \nrowKey\n,\n \ncolKey\n,\n \nvalue\n)\n \n{\n\n    \n// ...\n\n\n};", 
+            "text": "Introduction\n\n\nHash table indexed by (col-key, row-key) from csv string.\n\n\n\n\nAuthor: Rex\n\n\nMember of scene\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nCreate instance\n\n\nvar\n \ntable\n \n=\n \nnew\n \nHashTable\n(\nthis\n);\n\n\n\n\n\nLoad table from csv string\n\n\ntable\n.\nloadCSV\n(\ncsvString\n,\n \n{\n\n    \n// delimiter: \n,\n,\n\n    \n// convertCallback: true\n\n    \n// convertCallbackScope: undefined\n\n\n});\n\n\n\n\n\nFor exameple, csv string\n\n\nname,hp,mp\n\n\nRex,100,20\n\n\nAlice,300,40\n\n\n\n\n\nwill be converted to \n\n\n{\n\n    \nAlice\n:\n \n{\n\n        \nname\n:\n \nAlice\n,\n\n        \nhp\n:\n \n300\n,\n\n        \nmp\n:\n \n40\n\n    \n},\n\n    \nRex\n:\n \n{\n\n        \nname\n:\n \nRex\n,\n\n        \nhp\n:\n \n100\n,\n\n        \nmp\n:\n \n20\n\n    \n}\n\n\n}\n\n\n\n\n\nThen get value by\n\n\nvar\n \nvalue\n \n=\n \ntable\n.\nget\n(\nRex\n,\n \nhp\n);\n\n\n\n\n\nConvert value type\n\n\nValues will be converted to \nnumber\n, \nboolean\n, \nnull\n, or \nstring\n, if \nconvertCallback\n is \ntrue\n, or assign your convert function by \nconvertCallback\n and \nconvertCallbackScope\n when loading table (\ntable.loadCSV(...)\n).\n\n\nvar\n \nconvertCallback\n \n=\n \nfunction\n(\ntable\n,\n \nrowKey\n,\n \ncolKey\n,\n \nvalue\n)\n \n{\n\n    \n// value = ...\n\n    \nreturn\n \nvalue\n;\n\n\n};\n\n\n\n\n\nOr uses these metheds to convert columns or rows.\n\n\n\n\nconvert values in column\n    \ntable\n.\nconvertCol\n(\ncolKey\n);\n  \n// colKey: a colKey, or an array of colKeys\n\n\n// table.convertCol(colKey, convertCallback, convertCallbackScope);\n\n\n\n\nconvert values in row\n    \ntable\n.\nconvertRow\n(\nrowKey\n);\n  \n// rowKey: a rowKey, or an array of rowKeys\n\n\n// table.convertRow(rowKey, convertCallback, convertCallbackScope);\n\n\n\n\n\n\nGet value\n\n\nvar\n \nval\n \n=\n \ntable\n.\nget\n(\nrowKey\n,\n \ncolKey\n);\n\n\n\n\n\nSet value\n\n\ntable\n.\nset\n(\nrowKey\n,\n \ncolKey\n,\n \nvalue\n);\n\n\n\n\n\ntable\n.\nadd\n(\nrowKey\n,\n \ncolKey\n,\n \nvalue\n);\n\n\n// equal to table.set(rowKey, colKey, table.get(rowKey, colKey) + value);\n\n\n\n\n\nHas column/row key\n\n\nvar\n \nhasRow\n \n=\n \ntable\n.\nhasRowKey\n(\nrowKey\n);\n\n\n\n\n\nvar\n \nhasCol\n \n=\n \ntable\n.\nhasColKey\n(\ncolKey\n);\n\n\n\n\n\nvar\n \nhasCell\n \n=\n \ntable\n.\nhasKey\n(\nrowKey\n,\n \ncolKey\n);\n\n\n\n\n\nValue in column or row\n\n\nvar\n \nexisted\n \n=\n \ntable\n.\nisValueInRol\n(\nrowKey\n,\n \ndata\n);\n\n\n\n\n\nvar\n \nexisted\n \n=\n \ntable\n.\nisValueInCol\n(\ncolKey\n,\n \ndata\n);\n\n\n\n\n\nCreate table\n\n\nClean table\n\n\ntable\n.\nclean\n();\n\n\n\n\n\nAppend a column\n\n\ntable\n.\nappendCol\n(\ncolKey\n,\n \ninitValue\n);\n\n\n// table.appendCol(colKey, callback, scope);  // get initValue from callback\n\n\n\n\n\nCallback\n\n\nvar\n \ncallback\n \n=\n \nfunction\n \n(\ntable\n,\n \nrowKey\n,\n \ncolKey\n)\n \n{\n \n    \n// value = ...\n\n    \nreturn\n \nvalue\n;\n\n\n};\n\n\n\n\n\nAppend a row\n\n\ntable\n.\nappendRow\n(\ncolKey\n,\n \ninitValue\n);\n\n\n// table.appendRow(colKey, callback, scope);  // get initValue from callback\n\n\n\n\n\nCallback\n\n\nvar\n \ncallback\n \n=\n \nfunction\n \n(\ntable\n,\n \nrowKey\n,\n \ncolKey\n)\n \n{\n \n    \n// value = ...\n\n    \nreturn\n \nvalue\n;\n\n\n};\n\n\n\n\n\nRemove a row\n\n\ntable\n.\nremoveRol\n(\ncolKey\n);\n\n\n\n\n\nRemove a column\n\n\ntable\n.\nremoveCol\n(\ncolKey\n);\n\n\n\n\n\nSort column or row\n\n\ntable\n.\nsortCol\n(\ncolKey\n,\n \nmode\n);\n\n\n// table.sortCol(callback, scope);  // sort column by callback\n\n\n\n\n\ntable\n.\nsortRow\n(\nrowKey\n,\n \nmode\n);\n\n\n// table.sortRow(callback, scope);  // sort column by callback\n\n\n\n\n\nMode:\n\n\n\n\n'ascending'\n, or \n0\n\n\n'descending'\n, or \n1\n\n\n'logical ascending'\n, or \n2\n\n\n'logical descending'\n, or \n3\n\n\n\n\nSorting callback\n\n\nvar\n \ncallback\n \n=\n \nfunction\n(\nrowKeyA\n,\n \nrowKeyB\n)\n \n{\n\n    \nreturn\n \nresult\n;\n \n// 1, -1, or 0\n\n\n};\n\n\n\n\n\nRetrieve columns or rows\n\n\ntable\n.\neachCol\n(\nrowKey\n,\n \ncallback\n,\n \nscope\n);\n\n\n\n\n\ntable\n.\neachRow\n(\ncolKey\n,\n \ncallback\n,\n \nscope\n);\n\n\n\n\n\nCallback\n\n\nvar\n \ncallback\n \n=\n \nfunction\n(\ntable\n,\n \nrowKey\n,\n \ncolKey\n,\n \nvalue\n)\n \n{\n\n    \n// ...\n\n\n};", 
             "title": "CSV to hash table"
         }, 
         {
@@ -2542,7 +2542,7 @@
         }, 
         {
             "location": "/csvtohashtable/index.html#load-table-from-csv-string", 
-            "text": "table . loadCSV ( csvString ,   { \n     // delimiter:  , , \n     // convertCallback: true \n     // convertCallbackScope: undefined  });   For exameple, csv string  name,hp,mp  Rex, 100 , 20  Alice, 300 , 40   will be converted to   { \n     Alice :   { \n         name :   Alice , \n         hp :   300 , \n         mp :   40 \n     }, \n     Rex :   { \n         name :   Rex , \n         hp :   100 , \n         mp :   20 \n     }  }   Then get value by  var   value   =   table . get ( Rex ,   hp );", 
+            "text": "table . loadCSV ( csvString ,   { \n     // delimiter:  , , \n     // convertCallback: true \n     // convertCallbackScope: undefined  });   For exameple, csv string  name,hp,mp  Rex,100,20  Alice,300,40   will be converted to   { \n     Alice :   { \n         name :   Alice , \n         hp :   300 , \n         mp :   40 \n     }, \n     Rex :   { \n         name :   Rex , \n         hp :   100 , \n         mp :   20 \n     }  }   Then get value by  var   value   =   table . get ( Rex ,   hp );", 
             "title": "Load table from csv string"
         }, 
         {
@@ -2744,6 +2744,101 @@
             "location": "/sequence/index.html#action-of-commands", 
             "text": "Action of commands, extended from  Phaser.Events.EventEmitter .  class   ActionKlass   extends   Phaser . Events . EventEmitter   { \n     constructor ( scene )   { \n         super (); \n\n         this . scene   =   scene ; \n         this . myConsole   =   scene . add . text ( 100 ,   100 ,   ); \n\n         this [ wait-click ]   =   this . waitClick ; \n         this [ wait-time ]   =   this . waitTime ; \n     } \n\n     // callbacks \n     print ( msg )   { \n         this . myConsole . setText ( msg ); \n         // return undefined to run next command \n     } \n\n     waitClick ()   { \n         this . scene . input . once ( pointerup ,   this . complete ,   this ); \n         return   this ;    // return eventEmitter to pause the sequence \n     } \n\n     waitTime ( delay )   { \n         this . scene . time . delayedCall ( delay   *   1000 ,   this . complete ,   [],   this ); \n         return   this ;    // return eventEmitter to pause the sequence \n     } \n\n     complete ()   { \n         this . emit ( complete );    // resume sequence \n     }  }  var   actionScope   =   new   ActionKlass ( scene );   Now this scope supports 3 commands   print(msg):  ['print', msg]  waitClick():  ['wait-click']  waitTime(delay):  ['wait-time', delay]", 
             "title": "Action of commands"
+        }, 
+        {
+            "location": "/csvscenario/index.html", 
+            "text": "Introduction\n\n\nRun script in csv format. Csv could be edited by excel or google document.\n\n\n\n\nAuthor: Rex\n\n\nMember of scene\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nUser could import class directly, or install it by global plugin.\n\n\nImport class\n\n\nimport\n \nrexCSVScenario\n \nfrom\n \n./plugins/csvscenario.js\n;\n\n\n\n\n\nInstall global plugin\n\n\nInstall plugin in \nconfiguration of game\n\n\nimport\n \nCSVScenarioPlugin\n \nfrom\n \n./plugins/csvscenario-plugin.js\n;\n\n\n\nvar\n \nconfig\n \n=\n \n{\n\n    \n// ...\n\n    \nplugins\n:\n \n{\n\n        \nglobal\n:\n \n[{\n\n            \nkey\n:\n \nrexCSVScenario\n,\n\n            \nplugin\n:\n \nCSVScenarioPlugin\n,\n\n            \nstart\n:\n \ntrue\n\n        \n}\n\n        \n// ...\n\n        \n]\n\n    \n}\n\n    \n// ...\n\n\n};\n\n\nvar\n \ngame\n \n=\n \nnew\n \nPhaser\n.\nGame\n(\nconfig\n);\n\n\n\n\n\nCreate instance\n\n\nvar\n \nscenario\n \n=\n \nscene\n.\nplugins\n.\nget\n(\nrexCSVScenario\n).\nadd\n(\nscene\n);\n\n\n\n\n\nLoad csv script\n\n\nscenario\n.\nload\n(\ncsvString\n,\n \nscope\n,\n \n{\n\n    \n// timeUnit: 0,        // \nms\n|0|\ns\n|\nsec\n|1\n\n    \n// prefix: /^#([a-zA-Z]+)/\n\n    \n// argsConvert: true,\n\n    \n// argsConvertScope: undefined\n\n\n})\n\n\n\n\n\nProperties\n\n\n\n\ntimeUnit: time-unit of dt, for \ndelay-execution\n\n\n'ms'\n, or \n0\n : dt in millisecond\n\n\n's'\n, \n'sec'\n, or 1 : dt in second\n\n\n\n\n\n\nprefix: regex of picking control instructions\n\n\nargsConvert: a callback to convert parameters of \nrun-custom-function\n, or \ntrue\n to use default convert function\n\n\nargsConvertScope: scope of argsConvert\n\n\n\n\nStart running instructions\n\n\nscenario\n.\nstart\n({\n\n    \n// label: \n,\n\n    \n// offset: 0\n\n\n})\n\n\n\n\n\nProperties\n\n\n\n\nlabel: Go to the label and execute. '' label is starting from 1\nst\n instruction\n\n\noffset: Offset time\n\n\n\n\nEvents\n\n\n\n\nComplete\n    \nscenario\n.\non\n(\ncomplete\n,\n \nfunction\n(){});\n\n\n\n\nLabel has changed\n    \nscenario\n.\non\n(\nlabelchange\n,\n \nfunction\n(){});\n\n\n\n\nDump execution log\n    \nscenario\n.\non\n(\nlog\n,\n \nfunction\n(){});\n\n\n\n\nNotify error\n    \nscenario\n.\non\n(\nerror\n,\n \nfunction\n(){});\n\n\n\n\n\n\nTypes of instructions\n\n\nEach row in csv table is an instruction.\n\n\nRun custom function\n\n\nRun custom function of \nscope\n, which passed from \nscenario.load(...)\n\n\nFormat:\n\n\n-,fnName,param0,param1,...\n\n\n\n\n\n\n\n1\nst\n column of instruction: \n-\n\n\nParameters will be converted to number, boolean, null, or string by default.\n\n\n\n\nDelay execution\n\n\nRun custom function after a delay.\n\n\nFormat:\n\n\ntime,fnName,param0,param1,...\n\n\n\n\n\n\n\n1\nst\n column of instruction: a number\n\n\ntime-unit of delay is set from \nscenario.load(...)\n\n\nParameters will be converted to number, boolean, null, or string by default.\n\n\n\n\nWait then execution\n\n\nRun custom function until \nscenario.continue(eventName)\n\n\nFormat:\n\n\neventName,fnName,param0,param1,...\n\n\n\n\n\n\n\n1\nst\n column of instruction: not a number, not a string start from \n#\n\n\nExecution will be hang until \nscenario.continue(eventName)\n is called\n\n\nParameters will be converted to number, boolean, null, or string by default.\n\n\n\n\nLabel\n\n\nA label for \n#GOTO\n or \n#IF\n instructions.\n\n\nFormat:\n\n\n#LABEL,label\n\n\n\n\n\n\n\n1\nst\n column of instruction: \n#LABEL\n, case insensitive.\n\n\nLabel \n''\n is reserved, don't use \n''\n for label name.\n\n\n\n\nExample: A label named 'AA'\n\n\n#LABEL,AA\n\n\n\n\n\nExit\n\n\nExit current execution.\n\n\nFormat:\n\n\n#EXIT\n\n\n\n\n\n\n\n1\nst\n column of instruction: \n#EXIT\n, case insensitive.\n\n\n\n\nGoto\n\n\nGo to \nlabel\n and execute.\n\n\nFormat:\n\n\n#GOTO,label\n\n\n\n\n\n\n\n1\nst\n column of instruction: \n#GOTO\n, case insensitive.\n\n\nAn \nerror\n event will be fired if label is not found.\n\n\n\n\nExample: Goto label 'AA'\n\n\n#GOTO,AA\n\n\n\n\n\nIf-goto\n\n\nGo to \ntrueLabel\n if condition is true, otherwise go to \nfalseLabel\n.\n\n\nFormat:\n\n\n#IF,condition,trueLabel,falseLabel\n\n\n\n\n\n\n\n1\nst\n column of instruction: \n#IF\n, case insensitive.\n\n\nconditon: boolean equation\n\n\nthis\n is the \nscope\n passed from \nscenario.load(...)\n\n\n\n\n\n\ntrueLabel/falseLabel: go to this label if condition is true/false\n\n\nrun next instruction if label is \n''\n\n\nAn \nerror\n event will be fired if label is not found.\n\n\n\n\n\n\n\n\nExample: Goto label 'AA' if (this.coin \n 100), else run next instruction\n\n\n#IF,this.coin \n 100,AA\n\n\n\n\n\nWait\n\n\nRun next instruction after a delay time, or \nscenario.continue(eventName)\n.\n\n\nFormat:\n\n\n#WAIT,time\n\n\n\n\n\n#WAIT,eventName\n\n\n\n\n\n\n\n1\nst\n column of instruction: \n#WAIT\n, case insensitive.\n\n\n2\nnd\n colume of instruction:\n\n\na number: a delay time\n\n\ntime-unit of delay is set from \nscenario.load(...)\n\n\n\n\n\n\na string: an event name for \nscenario.continue(eventName)\n\n\n\n\n\n\n\n\nExample: \n\n\n\n\nWait 1 time-unit\n    \n#WAIT,1\n\n\n\n\nWait until 'click'\n    \n#WAIT,click\n\n\n\n    \nscenario\n.\ncontinue\n(\nclick\n)", 
+            "title": "CSV scenario"
+        }, 
+        {
+            "location": "/csvscenario/index.html#introduction", 
+            "text": "Run script in csv format. Csv could be edited by excel or google document.   Author: Rex  Member of scene", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/csvscenario/index.html#source-code", 
+            "text": "Link", 
+            "title": "Source code"
+        }, 
+        {
+            "location": "/csvscenario/index.html#usage", 
+            "text": "User could import class directly, or install it by global plugin.", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/csvscenario/index.html#import-class", 
+            "text": "import   rexCSVScenario   from   ./plugins/csvscenario.js ;", 
+            "title": "Import class"
+        }, 
+        {
+            "location": "/csvscenario/index.html#install-global-plugin", 
+            "text": "Install plugin in  configuration of game  import   CSVScenarioPlugin   from   ./plugins/csvscenario-plugin.js ;  var   config   =   { \n     // ... \n     plugins :   { \n         global :   [{ \n             key :   rexCSVScenario , \n             plugin :   CSVScenarioPlugin , \n             start :   true \n         } \n         // ... \n         ] \n     } \n     // ...  };  var   game   =   new   Phaser . Game ( config );", 
+            "title": "Install global plugin"
+        }, 
+        {
+            "location": "/csvscenario/index.html#create-instance", 
+            "text": "var   scenario   =   scene . plugins . get ( rexCSVScenario ). add ( scene );", 
+            "title": "Create instance"
+        }, 
+        {
+            "location": "/csvscenario/index.html#load-csv-script", 
+            "text": "scenario . load ( csvString ,   scope ,   { \n     // timeUnit: 0,        //  ms |0| s | sec |1 \n     // prefix: /^#([a-zA-Z]+)/ \n     // argsConvert: true, \n     // argsConvertScope: undefined  })   Properties   timeUnit: time-unit of dt, for  delay-execution  'ms' , or  0  : dt in millisecond  's' ,  'sec' , or 1 : dt in second    prefix: regex of picking control instructions  argsConvert: a callback to convert parameters of  run-custom-function , or  true  to use default convert function  argsConvertScope: scope of argsConvert", 
+            "title": "Load csv script"
+        }, 
+        {
+            "location": "/csvscenario/index.html#start-running-instructions", 
+            "text": "scenario . start ({ \n     // label:  , \n     // offset: 0  })   Properties   label: Go to the label and execute. '' label is starting from 1 st  instruction  offset: Offset time", 
+            "title": "Start running instructions"
+        }, 
+        {
+            "location": "/csvscenario/index.html#events", 
+            "text": "Complete\n     scenario . on ( complete ,   function (){});   Label has changed\n     scenario . on ( labelchange ,   function (){});   Dump execution log\n     scenario . on ( log ,   function (){});   Notify error\n     scenario . on ( error ,   function (){});", 
+            "title": "Events"
+        }, 
+        {
+            "location": "/csvscenario/index.html#types-of-instructions", 
+            "text": "Each row in csv table is an instruction.", 
+            "title": "Types of instructions"
+        }, 
+        {
+            "location": "/csvscenario/index.html#run-custom-function", 
+            "text": "Run custom function of  scope , which passed from  scenario.load(...)  Format:  -,fnName,param0,param1,...    1 st  column of instruction:  -  Parameters will be converted to number, boolean, null, or string by default.", 
+            "title": "Run custom function"
+        }, 
+        {
+            "location": "/csvscenario/index.html#delay-execution", 
+            "text": "Run custom function after a delay.  Format:  time,fnName,param0,param1,...    1 st  column of instruction: a number  time-unit of delay is set from  scenario.load(...)  Parameters will be converted to number, boolean, null, or string by default.", 
+            "title": "Delay execution"
+        }, 
+        {
+            "location": "/csvscenario/index.html#wait-then-execution", 
+            "text": "Run custom function until  scenario.continue(eventName)  Format:  eventName,fnName,param0,param1,...    1 st  column of instruction: not a number, not a string start from  #  Execution will be hang until  scenario.continue(eventName)  is called  Parameters will be converted to number, boolean, null, or string by default.", 
+            "title": "Wait then execution"
+        }, 
+        {
+            "location": "/csvscenario/index.html#label", 
+            "text": "A label for  #GOTO  or  #IF  instructions.  Format:  #LABEL,label    1 st  column of instruction:  #LABEL , case insensitive.  Label  ''  is reserved, don't use  ''  for label name.   Example: A label named 'AA'  #LABEL,AA", 
+            "title": "Label"
+        }, 
+        {
+            "location": "/csvscenario/index.html#exit", 
+            "text": "Exit current execution.  Format:  #EXIT    1 st  column of instruction:  #EXIT , case insensitive.", 
+            "title": "Exit"
+        }, 
+        {
+            "location": "/csvscenario/index.html#goto", 
+            "text": "Go to  label  and execute.  Format:  #GOTO,label    1 st  column of instruction:  #GOTO , case insensitive.  An  error  event will be fired if label is not found.   Example: Goto label 'AA'  #GOTO,AA", 
+            "title": "Goto"
+        }, 
+        {
+            "location": "/csvscenario/index.html#if-goto", 
+            "text": "Go to  trueLabel  if condition is true, otherwise go to  falseLabel .  Format:  #IF,condition,trueLabel,falseLabel    1 st  column of instruction:  #IF , case insensitive.  conditon: boolean equation  this  is the  scope  passed from  scenario.load(...)    trueLabel/falseLabel: go to this label if condition is true/false  run next instruction if label is  ''  An  error  event will be fired if label is not found.     Example: Goto label 'AA' if (this.coin   100), else run next instruction  #IF,this.coin   100,AA", 
+            "title": "If-goto"
+        }, 
+        {
+            "location": "/csvscenario/index.html#wait", 
+            "text": "Run next instruction after a delay time, or  scenario.continue(eventName) .  Format:  #WAIT,time   #WAIT,eventName    1 st  column of instruction:  #WAIT , case insensitive.  2 nd  colume of instruction:  a number: a delay time  time-unit of delay is set from  scenario.load(...)    a string: an event name for  scenario.continue(eventName)     Example:    Wait 1 time-unit\n     #WAIT,1   Wait until 'click'\n     #WAIT,click  \n     scenario . continue ( click )", 
+            "title": "Wait"
         }, 
         {
             "location": "/tcrprecoderplugin/index.html", 

@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/clockplugin/index.html">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/csvscenario/index.html">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Clock - Notes of Phaser 3</title>
+        <title>CSV scenario - Notes of Phaser 3</title>
       
     
     
@@ -104,7 +104,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Clock
+                CSV scenario
               </span>
             
           
@@ -701,12 +701,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
     
     <label class="md-nav__link" for="nav-6">
       Time
@@ -758,134 +756,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="toc">
-        Clock
-      </label>
-    
-    <a href="index.html" title="Clock" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../clock/index.html" title="Clock" class="md-nav__link">
       Clock
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#source-code" title="Source code" class="md-nav__link">
-    Source code
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#import-class" title="Import class" class="md-nav__link">
-    Import class
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
-    Install global plugin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#start-counting" title="Start counting" class="md-nav__link">
-    Start counting
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-elapsed-time" title="Get elapsed time" class="md-nav__link">
-    Get elapsed time
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pause-resume-stop-counting" title="Pause, Resume, stop counting" class="md-nav__link">
-    Pause, Resume, stop counting
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#seek-elapsed-time" title="Seek elapsed time" class="md-nav__link">
-    Seek elapsed time
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#state-of-counting" title="State of counting" class="md-nav__link">
-    State of counting
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#time-scale" title="Time-scale" class="md-nav__link">
-    Time-scale
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-        <li class="md-nav__item">
-          <a href="#__comments" title="Comments" class="md-nav__link md-nav__link--active">
-            Comments
-          </a>
-        </li>
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -1126,10 +1001,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10" checked>
     
     <label class="md-nav__link" for="nav-10">
       Logic
@@ -1157,17 +1034,19 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10-2" type="checkbox" id="nav-10-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10-2" type="checkbox" id="nav-10-2" checked>
     
     <label class="md-nav__link" for="nav-10-2">
-      Array commands
+      Run commands
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
       <label class="md-nav__title" for="nav-10-2">
-        Array commands
+        Run commands
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -1193,6 +1072,195 @@
     <a href="../sequence/index.html" title="Sequence" class="md-nav__link">
       Sequence
     </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        CSV scenario
+      </label>
+    
+    <a href="index.html" title="CSV scenario" class="md-nav__link md-nav__link--active">
+      CSV scenario
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#import-class" title="Import class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
+    Install global plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-instance" title="Create instance" class="md-nav__link">
+    Create instance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load-csv-script" title="Load csv script" class="md-nav__link">
+    Load csv script
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#start-running-instructions" title="Start running instructions" class="md-nav__link">
+    Start running instructions
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" title="Events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#types-of-instructions" title="Types of instructions" class="md-nav__link">
+    Types of instructions
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#run-custom-function" title="Run custom function" class="md-nav__link">
+    Run custom function
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#delay-execution" title="Delay execution" class="md-nav__link">
+    Delay execution
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wait-then-execution" title="Wait then execution" class="md-nav__link">
+    Wait then execution
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#label" title="Label" class="md-nav__link">
+    Label
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exit" title="Exit" class="md-nav__link">
+    Exit
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#goto" title="Goto" class="md-nav__link">
+    Goto
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#if-goto" title="If-goto" class="md-nav__link">
+    If-goto
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wait" title="Wait" class="md-nav__link">
+    Wait
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+        <li class="md-nav__item">
+          <a href="#__comments" title="Comments" class="md-nav__link md-nav__link--active">
+            Comments
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -1496,44 +1564,98 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#start-counting" title="Start counting" class="md-nav__link">
-    Start counting
+  <a href="#load-csv-script" title="Load csv script" class="md-nav__link">
+    Load csv script
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-elapsed-time" title="Get elapsed time" class="md-nav__link">
-    Get elapsed time
+  <a href="#start-running-instructions" title="Start running instructions" class="md-nav__link">
+    Start running instructions
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#pause-resume-stop-counting" title="Pause, Resume, stop counting" class="md-nav__link">
-    Pause, Resume, stop counting
+  <a href="#events" title="Events" class="md-nav__link">
+    Events
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#seek-elapsed-time" title="Seek elapsed time" class="md-nav__link">
-    Seek elapsed time
+  <a href="#types-of-instructions" title="Types of instructions" class="md-nav__link">
+    Types of instructions
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#run-custom-function" title="Run custom function" class="md-nav__link">
+    Run custom function
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#delay-execution" title="Delay execution" class="md-nav__link">
+    Delay execution
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#state-of-counting" title="State of counting" class="md-nav__link">
-    State of counting
+  <a href="#wait-then-execution" title="Wait then execution" class="md-nav__link">
+    Wait then execution
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#label" title="Label" class="md-nav__link">
+    Label
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#time-scale" title="Time-scale" class="md-nav__link">
-    Time-scale
+  <a href="#exit" title="Exit" class="md-nav__link">
+    Exit
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#goto" title="Goto" class="md-nav__link">
+    Goto
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#if-goto" title="If-goto" class="md-nav__link">
+    If-goto
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wait" title="Wait" class="md-nav__link">
+    Wait
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1565,10 +1687,10 @@
               
                 
                 
-                  <h1>Clock</h1>
+                  <h1>CSV scenario</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>A clock to count elapsed time.</p>
+<p>Run script in csv format. Csv could be edited by excel or google document.</p>
 <ul>
 <li>Author: Rex</li>
 <li>Member of scene</li>
@@ -1578,19 +1700,19 @@
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p>User could import class directly, or install it by global plugin.</p>
 <h3 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">rexClock</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/clock.js&#39;</span><span class="p">;</span>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">rexCSVScenario</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/csvscenario.js&#39;</span><span class="p">;</span>
 </pre></div>
 
 <h3 id="install-global-plugin">Install global plugin<a class="headerlink" href="#install-global-plugin" title="Permanent link">&para;</a></h3>
 <p>Install plugin in <a href="../game/index.html#configuration">configuration of game</a></p>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">ClockPlugin</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/clock-plugin.js&#39;</span><span class="p">;</span>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">CSVScenarioPlugin</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/csvscenario-plugin.js&#39;</span><span class="p">;</span>
 
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
-            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexClock&#39;</span><span class="p">,</span>
-            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">ClockPlugin</span><span class="p">,</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexCSVScenario&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">CSVScenarioPlugin</span><span class="p">,</span>
             <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
         <span class="p">}</span>
         <span class="c1">// ...</span>
@@ -1602,42 +1724,180 @@
 </pre></div>
 
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">clock</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexClock&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
-    <span class="c1">// timeScale: 1</span>
-<span class="p">});</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">scenario</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexCSVScenario&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">);</span>
+</pre></div>
+
+<h3 id="load-csv-script">Load csv script<a class="headerlink" href="#load-csv-script" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">scenario</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="nx">csvString</span><span class="p">,</span> <span class="nx">scope</span><span class="p">,</span> <span class="p">{</span>
+    <span class="c1">// timeUnit: 0,        // &#39;ms&#39;|0|&#39;s&#39;|&#39;sec&#39;|1</span>
+    <span class="c1">// prefix: /^#([a-zA-Z]+)/</span>
+    <span class="c1">// argsConvert: true,</span>
+    <span class="c1">// argsConvertScope: undefined</span>
+<span class="p">})</span>
 </pre></div>
 
 <p>Properties</p>
 <ul>
-<li>timeScale : time-scale for counting elapsed time.</li>
+<li>timeUnit: time-unit of dt, for <a href="index.html#delay-execution">delay-execution</a><ul>
+<li><code>'ms'</code>, or <code>0</code> : dt in millisecond</li>
+<li><code>'s'</code>, <code>'sec'</code>, or 1 : dt in second</li>
 </ul>
-<h3 id="start-counting">Start counting<a class="headerlink" href="#start-counting" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">clock</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
-<span class="c1">// clock.start(startAt);  // start-at time in ms</span>
+</li>
+<li>prefix: regex of picking control instructions</li>
+<li>argsConvert: a callback to convert parameters of <a href="index.html#run-custom-function">run-custom-function</a>, or <code>true</code> to use default convert function</li>
+<li>argsConvertScope: scope of argsConvert</li>
+</ul>
+<h3 id="start-running-instructions">Start running instructions<a class="headerlink" href="#start-running-instructions" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">scenario</span><span class="p">.</span><span class="nx">start</span><span class="p">({</span>
+    <span class="c1">// label: &#39;&#39;,</span>
+    <span class="c1">// offset: 0</span>
+<span class="p">})</span>
 </pre></div>
 
-<h3 id="get-elapsed-time">Get elapsed time<a class="headerlink" href="#get-elapsed-time" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">now</span> <span class="o">=</span> <span class="nx">clock</span><span class="p">.</span><span class="nx">now</span><span class="p">;</span>  <span class="c1">// elapsed time in ms</span>
+<p>Properties</p>
+<ul>
+<li>label: Go to the label and execute. '' label is starting from 1<sup>st</sup> instruction</li>
+<li>offset: Offset time</li>
+</ul>
+<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Complete
+    <div class="codehilite"><pre><span></span><span class="nx">scenario</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
+</pre></div></li>
+<li>Label has changed
+    <div class="codehilite"><pre><span></span><span class="nx">scenario</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;labelchange&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
+</pre></div></li>
+<li>Dump execution log
+    <div class="codehilite"><pre><span></span><span class="nx">scenario</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
+</pre></div></li>
+<li>Notify error
+    <div class="codehilite"><pre><span></span><span class="nx">scenario</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
+</pre></div></li>
+</ul>
+<h3 id="types-of-instructions">Types of instructions<a class="headerlink" href="#types-of-instructions" title="Permanent link">&para;</a></h3>
+<p>Each row in csv table is an instruction.</p>
+<h4 id="run-custom-function">Run custom function<a class="headerlink" href="#run-custom-function" title="Permanent link">&para;</a></h4>
+<p>Run custom function of <code>scope</code>, which passed from <code>scenario.load(...)</code></p>
+<p>Format:</p>
+<div class="codehilite"><pre><span></span><span class="err">-,fnName,param0,param1,...</span>
 </pre></div>
 
-<h3 id="pause-resume-stop-counting">Pause, Resume, stop counting<a class="headerlink" href="#pause-resume-stop-counting" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">clock</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
-<span class="nx">clock</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
-<span class="nx">clock</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
+<ul>
+<li>1<sup>st</sup> column of instruction: <code>-</code></li>
+<li>Parameters will be converted to number, boolean, null, or string by default.</li>
+</ul>
+<h5 id="delay-execution">Delay execution<a class="headerlink" href="#delay-execution" title="Permanent link">&para;</a></h5>
+<p>Run custom function after a delay.</p>
+<p>Format:</p>
+<div class="codehilite"><pre><span></span><span class="err">time,fnName,param0,param1,...</span>
 </pre></div>
 
-<h3 id="seek-elapsed-time">Seek elapsed time<a class="headerlink" href="#seek-elapsed-time" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">clock</span><span class="p">.</span><span class="nx">seek</span><span class="p">(</span><span class="nx">time</span><span class="p">);</span>   <span class="c1">// elapsed time in ms</span>
+<ul>
+<li>1<sup>st</sup> column of instruction: a number</li>
+<li>time-unit of delay is set from <code>scenario.load(...)</code></li>
+<li>Parameters will be converted to number, boolean, null, or string by default.</li>
+</ul>
+<h5 id="wait-then-execution">Wait then execution<a class="headerlink" href="#wait-then-execution" title="Permanent link">&para;</a></h5>
+<p>Run custom function until <code>scenario.continue(eventName)</code></p>
+<p>Format:</p>
+<div class="codehilite"><pre><span></span><span class="err">eventName,fnName,param0,param1,...</span>
 </pre></div>
 
-<h3 id="state-of-counting">State of counting<a class="headerlink" href="#state-of-counting" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isRunning</span> <span class="o">=</span> <span class="nx">clock</span><span class="p">.</span><span class="nx">isRunning</span><span class="p">;</span>
+<ul>
+<li>1<sup>st</sup> column of instruction: not a number, not a string start from <code>#</code></li>
+<li>Execution will be hang until <code>scenario.continue(eventName)</code> is called</li>
+<li>Parameters will be converted to number, boolean, null, or string by default.</li>
+</ul>
+<h4 id="label">Label<a class="headerlink" href="#label" title="Permanent link">&para;</a></h4>
+<p>A label for <code>#GOTO</code> or <code>#IF</code> instructions.</p>
+<p>Format:</p>
+<div class="codehilite"><pre><span></span><span class="err">#LABEL,label</span>
 </pre></div>
 
-<h3 id="time-scale">Time-scale<a class="headerlink" href="#time-scale" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">timeScale</span> <span class="o">=</span> <span class="nx">clock</span><span class="p">.</span><span class="nx">timeScale</span><span class="p">;</span>
-<span class="nx">clock</span><span class="p">.</span><span class="nx">timeScale</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">;</span>
+<ul>
+<li>1<sup>st</sup> column of instruction: <code>#LABEL</code>, case insensitive.</li>
+<li>Label <code>''</code> is reserved, don't use <code>''</code> for label name.</li>
+</ul>
+<p>Example: A label named 'AA'</p>
+<div class="codehilite"><pre><span></span><span class="err">#LABEL,AA</span>
 </pre></div>
+
+<h4 id="exit">Exit<a class="headerlink" href="#exit" title="Permanent link">&para;</a></h4>
+<p>Exit current execution.</p>
+<p>Format:</p>
+<div class="codehilite"><pre><span></span><span class="err">#EXIT</span>
+</pre></div>
+
+<ul>
+<li>1<sup>st</sup> column of instruction: <code>#EXIT</code>, case insensitive.</li>
+</ul>
+<h4 id="goto">Goto<a class="headerlink" href="#goto" title="Permanent link">&para;</a></h4>
+<p>Go to <em>label</em> and execute.</p>
+<p>Format:</p>
+<div class="codehilite"><pre><span></span><span class="err">#GOTO,label</span>
+</pre></div>
+
+<ul>
+<li>1<sup>st</sup> column of instruction: <code>#GOTO</code>, case insensitive.</li>
+<li>An <code>error</code> event will be fired if label is not found.</li>
+</ul>
+<p>Example: Goto label 'AA'</p>
+<div class="codehilite"><pre><span></span><span class="err">#GOTO,AA</span>
+</pre></div>
+
+<h4 id="if-goto">If-goto<a class="headerlink" href="#if-goto" title="Permanent link">&para;</a></h4>
+<p>Go to <em>trueLabel</em> if condition is true, otherwise go to <em>falseLabel</em>.</p>
+<p>Format:</p>
+<div class="codehilite"><pre><span></span><span class="err">#IF,condition,trueLabel,falseLabel</span>
+</pre></div>
+
+<ul>
+<li>1<sup>st</sup> column of instruction: <code>#IF</code>, case insensitive.</li>
+<li>conditon: boolean equation<ul>
+<li><em>this</em> is the <code>scope</code> passed from <code>scenario.load(...)</code></li>
+</ul>
+</li>
+<li>trueLabel/falseLabel: go to this label if condition is true/false<ul>
+<li>run next instruction if label is <code>''</code></li>
+<li>An <code>error</code> event will be fired if label is not found.</li>
+</ul>
+</li>
+</ul>
+<p>Example: Goto label 'AA' if (this.coin &gt; 100), else run next instruction</p>
+<div class="codehilite"><pre><span></span><span class="err">#IF,this.coin &gt; 100,AA</span>
+</pre></div>
+
+<h4 id="wait">Wait<a class="headerlink" href="#wait" title="Permanent link">&para;</a></h4>
+<p>Run next instruction after a delay time, or <code>scenario.continue(eventName)</code>.</p>
+<p>Format:</p>
+<div class="codehilite"><pre><span></span><span class="err">#WAIT,time</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="err">#WAIT,eventName</span>
+</pre></div>
+
+<ul>
+<li>1<sup>st</sup> column of instruction: <code>#WAIT</code>, case insensitive.</li>
+<li>2<sup>nd</sup> colume of instruction:<ul>
+<li>a number: a delay time<ul>
+<li>time-unit of delay is set from <code>scenario.load(...)</code></li>
+</ul>
+</li>
+<li>a string: an event name for <code>scenario.continue(eventName)</code></li>
+</ul>
+</li>
+</ul>
+<p>Example: </p>
+<ul>
+<li>Wait 1 time-unit
+    <div class="codehilite"><pre><span></span><span class="err">#WAIT,1</span>
+</pre></div></li>
+<li>Wait until 'click'
+    <div class="codehilite"><pre><span></span><span class="err">#WAIT,click</span>
+</pre></div>
+    <div class="codehilite"><pre><span></span><span class="nx">scenario</span><span class="p">.</span><span class="k">continue</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">)</span>
+</pre></div></li>
+</ul>
                 
                   
                 
@@ -1651,9 +1911,9 @@
   <div id="disqus_thread"></div>
   <script>
     var disqus_config = function () {
-      this.page.url = "https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/clockplugin/index.html";
+      this.page.url = "https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/csvscenario/index.html";
       this.page.identifier =
-        "/clockplugin/index.html";
+        "/csvscenario/index.html";
     };
     (function() {
       var d = document, s = d.createElement("script");
@@ -1676,7 +1936,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../timeline/index.html" title="Timeline" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../sequence/index.html" title="Sequence" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -1685,19 +1945,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Timeline
+                Sequence
               </span>
             </div>
           </a>
         
         
-          <a href="../tween/index.html" title="Tween" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../tcrprecoderplugin/index.html" title="Recoder" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Tween
+                Recoder
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

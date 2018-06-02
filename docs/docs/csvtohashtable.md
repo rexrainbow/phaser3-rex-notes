@@ -29,7 +29,7 @@ table.loadCSV(csvString, {
 
 For exameple, csv string
 
-```json
+```raw
 name,hp,mp
 Rex,100,20
 Alice,300,40

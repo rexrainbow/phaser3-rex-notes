@@ -54,6 +54,8 @@ var scenario = scene.plugins.get('rexCSVScenario').add(scene);
 scenario.load(csvString, scope, {
     // timeUnit: 0,        // 'ms'|0|'s'|'sec'|1
     // prefix: /^#([a-zA-Z]+)/
+    // argsConvert: true,
+    // argsConvertScope: undefined
 })
 ```
 
@@ -63,6 +65,8 @@ Properties
     - `'ms'`, or `0` : dt in millisecond
     - `'s'`, `'sec'`, or 1 : dt in second
 - prefix: regex of picking control instructions
+- argsConvert: a callback to convert parameters of [run-custom-function](csvscenario.md#run-custom-function), or `true` to use default convert function
+- argsConvertScope: scope of argsConvert
 
 ### Start running instructions
 
@@ -107,13 +111,12 @@ Run custom function of `scope`, which passed from `scenario.load(...)`
 
 Format:
 
-```
+```raw
 -,fnName,param0,param1,...
 ```
 
 - 1st column of instruction: `-`
-
-##### Wait until complete
+- Parameters will be converted to number, boolean, null, or string by default.
 
 ##### Delay execution
 
@@ -121,12 +124,13 @@ Run custom function after a delay.
 
 Format:
 
-```
+```raw
 time,fnName,param0,param1,...
 ```
 
 - 1st column of instruction: a number
-- time-unit of delay is passed from `scenario.load(...)`
+- time-unit of delay is set from `scenario.load(...)`
+- Parameters will be converted to number, boolean, null, or string by default.
 
 ##### Wait then execution
 
@@ -134,12 +138,13 @@ Run custom function until `scenario.continue(eventName)`
 
 Format:
 
-```
+```raw
 eventName,fnName,param0,param1,...
 ```
 
-- 1st column of instruction: not a number
+- 1st column of instruction: not a number, not a string start from `#`
 - Execution will be hang until `scenario.continue(eventName)` is called
+- Parameters will be converted to number, boolean, null, or string by default.
 
 #### Label
 
@@ -147,7 +152,7 @@ A label for `#GOTO` or `#IF` instructions.
 
 Format:
 
-```
+```raw
 #LABEL,label
 ```
 
@@ -156,7 +161,7 @@ Format:
 
 Example: A label named 'AA'
 
-```
+```raw
 #LABEL,AA
 ```
 
@@ -166,7 +171,7 @@ Exit current execution.
 
 Format:
 
-```
+```raw
 #EXIT
 ```
 
@@ -178,7 +183,7 @@ Go to *label* and execute.
 
 Format:
 
-```
+```raw
 #GOTO,label
 ```
 
@@ -187,7 +192,7 @@ Format:
 
 Example: Goto label 'AA'
 
-```
+```raw
 #GOTO,AA
 ```
 
@@ -197,7 +202,7 @@ Go to *trueLabel* if condition is true, otherwise go to *falseLabel*.
 
 Format:
 
-```
+```raw
 #IF,condition,trueLabel,falseLabel
 ```
 
@@ -210,32 +215,40 @@ Format:
 
 Example: Goto label 'AA' if (this.coin > 100), else run next instruction
 
-```
+```raw
 #IF,this.coin > 100,AA
 ```
 
-### Wait time
+#### Wait
+
+Run next instruction after a delay time, or `scenario.continue(eventName)`.
 
 Format:
 
-```
-#WAITTIME,time
-```
-
-### Wait event
-
-```
-#WAITEVENT,eventName
-```
-
-### Wait
-
-Format:
-
-```
+```raw
 #WAIT,time
 ```
 
-```
+```raw
 #WAIT,eventName
 ```
+
+- 1st column of instruction: `#WAIT`, case insensitive.
+- 2nd colume of instruction:
+    - a number: a delay time
+        - time-unit of delay is set from `scenario.load(...)`
+    - a string: an event name for `scenario.continue(eventName)`
+
+Example: 
+
+- Wait 1 time-unit
+    ```raw
+    #WAIT,1
+    ```
+- Wait until 'click'
+    ```raw
+    #WAIT,click
+    ```
+    ```javascript
+    scenario.continue('click')
+    ```
