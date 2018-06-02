@@ -1624,8 +1624,8 @@
 <li>Run command :
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">eventEmitter</span> <span class="o">=</span> <span class="nx">actionScope</span><span class="p">[</span><span class="nx">fnName</span><span class="p">].</span><span class="nx">call</span><span class="p">(</span><span class="nx">actionScope</span><span class="p">,</span> <span class="nx">param0</span><span class="p">,</span> <span class="nx">param1</span> <span class="p">...);</span>
 </pre></div>
-        - Return <code>eventEmitter</code> to pause the sequence, otherwise run next command<br />
-        - Sequence will continue when firing <code>complete</code> event (i.e. <code>eventEmitter.emit('complete')</code>)</li>
+        - Return an <a href="../eventemitter3/index.html">event emitter</a> to pause the sequence, otherwise run next command<br />
+        - Sequence will continue when that event emitter fires <code>complete</code> event</li>
 </ul>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>

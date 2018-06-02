@@ -1197,6 +1197,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#task" title="Task" class="md-nav__link">
+    Task
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1233,6 +1240,33 @@
           <li class="md-nav__item">
   <a href="#wait" title="Wait" class="md-nav__link">
     Wait
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-methods" title="Other methods" class="md-nav__link">
+    Other methods
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pause" title="Pause" class="md-nav__link">
+    Pause
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resume" title="Resume" class="md-nav__link">
+    Resume
   </a>
   
 </li>
@@ -1614,6 +1648,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#task" title="Task" class="md-nav__link">
+    Task
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1650,6 +1691,33 @@
           <li class="md-nav__item">
   <a href="#wait" title="Wait" class="md-nav__link">
     Wait
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-methods" title="Other methods" class="md-nav__link">
+    Other methods
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pause" title="Pause" class="md-nav__link">
+    Pause
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resume" title="Resume" class="md-nav__link">
+    Resume
   </a>
   
 </li>
@@ -1808,6 +1876,9 @@
 <li>Execution will be hang until <code>scenario.continue(eventName)</code> is called</li>
 <li>Parameters will be converted to number, boolean, null, or string by default.</li>
 </ul>
+<h5 id="task">Task<a class="headerlink" href="#task" title="Permanent link">&para;</a></h5>
+<p>Scenario will be paused if custom function return an <a href="../eventemitter3/index.html">event emitter</a>, resumed when that evnt emitter fires <code>complete</code> event.</p>
+<p>See also: <a href="../sequence/index.html#action-of-commands">Sequence</a></p>
 <h4 id="label">Label<a class="headerlink" href="#label" title="Permanent link">&para;</a></h4>
 <p>A label for <code>#GOTO</code> or <code>#IF</code> instructions.</p>
 <p>Format:</p>
@@ -1898,6 +1969,14 @@
     <div class="codehilite"><pre><span></span><span class="nx">scenario</span><span class="p">.</span><span class="k">continue</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">)</span>
 </pre></div></li>
 </ul>
+<h3 id="other-methods">Other methods<a class="headerlink" href="#other-methods" title="Permanent link">&para;</a></h3>
+<h4 id="pause">Pause<a class="headerlink" href="#pause" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">scenario</span><span class="p">.</span><span class="nx">pause</span><span class="p">()</span>
+</pre></div>
+
+<h4 id="resume">Resume<a class="headerlink" href="#resume" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">scenario</span><span class="p">.</span><span class="nx">resume</span><span class="p">()</span>
+</pre></div>
                 
                   
                 

@@ -146,6 +146,12 @@ eventName,fnName,param0,param1,...
 - Execution will be hang until `scenario.continue(eventName)` is called
 - Parameters will be converted to number, boolean, null, or string by default.
 
+##### Task
+
+Scenario will be paused if custom function return an [event emitter](eventemitter3.md), resumed when that evnt emitter fires `complete` event.
+
+See also: [Sequence](sequence.md#action-of-commands)
+
 #### Label
 
 A label for `#GOTO` or `#IF` instructions.
@@ -252,3 +258,17 @@ Example:
     ```javascript
     scenario.continue('click')
     ```
+
+### Other methods
+
+#### Pause
+
+```javascript
+scenario.pause()
+```
+
+#### Resume
+
+```javascript
+scenario.resume()
+```

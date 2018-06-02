@@ -42,6 +42,7 @@ class CSVScenario extends EE {
     boot() {}
 
     shutdown() {
+        this.clean();
         this.parent = undefined;
     }
 

@@ -87,8 +87,8 @@ seq.start();
     ```javascript
     var eventEmitter = actionScope[fnName].call(actionScope, param0, param1 ...);
     ```
-        - Return `eventEmitter` to pause the sequence, otherwise run next command  
-        - Sequence will continue when firing `complete` event (i.e. `eventEmitter.emit('complete')`)
+        - Return an [event emitter](eventemitter3.md) to pause the sequence, otherwise run next command  
+        - Sequence will continue when that event emitter fires `complete` event
 
 ### Events
 
