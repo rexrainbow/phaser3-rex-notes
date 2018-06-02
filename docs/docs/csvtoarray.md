@@ -11,6 +11,8 @@ Generate array from csv string.
 
 ## Usage
 
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/csv-to-array)
+
 ### Generate array
 
 ```javascript

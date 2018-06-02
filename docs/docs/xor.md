@@ -12,6 +12,8 @@ Encrypt or decrypt string by XOR algorithm.
 
 ## Usage
 
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/xor)
+
 User could import class directly, or install it by global plugin.
 
 ### Import class

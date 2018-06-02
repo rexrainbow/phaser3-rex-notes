@@ -11,6 +11,8 @@ Hash table indexed by (col-key, row-key) from csv string.
 
 ## Usage
 
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/csv-to-hash-table)
+
 ### Create instance
 
 ```javascript

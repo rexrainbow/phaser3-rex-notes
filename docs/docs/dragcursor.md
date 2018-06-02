@@ -11,6 +11,8 @@ Simulate curosr keys according dragging events.
 
 ## Usage
 
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/dragcursor)
+
 ### Create instance
 
 ```javascript

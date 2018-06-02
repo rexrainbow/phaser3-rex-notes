@@ -1298,11 +1298,6 @@
   </li>
 
         
-      </ul>
-    </nav>
-  </li>
-
-        
           
           
           
@@ -1310,13 +1305,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10-3" type="checkbox" id="nav-10-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10-2-4" type="checkbox" id="nav-10-2-4">
     
-    <label class="md-nav__link" for="nav-10-3">
+    <label class="md-nav__link" for="nav-10-2-4">
       TCRP
     </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-10-3">
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-10-2-4">
         TCRP
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1343,6 +1338,11 @@
     <a href="../tcrpplayerplugin/index.html" title="Player" class="md-nav__link">
       Player
     </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
         
@@ -1766,6 +1766,7 @@
 <h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/clock/ClockPlugin.js">Link</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/csv-scenario">Sample code</a></p>
 <p>User could import class directly, or install it by global plugin.</p>
 <h3 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">rexCSVScenario</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/csvscenario.js&#39;</span><span class="p">;</span>
@@ -1877,9 +1878,11 @@
 <li>Parameters will be converted to number, boolean, null, or string by default.</li>
 </ul>
 <h5 id="task">Task<a class="headerlink" href="#task" title="Permanent link">&para;</a></h5>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/csv-scenario/task.js">Sample code</a></p>
 <p>Scenario will be paused if custom function return an <a href="../eventemitter3/index.html">event emitter</a>, resumed when that evnt emitter fires <code>complete</code> event.</p>
 <p>See also: <a href="../sequence/index.html#action-of-commands">Sequence</a></p>
 <h4 id="label">Label<a class="headerlink" href="#label" title="Permanent link">&para;</a></h4>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/csv-scenario/label-exit.js">Sample code</a></p>
 <p>A label for <code>#GOTO</code> or <code>#IF</code> instructions.</p>
 <p>Format:</p>
 <div class="codehilite"><pre><span></span><span class="err">#LABEL,label</span>
@@ -1903,6 +1906,7 @@
 <li>1<sup>st</sup> column of instruction: <code>#EXIT</code>, case insensitive.</li>
 </ul>
 <h4 id="goto">Goto<a class="headerlink" href="#goto" title="Permanent link">&para;</a></h4>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/csv-scenario/goto.js">Sample code</a></p>
 <p>Go to <em>label</em> and execute.</p>
 <p>Format:</p>
 <div class="codehilite"><pre><span></span><span class="err">#GOTO,label</span>
@@ -1917,6 +1921,7 @@
 </pre></div>
 
 <h4 id="if-goto">If-goto<a class="headerlink" href="#if-goto" title="Permanent link">&para;</a></h4>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/csv-scenario/if.js">Sample code</a></p>
 <p>Go to <em>trueLabel</em> if condition is true, otherwise go to <em>falseLabel</em>.</p>
 <p>Format:</p>
 <div class="codehilite"><pre><span></span><span class="err">#IF,condition,trueLabel,falseLabel</span>

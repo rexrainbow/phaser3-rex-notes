@@ -11,6 +11,8 @@ Fade out game object then destroy it.
 
 ## Usage
 
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/fade/fadeout-destroy.js)
+
 ```javascript
 fadeOutDestroy(gameobject, duration);
 ```

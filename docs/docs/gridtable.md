@@ -11,6 +11,8 @@ Viewer of grid table, to manipulate game object of each visible cell.
 
 ## Usage
 
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/gridtable)
+
 ### Create instance
 
 ```javascript

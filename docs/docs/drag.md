@@ -11,6 +11,8 @@ Drag game object.
 
 ## Usage
 
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/drag)
+
 User could import class directly, or install it by global plugin.
 
 ### Import class
@@ -91,6 +93,8 @@ gameobject.drag.setAxisMode(m);  //0|'both'|'h&v'|1|'horizontal'|'h'|2|'vertical
 
 ### Try drag
 
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/drag/try-drag.js)
+
 Game object will be dragged if there is any point above it.
 
 ```javascript
@@ -98,6 +102,8 @@ gameobject.drag.drag();
 ```
 
 ### Drop
+
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/drag/dragend.js)
 
 Game object will be dropped(dragend) manually.
 

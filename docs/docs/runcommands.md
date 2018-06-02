@@ -11,6 +11,8 @@ Run commands in array.
 
 ## Usage
 
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/run-commands)
+
 ### Run commands
 
 ```javascript

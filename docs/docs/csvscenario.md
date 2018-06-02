@@ -11,6 +11,8 @@ Run script in csv format. Csv could be edited by excel or google document.
 
 ## Usage
 
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/csv-scenario)
+
 User could import class directly, or install it by global plugin.
 
 ### Import class
@@ -148,11 +150,15 @@ eventName,fnName,param0,param1,...
 
 ##### Task
 
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/csv-scenario/task.js)
+
 Scenario will be paused if custom function return an [event emitter](eventemitter3.md), resumed when that evnt emitter fires `complete` event.
 
 See also: [Sequence](sequence.md#action-of-commands)
 
 #### Label
+
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/csv-scenario/label-exit.js)
 
 A label for `#GOTO` or `#IF` instructions.
 
@@ -185,6 +191,8 @@ Format:
 
 #### Goto
 
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/csv-scenario/goto.js)
+
 Go to *label* and execute.
 
 Format:
@@ -203,6 +211,8 @@ Example: Goto label 'AA'
 ```
 
 #### If-goto
+
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/csv-scenario/if.js)
 
 Go to *trueLabel* if condition is true, otherwise go to *falseLabel*.
 

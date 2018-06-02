@@ -11,6 +11,8 @@ Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
 
 ## Usage
 
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/bbcodetext)
+
 ### BBCode
 
 - bold: `[b]text[/b]`

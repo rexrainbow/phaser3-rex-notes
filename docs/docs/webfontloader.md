@@ -11,6 +11,8 @@ Load web font by [google webfont loader](https://github.com/typekit/webfontloade
 
 ## Usage
 
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/webfontloader)
+
 ### Install plugin
 
 Install plugin in [configuration of game](game.md#configuration)

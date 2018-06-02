@@ -11,21 +11,44 @@ Compress string using LZ-based compression algorithm. [Reference](https://github
 
 ## Usage
 
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/lzstring)
+
+User could import class directly, or install it by global plugin.
+
+### Import class
+
+```javascript
+import rexXOR from './plugins/xor.js';
+```
+
+### Install global plugin
+
+Install plugin in [configuration of game](game.md#configuration)
+
+```javascript
+import LZString from './plugins/lzstring-plugin.js';
+
+var config = {
+    // ...
+    plugins: {
+        global: [{
+            key: 'rexLZString',
+            plugin: LZString,
+            start: true
+        },
+        // ...
+        ]
+    }
+    // ...
+};
+var game = new Phaser.Game(config);
+```
+
 ### Create instance
 
 ```javascript
-var lzstring = new LZStringPlugin(scene, {
-    //encoding: 0,    // 0|'none'|1|'base64'|2|'utf16'|3|'uri'
-});
+var lzstring = scene.plugins.get('rexLZString');
 ```
-
-Properties
-
-- encoding : 
-    - `'none'`, or `0` : no encoding.
-    - `'base64'`, or `1` : base64 encoding.
-    - `'utf16'`, or `2` : UTF16 encoding.
-    - `'uri'`, or `3` : URI encoding.
 
 ### Compression
 
@@ -44,3 +67,9 @@ var decompressionResult = lzstring.decompress(compressionResult);
 ```javascript
 lzstring.setEncoding(m);  // 0|'none'|1|'base64'|2|'utf16'|3|'uri'
 ```
+
+- encoding mode : 
+    - `'none'`, or `0` : no encoding.
+    - `'base64'`, or `1` : base64 encoding.
+    - `'utf16'`, or `2` : UTF16 encoding.
+    - `'uri'`, or `3` : URI encoding.

@@ -11,6 +11,8 @@ Typing text on text object, [bbcode text object](bbcodetext.md), or [tag text bo
 
 ## Usage
 
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/texttyping)
+
 User could import class directly, or install it by global plugin.
 
 ### Import class

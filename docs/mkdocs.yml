@@ -60,9 +60,9 @@ pages:
       - Run commands: runcommands.md
       - Sequence: sequence.md
       - CSV scenario: csvscenario.md
-    - TCRP:
-        - Recoder: tcrprecoderplugin.md
-        - Player: tcrpplayerplugin.md
+      - TCRP:
+          - Recoder: tcrprecoderplugin.md
+          - Player: tcrpplayerplugin.md
 - Camera:
     - Camera: camera.md
 - Math:

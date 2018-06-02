@@ -11,6 +11,8 @@ Drawing on [canvas](https://www.w3schools.com/html/html5_canvas.asp).
 
 ## Usage
 
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/canvas)
+
 ### Install plugin
 
 Install plugin in [configuration of game](game.md#configuration)

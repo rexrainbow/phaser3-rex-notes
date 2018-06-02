@@ -12,6 +12,8 @@ Fade-in/fade-out volume of sound.
 
 ## Usage
 
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/audio/fade.js)
+
 - Play and fade in voluem
     ```javascript
     var sound = soundFadeIn(scene, sound, duration);  // sound: sound instance, or a key of audio cache
