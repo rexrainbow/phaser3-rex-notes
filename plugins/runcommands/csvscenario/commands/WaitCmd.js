@@ -7,12 +7,50 @@ class WaitCmd extends BaseCmd {
     }
 
     parse(inst, index) {
-        if (!isNaN(inst[1])) {
-            inst[0] = 'waittime';
-        } else {
-            inst[0] = 'waitevent';
+        inst.length = 2;
+        var eventName = this.getEventName(inst);
+        if (!isNaN(eventName)) {
+            inst[1] = parseFloat(eventName);
         }
-        return this.scenario.getCmdHandler(inst).parse(inst, index);
+        return inst;
+    }
+
+    run(inst) {
+        var eventName = this.getEventName(inst);
+        if (typeof (eventName) === 'number') {
+            this.waitTime(eventName);
+        } else {
+            this.waitEvent(eventName);
+        }
+    }
+
+    waitTime(delayTime) {
+        if (delayTime > this.scenario.offset) {
+            delayTime -= this.scenario.offset;
+            this.scenario.offset = 0;
+            if (this.scenario.isDebugMode) {
+                this.scenario.log('#WAIT: ' + delayTime);
+            }
+            this.scenario.wait(delayTime);
+        } else {
+            this.scenario.offset -= delayTime;
+        }
+    }
+
+    waitEvent(eventName) {
+        if (this.scenario.isDebugMode) {
+            this.scenario.log('#WAIT: ' + eventName);
+        }
+        this.scenario.wait(eventName);
+    }
+
+    getEventName(inst) {
+        var eventName = inst[1];
+        if (eventName == null) {
+            eventName = '';
+            inst[1] = eventName;
+        }
+        return eventName;
     }
 }
 

@@ -226,8 +226,8 @@ class CSVScenario extends EE {
             } else if (!isNaN(name)) {
                 var time = parseFloat(name);
                 if (time > 0) {
-                    // insert 'waittime' command
-                    this.appendCommand(['waittime', time]);
+                    // insert 'wait' command
+                    this.appendCommand(['wait', time]);
                 }
                 item[0] = '-';
                 this.appendCommand(item);
@@ -242,8 +242,8 @@ class CSVScenario extends EE {
                 }
 
             } else {
-                // insert 'waitevent' command
-                this.appendCommand(['waitevent', name]);
+                // insert 'wait' command
+                this.appendCommand(['wait', name]);
                 item[0] = '-';
                 this.appendCommand(item);
             }
