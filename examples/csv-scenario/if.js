@@ -8,15 +8,18 @@ var csvString =
 #IF,,CC
 #LABEL,AA,
 -,print,I can eat anything
-1,print,Ha
+click,print,Ha
+1,print,doneAA
 #EXIT,,
 #LABEL,BB,
 -,print,I have a cup of tea
-1,print,Bla bla bla
+click,print,Bla bla bla
+1,print,doneBB
 #EXIT,,
 #LABEL,CC,
 -,print,Game over
-1,print,Ouch
+click,print,Ouch
+1,print,doneCC
 #EXIT,,`;
 
 class ActionKlass extends Phaser.Events.EventEmitter {

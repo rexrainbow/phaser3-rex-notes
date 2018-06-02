@@ -5,8 +5,9 @@ import CSVScenarioPlugin from './../../plugins/csvscenario-plugin.js';
 var csvString =
     `-,print,start
 #LABEL,AA,
-1,print,hello
+-,print,hello
 1,print,world
+#WAIT,1,
 #GOTO,AA,`;
 
 class ActionKlass extends Phaser.Events.EventEmitter {
