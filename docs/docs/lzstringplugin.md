@@ -47,8 +47,18 @@ var game = new Phaser.Game(config);
 ### Create instance
 
 ```javascript
-var lzstring = scene.plugins.get('rexLZString');
+var lzstring = scene.plugins.get('rexLZString').add({
+    // encoding: 'none'     // 'none'|0, 'base64'|1, 'utf16'|2, 'uri'|3
+});
 ```
+
+Properties :
+
+- encoding mode : 
+    - `'none'`, or `0` : no encoding.
+    - `'base64'`, or `1` : base64 encoding.
+    - `'utf16'`, or `2` : UTF16 encoding.
+    - `'uri'`, or `3` : URI encoding.
 
 ### Compression
 
@@ -67,9 +77,3 @@ var decompressionResult = lzstring.decompress(compressionResult);
 ```javascript
 lzstring.setEncoding(m);  // 0|'none'|1|'base64'|2|'utf16'|3|'uri'
 ```
-
-- encoding mode : 
-    - `'none'`, or `0` : no encoding.
-    - `'base64'`, or `1` : base64 encoding.
-    - `'utf16'`, or `2` : UTF16 encoding.
-    - `'uri'`, or `3` : URI encoding.

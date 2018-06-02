@@ -3327,7 +3327,7 @@
         }, 
         {
             "location": "/lzstringplugin/index.html", 
-            "text": "Introduction\n\n\nCompress string using LZ-based compression algorithm. \nReference\n\n\n\n\nAuthor: Rex\n\n\nMember of scene\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nSample code\n\n\nUser could import class directly, or install it by global plugin.\n\n\nImport class\n\n\nimport\n \nrexXOR\n \nfrom\n \n./plugins/xor.js\n;\n\n\n\n\n\nInstall global plugin\n\n\nInstall plugin in \nconfiguration of game\n\n\nimport\n \nLZString\n \nfrom\n \n./plugins/lzstring-plugin.js\n;\n\n\n\nvar\n \nconfig\n \n=\n \n{\n\n    \n// ...\n\n    \nplugins\n:\n \n{\n\n        \nglobal\n:\n \n[{\n\n            \nkey\n:\n \nrexLZString\n,\n\n            \nplugin\n:\n \nLZString\n,\n\n            \nstart\n:\n \ntrue\n\n        \n},\n\n        \n// ...\n\n        \n]\n\n    \n}\n\n    \n// ...\n\n\n};\n\n\nvar\n \ngame\n \n=\n \nnew\n \nPhaser\n.\nGame\n(\nconfig\n);\n\n\n\n\n\nCreate instance\n\n\nvar\n \nlzstring\n \n=\n \nscene\n.\nplugins\n.\nget\n(\nrexLZString\n);\n\n\n\n\n\nCompression\n\n\nvar\n \ncompressionResult\n \n=\n \nlzstring\n.\ncompress\n(\nsrc\n);\n\n\n\n\n\nDecompression\n\n\nvar\n \ndecompressionResult\n \n=\n \nlzstring\n.\ndecompress\n(\ncompressionResult\n);\n\n\n\n\n\nSet encoding\n\n\nlzstring\n.\nsetEncoding\n(\nm\n);\n  \n// 0|\nnone\n|1|\nbase64\n|2|\nutf16\n|3|\nuri\n\n\n\n\n\n\n\nencoding mode : \n\n\n'none'\n, or \n0\n : no encoding.\n\n\n'base64'\n, or \n1\n : base64 encoding.\n\n\n'utf16'\n, or \n2\n : UTF16 encoding.\n\n\n'uri'\n, or \n3\n : URI encoding.", 
+            "text": "Introduction\n\n\nCompress string using LZ-based compression algorithm. \nReference\n\n\n\n\nAuthor: Rex\n\n\nMember of scene\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nSample code\n\n\nUser could import class directly, or install it by global plugin.\n\n\nImport class\n\n\nimport\n \nrexXOR\n \nfrom\n \n./plugins/xor.js\n;\n\n\n\n\n\nInstall global plugin\n\n\nInstall plugin in \nconfiguration of game\n\n\nimport\n \nLZString\n \nfrom\n \n./plugins/lzstring-plugin.js\n;\n\n\n\nvar\n \nconfig\n \n=\n \n{\n\n    \n// ...\n\n    \nplugins\n:\n \n{\n\n        \nglobal\n:\n \n[{\n\n            \nkey\n:\n \nrexLZString\n,\n\n            \nplugin\n:\n \nLZString\n,\n\n            \nstart\n:\n \ntrue\n\n        \n},\n\n        \n// ...\n\n        \n]\n\n    \n}\n\n    \n// ...\n\n\n};\n\n\nvar\n \ngame\n \n=\n \nnew\n \nPhaser\n.\nGame\n(\nconfig\n);\n\n\n\n\n\nCreate instance\n\n\nvar\n \nlzstring\n \n=\n \nscene\n.\nplugins\n.\nget\n(\nrexLZString\n).\nadd\n({\n\n    \n// encoding: \nnone\n     // \nnone\n|0, \nbase64\n|1, \nutf16\n|2, \nuri\n|3\n\n\n});\n\n\n\n\n\nProperties :\n\n\n\n\nencoding mode : \n\n\n'none'\n, or \n0\n : no encoding.\n\n\n'base64'\n, or \n1\n : base64 encoding.\n\n\n'utf16'\n, or \n2\n : UTF16 encoding.\n\n\n'uri'\n, or \n3\n : URI encoding.\n\n\n\n\n\n\n\n\nCompression\n\n\nvar\n \ncompressionResult\n \n=\n \nlzstring\n.\ncompress\n(\nsrc\n);\n\n\n\n\n\nDecompression\n\n\nvar\n \ndecompressionResult\n \n=\n \nlzstring\n.\ndecompress\n(\ncompressionResult\n);\n\n\n\n\n\nSet encoding\n\n\nlzstring\n.\nsetEncoding\n(\nm\n);\n  \n// 0|\nnone\n|1|\nbase64\n|2|\nutf16\n|3|\nuri", 
             "title": "LZ string"
         }, 
         {
@@ -3357,7 +3357,7 @@
         }, 
         {
             "location": "/lzstringplugin/index.html#create-instance", 
-            "text": "var   lzstring   =   scene . plugins . get ( rexLZString );", 
+            "text": "var   lzstring   =   scene . plugins . get ( rexLZString ). add ({ \n     // encoding:  none      //  none |0,  base64 |1,  utf16 |2,  uri |3  });   Properties :   encoding mode :   'none' , or  0  : no encoding.  'base64' , or  1  : base64 encoding.  'utf16' , or  2  : UTF16 encoding.  'uri' , or  3  : URI encoding.", 
             "title": "Create instance"
         }, 
         {
@@ -3372,7 +3372,7 @@
         }, 
         {
             "location": "/lzstringplugin/index.html#set-encoding", 
-            "text": "lzstring . setEncoding ( m );    // 0| none |1| base64 |2| utf16 |3| uri    encoding mode :   'none' , or  0  : no encoding.  'base64' , or  1  : base64 encoding.  'utf16' , or  2  : UTF16 encoding.  'uri' , or  3  : URI encoding.", 
+            "text": "lzstring . setEncoding ( m );    // 0| none |1| base64 |2| utf16 |3| uri", 
             "title": "Set encoding"
         }, 
         {

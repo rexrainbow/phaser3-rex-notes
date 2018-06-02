@@ -4,7 +4,7 @@ import lzstring from './../../utils/lzstring/lz-string.min.js';
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 
 class LZStringKlass {
-    constructor(scene, config) {
+    constructor(config) {
         this.resetFromJSON(config);
     }
 

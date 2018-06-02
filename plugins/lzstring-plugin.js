@@ -22,17 +22,8 @@ class LZStringPlugin extends Phaser.Plugins.BasePlugin {
         this.systems = null;
     }
 
-    setEncoding(m) {
-        this.lzstring.setEncoding(m);
-        return this;
-    }
-
-    compress(s) {
-        return this.lzstring.compress(s);
-    }
-
-    decompress(s) {
-        return this.lzstring.decompress(s);
+    add(config) {
+        return new LZString(config);
     }
 }
 export default LZStringPlugin;

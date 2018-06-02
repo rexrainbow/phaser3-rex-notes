@@ -24,8 +24,9 @@ class Demo extends Phaser.Scene {
         }
 
       
-        var lzstring = this.plugins.get('rexLZString');
-        //lzstring.setEncoding('uri');  // 'none', 'base64', 'utf16', 'uri'
+        var lzstring = this.plugins.get('rexLZString').add({
+            // encoding: 'none'     // 'none'|0, 'base64'|1, 'utf16'|2, 'uri'|3
+        });
         var compressResult = lzstring.compress(src);
         var decompressResult = lzstring.decompress(compressResult);
 
