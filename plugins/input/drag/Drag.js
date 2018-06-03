@@ -2,7 +2,7 @@
 
 import GetSceneObject from './../../utils/system/GetSceneObject.js';
 
-const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
+const GetValue = Phaser.Utils.Objects.GetValue;
 const DistanceBetween = Phaser.Math.Distance.Between;
 const RotateAroundDistance = Phaser.Math.RotateAroundDistance;
 
@@ -22,9 +22,9 @@ class Drag {
      * @returns {object} this object
      */
     resetFromJSON(o) {
-        this.setEnable(GetAdvancedValue(o, "enable", true));
-        this.setAxisMode(GetAdvancedValue(o, "axis", 0));
-        this.setAxisRotation(GetAdvancedValue(o, "rotation", 0));
+        this.setEnable(GetValue(o, "enable", true));
+        this.setAxisMode(GetValue(o, "axis", 0));
+        this.setAxisRotation(GetValue(o, "rotation", 0));
         return this;
     }
 
