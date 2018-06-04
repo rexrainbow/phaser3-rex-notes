@@ -13,7 +13,7 @@ class Slider {
         this.scene = GetSceneObject(gameobject);
 
         this._value = 0;
-        this.endpoints = [{
+        this.endPoints = [{
                 x: 0,
                 y: 0
             },
@@ -28,9 +28,9 @@ class Slider {
     }
 
     resetFromJSON(o) {
-        var endpoints = GetValue(o, "endPoints", undefined);
-        if (endpoints !== undefined) {
-            this.setEndPoints(endpoints);
+        var endPoints = GetValue(o, "endPoints", undefined);
+        if (endPoints !== undefined) {
+            this.setEndPoints(endPoints);
         }
         this.setValue(GetValue(o, "value", 0));
         this.setDragEnable(GetValue(o, "dragEnable", true));
@@ -76,7 +76,7 @@ class Slider {
     }
 
     setEndPoints(p0x, p0y, p1x, p1y) {
-        var points = this.endpoints;
+        var points = this.endPoints;
         if (typeof (p0x) === 'number') {
             points[0].x = p0x;
             points[0].y = p0y;
@@ -99,13 +99,17 @@ class Slider {
         this._value = Clamp(value, 0, 1);
 
         var gameobject = this.gameobject;
-        var points = this.endpoints;
+        var points = this.endPoints;
         gameobject.x = Linear(points[0].x, points[1].x, this._value);
         gameobject.y = Linear(points[0].y, points[1].y, this._value);
     }
 
     setValue(value) {
         this.value = value;
+    }
+
+    addValue(inc) {
+        this.value += inc;
     }
 
     getValue(min, max) {
@@ -118,6 +122,26 @@ class Slider {
 
     onDragging(pointer, dragX, dragY) {
         var gameobject = this.gameobject;
+        var endPoints = this.endPoints;
+        if (endPoints[0].y === endPoints[1].y) {
+            var min = Math.min(endPoints[0].x, endPoints[1].x);
+            var max = Math.max(endPoints[0].x, endPoints[1].x);
+            var x = Clamp(dragX, min, max);
+            this._value = (x - min) / (max - min);
+
+            gameobject.x = x;
+            gameobject.y = endPoints[0].y;
+        } else if (endPoints[0].x === endPoints[1].x) {
+            var min = Math.min(endPoints[0].y, endPoints[1].y);
+            var max = Math.max(endPoints[0].y, endPoints[1].y);
+            var y = Clamp(dragX, min, max);
+            this._value = (y - min) / (max - min);
+
+            gameobject.x = endPoints[0].x;
+            gameobject.y = y;
+        } else {
+            // TODO
+        }
     }
 }
 

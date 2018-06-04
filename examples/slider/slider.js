@@ -32,7 +32,7 @@ class Demo extends Phaser.Scene {
 
         this.add.graphics()
             .lineStyle(3, 0x55ff55, 1)
-            .strokePoints(this.img.slider.endpoints);
+            .strokePoints(this.img.slider.endPoints);
         this.text = this.add.text(100, 100, '', {
             fontSize: '20px'
         });
