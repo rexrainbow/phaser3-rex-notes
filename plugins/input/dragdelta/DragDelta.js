@@ -52,6 +52,10 @@ class DragDelta extends EE {
             this.gameobject.setInteractive(); // only need setInteractive once
         }
 
+        if (e === undefined) {
+            e = true;
+        }
+
         this.enable = !!e;
         if (!this.enable) {
             this.onDragEnd();
@@ -67,10 +71,10 @@ class DragDelta extends EE {
         this.preY = pointer.y;
     }
 
-    onDragging(pointer) {     
+    onDragging(pointer) {
         if (this.preX === undefined) {
             return;
-        }          
+        }
         var x = pointer.x,
             y = pointer.y;
         this.x = x;
@@ -95,9 +99,9 @@ class DragDelta extends EE {
 
     get speed() {
         var d = getDist(this.x, this.preX, this.y, this.preY);
-        var speed = d/(this.dt* 0.001);
+        var speed = d / (this.dt * 0.001);
         return speed;
-    }  
+    }
 }
 
 export default DragDelta;

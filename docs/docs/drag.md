@@ -3,7 +3,7 @@
 Drag game object.
 
 - Author: Rex
-- Member of game object
+- Behavior of game object
 
 ## Source code
 

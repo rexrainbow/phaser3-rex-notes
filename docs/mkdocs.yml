@@ -10,6 +10,7 @@ pages:
     - Touch events: touchevents.md
     - Keyboard events: keyboardevents.md
     - Drag: drag.md
+    - Slider: slider.md
     - Drag to cursorKeys: dragcursor.md
 - Loader:
     - Loader: loader.md

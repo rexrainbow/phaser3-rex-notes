@@ -62,7 +62,10 @@ class Drag {
             this.gameobject.setInteractive(); // only need setInteractive once
         }
 
-        e = !!e;
+        if (e === undefined) {
+            e = true;
+        }
+
         if (this.enable === e) {
             return this;
         }

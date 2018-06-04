@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/tween/index.html">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/slider/index.html">
       
       
         <meta name="author" content="rexrainbow">
@@ -36,7 +36,7 @@
     
     
       
-        <title>Tween - Notes of Phaser 3</title>
+        <title>Slider - Notes of Phaser 3</title>
       
     
     
@@ -96,7 +96,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Tween
+                Slider
               </span>
             
           
@@ -232,10 +232,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
     
     <label class="md-nav__link" for="nav-3">
       Input
@@ -299,11 +301,145 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../slider/index.html" title="Slider" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Slider
+      </label>
+    
+    <a href="index.html" title="Slider" class="md-nav__link md-nav__link--active">
       Slider
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#import-class" title="Import class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
+    Install global plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-instance" title="Create instance" class="md-nav__link">
+    Create instance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-end-points" title="Set end-points" class="md-nav__link">
+    Set end-points
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-value" title="Get value" class="md-nav__link">
+    Get value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-value" title="Set value" class="md-nav__link">
+    Set value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" title="Events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drag" title="Drag" class="md-nav__link">
+    Drag
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#drag-enable" title="Drag enable" class="md-nav__link">
+    Drag enable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is-dragging" title="Is dragging" class="md-nav__link">
+    Is dragging
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+        <li class="md-nav__item">
+          <a href="#__comments" title="Comments" class="md-nav__link md-nav__link--active">
+            Comments
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -772,12 +908,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
     
     <label class="md-nav__link" for="nav-7">
       Behavior
@@ -793,12 +927,10 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-1" type="checkbox" id="nav-7-1" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-1" type="checkbox" id="nav-7-1">
     
     <label class="md-nav__link" for="nav-7-1">
       Tween
@@ -814,144 +946,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="toc">
-        Tween
-      </label>
-    
-    <a href="index.html" title="Tween" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../tween/index.html" title="Tween" class="md-nav__link">
       Tween
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#create-tween-task" title="Create tween task" class="md-nav__link">
-    Create tween task
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#ease-equations" title="Ease equations" class="md-nav__link">
-    Ease equations
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pause-resume-task" title="Pause / Resume task" class="md-nav__link">
-    Pause / Resume task
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#stop-task" title="Stop task" class="md-nav__link">
-    Stop task
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#play-task" title="Play task" class="md-nav__link">
-    Play task
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#restart-task" title="Restart task" class="md-nav__link">
-    Restart task
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#time-scale" title="Time-scale" class="md-nav__link">
-    Time-scale
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#global-time-scale" title="Global time-scale" class="md-nav__link">
-    Global time-scale
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#tween-value" title="Tween value" class="md-nav__link">
-    Tween value
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#custom-ease-function" title="Custom ease function" class="md-nav__link">
-    Custom ease function
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-        <li class="md-nav__item">
-          <a href="#__comments" title="Comments" class="md-nav__link md-nav__link--active">
-            Comments
-          </a>
-        </li>
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -1483,6 +1482,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#usage" title="Usage" class="md-nav__link">
     Usage
   </a>
@@ -1491,84 +1497,78 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#create-tween-task" title="Create tween task" class="md-nav__link">
-    Create tween task
+  <a href="#import-class" title="Import class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
+    Install global plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-instance" title="Create instance" class="md-nav__link">
+    Create instance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-end-points" title="Set end-points" class="md-nav__link">
+    Set end-points
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-value" title="Get value" class="md-nav__link">
+    Get value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-value" title="Set value" class="md-nav__link">
+    Set value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" title="Events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drag" title="Drag" class="md-nav__link">
+    Drag
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#ease-equations" title="Ease equations" class="md-nav__link">
-    Ease equations
+  <a href="#drag-enable" title="Drag enable" class="md-nav__link">
+    Drag enable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is-dragging" title="Is dragging" class="md-nav__link">
+    Is dragging
   </a>
   
 </li>
         
       </ul>
     </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pause-resume-task" title="Pause / Resume task" class="md-nav__link">
-    Pause / Resume task
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#stop-task" title="Stop task" class="md-nav__link">
-    Stop task
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#play-task" title="Play task" class="md-nav__link">
-    Play task
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#restart-task" title="Restart task" class="md-nav__link">
-    Restart task
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#time-scale" title="Time-scale" class="md-nav__link">
-    Time-scale
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#global-time-scale" title="Global time-scale" class="md-nav__link">
-    Global time-scale
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#tween-value" title="Tween value" class="md-nav__link">
-    Tween value
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#custom-ease-function" title="Custom ease function" class="md-nav__link">
-    Custom ease function
-  </a>
   
 </li>
         
@@ -1598,248 +1598,101 @@
               
                 
                 
-                  <h1>Tween</h1>
+                  <h1>Slider</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Change properties by tween equations, built-in object of phaser.</p>
+<p>Drag thumb on a slider bar.</p>
 <ul>
-<li>Author: Richard Davey</li>
+<li>Author: Rex</li>
+<li>Behavior of game object</li>
 </ul>
+<h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/slider-plugin.js">Link</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<h3 id="create-tween-task">Create tween task<a class="headerlink" href="#create-tween-task" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tween</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">tweens</span><span class="p">.</span><span class="nx">add</span><span class="p">({</span>
-    <span class="nx">targets</span><span class="o">:</span> <span class="nx">gameobject</span><span class="p">,</span>
-    <span class="c1">// delay: 0,</span>
-    <span class="c1">// duration: 1000,</span>
-    <span class="c1">// ease: &#39;Power0&#39;,</span>
-    <span class="c1">// easeParams: null,</span>
-    <span class="c1">// hold: 0,</span>
-    <span class="c1">// repeat: 0,</span>
-    <span class="c1">// repeatDelay: 0,</span>
-    <span class="c1">// yoyo: false,</span>
-    <span class="c1">// flipX: false,</span>
-    <span class="c1">// flipY: false,</span>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/slider">Sample code</a></p>
+<p>User could import class directly, or install it by global plugin.</p>
+<h3 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">rexSlider</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/slider.js&#39;</span><span class="p">;</span>
+</pre></div>
 
-    <span class="c1">// offset: null,</span>
-    <span class="c1">// completeDelay: 0,</span>
-    <span class="c1">// loop: 0</span>
-    <span class="c1">// loopDelay: 0,</span>
-    <span class="c1">// paused: false,</span>
-    <span class="c1">// useFrames: false,</span>
+<h3 id="install-global-plugin">Install global plugin<a class="headerlink" href="#install-global-plugin" title="Permanent link">&para;</a></h3>
+<p>Install plugin in <a href="../game/index.html#configuration">configuration of game</a></p>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">SliderPlugin</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/slider-plugin.js&#39;</span><span class="p">;</span>
 
-    <span class="c1">// properties:</span>
-    <span class="c1">// x: &#39;+=600&#39;,        // start from current value</span>
-    <span class="c1">// y: 500,</span>
-    <span class="c1">// rotation: ...</span>
-    <span class="c1">// angle: ...</span>
-    <span class="c1">// alpha: ...</span>
+<span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
+    <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexSlider&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">SliderPlugin</span><span class="p">,</span>
+            <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="p">},</span>
+        <span class="c1">// ...</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</pre></div>
 
-    <span class="c1">// or</span>
-    <span class="c1">// props: {</span>
-    <span class="c1">//     x: { value: &#39;+=600&#39;, duration: 3000, ease: &#39;Power2&#39; },</span>
-    <span class="c1">//     y: { value: &#39;500&#39;, duration: 1500, ease: &#39;Bounce.easeOut&#39; }</span>
-    <span class="c1">// },</span>
-
-    <span class="c1">// or     </span>
-    <span class="c1">// props: {</span>
-    <span class="c1">//    x: {</span>
-    <span class="c1">//        duration: 400,</span>
-    <span class="c1">//        yoyo: true,</span>
-    <span class="c1">//        repeat: 8,</span>
-    <span class="c1">//        ease: &#39;Sine.easeInOut&#39;,</span>
-    <span class="c1">//        value: {</span>
-    <span class="c1">//            getEnd: function (target, key, value)</span>
-    <span class="c1">//            {</span>
-    <span class="c1">//                destX -= 30;</span>
-    <span class="c1">//                return destX;</span>
-    <span class="c1">//            },</span>
-    <span class="c1">//            getStart: function (target, key, value)</span>
-    <span class="c1">//            {</span>
-    <span class="c1">//                return value + 30;</span>
-    <span class="c1">//            }</span>
-    <span class="c1">//        }</span>
-    <span class="c1">//    },</span>
-    <span class="c1">//    ....</span>
-    <span class="c1">// },</span>
-
-    <span class="c1">// callbackScope: timeline,</span>
-
-    <span class="c1">// onStart: function () {},</span>
-    <span class="c1">// onStartScope: callbackScope,</span>
-
-    <span class="c1">// onUpdate: function () {},</span>
-    <span class="c1">// onUpdateScope: callbackScope,</span>
-
-    <span class="c1">// onComplete: function () {},</span>
-    <span class="c1">// onCompleteScope: callbackScope,</span>
-
-    <span class="c1">// onYoyo: function () {},</span>
-    <span class="c1">// onYoyoScope: callbackScope,</span>
-
-    <span class="c1">// onRepeat: function () {},</span>
-    <span class="c1">// onRepeatScope: callbackScope</span>
+<h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">slider</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexSlider&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameobject</span><span class="p">,</span> <span class="p">{</span>
+    <span class="c1">// endPoints: [</span>
+    <span class="c1">//     {x:0, y:0},</span>
+    <span class="c1">//     {x:0, y:0}</span>
+    <span class="c1">// ],</span>
+    <span class="c1">// value: 0,</span>
+    <span class="c1">// dragEnable: true</span>
 <span class="p">});</span>
 </pre></div>
 
+<p>Properties</p>
 <ul>
-<li>targets: The targets the tween is updating.</li>
-<li>delay: The time the tween will wait before it first starts</li>
-<li>duration: The duration of the tween</li>
-<li>ease: The ease function used by the tween</li>
-<li>easeParams: The parameters to go with the ease function (if any)</li>
-<li>hold: The time the tween will pause before running a yoyo</li>
-<li>repeat: The number of times the tween will repeat itself (a value of 1 means the tween will play twice, as it repeated once)</li>
-<li>repeatDelay: The time the tween will pause for before starting a repeat. The tween holds in the start state.</li>
-<li>yoyo: boolean - Does the tween reverse itself (yoyo) when it reaches the end?</li>
-<li>flipX: flip X the GameObject on tween end</li>
-<li>flipY: flip Y the GameObject on tween end</li>
-<li>offset: Used when the Tween is part of a Timeline</li>
-<li>completeDelay: The time the tween will wait before the onComplete event is dispatched once it has completed</li>
-<li>loop: The time the tween will pause before starting either a yoyo or returning to the start for a repeat</li>
-<li>loopDelay:</li>
-<li>paused: Does the tween start in a paused state, or playing?</li>
-<li>useFrames: Use frames or milliseconds?</li>
-<li>props: The properties being tweened by the tween</li>
-<li>onStart: callback which fired when tween task started</li>
-<li>onComplete: callback which fired when tween task done</li>
-<li>onYoyo: callback which fired when tween reversed (yoyo)</li>
-<li>onRepeat: callback which fired when repeat started</li>
+<li>endPoints : an array of 2 end-points (<code>[{x,y}, {x,y}]</code>)</li>
+<li>value: initial value between 0 to 1</li>
+<li>dragEnable: set true to drag thumb</li>
 </ul>
-<h4 id="ease-equations">Ease equations<a class="headerlink" href="#ease-equations" title="Permanent link">&para;</a></h4>
+<h3 id="set-end-points">Set end-points<a class="headerlink" href="#set-end-points" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">slider</span><span class="p">.</span><span class="nx">setEndPoints</span><span class="p">(</span><span class="nx">p0x</span><span class="p">,</span> <span class="nx">p0y</span><span class="p">,</span> <span class="nx">p1x</span><span class="p">,</span> <span class="nx">p1y</span><span class="p">);</span>
+<span class="c1">// gameobject.slider.setEndPoints(p0, p1); // p0, p1: {x, y}</span>
+<span class="c1">// gameobject.slider.setEndPoints(points); // points: [p0, p1]</span>
+</pre></div>
+
+<h3 id="get-value">Get value<a class="headerlink" href="#get-value" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">gameobject</span><span class="p">.</span><span class="nx">slider</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>          <span class="c1">// value: between 0 to 1</span>
+<span class="c1">// var value = gameobject.slider.getValue();  // value: between 0 to 1</span>
+<span class="c1">// var value = gameobject.slider.getValue(min, max);  // value: between min to max</span>
+</pre></div>
+
+<h3 id="set-value">Set value<a class="headerlink" href="#set-value" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">slider</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">newValue</span><span class="p">;</span>       <span class="c1">// newValue: between 0 to 1</span>
+<span class="c1">// gameobject.slider.setValue(newValue);  // newValue: between 0 to 1</span>
+<span class="c1">// gameobject.slider.setValue(newValue, min, max);  // newValue: between min to max</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">slider</span><span class="p">.</span><span class="nx">addValue</span><span class="p">(</span><span class="nx">inc</span><span class="p">);</span>  <span class="c1">// inc: between 0 to 1</span>
+<span class="c1">// gameobject.slider.addValue(inc, min, max);  // inc: between min to max</span>
+</pre></div>
+
+<p>Fires <code>valuechange</code> event if new value is not equal to current value.</p>
+<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
-<li><code>Power0</code> : Linear</li>
-<li><code>Power1</code> : Quadratic.Out</li>
-<li><code>Power2</code> : Cubic.Out</li>
-<li><code>Power3</code> : Quartic.Out</li>
-<li><code>Power4</code> : Quintic.Out</li>
-<li><code>Linear</code></li>
-<li><code>Quad</code> : Quadratic.Out</li>
-<li><code>Cubic</code> : Cubic.Out</li>
-<li><code>Quart</code> : Quartic.Out</li>
-<li><code>Quint</code> : Quintic.Out</li>
-<li><code>Sine</code> : Sine.Out</li>
-<li><code>Expo</code> : Expo.Out</li>
-<li><code>Circ</code> : Circular.Out</li>
-<li><code>Elastic</code> : Elastic.Out</li>
-<li><code>Back</code> : Back.Out</li>
-<li><code>Bounce</code> : Bounce.Out</li>
-<li><code>Stepped</code></li>
-<li><code>Quad.easeIn</code></li>
-<li><code>Cubic.easeIn</code></li>
-<li><code>Quart.easeIn</code></li>
-<li><code>Quint.easeIn</code></li>
-<li><code>Sine.easeIn</code></li>
-<li><code>Expo.easeIn</code></li>
-<li><code>Circ.easeIn</code></li>
-<li><code>Back.easeIn</code></li>
-<li><code>Bounce.easeIn</code></li>
-<li><code>Quad.easeOut</code></li>
-<li><code>Cubic.easeOut</code></li>
-<li><code>Quart.easeOut</code></li>
-<li><code>Quint.easeOut</code></li>
-<li><code>Sine.easeOut</code></li>
-<li><code>Expo.easeOut</code></li>
-<li><code>Circ.easeOut</code></li>
-<li><code>Back.easeOut</code></li>
-<li><code>Bounce.easeOut</code></li>
-<li><code>Quad.easeInOut</code></li>
-<li><code>Cubic.easeInOut</code></li>
-<li><code>Quart.easeInOut</code></li>
-<li><code>Quint.easeInOut</code></li>
-<li><code>Sine.easeInOut</code></li>
-<li><code>Expo.easeInOut</code></li>
-<li><code>Circ.easeInOut</code></li>
-<li><code>Back.easeInOut</code></li>
-<li><code>Bounce.easeInOut</code></li>
+<li>Value changed
+    <div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">slider</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;valuechange&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">newValue</span><span class="p">,</span> <span class="nx">prevValue</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+</pre></div><ul>
+<li>newValue: between 0 to 1</li>
+<li>prevValue: between 0 to 1</li>
 </ul>
-<h3 id="pause-resume-task">Pause / Resume task<a class="headerlink" href="#pause-resume-task" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">tween</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
+</li>
+</ul>
+<h3 id="drag">Drag<a class="headerlink" href="#drag" title="Permanent link">&para;</a></h3>
+<h4 id="drag-enable">Drag enable<a class="headerlink" href="#drag-enable" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">slider</span><span class="p">.</span><span class="nx">setDragEnable</span><span class="p">();</span>
+<span class="c1">// gameobject.slider.setDragEnable(false);  // disable</span>
 </pre></div>
 
-<div class="codehilite"><pre><span></span><span class="nx">tween</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
-</pre></div>
-
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isPlaying</span> <span class="o">=</span> <span class="nx">tween</span><span class="p">.</span><span class="nx">isPlaying</span><span class="p">();</span>
-<span class="kd">var</span> <span class="nx">isPaused</span> <span class="o">=</span> <span class="nx">tween</span><span class="p">.</span><span class="nx">isPaused</span><span class="p">();</span>
-</pre></div>
-
-<h3 id="stop-task">Stop task<a class="headerlink" href="#stop-task" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">tween</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
-</pre></div>
-
-<h3 id="play-task">Play task<a class="headerlink" href="#play-task" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">tween</span><span class="p">.</span><span class="nx">play</span><span class="p">();</span>
-</pre></div>
-
-<h3 id="restart-task">Restart task<a class="headerlink" href="#restart-task" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">tween</span><span class="p">.</span><span class="nx">restart</span><span class="p">();</span>
-</pre></div>
-
-<h3 id="time-scale">Time-scale<a class="headerlink" href="#time-scale" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">tween</span><span class="p">.</span><span class="nx">setTimeScale</span><span class="p">(</span><span class="nx">v</span><span class="p">);</span>
-<span class="c1">// tween.timeScale = timescale;</span>
-</pre></div>
-
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">timeScale</span> <span class="o">=</span> <span class="nx">tween</span><span class="p">.</span><span class="nx">getTimeScale</span><span class="p">();</span>
-<span class="c1">// var timeScale = tween.timeScale;</span>
-</pre></div>
-
-<h4 id="global-time-scale">Global time-scale<a class="headerlink" href="#global-time-scale" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">timeScale</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">tweens</span><span class="p">.</span><span class="nx">timeScale</span><span class="p">;</span>
-</pre></div>
-
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">tweens</span><span class="p">.</span><span class="nx">timeScale</span> <span class="o">=</span> <span class="nx">timescale</span><span class="p">;</span>
-</pre></div>
-
-<h3 id="tween-value">Tween value<a class="headerlink" href="#tween-value" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tween</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">tweens</span><span class="p">.</span><span class="nx">addCounter</span><span class="p">({</span>
-    <span class="c1">// from: 0,</span>
-    <span class="c1">// to: 1,</span>
-    <span class="c1">// delay: 0,</span>
-    <span class="c1">// duration: 1000,</span>
-    <span class="c1">// easeParams: null,</span>
-    <span class="c1">// ease: &#39;Power0&#39;,</span>
-    <span class="c1">// hold: 0,</span>
-    <span class="c1">// repeat: 0,</span>
-    <span class="c1">// repeatDelay: 0,</span>
-    <span class="c1">// yoyo: false,</span>
-
-    <span class="c1">// offset: null,</span>
-    <span class="c1">// completeDelay: 0,</span>
-    <span class="c1">// loop: 0,</span>
-    <span class="c1">// loopDelay: 0,</span>
-    <span class="c1">// paused: false,</span>
-    <span class="c1">// useFrames: false,</span>
-
-    <span class="c1">// callbackScope: timeline,</span>
-
-    <span class="c1">// onStart: function () {},</span>
-    <span class="c1">// onStartScope: callbackScope,</span>
-
-    <span class="c1">// onUpdate: function () {},</span>
-    <span class="c1">// onUpdateScope: callbackScope,</span>
-
-    <span class="c1">// onComplete: function () {},</span>
-    <span class="c1">// onCompleteScope: callbackScope,</span>
-
-    <span class="c1">// onYoyo: function () {},</span>
-    <span class="c1">// onYoyoScope: callbackScope,</span>
-
-    <span class="c1">// onRepeat: function () {},</span>
-    <span class="c1">// onRepeatScope: callbackScope</span>
-<span class="p">});</span>
-</pre></div>
-
-<h3 id="custom-ease-function">Custom ease function<a class="headerlink" href="#custom-ease-function" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tween</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">tweens</span><span class="p">.</span><span class="nx">add</span><span class="p">({</span>
-    <span class="nx">targets</span><span class="o">:</span> <span class="nx">gameobject</span><span class="p">,</span>
-    <span class="c1">// ...</span>
-    <span class="nx">ease</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">t</span><span class="p">)</span> <span class="p">{</span>  <span class="c1">// t: 0~1</span>
-        <span class="k">return</span> <span class="nx">value</span><span class="p">;</span>     <span class="c1">// value: 0~1</span>
-    <span class="p">},</span>
-    <span class="c1">// ...</span>
-<span class="p">});</span>
+<h4 id="is-dragging">Is dragging<a class="headerlink" href="#is-dragging" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isDragging</span> <span class="o">=</span> <span class="nx">gameobject</span><span class="p">.</span><span class="nx">slider</span><span class="p">.</span><span class="nx">isDragging</span><span class="p">;</span>
 </pre></div>
                 
                   
@@ -1851,9 +1704,9 @@
                   <div id="disqus_thread"></div>
 <script>
   var disqus_config = function () {
-    this.page.url = "https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/tween/index.html";
+    this.page.url = "https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/slider/index.html";
     this.page.identifier =
-      "/tween/index.html";
+      "/slider/index.html";
   };
   (function() {
     var d = document, s = d.createElement("script");
@@ -1875,7 +1728,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../clock/index.html" title="Clock" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../drag/index.html" title="Drag" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -1884,19 +1737,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Clock
+                Drag
               </span>
             </div>
           </a>
         
         
-          <a href="../fadeoutdestroy/index.html" title="Fade out destroy" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../dragcursor/index.html" title="Drag to cursorKeys" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Fade out destroy
+                Drag to cursorKeys
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

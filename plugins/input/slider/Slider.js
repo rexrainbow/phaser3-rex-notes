@@ -10,6 +10,7 @@ const DistanceBetween = Phaser.Math.Distance.Between;
 const RotateAroundDistance = Phaser.Math.RotateAroundDistance;
 const Clamp = Phaser.Math.Clamp;
 const Linear = Phaser.Math.Linear;
+const Percent = Phaser.Math.Percent;
 
 class Slider extends EE {
     constructor(gameobject, config) {
@@ -70,7 +71,10 @@ class Slider extends EE {
             this.gameobject.setInteractive(); // only need setInteractive once
         }
 
-        e = !!e;
+        if (e === undefined) {
+            e = true;
+        }
+
         if (this.dragEnable === e) {
             return this;
         }
@@ -112,25 +116,31 @@ class Slider extends EE {
         }
     }
 
-    setValue(value) {
+    setValue(value, min, max) {
+        if (min !== undefined) {
+            value = Percent(value, min, max);
+        }
         this.value = value;
     }
 
-    addValue(inc) {
+    addValue(inc, min, max) {
+        if (min !== undefined) {
+            inc = Percent(inc, min, max);
+        }
         this.value += inc;
     }
 
     getValue(min, max) {
-        if (min === undefined) {
-            return this.value;
-        } else {
-            return Linear(min, max, this.value);
+        var value = this.value;
+        if (min !== undefined) {
+            value = Linear(min, max, value);
         }
+        return value;
     }
 
     get isDragging() {
         return (this.gameobject.input.dragState > 0);
-    }    
+    }
 
     onDragging(pointer, dragX, dragY) {
         var endPoints = this.endPoints;
@@ -138,11 +148,11 @@ class Slider extends EE {
         if (endPoints[0].y === endPoints[1].y) {
             var min = Math.min(endPoints[0].x, endPoints[1].x);
             var max = Math.max(endPoints[0].x, endPoints[1].x);
-            newValue = (dragX - min) / (max - min);
+            newValue = Percent(dragX, min, max);
         } else if (endPoints[0].x === endPoints[1].x) {
             var min = Math.min(endPoints[0].y, endPoints[1].y);
             var max = Math.max(endPoints[0].y, endPoints[1].y);
-            newValue = (dragY - min) / (max - min);
+            newValue = Percent(dragY, min, max);
         } else {
             var gameobject = this.gameobject;
             var dist;
@@ -157,7 +167,7 @@ class Slider extends EE {
 
             var min = Math.min(endPoints[0].x, endPoints[1].x);
             var max = Math.max(endPoints[0].x, endPoints[1].x);
-            newValue = (P1.x - min) / (max - min);
+            newValue = Percent(P1.x, min, max);
         }
 
         this.value = newValue;
@@ -166,8 +176,8 @@ class Slider extends EE {
     updatePos() {
         var gameobject = this.gameobject;
         var points = this.endPoints;
-        gameobject.x = Linear(points[0].x, points[1].x, this.value);
-        gameobject.y = Linear(points[0].y, points[1].y, this.value);
+        gameobject.x = Linear(points[0].x, points[1].x, this._value);
+        gameobject.y = Linear(points[0].y, points[1].y, this._value);
     }
 }
 

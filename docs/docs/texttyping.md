@@ -3,7 +3,7 @@
 Typing text on text object, [bbcode text object](bbcodetext.md), or [tag text boject](tagtext.md).
 
 - Author: Rex
-- Member of text object
+- Behavior of text object
 
 ## Source code
 
