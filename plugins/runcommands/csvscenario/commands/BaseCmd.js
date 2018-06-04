@@ -7,6 +7,10 @@ class BaseCmd {
 
     resetFromJSON(o) {}
 
+    toJSON() {
+        return {};
+    }
+
     parse(inst, index) {
         return inst;
     }

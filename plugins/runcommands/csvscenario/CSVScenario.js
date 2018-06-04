@@ -25,18 +25,29 @@ class CSVScenario extends EE {
         this.isRunning = GetValue(o, 'state', false);
         this.isPaused = GetValue(o, 'pause', false);
         this.waitEvent = GetValue(o, 'wait', undefined);
-        this.cmdHandlers.resetFromJSON(o);
-        this.instMem.resetFromJSON(o);
         this.scope = GetValue(o, 'scope', undefined);
         this.timeUnit = GetValue(o, 'timeUnit', 0);
         this.cmdPrefix = GetValue(o, 'prefix', DEFAULT_PREFIX);
         this.argsConvert = GetValue(o, 'argsConvert', true);
         this.argsConvertScope = GetValue(o, 'argsConvertScope', undefined);
+        this.cmdHandlers.resetFromJSON(GetValue(o, 'handlers', undefined));
+        this.instMem.resetFromJSON(GetValue(o, 'instMem', undefined));        
         return this;
     }
 
     toJSON() {
-        return {};
+        return {          
+            state: this.isRunning,
+            pause: this.isPaused,
+            wait: this.waitEvent,
+            scope: this.scope,
+            timeUnit: this.timeUnit,
+            prefix: this.cmdPrefix,
+            argsConvert: this.argsConvert,
+            argsConvertScope: this.argsConvertScope,
+            handlers: this.cmdHandlers.toJSON(),
+            instMem: this.instMem.toJSON()
+        };
     }
 
     boot() {}

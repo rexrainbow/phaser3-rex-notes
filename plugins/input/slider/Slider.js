@@ -45,7 +45,9 @@ class Slider extends EE {
 
     toJSON() {
         return {
-            enable: this.enable
+            value: this.value,
+            endPoints: this.endPoints,
+            dragEnable: this.dragEnable
         };
     }
 

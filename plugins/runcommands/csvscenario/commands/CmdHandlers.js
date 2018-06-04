@@ -6,6 +6,8 @@ import ExitCmd from './ExitCmd.js';
 import GotoCmd from './GotoCmd.js';
 import IfCmd from './IfCmd.js';
 
+const GetValue = Phaser.Utils.Objects.GetValue;
+
 class CmdHandlers {
     constructor(scenario) {
         this.cmds = {
@@ -20,10 +22,18 @@ class CmdHandlers {
 
     resetFromJSON(o) {
         for (var name in this.cmds) {
-            this.cmds[name].resetFromJSON(o);
+            this.cmds[name].resetFromJSON(GetValue(o, name, undefined));
         }
         return this;
     }
+
+    toJSON() {
+        var ret = {};
+        for (var name in this.cmds) {
+            ret[name] = this.cmds[name].toJSON();
+        }
+        return ret;
+    }    
 
     get(name) {
         return this.cmds[name];

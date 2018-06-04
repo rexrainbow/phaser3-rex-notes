@@ -1,25 +1,36 @@
 'use strict'
 
+import Clone from './../../utils/object/Clone.js';
 import Clean from './../../utils/object/Clean.js';
+
+const GetValue = Phaser.Utils.Objects.GetValue;
 
 class InstMem {
     constructor(scenario) {
         this.scenario = scenario;
+
         this.queue = [];
-        this.customData = {};
-        this.resetFromJSON();
+        this.currentIdx = -1;
+        this.nextIdx = 0;
     }
 
     resetFromJSON(o) {
-        this.clean();
+        var queue = GetValue(o, 'queue', undefined);
+        if (queue === undefined) {
+            Clean(this.queue);
+        } else {
+            Clone(queue, this.queue);
+        }
+
+        this.currentIdx = GetValue(o, 'curIdx', -1);
+        this.nextIdx = GetValue(o, 'nextIdx', 0);
         return this;
     }
 
     clean() {
-        this.queue.length = 0;
         this.currentIdx = -1;
         this.nextIdx = 0;
-        Clean(this.customData);
+        this.queue.length = 0;
         return this;
     }
 

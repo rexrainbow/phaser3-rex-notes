@@ -1,27 +1,41 @@
 'use strict'
 
 import BaseCmd from './BaseCmd.js';
+import Clone from './../../../utils/object/Clone.js';
 import Clean from './../../../utils/object/Clean.js';
+
+const GetValue = Phaser.Utils.Objects.GetValue;
 
 class LabelCmd extends BaseCmd {
     constructor(scenario) {
         super(scenario, 'label');
 
         this.labels = {};
-        this.labels = {};
         this.prevLabel = '';
         this.lastLabel = '';
     }
 
     resetFromJSON(o) {
-        Clean(this.labels);
-        this.prevLabel = '';
-        this.lastLabel = '';
-        this.scenario.instMem.customData.labels = this.labels;
+        this.prevLabel = GetValue(o, 'preLabel', '');
+        this.lastLabel = GetValue(o, 'lastLabel', '');
+        var labels = GetValue(o, 'labels', undefined);
+        if (labels === undefined) {
+            Clean(this.labels);
+        } else {
+            Clone(labels, this.labels);
+        }
+    }
+
+    toJSON() {
+        return {
+            preLabel: this.prevLabel,
+            lastLabel: this.lastLabel,
+            labels: this.labels
+        };
     }
 
     parse(inst, index) {
-        inst.length = 2;        
+        inst.length = 2;
         var label = this.getLabel(inst);
         this.addLabel(label, index);
         return inst;
