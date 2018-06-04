@@ -100,6 +100,7 @@ class Slider extends EE {
         }
         this.axisRotation = BetweenPoints(points[0], points[1]);
         this.updatePos();
+        return this;
     }
 
     get value() {
@@ -121,6 +122,7 @@ class Slider extends EE {
             value = Percent(value, min, max);
         }
         this.value = value;
+        return this;
     }
 
     addValue(inc, min, max) {
@@ -128,6 +130,7 @@ class Slider extends EE {
             inc = Percent(inc, min, max);
         }
         this.value += inc;
+        return this;
     }
 
     getValue(min, max) {
@@ -178,6 +181,7 @@ class Slider extends EE {
         var points = this.endPoints;
         gameobject.x = Linear(points[0].x, points[1].x, this._value);
         gameobject.y = Linear(points[0].y, points[1].y, this._value);
+        return this;
     }
 }
 
