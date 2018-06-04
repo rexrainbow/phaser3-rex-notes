@@ -22,6 +22,7 @@ module.exports = {
 
         // input
         'dragplugin': './plugins/drag-plugin.js',
+        'sliderlugin': './plugins/slider-plugin.js',        
         'dragcursorplugin': './plugins/dragcursor-plugin.js',
         'dragdeltaplugin': './plugins/dragdelta-plugin.js',
 

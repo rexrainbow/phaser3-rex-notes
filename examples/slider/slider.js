@@ -1,15 +1,12 @@
 'use strict'
 
-import Slider from './../../plugins/slider.js';
+import SliderPlugin from './../../plugins/slider-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
         super({
             key: 'examples'
         })
-
-        this.img;
-        this.text;
     }
 
     preload() {
@@ -18,33 +15,33 @@ class Demo extends Phaser.Scene {
 
     create() {
         this.img = this.add.image(400, 300, 'dot').setScale(10, 10);
-        this.img.slider = new Slider(this.img, {
+        this.img.slider = this.plugins.get('rexSlider').add(this.img, {
             endPoints: [{
                     x: this.img.x - 200,
-                    y: this.img.y
+                    y: this.img.y - 200
                 },
                 {
                     x: this.img.x + 200,
-                    y: this.img.y
-                },
-            ]
+                    y: this.img.y + 200
+                }
+            ],
+            value: 0.25
         });
 
         this.add.graphics()
             .lineStyle(3, 0x55ff55, 1)
             .strokePoints(this.img.slider.endPoints);
-        this.text = this.add.text(100, 100, '', {
+
+        this.text = this.add.text(0, 0, '', {
             fontSize: '20px'
         });
         this.cursorKeys = this.input.keyboard.createCursorKeys();
     }
 
     update() {
-        var isLeftDown = this.cursorKeys.left.isDown;
-        var isRightDown = this.cursorKeys.right.isDown;
-        if (isLeftDown) {
+        if (this.cursorKeys.left.isDown) {
             this.img.slider.value -= 0.01;
-        } else if (isRightDown) {
+        } else if (this.cursorKeys.right.isDown) {
             this.img.slider.value += 0.01;
         }
         this.text.setText(this.img.slider.value);
@@ -56,7 +53,14 @@ var config = {
     parent: 'phaser-example',
     width: 800,
     height: 600,
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexSlider',
+            plugin: SliderPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

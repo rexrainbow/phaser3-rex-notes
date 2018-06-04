@@ -1,18 +1,23 @@
 'use strict'
 
+import EE from 'eventemitter3';
 import GetSceneObject from './../../utils/system/GetSceneObject.js';
 import IsArray from './../../utils/array/IsArray.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
+const BetweenPoints = Phaser.Math.Angle.BetweenPoints;
+const DistanceBetween = Phaser.Math.Distance.Between;
+const RotateAroundDistance = Phaser.Math.RotateAroundDistance;
 const Clamp = Phaser.Math.Clamp;
 const Linear = Phaser.Math.Linear;
 
-class Slider {
+class Slider extends EE {
     constructor(gameobject, config) {
+        super();
         this.gameobject = gameobject;
         this.scene = GetSceneObject(gameobject);
 
-        this._value = 0;
+        this._value = undefined;
         this.endPoints = [{
                 x: 0,
                 y: 0
@@ -28,11 +33,11 @@ class Slider {
     }
 
     resetFromJSON(o) {
+        this.setValue(GetValue(o, "value", 0));
         var endPoints = GetValue(o, "endPoints", undefined);
         if (endPoints !== undefined) {
             this.setEndPoints(endPoints);
         }
-        this.setValue(GetValue(o, "value", 0));
         this.setDragEnable(GetValue(o, "dragEnable", true));
         return this;
     }
@@ -89,6 +94,8 @@ class Slider {
             points[0] = p0x;
             points[1] = p0y;
         }
+        this.axisRotation = BetweenPoints(points[0], points[1]);
+        this.updatePos();
     }
 
     get value() {
@@ -96,12 +103,13 @@ class Slider {
     }
 
     set value(value) {
+        var oldValue = this._value;
         this._value = Clamp(value, 0, 1);
 
-        var gameobject = this.gameobject;
-        var points = this.endPoints;
-        gameobject.x = Linear(points[0].x, points[1].x, this._value);
-        gameobject.y = Linear(points[0].y, points[1].y, this._value);
+        if (oldValue !== this._value) {
+            this.updatePos(this._value);
+            this.emit('valuechange', this._value, oldValue);
+        }
     }
 
     setValue(value) {
@@ -120,29 +128,49 @@ class Slider {
         }
     }
 
+    get isDragging() {
+        return (this.gameobject.input.dragState > 0);
+    }    
+
     onDragging(pointer, dragX, dragY) {
-        var gameobject = this.gameobject;
         var endPoints = this.endPoints;
+        var newValue;
         if (endPoints[0].y === endPoints[1].y) {
             var min = Math.min(endPoints[0].x, endPoints[1].x);
             var max = Math.max(endPoints[0].x, endPoints[1].x);
-            var x = Clamp(dragX, min, max);
-            this._value = (x - min) / (max - min);
-
-            gameobject.x = x;
-            gameobject.y = endPoints[0].y;
+            newValue = (dragX - min) / (max - min);
         } else if (endPoints[0].x === endPoints[1].x) {
             var min = Math.min(endPoints[0].y, endPoints[1].y);
             var max = Math.max(endPoints[0].y, endPoints[1].y);
-            var y = Clamp(dragX, min, max);
-            this._value = (y - min) / (max - min);
-
-            gameobject.x = endPoints[0].x;
-            gameobject.y = y;
+            newValue = (dragY - min) / (max - min);
         } else {
-            // TODO
+            var gameobject = this.gameobject;
+            var dist;
+            P1.x = dragX;
+            P1.y = dragY;
+
+            dist = DistanceBetween(P1.x, P1.y, gameobject.x, gameobject.y);
+            P1 = RotateAroundDistance(P1, gameobject.x, gameobject.y, -this.axisRotation, dist);
+            P1.y = gameobject.y;
+            dist = DistanceBetween(P1.x, P1.y, gameobject.x, gameobject.y);
+            P1 = RotateAroundDistance(P1, gameobject.x, gameobject.y, this.axisRotation, dist);
+
+            var min = Math.min(endPoints[0].x, endPoints[1].x);
+            var max = Math.max(endPoints[0].x, endPoints[1].x);
+            newValue = (P1.x - min) / (max - min);
         }
+
+        this.value = newValue;
+    }
+
+    updatePos() {
+        var gameobject = this.gameobject;
+        var points = this.endPoints;
+        gameobject.x = Linear(points[0].x, points[1].x, this.value);
+        gameobject.y = Linear(points[0].y, points[1].y, this.value);
     }
 }
+
+var P1 = {}; // reuse this point object
 
 export default Slider;
