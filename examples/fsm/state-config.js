@@ -3,6 +3,7 @@
 import FSMPlugin from './../../plugins/fsm-plugin.js';
 
 var stateConfig = {
+    start: 'A',
     states: {
         A: {
             next: 'B',
@@ -38,9 +39,8 @@ var stateConfig = {
             }
         }
     },
-    init: function () {
-        this.i = 0;
-        this.goto('A');
+    extend: {
+        i: 0
     }
 };
 

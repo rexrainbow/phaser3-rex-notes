@@ -4,32 +4,59 @@ const EE = Phaser.Events.EventEmitter;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class FSM extends EE {
+    /*
+    var config = {
+        start: 'A',   // default: undefined
+        states: {
+            A: {
+                next: 'B',  // function() { return 'B'; }
+                enter: function() {},
+                exit: function() {}
+            },
+            // ...
+        },        
+        init: function() {},
+        extend: {
+            i: 0,
+            name: 'abc'
+            // ...
+        },
+        enable: true
+    };
+    */
     constructor(config) {
         super();
 
-        // attach get-next-state logic
-        var states = GetValue(config, 'states', undefined);
-        if (states) {
-            this.addStates(states);
+        // attach get-next-state function
+        if (config.hasOwnProperty('states')) {
+            this.addStates(config.states);
         }
-
-        this.isStateChanging = false;
-        this.resetFromJSON(config);
 
         // attach init function
-        var init = GetValue(config, 'init', undefined);
-        if (init !== undefined) {
-            this.init = init;
+        if (config.hasOwnProperty('init')) {
+            this.init = config.init;
         }
 
-        if (this.init) {
-            this.init.call(this);
+        // attach extend members
+        if (config.hasOwnProperty('extend')) {
+            var extendMembers = config.extend;
+            for (var name in extendMembers) {
+                if (!this.hasOwnProperty(name) || this[name] === undefined) {
+                    this[name] = extendMembers[name];
+                }
+            }
         }
+
+        this._stateLock = false;
+        this.resetFromJSON(config);
     }
 
     resetFromJSON(o) {
         this.setEnable(GetValue(o, 'enable', true));
         this.start(GetValue(o, 'start', undefined));
+        if (this.init) {
+            this.init.call(this);
+        }
         return this;
     }
 
@@ -52,7 +79,7 @@ class FSM extends EE {
     }
 
     set state(newState) {
-        if (!this.enable || this.isStateChanging) {
+        if (!this.enable || this._stateLock) {
             return;
         }
         if (this._state === newState) {
@@ -61,7 +88,7 @@ class FSM extends EE {
         this._prevState = this._state;
         this._state = newState;
 
-        this.isStateChanging = true;
+        this._stateLock = true; // lock state
 
         this.emit('statechange', this);
 
@@ -74,7 +101,7 @@ class FSM extends EE {
             this.emit(exitEventName, this);
         }
 
-        this.isStateChanging = false;
+        this._stateLock = false;
 
         if (this._state != null) {
             var enterEventName = 'enter_' + this._state;
