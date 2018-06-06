@@ -1,11 +1,11 @@
 'use strict'
 
-import EE from 'eventemitter3';
 import CSVToArray from './../../utils/array/CSVToArray.js';
 import IsArray from './../../utils/array/IsArray.js';
 import InstMem from './InstMem.js';
 import CmdHandlers from './commands/CmdHandlers.js';
 
+const EE = Phaser.Events.EventEmitter;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class CSVScenario extends EE {
@@ -53,6 +53,7 @@ class CSVScenario extends EE {
     boot() {}
 
     shutdown() {
+        super.shutdown();
         this.clean();
         this.parent = undefined;
     }

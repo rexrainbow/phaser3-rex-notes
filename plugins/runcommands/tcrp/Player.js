@@ -1,11 +1,11 @@
 'use strict'
 
-import EE from 'eventemitter3';
 import Clcok from './../../clock.js';
 import GetSceneObject from './../../utils/system/GetSceneObject.js';
 import ArrayCopy from './../../utils/array/Copy.js';
 import RunCommands from './../../runcommands.js';
 
+const EE = Phaser.Events.EventEmitter;
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 
 class Player extends EE {
@@ -59,10 +59,10 @@ class Player extends EE {
     }
 
     shutdown() {
+        super.shutdown();
         this.clock.shutdown();
         var scene = GetSceneObject(this.parent);
         scene.sys.events.off('update', this.runNextCommands, this);
-        this.removeAllListeners();
         this.commands = undefined;
     }
 

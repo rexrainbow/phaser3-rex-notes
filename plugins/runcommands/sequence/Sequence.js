@@ -1,9 +1,9 @@
 'use strict'
 
-import EE from 'eventemitter3';
 import RunCommands from './../../runcommands.js';
 import ArrayCopy from './../../utils/array/Copy.js';
 
+const EE = Phaser.Events.EventEmitter;
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 
 class Sequence extends EE {
@@ -22,6 +22,18 @@ class Sequence extends EE {
         this.task = undefined;
     }
 
+    shutdown() {
+        super.shutdown();
+        this.stop();
+        this.commands.length = 0;
+        this.scope = undefined;
+        this.config = undefined;
+    }
+
+    destroy() {
+        this.shutdown();
+    }
+    
     load(commands, scope, config) {
         this.stop();
         this.setYoyo(GetFastValue(config, 'yoyo', this.yoyo));
@@ -49,24 +61,10 @@ class Sequence extends EE {
         return this;
     }
 
-    pause() {
-        if (this.task && this.task.pause) {
-            this.task.pause();
-        }
-        return this;
-    }
-
-    resume() {
-        if (this.task && this.task.resume) {
-            this.task.resume();
-        }
-        return this;
-    }
-
     stop() {
         this.state = 0;
-        if (this.task && this.task.destroy) {
-            this.task.destroy();
+        if (this.task) {
+            this.task.off('complete', this.runNextCommands, this);
             this.task = undefined;
         }
         return this;

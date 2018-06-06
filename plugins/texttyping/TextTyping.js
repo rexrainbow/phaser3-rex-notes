@@ -1,8 +1,8 @@
 'use strict'
 
-import EE from 'eventemitter3';
 import GetSceneObject from './../utils/system/GetSceneObject.js';
 
+const EE = Phaser.Events.EventEmitter;
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -78,8 +78,8 @@ class TextTyping extends EE {
     }
 
     shutdown() {
+        super.shutdown();
         this.freeTimer();
-        this.removeAllListeners();
 
         this.gameobject = undefined;
         this.scene = undefined;

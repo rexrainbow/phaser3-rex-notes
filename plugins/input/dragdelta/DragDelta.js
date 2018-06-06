@@ -1,7 +1,8 @@
 'use strict'
 
-import EE from 'eventemitter3';
 import GetSceneObject from './../../utils/system/GetSceneObject.js';
+
+const EE = Phaser.Events.EventEmitter;
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 const getDist = Phaser.Math.Distance.Power;
 
@@ -37,7 +38,7 @@ class DragDelta extends EE {
     }
 
     shutdown() {
-        this.removeAllListeners();
+        super.shutdown();
         this.gameobject = undefined;
         this.scene = undefined;
         // gameobject event 'pointerdown','pointermove','pointerup' will be removed when this gameobject destroyed 

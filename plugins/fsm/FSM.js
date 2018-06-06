@@ -1,6 +1,6 @@
 'use strict'
-import EE from 'eventemitter3';
 
+const EE = Phaser.Events.EventEmitter;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class FSM extends EE {
@@ -13,15 +13,6 @@ class FSM extends EE {
             this.addStates(states);
         }
     }
-
-    shutdown() {
-        this.removeAllListeners();
-    }
-
-    destroy() {
-        this.shutdown();
-    }
-
 
     setEnable(e) {
         if (e === undefined) {

@@ -1,9 +1,9 @@
 'use strict'
 
-import EE from 'eventemitter3';
 import GetSceneObject from './../../utils/system/GetSceneObject.js';
 import IsArray from './../../utils/array/IsArray.js';
 
+const EE = Phaser.Events.EventEmitter;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const BetweenPoints = Phaser.Math.Angle.BetweenPoints;
 const DistanceBetween = Phaser.Math.Distance.Between;
@@ -59,6 +59,7 @@ class Slider extends EE {
     }
 
     shutdown() {
+        super.shutdown();
         this.gameobject = undefined;
         this.scene = undefined;
         // gameobject event 'drag' will be removed when this gameobject destroyed 
