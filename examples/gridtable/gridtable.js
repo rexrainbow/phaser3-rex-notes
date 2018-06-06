@@ -1,5 +1,5 @@
 'use strict'
-import GridTablePlugin from './../../plugins/gridtable-plugin.js';
+import GridTablePlugin from 'rexPlugins/gridtable-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

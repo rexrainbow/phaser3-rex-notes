@@ -1,7 +1,7 @@
 'use strict'
-import GridTablePlugin from './../../plugins/gridtable-plugin.js';
-import DragDeltaPlugin from './../../plugins/dragdelta-plugin.js';
-import ObjectPoolPlugin from './../../plugins/objectpool-plugin.js';
+import GridTablePlugin from 'rexPlugins/gridtable-plugin.js';
+import DragDeltaPlugin from 'rexPlugins/dragdelta-plugin.js';
+import ObjectPoolPlugin from 'rexPlugins/objectpool-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

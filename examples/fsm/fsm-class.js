@@ -1,6 +1,6 @@
 'use strict'
 
-import FSM from './../../plugins/fsm.js';
+import FSM from 'rexPlugins/fsm.js';
 
 class State extends FSM {
     constructor() {

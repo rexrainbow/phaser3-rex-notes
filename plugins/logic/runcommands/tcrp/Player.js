@@ -1,9 +1,9 @@
 'use strict'
 
-import Clcok from './../../clock.js';
-import GetSceneObject from './../../utils/system/GetSceneObject.js';
-import ArrayCopy from './../../utils/array/Copy.js';
-import RunCommands from './../../runcommands.js';
+import Clock from 'rexPlugins/clock.js'
+import GetSceneObject from 'rexPlugins/utils/system/GetSceneObject.js';
+import ArrayCopy from 'rexPlugins/utils/array/Copy.js';
+import RunCommands from 'rexPlugins/runcommands.js';
 
 const EE = Phaser.Events.EventEmitter;
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
@@ -11,7 +11,7 @@ const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 class Player extends EE {
     constructor(parent, config) {
         super();
-        this.clock = new Clcok(parent);
+        this.clock = new Clock(parent);
         this.parent = parent;
         this.resetFromJSON(config); // this function had been called in super(config)
         this.boot();

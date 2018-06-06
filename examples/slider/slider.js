@@ -1,6 +1,6 @@
 'use strict'
 
-import SliderPlugin from './../../plugins/slider-plugin.js';
+import SliderPlugin from 'rexPlugins/slider-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

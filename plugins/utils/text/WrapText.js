@@ -1,4 +1,4 @@
-import PoolKlass from './../object/Stack.js';
+import PoolKlass from 'rexPlugins/utils/object/Stack.js';
 import CONST from './const.js';
 
 const GetValue = Phaser.Utils.GetValue;

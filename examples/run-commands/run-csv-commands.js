@@ -1,7 +1,7 @@
 'use strict'
 
-import CSVToArray from './../../plugins/csvtoarray.js';
-import runCommands from './../../plugins/runcommands.js';
+import CSVToArray from 'rexPlugins/csvtoarray.js';
+import runCommands from 'rexPlugins/runcommands.js';
 
 const Map = Phaser.Structs.Map;
 

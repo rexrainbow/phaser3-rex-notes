@@ -1,6 +1,6 @@
 'use strict'
 
-import DragPlugin from './../../plugins/drag-plugin.js';
+import DragPlugin from 'rexPlugins/drag-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

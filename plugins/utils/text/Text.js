@@ -1,7 +1,7 @@
 import Render from './TextRender.js'; // copy from text object
 import TextStyle from './TextStyle.js'; // extended
 import CanvasTextKlass from './CanvasText.js';
-import PoolKlass from './../object/Stack.js';
+import PoolKlass from 'rexPlugins/utils/object/Stack.js';
 import CONST from './const.js';
 
 const AddToDOM = Phaser.DOM.AddToDOM;

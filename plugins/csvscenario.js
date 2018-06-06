@@ -1,2 +1,2 @@
-import CSVScenario from './runcommands/csvscenario/CSVScenario.js';
+import CSVScenario from './logic/runcommands/csvscenario/CSVScenario.js';
 export default CSVScenario;

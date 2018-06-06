@@ -3,7 +3,7 @@
 import PensManagerKlass from './PensManager.js';
 import CONST from './const.js';
 import WrapText from './WrapText.js';
-import Clone from './../object/Clone.js';
+import Clone from 'rexPlugins/utils/object/Clone.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const NO_WRAP = CONST.NO_WRAP;

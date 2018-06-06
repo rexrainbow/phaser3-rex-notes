@@ -1,8 +1,8 @@
 'use strict'
 
-import Clone from './../utils/object/Clone.js';
-import IsEmpty from './../utils/Object/IsEmpty.js';
-import Clean from './../utils/object/Clean.js';
+import Clone from 'rexPlugins/utils/object/Clone.js';
+import IsEmpty from 'rexPlugins/utils/Object/IsEmpty.js';
+import Clean from 'rexPlugins/utils/object/Clean.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 const GetValue = Phaser.Utils.Objects.GetValue;

@@ -1,13 +1,13 @@
 'use strict'
 
-import Clcok from './../../clock.js';
-import Clone from './../../utils/object/Clone.js';
+import Clock from 'rexPlugins/clock.js'
+import Clone from 'rexPlugins/utils/object/Clone.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 
 class Recorder {
     constructor(parent, config) {
-        this.clock = new Clcok(parent);
+        this.clock = new Clock(parent);
         this.parent = parent;
         this.resetFromJSON(config); // this function had been called in super(config)
     }

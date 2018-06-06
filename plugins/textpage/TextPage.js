@@ -1,6 +1,6 @@
 'use strict'
 
-import GetSceneObject from './../utils/system/GetSceneObject.js';
+import GetSceneObject from 'rexPlugins/utils/system/GetSceneObject.js';
 
 const TextKlass = Phaser.GameObjects.Text;
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;

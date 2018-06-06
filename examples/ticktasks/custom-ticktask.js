@@ -1,6 +1,6 @@
 'use strict'
 
-import TickTasksPlugin from './../../plugins/ticktasks-plugin.js';
+import TickTasksPlugin from 'rexPlugins/ticktasks-plugin.js';
 
 
 const GetValue = Phaser.Utils.Objects.GetValue;

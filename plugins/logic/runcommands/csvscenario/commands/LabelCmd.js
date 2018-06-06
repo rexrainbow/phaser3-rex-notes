@@ -1,8 +1,8 @@
 'use strict'
 
 import BaseCmd from './BaseCmd.js';
-import Clone from './../../../utils/object/Clone.js';
-import Clean from './../../../utils/object/Clean.js';
+import Clone from 'rexPlugins/utils/object/Clone.js';
+import Clean from 'rexPlugins/utils/object/Clean.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 

@@ -1,6 +1,6 @@
 'use strict'
-import BBCodeTextPlugin from './../../plugins/bbcodetext-plugin.js';
-import TextPagePlugin from './../../plugins/textpage-plugin.js'
+import BBCodeTextPlugin from 'rexPlugins/bbcodetext-plugin.js';
+import TextPagePlugin from 'rexPlugins/textpage-plugin.js'
 
 class Demo extends Phaser.Scene {
     constructor() {

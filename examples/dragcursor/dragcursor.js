@@ -1,6 +1,6 @@
 'use strict'
 
-import DragCursorPlugin from './../../plugins/dragcursor-plugin.js';
+import DragCursorPlugin from 'rexPlugins/dragcursor-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

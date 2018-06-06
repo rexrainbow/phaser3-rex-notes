@@ -1,8 +1,8 @@
 'use strict'
 
-import BBCodeTextKlass from './../../plugins/bbcodetext.js';
-import TextPage from './../../plugins/textpage.js'
-import TextTyping from './../../plugins/texttyping.js';
+import BBCodeTextKlass from 'rexPlugins/bbcodetext.js';
+import TextPage from 'rexPlugins/textpage.js'
+import TextTyping from 'rexPlugins/texttyping.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 

@@ -1,7 +1,7 @@
 'use strict'
 
-import CanvasPlugin from './../../plugins/canvas-plugin.js'
-import Chart from './../../plugins/utils/chartjs/Chart.js';
+import CanvasPlugin from 'rexPlugins/canvas-plugin.js'
+import Chart from 'rexPlugins/utils/chartjs/Chart.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

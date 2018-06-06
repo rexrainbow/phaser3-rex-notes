@@ -1,5 +1,7 @@
-import Recorder from './runcommands/tcrp/Recorder.js';
-import Player from './runcommands/tcrp/Player.js';
+import TCRP from './tcrp.js';
+
+const Recorder = TCRP.Recorder;
+const Player = TCRP.Player;
 
 class TCRPPlugin extends Phaser.Plugins.BasePlugin {
     constructor(pluginManager) {

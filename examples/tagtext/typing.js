@@ -1,7 +1,7 @@
 'use strict'
 
-import TagTextPlugin from './../../plugins/tagtext-plugin.js';
-import TextTypingPlugin from './../../plugins/texttyping-plugin.js';
+import TagTextPlugin from 'rexPlugins/tagtext-plugin.js';
+import TextTypingPlugin from 'rexPlugins/texttyping-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

@@ -1,6 +1,6 @@
 'use strict'
 
-import DragDeltaPlugin from './../../plugins/dragdelta-plugin.js';
+import DragDeltaPlugin from 'rexPlugins/dragdelta-plugin.js';
 const getDist = Phaser.Math.Distance.Power;
 
 class Demo extends Phaser.Scene {

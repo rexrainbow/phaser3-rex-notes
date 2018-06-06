@@ -1,2 +1,2 @@
-import FSM from './fsm/FSM.js';
+import FSM from './logic/fsm/FSM.js';
 export default FSM;

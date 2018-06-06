@@ -1,9 +1,9 @@
 'use strict'
 
-import PoolKlass from './../object/Stack.js';
+import PoolKlass from 'rexPlugins/utils/object/Stack.js';
 import PenKlass from './Pen.js';
 import CONST from './const.js';
-import Clone from './../object/Clone.js';
+import Clone from 'rexPlugins/utils/object/Clone.js';
 
 const NOOP = Phaser.Utils.NOOP;
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;

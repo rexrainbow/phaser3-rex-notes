@@ -1,7 +1,7 @@
 'use strict'
 
-import GetSceneObject from './../../utils/system/GetSceneObject.js';
-import VectorToCursorKeys from './../../utils/vectortocursorkeys/VectorToCursorKeys.js';
+import GetSceneObject from 'rexPlugins/utils/system/GetSceneObject.js';
+import VectorToCursorKeys from 'rexPlugins/utils/vectortocursorkeys/VectorToCursorKeys.js';
 
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 

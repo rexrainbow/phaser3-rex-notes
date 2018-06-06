@@ -1,6 +1,6 @@
 'use strict'
 
-import WebFontLoaderPlugin from './../../plugins/webfontloader-plugin.js';
+import WebFontLoaderPlugin from 'rexPlugins/webfontloader-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

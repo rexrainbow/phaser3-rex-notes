@@ -1,7 +1,7 @@
 'use strict'
 
 import Clean from './Clean.js';
-import IsArray from './../array/IsArray.js';
+import IsArray from 'rexPlugins/utils/array/IsArray.js';
 
 /**
  * Shallow Object Clone. Will not clone nested objects.

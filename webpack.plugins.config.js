@@ -18,11 +18,11 @@ module.exports = {
         'xorplugin': './plugins/xor-plugin.js',
         'lzstringplugin': './plugins/lzstring-plugin.js',
         'csvtoarrayplugin': './plugins/csvtoarray-plugin.js',
-        'sequenceplugin': './plugins/sequence-plugin.js',        
+        'sequenceplugin': './plugins/sequence-plugin.js',
 
         // input
         'dragplugin': './plugins/drag-plugin.js',
-        'sliderlugin': './plugins/slider-plugin.js',        
+        'sliderlugin': './plugins/slider-plugin.js',
         'dragcursorplugin': './plugins/dragcursor-plugin.js',
         'dragdeltaplugin': './plugins/dragdelta-plugin.js',
 
@@ -73,5 +73,10 @@ module.exports = {
             },
             warningsFilter: (src) => false
         })
-    ]
+    ],
+    resolve: {
+        alias: {
+            'rexPlugins': path.resolve(__dirname, 'plugins/')
+        }
+    }
 }

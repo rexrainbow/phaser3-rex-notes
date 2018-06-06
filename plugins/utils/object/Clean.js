@@ -1,6 +1,6 @@
 'use strict'
 
-import IsArray from './../array/IsArray.js';
+import IsArray from 'rexPlugins/utils/array/IsArray.js';
 var Clean = function (obj) {
     if (IsArray(obj)) {
         obj.length = 0;

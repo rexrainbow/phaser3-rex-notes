@@ -1,6 +1,6 @@
 'use strict'
 
-import CSVScenarioPlugin from './../../plugins/csvscenario-plugin.js';
+import CSVScenarioPlugin from 'rexPlugins/csvscenario-plugin.js';
 
 var csvString =
     `0,print,hello

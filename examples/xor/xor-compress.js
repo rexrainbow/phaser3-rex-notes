@@ -1,7 +1,7 @@
 'use strict'
 
-import XOR from './../../plugins/xor.js';
-import LZString from './../../plugins/lzstring.js';
+import XOR from 'rexPlugins/xor.js';
+import LZString from 'rexPlugins/lzstring.js';
 
 class StringPacker {
   constructor(config) {

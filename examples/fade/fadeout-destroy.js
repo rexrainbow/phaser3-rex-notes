@@ -1,6 +1,6 @@
 'use strict'
 
-import FadePlugin from './../../plugins/fade-plugin.js';
+import FadePlugin from 'rexPlugins/fade-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

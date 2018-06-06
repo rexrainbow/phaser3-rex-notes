@@ -1,9 +1,9 @@
 'use strict'
 
-import CSVToArray from './../utils/array/CSVToArray.js';
-import ArrayCopy from './../utils/array/Copy.js';
-import TypeConvert from './../utils/string/TypeConvert.js';
-import IsArray from './../utils/array/IsArray.js';
+import CSVToArray from 'rexPlugins/utils/array/CSVToArray.js';
+import ArrayCopy from 'rexPlugins/utils/array/Copy.js';
+import TypeConvert from 'rexPlugins/utils/string/TypeConvert.js';
+import IsArray from 'rexPlugins/utils/array/IsArray.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 

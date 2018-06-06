@@ -1,7 +1,7 @@
 'use strict'
 
-import soundFadeIn from './../../plugins/sound-fade-in.js';
-import soundFadeOut from './../../plugins/sound-fade-out.js';
+import soundFadeIn from 'rexPlugins/sound-fade-in.js';
+import soundFadeOut from 'rexPlugins/sound-fade-out.js';
 
 const Format = Phaser.Utils.String.Format;
 

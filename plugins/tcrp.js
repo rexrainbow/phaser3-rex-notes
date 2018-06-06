@@ -1,5 +1,5 @@
-import Recorder from './runcommands/tcrp/Recorder.js';
-import Player from './runcommands/tcrp/Player.js';
+import Recorder from './logic/runcommands/tcrp/Recorder.js';
+import Player from './logic/runcommands/tcrp/Player.js';
 
 export default {
     Recorder: Recorder,

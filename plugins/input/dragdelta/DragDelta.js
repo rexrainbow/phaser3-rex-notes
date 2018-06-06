@@ -1,6 +1,6 @@
 'use strict'
 
-import GetSceneObject from './../../utils/system/GetSceneObject.js';
+import GetSceneObject from 'rexPlugins/utils/system/GetSceneObject.js';
 
 const EE = Phaser.Events.EventEmitter;
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;

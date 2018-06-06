@@ -1,6 +1,6 @@
 'use strict'
 
-import FSMPlugin from './../../plugins/fsm-plugin.js';
+import FSMPlugin from 'rexPlugins/fsm-plugin.js';
 
 var stateConfig = {
     start: 'A',

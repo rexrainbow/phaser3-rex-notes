@@ -1,6 +1,6 @@
 'use strict'
 
-import ClockPlugin from './../../plugins/clock-plugin.js';
+import ClockPlugin from 'rexPlugins/clock-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

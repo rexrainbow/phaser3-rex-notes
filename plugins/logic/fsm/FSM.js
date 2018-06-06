@@ -28,17 +28,17 @@ class FSM extends EE {
         super();
 
         // attach get-next-state function
-        if (config.hasOwnProperty('states')) {
+        if (config && config.hasOwnProperty('states')) {
             this.addStates(config.states);
         }
 
         // attach init function
-        if (config.hasOwnProperty('init')) {
+        if (config && config.hasOwnProperty('init')) {
             this.init = config.init;
         }
 
         // attach extend members
-        if (config.hasOwnProperty('extend')) {
+        if (config && config.hasOwnProperty('extend')) {
             var extendMembers = config.extend;
             for (var name in extendMembers) {
                 if (!this.hasOwnProperty(name) || this[name] === undefined) {

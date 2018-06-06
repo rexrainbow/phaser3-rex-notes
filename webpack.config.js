@@ -79,8 +79,9 @@ module.exports = {
         tls: 'empty'
     },
     resolve: {
-        alias: {
+        alias: {            
             'phaser': phaser,
+            'rexPlugins': path.resolve(__dirname, 'plugins/')
         }
     }
 }

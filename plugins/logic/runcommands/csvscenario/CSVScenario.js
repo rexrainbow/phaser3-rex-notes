@@ -1,7 +1,7 @@
 'use strict'
 
-import CSVToArray from './../../utils/array/CSVToArray.js';
-import IsArray from './../../utils/array/IsArray.js';
+import CSVToArray from 'rexPlugins/utils/array/CSVToArray.js';
+import IsArray from 'rexPlugins/utils/array/IsArray.js';
 import InstMem from './InstMem.js';
 import CmdHandlers from './commands/CmdHandlers.js';
 

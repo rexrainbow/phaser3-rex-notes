@@ -1,7 +1,7 @@
 'use strict'
 
-import TextPagePlugin from './../../plugins/textpage-plugin.js'
-import TextTypingPlugin from './../../plugins/texttyping-plugin.js';
+import TextPagePlugin from 'rexPlugins/textpage-plugin.js'
+import TextTypingPlugin from 'rexPlugins/texttyping-plugin.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 

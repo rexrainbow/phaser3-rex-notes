@@ -1,7 +1,7 @@
 'use strict'
 
-import CSVToArrayPlugin from './../../plugins/csvtoarray-plugin.js';
-import TCRPPlugin from './../../plugins/tcrp-plugin.js';
+import CSVToArrayPlugin from 'rexPlugins/csvtoarray-plugin.js';
+import TCRPPlugin from 'rexPlugins/tcrp-plugin.js';
 
 const PlayerPlugin = TCRPPlugin.Player;
 

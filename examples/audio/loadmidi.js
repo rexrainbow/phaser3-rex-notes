@@ -1,6 +1,6 @@
 'use strict'
 
-import midiParser from './../../plugins/utils/midi-parser/midi-parser.js';
+import midiParser from 'rexPlugins/utils/midi-parser/midi-parser.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
