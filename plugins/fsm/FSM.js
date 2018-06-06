@@ -6,12 +6,41 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 class FSM extends EE {
     constructor(config) {
         super();
-        this.setEnable(GetValue(config, 'enable', true))
-        this.start(GetValue(config, 'start', undefined));
+
+        // attach get-next-state logic
         var states = GetValue(config, 'states', undefined);
         if (states) {
             this.addStates(states);
         }
+
+        this.isStateChanging = false;
+        this.resetFromJSON(config);
+
+        // attach init function
+        var init = GetValue(config, 'init', undefined);
+        if (init !== undefined) {
+            this.init = init;
+        }
+
+        if (this.init) {
+            this.init.call(this);
+        }
+    }
+
+    resetFromJSON(o) {
+        this.setEnable(GetValue(o, 'enable', true));
+        this.start(GetValue(o, 'start', undefined));
+        return this;
+    }
+
+    toJSON() {
+        return {
+            curState: this.state,
+            prevState: this.prevState,
+
+            enable: this.enable,
+            start: this._start
+        };
     }
 
     setEnable(e) {
@@ -19,10 +48,11 @@ class FSM extends EE {
             e = true;
         }
         this.enable = e;
+        return this;
     }
 
     set state(newState) {
-        if (!this.enable) {
+        if (!this.enable || this.isStateChanging) {
             return;
         }
         if (this._state === newState) {
@@ -30,11 +60,30 @@ class FSM extends EE {
         }
         this._prevState = this._state;
         this._state = newState;
-        this.enable = false;
-        this.emit('exit_' + this._prevState, this);
-        this.enable = true;
-        this.emit('enter_' + this._state, this);
+
+        this.isStateChanging = true;
+
         this.emit('statechange', this);
+
+        if (this._prevState != null) {
+            var exitEventName = 'exit_' + this._prevState;
+            var exitCallback = this[exitEventName];
+            if (exitCallback) {
+                exitCallback.call(this);
+            }
+            this.emit(exitEventName, this);
+        }
+
+        this.isStateChanging = false;
+
+        if (this._state != null) {
+            var enterEventName = 'enter_' + this._state;
+            var enterCallback = this[enterEventName];
+            if (enterCallback) {
+                enterCallback.call(this);
+            }
+            this.emit(enterEventName, this);
+        }
     }
 
     get state() {
@@ -46,8 +95,15 @@ class FSM extends EE {
     }
 
     start(state) {
+        this._start = state;
         this._prevState = undefined;
         this._state = state; // won't fire statechange events
+        return this;
+    }
+
+    goto(nextState) {
+        this.state = nextState;
+        return this;
     }
 
     next() {
@@ -64,31 +120,32 @@ class FSM extends EE {
         if (nextState != null) {
             this.state = nextState;
         }
+        return this;
     }
 
     addState(name, config) {
-        var getNextState = GetValue(config, 'next', undefined);
-        if (getNextState) {
-            this['next_' + name] = getNextState;
+        var getNextStateCallback = GetValue(config, 'next', undefined);
+        if (getNextStateCallback) {
+            this['next_' + name] = getNextStateCallback;
         }
 
-        var scope = GetValue(config, 'scope', this);
         var exitCallback = GetValue(config, 'exit', undefined);
         if (exitCallback) {
-            var exitScope = GetValue(config, 'exitScope', scope);
-            this.on('exit_' + name, exitCallback, exitScope);
+            this['exit_' + name] = exitCallback;
         }
+
         var enterCallback = GetValue(config, 'enter', undefined);
         if (enterCallback) {
-            var enterScope = GetValue(config, 'enterScope', scope);
-            this.on('enter_' + name, enterCallback, enterScope);
+            this['enter_' + name] = enterCallback;
         }
+        return this;
     }
 
     addStates(states) {
         for (var name in states) {
             this.addState(name, states[name]);
         }
+        return this;
     }
 }
 export default FSM;
