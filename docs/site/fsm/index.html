@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/mustache/index.html">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/fsm/index.html">
       
       
         <meta name="author" content="rexrainbow">
@@ -36,7 +36,7 @@
     
     
       
-        <title>Mustache - Notes of Phaser 3</title>
+        <title>FSM - Notes of Phaser 3</title>
       
     
     
@@ -96,7 +96,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Mustache
+                FSM
               </span>
             
           
@@ -1000,10 +1000,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10" checked>
     
     <label class="md-nav__link" for="nav-10">
       Logic
@@ -1139,11 +1141,171 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../fsm/index.html" title="FSM" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        FSM
+      </label>
+    
+    <a href="index.html" title="FSM" class="md-nav__link md-nav__link--active">
       FSM
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-class" title="New class" class="md-nav__link">
+    New class
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#import-fsm-class" title="Import FSM class" class="md-nav__link">
+    Import FSM class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-new-class" title="Create new class" class="md-nav__link">
+    Create new class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-instance" title="Create instance" class="md-nav__link">
+    Create instance
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-by-config" title="Create by config" class="md-nav__link">
+    Create by config
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
+    Install global plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-instance_1" title="Create instance" class="md-nav__link">
+    Create instance
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#start-at-state" title="Start at state" class="md-nav__link">
+    Start at state
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#next-state" title="Next state" class="md-nav__link">
+    Next state
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#request" title="Request" class="md-nav__link">
+    Request
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#state-changing" title="State-changing" class="md-nav__link">
+    State-changing
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enable" title="Enable" class="md-nav__link">
+    Enable
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+        <li class="md-nav__item">
+          <a href="#__comments" title="Comments" class="md-nav__link md-nav__link--active">
+            Comments
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -1264,12 +1426,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-13" type="checkbox" id="nav-13" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-13" type="checkbox" id="nav-13">
     
     <label class="md-nav__link" for="nav-13">
       String
@@ -1297,56 +1457,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="toc">
-        Mustache
-      </label>
-    
-    <a href="index.html" title="Mustache" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../mustache/index.html" title="Mustache" class="md-nav__link">
       Mustache
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-</li>
-      
-      
-      
-        <li class="md-nav__item">
-          <a href="#__comments" title="Comments" class="md-nav__link md-nav__link--active">
-            Comments
-          </a>
-        </li>
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -1405,9 +1520,124 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#usage" title="Usage" class="md-nav__link">
     Usage
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#new-class" title="New class" class="md-nav__link">
+    New class
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#import-fsm-class" title="Import FSM class" class="md-nav__link">
+    Import FSM class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-new-class" title="Create new class" class="md-nav__link">
+    Create new class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-instance" title="Create instance" class="md-nav__link">
+    Create instance
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-by-config" title="Create by config" class="md-nav__link">
+    Create by config
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
+    Install global plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-instance_1" title="Create instance" class="md-nav__link">
+    Create instance
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#start-at-state" title="Start at state" class="md-nav__link">
+    Start at state
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#next-state" title="Next state" class="md-nav__link">
+    Next state
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#request" title="Request" class="md-nav__link">
+    Request
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#state-changing" title="State-changing" class="md-nav__link">
+    State-changing
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enable" title="Enable" class="md-nav__link">
+    Enable
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1432,18 +1662,187 @@
               
                 
                 
-                  <h1>Mustache</h1>
+                  <h1>FSM</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Format string with variables.<br />
-<a href="https://github.com/janl/mustache.js">Reference</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Finite-state_machine">Finite state machine</a>.</p>
+<ul>
+<li>Author: Rex</li>
+<li>Object</li>
+</ul>
+<h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/fsm-plugin.js">Link</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">template</span> <span class="o">=</span> <span class="s1">&#39;hello, {{name}}&#39;</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">view</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;rex&#39;</span>
-<span class="p">};</span>
-<span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">Mustache</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="nx">template</span><span class="p">,</span> <span class="nx">view</span><span class="p">);</span>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/fsm">Sample code</a></p>
+<h3 id="new-class">New class<a class="headerlink" href="#new-class" title="Permanent link">&para;</a></h3>
+<h4 id="import-fsm-class">Import FSM class<a class="headerlink" href="#import-fsm-class" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">FSM</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/fsm.js&#39;</span><span class="p">;</span>
 </pre></div>
+
+<h4 id="create-new-class">Create new class<a class="headerlink" href="#create-new-class" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">State</span> <span class="kr">extends</span> <span class="nx">FSM</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="nx">next_A</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="s1">&#39;B&#39;</span> <span class="p">}</span>
+
+    <span class="nx">enter_A</span><span class="p">()</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
+
+    <span class="nx">exit_A</span><span class="p">()</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>Members:</p>
+<ul>
+<li><code>next_</code> + stateName: Callback to get next state.</li>
+<li><code>enter_</code> + stateName: Callback when enter state.</li>
+<li><code>exit_</code> + stateName: Callback when exit state.</li>
+</ul>
+<h4 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">State</span><span class="p">();</span>
+</pre></div>
+
+<h3 id="create-by-config">Create by config<a class="headerlink" href="#create-by-config" title="Permanent link">&para;</a></h3>
+<h4 id="install-global-plugin">Install global plugin<a class="headerlink" href="#install-global-plugin" title="Permanent link">&para;</a></h4>
+<p>Install plugin in <a href="../game/index.html#configuration">configuration of game</a></p>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">FSMPlugin</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/fsm-plugin.js&#39;</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexFSM&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">FSMPlugin</span><span class="p">,</span>
+            <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="p">},</span>
+        <span class="c1">// ...</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</pre></div>
+
+<h4 id="create-instance_1">Create instance<a class="headerlink" href="#create-instance_1" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">start</span><span class="o">:</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span>   <span class="c1">// default: undefined</span>
+    <span class="nx">states</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">A</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">next</span><span class="o">:</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span>  <span class="c1">// function() { return &#39;B&#39;; }</span>
+            <span class="nx">enter</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{},</span>
+            <span class="nx">exit</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{}</span>
+        <span class="p">},</span>
+        <span class="c1">// ...</span>
+    <span class="p">},</span>
+    <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{},</span>
+    <span class="nx">extend</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">i</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;abc&#39;</span>
+        <span class="c1">// ...</span>
+    <span class="p">},</span>
+    <span class="nx">enable</span><span class="o">:</span> <span class="kc">true</span>
+<span class="p">}</span>
+<span class="kd">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexFSM&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span>
+</pre></div>
+
+<p>Properties of config:</p>
+<ul>
+<li><code>start</code>: Initial state.</li>
+<li><code>states</code>: Define states.<ul>
+<li>stateName<ul>
+<li><code>next</code>: String of next state, or a callback to get next state.</li>
+<li><code>enter</code>: Callback when enter state.</li>
+<li><code>exit</code>: Callback when exit state.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>init</code>: Initial callback when creating instance.</li>
+<li><code>extend</code>: Inject key-value pairs into instance.</li>
+<li><code>enable</code>: Set false to block any state changing.</li>
+</ul>
+<h3 id="start-at-state">Start at state<a class="headerlink" href="#start-at-state" title="Permanent link">&para;</a></h3>
+<p>Set new state without triggering any <a href="index.html#state-changing">state-changing</a> callbacks or events.</p>
+<div class="codehilite"><pre><span></span><span class="nx">state</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="nx">newState</span><span class="p">);</span>
+</pre></div>
+
+<h3 id="next-state">Next state<a class="headerlink" href="#next-state" title="Permanent link">&para;</a></h3>
+<pre class="mermaid"><code>graph TB
+
+next[&quot;state.next()&quot;] --&gt; next_A[&quot;state.next_A()&lt;br&gt;return 'B'&quot;]
+
+next_A --&gt; eventStateChange[&quot;state.emit('statechange', state)&lt;br&gt;state.prevState -&gt; state.state&quot;]
+
+subgraph State changing
+
+eventStateChange --&gt; exit_A[&quot;state.exit_A()&quot;]
+exit_A --&gt; eventExitA[&quot;state.emit('exit_A', state)&quot;]
+
+eventExitA --&gt; enter_B[&quot;state.enter_B()&quot;]
+enter_B --&gt; eventEnterB[&quot;state.emit('enter_B', state)&quot;]
+
+subgraph Exit
+exit_A
+eventExitA
+end
+
+subgraph Enter
+enter_B
+eventEnterB
+end
+
+end
+
+goto[&quot;state.goto('B')&quot;] --&gt; eventStateChange
+
+subgraph Request
+
+subgraph Next
+next
+next_A
+end
+
+subgraph Goto
+goto
+end
+
+end</code></pre>
+
+<h4 id="request">Request<a class="headerlink" href="#request" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Get next state by callback
+    <div class="codehilite"><pre><span></span><span class="nx">state</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span>
+<span class="c1">// nextState = state.next_A()</span>
+</pre></div></li>
+<li>Goto state
+    <div class="codehilite"><pre><span></span><span class="nx">state</span><span class="p">.</span><span class="kr">goto</span><span class="p">(</span><span class="nx">nextState</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h4 id="state-changing">State-changing<a class="headerlink" href="#state-changing" title="Permanent link">&para;</a></h4>
+<p>These callbacks or events will be triggered if state is changing.</p>
+<p>For example, state is changing from 'A' to 'B'.</p>
+<ol>
+<li>event <code>statechange</code>
+    <div class="codehilite"><pre><span></span><span class="nx">state</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;statechange&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">state</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">state</span><span class="p">.</span><span class="nx">prevState</span> <span class="o">+</span> <span class="s1">&#39;-&gt;&#39;</span> <span class="o">+</span> <span class="nx">state</span><span class="p">.</span><span class="nx">state</span> <span class="p">);</span>
+<span class="p">});</span>
+</pre></div></li>
+<li>callback <code>state.exit_A</code></li>
+<li>event <code>exit_A</code>
+    <div class="codehilite"><pre><span></span><span class="nx">state</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;exit_A&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">state</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/*...*/</span> <span class="p">});</span>
+</pre></div></li>
+<li>callback <code>state.enter_B</code></li>
+<li>event <code>enter_B</code>
+    <div class="codehilite"><pre><span></span><span class="nx">state</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;enter_B&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">state</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/*...*/</span> <span class="p">});</span>
+</pre></div></li>
+</ol>
+<h3 id="enable">Enable<a class="headerlink" href="#enable" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">state</span><span class="p">.</span><span class="nx">setEnable</span><span class="p">();</span>
+<span class="c1">// state.setEnable(false); // disable</span>
+</pre></div>
+
+<p><code>state.next()</code> and <code>state.goto()</code> will be ignored if disabled.</p>
                 
                   
                 
@@ -1454,9 +1853,9 @@
                   <div id="disqus_thread"></div>
 <script>
   var disqus_config = function () {
-    this.page.url = "https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/mustache/index.html";
+    this.page.url = "https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/fsm/index.html";
     this.page.identifier =
-      "/mustache/index.html";
+      "/fsm/index.html";
   };
   (function() {
     var d = document, s = d.createElement("script");
@@ -1478,7 +1877,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../format/index.html" title="Format" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../tcrpplayerplugin/index.html" title="Player" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -1487,19 +1886,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Format
+                Player
               </span>
             </div>
           </a>
         
         
-          <a href="../lzstringplugin/index.html" title="LZ string" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../camera/index.html" title="Camera" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                LZ string
+                Camera
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

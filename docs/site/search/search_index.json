@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/index.html", 
-            "text": "Phaser\n\n\nPhaser\n is a fun, free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering.\n\n\nList of my plugins\n\n\n\n\nBBCodeText\n: Drawing text with \nBBCode\n protocol.\n\n\nCanvas\n: Drawing on \ncanvas\n.\n\n\nClock\n: A clock to count elapsed time.\n\n\nCSV-scenario\n: Run script in csv format.\n\n\nCSV-to-hash-table\n: Hash table indexed by (col-key, row-key) from csv string.\n\n\nDrag\n: Drag game object.\n\n\nDrag-cursor\n: Simulate curosr keys according dragging events.\n\n\nFade-out-destroy\n: Fade out game object then destroy it.\n\n\nFade-volume\n: Fade-in/fade-out volume of sound.\n\n\nGashapon\n: Pick random item from box.\n\n\nGrid table\n: Viewer of grid table, to manipulate game object of each visible cell.\n\n\nLZ-string\n: Compress string using LZ-based compression algorithm.\n\n\nPage\n: Display text page by page on text object.\n\n\nRun-commands\n: Run commands in array.\n\n\nSequence\n: Run sequence commands in array.\n\n\nSlider\n: Drag thumb on a slider bar.\n\n\nTagText\n: Displays text with multi-color, font face, or font size with tags.\n\n\nTCRP.Player\n: Run commands on time.\n\n\nTCRP.Recorder\n: Store commands with time.\n\n\nTyping\n: Typing text on text object.\n\n\nWebfont-loader\n: Load web font by google webfont loader in preload stage.\n\n\nXOR\n: Encrypt or decrypt string by XOR algorithm.", 
+            "text": "Phaser\n\n\nPhaser\n is a fun, free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering.\n\n\nList of my plugins\n\n\n\n\nBBCodeText\n: Drawing text with \nBBCode\n protocol.\n\n\nCanvas\n: Drawing on \ncanvas\n.\n\n\nClock\n: A clock to count elapsed time.\n\n\nCSV-scenario\n: Run script in csv format.\n\n\nCSV-to-hash-table\n: Hash table indexed by (col-key, row-key) from csv string.\n\n\nDrag\n: Drag game object.\n\n\nDrag-cursor\n: Simulate curosr keys according dragging events.\n\n\nFade-out-destroy\n: Fade out game object then destroy it.\n\n\nFade-volume\n: Fade-in/fade-out volume of sound.\n\n\nFSM\n: Finite state machine.\n\n\nGashapon\n: Pick random item from box.\n\n\nGrid table\n: Viewer of grid table, to manipulate game object of each visible cell.\n\n\nLZ-string\n: Compress string using LZ-based compression algorithm.\n\n\nPage\n: Display text page by page on text object.\n\n\nRun-commands\n: Run commands in array.\n\n\nSequence\n: Run sequence commands in array.\n\n\nSlider\n: Drag thumb on a slider bar.\n\n\nTagText\n: Displays text with multi-color, font face, or font size with tags.\n\n\nTCRP.Player\n: Run commands on time.\n\n\nTCRP.Recorder\n: Store commands with time.\n\n\nTyping\n: Typing text on text object.\n\n\nWebfont-loader\n: Load web font by google webfont loader in preload stage.\n\n\nXOR\n: Encrypt or decrypt string by XOR algorithm.", 
             "title": "Home"
         }, 
         {
@@ -12,7 +12,7 @@
         }, 
         {
             "location": "/index.html#list-of-my-plugins", 
-            "text": "BBCodeText : Drawing text with  BBCode  protocol.  Canvas : Drawing on  canvas .  Clock : A clock to count elapsed time.  CSV-scenario : Run script in csv format.  CSV-to-hash-table : Hash table indexed by (col-key, row-key) from csv string.  Drag : Drag game object.  Drag-cursor : Simulate curosr keys according dragging events.  Fade-out-destroy : Fade out game object then destroy it.  Fade-volume : Fade-in/fade-out volume of sound.  Gashapon : Pick random item from box.  Grid table : Viewer of grid table, to manipulate game object of each visible cell.  LZ-string : Compress string using LZ-based compression algorithm.  Page : Display text page by page on text object.  Run-commands : Run commands in array.  Sequence : Run sequence commands in array.  Slider : Drag thumb on a slider bar.  TagText : Displays text with multi-color, font face, or font size with tags.  TCRP.Player : Run commands on time.  TCRP.Recorder : Store commands with time.  Typing : Typing text on text object.  Webfont-loader : Load web font by google webfont loader in preload stage.  XOR : Encrypt or decrypt string by XOR algorithm.", 
+            "text": "BBCodeText : Drawing text with  BBCode  protocol.  Canvas : Drawing on  canvas .  Clock : A clock to count elapsed time.  CSV-scenario : Run script in csv format.  CSV-to-hash-table : Hash table indexed by (col-key, row-key) from csv string.  Drag : Drag game object.  Drag-cursor : Simulate curosr keys according dragging events.  Fade-out-destroy : Fade out game object then destroy it.  Fade-volume : Fade-in/fade-out volume of sound.  FSM : Finite state machine.  Gashapon : Pick random item from box.  Grid table : Viewer of grid table, to manipulate game object of each visible cell.  LZ-string : Compress string using LZ-based compression algorithm.  Page : Display text page by page on text object.  Run-commands : Run commands in array.  Sequence : Run sequence commands in array.  Slider : Drag thumb on a slider bar.  TagText : Displays text with multi-color, font face, or font size with tags.  TCRP.Player : Run commands on time.  TCRP.Recorder : Store commands with time.  Typing : Typing text on text object.  Webfont-loader : Load web font by google webfont loader in preload stage.  XOR : Encrypt or decrypt string by XOR algorithm.", 
             "title": "List of my plugins"
         }, 
         {
@@ -3069,6 +3069,86 @@
             "location": "/tcrpplayerplugin/index.html#time-scale", 
             "text": "var   timeScale   =   player . timeScale ;  player . timeScale   =   0.5 ;", 
             "title": "Time-scale"
+        }, 
+        {
+            "location": "/fsm/index.html", 
+            "text": "Introduction\n\n\nFinite state machine\n.\n\n\n\n\nAuthor: Rex\n\n\nObject\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nSample code\n\n\nNew class\n\n\nImport FSM class\n\n\nimport\n \nFSM\n \nfrom\n \n./plugins/fsm.js\n;\n\n\n\n\n\nCreate new class\n\n\nclass\n \nState\n \nextends\n \nFSM\n \n{\n\n    \nconstructor\n()\n \n{\n\n        \nsuper\n();\n\n    \n}\n\n\n    \nnext_A\n()\n \n{\n \nreturn\n \nB\n \n}\n\n\n    \nenter_A\n()\n \n{\n \n/* ... */\n \n}\n\n\n    \nexit_A\n()\n \n{\n \n/* ... */\n \n}\n\n\n}\n\n\n\n\n\nMembers:\n\n\n\n\nnext_\n + stateName: Callback to get next state.\n\n\nenter_\n + stateName: Callback when enter state.\n\n\nexit_\n + stateName: Callback when exit state.\n\n\n\n\nCreate instance\n\n\nvar\n \nstate\n \n=\n \nnew\n \nState\n();\n\n\n\n\n\nCreate by config\n\n\nInstall global plugin\n\n\nInstall plugin in \nconfiguration of game\n\n\nimport\n \nFSMPlugin\n \nfrom\n \n./plugins/fsm-plugin.js\n;\n\n\n\nvar\n \nconfig\n \n=\n \n{\n\n    \n// ...\n\n    \nplugins\n:\n \n{\n\n        \nglobal\n:\n \n[{\n\n            \nkey\n:\n \nrexFSM\n,\n\n            \nplugin\n:\n \nFSMPlugin\n,\n\n            \nstart\n:\n \ntrue\n\n        \n},\n\n        \n// ...\n\n        \n]\n\n    \n}\n\n    \n// ...\n\n\n};\n\n\nvar\n \ngame\n \n=\n \nnew\n \nPhaser\n.\nGame\n(\nconfig\n);\n\n\n\n\n\nCreate instance\n\n\nvar\n \nconfig\n \n=\n \n{\n\n    \nstart\n:\n \nA\n,\n   \n// default: undefined\n\n    \nstates\n:\n \n{\n\n        \nA\n:\n \n{\n\n            \nnext\n:\n \nB\n,\n  \n// function() { return \nB\n; }\n\n            \nenter\n:\n \nfunction\n()\n \n{},\n\n            \nexit\n:\n \nfunction\n()\n \n{}\n\n        \n},\n\n        \n// ...\n\n    \n},\n\n    \ninit\n:\n \nfunction\n()\n \n{},\n\n    \nextend\n:\n \n{\n\n        \ni\n:\n \n0\n,\n\n        \nname\n:\n \nabc\n\n        \n// ...\n\n    \n},\n\n    \nenable\n:\n \ntrue\n\n\n}\n\n\nvar\n \nstate\n \n=\n \nscene\n.\nplugins\n.\nget\n(\nrexFSM\n).\nadd\n(\nconfig\n)\n\n\n\n\n\nProperties of config:\n\n\n\n\nstart\n: Initial state.\n\n\nstates\n: Define states.\n\n\nstateName\n\n\nnext\n: String of next state, or a callback to get next state.\n\n\nenter\n: Callback when enter state.\n\n\nexit\n: Callback when exit state.\n\n\n\n\n\n\n\n\n\n\ninit\n: Initial callback when creating instance.\n\n\nextend\n: Inject key-value pairs into instance.\n\n\nenable\n: Set false to block any state changing.\n\n\n\n\nStart at state\n\n\nSet new state without triggering any \nstate-changing\n callbacks or events.\n\n\nstate\n.\nstart\n(\nnewState\n);\n\n\n\n\n\nNext state\n\n\ngraph TB\n\nnext[\nstate.next()\n] --\n next_A[\nstate.next_A()\nbr\nreturn 'B'\n]\n\nnext_A --\n eventStateChange[\nstate.emit('statechange', state)\nbr\nstate.prevState -\n state.state\n]\n\nsubgraph State changing\n\neventStateChange --\n exit_A[\nstate.exit_A()\n]\nexit_A --\n eventExitA[\nstate.emit('exit_A', state)\n]\n\neventExitA --\n enter_B[\nstate.enter_B()\n]\nenter_B --\n eventEnterB[\nstate.emit('enter_B', state)\n]\n\nsubgraph Exit\nexit_A\neventExitA\nend\n\nsubgraph Enter\nenter_B\neventEnterB\nend\n\nend\n\ngoto[\nstate.goto('B')\n] --\n eventStateChange\n\nsubgraph Request\n\nsubgraph Next\nnext\nnext_A\nend\n\nsubgraph Goto\ngoto\nend\n\nend\n\n\n\nRequest\n\n\n\n\nGet next state by callback\n    \nstate\n.\nnext\n();\n\n\n// nextState = state.next_A()\n\n\n\n\nGoto state\n    \nstate\n.\ngoto\n(\nnextState\n);\n\n\n\n\n\n\nState-changing\n\n\nThese callbacks or events will be triggered if state is changing.\n\n\nFor example, state is changing from 'A' to 'B'.\n\n\n\n\nevent \nstatechange\n\n    \nstate\n.\non\n(\nstatechange\n,\n \nfunction\n(\nstate\n)\n \n{\n\n    \nconsole\n.\nlog\n(\n \nstate\n.\nprevState\n \n+\n \n-\n \n+\n \nstate\n.\nstate\n \n);\n\n\n});\n\n\n\n\ncallback \nstate.exit_A\n\n\nevent \nexit_A\n\n    \nstate\n.\non\n(\nexit_A\n,\n \nfunction\n(\nstate\n)\n \n{\n \n/*...*/\n \n});\n\n\n\n\ncallback \nstate.enter_B\n\n\nevent \nenter_B\n\n    \nstate\n.\non\n(\nenter_B\n,\n \nfunction\n(\nstate\n)\n \n{\n \n/*...*/\n \n});\n\n\n\n\n\n\nEnable\n\n\nstate\n.\nsetEnable\n();\n\n\n// state.setEnable(false); // disable\n\n\n\n\n\nstate.next()\n and \nstate.goto()\n will be ignored if disabled.", 
+            "title": "FSM"
+        }, 
+        {
+            "location": "/fsm/index.html#introduction", 
+            "text": "Finite state machine .   Author: Rex  Object", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/fsm/index.html#source-code", 
+            "text": "Link", 
+            "title": "Source code"
+        }, 
+        {
+            "location": "/fsm/index.html#usage", 
+            "text": "Sample code", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/fsm/index.html#new-class", 
+            "text": "", 
+            "title": "New class"
+        }, 
+        {
+            "location": "/fsm/index.html#import-fsm-class", 
+            "text": "import   FSM   from   ./plugins/fsm.js ;", 
+            "title": "Import FSM class"
+        }, 
+        {
+            "location": "/fsm/index.html#create-new-class", 
+            "text": "class   State   extends   FSM   { \n     constructor ()   { \n         super (); \n     } \n\n     next_A ()   {   return   B   } \n\n     enter_A ()   {   /* ... */   } \n\n     exit_A ()   {   /* ... */   }  }   Members:   next_  + stateName: Callback to get next state.  enter_  + stateName: Callback when enter state.  exit_  + stateName: Callback when exit state.", 
+            "title": "Create new class"
+        }, 
+        {
+            "location": "/fsm/index.html#create-instance", 
+            "text": "var   state   =   new   State ();", 
+            "title": "Create instance"
+        }, 
+        {
+            "location": "/fsm/index.html#create-by-config", 
+            "text": "", 
+            "title": "Create by config"
+        }, 
+        {
+            "location": "/fsm/index.html#install-global-plugin", 
+            "text": "Install plugin in  configuration of game  import   FSMPlugin   from   ./plugins/fsm-plugin.js ;  var   config   =   { \n     // ... \n     plugins :   { \n         global :   [{ \n             key :   rexFSM , \n             plugin :   FSMPlugin , \n             start :   true \n         }, \n         // ... \n         ] \n     } \n     // ...  };  var   game   =   new   Phaser . Game ( config );", 
+            "title": "Install global plugin"
+        }, 
+        {
+            "location": "/fsm/index.html#create-instance_1", 
+            "text": "var   config   =   { \n     start :   A ,     // default: undefined \n     states :   { \n         A :   { \n             next :   B ,    // function() { return  B ; } \n             enter :   function ()   {}, \n             exit :   function ()   {} \n         }, \n         // ... \n     }, \n     init :   function ()   {}, \n     extend :   { \n         i :   0 , \n         name :   abc \n         // ... \n     }, \n     enable :   true  }  var   state   =   scene . plugins . get ( rexFSM ). add ( config )   Properties of config:   start : Initial state.  states : Define states.  stateName  next : String of next state, or a callback to get next state.  enter : Callback when enter state.  exit : Callback when exit state.      init : Initial callback when creating instance.  extend : Inject key-value pairs into instance.  enable : Set false to block any state changing.", 
+            "title": "Create instance"
+        }, 
+        {
+            "location": "/fsm/index.html#start-at-state", 
+            "text": "Set new state without triggering any  state-changing  callbacks or events.  state . start ( newState );", 
+            "title": "Start at state"
+        }, 
+        {
+            "location": "/fsm/index.html#next-state", 
+            "text": "graph TB\n\nnext[ state.next() ] --  next_A[ state.next_A() br return 'B' ]\n\nnext_A --  eventStateChange[ state.emit('statechange', state) br state.prevState -  state.state ]\n\nsubgraph State changing\n\neventStateChange --  exit_A[ state.exit_A() ]\nexit_A --  eventExitA[ state.emit('exit_A', state) ]\n\neventExitA --  enter_B[ state.enter_B() ]\nenter_B --  eventEnterB[ state.emit('enter_B', state) ]\n\nsubgraph Exit\nexit_A\neventExitA\nend\n\nsubgraph Enter\nenter_B\neventEnterB\nend\n\nend\n\ngoto[ state.goto('B') ] --  eventStateChange\n\nsubgraph Request\n\nsubgraph Next\nnext\nnext_A\nend\n\nsubgraph Goto\ngoto\nend\n\nend", 
+            "title": "Next state"
+        }, 
+        {
+            "location": "/fsm/index.html#request", 
+            "text": "Get next state by callback\n     state . next ();  // nextState = state.next_A()   Goto state\n     state . goto ( nextState );", 
+            "title": "Request"
+        }, 
+        {
+            "location": "/fsm/index.html#state-changing", 
+            "text": "These callbacks or events will be triggered if state is changing.  For example, state is changing from 'A' to 'B'.   event  statechange \n     state . on ( statechange ,   function ( state )   { \n     console . log (   state . prevState   +   -   +   state . state   );  });   callback  state.exit_A  event  exit_A \n     state . on ( exit_A ,   function ( state )   {   /*...*/   });   callback  state.enter_B  event  enter_B \n     state . on ( enter_B ,   function ( state )   {   /*...*/   });", 
+            "title": "State-changing"
+        }, 
+        {
+            "location": "/fsm/index.html#enable", 
+            "text": "state . setEnable ();  // state.setEnable(false); // disable   state.next()  and  state.goto()  will be ignored if disabled.", 
+            "title": "Enable"
         }, 
         {
             "location": "/camera/index.html", 

@@ -64,6 +64,7 @@ pages:
       - TCRP:
           - Recoder: tcrprecoderplugin.md
           - Player: tcrpplayerplugin.md
+    - FSM: fsm.md
 - Camera:
     - Camera: camera.md
 - Math:
