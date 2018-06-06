@@ -110,6 +110,17 @@ Properties of config:
 - `extend`: Inject key-value pairs into instance.
 - `enable`: Set false to block any state changing.
 
+### Read state
+
+- Current state
+    ```javascript
+    var curState = state.state;
+    ```
+- Previous state
+    ```javascript
+    var preState = state.prevState;
+    ```
+
 ### Start at state
 
 Set new state without triggering any [state-changing](fsm.md#state-changing) callbacks or events.
@@ -173,6 +184,7 @@ end
 - Goto state
     ```javascript
     state.goto(nextState);
+    // state.state = nextState;
     ```
 
 #### State-changing
