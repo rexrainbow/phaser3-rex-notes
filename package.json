@@ -1,37 +1,34 @@
 {
-  "name": "phaser3-es6-webpack",
-  "version": "1.0.0",
-  "description": "",
-  "author": "niklas berg <me@niklasberg.se>",
-  "main": "index.js",
-  "scripts": {
-    "dev": "webpack",
-    "test": "eslint ./plugins/**/**.js"
-  },
-  "license": "MIT",
-  "devDependencies": {
-    "babel-core": "^6.25.0",
-    "babel-eslint": "^7.2.3",
-    "babel-loader": "^7.1.1",
-    "babel-polyfill": "^6.23.0",
-    "babel-preset-es2015": "^6.24.1",
-    "browser-sync": "^2.18.13",
-    "browser-sync-webpack-plugin": "^1.2.0",
-    "eslint": "^4.3.0",
-    "eslint-config-standard": "^10.2.1",
-    "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-node": "^5.1.1",
-    "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^3.0.1",
-    "expose-loader": "^0.7.3",
-    "raw-loader": "^0.5.1",
-    "webpack": "^3.4.1",
-    "clean-webpack-plugin": "^0.1.17",
-    "copy-webpack-plugin": "^4.3.1",
-    "html-webpack-plugin": "^2.30.1",
-    "uglifyjs-webpack-plugin": "^1.1.2"
-  },
-  "dependencies": {
-    "phaser": "latest"
-  }
+    "name": "phaser3-rex-notes",
+    "version": "1.0.0",
+    "description": "",
+    "author": "rex",
+    "main": "index.js",
+    "scripts": {
+        "dev": "webpack",
+        "test": "eslint ./plugins/**/**.js"
+    },
+    "license": "MIT",
+    "devDependencies": {
+        "babel-core": "^6.25.0",
+        "babel-eslint": "^7.2.3",
+        "babel-loader": "^7.1.1",
+        "babel-polyfill": "^6.23.0",
+        "babel-preset-es2015": "^6.24.1",
+        "browser-sync": "^2.24.4",
+        "browser-sync-webpack-plugin": "^2.2.2",
+        "clean-webpack-plugin": "^0.1.19",
+        "copy-webpack-plugin": "^4.5.1",
+        "eslint": "^4.3.0",
+        "eslint-plugin-import": "^2.7.0",
+        "expose-loader": "^0.7.3",
+        "html-webpack-plugin": "^3.2.0",
+        "raw-loader": "^0.5.1",
+        "webpack": "^4.10.0",
+        "webpack-cli": "^3.0.1",
+        "uglifyjs-webpack-plugin": "^1.2.5"
+    },
+    "dependencies": {
+        "phaser": "latest"
+    }
 }

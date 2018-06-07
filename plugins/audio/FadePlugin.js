@@ -1,7 +1,5 @@
 'use strict'
 
-import GetSceneObject from 'rexPlugins/utils/system/GetSceneObject.js';
-
 const GetValue = Phaser.Utils.Objects.GetValue;
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 

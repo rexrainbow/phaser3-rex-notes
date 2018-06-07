@@ -4,6 +4,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
+    mode: 'production',
     entry: {
         // game objects
         'bbcodetextplugin': './plugins/bbcodetext-plugin.js',
@@ -34,6 +35,7 @@ module.exports = {
         'textpageplugin': './plugins/textpage-plugin.js',
 
         // member of scene 
+        'fsmplugin': './plugins/fsm-plugin.js',
         'clockplugin': './plugins/clock-plugin.js',
         'csvtohashtableplugin': './plugins/csvtohashtable-plugin.js',
         'tcrpplugin': './plugins/tcrp-plugin.js',
@@ -51,28 +53,30 @@ module.exports = {
         umdNamedDefine: true,
         libraryExport: 'default'
     },
-    plugins: [
-        new webpack.DefinePlugin({
-            __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV || 'true')),
-            WEBGL_RENDERER: true,
-            CANVAS_RENDERER: true
-        }),
-        new CleanWebpackPlugin(['./plugins/dist']),
-        new UglifyJSPlugin({
-            include: /\.min\.js$/,
-            parallel: true,
-            sourceMap: false,
-            uglifyOptions: {
-                compress: true,
-                ie8: false,
-                ecma: 5,
-                output: {
-                    comments: false
+    performance: {
+        hints: false
+    },
+    optimization: {
+        minimizer: [
+            new UglifyJSPlugin({
+                include: /\.min\.js$/,
+                parallel: true,
+                sourceMap: false,
+                uglifyOptions: {
+                    compress: true,
+                    ie8: false,
+                    ecma: 5,
+                    output: {
+                        comments: false
+                    },
+                    warnings: false
                 },
-                warnings: false
-            },
-            warningsFilter: (src) => false
-        })
+                warningsFilter: () => false
+            })
+        ]
+    },    
+    plugins: [
+        new CleanWebpackPlugin(['./plugins/dist'])
     ],
     resolve: {
         alias: {

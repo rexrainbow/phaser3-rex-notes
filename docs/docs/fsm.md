@@ -178,8 +178,7 @@ end
 
 - Get next state by callback
     ```javascript
-    state.next();
-    // nextState = state.next_A()
+    state.next();    // nextState = state.next_A()    
     ```
 - Goto state
     ```javascript
@@ -202,12 +201,16 @@ For example, state is changing from 'A' to 'B'.
 1. callback `state.exit_A`
 1. event `exit_A`
     ```javascript
-    state.on('exit_A', function(state) { /*...*/ });
+    state.on('exit_A', function(state) {
+        /*...*/
+    });
     ```
 1. callback `state.enter_B`
 1. event `enter_B`
     ```javascript
-    state.on('enter_B', function(state) { /*...*/ });
+    state.on('enter_B', function(state) {
+        /*...*/
+    });
     ```
 
 ### Enable
