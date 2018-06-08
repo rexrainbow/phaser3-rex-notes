@@ -18,7 +18,7 @@ class SoundFadePlugin extends Phaser.Plugins.BasePlugin {
     }
 
     fadeOut(scene, sound, duration, destroy) {
-        return new fadeOut(scene, sound, duration, destroy);
+        return fadeOut(scene, sound, duration, destroy);
     }
 }
 
