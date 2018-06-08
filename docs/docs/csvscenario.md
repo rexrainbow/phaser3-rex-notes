@@ -7,7 +7,7 @@ Run script in csv format. Csv could be edited by excel or google document.
 
 ## Source code
 
-[Link](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/clock/ClockPlugin.js)
+[Link](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/csvscenario-plugin.js)
 
 ## Usage
 

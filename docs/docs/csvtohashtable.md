@@ -7,16 +7,47 @@ Hash table indexed by (col-key, row-key) from csv string.
 
 ## Source code
 
-[Link](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/csvtohashtable/CsvToHashTable.js)
+[Link](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/csvtohashtable-plugin.js)
 
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/csv-to-hash-table)
 
+User could import class directly, or install it by global plugin.
+
+### Import class
+
+```javascript
+import rexHashTable from './plugins/csvtohashtable.js';
+```
+
+### Install global plugin
+
+Install plugin in [configuration of game](game.md#configuration)
+
+```javascript
+import HashTablePlugin from './plugins/csvtohashtable-plugin.js';
+
+var config = {
+    // ...
+    plugins: {
+        global: [{
+            key: 'rexHashTable',
+            plugin: HashTablePlugin,
+            start: true
+        }
+        // ...
+        ]
+    }
+    // ...
+};
+var game = new Phaser.Game(config);
+```
+
 ### Create instance
 
 ```javascript
-var table = new HashTable(this);
+var table = scene.plugins.get('rexHashTable').add();
 ```
 
 ### Load table from csv string
@@ -24,8 +55,8 @@ var table = new HashTable(this);
 ```javascript
 table.loadCSV(csvString, {
     // delimiter: ',',
-    // convertCallback: true
-    // convertCallbackScope: undefined
+    // convert: true
+    // convertScope: undefined
 });
 ```
 
@@ -37,7 +68,7 @@ Rex,100,20
 Alice,300,40
 ```
 
-will be converted to 
+will be converted to
 
 ```json
 {
@@ -62,7 +93,7 @@ var value = table.get('Rex', 'hp');
 
 ### Convert value type
 
-Values will be converted to *number*, *boolean*, *null*, or *string*, if `convertCallback` is `true`, or assign your convert function by `convertCallback` and `convertCallbackScope` when loading table (`table.loadCSV(...)`).
+Values will be converted to *number*, *boolean*, *null*, or *string*, if `convert` is `true`, or assign your convert function by `convert` and `convertScope` when loading table (`table.loadCSV(...)`).
 
 ```javascript
 var convertCallback = function(table, rowKey, colKey, value) {

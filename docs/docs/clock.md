@@ -7,7 +7,7 @@ A clock to count elapsed time.
 
 ## Source code
 
-[Link](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/clock/ClockPlugin.js)
+[Link](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/clock-plugin.js)
 
 ## Usage
 

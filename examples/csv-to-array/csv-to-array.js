@@ -19,7 +19,7 @@ class Demo extends Phaser.Scene {
 4,5,6
 7,8,9`;
         var result = this.plugins.get('rexCSVToArray').convert(csvString);
-        // result is a 3x3 string array
+        // result is a 3x3 number array
         console.log(result);
     }
 

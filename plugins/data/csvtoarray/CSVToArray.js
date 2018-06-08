@@ -1,4 +1,3 @@
-
 'use strict'
 
 import Converter from 'rexPlugins/utils/array/CSVToArray.js';
@@ -6,7 +5,7 @@ import TypeConvert from 'rexPlugins/utils/string/TypeConvert.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-var CSVToArray = function(csvString, config) {
+var CSVToArray = function (csvString, config) {
     var delimiter = GetValue(config, 'delimiter', ',');
     var convert = GetValue(config, 'convert', true);
     var convertScope = GetValue(config, 'convertScope', undefined);
