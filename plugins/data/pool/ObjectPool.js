@@ -1,15 +1,10 @@
 'use strict'
 
-import PoolKlass from 'rexPlugins/pool.js';
+import Pool from 'rexPlugins/pool.js';
 
-class ObjectPoolPlugin extends PoolKlass {
-    constructor(scene, config) {
+class ObjectPool extends Pool {
+    constructor() {
         super();
-        this.scene = scene;        
-        //this.boot();
-    }
-
-    boot() {
     }
 
     shutdown() {
@@ -22,7 +17,7 @@ class ObjectPoolPlugin extends PoolKlass {
             }
         }
         items.length = 0;
-        this.scene = undefined;        
+        this.scene = undefined;
     }
 
     destroy() {
@@ -30,4 +25,4 @@ class ObjectPoolPlugin extends PoolKlass {
     }
 }
 
-export default ObjectPoolPlugin;
+export default ObjectPool;

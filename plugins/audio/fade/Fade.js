@@ -3,7 +3,7 @@
 const GetValue = Phaser.Utils.Objects.GetValue;
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 
-class FadePlugin {
+class Fade {
     constructor(scene, sound, config) {
         this.sound = sound;
         this.scene = scene;
@@ -136,4 +136,4 @@ const MODE = {
     destroy: 2
 }
 
-export default FadePlugin;
+export default Fade;

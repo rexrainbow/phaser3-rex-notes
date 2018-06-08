@@ -1,2 +1,2 @@
-import CSVToArray from './csvtoarray/CSVToArray.js';
+import CSVToArray from './data/csvtoarray/CSVToArray.js';
 export default CSVToArray;

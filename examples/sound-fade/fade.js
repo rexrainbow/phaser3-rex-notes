@@ -1,7 +1,6 @@
 'use strict'
 
-import soundFadeIn from 'rexPlugins/sound-fade-in.js';
-import soundFadeOut from 'rexPlugins/sound-fade-out.js';
+import SoundFadePlugin from 'rexPlugins/soundfade-plugin.js';
 
 const Format = Phaser.Utils.String.Format;
 
@@ -27,6 +26,7 @@ class Demo extends Phaser.Scene {
         this.txt = this.add.text(0, 0, '');
 
         this.music = this.sound.add('fate');
+        var soundFadeIn = this.plugins.get('rexSoundFade').fadeIn;
         soundFadeIn(scene, this.music, 3000);
 
         // or
@@ -37,6 +37,7 @@ class Demo extends Phaser.Scene {
         });
 
         // fade-out volume then destroy sound instance
+        var soundFadeOut = this.plugins.get('rexSoundFade').fadeOut;
         this.time.delayedCall(4000, soundFadeOut, [scene, this.music, 3000]);
     }
 
@@ -66,7 +67,14 @@ var config = {
     parent: 'phaser-example',
     width: 800,
     height: 600,
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexSoundFade',
+            plugin: SoundFadePlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

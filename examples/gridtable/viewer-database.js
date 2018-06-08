@@ -1,6 +1,8 @@
 'use strict'
-import GridTablePlugin from './../../plugins/gridtable-plugin.js';
-import DragDeltaPlugin from './../../plugins/dragdelta-plugin.js';
+
+import Phaser from 'phaser';
+import GridTablePlugin from 'rexPlugins/gridtable-plugin.js';
+import DragDeltaPlugin from 'rexPlugins/dragdelta-plugin.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -37,6 +39,8 @@ class Demo extends Phaser.Scene {
             .lineStyle(3, 0xff0000)
             .strokeRectShape(table.getBounds());
 
+        //table.updateTable(true);
+
     }
 
     update() {}
@@ -64,6 +68,7 @@ var newTable = function (scene, config) {
             .setTint(0x333333)
             .setInteractive()
             .on('pointerup', function () {
+                debugger
                 console.log('click cell ' + cell.index);
                 deleteCell(cell);
             });

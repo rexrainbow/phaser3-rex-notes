@@ -1,6 +1,6 @@
 'use strict'
 import GridTablePlugin from 'rexPlugins/gridtable-plugin.js';
-import DragDeltaPlugin from 'rexPlugins/dragdelta-plugin.js';
+import DragDelta from 'rexPlugins/dragdelta.js';
 import ObjectPoolPlugin from 'rexPlugins/objectpool-plugin.js';
 
 class Demo extends Phaser.Scene {
@@ -13,7 +13,7 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        var cellObjectsPool = new ObjectPoolPlugin(this);
+        var cellObjectsPool = this.plugins.get('rexObjectPool').add();
 
         var newCellObject = function (scene, cell) {
             var container = cellObjectsPool.pop();
@@ -58,7 +58,7 @@ class Demo extends Phaser.Scene {
             .strokeRectShape(table.getBounds());
 
         // drag table content
-        var dragDelta = new DragDeltaPlugin(table);
+        var dragDelta = new DragDelta(table);
         dragDelta.on('dragdelta', function (pointer) {
             table.addTableOXY(pointer.dx, pointer.dy).updateTable();
         });
@@ -81,10 +81,16 @@ var config = {
     scene: Demo,
     plugins: {
         global: [{
-            key: 'GridTablePlugin',
-            plugin: GridTablePlugin,
-            start: true
-        }]
+                key: 'GridTablePlugin',
+                plugin: GridTablePlugin,
+                start: true
+            },
+            {
+                key: 'rexObjectPool',
+                plugin: ObjectPoolPlugin,
+                start: true
+            }
+        ]
     }
 };
 

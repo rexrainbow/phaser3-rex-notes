@@ -1,2 +1,2 @@
-import CSVToHashTable from './csvtohashtable/CsvToHashTable.js';
+import CSVToHashTable from './data/csvtohashtable/CsvToHashTable.js';
 export default CSVToHashTable;

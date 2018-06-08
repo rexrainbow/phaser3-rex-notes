@@ -1,6 +1,6 @@
-import FadePlugin from './audio/FadePlugin.js';
+import Fade from './Fade.js';
 
-var soundFadeOut = function (scene, sound, duration, destroy) {
+var fadeOut = function (scene, sound, duration, destroy) {
     if (destroy === undefined) {
         destroy = true;
     }
@@ -14,7 +14,7 @@ var soundFadeOut = function (scene, sound, duration, destroy) {
         fade = sound._fade;
         fade.stop().resetFromJSON(CONFIG);
     } else {
-        fade = new FadePlugin(scene, sound, CONFIG);
+        fade = new Fade(scene, sound, CONFIG);
         sound._fade = fade;
     }
 
@@ -29,4 +29,4 @@ var CONFIG = {
     volume: {}
 }; // reuse this config
 
-export default soundFadeOut;
+export default fadeOut;
