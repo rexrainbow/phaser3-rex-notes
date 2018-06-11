@@ -58,9 +58,9 @@ Properties
 
 - enable: drag-able
 - axis : 
-    - `'both'`,`'h&v'`, or `0` : dragging on all directions.
-    - `'horizontal'`,`'h'`, or `1` : dragging on horizontal axis.
-    - `'vertical'`,`'v'`, or `2` : dragging on vertical axis.
+    - `'both'`,`'h&v'`, `'x&y'`, or `0` : dragging on all directions.
+    - `'horizontal'`,`'h'`, `'x'`, or `1` : dragging on horizontal/x axis.
+    - `'vertical'`,`'v'`, `'y'`, or `2` : dragging on vertical/y axis.
 - rotation : axis rotation in rad, available in horizontal or vertical axis mode.
 
 ### Dragging events

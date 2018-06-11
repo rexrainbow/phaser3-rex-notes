@@ -5,11 +5,9 @@ import FSM from 'rexPlugins/fsm.js';
 class State extends FSM {
     constructor() {
         super();
-    }
 
-    init() {
         this.i = 0;
-        this.goto('A');
+        this.goto('A');        
     }
 
     next_A() {

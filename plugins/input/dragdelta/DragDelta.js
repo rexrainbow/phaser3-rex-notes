@@ -3,7 +3,7 @@
 import GetSceneObject from 'rexPlugins/utils/system/GetSceneObject.js';
 
 const EE = Phaser.Events.EventEmitter;
-const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
+const GetValue = Phaser.Utils.Objects.GetValue;
 const getDist = Phaser.Math.Distance.Power;
 
 class DragDelta extends EE {
@@ -24,7 +24,7 @@ class DragDelta extends EE {
         this.preY = undefined;
         this.dx = undefined;
         this.dy = undefined;
-        this.setEnable(GetAdvancedValue(o, "enable", true));
+        this.setEnable(GetValue(o, "enable", true));
         return this;
     }
 

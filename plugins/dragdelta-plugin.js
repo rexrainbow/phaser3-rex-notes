@@ -1,8 +1,6 @@
-import DragDelta from './dragdelta.js';
-
 'use strict'
 
-import Drag from './drag.js';
+import DragDelta from './dragdelta.js';
 
 class DragDeltaPlugin extends Phaser.Plugins.BasePlugin {
 

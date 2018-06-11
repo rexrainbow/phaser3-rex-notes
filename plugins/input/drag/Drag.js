@@ -157,10 +157,13 @@ var P1 = {}; // reuse this point object
 const AXISMODE = {
     'both': 0,
     'h&v': 0,
+    'x&y': 0,
     'horizontal': 1,
     'h': 1,
-    'vertical': 2,
-    'v': 2
+    'x': 1,
+    'vertical': 2,    
+    'v': 2,
+    'y': 2
 };
 
 

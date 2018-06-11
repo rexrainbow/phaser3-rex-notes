@@ -15,12 +15,12 @@ class FSM extends EE {
             },
             // ...
         },        
-        init: function() {},
         extend: {
             i: 0,
             name: 'abc'
             // ...
         },
+        init: function() {},
         enable: true
     };
     */
@@ -28,21 +28,17 @@ class FSM extends EE {
         super();
 
         // attach get-next-state function
-        if (config && config.hasOwnProperty('states')) {
-            this.addStates(config.states);
-        }
-
-        // attach init function
-        if (config && config.hasOwnProperty('init')) {
-            this.init = config.init;
+        var states = GetValue(config, 'states', undefined);
+        if (states) {
+            this.addStates(states);
         }
 
         // attach extend members
-        if (config && config.hasOwnProperty('extend')) {
-            var extendMembers = config.extend;
-            for (var name in extendMembers) {
+        var extend = GetValue(config, 'extend', undefined);
+        if (extend) {
+            for (var name in extend) {
                 if (!this.hasOwnProperty(name) || this[name] === undefined) {
-                    this[name] = extendMembers[name];
+                    this[name] = extend[name];
                 }
             }
         }
@@ -54,8 +50,9 @@ class FSM extends EE {
     resetFromJSON(o) {
         this.setEnable(GetValue(o, 'enable', true));
         this.start(GetValue(o, 'start', undefined));
-        if (this.init) {
-            this.init.call(this);
+        var init = GetValue(config, 'init', undefined);
+        if (init) {
+            init.call(this);
         }
         return this;
     }
@@ -129,7 +126,9 @@ class FSM extends EE {
     }
 
     goto(nextState) {
-        this.state = nextState;
+        if (nextState != null) {
+            this.state = nextState;
+        }
         return this;
     }
 
@@ -144,9 +143,7 @@ class FSM extends EE {
             }
         }
 
-        if (nextState != null) {
-            this.state = nextState;
-        }
+        this.goto(nextState);
         return this;
     }
 
