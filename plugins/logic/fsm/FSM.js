@@ -50,7 +50,7 @@ class FSM extends EE {
     resetFromJSON(o) {
         this.setEnable(GetValue(o, 'enable', true));
         this.start(GetValue(o, 'start', undefined));
-        var init = GetValue(config, 'init', undefined);
+        var init = GetValue(o, 'init', undefined);
         if (init) {
             init.call(this);
         }
