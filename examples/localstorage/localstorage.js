@@ -1,7 +1,5 @@
 'use strict'
 
-import localforage from 'rexPlugins/utils/storage/localforage/localforage.min.js';
-
 class Demo extends Phaser.Scene {
 
     constructor() {
@@ -20,15 +18,9 @@ class Demo extends Phaser.Scene {
             b: Math.floor(Math.random() * 100)
         };
         console.log(d);
-        localforage.setItem('key', d)
-            .then(function () {
-                localforage.getItem('key').then(function (value) {
-                    console.log(value);
-                })
-            })
-            .catch(function (err) {
-                console.log(err);
-            });
+        localStorage.setItem('key', JSON.stringify(d));
+        var value = JSON.parse(localStorage.getItem('key'));
+        console.log(value);
     }
 
     update() {}
