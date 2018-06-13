@@ -6,14 +6,91 @@ Store data in key-value pairs, built-inobject of phaser.
 
 ## Usage
 
-### Set value
+### Write
+
+#### Set value
 
 ```javascript
 parent.data.set(key, value);
-parent.data.merge(data);     // {}
+// parent.data.values[key] = value;
+// parent.data.values[key] += inc;
 ```
 
-### Pop key
+#### Set values
+
+```javascript
+parent.data.set(data);    // data: {key:value, ...}
+```
+
+#### Merge values
+
+```javascript
+parent.data.merge(data);  // data: {key:value, ...}
+parent.data.merge(data, false);  // won't overwrite existed keys
+```
+
+#### Events
+
+Fires `setdata` event when a value is first set.
+
+```javascript
+parent.data.event.on('setdata', function(parent, key, value){ /* ... */ });
+```
+
+Fires `changedata`, and `changedata_ + key` events when a value is set that already exists.
+
+```javascript
+parent.data.event.on('changedata', function(parent, key, value){ /* ... */ });
+```
+
+```javascript
+parent.data.event.on('changedata_' + key, function(parent, value){ /* ... */ });
+```
+
+### Read
+
+#### Get value
+
+```javascript
+var value = parent.data.get(key);
+// var value = parent.data.values[key];
+```
+
+#### Get values
+
+```javascript
+var values = parent.data.get(keys); // values: [value, value, ...], keys: [key, key, ...]
+```
+
+#### Get all values
+
+```javascript
+var allValues = parent.data.getAll();  // return a copy of data
+```
+
+#### Query
+
+Using [string.match()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match) to pick matched keys.
+
+```javascript
+var result = parent.data.query(rgExp);
+```
+
+### Remove
+
+#### Remove key
+
+```javascript
+parent.data.remove(key);
+```
+
+#### Remove keys
+
+```javascript
+parent.data.remove(keys);  // keys: [key, key, ...]
+```
+
+#### Pop key
 
 ```javascript
 var value = parent.data.pop(key);
@@ -21,25 +98,12 @@ var value = parent.data.pop(key);
 
 Get and remove that key.
 
-### Remove key
+#### Events
+
+Fires `removedata` event when a key is removed.
 
 ```javascript
-parent.data.remove(key);
-```
-
-### Get value
-
-```javascript
-var value = parent.data.get(key);
-var allValues = parent.data.getAll();  // return a copy of data
-```
-
-### Query
-
-Using [string.match()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match) to pick matched keys.
-
-```javascript
-var result = parent.data.query(rgExp);
+parent.data.event.on('removedata', function(parent, key, value){ /* ... */ });
 ```
 
 ### Freeze
@@ -77,20 +141,4 @@ Reset status and clean all keys.
 
 ```javascript
 parent.data.reset()
-```
-
-### Event of changing data
-
-Event 'setdata', 'changedata' will be fired when invoking `parent.data.set(key, value)`.
-
-```javascript
-parent.data.event.on('setdata', function(parent, key, value){
-    /* ... */
-}, scope);
-```
-
-```javascript
-parent.data.event.on('changedata', function(parent, key, value, resetValue){
-    // resetValue(newValue);  // overwrite value to newValue
-}, scope);
 ```
