@@ -257,7 +257,7 @@
         }, 
         {
             "location": "/drag/index.html", 
-            "text": "Introduction\n\n\nDrag game object.\n\n\n\n\nAuthor: Rex\n\n\nBehavior of game object\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nSample code\n\n\nUser could import class directly, or install it by global plugin.\n\n\nImport class\n\n\nimport\n \nrexDrag\n \nfrom\n \n./plugins/drag.js\n;\n\n\n\n\n\nInstall global plugin\n\n\nInstall plugin in \nconfiguration of game\n\n\nimport\n \nDragPlugin\n \nfrom\n \n./plugins/drag-plugin.js\n;\n\n\n\nvar\n \nconfig\n \n=\n \n{\n\n    \n// ...\n\n    \nplugins\n:\n \n{\n\n        \nglobal\n:\n \n[{\n\n            \nkey\n:\n \nrexDrag\n,\n\n            \nplugin\n:\n \nDragPlugin\n,\n\n            \nstart\n:\n \ntrue\n\n        \n},\n\n        \n// ...\n\n        \n]\n\n    \n}\n\n    \n// ...\n\n\n};\n\n\nvar\n \ngame\n \n=\n \nnew\n \nPhaser\n.\nGame\n(\nconfig\n);\n\n\n\n\n\nCreate instance\n\n\ngameobject\n.\ndrag\n \n=\n \nscene\n.\nplugins\n.\nget\n(\nrexDrag\n).\nadd\n(\ngameobject\n,\n \n{\n\n    \n//enable: true,\n\n    \n//axis: 0,      //0|\nboth\n|\nh\nv\n|1|\nhorizontal\n|\nh\n|2|\nvertical\n|\nv\n\n    \n//rotation: Phaser.Math.DegToRad(45)  // axis rotation in rad\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\nenable: drag-able\n\n\naxis : \n\n\n'both'\n,\n'h\nv'\n, or \n0\n : dragging on all directions.\n\n\n'horizontal'\n,\n'h'\n, or \n1\n : dragging on horizontal axis.\n\n\n'vertical'\n,\n'v'\n, or \n2\n : dragging on vertical axis.\n\n\n\n\n\n\nrotation : axis rotation in rad, available in horizontal or vertical axis mode.\n\n\n\n\nDragging events\n\n\nBuilt-in dragging events\n\n\ngameobject\n.\non\n(\ndragstart\n,\n \nfunction\n(\npointer\n,\n \ndragX\n,\n \ndragY\n){\n \n/*...*/\n \n});\n\n\ngameobject\n.\non\n(\ndrag\n,\n \nfunction\n(\npointer\n,\n \ndragX\n,\n \ndragY\n){\n \n/*...*/\n \n});\n\n\ngameobject\n.\non\n(\ndragend\n,\n \nfunction\n(\npointer\n,\n \ndragX\n,\n \ndragY\n,\n \ndropped\n){\n \n/*...*/\n \n});\n\n\n\n\n\nGet dragging state\n\n\nvar\n \nisDragging\n \n=\n \ngameobject\n.\ndrag\n.\nisDragging\n;\n\n\n\n\n\nSet rotation of axis\n\n\ngameobject\n.\ndrag\n.\nsetAxisRotation\n(\nrad\n);\n\n\n\n\n\nSet axis mode\n\n\ngameobject\n.\ndrag\n.\nsetAxisMode\n(\nm\n);\n  \n//0|\nboth\n|\nh\nv\n|1|\nhorizontal\n|\nh\n|2|\nvertical\n|\nv\n\n\n\n\n\nTry drag\n\n\nSample code\n\n\nGame object will be dragged if there is any point above it.\n\n\ngameobject\n.\ndrag\n.\ndrag\n();\n\n\n\n\n\nDrop\n\n\nSample code\n\n\nGame object will be dropped(dragend) manually.\n\n\ngameobject\n.\ndrag\n.\ndragend\n();", 
+            "text": "Introduction\n\n\nDrag game object.\n\n\n\n\nAuthor: Rex\n\n\nBehavior of game object\n\n\n\n\nSource code\n\n\nLink\n\n\nUsage\n\n\nSample code\n\n\nUser could import class directly, or install it by global plugin.\n\n\nImport class\n\n\nimport\n \nrexDrag\n \nfrom\n \n./plugins/drag.js\n;\n\n\n\n\n\nInstall global plugin\n\n\nInstall plugin in \nconfiguration of game\n\n\nimport\n \nDragPlugin\n \nfrom\n \n./plugins/drag-plugin.js\n;\n\n\n\nvar\n \nconfig\n \n=\n \n{\n\n    \n// ...\n\n    \nplugins\n:\n \n{\n\n        \nglobal\n:\n \n[{\n\n            \nkey\n:\n \nrexDrag\n,\n\n            \nplugin\n:\n \nDragPlugin\n,\n\n            \nstart\n:\n \ntrue\n\n        \n},\n\n        \n// ...\n\n        \n]\n\n    \n}\n\n    \n// ...\n\n\n};\n\n\nvar\n \ngame\n \n=\n \nnew\n \nPhaser\n.\nGame\n(\nconfig\n);\n\n\n\n\n\nCreate instance\n\n\ngameobject\n.\ndrag\n \n=\n \nscene\n.\nplugins\n.\nget\n(\nrexDrag\n).\nadd\n(\ngameobject\n,\n \n{\n\n    \n//enable: true,\n\n    \n//axis: 0,      //0|\nboth\n|\nh\nv\n|1|\nhorizontal\n|\nh\n|2|\nvertical\n|\nv\n\n    \n//rotation: Phaser.Math.DegToRad(45)  // axis rotation in rad\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\nenable: drag-able\n\n\naxis : \n\n\n'both'\n,\n'h\nv'\n, \n'x\ny'\n, or \n0\n : dragging on all directions.\n\n\n'horizontal'\n,\n'h'\n, \n'x'\n, or \n1\n : dragging on horizontal/x axis.\n\n\n'vertical'\n,\n'v'\n, \n'y'\n, or \n2\n : dragging on vertical/y axis.\n\n\n\n\n\n\nrotation : axis rotation in rad, available in horizontal or vertical axis mode.\n\n\n\n\nDragging events\n\n\nBuilt-in dragging events\n\n\ngameobject\n.\non\n(\ndragstart\n,\n \nfunction\n(\npointer\n,\n \ndragX\n,\n \ndragY\n){\n \n/*...*/\n \n});\n\n\ngameobject\n.\non\n(\ndrag\n,\n \nfunction\n(\npointer\n,\n \ndragX\n,\n \ndragY\n){\n \n/*...*/\n \n});\n\n\ngameobject\n.\non\n(\ndragend\n,\n \nfunction\n(\npointer\n,\n \ndragX\n,\n \ndragY\n,\n \ndropped\n){\n \n/*...*/\n \n});\n\n\n\n\n\nGet dragging state\n\n\nvar\n \nisDragging\n \n=\n \ngameobject\n.\ndrag\n.\nisDragging\n;\n\n\n\n\n\nSet rotation of axis\n\n\ngameobject\n.\ndrag\n.\nsetAxisRotation\n(\nrad\n);\n\n\n\n\n\nSet axis mode\n\n\ngameobject\n.\ndrag\n.\nsetAxisMode\n(\nm\n);\n  \n//0|\nboth\n|\nh\nv\n|1|\nhorizontal\n|\nh\n|2|\nvertical\n|\nv\n\n\n\n\n\nTry drag\n\n\nSample code\n\n\nGame object will be dragged if there is any point above it.\n\n\ngameobject\n.\ndrag\n.\ndrag\n();\n\n\n\n\n\nDrop\n\n\nSample code\n\n\nGame object will be dropped(dragend) manually.\n\n\ngameobject\n.\ndrag\n.\ndragend\n();", 
             "title": "Drag"
         }, 
         {
@@ -287,7 +287,7 @@
         }, 
         {
             "location": "/drag/index.html#create-instance", 
-            "text": "gameobject . drag   =   scene . plugins . get ( rexDrag ). add ( gameobject ,   { \n     //enable: true, \n     //axis: 0,      //0| both | h v |1| horizontal | h |2| vertical | v \n     //rotation: Phaser.Math.DegToRad(45)  // axis rotation in rad  });   Properties   enable: drag-able  axis :   'both' , 'h v' , or  0  : dragging on all directions.  'horizontal' , 'h' , or  1  : dragging on horizontal axis.  'vertical' , 'v' , or  2  : dragging on vertical axis.    rotation : axis rotation in rad, available in horizontal or vertical axis mode.", 
+            "text": "gameobject . drag   =   scene . plugins . get ( rexDrag ). add ( gameobject ,   { \n     //enable: true, \n     //axis: 0,      //0| both | h v |1| horizontal | h |2| vertical | v \n     //rotation: Phaser.Math.DegToRad(45)  // axis rotation in rad  });   Properties   enable: drag-able  axis :   'both' , 'h v' ,  'x y' , or  0  : dragging on all directions.  'horizontal' , 'h' ,  'x' , or  1  : dragging on horizontal/x axis.  'vertical' , 'v' ,  'y' , or  2  : dragging on vertical/y axis.    rotation : axis rotation in rad, available in horizontal or vertical axis mode.", 
             "title": "Create instance"
         }, 
         {
@@ -3609,6 +3609,76 @@
             "location": "/xor/index.html#decrypt", 
             "text": "var   decResult   =   scene . plugins . get ( rexXOR ). Decrypt ( encResult ,   pwd );", 
             "title": "Decrypt"
+        }, 
+        {
+            "location": "/localstorage/index.html", 
+            "text": "Introduction\n\n\nStore small data in key-value pairs locally within the user's browser.\n\n\n\n\nAuthor: Built-in javascript function\n\n\n\n\nUsage\n\n\nReference\n\n\nSample code\n\n\nSave data\n\n\nlocalStorage\n.\nsetItem\n(\nkey\n,\n \nvalue\n);\n\n\n\n\n\nRead data\n\n\nvar\n \nvalue\n \n=\n \nlocalStorage\n.\ngetItem\n(\nkey\n);\n\n\n\n\n\nRemove data\n\n\nlocalStorage\n.\nremoveItem\n(\nkey\n);", 
+            "title": "LocalStorage"
+        }, 
+        {
+            "location": "/localstorage/index.html#introduction", 
+            "text": "Store small data in key-value pairs locally within the user's browser.   Author: Built-in javascript function", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/localstorage/index.html#usage", 
+            "text": "Reference  Sample code", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/localstorage/index.html#save-data", 
+            "text": "localStorage . setItem ( key ,   value );", 
+            "title": "Save data"
+        }, 
+        {
+            "location": "/localstorage/index.html#read-data", 
+            "text": "var   value   =   localStorage . getItem ( key );", 
+            "title": "Read data"
+        }, 
+        {
+            "location": "/localstorage/index.html#remove-data", 
+            "text": "localStorage . removeItem ( key );", 
+            "title": "Remove data"
+        }, 
+        {
+            "location": "/localforage/index.html", 
+            "text": "Introduction\n\n\nOffline storage, improved.\n\n\n\n\nAuthor: \nMozilla\n\n\n\n\nUsage\n\n\nOfficial document\n\n\nSample code\n\n\nBy default, LocalForage selects backend drivers for the datastore in this order:\n\n\n\n\nIndexedDB\n\n\nWebSQL\n\n\nlocalStorage\n\n\n\n\nSave data\n\n\n\n\nCallback\n    \nlocalforage\n.\nsetItem\n(\nkey\n,\n \nvalue\n,\n \nfunction\n(){\n \n/* ... */\n \n});\n\n\n\n\nPromise\n    \nlocalforage\n.\nsetItem\n(\nkey\n,\n \nvalue\n)\n\n    \n.\nthen\n(\nfunction\n(\nvalue\n){\n \n/* ... */\n \n})\n\n    \n.\ncatch\n(\nfunction\n(\nerr\n){\n \n/* ... */\n \n});\n\n\n\n\n\n\nRead data\n\n\n\n\nCallback\n    \nlocalforage\n.\ngetItem\n(\nkey\n,\n \nfunction\n(\nerr\n,\n \nvalue\n){\n \n/* ... */\n \n});\n\n\n\n\nPromise\n    \nlocalforage\n.\ngetItem\n(\nkey\n)\n\n    \n.\nthen\n(\nfunction\n(\nvalue\n){\n \n/* ... */\n \n})\n\n    \n.\ncatch\n(\nfunction\n(\nerr\n){\n \n/* ... */\n \n});\n\n\n\n\n\n\nRemove data\n\n\n\n\nCallback\n    \nlocalforage\n.\nremoveItem\n(\nkey\n,\n \nfunction\n(){\n \n/* ... */\n \n});\n\n\n\n\nPromise\n    \nlocalforage\n.\nremoveItem\n(\nkey\n)\n\n    \n.\nthen\n(\nfunction\n(\nvalue\n){\n \n/* ... */\n \n})\n\n    \n.\ncatch\n(\nfunction\n(\nerr\n){\n \n/* ... */\n \n});", 
+            "title": "LocalForage"
+        }, 
+        {
+            "location": "/localforage/index.html#introduction", 
+            "text": "Offline storage, improved.   Author:  Mozilla", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/localforage/index.html#usage", 
+            "text": "Official document  Sample code  By default, LocalForage selects backend drivers for the datastore in this order:   IndexedDB  WebSQL  localStorage", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/localforage/index.html#save-data", 
+            "text": "Callback\n     localforage . setItem ( key ,   value ,   function (){   /* ... */   });   Promise\n     localforage . setItem ( key ,   value ) \n     . then ( function ( value ){   /* ... */   }) \n     . catch ( function ( err ){   /* ... */   });", 
+            "title": "Save data"
+        }, 
+        {
+            "location": "/localforage/index.html#read-data", 
+            "text": "Callback\n     localforage . getItem ( key ,   function ( err ,   value ){   /* ... */   });   Promise\n     localforage . getItem ( key ) \n     . then ( function ( value ){   /* ... */   }) \n     . catch ( function ( err ){   /* ... */   });", 
+            "title": "Read data"
+        }, 
+        {
+            "location": "/localforage/index.html#remove-data", 
+            "text": "Callback\n     localforage . removeItem ( key ,   function (){   /* ... */   });   Promise\n     localforage . removeItem ( key ) \n     . then ( function ( value ){   /* ... */   }) \n     . catch ( function ( err ){   /* ... */   });", 
+            "title": "Remove data"
+        }, 
+        {
+            "location": "/lokijs/index.html", 
+            "text": "", 
+            "title": "LokiJs"
+        }, 
+        {
+            "location": "/pouchdb/index.html", 
+            "text": "", 
+            "title": "Pouchdb"
         }
     ]
 }

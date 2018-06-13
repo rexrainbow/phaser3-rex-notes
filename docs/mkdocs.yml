@@ -76,8 +76,14 @@ pages:
     - Mustache: mustache.md
     - LZ string: lzstringplugin.md
     - XOR: xor.md
-
-
+- Storage:
+    - Offline:
+        - Key-value pairs:
+            - LocalStorage: localstorage.md
+            - LocalForage: localforage.md
+        - Database:
+            - LokiJs: lokijs.md
+            - Pouchdb: pouchdb.md  
 
 
 extra_javascript:
