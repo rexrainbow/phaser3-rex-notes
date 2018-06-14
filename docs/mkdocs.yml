@@ -8,10 +8,11 @@ pages:
 - Input:
     - Input: input.md
     - Touch events: touchevents.md
-    - Keyboard events: keyboardevents.md
+    - Cursor: cursor.md
     - Drag: drag.md
     - Slider: slider.md
-    - Drag to cursorKeys: dragcursor.md
+    - Drag to cursorKeys: dragcursor.md        
+    - Keyboard events: keyboardevents.md
 - Loader:
     - Loader: loader.md
     - Webfont loader: webfontloader.md    

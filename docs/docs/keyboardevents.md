@@ -20,39 +20,47 @@ scene.input.keyboard.on('keydown_' + 'A', function (event) { /* ... */});
 scene.input.keyboard.on('keyup_' + 'A', function (event) { /* ... */});
 ```
 
-### Get state of specific key
+### Get state of key
 
-- Get key state object
-
-```javascript
-var BKey = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.B);
-```
-
-- Get key state
-
-```javascript
-var isDown = BKey.isDown;
-var isUp = BKey.isUp;
-```
+1. Get state object of a key
+    ```javascript
+    var WKey = scene.input.keyboard.addKey('W');  // see `Key map` section
+    // var WKey = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+    ```
+    - Get state object of keys
+        ```javascript
+        var keys = scene.input.keyboard.addKey('W,S,A,D'); // comma-separated string
+        ```
+1. Get key state
+    ```javascript
+    var isDown = WKey.isDown;
+    var isUp = WKey.isUp;
+    ```
 
 ### Get state of cursorkeys
 
-- Get key state object
+1. Get key state object
+    ```javascript
+    var cursorKeys = scene.input.keyboard.createCursorKeys();
+    ```
+1. Get key state
+    ```javascript
+    var isUpDown = cursorKeys.up.isDown;
+    var isDownDown = cursorKeys.down.isDown;
+    var isLeftDown = cursorKeys.left.isDown;
+    var isRightDown = cursorKeys.right.isDown;
+    var isSpaceDown = cursorKeys.space.isDown;
+    var isShiftDown = cursorKeys.shift.isDown;
+    ```
+
+### Remove key state
 
 ```javascript
-var cursorKeys = scene.input.keyboard.createCursorKeys();
+scene.input.keyboard.removeKey('W');
+// scene.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.W);
 ```
 
-- Get key state
-
-```javascript
-var isUpDown = cursorKeys.up.isDown;
-var isDownDown = cursorKeys.down.isDown;
-var isLeftDown = cursorKeys.left.isDown;
-var isRightDown = cursorKeys.right.isDown;
-var isSpaceDown = cursorKeys.space.isDown;
-var isShiftDown = cursorKeys.shift.isDown;
-```
+Removed key state won't be updated.
 
 ### Key map
 
