@@ -6,11 +6,11 @@ Built-in touch/mouse events of phaser.
 
 ## Usage
 
-### Register
+### Register interactive
 
-Call `gameObject.setInteractive(...)` to register touch input of Game Object.
+Call `gameObject.setInteractive(...)` to register touch input of Game Object before listening touching events.
 
-- Set hit area from texture width & height
+- Set hit area from width & height (rectangle) of the texture
     ```javascript
     gameObject.setInteractive();
     ```
@@ -18,6 +18,21 @@ Call `gameObject.setInteractive(...)` to register touch input of Game Object.
     ```javascript
     gameObject.setInteractive(shape, callback);
     ```
+    - Circle
+        - shape : `new Phaser.Geom.Circle(x, y, radius)`
+        - callback : `Phaser.Geom.Circle.Contains`
+    - Ellipse
+        - shape : `new Phaser.Geom.Ellipse(x, y, width, height)`
+        - callback : `Phaser.Geom.Ellipse.Contains`    
+    - Rectangle
+        - shape : `new Phaser.Geom.Rectangle(x, y, width, height)`
+        - callback : `Phaser.Geom.Rectangle.Contains`      
+    - Triangle
+        - shape : `new Phaser.Geom.Triangle(x1, y1, x2, y2, x3, y3)`
+        - callback : `Phaser.Geom.Triangle.Contains`       
+    - Polygon
+        - shape : `new Phaser.Geom.Polygon(points)`
+        - callback : `Phaser.Geom.Polygon.Contains`
 - Set interactive configuration
     ```javascript
     gameObject.setInteractive({
@@ -34,11 +49,24 @@ Call `gameObject.setInteractive(...)` to register touch input of Game Object.
     Properties:
     - Hit area
         - Shape
-            - `hitArea`: shape
-            - `hitAreaCallback`: callback
+            - Circle
+                - `hitArea` : `new Phaser.Geom.Circle(x, y, radius)`
+                - `hitAreaCallback` : `Phaser.Geom.Circle.Contains`
+            - Ellipse
+                - `hitArea` : `new Phaser.Geom.Ellipse(x, y, width, height)`
+                - `hitAreaCallback` : `Phaser.Geom.Ellipse.Contains`    
+            - Rectangle
+                - `hitArea` : `new Phaser.Geom.Rectangle(x, y, width, height)`
+                - `hitAreaCallback` : `Phaser.Geom.Rectangle.Contains`      
+            - Triangle
+                - `hitArea` : `new Phaser.Geom.Triangle(x1, y1, x2, y2, x3, y3)`
+                - `hitAreaCallback` : `Phaser.Geom.Triangle.Contains`       
+            - Polygon
+                - `hitArea` : `new Phaser.Geom.Polygon(points)`
+                - `hitAreaCallback` : `Phaser.Geom.Polygon.Contains`
         - Pixel alpha
             - `pixelPerfect` : `true`
-            - `alphaTolerance` : `1`
+            - `alphaTolerance` : `1` (0-255)
         - Custom hit-testing function
             - `hitAreaCallback`
                 ```javascript
@@ -54,37 +82,29 @@ Call `gameObject.setInteractive(...)` to register touch input of Game Object.
         - `cursor` : CSS string
         - `useHandCursor` : `true`
 
-### Mouse/touch events
+### Disable interactive
 
 ```javascript
-scene.input.on('pointerdown', function(pointer, currentlyOver){ /* ... */ });
-scene.input.on('pointerup', function(pointer, currentlyOver){ /* ... */ });
-scene.input.on('pointermove', function(pointer, currentlyOver){ /* ... */ });
-
-scene.input.on('pointerover', function(pointer, justOver){ /* ... */ });
-scene.input.on('pointerout', function(pointer, justOut){ /* ... */ });
+gameObject.setInteractive(false);
 ```
 
-### Active pointer
+### Touch events
 
-```javascript
-var pointer = scene.input.activePointer;
-// var x = pointer.x;
-// var y = pointer.y;
-```
-
-### Mouse/touch
-
-- Register game object
+- Events to get **all** touched Game Objects
     ```javascript
-    gameObject.setInteractive();       // enable
-    // gameObject.setInteractive(false);  // disable
+    scene.input.on('pointerdown', function(pointer, currentlyOver){ /* ... */ });
+    scene.input.on('pointerup', function(pointer, currentlyOver){ /* ... */ });
+    scene.input.on('pointermove', function(pointer, currentlyOver){ /* ... */ });
+
+    scene.input.on('pointerover', function(pointer, justOver){ /* ... */ });
+    scene.input.on('pointerout', function(pointer, justOut){ /* ... */ });
     ```
-- Mouse/touch events of a game object
+- Events to get touched Game object
     ```javascript
     gameObject.on('pointerdown', function(pointer, localX, localY, camera){ /* ... */ });
     gameObject.on('pointerup', function(pointer, localX, localY){ /* ... */ });
     gameObject.on('pointermove', function(pointer, localX, localY){ /* ... */ });
+    
     gameObject.on('pointerover', function(pointer, localX, localY){ /* ... */ });
     gameObject.on('pointerout', function(pointer){ /* ... */ });
     ```
@@ -92,41 +112,84 @@ var pointer = scene.input.activePointer;
     scene.input.on('gameobjectdown', function(pointer, gameObject){ /* ... */ });
     scene.input.on('gameobjectup', function(pointer, gameObject){ /* ... */ });
     scene.input.on('gameobjectmove', function(pointer, gameObject){ /* ... */ });
+    
     scene.input.on('gameobjectover', function(pointer, gameObject){ /* ... */ });
     scene.input.on('gameobjectout', function(pointer, gameObject){ /* ... */ });
     ```
 
 ### Dragging
 
-- Dragable
+#### Enable dragging
+
+- Enable dragging when [registering interactive](touchevents.md#register-interactive)
     ```javascript
     gameObject.setInteractive({ draggable: true });
     ```
-- Disable dragable
+- Enable dragging and add it to dragging detecting list after registered interactive
+    ```javascript
+    scene.input.setDraggable(gameObject);
+    ```
+- Enable dragging
+    ```javascript
+    gameObject.input.draggable = true;
+    ```        
+
+#### Disable dragging
+
+- Remove Game Object from dragging detecting list
     ```javascript
     scene.input.setDraggable(gameObject, false);
     ```
-- Dragging events
+- Disable dragging but keep it in dragging detecting list
     ```javascript
-    gameObject.on('dragstart', function(pointer, dragX, dragY){ /* ... */ });
-    gameObject.on('drag', function(pointer, dragX, dragY){ /* ... */ });
-    gameObject.on('dragend', function(pointer, dragX, dragY, dropped){ /* ... */ });
+    gameObject.input.draggable = false;
     ```
-    ```javascript
-    scene.input.on('dragstart', function(pointer, gameObject){ /* ... */ });
-    scene.input.on('drag', function(pointer, gameObject, dragX, dragY){ /* ... */ });
-    scene.input.on('dragend', function(pointer, gameObject, dropped){ /* ... */ });
-    ```
-- Dragging properties
-    ```javascript
-    scene.input.dragDistanceThreshold = 16;
-    scene.input.dragTimeThreshold = 500;
-    ```
+
+#### Dragging events
+
+```javascript
+gameObject.on('dragstart', function(pointer, dragX, dragY){ /* ... */ });
+gameObject.on('drag', function(pointer, dragX, dragY){ /* ... */ });
+gameObject.on('dragend', function(pointer, dragX, dragY, dropped){ /* ... */ });
+```
+
+```javascript
+scene.input.on('dragstart', function(pointer, gameObject){ /* ... */ });
+scene.input.on('drag', function(pointer, gameObject, dragX, dragY){ /* ... */ });
+scene.input.on('dragend', function(pointer, gameObject, dropped){ /* ... */ });
+```
+
+#### Dragging properties
+
+```javascript
+scene.input.dragDistanceThreshold = 16;
+scene.input.dragTimeThreshold = 500;
+```
 
 ### Drop zone
 
+#### Enable drop zone
+
+- Enable dropping when [registering interactive](touchevents.md#register-interactive)
+    ```javascript
+    gameObject.setInteractive({ dropZone: true });
+    ```
+- Enable dropping after registered interactive
+    ```javascript
+    gameObject.input.dropZone = true;
+    ```  
+
+#### Disable drop zone
+
+```javascript
+gameObject.input.dropZone = false;
+```
+
+#### Dropping events
+
 ```javascript
 gameObject.on('drop', function(pointer, target){ /* ... */ });
+
 gameObject.on('dragenter', function(pointer, target){ /* ... */ });
 gameObject.on('dragover', function(pointer, target){ /* ... */ });
 gameObject.on('dragleave', function(pointer, target){ /* ... */ });
@@ -140,11 +203,54 @@ scene.input.on('dragover', function(pointer, gameObject, target){ /* ... */ });
 scene.input.on('dragleave', function(pointer, gameObject, target){ /* ... */ });
 ```
 
+### Single touch
+
+#### Pointer
+
+```javascript
+var pointer = scene.input.activePointer;
+```
+
+### Multi-touch
+
+#### Add pointers
+
+```javascript
+scene.input.addPointer(num);  // total points = num + 1
+```
+
+#### Pointers
+
+- pointer 1 ~ 10
+    ```javascript
+    var pointer = scene.input.pointer1;
+    //var pointer = scene.input.pointer10;
+    ```
+
 ### Properties of point
 
-- Position of current touching: `pointer.x` , `pointer.y`
-- Position of touching start: `pointer.downX`, `pointer.downY`
-- Position of touching end: `pointer.upX`, `pointer.upY`
-- No botton down: `pointer.noButtonDown()`
-- Is left botton down: `pointer.leftButtonDown()`
-- Is right botton down: `pointer.rightButtonDown()`
+#### Is touching
+
+Is touching or any botton down (mouse).
+
+```javascript
+pointer.isDown
+```
+
+#### Position
+
+- Current touching
+    - Position in screen : `pointer.x` , `pointer.y`
+    - Position in camera : `pointer.worldX` , `pointer.worldY`
+- Dragable object
+    - Touching start : `pointer.downX`, `pointer.downY`
+    - Touching end : `pointer.upX`, `pointer.upY`
+
+#### Botton down
+
+- No botton down : `pointer.noButtonDown()`
+- Is primary (left) botton down : `pointer.leftButtonDown()`
+- Is secondary (right) botton down : `pointer.rightButtonDown()`
+- Is middle (mouse wheel) button down : `pointer.middleButtonDown()`
+- Is back botton down : `pointer.backButtonDown()`
+- Is forward button down : `pointer.forwardButtonDown()`
