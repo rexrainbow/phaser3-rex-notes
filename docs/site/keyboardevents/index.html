@@ -277,6 +277,54 @@
           
           
 
+
+  <li class="md-nav__item">
+    <a href="../cursor/index.html" title="Cursor" class="md-nav__link">
+      Cursor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../drag/index.html" title="Drag" class="md-nav__link">
+      Drag
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../slider/index.html" title="Slider" class="md-nav__link">
+      Slider
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../dragcursor/index.html" title="Drag to cursorKeys" class="md-nav__link">
+      Drag to cursorKeys
+    </a>
+  </li>
+
+        
+          
+          
+          
+
   
 
 
@@ -331,8 +379,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-state-of-specific-key" title="Get state of specific key" class="md-nav__link">
-    Get state of specific key
+  <a href="#get-state-of-key" title="Get state of key" class="md-nav__link">
+    Get state of key
   </a>
   
 </li>
@@ -340,6 +388,13 @@
           <li class="md-nav__item">
   <a href="#get-state-of-cursorkeys" title="Get state of cursorkeys" class="md-nav__link">
     Get state of cursorkeys
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-key-state" title="Remove key state" class="md-nav__link">
+    Remove key state
   </a>
   
 </li>
@@ -368,42 +423,6 @@
   
 </nav>
     
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../drag/index.html" title="Drag" class="md-nav__link">
-      Drag
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../slider/index.html" title="Slider" class="md-nav__link">
-      Slider
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../dragcursor/index.html" title="Drag to cursorKeys" class="md-nav__link">
-      Drag to cursorKeys
-    </a>
   </li>
 
         
@@ -1612,8 +1631,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-state-of-specific-key" title="Get state of specific key" class="md-nav__link">
-    Get state of specific key
+  <a href="#get-state-of-key" title="Get state of key" class="md-nav__link">
+    Get state of key
   </a>
   
 </li>
@@ -1621,6 +1640,13 @@
           <li class="md-nav__item">
   <a href="#get-state-of-cursorkeys" title="Get state of cursorkeys" class="md-nav__link">
     Get state of cursorkeys
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-key-state" title="Remove key state" class="md-nav__link">
+    Remove key state
   </a>
   
 </li>
@@ -1676,38 +1702,42 @@
 <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;keyup_&#39;</span> <span class="o">+</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span><span class="p">});</span>
 </pre></div>
 
-<h3 id="get-state-of-specific-key">Get state of specific key<a class="headerlink" href="#get-state-of-specific-key" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Get key state object</li>
+<h3 id="get-state-of-key">Get state of key<a class="headerlink" href="#get-state-of-key" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Get state object of a key
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">WKey</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">addKey</span><span class="p">(</span><span class="s1">&#39;W&#39;</span><span class="p">);</span>  <span class="c1">// see `Key map` section</span>
+<span class="c1">// var WKey = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);</span>
+</pre></div><ul>
+<li>Get state object of keys
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">keys</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">addKey</span><span class="p">(</span><span class="s1">&#39;W,S,A,D&#39;</span><span class="p">);</span> <span class="c1">// comma-separated string</span>
+</pre></div></li>
 </ul>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">BKey</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">addKey</span><span class="p">(</span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Input</span><span class="p">.</span><span class="nx">Keyboard</span><span class="p">.</span><span class="nx">KeyCodes</span><span class="p">.</span><span class="nx">B</span><span class="p">);</span>
-</pre></div>
-
-<ul>
-<li>Get key state</li>
-</ul>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isDown</span> <span class="o">=</span> <span class="nx">BKey</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">isUp</span> <span class="o">=</span> <span class="nx">BKey</span><span class="p">.</span><span class="nx">isUp</span><span class="p">;</span>
-</pre></div>
-
+</li>
+<li>Get key state
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isDown</span> <span class="o">=</span> <span class="nx">WKey</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">isUp</span> <span class="o">=</span> <span class="nx">WKey</span><span class="p">.</span><span class="nx">isUp</span><span class="p">;</span>
+</pre></div></li>
+</ol>
 <h3 id="get-state-of-cursorkeys">Get state of cursorkeys<a class="headerlink" href="#get-state-of-cursorkeys" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Get key state object</li>
-</ul>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cursorKeys</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">createCursorKeys</span><span class="p">();</span>
-</pre></div>
-
-<ul>
-<li>Get key state</li>
-</ul>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isUpDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">up</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
+<ol>
+<li>Get key state object
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cursorKeys</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">createCursorKeys</span><span class="p">();</span>
+</pre></div></li>
+<li>Get key state
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isUpDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">up</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">isDownDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">down</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">isLeftDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">left</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">isRightDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">right</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">isSpaceDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">space</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">isShiftDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">shift</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
+</pre></div></li>
+</ol>
+<h3 id="remove-key-state">Remove key state<a class="headerlink" href="#remove-key-state" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">removeKey</span><span class="p">(</span><span class="s1">&#39;W&#39;</span><span class="p">);</span>
+<span class="c1">// scene.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.W);</span>
 </pre></div>
 
+<p>Removed key state won't be updated.</p>
 <h3 id="key-map">Key map<a class="headerlink" href="#key-map" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>A</code> ~ <code>Z</code></li>
@@ -1764,7 +1794,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../touchevents/index.html" title="Touch events" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../dragcursor/index.html" title="Drag to cursorKeys" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -1773,19 +1803,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Touch events
+                Drag to cursorKeys
               </span>
             </div>
           </a>
         
         
-          <a href="../drag/index.html" title="Drag" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../loader/index.html" title="Loader" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Drag
+                Loader
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

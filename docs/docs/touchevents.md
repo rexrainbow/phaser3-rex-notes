@@ -82,6 +82,10 @@ Call `gameObject.setInteractive(...)` to register touch input of Game Object bef
         - `cursor` : CSS string
         - `useHandCursor` : `true`
 
+
+!!! warning "Pixel perfect hit-testing"
+    This is an expensive process, should only be enabled on Game Objects that really need it.
+
 ### Disable interactive
 
 ```javascript
@@ -132,7 +136,7 @@ gameObject.setInteractive(false);
 - Enable dragging
     ```javascript
     gameObject.input.draggable = true;
-    ```        
+    ```
 
 #### Disable dragging
 
@@ -213,7 +217,22 @@ var pointer = scene.input.activePointer;
 
 ### Multi-touch
 
-#### Add pointers
+#### Amount of active pointers
+
+Set amount of active pointers in game configuration
+
+```javascript
+var config = {
+    // ...
+    input: {
+        activePointers: 1,
+        // ...
+    }
+};
+var game = new Phaser.Game(config);
+```
+
+Or add pointers in run-time.
 
 ```javascript
 scene.input.addPointer(num);  // total points = num + 1
@@ -224,33 +243,37 @@ scene.input.addPointer(num);  // total points = num + 1
 - pointer 1 ~ 10
     ```javascript
     var pointer = scene.input.pointer1;
-    //var pointer = scene.input.pointer10;
+    // ...
+    var pointer = scene.input.pointer10;
+    ```
+- pointer n
+    ```javascript
+    var pointer = scene.input.manager.pointers[n];
+    ```
+- Amount of total pointers
+    ```javascript
+    var amount = scene.input.manager.pointersTotal;
     ```
 
 ### Properties of point
 
-#### Is touching
-
-Is touching or any botton down (mouse).
-
-```javascript
-pointer.isDown
-```
-
-#### Position
-
-- Current touching
-    - Position in screen : `pointer.x` , `pointer.y`
-    - Position in camera : `pointer.worldX` , `pointer.worldY`
-- Dragable object
-    - Touching start : `pointer.downX`, `pointer.downY`
-    - Touching end : `pointer.upX`, `pointer.upY`
-
-#### Botton down
-
-- No botton down : `pointer.noButtonDown()`
-- Is primary (left) botton down : `pointer.leftButtonDown()`
-- Is secondary (right) botton down : `pointer.rightButtonDown()`
-- Is middle (mouse wheel) button down : `pointer.middleButtonDown()`
-- Is back botton down : `pointer.backButtonDown()`
-- Is forward button down : `pointer.forwardButtonDown()`
+- Position
+    - Current touching
+        - Position in screen : `pointer.x` , `pointer.y`
+        - Position in camera : `pointer.worldX` , `pointer.worldY`
+    - Dragable object
+        - Touching start : `pointer.downX`, `pointer.downY`
+        - Touching end : `pointer.upX`, `pointer.upY`
+- Touch state
+    - Is touching :  `pointer.isDown`
+    - Is touching start : `pointer.justDown`
+    - Is touching end : `pointer.justUp`
+    - Is touching move : `pointer.justMoved`
+- Botton down
+    - No botton down : `pointer.noButtonDown()`
+    - Is primary (left) botton down : `pointer.leftButtonDown()`
+    - Is secondary (right) botton down : `pointer.rightButtonDown()`
+    - Is middle (mouse wheel) button down : `pointer.middleButtonDown()`
+    - Is back botton down : `pointer.backButtonDown()`
+    - Is forward button down : `pointer.forwardButtonDown()`
+- Index in `scene.input.manager.pointers` : `pointer.id`

@@ -39,6 +39,7 @@ var game = new Phaser.Game(config);
             target: null,
             capture: true
         },
+        activePointers: 1,
         touch: {
             target: null,
             capture: true

@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/format/index.html">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/cursor/index.html">
       
       
         <meta name="author" content="rexrainbow">
@@ -36,7 +36,7 @@
     
     
       
-        <title>Format - Notes of Phaser 3</title>
+        <title>Cursor - Notes of Phaser 3</title>
       
     
     
@@ -96,7 +96,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Format
+                Cursor
               </span>
             
           
@@ -232,10 +232,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
     
     <label class="md-nav__link" for="nav-3">
       Input
@@ -275,11 +277,76 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../cursor/index.html" title="Cursor" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Cursor
+      </label>
+    
+    <a href="index.html" title="Cursor" class="md-nav__link md-nav__link--active">
       Cursor
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set-default-cursor" title="Set default cursor" class="md-nav__link">
+    Set default cursor
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-cursor-of-a-game-object" title="Set cursor of a Game Object" class="md-nav__link">
+    Set cursor of a Game Object
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+        <li class="md-nav__item">
+          <a href="#__comments" title="Comments" class="md-nav__link md-nav__link--active">
+            Comments
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -1276,12 +1343,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-13" type="checkbox" id="nav-13" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-13" type="checkbox" id="nav-13">
     
     <label class="md-nav__link" for="nav-13">
       String
@@ -1297,56 +1362,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="toc">
-        Format
-      </label>
-    
-    <a href="index.html" title="Format" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../format/index.html" title="Format" class="md-nav__link">
       Format
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-</li>
-      
-      
-      
-        <li class="md-nav__item">
-          <a href="#__comments" title="Comments" class="md-nav__link md-nav__link--active">
-            Comments
-          </a>
-        </li>
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -1565,6 +1585,26 @@
     Usage
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set-default-cursor" title="Set default cursor" class="md-nav__link">
+    Set default cursor
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-cursor-of-a-game-object" title="Set cursor of a Game Object" class="md-nav__link">
+    Set cursor of a Game Object
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
       
@@ -1588,19 +1628,41 @@
               
                 
                 
-                  <h1>Format</h1>
+                  <h1>Cursor</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Format string with variables.</p>
+<p>Custom cursor, built-in feature of phaser.</p>
 <ul>
 <li>Author: Richard Davey</li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p>Replace <code>%x</code> from an array. <code>x</code> starts from <code>1</code>.</p>
-<div class="codehilite"><pre><span></span><span class="c1">// const Format = Phaser.Utils.String.Format;</span>
-<span class="kd">var</span> <span class="nx">template</span> <span class="o">=</span> <span class="s1">&#39;hello, %1&#39;</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">view</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;rex&#39;</span><span class="p">];</span>
-<span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">Format</span><span class="p">(</span><span class="nx">template</span><span class="p">,</span> <span class="nx">view</span><span class="p">);</span>
+<p>References:</p>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/cursor">Cursor</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_User_Interface/Using_URL_values_for_the_cursor_property">Using URL values for the cursor property</a></li>
+</ul>
+<h3 id="set-default-cursor">Set default cursor<a class="headerlink" href="#set-default-cursor" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">setDefaultCursor</span><span class="p">(</span><span class="nx">CSSString</span><span class="p">);</span>
+<span class="c1">// CSSString: &#39;url(assets/input/cursors/sword.cur), pointer&#39;</span>
+</pre></div>
+
+<h3 id="set-cursor-of-a-game-object">Set cursor of a Game Object<a class="headerlink" href="#set-cursor-of-a-game-object" title="Permanent link">&para;</a></h3>
+<p>Change cursor image when cursor is over that Game Object.</p>
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">setInteractive</span><span class="p">({</span>
+    <span class="nx">cursor</span><span class="o">:</span> <span class="nx">CSSString</span>
+<span class="p">});</span>
+<span class="c1">// CSSString: &#39;url(assets/input/cursors/sword.cur), pointer&#39;</span>
+</pre></div>
+
+<p>Set cursor image directly after <code>gameobject.setInteractive()</code>.</p>
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">cursor</span> <span class="o">=</span> <span class="nx">CSSString</span><span class="p">;</span>
+<span class="c1">// CSSString: &#39;url(assets/input/cursors/sword.cur), pointer&#39;</span>
+</pre></div>
+
+<p>Use pointer (hand cursor).</p>
+<div class="codehilite"><pre><span></span><span class="nx">gameobject</span><span class="p">.</span><span class="nx">setInteractive</span><span class="p">({</span>
+    <span class="nx">useHandCursor</span><span class="o">:</span> <span class="kc">true</span>
+<span class="p">});</span>
 </pre></div>
                 
                   
@@ -1612,9 +1674,9 @@
                   <div id="disqus_thread"></div>
 <script>
   var disqus_config = function () {
-    this.page.url = "https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/format/index.html";
+    this.page.url = "https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/cursor/index.html";
     this.page.identifier =
-      "/format/index.html";
+      "/cursor/index.html";
   };
   (function() {
     var d = document, s = d.createElement("script");
@@ -1636,7 +1698,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../gashapon/index.html" title="Gashapon" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../touchevents/index.html" title="Touch events" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -1645,19 +1707,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Gashapon
+                Touch events
               </span>
             </div>
           </a>
         
         
-          <a href="../mustache/index.html" title="Mustache" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../drag/index.html" title="Drag" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Mustache
+                Drag
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
