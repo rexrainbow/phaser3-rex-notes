@@ -11,7 +11,9 @@ class Drag {
         this.gameobject = gameobject;
         this.scene = GetSceneObject(gameobject);
 
-        this.enable = null;
+        this.enable = false;
+        this.pointerId = undefined;
+        this.gameobject.setInteractive(GetValue(config, "inputConfig", undefined));
         this.resetFromJSON(config);
         this.boot();
     }
@@ -41,16 +43,19 @@ class Drag {
     }
 
     boot() {
-        if (this.gameobject.on) {
-            this.gameobject.on('drag', this.onDragging, this);
-            this.gameobject.on('destroy', this.destroy, this);
+        var gameobject = this.gameobject;
+        if (gameobject.on) {
+            gameobject.on('dragstart', this.onDragStart, this);
+            gameobject.on('drag', this.onDragging, this);
+            gameobject.on('dragend', this.onDragEnd, this);
+            gameobject.on('destroy', this.destroy, this);
         }
     }
 
     shutdown() {
         this.gameobject = undefined;
         this.scene = undefined;
-        // gameobject event 'drag' will be removed when this gameobject destroyed 
+        // gameobject event 'dragstart', 'drag', 'dragend' will be removed when this gameobject destroyed 
     }
 
     destroy() {
@@ -58,10 +63,6 @@ class Drag {
     }
 
     setEnable(e) {
-        if (this.enable === null) {
-            this.gameobject.setInteractive(); // only need setInteractive once
-        }
-
         if (e === undefined) {
             e = true;
         }
@@ -89,31 +90,58 @@ class Drag {
     }
 
     drag() {
-        var activePointer = this.gameobject.scene.input.activePointer;
-        if ((activePointer.dragState === 0) &&
-            activePointer.primaryDown &&
-            activePointer.justDown &&
-            this.hitTest(activePointer)) {
-            activePointer.dragState = 1;
+        var inputManager = this.scene.input.manager;
+        var pointersTotal = inputManager.pointersTotal;
+        var pointers = inputManager.pointers,
+            pointer;
+        for (var i = 0; i < pointersTotal; i++) {
+            pointer = pointers[i];
+            if ((pointer.dragState === 0) &&
+                pointer.primaryDown &&
+                pointer.justDown &&
+                this.hitTest(pointer)) {
+                pointer.dragState = 1;
+                break;
+            }
         }
     }
 
     hitTest(pointer) {
-        var gameobject = this.gameobject;
-        var manager = pointer.manager;
-        var camera = gameobject.scene.cameras.getCameraBelowPointer(pointer);
-        var output = manager.hitTest(pointer.x, pointer.y, [gameobject], camera);
-        return (output.length > 0);
+        var gameobjects = [this.gameobject];
+        var cameras = this.scene.input.cameras.getCamerasBelowPointer(pointer);
+        var inputManager = this.scene.input.manager;
+        var hitResult = false,
+            output;
+        for (var i = 0, len = cameras.length; i < len; i++) {
+            output = inputManager.hitTest(pointer, gameobjects, cameras[i]);
+            if (output.length > 0) {
+                hitResult = true;
+                break;
+            }
+        }
+
+        return hitResult;
     }
 
     dragend() {
-        var activePointer = this.gameobject.scene.input.activePointer;
-        if (activePointer.dragState > 0) {
-            activePointer.dragState = 5;
+        if (this.pointerId === undefined) {
+            return;
         }
+        var pointer = this.scene.input.manager.pointers[this.pointerId];
+        pointer.dragState = 5;
+    }
+
+    onDragStart(pointer, dragX, dragY) {
+        if (this.pointerId !== undefined) { // dragged by other pointer
+            return;
+        }
+        this.pointerId = pointer.id;
     }
 
     onDragging(pointer, dragX, dragY) {
+        if (pointer.id !== this.pointerId) {
+            return;
+        }
         var gameobject = this.gameobject;
         if (this.axisMode === 0) {
             gameobject.x = dragX;
@@ -146,6 +174,13 @@ class Drag {
 
     }
 
+    onDragEnd(pointer, dragX, dragY, dropped) {
+        if (pointer.id !== this.pointerId) {
+            return;
+        }
+        this.pointerId = undefined;
+    }
+
     get isDragging() {
         return (this.gameobject.input.dragState > 0);
     }
@@ -161,7 +196,7 @@ const AXISMODE = {
     'horizontal': 1,
     'h': 1,
     'x': 1,
-    'vertical': 2,    
+    'vertical': 2,
     'v': 2,
     'y': 2
 };

@@ -4,7 +4,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
-    mode: 'production',
+    //mode: 'production',
     entry: {
         // game objects
         'bbcodetextplugin': './plugins/bbcodetext-plugin.js',

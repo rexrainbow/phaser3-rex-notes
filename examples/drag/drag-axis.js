@@ -19,6 +19,9 @@ class Demo extends Phaser.Scene {
     create() {
         this.img = this.add.image(400, 300, 'arrow');
         this.img.drag = this.plugins.get('rexDrag').add(this.img, {
+            inputConfig : {
+                pixelPerfect: true
+            },
             //enable: true,
             axis: 1,
             rotation: Phaser.Math.DegToRad(45)
