@@ -47,7 +47,7 @@ var game = new Phaser.Game(config);
 ### Create instance
 
 ```javascript
-gameobject.slider = scene.plugins.get('rexSlider').add(gameobject, {
+gameObject.slider = scene.plugins.get('rexSlider').add(gameObject, {
     // endPoints: [
     //     {x:0, y:0},
     //     {x:0, y:0}
@@ -66,30 +66,30 @@ Properties
 ### Set end-points
 
 ```javascript
-gameobject.slider.setEndPoints(p0x, p0y, p1x, p1y);
-// gameobject.slider.setEndPoints(p0, p1); // p0, p1: {x, y}
-// gameobject.slider.setEndPoints(points); // points: [p0, p1]
+gameObject.slider.setEndPoints(p0x, p0y, p1x, p1y);
+// gameObject.slider.setEndPoints(p0, p1); // p0, p1: {x, y}
+// gameObject.slider.setEndPoints(points); // points: [p0, p1]
 ```
 
 ### Get value
 
 ```javascript
-var value = gameobject.slider.value;          // value: between 0 to 1
-// var value = gameobject.slider.getValue();  // value: between 0 to 1
-// var value = gameobject.slider.getValue(min, max);  // value: between min to max
+var value = gameObject.slider.value;          // value: between 0 to 1
+// var value = gameObject.slider.getValue();  // value: between 0 to 1
+// var value = gameObject.slider.getValue(min, max);  // value: between min to max
 ```
 
 ### Set value
 
 ```javascript
-gameobject.slider.value = newValue;       // newValue: between 0 to 1
-// gameobject.slider.setValue(newValue);  // newValue: between 0 to 1
-// gameobject.slider.setValue(newValue, min, max);  // newValue: between min to max
+gameObject.slider.value = newValue;       // newValue: between 0 to 1
+// gameObject.slider.setValue(newValue);  // newValue: between 0 to 1
+// gameObject.slider.setValue(newValue, min, max);  // newValue: between min to max
 ```
 
 ```javascript
-gameobject.slider.addValue(inc);  // inc: between 0 to 1
-// gameobject.slider.addValue(inc, min, max);  // inc: between min to max
+gameObject.slider.addValue(inc);  // inc: between 0 to 1
+// gameObject.slider.addValue(inc, min, max);  // inc: between min to max
 ```
 
 Fires `valuechange` event if new value is not equal to current value.
@@ -98,7 +98,7 @@ Fires `valuechange` event if new value is not equal to current value.
 
 - Value changed
     ```javascript
-    gameobject.slider.on('valuechange', function(newValue, prevValue){ /* ... */ });
+    gameObject.slider.on('valuechange', function(newValue, prevValue){ /* ... */ });
     ```
     - newValue: between 0 to 1
     - prevValue: between 0 to 1
@@ -108,12 +108,12 @@ Fires `valuechange` event if new value is not equal to current value.
 #### Drag enable
 
 ```javascript
-gameobject.slider.setDragEnable();
-// gameobject.slider.setDragEnable(false);  // disable
+gameObject.slider.setDragEnable();
+// gameObject.slider.setDragEnable(false);  // disable
 ```
 
 #### Is dragging
 
 ```javascript
-var isDragging = gameobject.slider.isDragging;
+var isDragging = gameObject.slider.isDragging;
 ```

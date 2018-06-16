@@ -6,9 +6,9 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 
 class Fade {
-    constructor(gameobject, config) {
-        this.gameobject = gameobject;
-        this.scene = GetSceneObject(gameobject);
+    constructor(gameObject, config) {
+        this.gameObject = gameObject;
+        this.scene = GetSceneObject(gameObject);
 
         this.alpha = {};
         this.tween = undefined;
@@ -24,7 +24,7 @@ class Fade {
     resetFromJSON(o) {
         this.setMode(GetValue(o, 'mode', 0));
         this.setAlphaRange(
-            GetAdvancedValue(o, 'alpha.start', this.gameobject.alpha),
+            GetAdvancedValue(o, 'alpha.start', this.gameObject.alpha),
             GetAdvancedValue(o, 'alpha.end', 0)
         );
         this.setDelay(GetAdvancedValue(o, 'delay', 0));
@@ -46,14 +46,14 @@ class Fade {
     }
 
     boot() {
-        if (this.gameobject.on) { // oops, bob object does not have event emitter
-            this.gameobject.on('destroy', this.destroy, this);
+        if (this.gameObject.on) { // oops, bob object does not have event emitter
+            this.gameObject.on('destroy', this.destroy, this);
         }
     }
 
     shutdown() {
         this.stop();
-        this.gameobject = undefined;
+        this.gameObject = undefined;
         this.scene = undefined;
     }
 
@@ -89,7 +89,7 @@ class Fade {
 
         var alpha = this.alpha;
         this.tween = this.scene.tweens.add({
-            targets: this.gameobject,
+            targets: this.gameObject,
             alpha: {
                 getStart: function () {
                     return alpha.start;
@@ -122,7 +122,7 @@ class Fade {
 
     complete() {
         if (this.mode === 1) {
-            this.gameobject.destroy();
+            this.gameObject.destroy();
         }
     }
 

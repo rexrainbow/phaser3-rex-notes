@@ -13,10 +13,10 @@ const Linear = Phaser.Math.Linear;
 const Percent = Phaser.Math.Percent;
 
 class Slider extends EE {
-    constructor(gameobject, config) {
+    constructor(gameObject, config) {
         super();
-        this.gameobject = gameobject;
-        this.scene = GetSceneObject(gameobject);
+        this.gameObject = gameObject;
+        this.scene = GetSceneObject(gameObject);
 
         this._value = undefined;
         this.endPoints = [{
@@ -52,17 +52,17 @@ class Slider extends EE {
     }
 
     boot() {
-        if (this.gameobject.on) {
-            this.gameobject.on('drag', this.onDragging, this);
-            this.gameobject.on('destroy', this.destroy, this);
+        if (this.gameObject.on) {
+            this.gameObject.on('drag', this.onDragging, this);
+            this.gameObject.on('destroy', this.destroy, this);
         }
     }
 
     shutdown() {
         super.shutdown();
-        this.gameobject = undefined;
+        this.gameObject = undefined;
         this.scene = undefined;
-        // gameobject event 'drag' will be removed when this gameobject destroyed 
+        // gameObject event 'drag' will be removed when this gameObject destroyed 
     }
 
     destroy() {
@@ -71,7 +71,7 @@ class Slider extends EE {
 
     setDragEnable(e) {
         if (this.dragEnable === null) {
-            this.gameobject.setInteractive(); // only need setInteractive once
+            this.gameObject.setInteractive(); // only need setInteractive once
         }
 
         if (e === undefined) {
@@ -83,7 +83,7 @@ class Slider extends EE {
         }
 
         this.dragEnable = e;
-        this.scene.input.setDraggable(this.gameobject, e);
+        this.scene.input.setDraggable(this.gameObject, e);
         return this;
     }
 
@@ -145,7 +145,7 @@ class Slider extends EE {
     }
 
     get isDragging() {
-        return (this.gameobject.input.dragState > 0);
+        return (this.gameObject.input.dragState > 0);
     }
 
     onDragging(pointer, dragX, dragY) {
@@ -160,16 +160,16 @@ class Slider extends EE {
             var max = Math.max(endPoints[0].y, endPoints[1].y);
             newValue = Percent(dragY, min, max);
         } else {
-            var gameobject = this.gameobject;
+            var gameObject = this.gameObject;
             var dist;
             P1.x = dragX;
             P1.y = dragY;
 
-            dist = DistanceBetween(P1.x, P1.y, gameobject.x, gameobject.y);
-            P1 = RotateAroundDistance(P1, gameobject.x, gameobject.y, -this.axisRotation, dist);
-            P1.y = gameobject.y;
-            dist = DistanceBetween(P1.x, P1.y, gameobject.x, gameobject.y);
-            P1 = RotateAroundDistance(P1, gameobject.x, gameobject.y, this.axisRotation, dist);
+            dist = DistanceBetween(P1.x, P1.y, gameObject.x, gameObject.y);
+            P1 = RotateAroundDistance(P1, gameObject.x, gameObject.y, -this.axisRotation, dist);
+            P1.y = gameObject.y;
+            dist = DistanceBetween(P1.x, P1.y, gameObject.x, gameObject.y);
+            P1 = RotateAroundDistance(P1, gameObject.x, gameObject.y, this.axisRotation, dist);
 
             var min = Math.min(endPoints[0].x, endPoints[1].x);
             var max = Math.max(endPoints[0].x, endPoints[1].x);
@@ -180,10 +180,10 @@ class Slider extends EE {
     }
 
     updatePos() {
-        var gameobject = this.gameobject;
+        var gameObject = this.gameObject;
         var points = this.endPoints;
-        gameobject.x = Linear(points[0].x, points[1].x, this._value);
-        gameobject.y = Linear(points[0].y, points[1].y, this._value);
+        gameObject.x = Linear(points[0].x, points[1].x, this._value);
+        gameObject.y = Linear(points[0].y, points[1].y, this._value);
         return this;
     }
 }

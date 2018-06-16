@@ -60,7 +60,7 @@ class DragCursor extends VectorToCursorKeys {
             input.on('pointerdown', this.onDragStart, this);
             input.on('pointerup', this.onDrop, this);
             input.on('pointermove', this.onDragging, this);
-        } else { // parent is gameobject
+        } else { // parent is gameObject
             // TODO
         }
     }

@@ -13,8 +13,8 @@ class ScrollerPlugin extends Phaser.Plugins.BasePlugin {
         eventEmitter.once('destroy', this.destroy, this);
     }
 
-    add(gameobject, config) {
-        return new Scroller(gameobject, config);
+    add(gameObject, config) {
+        return new Scroller(gameObject, config);
     }
 
 }

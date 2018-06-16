@@ -13,8 +13,8 @@ class TextTypingPlugin extends Phaser.Plugins.BasePlugin {
         eventEmitter.once('destroy', this.destroy, this);
     }
 
-    add(gameobject, config) {
-        return new TextTyping(gameobject, config);
+    add(gameObject, config) {
+        return new TextTyping(gameObject, config);
     }
 
 }

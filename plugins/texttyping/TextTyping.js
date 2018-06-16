@@ -7,11 +7,11 @@ const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class TextTyping extends EE {
-    constructor(gameobject, config) {
+    constructor(gameObject, config) {
         super();
 
-        this.gameobject = gameobject;
-        this.scene = GetSceneObject(gameobject);
+        this.gameObject = gameObject;
+        this.scene = GetSceneObject(gameObject);
         
         this.timer = null;
         this.resetFromJSON(config);
@@ -70,8 +70,8 @@ class TextTyping extends EE {
     }
 
     boot() {
-        if (this.gameobject.on) { // oops, bob object does not have event emitter
-            this.gameobject.on('destroy', this.destroy, this);
+        if (this.gameObject.on) { // oops, bob object does not have event emitter
+            this.gameObject.on('destroy', this.destroy, this);
         }
 
         return this;
@@ -81,7 +81,7 @@ class TextTyping extends EE {
         super.shutdown();
         this.freeTimer();
 
-        this.gameobject = undefined;
+        this.gameObject = undefined;
         this.scene = undefined;
 
         return this;
@@ -290,14 +290,14 @@ class TextTyping extends EE {
                 text = this.setTextCallback(text, this.isLastChar, this.insertIdx);
             }
         }
-        this.gameobject.setText(text);
+        this.gameObject.setText(text);
     }
 
     getTextLength(text) {
-        var gameobject = this.gameobject;
+        var gameObject = this.gameObject;
         var len;
-        if (gameobject.getRawText) {
-            len = gameobject.getRawText(text).length;
+        if (gameObject.getRawText) {
+            len = gameObject.getRawText(text).length;
         } else {
             len = text.length;
         }
@@ -306,10 +306,10 @@ class TextTyping extends EE {
     }
 
     getSubString(text, startIdx, endIdx) {
-        var gameobject = this.gameobject;
+        var gameObject = this.gameObject;
         var result;
-        if (gameobject.getSubString) {
-            result = gameobject.getSubString(text, startIdx, endIdx);
+        if (gameObject.getSubString) {
+            result = gameObject.getSubString(text, startIdx, endIdx);
         } else {
             result = text.slice(startIdx, endIdx);
         }

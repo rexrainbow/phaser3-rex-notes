@@ -10,7 +10,7 @@ Container of game objects, built-in game object of phaser.
 
 ```javascript
 var group = scene.add.group(config);
-// var group = scene.add.group(gameobjects, config);  // add game objects into group
+// var group = scene.add.group(gameObjects, config);  // add game objects into group
 ```
 
 #### Configuration
@@ -21,20 +21,20 @@ var group = scene.add.group(config);
     defaultKey: null,
     defaultFrame: null,
     maxSize: -1,
-    runChildUpdate: false    // run gameobject.update() if true
+    runChildUpdate: false    // run gameObject.update() if true
 }
 ```
 
 ### Add game object
 
 ```javascript
-group.add(gameobject);
-// group.add(gameobject, true);  // add this game object to display and update list of scene
+group.add(gameObject);
+// group.add(gameObject, true);  // add this game object to display and update list of scene
 ```
 
 ```javascript
-group.addMultiple(gameobjects);   // array of game objects
-// group.addMultiple(gameobjects, true);
+group.addMultiple(gameObjects);   // array of game objects
+// group.addMultiple(gameObjects, true);
 ```
 
 Game object will only be added once.
@@ -42,8 +42,8 @@ Game object will only be added once.
 ### Remove game object
 
 ```javascript
-group.remove(gameobject);
-// group.remove(gameobject, true);  // also remove this game object from display and update list of scene
+group.remove(gameObject);
+// group.remove(gameObject, true);  // also remove this game object from display and update list of scene
 ```
 
 Remove all game objects
@@ -56,7 +56,7 @@ group.clear();
 ### Get game objects
 
 ```javascript
-var gameobjects = group.getChildren();  // array of game objects
+var gameObjects = group.getChildren();  // array of game objects
 ```
 
 - Amount of game objects.
@@ -106,24 +106,24 @@ var freeCount = group.getTotalFree();          // group.maxSize - group.getTotal
 ```
 
 ```javascript
-group.kill(gameobject);         // gameobject.setActive(false)
-group.killAndHide(gameobject);  // gameObject.setActive(false).setVisible(false)
+group.kill(gameObject);         // gameObject.setActive(false)
+group.killAndHide(gameObject);  // gameObject.setActive(false).setVisible(false)
 ```
 
 Get first active/inactive game object, create one if `createIfNull` is `true`
 
 ```javascript
-var gameobject = group.getFirst(active, createIfNull, x, y, key, frame, visible);  // active = true/false
-var gameobject = group.getFirstAlive(createIfNull, x, y, key, frame, visible); // equal to group.getFirst(true, ...)
-var gameobject = group.getFirstDead(createIfNull, x, y, key, frame, visible); // equal to group.getFirst(false, ...)
-var gameobject = group.get(x, y, key, frame, visible); // equal to group.getFirst(false, true, ...)
+var gameObject = group.getFirst(active, createIfNull, x, y, key, frame, visible);  // active = true/false
+var gameObject = group.getFirstAlive(createIfNull, x, y, key, frame, visible); // equal to group.getFirst(true, ...)
+var gameObject = group.getFirstDead(createIfNull, x, y, key, frame, visible); // equal to group.getFirst(false, ...)
+var gameObject = group.get(x, y, key, frame, visible); // equal to group.getFirst(false, true, ...)
 ```
 
 ### Create game objects
 
 ```javascript
-var gameobjects = group.createFromConfig(config);
-var gameobjects = group.createMultiple(config);    // config in array
+var gameObjects = group.createFromConfig(config);
+var gameObjects = group.createMultiple(config);    // config in array
 ```
 
 #### Configuration
@@ -143,13 +143,13 @@ var gameobjects = group.createMultiple(config);    // config in array
         stepX:0,
         stepY:0
     },
-    // Actions.SetXY(gameobjects, x, y, stepX, stepY)
+    // Actions.SetXY(gameObjects, x, y, stepX, stepY)
 
     setRotation: {
         value: 0,
         step:
     },
-    // Actions.SetRotation(gameobjects, value, step)
+    // Actions.SetRotation(gameObjects, value, step)
 
     setScale: {
         x:0,
@@ -157,17 +157,17 @@ var gameobjects = group.createMultiple(config);    // config in array
         stepX:0,
         stepY:0
     },
-    // Actions.SetScale(gameobjects, x, y, stepX, stepY)
+    // Actions.SetScale(gameObjects, x, y, stepX, stepY)
 
     setAlpha: {
         value: 0,
         step:
     },
-    // Actions.SetAlpha(gameobjects, value, step)
+    // Actions.SetAlpha(gameObjects, value, step)
 
     hitArea: null,
     hitAreaCallback: null,
-    // Actions.SetHitArea(gameobjects, hitArea, hitAreaCallback);
+    // Actions.SetHitArea(gameObjects, hitArea, hitAreaCallback);
 
     gridAlign: false
     // {

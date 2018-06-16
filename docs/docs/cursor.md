@@ -23,23 +23,23 @@ scene.input.setDefaultCursor(CSSString);
 Change cursor image when cursor is over that Game Object.
 
 ```javascript
-gameobject.setInteractive({
+gameObject.setInteractive({
     cursor: CSSString
 });
 // CSSString: 'url(assets/input/cursors/sword.cur), pointer'
 ```
 
-Set cursor image directly after `gameobject.setInteractive()`.
+Set cursor image directly after `gameObject.setInteractive()`.
 
 ```javascript
-gameobject.input.cursor = CSSString;
+gameObject.input.cursor = CSSString;
 // CSSString: 'url(assets/input/cursors/sword.cur), pointer'
 ```
 
 Use pointer (hand cursor).
 
 ```javascript
-gameobject.setInteractive({
+gameObject.setInteractive({
     useHandCursor: true
 });
 ```

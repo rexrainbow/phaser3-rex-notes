@@ -9,9 +9,9 @@ const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 const Clamp = Phaser.Math.Clamp;
 
 class TextPagePlugin {
-    constructor(gameobject, config) {
-        this.gameobject = gameobject;
-        this.scene = GetSceneObject(gameobject);
+    constructor(gameObject, config) {
+        this.gameObject = gameObject;
+        this.scene = GetSceneObject(gameObject);
         this.setTextObjectType();
 
         this.lines = undefined; // array (default text object), or pens-manager (tag text object)
@@ -48,8 +48,8 @@ class TextPagePlugin {
     }
 
     boot() {
-        if (this.gameobject.on) { // oops, bob object does not have event emitter
-            this.gameobject.on('destroy', this.destroy, this);
+        if (this.gameObject.on) { // oops, bob object does not have event emitter
+            this.gameObject.on('destroy', this.destroy, this);
         }
     }
 
@@ -61,7 +61,7 @@ class TextPagePlugin {
             this.lines.destroy();
         }
 
-        this.gameobject = undefined;
+        this.gameObject = undefined;
         this.scene = undefined;
 
         return this;
@@ -72,7 +72,7 @@ class TextPagePlugin {
     }
 
     setTextObjectType() {
-        if (this.gameobject instanceof TextKlass) {
+        if (this.gameObject instanceof TextKlass) {
             this.textObjectType = 0;
         } else {
             this.textObjectType = 1;
@@ -97,9 +97,9 @@ class TextPagePlugin {
 
         // wrap content in lines
         if (this.textObjectType === 0) {
-            this.lines = this.gameobject.getWrappedText(this.text);  // lines in array
+            this.lines = this.gameObject.getWrappedText(this.text);  // lines in array
         } else {
-            this.lines = this.gameobject.getPenManager(this.text, this.lines);  // pen manager
+            this.lines = this.gameObject.getPenManager(this.text, this.lines);  // pen manager
         }
 
         this.pageCount = Math.ceil(this.totalLineCount / this.pageLineCount);
@@ -196,7 +196,7 @@ class TextPagePlugin {
 
     get pageLineCount() {
         var count;
-        var maxLines = this.gameobject.style.maxLines;
+        var maxLines = this.gameObject.style.maxLines;
         if (maxLines > 0) {
             count = maxLines;
         } else {
@@ -222,7 +222,7 @@ class TextPagePlugin {
     }
 
     displayText(text) {
-        this.gameobject.setText(text);
+        this.gameObject.setText(text);
     }
 }
 

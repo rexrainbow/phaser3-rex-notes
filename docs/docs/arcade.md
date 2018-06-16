@@ -28,6 +28,8 @@ var config = {
         //        left: true,
         //        right: true
         //    },
+        //    fps: 60,
+        //    timeScale: 1,     // 2.0 = half speed, 0.5 = double speed
         //    overlapBias: 4,
         //    tileBias: 16,
         //    forceX: false,
@@ -39,7 +41,8 @@ var config = {
         //    debugBodyColor: 0xff00ff,
         //    debugStaticBodyColor: 0x0000ff,
         //    debugVelocityColor: 0x00ff00,
-        //    maxEntries: 16
+        //    maxEntries: 16,
+        //    useTree: true   // set false if amount of dynamic bodies > 5000
         }
     }
     // ...
@@ -134,27 +137,35 @@ var config = {
 #### Destroy object
 
 ```javascript
-gameobject.destroy();
+gameObject.destroy();
 ```
 
 ### Collision
 
+Performs a collision check and separation between the two physics enabled objects given.
+
 ```javascript
 var collider = scene.physics.add.collider(objectsA, objectsB, collideCallback, processCallback, callbackContext);
-// var collider = scene.physics.add.addOverlap(objectsA, objectsB, collideCallback, processCallback, callbackContext);
+```
+
+If you don't require separation then use `overlap` instead.
+
+```javascript
+var collider = scene.physics.add.overlap(objectsA, objectsB, collideCallback, processCallback, callbackContext);
 ```
 
 - objectsA, objectsB
     - a game object
     - game objects in array
+    - physics group
     - group
 - collideCallback:
     ```javascript
-    function(gameobject1, gameobject2){}
+    function(gameObject1, gameObject2) { }
     ```
-- processCallback: fired when gameobject1 intersects gameobject2
+- processCallback: fired when gameObject1 intersects gameObject2
     ```javascript
-    function(gameobject1, gameobject2){
+    function(gameObject1, gameObject2) {
         return true;  // return false will discard remaining collision checking
     }
     ```
@@ -163,16 +174,22 @@ var collider = scene.physics.add.collider(objectsA, objectsB, collideCallback, p
 
 #### Size
 
-```javascript
-gameobject.setSize(width, height, isCenter);  // isCenter: boolean
-```
+- Rectangle
+    ```javascript
+    gameObject.setSize(width, height);            // set body's offset to center
+    // gameObject.setSize(width, height, false);  // set body's offset to (0, 0)
+    ```
+- Circle
+    ```javascript
+    gameObject.setCircle(radius, offsetX, offsetY);
+    ```
+
+#### Offset
+
+Sets the offset of the Body's position from its Game Object's position.
 
 ```javascript
-gameobject.setCircle(radius, offsetX, offsetY);
-```
-
-```javascript
-gameobject.setOffset(x, y);
+gameObject.setOffset(x, y);
 ```
 
 #### Sync body
@@ -180,25 +197,25 @@ gameobject.setOffset(x, y);
 Syncs the Bodies position and size in static game object.
 
 ```javascript
-gameobject.refreshBody();
+gameObject.refreshBody();
 ```
 
 #### Velocity
 
 ```javascript
-gameobject.setVelocity(x, y);
+gameObject.setVelocity(x, y);
 ```
 
 ```javascript
-gameobject.setVelocityX(x);
+gameObject.setVelocityX(x);
 ```
 
 ```javascript
-gameobject.setVelocityY(x);
+gameObject.setVelocityY(x);
 ```
 
 ```javascript
-gameobject.setMaxVelocity(y);
+gameObject.setMaxVelocity(y);
 ```
 
 #### Rotation
@@ -210,106 +227,153 @@ body.setAllowRotation(value);  // true to allow rotation on this body (default:t
 #### Mass
 
 ```javascript
-gameobject.setMass(v);
+gameObject.setMass(v);
 ```
 
 #### Acceleration
 
 ```javascript
-gameobject.setAcceleration(x, y);
+gameObject.setAcceleration(x, y);
 ```
 
 ```javascript
-gameobject.setAccelerationX(x);
+gameObject.setAccelerationX(x);
 ```
 
 ```javascript
-gameobject.setAccelerationY(y);
+gameObject.setAccelerationY(y);
 ```
 
 #### Gravity
 
 ```javascript
-gameobject.setGravity(x, y);
+gameObject.setGravity(x, y);
 ```
 
 ```javascript
-gameobject.setGravityX(x);
+gameObject.setGravityX(x);
 ```
 
 ```javascript
-gameobject.setGravityY(y);
+gameObject.setGravityY(y);
 ```
 
 #### Friction
 
 ```javascript
-gameobject.setFriction(x, y);
+gameObject.setFriction(x, y);
 ```
 
 ```javascript
-gameobject.setFrictionX(x);
+gameObject.setFrictionX(x);
 ```
 
 ```javascript
-gameobject.setFrictionY(y);
+gameObject.setFrictionY(y);
 ```
 
 #### Drag
 
 ```javascript
-gameobject.setDrag(x, y);
+gameObject.setDrag(x, y);
 ```
 
 ```javascript
-gameobject.setDragX(x);
+gameObject.setDragX(x);
 ```
 
 ```javascript
-gameobject.setDragY(y);
+gameObject.setDragY(y);
 ```
+
+Enables drag
 
 ```javascript
 body.setAllowDrag(value);  // true to allow drag on this body (default:true)
 ```
 
+Enable damping
+
+```javascript
+gameObject.setDamping(value);
+```
+
 #### Angular
 
 ```javascript
-gameobject.setAngularVelocity(v);
+gameObject.setAngularVelocity(v);
 ```
 
 ```javascript
-gameobject.setAngularAcceleration(v);
+gameObject.setAngularAcceleration(v);
 ```
 
 ```javascript
-gameobject.setAngularDrag(v);
+gameObject.setAngularDrag(v);
 ```
 
 #### Bounce
 
 ```javascript
-gameobject.setBounce(x, y);
+gameObject.setBounce(x, y);
 ```
 
 ```javascript
-gameobject.setBounceX(x);
+gameObject.setBounceX(x);
 ```
 
 ```javascript
-gameobject.setBounceY(y);
+gameObject.setBounceY(y);
 ```
 
 ```javascript
-gameobject.setCollideWorldBounds(boolean);
+gameObject.setCollideWorldBounds(boolean);
 ```
 
 #### Immovable
 
 ```javascript
-gameobject.setImmovable(boolean);
+gameObject.setImmovable(boolean);
 ```
+
+#### Speed
+
+The absolute (non-negative) change in this Body's horizontal/vertical position from the previous step.
+
+```javascript
+var dx = body.deltaAbsX();
+var dy = body.deltaAbsY();
+```
+
+#### Point inside
+
+```javascript
+var hit = gameObject.hitTest(x, y);
+```
+
+#### Blocked
+
+- Blocked when moveing down
+    ```javascript
+    var onFloor = body.onFloor();
+    ```    
+- Blocked when moveing up
+    ```javascript
+    var onCeiling = body.onCeiling();
+    ```
+- Blocked when moveing left or right
+    ```javascript
+    var onWall = body.onWall();
+    ```
+- State
+    ```javascript
+    var blocked = body.blocked;
+    ```
+    - `blocked.none`
+    - `blocked.up`
+    - `blocked.down`
+    - `blocked.left`
+    - `blocked.right`
 
 ### Methods of group
 
@@ -333,7 +397,6 @@ group.refresh();  // call this method when position of game objects were changed
 
 ```javascript
 scene.physics.existing(gameObject, isStatic);
-// var body = gameObject.body;
 ```
 
 #### Get physics body
@@ -446,6 +509,18 @@ body.drag.x = x;
 body.drag.y = y;
 ```
 
+Enables drag
+
+```javascript
+body.allowDrag = true;
+```
+
+Enable damping
+
+```javascript
+body.useDamping = true;
+```
+
 #### Angular
 
 ```javascript
@@ -489,10 +564,32 @@ body.immovable = boolean;
 #### Wrap
 
 ```javascript
-scene.physics.world.wrap(gameobject, padding);
+scene.physics.world.wrap(gameObject, padding);
 ```
 
-- gameobject:
+- gameObject:
     - game object (image, sprite)
     - group
     - array of game objects
+
+#### Duration per frame
+
+- Time scale
+    ```javascript
+    scene.physics.world.timeScale = timeScale;
+    ```
+    - 1.0 = normal speed
+    - 2.0 = half speed
+    - 0.5 = double speed
+- FPS
+    ```javascript
+    scene.physics.world.setFPS(framerate);
+    ```
+
+#### Step
+
+Advances the simulation by one step.
+
+```javascript
+scene.physics.world.step(delta);
+```

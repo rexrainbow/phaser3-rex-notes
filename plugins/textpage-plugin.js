@@ -13,8 +13,8 @@ class TextPagePlugin extends Phaser.Plugins.BasePlugin {
         eventEmitter.once('destroy', this.destroy, this);
     }
 
-    add(gameobject, config) {
-        return new TextPage(gameobject, config);
+    add(gameObject, config) {
+        return new TextPage(gameObject, config);
     }
 
 }

@@ -73,13 +73,13 @@ It is equal to `cellVisibleCallback` in configuration.
 }
 ```
 
-Each cell only has **one** container gameobject, old container will be destroyed when assigning a new container.
+Each cell only has **one** container gameObject, old container will be destroyed when assigning a new container.
 
 ### Cell begins invisible
 
 Container of an invisible cell will be destroyed automatically.
 
-To resue container gameobject, user could pop that container by `cell.popContainer()` in event `cellinvisible`.
+To resue container gameObject, user could pop that container by `cell.popContainer()` in event `cellinvisible`.
 
 ```javascript
 table.on('cellinvisible', function(cell){

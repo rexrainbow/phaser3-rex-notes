@@ -23,6 +23,10 @@
       
         <meta name="lang:search.language" content="en">
       
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
         <meta name="lang:search.result.none" content="No matching documents">
       
         <meta name="lang:search.result.one" content="1 matching document">
@@ -32,7 +36,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-0.17.1, mkdocs-material-2.1.0">
+      <meta name="generator" content="mkdocs-0.17.3, mkdocs-material-2.7.0">
     
     
       
@@ -40,15 +44,16 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application-3368aa6b74.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application.78aab2dc.css">
       
-        <link rel="stylesheet" href="../assets/stylesheets/application-95ad5566f9.palette.css">
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.6079476c.css">
       
     
     
-      <script src="../assets/javascripts/modernizr-e826f8942a.js"></script>
+      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
     
     
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
       
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
@@ -61,9 +66,7 @@
   
     
     
-    
-      <body data-md-color-primary="blue" data-md-color-accent="blue">
-    
+    <body dir="ltr" data-md-color-primary="blue" data-md-color-accent="blue">
   
     <svg class="md-svg">
       <defs>
@@ -74,6 +77,11 @@
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search">
     <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <a href="#introduction" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid">
@@ -109,11 +117,13 @@
             
 <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="search"></label>
-  <div class="md-search__inner">
+  <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" required placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
       <label class="md-icon md-search__icon" for="search"></label>
-      <button type="reset" class="md-icon md-search__icon" data-md-component="reset">&#xE5CD;</button>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
     </form>
     <div class="md-search__output">
       <div class="md-search__scrollwrap" data-md-scrollfix>
@@ -137,6 +147,9 @@
     
     <div class="md-container">
       
+        
+      
+      
       <main class="md-main">
         <div class="md-main__inner md-grid" data-md-component="container">
           
@@ -148,7 +161,7 @@
   <label class="md-nav__title md-nav__title--site" for="drawer">
     <span class="md-nav__button md-logo">
       
-        <img src="../images/logo.svg" width="24" height="24">
+        <img src="../images/logo.svg" width="48" height="48">
       
     </span>
     Notes of Phaser 3
@@ -788,6 +801,8 @@
     </nav>
   
 </li>
+      
+      
       
       
       
@@ -1733,6 +1748,8 @@
       
       
       
+      
+      
         <li class="md-nav__item">
           <a href="#__comments" title="Comments" class="md-nav__link md-nav__link--active">
             Comments
@@ -1762,7 +1779,7 @@
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <h3 id="add-group-object">Add group object<a class="headerlink" href="#add-group-object" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">group</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">group</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-<span class="c1">// var group = scene.add.group(gameobjects, config);  // add game objects into group</span>
+<span class="c1">// var group = scene.add.group(gameObjects, config);  // add game objects into group</span>
 </pre></div>
 
 <h4 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h4>
@@ -1771,23 +1788,23 @@
     <span class="nx">defaultKey</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="nx">defaultFrame</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="nx">maxSize</span><span class="o">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
-    <span class="nx">runChildUpdate</span><span class="o">:</span> <span class="kc">false</span>    <span class="c1">// run gameobject.update() if true</span>
+    <span class="nx">runChildUpdate</span><span class="o">:</span> <span class="kc">false</span>    <span class="c1">// run gameObject.update() if true</span>
 <span class="p">}</span>
 </pre></div>
 
 <h3 id="add-game-object">Add game object<a class="headerlink" href="#add-game-object" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">group</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameobject</span><span class="p">);</span>
-<span class="c1">// group.add(gameobject, true);  // add this game object to display and update list of scene</span>
+<div class="codehilite"><pre><span></span><span class="nx">group</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+<span class="c1">// group.add(gameObject, true);  // add this game object to display and update list of scene</span>
 </pre></div>
 
-<div class="codehilite"><pre><span></span><span class="nx">group</span><span class="p">.</span><span class="nx">addMultiple</span><span class="p">(</span><span class="nx">gameobjects</span><span class="p">);</span>   <span class="c1">// array of game objects</span>
-<span class="c1">// group.addMultiple(gameobjects, true);</span>
+<div class="codehilite"><pre><span></span><span class="nx">group</span><span class="p">.</span><span class="nx">addMultiple</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">);</span>   <span class="c1">// array of game objects</span>
+<span class="c1">// group.addMultiple(gameObjects, true);</span>
 </pre></div>
 
 <p>Game object will only be added once.</p>
 <h3 id="remove-game-object">Remove game object<a class="headerlink" href="#remove-game-object" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">group</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">gameobject</span><span class="p">);</span>
-<span class="c1">// group.remove(gameobject, true);  // also remove this game object from display and update list of scene</span>
+<div class="codehilite"><pre><span></span><span class="nx">group</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+<span class="c1">// group.remove(gameObject, true);  // also remove this game object from display and update list of scene</span>
 </pre></div>
 
 <p>Remove all game objects</p>
@@ -1796,7 +1813,7 @@
 </pre></div>
 
 <h3 id="get-game-objects">Get game objects<a class="headerlink" href="#get-game-objects" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gameobjects</span> <span class="o">=</span> <span class="nx">group</span><span class="p">.</span><span class="nx">getChildren</span><span class="p">();</span>  <span class="c1">// array of game objects</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gameObjects</span> <span class="o">=</span> <span class="nx">group</span><span class="p">.</span><span class="nx">getChildren</span><span class="p">();</span>  <span class="c1">// array of game objects</span>
 </pre></div>
 
 <ul>
@@ -1839,20 +1856,20 @@
 <span class="kd">var</span> <span class="nx">freeCount</span> <span class="o">=</span> <span class="nx">group</span><span class="p">.</span><span class="nx">getTotalFree</span><span class="p">();</span>          <span class="c1">// group.maxSize - group.getTotalUsed()</span>
 </pre></div>
 
-<div class="codehilite"><pre><span></span><span class="nx">group</span><span class="p">.</span><span class="nx">kill</span><span class="p">(</span><span class="nx">gameobject</span><span class="p">);</span>         <span class="c1">// gameobject.setActive(false)</span>
-<span class="nx">group</span><span class="p">.</span><span class="nx">killAndHide</span><span class="p">(</span><span class="nx">gameobject</span><span class="p">);</span>  <span class="c1">// gameObject.setActive(false).setVisible(false)</span>
+<div class="codehilite"><pre><span></span><span class="nx">group</span><span class="p">.</span><span class="nx">kill</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>         <span class="c1">// gameObject.setActive(false)</span>
+<span class="nx">group</span><span class="p">.</span><span class="nx">killAndHide</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>  <span class="c1">// gameObject.setActive(false).setVisible(false)</span>
 </pre></div>
 
 <p>Get first active/inactive game object, create one if <code>createIfNull</code> is <code>true</code></p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gameobject</span> <span class="o">=</span> <span class="nx">group</span><span class="p">.</span><span class="nx">getFirst</span><span class="p">(</span><span class="nx">active</span><span class="p">,</span> <span class="nx">createIfNull</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">visible</span><span class="p">);</span>  <span class="c1">// active = true/false</span>
-<span class="kd">var</span> <span class="nx">gameobject</span> <span class="o">=</span> <span class="nx">group</span><span class="p">.</span><span class="nx">getFirstAlive</span><span class="p">(</span><span class="nx">createIfNull</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">visible</span><span class="p">);</span> <span class="c1">// equal to group.getFirst(true, ...)</span>
-<span class="kd">var</span> <span class="nx">gameobject</span> <span class="o">=</span> <span class="nx">group</span><span class="p">.</span><span class="nx">getFirstDead</span><span class="p">(</span><span class="nx">createIfNull</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">visible</span><span class="p">);</span> <span class="c1">// equal to group.getFirst(false, ...)</span>
-<span class="kd">var</span> <span class="nx">gameobject</span> <span class="o">=</span> <span class="nx">group</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">visible</span><span class="p">);</span> <span class="c1">// equal to group.getFirst(false, true, ...)</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">group</span><span class="p">.</span><span class="nx">getFirst</span><span class="p">(</span><span class="nx">active</span><span class="p">,</span> <span class="nx">createIfNull</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">visible</span><span class="p">);</span>  <span class="c1">// active = true/false</span>
+<span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">group</span><span class="p">.</span><span class="nx">getFirstAlive</span><span class="p">(</span><span class="nx">createIfNull</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">visible</span><span class="p">);</span> <span class="c1">// equal to group.getFirst(true, ...)</span>
+<span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">group</span><span class="p">.</span><span class="nx">getFirstDead</span><span class="p">(</span><span class="nx">createIfNull</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">visible</span><span class="p">);</span> <span class="c1">// equal to group.getFirst(false, ...)</span>
+<span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">group</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">visible</span><span class="p">);</span> <span class="c1">// equal to group.getFirst(false, true, ...)</span>
 </pre></div>
 
 <h3 id="create-game-objects">Create game objects<a class="headerlink" href="#create-game-objects" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gameobjects</span> <span class="o">=</span> <span class="nx">group</span><span class="p">.</span><span class="nx">createFromConfig</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">gameobjects</span> <span class="o">=</span> <span class="nx">group</span><span class="p">.</span><span class="nx">createMultiple</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>    <span class="c1">// config in array</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gameObjects</span> <span class="o">=</span> <span class="nx">group</span><span class="p">.</span><span class="nx">createFromConfig</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">gameObjects</span> <span class="o">=</span> <span class="nx">group</span><span class="p">.</span><span class="nx">createMultiple</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>    <span class="c1">// config in array</span>
 </pre></div>
 
 <h4 id="configuration_1">Configuration<a class="headerlink" href="#configuration_1" title="Permanent link">&para;</a></h4>
@@ -1870,13 +1887,13 @@
         <span class="nx">stepX</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span>
         <span class="nx">stepY</span><span class="o">:</span><span class="mi">0</span>
     <span class="p">},</span>
-    <span class="c1">// Actions.SetXY(gameobjects, x, y, stepX, stepY)</span>
+    <span class="c1">// Actions.SetXY(gameObjects, x, y, stepX, stepY)</span>
 
     <span class="nx">setRotation</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">value</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">step</span><span class="o">:</span>
     <span class="p">},</span>
-    <span class="c1">// Actions.SetRotation(gameobjects, value, step)</span>
+    <span class="c1">// Actions.SetRotation(gameObjects, value, step)</span>
 
     <span class="nx">setScale</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">x</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span>
@@ -1884,17 +1901,17 @@
         <span class="nx">stepX</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span>
         <span class="nx">stepY</span><span class="o">:</span><span class="mi">0</span>
     <span class="p">},</span>
-    <span class="c1">// Actions.SetScale(gameobjects, x, y, stepX, stepY)</span>
+    <span class="c1">// Actions.SetScale(gameObjects, x, y, stepX, stepY)</span>
 
     <span class="nx">setAlpha</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">value</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">step</span><span class="o">:</span>
     <span class="p">},</span>
-    <span class="c1">// Actions.SetAlpha(gameobjects, value, step)</span>
+    <span class="c1">// Actions.SetAlpha(gameObjects, value, step)</span>
 
     <span class="nx">hitArea</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="nx">hitAreaCallback</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="c1">// Actions.SetHitArea(gameobjects, hitArea, hitAreaCallback);</span>
+    <span class="c1">// Actions.SetHitArea(gameObjects, hitArea, hitAreaCallback);</span>
 
     <span class="nx">gridAlign</span><span class="o">:</span> <span class="kc">false</span>
     <span class="c1">// {</span>
@@ -1914,21 +1931,25 @@
               
               
                 
-                  <h2 id="__comments">Comments</h2>
-                  <div id="disqus_thread"></div>
-<script>
-  var disqus_config = function () {
-    this.page.url = "https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/group/index.html";
-    this.page.identifier =
-      "/group/index.html";
-  };
-  (function() {
-    var d = document, s = d.createElement("script");
-    s.src = "//notes-of-phaser3.disqus.com/embed.js";
-    s.setAttribute("data-timestamp", +new Date());
-    (d.head || d.body).appendChild(s);
-  })();
-</script>
+                  
+
+
+  <h2 id="__comments">Comments</h2>
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/group/index.html";
+      this.page.identifier =
+        "/group/index.html";
+    };
+    (function() {
+      var d = document, s = d.createElement("script");
+      s.src = "//notes-of-phaser3.disqus.com/embed.js";
+      s.setAttribute("data-timestamp", +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+
                 
               
             </article>
@@ -2001,9 +2022,9 @@
       
     </div>
     
-      <script src="../assets/javascripts/application-a5397a53ce.js"></script>
+      <script src="../assets/javascripts/application.8eb9be28.js"></script>
       
-      <script>app.initialize({version:"0.17.1",url:{base:".."}})</script>
+      <script>app.initialize({version:"0.17.3",url:{base:".."}})</script>
       
         <script src="../js/mermaid/mermaid.min.js"></script>
       
@@ -2012,7 +2033,7 @@
     
     
       
-      <script>!function(e,t,a,n,o,c,i){e.GoogleAnalyticsObject=o,e[o]=e[o]||function(){(e[o].q=e[o].q||[]).push(arguments)},e[o].l=1*new Date,c=t.createElement(a),i=t.getElementsByTagName(a)[0],c.async=1,c.src=n,i.parentNode.insertBefore(c,i)}(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-119804412-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview");var links=document.getElementsByTagName("a");Array.prototype.map.call(links,function(e){e.host!=document.location.host&&e.addEventListener("click",function(){var t=e.getAttribute("data-md-action")||"follow";ga("send","event","outbound",t,e.href)})});var query=document.forms.search.query;query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})</script>
+        <script>!function(e,a,t,n,o,c,i){e.GoogleAnalyticsObject=o,e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=1*new Date,c=a.createElement(t),i=a.getElementsByTagName(t)[0],c.async=1,c.src="https://www.google-analytics.com/analytics.js",i.parentNode.insertBefore(c,i)}(window,document,"script",0,"ga"),ga("create","UA-119804412-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview");var links=document.getElementsByTagName("a");if(Array.prototype.map.call(links,function(e){e.host!=document.location.host&&e.addEventListener("click",function(){var a=e.getAttribute("data-md-action")||"follow";ga("send","event","outbound",a,e.href)})}),document.forms.search){var query=document.forms.search.query;query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}</script>
       
     
   </body>

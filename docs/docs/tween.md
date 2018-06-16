@@ -10,7 +10,7 @@ Change properties by tween equations, built-in object of phaser.
 
 ```javascript
 var tween = scene.tweens.add({
-    targets: gameobject,
+    targets: gameObject,
     // delay: 0,
     // duration: 1000,
     // ease: 'Power0',
@@ -254,7 +254,7 @@ var tween = scene.tweens.addCounter({
 
 ```javascript
 var tween = scene.tweens.add({
-    targets: gameobject,
+    targets: gameObject,
     // ...
     ease: function (t) {  // t: 0~1
         return value;     // value: 0~1

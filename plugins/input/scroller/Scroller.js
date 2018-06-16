@@ -6,9 +6,9 @@ import State from './State.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Scroller {
-    constructor(gameobject, config) {       
+    constructor(gameObject, config) {       
         this.state = new State(this, config);
-        this.dragDelta = new DragDelta(gameobject, config);
+        this.dragDelta = new DragDelta(gameObject, config);
     }
 
     resetFromJSON(o) {

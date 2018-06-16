@@ -7,13 +7,13 @@ const DistanceBetween = Phaser.Math.Distance.Between;
 const RotateAroundDistance = Phaser.Math.RotateAroundDistance;
 
 class Drag {
-    constructor(gameobject, config) {
-        this.gameobject = gameobject;
-        this.scene = GetSceneObject(gameobject);
+    constructor(gameObject, config) {
+        this.gameObject = gameObject;
+        this.scene = GetSceneObject(gameObject);
 
         this.enable = false;
         this.pointerId = undefined;
-        this.gameobject.setInteractive(GetValue(config, "inputConfig", undefined));
+        this.gameObject.setInteractive(GetValue(config, "inputConfig", undefined));
         this.resetFromJSON(config);
         this.boot();
     }
@@ -43,19 +43,19 @@ class Drag {
     }
 
     boot() {
-        var gameobject = this.gameobject;
-        if (gameobject.on) {
-            gameobject.on('dragstart', this.onDragStart, this);
-            gameobject.on('drag', this.onDragging, this);
-            gameobject.on('dragend', this.onDragEnd, this);
-            gameobject.on('destroy', this.destroy, this);
+        var gameObject = this.gameObject;
+        if (gameObject.on) {
+            gameObject.on('dragstart', this.onDragStart, this);
+            gameObject.on('drag', this.onDrag, this);
+            gameObject.on('dragend', this.onDragEnd, this);
+            gameObject.on('destroy', this.destroy, this);
         }
     }
 
     shutdown() {
-        this.gameobject = undefined;
+        this.gameObject = undefined;
         this.scene = undefined;
-        // gameobject event 'dragstart', 'drag', 'dragend' will be removed when this gameobject destroyed 
+        // gameObject event 'dragstart', 'drag', 'dragend' will be removed when this gameObject destroyed 
     }
 
     destroy() {
@@ -72,7 +72,7 @@ class Drag {
         }
 
         this.enable = e;
-        this.scene.input.setDraggable(this.gameobject, e);
+        this.scene.input.setDraggable(this.gameObject, e);
         return this;
     }
 
@@ -107,13 +107,13 @@ class Drag {
     }
 
     hitTest(pointer) {
-        var gameobjects = [this.gameobject];
+        var gameObjects = [this.gameObject];
         var cameras = this.scene.input.cameras.getCamerasBelowPointer(pointer);
         var inputManager = this.scene.input.manager;
         var hitResult = false,
             output;
         for (var i = 0, len = cameras.length; i < len; i++) {
-            output = inputManager.hitTest(pointer, gameobjects, cameras[i]);
+            output = inputManager.hitTest(pointer, gameObjects, cameras[i]);
             if (output.length > 0) {
                 hitResult = true;
                 break;
@@ -138,38 +138,38 @@ class Drag {
         this.pointerId = pointer.id;
     }
 
-    onDragging(pointer, dragX, dragY) {
+    onDrag(pointer, dragX, dragY) {
         if (pointer.id !== this.pointerId) {
             return;
         }
-        var gameobject = this.gameobject;
+        var gameObject = this.gameObject;
         if (this.axisMode === 0) {
-            gameobject.x = dragX;
-            gameobject.y = dragY;
+            gameObject.x = dragX;
+            gameObject.y = dragY;
         } else if (this.axisRotation === 0) {
             if (this.axisMode === 1) {
-                gameobject.x = dragX;
+                gameObject.x = dragX;
             } else if (this.axisMode === 2) {
-                gameobject.y = dragY;
+                gameObject.y = dragY;
             }
         } else {
             var dist;
             P1.x = dragX;
             P1.y = dragY;
 
-            dist = DistanceBetween(P1.x, P1.y, gameobject.x, gameobject.y);
-            P1 = RotateAroundDistance(P1, gameobject.x, gameobject.y, -this.axisRotation, dist);
+            dist = DistanceBetween(P1.x, P1.y, gameObject.x, gameObject.y);
+            P1 = RotateAroundDistance(P1, gameObject.x, gameObject.y, -this.axisRotation, dist);
 
             if (this.axisMode === 1) {
-                P1.y = gameobject.y;
+                P1.y = gameObject.y;
             } else if (this.axisMode === 2) {
-                P1.x = gameobject.x;
+                P1.x = gameObject.x;
             }
-            dist = DistanceBetween(P1.x, P1.y, gameobject.x, gameobject.y);
-            P1 = RotateAroundDistance(P1, gameobject.x, gameobject.y, this.axisRotation, dist);
+            dist = DistanceBetween(P1.x, P1.y, gameObject.x, gameObject.y);
+            P1 = RotateAroundDistance(P1, gameObject.x, gameObject.y, this.axisRotation, dist);
 
-            gameobject.x = P1.x;
-            gameobject.y = P1.y;
+            gameObject.x = P1.x;
+            gameObject.y = P1.y;
         }
 
     }
@@ -182,7 +182,7 @@ class Drag {
     }
 
     get isDragging() {
-        return (this.gameobject.input.dragState > 0);
+        return (this.pointerId !== undefined);
     }
 }
 

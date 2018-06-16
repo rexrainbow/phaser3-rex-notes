@@ -13,8 +13,8 @@ class DragDeltaPlugin extends Phaser.Plugins.BasePlugin {
         eventEmitter.once('destroy', this.destroy, this);
     }
 
-    add(gameobject, config) {
-        return new DragDelta(gameobject, config);
+    add(gameObject, config) {
+        return new DragDelta(gameObject, config);
     }
 
 }

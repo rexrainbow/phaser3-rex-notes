@@ -1,43 +1,28 @@
 'use strict'
 
-import Phaser from 'phaser';
-
-var sceneConfig = {
-    key: 'examples',
-    pack: {
-        files: [{
-            type: 'plugin',
-            key: 'rexwebfontloaderplugin',
-            url: 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/plugins/dist/rexwebfontloaderplugin.min.js',
-            start: true
-        }]
-    }
-};
-
 class Demo extends Phaser.Scene {
     constructor() {
-        super(sceneConfig)
+        super({
+            key: 'examples'
+        })
     }
 
     preload() {
-        this.plugins.get('rexwebfontloaderplugin').addToScene(this);
-
-        var config = {
-            google: {
-                families: ['Bangers']
-            }
-        };
-        this.load.rexWebFont(config);
+        this.load.image('bg', 'assets/images/white-dot.png');
     }
 
     create() {
-        this.add.text(100, 0, 'Default ', {
-            fontSize: '64px'
-        });        
-        this.add.text(100, 100, 'Hello ', {
-            fontFamily: 'Bangers',
-            fontSize: '64px'
-        });
+        this.input.addPointer(3);
+        var bg = this.add.image(400, 300, 'bg')
+            .setDisplaySize(150, 150)
+            .setTint(0xcccccc)
+            .setInteractive({
+                draggable: true
+            })
+            .on('drag', function (pointer, dragX, dragY) {
+                this.x = dragX;
+                this.y = dragY;
+            });
     }
 
     update() {}

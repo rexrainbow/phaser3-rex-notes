@@ -12,7 +12,7 @@
     ```
 - Game object:
     ```javascript
-    var ee = gameobject;
+    var ee = gameObject;
     ```
 
 ### Attach listener

@@ -102,6 +102,17 @@ var isVisible = scene.scene.isVisible(key);
 // var isVisible = scene.scene.isVisible();
 ```
 
+## Run scene
+
+Runs the given Scene, but does not change the state of this Scene.
+
+If the given Scene is paused, it will resume it. If sleeping, it will wake it.
+If not running at all, it will be started.
+
+```javascript
+scene.scene.run(key, data);
+```
+
 ## Stop scene
 
 Stop : shutdown the Scene, clearing display list, timers, etc.

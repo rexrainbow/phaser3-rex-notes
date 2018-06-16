@@ -47,7 +47,7 @@ var game = new Phaser.Game(config);
 ### Create instance
 
 ```javascript
-gameobject.drag = scene.plugins.get('rexDrag').add(gameobject, {
+gameObject.drag = scene.plugins.get('rexDrag').add(gameObject, {
     //enable: true,
     //axis: 0,      //0|'both'|'h&v'|1|'horizontal'|'h'|2|'vertical'|'v'
     //rotation: Phaser.Math.DegToRad(45)  // axis rotation in rad
@@ -68,27 +68,27 @@ Properties
 Built-in dragging events
 
 ```javascript
-gameobject.on('dragstart', function(pointer, dragX, dragY){ /*...*/ });
-gameobject.on('drag', function(pointer, dragX, dragY){ /*...*/ });
-gameobject.on('dragend', function(pointer, dragX, dragY, dropped){ /*...*/ });
+gameObject.on('dragstart', function(pointer, dragX, dragY){ /*...*/ });
+gameObject.on('drag', function(pointer, dragX, dragY){ /*...*/ });
+gameObject.on('dragend', function(pointer, dragX, dragY, dropped){ /*...*/ });
 ```
 
 ### Get dragging state
 
 ```javascript
-var isDragging = gameobject.drag.isDragging;
+var isDragging = gameObject.drag.isDragging;
 ```
 
 ### Set rotation of axis
 
 ```javascript
-gameobject.drag.setAxisRotation(rad);
+gameObject.drag.setAxisRotation(rad);
 ```
 
 ### Set axis mode
 
 ```javascript
-gameobject.drag.setAxisMode(m);  //0|'both'|'h&v'|1|'horizontal'|'h'|2|'vertical'|'v'
+gameObject.drag.setAxisMode(m);  //0|'both'|'h&v'|1|'horizontal'|'h'|2|'vertical'|'v'
 ```
 
 ### Try drag
@@ -98,7 +98,7 @@ gameobject.drag.setAxisMode(m);  //0|'both'|'h&v'|1|'horizontal'|'h'|2|'vertical
 Game object will be dragged if there is any point above it.
 
 ```javascript
-gameobject.drag.drag();
+gameObject.drag.drag();
 ```
 
 ### Drop
@@ -108,5 +108,5 @@ gameobject.drag.drag();
 Game object will be dropped(dragend) manually.
 
 ```javascript
-gameobject.drag.dragend();
+gameObject.drag.dragend();
 ```

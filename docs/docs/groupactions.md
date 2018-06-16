@@ -9,16 +9,16 @@ Set properties of game objects, built-in methods of phaser.
 ### Call
 
 ```javascript
-Phaser.Actions.Call(gameobjects, callback, context);
+Phaser.Actions.Call(gameObjects, callback, context);
 ```
 
 ### Any property
 
 ```javascript
-Phaser.Actions.PropertyValueSet(gameobjects, key, value, step, index, direction);
+Phaser.Actions.PropertyValueSet(gameObjects, key, value, step, index, direction);
 ```
 
-- gameobjects : The array of game objects to be updated by this action.
+- gameObjects : The array of game objects to be updated by this action.
 - key : The property to be updated.
 - value : The amount to be added to the property.
 - step : This is added to the `value` amount, multiplied by the iteration counter.
@@ -28,45 +28,45 @@ Phaser.Actions.PropertyValueSet(gameobjects, key, value, step, index, direction)
     - `-1`: from end to beginning.
 
 ```javascript
-Phaser.Actions.PropertyValueInc(gameobjects, key, value, step, index, direction);
+Phaser.Actions.PropertyValueInc(gameObjects, key, value, step, index, direction);
 ```
 
 ```javascript
-Phaser.Actions.SmootherStep(gameobjects, key, min, max, inc));
+Phaser.Actions.SmootherStep(gameObjects, key, min, max, inc));
 ```
 
 ```javascript
-Phaser.Actions.SmoothStep(gameobjects, key, min, max, inc));
+Phaser.Actions.SmoothStep(gameObjects, key, min, max, inc));
 ```
 
 ```javascript
-Phaser.Actions.Spread(gameobjects, key, min, max, inc));
+Phaser.Actions.Spread(gameObjects, key, min, max, inc));
 ```
 
 ### Position
 
 ```javascript
-Phaser.Actions.SetX(gameobjects, value, step, index, direction);
+Phaser.Actions.SetX(gameObjects, value, step, index, direction);
 ```
 
 ```javascript
-Phaser.Actions.IncX(gameobjects, value, step, index, direction);
+Phaser.Actions.IncX(gameObjects, value, step, index, direction);
 ```
 
 ```javascript
-Phaser.Actions.SetY(gameobjects, value, step, index, direction);
+Phaser.Actions.SetY(gameObjects, value, step, index, direction);
 ```
 
 ```javascript
-Phaser.Actions.IncY(gameobjects, value, step, index, direction);
+Phaser.Actions.IncY(gameObjects, value, step, index, direction);
 ```
 
 ```javascript
-Phaser.Actions.SetXY(gameobjects, x, y, stepX, stepY, index, direction);
+Phaser.Actions.SetXY(gameObjects, x, y, stepX, stepY, index, direction);
 ```
 
 ```javascript
-Phaser.Actions.IncXY(gameobjects, x, y, stepX, stepY, index, direction);
+Phaser.Actions.IncXY(gameObjects, x, y, stepX, stepY, index, direction);
 ```
 
 ### Shift position
@@ -74,7 +74,7 @@ Phaser.Actions.IncXY(gameobjects, x, y, stepX, stepY, index, direction);
 Set the position of first game object to (x, y), others to the position of previous game object.
 
 ```javascript
-Phaser.Actions.ShiftPosition(gameobjects, x, y, direction, output);
+Phaser.Actions.ShiftPosition(gameObjects, x, y, direction, output);
 ```
 
 ### Position on shape
@@ -82,7 +82,7 @@ Phaser.Actions.ShiftPosition(gameobjects, x, y, direction, output);
 #### Grid align
 
 ```javascript
-Phaser.Actions.GridAlign(gameobjects, {
+Phaser.Actions.GridAlign(gameObjects, {
     width: -1,
     height: -1,
     cellWidth: 1,
@@ -100,11 +100,11 @@ var line = new Phaser.Geom.Line(x1, y1, x2, y2);
 ```
 
 ```javascript
-Phaser.Actions.PlaceOnLine(gameobjects, line);
+Phaser.Actions.PlaceOnLine(gameObjects, line);
 ```
 
 ```javascript
-Phaser.Actions.RandomLine(gameobjects, line);
+Phaser.Actions.RandomLine(gameObjects, line);
 ```
 
 #### Circle
@@ -114,11 +114,11 @@ var circle = new Phaser.Geom.Circle(x, y, radius);
 ```
 
 ```javascript
-Phaser.Actions.PlaceOnCircle(gameobjects, circle, startAngle, endAngle);
+Phaser.Actions.PlaceOnCircle(gameObjects, circle, startAngle, endAngle);
 ```
 
 ```javascript
-Phaser.Actions.RandomCircle(gameobjects, circle);
+Phaser.Actions.RandomCircle(gameObjects, circle);
 ```
 
 #### Ellipse
@@ -128,7 +128,7 @@ var ellipse = new Phaser.Geom.Ellipse(x, y, width, height);
 ```
 
 ```javascript
-Phaser.Actions.PlaceOnEllipse(gameobjects, ellipse, startAngle, endAngle);
+Phaser.Actions.PlaceOnEllipse(gameObjects, ellipse, startAngle, endAngle);
 ```
 
 #### Triangle
@@ -138,11 +138,11 @@ var triangle = new Phaser.Geom.Triangle(x1, y1, x2, y2, x3, y3);
 ```
 
 ```javascript
-Phaser.Actions.PlaceOnTriangle(gameobjects, triangle, stepRate);
+Phaser.Actions.PlaceOnTriangle(gameObjects, triangle, stepRate);
 ```
 
 ```javascript
-Phaser.Actions.RandomTriangle(gameobjects, triangle);
+Phaser.Actions.RandomTriangle(gameObjects, triangle);
 ```
 
 #### Rectangle
@@ -152,98 +152,98 @@ var rect = new Phaser.Geom.Rectangle(x, y, width, height);
 ```
 
 ```javascript
-Phaser.Actions.PlaceOnRectangle(gameobjects, rect, shift;
+Phaser.Actions.PlaceOnRectangle(gameObjects, rect, shift;
 ```
 
 ```javascript
-Phaser.Actions.RandomRectangle(gameobjects, rect);
+Phaser.Actions.RandomRectangle(gameObjects, rect);
 ```
 
 ```javascript
-Phaser.Actions.WrapInRectangle(gameobjects, rect, padding);
+Phaser.Actions.WrapInRectangle(gameObjects, rect, padding);
 ```
 
 ### Angle
 
 ```javascript
-Phaser.Actions.Angle(gameobjects, value, step, index, direction);
+Phaser.Actions.Angle(gameObjects, value, step, index, direction);
 // value: angle in radians
 ```
 
 ```javascript
-Phaser.Actions.Rotate(gameobjects, value, step, index, direction);
+Phaser.Actions.Rotate(gameObjects, value, step, index, direction);
 // value: angle in degree
 ```
 
 ```javascript
-Phaser.Actions.RotateAround(gameobjects, point, angle);
+Phaser.Actions.RotateAround(gameObjects, point, angle);
 // point: {x, y}, angle: angle in radians
 ```
 
 ```javascript
-Phaser.Actions.RotateAroundDistance(gameobjects, point, angle, distance);
+Phaser.Actions.RotateAroundDistance(gameObjects, point, angle, distance);
 // point: {x, y}, angle: angle in radians
 ```
 
 ### Visible
 
 ```javascript
-Phaser.Actions.SetVisible(gameobjects, value, index, direction);
+Phaser.Actions.SetVisible(gameObjects, value, index, direction);
 ```
 
 ```javascript
-Phaser.Actions.ToggleVisible(gameobjects);
+Phaser.Actions.ToggleVisible(gameObjects);
 ```
 
 ### Alpha
 
 ```javascript
-Phaser.Actions.SetAlpha(gameobjects, value, step, index, direction);
+Phaser.Actions.SetAlpha(gameObjects, value, step, index, direction);
 ```
 
 ### Tint
 
 ```javascript
-Phaser.Actions.setTint(gameobjects, value);
-//Phaser.Actions.setTint(gameobjects, topLeft, topRight, bottomLeft, bottomRight);
+Phaser.Actions.setTint(gameObjects, value);
+//Phaser.Actions.setTint(gameObjects, topLeft, topRight, bottomLeft, bottomRight);
 ```
 
 ### Origin
 
 ```javascript
-Phaser.Actions.SetOrigin(gameobjects, originX, originY, stepX, stepY, index, direction);
+Phaser.Actions.SetOrigin(gameObjects, originX, originY, stepX, stepY, index, direction);
 ```
 
 ### Scale
 
 ```javascript
-Phaser.Actions.ScaleX(gameobjects, value, step, index, direction);
+Phaser.Actions.ScaleX(gameObjects, value, step, index, direction);
 ```
 
 ```javascript
-Phaser.Actions.ScaleY(gameobjects, value, step, index, direction);
+Phaser.Actions.ScaleY(gameObjects, value, step, index, direction);
 ```
 
 ```javascript
-Phaser.Actions.ScaleXY(gameobjects, x, y, stepX, stepY, index, direction);
+Phaser.Actions.ScaleXY(gameObjects, x, y, stepX, stepY, index, direction);
 ```
 
 ### Depth
 
 ```javascript
-Phaser.Actions.SetDepth(gameobjects, value, step, index, direction);
+Phaser.Actions.SetDepth(gameObjects, value, step, index, direction);
 ```
 
 ### Hit area
 
 ```javascript
-Phaser.Actions.SetHitArea(gameobjects, hitArea, hitAreaCallback);
+Phaser.Actions.SetHitArea(gameObjects, hitArea, hitAreaCallback);
 ```
 
 ### Blend mode
 
 ```javascript
-Phaser.Actions.SetHitArea(gameobjects, value, index, direction);
+Phaser.Actions.SetHitArea(gameObjects, value, index, direction);
 ```
 
 Blend mode :
@@ -270,11 +270,11 @@ Blend mode :
 ### Play animation
 
 ```javascript
-Phaser.Actions.PlayAnimation(gameobjects, key, startFrame);
+Phaser.Actions.PlayAnimation(gameObjects, key, startFrame);
 ```
 
 ### Shuffle
 
 ```javascript
-Phaser.Actions.Shuffle(gameobjects);
+Phaser.Actions.Shuffle(gameObjects);
 ```

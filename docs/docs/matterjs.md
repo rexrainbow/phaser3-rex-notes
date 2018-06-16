@@ -57,43 +57,43 @@ var image = scene.matter.add.sprite(x, y, key, frame);
 #### Size
 
 ```javascript
-gameobject.setRectangle(width, height, options);
+gameObject.setRectangle(width, height, options);
 ```
 
 ```javascript
-gameobject.setCircle(radius, options);
+gameObject.setCircle(radius, options);
 ```
 
 ```javascript
-gameobject.setPolygon(radius, sides, options);
+gameObject.setPolygon(radius, sides, options);
 ```
 
 ```javascript
-gameobject.setTrapezoid(width, height, slope, options);
+gameObject.setTrapezoid(width, height, slope, options);
 ```
 
 #### Velocity
 
 ```javascript
-gameobject.setVelocity(x, y);
+gameObject.setVelocity(x, y);
 ```
 
 ```javascript
-gameobject.setVelocityX(x);
+gameObject.setVelocityX(x);
 ```
 
 ```javascript
-gameobject.setVelocityY(x);
+gameObject.setVelocityY(x);
 ```
 
 #### Mass
 
 ```javascript
-gameobject.setMass(v);
+gameObject.setMass(v);
 ```
 
 ```javascript
-gameobject.setDensity(v);
+gameObject.setDensity(v);
 ```
 
 #### Acceleration
@@ -101,31 +101,31 @@ gameobject.setDensity(v);
 #### Gravity
 
 ```javascript
-gameobject.setGravity(x, y);
+gameObject.setGravity(x, y);
 ```
 
 #### Friction
 
 ```javascript
-gameobject.setFriction(value, air, fstatic);
+gameObject.setFriction(value, air, fstatic);
 ```
 
 ```javascript
-gameobject.setFrictionAir(v);
+gameObject.setFrictionAir(v);
 ```
 
 ```javascript
-gameobject.setFrictionStatic(v);
+gameObject.setFrictionStatic(v);
 ```
 
 #### Angular
 
 ```javascript
-gameobject.setAngularVelocity(v);
+gameObject.setAngularVelocity(v);
 ```
 
 #### Bounce
 
 ```javascript
-gameobject.setBounce(v);
+gameObject.setBounce(v);
 ```

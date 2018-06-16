@@ -13,8 +13,8 @@ class DragPlugin extends Phaser.Plugins.BasePlugin {
         eventEmitter.once('destroy', this.destroy, this);
     }
 
-    add(gameobject, config) {
-        return new Drag(gameobject, config);
+    add(gameObject, config) {
+        return new Drag(gameObject, config);
     }
 
 }

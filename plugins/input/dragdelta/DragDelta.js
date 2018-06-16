@@ -7,10 +7,10 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 const getDist = Phaser.Math.Distance.Power;
 
 class DragDelta extends EE {
-    constructor(gameobject, config) {
+    constructor(gameObject, config) {
         super();
-        this.gameobject = gameobject;
-        this.scene = GetSceneObject(gameobject);
+        this.gameObject = gameObject;
+        this.scene = GetSceneObject(gameObject);
 
         this.enable = null;
         this.resetFromJSON(config);
@@ -29,19 +29,19 @@ class DragDelta extends EE {
     }
 
     boot() {
-        if (this.gameobject.on) {
-            this.gameobject.on('pointerdown', this.onDragStart, this);
-            this.gameobject.on('pointermove', this.onDragging, this);
-            this.gameobject.on('pointerup', this.onDragEnd, this);
-            this.gameobject.on('destroy', this.destroy, this);
+        if (this.gameObject.on) {
+            this.gameObject.on('pointerdown', this.onDragStart, this);
+            this.gameObject.on('pointermove', this.onDragging, this);
+            this.gameObject.on('pointerup', this.onDragEnd, this);
+            this.gameObject.on('destroy', this.destroy, this);
         }
     }
 
     shutdown() {
         super.shutdown();
-        this.gameobject = undefined;
+        this.gameObject = undefined;
         this.scene = undefined;
-        // gameobject event 'pointerdown','pointermove','pointerup' will be removed when this gameobject destroyed 
+        // gameObject event 'pointerdown','pointermove','pointerup' will be removed when this gameObject destroyed 
     }
 
     destroy() {
@@ -50,7 +50,7 @@ class DragDelta extends EE {
 
     setEnable(e) {
         if (this.enable === null) {
-            this.gameobject.setInteractive(); // only need setInteractive once
+            this.gameObject.setInteractive(); // only need setInteractive once
         }
 
         if (e === undefined) {

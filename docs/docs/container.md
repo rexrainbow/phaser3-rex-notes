@@ -25,7 +25,7 @@ Also destroy all children game object.
 
 #### Set properties
 
-Reference [game object](gameobject.md), to set position, angle, visible, alpha, etc...
+Reference [game object](gameObject.md), to set position, angle, visible, alpha, etc...
 
 #### Set size
 

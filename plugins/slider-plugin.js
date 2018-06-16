@@ -13,8 +13,8 @@ class SliderPlugin extends Phaser.Plugins.BasePlugin {
         eventEmitter.once('destroy', this.destroy, this);
     }
 
-    add(gameobject, config) {
-        return new Slider(gameobject, config);
+    add(gameObject, config) {
+        return new Slider(gameObject, config);
     }
 
 }

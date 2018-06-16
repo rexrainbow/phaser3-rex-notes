@@ -46,16 +46,43 @@ camera.setViewport(x, y, width, height);
 camera.setPosition(x, y);
 // camera.x = x;
 // camera.y = y;
-// var x = camera.x;
-// var y = camera.y;
 ```
 
 ```javascript
 camera.setSize(width, height);
 // camera.width = width;
 // camera.height = height;
-// var width = camera.width;
-// var height = camera.height;
+```
+
+- Position
+    - Top-left
+        ```javascript
+        var x = camera.x;
+        var y = camera.y;
+        ```
+    - Center
+        ```javascript
+        var centerX = camera.centerX;
+        var centerY = camera.centerY;
+        ```
+- Width & height
+    ```javascript
+    var width = camera.width;
+    var height = camera.height
+    ```
+
+### Visible
+
+A visible camera will render and perform input tests.
+An invisible camera will not render anything and will skip input tests.
+
+```javascript
+camera.setVisible(value);
+// camera.visible = value
+```
+
+```javascript
+var visible = camera.visible;
 ```
 
 ### Scroll camera
@@ -81,8 +108,8 @@ camera.centerToSize();
 
 - Start following
     ```javascript
-    camera.startFollow(gameobject);
-    // camera.startFollow(gameobject, roundPx, lerpX, lerpY, offsetX, offsetY);  // 
+    camera.startFollow(gameObject);
+    // camera.startFollow(gameObject, roundPx, lerpX, lerpY, offsetX, offsetY);  // 
     ```
     roundPx : set true to round the camera position to integers
 - Stop following
@@ -100,7 +127,7 @@ camera.centerToSize();
 
 #### Scroll factor
 
-See [Scroll factor](gameobject.md#scroll-factor) in game object.
+See [Scroll factor](gameObject.md#scroll-factor) in game object.
 
 #### Set bounds
 
@@ -196,7 +223,7 @@ camera.setBackgroundColor(color);
 Ignored game objects won't show at that camera.
 
 ```javascript
-camera.ignore(gameobject);  // a game object, or an array of game objects
+camera.ignore(gameObject);  // a game object, or an array of game objects
 ```
 
 ### Camera Controllor
@@ -235,7 +262,8 @@ var config = {
     //    y: 0
     // }
 };
-var controls = new Phaser.Cameras.Controls.Smoothed(config);
+var controls = new Phaser.Cameras.Controls.SmoothedKeyControl(config);
+// var controls = new Phaser.Cameras.Controls.FixedKeyControl(config);
 ```
 
 #### Update
