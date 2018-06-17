@@ -21,10 +21,11 @@ class Demo extends Phaser.Scene {
         };
         console.log(d);
         localforage.setItem('key', d)
-            .then(function () {
-                localforage.getItem('key').then(function (value) {
-                    console.log(value);
-                })
+            .then(function () {  // after setItem
+                return localforage.getItem('key');
+            })
+            .then(function (value) {  // after getItem
+                console.log(value);
             })
             .catch(function (err) {
                 console.log(err);
