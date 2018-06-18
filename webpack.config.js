@@ -82,6 +82,9 @@ module.exports = {
             }
         ]
     },
+    node: {
+        fs: 'empty'
+    },
     resolve: {
         alias: {
             'phaser': phaser,
