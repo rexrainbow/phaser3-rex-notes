@@ -54,8 +54,11 @@ pages:
 - Data:
     - Data manager: datamanager.md
     - Array: array.md
-    - CSV to array: csvtoarray.md
-    - CSV to hash table: csvtohashtable.md
+    - CSV:
+        - CSV to array: csvtoarray.md
+        - CSV to hash table: csvtohashtable.md
+    - Database:
+        - LokiJs: lokijs.md    
 - Logic:
     - Event emitter: eventemitter3.md
     - Run commands:
@@ -83,7 +86,6 @@ pages:
             - LocalStorage: localstorage.md
             - LocalForage: localforage.md
         - Database:
-            - LokiJs: lokijs.md
             - Pouchdb: pouchdb.md  
 
 

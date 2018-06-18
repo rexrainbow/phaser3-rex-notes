@@ -18,24 +18,34 @@ class Demo extends Phaser.Scene {
         // Create a collection
         var children = db.addCollection('children');
 
+        var view = children.addDynamicView('over3').applyFind({
+            'id': {
+                '$gte': 3
+            }
+        });
+
+        var result = view.data();
+        console.log(result);
+
         // Insert documents
         for (var i = 0; i < 20; i++) {
             children.insert({
-                id: i,
+                id: i
             });
         }
 
-        children
-            .chain() // start chain functions
-            .where( // pick doc which (id%2 === 1) (odd)
-                function (doc) {
-                    return (doc.id % 2) === 1;
-                })
-            .remove(); // remove result set
-
-        var result = children.chain().data();
+        var result = view.data();
         console.log(result);
 
+        var result = view
+            .branchResultset()
+            .find({
+                id: {
+                    '$lt': 7
+                }
+            })
+            .data();
+        console.log(result);
     }
 
     update() {}

@@ -2,8 +2,6 @@
 
 import loki from 'rexPlugins/utils/lokijs/lokijs.min.js';
 
-var Between = Phaser.Math.Between;
-
 class Demo extends Phaser.Scene {
     constructor() {
         super({

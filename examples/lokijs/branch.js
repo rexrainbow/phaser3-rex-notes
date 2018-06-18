@@ -2,6 +2,8 @@
 
 import loki from 'rexPlugins/utils/lokijs/lokijs.min.js';
 
+var Between = Phaser.Math.Between;
+
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -21,20 +23,35 @@ class Demo extends Phaser.Scene {
         // Insert documents
         for (var i = 0; i < 100; i++) {
             children.insert({
-                id: i,
+                id: i
             });
         }
 
-        // sort all documents by 'id'
-        // get result from 50 to 54
-        var result = children
-            .chain() // start chain functions
-            .simplesort('id')
-            .offset(50)
-            .limit(5)
-            .data(); // get documents from result set
+        var resultSet = children
+            .chain()
+            .where(function (doc) {
+                return (doc.id % 2) === 0;
+            })
+            .simplesort('id');
+        var resultSetClone = resultSet.branch();
+
+        var result = resultSet
+            .find({
+                id: {
+                    '$gt': 80
+                }
+            })
+            .data();
         console.log(result);
 
+        var result = resultSetClone
+            .find({
+                id: {
+                    '$lt': 30
+                }
+            })
+            .data();
+        console.log(result);
     }
 
     update() {}

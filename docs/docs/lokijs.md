@@ -21,7 +21,13 @@ var collection = db.addCollection(name);
 ### Insert document
 
 ```javascript
-collection.insert(doc);  // doc: an object
+var docInColl = collection.insert(doc);  // doc: an object
+```
+
+Get Id
+
+```javascript
+var id = docInColl.$loki;
 ```
 
 ### Query
@@ -29,7 +35,7 @@ collection.insert(doc);  // doc: an object
 #### Get document by id
 
 ```javascript
-var doc = collection.get(id);  // Id: `$loki`
+var doc = collection.get(id);  // id: `$loki`
 ```
 
 #### Filter documents
@@ -100,8 +106,8 @@ var doc = collection.get(id);  // Id: `$loki`
     ```    
     For example
     ```javascript
-    var docArray = collection.find({name: { '$regex': 'din' }});
-    var docArray = collection.find({name: { '$regex': ['din', 'i'] }});
+    var docArray = collection.find({key: { '$regex': 'din' }});
+    var docArray = collection.find({key: { '$regex': ['din', 'i'] }});
     ```    
 - **$dteq**: filter for document(s) with date property equal to provided date value
     ```javascript
@@ -152,8 +158,16 @@ var docArray = collection.where(function(doc){
     ```
 - Sort with function
     ```javascript
-    var docArray = collection.chain().find({}).sort(function(){ /* */ }).data();
+    var docArray = collection.chain().find({}).sort(
+        function(doc1, doc2) {
+            return result; // 0, 1, -1
+        })
+        .data();
     ```
+    result:
+    - `0`: equal
+    - `1`: greater
+    - `-1`: less
 
 #### Pagination
 
@@ -162,3 +176,134 @@ Get documents from `start` to `start+count-1`.
 ```javascript
 var docArray = collection.chain().find({}).offset(start).limit(count).data();
 ```
+
+#### Update
+
+Update each filtered documents.
+
+```javascript
+var docArray = collection.chain().find({}).update(
+    function(doc) { 
+        //
+        return doc;
+    });
+```
+
+#### Remove
+
+Remove filtered documents.
+
+```javascript
+collection.chain().find({}).remove();
+```
+
+#### Map
+
+Map document into a new anonymous collection, won't affect original collection.
+
+```javascript
+var docArray = collection.chain().find({}).map(
+    function(doc) {
+        // ...
+        return doc
+    })
+    .data();
+```
+
+#### Map-reduce
+
+1. Map document into a new anonymous collection
+1. Run reduceFn to get final result value from result set of step 1.
+
+```javascript
+var mapFn = function(doc) {
+    // ...
+    return doc
+};
+var reduceFn = function(docArray) {
+    // ...
+    return result;
+}
+var result = collection.chain().find({}).mapReduce(mapFn, reduceFn);
+```
+
+#### Clone result set
+
+```javascript
+var resultSet = collection.chain().find({});
+var resultSetClone = resultSet.branch();
+
+// resultSetClone.find({}).data();
+```
+
+### Dynamic view
+
+1. Create dynamic view
+    ```javascript
+    var view = children.addDynamicView(name);
+    ```
+1. Add filters
+    - find
+        ```javascript
+        view.applyFind({});
+        ```
+    - where
+        ```javascript
+        view.applyWhere(function(doc) { return true; });
+        ```
+    - simple sort
+        ```javascript
+        view.applySimpleSort(key);
+        ```  
+    - sort by multiple keys
+        ```javascript
+        view.applySortCriteria([key0, key1]);
+        // view.applySortCriteria([key0, [key1, true]]);
+        ```     
+    - sort function
+        ```javascript
+        view.applySort(function(doc1, doc2) {
+            return result; // 0, 1, -1
+        });
+        ```
+        result:
+        - `0`: equal
+        - `1`: greater
+        - `-1`: less
+1. Get result data
+    ```javascript
+    var docArray = view.data();
+    ```
+
+Add new filters
+```javascript
+var docArray = view.branchResultset().find({}).data();
+```
+
+### Speed-up quering
+
+#### Custom unique index
+
+1. Define custom unique index
+    ```javascript
+    var collection = db.addCollection(name, {
+        unique: [key0]
+    });
+    ```
+1. Get document by custom unique index
+    ```javascript
+    var doc = collection.by(key0, value);
+    ```
+
+#### Binary index
+
+1. Define binary index
+    ```javascript
+    var collection = db.addCollection(name, {
+        indices: [key0]
+    });
+    ```
+1. Get documents by normal filters
+    ```javascript
+    var docArray = collection.find({key0: {'$gt': value}});
+    ```

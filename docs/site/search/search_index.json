@@ -2891,6 +2891,111 @@
             "title": "Retrieve columns or rows"
         }, 
         {
+            "location": "/lokijs/index.html", 
+            "text": "Introduction\n\n\nIn-memory JavaScript Datastore with Persistence.\n\nReference\n\n\nUsage\n\n\nCreate database\n\n\nvar\n \ndb\n \n=\n \nnew\n \nloki\n();\n\n\n// var db = new loki(\nloki.json\n);  // load database from file\n\n\n\n\n\nCreate collection\n\n\nvar\n \ncollection\n \n=\n \ndb\n.\naddCollection\n(\nname\n);\n\n\n\n\n\nInsert document\n\n\nvar\n \ndocInColl\n \n=\n \ncollection\n.\ninsert\n(\ndoc\n);\n  \n// doc: an object\n\n\n\n\n\nGet Id\n\n\nvar\n \nid\n \n=\n \ndocInColl\n.\n$loki\n;\n\n\n\n\n\nQuery\n\n\nGet document by id\n\n\nvar\n \ndoc\n \n=\n \ncollection\n.\nget\n(\nid\n);\n  \n// id: `$loki`\n\n\n\n\n\nFilter documents\n\n\n\n\n$eq\n : filter for document(s) with property of (strict) equality\n    \nvar\n \ndocArray\n \n=\n \ncollection\n.\nfind\n({\nkey\n:\n \nvalue\n});\n\n\n// var docArray = collection.find({key: {\n$eq\n: value});\n\n\n\n\n$aeq\n : filter for document(s) with property of abstract (loose) equality\n    \nvar\n \ndocArray\n \n=\n \ncollection\n.\nfind\n({\nkey\n:\n \n{\n$aeq\n:\n \nvalue\n});\n\n\n\n    For example\n    \nvar\n \nresults\n \n=\n \ncoll\n.\nfind\n({\nage\n:\n \n{\n$aeq\n:\n \n20\n}});\n  \n// age == \n20\n or age == 20\n\n\n\n\n$ne\n : filter for document(s) with property not equal to provided value\n    \nvar\n \ndocArray\n \n=\n \ncollection\n.\nfind\n({\nkey\n:\n \n{\n$ne\n:\n \nvalue\n});\n\n\n\n\n$gt\n : filter for document(s) with property greater than provided value\n    \nvar\n \ndocArray\n \n=\n \ncollection\n.\nfind\n({\nkey\n:\n \n{\n$gt\n:\n \nvalue\n});\n\n\n\n\n$gte\n : filter for document(s) with property greater or equal to provided value\n    \nvar\n \ndocArray\n \n=\n \ncollection\n.\nfind\n({\nkey\n:\n \n{\n$gte\n:\n \nvalue\n});\n\n\n\n\n$lt\n : filter for document(s) with property less than provided value\n    \nvar\n \ndocArray\n \n=\n \ncollection\n.\nfind\n({\nkey\n:\n \n{\n$lt\n:\n \nvalue\n});\n\n\n\n\n$lte\n : filter for document(s) with property less than or equal to provided value\n    \nvar\n \ndocArray\n \n=\n \ncollection\n.\nfind\n({\nkey\n:\n \n{\n$lte\n:\n \nvalue\n});\n\n\n\n\n$between\n : filter for documents(s) with property between provided values\n    \nvar\n \ndocArray\n \n=\n \ncollection\n.\nfind\n({\nkey\n:\n \n{\n$between\n:\n \n[\nvalue0\n,\n \nvalue1\n]});\n\n\n\n\n$in\n : filter for document(s) with property matching any of the provided array values\n    \nvar\n \ndocArray\n \n=\n \ncollection\n.\nfind\n({\nkey\n:\n \n{\n$in\n:\n \n[\nvalue0\n,\n \nvalue1\n,\n \n...]});\n\n\n\n    Your property should not be an array but your compare values should be.\n\n\n$nin\n : filter for document(s) with property not matching any of the provided array values\n    \nvar\n \ndocArray\n \n=\n \ncollection\n.\nfind\n({\nkey\n:\n \n{\n$nin\n:\n \n[\nvalue0\n,\n \nvalue1\n,\n \n...]});\n\n\n\n\n$contains\n : filter for document(s) with property containing the provided value\n    \nvar\n \ndocArray\n \n=\n \ncollection\n.\nfind\n({\nkey\n:\n \n{\n$contains\n:\n \nvalue\n});\n\n\n\n    Use this when your property contains an array but your compare value is not an array\n\n\n$containsAny\n : filter for document(s) with property containing any of the provided values\n    \nvar\n \ndocArray\n \n=\n \ncollection\n.\nfind\n({\nkey\n:\n \n{\n$containsAny\n:\n \n[\nvalue0\n,\n \nvalue1\n,\n \n...]});\n\n\n\n\n$containsNone\n : filter for documents(s) with property containing none of the provided values\n    \nvar\n \ndocArray\n \n=\n \ncollection\n.\nfind\n({\nkey\n:\n \n{\n$containsNone\n:\n \n[\nvalue0\n,\n \nvalue1\n,\n \n...]});\n\n\n\n\n$regex\n : filter for document(s) with property matching provided regular expression\n    \nvar\n \ndocArray\n \n=\n \ncollection\n.\nfind\n({\nkey\n:\n \n{\n$regex\n:\n \npattern\n});\n\n\n// var docArray = collection.find({key: {\n$regex\n: [pattern, options]});\n\n\n\n    For example\n    \nvar\n \ndocArray\n \n=\n \ncollection\n.\nfind\n({\nkey\n:\n \n{\n \n$regex\n:\n \ndin\n \n}});\n\n\nvar\n \ndocArray\n \n=\n \ncollection\n.\nfind\n({\nkey\n:\n \n{\n \n$regex\n:\n \n[\ndin\n,\n \ni\n]\n \n}});\n\n\n\n\n$dteq\n: filter for document(s) with date property equal to provided date value\n    \nvar\n \ndocArray\n \n=\n \ncollection\n.\nfind\n({\nkey\n:\n \n{\n$dteq\n:\n \nnew\n \nDate\n(\n1/1/2017\n)});\n\n\n\n\n$type\n : filter for documents which have a property of a specified type\n    \nvar\n \ndocArray\n \n=\n \ncollection\n.\nfind\n({\nkey\n:\n \n{\n$type\n:\n \nvalue\n});\n \n// \nstring\n, or \nnumber\n, ...\n\n\n\n\n$size\n : filter for documents which have array property of specified size\n    \nvar\n \ndocArray\n \n=\n \ncollection\n.\nfind\n({\nkey\n:\n \n{\n$size\n:\n \nvalue\n});\n\n\n\n    \n(does not work for strings)\n\n\n$len\n : filter for documents which have string property of specified length\n    \nvar\n \ndocArray\n \n=\n \ncollection\n.\nfind\n({\nkey\n:\n \n{\n$len\n:\n \nvalue\n});\n\n\n\n\n$or\n : filter for documents which meet any of the nested subexpressions\n    \nvar\n \ndocArray\n \n=\n \ncollection\n.\nfind\n({\n$or\n:\n \n[\n\n    \n{\nkey0\n:\n \n{\n$lt\n:\n \nvalue0\n},\n\n    \n{\nkey1\n:\n \n{\n$gte\n:\n \nvalue1\n},\n\n    \n// ...\n\n\n]});\n\n\n\n\n\n\nFilter by function\n\n\nvar\n \ndocArray\n \n=\n \ncollection\n.\nwhere\n(\nfunction\n(\ndoc\n){\n\n    \n// ...\n\n    \nreturn\n \nisPicked\n;\n  \n// true to pick this document\n\n\n})\n\n\n\n\n\nSort\n\n\n\n\nSort with a key\n    \nvar\n \ndocArray\n \n=\n \ncollection\n.\nchain\n().\nfind\n({}).\nsimplesort\n(\nkey\n).\ndata\n();\n  \n// ascending\n\n\n// var docArray = collection.chain().find({}).simplesort(key, {desc: true}).data();  // descending\n\n\n\n\nSort with mutiple keys\n    \nvar\n \ndocArray\n \n=\n \ncollection\n.\nchain\n().\nfind\n({}).\ncompoundsort\n([\nkey0\n,\n \nkey1\n]).\ndata\n();\n  \n// key0, key1: ascending\n\n\n// var docArray = collection.chain().find({}).compoundsort([key0, [key1, true]]).data(); // key0: ascending, key1: descending\n\n\n\n\nSort with function\n    \nvar\n \ndocArray\n \n=\n \ncollection\n.\nchain\n().\nfind\n({}).\nsort\n(\n\n    \nfunction\n(\ndoc1\n,\n \ndoc2\n)\n \n{\n\n        \nreturn\n \nresult\n;\n \n// 0, 1, -1\n\n    \n})\n\n    \n.\ndata\n();\n\n\n\n    result:\n\n\n0\n: equal\n\n\n1\n: greater\n\n\n-1\n: less\n\n\n\n\n\n\n\n\nPagination\n\n\nGet documents from \nstart\n to \nstart+count-1\n.\n\n\nvar\n \ndocArray\n \n=\n \ncollection\n.\nchain\n().\nfind\n({}).\noffset\n(\nstart\n).\nlimit\n(\ncount\n).\ndata\n();\n\n\n\n\n\nUpdate\n\n\nUpdate each filtered documents.\n\n\nvar\n \ndocArray\n \n=\n \ncollection\n.\nchain\n().\nfind\n({}).\nupdate\n(\n\n    \nfunction\n(\ndoc\n)\n \n{\n \n        \n//\n\n        \nreturn\n \ndoc\n;\n\n    \n});\n\n\n\n\n\nRemove\n\n\nRemove filtered documents.\n\n\ncollection\n.\nchain\n().\nfind\n({}).\nremove\n();\n\n\n\n\n\nMap\n\n\nMap document into a new anonymous collection, won't affect original collection.\n\n\nvar\n \ndocArray\n \n=\n \ncollection\n.\nchain\n().\nfind\n({}).\nmap\n(\n\n    \nfunction\n(\ndoc\n)\n \n{\n\n        \n// ...\n\n        \nreturn\n \ndoc\n\n    \n})\n\n    \n.\ndata\n();\n\n\n\n\n\nMap-reduce\n\n\n\n\nMap document into a new anonymous collection\n\n\nRun reduceFn to get final result value from result set of step 1.\n\n\n\n\nvar\n \nmapFn\n \n=\n \nfunction\n(\ndoc\n)\n \n{\n\n    \n// ...\n\n    \nreturn\n \ndoc\n\n\n};\n\n\nvar\n \nreduceFn\n \n=\n \nfunction\n(\ndocArray\n)\n \n{\n\n    \n// ...\n\n    \nreturn\n \nresult\n;\n\n\n}\n\n\nvar\n \nresult\n \n=\n \ncollection\n.\nchain\n().\nfind\n({}).\nmapReduce\n(\nmapFn\n,\n \nreduceFn\n);\n\n\n\n\n\nClone result set\n\n\nvar\n \nresultSet\n \n=\n \ncollection\n.\nchain\n().\nfind\n({});\n\n\nvar\n \nresultSetClone\n \n=\n \nresultSet\n.\nbranch\n();\n\n\n\n// resultSetClone.find({}).data();\n\n\n\n\n\nDynamic view\n\n\n\n\nCreate dynamic view\n    \nvar\n \nview\n \n=\n \nchildren\n.\naddDynamicView\n(\nname\n);\n\n\n\n\nAdd filters\n\n\nfind\n    \nview\n.\napplyFind\n({});\n\n\n\n\nwhere\n    \nview\n.\napplyWhere\n(\nfunction\n(\ndoc\n)\n \n{\n \nreturn\n \ntrue\n;\n \n});\n\n\n\n\nsimple sort\n    \nview\n.\napplySimpleSort\n(\nkey\n);\n\n\n\n\nsort by multiple keys\n    \nview\n.\napplySortCriteria\n([\nkey0\n,\n \nkey1\n]);\n\n\n// view.applySortCriteria([key0, [key1, true]]);\n\n\n\n\nsort function\n    \nview\n.\napplySort\n(\nfunction\n(\ndoc1\n,\n \ndoc2\n)\n \n{\n\n    \nreturn\n \nresult\n;\n \n// 0, 1, -1\n\n\n});\n\n\n\n    result:\n\n\n0\n: equal\n\n\n1\n: greater\n\n\n-1\n: less\n\n\n\n\n\n\n\n\n\n\nGet result data\n    \nvar\n \ndocArray\n \n=\n \nview\n.\ndata\n();\n\n\n\n\n\n\nAdd new filters\n\nvar\n \ndocArray\n \n=\n \nview\n.\nbranchResultset\n().\nfind\n({}).\ndata\n();\n\n\n\n\nSpeed-up quering\n\n\nCustom unique index\n\n\n\n\nDefine custom unique index\n    \nvar\n \ncollection\n \n=\n \ndb\n.\naddCollection\n(\nname\n,\n \n{\n\n    \nunique\n:\n \n[\nkey0\n]\n\n\n});\n\n\n\n\nGet document by custom unique index\n    \nvar\n \ndoc\n \n=\n \ncollection\n.\nby\n(\nkey0\n,\n \nvalue\n);\n\n\n\n\n\n\nBinary index\n\n\n\n\nDefine binary index\n    \nvar\n \ncollection\n \n=\n \ndb\n.\naddCollection\n(\nname\n,\n \n{\n\n    \nindices\n:\n \n[\nkey0\n]\n\n\n});\n\n\n\n\nGet documents by normal filters\n    \nvar\n \ndocArray\n \n=\n \ncollection\n.\nfind\n({\nkey0\n:\n \n{\n$gt\n:\n \nvalue\n}});", 
+            "title": "LokiJs"
+        }, 
+        {
+            "location": "/lokijs/index.html#introduction", 
+            "text": "In-memory JavaScript Datastore with Persistence. Reference", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/lokijs/index.html#usage", 
+            "text": "", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/lokijs/index.html#create-database", 
+            "text": "var   db   =   new   loki ();  // var db = new loki( loki.json );  // load database from file", 
+            "title": "Create database"
+        }, 
+        {
+            "location": "/lokijs/index.html#create-collection", 
+            "text": "var   collection   =   db . addCollection ( name );", 
+            "title": "Create collection"
+        }, 
+        {
+            "location": "/lokijs/index.html#insert-document", 
+            "text": "var   docInColl   =   collection . insert ( doc );    // doc: an object   Get Id  var   id   =   docInColl . $loki ;", 
+            "title": "Insert document"
+        }, 
+        {
+            "location": "/lokijs/index.html#query", 
+            "text": "", 
+            "title": "Query"
+        }, 
+        {
+            "location": "/lokijs/index.html#get-document-by-id", 
+            "text": "var   doc   =   collection . get ( id );    // id: `$loki`", 
+            "title": "Get document by id"
+        }, 
+        {
+            "location": "/lokijs/index.html#filter-documents", 
+            "text": "$eq  : filter for document(s) with property of (strict) equality\n     var   docArray   =   collection . find ({ key :   value });  // var docArray = collection.find({key: { $eq : value});   $aeq  : filter for document(s) with property of abstract (loose) equality\n     var   docArray   =   collection . find ({ key :   { $aeq :   value });  \n    For example\n     var   results   =   coll . find ({ age :   { $aeq :   20 }});    // age ==  20  or age == 20   $ne  : filter for document(s) with property not equal to provided value\n     var   docArray   =   collection . find ({ key :   { $ne :   value });   $gt  : filter for document(s) with property greater than provided value\n     var   docArray   =   collection . find ({ key :   { $gt :   value });   $gte  : filter for document(s) with property greater or equal to provided value\n     var   docArray   =   collection . find ({ key :   { $gte :   value });   $lt  : filter for document(s) with property less than provided value\n     var   docArray   =   collection . find ({ key :   { $lt :   value });   $lte  : filter for document(s) with property less than or equal to provided value\n     var   docArray   =   collection . find ({ key :   { $lte :   value });   $between  : filter for documents(s) with property between provided values\n     var   docArray   =   collection . find ({ key :   { $between :   [ value0 ,   value1 ]});   $in  : filter for document(s) with property matching any of the provided array values\n     var   docArray   =   collection . find ({ key :   { $in :   [ value0 ,   value1 ,   ...]});  \n    Your property should not be an array but your compare values should be.  $nin  : filter for document(s) with property not matching any of the provided array values\n     var   docArray   =   collection . find ({ key :   { $nin :   [ value0 ,   value1 ,   ...]});   $contains  : filter for document(s) with property containing the provided value\n     var   docArray   =   collection . find ({ key :   { $contains :   value });  \n    Use this when your property contains an array but your compare value is not an array  $containsAny  : filter for document(s) with property containing any of the provided values\n     var   docArray   =   collection . find ({ key :   { $containsAny :   [ value0 ,   value1 ,   ...]});   $containsNone  : filter for documents(s) with property containing none of the provided values\n     var   docArray   =   collection . find ({ key :   { $containsNone :   [ value0 ,   value1 ,   ...]});   $regex  : filter for document(s) with property matching provided regular expression\n     var   docArray   =   collection . find ({ key :   { $regex :   pattern });  // var docArray = collection.find({key: { $regex : [pattern, options]});  \n    For example\n     var   docArray   =   collection . find ({ key :   {   $regex :   din   }});  var   docArray   =   collection . find ({ key :   {   $regex :   [ din ,   i ]   }});   $dteq : filter for document(s) with date property equal to provided date value\n     var   docArray   =   collection . find ({ key :   { $dteq :   new   Date ( 1/1/2017 )});   $type  : filter for documents which have a property of a specified type\n     var   docArray   =   collection . find ({ key :   { $type :   value });   //  string , or  number , ...   $size  : filter for documents which have array property of specified size\n     var   docArray   =   collection . find ({ key :   { $size :   value });  \n     (does not work for strings)  $len  : filter for documents which have string property of specified length\n     var   docArray   =   collection . find ({ key :   { $len :   value });   $or  : filter for documents which meet any of the nested subexpressions\n     var   docArray   =   collection . find ({ $or :   [ \n     { key0 :   { $lt :   value0 }, \n     { key1 :   { $gte :   value1 }, \n     // ...  ]});", 
+            "title": "Filter documents"
+        }, 
+        {
+            "location": "/lokijs/index.html#filter-by-function", 
+            "text": "var   docArray   =   collection . where ( function ( doc ){ \n     // ... \n     return   isPicked ;    // true to pick this document  })", 
+            "title": "Filter by function"
+        }, 
+        {
+            "location": "/lokijs/index.html#sort", 
+            "text": "Sort with a key\n     var   docArray   =   collection . chain (). find ({}). simplesort ( key ). data ();    // ascending  // var docArray = collection.chain().find({}).simplesort(key, {desc: true}).data();  // descending   Sort with mutiple keys\n     var   docArray   =   collection . chain (). find ({}). compoundsort ([ key0 ,   key1 ]). data ();    // key0, key1: ascending  // var docArray = collection.chain().find({}).compoundsort([key0, [key1, true]]).data(); // key0: ascending, key1: descending   Sort with function\n     var   docArray   =   collection . chain (). find ({}). sort ( \n     function ( doc1 ,   doc2 )   { \n         return   result ;   // 0, 1, -1 \n     }) \n     . data ();  \n    result:  0 : equal  1 : greater  -1 : less", 
+            "title": "Sort"
+        }, 
+        {
+            "location": "/lokijs/index.html#pagination", 
+            "text": "Get documents from  start  to  start+count-1 .  var   docArray   =   collection . chain (). find ({}). offset ( start ). limit ( count ). data ();", 
+            "title": "Pagination"
+        }, 
+        {
+            "location": "/lokijs/index.html#update", 
+            "text": "Update each filtered documents.  var   docArray   =   collection . chain (). find ({}). update ( \n     function ( doc )   {  \n         // \n         return   doc ; \n     });", 
+            "title": "Update"
+        }, 
+        {
+            "location": "/lokijs/index.html#remove", 
+            "text": "Remove filtered documents.  collection . chain (). find ({}). remove ();", 
+            "title": "Remove"
+        }, 
+        {
+            "location": "/lokijs/index.html#map", 
+            "text": "Map document into a new anonymous collection, won't affect original collection.  var   docArray   =   collection . chain (). find ({}). map ( \n     function ( doc )   { \n         // ... \n         return   doc \n     }) \n     . data ();", 
+            "title": "Map"
+        }, 
+        {
+            "location": "/lokijs/index.html#map-reduce", 
+            "text": "Map document into a new anonymous collection  Run reduceFn to get final result value from result set of step 1.   var   mapFn   =   function ( doc )   { \n     // ... \n     return   doc  };  var   reduceFn   =   function ( docArray )   { \n     // ... \n     return   result ;  }  var   result   =   collection . chain (). find ({}). mapReduce ( mapFn ,   reduceFn );", 
+            "title": "Map-reduce"
+        }, 
+        {
+            "location": "/lokijs/index.html#clone-result-set", 
+            "text": "var   resultSet   =   collection . chain (). find ({});  var   resultSetClone   =   resultSet . branch ();  // resultSetClone.find({}).data();", 
+            "title": "Clone result set"
+        }, 
+        {
+            "location": "/lokijs/index.html#dynamic-view", 
+            "text": "Create dynamic view\n     var   view   =   children . addDynamicView ( name );   Add filters  find\n     view . applyFind ({});   where\n     view . applyWhere ( function ( doc )   {   return   true ;   });   simple sort\n     view . applySimpleSort ( key );   sort by multiple keys\n     view . applySortCriteria ([ key0 ,   key1 ]);  // view.applySortCriteria([key0, [key1, true]]);   sort function\n     view . applySort ( function ( doc1 ,   doc2 )   { \n     return   result ;   // 0, 1, -1  });  \n    result:  0 : equal  1 : greater  -1 : less      Get result data\n     var   docArray   =   view . data ();    Add new filters var   docArray   =   view . branchResultset (). find ({}). data ();", 
+            "title": "Dynamic view"
+        }, 
+        {
+            "location": "/lokijs/index.html#speed-up-quering", 
+            "text": "", 
+            "title": "Speed-up quering"
+        }, 
+        {
+            "location": "/lokijs/index.html#custom-unique-index", 
+            "text": "Define custom unique index\n     var   collection   =   db . addCollection ( name ,   { \n     unique :   [ key0 ]  });   Get document by custom unique index\n     var   doc   =   collection . by ( key0 ,   value );", 
+            "title": "Custom unique index"
+        }, 
+        {
+            "location": "/lokijs/index.html#binary-index", 
+            "text": "Define binary index\n     var   collection   =   db . addCollection ( name ,   { \n     indices :   [ key0 ]  });   Get documents by normal filters\n     var   docArray   =   collection . find ({ key0 :   { $gt :   value }});", 
+            "title": "Binary index"
+        }, 
+        {
             "location": "/eventemitter3/index.html", 
             "text": "Introduction\n\n\nEvent emitter\n.\n\n\nUsage\n\n\nGet event emitter\n\n\n\n\nScene: \n    \nvar\n \nee\n \n=\n \nscene\n.\nsys\n.\nevents\n;\n\n\n\n\nGame object:\n    \nvar\n \nee\n \n=\n \ngameObject\n;\n\n\n\n\n\n\nAttach listener\n\n\nee\n.\non\n(\neventName\n,\n \ncallback\n,\n \ncallbackScope\n);\n\n\nee\n.\nonce\n(\neventName\n,\n \ncallback\n,\n \ncallbackScope\n);\n  \n// only fire listeners one time\n\n\n\n\n\nAlias\n\n\nee\n.\naddListener\n(\neventName\n,\n \ncallback\n,\n \ncallbackScope\n);\n\n\nee\n.\naddListener\n(\neventName\n,\n \ncallback\n,\n \ncallbackScope\n,\n \ntrue\n);\n  \n// only fire listeners one time\n\n\n\n\n\nFire event\n\n\nee\n.\nemit\n(\neventName\n);\n\n\n\n\n\nRemove listeners\n\n\nee\n.\noff\n(\neventName\n,\n \ncallback\n,\n \ncallbackScope\n);\n\n\nee\n.\noff\n(\neventName\n,\n \ncallback\n,\n \ncallbackScope\n,\n \ntrue\n);\n   \n// only remove one-time listeners\n\n\n\n\n\nAlias\n\n\nee\n.\nremoveListener\n(\neventName\n,\n \ncallback\n,\n \ncallbackScope\n);\n \n\nee\n.\nremoveListener\n(\neventName\n,\n \ncallback\n,\n \ncallbackScope\n,\n \ntrue\n);\n  \n// only remove one-time listeners\n\n\n\n\n\nRemove all listeners\n\n\nee\n.\nremoveAllListeners\n();\n\n\n\n\n\nGet listeners count\n\n\nvar\n \ncount\n \n=\n \nee\n.\nlistenerCount\n(\neventName\n);\n\n\n//var noListener = (ee.listenerCount(eventName) === 0);\n\n\n\n\n\nGet listeners\n\n\nvar\n \nlisteners\n \n=\n \nee\n.\nlisteners\n(\neventName\n);\n\n\n\n\n\nListener\n\n\n{\n\n    \nfn\n:\n \ncallback\n,\n\n    \ncontext\n:\n \ncallbackScope\n,\n\n    \nonce\n:\n \nonce\n\n\n}", 
             "title": "Event emitter"
@@ -3846,14 +3951,24 @@
             "title": "Remove data"
         }, 
         {
-            "location": "/lokijs/index.html", 
-            "text": "", 
-            "title": "LokiJs"
+            "location": "/pouchdb/index.html", 
+            "text": "Introduction\n\n\nAn open-source JavaScript database.\n\nReference\n\n\nUsage\n\n\nCreate database", 
+            "title": "Pouchdb"
         }, 
         {
-            "location": "/pouchdb/index.html", 
+            "location": "/pouchdb/index.html#introduction", 
+            "text": "An open-source JavaScript database. Reference", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/pouchdb/index.html#usage", 
             "text": "", 
-            "title": "Pouchdb"
+            "title": "Usage"
+        }, 
+        {
+            "location": "/pouchdb/index.html#create-database", 
+            "text": "", 
+            "title": "Create database"
         }
     ]
 }

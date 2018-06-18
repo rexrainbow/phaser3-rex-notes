@@ -37,4 +37,4 @@ var image = scene.make.image({
 
 ### Other properties
 
-See [game object](gameObject.md)
+See [game object](gameobject.md)

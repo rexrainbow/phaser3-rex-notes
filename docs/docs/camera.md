@@ -127,7 +127,7 @@ camera.centerToSize();
 
 #### Scroll factor
 
-See [Scroll factor](gameObject.md#scroll-factor) in game object.
+See [Scroll factor](gameobject.md#scroll-factor) in game object.
 
 #### Set bounds
 
