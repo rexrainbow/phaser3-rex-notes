@@ -30,9 +30,9 @@ class Demo extends Phaser.Scene {
 
         // sort all documents by 'id'
         var result = children
-            .chain()
+            .chain() // start chain functions
             .simplesort('id')
-            .data();
+            .data(); // get documents from result set
         console.log(result);
 
         // sort filtered documents by 'id'
@@ -56,10 +56,10 @@ class Demo extends Phaser.Scene {
                 }
             })
             .simplesort('id', {
-                desc: true      // sort descending
+                desc: true // sort descending
             })
             .data();
-        console.log(result);        
+        console.log(result);
 
         // sort filtered documents by 'id' then 'coin'
         var result = children
@@ -71,7 +71,7 @@ class Demo extends Phaser.Scene {
             })
             .compoundsort(['id', 'coin'])
             .data();
-        console.log(result);        
+        console.log(result);
     }
 
     update() {}

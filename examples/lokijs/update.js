@@ -21,20 +21,26 @@ class Demo extends Phaser.Scene {
         var children = db.addCollection('children');
 
         // Insert documents
-        for (var i = 0; i < 100; i++) {
+        for (var i = 0; i < 20; i++) {
             children.insert({
                 id: i,
             });
         }
 
-        // sort all documents by 'id'
-        // get result from 50 to 54
-        var result = children
+        children
             .chain() // start chain functions
-            .simplesort('id')
-            .offset(50)
-            .limit(5)
-            .data(); // get documents from result set
+            .where( // pick doc which (id%2 === 1) (odd)
+                function (doc) {
+                    return (doc.id % 2) === 1;
+                })
+            .update(  // updata result set
+                function(doc) {
+                    doc.odd = true;
+                    return doc
+                }
+            ); 
+
+        var result = children.chain().data();
         console.log(result);
 
     }
