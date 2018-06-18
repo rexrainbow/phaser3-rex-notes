@@ -1,9 +1,13 @@
 ## Introduction
 
 In-memory JavaScript Datastore with Persistence.
-[Reference](http://lokijs.org/)
+
+- [Reference](http://lokijs.org/)
+- [API](https://rawgit.com/techfort/LokiJS/master/jsdoc/index.html)
 
 ## Usage
+
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/lokijs)
 
 ### Create database
 
@@ -28,6 +32,12 @@ Get Id
 
 ```javascript
 var id = docInColl.$loki;
+```
+
+#### Insert documents
+
+```javascript
+collection.insert(docArray);  // documents in array
 ```
 
 ### Query
@@ -134,6 +144,12 @@ var doc = collection.get(id);  // id: `$loki`
         // ...
     ]});
     ```
+
+#### Find one document
+
+```javascript
+var doc = collection.findOne({});
+```
 
 #### Filter by function
 
@@ -295,7 +311,7 @@ var docArray = view.branchResultset().find({}).data();
     var doc = collection.by(key0, value);
     ```
 
-#### Binary index
+#### Binary indices
 
 1. Define binary index
     ```javascript
@@ -303,7 +319,45 @@ var docArray = view.branchResultset().find({}).data();
         indices: [key0]
     });
     ```
+    Or
+    ```javascript
+    collection.ensureIndex(key);
+    ```    
 1. Get documents by normal filters
     ```javascript
     var docArray = collection.find({key0: {'$gt': value}});
+    ```
+
+### Methods of collection
+
+- Average value of a property
+   ```javascript
+   var avgValue = collection.avg(key);
+   ```
+- Maximum value of a property
+   ```javascript
+   var maxValue = collection.max(key);
+   ```
+- Minimum value of a property
+   ```javascript
+   var minValue = collection.min(key);
+   ```
+- Median value of a property
+   ```javascript
+   var medianValue = collection.median(key);
+   ```
+- Amount of documents
+   ```javascript
+   var amount = collection.count(query);  // {key: {'$gt': value}}
+   ```
+
+### Serialize & Deserialize
+
+- Database as string
+    ```javascript
+    var s = db.serialize();
+    ```
+- Load database from string
+    ```javascript
+    db.loadJSON(s);
     ```

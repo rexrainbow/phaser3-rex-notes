@@ -1125,6 +1125,19 @@
     Insert document
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#insert-documents" title="Insert documents" class="md-nav__link">
+    Insert documents
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -1145,6 +1158,13 @@
           <li class="md-nav__item">
   <a href="#filter-documents" title="Filter documents" class="md-nav__link">
     Filter documents
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#find-one-document" title="Find one document" class="md-nav__link">
+    Find one document
   </a>
   
 </li>
@@ -1233,14 +1253,28 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#binary-index" title="Binary index" class="md-nav__link">
-    Binary index
+  <a href="#binary-indices" title="Binary indices" class="md-nav__link">
+    Binary indices
   </a>
   
 </li>
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods-of-collection" title="Methods of collection" class="md-nav__link">
+    Methods of collection
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#serialize-deserialize" title="Serialize &amp; Deserialize" class="md-nav__link">
+    Serialize &amp; Deserialize
+  </a>
   
 </li>
         
@@ -1698,42 +1732,6 @@
   </li>
 
         
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-14-1-2" type="checkbox" id="nav-14-1-2">
-    
-    <label class="md-nav__link" for="nav-14-1-2">
-      Database
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-14-1-2">
-        Database
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../pouchdb/index.html" title="Pouchdb" class="md-nav__link">
-      Pouchdb
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
       </ul>
     </nav>
   </li>
@@ -1796,6 +1794,19 @@
     Insert document
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#insert-documents" title="Insert documents" class="md-nav__link">
+    Insert documents
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -1816,6 +1827,13 @@
           <li class="md-nav__item">
   <a href="#filter-documents" title="Filter documents" class="md-nav__link">
     Filter documents
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#find-one-document" title="Find one document" class="md-nav__link">
+    Find one document
   </a>
   
 </li>
@@ -1904,14 +1922,28 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#binary-index" title="Binary index" class="md-nav__link">
-    Binary index
+  <a href="#binary-indices" title="Binary indices" class="md-nav__link">
+    Binary indices
   </a>
   
 </li>
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods-of-collection" title="Methods of collection" class="md-nav__link">
+    Methods of collection
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#serialize-deserialize" title="Serialize &amp; Deserialize" class="md-nav__link">
+    Serialize &amp; Deserialize
+  </a>
   
 </li>
         
@@ -1946,9 +1978,13 @@
                   <h1>LokiJs</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>In-memory JavaScript Datastore with Persistence.
-<a href="http://lokijs.org/">Reference</a></p>
+<p>In-memory JavaScript Datastore with Persistence.</p>
+<ul>
+<li><a href="http://lokijs.org/">Reference</a></li>
+<li><a href="https://rawgit.com/techfort/LokiJS/master/jsdoc/index.html">API</a></li>
+</ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/lokijs">Sample code</a></p>
 <h3 id="create-database">Create database<a class="headerlink" href="#create-database" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">db</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">loki</span><span class="p">();</span>
 <span class="c1">// var db = new loki(&#39;loki.json&#39;);  // load database from file</span>
@@ -1964,6 +2000,10 @@
 
 <p>Get Id</p>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">id</span> <span class="o">=</span> <span class="nx">docInColl</span><span class="p">.</span><span class="nx">$loki</span><span class="p">;</span>
+</pre></div>
+
+<h4 id="insert-documents">Insert documents<a class="headerlink" href="#insert-documents" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">collection</span><span class="p">.</span><span class="nx">insert</span><span class="p">(</span><span class="nx">docArray</span><span class="p">);</span>  <span class="c1">// documents in array</span>
 </pre></div>
 
 <h3 id="query">Query<a class="headerlink" href="#query" title="Permanent link">&para;</a></h3>
@@ -2047,6 +2087,10 @@
 <span class="p">]});</span>
 </pre></div></li>
 </ul>
+<h4 id="find-one-document">Find one document<a class="headerlink" href="#find-one-document" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">doc</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({});</span>
+</pre></div>
+
 <h4 id="filter-by-function">Filter by function<a class="headerlink" href="#filter-by-function" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">where</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">doc</span><span class="p">){</span>
     <span class="c1">// ...</span>
@@ -2181,17 +2225,47 @@
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">doc</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">by</span><span class="p">(</span><span class="nx">key0</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
 </pre></div></li>
 </ol>
-<h4 id="binary-index">Binary index<a class="headerlink" href="#binary-index" title="Permanent link">&para;</a></h4>
+<h4 id="binary-indices">Binary indices<a class="headerlink" href="#binary-indices" title="Permanent link">&para;</a></h4>
 <ol>
 <li>Define binary index
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">collection</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">addCollection</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="p">{</span>
     <span class="nx">indices</span><span class="o">:</span> <span class="p">[</span><span class="nx">key0</span><span class="p">]</span>
 <span class="p">});</span>
+</pre></div>
+    Or
+    <div class="codehilite"><pre><span></span><span class="nx">collection</span><span class="p">.</span><span class="nx">ensureIndex</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </pre></div></li>
 <li>Get documents by normal filters
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key0</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$gt&#39;</span><span class="o">:</span> <span class="nx">value</span><span class="p">}});</span>
 </pre></div></li>
 </ol>
+<h3 id="methods-of-collection">Methods of collection<a class="headerlink" href="#methods-of-collection" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Average value of a property
+   <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">avgValue</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">avg</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</pre></div></li>
+<li>Maximum value of a property
+   <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">maxValue</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</pre></div></li>
+<li>Minimum value of a property
+   <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">minValue</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">min</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</pre></div></li>
+<li>Median value of a property
+   <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">medianValue</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">median</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</pre></div></li>
+<li>Amount of documents
+   <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">amount</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">count</span><span class="p">(</span><span class="nx">query</span><span class="p">);</span>  <span class="c1">// {key: {&#39;$gt&#39;: value}}</span>
+</pre></div></li>
+</ul>
+<h3 id="serialize-deserialize">Serialize &amp; Deserialize<a class="headerlink" href="#serialize-deserialize" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Database as string
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">serialize</span><span class="p">();</span>
+</pre></div></li>
+<li>Load database from string
+    <div class="codehilite"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">loadJSON</span><span class="p">(</span><span class="nx">s</span><span class="p">);</span>
+</pre></div></li>
+</ul>
                 
                   
                 

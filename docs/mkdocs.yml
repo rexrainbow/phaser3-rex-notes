@@ -85,8 +85,6 @@ pages:
         - Key-value pairs:
             - LocalStorage: localstorage.md
             - LocalForage: localforage.md
-        - Database:
-            - Pouchdb: pouchdb.md  
 
 
 extra_javascript:
