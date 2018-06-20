@@ -23,9 +23,9 @@ module.exports = {
 
         // input
         'dragplugin': './plugins/drag-plugin.js',
-        'sliderlugin': './plugins/slider-plugin.js',
-        'dragcursorplugin': './plugins/dragcursor-plugin.js',
-        'dragdeltaplugin': './plugins/dragdelta-plugin.js',
+        'sliderplugin': './plugins/slider-plugin.js',
+        'touchcursorplugin': './plugins/touchcursor-plugin.js',
+        'touchstatelugin': './plugins/touchstate-plugin.js',
 
         // member of game object
         'fadeplugin': './plugins/fade-plugin.js',

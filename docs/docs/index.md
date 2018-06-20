@@ -10,7 +10,6 @@
 1. [CSV-scenario](csvscenario.md): Run script in csv format.
 1. [CSV-to-hash-table](csvtohashtable.md): Hash table indexed by (col-key, row-key) from csv string.
 1. [Drag](drag.md): Drag game object.
-1. [Drag-cursor](dragcursor.md): Simulate curosr keys according dragging events.
 1. [Fade-out-destroy](fadeoutdestroy.md): Fade out game object then destroy it.
 1. [Fade-volume](fadevolume.md): Fade-in/fade-out volume of sound.
 1. [FSM](fsm.md): Finite state machine.
@@ -24,6 +23,7 @@
 1. [TagText](tagtext.md): Displays text with multi-color, font face, or font size with tags.
 1. [TCRP.Player](tcrpplayerplugin.md): Run commands on time.
 1. [TCRP.Recorder](tcrpplayerplugin.md): Store commands with time.
+1. [Touch-cursor](touchcursor.md): Simulate curosr keys according touch events.
 1. [Typing](texttyping.md): Typing text on text object.
 1. [Webfont-loader](webfontloader.md): Load web font by google webfont loader in preload stage.
 1. [XOR](xor.md): Encrypt or decrypt string by XOR algorithm.

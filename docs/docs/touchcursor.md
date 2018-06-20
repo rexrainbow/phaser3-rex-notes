@@ -1,17 +1,17 @@
 ## Introduction
 
-Simulate curosr keys according dragging events.
+Simulate curosr keys according touch events.
 
 - Author: Rex
-- Member of scene
+- Behavior of game object
 
 ## Source code
 
-[Link](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dragcursor-plugin.js)
+[Link](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/touchcursor-plugin.js)
 
 ## Usage
 
-[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/dragcursor)
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/touchcursor)
 
 ### Create instance
 

@@ -7,12 +7,14 @@ pages:
     - Scene: scene.md
 - Input:
     - Input: input.md
-    - Touch events: touchevents.md
-    - Cursor: cursor.md
-    - Drag: drag.md
-    - Slider: slider.md
-    - Drag to cursorKeys: dragcursor.md        
-    - Keyboard events: keyboardevents.md
+    - Touch:    
+        - Touch events: touchevents.md
+        - Cursor: cursor.md
+        - Drag: drag.md
+        - Slider: slider.md
+        - Touch to cursorKeys: touchcursor.md
+    - Keyboard:
+        - Keyboard events: keyboardevents.md
 - Loader:
     - Loader: loader.md
     - Webfont loader: webfontloader.md    
