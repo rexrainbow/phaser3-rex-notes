@@ -78,7 +78,7 @@ var config = {
     scene: Demo,
     plugins: {
         global: [{
-            key: 'CanvasPlugin',
+            key: 'rexCanvas',
             plugin: CanvasPlugin,
             start: true
         }]

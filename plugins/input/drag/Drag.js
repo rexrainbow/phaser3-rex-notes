@@ -11,8 +11,6 @@ class Drag {
         this.gameObject = gameObject;
         this.scene = GetSceneObject(gameObject);
 
-        this.enable = false;
-        this.pointerId = undefined;
         this.gameObject.setInteractive(GetValue(config, "inputConfig", undefined));
         this.resetFromJSON(config);
         this.boot();
@@ -24,6 +22,7 @@ class Drag {
      * @returns {object} this object
      */
     resetFromJSON(o) {
+        this.pointerId = undefined;
         this.setEnable(GetValue(o, "enable", true));
         this.setAxisMode(GetValue(o, "axis", 0));
         this.setAxisRotation(GetValue(o, "rotation", 0));
@@ -55,7 +54,7 @@ class Drag {
     shutdown() {
         this.gameObject = undefined;
         this.scene = undefined;
-        // gameObject event 'dragstart', 'drag', 'dragend' will be removed when this gameObject destroyed 
+        // gameObject events will be removed when this gameObject destroyed 
     }
 
     destroy() {
@@ -124,7 +123,7 @@ class Drag {
     }
 
     dragend() {
-        if (this.pointerId === undefined) {
+        if (!this.isDragging) {
             return;
         }
         var pointer = this.scene.input.manager.pointers[this.pointerId];
@@ -132,7 +131,7 @@ class Drag {
     }
 
     onDragStart(pointer, dragX, dragY) {
-        if (this.pointerId !== undefined) { // dragged by other pointer
+        if (this.isDragging) {
             return;
         }
         this.pointerId = pointer.id;

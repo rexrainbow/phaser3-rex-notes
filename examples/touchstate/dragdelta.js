@@ -1,6 +1,6 @@
 'use strict'
 
-import DragDeltaPlugin from 'rexPlugins/dragdelta-plugin.js';
+import TouchStatePlugin from 'rexPlugins/touchstate-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -19,12 +19,11 @@ class Demo extends Phaser.Scene {
         var bg = this.add.image(400, 300, 'bg')
             .setDisplaySize(300, 300)
             .setTint(0xcccccc);
-        var dragDelta = this.plugins.get('rexDragDelta').add(bg);
-        dragDelta.on('dragdelta', function (pointer) {
-            console.log(pointer.speed);
-            star.x += pointer.dx;
-            star.y += pointer.dy;            
-        });
+        bg.touchState = this.plugins.get('rexTouchState').add(bg)
+            .on('touchmove', function (pointer) {
+                star.x += this.dx;
+                star.y += this.dy;
+            });
 
         star = this.add.image(400, 300, 'bg')
             .setDisplaySize(10, 10)
@@ -42,8 +41,8 @@ var config = {
     scene: Demo,
     plugins: {
         global: [{
-            key: 'rexDragDelta',
-            plugin: DragDeltaPlugin,
+            key: 'rexTouchState',
+            plugin: TouchStatePlugin,
             start: true
         }]
     }

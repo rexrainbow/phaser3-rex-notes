@@ -2,7 +2,7 @@
 
 import Phaser from 'phaser';
 import GridTablePlugin from 'rexPlugins/gridtable-plugin.js';
-import DragDeltaPlugin from 'rexPlugins/dragdelta-plugin.js';
+import TouchStatePlugin from 'rexPlugins/touchstate-plugin.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -106,10 +106,10 @@ var newTable = function (scene, config) {
 }
 
 var addDragContentBehavior = function (table) {
-    var dragDelta = new DragDeltaPlugin(table);
-    dragDelta.on('dragdelta', function (pointer) {
-        table.addTableOXY(pointer.dx, pointer.dy).updateTable();
-    });
+    table.touchState = table.scene.plugins.get('rexTouchState').add(table)
+        .on('touchmove', function (pointer) {
+            table.addTableOXY(this.dx, this.dy).updateTable();
+        });
     return table;
 }
 
@@ -121,10 +121,16 @@ var config = {
     scene: Demo,
     plugins: {
         global: [{
-            key: 'GridTablePlugin',
-            plugin: GridTablePlugin,
-            start: true
-        }]
+                key: 'rexGridTable',
+                plugin: GridTablePlugin,
+                start: true
+            },
+            {
+                key: 'rexTouchState',
+                plugin: TouchStatePlugin,
+                start: true
+            }
+        ]
     }
 };
 

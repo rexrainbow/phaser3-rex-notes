@@ -1,9 +1,6 @@
 'use strict'
 
-const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 const GetValue = Phaser.Utils.Objects.GetValue;
-const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
-
 const Key = Phaser.Input.Keyboard.Key;
 const RadToDeg = Phaser.Math.RadToDeg;
 
@@ -36,9 +33,9 @@ class VectorToCursorKeys {
             }
         }
 
-        this.setEnable(GetAdvancedValue(o, 'enable', true));
-        this.setMode(GetAdvancedValue(o, 'dir', '8dir'));
-        this.setDistanceThreshold(GetAdvancedValue(o, 'distanceMin', 16));
+        this.setEnable(GetValue(o, 'enable', true));
+        this.setMode(GetValue(o, 'dir', '8dir'));
+        this.setDistanceThreshold(GetValue(o, 'distanceMin', 16));
 
         var startX = GetValue(o, "start.x", null);
         var startY = GetValue(o, "start.y", null);
@@ -52,7 +49,7 @@ class VectorToCursorKeys {
         } else {
             this.cleanVector();
         }
-        return this;        
+        return this;
     }
 
     /**
@@ -63,7 +60,7 @@ class VectorToCursorKeys {
         return {
             enable: this.cfg.enable,
             dir: this.cfg.dirMode,
-            distanceMin: this.cfg.distanceMin,            
+            distanceMin: this.cfg.distanceMin,
 
             start: {
                 x: this.start.x,
@@ -219,6 +216,34 @@ class VectorToCursorKeys {
         }
 
         return this;
+    }
+
+    get upKeyDown() {
+        return this.cursorKeys.up.isDown;
+    }
+
+    get downKeyDown() {
+        return this.cursorKeys.down.isDown;
+    }
+
+    get leftKeyDown() {
+        return this.cursorKeys.left.isDown;
+    }
+
+    get rightKeyDown() {
+        return this.cursorKeys.right.isDown;
+    }
+
+    get anyKeyDown() {
+        var cursorKeys = this.cursorKeys;
+        return (cursorKeys.up.isDown ||
+            cursorKeys.down.isDown ||
+            cursorKeys.left.isDown ||
+            cursorKeys.right.isDown);
+    }
+
+    get noKeyDown() {
+        return !this.anyKeyDown;
     }
 }
 

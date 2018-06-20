@@ -1,6 +1,7 @@
 'use strict'
 
 import CanvasPlugin from 'rexPlugins/canvas-plugin.js'
+import TouchStatePlugin from 'rexPlugins/touchstate-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -21,9 +22,8 @@ class Demo extends Phaser.Scene {
         this.bg = this.add.rexCanvas(300, 350, 600, 600)
             .fill('#050505');
         this.canvas = this.add.rexCanvas(300, 350, 600, 600)
-            .generateTexture('canvas')
-            .setInteractive();
-        this.input.setDraggable(this.canvas);
+            .generateTexture('canvas');
+        this.canvas.touchState = this.plugins.get('rexTouchState').add(this.canvas);
 
         var imageNum = 12;
         this.imageGroup = this.add.group({
@@ -50,9 +50,9 @@ class Demo extends Phaser.Scene {
     }
 
     update() {
-        var canvasInput = this.canvas.input;
-        if (canvasInput.dragState > 0) {
-            this.drawCanvas(canvasInput.localX, canvasInput.localY);
+        var touchState = this.canvas.touchState;
+        if (touchState.isInTouched) {
+            this.drawCanvas(touchState.localX, touchState.localY);
         }
     }
 
@@ -105,10 +105,16 @@ var config = {
     scene: Demo,
     plugins: {
         global: [{
-            key: 'CanvasPlugin',
-            plugin: CanvasPlugin,
-            start: true
-        }]
+                key: 'rexCanvas',
+                plugin: CanvasPlugin,
+                start: true
+            },
+            {
+                key: 'rexTouchState',
+                plugin: TouchStatePlugin,
+                start: true
+            }
+        ]
     }
 };
 

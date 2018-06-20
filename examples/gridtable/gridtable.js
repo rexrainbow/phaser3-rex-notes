@@ -70,7 +70,7 @@ var config = {
     scene: Demo,
     plugins: {
         global: [{
-            key: 'GridTablePlugin',
+            key: 'rexGridTable',
             plugin: GridTablePlugin,
             start: true
         }]

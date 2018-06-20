@@ -1,6 +1,6 @@
 'use strict'
 import GridTablePlugin from 'rexPlugins/gridtable-plugin.js';
-import DragDelta from 'rexPlugins/dragdelta.js';
+import TouchStatePlugin from 'rexPlugins/touchstate-plugin.js';
 import ObjectPoolPlugin from 'rexPlugins/objectpool-plugin.js';
 
 class Demo extends Phaser.Scene {
@@ -58,10 +58,10 @@ class Demo extends Phaser.Scene {
             .strokeRectShape(table.getBounds());
 
         // drag table content
-        var dragDelta = new DragDelta(table);
-        dragDelta.on('dragdelta', function (pointer) {
-            table.addTableOXY(pointer.dx, pointer.dy).updateTable();
-        });
+        table.touchState = this.plugins.get('rexTouchState').add(table)
+            .on('touchmove', function (pointer) {
+                table.addTableOXY(this.dx, this.dy).updateTable();
+            });
 
         this.add.text(10, 10, 'Destroy')
             .setInteractive()
@@ -81,8 +81,13 @@ var config = {
     scene: Demo,
     plugins: {
         global: [{
-                key: 'GridTablePlugin',
+                key: 'rexGridTable',
                 plugin: GridTablePlugin,
+                start: true
+            },
+            {
+                key: 'rexTouchState',
+                plugin: TouchStatePlugin,
                 start: true
             },
             {

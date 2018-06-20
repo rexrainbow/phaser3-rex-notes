@@ -1,8 +1,8 @@
 'use strict'
 
-import DragDelta from './dragdelta.js';
+import TouchState from './touchstate.js';
 
-class DragDeltaPlugin extends Phaser.Plugins.BasePlugin {
+class TouchStatePlugin extends Phaser.Plugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);
@@ -14,9 +14,9 @@ class DragDeltaPlugin extends Phaser.Plugins.BasePlugin {
     }
 
     add(gameObject, config) {
-        return new DragDelta(gameObject, config);
+        return new TouchState(gameObject, config);
     }
 
 }
 
-export default DragDeltaPlugin;
+export default TouchStatePlugin;
