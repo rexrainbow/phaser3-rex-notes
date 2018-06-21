@@ -26,7 +26,7 @@ class VectorToCursorKeys {
         if (this.end == undefined) {
             this.end = {};
         }
-        this.noKeyDown = true;
+        this.noKeyDown = GetValue(o, 'noKeyDown', true);
         if (this.cursorKeys == undefined) {
             this.cursorKeys = {
                 up: new Key(),
@@ -58,6 +58,7 @@ class VectorToCursorKeys {
             dir: this.cfg.dirMode,
             forceMin: this.cfg.forceMin,
 
+            noKeyDown: this.noKeyDown,
             start: {
                 x: this.start.x,
                 y: this.start.y
@@ -129,10 +130,10 @@ class VectorToCursorKeys {
     }
 
     cleanVector() {
-        this.start.x = null;
-        this.start.y = null;
-        this.end.x = null;
-        this.end.y = null;
+        this.start.x = 0;
+        this.start.y = 0;
+        this.end.x = 0;
+        this.end.y = 0;
         this.noKeyDown = true;
         for (var keyName in this.cursorKeys) {
             this.setKeyState(keyName, false);

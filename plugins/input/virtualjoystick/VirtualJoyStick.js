@@ -5,13 +5,18 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 class VirtualJoyStick {
     constructor(scene, config) {
         this.scene = scene;
-        this.x = GetValue(config, 'x', 0);
-        this.y = GetValue(config, 'y', 0);
+        this.base = undefined;
+        this.thumb = undefined;
+        this.touchCursor = undefined;
         this.radius = GetValue(config, 'radius', 100);
 
-        this.base = this.createBase(config);
-        this.thumb = this.createThumb(config);
-        this.touchCursor = this.createTouchCursor(this.base, config);
+        this.addBase(GetValue(config, 'base', undefined), config);
+        this.addThumb(GetValue(config, 'thumb', undefined));
+
+        var x = GetValue(config, 'x', 0);
+        var y = GetValue(config, 'y', 0);
+        this.base.setPosition(x, y);
+        this.thumb.setPosition(x, y);
 
         this.boot();
     }
@@ -60,31 +65,70 @@ class VirtualJoyStick {
         return this.touchCursor.noKeyDown;
     }
 
-    createBase(config) {
-        var base = GetValue(config, 'base', undefined);
-        if (base === undefined) {
-            base = this.scene.add.graphics()
+    setPosition(x, y) {
+        this.x = x;
+        this.y = y;
+        return this;
+    }
+
+    set x(x) {
+        this.base.x = x;
+    }
+
+    set y(y) {
+        this.base.y = y;
+    }
+
+    get x() {
+        return this.base.x;
+    }
+
+    get y() {
+        return this.base.y;
+    }
+
+    get visible() {
+        return this.base.visible;
+    }
+
+    set visible(visible) {
+        this.base.visible = visible;
+        this.thumb.visible = visible;
+    }
+
+    setVisible(visible) {
+        this.visible = visible;
+        return this;
+    }
+
+    addBase(gameObject, config) {
+        if (this.base) {
+            this.base.destroy();
+            // also destroy touchCursor behavior
+        }
+
+        if (gameObject === undefined) {
+            gameObject = this.scene.add.graphics()
                 .lineStyle(3, 0x0000ff)
                 .strokeCircle(0, 0, this.radius);
         }
-        base.setPosition(this.x, this.y);
-        return base;
+        this.touchCursor = new TouchCursor(gameObject, config)
+        this.base = gameObject;
+        return this;
     }
 
-    createThumb(config) {
-        var thumb = GetValue(config, 'thumb', undefined);
-        if (thumb === undefined) {
-            thumb = this.scene.add.graphics()
+    addThumb(gameObject) {
+        if (this.thumb) {
+            this.thumb.destroy();
+        }
+
+        if (gameObject === undefined) {
+            gameObject = this.scene.add.graphics()
                 .lineStyle(3, 0x00ff00)
                 .strokeCircle(0, 0, 40);
         }
-        thumb.setPosition(this.x, this.y);
-        return thumb;
-    }
-
-    createTouchCursor(gameObject, config) {
-        var touchCursor = new TouchCursor(gameObject, config)
-        return touchCursor;
+        this.thumb = gameObject;
+        return this;
     }
 
     boot() {
@@ -93,9 +137,12 @@ class VirtualJoyStick {
     }
 
     destroy() {
-        this.base.destroy();
+        this.base.destroy(); // also destroy touchCursor behavior
         this.thumb.destroy();
-        this.touchCursor.destroy();
+
+        this.base = undefined;
+        this.thumb = undefined;
+        this.touchCursor = undefined;
     }
 
     update() {
@@ -114,6 +161,8 @@ class VirtualJoyStick {
             this.thumb.y = this.base.y;
         }
     }
+
+
 }
 
 export default VirtualJoyStick;
