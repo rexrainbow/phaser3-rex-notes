@@ -26,6 +26,7 @@ class VectorToCursorKeys {
         if (this.end == undefined) {
             this.end = {};
         }
+        this.noKeyDown = true;
         if (this.cursorKeys == undefined) {
             this.cursorKeys = {
                 up: new Key(),
@@ -118,20 +119,9 @@ class VectorToCursorKeys {
         var isUp = !isDown;
         key.isDown = isDown;
         key.isUp = isUp;
-
-        // TBD
-        //key._justDown = isDown;
-        //key._justUp = isUp;
-        //if (isDown) {
-        //    key.timeDown = (new Date()).now();
-        //    key.duration = 0;
-        //    key.repeats++;
-        //}
-        //if (isUp) {
-        //    key.timeUp = (new Date()).now();
-        //    key.duration = key.timeUp - key.timeDown;
-        //    key.repeats = 0;
-        //}
+        if (isDown) {
+            this.noKeyDown = false;
+        }
     }
 
     getKeyState(keyName) {
@@ -143,6 +133,7 @@ class VectorToCursorKeys {
         this.start.y = null;
         this.end.x = null;
         this.end.y = null;
+        this.noKeyDown = true;
         for (var keyName in this.cursorKeys) {
             this.setKeyState(keyName, false);
         }
@@ -264,15 +255,7 @@ class VectorToCursorKeys {
     }
 
     get anyKeyDown() {
-        var cursorKeys = this.cursorKeys;
-        return (cursorKeys.up.isDown ||
-            cursorKeys.down.isDown ||
-            cursorKeys.left.isDown ||
-            cursorKeys.right.isDown);
-    }
-
-    get noKeyDown() {
-        return !this.anyKeyDown;
+        return !this.noKeyDown;
     }
 }
 
