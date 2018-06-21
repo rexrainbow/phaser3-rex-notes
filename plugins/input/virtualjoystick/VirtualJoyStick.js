@@ -64,10 +64,10 @@ class VirtualJoyStick {
         var base = GetValue(config, 'base', undefined);
         if (base === undefined) {
             base = this.scene.add.graphics()
-                .setPosition(this.x, this.y)
                 .lineStyle(3, 0x0000ff)
                 .strokeCircle(0, 0, this.radius);
         }
+        base.setPosition(this.x, this.y);
         return base;
     }
 
@@ -75,10 +75,10 @@ class VirtualJoyStick {
         var thumb = GetValue(config, 'thumb', undefined);
         if (thumb === undefined) {
             thumb = this.scene.add.graphics()
-                .setPosition(this.x, this.y)
                 .lineStyle(3, 0x00ff00)
                 .strokeCircle(0, 0, 40);
         }
+        thumb.setPosition(this.x, this.y);
         return thumb;
     }
 

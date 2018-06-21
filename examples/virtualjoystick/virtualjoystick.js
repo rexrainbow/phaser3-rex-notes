@@ -15,7 +15,9 @@ class Demo extends Phaser.Scene {
         this.joyStick = this.plugins.get('rexVirtualJoyStick').add(this, {
             x: 400,
             y: 300,
-            radius: 100
+            radius: 100,
+            //base: this.add.graphics().fillStyle(0x888888).fillCircle(0, 0, 100),
+            //thumb: this.add.graphics().fillStyle(0xcccccc).fillCircle(0, 0,50)
         });
 
         this.text = this.add.text(0, 0);
