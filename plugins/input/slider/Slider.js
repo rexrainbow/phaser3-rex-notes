@@ -52,10 +52,8 @@ class Slider extends EE {
     }
 
     boot() {
-        if (this.gameObject.on) {
-            this.gameObject.on('drag', this.onDragging, this);
-            this.gameObject.on('destroy', this.destroy, this);
-        }
+        this.gameObject.on('drag', this.onDragging, this);
+        this.gameObject.on('destroy', this.destroy, this);
     }
 
     shutdown() {

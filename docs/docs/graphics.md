@@ -10,7 +10,7 @@ Drawing on webgl or canvas, built-in game object of phaser.
 
 ```javascript
 var graphics = scene.add.graphics();
-// var graphics = scene.add.graphics(x, y);
+// var graphics = scene.add.graphics({x, y});
 ```
 
 ### Drawing commands
@@ -112,7 +112,7 @@ graphics.fillPoints(points, autoClose, endIndex);  // points: [{x, y}, ...]
 graphics.fillCircleShape(circle); // circle: {x, y, radius}
 graphics.fillCircle(x, y, radius);
 graphics.strokeCircleShape(circle);  // circle: {x, y, radius}
-graphics.fillCircle(x, y, radius);
+graphics.strokeCircle(x, y, radius);
 graphics.arc(x, y, radius, startAngle, endAngle, anticlockwise);
 ```
 

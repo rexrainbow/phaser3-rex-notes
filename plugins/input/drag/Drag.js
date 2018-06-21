@@ -43,12 +43,10 @@ class Drag {
 
     boot() {
         var gameObject = this.gameObject;
-        if (gameObject.on) {
-            gameObject.on('dragstart', this.onDragStart, this);
-            gameObject.on('drag', this.onDrag, this);
-            gameObject.on('dragend', this.onDragEnd, this);
-            gameObject.on('destroy', this.destroy, this);
-        }
+        gameObject.on('dragstart', this.onDragStart, this);
+        gameObject.on('drag', this.onDrag, this);
+        gameObject.on('dragend', this.onDragEnd, this);
+        gameObject.on('destroy', this.destroy, this);
     }
 
     shutdown() {

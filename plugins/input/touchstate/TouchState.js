@@ -4,7 +4,7 @@ import GetSceneObject from 'rexPlugins/utils/system/GetSceneObject.js';
 
 const EE = Phaser.Events.EventEmitter;
 const GetValue = Phaser.Utils.Objects.GetValue;
-const getDist = Phaser.Math.Distance.Power;
+const getDist = Phaser.Math.Distance.Between;
 
 class TouchState extends EE {
     constructor(gameObject, config) {
@@ -31,15 +31,13 @@ class TouchState extends EE {
     }
 
     boot() {
-        if (this.gameObject.on) {
-            this.gameObject.on('pointerdown', this.onPointIn, this);
-            this.gameObject.on('pointerover', this.onPointIn, this);
-            this.gameObject.on('pointerup', this.onPointOut, this);
-            this.gameObject.on('pointerout', this.onPointOut, this);
-            this.gameObject.on('pointermove', this.onPointerMove, this);
+        this.gameObject.on('pointerdown', this.onPointIn, this);
+        this.gameObject.on('pointerover', this.onPointIn, this);
+        this.gameObject.on('pointerup', this.onPointOut, this);
+        this.gameObject.on('pointerout', this.onPointOut, this);
+        this.gameObject.on('pointermove', this.onPointerMove, this);
 
-            this.gameObject.on('destroy', this.destroy, this);
-        }
+        this.gameObject.on('destroy', this.destroy, this)
     }
 
     shutdown() {

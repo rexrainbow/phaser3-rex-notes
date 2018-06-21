@@ -12,17 +12,32 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
+        var isInTouched = false;
         this.input.addPointer(3);
         var bg = this.add.image(400, 300, 'bg')
             .setDisplaySize(150, 150)
             .setTint(0xcccccc)
-            .setInteractive({
-                draggable: true
+            .setInteractive()
+            .on('pointerover', function (pointer, localX, localY) {
+                if (pointer.isDown) {
+                    isInTouched = true;
+                    console.log(isInTouched);
+                }
             })
-            .on('drag', function (pointer, dragX, dragY) {
-                this.x = dragX;
-                this.y = dragY;
-            });
+            .on('pointerout', function (pointer) {
+                if (pointer.isDown) {
+                    isInTouched = false;
+                    console.log(isInTouched);
+                }
+            })
+            .on('pointerdown', function (pointer, localX, localY, camera) {
+                isInTouched = true;
+                console.log(isInTouched);
+            })
+            .on('pointerup', function (pointer, localX, localY) {
+                isInTouched = false;
+                console.log(isInTouched);
+            })            
     }
 
     update() {}

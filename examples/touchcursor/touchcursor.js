@@ -9,45 +9,49 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {
-        this.load.image('dot', 'assets/images/white-dot.png');
-    }
+    preload() {}
 
     create() {
-        this.bg = this.add.image(200, 400, 'dot')
-            .setDisplaySize(400, 400)
-            .setTint(0x555555);
+        this.bg = this.add.graphics()
+            .setPosition(400, 300)
+            .lineStyle(3, 0x0000ff)
+            .strokeCircle(0, 0, 100);
         this.touchCursor = this.plugins.get('rexTouchCursor').add(this.bg, {
+            radius: 100,
             dir: '8dir', // 0|'up&down'|1|'left&right|2|'4dir'|3|'8dir'
             distanceMin: 30
         });
         //this.cursorKeys = this.touchCursor.createCursorKeys();
-        this.thumb = this.add.image(400, 300, 'dot')
-            .setDisplaySize(40, 40)
-            .setTint(0xff0000);
+        this.thumb = this.add.graphics()
+            .setPosition(400, 300)
+            .lineStyle(3, 0xff0000)
+            .strokeCircle(0, 0, 40);
 
         this.text = this.add.text(100, 100, '--');
-        this.graphics = this.add.graphics();
+        this.dragLine = this.add.graphics();
     }
 
     update() {
         var touchCursor = this.touchCursor;
 
-        var s = ''
+        var s = 'Key down: ';
         if (touchCursor.anyKeyDown) {
             s += (touchCursor.upKeyDown) ? 'up ' : '';
             s += (touchCursor.downKeyDown) ? 'down ' : '';
             s += (touchCursor.leftKeyDown) ? 'left ' : '';
             s += (touchCursor.rightKeyDown) ? 'right ' : '';
         } else {
-            s = '--';
+            s += '--';
         }
+        s += '\n';
+        s += ('Force: ' + Math.floor(touchCursor.force * 100) / 100 + '\n');
+        s += ('Angle: ' + Math.floor(touchCursor.angle * 100) / 100 + '\n');
         this.text.setText(s);
 
-        this.graphics.clear();
+        this.dragLine.clear();
         if (touchCursor.anyKeyDown) {
-            this.graphics.lineStyle(3, 0x00ff00, 1);
-            this.graphics.lineBetween(
+            this.dragLine.lineStyle(3, 0x00ff00, 1);
+            this.dragLine.lineBetween(
                 touchCursor.start.x,
                 touchCursor.start.y,
                 touchCursor.end.x,

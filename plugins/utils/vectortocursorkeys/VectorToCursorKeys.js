@@ -2,6 +2,8 @@
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Key = Phaser.Input.Keyboard.Key;
+const getDist = Phaser.Math.Distance.Between;
+const getAngle = Phaser.Math.Angle.Between;
 const RadToDeg = Phaser.Math.RadToDeg;
 
 class VectorToCursorKeys {
@@ -41,14 +43,7 @@ class VectorToCursorKeys {
         var startY = GetValue(o, "start.y", null);
         var endX = GetValue(o, "end.x", null);
         var endY = GetValue(o, "end.y", null);
-        if ((startX !== null) &&
-            (startY !== null) &&
-            (endX !== null) &&
-            (endY !== null)) {
-            this.setVector(startX, startY, endX, endY);
-        } else {
-            this.cleanVector();
-        }
+        this.setVector(startX, startY, endX, endY);
         return this;
     }
 
@@ -139,6 +134,10 @@ class VectorToCursorKeys {
         //}
     }
 
+    getKeyState(keyName) {
+        return this.cursorKeys[keyName];
+    }
+
     cleanVector() {
         this.start.x = null;
         this.start.y = null;
@@ -152,11 +151,11 @@ class VectorToCursorKeys {
     }
 
     setVector(x0, y0, x1, y1) {
+        this.cleanVector();
         if (!this.cfg.enable) {
             return this;
         }
-        this.cleanVector();
-        if (x0 == null) {
+        if (x0 === null) {
             return this;
         }
 
@@ -164,49 +163,45 @@ class VectorToCursorKeys {
         this.start.y = y0;
         this.end.x = x1;
         this.end.y = y1;
-        var dx = x1 - x0;
-        var dy = y1 - y0;
-        var dist = Math.sqrt(dx * dx + dy * dy);
-        var deg = RadToDeg(Math.atan2(dy, dx)); // -180 ~ 180
-        deg = (360 + deg) % 360;
-
-        if (dist < this.cfg.distanceMin) {
+        if (this.force < this.cfg.distanceMin) {
             return this;
         }
+
+        var angle = (360 + this.angle) % 360;
         switch (this.cfg.dirMode) {
             case 0: // up & down
-                var keyName = (deg < 180) ? 'down' : 'up';
+                var keyName = (angle < 180) ? 'down' : 'up';
                 this.setKeyState(keyName, true);
                 break;
             case 1: // left & right
-                var keyName = ((deg > 90) && (deg <= 270)) ? 'left' : 'right';
+                var keyName = ((angle > 90) && (angle <= 270)) ? 'left' : 'right';
                 this.setKeyState(keyName, true);
                 break;
             case 2: // 4 dir
                 var keyName =
-                    ((deg > 45) && (deg <= 135)) ? 'down' :
-                    ((deg > 135) && (deg <= 225)) ? 'left' :
-                    ((deg > 225) && (deg <= 315)) ? 'up' :
+                    ((angle > 45) && (angle <= 135)) ? 'down' :
+                    ((angle > 135) && (angle <= 225)) ? 'left' :
+                    ((angle > 225) && (angle <= 315)) ? 'up' :
                     'right';
                 this.setKeyState(keyName, true);
                 break;
             case 3: // 8 dir
-                if ((deg > 22.5) && (deg <= 67.5)) {
+                if ((angle > 22.5) && (angle <= 67.5)) {
                     this.setKeyState('down', true);
                     this.setKeyState('right', true);
-                } else if ((deg > 67.5) && (deg <= 112.5)) {
+                } else if ((angle > 67.5) && (angle <= 112.5)) {
                     this.setKeyState('down', true);
-                } else if ((deg > 112.5) && (deg <= 157.5)) {
+                } else if ((angle > 112.5) && (angle <= 157.5)) {
                     this.setKeyState('down', true);
                     this.setKeyState('left', true);
-                } else if ((deg > 157.5) && (deg <= 202.5)) {
+                } else if ((angle > 157.5) && (angle <= 202.5)) {
                     this.setKeyState('left', true);
-                } else if ((deg > 202.5) && (deg <= 247.5)) {
+                } else if ((angle > 202.5) && (angle <= 247.5)) {
                     this.setKeyState('left', true);
                     this.setKeyState('up', true);
-                } else if ((deg > 247.5) && (deg <= 292.5)) {
+                } else if ((angle > 247.5) && (angle <= 292.5)) {
                     this.setKeyState('up', true);
-                } else if ((deg > 292.5) && (deg <= 337.5)) {
+                } else if ((angle > 292.5) && (angle <= 337.5)) {
                     this.setKeyState('up', true);
                     this.setKeyState('right', true);
                 } else {
@@ -216,6 +211,40 @@ class VectorToCursorKeys {
         }
 
         return this;
+    }
+
+    get forceX() {
+        return this.end.x - this.start.x;
+    }
+
+    get forceY() {
+        return this.end.y - this.start.y;
+    }
+
+    get force() {
+        return getDist(this.start.x, this.start.y, this.end.x, this.end.y);
+    }
+
+    get rotation() {
+        return getAngle(this.start.x, this.start.y, this.end.x, this.end.y);
+    }
+
+    get angle() {
+        return RadToDeg(this.rotation);; // -180 ~ 180
+    }
+
+    get octant() {
+        var octant = 0;
+        if (this.rightKeyDown) {
+            octant = (this.downKeyDown) ? 45 : 0;
+        } else if (this.downKeyDown) {
+            octant = (this.leftKeyDown) ? 135 : 90;
+        } else if (this.leftKeyDown) {
+            octant = (this.upKeyDown) ? 225 : 180;
+        } else if (this.upKeyDown) {
+            octant = (this.rightKeyDown) ? 315 : 270;
+        }
+        return octant;
     }
 
     get upKeyDown() {
