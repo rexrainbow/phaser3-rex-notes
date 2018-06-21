@@ -96,14 +96,9 @@ class VirtualJoyStick {
         this.base.destroy();
         this.thumb.destroy();
         this.touchCursor.destroy();
-        this.forceLine.destroy();
     }
 
     update() {
-        this.updateThumb();
-    }
-
-    updateThumb() {
         var touchCursor = this.touchCursor;
         if (touchCursor.anyKeyDown) {
             if (touchCursor.force > this.radius) {
