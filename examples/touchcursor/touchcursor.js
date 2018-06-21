@@ -53,9 +53,9 @@ class VirtualJoyStick {
         this.bg = this.createBackground(config);
         this.thumb = this.createThumb(config);
         this.touchCursor = this.createTouchCursor(this.bg, config);
-        this.dragLine = this.createDragLine(config);
+        this.forceLine = this.createForceLine(config);
 
-        this.boot();        
+        this.boot();
     }
 
     createBackground(config) {
@@ -81,14 +81,11 @@ class VirtualJoyStick {
         return thumb;
     }
 
-    createDragLine(config) {
-        var dragLine;
-        if (this.debug) {
-            this.dragLineColor = GetValue(config, 'dragLine.color', 0x00ff00);
-            this.dragLineThinkness = GetValue(config, 'dragLine.thinkness', 1);
-            var dragLine = this.scene.add.graphics();
-        }
-        return dragLine;
+    createForceLine(config) {
+        this.dragLineColor = GetValue(config, 'forceLine.color', 0x00ff00);
+        this.dragLineThinkness = GetValue(config, 'forceLine.thinkness', 1);
+        var forceLine = this.scene.add.graphics();
+        return forceLine;
     }
 
     createTouchCursor(gameObject, config) {
@@ -105,21 +102,18 @@ class VirtualJoyStick {
 
     boot() {
         var ee = this.scene.sys.events;
-        ee.on('preupdate', this.update, this); 
+        ee.on('preupdate', this.update, this);
     }
 
     destroy() {
         this.bg.destroy();
         this.thumb.destroy();
         this.touchCursor.destroy();
-
-        if (this.dragLine) {
-            this.dragLine.destroy();
-        }
+        this.forceLine.destroy();
     }
 
     update() {
-        this.updateDragLine();
+        this.updateForceLine();
         this.updateThumb();
     }
 
@@ -140,15 +134,15 @@ class VirtualJoyStick {
         }
     }
 
-    updateDragLine() {
+    updateForceLine() {
         if (!this.debug) {
             return;
         }
         var touchCursor = this.touchCursor;
-        this.dragLine.clear();
+        this.forceLine.clear();
         if (touchCursor.anyKeyDown) {
-            this.dragLine.lineStyle(this.dragLineThinkness, this.dragLineColor);
-            this.dragLine.lineBetween(
+            this.forceLine.lineStyle(this.dragLineThinkness, this.dragLineColor);
+            this.forceLine.lineBetween(
                 touchCursor.start.x,
                 touchCursor.start.y,
                 touchCursor.end.x,
