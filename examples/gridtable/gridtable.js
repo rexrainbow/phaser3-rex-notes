@@ -12,7 +12,7 @@ class Demo extends Phaser.Scene {
 
     create() {
         var newCellObject = function (scene, cell) {
-            var bg = scene.add.graphics(0, 0)
+            var bg = scene.add.graphics()
                 .fillStyle(0x555555)
                 .fillRect(2, 2, 58, 58);
             var txt = scene.add.text(5, 5, cell.index);

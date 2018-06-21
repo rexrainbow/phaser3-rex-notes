@@ -19,7 +19,7 @@ class Demo extends Phaser.Scene {
             var container = cellObjectsPool.pop();
             if (container === null) {
                 console.log(cell.index + ': create new gameboject')
-                var bg = scene.add.graphics(0, 0)
+                var bg = scene.add.graphics()
                     .fillStyle(0x555555)
                     .fillRect(2, 2, 58, 58)
                     .setName('background');

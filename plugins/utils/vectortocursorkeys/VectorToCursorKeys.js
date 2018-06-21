@@ -2,8 +2,8 @@
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Key = Phaser.Input.Keyboard.Key;
-const getDist = Phaser.Math.Distance.Between;
-const getAngle = Phaser.Math.Angle.Between;
+const GetDist = Phaser.Math.Distance.Between;
+const GetAngle = Phaser.Math.Angle.Between;
 const RadToDeg = Phaser.Math.RadToDeg;
 
 class VectorToCursorKeys {
@@ -37,7 +37,7 @@ class VectorToCursorKeys {
 
         this.setEnable(GetValue(o, 'enable', true));
         this.setMode(GetValue(o, 'dir', '8dir'));
-        this.setDistanceThreshold(GetValue(o, 'distanceMin', 16));
+        this.setDistanceThreshold(GetValue(o, 'forceMin', 16));
 
         var startX = GetValue(o, "start.x", null);
         var startY = GetValue(o, "start.y", null);
@@ -55,7 +55,7 @@ class VectorToCursorKeys {
         return {
             enable: this.cfg.enable,
             dir: this.cfg.dirMode,
-            distanceMin: this.cfg.distanceMin,
+            forceMin: this.cfg.forceMin,
 
             start: {
                 x: this.start.x,
@@ -100,7 +100,7 @@ class VectorToCursorKeys {
         if (d < 0) {
             d = 0;
         }
-        this.cfg.distanceMin = d;
+        this.cfg.forceMin = d;
         return this;
     }
 
@@ -163,7 +163,7 @@ class VectorToCursorKeys {
         this.start.y = y0;
         this.end.x = x1;
         this.end.y = y1;
-        if (this.force < this.cfg.distanceMin) {
+        if (this.force < this.cfg.forceMin) {
             return this;
         }
 
@@ -222,11 +222,11 @@ class VectorToCursorKeys {
     }
 
     get force() {
-        return getDist(this.start.x, this.start.y, this.end.x, this.end.y);
+        return GetDist(this.start.x, this.start.y, this.end.x, this.end.y);
     }
 
     get rotation() {
-        return getAngle(this.start.x, this.start.y, this.end.x, this.end.y);
+        return GetAngle(this.start.x, this.start.y, this.end.x, this.end.y);
     }
 
     get angle() {
