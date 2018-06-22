@@ -1,7 +1,6 @@
 'use strict'
 
-import CSVToArray from 'rexPlugins/utils/array/CSVToArray.js';
-import IsArray from 'rexPlugins/utils/array/IsArray.js';
+import CSVToArray from 'rexPlugins/csvtoarray.js';
 import InstMem from './InstMem.js';
 import CmdHandlers from './commands/CmdHandlers.js';
 
@@ -31,12 +30,12 @@ class CSVScenario extends EE {
         this.argsConvert = GetValue(o, 'argsConvert', true);
         this.argsConvertScope = GetValue(o, 'argsConvertScope', undefined);
         this.cmdHandlers.resetFromJSON(GetValue(o, 'handlers', undefined));
-        this.instMem.resetFromJSON(GetValue(o, 'instMem', undefined));        
+        this.instMem.resetFromJSON(GetValue(o, 'instMem', undefined));
         return this;
     }
 
     toJSON() {
-        return {          
+        return {
             state: this.isRunning,
             pause: this.isPaused,
             wait: this.waitEvent,

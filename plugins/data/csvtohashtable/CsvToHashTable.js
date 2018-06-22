@@ -1,6 +1,6 @@
 'use strict'
 
-import CSVToArray from 'rexPlugins/utils/array/CSVToArray.js';
+import CSVToArray from 'rexPlugins/csvtoarray.js';
 import ArrayCopy from 'rexPlugins/utils/array/Copy.js';
 import TypeConvert from 'rexPlugins/utils/string/TypeConvert.js';
 import IsArray from 'rexPlugins/utils/array/IsArray.js';
@@ -55,7 +55,9 @@ class CsvToHashTable {
         }
 
         this.clean();
-        var arr = CSVToArray(csvString, delimiter);
+        var arr = CSVToArray(csvString, {
+            delimiter: delimiter
+        });
 
 
         this.colKeys = ArrayCopy(this.colKeys, arr[0]);

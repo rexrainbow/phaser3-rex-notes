@@ -18,7 +18,7 @@ Alice,300,40`;
         var table = this.plugins.get('rexHashTable').add();
         table.loadCSV(csvString);
         console.log(table.table);
-        console.log(table.get('rex', 'mp'));
+        console.log(table.get('Rex', 'mp'));
     }
 
     update() {}
