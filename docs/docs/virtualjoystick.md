@@ -1,6 +1,6 @@
 ## Introduction
 
-Virtual joystick, to get state of cursor keys.
+Virtual joystick, to get state of cursor keys from touch events.
 
 - Author: Rex
 - Member of scene
