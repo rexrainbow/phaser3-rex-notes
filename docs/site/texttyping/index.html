@@ -332,8 +332,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../touchcursor/index.html" title="Touch to cursorKeys" class="md-nav__link">
-      Touch to cursorKeys
+    <a href="../virtualjoystick/index.html" title="Virtual joystick" class="md-nav__link">
+      Virtual joystick
     </a>
   </li>
 
@@ -656,8 +656,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#other-commands" title="Other commands" class="md-nav__link">
-    Other commands
+  <a href="#other-methods" title="Other methods" class="md-nav__link">
+    Other methods
   </a>
   
 </li>
@@ -1728,8 +1728,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#other-commands" title="Other commands" class="md-nav__link">
-    Other commands
+  <a href="#other-methods" title="Other methods" class="md-nav__link">
+    Other methods
   </a>
   
 </li>
@@ -1813,7 +1813,7 @@
 <li><code>'left-to-right'</code>, or <code>0</code> : typing characters from left to right.</li>
 <li><code>'right-to-left'</code>, or <code>1</code> : typing characters from right to left.</li>
 <li><code>'middle-to-sides'</code>, or <code>2</code> : typing characters from middle to sides, optional.</li>
-<li><code>'sides-to-middle'</code>, or <code>3</code> : typing characters from sides to middle.    </li>
+<li><code>'sides-to-middle'</code>, or <code>3</code> : typing characters from sides to middle.</li>
 </ul>
 </li>
 <li>setTextCallback : callback befor set-text, to decorate display text.
@@ -1828,61 +1828,39 @@
 
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
-<li>On typing :</li>
+<li>On typing :
+    <div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">typing</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
+</pre></div></li>
+<li>On typing completed :
+    <div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">typing</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
+</pre></div></li>
 </ul>
-<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">typing</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
-</pre></div>
-
+<h3 id="other-methods">Other methods<a class="headerlink" href="#other-methods" title="Permanent link">&para;</a></h3>
 <ul>
-<li>On typing completed :</li>
-</ul>
-<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">typing</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
-</pre></div>
-
-<h3 id="other-commands">Other commands<a class="headerlink" href="#other-commands" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Is-typing state</li>
-</ul>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isTyping</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">typing</span><span class="p">.</span><span class="nx">isTyping</span><span class="p">;</span>
-</pre></div>
-
-<ul>
-<li>Stop typing</li>
-</ul>
-<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">typing</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
+<li>Is-typing state
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isTyping</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">typing</span><span class="p">.</span><span class="nx">isTyping</span><span class="p">;</span>
+</pre></div></li>
+<li>Stop typing
+    <div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">typing</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
 <span class="c1">// txt.typing.stop(true);;  // stop and show all text</span>
+</pre></div></li>
+<li>Pause typing
+    <div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">typing</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
+</pre></div></li>
+<li>Resume typing
+    <div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">typing</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
+</pre></div></li>
+<li>Set typing speed
+    <div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">typing</span><span class="p">.</span><span class="nx">setTypeSpeed</span><span class="p">(</span><span class="nx">speed</span><span class="p">);</span>  <span class="c1">// speed in ms</span>
 </pre></div>
-
-<ul>
-<li>Pause typing</li>
+    Set speed in <code>typing</code> event or setTextCallback to change typing speed of remaining text.</li>
+<li>Typing more text
+    <div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">typing</span><span class="p">.</span><span class="nx">appendText</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
+</pre></div></li>
+<li>Set typing mode
+    <div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">typing</span><span class="p">.</span><span class="nx">setTypeMode</span><span class="p">(</span><span class="nx">mode</span><span class="p">);</span>  <span class="c1">//0|&#39;left-to-right&#39;|1|&#39;right-to-left&#39;|2|&#39;middle-to-sides&#39;|3|&#39;sides-to-middle&#39;</span>
+</pre></div></li>
 </ul>
-<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">typing</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
-</pre></div>
-
-<ul>
-<li>Resume typing</li>
-</ul>
-<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">typing</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
-</pre></div>
-
-<ul>
-<li>Set typing speed</li>
-</ul>
-<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">typing</span><span class="p">.</span><span class="nx">setTypeSpeed</span><span class="p">(</span><span class="nx">speed</span><span class="p">);</span>  <span class="c1">// speed in ms</span>
-</pre></div>
-
-<p>Set speed in <code>typing</code> event or setTextCallback to change typing speed of remaining text.</p>
-<ul>
-<li>Typing more text</li>
-</ul>
-<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">typing</span><span class="p">.</span><span class="nx">appendText</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
-</pre></div>
-
-<ul>
-<li>Set typing mode</li>
-</ul>
-<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">typing</span><span class="p">.</span><span class="nx">setTypeMode</span><span class="p">(</span><span class="nx">mode</span><span class="p">);</span>  <span class="c1">//0|&#39;left-to-right&#39;|1|&#39;right-to-left&#39;|2|&#39;middle-to-sides&#39;|3|&#39;sides-to-middle&#39;</span>
-</pre></div>
                 
                   
                 

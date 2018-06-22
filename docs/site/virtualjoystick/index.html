@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/touchcursor/index.html">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/virtualjoystick/index.html">
       
       
         <meta name="author" content="rexrainbow">
@@ -36,7 +36,7 @@
     
     
       
-        <title>Touch to cursorKeys - Notes of Phaser 3</title>
+        <title>Virtual joystick - Notes of Phaser 3</title>
       
     
     
@@ -96,7 +96,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Touch to cursorKeys
+                Virtual joystick
               </span>
             
           
@@ -343,11 +343,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="toc">
-        Touch to cursorKeys
+        Virtual joystick
       </label>
     
-    <a href="index.html" title="Touch to cursorKeys" class="md-nav__link md-nav__link--active">
-      Touch to cursorKeys
+    <a href="index.html" title="Virtual joystick" class="md-nav__link md-nav__link--active">
+      Virtual joystick
     </a>
     
       
@@ -381,6 +381,20 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#import-class" title="Import class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
+    Install global plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#create-instance" title="Create instance" class="md-nav__link">
     Create instance
   </a>
@@ -388,22 +402,57 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-state-of-cursor-keys" title="Get state of cursor keys" class="md-nav__link">
-    Get state of cursor keys
+  <a href="#state-of-cursor-keys" title="State of cursor keys" class="md-nav__link">
+    State of cursor keys
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-dragging-point" title="Get dragging point" class="md-nav__link">
-    Get dragging point
+  <a href="#force-angle" title="Force &amp; Angle" class="md-nav__link">
+    Force &amp; Angle
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#assign-origin-point" title="Assign origin point" class="md-nav__link">
-    Assign origin point
+  <a href="#visible" title="Visible" class="md-nav__link">
+    Visible
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enable" title="Enable" class="md-nav__link">
+    Enable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#position" title="Position" class="md-nav__link">
+    Position
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#touch-pointer" title="Touch pointer" class="md-nav__link">
+    Touch pointer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#destroy" title="Destroy" class="md-nav__link">
+    Destroy
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" title="Events" class="md-nav__link">
+    Events
   </a>
   
 </li>
@@ -1679,6 +1728,20 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#import-class" title="Import class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
+    Install global plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#create-instance" title="Create instance" class="md-nav__link">
     Create instance
   </a>
@@ -1686,22 +1749,57 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-state-of-cursor-keys" title="Get state of cursor keys" class="md-nav__link">
-    Get state of cursor keys
+  <a href="#state-of-cursor-keys" title="State of cursor keys" class="md-nav__link">
+    State of cursor keys
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-dragging-point" title="Get dragging point" class="md-nav__link">
-    Get dragging point
+  <a href="#force-angle" title="Force &amp; Angle" class="md-nav__link">
+    Force &amp; Angle
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#assign-origin-point" title="Assign origin point" class="md-nav__link">
-    Assign origin point
+  <a href="#visible" title="Visible" class="md-nav__link">
+    Visible
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enable" title="Enable" class="md-nav__link">
+    Enable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#position" title="Position" class="md-nav__link">
+    Position
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#touch-pointer" title="Touch pointer" class="md-nav__link">
+    Touch pointer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#destroy" title="Destroy" class="md-nav__link">
+    Destroy
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" title="Events" class="md-nav__link">
+    Events
   </a>
   
 </li>
@@ -1732,66 +1830,166 @@
               
                 
                 
-                  <h1>Touch to cursorKeys</h1>
+                  <h1>Virtual joystick</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Simulate curosr keys according touch events.</p>
+<p>Virtual joystick, to get state of cursor keys.</p>
 <ul>
 <li>Author: Rex</li>
-<li>Behavior of game object</li>
+<li>Member of scene</li>
 </ul>
 <h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/touchcursor-plugin.js">Link</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/virtualjoystick-plugin.js">Link</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/touchcursor">Sample code</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/virtualjoystick">Sample code</a></p>
+<p>User could import class directly, or install it by global plugin.</p>
+<h3 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">rexVirtualJoyStick</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/virtualjoystick.js&#39;</span><span class="p">;</span>
+</pre></div>
+
+<h3 id="install-global-plugin">Install global plugin<a class="headerlink" href="#install-global-plugin" title="Permanent link">&para;</a></h3>
+<p>Install plugin in <a href="../game/index.html#configuration">configuration of game</a></p>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">VirtualJoyStickPlugin</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/virtualjoystick-plugin.js&#39;</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexVirtualJoyStick&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">VirtualJoyStickPlugin</span><span class="p">,</span>
+            <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="p">},</span>
+        <span class="c1">// ...</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</pre></div>
+
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">dragCursor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DragCursorPlugin</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
-    <span class="nx">dir</span><span class="o">:</span> <span class="s1">&#39;8dir&#39;</span><span class="p">,</span>    <span class="c1">// 0|&#39;up&amp;down&#39;|1|&#39;left&amp;right|2|&#39;4dir&#39;|3|&#39;8dir&#39;</span>
-    <span class="nx">distanceMin</span><span class="o">:</span> <span class="mi">30</span>        
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">joystick</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexVirtualJoyStick&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="nx">x</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="nx">y</span><span class="p">,</span>
+    <span class="nx">radius</span><span class="o">:</span> <span class="nx">radius</span><span class="p">,</span>
+    <span class="nx">base</span><span class="o">:</span> <span class="nx">baseGameObject</span><span class="p">,</span>
+    <span class="nx">thumb</span><span class="o">:</span> <span class="nx">thumbGameObject</span><span class="p">,</span>
+    <span class="c1">// dir: &#39;8dir&#39;,</span>
+    <span class="c1">// forceMin: 16,</span>
+    <span class="c1">// enable: true</span>
 <span class="p">});</span>
 </pre></div>
 
 <p>Properties</p>
 <ul>
-<li>mode : <ul>
-<li><code>'up&amp;down'</code>, or <code>0</code> : simulate up or down cursor keys only.</li>
-<li><code>'left&amp;right'</code>, or <code>1</code> : simulate left or right cursor keys only.</li>
-<li><code>'4dir'</code>, or <code>2</code> : simulate up, down, left or right cursor keys.</li>
-<li><code>'8dir'</code>, or <code>3</code> : simulate up, up-left, up-right, down, down-left, down-right, left, or right cursor keys.</li>
+<li>base : Base game object.<ul>
+<li>Create a graphics object if no base game object passed.</li>
 </ul>
 </li>
-<li>distanceMin : cursor keys will be pressed when dragging distance is larger then this value.</li>
+<li>thumb : Thumb game object.<ul>
+<li>Create a graphics object if no thumb game object passed.</li>
 </ul>
-<h3 id="get-state-of-cursor-keys">Get state of cursor keys<a class="headerlink" href="#get-state-of-cursor-keys" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cursorKeys</span> <span class="o">=</span> <span class="nx">dragCursor</span><span class="p">.</span><span class="nx">createCursorKeys</span><span class="p">();</span>
+</li>
+<li>x, y : Position of base game object</li>
+<li>radius : Circle hit-area of base game object</li>
+<li>dir : <ul>
+<li><code>'up&amp;down'</code>, or <code>0</code> : Simulate up or down cursor keys only.</li>
+<li><code>'left&amp;right'</code>, or <code>1</code> : Simulate left or right cursor keys only.</li>
+<li><code>'4dir'</code>, or <code>2</code> : Simulate up, down, left or right cursor keys.</li>
+<li><code>'8dir'</code>, or <code>3</code> : Simulate up, up-left, up-right, down, down-left, down-right, left, or right cursor keys.</li>
+</ul>
+</li>
+<li>forceMin : Cursor keys will be pressed when <em>force</em> is larger then this value.<ul>
+<li>force: Distance between origin point of base game object to touch pointer</li>
+</ul>
+</li>
+<li>enable : set <code>false</code> to disable cursor keys simulation</li>
+</ul>
+<h3 id="state-of-cursor-keys">State of cursor keys<a class="headerlink" href="#state-of-cursor-keys" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cursorKeys</span> <span class="o">=</span> <span class="nx">joystick</span><span class="p">.</span><span class="nx">createCursorKeys</span><span class="p">();</span>
 
-<span class="kd">var</span> <span class="nx">isLeftKeyDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">left</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">isRightKeyDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">right</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">isUpKeyDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">up</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">isDownKeyDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">down</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">leftKeyDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">left</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">rightKeyDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">right</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">upKeyDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">up</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">downKeyDown</span> <span class="o">=</span> <span class="nx">cursorKeys</span><span class="p">.</span><span class="nx">down</span><span class="p">.</span><span class="nx">isDown</span><span class="p">;</span>
 </pre></div>
 
-<h3 id="get-dragging-point">Get dragging point<a class="headerlink" href="#get-dragging-point" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">dragStartX</span> <span class="o">=</span> <span class="nx">dragCursor</span><span class="p">.</span><span class="nx">start</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">dragStartY</span> <span class="o">=</span> <span class="nx">dragCursor</span><span class="p">.</span><span class="nx">start</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">dragEndX</span> <span class="o">=</span> <span class="nx">dragCursor</span><span class="p">.</span><span class="nx">end</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">dragEndY</span> <span class="o">=</span> <span class="nx">dragCursor</span><span class="p">.</span><span class="nx">end</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+<p>Or</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">leftKeyDown</span> <span class="o">=</span> <span class="nx">joystick</span><span class="p">.</span><span class="nx">left</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">rightKeyDown</span> <span class="o">=</span> <span class="nx">joystick</span><span class="p">.</span><span class="nx">right</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">upKeyDown</span> <span class="o">=</span> <span class="nx">joystick</span><span class="p">.</span><span class="nx">up</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">downKeyDown</span> <span class="o">=</span> <span class="nx">joystick</span><span class="p">.</span><span class="nx">down</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">noKeyDown</span> <span class="o">=</span> <span class="nx">joystick</span><span class="p">.</span><span class="nx">noKey</span><span class="p">;</span>
 </pre></div>
 
-<h3 id="assign-origin-point">Assign origin point<a class="headerlink" href="#assign-origin-point" title="Permanent link">&para;</a></h3>
-<p>Origin point is the dragging start point, or assign origin point when creating instance.</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">dragCursor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DragCursorPlugin</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
-    <span class="c1">// ...</span>
-    <span class="nx">origin</span><span class="o">:</span> <span class="p">{</span>       <span class="c1">// assign origin point to (400,300)</span>
-        <span class="nx">x</span><span class="o">:</span> <span class="mi">400</span><span class="p">,</span>
-        <span class="nx">y</span><span class="o">:</span> <span class="mi">300</span>
-    <span class="p">}</span>
-<span class="p">});</span>
+<h3 id="force-angle">Force &amp; Angle<a class="headerlink" href="#force-angle" title="Permanent link">&para;</a></h3>
+<p>Force : Distance between origin point of base game object to touch pointer.</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">force</span> <span class="o">=</span> <span class="nx">joystick</span><span class="p">.</span><span class="nx">force</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">forceX</span> <span class="o">=</span> <span class="nx">joystick</span><span class="p">.</span><span class="nx">forceX</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">forceY</span> <span class="o">=</span> <span class="nx">joystick</span><span class="p">.</span><span class="nx">forceY</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">angle</span> <span class="o">=</span> <span class="nx">joystick</span><span class="p">.</span><span class="nx">angle</span><span class="p">;</span>  <span class="c1">// degree between -180 to 180</span>
+<span class="kd">var</span> <span class="nx">rotation</span> <span class="o">=</span> <span class="nx">joystick</span><span class="p">.</span><span class="nx">rotation</span><span class="p">;</span> <span class="c1">// radians</span>
 </pre></div>
 
-<p>Or assign origin point by <code>setOrigin(x, y)</code> function.</p>
-<div class="codehilite"><pre><span></span><span class="nx">dragCursor</span><span class="p">.</span><span class="nx">setOrigin</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="mi">300</span><span class="p">);</span>  <span class="c1">// assign origin point to (400,300)</span>
+<h3 id="visible">Visible<a class="headerlink" href="#visible" title="Permanent link">&para;</a></h3>
+<p>Visible of base game object.</p>
+<ul>
+<li>Get : Return visible of base game object
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">visible</span> <span class="o">=</span> <span class="nx">joystick</span><span class="p">.</span><span class="nx">visible</span><span class="p">;</span>
+</pre></div></li>
+<li>Set : Set visible to base game object and thumb game object
+    <div class="codehilite"><pre><span></span><span class="nx">joystick</span><span class="p">.</span><span class="nx">visible</span> <span class="o">=</span> <span class="nx">visible</span><span class="p">;</span>
+<span class="nx">joystick</span><span class="p">.</span><span class="nx">setVisible</span><span class="p">(</span><span class="nx">visible</span><span class="p">);</span>
+<span class="nx">joystick</span><span class="p">.</span><span class="nx">toggleVisible</span><span class="p">();</span>
 </pre></div>
+    Joystick will be disabled when invisible.</li>
+</ul>
+<h3 id="enable">Enable<a class="headerlink" href="#enable" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">enable</span> <span class="o">=</span> <span class="nx">joystick</span><span class="p">.</span><span class="nx">enable</span><span class="p">;</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">joystick</span><span class="p">.</span><span class="nx">enable</span> <span class="o">=</span> <span class="nx">enable</span><span class="p">;</span>
+<span class="nx">joystick</span><span class="p">.</span><span class="nx">setEnable</span><span class="p">(</span><span class="nx">enable</span><span class="p">);</span>
+<span class="nx">joystick</span><span class="p">.</span><span class="nx">toggleEnable</span><span class="p">();</span>
+</pre></div></li>
+</ul>
+<h3 id="position">Position<a class="headerlink" href="#position" title="Permanent link">&para;</a></h3>
+<p>Position of base game object.</p>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">joystick</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">joystick</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">joystick</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
+<span class="nx">joystick</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
+<span class="nx">joystick</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">x</span> <span class="p">,</span><span class="nx">y</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h3 id="touch-pointer">Touch pointer<a class="headerlink" href="#touch-pointer" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Position
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">joystick</span><span class="p">.</span><span class="nx">pointerX</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">joystick</span><span class="p">.</span><span class="nx">pointerY</span><span class="p">;</span>
+</pre></div></li>
+<li>Pointer Id
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">pointerId</span> <span class="o">=</span> <span class="nx">joystick</span><span class="p">.</span><span class="nx">pointerId</span><span class="p">;</span>
+</pre></div></li>
+</ul>
+<h3 id="destroy">Destroy<a class="headerlink" href="#destroy" title="Permanent link">&para;</a></h3>
+<p>Destroy base &amp; thumb game object.</p>
+<div class="codehilite"><pre><span></span><span class="nx">joystick</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
+</pre></div>
+
+<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
+<ul>
+<li>On joystick updated :
+   <div class="codehilite"><pre><span></span><span class="nx">joystick</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;update&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
+</pre></div></li>
+</ul>
                 
                   
                 
@@ -1802,9 +2000,9 @@
                   <div id="disqus_thread"></div>
 <script>
   var disqus_config = function () {
-    this.page.url = "https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/touchcursor/index.html";
+    this.page.url = "https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/virtualjoystick/index.html";
     this.page.identifier =
-      "/touchcursor/index.html";
+      "/virtualjoystick/index.html";
   };
   (function() {
     var d = document, s = d.createElement("script");

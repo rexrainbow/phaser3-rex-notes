@@ -65,6 +65,18 @@ class VirtualJoyStick {
         return this.touchCursor.noKeyDown;
     }
 
+    get pointerX() {
+        return this.touchCursor.end.x;
+    }
+
+    get pointerY() {
+        return this.touchCursor.end.y;
+    }
+
+    get pointerId() {
+        return this.touchCursor.pointerId;
+    }
+
     setPosition(x, y) {
         this.x = x;
         this.y = y;
@@ -87,6 +99,14 @@ class VirtualJoyStick {
         return this.base.y;
     }
 
+    setVisible(visible) {
+        this.visible = visible;
+    }
+
+    toggleVisible() {
+        this.visible = !this.visible;
+    }
+
     get visible() {
         return this.base.visible;
     }
@@ -94,6 +114,35 @@ class VirtualJoyStick {
     set visible(visible) {
         this.base.visible = visible;
         this.thumb.visible = visible;
+    }
+
+    setEnable(value) {
+        this.enable = value;
+        return this;
+    }
+
+    toggleEnabl() {
+        this.enable = !this.enable;
+    }
+
+    get enable() {
+        return this.touchCursor.cfg.enable;
+    }
+
+    set enable(value) {
+        this.touchCursor.setEnable(value);        
+    }
+
+    on() {
+        var ee = this.touchCursor.events;
+        ee.on.apply(ee, arguments);
+        return this;
+    }
+
+    once() {
+        var ee = this.touchCursor.events;
+        ee.once.apply(ee, arguments);
+        return this;
     }
 
     setVisible(visible) {
@@ -132,8 +181,7 @@ class VirtualJoyStick {
     }
 
     boot() {
-        var ee = this.scene.sys.events;
-        ee.on('preupdate', this.update, this);
+        this.touchCursor.on('update', this.update, this);
     }
 
     destroy() {
@@ -160,6 +208,7 @@ class VirtualJoyStick {
             this.thumb.x = this.base.x;
             this.thumb.y = this.base.y;
         }
+        return this;
     }
 
 

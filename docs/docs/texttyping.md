@@ -62,7 +62,7 @@ Configuration
     - `'left-to-right'`, or `0` : typing characters from left to right.
     - `'right-to-left'`, or `1` : typing characters from right to left.
     - `'middle-to-sides'`, or `2` : typing characters from middle to sides, optional.
-    - `'sides-to-middle'`, or `3` : typing characters from sides to middle.    
+    - `'sides-to-middle'`, or `3` : typing characters from sides to middle.
 - setTextCallback : callback befor set-text, to decorate display text.
     ```javascript
     function(text, isLastChar, insertIdx) { return text; }
@@ -79,60 +79,43 @@ txt.typing.start('ABCDEFG');
 ### Events
 
 - On typing :
-
-```javascript
-txt.typing.on('type', function(){});
-```
-
+    ```javascript
+    txt.typing.on('type', function(){});
+    ```
 - On typing completed :
+    ```javascript
+    txt.typing.on('complete', function(){});
+    ```
 
-```javascript
-txt.typing.on('complete', function(){});
-```
-
-### Other commands
+### Other methods
 
 - Is-typing state
-
-```javascript
-var isTyping = txt.typing.isTyping;
-```
-
+    ```javascript
+    var isTyping = txt.typing.isTyping;
+    ```
 - Stop typing
-
-```javascript
-txt.typing.stop();
-// txt.typing.stop(true);;  // stop and show all text
-```
-
+    ```javascript
+    txt.typing.stop();
+    // txt.typing.stop(true);;  // stop and show all text
+    ```
 - Pause typing
-
-```javascript
-txt.typing.pause();
-```
-
+    ```javascript
+    txt.typing.pause();
+    ```
 - Resume typing
-
-```javascript
-txt.typing.resume();
-```
-
+    ```javascript
+    txt.typing.resume();
+    ```
 - Set typing speed
-
-```javascript
-txt.typing.setTypeSpeed(speed);  // speed in ms
-```
-
-Set speed in `typing` event or setTextCallback to change typing speed of remaining text.
-
+    ```javascript
+    txt.typing.setTypeSpeed(speed);  // speed in ms
+    ```
+    Set speed in `typing` event or setTextCallback to change typing speed of remaining text.
 - Typing more text
-
-```javascript
-txt.typing.appendText(text);
-```
-
+    ```javascript
+    txt.typing.appendText(text);
+    ```
 - Set typing mode
-
-```javascript
-txt.typing.setTypeMode(mode);  //0|'left-to-right'|1|'right-to-left'|2|'middle-to-sides'|3|'sides-to-middle'
-```
+    ```javascript
+    txt.typing.setTypeMode(mode);  //0|'left-to-right'|1|'right-to-left'|2|'middle-to-sides'|3|'sides-to-middle'
+    ```

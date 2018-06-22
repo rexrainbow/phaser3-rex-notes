@@ -2,6 +2,7 @@
 
 import VectorToCursorKeys from 'rexPlugins/utils/vectortocursorkeys/VectorToCursorKeys.js';
 
+const EE = Phaser.Events.EventEmitter;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Geom = Phaser.Geom;
 
@@ -10,13 +11,13 @@ class TouchCursor extends VectorToCursorKeys {
         super(config);
         //this.resetFromJSON(config); // this function had been called in super(config)
 
-        this.gameObject = gameObject;
+        this.events = new EE();
         this.scene = gameObject.scene;
+        this.gameObject = gameObject;
         this.radius = GetValue(config, 'radius', 100);
         gameObject.setInteractive(new Geom.Circle(0, 0, this.radius), Geom.Circle.Contains);
         this.boot();
     }
-
 
     resetFromJSON(o) {
         super.resetFromJSON(o);
@@ -47,9 +48,13 @@ class TouchCursor extends VectorToCursorKeys {
         var sceneInput = this.scene.input;
         sceneInput.off('pointermove', this.onKeyDown, this);
         sceneInput.off('pointerup', this.onKeyUp, this);
-
-        this.gameObject = undefined;
         // gameObject events will be removed when this gameObject destroyed 
+
+        this.events.destroy();
+        
+        this.scene = undefined;
+        this.gameObject = undefined;
+        this.events = undefined;
     }
 
     destroy() {
@@ -73,6 +78,7 @@ class TouchCursor extends VectorToCursorKeys {
         var p0 = this.gameObject,
             p1 = pointer;
         this.setVector(p0.x, p0.y, p1.x, p1.y);
+        this.events.emit('update');
     }
 
     onKeyUp(pointer) {
@@ -81,6 +87,19 @@ class TouchCursor extends VectorToCursorKeys {
         }
         this.pointerId = undefined;
         this.cleanVector();
+        this.events.emit('update');
+    }
+
+    on() {
+        var ee = this.events;
+        ee.on.apply(ee, arguments);
+        return this;
+    }
+
+    once() {
+        var ee = this.events;
+        ee.once.apply(ee, arguments);
+        return this;
     }
 
 }

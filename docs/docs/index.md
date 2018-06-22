@@ -23,7 +23,7 @@
 1. [TagText](tagtext.md): Displays text with multi-color, font face, or font size with tags.
 1. [TCRP.Player](tcrpplayerplugin.md): Run commands on time.
 1. [TCRP.Recorder](tcrpplayerplugin.md): Store commands with time.
-1. [Touch-cursor](touchcursor.md): Simulate curosr keys according touch events.
 1. [Typing](texttyping.md): Typing text on text object.
+1. [Virtual joystick](virtualjoystick.md): Simulate curosr keys according touch events.
 1. [Webfont-loader](webfontloader.md): Load web font by google webfont loader in preload stage.
 1. [XOR](xor.md): Encrypt or decrypt string by XOR algorithm.

@@ -12,7 +12,7 @@ pages:
         - Cursor: cursor.md
         - Drag: drag.md
         - Slider: slider.md
-        - Touch to cursorKeys: touchcursor.md
+        - Virtual joystick: virtualjoystick.md
     - Keyboard:
         - Keyboard events: keyboardevents.md
 - Loader:

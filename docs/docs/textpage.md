@@ -65,15 +65,14 @@ Properties
 
 ### Set content
 
-```javascript
-txt.page.setText(text);   // content in string or array
-```
-
+- Set text
+    ```javascript
+    txt.page.setText(text);   // content in string or array
+    ```
 - Append text
-
-```javascript
-txt.page.appendText(text); // content in string or array
-```
+    ```javascript
+    txt.page.appendText(text); // content in string or array
+    ```
 
 ### Show page
 
