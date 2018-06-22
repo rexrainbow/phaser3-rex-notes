@@ -92,6 +92,21 @@ Call `gameObject.setInteractive(...)` to register touch input of Game Object bef
 gameObject.setInteractive(false);
 ```
 
+### Top only
+
+When set to `true` this Input Plugin will emulate DOM behavior by only emitting events from the top-most Game Objects in the Display List.
+If set to `false` it will emit events from all Game Objects below a Pointer, not just the top one.
+
+- Get
+    ```javascript
+    var topOnly = scene.input.topOnly;
+    ```
+- Set
+    ```javascript
+    scene.input.topOnly = topOnly;
+    scene.input.setTopOnly(topOnly);
+    ```
+
 ### Touch events
 
 - Events to get **all** touched Game Objects

@@ -340,6 +340,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#top-only" title="Top only" class="md-nav__link">
+    Top only
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#touch-events" title="Touch events" class="md-nav__link">
     Touch events
   </a>
@@ -1801,6 +1808,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#top-only" title="Top only" class="md-nav__link">
+    Top only
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#touch-events" title="Touch events" class="md-nav__link">
     Touch events
   </a>
@@ -2087,6 +2101,18 @@
 <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setInteractive</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
 </pre></div>
 
+<h3 id="top-only">Top only<a class="headerlink" href="#top-only" title="Permanent link">&para;</a></h3>
+<p>When set to <code>true</code> this Input Plugin will emulate DOM behavior by only emitting events from the top-most Game Objects in the Display List.
+If set to <code>false</code> it will emit events from all Game Objects below a Pointer, not just the top one.</p>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">topOnly</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">topOnly</span><span class="p">;</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">topOnly</span> <span class="o">=</span> <span class="nx">topOnly</span><span class="p">;</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">setTopOnly</span><span class="p">(</span><span class="nx">topOnly</span><span class="p">);</span>
+</pre></div></li>
+</ul>
 <h3 id="touch-events">Touch events<a class="headerlink" href="#touch-events" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Events to get <strong>all</strong> touched Game Objects

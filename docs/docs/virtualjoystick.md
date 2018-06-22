@@ -1,6 +1,6 @@
 ## Introduction
 
-Virtual joystick, to get state of cursor keys from touch events.
+Simulate curosr keys according touch events.
 
 - Author: Rex
 - Member of scene
@@ -73,7 +73,7 @@ Properties
     - `'4dir'`, or `2` : Simulate up, down, left or right cursor keys.
     - `'8dir'`, or `3` : Simulate up, up-left, up-right, down, down-left, down-right, left, or right cursor keys.
 - forceMin : Cursor keys will be pressed when *force* is larger then this value.
-    - force: Distance between origin point of base game object to touch pointer
+    - force: Distance between position of base game object to touch pointer
 - enable : set `false` to disable cursor keys simulation
 
 ### State of cursor keys
@@ -99,7 +99,7 @@ var noKeyDown = joystick.noKey;
 
 ### Force & Angle
 
-Force : Distance between origin point of base game object to touch pointer.
+Force : Distance between position of base game object to touch pointer.
 
 ```javascript
 var force = joystick.force;
