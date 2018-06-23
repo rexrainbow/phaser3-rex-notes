@@ -2,7 +2,7 @@
 
 Generate array from csv string.
 
-- Author: [Ben](http://www.bennadel.com/blog/1504-Ask-Ben-Parsing-CSV-Strings-With-Javascript-Exec-Regular-Expression-Command.htm)
+- Reference: [Papa Parse](https://www.papaparse.com/)
 - Method only
 
 ## Source code
@@ -49,9 +49,8 @@ var game = new Phaser.Game(config);
 ```javascript
 var arr = scene.plugins.get('rexCSVToArray').convert(csvString, {
     // delimiter: ',',
-    // convert: true,
-    // convertScope: undefined
+    // convert: true
 });
 ```
 
-Values will be converted to *number*, *boolean*, *null*, or *string*, if `convert` is `true`, or assign your convert function by `convert` and `convertScope`.
+Values will be converted to *number*, *boolean*, *null*, or *string*, if `convert` is `true`.
