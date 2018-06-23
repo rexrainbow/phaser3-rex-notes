@@ -1,6 +1,6 @@
 'use strict'
 
-import CSVToArray from 'rexPlugins/csvtoarray.js';
+import CSVToArray from 'rexPlugins/utils/array/CSVToArray.js'; // use simple csv parser
 import InstMem from './InstMem.js';
 import CmdHandlers from './commands/CmdHandlers.js';
 
