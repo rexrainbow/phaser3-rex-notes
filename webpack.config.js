@@ -11,7 +11,7 @@ if (!testMode) {
     phaser = path.join(phaserModule, 'src/phaser.js')
 } else {
     var phaserModule = path.join(__dirname, '/../rex-phaser/')
-    phaser = path.join(phaserModule, 'build/phaser.js')
+    phaser = path.join(phaserModule, 'src/phaser.js')
 }
 
 var projectName = process.env.myproj || "./examples/sample.js"
