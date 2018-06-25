@@ -87,6 +87,8 @@ pages:
         - Key-value pairs:
             - LocalStorage: localstorage.md
             - LocalForage: localforage.md
+    - Online:
+        - Firestore: firestore.md
 
 
 extra_javascript:

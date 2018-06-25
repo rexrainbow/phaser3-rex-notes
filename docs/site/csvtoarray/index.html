@@ -1626,6 +1626,42 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-14-2" type="checkbox" id="nav-14-2">
+    
+    <label class="md-nav__link" for="nav-14-2">
+      Online
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-14-2">
+        Online
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../firestore/index.html" title="Firestore" class="md-nav__link">
+      Firestore
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -1723,7 +1759,7 @@
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
 <p>Generate array from csv string.</p>
 <ul>
-<li>Author: <a href="http://www.bennadel.com/blog/1504-Ask-Ben-Parsing-CSV-Strings-With-Javascript-Exec-Regular-Expression-Command.htm">Ben</a></li>
+<li>Reference: <a href="https://www.papaparse.com/">Papa Parse</a></li>
 <li>Method only</li>
 </ul>
 <h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
@@ -1758,12 +1794,11 @@
 <h3 id="convert-csv">Convert csv<a class="headerlink" href="#convert-csv" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexCSVToArray&#39;</span><span class="p">).</span><span class="nx">convert</span><span class="p">(</span><span class="nx">csvString</span><span class="p">,</span> <span class="p">{</span>
     <span class="c1">// delimiter: &#39;,&#39;,</span>
-    <span class="c1">// convert: true,</span>
-    <span class="c1">// convertScope: undefined</span>
+    <span class="c1">// convert: true</span>
 <span class="p">});</span>
 </pre></div>
 
-<p>Values will be converted to <em>number</em>, <em>boolean</em>, <em>null</em>, or <em>string</em>, if <code>convert</code> is <code>true</code>, or assign your convert function by <code>convert</code> and <code>convertScope</code>.</p>
+<p>Values will be converted to <em>number</em>, <em>boolean</em>, <em>null</em>, or <em>string</em>, if <code>convert</code> is <code>true</code>.</p>
                 
                   
                 
