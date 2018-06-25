@@ -1879,18 +1879,18 @@
 <ul>
 <li>Add document
     <div class="codehilite"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="nx">collectionName</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">doc</span><span class="p">)</span>      <span class="c1">// doc: { ... }</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">docRef</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
     <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 </pre></div></li>
 <li>Set document
     <div class="codehilite"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="nx">collectionName</span><span class="p">).</span><span class="nx">doc</span><span class="p">(</span><span class="nx">docName</span><span class="p">).</span><span class="nx">set</span><span class="p">(</span><span class="nx">keyValues</span><span class="p">)</span>  <span class="c1">// keyValues: { ... }</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">docRef</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
     <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 </pre></div>
     Overwrite document</li>
 <li>Update data
     <div class="codehilite"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="nx">collectionName</span><span class="p">).</span><span class="nx">doc</span><span class="p">(</span><span class="nx">docName</span><span class="p">).</span><span class="nx">update</span><span class="p">(</span><span class="nx">keyValues</span><span class="p">)</span>  <span class="c1">// keyValues: { ... }</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">docRef</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
     <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 </pre></div></li>
 <li>Batched writes
@@ -1919,6 +1919,23 @@
     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
     <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 </pre></div></li>
+<li>Transaction
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">docRef</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="nx">collectionName</span><span class="p">).</span><span class="nx">doc</span><span class="p">(</span><span class="nx">docName</span><span class="p">);</span>
+<span class="nx">db</span><span class="p">.</span><span class="nx">runTransaction</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">transaction</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// read-modify-write</span>
+        <span class="c1">// This code may get re-run multiple times if there are conflicts.</span>
+        <span class="k">return</span> <span class="nx">transaction</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">docRef</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="c1">// doc.exists</span>
+                    <span class="nx">transaction</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">docRef</span><span class="p">,</span> <span class="nx">keyValues</span><span class="p">);</span>
+                <span class="p">});</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="c1">//console.log(&quot;Transaction successfully committed!&quot;);</span>
+    <span class="p">})</span>
+    <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//console.log(&quot;Transaction failed: &quot;, error);</span>
+    <span class="p">});</span>
+</pre></div></li>
 </ul>
 <h4 id="server-timestamp">Server timestamp<a class="headerlink" href="#server-timestamp" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><span class="nx">firebase</span><span class="p">.</span><span class="nx">firestore</span><span class="p">.</span><span class="nx">FieldValue</span><span class="p">.</span><span class="nx">serverTimestamp</span><span class="p">()</span>
@@ -1928,12 +1945,12 @@
 <ul>
 <li>Get a document
     <div class="codehilite"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="nx">collectionName</span><span class="p">).</span><span class="nx">doc</span><span class="p">(</span><span class="nx">docName</span><span class="p">).</span><span class="nx">get</span><span class="p">()</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">docRef</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
+    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
     <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 </pre></div><ul>
-<li><a href="https://firebase.google.com/docs/reference/js/firebase.firestore.QueryDocumentSnapshot">docRef</a><ul>
-<li><code>docRef.id</code></li>
-<li><code>docRef.data()</code></li>
+<li><a href="https://firebase.google.com/docs/reference/js/firebase.firestore.QueryDocumentSnapshot">doc</a><ul>
+<li><code>doc.id</code></li>
+<li><code>doc.data()</code></li>
 </ul>
 </li>
 </ul>
@@ -2012,7 +2029,7 @@
 <ul>
 <li>Get updates of a document
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">unsubscribe</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="nx">collectionName</span><span class="p">).</span><span class="nx">doc</span><span class="p">(</span><span class="nx">docName</span><span class="p">)</span>
-    <span class="p">.</span><span class="nx">onSnapshot</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">docRef</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+    <span class="p">.</span><span class="nx">onSnapshot</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 </pre></div></li>
 <li>Get updates of documents
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">unsubscribe</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="nx">collectionName</span><span class="p">).</span><span class="nx">where</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">op</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span>
@@ -2039,7 +2056,7 @@
     <span class="p">.</span><span class="nx">onSnapshot</span><span class="p">({</span>
             <span class="nx">includeMetadataChanges</span><span class="o">:</span> <span class="kc">true</span>    <span class="c1">// Listen for document metadata changes</span>
         <span class="p">},</span>
-        <span class="kd">function</span><span class="p">(</span><span class="nx">docRef</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span> <span class="p">);</span>
+        <span class="kd">function</span><span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span> <span class="p">);</span>
 </pre></div></li>
 </ul>
 <h3 id="indexing">Indexing<a class="headerlink" href="#indexing" title="Permanent link">&para;</a></h3>

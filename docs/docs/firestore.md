@@ -50,20 +50,20 @@ Cloud Firestore is a flexible, scalable database for mobile, web, and server dev
 - Add document
     ```javascript
     db.collection(collectionName).add(doc)      // doc: { ... }
-        .then(function(docRef) { /* ... */ })
+        .then(function(doc) { /* ... */ })
         .catch(function(error) { /* ... */ });
     ```
 - Set document
     ```javascript
     db.collection(collectionName).doc(docName).set(keyValues)  // keyValues: { ... }
-        .then(function(docRef) { /* ... */ })
+        .then(function(doc) { /* ... */ })
         .catch(function(error) { /* ... */ });
     ```
     Overwrite document
 - Update data
     ```javascript
     db.collection(collectionName).doc(docName).update(keyValues)  // keyValues: { ... }
-        .then(function(docRef) { /* ... */ })
+        .then(function(doc) { /* ... */ })
         .catch(function(error) { /* ... */ });
     ```
 - Batched writes
@@ -95,6 +95,24 @@ Cloud Firestore is a flexible, scalable database for mobile, web, and server dev
         .then(function() { /* ... */ })
         .catch(function(error) { /* ... */ });
     ```
+- Transaction
+    ```javascript
+    var docRef = db.collection(collectionName).doc(docName);
+    db.runTransaction(function(transaction) {
+            // read-modify-write
+            // This code may get re-run multiple times if there are conflicts.
+            return transaction.get(docRef).then(function(doc) {
+                        // doc.exists
+                        transaction.update(docRef, keyValues);
+                    });
+        })
+        .then(function() {
+            //console.log("Transaction successfully committed!");
+        })
+        .catch(function(error) {
+            //console.log("Transaction failed: ", error);
+        });
+    ```
 
 #### Server timestamp
 
@@ -107,12 +125,12 @@ firebase.firestore.FieldValue.serverTimestamp()
 - Get a document
     ```javascript
     db.collection(collectionName).doc(docName).get()
-        .then(function(docRef) { /* ... */ })
+        .then(function(doc) { /* ... */ })
         .catch(function(error) { /* ... */ });
     ```
-    - [docRef](https://firebase.google.com/docs/reference/js/firebase.firestore.QueryDocumentSnapshot)
-        - `docRef.id`
-        - `docRef.data()`
+    - [doc](https://firebase.google.com/docs/reference/js/firebase.firestore.QueryDocumentSnapshot)
+        - `doc.id`
+        - `doc.data()`
 - Get all documents
     ```javascript
     db.collection(collectionName).get()
@@ -175,7 +193,7 @@ firebase.firestore.FieldValue.serverTimestamp()
 - Get updates of a document
     ```javascript
     var unsubscribe = db.collection(collectionName).doc(docName)
-        .onSnapshot(function(docRef) { /* ... */ });
+        .onSnapshot(function(doc) { /* ... */ });
     ```
 - Get updates of documents
     ```javascript
@@ -200,7 +218,7 @@ firebase.firestore.FieldValue.serverTimestamp()
         .onSnapshot({
                 includeMetadataChanges: true    // Listen for document metadata changes
             },
-            function(docRef) { /* ... */ } );
+            function(doc) { /* ... */ } );
     ```
 
 ### Indexing
