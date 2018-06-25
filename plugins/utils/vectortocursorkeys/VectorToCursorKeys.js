@@ -17,9 +17,6 @@ class VectorToCursorKeys {
      * @returns {object} this object
      */
     resetFromJSON(o) {
-        if (this.cfg == undefined) {
-            this.cfg = {};
-        }
         if (this.start == undefined) {
             this.start = {};
         }
@@ -54,9 +51,9 @@ class VectorToCursorKeys {
      */
     toJSON() {
         return {
-            enable: this.cfg.enable,
-            dir: this.cfg.dirMode,
-            forceMin: this.cfg.forceMin,
+            enable: this.enable,
+            dir: this.dirMode,
+            forceMin: this.forceMin,
 
             noKeyDown: this.noKeyDown,
             start: {
@@ -79,7 +76,7 @@ class VectorToCursorKeys {
         if (typeof (m) === 'string') {
             m = DIRMODE[m];
         }
-        this.cfg.dirMode = m;
+        this.dirMode = m;
         return this;
     }
 
@@ -89,20 +86,20 @@ class VectorToCursorKeys {
         } else {
             e = !!e;
         }
-        if (e === this.cfg.enable) {
+        if (e === this.enable) {
             return;
         }
         if (e === false) {
             this.cleanVector();
         }
-        this.cfg.enable = e;
+        this.enable = e;
     }
 
     setDistanceThreshold(d) {
         if (d < 0) {
             d = 0;
         }
-        this.cfg.forceMin = d;
+        this.forceMin = d;
         return this;
     }
 
@@ -144,7 +141,7 @@ class VectorToCursorKeys {
 
     setVector(x0, y0, x1, y1) {
         this.cleanVector();
-        if (!this.cfg.enable) {
+        if (!this.enable) {
             return this;
         }
         if (x0 === null) {
@@ -155,12 +152,12 @@ class VectorToCursorKeys {
         this.start.y = y0;
         this.end.x = x1;
         this.end.y = y1;
-        if (this.force < this.cfg.forceMin) {
+        if (this.force < this.forceMin) {
             return this;
         }
 
         var angle = (360 + this.angle) % 360;
-        switch (this.cfg.dirMode) {
+        switch (this.dirMode) {
             case 0: // up & down
                 var keyName = (angle < 180) ? 'down' : 'up';
                 this.setKeyState(keyName, true);

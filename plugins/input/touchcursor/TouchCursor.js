@@ -51,7 +51,7 @@ class TouchCursor extends VectorToCursorKeys {
         // gameObject events will be removed when this gameObject destroyed 
 
         this.events.destroy();
-        
+
         this.scene = undefined;
         this.gameObject = undefined;
         this.events = undefined;

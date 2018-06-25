@@ -126,11 +126,11 @@ class VirtualJoyStick {
     }
 
     get enable() {
-        return this.touchCursor.cfg.enable;
+        return this.touchCursor.enable;
     }
 
     set enable(value) {
-        this.touchCursor.setEnable(value);        
+        this.touchCursor.setEnable(value);
     }
 
     on() {
