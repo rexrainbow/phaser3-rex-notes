@@ -16,44 +16,48 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        var firebaseApp = firebase.initializeApp(firebaseConfig)
+        var firebaseApp = firebase.initializeApp(firebaseConfig);
         // Initialize Cloud Firestore through Firebase
         var db = firebaseApp.firestore();
         db.settings({
             timestampsInSnapshots: true
         })
 
-        // save an item into 'users' collection
-        db.collection('users').add({
-                first: 'Ada',
-                last: 'Lovelace',
-                born: Between(1500, 2050)
-            })
-            .then(function (docRef) {
-                console.log('Document written with ID: ', docRef.id);
+        var batch = db.batch();
+        for (var i = 0; i < 100; i++) {
+            batch.set(db.collection('data').doc(i.toString()), {
+                count: i
+            });
+        }
 
-                // get all items in 'users' collection
-                console.log('get all items');
-                return db.collection('users').get();
+        batch.commit()
+            .then(function () {
+                console.log('Batch writes');
+
+                return db.collection('data').orderBy('count').startAt(70).limit(10).get();
             })
             .then(function (querySnapshot) {
-                // for each item:
-                querySnapshot.forEach(function (docRef) {
-                    console.log(docRef.id + ': ' + JSON.stringify(docRef.data()));
-                });
+                console.log('Start at count == 70');
 
-                console.log('get born > 1800 items');
-                return db.collection('users').where('born', '>', 1800).get();
-            })
-            .then(function (querySnapshot) {
                 // for each item:
                 querySnapshot.forEach(function (doc) {
                     console.log(doc.id + ': ' + JSON.stringify(doc.data()));
                 });
+
+                var lastDoc = querySnapshot.docs[querySnapshot.docs.length - 1];
+                return db.collection('data').orderBy('count').startAfter(lastDoc).limit(10).get();
             })
+            .then(function (querySnapshot) {
+                console.log('Start at next 10');
+
+                // for each item:
+                querySnapshot.forEach(function (doc) {
+                    console.log(doc.id + ': ' + JSON.stringify(doc.data()));
+                });
+            })            
             .catch(function (error) {
                 console.error('Error: ', error);
-            });
+            })
     }
 
     update() {}

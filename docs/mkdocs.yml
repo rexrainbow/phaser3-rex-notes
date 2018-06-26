@@ -88,7 +88,9 @@ pages:
             - LocalStorage: localstorage.md
             - LocalForage: localforage.md
     - Online:
-        - Firestore: firestore.md
+        - Firebase:
+            - Authentication: firebase-auth.md
+            - Firestore: firebase-firestore.md
 
 
 extra_javascript:

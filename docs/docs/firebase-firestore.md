@@ -2,13 +2,13 @@
 
 Cloud Firestore is a flexible, scalable database for mobile, web, and server development from Firebase and Google Cloud Platform.
 
-- Author: [Firebase](https://firebase.google.com/docs/firestore/)
+- Author: [Firebase](https://firebase.google.com/)
 
 ## Usage
 
 [Official document](https://firebase.google.com/docs/firestore/)
 
-[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/firestore)
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/firebase-firestore)
 
 ### Setup
 
@@ -53,6 +53,7 @@ Cloud Firestore is a flexible, scalable database for mobile, web, and server dev
         .then(function(doc) { /* ... */ })
         .catch(function(error) { /* ... */ });
     ```
+    Maximum size for a document : 1 MiB (1,048,576 bytes)
 - Set document
     ```javascript
     db.collection(collectionName).doc(docName).set(keyValues)  // keyValues: { ... }
@@ -81,6 +82,7 @@ Cloud Firestore is a flexible, scalable database for mobile, web, and server dev
         .then(function() { /* ... */ })
         .catch(function(error) { /* ... */ });
     ```
+    Maximum document writting in a commit : 500
 - Delete a document
     ```javascript
     db.collection(collectionName).doc(docName).delete()
@@ -113,6 +115,8 @@ Cloud Firestore is a flexible, scalable database for mobile, web, and server dev
             //console.log("Transaction failed: ", error);
         });
     ```
+
+[Limitation](https://firebase.google.com/docs/firestore/quotas): *Writes and transactions* section
 
 #### Server timestamp
 

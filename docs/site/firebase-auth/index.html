@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/firestore/index.html">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/firebase-auth/index.html">
       
       
         <meta name="author" content="rexrainbow">
@@ -36,7 +36,7 @@
     
     
       
-        <title>Firestore - Notes of Phaser 3</title>
+        <title>Authentication - Notes of Phaser 3</title>
       
     
     
@@ -96,7 +96,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Firestore
+                Authentication
               </span>
             
           
@@ -1573,17 +1573,38 @@
   
 
 
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-14-2-1" type="checkbox" id="nav-14-2-1" checked>
+    
+    <label class="md-nav__link" for="nav-14-2-1">
+      Firebase
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-14-2-1">
+        Firebase
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
   <li class="md-nav__item md-nav__item--active">
     
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
     
     
       <label class="md-nav__link md-nav__link--active" for="toc">
-        Firestore
+        Authentication
       </label>
     
-    <a href="index.html" title="Firestore" class="md-nav__link md-nav__link--active">
-      Firestore
+    <a href="index.html" title="Authentication" class="md-nav__link md-nav__link--active">
+      Authentication
     </a>
     
       
@@ -1617,63 +1638,71 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#references" title="References" class="md-nav__link">
-    References
+  <a href="#on-sign-insign-out" title="On sign-in/sign-out" class="md-nav__link">
+    On sign-in/sign-out
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#save" title="Save" class="md-nav__link">
-    Save
+  <a href="#sign-in-with-facebook" title="Sign-in with facebook" class="md-nav__link">
+    Sign-in with facebook
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sign-in-with-google" title="Sign-in with Google" class="md-nav__link">
+    Sign-in with Google
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sign-in-with-password" title="Sign-in with password" class="md-nav__link">
+    Sign-in with password
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sign-out" title="Sign-out" class="md-nav__link">
+    Sign-out
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#current-sign-in-user" title="Current sign-in user" class="md-nav__link">
+    Current sign-in user
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#server-timestamp" title="Server timestamp" class="md-nav__link">
-    Server timestamp
+  <a href="#update-email" title="Update email" class="md-nav__link">
+    Update email
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-profile" title="Update profile" class="md-nav__link">
+    Update profile
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#send-a-verification-email" title="Send a verification email" class="md-nav__link">
+    Send a verification email
   </a>
   
 </li>
         
       </ul>
     </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#load" title="Load" class="md-nav__link">
-    Load
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#paginate" title="Paginate" class="md-nav__link">
-    Paginate
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-realtime-updates" title="Get realtime updates" class="md-nav__link">
-    Get realtime updates
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#indexing" title="Indexing" class="md-nav__link">
-    Indexing
-  </a>
   
 </li>
         
@@ -1694,6 +1723,23 @@
   
 </nav>
     
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../firebase-firestore/index.html" title="Firestore" class="md-nav__link">
+      Firestore
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
         
@@ -1748,63 +1794,71 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#references" title="References" class="md-nav__link">
-    References
+  <a href="#on-sign-insign-out" title="On sign-in/sign-out" class="md-nav__link">
+    On sign-in/sign-out
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#save" title="Save" class="md-nav__link">
-    Save
+  <a href="#sign-in-with-facebook" title="Sign-in with facebook" class="md-nav__link">
+    Sign-in with facebook
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sign-in-with-google" title="Sign-in with Google" class="md-nav__link">
+    Sign-in with Google
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sign-in-with-password" title="Sign-in with password" class="md-nav__link">
+    Sign-in with password
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sign-out" title="Sign-out" class="md-nav__link">
+    Sign-out
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#current-sign-in-user" title="Current sign-in user" class="md-nav__link">
+    Current sign-in user
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#server-timestamp" title="Server timestamp" class="md-nav__link">
-    Server timestamp
+  <a href="#update-email" title="Update email" class="md-nav__link">
+    Update email
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-profile" title="Update profile" class="md-nav__link">
+    Update profile
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#send-a-verification-email" title="Send a verification email" class="md-nav__link">
+    Send a verification email
   </a>
   
 </li>
         
       </ul>
     </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#load" title="Load" class="md-nav__link">
-    Load
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#paginate" title="Paginate" class="md-nav__link">
-    Paginate
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-realtime-updates" title="Get realtime updates" class="md-nav__link">
-    Get realtime updates
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#indexing" title="Indexing" class="md-nav__link">
-    Indexing
-  </a>
   
 </li>
         
@@ -1834,21 +1888,21 @@
               
                 
                 
-                  <h1>Firestore</h1>
+                  <h1>Authentication</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Cloud Firestore is a flexible, scalable database for mobile, web, and server development from Firebase and Google Cloud Platform.</p>
+<p>It supports authentication using passwords, phone numbers, popular federated identity providers like Google, Facebook and Twitter, and more.</p>
 <ul>
-<li>Author: <a href="https://firebase.google.com/docs/firestore/">Firebase</a></li>
+<li>Author: <a href="https://firebase.google.com/">Firebase</a></li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://firebase.google.com/docs/firestore/">Official document</a></p>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/firestore">Sample code</a></p>
+<p><a href="https://firebase.google.com/docs/auth/web/start">Official document</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/firebase-auth">Sample code</a></p>
 <h3 id="setup">Setup<a class="headerlink" href="#setup" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Import firestore
     <div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">firebase</span> <span class="nx">from</span> <span class="s1">&#39;firebase/app&#39;</span><span class="p">;</span>
-<span class="kr">import</span> <span class="s1">&#39;firebase/firestore&#39;</span><span class="p">;</span>
+<span class="kr">import</span> <span class="s1">&#39;firebase/auth&#39;</span><span class="p">;</span>
 </pre></div>
     Firebase has been included in <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/package.json">package.json</a>.</li>
 <li>Initialize
@@ -1860,207 +1914,126 @@
    <span class="nx">storageBucket</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
    <span class="nx">messagingSenderId</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span>
 <span class="p">});</span>
-<span class="kd">var</span> <span class="nx">db</span> <span class="o">=</span> <span class="nx">firebaseApp</span><span class="p">.</span><span class="nx">firestore</span><span class="p">();</span>
-<span class="nx">db</span><span class="p">.</span><span class="nx">settings</span><span class="p">({</span>
-       <span class="nx">timestampsInSnapshots</span><span class="o">:</span> <span class="kc">true</span>
-<span class="p">})</span>
 </pre></div></li>
 </ol>
-<h3 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Reference of collection
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">collectionRef</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="nx">collectionName</span><span class="p">);</span>
-</pre></div></li>
-<li>Reference of document
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">docRef</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="nx">collectionName</span><span class="p">).</span><span class="nx">doc</span><span class="p">(</span><span class="nx">docName</span><span class="p">);</span>
-</pre></div></li>
-</ul>
-<h3 id="save">Save<a class="headerlink" href="#save" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Add document
-    <div class="codehilite"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="nx">collectionName</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">doc</span><span class="p">)</span>      <span class="c1">// doc: { ... }</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-    <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-</pre></div></li>
-<li>Set document
-    <div class="codehilite"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="nx">collectionName</span><span class="p">).</span><span class="nx">doc</span><span class="p">(</span><span class="nx">docName</span><span class="p">).</span><span class="nx">set</span><span class="p">(</span><span class="nx">keyValues</span><span class="p">)</span>  <span class="c1">// keyValues: { ... }</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-    <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-</pre></div>
-    Overwrite document</li>
-<li>Update data
-    <div class="codehilite"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="nx">collectionName</span><span class="p">).</span><span class="nx">doc</span><span class="p">(</span><span class="nx">docName</span><span class="p">).</span><span class="nx">update</span><span class="p">(</span><span class="nx">keyValues</span><span class="p">)</span>  <span class="c1">// keyValues: { ... }</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-    <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-</pre></div></li>
-<li>Batched writes
-    <div class="codehilite"><pre><span></span><span class="c1">// Get a new write batch</span>
-<span class="kd">var</span> <span class="nx">batch</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">batch</span><span class="p">();</span>
-
-<span class="nx">batch</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="nx">collectionName</span><span class="p">).</span><span class="nx">doc</span><span class="p">(</span><span class="nx">docName</span><span class="p">),</span> <span class="nx">keyValues</span><span class="p">);</span>
-<span class="nx">batch</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="nx">collectionName</span><span class="p">).</span><span class="nx">doc</span><span class="p">(</span><span class="nx">docName</span><span class="p">),</span> <span class="nx">keyValues</span><span class="p">);</span>
-<span class="nx">batch</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="nx">collectionName</span><span class="p">).</span><span class="nx">doc</span><span class="p">(</span><span class="nx">docName</span><span class="p">));</span>
-<span class="c1">// ...</span>
-
-<span class="c1">// Commit the batch</span>
-<span class="nx">batch</span><span class="p">.</span><span class="nx">commit</span><span class="p">()</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-    <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-</pre></div></li>
-<li>Delete a document
-    <div class="codehilite"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="nx">collectionName</span><span class="p">).</span><span class="nx">doc</span><span class="p">(</span><span class="nx">docName</span><span class="p">).</span><span class="k">delete</span><span class="p">()</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-    <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-</pre></div></li>
-<li>Delete a field
-    <div class="codehilite"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="nx">collectionName</span><span class="p">).</span><span class="nx">doc</span><span class="p">(</span><span class="nx">docName</span><span class="p">).</span><span class="nx">update</span><span class="p">({</span>
-        <span class="nx">key</span><span class="o">:</span> <span class="nx">firebase</span><span class="p">.</span><span class="nx">firestore</span><span class="p">.</span><span class="nx">FieldValue</span><span class="p">.</span><span class="k">delete</span><span class="p">()</span>
-    <span class="p">})</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-    <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-</pre></div></li>
-<li>Transaction
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">docRef</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="nx">collectionName</span><span class="p">).</span><span class="nx">doc</span><span class="p">(</span><span class="nx">docName</span><span class="p">);</span>
-<span class="nx">db</span><span class="p">.</span><span class="nx">runTransaction</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">transaction</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// read-modify-write</span>
-        <span class="c1">// This code may get re-run multiple times if there are conflicts.</span>
-        <span class="k">return</span> <span class="nx">transaction</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">docRef</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="c1">// doc.exists</span>
-                    <span class="nx">transaction</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">docRef</span><span class="p">,</span> <span class="nx">keyValues</span><span class="p">);</span>
-                <span class="p">});</span>
-    <span class="p">})</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="c1">//console.log(&quot;Transaction successfully committed!&quot;);</span>
-    <span class="p">})</span>
-    <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">//console.log(&quot;Transaction failed: &quot;, error);</span>
-    <span class="p">});</span>
-</pre></div></li>
-</ul>
-<h4 id="server-timestamp">Server timestamp<a class="headerlink" href="#server-timestamp" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">firebase</span><span class="p">.</span><span class="nx">firestore</span><span class="p">.</span><span class="nx">FieldValue</span><span class="p">.</span><span class="nx">serverTimestamp</span><span class="p">()</span>
+<h3 id="on-sign-insign-out">On sign-in/sign-out<a class="headerlink" href="#on-sign-insign-out" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">firebaseApp</span><span class="p">.</span><span class="nx">auth</span><span class="p">().</span><span class="nx">onAuthStateChanged</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// User is signed in.</span>
+        <span class="kd">var</span> <span class="nx">displayName</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">displayName</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">email</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">email</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">emailVerified</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">emailVerified</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">photoURL</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">photoURL</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">isAnonymous</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">isAnonymous</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">uid</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">uid</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">providerData</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">providerData</span><span class="p">;</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="c1">// User is signed out.</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">});</span>
 </pre></div>
 
-<h3 id="load">Load<a class="headerlink" href="#load" title="Permanent link">&para;</a></h3>
+<h3 id="sign-in-with-facebook">Sign-in with facebook<a class="headerlink" href="#sign-in-with-facebook" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">provider</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">firebase</span><span class="p">.</span><span class="nx">auth</span><span class="p">.</span><span class="nx">FacebookAuthProvider</span><span class="p">();</span>
+<span class="nx">firebaseApp</span><span class="p">.</span><span class="nx">auth</span><span class="p">().</span><span class="nx">signInWithPopup</span><span class="p">(</span><span class="nx">provider</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// This gives you a Facebook Access Token. You can use it to access the Facebook API.</span>
+    <span class="kd">var</span> <span class="nx">token</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">credential</span><span class="p">.</span><span class="nx">accessToken</span><span class="p">;</span>
+    <span class="c1">// The signed-in user info.</span>
+    <span class="kd">var</span> <span class="nx">user</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">user</span><span class="p">;</span>
+    <span class="c1">// ...</span>
+<span class="p">}).</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle Errors here.</span>
+    <span class="kd">var</span> <span class="nx">errorCode</span> <span class="o">=</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">errorMessage</span> <span class="o">=</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">;</span>
+    <span class="c1">// The email of the user&#39;s account used.</span>
+    <span class="kd">var</span> <span class="nx">email</span> <span class="o">=</span> <span class="nx">error</span><span class="p">.</span><span class="nx">email</span><span class="p">;</span>
+    <span class="c1">// The firebase.auth.AuthCredential type that was used.</span>
+    <span class="kd">var</span> <span class="nx">credential</span> <span class="o">=</span> <span class="nx">error</span><span class="p">.</span><span class="nx">credential</span><span class="p">;</span>
+    <span class="c1">// ...</span>
+<span class="p">});</span>
+</pre></div>
+
+<h3 id="sign-in-with-google">Sign-in with Google<a class="headerlink" href="#sign-in-with-google" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">provider</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">firebase</span><span class="p">.</span><span class="nx">auth</span><span class="p">.</span><span class="nx">GoogleAuthProvider</span><span class="p">();</span>
+<span class="nx">firebaseApp</span><span class="p">.</span><span class="nx">auth</span><span class="p">().</span><span class="nx">signInWithPopup</span><span class="p">(</span><span class="nx">provider</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// This gives you a Google Access Token. You can use it to access the Google API.</span>
+    <span class="kd">var</span> <span class="nx">token</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">credential</span><span class="p">.</span><span class="nx">accessToken</span><span class="p">;</span>
+    <span class="c1">// The signed-in user info.</span>
+    <span class="kd">var</span> <span class="nx">user</span> <span class="o">=</span> <span class="nx">result</span><span class="p">.</span><span class="nx">user</span><span class="p">;</span>
+    <span class="c1">// ...</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">user</span><span class="p">);</span>
+<span class="p">}).</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle Errors here.</span>
+    <span class="kd">var</span> <span class="nx">errorCode</span> <span class="o">=</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">errorMessage</span> <span class="o">=</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">;</span>
+    <span class="c1">// The email of the user&#39;s account used.</span>
+    <span class="kd">var</span> <span class="nx">email</span> <span class="o">=</span> <span class="nx">error</span><span class="p">.</span><span class="nx">email</span><span class="p">;</span>
+    <span class="c1">// The firebase.auth.AuthCredential type that was used.</span>
+    <span class="kd">var</span> <span class="nx">credential</span> <span class="o">=</span> <span class="nx">error</span><span class="p">.</span><span class="nx">credential</span><span class="p">;</span>
+    <span class="c1">// ...</span>
+<span class="p">});</span>
+</pre></div>
+
+<h3 id="sign-in-with-password">Sign-in with password<a class="headerlink" href="#sign-in-with-password" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Get a document
-    <div class="codehilite"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="nx">collectionName</span><span class="p">).</span><span class="nx">doc</span><span class="p">(</span><span class="nx">docName</span><span class="p">).</span><span class="nx">get</span><span class="p">()</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-    <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-</pre></div><ul>
-<li><a href="https://firebase.google.com/docs/reference/js/firebase.firestore.QueryDocumentSnapshot">doc</a><ul>
-<li><code>doc.id</code></li>
-<li><code>doc.data()</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Get all documents
-    <div class="codehilite"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="nx">collectionName</span><span class="p">).</span><span class="nx">get</span><span class="p">()</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">querySnapshot</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-    <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-</pre></div><ul>
-<li><a href="https://firebase.google.com/docs/reference/js/firebase.firestore.QuerySnapshot">querySnapshot</a>        <ul>
-<li><code>querySnapshot.docs</code></li>
-<li><code>querySnapshot.forEach(callback, thisArg)</code></li>
-<li><code>querySnapshot.empty</code></li>
-<li><code>querySnapshot.size</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Simple queries
-    <div class="codehilite"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="nx">collectionName</span><span class="p">).</span><span class="nx">where</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">op</span><span class="p">,</span> <span class="nx">value</span><span class="p">).</span><span class="nx">get</span><span class="p">()</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">querySnapshot</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-    <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-</pre></div><ul>
-<li><code>op</code> : <code>'&gt;'</code>, <code>'=='</code>, <code>'&lt;'</code>, <code>'&gt;='</code>, <code>'&lt;='</code><ul>
-<li><code>!=</code> : <code>where(key,'&gt;', value).where(key, '&lt;', value)</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Compound queries
-    <div class="codehilite"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="nx">collectionName</span><span class="p">).</span><span class="nx">where</span><span class="p">(</span><span class="nx">key0</span><span class="p">,</span> <span class="nx">op0</span><span class="p">,</span> <span class="nx">value0</span><span class="p">).</span><span class="nx">where</span><span class="p">(</span><span class="nx">key1</span><span class="p">,</span> <span class="nx">op1</span><span class="p">,</span> <span class="nx">value1</span><span class="p">).</span><span class="nx">get</span><span class="p">()</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">querySnapshot</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-    <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-</pre></div><ul>
-<li>Range filters (<code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code>) on only one field</li>
-</ul>
-</li>
-</ul>
-<h4 id="paginate">Paginate<a class="headerlink" href="#paginate" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Order, limit
-    <div class="codehilite"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="nx">collectionName</span><span class="p">).</span><span class="nx">orderBy</span><span class="p">(</span><span class="nx">key</span><span class="p">).</span><span class="nx">limit</span><span class="p">(</span><span class="nx">count</span><span class="p">)</span>
-</pre></div><ul>
-<li>Descending order : <code>orderBy(key, 'desc')</code></li>
-<li>Order by multiple fields : <code>orderBy(key0).orderBy(key1)</code></li>
-</ul>
-</li>
-<li>Query, order, limit
-    <div class="codehilite"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="nx">collectionName</span><span class="p">).</span><span class="nx">where</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">op</span><span class="p">,</span> <span class="nx">value</span><span class="p">).</span><span class="nx">orderBy</span><span class="p">(</span><span class="nx">key</span><span class="p">).</span><span class="nx">limit</span><span class="p">(</span><span class="nx">count</span><span class="p">)</span>
-</pre></div><ul>
-<li>Key of first order must be equal to range comparison (<code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code>)</li>
-</ul>
-</li>
-<li>Page<ol>
-<li>Start at
-    <div class="codehilite"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="nx">collectionName</span><span class="p">).</span><span class="nx">orderBy</span><span class="p">(</span><span class="nx">key</span><span class="p">).</span><span class="nx">startAt</span><span class="p">(</span><span class="nx">value</span><span class="p">).</span><span class="nx">limit</span><span class="p">(</span><span class="nx">count</span><span class="p">).</span><span class="nx">get</span><span class="p">()</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">querySnapshot</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-    <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-</pre></div><ul>
-<li><code>endAt(value)</code></li>
-</ul>
-</li>
-<li>Next page
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">lastDoc</span> <span class="o">=</span> <span class="nx">querySnapshot</span><span class="p">.</span><span class="nx">docs</span><span class="p">[</span><span class="nx">querySnapshot</span><span class="p">.</span><span class="nx">docs</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
-<span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="nx">collectionName</span><span class="p">).</span><span class="nx">orderBy</span><span class="p">(</span><span class="nx">key</span><span class="p">).</span><span class="nx">startAfter</span><span class="p">(</span><span class="nx">lastDoc</span><span class="p">).</span><span class="nx">limit</span><span class="p">(</span><span class="nx">count</span><span class="p">).</span><span class="nx">get</span><span class="p">()</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">querySnapshot</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">})</span>
-    <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-</pre></div><ul>
-<li><code>endBefore(lastDoc)</code></li>
-</ul>
-</li>
-</ol>
-</li>
-</ul>
-<h4 id="get-realtime-updates">Get realtime updates<a class="headerlink" href="#get-realtime-updates" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Get updates of a document
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">unsubscribe</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="nx">collectionName</span><span class="p">).</span><span class="nx">doc</span><span class="p">(</span><span class="nx">docName</span><span class="p">)</span>
-    <span class="p">.</span><span class="nx">onSnapshot</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<li>Create new user
+    <div class="codehilite"><pre><span></span><span class="nx">firebaseApp</span><span class="p">.</span><span class="nx">auth</span><span class="p">().</span><span class="nx">createUserWithEmailAndPassword</span><span class="p">(</span><span class="nx">email</span><span class="p">,</span> <span class="nx">password</span><span class="p">).</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle Errors here.</span>
+    <span class="kd">var</span> <span class="nx">errorCode</span> <span class="o">=</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">errorMessage</span> <span class="o">=</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">;</span>
+<span class="p">});</span>
 </pre></div></li>
-<li>Get updates of documents
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">unsubscribe</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="nx">collectionName</span><span class="p">).</span><span class="nx">where</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">op</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span>
-    <span class="p">.</span><span class="nx">onSnapshot</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">querySnapshot</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-</pre></div><ul>
-<li>Changes
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">changes</span> <span class="o">=</span> <span class="nx">querySnapshot</span><span class="p">.</span><span class="nx">docChanges</span><span class="p">();</span>  <span class="c1">// [change]</span>
-</pre></div><ul>
-<li><a href="https://firebase.google.com/docs/reference/js/firebase.firestore.DocumentChange">Change</a><ul>
-<li><code>change.type</code> : <code>'added'</code>, <code>'modified'</code>, <code>'removed'</code></li>
-<li><code>change.newIndex</code></li>
-<li><code>change.oldIndex</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Detach a listener
-    <div class="codehilite"><pre><span></span><span class="nx">unsubscribe</span><span class="p">();</span>
-</pre></div></li>
-<li>Events for <a href="https://firebase.google.com/docs/reference/js/firebase.firestore.SnapshotMetadata">metadata</a> changes
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">unsubscribe</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">collection</span><span class="p">(</span><span class="nx">collectionName</span><span class="p">).</span><span class="nx">doc</span><span class="p">(</span><span class="nx">docName</span><span class="p">)</span>
-    <span class="p">.</span><span class="nx">onSnapshot</span><span class="p">({</span>
-            <span class="nx">includeMetadataChanges</span><span class="o">:</span> <span class="kc">true</span>    <span class="c1">// Listen for document metadata changes</span>
-        <span class="p">},</span>
-        <span class="kd">function</span><span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span> <span class="p">);</span>
+<li>Sign-in
+    <div class="codehilite"><pre><span></span><span class="nx">firebase</span><span class="p">.</span><span class="nx">auth</span><span class="p">().</span><span class="nx">signInWithEmailAndPassword</span><span class="p">(</span><span class="nx">email</span><span class="p">,</span> <span class="nx">password</span><span class="p">).</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Handle Errors here.</span>
+    <span class="kd">var</span> <span class="nx">errorCode</span> <span class="o">=</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">errorMessage</span> <span class="o">=</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">;</span>
+<span class="p">});</span>
 </pre></div></li>
 </ul>
-<h3 id="indexing">Indexing<a class="headerlink" href="#indexing" title="Permanent link">&para;</a></h3>
-<p><a href="https://firebase.google.com/docs/firestore/query-data/index-overview">Reference</a></p>
+<h3 id="sign-out">Sign-out<a class="headerlink" href="#sign-out" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">firebaseApp</span><span class="p">.</span><span class="nx">auth</span><span class="p">().</span><span class="nx">signOut</span><span class="p">();</span>
+</pre></div>
+
+<h3 id="current-sign-in-user">Current sign-in user<a class="headerlink" href="#current-sign-in-user" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">user</span> <span class="o">=</span> <span class="nx">firebaseApp</span><span class="p">.</span><span class="nx">auth</span><span class="p">().</span><span class="nx">currentUser</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">(</span><span class="nx">user</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">displayName</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">email</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">email</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">photoUrl</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">photoURL</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">emailVerified</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">emailVerified</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">uid</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">uid</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+<h4 id="update-email">Update email<a class="headerlink" href="#update-email" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">user</span><span class="p">.</span><span class="nx">updateEmail</span><span class="p">(</span><span class="s1">&#39;...&#39;</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Update successful.</span>
+<span class="p">}).</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// An error happened.</span>
+<span class="p">});</span>
+</pre></div>
+
+<h4 id="update-profile">Update profile<a class="headerlink" href="#update-profile" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">user</span><span class="p">.</span><span class="nx">updateProfile</span><span class="p">({</span>
+    <span class="nx">displayName</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
+    <span class="nx">photoURL</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Update successful.</span>
+<span class="p">}).</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// An error happened.</span>
+<span class="p">});</span>
+</pre></div>
+
+<h4 id="send-a-verification-email">Send a verification email<a class="headerlink" href="#send-a-verification-email" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">user</span><span class="p">.</span><span class="nx">sendEmailVerification</span><span class="p">().</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// Email sent.</span>
+<span class="p">}).</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// An error happened.</span>
+<span class="p">});</span>
+</pre></div>
                 
                   
                 
@@ -2071,9 +2044,9 @@
                   <div id="disqus_thread"></div>
 <script>
   var disqus_config = function () {
-    this.page.url = "https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/firestore/index.html";
+    this.page.url = "https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/firebase-auth/index.html";
     this.page.identifier =
-      "/firestore/index.html";
+      "/firebase-auth/index.html";
   };
   (function() {
     var d = document, s = d.createElement("script");
@@ -2109,6 +2082,20 @@
             </div>
           </a>
         
+        
+          <a href="../firebase-firestore/index.html" title="Firestore" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Firestore
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
         
       </nav>
     </div>
