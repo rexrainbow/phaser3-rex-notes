@@ -165,12 +165,13 @@ var Canvas = new Phaser.Class({
         if (destCanvas.height !== srcCanvas.height) {
             destCanvas.height = srcCanvas.height;
         }
+        var destCtx = destCanvas.getContext('2d');
         destCtx.clearRect(0, 0, destCanvas.width, destCanvas.height);
         destCtx.drawImage(srcCanvas, 0, 0, destCanvas.width, destCanvas.height);
         this.dirty = true;
 
-        if (resize) {            
-            this.setSize(destCanvas.width/this.resolution, destCanvas.height/this.resolution);
+        if (resize) {
+            this.setSize(destCanvas.width / this.resolution, destCanvas.height / this.resolution);
         }
         return this;
     }
