@@ -1411,6 +1411,46 @@
             "title": "Compare with Graphics object"
         }, 
         {
+            "location": "/texture/index.html", 
+            "text": "Introduction\n\n\nTextures cache, built-in object of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nLoad texture\n\n\nscene\n.\nload\n.\nimage\n(\nkey\n,\n \nurl\n);\n\n\n\n\n\nReference: \nLoader\n\n\nRemove texture\n\n\nscene\n.\ntextures\n.\nremove\n(\nkey\n);\n\n\n\n\n\nRemove texture stored in texture cache.\n\n\nGet texture\n\n\nvar\n \ntexture\n \n=\n \nscene\n.\ntextures\n.\nget\n(\nkey\n);\n\n\nvar\n \nimage\n \n=\n \ntexture\n.\ngetSourceImage\n();\n\n\n// var width = image.width;\n\n\n// var height = image.height;\n\n\n\n\n\nCanvas texture\n\n\n\n\nCreate canvas texture\n    \nvar\n \ntexture\n \n=\n \nscene\n.\ntextures\n.\ncreateCanvas\n(\nkey\n,\n \nwidth\n,\n \nheight\n);\n\n\n\n\nGet canvas element\n    \nvar\n \ncanvas\n \n=\n \ntexture\n.\ngetSourceImage\n();\n\n\nvar\n \ncontext\n \n=\n \ncanvas\n.\ngetContext\n(\n2d\n);\n\n\n\n    \nCanvas api\n\n\nRefresh canvas texture\n    \ntexture\n.\nrefresh\n();\n\n\n\n\nGenerate\n    \nvar\n \nconfig\n \n=\n \n{\n\n    \ndata\n:\n \ndata\n,\n\n    \n// 3x3:\n\n    \n// [ \n...\n,\n\n    \n//   \n...\n,\n\n    \n//   \n...\n ]\n\n\n    \npixelWidth\n:\n \n1\n,\n    \n// pixel width of each data\n\n    \npixelHeight\n:\n \n1\n,\n   \n// pixel height of each data\n\n\n    \npreRender\n:\n \nnull\n,\n  \n// callback, function(canvas, ctx) {}\n\n    \npostRender\n:\n \nnull\n,\n \n// callback, function(canvas, ctx) {}\n\n\n    \ncanvas\n:\n \nnull\n,\n  \n// create a canvas if null\n\n    \nresizeCanvas\n:\n \ntrue\n,\n\n    \nclearCanvas\n:\n \ntrue\n\n\n};\n\n\nvar\n \ntexture\n \n=\n \nscene\n.\ntextures\n.\ngenerate\n(\nkey\n,\n \nconfig\n);\n\n\n\n\n\n\nGet pixel\n\n\nvar\n \ncolor\n \n=\n \nscene\n.\ntextures\n.\ngetPixel\n(\nx\n,\n \ny\n,\n \nkey\n);\n\n\n// var color = scene.textures.getPixel(x, y, key, frame);\n\n\n\n\n\nProperties of \ncolor\n\n\n\n\nr\n : 0 ~ 255\n\n\ng\n : 0 ~ 255\n\n\nb\n : 0 ~ 255\n\n\na\n : 0 ~ 255\n\n\ncolor\n : \ncolor\n integer\n\n\n\n\nvar\n \nalpha\n \n=\n \nscene\n.\ntextures\n.\ngetPixelAlpha\n(\nx\n,\n \ny\n,\n \nkey\n);\n\n\n// var alpha = scene.textures.getPixelAlpha(x, y, key, frame);\n\n\n\n\n\nalpha : 0 ~ 255\n\n\nReturn \nnull\n if the coordinates were out of bounds.", 
+            "title": "Texture"
+        }, 
+        {
+            "location": "/texture/index.html#introduction", 
+            "text": "Textures cache, built-in object of phaser.   Author: Richard Davey", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/texture/index.html#usage", 
+            "text": "", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/texture/index.html#load-texture", 
+            "text": "scene . load . image ( key ,   url );   Reference:  Loader", 
+            "title": "Load texture"
+        }, 
+        {
+            "location": "/texture/index.html#remove-texture", 
+            "text": "scene . textures . remove ( key );   Remove texture stored in texture cache.", 
+            "title": "Remove texture"
+        }, 
+        {
+            "location": "/texture/index.html#get-texture", 
+            "text": "var   texture   =   scene . textures . get ( key );  var   image   =   texture . getSourceImage ();  // var width = image.width;  // var height = image.height;", 
+            "title": "Get texture"
+        }, 
+        {
+            "location": "/texture/index.html#canvas-texture", 
+            "text": "Create canvas texture\n     var   texture   =   scene . textures . createCanvas ( key ,   width ,   height );   Get canvas element\n     var   canvas   =   texture . getSourceImage ();  var   context   =   canvas . getContext ( 2d );  \n     Canvas api  Refresh canvas texture\n     texture . refresh ();   Generate\n     var   config   =   { \n     data :   data , \n     // 3x3: \n     // [  ... , \n     //    ... , \n     //    ...  ] \n\n     pixelWidth :   1 ,      // pixel width of each data \n     pixelHeight :   1 ,     // pixel height of each data \n\n     preRender :   null ,    // callback, function(canvas, ctx) {} \n     postRender :   null ,   // callback, function(canvas, ctx) {} \n\n     canvas :   null ,    // create a canvas if null \n     resizeCanvas :   true , \n     clearCanvas :   true  };  var   texture   =   scene . textures . generate ( key ,   config );", 
+            "title": "Canvas texture"
+        }, 
+        {
+            "location": "/texture/index.html#get-pixel", 
+            "text": "var   color   =   scene . textures . getPixel ( x ,   y ,   key );  // var color = scene.textures.getPixel(x, y, key, frame);   Properties of  color   r  : 0 ~ 255  g  : 0 ~ 255  b  : 0 ~ 255  a  : 0 ~ 255  color  :  color  integer   var   alpha   =   scene . textures . getPixelAlpha ( x ,   y ,   key );  // var alpha = scene.textures.getPixelAlpha(x, y, key, frame);   alpha : 0 ~ 255  Return  null  if the coordinates were out of bounds.", 
+            "title": "Get pixel"
+        }, 
+        {
             "location": "/tilemap/index.html", 
             "text": "Introduction\n\n\nDisplay of tiles map, built-in game object of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nLoad tile map\n\n\nscene\n.\nload\n.\ntilemapWeltmeister\n(\nkey\n,\n \nurl\n);\n  \n// JSON\n\n\nscene\n.\nload\n.\ntilemapCSV\n(\nkey\n,\n \nurl\n);\n          \n// CSV\n\n\n\n\n\nAdd tile map object\n\n\n\n\nCreate tile map\n\n\nCreate map from tiled\n    \nvar\n \nmap\n \n=\n \nscene\n.\nadd\n.\ntilemap\n(\nkey\n);\n\n\n// var map = this.make.tilemap({ key: \nmap\n });\n\n\n\n\nCreate map from 2d array\n    \nvar\n \nconfig\n \n=\n \n{\n\n    \ndata\n:\n \ntileIdxArray\n,\n  \n// [ [], [], ... ]\n\n    \ntileWidth\n:\n \n32\n,\n\n    \ntileHeight\n:\n \n32\n,\n\n    \nwidth\n:\n \n10\n,\n\n    \nheight\n:\n \n10\n\n\n}\n\n\nvar\n \nmap\n \n=\n \nthis\n.\nmake\n.\ntilemap\n(\nconfig\n);\n\n\n\n\nCreate map from csv\n    \nvar\n \nconfig\n \n=\n \n{\n\n    \nkey\n:\n \nmap\n,\n     \n// csv file\n\n    \ntileWidth\n:\n \n32\n,\n\n    \ntileHeight\n:\n \n32\n\n\n}\n\n\nvar\n \nmap\n \n=\n \nthis\n.\nmake\n.\ntilemap\n(\nconfig\n);\n\n\n\n\n\n\n\n\nAdd tile set image\n    \nvar\n \ntileset\n \n=\n \nmap\n.\naddTilesetImage\n(\ntilesetName\n,\n \nkey\n);\n \n// key: texture key\n\n\n// var tileset = map.addTilesetImage(tilesetName);  // key = tilesetName\n\n\n// var tileset = map.addTilesetImage(tilesetName, key, tileWidth, tileHeight, tileMargin, tileSpacing, gid);\n\n\n\n\nCreate layer object to render tile image, a tile map object could have many layers. Layer object is a kind of game object.\n\n\nStatic\n    \nvar\n \nlayer\n \n=\n \nmap\n.\ncreateStaticLayer\n(\nlayerID\n,\n \ntileset\n);\n\n\n// var layer = map.createStaticLayer(layerID, tileset, x, y); // x, y : offset in pxiels\n\n\n\n\nDynamic\n    \nvar\n \nlayer\n \n=\n \nmap\n.\ncreateDynamicLayer\n(\nlayerID\n,\n \ntileset\n);\n\n\n// var layer = map.createDynamicLayer(layerID, tileset, x, y); // x, y : offset in pxiels\n\n\n\n\nBlank dynamic\n    \nvar\n \nlayer\n \n=\n \nmap\n.\ncreateBlankDynamicLayer\n(\nlayerID\n,\n \ntileset\n);\n\n\n// var layer = map.createBlankDynamicLayer(layerID, tileset, x, y); // x, y : offset in pxiels\n\n\n\n\n\n\n\n\nCreate sprite objects with tile ID (optional)\n    \nvar\n \nsprites\n \n=\n \nmap\n.\ncreateFromObjects\n(\nname\n,\n \nid\n,\n \nspriteConfig\n);\n\n\n// var sprites = map.createFromObjects(name, id, spriteConfig, scene);\n\n\n\n\nname: name of the object layer\n\n\nid: gid (number), or id (number), or name (string)\n\n\nspriteConfig: The config object to pass into the Sprite creator (i.e. \nscene.make.sprite\n). Extend spriteConfig with properties of object (\ntype\n, \nx\n, \ny\n, \nrotation\n, \nvisible\n, \nwidth\n, \nheight\n, ... etc)\n\n\n\n\n\n\n\n\nMap\n\n\nSelect current layer\n\n\nmap\n.\nsetLayer\n(\nlayer\n);\n  \n// layer name, layer index\n\n\n// map.layer = layer;\n\n\n\n\n\nSet tile size\n\n\nmap\n.\nsetBaseTileSize\n(\ntileWidth\n,\n \ntileHeight\n);\n\n\n\n\n\nDraw on graphics\n\n\nvar\n \nstyleConfig\n \n=\n \n{\n\n    \ntileColor\n:\n \nnew\n \nPhaser\n.\nDisplay\n.\nColor\n(\n105\n,\n \n210\n,\n \n231\n,\n \n150\n),\n         \n// null\n\n    \ncollidingTileColor\n:\n \nnew\n \nPhaser\n.\nDisplay\n.\nColor\n(\n243\n,\n \n134\n,\n \n48\n,\n \n200\n),\n \n// null\n\n    \nfaceColor\n:\n \nnew\n \nPhaser\n.\nDisplay\n.\nColor\n(\n40\n,\n \n39\n,\n \n37\n,\n \n150\n)\n             \n// null\n\n\n}\n\n\nmap\n.\nrenderDebug\n(\ngraphics\n,\n \nstyleConfig\n);\n\n\n// map.renderDebug(graphics, styleConfig, layer);\n\n\n\n\n\nTile\n\n\nGet tile\n\n\nvar\n \ntile\n \n=\n \nmap\n.\ngetTileAt\n(\ntileX\n,\n \ntileY\n);\n\n\n// var tile = map.getTileAt(tileX, tileY, true);  // return a Tile object with an index of -1 for empty tile\n\n\n\n\n\nGet tiles within\n\n\nvar\n \ntiles\n \n=\n \nmap\n.\ngetTilesWithin\n(\ntileX\n,\n \ntileY\n,\n \nwidth\n,\n \nheight\n);\n\n\n\n\n\nvar\n \nfilteringOptions\n \n=\n \n{\n\n    \n// isNotEmpty: false,\n\n    \n// isColliding: false,\n\n    \n// hasInterestingFace: false\n\n\n};\n\n\nvar\n \ntiles\n \n=\n \nmap\n.\ngetTilesWithin\n(\ntileX\n,\n \ntileY\n,\n \nwidth\n,\n \nheight\n,\n \nfilteringOptions\n);\n\n\n\n\n\nGet tiles within world XY\n\n\nvar\n \ntiles\n \n=\n \nmap\n.\ngetTilesWithinWorldXY\n(\nworldX\n,\n \nworldY\n,\n \nwidth\n,\n \nheight\n);\n\n\n// var tiles = map.getTilesWithinWorldXY(worldX, worldY, width, height, filteringOptions, camera, layer);\n\n\n\n\n\nGet tiles within shape\n\n\nvat\n \ntiles\n \n=\n \nmap\n.\ngetTilesWithinShape\n(\nshape\n);\n\n\n// vat tiles = map.getTilesWithinShape(shape, filteringOptions, camera, layer);\n\n\n\n\n\nShape:\n\n\n\n\nnew Phaser.Geom.Rectangle(x0, y0, width, height)\n\n\nnew Phaser.Geom.Line(x0, y0, x1, y1)\n\n\nnew Phaser.Geom.Circle(x, y, radius)\n\n\nnew Phaser.Geom.Triangle(x0, y0, x1, y1, x2, y2)\n\n\n\n\nFor each tile in layer\n\n\nvar\n \ncallback\n \n=\n \nfunction\n \n(\ntile\n)\n \n{\n \n/* ... */\n};\n\n\nmap\n.\nforEachTile\n(\ncallback\n,\n \ncontext\n);\n\n\n// map.forEachTile(callback, context, tileX, tileY, width, height, filteringOptions);\n\n\n\n\n\nvar\n \ncallback\n \n=\n \nfunction\n \n(\ntile\n)\n \n{\n \n/* ... */\n};\n\n\nlayer\n.\nforEachTile\n(\ncallback\n,\n \ncontext\n);\n\n\n// layer.forEachTile(callback, context, tileX, tileY, width, height, filteringOptions);\n\n\n\n\n\nTiled index\n\n\nvar\n \nindex\n \n=\n \ntile\n.\nindex\n;\n\n\n\n\n\ntile\n.\nindex\n \n=\n \nindex\n;\n\n\n\n\n\nProperties\n\n\nvar\n \nproperties\n \n=\n \ntile\n.\nproperties\n;\n  \n// object or null\n\n\nvar\n \nvalue\n \n=\n \nproperties\n[\nkey\n];\n\n\n\n\n\ntile\n.\nproperties\n[\nkey\n]\n \n=\n \nvalue\n;\n\n\n\n\n\nTile at world XY\n\n\nWorld XY at map\n\n\nvar\n \nhasTile\n \n=\n \nmap\n.\nhasTileAtWorldXY\n(\nworldX\n,\n \nworldY\n);\n  \n// true/false\n\n\n// hasTile = map.hasTileAtWorldXY(worldX, worldY, camera, layer);\n\n\n\n\n\nXY at layer\n\n\nvar\n \nhasTile\n \n=\n \nlayer\n.\nhasTileAtWorldXY\n(\nworldX\n,\n \nworldY\n);\n  \n// true/false\n\n\n// hasTile = layer.hasTileAtWorldXY(worldX, worldY, camera);\n\n\n\n\n\nCollision\n\n\nEnable collision\n\n\nmap\n.\nsetCollision\n(\nindex\n);\n   \n// indexes: tile index\n\n\nmap\n.\nsetCollision\n(\nindexes\n);\n \n// indexes: an array of tile index\n\n\nmap\n.\nsetCollisionBetween\n(\nstart\n,\n \nstop\n);\n \n// indexes from `start` to `stop`\n\n\nmap\n.\nsetCollisionByExclusion\n(\nindexes\n);\n \n// indexes: an array of tile index\n\n\nmap\n.\nsetCollisionByProperty\n({\nkey\n:\nvalue\n});\n  \n// enable collision if value of tile property \nkey\n is equal to \nvalue\n\n\nmap\n.\nsetCollisionFromCollisionGroup\n();\n  \n// set by collision group data in tileset collision editor\n\n\n\n\n\nCollision editor\n\n\nDisable collision\n\n\nmap\n.\nsetCollision\n(\nindex\n,\n \nfalse\n);\n\n\nmap\n.\nsetCollision\n(\nindexes\n,\n \nfalse\n);\n\n\nmap\n.\nsetCollisionBetween\n(\nstart\n,\n \nstop\n,\n \nfalse\n);\n\n\nmap\n.\nsetCollisionByProperty\n({\nkey\n:\nvalue\n},\n \nfalse\n);\n\n\nmap\n.\nsetCollisionFromCollisionGroup\n(\nfalse\n);\n\n\n\n\n\nTile set\n\n\nGet collision group\n\n\nvar\n \ncollisionGroup\n \n=\n \ntileset\n.\ngetTileCollisionGroup\n(\ntile\n.\nindex\n);\n \n// array of collision shapes, or null\n\n\n\n\n\nTypes of collision shape (\ncollisionGroup.objects\n)\n\n\n\n\nobject.rectangle (object.x, object.y, object.width, object.height)\n\n\nobject.ellipse (object.x, object.y, object.width, object.height)\n\n\nobject.polygon (object.x, object.y, [{x,y}, {x,y}, ...])\n\n\nobject.polyline (object.x, object.y, [{x,y}, {x,y}, ...])\n\n\n\n\nChange texture of tileset\n\n\nvar\n \ntexture\n \n=\n \nscene\n.\nsys\n.\ntextures\n.\nget\n(\nkey\n);\n\n\ntileset\n.\nsetImage\n(\ntexture\n);\n\n\n\n\n\nDynamic layer\n\n\nFill tiles\n\n\nmap\n.\nfill\n(\nindex\n);\n\n\n// map.fill(index, tileX, tileY, width, height);\n\n\n\n\n\nlayer\n.\nfill\n(\nindex\n);\n\n\n// layer.fill(index, tileX, tileY, width, height);\n\n\n\n\n\nRandomize\n\n\nmap\n.\nrandomize\n(\ntileX\n,\n \ntileY\n,\n \nwidth\n,\n \nheight\n,\n \nindexes\n);\n \n// indexes: array of tile index\n\n\n\n\n\nlayer\n.\nrandomize\n(\ntileX\n,\n \ntileY\n,\n \nwidth\n,\n \nheight\n,\n \nindexes\n);\n\n\n\n\n\nvar\n \nweightedIndexes\n \n=\n \n[\n\n    \n{\n \nindex\n:\n \n0\n,\n \nweight\n:\n \n4\n \n},\n\n    \n{\n \nindex\n:\n \n[\n0\n,\n \n1\n],\n \nweight\n:\n \n4\n \n}\n\n\n]\n\n\nmap\n.\nweightedRandomize\n(\ntileX\n,\n \ntileY\n,\n \nwidth\n,\n \nheight\n,\n \nweightedIndexes\n);\n \n// weightedIndexes: [{index, weight}, ...]\n\n\n\n\n\nCopy tiles\n\n\nmap\n.\ncopy\n(\nsrcTileX\n,\n \nsrcTileY\n,\n \nwidth\n,\n \nheight\n,\n \ndestTileX\n,\n \ndestTileY\n);\n \n// indexes: array of tile index\n\n\n\n\n\nPut tile at\n\n\nmap\n.\nputTileAt\n(\ntile\n,\n \ntileX\n,\n \ntileY\n);\n  \n// tile: Tile object or tile index\n\n\n\n\n\nmap\n.\nputTilesAt\n(\ntilesArray\n,\n \ntileX\n,\n \ntileY\n);\n  \n// tilesArray: 1d/2d array of Tile object or tile index\n\n\n\n\n\nReplace tiles\n\n\nmap\n.\nreplaceByIndex\n(\nfindIndex\n,\n \nnewIndex\n);\n\n\n// map.replaceByIndex(findIndex, newIndex, tileX, tileY, width, height, layer);\n\n\n\n\n\nSwap tiles\n\n\nmap\n.\nreplaceByIndex\n(\nindexA\n,\n \nindexB\n);\n\n\n// map.replaceByIndex(indexA, indexB, tileX, tileY, width, height, layer);\n\n\n\n\n\nShuffle tiles\n\n\nmap\n.\nshuffle\n();\n\n\n// map.shuffle(tileX, tileY, width, height, layer);\n\n\n\n\n\nConvert to static layer\n\n\nstaticLayer\n \n=\n \nmap\n.\nconvertLayerToStatic\n(\ndynamicLayer\n);\n\n\n\n\n\ndynamicLayer will be destroyed.", 
             "title": "Tile map"
@@ -3671,6 +3711,41 @@
             "title": "Other methods"
         }, 
         {
+            "location": "/distance/index.html", 
+            "text": "Introduction\n\n\nGet distance, built-in methods of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\n\n\nGet distance between 2 points\n    \nvar\n \nd\n \n=\n \nPhaser\n.\nMath\n.\nDistance\n.\nBetween\n(\nx1\n,\n \ny1\n,\n \nx2\n,\n \ny2\n);\n\n\n\n\nGet speed\n    \nvar\n \nd\n \n=\n \nPhaser\n.\nMath\n.\nGetSpeed\n(\ndistance\n,\n \ntime\n);\n\n\n\n\ndistance : The distance to travel in pixels.\n\n\ntime : The time, in ms, to cover the distance in.", 
+            "title": "Distance"
+        }, 
+        {
+            "location": "/distance/index.html#introduction", 
+            "text": "Get distance, built-in methods of phaser.   Author: Richard Davey", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/distance/index.html#usage", 
+            "text": "Get distance between 2 points\n     var   d   =   Phaser . Math . Distance . Between ( x1 ,   y1 ,   x2 ,   y2 );   Get speed\n     var   d   =   Phaser . Math . GetSpeed ( distance ,   time );   distance : The distance to travel in pixels.  time : The time, in ms, to cover the distance in.", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/angle/index.html", 
+            "text": "Introduction\n\n\nConvert angle value, built-in methods of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nDegree \n-\n Radians\n\n\n\n\nDegree to radians\n    \nvar\n \nrad\n \n=\n \nPhaser\n.\nMath\n.\nDegToRad\n(\ndeg\n);\n\n\n\n\nRadians to degree\n   \nvar\n \ndeg\n \n=\n \nPhaser\n.\nMath\n.\nRadToDeg\n(\nrad\n);\n  \n// deg : -180 ~ 180\n\n\n\n\nAngle from (0,0) to vector (x2 - x1 , y2 - y1)\n   \nvar\n \nrad\n \n=\n \nPhaser\n.\nMath\n.\nAngle\n.\nBetween\n(\nx1\n,\n \ny1\n,\n \nx2\n,\n \ny2\n)\n\n\n\n   \nvar\n \nrad\n \n=\n \nPhaser\n.\nMath\n.\nAngle\n.\nBetweenPoints\n(\npoint1\n,\n \npoint2\n);", 
+            "title": "Angle"
+        }, 
+        {
+            "location": "/angle/index.html#introduction", 
+            "text": "Convert angle value, built-in methods of phaser.   Author: Richard Davey", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/angle/index.html#usage", 
+            "text": "", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/angle/index.html#degree-radians", 
+            "text": "Degree to radians\n     var   rad   =   Phaser . Math . DegToRad ( deg );   Radians to degree\n    var   deg   =   Phaser . Math . RadToDeg ( rad );    // deg : -180 ~ 180   Angle from (0,0) to vector (x2 - x1 , y2 - y1)\n    var   rad   =   Phaser . Math . Angle . Between ( x1 ,   y1 ,   x2 ,   y2 )  \n    var   rad   =   Phaser . Math . Angle . BetweenPoints ( point1 ,   point2 );", 
+            "title": "Degree &lt;-&gt; Radians"
+        }, 
+        {
             "location": "/random/index.html", 
             "text": "Introduction\n\n\nGet random value, built-in methods of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nGet random integer between (min, max)\n\n\nvar\n \nvalue\n \n=\n \nPhaser\n.\nMath\n.\nBetween\n(\nmin\n,\n \nmax\n);\n\n\n\n\n\nGet random vector\n\n\nvar\n \nvec\n \n=\n \nPhaser\n.\nMath\n.\nRandomXY\n(\nvec\n);\n    \n// return vec {x, y}\n\n\n// var vec = Phaser.Math.RandomXY(vec, scale);\n\n\n\n\n\nGet random item\n\n\nvar\n \nitem\n \n=\n \nPhaser\n.\nUtils\n.\nArray\n.\nGetRandom\n(\narray\n);\n\n\n// var item = Phaser.Utils.Array.GetRandom(array, startIndex, length);\n\n\n\n\n\nRemove random item\n\n\nvar\n \nitem\n \n=\n \nPhaser\n.\nUtils\n.\nArray\n.\nRemoveRandomElement\n(\narray\n);\n\n\n\n\n\nShuffle\n\n\nvar\n \narr\n \n=\n \nPhaser\n.\nUtils\n.\nArray\n.\nShuffle\n(\narray\n);", 
             "title": "Random number"
@@ -3829,6 +3904,31 @@
             "location": "/gashapon/index.html#get-items_1", 
             "text": "var   items   =   gashapon . getItems ();", 
             "title": "Get items"
+        }, 
+        {
+            "location": "/color/index.html", 
+            "text": "Introduction\n\n\nGet color value, built-in methods of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nGet color integer\n\n\n\n\nRGB to color\n    \nvar\n \ncolor\n \n=\n \nPhaser\n.\nDisplay\n.\nColor\n.\nGetColor\n(\nred\n,\n \ngreen\n,\n \nblue\n);\n\n\n\n\nred, green, blue : 0 ~ 255\n\n\n\n\n\n\nRGBA to color\n    \nvar\n \ncolor\n \n=\n \nPhaser\n.\nDisplay\n.\nColor\n.\nGetColor32\n(\nred\n,\n \ngreen\n,\n \nblue\n,\n \nalpha\n);\n\n\n\n\nred, green, blue, alpha : 0 ~ 255\n\n\n\n\n\n\nHex string to color\n    \nvar\n \ncolor\n \n=\n \nPhaser\n.\nDisplay\n.\nColor\n.\nHexStringToColor\n(\nhex\n).\ncolor\n;\n\n\n\n\nhex : \n#0033ff\n, \n#03f\n, \n0x0033ff\n, or \n0x03f\n\n\n\n\n\n\nRGB string to color\n    \nvar\n \ncolor\n \n=\n \nPhaser\n.\nDisplay\n.\nColor\n.\nRGBStringToColor\n(\nrgb\n);\n \n\n\n\nrgb : \n'rgb(r,g,b)'\n, or \n'rgba(r,g,b,a)'\n\n\nr, g, b : 0 ~ 255\n\n\na : 0 ~ 1\n\n\n\n\n\n\n\n\n\n\nHSV to color\n    \nvar\n \ncolor\n \n=\n \nPhaser\n.\nDisplay\n.\nColor\n.\nHSVToRGB\n(\nh\n,\n \ns\n,\n \nv\n).\ncolor\n;\n\n\n\n\nh, s, v : 0 ~ 1\n\n\n\n\n\n\n\n\nHSV color wheel\n\n\nvar\n \ncolorArray\n \n=\n \nPhaser\n.\nDisplay\n.\nColor\n.\nHSVColorWheel\n(\ns\n,\n \nv\n);\n\n\n\n\n\nGet color\n\nvar\n \ncolor\n \n=\n \ncolorArray\n[\ni\n].\ncolor\n;\n  \n// i : 0 ~ 359", 
+            "title": "Color"
+        }, 
+        {
+            "location": "/color/index.html#introduction", 
+            "text": "Get color value, built-in methods of phaser.   Author: Richard Davey", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/color/index.html#usage", 
+            "text": "", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/color/index.html#get-color-integer", 
+            "text": "RGB to color\n     var   color   =   Phaser . Display . Color . GetColor ( red ,   green ,   blue );   red, green, blue : 0 ~ 255    RGBA to color\n     var   color   =   Phaser . Display . Color . GetColor32 ( red ,   green ,   blue ,   alpha );   red, green, blue, alpha : 0 ~ 255    Hex string to color\n     var   color   =   Phaser . Display . Color . HexStringToColor ( hex ). color ;   hex :  #0033ff ,  #03f ,  0x0033ff , or  0x03f    RGB string to color\n     var   color   =   Phaser . Display . Color . RGBStringToColor ( rgb );    rgb :  'rgb(r,g,b)' , or  'rgba(r,g,b,a)'  r, g, b : 0 ~ 255  a : 0 ~ 1      HSV to color\n     var   color   =   Phaser . Display . Color . HSVToRGB ( h ,   s ,   v ). color ;   h, s, v : 0 ~ 1", 
+            "title": "Get color integer"
+        }, 
+        {
+            "location": "/color/index.html#hsv-color-wheel", 
+            "text": "var   colorArray   =   Phaser . Display . Color . HSVColorWheel ( s ,   v );   Get color var   color   =   colorArray [ i ]. color ;    // i : 0 ~ 359", 
+            "title": "HSV color wheel"
         }, 
         {
             "location": "/format/index.html", 

@@ -32,6 +32,7 @@ pages:
     - Canvas:
         - Graphics: graphics.md
         - Canvas: canvas.md
+    - Texture: texture.md
     - Tile map:
         - Tile map: tilemap.md
     - Container:
@@ -74,9 +75,12 @@ pages:
 - Camera:
     - Camera: camera.md
 - Math:
+    - Distance: distance.md
+    - Angle: angle.md
     - Random:
         - Random number: random.md
         - Gashapon: gashapon.md
+    - Color: color.md
 - String:
     - Format: format.md
     - Mustache: mustache.md
