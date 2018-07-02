@@ -702,22 +702,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#load-texture" title="Load texture" class="md-nav__link">
-    Load texture
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#remove-texture" title="Remove texture" class="md-nav__link">
-    Remove texture
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-texture" title="Get texture" class="md-nav__link">
-    Get texture
+  <a href="#image-texture" title="Image texture" class="md-nav__link">
+    Image texture
   </a>
   
 </li>
@@ -732,6 +718,20 @@
           <li class="md-nav__item">
   <a href="#get-pixel" title="Get pixel" class="md-nav__link">
     Get pixel
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#has-key" title="Has key" class="md-nav__link">
+    Has key
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-texture" title="Remove texture" class="md-nav__link">
+    Remove texture
   </a>
   
 </li>
@@ -1805,22 +1805,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#load-texture" title="Load texture" class="md-nav__link">
-    Load texture
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#remove-texture" title="Remove texture" class="md-nav__link">
-    Remove texture
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-texture" title="Get texture" class="md-nav__link">
-    Get texture
+  <a href="#image-texture" title="Image texture" class="md-nav__link">
+    Image texture
   </a>
   
 </li>
@@ -1835,6 +1821,20 @@
           <li class="md-nav__item">
   <a href="#get-pixel" title="Get pixel" class="md-nav__link">
     Get pixel
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#has-key" title="Has key" class="md-nav__link">
+    Has key
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-texture" title="Remove texture" class="md-nav__link">
+    Remove texture
   </a>
   
 </li>
@@ -1875,23 +1875,19 @@
 <li>Author: Richard Davey</li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<h3 id="load-texture">Load texture<a class="headerlink" href="#load-texture" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">image</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
+<h3 id="image-texture">Image texture<a class="headerlink" href="#image-texture" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Load image texture
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">image</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
 </pre></div>
-
-<p>Reference: <a href="../loader/index.html#image">Loader</a></p>
-<h3 id="remove-texture">Remove texture<a class="headerlink" href="#remove-texture" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</pre></div>
-
-<p>Remove texture stored in texture cache.</p>
-<h3 id="get-texture">Get texture<a class="headerlink" href="#get-texture" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">texture</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+    Reference: <a href="../loader/index.html#image">Loader</a></li>
+<li>Get image texture
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">texture</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="nx">texture</span><span class="p">.</span><span class="nx">getSourceImage</span><span class="p">();</span>
 <span class="c1">// var width = image.width;</span>
 <span class="c1">// var height = image.height;</span>
-</pre></div>
-
+</pre></div></li>
+</ul>
 <h3 id="canvas-texture">Canvas texture<a class="headerlink" href="#canvas-texture" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Create canvas texture
@@ -1902,6 +1898,21 @@
 <span class="kd">var</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">canvas</span><span class="p">.</span><span class="nx">getContext</span><span class="p">(</span><span class="s1">&#39;2d&#39;</span><span class="p">);</span>
 </pre></div>
     <a href="https://www.w3schools.com/html/html5_canvas.asp">Canvas api</a></li>
+<li>Copy image to canvas
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">srcKey</span><span class="p">).</span><span class="nx">getSourceImage</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">canvas</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">createCanvas</span><span class="p">(</span><span class="nx">destKey</span><span class="p">,</span> <span class="nx">image</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span> <span class="nx">image</span><span class="p">.</span><span class="nx">height</span><span class="p">).</span><span class="nx">getSourceImage</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">canvas</span><span class="p">.</span><span class="nx">getContext</span><span class="p">(</span><span class="s1">&#39;2d&#39;</span><span class="p">);</span>
+<span class="nx">context</span><span class="p">.</span><span class="nx">drawImage</span><span class="p">(</span><span class="nx">image</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="c1">// var pixels = context.getImageData(0, 0, image.width, image.height);  // 1d array. [r,g,b,a,r,g,b,a,...]</span>
+</pre></div><ul>
+<li>Create canvas from canvas pool
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">canvas</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Display</span><span class="p">.</span><span class="nx">Canvas</span><span class="p">.</span><span class="nx">Pool</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">parent</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+</pre></div></li>
+<li>Release canvas
+    <div class="codehilite"><pre><span></span><span class="nx">CanvasPool</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">canvas</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+</li>
 <li>Refresh canvas texture
     <div class="codehilite"><pre><span></span><span class="nx">texture</span><span class="p">.</span><span class="nx">refresh</span><span class="p">();</span>
 </pre></div></li>
@@ -1945,6 +1956,15 @@
 
 <p>alpha : 0 ~ 255</p>
 <p>Return <code>null</code> if the coordinates were out of bounds.</p>
+<h3 id="has-key">Has key<a class="headerlink" href="#has-key" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">hasKey</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">exists</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</pre></div>
+
+<h3 id="remove-texture">Remove texture<a class="headerlink" href="#remove-texture" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</pre></div>
+
+<p>Remove texture stored in texture cache.</p>
                 
                   
                 

@@ -1412,7 +1412,7 @@
         }, 
         {
             "location": "/texture/index.html", 
-            "text": "Introduction\n\n\nTextures cache, built-in object of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nLoad texture\n\n\nscene\n.\nload\n.\nimage\n(\nkey\n,\n \nurl\n);\n\n\n\n\n\nReference: \nLoader\n\n\nRemove texture\n\n\nscene\n.\ntextures\n.\nremove\n(\nkey\n);\n\n\n\n\n\nRemove texture stored in texture cache.\n\n\nGet texture\n\n\nvar\n \ntexture\n \n=\n \nscene\n.\ntextures\n.\nget\n(\nkey\n);\n\n\nvar\n \nimage\n \n=\n \ntexture\n.\ngetSourceImage\n();\n\n\n// var width = image.width;\n\n\n// var height = image.height;\n\n\n\n\n\nCanvas texture\n\n\n\n\nCreate canvas texture\n    \nvar\n \ntexture\n \n=\n \nscene\n.\ntextures\n.\ncreateCanvas\n(\nkey\n,\n \nwidth\n,\n \nheight\n);\n\n\n\n\nGet canvas element\n    \nvar\n \ncanvas\n \n=\n \ntexture\n.\ngetSourceImage\n();\n\n\nvar\n \ncontext\n \n=\n \ncanvas\n.\ngetContext\n(\n2d\n);\n\n\n\n    \nCanvas api\n\n\nRefresh canvas texture\n    \ntexture\n.\nrefresh\n();\n\n\n\n\nGenerate\n    \nvar\n \nconfig\n \n=\n \n{\n\n    \ndata\n:\n \ndata\n,\n\n    \n// 3x3:\n\n    \n// [ \n...\n,\n\n    \n//   \n...\n,\n\n    \n//   \n...\n ]\n\n\n    \npixelWidth\n:\n \n1\n,\n    \n// pixel width of each data\n\n    \npixelHeight\n:\n \n1\n,\n   \n// pixel height of each data\n\n\n    \npreRender\n:\n \nnull\n,\n  \n// callback, function(canvas, ctx) {}\n\n    \npostRender\n:\n \nnull\n,\n \n// callback, function(canvas, ctx) {}\n\n\n    \ncanvas\n:\n \nnull\n,\n  \n// create a canvas if null\n\n    \nresizeCanvas\n:\n \ntrue\n,\n\n    \nclearCanvas\n:\n \ntrue\n\n\n};\n\n\nvar\n \ntexture\n \n=\n \nscene\n.\ntextures\n.\ngenerate\n(\nkey\n,\n \nconfig\n);\n\n\n\n\n\n\nGet pixel\n\n\nvar\n \ncolor\n \n=\n \nscene\n.\ntextures\n.\ngetPixel\n(\nx\n,\n \ny\n,\n \nkey\n);\n\n\n// var color = scene.textures.getPixel(x, y, key, frame);\n\n\n\n\n\nProperties of \ncolor\n\n\n\n\nr\n : 0 ~ 255\n\n\ng\n : 0 ~ 255\n\n\nb\n : 0 ~ 255\n\n\na\n : 0 ~ 255\n\n\ncolor\n : \ncolor\n integer\n\n\n\n\nvar\n \nalpha\n \n=\n \nscene\n.\ntextures\n.\ngetPixelAlpha\n(\nx\n,\n \ny\n,\n \nkey\n);\n\n\n// var alpha = scene.textures.getPixelAlpha(x, y, key, frame);\n\n\n\n\n\nalpha : 0 ~ 255\n\n\nReturn \nnull\n if the coordinates were out of bounds.", 
+            "text": "Introduction\n\n\nTextures cache, built-in object of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nImage texture\n\n\n\n\nLoad image texture\n    \nscene\n.\nload\n.\nimage\n(\nkey\n,\n \nurl\n);\n\n\n\n    Reference: \nLoader\n\n\nGet image texture\n    \nvar\n \ntexture\n \n=\n \nscene\n.\ntextures\n.\nget\n(\nkey\n);\n\n\nvar\n \nimage\n \n=\n \ntexture\n.\ngetSourceImage\n();\n\n\n// var width = image.width;\n\n\n// var height = image.height;\n\n\n\n\n\n\nCanvas texture\n\n\n\n\nCreate canvas texture\n    \nvar\n \ntexture\n \n=\n \nscene\n.\ntextures\n.\ncreateCanvas\n(\nkey\n,\n \nwidth\n,\n \nheight\n);\n\n\n\n\nGet canvas element\n    \nvar\n \ncanvas\n \n=\n \ntexture\n.\ngetSourceImage\n();\n\n\nvar\n \ncontext\n \n=\n \ncanvas\n.\ngetContext\n(\n2d\n);\n\n\n\n    \nCanvas api\n\n\nCopy image to canvas\n    \nvar\n \nimage\n \n=\n \nscene\n.\ntextures\n.\nget\n(\nsrcKey\n).\ngetSourceImage\n();\n\n\nvar\n \ncanvas\n \n=\n \nscene\n.\ntextures\n.\ncreateCanvas\n(\ndestKey\n,\n \nimage\n.\nwidth\n,\n \nimage\n.\nheight\n).\ngetSourceImage\n();\n\n\nvar\n \ncontext\n \n=\n \ncanvas\n.\ngetContext\n(\n2d\n);\n\n\ncontext\n.\ndrawImage\n(\nimage\n,\n \n0\n,\n \n0\n);\n\n\n// var pixels = context.getImageData(0, 0, image.width, image.height);  // 1d array. [r,g,b,a,r,g,b,a,...]\n\n\n\n\nCreate canvas from canvas pool\n    \nvar\n \ncanvas\n \n=\n \nPhaser\n.\nDisplay\n.\nCanvas\n.\nPool\n.\ncreate\n(\nparent\n,\n \nwidth\n,\n \nheight\n);\n\n\n\n\nRelease canvas\n    \nCanvasPool\n.\nremove\n(\ncanvas\n);\n\n\n\n\n\n\n\n\nRefresh canvas texture\n    \ntexture\n.\nrefresh\n();\n\n\n\n\nGenerate\n    \nvar\n \nconfig\n \n=\n \n{\n\n    \ndata\n:\n \ndata\n,\n\n    \n// 3x3:\n\n    \n// [ \n...\n,\n\n    \n//   \n...\n,\n\n    \n//   \n...\n ]\n\n\n    \npixelWidth\n:\n \n1\n,\n    \n// pixel width of each data\n\n    \npixelHeight\n:\n \n1\n,\n   \n// pixel height of each data\n\n\n    \npreRender\n:\n \nnull\n,\n  \n// callback, function(canvas, ctx) {}\n\n    \npostRender\n:\n \nnull\n,\n \n// callback, function(canvas, ctx) {}\n\n\n    \ncanvas\n:\n \nnull\n,\n  \n// create a canvas if null\n\n    \nresizeCanvas\n:\n \ntrue\n,\n\n    \nclearCanvas\n:\n \ntrue\n\n\n};\n\n\nvar\n \ntexture\n \n=\n \nscene\n.\ntextures\n.\ngenerate\n(\nkey\n,\n \nconfig\n);\n\n\n\n\n\n\nGet pixel\n\n\nvar\n \ncolor\n \n=\n \nscene\n.\ntextures\n.\ngetPixel\n(\nx\n,\n \ny\n,\n \nkey\n);\n\n\n// var color = scene.textures.getPixel(x, y, key, frame);\n\n\n\n\n\nProperties of \ncolor\n\n\n\n\nr\n : 0 ~ 255\n\n\ng\n : 0 ~ 255\n\n\nb\n : 0 ~ 255\n\n\na\n : 0 ~ 255\n\n\ncolor\n : \ncolor\n integer\n\n\n\n\nvar\n \nalpha\n \n=\n \nscene\n.\ntextures\n.\ngetPixelAlpha\n(\nx\n,\n \ny\n,\n \nkey\n);\n\n\n// var alpha = scene.textures.getPixelAlpha(x, y, key, frame);\n\n\n\n\n\nalpha : 0 ~ 255\n\n\nReturn \nnull\n if the coordinates were out of bounds.\n\n\nHas key\n\n\nvar\n \nhasKey\n \n=\n \nscene\n.\ntextures\n.\nexists\n(\nkey\n);\n\n\n\n\n\nRemove texture\n\n\nscene\n.\ntextures\n.\nremove\n(\nkey\n);\n\n\n\n\n\nRemove texture stored in texture cache.", 
             "title": "Texture"
         }, 
         {
@@ -1426,29 +1426,29 @@
             "title": "Usage"
         }, 
         {
-            "location": "/texture/index.html#load-texture", 
-            "text": "scene . load . image ( key ,   url );   Reference:  Loader", 
-            "title": "Load texture"
-        }, 
-        {
-            "location": "/texture/index.html#remove-texture", 
-            "text": "scene . textures . remove ( key );   Remove texture stored in texture cache.", 
-            "title": "Remove texture"
-        }, 
-        {
-            "location": "/texture/index.html#get-texture", 
-            "text": "var   texture   =   scene . textures . get ( key );  var   image   =   texture . getSourceImage ();  // var width = image.width;  // var height = image.height;", 
-            "title": "Get texture"
+            "location": "/texture/index.html#image-texture", 
+            "text": "Load image texture\n     scene . load . image ( key ,   url );  \n    Reference:  Loader  Get image texture\n     var   texture   =   scene . textures . get ( key );  var   image   =   texture . getSourceImage ();  // var width = image.width;  // var height = image.height;", 
+            "title": "Image texture"
         }, 
         {
             "location": "/texture/index.html#canvas-texture", 
-            "text": "Create canvas texture\n     var   texture   =   scene . textures . createCanvas ( key ,   width ,   height );   Get canvas element\n     var   canvas   =   texture . getSourceImage ();  var   context   =   canvas . getContext ( 2d );  \n     Canvas api  Refresh canvas texture\n     texture . refresh ();   Generate\n     var   config   =   { \n     data :   data , \n     // 3x3: \n     // [  ... , \n     //    ... , \n     //    ...  ] \n\n     pixelWidth :   1 ,      // pixel width of each data \n     pixelHeight :   1 ,     // pixel height of each data \n\n     preRender :   null ,    // callback, function(canvas, ctx) {} \n     postRender :   null ,   // callback, function(canvas, ctx) {} \n\n     canvas :   null ,    // create a canvas if null \n     resizeCanvas :   true , \n     clearCanvas :   true  };  var   texture   =   scene . textures . generate ( key ,   config );", 
+            "text": "Create canvas texture\n     var   texture   =   scene . textures . createCanvas ( key ,   width ,   height );   Get canvas element\n     var   canvas   =   texture . getSourceImage ();  var   context   =   canvas . getContext ( 2d );  \n     Canvas api  Copy image to canvas\n     var   image   =   scene . textures . get ( srcKey ). getSourceImage ();  var   canvas   =   scene . textures . createCanvas ( destKey ,   image . width ,   image . height ). getSourceImage ();  var   context   =   canvas . getContext ( 2d );  context . drawImage ( image ,   0 ,   0 );  // var pixels = context.getImageData(0, 0, image.width, image.height);  // 1d array. [r,g,b,a,r,g,b,a,...]   Create canvas from canvas pool\n     var   canvas   =   Phaser . Display . Canvas . Pool . create ( parent ,   width ,   height );   Release canvas\n     CanvasPool . remove ( canvas );     Refresh canvas texture\n     texture . refresh ();   Generate\n     var   config   =   { \n     data :   data , \n     // 3x3: \n     // [  ... , \n     //    ... , \n     //    ...  ] \n\n     pixelWidth :   1 ,      // pixel width of each data \n     pixelHeight :   1 ,     // pixel height of each data \n\n     preRender :   null ,    // callback, function(canvas, ctx) {} \n     postRender :   null ,   // callback, function(canvas, ctx) {} \n\n     canvas :   null ,    // create a canvas if null \n     resizeCanvas :   true , \n     clearCanvas :   true  };  var   texture   =   scene . textures . generate ( key ,   config );", 
             "title": "Canvas texture"
         }, 
         {
             "location": "/texture/index.html#get-pixel", 
             "text": "var   color   =   scene . textures . getPixel ( x ,   y ,   key );  // var color = scene.textures.getPixel(x, y, key, frame);   Properties of  color   r  : 0 ~ 255  g  : 0 ~ 255  b  : 0 ~ 255  a  : 0 ~ 255  color  :  color  integer   var   alpha   =   scene . textures . getPixelAlpha ( x ,   y ,   key );  // var alpha = scene.textures.getPixelAlpha(x, y, key, frame);   alpha : 0 ~ 255  Return  null  if the coordinates were out of bounds.", 
             "title": "Get pixel"
+        }, 
+        {
+            "location": "/texture/index.html#has-key", 
+            "text": "var   hasKey   =   scene . textures . exists ( key );", 
+            "title": "Has key"
+        }, 
+        {
+            "location": "/texture/index.html#remove-texture", 
+            "text": "scene . textures . remove ( key );   Remove texture stored in texture cache.", 
+            "title": "Remove texture"
         }, 
         {
             "location": "/tilemap/index.html", 
