@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/drag/index.html">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/quad/index.html">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Drag - Notes of Phaser 3</title>
+        <title>Quad - Notes of Phaser 3</title>
       
     
     
@@ -104,7 +104,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Drag
+                Quad
               </span>
             
           
@@ -245,12 +245,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
     
     <label class="md-nav__link" for="nav-3">
       Input
@@ -278,12 +276,10 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-2" type="checkbox" id="nav-3-2" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-2" type="checkbox" id="nav-3-2">
     
     <label class="md-nav__link" for="nav-3-2">
       Touch
@@ -323,134 +319,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="toc">
-        Drag
-      </label>
-    
-    <a href="index.html" title="Drag" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../drag/index.html" title="Drag" class="md-nav__link">
       Drag
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#source-code" title="Source code" class="md-nav__link">
-    Source code
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#import-class" title="Import class" class="md-nav__link">
-    Import class
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
-    Install global plugin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#dragging-events" title="Dragging events" class="md-nav__link">
-    Dragging events
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-dragging-state" title="Get dragging state" class="md-nav__link">
-    Get dragging state
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set-rotation-of-axis" title="Set rotation of axis" class="md-nav__link">
-    Set rotation of axis
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set-axis-mode" title="Set axis mode" class="md-nav__link">
-    Set axis mode
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#try-drag" title="Try drag" class="md-nav__link">
-    Try drag
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#drop" title="Drop" class="md-nav__link">
-    Drop
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-        <li class="md-nav__item">
-          <a href="#__comments" title="Comments" class="md-nav__link md-nav__link--active">
-            Comments
-          </a>
-        </li>
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -576,10 +449,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
     
     <label class="md-nav__link" for="nav-5">
       Game object
@@ -607,10 +482,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2" type="checkbox" id="nav-5-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2" type="checkbox" id="nav-5-2" checked>
     
     <label class="md-nav__link" for="nav-5-2">
       Sprite
@@ -650,11 +527,119 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../quad/index.html" title="Quad" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Quad
+      </label>
+    
+    <a href="index.html" title="Quad" class="md-nav__link md-nav__link--active">
       Quad
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-texture" title="Load texture" class="md-nav__link">
+    Load texture
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-quad-object" title="Add quad object" class="md-nav__link">
+    Add quad object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#properties-of-corner-points" title="Properties of corner points" class="md-nav__link">
+    Properties of corner points
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#position" title="Position" class="md-nav__link">
+    Position
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alpha" title="Alpha" class="md-nav__link">
+    Alpha
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#color" title="Color" class="md-nav__link">
+    Color
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reset-all" title="Reset all" class="md-nav__link">
+    Reset all
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+        <li class="md-nav__item">
+          <a href="#__comments" title="Comments" class="md-nav__link md-nav__link--active">
+            Comments
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -1858,13 +1843,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#source-code" title="Source code" class="md-nav__link">
-    Source code
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#usage" title="Usage" class="md-nav__link">
     Usage
   </a>
@@ -1873,65 +1851,57 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#import-class" title="Import class" class="md-nav__link">
-    Import class
+  <a href="#load-texture" title="Load texture" class="md-nav__link">
+    Load texture
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
-    Install global plugin
+  <a href="#add-quad-object" title="Add quad object" class="md-nav__link">
+    Add quad object
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
+  <a href="#properties-of-corner-points" title="Properties of corner points" class="md-nav__link">
+    Properties of corner points
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#position" title="Position" class="md-nav__link">
+    Position
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#dragging-events" title="Dragging events" class="md-nav__link">
-    Dragging events
+  <a href="#alpha" title="Alpha" class="md-nav__link">
+    Alpha
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-dragging-state" title="Get dragging state" class="md-nav__link">
-    Get dragging state
+  <a href="#color" title="Color" class="md-nav__link">
+    Color
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#set-rotation-of-axis" title="Set rotation of axis" class="md-nav__link">
-    Set rotation of axis
+  <a href="#reset-all" title="Reset all" class="md-nav__link">
+    Reset all
   </a>
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#set-axis-mode" title="Set axis mode" class="md-nav__link">
-    Set axis mode
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#try-drag" title="Try drag" class="md-nav__link">
-    Try drag
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#drop" title="Drop" class="md-nav__link">
-    Drop
-  </a>
+      </ul>
+    </nav>
   
 </li>
         
@@ -1963,91 +1933,106 @@
               
                 
                 
-                  <h1>Drag</h1>
+                  <h1>Quad</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Drag game object.</p>
+<p>Manipulate the corner points of static images, built-in game object of phaser.</p>
 <ul>
-<li>Author: Rex</li>
-<li>Behavior of game object</li>
+<li>Author: Richard Davey</li>
 </ul>
-<h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/drag-plugin.js">Link</a></p>
+<div class="admonition warning">
+<p class="admonition-title">WebGL only</p>
+<p>It only works in WebGL render mode.</p>
+</div>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/drag">Sample code</a></p>
-<p>User could import class directly, or install it by global plugin.</p>
-<h3 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">rexDrag</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/drag.js&#39;</span><span class="p">;</span>
+<h3 id="load-texture">Load texture<a class="headerlink" href="#load-texture" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">image</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
 </pre></div>
 
-<h3 id="install-global-plugin">Install global plugin<a class="headerlink" href="#install-global-plugin" title="Permanent link">&para;</a></h3>
-<p>Install plugin in <a href="../game/index.html#configuration">configuration of game</a></p>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">DragPlugin</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/drag-plugin.js&#39;</span><span class="p">;</span>
-
-<span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="c1">// ...</span>
-    <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
-            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexDrag&#39;</span><span class="p">,</span>
-            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">DragPlugin</span><span class="p">,</span>
-            <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
-        <span class="p">},</span>
-        <span class="c1">// ...</span>
-        <span class="p">]</span>
-    <span class="p">}</span>
-    <span class="c1">// ...</span>
-<span class="p">};</span>
-<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<p>See <a href="../loader/index.html#image">loader</a></p>
+<h3 id="add-quad-object">Add quad object<a class="headerlink" href="#add-quad-object" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">quad</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">quad</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
 </pre></div>
 
-<h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">drag</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexDrag&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="p">{</span>
-    <span class="c1">//enable: true,</span>
-    <span class="c1">//axis: 0,      //0|&#39;both&#39;|&#39;h&amp;v&#39;|1|&#39;horizontal&#39;|&#39;h&#39;|2|&#39;vertical&#39;|&#39;v&#39;</span>
-    <span class="c1">//rotation: Phaser.Math.DegToRad(45)  // axis rotation in rad</span>
+<p>Add quad from JSON</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">quad</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">quad</span><span class="p">({</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+
+    <span class="c1">// angle: 0,</span>
+    <span class="c1">// alpha: 1</span>
+    <span class="c1">// flipX: true,</span>
+    <span class="c1">// flipY: true</span>
 <span class="p">});</span>
 </pre></div>
 
-<p>Properties</p>
+<h3 id="properties-of-corner-points">Properties of corner points<a class="headerlink" href="#properties-of-corner-points" title="Permanent link">&para;</a></h3>
+<h4 id="position">Position<a class="headerlink" href="#position" title="Permanent link">&para;</a></h4>
 <ul>
-<li>enable: drag-able</li>
-<li>axis : <ul>
-<li><code>'both'</code>,<code>'h&amp;v'</code>, <code>'x&amp;y'</code>, or <code>0</code> : dragging on all directions.</li>
-<li><code>'horizontal'</code>,<code>'h'</code>, <code>'x'</code>, or <code>1</code> : dragging on horizontal/x axis.</li>
-<li><code>'vertical'</code>,<code>'v'</code>, <code>'y'</code>, or <code>2</code> : dragging on vertical/y axis.</li>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">topLeftX</span> <span class="o">=</span> <span class="nx">quad</span><span class="p">.</span><span class="nx">topLeftX</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">topLeftY</span> <span class="o">=</span> <span class="nx">quad</span><span class="p">.</span><span class="nx">topLeftY</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">topRightX</span> <span class="o">=</span> <span class="nx">quad</span><span class="p">.</span><span class="nx">topRightX</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">topRightY</span> <span class="o">=</span> <span class="nx">quad</span><span class="p">.</span><span class="nx">topRightY</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">bottomLeftX</span> <span class="o">=</span> <span class="nx">quad</span><span class="p">.</span><span class="nx">bottomLeftX</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">bottomLeftY</span> <span class="o">=</span> <span class="nx">quad</span><span class="p">.</span><span class="nx">bottomLeftY</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">bottomRightX</span> <span class="o">=</span> <span class="nx">quad</span><span class="p">.</span><span class="nx">bottomRightX</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">bottomRightY</span> <span class="o">=</span> <span class="nx">quad</span><span class="p">.</span><span class="nx">bottomRightY</span><span class="p">;</span>    
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">quad</span><span class="p">.</span><span class="nx">topLeftX</span> <span class="o">=</span> <span class="nx">topLeftX</span><span class="p">;</span>
+<span class="nx">quad</span><span class="p">.</span><span class="nx">topLeftY</span> <span class="o">=</span> <span class="nx">topLeftY</span><span class="p">;</span>
+<span class="nx">quad</span><span class="p">.</span><span class="nx">topRightX</span> <span class="o">=</span> <span class="nx">topRightX</span><span class="p">;</span>
+<span class="nx">quad</span><span class="p">.</span><span class="nx">topRightY</span> <span class="o">=</span> <span class="nx">topRightY</span><span class="p">;</span>
+<span class="nx">quad</span><span class="p">.</span><span class="nx">bottomLeftX</span> <span class="o">=</span> <span class="nx">bottomLeftX</span><span class="p">;</span>
+<span class="nx">quad</span><span class="p">.</span><span class="nx">bottomLeftY</span> <span class="o">=</span> <span class="nx">bottomLeftY</span><span class="p">;</span>
+<span class="nx">quad</span><span class="p">.</span><span class="nx">bottomRightX</span> <span class="o">=</span> <span class="nx">bottomRightX</span><span class="p">;</span>
+<span class="nx">quad</span><span class="p">.</span><span class="nx">bottomRightY</span> <span class="o">=</span> <span class="nx">bottomRightY</span><span class="p">;</span>
+
+<span class="nx">quad</span><span class="p">.</span><span class="nx">setTopLeft</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+<span class="nx">quad</span><span class="p">.</span><span class="nx">setTopRight</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+<span class="nx">quad</span><span class="p">.</span><span class="nx">setBottomLeft</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+<span class="nx">quad</span><span class="p">.</span><span class="nx">setBottomRight</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>    
+<span class="nx">quad</span><span class="p">.</span><span class="nx">resetPosition</span><span class="p">();</span>
+</pre></div></li>
 </ul>
-</li>
-<li>rotation : axis rotation in rad, available in horizontal or vertical axis mode.</li>
+<h4 id="alpha">Alpha<a class="headerlink" href="#alpha" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">topLeftAlpha</span> <span class="o">=</span> <span class="nx">quad</span><span class="p">.</span><span class="nx">topLeftAlpha</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">topRightAlpha</span> <span class="o">=</span> <span class="nx">quad</span><span class="p">.</span><span class="nx">topRightAlpha</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">bottomLeftAlpha</span> <span class="o">=</span> <span class="nx">quad</span><span class="p">.</span><span class="nx">bottomLeftAlpha</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">bottomRightAlpha</span> <span class="o">=</span> <span class="nx">quad</span><span class="p">.</span><span class="nx">bottomRightAlpha</span><span class="p">;</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">quad</span><span class="p">.</span><span class="nx">topLeftAlpha</span> <span class="o">=</span> <span class="nx">topLeftAlpha</span><span class="p">;</span>
+<span class="nx">quad</span><span class="p">.</span><span class="nx">topRightAlpha</span> <span class="o">=</span> <span class="nx">topRightAlpha</span><span class="p">;</span>
+<span class="nx">quad</span><span class="p">.</span><span class="nx">bottomLeftAlpha</span> <span class="o">=</span> <span class="nx">bottomLeftAlpha</span><span class="p">;</span>
+<span class="nx">quad</span><span class="p">.</span><span class="nx">bottomRightAlpha</span> <span class="o">=</span> <span class="nx">bottomRightAlpha</span><span class="p">;</span>
+
+<span class="nx">quad</span><span class="p">.</span><span class="nx">resetAlpha</span><span class="p">();</span>
+</pre></div></li>
 </ul>
-<h3 id="dragging-events">Dragging events<a class="headerlink" href="#dragging-events" title="Permanent link">&para;</a></h3>
-<p>Built-in dragging events</p>
-<div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;dragstart&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">dragX</span><span class="p">,</span> <span class="nx">dragY</span><span class="p">){</span> <span class="cm">/*...*/</span> <span class="p">});</span>
-<span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;drag&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">dragX</span><span class="p">,</span> <span class="nx">dragY</span><span class="p">){</span> <span class="cm">/*...*/</span> <span class="p">});</span>
-<span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;dragend&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">dragX</span><span class="p">,</span> <span class="nx">dragY</span><span class="p">,</span> <span class="nx">dropped</span><span class="p">){</span> <span class="cm">/*...*/</span> <span class="p">});</span>
-</pre></div>
+<h4 id="color">Color<a class="headerlink" href="#color" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">topLeftColor</span> <span class="o">=</span> <span class="nx">quad</span><span class="p">.</span><span class="nx">topLeftColor</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">topRightColor</span> <span class="o">=</span> <span class="nx">quad</span><span class="p">.</span><span class="nx">topRightColor</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">bottomLeftColor</span> <span class="o">=</span> <span class="nx">quad</span><span class="p">.</span><span class="nx">bottomLeftColor</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">bottomRightColor</span> <span class="o">=</span> <span class="nx">quad</span><span class="p">.</span><span class="nx">bottomRightColor</span><span class="p">;</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">quad</span><span class="p">.</span><span class="nx">topLeftColor</span> <span class="o">=</span> <span class="nx">topLeftColor</span><span class="p">;</span>
+<span class="nx">quad</span><span class="p">.</span><span class="nx">topRightColor</span> <span class="o">=</span> <span class="nx">topRightColor</span><span class="p">;</span>
+<span class="nx">quad</span><span class="p">.</span><span class="nx">bottomLeftColor</span> <span class="o">=</span> <span class="nx">bottomLeftColor</span><span class="p">;</span>
+<span class="nx">quad</span><span class="p">.</span><span class="nx">bottomRightColor</span> <span class="o">=</span> <span class="nx">bottomRightColor</span><span class="p">;</span>
 
-<h3 id="get-dragging-state">Get dragging state<a class="headerlink" href="#get-dragging-state" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isDragging</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">drag</span><span class="p">.</span><span class="nx">isDragging</span><span class="p">;</span>
-</pre></div>
-
-<h3 id="set-rotation-of-axis">Set rotation of axis<a class="headerlink" href="#set-rotation-of-axis" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">drag</span><span class="p">.</span><span class="nx">setAxisRotation</span><span class="p">(</span><span class="nx">rad</span><span class="p">);</span>
-</pre></div>
-
-<h3 id="set-axis-mode">Set axis mode<a class="headerlink" href="#set-axis-mode" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">drag</span><span class="p">.</span><span class="nx">setAxisMode</span><span class="p">(</span><span class="nx">m</span><span class="p">);</span>  <span class="c1">//0|&#39;both&#39;|&#39;h&amp;v&#39;|1|&#39;horizontal&#39;|&#39;h&#39;|2|&#39;vertical&#39;|&#39;v&#39;</span>
-</pre></div>
-
-<h3 id="try-drag">Try drag<a class="headerlink" href="#try-drag" title="Permanent link">&para;</a></h3>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/drag/try-drag.js">Sample code</a></p>
-<p>Game object will be dragged if there is any point above it.</p>
-<div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">drag</span><span class="p">.</span><span class="nx">drag</span><span class="p">();</span>
-</pre></div>
-
-<h3 id="drop">Drop<a class="headerlink" href="#drop" title="Permanent link">&para;</a></h3>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/drag/dragend.js">Sample code</a></p>
-<p>Game object will be dropped(dragend) manually.</p>
-<div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">drag</span><span class="p">.</span><span class="nx">dragend</span><span class="p">();</span>
+<span class="nx">quad</span><span class="p">.</span><span class="nx">resetColors</span><span class="p">();</span>
+</pre></div></li>
+</ul>
+<h4 id="reset-all">Reset all<a class="headerlink" href="#reset-all" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">quad</span><span class="p">.</span><span class="nx">reset</span><span class="p">();</span>
 </pre></div>
                 
                   
@@ -2062,9 +2047,9 @@
   <div id="disqus_thread"></div>
   <script>
     var disqus_config = function () {
-      this.page.url = "https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/drag/index.html";
+      this.page.url = "https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/quad/index.html";
       this.page.identifier =
-        "/drag/index.html";
+        "/quad/index.html";
     };
     (function() {
       var d = document, s = d.createElement("script");
@@ -2087,7 +2072,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../cursor/index.html" title="Cursor" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../blitter/index.html" title="Blitter" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -2096,19 +2081,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Cursor
+                Blitter
               </span>
             </div>
           </a>
         
         
-          <a href="../slider/index.html" title="Slider" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../text/index.html" title="Text" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Slider
+                Text
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

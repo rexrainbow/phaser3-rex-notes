@@ -23,6 +23,7 @@ pages:
     - Sprite:
         - Image: image.md
         - Blitter: blitter.md
+        - Quad: quad.md
     - Text:
         - Text: text.md
         - BBCode Text: bbcodetext.md
