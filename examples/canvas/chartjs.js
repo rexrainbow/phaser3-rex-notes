@@ -12,7 +12,7 @@ class Demo extends Phaser.Scene {
 
     preload() {}
 
-    create() {
+    create() {        
         var canvas = this.add.rexCanvas(0, 0, 800, 600).setOrigin(0);
 
         var src = canvas.getCanvas();
@@ -60,6 +60,7 @@ class Demo extends Phaser.Scene {
                         //console.log('onComplete');
                     }
                 },
+                devicePixelRatio: 1,
                 responsive: false // set to false because of this canvas element has no parent node         
             }
         });

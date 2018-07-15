@@ -53,12 +53,7 @@ var runCommand = function (cmd, scope, config) {
         fn = GetValue(scope, fnName, null);
     }
 
-    var retValue;
-    if (scope) {
-        retValue = fn.apply(scope, ARGS);
-    } else {
-        retValue = fn(ARGS);
-    }
+    var retValue = fn.apply(scope, ARGS);
     return retValue;
 }
 var ARGS = []; // reuse this array
