@@ -36,6 +36,10 @@ scene.input.keyboard.on('keyup_' + 'A', function (event) { /* ... */});
     var isDown = WKey.isDown;
     var isUp = WKey.isUp;
     ```
+    - Key is down after a duration.
+        ```javascript
+        var isDown = scene.input.keyboard.checkDown(WKey, duration);
+        ```
 
 ### Get state of cursorkeys
 

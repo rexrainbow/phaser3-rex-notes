@@ -27,31 +27,22 @@ scene.load.start();                     // start loading
 ### Events
 
 - Start loading
-
     ```javascript
     scene.load.once('start', function(){});
     ```
-
 - Loading progressing
-
     ```javascript
     scene.load.once('progress', function(progress){});
     ```
-
 - Loading a file object successful
-
     ```javascript
     scene.load.once('load', function(fileObj){});
     ```
-
 - Loading a file object failed
-
     ```javascript
     scene.load.once('loaderror', function(fileObj){});
     ```
-
 - All loading completed
-
     ```javascript
     scene.load.once('complete', function(){});
     ```
@@ -59,13 +50,10 @@ scene.load.start();                     // start loading
 ### Status of loader
 
 - Ready to start loading
-
     ```javascript
     var isReady = scene.load.isReady();
     ```
-
 - Is loading
-
     ```javascript
     var isLoading = scene.load.isLoading();
     ```

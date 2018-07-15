@@ -36,40 +36,90 @@ scene.cameras.remove(camera);
 camera.destroy();
 ```
 
-### Set view port
+### View port
 
-```javascript
-camera.setViewport(x, y, width, height);
-```
-
-```javascript
-camera.setPosition(x, y);
-// camera.x = x;
-// camera.y = y;
-```
-
-```javascript
-camera.setSize(width, height);
-// camera.width = width;
-// camera.height = height;
-```
-
-- Position
-    - Top-left
+- Set
+    - Top(x), Left(y), Width, Height
         ```javascript
-        var x = camera.x;
-        var y = camera.y;
+        camera.setViewport(top, left, width, height);
         ```
-    - Center
         ```javascript
-        var centerX = camera.centerX;
-        var centerY = camera.centerY;
+        camera.setPosition(top, left);
+        // camera.x = top;
+        // camera.y = left;
         ```
-- Width & height
-    ```javascript
-    var width = camera.width;
-    var height = camera.height
-    ```
+        ```javascript
+        camera.setSize(width, height);
+        // camera.width = width;
+        // camera.height = height;
+        ```
+        ```javascript
+        camera.centerOn(x, y);  // centered on the given coordinates
+        ```
+        ```javascript
+        camera.centerToBounds();
+        ```
+    - Zoom
+        ```javascript
+        camera.setZoom(zoomValue);  // The minimum it can be is 0.001.
+        camera.zoom = zoomValue;
+        ```
+    - Rotation
+        ```javascript
+        camera.setAngle(angle);  // angle in degree
+        camera.setRotation(angle);  // angle in radians
+        camera.rotation = angle; // angle in radians
+        ```
+- Get
+    - Position
+        - Top-left
+            ```javascript
+            var top = camera.x;
+            var left = camera.y;
+            ```
+        - Center, relative to the top-left of the game canvas.
+            ```javascript
+            var x = camera.centerX;
+            var y = camera.centerY;
+            ```
+        - Middle point, in 'world' coordinates.
+            ```javascript
+            var x = camera.midPoint.x;
+            var y = camera.midPoint.y;
+            ```
+    - Width & height
+        ```javascript
+        var width = camera.width;
+        var height = camera.height;
+        ```
+        ```javascript
+        var displayWidth = camera.displayWidth;
+        var displayHeight = camera.displayHeight;
+        ```
+    - Zoom
+        ```javascript
+        var zoomValue = camera.zoom;
+        ```
+    - Rotation
+        ```javascript
+        var angle = camera.rotation;  // angle in radians
+        ```
+    - World view, a rectangle object
+        ```javascript
+        var worldView = camera.worldView;
+        var x = worldView.x;
+        var y = worldView.y;
+        var width = worldView.width;  // displayWidth
+        var height = worldView.height; // displayHeight
+        var left = worldView.left;  // x
+        var right = worldView.right;  // x + width
+        var top = worldView.top;  // y
+        var bottom = worldView.bottom;  // y + height
+        var centerX = worldView.centerX;
+        var centerY = worldView.centerY;
+        var isInside = worldView.contains(x, y);
+        var randPoint = worldView.getRandomPoint(point); // point: {x, y}
+        ```
 
 ### Visible
 
@@ -83,6 +133,17 @@ camera.setVisible(value);
 
 ```javascript
 var visible = camera.visible;
+```
+
+### Alpha
+
+```javascript
+camera.setAlpha(value);
+// camera.alpha = value;
+```
+
+```javascript
+var alpha = camera.alpha;
 ```
 
 ### Scroll camera
@@ -124,6 +185,24 @@ camera.centerToSize();
     ```javascript
     camera.setLerp(x, y);
     ```
+    - `1` : Camera will instantly snap to the target coordinates.
+    - `0.1` : Camera will more slowly track the target, giving a smooth transition.
+- Deadzone
+    ```javascript
+    camera.setDeadzone(width, height);
+    ```
+    If the target moves outside of this area, the camera will begin scrolling in order to follow it.
+    - Boundaries
+        ```javascript
+        var left = camera.deadzone.left;
+        var right = camera.deadzone.right;
+        var top = camera.deadzone.top;
+        var bootom = camera.deadzone.bottom;
+        ```
+    - Clean deadzone
+        ```javascript
+        camera.setDeadzone();
+        ```
 
 #### Scroll factor
 
@@ -133,24 +212,6 @@ See [Scroll factor](gameobject.md#scroll-factor) in game object.
 
 ```javascript
 camera.setBounds(x, y, width, height)
-```
-
-### Zoom
-
-```javascript
-camera.setZoom(v);
-// camera.zoom = v;
-// var zoom = camera.zoom;
-```
-
-### Rotation
-
-Spin camera around center.
-
-```javascript
-camera.setRotation(rad);
-// camera.setAngle(degree);
-// camera.rotation = rad;
 ```
 
 ### Effects
@@ -167,6 +228,11 @@ camera.fadeIn(duration);   // duration in ms
 camera.fadeOut(duration);   // duration in ms
 // camera.fadeOut(duration, red, green, blue, callback, context);
 ```
+
+- `callback` , `context` : It will be invoked every frame for the duration of the effect.
+    ```javascript
+    function(camera, progress) {}
+    ```
 
 ##### Events
 
@@ -185,6 +251,11 @@ camera.flash(duration);   // duration in ms
 // camera.flash(duration, red, green, blue, force, callback, context);
 ```
 
+- `callback` , `context` : It will be invoked every frame for the duration of the effect.
+    ```javascript
+    function(camera, progress) {}
+    ```
+
 ##### Events
 
 ```javascript
@@ -202,6 +273,11 @@ camera.shake(duration);   // duration in ms
 // camera.shake(duration, intensity, force, callback, context);  // callback: invoked when completed
 ```
 
+- `callback` , `context` : It will be invoked every frame for the duration of the effect.
+    ```javascript
+    function(camera, progress) {}
+    ```
+
 ##### Events
 
 ```javascript
@@ -210,6 +286,50 @@ camera.on('camerashakestart', camera, shake, duration, intensity);
 
 ```javascript
 camera.on('camerashakecomplete', camera, shake);
+```
+
+##### Pan
+
+```javascript
+camera.pan(x, y, duration);   // duration in ms
+// camera.pan(x, y, duration, ease, force, callback, context);
+```
+
+- `callback` , `context` : It will be invoked every frame for the duration of the effect.
+    ```javascript
+    function(camera, progress, x, y) {}
+    ```
+
+##### Events
+
+```javascript
+camera.on('camerapanstart', camera, pan, duration, x, y);
+```
+
+```javascript
+camera.on('camerapancomplete', camera, pan);
+```
+
+##### Zoom
+
+```javascript
+camera.zoomTo(zoomValue, duration);   // duration in ms
+// camera.zoomTo(zoomValue, duration, ease, force, callback, context);
+```
+
+- `callback` , `context` : It will be invoked every frame for the duration of the effect.
+    ```javascript
+    function(camera, progress, zoomValue) {}
+    ```
+
+##### Events
+
+```javascript
+camera.on('camerazoomstart', camera, zoom, duration, zoomValue);
+```
+
+```javascript
+camera.on('camerazoomcomplete', camera, zoom);
 ```
 
 ### Set background color

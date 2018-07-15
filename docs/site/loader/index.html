@@ -866,11 +866,11 @@
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-4" type="checkbox" id="nav-5-4">
     
     <label class="md-nav__link" for="nav-5-4">
-      Canvas
+      Graphics
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
       <label class="md-nav__title" for="nav-5-4">
-        Canvas
+        Graphics
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -2206,51 +2206,30 @@
 
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
-<li>
-<p>Start loading</p>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
-</pre></div>
-
-</li>
-<li>
-<p>Loading progressing</p>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;progress&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">progress</span><span class="p">){});</span>
-</pre></div>
-
-</li>
-<li>
-<p>Loading a file object successful</p>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fileObj</span><span class="p">){});</span>
-</pre></div>
-
-</li>
-<li>
-<p>Loading a file object failed</p>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;loaderror&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fileObj</span><span class="p">){});</span>
-</pre></div>
-
-</li>
-<li>
-<p>All loading completed</p>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
-</pre></div>
-
-</li>
+<li>Start loading
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
+</pre></div></li>
+<li>Loading progressing
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;progress&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">progress</span><span class="p">){});</span>
+</pre></div></li>
+<li>Loading a file object successful
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fileObj</span><span class="p">){});</span>
+</pre></div></li>
+<li>Loading a file object failed
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;loaderror&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fileObj</span><span class="p">){});</span>
+</pre></div></li>
+<li>All loading completed
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
+</pre></div></li>
 </ul>
 <h3 id="status-of-loader">Status of loader<a class="headerlink" href="#status-of-loader" title="Permanent link">&para;</a></h3>
 <ul>
-<li>
-<p>Ready to start loading</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isReady</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">isReady</span><span class="p">();</span>
-</pre></div>
-
-</li>
-<li>
-<p>Is loading</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isLoading</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">isLoading</span><span class="p">();</span>
-</pre></div>
-
-</li>
+<li>Ready to start loading
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isReady</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">isReady</span><span class="p">();</span>
+</pre></div></li>
+<li>Is loading
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isLoading</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">isLoading</span><span class="p">();</span>
+</pre></div></li>
 </ul>
 <h3 id="file-types">File types<a class="headerlink" href="#file-types" title="Permanent link">&para;</a></h3>
 <h4 id="image">Image<a class="headerlink" href="#image" title="Permanent link">&para;</a></h4>

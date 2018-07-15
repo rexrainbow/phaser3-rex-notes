@@ -114,3 +114,9 @@ var quad = scene.make.quad({
 ```javascript
 quad.reset();
 ```
+
+### Set frame
+
+```javascript
+quad.setFrame(frame);
+```

@@ -138,12 +138,15 @@ var output = gameObject.getBounds(output);      // output: {x, y, width, height}
     var color = gameObject.tintTopRight;
     var color = gameObject.tintBottomLeft;
     var color = gameObject.tintBottomRight;
+    var isTinted = gameObject.isTinted;
     ```
 - Set
     ```javascript
     gameObject.tint = color;
-    gameObject.setTint(color);
+    gameObject.setTint(color);  // multiply color value
     gameObject.setTint(colorTopLeft, colorTopRight, colorBottomLeft, colorBottomRight);
+    gameObject.setTintFill(color);  // replace color value
+    gameObject.setTintFill(colorTopLeft, colorTopRight, colorBottomLeft, colorBottomRight);    
     gameObject.clearTint();     // equal to `gameObject.setTint(0xffffff)`
     ```
 
@@ -203,3 +206,30 @@ var output = gameObject.getBounds(output);      // output: {x, y, width, height}
     ```
 
 See [data manager](datamanager.md)
+
+### Texture
+
+Only [image](image.md) and sprite game object have teuture componment.
+
+- Set texture
+    ```javascript
+    gameObject.setTexture(key, frame);
+    ```
+- Set frame
+    ```javascript
+    gameObject.setFrame(frame);   
+    gameObject.setFrame(frame, updateSize, updateOrigin);   
+    ```
+    - `frame` :　The name or index of the frame within the Texture.
+    - `updateSize` : Should this call adjust the size of the Game Object?
+    - `updateOrigin` : Should this call adjust the origin of the Game Object?
+- Applies a crop to a texture
+    ```javascript
+    gameObject.setCrop(x, y, width, height);
+    ```
+    The crop coordinates are relative to the texture frame, not the Game Object, meaning 0 x 0 is the top-left.
+    - Reset crop
+        ```javascript
+        gameObject.setCrop();
+        // gameObject.isCropped = false;
+        ```    

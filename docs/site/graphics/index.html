@@ -634,11 +634,11 @@
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-4" type="checkbox" id="nav-5-4" checked>
     
     <label class="md-nav__link" for="nav-5-4">
-      Canvas
+      Graphics
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
       <label class="md-nav__title" for="nav-5-4">
-        Canvas
+        Graphics
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -725,6 +725,13 @@
           <li class="md-nav__item">
   <a href="#rectangle" title="Rectangle" class="md-nav__link">
     Rectangle
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rounded-rectangle" title="Rounded rectangle" class="md-nav__link">
+    Rounded rectangle
   </a>
   
 </li>
@@ -1943,6 +1950,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#rounded-rectangle" title="Rounded rectangle" class="md-nav__link">
+    Rounded rectangle
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#triangle" title="Triangle" class="md-nav__link">
     Triangle
   </a>
@@ -2047,9 +2061,8 @@
 <h3 id="drawing-commands">Drawing commands<a class="headerlink" href="#drawing-commands" title="Permanent link">&para;</a></h3>
 <h4 id="set-style">Set style<a class="headerlink" href="#set-style" title="Permanent link">&para;</a></h4>
 <ul>
-<li>
-<p>Set line style and fill style</p>
-<div class="codehilite"><pre><span></span><span class="nx">graphics</span><span class="p">.</span><span class="nx">setDefaultStyles</span><span class="p">({</span>
+<li>Set line style and fill style
+    <div class="codehilite"><pre><span></span><span class="nx">graphics</span><span class="p">.</span><span class="nx">setDefaultStyles</span><span class="p">({</span>
     <span class="nx">lineStyle</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">width</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
         <span class="nx">color</span><span class="o">:</span> <span class="mh">0xffffff</span><span class="p">,</span>
@@ -2060,21 +2073,13 @@
         <span class="nx">alpha</span><span class="o">:</span> <span class="mi">1</span>
     <span class="p">}</span>
 <span class="p">});</span>
-</pre></div>
-
-</li>
-<li>
-<p>Set line style</p>
-<div class="codehilite"><pre><span></span><span class="nx">graphics</span><span class="p">.</span><span class="nx">lineStyle</span><span class="p">(</span><span class="nx">lineWidth</span><span class="p">,</span> <span class="nx">color</span><span class="p">,</span> <span class="nx">alpha</span><span class="p">);</span>   <span class="c1">// color: 0xRRGGBB</span>
-</pre></div>
-
-</li>
-<li>
-<p>Set fill style</p>
-<div class="codehilite"><pre><span></span><span class="nx">graphics</span><span class="p">.</span><span class="nx">fillStyle</span><span class="p">(</span><span class="nx">color</span><span class="p">,</span> <span class="nx">alpha</span><span class="p">);</span>   <span class="c1">// color: 0xRRGGBB</span>
-</pre></div>
-
-</li>
+</pre></div></li>
+<li>Set line style
+    <div class="codehilite"><pre><span></span><span class="nx">graphics</span><span class="p">.</span><span class="nx">lineStyle</span><span class="p">(</span><span class="nx">lineWidth</span><span class="p">,</span> <span class="nx">color</span><span class="p">,</span> <span class="nx">alpha</span><span class="p">);</span>   <span class="c1">// color: 0xRRGGBB</span>
+</pre></div></li>
+<li>Set fill style
+    <div class="codehilite"><pre><span></span><span class="nx">graphics</span><span class="p">.</span><span class="nx">fillStyle</span><span class="p">(</span><span class="nx">color</span><span class="p">,</span> <span class="nx">alpha</span><span class="p">);</span>   <span class="c1">// color: 0xRRGGBB</span>
+</pre></div></li>
 </ul>
 <h4 id="clear">Clear<a class="headerlink" href="#clear" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><span class="nx">graphics</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
@@ -2094,6 +2099,14 @@
 <span class="nx">graphics</span><span class="p">.</span><span class="nx">strokeRect</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
 </pre></div>
 
+<h4 id="rounded-rectangle">Rounded rectangle<a class="headerlink" href="#rounded-rectangle" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">graphics</span><span class="p">.</span><span class="nx">fillRoundedRect</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">radius</span><span class="p">);</span>
+<span class="nx">graphics</span><span class="p">.</span><span class="nx">strokeRoundedRect</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">radius</span><span class="p">);</span>
+</pre></div>
+
+<ul>
+<li><code>radius</code> : number or an object <code>{tl, tr, bl, br}</code></li>
+</ul>
 <h4 id="triangle">Triangle<a class="headerlink" href="#triangle" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><span class="nx">graphics</span><span class="p">.</span><span class="nx">fillTriangleShape</span><span class="p">(</span><span class="nx">triangle</span><span class="p">);</span> <span class="c1">// triangle: {x1, y1, x2, y2, x3, y3}</span>
 <span class="nx">graphics</span><span class="p">.</span><span class="nx">fillTriangle</span><span class="p">(</span><span class="nx">x1</span><span class="p">,</span> <span class="nx">y1</span><span class="p">,</span> <span class="nx">x2</span><span class="p">,</span> <span class="nx">y2</span><span class="p">,</span> <span class="nx">x3</span><span class="p">,</span> <span class="nx">y3</span><span class="p">);</span>
@@ -2130,6 +2143,7 @@
 <span class="nx">graphics</span><span class="p">.</span><span class="nx">strokeCircleShape</span><span class="p">(</span><span class="nx">circle</span><span class="p">);</span>  <span class="c1">// circle: {x, y, radius}</span>
 <span class="nx">graphics</span><span class="p">.</span><span class="nx">strokeCircle</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">);</span>
 <span class="nx">graphics</span><span class="p">.</span><span class="nx">arc</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">startAngle</span><span class="p">,</span> <span class="nx">endAngle</span><span class="p">,</span> <span class="nx">anticlockwise</span><span class="p">);</span>
+<span class="nx">graphics</span><span class="p">.</span><span class="nx">arc</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">startAngle</span><span class="p">,</span> <span class="nx">endAngle</span><span class="p">,</span> <span class="nx">anticlockwise</span><span class="p">,</span> <span class="nx">overshoot</span><span class="p">);</span>
 </pre></div>
 
 <p>Draw or fill circle shape by points.</p>

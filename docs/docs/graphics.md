@@ -18,7 +18,6 @@ var graphics = scene.add.graphics();
 #### Set style
 
 - Set line style and fill style
-
     ```javascript
     graphics.setDefaultStyles({
         lineStyle: {
@@ -32,15 +31,11 @@ var graphics = scene.add.graphics();
         }
     });
     ```
-
 - Set line style
-
     ```javascript
     graphics.lineStyle(lineWidth, color, alpha);   // color: 0xRRGGBB
     ```
-
 - Set fill style
-
     ```javascript
     graphics.fillStyle(color, alpha);   // color: 0xRRGGBB
     ```
@@ -68,6 +63,15 @@ graphics.fillRect(x, y, width, height);
 graphics.strokeRectShape(rect);  // rect: {x, y, width, height}
 graphics.strokeRect(x, y, width, height);
 ```
+
+#### Rounded rectangle
+
+```javascript
+graphics.fillRoundedRect(x, y, width, height, radius);
+graphics.strokeRoundedRect(x, y, width, height, radius);
+```
+
+- `radius` : number or an object `{tl, tr, bl, br}`
 
 #### Triangle
 
@@ -114,6 +118,7 @@ graphics.fillCircle(x, y, radius);
 graphics.strokeCircleShape(circle);  // circle: {x, y, radius}
 graphics.strokeCircle(x, y, radius);
 graphics.arc(x, y, radius, startAngle, endAngle, anticlockwise);
+graphics.arc(x, y, radius, startAngle, endAngle, anticlockwise, overshoot);
 ```
 
 Draw or fill circle shape by points.

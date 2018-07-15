@@ -276,6 +276,7 @@ scene.input.addPointer(num);  // total points = num + 1
     - Current touching
         - Position in screen : `pointer.x` , `pointer.y`
         - Position in camera : `pointer.worldX` , `pointer.worldY`
+        - Position of previous moving : `pointer.prevPosition.x` , `pointer.prevPosition.y`
     - Dragable object
         - Touching start : `pointer.downX`, `pointer.downY`
         - Touching end : `pointer.upX`, `pointer.upY`

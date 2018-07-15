@@ -58,7 +58,8 @@ var game = new Phaser.Game(config);
         premultipliedAlpha: true,
         preserveDrawingBuffer: false,
         failIfMajorPerformanceCaveat: false,
-        powerPreference: 'default'
+        powerPreference: 'default', // 'high-performance', 'low-power' or 'default'
+        batchSize: 2000
     },
 
     physics: {

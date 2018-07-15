@@ -30,7 +30,7 @@ pages:
         - Tag Text: tagtext.md
         - Typing: texttyping.md    
         - Page: textpage.md
-    - Canvas:
+    - Graphics:
         - Graphics: graphics.md
         - Canvas: canvas.md
     - Texture: texture.md
