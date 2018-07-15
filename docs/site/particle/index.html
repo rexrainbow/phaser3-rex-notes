@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/scene/index.html">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/particle/index.html">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Scene - Notes of Phaser 3</title>
+        <title>Particle - Notes of Phaser 3</title>
       
     
     
@@ -78,7 +78,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search">
     <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
     
-      <a href="#define-a-scene" tabindex="1" class="md-skip">
+      <a href="#introduction" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -104,7 +104,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Scene
+                Particle
               </span>
             
           
@@ -185,12 +185,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
     
     <label class="md-nav__link" for="nav-2">
       System
@@ -230,92 +228,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="toc">
-        Scene
-      </label>
-    
-    <a href="index.html" title="Scene" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../scene/index.html" title="Scene" class="md-nav__link">
       Scene
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#define-a-scene" title="Define a scene" class="md-nav__link">
-    Define a scene
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#es6-class" title="ES6 class" class="md-nav__link">
-    ES6 class
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#class" title="Class" class="md-nav__link">
-    Class
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#overwrite" title="Overwrite" class="md-nav__link">
-    Overwrite
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#members" title="Members" class="md-nav__link">
-    Members
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#events" title="Events" class="md-nav__link">
-    Events
-  </a>
-  
-</li>
-      
-      
-      
-      
-      
-        <li class="md-nav__item">
-          <a href="#__comments" title="Comments" class="md-nav__link md-nav__link--active">
-            Comments
-          </a>
-        </li>
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -532,10 +449,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
     
     <label class="md-nav__link" for="nav-5">
       Game object
@@ -755,11 +674,85 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../particle/index.html" title="Particle" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Particle
+      </label>
+    
+    <a href="index.html" title="Particle" class="md-nav__link md-nav__link--active">
       Particle
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-texture" title="Load texture" class="md-nav__link">
+    Load texture
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-particle" title="Add particle" class="md-nav__link">
+    Add particle
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#z-index-of-emitters" title="Z index of emitters" class="md-nav__link">
+    Z index of emitters
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+        <li class="md-nav__item">
+          <a href="#__comments" title="Comments" class="md-nav__link md-nav__link--active">
+            Comments
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -1819,50 +1812,43 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#define-a-scene" title="Define a scene" class="md-nav__link">
-    Define a scene
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#es6-class" title="ES6 class" class="md-nav__link">
-    ES6 class
+  <a href="#load-texture" title="Load texture" class="md-nav__link">
+    Load texture
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#class" title="Class" class="md-nav__link">
-    Class
+  <a href="#add-particle" title="Add particle" class="md-nav__link">
+    Add particle
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#overwrite" title="Overwrite" class="md-nav__link">
-    Overwrite
+  <a href="#z-index-of-emitters" title="Z index of emitters" class="md-nav__link">
+    Z index of emitters
   </a>
   
 </li>
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#members" title="Members" class="md-nav__link">
-    Members
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#events" title="Events" class="md-nav__link">
-    Events
-  </a>
   
 </li>
       
@@ -1889,160 +1875,139 @@
               
                 
                 
-                  <h1>Scene</h1>
+                  <h1>Particle</h1>
                 
-                <h2 id="define-a-scene">Define a scene<a class="headerlink" href="#define-a-scene" title="Permanent link">&para;</a></h2>
-<h3 id="es6-class">ES6 class<a class="headerlink" href="#es6-class" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">MyScene</span> <span class="kr">extends</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scene</span> <span class="p">{</span>
-
-    <span class="nx">constructor</span> <span class="p">(</span><span class="nx">config</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="kr">super</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-    <span class="p">}</span>
-
-    <span class="nx">preload</span> <span class="p">()</span> <span class="p">{}</span>
-    <span class="nx">create</span> <span class="p">()</span>  <span class="p">{}</span>
-    <span class="nx">update</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">)</span> <span class="p">{}</span>
-
-<span class="p">}</span>
-</pre></div>
-
-<h3 id="class">Class<a class="headerlink" href="#class" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">MyScene</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Class</span><span class="p">({</span>
-
-    <span class="nx">Extends</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scene</span><span class="p">,</span>
-
-    <span class="nx">initialize</span><span class="o">:</span>
-
-    <span class="kd">function</span> <span class="nx">MyScene</span> <span class="p">(</span><span class="nx">config</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scene</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span>
-    <span class="p">},</span>
-
-    <span class="nx">preload</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{},</span>
-    <span class="nx">create</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{},</span>
-    <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">)</span> <span class="p">{}</span>
-<span class="p">});</span>
-</pre></div>
-
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">MyGame</span> <span class="o">=</span> <span class="p">{};</span>
-
-<span class="nx">MyGame</span><span class="p">.</span><span class="nx">Boot</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span>
-<span class="p">{</span>
-<span class="p">};</span>
-
-<span class="nx">MyGame</span><span class="p">.</span><span class="nx">Boot</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">=</span> <span class="nx">MyGame</span><span class="p">.</span><span class="nx">Boot</span><span class="p">;</span>
-
-<span class="nx">MyGame</span><span class="p">.</span><span class="nx">Boot</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="nx">preload</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{},</span>
-    <span class="nx">create</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{},</span>
-    <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">)</span> <span class="p">{}</span>
-<span class="p">};</span>
-</pre></div>
-
-<h3 id="overwrite">Overwrite<a class="headerlink" href="#overwrite" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">demo</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scene</span><span class="p">(</span><span class="s1">&#39;Demo&#39;</span><span class="p">);</span>
-
-<span class="nx">demo</span><span class="p">.</span><span class="nx">preload</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(){};</span>
-<span class="nx">demo</span><span class="p">.</span><span class="nx">create</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(){};</span>
-<span class="nx">demo</span><span class="p">.</span><span class="nx">update</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(){};</span>
-</pre></div>
-
-<h2 id="members">Members<a class="headerlink" href="#members" title="Permanent link">&para;</a></h2>
+                <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
+<p>Particle uses its own lightweight physics system, and can interact only with its Emitter's bounds and zones. Built-in game object of phaser.</p>
 <ul>
-<li><code>sys</code></li>
-<li><code>game</code></li>
-<li><code>anims</code></li>
-<li><code>cache</code></li>
-<li><code>registry</code></li>
-<li><code>sound</code></li>
-<li><code>textures</code></li>
-<li><code>events</code></li>
-<li><code>cameras</code></li>
-<li><code>cameras3d</code></li>
-<li><code>add</code></li>
-<li><code>make</code></li>
-<li><code>scene</code> : scenePlugin</li>
-<li><code>children</code> : displayList</li>
-<li><code>lights</code></li>
-<li><code>data</code></li>
-<li><code>input</code></li>
-<li><code>load</code></li>
-<li><code>time</code></li>
-<li><code>tweens</code></li>
-<li><code>physics</code> : arcadePhysics</li>
-<li><code>plugins</code></li>
-<li><code>impact</code> : impactPhysics</li>
-<li><code>matter</code> :　matterPhysics</li>
+<li>Author: Richard Davey</li>
 </ul>
-<p>Preserve word in a scene.</p>
-<h2 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h2>
+<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<h3 id="load-texture">Load texture<a class="headerlink" href="#load-texture" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">image</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
+</pre></div>
+
+<p>See <a href="../loader/index.html#image">loader</a></p>
+<h3 id="add-particle">Add particle<a class="headerlink" href="#add-particle" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Create a particle manager
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">particles</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">particles</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</pre></div></li>
+<li>Create a particle emitter
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// **basic properties of particles**</span>
+    <span class="c1">// **position**</span>
+    <span class="c1">// x: 0,             // { min, max }, or { min, max, steps }</span>
+    <span class="c1">// y: 0,             // { min, max }, or { min, max, steps }</span>
+    <span class="c1">// follow: null,</span>
+    <span class="c1">// followOffset: {</span>
+    <span class="c1">//    x: 0,</span>
+    <span class="c1">//    y: 0</span>
+    <span class="c1">// }</span>
+
+    <span class="c1">// **angle**</span>
+    <span class="c1">// radial: true,</span>
+    <span class="c1">// angle: { min: 0, max: 360 },  // { start, end, steps }</span>
+
+    <span class="c1">// **scale**</span>
+    <span class="c1">// scale: 1,             // { start, end },</span>
+    <span class="c1">// scaleX: 1,</span>
+    <span class="c1">// scaleY: 1, </span>
+
+    <span class="c1">// **render**</span>
+    <span class="c1">// frame: </span>
+    <span class="c1">// alpha: 1,      </span>
+    <span class="c1">// visible: true,          </span>
+    <span class="c1">// tint: 0xffffffff,     // a number 0xfffffff, or an array [ 0xffff00, 0xff0000, 0x00ff00, 0x0000ff ]</span>
+    <span class="c1">// blendMode: &#39;NORMAL&#39;,  // Phaser.BlendModes</span>
+
+    <span class="c1">// delay: 0,</span>
+    <span class="c1">// lifespan: 1000,       // { min, max }, or { min, max, steps }</span>
+
+
+    <span class="c1">// **physics**</span>
+    <span class="c1">// speed:                // { min, max }, or { min, max, steps }</span>
+    <span class="c1">// speedX:               // { min, max }, or { min, max, steps }</span>
+    <span class="c1">// speedY:               // { min, max }, or { min, max, steps }</span>
+    <span class="c1">// gravityX:</span>
+    <span class="c1">// gravityY:</span>
+    <span class="c1">// accelerationX:</span>
+    <span class="c1">// accelerationY:</span>
+    <span class="c1">// maxVelocityX: 10000,</span>
+    <span class="c1">// maxVelocityY: 10000,</span>
+    <span class="c1">// moveToX:</span>
+    <span class="c1">// moveToY:</span>
+
+    <span class="c1">// **bounce**</span>
+    <span class="c1">// bounce: 0,</span>
+    <span class="c1">// bounds: nul,           // { x, y, width, height }</span>
+    <span class="c1">// collideBottom: true,</span>
+    <span class="c1">// collideTop: true,</span>
+    <span class="c1">// collideLeft: true,</span>
+    <span class="c1">// collideRight : true,</span>
+
+
+    <span class="c1">// **callback**</span>
+    <span class="c1">// deathCallback: null,</span>
+    <span class="c1">// deathCallbackScope: null,</span>
+    <span class="c1">// emitCallback: null,</span>
+    <span class="c1">// emitCallbackScope: null,</span>
+
+
+    <span class="c1">// **custom particle**</span>
+    <span class="c1">// particleClass: Phaser.GameObjects.Particles.Particle</span>
+
+    <span class="c1">// **emitter**</span>
+    <span class="c1">// name: &#39;&#39;,        </span>
+    <span class="c1">// on: true,</span>
+    <span class="c1">// active: true,</span>
+    <span class="c1">// frequency: 0,</span>
+    <span class="c1">// quantity: 1,</span>
+    <span class="c1">// maxParticles: 0,</span>
+    <span class="c1">// rotate: 0,</span>
+    <span class="c1">// timeScale: 1,</span>
+
+    <span class="c1">// emitZone: {</span>
+    <span class="c1">// type: &#39;random&#39;,    // &#39;random&#39;, or &#39;edge&#39;</span>
+    <span class="c1">// source: geom,      // Geom like Circle, or a Path or Curve</span>
+
+    <span class="c1">// **type = edge**</span>
+    <span class="c1">// quantity: 1,</span>
+    <span class="c1">// stepRate: 0,</span>
+    <span class="c1">// yoyo: false,</span>
+    <span class="c1">// seamless: true</span>
+    <span class="c1">// }</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">emitter</span> <span class="o">=</span> <span class="nx">particles</span><span class="p">.</span><span class="nx">createEmitter</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</pre></div></li>
+</ol>
+<h3 id="z-index-of-emitters">Z index of emitters<a class="headerlink" href="#z-index-of-emitters" title="Permanent link">&para;</a></h3>
+<p>Z index of emitters is the same as <code>particles.emitters</code> (an array).</p>
 <ul>
-<li>
-<p>start
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
-</pre></div></p>
-</li>
-<li>
-<p>destroy
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;destroy&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
-</pre></div></p>
-</li>
-<li>
-<p>preupdate
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;preupdate&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">){});</span>
-</pre></div></p>
-</li>
-<li>
-<p>update
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;update&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">){});</span>
-</pre></div></p>
-</li>
-<li>
-<p>postupdate
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;postupdate&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">){});</span>
-</pre></div></p>
-</li>
-<li>
-<p>render
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;render&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
-</pre></div></p>
-</li>
-<li>
-<p>pause
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pause&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
-</pre></div></p>
-</li>
-<li>
-<p>resume
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;resume&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
-</pre></div></p>
-</li>
-<li>
-<p>sleep
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;sleep&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
-</pre></div></p>
-</li>
-<li>
-<p>wake
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;wake&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
-</pre></div></p>
-</li>
-<li>
-<p>resize
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;resize&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
-</pre></div></p>
-</li>
-<li>
-<p>boot
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;boot&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
-</pre></div></p>
-</li>
-<li>
-<p>shutdown
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;shutdown&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
-</pre></div></p>
-</li>
+<li>Bring an emitter to top
+    <div class="codehilite"><pre><span></span><span class="nx">particles</span><span class="p">.</span><span class="nx">emitters</span><span class="p">.</span><span class="nx">bringToTop</span><span class="p">(</span><span class="nx">emitter</span><span class="p">);</span>
+</pre></div></li>
+<li>Send an emitter to bottom
+    <div class="codehilite"><pre><span></span><span class="nx">particles</span><span class="p">.</span><span class="nx">emitters</span><span class="p">.</span><span class="nx">sendToBack</span><span class="p">(</span><span class="nx">emitter</span><span class="p">);</span>
+</pre></div></li>
+<li>Move an emitter up
+    <div class="codehilite"><pre><span></span><span class="nx">particles</span><span class="p">.</span><span class="nx">emitters</span><span class="p">.</span><span class="nx">moveUp</span><span class="p">(</span><span class="nx">emitter</span><span class="p">);</span>
+</pre></div></li>
+<li>Move an emitter down
+    <div class="codehilite"><pre><span></span><span class="nx">particles</span><span class="p">.</span><span class="nx">emitters</span><span class="p">.</span><span class="nx">moveDown</span><span class="p">(</span><span class="nx">emitter</span><span class="p">);</span>
+</pre></div></li>
+<li>Move an emitter to index
+    <div class="codehilite"><pre><span></span><span class="nx">particles</span><span class="p">.</span><span class="nx">emitters</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">emitter</span><span class="p">,</span> <span class="nx">index</span><span class="p">);</span>
+</pre></div></li>
+<li>Reverse order
+    <div class="codehilite"><pre><span></span><span class="nx">particles</span><span class="p">.</span><span class="nx">emitters</span><span class="p">.</span><span class="nx">reverse</span><span class="p">();</span>
+</pre></div></li>
+<li>Shuffle order
+    <div class="codehilite"><pre><span></span><span class="nx">particles</span><span class="p">.</span><span class="nx">emitters</span><span class="p">.</span><span class="nx">shuffle</span><span class="p">();</span>
+</pre></div></li>
+<li>Swap 2 emitters
+    <div class="codehilite"><pre><span></span><span class="nx">particles</span><span class="p">.</span><span class="nx">emitters</span><span class="p">.</span><span class="nx">swap</span><span class="p">(</span><span class="nx">emitter0</span><span class="p">,</span> <span class="nx">emitter1</span><span class="p">);</span>
+</pre></div></li>
 </ul>
                 
                   
@@ -2057,9 +2022,9 @@
   <div id="disqus_thread"></div>
   <script>
     var disqus_config = function () {
-      this.page.url = "https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/scene/index.html";
+      this.page.url = "https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/particle/index.html";
       this.page.identifier =
-        "/scene/index.html";
+        "/particle/index.html";
     };
     (function() {
       var d = document, s = d.createElement("script");
@@ -2082,7 +2047,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../scenemanager/index.html" title="Scene manager" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../canvas/index.html" title="Canvas" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -2091,19 +2056,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Scene manager
+                Canvas
               </span>
             </div>
           </a>
         
         
-          <a href="../input/index.html" title="Input" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../texture/index.html" title="Texture" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Input
+                Texture
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

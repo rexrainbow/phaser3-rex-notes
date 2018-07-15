@@ -288,7 +288,7 @@ camera.on('camerashakestart', camera, shake, duration, intensity);
 camera.on('camerashakecomplete', camera, shake);
 ```
 
-##### Pan
+#### Pan
 
 ```javascript
 camera.pan(x, y, duration);   // duration in ms
@@ -310,7 +310,7 @@ camera.on('camerapanstart', camera, pan, duration, x, y);
 camera.on('camerapancomplete', camera, pan);
 ```
 
-##### Zoom
+#### Zoom
 
 ```javascript
 camera.zoomTo(zoomValue, duration);   // duration in ms

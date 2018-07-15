@@ -33,6 +33,7 @@ pages:
     - Graphics:
         - Graphics: graphics.md
         - Canvas: canvas.md
+    - Particle: particle.md
     - Texture: texture.md
     - Tile map:
         - Tile map: tilemap.md
