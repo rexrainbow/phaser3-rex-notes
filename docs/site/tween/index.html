@@ -2194,7 +2194,9 @@
 </pre></div>
 
 <h3 id="tween-value">Tween value<a class="headerlink" href="#tween-value" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tween</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">tweens</span><span class="p">.</span><span class="nx">addCounter</span><span class="p">({</span>
+<ol>
+<li>Create tween task
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tween</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">tweens</span><span class="p">.</span><span class="nx">addCounter</span><span class="p">({</span>
     <span class="c1">// from: 0,</span>
     <span class="c1">// to: 1,</span>
     <span class="c1">// delay: 0,</span>
@@ -2230,8 +2232,11 @@
     <span class="c1">// onRepeat: function () {},</span>
     <span class="c1">// onRepeatScope: callbackScope</span>
 <span class="p">});</span>
-</pre></div>
-
+</pre></div></li>
+<li>Get value
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">tween</span><span class="p">.</span><span class="nx">getValue</span><span class="p">();</span>
+</pre></div></li>
+</ol>
 <h3 id="custom-ease-function">Custom ease function<a class="headerlink" href="#custom-ease-function" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tween</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">tweens</span><span class="p">.</span><span class="nx">add</span><span class="p">({</span>
     <span class="nx">targets</span><span class="o">:</span> <span class="nx">gameObject</span><span class="p">,</span>

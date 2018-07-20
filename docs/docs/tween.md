@@ -211,44 +211,50 @@ scene.tweens.timeScale = timescale;
 
 ### Tween value
 
-```javascript
-var tween = scene.tweens.addCounter({
-    // from: 0,
-    // to: 1,
-    // delay: 0,
-    // duration: 1000,
-    // easeParams: null,
-    // ease: 'Power0',
-    // hold: 0,
-    // repeat: 0,
-    // repeatDelay: 0,
-    // yoyo: false,
+1. Create tween task
+    ```javascript
+    var tween = scene.tweens.addCounter({
+        // from: 0,
+        // to: 1,
+        // delay: 0,
+        // duration: 1000,
+        // easeParams: null,
+        // ease: 'Power0',
+        // hold: 0,
+        // repeat: 0,
+        // repeatDelay: 0,
+        // yoyo: false,
+    
+        // offset: null,
+        // completeDelay: 0,
+        // loop: 0,
+        // loopDelay: 0,
+        // paused: false,
+        // useFrames: false,
+    
+        // callbackScope: timeline,
+    
+        // onStart: function () {},
+        // onStartScope: callbackScope,
+    
+        // onUpdate: function () {},
+        // onUpdateScope: callbackScope,
+    
+        // onComplete: function () {},
+        // onCompleteScope: callbackScope,
+    
+        // onYoyo: function () {},
+        // onYoyoScope: callbackScope,
+    
+        // onRepeat: function () {},
+        // onRepeatScope: callbackScope
+    });
+    ```
+1. Get value
+    ```javascript
+    var value = tween.getValue();
+    ```
 
-    // offset: null,
-    // completeDelay: 0,
-    // loop: 0,
-    // loopDelay: 0,
-    // paused: false,
-    // useFrames: false,
-
-    // callbackScope: timeline,
-
-    // onStart: function () {},
-    // onStartScope: callbackScope,
-
-    // onUpdate: function () {},
-    // onUpdateScope: callbackScope,
-
-    // onComplete: function () {},
-    // onCompleteScope: callbackScope,
-
-    // onYoyo: function () {},
-    // onYoyoScope: callbackScope,
-
-    // onRepeat: function () {},
-    // onRepeatScope: callbackScope
-});
-```
 
 ### Custom ease function
 
