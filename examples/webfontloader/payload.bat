@@ -2,4 +2,4 @@
 set myproj=./examples/webfontloader/payload.js
 cd ..
 cd ..
-webpack
+npm run dev

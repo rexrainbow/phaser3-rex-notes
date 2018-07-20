@@ -2,4 +2,4 @@
 set myproj=./examples/localstorage/localstorage.js
 cd ..
 cd ..
-webpack
+npm run dev

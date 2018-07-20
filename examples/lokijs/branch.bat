@@ -2,4 +2,4 @@
 set myproj=./examples/lokijs/branch.js
 cd ..
 cd ..
-webpack
+npm run dev

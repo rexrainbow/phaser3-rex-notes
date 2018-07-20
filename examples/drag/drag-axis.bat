@@ -2,4 +2,4 @@
 set myproj=./examples/drag/drag-axis.js
 cd ..
 cd ..
-webpack
+npm run dev

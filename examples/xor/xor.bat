@@ -2,4 +2,4 @@
 set myproj=./examples/xor/xor.js
 cd ..
 cd ..
-webpack
+npm run dev

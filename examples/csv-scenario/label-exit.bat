@@ -2,4 +2,4 @@
 set myproj=./examples/csv-scenario/label-exit.js
 cd ..
 cd ..
-webpack
+npm run dev

@@ -2,4 +2,4 @@
 set myproj=./examples/bbcodetext/prev-next-page.js
 cd ..
 cd ..
-webpack
+npm run dev

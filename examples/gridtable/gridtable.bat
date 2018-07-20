@@ -2,4 +2,4 @@
 set myproj=./examples/gridtable/gridtable.js
 cd ..
 cd ..
-webpack
+npm run dev

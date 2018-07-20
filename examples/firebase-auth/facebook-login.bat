@@ -2,4 +2,4 @@
 set myproj=./examples/firebase-auth/google-login.js
 cd ..
 cd ..
-webpack
+npm run dev

@@ -2,4 +2,4 @@
 set myproj=./examples/color/hsv-color-wheel.js
 cd ..
 cd ..
-webpack
+npm run dev
