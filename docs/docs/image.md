@@ -12,7 +12,7 @@ Display of static images, built-in game object of phaser.
 scene.load.image(key, url);
 ```
 
-See [loader](loader.md#image)
+Reference: [load image](loader.md#image)
 
 ### Add image object
 
@@ -31,9 +31,31 @@ var image = scene.make.image({
     // angle: 0,
     // alpha: 1
     // flipX: true,
-    // flipY: true
+    // flipY: true,
+    // scale : {
+    //    x: 1,
+    //    y: 1
+    //}
 });
 ```
+
+- `key` : 
+    - A string
+    - An array of string to pick one element at random
+- `x`, `y`, `scale.x`, `scale.y` :
+    - A number
+    - A callback to get return value
+        ```javascript
+        function() { return 0; }
+        ```
+    - Random integer between min and max
+        ```javascript
+        { randInt: [min, max] }
+        ```
+    - Random float between min and max
+        ```javascript
+        { randFloat: [min, max] }
+        ```
 
 ### Other properties
 

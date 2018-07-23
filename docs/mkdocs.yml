@@ -22,8 +22,11 @@ pages:
     - Game object: gameobject.md
     - Sprite:
         - Image: image.md
+        - Sprite: sprite.md
         - Blitter: blitter.md
+        - Particle: particle.md        
         - Quad: quad.md
+        - Texture: texture.md        
     - Text:
         - Text: text.md
         - BBCode Text: bbcodetext.md
@@ -33,8 +36,6 @@ pages:
     - Graphics:
         - Graphics: graphics.md
         - Canvas: canvas.md
-    - Particle: particle.md
-    - Texture: texture.md
     - Tile map:
         - Tile map: tilemap.md
     - Container:
@@ -42,6 +43,7 @@ pages:
         - Group: group.md
         - Group actions: groupactions.md
         - Grid table: gridtable.md
+    - Zone: zone.md        
 - Time:
     - Date: date.md
     - Timer: timer.md

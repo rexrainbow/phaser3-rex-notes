@@ -12,7 +12,7 @@ Particle uses its own lightweight physics system, and can interact only with its
 scene.load.image(key, url);
 ```
 
-See [loader](loader.md#image)
+Reference: [load image](loader.md#image)
 
 ### Add particle
 

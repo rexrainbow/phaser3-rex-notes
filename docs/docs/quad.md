@@ -15,7 +15,7 @@ Manipulate the corner points of static images, built-in game object of phaser.
 scene.load.image(key, url);
 ```
 
-See [loader](loader.md#image)
+Reference: [load image](loader.md#image)
 
 ### Add quad object
 

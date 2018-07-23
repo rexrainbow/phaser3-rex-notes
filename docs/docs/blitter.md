@@ -12,7 +12,7 @@ Display of static images, built-in game object of phaser.
 scene.load.image(key, url);
 ```
 
-See [loader](loader.md#image)
+Reference: [load image](loader.md#image)
 
 ### Add blitter container
 
