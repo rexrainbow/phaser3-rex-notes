@@ -74,7 +74,7 @@ var gameObjects = group.getChildren();  // array of game objects
 - Game object is in group.
 
     ```javascript
-    var isInGroup = group.contains();
+    var isInGroup = group.contains(child);
     ```
 
 ### Group actions

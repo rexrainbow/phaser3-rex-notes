@@ -13,7 +13,7 @@ const Clamp = Phaser.Math.Clamp;
 class GridTable extends Container {
     constructor(scene, x, y, width, height, config) {
         super(scene, x, y);
-        this.type = 'GridTable';
+        this.type = 'rexGridTable';
         this.updateFlag = true;
         this._tableOX = 0;
         this._tableOY = 0;

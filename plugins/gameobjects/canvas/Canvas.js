@@ -43,7 +43,7 @@ var Canvas = new Phaser.Class({
                 height = 256;
             }
 
-            GameObject.call(this, scene, 'Canvas');
+            GameObject.call(this, scene, 'rexCanvas');
 
             this.resolution = 1;
             this.canvas = CanvasPool.create(this, this.resolution * width, this.resolution * height);

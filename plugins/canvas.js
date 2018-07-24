@@ -10,7 +10,7 @@ Phaser.GameObjects.GameObjectFactory.register('rexCanvas', function (x, y, width
 });
 Phaser.GameObjects.GameObjectCreator.register('rexCanvas', function (config) {
     var width = GetValue(config, 'width', 256);
-    var height = GetValue(config, 'height', 256);
+    var height = GetValue(config, 'height', width);
     var canvas = new Canvas(this.scene, 0, 0, width, height);
     BuildGameObject(this.scene, canvas, config);
     var fillColor = GetValue(config, 'fill', null);

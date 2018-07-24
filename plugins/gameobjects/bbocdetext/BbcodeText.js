@@ -3,7 +3,7 @@ import parser from './Parser.js';
 
 class BBCodeText extends Text {
     constructor(scene, x, y, text, style) {
-        super(scene, x, y, text, style, 'BBCodeText', parser);
+        super(scene, x, y, text, style, 'rexBBCodeText', parser);
     }
 }
 
