@@ -1,4 +1,5 @@
+@echo off
 set myproj=./examples/gashapon/pick-item.js
 cd ..
 cd ..
-webpack
+npm run dev

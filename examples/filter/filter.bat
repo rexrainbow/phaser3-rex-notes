@@ -1,4 +1,5 @@
+@echo off
 set myproj=./examples/filter/filter.js
 cd ..
 cd ..
-webpack
+npm run dev

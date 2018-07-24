@@ -1,4 +1,5 @@
+@echo off
 set myproj=./examples/fade/blinking.js
 cd ..
 cd ..
-webpack
+npm run dev

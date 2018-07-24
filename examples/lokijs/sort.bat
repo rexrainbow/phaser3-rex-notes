@@ -1,4 +1,5 @@
+@echo off
 set myproj=./examples/lokijs/sort.js
 cd ..
 cd ..
-webpack
+npm run dev

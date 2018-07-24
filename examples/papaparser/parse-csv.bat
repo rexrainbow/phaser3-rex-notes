@@ -1,4 +1,5 @@
+@echo off
 set myproj=./examples/papaparser/parse-csv.js
 cd ..
 cd ..
-webpack
+npm run dev

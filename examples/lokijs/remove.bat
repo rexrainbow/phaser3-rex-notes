@@ -1,4 +1,5 @@
+@echo off
 set myproj=./examples/lokijs/remove.js
 cd ..
 cd ..
-webpack
+npm run dev
