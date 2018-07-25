@@ -33,7 +33,7 @@ class Cell {
         if (this.container) {
             this.container.destroy();
         }
-        this.container = container;        
+        this.container = container;
         this.parentContainer.add(container);
         return this;
     }
@@ -49,7 +49,7 @@ class Cell {
         if (this.container) {
             var container = this.container;
             this.container = null;
-            this.parentContainer.remove(container);            
+            this.parentContainer.remove(container);
             return container;
         } else {
             return null;
@@ -58,8 +58,7 @@ class Cell {
 
     setXY(x, y) {
         if (this.container) {
-            this.container.x = x;
-            this.container.y = y;
+            this.parentContainer.setChildLocalPosition(this.container, x, y);
         }
     }
 

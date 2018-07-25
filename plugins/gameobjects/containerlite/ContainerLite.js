@@ -7,6 +7,8 @@ class ContainerLite extends Zone {
         this.type = 'rexContainer';
         this._alpha = 1;
         this.children = scene.add.group();
+
+        this.setOrigin();  // ?
     }
 
     add(gameObject) {
@@ -26,10 +28,6 @@ class ContainerLite extends Zone {
     }
 
     getChildren() {
-        if (this.children === undefined) {
-            // only rise when super()
-            return [];
-        }
         return this.children.getChildren();
     }
 
@@ -61,8 +59,8 @@ class ContainerLite extends Zone {
         return point;
     }
 
-    updatePosition(child) {
-        var state = this.getChildState(child);
+    updateChildPosition(child) {
+        var state = this.getLocalState(child);
 
         child.x = state.x;
         child.y = state.y;
@@ -73,21 +71,22 @@ class ContainerLite extends Zone {
         child.rotation = state.face + this.rotation;
     }
 
-    updateVisible(child) {
+    updateChildVisible(child) {
         child.visible = this.visible;
     }
 
-    updateAlpha(child) {
-        var state = this.getChildState(child);
+    updateChildAlpha(child) {
+        var state = this.getLocalState(child);
         child.alpha = state.alpha * this.alpha;
     }
 
     destroy() {
         this.children.destroy();
+        this.children = undefined;
         super.destroy();
     }
 
-    getChildState(gameObject) {
+    getLocalState(gameObject) {
         if (!gameObject.hasOwnProperty('rexContainer')) {
             gameObject.rexContainer = {};
         }
@@ -95,7 +94,7 @@ class ContainerLite extends Zone {
     }
 
     resetChildState(gameObject) {
-        var state = this.getChildState(gameObject);
+        var state = this.getLocalState(gameObject);
         state.x = gameObject.x;
         state.y = gameObject.y;
         this.worldToLocal(state);
@@ -104,6 +103,14 @@ class ContainerLite extends Zone {
         state.scaleY = gameObject.scaleY / this.scaleY;
         state.face = gameObject.rotation - this.rotation;
         state.alpha = gameObject.alpha / this.alpha;
+    }
+
+    setChildLocalPosition(gameObject, x, y) {
+        var state = this.getLocalState(gameObject);
+        state.x = x;
+        state.y = y;
+        this.updateChildPosition(gameObject);
+        return this;
     }
 
     get x() {
@@ -116,7 +123,9 @@ class ContainerLite extends Zone {
         }
         this._x = value;
 
-        this.getChildren().forEach(this.updatePosition, this);
+        if (this.children) {
+            this.getChildren().forEach(this.updateChildPosition, this);
+        }
     }
 
     get y() {
@@ -129,7 +138,9 @@ class ContainerLite extends Zone {
         }
         this._y = value;
 
-        this.getChildren().forEach(this.updatePosition, this);
+        if (this.children) {
+            this.getChildren().forEach(this.updateChildPosition, this);
+        }
     }
 
     // override
@@ -140,7 +151,9 @@ class ContainerLite extends Zone {
     set rotation(value) {
         super.rotation = value;
 
-        this.getChildren().forEach(this.updatePosition, this);
+        if (this.children) {
+            this.getChildren().forEach(this.updateChildPosition, this);
+        }
     }
 
     // override
@@ -151,7 +164,9 @@ class ContainerLite extends Zone {
     set scaleX(value) {
         super.scaleX = value;
 
-        this.getChildren().forEach(this.updatePosition, this);
+        if (this.children) {
+            this.getChildren().forEach(this.updateChildPosition, this);
+        }
     }
 
     // override
@@ -162,7 +177,9 @@ class ContainerLite extends Zone {
     set scaleY(value) {
         super.scaleY = value;
 
-        this.getChildren().forEach(this.updatePosition, this);
+        if (this.children) {
+            this.getChildren().forEach(this.updateChildPosition, this);
+        }
     }
 
     // override
@@ -173,12 +190,15 @@ class ContainerLite extends Zone {
     set visible(value) {
         super.visible = value;
 
-        this.getChildren().forEach(this.updateVisible, this);
+        if (this.children) {
+            this.getChildren().forEach(this.updateChildVisible, this);
+        }
     }
 
     // override
     setAlpha(value) {
         this.alpha = value;
+        return this;
     }
 
     get alpha() {
@@ -192,7 +212,9 @@ class ContainerLite extends Zone {
 
         this._alpha = value;
 
-        this.getChildren().forEach(this.updateAlpha, this);
+        if (this.children) {
+            this.getChildren().forEach(this.updateChildAlpha, this);
+        }
     }
 
 }

@@ -1,10 +1,9 @@
 'use strict'
 
+import ContainerLite from 'rexPlugins/gameobjects/containerlite/ContainerLite.js';
 import TableKlass from './Table.js';
-import Clean from 'rexPlugins/utils/object/Clean.js';
-import IsArray from 'rexPlugins/utils/array/IsArray.js';
 
-const Container = Phaser.GameObjects.Container;
+const Container = ContainerLite;
 const Components = Phaser.GameObjects.Components;
 const Set = Phaser.Structs.Set;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -12,7 +11,7 @@ const Clamp = Phaser.Math.Clamp;
 
 class GridTable extends Container {
     constructor(scene, x, y, width, height, config) {
-        super(scene, x, y);
+        super(scene, x, y, width, height);
         this.type = 'rexGridTable';
         this.updateFlag = true;
         this._tableOX = 0;
@@ -29,13 +28,6 @@ class GridTable extends Container {
         this.execeedLeftState = false;
         this.execeedRightState = false;
 
-        if (width === undefined) {
-            width = 0;
-        }
-        if (height === undefined) {
-            height = 0;
-        }
-        this.setSize(width, height);
         this.setScrollMode(GetValue(config, 'scrollMode', 0));
         this.setClampMode(GetValue(config, 'clamplTableOXY', true));
         var callback = GetValue(config, 'cellVisibleCallback', null);
@@ -88,7 +80,7 @@ class GridTable extends Container {
     }
 
     setGridSize(colCount, rowCount) {
-        this.table.setCellsCunt(colCount * rowCount);
+        this.setCellsCount(colCount * rowCount);
         this.table.setColumnCount(colCount);
         return this;
     }
@@ -544,7 +536,7 @@ class GridTable extends Container {
     }
 
     destroy() {
-        this.setCellsCunt(0);
+        this.setCellsCount(0);
         this.table.destroy();
         super.destroy();
     }

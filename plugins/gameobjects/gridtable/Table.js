@@ -7,7 +7,7 @@ const SpliceOne = Phaser.Utils.Array.SpliceOne;
 var CellsPool = new PoolKlass();
 class Table {
     constructor(parent, config) {
-        this.parent = parent; // parent: GridTable game object (container)
+        this.parent = parent; // parent: GridTable game object (Container)
         this.cells = [];
         this.resetFromJSON(config);
     }
@@ -15,7 +15,7 @@ class Table {
     resetFromJSON(o) {
         this.colCount = undefined;
         this.defaultCellHeightMode = true;
-        this._totalRowsHeight = null;
+        this.resetTotalRowsHeight();
         this.setDefaultCellHeight(GetValue(o, "cellHeight", 30));
         this.setDefaultCellWidth(GetValue(o, "cellWidth", 30));
         this.initCells(GetValue(o, "cellsCount", 0));
@@ -59,6 +59,8 @@ class Table {
             }
             this.cells.splice(cellIdx, 0, ...newCells);
         }
+
+        this.resetTotalRowsHeight();
         return this;
     }
 
@@ -79,12 +81,14 @@ class Table {
             }
             this.buildCellIndex(cellIdx);
         }
+
+        this.resetTotalRowsHeight();
         return this;
     }
 
     setColumnCount(cnt) {
         this.colCount = cnt;
-        this._totalRowsHeight = null;
+        this.resetTotalRowsHeight();
         return this;
     }
 
@@ -211,8 +215,9 @@ class Table {
     }
 
     getCellHeight(cellIdx) {
-        if (!this.isValidCellIdx(cellIdx))
+        if (!this.isValidCellIdx(cellIdx)) {
             return 0;
+        }
 
         var cellHeight;
         if (this.defaultCellHeightMode)
@@ -226,9 +231,14 @@ class Table {
         return cellHeight;
     }
 
+    resetTotalRowsHeight() {
+        this._totalRowsHeight = null;
+    }
+    
     get totalRowsHeight() {
-        if (this._totalRowsHeight === null)
+        if (this._totalRowsHeight === null) {
             this._totalRowsHeight = this.rowIndexToHeight(0, this.rowCount - 1);
+        }
 
         return this._totalRowsHeight;
     }

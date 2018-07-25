@@ -66,12 +66,11 @@ var newTable = function (scene, config) {
             .setName('background')
             .setDisplaySize(56, 56)
             .setTint(0x333333)
-            .setInteractive()
-            .on('pointerup', function () {
-                debugger
-                console.log('click cell ' + cell.index);
-                deleteCell(cell);
-            });
+            //.setInteractive()
+            //.on('pointerup', function () {                
+            //    console.log('click cell ' + cell.index);
+            //    deleteCell(cell);
+            //});
         var txt = scene.add.text(5, 5, data.id)
             .setName('id');
         cell.setData('id', data.id);
