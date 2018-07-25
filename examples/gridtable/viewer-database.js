@@ -24,7 +24,7 @@ class Demo extends Phaser.Scene {
             database: database,
             x: 400,
             y: 300,
-            width: 300,
+            width: 250,
             height: 400,
 
             cellHeight: 60,
@@ -65,14 +65,14 @@ var newTable = function (scene, config) {
         var bg = scene.add.image(30, 30, 'bg')
             .setName('background')
             .setDisplaySize(56, 56)
-            .setTint(0x333333)
-            //.setInteractive()
-            //.on('pointerup', function () {                
-            //    console.log('click cell ' + cell.index);
-            //    deleteCell(cell);
-            //});
+            .setTint(0x333333);
         var txt = scene.add.text(5, 5, data.id)
-            .setName('id');
+            .setName('id')
+            .setInteractive()
+            .on('pointerup', function () {
+                console.log('click cell ' + cell.index);
+                deleteCell(cell);
+            });
         cell.setData('id', data.id);
 
         var container = scene.add.container(0, 0, [bg, txt]);
@@ -99,6 +99,7 @@ var newTable = function (scene, config) {
         //console.log('Cell ' + cell.index + ' visible');
     };
     table = scene.make.rexGridTable(config);
+    table.depth = -1;
     addDragContentBehavior(table);
 
     return table;

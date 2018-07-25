@@ -1,7 +1,7 @@
 'use strict'
 
 import ContainerLite from 'rexPlugins/gameobjects/containerlite/ContainerLite.js';
-import TableKlass from './Table.js';
+import Table from './Table.js';
 
 const Container = ContainerLite;
 const Components = Phaser.GameObjects.Components;
@@ -40,8 +40,9 @@ class GridTable extends Container {
             var scope = GetValue(config, 'cellInvisibleCallbackScope', undefined);
             this.on('cellinvisible', callback, scope);
         }
-        this.table = new TableKlass(this, config);
+        this.table = new Table(this, config);
         this.updateTable();
+        // TODO: move z-index of grid table to bottom
     }
 
     setScrollMode(mode) {

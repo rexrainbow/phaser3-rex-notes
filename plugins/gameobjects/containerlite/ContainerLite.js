@@ -4,11 +4,11 @@ const RotateAround = Phaser.Math.RotateAround;
 class ContainerLite extends Zone {
     constructor(scene, x, y, width, height) {
         super(scene, x, y, width, height);
+        this.setOrigin(0.5, 0.5);  // Iit should be set in Zone object
+
         this.type = 'rexContainer';
         this._alpha = 1;
         this.children = scene.add.group();
-
-        this.setOrigin();  // ?
     }
 
     add(gameObject) {

@@ -27,7 +27,8 @@ class Demo extends Phaser.Scene {
                     .setName('index');
                 container = scene.add.container(0, 0, [bg, txt]);
             } else {
-                console.log(cell.index + ': pop from pool')
+                console.log(cell.index + ': pop from pool');
+                container.visible = true;
                 container.getByName('index').setText(cell.index);
             }
 
@@ -40,6 +41,8 @@ class Demo extends Phaser.Scene {
         };
         var onCellInvisible = function (cell) {
             var container = cell.popContainer();
+            container.setPosition(-100,-100);
+            container.visible = false;
             cellObjectsPool.push(container);
             console.log(cell.index + ': push to pool')
         }
