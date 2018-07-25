@@ -9,6 +9,7 @@ module.exports = {
         // game objects
         'bbcodetextplugin': './plugins/bbcodetext-plugin.js',
         'canvasplugin': './plugins/canvas-plugin.js',
+        'containerliteplugin': './plugins/containerlite-plugin.js',
         'gridtableplugin': './plugins/gridtable-plugin.js',
         'tagtextplugin': './plugins/tagtext-plugin.js',
 

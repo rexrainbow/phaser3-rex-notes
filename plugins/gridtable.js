@@ -16,4 +16,4 @@ Phaser.GameObjects.GameObjectCreator.register('rexGridTable', function (config) 
     return table;
 });
 
-export default TagText;
+export default GridTable;
