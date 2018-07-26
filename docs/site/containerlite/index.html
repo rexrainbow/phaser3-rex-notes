@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/csvtohashtable/index.html">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/containerlite/index.html">
       
       
         <meta name="author" content="rexrainbow">
@@ -36,7 +36,7 @@
     
     
       
-        <title>CSV to hash table - Notes of Phaser 3</title>
+        <title>Container Lite - Notes of Phaser 3</title>
       
     
     
@@ -96,7 +96,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                CSV to hash table
+                Container Lite
               </span>
             
           
@@ -436,10 +436,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
     
     <label class="md-nav__link" for="nav-5">
       Game object
@@ -731,10 +733,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-6" type="checkbox" id="nav-5-6">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-6" type="checkbox" id="nav-5-6" checked>
     
     <label class="md-nav__link" for="nav-5-6">
       Container
@@ -762,11 +766,173 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../containerlite/index.html" title="Container Lite" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Container Lite
+      </label>
+    
+    <a href="index.html" title="Container Lite" class="md-nav__link md-nav__link--active">
       Container Lite
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-plugin" title="Install plugin" class="md-nav__link">
+    Install plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-container-object" title="Add container object" class="md-nav__link">
+    Add container object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#destroy" title="Destroy" class="md-nav__link">
+    Destroy
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-properties" title="Other properties" class="md-nav__link">
+    Other properties
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#addpin-child" title="Add(pin) child" class="md-nav__link">
+    Add(pin) child
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-child" title="Remove child" class="md-nav__link">
+    Remove child
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-children" title="Get children" class="md-nav__link">
+    Get children
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exist" title="Exist" class="md-nav__link">
+    Exist
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#children-group" title="Children group" class="md-nav__link">
+    Children group
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#positionanglescale-of-children" title="Position/Angle/Scale of children" class="md-nav__link">
+    Position/Angle/Scale of children
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visible-of-children" title="Visible of children" class="md-nav__link">
+    Visible of children
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alpha-of-children" title="Alpha of children" class="md-nav__link">
+    Alpha of children
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#local-position-of-child" title="Local position of child" class="md-nav__link">
+    Local position of child
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set-local-position" title="Set local position" class="md-nav__link">
+    Set local position
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+        <li class="md-nav__item">
+          <a href="#__comments" title="Comments" class="md-nav__link md-nav__link--active">
+            Comments
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -1060,12 +1226,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
     
     <label class="md-nav__link" for="nav-9">
       Data
@@ -1105,12 +1269,10 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-3" type="checkbox" id="nav-9-3" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-3" type="checkbox" id="nav-9-3">
     
     <label class="md-nav__link" for="nav-9-3">
       CSV
@@ -1138,194 +1300,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="toc">
-        CSV to hash table
-      </label>
-    
-    <a href="index.html" title="CSV to hash table" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../csvtohashtable/index.html" title="CSV to hash table" class="md-nav__link">
       CSV to hash table
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#source-code" title="Source code" class="md-nav__link">
-    Source code
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#import-class" title="Import class" class="md-nav__link">
-    Import class
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
-    Install global plugin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#load-table-from-csv-string" title="Load table from csv string" class="md-nav__link">
-    Load table from csv string
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#convert-value-type" title="Convert value type" class="md-nav__link">
-    Convert value type
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-value" title="Get value" class="md-nav__link">
-    Get value
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set-value" title="Set value" class="md-nav__link">
-    Set value
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#has-columnrow-key" title="Has column/row key" class="md-nav__link">
-    Has column/row key
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#value-in-column-or-row" title="Value in column or row" class="md-nav__link">
-    Value in column or row
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#create-table" title="Create table" class="md-nav__link">
-    Create table
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#clean-table" title="Clean table" class="md-nav__link">
-    Clean table
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#append-a-column" title="Append a column" class="md-nav__link">
-    Append a column
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#append-a-row" title="Append a row" class="md-nav__link">
-    Append a row
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#remove-a-row" title="Remove a row" class="md-nav__link">
-    Remove a row
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#remove-a-column" title="Remove a column" class="md-nav__link">
-    Remove a column
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sort-column-or-row" title="Sort column or row" class="md-nav__link">
-    Sort column or row
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#retrieve-columns-or-rows" title="Retrieve columns or rows" class="md-nav__link">
-    Retrieve columns or rows
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-        <li class="md-nav__item">
-          <a href="#__comments" title="Comments" class="md-nav__link md-nav__link--active">
-            Comments
-          </a>
-        </li>
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -1968,127 +1947,106 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#import-class" title="Import class" class="md-nav__link">
-    Import class
+  <a href="#install-plugin" title="Install plugin" class="md-nav__link">
+    Install plugin
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
-    Install global plugin
+  <a href="#add-container-object" title="Add container object" class="md-nav__link">
+    Add container object
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
+  <a href="#destroy" title="Destroy" class="md-nav__link">
+    Destroy
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#load-table-from-csv-string" title="Load table from csv string" class="md-nav__link">
-    Load table from csv string
+  <a href="#other-properties" title="Other properties" class="md-nav__link">
+    Other properties
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#convert-value-type" title="Convert value type" class="md-nav__link">
-    Convert value type
+  <a href="#addpin-child" title="Add(pin) child" class="md-nav__link">
+    Add(pin) child
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-value" title="Get value" class="md-nav__link">
-    Get value
+  <a href="#remove-child" title="Remove child" class="md-nav__link">
+    Remove child
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#set-value" title="Set value" class="md-nav__link">
-    Set value
+  <a href="#get-children" title="Get children" class="md-nav__link">
+    Get children
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#has-columnrow-key" title="Has column/row key" class="md-nav__link">
-    Has column/row key
+  <a href="#exist" title="Exist" class="md-nav__link">
+    Exist
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#value-in-column-or-row" title="Value in column or row" class="md-nav__link">
-    Value in column or row
+  <a href="#children-group" title="Children group" class="md-nav__link">
+    Children group
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-table" title="Create table" class="md-nav__link">
-    Create table
+  <a href="#positionanglescale-of-children" title="Position/Angle/Scale of children" class="md-nav__link">
+    Position/Angle/Scale of children
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visible-of-children" title="Visible of children" class="md-nav__link">
+    Visible of children
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alpha-of-children" title="Alpha of children" class="md-nav__link">
+    Alpha of children
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#local-position-of-child" title="Local position of child" class="md-nav__link">
+    Local position of child
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#clean-table" title="Clean table" class="md-nav__link">
-    Clean table
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#append-a-column" title="Append a column" class="md-nav__link">
-    Append a column
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#append-a-row" title="Append a row" class="md-nav__link">
-    Append a row
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#remove-a-row" title="Remove a row" class="md-nav__link">
-    Remove a row
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#remove-a-column" title="Remove a column" class="md-nav__link">
-    Remove a column
+  <a href="#set-local-position" title="Set local position" class="md-nav__link">
+    Set local position
   </a>
   
 </li>
         
       </ul>
     </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sort-column-or-row" title="Sort column or row" class="md-nav__link">
-    Sort column or row
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#retrieve-columns-or-rows" title="Retrieve columns or rows" class="md-nav__link">
-    Retrieve columns or rows
-  </a>
   
 </li>
         
@@ -2118,35 +2076,29 @@
               
                 
                 
-                  <h1>CSV to hash table</h1>
+                  <h1>Container Lite</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Hash table indexed by (col-key, row-key) from csv string.</p>
+<p>Control the position and angle of children game objects.</p>
+<p>A lite container game object inspired from <a href="https://github.com/Ziao/phaser3-interim-containers">Ziao/phaser3-interim-containers</a>.</p>
 <ul>
 <li>Author: Rex</li>
-<li>Member of scene</li>
+<li>A kind of game object, installed by global plugin</li>
 </ul>
 <h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/csvtohashtable-plugin.js">Link</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/containerlite-plugin.js">Link</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/csv-to-hash-table">Sample code</a></p>
-<p>User could import class directly, or install it by global plugin.</p>
-<h3 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">rexHashTable</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/csvtohashtable.js&#39;</span><span class="p">;</span>
-</pre></div>
-
-<h3 id="install-global-plugin">Install global plugin<a class="headerlink" href="#install-global-plugin" title="Permanent link">&para;</a></h3>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/container-lite">Sample code</a></p>
+<h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
 <p>Install plugin in <a href="../game/index.html#configuration">configuration of game</a></p>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">HashTablePlugin</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/csvtohashtable-plugin.js&#39;</span><span class="p">;</span>
-
-<span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
-            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexHashTable&#39;</span><span class="p">,</span>
-            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">HashTablePlugin</span><span class="p">,</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;ContainerLitePlugin&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">ContainerLitetPlugin</span><span class="p">,</span>
             <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
-        <span class="p">}</span>
+        <span class="p">},</span>
         <span class="c1">// ...</span>
         <span class="p">]</span>
     <span class="p">}</span>
@@ -2155,161 +2107,102 @@
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </pre></div>
 
-<h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">table</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexHashTable&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">();</span>
+<h3 id="add-container-object">Add container object<a class="headerlink" href="#add-container-object" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">container</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexContainerLite</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>  <span class="c1">// width = 1, height = 1</span>
+<span class="c1">// var container = scene.add.rexContainerLite(x, y, width, height);</span>
 </pre></div>
 
-<h3 id="load-table-from-csv-string">Load table from csv string<a class="headerlink" href="#load-table-from-csv-string" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">loadCSV</span><span class="p">(</span><span class="nx">csvString</span><span class="p">,</span> <span class="p">{</span>
-    <span class="c1">// delimiter: &#39;,&#39;,</span>
-    <span class="c1">// convert: true</span>
-    <span class="c1">// convertScope: undefined</span>
+<p>Add container from JSON</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">container</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">rexContainerLite</span><span class="p">({</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+
+    <span class="c1">// angle: 0,</span>
+    <span class="c1">// alpha: 1</span>
+    <span class="c1">// flipX: true,</span>
+    <span class="c1">// flipY: true,</span>
+    <span class="c1">// scale : {</span>
+    <span class="c1">//    x: 1,</span>
+    <span class="c1">//    y: 1</span>
+    <span class="c1">//}</span>
 <span class="p">});</span>
 </pre></div>
 
-<p>For exameple, csv string</p>
-<div class="codehilite"><pre><span></span><span class="err">name,hp,mp</span>
-<span class="err">Rex,100,20</span>
-<span class="err">Alice,300,40</span>
+<h3 id="destroy">Destroy<a class="headerlink" href="#destroy" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
 </pre></div>
 
-<p>will be converted to</p>
-<div class="codehilite"><pre><span></span><span class="p">{</span>
-    <span class="nt">&quot;Alice&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Alice&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;hp&quot;</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span>
-        <span class="nt">&quot;mp&quot;</span><span class="p">:</span> <span class="mi">40</span>
-    <span class="p">},</span>
-    <span class="nt">&quot;Rex&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nt">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;Rex&quot;</span><span class="p">,</span>
-        <span class="nt">&quot;hp&quot;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
-        <span class="nt">&quot;mp&quot;</span><span class="p">:</span> <span class="mi">20</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+<p>Also destroy all children game object.</p>
+<h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
+<p>This container game object inherits from <a href="../zone/index.html">Zone</a>.</p>
+<h3 id="addpin-child">Add(pin) child<a class="headerlink" href="#addpin-child" title="Permanent link">&para;</a></h3>
+<p>Add(pin) a game obejct to container</p>
+<div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>  <span class="c1">// child: a game object</span>
 </pre></div>
 
-<p>Then get value by</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;Rex&#39;</span><span class="p">,</span> <span class="s1">&#39;hp&#39;</span><span class="p">);</span>
+<p>Or add(pin) children</p>
+<div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">addMultiple</span><span class="p">(</span><span class="nx">children</span><span class="p">);</span>  <span class="c1">// children: an array of game objects</span>
 </pre></div>
 
-<h3 id="convert-value-type">Convert value type<a class="headerlink" href="#convert-value-type" title="Permanent link">&para;</a></h3>
-<p>Values will be converted to <em>number</em>, <em>boolean</em>, <em>null</em>, or <em>string</em>, if <code>convert</code> is <code>true</code>, or assign your convert function by <code>convert</code> and <code>convertScope</code> when loading table (<code>table.loadCSV(...)</code>).</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">convertCallback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">table</span><span class="p">,</span> <span class="nx">rowKey</span><span class="p">,</span> <span class="nx">colKey</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// value = ...</span>
-    <span class="k">return</span> <span class="nx">value</span><span class="p">;</span>
-<span class="p">};</span>
+<p>Position/Angle/Scale/Visible/Alpha of children will be changed with container.</p>
+<h3 id="remove-child">Remove child<a class="headerlink" href="#remove-child" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>  <span class="c1">// child: a game object</span>
 </pre></div>
 
-<p>Or uses these metheds to convert columns or rows.</p>
+<p>Or remove all children</p>
+<div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+</pre></div>
+
+<h3 id="get-children">Get children<a class="headerlink" href="#get-children" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gameObjects</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">getChildren</span><span class="p">();</span>
+</pre></div>
+
+<h3 id="exist">Exist<a class="headerlink" href="#exist" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">hasChild</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">contains</span><span class="p">();</span>
+</pre></div>
+
+<h3 id="children-group">Children group<a class="headerlink" href="#children-group" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">group</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">children</span><span class="p">;</span>
+</pre></div>
+
+<p>Reference <a href="../group/index.html">Group</a></p>
+<h3 id="positionanglescale-of-children">Position/Angle/Scale of children<a class="headerlink" href="#positionanglescale-of-children" title="Permanent link">&para;</a></h3>
+<p>Position/Angle/Scale of children will be updated when position, angle, or scale of container is changed.</p>
+<p>Or call</p>
+<div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">updateChildPosition</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+</pre></div>
+
+<p>to update child's position/angle/scale manually.</p>
+<h3 id="visible-of-children">Visible of children<a class="headerlink" href="#visible-of-children" title="Permanent link">&para;</a></h3>
+<p>Visible of children will be updated when visible of container is changed.</p>
+<p>Or call</p>
+<div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">updateChildVisible</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+</pre></div>
+
+<p>to update child's visible manually.</p>
+<h3 id="alpha-of-children">Alpha of children<a class="headerlink" href="#alpha-of-children" title="Permanent link">&para;</a></h3>
+<p>Alpha of children will be updated when alpha of container is changed.</p>
+<p>Or call</p>
+<div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">updateChildAlpha</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+</pre></div>
+
+<p>to update child's alpha manually.</p>
+<h3 id="local-position-of-child">Local position of child<a class="headerlink" href="#local-position-of-child" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">localState</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">getLocalState</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
+</pre></div>
+
 <ul>
-<li>convert values in column
-    <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">convertCol</span><span class="p">(</span><span class="nx">colKey</span><span class="p">);</span>  <span class="c1">// colKey: a colKey, or an array of colKeys</span>
-<span class="c1">// table.convertCol(colKey, convertCallback, convertCallbackScope);</span>
-</pre></div></li>
-<li>convert values in row
-    <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">convertRow</span><span class="p">(</span><span class="nx">rowKey</span><span class="p">);</span>  <span class="c1">// rowKey: a rowKey, or an array of rowKeys</span>
-<span class="c1">// table.convertRow(rowKey, convertCallback, convertCallbackScope);</span>
-</pre></div></li>
+<li>Properties of <code>localState</code><ul>
+<li><code>x</code>, <code>y</code>, <code>face</code></li>
+<li><code>scaleX</code>, <code>scaleY</code></li>
+<li><code>alpha</code></li>
 </ul>
-<h3 id="get-value">Get value<a class="headerlink" href="#get-value" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">val</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">rowKey</span><span class="p">,</span> <span class="nx">colKey</span><span class="p">);</span>
-</pre></div>
-
-<h3 id="set-value">Set value<a class="headerlink" href="#set-value" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">rowKey</span><span class="p">,</span> <span class="nx">colKey</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
-</pre></div>
-
-<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">rowKey</span><span class="p">,</span> <span class="nx">colKey</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
-<span class="c1">// equal to table.set(rowKey, colKey, table.get(rowKey, colKey) + value);</span>
-</pre></div>
-
-<h3 id="has-columnrow-key">Has column/row key<a class="headerlink" href="#has-columnrow-key" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">hasRow</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">hasRowKey</span><span class="p">(</span><span class="nx">rowKey</span><span class="p">);</span>
-</pre></div>
-
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">hasCol</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">hasColKey</span><span class="p">(</span><span class="nx">colKey</span><span class="p">);</span>
-</pre></div>
-
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">hasCell</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">hasKey</span><span class="p">(</span><span class="nx">rowKey</span><span class="p">,</span> <span class="nx">colKey</span><span class="p">);</span>
-</pre></div>
-
-<h3 id="value-in-column-or-row">Value in column or row<a class="headerlink" href="#value-in-column-or-row" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">existed</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">isValueInRol</span><span class="p">(</span><span class="nx">rowKey</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
-</pre></div>
-
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">existed</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">isValueInCol</span><span class="p">(</span><span class="nx">colKey</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
-</pre></div>
-
-<h3 id="create-table">Create table<a class="headerlink" href="#create-table" title="Permanent link">&para;</a></h3>
-<h4 id="clean-table">Clean table<a class="headerlink" href="#clean-table" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">clean</span><span class="p">();</span>
-</pre></div>
-
-<h4 id="append-a-column">Append a column<a class="headerlink" href="#append-a-column" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">appendCol</span><span class="p">(</span><span class="nx">colKey</span><span class="p">,</span> <span class="nx">initValue</span><span class="p">);</span>
-<span class="c1">// table.appendCol(colKey, callback, scope);  // get initValue from callback</span>
-</pre></div>
-
-<p>Callback</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">table</span><span class="p">,</span> <span class="nx">rowKey</span><span class="p">,</span> <span class="nx">colKey</span><span class="p">)</span> <span class="p">{</span> 
-    <span class="c1">// value = ...</span>
-    <span class="k">return</span> <span class="nx">value</span><span class="p">;</span>
-<span class="p">};</span>
-</pre></div>
-
-<h4 id="append-a-row">Append a row<a class="headerlink" href="#append-a-row" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">appendRow</span><span class="p">(</span><span class="nx">colKey</span><span class="p">,</span> <span class="nx">initValue</span><span class="p">);</span>
-<span class="c1">// table.appendRow(colKey, callback, scope);  // get initValue from callback</span>
-</pre></div>
-
-<p>Callback</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">table</span><span class="p">,</span> <span class="nx">rowKey</span><span class="p">,</span> <span class="nx">colKey</span><span class="p">)</span> <span class="p">{</span> 
-    <span class="c1">// value = ...</span>
-    <span class="k">return</span> <span class="nx">value</span><span class="p">;</span>
-<span class="p">};</span>
-</pre></div>
-
-<h4 id="remove-a-row">Remove a row<a class="headerlink" href="#remove-a-row" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">removeRol</span><span class="p">(</span><span class="nx">colKey</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="remove-a-column">Remove a column<a class="headerlink" href="#remove-a-column" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">removeCol</span><span class="p">(</span><span class="nx">colKey</span><span class="p">);</span>
-</pre></div>
-
-<h3 id="sort-column-or-row">Sort column or row<a class="headerlink" href="#sort-column-or-row" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">sortCol</span><span class="p">(</span><span class="nx">colKey</span><span class="p">,</span> <span class="nx">mode</span><span class="p">);</span>
-<span class="c1">// table.sortCol(callback, scope);  // sort column by callback</span>
-</pre></div>
-
-<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">sortRow</span><span class="p">(</span><span class="nx">rowKey</span><span class="p">,</span> <span class="nx">mode</span><span class="p">);</span>
-<span class="c1">// table.sortRow(callback, scope);  // sort column by callback</span>
-</pre></div>
-
-<p>Mode:</p>
-<ul>
-<li><code>'ascending'</code>, or <code>0</code></li>
-<li><code>'descending'</code>, or <code>1</code></li>
-<li><code>'logical ascending'</code>, or <code>2</code></li>
-<li><code>'logical descending'</code>, or <code>3</code></li>
+</li>
 </ul>
-<p>Sorting callback</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">rowKeyA</span><span class="p">,</span> <span class="nx">rowKeyB</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">result</span><span class="p">;</span> <span class="c1">// 1, -1, or 0</span>
-<span class="p">};</span>
-</pre></div>
-
-<h3 id="retrieve-columns-or-rows">Retrieve columns or rows<a class="headerlink" href="#retrieve-columns-or-rows" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">eachCol</span><span class="p">(</span><span class="nx">rowKey</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>
-</pre></div>
-
-<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">eachRow</span><span class="p">(</span><span class="nx">colKey</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>
-</pre></div>
-
-<p>Callback</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">table</span><span class="p">,</span> <span class="nx">rowKey</span><span class="p">,</span> <span class="nx">colKey</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// ...</span>
-<span class="p">};</span>
+<h4 id="set-local-position">Set local position<a class="headerlink" href="#set-local-position" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">setChildLocalPosition</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 </pre></div>
                 
                   
@@ -2321,9 +2214,9 @@
                   <div id="disqus_thread"></div>
 <script>
   var disqus_config = function () {
-    this.page.url = "https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/csvtohashtable/index.html";
+    this.page.url = "https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/containerlite/index.html";
     this.page.identifier =
-      "/csvtohashtable/index.html";
+      "/containerlite/index.html";
   };
   (function() {
     var d = document, s = d.createElement("script");
@@ -2345,7 +2238,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../csvtoarray/index.html" title="CSV to array" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../container/index.html" title="Container" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -2354,19 +2247,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                CSV to array
+                Container
               </span>
             </div>
           </a>
         
         
-          <a href="../lokijs/index.html" title="LokiJs" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../group/index.html" title="Group" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                LokiJs
+                Group
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

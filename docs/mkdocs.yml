@@ -39,7 +39,8 @@ pages:
     - Tile map:
         - Tile map: tilemap.md
     - Container:
-        - Container: container.md        
+        - Container: container.md
+        - Container Lite: containerlite.md
         - Group: group.md
         - Group actions: groupactions.md
         - Grid table: gridtable.md

@@ -20,9 +20,7 @@ class ContainerLite extends Zone {
     }
 
     addMultiple(gameObjects) {
-        for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-            this.add(gameObjects[i]);
-        }
+        gameObjects.forEach(this.add, this);
     }
 
     remove(gameObject) {

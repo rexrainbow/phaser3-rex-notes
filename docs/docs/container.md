@@ -1,6 +1,6 @@
 ## Introduction
 
-Control the position and angle of children game object, built-in game object of phaser.
+Control the position and angle of children game objects, built-in game object of phaser.
 
 - Author: Richard Davey
 
@@ -21,7 +21,7 @@ var container = scene.add.container(x, y);
 container.destroy();
 ```
 
-Also destroy all children game object.
+Also destroy all children game objects.
 
 #### Set properties
 

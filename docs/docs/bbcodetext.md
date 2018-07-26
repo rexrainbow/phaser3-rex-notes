@@ -100,13 +100,13 @@ Add text from JSON
 
 ```javascript
 var txt = scene.make.rexBBCodeText({
-    x: 100,
-    y: 100,
+    x: 0,
+    y: 0,
     padding: {
-        left: 64,
-        right: 16,
-        top: 20,
-        bottom: 40
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: 0
         //x: 32,    // 32px padding on the left/right
         //y: 16     // 16px padding on the top/bottom
     },
