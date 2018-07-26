@@ -11,8 +11,8 @@ Control the position and angle of children game object, built-in game object of 
 #### Add container object
 
 ```javascript
-var image = scene.add.container(x, y);
-// var image = scene.add.container(x, y, children); // children: an array of game object
+var container = scene.add.container(x, y);
+// var container = scene.add.container(x, y, children); // children: an array of game object
 ```
 
 #### Destroy

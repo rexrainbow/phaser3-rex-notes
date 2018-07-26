@@ -9,15 +9,24 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {}
+    preload() {
+        this.load.image('mushroom', 'assets/images/mushroom.png');
+    }
 
     create() {
-        this.child = this.add.graphics()
-            .fillStyle(0xcccccc, 1)
-            .fillRect(0, 0, 40, 40)
-            .setPosition(100, 200);
-        this.containerLite = this.add.rexContainerLite(100, 300)
-            .add(this.child);
+        this.containerLite = this.add.rexContainerLite(100, 300, 100, 100);
+
+        this.children = [];
+        this.children.push(
+            this.add.image(100, 200, 'mushroom')
+        );
+        this.children.push(
+            this.add.image(140, 340, 'mushroom')
+            .setAngle(45)
+        );
+
+        this.containerLite
+            .addMultiple(this.children);
 
         // test x, scale, angle, alpha
         this.tweens.add({
@@ -39,7 +48,7 @@ class Demo extends Phaser.Scene {
                     value: '-=1'
                 }
             },
-            duration: 4000,
+            duration: 6000,
             repeat: -1,
             yoyo: true
         });
@@ -47,18 +56,24 @@ class Demo extends Phaser.Scene {
         // test visible
         var scene = this;
         this.input.on('pointerup', function () {
-            scene.containerLite.visible = !scene.containerLite.visible;
+            //scene.containerLite.visible = !scene.containerLite.visible;
+            scene.containerLite.toggleFlipY();
         });
 
-        this.line = this.add.graphics();
+        this.lines = this.add.graphics();
         this.update();
     }
 
     update() {
-        this.line
+        this.lines
             .clear()
-            .lineStyle(2, 0x00ffff, 1)
-            .lineBetween(this.containerLite.x, this.containerLite.y, this.child.x, this.child.y);
+            .lineStyle(2, 0x00ffff, 1);
+
+        var gameObject;
+        for (var i = 0, cnt = this.children.length; i < cnt; i++) {
+            gameObject = this.children[i];
+            this.lines.lineBetween(this.containerLite.x, this.containerLite.y, gameObject.x, gameObject.y);
+        }
     }
 }
 
