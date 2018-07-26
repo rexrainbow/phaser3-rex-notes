@@ -5,6 +5,7 @@ pages:
     - Game: game.md
     - Scene manager: scenemanager.md
     - Scene: scene.md
+    - Snapshot: snapshot.md
 - Input:
     - Input: input.md
     - Touch:    

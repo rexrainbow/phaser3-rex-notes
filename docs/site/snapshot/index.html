@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/loader/index.html">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/snapshot/index.html">
       
       
         <meta name="author" content="rexrainbow">
@@ -36,7 +36,7 @@
     
     
       
-        <title>Loader - Notes of Phaser 3</title>
+        <title>Snapshot - Notes of Phaser 3</title>
       
     
     
@@ -96,7 +96,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Loader
+                Snapshot
               </span>
             
           
@@ -172,10 +172,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
     
     <label class="md-nav__link" for="nav-2">
       System
@@ -227,11 +229,69 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../snapshot/index.html" title="Snapshot" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Snapshot
+      </label>
+    
+    <a href="index.html" title="Snapshot" class="md-nav__link md-nav__link--active">
       Snapshot
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-snapshot-image" title="Get snapshot image" class="md-nav__link">
+    Get snapshot image
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+        <li class="md-nav__item">
+          <a href="#__comments" title="Comments" class="md-nav__link md-nav__link--active">
+            Comments
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -400,12 +460,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
     
     <label class="md-nav__link" for="nav-4">
       Loader
@@ -421,243 +479,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="toc">
-        Loader
-      </label>
-    
-    <a href="index.html" title="Loader" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../loader/index.html" title="Loader" class="md-nav__link">
       Loader
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#loading-in-preload-stage" title="Loading in preload stage" class="md-nav__link">
-    Loading in preload stage
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#loading-after-preload-stage" title="Loading after preload stage" class="md-nav__link">
-    Loading after preload stage
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#events" title="Events" class="md-nav__link">
-    Events
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#status-of-loader" title="Status of loader" class="md-nav__link">
-    Status of loader
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#file-types" title="File types" class="md-nav__link">
-    File types
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#image" title="Image" class="md-nav__link">
-    Image
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sprite-sheet" title="Sprite sheet" class="md-nav__link">
-    Sprite sheet
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#texture-atlas" title="Texture atlas" class="md-nav__link">
-    Texture atlas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#multi-file-texture-atlas" title="Multi file texture atlas" class="md-nav__link">
-    Multi file texture atlas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#unity-texture-atlas" title="Unity texture atlas" class="md-nav__link">
-    Unity texture atlas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#animation" title="Animation" class="md-nav__link">
-    Animation
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#audio" title="Audio" class="md-nav__link">
-    Audio
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#audio-sprite" title="Audio sprite" class="md-nav__link">
-    Audio sprite
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#bitmap-font" title="Bitmap font" class="md-nav__link">
-    Bitmap font
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#tile-map" title="Tile map" class="md-nav__link">
-    Tile map
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#text" title="Text" class="md-nav__link">
-    Text
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#json" title="JSON" class="md-nav__link">
-    JSON
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#xml" title="XML" class="md-nav__link">
-    XML
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#script" title="Script" class="md-nav__link">
-    Script
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#glsl" title="GLSL" class="md-nav__link">
-    GLSL
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#binary" title="Binary" class="md-nav__link">
-    Binary
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#plugin" title="Plugin" class="md-nav__link">
-    Plugin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#file-pack" title="File pack" class="md-nav__link">
-    File pack
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#release-data" title="Release data" class="md-nav__link">
-    Release data
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#data-in-cache" title="Data in cache" class="md-nav__link">
-    Data in cache
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-        <li class="md-nav__item">
-          <a href="#__comments" title="Comments" class="md-nav__link md-nav__link--active">
-            Comments
-          </a>
-        </li>
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -2020,182 +1846,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#loading-in-preload-stage" title="Loading in preload stage" class="md-nav__link">
-    Loading in preload stage
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#loading-after-preload-stage" title="Loading after preload stage" class="md-nav__link">
-    Loading after preload stage
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#events" title="Events" class="md-nav__link">
-    Events
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#status-of-loader" title="Status of loader" class="md-nav__link">
-    Status of loader
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#file-types" title="File types" class="md-nav__link">
-    File types
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#image" title="Image" class="md-nav__link">
-    Image
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sprite-sheet" title="Sprite sheet" class="md-nav__link">
-    Sprite sheet
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#texture-atlas" title="Texture atlas" class="md-nav__link">
-    Texture atlas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#multi-file-texture-atlas" title="Multi file texture atlas" class="md-nav__link">
-    Multi file texture atlas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#unity-texture-atlas" title="Unity texture atlas" class="md-nav__link">
-    Unity texture atlas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#animation" title="Animation" class="md-nav__link">
-    Animation
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#audio" title="Audio" class="md-nav__link">
-    Audio
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#audio-sprite" title="Audio sprite" class="md-nav__link">
-    Audio sprite
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#bitmap-font" title="Bitmap font" class="md-nav__link">
-    Bitmap font
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#tile-map" title="Tile map" class="md-nav__link">
-    Tile map
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#text" title="Text" class="md-nav__link">
-    Text
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#json" title="JSON" class="md-nav__link">
-    JSON
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#xml" title="XML" class="md-nav__link">
-    XML
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#script" title="Script" class="md-nav__link">
-    Script
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#glsl" title="GLSL" class="md-nav__link">
-    GLSL
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#binary" title="Binary" class="md-nav__link">
-    Binary
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#plugin" title="Plugin" class="md-nav__link">
-    Plugin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#file-pack" title="File pack" class="md-nav__link">
-    File pack
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#release-data" title="Release data" class="md-nav__link">
-    Release data
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#data-in-cache" title="Data in cache" class="md-nav__link">
-    Data in cache
+  <a href="#get-snapshot-image" title="Get snapshot image" class="md-nav__link">
+    Get snapshot image
   </a>
   
 </li>
@@ -2226,255 +1878,29 @@
               
                 
                 
-                  <h1>Loader</h1>
+                  <h1>Snapshot</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Load assets, built-in object of phaser.</p>
+<p>Get snapshot image, built-in methods of phaser.</p>
 <ul>
 <li>Author: Richard Davey</li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<h3 id="loading-in-preload-stage">Loading in preload stage<a class="headerlink" href="#loading-in-preload-stage" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">image</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
-<span class="c1">// scene.load.image(config); // config: {key, url}</span>
+<h3 id="get-snapshot-image">Get snapshot image<a class="headerlink" href="#get-snapshot-image" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">game</span><span class="p">.</span><span class="nx">renderer</span><span class="p">.</span><span class="nx">snapshot</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
+<span class="c1">// game.renderer.snapshot(callback, type, encoderOptions)</span>
 </pre></div>
 
-<p>Loader in preload stage will start loading automatically by scene.</p>
-<h3 id="loading-after-preload-stage">Loading after preload stage<a class="headerlink" href="#loading-after-preload-stage" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">image</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>   <span class="c1">// add task</span>
-<span class="c1">// scene.load.image(config); // config: {key, url}</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>  <span class="c1">// add callback of &#39;complete&#39; event</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>                     <span class="c1">// start loading</span>
-</pre></div>
-
-<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Start loading
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
-</pre></div></li>
-<li>Loading progressing
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;progress&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">progress</span><span class="p">){});</span>
-</pre></div></li>
-<li>Loading a file object successful
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fileObj</span><span class="p">){});</span>
-</pre></div></li>
-<li>Loading a file object failed
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;loaderror&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fileObj</span><span class="p">){});</span>
-</pre></div></li>
-<li>All loading completed
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
-</pre></div></li>
+<li><code>type</code> : <code>'image/png'</code></li>
+<li><code>encoderOptions</code> : <code>0.92</code></li>
+<li><code>callback</code> :
+    <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">image</span><span class="p">){</span> <span class="cm">/* ... */</span><span class="p">};</span>
+</pre></div><ul>
+<li><code>image</code> : Image element</li>
 </ul>
-<h3 id="status-of-loader">Status of loader<a class="headerlink" href="#status-of-loader" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Ready to start loading
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isReady</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">isReady</span><span class="p">();</span>
-</pre></div></li>
-<li>Is loading
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isLoading</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">isLoading</span><span class="p">();</span>
-</pre></div></li>
+</li>
 </ul>
-<h3 id="file-types">File types<a class="headerlink" href="#file-types" title="Permanent link">&para;</a></h3>
-<h4 id="image">Image<a class="headerlink" href="#image" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">image</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>  <span class="c1">// image</span>
-<span class="c1">// scene.load.image(config); // config: {key, url}</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">svg</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>    <span class="c1">// image in svg format</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>  <span class="c1">// image in html format</span>
-</pre></div>
-
-<p>Get data from texture cache</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="sprite-sheet">Sprite sheet<a class="headerlink" href="#sprite-sheet" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">spritesheet</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="p">{</span>
-    <span class="c1">// frameWidth: frameWidth,</span>
-    <span class="c1">// frameHeight: frameHeight,</span>
-    <span class="c1">// startFrame: startFrame,</span>
-    <span class="c1">// endFrame: endFrame,</span>
-    <span class="c1">// margin: margin,</span>
-    <span class="c1">// spacing: spacing</span>
-<span class="p">});</span>
-</pre></div>
-
-<p>Get data from texture cache</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="texture-atlas">Texture atlas<a class="headerlink" href="#texture-atlas" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">atlas</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">textureURL</span><span class="p">,</span> <span class="nx">atlasURL</span><span class="p">);</span>
-</pre></div>
-
-<p>Get data from texture cache</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="multi-file-texture-atlas">Multi file texture atlas<a class="headerlink" href="#multi-file-texture-atlas" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">multiatlas</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">textureURLs</span><span class="p">,</span> <span class="nx">atlasURLs</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="unity-texture-atlas">Unity texture atlas<a class="headerlink" href="#unity-texture-atlas" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">unityAtlas</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">textureURL</span><span class="p">,</span> <span class="nx">atlasURL</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="animation">Animation<a class="headerlink" href="#animation" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">animation</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="audio">Audio<a class="headerlink" href="#audio" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">audio</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">urls</span><span class="p">);</span>
-</pre></div>
-
-<p>Get data from cache</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">audio</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="audio-sprite">Audio sprite<a class="headerlink" href="#audio-sprite" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">audioSprite</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">urls</span><span class="p">,</span> <span class="nx">json</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="bitmap-font">Bitmap font<a class="headerlink" href="#bitmap-font" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">bitmapFont</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">textureURL</span><span class="p">,</span> <span class="nx">xmlURL</span><span class="p">);</span>
-</pre></div>
-
-<p>Get data from cache</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">bitmapFont</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="tile-map">Tile map<a class="headerlink" href="#tile-map" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">tilemapWeltmeister</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>  <span class="c1">// JSON</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">tilemapCSV</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>          <span class="c1">// CSV</span>
-</pre></div>
-
-<p>Get data from cache</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">tilemap</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="text">Text<a class="headerlink" href="#text" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
-</pre></div>
-
-<p>Get data from cache</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">text</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="json">JSON<a class="headerlink" href="#json" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">json</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
-</pre></div>
-
-<p>Get data from cache</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">json</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="xml">XML<a class="headerlink" href="#xml" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">xml</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
-</pre></div>
-
-<p>Get data from cache</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">xml</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="script">Script<a class="headerlink" href="#script" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">script</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="glsl">GLSL<a class="headerlink" href="#glsl" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">glsl</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
-</pre></div>
-
-<p>Get data from cache</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">shader</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="binary">Binary<a class="headerlink" href="#binary" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">binary</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="nx">dataType</span><span class="p">);</span>  <span class="c1">// dataType: Uint8Array</span>
-<span class="c1">// scene.load.binary(config); // config: {key, url, dataType}</span>
-</pre></div>
-
-<p>Get data from cache</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">binary</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="plugin">Plugin<a class="headerlink" href="#plugin" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span> <span class="c1">// start plugin when loaded</span>
-</pre></div>
-
-<h4 id="file-pack">File pack<a class="headerlink" href="#file-pack" title="Permanent link">&para;</a></h4>
-<p>Load files in JSON format.</p>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">pack</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="nx">dataKey</span><span class="p">);</span>
-</pre></div>
-
-<p>JSON pack file:</p>
-<div class="codehilite"><pre><span></span><span class="p">{</span>
-    <span class="s1">&#39;dataKey&#39;</span><span class="o">:</span> <span class="p">{</span>
-        <span class="c1">// &quot;prefix&quot;: &quot;...&quot;,          // optional, extend key by prefix</span>
-        <span class="c1">// &quot;path&quot;: &quot;...&quot;,            // optional, extend url by path</span>
-        <span class="c1">// &quot;defaultType&quot;: &quot;image&quot;,   // optional, default file type</span>
-        <span class="s1">&#39;files&#39;</span><span class="o">:</span> <span class="p">[</span> 
-            <span class="p">{</span>
-                <span class="s1">&#39;type&#39;</span><span class="o">:</span> <span class="s1">&#39;image&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;key&#39;</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;url&#39;</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span>
-            <span class="p">},</span>
-            <span class="p">{</span>
-                <span class="s1">&#39;type&#39;</span><span class="o">:</span> <span class="s1">&#39;image&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;key&#39;</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;url&#39;</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span>
-            <span class="p">}</span>            
-            <span class="c1">// ...</span>
-        <span class="p">]</span>
-    <span class="p">},</span>
-
-    <span class="s1">&#39;node0&#39;</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s1">&#39;node1&#39;</span><span class="o">:</span> <span class="p">{</span>
-            <span class="s1">&#39;node2&#39;</span><span class="o">:</span> <span class="p">{</span>
-                <span class="s1">&#39;files&#39;</span><span class="o">:</span> <span class="p">[</span>
-                    <span class="c1">// ....</span>
-                <span class="p">]</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="c1">// dataKey: &#39;node0.node1.node2&#39;</span>
-<span class="p">}</span>
-</pre></div>
-
-<p>File type:</p>
-<ul>
-<li><code>animationJSON</code></li>
-<li><code>audio</code></li>
-<li><code>binary</code></li>
-<li><code>glsl</code></li>
-<li><code>html</code></li>
-<li><code>image</code></li>
-<li><code>json</code></li>
-<li><code>script</code></li>
-<li><code>spritesheet</code></li>
-<li><code>svg</code></li>
-<li><code>text</code></li>
-<li><code>tilemapCSV</code></li>
-<li><code>tilemapJSON</code></li>
-<li><code>xml</code></li>
-</ul>
-<h3 id="release-data">Release data<a class="headerlink" href="#release-data" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">text</span><span class="p">;</span>
-<span class="nx">cache</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</pre></div>
-
-<h3 id="data-in-cache">Data in cache<a class="headerlink" href="#data-in-cache" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">text</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">hasData</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</pre></div>
                 
                   
                 
@@ -2485,9 +1911,9 @@
                   <div id="disqus_thread"></div>
 <script>
   var disqus_config = function () {
-    this.page.url = "https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/loader/index.html";
+    this.page.url = "https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/snapshot/index.html";
     this.page.identifier =
-      "/loader/index.html";
+      "/snapshot/index.html";
   };
   (function() {
     var d = document, s = d.createElement("script");
@@ -2509,7 +1935,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../keyboardevents/index.html" title="Keyboard events" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../scene/index.html" title="Scene" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -2518,19 +1944,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Keyboard events
+                Scene
               </span>
             </div>
           </a>
         
         
-          <a href="../webfontloader/index.html" title="Webfont loader" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../input/index.html" title="Input" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Webfont loader
+                Input
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
