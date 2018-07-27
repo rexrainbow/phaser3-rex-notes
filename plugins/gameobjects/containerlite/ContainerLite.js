@@ -1,27 +1,41 @@
+import IsArray from 'rexPlugins/utils/array/IsArray.js';
+
 const Zone = Phaser.GameObjects.Zone;
 const Components = Phaser.GameObjects.Components;
 const RotateAround = Phaser.Math.RotateAround;
 
 class ContainerLite extends Zone {
-    constructor(scene, x, y, width, height) {
+    constructor(scene, x, y, width, height, children) {
+        if (IsArray(width)) {
+            children = width;
+            width = undefined;
+        }
         super(scene, x, y, width, height);
-        this.setOrigin(0.5, 0.5); // Iit should be set in Zone object
+        this.children = scene.add.group();        
+        this.setOrigin(0.5, 0.5); // It should be set in Zone object
         this.type = 'rexContainerLite';
         this.syncPositionEnable = true;
+        
         this._flipX = false;
         this._flipY = false;
         this._alpha = 1;
-        this.children = scene.add.group();
+
+        if (children) {
+            this.add(children);
+        }
     }
 
     add(gameObject) {
-        this.children.add(gameObject);
-        this.resetChildState(gameObject);
+        if (IsArray(gameObject)) {
+            this.addMultiple(gameObject);
+        } else {
+            this._add(gameObject);
+        }
         return this;
     }
 
     addMultiple(gameObjects) {
-        gameObjects.forEach(this.add, this);
+        gameObjects.forEach(this._add, this);
         return this;
     }
 
@@ -74,7 +88,7 @@ class ContainerLite extends Zone {
     }
 
     updateChildPosition(child) {
-        var isContainerLiteChild = (child.type === this.type);
+        var isContainerLiteChild = (child.hasOwnProperty('syncPositionEnable'));
         if (isContainerLiteChild) {
             child.syncPositionEnable = false;
         }
@@ -96,7 +110,7 @@ class ContainerLite extends Zone {
         if (isContainerLiteChild) {
             child.syncPositionEnable = true;
             child.syncPosition();
-        }        
+        }
     }
 
     updateChildVisible(child) {
@@ -152,6 +166,12 @@ class ContainerLite extends Zone {
         state.x = x;
         state.y = y;
         this.updateChildPosition(gameObject);
+        return this;
+    }
+
+    _add(gameObject) {
+        this.children.add(gameObject);
+        this.resetChildState(gameObject);
         return this;
     }
 

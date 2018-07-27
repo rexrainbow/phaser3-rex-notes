@@ -14,17 +14,15 @@ class Demo extends Phaser.Scene {
     }
 
     create() {;
-        this.images = [
-            this.add.image(100, 200, 'mushroom'),
-            this.add.image(140, 340, 'mushroom').setAngle(45)
-        ]
-        this.children = [
-            this.add.rexContainerLite(30, 40).add(this.images[0]),
-            this.add.rexContainerLite(50, 60).add(this.images[1])
-        ];
-
         this.containerLite = this.add.rexContainerLite(100, 300, 100, 100)
-            .addMultiple(this.children);
+            .add(
+                this.add.rexContainerLite(50, 200)
+                .add(this.add.image(100, 200, 'mushroom'))
+            )
+            .add(
+                this.add.rexContainerLite(150, 300)
+                .add(this.add.image(140, 340, 'mushroom').setAngle(45))
+            );
 
         // test x, scale, angle, alpha
         this.tweens.add({
@@ -58,19 +56,31 @@ class Demo extends Phaser.Scene {
             scene.containerLite.toggleFlipY();
         });
 
-        this.lines = this.add.graphics();
+        this.lines = this.add.graphics()
+            .setDefaultStyles({
+                lineStyle: {
+                    width: 2,
+                    color: 0x00ffff,
+                    alpha: 1
+                }
+            });
         this.update();
     }
 
     update() {
-        this.lines
-            .clear()
-            .lineStyle(2, 0x00ffff, 1);
+        this.lines.clear();
+        this.lineParentToChildren(this.containerLite);
+    }
 
-        var gameObject;
-        for (var i = 0, cnt = this.images.length; i < cnt; i++) {
-            gameObject = this.images[i];
-            this.lines.lineBetween(this.containerLite.x, this.containerLite.y, gameObject.x, gameObject.y);
+    lineParentToChildren(parent) {
+        var children = parent.getChildren(),
+            child;
+        for (var i = 0, cnt = children.length; i < cnt; i++) {
+            child = children[i];
+            this.lines.lineBetween(parent.x, parent.y, child.x, child.y);
+            if (child.children) {
+                this.lineParentToChildren(child);
+            }
         }
     }
 }
