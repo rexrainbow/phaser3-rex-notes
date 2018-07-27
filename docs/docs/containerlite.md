@@ -175,3 +175,12 @@ var localState = container.getLocalState(child);
 ```javascript
 container.setChildLocalPosition(child, x, y);
 ```
+
+## Compare with [Container](container.md)
+
+- Position/anlge/scale of a child object :
+    - [Container](container.md) : Local position/anlge/scale, responding to parent container, not a world position/anlge/scale
+    - Container-Lite : World position/anlge/scale
+- Updating period
+    - [Container](container.md) : re-calculate position/anlge/scale of each child every render
+    - Container-Lite: re-calculate position/anlge/scale of each child when parent container changes position/anlge/scale
