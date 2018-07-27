@@ -3,6 +3,7 @@
 import Phaser from 'phaser';
 import GridTablePlugin from 'rexPlugins/gridtable-plugin.js';
 import TouchStatePlugin from 'rexPlugins/touchstate-plugin.js';
+import ContainerLitePlugin from 'rexPlugins/containerlite-plugin.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -75,7 +76,9 @@ var newTable = function (scene, config) {
             });
         cell.setData('id', data.id);
 
-        var container = scene.add.container(0, 0, [bg, txt]);
+        var container = scene.add.rexContainerLite(0, 0)
+            .add(bg)
+            .add(txt);
         return container;
     };
 
@@ -128,6 +131,11 @@ var config = {
             {
                 key: 'rexTouchState',
                 plugin: TouchStatePlugin,
+                start: true
+            },
+            {
+                key: 'rexContainerLite',
+                plugin: ContainerLitePlugin,
                 start: true
             }
         ]

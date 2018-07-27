@@ -6,7 +6,8 @@ class ContainerLite extends Zone {
     constructor(scene, x, y, width, height) {
         super(scene, x, y, width, height);
         this.setOrigin(0.5, 0.5); // Iit should be set in Zone object
-        this.type = 'rexContainer';
+        this.type = 'rexContainerLite';
+        this.syncPositionEnable = true;
         this._flipX = false;
         this._flipY = false;
         this._alpha = 1;
@@ -72,12 +73,14 @@ class ContainerLite extends Zone {
     }
 
     updateChildPosition(child) {
+        var isContainerLiteChild = (child.type === this.type);
+        if (isContainerLiteChild) {
+            child.syncPositionEnable = false;
+        }
         var state = this.getLocalState(child);
-        P0.x = state.x;
-        P0.y = state.y;
-        this.localToWorld(P0);
-        child.x = P0.x;
-        child.y = P0.y;
+        child.x = state.x;
+        child.y = state.y;
+        this.localToWorld(child);
 
         child.scaleX = state.scaleX * this.scaleX;
         child.scaleY = state.scaleY * this.scaleY;
@@ -88,6 +91,11 @@ class ContainerLite extends Zone {
         }
 
         child.rotation = state.face + this.rotation;
+
+        if (isContainerLiteChild) {
+            child.syncPositionEnable = true;
+            child.syncPosition();
+        }        
     }
 
     updateChildVisible(child) {
@@ -99,8 +107,16 @@ class ContainerLite extends Zone {
         child.alpha = state.alpha * this.alpha;
     }
 
+    syncPosition() {
+        if (this.children && this.syncPositionEnable) {
+            this.getChildren().forEach(this.updateChildPosition, this);
+        }
+
+        return this;
+    }
+
     destroy() {
-        this.children.destroy();
+        this.children.destroy(true);
         this.children = undefined;
         super.destroy();
     }
@@ -148,9 +164,7 @@ class ContainerLite extends Zone {
         }
         this._x = value;
 
-        if (this.children) {
-            this.getChildren().forEach(this.updateChildPosition, this);
-        }
+        this.syncPosition();
     }
 
     get y() {
@@ -163,9 +177,7 @@ class ContainerLite extends Zone {
         }
         this._y = value;
 
-        if (this.children) {
-            this.getChildren().forEach(this.updateChildPosition, this);
-        }
+        this.syncPosition();
     }
 
     // override
@@ -179,9 +191,7 @@ class ContainerLite extends Zone {
         }
         super.rotation = value;
 
-        if (this.children) {
-            this.getChildren().forEach(this.updateChildPosition, this);
-        }
+        this.syncPosition();
     }
 
     // override
@@ -195,9 +205,7 @@ class ContainerLite extends Zone {
         }
         super.scaleX = value;
 
-        if (this.children) {
-            this.getChildren().forEach(this.updateChildPosition, this);
-        }
+        this.syncPosition();
     }
 
     // override
@@ -211,9 +219,7 @@ class ContainerLite extends Zone {
         }
         super.scaleY = value;
 
-        if (this.children) {
-            this.getChildren().forEach(this.updateChildPosition, this);
-        }
+        this.syncPosition();
     }
 
     // override
@@ -227,9 +233,7 @@ class ContainerLite extends Zone {
         }
         this._flipX = value;
 
-        if (this.children) {
-            this.getChildren().forEach(this.updateChildPosition, this);
-        }
+        this.syncPosition();
     }
 
     // override
@@ -243,9 +247,7 @@ class ContainerLite extends Zone {
         }
         this._flipY = value;
 
-        if (this.children) {
-            this.getChildren().forEach(this.updateChildPosition, this);
-        }
+        this.syncPosition();
     }
 
     // override
@@ -281,8 +283,6 @@ class ContainerLite extends Zone {
     }
 
 }
-
-var P0 = {}; // reuse this vector2 object
 
 Object.assign(
     ContainerLite.prototype,

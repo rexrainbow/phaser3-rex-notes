@@ -16,14 +16,14 @@ class Demo extends Phaser.Scene {
     create() {
         this.containerLite = this.add.rexContainerLite(100, 300, 100, 100);
 
-        this.children = [];
-        this.children.push(
-            this.add.image(100, 200, 'mushroom')
-        );
-        this.children.push(
-            this.add.image(140, 340, 'mushroom')
-            .setAngle(45)
-        );
+        this.images = [
+            this.add.image(100, 200, 'mushroom'),
+            this.add.image(140, 340, 'mushroom').setAngle(45)
+        ]
+        this.children = [
+            this.add.rexContainerLite(30, 40).add(this.images[0]),
+            this.add.rexContainerLite(50, 60).add(this.images[1])
+        ];
 
         this.containerLite
             .addMultiple(this.children);
@@ -70,8 +70,8 @@ class Demo extends Phaser.Scene {
             .lineStyle(2, 0x00ffff, 1);
 
         var gameObject;
-        for (var i = 0, cnt = this.children.length; i < cnt; i++) {
-            gameObject = this.children[i];
+        for (var i = 0, cnt = this.images.length; i < cnt; i++) {
+            gameObject = this.images[i];
             this.lines.lineBetween(this.containerLite.x, this.containerLite.y, gameObject.x, gameObject.y);
         }
     }
