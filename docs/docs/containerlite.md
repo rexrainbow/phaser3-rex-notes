@@ -42,6 +42,11 @@ var game = new Phaser.Game(config);
 var container = scene.add.rexContainerLite(x, y);  // width = 1, height = 1
 // var container = scene.add.rexContainerLite(x, y, width, height);
 ```
+or
+```javascript
+var container = scene.add.rexContainerLite(x, y, children);  // width = 1, height = 1
+// var container = scene.add.rexContainerLite(x, y, width, height, children);
+```
 
 Add container from JSON
 
@@ -87,6 +92,7 @@ Or add(pin) children
 
 ```javascript
 container.addMultiple(children);  // children: an array of game objects
+// container.add(children);  // children: an array of game objects
 ```
 
 Position/Angle/Scale/Visible/Alpha of children will be changed with container.
