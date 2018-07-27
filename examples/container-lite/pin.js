@@ -13,9 +13,7 @@ class Demo extends Phaser.Scene {
         this.load.image('mushroom', 'assets/images/mushroom.png');
     }
 
-    create() {
-        this.containerLite = this.add.rexContainerLite(100, 300, 100, 100);
-
+    create() {;
         this.images = [
             this.add.image(100, 200, 'mushroom'),
             this.add.image(140, 340, 'mushroom').setAngle(45)
@@ -25,7 +23,7 @@ class Demo extends Phaser.Scene {
             this.add.rexContainerLite(50, 60).add(this.images[1])
         ];
 
-        this.containerLite
+        this.containerLite = this.add.rexContainerLite(100, 300, 100, 100)
             .addMultiple(this.children);
 
         // test x, scale, angle, alpha

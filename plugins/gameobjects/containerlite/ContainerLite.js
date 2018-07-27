@@ -22,6 +22,7 @@ class ContainerLite extends Zone {
 
     addMultiple(gameObjects) {
         gameObjects.forEach(this.add, this);
+        return this;
     }
 
     remove(gameObject) {
