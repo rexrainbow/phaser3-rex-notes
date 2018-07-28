@@ -1,12 +1,10 @@
-import IsArray from 'rexPlugins/utils/array/IsArray.js';
-
 const Zone = Phaser.GameObjects.Zone;
 const Components = Phaser.GameObjects.Components;
 const RotateAround = Phaser.Math.RotateAround;
 
 class ContainerLite extends Zone {
     constructor(scene, x, y, width, height, children) {
-        if (IsArray(width)) {
+        if (Array.isArray(width)) {
             children = width;
             width = undefined;
         }
@@ -26,7 +24,7 @@ class ContainerLite extends Zone {
     }
 
     add(gameObject) {
-        if (IsArray(gameObject)) {
+        if (Array.isArray(gameObject)) {
             this.addMultiple(gameObject);
         } else {
             this._add(gameObject);

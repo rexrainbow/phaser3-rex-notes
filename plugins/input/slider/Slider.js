@@ -1,7 +1,6 @@
 'use strict'
 
 import GetSceneObject from 'rexPlugins/utils/system/GetSceneObject.js';
-import IsArray from 'rexPlugins/utils/array/IsArray.js';
 
 const EE = Phaser.Events.EventEmitter;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -92,7 +91,7 @@ class Slider extends EE {
             points[0].y = p0y;
             points[1].x = p1x;
             points[1].y = p1y;
-        } else if (IsArray(p0x)) { // single array with 2 points
+        } else if (Array.isArray(p0x)) { // single array with 2 points
             points[0] = p0x[0];
             points[1] = p0x[1];
         } else {

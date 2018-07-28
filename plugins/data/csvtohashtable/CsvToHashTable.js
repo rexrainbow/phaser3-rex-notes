@@ -3,7 +3,6 @@
 import CSVToArray from 'rexPlugins/utils/array/CSVToArray.js'; // use simple csv parser
 import ArrayCopy from 'rexPlugins/utils/array/Copy.js';
 import TypeConvert from 'rexPlugins/utils/string/TypeConvert.js';
-import IsArray from 'rexPlugins/utils/array/IsArray.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -319,7 +318,7 @@ class CsvToHashTable {
             callback = TypeConvert;
         }
 
-        if (IsArray(colKey)) {
+        if (Array.isArray(colKey)) {
             for (var i = 0, len = colKey.length; i < len; i++) {
                 this.convertCol(colKey[i], callback, scope);
             }
@@ -354,7 +353,7 @@ class CsvToHashTable {
             callback = TypeConvert;
         }
 
-        if (IsArray(rowKey)) {
+        if (Array.isArray(rowKey)) {
             for (var i = 0, len = rowKey.length; i < len; i++) {
                 this.convertRow(rowKey[i], callback, scope);
             }

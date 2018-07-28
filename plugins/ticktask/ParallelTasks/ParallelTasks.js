@@ -1,6 +1,5 @@
 import BaseTask from './../BaseTask.js';
 import TaskTypeCache from './../TaskTypeCache.js';
-import IsArray from './../../utils/array/IsArray.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 
@@ -27,7 +26,7 @@ class ParallelTasks extends BaseTask {
     }
 
     add(config) {
-        if (IsArray(config)) {
+        if (Array.isArray(config)) {
             for (var i = 0, len = config.length; i < len; i++) {
                 this.add(config[i]);
             }
