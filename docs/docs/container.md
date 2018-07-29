@@ -15,6 +15,24 @@ var container = scene.add.container(x, y);
 // var container = scene.add.container(x, y, children); // children: an array of game object
 ```
 
+### Custom class
+
+- Define class
+    ```javascript
+    class MyContainer extends Phaser.GameObjects.Container {
+        constructor(scene, x, y, children) {
+            super(scene, x, y, children);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
+- Create instance
+    ```javascript
+    var container = new MyContainer(scene, x, y, children);
+    ```
+
 #### Destroy
 
 ```javascript

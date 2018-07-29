@@ -53,6 +53,24 @@ var table = scene.make.rexGridTable({
 });
 ```
 
+### Custom class
+
+- Define class
+    ```javascript
+    class MyGridTable extends GridTable {
+        constructor(scene, x, y, width, height, config) {
+            super(scene, x, y, width, height, config);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
+- Create instance
+    ```javascript
+    var table = new MyGridTable(scene, x, y, width, height, config);
+    ```
+
 ### Cell begins visible
 
 Add [container](container.md) of cell when it begins visible in event `cellvisible`. 

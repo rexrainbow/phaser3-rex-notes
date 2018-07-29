@@ -75,6 +75,24 @@ var sprite = scene.make.sprite({
         { randFloat: [min, max] }
         ```
 
+### Custom class
+
+- Define class
+    ```javascript
+    class MySprite extends Phaser.GameObjects.Sprite {
+        constructor(scene, x, y, texture, frame) {
+            super(scene, x, y, texture, frame);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
+- Create instance
+    ```javascript
+    var sprite = new MySprite(scene, x, y, key);
+    ```
+
 ### Other properties
 
 See [game object](gameobject.md)

@@ -37,6 +37,24 @@ var blitter = scene.make.blitter({
 });
 ```
 
+### Custom class
+
+- Define class
+    ```javascript
+    class MyBlitter extends Phaser.GameObjects.Blitter {
+        constructor(scene, x, y, texture, frame) {
+            super(scene, x, y, texture, frame);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
+- Create instance
+    ```javascript
+    var blitter = new MyBlitter(scene, x, y, key);
+    ```
+
 ### Add bob object
 
 ```javascript

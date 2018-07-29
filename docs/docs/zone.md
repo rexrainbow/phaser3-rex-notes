@@ -23,6 +23,24 @@ var zone = scene.make.zone({
 });
 ```
 
+### Custom class
+
+- Define class
+    ```javascript
+    class MyZone extends Phaser.GameObjects.Zone {
+        constructor(scene, x, y, width, height) {
+            super(scene, x, y, width, height);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
+- Create instance
+    ```javascript
+    var zone = new MyZone(x, y, width, height);
+    ```
+
 ### Other properties
 
 See [game object](gameobject.md)

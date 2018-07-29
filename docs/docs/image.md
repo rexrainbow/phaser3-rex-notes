@@ -57,6 +57,24 @@ var image = scene.make.image({
         { randFloat: [min, max] }
         ```
 
+### Custom class
+
+- Define class
+    ```javascript
+    class MyImage extends Phaser.GameObjects.Image {
+        constructor(scene, x, y, texture, frame) {
+            super(scene, x, y, texture, frame);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
+- Create instance
+    ```javascript
+    var image = new MyImage(scene, x, y, key);
+    ```
+
 ### Other properties
 
 See [game object](gameobject.md)

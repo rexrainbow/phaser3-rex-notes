@@ -610,8 +610,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-quad-object" title="Add quad object" class="md-nav__link">
-    Add quad object
+  <a href="#add-object" title="Add object" class="md-nav__link">
+    Add object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-quad-class" title="Custom quad class" class="md-nav__link">
+    Custom quad class
   </a>
   
 </li>
@@ -1973,8 +1980,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-quad-object" title="Add quad object" class="md-nav__link">
-    Add quad object
+  <a href="#add-object" title="Add object" class="md-nav__link">
+    Add object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-quad-class" title="Custom quad class" class="md-nav__link">
+    Custom quad class
   </a>
   
 </li>
@@ -2072,7 +2086,7 @@
 </pre></div>
 
 <p>Reference: <a href="../loader/index.html#image">load image</a></p>
-<h3 id="add-quad-object">Add quad object<a class="headerlink" href="#add-quad-object" title="Permanent link">&para;</a></h3>
+<h3 id="add-object">Add object<a class="headerlink" href="#add-object" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">quad</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">quad</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
 </pre></div>
 
@@ -2089,6 +2103,22 @@
 <span class="p">});</span>
 </pre></div>
 
+<h3 id="custom-quad-class">Custom quad class<a class="headerlink" href="#custom-quad-class" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Define class
+    <div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">MyQuad</span> <span class="kr">extends</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">GameObjects</span><span class="p">.</span><span class="nx">Quad</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>
+        <span class="c1">// ...</span>
+        <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div></li>
+<li>Create instance
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">quad</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyQuad</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
+</pre></div></li>
+</ul>
 <h3 id="properties-of-corner-points">Properties of corner points<a class="headerlink" href="#properties-of-corner-points" title="Permanent link">&para;</a></h3>
 <h4 id="position">Position<a class="headerlink" href="#position" title="Permanent link">&para;</a></h4>
 <ul>

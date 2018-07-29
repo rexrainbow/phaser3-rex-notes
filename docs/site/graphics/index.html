@@ -742,6 +742,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#custom-class" title="Custom class" class="md-nav__link">
+    Custom class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#drawing-commands" title="Drawing commands" class="md-nav__link">
     Drawing commands
   </a>
@@ -2022,6 +2029,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#custom-class" title="Custom class" class="md-nav__link">
+    Custom class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#drawing-commands" title="Drawing commands" class="md-nav__link">
     Drawing commands
   </a>
@@ -2166,6 +2180,22 @@
 <span class="c1">// var graphics = scene.add.graphics({x, y});</span>
 </pre></div>
 
+<h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Define class
+    <div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">MyGraphics</span> <span class="kr">extends</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">GameObjects</span><span class="p">.</span><span class="nx">Graphics</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
+        <span class="c1">// ...</span>
+        <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div></li>
+<li>Create instance
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">graphics</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyGraphics</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
+</pre></div></li>
+</ul>
 <h3 id="drawing-commands">Drawing commands<a class="headerlink" href="#drawing-commands" title="Permanent link">&para;</a></h3>
 <h4 id="set-style">Set style<a class="headerlink" href="#set-style" title="Permanent link">&para;</a></h4>
 <ul>

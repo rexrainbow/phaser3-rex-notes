@@ -665,6 +665,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#custom-class" title="Custom class" class="md-nav__link">
+    Custom class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#word-wrap" title="Word wrap" class="md-nav__link">
     Word wrap
   </a>
@@ -1988,6 +1995,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#custom-class" title="Custom class" class="md-nav__link">
+    Custom class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#word-wrap" title="Word wrap" class="md-nav__link">
     Word wrap
   </a>
@@ -2144,6 +2158,22 @@
 <span class="p">});</span>
 </pre></div>
 
+<h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Define class
+    <div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">MyText</span> <span class="kr">extends</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">GameObjects</span><span class="p">.</span><span class="nx">Text</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">text</span><span class="p">,</span> <span class="nx">style</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">text</span><span class="p">,</span> <span class="nx">style</span><span class="p">);</span>
+        <span class="c1">// ...</span>
+        <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div></li>
+<li>Create instance
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">text</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyText</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="s1">&#39;hello&#39;</span><span class="p">);</span>
+</pre></div></li>
+</ul>
 <h3 id="word-wrap">Word wrap<a class="headerlink" href="#word-wrap" title="Permanent link">&para;</a></h3>
 <p>Wrap by width</p>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">text</span><span class="p">({</span>

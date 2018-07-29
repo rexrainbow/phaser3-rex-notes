@@ -152,6 +152,24 @@ var txt = scene.make.rexTagText({
 });
 ```
 
+### Custom class
+
+- Define class
+    ```javascript
+    class MyText extends TagText {
+        constructor(scene, x, y, text, style) {
+            super(scene, x, y, text, style);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
+- Create instance
+    ```javascript
+    var txt = new MyText(scene, x, y, '<style="name0">h</style>ello', {tags:tags});
+    ```
+
 ### Word wrap
 
 Wrap by word or character.

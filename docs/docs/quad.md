@@ -17,7 +17,7 @@ scene.load.image(key, url);
 
 Reference: [load image](loader.md#image)
 
-### Add quad object
+### Add object
 
 ```javascript
 var quad = scene.add.quad(x, y, key);
@@ -37,6 +37,24 @@ var quad = scene.make.quad({
     // flipY: true
 });
 ```
+
+### Custom quad class
+
+- Define class
+    ```javascript
+    class MyQuad extends Phaser.GameObjects.Quad {
+        constructor(scene, x, y, texture, frame) {
+            super(scene, x, y, texture, frame);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
+- Create instance
+    ```javascript
+    var quad = new MyQuad(scene, x, y, key);
+    ```
 
 ### Properties of corner points
 

@@ -698,6 +698,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#custom-class" title="Custom class" class="md-nav__link">
+    Custom class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#word-wrap" title="Word wrap" class="md-nav__link">
     Word wrap
   </a>
@@ -2044,6 +2051,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#custom-class" title="Custom class" class="md-nav__link">
+    Custom class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#word-wrap" title="Word wrap" class="md-nav__link">
     Word wrap
   </a>
@@ -2150,7 +2164,8 @@
 <li>A kind of game object, installed by global plugin</li>
 </ul>
 <h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/bbcodetext-plugin.js">Link</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/bbcodetext-plugin.js">Plugin</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/bbcodetext.js">Class</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/bbcodetext">Sample code</a></p>
 <h3 id="bbcode">BBCode<a class="headerlink" href="#bbcode" title="Permanent link">&para;</a></h3>
@@ -2254,6 +2269,22 @@
 <span class="p">});</span>
 </pre></div>
 
+<h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Define class
+    <div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">MyText</span> <span class="kr">extends</span> <span class="nx">BBCodeText</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">text</span><span class="p">,</span> <span class="nx">style</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">text</span><span class="p">,</span> <span class="nx">style</span><span class="p">);</span>
+        <span class="c1">// ...</span>
+        <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div></li>
+<li>Create instance
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyText</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="s1">&#39;[b]h[/b]ello&#39;</span><span class="p">);</span>
+</pre></div></li>
+</ul>
 <h3 id="word-wrap">Word wrap<a class="headerlink" href="#word-wrap" title="Permanent link">&para;</a></h3>
 <p>Wrap by word or character.</p>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">text</span><span class="p">({</span>

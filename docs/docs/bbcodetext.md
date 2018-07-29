@@ -7,7 +7,9 @@ Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
 
 ## Source code
 
-[Link](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/bbcodetext-plugin.js)
+[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/bbcodetext-plugin.js)
+
+[Class](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/bbcodetext.js)
 
 ## Usage
 
@@ -120,6 +122,24 @@ var txt = scene.make.rexBBCodeText({
     }
 });
 ```
+
+### Custom class
+
+- Define class
+    ```javascript
+    class MyText extends BBCodeText {
+        constructor(scene, x, y, text, style) {
+            super(scene, x, y, text, style);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
+- Create instance
+    ```javascript
+    var txt = new MyText(scene, x, y, '[b]h[/b]ello');
+    ```
 
 ### Word wrap
 

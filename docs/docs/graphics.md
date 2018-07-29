@@ -13,6 +13,24 @@ var graphics = scene.add.graphics();
 // var graphics = scene.add.graphics({x, y});
 ```
 
+### Custom class
+
+- Define class
+    ```javascript
+    class MyGraphics extends Phaser.GameObjects.Graphics {
+        constructor(scene, options) {
+            super(scene, options);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
+- Create instance
+    ```javascript
+    var graphics = new MyGraphics(scene, options);
+    ```
+
 ### Drawing commands
 
 #### Set style

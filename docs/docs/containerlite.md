@@ -68,6 +68,24 @@ var container = scene.make.rexContainerLite({
 });
 ```
 
+### Custom class
+
+- Define class
+    ```javascript
+    class MyContainerLite extends ContainerLite {
+        constructor(scene, x, y, width, height, children) {
+            super(scene, x, y, width, height, children);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
+- Create instance
+    ```javascript
+    var container = new MyContainerLite(scene, x, y, width, height, children);
+    ```
+
 ### Destroy
 
 ```javascript

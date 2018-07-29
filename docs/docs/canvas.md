@@ -53,6 +53,24 @@ var canvas = scene.make.rexCanvas({
 });
 ```
 
+### Custom class
+
+- Define class
+    ```javascript
+    class MyCanvas extends Canvas {
+        constructor(scene, x, y, width, height) {
+            super(scene, x, y, width, height);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
+- Create instance
+    ```javascript
+    var canvas = new MyCanvas(scene, x, y, width, height);
+    ```
+
 ### Clear or fill canvas
 
 - Clear
