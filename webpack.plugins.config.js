@@ -6,6 +6,9 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 module.exports = {
     mode: 'production',
     entry: {
+        // single pack
+        'plugins': './plugins/index.js',
+
         // game objects
         'bbcodetextplugin': './plugins/bbcodetext-plugin.js',
         'canvasplugin': './plugins/canvas-plugin.js',
@@ -36,12 +39,22 @@ module.exports = {
         'texttypingplugin': './plugins/texttyping-plugin.js',
         'textpageplugin': './plugins/textpage-plugin.js',
 
-        // member of scene 
+        // member of scene
+        // sound
+        'soundfadeplugin': './plugins/soundfade-plugin.js',
+
+        // control
         'fsmplugin': './plugins/fsm-plugin.js',
-        'clockplugin': './plugins/clock-plugin.js',
-        'csvtohashtableplugin': './plugins/csvtohashtable-plugin.js',
         'tcrpplugin': './plugins/tcrp-plugin.js',
-        'csvscenarioplugin': './plugins/csvscenario-plugin.js',
+        'csvscenarioplugin': './plugins/csvscenario-plugin.js',        
+
+        // time
+        'clockplugin': './plugins/clock-plugin.js',
+
+        // data structure
+        'csvtohashtableplugin': './plugins/csvtohashtable-plugin.js',
+
+        // math
         'gashaponplugin': './plugins/gashapon-plugin.js'
     },
     output: {
