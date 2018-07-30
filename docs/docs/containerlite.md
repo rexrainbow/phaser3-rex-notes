@@ -2,7 +2,7 @@
 
 Control the position and angle of children game objects.
 
-A lite container game object inspired from [Ziao/phaser3-interim-containers](https://github.com/Ziao/phaser3-interim-containers).
+It is inspired from [Ziao/phaser3-interim-containers](https://github.com/Ziao/phaser3-interim-containers).
 
 - Author: Rex
 - A kind of game object, installed by global plugin
@@ -202,11 +202,14 @@ var localState = container.getLocalState(child);
 container.setChildLocalPosition(child, x, y);
 ```
 
-## Compare with [Container](container.md)
+## Compare with Official Container
 
+- Nested container :
+    - [Container](container.md) : Feature of nested container will be dropped after v3.12.
+    - Container-Lite : Support nested container.
 - Position/anlge/scale of a child object :
-    - [Container](container.md) : Local position/anlge/scale, responding to parent container, not a world position/anlge/scale
-    - Container-Lite : World position/anlge/scale
+    - [Container](container.md) : Local position/anlge/scale, responding to parent container, not a world position/anlge/scale.
+    - Container-Lite : World position/anlge/scale.
 - Updating period
-    - [Container](container.md) : re-calculate position/anlge/scale of each child every render
-    - Container-Lite: re-calculate position/anlge/scale of each child when parent container changes position/anlge/scale
+    - [Container](container.md) : Re-calculate position/anlge/scale of each child every render.
+    - Container-Lite: Re-calculate position/anlge/scale of each child when parent container changes position/anlge/scale.

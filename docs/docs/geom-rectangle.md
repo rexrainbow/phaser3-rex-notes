@@ -11,7 +11,9 @@ Rectangle shape and methods, built-in methods of phaser.
 ```javascript
 var rect = new Phaser.Geom.Rectangle(x, y, width, height);
 ```
+
 or clone from another shape
+
 ```javascript
 var rect1 = Phaser.Geom.Rectangle.Clone(rect0);
 ```

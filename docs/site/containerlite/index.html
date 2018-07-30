@@ -941,8 +941,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#compare-with-container" title="Compare with Container" class="md-nav__link">
-    Compare with Container
+  <a href="#compare-with-official-container" title="Compare with Official Container" class="md-nav__link">
+    Compare with Official Container
   </a>
   
 </li>
@@ -2137,8 +2137,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#compare-with-container" title="Compare with Container" class="md-nav__link">
-    Compare with Container
+  <a href="#compare-with-official-container" title="Compare with Official Container" class="md-nav__link">
+    Compare with Official Container
   </a>
   
 </li>
@@ -2168,7 +2168,7 @@
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
 <p>Control the position and angle of children game objects.</p>
-<p>A lite container game object inspired from <a href="https://github.com/Ziao/phaser3-interim-containers">Ziao/phaser3-interim-containers</a>.</p>
+<p>It is inspired from <a href="https://github.com/Ziao/phaser3-interim-containers">Ziao/phaser3-interim-containers</a>.</p>
 <ul>
 <li>Author: Rex</li>
 <li>A kind of game object, installed by global plugin</li>
@@ -2314,16 +2314,21 @@ or
 <div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">setChildLocalPosition</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 </pre></div>
 
-<h2 id="compare-with-container">Compare with <a href="../container/index.html">Container</a><a class="headerlink" href="#compare-with-container" title="Permanent link">&para;</a></h2>
+<h2 id="compare-with-official-container">Compare with Official Container<a class="headerlink" href="#compare-with-official-container" title="Permanent link">&para;</a></h2>
 <ul>
+<li>Nested container :<ul>
+<li><a href="../container/index.html">Container</a> : Feature of nested container will be dropped after v3.12.</li>
+<li>Container-Lite : Support nested container.</li>
+</ul>
+</li>
 <li>Position/anlge/scale of a child object :<ul>
-<li><a href="../container/index.html">Container</a> : Local position/anlge/scale, responding to parent container, not a world position/anlge/scale</li>
-<li>Container-Lite : World position/anlge/scale</li>
+<li><a href="../container/index.html">Container</a> : Local position/anlge/scale, responding to parent container, not a world position/anlge/scale.</li>
+<li>Container-Lite : World position/anlge/scale.</li>
 </ul>
 </li>
 <li>Updating period<ul>
-<li><a href="../container/index.html">Container</a> : re-calculate position/anlge/scale of each child every render</li>
-<li>Container-Lite: re-calculate position/anlge/scale of each child when parent container changes position/anlge/scale</li>
+<li><a href="../container/index.html">Container</a> : Re-calculate position/anlge/scale of each child every render.</li>
+<li>Container-Lite: Re-calculate position/anlge/scale of each child when parent container changes position/anlge/scale.</li>
 </ul>
 </li>
 </ul>
