@@ -94,7 +94,7 @@ var container = scene.make.rexContainerLite({
 container.destroy();
 ```
 
-Also destroy all children game object.
+Also destroy all child game objects.
 
 ### Other properties
 
