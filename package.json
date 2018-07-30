@@ -1,14 +1,25 @@
 {
-    "name": "phaser3-rex-notes",
+    "name": "phaser3-rex-plugins",
     "version": "1.0.0",
-    "description": "",
-    "author": "rex",
-    "main": "index.js",
+    "description": "Plugins of phaser3",
+    "author": "Rex",
+    "main": "./plugins/index.js",
     "scripts": {
         "dev": "webpack",
         "test": "eslint ./plugins/**/**.js"
     },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/rexrainbow/phaser3-rex-notes"
+    },
+    "keywords": [
+        "phaser3"
+    ],
     "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/rexrainbow/phaser3-rex-notes/issues"
+    },
+    "homepage": "https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html",
     "devDependencies": {
         "babel-core": "^6.25.0",
         "babel-eslint": "^7.2.3",
