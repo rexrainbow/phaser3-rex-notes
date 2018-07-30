@@ -11,10 +11,15 @@ module.exports = {
 
         // game objects
         'bbcodetextplugin': './plugins/bbcodetext-plugin.js',
+        'bbcodetext': './plugins/bbcodetext.js',
         'canvasplugin': './plugins/canvas-plugin.js',
+        'canvas': './plugins/canvas.js',
         'containerliteplugin': './plugins/containerlite-plugin.js',
+        'containerlite': './plugins/containerlite.js',
         'gridtableplugin': './plugins/gridtable-plugin.js',
+        'gridtable': './plugins/gridtable.js',
         'tagtextplugin': './plugins/tagtext-plugin.js',
+        'tagtext': './plugins/tagtext.js',
 
         // custom file loader      
         'webfontloaderplugin': './plugins/webfontloader-plugin.js',
@@ -30,7 +35,7 @@ module.exports = {
         'sliderplugin': './plugins/slider-plugin.js',
         'touchcursorplugin': './plugins/touchcursor-plugin.js',
         'touchstateplugin': './plugins/touchstate-plugin.js',
-        'virtualjoystickplugin':'./plugins/virtualjoystick-plugin.js',
+        'virtualjoystickplugin': './plugins/virtualjoystick-plugin.js',
 
         // member of game object
         'fadeplugin': './plugins/fade-plugin.js',
@@ -46,7 +51,7 @@ module.exports = {
         // control
         'fsmplugin': './plugins/fsm-plugin.js',
         'tcrpplugin': './plugins/tcrp-plugin.js',
-        'csvscenarioplugin': './plugins/csvscenario-plugin.js',        
+        'csvscenarioplugin': './plugins/csvscenario-plugin.js',
 
         // time
         'clockplugin': './plugins/clock-plugin.js',

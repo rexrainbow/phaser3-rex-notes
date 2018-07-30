@@ -1,14 +1,16 @@
 'use strict'
 
-import BBCodeTextKlass from 'rexPlugins/bbcodetext.js';
+import BBCodeText from 'rexPlugins/bbcodetext.js';
 import TextPage from 'rexPlugins/textpage.js'
 import TextTyping from 'rexPlugins/texttyping.js';
 
+const BaseTextClass = BBCodeText;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class PageTypingText extends BBCodeTextKlass {
+class PageTypingText extends BaseTextClass {
     constructor(scene, x, y, text, config) {
         super(scene, x, y, text, config);
+        scene.add.existing(this);
 
         this.page = new TextPage(this, GetValue(config, 'page', undefined));
         this.typing = new TextTyping(this, GetValue(config, 'type', undefined));
@@ -16,7 +18,7 @@ class PageTypingText extends BBCodeTextKlass {
         this.typing.on('complete', this.typeNextPage, this);
     }
 
-    start(text, speed) {        
+    start(text, speed) {
         this.page.setText(text);
         this.typeNextPage(speed);
     }
@@ -73,10 +75,12 @@ Grab the source and join the fun!`;
                 //wrap: false
             }
         });
-        this.add.existing(txt);
-        txt.once('complete', function () {
-            console.log('done');
-        }).start(content, 50);
+
+        txt
+            .once('complete', function () {
+                console.log('done');
+            })
+            .start(content, 50);
 
     }
 

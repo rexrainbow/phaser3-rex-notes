@@ -217,8 +217,8 @@ Only [image](image.md) and sprite game object have teuture componment.
     ```
 - Set frame
     ```javascript
-    gameObject.setFrame(frame);   
-    gameObject.setFrame(frame, updateSize, updateOrigin);   
+    gameObject.setFrame(frame);
+    gameObject.setFrame(frame, updateSize, updateOrigin);
     ```
     - `frame` :　The name or index of the frame within the Texture.
     - `updateSize` : Should this call adjust the size of the Game Object?
@@ -232,4 +232,22 @@ Only [image](image.md) and sprite game object have teuture componment.
         ```javascript
         gameObject.setCrop();
         // gameObject.isCropped = false;
-        ```    
+        ```
+
+### Custom class
+
+- Define class
+    ```javascript
+    class MyClass extends BaseClass {
+        constructor(scene, x, y) {
+            super(scene, x, y;
+            // ...
+            scene.add.existing(this);  // add this game object to update list and display list
+        }
+        // ...
+    }
+    ```
+- Create instance
+    ```javascript
+    var image = new MyClass(scene, x, y, key);
+    ```
