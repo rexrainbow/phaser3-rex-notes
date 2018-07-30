@@ -6,7 +6,7 @@ import GridTable from './gridtable.js';
 import TagText from './tagtext.js';
 
 // custom file loader      
-import WebfontLoader from './webfontloader.js'
+import WebFontLoader from './webfontloader.js'
 
 // functions
 import XOR from './xor.js';
@@ -43,50 +43,53 @@ import CSVToHashTable from './csvtohashtable.js';
 // math
 import Gashapon from './gashapon.js';
 
-export default {
+export {
     // game objects
-    'BBCodeText': BBCodeText,
-    'Canvas': Canvas,
-    'ContainerLite': ContainerLite,
-    'GridTable': GridTable,
-    'TagText': TagText,
+    BBCodeText,
+    Canvas,
+    ContainerLite,
+    GridTable,
+    TagText,
+
+    // custom file loader 
+    WebFontLoader,
 
     // functions
-    'XOR': XOR,
-    'LZString': LZString,
-    'CSVToArray': CSVToArray,
-    'Sequence': Sequence,
+    XOR,
+    LZString,
+    CSVToArray,
+    Sequence,
 
     // input
-    'Drag': Drag,
-    'Slider': Slider,
-    'TouchCursor': TouchCursor,
-    'TouchState': TouchState,
-    'VirtualJoyStick': VirtualJoyStick,
+    Drag,
+    Slider,
+    TouchCursor,
+    TouchState,
+    VirtualJoyStick,
 
     // member of game object
-    'Fade': Fade,
-    'FadeOutDestroy': FadeOutDestroy,
+    Fade,
+    FadeOutDestroy,
 
     // member of text
-    'TextTyping': TextTyping,
-    'TextPage': TextPage,
+    TextTyping,
+    TextPage,
 
     // member of scene 
     // sound
-    'SoundFade': SoundFade,
+    SoundFade,
 
     // control
-    'FSM': FSM,
-    'TCRP': TCRP,
-    'CSVScenario': CSVScenario,
+    FSM,
+    TCRP,
+    CSVScenario,
 
     // time
-    'Clock': Clock,
+    Clock,
 
     // data structure
-    'CSVToHashTable': CSVToHashTable,
+    CSVToHashTable,
 
     // math
-    'Gashapon': Gashapon
+    Gashapon
 };
