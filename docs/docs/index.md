@@ -28,3 +28,5 @@
 1. [Virtual joystick](virtualjoystick.md): Simulate curosr keys according touch events.
 1. [Webfont-loader](webfontloader.md): Load web font by google webfont loader in preload stage.
 1. [XOR](xor.md): Encrypt or decrypt string by XOR algorithm.
+
+[Download](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexplugins.min.js) them in a signle minify file.

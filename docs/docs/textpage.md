@@ -7,7 +7,7 @@ Display text page by page on text object, [bbcode text object](bbcodetext.md), o
 
 ## Source code
 
-[Link](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/textpage/TextPagePlugin.js)
+[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/textpage-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rextextpageplugin.min.js)
 
 ## Usage
 

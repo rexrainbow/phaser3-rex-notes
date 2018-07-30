@@ -7,7 +7,7 @@ Hash table indexed by (col-key, row-key) from csv string.
 
 ## Source code
 
-[Link](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/csvtohashtable-plugin.js)
+[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/csvtohashtable-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexcsvtohashtableplugin.min.js)
 
 ## Usage
 

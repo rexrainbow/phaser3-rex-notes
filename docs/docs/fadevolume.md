@@ -7,13 +7,11 @@ Fade-in/fade-out volume of sound.
 
 ## Source code
 
-[Link](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/soundfade-plugin.js)
+[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/soundfade-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexsoundfadeplugin.min.js)
 
 ## Usage
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/sound-fade)
-
-User could import functions directly, or install it by global plugin.
 
 ### Import functions
 

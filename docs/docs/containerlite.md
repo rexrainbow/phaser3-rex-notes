@@ -9,7 +9,9 @@ A lite container game object inspired from [Ziao/phaser3-interim-containers](htt
 
 ## Source code
 
-[Link](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/containerlite-plugin.js)
+[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/containerlite-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexcontainerliteplugin.min.js)
+
+[Class](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/containerlite.js)
 
 ## Usage
 

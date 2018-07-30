@@ -7,7 +7,7 @@ Simulate curosr keys according touch events.
 
 ## Source code
 
-[Link](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/virtualjoystick-plugin.js)
+[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/virtualjoystick-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexvirtualjoystickplugin.min.js)
 
 ## Usage
 

@@ -7,7 +7,9 @@ Viewer of grid table, to manipulate game object of each visible cell.
 
 ## Source code
 
-[Link](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/gridtable-plugin.js)
+[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/gridtable-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexgridtableplugin.min.js)
+
+[Class](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/gridtable.js)
 
 ## Usage
 

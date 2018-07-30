@@ -7,7 +7,7 @@ Generate array from csv string.
 
 ## Source code
 
-[Link](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/csvtoarray-plugin.js)
+[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/csvtoarray-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexcsvtoarrayplugin.min.js)
 
 ## Usage
 

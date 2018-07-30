@@ -7,7 +7,7 @@ Recorder of **T** ime-**C** ommand-**R** ecorder-**P** layer, to store commands 
 
 ## Source code
 
-[Link](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/tcrp/RecorderPlugin.js)
+[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/tcrp-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rextcrpplugin.min.js)
 
 ## Usage
 
