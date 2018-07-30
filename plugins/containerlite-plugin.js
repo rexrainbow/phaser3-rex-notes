@@ -23,7 +23,7 @@ class ContainerLitePlugin extends Phaser.Plugins.BasePlugin {
         return this.displayList.add(new ContainerLite(this.scene, x, y, width, height));
     }
 
-    makeContainer(config) {      
+    makeContainer(config) {
         var width = GetValue(config, 'width', 1);
         var height = GetValue(config, 'height', width);
         var containerLite = new ContainerLite(this.scene, 0, 0, width, height);
@@ -31,6 +31,9 @@ class ContainerLitePlugin extends Phaser.Plugins.BasePlugin {
         return containerLite;
     }
 
+    getClass() {
+        return ContainerLite;
+    }
 }
 
 export default ContainerLitePlugin;

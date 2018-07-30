@@ -68,6 +68,9 @@ class TagTextPlugin extends Phaser.Plugins.BasePlugin {
         return text;
     }
 
+    getClass() {
+        return TagText;
+    }
 }
 
 export default TagTextPlugin;

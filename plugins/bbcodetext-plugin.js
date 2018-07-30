@@ -68,6 +68,9 @@ class BBCodeTextPlugin extends Phaser.Plugins.BasePlugin {
         return text;
     }
 
+    getClass() {
+        return BBCodeText;
+    }
 }
 
 export default BBCodeTextPlugin;

@@ -33,6 +33,9 @@ class GridTablePlugin extends Phaser.Plugins.BasePlugin {
         return table;
     }
 
+    getClass() {
+        return GridTable;
+    }
 }
 
 export default GridTablePlugin;

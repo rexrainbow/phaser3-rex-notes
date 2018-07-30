@@ -33,6 +33,9 @@ class CanvasPlugin extends Phaser.Plugins.BasePlugin {
         return canvas;
     }
 
+    getClass() {
+        return Canvas;
+    }
 }
 
 export default CanvasPlugin;
