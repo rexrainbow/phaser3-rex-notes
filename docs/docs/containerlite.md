@@ -74,7 +74,7 @@ var container = scene.make.rexContainerLite({
 
 - Define class
     ```javascript
-    class MyContainerLite extends ContainerLite {
+    class MyContainer extends ContainerLite {
         constructor(scene, x, y, width, height, children) {
             super(scene, x, y, width, height, children);
             // ...
@@ -85,7 +85,7 @@ var container = scene.make.rexContainerLite({
     ```
 - Create instance
     ```javascript
-    var container = new MyContainerLite(scene, x, y, width, height, children);
+    var container = new MyContainer(scene, x, y, width, height, children);
     ```
 
 ### Destroy
