@@ -821,6 +821,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#arc" title="Arc" class="md-nav__link">
+    Arc
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pie-chart-slice" title="Pie-chart slice" class="md-nav__link">
+    Pie-chart slice
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#transfer" title="Transfer" class="md-nav__link">
     Transfer
   </a>
@@ -835,6 +849,13 @@
           <li class="md-nav__item">
   <a href="#generate-texture" title="Generate texture" class="md-nav__link">
     Generate texture
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-mask" title="Create mask" class="md-nav__link">
+    Create mask
   </a>
   
 </li>
@@ -1005,6 +1026,42 @@
     <a href="../zone/index.html" title="Zone" class="md-nav__link">
       Zone
     </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-8" type="checkbox" id="nav-5-8">
+    
+    <label class="md-nav__link" for="nav-5-8">
+      Display
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-5-8">
+        Display
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mask/index.html" title="Mask" class="md-nav__link">
+      Mask
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
         
@@ -2106,6 +2163,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#arc" title="Arc" class="md-nav__link">
+    Arc
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pie-chart-slice" title="Pie-chart slice" class="md-nav__link">
+    Pie-chart slice
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#transfer" title="Transfer" class="md-nav__link">
     Transfer
   </a>
@@ -2120,6 +2191,13 @@
           <li class="md-nav__item">
   <a href="#generate-texture" title="Generate texture" class="md-nav__link">
     Generate texture
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-mask" title="Create mask" class="md-nav__link">
+    Create mask
   </a>
   
 </li>
@@ -2263,8 +2341,6 @@
 <span class="nx">graphics</span><span class="p">.</span><span class="nx">fillCircle</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">);</span>
 <span class="nx">graphics</span><span class="p">.</span><span class="nx">strokeCircleShape</span><span class="p">(</span><span class="nx">circle</span><span class="p">);</span>  <span class="c1">// circle: {x, y, radius}</span>
 <span class="nx">graphics</span><span class="p">.</span><span class="nx">strokeCircle</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">);</span>
-<span class="nx">graphics</span><span class="p">.</span><span class="nx">arc</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">startAngle</span><span class="p">,</span> <span class="nx">endAngle</span><span class="p">,</span> <span class="nx">anticlockwise</span><span class="p">);</span>
-<span class="nx">graphics</span><span class="p">.</span><span class="nx">arc</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">startAngle</span><span class="p">,</span> <span class="nx">endAngle</span><span class="p">,</span> <span class="nx">anticlockwise</span><span class="p">,</span> <span class="nx">overshoot</span><span class="p">);</span>
 </pre></div>
 
 <p>Draw or fill circle shape by points.</p>
@@ -2276,6 +2352,22 @@
 </pre></div>
 
 <p>Draw or fill ellipse shape by points.</p>
+<h4 id="arc">Arc<a class="headerlink" href="#arc" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">graphics</span><span class="p">.</span><span class="nx">arc</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">startAngle</span><span class="p">,</span> <span class="nx">endAngle</span><span class="p">,</span> <span class="nx">anticlockwise</span><span class="p">);</span>
+<span class="nx">graphics</span><span class="p">.</span><span class="nx">arc</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">startAngle</span><span class="p">,</span> <span class="nx">endAngle</span><span class="p">,</span> <span class="nx">anticlockwise</span><span class="p">,</span> <span class="nx">overshoot</span><span class="p">);</span>
+</pre></div>
+
+<p>Draw arc curve by points.</p>
+<h4 id="pie-chart-slice">Pie-chart slice<a class="headerlink" href="#pie-chart-slice" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">graphics</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">startAngle</span><span class="p">,</span> <span class="nx">endAngle</span><span class="p">,</span> <span class="nx">anticlockwise</span><span class="p">);</span>
+<span class="nx">graphics</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">startAngle</span><span class="p">,</span> <span class="nx">endAngle</span><span class="p">,</span> <span class="nx">anticlockwise</span><span class="p">,</span> <span class="nx">overshoot</span><span class="p">);</span>
+</pre></div>
+
+<p>Draw pie-chart slice shape by points.</p>
+<p>Fill this shape</p>
+<div class="codehilite"><pre><span></span><span class="nx">graphics</span><span class="p">.</span><span class="nx">fillPath</span><span class="p">();</span>
+</pre></div>
+
 <h4 id="transfer">Transfer<a class="headerlink" href="#transfer" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><span class="nx">graphics</span><span class="p">.</span><span class="nx">save</span><span class="p">();</span>
 <span class="nx">graphics</span><span class="p">.</span><span class="nx">restore</span><span class="p">();</span>
@@ -2287,6 +2379,12 @@
 <h3 id="generate-texture">Generate texture<a class="headerlink" href="#generate-texture" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="nx">graphics</span><span class="p">.</span><span class="nx">generateTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>  <span class="c1">// key: texture key</span>
 </pre></div>
+
+<h3 id="create-mask">Create mask<a class="headerlink" href="#create-mask" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">mask</span> <span class="o">=</span> <span class="nx">graphics</span><span class="p">.</span><span class="nx">createGeometryMask</span><span class="p">();</span>
+</pre></div>
+
+<p>See <a href="../mask/index.html">mask</a></p>
                 
                   
                 

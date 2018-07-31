@@ -135,8 +135,6 @@ graphics.fillCircleShape(circle); // circle: {x, y, radius}
 graphics.fillCircle(x, y, radius);
 graphics.strokeCircleShape(circle);  // circle: {x, y, radius}
 graphics.strokeCircle(x, y, radius);
-graphics.arc(x, y, radius, startAngle, endAngle, anticlockwise);
-graphics.arc(x, y, radius, startAngle, endAngle, anticlockwise, overshoot);
 ```
 
 Draw or fill circle shape by points.
@@ -151,6 +149,30 @@ graphics.fillEllipse(x, y, width, height, smoothness);
 ```
 
 Draw or fill ellipse shape by points.
+
+#### Arc
+
+```javascript
+graphics.arc(x, y, radius, startAngle, endAngle, anticlockwise);
+graphics.arc(x, y, radius, startAngle, endAngle, anticlockwise, overshoot);
+```
+
+Draw arc curve by points.
+
+#### Pie-chart slice
+
+```javascript
+graphics.slice(x, y, radius, startAngle, endAngle, anticlockwise);
+graphics.slice(x, y, radius, startAngle, endAngle, anticlockwise, overshoot);
+```
+
+Draw pie-chart slice shape by points.
+
+Fill this shape
+
+```javascript
+graphics.fillPath();
+```
 
 #### Transfer
 
@@ -167,3 +189,11 @@ graphics.rotate(radians);
 ```javascript
 graphics.generateTexture(key, width, height);  // key: texture key
 ```
+
+### Create mask
+
+```javascript
+var mask = graphics.createGeometryMask();
+```
+
+See [mask](mask.md)

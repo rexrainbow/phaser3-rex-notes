@@ -45,7 +45,9 @@ pages:
         - Group: group.md
         - Group actions: groupactions.md
         - Grid table: gridtable.md
-    - Zone: zone.md        
+    - Zone: zone.md
+    - Display:
+        - Mask: mask.md
 - Time:
     - Date: date.md
     - Timer: timer.md

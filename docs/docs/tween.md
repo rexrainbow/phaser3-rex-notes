@@ -103,6 +103,7 @@ var tween = scene.tweens.add({
 - `useFrames` : Use frames or milliseconds?
 - `props` : The properties being tweened by the tween
 - `onStart` : callback which fired when tween task started
+- `onUpdate` : callback which fired when tween task updated
 - `onComplete` : callback which fired when tween task done
 - `onYoyo` : callback which fired when tween reversed (yoyo)
 - `onRepeat` : callback which fired when repeat started
