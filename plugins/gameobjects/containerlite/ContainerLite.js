@@ -9,14 +9,15 @@ class ContainerLite extends Zone {
             width = undefined;
         }
         super(scene, x, y, width, height);
-        this.children = scene.add.group();        
+        this.children = scene.add.group();
         this.setOrigin(0.5, 0.5); // It should be set in Zone object
         this.type = 'rexContainerLite';
         this.syncPositionEnable = true;
-        
+
         this._flipX = false;
         this._flipY = false;
         this._alpha = 1;
+        this._mask = null;
 
         if (children) {
             this.add(children);
@@ -86,8 +87,8 @@ class ContainerLite extends Zone {
     }
 
     updateChildPosition(child) {
-        var isContainerLiteChild = (child.hasOwnProperty('syncPositionEnable'));
-        if (isContainerLiteChild) {
+        var isContainerLite = (child.hasOwnProperty('syncPositionEnable'));
+        if (isContainerLite) {
             child.syncPositionEnable = false;
         }
         var state = this.getLocalState(child);
@@ -105,19 +106,30 @@ class ContainerLite extends Zone {
 
         child.rotation = state.face + this.rotation;
 
-        if (isContainerLiteChild) {
+        if (isContainerLite) {
             child.syncPositionEnable = true;
             child.syncPosition();
         }
     }
 
     updateChildVisible(child) {
-        child.visible = this.visible;
+        if (this._visible) {
+            var state = this.getLocalState(child);
+            child.visible = state.visible;
+        } else { // !this._visible
+            child.visible = false;
+        }
     }
 
     updateChildAlpha(child) {
         var state = this.getLocalState(child);
         child.alpha = state.alpha * this.alpha;
+    }
+
+    updateChildMask(child) {
+        if (this._mask !== child) {
+            child.mask = this._mask;
+        }
     }
 
     syncPosition() {
@@ -157,6 +169,8 @@ class ContainerLite extends Zone {
 
         state.face = gameObject.rotation - this.rotation;
         state.alpha = gameObject.alpha / this.alpha;
+
+        state.visible = gameObject.visible;
     }
 
     setChildLocalPosition(gameObject, x, y) {
@@ -170,6 +184,14 @@ class ContainerLite extends Zone {
     _add(gameObject) {
         this.children.add(gameObject);
         this.resetChildState(gameObject);
+
+        if (!this._visible) {
+            gameObject.visible = false;
+        }
+
+        if (this._mask && (this._mask !== gameObject)) {
+            gameObject.mask = this._mask;
+        }
         return this;
     }
 
@@ -300,6 +322,39 @@ class ContainerLite extends Zone {
             this.getChildren().forEach(this.updateChildAlpha, this);
         }
     }
+
+    // override
+    get mask() {
+        return this._mask;
+    }
+    set mask(mask) {
+        if (this._mask === mask) {
+            return;
+        }
+        this._mask = mask;
+
+        if (this.children) {
+            this.getChildren().forEach(this.updateChildMask, this);
+        }
+    }
+
+    setMask(mask) {
+        this.mask = mask;
+        return this;
+    }
+
+    clearMask(destroyMask) {
+        if (destroyMask === undefined) {
+            destroyMask = false;
+        }
+
+        if (destroyMask && this.mask) {
+            this.mask.destroy();
+        }
+        this.mask = null;
+        return this;
+    }
+
 
 }
 

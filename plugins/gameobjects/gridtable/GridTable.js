@@ -28,6 +28,12 @@ class GridTable extends Container {
         this.execeedLeftState = false;
         this.execeedRightState = false;
 
+        var mask = GetValue(config, 'mask', true);
+        if (mask === true) {
+            mask = this.getDefaultMask();
+        }
+        this.setMask(mask);
+
         this.setScrollMode(GetValue(config, 'scrollMode', 0));
         this.setClampMode(GetValue(config, 'clamplTableOXY', true));
         var callback = GetValue(config, 'cellVisibleCallback', null);
@@ -42,7 +48,6 @@ class GridTable extends Container {
         }
         this.table = new Table(this, config);
         this.updateTable();
-        // TODO: move z-index of grid table to bottom
     }
 
     setScrollMode(mode) {
@@ -311,6 +316,19 @@ class GridTable extends Container {
         return this;
     }
 
+    // internal
+    getDefaultMask() {
+        var x = -(this.displayWidth * this.originX);
+        var y = -(this.displayHeight * this.originY);
+        var shape = this.scene.make.graphics(undefined, false)
+            .fillStyle(0xffffff)
+            .fillRect(x, y, this.width, this.height)
+            .setPosition(this.x, this.y);
+        this.add(shape);
+        var mask = shape.createGeometryMask();
+        return mask;
+    }
+
     cleanVisibleCellIndexes() {
         var tmp = this.preVisibleCells;
         this.preVisibleCells = this.visibleCells;
@@ -555,5 +573,7 @@ const SCROLLMODE = {
     h: 1,
     horizontal: 1
 };
+
+var P0 = {}; // reuse point object
 
 export default GridTable;

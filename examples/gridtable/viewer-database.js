@@ -27,6 +27,7 @@ class Demo extends Phaser.Scene {
             y: 300,
             width: 250,
             height: 400,
+            depth: -1,
 
             cellHeight: 60,
             cellWidth: 60,
@@ -94,7 +95,7 @@ var newTable = function (scene, config) {
 
     var updateCellObject = function (cell) {
         var data = database[cell.index];
-        cell.getContainer().getByName('id').setText(data.id);
+        cell.getContainer().getByName('id').setText(data.id); // Bug: no `getByName` function
     };
 
     config.cellVisibleCallback = function (cell) {
@@ -102,7 +103,6 @@ var newTable = function (scene, config) {
         //console.log('Cell ' + cell.index + ' visible');
     };
     table = scene.make.rexGridTable(config);
-    table.depth = -1;
     addDragContentBehavior(table);
 
     return table;
