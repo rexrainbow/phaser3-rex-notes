@@ -39,23 +39,13 @@ class Demo extends Phaser.Scene {
 
         // drag table content
         table.setInteractive();
-        table.on('pointerdown', function (pointer) {
-            table.setData('preX', pointer.x);
-            table.setData('preY', pointer.y);
-        });
         table.on('pointermove', function (pointer) {
-            if (table.getData('preX') === undefined) {
+            if (!pointer.isDown) {
                 return;
             }
-            var dx = pointer.x - table.getData('preX');
-            var dy = pointer.y - table.getData('preY');
+            var dx = pointer.x - pointer.prevPosition.x;
+            var dy = pointer.y - pointer.prevPosition.y;
             table.addTableOXY(dx, dy).updateTable();
-            table.setData('preX', pointer.x);
-            table.setData('preY', pointer.y);
-        });
-        table.on('pointerup', function (pointer) {
-            table.setData('preX', undefined);
-            table.setData('preY', undefined);
         });
     }
 

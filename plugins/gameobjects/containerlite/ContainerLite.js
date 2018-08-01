@@ -1,6 +1,7 @@
 const Zone = Phaser.GameObjects.Zone;
 const Components = Phaser.GameObjects.Components;
 const RotateAround = Phaser.Math.RotateAround;
+const ArrayUtils = Phaser.Utils.Array;
 
 class ContainerLite extends Zone {
     constructor(scene, x, y, width, height, children) {
@@ -355,7 +356,45 @@ class ContainerLite extends Zone {
         return this;
     }
 
+    // compatible with container plugin
+    get list() {
+        return this.getChildren();
+    }
 
+    getByName(name) {
+        return ArrayUtils.GetFirst(this.list, 'name', name);
+    }
+
+    getRandom(startIndex, length) {
+        return ArrayUtils.GetRandom(this.list, startIndex, length);
+    }
+
+    getFirst(property, value, startIndex, endIndex) {
+        return ArrayUtils.GetFirstElement(this.list, property, value, startIndex, endIndex);
+    }
+
+    getAll(property, value, startIndex, endIndex) {
+        return ArrayUtils.GetAll(this.list, property, value, startIndex, endIndex);
+    }
+
+    count(property, value, startIndex, endIndex) {
+        return ArrayUtils.CountAllMatching(this.list, property, value, startIndex, endIndex);
+    }
+
+    swap(child1, child2) {
+        ArrayUtils.Swap(this.list, child1, child2);
+        return this;
+    }
+
+    moveTo(child, index) {
+        ArrayUtils.MoveTo(this.list, child, index);
+        return this;
+    }
+
+    setAll(property, value, startIndex, endIndex) {
+        ArrayUtils.SetAll(this.list, property, value, startIndex, endIndex);
+        return this;
+    }
 }
 
 Object.assign(

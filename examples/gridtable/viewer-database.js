@@ -95,7 +95,7 @@ var newTable = function (scene, config) {
 
     var updateCellObject = function (cell) {
         var data = database[cell.index];
-        cell.getContainer().getByName('id').setText(data.id); // Bug: no `getByName` function
+        cell.getContainer().getByName('id').setText(data.id);
     };
 
     config.cellVisibleCallback = function (cell) {

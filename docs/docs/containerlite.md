@@ -202,6 +202,17 @@ var localState = container.getLocalState(child);
 container.setChildLocalPosition(child, x, y);
 ```
 
+### Mask
+
+- Propagate [mask object](mask.md) to children.
+    ```javascript
+    container.setMask(mask);  // container.mask = mask;
+    ```
+- Remove mask object of children
+    ```javascript
+    container.clearMask();
+    ```
+
 ## Compare with Official Container
 
 - Nested container :
@@ -213,3 +224,6 @@ container.setChildLocalPosition(child, x, y);
 - Updating period
     - [Container](container.md) : Re-calculate position/anlge/scale of each child every render.
     - Container-Lite: Re-calculate position/anlge/scale of each child when parent container changes position/anlge/scale.
+- Mask
+    - [Container](container.md) : It has mask property, and it could become a mask object.
+    - Container-Lite : It has mask property, but it could not become a mask object.
