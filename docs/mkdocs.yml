@@ -25,7 +25,7 @@ pages:
         - Image: image.md
         - Sprite: sprite.md
         - Blitter: blitter.md
-        - Particle: particle.md        
+        - Particles: particles.md        
         - Quad: quad.md
         - Texture: texture.md        
     - Text:

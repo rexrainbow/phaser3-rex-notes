@@ -356,7 +356,7 @@ class ContainerLite extends Zone {
         return this;
     }
 
-    // compatible with container plugin
+    // compatiable with container plugin
     get list() {
         return this.getChildren();
     }
