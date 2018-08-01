@@ -29,7 +29,14 @@ class GridTablePlugin extends Phaser.Plugins.BasePlugin {
         var width = GetValue(config, 'width', 256);
         var height = GetValue(config, 'height', 256);
         var table = new GridTable(this.scene, 0, 0, width, height, config);
+
+        // set properties wo modify children
+        table.syncChildrenEnable = false;
         BuildGameObject(this.scene, table, config);
+        // sync properties of children
+        table.syncChildrenEnable = true;
+        table.syncPosition().syncVisible().syncAlpha();
+
         return table;
     }
 

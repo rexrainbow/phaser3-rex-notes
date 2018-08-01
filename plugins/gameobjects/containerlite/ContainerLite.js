@@ -13,7 +13,7 @@ class ContainerLite extends Zone {
         this.children = scene.add.group();
         this.setOrigin(0.5, 0.5); // It should be set in Zone object
         this.type = 'rexContainerLite';
-        this.syncPositionEnable = true;
+        this.syncChildrenEnable = true;
 
         this._flipX = false;
         this._flipY = false;
@@ -88,9 +88,9 @@ class ContainerLite extends Zone {
     }
 
     updateChildPosition(child) {
-        var isContainerLite = (child.hasOwnProperty('syncPositionEnable'));
+        var isContainerLite = (child.hasOwnProperty('syncChildrenEnable'));
         if (isContainerLite) {
-            child.syncPositionEnable = false;
+            child.syncChildrenEnable = false;
         }
         var state = this.getLocalState(child);
         child.x = state.x;
@@ -108,36 +108,59 @@ class ContainerLite extends Zone {
         child.rotation = state.face + this.rotation;
 
         if (isContainerLite) {
-            child.syncPositionEnable = true;
+            child.syncChildrenEnable = true;
             child.syncPosition();
         }
+        return this;
     }
 
     updateChildVisible(child) {
-        if (this._visible) {
-            var state = this.getLocalState(child);
-            child.visible = state.visible;
-        } else { // !this._visible
-            child.visible = false;
-        }
+        child.visible = this.visible && this.getLocalState(child).visible;
+        return this;
     }
 
     updateChildAlpha(child) {
-        var state = this.getLocalState(child);
-        child.alpha = state.alpha * this.alpha;
+        child.alpha = this.alpha * this.getLocalState(child).alpha;
+        return this;
     }
 
     updateChildMask(child) {
         if (this._mask !== child) {
             child.mask = this._mask;
         }
+        return this;
     }
 
     syncPosition() {
-        if (this.children && this.syncPositionEnable) {
+        if (this.children && this.syncChildrenEnable) {
             this.getChildren().forEach(this.updateChildPosition, this);
         }
+        return this;
+    }
 
+    syncVisible() {
+        if (this.children && this.syncChildrenEnable) {
+            this.getChildren().forEach(this.updateChildVisible, this);
+        }
+        return this;
+    }
+
+    syncAlpha() {
+        if (this.children && this.syncChildrenEnable) {
+            this.getChildren().forEach(this.updateChildAlpha, this);
+        }
+        return this;
+    }
+
+    syncMask() {
+        if (this.children && this.syncChildrenEnable) {
+            this.getChildren().forEach(this.updateChildMask, this);
+        }
+        return this;
+    }
+
+    syncProperties() {
+        this.syncPosition().syncVisible().syncAlpha().syncMask();
         return this;
     }
 
@@ -303,9 +326,7 @@ class ContainerLite extends Zone {
         }
         super.visible = value;
 
-        if (this.children) {
-            this.getChildren().forEach(this.updateChildVisible, this);
-        }
+        this.syncVisible();
     }
 
     // override
@@ -319,9 +340,7 @@ class ContainerLite extends Zone {
         }
         this._alpha = value;
 
-        if (this.children) {
-            this.getChildren().forEach(this.updateChildAlpha, this);
-        }
+        this.syncAlpha();
     }
 
     // override
@@ -334,9 +353,7 @@ class ContainerLite extends Zone {
         }
         this._mask = mask;
 
-        if (this.children) {
-            this.getChildren().forEach(this.updateChildMask, this);
-        }
+        this.syncMask();
     }
 
     setMask(mask) {
