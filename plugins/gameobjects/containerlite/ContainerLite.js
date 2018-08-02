@@ -105,7 +105,7 @@ class ContainerLite extends Zone {
             child.flipY = (!this.flipY) ? state.flipY : !state.flipY;
         }
 
-        child.rotation = state.face + this.rotation;
+        child.rotation = state.rotation + this.rotation;
 
         if (isContainerLite) {
             child.syncChildrenEnable = true;
@@ -191,7 +191,7 @@ class ContainerLite extends Zone {
             state.flipY = gameObject.flipY;
         }
 
-        state.face = gameObject.rotation - this.rotation;
+        state.rotation = gameObject.rotation - this.rotation;
         state.alpha = gameObject.alpha / this.alpha;
 
         state.visible = gameObject.visible;
