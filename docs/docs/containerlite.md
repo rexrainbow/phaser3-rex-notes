@@ -44,7 +44,9 @@ var game = new Phaser.Game(config);
 var container = scene.add.rexContainerLite(x, y);  // width = 1, height = 1
 // var container = scene.add.rexContainerLite(x, y, width, height);
 ```
+
 or
+
 ```javascript
 var container = scene.add.rexContainerLite(x, y, children);  // width = 1, height = 1
 // var container = scene.add.rexContainerLite(x, y, width, height, children);
@@ -115,7 +117,18 @@ container.addMultiple(children);  // children: an array of game objects
 // container.add(children);  // children: an array of game objects
 ```
 
-Position/Angle/Scale/Visible/Alpha of children will be changed with container.
+These world properties of children will be changed with container.
+
+- Position/Angle/Scale
+- Visible
+- Alpha
+- Mask
+
+!!! note
+    - Position of child is the world position, i.e. position of child won't be changed when adding to container initially.
+        - For example, container-lite is at (100, 100), and child is at **(110, 110)**, then child will be placed at (110, 110) after adding to container-lite.
+    - This behavior is different from [official container](container.md), which using related position of child when adding to container.
+        - For example, official container is at (100, 100), and child is at **(10, 10)**, then child will be placed at (110, 110) after adding to official container.
 
 ### Remove child
 
@@ -149,51 +162,25 @@ var group = container.children;
 
 Reference [Group](group.md)
 
-### Position/Angle/Scale of children
+### Local state of child
 
-Position/Angle/Scale of children will be updated when position, angle, or scale of container is changed.
-
-Or call
-
-```javascript
-container.updateChildPosition(gameObject);
-```
-
-to update child's position/angle/scale manually.
-
-### Visible of children
-
-Visible of children will be updated when visible of container is changed.
-
-Or call
-
-```javascript
-container.updateChildVisible(gameObject);
-```
-
-to update child's visible manually.
-
-### Alpha of children
-
-Alpha of children will be updated when alpha of container is changed.
-
-Or call
-
-```javascript
-container.updateChildAlpha(gameObject);
-```
-
-to update child's alpha manually.
-
-### Local position of child
+Get local state
 
 ```javascript
 var localState = container.getLocalState(child);
 ```
 
+or
+
+```javascript
+var localState = child.rexContainer;
+```
+
 - Properties of `localState`
-    - `x`, `y`, `face`
+    - `x`, `y`
+    - `rotation`
     - `scaleX`, `scaleY`
+    - `visible`
     - `alpha`
 
 #### Set local position
@@ -202,9 +189,29 @@ var localState = container.getLocalState(child);
 container.setChildLocalPosition(child, x, y);
 ```
 
+#### Update world properties of child
+
+Call these methods to update properties of child after changing local state of child.
+
+- Position/Angle/Scale
+    ```javascript
+    container.updateChildPosition(gameObject);
+    // container.syncPosition();  // update position/angle/scale of all children
+    ```
+- Visible
+    ```javascript
+    container.updateChildVisible(gameObject);
+    // container.syncVisible();  // update visible of all children
+    ```
+- Alpha
+    ```javascript
+    container.updateChildAlpha(gameObject);
+    // container.syncAlpha();  // update alpha of all children
+    ```
+
 ### Mask
 
-- Propagate [mask object](mask.md) to children.
+- Assign [mask object](mask.md) to children.
     ```javascript
     container.setMask(mask);  // container.mask = mask;
     ```

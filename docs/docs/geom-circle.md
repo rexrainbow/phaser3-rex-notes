@@ -11,7 +11,9 @@ Circle shape and methods, built-in methods of phaser.
 ```javascript
 var circle = new Phaser.Geom.Circle(x, y, radius);
 ```
-or clone from another shape
+
+#### Clone shape
+
 ```javascript
 var circle1 = Phaser.Geom.Circle.Clone(circle0);
 ```
@@ -136,8 +138,8 @@ var circle1 = Phaser.Geom.Circle.Clone(circle0);
     ```
     or calculate quantity from steps
     ```javascript
-    var points = circle.getPoints(null, stepRate);
-    // var points = circle.getPoints(null, stepRate, points);  // modify points
+    var points = circle.getPoints(false, stepRate);
+    // var points = circle.getPoints(false, stepRate, points);  // modify points
     ```
     - `points` : an array of point
 - Rectangle is inside shape
@@ -163,3 +165,23 @@ var isEqual = Phaser.Geom.Circle.Equals(circle0, circle1);
 ```
 
 Position and radius are equal.
+
+### Intersection
+
+- Circle to circle
+    ```javascript
+    var result = Phaser.Geom.Intersects.CircleToCircle(circleA, circleB);
+    ```
+- Circle to [rectangle](rectangle.md)
+    ```javascript
+    var result = Phaser.Geom.Intersects.CircleToRectangle(circle, rect);
+    ```
+- Circle to triangle
+    ```javascript
+    var result = Phaser.Geom.Intersects.TriangleToCircle(triangle, circle);
+    ```
+- Circle to line
+    ```javascript
+    var result = Phaser.Geom.Intersects.LineToCircle(line, circle);
+    // var result = Phaser.Geom.Intersects.LineToCircle(line, circle, nearest);  // nearest : nearest point on line
+    ```

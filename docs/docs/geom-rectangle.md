@@ -12,7 +12,16 @@ Rectangle shape and methods, built-in methods of phaser.
 var rect = new Phaser.Geom.Rectangle(x, y, width, height);
 ```
 
-or clone from another shape
+or create from 4 points
+
+```javascript
+var rect = Phaser.Geom.Rectangle.FromPoints(points);
+// var rect = Phaser.Geom.Rectangle.FromPoints(points, rect);  // modify rect
+```
+
+- `points` : an array with 4 points. `[x, y]`, or `{x:0, y:0}`
+
+#### Clone shape
 
 ```javascript
 var rect1 = Phaser.Geom.Rectangle.Clone(rect0);
@@ -69,6 +78,10 @@ var rect1 = Phaser.Geom.Rectangle.Clone(rect0);
     ```javascript
     Phaser.Geom.Rectangle.OffsetPoint(rect, point); // rect.x += point.x, rect.y += point.y
     ```
+    or
+    ```javascript
+    Phaser.Geom.Rectangle.CenterOn(rect, x, y);  // rect.x = x - (rect.width / 2), rect.y = y - (rect.height / 2)
+    ```
 - Size
     ```javascript
     rect.setSize(width, height);
@@ -79,6 +92,20 @@ var rect1 = Phaser.Geom.Rectangle.Clone(rect0);
     rect.width = 0;
     rect.height = 0;
     ```
+    - Scale
+        ```javascript
+        Phaser.Geom.Rectangle.Scale(rect, x, y); // rect.width *= x, rect.height *= y;
+        // Phaser.Geom.Rectangle.Scale(rect, x);   // y = x
+        ```
+    - Extend size to include points
+        ```javascript
+        Phaser.Geom.Rectangle.MergePoints(rect, points);
+        ```
+        - `points` : an array of points. `[x, y]`, or `{x:0, y:0}`
+    - Extend size to include another rectangle
+        ```javascript
+        Phaser.Geom.Rectangle.MergeRect(target, source);
+        ```
 - Inflate
     ```javascript
     Phaser.Geom.Rectangle.Inflate(rect, x, y);
@@ -155,7 +182,18 @@ var rect1 = Phaser.Geom.Rectangle.Clone(rect0);
     ```
 - Perimeter
     ```javascript
-    var circumference = Phaser.Geom.Rectangle.Perimeter(rect);  // 2 * (rect.width + rect.height)
+    var perimeter = Phaser.Geom.Rectangle.Perimeter(rect);  // 2 * (rect.width + rect.height)
+    ```
+- Aspect ratio
+    ```javascript
+    var aspectRatio = Phaser.Geom.Rectangle.GetAspectRatio(rect);  // rect.width / rect.height
+    ```
+- Lines around rectangle
+    ```javascript
+    var topLine = rect.getLineA();  // top line of this rectangle
+    var rightLine = rect.getLineB();  // right line of this rectangle
+    var bottomLine = rect.getLineC();  // bottom line of this rectangle
+    var leftLine = rect.getLineD();  // left line of this rectangle
     ```
 
 ### Point(s) & shape
@@ -185,7 +223,7 @@ var rect1 = Phaser.Geom.Rectangle.Clone(rect0);
     ```
     or
     ```javascript
-    var point =Phaser.Geom.Rectangle.PerimeterPoint(rect, angle);  // angle in degrees
+    var point = Phaser.Geom.Rectangle.PerimeterPoint(rect, angle);  // angle in degrees
     // var point = Phaser.Geom.Rectangle.PerimeterPoint(rect, angle, point);  // modify point
     ```
 - Get points around shape's edge
@@ -195,13 +233,31 @@ var rect1 = Phaser.Geom.Rectangle.Clone(rect0);
     ```
     or calculate quantity from steps
     ```javascript
-    var points = rect.getPoints(null, stepRate);
-    // var points = rect.getPoints(null, stepRate, points);  // modify points
+    var points = rect.getPoints(false, step);
+    // var points = rect.getPoints(false, step, points);  // modify points
     ```
+    - `step` : width of each step, in pixels. `quantity = Perimeter(rectangle) / step;`
     - `points` : an array of point
 - Rectangle is inside shape
     ```javascript
     var isInside = Phaser.Geom.Rectangle.ContainsRect(rectA, rectB);  // rectB is inside rectA
+    ```
+
+### Rectangles
+
+- Is overlapping
+    ```javascript
+    var isOverlapping = Phaser.Geom.Rectangle.Overlaps(rectA, rectB);
+    ```
+- Get intersection rectangle
+    ```javascript
+    var rect = Phaser.Geom.Rectangle.Intersection(rectA, rectB);
+    var rect = Phaser.Geom.Rectangle.Intersection(rectA, rectB, rect);  // modify rect
+    ```
+- Get union rectangle
+    ```javascript
+    var rect = Phaser.Geom.Rectangle.Union(rectA, rectB);
+    var rect = Phaser.Geom.Rectangle.Union(rectA, rectB, rect);  // modify rect
     ```
 
 ### Empty
@@ -222,3 +278,22 @@ var isEqual = Phaser.Geom.Rectangle.Equals(rect0, rect1);
 ```
 
 Position and size are equal.
+
+### Intersection
+
+- Rectangle to circle
+    ```javascript
+    var result = Phaser.Geom.Intersects.CircleToRectangle(circle, rect);
+    ```
+- Rectangle to rectangle
+    ```javascript
+    var result = Phaser.Geom.Intersects.RectangleToRectangle(rectA, rectB);
+    ```
+- Rectangle to triangle
+    ```javascript
+    var result = Phaser.Geom.Intersects.RectangleToTriangle(rect, triangle);
+    ```
+- Rectangle to line
+    ```javascript
+    var result = Phaser.Geom.Intersects.LineToRectangle(line, rect);
+    ```
