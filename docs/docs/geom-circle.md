@@ -138,8 +138,8 @@ var circle1 = Phaser.Geom.Circle.Clone(circle0);
     ```
     or calculate quantity from steps
     ```javascript
-    var points = circle.getPoints(false, stepRate);
-    // var points = circle.getPoints(false, stepRate, points);  // modify points
+    var points = circle.getPoints(false, step);
+    // var points = circle.getPoints(false, step, points);  // modify points
     ```
     - `points` : an array of point
 - Rectangle is inside shape
@@ -172,7 +172,7 @@ Position and radius are equal.
     ```javascript
     var result = Phaser.Geom.Intersects.CircleToCircle(circleA, circleB);
     ```
-- Circle to [rectangle](rectangle.md)
+- Circle to [rectangle](geom-rectangle.md)
     ```javascript
     var result = Phaser.Geom.Intersects.CircleToRectangle(circle, rect);
     ```
@@ -180,7 +180,7 @@ Position and radius are equal.
     ```javascript
     var result = Phaser.Geom.Intersects.TriangleToCircle(triangle, circle);
     ```
-- Circle to line
+- Circle to [line](geom-line.md)
     ```javascript
     var result = Phaser.Geom.Intersects.LineToCircle(line, circle);
     // var result = Phaser.Geom.Intersects.LineToCircle(line, circle, nearest);  // nearest : nearest point on line

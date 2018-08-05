@@ -281,7 +281,7 @@ Position and size are equal.
 
 ### Intersection
 
-- Rectangle to circle
+- Rectangle to [circle](geom-circle.md)
     ```javascript
     var result = Phaser.Geom.Intersects.CircleToRectangle(circle, rect);
     ```
@@ -293,7 +293,7 @@ Position and size are equal.
     ```javascript
     var result = Phaser.Geom.Intersects.RectangleToTriangle(rect, triangle);
     ```
-- Rectangle to line
+- Rectangle to [line](geom-line.md)
     ```javascript
     var result = Phaser.Geom.Intersects.LineToRectangle(line, rect);
     ```

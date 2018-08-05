@@ -10,7 +10,24 @@ Drawing on webgl or canvas, built-in game object of phaser.
 
 ```javascript
 var graphics = scene.add.graphics();
-// var graphics = scene.add.graphics({x, y});
+```
+
+or
+
+```javascript
+var graphics = scene.add.graphics({
+    x: 0,
+    y: 0,
+    lineStyle: {
+        width: 1,
+        color: 0xffffff,
+        alpha: 1
+    },
+    fillStyle: {
+        color: 0xffffff,
+        alpha: 1
+    }
+});
 ```
 
 ### Custom class
@@ -110,7 +127,7 @@ graphics.fillPoint(x, y, size);
 #### Line
 
 ```javascript
-graphics.strokeLineShape(line); // point: {x1, y1, x2, y2}
+graphics.strokeLineShape(line); // line: {x1, y1, x2, y2}
 graphics.lineBetween(x1, y1, x2, y2);
 graphics.lineTo(x, y);
 graphics.moveTo(x, y);
