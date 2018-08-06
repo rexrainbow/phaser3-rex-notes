@@ -8,11 +8,12 @@ Change properties by tween equations, built-in object of phaser.
 
 ### Create tween task
 
-- One property
+- Simple
     ```javascript
     var tween = scene.tweens.add({
         targets: gameObject,
-        x: 500,               // '+=600'
+        x: 400,               // '+=100'
+        y: 300,               // '+=100'
         ease: 'Linear',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
         duration: 1000,
         repeat: -1,
@@ -231,40 +232,56 @@ scene.tweens.timeScale = timescale;
 1. Create tween task
     ```javascript
     var tween = scene.tweens.addCounter({
-        // from: 0,
-        // to: 1,
-        // delay: 0,
-        // duration: 1000,
-        // easeParams: null,
-        // ease: 'Power0',
-        // hold: 0,
-        // repeat: 0,
-        // repeatDelay: 0,
-        // yoyo: false,
+        from: 0,
+        to: 1,
+        ease: 'Linear',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
+        duration: 1000,
+        repeat: 0,
+        yoyo: false,
+    });
+    ```
+    or
+    ```javascript
+    var tween = scene.tweens.addCounter({
+        from: 0,
+        to: 1,
+        delay: 0,
+        duration: 1000,
+        easeParams: null,
+        ease: 'Power0',
+        hold: 0,
+        repeat: 0,
+        repeatDelay: 0,
+        yoyo: false,
     
-        // offset: null,
-        // completeDelay: 0,
-        // loop: 0,
-        // loopDelay: 0,
-        // paused: false,
-        // useFrames: false,
+        offset: null,
+        completeDelay: 0,
+        loop: 0,
+        loopDelay: 0,
+        paused: false,
+        useFrames: false,
     
-        // callbackScope: timeline,
+        callbackScope: tween,
     
-        // onStart: function () {},
-        // onStartScope: callbackScope,
+        onStart: function () {},
+        onStartScope: callbackScope,
+        onStartParams: [],
     
-        // onUpdate: function () {},
-        // onUpdateScope: callbackScope,
+        onUpdate: function () {},
+        onUpdateScope: callbackScope,
+        onUpdateParams: [],
     
-        // onComplete: function () {},
-        // onCompleteScope: callbackScope,
+        onComplete: function () {},
+        onCompleteScope: callbackScope,
+        onCompleteParams: [],
     
-        // onYoyo: function () {},
-        // onYoyoScope: callbackScope,
+        onYoyo: function () {},
+        onYoyoScope: callbackScope,
+        onYoyoParams: [],
     
-        // onRepeat: function () {},
-        // onRepeatScope: callbackScope
+        onRepeat: function () {},
+        onRepeatScope: callbackScope,
+        onRepeatParams: []
     });
     ```
 1. Get value
