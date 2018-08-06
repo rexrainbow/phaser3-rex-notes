@@ -68,20 +68,29 @@ graphics.strokeLineShape(line);
         var rad = Phaser.Math.DegToRad(deg);
         ```
     - `length` :　The length of the line
-- Rotate a line around its **midpoint** by the given angle in radians
-    ```javascript
-    var line = Phaser.Geom.Line.Rotate(line, angle)
-    ```
-    - `line` : The line to set
-    - `angle` : The angle of the line in **radians**
+- Rotate
+    - Rotate around **midpoint**
         ```javascript
-        var rad = Phaser.Math.DegToRad(deg);
+        var line = Phaser.Geom.Line.Rotate(line, angle)
         ```
-- Normal vector
-   ```javascript
-   var normal = Phaser.Geom.Line.GetNormal(line);  // normal: {x, y}
-   // var normal = Phaser.Geom.Line.GetNormal(line, normal);  // modify normal
-   ```
+        - `line` : The line to set
+        - `angle` : The angle of the line in **radians**
+            ```javascript
+            var rad = Phaser.Math.DegToRad(deg);
+            ```
+    - Rotate around point
+        ```javascript
+        var line = Phaser.Geom.Line.RotateAroundPoint(line, point, angle);
+        ```
+        or
+        ```javascript
+        var line = Phaser.Geom.Line.RotateAroundXY(line, x, y, angle);
+        ```
+        - `line` : The line to set
+        - `angle` : The angle of the line in **radians**
+            ```javascript
+            var rad = Phaser.Math.DegToRad(deg);
+            ```            
 
 ### Get properties
 
@@ -99,12 +108,12 @@ graphics.strokeLineShape(line);
     - Start point
        ```javascript
        var start = line.getPointA();  // start: {x, y}
-       var start = line.getPointA(start);  // modify start
+       var start = line.getPointA(start);  // push start
        ```
     - End point
        ```javascript
        var end = line.getPointB();  // end: {x, y}
-       var end = line.getPointB(end);  // modify end
+       var end = line.getPointB(end);  // push end
        ```       
     - Middle point
         ```javascript
@@ -123,46 +132,71 @@ graphics.strokeLineShape(line);
         ```javascript
         var width = Phaser.Geom.Line.Height(line);
         ```
-- Slope : (y2 - y1) / (x2 - x1)
-    ```javascript
-    var slope = Phaser.Geom.Line.Slope(line);
-    ```
-- Angle
-    ```javascript
-    var angle = Phaser.Geom.Line.Angle(line);
-    ```
-    - `angle` : The angle of the line in **radians**
+- Slope
+    - Slope : (y2 - y1) / (x2 - x1)
         ```javascript
-        var deg = Phaser.Math.RadToDeg(rad);  // deg : -180 ~ 180
+        var slope = Phaser.Geom.Line.Slope(line);
+        ```
+    - Perpendicular slope : -((x2 - x1) / (y2 - y1))
+        ```javascript
+        var perpSlope = Phaser.Geom.Line.PerpSlope(line);
+        ```    
+- Angle
+    - Angle
+        ```javascript
+        var angle = Phaser.Geom.Line.Angle(line);
+        ```
+        - `angle` : The angle of the line in **radians**
+            ```javascript
+            var deg = Phaser.Math.RadToDeg(rad);  // deg : -180 ~ 180
+            ```
+    - Normal angle (angle - 90 degrees)
+        - Normal angle
+            ```javascript
+            var normalAngle = Phaser.Geom.Line.NormalAngle(line);
+            ```
+        - Normal vector
+            ```javascript
+            var normal = Phaser.Geom.Line.GetNormal(line);  // normal: {x, y}
+            // var normal = Phaser.Geom.Line.GetNormal(line, normal);  // push normal
+            ```
+            or
+            ```javascript
+            var normalX = Phaser.Geom.Line.NormalX(line);
+            var normalY = Phaser.Geom.Line.NormalY(line);
+            ```
+    - Reflect angle
+        ```javascript
+        var reflectAngle = Phaser.Geom.Line.ReflectAngle(aimLine, reflectingLine);
         ```
 
 ### Point(s) & shape
 
-- Get a random point inside shape
-    ```javascript
-    var point = line.getRandomPoint();
-    // var point = line.getRandomPoint(point);  // modify point
-    ```
 - Get point at shape's edge
     ```javascript
     var point = line.getPoint(t);  // t : 0 ~ 1. 0=start, 0.5=middle, 1=end
     // var point = line.getPoint(t, point);  // modify point
     ```
+- Get a random point inside shape
+    ```javascript
+    var point = line.getRandomPoint();
+    // var point = line.getRandomPoint(point);  // modify point
+    ```    
 - Get points around shape's edge
     ```javascript
     var points = line.getPoints(quantity);
-    // var points = line.getPoints(quantity, null, points);  // modify points
+    // var points = line.getPoints(quantity, null, points);  // push points
     ```
     or calculate quantity from steps
     ```javascript
     var points = line.getPoints(false, step);
-    // var points = line.getPoints(false, step, points);  // modify points
+    // var points = line.getPoints(false, step, points);  // push points
     ```
     - `points` : an array of point
 - Get points using *Bresenham*'s line algorithm
     ```javascript
     var points = Phaser.Geom.Line.BresenhamPoints(line, step);
-    // var points = Phaser.Geom.Line.BresenhamPoints(line, step, points);  // modify points
+    // var points = Phaser.Geom.Line.BresenhamPoints(line, step, points);  // push points
     ```
 
 ### Equal

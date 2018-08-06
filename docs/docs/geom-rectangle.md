@@ -16,7 +16,7 @@ or create from 4 points
 
 ```javascript
 var rect = Phaser.Geom.Rectangle.FromPoints(points);
-// var rect = Phaser.Geom.Rectangle.FromPoints(points, rect);  // modify rect
+// var rect = Phaser.Geom.Rectangle.FromPoints(points, rect);  // push rect
 ```
 
 - `points` : an array with 4 points. `[x, y]`, or `{x:0, y:0}`
@@ -198,6 +198,28 @@ var rect1 = Phaser.Geom.Rectangle.Clone(rect0);
 
 ### Point(s) & shape
 
+- Get point at shape's edge
+    ```javascript
+    var point = rect.getPoint(t);  // t : 0 ~ 1 (0= top-left, 0.5= bottom-right, 1= top-left)
+    // var point = rect.getPoint(t, point);  // modify point
+    ```
+    or
+    ```javascript
+    var point = Phaser.Geom.Rectangle.PerimeterPoint(rect, angle);  // angle in degrees
+    // var point = Phaser.Geom.Rectangle.PerimeterPoint(rect, angle, point);  // push point
+    ```
+- Get points around shape's edge
+    ```javascript
+    var points = rect.getPoints(quantity);
+    // var points = rect.getPoints(quantity, null, points);  // push points
+    ```
+    or calculate quantity from steps
+    ```javascript
+    var points = rect.getPoints(false, step);
+    // var points = rect.getPoints(false, step, points);  // push points
+    ```
+    - `step` : width of each step, in pixels. `quantity = Perimeter(rectangle) / step;`
+    - `points` : an array of point    
 - Point is inside shape
     ```javascript
     var isInside = rect.contains(x, y);
@@ -205,7 +227,7 @@ var rect1 = Phaser.Geom.Rectangle.Clone(rect0);
     or
     ```javascript
     var isInside = Phaser.Geom.Rectangle.ContainsPoint(rect, point);
-    ```
+    ```   
 - Get a random point inside shape
     ```javascript
     var point = rect.getRandomPoint();
@@ -216,28 +238,6 @@ var rect1 = Phaser.Geom.Rectangle.Clone(rect0);
     var point = Phaser.Geom.Rectangle.RandomOutside(outer, inner);
     // var point = Phaser.Geom.Rectangle.RandomOutside(outer, inner, point); // modify point
     ```
-- Get point at shape's edge
-    ```javascript
-    var point = rect.getPoint(t);  // t : 0 ~ 1 (0= top-left, 0.5= bottom-right, 1= top-left)
-    // var point = rect.getPoint(t, point);  // modify point
-    ```
-    or
-    ```javascript
-    var point = Phaser.Geom.Rectangle.PerimeterPoint(rect, angle);  // angle in degrees
-    // var point = Phaser.Geom.Rectangle.PerimeterPoint(rect, angle, point);  // modify point
-    ```
-- Get points around shape's edge
-    ```javascript
-    var points = rect.getPoints(quantity);
-    // var points = rect.getPoints(quantity, null, points);  // modify points
-    ```
-    or calculate quantity from steps
-    ```javascript
-    var points = rect.getPoints(false, step);
-    // var points = rect.getPoints(false, step, points);  // modify points
-    ```
-    - `step` : width of each step, in pixels. `quantity = Perimeter(rectangle) / step;`
-    - `points` : an array of point
 - Rectangle is inside shape
     ```javascript
     var isInside = Phaser.Geom.Rectangle.ContainsRect(rectA, rectB);  // rectB is inside rectA
@@ -252,12 +252,12 @@ var rect1 = Phaser.Geom.Rectangle.Clone(rect0);
 - Get intersection rectangle
     ```javascript
     var rect = Phaser.Geom.Rectangle.Intersection(rectA, rectB);
-    var rect = Phaser.Geom.Rectangle.Intersection(rectA, rectB, rect);  // modify rect
+    var rect = Phaser.Geom.Rectangle.Intersection(rectA, rectB, rect);  // push rect
     ```
 - Get union rectangle
     ```javascript
     var rect = Phaser.Geom.Rectangle.Union(rectA, rectB);
-    var rect = Phaser.Geom.Rectangle.Union(rectA, rectB, rect);  // modify rect
+    var rect = Phaser.Geom.Rectangle.Union(rectA, rectB, rect);  // push rect
     ```
 
 ### Empty

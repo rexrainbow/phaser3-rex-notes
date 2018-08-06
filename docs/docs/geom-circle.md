@@ -94,7 +94,7 @@ var circle1 = Phaser.Geom.Circle.Clone(circle0);
 - Bound
     ```javascript
     var bound = Phaser.Geom.Circle.GetBounds(circle);
-    // var bound = Phaser.Geom.Circle.GetBounds(circle, bound);  // modify bound
+    // var bound = Phaser.Geom.Circle.GetBounds(circle, bound);  // push bound
     ```
     - `bound` : A Rectangle shape object
 - Area
@@ -108,19 +108,6 @@ var circle1 = Phaser.Geom.Circle.Clone(circle0);
 
 ### Point(s) & shape
 
-- Point is inside shape
-    ```javascript
-    var isInside = circle.contains(x, y);
-    ```
-    or
-    ```javascript
-    var isInside = Phaser.Geom.Circle.ContainsPoint(circle, point);
-    ```
-- Get a random point inside shape
-    ```javascript
-    var point = circle.getRandomPoint();
-    // var point = circle.getRandomPoint(point);  // modify point
-    ```
 - Get point at shape's edge
     ```javascript
     var point = circle.getPoint(t);  // t : 0 ~ 1 (angle/360)
@@ -131,17 +118,30 @@ var circle1 = Phaser.Geom.Circle.Clone(circle0);
     var point = Phaser.Geom.Circle.CircumferencePoint(circle, angle);  // angle in degrees
     // var point = Phaser.Geom.Circle.CircumferencePoint(circle, angle, point);  // modify point
     ```
+- Get a random point inside shape
+    ```javascript
+    var point = circle.getRandomPoint();
+    // var point = circle.getRandomPoint(point);  // modify point
+    ```    
 - Get points around shape's edge
     ```javascript
     var points = circle.getPoints(quantity);
-    // var points = circle.getPoints(quantity, null, points);  // modify points
+    // var points = circle.getPoints(quantity, null, points);  // push points
     ```
     or calculate quantity from steps
     ```javascript
     var points = circle.getPoints(false, step);
-    // var points = circle.getPoints(false, step, points);  // modify points
+    // var points = circle.getPoints(false, step, points);  // push points
     ```
-    - `points` : an array of point
+    - `points` : an array of point    
+- Point is inside shape
+    ```javascript
+    var isInside = circle.contains(x, y);
+    ```
+    or
+    ```javascript
+    var isInside = Phaser.Geom.Circle.ContainsPoint(circle, point);
+    ```
 - Rectangle is inside shape
     ```javascript
     var isInside = Phaser.Geom.Circle.ContainsRect(circle, rect);  // rect : 4 points
