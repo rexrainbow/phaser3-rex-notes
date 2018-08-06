@@ -89,9 +89,10 @@ pages:
         - Random number: random.md
         - Gashapon: gashapon.md
     - Color: color.md    
-    - Geometry: 
+    - Geometry:
         - Circle: geom-circle.md
         - Rectangle: geom-rectangle.md
+        - Line: geom-line.md
 - String:
     - Format: format.md
     - Mustache: mustache.md

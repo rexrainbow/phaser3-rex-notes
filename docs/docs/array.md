@@ -6,13 +6,22 @@ Built-in javascript object.
 
 ## Usage
 
-### Filter elements
-
-Creates a new array with all elements that pass the test function. [Reference](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)
+### Run function for each element
 
 ```javascript
-// var elems = [...]
-var result = elems.filter(function(el){
-    return (el.x > 400);
-});
+var callback = function(element, index, arr) {};
+arr.forEach(callback);
+// arr.forEach(callback, scope);
+```
+
+### Filter elements
+
+Creates a new array with all elements that pass the test function.
+
+```javascript
+var callback = function(element, index, arr) {
+    // return true; // false
+};
+var result = arr.filter(callback);
+// var result = arr.filter(callback, scope);
 ```

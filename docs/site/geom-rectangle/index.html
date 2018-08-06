@@ -1705,6 +1705,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../geom-line/index.html" title="Line" class="md-nav__link">
+      Line
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -2116,7 +2128,7 @@
 
 <p>or create from 4 points</p>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Rectangle</span><span class="p">.</span><span class="nx">FromPoints</span><span class="p">(</span><span class="nx">points</span><span class="p">);</span>
-<span class="c1">// var rect = Phaser.Geom.Rectangle.FromPoints(points, rect);  // modify rect</span>
+<span class="c1">// var rect = Phaser.Geom.Rectangle.FromPoints(points, rect);  // push rect</span>
 </pre></div>
 
 <ul>
@@ -2275,6 +2287,26 @@
 </ul>
 <h3 id="points-shape">Point(s) &amp; shape<a class="headerlink" href="#points-shape" title="Permanent link">&para;</a></h3>
 <ul>
+<li>Get point at shape's edge
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">point</span> <span class="o">=</span> <span class="nx">rect</span><span class="p">.</span><span class="nx">getPoint</span><span class="p">(</span><span class="nx">t</span><span class="p">);</span>  <span class="c1">// t : 0 ~ 1 (0= top-left, 0.5= bottom-right, 1= top-left)</span>
+<span class="c1">// var point = rect.getPoint(t, point);  // modify point</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">point</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Rectangle</span><span class="p">.</span><span class="nx">PerimeterPoint</span><span class="p">(</span><span class="nx">rect</span><span class="p">,</span> <span class="nx">angle</span><span class="p">);</span>  <span class="c1">// angle in degrees</span>
+<span class="c1">// var point = Phaser.Geom.Rectangle.PerimeterPoint(rect, angle, point);  // push point</span>
+</pre></div></li>
+<li>Get points around shape's edge
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="nx">rect</span><span class="p">.</span><span class="nx">getPoints</span><span class="p">(</span><span class="nx">quantity</span><span class="p">);</span>
+<span class="c1">// var points = rect.getPoints(quantity, null, points);  // push points</span>
+</pre></div>
+    or calculate quantity from steps
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="nx">rect</span><span class="p">.</span><span class="nx">getPoints</span><span class="p">(</span><span class="kc">false</span><span class="p">,</span> <span class="nx">step</span><span class="p">);</span>
+<span class="c1">// var points = rect.getPoints(false, step, points);  // push points</span>
+</pre></div><ul>
+<li><code>step</code> : width of each step, in pixels. <code>quantity = Perimeter(rectangle) / step;</code></li>
+<li><code>points</code> : an array of point    </li>
+</ul>
+</li>
 <li>Point is inside shape
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isInside</span> <span class="o">=</span> <span class="nx">rect</span><span class="p">.</span><span class="nx">contains</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 </pre></div>
@@ -2289,26 +2321,6 @@
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">point</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Rectangle</span><span class="p">.</span><span class="nx">RandomOutside</span><span class="p">(</span><span class="nx">outer</span><span class="p">,</span> <span class="nx">inner</span><span class="p">);</span>
 <span class="c1">// var point = Phaser.Geom.Rectangle.RandomOutside(outer, inner, point); // modify point</span>
 </pre></div></li>
-<li>Get point at shape's edge
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">point</span> <span class="o">=</span> <span class="nx">rect</span><span class="p">.</span><span class="nx">getPoint</span><span class="p">(</span><span class="nx">t</span><span class="p">);</span>  <span class="c1">// t : 0 ~ 1 (0= top-left, 0.5= bottom-right, 1= top-left)</span>
-<span class="c1">// var point = rect.getPoint(t, point);  // modify point</span>
-</pre></div>
-    or
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">point</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Rectangle</span><span class="p">.</span><span class="nx">PerimeterPoint</span><span class="p">(</span><span class="nx">rect</span><span class="p">,</span> <span class="nx">angle</span><span class="p">);</span>  <span class="c1">// angle in degrees</span>
-<span class="c1">// var point = Phaser.Geom.Rectangle.PerimeterPoint(rect, angle, point);  // modify point</span>
-</pre></div></li>
-<li>Get points around shape's edge
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="nx">rect</span><span class="p">.</span><span class="nx">getPoints</span><span class="p">(</span><span class="nx">quantity</span><span class="p">);</span>
-<span class="c1">// var points = rect.getPoints(quantity, null, points);  // modify points</span>
-</pre></div>
-    or calculate quantity from steps
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="nx">rect</span><span class="p">.</span><span class="nx">getPoints</span><span class="p">(</span><span class="kc">false</span><span class="p">,</span> <span class="nx">step</span><span class="p">);</span>
-<span class="c1">// var points = rect.getPoints(false, step, points);  // modify points</span>
-</pre></div><ul>
-<li><code>step</code> : width of each step, in pixels. <code>quantity = Perimeter(rectangle) / step;</code></li>
-<li><code>points</code> : an array of point</li>
-</ul>
-</li>
 <li>Rectangle is inside shape
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isInside</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Rectangle</span><span class="p">.</span><span class="nx">ContainsRect</span><span class="p">(</span><span class="nx">rectA</span><span class="p">,</span> <span class="nx">rectB</span><span class="p">);</span>  <span class="c1">// rectB is inside rectA</span>
 </pre></div></li>
@@ -2320,11 +2332,11 @@
 </pre></div></li>
 <li>Get intersection rectangle
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Rectangle</span><span class="p">.</span><span class="nx">Intersection</span><span class="p">(</span><span class="nx">rectA</span><span class="p">,</span> <span class="nx">rectB</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Rectangle</span><span class="p">.</span><span class="nx">Intersection</span><span class="p">(</span><span class="nx">rectA</span><span class="p">,</span> <span class="nx">rectB</span><span class="p">,</span> <span class="nx">rect</span><span class="p">);</span>  <span class="c1">// modify rect</span>
+<span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Rectangle</span><span class="p">.</span><span class="nx">Intersection</span><span class="p">(</span><span class="nx">rectA</span><span class="p">,</span> <span class="nx">rectB</span><span class="p">,</span> <span class="nx">rect</span><span class="p">);</span>  <span class="c1">// push rect</span>
 </pre></div></li>
 <li>Get union rectangle
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Rectangle</span><span class="p">.</span><span class="nx">Union</span><span class="p">(</span><span class="nx">rectA</span><span class="p">,</span> <span class="nx">rectB</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Rectangle</span><span class="p">.</span><span class="nx">Union</span><span class="p">(</span><span class="nx">rectA</span><span class="p">,</span> <span class="nx">rectB</span><span class="p">,</span> <span class="nx">rect</span><span class="p">);</span>  <span class="c1">// modify rect</span>
+<span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Rectangle</span><span class="p">.</span><span class="nx">Union</span><span class="p">(</span><span class="nx">rectA</span><span class="p">,</span> <span class="nx">rectB</span><span class="p">,</span> <span class="nx">rect</span><span class="p">);</span>  <span class="c1">// push rect</span>
 </pre></div></li>
 </ul>
 <h3 id="empty">Empty<a class="headerlink" href="#empty" title="Permanent link">&para;</a></h3>
@@ -2343,7 +2355,7 @@
 <p>Position and size are equal.</p>
 <h3 id="intersection">Intersection<a class="headerlink" href="#intersection" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Rectangle to circle
+<li>Rectangle to <a href="../geom-circle/index.html">circle</a>
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Intersects</span><span class="p">.</span><span class="nx">CircleToRectangle</span><span class="p">(</span><span class="nx">circle</span><span class="p">,</span> <span class="nx">rect</span><span class="p">);</span>
 </pre></div></li>
 <li>Rectangle to rectangle
@@ -2352,7 +2364,7 @@
 <li>Rectangle to triangle
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Intersects</span><span class="p">.</span><span class="nx">RectangleToTriangle</span><span class="p">(</span><span class="nx">rect</span><span class="p">,</span> <span class="nx">triangle</span><span class="p">);</span>
 </pre></div></li>
-<li>Rectangle to line
+<li>Rectangle to <a href="../geom-line/index.html">line</a>
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Intersects</span><span class="p">.</span><span class="nx">LineToRectangle</span><span class="p">(</span><span class="nx">line</span><span class="p">,</span> <span class="nx">rect</span><span class="p">);</span>
 </pre></div></li>
 </ul>
@@ -2405,13 +2417,13 @@
           </a>
         
         
-          <a href="../format/index.html" title="Format" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../geom-line/index.html" title="Line" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Format
+                Line
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

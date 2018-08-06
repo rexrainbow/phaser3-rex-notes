@@ -1711,6 +1711,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../geom-line/index.html" title="Line" class="md-nav__link">
+      Line
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -2123,82 +2135,97 @@
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <h3 id="create-tween-task">Create tween task<a class="headerlink" href="#create-tween-task" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tween</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">tweens</span><span class="p">.</span><span class="nx">add</span><span class="p">({</span>
+<ul>
+<li>One property
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tween</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">tweens</span><span class="p">.</span><span class="nx">add</span><span class="p">({</span>
     <span class="nx">targets</span><span class="o">:</span> <span class="nx">gameObject</span><span class="p">,</span>
-    <span class="c1">// delay: 0,</span>
-    <span class="c1">// duration: 1000,</span>
-    <span class="c1">// ease: &#39;Power0&#39;,</span>
-    <span class="c1">// easeParams: null,</span>
-    <span class="c1">// hold: 0,</span>
-    <span class="c1">// repeat: 0,</span>
-    <span class="c1">// repeatDelay: 0,</span>
-    <span class="c1">// yoyo: false,</span>
-    <span class="c1">// flipX: false,</span>
-    <span class="c1">// flipY: false,</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="mi">500</span><span class="p">,</span>               <span class="c1">// &#39;+=600&#39;</span>
+    <span class="nx">ease</span><span class="o">:</span> <span class="s1">&#39;Linear&#39;</span><span class="p">,</span>       <span class="c1">// &#39;Cubic&#39;, &#39;Elastic&#39;, &#39;Bounce&#39;, &#39;Back&#39;</span>
+    <span class="nx">duration</span><span class="o">:</span> <span class="mi">1000</span><span class="p">,</span>
+    <span class="nx">repeat</span><span class="o">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="nx">yoyo</span><span class="o">:</span> <span class="kc">false</span>
+<span class="p">});</span>
+</pre></div></li>
+<li>Full features
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tween</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">tweens</span><span class="p">.</span><span class="nx">add</span><span class="p">({</span>
+    <span class="nx">targets</span><span class="o">:</span> <span class="nx">gameObject</span><span class="p">,</span>
+    <span class="nx">delay</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">duration</span><span class="o">:</span> <span class="mi">1000</span><span class="p">,</span>
+    <span class="nx">ease</span><span class="o">:</span> <span class="s1">&#39;Power0&#39;</span><span class="p">,</span>
+    <span class="nx">easeParams</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">hold</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">repeat</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">repeatDelay</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">yoyo</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">flipX</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">flipY</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
 
-    <span class="c1">// offset: null,</span>
-    <span class="c1">// completeDelay: 0,</span>
-    <span class="c1">// loop: 0</span>
-    <span class="c1">// loopDelay: 0,</span>
-    <span class="c1">// paused: false,</span>
-    <span class="c1">// useFrames: false,</span>
+    <span class="nx">offset</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">completeDelay</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">loop</span><span class="o">:</span> <span class="mi">0</span>
+    <span class="nx">loopDelay</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">paused</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">useFrames</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
 
     <span class="c1">// properties:</span>
-    <span class="c1">// x: &#39;+=600&#39;,        // start from current value</span>
-    <span class="c1">// y: 500,</span>
-    <span class="c1">// rotation: ...</span>
-    <span class="c1">// angle: ...</span>
-    <span class="c1">// alpha: ...</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="s1">&#39;+=600&#39;</span><span class="p">,</span>        <span class="c1">// start from current value</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="mi">500</span><span class="p">,</span>
+    <span class="nx">rotation</span><span class="o">:</span> <span class="p">...</span>
+    <span class="nx">angle</span><span class="o">:</span> <span class="p">...</span>
+    <span class="nx">alpha</span><span class="o">:</span> <span class="p">...</span>
     <span class="c1">// ...</span>
 
     <span class="c1">// or</span>
-    <span class="c1">// props: {</span>
-    <span class="c1">//     x: { value: &#39;+=600&#39;, duration: 3000, ease: &#39;Power2&#39; },</span>
-    <span class="c1">//     y: { value: &#39;500&#39;, duration: 1500, ease: &#39;Bounce.easeOut&#39; }</span>
-    <span class="c1">// },</span>
+    <span class="nx">props</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">x</span><span class="o">:</span> <span class="p">{</span> <span class="nx">value</span><span class="o">:</span> <span class="s1">&#39;+=600&#39;</span><span class="p">,</span> <span class="nx">duration</span><span class="o">:</span> <span class="mi">3000</span><span class="p">,</span> <span class="nx">ease</span><span class="o">:</span> <span class="s1">&#39;Power2&#39;</span> <span class="p">},</span>
+        <span class="nx">y</span><span class="o">:</span> <span class="p">{</span> <span class="nx">value</span><span class="o">:</span> <span class="s1">&#39;500&#39;</span><span class="p">,</span> <span class="nx">duration</span><span class="o">:</span> <span class="mi">1500</span><span class="p">,</span> <span class="nx">ease</span><span class="o">:</span> <span class="s1">&#39;Bounce.easeOut&#39;</span> <span class="p">}</span>
+    <span class="p">},</span>
 
-    <span class="c1">// or     </span>
-    <span class="c1">// props: {</span>
-    <span class="c1">//    x: {</span>
-    <span class="c1">//        duration: 400,</span>
-    <span class="c1">//        yoyo: true,</span>
-    <span class="c1">//        repeat: 8,</span>
-    <span class="c1">//        ease: &#39;Sine.easeInOut&#39;,</span>
-    <span class="c1">//        value: {</span>
-    <span class="c1">//            getEnd: function (target, key, value)</span>
-    <span class="c1">//            {</span>
-    <span class="c1">//                destX -= 30;</span>
-    <span class="c1">//                return destX;</span>
-    <span class="c1">//            },</span>
-    <span class="c1">//            getStart: function (target, key, value)</span>
-    <span class="c1">//            {</span>
-    <span class="c1">//                return value + 30;</span>
-    <span class="c1">//            }</span>
-    <span class="c1">//        }</span>
-    <span class="c1">//    },</span>
-    <span class="c1">//    ....</span>
-    <span class="c1">// },</span>
+    <span class="c1">// or</span>
+    <span class="nx">props</span><span class="o">:</span> <span class="p">{</span>
+       <span class="nx">x</span><span class="o">:</span> <span class="p">{</span>
+           <span class="nx">duration</span><span class="o">:</span> <span class="mi">400</span><span class="p">,</span>
+           <span class="nx">yoyo</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+           <span class="nx">repeat</span><span class="o">:</span> <span class="mi">8</span><span class="p">,</span>
+           <span class="nx">ease</span><span class="o">:</span> <span class="s1">&#39;Sine.easeInOut&#39;</span><span class="p">,</span>
+           <span class="nx">value</span><span class="o">:</span> <span class="p">{</span>
+               <span class="nx">getEnd</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span>
+               <span class="p">{</span>
+                   <span class="nx">destX</span> <span class="o">-=</span> <span class="mi">30</span><span class="p">;</span>
+                   <span class="k">return</span> <span class="nx">destX</span><span class="p">;</span>
+               <span class="p">},</span>
+               <span class="nx">getStart</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">target</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">)</span>
+               <span class="p">{</span>
+                   <span class="k">return</span> <span class="nx">value</span> <span class="o">+</span> <span class="mi">30</span><span class="p">;</span>
+               <span class="p">}</span>
+           <span class="p">}</span>
+       <span class="p">},</span>
+       <span class="p">....</span>
+    <span class="p">},</span>
 
-    <span class="c1">// callbackScope: timeline,</span>
+    <span class="nx">callbackScope</span><span class="o">:</span> <span class="nx">tween</span><span class="p">,</span>
 
-    <span class="c1">// onStart: function () {},</span>
-    <span class="c1">// onStartScope: callbackScope,</span>
+    <span class="nx">onStart</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{},</span>
+    <span class="nx">onStartScope</span><span class="o">:</span> <span class="nx">callbackScope</span><span class="p">,</span>
+    <span class="nx">onStartParams</span><span class="o">:</span> <span class="p">[],</span>
 
-    <span class="c1">// onUpdate: function () {},</span>
-    <span class="c1">// onUpdateScope: callbackScope,</span>
+    <span class="nx">onUpdate</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{},</span>
+    <span class="nx">onUpdateScope</span><span class="o">:</span> <span class="nx">callbackScope</span><span class="p">,</span>
+    <span class="nx">onUpdateParams</span><span class="o">:</span> <span class="p">[],</span>
 
-    <span class="c1">// onComplete: function () {},</span>
-    <span class="c1">// onCompleteScope: callbackScope,</span>
+    <span class="nx">onComplete</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{},</span>
+    <span class="nx">onCompleteScope</span><span class="o">:</span> <span class="nx">callbackScope</span><span class="p">,</span>
+    <span class="nx">onCompleteParams</span><span class="o">:</span> <span class="p">[],</span>
 
-    <span class="c1">// onYoyo: function () {},</span>
-    <span class="c1">// onYoyoScope: callbackScope,</span>
+    <span class="nx">onYoyo</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{},</span>
+    <span class="nx">onYoyoScope</span><span class="o">:</span> <span class="nx">callbackScope</span><span class="p">,</span>
+    <span class="nx">onYoyoParams</span><span class="o">:</span> <span class="p">[],</span>
 
-    <span class="c1">// onRepeat: function () {},</span>
-    <span class="c1">// onRepeatScope: callbackScope</span>
+    <span class="nx">onRepeat</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{},</span>
+    <span class="nx">onRepeatScope</span><span class="o">:</span> <span class="nx">callbackScope</span><span class="p">,</span>
+    <span class="nx">onRepeatParams</span><span class="o">:</span> <span class="p">[]</span>
 <span class="p">});</span>
-</pre></div>
-
-<ul>
+</pre></div><ul>
 <li><code>targets</code> : The targets the tween is updating.</li>
 <li><code>delay</code> : The time the tween will wait before it first starts</li>
 <li><code>duration</code> : The duration of the tween</li>
@@ -2211,7 +2238,7 @@
 <li><code>flipX</code> : flip X the GameObject on tween end</li>
 <li><code>flipY</code> : flip Y the GameObject on tween end</li>
 <li><code>offset</code> : Used when the Tween is part of a Timeline</li>
-<li><code>completeDelay</code> : The time the tween will wait before the onComplete event is dispatched once it has completed</li>
+<li><code>completeDelay</code> : The time the tween will wait before the onComplete event is dispatched once it has     completed</li>
 <li><code>loop</code> : The time the tween will pause before starting either a yoyo or returning to the start for a repeat</li>
 <li><code>loopDelay</code> :</li>
 <li><code>paused</code> : Does the tween start in a paused state, or playing?</li>
@@ -2222,6 +2249,8 @@
 <li><code>onComplete</code> : callback which fired when tween task done</li>
 <li><code>onYoyo</code> : callback which fired when tween reversed (yoyo)</li>
 <li><code>onRepeat</code> : callback which fired when repeat started</li>
+</ul>
+</li>
 </ul>
 <h4 id="ease-equations">Ease equations<a class="headerlink" href="#ease-equations" title="Permanent link">&para;</a></h4>
 <ul>
