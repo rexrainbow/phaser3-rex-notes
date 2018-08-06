@@ -133,7 +133,7 @@ var circle1 = Phaser.Geom.Circle.Clone(circle0);
     var points = circle.getPoints(false, step);
     // var points = circle.getPoints(false, step, points);  // push points
     ```
-    - `points` : an array of point    
+    - `points` : an array of point
 - Point is inside shape
     ```javascript
     var isInside = circle.contains(x, y);

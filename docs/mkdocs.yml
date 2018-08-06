@@ -93,6 +93,7 @@ pages:
         - Circle: geom-circle.md
         - Rectangle: geom-rectangle.md
         - Line: geom-line.md
+        - Point: geom-point.md
 - String:
     - Format: format.md
     - Mustache: mustache.md

@@ -90,7 +90,7 @@ graphics.strokeLineShape(line);
         - `angle` : The angle of the line in **radians**
             ```javascript
             var rad = Phaser.Math.DegToRad(deg);
-            ```            
+            ```
 
 ### Get properties
 
@@ -99,11 +99,11 @@ graphics.strokeLineShape(line);
     var x1 = line.x1;
     var y1 = line.y1;
     var x2 = line.x2;
-    var y2 = line.y2;    
+    var y2 = line.y2;
     var top = line.top;       // min(x1, x2)
     var left = line.left;     // min(y1, y2)
     var right = line.right;   // max(x1, x2)
-    var bottom = line.bottom; // max(y1, y2)    
+    var bottom = line.bottom; // max(y1, y2)
     ```
     - Start point
        ```javascript
@@ -114,7 +114,7 @@ graphics.strokeLineShape(line);
        ```javascript
        var end = line.getPointB();  // end: {x, y}
        var end = line.getPointB(end);  // push end
-       ```       
+       ```
     - Middle point
         ```javascript
         var middle = Phaser.Geom.Line.GetMidPoint(line);  // middle: {x, y}
@@ -140,7 +140,7 @@ graphics.strokeLineShape(line);
     - Perpendicular slope : -((x2 - x1) / (y2 - y1))
         ```javascript
         var perpSlope = Phaser.Geom.Line.PerpSlope(line);
-        ```    
+        ```
 - Angle
     - Angle
         ```javascript
@@ -181,7 +181,7 @@ graphics.strokeLineShape(line);
     ```javascript
     var point = line.getRandomPoint();
     // var point = line.getRandomPoint(point);  // modify point
-    ```    
+    ```
 - Get points around shape's edge
     ```javascript
     var points = line.getPoints(quantity);
