@@ -4,6 +4,7 @@ Displays text with multi-color, font face, or font size with tags.
 
 - Author: Rex
 - A kind of game object, installed by global plugin
+- Compatible with **v3.12.0-beta1**
 
 ## Source code
 
