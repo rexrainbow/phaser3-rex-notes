@@ -1194,6 +1194,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#find-one-element" title="Find one element" class="md-nav__link">
+    Find one element
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#map-elements-to-a-new-array" title="Map elements to a new array" class="md-nav__link">
+    Map elements to a new array
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1653,6 +1667,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../geom-point/index.html" title="Point" class="md-nav__link">
+      Point
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -1962,6 +1988,20 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#find-one-element" title="Find one element" class="md-nav__link">
+    Find one element
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#map-elements-to-a-new-array" title="Map elements to a new array" class="md-nav__link">
+    Map elements to a new array
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2005,10 +2045,26 @@
 <h3 id="filter-elements">Filter elements<a class="headerlink" href="#filter-elements" title="Permanent link">&para;</a></h3>
 <p>Creates a new array with all elements that pass the test function.</p>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">arr</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// return true; // false</span>
+    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span> <span class="c1">// false</span>
 <span class="p">};</span>
 <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
 <span class="c1">// var result = arr.filter(callback, scope);</span>
+</pre></div>
+
+<h3 id="find-one-element">Find one element<a class="headerlink" href="#find-one-element" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">arr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span> <span class="c1">// false</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">element</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
+<span class="c1">// var element = arr.find(callback, scope);</span>
+</pre></div>
+
+<h3 id="map-elements-to-a-new-array">Map elements to a new array<a class="headerlink" href="#map-elements-to-a-new-array" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">index</span><span class="p">,</span> <span class="nx">arr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">newElement</span><span class="p">;</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">newArray</span> <span class="o">=</span> <span class="nx">arr</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
+<span class="c1">// var newArray = arr.map(callback, scope);</span>
 </pre></div>
                 
                   

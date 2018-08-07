@@ -1723,6 +1723,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../geom-point/index.html" title="Point" class="md-nav__link">
+      Point
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -2135,9 +2147,7 @@
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <h3 id="create-tween-task">Create tween task<a class="headerlink" href="#create-tween-task" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Simple
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tween</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">tweens</span><span class="p">.</span><span class="nx">add</span><span class="p">({</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tween</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">tweens</span><span class="p">.</span><span class="nx">add</span><span class="p">({</span>
     <span class="nx">targets</span><span class="o">:</span> <span class="nx">gameObject</span><span class="p">,</span>
     <span class="nx">x</span><span class="o">:</span> <span class="mi">400</span><span class="p">,</span>               <span class="c1">// &#39;+=100&#39;</span>
     <span class="nx">y</span><span class="o">:</span> <span class="mi">300</span><span class="p">,</span>               <span class="c1">// &#39;+=100&#39;</span>
@@ -2146,9 +2156,10 @@
     <span class="nx">repeat</span><span class="o">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
     <span class="nx">yoyo</span><span class="o">:</span> <span class="kc">false</span>
 <span class="p">});</span>
-</pre></div></li>
-<li>Full features
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tween</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">tweens</span><span class="p">.</span><span class="nx">add</span><span class="p">({</span>
+</pre></div>
+
+<p>or</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tween</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">tweens</span><span class="p">.</span><span class="nx">add</span><span class="p">({</span>
     <span class="nx">targets</span><span class="o">:</span> <span class="nx">gameObject</span><span class="p">,</span>
     <span class="nx">delay</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">duration</span><span class="o">:</span> <span class="mi">1000</span><span class="p">,</span>
@@ -2226,7 +2237,9 @@
     <span class="nx">onRepeatScope</span><span class="o">:</span> <span class="nx">callbackScope</span><span class="p">,</span>
     <span class="nx">onRepeatParams</span><span class="o">:</span> <span class="p">[]</span>
 <span class="p">});</span>
-</pre></div><ul>
+</pre></div>
+
+<ul>
 <li><code>targets</code> : The targets the tween is updating.</li>
 <li><code>delay</code> : The time the tween will wait before it first starts</li>
 <li><code>duration</code> : The duration of the tween</li>
@@ -2250,8 +2263,6 @@
 <li><code>onComplete</code> : callback which fired when tween task done</li>
 <li><code>onYoyo</code> : callback which fired when tween reversed (yoyo)</li>
 <li><code>onRepeat</code> : callback which fired when repeat started</li>
-</ul>
-</li>
 </ul>
 <h4 id="ease-equations">Ease equations<a class="headerlink" href="#ease-equations" title="Permanent link">&para;</a></h4>
 <ul>
