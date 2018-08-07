@@ -14,9 +14,11 @@ var Canvas = new Phaser.Class({
         Components.Alpha,
         Components.BlendMode,
         Components.ComputedSize,
+        Components.Crop,
         Components.Depth,
         Components.Flip,
         Components.GetBounds,
+        Components.Mask,
         Components.Origin,
         Components.Pipeline,
         Components.ScaleMode,
@@ -37,28 +39,49 @@ var Canvas = new Phaser.Class({
                 y = 0;
             }
             if (width === undefined) {
-                width = 256;
+                width = 0;
             }
             if (height === undefined) {
-                height = 256;
+                height = 0;
             }
 
             GameObject.call(this, scene, 'rexCanvas');
 
-            this.resolution = 1;
+            this.renderer = scene.sys.game.renderer;
+
+            this.resolution = scene.sys.game.config.resolution;
             this.canvas = CanvasPool.create(this, this.resolution * width, this.resolution * height);
             this.context = this.canvas.getContext('2d');
-            this.canvasTexture = null;
             this.dirty = true;
 
             this.setPosition(x, y);
             this.setSize(width, height);
-            this.setOrigin();
+            this.setOrigin(0.5, 0.5);
             this.initPipeline('TextureTintPipeline');
+
+            this._crop = this.resetCropObject();
+
+            //  Create a Texture for this Text object
+            this.texture = scene.sys.textures.addCanvas(null, this.canvas, true);
+
+            //  Get the frame
+            this.frame = this.texture.get();
+
+            //  Set the resolution
+            this.frame.source.resolution = this.resolution;
+
+            if (this.renderer.gl) {
+                if ((width > 0) && (height > 0)) {
+                    this.updateTexture();
+                } else {
+                    //  Clear the default glTexture, as we override it later
+                    this.renderer.deleteTexture(this.frame.source.glTexture);
+                    this.frame.source.glTexture = null;
+                }
+            }
 
             if (scene.sys.game.config.renderType === Phaser.WEBGL) {
                 scene.sys.game.renderer.onContextRestored(function () {
-                    this.canvasTexture = null;
                     this.dirty = true;
                 }, this);
             }
@@ -97,9 +120,26 @@ var Canvas = new Phaser.Class({
         CanvasPool.remove(this.canvas);
     },
 
+    updateTexture: function (callback, scope) {
+        if (callback) {
+            if (scope) {
+                callback.call(scope, this.canvas, this.context);
+            } else {
+                callback(this.canvas, this.context);
+            }
+        }
+        if (this.renderer.gl) {
+            this.frame.source.glTexture = this.renderer.canvasToTexture(this.canvas, this.frame.source.glTexture);
+            this.frame.glTexture = this.frame.source.glTexture;
+        }
+        this.dirty = false;
+        return this;
+    },
+
     generateTexture: function (key, x, y, width, height) {
         var srcCanvas = this.canvas;
         var sys = this.scene.sys;
+        var renderer = sys.game.renderer;
         var texture;
 
         if (x === undefined) {
@@ -138,10 +178,10 @@ var Canvas = new Phaser.Class({
         }
 
         var destCtx = destCanvas.getContext('2d');
-        destCtx.clearRect(0, 0, width, height)
+        destCtx.clearRect(0, 0, width, height);
         destCtx.drawImage(srcCanvas, x, y, width, height);
-        if (sys.game.renderer.gl && texture) {
-            texture.source[0].glTexture = sys.game.renderer.canvasToTexture(destCanvas, texture.source[0].glTexture, true, 0);
+        if (renderer.gl && texture) {
+            texture.source[0].glTexture = renderer.canvasToTexture(destCanvas, texture.source[0].glTexture, true, 0);
         }
 
         return this;
@@ -168,7 +208,7 @@ var Canvas = new Phaser.Class({
         var destCtx = destCanvas.getContext('2d');
         destCtx.clearRect(0, 0, destCanvas.width, destCanvas.height);
         destCtx.drawImage(srcCanvas, 0, 0, destCanvas.width, destCanvas.height);
-        this.dirty = true;
+        this.updateTexture();
 
         if (resize) {
             this.setSize(destCanvas.width / this.resolution, destCanvas.height / this.resolution);
@@ -177,5 +217,7 @@ var Canvas = new Phaser.Class({
     }
 
 });
+
+var updateTextureCallbackParams = [null, null];
 
 export default Canvas;

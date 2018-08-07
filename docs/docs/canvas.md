@@ -76,41 +76,47 @@ var canvas = scene.make.rexCanvas({
 ### Clear or fill canvas
 
 - Clear
-
     ```javascript
     canvas.clear();
     ```
-
 - Fill color
-
     ```javascript
     canvas.fill(color);
     ```
 
-### Get canvas elemet
+### Update canvas
 
-```javascript
-var canvasElem = canvas.getCanvas();
-// var context = canvasElem.getContext('2d');
-// Drawing on context
-```
+1. Get canvas elemet
+    ```javascript
+    var canvasElem = canvas.getCanvas();
+    var context = canvasElem.getContext('2d');
+    ```
+1. Draw on [context](https://www.w3schools.com/html/html5_canvas.asp)
 
 ### Update display texture
 
-```javascript
-canvas.needRedraw();
-```
+- Update texture when rendering
+    ```javascript
+    canvas.needRedraw();
+    ```
+- Update texture now
+    ```javascript
+    canvas.updateTexture();
+    ```
+    or update canvas and texture
+    ```javascript
+    var callback = function(canvasElem, context) { };
+    canvas.updateTexture(callback);
+    // canvas.updateTexture(callback, scope);
+    ```
 
 ### Load or save texture
 
 - Save canvas to texuture
-
     ```javascript
     canvas.generateTexture(key, x, y, width, height);
     ```
-
 - Copy canvas from texture
-
     ```javascript
     canvas.loadTexture(key, resize);
     ```
@@ -119,7 +125,7 @@ canvas.needRedraw();
 
  - Drawing method
     - This canvas object draws stuff on canvas in WEBGL or CANVAS render mode.  
-    - Graphics object draws stuff on webgl render pipeline n WEBGL render mode.
+    - Graphics object draws stuff on webgl render pipeline in WEBGL render mode.
 
 - Size
     - This canvas object has size (width, height) and origin.  

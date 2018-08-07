@@ -21,69 +21,10 @@ const GameObject = Phaser.GameObjects.GameObject;
  * @param {Phaser.Cameras.Scene2D.Camera} camera - The Camera that is rendering the Game Object.
  * @param {Phaser.GameObjects.Components.TransformMatrix} parentMatrix - This transform matrix is defined if the game object is nested
  */
-var CanvasRenderer = function (renderer, src, interpolationPercentage, camera, parentMatrix)
-{
-    if (GameObject.RENDER_MASK !== src.renderFlags || (src.cameraFilter > 0 && (src.cameraFilter & camera._id)) || src.text === '')
-    {
-        return;
+var CanvasRenderer = function (renderer, src, interpolationPercentage, camera, parentMatrix) {
+    if (src.text !== '') {
+        renderer.batchSprite(src, src.frame, camera, parentMatrix);
     }
-    
-    var ctx = renderer.currentContext;
-
-    // var resolution = src.resolution;
-
-    //  Blend Mode
-    if (renderer.currentBlendMode !== src.blendMode)
-    {
-        renderer.currentBlendMode = src.blendMode;
-        ctx.globalCompositeOperation = renderer.blendModes[src.blendMode];
-    }
-
-    //  Alpha
-    if (renderer.currentAlpha !== src.alpha)
-    {
-        renderer.currentAlpha = src.alpha;
-        ctx.globalAlpha = src.alpha;
-    }
-
-    //  Smoothing
-    if (renderer.currentScaleMode !== src.scaleMode)
-    {
-        renderer.currentScaleMode = src.scaleMode;
-    }
-
-    var canvas = src.canvas;
-
-    ctx.save();
-
-    if (parentMatrix !== undefined)
-    {
-        var matrix = parentMatrix.matrix;
-        ctx.transform(matrix[0], matrix[1], matrix[2], matrix[3], matrix[4], matrix[5]);
-    }
-
-    var tx = src.x - camera.scrollX * src.scrollFactorX;
-    var ty = src.y - camera.scrollY * src.scrollFactorY;
-
-    if (renderer.config.roundPixels)
-    {
-        tx |= 0;
-        ty |= 0;
-    }
-
-    ctx.translate(tx, ty);
-
-    ctx.rotate(src.rotation);
-
-    ctx.scale(src.scaleX, src.scaleY);
-
-    ctx.translate(canvas.width * (src.flipX ? 1 : 0), canvas.height * (src.flipY ? 1 : 0));
-
-    ctx.scale(src.flipX ? -1 : 1, src.flipY ? -1 : 1);
-
-    ctx.drawImage(canvas, 0, 0, canvas.width, canvas.height, -src.displayOriginX, -src.displayOriginY, canvas.width, canvas.height);
-
-    ctx.restore();
 };
 
 export default CanvasRenderer;

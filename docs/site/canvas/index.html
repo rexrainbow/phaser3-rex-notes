@@ -769,8 +769,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-canvas-elemet" title="Get canvas elemet" class="md-nav__link">
-    Get canvas elemet
+  <a href="#update-canvas" title="Update canvas" class="md-nav__link">
+    Update canvas
   </a>
   
 </li>
@@ -2047,8 +2047,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-canvas-elemet" title="Get canvas elemet" class="md-nav__link">
-    Get canvas elemet
+  <a href="#update-canvas" title="Update canvas" class="md-nav__link">
+    Update canvas
   </a>
   
 </li>
@@ -2164,43 +2164,43 @@
 </ul>
 <h3 id="clear-or-fill-canvas">Clear or fill canvas<a class="headerlink" href="#clear-or-fill-canvas" title="Permanent link">&para;</a></h3>
 <ul>
-<li>
-<p>Clear</p>
-<div class="codehilite"><pre><span></span><span class="nx">canvas</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
-</pre></div>
-
-</li>
-<li>
-<p>Fill color</p>
-<div class="codehilite"><pre><span></span><span class="nx">canvas</span><span class="p">.</span><span class="nx">fill</span><span class="p">(</span><span class="nx">color</span><span class="p">);</span>
-</pre></div>
-
-</li>
+<li>Clear
+    <div class="codehilite"><pre><span></span><span class="nx">canvas</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+</pre></div></li>
+<li>Fill color
+    <div class="codehilite"><pre><span></span><span class="nx">canvas</span><span class="p">.</span><span class="nx">fill</span><span class="p">(</span><span class="nx">color</span><span class="p">);</span>
+</pre></div></li>
 </ul>
-<h3 id="get-canvas-elemet">Get canvas elemet<a class="headerlink" href="#get-canvas-elemet" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">canvasElem</span> <span class="o">=</span> <span class="nx">canvas</span><span class="p">.</span><span class="nx">getCanvas</span><span class="p">();</span>
-<span class="c1">// var context = canvasElem.getContext(&#39;2d&#39;);</span>
-<span class="c1">// Drawing on context</span>
-</pre></div>
-
+<h3 id="update-canvas">Update canvas<a class="headerlink" href="#update-canvas" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Get canvas elemet
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">canvasElem</span> <span class="o">=</span> <span class="nx">canvas</span><span class="p">.</span><span class="nx">getCanvas</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">canvasElem</span><span class="p">.</span><span class="nx">getContext</span><span class="p">(</span><span class="s1">&#39;2d&#39;</span><span class="p">);</span>
+</pre></div></li>
+<li>Draw on <a href="https://www.w3schools.com/html/html5_canvas.asp">context</a></li>
+</ol>
 <h3 id="update-display-texture">Update display texture<a class="headerlink" href="#update-display-texture" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">canvas</span><span class="p">.</span><span class="nx">needRedraw</span><span class="p">();</span>
+<ul>
+<li>Update texture when rendering
+    <div class="codehilite"><pre><span></span><span class="nx">canvas</span><span class="p">.</span><span class="nx">needRedraw</span><span class="p">();</span>
+</pre></div></li>
+<li>Update texture now
+    <div class="codehilite"><pre><span></span><span class="nx">canvas</span><span class="p">.</span><span class="nx">updateTexture</span><span class="p">();</span>
 </pre></div>
-
+    or update canvas and texture
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">canvasElem</span><span class="p">,</span> <span class="nx">context</span><span class="p">)</span> <span class="p">{</span> <span class="p">};</span>
+<span class="nx">canvas</span><span class="p">.</span><span class="nx">updateTexture</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
+<span class="c1">// canvas.updateTexture(callback, scope);</span>
+</pre></div></li>
+</ul>
 <h3 id="load-or-save-texture">Load or save texture<a class="headerlink" href="#load-or-save-texture" title="Permanent link">&para;</a></h3>
 <ul>
-<li>
-<p>Save canvas to texuture</p>
-<div class="codehilite"><pre><span></span><span class="nx">canvas</span><span class="p">.</span><span class="nx">generateTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
-</pre></div>
-
-</li>
-<li>
-<p>Copy canvas from texture</p>
-<div class="codehilite"><pre><span></span><span class="nx">canvas</span><span class="p">.</span><span class="nx">loadTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">resize</span><span class="p">);</span>
-</pre></div>
-
-</li>
+<li>Save canvas to texuture
+    <div class="codehilite"><pre><span></span><span class="nx">canvas</span><span class="p">.</span><span class="nx">generateTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+</pre></div></li>
+<li>Copy canvas from texture
+    <div class="codehilite"><pre><span></span><span class="nx">canvas</span><span class="p">.</span><span class="nx">loadTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">resize</span><span class="p">);</span>
+</pre></div></li>
 </ul>
 <h2 id="compare-with-graphics-object">Compare with <a href="../graphics/index.html">Graphics object</a><a class="headerlink" href="#compare-with-graphics-object" title="Permanent link">&para;</a></h2>
 <ul>
@@ -2208,7 +2208,7 @@
 <p>Drawing method</p>
 <ul>
 <li>This canvas object draws stuff on canvas in WEBGL or CANVAS render mode.  </li>
-<li>Graphics object draws stuff on webgl render pipeline n WEBGL render mode.</li>
+<li>Graphics object draws stuff on webgl render pipeline in WEBGL render mode.</li>
 </ul>
 </li>
 <li>

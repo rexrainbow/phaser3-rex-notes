@@ -54,6 +54,7 @@ var propertyMap = {
     maxLines: ['maxLines', 0],
     fixedWidth: ['fixedWidth', 0],
     fixedHeight: ['fixedHeight', 0],
+    resolution: ['resolution', 0],
     lineSpacing: ['lineSpacing', 0],
 
     rtl: ['rtl', false],
@@ -97,6 +98,7 @@ class TextStyle {
         this.maxLines;
         this.fixedWidth;
         this.fixedHeight;
+        this.resolution;
         this.lineSpacing;
 
         this.rtl;
@@ -289,6 +291,12 @@ class TextStyle {
         if (height) {
             this.parent.height = height;
         }
+
+        return this.update(false);
+    }
+
+    setResolution(value) {
+        this.resolution = value;
 
         return this.update(false);
     }

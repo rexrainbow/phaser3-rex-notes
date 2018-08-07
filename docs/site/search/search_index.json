@@ -1727,7 +1727,7 @@
         }, 
         {
             "location": "/canvas/index.html", 
-            "text": "Introduction\n\n\nDrawing on \ncanvas\n.\n\n\n\n\nAuthor: Rex\n\n\nA kind of game object\n\n\n\n\nSource code\n\n\nPlugin\n, \nminify\n\n\nClass\n\n\nUsage\n\n\nSample code\n\n\nInstall plugin\n\n\nInstall plugin in \nconfiguration of game\n\n\nvar\n \nconfig\n \n=\n \n{\n\n    \n// ...\n\n    \nplugins\n:\n \n{\n\n        \nglobal\n:\n \n[{\n\n            \nkey\n:\n \nCanvasPlugin\n,\n\n            \nplugin\n:\n \nCanvasPlugin\n,\n\n            \nstart\n:\n \ntrue\n\n        \n},\n\n        \n// ...\n\n        \n]\n\n    \n}\n\n    \n// ...\n\n\n};\n\n\nvar\n \ngame\n \n=\n \nnew\n \nPhaser\n.\nGame\n(\nconfig\n);\n\n\n\n\n\nCreate instance\n\n\nvar\n \ncanvas\n \n=\n \nscene\n.\nadd\n.\nrexCanvas\n(\nx\n,\n \ny\n,\n \nwidth\n,\n \nheight\n);\n\n\n\n\n\nAdd canvas from JSON\n\n\nvar\n \ncanvas\n \n=\n \nscene\n.\nmake\n.\nrexCanvas\n({\n\n    \nx\n:\n \n0\n,\n\n    \ny\n:\n \n0\n,\n\n    \nwidth\n:\n \n256\n,\n\n    \nheight\n:\n \n256\n,\n\n\n    \n//fill: null\n\n\n});\n\n\n\n\n\nCustom class\n\n\n\n\nDefine class\n    \nclass\n \nMyCanvas\n \nextends\n \nCanvas\n \n{\n\n    \nconstructor\n(\nscene\n,\n \nx\n,\n \ny\n,\n \nwidth\n,\n \nheight\n)\n \n{\n\n        \nsuper\n(\nscene\n,\n \nx\n,\n \ny\n,\n \nwidth\n,\n \nheight\n);\n\n        \n// ...\n\n        \nscene\n.\nadd\n.\nexisting\n(\nthis\n);\n\n    \n}\n\n    \n// ...\n\n\n}\n\n\n\n\nCreate instance\n    \nvar\n \ncanvas\n \n=\n \nnew\n \nMyCanvas\n(\nscene\n,\n \nx\n,\n \ny\n,\n \nwidth\n,\n \nheight\n);\n\n\n\n\n\n\nClear or fill canvas\n\n\n\n\n\n\nClear\n\n\ncanvas\n.\nclear\n();\n\n\n\n\n\n\n\n\n\nFill color\n\n\ncanvas\n.\nfill\n(\ncolor\n);\n\n\n\n\n\n\n\n\n\nGet canvas elemet\n\n\nvar\n \ncanvasElem\n \n=\n \ncanvas\n.\ngetCanvas\n();\n\n\n// var context = canvasElem.getContext(\n2d\n);\n\n\n// Drawing on context\n\n\n\n\n\nUpdate display texture\n\n\ncanvas\n.\nneedRedraw\n();\n\n\n\n\n\nLoad or save texture\n\n\n\n\n\n\nSave canvas to texuture\n\n\ncanvas\n.\ngenerateTexture\n(\nkey\n,\n \nx\n,\n \ny\n,\n \nwidth\n,\n \nheight\n);\n\n\n\n\n\n\n\n\n\nCopy canvas from texture\n\n\ncanvas\n.\nloadTexture\n(\nkey\n,\n \nresize\n);\n\n\n\n\n\n\n\n\n\nCompare with \nGraphics object\n\n\n\n\n\n\nDrawing method\n\n\n\n\nThis canvas object draws stuff on canvas in WEBGL or CANVAS render mode.  \n\n\nGraphics object draws stuff on webgl render pipeline n WEBGL render mode.\n\n\n\n\n\n\n\n\nSize\n\n\n\n\nThis canvas object has size (width, height) and origin.  \n\n\nGraphics object does not have size and origin.", 
+            "text": "Introduction\n\n\nDrawing on \ncanvas\n.\n\n\n\n\nAuthor: Rex\n\n\nA kind of game object\n\n\n\n\nSource code\n\n\nPlugin\n, \nminify\n\n\nClass\n\n\nUsage\n\n\nSample code\n\n\nInstall plugin\n\n\nInstall plugin in \nconfiguration of game\n\n\nvar\n \nconfig\n \n=\n \n{\n\n    \n// ...\n\n    \nplugins\n:\n \n{\n\n        \nglobal\n:\n \n[{\n\n            \nkey\n:\n \nCanvasPlugin\n,\n\n            \nplugin\n:\n \nCanvasPlugin\n,\n\n            \nstart\n:\n \ntrue\n\n        \n},\n\n        \n// ...\n\n        \n]\n\n    \n}\n\n    \n// ...\n\n\n};\n\n\nvar\n \ngame\n \n=\n \nnew\n \nPhaser\n.\nGame\n(\nconfig\n);\n\n\n\n\n\nCreate instance\n\n\nvar\n \ncanvas\n \n=\n \nscene\n.\nadd\n.\nrexCanvas\n(\nx\n,\n \ny\n,\n \nwidth\n,\n \nheight\n);\n\n\n\n\n\nAdd canvas from JSON\n\n\nvar\n \ncanvas\n \n=\n \nscene\n.\nmake\n.\nrexCanvas\n({\n\n    \nx\n:\n \n0\n,\n\n    \ny\n:\n \n0\n,\n\n    \nwidth\n:\n \n256\n,\n\n    \nheight\n:\n \n256\n,\n\n\n    \n//fill: null\n\n\n});\n\n\n\n\n\nCustom class\n\n\n\n\nDefine class\n    \nclass\n \nMyCanvas\n \nextends\n \nCanvas\n \n{\n\n    \nconstructor\n(\nscene\n,\n \nx\n,\n \ny\n,\n \nwidth\n,\n \nheight\n)\n \n{\n\n        \nsuper\n(\nscene\n,\n \nx\n,\n \ny\n,\n \nwidth\n,\n \nheight\n);\n\n        \n// ...\n\n        \nscene\n.\nadd\n.\nexisting\n(\nthis\n);\n\n    \n}\n\n    \n// ...\n\n\n}\n\n\n\n\nCreate instance\n    \nvar\n \ncanvas\n \n=\n \nnew\n \nMyCanvas\n(\nscene\n,\n \nx\n,\n \ny\n,\n \nwidth\n,\n \nheight\n);\n\n\n\n\n\n\nClear or fill canvas\n\n\n\n\nClear\n    \ncanvas\n.\nclear\n();\n\n\n\n\nFill color\n    \ncanvas\n.\nfill\n(\ncolor\n);\n\n\n\n\n\n\nUpdate canvas\n\n\n\n\nGet canvas elemet\n    \nvar\n \ncanvasElem\n \n=\n \ncanvas\n.\ngetCanvas\n();\n\n\nvar\n \ncontext\n \n=\n \ncanvasElem\n.\ngetContext\n(\n2d\n);\n\n\n\n\nDraw on \ncontext\n\n\n\n\nUpdate display texture\n\n\n\n\nUpdate texture when rendering\n    \ncanvas\n.\nneedRedraw\n();\n\n\n\n\nUpdate texture now\n    \ncanvas\n.\nupdateTexture\n();\n\n\n\n    or update canvas and texture\n    \nvar\n \ncallback\n \n=\n \nfunction\n(\ncanvasElem\n,\n \ncontext\n)\n \n{\n \n};\n\n\ncanvas\n.\nupdateTexture\n(\ncallback\n);\n\n\n// canvas.updateTexture(callback, scope);\n\n\n\n\n\n\nLoad or save texture\n\n\n\n\nSave canvas to texuture\n    \ncanvas\n.\ngenerateTexture\n(\nkey\n,\n \nx\n,\n \ny\n,\n \nwidth\n,\n \nheight\n);\n\n\n\n\nCopy canvas from texture\n    \ncanvas\n.\nloadTexture\n(\nkey\n,\n \nresize\n);\n\n\n\n\n\n\nCompare with \nGraphics object\n\n\n\n\n\n\nDrawing method\n\n\n\n\nThis canvas object draws stuff on canvas in WEBGL or CANVAS render mode.  \n\n\nGraphics object draws stuff on webgl render pipeline in WEBGL render mode.\n\n\n\n\n\n\n\n\nSize\n\n\n\n\nThis canvas object has size (width, height) and origin.  \n\n\nGraphics object does not have size and origin.", 
             "title": "Canvas"
         }, 
         {
@@ -1762,27 +1762,27 @@
         }, 
         {
             "location": "/canvas/index.html#clear-or-fill-canvas", 
-            "text": "Clear  canvas . clear ();     Fill color  canvas . fill ( color );", 
+            "text": "Clear\n     canvas . clear ();   Fill color\n     canvas . fill ( color );", 
             "title": "Clear or fill canvas"
         }, 
         {
-            "location": "/canvas/index.html#get-canvas-elemet", 
-            "text": "var   canvasElem   =   canvas . getCanvas ();  // var context = canvasElem.getContext( 2d );  // Drawing on context", 
-            "title": "Get canvas elemet"
+            "location": "/canvas/index.html#update-canvas", 
+            "text": "Get canvas elemet\n     var   canvasElem   =   canvas . getCanvas ();  var   context   =   canvasElem . getContext ( 2d );   Draw on  context", 
+            "title": "Update canvas"
         }, 
         {
             "location": "/canvas/index.html#update-display-texture", 
-            "text": "canvas . needRedraw ();", 
+            "text": "Update texture when rendering\n     canvas . needRedraw ();   Update texture now\n     canvas . updateTexture ();  \n    or update canvas and texture\n     var   callback   =   function ( canvasElem ,   context )   {   };  canvas . updateTexture ( callback );  // canvas.updateTexture(callback, scope);", 
             "title": "Update display texture"
         }, 
         {
             "location": "/canvas/index.html#load-or-save-texture", 
-            "text": "Save canvas to texuture  canvas . generateTexture ( key ,   x ,   y ,   width ,   height );     Copy canvas from texture  canvas . loadTexture ( key ,   resize );", 
+            "text": "Save canvas to texuture\n     canvas . generateTexture ( key ,   x ,   y ,   width ,   height );   Copy canvas from texture\n     canvas . loadTexture ( key ,   resize );", 
             "title": "Load or save texture"
         }, 
         {
             "location": "/canvas/index.html#compare-with-graphics-object", 
-            "text": "Drawing method   This canvas object draws stuff on canvas in WEBGL or CANVAS render mode.    Graphics object draws stuff on webgl render pipeline n WEBGL render mode.     Size   This canvas object has size (width, height) and origin.    Graphics object does not have size and origin.", 
+            "text": "Drawing method   This canvas object draws stuff on canvas in WEBGL or CANVAS render mode.    Graphics object draws stuff on webgl render pipeline in WEBGL render mode.     Size   This canvas object has size (width, height) and origin.    Graphics object does not have size and origin.", 
             "title": "Compare with Graphics object"
         }, 
         {

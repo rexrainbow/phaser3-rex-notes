@@ -5,12 +5,11 @@ import PoolKlass from 'rexPlugins/utils/object/Stack.js';
 import CONST from './const.js';
 
 const AddToDOM = Phaser.DOM.AddToDOM;
-const RemoveFromDOM = Phaser.DOM.RemoveFromDOM;
 const CanvasPool = Phaser.Display.Canvas.Pool;
 const Components = Phaser.GameObjects.Components;
 const GameObject = Phaser.GameObjects.GameObject;
-const BuildGameObject = Phaser.GameObjects.BuildGameObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
+const RemoveFromDOM = Phaser.DOM.RemoveFromDOM;
 const SPLITREGEXP = CONST.SPLITREGEXP;
 
 var PensPools = {};
@@ -22,9 +21,11 @@ var Text = new Phaser.Class({
         Components.Alpha,
         Components.BlendMode,
         Components.ComputedSize,
+        Components.Crop,
         Components.Depth,
         Components.Flip,
         Components.GetBounds,
+        Components.Mask,
         Components.Origin,
         Components.Pipeline,
         Components.ScaleMode,
@@ -47,6 +48,8 @@ var Text = new Phaser.Class({
 
             GameObject.call(this, scene, type);
 
+            this.renderer = scene.sys.game.renderer;
+
             this.setPosition(x, y);
             this.setOrigin(0, 0);
             this.initPipeline('TextureTintPipeline');
@@ -66,8 +69,6 @@ var Text = new Phaser.Class({
 
             this.text = '';
 
-            this.resolution = 1;
-
             this.padding = {
                 left: 0,
                 right: 0,
@@ -79,9 +80,31 @@ var Text = new Phaser.Class({
 
             this.height = 1;
 
-            this.canvasTexture = null;
-
             this.dirty = false;
+
+            //  If resolution wasn't set, then we get it from the game config
+            if (this.style.resolution === 0) {
+                this.style.resolution = scene.sys.game.config.resolution;
+            }
+
+            this._crop = this.resetCropObject();
+
+            //  Create a Texture for this Text object
+            this.texture = scene.sys.textures.addCanvas(null, this.canvas, true);
+
+            //  Get the frame
+            this.frame = this.texture.get();
+
+            //  Set the resolution
+            this.frame.source.resolution = this.style.resolution;
+
+            if (this.renderer && this.renderer.gl) {
+                //  Clear the default 1x1 glTexture, as we override it later
+
+                this.renderer.deleteTexture(this.frame.source.glTexture);
+
+                this.frame.source.glTexture = null;
+            }
 
             if (!PensPools.hasOwnProperty(type)) {
                 PensPools[type] = new PoolKlass();
@@ -102,7 +125,6 @@ var Text = new Phaser.Class({
 
             if (scene.sys.game.config.renderType === Phaser.WEBGL) {
                 scene.sys.game.renderer.onContextRestored(function () {
-                    this.canvasTexture = null;
                     this.dirty = true;
                 }, this);
             }
@@ -273,6 +295,10 @@ var Text = new Phaser.Class({
         return this.updateText();
     },
 
+    setResolution: function (value) {
+        return this.style.setResolution(value);
+    },
+
     setMaxLines: function (max) {
         return this.style.setMaxLines(max);
     },
@@ -295,9 +321,11 @@ var Text = new Phaser.Class({
         }
 
         // resize
+        var boxWidth = canvasText.linesWidth,
+            boxHeight = canvasText.linesHeight;
         var padding = this.padding;
-        var w = canvasText.linesWidth + padding.left + padding.right;
-        var h = canvasText.linesHeight + padding.top + padding.bottom;
+        var w = boxWidth + padding.left + padding.right;
+        var h = boxHeight + padding.top + padding.bottom;
 
         if (style.fixedWidth === 0) {
             this.width = w;
@@ -309,7 +337,7 @@ var Text = new Phaser.Class({
 
         this.updateDisplayOrigin();
 
-        var resolution = this.resolution;
+        var resolution = style.resolution;
         w *= resolution;
         h *= resolution;
 
@@ -321,17 +349,28 @@ var Text = new Phaser.Class({
         if (canvas.width !== w || canvas.height !== h) {
             canvas.width = w;
             canvas.height = h;
+            this.frame.setSize(w, h);
+        } else {
+            context.clearRect(0, 0, w, h);
         }
 
         context.save();
         context.scale(resolution, resolution);
-        context.translate(padding.left, padding.top);
+
         // draw
         canvasText.draw(
-            (w - padding.right),
-            (h - padding.bottom)
+            padding.left,
+            padding.top,
+            boxWidth,
+            boxHeight
         );
+
         context.restore();
+
+        if (this.renderer.gl) {
+            this.frame.source.glTexture = this.renderer.canvasToTexture(canvas, this.frame.source.glTexture);
+            this.frame.glTexture = this.frame.source.glTexture;
+        }
 
         this.dirty = true;
 
@@ -377,7 +416,7 @@ var Text = new Phaser.Class({
     getWrappedText: function (text, start, end) {
         text = this.canvasText.getText(text, start, end, true);
         return text.split(SPLITREGEXP);
-    },    
+    },
 
     getRawText: function (text, start, end) {
         return this.canvasText.getRawText(text, start, end);
@@ -395,7 +434,7 @@ var Text = new Phaser.Class({
         return this.canvasText.copyPensManager(pensManager);
     },
 
-    getPenManager: function(text, pensManager) {
+    getPenManager: function (text, pensManager) {
         return this.canvasText.getPenManager(text, pensManager);
     }
 

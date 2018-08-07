@@ -49,9 +49,10 @@ class CanvasText {
             cursorY = 0;
 
         var rawText, curProp, curStyle;
-        var match = this.parser.splitText(text);
+        var match = this.parser.splitText(text),
+            result, wrapLines;
         for (var i = 0, len = match.length; i < len; i++) {
-            var result = this.parser.tagTextToProp(match[i], curProp);
+            result = this.parser.tagTextToProp(match[i], curProp);
             rawText = result.rawText;
             curProp = result.prop;
 
@@ -66,7 +67,7 @@ class CanvasText {
                 curStyle.buildFont();
                 curStyle.syncFont(canvas, context);
                 curStyle.syncStyle(canvas, context);
-                var wrapLines = WrapText(
+                wrapLines = WrapText(
                     rawText,
                     this.getTextWidth,
                     wrapMode,
@@ -102,23 +103,24 @@ class CanvasText {
         return pensManager;
     }
 
-    draw(boxWidth, boxHeight, pensManager) {
+    draw(startX, startY, boxWidth, boxHeight, pensManager) {
         if (pensManager === undefined) {
             pensManager = this.pensManager;
         }
         var context = this.context;
         context.save();
 
-        this.clean();
+        // this.clean();
         this.drawBackground();
 
         // draw lines
         var defatultStyle = this.defatultStyle;
+        startX += (defatultStyle.strokeThickness / 2);
+        startY += (defatultStyle.strokeThickness / 2) + defatultStyle.metrics.ascent;
         var halign = defatultStyle.halign,
             valign = defatultStyle.valign;
 
         var lineWidth, lineHeight = defatultStyle.lineHeight;
-
         var lines = pensManager.lines;
         var totalLinesNum = lines.length,
             maxLines = defatultStyle.maxLines;
@@ -138,8 +140,6 @@ class CanvasText {
         }
         drawLineEndIdx = drawLineStartIdx + drawLinesNum;
 
-        var startX = (defatultStyle.strokeThickness / 2);
-        var startY = (defatultStyle.strokeThickness / 2) + defatultStyle.metrics.ascent;
         var offsetX, offsetY;
         if (valign === VALIGN_CENTER) { // center
             offsetY = Math.max((boxHeight - (drawLinesNum * lineHeight)) / 2, 0);
@@ -148,18 +148,19 @@ class CanvasText {
         } else {
             offsetY = 0;
         }
-        offsetY = startY;
+        offsetY += startY;
         for (var lineIdx = drawLineStartIdx; lineIdx < drawLineEndIdx; lineIdx++) {
             lineWidth = pensManager.getLineWidth(lineIdx);
             if (lineWidth === 0)
                 continue;
 
-            if (halign === HALIGN_CENTER) // center
+            if (halign === HALIGN_CENTER) { // center
                 offsetX = (boxWidth - lineWidth) / 2;
-            else if (halign === HALIGN_RIGHT) // right
+            } else if (halign === HALIGN_RIGHT) { // right
                 offsetX = boxWidth - lineWidth;
-            else
+            } else {
                 offsetX = 0;
+            }
             offsetX += startX;
 
             var pens = lines[lineIdx];
@@ -217,11 +218,11 @@ class CanvasText {
         curStyle.syncFont(canvas, context);
         curStyle.syncStyle(canvas, context);
 
-        var startX = offsetX + pen.x;
-        var startY = offsetY + pen.y;
+        offsetX += pen.x;
+        offsetY += pen.y;
         if (this.autoRound) {
-            startX = Math.round(startX);
-            startY = Math.round(startY);
+            offsetX = Math.round(offsetX);
+            offsetY = Math.round(offsetY);
         }
 
         var text = pen.text;
@@ -229,8 +230,8 @@ class CanvasText {
 
         // underline
         this.drawUnderline(
-            startX, // x
-            (startY + curStyle.underlineOffset), // y
+            offsetX, // x
+            (offsetY + curStyle.underlineOffset), // y
             penWidth, // width
             curStyle.underlineThickness, // thinkness
             curStyle.underlineColor // color
@@ -242,13 +243,13 @@ class CanvasText {
         if (curStyle.strokeThickness) {
             curStyle.syncShadow(context, curStyle.shadowStroke);
 
-            context.strokeText(text, startX, startY);
+            context.strokeText(text, offsetX, offsetY);
         }
 
         if (curStyle.color && (curStyle.color !== 'none')) {
             curStyle.syncShadow(context, curStyle.shadowFill);
 
-            context.fillText(text, startX, startY);
+            context.fillText(text, offsetX, offsetY);
         }
 
         context.restore();
@@ -302,7 +303,7 @@ class CanvasText {
     }
 
     get tmpPenManager() {
-        if (this._tmpPensManager === null) {           
+        if (this._tmpPensManager === null) {
             this._tmpPensManager = this.newPenManager();
         }
         return this._tmpPensManager;
