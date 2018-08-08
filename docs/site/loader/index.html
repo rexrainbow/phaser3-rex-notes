@@ -587,6 +587,19 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#html" title="HTML" class="md-nav__link">
+    HTML
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
           <li class="md-nav__item">
   <a href="#script" title="Script" class="md-nav__link">
     Script
@@ -1074,15 +1087,27 @@
           
 
 
+  <li class="md-nav__item">
+    <a href="../domelement/index.html" title="DOM element" class="md-nav__link">
+      DOM element
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-8" type="checkbox" id="nav-5-8">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-9" type="checkbox" id="nav-5-9">
     
-    <label class="md-nav__link" for="nav-5-8">
+    <label class="md-nav__link" for="nav-5-9">
       Display
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-5-8">
+      <label class="md-nav__title" for="nav-5-9">
         Display
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -2254,6 +2279,19 @@
   
 </li>
         
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#html" title="HTML" class="md-nav__link">
+    HTML
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
           <li class="md-nav__item">
   <a href="#script" title="Script" class="md-nav__link">
     Script
@@ -2385,9 +2423,8 @@
 <h3 id="file-types">File types<a class="headerlink" href="#file-types" title="Permanent link">&para;</a></h3>
 <h4 id="image">Image<a class="headerlink" href="#image" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">image</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>  <span class="c1">// image</span>
-<span class="c1">// scene.load.image(config); // config: {key, url}</span>
 <span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">svg</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>    <span class="c1">// image in svg format</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>  <span class="c1">// image in html format</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">htmlTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>  <span class="c1">// image in htmlTexture format</span>
 </pre></div>
 
 <p>Get data from texture cache</p>
@@ -2491,6 +2528,15 @@
 <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </pre></div>
 
+<h3 id="html">HTML<a class="headerlink" href="#html" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
+</pre></div>
+
+<p>Get data from cache</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">html</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</pre></div>
+
 <h4 id="script">Script<a class="headerlink" href="#script" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">script</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
 </pre></div>
@@ -2564,6 +2610,7 @@
 <li><code>binary</code></li>
 <li><code>glsl</code></li>
 <li><code>html</code></li>
+<li><code>htmlTexture</code></li>
 <li><code>image</code></li>
 <li><code>json</code></li>
 <li><code>script</code></li>

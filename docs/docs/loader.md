@@ -64,9 +64,8 @@ scene.load.start();                     // start loading
 
 ```javascript
 scene.load.image(key, url);  // image
-// scene.load.image(config); // config: {key, url}
 scene.load.svg(key, url);    // image in svg format
-scene.load.html(key, url, width, height);  // image in html format
+scene.load.htmlTexture(key, url, width, height);  // image in htmlTexture format
 ```
 
 Get data from texture cache
@@ -212,6 +211,19 @@ var cache = scene.cache.xml;
 var data = cache.get(key);
 ```
 
+### HTML
+
+```javascript
+scene.load.html(key, url);
+```
+
+Get data from cache
+
+```javascript
+var cache = scene.cache.html;
+var data = cache.get(key);
+```
+
 #### Script
 
 ```javascript
@@ -302,6 +314,7 @@ File type:
 - `binary`
 - `glsl`
 - `html`
+- `htmlTexture`
 - `image`
 - `json`
 - `script`

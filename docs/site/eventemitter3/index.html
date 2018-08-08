@@ -840,15 +840,27 @@
           
 
 
+  <li class="md-nav__item">
+    <a href="../domelement/index.html" title="DOM element" class="md-nav__link">
+      DOM element
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-8" type="checkbox" id="nav-5-8">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-9" type="checkbox" id="nav-5-9">
     
-    <label class="md-nav__link" for="nav-5-8">
+    <label class="md-nav__link" for="nav-5-9">
       Display
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-5-8">
+      <label class="md-nav__title" for="nav-5-9">
         Display
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -2111,13 +2123,13 @@
 </pre></div></li>
 </ul>
 <h3 id="attach-listener">Attach listener<a class="headerlink" href="#attach-listener" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">ee</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="nx">eventName</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">callbackScope</span><span class="p">);</span>
-<span class="nx">ee</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="nx">eventName</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">callbackScope</span><span class="p">);</span>  <span class="c1">// only fire listeners one time</span>
+<div class="codehilite"><pre><span></span><span class="nx">ee</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="nx">eventName</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>
+<span class="nx">ee</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="nx">eventName</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>  <span class="c1">// only fire listeners one time</span>
 </pre></div>
 
 <p>Alias</p>
-<div class="codehilite"><pre><span></span><span class="nx">ee</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="nx">eventName</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">callbackScope</span><span class="p">);</span>
-<span class="nx">ee</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="nx">eventName</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">callbackScope</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>  <span class="c1">// only fire listeners one time</span>
+<div class="codehilite"><pre><span></span><span class="nx">ee</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="nx">eventName</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>
+<span class="nx">ee</span><span class="p">.</span><span class="nx">addListener</span><span class="p">(</span><span class="nx">eventName</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>  <span class="c1">// only fire listeners one time</span>
 </pre></div>
 
 <h3 id="fire-event">Fire event<a class="headerlink" href="#fire-event" title="Permanent link">&para;</a></h3>
@@ -2125,13 +2137,13 @@
 </pre></div>
 
 <h3 id="remove-listeners">Remove listeners<a class="headerlink" href="#remove-listeners" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">ee</span><span class="p">.</span><span class="nx">off</span><span class="p">(</span><span class="nx">eventName</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">callbackScope</span><span class="p">);</span>
-<span class="nx">ee</span><span class="p">.</span><span class="nx">off</span><span class="p">(</span><span class="nx">eventName</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">callbackScope</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>   <span class="c1">// only remove one-time listeners</span>
+<div class="codehilite"><pre><span></span><span class="nx">ee</span><span class="p">.</span><span class="nx">off</span><span class="p">(</span><span class="nx">eventName</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>
+<span class="nx">ee</span><span class="p">.</span><span class="nx">off</span><span class="p">(</span><span class="nx">eventName</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>   <span class="c1">// only remove one-time listeners</span>
 </pre></div>
 
 <p>Alias</p>
-<div class="codehilite"><pre><span></span><span class="nx">ee</span><span class="p">.</span><span class="nx">removeListener</span><span class="p">(</span><span class="nx">eventName</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">callbackScope</span><span class="p">);</span> 
-<span class="nx">ee</span><span class="p">.</span><span class="nx">removeListener</span><span class="p">(</span><span class="nx">eventName</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">callbackScope</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>  <span class="c1">// only remove one-time listeners</span>
+<div class="codehilite"><pre><span></span><span class="nx">ee</span><span class="p">.</span><span class="nx">removeListener</span><span class="p">(</span><span class="nx">eventName</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span> 
+<span class="nx">ee</span><span class="p">.</span><span class="nx">removeListener</span><span class="p">(</span><span class="nx">eventName</span><span class="p">,</span> <span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>  <span class="c1">// only remove one-time listeners</span>
 </pre></div>
 
 <h3 id="remove-all-listeners">Remove all listeners<a class="headerlink" href="#remove-all-listeners" title="Permanent link">&para;</a></h3>
@@ -2150,7 +2162,7 @@
 <h4 id="listener">Listener<a class="headerlink" href="#listener" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><span class="p">{</span>
     <span class="nx">fn</span><span class="o">:</span> <span class="nx">callback</span><span class="p">,</span>
-    <span class="nx">context</span><span class="o">:</span> <span class="nx">callbackScope</span><span class="p">,</span>
+    <span class="nx">context</span><span class="o">:</span> <span class="nx">scope</span><span class="p">,</span>
     <span class="nx">once</span><span class="o">:</span> <span class="nx">once</span>
 <span class="p">}</span>
 </pre></div>

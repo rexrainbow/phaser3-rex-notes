@@ -46,6 +46,7 @@ pages:
         - Group actions: groupactions.md
         - Grid table: gridtable.md
     - Zone: zone.md
+    - DOM element: domelement.md
     - Display:
         - Mask: mask.md
 - Time:

@@ -18,15 +18,15 @@
 ### Attach listener
 
 ```javascript
-ee.on(eventName, callback, callbackScope);
-ee.once(eventName, callback, callbackScope);  // only fire listeners one time
+ee.on(eventName, callback, scope);
+ee.once(eventName, callback, scope);  // only fire listeners one time
 ```
 
 Alias
 
 ```javascript
-ee.addListener(eventName, callback, callbackScope);
-ee.addListener(eventName, callback, callbackScope, true);  // only fire listeners one time
+ee.addListener(eventName, callback, scope);
+ee.addListener(eventName, callback, scope, true);  // only fire listeners one time
 ```
 
 ### Fire event
@@ -38,15 +38,15 @@ ee.emit(eventName);
 ### Remove listeners
 
 ```javascript
-ee.off(eventName, callback, callbackScope);
-ee.off(eventName, callback, callbackScope, true);   // only remove one-time listeners
+ee.off(eventName, callback, scope);
+ee.off(eventName, callback, scope, true);   // only remove one-time listeners
 ```
 
 Alias
 
 ```javascript
-ee.removeListener(eventName, callback, callbackScope); 
-ee.removeListener(eventName, callback, callbackScope, true);  // only remove one-time listeners
+ee.removeListener(eventName, callback, scope); 
+ee.removeListener(eventName, callback, scope, true);  // only remove one-time listeners
 ```
 
 ### Remove all listeners
@@ -73,7 +73,7 @@ var listeners = ee.listeners(eventName);
 ```javascript
 {
     fn: callback,
-    context: callbackScope,
+    context: scope,
     once: once
 }
 ```
