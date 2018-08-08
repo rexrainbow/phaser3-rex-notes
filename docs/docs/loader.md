@@ -211,7 +211,7 @@ var cache = scene.cache.xml;
 var data = cache.get(key);
 ```
 
-### HTML
+#### HTML
 
 ```javascript
 scene.load.html(key, url);
