@@ -966,6 +966,66 @@
             "title": "Events"
         }, 
         {
+            "location": "/quad/index.html", 
+            "text": "Introduction\n\n\nManipulate the corner points of static images, built-in game object of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\n\n\nWebGL only\n\n\nIt only works in WebGL render mode.\n\n\n\n\nUsage\n\n\nLoad texture\n\n\nscene\n.\nload\n.\nimage\n(\nkey\n,\n \nurl\n);\n\n\n\n\n\nReference: \nload image\n\n\nAdd object\n\n\nvar\n \nquad\n \n=\n \nscene\n.\nadd\n.\nquad\n(\nx\n,\n \ny\n,\n \nkey\n);\n\n\n\n\n\nAdd quad from JSON\n\n\nvar\n \nquad\n \n=\n \nscene\n.\nmake\n.\nquad\n({\n\n    \nx\n:\n \n0\n,\n\n    \ny\n:\n \n0\n,\n\n    \nkey\n:\n \n,\n\n\n    \n// angle: 0,\n\n    \n// alpha: 1\n\n    \n// flipX: true,\n\n    \n// flipY: true,\n\n\n    \nadd\n:\n \ntrue\n\n\n});\n\n\n\n\n\nCustom quad class\n\n\n\n\nDefine class\n    \nclass\n \nMyQuad\n \nextends\n \nPhaser\n.\nGameObjects\n.\nQuad\n \n{\n\n    \nconstructor\n(\nscene\n,\n \nx\n,\n \ny\n,\n \ntexture\n,\n \nframe\n)\n \n{\n\n        \nsuper\n(\nscene\n,\n \nx\n,\n \ny\n,\n \ntexture\n,\n \nframe\n);\n\n        \n// ...\n\n        \nscene\n.\nadd\n.\nexisting\n(\nthis\n);\n\n    \n}\n\n    \n// ...\n\n\n}\n\n\n\n\nCreate instance\n    \nvar\n \nquad\n \n=\n \nnew\n \nMyQuad\n(\nscene\n,\n \nx\n,\n \ny\n,\n \nkey\n);\n\n\n\n\n\n\nProperties of corner points\n\n\nPosition\n\n\n\n\nGet\n    \nvar\n \ntopLeftX\n \n=\n \nquad\n.\ntopLeftX\n;\n\n\nvar\n \ntopLeftY\n \n=\n \nquad\n.\ntopLeftY\n;\n\n\nvar\n \ntopRightX\n \n=\n \nquad\n.\ntopRightX\n;\n\n\nvar\n \ntopRightY\n \n=\n \nquad\n.\ntopRightY\n;\n\n\nvar\n \nbottomLeftX\n \n=\n \nquad\n.\nbottomLeftX\n;\n\n\nvar\n \nbottomLeftY\n \n=\n \nquad\n.\nbottomLeftY\n;\n\n\nvar\n \nbottomRightX\n \n=\n \nquad\n.\nbottomRightX\n;\n\n\nvar\n \nbottomRightY\n \n=\n \nquad\n.\nbottomRightY\n;\n    \n\n\n\nSet\n    \nquad\n.\ntopLeftX\n \n=\n \ntopLeftX\n;\n\n\nquad\n.\ntopLeftY\n \n=\n \ntopLeftY\n;\n\n\nquad\n.\ntopRightX\n \n=\n \ntopRightX\n;\n\n\nquad\n.\ntopRightY\n \n=\n \ntopRightY\n;\n\n\nquad\n.\nbottomLeftX\n \n=\n \nbottomLeftX\n;\n\n\nquad\n.\nbottomLeftY\n \n=\n \nbottomLeftY\n;\n\n\nquad\n.\nbottomRightX\n \n=\n \nbottomRightX\n;\n\n\nquad\n.\nbottomRightY\n \n=\n \nbottomRightY\n;\n\n\n\nquad\n.\nsetTopLeft\n(\nx\n,\n \ny\n);\n\n\nquad\n.\nsetTopRight\n(\nx\n,\n \ny\n);\n\n\nquad\n.\nsetBottomLeft\n(\nx\n,\n \ny\n);\n\n\nquad\n.\nsetBottomRight\n(\nx\n,\n \ny\n);\n    \n\nquad\n.\nresetPosition\n();\n\n\n\n\n\n\nAlpha\n\n\n\n\nGet\n    \nvar\n \ntopLeftAlpha\n \n=\n \nquad\n.\ntopLeftAlpha\n;\n\n\nvar\n \ntopRightAlpha\n \n=\n \nquad\n.\ntopRightAlpha\n;\n\n\nvar\n \nbottomLeftAlpha\n \n=\n \nquad\n.\nbottomLeftAlpha\n;\n\n\nvar\n \nbottomRightAlpha\n \n=\n \nquad\n.\nbottomRightAlpha\n;\n\n\n\n\nSet\n    \nquad\n.\ntopLeftAlpha\n \n=\n \ntopLeftAlpha\n;\n\n\nquad\n.\ntopRightAlpha\n \n=\n \ntopRightAlpha\n;\n\n\nquad\n.\nbottomLeftAlpha\n \n=\n \nbottomLeftAlpha\n;\n\n\nquad\n.\nbottomRightAlpha\n \n=\n \nbottomRightAlpha\n;\n\n\n\nquad\n.\nresetAlpha\n();\n\n\n\n\n\n\nColor\n\n\n\n\nGet\n    \nvar\n \ntopLeftColor\n \n=\n \nquad\n.\ntopLeftColor\n;\n\n\nvar\n \ntopRightColor\n \n=\n \nquad\n.\ntopRightColor\n;\n\n\nvar\n \nbottomLeftColor\n \n=\n \nquad\n.\nbottomLeftColor\n;\n\n\nvar\n \nbottomRightColor\n \n=\n \nquad\n.\nbottomRightColor\n;\n\n\n\n\nSet\n    \nquad\n.\ntopLeftColor\n \n=\n \ntopLeftColor\n;\n\n\nquad\n.\ntopRightColor\n \n=\n \ntopRightColor\n;\n\n\nquad\n.\nbottomLeftColor\n \n=\n \nbottomLeftColor\n;\n\n\nquad\n.\nbottomRightColor\n \n=\n \nbottomRightColor\n;\n\n\n\nquad\n.\nresetColors\n();\n\n\n\n\n\n\nReset all\n\n\nquad\n.\nreset\n();\n\n\n\n\n\nSet frame\n\n\nquad\n.\nsetFrame\n(\nframe\n);", 
+            "title": "Quad"
+        }, 
+        {
+            "location": "/quad/index.html#introduction", 
+            "text": "Manipulate the corner points of static images, built-in game object of phaser.   Author: Richard Davey    WebGL only  It only works in WebGL render mode.", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/quad/index.html#usage", 
+            "text": "", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/quad/index.html#load-texture", 
+            "text": "scene . load . image ( key ,   url );   Reference:  load image", 
+            "title": "Load texture"
+        }, 
+        {
+            "location": "/quad/index.html#add-object", 
+            "text": "var   quad   =   scene . add . quad ( x ,   y ,   key );   Add quad from JSON  var   quad   =   scene . make . quad ({ \n     x :   0 , \n     y :   0 , \n     key :   , \n\n     // angle: 0, \n     // alpha: 1 \n     // flipX: true, \n     // flipY: true, \n\n     add :   true  });", 
+            "title": "Add object"
+        }, 
+        {
+            "location": "/quad/index.html#custom-quad-class", 
+            "text": "Define class\n     class   MyQuad   extends   Phaser . GameObjects . Quad   { \n     constructor ( scene ,   x ,   y ,   texture ,   frame )   { \n         super ( scene ,   x ,   y ,   texture ,   frame ); \n         // ... \n         scene . add . existing ( this ); \n     } \n     // ...  }   Create instance\n     var   quad   =   new   MyQuad ( scene ,   x ,   y ,   key );", 
+            "title": "Custom quad class"
+        }, 
+        {
+            "location": "/quad/index.html#properties-of-corner-points", 
+            "text": "", 
+            "title": "Properties of corner points"
+        }, 
+        {
+            "location": "/quad/index.html#position", 
+            "text": "Get\n     var   topLeftX   =   quad . topLeftX ;  var   topLeftY   =   quad . topLeftY ;  var   topRightX   =   quad . topRightX ;  var   topRightY   =   quad . topRightY ;  var   bottomLeftX   =   quad . bottomLeftX ;  var   bottomLeftY   =   quad . bottomLeftY ;  var   bottomRightX   =   quad . bottomRightX ;  var   bottomRightY   =   quad . bottomRightY ;       Set\n     quad . topLeftX   =   topLeftX ;  quad . topLeftY   =   topLeftY ;  quad . topRightX   =   topRightX ;  quad . topRightY   =   topRightY ;  quad . bottomLeftX   =   bottomLeftX ;  quad . bottomLeftY   =   bottomLeftY ;  quad . bottomRightX   =   bottomRightX ;  quad . bottomRightY   =   bottomRightY ;  quad . setTopLeft ( x ,   y );  quad . setTopRight ( x ,   y );  quad . setBottomLeft ( x ,   y );  quad . setBottomRight ( x ,   y );      quad . resetPosition ();", 
+            "title": "Position"
+        }, 
+        {
+            "location": "/quad/index.html#alpha", 
+            "text": "Get\n     var   topLeftAlpha   =   quad . topLeftAlpha ;  var   topRightAlpha   =   quad . topRightAlpha ;  var   bottomLeftAlpha   =   quad . bottomLeftAlpha ;  var   bottomRightAlpha   =   quad . bottomRightAlpha ;   Set\n     quad . topLeftAlpha   =   topLeftAlpha ;  quad . topRightAlpha   =   topRightAlpha ;  quad . bottomLeftAlpha   =   bottomLeftAlpha ;  quad . bottomRightAlpha   =   bottomRightAlpha ;  quad . resetAlpha ();", 
+            "title": "Alpha"
+        }, 
+        {
+            "location": "/quad/index.html#color", 
+            "text": "Get\n     var   topLeftColor   =   quad . topLeftColor ;  var   topRightColor   =   quad . topRightColor ;  var   bottomLeftColor   =   quad . bottomLeftColor ;  var   bottomRightColor   =   quad . bottomRightColor ;   Set\n     quad . topLeftColor   =   topLeftColor ;  quad . topRightColor   =   topRightColor ;  quad . bottomLeftColor   =   bottomLeftColor ;  quad . bottomRightColor   =   bottomRightColor ;  quad . resetColors ();", 
+            "title": "Color"
+        }, 
+        {
+            "location": "/quad/index.html#reset-all", 
+            "text": "quad . reset ();", 
+            "title": "Reset all"
+        }, 
+        {
+            "location": "/quad/index.html#set-frame", 
+            "text": "quad . setFrame ( frame );", 
+            "title": "Set frame"
+        }, 
+        {
             "location": "/blitter/index.html", 
             "text": "Introduction\n\n\nDisplay of static images, built-in game object of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nLoad texture\n\n\nscene\n.\nload\n.\nimage\n(\nkey\n,\n \nurl\n);\n\n\n\n\n\nReference: \nload image\n\n\nAdd blitter container\n\n\nAdd blitter container\n\n\nvar\n \nblitter\n \n=\n \nscene\n.\nadd\n.\nblitter\n(\nx\n,\n \ny\n,\n \nkey\n);\n\n\n\n\n\nAdd blitter container from JSON\n\n\nvar\n \nblitter\n \n=\n \nscene\n.\nmake\n.\nblitter\n({\n\n    \nx\n:\n \n0\n,\n\n    \ny\n:\n \n0\n,\n\n    \nkey\n:\n \n,\n\n\n    \n// angle: 0,\n\n    \n// alpha: 1\n\n    \n// flipX: true,\n\n    \n// flipY: true,\n\n\n    \nadd\n:\n \ntrue\n\n\n});\n\n\n\n\n\nCustom class\n\n\n\n\nDefine class\n    \nclass\n \nMyBlitter\n \nextends\n \nPhaser\n.\nGameObjects\n.\nBlitter\n \n{\n\n    \nconstructor\n(\nscene\n,\n \nx\n,\n \ny\n,\n \ntexture\n,\n \nframe\n)\n \n{\n\n        \nsuper\n(\nscene\n,\n \nx\n,\n \ny\n,\n \ntexture\n,\n \nframe\n);\n\n        \n// ...\n\n        \nscene\n.\nadd\n.\nexisting\n(\nthis\n);\n\n    \n}\n\n    \n// ...\n\n\n}\n\n\n\n\nCreate instance\n    \nvar\n \nblitter\n \n=\n \nnew\n \nMyBlitter\n(\nscene\n,\n \nx\n,\n \ny\n,\n \nkey\n);\n\n\n\n\n\n\nAdd bob object\n\n\nvar\n \nbob\n \n=\n \nblitter\n.\ncreate\n(\nx\n,\n \ny\n);\n\n\n// var bob = blitter.create(x, y, frame, visible, index);\n\n\n\n\n\n\n\nframe : The Frame the Bob will use. It must be part of the Texture the parent Blitter object is using.\n\n\nvisible : Should the created Bob render or not?\n\n\nindex : The position in the Blitters Display List to add the new Bob at. Defaults to the top of the list.\n\n\n\n\nAdd mutiple bob objects\n\n\nvar\n \nbobs\n \n=\n \nblitter\n.\ncreateMultiple\n(\nquantity\n,\n \nframe\n,\n \nvisible\n);\n\n\n\n\n\n\n\nquantity : The quantity of Bob objects to create.\n\n\n\n\nAdd bob object from callback\n\n\nvar\n \nbobs\n \n=\n \nblitter\n.\ncreateFromCallback\n(\ncallback\n,\n \nquantity\n,\n \nframe\n,\n \nvisible\n)\n\n\n// var callback = function(bob, i){};\n\n\n\n\n\nGet bob objects\n\n\nvar\n \nbobs\n \n=\n \nblitter\n.\nchildren\n;\n\n\n// bobs = blitter.getRenderList();\n\n\n\n\n\nbobs\n \n=\n \nblitter\n.\ngetRenderList\n();\n\n\n\n\n\nClear all bob objects\n\n\nblitter\n.\nclear\n();\n\n\n\n\n\nBob object\n\n\nA Bob has a position, alpha value and a frame from a texture that it uses to render with. You can also toggle the flipped and visible state of the Bob.\n\n\nPosition, frame\n\n\nbob\n.\nx\n \n=\n \n0\n;\n\n\nbob\n.\ny\n \n=\n \n0\n;\n\n\n// var x = bob.x;\n\n\n// var y = bob.y;\n\n\n\n\n\nbob\n.\nreset\n(\nx\n,\n \ny\n,\n \nframe\n);\n\n\n\n\n\nbob\n.\nsetFrame\n(\nframe\n);\n\n\n\n\n\nFlip\n\n\nbob\n.\nresetFlip\n();\n\n\n\n\n\nbob\n.\nsetFlip\n(\nboolX\n,\n \nboolY\n);\n\n\n\n\n\nbob\n.\nsetFlipX\n(\nboolean\n);\n\n\n\n\n\nbob\n.\nsetFlipY\n(\nboolean\n);\n\n\n\n\n\nVisible, alpha\n\n\nbob\n.\nsetVisible\n(\nboolean\n);\n\n\n// bob.visible = v;\n\n\n// var visible = bob.visible;\n\n\n\n\n\nbob\n.\nsetAlpha\n(\nv\n);\n\n\n// bob.aplha = v;\n\n\n// var alpha = bob.alpha;\n\n\n\n\n\nDestroy\n\n\nbob\n.\ndestroy\n();\n\n\n\n\n\nData\n\n\nvar\n \ndata\n \n=\n \nbob\n.\ndata\n;\n  \n// {}", 
             "title": "Blitter"
@@ -1161,64 +1221,49 @@
             "title": "Z index of emitters"
         }, 
         {
-            "location": "/quad/index.html", 
-            "text": "Introduction\n\n\nManipulate the corner points of static images, built-in game object of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\n\n\nWebGL only\n\n\nIt only works in WebGL render mode.\n\n\n\n\nUsage\n\n\nLoad texture\n\n\nscene\n.\nload\n.\nimage\n(\nkey\n,\n \nurl\n);\n\n\n\n\n\nReference: \nload image\n\n\nAdd object\n\n\nvar\n \nquad\n \n=\n \nscene\n.\nadd\n.\nquad\n(\nx\n,\n \ny\n,\n \nkey\n);\n\n\n\n\n\nAdd quad from JSON\n\n\nvar\n \nquad\n \n=\n \nscene\n.\nmake\n.\nquad\n({\n\n    \nx\n:\n \n0\n,\n\n    \ny\n:\n \n0\n,\n\n    \nkey\n:\n \n,\n\n\n    \n// angle: 0,\n\n    \n// alpha: 1\n\n    \n// flipX: true,\n\n    \n// flipY: true,\n\n\n    \nadd\n:\n \ntrue\n\n\n});\n\n\n\n\n\nCustom quad class\n\n\n\n\nDefine class\n    \nclass\n \nMyQuad\n \nextends\n \nPhaser\n.\nGameObjects\n.\nQuad\n \n{\n\n    \nconstructor\n(\nscene\n,\n \nx\n,\n \ny\n,\n \ntexture\n,\n \nframe\n)\n \n{\n\n        \nsuper\n(\nscene\n,\n \nx\n,\n \ny\n,\n \ntexture\n,\n \nframe\n);\n\n        \n// ...\n\n        \nscene\n.\nadd\n.\nexisting\n(\nthis\n);\n\n    \n}\n\n    \n// ...\n\n\n}\n\n\n\n\nCreate instance\n    \nvar\n \nquad\n \n=\n \nnew\n \nMyQuad\n(\nscene\n,\n \nx\n,\n \ny\n,\n \nkey\n);\n\n\n\n\n\n\nProperties of corner points\n\n\nPosition\n\n\n\n\nGet\n    \nvar\n \ntopLeftX\n \n=\n \nquad\n.\ntopLeftX\n;\n\n\nvar\n \ntopLeftY\n \n=\n \nquad\n.\ntopLeftY\n;\n\n\nvar\n \ntopRightX\n \n=\n \nquad\n.\ntopRightX\n;\n\n\nvar\n \ntopRightY\n \n=\n \nquad\n.\ntopRightY\n;\n\n\nvar\n \nbottomLeftX\n \n=\n \nquad\n.\nbottomLeftX\n;\n\n\nvar\n \nbottomLeftY\n \n=\n \nquad\n.\nbottomLeftY\n;\n\n\nvar\n \nbottomRightX\n \n=\n \nquad\n.\nbottomRightX\n;\n\n\nvar\n \nbottomRightY\n \n=\n \nquad\n.\nbottomRightY\n;\n    \n\n\n\nSet\n    \nquad\n.\ntopLeftX\n \n=\n \ntopLeftX\n;\n\n\nquad\n.\ntopLeftY\n \n=\n \ntopLeftY\n;\n\n\nquad\n.\ntopRightX\n \n=\n \ntopRightX\n;\n\n\nquad\n.\ntopRightY\n \n=\n \ntopRightY\n;\n\n\nquad\n.\nbottomLeftX\n \n=\n \nbottomLeftX\n;\n\n\nquad\n.\nbottomLeftY\n \n=\n \nbottomLeftY\n;\n\n\nquad\n.\nbottomRightX\n \n=\n \nbottomRightX\n;\n\n\nquad\n.\nbottomRightY\n \n=\n \nbottomRightY\n;\n\n\n\nquad\n.\nsetTopLeft\n(\nx\n,\n \ny\n);\n\n\nquad\n.\nsetTopRight\n(\nx\n,\n \ny\n);\n\n\nquad\n.\nsetBottomLeft\n(\nx\n,\n \ny\n);\n\n\nquad\n.\nsetBottomRight\n(\nx\n,\n \ny\n);\n    \n\nquad\n.\nresetPosition\n();\n\n\n\n\n\n\nAlpha\n\n\n\n\nGet\n    \nvar\n \ntopLeftAlpha\n \n=\n \nquad\n.\ntopLeftAlpha\n;\n\n\nvar\n \ntopRightAlpha\n \n=\n \nquad\n.\ntopRightAlpha\n;\n\n\nvar\n \nbottomLeftAlpha\n \n=\n \nquad\n.\nbottomLeftAlpha\n;\n\n\nvar\n \nbottomRightAlpha\n \n=\n \nquad\n.\nbottomRightAlpha\n;\n\n\n\n\nSet\n    \nquad\n.\ntopLeftAlpha\n \n=\n \ntopLeftAlpha\n;\n\n\nquad\n.\ntopRightAlpha\n \n=\n \ntopRightAlpha\n;\n\n\nquad\n.\nbottomLeftAlpha\n \n=\n \nbottomLeftAlpha\n;\n\n\nquad\n.\nbottomRightAlpha\n \n=\n \nbottomRightAlpha\n;\n\n\n\nquad\n.\nresetAlpha\n();\n\n\n\n\n\n\nColor\n\n\n\n\nGet\n    \nvar\n \ntopLeftColor\n \n=\n \nquad\n.\ntopLeftColor\n;\n\n\nvar\n \ntopRightColor\n \n=\n \nquad\n.\ntopRightColor\n;\n\n\nvar\n \nbottomLeftColor\n \n=\n \nquad\n.\nbottomLeftColor\n;\n\n\nvar\n \nbottomRightColor\n \n=\n \nquad\n.\nbottomRightColor\n;\n\n\n\n\nSet\n    \nquad\n.\ntopLeftColor\n \n=\n \ntopLeftColor\n;\n\n\nquad\n.\ntopRightColor\n \n=\n \ntopRightColor\n;\n\n\nquad\n.\nbottomLeftColor\n \n=\n \nbottomLeftColor\n;\n\n\nquad\n.\nbottomRightColor\n \n=\n \nbottomRightColor\n;\n\n\n\nquad\n.\nresetColors\n();\n\n\n\n\n\n\nReset all\n\n\nquad\n.\nreset\n();\n\n\n\n\n\nSet frame\n\n\nquad\n.\nsetFrame\n(\nframe\n);", 
-            "title": "Quad"
+            "location": "/tilesprite/index.html", 
+            "text": "Introduction\n\n\nDisplay of repeating texture, built-in game object of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nLoad texture\n\n\nscene\n.\nload\n.\nimage\n(\nkey\n,\n \nurl\n);\n\n\n\n\n\nReference: \nload image\n\n\nAdd tile sprite object\n\n\nvar\n \nimage\n \n=\n \nscene\n.\nadd\n.\ntileSprite\n(\nx\n,\n \ny\n,\n \nwidth\n,\n \nheight\n,\n \ntextureKey\n);\n\n\n\n\n\nAdd tile sprite from JSON\n\n\nvar\n \nimage\n \n=\n \nscene\n.\nmake\n.\ntileSprite\n({\n\n    \nx\n:\n \n0\n,\n\n    \ny\n:\n \n0\n,\n\n    \nwidth\n:\n \n512\n,\n\n    \nheight\n:\n \n512\n,\n\n    \nkey\n:\n \n,\n\n\n    \n// angle: 0,\n\n    \n// alpha: 1\n\n    \n// flipX: true,\n\n    \n// flipY: true,\n\n    \n// scale : {\n\n    \n//    x: 1,\n\n    \n//    y: 1\n\n    \n//},\n\n\n    \nadd\n:\n \ntrue\n\n\n});\n\n\n\n\n\nCustom class\n\n\n\n\nDefine class\n    \nclass\n \nMyTileSprite\n \nextends\n \nPhaser\n.\nGameObjects\n.\nTileSprite\n \n{\n\n    \nconstructor\n(\nscene\n,\n \nx\n,\n \ny\n,\n \nwidth\n,\n \nheight\n,\n \ntexture\n,\n \nframe\n)\n \n{\n\n        \nsuper\n(\nscene\n,\n \nx\n,\n \ny\n,\n \nwidth\n,\n \nheight\n,\n \ntexture\n,\n \nframe\n);\n\n        \n// ...\n\n        \nscene\n.\nadd\n.\nexisting\n(\nthis\n);\n\n    \n}\n\n    \n// ...\n\n\n}\n\n\n\n\nCreate instance\n    \nvar\n \nimage\n \n=\n \nnew\n \nMyTileSprite\n(\nscene\n,\n \nx\n,\n \ny\n,\n \nkey\n);\n\n\n\n\n\n\nProperties of tiles\n\n\n\n\nPosition\n    \nimage\n.\nsetTilePosition\n(\nx\n,\n \ny\n);\n\n\n\n    or\n    \nimage\n.\ntilePositionX\n \n=\n \nx\n;\n\n\nimage\n.\ntilePositionY\n \n=\n \ny\n;\n\n\n\n\nScale\n    \nimage\n.\nsetTileScale\n(\nscaleX\n,\n \nscaleY\n);\n\n\n\n    or\n    \nimage\n.\ntileScaleX\n \n=\n \nscaleX\n;\n\n\nimage\n.\ntileScaleY\n \n=\n \nscaleY\n;\n\n\n\n\n\n\nOther properties\n\n\nSee \ngame object\n\n\nCreate mask\n\n\nvar\n \nmask\n \n=\n \nimage\n.\ncreateBitmapMask\n();\n\n\n\n\n\nSee \nmask", 
+            "title": "Tile sprite"
         }, 
         {
-            "location": "/quad/index.html#introduction", 
-            "text": "Manipulate the corner points of static images, built-in game object of phaser.   Author: Richard Davey    WebGL only  It only works in WebGL render mode.", 
+            "location": "/tilesprite/index.html#introduction", 
+            "text": "Display of repeating texture, built-in game object of phaser.   Author: Richard Davey", 
             "title": "Introduction"
         }, 
         {
-            "location": "/quad/index.html#usage", 
+            "location": "/tilesprite/index.html#usage", 
             "text": "", 
             "title": "Usage"
         }, 
         {
-            "location": "/quad/index.html#load-texture", 
+            "location": "/tilesprite/index.html#load-texture", 
             "text": "scene . load . image ( key ,   url );   Reference:  load image", 
             "title": "Load texture"
         }, 
         {
-            "location": "/quad/index.html#add-object", 
-            "text": "var   quad   =   scene . add . quad ( x ,   y ,   key );   Add quad from JSON  var   quad   =   scene . make . quad ({ \n     x :   0 , \n     y :   0 , \n     key :   , \n\n     // angle: 0, \n     // alpha: 1 \n     // flipX: true, \n     // flipY: true, \n\n     add :   true  });", 
-            "title": "Add object"
+            "location": "/tilesprite/index.html#add-tile-sprite-object", 
+            "text": "var   image   =   scene . add . tileSprite ( x ,   y ,   width ,   height ,   textureKey );   Add tile sprite from JSON  var   image   =   scene . make . tileSprite ({ \n     x :   0 , \n     y :   0 , \n     width :   512 , \n     height :   512 , \n     key :   , \n\n     // angle: 0, \n     // alpha: 1 \n     // flipX: true, \n     // flipY: true, \n     // scale : { \n     //    x: 1, \n     //    y: 1 \n     //}, \n\n     add :   true  });", 
+            "title": "Add tile sprite object"
         }, 
         {
-            "location": "/quad/index.html#custom-quad-class", 
-            "text": "Define class\n     class   MyQuad   extends   Phaser . GameObjects . Quad   { \n     constructor ( scene ,   x ,   y ,   texture ,   frame )   { \n         super ( scene ,   x ,   y ,   texture ,   frame ); \n         // ... \n         scene . add . existing ( this ); \n     } \n     // ...  }   Create instance\n     var   quad   =   new   MyQuad ( scene ,   x ,   y ,   key );", 
-            "title": "Custom quad class"
+            "location": "/tilesprite/index.html#custom-class", 
+            "text": "Define class\n     class   MyTileSprite   extends   Phaser . GameObjects . TileSprite   { \n     constructor ( scene ,   x ,   y ,   width ,   height ,   texture ,   frame )   { \n         super ( scene ,   x ,   y ,   width ,   height ,   texture ,   frame ); \n         // ... \n         scene . add . existing ( this ); \n     } \n     // ...  }   Create instance\n     var   image   =   new   MyTileSprite ( scene ,   x ,   y ,   key );", 
+            "title": "Custom class"
         }, 
         {
-            "location": "/quad/index.html#properties-of-corner-points", 
-            "text": "", 
-            "title": "Properties of corner points"
+            "location": "/tilesprite/index.html#properties-of-tiles", 
+            "text": "Position\n     image . setTilePosition ( x ,   y );  \n    or\n     image . tilePositionX   =   x ;  image . tilePositionY   =   y ;   Scale\n     image . setTileScale ( scaleX ,   scaleY );  \n    or\n     image . tileScaleX   =   scaleX ;  image . tileScaleY   =   scaleY ;", 
+            "title": "Properties of tiles"
         }, 
         {
-            "location": "/quad/index.html#position", 
-            "text": "Get\n     var   topLeftX   =   quad . topLeftX ;  var   topLeftY   =   quad . topLeftY ;  var   topRightX   =   quad . topRightX ;  var   topRightY   =   quad . topRightY ;  var   bottomLeftX   =   quad . bottomLeftX ;  var   bottomLeftY   =   quad . bottomLeftY ;  var   bottomRightX   =   quad . bottomRightX ;  var   bottomRightY   =   quad . bottomRightY ;       Set\n     quad . topLeftX   =   topLeftX ;  quad . topLeftY   =   topLeftY ;  quad . topRightX   =   topRightX ;  quad . topRightY   =   topRightY ;  quad . bottomLeftX   =   bottomLeftX ;  quad . bottomLeftY   =   bottomLeftY ;  quad . bottomRightX   =   bottomRightX ;  quad . bottomRightY   =   bottomRightY ;  quad . setTopLeft ( x ,   y );  quad . setTopRight ( x ,   y );  quad . setBottomLeft ( x ,   y );  quad . setBottomRight ( x ,   y );      quad . resetPosition ();", 
-            "title": "Position"
+            "location": "/tilesprite/index.html#other-properties", 
+            "text": "See  game object", 
+            "title": "Other properties"
         }, 
         {
-            "location": "/quad/index.html#alpha", 
-            "text": "Get\n     var   topLeftAlpha   =   quad . topLeftAlpha ;  var   topRightAlpha   =   quad . topRightAlpha ;  var   bottomLeftAlpha   =   quad . bottomLeftAlpha ;  var   bottomRightAlpha   =   quad . bottomRightAlpha ;   Set\n     quad . topLeftAlpha   =   topLeftAlpha ;  quad . topRightAlpha   =   topRightAlpha ;  quad . bottomLeftAlpha   =   bottomLeftAlpha ;  quad . bottomRightAlpha   =   bottomRightAlpha ;  quad . resetAlpha ();", 
-            "title": "Alpha"
-        }, 
-        {
-            "location": "/quad/index.html#color", 
-            "text": "Get\n     var   topLeftColor   =   quad . topLeftColor ;  var   topRightColor   =   quad . topRightColor ;  var   bottomLeftColor   =   quad . bottomLeftColor ;  var   bottomRightColor   =   quad . bottomRightColor ;   Set\n     quad . topLeftColor   =   topLeftColor ;  quad . topRightColor   =   topRightColor ;  quad . bottomLeftColor   =   bottomLeftColor ;  quad . bottomRightColor   =   bottomRightColor ;  quad . resetColors ();", 
-            "title": "Color"
-        }, 
-        {
-            "location": "/quad/index.html#reset-all", 
-            "text": "quad . reset ();", 
-            "title": "Reset all"
-        }, 
-        {
-            "location": "/quad/index.html#set-frame", 
-            "text": "quad . setFrame ( frame );", 
-            "title": "Set frame"
+            "location": "/tilesprite/index.html#create-mask", 
+            "text": "var   mask   =   image . createBitmapMask ();   See  mask", 
+            "title": "Create mask"
         }, 
         {
             "location": "/texture/index.html", 

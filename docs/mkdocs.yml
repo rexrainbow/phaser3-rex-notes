@@ -22,12 +22,15 @@ pages:
 - Game object:
     - Game object: gameobject.md
     - Sprite:
-        - Image: image.md
-        - Sprite: sprite.md
-        - Blitter: blitter.md
-        - Particles: particles.md        
-        - Quad: quad.md
-        - Texture: texture.md        
+        - Single image:
+            - Image: image.md
+            - Sprite: sprite.md
+            - Quad: quad.md    
+        - Multiple images: 
+            - Blitter: blitter.md
+            - Particles: particles.md        
+            - Tile sprite: tilesprite.md
+        - Texture: texture.md
     - Text:
         - Text: text.md
         - BBCode Text: bbcodetext.md
