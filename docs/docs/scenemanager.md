@@ -85,23 +85,6 @@ Makes this Scene sleep then starts the Scene given.
 scene.scene.switch(key);
 ```
 
-### Read status
-
-```javascript
-var isSleep = scene.scene.isSleeping(key);
-// var isSleep = scene.scene.isSleeping();
-```
-
-```javascript
-var isActive = scene.scene.isActive(key);
-// var isActive = scene.scene.isActive();
-```
-
-```javascript
-var isVisible = scene.scene.isVisible(key);
-// var isVisible = scene.scene.isVisible();
-```
-
 ## Run scene
 
 Runs the given Scene, but does not change the state of this Scene.
@@ -120,6 +103,30 @@ Stop : shutdown the Scene, clearing display list, timers, etc.
 ```javascript
 scene.scene.stop(key);
 // scene.scene.stop();  // stop myself
+```
+
+## Set visible
+
+```javascript
+scene.scene.setVisible(value, key);  // value: true/false
+// scene.scene.setVisible(value);    // set visible to myself
+```
+
+## Read status
+
+```javascript
+var isSleep = scene.scene.isSleeping(key);
+// var isSleep = scene.scene.isSleeping();
+```
+
+```javascript
+var isActive = scene.scene.isActive(key);
+// var isActive = scene.scene.isActive();
+```
+
+```javascript
+var isVisible = scene.scene.isVisible(key);
+// var isVisible = scene.scene.isVisible();
 ```
 
 ## Get scene

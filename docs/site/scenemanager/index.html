@@ -268,19 +268,6 @@
     Pause/Resume scene
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#read-status" title="Read status" class="md-nav__link">
-    Read status
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -293,6 +280,20 @@
         <li class="md-nav__item">
   <a href="#stop-scene" title="Stop scene" class="md-nav__link">
     Stop scene
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#set-visible" title="Set visible" class="md-nav__link">
+    Set visible
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#read-status" title="Read status" class="md-nav__link">
+    Read status
   </a>
   
 </li>
@@ -2100,19 +2101,6 @@
     Pause/Resume scene
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#read-status" title="Read status" class="md-nav__link">
-    Read status
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
       
         <li class="md-nav__item">
@@ -2125,6 +2113,20 @@
         <li class="md-nav__item">
   <a href="#stop-scene" title="Stop scene" class="md-nav__link">
     Stop scene
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#set-visible" title="Set visible" class="md-nav__link">
+    Set visible
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#read-status" title="Read status" class="md-nav__link">
+    Read status
   </a>
   
 </li>
@@ -2252,19 +2254,6 @@
 <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="k">switch</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </pre></div>
 
-<h3 id="read-status">Read status<a class="headerlink" href="#read-status" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isSleep</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">isSleeping</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-<span class="c1">// var isSleep = scene.scene.isSleeping();</span>
-</pre></div>
-
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isActive</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">isActive</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-<span class="c1">// var isActive = scene.scene.isActive();</span>
-</pre></div>
-
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isVisible</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">isVisible</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-<span class="c1">// var isVisible = scene.scene.isVisible();</span>
-</pre></div>
-
 <h2 id="run-scene">Run scene<a class="headerlink" href="#run-scene" title="Permanent link">&para;</a></h2>
 <p>Runs the given Scene, but does not change the state of this Scene.</p>
 <p>If the given Scene is paused, it will resume it. If sleeping, it will wake it.
@@ -2276,6 +2265,24 @@ If not running at all, it will be started.</p>
 <p>Stop : shutdown the Scene, clearing display list, timers, etc.</p>
 <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">stop</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 <span class="c1">// scene.scene.stop();  // stop myself</span>
+</pre></div>
+
+<h2 id="set-visible">Set visible<a class="headerlink" href="#set-visible" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">setVisible</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>  <span class="c1">// value: true/false</span>
+<span class="c1">// scene.scene.setVisible(value);    // set visible to myself</span>
+</pre></div>
+
+<h2 id="read-status">Read status<a class="headerlink" href="#read-status" title="Permanent link">&para;</a></h2>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isSleep</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">isSleeping</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+<span class="c1">// var isSleep = scene.scene.isSleeping();</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isActive</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">isActive</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+<span class="c1">// var isActive = scene.scene.isActive();</span>
+</pre></div>
+
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isVisible</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">isVisible</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+<span class="c1">// var isVisible = scene.scene.isVisible();</span>
 </pre></div>
 
 <h2 id="get-scene">Get scene<a class="headerlink" href="#get-scene" title="Permanent link">&para;</a></h2>
