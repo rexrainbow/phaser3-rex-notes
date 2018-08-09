@@ -46,7 +46,7 @@ class Recorder {
 
     start(startAt) {
         this.clock.start(startAt);
-        this.clean();
+        this.clear();
         return this;
     }
 
@@ -111,7 +111,7 @@ class Recorder {
         return commands;
     }
 
-    clean() {
+    clear() {
         this.commands.length = 0;
     }
 }

@@ -53,7 +53,7 @@ class CsvToHashTable {
             convertScope = undefined;
         }
 
-        this.clean();
+        this.clear();
         var arr = CSVToArray(csvString, delimiter);
 
 
@@ -92,7 +92,7 @@ class CsvToHashTable {
         return this;
     }
 
-    clean() {
+    clear() {
         var table = this.table;
         for (var key in table) {
             delete table[key];

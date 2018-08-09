@@ -161,7 +161,7 @@ var existed = table.isValueInCol(colKey, data);
 #### Clean table
 
 ```javascript
-table.clean();
+table.clear();
 ```
 
 #### Append a column

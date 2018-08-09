@@ -23,9 +23,12 @@ class CanvasPlugin extends Phaser.Plugins.BasePlugin {
         return this.displayList.add(new Canvas(this.scene, x, y, width, height));
     }
 
-    makeCanvas(config) {
+    makeCanvas(config, addToScene) {
         var width = GetValue(config, 'width', 256);
         var height = GetValue(config, 'height', width);
+        if (addToScene !== undefined) {
+            config.add = addToScene;
+        }
         var canvas = new Canvas(this.scene, 0, 0, width, height);
         BuildGameObject(this.scene, canvas, config);
         var fillColor = GetValue(config, 'fill', null);

@@ -53,7 +53,7 @@ class CSVScenario extends EE {
 
     shutdown() {
         super.shutdown();
-        this.clean();
+        this.clear();
         this.parent = undefined;
     }
 
@@ -62,7 +62,7 @@ class CSVScenario extends EE {
     }
 
     load(strCmd, scope, config) {
-        this.clean();
+        this.clear();
 
         this.timeUnit = GetValue(config, 'timeUnit', this.timeUnit);
         if (typeof (this.timeUnit) === 'string') {
@@ -80,7 +80,7 @@ class CSVScenario extends EE {
         return this;
     }
 
-    clean() {
+    clear() {
         this.stop();
         this.instMem.resetFromJSON();
         this.cmdHandlers.resetFromJSON();

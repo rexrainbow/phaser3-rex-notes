@@ -37,6 +37,7 @@ pages:
     - Graphics:
         - Graphics: graphics.md
         - Canvas: canvas.md
+        - Render texture: rendertexture.md
     - Tile map:
         - Tile map: tilemap.md
     - Container:

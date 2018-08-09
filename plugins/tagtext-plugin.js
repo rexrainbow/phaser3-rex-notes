@@ -23,7 +23,7 @@ class TagTextPlugin extends Phaser.Plugins.BasePlugin {
         return this.displayList.add(new TagText(this.scene, x, y, text, style));
     }
 
-    makeTagText(config) {
+    makeTagText(config, addToScene) {
         // style Object = {
         //     font: [ 'font', '16px Courier' ],
         //     backgroundColor: [ 'backgroundColor', null ],
@@ -55,6 +55,10 @@ class TagTextPlugin extends Phaser.Plugins.BasePlugin {
 
         if (padding !== null) {
             style.padding = padding;
+        }
+
+        if (addToScene !== undefined) {
+            config.add = addToScene;
         }
 
         var text = new TagText(this.scene, 0, 0, content, style);

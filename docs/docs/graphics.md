@@ -18,15 +18,18 @@ or
 var graphics = scene.add.graphics({
     x: 0,
     y: 0,
-    lineStyle: {
-        width: 1,
-        color: 0xffffff,
-        alpha: 1
-    },
-    fillStyle: {
-        color: 0xffffff,
-        alpha: 1
-    }
+
+    // lineStyle: {
+    //     width: 1,
+    //     color: 0xffffff,
+    //     alpha: 1
+    // },
+    // fillStyle: {
+    //     color: 0xffffff,
+    //     alpha: 1
+    // },
+
+    add: true
 });
 ```
 

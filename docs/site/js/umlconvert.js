@@ -36,7 +36,7 @@
             // <div>
             var content = elem.textContent || elem.innerText;
 
-            // clean text
+            // clear text
             if (elem.innerText) {
                 elem.innerText = '';
             } else {

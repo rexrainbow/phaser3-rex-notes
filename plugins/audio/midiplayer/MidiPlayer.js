@@ -45,7 +45,7 @@ class MidiPlayer {
         if (!midi) {
             return this;
         }
-        this.clean();
+        this.clear();
 
         this.setTickPeriod(midi);
 
@@ -61,7 +61,7 @@ class MidiPlayer {
         }
     }
 
-    clean() {};
+    clear() {};
 
     setTickPeriod(midi) {
         var timeDivision = midi.timeDivision;

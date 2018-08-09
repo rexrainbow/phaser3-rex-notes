@@ -35,7 +35,9 @@ var image = scene.make.image({
     // scale : {
     //    x: 1,
     //    y: 1
-    //}
+    //},
+
+    add: true
 });
 ```
 

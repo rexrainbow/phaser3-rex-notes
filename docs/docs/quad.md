@@ -34,7 +34,9 @@ var quad = scene.make.quad({
     // angle: 0,
     // alpha: 1
     // flipX: true,
-    // flipY: true
+    // flipY: true,
+
+    add: true
 });
 ```
 

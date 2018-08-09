@@ -865,6 +865,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../rendertexture/index.html" title="Render texture" class="md-nav__link">
+      Render texture
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -2260,7 +2272,7 @@
             <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;yellow&#39;</span><span class="p">,</span>
             <span class="nx">thinkness</span><span class="o">:</span> <span class="mi">1</span>
         <span class="p">}</span>
-    <span class="p">}</span>    
+    <span class="p">}</span>
 <span class="p">}</span>
 <span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexTagText</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="s1">&#39;&lt;style=&quot;name0&quot;&gt;h&lt;/style&gt;ello&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">tags</span><span class="o">:</span><span class="nx">tags</span><span class="p">});</span>
 <span class="nx">txt</span><span class="p">.</span><span class="nx">setText</span><span class="p">(</span><span class="s1">&#39;&lt;style=&quot;name1&quot;&gt;wor&lt;/style&gt;ld&#39;</span><span class="p">);</span>
@@ -2285,10 +2297,11 @@
 </pre></div>
 
 <h3 id="add-text-object">Add text object<a class="headerlink" href="#add-text-object" title="Permanent link">&para;</a></h3>
-<p><div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexTagText</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="s1">&#39;&lt;style=&quot;name0&quot;&gt;h&lt;/style&gt;ello&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">tags</span><span class="o">:</span><span class="nx">tags</span><span class="p">});</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexTagText</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="s1">&#39;&lt;style=&quot;name0&quot;&gt;h&lt;/style&gt;ello&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">tags</span><span class="o">:</span><span class="nx">tags</span><span class="p">});</span>
 <span class="c1">// var txt = scene.add.rexTagText(x, y, &#39;&lt;style=&quot;name0&quot;&gt;h&lt;/style&gt;ello&#39;, { fontFamily: &#39;Arial&#39;, fontSize: 64, color: &#39;#00ff00&#39;, tags:tags });</span>
 </pre></div>
-Properties of a tag</p>
+
+<p>Properties of a tag</p>
 <div class="codehilite"><pre><span></span><span class="p">{</span>
     <span class="nx">fontFamily</span><span class="o">:</span> <span class="s1">&#39;Courier&#39;</span><span class="p">,</span>   <span class="c1">// or &#39;family&#39;, &#39;font-family&#39;</span>
     <span class="nx">fontSize</span><span class="o">:</span> <span class="s1">&#39;16px&#39;</span><span class="p">,</span>        <span class="c1">// or &#39;size&#39;, &#39;font-size&#39;</span>
@@ -2370,7 +2383,9 @@ Properties of a tag</p>
         <span class="nx">align</span><span class="o">:</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span>
         <span class="nx">backgroundColor</span><span class="o">:</span> <span class="s1">&#39;#ff00ff&#39;</span><span class="p">,</span>
         <span class="nx">tags</span><span class="o">:</span> <span class="p">{}</span>
-    <span class="p">}</span>
+    <span class="p">},</span>
+
+    <span class="nx">add</span><span class="o">:</span> <span class="kc">true</span>
 <span class="p">});</span>
 </pre></div>
 

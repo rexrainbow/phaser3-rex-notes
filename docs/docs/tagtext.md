@@ -30,7 +30,7 @@ var tags = {
             color: 'yellow',
             thinkness: 1
         }
-    }    
+    }
 }
 var txt = scene.add.rexTagText(x, y, '<style="name0">h</style>ello', {tags:tags});
 txt.setText('<style="name1">wor</style>ld');
@@ -63,6 +63,7 @@ var game = new Phaser.Game(config);
 var txt = scene.add.rexTagText(x, y, '<style="name0">h</style>ello', {tags:tags});
 // var txt = scene.add.rexTagText(x, y, '<style="name0">h</style>ello', { fontFamily: 'Arial', fontSize: 64, color: '#00ff00', tags:tags });
 ```
+
 Properties of a tag
 
 ```javascript
@@ -151,7 +152,9 @@ var txt = scene.make.rexTagText({
         align: 'center',
         backgroundColor: '#ff00ff',
         tags: {}
-    }
+    },
+
+    add: true
 });
 ```
 

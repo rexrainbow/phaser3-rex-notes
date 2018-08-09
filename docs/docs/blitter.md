@@ -33,7 +33,9 @@ var blitter = scene.make.blitter({
     // angle: 0,
     // alpha: 1
     // flipX: true,
-    // flipY: true
+    // flipY: true,
+    
+    add: true
 });
 ```
 

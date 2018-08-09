@@ -110,7 +110,7 @@ class CanvasText {
         var context = this.context;
         context.save();
 
-        // this.clean();
+        // this.clear();
         this.drawBackground();
 
         // draw lines
@@ -172,7 +172,7 @@ class CanvasText {
         context.restore();
     }
 
-    clean() {
+    clear() {
         var canvas = this.canvas;
         this.context.clearRect(0, 0, canvas.width, canvas.height);
     }

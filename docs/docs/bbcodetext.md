@@ -120,7 +120,8 @@ var txt = scene.make.rexBBCodeText({
         color: '#ffffff',
         align: 'center',
         backgroundColor: '#ff00ff'
-    }
+    },
+    add: true
 });
 ```
 

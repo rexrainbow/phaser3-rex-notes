@@ -100,7 +100,7 @@ class Gashapon {
      */
     startGen() {
         var name;
-        // clean remain items
+        // clear remain items
         for (name in this.remain) {
             if (!this.items.hasOwnProperty(name)) {
                 delete this.remain[name];
@@ -394,7 +394,7 @@ class Gashapon {
 
     /** @private */
     resetItemList(items) {
-        // clean list
+        // clear list
         this._list.length = 0;
         var name, count, totalCount = 0;
         // get total count

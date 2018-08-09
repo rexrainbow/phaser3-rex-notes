@@ -8,7 +8,7 @@ const BuildGameObject = Phaser.GameObjects.BuildGameObject;
 Phaser.GameObjects.GameObjectFactory.register('rexBBCodeText', function (x, y, text, style) {
     return this.displayList.add(new BBCodeText(this.scene, x, y, text, style));
 });
-Phaser.GameObjects.GameObjectCreator.register('rexBBCodeText', function (config) {
+Phaser.GameObjects.GameObjectCreator.register('rexBBCodeText', function (config, addToScene) {
     // style Object = {
     //     font: [ 'font', '16px Courier' ],
     //     backgroundColor: [ 'backgroundColor', null ],
@@ -40,6 +40,10 @@ Phaser.GameObjects.GameObjectCreator.register('rexBBCodeText', function (config)
 
     if (padding !== null) {
         style.padding = padding;
+    }
+
+    if (addToScene !== undefined) {
+        config.add = addToScene;
     }
 
     var text = new BBCodeText(this.scene, 0, 0, content, style);

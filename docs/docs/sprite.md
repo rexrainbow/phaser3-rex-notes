@@ -53,7 +53,9 @@ var sprite = scene.make.sprite({
         // key: ,
         // repeat: ,
         // ...
-    // }
+    // },
+
+    add: true
 });
 ```
 

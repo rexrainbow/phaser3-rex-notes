@@ -75,7 +75,8 @@ var txt = scene.make.text({
         color: '#ffffff',
         align: 'center',
         backgroundColor: '#ff00ff'
-    }
+    },
+    add: true
 });
 ```
 

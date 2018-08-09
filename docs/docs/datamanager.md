@@ -137,7 +137,7 @@ var cnt = parent.data.count;
 
 ### Reset
 
-Reset status and clean all keys.
+Reset status and clear all keys.
 
 ```javascript
 parent.data.reset()

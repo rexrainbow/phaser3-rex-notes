@@ -27,7 +27,7 @@ class InstMem {
         return this;
     }
 
-    clean() {
+    clear() {
         this.currentIdx = -1;
         this.nextIdx = 0;
         this.queue.length = 0;
