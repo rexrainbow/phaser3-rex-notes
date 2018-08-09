@@ -2,7 +2,7 @@
 
 import Canvas from './gameobjects/canvas/Canvas.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 const BuildGameObject = Phaser.GameObjects.BuildGameObject;
 
 class CanvasPlugin extends Phaser.Plugins.BasePlugin {
@@ -24,14 +24,14 @@ class CanvasPlugin extends Phaser.Plugins.BasePlugin {
     }
 
     makeCanvas(config, addToScene) {
-        var width = GetValue(config, 'width', 256);
-        var height = GetValue(config, 'height', width);
+        var width = GetAdvancedValue(config, 'width', 256);
+        var height = GetAdvancedValue(config, 'height', width);
         if (addToScene !== undefined) {
             config.add = addToScene;
         }
         var canvas = new Canvas(this.scene, 0, 0, width, height);
         BuildGameObject(this.scene, canvas, config);
-        var fillColor = GetValue(config, 'fill', null);
+        var fillColor = GetAdvancedValue(config, 'fill', null);
         canvas.fill(fillColor);
         return canvas;
     }

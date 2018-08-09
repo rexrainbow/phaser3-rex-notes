@@ -2,7 +2,7 @@
 
 import TagText from './gameobjects/tagtext/TagText.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 const BuildGameObject = Phaser.GameObjects.BuildGameObject;
 
 Phaser.GameObjects.GameObjectFactory.register('rexTagText', function (x, y, text, style) {
@@ -27,8 +27,8 @@ Phaser.GameObjects.GameObjectCreator.register('rexTagText', function (config, ad
     //     fixedHeight: [ 'fixedHeight', false ]
     // }
 
-    var content = GetValue(config, 'text', '');
-    var style = GetValue(config, 'style', null);
+    var content = GetAdvancedValue(config, 'text', '');
+    var style = GetAdvancedValue(config, 'style', null);
 
     //  Padding
     //      { padding: 2 }
@@ -36,7 +36,7 @@ Phaser.GameObjects.GameObjectCreator.register('rexTagText', function (config, ad
     //      { padding: { left: , top: }}
     //      { padding: { left: , right: , top: , bottom: }}  
 
-    var padding = GetValue(config, 'padding', null);
+    var padding = GetAdvancedValue(config, 'padding', null);
 
     if (padding !== null) {
         style.padding = padding;
@@ -51,8 +51,8 @@ Phaser.GameObjects.GameObjectCreator.register('rexTagText', function (config, ad
 
     //  Text specific config options:
 
-    text.autoRound = GetValue(config, 'autoRound', true);
-    text.resolution = GetValue(config, 'resolution', 1);
+    text.autoRound = GetAdvancedValue(config, 'autoRound', true);
+    text.resolution = GetAdvancedValue(config, 'resolution', 1);
 
     return text;
 });

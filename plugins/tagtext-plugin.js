@@ -2,7 +2,7 @@
 
 import TagText from './gameobjects/tagtext/TagText.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 const BuildGameObject = Phaser.GameObjects.BuildGameObject;
 
 class TagTextPlugin extends Phaser.Plugins.BasePlugin {
@@ -42,8 +42,8 @@ class TagTextPlugin extends Phaser.Plugins.BasePlugin {
         //     fixedHeight: [ 'fixedHeight', false ]
         // }
 
-        var content = GetValue(config, 'text', '');
-        var style = GetValue(config, 'style', null);
+        var content = GetAdvancedValue(config, 'text', '');
+        var style = GetAdvancedValue(config, 'style', null);
 
         //  Padding
         //      { padding: 2 }
@@ -51,7 +51,7 @@ class TagTextPlugin extends Phaser.Plugins.BasePlugin {
         //      { padding: { left: , top: }}
         //      { padding: { left: , right: , top: , bottom: }}  
 
-        var padding = GetValue(config, 'padding', null);
+        var padding = GetAdvancedValue(config, 'padding', null);
 
         if (padding !== null) {
             style.padding = padding;
@@ -66,8 +66,8 @@ class TagTextPlugin extends Phaser.Plugins.BasePlugin {
 
         //  Text specific config options:
 
-        text.autoRound = GetValue(config, 'autoRound', true);
-        text.resolution = GetValue(config, 'resolution', 1);
+        text.autoRound = GetAdvancedValue(config, 'autoRound', true);
+        text.resolution = GetAdvancedValue(config, 'resolution', 1);
 
         return text;
     }
