@@ -13,4 +13,7 @@ var result = Phaser.Utils.String.Pad(str, len, pad, dir);
 - `str` : String, or number.
 - `len` : Length or result string.
 - `pad` : The string to pad it out.
-- `dir` : `1` (left), `2` (right), `3` (both)
+- `dir` : 
+    - `1` : Left
+    - `2` : Right
+    - `3` : Both

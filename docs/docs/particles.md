@@ -464,7 +464,7 @@ emitter.setDeathZone(config);
         var callback = function(particle, emitter) { /* ... */ }
         emitter.onParticleEmit(callback, context);
         ```
-        - Clean callback
+        - Clear callback
             ```javascript        
             emitter.onParticleEmit();
             ```              
@@ -483,7 +483,7 @@ emitter.setDeathZone(config);
         var callback = function(particle, emitter) { /* ... */ }
         emitter.onParticleDeath(callback, context);
         ```
-        - Clean callback
+        - Clear callback
             ```javascript        
             emitter.onParticleDeath();
             ```        

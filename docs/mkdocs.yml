@@ -6,16 +6,6 @@ pages:
     - Scene manager: scenemanager.md
     - Scene: scene.md
     - Snapshot: snapshot.md
-- Input:
-    - Input: input.md
-    - Touch:    
-        - Touch events: touchevents.md
-        - Cursor: cursor.md
-        - Drag: drag.md
-        - Slider: slider.md
-        - Virtual joystick: virtualjoystick.md
-    - Keyboard:
-        - Keyboard events: keyboardevents.md
 - Loader:
     - Loader: loader.md
     - Webfont loader: webfontloader.md    
@@ -54,6 +44,16 @@ pages:
         - DOM element: domelement.md
     - Display:
         - Mask: mask.md
+- Input:
+    - Input: input.md
+    - Touch:    
+        - Touch events: touchevents.md
+        - Cursor: cursor.md
+        - Drag: drag.md
+        - Slider: slider.md
+        - Virtual joystick: virtualjoystick.md
+    - Keyboard:
+        - Keyboard events: keyboardevents.md
 - Time:
     - Date: date.md
     - Timer: timer.md

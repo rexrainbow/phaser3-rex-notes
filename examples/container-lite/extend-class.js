@@ -72,6 +72,9 @@ class Demo extends Phaser.Scene {
                 }
             });
         this.update();
+
+        var allChildren = this.containerLite.getAllChildren();
+        console.log(this.containerLite.contains(allChildren[3]));        
     }
 
     update() {

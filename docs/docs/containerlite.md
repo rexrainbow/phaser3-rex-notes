@@ -144,14 +144,29 @@ container.clear();
 
 ### Get children
 
-```javascript
-var gameObjects = container.getChildren();
-```
+- Get children in this container-lite
+    ```javascript
+    var gameObjects = container.getChildren();
+    ```
+- Get all children under this container-lite (nested)
+    ```javascript
+    var gameObjects = container.getAllChildren();
+    ```
+    - Draw on [render texture](rendertexture.md#paste-texture)
+        ```javascript
+        rt.draw(container.getAllChildren());
+        ```
+    - Ignored in [camera](camera.md#ignore-game-object)
+        ```javascript
+        camera.ignore(container.getAllChildren());
+        ```
 
 ### Exist
 
+Return true if child is under this container-lite (nested).
+
 ```javascript
-var hasChild = container.contains();
+var hasChild = container.contains(child);
 ```
 
 ### Children group

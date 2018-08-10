@@ -55,7 +55,7 @@ var graphics = scene.add.graphics({
 
 #### Set style
 
-- Set line style and fill style
+- Set default line style and fill style
     ```javascript
     graphics.setDefaultStyles({
         lineStyle: {
@@ -74,9 +74,19 @@ var graphics = scene.add.graphics({
     graphics.lineStyle(lineWidth, color, alpha);   // color: 0xRRGGBB
     ```
 - Set fill style
-    ```javascript
-    graphics.fillStyle(color, alpha);   // color: 0xRRGGBB
-    ```
+    - Fill color
+        ```javascript
+        graphics.fillStyle(color, alpha);   // color: 0xRRGGBB
+        ```
+    - Fill gradient color (WebGL only)
+        ```javascript
+        graphics.fillStyle(topLeft, topRight, bottomLeft, bottomRight);  // alpha= 1
+        // graphics.fillStyle(topLeft, topRight, bottomLeft, bottomRight, alpha);
+        ```
+        - `topLeft` : The tint being applied to the top-left of the Game Object.
+        - `topRight` : The tint being applied to the top-right of the Game Object.
+        - `bottomLeft` : The tint being applied to the bottom-left of the Game Object.
+        - `bottomRight` : The tint being applied to the bottom-right of the Game Object.
 
 #### Clear
 
@@ -192,6 +202,29 @@ Fill this shape
 
 ```javascript
 graphics.fillPath();
+```
+
+#### Fill pattern
+
+1. Load texture pattern
+    ```javascript
+    graphics.setTexture(key, frame, mode);
+    ```
+    - `mode` :
+        - `0` : Multiply
+        - `1` : Alpha only
+        - `2` : Texture only
+1. Fill pattern
+    ```javascript
+    graphics.fillRect(x, y, width, height);
+    ```
+
+WebGL only
+
+##### Clear pattern
+
+```javascript
+graphics.setTexture();
 ```
 
 #### Transfer

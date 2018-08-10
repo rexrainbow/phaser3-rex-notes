@@ -199,7 +199,7 @@ camera.centerToSize();
         var top = camera.deadzone.top;
         var bootom = camera.deadzone.bottom;
         ```
-    - Clean deadzone
+    - Clear deadzone
         ```javascript
         camera.setDeadzone();
         ```

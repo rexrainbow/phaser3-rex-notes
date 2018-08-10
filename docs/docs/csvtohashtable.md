@@ -158,7 +158,7 @@ var existed = table.isValueInCol(colKey, data);
 
 ### Create table
 
-#### Clean table
+#### Clear table
 
 ```javascript
 table.clear();

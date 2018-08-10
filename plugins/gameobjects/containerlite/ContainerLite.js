@@ -12,6 +12,7 @@ class ContainerLite extends Zone {
         super(scene, x, y, width, height);
         this.children = scene.add.group();
         this.type = 'rexContainerLite';
+        this.isRexContainerLite = true;
         this.syncChildrenEnable = true;
 
         this._flipX = false;
@@ -52,8 +53,40 @@ class ContainerLite extends Zone {
         return this.children.getChildren();
     }
 
+    getAllChildren() {
+        var allChildren = [];
+        var myCildren = this.getChildren(),
+            myChild;
+        for (var i = 0, cnt = myCildren.length; i < cnt; i++) {
+            myChild = myCildren[i];
+            allChildren.push(myChild);
+
+            if (myChild.hasOwnProperty('isRexContainerLite')) {
+                allChildren.push(...myChild.getAllChildren());
+            }
+        }
+
+        return allChildren;
+    }
+
     contains(gameObject) {
-        return this.children.contains(gameObject);
+        if (this.children.contains(gameObject)) {
+            return true;
+        }
+
+        var myCildren = this.children.getChildren(),
+            myChild;
+        for (var i = 0, cnt = myCildren.length; i < cnt; i++) {
+            myChild = myCildren[i];
+
+            if (myChild.isRexContainerLite) {
+                if (myChild.contains(gameObject)) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     worldToLocal(point) {
@@ -87,8 +120,7 @@ class ContainerLite extends Zone {
     }
 
     updateChildPosition(child) {
-        var isContainerLite = (child.hasOwnProperty('syncChildrenEnable'));
-        if (isContainerLite) {
+        if (child.isRexContainerLite) {
             child.syncChildrenEnable = false;
         }
         var state = this.getLocalState(child);
@@ -106,7 +138,7 @@ class ContainerLite extends Zone {
 
         child.rotation = state.rotation + this.rotation;
 
-        if (isContainerLite) {
+        if (child.isRexContainerLite) {
             child.syncChildrenEnable = true;
             child.syncPosition();
         }
