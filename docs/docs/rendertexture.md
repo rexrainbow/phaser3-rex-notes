@@ -55,27 +55,32 @@ var rt = scene.make.renderTexture({
 ### Paste texture
 
 - Paste game object
-   ```javascript
-   rt.draw(gameObject, x, y);
-   // rt.draw(gameObject, x, y, alpha, tint);
-   ```
+    ```javascript
+    rt.draw(gameObject, x, y);
+    // rt.draw(gameObject, x, y, alpha, tint);
+    ```
    - `gameObject` : a game object, or an array of game objects
+- Paste game objects in a [group](group.md)
+    ```javascript
+    rt.draw(group, x, y);
+    // rt.draw(group, x, y, alpha, tint);
+    ```
 - Paste game objects in a scene
-   ```javascript
-   rt.draw(scene.children, x, y);
-   // rt.draw(scene.children, x, y, alpha, tint);
-   ```
+    ```javascript
+    rt.draw(scene.children, x, y);
+    // rt.draw(scene.children, x, y, alpha, tint);
+    ```
 - Paste texture
-   ```javascript
-   rt.draw(key, x, y);
-   // rt.draw(key, x, y, alpha, tint);
-   ```
-   or
-   ```javascript
-   rt.drawFrame(key, frame, x, y);
-   // rt.drawFrame(key, frame, x, y, alpha, tint);
-   ```
-   - `key` : The key of the texture to be used, as stored in the Texture Manager.
+    ```javascript
+    rt.draw(key, x, y);
+    // rt.draw(key, x, y, alpha, tint);
+    ```
+    or
+    ```javascript
+    rt.drawFrame(key, frame, x, y);
+    // rt.drawFrame(key, frame, x, y, alpha, tint);
+    ```
+    - `key` : The key of the texture to be used, as stored in the Texture Manager.
 
 #### Global alpha
 
@@ -118,22 +123,24 @@ Stores a copy of this Render Texture in the Texture Manager using the given key.
 rt.saveTexture(key);
 ```
 
+Calling `saveTexture` again will not save another copy of the same texture, it will just rename the key of the existing copy.
+
 ### Internal camera
 
 Internal camera `rt.camera`
 
 - Scroll (offset)
-   ```javascript
-   rt.camera.setPosition(x, y);
-   ```
+    ```javascript
+    rt.camera.setPosition(x, y);
+    ```
 - Zoom (scale)
-   ```javascript
-   rt.camera.setZoom(zoom);
-   ```
+    ```javascript
+    rt.camera.setZoom(zoom);
+    ```
 - Rotate
-   ```javascript
-   rt.camera.setAngle(angle);  // angle in degrees
-   ```
+    ```javascript
+    rt.camera.setAngle(angle);  // angle in degrees
+    ```
 
 ### Other properties
 

@@ -161,6 +161,11 @@ scene.anims.create(config);
         ```javascript
         sprite.anims.setCurrentFrame(frame);
         ```
+- Play in reverse
+    ```javascript
+    sprite.anims.playReverse(key);
+    // sprite.playReverse(key, ignoreIfPlaying, startFrame);
+    ```
 - Time scale
     ```javascript
     sprite.anims.setTimeScale(value);

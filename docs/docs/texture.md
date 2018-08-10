@@ -107,8 +107,15 @@ var hasKey = scene.textures.exists(key);
 
 ### Remove texture
 
+Remove texture stored in texture cache.
+
 ```javascript
 scene.textures.remove(key);
 ```
 
-Remove texture stored in texture cache.
+### Get base64
+
+```javascript
+var s = scene.textures.getBase64(key);  // type= 'image/png', encoderOptions= 0.92
+// var s = scene.textures.getBase64(key, frame, type, encoderOptions);
+```

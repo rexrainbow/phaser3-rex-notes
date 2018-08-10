@@ -11,7 +11,6 @@ class ContainerLite extends Zone {
         }
         super(scene, x, y, width, height);
         this.children = scene.add.group();
-        this.setOrigin(0.5, 0.5); // It should be set in Zone object
         this.type = 'rexContainerLite';
         this.syncChildrenEnable = true;
 

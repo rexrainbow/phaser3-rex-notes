@@ -125,8 +125,9 @@ Default style
     }
 
     tags: {
-
-    }
+        // ...
+    },
+    // resolution: 1
 }
 ```
 

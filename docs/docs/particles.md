@@ -40,7 +40,6 @@ Reference: [load image](loader.md#image)
             ]
         });
         ```
-        
 1. Create a particle emitter
     ```javascript
     var config = {
@@ -236,39 +235,71 @@ emitter.fromJSON(config);
 
 #### Position
 
-- Position
+- Emitter
+    - Position
+        ```javascript
+        emitter.setPosition(x, y);
+        ```
+    - Follow
+        - Start
+            ```javascript
+            emitter.startFollow(target);
+            // emitter.startFollow(target, offsetX, offsetY, trackVisible);
+            ```
+            - `trackVisible` : Whether the emitter's visible state will track the target's visible state.    
+        - Stop
+            ```javascript
+            emitter.stopFollow();
+            ```
+- All emitters
     ```javascript
-    emitter.setPosition(x, y);
+    particles.setPosition(x, y);
     ```
-- Follow
-    - Start
-        ```javascript
-        emitter.startFollow(target);
-        // emitter.startFollow(target, offsetX, offsetY, trackVisible);
-        ```
-        - `trackVisible` : Whether the emitter's visible state will track the target's visible state.    
-    - Stop
-        ```javascript
-        emitter.stopFollow();
-        ```
+    or
+    ```javascript
+    particles.x = x;
+    particles.y = y;
+    ```    
 
-#### Angle
+#### Rotation
 
-```javascript
-emitter.setRadial(bool);   // set true to emit particles in all directions between angle min and max
-emitter.setAngle(value);
-```
+- Emitter
+   ```javascript
+   emitter.setRadial(bool);   // set true to emit particles in all directions between angle min and max
+   emitter.setAngle(value);
+   ```
+- All emitters
+    ```javascript
+    particles.setAngle(angle); // angle in degrees
+    // particles.setRotation(angle); // angle in radians
+    ```
+    or
+    ```javascript
+    particles.angle = angle;
+    // particles.rotation = angle;
+    ``` 
 
 #### Scale
 
-```javascript
-emitter.setScale(value);
-```
-or
-```javascript
-emitter.setScaleX(value);
-emitter.setScaleY(value);
-```
+- Emitter
+    ```javascript
+    emitter.setScale(value);
+    ```
+    or
+    ```javascript
+    emitter.setScaleX(value);
+    emitter.setScaleY(value);
+    ```
+- All emitters
+    ```javascript
+    particles.setScale(value);
+    // particles.setScale(x, y);
+    ```
+    or
+    ```javascript
+    particles.scaleX = scaleX;
+    particles.scaleY = scaleY;
+    ``` 
 
 #### Render
 

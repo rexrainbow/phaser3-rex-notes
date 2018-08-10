@@ -124,7 +124,7 @@ var game = new Phaser.Game(config);
 ## Resize
 
 ```javascript
-game.destroy(width, height);
+game.resize(width, height);
 ```
 
 Also fires game.events `resize` event.
@@ -133,9 +133,12 @@ Also fires game.events `resize` event.
 
 ```javascript
 game.destroy();
+// game.destroy(removeCanvas, noReturn);
 ```
 
-Also fires game.events `destroy` event.
+- Also fires game.events `destroy` event.
+- `removeCanvas` : Set to `true` if you would like the parent canvas element removed from the DOM, or `false` to leave it in place.
+- `noReturn` : If `true` all the core Phaser plugins are destroyed. You cannot create another instance of Phaser on the same web page if you do this.
 
 ## Main loop
 

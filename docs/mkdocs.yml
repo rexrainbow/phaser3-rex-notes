@@ -101,10 +101,15 @@ pages:
         - Line: geom-line.md
         - Point: geom-point.md
 - String:
-    - Format: format.md
-    - Mustache: mustache.md
+    - Format:
+        - Format: format.md
+        - Mustache: mustache.md
+    - Pad: pad.md
+    - Capitalizes first: capitalizes-first.md
+    - Reverse: reverse-string.md
     - LZ string: lzstringplugin.md
     - XOR: xor.md
+    - UUID: uuid.md
 - Storage:
     - Offline:
         - Key-value pairs:

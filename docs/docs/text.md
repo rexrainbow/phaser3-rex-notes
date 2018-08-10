@@ -50,7 +50,8 @@ Default style
         callback: null,
         callbackScope: null,
         useAdvancedWrap: false
-    }
+    },
+    // resolution: 1
 }
 ```
 
