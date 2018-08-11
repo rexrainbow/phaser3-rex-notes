@@ -332,6 +332,62 @@ camera.on('camerazoomstart', camera, zoom, duration, zoomValue);
 camera.on('camerazoomcomplete', camera, zoom);
 ```
 
+#### Filter
+
+1. Create filter
+   ```javascript
+    var config = {
+        game: scene.game,
+        renderer: scene.game.renderer,
+        fragShader: '...'  // GLSL shader
+    };
+    var customPipeline = new Phaser.Renderer.WebGL.Pipelines.TextureTintPipeline(config);
+    var filter = scene.game.renderer.addPipeline(pipeName, customPipeline);
+   ```
+1. Add filter
+    ```javascript
+    camera.setRenderToTexture(filter);
+    ```
+1. Set/change properties of filter
+    - Property with 1 value
+        - Float
+            ```javascript
+            filter.setFloat1(name, value0);
+            ```
+        - Int
+            ```javascript
+            filter.setInt1(name, value0);
+            ```        
+    - Property with 2 values
+        - Float
+            ```javascript
+            filter.setFloat2(name, value0, value1);
+            ```
+        - Int
+            ```javascript
+            filter.setInt2(name, value0, value1);
+            ``` 
+    - Property with 3 value
+        - Float
+            ```javascript
+            filter.setFloat3(name, value0, value1, value2);
+            ```
+        - Int
+            ```javascript
+            filter.setInt3(name, value0, value1, value2);
+            ```        
+    - Property with 4 values
+        - Float
+            ```javascript
+            filter.setFloat4(name, value0, value1, value2, value3);
+            ```
+        - Int
+            ```javascript
+            filter.setInt4(name, value0, value1, value2, value3);
+            ```
+
+WebGL only
+
 ### Set background color
 
 ```javascript
