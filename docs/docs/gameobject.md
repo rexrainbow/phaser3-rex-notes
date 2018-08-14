@@ -150,6 +150,24 @@ var output = gameObject.getBounds(output);      // output: {x, y, width, height}
     gameObject.clearTint();     // equal to `gameObject.setTint(0xffffff)`
     ```
 
+### Blend mode
+
+- Get
+    ```javascript
+    var blendMode = gameObject.blendMode;
+    ```
+- Set
+    ```javascript
+    gameObject.blendMode = blendMode;
+    gameObject.setBlendMode(blendMode);
+    ```
+
+- Under WebGL only the following Blend Modes are available
+    - `'ADD'`, or `Phaser.BlendModes.ADD`, or `1`
+    - `'MULTIPLY'`, or `Phaser.BlendModes.MULTIPLY`, or `2`
+    - `'SCREEN'`, or `Phaser.BlendModes.SCREEN`, or `3`
+- Canvas has more available depending on browser support
+
 ### Size
 
 - Native (un-scaled) size

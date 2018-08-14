@@ -22,6 +22,9 @@ pages:
             - Tile sprite: tilesprite.md
         - Texture: texture.md
     - Text:
+        - Bitmap text:
+           - Static bitmap text: bitmaptext.md
+           - Dynamic bitmap text: dynamicbitmaptext.md
         - Text: text.md
         - BBCode Text: bbcodetext.md
         - Tag Text: tagtext.md
