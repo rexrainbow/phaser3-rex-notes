@@ -49,7 +49,7 @@ Drawing text by texture, built-in game object of phaser.
             - `width` : The width of each character in the font set.
             - `height` : The height of each character in the font set.
             - `chars` : The characters used in the font set, in display order.
-                - [Default characters set](bitmap.md#default-characters-set-of-retro-font)
+                - [Default characters set](bitmaptext.md#default-characters-set-of-retro-font)
             - `charsPerRow` : The number of characters per row in the font set. If not given charsPerRow will be the image width / characterWidth.
         - Spacing :
             - `spacing` : If the characters in the font set have horizontal/vertical spacing between them set the required amount here.
@@ -133,9 +133,10 @@ or
 txt.align = align;
 ```
 
-- `0` : Left aligned (default)
-- `1` : Middle aligned
-- `2` : Right aligned
+- `align` :
+    - `0` : Left aligned (default)
+    - `1` : Middle aligned
+    - `2` : Right aligned
 
 ### Set letter spacing
 
