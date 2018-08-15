@@ -502,6 +502,27 @@
           
           
 
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-1" type="checkbox" id="nav-4-3-1" checked>
+    
+    <label class="md-nav__link" for="nav-4-3-1">
+      Canvas text
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-1">
+        Canvas text
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
 
   <li class="md-nav__item">
     <a href="../text/index.html" title="Text" class="md-nav__link">
@@ -571,13 +592,6 @@
   
     <nav class="md-nav">
       <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#snapshot" title="Snapshot" class="md-nav__link">
-    Snapshot
-  </a>
-  
-</li>
         
           <li class="md-nav__item">
   <a href="#install-plugin" title="Install plugin" class="md-nav__link">
@@ -677,6 +691,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#get-text" title="Get text" class="md-nav__link">
+    Get text
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -696,6 +717,78 @@
     
   </li>
 
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-2" type="checkbox" id="nav-4-3-2">
+    
+    <label class="md-nav__link" for="nav-4-3-2">
+      Bitmap text
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-2">
+        Bitmap text
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../bitmaptext/index.html" title="Static bitmap text" class="md-nav__link">
+      Static bitmap text
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../dynamicbitmaptext/index.html" title="Dynamic bitmap text" class="md-nav__link">
+      Dynamic bitmap text
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-3" type="checkbox" id="nav-4-3-3">
+    
+    <label class="md-nav__link" for="nav-4-3-3">
+      Behaviors
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-3">
+        Behaviors
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
         
           
           
@@ -718,6 +811,11 @@
     <a href="../textpage/index.html" title="Page" class="md-nav__link">
       Page
     </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
         
@@ -2248,13 +2346,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#snapshot" title="Snapshot" class="md-nav__link">
-    Snapshot
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#install-plugin" title="Install plugin" class="md-nav__link">
     Install plugin
   </a>
@@ -2352,6 +2443,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#get-text" title="Get text" class="md-nav__link">
+    Get text
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2392,24 +2490,6 @@
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/tagtext.js">Class</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/tagtext">Sample code</a></p>
-<h3 id="snapshot">Snapshot<a class="headerlink" href="#snapshot" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tags</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="nx">name0</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;red&#39;</span><span class="p">,</span>
-        <span class="nx">fontStyle</span><span class="o">:</span> <span class="s1">&#39;bold italic&#39;</span>
-    <span class="p">},</span>
-    <span class="nx">name1</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;none&#39;</span><span class="p">,</span>
-        <span class="nx">stroke</span><span class="o">:</span> <span class="p">{</span>
-            <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;yellow&#39;</span><span class="p">,</span>
-            <span class="nx">thinkness</span><span class="o">:</span> <span class="mi">1</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-<span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexTagText</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="s1">&#39;&lt;style=&quot;name0&quot;&gt;h&lt;/style&gt;ello&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">tags</span><span class="o">:</span><span class="nx">tags</span><span class="p">});</span>
-<span class="nx">txt</span><span class="p">.</span><span class="nx">setText</span><span class="p">(</span><span class="s1">&#39;&lt;style=&quot;name1&quot;&gt;wor&lt;/style&gt;ld&#39;</span><span class="p">);</span>
-</pre></div>
-
 <h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
 <p>Install plugin in <a href="../game/index.html#configuration">configuration of game</a></p>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
@@ -2429,8 +2509,16 @@
 </pre></div>
 
 <h3 id="add-text-object">Add text object<a class="headerlink" href="#add-text-object" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexTagText</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="s1">&#39;&lt;style=&quot;name0&quot;&gt;h&lt;/style&gt;ello&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">tags</span><span class="o">:</span><span class="nx">tags</span><span class="p">});</span>
-<span class="c1">// var txt = scene.add.rexTagText(x, y, &#39;&lt;style=&quot;name0&quot;&gt;h&lt;/style&gt;ello&#39;, { fontFamily: &#39;Arial&#39;, fontSize: 64, color: &#39;#00ff00&#39;, tags:tags });</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tags</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">tag0</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;red&#39;</span>
+    <span class="p">},</span>
+    <span class="nx">tag1</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;blue&#39;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexTagText</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="s1">&#39;&lt;style=&quot;tag0&quot;&gt;h&lt;/style&gt;ello&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">tags</span><span class="o">:</span><span class="nx">tags</span><span class="p">});</span>
+<span class="c1">// var txt = scene.add.rexTagText(x, y, &#39;&lt;style=&quot;tag0&quot;&gt;h&lt;/style&gt;ello&#39;, { fontFamily: &#39;Arial&#39;, fontSize: 64, color: &#39;#00ff00&#39;, tags:tags });</span>
 </pre></div>
 
 <p>Properties of a tag</p>
@@ -2490,7 +2578,12 @@
     <span class="p">}</span>
 
     <span class="nx">tags</span><span class="o">:</span> <span class="p">{</span>
-        <span class="c1">// ...</span>
+        <span class="c1">//tag0: {</span>
+        <span class="c1">//  color: &#39;red&#39;</span>
+        <span class="c1">//},</span>
+        <span class="c1">//tag1: {</span>
+        <span class="c1">//  color: &#39;blue&#39;</span>
+        <span class="c1">//}</span>
     <span class="p">},</span>
     <span class="c1">// resolution: 1</span>
 <span class="p">}</span>
@@ -2535,7 +2628,7 @@
 <span class="p">}</span>
 </pre></div></li>
 <li>Create instance
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyText</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="s1">&#39;&lt;style=&quot;name0&quot;&gt;h&lt;/style&gt;ello&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">tags</span><span class="o">:</span><span class="nx">tags</span><span class="p">});</span>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyText</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="s1">&#39;&lt;style=&quot;tag0&quot;&gt;h&lt;/style&gt;ello&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">tags</span><span class="o">:</span><span class="nx">tags</span><span class="p">});</span>
 </pre></div></li>
 </ul>
 <h3 id="word-wrap">Word wrap<a class="headerlink" href="#word-wrap" title="Permanent link">&para;</a></h3>
@@ -2558,7 +2651,10 @@
 
 <h3 id="set-text">Set text<a class="headerlink" href="#set-text" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">setText</span><span class="p">(</span><span class="s1">&#39;&lt;style=&quot;name1&quot;&gt;wor&lt;/style&gt;ld&#39;</span><span class="p">);</span>
-<span class="c1">// var curContent = txt.text;</span>
+</pre></div>
+
+<p>or</p>
+<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="s1">&#39;&lt;style=&quot;name1&quot;&gt;wor&lt;/style&gt;ld&#39;</span><span class="p">;</span>
 </pre></div>
 
 <h3 id="set-style">Set style<a class="headerlink" href="#set-style" title="Permanent link">&para;</a></h3>
@@ -2623,6 +2719,9 @@
 <ul>
 <li><code>&lt;style='color:red;size:30px'&gt;Some text&lt;/style&gt;</code></li>
 </ul>
+<h3 id="get-text">Get text<a class="headerlink" href="#get-text" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">curContent</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">text</span><span class="p">;</span>
+</pre></div>
                 
                   
                 
@@ -2672,13 +2771,13 @@
           </a>
         
         
-          <a href="../texttyping/index.html" title="Typing" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../bitmaptext/index.html" title="Static bitmap text" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Typing
+                Static bitmap text
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

@@ -416,6 +416,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#blend-mode" title="Blend mode" class="md-nav__link">
+    Blend mode
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#size" title="Size" class="md-nav__link">
     Size
   </a>
@@ -643,6 +650,25 @@
           
 
 
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-1" type="checkbox" id="nav-4-3-1">
+    
+    <label class="md-nav__link" for="nav-4-3-1">
+      Canvas text
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-1">
+        Canvas text
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
   <li class="md-nav__item">
     <a href="../text/index.html" title="Text" class="md-nav__link">
       Text
@@ -674,6 +700,78 @@
   </li>
 
         
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-2" type="checkbox" id="nav-4-3-2">
+    
+    <label class="md-nav__link" for="nav-4-3-2">
+      Bitmap text
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-2">
+        Bitmap text
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../bitmaptext/index.html" title="Static bitmap text" class="md-nav__link">
+      Static bitmap text
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../dynamicbitmaptext/index.html" title="Dynamic bitmap text" class="md-nav__link">
+      Dynamic bitmap text
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-3" type="checkbox" id="nav-4-3-3">
+    
+    <label class="md-nav__link" for="nav-4-3-3">
+      Behaviors
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-3">
+        Behaviors
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
           
           
           
@@ -695,6 +793,11 @@
     <a href="../textpage/index.html" title="Page" class="md-nav__link">
       Page
     </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
         
@@ -2281,6 +2384,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#blend-mode" title="Blend mode" class="md-nav__link">
+    Blend mode
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#size" title="Size" class="md-nav__link">
     Size
   </a>
@@ -2467,6 +2577,27 @@
 <span class="nx">gameObject</span><span class="p">.</span><span class="nx">setTintFill</span><span class="p">(</span><span class="nx">colorTopLeft</span><span class="p">,</span> <span class="nx">colorTopRight</span><span class="p">,</span> <span class="nx">colorBottomLeft</span><span class="p">,</span> <span class="nx">colorBottomRight</span><span class="p">);</span>    
 <span class="nx">gameObject</span><span class="p">.</span><span class="nx">clearTint</span><span class="p">();</span>     <span class="c1">// equal to `gameObject.setTint(0xffffff)`</span>
 </pre></div></li>
+</ul>
+<h3 id="blend-mode">Blend mode<a class="headerlink" href="#blend-mode" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">blendMode</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">blendMode</span><span class="p">;</span>
+</pre></div></li>
+<li>
+<p>Set
+    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">blendMode</span> <span class="o">=</span> <span class="nx">blendMode</span><span class="p">;</span>
+<span class="nx">gameObject</span><span class="p">.</span><span class="nx">setBlendMode</span><span class="p">(</span><span class="nx">blendMode</span><span class="p">);</span>
+</pre></div></p>
+</li>
+<li>
+<p>Under WebGL only the following Blend Modes are available</p>
+<ul>
+<li><code>'ADD'</code>, or <code>Phaser.BlendModes.ADD</code>, or <code>1</code></li>
+<li><code>'MULTIPLY'</code>, or <code>Phaser.BlendModes.MULTIPLY</code>, or <code>2</code></li>
+<li><code>'SCREEN'</code>, or <code>Phaser.BlendModes.SCREEN</code>, or <code>3</code></li>
+</ul>
+</li>
+<li>Canvas has more available depending on browser support</li>
 </ul>
 <h3 id="size">Size<a class="headerlink" href="#size" title="Permanent link">&para;</a></h3>
 <ul>

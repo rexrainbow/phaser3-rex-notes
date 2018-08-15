@@ -8,11 +8,52 @@ Drawing text by texture, built-in game object of phaser.
 
 ### Load bitmap font
 
-```javascript
-scene.load.bitmapFont(key, textureURL, xmlURL);
-```
-
-Reference: [load bitmap font](loader.md#bitmap-font)
+- Load bitmap font from texture and xml configuration
+    ```javascript
+    scene.load.bitmapFont(key, textureURL, xmlURL);
+    ```
+    Reference: [load bitmap font](loader.md#bitmap-font)
+- Load retro bitmap font from texture and JSON configuration
+    1. Load texture in *preload* stage
+        ```javascript
+        scene.load.image(key, url);
+        ```
+        Reference: [load image](loader.md#image)
+    1. Add retro bitmap font
+        ```javascript
+        var config = {
+            // image
+            image: '',
+            offset: {
+                x: 0,
+                y: 0
+            },
+            // characters
+            width: 32,
+            height: 32,
+            chars: '',
+            charsPerRow: 10,
+            // spacing
+            spacing: {
+                x: 0,
+                y: 0
+            },
+            lineSpacing: 0
+        }
+        scene.cache.bitmapFont.add(key, Phaser.GameObjects.RetroFont.Parse(scene, config));
+        ```
+        - Image :
+            - `image` : The key of the image containing the font.
+            - `offset` : If the font set doesn't start at the top left of the given image, specify the X/Y coordinate offset here.
+        - Characters :
+            - `width` : The width of each character in the font set.
+            - `height` : The height of each character in the font set.
+            - `chars` : The characters used in the font set, in display order.
+                - [Default characters set](bitmap.md#default-characters-set-of-retro-font)
+            - `charsPerRow` : The number of characters per row in the font set. If not given charsPerRow will be the image width / characterWidth.
+        - Spacing :
+            - `spacing` : If the characters in the font set have horizontal/vertical spacing between them set the required amount here.
+            - `lineSpacing` : The amount of vertical space to add to the line height of the font.
 
 ### Add bitmap text object
 
@@ -168,3 +209,52 @@ var bounds = txt.setFixedSize(width, height);
 ### Other properties
 
 See [game object](gameobject.md)
+
+## Appendix
+
+### Default characters set of retro font
+
+- `Phaser.GameObjects.RetroFont.TEXT_SET1` :
+    ```
+    ' !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~'
+    ```
+- `Phaser.GameObjects.RetroFont.TEXT_SET2` :
+    ```
+    ' !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    ```
+- `Phaser.GameObjects.RetroFont.TEXT_SET3` :
+    ```
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 '
+    ```
+- `Phaser.GameObjects.RetroFont.TEXT_SET4` :
+    ```
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789'
+    ```
+- `Phaser.GameObjects.RetroFont.TEXT_SET5` :
+    ```
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZ.,/() \'!?-*:0123456789'
+    ```
+- `Phaser.GameObjects.RetroFont.TEXT_SET6` :
+    ```
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZ!?:;0123456789"(),-.\' '
+    ```
+- `Phaser.GameObjects.RetroFont.TEXT_SET7` :
+    ```
+    'AGMSY+:4BHNTZ!;5CIOU.?06DJPV,(17EKQW")28FLRX-\'39'
+    ```
+- `Phaser.GameObjects.RetroFont.TEXT_SET8` :
+    ```
+    '0123456789 .ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    ```
+- `Phaser.GameObjects.RetroFont.TEXT_SET9` :
+    ```
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZ()-0123456789.:,\'"?!'
+    ```
+- `Phaser.GameObjects.RetroFont.TEXT_SET10` :
+    ```
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    ```
+- `Phaser.GameObjects.RetroFont.TEXT_SET11` :
+    ```
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZ.,"-+!?()\':;0123456789'
+    ```

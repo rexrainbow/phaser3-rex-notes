@@ -6,13 +6,6 @@ Drawing text on canvas, built-in game object of phaser.
 
 ## Usage
 
-### Snapshot
-
-```javascript
-var txt = scene.add.text(x, y, 'hello');
-txt.setText('world');
-```
-
 ### Add text object
 
 ```javascript

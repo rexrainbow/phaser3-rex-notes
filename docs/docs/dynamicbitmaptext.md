@@ -8,11 +8,7 @@ Drawing text by texture with a callback for each character triggered at every ti
 
 ### Load bitmap font
 
-```javascript
-scene.load.bitmapFont(key, textureURL, xmlURL);
-```
-
-Reference: [load bitmap font](loader.md#bitmap-font)
+Reference: [load bitmap font](bitmaptext.md##load-bitmap-font)
 
 ### Add bitmap text object
 
@@ -92,4 +88,4 @@ txt.text = '...';
 
 ### Other properties
 
-This dynamic bitmap text is extended from [bitmap text](bitmaptext.md)
+This dynamic bitmap text class is extended from [bitmap text](bitmaptext.md)

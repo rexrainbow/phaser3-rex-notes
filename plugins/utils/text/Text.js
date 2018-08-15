@@ -67,7 +67,7 @@ var Text = new Phaser.Class({
 
             this.autoRound = true;
 
-            this.text = '';
+            this._text = '';
 
             this.padding = {
                 left: 0,
@@ -130,6 +130,18 @@ var Text = new Phaser.Class({
             }
         },
 
+    text: {
+
+        set: function (value) {
+            this.setText(value);
+        },
+
+        get: function () {
+            return this._text;
+        }
+
+    },
+
     initRTL: function () {
         if (!this.style.rtl) {
             return;
@@ -163,8 +175,8 @@ var Text = new Phaser.Class({
             value = value.join('\n');
         }
 
-        if (value !== this.text) {
-            this.text = value.toString();
+        if (value !== this._text) {
+            this._text = value.toString();
 
             this.updateText(true);
         }
@@ -313,7 +325,7 @@ var Text = new Phaser.Class({
         var style = this.style;
         if (runWrap) {
             canvasText.updatePensManager(
-                this.text,
+                this._text,
                 style.wrapMode,
                 style.wrapWidth,
                 style.lineHeight
@@ -388,7 +400,7 @@ var Text = new Phaser.Class({
 
         var data = {
             autoRound: this.autoRound,
-            text: this.text,
+            text: this._text,
             style: this.style.toJSON(),
             resolution: this.resolution,
             padding: {

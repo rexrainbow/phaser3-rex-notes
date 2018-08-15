@@ -22,14 +22,16 @@ pages:
             - Tile sprite: tilesprite.md
         - Texture: texture.md
     - Text:
+        - Canvas text:
+            - Text: text.md
+            - BBCode Text: bbcodetext.md
+            - Tag Text: tagtext.md
         - Bitmap text:
-           - Static bitmap text: bitmaptext.md
-           - Dynamic bitmap text: dynamicbitmaptext.md
-        - Text: text.md
-        - BBCode Text: bbcodetext.md
-        - Tag Text: tagtext.md
-        - Typing: texttyping.md    
-        - Page: textpage.md
+            - Static bitmap text: bitmaptext.md
+            - Dynamic bitmap text: dynamicbitmaptext.md
+        - Behaviors:
+            - Typing: texttyping.md    
+            - Page: textpage.md
     - Graphics:
         - Graphics: graphics.md
         - Canvas: canvas.md

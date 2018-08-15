@@ -16,26 +16,6 @@ Displays text with multi-color, font face, or font size with tags.
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/tagtext)
 
-### Snapshot
-
-```javascript
-var tags = {
-    name0: {
-        color: 'red',
-        fontStyle: 'bold italic'
-    },
-    name1: {
-        color: 'none',
-        stroke: {
-            color: 'yellow',
-            thinkness: 1
-        }
-    }
-}
-var txt = scene.add.rexTagText(x, y, '<style="name0">h</style>ello', {tags:tags});
-txt.setText('<style="name1">wor</style>ld');
-```
-
 ### Install plugin
 
 Install plugin in [configuration of game](game.md#configuration)
@@ -60,8 +40,16 @@ var game = new Phaser.Game(config);
 ### Add text object
 
 ```javascript
-var txt = scene.add.rexTagText(x, y, '<style="name0">h</style>ello', {tags:tags});
-// var txt = scene.add.rexTagText(x, y, '<style="name0">h</style>ello', { fontFamily: 'Arial', fontSize: 64, color: '#00ff00', tags:tags });
+var tags = {
+    tag0: {
+      color: 'red'
+    },
+    tag1: {
+      color: 'blue'
+    }
+};
+var txt = scene.add.rexTagText(x, y, '<style="tag0">h</style>ello', {tags:tags});
+// var txt = scene.add.rexTagText(x, y, '<style="tag0">h</style>ello', { fontFamily: 'Arial', fontSize: 64, color: '#00ff00', tags:tags });
 ```
 
 Properties of a tag
@@ -125,7 +113,12 @@ Default style
     }
 
     tags: {
-        // ...
+        //tag0: {
+        //  color: 'red'
+        //},
+        //tag1: {
+        //  color: 'blue'
+        //}
     },
     // resolution: 1
 }
@@ -174,7 +167,7 @@ var txt = scene.make.rexTagText({
     ```
 - Create instance
     ```javascript
-    var txt = new MyText(scene, x, y, '<style="name0">h</style>ello', {tags:tags});
+    var txt = new MyText(scene, x, y, '<style="tag0">h</style>ello', {tags:tags});
     ```
 
 ### Word wrap
@@ -202,7 +195,12 @@ var txt = scene.make.text({
 
 ```javascript
 txt.setText('<style="name1">wor</style>ld');
-// var curContent = txt.text;
+```
+
+or
+
+```javascript
+txt.text = '<style="name1">wor</style>ld';
 ```
 
 ### Set style
@@ -283,3 +281,9 @@ Define style inline text.
 Or mix them
 
 - `<style='color:red;size:30px'>Some text</style>`
+
+### Get text
+
+```javascript
+var curContent = txt.text;
+```

@@ -499,6 +499,25 @@
           
 
 
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-1" type="checkbox" id="nav-4-3-1">
+    
+    <label class="md-nav__link" for="nav-4-3-1">
+      Canvas text
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-1">
+        Canvas text
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
   <li class="md-nav__item">
     <a href="../text/index.html" title="Text" class="md-nav__link">
       Text
@@ -530,6 +549,78 @@
   </li>
 
         
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-2" type="checkbox" id="nav-4-3-2">
+    
+    <label class="md-nav__link" for="nav-4-3-2">
+      Bitmap text
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-2">
+        Bitmap text
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../bitmaptext/index.html" title="Static bitmap text" class="md-nav__link">
+      Static bitmap text
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../dynamicbitmaptext/index.html" title="Dynamic bitmap text" class="md-nav__link">
+      Dynamic bitmap text
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-3" type="checkbox" id="nav-4-3-3">
+    
+    <label class="md-nav__link" for="nav-4-3-3">
+      Behaviors
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-3-3">
+        Behaviors
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
           
           
           
@@ -551,6 +642,11 @@
     <a href="../textpage/index.html" title="Page" class="md-nav__link">
       Page
     </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
         
@@ -1748,6 +1844,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#filter" title="Filter" class="md-nav__link">
+    Filter
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2554,6 +2657,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#filter" title="Filter" class="md-nav__link">
+    Filter
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2914,6 +3024,61 @@ An invisible camera will not render anything and will skip input tests.</p>
 <div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;camerazoomcomplete&#39;</span><span class="p">,</span> <span class="nx">camera</span><span class="p">,</span> <span class="nx">zoom</span><span class="p">);</span>
 </pre></div>
 
+<h4 id="filter">Filter<a class="headerlink" href="#filter" title="Permanent link">&para;</a></h4>
+<ol>
+<li>Create filter
+   <div class="codehilite"><pre><span></span> <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+     <span class="nx">game</span><span class="o">:</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">game</span><span class="p">,</span>
+     <span class="nx">renderer</span><span class="o">:</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">renderer</span><span class="p">,</span>
+     <span class="nx">fragShader</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span>  <span class="c1">// GLSL shader</span>
+ <span class="p">};</span>
+ <span class="kd">var</span> <span class="nx">customPipeline</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Renderer</span><span class="p">.</span><span class="nx">WebGL</span><span class="p">.</span><span class="nx">Pipelines</span><span class="p">.</span><span class="nx">TextureTintPipeline</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+ <span class="kd">var</span> <span class="nx">filter</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">renderer</span><span class="p">.</span><span class="nx">addPipeline</span><span class="p">(</span><span class="nx">pipeName</span><span class="p">,</span> <span class="nx">customPipeline</span><span class="p">);</span>
+</pre></div></li>
+<li>Add filter
+    <div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">setRenderToTexture</span><span class="p">(</span><span class="nx">filter</span><span class="p">);</span>
+</pre></div></li>
+<li>Set/change properties of filter<ul>
+<li>Property with 1 value<ul>
+<li>Float
+    <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat1</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">);</span>
+</pre></div></li>
+<li>Int
+    <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setInt1</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+</li>
+<li>Property with 2 values<ul>
+<li>Float
+    <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat2</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">);</span>
+</pre></div></li>
+<li>Int
+    <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setInt2</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+</li>
+<li>Property with 3 value<ul>
+<li>Float
+    <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat3</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">);</span>
+</pre></div></li>
+<li>Int
+    <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setInt3</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+</li>
+<li>Property with 4 values<ul>
+<li>Float
+    <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat4</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">,</span> <span class="nx">value3</span><span class="p">);</span>
+</pre></div></li>
+<li>Int
+    <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setInt4</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">,</span> <span class="nx">value3</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p>WebGL only</p>
 <h3 id="set-background-color">Set background color<a class="headerlink" href="#set-background-color" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">setBackgroundColor</span><span class="p">(</span><span class="nx">color</span><span class="p">);</span>
 </pre></div>

@@ -28,13 +28,6 @@ Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
 - underline: `[u]text[/u]`
     - underline with color setting: `[u=red]text[/u]`
 
-### Snapshot
-
-```javascript
-var txt = scene.add.rexBBCodeText(x, y, '[b]h[/b]ello');
-txt.setText('[i]wor[/i]ld');
-```
-
 ### Install plugin
 
 Install plugin in [configuration of game](game.md#configuration)
@@ -169,7 +162,12 @@ var txt = scene.make.text({
 
 ```javascript
 txt.setText('[b]h[/b]ello');
-// var curContent = txt.text;
+```
+
+or
+
+```javascript
+txt.text = '[b]h[/b]ello';
 ```
 
 ### Set style
@@ -235,4 +233,10 @@ txt.setWrapWidth(width);
 
 ```javascript
 txt.setFixedSize(width, height);
+```
+
+### Get text
+
+```javascript
+var curContent = txt.text;
 ```

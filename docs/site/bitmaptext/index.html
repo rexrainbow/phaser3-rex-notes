@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/localstorage/index.html">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/bitmaptext/index.html">
       
       
         <meta name="author" content="rexrainbow">
@@ -36,7 +36,7 @@
     
     
       
-        <title>LocalStorage - Notes of Phaser 3</title>
+        <title>Static bitmap text - Notes of Phaser 3</title>
       
     
     
@@ -96,7 +96,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                LocalStorage
+                Static bitmap text
               </span>
             
           
@@ -292,10 +292,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
     
     <label class="md-nav__link" for="nav-4">
       Game object
@@ -479,10 +481,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3" type="checkbox" id="nav-4-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3" type="checkbox" id="nav-4-3" checked>
     
     <label class="md-nav__link" for="nav-4-3">
       Text
@@ -558,10 +562,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-2" type="checkbox" id="nav-4-3-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-2" type="checkbox" id="nav-4-3-2" checked>
     
     <label class="md-nav__link" for="nav-4-3-2">
       Bitmap text
@@ -577,11 +583,152 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../bitmaptext/index.html" title="Static bitmap text" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Static bitmap text
+      </label>
+    
+    <a href="index.html" title="Static bitmap text" class="md-nav__link md-nav__link--active">
       Static bitmap text
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-bitmap-font" title="Load bitmap font" class="md-nav__link">
+    Load bitmap font
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-bitmap-text-object" title="Add bitmap text object" class="md-nav__link">
+    Add bitmap text object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-class" title="Custom class" class="md-nav__link">
+    Custom class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-text" title="Set text" class="md-nav__link">
+    Set text
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-align" title="Set align" class="md-nav__link">
+    Set align
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-letter-spacing" title="Set letter spacing" class="md-nav__link">
+    Set letter spacing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-font-size" title="Set font size" class="md-nav__link">
+    Set font size
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-font" title="Set font" class="md-nav__link">
+    Set font
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-bound" title="Get bound" class="md-nav__link">
+    Get bound
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-properties" title="Other properties" class="md-nav__link">
+    Other properties
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appendix" title="Appendix" class="md-nav__link">
+    Appendix
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#default-characters-set-of-retro-font" title="Default characters set of retro font" class="md-nav__link">
+    Default characters set of retro font
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+        <li class="md-nav__item">
+          <a href="#__comments" title="Comments" class="md-nav__link md-nav__link--active">
+            Comments
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -1960,12 +2107,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-14" type="checkbox" id="nav-14" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-14" type="checkbox" id="nav-14">
     
     <label class="md-nav__link" for="nav-14">
       Storage
@@ -1981,12 +2126,10 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-14-1" type="checkbox" id="nav-14-1" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-14-1" type="checkbox" id="nav-14-1">
     
     <label class="md-nav__link" for="nav-14-1">
       Offline
@@ -2002,12 +2145,10 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-14-1-1" type="checkbox" id="nav-14-1-1" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-14-1-1" type="checkbox" id="nav-14-1-1">
     
     <label class="md-nav__link" for="nav-14-1-1">
       Key-value pairs
@@ -2023,83 +2164,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="toc">
-        LocalStorage
-      </label>
-    
-    <a href="index.html" title="LocalStorage" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../localstorage/index.html" title="LocalStorage" class="md-nav__link">
       LocalStorage
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#save-data" title="Save data" class="md-nav__link">
-    Save data
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#read-data" title="Read data" class="md-nav__link">
-    Read data
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#remove-data" title="Remove data" class="md-nav__link">
-    Remove data
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-        <li class="md-nav__item">
-          <a href="#__comments" title="Comments" class="md-nav__link md-nav__link--active">
-            Comments
-          </a>
-        </li>
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -2248,22 +2317,91 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#save-data" title="Save data" class="md-nav__link">
-    Save data
+  <a href="#load-bitmap-font" title="Load bitmap font" class="md-nav__link">
+    Load bitmap font
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#read-data" title="Read data" class="md-nav__link">
-    Read data
+  <a href="#add-bitmap-text-object" title="Add bitmap text object" class="md-nav__link">
+    Add bitmap text object
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#remove-data" title="Remove data" class="md-nav__link">
-    Remove data
+  <a href="#custom-class" title="Custom class" class="md-nav__link">
+    Custom class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-text" title="Set text" class="md-nav__link">
+    Set text
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-align" title="Set align" class="md-nav__link">
+    Set align
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-letter-spacing" title="Set letter spacing" class="md-nav__link">
+    Set letter spacing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-font-size" title="Set font size" class="md-nav__link">
+    Set font size
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-font" title="Set font" class="md-nav__link">
+    Set font
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-bound" title="Get bound" class="md-nav__link">
+    Get bound
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-properties" title="Other properties" class="md-nav__link">
+    Other properties
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appendix" title="Appendix" class="md-nav__link">
+    Appendix
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#default-characters-set-of-retro-font" title="Default characters set of retro font" class="md-nav__link">
+    Default characters set of retro font
   </a>
   
 </li>
@@ -2294,27 +2432,237 @@
               
                 
                 
-                  <h1>LocalStorage</h1>
+                  <h1>Static bitmap text</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Store small data in key-value pairs locally within the user's browser.</p>
+<p>Drawing text by texture, built-in game object of phaser.</p>
 <ul>
-<li>Author: Built-in javascript function</li>
+<li>Author: Richard Davey</li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage">Reference</a></p>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/localstorage">Sample code</a></p>
-<h3 id="save-data">Save data<a class="headerlink" href="#save-data" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">setItem</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+<h3 id="load-bitmap-font">Load bitmap font<a class="headerlink" href="#load-bitmap-font" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Load bitmap font from texture and xml configuration
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">bitmapFont</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">textureURL</span><span class="p">,</span> <span class="nx">xmlURL</span><span class="p">);</span>
+</pre></div>
+    Reference: <a href="../loader/index.html#bitmap-font">load bitmap font</a></li>
+<li>Load retro bitmap font from texture and JSON configuration<ol>
+<li>Load texture in <em>preload</em> stage
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">image</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
+</pre></div>
+    Reference: <a href="../loader/index.html#image">load image</a></li>
+<li>Add retro bitmap font
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// image</span>
+    <span class="nx">image</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="nx">offset</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span>
+    <span class="p">},</span>
+    <span class="c1">// characters</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="mi">32</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="mi">32</span><span class="p">,</span>
+    <span class="nx">chars</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="nx">charsPerRow</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="c1">// spacing</span>
+    <span class="nx">spacing</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span>
+    <span class="p">},</span>
+    <span class="nx">lineSpacing</span><span class="o">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">bitmapFont</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">GameObjects</span><span class="p">.</span><span class="nx">RetroFont</span><span class="p">.</span><span class="nx">Parse</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">));</span>
+</pre></div><ul>
+<li>Image :<ul>
+<li><code>image</code> : The key of the image containing the font.</li>
+<li><code>offset</code> : If the font set doesn't start at the top left of the given image, specify the X/Y coordinate offset here.</li>
+</ul>
+</li>
+<li>Characters :<ul>
+<li><code>width</code> : The width of each character in the font set.</li>
+<li><code>height</code> : The height of each character in the font set.</li>
+<li><code>chars</code> : The characters used in the font set, in display order.<ul>
+<li><a href="bitmap.md#default-characters-set-of-retro-font">Default characters set</a></li>
+</ul>
+</li>
+<li><code>charsPerRow</code> : The number of characters per row in the font set. If not given charsPerRow will be the image width / characterWidth.</li>
+</ul>
+</li>
+<li>Spacing :<ul>
+<li><code>spacing</code> : If the characters in the font set have horizontal/vertical spacing between them set the required amount here.</li>
+<li><code>lineSpacing</code> : The amount of vertical space to add to the line height of the font.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="add-bitmap-text-object">Add bitmap text object<a class="headerlink" href="#add-bitmap-text-object" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">bitmapText</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">text</span><span class="p">);</span>
+<span class="c1">// var txt = scene.bitmapText(x, y, key, text, size, align);</span>
 </pre></div>
 
-<h3 id="read-data">Read data<a class="headerlink" href="#read-data" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">localStorage</span><span class="p">.</span><span class="nx">getItem</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+<ul>
+<li><code>size</code> : The size of the font</li>
+<li><code>align</code> : The alignment of the text in a <em>multi-line</em> BitmapText object.<ul>
+<li><code>0</code> : Left aligned (default)</li>
+<li><code>1</code> : Middle aligned</li>
+<li><code>2</code> : Right aligned</li>
+</ul>
+</li>
+</ul>
+<p>Add text from JSON</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">bitmapText</span><span class="p">({</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;Text\nGame Object\nCreated from config&#39;</span><span class="p">,</span>
+    <span class="nx">font</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="nx">size</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">align</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">add</span><span class="o">:</span> <span class="kc">true</span>
+<span class="p">});</span>
 </pre></div>
 
-<h3 id="remove-data">Remove data<a class="headerlink" href="#remove-data" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">localStorage</span><span class="p">.</span><span class="nx">removeItem</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+<h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Define class
+    <div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">MyText</span> <span class="kr">extends</span> <span class="nx">BitmapText</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">text</span><span class="p">,</span> <span class="nx">size</span><span class="p">,</span> <span class="nx">align</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">text</span><span class="p">,</span> <span class="nx">size</span><span class="p">,</span> <span class="nx">align</span><span class="p">);</span>
+        <span class="c1">// ...</span>
+        <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div></li>
+<li>Create instance
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyText</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">text</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h3 id="set-text">Set text<a class="headerlink" href="#set-text" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">setText</span><span class="p">(</span><span class="s1">&#39;...&#39;</span><span class="p">);</span>
 </pre></div>
+
+<p>or</p>
+<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="s1">&#39;...&#39;</span><span class="p">;</span>
+</pre></div>
+
+<h3 id="set-align">Set align<a class="headerlink" href="#set-align" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Left aligned
+    <div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">setLeftAlign</span><span class="p">();</span>
+</pre></div></li>
+<li>Middle aligned
+    <div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">setCenterAlign</span><span class="p">();</span>
+</pre></div></li>
+<li>Right aligned
+    <div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">setRightAlign</span><span class="p">();</span>
+</pre></div></li>
+</ul>
+<p>or</p>
+<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">align</span> <span class="o">=</span> <span class="nx">align</span><span class="p">;</span>
+</pre></div>
+
+<ul>
+<li><code>0</code> : Left aligned (default)</li>
+<li><code>1</code> : Middle aligned</li>
+<li><code>2</code> : Right aligned</li>
+</ul>
+<h3 id="set-letter-spacing">Set letter spacing<a class="headerlink" href="#set-letter-spacing" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">setLetterSpacing</span><span class="p">(</span><span class="nx">spacing</span><span class="p">);</span>
+</pre></div>
+
+<p>or</p>
+<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">letterSpacing</span> <span class="o">=</span> <span class="nx">spacing</span><span class="p">;</span>
+</pre></div>
+
+<p>Can be a positive value to increase the space, or negative to reduce it.</p>
+<h3 id="set-font-size">Set font size<a class="headerlink" href="#set-font-size" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">setFontSize</span><span class="p">(</span><span class="nx">size</span><span class="p">);</span>
+</pre></div>
+
+<p>or</p>
+<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">fontSize</span> <span class="o">=</span> <span class="nx">size</span><span class="p">;</span>
+</pre></div>
+
+<h3 id="set-font">Set font<a class="headerlink" href="#set-font" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">setFont</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+<span class="c1">// txt.setFont(key, size, align);</span>
+</pre></div>
+
+<h3 id="get-bound">Get bound<a class="headerlink" href="#get-bound" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">width</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">height</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+</pre></div>
+
+<p>or</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bounds</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">setFixedSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+<span class="c1">// bounds = {</span>
+<span class="c1">//     local: {</span>
+<span class="c1">//         x: 0,</span>
+<span class="c1">//         y: 0,</span>
+<span class="c1">//         width: 0,</span>
+<span class="c1">//         height: 0</span>
+<span class="c1">//     },</span>
+<span class="c1">//     global: {</span>
+<span class="c1">//         x: 0,</span>
+<span class="c1">//         y: 0,</span>
+<span class="c1">//         width: 0,</span>
+<span class="c1">//         height: 0</span>
+<span class="c1">//     },</span>
+<span class="c1">//     lines: {</span>
+<span class="c1">//         shortest: 0,</span>
+<span class="c1">//         longest: 0,</span>
+<span class="c1">//         lengths: null</span>
+<span class="c1">//     }</span>
+<span class="c1">// };</span>
+</pre></div>
+
+<ul>
+<li><code>local</code> : The BitmapText based on fontSize and 0x0 coords</li>
+<li><code>global</code> : The BitmapText, taking into account scale and world position</li>
+<li><code>lines</code> : The BitmapText line data</li>
+</ul>
+<h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
+<p>See <a href="../gameobject/index.html">game object</a></p>
+<h2 id="appendix">Appendix<a class="headerlink" href="#appendix" title="Permanent link">&para;</a></h2>
+<h3 id="default-characters-set-of-retro-font">Default characters set of retro font<a class="headerlink" href="#default-characters-set-of-retro-font" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>Phaser.GameObjects.RetroFont.TEXT_SET1</code> :
+    <div class="codehilite"><pre><span></span>&#39; !&quot;#$%&amp;\&#39;()*+,-./0123456789:;&lt;=&gt;?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~&#39;
+</pre></div></li>
+<li><code>Phaser.GameObjects.RetroFont.TEXT_SET2</code> :
+    <div class="codehilite"><pre><span></span>&#39; !&quot;#$%&amp;\&#39;()*+,-./0123456789:;&lt;=&gt;?@ABCDEFGHIJKLMNOPQRSTUVWXYZ&#39;
+</pre></div></li>
+<li><code>Phaser.GameObjects.RetroFont.TEXT_SET3</code> :
+    <div class="codehilite"><pre><span></span>&#39;ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789 &#39;
+</pre></div></li>
+<li><code>Phaser.GameObjects.RetroFont.TEXT_SET4</code> :
+    <div class="codehilite"><pre><span></span>&#39;ABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789&#39;
+</pre></div></li>
+<li><code>Phaser.GameObjects.RetroFont.TEXT_SET5</code> :
+    <div class="codehilite"><pre><span></span>&#39;ABCDEFGHIJKLMNOPQRSTUVWXYZ.,/() \&#39;!?-*:0123456789&#39;
+</pre></div></li>
+<li><code>Phaser.GameObjects.RetroFont.TEXT_SET6</code> :
+    <div class="codehilite"><pre><span></span>&#39;ABCDEFGHIJKLMNOPQRSTUVWXYZ!?:;0123456789&quot;(),-.\&#39; &#39;
+</pre></div></li>
+<li><code>Phaser.GameObjects.RetroFont.TEXT_SET7</code> :
+    <div class="codehilite"><pre><span></span>&#39;AGMSY+:4BHNTZ!;5CIOU.?06DJPV,(17EKQW&quot;)28FLRX-\&#39;39&#39;
+</pre></div></li>
+<li><code>Phaser.GameObjects.RetroFont.TEXT_SET8</code> :
+    <div class="codehilite"><pre><span></span>&#39;0123456789 .ABCDEFGHIJKLMNOPQRSTUVWXYZ&#39;
+</pre></div></li>
+<li><code>Phaser.GameObjects.RetroFont.TEXT_SET9</code> :
+    <div class="codehilite"><pre><span></span>&#39;ABCDEFGHIJKLMNOPQRSTUVWXYZ()-0123456789.:,\&#39;&quot;?!&#39;
+</pre></div></li>
+<li><code>Phaser.GameObjects.RetroFont.TEXT_SET10</code> :
+    <div class="codehilite"><pre><span></span>&#39;ABCDEFGHIJKLMNOPQRSTUVWXYZ&#39;
+</pre></div></li>
+<li><code>Phaser.GameObjects.RetroFont.TEXT_SET11</code> :
+    <div class="codehilite"><pre><span></span>&#39;ABCDEFGHIJKLMNOPQRSTUVWXYZ.,&quot;-+!?()\&#39;:;0123456789&#39;
+</pre></div></li>
+</ul>
                 
                   
                 
@@ -2325,9 +2673,9 @@
                   <div id="disqus_thread"></div>
 <script>
   var disqus_config = function () {
-    this.page.url = "https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/localstorage/index.html";
+    this.page.url = "https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/bitmaptext/index.html";
     this.page.identifier =
-      "/localstorage/index.html";
+      "/bitmaptext/index.html";
   };
   (function() {
     var d = document, s = d.createElement("script");
@@ -2349,7 +2697,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../uuid/index.html" title="UUID" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../tagtext/index.html" title="Tag Text" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -2358,19 +2706,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                UUID
+                Tag Text
               </span>
             </div>
           </a>
         
         
-          <a href="../localforage/index.html" title="LocalForage" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../dynamicbitmaptext/index.html" title="Dynamic bitmap text" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                LocalForage
+                Dynamic bitmap text
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
