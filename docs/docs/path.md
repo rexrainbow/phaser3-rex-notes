@@ -27,9 +27,7 @@ var path = new Phaser.Curves.Path();
 ```javascript
 var path = scene.add.path(json);
 ```
-
 or
-
 ```javascript
 var path = new Phaser.Curves.Path(json);
 ```
@@ -141,6 +139,12 @@ var points = [
 path.splineTo(points);
 ```
 
+##### Append point
+
+```javascript
+var point = curve.addPoint(x, y);
+```
+
 #### Add quadratic bezier curve
 
 1. Create quadratic bezier curve object
@@ -214,6 +218,12 @@ path.moveTo(x, y);
 path.fromJSON(json);
 ```
 
+### Get curves
+
+```javascript
+var curves = path.curves;
+```
+
 ### Draw on [graphics](graphics.md)
 
 ```javascript
@@ -227,34 +237,84 @@ path.draw(graphics);
     var out = path.getPoint(t);  // t: 0 ~ 1
     // var out = path.getPoint(t, out);  // modify out
     ```
+    or
+    ```javascript
+    var out = curve.getPoint(t);  // t: 0 ~ 1
+    // var out = curve.getPoint(t, out);  // modify out
+    ```
+    Distance of path from start point to target point (out) might not linear with t.
 - Get random point
     ```javascript
     var out = path.getRandomPoint();
     // var out = path.getRandomPoint(out);  // modify out
     ```
+    or
+    ```javascript
+    var out = curve.getRandomPoint();
+    // var out = curve.getRandomPoint(out);  // modify out
+    ```    
 - Get n points
     ```javascript
     var points = path.getPoints(n);
     ```
+    or
+    ```javascript
+    var points = curve.getPoints(n);
+    ```    
 - Get n points equally spaced out along the curve
     ```javascript
     var points = path.getSpacedPoints(n);
     ```
+    or
+    ```javascript
+    var points = curve.getSpacedPoints(n);
+    ```
+- Get points spaced out n distance pixels apart    
+    ```javascript
+    var points = curve.getDistancePoints(n)
+    ```
+    The smaller the distance, the larger the array will be.  
+    Path object does **NOT** support this feature yet.
 - Get start point
     ```javascript
     var out = path.getStartPoint();
-    var out = path.getStartPoint(out);  // modify out
+    // var out = path.getStartPoint(out);  // modify out
     ```
+    or
+    ```javascript
+    var out = curve.getStartPoint();
+    // var out = curve.getStartPoint(out);  // modify out
+    ```    
 - Get end point
     ```javascript
     var out = path.getEndPoint();
-    var out = path.getEndPoint(out);  // modify out
+    // var out = path.getEndPoint(out);  // modify out
     ```
+    or
+    ```javascript
+    var out = curve.getEndPoint();
+    // var out = curve.getEndPoint(out);  // modify out
+    ```
+- Get t (0~1) from distance
+    ```javascript
+    var t = curve.getTFromDistance(d);
+    ```
+    Path object does **NOT** support this feature yet.
+- Get tangent
+    ```javascript
+    var out = curve.getTangent(t);  // t: 0~1
+    // var out = curve.getTangent(t, out);  // modify out
+    ```
+    Path object does **NOT** support this feature yet.
 
 ### Length of path
 
 ```javascript
 var l = path.getLength();
+```
+or
+```javascript
+var l = curve.getLength();
 ```
 
 #### Update length
@@ -262,13 +322,21 @@ var l = path.getLength();
 ```javascript
 path.updateArcLengths();
 ```
+or
+```javascript
+curve.updateArcLengths();
+```
 
-Length of path will be cached.
+Length of path/curve will be cached.
 
 ### Curves to JSON
 
 ```javascript
 var json = path.toJSON();
+```
+or
+```javascript
+var json = curve.toJSON();
 ```
 
 ### Bounds
@@ -276,9 +344,15 @@ var json = path.toJSON();
 Get bounds
 
 ```javascript
-var out = getBounds();    // accuracy = 16
-// var out = getBounds(out);
-// var out = getBounds(out, accuracy);
+var out = path.getBounds();    // accuracy = 16
+// var out = path.getBounds(out);
+// var out = path.getBounds(out, accuracy);
+```
+or
+```javascript
+var out = curve.getBounds();    // accuracy = 16
+// var out = curve.getBounds(out);
+// var out = curve.getBounds(out, accuracy);
 ```
 
 - `out` : A [rectangle object](geom-rectangle.md)

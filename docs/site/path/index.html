@@ -1827,6 +1827,19 @@
     Add spline
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#append-point" title="Append point" class="md-nav__link">
+    Append point
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -1859,6 +1872,13 @@
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-curves" title="Get curves" class="md-nav__link">
+    Get curves
+  </a>
   
 </li>
         
@@ -2411,6 +2431,19 @@
     Add spline
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#append-point" title="Append point" class="md-nav__link">
+    Append point
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -2443,6 +2476,13 @@
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-curves" title="Get curves" class="md-nav__link">
+    Get curves
+  </a>
   
 </li>
         
@@ -2540,13 +2580,11 @@
 
 <h4 id="add-path-object-with-curves">Add path object with curves<a class="headerlink" href="#add-path-object-with-curves" title="Permanent link">&para;</a></h4>
 <p><a href="../path.mdl#curves-to-json">Curves in JSON</a></p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">path</span><span class="p">(</span><span class="nx">json</span><span class="p">);</span>
+<p><div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">path</span><span class="p">(</span><span class="nx">json</span><span class="p">);</span>
 </pre></div>
-
-<p>or</p>
+or
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">path</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Curves</span><span class="p">.</span><span class="nx">Path</span><span class="p">(</span><span class="nx">json</span><span class="p">);</span>
-</pre></div>
-
+</pre></div></p>
 <h3 id="add-curve">Add curve<a class="headerlink" href="#add-curve" title="Permanent link">&para;</a></h3>
 <h4 id="add-line">Add line<a class="headerlink" href="#add-line" title="Permanent link">&para;</a></h4>
 <ol>
@@ -2634,6 +2672,10 @@ or
 <span class="p">];</span>
 <span class="nx">path</span><span class="p">.</span><span class="nx">splineTo</span><span class="p">(</span><span class="nx">points</span><span class="p">);</span>
 </pre></div></p>
+<h5 id="append-point">Append point<a class="headerlink" href="#append-point" title="Permanent link">&para;</a></h5>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">point</span> <span class="o">=</span> <span class="nx">curve</span><span class="p">.</span><span class="nx">addPoint</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</pre></div>
+
 <h4 id="add-quadratic-bezier-curve">Add quadratic bezier curve<a class="headerlink" href="#add-quadratic-bezier-curve" title="Permanent link">&para;</a></h4>
 <ol>
 <li>Create quadratic bezier curve object
@@ -2689,6 +2731,10 @@ or
 <div class="codehilite"><pre><span></span><span class="nx">path</span><span class="p">.</span><span class="nx">fromJSON</span><span class="p">(</span><span class="nx">json</span><span class="p">);</span>
 </pre></div>
 
+<h3 id="get-curves">Get curves<a class="headerlink" href="#get-curves" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">curves</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">curves</span><span class="p">;</span>
+</pre></div>
+
 <h3 id="draw-on-graphics">Draw on <a href="../graphics/index.html">graphics</a><a class="headerlink" href="#draw-on-graphics" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="nx">path</span><span class="p">.</span><span class="nx">draw</span><span class="p">(</span><span class="nx">graphics</span><span class="p">);</span>
 </pre></div>
@@ -2698,46 +2744,93 @@ or
 <li>Get point
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">getPoint</span><span class="p">(</span><span class="nx">t</span><span class="p">);</span>  <span class="c1">// t: 0 ~ 1</span>
 <span class="c1">// var out = path.getPoint(t, out);  // modify out</span>
-</pre></div></li>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">curve</span><span class="p">.</span><span class="nx">getPoint</span><span class="p">(</span><span class="nx">t</span><span class="p">);</span>  <span class="c1">// t: 0 ~ 1</span>
+<span class="c1">// var out = curve.getPoint(t, out);  // modify out</span>
+</pre></div>
+    Distance of path from start point to target point (out) might not linear with t.</li>
 <li>Get random point
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">getRandomPoint</span><span class="p">();</span>
 <span class="c1">// var out = path.getRandomPoint(out);  // modify out</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">curve</span><span class="p">.</span><span class="nx">getRandomPoint</span><span class="p">();</span>
+<span class="c1">// var out = curve.getRandomPoint(out);  // modify out</span>
 </pre></div></li>
 <li>Get n points
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">getPoints</span><span class="p">(</span><span class="nx">n</span><span class="p">);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="nx">curve</span><span class="p">.</span><span class="nx">getPoints</span><span class="p">(</span><span class="nx">n</span><span class="p">);</span>
 </pre></div></li>
 <li>Get n points equally spaced out along the curve
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">getSpacedPoints</span><span class="p">(</span><span class="nx">n</span><span class="p">);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="nx">curve</span><span class="p">.</span><span class="nx">getSpacedPoints</span><span class="p">(</span><span class="nx">n</span><span class="p">);</span>
 </pre></div></li>
+<li>Get points spaced out n distance pixels apart  <br />
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="nx">curve</span><span class="p">.</span><span class="nx">getDistancePoints</span><span class="p">(</span><span class="nx">n</span><span class="p">)</span>
+</pre></div>
+    The smaller the distance, the larger the array will be.<br />
+    Path object does <strong>NOT</strong> support this feature yet.</li>
 <li>Get start point
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">getStartPoint</span><span class="p">();</span>
-<span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">getStartPoint</span><span class="p">(</span><span class="nx">out</span><span class="p">);</span>  <span class="c1">// modify out</span>
+<span class="c1">// var out = path.getStartPoint(out);  // modify out</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">curve</span><span class="p">.</span><span class="nx">getStartPoint</span><span class="p">();</span>
+<span class="c1">// var out = curve.getStartPoint(out);  // modify out</span>
 </pre></div></li>
 <li>Get end point
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">getEndPoint</span><span class="p">();</span>
-<span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">getEndPoint</span><span class="p">(</span><span class="nx">out</span><span class="p">);</span>  <span class="c1">// modify out</span>
+<span class="c1">// var out = path.getEndPoint(out);  // modify out</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">curve</span><span class="p">.</span><span class="nx">getEndPoint</span><span class="p">();</span>
+<span class="c1">// var out = curve.getEndPoint(out);  // modify out</span>
 </pre></div></li>
+<li>Get t (0~1) from distance
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">t</span> <span class="o">=</span> <span class="nx">curve</span><span class="p">.</span><span class="nx">getTFromDistance</span><span class="p">(</span><span class="nx">d</span><span class="p">);</span>
+</pre></div>
+    Path object does <strong>NOT</strong> support this feature yet.</li>
+<li>Get tangent
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">curve</span><span class="p">.</span><span class="nx">getTangent</span><span class="p">(</span><span class="nx">t</span><span class="p">);</span>  <span class="c1">// t: 0~1</span>
+<span class="c1">// var out = curve.getTangent(t, out);  // modify out</span>
+</pre></div>
+    Path object does <strong>NOT</strong> support this feature yet.</li>
 </ul>
 <h3 id="length-of-path">Length of path<a class="headerlink" href="#length-of-path" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">l</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">getLength</span><span class="p">();</span>
+<p><div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">l</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">getLength</span><span class="p">();</span>
 </pre></div>
-
+or
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">l</span> <span class="o">=</span> <span class="nx">curve</span><span class="p">.</span><span class="nx">getLength</span><span class="p">();</span>
+</pre></div></p>
 <h4 id="update-length">Update length<a class="headerlink" href="#update-length" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">path</span><span class="p">.</span><span class="nx">updateArcLengths</span><span class="p">();</span>
+<p><div class="codehilite"><pre><span></span><span class="nx">path</span><span class="p">.</span><span class="nx">updateArcLengths</span><span class="p">();</span>
 </pre></div>
-
-<p>Length of path will be cached.</p>
+or
+<div class="codehilite"><pre><span></span><span class="nx">curve</span><span class="p">.</span><span class="nx">updateArcLengths</span><span class="p">();</span>
+</pre></div></p>
+<p>Length of path/curve will be cached.</p>
 <h3 id="curves-to-json">Curves to JSON<a class="headerlink" href="#curves-to-json" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">json</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">toJSON</span><span class="p">();</span>
+<p><div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">json</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">toJSON</span><span class="p">();</span>
 </pre></div>
-
+or
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">json</span> <span class="o">=</span> <span class="nx">curve</span><span class="p">.</span><span class="nx">toJSON</span><span class="p">();</span>
+</pre></div></p>
 <h3 id="bounds">Bounds<a class="headerlink" href="#bounds" title="Permanent link">&para;</a></h3>
 <p>Get bounds</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">getBounds</span><span class="p">();</span>    <span class="c1">// accuracy = 16</span>
-<span class="c1">// var out = getBounds(out);</span>
-<span class="c1">// var out = getBounds(out, accuracy);</span>
+<p><div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">path</span><span class="p">.</span><span class="nx">getBounds</span><span class="p">();</span>    <span class="c1">// accuracy = 16</span>
+<span class="c1">// var out = path.getBounds(out);</span>
+<span class="c1">// var out = path.getBounds(out, accuracy);</span>
 </pre></div>
-
+or
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">curve</span><span class="p">.</span><span class="nx">getBounds</span><span class="p">();</span>    <span class="c1">// accuracy = 16</span>
+<span class="c1">// var out = curve.getBounds(out);</span>
+<span class="c1">// var out = curve.getBounds(out, accuracy);</span>
+</pre></div></p>
 <ul>
 <li><code>out</code> : A <a href="../geom-rectangle/index.html">rectangle object</a></li>
 </ul>
