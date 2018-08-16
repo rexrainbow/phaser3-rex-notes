@@ -131,6 +131,15 @@ var points = [
 ];
 path.splineTo(points);
 ```
+or
+```javascript
+var points = [
+    x0, y0,
+    x1, y1,
+    // ...
+];
+path.splineTo(points);
+```
 
 #### Add quadratic bezier curve
 
@@ -191,6 +200,12 @@ path.cubicBezierTo(endX, endY, control1X, control1Y, control2X, control2Y);
 or
 ```javascript
 path.cubicBezierTo(endPoint, controlPoint1, controlPoint2);  // point : Phaser.Math.Vector2
+```
+
+#### Move to point
+
+```javascript
+path.moveTo(x, y);
 ```
 
 #### Add curves from [JSON](path.mdl#curves-to-json)

@@ -73,6 +73,51 @@ var sceneConfig = {
 };
 ```
 
+Configuration of loading fonts
+
+- [Google webfont](https://github.com/typekit/webfontloader#google)
+    ```javascript
+    WebFontConfig = {
+        google: {
+            families: ['Droid Sans', 'Droid Serif:bold']
+        }
+    };
+    ```
+- [Custom font](https://github.com/typekit/webfontloader#custom)
+    ```javascript
+    WebFontConfig = {
+        custom: {
+            families: ['My Font', 'My Other Font:n4,i4,n7'],
+            urls: ['/fonts.css']
+        }
+    };
+    ```
+    and `fonts.css`
+    ```css
+    @font-face {
+        font-family: 'My Font';
+        src: ...;
+    }
+    @font-face {
+        font-family: 'My Other Font';
+        font-style: normal;
+        font-weight: normal; /* or 400 */
+        src: ...;
+    }
+    @font-face {
+        font-family: 'My Other Font';
+        font-style: italic;
+        font-weight: normal; /* or 400 */
+        src: ...;
+    }
+    @font-face {
+        font-family: 'My Other Font';
+        font-style: normal;
+        font-weight: bold; /* or 700 */
+        src: ...;
+    }
+    ```
+
 ### Events
 
 - `fontactive` event

@@ -49,6 +49,12 @@ pages:
         - DOM element: domelement.md
     - Display:
         - Mask: mask.md
+- Behavior:
+    - Tween: 
+       - Tween: tween.md
+       - Fade out destroy: fadeoutdestroy.md
+    - Arcade:
+        - Physics: arcade.md
 - Input:
     - Input: input.md
     - Touch:    
@@ -59,28 +65,11 @@ pages:
         - Virtual joystick: virtualjoystick.md
     - Keyboard:
         - Keyboard events: keyboardevents.md
-- Time:
-    - Date: date.md
-    - Timer: timer.md
-    - Timeline: timeline.md    
-    - Clock: clock.md
-- Behavior:
-    - Tween: 
-       - Tween: tween.md
-       - Fade out destroy: fadeoutdestroy.md
-    - Arcade:
-        - Physics: arcade.md
 - Audio:
     - Audio: audio.md
     - Volume fading: fadevolume.md
-- Data:
-    - Data manager: datamanager.md
-    - Array: array.md
-    - CSV:
-        - CSV to array: csvtoarray.md
-        - CSV to hash table: csvtohashtable.md
-    - Database:
-        - LokiJs: lokijs.md    
+- Camera:
+    - Camera: camera.md
 - Logic:
     - Event emitter: eventemitter3.md
     - Run commands:
@@ -91,8 +80,14 @@ pages:
           - Recoder: tcrprecoderplugin.md
           - Player: tcrpplayerplugin.md
     - FSM: fsm.md
-- Camera:
-    - Camera: camera.md
+- Data:
+    - Data manager: datamanager.md
+    - Array: array.md
+    - CSV:
+        - CSV to array: csvtoarray.md
+        - CSV to hash table: csvtohashtable.md
+    - Database:
+        - LokiJs: lokijs.md
 - Math:
     - Distance: distance.md
     - Angle: angle.md
@@ -116,6 +111,11 @@ pages:
     - LZ string: lzstringplugin.md
     - XOR: xor.md
     - UUID: uuid.md
+- Time:
+    - Date: date.md
+    - Timer: timer.md
+    - Timeline: timeline.md    
+    - Clock: clock.md
 - Storage:
     - Offline:
         - Key-value pairs:
