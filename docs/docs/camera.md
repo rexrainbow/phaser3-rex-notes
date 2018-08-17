@@ -104,7 +104,7 @@ camera.destroy();
         ```javascript
         var angle = camera.rotation;  // angle in radians
         ```
-    - World view, a rectangle object
+    - World view, a [rectangle object](geom-rectangle.md)
         ```javascript
         var worldView = camera.worldView;
         var x = worldView.x;
