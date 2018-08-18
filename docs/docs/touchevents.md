@@ -6,6 +6,36 @@ Built-in touch/mouse events of phaser.
 
 ## Usage
 
+### Quick start
+
+- Is touching
+    ```javascript
+    var pointer = scene.input.activePointer;
+    if (pointer.isDown) {
+        var touchX = pointer.x;
+        var touchY = pointer.y;
+        // ...
+    }
+    ```
+- On any touching start
+    ```javascript
+    scene.input.on('pointerdown', function(pointer){
+        var touchX = pointer.x;
+        var touchY = pointer.y;      
+        // ...      
+     });
+    ```
+- On any touching end
+    ```javascript
+    scene.input.on('pointerup', function(pointer){
+        var touchX = pointer.x;
+        var touchY = pointer.y;
+        // ...
+     });
+    ```
+
+Reference : [Properties of point](touchevents.md#properties-of-point)
+
 ### Register interactive
 
 Call `gameObject.setInteractive(...)` to register touch input of Game Object before listening touching events.

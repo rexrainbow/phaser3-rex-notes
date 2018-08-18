@@ -16,11 +16,12 @@
 1. [FSM](fsm.md): Finite state machine.
 1. [Gashapon](gashapon.md): Pick random item from box.
 1. [Grid table](gridtable.md): Viewer of grid table, to manipulate game object of each visible cell.
-1. [LZ-string](lzstringplugin.md): Compress string using LZ-based compression algorithm.
+1. [LZ-string](lzstring.md): Compress string using LZ-based compression algorithm.
 1. [Page](textpage.md): Display text page by page on text object.
 1. [Run-commands](runcommands.md): Run commands in array.
 1. [Sequence](sequence.md): Run sequence commands in array.
 1. [Slider](slider.md): Drag thumb on a slider bar.
+1. [Swirl-pipeline](swirlpipeline.md): Swirl post processing filter.
 1. [TagText](tagtext.md): Displays text with multi-color, font face, or font size with tags.
 1. [TCRP.Player](tcrpplayerplugin.md): Run commands on time.
 1. [TCRP.Recorder](tcrpplayerplugin.md): Store commands with time.

@@ -1,7 +1,6 @@
 'use strict'
 
 import SwirlPipelinePlugin from 'rexPlugins/swirlpipeline-plugin.js'
-import drawSomething from './drawSomething.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -14,14 +13,15 @@ class Demo extends Phaser.Scene {
 
     create() {
         drawSomething(this);
-        var pipe = this.plugins.get('rexSwirlPipeline').add(this, 'Swirl');
-        this.cameras.main.setRenderToTexture(pipe);
-        this.cameraFilter = pipe;
+
+        var customPipeline = this.plugins.get('rexSwirlPipeline').add(this, 'Swirl');
+        this.cameras.main.setRenderToTexture(customPipeline);
+        this.cameraFilter = customPipeline;
 
         var scene = this;
-        this.input.on('pointerup', function(pointer, currentlyOver){
+        this.input.on('pointerup', function (pointer, currentlyOver) {
             scene.tweens.add({
-                targets: pipe,
+                targets: customPipeline,
                 angle: 0,
                 radius: 0,
                 ease: 'Linear',
@@ -39,6 +39,20 @@ class Demo extends Phaser.Scene {
             this.cameraFilter.radius += 5;
             this.cameraFilter.setCenter(activePointer.x, activePointer.y);
         }
+    }
+}
+
+const Between = Phaser.Math.Between;
+
+var drawSomething = function (scene) {
+    var graphics = scene.add.graphics();
+    var camera = scene.cameras.main;
+    var w = camera.width,
+        h = camera.height;
+    for (var i = 0; i < 500; i++) {
+        graphics
+            .fillStyle(Between(0, 0x1000000), Math.random())
+            .fillCircle(Between(0, w), Between(0, w), Between(5, 30));
     }
 }
 

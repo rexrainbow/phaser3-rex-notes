@@ -43,6 +43,9 @@ import CSVToHashTable from './csvtohashtable.js';
 // math
 import Gashapon from './gashapon.js';
 
+// shader
+import SwirlPipeline from './swirlpipeline.js';
+
 export {
     // game objects
     BBCodeText,
@@ -91,5 +94,8 @@ export {
     CSVToHashTable,
 
     // math
-    Gashapon
+    Gashapon,
+
+    // shader
+    SwirlPipeline
 };

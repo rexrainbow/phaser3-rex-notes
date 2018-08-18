@@ -70,6 +70,8 @@ pages:
     - Volume fading: fadevolume.md
 - Camera:
     - Camera: camera.md
+    - Filters:
+        - Swirl: swirlpipeline.md
 - Logic:
     - Event emitter: eventemitter3.md
     - Run commands:
@@ -108,7 +110,7 @@ pages:
     - Pad: pad.md
     - Capitalizes first: capitalizes-first.md
     - Reverse: reverse-string.md
-    - LZ string: lzstringplugin.md
+    - LZ string: lzstring.md
     - XOR: xor.md
     - UUID: uuid.md
 - Time:
