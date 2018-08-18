@@ -10,23 +10,15 @@ varying vec2 outTexCoord;
 // Currently not used in this demo!
 uniform float time; 
 
-// GeeXLab built-in uniform, width of
-// the current render target
-uniform float rt_w; 
-// GeeXLab built-in uniform, height of
-// the current render target
-uniform float rt_h; 
+uniform vec2 texSize;
+uniform vec2 center;
 
 // Swirl effect parameters
 uniform float radius;
 uniform float angle;
-uniform float center_x; 
-uniform float center_y;
 
 vec4 PostFX(sampler2D tex, vec2 uv, float time)
 {
-  vec2 texSize = vec2(rt_w, rt_h);
-  vec2 center = vec2(center_x, center_y);
   vec2 tc = uv * texSize;
   tc -= center;
   float dist = length(tc);

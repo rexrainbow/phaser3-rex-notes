@@ -86,7 +86,7 @@ class SwirlPipeline extends TextureTintPipeline {
 
     set centerX(x) {
         this._centerX = x;
-        this.setFloat1('center_x', x * this.resolution);
+        this._setCenter();
     }
 
     get centerY() {
@@ -95,7 +95,7 @@ class SwirlPipeline extends TextureTintPipeline {
 
     set centerY(y) {
         this._centerY = y;
-        this.setFloat1('center_y', y * this.resolution);
+        this._setCenter();
     }
 
     setCenter(x, y) {
@@ -103,9 +103,14 @@ class SwirlPipeline extends TextureTintPipeline {
             x = this._width / 2;
             y = this._height / 2;
         }
-        this.centerX = x;
-        this.centerY = y;
+        this._centerX = x;
+        this._centerY = y;
+        this._setCenter();
         return this;
+    }
+
+    _setCenter() {
+        this.setFloat2('center', this._centerX * this.resolution, this._centerY * this.resolution);
     }
 
     // size
@@ -113,8 +118,7 @@ class SwirlPipeline extends TextureTintPipeline {
         this._width = width;
         this._height = height;
         super.resize(width, height, resolution);
-        this.setFloat1('rt_w', this.width);
-        this.setFloat1('rt_h', this.height);
+        this.setFloat2('texSize', this.width, this.height);
         return this;
     }
 }
