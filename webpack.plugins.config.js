@@ -60,7 +60,11 @@ module.exports = {
         'csvtohashtableplugin': './plugins/csvtohashtable-plugin.js',
 
         // math
-        'gashaponplugin': './plugins/gashapon-plugin.js'
+        'gashaponplugin': './plugins/gashapon-plugin.js',
+
+        // shader
+        'swirlpipelineplugin': './plugins/swirlpipeline-plugin.js',
+    
     },
     output: {
         pathinfo: true,
