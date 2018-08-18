@@ -14,7 +14,7 @@ class Demo extends Phaser.Scene {
 
     create() {
         drawSomething(this);
-        var pipe = this.plugins.get('rexSwirlPipeline').add(this.game, 'Swirl');
+        var pipe = this.plugins.get('rexSwirlPipeline').add(this, 'Swirl');
         this.cameras.main.setRenderToTexture(pipe);
         this.cameraFilter = pipe;
 

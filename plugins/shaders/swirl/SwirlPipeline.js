@@ -3,27 +3,37 @@ import frag from './swirl-frag.js';
 const TextureTintPipeline = Phaser.Renderer.WebGL.Pipelines.TextureTintPipeline;
 const DegToRad = Phaser.Math.DegToRad;
 const RadToDeg = Phaser.Math.RadToDeg;
+const GetValue = Phaser.Utils.Objects.GetValue;
 
 class SwirlPipeline extends TextureTintPipeline {
-    constructor(game, key) {
-        var config = {
+    constructor(scene, key, config) {
+        var game = scene.game;
+        super({
             game: game,
             renderer: game.renderer,
             fragShader: frag // GLSL shader
-        };
-        super(config);
+        });
         this._width = 0; // width wo resolution
         this._height = 0; // height wo resolution
-
         this._centerX = 0; // position wo resolution
         this._centerY = 0; // position wo resolution
         this._radius = 0;
         this._rotation = 0;
 
-        this.setRadius(0);
-        this.setRotation(0);
-        this.setCenter();
         game.renderer.addPipeline(key, this);
+        this.resetFromJSON(config);
+    }
+
+    resetFromJSON(o) {
+        this.radius = GetValue(o, 'radius', 0);
+        var rotation = GetValue(o, 'rotation', undefined);
+        if (rotation === undefined) {
+            this.angle = GetValue(o, 'angle', 0);
+        } else {
+            this.rotation = rotation;
+        }
+        this.setCenter(GetValue(o, 'center.x', undefined), GetValue(o, 'center.y', undefined));
+        return this;
     }
 
     // radius

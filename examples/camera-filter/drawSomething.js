@@ -1,5 +1,4 @@
 const Between = Phaser.Math.Between;
-const GetColor = Phaser.Display.Color.GetColor;
 
 var drawSomething = function(scene) {
     var graphics = scene.add.graphics();

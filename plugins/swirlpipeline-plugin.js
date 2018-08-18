@@ -13,8 +13,8 @@ class SwirlpipelinePlugin extends Phaser.Plugins.BasePlugin {
         eventEmitter.once('destroy', this.destroy, this);
     }
 
-    add(game, key) {
-        return new Swirlpipeline(game, key);
+    add(scene, key, config) {
+        return new Swirlpipeline(scene, key, config);
     }
 
 }
