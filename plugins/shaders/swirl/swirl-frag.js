@@ -1,7 +1,12 @@
 // reference : https://www.geeks3d.com/20110428/shader-library-swirl-post-processing-filter-in-glsl/
 
 const frag = `
-precision mediump float;
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+#define highmedp highp
+#else
+#define highmedp mediump
+#endif
+precision highmedp float;
 
 // Scene buffer
 uniform sampler2D uMainSampler; 

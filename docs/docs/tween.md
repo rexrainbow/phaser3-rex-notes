@@ -15,7 +15,7 @@ var tween = scene.tweens.add({
     y: 300,               // '+=100'
     ease: 'Linear',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
     duration: 1000,
-    repeat: -1,
+    repeat: 0,
     yoyo: false
 });
 ```
