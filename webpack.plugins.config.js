@@ -23,6 +23,7 @@ module.exports = {
 
         // custom file loader      
         'webfontloaderplugin': './plugins/webfontloader-plugin.js',
+        'awaitloaderplugin': './plugins/awaitloader-plugin.js',
 
         // functions
         'xorplugin': './plugins/xor-plugin.js',

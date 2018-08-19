@@ -6,7 +6,8 @@ import GridTable from './gridtable.js';
 import TagText from './tagtext.js';
 
 // custom file loader      
-import WebFontLoader from './webfontloader.js'
+import WebFontLoader from './webfontloader.js';
+import Awaitloader from './awaitloader.js'
 
 // functions
 import XOR from './xor.js';
@@ -57,6 +58,7 @@ export {
 
     // custom file loader 
     WebFontLoader,
+    Awaitloader,
 
     // functions
     XOR,
