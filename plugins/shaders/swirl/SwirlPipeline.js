@@ -110,7 +110,7 @@ class SwirlPipeline extends TextureTintPipeline {
     }
 
     _setCenter() {
-        this.setFloat2('center', this._centerX * this.resolution, this._centerY * this.resolution);
+        this.setFloat2('center', this._centerX, this._centerY);
     }
 
     // size
@@ -118,7 +118,7 @@ class SwirlPipeline extends TextureTintPipeline {
         this._width = width;
         this._height = height;
         super.resize(width, height, resolution);
-        this.setFloat2('texSize', this.width, this.height);
+        this.setFloat2('texSize', width, height);
         return this;
     }
 }

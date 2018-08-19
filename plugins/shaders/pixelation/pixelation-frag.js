@@ -13,25 +13,23 @@ uniform sampler2D uMainSampler;
 varying vec2 outTexCoord;
 
 uniform vec2 texSize;
-uniform vec2 center;
+uniform vec2 pixelSize;
 
 // Swirl effect parameters
 uniform float radius;
 uniform float angle;
 
 void main (void) {
-  vec2 tc = outTexCoord * texSize;
-  tc -= center;
-  float dist = length(tc);
-  if (dist < radius) {
-    float percent = (radius - dist) / radius;
-    float theta = percent * percent * angle * 8.0;
-    float s = sin(theta);
-    float c = cos(theta);
-    tc = vec2(dot(tc, vec2(c, -s)), dot(tc, vec2(s, c)));
+  if ((pixelSize.x == 0.0) || (pixelSize.y == 0.0)) {
+    gl_FragColor = texture2D(uMainSampler, outTexCoord);
   }
-  tc += center;
-  gl_FragColor = texture2D(uMainSampler, tc / texSize);
+  else {
+    vec2 dxy = pixelSize/texSize;
+    vec2 tc = vec2(dxy.x*( floor(outTexCoord.x/dxy.x) + 0.5 ), 
+                   dxy.y*( floor(outTexCoord.y/dxy.y) + 0.5 )
+                  );
+    gl_FragColor = texture2D(uMainSampler, tc);
+  }
 }
 `;
 

@@ -45,6 +45,7 @@ import Gashapon from './gashapon.js';
 
 // shader
 import SwirlPipeline from './swirlpipeline.js';
+import PixelationPipeline from './pixelationpipeline.js';
 
 export {
     // game objects
@@ -97,5 +98,6 @@ export {
     Gashapon,
 
     // shader
-    SwirlPipeline
+    SwirlPipeline,
+    PixelationPipeline
 };

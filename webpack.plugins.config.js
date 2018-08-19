@@ -64,7 +64,8 @@ module.exports = {
 
         // shader
         'swirlpipelineplugin': './plugins/swirlpipeline-plugin.js',
-    
+        'pixelationpipelineplugin': './plugins/pixelationpipeline-plugin.js',
+
     },
     output: {
         pathinfo: true,
