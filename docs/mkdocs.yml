@@ -8,7 +8,8 @@ pages:
     - Snapshot: snapshot.md
 - Loader:
     - Loader: loader.md
-    - Webfont loader: webfontloader.md    
+    - Webfont loader: webfontloader.md
+    - Await loader:  awaitloader.md
 - Game object:
     - Game object: gameobject.md
     - Sprite:

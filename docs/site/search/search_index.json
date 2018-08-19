@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/index.html", 
-            "text": "Phaser\n\n\nPhaser\n is a fun, free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering.\n\n\nList of my plugins\n\n\n\n\nBBCodeText\n: Drawing text with \nBBCode\n protocol.\n\n\nCanvas\n: Drawing on \ncanvas\n.\n\n\nClock\n: A clock to count elapsed time.\n\n\nContainerLite\n: Control the position and angle of children game objects.\n\n\nCSV-scenario\n: Run script in csv format.\n\n\nCSV-to-hash-table\n: Hash table indexed by (col-key, row-key) from csv string.\n\n\nDrag\n: Drag game object.\n\n\nFade-out-destroy\n: Fade out game object then destroy it.\n\n\nFade-volume\n: Fade-in/fade-out volume of sound.\n\n\nFSM\n: Finite state machine.\n\n\nGashapon\n: Pick random item from box.\n\n\nGrid table\n: Viewer of grid table, to manipulate game object of each visible cell.\n\n\nLZ-string\n: Compress string using LZ-based compression algorithm.\n\n\nPage\n: Display text page by page on text object.\n\n\nPixelation-pipeline\n: Pixelation post processing filter.\n\n\nRun-commands\n: Run commands in array.\n\n\nSequence\n: Run sequence commands in array.\n\n\nSlider\n: Drag thumb on a slider bar.\n\n\nSwirl-pipeline\n: Swirl post processing filter.\n\n\nTagText\n: Displays text with multi-color, font face, or font size with tags.\n\n\nTCRP.Player\n: Run commands on time.\n\n\nTCRP.Recorder\n: Store commands with time.\n\n\nTyping\n: Typing text on text object.\n\n\nVirtual joystick\n: Simulate curosr keys according touch events.\n\n\nWebfont-loader\n: Load web font by google webfont loader in preload stage.\n\n\nXOR\n: Encrypt or decrypt string by XOR algorithm.\n\n\n\n\nDownload\n them in a signle minify file.", 
+            "text": "Phaser\n\n\nPhaser\n is a fun, free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering.\n\n\nList of my plugins\n\n\n\n\nAwaitLoader\n: Await custom task in preload stage.\n\n\nBBCodeText\n: Drawing text with \nBBCode\n protocol.\n\n\nCanvas\n: Drawing on \ncanvas\n.\n\n\nClock\n: A clock to count elapsed time.\n\n\nContainerLite\n: Control the position and angle of children game objects.\n\n\nCSV-scenario\n: Run script in csv format.\n\n\nCSV-to-hash-table\n: Hash table indexed by (col-key, row-key) from csv string.\n\n\nDrag\n: Drag game object.\n\n\nFade-out-destroy\n: Fade out game object then destroy it.\n\n\nFade-volume\n: Fade-in/fade-out volume of sound.\n\n\nFSM\n: Finite state machine.\n\n\nGashapon\n: Pick random item from box.\n\n\nGrid table\n: Viewer of grid table, to manipulate game object of each visible cell.\n\n\nLZ-string\n: Compress string using LZ-based compression algorithm.\n\n\nPage\n: Display text page by page on text object.\n\n\nPixelation-pipeline\n: Pixelation post processing filter.\n\n\nRun-commands\n: Run commands in array.\n\n\nSequence\n: Run sequence commands in array.\n\n\nSlider\n: Drag thumb on a slider bar.\n\n\nSwirl-pipeline\n: Swirl post processing filter.\n\n\nTagText\n: Displays text with multi-color, font face, or font size with tags.\n\n\nTCRP.Player\n: Run commands on time.\n\n\nTCRP.Recorder\n: Store commands with time.\n\n\nTyping\n: Typing text on text object.\n\n\nVirtual joystick\n: Simulate curosr keys according touch events.\n\n\nWebfont-loader\n: Load web font by google webfont loader in preload stage.\n\n\nXOR\n: Encrypt or decrypt string by XOR algorithm.\n\n\n\n\nDownload\n them in a signle minify file.", 
             "title": "Home"
         }, 
         {
@@ -12,7 +12,7 @@
         }, 
         {
             "location": "/index.html#list-of-my-plugins", 
-            "text": "BBCodeText : Drawing text with  BBCode  protocol.  Canvas : Drawing on  canvas .  Clock : A clock to count elapsed time.  ContainerLite : Control the position and angle of children game objects.  CSV-scenario : Run script in csv format.  CSV-to-hash-table : Hash table indexed by (col-key, row-key) from csv string.  Drag : Drag game object.  Fade-out-destroy : Fade out game object then destroy it.  Fade-volume : Fade-in/fade-out volume of sound.  FSM : Finite state machine.  Gashapon : Pick random item from box.  Grid table : Viewer of grid table, to manipulate game object of each visible cell.  LZ-string : Compress string using LZ-based compression algorithm.  Page : Display text page by page on text object.  Pixelation-pipeline : Pixelation post processing filter.  Run-commands : Run commands in array.  Sequence : Run sequence commands in array.  Slider : Drag thumb on a slider bar.  Swirl-pipeline : Swirl post processing filter.  TagText : Displays text with multi-color, font face, or font size with tags.  TCRP.Player : Run commands on time.  TCRP.Recorder : Store commands with time.  Typing : Typing text on text object.  Virtual joystick : Simulate curosr keys according touch events.  Webfont-loader : Load web font by google webfont loader in preload stage.  XOR : Encrypt or decrypt string by XOR algorithm.   Download  them in a signle minify file.", 
+            "text": "AwaitLoader : Await custom task in preload stage.  BBCodeText : Drawing text with  BBCode  protocol.  Canvas : Drawing on  canvas .  Clock : A clock to count elapsed time.  ContainerLite : Control the position and angle of children game objects.  CSV-scenario : Run script in csv format.  CSV-to-hash-table : Hash table indexed by (col-key, row-key) from csv string.  Drag : Drag game object.  Fade-out-destroy : Fade out game object then destroy it.  Fade-volume : Fade-in/fade-out volume of sound.  FSM : Finite state machine.  Gashapon : Pick random item from box.  Grid table : Viewer of grid table, to manipulate game object of each visible cell.  LZ-string : Compress string using LZ-based compression algorithm.  Page : Display text page by page on text object.  Pixelation-pipeline : Pixelation post processing filter.  Run-commands : Run commands in array.  Sequence : Run sequence commands in array.  Slider : Drag thumb on a slider bar.  Swirl-pipeline : Swirl post processing filter.  TagText : Displays text with multi-color, font face, or font size with tags.  TCRP.Player : Run commands on time.  TCRP.Recorder : Store commands with time.  Typing : Typing text on text object.  Virtual joystick : Simulate curosr keys according touch events.  Webfont-loader : Load web font by google webfont loader in preload stage.  XOR : Encrypt or decrypt string by XOR algorithm.   Download  them in a signle minify file.", 
             "title": "List of my plugins"
         }, 
         {
@@ -359,6 +359,36 @@
             "location": "/webfontloader/index.html#events", 
             "text": "fontactive  event  this . load . on ( webfontactive ,   function ( fileObj ,   familyName ){});     fontinactive  event  this . load . on ( webfontinactive ,   function ( fileObj ,   familyName ){});", 
             "title": "Events"
+        }, 
+        {
+            "location": "/awaitloader/index.html", 
+            "text": "Introduction\n\n\nAwait custom task in preload stage.\n\n\n\n\nAuthor: Rex\n\n\nCustom File of loader, installed by global plugin\n\n\n\n\nSource code\n\n\nPlugin\n, \nminify\n\n\nUsage\n\n\nSample code\n\n\nInstall plugin\n\n\nInstall plugin in \nconfiguration of game\n\n\nvar\n \nconfig\n \n=\n \n{\n\n    \n// ...\n\n    \nplugins\n:\n \n{\n\n        \nglobal\n:\n \n[{\n\n            \nkey\n:\n \nAwaitLoader\n,\n\n            \nplugin\n:\n \nAwaitLoaderPlugin\n,\n\n            \nstart\n:\n \ntrue\n\n        \n},\n\n        \n// ...\n\n        \n]\n\n    \n}\n\n    \n// ...\n\n\n};\n\n\nvar\n \ngame\n \n=\n \nnew\n \nPhaser\n.\nGame\n(\nconfig\n);\n\n\n\n\n\nor install it in previous scene (i.e. a preload scene).\n\n\n\n\nWarning\n\n\nThe best way of installing this plugin is to load it in game config. \n\n\nThis custom file loader won't be added into loader of current scene after loader is created (i.e. loading plugin using \nthis.load.plugin(...)\n, or loading in payload of scene)\n\n\n\n\nAwait task\n\n\nIn preload stage:\n\n\nvar\n \ncallback\n \n=\n \nfunction\n(\nsuccessCallback\n,\n \nfailureCallback\n)\n \n{\n\n    \n// successCallback();\n\n\n};\n\n\nthis\n.\nload\n.\nrexAwait\n(\nkey\n,\n \n{\n\n    \ncallback\n:\n \ncallback\n,\n\n    \n// scope: scope\n\n\n});\n\n\n\n\n\n\n\nThis plugin runs \ncallback\n  to start custom task.\n\n\nCalls \nsuccessCallback\n when custom task completed, or \nfailureCallback\n if error.", 
+            "title": "Await loader"
+        }, 
+        {
+            "location": "/awaitloader/index.html#introduction", 
+            "text": "Await custom task in preload stage.   Author: Rex  Custom File of loader, installed by global plugin", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/awaitloader/index.html#source-code", 
+            "text": "Plugin ,  minify", 
+            "title": "Source code"
+        }, 
+        {
+            "location": "/awaitloader/index.html#usage", 
+            "text": "Sample code", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/awaitloader/index.html#install-plugin", 
+            "text": "Install plugin in  configuration of game  var   config   =   { \n     // ... \n     plugins :   { \n         global :   [{ \n             key :   AwaitLoader , \n             plugin :   AwaitLoaderPlugin , \n             start :   true \n         }, \n         // ... \n         ] \n     } \n     // ...  };  var   game   =   new   Phaser . Game ( config );   or install it in previous scene (i.e. a preload scene).   Warning  The best way of installing this plugin is to load it in game config.   This custom file loader won't be added into loader of current scene after loader is created (i.e. loading plugin using  this.load.plugin(...) , or loading in payload of scene)", 
+            "title": "Install plugin"
+        }, 
+        {
+            "location": "/awaitloader/index.html#await-task", 
+            "text": "In preload stage:  var   callback   =   function ( successCallback ,   failureCallback )   { \n     // successCallback();  };  this . load . rexAwait ( key ,   { \n     callback :   callback , \n     // scope: scope  });    This plugin runs  callback   to start custom task.  Calls  successCallback  when custom task completed, or  failureCallback  if error.", 
+            "title": "Await task"
         }, 
         {
             "location": "/gameobject/index.html", 
