@@ -18,6 +18,7 @@
 1. [Grid table](gridtable.md): Viewer of grid table, to manipulate game object of each visible cell.
 1. [LZ-string](lzstring.md): Compress string using LZ-based compression algorithm.
 1. [Page](textpage.md): Display text page by page on text object.
+1. [Pixelation-pipeline](pixelationpipeline.md): Pixelation post processing filter.
 1. [Run-commands](runcommands.md): Run commands in array.
 1. [Sequence](sequence.md): Run sequence commands in array.
 1. [Slider](slider.md): Drag thumb on a slider bar.

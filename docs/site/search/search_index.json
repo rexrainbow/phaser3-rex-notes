@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/index.html", 
-            "text": "Phaser\n\n\nPhaser\n is a fun, free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering.\n\n\nList of my plugins\n\n\n\n\nBBCodeText\n: Drawing text with \nBBCode\n protocol.\n\n\nCanvas\n: Drawing on \ncanvas\n.\n\n\nClock\n: A clock to count elapsed time.\n\n\nContainerLite\n: Control the position and angle of children game objects.\n\n\nCSV-scenario\n: Run script in csv format.\n\n\nCSV-to-hash-table\n: Hash table indexed by (col-key, row-key) from csv string.\n\n\nDrag\n: Drag game object.\n\n\nFade-out-destroy\n: Fade out game object then destroy it.\n\n\nFade-volume\n: Fade-in/fade-out volume of sound.\n\n\nFSM\n: Finite state machine.\n\n\nGashapon\n: Pick random item from box.\n\n\nGrid table\n: Viewer of grid table, to manipulate game object of each visible cell.\n\n\nLZ-string\n: Compress string using LZ-based compression algorithm.\n\n\nPage\n: Display text page by page on text object.\n\n\nRun-commands\n: Run commands in array.\n\n\nSequence\n: Run sequence commands in array.\n\n\nSlider\n: Drag thumb on a slider bar.\n\n\nSwirl-pipeline\n: Swirl post processing filter.\n\n\nTagText\n: Displays text with multi-color, font face, or font size with tags.\n\n\nTCRP.Player\n: Run commands on time.\n\n\nTCRP.Recorder\n: Store commands with time.\n\n\nTyping\n: Typing text on text object.\n\n\nVirtual joystick\n: Simulate curosr keys according touch events.\n\n\nWebfont-loader\n: Load web font by google webfont loader in preload stage.\n\n\nXOR\n: Encrypt or decrypt string by XOR algorithm.\n\n\n\n\nDownload\n them in a signle minify file.", 
+            "text": "Phaser\n\n\nPhaser\n is a fun, free and fast 2D game framework for making HTML5 games for desktop and mobile web browsers, supporting Canvas and WebGL rendering.\n\n\nList of my plugins\n\n\n\n\nBBCodeText\n: Drawing text with \nBBCode\n protocol.\n\n\nCanvas\n: Drawing on \ncanvas\n.\n\n\nClock\n: A clock to count elapsed time.\n\n\nContainerLite\n: Control the position and angle of children game objects.\n\n\nCSV-scenario\n: Run script in csv format.\n\n\nCSV-to-hash-table\n: Hash table indexed by (col-key, row-key) from csv string.\n\n\nDrag\n: Drag game object.\n\n\nFade-out-destroy\n: Fade out game object then destroy it.\n\n\nFade-volume\n: Fade-in/fade-out volume of sound.\n\n\nFSM\n: Finite state machine.\n\n\nGashapon\n: Pick random item from box.\n\n\nGrid table\n: Viewer of grid table, to manipulate game object of each visible cell.\n\n\nLZ-string\n: Compress string using LZ-based compression algorithm.\n\n\nPage\n: Display text page by page on text object.\n\n\nPixelation-pipeline\n: Pixelation post processing filter.\n\n\nRun-commands\n: Run commands in array.\n\n\nSequence\n: Run sequence commands in array.\n\n\nSlider\n: Drag thumb on a slider bar.\n\n\nSwirl-pipeline\n: Swirl post processing filter.\n\n\nTagText\n: Displays text with multi-color, font face, or font size with tags.\n\n\nTCRP.Player\n: Run commands on time.\n\n\nTCRP.Recorder\n: Store commands with time.\n\n\nTyping\n: Typing text on text object.\n\n\nVirtual joystick\n: Simulate curosr keys according touch events.\n\n\nWebfont-loader\n: Load web font by google webfont loader in preload stage.\n\n\nXOR\n: Encrypt or decrypt string by XOR algorithm.\n\n\n\n\nDownload\n them in a signle minify file.", 
             "title": "Home"
         }, 
         {
@@ -12,7 +12,7 @@
         }, 
         {
             "location": "/index.html#list-of-my-plugins", 
-            "text": "BBCodeText : Drawing text with  BBCode  protocol.  Canvas : Drawing on  canvas .  Clock : A clock to count elapsed time.  ContainerLite : Control the position and angle of children game objects.  CSV-scenario : Run script in csv format.  CSV-to-hash-table : Hash table indexed by (col-key, row-key) from csv string.  Drag : Drag game object.  Fade-out-destroy : Fade out game object then destroy it.  Fade-volume : Fade-in/fade-out volume of sound.  FSM : Finite state machine.  Gashapon : Pick random item from box.  Grid table : Viewer of grid table, to manipulate game object of each visible cell.  LZ-string : Compress string using LZ-based compression algorithm.  Page : Display text page by page on text object.  Run-commands : Run commands in array.  Sequence : Run sequence commands in array.  Slider : Drag thumb on a slider bar.  Swirl-pipeline : Swirl post processing filter.  TagText : Displays text with multi-color, font face, or font size with tags.  TCRP.Player : Run commands on time.  TCRP.Recorder : Store commands with time.  Typing : Typing text on text object.  Virtual joystick : Simulate curosr keys according touch events.  Webfont-loader : Load web font by google webfont loader in preload stage.  XOR : Encrypt or decrypt string by XOR algorithm.   Download  them in a signle minify file.", 
+            "text": "BBCodeText : Drawing text with  BBCode  protocol.  Canvas : Drawing on  canvas .  Clock : A clock to count elapsed time.  ContainerLite : Control the position and angle of children game objects.  CSV-scenario : Run script in csv format.  CSV-to-hash-table : Hash table indexed by (col-key, row-key) from csv string.  Drag : Drag game object.  Fade-out-destroy : Fade out game object then destroy it.  Fade-volume : Fade-in/fade-out volume of sound.  FSM : Finite state machine.  Gashapon : Pick random item from box.  Grid table : Viewer of grid table, to manipulate game object of each visible cell.  LZ-string : Compress string using LZ-based compression algorithm.  Page : Display text page by page on text object.  Pixelation-pipeline : Pixelation post processing filter.  Run-commands : Run commands in array.  Sequence : Run sequence commands in array.  Slider : Drag thumb on a slider bar.  Swirl-pipeline : Swirl post processing filter.  TagText : Displays text with multi-color, font face, or font size with tags.  TCRP.Player : Run commands on time.  TCRP.Recorder : Store commands with time.  Typing : Typing text on text object.  Virtual joystick : Simulate curosr keys according touch events.  Webfont-loader : Load web font by google webfont loader in preload stage.  XOR : Encrypt or decrypt string by XOR algorithm.   Download  them in a signle minify file.", 
             "title": "List of my plugins"
         }, 
         {
@@ -3589,6 +3589,46 @@
             "location": "/swirlpipeline/index.html#center-position", 
             "text": "Default value is center of window.   Get\n     var   x   =   customPipeline . centerX ;  var   y   =   customPipeline . centerY ;   Set\n     customPipeline . centerX   =   x ;  customPipeline . centerY   =   y ;  \n    or\n     customPipeline . setCenter ( x ,   y );  // customPipeline.setCenter();   // set to center of window", 
             "title": "Center position"
+        }, 
+        {
+            "location": "/pixelationpipeline/index.html", 
+            "text": "Introduction\n\n\nPixelation post processing filter. \nReference\n\n\n\n\nAuthor: Rex\n\n\nA camera filter\n\n\n\n\nSource code\n\n\nPlugin\n, \nminify\n\n\nUsage\n\n\nSample code\n\n\nUser could import class directly, or install it by global plugin.\n\n\nImport class\n\n\nimport\n \nrexPixelationPipeline\n \nfrom\n \n./plugins/pixelationpipeline.js\n;\n\n\n\n\n\nInstall global plugin\n\n\nInstall plugin in \nconfiguration of game\n\n\nimport\n \nPixelationPipelinePlugin\n \nfrom\n \n./plugins/pixelationpipeline-plugin.js\n;\n\n\n\nvar\n \nconfig\n \n=\n \n{\n\n    \n// ...\n\n    \nplugins\n:\n \n{\n\n        \nglobal\n:\n \n[{\n\n            \nkey\n:\n \nrexPixelationPipeline\n,\n\n            \nplugin\n:\n \nPixelationPipelinePlugin\n,\n\n            \nstart\n:\n \ntrue\n\n        \n},\n\n        \n// ...\n\n        \n]\n\n    \n}\n\n    \n// ...\n\n\n};\n\n\nvar\n \ngame\n \n=\n \nnew\n \nPhaser\n.\nGame\n(\nconfig\n);\n\n\n\n\n\nApply filter\n\n\n\n\nCreate pipeline instance\n    \nvar\n \ncustomPipeline\n \n=\n \nscene\n.\nplugins\n.\nget\n(\nrexPixelationPipeline\n).\nadd\n(\nscene\n,\n \nkey\n,\n \n{\n\n    \n// pixelWidth: 0,\n\n    \n// pixelHeight: 0\n\n\n});\n\n\n\n\nAdd pipeline to camera\n    \n// var camera = scene.cameras.main;\n\n\ncamera\n.\nsetRenderToTexture\n(\ncustomPipeline\n);\n\n\n\n\n\n\nPixel size\n\n\n\n\nGet\n    \nvar\n \npixelWidth\n \n=\n \ncustomPipeline\n.\npixelWidth\n;\n\n\nvar\n \npixelHeight\n \n=\n \ncustomPipeline\n.\npixelHeight\n;\n\n\n\n\nSet\n    \ncustomPipeline\n.\npixelWidth\n \n=\n \npixelWidth\n;\n\n\ncustomPipeline\n.\npixelHeight\n \n=\n \npixelHeight\n;\n\n\n// customPipeline.pixelWidth += value;\n\n\n// customPipeline.pixelHeight += value;\n\n\n\n    or\n    \ncustomPipeline\n.\nsetPixelWidth\n(\npixelWidth\n);\n\n\ncustomPipeline\n.\nsetPixelHeight\n(\npixelHeight\n);\n\n\ncustomPipeline\n.\nsetPixelSize\n(\npixelWidth\n,\n \npixelHeight\n);", 
+            "title": "Pixelation"
+        }, 
+        {
+            "location": "/pixelationpipeline/index.html#introduction", 
+            "text": "Pixelation post processing filter.  Reference   Author: Rex  A camera filter", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/pixelationpipeline/index.html#source-code", 
+            "text": "Plugin ,  minify", 
+            "title": "Source code"
+        }, 
+        {
+            "location": "/pixelationpipeline/index.html#usage", 
+            "text": "Sample code  User could import class directly, or install it by global plugin.", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/pixelationpipeline/index.html#import-class", 
+            "text": "import   rexPixelationPipeline   from   ./plugins/pixelationpipeline.js ;", 
+            "title": "Import class"
+        }, 
+        {
+            "location": "/pixelationpipeline/index.html#install-global-plugin", 
+            "text": "Install plugin in  configuration of game  import   PixelationPipelinePlugin   from   ./plugins/pixelationpipeline-plugin.js ;  var   config   =   { \n     // ... \n     plugins :   { \n         global :   [{ \n             key :   rexPixelationPipeline , \n             plugin :   PixelationPipelinePlugin , \n             start :   true \n         }, \n         // ... \n         ] \n     } \n     // ...  };  var   game   =   new   Phaser . Game ( config );", 
+            "title": "Install global plugin"
+        }, 
+        {
+            "location": "/pixelationpipeline/index.html#apply-filter", 
+            "text": "Create pipeline instance\n     var   customPipeline   =   scene . plugins . get ( rexPixelationPipeline ). add ( scene ,   key ,   { \n     // pixelWidth: 0, \n     // pixelHeight: 0  });   Add pipeline to camera\n     // var camera = scene.cameras.main;  camera . setRenderToTexture ( customPipeline );", 
+            "title": "Apply filter"
+        }, 
+        {
+            "location": "/pixelationpipeline/index.html#pixel-size", 
+            "text": "Get\n     var   pixelWidth   =   customPipeline . pixelWidth ;  var   pixelHeight   =   customPipeline . pixelHeight ;   Set\n     customPipeline . pixelWidth   =   pixelWidth ;  customPipeline . pixelHeight   =   pixelHeight ;  // customPipeline.pixelWidth += value;  // customPipeline.pixelHeight += value;  \n    or\n     customPipeline . setPixelWidth ( pixelWidth );  customPipeline . setPixelHeight ( pixelHeight );  customPipeline . setPixelSize ( pixelWidth ,   pixelHeight );", 
+            "title": "Pixel size"
         }, 
         {
             "location": "/eventemitter3/index.html", 

@@ -72,6 +72,7 @@ pages:
     - Camera: camera.md
     - Filters:
         - Swirl: swirlpipeline.md
+        - Pixelation: pixelationpipeline.md
 - Logic:
     - Event emitter: eventemitter3.md
     - Run commands:
