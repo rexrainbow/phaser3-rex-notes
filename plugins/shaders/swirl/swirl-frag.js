@@ -22,9 +22,9 @@ uniform vec2 center;
 uniform float radius;
 uniform float angle;
 
-vec4 PostFX(sampler2D tex, vec2 uv, float time)
+void main (void)
 {
-  vec2 tc = uv * texSize;
+  vec2 tc = outTexCoord * texSize;
   tc -= center;
   float dist = length(tc);
   if (dist < radius) 
@@ -36,13 +36,7 @@ vec4 PostFX(sampler2D tex, vec2 uv, float time)
     tc = vec2(dot(tc, vec2(c, -s)), dot(tc, vec2(s, c)));
   }
   tc += center;
-  vec3 color = texture2D(tex, tc / texSize).rgb;
-  return vec4(color, 1.0);
-}
-
-void main (void)
-{
-  gl_FragColor = PostFX(uMainSampler, outTexCoord, time);
+  gl_FragColor = texture2D(uMainSampler, tc / texSize);
 }
 `;
 
