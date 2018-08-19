@@ -21,8 +21,7 @@ class PixelationPipeline extends TextureTintPipeline {
     }
 
     resetFromJSON(o) {
-        this.pixelWidth = GetValue(o, 'pixel.width', 0);
-        this.pixelHeight = GetValue(o, 'pixel.height', 0);
+        this.setPixelSize(GetValue(o, 'pixelWidth', 0), GetValue(o, 'pixelHeight', 0));
         return this;
     }
 
