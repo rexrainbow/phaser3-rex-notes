@@ -25,6 +25,7 @@ import VirtualJoyStick from './virtualjoystick.js';
 // member of game object
 import Fade from './fade.js';
 import FadeOutDestroy from './fade-out-destroy.js';
+import PathFollower from './pathfollower.js';
 
 // member of text
 import TextTyping from './texttyping.js';
@@ -76,6 +77,7 @@ export {
     // member of game object
     Fade,
     FadeOutDestroy,
+    PathFollower,
 
     // member of text
     TextTyping,

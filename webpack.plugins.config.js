@@ -40,6 +40,7 @@ module.exports = {
 
         // member of game object
         'fadeplugin': './plugins/fade-plugin.js',
+        'pathfollowerplugin': './plugins/pathfollower-plugin.js',
 
         // member of text
         'texttypingplugin': './plugins/texttyping-plugin.js',
