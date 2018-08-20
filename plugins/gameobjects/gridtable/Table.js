@@ -14,13 +14,29 @@ class Table {
 
     resetFromJSON(o) {
         this.colCount = undefined;
-        this.defaultCellHeightMode = true;
+        this._nonZeroDeltaHeightCount = 0;
         this.resetTotalRowsHeight();
         this.setDefaultCellHeight(GetValue(o, "cellHeight", 30));
         this.setDefaultCellWidth(GetValue(o, "cellWidth", 30));
         this.initCells(GetValue(o, "cellsCount", 0));
         this.setColumnCount(GetValue(o, "columns", 1));
         return this;
+    }
+
+    get nonZeroDeltaHeightCount() {
+        return this._nonZeroDeltaHeightCount;
+    }
+
+    set nonZeroDeltaHeightCount(count) {
+        if (this._nonZeroDeltaHeightCount === count) {
+            return;
+        }
+        this._nonZeroDeltaHeightCount = count;
+        this.resetTotalRowsHeight();
+    }
+
+    get defaultCellHeightMode() {
+        return (this.nonZeroDeltaHeightCount === 0);
     }
 
     setDefaultCellHeight(height) {
@@ -36,7 +52,7 @@ class Table {
     initCells(size) {
         var cells = this.cells;
         cells.length = size;
-        for(var i=0; i<size; i++) {
+        for (var i = 0; i < size; i++) {
             cells[i] = null;
         }
         return this;
@@ -171,20 +187,11 @@ class Table {
         }
 
         var h, sum = 0;
-        var allDefaultHeight = true;
         for (var i = start; i <= end; i++) {
             h = this.getRowHeight(i);
             sum += h;
-
-            if (h !== this.defaultCellHeight)
-                allDefaultHeight = false;
         }
 
-        if (allDefaultHeight &&
-            (start === 0) &&
-            (end >= (this.rowCount - 1))) {
-            this.defaultCellHeightMode = true;
-        }
         return sum;
     }
 
@@ -224,7 +231,7 @@ class Table {
             cellHeight = this.defaultCellHeight;
         else {
             var cell = this.getCell(cellIdx, false);
-            var deltaHeight = (cell && cell.hasOwnProperty('deltaHeight')) ? cell.deltaHeight : 0;
+            var deltaHeight = (cell) ? cell.deltaHeight : 0;
             cellHeight = this.defaultCellHeight + deltaHeight;
         }
 
@@ -234,7 +241,7 @@ class Table {
     resetTotalRowsHeight() {
         this._totalRowsHeight = null;
     }
-    
+
     get totalRowsHeight() {
         if (this._totalRowsHeight === null) {
             this._totalRowsHeight = this.rowIndexToHeight(0, this.rowCount - 1);
@@ -277,9 +284,6 @@ class Table {
             cell = new CellKlass(this);
         } else {
             cell.setParent(this);
-            if (cell.hasOwnProperty('deltaHeight')) {
-                delete cell.deltaHeight;
-            }
         }
         cell.index = cellIdx;
 

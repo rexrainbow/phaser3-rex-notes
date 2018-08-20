@@ -5,6 +5,7 @@ class Cell {
         this.container = null;
         this.data = null;
         this.setParent(parent);
+        this.deltaHeight = 0;
         //this.resetFromJSON(config);
     }
 
@@ -60,6 +61,7 @@ class Cell {
         if (this.container) {
             this.parentContainer.setChildLocalPosition(this.container, x, y);
         }
+        return this;
     }
 
     setData(key, value) {
@@ -90,7 +92,28 @@ class Cell {
         }
     }
 
+    setDeltaHeight(deltaHeight) {
+        if (deltaHeight == null) {
+            deltaHeight = 0;
+        }
+
+        var table = this.parent;
+        if ((this.deltaHeight === 0) && (deltaHeight !== 0)) {
+            table.nonZeroDeltaHeightCount++;
+        } else if ((this.deltaHeight !== 0) && (deltaHeight === 0)) {
+            table.nonZeroDeltaHeightCount--;
+        }
+
+        this.deltaHeight = deltaHeight;
+        return this;
+    }
+
     destroy() {
+        var table = this.parent;
+        if (this.deltaHeight !== 0) {
+            table.nonZeroDeltaHeightCount--;
+        }
+
         this.cleanData();
         this.destroyContainer();
         this.parent = undefined;
