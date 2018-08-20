@@ -1,7 +1,7 @@
 
 'use strict'
 
-import loaderCallback from './awaitloader/awaitLoaderCallback.js';
+import loaderCallback from './loader/awaitloader/awaitLoaderCallback.js';
 
 class AwaitLoaderPlugin extends Phaser.Plugins.BasePlugin {
     constructor(pluginManager) {

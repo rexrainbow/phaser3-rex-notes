@@ -1,6 +1,6 @@
 'use strict'
 
-import TasksManager from './ticktask/TaskManager.js';
+import TasksManager from './behaviors/ticktask/TaskManager.js';
 
 class TasksManagerPlugin extends Phaser.Plugins.BasePlugin {
 

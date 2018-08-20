@@ -1,2 +1,2 @@
-import Fade from './fade/Fade.js';
+import Fade from './behaviors/fade/Fade.js';
 export default Fade;

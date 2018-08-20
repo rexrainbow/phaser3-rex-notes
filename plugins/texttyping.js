@@ -1,2 +1,2 @@
-import TextTyping from './texttyping/TextTyping.js';
+import TextTyping from './behaviors/texttyping/TextTyping.js';
 export default TextTyping;
