@@ -4,6 +4,7 @@ import GetSceneObject from 'rexPlugins/utils/system/GetSceneObject.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const DegToRad = Phaser.Math.DegToRad;
+const AngleBetween = Phaser.Math.Angle.Between;
 
 class PathFollower {
     constructor(gameObject, config) {
@@ -35,7 +36,9 @@ class PathFollower {
     toJSON() {
         return {
             path: this.path,
-            t: this.t
+            t: this.t,
+            rotateToPath: this.rotateToPath,
+            rotationOffset: this.rotationOffset
         };
     }
 
@@ -90,14 +93,13 @@ class PathFollower {
         this.pathVector = this.path.getPoint(this.t, this.pathVector);
         gameObject.setPosition(this.pathVector.x, this.pathVector.y);
 
-        var speedX = gameObject.x - oldX;
-        var speedY = gameObject.y - oldY;
-        if (speedX === 0 && speedY === 0) {
+        if ((gameObject.x === oldX) &&
+            (gameObject.y === oldY)) {
             return;
         }
 
         if (this.rotateToPath) {
-            gameObject.rotation = Math.atan2(speedY, speedX) + this.rotationOffset;
+            gameObject.rotation = AngleBetween(oldX, oldY, gameObject.x, gameObject.y) + this.rotationOffset;
         }
     }
 }

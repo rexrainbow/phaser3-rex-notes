@@ -396,7 +396,7 @@ group.refresh();  // call this method when position of game objects were changed
 ### Add a game object to physics world
 
 ```javascript
-scene.physics.existing(gameObject, isStatic);
+scene.physics.add.existing(gameObject, isStatic);
 ```
 
 #### Get physics body
