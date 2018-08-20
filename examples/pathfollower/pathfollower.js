@@ -15,9 +15,10 @@ class Demo extends Phaser.Scene {
 
     create() {
         var path = this.add.path(100, 100)
-            .lineTo(100, 200)
-            .lineTo(200, 200)
-            .lineTo(200, 300);
+            .lineTo(300, 100)
+            .lineTo(100, 300)
+            .lineTo(300, 300)
+            .lineTo(100, 100);
         var graphics = this.add.graphics({
             lineStyle: {
                 width: 3,
@@ -32,16 +33,17 @@ class Demo extends Phaser.Scene {
             .fillPoint(0, 0, 40);
         gameObject.pathFollower = this.plugins.get('rexPathFollower').add(gameObject, {
             path: path,
-            t: 0
+            t: 0,
+            rotateToPath: true
         });
 
         this.tweens.add({
             targets: gameObject.pathFollower,
             t: 1,
             ease: 'Linear', // 'Cubic', 'Elastic', 'Bounce', 'Back'
-            duration: 1000,
+            duration: 3000,
             repeat: -1,
-            yoyo: true
+            yoyo: false
         });
 
     }

@@ -3,6 +3,7 @@
 import GetSceneObject from 'rexPlugins/utils/system/GetSceneObject.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
+const DegToRad = Phaser.Math.DegToRad;
 
 class PathFollower {
     constructor(gameObject, config) {
@@ -10,29 +11,27 @@ class PathFollower {
         this.scene = GetSceneObject(gameObject);
 
         this._t = 0;
-        this.pos = undefined;
+        this.pathVector = undefined;
         this.resetFromJSON(config);
         this.boot();
     }
 
-    /**
-     * Reset status by JSON object
-     * @param {object} o JSON object
-     * @returns {object} this object
-     */
     resetFromJSON(o) {
         this.setPath(GetValue(o, 'path', undefined));
         var t = GetValue(o, 't', undefined);
         if (t !== undefined) {
             this.setT(t);
         }
+
+        var rotateToPath = GetValue(o, 'rotateToPath', false);
+        var rotationOffset = GetValue(o, 'rotationOffset', undefined);
+        if (rotationOffset === undefined) {
+            rotationOffset = DegToRad(GetValue(o, 'angleOffset', 0));
+        }
+        this.setRotateToPath(rotateToPath, rotationOffset);
         return this;
     }
 
-    /**
-     * Return status in JSON object
-     * @returns JSON object
-     */
     toJSON() {
         return {
             path: this.path,
@@ -74,13 +73,32 @@ class PathFollower {
         this.update();
     }
 
+    setRotateToPath(rotateToPath, rotationOffset) {
+        this.rotateToPath = rotateToPath;
+        this.rotationOffset = rotationOffset;
+        return this;
+    }
+
     update() {
         if (this.path === undefined) {
             return;
         }
 
-        this.pos = this.path.getPoint(this.t, this.pos);
-        this.gameObject.setPosition(this.pos.x, this.pos.y);
+        var gameObject = this.gameObject;
+        var oldX = gameObject.x,
+            oldY = gameObject.y;
+        this.pathVector = this.path.getPoint(this.t, this.pathVector);
+        gameObject.setPosition(this.pathVector.x, this.pathVector.y);
+
+        var speedX = gameObject.x - oldX;
+        var speedY = gameObject.y - oldY;
+        if (speedX === 0 && speedY === 0) {
+            return;
+        }
+
+        if (this.rotateToPath) {
+            gameObject.rotation = Math.atan2(speedY, speedX) + this.rotationOffset;
+        }
     }
 }
 
