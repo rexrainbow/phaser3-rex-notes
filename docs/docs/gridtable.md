@@ -145,11 +145,16 @@ Refresh all visible cells.
 table.updateTable(true);
 ```
 
-#### Set total cells count
+#### Total cells count
 
-```javascript
-table.setCellsCunt(count).updateTable();
-```
+- Get
+    ```javascript
+    var count = table.cellsCount;
+    ```
+- Set
+    ```javascript
+    table.setCellsCunt(count).updateTable();
+    ```
 
 ### Set table size
 
@@ -171,6 +176,21 @@ table.setColumnCount(count).updateTable();
 var cell = table.getCell(cellIndxe);
 ```
 
+#### Cell height
+
+- Get
+    ```javascript
+    var height = cell.height;
+    ```
+- Set
+    ```javascript
+    cell.height = height;
+    ```
+    or
+    ```javascript
+    cell.setHeight(height);
+    ```
+
 #### Fore each visible cell
 
 - For when you absolutely know this Set won't be modified during the iteration
@@ -188,20 +208,22 @@ var cell = table.getCell(cellIndxe);
 
 #### Container
 
-```javascript
-var container = cell.getContainer();
-```
-
-```javascript
-var container = cell.popContainer();
-```
-
-```javascript
-cell.setContainer(container);
-```
-```javascript
-cell.destroyContainer();
-```
+- Get
+    ```javascript
+    var container = cell.getContainer();
+    ```
+- Pop (get and remove)
+    ```javascript
+    var container = cell.popContainer();
+    ```
+- Set
+    ```javascript
+    cell.setContainer(container);
+    ```
+- Remove
+    ```javascript
+    cell.destroyContainer();
+    ```
 
 #### Properties
 

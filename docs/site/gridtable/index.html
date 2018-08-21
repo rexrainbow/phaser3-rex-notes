@@ -928,8 +928,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#set-total-cells-count" title="Set total cells count" class="md-nav__link">
-    Set total cells count
+  <a href="#total-cells-count" title="Total cells count" class="md-nav__link">
+    Total cells count
   </a>
   
 </li>
@@ -970,6 +970,13 @@
           <li class="md-nav__item">
   <a href="#get-cell" title="Get cell" class="md-nav__link">
     Get cell
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cell-height" title="Cell height" class="md-nav__link">
+    Cell height
   </a>
   
 </li>
@@ -2470,8 +2477,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#set-total-cells-count" title="Set total cells count" class="md-nav__link">
-    Set total cells count
+  <a href="#total-cells-count" title="Total cells count" class="md-nav__link">
+    Total cells count
   </a>
   
 </li>
@@ -2512,6 +2519,13 @@
           <li class="md-nav__item">
   <a href="#get-cell" title="Get cell" class="md-nav__link">
     Get cell
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cell-height" title="Cell height" class="md-nav__link">
+    Cell height
   </a>
   
 </li>
@@ -2683,10 +2697,15 @@
 <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">updateTable</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
 </pre></div>
 
-<h4 id="set-total-cells-count">Set total cells count<a class="headerlink" href="#set-total-cells-count" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">setCellsCunt</span><span class="p">(</span><span class="nx">count</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
-</pre></div>
-
+<h4 id="total-cells-count">Total cells count<a class="headerlink" href="#total-cells-count" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">count</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">cellsCount</span><span class="p">;</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">setCellsCunt</span><span class="p">(</span><span class="nx">count</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
+</pre></div></li>
+</ul>
 <h3 id="set-table-size">Set table size<a class="headerlink" href="#set-table-size" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">setGridSize</span><span class="p">(</span><span class="nx">colCount</span><span class="p">,</span> <span class="nx">rowCount</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
 </pre></div>
@@ -2700,6 +2719,18 @@
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cell</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">getCell</span><span class="p">(</span><span class="nx">cellIndxe</span><span class="p">);</span>
 </pre></div>
 
+<h4 id="cell-height">Cell height<a class="headerlink" href="#cell-height" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">height</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">cell</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">height</span><span class="p">;</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">cell</span><span class="p">.</span><span class="nx">setHeight</span><span class="p">(</span><span class="nx">height</span><span class="p">);</span>
+</pre></div></li>
+</ul>
 <h4 id="fore-each-visible-cell">Fore each visible cell<a class="headerlink" href="#fore-each-visible-cell" title="Permanent link">&para;</a></h4>
 <ul>
 <li>For when you absolutely know this Set won't be modified during the iteration
@@ -2714,16 +2745,20 @@
 </pre></div></li>
 </ul>
 <h4 id="container">Container<a class="headerlink" href="#container" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">container</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">getContainer</span><span class="p">();</span>
-</pre></div>
-
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">container</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">popContainer</span><span class="p">();</span>
-</pre></div>
-
-<p><div class="codehilite"><pre><span></span><span class="nx">cell</span><span class="p">.</span><span class="nx">setContainer</span><span class="p">(</span><span class="nx">container</span><span class="p">);</span>
-</pre></div>
-<div class="codehilite"><pre><span></span><span class="nx">cell</span><span class="p">.</span><span class="nx">destroyContainer</span><span class="p">();</span>
-</pre></div></p>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">container</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">getContainer</span><span class="p">();</span>
+</pre></div></li>
+<li>Pop (get and remove)
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">container</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">popContainer</span><span class="p">();</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">cell</span><span class="p">.</span><span class="nx">setContainer</span><span class="p">(</span><span class="nx">container</span><span class="p">);</span>
+</pre></div></li>
+<li>Remove
+    <div class="codehilite"><pre><span></span><span class="nx">cell</span><span class="p">.</span><span class="nx">destroyContainer</span><span class="p">();</span>
+</pre></div></li>
+</ul>
 <h4 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cellIndex</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">index</span><span class="p">;</span>
 </pre></div>
