@@ -281,6 +281,18 @@ class GridTable extends Container {
         return this;
     }
 
+    getTableOYPercentage() {
+        return (this.tableOY / -this.tableVisibleHeight);
+    }
+
+    set t(value) {
+        this.setTableOYByPercentage(value);
+    }
+
+    get t() {
+        return this.getTableOYPercentage();
+    }
+
     updateTable(refresh) {
         if (refresh) {
             this.updateFlag = true;

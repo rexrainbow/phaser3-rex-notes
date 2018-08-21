@@ -43,24 +43,39 @@ class Demo extends Phaser.Scene {
         // drag table content
         var topRight = table.getTopRight();
         var bottomRight = table.getBottomRight();
-        this.thumb = this.add.image(0, 0, 'dot').setScale(4, 4);
-        this.thumb.slider = this.plugins.get('rexSlider').add(this.thumb, {
+        var thumb = this.add.image(0, 0, 'dot').setScale(4, 4);
+        thumb.slider = this.plugins.get('rexSlider').add(thumb, {
             endPoints: [{
-                    x: topRight.x,
-                    y: topRight.y
+                    x: topRight.x + 10,
+                    y: topRight.y + 10
                 },
                 {
-                    x: bottomRight.x,
-                    y: bottomRight.y
+                    x: bottomRight.x + 10,
+                    y: bottomRight.y - 10
                 }
             ]
         });
-        this.thumb.slider.on('valuechange', function (newValue) {
+        thumb.slider.on('valuechange', function (newValue) {
             table.setTableOYByPercentage(newValue).updateTable();
         });
         this.add.graphics()
             .lineStyle(3, 0x55ff55, 1)
-            .strokePoints(this.thumb.slider.endPoints);
+            .strokePoints(thumb.slider.endPoints);
+
+
+        // drag table content
+        table.setInteractive();
+        table.on('pointermove', function (pointer) {
+            if (!pointer.isDown) {
+                return;
+            }
+            var dx = pointer.x - pointer.prevPosition.x;
+            var dy = pointer.y - pointer.prevPosition.y;
+            table.addTableOXY(dx, dy).updateTable();
+
+            // reflect to slider
+            thumb.slider.setValue(table.getTableOYPercentage());
+        });
     }
 
     update() {}
