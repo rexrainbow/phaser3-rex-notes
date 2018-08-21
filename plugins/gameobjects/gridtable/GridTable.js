@@ -286,7 +286,7 @@ class GridTable extends Container {
     }
 
     set t(value) {
-        this.setTableOYByPercentage(value);
+        this.setTableOYByPercentage(value).updateTable();
     }
 
     get t() {

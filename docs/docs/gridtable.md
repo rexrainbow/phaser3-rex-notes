@@ -137,6 +137,24 @@ table.addTableOXY(dx, dy).updateTable();
 
 These will trigger `cellvisible`, or `cellinvisible` events.
 
+#### Scroll by percentage
+
+- Set
+    ```javascript
+    table.setTableOYByPercentage(t).updateTable();  // t: 0~1
+    ```
+    or
+    ```javascript
+    table.t = t;  // include table.updateTable()
+    ```
+- Get
+    ```javascript
+    var t = table.getTableOYPercentage();
+    //var t = table.t;
+    ```
+
+Table could be scrolled by [slider](slider.md) behavior.
+
 ### Refresh table content
 
 Refresh all visible cells.
