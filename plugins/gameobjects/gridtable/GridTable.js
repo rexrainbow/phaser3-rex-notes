@@ -63,15 +63,15 @@ class GridTable extends Container {
     }
 
     setCellsCount(count) {
-        var cellCount = this.table.cellCount;
-        if (cellCount === count) {
+        var cellsCount = this.table.cellsCount;
+        if (cellsCount === count) {
             return this;
         }
 
-        if (cellCount > count) {
-            this.removeCell(count, cellCount - count);
-        } else { // cellCount < count
-            this.insertNewCell(cellCount, count - cellCount);
+        if (cellsCount > count) {
+            this.removeCell(count, cellsCount - count);
+        } else { // cellsCount < count
+            this.insertNewCell(cellsCount, count - cellsCount);
         }
         return this;
     }
@@ -101,7 +101,7 @@ class GridTable extends Container {
         if (count <= 0) {
             return this;
         }
-        cellIdx = Clamp(cellIdx, 0, this.table.cellCount);
+        cellIdx = Clamp(cellIdx, 0, this.table.cellsCount);
         this.table.insertNewCell(cellIdx, count);
         if (cellIdx <= this.lastVisibleCellIdx) {
             this.updateFlag = true;
@@ -124,7 +124,7 @@ class GridTable extends Container {
             return this;
         }
         // out-of-range
-        if (cellIdx > this.table.cellCount) {
+        if (cellIdx > this.table.cellsCount) {
             return this;
         }
 
@@ -216,7 +216,7 @@ class GridTable extends Container {
             } else if (tableOXExeceedLeft) {
                 ox = leftTableOX
             } else {
-                var tableVisibleWidth = this.tableVisibleWidth;
+                // var tableVisibleWidth = this.tableVisibleWidth;
                 if (tableOXExeceedRight)
                     ox = rightTableOX;
             }
@@ -304,6 +304,18 @@ class GridTable extends Container {
         return this.table.getCell(cellIdx, true);
     }
 
+    get cellsCount() {
+        return this.table.cellsCount;
+    }
+
+    setCellHeight(cellIdx, height) {
+        if (typeof (cellIdx) === 'number') {
+            var cell = this.table.getCell(cellIdx, true);
+            cell.height = height;
+        }
+        return this;
+    }
+
     // For when you know this Set will be modified during the iteration
     eachVisibleCell(callback, scope) {
         this.visibleCells.each(callback, scope);
@@ -351,7 +363,7 @@ class GridTable extends Container {
         var cellIdx = table.colRowToCellIndex(colIdx, rowIdx);
         var bottomBound = this.bottomBound;
         var rightBound = this.rightBound;
-        var lastIdx = table.cellCount - 1;
+        var lastIdx = table.cellsCount - 1;
         var lastColIdx = table.colCount - 1;
 
         var cellTLX0 = this.getTLX(colIdx),

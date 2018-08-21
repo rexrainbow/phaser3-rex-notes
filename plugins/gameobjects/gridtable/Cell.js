@@ -5,7 +5,7 @@ class Cell {
         this.container = null;
         this.data = null;
         this.setParent(parent);
-        this.deltaHeight = 0;
+        this._deltaHeight = 0;
         //this.resetFromJSON(config);
     }
 
@@ -17,6 +17,10 @@ class Cell {
     //resetFromJSON(o) {
     //    return this;
     //}
+
+    get table () {
+        return this.parent;
+    }
 
     get colIndx() {
         return this.parent.cellIndxeToColIndex(this.index);
@@ -92,20 +96,53 @@ class Cell {
         }
     }
 
-    setDeltaHeight(deltaHeight) {
+    get deltaHeight() {
+        return this._deltaHeight;
+    }
+
+    set deltaHeight(deltaHeight) {
         if (deltaHeight == null) {
             deltaHeight = 0;
         }
-
         var table = this.parent;
-        if ((this.deltaHeight === 0) && (deltaHeight !== 0)) {
+        if ((this._deltaHeight === 0) && (deltaHeight !== 0)) {
             table.nonZeroDeltaHeightCount++;
-        } else if ((this.deltaHeight !== 0) && (deltaHeight === 0)) {
+        } else if ((this._deltaHeight !== 0) && (deltaHeight === 0)) {
             table.nonZeroDeltaHeightCount--;
         }
 
+        this._deltaHeight = deltaHeight;
+    }
+
+    setDeltaHeight(deltaHeight) {
         this.deltaHeight = deltaHeight;
         return this;
+    }
+
+    get height() {
+        var table = this.parent;
+        return this.deltaHeight + table.defaultCellHeight;
+    }
+
+    set height(height) {
+        var table = this.parent;
+        var deltaHeight;
+        if (height === undefined) {
+            deltaHeight = 0;
+        } else {
+            deltaHeight = height - table.defaultCellHeight;
+        }
+        this.setDeltaHeight(deltaHeight);
+    }
+
+    setHeight(height) {
+        this.height = height;
+        return this;
+    }
+
+    get width () {
+        var table = this.parent;
+        return table.defaultCellWidth;
     }
 
     destroy() {

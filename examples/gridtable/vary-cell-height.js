@@ -13,14 +13,12 @@ class Demo extends Phaser.Scene {
     create() {
         var newCellObject = function (scene, cell) {
             var cellIdx = cell.index;
-            var cellWidth = 120;
-            var cellHeight = (cellIdx % 2) ? 60 : 80;
-            cell.setDeltaHeight(cellHeight - 60);
+            // cell.height = (cellIdx % 2) ? 40 : 80;  // se height of visible cell
 
             var cellBg = (cellIdx % 2) ? 0x696969 : 0x808080;
             var bg = scene.add.graphics()
                 .fillStyle(cellBg)
-                .fillRect(2, 2, cellWidth - 2, cellHeight - 2);
+                .fillRect(2, 2, cell.width - 2, cell.height - 2);
             var txt = scene.add.text(5, 5, cellIdx);
             var container = scene.add.container(0, 0, [bg, txt]);
             return container;
@@ -38,6 +36,13 @@ class Demo extends Phaser.Scene {
             cellVisibleCallback: onCellVisible.bind(this),
         });
 
+        // set height of all cells
+        for(var i=0, cnt= table.cellsCount; i<cnt; i++) {
+            var cellHeight = (i % 2) ? 40 : 80;
+            table.setCellHeight(i, cellHeight);
+        }
+        table.updateTable(true);  // refresh visible cells
+        
         // draw bound
         this.add.graphics()
             .lineStyle(3, 0xff0000)

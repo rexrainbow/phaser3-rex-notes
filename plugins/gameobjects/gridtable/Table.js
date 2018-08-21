@@ -112,7 +112,7 @@ class Table {
         return Math.ceil(this.cells.length / this.colCount);
     }
 
-    get cellCount() {
+    get cellsCount() {
         return this.cells.length;
     }
 
@@ -136,7 +136,6 @@ class Table {
         // count cell height one by one
         var rowCount = this.rowCount;
         var remain = height,
-            cellCount = 0,
             isValidIdx;
         var cell, rowHeight, rowIdx = 0;
 
