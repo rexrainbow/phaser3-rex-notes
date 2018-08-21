@@ -40,7 +40,7 @@ class Demo extends Phaser.Scene {
 
         var setDataBase = function (database) {
             table.database = database;
-            table.setCellsCount(database.length).updateTable(true).setTableOY(0);
+            table.setCellsCount(database.length).setTableOY(0).updateTable(true);
         };
 
         this.add.text(0, 0, 'Db0')
