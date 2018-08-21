@@ -2683,8 +2683,8 @@
 <li>On any touching start
     <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerdown&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">){</span>
     <span class="kd">var</span> <span class="nx">touchX</span> <span class="o">=</span> <span class="nx">pointer</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
-    <span class="kd">var</span> <span class="nx">touchY</span> <span class="o">=</span> <span class="nx">pointer</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>      
-    <span class="c1">// ...      </span>
+    <span class="kd">var</span> <span class="nx">touchY</span> <span class="o">=</span> <span class="nx">pointer</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+    <span class="c1">// ...</span>
  <span class="p">});</span>
 </pre></div></li>
 <li>On any touching end
@@ -2693,6 +2693,16 @@
     <span class="kd">var</span> <span class="nx">touchY</span> <span class="o">=</span> <span class="nx">pointer</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
     <span class="c1">// ...</span>
  <span class="p">});</span>
+</pre></div></li>
+<li>On touch game object start
+    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setInteractive</span><span class="p">().</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerdown&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">localX</span><span class="p">,</span> <span class="nx">localY</span><span class="p">,</span> <span class="nx">camera</span><span class="p">){</span>
+    <span class="c1">// ...</span>
+<span class="p">})</span>
+</pre></div></li>
+<li>On touch game object end
+    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setInteractive</span><span class="p">().</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerup&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">localX</span><span class="p">,</span> <span class="nx">localY</span><span class="p">,</span> <span class="nx">camera</span><span class="p">){</span>
+    <span class="c1">// ...</span>
+<span class="p">})</span>
 </pre></div></li>
 </ul>
 <p>Reference : <a href="index.html#properties-of-point">Properties of point</a></p>
@@ -2712,17 +2722,17 @@
 </li>
 <li>Ellipse<ul>
 <li>shape : <code>new Phaser.Geom.Ellipse(x, y, width, height)</code></li>
-<li>callback : <code>Phaser.Geom.Ellipse.Contains</code>    </li>
+<li>callback : <code>Phaser.Geom.Ellipse.Contains</code></li>
 </ul>
 </li>
 <li>Rectangle<ul>
 <li>shape : <code>new Phaser.Geom.Rectangle(x, y, width, height)</code></li>
-<li>callback : <code>Phaser.Geom.Rectangle.Contains</code>      </li>
+<li>callback : <code>Phaser.Geom.Rectangle.Contains</code></li>
 </ul>
 </li>
 <li>Triangle<ul>
 <li>shape : <code>new Phaser.Geom.Triangle(x1, y1, x2, y2, x3, y3)</code></li>
-<li>callback : <code>Phaser.Geom.Triangle.Contains</code>       </li>
+<li>callback : <code>Phaser.Geom.Triangle.Contains</code></li>
 </ul>
 </li>
 <li>Polygon<ul>
@@ -2754,17 +2764,17 @@
 </li>
 <li>Ellipse<ul>
 <li><code>hitArea</code> : <code>new Phaser.Geom.Ellipse(x, y, width, height)</code></li>
-<li><code>hitAreaCallback</code> : <code>Phaser.Geom.Ellipse.Contains</code>    </li>
+<li><code>hitAreaCallback</code> : <code>Phaser.Geom.Ellipse.Contains</code></li>
 </ul>
 </li>
 <li>Rectangle<ul>
 <li><code>hitArea</code> : <code>new Phaser.Geom.Rectangle(x, y, width, height)</code></li>
-<li><code>hitAreaCallback</code> : <code>Phaser.Geom.Rectangle.Contains</code>      </li>
+<li><code>hitAreaCallback</code> : <code>Phaser.Geom.Rectangle.Contains</code></li>
 </ul>
 </li>
 <li>Triangle<ul>
 <li><code>hitArea</code> : <code>new Phaser.Geom.Triangle(x1, y1, x2, y2, x3, y3)</code></li>
-<li><code>hitAreaCallback</code> : <code>Phaser.Geom.Triangle.Contains</code>       </li>
+<li><code>hitAreaCallback</code> : <code>Phaser.Geom.Triangle.Contains</code></li>
 </ul>
 </li>
 <li>Polygon<ul>

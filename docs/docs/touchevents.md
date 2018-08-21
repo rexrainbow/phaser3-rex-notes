@@ -21,8 +21,8 @@ Built-in touch/mouse events of phaser.
     ```javascript
     scene.input.on('pointerdown', function(pointer){
         var touchX = pointer.x;
-        var touchY = pointer.y;      
-        // ...      
+        var touchY = pointer.y;
+        // ...
      });
     ```
 - On any touching end
@@ -32,6 +32,18 @@ Built-in touch/mouse events of phaser.
         var touchY = pointer.y;
         // ...
      });
+    ```
+- On touch game object start
+    ```javascript
+    gameObject.setInteractive().on('pointerdown', function(pointer, localX, localY, camera){
+        // ...
+    })
+    ```
+- On touch game object end
+    ```javascript
+    gameObject.setInteractive().on('pointerup', function(pointer, localX, localY, camera){
+        // ...
+    })
     ```
 
 Reference : [Properties of point](touchevents.md#properties-of-point)
@@ -53,13 +65,13 @@ Call `gameObject.setInteractive(...)` to register touch input of Game Object bef
         - callback : `Phaser.Geom.Circle.Contains`
     - Ellipse
         - shape : `new Phaser.Geom.Ellipse(x, y, width, height)`
-        - callback : `Phaser.Geom.Ellipse.Contains`    
+        - callback : `Phaser.Geom.Ellipse.Contains`
     - Rectangle
         - shape : `new Phaser.Geom.Rectangle(x, y, width, height)`
-        - callback : `Phaser.Geom.Rectangle.Contains`      
+        - callback : `Phaser.Geom.Rectangle.Contains`
     - Triangle
         - shape : `new Phaser.Geom.Triangle(x1, y1, x2, y2, x3, y3)`
-        - callback : `Phaser.Geom.Triangle.Contains`       
+        - callback : `Phaser.Geom.Triangle.Contains`
     - Polygon
         - shape : `new Phaser.Geom.Polygon(points)`
         - callback : `Phaser.Geom.Polygon.Contains`
@@ -84,13 +96,13 @@ Call `gameObject.setInteractive(...)` to register touch input of Game Object bef
                 - `hitAreaCallback` : `Phaser.Geom.Circle.Contains`
             - Ellipse
                 - `hitArea` : `new Phaser.Geom.Ellipse(x, y, width, height)`
-                - `hitAreaCallback` : `Phaser.Geom.Ellipse.Contains`    
+                - `hitAreaCallback` : `Phaser.Geom.Ellipse.Contains`
             - Rectangle
                 - `hitArea` : `new Phaser.Geom.Rectangle(x, y, width, height)`
-                - `hitAreaCallback` : `Phaser.Geom.Rectangle.Contains`      
+                - `hitAreaCallback` : `Phaser.Geom.Rectangle.Contains`
             - Triangle
                 - `hitArea` : `new Phaser.Geom.Triangle(x1, y1, x2, y2, x3, y3)`
-                - `hitAreaCallback` : `Phaser.Geom.Triangle.Contains`       
+                - `hitAreaCallback` : `Phaser.Geom.Triangle.Contains`
             - Polygon
                 - `hitArea` : `new Phaser.Geom.Polygon(points)`
                 - `hitAreaCallback` : `Phaser.Geom.Polygon.Contains`
