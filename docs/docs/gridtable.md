@@ -145,7 +145,7 @@ Refresh all visible cells.
 table.updateTable(true);
 ```
 
-#### Total cells count
+### Total cells count
 
 - Get
     ```javascript
