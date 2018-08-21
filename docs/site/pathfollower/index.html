@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/angle/index.html">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/pathfollower/index.html">
       
       
         <meta name="author" content="rexrainbow">
@@ -36,7 +36,7 @@
     
     
       
-        <title>Angle - Notes of Phaser 3</title>
+        <title>Path follower - Notes of Phaser 3</title>
       
     
     
@@ -96,7 +96,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Angle
+                Path follower
               </span>
             
           
@@ -940,10 +940,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
     
     <label class="md-nav__link" for="nav-5">
       Behavior
@@ -1007,11 +1009,111 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../pathfollower/index.html" title="Path follower" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Path follower
+      </label>
+    
+    <a href="index.html" title="Path follower" class="md-nav__link md-nav__link--active">
       Path follower
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#import-class" title="Import class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
+    Install global plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-instance" title="Create instance" class="md-nav__link">
+    Create instance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#move-along-path" title="Move along path" class="md-nav__link">
+    Move along path
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-path" title="Set path" class="md-nav__link">
+    Set path
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-rotate-to-path" title="Set rotate-to-path" class="md-nav__link">
+    Set rotate-to-path
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+        <li class="md-nav__item">
+          <a href="#__comments" title="Comments" class="md-nav__link md-nav__link--active">
+            Comments
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -1636,12 +1738,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11">
     
     <label class="md-nav__link" for="nav-11">
       Math
@@ -1669,69 +1769,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="toc">
-        Angle
-      </label>
-    
-    <a href="index.html" title="Angle" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../angle/index.html" title="Angle" class="md-nav__link">
       Angle
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#degree-radians" title="Degree &lt;-&gt; Radians" class="md-nav__link">
-    Degree &lt;-&gt; Radians
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-        <li class="md-nav__item">
-          <a href="#__comments" title="Comments" class="md-nav__link md-nav__link--active">
-            Comments
-          </a>
-        </li>
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -2306,6 +2348,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#usage" title="Usage" class="md-nav__link">
     Usage
   </a>
@@ -2314,8 +2363,43 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#degree-radians" title="Degree &lt;-&gt; Radians" class="md-nav__link">
-    Degree &lt;-&gt; Radians
+  <a href="#import-class" title="Import class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
+    Install global plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-instance" title="Create instance" class="md-nav__link">
+    Create instance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#move-along-path" title="Move along path" class="md-nav__link">
+    Move along path
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-path" title="Set path" class="md-nav__link">
+    Set path
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-rotate-to-path" title="Set rotate-to-path" class="md-nav__link">
+    Set rotate-to-path
   </a>
   
 </li>
@@ -2346,27 +2430,88 @@
               
                 
                 
-                  <h1>Angle</h1>
+                  <h1>Path follower</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Convert angle value, built-in methods of phaser.</p>
+<p>Set position of game object on a <a href="../path/index.html">path</a>.</p>
 <ul>
-<li>Author: Richard Davey</li>
+<li>Author: Rex</li>
+<li>Behavior of game object</li>
 </ul>
+<h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/pathfollower-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexpathfollowerplugin.min.js">minify</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<h3 id="degree-radians">Degree &lt;-&gt; Radians<a class="headerlink" href="#degree-radians" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Degree to radians
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rad</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">DegToRad</span><span class="p">(</span><span class="nx">deg</span><span class="p">);</span>
-</pre></div></li>
-<li>Radians to degree
-   <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">deg</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">RadToDeg</span><span class="p">(</span><span class="nx">rad</span><span class="p">);</span>  <span class="c1">// deg : -180 ~ 180</span>
-</pre></div></li>
-<li>Angle from (0,0) to vector (x2 - x1 , y2 - y1)
-   <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rad</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">Angle</span><span class="p">.</span><span class="nx">Between</span><span class="p">(</span><span class="nx">x1</span><span class="p">,</span> <span class="nx">y1</span><span class="p">,</span> <span class="nx">x2</span><span class="p">,</span> <span class="nx">y2</span><span class="p">)</span>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/pathfollower">Sample code</a></p>
+<p>User could import class directly, or install it by global plugin.</p>
+<h3 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">rexPathFollower</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/pathfollower.js&#39;</span><span class="p">;</span>
 </pre></div>
-   <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rad</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">Angle</span><span class="p">.</span><span class="nx">BetweenPoints</span><span class="p">(</span><span class="nx">point1</span><span class="p">,</span> <span class="nx">point2</span><span class="p">);</span>
-</pre></div></li>
+
+<h3 id="install-global-plugin">Install global plugin<a class="headerlink" href="#install-global-plugin" title="Permanent link">&para;</a></h3>
+<p>Install plugin in <a href="../game/index.html#configuration">configuration of game</a></p>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">PathFollowerPlugin</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/pathfollower-plugin.js&#39;</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexPathFollower&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">PathFollowerPlugin</span><span class="p">,</span>
+            <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="p">},</span>
+        <span class="c1">// ...</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</pre></div>
+
+<h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="c1">// var path = scene.add.path();</span>
+<span class="kd">var</span> <span class="nx">pathFollower</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexPathFollower&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="p">{</span>
+    <span class="c1">// path: path,          // path object</span>
+    <span class="c1">// t: 0,                // t: 0~1</span>
+    <span class="c1">// rotateToPath: false,</span>
+    <span class="c1">// rotationOffset: 0,</span>
+    <span class="c1">// angleOffset: 0</span>
+<span class="p">});</span>
+</pre></div>
+
+<ul>
+<li><code>path</code> : <a href="../path/index.html">Path</a> object</li>
+<li><code>t</code> : Initial value of property <code>t</code> (0~1)</li>
+<li><code>rotateToPath</code>: Set true to change angle towards path</li>
+<li><code>rotationOffset</code> : Rotation offset in radian, or <code>angleOffset</code> in degrees</li>
+</ul>
+<h3 id="move-along-path">Move along path<a class="headerlink" href="#move-along-path" title="Permanent link">&para;</a></h3>
+<p>Set <code>pathFollower.t</code> (0~1) to move along path</p>
+<div class="codehilite"><pre><span></span><span class="nx">pathFollower</span><span class="p">.</span><span class="nx">t</span> <span class="o">=</span> <span class="nx">t</span><span class="p">;</span>  <span class="c1">// t: 0~1</span>
+<span class="c1">// pathFollower.setT(t);</span>
+</pre></div>
+
+<p>or <a href="../tween/index.html">tween</a> <code>pathFollower.t</code></p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tween</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">tweens</span><span class="p">.</span><span class="nx">add</span><span class="p">({</span>
+    <span class="nx">targets</span><span class="o">:</span> <span class="nx">pathFollower</span><span class="p">,</span>
+    <span class="nx">t</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nx">ease</span><span class="o">:</span> <span class="s1">&#39;Linear&#39;</span><span class="p">,</span> <span class="c1">// &#39;Cubic&#39;, &#39;Elastic&#39;, &#39;Bounce&#39;, &#39;Back&#39;</span>
+    <span class="nx">duration</span><span class="o">:</span> <span class="mi">1000</span><span class="p">,</span>
+    <span class="nx">repeat</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">yoyo</span><span class="o">:</span> <span class="kc">false</span>
+<span class="p">});</span>
+</pre></div>
+
+<h3 id="set-path">Set path<a class="headerlink" href="#set-path" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">pathFollower</span><span class="p">.</span><span class="nx">setPath</span><span class="p">(</span><span class="nx">path</span><span class="p">);</span>
+</pre></div>
+
+<h3 id="set-rotate-to-path">Set rotate-to-path<a class="headerlink" href="#set-rotate-to-path" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">pathFollower</span><span class="p">.</span><span class="nx">setRotateToPath</span><span class="p">(</span><span class="nx">rotateToPath</span><span class="p">,</span> <span class="nx">rotationOffset</span><span class="p">);</span>
+</pre></div>
+
+<ul>
+<li><code>rotateToPath</code> : Set true to change angle towards path</li>
+<li><code>rotationOffset</code> : Rotation offset in radian</li>
 </ul>
                 
                   
@@ -2378,9 +2523,9 @@
                   <div id="disqus_thread"></div>
 <script>
   var disqus_config = function () {
-    this.page.url = "https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/angle/index.html";
+    this.page.url = "https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/pathfollower/index.html";
     this.page.identifier =
-      "/angle/index.html";
+      "/pathfollower/index.html";
   };
   (function() {
     var d = document, s = d.createElement("script");
@@ -2402,7 +2547,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../distance/index.html" title="Distance" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../fadeoutdestroy/index.html" title="Fade out destroy" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -2411,19 +2556,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Distance
+                Fade out destroy
               </span>
             </div>
           </a>
         
         
-          <a href="../random/index.html" title="Random number" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../arcade/index.html" title="Physics" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Random number
+                Physics
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

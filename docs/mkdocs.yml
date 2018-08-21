@@ -54,6 +54,7 @@ pages:
     - Tween: 
        - Tween: tween.md
        - Fade out destroy: fadeoutdestroy.md
+    - Path follower: pathfollower.md
     - Arcade:
         - Physics: arcade.md
 - Input:
