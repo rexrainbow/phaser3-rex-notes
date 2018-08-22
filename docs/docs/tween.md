@@ -15,7 +15,7 @@ var tween = scene.tweens.add({
     y: 300,               // '+=100'
     ease: 'Linear',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
     duration: 1000,
-    repeat: 0,
+    repeat: 0,            // -1: infinity
     yoyo: false
 });
 ```
@@ -238,7 +238,7 @@ scene.tweens.timeScale = timescale;
         to: 1,
         ease: 'Linear',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
         duration: 1000,
-        repeat: 0,
+        repeat: 0,            // -1: infinity
         yoyo: false,
     });
     ```

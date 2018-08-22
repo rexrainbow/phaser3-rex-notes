@@ -155,7 +155,7 @@ class TextTyping extends EE {
             this.typingIdx = this.textLen;
             this.setText(this.text);
             this.emit('type');
-            this.emit('complete');
+            this.emit('complete', this);
         }
 
         return this;
@@ -190,7 +190,7 @@ class TextTyping extends EE {
 
         if (this.isLastChar) {
             this.freeTimer();
-            this.emit('complete');
+            this.emit('complete', this);
         } else {
             this.timer.delay = this.speed; // delay of next typing            
             this.typingIdx++;

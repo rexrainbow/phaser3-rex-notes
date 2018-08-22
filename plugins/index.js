@@ -26,6 +26,8 @@ import VirtualJoyStick from './virtualjoystick.js';
 import Fade from './fade.js';
 import FadeOutDestroy from './fade-out-destroy.js';
 import PathFollower from './pathfollower.js';
+import MoveTo from './moveto.js';
+
 
 // member of text
 import TextTyping from './texttyping.js';
@@ -78,6 +80,7 @@ export {
     Fade,
     FadeOutDestroy,
     PathFollower,
+    MoveTo,
 
     // member of text
     TextTyping,
