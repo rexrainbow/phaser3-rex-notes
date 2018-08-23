@@ -51,17 +51,13 @@ var moveTo = scene.plugins.get('rexMoveTo').add(gameObject, {
     // speed: 0,
     // rotateToTarget: false,
     // rotationOffset: 0,
-    // angleOffset: 0,
-
-    // x: undefined,
-    // y: undefined
+    // angleOffset: 0
 });
 ```
 
 - `speed` : moving speed, pixels in second
 - `rotateToTarget` : Set true to change angle towards path
 - `rotationOffset` : Rotation offset in radian, or `angleOffset` in degrees
-- `x`, `y` : Move to target position if (x, y) is not undefined
 
 ### Start moving
 

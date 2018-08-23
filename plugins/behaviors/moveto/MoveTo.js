@@ -24,8 +24,11 @@ class MoveTo extends EE {
     }
 
     resetFromJSON(o) {
+        this.isMoving = GetValue(o, 'isMoving', false);        
         this.timeScale = GetValue(o, 'timeScale', 1);
-        this.setSpeed(GetValue(o, 'speed', 0));
+        this.speed = GetValue(o, 'speed', 0);
+        this.targetX = GetValue(o, 'targetX', 0);
+        this.targetY = GetValue(o, 'targetY', 0);
 
         var rotateToTarget = GetValue(o, 'rotateToTarget', false);
         var rotationOffset = GetValue(o, 'rotationOffset', undefined);
@@ -33,8 +36,6 @@ class MoveTo extends EE {
             rotationOffset = DegToRad(GetValue(o, 'angleOffset', 0));
         }
         this.setRotateToTarget(rotateToTarget, rotationOffset);
-
-        this.moveTo(o);
         return this;
     }
 
@@ -44,7 +45,9 @@ class MoveTo extends EE {
             timeScale: this.timeScale,
             speed: this.speed,
             targetX: this.targetX,
-            targetY: this.targetY
+            targetY: this.targetY,
+            rotateToTarget: this.rotateToTarget,
+            rotationOffset: this.rotationOffset
         };
     }
 
