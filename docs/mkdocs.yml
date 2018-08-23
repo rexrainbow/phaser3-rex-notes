@@ -48,15 +48,13 @@ pages:
     - Zone: zone.md
     - DOM element:
         - DOM element: domelement.md
+    - Behaviors:
+        - Fade out destroy: fadeoutdestroy.md
+        - Path follower: pathfollower.md
+        - Arcade:
+            - Physics: arcade.md        
     - Display:
         - Mask: mask.md
-- Behavior:
-    - Tween: 
-       - Tween: tween.md
-       - Fade out destroy: fadeoutdestroy.md
-    - Path follower: pathfollower.md
-    - Arcade:
-        - Physics: arcade.md
 - Input:
     - Input: input.md
     - Touch:    
@@ -94,6 +92,7 @@ pages:
     - Database:
         - LokiJs: lokijs.md
 - Math:
+    - Tween: tween.md
     - Distance: distance.md
     - Angle: angle.md
     - Random:

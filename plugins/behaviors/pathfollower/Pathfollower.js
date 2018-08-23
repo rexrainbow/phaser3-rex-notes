@@ -88,18 +88,19 @@ class PathFollower {
         }
 
         var gameObject = this.gameObject;
-        var oldX = gameObject.x,
-            oldY = gameObject.y;
+        var curX = gameObject.x,
+            curY = gameObject.y;
         this.pathVector = this.path.getPoint(this.t, this.pathVector);
-        gameObject.setPosition(this.pathVector.x, this.pathVector.y);
+        var newX = this.pathVector.x,
+            newY = this.pathVector.y;
 
-        if ((gameObject.x === oldX) &&
-            (gameObject.y === oldY)) {
+        if ((curX === newX) && (curY === newY)) {
             return;
         }
 
+        gameObject.setPosition(newX, newY);
         if (this.rotateToPath) {
-            gameObject.rotation = AngleBetween(oldX, oldY, gameObject.x, gameObject.y) + this.rotationOffset;
+            gameObject.rotation = AngleBetween(curX, curY, newX, newY) + this.rotationOffset;
         }
     }
 }

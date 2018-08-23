@@ -16,11 +16,6 @@ class Fade {
         this.boot();
     }
 
-    /**
-     * Reset status by JSON object
-     * @param {object} o JSON object
-     * @returns {object} this object
-     */
     resetFromJSON(o) {
         this.setMode(GetValue(o, 'mode', 0));
         this.setAlphaRange(
@@ -32,10 +27,6 @@ class Fade {
         return this;
     }
 
-    /**
-     * Return status in JSON object
-     * @returns JSON object
-     */
     toJSON() {
         return {
             mode: this.mode,
@@ -88,16 +79,10 @@ class Fade {
         }
 
         var alpha = this.alpha;
+        this.gameObject.alpha = alpha.start;
         this.tween = this.scene.tweens.add({
             targets: this.gameObject,
-            alpha: {
-                getStart: function () {
-                    return alpha.start;
-                },
-                getEnd: function () {
-                    return alpha.end;
-                }
-            },
+            alpha: alpha.end,
 
             delay: this.delay,
             duration: this.duration,

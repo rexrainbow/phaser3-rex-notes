@@ -17,7 +17,8 @@ class Demo extends Phaser.Scene {
             .fillPoint(0, 0, 20)
             .setPosition(100, 100);
         dot.moveTo = this.plugins.get('rexMoveTo').add(dot, {
-            speed: 400
+            speed: 400,
+            rotateToTarget: true
         }).on('complete', function(){
             console.log('Reach target');
         })
