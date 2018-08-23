@@ -93,6 +93,11 @@ pages:
     - Database:
         - LokiJs: lokijs.md
 - Math:
+    - Max, min:
+        - Interpolation: interpolation.md
+        - Percentage: percentage.md
+        - Clamp: clamp.md
+        - Wrap: wrap.md
     - Tween: tween.md
     - Distance: distance.md
     - Angle: angle.md

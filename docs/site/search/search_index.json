@@ -4636,6 +4636,66 @@
             "title": "Serialize &amp; Deserialize"
         }, 
         {
+            "location": "/interpolation/index.html", 
+            "text": "Introduction\n\n\nCalculates interpolation value over t, built-in method of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\n\n\nLinear (lerp)\n    \nvar\n \nresult\n \n=\n \nPhaser\n.\nMath\n.\nLinear\n(\np0\n,\n \np1\n,\n \nt\n);\n  \n// t: 0~1, result: p0~p1\n\n\n\n\nSmooth\n    \nvar\n \nresult\n \n=\n \nPhaser\n.\nMath\n.\nSmoothStep\n(\nx\n,\n \nmin\n,\n \nmax\n);\n  \n// x: min~max, result: 0~1\n\n\n\n\nSmoother\n    \nvar\n \nresult\n \n=\n \nPhaser\n.\nMath\n.\nSmootherStep\n(\nx\n,\n \nmin\n,\n \nmax\n);\n  \n// x: min~max, result: 0~1", 
+            "title": "Interpolation"
+        }, 
+        {
+            "location": "/interpolation/index.html#introduction", 
+            "text": "Calculates interpolation value over t, built-in method of phaser.   Author: Richard Davey", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/interpolation/index.html#usage", 
+            "text": "Linear (lerp)\n     var   result   =   Phaser . Math . Linear ( p0 ,   p1 ,   t );    // t: 0~1, result: p0~p1   Smooth\n     var   result   =   Phaser . Math . SmoothStep ( x ,   min ,   max );    // x: min~max, result: 0~1   Smoother\n     var   result   =   Phaser . Math . SmootherStep ( x ,   min ,   max );    // x: min~max, result: 0~1", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/percentage/index.html", 
+            "text": "Introduction\n\n\nWork out what percentage \nvalue\n is of the range between \nmin\n and \nmax\n, built-in method of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nvar\n \nresult\n \n=\n \nPhaser\n.\nMath\n.\nPercent\n(\nvalue\n,\n \nmin\n,\n \nmax\n);\n\n\n\n\n\n\n\nresult\n: Percentage/t (0~1).\n\n\nvalue\n : The value to determine the percentage of.", 
+            "title": "Percentage"
+        }, 
+        {
+            "location": "/percentage/index.html#introduction", 
+            "text": "Work out what percentage  value  is of the range between  min  and  max , built-in method of phaser.   Author: Richard Davey", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/percentage/index.html#usage", 
+            "text": "var   result   =   Phaser . Math . Percent ( value ,   min ,   max );    result : Percentage/t (0~1).  value  : The value to determine the percentage of.", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/clamp/index.html", 
+            "text": "Introduction\n\n\nForce a value within the boundaries by clamping it to the range \nmin\n, \nmax\n, built-in method of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nvar\n \nresult\n \n=\n \nPhaser\n.\nMath\n.\nClamp\n(\nvalue\n,\n \nmin\n,\n \nmax\n);\n\n\n\n\n\n\n\nvalue\n : The value to be clamped.", 
+            "title": "Clamp"
+        }, 
+        {
+            "location": "/clamp/index.html#introduction", 
+            "text": "Force a value within the boundaries by clamping it to the range  min ,  max , built-in method of phaser.   Author: Richard Davey", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/clamp/index.html#usage", 
+            "text": "var   result   =   Phaser . Math . Clamp ( value ,   min ,   max );    value  : The value to be clamped.", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/wrap/index.html", 
+            "text": "Introduction\n\n\nWrap the given \nvalue\n between \nmin\n and \nmax\n, built-in method of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nvar\n \nresult\n \n=\n \nPhaser\n.\nMath\n.\nWrap\n(\nvalue\n,\n \nmin\n,\n \nmax\n);\n\n\n\n\n\n\n\nvalue\n : The value to wrap.", 
+            "title": "Wrap"
+        }, 
+        {
+            "location": "/wrap/index.html#introduction", 
+            "text": "Wrap the given  value  between  min  and  max , built-in method of phaser.   Author: Richard Davey", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/wrap/index.html#usage", 
+            "text": "var   result   =   Phaser . Math . Wrap ( value ,   min ,   max );    value  : The value to wrap.", 
+            "title": "Usage"
+        }, 
+        {
             "location": "/tween/index.html", 
             "text": "Introduction\n\n\nChange properties by tween equations, built-in object of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nCreate tween task\n\n\nvar\n \ntween\n \n=\n \nscene\n.\ntweens\n.\nadd\n({\n\n    \ntargets\n:\n \ngameObject\n,\n\n    \nx\n:\n \n400\n,\n               \n// \n+=100\n\n    \ny\n:\n \n300\n,\n               \n// \n+=100\n\n    \nease\n:\n \nLinear\n,\n       \n// \nCubic\n, \nElastic\n, \nBounce\n, \nBack\n\n    \nduration\n:\n \n1000\n,\n\n    \nrepeat\n:\n \n0\n,\n            \n// -1: infinity\n\n    \nyoyo\n:\n \nfalse\n\n\n});\n\n\n\n\n\nor\n\n\nvar\n \ntween\n \n=\n \nscene\n.\ntweens\n.\nadd\n({\n\n    \ntargets\n:\n \ngameObject\n,\n\n    \ndelay\n:\n \n0\n,\n\n    \nduration\n:\n \n1000\n,\n\n    \nease\n:\n \nPower0\n,\n\n    \neaseParams\n:\n \nnull\n,\n\n    \nhold\n:\n \n0\n,\n\n    \nrepeat\n:\n \n0\n,\n\n    \nrepeatDelay\n:\n \n0\n,\n\n    \nyoyo\n:\n \nfalse\n,\n\n    \nflipX\n:\n \nfalse\n,\n\n    \nflipY\n:\n \nfalse\n,\n\n\n    \noffset\n:\n \nnull\n,\n\n    \ncompleteDelay\n:\n \n0\n,\n\n    \nloop\n:\n \n0\n\n    \nloopDelay\n:\n \n0\n,\n\n    \npaused\n:\n \nfalse\n,\n\n    \nuseFrames\n:\n \nfalse\n,\n\n\n    \n// properties:\n\n    \nx\n:\n \n+=600\n,\n        \n// start from current value\n\n    \ny\n:\n \n500\n,\n\n    \nrotation\n:\n \n...\n\n    \nangle\n:\n \n...\n\n    \nalpha\n:\n \n...\n\n    \n// ...\n\n\n    \n// or\n\n    \nprops\n:\n \n{\n\n        \nx\n:\n \n{\n \nvalue\n:\n \n+=600\n,\n \nduration\n:\n \n3000\n,\n \nease\n:\n \nPower2\n \n},\n\n        \ny\n:\n \n{\n \nvalue\n:\n \n500\n,\n \nduration\n:\n \n1500\n,\n \nease\n:\n \nBounce.easeOut\n \n}\n\n    \n},\n\n\n    \n// or\n\n    \nprops\n:\n \n{\n\n       \nx\n:\n \n{\n\n           \nduration\n:\n \n400\n,\n\n           \nyoyo\n:\n \ntrue\n,\n\n           \nrepeat\n:\n \n8\n,\n\n           \nease\n:\n \nSine.easeInOut\n,\n\n           \nvalue\n:\n \n{\n\n               \ngetEnd\n:\n \nfunction\n \n(\ntarget\n,\n \nkey\n,\n \nvalue\n)\n\n               \n{\n\n                   \ndestX\n \n-=\n \n30\n;\n\n                   \nreturn\n \ndestX\n;\n\n               \n},\n\n               \ngetStart\n:\n \nfunction\n \n(\ntarget\n,\n \nkey\n,\n \nvalue\n)\n\n               \n{\n\n                   \nreturn\n \nvalue\n \n+\n \n30\n;\n\n               \n}\n\n           \n}\n\n       \n},\n\n       \n....\n\n    \n},\n\n\n    \ncallbackScope\n:\n \ntween\n,\n\n\n    \nonStart\n:\n \nfunction\n \n()\n \n{},\n\n    \nonStartScope\n:\n \ncallbackScope\n,\n\n    \nonStartParams\n:\n \n[],\n\n\n    \nonUpdate\n:\n \nfunction\n \n()\n \n{},\n\n    \nonUpdateScope\n:\n \ncallbackScope\n,\n\n    \nonUpdateParams\n:\n \n[],\n\n\n    \nonComplete\n:\n \nfunction\n \n()\n \n{},\n\n    \nonCompleteScope\n:\n \ncallbackScope\n,\n\n    \nonCompleteParams\n:\n \n[],\n\n\n    \nonYoyo\n:\n \nfunction\n \n()\n \n{},\n\n    \nonYoyoScope\n:\n \ncallbackScope\n,\n\n    \nonYoyoParams\n:\n \n[],\n\n\n    \nonRepeat\n:\n \nfunction\n \n()\n \n{},\n\n    \nonRepeatScope\n:\n \ncallbackScope\n,\n\n    \nonRepeatParams\n:\n \n[]\n\n\n});\n\n\n\n\n\n\n\ntargets\n : The targets the tween is updating.\n\n\ndelay\n : The time the tween will wait before it first starts\n\n\nduration\n : The duration of the tween\n\n\nease\n : The ease function used by the tween\n\n\neaseParams\n : The parameters to go with the ease function (if any)\n\n\nhold\n : The time the tween will pause before running a yoyo\n\n\nrepeat\n : The number of times the tween will repeat itself (a value of 1 means the tween will play twice, as it repeated once)\n\n\nrepeatDelay\n : The time the tween will pause for before starting a repeat. The tween holds in the start state.\n\n\nyoyo\n : boolean - Does the tween reverse itself (yoyo) when it reaches the end?\n\n\nflipX\n : flip X the GameObject on tween end\n\n\nflipY\n : flip Y the GameObject on tween end\n\n\noffset\n : Used when the Tween is part of a Timeline\n\n\ncompleteDelay\n : The time the tween will wait before the onComplete event is dispatched once it has     completed\n\n\nloop\n : The time the tween will pause before starting either a yoyo or returning to the start for a repeat\n\n\nloopDelay\n :\n\n\npaused\n : Does the tween start in a paused state, or playing?\n\n\nuseFrames\n : Use frames or milliseconds?\n\n\nprops\n : The properties being tweened by the tween\n\n\nonStart\n : callback which fired when tween task started\n\n\nonUpdate\n : callback which fired when tween task updated\n\n\nonComplete\n : callback which fired when tween task done\n\n\nonYoyo\n : callback which fired when tween reversed (yoyo)\n\n\nonRepeat\n : callback which fired when repeat started\n\n\n\n\nEase equations\n\n\n\n\nPower0\n : Linear\n\n\nPower1\n : Quadratic.Out\n\n\nPower2\n : Cubic.Out\n\n\nPower3\n : Quartic.Out\n\n\nPower4\n : Quintic.Out\n\n\nLinear\n\n\nQuad\n : Quadratic.Out\n\n\nCubic\n : Cubic.Out\n\n\nQuart\n : Quartic.Out\n\n\nQuint\n : Quintic.Out\n\n\nSine\n : Sine.Out\n\n\nExpo\n : Expo.Out\n\n\nCirc\n : Circular.Out\n\n\nElastic\n : Elastic.Out\n\n\nBack\n : Back.Out\n\n\nBounce\n : Bounce.Out\n\n\nStepped\n\n\nQuad.easeIn\n\n\nCubic.easeIn\n\n\nQuart.easeIn\n\n\nQuint.easeIn\n\n\nSine.easeIn\n\n\nExpo.easeIn\n\n\nCirc.easeIn\n\n\nBack.easeIn\n\n\nBounce.easeIn\n\n\nQuad.easeOut\n\n\nCubic.easeOut\n\n\nQuart.easeOut\n\n\nQuint.easeOut\n\n\nSine.easeOut\n\n\nExpo.easeOut\n\n\nCirc.easeOut\n\n\nBack.easeOut\n\n\nBounce.easeOut\n\n\nQuad.easeInOut\n\n\nCubic.easeInOut\n\n\nQuart.easeInOut\n\n\nQuint.easeInOut\n\n\nSine.easeInOut\n\n\nExpo.easeInOut\n\n\nCirc.easeInOut\n\n\nBack.easeInOut\n\n\nBounce.easeInOut\n\n\n\n\nPause / Resume task\n\n\ntween\n.\npause\n();\n\n\n\n\n\ntween\n.\nresume\n();\n\n\n\n\n\nvar\n \nisPlaying\n \n=\n \ntween\n.\nisPlaying\n();\n\n\nvar\n \nisPaused\n \n=\n \ntween\n.\nisPaused\n();\n\n\n\n\n\nStop task\n\n\ntween\n.\nstop\n();\n\n\n\n\n\nPlay task\n\n\ntween\n.\nplay\n();\n\n\n\n\n\nRestart task\n\n\ntween\n.\nrestart\n();\n\n\n\n\n\nTime-scale\n\n\ntween\n.\nsetTimeScale\n(\nv\n);\n\n\n// tween.timeScale = timescale;\n\n\n\n\n\nvar\n \ntimeScale\n \n=\n \ntween\n.\ngetTimeScale\n();\n\n\n// var timeScale = tween.timeScale;\n\n\n\n\n\nGlobal time-scale\n\n\nvar\n \ntimeScale\n \n=\n \nscene\n.\ntweens\n.\ntimeScale\n;\n\n\n\n\n\nscene\n.\ntweens\n.\ntimeScale\n \n=\n \ntimescale\n;\n\n\n\n\n\nTween value\n\n\n\n\nCreate tween task\n    \nvar\n \ntween\n \n=\n \nscene\n.\ntweens\n.\naddCounter\n({\n\n    \nfrom\n:\n \n0\n,\n\n    \nto\n:\n \n1\n,\n\n    \nease\n:\n \nLinear\n,\n       \n// \nCubic\n, \nElastic\n, \nBounce\n, \nBack\n\n    \nduration\n:\n \n1000\n,\n\n    \nrepeat\n:\n \n0\n,\n            \n// -1: infinity\n\n    \nyoyo\n:\n \nfalse\n,\n\n\n});\n\n\n\n    or\n    \nvar\n \ntween\n \n=\n \nscene\n.\ntweens\n.\naddCounter\n({\n\n    \nfrom\n:\n \n0\n,\n\n    \nto\n:\n \n1\n,\n\n    \ndelay\n:\n \n0\n,\n\n    \nduration\n:\n \n1000\n,\n\n    \neaseParams\n:\n \nnull\n,\n\n    \nease\n:\n \nPower0\n,\n\n    \nhold\n:\n \n0\n,\n\n    \nrepeat\n:\n \n0\n,\n\n    \nrepeatDelay\n:\n \n0\n,\n\n    \nyoyo\n:\n \nfalse\n,\n\n\n    \noffset\n:\n \nnull\n,\n\n    \ncompleteDelay\n:\n \n0\n,\n\n    \nloop\n:\n \n0\n,\n\n    \nloopDelay\n:\n \n0\n,\n\n    \npaused\n:\n \nfalse\n,\n\n    \nuseFrames\n:\n \nfalse\n,\n\n\n    \ncallbackScope\n:\n \ntween\n,\n\n\n    \nonStart\n:\n \nfunction\n \n()\n \n{},\n\n    \nonStartScope\n:\n \ncallbackScope\n,\n\n    \nonStartParams\n:\n \n[],\n\n\n    \nonUpdate\n:\n \nfunction\n \n()\n \n{},\n\n    \nonUpdateScope\n:\n \ncallbackScope\n,\n\n    \nonUpdateParams\n:\n \n[],\n\n\n    \nonComplete\n:\n \nfunction\n \n()\n \n{},\n\n    \nonCompleteScope\n:\n \ncallbackScope\n,\n\n    \nonCompleteParams\n:\n \n[],\n\n\n    \nonYoyo\n:\n \nfunction\n \n()\n \n{},\n\n    \nonYoyoScope\n:\n \ncallbackScope\n,\n\n    \nonYoyoParams\n:\n \n[],\n\n\n    \nonRepeat\n:\n \nfunction\n \n()\n \n{},\n\n    \nonRepeatScope\n:\n \ncallbackScope\n,\n\n    \nonRepeatParams\n:\n \n[]\n\n\n});\n\n\n\n\nGet value\n    \nvar\n \nvalue\n \n=\n \ntween\n.\ngetValue\n();\n\n\n\n\n\n\nCustom ease function\n\n\nvar\n \ntween\n \n=\n \nscene\n.\ntweens\n.\nadd\n({\n\n    \ntargets\n:\n \ngameObject\n,\n\n    \n// ...\n\n    \nease\n:\n \nfunction\n \n(\nt\n)\n \n{\n  \n// t: 0~1\n\n        \nreturn\n \nvalue\n;\n     \n// value: 0~1\n\n    \n},\n\n    \n// ...\n\n\n});", 
             "title": "Tween"
