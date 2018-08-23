@@ -1,6 +1,6 @@
 ## Introduction
 
-Move game object towards target position.
+Move game object towards target position with a constant speed.
 
 - Author: Rex
 - Behavior of game object

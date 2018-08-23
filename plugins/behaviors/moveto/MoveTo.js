@@ -106,7 +106,7 @@ class MoveTo extends EE {
     }
 
     update(time, delta) {
-        if ((!this.isMoving) || (this.speed === 0) || (delta === 0)) {
+        if (!this.isMoving) {
             return;
         }
 
@@ -117,6 +117,10 @@ class MoveTo extends EE {
             targetY = this.targetY;
         if ((curX === targetX) && (curY === targetY)) {
             this.onReachTarget();
+            return;
+        }
+
+        if ((this.speed === 0) || (delta === 0)) {
             return;
         }
 
