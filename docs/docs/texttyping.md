@@ -47,7 +47,7 @@ var game = new Phaser.Game(config);
 ### Create instance
 
 ```javascript
-txt.typing = scene.plugins.get('rexTextTyping').add(txt, {
+var typing = scene.plugins.get('rexTextTyping').add(txt, {
     //speed: 333,       // typing speed in ms
     //typeMode: 0,      //0|'left-to-right'|1|'right-to-left'|2|'middle-to-sides'|3|'sides-to-middle'
     //setTextCallback: function(text, isLastChar, insertIdx){ return text; }  // callback before set-text
@@ -72,50 +72,68 @@ Configuration
 ### Start typing
 
 ```javascript
-txt.typing.start('ABCDEFG');
-// txt.typing.start('ABCDEFG', 333);  // speed in ms
+typing.start('ABCDEFG');
+// typing.start('ABCDEFG', 333);  // speed in ms
 ```
+
+#### Typing more text
+
+```javascript
+typing.appendText(text);
+```
+
+### Stop typing
+
+```javascript
+typing.stop();
+// typing.stop(true);;  // stop and show all text
+```
+
+### Pause/Resume typing
+
+- Pause typing
+    ```javascript
+    typing.pause();
+    ```
+- Resume typing
+    ```javascript
+    typing.resume();
+    ```
+
+### Set typing speed
+
+```javascript
+typing.setTypeSpeed(speed);  // speed in ms
+```
+
+Set speed in `typing` event or setTextCallback to change typing speed of remaining text.
+
+### Set typing mode
+
+```javascript
+typing.setTypeMode(mode);
+```
+
+- typeMode :
+    - `'left-to-right'`, or `0` : typing characters from left to right.
+    - `'right-to-left'`, or `1` : typing characters from right to left.
+    - `'middle-to-sides'`, or `2` : typing characters from middle to sides, optional.
+    - `'sides-to-middle'`, or `3` : typing characters from sides to middle.
 
 ### Events
 
 - On typing :
     ```javascript
-    txt.typing.on('type', function(){});
+    typing.on('type', function(){});
     ```
 - On typing completed :
     ```javascript
-    txt.typing.on('complete', function(){});
+    typing.on('complete', function(){});
     ```
 
-### Other methods
+### Status
 
-- Is-typing state
+- Is typing
     ```javascript
-    var isTyping = txt.typing.isTyping;
-    ```
-- Stop typing
-    ```javascript
-    txt.typing.stop();
-    // txt.typing.stop(true);;  // stop and show all text
-    ```
-- Pause typing
-    ```javascript
-    txt.typing.pause();
-    ```
-- Resume typing
-    ```javascript
-    txt.typing.resume();
-    ```
-- Set typing speed
-    ```javascript
-    txt.typing.setTypeSpeed(speed);  // speed in ms
-    ```
-    Set speed in `typing` event or setTextCallback to change typing speed of remaining text.
-- Typing more text
-    ```javascript
-    txt.typing.appendText(text);
-    ```
-- Set typing mode
-    ```javascript
-    txt.typing.setTypeMode(mode);  //0|'left-to-right'|1|'right-to-left'|2|'middle-to-sides'|3|'sides-to-middle'
+    var isTyping = typing.isTyping;
     ```

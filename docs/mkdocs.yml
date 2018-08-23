@@ -49,6 +49,7 @@ pages:
     - DOM element:
         - DOM element: domelement.md
     - Behaviors:
+        - Move to: moveto.md
         - Fade out destroy: fadeoutdestroy.md
         - Path follower: pathfollower.md
         - Arcade:

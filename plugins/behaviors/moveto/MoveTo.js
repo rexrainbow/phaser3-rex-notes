@@ -68,21 +68,24 @@ class MoveTo extends EE {
         this.shutdown();
     }
 
-    moveTo(x, y, config) {
+    moveTo(x, y, speed) {
         this.stop();
 
         if (IsPlainObject(x)) {
-            config = x;
+            var config = x;
             x = GetValue(config, 'x', undefined);
             y = GetValue(config, 'y', undefined);
+            speed = GetValue(config, 'speed', this.speed);
         }
         this.targetX = x;
         this.targetY = y;
         if ((x == null) || (y == null)) {
             return this;
         }
+        if (speed !== undefined) {
+            this.speed = speed;
+        }
 
-        this.speed = GetValue(config, 'speed', this.speed);
         this.isMoving = true;
         return this;
     }

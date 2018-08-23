@@ -18,6 +18,7 @@
 1. [Gashapon](gashapon.md): Pick random item from box.
 1. [Grid table](gridtable.md): Viewer of grid table, to manipulate game object of each visible cell.
 1. [LZ-string](lzstring.md): Compress string using LZ-based compression algorithm.
+1. [Move to](moveto.md): Move game object towards target position.
 1. [Page](textpage.md): Display text page by page on text object.
 1. [Path follower](pathfollower.md): Set position of game object on a path.
 1. [Pixelation-pipeline](pixelationpipeline.md): Pixelation post processing filter.

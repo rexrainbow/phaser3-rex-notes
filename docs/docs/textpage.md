@@ -53,7 +53,7 @@ var txt = scene.add.text(x, y, '', {
     },
     maxLines: 7
 });
-txt.page = scene.plugins.get('rexTextPage').add(txt, {
+var page = scene.plugins.get('rexTextPage').add(txt, {
     //text: '',       // content in string or array
     //wrap: false     // set true to add '\n' in each line end
 });
@@ -67,34 +67,34 @@ Properties
 
 - Set text
     ```javascript
-    txt.page.setText(text);   // content in string or array
+    page.setText(text);   // content in string or array
     ```
 - Append text
     ```javascript
-    txt.page.appendText(text); // content in string or array
+    page.appendText(text); // content in string or array
     ```
 
 ### Show page
 
 ```javascript
-txt.page.showPage();         // display current page
-txt.page.showNextPage();     // display next page
-txt.page.showPreviousPage(); // display previous page
+page.showPage();         // display current page
+page.showNextPage();     // display next page
+page.showPreviousPage(); // display previous page
 ```
 
-Initial page index is `-1`, so user could call `txt.page.showNextPage()` to display first page.
+Initial page index is `-1`, so user could call `page.showNextPage()` to display first page.
 
 ### Get lines of page
 
 ```javascript
-var lines = txt.page.getPage();         // get lines of current page
-var lines = txt.page.getNextPage();     // get lines of next page
-var lines = txt.page.getPreviousPage(); // get lines of previous page
+var lines = page.getPage();         // get lines of current page
+var lines = page.getNextPage();     // get lines of next page
+var lines = page.getPreviousPage(); // get lines of previous page
 ```
 
 ### Other properties
 
-- Current page index : `txt.page.pageIdx`
-- Number of pages : `txt.page.pageCount`
-- Is last page: `txt.page.isLastPage`
-- Is first page: `txt.page.isFirstPage`
+- Current page index : `page.pageIdx`
+- Number of pages : `page.pageCount`
+- Is last page: `page.isLastPage`
+- Is first page: `page.isFirstPage`
