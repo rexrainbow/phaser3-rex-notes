@@ -30,6 +30,7 @@ class Demo extends Phaser.Scene {
             cellsCount: 100,
             columns: 4,
             cellVisibleCallback: onCellVisible.bind(this),
+            // mask: false
         });
 
         // draw bound

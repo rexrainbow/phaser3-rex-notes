@@ -18,28 +18,39 @@ Viewer of grid table, to manipulate game object of each visible cell.
 ### Create instance
 
 ```javascript
+var config = {
+    cellsCount: 0,
+    columns: 1,
+    cellHeight: 30,
+    cellWidth: 30,
+
+    cellVisibleCallback: null,
+    cellVisibleCallbackScope: undefined,
+
+    cellInvisibleCallback: null,
+    cellInvisibleCallbackScope: undefined,
+
+    clamplTableOXY: true,
+    scrollMode: 0,        // 0|'v'|'vertical'|1|'h'|'horizontal'
+    mask: true
+}
 var table = scene.add.rexGridTable(x, y, width, height, config);
 ```
 
-Configuration
-
-```javascript
-{
-    cellsCount: 0,    // total cells count
-    columns: 1,       // columns count of each row
-    cellHeight: 30,   // default height of each cell
-    cellWidth: 30,    // width of each cell
-
-    cellVisibleCallback: null, // callback when cell begins visible
-    cellVisibleCallbackScope: undefined,
-
-    cellInvisibleCallback: null, // callback when cell begins invisible
-    cellInvisibleCallbackScope: undefined,
-
-    clamplTableOXY: true, // clamp tableOX, tableOY when out-of-bound
-    scrollMode: 0,        // 0|'v'|'vertical'|1|'h'|'horizontal'
-}
-```
+- `cellsCount` : Total cells count
+- `columns` : Columns count of each row
+- `cellHeight` : Default height of each cell
+- `cellWidth` : Width of each cell
+- `cellVisibleCallback` , `cellVisibleCallbackScope` : Callback when cell begins visible
+- `cellInvisibleCallback`, `cellInvisibleCallbackScope`: Callback when cell begins invisible
+- `clamplTableOXY` : Set `true` to clamp `tableOX`, `tableOY` when out-of-bound
+- `scrollMode` :
+    - `0`, or `'v'`, or `'vertical'`
+    - `1`, or `'h'`, or `'horizontal'`
+- `mask` : [Mask](mask.md) cells
+    - `true` : Default rectangle mask
+    - `false` : No mask
+    - A [mask object](mask.md) : Custom mask object
 
 Add grid table from JSON
 

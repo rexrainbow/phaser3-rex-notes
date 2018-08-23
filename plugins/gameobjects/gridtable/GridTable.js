@@ -32,7 +32,9 @@ class GridTable extends Container {
         if (mask === true) {
             mask = this.getDefaultMask();
         }
-        this.setMask(mask);
+        if (mask) {
+            this.setMask(mask);
+        }
 
         this.setScrollMode(GetValue(config, 'scrollMode', 0));
         this.setClampMode(GetValue(config, 'clamplTableOXY', true));
@@ -342,8 +344,8 @@ class GridTable extends Container {
 
     // internal
     getDefaultMask() {
-        var x = -(this.displayWidth * this.originX);
-        var y = -(this.displayHeight * this.originY);
+        var x = -(this.width * this.originX);
+        var y = -(this.height * this.originY);
         var shape = this.scene.make.graphics(undefined, false)
             .fillStyle(0xffffff)
             .fillRect(x, y, this.width, this.height)
