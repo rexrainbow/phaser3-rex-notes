@@ -420,7 +420,11 @@ class GridTable extends Container {
                 if (!this.preVisibleCells.contains(cell)) {
                     this.showCell(cell);
                 }
-                cell.setXY(cellTLX, cellTLY);
+                if (this.scrollMode === 0) {
+                    cell.setXY(cellTLX, cellTLY);
+                } else {
+                    cell.setXY(cellTLY, cellTLX);
+                }
             }
 
             if ((cellTLX < rightBound) && (colIdx < lastColIdx)) {
