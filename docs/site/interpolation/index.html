@@ -2402,21 +2402,46 @@
                   <h1>Interpolation</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Calculates interpolation value over t, built-in method of phaser.</p>
+<p>Calculates interpolation value over t (0~1), built-in method of phaser.</p>
 <ul>
 <li>Author: Richard Davey</li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Linear (lerp)
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">Linear</span><span class="p">(</span><span class="nx">p0</span><span class="p">,</span> <span class="nx">p1</span><span class="p">,</span> <span class="nx">t</span><span class="p">);</span>  <span class="c1">// t: 0~1, result: p0~p1</span>
+<li>Linear interpolation (lerp)
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">Linear</span><span class="p">(</span><span class="nx">p0</span><span class="p">,</span> <span class="nx">p1</span><span class="p">,</span> <span class="nx">t</span><span class="p">);</span>
 </pre></div></li>
-<li>Smooth
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">SmoothStep</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span>  <span class="c1">// x: min~max, result: 0~1</span>
-</pre></div></li>
-<li>Smoother
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">SmootherStep</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span>  <span class="c1">// x: min~max, result: 0~1</span>
-</pre></div></li>
+<li>Smooth interpolation
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">Interpolation</span><span class="p">.</span><span class="nx">SmoothStep</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>t</code> : 0~1</li>
+</ul>
+</li>
+<li>Smoother interpolation
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">Interpolation</span><span class="p">.</span><span class="nx">SmootherStep</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>t</code> : 0~1</li>
+</ul>
+</li>
+<li>Quadratic bezier interpolation
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">Interpolation</span><span class="p">.</span><span class="nx">QuadraticBezier</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="nx">p0</span><span class="p">,</span> <span class="nx">p1</span><span class="p">,</span> <span class="nx">p2</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>t</code> : 0~1</li>
+<li><code>p0</code> : The start point.</li>
+<li><code>p1</code> : The control point.</li>
+<li><code>p2</code> : The end point.</li>
+</ul>
+</li>
+<li>Cubic bezier interpolation
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">Interpolation</span><span class="p">.</span><span class="nx">CubicBezier</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="nx">p0</span><span class="p">,</span> <span class="nx">p1</span><span class="p">,</span> <span class="nx">p2</span><span class="p">,</span> <span class="nx">p3</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>t</code> : 0~1</li>
+<li><code>p0</code> : The start point.</li>
+<li><code>p1</code> : The first control point.</li>
+<li><code>p2</code> : The second control point.</li>
+<li><code>p3</code> : The end point.</li>
+</ul>
+</li>
 </ul>
                 
                   

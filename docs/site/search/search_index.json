@@ -4647,17 +4647,17 @@
         }, 
         {
             "location": "/interpolation/index.html", 
-            "text": "Introduction\n\n\nCalculates interpolation value over t, built-in method of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\n\n\nLinear (lerp)\n    \nvar\n \nresult\n \n=\n \nPhaser\n.\nMath\n.\nLinear\n(\np0\n,\n \np1\n,\n \nt\n);\n  \n// t: 0~1, result: p0~p1\n\n\n\n\nSmooth\n    \nvar\n \nresult\n \n=\n \nPhaser\n.\nMath\n.\nSmoothStep\n(\nx\n,\n \nmin\n,\n \nmax\n);\n  \n// x: min~max, result: 0~1\n\n\n\n\nSmoother\n    \nvar\n \nresult\n \n=\n \nPhaser\n.\nMath\n.\nSmootherStep\n(\nx\n,\n \nmin\n,\n \nmax\n);\n  \n// x: min~max, result: 0~1", 
+            "text": "Introduction\n\n\nCalculates interpolation value over t (0~1), built-in method of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\n\n\nLinear interpolation (lerp)\n    \nvar\n \nresult\n \n=\n \nPhaser\n.\nMath\n.\nLinear\n(\np0\n,\n \np1\n,\n \nt\n);\n\n\n\n\nSmooth interpolation\n    \nvar\n \nresult\n \n=\n \nPhaser\n.\nMath\n.\nInterpolation\n.\nSmoothStep\n(\nt\n,\n \nmin\n,\n \nmax\n);\n\n\n\n\nt\n : 0~1\n\n\n\n\n\n\nSmoother interpolation\n    \nvar\n \nresult\n \n=\n \nPhaser\n.\nMath\n.\nInterpolation\n.\nSmootherStep\n(\nt\n,\n \nmin\n,\n \nmax\n);\n\n\n\n\nt\n : 0~1\n\n\n\n\n\n\nQuadratic bezier interpolation\n    \nvar\n \nresult\n \n=\n \nPhaser\n.\nMath\n.\nInterpolation\n.\nQuadraticBezier\n(\nt\n,\n \np0\n,\n \np1\n,\n \np2\n);\n\n\n\n\nt\n : 0~1\n\n\np0\n : The start point.\n\n\np1\n : The control point.\n\n\np2\n : The end point.\n\n\n\n\n\n\nCubic bezier interpolation\n    \nvar\n \nresult\n \n=\n \nPhaser\n.\nMath\n.\nInterpolation\n.\nCubicBezier\n(\nt\n,\n \np0\n,\n \np1\n,\n \np2\n,\n \np3\n);\n\n\n\n\nt\n : 0~1\n\n\np0\n : The start point.\n\n\np1\n : The first control point.\n\n\np2\n : The second control point.\n\n\np3\n : The end point.", 
             "title": "Interpolation"
         }, 
         {
             "location": "/interpolation/index.html#introduction", 
-            "text": "Calculates interpolation value over t, built-in method of phaser.   Author: Richard Davey", 
+            "text": "Calculates interpolation value over t (0~1), built-in method of phaser.   Author: Richard Davey", 
             "title": "Introduction"
         }, 
         {
             "location": "/interpolation/index.html#usage", 
-            "text": "Linear (lerp)\n     var   result   =   Phaser . Math . Linear ( p0 ,   p1 ,   t );    // t: 0~1, result: p0~p1   Smooth\n     var   result   =   Phaser . Math . SmoothStep ( x ,   min ,   max );    // x: min~max, result: 0~1   Smoother\n     var   result   =   Phaser . Math . SmootherStep ( x ,   min ,   max );    // x: min~max, result: 0~1", 
+            "text": "Linear interpolation (lerp)\n     var   result   =   Phaser . Math . Linear ( p0 ,   p1 ,   t );   Smooth interpolation\n     var   result   =   Phaser . Math . Interpolation . SmoothStep ( t ,   min ,   max );   t  : 0~1    Smoother interpolation\n     var   result   =   Phaser . Math . Interpolation . SmootherStep ( t ,   min ,   max );   t  : 0~1    Quadratic bezier interpolation\n     var   result   =   Phaser . Math . Interpolation . QuadraticBezier ( t ,   p0 ,   p1 ,   p2 );   t  : 0~1  p0  : The start point.  p1  : The control point.  p2  : The end point.    Cubic bezier interpolation\n     var   result   =   Phaser . Math . Interpolation . CubicBezier ( t ,   p0 ,   p1 ,   p2 ,   p3 );   t  : 0~1  p0  : The start point.  p1  : The first control point.  p2  : The second control point.  p3  : The end point.", 
             "title": "Usage"
         }, 
         {
