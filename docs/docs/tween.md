@@ -283,7 +283,7 @@ var tween = scene.tweens.add({
 });
 ```
 
-### State machine
+### Flow chart
 
 ```mermaid
 graph TB
