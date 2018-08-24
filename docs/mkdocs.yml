@@ -3,6 +3,7 @@ pages:
 - Home: index.md
 - System:
     - Game: game.md
+    - Main loop: mainloop.md
     - Scene manager: scenemanager.md
     - Scene: scene.md
     - Snapshot: snapshot.md
@@ -74,6 +75,7 @@ pages:
     - Filters:
         - Swirl: swirlpipeline.md
         - Pixelation: pixelationpipeline.md
+- Tween: tween.md        
 - Logic:
     - Event emitter: eventemitter3.md
     - Run commands:
@@ -98,7 +100,6 @@ pages:
         - Percentage: percentage.md
         - Clamp: clamp.md
         - Wrap: wrap.md
-    - Tween: tween.md
     - Distance: distance.md
     - Angle: angle.md
     - Random:

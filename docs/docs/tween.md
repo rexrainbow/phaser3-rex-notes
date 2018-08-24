@@ -25,23 +25,57 @@ or
 ```javascript
 var tween = scene.tweens.add({
     targets: gameObject,
+    paused: false,
+    callbackScope: tween,
+
+    // timming/callback of each state
+    onStart: function () {},
+    onStartScope: callbackScope,
+    onStartParams: [],
+
+    // initial delay
     delay: 0,
+
+    // tween duration
     duration: 1000,
-    ease: 'Power0',
+    ease: 'Linear',
     easeParams: null,
+
+    onUpdate: function () {},
+    onUpdateScope: callbackScope,
+    onUpdateParams: [],
+
+    // delay between tween and yoyo
     hold: 0,
-    repeat: 0,
-    repeatDelay: 0,
-    yoyo: false,
+    yoyo: false,  // true to tween backward
     flipX: false,
     flipY: false,
+    onYoyo: function () {},
+    onYoyoScope: callbackScope,
+    onYoyoParams: [],
 
-    offset: null,
-    completeDelay: 0,
-    loop: 0
+    // repeat count (-1: infinite)
+    repeat: 0,
+    onRepeat: function () {},
+    onRepeatScope: callbackScope,
+    onRepeatParams: [],
+    // delay to next pass
+    repeatDelay: 0,
+
+    // loop count (-1: infinite)
+    loop: 0,
+    onLoop: function () {},
+    onLoopScope: callbackScope,
+    onLoopParams: [],
+    // delay to next loop
     loopDelay: 0,
-    paused: false,
-    useFrames: false,
+
+    // delay to onComplete callback
+    completeDelay: 0,
+    onComplete: function () {},
+    onCompleteScope: callbackScope,
+    onCompleteParams: [],
+    // timming/callback of each state
 
     // properties:
     x: '+=600',        // start from current value
@@ -79,27 +113,8 @@ var tween = scene.tweens.add({
        ....
     },
 
-    callbackScope: tween,
-
-    onStart: function () {},
-    onStartScope: callbackScope,
-    onStartParams: [],
-
-    onUpdate: function () {},
-    onUpdateScope: callbackScope,
-    onUpdateParams: [],
-
-    onComplete: function () {},
-    onCompleteScope: callbackScope,
-    onCompleteParams: [],
-
-    onYoyo: function () {},
-    onYoyoScope: callbackScope,
-    onYoyoParams: [],
-
-    onRepeat: function () {},
-    onRepeatScope: callbackScope,
-    onRepeatParams: []
+    offset: null,
+    useFrames: false
 });
 ```
 
@@ -116,8 +131,8 @@ var tween = scene.tweens.add({
 - `flipY` : flip Y the GameObject on tween end
 - `offset` : Used when the Tween is part of a Timeline
 - `completeDelay` : The time the tween will wait before the onComplete event is dispatched once it has     completed
-- `loop` : The time the tween will pause before starting either a yoyo or returning to the start for a repeat
-- `loopDelay` :
+- `loop` : `-1` for an infinite loop
+- `loopDelay`
 - `paused` : Does the tween start in a paused state, or playing?
 - `useFrames` : Use frames or milliseconds?
 - `props` : The properties being tweened by the tween
@@ -247,50 +262,13 @@ scene.tweens.timeScale = timescale;
     var tween = scene.tweens.addCounter({
         from: 0,
         to: 1,
-        delay: 0,
-        duration: 1000,
-        easeParams: null,
-        ease: 'Power0',
-        hold: 0,
-        repeat: 0,
-        repeatDelay: 0,
-        yoyo: false,
-    
-        offset: null,
-        completeDelay: 0,
-        loop: 0,
-        loopDelay: 0,
-        paused: false,
-        useFrames: false,
-    
-        callbackScope: tween,
-    
-        onStart: function () {},
-        onStartScope: callbackScope,
-        onStartParams: [],
-    
-        onUpdate: function () {},
-        onUpdateScope: callbackScope,
-        onUpdateParams: [],
-    
-        onComplete: function () {},
-        onCompleteScope: callbackScope,
-        onCompleteParams: [],
-    
-        onYoyo: function () {},
-        onYoyoScope: callbackScope,
-        onYoyoParams: [],
-    
-        onRepeat: function () {},
-        onRepeatScope: callbackScope,
-        onRepeatParams: []
+        // ...
     });
     ```
 1. Get value
     ```javascript
     var value = tween.getValue();
     ```
-
 
 ### Custom ease function
 
@@ -303,4 +281,38 @@ var tween = scene.tweens.add({
     },
     // ...
 });
+```
+
+### State machine
+
+```mermaid
+graph TB
+
+Start((Start)) --> CallbackOnStart
+CallbackOnStart>"Callback: onStart"] --> ActiveDelay["delay"]
+ActiveDelay --> DurationForward["Tween forward<br>Callback: onUpdate<br>(duration)"]
+
+subgraph A pass
+
+DurationForward --> Hold["hold"]
+Hold --> IsYoyo{Is yoyo}
+IsYoyo --> |Yes| CallbackOnYoyo>"Callback: onYoyo"]
+CallbackOnYoyo --> DurationBackward["Tween backword<br>Callback: onUpdate<br>(duration)"]
+DurationBackward --> IsRepeat{"Repeat count > 0"}
+IsYoyo --> |No| IsRepeat
+IsRepeat --> |Yes| CallbackOnRepeat>"Callback: onRepeat"]
+CallbackOnRepeat --> RepeatDelay["repeatDelay"]
+RepeatDelay --> DurationForward
+
+end
+
+IsRepeat --> |No| IsLoop{"Loop count > 0"}
+
+IsLoop --> |Yes| CallbackOnLoop
+CallbackOnLoop>"Callback: onLoop"] --> LoopDelay["loopDelay"]
+LoopDelay --> DurationForward
+
+IsLoop --> |No| CompleteDelay
+CompleteDelay["completeDelay"] --> CallbackOnComplete>"Callback: onComplete"]
+CallbackOnComplete --> End((End))
 ```

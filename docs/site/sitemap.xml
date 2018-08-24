@@ -18,6 +18,12 @@
     </url>
         
     <url>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/mainloop/index.html</loc>
+     <lastmod>2018-08-24</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
      <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/scenemanager/index.html</loc>
      <lastmod>2018-08-24</lastmod>
      <changefreq>daily</changefreq>
@@ -178,6 +184,14 @@
     
 
     
+    <url>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/tween/index.html</loc>
+     <lastmod>2018-08-24</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
         
     <url>
      <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/eventemitter3/index.html</loc>
@@ -232,12 +246,6 @@
     <url>
      <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html</loc>
      <lastmod></lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-        
-    <url>
-     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/tween/index.html</loc>
-     <lastmod>2018-08-24</lastmod>
      <changefreq>daily</changefreq>
     </url>
         

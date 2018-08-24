@@ -1,6 +1,14 @@
 ## Boot
 
 ```javascript
+var config = {
+    width: 1024,
+    height: 768,
+    type: Phaser.AUTO,
+    parent: null,
+
+    scene: null
+};
 var game = new Phaser.Game(config);
 ```
 
@@ -139,31 +147,6 @@ game.destroy();
 - Also fires game.events `destroy` event.
 - `removeCanvas` : Set to `true` if you would like the parent canvas element removed from the DOM, or `false` to leave it in place.
 - `noReturn` : If `true` all the core Phaser plugins are destroyed. You cannot create another instance of Phaser on the same web page if you do this.
-
-## Main loop
-
-1.  game.events `prestep` event
-    1.  trigger `game.input.update()`
-    1.  trigger `game.sound.update()`
-1.  game.events `step` event
-1.  SceneManager.update, for each active scene
-    1.  scene.sys.events `preupdate` event
-        1.  TweenManager.preUpdate() to arrange active targets
-        1.  UpdateList.preUpdate(), to arrange game objects in UpdateList
-    1.  scene.sys.events `update` event
-        1.  TweenManager.update(), to run active tweens
-        1.  UpdateList.update --> gameObject.preUpdate
-    1.  scene.update
-    1.  scene.sys.events `postupdate` event
-1.  game.events `poststep` event
-1.  game.renderer.preRender()
-1.  game.events `prerender` event
-1.  SceneManager.render()
-1.  game.renderer.postRender()
-1.  game.events `postrender` event
-
-!!! note
-    Each scene is a standalone system.
 
 ## Pause / Resume events
 

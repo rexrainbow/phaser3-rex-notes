@@ -33,7 +33,13 @@ var ms = d.getMilliseconds();  // returns the milliseconds (0-999)
 ### Get unix-timestamp
 
 ```javascript
-var timestamp = d.now();       // unix-timestamp in milliseconds
+var timestamp = d.getTime();;   // unix-timestamp in milliseconds
+```
+
+or
+
+```javascript
+var timestamp = Date.now();;    // unix-timestamp in milliseconds
 ```
 
 ### To string
