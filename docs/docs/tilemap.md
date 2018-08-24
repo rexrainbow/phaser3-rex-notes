@@ -99,6 +99,20 @@ map.renderDebug(graphics, styleConfig);
 // map.renderDebug(graphics, styleConfig, layer);
 ```
 
+### Layer
+
+#### Render order
+
+```javascript
+layer.setRenderOrder(renderOrder);
+```
+
+- `renderOrder`
+    - `0`, or `'right-down'`
+    - `1`, or `'left-down'`
+    - `2`, or `'right-up'`
+    - `3`, or `'left-up'`
+
 ### Tile
 
 #### Get tile

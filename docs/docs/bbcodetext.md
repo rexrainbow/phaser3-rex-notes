@@ -158,17 +158,17 @@ var txt = scene.make.text({
 });
 ```
 
-### Set text
+### Content
 
-```javascript
-txt.setText('[b]h[/b]ello');
-```
-
-or
-
-```javascript
-txt.text = '[b]h[/b]ello';
-```
+- Get
+    ```javascript
+    var content = txt.text;
+    ```
+- Set
+    ```javascript
+    txt.setText('[b]h[/b]ello');
+    // txt.text = '[b]h[/b]ello';
+    ```
 
 ### Set style
 

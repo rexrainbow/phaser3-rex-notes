@@ -62,11 +62,20 @@ scene.load.start();                     // start loading
 
 #### Image
 
-```javascript
-scene.load.image(key, url);  // image
-scene.load.svg(key, url);    // image in svg format
-scene.load.htmlTexture(key, url, width, height);  // image in htmlTexture format
-```
+- Image
+    ```javascript
+    scene.load.image(key, url);
+    ```
+- SVG
+    ```javascript
+    scene.load.svg(key, url);
+    // scene.load.svg(key, url, {width, height});
+    // scene.load.svg(key, url, {scale});
+    ```
+- Html texture
+    ```javascript
+    scene.load.htmlTexture(key, url, width, height);
+    ```
 
 Get data from texture cache
 

@@ -140,12 +140,17 @@ function wordWrap (text, textObject)
 }
 ```
 
-### Set text
+### Content
 
-```javascript
-txt.setText('world');
-// var curContent = txt.text;
-```
+- Get
+    ```javascript
+    var content = txt.text;
+    ```
+- Set
+    ```javascript
+    txt.setText('world');
+    // txt.text = 'world';
+    ```
 
 ### Set style
 

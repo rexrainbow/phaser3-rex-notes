@@ -191,17 +191,17 @@ var txt = scene.make.text({
 });
 ```
 
-### Set text
+### Content
 
-```javascript
-txt.setText('<style="name1">wor</style>ld');
-```
-
-or
-
-```javascript
-txt.text = '<style="name1">wor</style>ld';
-```
+- Get
+    ```javascript
+    var content = txt.text;
+    ```
+- Set
+    ```javascript
+    txt.setText('<style="name1">wor</style>ld');
+    // txt.text = '<style="name1">wor</style>ld';
+    ```
 
 ### Set style
 

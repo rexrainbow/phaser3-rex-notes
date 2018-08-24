@@ -88,8 +88,8 @@ moveTo.stop();
 ### Set speed
 
 ```javascript
-moveTo.speed = speed;
-// moveTo.setSpeed(speed);
+moveTo.setSpeed(speed);
+// moveTo.speed = speed;
 ```
 
 ### Set rotate-to-target
