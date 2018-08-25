@@ -26,8 +26,8 @@ class MainScene extends Phaser.Scene {
 
     create() {
         console.log('MainScene: create');        
-        // this.scene.launch('Sub');
-        this.scene.start('Sub');
+        this.scene.launch('Sub');
+        // this.scene.start('Sub');
     }
 
     update() {
