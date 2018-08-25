@@ -54,7 +54,7 @@ class Player extends EE {
 
     boot() {
         var scene = GetSceneObject(this.parent);
-        scene.sys.events.on('update', this.runNextCommands, this);
+        scene.events.on('update', this.runNextCommands, this);
 
     }
 
@@ -62,7 +62,7 @@ class Player extends EE {
         super.shutdown();
         this.clock.shutdown();
         var scene = GetSceneObject(this.parent);
-        scene.sys.events.off('update', this.runNextCommands, this);
+        scene.events.off('update', this.runNextCommands, this);
         this.commands = undefined;
     }
 

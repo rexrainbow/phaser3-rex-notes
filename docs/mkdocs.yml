@@ -2,10 +2,12 @@ site_name: Notes of Phaser 3
 pages:
 - Home: index.md
 - System:
-    - Game: game.md
-    - Main loop: mainloop.md
-    - Scene manager: scenemanager.md
-    - Scene: scene.md
+    - Game:
+        - Game: game.md
+        - Main loop: mainloop.md
+    - Scene:
+        - Scene: scene.md
+        - Scene manager: scenemanager.md
     - Snapshot: snapshot.md
 - Loader:
     - Loader: loader.md

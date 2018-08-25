@@ -1,6 +1,5 @@
 Scene manager:
 
-- In Game instance : `game.scene`
 - In each scene instance: `scene.scene`
 
 ## Add new scene
@@ -16,74 +15,65 @@ scene.scene.add(key, sceneConfig, autoStart);
     ```javascript
     scene.load.script(key, url);
     ```
-
-2. add new scene
+1. add new scene
     ```javascript
     scene.scene.add(key, sceneConfig, autoStart);
     // game.scene.add(key, sceneConfig, autoStart);
     ```
 
-## Remove scene
+## Destroy scene
 
 ```javascript
 scene.scene.remove(key);
 ```
 
+- Fires scene.events `destroy`
+
 ## Start scene
 
-Launch the given Scene and run it in parallel with this one.
-
-```javascript
-scene.scene.launch(key, data);
-```
-
-Shutdown this Scene and run the given one.
-
-```javascript
-scene.scene.start(key, data);
-```
-
-Restarts this Scene.
-
-```javascript
-scene.scene.restart(data);
-```
+- Launch the given Scene and run it in parallel with this one
+    ```javascript
+    scene.scene.launch(key, data);
+    ```
+- Shutdown this Scene and run the given one
+    ```javascript
+    scene.scene.start(key, data);
+    ```
+- Restarts this Scene
+    ```javascript
+    scene.scene.restart(data);
+    ```
 
 ## Pause/Resume scene
 
-Pause : stops the update step but still renders.
-
-```javascript
-scene.scene.pause(key);
-// scene.scene.pause();  // pause myself
-```
-
-Resume : starts the update loop again.
-
-```javascript
-scene.scene.resume(key);
-// scene.scene.resume();  // resume myself
-```
-
-Sleep : no update, no render but doesn't shutdown.
-
-```javascript
-scene.scene.sleep(key);
-// scene.scene.sleep();  // sleep myself
-```
-
-Wake-up: starts update and render
-
-```javascript
-scene.scene.wake(key);
-// scene.scene.wake();  // wake-up myself
-```
-
-Makes this Scene sleep then starts the Scene given.
-
-```javascript
-scene.scene.switch(key);
-```
+- Pause : stops the update step but still renders
+    ```javascript
+    scene.scene.pause(key);
+    // scene.scene.pause();  // pause myself
+    ```
+    - Fires scene.events `pause`
+- Resume : starts the update loop again
+    ```javascript
+    scene.scene.resume(key);
+    // scene.scene.resume();  // resume myself
+    ```
+    - Fires scene.events `resume`
+- Sleep : no update, no render but doesn't shutdown
+    ```javascript
+    scene.scene.sleep(key);
+    // scene.scene.sleep();  // sleep myself
+    ```
+    - Fires scene.events `sleep`
+- Wake-up: starts update and render
+    ```javascript
+    scene.scene.wake(key);
+    // scene.scene.wake();  // wake-up myself
+    ```
+    - Fires scene.events `wake`
+- Makes this Scene sleep then starts the Scene given
+    ```javascript
+    scene.scene.switch(key);
+    ```
 
 ## Run scene
 
@@ -128,6 +118,12 @@ var isActive = scene.scene.isActive(key);
 var isVisible = scene.scene.isVisible(key);
 // var isVisible = scene.scene.isVisible();
 ```
+
+|       | Update/isActive    | Render/isVisible   |
+| ----- | ------------------ | ------------------ |
+| Run   | :heavy_check_mark: | :heavy_check_mark: |
+| Pause |                    | :heavy_check_mark: |
+| Sleep |                    |                    |
 
 ## Get scene
 

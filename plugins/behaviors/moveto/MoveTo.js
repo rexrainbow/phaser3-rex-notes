@@ -57,12 +57,12 @@ class MoveTo extends EE {
         }
 
         var scene = GetSceneObject(this.gameObject);
-        scene.sys.events.on('preupdate', this.update, this);
+        scene.events.on('update', this.update, this);
     }
 
     shutdown() {
         var scene = GetSceneObject(this.gameObject);
-        scene.sys.events.off('preupdate', this.update, this);
+        scene.events.off('update', this.update, this);
         this.gameObject = undefined;
         this.scene = undefined;
     }

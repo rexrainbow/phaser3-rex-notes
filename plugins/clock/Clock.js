@@ -28,12 +28,12 @@ class Clock {
 
     boot() {
         var scene = GetSceneObject(this.parent);
-        scene.sys.events.on('preupdate', this.update, this);
+        scene.events.on('update', this.update, this);
     }
 
     shutdown() {
         var scene = GetSceneObject(this.parent);
-        scene.sys.events.off('preupdate', this.update, this);
+        scene.events.off('update', this.update, this);
         this.parent = undefined;
     }
 

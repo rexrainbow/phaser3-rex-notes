@@ -1,21 +1,42 @@
 ## Define a scene
 
+### Configuration of scene
+
+```javascript
+var config = {
+    key: '',
+    // active: false,
+    // visible: true,
+    // pack: false,
+    // cameras: null,
+    // map: {},
+    // physics: {},
+    // loader: {},
+    // plugins: false,
+    // input: {}
+};
+```
+
+- `pack` : See [file pack](loader.md#file-pack)
+
 ### ES6 class
 
 ```javascript
 class MyScene extends Phaser.Scene {
 
-    constructor (config)
-    {
+    constructor (config) {
         super(config);
     }
 
+    init(data) {}
     preload () {}
-    create ()  {}
+    create (data)  {}
     update(time, delta) {}
 
 }
 ```
+
+- `data` : Parameters passed from [starting scene](scenemanager.md#start-scene)
 
 ### Class
 
@@ -31,11 +52,14 @@ var MyScene = new Phaser.Class({
         Phaser.Scene.call(this, config)
     },
 
+    init: function (data) {},
     preload: function () {},
-    create: function () {},
+    create: function (data) {},
     update: function (time, delta) {}
 });
 ```
+
+- `data` : Parameters passed from [starting scene](scenemanager.md#start-scene)
 
 ```javascript
 var MyGame = {};
@@ -47,114 +71,162 @@ MyGame.Boot = function ()
 MyGame.Boot.prototype.constructor = MyGame.Boot;
 
 MyGame.Boot.prototype = {
+    init: function (data) {},
     preload: function () {},
-    create: function () {},
+    create: function (data) {},
     update: function (time, delta) {}
 };
 ```
 
-### Overwrite
+- `data` : Parameters passed from [starting scene](scenemanager.md#start-scene)
+
+### Override
 
 ```javascript
 var demo = new Phaser.Scene('Demo');
 
+demo.init = function (data){};
 demo.preload = function (){};
-demo.create = function (){};
-demo.update = function (){};
+demo.create = function (data){};
+demo.update = function (time, delta){};
 ```
+
+- `data` : Parameters passed from [starting scene](scenemanager.md#start-scene)
+
+## Flow chart
+
+```mermaid
+graph TB
+
+subgraph Stop
+SceneEventDestroy>"scene.events: destroy"]
+Stop["Shutdown<br>Free game objects"]
+end
+
+subgraph Update
+SceneUpdate["Run: Every tick<br>scene.update()"]
+SceneEventPauseSleep>"scene.events: pause<br>scene.events: sleep"]
+Pause["Pause: render but no update<br>Sleep: no update, no render"]
+SceneEventResumeWake>"scene.events: resume<br>scene.events: wake"]
+end
+
+subgraph Create
+SceneEventStart>"scene.events: start"]
+SceneInit["scene.init()"]
+ScenePreLoad["Load assets<br>scene.preload()"]
+SceneCreate["Create game objects<br>scene.create()"]
+end
+
+Start((Start)) --> SceneEventStart
+SceneEventStart --> SceneInit
+SceneInit --> ScenePreLoad
+ScenePreLoad --> SceneCreate
+SceneCreate --> SceneUpdate
+SceneUpdate --> SceneUpdate
+SceneUpdate --> |"scene.scene.pause()<br>scene.scene.sleep()"|SceneEventPauseSleep
+SceneEventPauseSleep --> Pause
+Pause --> |"scene.scene.resume()<br>scene.scene.wake()"|SceneEventResumeWake
+SceneEventResumeWake --> SceneUpdate
+
+SceneUpdate --> |"scene.scene.stop()"|Stop
+Pause --> |"scene.scene.stop()"|SceneEventDestroy
+SceneEventDestroy --> Stop
+
+Stop --> |"scene.scene.start()<br>scene.scene.launch()<br>scene.scene.restart()"|SceneEventStart
+```
+
+- `Run` : Update and render
+- `Pause` : Render but no update
+- `Sleep` : No update, no render
+- `Stop` : Shutdown
+
+See also
+
+- [Pause/resume](scenemanager.md#pauseresume-scene)
+- [Stop](scenemanager.md#stop-scene)
+- [Main loop](mainloop.md)
 
 ## Members
 
-- `sys`
-- `game`
-- `anims`
-- `cache`
-- `registry`
-- `sound`
-- `textures`
-- `events`
-- `cameras`
-- `cameras3d`
-- `add`
-- `make`
-- `scene` : scenePlugin
-- `children` : displayList
-- `lights`
-- `data`
-- `input`
-- `load`
-- `time`
-- `tweens`
-- `physics` : arcadePhysics
 - `plugins`
+- `load` : [loader](loader.md)
+- `events` : [Local events](eventemitter3.md)
+- `input` : [Touch](touchevents.md), [keyboard](keyboardevents.md)
+- `tweens` : [Tween tasks](tween.md)
+- `time` : [Timer](timer.md)
+- `cameras` : [Camera](camera.md)
+- `scene` : [scenePlugin](scenemanager.md)
+- `anims`
+- `physics` : [arcadePhysics](arcade.md)
 - `impact` : impactPhysics
 - `matter` :　matterPhysics
+- `registry` : Global [data manager](datamanager.md)
+- `data` : Local [data manager](datamanager.md)
+- `sys`
+- `game`
+- `cache`
+- `sound`
+- `textures`
+- `add`
+- `make`
+- `children` : displayList
+- `lights`
 
 Preserve word in a scene.
 
 ## Events
 
-- start
+- Start (Before `scene.init()`)
     ```javascript
     scene.events.on('start', function(){});
     ```
-
-- destroy
+- Every tick
+    - Preupdate
+        ```javascript
+        scene.events.on('preupdate', function(time, delta){});
+        ```
+    - Update
+        ```javascript
+        scene.events.on('update', function(time, delta){});
+        ```
+    - Postupdate
+        ```javascript
+        scene.events.on('postupdate', function(time, delta){});
+        ```
+    - Render
+        ```javascript
+        scene.events.on('render', function(){});
+        ```
+- State changed
+    - Pause (from `scene.scene.pause()`)
+        ```javascript
+        scene.events.on('pause', function(){});
+        ```
+    - Resume (from `scene.scene.resume()`)
+        ```javascript
+        scene.events.on('resume', function(){});
+        ```
+    - Sleep (from `scene.scene.sleep()`)
+        ```javascript
+        scene.events.on('sleep', function(){});
+        ```
+    - Wake (from `scene.scene.wake()`)
+        ```javascript
+        scene.events.on('wake', function(){});
+        ```
+    - Stop/shutdown (from `scene.scene.stop()`)
+        ```javascript
+        scene.events.on('shutdown', function(){});
+        ```
+- Destroy (from `scene.scene.remove()`)
     ```javascript
     scene.events.on('destroy', function(){});
     ```
-
-- preupdate
-    ```javascript
-    scene.events.on('preupdate', function(time, delta){});
-    ```
-
-- update
-    ```javascript
-    scene.events.on('update', function(time, delta){});
-    ```
-
-- postupdate
-    ```javascript
-    scene.events.on('postupdate', function(time, delta){});
-    ```
-
-- render
-    ```javascript
-    scene.events.on('render', function(){});
-    ```
-
-- pause
-    ```javascript
-    scene.events.on('pause', function(){});
-    ```
-
-- resume
-    ```javascript
-    scene.events.on('resume', function(){});
-    ```
-
-- sleep
-    ```javascript
-    scene.events.on('sleep', function(){});
-    ```
-
-- wake
-    ```javascript
-    scene.events.on('wake', function(){});
-    ```
-
-- resize
+- Resize
     ```javascript
     scene.events.on('resize', function(){});
     ```
-
-- boot
+- Boot
     ```javascript
     scene.events.on('boot', function(){});
-    ```
-
-- shutdown
-    ```javascript
-    scene.events.on('shutdown', function(){});
     ```

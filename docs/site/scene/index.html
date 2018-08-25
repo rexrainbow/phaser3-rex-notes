@@ -23,6 +23,10 @@
       
         <meta name="lang:search.language" content="en">
       
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
         <meta name="lang:search.result.none" content="No matching documents">
       
         <meta name="lang:search.result.one" content="1 matching document">
@@ -32,7 +36,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-0.17.1, mkdocs-material-2.1.0">
+      <meta name="generator" content="mkdocs-0.17.3, mkdocs-material-2.7.0">
     
     
       
@@ -40,15 +44,16 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application-3368aa6b74.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application.78aab2dc.css">
       
-        <link rel="stylesheet" href="../assets/stylesheets/application-95ad5566f9.palette.css">
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.6079476c.css">
       
     
     
-      <script src="../assets/javascripts/modernizr-e826f8942a.js"></script>
+      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
     
     
+      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
       
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
@@ -61,9 +66,7 @@
   
     
     
-    
-      <body data-md-color-primary="blue" data-md-color-accent="blue">
-    
+    <body dir="ltr" data-md-color-primary="blue" data-md-color-accent="blue">
   
     <svg class="md-svg">
       <defs>
@@ -74,6 +77,11 @@
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search">
     <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <a href="#define-a-scene" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid">
@@ -109,11 +117,13 @@
             
 <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="search"></label>
-  <div class="md-search__inner">
+  <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" required placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
       <label class="md-icon md-search__icon" for="search"></label>
-      <button type="reset" class="md-icon md-search__icon" data-md-component="reset">&#xE5CD;</button>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
     </form>
     <div class="md-search__output">
       <div class="md-search__scrollwrap" data-md-scrollfix>
@@ -137,6 +147,9 @@
     
     <div class="md-container">
       
+        
+      
+      
       <main class="md-main">
         <div class="md-main__inner md-grid" data-md-component="container">
           
@@ -148,7 +161,7 @@
   <label class="md-nav__title md-nav__title--site" for="drawer">
     <span class="md-nav__button md-logo">
       
-        <img src="../images/logo.svg" width="24" height="24">
+        <img src="../images/logo.svg" width="48" height="48">
       
     </span>
     Notes of Phaser 3
@@ -194,6 +207,25 @@
           
 
 
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-1" type="checkbox" id="nav-2-1">
+    
+    <label class="md-nav__link" for="nav-2-1">
+      Game
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-1">
+        Game
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
   <li class="md-nav__item">
     <a href="../game/index.html" title="Game" class="md-nav__link">
       Game
@@ -213,17 +245,31 @@
   </li>
 
         
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../scenemanager/index.html" title="Scene manager" class="md-nav__link">
-      Scene manager
-    </a>
+      </ul>
+    </nav>
   </li>
 
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-2" type="checkbox" id="nav-2-2" checked>
+    
+    <label class="md-nav__link" for="nav-2-2">
+      Scene
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-2">
+        Scene
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
         
           
           
@@ -262,6 +308,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#configuration-of-scene" title="Configuration of scene" class="md-nav__link">
+    Configuration of scene
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#es6-class" title="ES6 class" class="md-nav__link">
     ES6 class
   </a>
@@ -276,14 +329,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#overwrite" title="Overwrite" class="md-nav__link">
-    Overwrite
+  <a href="#override" title="Override" class="md-nav__link">
+    Override
   </a>
   
 </li>
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#flow-chart" title="Flow chart" class="md-nav__link">
+    Flow chart
+  </a>
   
 </li>
       
@@ -303,6 +363,8 @@
       
       
       
+      
+      
         <li class="md-nav__item">
           <a href="#__comments" title="Comments" class="md-nav__link md-nav__link--active">
             Comments
@@ -313,6 +375,23 @@
   
 </nav>
     
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../scenemanager/index.html" title="Scene manager" class="md-nav__link">
+      Scene manager
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
         
@@ -2400,6 +2479,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#configuration-of-scene" title="Configuration of scene" class="md-nav__link">
+    Configuration of scene
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#es6-class" title="ES6 class" class="md-nav__link">
     ES6 class
   </a>
@@ -2414,14 +2500,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#overwrite" title="Overwrite" class="md-nav__link">
-    Overwrite
+  <a href="#override" title="Override" class="md-nav__link">
+    Override
   </a>
   
 </li>
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#flow-chart" title="Flow chart" class="md-nav__link">
+    Flow chart
+  </a>
   
 </li>
       
@@ -2438,6 +2531,8 @@
   </a>
   
 </li>
+      
+      
       
       
       
@@ -2463,21 +2558,42 @@
                   <h1>Scene</h1>
                 
                 <h2 id="define-a-scene">Define a scene<a class="headerlink" href="#define-a-scene" title="Permanent link">&para;</a></h2>
+<h3 id="configuration-of-scene">Configuration of scene<a class="headerlink" href="#configuration-of-scene" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="c1">// active: false,</span>
+    <span class="c1">// visible: true,</span>
+    <span class="c1">// pack: false,</span>
+    <span class="c1">// cameras: null,</span>
+    <span class="c1">// map: {},</span>
+    <span class="c1">// physics: {},</span>
+    <span class="c1">// loader: {},</span>
+    <span class="c1">// plugins: false,</span>
+    <span class="c1">// input: {}</span>
+<span class="p">};</span>
+</pre></div>
+
+<ul>
+<li><code>pack</code> : See <a href="../loader/index.html#file-pack">file pack</a></li>
+</ul>
 <h3 id="es6-class">ES6 class<a class="headerlink" href="#es6-class" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">MyScene</span> <span class="kr">extends</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scene</span> <span class="p">{</span>
 
-    <span class="nx">constructor</span> <span class="p">(</span><span class="nx">config</span><span class="p">)</span>
-    <span class="p">{</span>
+    <span class="nx">constructor</span> <span class="p">(</span><span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
         <span class="kr">super</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
     <span class="p">}</span>
 
+    <span class="nx">init</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{}</span>
     <span class="nx">preload</span> <span class="p">()</span> <span class="p">{}</span>
-    <span class="nx">create</span> <span class="p">()</span>  <span class="p">{}</span>
+    <span class="nx">create</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span>  <span class="p">{}</span>
     <span class="nx">update</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">)</span> <span class="p">{}</span>
 
 <span class="p">}</span>
 </pre></div>
 
+<ul>
+<li><code>data</code> : Parameters passed from <a href="../scenemanager/index.html#start-scene">starting scene</a></li>
+</ul>
 <h3 id="class">Class<a class="headerlink" href="#class" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">MyScene</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Class</span><span class="p">({</span>
 
@@ -2490,12 +2606,16 @@
         <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scene</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span>
     <span class="p">},</span>
 
+    <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{},</span>
     <span class="nx">preload</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{},</span>
-    <span class="nx">create</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{},</span>
+    <span class="nx">create</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{},</span>
     <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">)</span> <span class="p">{}</span>
 <span class="p">});</span>
 </pre></div>
 
+<ul>
+<li><code>data</code> : Parameters passed from <a href="../scenemanager/index.html#start-scene">starting scene</a></li>
+</ul>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">MyGame</span> <span class="o">=</span> <span class="p">{};</span>
 
 <span class="nx">MyGame</span><span class="p">.</span><span class="nx">Boot</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span>
@@ -2505,115 +2625,153 @@
 <span class="nx">MyGame</span><span class="p">.</span><span class="nx">Boot</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">=</span> <span class="nx">MyGame</span><span class="p">.</span><span class="nx">Boot</span><span class="p">;</span>
 
 <span class="nx">MyGame</span><span class="p">.</span><span class="nx">Boot</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{},</span>
     <span class="nx">preload</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{},</span>
-    <span class="nx">create</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{},</span>
+    <span class="nx">create</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{},</span>
     <span class="nx">update</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">)</span> <span class="p">{}</span>
 <span class="p">};</span>
 </pre></div>
 
-<h3 id="overwrite">Overwrite<a class="headerlink" href="#overwrite" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>data</code> : Parameters passed from <a href="../scenemanager/index.html#start-scene">starting scene</a></li>
+</ul>
+<h3 id="override">Override<a class="headerlink" href="#override" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">demo</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scene</span><span class="p">(</span><span class="s1">&#39;Demo&#39;</span><span class="p">);</span>
 
+<span class="nx">demo</span><span class="p">.</span><span class="nx">init</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">){};</span>
 <span class="nx">demo</span><span class="p">.</span><span class="nx">preload</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(){};</span>
-<span class="nx">demo</span><span class="p">.</span><span class="nx">create</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(){};</span>
-<span class="nx">demo</span><span class="p">.</span><span class="nx">update</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(){};</span>
+<span class="nx">demo</span><span class="p">.</span><span class="nx">create</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">){};</span>
+<span class="nx">demo</span><span class="p">.</span><span class="nx">update</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">){};</span>
 </pre></div>
 
+<ul>
+<li><code>data</code> : Parameters passed from <a href="../scenemanager/index.html#start-scene">starting scene</a></li>
+</ul>
+<h2 id="flow-chart">Flow chart<a class="headerlink" href="#flow-chart" title="Permanent link">&para;</a></h2>
+<pre class="mermaid"><code>graph TB
+
+subgraph Stop
+SceneEventDestroy&gt;&quot;scene.events: destroy&quot;]
+Stop[&quot;Shutdown&lt;br&gt;Free game objects&quot;]
+end
+
+subgraph Update
+SceneUpdate[&quot;Run: Every tick&lt;br&gt;scene.update()&quot;]
+SceneEventPauseSleep&gt;&quot;scene.events: pause&lt;br&gt;scene.events: sleep&quot;]
+Pause[&quot;Pause: render but no update&lt;br&gt;Sleep: no update, no render&quot;]
+SceneEventResumeWake&gt;&quot;scene.events: resume&lt;br&gt;scene.events: wake&quot;]
+end
+
+subgraph Create
+SceneEventStart&gt;&quot;scene.events: start&quot;]
+SceneInit[&quot;scene.init()&quot;]
+ScenePreLoad[&quot;Load assets&lt;br&gt;scene.preload()&quot;]
+SceneCreate[&quot;Create game objects&lt;br&gt;scene.create()&quot;]
+end
+
+Start((Start)) --&gt; SceneEventStart
+SceneEventStart --&gt; SceneInit
+SceneInit --&gt; ScenePreLoad
+ScenePreLoad --&gt; SceneCreate
+SceneCreate --&gt; SceneUpdate
+SceneUpdate --&gt; SceneUpdate
+SceneUpdate --&gt; |&quot;scene.scene.pause()&lt;br&gt;scene.scene.sleep()&quot;|SceneEventPauseSleep
+SceneEventPauseSleep --&gt; Pause
+Pause --&gt; |&quot;scene.scene.resume()&lt;br&gt;scene.scene.wake()&quot;|SceneEventResumeWake
+SceneEventResumeWake --&gt; SceneUpdate
+
+SceneUpdate --&gt; |&quot;scene.scene.stop()&quot;|Stop
+Pause --&gt; |&quot;scene.scene.stop()&quot;|SceneEventDestroy
+SceneEventDestroy --&gt; Stop
+
+Stop --&gt; |&quot;scene.scene.start()&lt;br&gt;scene.scene.launch()&lt;br&gt;scene.scene.restart()&quot;|SceneEventStart</code></pre>
+
+<ul>
+<li><code>Run</code> : Update and render</li>
+<li><code>Pause</code> : Render but no update</li>
+<li><code>Sleep</code> : No update, no render</li>
+<li><code>Stop</code> : Shutdown</li>
+</ul>
+<p>See also</p>
+<ul>
+<li><a href="../scenemanager/index.html#pauseresume-scene">Pause/resume</a></li>
+<li><a href="../scenemanager/index.html#stop-scene">Stop</a></li>
+<li><a href="../mainloop/index.html">Main loop</a></li>
+</ul>
 <h2 id="members">Members<a class="headerlink" href="#members" title="Permanent link">&para;</a></h2>
 <ul>
-<li><code>sys</code></li>
-<li><code>game</code></li>
-<li><code>anims</code></li>
-<li><code>cache</code></li>
-<li><code>registry</code></li>
-<li><code>sound</code></li>
-<li><code>textures</code></li>
-<li><code>events</code></li>
-<li><code>cameras</code></li>
-<li><code>cameras3d</code></li>
-<li><code>add</code></li>
-<li><code>make</code></li>
-<li><code>scene</code> : scenePlugin</li>
-<li><code>children</code> : displayList</li>
-<li><code>lights</code></li>
-<li><code>data</code></li>
-<li><code>input</code></li>
-<li><code>load</code></li>
-<li><code>time</code></li>
-<li><code>tweens</code></li>
-<li><code>physics</code> : arcadePhysics</li>
 <li><code>plugins</code></li>
+<li><code>load</code> : <a href="../loader/index.html">loader</a></li>
+<li><code>events</code> : <a href="../eventemitter3/index.html">Local events</a></li>
+<li><code>input</code> : <a href="../touchevents/index.html">Touch</a>, <a href="../keyboardevents/index.html">keyboard</a></li>
+<li><code>tweens</code> : <a href="../tween/index.html">Tween tasks</a></li>
+<li><code>time</code> : <a href="../timer/index.html">Timer</a></li>
+<li><code>cameras</code> : <a href="../camera/index.html">Camera</a></li>
+<li><code>scene</code> : <a href="../scenemanager/index.html">scenePlugin</a></li>
+<li><code>anims</code></li>
+<li><code>physics</code> : <a href="../arcade/index.html">arcadePhysics</a></li>
 <li><code>impact</code> : impactPhysics</li>
 <li><code>matter</code> :　matterPhysics</li>
+<li><code>registry</code> : Global <a href="../datamanager/index.html">data manager</a></li>
+<li><code>data</code> : Local <a href="../datamanager/index.html">data manager</a></li>
+<li><code>sys</code></li>
+<li><code>game</code></li>
+<li><code>cache</code></li>
+<li><code>sound</code></li>
+<li><code>textures</code></li>
+<li><code>add</code></li>
+<li><code>make</code></li>
+<li><code>children</code> : displayList</li>
+<li><code>lights</code></li>
 </ul>
 <p>Preserve word in a scene.</p>
 <h2 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p>start
+<li>Start (Before <code>scene.init()</code>)
     <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
-</pre></div></p>
-</li>
-<li>
-<p>destroy
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;destroy&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
-</pre></div></p>
-</li>
-<li>
-<p>preupdate
+</pre></div></li>
+<li>Every tick<ul>
+<li>Preupdate
     <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;preupdate&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">){});</span>
-</pre></div></p>
-</li>
-<li>
-<p>update
+</pre></div></li>
+<li>Update
     <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;update&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">){});</span>
-</pre></div></p>
-</li>
-<li>
-<p>postupdate
+</pre></div></li>
+<li>Postupdate
     <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;postupdate&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">){});</span>
-</pre></div></p>
-</li>
-<li>
-<p>render
+</pre></div></li>
+<li>Render
     <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;render&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
-</pre></div></p>
+</pre></div></li>
+</ul>
 </li>
-<li>
-<p>pause
+<li>State changed<ul>
+<li>Pause (from <code>scene.scene.pause()</code>)
     <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pause&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
-</pre></div></p>
-</li>
-<li>
-<p>resume
+</pre></div></li>
+<li>Resume (from <code>scene.scene.resume()</code>)
     <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;resume&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
-</pre></div></p>
-</li>
-<li>
-<p>sleep
+</pre></div></li>
+<li>Sleep (from <code>scene.scene.sleep()</code>)
     <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;sleep&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
-</pre></div></p>
-</li>
-<li>
-<p>wake
+</pre></div></li>
+<li>Wake (from <code>scene.scene.wake()</code>)
     <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;wake&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
-</pre></div></p>
-</li>
-<li>
-<p>resize
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;resize&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
-</pre></div></p>
-</li>
-<li>
-<p>boot
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;boot&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
-</pre></div></p>
-</li>
-<li>
-<p>shutdown
+</pre></div></li>
+<li>Stop/shutdown (from <code>scene.scene.stop()</code>)
     <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;shutdown&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
-</pre></div></p>
+</pre></div></li>
+</ul>
 </li>
+<li>Destroy (from <code>scene.scene.remove()</code>)
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;destroy&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
+</pre></div></li>
+<li>Resize
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;resize&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
+</pre></div></li>
+<li>Boot
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;boot&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
+</pre></div></li>
 </ul>
                 
                   
@@ -2621,21 +2779,25 @@
               
               
                 
-                  <h2 id="__comments">Comments</h2>
-                  <div id="disqus_thread"></div>
-<script>
-  var disqus_config = function () {
-    this.page.url = "https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/scene/index.html";
-    this.page.identifier =
-      "/scene/index.html";
-  };
-  (function() {
-    var d = document, s = d.createElement("script");
-    s.src = "//notes-of-phaser3.disqus.com/embed.js";
-    s.setAttribute("data-timestamp", +new Date());
-    (d.head || d.body).appendChild(s);
-  })();
-</script>
+                  
+
+
+  <h2 id="__comments">Comments</h2>
+  <div id="disqus_thread"></div>
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/scene/index.html";
+      this.page.identifier =
+        "/scene/index.html";
+    };
+    (function() {
+      var d = document, s = d.createElement("script");
+      s.src = "//notes-of-phaser3.disqus.com/embed.js";
+      s.setAttribute("data-timestamp", +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+
                 
               
             </article>
@@ -2649,7 +2811,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../scenemanager/index.html" title="Scene manager" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../mainloop/index.html" title="Main loop" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -2658,19 +2820,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Scene manager
+                Main loop
               </span>
             </div>
           </a>
         
         
-          <a href="../snapshot/index.html" title="Snapshot" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../scenemanager/index.html" title="Scene manager" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Snapshot
+                Scene manager
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
@@ -2708,9 +2870,9 @@
       
     </div>
     
-      <script src="../assets/javascripts/application-a5397a53ce.js"></script>
+      <script src="../assets/javascripts/application.8eb9be28.js"></script>
       
-      <script>app.initialize({version:"0.17.1",url:{base:".."}})</script>
+      <script>app.initialize({version:"0.17.3",url:{base:".."}})</script>
       
         <script src="../js/mermaid/mermaid.min.js"></script>
       
@@ -2719,7 +2881,7 @@
     
     
       
-      <script>!function(e,t,a,n,o,c,i){e.GoogleAnalyticsObject=o,e[o]=e[o]||function(){(e[o].q=e[o].q||[]).push(arguments)},e[o].l=1*new Date,c=t.createElement(a),i=t.getElementsByTagName(a)[0],c.async=1,c.src=n,i.parentNode.insertBefore(c,i)}(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-119804412-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview");var links=document.getElementsByTagName("a");Array.prototype.map.call(links,function(e){e.host!=document.location.host&&e.addEventListener("click",function(){var t=e.getAttribute("data-md-action")||"follow";ga("send","event","outbound",t,e.href)})});var query=document.forms.search.query;query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})</script>
+        <script>!function(e,a,t,n,o,c,i){e.GoogleAnalyticsObject=o,e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=1*new Date,c=a.createElement(t),i=a.getElementsByTagName(t)[0],c.async=1,c.src="https://www.google-analytics.com/analytics.js",i.parentNode.insertBefore(c,i)}(window,document,"script",0,"ga"),ga("create","UA-119804412-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview");var links=document.getElementsByTagName("a");if(Array.prototype.map.call(links,function(e){e.host!=document.location.host&&e.addEventListener("click",function(){var a=e.getAttribute("data-md-action")||"follow";ga("send","event","outbound",a,e.href)})}),document.forms.search){var query=document.forms.search.query;query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}</script>
       
     
   </body>

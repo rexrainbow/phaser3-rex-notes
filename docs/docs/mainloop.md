@@ -16,6 +16,9 @@
 1.  game.renderer.preRender()
 1.  game.events `prerender` event
 1.  SceneManager.render()
+    1. Sort display list
+    1. Render cameras
+    1. scene.sys.events `render` event
 1.  game.renderer.postRender()
 1.  game.events `postrender` event
 
@@ -29,21 +32,29 @@
 ```mermaid
 graph TB
 
+subgraph Render
+GameRenderPreRender["game.renderer.preRender()"]
+GameEventPreRender>"game.events: prerender"]
+SceneManagerRender["SceneManager.render()<br>...See 'Scene steps'..."]
+GameRenderPostRender["game.renderer.postRender()"]
+GameEventPostRender>"game.events: postrender"]
+end
+
+subgraph Step
 GameEventPreStep>"game.events: prestep<br><br>input.update()<br>sound.update()"]
 GameEventStep>"game.events: step"]
 SceneManagerUpdate["SceneManager.update()<br>...See 'Scene steps'..."]
 GameEventPostStep>"game.events: poststep"]
-GameRenderPreRender["game.renderer.preRender()"]
-GameEventPreRender>"game.events: prerender"]
-GameRenderPostRender["game.renderer.postRender()"]
-GameEventPostRender>"game.events: postrender"]
+end
+
 
 GameEventPreStep --> GameEventStep
 GameEventStep --> SceneManagerUpdate
 SceneManagerUpdate --> GameEventPostStep
 GameEventPostStep --> GameRenderPreRender
 GameRenderPreRender --> GameEventPreRender
-GameEventPreRender --> GameRenderPostRender
+GameEventPreRender --> SceneManagerRender
+SceneManagerRender --> GameRenderPostRender
 GameRenderPostRender --> GameEventPostRender
 GameEventPostRender --> GameEventPreStep
 ```
@@ -53,14 +64,21 @@ GameEventPostRender --> GameEventPreStep
 ```mermaid
 graph TB
 
-SceneManagerUpdate["SceneManager.update()"]
+subgraph Render
+SceneEventRender>"scene.sys.events: render"]
+end
+
+subgraph Update
 SceneEventPreUpdate>"scene.sys.events: preupdate<br><br>TweenManager.preUpdate()<br>UpdateList.preUpdate()"]
 SceneEventUpdate>"scene.sys.events: update<br><br>TweenManager.update()<br>UpdateList.update()<br>gameObject.preUpdate()"]
 SceneUpdate["scene.update()"]
 SceneEventPostUpdate>"scene.sys.events: postupdate"]
+end
 
-SceneManagerUpdate --> SceneEventPreUpdate
+
 SceneEventPreUpdate --> SceneEventUpdate
 SceneEventUpdate --> SceneUpdate
 SceneUpdate --> SceneEventPostUpdate
+
+SceneEventPostUpdate -.-> SceneEventRender
 ```
