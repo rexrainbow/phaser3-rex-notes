@@ -11,7 +11,9 @@ const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 class Player extends EE {
     constructor(parent, config) {
         super();
-        this.clock = new Clock(parent);
+        this.clock = new Clock(parent, {
+            tickMe: false
+        });
         this.parent = parent;
         this.resetFromJSON(config); // this function had been called in super(config)
         this.boot();
@@ -55,7 +57,6 @@ class Player extends EE {
     boot() {
         var scene = GetSceneObject(this.parent);
         scene.events.on('update', this.runNextCommands, this);
-
     }
 
     shutdown() {
@@ -162,9 +163,11 @@ class Player extends EE {
         return this.clock.now;
     }
 
-    runNextCommands() {
-        var clockNowTime = this.clock.now;
-        if (!this.clock.isRunning ||
+    runNextCommands(time, delta) {
+        var clock = this.clock;
+        clock.update(time, delta);
+        var clockNowTime = clock.now;
+        if (!clock.isRunning ||
             (this.nextDt > clockNowTime)) {
             return;
         }

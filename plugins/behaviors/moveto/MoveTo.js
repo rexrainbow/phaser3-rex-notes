@@ -20,11 +20,11 @@ class MoveTo extends EE {
 
         this.tween = undefined;
         this.resetFromJSON(config);
-        this.boot();
+        this.boot(config);
     }
 
     resetFromJSON(o) {
-        this.isMoving = GetValue(o, 'isMoving', false);        
+        this.isMoving = GetValue(o, 'isMoving', false);
         this.timeScale = GetValue(o, 'timeScale', 1);
         this.speed = GetValue(o, 'speed', 0);
         this.targetX = GetValue(o, 'targetX', 0);
@@ -36,6 +36,7 @@ class MoveTo extends EE {
             rotationOffset = DegToRad(GetValue(o, 'angleOffset', 0));
         }
         this.setRotateToTarget(rotateToTarget, rotationOffset);
+        this.tickMe = GetValue(o, 'tickMe', true);  // true to set 'update' callback
         return this;
     }
 
@@ -47,22 +48,25 @@ class MoveTo extends EE {
             targetX: this.targetX,
             targetY: this.targetY,
             rotateToTarget: this.rotateToTarget,
-            rotationOffset: this.rotationOffset
+            rotationOffset: this.rotationOffset,            
+            tickMe: this.tickMe
         };
     }
 
-    boot() {
+    boot(config) {
         if (this.gameObject.on) { // oops, bob object does not have event emitter
             this.gameObject.on('destroy', this.destroy, this);
         }
 
-        var scene = GetSceneObject(this.gameObject);
-        scene.events.on('update', this.update, this);
+        if (this.tickMe) {
+            this.scene.events.on('update', this.update, this);
+        }
     }
 
     shutdown() {
-        var scene = GetSceneObject(this.gameObject);
-        scene.events.off('update', this.update, this);
+        if (this.tickMe) {
+            this.scene.events.off('update', this.update, this);
+        }
         this.gameObject = undefined;
         this.scene = undefined;
     }

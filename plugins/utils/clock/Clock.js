@@ -2,7 +2,7 @@
 
 import GetSceneObject from 'rexPlugins/utils/system/GetSceneObject.js';
 
-const GetFastValue = Phaser.Utils.Objects.GetFastValue;
+const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Clock {
     constructor(parent, config) {
@@ -12,9 +12,10 @@ class Clock {
     }
 
     resetFromJSON(o) {
-        this.state = GetFastValue(o, 'state', 0); // 0=IDLE, 1=RUN
-        this.now = GetFastValue(o, 'now', 0);
-        this.timeScale = GetFastValue(o, 'timeScale', 1);
+        this.state = GetValue(o, 'state', 0); // 0=IDLE, 1=RUN
+        this.now = GetValue(o, 'now', 0);
+        this.timeScale = GetValue(o, 'timeScale', 1);
+        this.tickMe = GetValue(o, 'tickMe', true); // true to set 'update' callback
         return this;
     }
 
@@ -22,18 +23,23 @@ class Clock {
         return {
             state: this.state,
             now: this.now,
-            timeScale: this.timeScale
+            timeScale: this.timeScale,
+            tickMe: this.tickMe
         };
     }
 
     boot() {
-        var scene = GetSceneObject(this.parent);
-        scene.events.on('update', this.update, this);
+        if (this.tickMe) {
+            var scene = GetSceneObject(this.parent);
+            scene.events.on('update', this.update, this);
+        }
     }
 
     shutdown() {
-        var scene = GetSceneObject(this.parent);
-        scene.events.off('update', this.update, this);
+        if (this.tickMe) {
+            var scene = GetSceneObject(this.parent);
+            scene.events.off('update', this.update, this);
+        }
         this.parent = undefined;
     }
 
