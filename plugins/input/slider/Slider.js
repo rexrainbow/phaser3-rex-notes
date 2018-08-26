@@ -27,7 +27,7 @@ class Slider extends EE {
                 y: 0
             }
         ];
-        this.dragEnable = null;
+        this.gameObject.setInteractive(GetValue(config, "inputConfig", undefined));        
         this.resetFromJSON(config);
         this.boot();
     }
@@ -38,7 +38,7 @@ class Slider extends EE {
         if (endPoints !== undefined) {
             this.setEndPoints(endPoints);
         }
-        this.setDragEnable(GetValue(o, "dragEnable", true));
+        this.setEnable(GetValue(o, "enable", true));
         return this;
     }
 
@@ -46,7 +46,7 @@ class Slider extends EE {
         return {
             value: this.value,
             endPoints: this.endPoints,
-            dragEnable: this.dragEnable
+            enable: this.enable
         };
     }
 
@@ -66,20 +66,16 @@ class Slider extends EE {
         this.shutdown();
     }
 
-    setDragEnable(e) {
-        if (this.dragEnable === null) {
-            this.gameObject.setInteractive(); // only need setInteractive once
-        }
-
+    setEnable(e) {
         if (e === undefined) {
             e = true;
         }
 
-        if (this.dragEnable === e) {
+        if (this.enable === e) {
             return this;
         }
 
-        this.dragEnable = e;
+        this.enable = e;
         this.scene.input.setDraggable(this.gameObject, e);
         return this;
     }

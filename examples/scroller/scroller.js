@@ -10,27 +10,61 @@ class Demo extends Phaser.Scene {
 
     }
 
-    preload() {
-        this.load.image('bg', 'assets/images/white-dot.png');
-    }
+    preload() {}
 
     create() {
-        var star;
-        var bg = this.add.image(400, 300, 'bg')
-            .setDisplaySize(300, 300)
-            .setTint(0xcccccc);
-        var scroller = this.plugins.get('rexScroller').add(bg);
-        scroller.on('dragdelta', function (pointer) {
-            star.x += pointer.dx;
-            star.y += pointer.dy;            
+        var container = this.add.container(400, 300)
+            .setSize(300, 400);
+        var topY = -container.height / 2,
+            leftX = -container.width / 2;
+        var bg = this.add.graphics()
+            .fillStyle(0x333333, 1)
+            .fillRect(container.x + leftX, container.y + topY, container.width, container.height)
+            .setVisible(true)
+            .setDepth(-1);
+        container.setMask(bg.createGeometryMask());
+
+
+        var s = '';
+        for (var i = 0, cnt = 100; i < cnt; i++) {
+            s += i + ': ' + getRandomChar(12);
+            if (i < (cnt - 1)) {
+                s += '\n';
+            }
+        }
+
+        var txt = this.add.text(leftX, topY, s, {
+            fontSize: '20pt'
+        });
+        container.add(txt);
+
+        this.scroller = this.plugins.get('rexScroller').add(container, {
+            bounds: [
+                topY - txt.displayHeight + container.displayHeight,
+                topY
+            ],
+            value: topY,
+        }).on('valuechange', function (value) {
+            console.log(value);
+            txt.y = value;
         });
 
-        star = this.add.image(400, 300, 'bg')
-            .setDisplaySize(10, 10)
-            .setTint(0xff0000);
+        this.scrollerState = this.add.text(0, 0, '');
     }
 
-    update() {}
+    update() {
+        this.scrollerState.setText(this.scroller.state + "\n" + this.scroller.value);
+    }
+}
+
+var s = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ ';
+const GetRandom = Phaser.Utils.Array.GetRandom;
+var getRandomChar = function (len) {
+    var resutl = '';
+    for (var i = 0; i < len; i++) {
+        resutl += GetRandom(s);
+    }
+    return resutl;
 }
 
 var config = {

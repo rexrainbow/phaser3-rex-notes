@@ -15,7 +15,7 @@ class State extends FSM {
         this.start('IDLE');
     }
 
-    // IDLE
+    // IDLE -> DRAG
     next_IDLE() {
         var nextState, parent = this.parent;
         if (parent.isDragging) {
@@ -25,7 +25,7 @@ class State extends FSM {
     }
     // IDLE    
 
-    // DRAG
+    // DRAG -> BACK|SLOW|IDLE
     next_DRAG() {
         var nextState, parent = this.parent;
         if (!parent.isDragging) {
@@ -41,7 +41,7 @@ class State extends FSM {
     }
     // DRAG    
 
-    // SLOW
+    // SLOW -> DRAG|IDLE
     next_SLOW() {
         var nextState, parent = this.parent;
         if (parent.isDragging) {
@@ -51,9 +51,15 @@ class State extends FSM {
         }
         return nextState;
     }
+    enter_SLOW() {
+        this.parent.slowDown();
+    }
+    exit_SLOW() {
+        this.parent.stop();
+    }
     // SLOW    
 
-    // BACK
+    // BACK -> DRAG|IDLE
     next_BACK() {
         var nextState, parent = this.parent;
         if (parent.isDragging) {
@@ -62,6 +68,12 @@ class State extends FSM {
             nextState = 'IDLE';
         }
         return nextState;
+    }
+    enter_BACK() {
+        this.parent.rollback();
+    }
+    exit_BACK() {
+        this.parent.stop();
     }
     // BACK
 }

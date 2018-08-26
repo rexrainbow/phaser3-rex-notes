@@ -123,6 +123,7 @@ class TouchState extends EE {
     }
 
     get speed() {
+        // TODO: Fix
         var d = getDist(this.x, this.preX, this.y, this.preY);
         var speed = d / (this.dt * 0.001);
         return speed;

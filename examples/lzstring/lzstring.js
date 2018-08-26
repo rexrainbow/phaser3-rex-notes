@@ -2,7 +2,7 @@
 
 import LZStringPlugin from 'rexPlugins/lzstring-plugin.js';
 
-const GetRandomElement = Phaser.Utils.Array.GetRandom;
+const GetRandom = Phaser.Utils.Array.GetRandom;
 
 class Demo extends Phaser.Scene {
 
@@ -20,7 +20,7 @@ class Demo extends Phaser.Scene {
         var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ ';
         var src = '';
         for (var i=0; i<10000; i++) {
-            src += GetRandomElement(chars);
+            src += GetRandom(chars);
         }
 
       
