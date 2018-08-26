@@ -3112,7 +3112,7 @@
         }, 
         {
             "location": "/slider/index.html", 
-            "text": "Introduction\n\n\nDrag thumb on a slider bar.\n\n\n\n\nAuthor: Rex\n\n\nBehavior of game object\n\n\n\n\nSource code\n\n\nPlugin\n, \nminify\n\n\nUsage\n\n\nSample code\n\n\nUser could import class directly, or install it by global plugin.\n\n\nImport class\n\n\nimport\n \nrexSlider\n \nfrom\n \n./plugins/slider.js\n;\n\n\n\n\n\nInstall global plugin\n\n\nInstall plugin in \nconfiguration of game\n\n\nimport\n \nSliderPlugin\n \nfrom\n \n./plugins/slider-plugin.js\n;\n\n\n\nvar\n \nconfig\n \n=\n \n{\n\n    \n// ...\n\n    \nplugins\n:\n \n{\n\n        \nglobal\n:\n \n[{\n\n            \nkey\n:\n \nrexSlider\n,\n\n            \nplugin\n:\n \nSliderPlugin\n,\n\n            \nstart\n:\n \ntrue\n\n        \n},\n\n        \n// ...\n\n        \n]\n\n    \n}\n\n    \n// ...\n\n\n};\n\n\nvar\n \ngame\n \n=\n \nnew\n \nPhaser\n.\nGame\n(\nconfig\n);\n\n\n\n\n\nCreate instance\n\n\ngameObject\n.\nslider\n \n=\n \nscene\n.\nplugins\n.\nget\n(\nrexSlider\n).\nadd\n(\ngameObject\n,\n \n{\n\n    \n// endPoints: [\n\n    \n//     {x:0, y:0},\n\n    \n//     {x:0, y:0}\n\n    \n// ],\n\n    \n// value: 0,\n\n    \n// dragEnable: true\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\nendPoints : an array of 2 end-points (\n[{x,y}, {x,y}]\n)\n\n\nvalue: initial value between 0 to 1\n\n\ndragEnable: set true to drag thumb\n\n\n\n\nSet end-points\n\n\ngameObject\n.\nslider\n.\nsetEndPoints\n(\np0x\n,\n \np0y\n,\n \np1x\n,\n \np1y\n);\n\n\n// gameObject.slider.setEndPoints(p0, p1); // p0, p1: {x, y}\n\n\n// gameObject.slider.setEndPoints(points); // points: [p0, p1]\n\n\n\n\n\nGet value\n\n\nvar\n \nvalue\n \n=\n \ngameObject\n.\nslider\n.\nvalue\n;\n          \n// value: between 0 to 1\n\n\n// var value = gameObject.slider.getValue();  // value: between 0 to 1\n\n\n// var value = gameObject.slider.getValue(min, max);  // value: between min to max\n\n\n\n\n\nSet value\n\n\ngameObject\n.\nslider\n.\nvalue\n \n=\n \nnewValue\n;\n       \n// newValue: between 0 to 1\n\n\n// gameObject.slider.setValue(newValue);  // newValue: between 0 to 1\n\n\n// gameObject.slider.setValue(newValue, min, max);  // newValue: between min to max\n\n\n\n\n\ngameObject\n.\nslider\n.\naddValue\n(\ninc\n);\n  \n// inc: between 0 to 1\n\n\n// gameObject.slider.addValue(inc, min, max);  // inc: between min to max\n\n\n\n\n\nFires \nvaluechange\n event if new value is not equal to current value.\n\n\nEvents\n\n\n\n\nValue changed\n    \ngameObject\n.\nslider\n.\non\n(\nvaluechange\n,\n \nfunction\n(\nnewValue\n,\n \nprevValue\n){\n \n/* ... */\n \n});\n\n\n\n\nnewValue: between 0 to 1\n\n\nprevValue: between 0 to 1\n\n\n\n\n\n\n\n\nDrag\n\n\nDrag enable\n\n\ngameObject\n.\nslider\n.\nsetDragEnable\n();\n\n\n// gameObject.slider.setDragEnable(false);  // disable\n\n\n\n\n\nIs dragging\n\n\nvar\n \nisDragging\n \n=\n \ngameObject\n.\nslider\n.\nisDragging\n;", 
+            "text": "Introduction\n\n\nDrag thumb on a slider bar.\n\n\n\n\nAuthor: Rex\n\n\nBehavior of game object\n\n\n\n\nSource code\n\n\nPlugin\n, \nminify\n\n\nUsage\n\n\nSample code\n\n\nUser could import class directly, or install it by global plugin.\n\n\nImport class\n\n\nimport\n \nrexSlider\n \nfrom\n \n./plugins/slider.js\n;\n\n\n\n\n\nInstall global plugin\n\n\nInstall plugin in \nconfiguration of game\n\n\nimport\n \nSliderPlugin\n \nfrom\n \n./plugins/slider-plugin.js\n;\n\n\n\nvar\n \nconfig\n \n=\n \n{\n\n    \n// ...\n\n    \nplugins\n:\n \n{\n\n        \nglobal\n:\n \n[{\n\n            \nkey\n:\n \nrexSlider\n,\n\n            \nplugin\n:\n \nSliderPlugin\n,\n\n            \nstart\n:\n \ntrue\n\n        \n},\n\n        \n// ...\n\n        \n]\n\n    \n}\n\n    \n// ...\n\n\n};\n\n\nvar\n \ngame\n \n=\n \nnew\n \nPhaser\n.\nGame\n(\nconfig\n);\n\n\n\n\n\nCreate instance\n\n\nvar\n \nslider\n \n=\n \nscene\n.\nplugins\n.\nget\n(\nrexSlider\n).\nadd\n(\ngameObject\n,\n \n{\n\n    \n// endPoints: [\n\n    \n//     {x:0, y:0},\n\n    \n//     {x:0, y:0}\n\n    \n// ],\n\n    \n// value: 0,\n\n    \n// dragEnable: true\n\n\n});\n\n\n\n\n\nProperties\n\n\n\n\nendPoints : an array of 2 end-points (\n[{x,y}, {x,y}]\n)\n\n\nvalue: initial value between 0 to 1\n\n\ndragEnable: set true to drag thumb\n\n\n\n\nSet end-points\n\n\nslider\n.\nsetEndPoints\n(\np0x\n,\n \np0y\n,\n \np1x\n,\n \np1y\n);\n\n\n// slider.setEndPoints(p0, p1); // p0, p1: {x, y}\n\n\n// slider.setEndPoints(points); // points: [p0, p1]\n\n\n\n\n\nGet value\n\n\nvar\n \nvalue\n \n=\n \nslider\n.\nvalue\n;\n          \n// value: between 0 to 1\n\n\n// var value = slider.getValue();  // value: between 0 to 1\n\n\n// var value = slider.getValue(min, max);  // value: between min to max\n\n\n\n\n\nSet value\n\n\nslider\n.\nvalue\n \n=\n \nnewValue\n;\n       \n// newValue: between 0 to 1\n\n\n// slider.setValue(newValue);  // newValue: between 0 to 1\n\n\n// slider.setValue(newValue, min, max);  // newValue: between min to max\n\n\n\n\n\nslider\n.\naddValue\n(\ninc\n);\n  \n// inc: between 0 to 1\n\n\n// slider.addValue(inc, min, max);  // inc: between min to max\n\n\n\n\n\nFires \nvaluechange\n event if new value is not equal to current value.\n\n\nEvents\n\n\n\n\nValue changed\n    \nslider\n.\non\n(\nvaluechange\n,\n \nfunction\n(\nnewValue\n,\n \nprevValue\n){\n \n/* ... */\n \n});\n\n\n\n\nnewValue: between 0 to 1\n\n\nprevValue: between 0 to 1\n\n\n\n\n\n\n\n\nDrag\n\n\nDrag enable\n\n\nslider\n.\nsetEnable\n();\n\n\n// slider.setEnable(false);  // disable\n\n\n\n\n\nIs dragging\n\n\nvar\n \nisDragging\n \n=\n \nslider\n.\nisDragging\n;", 
             "title": "Slider"
         }, 
         {
@@ -3142,27 +3142,27 @@
         }, 
         {
             "location": "/slider/index.html#create-instance", 
-            "text": "gameObject . slider   =   scene . plugins . get ( rexSlider ). add ( gameObject ,   { \n     // endPoints: [ \n     //     {x:0, y:0}, \n     //     {x:0, y:0} \n     // ], \n     // value: 0, \n     // dragEnable: true  });   Properties   endPoints : an array of 2 end-points ( [{x,y}, {x,y}] )  value: initial value between 0 to 1  dragEnable: set true to drag thumb", 
+            "text": "var   slider   =   scene . plugins . get ( rexSlider ). add ( gameObject ,   { \n     // endPoints: [ \n     //     {x:0, y:0}, \n     //     {x:0, y:0} \n     // ], \n     // value: 0, \n     // dragEnable: true  });   Properties   endPoints : an array of 2 end-points ( [{x,y}, {x,y}] )  value: initial value between 0 to 1  dragEnable: set true to drag thumb", 
             "title": "Create instance"
         }, 
         {
             "location": "/slider/index.html#set-end-points", 
-            "text": "gameObject . slider . setEndPoints ( p0x ,   p0y ,   p1x ,   p1y );  // gameObject.slider.setEndPoints(p0, p1); // p0, p1: {x, y}  // gameObject.slider.setEndPoints(points); // points: [p0, p1]", 
+            "text": "slider . setEndPoints ( p0x ,   p0y ,   p1x ,   p1y );  // slider.setEndPoints(p0, p1); // p0, p1: {x, y}  // slider.setEndPoints(points); // points: [p0, p1]", 
             "title": "Set end-points"
         }, 
         {
             "location": "/slider/index.html#get-value", 
-            "text": "var   value   =   gameObject . slider . value ;            // value: between 0 to 1  // var value = gameObject.slider.getValue();  // value: between 0 to 1  // var value = gameObject.slider.getValue(min, max);  // value: between min to max", 
+            "text": "var   value   =   slider . value ;            // value: between 0 to 1  // var value = slider.getValue();  // value: between 0 to 1  // var value = slider.getValue(min, max);  // value: between min to max", 
             "title": "Get value"
         }, 
         {
             "location": "/slider/index.html#set-value", 
-            "text": "gameObject . slider . value   =   newValue ;         // newValue: between 0 to 1  // gameObject.slider.setValue(newValue);  // newValue: between 0 to 1  // gameObject.slider.setValue(newValue, min, max);  // newValue: between min to max   gameObject . slider . addValue ( inc );    // inc: between 0 to 1  // gameObject.slider.addValue(inc, min, max);  // inc: between min to max   Fires  valuechange  event if new value is not equal to current value.", 
+            "text": "slider . value   =   newValue ;         // newValue: between 0 to 1  // slider.setValue(newValue);  // newValue: between 0 to 1  // slider.setValue(newValue, min, max);  // newValue: between min to max   slider . addValue ( inc );    // inc: between 0 to 1  // slider.addValue(inc, min, max);  // inc: between min to max   Fires  valuechange  event if new value is not equal to current value.", 
             "title": "Set value"
         }, 
         {
             "location": "/slider/index.html#events", 
-            "text": "Value changed\n     gameObject . slider . on ( valuechange ,   function ( newValue ,   prevValue ){   /* ... */   });   newValue: between 0 to 1  prevValue: between 0 to 1", 
+            "text": "Value changed\n     slider . on ( valuechange ,   function ( newValue ,   prevValue ){   /* ... */   });   newValue: between 0 to 1  prevValue: between 0 to 1", 
             "title": "Events"
         }, 
         {
@@ -3172,12 +3172,12 @@
         }, 
         {
             "location": "/slider/index.html#drag-enable", 
-            "text": "gameObject . slider . setDragEnable ();  // gameObject.slider.setDragEnable(false);  // disable", 
+            "text": "slider . setEnable ();  // slider.setEnable(false);  // disable", 
             "title": "Drag enable"
         }, 
         {
             "location": "/slider/index.html#is-dragging", 
-            "text": "var   isDragging   =   gameObject . slider . isDragging ;", 
+            "text": "var   isDragging   =   slider . isDragging ;", 
             "title": "Is dragging"
         }, 
         {

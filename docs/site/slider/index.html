@@ -2675,7 +2675,7 @@
 </pre></div>
 
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">slider</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexSlider&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">slider</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexSlider&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="p">{</span>
     <span class="c1">// endPoints: [</span>
     <span class="c1">//     {x:0, y:0},</span>
     <span class="c1">//     {x:0, y:0}</span>
@@ -2692,32 +2692,32 @@
 <li>dragEnable: set true to drag thumb</li>
 </ul>
 <h3 id="set-end-points">Set end-points<a class="headerlink" href="#set-end-points" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">slider</span><span class="p">.</span><span class="nx">setEndPoints</span><span class="p">(</span><span class="nx">p0x</span><span class="p">,</span> <span class="nx">p0y</span><span class="p">,</span> <span class="nx">p1x</span><span class="p">,</span> <span class="nx">p1y</span><span class="p">);</span>
-<span class="c1">// gameObject.slider.setEndPoints(p0, p1); // p0, p1: {x, y}</span>
-<span class="c1">// gameObject.slider.setEndPoints(points); // points: [p0, p1]</span>
+<div class="codehilite"><pre><span></span><span class="nx">slider</span><span class="p">.</span><span class="nx">setEndPoints</span><span class="p">(</span><span class="nx">p0x</span><span class="p">,</span> <span class="nx">p0y</span><span class="p">,</span> <span class="nx">p1x</span><span class="p">,</span> <span class="nx">p1y</span><span class="p">);</span>
+<span class="c1">// slider.setEndPoints(p0, p1); // p0, p1: {x, y}</span>
+<span class="c1">// slider.setEndPoints(points); // points: [p0, p1]</span>
 </pre></div>
 
 <h3 id="get-value">Get value<a class="headerlink" href="#get-value" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">slider</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>          <span class="c1">// value: between 0 to 1</span>
-<span class="c1">// var value = gameObject.slider.getValue();  // value: between 0 to 1</span>
-<span class="c1">// var value = gameObject.slider.getValue(min, max);  // value: between min to max</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">slider</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>          <span class="c1">// value: between 0 to 1</span>
+<span class="c1">// var value = slider.getValue();  // value: between 0 to 1</span>
+<span class="c1">// var value = slider.getValue(min, max);  // value: between min to max</span>
 </pre></div>
 
 <h3 id="set-value">Set value<a class="headerlink" href="#set-value" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">slider</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">newValue</span><span class="p">;</span>       <span class="c1">// newValue: between 0 to 1</span>
-<span class="c1">// gameObject.slider.setValue(newValue);  // newValue: between 0 to 1</span>
-<span class="c1">// gameObject.slider.setValue(newValue, min, max);  // newValue: between min to max</span>
+<div class="codehilite"><pre><span></span><span class="nx">slider</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">newValue</span><span class="p">;</span>       <span class="c1">// newValue: between 0 to 1</span>
+<span class="c1">// slider.setValue(newValue);  // newValue: between 0 to 1</span>
+<span class="c1">// slider.setValue(newValue, min, max);  // newValue: between min to max</span>
 </pre></div>
 
-<div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">slider</span><span class="p">.</span><span class="nx">addValue</span><span class="p">(</span><span class="nx">inc</span><span class="p">);</span>  <span class="c1">// inc: between 0 to 1</span>
-<span class="c1">// gameObject.slider.addValue(inc, min, max);  // inc: between min to max</span>
+<div class="codehilite"><pre><span></span><span class="nx">slider</span><span class="p">.</span><span class="nx">addValue</span><span class="p">(</span><span class="nx">inc</span><span class="p">);</span>  <span class="c1">// inc: between 0 to 1</span>
+<span class="c1">// slider.addValue(inc, min, max);  // inc: between min to max</span>
 </pre></div>
 
 <p>Fires <code>valuechange</code> event if new value is not equal to current value.</p>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Value changed
-    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">slider</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;valuechange&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">newValue</span><span class="p">,</span> <span class="nx">prevValue</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+    <div class="codehilite"><pre><span></span><span class="nx">slider</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;valuechange&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">newValue</span><span class="p">,</span> <span class="nx">prevValue</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 </pre></div><ul>
 <li>newValue: between 0 to 1</li>
 <li>prevValue: between 0 to 1</li>
@@ -2726,12 +2726,12 @@
 </ul>
 <h3 id="drag">Drag<a class="headerlink" href="#drag" title="Permanent link">&para;</a></h3>
 <h4 id="drag-enable">Drag enable<a class="headerlink" href="#drag-enable" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">slider</span><span class="p">.</span><span class="nx">setDragEnable</span><span class="p">();</span>
-<span class="c1">// gameObject.slider.setDragEnable(false);  // disable</span>
+<div class="codehilite"><pre><span></span><span class="nx">slider</span><span class="p">.</span><span class="nx">setEnable</span><span class="p">();</span>
+<span class="c1">// slider.setEnable(false);  // disable</span>
 </pre></div>
 
 <h4 id="is-dragging">Is dragging<a class="headerlink" href="#is-dragging" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isDragging</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">slider</span><span class="p">.</span><span class="nx">isDragging</span><span class="p">;</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isDragging</span> <span class="o">=</span> <span class="nx">slider</span><span class="p">.</span><span class="nx">isDragging</span><span class="p">;</span>
 </pre></div>
                 
                   
