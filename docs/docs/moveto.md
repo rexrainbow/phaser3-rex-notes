@@ -105,7 +105,7 @@ moveTo.setRotateToTarget(rotateToTarget, rotationOffset);
 
 - On reached target
     ```javascript
-    moveTo.on('complete', function(){});
+    moveTo.on('complete', function(moveTo, gameObject){});
     ```
 
 ### Status

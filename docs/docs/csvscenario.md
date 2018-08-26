@@ -88,7 +88,7 @@ Properties
 
 - Complete
     ```javascript
-    scenario.on('complete', function(){});
+    scenario.on('complete', function(scenario){});
     ```
 - Label has changed
     ```javascript

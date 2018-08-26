@@ -152,7 +152,7 @@ class Sequence extends EE {
 
     complete() {
         this.state = 0;
-        this.emit('complete');
+        this.emit('complete', this);
     }
 }
 

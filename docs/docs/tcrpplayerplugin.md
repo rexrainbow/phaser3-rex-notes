@@ -106,7 +106,7 @@ player.start();
 
 - Complete
     ```javascript
-    player.on('complete', function(){});
+    player.on('complete', function(player){});
     ```
 - Run command
     ```javascript

@@ -149,17 +149,17 @@ See also
 ## Members
 
 - `plugins`
-- `load` : [loader](loader.md)
-- `events` : [Local events](eventemitter3.md)
+- `load` : [Loader](loader.md)
+- `events` : Local [events](eventemitter3.md)
 - `input` : [Touch](touchevents.md), [keyboard](keyboardevents.md)
 - `tweens` : [Tween tasks](tween.md)
 - `time` : [Timer](timer.md)
 - `cameras` : [Camera](camera.md)
 - `scene` : [scenePlugin](scenemanager.md)
 - `anims`
-- `physics` : [arcadePhysics](arcade.md)
-- `impact` : impactPhysics
-- `matter` :　matterPhysics
+- `physics` : [ArcadePhysics](arcade.md)
+- `impact` : ImpactPhysics
+- `matter` :　MatterPhysics
 - `registry` : Global [data manager](datamanager.md)
 - `data` : Local [data manager](datamanager.md)
 - `sys`

@@ -97,7 +97,7 @@ seq.start();
 - On sequence completed :
 
 ```javascript
-seq.on('complete', function(){});
+seq.on('complete', function(seq){});
 ```
 
 ### Action of commands

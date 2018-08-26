@@ -128,7 +128,7 @@ typing.setTypeMode(mode);
     ```
 - On typing completed :
     ```javascript
-    typing.on('complete', function(){});
+    typing.on('complete', function(typing, txt){});
     ```
 
 ### Status

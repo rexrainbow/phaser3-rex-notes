@@ -202,7 +202,7 @@ class Player extends EE {
     complete() {
         this.state = 0;
         this.clock.stop();
-        this.emit('complete');
+        this.emit('complete', this);
     }
 
     getNextDt(currentDt) {

@@ -152,7 +152,7 @@ class MoveTo extends EE {
 
     onReachTarget() {
         this.isMoving = false;
-        this.emit('complete', this);
+        this.emit('complete', this, this.gameObject);
     }
 }
 
