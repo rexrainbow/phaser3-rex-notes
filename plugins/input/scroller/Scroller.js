@@ -13,13 +13,19 @@ class Scroller extends EE {
         super();
         this.gameObject = gameObject;
         this.scene = GetSceneObject(gameObject);
-        this._state = new State(this, config);
-        // debug
-        // var txt = this.scene.add.text(0, 0, '');
-        // this._state.on('statechange', function (state) {
-        //     txt.setText(state.state);
-        // });
-        this.touchState = new TouchState(gameObject, config);
+
+        var enable = GetValue(config, 'enable', true);
+        var stateConfig = {
+            enable: enable
+        }
+        this._state = new State(this, stateConfig);
+
+        var touchStateConfig = {
+            inputConfig: GetValue(config, 'inputConfig', undefined),
+            enable: enable,
+            speedTrace: true
+        };
+        this.touchState = new TouchState(gameObject, touchStateConfig);
         this.touchState
             .on('touchstart', this._state.next, this._state)
             .on('touchend', this._state.next, this._state)
@@ -32,7 +38,7 @@ class Scroller extends EE {
 
     resetFromJSON(o) {
         this.setAxisMode(GetValue(o, 'axis', 2));
-        this.setSlowDownDeceleration(GetValue(o, 'slowDownDeceleration', 10000));
+        this.setSlowDownDeceleration(GetValue(o, 'slowDownDeceleration', 50000));
         this.setBackSpeed(GetValue(o, 'backSpeed', 2000));
 
         var bounds = GetValue(o, 'bounds', undefined);
@@ -197,10 +203,6 @@ class Scroller extends EE {
         return tweenTask && tweenTask.isPlaying();
     }
 
-    onStateChange() {
-        console.log(this._state.state);
-    }
-
     // action of fsm
     slowDown() {
         this.stop();
@@ -240,7 +242,7 @@ class Scroller extends EE {
         });
     }
 
-    pushBack() {
+    pullBack() {
         this.stop();
 
         var target = (this.outOfMinBound) ? this.minValue : this.maxValue;

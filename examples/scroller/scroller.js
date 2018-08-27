@@ -7,7 +7,6 @@ class Demo extends Phaser.Scene {
         super({
             key: 'examples'
         })
-
     }
 
     preload() {}
@@ -47,7 +46,6 @@ class Demo extends Phaser.Scene {
             ],
             value: topY,
         }).on('valuechange', function (value) {
-            console.log(value);
             txt.y = value;
         });
 

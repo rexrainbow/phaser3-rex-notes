@@ -36,7 +36,7 @@ class MoveTo extends EE {
             rotationOffset = DegToRad(GetValue(o, 'angleOffset', 0));
         }
         this.setRotateToTarget(rotateToTarget, rotationOffset);
-        this.tickMe = GetValue(o, 'tickMe', true);  // true to set 'update' callback
+        this.tickMe = GetValue(o, 'tickMe', true);  // true to enable 'update' callback
         return this;
     }
 

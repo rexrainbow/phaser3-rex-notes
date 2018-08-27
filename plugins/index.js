@@ -16,10 +16,11 @@ import CSVToArray from './csvtoarray.js';
 import Sequence from './sequence.js';
 
 // input
+import TouchState from './touchstate.js';
 import Drag from './drag.js';
 import Slider from './slider.js';
+import Scroller from './scroller.js';
 import TouchCursor from './touchcursor.js';
-import TouchState from './touchstate.js';
 import VirtualJoyStick from './virtualjoystick.js';
 
 // member of game object
@@ -70,10 +71,11 @@ export {
     Sequence,
 
     // input
+    TouchState,    
     Drag,
     Slider,
+    Scroller,
     TouchCursor,
-    TouchState,
     VirtualJoyStick,
 
     // member of game object

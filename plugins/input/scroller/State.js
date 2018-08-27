@@ -6,7 +6,7 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 
 class State extends FSM {
     constructor(parent, config) {
-        super();
+        super(config);
         this.parent = parent;
         this.init();
     }
@@ -70,7 +70,7 @@ class State extends FSM {
         return nextState;
     }
     enter_BACK() {
-        this.parent.pushBack();
+        this.parent.pullBack();
     }
     exit_BACK() {
         this.parent.stop();

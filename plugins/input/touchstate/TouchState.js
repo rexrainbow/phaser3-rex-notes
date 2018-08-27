@@ -19,7 +19,7 @@ class TouchState extends EE {
 
     resetFromJSON(o) {
         this.isInTouched = false;
-        this.pointerId = undefined;
+        this.pointer = undefined;
         this.x = undefined;
         this.y = undefined;
         this.localX = undefined;
@@ -27,6 +27,7 @@ class TouchState extends EE {
         this.preX = undefined;
         this.preY = undefined;
         this.setEnable(GetValue(o, "enable", true));
+        this.speedTrace = GetValue(o, 'speedTrace', false); // true to set 'preupdate' callback
         return this;
     }
 
@@ -37,7 +38,11 @@ class TouchState extends EE {
         this.gameObject.on('pointerout', this.onPointOut, this);
         this.gameObject.on('pointermove', this.onPointerMove, this);
 
-        this.gameObject.on('destroy', this.destroy, this)
+        this.gameObject.on('destroy', this.destroy, this);
+
+        if (this.speedTrace) {
+            this.scene.events.on('postupdate', this.postupdate, this);
+        }
     }
 
     shutdown() {
@@ -71,11 +76,11 @@ class TouchState extends EE {
 
     onPointIn(pointer, localX, localY) {
         if (!pointer.isDown ||
-            (this.pointerId !== undefined)) {
+            (this.pointer !== undefined)) {
             return;
         }
         this.isInTouched = true;
-        this.pointerId = pointer.id;
+        this.pointer = pointer;
         this.preX = pointer.x;
         this.preY = pointer.y;
         this.x = pointer.x;
@@ -86,17 +91,17 @@ class TouchState extends EE {
     }
 
     onPointOut(pointer) {
-        if (this.pointerId !== pointer.id) {
+        if (this.pointer !== pointer) {
             return;
         }
         this.isInTouched = false;
-        this.pointerId = undefined;
+        this.pointer = undefined;
         this.emit('touchend', pointer);
     }
 
     onPointerMove(pointer, localX, localY) {
         if (!pointer.isDown ||
-            (this.pointerId !== pointer.id)) {
+            (this.pointer !== pointer)) {
             return;
         }
         this.preX = this.x;
@@ -123,10 +128,22 @@ class TouchState extends EE {
     }
 
     get speed() {
-        // TODO: Fix
+        if ((this.x === this.preX) && (this.y === this.preY)) {
+            return 0;
+        }
         var d = getDist(this.x, this.preX, this.y, this.preY);
         var speed = d / (this.dt * 0.001);
         return speed;
+    }
+
+    postupdate(time, delta) {
+        if (this.pointer === undefined) {
+            return;
+        }
+        if (!this.pointer.justMoved) {
+            this.preX = this.x;
+            this.preY = this.y;
+        }
     }
 }
 

@@ -15,7 +15,7 @@ class Clock {
         this.state = GetValue(o, 'state', 0); // 0=IDLE, 1=RUN
         this.now = GetValue(o, 'now', 0);
         this.timeScale = GetValue(o, 'timeScale', 1);
-        this.tickMe = GetValue(o, 'tickMe', true); // true to set 'update' callback
+        this.tickMe = GetValue(o, 'tickMe', true); // true to enable 'update' callback
         return this;
     }
 

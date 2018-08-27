@@ -32,10 +32,11 @@ module.exports = {
         'sequenceplugin': './plugins/sequence-plugin.js',
 
         // input
+        'touchstateplugin': './plugins/touchstate-plugin.js',        
         'dragplugin': './plugins/drag-plugin.js',
         'sliderplugin': './plugins/slider-plugin.js',
+        'scrollerplugin': './plugins/scroller-plugin.js',
         'touchcursorplugin': './plugins/touchcursor-plugin.js',
-        'touchstateplugin': './plugins/touchstate-plugin.js',
         'virtualjoystickplugin': './plugins/virtualjoystick-plugin.js',
 
         // member of game object
