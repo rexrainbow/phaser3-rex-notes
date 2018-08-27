@@ -19,9 +19,8 @@ class SlowDown {
     }
 
     update(delta) {
-        var d = this.movement
-            .updateSpeed(delta)
-            .getDeltaValue(delta);
+        // delta in sec
+        var d = this.movement.getDeltaValue(delta);
         if (this.dir) {
             this.value += d;
         } else {

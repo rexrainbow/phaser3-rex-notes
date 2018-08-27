@@ -24,7 +24,7 @@ class Scroller extends EE {
         var touchStateConfig = {
             inputConfig: GetValue(config, 'inputConfig', undefined),
             enable: enable,
-            speedTrace: true
+            traceDragEndSpeed: true
         };
         this.touchState = new TouchState(gameObject, touchStateConfig);
 

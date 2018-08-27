@@ -29,13 +29,13 @@ class Demo extends Phaser.Scene {
 
         var s = '';
         for (var i = 0, cnt = 100; i < cnt; i++) {
-            s += pad(i.toString(),3, '0', 1) + ': ' + getRandomChar(12);
+            s += pad(i.toString(), 3, '0', 1);
             if (i < (cnt - 1)) {
                 s += '\n';
             }
         }
 
-        var txt = this.add.text(leftX, topY, s, {
+        var txt = this.add.text(leftX + 30, topY, s, {
             fontSize: '20pt'
         });
         txt.setMask(bg.createGeometryMask());
@@ -58,22 +58,13 @@ class Demo extends Phaser.Scene {
     }
 }
 
-var s = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ ';
-const GetRandom = Phaser.Utils.Array.GetRandom;
-var getRandomChar = function (len) {
-    var resutl = '';
-    for (var i = 0; i < len; i++) {
-        resutl += GetRandom(s);
-    }
-    return resutl;
-}
-
 var config = {
     type: Phaser.AUTO,
     parent: 'phaser-example',
     width: 800,
     height: 600,
     scene: Demo,
+    backgroundColor: 0x111111,
     plugins: {
         global: [{
             key: 'rexScroller',

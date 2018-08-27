@@ -27,7 +27,7 @@ class TouchState extends EE {
         this.preX = undefined;
         this.preY = undefined;
         this.setEnable(GetValue(o, "enable", true));
-        this.speedTrace = GetValue(o, 'speedTrace', false); // true to set 'preupdate' callback
+        this.traceDragEndSpeed = GetValue(o, 'traceDragEndSpeed', false); // true to set 'preupdate' callback
         return this;
     }
 
@@ -40,14 +40,14 @@ class TouchState extends EE {
 
         this.gameObject.on('destroy', this.destroy, this);
 
-        if (this.speedTrace) {
+        if (this.traceDragEndSpeed) {
             this.scene.events.on('postupdate', this.postupdate, this);
         }
     }
 
     shutdown() {
         super.shutdown();
-        if (this.speedTrace) {
+        if (this.traceDragEndSpeed) {
             this.scene.events.off('postupdate', this.postupdate, this);
         }        
         this.gameObject = undefined;
@@ -140,10 +140,11 @@ class TouchState extends EE {
     }
 
     postupdate(time, delta) {
-        if (this.pointer === undefined) {
+        var pointer = this.pointer;
+        if (pointer === undefined) {
             return;
         }
-        if (!this.pointer.justMoved) {
+        if (!pointer.justMoved) {
             this.preX = this.x;
             this.preY = this.y;
         }

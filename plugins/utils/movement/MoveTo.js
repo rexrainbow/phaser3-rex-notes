@@ -14,11 +14,14 @@ class MoveTo {
         this.start = start;
         this.end = end;
         this.value = start;
-        this.movement.setSpeed(speed);
+        this.movement
+            .setSpeed(speed)
+            .setAcceleration(0);
         return this;
     }
 
     update(delta) {
+        // delta in sec
         var d = this.movement.getDeltaValue(delta);
         if (this.start < this.end) {
             this.value += d;

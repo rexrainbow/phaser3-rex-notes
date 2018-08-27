@@ -46,6 +46,8 @@ class Movement {
     }
 
     getDeltaValue(delta) {
+        // delta in sec
+        this.updateSpeed(delta);
         if (this.speed <= 0) {
             return 0;
         }
@@ -53,6 +55,7 @@ class Movement {
     }
 
     update(delta) {
+        // delta in sec
         this.updateSpeed(delta);
         if (this.speed > 0) {
             this.value += this.getDeltaValue(delta);
