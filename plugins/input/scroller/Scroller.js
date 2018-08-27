@@ -33,7 +33,7 @@ class Scroller extends EE {
     resetFromJSON(o) {
         this.setAxisMode(GetValue(o, 'axis', 2));
         this.setSlowDownDeceleration(GetValue(o, 'slowDownDeceleration', 10000));
-        this.setBackSpeed(GetValue(o, 'backSpeed', 600));
+        this.setBackSpeed(GetValue(o, 'backSpeed', 2000));
 
         var bounds = GetValue(o, 'bounds', undefined);
         if (bounds) {
@@ -240,7 +240,7 @@ class Scroller extends EE {
         });
     }
 
-    rollback() {
+    pushBack() {
         this.stop();
 
         var target = (this.outOfMinBound) ? this.minValue : this.maxValue;

@@ -13,16 +13,18 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        var container = this.add.container(400, 300)
-            .setSize(300, 400);
-        var topY = -container.height / 2,
-            leftX = -container.width / 2;
+        var x = 400,
+            y = 300,
+            w = 300,
+            h = 400;
+        var topY = y - (h / 2),
+            leftX = x - (w / 2);
         var bg = this.add.graphics()
+            .setPosition(leftX, topY)
             .fillStyle(0x333333, 1)
-            .fillRect(container.x + leftX, container.y + topY, container.width, container.height)
-            .setVisible(true)
-            .setDepth(-1);
-        container.setMask(bg.createGeometryMask());
+            .fillRect(0, 0, w, h)
+            .setInteractive(new Phaser.Geom.Rectangle(0, 0, w, h),
+                Phaser.Geom.Rectangle.Contains);
 
 
         var s = '';
@@ -36,11 +38,11 @@ class Demo extends Phaser.Scene {
         var txt = this.add.text(leftX, topY, s, {
             fontSize: '20pt'
         });
-        container.add(txt);
+        txt.setMask(bg.createGeometryMask());
 
-        this.scroller = this.plugins.get('rexScroller').add(container, {
+        this.scroller = this.plugins.get('rexScroller').add(bg, {
             bounds: [
-                topY - txt.displayHeight + container.displayHeight,
+                topY - txt.displayHeight + h,
                 topY
             ],
             value: topY,

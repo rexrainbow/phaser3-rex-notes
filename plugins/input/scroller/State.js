@@ -70,7 +70,7 @@ class State extends FSM {
         return nextState;
     }
     enter_BACK() {
-        this.parent.rollback();
+        this.parent.pushBack();
     }
     exit_BACK() {
         this.parent.stop();
