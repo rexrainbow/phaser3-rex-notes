@@ -47,6 +47,9 @@ class TouchState extends EE {
 
     shutdown() {
         super.shutdown();
+        if (this.speedTrace) {
+            this.scene.events.off('postupdate', this.postupdate, this);
+        }        
         this.gameObject = undefined;
         this.scene = undefined;
         // gameObject events will be removed when this gameObject destroyed 

@@ -25,14 +25,14 @@ class State extends FSM {
     }
     // IDLE    
 
-    // DRAG -> BACK|SLOW|IDLE
+    // DRAG -> BACK|SLIDE|IDLE
     next_DRAG() {
         var nextState, parent = this.parent;
         if (!parent.isDragging) {
             if (parent.outOfBounds) {
                 nextState = 'BACK';
-            } else if (parent.slowDownEnable) {
-                nextState = 'SLOW';
+            } else if (parent.slidingEnable) {
+                nextState = 'SLIDE';
             } else {
                 nextState = 'IDLE';
             }
@@ -41,36 +41,36 @@ class State extends FSM {
     }
     // DRAG    
 
-    // SLOW -> DRAG|IDLE
-    next_SLOW() {
+    // SLIDE -> DRAG|IDLE
+    next_SLIDE() {
         var nextState, parent = this.parent;
         if (parent.isDragging) {
             nextState = 'DRAG';
-        } else {
+        } else if (!parent.isSliding) {
             nextState = 'IDLE';
         }
         return nextState;
     }
-    enter_SLOW() {
-        this.parent.slowDown();
+    enter_SLIDE() {
+        this.parent.onSliding();
     }
-    exit_SLOW() {
+    exit_SLIDE() {
         this.parent.stop();
     }
-    // SLOW    
+    // SLIDE    
 
     // BACK -> DRAG|IDLE
     next_BACK() {
         var nextState, parent = this.parent;
         if (parent.isDragging) {
             nextState = 'DRAG';
-        } else {
+        } else if (!parent.isSliding) {
             nextState = 'IDLE';
         }
         return nextState;
     }
     enter_BACK() {
-        this.parent.pullBack();
+        this.parent.onPullBack();
     }
     exit_BACK() {
         this.parent.stop();

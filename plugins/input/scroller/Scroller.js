@@ -3,10 +3,11 @@
 import GetSceneObject from 'rexPlugins/utils/system/GetSceneObject.js';
 import State from './State.js';
 import TouchState from 'rexPlugins/touchstate.js';
+import MoveTo from 'rexPlugins/utils/movement/MoveTo.js';
+import SlowDown from 'rexPlugins/utils/movement/SlowDown.js';
 
 const EE = Phaser.Events.EventEmitter;
 const GetValue = Phaser.Utils.Objects.GetValue;
-const Clamp = Phaser.Math.Clamp;
 
 class Scroller extends EE {
     constructor(gameObject, config) {
@@ -26,19 +27,17 @@ class Scroller extends EE {
             speedTrace: true
         };
         this.touchState = new TouchState(gameObject, touchStateConfig);
-        this.touchState
-            .on('touchstart', this._state.next, this._state)
-            .on('touchend', this._state.next, this._state)
-            .on('touchmove', this.onDragMove, this);
 
         this._value = undefined;
-        this.tweenTask = undefined;
+        this._moveTo = new MoveTo();
+        this._slowDown = new SlowDown();
         this.resetFromJSON(config);
+        this.boot();
     }
 
     resetFromJSON(o) {
         this.setAxisMode(GetValue(o, 'axis', 2));
-        this.setSlowDownDeceleration(GetValue(o, 'slowDownDeceleration', 50000));
+        this.setSlidingDeceleration(GetValue(o, 'slidingDeceleration', 50000));
         this.setBackSpeed(GetValue(o, 'backSpeed', 2000));
 
         var bounds = GetValue(o, 'bounds', undefined);
@@ -47,13 +46,23 @@ class Scroller extends EE {
         } else {
             this.setBounds(GetValue(o, 'max', undefined), GetValue(o, 'min', undefined));
         }
-        this.setValue(GetValue(o, 'value', this.minValue || 0));
+        this.setValue(GetValue(o, 'value', this.maxValue || 0));
         this.setEnable(GetValue(o, "enable", true));
         return this;
     }
 
+    boot() {
+        this.touchState
+            .on('touchstart', this._state.next, this._state)
+            .on('touchend', this._state.next, this._state)
+            .on('touchmove', this.onDragMove, this);
+
+        this.scene.events.on('update', this.update, this);
+    }
+
     shutdown() {
         super.shutdown();
+        this.scene.events.off('update', this.update, this);
         this.gameObject = undefined;
         this.scene = undefined;
         this._state.destroy();
@@ -73,8 +82,8 @@ class Scroller extends EE {
         return this;
     }
 
-    setSlowDownDeceleration(dec) {
-        this.slowDownDec = dec;
+    setSlidingDeceleration(dec) {
+        this.slidingDec = dec;
         return this;
     }
 
@@ -110,7 +119,7 @@ class Scroller extends EE {
             this.emit('overmax', value);
         }
         if (isOverMin) {
-            this.emit('minmax', value);
+            this.emit('overmin', value);
         }
         if (!this.backEnable) {
             if (isOverMax) {
@@ -155,8 +164,8 @@ class Scroller extends EE {
         this.value += this.dragVect;
     }
 
-    get slowDownEnable() {
-        return !!this.slowDownDec;
+    get slidingEnable() {
+        return !!this.slidingDec;
     }
 
     get backEnable() {
@@ -167,22 +176,25 @@ class Scroller extends EE {
         return this.touchState.isInTouched;
     }
 
-    overMax(value) {
-        return (this.minValue != null) && (value < this.minValue);
+    get isSliding() {
+        return !!this.tweenTask;
     }
 
-    overMin(value) {
+    overMax(value) {
         return (this.maxValue != null) && (value > this.maxValue);
     }
 
-    get outOfMinBound() {
-        return this.overMax(this.value);
+    overMin(value) {
+        return (this.minValue != null) && (value < this.minValue);
     }
 
     get outOfMaxBound() {
-        return this.overMin(this.value);
+        return this.overMax(this.value);
     }
 
+    get outOfMinBound() {
+        return this.overMin(this.value);
+    }
 
     get dragVect() {
         if (this.axisMode === 2) { // y
@@ -198,72 +210,65 @@ class Scroller extends EE {
         return this.outOfMinBound || this.outOfMaxBound;
     }
 
-    get isSlipping() {
-        var tweenTask = this.tweenTask;
-        return tweenTask && tweenTask.isPlaying();
+
+    update(time, delta) {
+        if (delta <= 0) {
+            return;
+        }
+
+        var state = this.state;
+        switch (state) {
+            case 'SLIDE':
+                this.sliding(delta);
+                break;
+            case 'BACK':
+                this.pullBack(delta);
+                break;
+        }
     }
 
-    // action of fsm
-    slowDown() {
-        this.stop();
-
+    onSliding() {
         var speed = this.touchState.speed;
         if (speed === 0) {
             this._state.next();
             return;
         }
+        this._slowDown.init(this.value, (this.dragVect > 0), speed, this.slidingDec)
+    }
 
-        var period = speed / this.slowDownDec;
-        var d = (speed * speed) / (2 * this.slowDownDec);
-        var target;
-        if (this.dragVect > 0) {
-            target = this.value + d
+    sliding(delta) {
+        delta *= 0.001;
+        var newValue = this._slowDown.update(delta).value;
+        if (this.overMax(newValue)) {
+            console.log('over max')
+            this.value = this.maxValue;
+            this._state.next();
+        } else if (this.overMin(newValue)) {
+            console.log('over min')
+            this.value = this.minValue;
+            this._state.next();
         } else {
-            target = this.value - d;
+            this.value = newValue;
+            if (this._slowDown.complete) {
+                this._state.next();
+            }
         }
-
-        var self = this;
-        this.tweenTask = this.scene.tweens.add({
-            targets: this,
-            value: target,
-            ease: 'Quad.easeOut',
-            duration: period * 1000,
-            onUpdate: function () {
-                if (self.outOfMinBound) {
-                    self.value = self.minValue;
-                    self._state.next();
-                } else if (self.outOfMaxBound) {
-                    self.value = self.maxValue;
-                    self._state.next()
-                }
-            },
-            onComplete: this._state.next,
-            onCompleteScope: this._state
-        });
     }
 
-    pullBack() {
-        this.stop();
-
+    onPullBack() {
         var target = (this.outOfMinBound) ? this.minValue : this.maxValue;
-        var period = Math.abs(this.value - target) / this.backSpeed;
-
-        this.tweenTask = this.scene.tweens.add({
-            targets: this,
-            value: target,
-            ease: 'Linear',
-            duration: period * 1000,
-            onComplete: this._state.next,
-            onCompleteScope: this._state
-        });
+        this._moveTo.init(this.value, target, this.backSpeed);
     }
 
-    stop() {
-        if (this.tweenTask) {
-            this.tweenTask.stop();
-            this.tweenTask = undefined;
+    pullBack(delta) {
+        delta *= 0.001;
+        this.value = this._moveTo.update(delta).value;
+        if (this._moveTo.complete) {
+            this._state.next();
         }
     }
+
+    stop() {}
 
 }
 

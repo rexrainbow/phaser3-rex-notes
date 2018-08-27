@@ -2,6 +2,7 @@
 
 import ScrollerPlugin from 'rexPlugins/scroller-plugin.js';
 
+const pad = Phaser.Utils.String.Pad;
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -28,7 +29,7 @@ class Demo extends Phaser.Scene {
 
         var s = '';
         for (var i = 0, cnt = 100; i < cnt; i++) {
-            s += i + ': ' + getRandomChar(12);
+            s += pad(i.toString(),3, '0', 1) + ': ' + getRandomChar(12);
             if (i < (cnt - 1)) {
                 s += '\n';
             }
