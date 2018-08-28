@@ -28,7 +28,6 @@ class DragSpeed extends EE {
         this.localX = undefined;
         this.localY = undefined;
         this.setEnable(GetValue(o, "enable", true));
-        this.holdThreshold = GetValue(o, "holdThreshold", 50); // ms
         return this;
     }
 
@@ -91,7 +90,7 @@ class DragSpeed extends EE {
         if ((this.x === this.preX) && (this.y === this.preY)) {
             return 0;
         }
-        var d = DistanceBetween(this.x, this.preX, this.y, this.preY);
+        var d = DistanceBetween(this.preX, this.preY, this.x, this.y);
         var speed = d / (this.dt * 0.001);
         return speed;
     }
@@ -139,12 +138,9 @@ class DragSpeed extends EE {
             // in touch
             if ((this.x === pointer.x) && (this.y === pointer.y)) {
                 // hold
-                if (this.holdStartTime === undefined) {
-                    this.holdStartTime = time;
-                } else if (time - this.holdStartTime > this.holdThreshold) {
-                    this.preX = this.x;
-                    this.preY = this.y;
-                }
+                this.preX = this.x;
+                this.preY = this.y;
+
             } else {
                 // move
                 this.preX = this.x;
