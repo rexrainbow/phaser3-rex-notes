@@ -72,6 +72,10 @@ class TouchState extends EE {
         return this;
     }
 
+    get justMoved() {
+        return this.pointer && this.pointer.justMoved;
+    }
+
     get dx() {
         return this.x - this.preX;
     }
@@ -94,6 +98,14 @@ class TouchState extends EE {
         var speed = d / (this.dt * 0.001);
         return speed;
     }
+    
+    get speedX() {
+        return this.dx / (this.dt * 0.001);
+    }
+
+    get speedY() {
+        return this.dy / (this.dt * 0.001);
+    }
 
     // internal
     onPointIn(pointer, localX, localY) {
@@ -102,14 +114,13 @@ class TouchState extends EE {
             return;
         }
         this.pointer = pointer;
-        this.localX = localX;
-        this.localY = localY;
-
-        this.isInTouched = true;
+        this.isInTouched = true;        
         this.preX = pointer.x;
         this.preY = pointer.y;
         this.x = pointer.x;
         this.y = pointer.y;
+        this.localX = localX;
+        this.localY = localY;
         this.emit('touchstart', pointer, localX, localY);
     }
 
@@ -118,9 +129,7 @@ class TouchState extends EE {
             return;
         }
         this.pointer = undefined;
-
         this.isInTouched = false;
-        this.pointer = undefined;
         this.emit('touchend', pointer);
     }
 
@@ -129,13 +138,12 @@ class TouchState extends EE {
             (this.pointer !== pointer)) {
             return;
         }
-        this.localX = localX;
-        this.localY = localY;
-
         this.preX = this.x;
         this.preY = this.y;
         this.x = pointer.x;
         this.y = pointer.y;
+        this.localX = localX;
+        this.localY = localY;        
         this.emit('touchmove', pointer, localX, localY);
     }
 

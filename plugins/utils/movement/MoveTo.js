@@ -20,6 +20,10 @@ class MoveTo {
         return this;
     }
 
+    stop() {
+        this.movement.reset();
+    }
+
     update(delta) {
         // delta in sec
         var d = this.movement.getDeltaValue(delta);
@@ -37,8 +41,8 @@ class MoveTo {
         return this;
     }
 
-    get complete() {
-        return (this.value === this.end);
+    get isMoving() {
+        return (this.value !== this.end);
     }
 }
 export default MoveTo;

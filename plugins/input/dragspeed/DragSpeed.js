@@ -96,6 +96,14 @@ class DragSpeed extends EE {
         return speed;
     }
 
+    get speedX() {
+        return this.dx / (this.dt * 0.001);
+    }
+
+    get speedY() {
+        return this.dy / (this.dt * 0.001);
+    }
+
     // internal
     onPointIn(pointer, localX, localY) {
         if (!pointer.isDown ||

@@ -18,6 +18,10 @@ class SlowDown {
         return this;
     }
 
+    stop() {
+        this.movement.reset();
+    }    
+
     update(delta) {
         // delta in sec
         var d = this.movement.getDeltaValue(delta);
@@ -29,8 +33,8 @@ class SlowDown {
         return this;
     }
 
-    get complete() {
-        return !this.movement.isMoving;
-    }
+    get isMoving() {
+        return this.movement.isMoving;
+    }    
 }
 export default SlowDown;

@@ -14,6 +14,12 @@ class Movement {
         return this;
     }
 
+    reset() {
+        this.setValue(0);
+        this.setSpeed(0);
+        this.setAcceleration(0);
+    }
+
     setValue(value) {
         this.value = value;
         return this;

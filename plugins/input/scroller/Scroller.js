@@ -25,7 +25,7 @@ class Scroller extends EE {
             inputConfig: GetValue(config, 'inputConfig', undefined),
             enable: enable
         };
-        this.drapSpeed = new DrapSpeed(gameObject, drapSpeedConfig);
+        this._dragSpeed = new DrapSpeed(gameObject, drapSpeedConfig);
 
         this._value = undefined;
         this._moveTo = new MoveTo();
@@ -36,8 +36,8 @@ class Scroller extends EE {
 
     resetFromJSON(o) {
         this.setAxisMode(GetValue(o, 'axis', 2));
-        this.setSlidingDeceleration(GetValue(o, 'slidingDeceleration', 10000));
-        this.setBackSpeed(GetValue(o, 'backSpeed', 2000));
+        this.setSlidingDeceleration(GetValue(o, 'slidingDeceleration', 5000));
+        this.setBackSpeed(GetValue(o, 'backSpeed', 1000));
 
         var bounds = GetValue(o, 'bounds', undefined);
         if (bounds) {
@@ -51,9 +51,9 @@ class Scroller extends EE {
     }
 
     boot() {
-        this.drapSpeed
-            .on('touchstart', this._state.next, this._state)
-            .on('touchend', this._state.next, this._state)
+        this._dragSpeed
+            .on('touchstart', this.onDragStart, this)
+            .on('touchend', this.onDragEnd, this)
             .on('touchmove', this.onDragMove, this);
 
         this.scene.events.on('update', this.update, this);
@@ -65,7 +65,7 @@ class Scroller extends EE {
         this.gameObject = undefined;
         this.scene = undefined;
         this._state.destroy();
-        this.drapSpeed.destroy();
+        this._dragSpeed.destroy();
         // gameObject events will be removed when this gameObject destroyed 
     }
 
@@ -143,7 +143,7 @@ class Scroller extends EE {
 
     setEnable(e) {
         this._state.setEnable(e);
-        this.drapSpeed.setEnable(e);
+        this._dragSpeed.setEnable(e);
         return this;
     }
 
@@ -160,23 +160,27 @@ class Scroller extends EE {
     }
 
     onDragMove() {
-        this.value += this.dragVect;
+        this.value += this.dragVecter;
     }
 
     get slidingEnable() {
-        return !!this.slidingDec;
+        return (this.slidingDec != null);
     }
 
     get backEnable() {
-        return (!!this.backSpeed);
+        return (this.backSpeed != null);
     }
 
     get isDragging() {
-        return this.drapSpeed.isInTouched;
+        return this._dragSpeed.isInTouched;
+    }
+
+    get isPullBack() {
+        return this._moveTo.isMoving;
     }
 
     get isSliding() {
-        return !!this.tweenTask;
+        return this._slowDown.isMoving;
     }
 
     overMax(value) {
@@ -195,11 +199,21 @@ class Scroller extends EE {
         return this.overMin(this.value);
     }
 
-    get dragVect() {
+    get dragVecter() {
         if (this.axisMode === 2) { // y
-            return this.drapSpeed.dy;
+            return this._dragSpeed.dy;
         } else if (this.axisMode === 1) { // x
-            return this.drapSpeed.dx;
+            return this._dragSpeed.dx;
+        } else {
+            return 0;
+        }
+    }
+
+    get dragSpeed() {
+        if (this.axisMode === 2) { // y
+            return this._dragSpeed.speedY;
+        } else if (this.axisMode === 1) { // x
+            return this._dragSpeed.speedX;
         } else {
             return 0;
         }
@@ -227,30 +241,31 @@ class Scroller extends EE {
     }
 
     onSliding() {
-        var speed = this.drapSpeed.speed;
+        var speed = this.dragSpeed;
         if (speed === 0) {
+            this._slowDown.stop();
             this._state.next();
             return;
         }
-        this._slowDown.init(this.value, (this.dragVect > 0), speed, this.slidingDec)
+        debugger
+        this._slowDown.init(this.value, (speed > 0), Math.abs(speed), this.slidingDec)
     }
 
     sliding(delta) {
         delta *= 0.001;
         var newValue = this._slowDown.update(delta).value;
         if (this.overMax(newValue)) {
-            console.log('over max')
             this.value = this.maxValue;
-            this._state.next();
+            this._slowDown.stop();
         } else if (this.overMin(newValue)) {
-            console.log('over min')
             this.value = this.minValue;
-            this._state.next();
+            this._slowDown.stop();
         } else {
             this.value = newValue;
-            if (this._slowDown.complete) {
-                this._state.next();
-            }
+        }
+
+        if (!this._slowDown.isMoving) {
+            this._state.next();
         }
     }
 
@@ -262,7 +277,8 @@ class Scroller extends EE {
     pullBack(delta) {
         delta *= 0.001;
         this.value = this._moveTo.update(delta).value;
-        if (this._moveTo.complete) {
+
+        if (!this._moveTo.isMoving) {
             this._state.next();
         }
     }

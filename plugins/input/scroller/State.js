@@ -62,7 +62,7 @@ class State extends FSM {
         var nextState, parent = this.parent;
         if (parent.isDragging) {
             nextState = 'DRAG';
-        } else if (!parent.isSliding) {
+        } else if (!parent.isPullBack) {
             nextState = 'IDLE';
         }
         return nextState;
