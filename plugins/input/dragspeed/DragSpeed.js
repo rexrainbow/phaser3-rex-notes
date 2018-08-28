@@ -127,6 +127,10 @@ class DragSpeed extends EE {
         var pointer = this.pointer;
         if (pointer && (!this.isInTouched)) {
             // touch start
+            this.x = pointer.x;
+            this.y = pointer.y;
+            this.preX = pointer.x;
+            this.preY = pointer.y;
             this.isInTouched = true;
             this.holdStartTime = undefined;
             this.emit('touchstart', pointer, this.localX, this.localY);
