@@ -34,6 +34,7 @@ module.exports = {
         // input
         'touchstateplugin': './plugins/touchstate-plugin.js',        
         'dragplugin': './plugins/drag-plugin.js',
+        'dragspeedplugin': './plugins/dragspeed-plugin.js',        
         'sliderplugin': './plugins/slider-plugin.js',
         'scrollerplugin': './plugins/scroller-plugin.js',
         'touchcursorplugin': './plugins/touchcursor-plugin.js',

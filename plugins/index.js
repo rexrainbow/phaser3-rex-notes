@@ -18,6 +18,7 @@ import Sequence from './sequence.js';
 // input
 import TouchState from './touchstate.js';
 import Drag from './drag.js';
+import DragSpeed from './dragspeed.js';
 import Slider from './slider.js';
 import Scroller from './scroller.js';
 import TouchCursor from './touchcursor.js';
@@ -73,6 +74,7 @@ export {
     // input
     TouchState,    
     Drag,
+    DragSpeed,
     Slider,
     Scroller,
     TouchCursor,

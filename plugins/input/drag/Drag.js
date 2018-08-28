@@ -1,6 +1,7 @@
 'use strict'
 
 import GetSceneObject from 'rexPlugins/utils/system/GetSceneObject.js';
+import HitTest from 'rexPlugins/utils/input/HitTest.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const DistanceBetween = Phaser.Math.Distance.Between;
@@ -22,7 +23,7 @@ class Drag {
      * @returns {object} this object
      */
     resetFromJSON(o) {
-        this.pointerId = undefined;
+        this.pointer = undefined;
         this.setEnable(GetValue(o, "enable", true));
         this.setAxisMode(GetValue(o, "axis", 0));
         this.setAxisRotation(GetValue(o, "rotation", 0));
@@ -50,6 +51,7 @@ class Drag {
     }
 
     shutdown() {
+        this.pointer = undefined;
         this.gameObject = undefined;
         this.scene = undefined;
         // gameObject events will be removed when this gameObject destroyed 
@@ -68,6 +70,9 @@ class Drag {
             return this;
         }
 
+        if (!e) {
+            this.pointer = undefined;
+        }
         this.enable = e;
         this.scene.input.setDraggable(this.gameObject, e);
         return this;
@@ -93,50 +98,32 @@ class Drag {
             pointer;
         for (var i = 0; i < pointersTotal; i++) {
             pointer = pointers[i];
-            if ((pointer.dragState === 0) &&
-                pointer.primaryDown &&
-                pointer.justDown &&
-                this.hitTest(pointer)) {
+            if (pointer.dragState > 0) {
+                continue;
+            }
+            if (HitTest(pointer, this.gameObject)) {
                 pointer.dragState = 1;
                 break;
             }
         }
     }
 
-    hitTest(pointer) {
-        var gameObjects = [this.gameObject];
-        var cameras = this.scene.input.cameras.getCamerasBelowPointer(pointer);
-        var inputManager = this.scene.input.manager;
-        var hitResult = false,
-            output;
-        for (var i = 0, len = cameras.length; i < len; i++) {
-            output = inputManager.hitTest(pointer, gameObjects, cameras[i]);
-            if (output.length > 0) {
-                hitResult = true;
-                break;
-            }
-        }
-
-        return hitResult;
-    }
-
     dragend() {
         if (!this.isDragging) {
             return;
         }
-        var pointer = this.scene.input.manager.pointers[this.pointerId];
-        pointer.dragState = 5;
+        this.pointer.dragState = 5;
     }
 
     onDragStart(pointer, dragX, dragY) {
         if (this.isDragging) {
             return;
         }
-        this.pointerId = pointer.id;
+        this.pointer = pointer;
     }
 
     onDrag(pointer, dragX, dragY) {
-        if (pointer.id !== this.pointerId) {
+        if (this.pointer !== pointer) {
             return;
         }
         var gameObject = this.gameObject;
@@ -172,14 +159,14 @@ class Drag {
     }
 
     onDragEnd(pointer, dragX, dragY, dropped) {
-        if (pointer.id !== this.pointerId) {
+        if (this.pointer !== pointer) {
             return;
         }
-        this.pointerId = undefined;
+        this.pointer = undefined;
     }
 
     get isDragging() {
-        return (this.pointerId !== undefined);
+        return (this.pointer !== undefined);
     }
 }
 

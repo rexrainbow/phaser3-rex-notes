@@ -2,8 +2,6 @@
 
 import FSM from 'rexPlugins/fsm.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-
 class State extends FSM {
     constructor(parent, config) {
         super(config);

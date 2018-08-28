@@ -21,7 +21,7 @@ class TouchCursor extends VectorToCursorKeys {
 
     resetFromJSON(o) {
         super.resetFromJSON(o);
-        this.pointerId = undefined;
+        this.pointer = undefined;
 
         return this;
     }
@@ -52,6 +52,7 @@ class TouchCursor extends VectorToCursorKeys {
 
         this.events.destroy();
 
+        this.pointer = undefined;
         this.scene = undefined;
         this.gameObject = undefined;
         this.events = undefined;
@@ -63,15 +64,15 @@ class TouchCursor extends VectorToCursorKeys {
 
     onKeyDownStart(pointer) {
         if ((!pointer.isDown) ||
-            (this.pointerId !== undefined)) {
+            (this.pointer !== undefined)) {
             return;
         }
-        this.pointerId = pointer.id;
+        this.pointer = pointer;
         this.onKeyDown(pointer);
     }
 
     onKeyDown(pointer) {
-        if (this.pointerId !== pointer.id) {
+        if (this.pointer !== pointer) {
             return;
         }
 
@@ -82,10 +83,10 @@ class TouchCursor extends VectorToCursorKeys {
     }
 
     onKeyUp(pointer) {
-        if (this.pointerId !== pointer.id) {
+        if (this.pointer !== pointer) {
             return;
         }
-        this.pointerId = undefined;
+        this.pointer = undefined;
         this.cleanVector();
         this.events.emit('update');
     }

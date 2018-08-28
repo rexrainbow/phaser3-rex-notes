@@ -1,6 +1,6 @@
 'use strict'
 
-import TouchStatePlugin from 'rexPlugins/touchstate-plugin.js';
+import DragSpeedPlugin from 'rexPlugins/dragspeed-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -19,9 +19,7 @@ class Demo extends Phaser.Scene {
             .setInteractive(new Phaser.Geom.Rectangle(0, 0, 800, 600),
                 Phaser.Geom.Rectangle.Contains);
         var txtSpeed = this.add.text(0, 0, '-');
-        var touchState = this.plugins.get('rexTouchState').add(bg, {
-                traceDragEndSpeed: true
-            })
+        var touchState = this.plugins.get('rexDragSpeed').add(bg)
             .on('touchstart', function (pointer) {
                 txtSpeed.setText('-');
             })
@@ -45,8 +43,8 @@ var config = {
     scene: Demo,
     plugins: {
         global: [{
-            key: 'rexTouchState',
-            plugin: TouchStatePlugin,
+            key: 'rexDragSpeed',
+            plugin: DragSpeedPlugin,
             start: true
         }]
     }

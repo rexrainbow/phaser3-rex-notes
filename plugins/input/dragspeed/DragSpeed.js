@@ -6,7 +6,7 @@ const EE = Phaser.Events.EventEmitter;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const DistanceBetween = Phaser.Math.Distance.Between;
 
-class TouchState extends EE {
+class DragSpeed extends EE {
     constructor(gameObject, config) {
         super();
         this.gameObject = gameObject;
@@ -20,6 +20,7 @@ class TouchState extends EE {
     resetFromJSON(o) {
         this.pointer = undefined;
         this.isInTouched = false;
+        this.holdStartTime = undefined;
         this.x = undefined;
         this.y = undefined;
         this.preX = undefined;
@@ -27,6 +28,7 @@ class TouchState extends EE {
         this.localX = undefined;
         this.localY = undefined;
         this.setEnable(GetValue(o, "enable", true));
+        this.holdThreshold = GetValue(o, "holdThreshold", 50); // ms
         return this;
     }
 
@@ -36,14 +38,13 @@ class TouchState extends EE {
         this.gameObject.on('pointerup', this.onPointOut, this);
         this.gameObject.on('pointerout', this.onPointOut, this);
         this.gameObject.on('pointermove', this.onPointerMove, this);
-
         this.gameObject.on('destroy', this.destroy, this);
-
+        this.scene.events.on('preupdate', this.preupdate, this);
     }
 
     shutdown() {
         super.shutdown();
-
+        this.scene.events.off('preupdate', this.preupdate, this);
         this.pointer = undefined;
         this.gameObject = undefined;
         this.scene = undefined;
@@ -104,13 +105,6 @@ class TouchState extends EE {
         this.pointer = pointer;
         this.localX = localX;
         this.localY = localY;
-
-        this.isInTouched = true;
-        this.preX = pointer.x;
-        this.preY = pointer.y;
-        this.x = pointer.x;
-        this.y = pointer.y;
-        this.emit('touchstart', pointer, localX, localY);
     }
 
     onPointOut(pointer) {
@@ -118,10 +112,6 @@ class TouchState extends EE {
             return;
         }
         this.pointer = undefined;
-
-        this.isInTouched = false;
-        this.pointer = undefined;
-        this.emit('touchend', pointer);
     }
 
     onPointerMove(pointer, localX, localY) {
@@ -131,14 +121,44 @@ class TouchState extends EE {
         }
         this.localX = localX;
         this.localY = localY;
-
-        this.preX = this.x;
-        this.preY = this.y;
-        this.x = pointer.x;
-        this.y = pointer.y;
-        this.emit('touchmove', pointer, localX, localY);
     }
 
+    preupdate(time, delta) {
+        var pointer = this.pointer;
+        if (pointer && (!this.isInTouched)) {
+            // touch start
+            this.isInTouched = true;
+            this.holdStartTime = undefined;
+            this.emit('touchstart', pointer, this.localX, this.localY);
+
+        } else if (pointer && this.isInTouched) {
+            // in touch
+            if ((this.x === pointer.x) && (this.y === pointer.y)) {
+                // hold
+                if (this.holdStartTime === undefined) {
+                    this.holdStartTime = time;
+                } else if (time - this.holdStartTime > this.holdThreshold) {
+                    this.preX = this.x;
+                    this.preY = this.y;
+                }
+            } else {
+                // move
+                this.preX = this.x;
+                this.preY = this.y;
+                this.x = pointer.x;
+                this.y = pointer.y;
+                this.holdStartTime = undefined;
+                this.emit('touchmove', pointer, this.localX, this.localY);
+            }
+
+        } else if ((!pointer) && this.isInTouched) {
+            // touch end
+            this.isInTouched = false;
+            this.holdStartTime = undefined;
+            this.emit('touchend', pointer);
+
+        }
+    }
 }
 
-export default TouchState;
+export default DragSpeed;

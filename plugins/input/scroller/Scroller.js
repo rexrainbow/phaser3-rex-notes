@@ -2,7 +2,7 @@
 
 import GetSceneObject from 'rexPlugins/utils/system/GetSceneObject.js';
 import State from './State.js';
-import TouchState from 'rexPlugins/touchstate.js';
+import DrapSpeed from 'rexPlugins/dragspeed.js';
 import MoveTo from 'rexPlugins/utils/movement/MoveTo.js';
 import SlowDown from 'rexPlugins/utils/movement/SlowDown.js';
 
@@ -21,12 +21,11 @@ class Scroller extends EE {
         }
         this._state = new State(this, stateConfig);
 
-        var touchStateConfig = {
+        var drapSpeedConfig = {
             inputConfig: GetValue(config, 'inputConfig', undefined),
-            enable: enable,
-            traceDragEndSpeed: true
+            enable: enable
         };
-        this.touchState = new TouchState(gameObject, touchStateConfig);
+        this.drapSpeed = new DrapSpeed(gameObject, drapSpeedConfig);
 
         this._value = undefined;
         this._moveTo = new MoveTo();
@@ -52,7 +51,7 @@ class Scroller extends EE {
     }
 
     boot() {
-        this.touchState
+        this.drapSpeed
             .on('touchstart', this._state.next, this._state)
             .on('touchend', this._state.next, this._state)
             .on('touchmove', this.onDragMove, this);
@@ -66,7 +65,7 @@ class Scroller extends EE {
         this.gameObject = undefined;
         this.scene = undefined;
         this._state.destroy();
-        this.touchState.destroy();
+        this.drapSpeed.destroy();
         // gameObject events will be removed when this gameObject destroyed 
     }
 
@@ -144,7 +143,7 @@ class Scroller extends EE {
 
     setEnable(e) {
         this._state.setEnable(e);
-        this.touchState.setEnable(e);
+        this.drapSpeed.setEnable(e);
         return this;
     }
 
@@ -173,7 +172,7 @@ class Scroller extends EE {
     }
 
     get isDragging() {
-        return this.touchState.isInTouched;
+        return this.drapSpeed.isInTouched;
     }
 
     get isSliding() {
@@ -198,9 +197,9 @@ class Scroller extends EE {
 
     get dragVect() {
         if (this.axisMode === 2) { // y
-            return this.touchState.dy;
+            return this.drapSpeed.dy;
         } else if (this.axisMode === 1) { // x
-            return this.touchState.dx;
+            return this.drapSpeed.dx;
         } else {
             return 0;
         }
@@ -228,7 +227,7 @@ class Scroller extends EE {
     }
 
     onSliding() {
-        var speed = this.touchState.speed;
+        var speed = this.drapSpeed.speed;
         if (speed === 0) {
             this._state.next();
             return;
