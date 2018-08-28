@@ -36,7 +36,7 @@ class Scroller extends EE {
 
     resetFromJSON(o) {
         this.setAxisMode(GetValue(o, 'axis', 2));
-        this.setSlidingDeceleration(GetValue(o, 'slidingDeceleration', 50000));
+        this.setSlidingDeceleration(GetValue(o, 'slidingDeceleration', 10000));
         this.setBackSpeed(GetValue(o, 'backSpeed', 2000));
 
         var bounds = GetValue(o, 'bounds', undefined);
