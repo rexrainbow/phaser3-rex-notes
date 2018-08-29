@@ -3,7 +3,6 @@
 import GetSceneObject from 'rexPlugins/utils/system/GetSceneObject.js';
 import State from './State.js';
 import DrapSpeed from 'rexPlugins/dragspeed.js';
-import MoveTo from 'rexPlugins/utils/movement/MoveTo.js';
 import SlowDown from 'rexPlugins/utils/movement/SlowDown.js';
 
 const EE = Phaser.Events.EventEmitter;
@@ -28,7 +27,6 @@ class Scroller extends EE {
         this.dragState = new DrapSpeed(gameObject, drapSpeedConfig);
 
         this._value = undefined;
-        this._moveTo = new MoveTo();
         this._slowDown = new SlowDown();
         this.resetFromJSON(config);
         this.boot();
@@ -176,7 +174,7 @@ class Scroller extends EE {
     }
 
     get isPullBack() {
-        return this._moveTo.isMoving;
+        return this._slowDown.isMoving;
     }
 
     get slidingEnable() {
@@ -214,13 +212,14 @@ class Scroller extends EE {
 
     // enter_SLIDE 
     onSliding() {
+        var start = this.value;
         var speed = this.dragSpeed;
         if (speed === 0) {
             this._slowDown.stop();
             this._state.next();
             return;
         }
-        this._slowDown.init(this.value, (speed > 0), Math.abs(speed), this.slidingDec)
+        this._slowDown.init(start, (speed > 0), Math.abs(speed), this.slidingDec)
     }
 
     // everyTick_SLIDE
@@ -240,16 +239,19 @@ class Scroller extends EE {
 
     // enter_BACK
     onPullBack() {
-        var target = (this.outOfMinBound) ? this.minValue : this.maxValue;
-        this._moveTo.init(this.value, target, this.backSpeed);
+        var start = this.value;
+        var end = (this.outOfMinBound) ? this.minValue : this.maxValue;
+        var speed = this.backSpeed;
+        var dec = (speed * speed) / (2 * (Math.abs(end - start)));
+        this._slowDown.init(start, undefined, speed, dec, end);
     }
 
     // everyTick_BACK
     pullBack(time, delta) {
         delta *= 0.001;
-        this.value = this._moveTo.update(delta).value;
+        this.value = this._slowDown.update(delta).value;
 
-        if (!this._moveTo.isMoving) {
+        if (!this._slowDown.isMoving) {
             this._state.next();
         }
     }
@@ -257,7 +259,6 @@ class Scroller extends EE {
     // exit_SLIDE, exit_BACK
     stop() {
         this._slowDown.stop();
-        this._moveTo.stop();
     }
 
 }

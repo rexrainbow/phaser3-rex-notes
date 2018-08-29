@@ -14,10 +14,7 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.spritesheet('knighthawks', 'assets/fonts/knighthawks-font-filled.png', {
-            frameWidth: 32,
-            frameHeight: 25
-        });
+        this.load.image('knighthawks', 'assets/fonts/knighthawks-font-filled.png');
     }
 
     create() {

@@ -9,9 +9,15 @@ class SlowDown {
         this.movement = new Movement();
     }
 
-    init(start, dir, speed, dec) {
+    init(start, dir, speed, dec, end) {
         this.value = start;
-        this.dir = dir;
+        this.end = end;
+        if (end !== undefined) {
+            this.dir = (start < end);
+        } else {
+            this.dir = dir;
+        }
+
         this.movement
             .setSpeed(speed)
             .setAcceleration(-dec);
@@ -20,21 +26,27 @@ class SlowDown {
 
     stop() {
         this.movement.reset();
-    }    
+    }
 
     update(delta) {
         // delta in sec
         var d = this.movement.getDeltaValue(delta);
-        if (this.dir) {
-            this.value += d;
-        } else {
-            this.value -= d;
+        if (d > 0) {
+            if (this.dir) {
+                this.value += d;
+            } else {
+                this.value -= d;
+            }
+        } else { // d === 0
+            if (this.end !== undefined) {
+                this.value = this.end;
+            }
         }
         return this;
     }
 
     get isMoving() {
         return this.movement.isMoving;
-    }    
+    }
 }
 export default SlowDown;
