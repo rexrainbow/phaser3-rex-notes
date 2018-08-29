@@ -23,9 +23,9 @@
 1. [Path follower](pathfollower.md): Set position of game object on a path.
 1. [Pixelation-pipeline](pixelationpipeline.md): Pixelation post processing filter.
 1. [Run-commands](runcommands.md): Run commands in array.
+1. [Scroller](scroller.md): Drag content. Slow down when dragging released, pull back when out of bounds.
 1. [Sequence](sequence.md): Run sequence commands in array.
 1. [Slider](slider.md): Drag thumb on a slider bar.
-1. [Scroller](scroller.md): Drag content. Slow down when dragging released, pull back when out of bounds.
 1. [Swirl-pipeline](swirlpipeline.md): Swirl post processing filter.
 1. [TagText](tagtext.md): Displays text with multi-color, font face, or font size with tags.
 1. [TCRP.Player](tcrpplayerplugin.md): Run commands on time.
