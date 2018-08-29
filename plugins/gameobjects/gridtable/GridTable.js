@@ -175,7 +175,6 @@ class GridTable extends Container {
             } else if (tableOYExceedTop) {
                 oy = topTableOY
             } else {
-                var tableVisibleHeight = this.tableVisibleHeight;
                 if (tableOYExeceedBottom)
                     oy = bottomTableOY;
             }

@@ -44,6 +44,7 @@ var table = scene.add.rexGridTable(x, y, width, height, config);
 - `cellVisibleCallback` , `cellVisibleCallbackScope` : Callback when cell begins visible
 - `cellInvisibleCallback`, `cellInvisibleCallbackScope`: Callback when cell begins invisible
 - `clamplTableOXY` : Set `true` to clamp `tableOX`, `tableOY` when out-of-bound
+    - Set `false` when dragging by [scroller](scroller.md)
 - `scrollMode` :
     - `0`, or `'v'`, or `'vertical'`
     - `1`, or `'h'`, or `'horizontal'`
@@ -196,6 +197,28 @@ table.setGridSize(colCount, rowCount).updateTable();
 ```javascript
 table.setColumnCount(count).updateTable();
 ```
+
+### Bounds of tableOX, tableOY
+
+- Top bound of tableOY
+    ```javascript
+    var topTableOY = table.topTableOY;  // 0
+    ```
+- Bottom bound of tableOY
+    ```javascript
+    var bottomTableOY = table.bottomTableOY;
+    ```
+- Left bound of tableOY
+    ```javascript
+    var leftTableOX = table.leftTableOX;  // 0
+    ```
+- Right bound of tableOY
+    ```javascript
+    var rightTableOX = table.rightTableOX;
+    ```
+
+!!! note "Use-case"
+    Set bounds of [scroller](scroller.md)
 
 ### Cell
 

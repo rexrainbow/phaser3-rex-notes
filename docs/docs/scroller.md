@@ -55,14 +55,18 @@ var scroller = scene.plugins.get('rexScroller').add(gameObject, {
     value: topBound,
     // slidingDeceleration: 5000,
     // backDeceleration: 2000,
-    // enable: true
+    // enable: true,
+    // axis: 'vertical'
 });
 ```
 
 - `bounds` : An array of 2 values [bound0, bound1]
 - `value` : Initial value between bound0 and bound1
+    - Map this value to position of content under [event 'valuechange'](scroller.md#events)
 - `slidingDeceleration` : Deceleration of slow down when dragging released.
+    - Set `false` to disable it.
 - `backDeceleration` : Deceleration of pull back when out of bounds.
+    - Set `false` to disable it.
 - `enable` : Set true to get dragging events.
 - `axis` :
     - `'horizontal'`,`'h'`, `'x'`, or `1` : dragging on horizontal/x axis.
@@ -81,10 +85,18 @@ this.setBounds(bounds);  // bounds: [bound0, bound1]
     ```javascript
     scroller.setSlidingDeceleration(dec);
     ```
+    - Disable
+        ```javascript
+        scroller.setSlidingDeceleration(false);
+        ```
 - Deceleration of pull back when out of bounds
     ```javascript
     scroller.setBackDeceleration(dec);
     ```
+    - Disable
+        ```javascript
+        scroller.setBackDeceleration(false);
+        ```
 
 ### Get value
 
@@ -147,3 +159,12 @@ OnRelease --> |No| BACK["Pull back to bounds<br>Back-deceleration"]
 BACK --> |Stop| IDLE
 BACK --> |Drag| DRAG
 ```
+
+- Get state
+    ```javascript
+    var state = scroller.state;
+    ```
+    - `'IDLE'` : No dragging, no sliding
+    - `'DRAG'` : Dragging
+    - `'SLIDE'` : Sliding when dragging released
+    - `'BACK'` : Sliding back to bound when out of bound

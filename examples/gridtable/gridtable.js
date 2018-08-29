@@ -39,15 +39,16 @@ class Demo extends Phaser.Scene {
             .strokeRectShape(table.getBounds());
 
         // drag table content
-        table.setInteractive();
-        table.on('pointermove', function (pointer) {
-            if (!pointer.isDown) {
-                return;
-            }
-            var dx = pointer.x - pointer.prevPosition.x;
-            var dy = pointer.y - pointer.prevPosition.y;
-            table.addTableOXY(dx, dy).updateTable();
-        });
+        table
+            .setInteractive()
+            .on('pointermove', function (pointer) {
+                if (!pointer.isDown) {
+                    return;
+                }
+                var dx = pointer.x - pointer.prevPosition.x;
+                var dy = pointer.y - pointer.prevPosition.y;
+                table.addTableOXY(dx, dy).updateTable();
+            });
     }
 
     update() {}

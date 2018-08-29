@@ -172,7 +172,7 @@ class Scroller extends EE {
     }
 
     get backEnable() {
-        return (this.backDeceleration != null);
+        return (typeof(this.backDeceleration) === 'number');
     }
 
     get isPullBack() {
@@ -180,7 +180,7 @@ class Scroller extends EE {
     }
 
     get slidingEnable() {
-        return (this.slidingDeceleration != null);
+        return (typeof(this.slidingDeceleration) === 'number');
     }
 
     get isSliding() {
