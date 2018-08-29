@@ -73,6 +73,18 @@ class DragSpeed extends EE {
         return this;
     }
 
+    get isDown() {
+        return this.pointer && this.pointer.isDown;
+    }
+
+    get isUp() {
+        return this.pointer === undefined;
+    }
+
+    get justMoved() {
+        return this.pointer && this.pointer.justMoved;
+    }
+
     get dx() {
         return this.x - this.preX;
     }

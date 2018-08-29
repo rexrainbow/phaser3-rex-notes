@@ -171,5 +171,23 @@ class FSM extends EE {
         }
         return this;
     }
+
+    update(time, delta, key) {
+        if (key === undefined) {
+            key = 'update';
+        }
+        var fn = this[key + '_' + this.state];
+        if (fn) {
+            fn.call(this, time, delta);
+        }
+    }
+
+    preupdate(time, delta) {
+        this.update(time, delta, 'preupdate');
+    }
+
+    postupdate(time, delta) {
+        this.update(time, delta, 'postupdate');
+    }
 }
 export default FSM;

@@ -25,7 +25,7 @@ class Scroller extends EE {
             inputConfig: GetValue(config, 'inputConfig', undefined),
             enable: enable
         };
-        this._dragSpeed = new DrapSpeed(gameObject, drapSpeedConfig);
+        this.dragState = new DrapSpeed(gameObject, drapSpeedConfig);
 
         this._value = undefined;
         this._moveTo = new MoveTo();
@@ -51,21 +51,16 @@ class Scroller extends EE {
     }
 
     boot() {
-        this._dragSpeed
-            .on('touchstart', this.onDragStart, this)
-            .on('touchend', this.onDragEnd, this)
-            .on('touchmove', this.onDragMove, this);
-
-        this.scene.events.on('update', this.update, this);
+        this.scene.events.on('update', this._state.update, this._state);
     }
 
     shutdown() {
         super.shutdown();
-        this.scene.events.off('update', this.update, this);
+        this.scene.events.off('update', this._state.update, this._state);
         this.gameObject = undefined;
         this.scene = undefined;
         this._state.destroy();
-        this._dragSpeed.destroy();
+        this.dragState.destroy();
         // gameObject events will be removed when this gameObject destroyed 
     }
 
@@ -143,7 +138,7 @@ class Scroller extends EE {
 
     setEnable(e) {
         this._state.setEnable(e);
-        this._dragSpeed.setEnable(e);
+        this.dragState.setEnable(e);
         return this;
     }
 
@@ -151,44 +146,8 @@ class Scroller extends EE {
         return this._state.state;
     }
 
-    onDragStart() {
-        this._state.next();
-    }
-
-    onDragEnd() {
-        this._state.next();
-    }
-
-    onDragMove() {
-        this.value += this.dragVecter;
-    }
-
-    get slidingEnable() {
-        return (this.slidingDec != null);
-    }
-
-    get backEnable() {
-        return (this.backSpeed != null);
-    }
-
-    get isDragging() {
-        return this._dragSpeed.isInTouched;
-    }
-
-    get isPullBack() {
-        return this._moveTo.isMoving;
-    }
-
-    get isSliding() {
-        return this._slowDown.isMoving;
-    }
-
-    overMax(value) {
-        return (this.maxValue != null) && (value > this.maxValue);
-    }
-
-    overMin(value) {
-        return (this.minValue != null) && (value < this.minValue);
+    get isInTouched() {
+        return this.dragState.isInTouched;
     }
 
     get outOfMaxBound() {
@@ -199,11 +158,40 @@ class Scroller extends EE {
         return this.overMin(this.value);
     }
 
-    get dragVecter() {
+    get outOfBounds() {
+        return this.outOfMinBound || this.outOfMaxBound;
+    }
+
+    // internal
+    overMax(value) {
+        return (this.maxValue != null) && (value > this.maxValue);
+    }
+
+    overMin(value) {
+        return (this.minValue != null) && (value < this.minValue);
+    }
+
+    get backEnable() {
+        return (this.backSpeed != null);
+    }
+
+    get isPullBack() {
+        return this._moveTo.isMoving;
+    }
+
+    get slidingEnable() {
+        return (this.slidingDec != null);
+    }
+
+    get isSliding() {
+        return this._slowDown.isMoving;
+    }
+
+    get dragDelta() {
         if (this.axisMode === 2) { // y
-            return this._dragSpeed.dy;
+            return this.dragState.dy;
         } else if (this.axisMode === 1) { // x
-            return this._dragSpeed.dx;
+            return this.dragState.dx;
         } else {
             return 0;
         }
@@ -211,35 +199,20 @@ class Scroller extends EE {
 
     get dragSpeed() {
         if (this.axisMode === 2) { // y
-            return this._dragSpeed.speedY;
+            return this.dragState.speedY;
         } else if (this.axisMode === 1) { // x
-            return this._dragSpeed.speedX;
+            return this.dragState.speedX;
         } else {
             return 0;
         }
     }
 
-    get outOfBounds() {
-        return this.outOfMinBound || this.outOfMaxBound;
+    // everyTick_DRAG
+    dragging() {
+        this.value += this.dragDelta;
     }
 
-
-    update(time, delta) {
-        if (delta <= 0) {
-            return;
-        }
-
-        var state = this.state;
-        switch (state) {
-            case 'SLIDE':
-                this.sliding(delta);
-                break;
-            case 'BACK':
-                this.pullBack(delta);
-                break;
-        }
-    }
-
+    // enter_SLIDE 
     onSliding() {
         var speed = this.dragSpeed;
         if (speed === 0) {
@@ -247,11 +220,11 @@ class Scroller extends EE {
             this._state.next();
             return;
         }
-        debugger
         this._slowDown.init(this.value, (speed > 0), Math.abs(speed), this.slidingDec)
     }
 
-    sliding(delta) {
+    // everyTick_SLIDE
+    sliding(time, delta) {
         delta *= 0.001;
         var newValue = this._slowDown.update(delta).value;
         if (this.overMax(newValue)) {
@@ -263,18 +236,16 @@ class Scroller extends EE {
         } else {
             this.value = newValue;
         }
-
-        if (!this._slowDown.isMoving) {
-            this._state.next();
-        }
     }
 
+    // enter_BACK
     onPullBack() {
         var target = (this.outOfMinBound) ? this.minValue : this.maxValue;
         this._moveTo.init(this.value, target, this.backSpeed);
     }
 
-    pullBack(delta) {
+    // everyTick_BACK
+    pullBack(time, delta) {
         delta *= 0.001;
         this.value = this._moveTo.update(delta).value;
 
@@ -283,7 +254,11 @@ class Scroller extends EE {
         }
     }
 
-    stop() {}
+    // exit_SLIDE, exit_BACK
+    stop() {
+        this._slowDown.stop();
+        this._moveTo.stop();
+    }
 
 }
 

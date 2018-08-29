@@ -1,2 +1,2 @@
-import Clock from './behaviors/clock/Clock.js';
+import Clock from './time/clock/Clock.js';
 export default Clock;

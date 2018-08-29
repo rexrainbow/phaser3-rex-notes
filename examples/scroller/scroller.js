@@ -2,6 +2,9 @@
 
 import ScrollerPlugin from 'rexPlugins/scroller-plugin.js';
 
+const slidingDeceleration = 5000;
+const backSpeed = 1000;
+
 const pad = Phaser.Utils.String.Pad;
 class Demo extends Phaser.Scene {
     constructor() {
@@ -10,7 +13,12 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {}
+    preload() {
+        this.load.spritesheet('knighthawks', 'assets/fonts/knighthawks-font-filled.png', {
+            frameWidth: 32,
+            frameHeight: 25
+        });
+    }
 
     create() {
         var x = 400,
@@ -21,31 +29,53 @@ class Demo extends Phaser.Scene {
             leftX = x - (w / 2);
         var bg = this.add.graphics()
             .setPosition(leftX, topY)
-            .fillStyle(0x333333, 1)
+            .fillStyle(0x000033, 1)
             .fillRect(0, 0, w, h)
             .setInteractive(new Phaser.Geom.Rectangle(0, 0, w, h),
                 Phaser.Geom.Rectangle.Contains);
 
 
         var s = '';
-        for (var i = 0, cnt = 100; i < cnt; i++) {
-            s += pad(i.toString(), 3, '0', 1);
+        for (var i = 0, cnt = 1000; i < cnt; i++) {
+            s += pad(i.toString(), 4, '0', 1);
             if (i < (cnt - 1)) {
                 s += '\n';
             }
         }
 
-        var txt = this.add.text(leftX + 30, topY, s, {
-            fontSize: '20pt'
-        });
+        var config = {
+            image: 'knighthawks',
+            width: 31,
+            height: 25,
+            chars: Phaser.GameObjects.RetroFont.TEXT_SET2,
+            charsPerRow: 10,
+            spacing: {
+                x: 1,
+                y: 1
+            }
+        };
+
+        this.cache.bitmapFont.add('knighthawks', Phaser.GameObjects.RetroFont.Parse(this, config));
+        var txt = this.add.bitmapText(leftX, topY, 'knighthawks', s).setScale(2);
         txt.setMask(bg.createGeometryMask());
 
+        var topBound = topY,
+            bottomBound;
+        var contentHieght = txt.height;
+        if (contentHieght > h) {
+            // over a page
+            bottomBound = topY - contentHieght + h;
+        } else {
+            bottomBound = topY;
+        }
         this.scroller = this.plugins.get('rexScroller').add(bg, {
             bounds: [
-                topY - txt.displayHeight + h,
-                topY
+                bottomBound,
+                topBound
             ],
-            value: topY,
+            value: topBound,
+            slidingDeceleration: slidingDeceleration,
+            backSpeed: backSpeed
         }).on('valuechange', function (value) {
             txt.y = value;
         });
@@ -64,7 +94,7 @@ var config = {
     width: 800,
     height: 600,
     scene: Demo,
-    backgroundColor: 0x111111,
+    backgroundColor: 0x333333,
     plugins: {
         global: [{
             key: 'rexScroller',
