@@ -54,14 +54,12 @@ gameObject.drag = scene.plugins.get('rexDrag').add(gameObject, {
 });
 ```
 
-Properties
-
-- enable: drag-able
-- axis : 
+- `enable` : drag-able
+- `axis` : 
     - `'both'`,`'h&v'`, `'x&y'`, or `0` : dragging on all directions.
     - `'horizontal'`,`'h'`, `'x'`, or `1` : dragging on horizontal/x axis.
     - `'vertical'`,`'v'`, `'y'`, or `2` : dragging on vertical/y axis.
-- rotation : axis rotation in rad, available in horizontal or vertical axis mode.
+- `rotation` : axis rotation in rad, available in horizontal or vertical axis mode.
 
 ### Dragging events
 

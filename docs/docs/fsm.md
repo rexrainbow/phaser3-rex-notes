@@ -98,8 +98,6 @@ var config = {
 var state = scene.plugins.get('rexFSM').add(config)
 ```
 
-Properties of config:
-
 - `start`: Initial state.
 - `states`: Define states.
     - stateName

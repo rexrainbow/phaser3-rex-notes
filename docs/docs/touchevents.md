@@ -88,7 +88,6 @@ Call `gameObject.setInteractive(...)` to register touch input of Game Object bef
         useHandCursor: true
     });
     ```
-    Properties:
     - Hit area
         - Shape
             - Circle

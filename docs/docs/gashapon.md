@@ -58,13 +58,11 @@ var gashapon = scene.plugins.get('rexGashapon').add({
 });
 ```
 
-Properties
-
-- mode : 
+- `mode` : 
     - `'shuffle'`, or `0` : pick item from box without put it back.
     - `'random'`, or `1` : pick item from box then put it back.
-- reload : set `true` to reload items when box is empty for `shuffle` mode.
-- items : initial items in box
+- `reload` : set `true` to reload items when box is empty for `shuffle` mode.
+- `items` : initial items in box
 
 ### Pick item
 

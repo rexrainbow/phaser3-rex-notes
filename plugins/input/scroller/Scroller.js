@@ -105,13 +105,15 @@ class Scroller extends EE {
     }
 
     set value(value) {
+        var oldValue = this._value;      
+
         var isOverMax = this.overMax(value);
         var isOverMin = this.overMin(value);
         if (isOverMax) {
-            this.emit('overmax', value);
+            this.emit('overmax', value, oldValue);
         }
         if (isOverMin) {
-            this.emit('overmin', value);
+            this.emit('overmin', value, oldValue);
         }
         if (!this.backEnable) {
             if (isOverMax) {
@@ -125,9 +127,9 @@ class Scroller extends EE {
         if (value === this._value) {
             return;
         }
-        var oldValue = this._value;
+
         this._value = value;
-        this.emit('valuechange', this._value, oldValue);
+        this.emit('valuechange', value, oldValue);
     }
 
     setValue(value) {
@@ -144,7 +146,7 @@ class Scroller extends EE {
         return this._state.state;
     }
 
-    get isInTouched() {
+    get isDragging() {
         return this.dragState.isInTouched;
     }
 

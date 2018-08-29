@@ -59,9 +59,7 @@ var page = scene.plugins.get('rexTextPage').add(txt, {
 });
 ```
 
-Properties
-
-- text: content in string or array, optional
+- `text` : content in string or array, optional
 
 ### Set content
 

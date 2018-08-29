@@ -61,8 +61,6 @@ scenario.load(csvString, scope, {
 })
 ```
 
-Properties
-
 - timeUnit: time-unit of dt, for [delay-execution](csvscenario.md#delay-execution)
     - `'ms'`, or `0` : dt in millisecond
     - `'s'`, `'sec'`, or 1 : dt in second
@@ -79,10 +77,8 @@ scenario.start({
 })
 ```
 
-Properties
-
-- label: Go to the label and execute. '' label is starting from 1st instruction
-- offset: Offset time
+- `label` : Go to the label and execute. '' label is starting from 1st instruction
+- `offset` : Offset time
 
 ### Events
 

@@ -52,9 +52,7 @@ var lzstring = scene.plugins.get('rexLZString').add({
 });
 ```
 
-Properties :
-
-- encoding mode : 
+- `encoding` : 
     - `'none'`, or `0` : no encoding.
     - `'base64'`, or `1` : base64 encoding.
     - `'utf16'`, or `2` : UTF16 encoding.

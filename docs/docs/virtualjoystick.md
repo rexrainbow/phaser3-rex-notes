@@ -59,22 +59,20 @@ var joystick = scene.plugins.get('rexVirtualJoyStick').add(scene, {
 });
 ```
 
-Properties
-
-- base : Base game object.
+- `base` : Base game object.
     - Create a graphics object if no base game object passed.
-- thumb : Thumb game object.
+- `thumb` : Thumb game object.
     - Create a graphics object if no thumb game object passed.
-- x, y : Position of base game object
-- radius : Circle hit-area of base game object
-- dir : 
+- `x`, `y` : Position of base game object
+- `radius` : Circle hit-area of base game object
+- `dir` : 
     - `'up&down'`, or `0` : Simulate up or down cursor keys only.
     - `'left&right'`, or `1` : Simulate left or right cursor keys only.
     - `'4dir'`, or `2` : Simulate up, down, left or right cursor keys.
     - `'8dir'`, or `3` : Simulate up, up-left, up-right, down, down-left, down-right, left, or right cursor keys.
-- forceMin : Cursor keys will be pressed when *force* is larger then this value.
-    - force: Distance between position of base game object to touch pointer
-- enable : set `false` to disable cursor keys simulation
+- `forceMin` : Cursor keys will be pressed when *force* is larger then this value.
+    - `force` : Distance between position of base game object to touch pointer
+- `enable` : set `false` to disable cursor keys simulation
 
 ### State of cursor keys
 

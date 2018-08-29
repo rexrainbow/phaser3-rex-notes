@@ -52,9 +52,7 @@ var clock = scene.plugins.get('rexClock').add(scene, {
 });
 ```
 
-Properties
-
-- timeScale : time-scale for counting elapsed time.
+- `timeScale` : time-scale for counting elapsed time.
 
 ### Start counting
 

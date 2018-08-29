@@ -55,11 +55,9 @@ var player = scene.plugins.get('rexTextTyping').addPlayer(scene, {
 });
 ```
 
-Properties
-
-- timeUnit: see [next section](tcrpplayerplugin.md#load-commands)
-- dtMode: see [next section](tcrpplayerplugin.md#load-commands)
-- commands: see [next section](tcrpplayerplugin.md#load-commands)
+- `timeUnit` : see [next section](tcrpplayerplugin.md#load-commands)
+- `dtMode` : see [next section](tcrpplayerplugin.md#load-commands)
+- `commands` : see [next section](tcrpplayerplugin.md#load-commands)
 
 ### Load commands
 
