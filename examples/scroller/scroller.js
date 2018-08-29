@@ -3,7 +3,7 @@
 import ScrollerPlugin from 'rexPlugins/scroller-plugin.js';
 
 const slidingDeceleration = 5000;
-const backSpeed = 1000;
+const backDeceleration = 2000;
 
 const pad = Phaser.Utils.String.Pad;
 class Demo extends Phaser.Scene {
@@ -72,7 +72,7 @@ class Demo extends Phaser.Scene {
             ],
             value: topBound,
             slidingDeceleration: slidingDeceleration,
-            backSpeed: backSpeed
+            backDeceleration: backDeceleration
         }).on('valuechange', function (value) {
             txt.y = value;
         });

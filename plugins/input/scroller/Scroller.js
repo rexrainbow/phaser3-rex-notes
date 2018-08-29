@@ -35,7 +35,7 @@ class Scroller extends EE {
     resetFromJSON(o) {
         this.setAxisMode(GetValue(o, 'axis', 2));
         this.setSlidingDeceleration(GetValue(o, 'slidingDeceleration', 5000));
-        this.setBackSpeed(GetValue(o, 'backSpeed', 1000));
+        this.setBackDeceleration(GetValue(o, 'backDeceleration', 2000));
 
         var bounds = GetValue(o, 'bounds', undefined);
         if (bounds) {
@@ -75,12 +75,12 @@ class Scroller extends EE {
     }
 
     setSlidingDeceleration(dec) {
-        this.slidingDec = dec;
+        this.slidingDeceleration = dec;
         return this;
     }
 
-    setBackSpeed(speed) {
-        this.backSpeed = speed;
+    setBackDeceleration(dec) {
+        this.backDeceleration = dec;
         return this;
     }
 
@@ -170,7 +170,7 @@ class Scroller extends EE {
     }
 
     get backEnable() {
-        return (this.backSpeed != null);
+        return (this.backDeceleration != null);
     }
 
     get isPullBack() {
@@ -178,7 +178,7 @@ class Scroller extends EE {
     }
 
     get slidingEnable() {
-        return (this.slidingDec != null);
+        return (this.slidingDeceleration != null);
     }
 
     get isSliding() {
@@ -219,7 +219,8 @@ class Scroller extends EE {
             this._state.next();
             return;
         }
-        this._slowDown.init(start, (speed > 0), Math.abs(speed), this.slidingDec)
+        var dec = this.slidingDeceleration;
+        this._slowDown.init(start, (speed > 0), Math.abs(speed), dec)
     }
 
     // everyTick_SLIDE
@@ -241,8 +242,9 @@ class Scroller extends EE {
     onPullBack() {
         var start = this.value;
         var end = (this.outOfMinBound) ? this.minValue : this.maxValue;
-        var speed = this.backSpeed;
-        var dec = (speed * speed) / (2 * (Math.abs(end - start)));
+        var dist = Math.abs(end - start);
+        var dec = this.backDeceleration;        
+        var speed = Math.sqrt(2 * dec * dist);
         this._slowDown.init(start, undefined, speed, dec, end);
     }
 
