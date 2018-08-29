@@ -72,12 +72,12 @@ class TouchState extends EE {
         return this;
     }
 
-    get justDown() {
-        return this.pointer && this.pointer.justDown;
+    get isDown() {
+        return this.pointer && this.pointer.isDown;
     }
 
-    get justUp() {
-        return this.pointer && this.pointer.justUp;
+    get isUp() {
+        return this.pointer === undefined;
     }
 
     get justMoved() {
