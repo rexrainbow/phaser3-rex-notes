@@ -31,15 +31,26 @@ class SlowDown {
     update(delta) {
         // delta in sec
         var d = this.movement.getDeltaValue(delta);
-        if (d > 0) {
-            if (this.dir) {
-                this.value += d;
-            } else {
-                this.value -= d;
-            }
-        } else { // d === 0
-            if (this.end !== undefined) {
+        if (!this.dir) {
+            d = -d;
+        }
+
+        if (this.end === undefined) {
+            this.value += d;
+        } else {
+            if (d === 0) {
                 this.value = this.end;
+            } else {
+                this.value += d;
+                if (this.dir) { // +
+                    if (this.value > this.end) {
+                        this.value = this.end;
+                    }
+                } else { // -
+                    if (this.value < this.end) {
+                        this.value = this.end;
+                    }
+                }
             }
         }
         return this;
