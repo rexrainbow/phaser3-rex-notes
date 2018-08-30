@@ -4531,39 +4531,69 @@
             "title": "Reset"
         }, 
         {
-            "location": "/array/index.html", 
+            "location": "/array-filter/index.html", 
             "text": "Introduction\n\n\nBuilt-in javascript object.\n\n\n\n\nAuthor: Built-in javascript function\n\n\n\n\nUsage\n\n\nRun function for each element\n\n\nvar\n \ncallback\n \n=\n \nfunction\n(\nelement\n,\n \nindex\n,\n \narr\n)\n \n{};\n\n\narr\n.\nforEach\n(\ncallback\n);\n\n\n// arr.forEach(callback, scope);\n\n\n\n\n\nFilter elements\n\n\nCreates a new array with all elements that pass the test function.\n\n\nvar\n \ncallback\n \n=\n \nfunction\n(\nelement\n,\n \nindex\n,\n \narr\n)\n \n{\n\n    \nreturn\n \ntrue\n;\n \n// false\n\n\n};\n\n\nvar\n \nresult\n \n=\n \narr\n.\nfilter\n(\ncallback\n);\n\n\n// var result = arr.filter(callback, scope);\n\n\n\n\n\nFind one element\n\n\nvar\n \ncallback\n \n=\n \nfunction\n(\nelement\n,\n \nindex\n,\n \narr\n)\n \n{\n\n    \nreturn\n \ntrue\n;\n \n// false\n\n\n};\n\n\nvar\n \nelement\n \n=\n \narr\n.\nfind\n(\ncallback\n);\n\n\n// var element = arr.find(callback, scope);\n\n\n\n\n\nMap elements to a new array\n\n\nvar\n \ncallback\n \n=\n \nfunction\n(\nelement\n,\n \nindex\n,\n \narr\n)\n \n{\n\n    \nreturn\n \nnewElement\n;\n\n\n};\n\n\nvar\n \nnewArray\n \n=\n \narr\n.\nmap\n(\ncallback\n);\n\n\n// var newArray = arr.map(callback, scope);", 
-            "title": "Array"
+            "title": "Filter/Map"
         }, 
         {
-            "location": "/array/index.html#introduction", 
+            "location": "/array-filter/index.html#introduction", 
             "text": "Built-in javascript object.   Author: Built-in javascript function", 
             "title": "Introduction"
         }, 
         {
-            "location": "/array/index.html#usage", 
+            "location": "/array-filter/index.html#usage", 
             "text": "", 
             "title": "Usage"
         }, 
         {
-            "location": "/array/index.html#run-function-for-each-element", 
+            "location": "/array-filter/index.html#run-function-for-each-element", 
             "text": "var   callback   =   function ( element ,   index ,   arr )   {};  arr . forEach ( callback );  // arr.forEach(callback, scope);", 
             "title": "Run function for each element"
         }, 
         {
-            "location": "/array/index.html#filter-elements", 
+            "location": "/array-filter/index.html#filter-elements", 
             "text": "Creates a new array with all elements that pass the test function.  var   callback   =   function ( element ,   index ,   arr )   { \n     return   true ;   // false  };  var   result   =   arr . filter ( callback );  // var result = arr.filter(callback, scope);", 
             "title": "Filter elements"
         }, 
         {
-            "location": "/array/index.html#find-one-element", 
+            "location": "/array-filter/index.html#find-one-element", 
             "text": "var   callback   =   function ( element ,   index ,   arr )   { \n     return   true ;   // false  };  var   element   =   arr . find ( callback );  // var element = arr.find(callback, scope);", 
             "title": "Find one element"
         }, 
         {
-            "location": "/array/index.html#map-elements-to-a-new-array", 
+            "location": "/array-filter/index.html#map-elements-to-a-new-array", 
             "text": "var   callback   =   function ( element ,   index ,   arr )   { \n     return   newElement ;  };  var   newArray   =   arr . map ( callback );  // var newArray = arr.map(callback, scope);", 
             "title": "Map elements to a new array"
+        }, 
+        {
+            "location": "/create-number-array/index.html", 
+            "text": "Introduction\n\n\nCreate an array representing the range of numbers, built-in method of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nCreate number array\n\n\nCreate an array representing the range of numbers (usually integers), between, and inclusive of, the given \nstart\n and \nend\n arguments.\n\n\nvar\n \narr\n \n=\n \nPhaser\n.\nUtils\n.\nArray\n.\nNumberArray\n(\nstart\n,\n \nend\n);\n\n\n\n\n\nFor example,\n\nvar\n \narr\n \n=\n \nPhaser\n.\nUtils\n.\nArray\n.\nNumberArray\n(\n2\n,\n \n4\n);\n\n\n// arr = [2, 3, 4]\n\n\n\n\nCreate number array with step\n\n\nCreate an array of numbers (positive and/or negative) progressing from \nstart\n up to but not including \nend\n by advancing by \nstep\n.\n\n\nvar\n \narr\n \n=\n \nPhaser\n.\nUtils\n.\nArray\n.\nNumberArray\n(\nstart\n,\n \nend\n,\n \nstep\n);\n\n\n\n\n\nFor example,\n\nvar\n \narr\n \n=\n \nPhaser\n.\nUtils\n.\nArray\n.\nNumberArrayStep\n(\n0\n,\n \n20\n,\n \n5\n);\n\n\n// arr =  [0, 5, 10, 15]\n\n\n\n\nCreate \nprefix-number-suffix\n string array\n\n\nvar\n \narr\n \n=\n \nPhaser\n.\nUtils\n.\nArray\n.\nNumberArray\n(\nstart\n,\n \nend\n,\n \nprefix\n,\n \nsuffix\n);\n\n\n\n\n\nFor example,\n\nvar\n \narr\n \n=\n \nPhaser\n.\nUtils\n.\nArray\n.\nNumberArray\n(\n5\n,\n \n7\n,\n \nHD-\n,\n \n.png\n);\n\n\n// arr = [\nHD-5.png\n, \nHD-6.png\n, \nHD-7.png\n]", 
+            "title": "Number array"
+        }, 
+        {
+            "location": "/create-number-array/index.html#introduction", 
+            "text": "Create an array representing the range of numbers, built-in method of phaser.   Author: Richard Davey", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/create-number-array/index.html#usage", 
+            "text": "", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/create-number-array/index.html#create-number-array", 
+            "text": "Create an array representing the range of numbers (usually integers), between, and inclusive of, the given  start  and  end  arguments.  var   arr   =   Phaser . Utils . Array . NumberArray ( start ,   end );   For example, var   arr   =   Phaser . Utils . Array . NumberArray ( 2 ,   4 );  // arr = [2, 3, 4]", 
+            "title": "Create number array"
+        }, 
+        {
+            "location": "/create-number-array/index.html#create-number-array-with-step", 
+            "text": "Create an array of numbers (positive and/or negative) progressing from  start  up to but not including  end  by advancing by  step .  var   arr   =   Phaser . Utils . Array . NumberArray ( start ,   end ,   step );   For example, var   arr   =   Phaser . Utils . Array . NumberArrayStep ( 0 ,   20 ,   5 );  // arr =  [0, 5, 10, 15]", 
+            "title": "Create number array with step"
+        }, 
+        {
+            "location": "/create-number-array/index.html#create-prefix-number-suffix-string-array", 
+            "text": "var   arr   =   Phaser . Utils . Array . NumberArray ( start ,   end ,   prefix ,   suffix );   For example, var   arr   =   Phaser . Utils . Array . NumberArray ( 5 ,   7 ,   HD- ,   .png );  // arr = [ HD-5.png ,  HD-6.png ,  HD-7.png ]", 
+            "title": "Create prefix-number-suffix string array"
         }, 
         {
             "location": "/csvtoarray/index.html", 
