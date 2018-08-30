@@ -6,26 +6,13 @@ import Clean from 'rexPlugins/utils/object/Clean.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 const GetValue = Phaser.Utils.Objects.GetValue;
-/**
- * Create Gashapon object with configuration
- * @class
- * @classdesc Gashapon in shuffle or random mode
- */
+
 class Gashapon {
     constructor(config) {
         this.resetFromJSON(config);
     }
 
-    /**
-     * Reset status by JSON object
-     * @param {object} o JSON object
-     * @returns {object} this object
-     */
     resetFromJSON(o) {
-        // configuration
-        if (this.cfg == undefined) {
-            this.cfg = {};
-        }
         if (this.items == undefined) {
             this.items = {};
         }
@@ -69,15 +56,11 @@ class Gashapon {
         return this;
     }
 
-    /**
-     * Return status in JSON object
-     * @returns JSON object
-     */
     toJSON() {
         return {
             // configuration
-            mode: this.cfg.mode,
-            reload: this.cfg.reload,
+            mode: this.mode,
+            reload: this.reload,
 
             // data
             items: Clone(this.items),
@@ -94,10 +77,6 @@ class Gashapon {
         };
     };
 
-    /**
-     * Restart generator
-     * @returns {object} this object
-     */
     startGen() {
         var name;
         // clear remain items
@@ -113,7 +92,7 @@ class Gashapon {
                 this.remain[name] = count;
         }
 
-        if (this.cfg.mode === 1) { // random mode
+        if (this.mode === 1) { // random mode
             this.resetItemList(this.remain);
         }
         this._restartFlag = false;
@@ -121,48 +100,26 @@ class Gashapon {
         return this;
     }
 
-
-    /**
-     * Set mode
-     * @param {number|string} m 'shuffle'(0) or 'random'(1)
-     * @returns {object} this object
-     */
     setMode(m) {
         if (typeof (m) === 'string') {
             m = MODE[m];
         }
-        this._restartFlag = (this.cfg.mode !== m);
-        this.cfg.mode = m;
+        this._restartFlag = (this.mode !== m);
+        this.mode = m;
         return this;
     }
 
-    /**
-     * Set reload mode
-     * @param {boolean} isReload reload items when empty
-     * @returns {object} this object
-     */
     setReload(isReload) {
-        this.cfg.reload = !!isReload;
+        this.reload = !!isReload;
         return this;
     }
 
-    /**
-     * Set item
-     * @param {string} name item name
-     * @param {number} count item count
-     * @returns {object} this object
-     */
     setItem(name, count) {
         this._restartFlag = (this.items[name] !== count);
         this.items[name] = count;
         return this;
     }
 
-    /**
-     * Remove item
-     * @param {string} name item name
-     * @returns {object} this object
-     */
     removeItem(name) {
         if (this.items.hasOwnProperty(name)) {
             delete this.items[name];
@@ -171,10 +128,6 @@ class Gashapon {
         return this;
     }
 
-    /**
-     * Remove all items
-     * @returns {object} this object
-     */
     removeAllItems() {
         for (var name in this.items) {
             delete this.items[name];
@@ -183,47 +136,22 @@ class Gashapon {
         return this;
     }
 
-    /**
-     * Return clone items
-     * @returns {object} Cloned items
-     */
     getItems() {
         return Clone(this.items);
     }
 
-    /**
-     * Return clone remaining items
-     * @returns {object} Cloned remaining items
-     */
     getRemain() {
         return Clone(this.remain);
     }
 
-    /**
-     * Return amount of an item
-     * @param {string} name item name
-     * @returns {number} Amount of an item
-     */
     getItemCount(name) {
         return this.items[name] || 0;
     }
 
-    /**
-     * Return amount of a remaining item
-     * @param {string} name remaining item name
-     * @returns {number} Amount of a remaining item
-     */
     getRemainCount(name) {
         return this.remain[name] || 0;
     }
 
-    /**
-     * Passes all items to the given callback
-     * @param {function} callback the function to call
-     * @param {object} [scope] value to use as `this` when executing callback.
-     * @param {...*} [arguments] additional arguments that will be passed to the callback, after item name, and amount.
-     * @returns {object} this object
-     */
     eachItem(callback, scope) {
         var args = [null, undefined];
 
@@ -245,13 +173,6 @@ class Gashapon {
         return this;
     }
 
-    /**
-     * Passes all remaining items to the given callback
-     * @param {function} callback the function to call
-     * @param {object} [scope] value to use as `this` when executing callback.
-     * @param {...*} [arguments] additional arguments that will be passed to the callback, after item name, and amount.
-     * @returns {object} this object
-     */
     eachRemain(callback, scope) {
         var args = [null, undefined];
 
@@ -272,12 +193,6 @@ class Gashapon {
         return this;
     }
 
-    /**
-     * Add item without changing remaining items
-     * @param {string} name item name
-     * @param {number} count item count
-     * @returns {object} this object
-     */
     addItem(name, count) {
         if (!this.items.hasOwnProperty(name)) {
             this.items[name] = 0;
@@ -287,7 +202,7 @@ class Gashapon {
         if (this._restartFlag)
             return;
 
-        if (this.cfg.mode === 0) { // shuffle mode
+        if (this.mode === 0) { // shuffle mode
             this.addRemainItem(name, count);
         } else { // random mode
             this.resetItemList(this.remain);
@@ -295,20 +210,14 @@ class Gashapon {
         return this;
     }
 
-    /**
-     * Add remaining items without max items
-     * @param {string} name item name
-     * @param {number} count item count
-     * @returns {object} this object
-     */
     putItemBack(name, count) {
-        if (this.cfg.mode === 1) // random mode
+        if (this.mode === 1) // random mode
             return;
 
         if (!this.items.hasOwnProperty(name))
             return;
 
-        if ((this.cfg.mode === 2) && this.restartGenFlg)
+        if ((this.mode === 2) && this.restartGenFlg)
             return;
 
         // generator had started  
@@ -319,10 +228,6 @@ class Gashapon {
         return this;
     };
 
-    /**
-     * Return a random item
-     * @returns {string} item name
-     */
     next(name) {
         var result = null;
         if (this._restartFlag) {
@@ -330,7 +235,7 @@ class Gashapon {
         }
 
         if (name == null) {
-            if (this.cfg.mode === 0) { // shuffle mode
+            if (this.mode === 0) { // shuffle mode
                 this.resetItemList(this.remain);
                 result = this.getRndItem(this._list);
                 this.addRemainItem(result, -1);
@@ -342,7 +247,7 @@ class Gashapon {
             if (!this.remain.hasOwnProperty(name)) {
                 result = null; // can not pick that result
             } else {
-                if (this.cfg.mode === 0) {
+                if (this.mode === 0) {
                     this.addRemainItem(name, -1);
                 }
                 result = name;
@@ -353,27 +258,13 @@ class Gashapon {
         return result;
     }
 
-    /**
-     * Set custom random generator
-     * @param {function} callback the function to call
-     * @param {object} scope value to use as `this` when executing callback
-     * @returns {object} this object
-     */
     setRandomGen(callback, scope) {
         this.customRnd[0] = callback;
         this.customRnd[1] = scope;
         return this;
     }
 
-    /**
-     * Release all resources and references
-     * @returns {object} this object
-     */
     destroy() {
-        // configuration
-        this.cfg.mode = undefined;
-        this.cfg.reload = undefined;
-
         // data
         Clean(this.items);
         Clean(this.remain);
@@ -431,7 +322,7 @@ class Gashapon {
         if (this.remain[name] <= 0)
             delete this.remain[name];
 
-        if ((this.cfg.mode === 0) && this.cfg.reload && IsEmpty(this.remain))
+        if ((this.mode === 0) && this.reload && IsEmpty(this.remain))
             this._restartFlag = true;
 
         return this;
@@ -471,7 +362,6 @@ class Gashapon {
 
 }
 
-/** @private */
 const MODE = {
     shuffle: 0,
     random: 1
