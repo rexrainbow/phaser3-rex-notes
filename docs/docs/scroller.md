@@ -56,7 +56,16 @@ var scroller = scene.plugins.get('rexScroller').add(gameObject, {
     // slidingDeceleration: 5000,
     // backDeceleration: 2000,
     // enable: true,
-    // axis: 'vertical'
+    // axis: 'vertical',
+
+    // valuechangeCallback: null,
+    // valuechangeCallbackScope: null,
+
+    // overmaxCallback: null,
+    // overmaxCallbackScope: null,
+
+    // overminCallback: null,
+    // overminCallbackScope: null,
 });
 ```
 
@@ -71,6 +80,9 @@ var scroller = scene.plugins.get('rexScroller').add(gameObject, {
 - `axis` :
     - `'horizontal'`,`'h'`, `'x'`, or `1` : dragging on horizontal/x axis.
     - `'vertical'`,`'v'`, `'y'`, or `2` : dragging on vertical/y axis.
+- `valuechangeCallback` , `valuechangeCallbackScope` : Bind this callback to [`valuechange` event](scroller.md#events)
+- `overminCallback` , `overmaxCallbackScope` : Bind this callback to [`overmax` event](scroller.md#events)
+- `overminCallback` , `overminCallbackScope` : Bind this callback to [`overmin` event](scroller.md#events)
 
 ### Set bounds
 

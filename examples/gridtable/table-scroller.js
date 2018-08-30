@@ -41,15 +41,16 @@ class Demo extends Phaser.Scene {
 
         // drag table content
         table.scroller = this.plugins.get('rexScroller').add(table, {
-                bounds: [
-                    table.bottomTableOY,
-                    table.topTableOY
-                ],
-                value: table.topTableOY,
-            })
-            .on('valuechange', function (newValue) {
+            bounds: [
+                table.bottomTableOY,
+                table.topTableOY
+            ],
+            value: table.topTableOY,
+
+            valuechangeCallback: function (newValue) {
                 table.setTableOY(newValue).updateTable();
-            });
+            }
+        })
 
         this.table = table;
         this.scrollerState = this.add.text(0, 0, '');

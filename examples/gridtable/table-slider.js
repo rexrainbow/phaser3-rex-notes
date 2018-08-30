@@ -53,10 +53,11 @@ class Demo extends Phaser.Scene {
                     x: bottomRight.x + 10,
                     y: bottomRight.y - 10
                 }
-            ]
-        });
-        thumb.slider.on('valuechange', function (newValue) {
-            table.setTableOYByPercentage(newValue).updateTable();
+            ],
+
+            valuechangeCallback: function (newValue) {
+                table.setTableOYByPercentage(newValue).updateTable();
+            }
         });
         this.add.graphics()
             .lineStyle(3, 0x55ff55, 1)

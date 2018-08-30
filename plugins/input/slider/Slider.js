@@ -27,7 +27,14 @@ class Slider extends EE {
                 y: 0
             }
         ];
-        this.gameObject.setInteractive(GetValue(config, "inputConfig", undefined));        
+
+        var callback = GetValue(config, 'valuechangeCallback', null);
+        if (callback !== null) {
+            var scope = GetValue(config, 'valuechangeCallbackScope', undefined);
+            this.on('valuechange', callback, scope);
+        }
+
+        this.gameObject.setInteractive(GetValue(config, "inputConfig", undefined));
         this.resetFromJSON(config);
         this.boot();
     }

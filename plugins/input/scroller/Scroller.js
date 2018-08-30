@@ -28,6 +28,23 @@ class Scroller extends EE {
 
         this._value = undefined;
         this._slowDown = new SlowDown();
+
+        var callback = GetValue(config, 'valuechangeCallback', null);
+        if (callback !== null) {
+            var scope = GetValue(config, 'valuechangeCallbackScope', undefined);
+            this.on('valuechange', callback, scope);
+        }
+        callback = GetValue(config, 'overmaxCallback', null);
+        if (callback !== null) {
+            var scope = GetValue(config, 'overmaxCallbackScope', undefined);
+            this.on('overmax', callback, scope);
+        }
+        callback = GetValue(config, 'overminCallback', null);
+        if (callback !== null) {
+            var scope = GetValue(config, 'overminCallbackScope', undefined);
+            this.on('overmin', callback, scope);
+        }
+
         this.resetFromJSON(config);
         this.boot();
     }
@@ -105,7 +122,7 @@ class Scroller extends EE {
     }
 
     set value(value) {
-        var oldValue = this._value;      
+        var oldValue = this._value;
 
         var isOverMax = this.overMax(value);
         var isOverMin = this.overMin(value);
@@ -172,7 +189,7 @@ class Scroller extends EE {
     }
 
     get backEnable() {
-        return (typeof(this.backDeceleration) === 'number');
+        return (typeof (this.backDeceleration) === 'number');
     }
 
     get isPullBack() {
@@ -180,7 +197,7 @@ class Scroller extends EE {
     }
 
     get slidingEnable() {
-        return (typeof(this.slidingDeceleration) === 'number');
+        return (typeof (this.slidingDeceleration) === 'number');
     }
 
     get isSliding() {
@@ -245,7 +262,7 @@ class Scroller extends EE {
         var start = this.value;
         var end = (this.outOfMinBound) ? this.minValue : this.maxValue;
         var dist = Math.abs(end - start);
-        var dec = this.backDeceleration;        
+        var dec = this.backDeceleration;
         var speed = Math.sqrt(2 * dec * dist);
         this._slowDown.init(start, undefined, speed, dec, end);
     }

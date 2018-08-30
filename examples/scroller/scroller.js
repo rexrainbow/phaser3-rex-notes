@@ -72,9 +72,11 @@ class Demo extends Phaser.Scene {
             ],
             value: topBound,
             slidingDeceleration: slidingDeceleration,
-            backDeceleration: backDeceleration
-        }).on('valuechange', function (value) {
-            txt.y = value;
+            backDeceleration: backDeceleration,
+
+            valuechangeCallback: function(newValue) {
+                txt.y = newValue;
+            }
         });
 
         this.scrollerState = this.add.text(0, 0, '');

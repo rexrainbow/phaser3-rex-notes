@@ -53,13 +53,17 @@ var slider = scene.plugins.get('rexSlider').add(gameObject, {
     //     {x:0, y:0}
     // ],
     // value: 0,
-    // enable: true
+    // enable: true,
+
+    // valuechangeCallback: null,
+    // valuechangeCallbackScope: null
 });
 ```
 
 - `endPoints` : An array of 2 end-points (`[{x,y}, {x,y}]`)
 - `value` : Initial value between 0 to 1
 - `enable` : Set true to drag thumb
+- `valuechangeCallback` , `valuechangeCallbackScope` : Bind this callback to [`valuechange` event](slider.md#events)
 
 ### Set end-points
 

@@ -28,16 +28,6 @@ class GridTable extends Container {
         this.execeedLeftState = false;
         this.execeedRightState = false;
 
-        var mask = GetValue(config, 'mask', true);
-        if (mask === true) {
-            mask = this.getDefaultMask();
-        }
-        if (mask) {
-            this.setMask(mask);
-        }
-
-        this.setScrollMode(GetValue(config, 'scrollMode', 0));
-        this.setClampMode(GetValue(config, 'clamplTableOXY', true));
         var callback = GetValue(config, 'cellVisibleCallback', null);
         if (callback !== null) {
             var scope = GetValue(config, 'cellVisibleCallbackScope', undefined);
@@ -48,6 +38,17 @@ class GridTable extends Container {
             var scope = GetValue(config, 'cellInvisibleCallbackScope', undefined);
             this.on('cellinvisible', callback, scope);
         }
+
+        var mask = GetValue(config, 'mask', true);
+        if (mask === true) {
+            mask = this.getDefaultMask();
+        }
+        if (mask) {
+            this.setMask(mask);
+        }
+
+        this.setScrollMode(GetValue(config, 'scrollMode', 0));
+        this.setClampMode(GetValue(config, 'clamplTableOXY', true));
         this.table = new Table(this, config);
         this.updateTable();
     }
