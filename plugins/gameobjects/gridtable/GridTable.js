@@ -65,7 +65,7 @@ class GridTable extends Container {
     }
 
     setCellsCount(count) {
-        var cellsCount = this.table.cellsCount;
+        var cellsCount = this.cellsCount;
         if (cellsCount === count) {
             return this;
         }
@@ -103,7 +103,7 @@ class GridTable extends Container {
         if (count <= 0) {
             return this;
         }
-        cellIdx = Clamp(cellIdx, 0, this.table.cellsCount);
+        cellIdx = Clamp(cellIdx, 0, this.cellsCount);
         this.table.insertNewCell(cellIdx, count);
         if (cellIdx <= this.lastVisibleCellIdx) {
             this.updateFlag = true;
@@ -126,7 +126,7 @@ class GridTable extends Container {
             return this;
         }
         // out-of-range
-        if (cellIdx > this.table.cellsCount) {
+        if (cellIdx > this.cellsCount) {
             return this;
         }
 
@@ -321,6 +321,10 @@ class GridTable extends Container {
         return this.table.cellsCount;
     }
 
+    get columnCount() {
+        return this.table.colCount;
+    }
+
     setCellHeight(cellIdx, height) {
         if (typeof (cellIdx) === 'number') {
             var cell = this.table.getCell(cellIdx, true);
@@ -470,6 +474,14 @@ class GridTable extends Container {
         return (this.scrollMode === 0) ? this.width : this.height;
     }
 
+    get tableHeight() {
+        return this.table.totalRowsHeight;
+    }
+
+    get tableWidth() {
+        return this.table.totalColumnWidth;
+    }
+
     get topTableOY() {
         return 0;
     }
@@ -516,10 +528,10 @@ class GridTable extends Container {
 
     get tableVisibleHeight() {
         var h;
-        var totalRowsHeight = this.table.totalRowsHeight;
+        var tableHeight = this.tableHeight;
         var instHeight = this.instHeight;
-        if (totalRowsHeight > instHeight) {
-            h = totalRowsHeight - instHeight;
+        if (tableHeight > instHeight) {
+            h = tableHeight - instHeight;
         } else {
             h = 0;
         }
@@ -529,12 +541,12 @@ class GridTable extends Container {
 
     get tableVisibleWidth() {
         var w;
-        var totalColumnWidth = this.table.totalColumnWidth;
+        var tableWidth = this.tableWidth;
         var instWidth = this.instWidth;
-        if (totalColumnWidth > instWidth) {
-            w = totalColumnWidth - instWidth;
+        if (tableWidth > instWidth) {
+            w = tableWidth - instWidth;
         } else {
-            w = totalColumnWidth;
+            w = tableWidth;
         }
         return w;
     };

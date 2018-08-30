@@ -165,7 +165,8 @@ These will trigger `cellvisible`, or `cellinvisible` events.
     //var t = table.t;
     ```
 
-Table could be scrolled by [slider](slider.md) behavior.
+!!! note "Use-case"
+    Scroll table by [slider](slider.md) behavior.
 
 ### Refresh table content
 
@@ -186,11 +187,31 @@ table.updateTable(true);
     table.setCellsCunt(count).updateTable();
     ```
 
-### Set table size
+### Table size in cells
 
-```javascript
-table.setGridSize(colCount, rowCount).updateTable();
-```
+- Set table size
+    ```javascript
+    table.setGridSize(colCount, rowCount).updateTable();
+    ```
+- Get total cells count
+    ```javascript
+    var cellsCount = table.cellsCount;
+    ```
+- Get column count
+    ```javascript
+    var columnCount = table.columnCount;
+    ```
+
+### Table size in pixels
+
+- Table height in pixels
+    ```javascript
+    var tableHeight = table.tableHeight;
+    ```
+- Table width in pixels
+    ```javascript
+    var tableWidth = table.tableWidth;
+    ```
 
 #### Set columns count
 

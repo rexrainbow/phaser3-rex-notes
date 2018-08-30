@@ -1020,8 +1020,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#set-table-size" title="Set table size" class="md-nav__link">
-    Set table size
+  <a href="#table-size-in-cells" title="Table size in cells" class="md-nav__link">
+    Table size in cells
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#table-size-in-pixels" title="Table size in pixels" class="md-nav__link">
+    Table size in pixels
   </a>
   
     <nav class="md-nav">
@@ -2669,8 +2676,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#set-table-size" title="Set table size" class="md-nav__link">
-    Set table size
+  <a href="#table-size-in-cells" title="Table size in cells" class="md-nav__link">
+    Table size in cells
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#table-size-in-pixels" title="Table size in pixels" class="md-nav__link">
+    Table size in pixels
   </a>
   
     <nav class="md-nav">
@@ -2915,7 +2929,10 @@
 <span class="c1">//var t = table.t;</span>
 </pre></div></li>
 </ul>
-<p>Table could be scrolled by <a href="../slider/index.html">slider</a> behavior.</p>
+<div class="admonition note">
+<p class="admonition-title">Use-case</p>
+<p>Scroll table by <a href="../slider/index.html">slider</a> behavior.</p>
+</div>
 <h3 id="refresh-table-content">Refresh table content<a class="headerlink" href="#refresh-table-content" title="Permanent link">&para;</a></h3>
 <p>Refresh all visible cells.</p>
 <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">updateTable</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
@@ -2930,10 +2947,27 @@
     <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">setCellsCunt</span><span class="p">(</span><span class="nx">count</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
 </pre></div></li>
 </ul>
-<h3 id="set-table-size">Set table size<a class="headerlink" href="#set-table-size" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">setGridSize</span><span class="p">(</span><span class="nx">colCount</span><span class="p">,</span> <span class="nx">rowCount</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
-</pre></div>
-
+<h3 id="table-size-in-cells">Table size in cells<a class="headerlink" href="#table-size-in-cells" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Set table size
+    <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">setGridSize</span><span class="p">(</span><span class="nx">colCount</span><span class="p">,</span> <span class="nx">rowCount</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
+</pre></div></li>
+<li>Get total cells count
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cellsCount</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">cellsCount</span><span class="p">;</span>
+</pre></div></li>
+<li>Get column count
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">columnCount</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">columnCount</span><span class="p">;</span>
+</pre></div></li>
+</ul>
+<h3 id="table-size-in-pixels">Table size in pixels<a class="headerlink" href="#table-size-in-pixels" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Table height in pixels
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tableHeight</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">tableHeight</span><span class="p">;</span>
+</pre></div></li>
+<li>Table width in pixels
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tableWidth</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">tableWidth</span><span class="p">;</span>
+</pre></div></li>
+</ul>
 <h4 id="set-columns-count">Set columns count<a class="headerlink" href="#set-columns-count" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">setColumnCount</span><span class="p">(</span><span class="nx">count</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
 </pre></div>
