@@ -165,7 +165,7 @@ These will trigger `cellvisible`, or `cellinvisible` events.
     //var t = table.t;
     ```
 
-!!! note "Use-case"
+!!! note "Use case"
     Scroll table by [slider](slider.md) behavior.
 
 ### Refresh table content
@@ -176,7 +176,14 @@ Refresh all visible cells.
 table.updateTable(true);
 ```
 
-### Total cells count
+### Table size in cells
+
+- Set table size
+    ```javascript
+    table.setGridSize(colCount, rowCount).updateTable();
+    ```
+
+#### Total cells count
 
 - Get
     ```javascript
@@ -187,19 +194,15 @@ table.updateTable(true);
     table.setCellsCunt(count).updateTable();
     ```
 
-### Table size in cells
+#### Columns count
 
-- Set table size
-    ```javascript
-    table.setGridSize(colCount, rowCount).updateTable();
-    ```
-- Get total cells count
-    ```javascript
-    var cellsCount = table.cellsCount;
-    ```
-- Get column count
+- Get
     ```javascript
     var columnCount = table.columnCount;
+    ```
+- Set
+    ```javascript
+    table.setColumnCount(count).updateTable();
     ```
 
 ### Table size in pixels
@@ -212,12 +215,6 @@ table.updateTable(true);
     ```javascript
     var tableWidth = table.tableWidth;
     ```
-
-#### Set columns count
-
-```javascript
-table.setColumnCount(count).updateTable();
-```
 
 ### Bounds of tableOX, tableOY
 
@@ -238,7 +235,7 @@ table.setColumnCount(count).updateTable();
     var rightTableOX = table.rightTableOX;
     ```
 
-!!! note "Use-case"
+!!! note "Use case"
     Set bounds of [scroller](scroller.md)
 
 ### Cell
