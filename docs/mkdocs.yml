@@ -117,7 +117,8 @@ pages:
         - Rectangle: geom-rectangle.md
         - Line: geom-line.md
         - Point: geom-point.md
-        - Ellipse: geom-ellipse.md        
+        - Ellipse: geom-ellipse.md
+        - Triangle: geom-triangle.md        
         - Polygon: geom-polygon.md
     - Path: path.md
 - String:

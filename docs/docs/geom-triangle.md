@@ -33,10 +33,12 @@ var triangle = Phaser.Geom.Triangle.BuildRight(x1, y1, width, height);
 #### [Polygon](geom-polygon.md) to triangles
 
 ```javascript
-var out = Phaser.Geom.Triangle.BuildFromPolygon(data, holes, scaleX, scaleY);
+var out = Phaser.Geom.Triangle.BuildFromPolygon(data);
+// var out = Phaser.Geom.Triangle.BuildFromPolygon(data, holes, scaleX, scaleY);
 // out = Phaser.Geom.Triangle.BuildFromPolygon(data, holes, scaleX, scaleY, out);
 ```
 
+- `data` : A flat array of vertice coordinates like `[x0,y0, x1,y1, x2,y2, ...]`
 - `out` : Array of triangles
 
 ### Draw on [graphics](graphics.md)
@@ -84,6 +86,23 @@ var out = Phaser.Geom.Triangle.BuildFromPolygon(data, holes, scaleX, scaleY);
     ```javascript
     Phaser.Geom.Triangle.CenterOn(triangle, x, y);
     ```
+- Rotate
+    - Rotate around center (incenter)
+        ```javascript
+        var triangle = Phaser.Geom.Triangle.Rotate(triangle, angle);
+        ```
+        - `angle` : Radian
+    - Rotate around point
+        ```javascript
+        var triangle = Phaser.Geom.Triangle.RotateAroundPoint(triangle, point, angle);
+        ```
+        - `point` : `{x, y}`
+        - `angle` : Radian
+    - Rotate around (x,y)
+        ```javascript
+        var triangle = Phaser.Geom.Triangle.RotateAroundXY(triangle, x, y, angle);
+        ```
+        - `angle` : Radian    
 
 ### Get properties
 
@@ -100,10 +119,15 @@ var out = Phaser.Geom.Triangle.BuildFromPolygon(data, holes, scaleX, scaleY);
     var right = triangle.right;
     var bottom = triangle.bottom;
     ```
-    - Centroid
-        ```javascript
-        var centroid = Phaser.Geom.Triangle.Centroid(triangle);
-        ```
+    or
+    ```javascript
+    var out = Phaser.Geom.Triangle.Decompose(triangle);  // out: [{x1,y1}, {x2,y2}, {x3,y3}]
+    // var out = Phaser.Geom.Triangle.Decompose(triangle, out);
+    ```
+- Perimeter
+    ```javascript
+    var perimeter = Phaser.Geom.Triangle.Perimeter(triangle);
+    ```
 - Area
     ```javascript
     var area = Phaser.Geom.Triangle.Area(triangle);
@@ -113,6 +137,25 @@ var out = Phaser.Geom.Triangle.BuildFromPolygon(data, holes, scaleX, scaleY);
     var line12 = rect.getLineA();     // line from (x1, y1) to (x2, y2)
     var line23 = rect.getLineB();     // line from (x2, y2) to (x3, y3)
     var line31 = rect.getLineC();     // line from (x3, y3) to (x1, y1)
+    ```
+- Centroid
+    ```javascript
+    var out = Phaser.Geom.Triangle.Centroid(triangle);  // out: {x,y}
+    ```
+- Incenter
+    ```javascript
+    var out = Phaser.Geom.Triangle.InCenter(triangle);  // out: {x,y}
+    // var out = Phaser.Geom.Triangle.InCenter(triangle, out);
+    ```
+- Circumcenter
+    ```javascript
+    var out = Phaser.Geom.Triangle.CircumCenter(triangle);  // out: {x,y}
+    // var out = Phaser.Geom.Triangle.CircumCenter(triangle, out);
+    ```
+- Circumcircle
+    ```javascript
+    var out = Phaser.Geom.Triangle.CircumCircle(triangle);  // out: a circle object
+    // var out = Phaser.Geom.Triangle.CircumCircle(triangle, out);
     ```
 
 ### Point(s) & shape
@@ -146,6 +189,13 @@ var out = Phaser.Geom.Triangle.BuildFromPolygon(data, holes, scaleX, scaleY);
     ```javascript
     var isInside = Phaser.Geom.Triangle.ContainsPoint(triangle, point);
     ```
+    - Points inside shape
+        ```javascript
+        var out = Phaser.Geom.Triangle.ContainsArray(triangle, points, returnFirst);
+        // var out = Phaser.Geom.Triangle.ContainsArray(triangle, points, returnFirst, out);
+        ```
+        - `out` : Points inside triangle
+        - `returnFirst` : True to get fist matched point
 
 ### Equal
 
