@@ -103,19 +103,21 @@ class Button extends EE {
     }
 
     click(nowTime) {
-        var pointer = this.pointer;
-        this.pointer = undefined;
+        if (nowTime === undefined) {
+            // fires 'click' event manually
+            this.emit('click', this, this.gameObject);
+            return this;
+        }
 
+        this.pointer = undefined;
         var lastClickTime = this.lastClickTime;
-        if ((nowTime !== undefined) &&
-            (lastClickTime !== undefined) &&
+        if ((lastClickTime !== undefined) &&
             ((nowTime - lastClickTime) <= this.clickInterval)) {
-            return;
+            return this;
         }
-        if (nowTime !== undefined) {
-            this.lastClickTime = nowTime;
-        }
+        this.lastClickTime = nowTime;
         this.emit('click', this, this.gameObject);
+        return this;
     }
 }
 

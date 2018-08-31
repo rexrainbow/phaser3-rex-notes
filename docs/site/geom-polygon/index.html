@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/fsm/index.html">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/geom-polygon/index.html">
       
       
         <meta name="author" content="rexrainbow">
@@ -36,7 +36,7 @@
     
     
       
-        <title>FSM - Notes of Phaser 3</title>
+        <title>Polygon - Notes of Phaser 3</title>
       
     
     
@@ -96,7 +96,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                FSM
+                Polygon
               </span>
             
           
@@ -1420,12 +1420,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
     
     <label class="md-nav__link" for="nav-9">
       Logic
@@ -1561,178 +1559,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="toc">
-        FSM
-      </label>
-    
-    <a href="index.html" title="FSM" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../fsm/index.html" title="FSM" class="md-nav__link">
       FSM
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#source-code" title="Source code" class="md-nav__link">
-    Source code
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#new-class" title="New class" class="md-nav__link">
-    New class
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#import-fsm-class" title="Import FSM class" class="md-nav__link">
-    Import FSM class
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#create-new-class" title="Create new class" class="md-nav__link">
-    Create new class
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#create-by-config" title="Create by config" class="md-nav__link">
-    Create by config
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
-    Install global plugin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#create-instance_1" title="Create instance" class="md-nav__link">
-    Create instance
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#read-state" title="Read state" class="md-nav__link">
-    Read state
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#start-at-state" title="Start at state" class="md-nav__link">
-    Start at state
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#next-state" title="Next state" class="md-nav__link">
-    Next state
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#request" title="Request" class="md-nav__link">
-    Request
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#state-changing" title="State-changing" class="md-nav__link">
-    State-changing
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#enable" title="Enable" class="md-nav__link">
-    Enable
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-        <li class="md-nav__item">
-          <a href="#__comments" title="Comments" class="md-nav__link md-nav__link--active">
-            Comments
-          </a>
-        </li>
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -1913,10 +1744,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11" checked>
     
     <label class="md-nav__link" for="nav-11">
       Math
@@ -2088,10 +1921,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11-6" type="checkbox" id="nav-11-6">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11-6" type="checkbox" id="nav-11-6" checked>
     
     <label class="md-nav__link" for="nav-11-6">
       Geometry
@@ -2167,11 +2002,110 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../geom-polygon/index.html" title="Polygon" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Polygon
+      </label>
+    
+    <a href="index.html" title="Polygon" class="md-nav__link md-nav__link--active">
       Polygon
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-shape" title="Create shape" class="md-nav__link">
+    Create shape
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#clone-shape" title="Clone shape" class="md-nav__link">
+    Clone shape
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#draw-on-graphics" title="Draw on graphics" class="md-nav__link">
+    Draw on graphics
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-properties" title="Set properties" class="md-nav__link">
+    Set properties
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-properties" title="Get properties" class="md-nav__link">
+    Get properties
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#points-shape" title="Point(s) &amp; shape" class="md-nav__link">
+    Point(s) &amp; shape
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+        <li class="md-nav__item">
+          <a href="#__comments" title="Comments" class="md-nav__link md-nav__link--active">
+            Comments
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -2619,13 +2553,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#source-code" title="Source code" class="md-nav__link">
-    Source code
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#usage" title="Usage" class="md-nav__link">
     Usage
   </a>
@@ -2634,30 +2561,16 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#new-class" title="New class" class="md-nav__link">
-    New class
+  <a href="#create-shape" title="Create shape" class="md-nav__link">
+    Create shape
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#import-fsm-class" title="Import FSM class" class="md-nav__link">
-    Import FSM class
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#create-new-class" title="Create new class" class="md-nav__link">
-    Create new class
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
+  <a href="#clone-shape" title="Clone shape" class="md-nav__link">
+    Clone shape
   </a>
   
 </li>
@@ -2668,76 +2581,29 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-by-config" title="Create by config" class="md-nav__link">
-    Create by config
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
-    Install global plugin
+  <a href="#draw-on-graphics" title="Draw on graphics" class="md-nav__link">
+    Draw on graphics
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-instance_1" title="Create instance" class="md-nav__link">
-    Create instance
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#read-state" title="Read state" class="md-nav__link">
-    Read state
+  <a href="#set-properties" title="Set properties" class="md-nav__link">
+    Set properties
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#start-at-state" title="Start at state" class="md-nav__link">
-    Start at state
+  <a href="#get-properties" title="Get properties" class="md-nav__link">
+    Get properties
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#next-state" title="Next state" class="md-nav__link">
-    Next state
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#request" title="Request" class="md-nav__link">
-    Request
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#state-changing" title="State-changing" class="md-nav__link">
-    State-changing
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#enable" title="Enable" class="md-nav__link">
-    Enable
+  <a href="#points-shape" title="Point(s) &amp; shape" class="md-nav__link">
+    Point(s) &amp; shape
   </a>
   
 </li>
@@ -2768,199 +2634,85 @@
               
                 
                 
-                  <h1>FSM</h1>
+                  <h1>Polygon</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p><a href="https://en.wikipedia.org/wiki/Finite-state_machine">Finite state machine</a>.</p>
+<p>Polygon shape and methods, built-in methods of phaser.</p>
 <ul>
-<li>Author: Rex</li>
-<li>Object</li>
+<li>Author: Richard Davey</li>
 </ul>
-<h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/fsm-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexfsmplugin.min.js">minify</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/fsm">Sample code</a></p>
-<h3 id="new-class">New class<a class="headerlink" href="#new-class" title="Permanent link">&para;</a></h3>
-<h4 id="import-fsm-class">Import FSM class<a class="headerlink" href="#import-fsm-class" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">FSM</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/fsm.js&#39;</span><span class="p">;</span>
+<h3 id="create-shape">Create shape<a class="headerlink" href="#create-shape" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">polygon</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">([</span>
+    <span class="nx">x0</span><span class="p">,</span> <span class="nx">y0</span><span class="p">,</span>
+    <span class="nx">x1</span><span class="p">,</span> <span class="nx">y1</span><span class="p">,</span>
+    <span class="nx">x2</span><span class="p">,</span> <span class="nx">y2</span><span class="p">,</span>
+    <span class="c1">// ...</span>
+<span class="p">]);</span>
 </pre></div>
 
-<h4 id="create-new-class">Create new class<a class="headerlink" href="#create-new-class" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">State</span> <span class="kr">extends</span> <span class="nx">FSM</span> <span class="p">{</span>
-    <span class="nx">constructor</span><span class="p">()</span> <span class="p">{</span>
-        <span class="kr">super</span><span class="p">();</span>
-    <span class="p">}</span>
-
-    <span class="nx">next_A</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="s1">&#39;B&#39;</span> <span class="p">}</span>
-
-    <span class="nx">enter_A</span><span class="p">()</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
-
-    <span class="nx">exit_A</span><span class="p">()</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
-<span class="p">}</span>
+<p>or</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">polygon</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">([</span>
+    <span class="nx">point0</span><span class="p">,</span>    <span class="c1">// {x, y}</span>
+    <span class="nx">point1</span><span class="p">,</span>    <span class="c1">// {x, y}</span>
+    <span class="nx">point2</span><span class="p">,</span>    <span class="c1">// {x, y}</span>
+    <span class="c1">// ...</span>
+<span class="p">]);</span>
 </pre></div>
 
-<p>Members:</p>
+<h4 id="clone-shape">Clone shape<a class="headerlink" href="#clone-shape" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">polygon1</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">.</span><span class="nx">Clone</span><span class="p">(</span><span class="nx">polygon0</span><span class="p">);</span>
+</pre></div>
+
+<h3 id="draw-on-graphics">Draw on <a href="../graphics/index.html">graphics</a><a class="headerlink" href="#draw-on-graphics" title="Permanent link">&para;</a></h3>
 <ul>
-<li><code>next_</code> + stateName: Callback to get next state.</li>
-<li><code>enter_</code> + stateName: Callback when enter state.</li>
-<li><code>exit_</code> + stateName: Callback when exit state.</li>
+<li>Fill shape
+    <div class="codehilite"><pre><span></span><span class="nx">graphics</span><span class="p">.</span><span class="nx">fillPoints</span><span class="p">(</span><span class="nx">polygon</span><span class="p">.</span><span class="nx">points</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</pre></div></li>
+<li>Stroke shape
+    <div class="codehilite"><pre><span></span><span class="nx">graphics</span><span class="p">.</span><span class="nx">strokePoints</span><span class="p">(</span><span class="nx">polygon</span><span class="p">.</span><span class="nx">points</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</pre></div></li>
 </ul>
-<h4 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">State</span><span class="p">();</span>
+<h3 id="set-properties">Set properties<a class="headerlink" href="#set-properties" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">polygon</span><span class="p">.</span><span class="nx">setTo</span><span class="p">(</span><span class="nx">points</span><span class="p">);</span>
+<span class="c1">// points = [x0, y0, x1, y1, x2, y2, ...] , or [{x,y}, {x,y}, {x,y}, ...]</span>
 </pre></div>
 
-<h3 id="create-by-config">Create by config<a class="headerlink" href="#create-by-config" title="Permanent link">&para;</a></h3>
-<h4 id="install-global-plugin">Install global plugin<a class="headerlink" href="#install-global-plugin" title="Permanent link">&para;</a></h4>
-<p>Install plugin in <a href="../game/index.html#configuration">configuration of game</a></p>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">FSMPlugin</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/fsm-plugin.js&#39;</span><span class="p">;</span>
-
-<span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="c1">// ...</span>
-    <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
-            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexFSM&#39;</span><span class="p">,</span>
-            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">FSMPlugin</span><span class="p">,</span>
-            <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
-        <span class="p">},</span>
-        <span class="c1">// ...</span>
-        <span class="p">]</span>
-    <span class="p">}</span>
-    <span class="c1">// ...</span>
-<span class="p">};</span>
-<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="create-instance_1">Create instance<a class="headerlink" href="#create-instance_1" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="nx">start</span><span class="o">:</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span>   <span class="c1">// default: undefined</span>
-    <span class="nx">states</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">A</span><span class="o">:</span> <span class="p">{</span>
-            <span class="nx">next</span><span class="o">:</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span>  <span class="c1">// function() { return &#39;B&#39;; }</span>
-            <span class="nx">enter</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{},</span>
-            <span class="nx">exit</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{}</span>
-        <span class="p">},</span>
-        <span class="c1">// ...</span>
-    <span class="p">},</span>
-    <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{},</span>
-    <span class="nx">extend</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">i</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;abc&#39;</span>
-        <span class="c1">// ...</span>
-    <span class="p">},</span>
-    <span class="nx">enable</span><span class="o">:</span> <span class="kc">true</span>
-<span class="p">}</span>
-<span class="kd">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexFSM&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span>
-</pre></div>
-
+<h3 id="get-properties">Get properties<a class="headerlink" href="#get-properties" title="Permanent link">&para;</a></h3>
 <ul>
-<li><code>start</code>: Initial state.</li>
-<li><code>states</code>: Define states.<ul>
-<li>stateName<ul>
-<li><code>next</code>: String of next state, or a callback to get next state.</li>
-<li><code>enter</code>: Callback when enter state.</li>
-<li><code>exit</code>: Callback when exit state.</li>
+<li>Points
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="nx">polygon</span><span class="p">.</span><span class="nx">points</span><span class="p">;</span>    <span class="c1">// array of points {x,y}</span>
+</pre></div></li>
+<li>Area
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">area</span> <span class="o">=</span> <span class="nx">polygon</span><span class="p">.</span><span class="nx">area</span><span class="p">;</span>
+</pre></div></li>
+<li>Number array
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">.</span><span class="nx">GetNumberArray</span><span class="p">(</span><span class="nx">polygon</span><span class="p">);</span>
+<span class="c1">// var out = Phaser.Geom.Polygon.GetNumberArray(polygon, out);  // modify out</span>
+</pre></div><ul>
+<li><code>arr</code> : [x0, y0, x1, y1, x2, y2, ...]</li>
+</ul>
+</li>
+<li>AABB (A minimum rectangle to cover this polygon)
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">.</span><span class="nx">GetAABB</span><span class="p">(</span><span class="nx">polygon</span><span class="p">);</span>
+<span class="c1">// var out = Phaser.Geom.Polygon.GetAABB(polygon, out);</span>
+</pre></div><ul>
+<li><code>out</code> : A <a href="../geom-rectangle/index.html">rectangle object</a></li>
 </ul>
 </li>
 </ul>
-</li>
-<li><code>init</code>: Initial callback when creating instance.</li>
-<li><code>extend</code>: Inject key-value pairs into instance.</li>
-<li><code>enable</code>: Set false to block any state changing.</li>
-</ul>
-<h3 id="read-state">Read state<a class="headerlink" href="#read-state" title="Permanent link">&para;</a></h3>
+<h3 id="points-shape">Point(s) &amp; shape<a class="headerlink" href="#points-shape" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Current state
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">curState</span> <span class="o">=</span> <span class="nx">state</span><span class="p">.</span><span class="nx">state</span><span class="p">;</span>
+<li>Point is inside shape
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isInside</span> <span class="o">=</span> <span class="nx">polygon</span><span class="p">.</span><span class="nx">contains</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isInside</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">.</span><span class="nx">ContainsPoint</span><span class="p">(</span><span class="nx">polygon</span><span class="p">,</span> <span class="nx">point</span><span class="p">);</span>
 </pre></div></li>
-<li>Previous state
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">preState</span> <span class="o">=</span> <span class="nx">state</span><span class="p">.</span><span class="nx">prevState</span><span class="p">;</span>
+<li>Reverse the order of points
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">polygon</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Polygon</span><span class="p">.</span><span class="nx">Reverse</span><span class="p">(</span><span class="nx">polygon</span><span class="p">);</span>
 </pre></div></li>
 </ul>
-<h3 id="start-at-state">Start at state<a class="headerlink" href="#start-at-state" title="Permanent link">&para;</a></h3>
-<p>Set new state without triggering any <a href="index.html#state-changing">state-changing</a> callbacks or events.</p>
-<div class="codehilite"><pre><span></span><span class="nx">state</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="nx">newState</span><span class="p">);</span>
-</pre></div>
-
-<h3 id="next-state">Next state<a class="headerlink" href="#next-state" title="Permanent link">&para;</a></h3>
-<pre class="mermaid"><code>graph TB
-
-next[&quot;state.next()&quot;] --&gt; next_A[&quot;state.next_A()&lt;br&gt;return 'B'&quot;]
-
-next_A --&gt; eventStateChange[&quot;state.emit('statechange', state)&lt;br&gt;state.prevState -&gt; state.state&quot;]
-
-subgraph State changing
-
-eventStateChange --&gt; exit_A[&quot;state.exit_A()&quot;]
-exit_A --&gt; eventExitA[&quot;state.emit('exit_A', state)&quot;]
-
-eventExitA --&gt; enter_B[&quot;state.enter_B()&quot;]
-enter_B --&gt; eventEnterB[&quot;state.emit('enter_B', state)&quot;]
-
-subgraph Exit
-exit_A
-eventExitA
-end
-
-subgraph Enter
-enter_B
-eventEnterB
-end
-
-end
-
-goto[&quot;state.goto('B')&quot;] --&gt; eventStateChange
-
-subgraph Request
-
-subgraph Next
-next
-next_A
-end
-
-subgraph Goto
-goto
-end
-
-end</code></pre>
-
-<h4 id="request">Request<a class="headerlink" href="#request" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Get next state by callback
-    <div class="codehilite"><pre><span></span><span class="nx">state</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span>    <span class="c1">// nextState = state.next_A()    </span>
-</pre></div></li>
-<li>Goto state
-    <div class="codehilite"><pre><span></span><span class="nx">state</span><span class="p">.</span><span class="kr">goto</span><span class="p">(</span><span class="nx">nextState</span><span class="p">);</span>
-<span class="c1">// state.state = nextState;</span>
-</pre></div></li>
-</ul>
-<h4 id="state-changing">State-changing<a class="headerlink" href="#state-changing" title="Permanent link">&para;</a></h4>
-<p>These callbacks or events will be triggered if state is changing.</p>
-<p>For example, state is changing from 'A' to 'B'.</p>
-<ol>
-<li>event <code>statechange</code>
-    <div class="codehilite"><pre><span></span><span class="nx">state</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;statechange&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">state</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">state</span><span class="p">.</span><span class="nx">prevState</span> <span class="o">+</span> <span class="s1">&#39;-&gt;&#39;</span> <span class="o">+</span> <span class="nx">state</span><span class="p">.</span><span class="nx">state</span> <span class="p">);</span>
-<span class="p">});</span>
-</pre></div></li>
-<li>callback <code>state.exit_A</code></li>
-<li>event <code>exit_A</code>
-    <div class="codehilite"><pre><span></span><span class="nx">state</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;exit_A&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">state</span><span class="p">)</span> <span class="p">{</span>
-    <span class="cm">/*...*/</span>
-<span class="p">});</span>
-</pre></div></li>
-<li>callback <code>state.enter_B</code></li>
-<li>event <code>enter_B</code>
-    <div class="codehilite"><pre><span></span><span class="nx">state</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;enter_B&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">state</span><span class="p">)</span> <span class="p">{</span>
-    <span class="cm">/*...*/</span>
-<span class="p">});</span>
-</pre></div></li>
-</ol>
-<h3 id="enable">Enable<a class="headerlink" href="#enable" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">state</span><span class="p">.</span><span class="nx">setEnable</span><span class="p">();</span>
-<span class="c1">// state.setEnable(false); // disable</span>
-</pre></div>
-
-<p><code>state.next()</code> and <code>state.goto()</code> will be ignored if disabled.</p>
                 
                   
                 
@@ -2971,9 +2723,9 @@ end</code></pre>
                   <div id="disqus_thread"></div>
 <script>
   var disqus_config = function () {
-    this.page.url = "https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/fsm/index.html";
+    this.page.url = "https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/geom-polygon/index.html";
     this.page.identifier =
-      "/fsm/index.html";
+      "/geom-polygon/index.html";
   };
   (function() {
     var d = document, s = d.createElement("script");
@@ -2995,7 +2747,7 @@ end</code></pre>
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../tcrpplayerplugin/index.html" title="Player" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../geom-ellipse/index.html" title="Ellipse" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -3004,19 +2756,19 @@ end</code></pre>
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Player
+                Ellipse
               </span>
             </div>
           </a>
         
         
-          <a href="../datamanager/index.html" title="Data manager" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../path/index.html" title="Path" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Data manager
+                Path
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

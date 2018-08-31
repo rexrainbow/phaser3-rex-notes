@@ -218,11 +218,11 @@ x1, y2, x2, y2 are equal.
     ```javascript
     var result = Phaser.Geom.Intersects.LineToRectangle(line, rect);
     ```
-- Line to triangle
+- Line to [triangle](geom-triangle.md)
     ```javascript
     var result = Phaser.Geom.Intersects.TriangleToLine(triangle, line);
     ```
-- Line to line
+- Line to [line](geom-line.md)
     ```javascript
     var result = Phaser.Geom.Intersects.LineToLine(line1, line2);
     // var result = Phaser.Geom.Intersects.LineToLine(line1, line2, out);  // out : intersected point

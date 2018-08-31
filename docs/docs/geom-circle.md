@@ -68,11 +68,11 @@ var circle1 = Phaser.Geom.Circle.Clone(circle0);
     ```
 - Radius
     ```javascript
-    circle.radius = 1;
+    circle.radius = radius;
     ```
     or
     ```javascript
-    circle.diameter = 2;  // diameter = 2 * radius
+    circle.diameter = diameter;  // diameter = 2 * radius
     ```
 
 ### Get properties
@@ -103,7 +103,7 @@ var circle1 = Phaser.Geom.Circle.Clone(circle0);
     ```
 - Circumference
     ```javascript
-    var circumference = Phaser.Geom.Circle.Circumference(circle);  // 2 * (Math.PI * circle.radius)
+    var circumference = Phaser.Geom.Circle.Circumference(circle);
     ```
 
 ### Point(s) & shape
@@ -122,7 +122,7 @@ var circle1 = Phaser.Geom.Circle.Clone(circle0);
     ```javascript
     var point = circle.getRandomPoint();
     // var point = circle.getRandomPoint(point);  // modify point
-    ```    
+    ```
 - Get points around shape's edge
     ```javascript
     var points = circle.getPoints(quantity);
@@ -168,7 +168,7 @@ Position and radius are equal.
 
 ### Intersection
 
-- Circle to circle
+- Circle to [circle](geom-circle.md)
     ```javascript
     var result = Phaser.Geom.Intersects.CircleToCircle(circleA, circleB);
     ```
@@ -176,9 +176,9 @@ Position and radius are equal.
     ```javascript
     var result = Phaser.Geom.Intersects.CircleToRectangle(circle, rect);
     ```
-- Circle to triangle
+- Circle to [triangle](geom-triangle.md)
     ```javascript
-    var result = Phaser.Geom.Intersects.TriangleToCircle(triangle, circle);
+    var result = Phaser.Geom.Intersects.TriangleToCircle(circle, circle);
     ```
 - Circle to [line](geom-line.md)
     ```javascript

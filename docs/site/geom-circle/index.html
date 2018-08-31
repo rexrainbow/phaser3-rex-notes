@@ -2106,6 +2106,30 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../geom-ellipse/index.html" title="Ellipse" class="md-nav__link">
+      Ellipse
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../geom-polygon/index.html" title="Polygon" class="md-nav__link">
+      Polygon
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -2709,10 +2733,10 @@
     <div class="codehilite"><pre><span></span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Circle</span><span class="p">.</span><span class="nx">OffsetPoint</span><span class="p">(</span><span class="nx">circle</span><span class="p">,</span> <span class="nx">point</span><span class="p">);</span> <span class="c1">// circle.x += point.x, circle.y += point.y</span>
 </pre></div></li>
 <li>Radius
-    <div class="codehilite"><pre><span></span><span class="nx">circle</span><span class="p">.</span><span class="nx">radius</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><span class="nx">circle</span><span class="p">.</span><span class="nx">radius</span> <span class="o">=</span> <span class="nx">radius</span><span class="p">;</span>
 </pre></div>
     or
-    <div class="codehilite"><pre><span></span><span class="nx">circle</span><span class="p">.</span><span class="nx">diameter</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>  <span class="c1">// diameter = 2 * radius</span>
+    <div class="codehilite"><pre><span></span><span class="nx">circle</span><span class="p">.</span><span class="nx">diameter</span> <span class="o">=</span> <span class="nx">diameter</span><span class="p">;</span>  <span class="c1">// diameter = 2 * radius</span>
 </pre></div></li>
 </ul>
 <h3 id="get-properties">Get properties<a class="headerlink" href="#get-properties" title="Permanent link">&para;</a></h3>
@@ -2740,7 +2764,7 @@
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">area</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Circle</span><span class="p">.</span><span class="nx">Area</span><span class="p">(</span><span class="nx">circle</span><span class="p">);</span>
 </pre></div></li>
 <li>Circumference
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">circumference</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Circle</span><span class="p">.</span><span class="nx">Circumference</span><span class="p">(</span><span class="nx">circle</span><span class="p">);</span>  <span class="c1">// 2 * (Math.PI * circle.radius)</span>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">circumference</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Circle</span><span class="p">.</span><span class="nx">Circumference</span><span class="p">(</span><span class="nx">circle</span><span class="p">);</span>
 </pre></div></li>
 </ul>
 <h3 id="points-shape">Point(s) &amp; shape<a class="headerlink" href="#points-shape" title="Permanent link">&para;</a></h3>
@@ -2794,14 +2818,14 @@
 <p>Position and radius are equal.</p>
 <h3 id="intersection">Intersection<a class="headerlink" href="#intersection" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Circle to circle
+<li>Circle to <a href="index.html">circle</a>
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Intersects</span><span class="p">.</span><span class="nx">CircleToCircle</span><span class="p">(</span><span class="nx">circleA</span><span class="p">,</span> <span class="nx">circleB</span><span class="p">);</span>
 </pre></div></li>
 <li>Circle to <a href="../geom-rectangle/index.html">rectangle</a>
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Intersects</span><span class="p">.</span><span class="nx">CircleToRectangle</span><span class="p">(</span><span class="nx">circle</span><span class="p">,</span> <span class="nx">rect</span><span class="p">);</span>
 </pre></div></li>
-<li>Circle to triangle
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Intersects</span><span class="p">.</span><span class="nx">TriangleToCircle</span><span class="p">(</span><span class="nx">triangle</span><span class="p">,</span> <span class="nx">circle</span><span class="p">);</span>
+<li>Circle to <a href="geom-triangle.md">triangle</a>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Intersects</span><span class="p">.</span><span class="nx">TriangleToCircle</span><span class="p">(</span><span class="nx">circle</span><span class="p">,</span> <span class="nx">circle</span><span class="p">);</span>
 </pre></div></li>
 <li>Circle to <a href="../geom-line/index.html">line</a>
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Intersects</span><span class="p">.</span><span class="nx">LineToCircle</span><span class="p">(</span><span class="nx">line</span><span class="p">,</span> <span class="nx">circle</span><span class="p">);</span>

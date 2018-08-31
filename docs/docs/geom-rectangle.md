@@ -219,7 +219,7 @@ var rect1 = Phaser.Geom.Rectangle.Clone(rect0);
     // var points = rect.getPoints(false, step, points);  // push points
     ```
     - `step` : width of each step, in pixels. `quantity = Perimeter(rectangle) / step;`
-    - `points` : an array of point    
+    - `points` : an array of point
 - Point is inside shape
     ```javascript
     var isInside = rect.contains(x, y);
@@ -285,11 +285,11 @@ Position and size are equal.
     ```javascript
     var result = Phaser.Geom.Intersects.CircleToRectangle(circle, rect);
     ```
-- Rectangle to rectangle
+- Rectangle to [rectangle](geom-rectangle.md)
     ```javascript
     var result = Phaser.Geom.Intersects.RectangleToRectangle(rectA, rectB);
     ```
-- Rectangle to triangle
+- Rectangle to [triangle](geom-triangle.md)
     ```javascript
     var result = Phaser.Geom.Intersects.RectangleToTriangle(rect, triangle);
     ```

@@ -41,11 +41,13 @@ var createBtn = function (scene, config) {
     var y = GetValue(config, 'y', 0);
     var color = GetValue(config, 'color', 0xffffff);
     var name = GetValue(config, 'name', '');
+
+    var shape = new Phaser.Geom.Circle(0, 0, 60);
     var btn = scene.add.graphics()
         .setName(name)
         .fillStyle(color, 1)
-        .fillCircle(0, 0, 60)
-        .setInteractive(new Phaser.Geom.Circle(0, 0, 60), Phaser.Geom.Circle.Contains)
+        .fillCircleShape(shape)
+        .setInteractive(shape, Phaser.Geom.Circle.Contains)
         .setPosition(x, y);
     scene.add.text(x, y, name, {
             fontSize: '20pt'
