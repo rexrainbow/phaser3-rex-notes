@@ -252,6 +252,18 @@ Only [image](image.md) and sprite game object have teuture componment.
         // gameObject.isCropped = false;
         ```
 
+### Name
+
+- Get
+    ```javascript
+    var name = gameObject.name;
+    ```
+- Set
+    ```javascript
+    gameObject.setName(name);
+    gameObject.name = name;
+    ```
+
 ### Custom class
 
 - Define class
