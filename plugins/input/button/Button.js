@@ -81,7 +81,7 @@ class Button extends EE {
         }
         this.pointer = pointer;
         if (this.mode === 0) {
-            this.click(pointer.downTime, this.clickInterval);
+            this.click(pointer.downTime);
         }
     }
 
@@ -90,7 +90,7 @@ class Button extends EE {
             return;
         }
         if (this.mode === 1) {
-            this.click(pointer.upTime, this.clickInterval);
+            this.click(pointer.upTime);
         }
         this.pointer = undefined;
     }
@@ -102,15 +102,14 @@ class Button extends EE {
         this.pointer = undefined;
     }
 
-    click(nowTime, clickInterval) {
+    click(nowTime) {
         var pointer = this.pointer;
         this.pointer = undefined;
 
         var lastClickTime = this.lastClickTime;
         if ((nowTime !== undefined) &&
-            (clickInterval !== undefined) &&
             (lastClickTime !== undefined) &&
-            ((nowTime - lastClickTime) <= clickInterval)) {
+            ((nowTime - lastClickTime) <= this.clickInterval)) {
             return;
         }
         if (nowTime !== undefined) {
