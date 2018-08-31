@@ -21,6 +21,7 @@ import Drag from './drag.js';
 import DragSpeed from './dragspeed.js';
 import Slider from './slider.js';
 import Scroller from './scroller.js';
+import Button from './button.js';
 import TouchCursor from './touchcursor.js';
 import VirtualJoyStick from './virtualjoystick.js';
 
@@ -77,6 +78,7 @@ export {
     DragSpeed,
     Slider,
     Scroller,
+    Button,
     TouchCursor,
     VirtualJoyStick,
 

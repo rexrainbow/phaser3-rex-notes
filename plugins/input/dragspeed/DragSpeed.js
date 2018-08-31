@@ -12,7 +12,7 @@ class DragSpeed extends EE {
         this.gameObject = gameObject;
         this.scene = GetSceneObject(gameObject);
 
-        this.gameObject.setInteractive(GetValue(config, "inputConfig", undefined));
+        gameObject.setInteractive(GetValue(config, "inputConfig", undefined));
         this.resetFromJSON(config);
         this.boot();
     }

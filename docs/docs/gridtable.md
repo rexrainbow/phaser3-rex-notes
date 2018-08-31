@@ -226,11 +226,11 @@ table.updateTable(true);
     ```javascript
     var bottomTableOY = table.bottomTableOY;
     ```
-- Left bound of tableOY
+- Left bound of tableOX
     ```javascript
     var leftTableOX = table.leftTableOX;  // 0
     ```
-- Right bound of tableOY
+- Right bound of tableOX
     ```javascript
     var rightTableOX = table.rightTableOX;
     ```
