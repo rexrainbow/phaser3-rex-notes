@@ -1,6 +1,6 @@
 'use strict'
 
-import EightDirectionPlugin from 'rexPlugins/eightdirection-plugin.js';
+import AsteroidsPlugin from 'rexPlugins/asteroids-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -22,15 +22,16 @@ class Demo extends Phaser.Scene {
         this.physics.add.existing(obj, false);
         obj.body
             .setSize(30, 30)
-            .setOffset(-15, -15)
-            .setCollideWorldBounds();
-        obj.eightDirection = this.plugins.get('rexEightDirection').add(obj, {
-            dir: 3,
-            rotateToDirection: true
-        });
+            .setOffset(-15, -15);
+        obj.asteroids = this.plugins.get('rexAsteroids').add(obj, {});
+        this.ship = obj;
+
+        this.print = this.add.text(0, 0, '');
     }
 
-    update() {}
+    update() {
+        this.print.setText('Speed = ' + this.ship.asteroids.speed);
+    }
 }
 
 var config = {
@@ -48,8 +49,8 @@ var config = {
     },
     plugins: {
         global: [{
-            key: 'rexEightDirection',
-            plugin: EightDirectionPlugin,
+            key: 'rexAsteroids',
+            plugin: AsteroidsPlugin,
             start: true
         }]
     }

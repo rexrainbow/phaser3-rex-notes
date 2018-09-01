@@ -93,6 +93,8 @@ Arcade physics body.
 
 #### Drag
 
+Reduces speed per second.
+
 - Set
     ```javascript
     body.setDrag(x, y);
@@ -217,6 +219,8 @@ Whether this Body's rotation is affected by its angular acceleration and velocit
 
 #### Angular drag  
 
+Reduces angular speed per second.
+
 - Set
     ```javascript
     body.setAngularDrag(v);
@@ -236,7 +240,7 @@ var hit = body.hitTest(x, y);
 
 #### Callbacks
 
-[Callback of collision](arcade-world.md#collision)
+[Add collider](arcade-world.md#collision)
 
 #### Collision bound
 
@@ -276,6 +280,29 @@ body.setOffset(x, y);
     });
     ```
 
+#### Push out
+
+```javascript
+scene.physics.add.collider(objectsA, objectsB);
+```
+
+#### Bounce
+
+- Set
+    ```javascript
+    body.setBounce(x, y);
+    ```
+    or
+    ```javascript
+    body.setBounceX(x);
+    body.setBounceY(y);
+    ```    
+- Get
+    ```javascript
+    var bx = body.bounce.x;
+    var by = body.bounce.y;
+    ```
+
 #### Blocked
 
 - Blocked when moveing down
@@ -304,23 +331,6 @@ body.setOffset(x, y);
             right: true
         }
         ```
-
-#### Bounce
-
-- Set
-    ```javascript
-    body.setBounce(x, y);
-    ```
-    or
-    ```javascript
-    body.setBounceX(x);
-    body.setBounceY(y);
-    ```    
-- Get
-    ```javascript
-    var bx = body.bounce.x;
-    var by = body.bounce.y;
-    ```
 
 ### Mass
 

@@ -251,7 +251,7 @@ var hit = gameObject.hitTest(x, y);
 
 #### Callbacks
 
-[Callback of collision](arcade-world.md#collision)
+[Add collider](arcade-world.md#collision)
 
 #### Collision bound
 
@@ -269,6 +269,12 @@ var hit = gameObject.hitTest(x, y);
 
 ```javascript
 gameObject.setOffset(x, y);
+```
+
+#### Push out
+
+```javascript
+scene.physics.add.collider(objectsA, objectsB);
 ```
 
 #### Bounce

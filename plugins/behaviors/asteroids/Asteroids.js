@@ -1,10 +1,12 @@
 'use strict'
 
+// https://labs.phaser.io/view.html?src=src\physics\arcade\asteroids%20movement.js
+
 const GetValue = Phaser.Utils.Objects.GetValue;
 const AngleBetween = Phaser.Math.Angle.Between;
 const RadToDeg = Phaser.Math.RadToDeg;
 
-class EightDirection {
+class Asteroids {
     constructor(gameObject, config) {
         this.gameObject = gameObject;
         this.scene = gameObject.scene;
@@ -15,9 +17,11 @@ class EightDirection {
 
     resetFromJSON(o) {
         this.setEnable(GetValue(o, 'enable', true));
-        this.setMode(GetValue(o, 'dir', '8dir'));
-        this.setSpeed(GetValue(o, 'speed', 200));
-        this.setRotateToDirection(GetValue(o, 'rotateToDirection', false));
+        this.setMaxSpeed(GetValue(o, 'maxSpeed', 200));
+        this.setAcceleration(GetValue(o, 'acceleration', 200));
+        this.setDrag(GetValue(o, 'drag', 0.99));
+        this.setAngularVelocity(GetValue(o, 'angularVelocity', 300));
+        this.setWrap(GetValue(o, 'wrap', true), GetValue(o, 'padding', 0));
         this.setCursorKeys(GetValue(o, 'cursorKeys', undefined));
         this.tickMe = GetValue(o, 'tickMe', true); // true to enable 'update' callback
         return this;
@@ -63,21 +67,34 @@ class EightDirection {
         this.enable = e;
     }
 
-    setMode(m) {
-        if (typeof (m) === 'string') {
-            m = DIRMODE[m];
-        }
-        this.dirMode = m;
+    setMaxSpeed(speed) {
+        var body = this.gameObject.body;
+        body.setMaxVelocity(speed);
         return this;
     }
 
-    setSpeed(speed) {
-        this.speed = speed;
+    setAcceleration(acceleration) {
+        this.acceleration = acceleration;
         return this;
     }
 
-    setRotateToDirection(rotateToDirection) {
-        this.rotateToDirection = rotateToDirection;
+    setDrag(drag) {
+        var body = this.gameObject.body;
+        body.setDrag(drag);
+        this.drag = drag;
+
+        body.useDamping = true;
+        return this;
+    }
+
+    setAngularVelocity(angularVelocity) {
+        this.angularVelocity = angularVelocity;
+        return this;
+    }
+
+    setWrap(wrap, padding) {
+        this.wrap = wrap;
+        this.padding = padding;
         return this;
     }
 
@@ -89,66 +106,44 @@ class EightDirection {
         return this;
     }
 
+    get speed() {
+        return this.gameObject.body.speed;
+    }
+
     update(time, delta) {
-        var body = this.gameObject.body;
         if (!this.enable) {
-            body.setVelocity(0, 0);
             return this;
-        }
-        var cursorKeys = this.cursorKeys;
-        var isUpDown = cursorKeys.up.isDown;
-        var isDownDown = cursorKeys.down.isDown;
-        var isLeftDown = cursorKeys.left.isDown;
-        var isRightDown = cursorKeys.right.isDown;
-        var dx = 0,
-            dy = 0;
-        if (isUpDown) {
-            dy -= 1;
-        }
-        if (isDownDown) {
-            dy += 1;
-        }
-        if (isLeftDown) {
-            dx -= 1;
-        }
-        if (isRightDown) {
-            dx += 1;
-        }
-        switch (this.dirMode) {
-            case 0:
-                dx = 0;
-                break;
-            case 1:
-                dy = 0;
-                break;
-            case 2:
-                if (dy !== 0) {
-                    dx = 0
-                }
-                break;
         }
 
-        if ((dx === 0) && (dy === 0)) {
-            body.setVelocity(0, 0);
-            return this;
+        var cursorKeys = this.cursorKeys;
+        var isUpDown = cursorKeys.up.isDown;
+        var isLeftDown = cursorKeys.left.isDown;
+        var isRightDown = cursorKeys.right.isDown;
+        var body = this.gameObject.body;
+
+        // speed up
+        if (isUpDown) {
+            var rotation = this.gameObject.rotation;
+            var ax = Math.cos(rotation) * this.acceleration;
+            var ay = Math.sin(rotation) * this.acceleration;
+            body.setAcceleration(ax, ay);
+        } else {
+            body.setAcceleration(0);
         }
-        var rotation = AngleBetween(0, 0, dx, dy);
-        var vx = this.speed * Math.cos(rotation),
-            vy = this.speed * Math.sin(rotation);
-        body.setVelocity(vx, vy);
-        if (this.rotateToDirection) {
-            this.gameObject.rotation = rotation;
+
+        // turn left/right
+        if (isLeftDown && !isRightDown) {
+            body.setAngularVelocity(-this.angularVelocity);
+        } else if (isRightDown && !isLeftDown) {
+            body.setAngularVelocity(this.angularVelocity);
+        } else {
+            body.setAngularVelocity(0);
         }
-        return this;
+
+        if (this.wrap) {
+            body.world.wrap(this.gameObject, this.padding);
+        }
     }
 }
 
-/** @private */
-const DIRMODE = {
-    'up&down': 0,
-    'left&right': 1,
-    '4dir': 2,
-    '8dir': 3
-};
-
-export default EightDirection;
+export default Asteroids;

@@ -52,32 +52,40 @@ var game = new Phaser.Game(config);
 
 ### Collision
 
-Performs a collision check and separation between the two physics enabled objects given.
-
-```javascript
-var collider = scene.physics.add.collider(objectsA, objectsB, collideCallback, processCallback, callbackContext);
-```
-
-If you don't require separation then use `overlap` instead.
-
-```javascript
-var collider = scene.physics.add.overlap(objectsA, objectsB, collideCallback, processCallback, callbackContext);
-```
-
-- objectsA, objectsB
-    - a game object
-    - game objects in array
-    - physics group
-    - group
-- collideCallback:
+- Add collider
+    - Push out
+        ```javascript
+        scene.physics.add.collider(objectsA, objectsB);
+        ```
+    - Performs a collision check and separation between the two physics enabled objects given.
+        ```javascript
+        var collider = scene.physics.add.collider(objectsA, objectsB, collideCallback, processCallback, callbackContext);
+        ```
+    - If you don't require separation then use `overlap` instead.
+        ```javascript
+        var collider = scene.physics.add.overlap(objectsA, objectsB, collideCallback, processCallback, callbackContext);
+        ```
+    - Parameters
+        - `objectsA`, `objectsB` :
+            - A game object
+            - Game objects in array
+            - Physics group
+            - Group
+        - `collideCallback` :
+            ```javascript
+            var collideCallback = function(gameObject1, gameObject2) { 
+                // ...
+            }
+            ```
+        - `processCallback` : Fired when gameObject1 intersects gameObject2
+            ```javascript
+            var processCallback = function(gameObject1, gameObject2) {
+                return true;  // return false will discard remaining collision checking
+            }
+            ```
+- Remove collider
     ```javascript
-    function(gameObject1, gameObject2) { }
-    ```
-- processCallback: fired when gameObject1 intersects gameObject2
-    ```javascript
-    function(gameObject1, gameObject2) {
-        return true;  // return false will discard remaining collision checking
-    }
+    scene.physics.world.removeCollider(collider);
     ```
 
 ### Wrap
@@ -90,6 +98,29 @@ scene.physics.world.wrap(gameObject, padding);
     - game object (image, sprite)
     - group
     - array of game objects
+
+### Move to
+
+- Move to position with a steady velocity
+    ```javascript
+    scene.physics.moveTo(gameObject, x, y, speed, maxTime);
+    ```
+- Move to object with a steady velocity
+    ```javascript
+    scene.physics.moveToObject(gameObject, destination, speed, maxTime);
+    ```
+
+### Accelerate to
+
+- Accelerate to position
+    ```javascript
+    scene.physics.accelerateTo(gameObject, x, y, acceleration, xSpeedMax, ySpeedMax);
+    ```
+- Accelerate to object
+    ```javascript
+    scene.physics.accelerateToObject(gameObject, destination, acceleration, xSpeedMax, ySpeedMax);
+    ```
+
 
 ### Control
 
