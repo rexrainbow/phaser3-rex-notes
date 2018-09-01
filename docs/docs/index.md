@@ -13,6 +13,7 @@
 1. [CSV-scenario](csvscenario.md): Run script in csv format.
 1. [CSV-to-hash-table](csvtohashtable.md): Hash table indexed by (col-key, row-key) from csv string.
 1. [Drag](drag.md): Drag game object.
+1. [Eight direction](eightdirection.md): Move game object by cursor keys.
 1. [Fade-out-destroy](fadeoutdestroy.md): Fade out game object then destroy it.
 1. [Fade-volume](fadevolume.md): Fade-in/fade-out volume of sound.
 1. [FSM](fsm.md): Finite state machine.
