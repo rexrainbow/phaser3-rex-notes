@@ -157,7 +157,7 @@ See also
 - `cameras` : [Camera](camera.md)
 - `scene` : [scenePlugin](scenemanager.md)
 - `anims`
-- `physics` : [ArcadePhysics](arcade.md)
+- `physics` : [ArcadePhysics](arcade-world.md)
 - `impact` : ImpactPhysics
 - `matter` :　MatterPhysics
 - `registry` : Global [data manager](datamanager.md)

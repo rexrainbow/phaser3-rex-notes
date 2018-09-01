@@ -2512,7 +2512,7 @@
         }, 
         {
             "location": "/moveto/index.html", 
-            "text": "Introduction\n\n\nMove game object towards target position with a constant speed.\n\n\n\n\nAuthor: Rex\n\n\nBehavior of game object\n\n\n\n\nSource code\n\n\nPlugin\n, \nminify\n\n\nUsage\n\n\nSample code\n\n\nUser could import class directly, or install it by global plugin.\n\n\nImport class\n\n\nimport\n \nrexMoveTo\n \nfrom\n \n./plugins/moveto.js\n;\n\n\n\n\n\nInstall global plugin\n\n\nInstall plugin in \nconfiguration of game\n\n\nimport\n \nMoveToPlugin\n \nfrom\n \n./plugins/moveto-plugin.js\n;\n\n\n\nvar\n \nconfig\n \n=\n \n{\n\n    \n// ...\n\n    \nplugins\n:\n \n{\n\n        \nglobal\n:\n \n[{\n\n            \nkey\n:\n \nrexMoveTo\n,\n\n            \nplugin\n:\n \nMoveToPlugin\n,\n\n            \nstart\n:\n \ntrue\n\n        \n},\n\n        \n// ...\n\n        \n]\n\n    \n}\n\n    \n// ...\n\n\n};\n\n\nvar\n \ngame\n \n=\n \nnew\n \nPhaser\n.\nGame\n(\nconfig\n);\n\n\n\n\n\nCreate instance\n\n\nvar\n \nmoveTo\n \n=\n \nscene\n.\nplugins\n.\nget\n(\nrexMoveTo\n).\nadd\n(\ngameObject\n,\n \n{\n\n    \n// speed: 0,\n\n    \n// rotateToTarget: false,\n\n    \n// rotationOffset: 0,\n\n    \n// angleOffset: 0\n\n\n});\n\n\n\n\n\n\n\nspeed\n : moving speed, pixels in second\n\n\nrotateToTarget\n : Set true to change angle towards path\n\n\nrotationOffset\n : Rotation offset in radian, or \nangleOffset\n in degrees\n\n\n\n\nStart moving\n\n\nmoveTo\n.\nmoveTo\n(\nx\n,\n \ny\n);\n\n\n// moveTo.moveTo(x, y, speed);\n\n\n\n\n\n\n\nx\n , \ny\n : Target position\n\n\n\n\nor\n\n\nvar\n \nconfig\n \n=\n \n{\n\n    \nx\n:\n \n0\n,\n\n    \ny\n:\n \n0\n,\n\n    \n// speed: 0\n\n\n}\n\n\nmoveTo\n.\nmoveTo\n(\nconfig\n);\n\n\n\n\n\nStop moving\n\n\nmoveTo\n.\nstop\n();\n\n\n\n\n\nSet speed\n\n\nmoveTo\n.\nsetSpeed\n(\nspeed\n);\n\n\n// moveTo.speed = speed;\n\n\n\n\n\nSet rotate-to-target\n\n\nmoveTo\n.\nsetRotateToTarget\n(\nrotateToTarget\n,\n \nrotationOffset\n);\n\n\n\n\n\n\n\nrotateToTarget\n : Set true to change angle towards target\n\n\nrotationOffset\n : Rotation offset in radian\n\n\n\n\nEvents\n\n\n\n\nOn reached target\n    \nmoveTo\n.\non\n(\ncomplete\n,\n \nfunction\n(\nmoveTo\n,\n \ngameObject\n){});\n\n\n\n\n\n\nStatus\n\n\n\n\nIs moving\n    \nvar\n \nisMoving\n \n=\n \nmoveTo\n.\nisMoving\n;", 
+            "text": "Introduction\n\n\nMove game object towards target position with a constant speed.\n\n\n\n\nAuthor: Rex\n\n\nBehavior of game object\n\n\n\n\nSource code\n\n\nPlugin\n, \nminify\n\n\nUsage\n\n\nSample code\n\n\nUser could import class directly, or install it by global plugin.\n\n\nImport class\n\n\nimport\n \nrexMoveTo\n \nfrom\n \n./plugins/moveto.js\n;\n\n\n\n\n\nInstall global plugin\n\n\nInstall plugin in \nconfiguration of game\n\n\nimport\n \nMoveToPlugin\n \nfrom\n \n./plugins/moveto-plugin.js\n;\n\n\n\nvar\n \nconfig\n \n=\n \n{\n\n    \n// ...\n\n    \nplugins\n:\n \n{\n\n        \nglobal\n:\n \n[{\n\n            \nkey\n:\n \nrexMoveTo\n,\n\n            \nplugin\n:\n \nMoveToPlugin\n,\n\n            \nstart\n:\n \ntrue\n\n        \n},\n\n        \n// ...\n\n        \n]\n\n    \n}\n\n    \n// ...\n\n\n};\n\n\nvar\n \ngame\n \n=\n \nnew\n \nPhaser\n.\nGame\n(\nconfig\n);\n\n\n\n\n\nCreate instance\n\n\nvar\n \nmoveTo\n \n=\n \nscene\n.\nplugins\n.\nget\n(\nrexMoveTo\n).\nadd\n(\ngameObject\n,\n \n{\n\n    \n// speed: 400,\n\n    \n// rotateToTarget: false\n\n\n});\n\n\n\n\n\n\n\nspeed\n : moving speed, pixels in second\n\n\nrotateToTarget\n : Set true to change angle towards path\n\n\n\n\nStart moving\n\n\nmoveTo\n.\nmoveTo\n(\nx\n,\n \ny\n);\n\n\n// moveTo.moveTo(x, y, speed);\n\n\n\n\n\n\n\nx\n , \ny\n : Target position\n\n\n\n\nor\n\n\nvar\n \nconfig\n \n=\n \n{\n\n    \nx\n:\n \n0\n,\n\n    \ny\n:\n \n0\n,\n\n    \n// speed: 0\n\n\n}\n\n\nmoveTo\n.\nmoveTo\n(\nconfig\n);\n\n\n\n\n\nStop moving\n\n\nmoveTo\n.\nstop\n();\n\n\n\n\n\nSet speed\n\n\nmoveTo\n.\nsetSpeed\n(\nspeed\n);\n\n\n// moveTo.speed = speed;\n\n\n\n\n\nSet rotate-to-target\n\n\nmoveTo\n.\nsetRotateToTarget\n(\nrotateToTarget\n);\n\n\n\n\n\n\n\nrotateToTarget\n : Set true to change angle towards target\n\n\n\n\nEvents\n\n\n\n\nOn reached target\n    \nmoveTo\n.\non\n(\ncomplete\n,\n \nfunction\n(\nmoveTo\n,\n \ngameObject\n){});\n\n\n\n\n\n\nStatus\n\n\n\n\nIs moving\n    \nvar\n \nisMoving\n \n=\n \nmoveTo\n.\nisMoving\n;", 
             "title": "Move to"
         }, 
         {
@@ -2542,7 +2542,7 @@
         }, 
         {
             "location": "/moveto/index.html#create-instance", 
-            "text": "var   moveTo   =   scene . plugins . get ( rexMoveTo ). add ( gameObject ,   { \n     // speed: 0, \n     // rotateToTarget: false, \n     // rotationOffset: 0, \n     // angleOffset: 0  });    speed  : moving speed, pixels in second  rotateToTarget  : Set true to change angle towards path  rotationOffset  : Rotation offset in radian, or  angleOffset  in degrees", 
+            "text": "var   moveTo   =   scene . plugins . get ( rexMoveTo ). add ( gameObject ,   { \n     // speed: 400, \n     // rotateToTarget: false  });    speed  : moving speed, pixels in second  rotateToTarget  : Set true to change angle towards path", 
             "title": "Create instance"
         }, 
         {
@@ -2562,7 +2562,7 @@
         }, 
         {
             "location": "/moveto/index.html#set-rotate-to-target", 
-            "text": "moveTo . setRotateToTarget ( rotateToTarget ,   rotationOffset );    rotateToTarget  : Set true to change angle towards target  rotationOffset  : Rotation offset in radian", 
+            "text": "moveTo . setRotateToTarget ( rotateToTarget );    rotateToTarget  : Set true to change angle towards target", 
             "title": "Set rotate-to-target"
         }, 
         {
@@ -2646,234 +2646,414 @@
             "title": "Set rotate-to-path"
         }, 
         {
-            "location": "/arcade/index.html", 
-            "text": "Introduction\n\n\nArcade physics engine in phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nConfiguration\n\n\nvar\n \nconfig\n \n=\n \n{\n\n    \n// ...\n\n    \nphysics\n:\n \n{\n\n        \ndefault\n:\n \narcade\n,\n\n        \narcade\n:\n \n{\n\n        \n//    x: 0,\n\n        \n//    y: 0,\n\n        \n//    width: scene.sys.game.config.width,\n\n        \n//    height: scene.sys.game.config.height,\n\n        \n//    gravity: {\n\n        \n//        x: 0,\n\n        \n//        y: 0\n\n        \n//    },\n\n        \n//    checkCollision: {\n\n        \n//        up: true,\n\n        \n//        down: true,\n\n        \n//        left: true,\n\n        \n//        right: true\n\n        \n//    },\n\n        \n//    fps: 60,\n\n        \n//    timeScale: 1,     // 2.0 = half speed, 0.5 = double speed\n\n        \n//    overlapBias: 4,\n\n        \n//    tileBias: 16,\n\n        \n//    forceX: false,\n\n        \n//    isPaused: false,\n\n        \n//    debug: false,\n\n        \n//    debugShowBody: true,\n\n        \n//    debugShowStaticBody: true,\n\n        \n//    debugShowVelocity: true,\n\n        \n//    debugBodyColor: 0xff00ff,\n\n        \n//    debugStaticBodyColor: 0x0000ff,\n\n        \n//    debugVelocityColor: 0x00ff00,\n\n        \n//    maxEntries: 16,\n\n        \n//    useTree: true   // set false if amount of dynamic bodies \n 5000\n\n        \n}\n\n    \n}\n\n    \n// ...\n\n\n};\n\n\nvar\n \ngame\n \n=\n \nnew\n \nPhaser\n.\nGame\n(\nconfig\n);\n\n\n\n\n\nPause / Resume\n\n\nscene\n.\nphysics\n.\npause\n();\n\n\n\n\n\nscene\n.\nphysics\n.\nresume\n();\n\n\n\n\n\nAdd physics object\n\n\nImage object\n\n\nStatic object\n\n\nvar\n \nimage\n \n=\n \nscene\n.\nphysics\n.\nadd\n.\nstaticImage\n(\nx\n,\n \ny\n,\n \nkey\n);\n\n\n\n\n\nDynamic object\n\n\nvar\n \nimage\n \n=\n \nscene\n.\nphysics\n.\nadd\n.\nimage\n(\nx\n,\n \ny\n,\n \nkey\n);\n\n\n\n\n\nSprite object\n\n\nStatic object\n\n\nvar\n \nimage\n \n=\n \nscene\n.\nphysics\n.\nadd\n.\nstaticSprite\n(\nx\n,\n \ny\n,\n \nkey\n,\n \nframe\n);\n\n\n\n\n\nDynamic object\n\n\nvar\n \nimage\n \n=\n \nscene\n.\nphysics\n.\nadd\n.\nsprite\n(\nx\n,\n \ny\n,\n \nkey\n,\n \nframe\n);\n\n\n\n\n\nGroup\n\n\nStatic sprite objects\n\n\nvar\n \ngroup\n \n=\n \nscene\n.\nphysics\n.\nadd\n.\nstaticGroup\n(\nchildren\n,\n \nconfig\n);\n\n\n// var group = scene.physics.add.staticGroup(config);\n\n\n\n\n\nDynamic sprite objects\n\n\nvar\n \ngroup\n \n=\n \nscene\n.\nphysics\n.\nadd\n.\ngroup\n(\nchildren\n,\n \nconfig\n);\n\n\n// var group = scene.physics.add.staticGroup(config);\n\n\n\n\n\nConfiugration\n\n\nvar\n \nconfig\n \n=\n \n{\n\n    \nsetCollideWorldBounds\n:\n \nfalse\n,\n\n    \nsetAccelerationX\n:\n \n0\n,\n\n    \nsetAccelerationY\n:\n \n0\n,\n\n    \nallowDrag\n:\n \ntrue\n,\n\n    \nallowGravity\n:\n \ntrue\n,\n\n    \nallowRotation\n:\n \ntrue\n\n    \nsetBounceX\n:\n \n0\n,\n\n    \nsetBounceY\n:\n \n0\n,\n\n    \nsetDragX\n:\n \n0\n,\n\n    \nsetDragY\n:\n \n0\n,\n\n    \nsetGravityX\n:\n \n0\n,\n\n    \nsetGravityY\n:\n \n0\n,\n\n    \nsetFrictionX\n:\n \n0\n,\n\n    \nsetFrictionY\n:\n \n0\n,\n\n    \nsetVelocityX\n:\n \n0\n,\n\n    \nsetVelocityY\n:\n \n0\n,\n\n    \nsetAngularVelocity\n:\n \n0\n,\n\n    \nsetAngularAcceleration\n:\n \n0\n,\n\n    \nsetAngularDrag\n:\n \n0\n,\n\n    \nsetMass\n:\n \n1\n,\n\n    \nsetImmovable\n:\n \nfalse\n\n\n};\n\n\n\n\n\nDestroy object\n\n\ngameObject\n.\ndestroy\n();\n\n\n\n\n\nCollision\n\n\nPerforms a collision check and separation between the two physics enabled objects given.\n\n\nvar\n \ncollider\n \n=\n \nscene\n.\nphysics\n.\nadd\n.\ncollider\n(\nobjectsA\n,\n \nobjectsB\n,\n \ncollideCallback\n,\n \nprocessCallback\n,\n \ncallbackContext\n);\n\n\n\n\n\nIf you don't require separation then use \noverlap\n instead.\n\n\nvar\n \ncollider\n \n=\n \nscene\n.\nphysics\n.\nadd\n.\noverlap\n(\nobjectsA\n,\n \nobjectsB\n,\n \ncollideCallback\n,\n \nprocessCallback\n,\n \ncallbackContext\n);\n\n\n\n\n\n\n\nobjectsA, objectsB\n\n\na game object\n\n\ngame objects in array\n\n\nphysics group\n\n\ngroup\n\n\n\n\n\n\ncollideCallback:\n    \nfunction\n(\ngameObject1\n,\n \ngameObject2\n)\n \n{\n \n}\n\n\n\n\nprocessCallback: fired when gameObject1 intersects gameObject2\n    \nfunction\n(\ngameObject1\n,\n \ngameObject2\n)\n \n{\n\n    \nreturn\n \ntrue\n;\n  \n// return false will discard remaining collision checking\n\n\n}\n\n\n\n\n\n\nMethods of game object\n\n\nSize\n\n\n\n\nRectangle\n    \ngameObject\n.\nsetSize\n(\nwidth\n,\n \nheight\n);\n            \n// set body\ns offset to center\n\n\n// gameObject.setSize(width, height, false);  // set body\ns offset to (0, 0)\n\n\n\n\nCircle\n    \ngameObject\n.\nsetCircle\n(\nradius\n,\n \noffsetX\n,\n \noffsetY\n);\n\n\n\n\n\n\nOffset\n\n\nSets the offset of the Body's position from its Game Object's position.\n\n\ngameObject\n.\nsetOffset\n(\nx\n,\n \ny\n);\n\n\n\n\n\nSync body\n\n\nSyncs the Bodies position and size in static game object.\n\n\ngameObject\n.\nrefreshBody\n();\n\n\n\n\n\nVelocity\n\n\ngameObject\n.\nsetVelocity\n(\nx\n,\n \ny\n);\n\n\n\n\n\ngameObject\n.\nsetVelocityX\n(\nx\n);\n\n\n\n\n\ngameObject\n.\nsetVelocityY\n(\nx\n);\n\n\n\n\n\ngameObject\n.\nsetMaxVelocity\n(\ny\n);\n\n\n\n\n\nRotation\n\n\nbody\n.\nsetAllowRotation\n(\nvalue\n);\n  \n// true to allow rotation on this body (default:true)\n\n\n\n\n\nMass\n\n\ngameObject\n.\nsetMass\n(\nv\n);\n\n\n\n\n\nAcceleration\n\n\ngameObject\n.\nsetAcceleration\n(\nx\n,\n \ny\n);\n\n\n\n\n\ngameObject\n.\nsetAccelerationX\n(\nx\n);\n\n\n\n\n\ngameObject\n.\nsetAccelerationY\n(\ny\n);\n\n\n\n\n\nGravity\n\n\ngameObject\n.\nsetGravity\n(\nx\n,\n \ny\n);\n\n\n\n\n\ngameObject\n.\nsetGravityX\n(\nx\n);\n\n\n\n\n\ngameObject\n.\nsetGravityY\n(\ny\n);\n\n\n\n\n\nFriction\n\n\ngameObject\n.\nsetFriction\n(\nx\n,\n \ny\n);\n\n\n\n\n\ngameObject\n.\nsetFrictionX\n(\nx\n);\n\n\n\n\n\ngameObject\n.\nsetFrictionY\n(\ny\n);\n\n\n\n\n\nDrag\n\n\ngameObject\n.\nsetDrag\n(\nx\n,\n \ny\n);\n\n\n\n\n\ngameObject\n.\nsetDragX\n(\nx\n);\n\n\n\n\n\ngameObject\n.\nsetDragY\n(\ny\n);\n\n\n\n\n\nEnables drag\n\n\nbody\n.\nsetAllowDrag\n(\nvalue\n);\n  \n// true to allow drag on this body (default:true)\n\n\n\n\n\nEnable damping\n\n\ngameObject\n.\nsetDamping\n(\nvalue\n);\n\n\n\n\n\nAngular\n\n\ngameObject\n.\nsetAngularVelocity\n(\nv\n);\n\n\n\n\n\ngameObject\n.\nsetAngularAcceleration\n(\nv\n);\n\n\n\n\n\ngameObject\n.\nsetAngularDrag\n(\nv\n);\n\n\n\n\n\nBounce\n\n\ngameObject\n.\nsetBounce\n(\nx\n,\n \ny\n);\n\n\n\n\n\ngameObject\n.\nsetBounceX\n(\nx\n);\n\n\n\n\n\ngameObject\n.\nsetBounceY\n(\ny\n);\n\n\n\n\n\ngameObject\n.\nsetCollideWorldBounds\n(\nboolean\n);\n\n\n\n\n\nImmovable\n\n\ngameObject\n.\nsetImmovable\n(\nboolean\n);\n\n\n\n\n\nSpeed\n\n\nThe absolute (non-negative) change in this Body's horizontal/vertical position from the previous step.\n\n\nvar\n \ndx\n \n=\n \nbody\n.\ndeltaAbsX\n();\n\n\nvar\n \ndy\n \n=\n \nbody\n.\ndeltaAbsY\n();\n\n\n\n\n\nPoint inside\n\n\nvar\n \nhit\n \n=\n \ngameObject\n.\nhitTest\n(\nx\n,\n \ny\n);\n\n\n\n\n\nBlocked\n\n\n\n\nBlocked when moveing down\n    \nvar\n \nonFloor\n \n=\n \nbody\n.\nonFloor\n();\n\n\n\n\nBlocked when moveing up\n    \nvar\n \nonCeiling\n \n=\n \nbody\n.\nonCeiling\n();\n\n\n\n\nBlocked when moveing left or right\n    \nvar\n \nonWall\n \n=\n \nbody\n.\nonWall\n();\n\n\n\n\nState\n    \nvar\n \nblocked\n \n=\n \nbody\n.\nblocked\n;\n\n\n\n\nblocked.none\n\n\nblocked.up\n\n\nblocked.down\n\n\nblocked.left\n\n\nblocked.right\n\n\n\n\n\n\n\n\nMethods of group\n\n\ngroup\n.\nsetVelocity\n(\nx\n,\n \ny\n,\n \nstep\n);\n\n\n\n\n\ngroup\n.\nsetVelocityX\n(\nvalue\n,\n \nstep\n);\n\n\n\n\n\ngroup\n.\nsetVelocityY\n(\nvalue\n,\n \nstep\n);\n\n\n\n\n\ngroup\n.\nrefresh\n();\n  \n// call this method when position of game objects were changed in static object group\n\n\n\n\n\nAdd a game object to physics world\n\n\nscene\n.\nphysics\n.\nadd\n.\nexisting\n(\ngameObject\n,\n \nisStatic\n);\n\n\n\n\n\nGet physics body\n\n\nvar\n \nbody\n \n=\n \ngameObject\n.\nbody\n;\n\n\n\n\n\nSize\n\n\nbody\n.\nsetSize\n(\nwidth\n,\n \nheight\n,\n \ncenter\n);\n\n\n\n\n\nbody\n.\nsetCircle\n(\nradius\n,\n \noffsetX\n,\n \noffsetY\n);\n\n\n\n\n\nbody\n.\nsetOffset\n(\nx\n,\n \ny\n);\n\n\n\n\n\nReset position\n\n\nbody\n.\nreset\n(\nx\n,\n \ny\n);\n\n\n\n\n\nVelocity\n\n\nbody\n.\nvelocity\n.\nset\n(\nx\n,\n \ny\n);\n\n\n\n\n\nbody\n.\nvelocity\n.\nx\n \n=\n \nx\n;\n\n\n\n\n\nbody\n.\nvelocity\n.\ny\n \n=\n \ny\n;\n\n\n\n\n\nbody\n.\nmaxVelocity\n.\nset\n(\nx\n,\n \ny\n);\n\n\n\n\n\nMass\n\n\nbody\n.\nmass\n \n=\n \nv\n;\n\n\n\n\n\nAcceleration\n\n\nbody\n.\nacceleration\n.\nset\n(\nx\n,\n \ny\n);\n\n\n\n\n\nbody\n.\nacceleration\n.\nx\n \n=\n \nx\n;\n\n\n\n\n\nbody\n.\nacceleration\n.\ny\n \n=\n \ny\n;\n\n\n\n\n\nGravity\n\n\nbody\n.\ngravity\n.\nset\n(\nx\n,\n \ny\n);\n\n\n\n\n\nbody\n.\ngravity\n.\nx\n \n=\n \nx\n;\n\n\n\n\n\nbody\n.\ngravity\n.\ny\n \n=\n \ny\n;\n\n\n\n\n\nbody\n.\nsetAllowGravity\n(\nvalue\n);\n  \n// true to allow gravity on this body (default:true)\n\n\n\n\n\nFriction\n\n\nbody\n.\nfriction\n.\nset\n(\nx\n,\n \ny\n);\n\n\n\n\n\nbody\n.\nfriction\n.\nx\n \n=\n \nx\n;\n\n\n\n\n\nbody\n.\nfriction\n.\ny\n \n=\n \ny\n;\n\n\n\n\n\nDrag\n\n\nbody\n.\ndrag\n.\nset\n(\nx\n,\n \ny\n);\n\n\n\n\n\nbody\n.\ndrag\n.\nx\n \n=\n \nx\n;\n\n\n\n\n\nbody\n.\ndrag\n.\ny\n \n=\n \ny\n;\n\n\n\n\n\nEnables drag\n\n\nbody\n.\nallowDrag\n \n=\n \ntrue\n;\n\n\n\n\n\nEnable damping\n\n\nbody\n.\nuseDamping\n \n=\n \ntrue\n;\n\n\n\n\n\nAngular\n\n\nbody\n.\nangularVelocity\n \n=\n \nv\n;\n\n\n\n\n\nbody\n.\nangularAcceleration\n \n=\n \nv\n;\n\n\n\n\n\nbody\n.\nangularDrag\n \n=\n \nv\n;\n\n\n\n\n\nBounce\n\n\nbody\n.\nbounce\n.\nset\n(\nx\n,\n \ny\n);\n\n\n\n\n\nbody\n.\nbounce\n.\nx\n \n=\n \nx\n;\n\n\n\n\n\nbody\n.\nbounce\n.\ny\n \n=\n \ny\n;\n\n\n\n\n\nbody\n.\ncollideWorldBounds\n \n=\n \nboolean\n;\n\n\n\n\n\nImmovable\n\n\nbody\n.\nimmovable\n \n=\n \nboolean\n;\n\n\n\n\n\nMethods of World\n\n\nWrap\n\n\nscene\n.\nphysics\n.\nworld\n.\nwrap\n(\ngameObject\n,\n \npadding\n);\n\n\n\n\n\n\n\ngameObject:\n\n\ngame object (image, sprite)\n\n\ngroup\n\n\narray of game objects\n\n\n\n\n\n\n\n\nDuration per frame\n\n\n\n\nTime scale\n    \nscene\n.\nphysics\n.\nworld\n.\ntimeScale\n \n=\n \ntimeScale\n;\n\n\n\n\n1.0 = normal speed\n\n\n2.0 = half speed\n\n\n0.5 = double speed\n\n\n\n\n\n\nFPS\n    \nscene\n.\nphysics\n.\nworld\n.\nsetFPS\n(\nframerate\n);\n\n\n\n\n\n\nStep\n\n\nAdvances the simulation by one step.\n\n\nscene\n.\nphysics\n.\nworld\n.\nstep\n(\ndelta\n);", 
-            "title": "Physics"
+            "location": "/arcade-world/index.html", 
+            "text": "Introduction\n\n\nWorld\n of Arcade physics engine in phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nConfiguration\n\n\nvar\n \nconfig\n \n=\n \n{\n\n    \n// ...\n\n    \nphysics\n:\n \n{\n\n        \ndefault\n:\n \narcade\n,\n\n        \narcade\n:\n \n{\n\n        \n//    x: 0,\n\n        \n//    y: 0,\n\n        \n//    width: scene.sys.game.config.width,\n\n        \n//    height: scene.sys.game.config.height,\n\n        \n//    gravity: {\n\n        \n//        x: 0,\n\n        \n//        y: 0\n\n        \n//    },\n\n        \n//    checkCollision: {\n\n        \n//        up: true,\n\n        \n//        down: true,\n\n        \n//        left: true,\n\n        \n//        right: true\n\n        \n//    },\n\n        \n//    fps: 60,\n\n        \n//    timeScale: 1,     // 2.0 = half speed, 0.5 = double speed\n\n        \n//    overlapBias: 4,\n\n        \n//    tileBias: 16,\n\n        \n//    forceX: false,\n\n        \n//    isPaused: false,\n\n        \n//    debug: false,\n\n        \n//    debugShowBody: true,\n\n        \n//    debugShowStaticBody: true,\n\n        \n//    debugShowVelocity: true,\n\n        \n//    debugBodyColor: 0xff00ff,\n\n        \n//    debugStaticBodyColor: 0x0000ff,\n\n        \n//    debugVelocityColor: 0x00ff00,\n\n        \n//    maxEntries: 16,\n\n        \n//    useTree: true   // set false if amount of dynamic bodies \n 5000\n\n        \n}\n\n    \n}\n\n    \n// ...\n\n\n};\n\n\nvar\n \ngame\n \n=\n \nnew\n \nPhaser\n.\nGame\n(\nconfig\n);\n\n\n\n\n\nCollision\n\n\nPerforms a collision check and separation between the two physics enabled objects given.\n\n\nvar\n \ncollider\n \n=\n \nscene\n.\nphysics\n.\nadd\n.\ncollider\n(\nobjectsA\n,\n \nobjectsB\n,\n \ncollideCallback\n,\n \nprocessCallback\n,\n \ncallbackContext\n);\n\n\n\n\n\nIf you don't require separation then use \noverlap\n instead.\n\n\nvar\n \ncollider\n \n=\n \nscene\n.\nphysics\n.\nadd\n.\noverlap\n(\nobjectsA\n,\n \nobjectsB\n,\n \ncollideCallback\n,\n \nprocessCallback\n,\n \ncallbackContext\n);\n\n\n\n\n\n\n\nobjectsA, objectsB\n\n\na game object\n\n\ngame objects in array\n\n\nphysics group\n\n\ngroup\n\n\n\n\n\n\ncollideCallback:\n    \nfunction\n(\ngameObject1\n,\n \ngameObject2\n)\n \n{\n \n}\n\n\n\n\nprocessCallback: fired when gameObject1 intersects gameObject2\n    \nfunction\n(\ngameObject1\n,\n \ngameObject2\n)\n \n{\n\n    \nreturn\n \ntrue\n;\n  \n// return false will discard remaining collision checking\n\n\n}\n\n\n\n\n\n\nWrap\n\n\nscene\n.\nphysics\n.\nworld\n.\nwrap\n(\ngameObject\n,\n \npadding\n);\n\n\n\n\n\n\n\ngameObject:\n\n\ngame object (image, sprite)\n\n\ngroup\n\n\narray of game objects\n\n\n\n\n\n\n\n\nControl\n\n\nPause\n\n\nscene\n.\nphysics\n.\npause\n();\n\n\n\n\n\nResume\n\n\nscene\n.\nphysics\n.\nresume\n();\n\n\n\n\n\nDuration per frame\n\n\n\n\nTime scale\n    \nscene\n.\nphysics\n.\nworld\n.\ntimeScale\n \n=\n \ntimeScale\n;\n\n\n\n\n1.0 = normal speed\n\n\n2.0 = half speed\n\n\n0.5 = double speed\n\n\n\n\n\n\nFPS\n    \nscene\n.\nphysics\n.\nworld\n.\nsetFPS\n(\nframerate\n);\n\n\n\n\n\n\nStep\n\n\nAdvances the simulation by one step.\n\n\nscene\n.\nphysics\n.\nworld\n.\nstep\n(\ndelta\n);", 
+            "title": "World"
         }, 
         {
-            "location": "/arcade/index.html#introduction", 
-            "text": "Arcade physics engine in phaser.   Author: Richard Davey", 
+            "location": "/arcade-world/index.html#introduction", 
+            "text": "World  of Arcade physics engine in phaser.   Author: Richard Davey", 
             "title": "Introduction"
         }, 
         {
-            "location": "/arcade/index.html#usage", 
+            "location": "/arcade-world/index.html#usage", 
             "text": "", 
             "title": "Usage"
         }, 
         {
-            "location": "/arcade/index.html#configuration", 
+            "location": "/arcade-world/index.html#configuration", 
             "text": "var   config   =   { \n     // ... \n     physics :   { \n         default :   arcade , \n         arcade :   { \n         //    x: 0, \n         //    y: 0, \n         //    width: scene.sys.game.config.width, \n         //    height: scene.sys.game.config.height, \n         //    gravity: { \n         //        x: 0, \n         //        y: 0 \n         //    }, \n         //    checkCollision: { \n         //        up: true, \n         //        down: true, \n         //        left: true, \n         //        right: true \n         //    }, \n         //    fps: 60, \n         //    timeScale: 1,     // 2.0 = half speed, 0.5 = double speed \n         //    overlapBias: 4, \n         //    tileBias: 16, \n         //    forceX: false, \n         //    isPaused: false, \n         //    debug: false, \n         //    debugShowBody: true, \n         //    debugShowStaticBody: true, \n         //    debugShowVelocity: true, \n         //    debugBodyColor: 0xff00ff, \n         //    debugStaticBodyColor: 0x0000ff, \n         //    debugVelocityColor: 0x00ff00, \n         //    maxEntries: 16, \n         //    useTree: true   // set false if amount of dynamic bodies   5000 \n         } \n     } \n     // ...  };  var   game   =   new   Phaser . Game ( config );", 
             "title": "Configuration"
         }, 
         {
-            "location": "/arcade/index.html#pause-resume", 
-            "text": "scene . physics . pause ();   scene . physics . resume ();", 
-            "title": "Pause / Resume"
-        }, 
-        {
-            "location": "/arcade/index.html#add-physics-object", 
-            "text": "", 
-            "title": "Add physics object"
-        }, 
-        {
-            "location": "/arcade/index.html#image-object", 
-            "text": "Static object  var   image   =   scene . physics . add . staticImage ( x ,   y ,   key );   Dynamic object  var   image   =   scene . physics . add . image ( x ,   y ,   key );", 
-            "title": "Image object"
-        }, 
-        {
-            "location": "/arcade/index.html#sprite-object", 
-            "text": "Static object  var   image   =   scene . physics . add . staticSprite ( x ,   y ,   key ,   frame );   Dynamic object  var   image   =   scene . physics . add . sprite ( x ,   y ,   key ,   frame );", 
-            "title": "Sprite object"
-        }, 
-        {
-            "location": "/arcade/index.html#group", 
-            "text": "Static sprite objects  var   group   =   scene . physics . add . staticGroup ( children ,   config );  // var group = scene.physics.add.staticGroup(config);   Dynamic sprite objects  var   group   =   scene . physics . add . group ( children ,   config );  // var group = scene.physics.add.staticGroup(config);   Confiugration  var   config   =   { \n     setCollideWorldBounds :   false , \n     setAccelerationX :   0 , \n     setAccelerationY :   0 , \n     allowDrag :   true , \n     allowGravity :   true , \n     allowRotation :   true \n     setBounceX :   0 , \n     setBounceY :   0 , \n     setDragX :   0 , \n     setDragY :   0 , \n     setGravityX :   0 , \n     setGravityY :   0 , \n     setFrictionX :   0 , \n     setFrictionY :   0 , \n     setVelocityX :   0 , \n     setVelocityY :   0 , \n     setAngularVelocity :   0 , \n     setAngularAcceleration :   0 , \n     setAngularDrag :   0 , \n     setMass :   1 , \n     setImmovable :   false  };", 
-            "title": "Group"
-        }, 
-        {
-            "location": "/arcade/index.html#destroy-object", 
-            "text": "gameObject . destroy ();", 
-            "title": "Destroy object"
-        }, 
-        {
-            "location": "/arcade/index.html#collision", 
+            "location": "/arcade-world/index.html#collision", 
             "text": "Performs a collision check and separation between the two physics enabled objects given.  var   collider   =   scene . physics . add . collider ( objectsA ,   objectsB ,   collideCallback ,   processCallback ,   callbackContext );   If you don't require separation then use  overlap  instead.  var   collider   =   scene . physics . add . overlap ( objectsA ,   objectsB ,   collideCallback ,   processCallback ,   callbackContext );    objectsA, objectsB  a game object  game objects in array  physics group  group    collideCallback:\n     function ( gameObject1 ,   gameObject2 )   {   }   processCallback: fired when gameObject1 intersects gameObject2\n     function ( gameObject1 ,   gameObject2 )   { \n     return   true ;    // return false will discard remaining collision checking  }", 
             "title": "Collision"
         }, 
         {
-            "location": "/arcade/index.html#methods-of-game-object", 
-            "text": "", 
-            "title": "Methods of game object"
-        }, 
-        {
-            "location": "/arcade/index.html#size", 
-            "text": "Rectangle\n     gameObject . setSize ( width ,   height );              // set body s offset to center  // gameObject.setSize(width, height, false);  // set body s offset to (0, 0)   Circle\n     gameObject . setCircle ( radius ,   offsetX ,   offsetY );", 
-            "title": "Size"
-        }, 
-        {
-            "location": "/arcade/index.html#offset", 
-            "text": "Sets the offset of the Body's position from its Game Object's position.  gameObject . setOffset ( x ,   y );", 
-            "title": "Offset"
-        }, 
-        {
-            "location": "/arcade/index.html#sync-body", 
-            "text": "Syncs the Bodies position and size in static game object.  gameObject . refreshBody ();", 
-            "title": "Sync body"
-        }, 
-        {
-            "location": "/arcade/index.html#velocity", 
-            "text": "gameObject . setVelocity ( x ,   y );   gameObject . setVelocityX ( x );   gameObject . setVelocityY ( x );   gameObject . setMaxVelocity ( y );", 
-            "title": "Velocity"
-        }, 
-        {
-            "location": "/arcade/index.html#rotation", 
-            "text": "body . setAllowRotation ( value );    // true to allow rotation on this body (default:true)", 
-            "title": "Rotation"
-        }, 
-        {
-            "location": "/arcade/index.html#mass", 
-            "text": "gameObject . setMass ( v );", 
-            "title": "Mass"
-        }, 
-        {
-            "location": "/arcade/index.html#acceleration", 
-            "text": "gameObject . setAcceleration ( x ,   y );   gameObject . setAccelerationX ( x );   gameObject . setAccelerationY ( y );", 
-            "title": "Acceleration"
-        }, 
-        {
-            "location": "/arcade/index.html#gravity", 
-            "text": "gameObject . setGravity ( x ,   y );   gameObject . setGravityX ( x );   gameObject . setGravityY ( y );", 
-            "title": "Gravity"
-        }, 
-        {
-            "location": "/arcade/index.html#friction", 
-            "text": "gameObject . setFriction ( x ,   y );   gameObject . setFrictionX ( x );   gameObject . setFrictionY ( y );", 
-            "title": "Friction"
-        }, 
-        {
-            "location": "/arcade/index.html#drag", 
-            "text": "gameObject . setDrag ( x ,   y );   gameObject . setDragX ( x );   gameObject . setDragY ( y );   Enables drag  body . setAllowDrag ( value );    // true to allow drag on this body (default:true)   Enable damping  gameObject . setDamping ( value );", 
-            "title": "Drag"
-        }, 
-        {
-            "location": "/arcade/index.html#angular", 
-            "text": "gameObject . setAngularVelocity ( v );   gameObject . setAngularAcceleration ( v );   gameObject . setAngularDrag ( v );", 
-            "title": "Angular"
-        }, 
-        {
-            "location": "/arcade/index.html#bounce", 
-            "text": "gameObject . setBounce ( x ,   y );   gameObject . setBounceX ( x );   gameObject . setBounceY ( y );   gameObject . setCollideWorldBounds ( boolean );", 
-            "title": "Bounce"
-        }, 
-        {
-            "location": "/arcade/index.html#immovable", 
-            "text": "gameObject . setImmovable ( boolean );", 
-            "title": "Immovable"
-        }, 
-        {
-            "location": "/arcade/index.html#speed", 
-            "text": "The absolute (non-negative) change in this Body's horizontal/vertical position from the previous step.  var   dx   =   body . deltaAbsX ();  var   dy   =   body . deltaAbsY ();", 
-            "title": "Speed"
-        }, 
-        {
-            "location": "/arcade/index.html#point-inside", 
-            "text": "var   hit   =   gameObject . hitTest ( x ,   y );", 
-            "title": "Point inside"
-        }, 
-        {
-            "location": "/arcade/index.html#blocked", 
-            "text": "Blocked when moveing down\n     var   onFloor   =   body . onFloor ();   Blocked when moveing up\n     var   onCeiling   =   body . onCeiling ();   Blocked when moveing left or right\n     var   onWall   =   body . onWall ();   State\n     var   blocked   =   body . blocked ;   blocked.none  blocked.up  blocked.down  blocked.left  blocked.right", 
-            "title": "Blocked"
-        }, 
-        {
-            "location": "/arcade/index.html#methods-of-group", 
-            "text": "group . setVelocity ( x ,   y ,   step );   group . setVelocityX ( value ,   step );   group . setVelocityY ( value ,   step );   group . refresh ();    // call this method when position of game objects were changed in static object group", 
-            "title": "Methods of group"
-        }, 
-        {
-            "location": "/arcade/index.html#add-a-game-object-to-physics-world", 
-            "text": "scene . physics . add . existing ( gameObject ,   isStatic );", 
-            "title": "Add a game object to physics world"
-        }, 
-        {
-            "location": "/arcade/index.html#get-physics-body", 
-            "text": "var   body   =   gameObject . body ;", 
-            "title": "Get physics body"
-        }, 
-        {
-            "location": "/arcade/index.html#size_1", 
-            "text": "body . setSize ( width ,   height ,   center );   body . setCircle ( radius ,   offsetX ,   offsetY );   body . setOffset ( x ,   y );", 
-            "title": "Size"
-        }, 
-        {
-            "location": "/arcade/index.html#reset-position", 
-            "text": "body . reset ( x ,   y );", 
-            "title": "Reset position"
-        }, 
-        {
-            "location": "/arcade/index.html#velocity_1", 
-            "text": "body . velocity . set ( x ,   y );   body . velocity . x   =   x ;   body . velocity . y   =   y ;   body . maxVelocity . set ( x ,   y );", 
-            "title": "Velocity"
-        }, 
-        {
-            "location": "/arcade/index.html#mass_1", 
-            "text": "body . mass   =   v ;", 
-            "title": "Mass"
-        }, 
-        {
-            "location": "/arcade/index.html#acceleration_1", 
-            "text": "body . acceleration . set ( x ,   y );   body . acceleration . x   =   x ;   body . acceleration . y   =   y ;", 
-            "title": "Acceleration"
-        }, 
-        {
-            "location": "/arcade/index.html#gravity_1", 
-            "text": "body . gravity . set ( x ,   y );   body . gravity . x   =   x ;   body . gravity . y   =   y ;   body . setAllowGravity ( value );    // true to allow gravity on this body (default:true)", 
-            "title": "Gravity"
-        }, 
-        {
-            "location": "/arcade/index.html#friction_1", 
-            "text": "body . friction . set ( x ,   y );   body . friction . x   =   x ;   body . friction . y   =   y ;", 
-            "title": "Friction"
-        }, 
-        {
-            "location": "/arcade/index.html#drag_1", 
-            "text": "body . drag . set ( x ,   y );   body . drag . x   =   x ;   body . drag . y   =   y ;   Enables drag  body . allowDrag   =   true ;   Enable damping  body . useDamping   =   true ;", 
-            "title": "Drag"
-        }, 
-        {
-            "location": "/arcade/index.html#angular_1", 
-            "text": "body . angularVelocity   =   v ;   body . angularAcceleration   =   v ;   body . angularDrag   =   v ;", 
-            "title": "Angular"
-        }, 
-        {
-            "location": "/arcade/index.html#bounce_1", 
-            "text": "body . bounce . set ( x ,   y );   body . bounce . x   =   x ;   body . bounce . y   =   y ;   body . collideWorldBounds   =   boolean ;", 
-            "title": "Bounce"
-        }, 
-        {
-            "location": "/arcade/index.html#immovable_1", 
-            "text": "body . immovable   =   boolean ;", 
-            "title": "Immovable"
-        }, 
-        {
-            "location": "/arcade/index.html#methods-of-world", 
-            "text": "", 
-            "title": "Methods of World"
-        }, 
-        {
-            "location": "/arcade/index.html#wrap", 
+            "location": "/arcade-world/index.html#wrap", 
             "text": "scene . physics . world . wrap ( gameObject ,   padding );    gameObject:  game object (image, sprite)  group  array of game objects", 
             "title": "Wrap"
         }, 
         {
-            "location": "/arcade/index.html#duration-per-frame", 
+            "location": "/arcade-world/index.html#control", 
+            "text": "", 
+            "title": "Control"
+        }, 
+        {
+            "location": "/arcade-world/index.html#pause", 
+            "text": "scene . physics . pause ();", 
+            "title": "Pause"
+        }, 
+        {
+            "location": "/arcade-world/index.html#resume", 
+            "text": "scene . physics . resume ();", 
+            "title": "Resume"
+        }, 
+        {
+            "location": "/arcade-world/index.html#duration-per-frame", 
             "text": "Time scale\n     scene . physics . world . timeScale   =   timeScale ;   1.0 = normal speed  2.0 = half speed  0.5 = double speed    FPS\n     scene . physics . world . setFPS ( framerate );", 
             "title": "Duration per frame"
         }, 
         {
-            "location": "/arcade/index.html#step", 
+            "location": "/arcade-world/index.html#step", 
             "text": "Advances the simulation by one step.  scene . physics . world . step ( delta );", 
             "title": "Step"
+        }, 
+        {
+            "location": "/arcade-body/index.html", 
+            "text": "Introduction\n\n\nArcade physics body.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nGet physics body\n\n\n\n\nEnable physics world\n\n\nAdd an existing game object to physics world\n    \nvar\n \ngameObject\n \n=\n \nscene\n.\nphysics\n.\nadd\n.\nexisting\n(\ngameObject\n,\n \nisStatic\n);\n\n\n\n\nGet physics body\n    \nvar\n \nbody\n \n=\n \ngameObject\n.\nbody\n;\n\n\n\n\n\n\nMovement\n\n\nVelocity\n\n\n\n\nSet\n    \nbody\n.\nsetVelocity\n(\nx\n,\ny\n);\n\n\n\n    or\n    \nbody\n.\nsetVelocityX\n(\nx\n);\n\n\nbody\n.\nsetVelocityY\n(\nx\n);\n\n\n\n\nGet\n    \nvar\n \nvx\n \n=\n \nbody\n.\nvelocity\n.\nx\n;\n\n\nvar\n \nvy\n \n=\n \nbody\n.\nvelocity\n.\ny\n;\n\n\n\n\n\n\nMax velocity\n\n\n\n\nSet\n    \nbody\n.\nsetMaxVelocity\n(\nx\n,\n \ny\n);\n\n\n\n\nGet \n    \nvar\n \nvx\n \n=\n \nbody\n.\nmaxVelocity\n.\nx\n;\n\n\nvar\n \nvy\n \n=\n \nbody\n.\nmaxVelocity\n.\ny\n;\n\n\n\n\n\n\nAcceleration\n\n\n\n\nSet\n    \nbody\n.\nsetAcceleration\n(\nx\n,\n \ny\n);\n\n\n\n    or\n    \nbody\n.\nsetAccelerationX\n(\nx\n);\n\n\nbody\n.\nsetAccelerationY\n(\ny\n);\n\n\n\n\nGet\n    \nvar\n \nax\n \n=\n \nbody\n.\nacceleration\n.\nx\n;\n\n\nvar\n \nay\n \n=\n \nbody\n.\nacceleration\n.\ny\n;\n\n\n\n\n\n\nGravity\n\n\n\n\nSet\n    \nbody\n.\nsetGravity\n(\nx\n,\n \ny\n);\n\n\n\n    or\n    \nbody\n.\nsetGravityX\n(\nx\n);\n\n\nbody\n.\nsetGravityY\n(\ny\n);\n\n\n\n\nGet\n    \nvar\n \ngx\n \n=\n \nbody\n.\ngravity\n.\nx\n;\n\n\nvar\n \ngy\n \n=\n \nbody\n.\ngravity\n.\ny\n;\n\n\n\n\nEnables (default)\n    \nbody\n.\nsetAllowGravity\n();\n\n\n\n\nDisable\n    \nbody\n.\nsetAllowGravity\n(\nfalse\n);\n\n\n\n\n\n\nDrag\n\n\n\n\nSet\n    \nbody\n.\nsetDrag\n(\nx\n,\n \ny\n);\n\n\n\n    or\n    \nbody\n.\nsetDragX\n(\nx\n);\n\n\nbody\n.\nsetDragY\n(\ny\n);\n\n\n\n\nGet\n    \nvar\n \ndx\n \n=\n \nbody\n.\ndrag\n.\nx\n;\n\n\nvar\n \ndy\n \n=\n \nbody\n.\ndrag\n.\ny\n;\n\n\n\n\nEnables (default)\n    \nbody\n.\nsetAllowDrag\n();\n\n\n\n\nDisable\n    \nbody\n.\nsetAllowDrag\n(\nfalse\n);\n\n\n\n\nEnable damping (default: false)\n    \nbody\n.\nuseDamping\n \n=\n \ntrue\n;\n\n\n\n\n\n\nFriction\n\n\n\n\nSet\n    \nbody\n.\nsetFriction\n(\nx\n,\n \ny\n);\n\n\n\n    or\n    \nbody\n.\nsetFrictionX\n(\nx\n);\n\n\nbody\n.\nsetFrictionY\n(\ny\n);\n\n\n\n\nGet\n    \nvar\n \nfx\n \n=\n \nbody\n.\nfriction\n.\nx\n;\n\n\nvar\n \nfy\n \n=\n \nbody\n.\nfriction\n.\ny\n;\n\n\n\n\n\n\nReset position\n\n\nbody\n.\nreset\n(\nx\n,\n \ny\n);\n\n\n\n\n\nStop\n\n\nSets acceleration, velocity, and speed to zero.\n\n\nbody\n.\nstop\n();\n\n\n\n\n\nImmovable\n\n\n\n\nEnable\n    \nbody\n.\nsetImmovable\n();\n\n\n\n\nDisable (defalut)\n    \nbody\n.\nsetImmovable\n(\nfalse\n);\n\n\n\n\nGet\n    \nvar\n \nimmovable\n \n=\n \nbody\n.\nimmovable\n;\n\n\n\n\n\n\nSpeed\n\n\n\n\nThe absolute (non-negative) change in this Body's horizontal/vertical position from the previous step.\n    \nvar\n \ndx\n \n=\n \nbody\n.\ndeltaAbsX\n();\n\n\nvar\n \ndy\n \n=\n \nbody\n.\ndeltaAbsY\n();\n\n\n\n\n\n\nRotation\n\n\nAllow rotation\n\n\nWhether this Body's rotation is affected by its angular acceleration and velocity.\n\n\n\n\nEnable (default)\n    \nbody\n.\nsetAllowRotation\n();\n\n\n\n\nDisable\n    \nbody\n.\nsetAllowRotation\n(\nfalse\n);\n\n\n\n\nGet\n    \nvar\n \nallowRotation\n \n=\n \nbody\n.\nallowRotation\n;\n\n\n\n\n\n\nAngular velocity\n\n\n\n\nSet \n    \nbody\n.\nsetAngularVelocity\n(\nv\n);\n\n\n\n\nGet\n    \nvar\n \nav\n \n=\n \nbody\n.\nangularVelocity\n;\n\n\n\n\n\n\nAngular acceleration\n\n\n-Set \n    \nbody\n.\nsetAngularAcceleration\n(\nv\n);\n\n\n\n- Get\n    \nvar\n \naa\n \n=\n \nbody\n.\nangularAcceleration\n;\n\n\n\n\nAngular drag\n\n\n\n\nSet\n    \nbody\n.\nsetAngularDrag\n(\nv\n);\n\n\n\n\nGet\n    \nvar\n \nad\n \n=\n \nbody\n.\nangularDrag\n;\n\n\n\n\n\n\nCollision\n\n\nPoint inside\n\n\nvar\n \nhit\n \n=\n \nbody\n.\nhitTest\n(\nx\n,\n \ny\n);\n\n\n\n\n\nCallbacks\n\n\nCallback of collision\n\n\nCollision bound\n\n\n\n\nRectangle\n    \nbody\n.\nsetSize\n(\nwidth\n,\n \nheight\n,\n \ncenter\n);\n\n\n\n\ncenter\n : \nfalse\n to set body's offset to (0, 0).\n\n\n\n\n\n\nCircle\n    \nbody\n.\nsetCircle\n(\nradius\n,\n \noffsetX\n,\n \noffsetY\n);\n\n\n\n\n\n\nOffset\n\n\nbody\n.\nsetOffset\n(\nx\n,\n \ny\n);\n\n\n\n\n\nWorld bounds\n\n\n\n\nEnable\n    \nbody\n.\nsetCollideWorldBounds\n();\n\n\n\n\nDisable (default))\n    \nbody\n.\nsetCollideWorldBounds\n(\nfalse\n);\n\n\n\n\n\n\nEvents\n\n\n\n\nWorld bounds\n    \nscene\n.\nphysics\n.\nworld\n.\non\n(\nworldbounds\n,\n \nfunction\n(\nbody\n,\n \nblockedUp\n,\n \nblockedDown\n,\n \nblockedLeft\n,\n \nblockedRight\n \n){\n \n    \n// \n\n\n});\n\n\n\n\n\n\nBlocked\n\n\n\n\nBlocked when moveing down\n    \nvar\n \nonFloor\n \n=\n \nbody\n.\nonFloor\n();\n \n// blocked.down\n\n\n\n\nBlocked when moveing up\n    \nvar\n \nonCeiling\n \n=\n \nbody\n.\nonCeiling\n();\n  \n// blocked.up\n\n\n\n\nBlocked when moveing left or right\n    \nvar\n \nonWall\n \n=\n \nbody\n.\nonWall\n();\n  \n// blocked.left || this.blocked.right\n\n\n\n\nState\n    \nvar\n \nblocked\n \n=\n \nbody\n.\nblocked\n;\n\n\n\n\nblocked\n :\n    \n{\n\n    \nnone\n:\n \ntrue\n,\n\n    \nup\n:\n \ntrue\n,\n\n    \ndown\n:\n \ntrue\n,\n\n    \nleft\n:\n \ntrue\n,\n\n    \nright\n:\n \ntrue\n\n\n}\n\n\n\n\n\n\n\n\n\n\nBounce\n\n\n\n\nSet\n    \nbody\n.\nsetBounce\n(\nx\n,\n \ny\n);\n\n\n\n    or\n    \nbody\n.\nsetBounceX\n(\nx\n);\n\n\nbody\n.\nsetBounceY\n(\ny\n);\n\n\n\n\nGet\n    \nvar\n \nbx\n \n=\n \nbody\n.\nbounce\n.\nx\n;\n\n\nvar\n \nby\n \n=\n \nbody\n.\nbounce\n.\ny\n;\n\n\n\n\n\n\nMass\n\n\n\n\nSet\n    \nbody\n.\nsetMass\n(\nm\n);\n\n\n\n\nGet\n    \nvar\n \nm\n \n=\n \nbody\n.\nmass\n;\n\n\n\n\n\n\nStatic body\n\n\nSync\n\n\nSyncs the Bodies \nposition\n and \nsize\n with its parent Game Object.\n\n\nbody\n.\nupdateFromGameObject\n();", 
+            "title": "Body"
+        }, 
+        {
+            "location": "/arcade-body/index.html#introduction", 
+            "text": "Arcade physics body.   Author: Richard Davey", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/arcade-body/index.html#usage", 
+            "text": "", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/arcade-body/index.html#get-physics-body", 
+            "text": "Enable physics world  Add an existing game object to physics world\n     var   gameObject   =   scene . physics . add . existing ( gameObject ,   isStatic );   Get physics body\n     var   body   =   gameObject . body ;", 
+            "title": "Get physics body"
+        }, 
+        {
+            "location": "/arcade-body/index.html#movement", 
+            "text": "", 
+            "title": "Movement"
+        }, 
+        {
+            "location": "/arcade-body/index.html#velocity", 
+            "text": "Set\n     body . setVelocity ( x , y );  \n    or\n     body . setVelocityX ( x );  body . setVelocityY ( x );   Get\n     var   vx   =   body . velocity . x ;  var   vy   =   body . velocity . y ;", 
+            "title": "Velocity"
+        }, 
+        {
+            "location": "/arcade-body/index.html#max-velocity", 
+            "text": "Set\n     body . setMaxVelocity ( x ,   y );   Get \n     var   vx   =   body . maxVelocity . x ;  var   vy   =   body . maxVelocity . y ;", 
+            "title": "Max velocity"
+        }, 
+        {
+            "location": "/arcade-body/index.html#acceleration", 
+            "text": "Set\n     body . setAcceleration ( x ,   y );  \n    or\n     body . setAccelerationX ( x );  body . setAccelerationY ( y );   Get\n     var   ax   =   body . acceleration . x ;  var   ay   =   body . acceleration . y ;", 
+            "title": "Acceleration"
+        }, 
+        {
+            "location": "/arcade-body/index.html#gravity", 
+            "text": "Set\n     body . setGravity ( x ,   y );  \n    or\n     body . setGravityX ( x );  body . setGravityY ( y );   Get\n     var   gx   =   body . gravity . x ;  var   gy   =   body . gravity . y ;   Enables (default)\n     body . setAllowGravity ();   Disable\n     body . setAllowGravity ( false );", 
+            "title": "Gravity"
+        }, 
+        {
+            "location": "/arcade-body/index.html#drag", 
+            "text": "Set\n     body . setDrag ( x ,   y );  \n    or\n     body . setDragX ( x );  body . setDragY ( y );   Get\n     var   dx   =   body . drag . x ;  var   dy   =   body . drag . y ;   Enables (default)\n     body . setAllowDrag ();   Disable\n     body . setAllowDrag ( false );   Enable damping (default: false)\n     body . useDamping   =   true ;", 
+            "title": "Drag"
+        }, 
+        {
+            "location": "/arcade-body/index.html#friction", 
+            "text": "Set\n     body . setFriction ( x ,   y );  \n    or\n     body . setFrictionX ( x );  body . setFrictionY ( y );   Get\n     var   fx   =   body . friction . x ;  var   fy   =   body . friction . y ;", 
+            "title": "Friction"
+        }, 
+        {
+            "location": "/arcade-body/index.html#reset-position", 
+            "text": "body . reset ( x ,   y );", 
+            "title": "Reset position"
+        }, 
+        {
+            "location": "/arcade-body/index.html#stop", 
+            "text": "Sets acceleration, velocity, and speed to zero.  body . stop ();", 
+            "title": "Stop"
+        }, 
+        {
+            "location": "/arcade-body/index.html#immovable", 
+            "text": "Enable\n     body . setImmovable ();   Disable (defalut)\n     body . setImmovable ( false );   Get\n     var   immovable   =   body . immovable ;", 
+            "title": "Immovable"
+        }, 
+        {
+            "location": "/arcade-body/index.html#speed", 
+            "text": "The absolute (non-negative) change in this Body's horizontal/vertical position from the previous step.\n     var   dx   =   body . deltaAbsX ();  var   dy   =   body . deltaAbsY ();", 
+            "title": "Speed"
+        }, 
+        {
+            "location": "/arcade-body/index.html#rotation", 
+            "text": "", 
+            "title": "Rotation"
+        }, 
+        {
+            "location": "/arcade-body/index.html#allow-rotation", 
+            "text": "Whether this Body's rotation is affected by its angular acceleration and velocity.   Enable (default)\n     body . setAllowRotation ();   Disable\n     body . setAllowRotation ( false );   Get\n     var   allowRotation   =   body . allowRotation ;", 
+            "title": "Allow rotation"
+        }, 
+        {
+            "location": "/arcade-body/index.html#angular-velocity", 
+            "text": "Set \n     body . setAngularVelocity ( v );   Get\n     var   av   =   body . angularVelocity ;", 
+            "title": "Angular velocity"
+        }, 
+        {
+            "location": "/arcade-body/index.html#angular-acceleration", 
+            "text": "-Set \n     body . setAngularAcceleration ( v );  \n- Get\n     var   aa   =   body . angularAcceleration ;", 
+            "title": "Angular acceleration"
+        }, 
+        {
+            "location": "/arcade-body/index.html#angular-drag", 
+            "text": "Set\n     body . setAngularDrag ( v );   Get\n     var   ad   =   body . angularDrag ;", 
+            "title": "Angular drag"
+        }, 
+        {
+            "location": "/arcade-body/index.html#collision", 
+            "text": "", 
+            "title": "Collision"
+        }, 
+        {
+            "location": "/arcade-body/index.html#point-inside", 
+            "text": "var   hit   =   body . hitTest ( x ,   y );", 
+            "title": "Point inside"
+        }, 
+        {
+            "location": "/arcade-body/index.html#callbacks", 
+            "text": "Callback of collision", 
+            "title": "Callbacks"
+        }, 
+        {
+            "location": "/arcade-body/index.html#collision-bound", 
+            "text": "Rectangle\n     body . setSize ( width ,   height ,   center );   center  :  false  to set body's offset to (0, 0).    Circle\n     body . setCircle ( radius ,   offsetX ,   offsetY );", 
+            "title": "Collision bound"
+        }, 
+        {
+            "location": "/arcade-body/index.html#offset", 
+            "text": "body . setOffset ( x ,   y );", 
+            "title": "Offset"
+        }, 
+        {
+            "location": "/arcade-body/index.html#world-bounds", 
+            "text": "Enable\n     body . setCollideWorldBounds ();   Disable (default))\n     body . setCollideWorldBounds ( false );", 
+            "title": "World bounds"
+        }, 
+        {
+            "location": "/arcade-body/index.html#events", 
+            "text": "World bounds\n     scene . physics . world . on ( worldbounds ,   function ( body ,   blockedUp ,   blockedDown ,   blockedLeft ,   blockedRight   ){  \n     //   });", 
+            "title": "Events"
+        }, 
+        {
+            "location": "/arcade-body/index.html#blocked", 
+            "text": "Blocked when moveing down\n     var   onFloor   =   body . onFloor ();   // blocked.down   Blocked when moveing up\n     var   onCeiling   =   body . onCeiling ();    // blocked.up   Blocked when moveing left or right\n     var   onWall   =   body . onWall ();    // blocked.left || this.blocked.right   State\n     var   blocked   =   body . blocked ;   blocked  :\n     { \n     none :   true , \n     up :   true , \n     down :   true , \n     left :   true , \n     right :   true  }", 
+            "title": "Blocked"
+        }, 
+        {
+            "location": "/arcade-body/index.html#bounce", 
+            "text": "Set\n     body . setBounce ( x ,   y );  \n    or\n     body . setBounceX ( x );  body . setBounceY ( y );   Get\n     var   bx   =   body . bounce . x ;  var   by   =   body . bounce . y ;", 
+            "title": "Bounce"
+        }, 
+        {
+            "location": "/arcade-body/index.html#mass", 
+            "text": "Set\n     body . setMass ( m );   Get\n     var   m   =   body . mass ;", 
+            "title": "Mass"
+        }, 
+        {
+            "location": "/arcade-body/index.html#static-body", 
+            "text": "", 
+            "title": "Static body"
+        }, 
+        {
+            "location": "/arcade-body/index.html#sync", 
+            "text": "Syncs the Bodies  position  and  size  with its parent Game Object.  body . updateFromGameObject ();", 
+            "title": "Sync"
+        }, 
+        {
+            "location": "/arcade-gameobject/index.html", 
+            "text": "Introduction\n\n\nArcade physics Image/Sprite/Group object.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nAdd physics object\n\n\nEnable physics world\n\n\nImage object\n\n\n\n\nStatic object\n    \nvar\n \nimage\n \n=\n \nscene\n.\nphysics\n.\nadd\n.\nstaticImage\n(\nx\n,\n \ny\n,\n \nkey\n);\n\n\n\n\nDynamic object\n    \nvar\n \nimage\n \n=\n \nscene\n.\nphysics\n.\nadd\n.\nimage\n(\nx\n,\n \ny\n,\n \nkey\n);\n\n\n\n\n\n\nSprite object\n\n\n\n\nStatic object\n    \nvar\n \nimage\n \n=\n \nscene\n.\nphysics\n.\nadd\n.\nstaticSprite\n(\nx\n,\n \ny\n,\n \nkey\n,\n \nframe\n);\n\n\n\n\nDynamic object\n    \nvar\n \nimage\n \n=\n \nscene\n.\nphysics\n.\nadd\n.\nsprite\n(\nx\n,\n \ny\n,\n \nkey\n,\n \nframe\n);\n\n\n\n\n\n\nGroup\n\n\n\n\nStatic sprite objects\n    \nvar\n \ngroup\n \n=\n \nscene\n.\nphysics\n.\nadd\n.\nstaticGroup\n(\nchildren\n,\n \nconfig\n);\n\n\n// var group = scene.physics.add.staticGroup(config);\n\n\n\n\nDynamic sprite objects\n    \nvar\n \ngroup\n \n=\n \nscene\n.\nphysics\n.\nadd\n.\ngroup\n(\nchildren\n,\n \nconfig\n);\n\n\n// var group = scene.physics.add.staticGroup(config);\n\n\n\n\nconfig\n\n\nvar\n \nconfig\n \n=\n \n{\n\n    \nsetCollideWorldBounds\n:\n \nfalse\n,\n\n    \nsetAccelerationX\n:\n \n0\n,\n\n    \nsetAccelerationY\n:\n \n0\n,\n\n    \nallowDrag\n:\n \ntrue\n,\n\n    \nallowGravity\n:\n \ntrue\n,\n\n    \nallowRotation\n:\n \ntrue\n\n    \nsetBounceX\n:\n \n0\n,\n\n    \nsetBounceY\n:\n \n0\n,\n\n    \nsetDragX\n:\n \n0\n,\n\n    \nsetDragY\n:\n \n0\n,\n\n    \nsetGravityX\n:\n \n0\n,\n\n    \nsetGravityY\n:\n \n0\n,\n\n    \nsetFrictionX\n:\n \n0\n,\n\n    \nsetFrictionY\n:\n \n0\n,\n\n    \nsetVelocityX\n:\n \n0\n,\n\n    \nsetVelocityY\n:\n \n0\n,\n\n    \nsetAngularVelocity\n:\n \n0\n,\n\n    \nsetAngularAcceleration\n:\n \n0\n,\n\n    \nsetAngularDrag\n:\n \n0\n,\n\n    \nsetMass\n:\n \n1\n,\n\n    \nsetImmovable\n:\n \nfalse\n\n\n};\n\n\n\n\n\n\n\n\n\n\nMovement\n\n\nVelocity\n\n\n\n\nSet\n    \ngameObject\n.\nsetVelocity\n(\nx\n,\n \ny\n);\n\n\n\n    or\n    \ngameObject\n.\nsetVelocityX\n(\nx\n);\n\n\ngameObject\n.\nsetVelocityY\n(\ny\n);\n\n\n\n\nGet\n    \nvar\n \nvx\n \n=\n \ngameObject\n.\nbody\n.\nvelocity\n.\nx\n;\n\n\nvar\n \nvy\n \n=\n \ngameObject\n.\nbody\n.\nvelocity\n.\ny\n;\n\n\n\n\n\n\nMax velocity\n\n\n\n\nSet\n    \ngameObject\n.\nsetMaxVelocity\n(\nx\n,\n \ny\n);\n\n\n\n\nGet \n    \nvar\n \nvx\n \n=\n \ngameObject\n.\nbody\n.\nmaxVelocity\n.\nx\n;\n\n\nvar\n \nvy\n \n=\n \ngameObject\n.\nbody\n.\nmaxVelocity\n.\ny\n;\n\n\n\n\n\n\nAcceleration\n\n\n\n\nSet\n    \ngameObject\n.\nsetAcceleration\n(\nx\n,\n \ny\n);\n\n\n\n    or\n    \ngameObject\n.\nsetAccelerationX\n(\nx\n);\n\n\ngameObject\n.\nsetAccelerationY\n(\ny\n);\n\n\n\n\nGet\n    \nvar\n \nax\n \n=\n \ngameObject\n.\nbody\n.\nacceleration\n.\nx\n;\n\n\nvar\n \nay\n \n=\n \ngameObject\n.\nbody\n.\nacceleration\n.\ny\n;\n\n\n\n\n\n\nGravity\n\n\n\n\nSet\n    \ngameObject\n.\nsetGravity\n(\nx\n,\n \ny\n);\n\n\n\n    or\n    \ngameObject\n.\nsetGravityX\n(\nx\n);\n\n\ngameObject\n.\nsetGravityY\n(\ny\n);\n\n\n\n\nGet\n    \nvar\n \ngx\n \n=\n \ngameObject\n.\nbody\n.\ngravity\n.\nx\n;\n\n\nvar\n \ngy\n \n=\n \ngameObject\n.\nbody\n.\ngravity\n.\ny\n;\n\n\n\n\n\n\nDrag\n\n\n\n\nSet\n    \ngameObject\n.\nsetDrag\n(\nx\n,\n \ny\n);\n\n\n\n    or\n    \ngameObject\n.\nsetDragX\n(\nx\n);\n\n\ngameObject\n.\nsetDragY\n(\ny\n);\n\n\n\n\nGet\n    \nvar\n \ndx\n \n=\n \ngameObject\n.\nbody\n.\ndrag\n.\nx\n;\n\n\nvar\n \ndy\n \n=\n \ngameObject\n.\nbody\n.\ndrag\n.\ny\n;\n\n\n\n\nEnable damping\n    \ngameObject\n.\nsetDamping\n(\nvalue\n);\n\n\n\n\n\n\nFriction\n\n\n\n\nSet\n    \ngameObject\n.\nsetFriction\n(\nx\n,\n \ny\n);\n\n\n\n    or\n    \ngameObject\n.\nsetFrictionX\n(\nx\n);\n\n\ngameObject\n.\nsetFrictionY\n(\ny\n);\n\n\n\n\nGet\n    \nvar\n \nfx\n \n=\n \ngameObject\n.\nbody\n.\nfriction\n.\nx\n;\n\n\nvar\n \nfy\n \n=\n \ngameObject\n.\nbody\n.\nfriction\n.\ny\n;\n\n\n\n\n\n\nImmovable\n\n\n\n\nEnable\n    \ngameObject\n.\nsetImmovable\n();\n\n\n\n\nDisable\n    \ngameObject\n.\nsetImmovable\n(\nfalse\n);\n\n\n\n\nGet\n    \nvar\n \nimmovable\n \n=\n \ngameObject\n.\nbody\n.\nimmovable\n;\n\n\n\n\n\n\nRotation\n\n\nAllow rotation\n\n\nWhether this Body's rotation is affected by its angular acceleration and velocity.\n\n\n\n\nEnable (default)\n    \nbody\n.\nsetAllowRotation\n();\n\n\n\n\nDisable\n    \nbody\n.\nsetAllowRotation\n(\nfalse\n);\n\n\n\n\nGet\n    \nvar\n \nallowRotation\n \n=\n \ngameObject\n.\nbody\n.\nallowRotation\n;\n\n\n\n\n\n\nAngular velocity\n\n\n\n\nSet\n    \ngameObject\n.\nsetAngularVelocity\n(\nv\n);\n\n\n\n\nGet\n    \nvar\n \nav\n \n=\n \ngameObject\n.\nbody\n.\nangularVelocity\n;\n\n\n\n\n\n\nAngular acceleration\n\n\n-Set \n    \ngameObject\n.\nsetAngularAcceleration\n(\nv\n);\n\n\n\n- Get\n    \nvar\n \naa\n \n=\n \ngameObject\n.\nbody\n.\nangularAcceleration\n;\n\n\n\n\nAngular drag\n\n\n\n\nSet\n    \ngameObject\n.\nsetAngularDrag\n(\nv\n);\n\n\n\n\nGet\n    \nvar\n \nad\n \n=\n \ngameObject\n.\nbody\n.\nangularDrag\n;\n\n\n\n\n\n\nCollision\n\n\nPoint inside\n\n\nvar\n \nhit\n \n=\n \ngameObject\n.\nhitTest\n(\nx\n,\n \ny\n);\n\n\n\n\n\nCallbacks\n\n\nCallback of collision\n\n\nCollision bound\n\n\n\n\nRectangle\n    \ngameObject\n.\nsetSize\n(\nwidth\n,\n \nheight\n,\n \ncenter\n);\n\n\n\n\ncenter\n : \nfalse\n to set body's offset to (0, 0)\n\n\n\n\n\n\nCircle\n    \ngameObject\n.\nsetCircle\n(\nradius\n,\n \noffsetX\n,\n \noffsetY\n);\n\n\n\n\n\n\nOffset\n\n\ngameObject\n.\nsetOffset\n(\nx\n,\n \ny\n);\n\n\n\n\n\nBounce\n\n\n\n\nSet\n    \ngameObject\n.\nsetBounce\n(\nx\n,\n \ny\n);\n\n\n\n    or\n    \ngameObject\n.\nsetBounceX\n(\nx\n);\n\n\ngameObject\n.\nsetBounceY\n(\ny\n);\n\n\n\n\nGet\n    \nvar\n \nbx\n \n=\n \ngameObject\n.\nbody\n.\nbounce\n.\nx\n;\n\n\nvar\n \nby\n \n=\n \ngameObject\n.\nbody\n.\nbounce\n.\ny\n;\n\n\n\n\nEnable bounce when colliding with the world boundary\n    \ngameObject\n.\nsetCollideWorldBounds\n();\n\n\n\n\nDisable bounce when colliding with the world boundary\n    \ngameObject\n.\nsetCollideWorldBounds\n(\nfalse\n);\n\n\n\n\n\n\nMass\n\n\n\n\nSet\n    \ngameObject\n.\nsetMass\n(\nm\n);\n\n\n\n\nGet\n    \nvar\n \nm\n \n=\n \ngameObject\n.\nbody\n.\nmass\n;\n\n\n\n\n\n\nStatic game object\n\n\nSync\n\n\nSyncs the Bodies position and size in static game object.\n\n\ngameObject\n.\nrefreshBody\n();\n\n\n\n\n\nMethods of group\n\n\ngroup\n.\nsetVelocity\n(\nx\n,\n \ny\n,\n \nstep\n);\n\n\n\n\n\ngroup\n.\nsetVelocityX\n(\nvalue\n,\n \nstep\n);\n\n\n\n\n\ngroup\n.\nsetVelocityY\n(\nvalue\n,\n \nstep\n);\n\n\n\n\n\ngroup\n.\nrefresh\n();\n  \n// call this method when position of game objects were changed in static object group", 
+            "title": "Game object"
+        }, 
+        {
+            "location": "/arcade-gameobject/index.html#introduction", 
+            "text": "Arcade physics Image/Sprite/Group object.   Author: Richard Davey", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/arcade-gameobject/index.html#usage", 
+            "text": "", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/arcade-gameobject/index.html#add-physics-object", 
+            "text": "Enable physics world", 
+            "title": "Add physics object"
+        }, 
+        {
+            "location": "/arcade-gameobject/index.html#image-object", 
+            "text": "Static object\n     var   image   =   scene . physics . add . staticImage ( x ,   y ,   key );   Dynamic object\n     var   image   =   scene . physics . add . image ( x ,   y ,   key );", 
+            "title": "Image object"
+        }, 
+        {
+            "location": "/arcade-gameobject/index.html#sprite-object", 
+            "text": "Static object\n     var   image   =   scene . physics . add . staticSprite ( x ,   y ,   key ,   frame );   Dynamic object\n     var   image   =   scene . physics . add . sprite ( x ,   y ,   key ,   frame );", 
+            "title": "Sprite object"
+        }, 
+        {
+            "location": "/arcade-gameobject/index.html#group", 
+            "text": "Static sprite objects\n     var   group   =   scene . physics . add . staticGroup ( children ,   config );  // var group = scene.physics.add.staticGroup(config);   Dynamic sprite objects\n     var   group   =   scene . physics . add . group ( children ,   config );  // var group = scene.physics.add.staticGroup(config);   config  var   config   =   { \n     setCollideWorldBounds :   false , \n     setAccelerationX :   0 , \n     setAccelerationY :   0 , \n     allowDrag :   true , \n     allowGravity :   true , \n     allowRotation :   true \n     setBounceX :   0 , \n     setBounceY :   0 , \n     setDragX :   0 , \n     setDragY :   0 , \n     setGravityX :   0 , \n     setGravityY :   0 , \n     setFrictionX :   0 , \n     setFrictionY :   0 , \n     setVelocityX :   0 , \n     setVelocityY :   0 , \n     setAngularVelocity :   0 , \n     setAngularAcceleration :   0 , \n     setAngularDrag :   0 , \n     setMass :   1 , \n     setImmovable :   false  };", 
+            "title": "Group"
+        }, 
+        {
+            "location": "/arcade-gameobject/index.html#movement", 
+            "text": "", 
+            "title": "Movement"
+        }, 
+        {
+            "location": "/arcade-gameobject/index.html#velocity", 
+            "text": "Set\n     gameObject . setVelocity ( x ,   y );  \n    or\n     gameObject . setVelocityX ( x );  gameObject . setVelocityY ( y );   Get\n     var   vx   =   gameObject . body . velocity . x ;  var   vy   =   gameObject . body . velocity . y ;", 
+            "title": "Velocity"
+        }, 
+        {
+            "location": "/arcade-gameobject/index.html#max-velocity", 
+            "text": "Set\n     gameObject . setMaxVelocity ( x ,   y );   Get \n     var   vx   =   gameObject . body . maxVelocity . x ;  var   vy   =   gameObject . body . maxVelocity . y ;", 
+            "title": "Max velocity"
+        }, 
+        {
+            "location": "/arcade-gameobject/index.html#acceleration", 
+            "text": "Set\n     gameObject . setAcceleration ( x ,   y );  \n    or\n     gameObject . setAccelerationX ( x );  gameObject . setAccelerationY ( y );   Get\n     var   ax   =   gameObject . body . acceleration . x ;  var   ay   =   gameObject . body . acceleration . y ;", 
+            "title": "Acceleration"
+        }, 
+        {
+            "location": "/arcade-gameobject/index.html#gravity", 
+            "text": "Set\n     gameObject . setGravity ( x ,   y );  \n    or\n     gameObject . setGravityX ( x );  gameObject . setGravityY ( y );   Get\n     var   gx   =   gameObject . body . gravity . x ;  var   gy   =   gameObject . body . gravity . y ;", 
+            "title": "Gravity"
+        }, 
+        {
+            "location": "/arcade-gameobject/index.html#drag", 
+            "text": "Set\n     gameObject . setDrag ( x ,   y );  \n    or\n     gameObject . setDragX ( x );  gameObject . setDragY ( y );   Get\n     var   dx   =   gameObject . body . drag . x ;  var   dy   =   gameObject . body . drag . y ;   Enable damping\n     gameObject . setDamping ( value );", 
+            "title": "Drag"
+        }, 
+        {
+            "location": "/arcade-gameobject/index.html#friction", 
+            "text": "Set\n     gameObject . setFriction ( x ,   y );  \n    or\n     gameObject . setFrictionX ( x );  gameObject . setFrictionY ( y );   Get\n     var   fx   =   gameObject . body . friction . x ;  var   fy   =   gameObject . body . friction . y ;", 
+            "title": "Friction"
+        }, 
+        {
+            "location": "/arcade-gameobject/index.html#immovable", 
+            "text": "Enable\n     gameObject . setImmovable ();   Disable\n     gameObject . setImmovable ( false );   Get\n     var   immovable   =   gameObject . body . immovable ;", 
+            "title": "Immovable"
+        }, 
+        {
+            "location": "/arcade-gameobject/index.html#rotation", 
+            "text": "", 
+            "title": "Rotation"
+        }, 
+        {
+            "location": "/arcade-gameobject/index.html#allow-rotation", 
+            "text": "Whether this Body's rotation is affected by its angular acceleration and velocity.   Enable (default)\n     body . setAllowRotation ();   Disable\n     body . setAllowRotation ( false );   Get\n     var   allowRotation   =   gameObject . body . allowRotation ;", 
+            "title": "Allow rotation"
+        }, 
+        {
+            "location": "/arcade-gameobject/index.html#angular-velocity", 
+            "text": "Set\n     gameObject . setAngularVelocity ( v );   Get\n     var   av   =   gameObject . body . angularVelocity ;", 
+            "title": "Angular velocity"
+        }, 
+        {
+            "location": "/arcade-gameobject/index.html#angular-acceleration", 
+            "text": "-Set \n     gameObject . setAngularAcceleration ( v );  \n- Get\n     var   aa   =   gameObject . body . angularAcceleration ;", 
+            "title": "Angular acceleration"
+        }, 
+        {
+            "location": "/arcade-gameobject/index.html#angular-drag", 
+            "text": "Set\n     gameObject . setAngularDrag ( v );   Get\n     var   ad   =   gameObject . body . angularDrag ;", 
+            "title": "Angular drag"
+        }, 
+        {
+            "location": "/arcade-gameobject/index.html#collision", 
+            "text": "", 
+            "title": "Collision"
+        }, 
+        {
+            "location": "/arcade-gameobject/index.html#point-inside", 
+            "text": "var   hit   =   gameObject . hitTest ( x ,   y );", 
+            "title": "Point inside"
+        }, 
+        {
+            "location": "/arcade-gameobject/index.html#callbacks", 
+            "text": "Callback of collision", 
+            "title": "Callbacks"
+        }, 
+        {
+            "location": "/arcade-gameobject/index.html#collision-bound", 
+            "text": "Rectangle\n     gameObject . setSize ( width ,   height ,   center );   center  :  false  to set body's offset to (0, 0)    Circle\n     gameObject . setCircle ( radius ,   offsetX ,   offsetY );", 
+            "title": "Collision bound"
+        }, 
+        {
+            "location": "/arcade-gameobject/index.html#offset", 
+            "text": "gameObject . setOffset ( x ,   y );", 
+            "title": "Offset"
+        }, 
+        {
+            "location": "/arcade-gameobject/index.html#bounce", 
+            "text": "Set\n     gameObject . setBounce ( x ,   y );  \n    or\n     gameObject . setBounceX ( x );  gameObject . setBounceY ( y );   Get\n     var   bx   =   gameObject . body . bounce . x ;  var   by   =   gameObject . body . bounce . y ;   Enable bounce when colliding with the world boundary\n     gameObject . setCollideWorldBounds ();   Disable bounce when colliding with the world boundary\n     gameObject . setCollideWorldBounds ( false );", 
+            "title": "Bounce"
+        }, 
+        {
+            "location": "/arcade-gameobject/index.html#mass", 
+            "text": "Set\n     gameObject . setMass ( m );   Get\n     var   m   =   gameObject . body . mass ;", 
+            "title": "Mass"
+        }, 
+        {
+            "location": "/arcade-gameobject/index.html#static-game-object", 
+            "text": "", 
+            "title": "Static game object"
+        }, 
+        {
+            "location": "/arcade-gameobject/index.html#sync", 
+            "text": "Syncs the Bodies position and size in static game object.  gameObject . refreshBody ();", 
+            "title": "Sync"
+        }, 
+        {
+            "location": "/arcade-gameobject/index.html#methods-of-group", 
+            "text": "group . setVelocity ( x ,   y ,   step );   group . setVelocityX ( value ,   step );   group . setVelocityY ( value ,   step );   group . refresh ();    // call this method when position of game objects were changed in static object group", 
+            "title": "Methods of group"
+        }, 
+        {
+            "location": "/eightdirection/index.html", 
+            "text": "Introduction\n\n\nMove game object by cursor keys.\n\n\n\n\nAuthor: Rex\n\n\nArcade behavior of game object, \n\n\n\n\nSource code\n\n\nPlugin\n, \nminify\n\n\nUsage\n\n\nSample code\n\n\nUser could import class directly, or install it by global plugin.\n\n\nImport class\n\n\nimport\n \nrexEightDirection\n \nfrom\n \n./plugins/eightdirection.js\n;\n\n\n\n\n\nInstall global plugin\n\n\nEnable \narcade physics engine\n and install plugin in \nconfiguration of game\n\n\nimport\n \nEightDirectionPlugin\n \nfrom\n \n./plugins/eightdirection-plugin.js\n;\n\n\n\nvar\n \nconfig\n \n=\n \n{\n\n    \n// ...\n\n    \nphysics\n:\n \n{\n\n        \ndefault\n:\n \narcade\n,\n\n        \narcade\n:\n \n{\n\n            \n// debug: true\n\n        \n}\n\n    \n},\n    \n    \nplugins\n:\n \n{\n\n        \nglobal\n:\n \n[{\n\n            \nkey\n:\n \nrexEightDirection\n,\n\n            \nplugin\n:\n \nEightDirectionPlugin\n,\n\n            \nstart\n:\n \ntrue\n\n        \n},\n\n        \n// ...\n\n        \n]\n\n    \n}\n\n    \n// ...\n\n\n};\n\n\nvar\n \ngame\n \n=\n \nnew\n \nPhaser\n.\nGame\n(\nconfig\n);\n\n\n\n\n\nCreate instance\n\n\nvar\n \neightDirection\n \n=\n \nscene\n.\nplugins\n.\nget\n(\nrexEightDirection\n).\nadd\n(\ngameObject\n,\n \n{\n\n    \n// dir: \n8dir\n,     // 0|\nup\ndown\n|1|\nleft\nright\n|2|\n4dir\n|3|\n8dir\n\n    \n// speed: 200,\n\n    \n// rotateToDirection: false,\n\n    \n// enable: true,\n\n    \n// cursorKeys: scene.input.keyboard.createCursorKeys()\n\n\n});\n\n\n\n\n\n\n\ndir\n : \n\n\n'up\ndown'\n, or \n0\n :Aaccept up or down cursor keys only.\n\n\n'left\nright'\n, or \n1\n : Aaccept left or right cursor keys only.\n\n\n'4dir'\n, or \n2\n : Aaccept up, down, left or right cursor keys.\n\n\n'8dir'\n, or \n3\n : Aaccept up, up-left, up-right, down, down-left, down-right, left, or right cursor keys.\n\n\n\n\n\n\nspeed\n : moving speed, pixels in second\n\n\nrotateToDirection\n : Set true to change angle towards moving direction\n\n\nenable\n : set \nfalse\n to disable moving\n\n\ncursorKeys\n : CursorKey object, using \nkeyboard's cursorKeys\n by default.\n\n\n\n\nSet speed\n\n\neightDirection\n.\nsetSpeed\n(\nspeed\n);\n\n\n// eightDirection.speed = speed;\n\n\n\n\n\nSet rotate-to-direction\n\n\neightDirection\n.\nsetRotateToDirection\n(\nrotateToDirection\n);\n\n\n\n\n\n\n\nrotateToDirection\n : Set true to change angle towards moving direction", 
+            "title": "8 direction"
+        }, 
+        {
+            "location": "/eightdirection/index.html#introduction", 
+            "text": "Move game object by cursor keys.   Author: Rex  Arcade behavior of game object,", 
+            "title": "Introduction"
+        }, 
+        {
+            "location": "/eightdirection/index.html#source-code", 
+            "text": "Plugin ,  minify", 
+            "title": "Source code"
+        }, 
+        {
+            "location": "/eightdirection/index.html#usage", 
+            "text": "Sample code  User could import class directly, or install it by global plugin.", 
+            "title": "Usage"
+        }, 
+        {
+            "location": "/eightdirection/index.html#import-class", 
+            "text": "import   rexEightDirection   from   ./plugins/eightdirection.js ;", 
+            "title": "Import class"
+        }, 
+        {
+            "location": "/eightdirection/index.html#install-global-plugin", 
+            "text": "Enable  arcade physics engine  and install plugin in  configuration of game  import   EightDirectionPlugin   from   ./plugins/eightdirection-plugin.js ;  var   config   =   { \n     // ... \n     physics :   { \n         default :   arcade , \n         arcade :   { \n             // debug: true \n         } \n     },     \n     plugins :   { \n         global :   [{ \n             key :   rexEightDirection , \n             plugin :   EightDirectionPlugin , \n             start :   true \n         }, \n         // ... \n         ] \n     } \n     // ...  };  var   game   =   new   Phaser . Game ( config );", 
+            "title": "Install global plugin"
+        }, 
+        {
+            "location": "/eightdirection/index.html#create-instance", 
+            "text": "var   eightDirection   =   scene . plugins . get ( rexEightDirection ). add ( gameObject ,   { \n     // dir:  8dir ,     // 0| up down |1| left right |2| 4dir |3| 8dir \n     // speed: 200, \n     // rotateToDirection: false, \n     // enable: true, \n     // cursorKeys: scene.input.keyboard.createCursorKeys()  });    dir  :   'up down' , or  0  :Aaccept up or down cursor keys only.  'left right' , or  1  : Aaccept left or right cursor keys only.  '4dir' , or  2  : Aaccept up, down, left or right cursor keys.  '8dir' , or  3  : Aaccept up, up-left, up-right, down, down-left, down-right, left, or right cursor keys.    speed  : moving speed, pixels in second  rotateToDirection  : Set true to change angle towards moving direction  enable  : set  false  to disable moving  cursorKeys  : CursorKey object, using  keyboard's cursorKeys  by default.", 
+            "title": "Create instance"
+        }, 
+        {
+            "location": "/eightdirection/index.html#set-speed", 
+            "text": "eightDirection . setSpeed ( speed );  // eightDirection.speed = speed;", 
+            "title": "Set speed"
+        }, 
+        {
+            "location": "/eightdirection/index.html#set-rotate-to-direction", 
+            "text": "eightDirection . setRotateToDirection ( rotateToDirection );    rotateToDirection  : Set true to change angle towards moving direction", 
+            "title": "Set rotate-to-direction"
         }, 
         {
             "location": "/mask/index.html", 
@@ -5002,7 +5182,7 @@
         }, 
         {
             "location": "/angle/index.html", 
-            "text": "Introduction\n\n\nConvert angle value, built-in methods of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nDegree \n-\n Radians\n\n\n\n\nDegree to radians\n    \nvar\n \nrad\n \n=\n \nPhaser\n.\nMath\n.\nDegToRad\n(\ndeg\n);\n\n\n\n\nRadians to degree\n   \nvar\n \ndeg\n \n=\n \nPhaser\n.\nMath\n.\nRadToDeg\n(\nrad\n);\n  \n// deg : -180 ~ 180\n\n\n\n\nAngle from (0,0) to vector (x2 - x1 , y2 - y1)\n   \nvar\n \nrad\n \n=\n \nPhaser\n.\nMath\n.\nAngle\n.\nBetween\n(\nx1\n,\n \ny1\n,\n \nx2\n,\n \ny2\n)\n\n\n\n   \nvar\n \nrad\n \n=\n \nPhaser\n.\nMath\n.\nAngle\n.\nBetweenPoints\n(\npoint1\n,\n \npoint2\n);", 
+            "text": "Introduction\n\n\nConvert angle value, built-in methods of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nDegree \n-\n Radians\n\n\n\n\nDegree to radians\n    \nvar\n \nrad\n \n=\n \nPhaser\n.\nMath\n.\nDegToRad\n(\ndeg\n);\n\n\n\n\nRadians to degree\n   \nvar\n \ndeg\n \n=\n \nPhaser\n.\nMath\n.\nRadToDeg\n(\nrad\n);\n  \n// deg : -180 ~ 180\n\n\n\n\nAngle from (0,0) to vector (x2 - x1 , y2 - y1)\n   \nvar\n \nrad\n \n=\n \nPhaser\n.\nMath\n.\nAngle\n.\nBetween\n(\nx1\n,\n \ny1\n,\n \nx2\n,\n \ny2\n);\n\n\n\n   \nvar\n \nrad\n \n=\n \nPhaser\n.\nMath\n.\nAngle\n.\nBetweenPoints\n(\npoint1\n,\n \npoint2\n);", 
             "title": "Angle"
         }, 
         {
@@ -5017,7 +5197,7 @@
         }, 
         {
             "location": "/angle/index.html#degree-radians", 
-            "text": "Degree to radians\n     var   rad   =   Phaser . Math . DegToRad ( deg );   Radians to degree\n    var   deg   =   Phaser . Math . RadToDeg ( rad );    // deg : -180 ~ 180   Angle from (0,0) to vector (x2 - x1 , y2 - y1)\n    var   rad   =   Phaser . Math . Angle . Between ( x1 ,   y1 ,   x2 ,   y2 )  \n    var   rad   =   Phaser . Math . Angle . BetweenPoints ( point1 ,   point2 );", 
+            "text": "Degree to radians\n     var   rad   =   Phaser . Math . DegToRad ( deg );   Radians to degree\n    var   deg   =   Phaser . Math . RadToDeg ( rad );    // deg : -180 ~ 180   Angle from (0,0) to vector (x2 - x1 , y2 - y1)\n    var   rad   =   Phaser . Math . Angle . Between ( x1 ,   y1 ,   x2 ,   y2 );  \n    var   rad   =   Phaser . Math . Angle . BetweenPoints ( point1 ,   point2 );", 
             "title": "Degree &lt;-&gt; Radians"
         }, 
         {
@@ -5507,7 +5687,7 @@
         }, 
         {
             "location": "/geom-triangle/index.html", 
-            "text": "Introduction\n\n\nTriangle shape and methods, built-in methods of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nCreate shape\n\n\nvar\n \ntriangle\n \n=\n \nnew\n \nPhaser\n.\nGeom\n.\nTriangle\n(\nx1\n,\n \ny1\n,\n \nx2\n,\n \ny2\n,\n \nx3\n,\n \ny3\n);\n\n\n\n\n\nClone shape\n\n\nvar\n \ntriangle1\n \n=\n \nPhaser\n.\nGeom\n.\nTriangle\n.\nClone\n(\ntriangle0\n);\n\n\n\n\n\nEquilateral triangle\n\n\nvar\n \ntriangle\n \n=\n \nPhaser\n.\nGeom\n.\nTriangle\n.\nBuildEquilateral\n(\nx1\n,\n \ny1\n,\n \nlength\n)\n\n\n\n\n\nRight triangle\n\n\nvar\n \ntriangle\n \n=\n \nPhaser\n.\nGeom\n.\nTriangle\n.\nBuildRight\n(\nx1\n,\n \ny1\n,\n \nwidth\n,\n \nheight\n);\n\n\n\n\n\nPolygon\n to triangles\n\n\nvar\n \nout\n \n=\n \nPhaser\n.\nGeom\n.\nTriangle\n.\nBuildFromPolygon\n(\ndata\n);\n\n\n// var out = Phaser.Geom.Triangle.BuildFromPolygon(data, holes, scaleX, scaleY);\n\n\n// out = Phaser.Geom.Triangle.BuildFromPolygon(data, holes, scaleX, scaleY, out);\n\n\n\n\n\n\n\ndata\n : A flat array of vertice coordinates like \n[x0,y0, x1,y1, x2,y2, ...]\n\n\nout\n : Array of triangles\n\n\n\n\nDraw on \ngraphics\n\n\n\n\nFill shape\n    \ngraphics\n.\nfillTriangleShape\n(\ntriangle\n);\n\n\n\n\nStroke shape\n    \ngraphics\n.\nstrokeTriangleShape\n(\ntriangle\n);\n\n\n\n\n\n\nSet properties\n\n\n\n\nAll properties\n    \ntriangle\n.\nsetTo\n(\nx1\n,\n \ny1\n,\n \nx2\n,\n \ny2\n,\n \nx3\n,\n \ny3\n);\n\n\n\n    or\n    \nPhaser\n.\nGeom\n.\nTriangle\n.\nCopyFrom\n(\nsource\n,\n \ndest\n);\n\n\n\n\nPosition\n    \ntriangle\n.\nx1\n \n=\n \n0\n;\n\n\ntriangle\n.\ny1\n \n=\n \n0\n;\n\n\ntriangle\n.\nx2\n \n=\n \n0\n;\n\n\ntriangle\n.\ny2\n \n=\n \n0\n;\n\n\ntriangle\n.\nx3\n \n=\n \n0\n;\n\n\ntriangle\n.\ny3\n \n=\n \n0\n;\n\n\n\n    or\n    \ntriangle\n.\nleft\n \n=\n \n0\n;\n       \n// triangle.x1, triangle.x2, triangle.x3\n\n\ntriangle\n.\ntop\n \n=\n \n0\n;\n        \n// triangle.y1, triangle.y2, triangle.y3\n\n\n// triangle.right = 0;   // triangle.x1, triangle.x2, triangle.x3\n\n\n// triangle.bottom = 0;  // triangle.y1, triangle.y2, triangle.y3\n\n\n\n    or\n    \nPhaser\n.\nGeom\n.\nTriangle\n.\nOffset\n(\ntriangle\n,\n \ndx\n,\n \ndy\n);\n \n// triangle.x += dx, triangle.y += dy\n\n\n\n    or\n    \nPhaser\n.\nGeom\n.\nTriangle\n.\nCenterOn\n(\ntriangle\n,\n \nx\n,\n \ny\n);\n\n\n\n\nRotate\n\n\nRotate around center (incenter)\n    \nvar\n \ntriangle\n \n=\n \nPhaser\n.\nGeom\n.\nTriangle\n.\nRotate\n(\ntriangle\n,\n \nangle\n);\n\n\n\n\nangle\n : Radian\n\n\n\n\n\n\nRotate around point\n    \nvar\n \ntriangle\n \n=\n \nPhaser\n.\nGeom\n.\nTriangle\n.\nRotateAroundPoint\n(\ntriangle\n,\n \npoint\n,\n \nangle\n);\n\n\n\n\npoint\n : \n{x, y}\n\n\nangle\n : Radian\n\n\n\n\n\n\nRotate around (x,y)\n    \nvar\n \ntriangle\n \n=\n \nPhaser\n.\nGeom\n.\nTriangle\n.\nRotateAroundXY\n(\ntriangle\n,\n \nx\n,\n \ny\n,\n \nangle\n);\n\n\n\n\nangle\n : Radian    \n\n\n\n\n\n\n\n\n\n\n\n\nGet properties\n\n\n\n\nPosition\n    \nvar\n \nx1\n \n=\n \ntriangle\n.\nx1\n;\n\n\nvar\n \ny1\n \n=\n \ntriangle\n.\ny1\n;\n\n\nvar\n \nx2\n \n=\n \ntriangle\n.\nx2\n;\n\n\nvar\n \ny2\n \n=\n \ntriangle\n.\ny2\n;\n\n\nvar\n \nx3\n \n=\n \ntriangle\n.\nx3\n;\n\n\nvar\n \ny3\n \n=\n \ntriangle\n.\ny3\n;\n\n\nvar\n \ntop\n \n=\n \ntriangle\n.\ntop\n;\n\n\nvar\n \nleft\n \n=\n \ntriangle\n.\nleft\n;\n\n\nvar\n \nright\n \n=\n \ntriangle\n.\nright\n;\n\n\nvar\n \nbottom\n \n=\n \ntriangle\n.\nbottom\n;\n\n\n\n    or\n    \nvar\n \nout\n \n=\n \nPhaser\n.\nGeom\n.\nTriangle\n.\nDecompose\n(\ntriangle\n);\n  \n// out: [{x1,y1}, {x2,y2}, {x3,y3}]\n\n\n// var out = Phaser.Geom.Triangle.Decompose(triangle, out);\n\n\n\n\nPerimeter\n    \nvar\n \nperimeter\n \n=\n \nPhaser\n.\nGeom\n.\nTriangle\n.\nPerimeter\n(\ntriangle\n);\n\n\n\n\nArea\n    \nvar\n \narea\n \n=\n \nPhaser\n.\nGeom\n.\nTriangle\n.\nArea\n(\ntriangle\n);\n\n\n\n\nLines around triangle\n    \nvar\n \nline12\n \n=\n \nrect\n.\ngetLineA\n();\n     \n// line from (x1, y1) to (x2, y2)\n\n\nvar\n \nline23\n \n=\n \nrect\n.\ngetLineB\n();\n     \n// line from (x2, y2) to (x3, y3)\n\n\nvar\n \nline31\n \n=\n \nrect\n.\ngetLineC\n();\n     \n// line from (x3, y3) to (x1, y1)\n\n\n\n\nCentroid\n    \nvar\n \nout\n \n=\n \nPhaser\n.\nGeom\n.\nTriangle\n.\nCentroid\n(\ntriangle\n);\n  \n// out: {x,y}\n\n\n\n\nIncenter\n    \nvar\n \nout\n \n=\n \nPhaser\n.\nGeom\n.\nTriangle\n.\nInCenter\n(\ntriangle\n);\n  \n// out: {x,y}\n\n\n// var out = Phaser.Geom.Triangle.InCenter(triangle, out);\n\n\n\n\nCircumcenter\n    \nvar\n \nout\n \n=\n \nPhaser\n.\nGeom\n.\nTriangle\n.\nCircumCenter\n(\ntriangle\n);\n  \n// out: {x,y}\n\n\n// var out = Phaser.Geom.Triangle.CircumCenter(triangle, out);\n\n\n\n\nCircumcircle\n    \nvar\n \nout\n \n=\n \nPhaser\n.\nGeom\n.\nTriangle\n.\nCircumCircle\n(\ntriangle\n);\n  \n// out: a circle object\n\n\n// var out = Phaser.Geom.Triangle.CircumCircle(triangle, out);\n\n\n\n\n\n\nPoint(s) \n shape\n\n\n\n\nGet point at shape's edge\n    \nvar\n \npoint\n \n=\n \ntriangle\n.\ngetPoint\n(\nt\n);\n  \n// t : 0 ~ 1 (angle/360)\n\n\n// var point = triangle.getPoint(t, point);  // modify point\n\n\n\n\nGet a random point inside shape\n    \nvar\n \npoint\n \n=\n \ntriangle\n.\ngetRandomPoint\n();\n\n\n// var point = triangle.getRandomPoint(point);  // modify point\n\n\n\n\nGet points around shape's edge\n    \nvar\n \npoints\n \n=\n \ntriangle\n.\ngetPoints\n(\nquantity\n);\n\n\n// var points = triangle.getPoints(quantity, null, points);  // push points\n\n\n\n    or calculate quantity from steps\n    \nvar\n \npoints\n \n=\n \ntriangle\n.\ngetPoints\n(\nfalse\n,\n \nstep\n);\n\n\n// var points = triangle.getPoints(false, step, points);  // push points\n\n\n\n\npoints\n : an array of point\n\n\n\n\n\n\nPoint is inside shape\n    \nvar\n \nisInside\n \n=\n \ntriangle\n.\ncontains\n(\nx\n,\n \ny\n);\n\n\n\n    or\n    \nvar\n \nisInside\n \n=\n \nPhaser\n.\nGeom\n.\nTriangle\n.\nContainsPoint\n(\ntriangle\n,\n \npoint\n);\n\n\n\n\nPoints inside shape\n    \nvar\n \nout\n \n=\n \nPhaser\n.\nGeom\n.\nTriangle\n.\nContainsArray\n(\ntriangle\n,\n \npoints\n,\n \nreturnFirst\n);\n\n\n// var out = Phaser.Geom.Triangle.ContainsArray(triangle, points, returnFirst, out);\n\n\n\n\nout\n : Points inside triangle\n\n\nreturnFirst\n : True to get fist matched point\n\n\n\n\n\n\n\n\n\n\n\n\nEqual\n\n\nvar\n \nisEqual\n \n=\n \nPhaser\n.\nGeom\n.\nTriangle\n.\nEquals\n(\ntriangle0\n,\n \ntriangle1\n);\n\n\n\n\n\nPosition and radius are equal.\n\n\nIntersection\n\n\n\n\nTriangle to \ncircle\n\n    \nvar\n \nresult\n \n=\n \nPhaser\n.\nGeom\n.\nIntersects\n.\nTriangleToCircle\n(\ntriangle\n,\n \ncircle\n);\n\n\n\n\nTriangle to \nrectangle\n\n    \nvar\n \nresult\n \n=\n \nPhaser\n.\nGeom\n.\nIntersects\n.\nRectangleToTriangle\n(\nrect\n,\n \ntriangle\n);\n\n\n\n\nTriangle to \ntriangle\n\n    \nvar\n \nresult\n \n=\n \nPhaser\n.\nGeom\n.\nIntersects\n.\nTriangleToTriangle\n(\ntriangleA\n,\n \ntriangleB\n);\n\n\n\n\nTriangle to \nline\n\n    \nvar\n \nresult\n \n=\n \nPhaser\n.\nGeom\n.\nIntersects\n.\nTriangleToLine\n(\ntriangle\n,\n \nline\n);", 
+            "text": "Introduction\n\n\nTriangle shape and methods, built-in methods of phaser.\n\n\n\n\nAuthor: Richard Davey\n\n\n\n\nUsage\n\n\nCreate shape\n\n\nvar\n \ntriangle\n \n=\n \nnew\n \nPhaser\n.\nGeom\n.\nTriangle\n(\nx1\n,\n \ny1\n,\n \nx2\n,\n \ny2\n,\n \nx3\n,\n \ny3\n);\n\n\n\n\n\nClone shape\n\n\nvar\n \ntriangle1\n \n=\n \nPhaser\n.\nGeom\n.\nTriangle\n.\nClone\n(\ntriangle0\n);\n\n\n\n\n\nEquilateral triangle\n\n\nvar\n \ntriangle\n \n=\n \nPhaser\n.\nGeom\n.\nTriangle\n.\nBuildEquilateral\n(\nx1\n,\n \ny1\n,\n \nlength\n);\n\n\n\n\n\nRight triangle\n\n\nvar\n \ntriangle\n \n=\n \nPhaser\n.\nGeom\n.\nTriangle\n.\nBuildRight\n(\nx1\n,\n \ny1\n,\n \nwidth\n,\n \nheight\n);\n\n\n\n\n\nPolygon\n to triangles\n\n\nvar\n \nout\n \n=\n \nPhaser\n.\nGeom\n.\nTriangle\n.\nBuildFromPolygon\n(\ndata\n);\n\n\n// var out = Phaser.Geom.Triangle.BuildFromPolygon(data, holes, scaleX, scaleY);\n\n\n// out = Phaser.Geom.Triangle.BuildFromPolygon(data, holes, scaleX, scaleY, out);\n\n\n\n\n\n\n\ndata\n : A flat array of vertice coordinates like \n[x0,y0, x1,y1, x2,y2, ...]\n\n\nout\n : Array of triangles\n\n\n\n\nDraw on \ngraphics\n\n\n\n\nFill shape\n    \ngraphics\n.\nfillTriangleShape\n(\ntriangle\n);\n\n\n\n\nStroke shape\n    \ngraphics\n.\nstrokeTriangleShape\n(\ntriangle\n);\n\n\n\n\n\n\nSet properties\n\n\n\n\nAll properties\n    \ntriangle\n.\nsetTo\n(\nx1\n,\n \ny1\n,\n \nx2\n,\n \ny2\n,\n \nx3\n,\n \ny3\n);\n\n\n\n    or\n    \nPhaser\n.\nGeom\n.\nTriangle\n.\nCopyFrom\n(\nsource\n,\n \ndest\n);\n\n\n\n\nPosition\n    \ntriangle\n.\nx1\n \n=\n \n0\n;\n\n\ntriangle\n.\ny1\n \n=\n \n0\n;\n\n\ntriangle\n.\nx2\n \n=\n \n0\n;\n\n\ntriangle\n.\ny2\n \n=\n \n0\n;\n\n\ntriangle\n.\nx3\n \n=\n \n0\n;\n\n\ntriangle\n.\ny3\n \n=\n \n0\n;\n\n\n\n    or\n    \ntriangle\n.\nleft\n \n=\n \n0\n;\n       \n// triangle.x1, triangle.x2, triangle.x3\n\n\ntriangle\n.\ntop\n \n=\n \n0\n;\n        \n// triangle.y1, triangle.y2, triangle.y3\n\n\n// triangle.right = 0;   // triangle.x1, triangle.x2, triangle.x3\n\n\n// triangle.bottom = 0;  // triangle.y1, triangle.y2, triangle.y3\n\n\n\n    or\n    \nPhaser\n.\nGeom\n.\nTriangle\n.\nOffset\n(\ntriangle\n,\n \ndx\n,\n \ndy\n);\n \n// triangle.x += dx, triangle.y += dy\n\n\n\n    or\n    \nPhaser\n.\nGeom\n.\nTriangle\n.\nCenterOn\n(\ntriangle\n,\n \nx\n,\n \ny\n);\n\n\n\n\nRotate\n\n\nRotate around center (incenter)\n    \nvar\n \ntriangle\n \n=\n \nPhaser\n.\nGeom\n.\nTriangle\n.\nRotate\n(\ntriangle\n,\n \nangle\n);\n\n\n\n\nangle\n : Radian\n\n\n\n\n\n\nRotate around point\n    \nvar\n \ntriangle\n \n=\n \nPhaser\n.\nGeom\n.\nTriangle\n.\nRotateAroundPoint\n(\ntriangle\n,\n \npoint\n,\n \nangle\n);\n\n\n\n\npoint\n : \n{x, y}\n\n\nangle\n : Radian\n\n\n\n\n\n\nRotate around (x,y)\n    \nvar\n \ntriangle\n \n=\n \nPhaser\n.\nGeom\n.\nTriangle\n.\nRotateAroundXY\n(\ntriangle\n,\n \nx\n,\n \ny\n,\n \nangle\n);\n\n\n\n\nangle\n : Radian    \n\n\n\n\n\n\n\n\n\n\n\n\nGet properties\n\n\n\n\nPosition\n    \nvar\n \nx1\n \n=\n \ntriangle\n.\nx1\n;\n\n\nvar\n \ny1\n \n=\n \ntriangle\n.\ny1\n;\n\n\nvar\n \nx2\n \n=\n \ntriangle\n.\nx2\n;\n\n\nvar\n \ny2\n \n=\n \ntriangle\n.\ny2\n;\n\n\nvar\n \nx3\n \n=\n \ntriangle\n.\nx3\n;\n\n\nvar\n \ny3\n \n=\n \ntriangle\n.\ny3\n;\n\n\nvar\n \ntop\n \n=\n \ntriangle\n.\ntop\n;\n\n\nvar\n \nleft\n \n=\n \ntriangle\n.\nleft\n;\n\n\nvar\n \nright\n \n=\n \ntriangle\n.\nright\n;\n\n\nvar\n \nbottom\n \n=\n \ntriangle\n.\nbottom\n;\n\n\n\n    or\n    \nvar\n \nout\n \n=\n \nPhaser\n.\nGeom\n.\nTriangle\n.\nDecompose\n(\ntriangle\n);\n  \n// out: [{x1,y1}, {x2,y2}, {x3,y3}]\n\n\n// var out = Phaser.Geom.Triangle.Decompose(triangle, out);\n\n\n\n\nPerimeter\n    \nvar\n \nperimeter\n \n=\n \nPhaser\n.\nGeom\n.\nTriangle\n.\nPerimeter\n(\ntriangle\n);\n\n\n\n\nArea\n    \nvar\n \narea\n \n=\n \nPhaser\n.\nGeom\n.\nTriangle\n.\nArea\n(\ntriangle\n);\n\n\n\n\nLines around triangle\n    \nvar\n \nline12\n \n=\n \nrect\n.\ngetLineA\n();\n     \n// line from (x1, y1) to (x2, y2)\n\n\nvar\n \nline23\n \n=\n \nrect\n.\ngetLineB\n();\n     \n// line from (x2, y2) to (x3, y3)\n\n\nvar\n \nline31\n \n=\n \nrect\n.\ngetLineC\n();\n     \n// line from (x3, y3) to (x1, y1)\n\n\n\n\nCentroid\n    \nvar\n \nout\n \n=\n \nPhaser\n.\nGeom\n.\nTriangle\n.\nCentroid\n(\ntriangle\n);\n  \n// out: {x,y}\n\n\n\n\nIncenter\n    \nvar\n \nout\n \n=\n \nPhaser\n.\nGeom\n.\nTriangle\n.\nInCenter\n(\ntriangle\n);\n  \n// out: {x,y}\n\n\n// var out = Phaser.Geom.Triangle.InCenter(triangle, out);\n\n\n\n\nCircumcenter\n    \nvar\n \nout\n \n=\n \nPhaser\n.\nGeom\n.\nTriangle\n.\nCircumCenter\n(\ntriangle\n);\n  \n// out: {x,y}\n\n\n// var out = Phaser.Geom.Triangle.CircumCenter(triangle, out);\n\n\n\n\nCircumcircle\n    \nvar\n \nout\n \n=\n \nPhaser\n.\nGeom\n.\nTriangle\n.\nCircumCircle\n(\ntriangle\n);\n  \n// out: a circle object\n\n\n// var out = Phaser.Geom.Triangle.CircumCircle(triangle, out);\n\n\n\n\n\n\nPoint(s) \n shape\n\n\n\n\nGet point at shape's edge\n    \nvar\n \npoint\n \n=\n \ntriangle\n.\ngetPoint\n(\nt\n);\n  \n// t : 0 ~ 1 (angle/360)\n\n\n// var point = triangle.getPoint(t, point);  // modify point\n\n\n\n\nGet a random point inside shape\n    \nvar\n \npoint\n \n=\n \ntriangle\n.\ngetRandomPoint\n();\n\n\n// var point = triangle.getRandomPoint(point);  // modify point\n\n\n\n\nGet points around shape's edge\n    \nvar\n \npoints\n \n=\n \ntriangle\n.\ngetPoints\n(\nquantity\n);\n\n\n// var points = triangle.getPoints(quantity, null, points);  // push points\n\n\n\n    or calculate quantity from steps\n    \nvar\n \npoints\n \n=\n \ntriangle\n.\ngetPoints\n(\nfalse\n,\n \nstep\n);\n\n\n// var points = triangle.getPoints(false, step, points);  // push points\n\n\n\n\npoints\n : an array of point\n\n\n\n\n\n\nPoint is inside shape\n    \nvar\n \nisInside\n \n=\n \ntriangle\n.\ncontains\n(\nx\n,\n \ny\n);\n\n\n\n    or\n    \nvar\n \nisInside\n \n=\n \nPhaser\n.\nGeom\n.\nTriangle\n.\nContainsPoint\n(\ntriangle\n,\n \npoint\n);\n\n\n\n\nPoints inside shape\n    \nvar\n \nout\n \n=\n \nPhaser\n.\nGeom\n.\nTriangle\n.\nContainsArray\n(\ntriangle\n,\n \npoints\n,\n \nreturnFirst\n);\n\n\n// var out = Phaser.Geom.Triangle.ContainsArray(triangle, points, returnFirst, out);\n\n\n\n\nout\n : Points inside triangle\n\n\nreturnFirst\n : True to get fist matched point\n\n\n\n\n\n\n\n\n\n\n\n\nEqual\n\n\nvar\n \nisEqual\n \n=\n \nPhaser\n.\nGeom\n.\nTriangle\n.\nEquals\n(\ntriangle0\n,\n \ntriangle1\n);\n\n\n\n\n\nPosition and radius are equal.\n\n\nIntersection\n\n\n\n\nTriangle to \ncircle\n\n    \nvar\n \nresult\n \n=\n \nPhaser\n.\nGeom\n.\nIntersects\n.\nTriangleToCircle\n(\ntriangle\n,\n \ncircle\n);\n\n\n\n\nTriangle to \nrectangle\n\n    \nvar\n \nresult\n \n=\n \nPhaser\n.\nGeom\n.\nIntersects\n.\nRectangleToTriangle\n(\nrect\n,\n \ntriangle\n);\n\n\n\n\nTriangle to \ntriangle\n\n    \nvar\n \nresult\n \n=\n \nPhaser\n.\nGeom\n.\nIntersects\n.\nTriangleToTriangle\n(\ntriangleA\n,\n \ntriangleB\n);\n\n\n\n\nTriangle to \nline\n\n    \nvar\n \nresult\n \n=\n \nPhaser\n.\nGeom\n.\nIntersects\n.\nTriangleToLine\n(\ntriangle\n,\n \nline\n);", 
             "title": "Triangle"
         }, 
         {
@@ -5532,7 +5712,7 @@
         }, 
         {
             "location": "/geom-triangle/index.html#equilateral-triangle", 
-            "text": "var   triangle   =   Phaser . Geom . Triangle . BuildEquilateral ( x1 ,   y1 ,   length )", 
+            "text": "var   triangle   =   Phaser . Geom . Triangle . BuildEquilateral ( x1 ,   y1 ,   length );", 
             "title": "Equilateral triangle"
         }, 
         {

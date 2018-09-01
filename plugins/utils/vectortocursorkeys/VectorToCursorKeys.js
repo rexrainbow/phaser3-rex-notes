@@ -11,11 +11,6 @@ class VectorToCursorKeys {
         this.resetFromJSON(config);
     }
 
-    /**
-     * Reset status by JSON object
-     * @param {object} o JSON object
-     * @returns {object} this object
-     */
     resetFromJSON(o) {
         if (this.start == undefined) {
             this.start = {};
@@ -45,10 +40,6 @@ class VectorToCursorKeys {
         return this;
     }
 
-    /**
-     * Return status in JSON object
-     * @returns JSON object
-     */
     toJSON() {
         return {
             enable: this.enable,
@@ -67,11 +58,6 @@ class VectorToCursorKeys {
         };
     }
 
-    /**
-     * Set direction mode
-     * @param {number|string} m 'up&down'(0), 'left&right'(1), '4dir'(2), or '8dir'(3)
-     * @returns {object} this object
-     */
     setMode(m) {
         if (typeof (m) === 'string') {
             m = DIRMODE[m];

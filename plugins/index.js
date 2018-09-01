@@ -31,6 +31,8 @@ import FadeOutDestroy from './fade-out-destroy.js';
 import PathFollower from './pathfollower.js';
 import MoveTo from './moveto.js';
 
+import EightDirection from './eightdirection.js';
+
 
 // member of text
 import TextTyping from './texttyping.js';
@@ -87,6 +89,8 @@ export {
     FadeOutDestroy,
     PathFollower,
     MoveTo,
+
+    EightDirection,
 
     // member of text
     TextTyping,

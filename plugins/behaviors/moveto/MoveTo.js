@@ -26,16 +26,10 @@ class MoveTo extends EE {
     resetFromJSON(o) {
         this.isMoving = GetValue(o, 'isMoving', false);
         this.timeScale = GetValue(o, 'timeScale', 1);
-        this.speed = GetValue(o, 'speed', 0);
+        this.speed = GetValue(o, 'speed', 400);
         this.targetX = GetValue(o, 'targetX', 0);
         this.targetY = GetValue(o, 'targetY', 0);
-
-        var rotateToTarget = GetValue(o, 'rotateToTarget', false);
-        var rotationOffset = GetValue(o, 'rotationOffset', undefined);
-        if (rotationOffset === undefined) {
-            rotationOffset = DegToRad(GetValue(o, 'angleOffset', 0));
-        }
-        this.setRotateToTarget(rotateToTarget, rotationOffset);
+        this.setRotateToTarget(GetValue(o, 'rotateToTarget', false));
         this.tickMe = GetValue(o, 'tickMe', true);  // true to enable 'update' callback
         return this;
     }
@@ -64,6 +58,7 @@ class MoveTo extends EE {
     }
 
     shutdown() {
+        super.shutdown();
         if (this.tickMe) {
             this.scene.events.off('update', this.update, this);
         }
@@ -106,9 +101,8 @@ class MoveTo extends EE {
         return this;
     }
 
-    setRotateToTarget(rotateToTarget, rotationOffset) {
+    setRotateToTarget(rotateToTarget) {
         this.rotateToTarget = rotateToTarget;
-        this.rotationOffset = rotationOffset;
         return this;
     }
 
@@ -146,7 +140,7 @@ class MoveTo extends EE {
 
         gameObject.setPosition(newX, newY);
         if (this.rotateToTarget) {
-            gameObject.rotation = AngleBetween(curX, curY, newX, newY) + this.rotationOffset;
+            gameObject.rotation = AngleBetween(curX, curY, newX, newY);
         }
     }
 

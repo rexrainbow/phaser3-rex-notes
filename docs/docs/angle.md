@@ -18,7 +18,7 @@ Convert angle value, built-in methods of phaser.
    ```
 - Angle from (0,0) to vector (x2 - x1 , y2 - y1)
    ```javascript
-   var rad = Phaser.Math.Angle.Between(x1, y1, x2, y2)
+   var rad = Phaser.Math.Angle.Between(x1, y1, x2, y2);
    ```
    ```javascript
    var rad = Phaser.Math.Angle.BetweenPoints(point1, point2);

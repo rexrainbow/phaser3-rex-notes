@@ -1175,8 +1175,44 @@
 
 
   <li class="md-nav__item">
-    <a href="../arcade/index.html" title="Physics" class="md-nav__link">
-      Physics
+    <a href="../arcade-world/index.html" title="World" class="md-nav__link">
+      World
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../arcade-body/index.html" title="Body" class="md-nav__link">
+      Body
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../arcade-gameobject/index.html" title="Game object" class="md-nav__link">
+      Game object
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../eightdirection/index.html" title="8 direction" class="md-nav__link">
+      8 direction
     </a>
   </li>
 
@@ -2746,17 +2782,14 @@
 
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">moveTo</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexMoveTo&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="p">{</span>
-    <span class="c1">// speed: 0,</span>
-    <span class="c1">// rotateToTarget: false,</span>
-    <span class="c1">// rotationOffset: 0,</span>
-    <span class="c1">// angleOffset: 0</span>
+    <span class="c1">// speed: 400,</span>
+    <span class="c1">// rotateToTarget: false</span>
 <span class="p">});</span>
 </pre></div>
 
 <ul>
 <li><code>speed</code> : moving speed, pixels in second</li>
 <li><code>rotateToTarget</code> : Set true to change angle towards path</li>
-<li><code>rotationOffset</code> : Rotation offset in radian, or <code>angleOffset</code> in degrees</li>
 </ul>
 <h3 id="start-moving">Start moving<a class="headerlink" href="#start-moving" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="nx">moveTo</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
@@ -2785,12 +2818,11 @@
 </pre></div>
 
 <h3 id="set-rotate-to-target">Set rotate-to-target<a class="headerlink" href="#set-rotate-to-target" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">moveTo</span><span class="p">.</span><span class="nx">setRotateToTarget</span><span class="p">(</span><span class="nx">rotateToTarget</span><span class="p">,</span> <span class="nx">rotationOffset</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><span class="nx">moveTo</span><span class="p">.</span><span class="nx">setRotateToTarget</span><span class="p">(</span><span class="nx">rotateToTarget</span><span class="p">);</span>
 </pre></div>
 
 <ul>
 <li><code>rotateToTarget</code> : Set true to change angle towards target</li>
-<li><code>rotationOffset</code> : Rotation offset in radian</li>
 </ul>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>

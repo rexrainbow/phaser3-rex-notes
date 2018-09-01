@@ -21,7 +21,7 @@ var triangle1 = Phaser.Geom.Triangle.Clone(triangle0);
 #### Equilateral triangle
 
 ```javascript
-var triangle = Phaser.Geom.Triangle.BuildEquilateral(x1, y1, length)
+var triangle = Phaser.Geom.Triangle.BuildEquilateral(x1, y1, length);
 ```
 
 #### Right triangle

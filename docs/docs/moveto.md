@@ -48,16 +48,13 @@ var game = new Phaser.Game(config);
 
 ```javascript
 var moveTo = scene.plugins.get('rexMoveTo').add(gameObject, {
-    // speed: 0,
-    // rotateToTarget: false,
-    // rotationOffset: 0,
-    // angleOffset: 0
+    // speed: 400,
+    // rotateToTarget: false
 });
 ```
 
 - `speed` : moving speed, pixels in second
 - `rotateToTarget` : Set true to change angle towards path
-- `rotationOffset` : Rotation offset in radian, or `angleOffset` in degrees
 
 ### Start moving
 
@@ -95,11 +92,10 @@ moveTo.setSpeed(speed);
 ### Set rotate-to-target
 
 ```javascript
-moveTo.setRotateToTarget(rotateToTarget, rotationOffset);
+moveTo.setRotateToTarget(rotateToTarget);
 ```
 
 - `rotateToTarget` : Set true to change angle towards target
-- `rotationOffset` : Rotation offset in radian
 
 ### Events
 

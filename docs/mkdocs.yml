@@ -56,7 +56,10 @@ pages:
         - Fade out destroy: fadeoutdestroy.md
         - Path follower: pathfollower.md
         - Arcade:
-            - Physics: arcade.md        
+            - World: arcade-world.md
+            - Body: arcade-body.md
+            - Game object: arcade-gameobject.md
+            - 8 direction: eightdirection.md     
     - Display:
         - Mask: mask.md
 - Input:
