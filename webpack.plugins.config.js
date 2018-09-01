@@ -46,6 +46,8 @@ module.exports = {
         'pathfollowerplugin': './plugins/pathfollower-plugin.js',
         'movetoplugin': './plugins/moveto-plugin.js',
 
+        'eightdirectionplugin': './plugins/eightdirection-plugin.js',
+
         // member of text
         'texttypingplugin': './plugins/texttyping-plugin.js',
         'textpageplugin': './plugins/textpage-plugin.js',
