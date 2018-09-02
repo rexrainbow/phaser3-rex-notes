@@ -3,10 +3,8 @@
 // https://labs.phaser.io/view.html?src=src\physics\arcade\asteroids%20movement.js
 
 const GetValue = Phaser.Utils.Objects.GetValue;
-const AngleBetween = Phaser.Math.Angle.Between;
-const RadToDeg = Phaser.Math.RadToDeg;
 
-class Asteroids {
+class Ship {
     constructor(gameObject, config) {
         this.gameObject = gameObject;
         this.scene = gameObject.scene;
@@ -146,4 +144,4 @@ class Asteroids {
     }
 }
 
-export default Asteroids;
+export default Ship;

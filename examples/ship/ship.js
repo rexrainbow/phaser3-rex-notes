@@ -1,6 +1,6 @@
 'use strict'
 
-import AsteroidsPlugin from 'rexPlugins/asteroids-plugin.js';
+import ShipPlugin from 'rexPlugins/ship-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -23,14 +23,14 @@ class Demo extends Phaser.Scene {
         obj.body
             .setSize(30, 30)
             .setOffset(-15, -15);
-        obj.asteroids = this.plugins.get('rexAsteroids').add(obj, {});
+        obj.ship = this.plugins.get('rexShip').add(obj, {});
         this.ship = obj;
 
         this.print = this.add.text(0, 0, '');
     }
 
     update() {
-        this.print.setText('Speed = ' + this.ship.asteroids.speed);
+        this.print.setText('Speed = ' + this.ship.ship.speed);
     }
 }
 
@@ -49,8 +49,8 @@ var config = {
     },
     plugins: {
         global: [{
-            key: 'rexAsteroids',
-            plugin: AsteroidsPlugin,
+            key: 'rexShip',
+            plugin: ShipPlugin,
             start: true
         }]
     }

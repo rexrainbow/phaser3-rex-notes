@@ -100,20 +100,8 @@ class EightDirection {
         var isDownDown = cursorKeys.down.isDown;
         var isLeftDown = cursorKeys.left.isDown;
         var isRightDown = cursorKeys.right.isDown;
-        var dx = 0,
-            dy = 0;
-        if (isUpDown) {
-            dy -= 1;
-        }
-        if (isDownDown) {
-            dy += 1;
-        }
-        if (isLeftDown) {
-            dx -= 1;
-        }
-        if (isRightDown) {
-            dx += 1;
-        }
+        var dy = ((isUpDown) ? -1 : 0) + ((isDownDown) ? 1 : 0),
+            dx = ((isLeftDown) ? -1 : 0) + ((isRightDown) ? 1 : 0);
         switch (this.dirMode) {
             case 0:
                 dx = 0;
@@ -129,17 +117,26 @@ class EightDirection {
         }
 
         if ((dx === 0) && (dy === 0)) {
-            body.setVelocity(0, 0);
+            if (!this.compareVelocity(0, 0)) {
+                body.setVelocity(0, 0);
+            }
             return this;
         }
         var rotation = AngleBetween(0, 0, dx, dy);
         var vx = this.speed * Math.cos(rotation),
             vy = this.speed * Math.sin(rotation);
-        body.setVelocity(vx, vy);
+        if (!this.compareVelocity(vx, vy)) {
+            body.setVelocity(vx, vy);
+        }
         if (this.rotateToDirection) {
             this.gameObject.rotation = rotation;
         }
         return this;
+    }
+
+    compareVelocity(vx, vy) {
+        var velocity = this.gameObject.body.velocity;
+        return (velocity.x === vx) && (velocity.y === vy);
     }
 }
 

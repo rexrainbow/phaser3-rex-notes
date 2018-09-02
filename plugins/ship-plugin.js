@@ -1,8 +1,8 @@
 'use strict'
 
-import Asteroids from './asteroids.js';
+import Ship from './ship.js';
 
-class AsteroidsPlugin extends Phaser.Plugins.BasePlugin {
+class ShipPlugin extends Phaser.Plugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);
@@ -14,9 +14,9 @@ class AsteroidsPlugin extends Phaser.Plugins.BasePlugin {
     }
 
     add(gameObject, config) {
-        return new Asteroids(gameObject, config);
+        return new Ship(gameObject, config);
     }
 
 }
 
-export default AsteroidsPlugin;
+export default ShipPlugin;
