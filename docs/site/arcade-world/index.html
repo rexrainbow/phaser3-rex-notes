@@ -1113,6 +1113,40 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#move-to" title="Move to" class="md-nav__link">
+    Move to
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accelerate-to" title="Accelerate to" class="md-nav__link">
+    Accelerate to
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bodies" title="Bodies" class="md-nav__link">
+    Bodies
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#closestfurthest" title="Closest/furthest" class="md-nav__link">
+    Closest/furthest
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#control" title="Control" class="md-nav__link">
     Control
   </a>
@@ -2661,6 +2695,40 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#move-to" title="Move to" class="md-nav__link">
+    Move to
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accelerate-to" title="Accelerate to" class="md-nav__link">
+    Accelerate to
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bodies" title="Bodies" class="md-nav__link">
+    Bodies
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#closestfurthest" title="Closest/furthest" class="md-nav__link">
+    Closest/furthest
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#control" title="Control" class="md-nav__link">
     Control
   </a>
@@ -2780,29 +2848,41 @@
 </pre></div>
 
 <h3 id="collision">Collision<a class="headerlink" href="#collision" title="Permanent link">&para;</a></h3>
-<p>Performs a collision check and separation between the two physics enabled objects given.</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">collider</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">collider</span><span class="p">(</span><span class="nx">objectsA</span><span class="p">,</span> <span class="nx">objectsB</span><span class="p">,</span> <span class="nx">collideCallback</span><span class="p">,</span> <span class="nx">processCallback</span><span class="p">,</span> <span class="nx">callbackContext</span><span class="p">);</span>
-</pre></div>
-
-<p>If you don't require separation then use <code>overlap</code> instead.</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">collider</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">overlap</span><span class="p">(</span><span class="nx">objectsA</span><span class="p">,</span> <span class="nx">objectsB</span><span class="p">,</span> <span class="nx">collideCallback</span><span class="p">,</span> <span class="nx">processCallback</span><span class="p">,</span> <span class="nx">callbackContext</span><span class="p">);</span>
-</pre></div>
-
 <ul>
-<li>objectsA, objectsB<ul>
-<li>a game object</li>
-<li>game objects in array</li>
-<li>physics group</li>
-<li>group</li>
+<li>Add collider<ul>
+<li>Push out
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">collider</span><span class="p">(</span><span class="nx">objectsA</span><span class="p">,</span> <span class="nx">objectsB</span><span class="p">);</span>
+</pre></div></li>
+<li>Performs a collision check and separation between the two physics enabled objects given.
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">collider</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">collider</span><span class="p">(</span><span class="nx">objectsA</span><span class="p">,</span> <span class="nx">objectsB</span><span class="p">,</span> <span class="nx">collideCallback</span><span class="p">,</span> <span class="nx">processCallback</span><span class="p">,</span> <span class="nx">callbackContext</span><span class="p">);</span>
+</pre></div></li>
+<li>If you don't require separation then use <code>overlap</code> instead.
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">collider</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">overlap</span><span class="p">(</span><span class="nx">objectsA</span><span class="p">,</span> <span class="nx">objectsB</span><span class="p">,</span> <span class="nx">collideCallback</span><span class="p">,</span> <span class="nx">processCallback</span><span class="p">,</span> <span class="nx">callbackContext</span><span class="p">);</span>
+</pre></div></li>
+<li>Parameters<ul>
+<li><code>objectsA</code>, <code>objectsB</code> :<ul>
+<li>A game object</li>
+<li>Game objects in array (Add or remove game objects)</li>
+<li>Physics group (Add or remove game objects)</li>
+<li>Group (Add or remove game objects)</li>
 </ul>
 </li>
-<li>collideCallback:
-    <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">gameObject1</span><span class="p">,</span> <span class="nx">gameObject2</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+<li><code>collideCallback</code> :
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">collideCallback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">gameObject1</span><span class="p">,</span> <span class="nx">gameObject2</span><span class="p">)</span> <span class="p">{</span> 
+    <span class="c1">// ...</span>
+<span class="p">}</span>
 </pre></div></li>
-<li>processCallback: fired when gameObject1 intersects gameObject2
-    <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">gameObject1</span><span class="p">,</span> <span class="nx">gameObject2</span><span class="p">)</span> <span class="p">{</span>
+<li><code>processCallback</code> : Fired when gameObject1 intersects gameObject2
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">processCallback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">gameObject1</span><span class="p">,</span> <span class="nx">gameObject2</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>  <span class="c1">// return false will discard remaining collision checking</span>
 <span class="p">}</span>
+</pre></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Remove collider
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">removeCollider</span><span class="p">(</span><span class="nx">collider</span><span class="p">);</span>
 </pre></div></li>
 </ul>
 <h3 id="wrap">Wrap<a class="headerlink" href="#wrap" title="Permanent link">&para;</a></h3>
@@ -2811,11 +2891,39 @@
 
 <ul>
 <li>gameObject:<ul>
-<li>game object (image, sprite)</li>
+<li>game object</li>
 <li>group</li>
 <li>array of game objects</li>
 </ul>
 </li>
+</ul>
+<h3 id="move-to">Move to<a class="headerlink" href="#move-to" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Move to position with a steady velocity
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">speed</span><span class="p">,</span> <span class="nx">maxTime</span><span class="p">);</span>
+</pre></div></li>
+<li>Move to object with a steady velocity
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">moveToObject</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">destination</span><span class="p">,</span> <span class="nx">speed</span><span class="p">,</span> <span class="nx">maxTime</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h3 id="accelerate-to">Accelerate to<a class="headerlink" href="#accelerate-to" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Accelerate to position
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">accelerateTo</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">acceleration</span><span class="p">,</span> <span class="nx">xSpeedMax</span><span class="p">,</span> <span class="nx">ySpeedMax</span><span class="p">);</span>
+</pre></div></li>
+<li>Accelerate to object
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">accelerateToObject</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">destination</span><span class="p">,</span> <span class="nx">acceleration</span><span class="p">,</span> <span class="nx">xSpeedMax</span><span class="p">,</span> <span class="nx">ySpeedMax</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h3 id="bodies">Bodies<a class="headerlink" href="#bodies" title="Permanent link">&para;</a></h3>
+<h4 id="closestfurthest">Closest/furthest<a class="headerlink" href="#closestfurthest" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Closest
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">body</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">closest</span><span class="p">(</span><span class="nx">point</span><span class="p">);</span>  <span class="c1">// point: {x,y}</span>
+</pre></div></li>
+<li>Furthest
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">body</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">furthest</span><span class="p">(</span><span class="nx">point</span><span class="p">);</span>  <span class="c1">// point: {x,y}</span>
+</pre></div></li>
 </ul>
 <h3 id="control">Control<a class="headerlink" href="#control" title="Permanent link">&para;</a></h3>
 <h4 id="pause">Pause<a class="headerlink" href="#pause" title="Permanent link">&para;</a></h4>

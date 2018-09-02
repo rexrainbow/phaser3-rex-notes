@@ -1269,22 +1269,8 @@
     Collision
   </a>
   
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#point-inside" title="Point inside" class="md-nav__link">
-    Point inside
-  </a>
-  
     <nav class="md-nav">
       <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#callbacks" title="Callbacks" class="md-nav__link">
-    Callbacks
-  </a>
-  
-</li>
         
           <li class="md-nav__item">
   <a href="#collision-bound" title="Collision bound" class="md-nav__link">
@@ -1305,6 +1291,33 @@
     </nav>
   
 </li>
+        
+          <li class="md-nav__item">
+  <a href="#push-out" title="Push out" class="md-nav__link">
+    Push out
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#callbacks" title="Callbacks" class="md-nav__link">
+    Callbacks
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#point-inside" title="Point inside" class="md-nav__link">
+    Point inside
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#bounce" title="Bounce" class="md-nav__link">
@@ -2968,22 +2981,8 @@
     Collision
   </a>
   
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#point-inside" title="Point inside" class="md-nav__link">
-    Point inside
-  </a>
-  
     <nav class="md-nav">
       <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#callbacks" title="Callbacks" class="md-nav__link">
-    Callbacks
-  </a>
-  
-</li>
         
           <li class="md-nav__item">
   <a href="#collision-bound" title="Collision bound" class="md-nav__link">
@@ -3004,6 +3003,33 @@
     </nav>
   
 </li>
+        
+          <li class="md-nav__item">
+  <a href="#push-out" title="Push out" class="md-nav__link">
+    Push out
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#callbacks" title="Callbacks" class="md-nav__link">
+    Callbacks
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#point-inside" title="Point inside" class="md-nav__link">
+    Point inside
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#bounce" title="Bounce" class="md-nav__link">
@@ -3281,12 +3307,6 @@
 </pre></div></li>
 </ul>
 <h3 id="collision">Collision<a class="headerlink" href="#collision" title="Permanent link">&para;</a></h3>
-<h3 id="point-inside">Point inside<a class="headerlink" href="#point-inside" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">hit</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">hitTest</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="callbacks">Callbacks<a class="headerlink" href="#callbacks" title="Permanent link">&para;</a></h4>
-<p><a href="../arcade-world/index.html#collision">Callback of collision</a></p>
 <h4 id="collision-bound">Collision bound<a class="headerlink" href="#collision-bound" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Rectangle
@@ -3301,6 +3321,25 @@
 </ul>
 <h5 id="offset">Offset<a class="headerlink" href="#offset" title="Permanent link">&para;</a></h5>
 <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setOffset</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</pre></div>
+
+<h4 id="push-out">Push out<a class="headerlink" href="#push-out" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">collider</span><span class="p">(</span><span class="nx">objectsA</span><span class="p">,</span> <span class="nx">objectsB</span><span class="p">);</span>
+</pre></div>
+
+<ul>
+<li><code>objectsA</code>, <code>objectsB</code> :<ul>
+<li>A game object</li>
+<li>Game objects in array (Add or remove game objects)</li>
+<li>Physics group (Add or remove game objects)</li>
+<li>Group (Add or remove game objects)</li>
+</ul>
+</li>
+</ul>
+<h4 id="callbacks">Callbacks<a class="headerlink" href="#callbacks" title="Permanent link">&para;</a></h4>
+<p><a href="../arcade-world/index.html#collision">Add collider</a></p>
+<h3 id="point-inside">Point inside<a class="headerlink" href="#point-inside" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">hit</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">hitTest</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 </pre></div>
 
 <h4 id="bounce">Bounce<a class="headerlink" href="#bounce" title="Permanent link">&para;</a></h4>

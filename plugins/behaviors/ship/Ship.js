@@ -21,7 +21,7 @@ class Ship {
         this.setAngularVelocity(GetValue(o, 'angularVelocity', 300));
         this.setWrap(GetValue(o, 'wrap', true), GetValue(o, 'padding', 0));
         this.setCursorKeys(GetValue(o, 'cursorKeys', undefined));
-        this.tickMe = GetValue(o, 'tickMe', true); // true to enable 'update' callback
+        this.tickMe = GetValue(o, 'tickMe', true); // true to enable 'preupdate' callback
         return this;
     }
 
@@ -37,13 +37,13 @@ class Ship {
         }
 
         if (this.tickMe) {
-            this.scene.events.on('update', this.update, this);
+            this.scene.events.on('preupdate', this.preupdate, this);
         }
     }
 
     shutdown() {
         if (this.tickMe) {
-            this.scene.events.off('update', this.update, this);
+            this.scene.events.off('preupdate', this.preupdate, this);
         }
         this.gameObject = undefined;
         this.scene = undefined;
@@ -104,11 +104,7 @@ class Ship {
         return this;
     }
 
-    get speed() {
-        return this.gameObject.body.speed;
-    }
-
-    update(time, delta) {
+    preupdate(time, delta) {
         if (!this.enable) {
             return this;
         }

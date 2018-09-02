@@ -2,7 +2,7 @@
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const AngleBetween = Phaser.Math.Angle.Between;
-const RadToDeg = Phaser.Math.RadToDeg;
+const DegToRad = Phaser.Math.DegToRad;
 
 class EightDirection {
     constructor(gameObject, config) {
@@ -19,7 +19,7 @@ class EightDirection {
         this.setSpeed(GetValue(o, 'speed', 200));
         this.setRotateToDirection(GetValue(o, 'rotateToDirection', false));
         this.setCursorKeys(GetValue(o, 'cursorKeys', undefined));
-        this.tickMe = GetValue(o, 'tickMe', true); // true to enable 'update' callback
+        this.tickMe = GetValue(o, 'tickMe', true); // true to enable 'preupdate' callback
         return this;
     }
 
@@ -35,13 +35,13 @@ class EightDirection {
         }
 
         if (this.tickMe) {
-            this.scene.events.on('update', this.update, this);
+            this.scene.events.on('preupdate', this.preupdate, this);
         }
     }
 
     shutdown() {
         if (this.tickMe) {
-            this.scene.events.off('update', this.update, this);
+            this.scene.events.off('preupdate', this.preupdate, this);
         }
         this.gameObject = undefined;
         this.scene = undefined;
@@ -89,7 +89,7 @@ class EightDirection {
         return this;
     }
 
-    update(time, delta) {
+    preupdate(time, delta) {
         var body = this.gameObject.body;
         if (!this.enable) {
             body.setVelocity(0, 0);
@@ -111,32 +111,33 @@ class EightDirection {
                 break;
             case 2:
                 if (dy !== 0) {
-                    dx = 0
+                    dx = 0;
                 }
                 break;
         }
 
+        var rotation, vx, vy;
         if ((dx === 0) && (dy === 0)) {
-            if (!this.compareVelocity(0, 0)) {
-                body.setVelocity(0, 0);
-            }
-            return this;
-        }
-        var rotation = AngleBetween(0, 0, dx, dy);
-        var vx = this.speed * Math.cos(rotation),
+            vx = 0;
+            vy = 0;
+        } else if (dy === 0) {
+            vx = this.speed * dx;
+            vy = 0;
+            rotation = DegToRad((dx === 1) ? 0 : 180);
+        } else if (dx === 0) {
+            vx = 0;
+            vy = this.speed * dy;
+            rotation = DegToRad((dy === 1) ? 90 : 270);
+        } else {
+            rotation = AngleBetween(0, 0, dx, dy);
+            vx = this.speed * Math.cos(rotation);
             vy = this.speed * Math.sin(rotation);
-        if (!this.compareVelocity(vx, vy)) {
-            body.setVelocity(vx, vy);
         }
-        if (this.rotateToDirection) {
+        body.setVelocity(vx, vy);
+        if (this.rotateToDirection && (rotation !== undefined)) {
             this.gameObject.rotation = rotation;
         }
         return this;
-    }
-
-    compareVelocity(vx, vy) {
-        var velocity = this.gameObject.body.velocity;
-        return (velocity.x === vx) && (velocity.y === vy);
     }
 }
 

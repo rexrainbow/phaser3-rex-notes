@@ -9,13 +9,40 @@ Arcade physics body.
 ### Get physics body
 
 1. [Enable physics world](arcade-world.md#configuration)
-1. Add an existing game object to physics world
-    ```javascript
-    var gameObject = scene.physics.add.existing(gameObject, isStatic);
-    ```
+1. Add existing game object(s) to physics world
+    - Add a game object
+        ```javascript
+        var gameObject = scene.physics.add.existing(gameObject, isStatic);
+        ```
+        - `isStatic` :
+            - `0` : Dynamic body
+            - `1` : Static body
+    - Add game objects
+        ```javascript
+        scene.physics.world.enable(gameObjects, isStatic);
+        ```
+        - `gameObjects` : An array of game objects, or a group object
+        - `isStatic` :
+            - `0` : Dynamic body
+            - `1` : Static body 
 1. Get physics body
     ```javascript
     var body = gameObject.body;
+    ```
+
+### Update position & angle
+
+- Enable (default)
+    ```javascript
+    body.moves = true;
+    ```
+- Disable
+    ```javascript
+    body.moves = false;
+    ```
+- Get
+    ```javascript
+    var enable = body.moves;
     ```
 
 ### Movement
@@ -123,6 +150,8 @@ Reduces speed per second.
     ```
 
 #### Friction
+
+If this Body is `immovable` and in motion, this the proportion of this Body's movement received by the riding body on each axis.
 
 - Set
     ```javascript
@@ -232,16 +261,6 @@ Reduces angular speed per second.
 
 ### Collision
 
-#### Point inside
-
-```javascript
-var hit = body.hitTest(x, y);
-```
-
-#### Callbacks
-
-[Add collider](arcade-world.md#collision)
-
 #### Collision bound
 
 - Rectangle
@@ -259,6 +278,76 @@ var hit = body.hitTest(x, y);
 ```javascript
 body.setOffset(x, y);
 ```
+
+#### Push out
+
+```javascript
+scene.physics.add.collider(objectsA, objectsB);
+```
+
+- `objectsA`, `objectsB` :
+    - A game object
+    - Game objects in array (Add or remove game objects)
+    - Physics group (Add or remove game objects)
+    - Group (Add or remove game objects)
+
+#### Callbacks
+
+[Add collider](arcade-world.md#collision)
+
+#### Point inside
+
+```javascript
+var hit = body.hitTest(x, y);
+```
+
+#### Is colliding
+
+- Is colliding this tick
+    ```javascript
+    var isColliding = body.touching;
+    ```
+    - `isColliding` :
+        ```javascript
+        {
+            none: true,
+            up: true,
+            down: true,
+            left: true,
+            right: true
+        }
+        ```
+- Was colliding previous tick
+    ```javascript
+    var wasColliding = body.wasTouching;
+    ```
+    - `wasColliding` :
+        ```javascript
+        {
+            none: true,
+            up: true,
+            down: true,
+            left: true,
+            right: true
+        }
+        ```
+
+#### Bounce
+
+- Set
+    ```javascript
+    body.setBounce(x, y);
+    ```
+    or
+    ```javascript
+    body.setBounceX(x);
+    body.setBounceY(y);
+    ```    
+- Get
+    ```javascript
+    var bx = body.bounce.x;
+    var by = body.bounce.y;
+    ```
 
 #### World bounds
 
@@ -280,30 +369,9 @@ body.setOffset(x, y);
     });
     ```
 
-#### Push out
+##### Blocked
 
-```javascript
-scene.physics.add.collider(objectsA, objectsB);
-```
-
-#### Bounce
-
-- Set
-    ```javascript
-    body.setBounce(x, y);
-    ```
-    or
-    ```javascript
-    body.setBounceX(x);
-    body.setBounceY(y);
-    ```    
-- Get
-    ```javascript
-    var bx = body.bounce.x;
-    var by = body.bounce.y;
-    ```
-
-#### Blocked
+Whether this Body is colliding with a tile or the world boundary.
 
 - Blocked when moveing down
     ```javascript

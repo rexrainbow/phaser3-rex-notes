@@ -68,9 +68,9 @@ var game = new Phaser.Game(config);
     - Parameters
         - `objectsA`, `objectsB` :
             - A game object
-            - Game objects in array
-            - Physics group
-            - Group
+            - Game objects in array (Add or remove game objects)
+            - Physics group (Add or remove game objects)
+            - Group (Add or remove game objects)
         - `collideCallback` :
             ```javascript
             var collideCallback = function(gameObject1, gameObject2) { 
@@ -95,7 +95,7 @@ scene.physics.world.wrap(gameObject, padding);
 ```
 
 - gameObject:
-    - game object (image, sprite)
+    - game object
     - group
     - array of game objects
 
@@ -121,6 +121,18 @@ scene.physics.world.wrap(gameObject, padding);
     scene.physics.accelerateToObject(gameObject, destination, acceleration, xSpeedMax, ySpeedMax);
     ```
 
+### Bodies
+
+#### Closest/furthest
+
+- Closest
+    ```javascript
+    var body = scene.physics.closest(point);  // point: {x,y}
+    ```
+- Furthest
+    ```javascript
+    var body = scene.physics.furthest(point);  // point: {x,y}
+    ```
 
 ### Control
 

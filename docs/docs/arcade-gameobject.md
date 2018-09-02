@@ -243,16 +243,6 @@ Whether this Body's rotation is affected by its angular acceleration and velocit
 
 ### Collision
 
-### Point inside
-
-```javascript
-var hit = gameObject.hitTest(x, y);
-```
-
-#### Callbacks
-
-[Add collider](arcade-world.md#collision)
-
 #### Collision bound
 
 - Rectangle
@@ -275,6 +265,22 @@ gameObject.setOffset(x, y);
 
 ```javascript
 scene.physics.add.collider(objectsA, objectsB);
+```
+
+- `objectsA`, `objectsB` :
+    - A game object
+    - Game objects in array (Add or remove game objects)
+    - Physics group (Add or remove game objects)
+    - Group (Add or remove game objects)
+
+#### Callbacks
+
+[Add collider](arcade-world.md#collision)
+
+### Point inside
+
+```javascript
+var hit = gameObject.hitTest(x, y);
 ```
 
 #### Bounce

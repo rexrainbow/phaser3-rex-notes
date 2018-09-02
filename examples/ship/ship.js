@@ -30,7 +30,7 @@ class Demo extends Phaser.Scene {
     }
 
     update() {
-        this.print.setText('Speed = ' + this.ship.ship.speed);
+        this.print.setText('Speed = ' + this.ship.body.speed);
     }
 }
 
