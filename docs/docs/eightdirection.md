@@ -35,7 +35,7 @@ var config = {
         arcade: {
             // debug: true
         }
-    },    
+    },
     plugins: {
         global: [{
             key: 'rexEightDirection',
@@ -58,11 +58,12 @@ var eightDirection = scene.plugins.get('rexEightDirection').add(gameObject, {
     // speed: 200,
     // rotateToDirection: false,
     // enable: true,
-    // cursorKeys: scene.input.keyboard.createCursorKeys()
+    // cursorKeys: scene.input.keyboard.createCursorKeys(),
+    // cascade: false
 });
 ```
 
-- `dir` : 
+- `dir` :
     - `'up&down'`, or `0` :Aaccept up or down cursor keys only.
     - `'left&right'`, or `1` : Aaccept left or right cursor keys only.
     - `'4dir'`, or `2` : Aaccept up, down, left or right cursor keys.
@@ -71,6 +72,9 @@ var eightDirection = scene.plugins.get('rexEightDirection').add(gameObject, {
 - `rotateToDirection` : Set true to change angle towards moving direction
 - `enable` : set `false` to disable moving
 - `cursorKeys` : CursorKey object, using [keyboard's cursorKeys](keyboardevents.md#get-state-of-cursorkeys) by default.
+- `cascade` :
+    - `false` : Velicity, acceleration will be **set** to body directly. Default setting.
+    - `true` : Velicity, acceleration will be **added** to body. Uses this mode when body is not only controlled by this behavior.
 
 ### Set speed
 
@@ -86,3 +90,15 @@ eightDirection.setRotateToDirection(rotateToDirection);
 ```
 
 - `rotateToDirection` : Set true to change angle towards moving direction
+
+### Set direction mode
+
+```javascript
+eightDirection.setDirMode(dir);
+```
+
+- `dir` :
+    - `'up&down'`, or `0` :Aaccept up or down cursor keys only.
+    - `'left&right'`, or `1` : Aaccept left or right cursor keys only.
+    - `'4dir'`, or `2` : Aaccept up, down, left or right cursor keys.
+    - `'8dir'`, or `3` : Aaccept up, up-left, up-right, down, down-left, down-right, left, or right cursor keys.

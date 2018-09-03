@@ -15,7 +15,8 @@ class EightDirection {
 
     resetFromJSON(o) {
         this.setEnable(GetValue(o, 'enable', true));
-        this.setMode(GetValue(o, 'dir', '8dir'));
+        this.setCascadeMode(GetValue(o, 'cascade', false));
+        this.setDirMode(GetValue(o, 'dir', '8dir'));
         this.setSpeed(GetValue(o, 'speed', 200));
         this.setRotateToDirection(GetValue(o, 'rotateToDirection', false));
         this.setCursorKeys(GetValue(o, 'cursorKeys', undefined));
@@ -61,9 +62,15 @@ class EightDirection {
             return;
         }
         this.enable = e;
+        return this;
     }
 
-    setMode(m) {
+    setCascadeMode(e) {
+        this.cascaseMode = e;
+        return this;
+    }
+
+    setDirMode(m) {
         if (typeof (m) === 'string') {
             m = DIRMODE[m];
         }
@@ -90,9 +97,8 @@ class EightDirection {
     }
 
     preupdate(time, delta) {
-        var body = this.gameObject.body;
         if (!this.enable) {
-            body.setVelocity(0, 0);
+            this.setVelocity(0, 0);
             return this;
         }
         var cursorKeys = this.cursorKeys;
@@ -102,6 +108,10 @@ class EightDirection {
         var isRightDown = cursorKeys.right.isDown;
         var dy = ((isUpDown) ? -1 : 0) + ((isDownDown) ? 1 : 0),
             dx = ((isLeftDown) ? -1 : 0) + ((isRightDown) ? 1 : 0);
+        if ((dx === 0) && (dy === 0)) {
+            this.setVelocity(0, 0);
+            return this;
+        }
         switch (this.dirMode) {
             case 0:
                 dx = 0;
@@ -117,27 +127,41 @@ class EightDirection {
         }
 
         var rotation, vx, vy;
-        if ((dx === 0) && (dy === 0)) {
-            vx = 0;
-            vy = 0;
-        } else if (dy === 0) {
+        if (dy === 0) { // dx !== 0
             vx = this.speed * dx;
             vy = 0;
-            rotation = DegToRad((dx === 1) ? 0 : 180);
-        } else if (dx === 0) {
+            rotation = (dx === 1) ? RAD0 : RAD180;
+        } else if (dx === 0) { // dy !== 0
             vx = 0;
             vy = this.speed * dy;
-            rotation = DegToRad((dy === 1) ? 90 : 270);
-        } else {
+            rotation = (dy === 1) ? RAD90 : RAD270;
+        } else { // (dx !== 0) && (dy !== 0)
             rotation = AngleBetween(0, 0, dx, dy);
             vx = this.speed * Math.cos(rotation);
             vy = this.speed * Math.sin(rotation);
         }
-        body.setVelocity(vx, vy);
+        this.setVelocity(vx, vy);
         if (this.rotateToDirection && (rotation !== undefined)) {
             this.gameObject.rotation = rotation;
         }
         return this;
+    }
+
+    setVelocity(newVx, newVy) {
+        var body = this.body;
+        var oldVx = body.velocity.x;
+        var oldVy = body.velocity.y;
+        if (this.cascaseMode) {
+            newVx += oldVx;
+            newVy += oldVy;
+        }
+        if ((newVx !== oldVx) || (newVy !== oldVy)) {
+            body.setVelocity(newVx, newVy);
+        }
+    }
+
+    get body() {
+        return this.gameObject.body;
     }
 }
 
@@ -148,5 +172,9 @@ const DIRMODE = {
     '4dir': 2,
     '8dir': 3
 };
+const RAD0 = DegToRad(0);
+const RAD90 = DegToRad(90);
+const RAD180 = DegToRad(180);
+const RAD270 = DegToRad(270);
 
 export default EightDirection;

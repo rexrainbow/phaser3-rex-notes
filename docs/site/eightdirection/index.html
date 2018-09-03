@@ -1156,6 +1156,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#set-direction-mode" title="Set direction mode" class="md-nav__link">
+    Set direction mode
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2646,6 +2653,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#set-direction-mode" title="Set direction mode" class="md-nav__link">
+    Set direction mode
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2700,7 +2714,7 @@
         <span class="nx">arcade</span><span class="o">:</span> <span class="p">{</span>
             <span class="c1">// debug: true</span>
         <span class="p">}</span>
-    <span class="p">},</span>    
+    <span class="p">},</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
             <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexEightDirection&#39;</span><span class="p">,</span>
@@ -2721,12 +2735,13 @@
     <span class="c1">// speed: 200,</span>
     <span class="c1">// rotateToDirection: false,</span>
     <span class="c1">// enable: true,</span>
-    <span class="c1">// cursorKeys: scene.input.keyboard.createCursorKeys()</span>
+    <span class="c1">// cursorKeys: scene.input.keyboard.createCursorKeys(),</span>
+    <span class="c1">// cascade: false</span>
 <span class="p">});</span>
 </pre></div>
 
 <ul>
-<li><code>dir</code> : <ul>
+<li><code>dir</code> :<ul>
 <li><code>'up&amp;down'</code>, or <code>0</code> :Aaccept up or down cursor keys only.</li>
 <li><code>'left&amp;right'</code>, or <code>1</code> : Aaccept left or right cursor keys only.</li>
 <li><code>'4dir'</code>, or <code>2</code> : Aaccept up, down, left or right cursor keys.</li>
@@ -2737,6 +2752,11 @@
 <li><code>rotateToDirection</code> : Set true to change angle towards moving direction</li>
 <li><code>enable</code> : set <code>false</code> to disable moving</li>
 <li><code>cursorKeys</code> : CursorKey object, using <a href="../keyboardevents/index.html#get-state-of-cursorkeys">keyboard's cursorKeys</a> by default.</li>
+<li><code>cascade</code> :<ul>
+<li><code>false</code> : Velicity, acceleration will be <strong>set</strong> to body directly. Default setting.</li>
+<li><code>true</code> : Velicity, acceleration will be <strong>added</strong> to body. Uses this mode when body is not only controlled by this behavior.</li>
+</ul>
+</li>
 </ul>
 <h3 id="set-speed">Set speed<a class="headerlink" href="#set-speed" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="nx">eightDirection</span><span class="p">.</span><span class="nx">setSpeed</span><span class="p">(</span><span class="nx">speed</span><span class="p">);</span>
@@ -2749,6 +2769,19 @@
 
 <ul>
 <li><code>rotateToDirection</code> : Set true to change angle towards moving direction</li>
+</ul>
+<h3 id="set-direction-mode">Set direction mode<a class="headerlink" href="#set-direction-mode" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">eightDirection</span><span class="p">.</span><span class="nx">setDirMode</span><span class="p">(</span><span class="nx">dir</span><span class="p">);</span>
+</pre></div>
+
+<ul>
+<li><code>dir</code> :<ul>
+<li><code>'up&amp;down'</code>, or <code>0</code> :Aaccept up or down cursor keys only.</li>
+<li><code>'left&amp;right'</code>, or <code>1</code> : Aaccept left or right cursor keys only.</li>
+<li><code>'4dir'</code>, or <code>2</code> : Aaccept up, down, left or right cursor keys.</li>
+<li><code>'8dir'</code>, or <code>3</code> : Aaccept up, up-left, up-right, down, down-left, down-right, left, or right cursor keys.</li>
+</ul>
+</li>
 </ul>
                 
                   
