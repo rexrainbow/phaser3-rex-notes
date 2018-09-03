@@ -30,7 +30,24 @@ Arcade physics body.
     var body = gameObject.body;
     ```
 
-### Update position & angle
+### Enable
+
+Whether this Body is updated by the physics simulation.
+
+- Enable (default)
+    ```javascript
+    body.enable = true;
+    ```
+- Disable
+    ```javascript
+    body.enable = false;
+    ```
+- Get
+    ```javascript
+    var enable = body.moves;
+    ```
+
+Whether the Body's position and rotation are affected by its velocity, acceleration, drag, and gravity.
 
 - Enable (default)
     ```javascript
@@ -42,8 +59,11 @@ Arcade physics body.
     ```
 - Get
     ```javascript
-    var enable = body.moves;
+    var moves = body.moves;
     ```
+
+!!! note "Use case"
+    Set `body.moves` to `false` when game object is controlled by tween or dragging.
 
 ### Movement
 
@@ -91,7 +111,7 @@ Arcade physics body.
     ```javascript
     var ax = body.acceleration.x;
     var ay = body.acceleration.y;
-    ```    
+    ```
 
 ##### Gravity
 
@@ -149,25 +169,6 @@ Reduces speed per second.
     body.useDamping = true;
     ```
 
-#### Friction
-
-If this Body is `immovable` and in motion, this the proportion of this Body's movement received by the riding body on each axis.
-
-- Set
-    ```javascript
-    body.setFriction(x, y);
-    ```
-    or
-    ```javascript
-    body.setFrictionX(x);
-    body.setFrictionY(y);
-    ```
-- Get
-    ```javascript
-    var fx = body.friction.x;
-    var fy = body.friction.y;
-    ```
-
 #### Reset position
 
 ```javascript
@@ -195,6 +196,25 @@ body.stop();
 - Get
     ```javascript
     var immovable = body.immovable;
+    ```
+
+##### Friction
+
+If this Body is `immovable` and in motion, this the proportion of this Body's movement received by the riding body on each axis.
+
+- Set
+    ```javascript
+    body.setFriction(x, y);
+    ```
+    or
+    ```javascript
+    body.setFrictionX(x);
+    body.setFrictionY(y);
+    ```
+- Get
+    ```javascript
+    var fx = body.friction.x;
+    var fy = body.friction.y;
     ```
 
 #### Speed
@@ -360,15 +380,6 @@ var hit = body.hitTest(x, y);
     body.setCollideWorldBounds(false);
     ```
 
-##### Events
-
-- World bounds
-    ```javascript
-    scene.physics.world.on('worldbounds', function(body, blockedUp, blockedDown, blockedLeft, blockedRight ){ 
-        // 
-    });
-    ```
-
 ##### Blocked
 
 Whether this Body is colliding with a tile or the world boundary.
@@ -421,3 +432,19 @@ Syncs the Bodies *position* and *size* with its parent Game Object.
 body.updateFromGameObject();
 ```
 
+### Debug
+
+- Bounds of Body
+    - Enable drawing body
+        ```javascript
+        body.debugShowBody = true;
+        ```
+    - Color
+        ```javascript
+        body.debugBodyColor = 0xff00ff;
+        ```
+- Direction and magnitude of velocity
+    - Enable drawing body
+        ```javascript
+        body.debugShowVelocity = true;
+        ```

@@ -23,10 +23,6 @@
       
         <meta name="lang:search.language" content="en">
       
-        <meta name="lang:search.pipeline.stopwords" content="True">
-      
-        <meta name="lang:search.pipeline.trimmer" content="True">
-      
         <meta name="lang:search.result.none" content="No matching documents">
       
         <meta name="lang:search.result.one" content="1 matching document">
@@ -36,7 +32,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-0.17.3, mkdocs-material-2.7.0">
+      <meta name="generator" content="mkdocs-0.17.1, mkdocs-material-2.1.0">
     
     
       
@@ -44,16 +40,15 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application.78aab2dc.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application-3368aa6b74.css">
       
-        <link rel="stylesheet" href="../assets/stylesheets/application-palette.6079476c.css">
+        <link rel="stylesheet" href="../assets/stylesheets/application-95ad5566f9.palette.css">
       
     
     
-      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
+      <script src="../assets/javascripts/modernizr-e826f8942a.js"></script>
     
     
-      <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
       
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
@@ -66,7 +61,9 @@
   
     
     
-    <body dir="ltr" data-md-color-primary="blue" data-md-color-accent="blue">
+    
+      <body data-md-color-primary="blue" data-md-color-accent="blue">
+    
   
     <svg class="md-svg">
       <defs>
@@ -77,11 +74,6 @@
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search">
     <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
-    
-      <a href="#introduction" tabindex="1" class="md-skip">
-        Skip to content
-      </a>
-    
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header-nav md-grid">
@@ -117,13 +109,11 @@
             
 <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="search"></label>
-  <div class="md-search__inner" role="search">
+  <div class="md-search__inner">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <input type="text" class="md-search__input" name="query" required placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
       <label class="md-icon md-search__icon" for="search"></label>
-      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
-        &#xE5CD;
-      </button>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset">&#xE5CD;</button>
     </form>
     <div class="md-search__output">
       <div class="md-search__scrollwrap" data-md-scrollfix>
@@ -147,9 +137,6 @@
     
     <div class="md-container">
       
-        
-      
-      
       <main class="md-main">
         <div class="md-main__inner md-grid" data-md-component="container">
           
@@ -161,7 +148,7 @@
   <label class="md-nav__title md-nav__title--site" for="drawer">
     <span class="md-nav__button md-logo">
       
-        <img src="../images/logo.svg" width="48" height="48">
+        <img src="../images/logo.svg" width="24" height="24">
       
     </span>
     Notes of Phaser 3
@@ -1099,54 +1086,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#collision" title="Collision" class="md-nav__link">
-    Collision
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#wrap" title="Wrap" class="md-nav__link">
-    Wrap
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#move-to" title="Move to" class="md-nav__link">
-    Move to
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#accelerate-to" title="Accelerate to" class="md-nav__link">
-    Accelerate to
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#bodies" title="Bodies" class="md-nav__link">
-    Bodies
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#closestfurthest" title="Closest/furthest" class="md-nav__link">
-    Closest/furthest
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#control" title="Control" class="md-nav__link">
     Control
   </a>
@@ -1187,12 +1126,153 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#collision" title="Collision" class="md-nav__link">
+    Collision
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set-bound" title="Set bound" class="md-nav__link">
+    Set bound
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#collider-callback" title="Collider &amp; callback" class="md-nav__link">
+    Collider &amp; callback
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing-wo-collider" title="Testing wo collider" class="md-nav__link">
+    Testing wo collider
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
 </li>
-      
-      
+        
+          <li class="md-nav__item">
+  <a href="#world-bounds" title="World bounds" class="md-nav__link">
+    World bounds
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enable" title="Enable" class="md-nav__link">
+    Enable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" title="Events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wrap" title="Wrap" class="md-nav__link">
+    Wrap
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#move-to" title="Move to" class="md-nav__link">
+    Move to
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accelerate-to" title="Accelerate to" class="md-nav__link">
+    Accelerate to
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gravity" title="Gravity" class="md-nav__link">
+    Gravity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bodies" title="Bodies" class="md-nav__link">
+    Bodies
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#closestfurthest" title="Closest/furthest" class="md-nav__link">
+    Closest/furthest
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debug" title="Debug" class="md-nav__link">
+    Debug
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#draw-body-velocity" title="Draw body &amp; velocity" class="md-nav__link">
+    Draw body &amp; velocity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#graphics" title="Graphics" class="md-nav__link">
+    Graphics
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-loop" title="Update loop" class="md-nav__link">
+    Update loop
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
       
       
@@ -2681,54 +2761,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#collision" title="Collision" class="md-nav__link">
-    Collision
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#wrap" title="Wrap" class="md-nav__link">
-    Wrap
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#move-to" title="Move to" class="md-nav__link">
-    Move to
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#accelerate-to" title="Accelerate to" class="md-nav__link">
-    Accelerate to
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#bodies" title="Bodies" class="md-nav__link">
-    Bodies
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#closestfurthest" title="Closest/furthest" class="md-nav__link">
-    Closest/furthest
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#control" title="Control" class="md-nav__link">
     Control
   </a>
@@ -2769,12 +2801,153 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#collision" title="Collision" class="md-nav__link">
+    Collision
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set-bound" title="Set bound" class="md-nav__link">
+    Set bound
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#collider-callback" title="Collider &amp; callback" class="md-nav__link">
+    Collider &amp; callback
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testing-wo-collider" title="Testing wo collider" class="md-nav__link">
+    Testing wo collider
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
 </li>
-      
-      
+        
+          <li class="md-nav__item">
+  <a href="#world-bounds" title="World bounds" class="md-nav__link">
+    World bounds
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enable" title="Enable" class="md-nav__link">
+    Enable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" title="Events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wrap" title="Wrap" class="md-nav__link">
+    Wrap
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#move-to" title="Move to" class="md-nav__link">
+    Move to
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#accelerate-to" title="Accelerate to" class="md-nav__link">
+    Accelerate to
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gravity" title="Gravity" class="md-nav__link">
+    Gravity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bodies" title="Bodies" class="md-nav__link">
+    Bodies
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#closestfurthest" title="Closest/furthest" class="md-nav__link">
+    Closest/furthest
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debug" title="Debug" class="md-nav__link">
+    Debug
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#draw-body-velocity" title="Draw body &amp; velocity" class="md-nav__link">
+    Draw body &amp; velocity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#graphics" title="Graphics" class="md-nav__link">
+    Graphics
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#update-loop" title="Update loop" class="md-nav__link">
+    Update loop
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
       
       
@@ -2847,28 +3020,61 @@
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </pre></div>
 
+<h3 id="control">Control<a class="headerlink" href="#control" title="Permanent link">&para;</a></h3>
+<h4 id="pause">Pause<a class="headerlink" href="#pause" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
+</pre></div>
+
+<h4 id="resume">Resume<a class="headerlink" href="#resume" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
+</pre></div>
+
+<h4 id="duration-per-frame">Duration per frame<a class="headerlink" href="#duration-per-frame" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Time scale
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">timeScale</span> <span class="o">=</span> <span class="nx">timeScale</span><span class="p">;</span>
+</pre></div><ul>
+<li>1.0 = normal speed</li>
+<li>2.0 = half speed</li>
+<li>0.5 = double speed</li>
+</ul>
+</li>
+<li>FPS
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">setFPS</span><span class="p">(</span><span class="nx">framerate</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h4 id="step">Step<a class="headerlink" href="#step" title="Permanent link">&para;</a></h4>
+<p>Advances the simulation by one step.</p>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">step</span><span class="p">(</span><span class="nx">delta</span><span class="p">);</span>
+</pre></div>
+
 <h3 id="collision">Collision<a class="headerlink" href="#collision" title="Permanent link">&para;</a></h3>
+<h4 id="set-bound">Set bound<a class="headerlink" href="#set-bound" title="Permanent link">&para;</a></h4>
+<p>See bound in <a href="../arcade-body/index.html#collision-bound">body object</a>, or <a href="../arcade-gameobject/index.html#collision-bound">game object</a>.</p>
+<h4 id="collider-callback">Collider &amp; callback<a class="headerlink" href="#collider-callback" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Add collider<ul>
 <li>Push out
     <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">collider</span><span class="p">(</span><span class="nx">objectsA</span><span class="p">,</span> <span class="nx">objectsB</span><span class="p">);</span>
 </pre></div></li>
 <li>Performs a collision check and separation between the two physics enabled objects given.
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">collider</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">collider</span><span class="p">(</span><span class="nx">objectsA</span><span class="p">,</span> <span class="nx">objectsB</span><span class="p">,</span> <span class="nx">collideCallback</span><span class="p">,</span> <span class="nx">processCallback</span><span class="p">,</span> <span class="nx">callbackContext</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">collider</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">collider</span><span class="p">(</span><span class="nx">objectsA</span><span class="p">,</span> <span class="nx">objectsB</span><span class="p">,</span> <span class="nx">collideCallback</span><span class="p">);</span>
+<span class="c1">// var collider = scene.physics.add.collider(objectsA, objectsB, collideCallback, processCallback, callbackContext);</span>
 </pre></div></li>
 <li>If you don't require separation then use <code>overlap</code> instead.
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">collider</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">overlap</span><span class="p">(</span><span class="nx">objectsA</span><span class="p">,</span> <span class="nx">objectsB</span><span class="p">,</span> <span class="nx">collideCallback</span><span class="p">,</span> <span class="nx">processCallback</span><span class="p">,</span> <span class="nx">callbackContext</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">collider</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">overlap</span><span class="p">(</span><span class="nx">objectsA</span><span class="p">,</span> <span class="nx">objectsB</span><span class="p">,</span> <span class="nx">collideCallback</span><span class="p">);</span>
+<span class="c1">// var collider = scene.physics.add.overlap(objectsA, objectsB, collideCallback, processCallback, callbackContext);</span>
 </pre></div></li>
 <li>Parameters<ul>
 <li><code>objectsA</code>, <code>objectsB</code> :<ul>
 <li>A game object</li>
-<li>Game objects in array (Add or remove game objects)</li>
-<li>Physics group (Add or remove game objects)</li>
-<li>Group (Add or remove game objects)</li>
+<li>An array contains Game objects (Add or remove game objects)</li>
+<li>Physics group/Group (Add or remove game objects)</li>
+<li>An array contains Physics group/Group</li>
 </ul>
 </li>
 <li><code>collideCallback</code> :
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">collideCallback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">gameObject1</span><span class="p">,</span> <span class="nx">gameObject2</span><span class="p">)</span> <span class="p">{</span> 
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">collideCallback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">gameObject1</span><span class="p">,</span> <span class="nx">gameObject2</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
 <span class="p">}</span>
 </pre></div></li>
@@ -2883,6 +3089,61 @@
 </li>
 <li>Remove collider
     <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">removeCollider</span><span class="p">(</span><span class="nx">collider</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h4 id="testing-wo-collider">Testing wo collider<a class="headerlink" href="#testing-wo-collider" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Test overlapping
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isOverlapping</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">overlap</span><span class="p">(</span><span class="nx">object1</span><span class="p">,</span> <span class="nx">object2</span><span class="p">);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isOverlapping</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">overlap</span><span class="p">(</span><span class="nx">object1</span><span class="p">,</span> <span class="nx">object2</span><span class="p">,</span> <span class="nx">collideCallback</span><span class="p">);</span>
+<span class="c1">// var isOverlapping = scene.physics.world.overlap(object1, object2, collideCallback, processCallback, callbackContext);</span>
+</pre></div></li>
+<li>Test colliding, also push out
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isCollided</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">collide</span><span class="p">(</span><span class="nx">object1</span><span class="p">,</span> <span class="nx">object2</span><span class="p">);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isCollided</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">collide</span><span class="p">(</span><span class="nx">object1</span><span class="p">,</span> <span class="nx">object2</span><span class="p">,</span> <span class="nx">collideCallback</span><span class="p">);</span>
+<span class="c1">// var isCollided = scene.physics.world.collide(object1, object2, collideCallback, processCallback, callbackContext);</span>
+</pre></div></li>
+</ul>
+<h3 id="world-bounds">World bounds<a class="headerlink" href="#world-bounds" title="Permanent link">&para;</a></h3>
+<h4 id="enable">Enable<a class="headerlink" href="#enable" title="Permanent link">&para;</a></h4>
+<ul>
+<li><a href="../arcade-body/index.html">Body</a> : Set <code>body.setCollideWorldBounds()</code> to enable worldBounds property.</li>
+<li>World :<ul>
+<li>Set bounds <a href="../geom-rectangle/index.html">rectangle</a> and enable bounds
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">setBounds</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+<span class="c1">// scene.physics.world.setBounds(x, y, width, height, checkLeft, checkRight, checkUp, checkDown);</span>
+</pre></div></li>
+<li>Set bounds <a href="../geom-rectangle/index.html">rectangle</a>
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">bounds</span><span class="p">.</span><span class="nx">setTo</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">bounds</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">bounds</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">bounds</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span><span class="p">;</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">bounds</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">height</span><span class="p">;</span>
+</pre></div></li>
+<li>Enable bounds
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">setBoundsCollision</span><span class="p">();</span>
+<span class="c1">// scene.physics.world.setBoundsCollision(left, right, up, down);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">checkCollision</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="nx">left</span><span class="p">;</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">checkCollision</span><span class="p">.</span><span class="nx">right</span> <span class="o">=</span> <span class="nx">right</span><span class="p">;</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">checkCollision</span><span class="p">.</span><span class="nx">up</span> <span class="o">=</span> <span class="nx">up</span><span class="p">;</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">checkCollision</span><span class="p">.</span><span class="nx">down</span> <span class="o">=</span> <span class="nx">down</span><span class="p">;</span>
+</pre></div></li>
+</ul>
+</li>
+</ul>
+<h4 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h4>
+<ul>
+<li>World bounds
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">body</span><span class="p">,</span> <span class="nx">blockedUp</span><span class="p">,</span> <span class="nx">blockedDown</span><span class="p">,</span> <span class="nx">blockedLeft</span><span class="p">,</span> <span class="nx">blockedRight</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">};</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;worldbounds&#39;</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
 </pre></div></li>
 </ul>
 <h3 id="wrap">Wrap<a class="headerlink" href="#wrap" title="Permanent link">&para;</a></h3>
@@ -2915,6 +3176,18 @@
     <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">accelerateToObject</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">destination</span><span class="p">,</span> <span class="nx">acceleration</span><span class="p">,</span> <span class="nx">xSpeedMax</span><span class="p">,</span> <span class="nx">ySpeedMax</span><span class="p">);</span>
 </pre></div></li>
 </ul>
+<h3 id="gravity">Gravity<a class="headerlink" href="#gravity" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">gravity</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">gx</span><span class="p">;</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">gravity</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">gy</span><span class="p">;</span>
+</pre></div></li>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gx</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">gravity</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">gy</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">gravity</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+</pre></div></li>
+</ul>
+<p>Total Gravity = world.gravity + body.gravity</p>
 <h3 id="bodies">Bodies<a class="headerlink" href="#bodies" title="Permanent link">&para;</a></h3>
 <h4 id="closestfurthest">Closest/furthest<a class="headerlink" href="#closestfurthest" title="Permanent link">&para;</a></h4>
 <ul>
@@ -2925,58 +3198,94 @@
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">body</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">furthest</span><span class="p">(</span><span class="nx">point</span><span class="p">);</span>  <span class="c1">// point: {x,y}</span>
 </pre></div></li>
 </ul>
-<h3 id="control">Control<a class="headerlink" href="#control" title="Permanent link">&para;</a></h3>
-<h4 id="pause">Pause<a class="headerlink" href="#pause" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
-</pre></div>
-
-<h4 id="resume">Resume<a class="headerlink" href="#resume" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
-</pre></div>
-
-<h4 id="duration-per-frame">Duration per frame<a class="headerlink" href="#duration-per-frame" title="Permanent link">&para;</a></h4>
+<h3 id="debug">Debug<a class="headerlink" href="#debug" title="Permanent link">&para;</a></h3>
+<h4 id="draw-body-velocity">Draw body &amp; velocity<a class="headerlink" href="#draw-body-velocity" title="Permanent link">&para;</a></h4>
 <ul>
-<li>Time scale
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">timeScale</span> <span class="o">=</span> <span class="nx">timeScale</span><span class="p">;</span>
-</pre></div><ul>
-<li>1.0 = normal speed</li>
-<li>2.0 = half speed</li>
-<li>0.5 = double speed</li>
-</ul>
-</li>
-<li>FPS
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">setFPS</span><span class="p">(</span><span class="nx">framerate</span><span class="p">);</span>
+<li>Bounds of dynamic Body<ul>
+<li>Enable drawing body
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">defaults</span><span class="p">.</span><span class="nx">debugShowBody</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</pre></div></li>
+<li>Color
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">defaults</span><span class="p">.</span><span class="nx">bodyDebugColor</span> <span class="o">=</span> <span class="mh">0xff00ff</span><span class="p">;</span>
 </pre></div></li>
 </ul>
-<h4 id="step">Step<a class="headerlink" href="#step" title="Permanent link">&para;</a></h4>
-<p>Advances the simulation by one step.</p>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">step</span><span class="p">(</span><span class="nx">delta</span><span class="p">);</span>
+</li>
+<li>Bounds of static Body<ul>
+<li>Enable drawing body
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">defaults</span><span class="p">.</span><span class="nx">debugShowStaticBody</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</pre></div></li>
+<li>Color
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">defaults</span><span class="p">.</span><span class="nx">staticBodyDebugColor</span> <span class="o">=</span> <span class="mh">0x0000ff</span><span class="p">;</span>
+</pre></div></li>
+</ul>
+</li>
+<li>Direction and magnitude of velocity<ul>
+<li>Enable drawing body
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">defaults</span><span class="p">.</span><span class="nx">debugShowVelocity</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</pre></div></li>
+<li>Color
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">defaults</span><span class="p">.</span><span class="nx">velocityDebugColor</span> <span class="o">=</span> <span class="mh">0x00ff00</span><span class="p">;</span>
+</pre></div></li>
+</ul>
+</li>
+</ul>
+<h4 id="graphics">Graphics<a class="headerlink" href="#graphics" title="Permanent link">&para;</a></h4>
+<p>Draw debug body &amp; velocity on a <a href="../graphics/index.html">Graphics object</a>.</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">graphics</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">debugGraphic</span><span class="p">;</span>
 </pre></div>
+
+<ul>
+<li>Set visible
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">debugGraphic</span><span class="p">.</span><span class="nx">setVisible</span><span class="p">();</span>
+</pre></div></li>
+<li>Set invisible
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">debugGraphic</span><span class="p">.</span><span class="nx">setVisible</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h3 id="update-loop">Update loop<a class="headerlink" href="#update-loop" title="Permanent link">&para;</a></h3>
+<ol>
+<li>scene.sys.events: update<ol>
+<li>Update position &amp; angle of each body</li>
+<li>Process each collider</li>
+<li>Update final position of each body</li>
+</ol>
+</li>
+<li>scene.sys.events: postupdate<ol>
+<li>Draw debug graphics</li>
+</ol>
+</li>
+</ol>
+<pre class="mermaid"><code>graph TB
+
+SceneEventUpdate&gt;&quot;scene.sys.events: update&lt;br&gt;&lt;br&gt;Update arcade world&lt;br&gt;gameObject.preUpdate()&quot;]
+SceneUpdate[&quot;scene.update()&quot;]
+SceneEventPostUpdate&gt;&quot;scene.sys.events: postupdate&lt;br&gt;&lt;br&gt;Post update arcade world&quot;]
+Render
+
+SceneEventUpdate --&gt; SceneUpdate
+SceneUpdate --&gt; SceneEventPostUpdate
+SceneEventPostUpdate --&gt; Render</code></pre>
                 
                   
                 
               
               
                 
-                  
-
-
-  <h2 id="__comments">Comments</h2>
-  <div id="disqus_thread"></div>
-  <script>
-    var disqus_config = function () {
-      this.page.url = "https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/arcade-world/index.html";
-      this.page.identifier =
-        "/arcade-world/index.html";
-    };
-    (function() {
-      var d = document, s = d.createElement("script");
-      s.src = "//notes-of-phaser3.disqus.com/embed.js";
-      s.setAttribute("data-timestamp", +new Date());
-      (d.head || d.body).appendChild(s);
-    })();
-  </script>
-
+                  <h2 id="__comments">Comments</h2>
+                  <div id="disqus_thread"></div>
+<script>
+  var disqus_config = function () {
+    this.page.url = "https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/arcade-world/index.html";
+    this.page.identifier =
+      "/arcade-world/index.html";
+  };
+  (function() {
+    var d = document, s = d.createElement("script");
+    s.src = "//notes-of-phaser3.disqus.com/embed.js";
+    s.setAttribute("data-timestamp", +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
                 
               
             </article>
@@ -3049,9 +3358,9 @@
       
     </div>
     
-      <script src="../assets/javascripts/application.8eb9be28.js"></script>
+      <script src="../assets/javascripts/application-a5397a53ce.js"></script>
       
-      <script>app.initialize({version:"0.17.3",url:{base:".."}})</script>
+      <script>app.initialize({version:"0.17.1",url:{base:".."}})</script>
       
         <script src="../js/mermaid/mermaid.min.js"></script>
       
@@ -3060,7 +3369,7 @@
     
     
       
-        <script>!function(e,a,t,n,o,c,i){e.GoogleAnalyticsObject=o,e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=1*new Date,c=a.createElement(t),i=a.getElementsByTagName(t)[0],c.async=1,c.src="https://www.google-analytics.com/analytics.js",i.parentNode.insertBefore(c,i)}(window,document,"script",0,"ga"),ga("create","UA-119804412-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview");var links=document.getElementsByTagName("a");if(Array.prototype.map.call(links,function(e){e.host!=document.location.host&&e.addEventListener("click",function(){var a=e.getAttribute("data-md-action")||"follow";ga("send","event","outbound",a,e.href)})}),document.forms.search){var query=document.forms.search.query;query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}</script>
+      <script>!function(e,t,a,n,o,c,i){e.GoogleAnalyticsObject=o,e[o]=e[o]||function(){(e[o].q=e[o].q||[]).push(arguments)},e[o].l=1*new Date,c=t.createElement(a),i=t.getElementsByTagName(a)[0],c.async=1,c.src=n,i.parentNode.insertBefore(c,i)}(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-119804412-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview");var links=document.getElementsByTagName("a");Array.prototype.map.call(links,function(e){e.host!=document.location.host&&e.addEventListener("click",function(){var t=e.getAttribute("data-md-action")||"follow";ga("send","event","outbound",t,e.href)})});var query=document.forms.search.query;query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})</script>
       
     
   </body>

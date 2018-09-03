@@ -12,65 +12,83 @@ Arcade physics Image/Sprite/Group object.
 
 #### Image object
 
-- Static object
+- Static object, extends from [Image object](image.md)
     ```javascript
     var image = scene.physics.add.staticImage(x, y, key);
     ```
-- Dynamic object
+- Dynamic object, extends from [Image object](image.md)
     ```javascript
     var image = scene.physics.add.image(x, y, key);
     ```
 
 #### Sprite object
 
-- Static object
+- Static object, extends from [Sprite object](sprite.md)
     ```javascript
     var image = scene.physics.add.staticSprite(x, y, key, frame);
     ```
-- Dynamic object
+- Dynamic object, extends from [Sprite object](sprite.md)
     ```javascript
     var image = scene.physics.add.sprite(x, y, key, frame);
     ```
 
 #### Group
 
-- Static sprite objects
+- Static sprite objects, extends from [Group object](group.md)
     ```javascript
     var group = scene.physics.add.staticGroup(children, config);
     // var group = scene.physics.add.staticGroup(config);
     ```
-- Dynamic sprite objects
+- Dynamic sprite objects, extends from [Group object](group.md)
     ```javascript
     var group = scene.physics.add.group(children, config);
     // var group = scene.physics.add.staticGroup(config);
     ```
     - `config`
-    ```javascript
-    var config = {
-        setCollideWorldBounds: false,
-        setAccelerationX: 0,
-        setAccelerationY: 0,
-        allowDrag: true,
-        allowGravity: true,
-        allowRotation: true
-        setBounceX: 0,
-        setBounceY: 0,
-        setDragX: 0,
-        setDragY: 0,
-        setGravityX: 0,
-        setGravityY: 0,
-        setFrictionX: 0,
-        setFrictionY: 0,
-        setVelocityX: 0,
-        setVelocityY: 0,
-        setAngularVelocity: 0,
-        setAngularAcceleration: 0,
-        setAngularDrag: 0,
-        setMass: 1,
-        setImmovable: false
-    };
-    ```
+        ```javascript
+        var config = {
+            classType: ArcadeSprite,
+            setCollideWorldBounds: false,
+            setAccelerationX: 0,
+            setAccelerationY: 0,
+            allowDrag: true,
+            allowGravity: true,
+            allowRotation: true
+            setBounceX: 0,
+            setBounceY: 0,
+            setDragX: 0,
+            setDragY: 0,
+            setGravityX: 0,
+            setGravityY: 0,
+            setFrictionX: 0,
+            setFrictionY: 0,
+            setVelocityX: 0,
+            setVelocityY: 0,
+            setAngularVelocity: 0,
+            setAngularAcceleration: 0,
+            setAngularDrag: 0,
+            setMass: 1,
+            setImmovable: false,
+            maxSize: -1,
+            runChildUpdate: false
+        };
+        ```
 
+### Enable
+
+- Enable body
+    ```javascript
+    gameObject.enableBody();
+    ```
+    - Enable and reset position
+        ```javascript
+        gameObject.enableBody(true, x, y);
+        ```
+- Disable body
+    ```javascript
+    gameObject.disableBody();
+    ```
+  
 ### Movement
 
 #### Velocity
@@ -157,7 +175,24 @@ Arcade physics Image/Sprite/Group object.
     gameObject.setDamping(value);
     ```
 
-#### Friction
+#### Immovable
+
+- Enable
+    ```javascript
+    gameObject.setImmovable();
+    ```
+- Disable
+    ```javascript
+    gameObject.setImmovable(false);
+    ```
+- Get
+    ```javascript
+    var immovable = gameObject.body.immovable;
+    ```
+
+##### Friction
+
+If this Body is `immovable` and in motion, this the proportion of this Body's movement received by the riding body on each axis.
 
 - Set
     ```javascript
@@ -172,21 +207,6 @@ Arcade physics Image/Sprite/Group object.
     ```javascript
     var fx = gameObject.body.friction.x;
     var fy = gameObject.body.friction.y;
-    ```
-
-#### Immovable
-
-- Enable
-    ```javascript
-    gameObject.setImmovable();
-    ```
-- Disable
-    ```javascript
-    gameObject.setImmovable(false);
-    ```
-- Get
-    ```javascript
-    var immovable = gameObject.body.immovable;
     ```
 
 ### Rotation
@@ -345,4 +365,14 @@ group.setVelocityY(value, step);
 
 ```javascript
 group.refresh();  // call this method when position of game objects were changed in static object group
+```
+
+### Debug
+
+```javascript
+gameObject.setDebug(showBody, showVelocity, bodyColor);
+```
+
+```javascript
+gameObject.setDebugBodyColor(bodyColor);
 ```
