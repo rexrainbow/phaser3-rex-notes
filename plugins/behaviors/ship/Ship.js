@@ -2,7 +2,7 @@
 
 // https://labs.phaser.io/view.html?src=src\physics\arcade\asteroids%20movement.js
 
-import Cascade from 'rexPlugins/utils/arcade/cascade.js';
+import Proxy from 'rexPlugins/utils/arcade/proxy.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -144,7 +144,7 @@ class Ship {
 // mixin
 Object.assign(
     Ship.prototype,
-    Cascade
+    Proxy
 );
 
 export default Ship;

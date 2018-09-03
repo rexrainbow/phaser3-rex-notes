@@ -55,6 +55,7 @@ var joystick = scene.plugins.get('rexVirtualJoyStick').add(scene, {
     thumb: thumbGameObject,
     // dir: '8dir',
     // forceMin: 16,
+    // fixed: true,
     // enable: true
 });
 ```
@@ -72,7 +73,8 @@ var joystick = scene.plugins.get('rexVirtualJoyStick').add(scene, {
     - `'8dir'`, or `3` : Simulate up, up-left, up-right, down, down-left, down-right, left, or right cursor keys.
 - `forceMin` : Cursor keys will be pressed when *force* is larger then this value.
     - `force` : Distance between position of base game object to touch pointer
-- `enable` : set `false` to disable cursor keys simulation
+- `fixed` : Set `true` to fix to camera, i.e set `scrollFactor` to `0` for base and thumb game object.
+- `enable` : Set `false` to disable cursor keys simulation
 
 ### State of cursor keys
 
@@ -153,6 +155,13 @@ Position of base game object.
     joystick.setPosition(x ,y);
     ```
 
+### Scroll factor
+
+- Fix to camera
+    ```javascript
+    joystick.setScrollFactor(0);
+    ```
+
 ### Touch pointer
 
 - Position
@@ -160,9 +169,9 @@ Position of base game object.
     var x = joystick.pointerX;
     var y = joystick.pointerY;
     ```
-- Pointer Id
+- Pointer
     ```javascript
-    var pointerId = joystick.pointerId;
+    var pointer = joystick.pointer;
     ```
 
 ### Destroy

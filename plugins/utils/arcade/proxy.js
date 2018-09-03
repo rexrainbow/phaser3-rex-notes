@@ -1,6 +1,6 @@
 'use strict'
 
-var Cascade = {
+var Proxy = {
     cascadeMode: false,
     setCascadeMode: function (m) {
         this.cascadeMode = m;
@@ -64,4 +64,4 @@ var Cascade = {
         }
     },
 };
-export default Cascade;
+export default Proxy;

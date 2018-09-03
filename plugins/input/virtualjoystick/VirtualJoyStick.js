@@ -18,6 +18,10 @@ class VirtualJoyStick {
         this.base.setPosition(x, y);
         this.thumb.setPosition(x, y);
 
+        if (GetValue(config, 'fixed', true)) {
+            this.setScrollFactor(0);
+        }
+
         this.boot();
     }
 
@@ -73,8 +77,8 @@ class VirtualJoyStick {
         return this.touchCursor.end.y;
     }
 
-    get pointerId() {
-        return this.touchCursor.pointerId;
+    get pointer() {
+        return this.touchCursor.pointer;
     }
 
     setPosition(x, y) {
@@ -178,6 +182,11 @@ class VirtualJoyStick {
         }
         this.thumb = gameObject;
         return this;
+    }
+
+    setScrollFactor(scrollFactor) {
+        this.base.setScrollFactor(scrollFactor);
+        this.thumb.setScrollFactor(scrollFactor);
     }
 
     boot() {

@@ -1,6 +1,6 @@
 'use strict'
 
-import Cascade from 'rexPlugins/utils/arcade/cascade.js';
+import Proxy from 'rexPlugins/utils/arcade/proxy.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const AngleBetween = Phaser.Math.Angle.Between;
@@ -149,7 +149,7 @@ class EightDirection {
 // mixin
 Object.assign(
     EightDirection.prototype,
-    Cascade
+    Proxy
 );
 
 /** @private */
