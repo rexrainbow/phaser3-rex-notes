@@ -257,7 +257,7 @@ Whether this Body's rotation is affected by its angular acceleration and velocit
 
 #### Angular acceleration
 
--Set 
+- Set 
     ```javascript
     body.setAngularAcceleration(v);
     ```

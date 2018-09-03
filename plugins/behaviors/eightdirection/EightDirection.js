@@ -1,5 +1,7 @@
 'use strict'
 
+import Cascade from 'rexPlugins/utils/arcade/cascade.js';
+
 const GetValue = Phaser.Utils.Objects.GetValue;
 const AngleBetween = Phaser.Math.Angle.Between;
 const DegToRad = Phaser.Math.DegToRad;
@@ -14,8 +16,8 @@ class EightDirection {
     }
 
     resetFromJSON(o) {
+        this.setCascadeMode(GetValue(o, 'cascade', false));        
         this.setEnable(GetValue(o, 'enable', true));
-        this.setCascadeMode(GetValue(o, 'cascade', false));
         this.setDirMode(GetValue(o, 'dir', '8dir'));
         this.setSpeed(GetValue(o, 'speed', 200));
         this.setRotateToDirection(GetValue(o, 'rotateToDirection', false));
@@ -65,11 +67,6 @@ class EightDirection {
         return this;
     }
 
-    setCascadeMode(e) {
-        this.cascaseMode = e;
-        return this;
-    }
-
     setDirMode(m) {
         if (typeof (m) === 'string') {
             m = DIRMODE[m];
@@ -98,7 +95,7 @@ class EightDirection {
 
     preupdate(time, delta) {
         if (!this.enable) {
-            this.setVelocity(0, 0);
+            this._setVelocity(0, 0);
             return this;
         }
         var cursorKeys = this.cursorKeys;
@@ -109,7 +106,7 @@ class EightDirection {
         var dy = ((isUpDown) ? -1 : 0) + ((isDownDown) ? 1 : 0),
             dx = ((isLeftDown) ? -1 : 0) + ((isRightDown) ? 1 : 0);
         if ((dx === 0) && (dy === 0)) {
-            this.setVelocity(0, 0);
+            this._setVelocity(0, 0);
             return this;
         }
         switch (this.dirMode) {
@@ -137,33 +134,23 @@ class EightDirection {
             rotation = (dy === 1) ? RAD90 : RAD270;
         } else { // (dx !== 0) && (dy !== 0)
             rotation = AngleBetween(0, 0, dx, dy);
+            // TODO maxSpeed?
             vx = this.speed * Math.cos(rotation);
             vy = this.speed * Math.sin(rotation);
         }
-        this.setVelocity(vx, vy);
+        this._setVelocity(vx, vy);
         if (this.rotateToDirection && (rotation !== undefined)) {
             this.gameObject.rotation = rotation;
         }
         return this;
     }
-
-    setVelocity(newVx, newVy) {
-        var body = this.body;
-        var oldVx = body.velocity.x;
-        var oldVy = body.velocity.y;
-        if (this.cascaseMode) {
-            newVx += oldVx;
-            newVy += oldVy;
-        }
-        if ((newVx !== oldVx) || (newVy !== oldVy)) {
-            body.setVelocity(newVx, newVy);
-        }
-    }
-
-    get body() {
-        return this.gameObject.body;
-    }
 }
+
+// mixin
+Object.assign(
+    EightDirection.prototype,
+    Cascade
+);
 
 /** @private */
 const DIRMODE = {

@@ -2,6 +2,8 @@
 
 // https://labs.phaser.io/view.html?src=src\physics\arcade\asteroids%20movement.js
 
+import Cascade from 'rexPlugins/utils/arcade/cascade.js';
+
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Ship {
@@ -14,12 +16,13 @@ class Ship {
     }
 
     resetFromJSON(o) {
+        this.setCascadeMode(GetValue(o, 'cascade', false));
         this.setEnable(GetValue(o, 'enable', true));
         this.setMaxSpeed(GetValue(o, 'maxSpeed', 200));
         this.setAcceleration(GetValue(o, 'acceleration', 200));
         this.setDrag(GetValue(o, 'drag', 0.99));
-        this.setAngularVelocity(GetValue(o, 'angularVelocity', 300));
-        this.setWrap(GetValue(o, 'wrap', true), GetValue(o, 'padding', 0));
+        this.setTurnSpeed(GetValue(o, 'turnSpeed', 300));
+        this.setWrapMode(GetValue(o, 'wrap', true), GetValue(o, 'padding', 0));
         this.setCursorKeys(GetValue(o, 'cursorKeys', undefined));
         this.tickMe = GetValue(o, 'tickMe', true); // true to enable 'preupdate' callback
         return this;
@@ -85,12 +88,12 @@ class Ship {
         return this;
     }
 
-    setAngularVelocity(angularVelocity) {
+    setTurnSpeed(angularVelocity) {
         this.angularVelocity = angularVelocity;
         return this;
     }
 
-    setWrap(wrap, padding) {
+    setWrapMode(wrap, padding) {
         this.wrap = wrap;
         this.padding = padding;
         return this;
@@ -106,6 +109,8 @@ class Ship {
 
     preupdate(time, delta) {
         if (!this.enable) {
+            this._setAcceleration(0);
+            this._setAngularVelocity(0);
             return this;
         }
 
@@ -120,24 +125,26 @@ class Ship {
             var rotation = this.gameObject.rotation;
             var ax = Math.cos(rotation) * this.acceleration;
             var ay = Math.sin(rotation) * this.acceleration;
-            body.setAcceleration(ax, ay);
+            this._setAcceleration(ax, ay);
         } else {
-            body.setAcceleration(0);
+            this._setAcceleration(0);
         }
 
+        debugger
         // turn left/right
-        if (isLeftDown && !isRightDown) {
-            body.setAngularVelocity(-this.angularVelocity);
-        } else if (isRightDown && !isLeftDown) {
-            body.setAngularVelocity(this.angularVelocity);
-        } else {
-            body.setAngularVelocity(0);
-        }
+        var dx = ((isLeftDown) ? -1 : 0) + ((isRightDown) ? 1 : 0);
+        this._setAngularVelocity(this.angularVelocity * dx);
 
         if (this.wrap) {
             body.world.wrap(this.gameObject, this.padding);
         }
     }
 }
+
+// mixin
+Object.assign(
+    Ship.prototype,
+    Cascade
+);
 
 export default Ship;
