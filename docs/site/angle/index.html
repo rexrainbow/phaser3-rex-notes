@@ -2014,6 +2014,27 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#wrap" title="Wrap" class="md-nav__link">
+    Wrap
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#angle-between-points" title="Angle between points" class="md-nav__link">
+    Angle between points
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#angle-between-angles" title="Angle between angles" class="md-nav__link">
+    Angle between angles
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2651,6 +2672,27 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#wrap" title="Wrap" class="md-nav__link">
+    Wrap
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#angle-between-points" title="Angle between points" class="md-nav__link">
+    Angle between points
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#angle-between-angles" title="Angle between angles" class="md-nav__link">
+    Angle between angles
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2691,11 +2733,40 @@
 <li>Radians to degree
    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">deg</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">RadToDeg</span><span class="p">(</span><span class="nx">rad</span><span class="p">);</span>  <span class="c1">// deg : -180 ~ 180</span>
 </pre></div></li>
+</ul>
+<h3 id="wrap">Wrap<a class="headerlink" href="#wrap" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Wrap angle (radians) in the range of -PI to PI
+   <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rad</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">Angle</span><span class="p">.</span><span class="nx">Wrap</span><span class="p">(</span><span class="nx">angle</span><span class="p">);</span>
+</pre></div></li>
+<li>Wrap angle (radians) in the range of 0 to PI
+   <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rad</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">Angle</span><span class="p">.</span><span class="nx">Normalize</span><span class="p">(</span><span class="nx">angle</span><span class="p">);</span>
+</pre></div></li>
+<li>Wrap angle (degrees) in the range of -180 to 180
+   <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">deg</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">Angle</span><span class="p">.</span><span class="nx">WrapDegrees</span><span class="p">(</span><span class="nx">angle</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h3 id="angle-between-points">Angle between points<a class="headerlink" href="#angle-between-points" title="Permanent link">&para;</a></h3>
+<ul>
 <li>Angle from (0,0) to vector (x2 - x1 , y2 - y1)
    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rad</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">Angle</span><span class="p">.</span><span class="nx">Between</span><span class="p">(</span><span class="nx">x1</span><span class="p">,</span> <span class="nx">y1</span><span class="p">,</span> <span class="nx">x2</span><span class="p">,</span> <span class="nx">y2</span><span class="p">);</span>
 </pre></div>
    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rad</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">Angle</span><span class="p">.</span><span class="nx">BetweenPoints</span><span class="p">(</span><span class="nx">point1</span><span class="p">,</span> <span class="nx">point2</span><span class="p">);</span>
 </pre></div></li>
+</ul>
+<h3 id="angle-between-angles">Angle between angles<a class="headerlink" href="#angle-between-angles" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Shortest angle (degrees) between 2 angles
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">deg</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">Angle</span><span class="p">.</span><span class="nx">ShortestBetween</span><span class="p">(</span><span class="nx">angle1</span><span class="p">,</span> <span class="nx">angle2</span><span class="p">)</span>
+</pre></div><ul>
+<li><code>angle1</code>, <code>angle2</code> : Angle in degrees in the range of -180 to 180</li>
+<li><code>deg</code> : Shortest angle in degrees<ul>
+<li>deg &gt; 0 : Counter-ClockWise rotation</li>
+<li>deg &lt; 0 : ClockWise rotation</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
                 
                   
