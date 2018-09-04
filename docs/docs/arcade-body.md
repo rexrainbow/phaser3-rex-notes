@@ -288,6 +288,7 @@ Reduces angular speed per second.
     body.setSize(width, height, center);
     ```    
     - `center` : `false` to set body's offset to (0, 0).
+        - No effect in [Graphics](graphics.md) object.
 - Circle
     ```javascript
     body.setCircle(radius, offsetX, offsetY);

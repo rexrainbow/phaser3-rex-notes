@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/mustache/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/rotateto/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Mustache - Notes of Phaser 3</title>
+        <title>Rotate to - Notes of Phaser 3</title>
       
     
     
@@ -128,7 +128,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Mustache
+                Rotate to
               </span>
             
           
@@ -447,10 +447,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
     
     <label class="md-nav__link" for="nav-4">
       Game object
@@ -1042,10 +1044,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-9" type="checkbox" id="nav-4-9">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-9" type="checkbox" id="nav-4-9" checked>
     
     <label class="md-nav__link" for="nav-4-9">
       Behaviors
@@ -1073,11 +1077,141 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../rotateto/" title="Rotate to" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Rotate to
+      </label>
+    
+    <a href="./" title="Rotate to" class="md-nav__link md-nav__link--active">
       Rotate to
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#import-class" title="Import class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
+    Install global plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-instance" title="Create instance" class="md-nav__link">
+    Create instance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#start-moving" title="Start moving" class="md-nav__link">
+    Start moving
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rotate-game-object-towards-position" title="Rotate game object towards position" class="md-nav__link">
+    Rotate game object towards position
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rotate-game-object-to-angle" title="Rotate game object to angle" class="md-nav__link">
+    Rotate game object to angle
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stop-moving" title="Stop moving" class="md-nav__link">
+    Stop moving
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-speed" title="Set speed" class="md-nav__link">
+    Set speed
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" title="Events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#status" title="Status" class="md-nav__link">
+    Status
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -2175,12 +2309,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-12" type="checkbox" id="nav-12" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-12" type="checkbox" id="nav-12">
     
     <label class="md-nav__link" for="nav-12">
       String
@@ -2196,12 +2328,10 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-12-1" type="checkbox" id="nav-12-1" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-12-1" type="checkbox" id="nav-12-1">
     
     <label class="md-nav__link" for="nav-12-1">
       Format
@@ -2229,52 +2359,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Mustache
-      </label>
-    
-    <a href="./" title="Mustache" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../mustache/" title="Mustache" class="md-nav__link">
       Mustache
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -2638,9 +2727,98 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#usage" title="Usage" class="md-nav__link">
     Usage
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#import-class" title="Import class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
+    Install global plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-instance" title="Create instance" class="md-nav__link">
+    Create instance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#start-moving" title="Start moving" class="md-nav__link">
+    Start moving
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rotate-game-object-towards-position" title="Rotate game object towards position" class="md-nav__link">
+    Rotate game object towards position
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rotate-game-object-to-angle" title="Rotate game object to angle" class="md-nav__link">
+    Rotate game object to angle
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stop-moving" title="Stop moving" class="md-nav__link">
+    Stop moving
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-speed" title="Set speed" class="md-nav__link">
+    Set speed
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" title="Events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#status" title="Status" class="md-nav__link">
+    Status
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -2660,21 +2838,122 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/mustache.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/rotateto.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Mustache</h1>
+                  <h1>Rotate to</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Format string with variables.<br />
-<a href="https://github.com/janl/mustache.js">Reference</a></p>
+<p>Rotate game object towards target position with a steady speed.</p>
+<ul>
+<li>Author: Rex</li>
+<li>Behavior of game object</li>
+</ul>
+<h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/rotateto-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexrotatetoplugin.min.js">minify</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">template</span> <span class="o">=</span> <span class="s1">&#39;hello, {{name}}&#39;</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">view</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;rex&#39;</span>
-<span class="p">};</span>
-<span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">Mustache</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="nx">template</span><span class="p">,</span> <span class="nx">view</span><span class="p">);</span>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/rotateto">Sample code</a></p>
+<p>User could import class directly, or install it by global plugin.</p>
+<h3 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">rexRotateTo</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/rotateto.js&#39;</span><span class="p">;</span>
 </pre></div>
+
+<h3 id="install-global-plugin">Install global plugin<a class="headerlink" href="#install-global-plugin" title="Permanent link">&para;</a></h3>
+<p>Install plugin in <a href="../game/#configuration">configuration of game</a></p>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">RotateToPlugin</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/rotateto-plugin.js&#39;</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexRotateTo&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">RotateToPlugin</span><span class="p">,</span>
+            <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="p">},</span>
+        <span class="c1">// ...</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</pre></div>
+
+<h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rotateTo</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexRotateTo&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="p">{</span>
+    <span class="c1">// speed: 180</span>
+<span class="p">});</span>
+</pre></div>
+
+<ul>
+<li><code>speed</code> : Turn speed, degrees in second</li>
+</ul>
+<h3 id="start-moving">Start moving<a class="headerlink" href="#start-moving" title="Permanent link">&para;</a></h3>
+<h4 id="rotate-game-object-towards-position">Rotate game object towards position<a class="headerlink" href="#rotate-game-object-towards-position" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Shortest angle
+    <div class="codehilite"><pre><span></span><span class="nx">rotateTo</span><span class="p">.</span><span class="nx">rotateTowardsPosition</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>x</code> , <code>y</code> : Target position</li>
+</ul>
+</li>
+<li>Clockwise/counter-clockwise
+    <div class="codehilite"><pre><span></span><span class="nx">rotateTo</span><span class="p">.</span><span class="nx">rotateTowardsPosition</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">dir</span><span class="p">);</span>
+<span class="c1">// rotateTo.rotateTowardsPosition(x, y, dir, speed);</span>
+</pre></div><ul>
+<li><code>dir</code> :<ul>
+<li><code>0</code> : Shortest angle</li>
+<li><code>1</code>, or <code>'cw'</code> : Clockwise</li>
+<li><code>2</code>, or <code>'ccw'</code> : Counter-clockwise</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="rotate-game-object-to-angle">Rotate game object to angle<a class="headerlink" href="#rotate-game-object-to-angle" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Shortest angle
+    <div class="codehilite"><pre><span></span><span class="nx">rotateTo</span><span class="p">.</span><span class="nx">rotateTo</span><span class="p">(</span><span class="nx">angle</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>angle</code> : Target angle in degrees</li>
+</ul>
+</li>
+<li>Clockwise/counter-clockwise
+    <div class="codehilite"><pre><span></span><span class="nx">rotateTo</span><span class="p">.</span><span class="nx">rotateTo</span><span class="p">(</span><span class="nx">angle</span><span class="p">,</span> <span class="nx">dir</span><span class="p">);</span>
+<span class="c1">// rotateTo.rotateTo(angle, dir, speed);</span>
+</pre></div><ul>
+<li><code>dir</code> :<ul>
+<li><code>0</code> : Shortest angle</li>
+<li><code>1</code>, or <code>cw</code> : Clockwise</li>
+<li><code>2</code>, or <code>ccw</code> : Counter-clockwise</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="stop-moving">Stop moving<a class="headerlink" href="#stop-moving" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">rotateTo</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
+</pre></div>
+
+<h3 id="set-speed">Set speed<a class="headerlink" href="#set-speed" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">rotateTo</span><span class="p">.</span><span class="nx">setSpeed</span><span class="p">(</span><span class="nx">speed</span><span class="p">);</span>
+<span class="c1">// rotateTo.speed = speed;</span>
+</pre></div>
+
+<ul>
+<li><code>speed</code> : Turn speed, degrees in second</li>
+</ul>
+<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
+<ul>
+<li>On reached target
+    <div class="codehilite"><pre><span></span><span class="nx">rotateTo</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">rotateTo</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">){});</span>
+</pre></div></li>
+</ul>
+<h3 id="status">Status<a class="headerlink" href="#status" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Is moving
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isMoving</span> <span class="o">=</span> <span class="nx">rotateTo</span><span class="p">.</span><span class="nx">isMoving</span><span class="p">;</span>
+</pre></div></li>
+</ul>
                 
                   
                 
@@ -2695,7 +2974,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../format/" title="Format" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../moveto/" title="Move to" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -2704,19 +2983,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Format
+                Move to
               </span>
             </div>
           </a>
         
         
-          <a href="../pad/" title="Pad" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../fadeoutdestroy/" title="Fade out destroy" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Pad
+                Fade out destroy
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

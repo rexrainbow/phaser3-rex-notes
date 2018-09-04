@@ -26,10 +26,12 @@ import TouchCursor from './touchcursor.js';
 import VirtualJoyStick from './virtualjoystick.js';
 
 // member of game object
+import MoveTo from './moveto.js';
+import RotateTo from './rotateto.js';
 import Fade from './fade.js';
 import FadeOutDestroy from './fade-out-destroy.js';
 import PathFollower from './pathfollower.js';
-import MoveTo from './moveto.js';
+
 
 import EightDirection from './eightdirection.js';
 
@@ -85,10 +87,11 @@ export {
     VirtualJoyStick,
 
     // member of game object
+    MoveTo,
+    RotateTo,    
     Fade,
     FadeOutDestroy,
     PathFollower,
-    MoveTo,
 
     EightDirection,
 

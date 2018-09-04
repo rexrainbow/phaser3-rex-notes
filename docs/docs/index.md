@@ -24,6 +24,7 @@
 1. [Page](textpage.md): Display text page by page on text object.
 1. [Path follower](pathfollower.md): Set position of game object on a path.
 1. [Pixelation-pipeline](pixelationpipeline.md): Pixelation post processing filter.
+1. [RotateTo](rotateto.md): Rotate game object towards target position with a steady speed.
 1. [Run-commands](runcommands.md): Run commands in array.
 1. [Scroller](scroller.md): Drag content. Slow down when dragging released, pull back when out of bounds.
 1. [Sequence](sequence.md): Run sequence commands in array.

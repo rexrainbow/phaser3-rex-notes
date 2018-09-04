@@ -53,6 +53,7 @@ nav:
         - DOM element: domelement.md
     - Behaviors:
         - Move to: moveto.md
+        - Rotate to: rotateto.md
         - Fade out destroy: fadeoutdestroy.md
         - Path follower: pathfollower.md
         - Arcade:

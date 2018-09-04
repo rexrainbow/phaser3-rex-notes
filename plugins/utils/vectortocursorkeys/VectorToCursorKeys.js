@@ -143,7 +143,7 @@ class VectorToCursorKeys {
             return this;
         }
 
-        var angle = MathWrap(this.angle, 0, 360);
+        var angle = (this.angle + 360) % 360;
         switch (this.dirMode) {
             case 0: // up & down
                 var keyName = (angle < 180) ? 'down' : 'up';

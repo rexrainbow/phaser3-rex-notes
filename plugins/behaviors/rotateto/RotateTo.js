@@ -6,7 +6,9 @@ const EE = Phaser.Events.EventEmitter;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const MathWrap = Phaser.Math.Wrap;
+const WrapAngle = Phaser.Math.Angle.Wrap;
 const RadToDeg = Phaser.Math.RadToDeg;
+const DegToRad = Phaser.Math.DegToRad;
 const AngleBetween = Phaser.Math.Angle.Between;
 
 
@@ -113,18 +115,19 @@ class RotateTo extends EE {
             return;
         }
 
-        var gameObject = this.gameObject;
-        var curAngle = (360 + gameObject.angle) % 360; // 0~360
         var target = this.target; // 0~360
-        if (curAngle === target) {
+        var targetRad = WrapAngle(DegToRad(target)); // -PI~PI
+        var gameObject = this.gameObject;
+        if (targetRad === gameObject.rotation) {
             this.onReachTarget();
-            return;
+            return;  
         }
 
         if ((this.speed === 0) || (delta === 0)) {
             return;
         }
 
+        var curAngle = (360 + gameObject.angle) % 360; // 0~360
         var dt = (delta * this.timeScale) / 1000;
         var movingDist = this.speed * dt;
         var distToTarget, dir = this.dir;
@@ -155,7 +158,7 @@ class RotateTo extends EE {
             newAngle = target;
         }
 
-        gameObject.angle = newAngle;
+        gameObject.rotation = DegToRad(newAngle);
     }
 
     onReachTarget() {
