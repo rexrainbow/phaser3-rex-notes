@@ -38,3 +38,5 @@
 1. [XOR](xor.md): Encrypt or decrypt string by XOR algorithm.
 
 [Download](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexplugins.min.js) them in a signle minify file.
+
+[Bug report or suggestion](https://github.com/rexrainbow/phaser3-rex-notes/issues)

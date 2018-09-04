@@ -1,5 +1,5 @@
 site_name: Notes of Phaser 3
-pages:
+nav:
 - Home: index.md
 - System:
     - Game:
@@ -157,7 +157,9 @@ extra_javascript:
 
 theme:
     name: 'material'
-    logo: 'images/logo.svg'
+    logo:
+        icon: 'memory'    
+    favicon: 'images/logo.svg'
     palette:
         primary: 'blue'
         accent: 'blue'
@@ -165,10 +167,16 @@ theme:
 site_author: rexrainbow
 site_url: https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html
 
+repo_name: 'phaser3-rex-notes'
+repo_url: 'https://github.com/rexrainbow/phaser3-rex-notes'
+
 extra:
     social:
+        - type: 'twitter'
+          link: https://twitter.com/rexrainbow
         - type: github
-          link: https://github.com/rexrainbow/phaser3-rex-notes
+          link: https://github.com/rexrainbow/
+
 
 google_analytics:
     - 'UA-119804412-1'
