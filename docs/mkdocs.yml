@@ -168,7 +168,7 @@ site_url: https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html
 extra:
     social:
         - type: github
-          link: https://github.com/rexrainbow/
+          link: https://github.com/rexrainbow/phaser3-rex-notes
 
 google_analytics:
     - 'UA-119804412-1'
