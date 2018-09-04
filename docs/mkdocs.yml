@@ -175,8 +175,6 @@ google_analytics:
     - 'UA-119804412-1'
     - 'auto'      
 
-use_directory_urls: false
-    
 markdown_extensions:
 - admonition
 - codehilite(guess_lang=false,linenums=false)

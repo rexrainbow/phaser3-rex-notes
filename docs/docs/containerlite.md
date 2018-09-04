@@ -122,6 +122,7 @@ These world properties of children will be changed with container.
 - Position/Angle/Scale
 - Visible
 - Alpha
+- Scroll factor
 - Mask
 
 !!! note
@@ -226,7 +227,7 @@ Call these methods to update properties of child after changing local state of c
 
 ### Mask
 
-- Assign [mask object](mask.md) to children.
+- Assign [mask object](mask.md) to children
     ```javascript
     container.setMask(mask);  // container.mask = mask;
     ```
@@ -234,6 +235,13 @@ Call these methods to update properties of child after changing local state of c
     ```javascript
     container.clearMask();
     ```
+
+### Scroll factor
+
+- Set scroll factor to children
+   ```javascript
+   container.setScrollFactor(x, y);
+   ```
 
 ## Compare with Official Container
 

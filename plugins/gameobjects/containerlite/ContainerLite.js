@@ -19,6 +19,8 @@ class ContainerLite extends Zone {
         this._flipY = false;
         this._alpha = 1;
         this._mask = null;
+        this._scrollFactorX = 1;
+        this._scrollFactorY = 1;
 
         if (children) {
             this.add(children);
@@ -162,6 +164,11 @@ class ContainerLite extends Zone {
         return this;
     }
 
+    updateChildScrollFactor(child) {
+        child.setScrollFactor(this.scrollFactorX, this.scrollFactorY);
+        return this;
+    }
+
     syncPosition() {
         if (this.children && this.syncChildrenEnable) {
             this.getChildren().forEach(this.updateChildPosition, this);
@@ -190,6 +197,13 @@ class ContainerLite extends Zone {
         return this;
     }
 
+    syncScrollFactor() {
+        if (this.children && this.syncChildrenEnable) {
+            this.getChildren().forEach(this.updateChildScrollFactor, this);
+        }
+        return this;
+    }
+
     syncProperties() {
         this.syncPosition().syncVisible().syncAlpha().syncMask();
         return this;
@@ -214,8 +228,8 @@ class ContainerLite extends Zone {
         state.y = gameObject.y;
         this.worldToLocal(state);
 
-        state.scaleX = gameObject.scaleX / this.scaleX;
-        state.scaleY = gameObject.scaleY / this.scaleY;
+        state.scaleX = scale(gameObject.scaleX, this.scaleX);
+        state.scaleY = scale(gameObject.scaleY, this.scaleY);
 
         if (gameObject.flipX !== undefined) {
             state.flipX = gameObject.flipX;
@@ -223,9 +237,9 @@ class ContainerLite extends Zone {
         }
 
         state.rotation = gameObject.rotation - this.rotation;
-        state.alpha = gameObject.alpha / this.alpha;
-
+        state.alpha = scale(gameObject.alpha, this.alpha);
         state.visible = gameObject.visible;
+        return this;
     }
 
     setChildLocalPosition(gameObject, x, y) {
@@ -238,15 +252,12 @@ class ContainerLite extends Zone {
 
     _add(gameObject) {
         this.children.add(gameObject);
-        this.resetChildState(gameObject);
 
-        if (!this._visible) {
-            gameObject.visible = false;
-        }
+        this.resetChildState(gameObject)
+            .updateChildVisible(gameObject)
+            .updateChildScrollFactor(gameObject)
+            .updateChildMask(gameObject);
 
-        if (this._mask && (this._mask !== gameObject)) {
-            gameObject.mask = this._mask;
-        }
         return this;
     }
 
@@ -404,6 +415,32 @@ class ContainerLite extends Zone {
         return this;
     }
 
+    // override
+    get scrollFactorX() {
+        return this._scrollFactorX;
+    }
+
+    set scrollFactorX(value) {
+        if (this._scrollFactorX === value) {
+            return;
+        }
+
+        this._scrollFactorX = value;
+        this.syncScrollFactor();
+    }
+    get scrollFactorY() {
+        return this._scrollFactorY;
+    }
+
+    set scrollFactorY(value) {
+        if (this._scrollFactorY === value) {
+            return;
+        }
+
+        this._scrollFactorY = value;
+        this.syncScrollFactor();
+    }
+
     // compatiable with container plugin
     get list() {
         return this.getChildren();
@@ -451,5 +488,12 @@ Object.assign(
     Components.Flip
 );
 
+var scale = function (a, b) {
+    if (a === b) {
+        return 1;
+    } else {
+        return a / b;
+    }
+}
 
 export default ContainerLite;

@@ -22,7 +22,7 @@ var path = new Phaser.Curves.Path();
 
 #### Add path object with curves
 
-[Curves in JSON](path.mdl#curves-to-json)
+[Curves in JSON](path.md#curves-to-json)
 
 ```javascript
 var path = scene.add.path(json);
@@ -212,7 +212,7 @@ path.cubicBezierTo(endPoint, controlPoint1, controlPoint2);  // point : Phaser.M
 path.moveTo(x, y);
 ```
 
-#### Add curves from [JSON](path.mdl#curves-to-json)
+#### Add curves from [JSON](path.md#curves-to-json)
 
 ```javascript
 path.fromJSON(json);
