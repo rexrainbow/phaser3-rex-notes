@@ -45,6 +45,7 @@ module.exports = {
         'fadeplugin': './plugins/fade-plugin.js',
         'pathfollowerplugin': './plugins/pathfollower-plugin.js',
         'movetoplugin': './plugins/moveto-plugin.js',
+        'rotatetoplugin': './plugins/rotateto-plugin.js',
         // member of game object, arcade behavior
         'eightdirectionplugin': './plugins/eightdirection-plugin.js',
 

@@ -5,6 +5,7 @@ const Key = Phaser.Input.Keyboard.Key;
 const GetDist = Phaser.Math.Distance.Between;
 const GetAngle = Phaser.Math.Angle.Between;
 const RadToDeg = Phaser.Math.RadToDeg;
+const MathWrap = Phaser.Math.Wrap;
 
 class VectorToCursorKeys {
     constructor(config) {
@@ -142,7 +143,7 @@ class VectorToCursorKeys {
             return this;
         }
 
-        var angle = (360 + this.angle) % 360;
+        var angle = MathWrap(this.angle, 0, 360);
         switch (this.dirMode) {
             case 0: // up & down
                 var keyName = (angle < 180) ? 'down' : 'up';

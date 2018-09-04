@@ -5,12 +5,12 @@ import GetSceneObject from 'rexPlugins/utils/system/GetSceneObject.js';
 const EE = Phaser.Events.EventEmitter;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const DistanceBetween = Phaser.Math.Distance.Between;
-const Lerp = Phaser.Math.Linear;
+const MathWrap = Phaser.Math.Wrap;
+const RadToDeg = Phaser.Math.RadToDeg;
 const AngleBetween = Phaser.Math.Angle.Between;
 
 
-class MoveTo extends EE {
+class RotateTo extends EE {
     constructor(gameObject, config) {
         super();
 
@@ -25,10 +25,9 @@ class MoveTo extends EE {
     resetFromJSON(o) {
         this.isMoving = GetValue(o, 'isMoving', false);
         this.timeScale = GetValue(o, 'timeScale', 1);
-        this.setSpeed(GetValue(o, 'speed', 400));
-        this.setRotateToTarget(GetValue(o, 'rotateToTarget', false));
-        this.targetX = GetValue(o, 'targetX', 0);
-        this.targetY = GetValue(o, 'targetY', 0);
+        this.setSpeed(GetValue(o, 'speed', 180));
+        this.target = GetValue(o, 'target', 0);
+        this.dir = GetValue(o, 'dir', 0);
         this.tickMe = GetValue(o, 'tickMe', true); // true to enable 'update' callback
         return this;
     }
@@ -38,9 +37,8 @@ class MoveTo extends EE {
             isMoving: this.isMoving,
             timeScale: this.timeScale,
             speed: this.speed,
-            rotateToTarget: this.rotateToTarget,
-            targetX: this.targetX,
-            targetY: this.targetY,
+            target: this.target,
+            dir: this.dir,
             tickMe: this.tickMe
         };
     }
@@ -68,18 +66,21 @@ class MoveTo extends EE {
         this.shutdown();
     }
 
-    moveTo(x, y, speed) {
+    rotateTo(angle, dir, speed) {
         this.stop();
 
-        if (IsPlainObject(x)) {
-            var config = x;
-            x = GetValue(config, 'x', undefined);
-            y = GetValue(config, 'y', undefined);
+        if (IsPlainObject(angle)) {
+            var config = angle;
+            angle = GetValue(config, 'angle', undefined);
+            dir = GetValue(config, 'dir', undefined);
             speed = GetValue(config, 'speed', undefined);
         }
-        this.targetX = x;
-        this.targetY = y;
-        if ((x == null) || (y == null)) {
+        this.target = MathWrap(angle, 0, 360); // 0~360
+        if (dir === undefined) {
+            dir = 0;
+        }
+        this.dir = (typeof (dir) === 'string') ? DIRMODE[dir] : dir;
+        if (angle == null) {
             return this;
         }
         if (speed !== undefined) {
@@ -87,6 +88,14 @@ class MoveTo extends EE {
         }
 
         this.isMoving = true;
+        return this;
+    }
+
+    rotateTowardsPosition(x, y, dir, speed) {
+        var gameObject = this.gameObject;
+        var rad = AngleBetween(gameObject.x, gameObject.y, x, y);
+        var angle = RadToDeg(rad);
+        this.rotateTo(angle, dir, speed);
         return this;
     }
 
@@ -99,22 +108,15 @@ class MoveTo extends EE {
         return this;
     }
 
-    setRotateToTarget(rotateToTarget) {
-        this.rotateToTarget = rotateToTarget;
-        return this;
-    }
-
     update(time, delta) {
         if (!this.isMoving) {
             return;
         }
 
         var gameObject = this.gameObject;
-        var curX = gameObject.x,
-            curY = gameObject.y;
-        var targetX = this.targetX,
-            targetY = this.targetY;
-        if ((curX === targetX) && (curY === targetY)) {
+        var curAngle = (360 + gameObject.angle) % 360; // 0~360
+        var target = this.target; // 0~360
+        if (curAngle === target) {
             this.onReachTarget();
             return;
         }
@@ -125,21 +127,35 @@ class MoveTo extends EE {
 
         var dt = (delta * this.timeScale) / 1000;
         var movingDist = this.speed * dt;
-        var distToTarget = DistanceBetween(curX, curY, targetX, targetY);
-        var newX, newY;
-        if (movingDist < distToTarget) {
-            var t = movingDist / distToTarget;
-            newX = Lerp(curX, targetX, t);
-            newY = Lerp(curY, targetY, t);
-        } else {
-            newX = targetX;
-            newY = targetY;
+        var distToTarget, dir = this.dir;
+        switch (dir) {
+            case 0: // shotest
+                var distCW = diffAngle(curAngle, target, true);
+                var distCCW = 360 - distCW;
+                if (distCW < distCCW) {
+                    dir = 1;
+                    distToTarget = distCW;
+                } else {
+                    dir = 2;
+                    distToTarget = distCCW;
+                }
+                break;
+            case 1: // cw
+                distToTarget = diffAngle(curAngle, target, true);
+                break;
+            case 2: // ccw
+                distToTarget = diffAngle(curAngle, target, false);
+                break;
         }
 
-        gameObject.setPosition(newX, newY);
-        if (this.rotateToTarget) {
-            gameObject.rotation = AngleBetween(curX, curY, newX, newY);
+        var newAngle;
+        if (movingDist < distToTarget) {
+            newAngle = (dir === 1) ? (curAngle + movingDist) : (curAngle - movingDist);
+        } else {
+            newAngle = target;
         }
+
+        gameObject.angle = newAngle;
     }
 
     onReachTarget() {
@@ -148,4 +164,15 @@ class MoveTo extends EE {
     }
 }
 
-export default MoveTo;
+var diffAngle = function (a0, a1, cw) {
+    var diff = (cw) ? (a1 - a0) : (a0 - a1);
+    diff = MathWrap(diff, 0, 360);
+    return diff;
+}
+
+const DIRMODE = {
+    shortest: 0,
+    cw: 1,
+    ccw: 2
+}
+export default RotateTo;
