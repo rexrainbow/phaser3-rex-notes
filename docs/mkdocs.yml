@@ -169,7 +169,6 @@ extra:
     social:
         - type: github
           link: https://github.com/rexrainbow/
-    disqus: 'notes-of-phaser3'
 
 google_analytics:
     - 'UA-119804412-1'
