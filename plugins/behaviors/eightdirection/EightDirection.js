@@ -8,9 +8,7 @@ const DegToRad = Phaser.Math.DegToRad;
 
 class EightDirection {
     constructor(gameObject, config) {
-        this.gameObject = gameObject;
-        this.scene = gameObject.scene;
-
+        this.setParent(gameObject);
         this.resetFromJSON(config);
         this.boot(config);
     }
@@ -95,7 +93,7 @@ class EightDirection {
 
     preupdate(time, delta) {
         if (!this.enable) {
-            this._setVelocity(0, 0);
+            this.bodySetVelocity(0, 0);
             return this;
         }
         var cursorKeys = this.cursorKeys;
@@ -106,7 +104,7 @@ class EightDirection {
         var dy = ((isUpDown) ? -1 : 0) + ((isDownDown) ? 1 : 0),
             dx = ((isLeftDown) ? -1 : 0) + ((isRightDown) ? 1 : 0);
         if ((dx === 0) && (dy === 0)) {
-            this._setVelocity(0, 0);
+            this.bodySetVelocity(0, 0);
             return this;
         }
         switch (this.dirMode) {
@@ -138,7 +136,7 @@ class EightDirection {
             vx = this.speed * Math.cos(rotation);
             vy = this.speed * Math.sin(rotation);
         }
-        this._setVelocity(vx, vy);
+        this.bodySetVelocity(vx, vy);
         if (this.rotateToDirection && (rotation !== undefined)) {
             this.gameObject.rotation = rotation;
         }

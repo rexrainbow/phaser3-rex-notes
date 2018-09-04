@@ -8,9 +8,7 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Ship {
     constructor(gameObject, config) {
-        this.gameObject = gameObject;
-        this.scene = gameObject.scene;
-
+        this.setParent(gameObject);
         this.resetFromJSON(config);
         this.boot(config);
     }
@@ -109,8 +107,8 @@ class Ship {
 
     preupdate(time, delta) {
         if (!this.enable) {
-            this._setAcceleration(0);
-            this._setAngularVelocity(0);
+            this.bodySetAcceleration(0);
+            this.bodySetAngularVelocity(0);
             return this;
         }
 
@@ -125,15 +123,14 @@ class Ship {
             var rotation = this.gameObject.rotation;
             var ax = Math.cos(rotation) * this.acceleration;
             var ay = Math.sin(rotation) * this.acceleration;
-            this._setAcceleration(ax, ay);
+            this.bodySetAcceleration(ax, ay);
         } else {
-            this._setAcceleration(0);
+            this.bodySetAcceleration(0);
         }
 
-        debugger
         // turn left/right
         var dx = ((isLeftDown) ? -1 : 0) + ((isRightDown) ? 1 : 0);
-        this._setAngularVelocity(this.angularVelocity * dx);
+        this.bodySetAngularVelocity(this.angularVelocity * dx);
 
         if (this.wrap) {
             body.world.wrap(this.gameObject, this.padding);

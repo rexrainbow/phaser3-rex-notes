@@ -2,12 +2,18 @@
 
 var Proxy = {
     cascadeMode: false,
+    setParent: function(gameObject) {
+        this.gameObject = gameObject;
+        this.scene = gameObject.scene;
+        return this;
+    },
     setCascadeMode: function (m) {
         this.cascadeMode = m;
+        return this;
     },
 
     // internal
-    _setVelocity(newVx, newVy) {
+    bodySetVelocity(newVx, newVy) {
         var body = this.gameObject.body;
         var oldVx = body.velocity.x;
         var oldVy = body.velocity.y;
@@ -19,7 +25,7 @@ var Proxy = {
             body.setVelocity(newVx, newVy);
         }
     },
-    _setAcceleration(newAx, newAy) {
+    bodySetAcceleration(newAx, newAy) {
         var body = this.gameObject.body;
         var oldAx = body.acceleration.x;
         var oldAy = body.acceleration.y;
@@ -31,7 +37,7 @@ var Proxy = {
             body.setAcceleration(newAx, newAy);
         }
     },
-    _setGravity(newGx, newGy) {
+    bodySetGravity(newGx, newGy) {
         var body = this.gameObject.body;
         var oldGx = body.gravity.x;
         var oldGy = body.gravity.y;
@@ -43,7 +49,7 @@ var Proxy = {
             body.setAcceleration(newGx, newGy);
         }
     },
-    _setAngularVelocity(newAV) {
+    bodySetAngularVelocity(newAV) {
         var body = this.gameObject.body;
         var oldAV = body.angularVelocity;
         if (this.cascaseMode) {
@@ -53,7 +59,7 @@ var Proxy = {
             body.setAngularVelocity(newAV);
         }
     },
-    _setAngularAcceleration(newAA) {
+    bodySetAngularAcceleration(newAA) {
         var body = this.gameObject.body;
         var oldAA = body.angularAcceleration;
         if (this.cascaseMode) {
