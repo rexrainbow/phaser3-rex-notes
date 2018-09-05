@@ -5,7 +5,7 @@ import PoolKlass from 'rexPlugins/utils/object/Stack.js';
 import CONST from './const.js';
 
 const AddToDOM = Phaser.DOM.AddToDOM;
-const CanvasPool = Phaser.Display.Canvas.Pool;
+const CanvasPool = Phaser.Display.Canvas.CanvasPool;
 const Components = Phaser.GameObjects.Components;
 const GameObject = Phaser.GameObjects.GameObject;
 const GetValue = Phaser.Utils.Objects.GetValue;

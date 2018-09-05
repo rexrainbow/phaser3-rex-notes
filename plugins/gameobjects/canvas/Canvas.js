@@ -2,7 +2,7 @@
 
 import Render from './CanvasRender.js';
 
-const CanvasPool = Phaser.Display.Canvas.Pool;
+const CanvasPool = Phaser.Display.Canvas.CanvasPool;
 const Components = Phaser.GameObjects.Components;
 const GameObject = Phaser.GameObjects.GameObject;
 
