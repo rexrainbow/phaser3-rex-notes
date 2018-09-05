@@ -48,11 +48,15 @@ var drawSomething = function (scene) {
     var camera = scene.cameras.main;
     var w = camera.width,
         h = camera.height;
-    for (var i = 0; i < 500; i++) {
+    for (var i = 0; i < 1000; i++) {
         graphics
             .fillStyle(Between(0, 0x1000000), Math.random())
             .fillCircle(Between(0, w), Between(0, w), Between(5, 30));
     }
+
+    var rt = scene.add.renderTexture(0, 0, w, h);
+    rt.draw(graphics, 0, 0);
+    graphics.destroy();
 }
 
 var config = {

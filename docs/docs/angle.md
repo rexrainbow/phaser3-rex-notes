@@ -23,7 +23,7 @@ Convert angle value, built-in methods of phaser.
    ```javascript
    var rad = Phaser.Math.Angle.Wrap(angle);
    ```
-- Wrap angle (radians) in the range of 0 to PI
+- Wrap angle (radians) in the range of 0 to 2*PI
    ```javascript
    var rad = Phaser.Math.Angle.Normalize(angle);
    ```
