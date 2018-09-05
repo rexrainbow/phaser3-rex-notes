@@ -132,22 +132,25 @@ It is equal to `cellInvisibleCallback` in configuration.
 
 ### Scroll table content
 
-```javascript
-table.setTableOY(oy).updateTable();
-table.addTableOY(dy).updateTable();
-```
-
-```javascript
-table.setTableOX(ox).updateTable();
-table.addTableOX(dx).updateTable();
-```
-
-```javascript
-table.setTableOXY(ox, oy).updateTable();
-table.addTableOXY(dx, dy).updateTable();
-```
-
-These will trigger `cellvisible`, or `cellinvisible` events.
+- Set
+    ```javascript
+    table.setTableOY(oy).updateTable();
+    table.addTableOY(dy).updateTable();
+    ```
+    ```javascript
+    table.setTableOX(ox).updateTable();
+    table.addTableOX(dx).updateTable();
+    ```    
+    ```javascript
+    table.setTableOXY(ox, oy).updateTable();
+    table.addTableOXY(dx, dy).updateTable();
+    ```
+    - These will trigger `cellvisible`, or `cellinvisible` events.
+- Get
+    ```javascript
+    var tableOY = table.tableOY;
+    var tableOX = table.tableOX;
+    ```
 
 #### Scroll by percentage
 

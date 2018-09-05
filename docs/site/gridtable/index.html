@@ -3095,19 +3095,25 @@
 </pre></div>
 
 <h3 id="scroll-table-content">Scroll table content<a class="headerlink" href="#scroll-table-content" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">setTableOY</span><span class="p">(</span><span class="nx">oy</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
+<ul>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">setTableOY</span><span class="p">(</span><span class="nx">oy</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
 <span class="nx">table</span><span class="p">.</span><span class="nx">addTableOY</span><span class="p">(</span><span class="nx">dy</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
 </pre></div>
-
-<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">setTableOX</span><span class="p">(</span><span class="nx">ox</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
+    <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">setTableOX</span><span class="p">(</span><span class="nx">ox</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
 <span class="nx">table</span><span class="p">.</span><span class="nx">addTableOX</span><span class="p">(</span><span class="nx">dx</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
 </pre></div>
-
-<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">setTableOXY</span><span class="p">(</span><span class="nx">ox</span><span class="p">,</span> <span class="nx">oy</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
+    <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">setTableOXY</span><span class="p">(</span><span class="nx">ox</span><span class="p">,</span> <span class="nx">oy</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
 <span class="nx">table</span><span class="p">.</span><span class="nx">addTableOXY</span><span class="p">(</span><span class="nx">dx</span><span class="p">,</span> <span class="nx">dy</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
-</pre></div>
-
-<p>These will trigger <code>cellvisible</code>, or <code>cellinvisible</code> events.</p>
+</pre></div><ul>
+<li>These will trigger <code>cellvisible</code>, or <code>cellinvisible</code> events.</li>
+</ul>
+</li>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tableOY</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">tableOY</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">tableOX</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">tableOX</span><span class="p">;</span>
+</pre></div></li>
+</ul>
 <h4 id="scroll-by-percentage">Scroll by percentage<a class="headerlink" href="#scroll-by-percentage" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Set
