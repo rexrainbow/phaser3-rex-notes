@@ -3114,7 +3114,7 @@
 
     <span class="c1">// **callback**</span>
     <span class="c1">// emitCallback: null,</span>
-    <span class="c1">// emitCallbackScope: null,        </span>
+    <span class="c1">// emitCallbackScope: null,</span>
     <span class="c1">// deathCallback: null,</span>
     <span class="c1">// deathCallbackScope: null,</span>
 
@@ -3145,7 +3145,8 @@
 <li><code>random</code>: <code>true</code> or <code>false</code></li>
 </ul>
 </li>
-<li><code>{min, max, steps}</code> : Pick values between min to max, with steps</li>
+<li><code>{min, max, steps}</code> : Pick values between min to max, with steps.</li>
+<li><code>{onEmit: function() {return value}}</code> : Get return value from a function invoking.</li>
 </ul>
 </li>
 <li><code>on</code> : Controls if the emitter is currently emitting a particle flow (when frequency &gt;= 0). Already alive particles will continue to update until they expire.</li>

@@ -114,7 +114,7 @@ Reference: [load image](loader.md#image)
 
         // **callback**
         // emitCallback: null,
-        // emitCallbackScope: null,        
+        // emitCallbackScope: null,
         // deathCallback: null,
         // deathCallbackScope: null,
 
@@ -141,7 +141,8 @@ Reference: [load image](loader.md#image)
         - `{start, end, steps}` : Pick values incremented by steps across a range.
         - `{start, end, random}`
             - `random`: `true` or `false`
-        - `{min, max, steps}` : Pick values between min to max, with steps
+        - `{min, max, steps}` : Pick values between min to max, with steps.
+        - `{onEmit: function() {return value}}` : Get return value from a function invoking.
     - `on` : Controls if the emitter is currently emitting a particle flow (when frequency >= 0). Already alive particles will continue to update until they expire.
     - `active` : Whether this emitter updates itself and its particles.
     - `frequency`
