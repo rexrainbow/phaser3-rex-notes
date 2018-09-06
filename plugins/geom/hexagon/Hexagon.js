@@ -33,8 +33,8 @@ class Hexagon extends Polygon {
 
     // override
     setTo(x, y, size, type) {
-        this.x = x;
-        this.y = y;
+        this._x = x;
+        this._y = y;
         this.size = size;
         this.type = type;
 
@@ -55,13 +55,30 @@ class Hexagon extends Polygon {
         return this;
     }
 
+    get x() {
+        return this._x;
+    }
+
+    set x(value) {
+        var offsetX = value - this.x;
+        Offset(this, offsetX, 0); 
+    }
+
+    get y() {
+        return this._y;
+    }
+
+    set y(value) {
+        var offsetY = value - this.y;
+        Offset(this, 0, offsetY); 
+    }    
+
     get left() {
         return this.x - (this.width / 2);
     }
 
     set left(value) {
-        var offsetX = value - this.left;
-        Offset(this, offsetX, 0);
+        this.x += (value - this.left);
     }
 
     get right() {
@@ -69,16 +86,14 @@ class Hexagon extends Polygon {
     }
 
     set right(value) {
-        var offsetX = value - this.right;
-        Offset(this, offsetX, 0);
+        this.x += (value - this.right);
     }
     get top() {
         return this.y - (this.height / 2);
     }
 
     set top(value) {
-        var offsetY = value - this.top;
-        Offset(this, 0, offsetY);
+        this.y += (value - this.top);
     }
 
     get bottom() {
@@ -86,8 +101,7 @@ class Hexagon extends Polygon {
     }
 
     set bottom(value) {
-        var offsetY = value - this.bottom;
-        Offset(this, 0, offsetY);
+        this.y += (value - this.bottom);
     }
 }
 

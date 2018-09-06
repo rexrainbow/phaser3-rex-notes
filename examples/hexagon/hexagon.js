@@ -13,7 +13,9 @@ class Demo extends Phaser.Scene {
 
     create() {
         var hexagon0 = this.plugins.get('rexHexagon').add(300, 300, 60, 0);
-        var hexagon1 = this.plugins.get('rexHexagon').add(500, 300, 60, 1);        
+        // hexagon0.left = 0;
+        // hexagon0.top = 0;
+        var hexagon1 = this.plugins.get('rexHexagon').add(500, 300, 60, 1);
         this.add.graphics()
             // draw hexagon0
             .fillStyle(0x0000ff)
