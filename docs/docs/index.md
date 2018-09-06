@@ -12,6 +12,7 @@
 1. [ContainerLite](containerlite.md): Control the position and angle of children game objects.
 1. [CSV-scenario](csvscenario.md): Run script in csv format.
 1. [CSV-to-hash-table](csvtohashtable.md): Hash table indexed by (col-key, row-key) from csv string.
+1. [Diamond](geom-diamond.md): Diamond shape and methods.
 1. [Drag](drag.md): Drag game object.
 1. [Eight direction](eightdirection.md): Move game object by cursor keys.
 1. [Fade-out-destroy](fadeoutdestroy.md): Fade out game object then destroy it.
@@ -19,6 +20,7 @@
 1. [FSM](fsm.md): Finite state machine.
 1. [Gashapon](gashapon.md): Pick random item from box.
 1. [Grid table](gridtable.md): Viewer of grid table, to manipulate game object of each visible cell.
+1. [Hexagon](geom-hexagon.md): [Hexagon shape](https://www.redblobgames.com/grids/hexagons/) and methods.
 1. [LZ-string](lzstring.md): Compress string using LZ-based compression algorithm.
 1. [Move to](moveto.md): Move game object towards target position with a steady speed.
 1. [Page](textpage.md): Display text page by page on text object.

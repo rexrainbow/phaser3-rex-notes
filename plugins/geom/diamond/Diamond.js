@@ -72,6 +72,15 @@ class Diamond extends Polygon {
         Offset(this, 0, offsetY);
     }
 
+    setPosition(x, y) {
+        var offsetX = x - this.x;
+        var offsetY = y - this.y;
+        this._x = x;
+        this._y = y;        
+        Offset(this, offsetX, offsetY);
+        return this;
+    }
+
     get left() {
         return this.x - (this.width / 2);
     }
@@ -142,7 +151,7 @@ class Diamond extends Polygon {
     }
 
     isEmpty() {
-        return (this.size <= 0);
+        return (this.width <= 0) || (this.height <= 0);
     }
 
     getEdge(idx, line) {

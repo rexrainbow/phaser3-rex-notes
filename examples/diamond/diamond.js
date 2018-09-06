@@ -21,7 +21,6 @@ class Demo extends Phaser.Scene {
                 printTxt.text += 'click diamond0\n';
             });
 
-        var diamond = this.plugins.get('rexDiamond').add(0, 0, 120, 60);
         DiamondShape(this, diamond, 0x00ff00, 0xffffff, 2)
             .setPosition(500, 300)
             .on('pointerdown', function () {

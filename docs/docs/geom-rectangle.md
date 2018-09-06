@@ -196,6 +196,7 @@ var rect1 = Phaser.Geom.Rectangle.Clone(rect0);
     var rightLine = rect.getLineB();  // right line of this rectangle
     var bottomLine = rect.getLineC();  // bottom line of this rectangle
     var leftLine = rect.getLineD();  // left line of this rectangle
+    // var out = rect.getLineA(out);  // top line of this rectangle
     ```
 
 ### Point(s) & shape

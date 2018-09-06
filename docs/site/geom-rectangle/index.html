@@ -2276,6 +2276,30 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../geom-diamond/" title="Diamond" class="md-nav__link">
+      Diamond
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../geom-hexagon/" title="Hexagon" class="md-nav__link">
+      Hexagon
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -2854,10 +2878,12 @@
 <h3 id="draw-on-graphics">Draw on <a href="../graphics/">graphics</a><a class="headerlink" href="#draw-on-graphics" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Fill shape
-    <div class="codehilite"><pre><span></span><span class="nx">graphics</span><span class="p">.</span><span class="nx">fillRectShape</span><span class="p">(</span><span class="nx">rect</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><span class="c1">// graphics.fillStyle(color, alpha);   // color: 0xRRGGBB</span>
+<span class="nx">graphics</span><span class="p">.</span><span class="nx">fillRectShape</span><span class="p">(</span><span class="nx">rect</span><span class="p">);</span>
 </pre></div></li>
 <li>Stroke shape
-    <div class="codehilite"><pre><span></span><span class="nx">graphics</span><span class="p">.</span><span class="nx">strokeRectShape</span><span class="p">(</span><span class="nx">rect</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><span class="c1">// graphics.lineStyle(lineWidth, color, alpha);   // color: 0xRRGGBB</span>
+<span class="nx">graphics</span><span class="p">.</span><span class="nx">strokeRectShape</span><span class="p">(</span><span class="nx">rect</span><span class="p">);</span>
 </pre></div></li>
 </ul>
 <div class="admonition note">
@@ -2996,6 +3022,7 @@
 <span class="kd">var</span> <span class="nx">rightLine</span> <span class="o">=</span> <span class="nx">rect</span><span class="p">.</span><span class="nx">getLineB</span><span class="p">();</span>  <span class="c1">// right line of this rectangle</span>
 <span class="kd">var</span> <span class="nx">bottomLine</span> <span class="o">=</span> <span class="nx">rect</span><span class="p">.</span><span class="nx">getLineC</span><span class="p">();</span>  <span class="c1">// bottom line of this rectangle</span>
 <span class="kd">var</span> <span class="nx">leftLine</span> <span class="o">=</span> <span class="nx">rect</span><span class="p">.</span><span class="nx">getLineD</span><span class="p">();</span>  <span class="c1">// left line of this rectangle</span>
+<span class="c1">// var out = rect.getLineA(out);  // top line of this rectangle</span>
 </pre></div></li>
 </ul>
 <h3 id="points-shape">Point(s) &amp; shape<a class="headerlink" href="#points-shape" title="Permanent link">&para;</a></h3>
