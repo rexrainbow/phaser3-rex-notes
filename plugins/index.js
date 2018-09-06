@@ -51,8 +51,11 @@ import CSVScenario from './csvscenario.js';
 import Clock from './clock.js';
 // data structure
 import CSVToHashTable from './csvtohashtable.js';
+
 // math
 import Gashapon from './gashapon.js';
+// geom
+import Hexagon from './hexagon.js';
 
 // shader
 import SwirlPipeline from './swirlpipeline.js';
@@ -116,6 +119,8 @@ export {
 
     // math
     Gashapon,
+    // geom
+    Hexagon,
 
     // shader
     SwirlPipeline,

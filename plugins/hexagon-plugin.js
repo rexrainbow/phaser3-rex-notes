@@ -1,8 +1,8 @@
 'use strict'
 
-import Hexagon from './geomhexagon.js';
+import Hexagon from './hexagon.js';
 
-class GeomHexagonPlugin extends Phaser.Plugins.BasePlugin {
+class HexagonPlugin extends Phaser.Plugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);
@@ -18,4 +18,4 @@ class GeomHexagonPlugin extends Phaser.Plugins.BasePlugin {
     }
 }
 
-export default GeomHexagonPlugin;
+export default HexagonPlugin;

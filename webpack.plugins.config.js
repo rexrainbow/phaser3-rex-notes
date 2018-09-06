@@ -32,9 +32,9 @@ module.exports = {
         'sequenceplugin': './plugins/sequence-plugin.js',
 
         // input
-        'touchstateplugin': './plugins/touchstate-plugin.js',        
+        'touchstateplugin': './plugins/touchstate-plugin.js',
         'dragplugin': './plugins/drag-plugin.js',
-        'dragspeedplugin': './plugins/dragspeed-plugin.js',        
+        'dragspeedplugin': './plugins/dragspeed-plugin.js',
         'sliderplugin': './plugins/slider-plugin.js',
         'scrollerplugin': './plugins/scroller-plugin.js',
         'buttonplugin': './plugins/button-plugin.js',
@@ -70,6 +70,8 @@ module.exports = {
 
         // math
         'gashaponplugin': './plugins/gashapon-plugin.js',
+        // geom
+        'hexagonplugin': './plugins/hexagon-plugin.js',
 
         // shader
         'swirlpipelineplugin': './plugins/swirlpipeline-plugin.js',

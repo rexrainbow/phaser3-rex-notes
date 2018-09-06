@@ -1,6 +1,6 @@
 'use strict'
 
-import GeomHexagonPlugin from 'rexPlugins/geomhexagon-plugin.js';
+import HexagonPlugin from 'rexPlugins/hexagon-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -12,8 +12,8 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        var hexagon0 = this.plugins.get('rexGeomHexagon').add(300, 300, 60, 0);
-        var hexagon1 = this.plugins.get('rexGeomHexagon').add(500, 300, 60, 1);
+        var hexagon0 = this.plugins.get('rexHexagon').add(300, 300, 60, 0);
+        var hexagon1 = this.plugins.get('rexHexagon').add(500, 300, 60, 1);        
         this.add.graphics()
             // draw hexagon0
             .fillStyle(0x0000ff)
@@ -27,10 +27,23 @@ class Demo extends Phaser.Scene {
             .fillPoints(hexagon1.points, true)
             .strokePoints(hexagon1.points, true);
 
-        console.log(hexagon0.width + ',' + hexagon0.height);
+        this.hexagon0 = hexagon0;
+        this.hexagon1 = hexagon1;
+        this.print = this.add.text(0, 0, '');
     }
 
-    update() {}
+    update() {
+        var pointer = this.input.activePointer;
+        var px = pointer.x,
+            py = pointer.y;
+        if (this.hexagon0.contains(px, py)) {
+            this.print.setText('Inside hexagon0');
+        } else if (this.hexagon1.contains(px, py)) {
+            this.print.setText('Inside hexagon1');
+        } else {
+            this.print.setText('--')
+        }
+    }
 }
 
 var config = {
@@ -41,8 +54,8 @@ var config = {
     scene: Demo,
     plugins: {
         global: [{
-            key: 'rexGeomHexagon',
-            plugin: GeomHexagonPlugin,
+            key: 'rexHexagon',
+            plugin: HexagonPlugin,
             start: true
         }]
     }
