@@ -22,10 +22,12 @@ var circle1 = Phaser.Geom.Circle.Clone(circle0);
 
 - Fill shape
     ```javascript
+    // graphics.fillStyle(color, alpha);   // color: 0xRRGGBB
     graphics.fillCircleShape(circle);
     ```
 - Stroke shape
     ```javascript
+    // graphics.lineStyle(lineWidth, color, alpha);   // color: 0xRRGGBB
     graphics.strokeCircleShape(circle);
     ```
 

@@ -71,6 +71,7 @@ module.exports = {
         // math
         'gashaponplugin': './plugins/gashapon-plugin.js',
         // geom
+        'diamondplugin': './plugins/diamond-plugin.js',
         'hexagonplugin': './plugins/hexagon-plugin.js',
 
         // shader

@@ -38,10 +38,12 @@ var polygon1 = Phaser.Geom.Polygon.Clone(polygon0);
 
 - Fill shape
     ```javascript
+    // graphics.fillStyle(color, alpha);   // color: 0xRRGGBB
     graphics.fillPoints(polygon.points, true);
     ```
 - Stroke shape
     ```javascript
+    // graphics.lineStyle(lineWidth, color, alpha);   // color: 0xRRGGBB
     graphics.strokePoints(polygon.points, true);
     ```
 

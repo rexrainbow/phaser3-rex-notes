@@ -31,10 +31,12 @@ var rect1 = Phaser.Geom.Rectangle.Clone(rect0);
 
 - Fill shape
     ```javascript
+    // graphics.fillStyle(color, alpha);   // color: 0xRRGGBB
     graphics.fillRectShape(rect);
     ```
 - Stroke shape
     ```javascript
+    // graphics.lineStyle(lineWidth, color, alpha);   // color: 0xRRGGBB
     graphics.strokeRectShape(rect);
     ```
 

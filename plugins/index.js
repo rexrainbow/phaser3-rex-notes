@@ -55,6 +55,7 @@ import CSVToHashTable from './csvtohashtable.js';
 // math
 import Gashapon from './gashapon.js';
 // geom
+import Diamond from './diamond.js';
 import Hexagon from './hexagon.js';
 
 // shader
@@ -120,6 +121,7 @@ export {
     // math
     Gashapon,
     // geom
+    Diamond,
     Hexagon,
 
     // shader

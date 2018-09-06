@@ -21,6 +21,7 @@ var line1 = Phaser.Geom.Line.Clone(line0);
 ### Draw on [graphics](graphics.md)
 
 ```javascript
+// graphics.lineStyle(lineWidth, color, alpha);   // color: 0xRRGGBB
 graphics.strokeLineShape(line);
 ```
 

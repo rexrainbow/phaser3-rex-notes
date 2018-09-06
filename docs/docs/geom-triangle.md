@@ -45,10 +45,12 @@ var out = Phaser.Geom.Triangle.BuildFromPolygon(data);
 
 - Fill shape
     ```javascript
+    // graphics.fillStyle(color, alpha);   // color: 0xRRGGBB
     graphics.fillTriangleShape(triangle);
     ```
 - Stroke shape
     ```javascript
+    // graphics.lineStyle(lineWidth, color, alpha);   // color: 0xRRGGBB
     graphics.strokeTriangleShape(triangle);
     ```
 

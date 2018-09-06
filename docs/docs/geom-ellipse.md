@@ -22,10 +22,12 @@ var ellipse1 = Phaser.Geom.Ellipse.Clone(ellipse0);
 
 - Fill shape
     ```javascript
+    // graphics.fillStyle(color, alpha);   // color: 0xRRGGBB
     graphics.fillEllipseShape(ellipse);
     ```
 - Stroke shape
     ```javascript
+    // graphics.lineStyle(lineWidth, color, alpha);   // color: 0xRRGGBB
     graphics.strokeEllipseShape(ellipse);
     ```
 

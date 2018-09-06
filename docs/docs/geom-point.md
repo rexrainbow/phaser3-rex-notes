@@ -21,6 +21,7 @@ var point1 = Phaser.Geom.Point.Clone(point0);
 ### Draw on [graphics](graphics.md)
 
 ```javascript
+// graphics.fillStyle(color, alpha);   // color: 0xRRGGBB
 graphics.fillPointShape(point, size);
 ```
 
