@@ -58,6 +58,11 @@ var diamond = scene.plugins.get('rexDiamond').add({
     height: 20
 });
 ```
+or
+```javascript
+var diamond = new rexDiamond(x, y, width, height);
+// var diamond = new Phaser.Geom.rexDiamond(x, y, width, height);
+```
 
 - `x` : Top X.
 - `y` : Left Y.

@@ -60,20 +60,26 @@ Call `gameObject.setInteractive(...)` to register touch input of Game Object bef
     ```javascript
     gameObject.setInteractive(shape, callback);
     ```
-    - Circle
+    - [Circle](geom-circle.md)
         - shape : `new Phaser.Geom.Circle(x, y, radius)`
         - callback : `Phaser.Geom.Circle.Contains`
-    - Ellipse
+    - [Ellipse](geom-ellipse.md)
         - shape : `new Phaser.Geom.Ellipse(x, y, width, height)`
         - callback : `Phaser.Geom.Ellipse.Contains`
-    - Rectangle
+    - [Rectangle](geom-rectangle.md)
         - shape : `new Phaser.Geom.Rectangle(x, y, width, height)`
         - callback : `Phaser.Geom.Rectangle.Contains`
-    - Triangle
+    - [Triangle](geom-triangle.md)
         - shape : `new Phaser.Geom.Triangle(x1, y1, x2, y2, x3, y3)`
         - callback : `Phaser.Geom.Triangle.Contains`
-    - Polygon
+    - [Polygon](geom-polygon.md)
         - shape : `new Phaser.Geom.Polygon(points)`
+        - callback : `Phaser.Geom.Polygon.Contains`
+    - [Hexagon](geom-hexagon.md)
+        - shape : `new Phaser.Geom.rexHexagon(x, y, size, type)`
+        - callback : `Phaser.Geom.Polygon.Contains`
+    - [Diamond](geom-diamond.md)
+        - shape : `new Phaser.Geom.rexDiamond(x, y, width, height)`
         - callback : `Phaser.Geom.Polygon.Contains`
 - Set interactive configuration
     ```javascript
@@ -89,22 +95,7 @@ Call `gameObject.setInteractive(...)` to register touch input of Game Object bef
     });
     ```
     - Hit area
-        - Shape
-            - Circle
-                - `hitArea` : `new Phaser.Geom.Circle(x, y, radius)`
-                - `hitAreaCallback` : `Phaser.Geom.Circle.Contains`
-            - Ellipse
-                - `hitArea` : `new Phaser.Geom.Ellipse(x, y, width, height)`
-                - `hitAreaCallback` : `Phaser.Geom.Ellipse.Contains`
-            - Rectangle
-                - `hitArea` : `new Phaser.Geom.Rectangle(x, y, width, height)`
-                - `hitAreaCallback` : `Phaser.Geom.Rectangle.Contains`
-            - Triangle
-                - `hitArea` : `new Phaser.Geom.Triangle(x1, y1, x2, y2, x3, y3)`
-                - `hitAreaCallback` : `Phaser.Geom.Triangle.Contains`
-            - Polygon
-                - `hitArea` : `new Phaser.Geom.Polygon(points)`
-                - `hitAreaCallback` : `Phaser.Geom.Polygon.Contains`
+        - shape
         - Pixel alpha
             - `pixelPerfect` : `true`
             - `alphaTolerance` : `1` (0-255)

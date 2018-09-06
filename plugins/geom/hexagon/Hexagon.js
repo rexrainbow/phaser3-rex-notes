@@ -174,4 +174,7 @@ const ORIENTATIONTYPE = {
     'horizontal': 1
 };
 
+// use `rexHexagon` to prevent name conflict
+Phaser.Geom.rexHexagon = Hexagon;
+
 export default Hexagon;

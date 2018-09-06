@@ -181,11 +181,7 @@ class Diamond extends Polygon {
     }
 }
 
-const ORIENTATIONTYPE = {
-    'flat': 0,
-    'vertical': 0,
-    'pointy': 1,
-    'horizontal': 1
-};
+// use `rexDiamond` to prevent name conflict
+Phaser.Geom.rexDiamond = Diamond;
 
 export default Diamond;

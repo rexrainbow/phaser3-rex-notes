@@ -14,6 +14,7 @@ class Demo extends Phaser.Scene {
     create() {
         var printTxt = this.add.text(0, 0, '');
 
+        // add hexagon from plugin
         var hexagon = this.plugins.get('rexHexagon').add(0, 0, 60, 0);
         HexagonShape(this, hexagon, 0x0000ff, 0xffffff, 2)
             .setPosition(300, 300)
@@ -21,7 +22,8 @@ class Demo extends Phaser.Scene {
                 printTxt.text += 'click hex0\n';
             });
 
-        var hexagon = this.plugins.get('rexHexagon').add(0, 0, 60, 1);
+        // add hexagon from Phaser.Geom.rexHexagon class
+        var hexagon = new Phaser.Geom.rexHexagon(0, 0, 60, 1);
         HexagonShape(this, hexagon, 0x00ff00, 0xffffff, 2)
             .setPosition(500, 300)
             .on('pointerdown', function () {

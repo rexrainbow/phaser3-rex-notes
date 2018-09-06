@@ -3080,28 +3080,38 @@
 <li>Set hit area from shape
     <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setInteractive</span><span class="p">(</span><span class="nx">shape</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
 </pre></div><ul>
-<li>Circle<ul>
+<li><a href="../geom-circle/">Circle</a><ul>
 <li>shape : <code>new Phaser.Geom.Circle(x, y, radius)</code></li>
 <li>callback : <code>Phaser.Geom.Circle.Contains</code></li>
 </ul>
 </li>
-<li>Ellipse<ul>
+<li><a href="../geom-ellipse/">Ellipse</a><ul>
 <li>shape : <code>new Phaser.Geom.Ellipse(x, y, width, height)</code></li>
 <li>callback : <code>Phaser.Geom.Ellipse.Contains</code></li>
 </ul>
 </li>
-<li>Rectangle<ul>
+<li><a href="../geom-rectangle/">Rectangle</a><ul>
 <li>shape : <code>new Phaser.Geom.Rectangle(x, y, width, height)</code></li>
 <li>callback : <code>Phaser.Geom.Rectangle.Contains</code></li>
 </ul>
 </li>
-<li>Triangle<ul>
+<li><a href="../geom-triangle/">Triangle</a><ul>
 <li>shape : <code>new Phaser.Geom.Triangle(x1, y1, x2, y2, x3, y3)</code></li>
 <li>callback : <code>Phaser.Geom.Triangle.Contains</code></li>
 </ul>
 </li>
-<li>Polygon<ul>
+<li><a href="../geom-polygon/">Polygon</a><ul>
 <li>shape : <code>new Phaser.Geom.Polygon(points)</code></li>
+<li>callback : <code>Phaser.Geom.Polygon.Contains</code></li>
+</ul>
+</li>
+<li><a href="../geom-hexagon/">Hexagon</a><ul>
+<li>shape : <code>new Phaser.Geom.rexHexagon(x, y, size, type)</code></li>
+<li>callback : <code>Phaser.Geom.Polygon.Contains</code></li>
+</ul>
+</li>
+<li><a href="../geom-diamond/">Diamond</a><ul>
+<li>shape : <code>new Phaser.Geom.rexDiamond(x, y, width, height)</code></li>
 <li>callback : <code>Phaser.Geom.Polygon.Contains</code></li>
 </ul>
 </li>
@@ -3120,34 +3130,7 @@
 <span class="p">});</span>
 </pre></div><ul>
 <li>Hit area<ul>
-<li>Shape<ul>
-<li>Circle<ul>
-<li><code>hitArea</code> : <code>new Phaser.Geom.Circle(x, y, radius)</code></li>
-<li><code>hitAreaCallback</code> : <code>Phaser.Geom.Circle.Contains</code></li>
-</ul>
-</li>
-<li>Ellipse<ul>
-<li><code>hitArea</code> : <code>new Phaser.Geom.Ellipse(x, y, width, height)</code></li>
-<li><code>hitAreaCallback</code> : <code>Phaser.Geom.Ellipse.Contains</code></li>
-</ul>
-</li>
-<li>Rectangle<ul>
-<li><code>hitArea</code> : <code>new Phaser.Geom.Rectangle(x, y, width, height)</code></li>
-<li><code>hitAreaCallback</code> : <code>Phaser.Geom.Rectangle.Contains</code></li>
-</ul>
-</li>
-<li>Triangle<ul>
-<li><code>hitArea</code> : <code>new Phaser.Geom.Triangle(x1, y1, x2, y2, x3, y3)</code></li>
-<li><code>hitAreaCallback</code> : <code>Phaser.Geom.Triangle.Contains</code></li>
-</ul>
-</li>
-<li>Polygon<ul>
-<li><code>hitArea</code> : <code>new Phaser.Geom.Polygon(points)</code></li>
-<li><code>hitAreaCallback</code> : <code>Phaser.Geom.Polygon.Contains</code></li>
-</ul>
-</li>
-</ul>
-</li>
+<li>shape</li>
 <li>Pixel alpha<ul>
 <li><code>pixelPerfect</code> : <code>true</code></li>
 <li><code>alphaTolerance</code> : <code>1</code> (0-255)</li>

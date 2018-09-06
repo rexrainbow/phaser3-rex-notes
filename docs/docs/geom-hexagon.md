@@ -58,6 +58,11 @@ var hexagon = scene.plugins.get('rexHexagon').add({
     type: 0     // 0|'flat'|'vertical'|1|'pointy'|'horizontal'
 });
 ```
+or
+```javascript
+var hexagon = new rexHexagon(x, y, size, type);
+// var hexagon = new Phaser.Geom.rexHexagon(x, y, size, type);
+```
 
 - `x` : Center X.
 - `y` : Center Y.
