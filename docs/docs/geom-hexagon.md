@@ -68,8 +68,8 @@ var hexagon = new rexHexagon(x, y, size, type);
 - `y` : Center Y.
 - `size` : Distance between center to each corner.
 - `type` : See [here](https://www.redblobgames.com/grids/hexagons/#basics)
-    - `0`, `'flat'`, or `'vertical'`
-    - `1`, `'pointy'` or ,`'horizontal'`
+    - `0`, `'flat'`, or `'y'`
+    - `1`, `'pointy'` or ,`'x'`
 
 ### Draw on [graphics](graphics.md)
 
@@ -105,6 +105,17 @@ See [Polygon shape](geom-hexagon.md#draw-on-graphics).
     ```javascript
     hexagon.size = size;
     ```
+- Type
+    ```javascript
+    hexagon.setType(type);
+    ```
+    or
+    ```javascript
+    hexagon.type = type;
+    ```
+    - `type` : See [here](https://www.redblobgames.com/grids/hexagons/#basics)
+        - `0`, `'flat'`, or `'y'`
+        - `1`, `'pointy'` or ,`'x'` 
 
 ### Get properties
 

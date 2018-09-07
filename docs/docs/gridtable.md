@@ -194,7 +194,7 @@ table.updateTable(true);
     ```
 - Set
     ```javascript
-    table.setCellsCunt(count).updateTable();
+    table.setCellsCount(count).updateTable();
     ```
 
 #### Columns count

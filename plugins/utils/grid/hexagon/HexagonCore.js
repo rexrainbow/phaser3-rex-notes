@@ -21,7 +21,7 @@ class Hexagon {
     resetFromJSON(o) {
         this.setOriginPosition(GetValue(o, 'x', 0), GetValue(o, 'y', 0));
         this.setCellSize(GetValue(o, 'cellWidth', 33), GetValue(o, 'cellHeight', 42));
-        this.setType(GetValue(o, 'type', 0), GetValue(o, 'indent', false));
+        this.setType(GetValue(o, 'staggeraxis', 0), GetValue(o, 'staggerindex', 0));
     }
 
     setOriginPosition(x, y) {
@@ -52,17 +52,21 @@ class Hexagon {
         this.height = value;
     }
 
-    setType(type, indent) {
-        if (typeof (type) === 'string') {
-            type = ORIENTATIONTYPE[type]
+    setType(staggeraxis, staggerindex) {
+        debugger
+        if (typeof (staggeraxis) === 'string') {
+            staggeraxis = STAGGERAXIS[staggeraxis]
         }
-        this.type = type; // flat, or pointy
-        this.indent = indent; // indent first row/column, or not
+        if (typeof (staggerindex) === 'string') {
+            staggerindex = STAGGERINDEX[staggerindex]
+        }        
+        this.staggeraxis = staggeraxis; // y(flat), or x(pointy)
+        this.staggerindex = staggerindex; // even, or odd
 
-        if (type === 0) { // flat
-            this.mode = (indent) ? EVEN_Q : ODD_Q;
+        if (staggeraxis === 0) { // flat
+            this.mode = (staggerindex === 0) ? EVEN_Q : ODD_Q;
         } else { // pointy
-            this.mode = (indent) ? EVEN_R : ODD_R;
+            this.mode = (staggerindex === 0) ? EVEN_R : ODD_R;
         }
         return this;
     }
@@ -76,11 +80,14 @@ class Hexagon {
     }
 }
 
-const ORIENTATIONTYPE = {
-    'flat': 0,
-    'vertical': 0,
-    'pointy': 1,
-    'horizontal': 1
+const STAGGERAXIS = {
+    'y': 0,
+    'x': 1
 };
+
+const STAGGERINDEX = {
+    'even': 0,
+    'odd': 1
+}
 
 export default Hexagon;

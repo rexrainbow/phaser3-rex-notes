@@ -15,10 +15,10 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        var type = 0;
-        var indent = false;
+        var staggeraxis = 'x';
+        var staggerindex = 'odd';
         var key = 'shape';
-        createHexagonTexture(this, key, type, indent);
+        createHexagonTexture(this, key, staggeraxis, staggerindex);
 
         var items = [];
         for (var i = 0; i < 16; i++) {
@@ -34,8 +34,8 @@ class Demo extends Phaser.Scene {
             height: 4,
             cellWidth: image.width,
             cellHeight: image.height,
-            type: type,
-            indent: indent,
+            staggeraxis: staggeraxis,
+            staggerindex: staggerindex,
             x: 50,
             y: 50
         });
@@ -44,8 +44,8 @@ class Demo extends Phaser.Scene {
     update() {}
 }
 
-var createHexagonTexture = function (scene, key, type) {
-    var hexagon = new Phaser.Geom.rexHexagon(0, 0, 30, type);
+var createHexagonTexture = function (scene, key, staggeraxis) {
+    var hexagon = new Phaser.Geom.rexHexagon(0, 0, 30, staggeraxis);
     hexagon.left = 0;
     hexagon.top = 0;
 

@@ -38,8 +38,8 @@ var GridAlign = function (items, options) {
     var height = GetFastValue(options, 'height', -1);
     var cellWidth = GetFastValue(options, 'cellWidth', 1);
     var cellHeight = GetFastValue(options, 'cellHeight', cellWidth);
-    var type = GetFastValue(options, 'type', 0);
-    var indent = GetFastValue(options, 'indent', false);
+    var staggeraxis = GetFastValue(options, 'staggeraxis', 0);
+    var staggerindex = GetFastValue(options, 'staggerindex', 0);
     var position = GetFastValue(options, 'position', Phaser.Display.Align.TOP_LEFT);
     var x = GetFastValue(options, 'x', 0);
     var y = GetFastValue(options, 'y', 0);
@@ -47,7 +47,7 @@ var GridAlign = function (items, options) {
     tempHexagonGrid
         .setOriginPosition(x, y)
         .setCellSize(cellWidth, cellHeight)
-        .setType(type, indent);
+        .setType(staggeraxis, staggerindex);
 
     tempZone.setSize(cellWidth, cellHeight);
 

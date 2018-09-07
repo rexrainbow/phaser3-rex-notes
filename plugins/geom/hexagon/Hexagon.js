@@ -15,9 +15,6 @@ const Line = Phaser.Geom.Line;
 class Hexagon extends Polygon {
     constructor(x, y, size, type) {
         super();
-        if (typeof (type) === 'string') {
-            type = ORIENTATIONTYPE[type]
-        }
         if (IsPlainObject(x)) {
             var config = x;
             x = GetValue(config, 'x', 0);
@@ -34,10 +31,14 @@ class Hexagon extends Polygon {
 
     // override
     setTo(x, y, size, type) {
+        if (typeof (type) === 'string') {
+            type = ORIENTATIONTYPE[type]
+        }
+
         this._x = x;
         this._y = y;
         this._size = size;
-        this.type = type;
+        this._type = type;
 
         var points = this.points,
             point;
@@ -78,7 +79,7 @@ class Hexagon extends Polygon {
         var offsetX = x - this.x;
         var offsetY = y - this.y;
         this._x = x;
-        this._y = y;        
+        this._y = y;
         Offset(this, offsetX, offsetY);
         return this;
     }
@@ -128,6 +129,18 @@ class Hexagon extends Polygon {
         return this;
     }
 
+    get type() {
+        return this._type;
+    }
+
+    set type(value) {
+        this.setTo(this._x, this._y, this._size, value);
+    }
+
+    setType(type) {
+        this.type = type;
+    }
+
     isEmpty() {
         return (this.size <= 0);
     }
@@ -169,9 +182,9 @@ class Hexagon extends Polygon {
 
 const ORIENTATIONTYPE = {
     'flat': 0,
-    'vertical': 0,
+    'y': 0,
     'pointy': 1,
-    'horizontal': 1
+    'x': 1
 };
 
 // use `rexHexagon` to prevent name conflict

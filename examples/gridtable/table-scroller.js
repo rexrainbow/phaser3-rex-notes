@@ -48,6 +48,7 @@ class Demo extends Phaser.Scene {
             value: table.topTableOY,
 
             valuechangeCallback: function (newValue) {
+                console.log(newValue);
                 table.setTableOY(newValue).updateTable();
             }
         })
