@@ -1,4 +1,6 @@
-import HexagonGrid from 'rexPlugins/utils/grid/hexagon/Hexagon.js';
+import HexagonGrid from 'rexPlugins/utils/grid/hexagon/HexagonCore.js';
+import GetWorldX from 'rexPlugins/utils/grid/hexagon/GetWorldX.js';
+import GetWorldY from 'rexPlugins/utils/grid/hexagon/GetWorldY.js';
 
 const AlignIn = Phaser.Display.Align.In.QuickSet;
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
@@ -57,8 +59,8 @@ var GridAlign = function (items, options) {
         colIdx = 0;
 
     for (var i = 0, cnt = items.length; i < cnt; i++) {
-        tempZone.x = tempHexagonGrid.getWorldX(colIdx, rowIdx);
-        tempZone.y = tempHexagonGrid.getWorldY(colIdx, rowIdx);
+        tempZone.x = GetWorldX(tempHexagonGrid, colIdx, rowIdx);
+        tempZone.y = GetWorldY(tempHexagonGrid, colIdx, rowIdx);
         AlignIn(items[i], tempZone, position);
 
         if (width === -1) {
