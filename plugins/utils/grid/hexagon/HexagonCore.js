@@ -3,6 +3,8 @@
 // https://www.redblobgames.com/grids/hexagons/
 
 import CONST from './const.js';
+import GetWorldX from './GetWorldX.js';
+import GetWorldY from './GetWorldY.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const ODD_R = CONST.ODD_R;
@@ -63,6 +65,14 @@ class Hexagon {
             this.mode = (indent) ? EVEN_R : ODD_R;
         }
         return this;
+    }
+
+    getWorldX(tileX, tileY) {
+        return GetWorldX(this, tileX, tileY);
+    }
+
+    getWorldY(tileX, tileY) {
+        return GetWorldY(this, tileX, tileY);
     }
 }
 

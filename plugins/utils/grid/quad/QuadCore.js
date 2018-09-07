@@ -1,5 +1,8 @@
 'use strict'
 
+import GetWorldX from './GetWorldX.js';
+import GetWorldY from './GetWorldY.js';
+
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Quad {
@@ -66,6 +69,14 @@ class Quad {
         }
         this.mode = type; // orthogonal, isometric, or staggered
         return this;
+    }
+
+    getWorldX(tileX, tileY) {
+        return GetWorldX(this, tileX, tileY);
+    }
+
+    getWorldY(tileX, tileY) {
+        return GetWorldY(this, tileX, tileY);
     }
 }
 

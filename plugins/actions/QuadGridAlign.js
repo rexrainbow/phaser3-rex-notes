@@ -1,6 +1,4 @@
 import QuadGrid from 'rexPlugins/utils/grid/quad/QuadCore.js';
-import GetWorldX from 'rexPlugins/utils/grid/quad/GetWorldX.js';
-import GetWorldY from 'rexPlugins/utils/grid/quad/GetWorldY.js';
 
 const AlignIn = Phaser.Display.Align.In.QuickSet;
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
@@ -58,8 +56,8 @@ var GridAlign = function (items, options) {
         colIdx = 0;
 
     for (var i = 0, cnt = items.length; i < cnt; i++) {
-        tempZone.x = GetWorldX(tempQuadGrid, colIdx, rowIdx);
-        tempZone.y = GetWorldY(tempQuadGrid, colIdx, rowIdx);
+        tempZone.x = tempQuadGrid.getWorldX(colIdx, rowIdx);
+        tempZone.y = tempQuadGrid.getWorldY(colIdx, rowIdx);
         AlignIn(items[i], tempZone, position);
 
         if (width === -1) {
