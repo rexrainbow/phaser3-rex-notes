@@ -14,6 +14,7 @@ import XOR from './xor.js';
 import LZString from './lzstring.js';
 import CSVToArray from './csvtoarray.js';
 import Sequence from './sequence.js';
+import GridAlign from './gridalign.js';
 
 // input
 import TouchState from './touchstate.js';
@@ -79,6 +80,7 @@ export {
     LZString,
     CSVToArray,
     Sequence,
+    GridAlign,
 
     // input
     TouchState,    

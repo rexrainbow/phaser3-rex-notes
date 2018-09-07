@@ -30,6 +30,7 @@ module.exports = {
         'lzstringplugin': './plugins/lzstring-plugin.js',
         'csvtoarrayplugin': './plugins/csvtoarray-plugin.js',
         'sequenceplugin': './plugins/sequence-plugin.js',
+        'gridalignplugin': './plugins/gridalign-plugin.js',
 
         // input
         'touchstateplugin': './plugins/touchstate-plugin.js',
