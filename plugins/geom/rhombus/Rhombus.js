@@ -9,7 +9,7 @@ const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Line = Phaser.Geom.Line;
 
-class Diamond extends Polygon {
+class Rhombus extends Polygon {
     constructor(x, y, width, height) {
         super();
         if (IsPlainObject(x)) {
@@ -181,7 +181,7 @@ class Diamond extends Polygon {
     }
 }
 
-// use `rexDiamond` to prevent name conflict
-Phaser.Geom.rexDiamond = Diamond;
+// use `rexRhombus` to prevent name conflict
+Phaser.Geom.rexRhombus = Rhombus;
 
-export default Diamond;
+export default Rhombus;

@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/geom-diamond/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/geom-rhombus/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Diamond - Notes of Phaser 3</title>
+        <title>Rhombus - Notes of Phaser 3</title>
       
     
     
@@ -128,7 +128,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Diamond
+                Rhombus
               </span>
             
           
@@ -2166,11 +2166,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        Diamond
+        Rhombus
       </label>
     
-    <a href="./" title="Diamond" class="md-nav__link md-nav__link--active">
-      Diamond
+    <a href="./" title="Rhombus" class="md-nav__link md-nav__link--active">
+      Rhombus
     </a>
     
       
@@ -2808,36 +2808,36 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/geom-diamond.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/geom-rhombus.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Diamond</h1>
+                  <h1>Rhombus</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Diamond shape and methods, extends from <a href="./">Polygon shape</a>.</p>
+<p>Rhombus shape and methods, extends from <a href="./">Polygon shape</a>.</p>
 <ul>
 <li>Author: Rex</li>
 <li>Geometry object</li>
 </ul>
 <h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/diamond-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexdiamondplugin.min.js">minify</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/rhombus-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexrhombusplugin.min.js">minify</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/diamond">Sample code</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/rhombus">Sample code</a></p>
 <p>User could import class directly, or install it by global plugin.</p>
 <h3 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">rexDiamond</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/diamond.js&#39;</span><span class="p">;</span>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">rexRhombus</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/rhombus.js&#39;</span><span class="p">;</span>
 </pre></div>
 
 <h3 id="install-global-plugin">Install global plugin<a class="headerlink" href="#install-global-plugin" title="Permanent link">&para;</a></h3>
 <p>Install plugin in <a href="../game/#configuration">configuration of game</a></p>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">DiamondPlugin</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/diamond-plugin.js&#39;</span><span class="p">;</span>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">RhombusPlugin</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/rhombus-plugin.js&#39;</span><span class="p">;</span>
 
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
-            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexDiamond&#39;</span><span class="p">,</span>
-            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">DiamondPlugin</span><span class="p">,</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexRhombus&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">RhombusPlugin</span><span class="p">,</span>
             <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
         <span class="p">},</span>
         <span class="c1">// ...</span>
@@ -2849,10 +2849,10 @@
 </pre></div>
 
 <h3 id="create-shape">Create shape<a class="headerlink" href="#create-shape" title="Permanent link">&para;</a></h3>
-<p><div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">diamond</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexDiamond&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+<p><div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rhombus</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexRhombus&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
 </pre></div>
 or
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">diamond</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexDiamond&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">({</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rhombus</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexRhombus&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">({</span>
     <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">width</span><span class="o">:</span> <span class="mi">40</span><span class="p">,</span>
@@ -2860,8 +2860,8 @@ or
 <span class="p">});</span>
 </pre></div>
 or
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">diamond</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">rexDiamond</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
-<span class="c1">// var diamond = new Phaser.Geom.rexDiamond(x, y, width, height);</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rhombus</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">rexRhombus</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+<span class="c1">// var rhombus = new Phaser.Geom.rexRhombus(x, y, width, height);</span>
 </pre></div></p>
 <ul>
 <li><code>x</code> : Top X.</li>
@@ -2872,27 +2872,27 @@ or
 <h3 id="set-properties">Set properties<a class="headerlink" href="#set-properties" title="Permanent link">&para;</a></h3>
 <ul>
 <li>All properties
-    <div class="codehilite"><pre><span></span><span class="nx">diamond</span><span class="p">.</span><span class="nx">setTo</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><span class="nx">rhombus</span><span class="p">.</span><span class="nx">setTo</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
 </pre></div></li>
 <li>Position
-    <div class="codehilite"><pre><span></span><span class="nx">diamond</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><span class="nx">rhombus</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 </pre></div>
     or
-    <div class="codehilite"><pre><span></span><span class="nx">diamond</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="nx">diamond</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><span class="nx">rhombus</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="nx">rhombus</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 </pre></div>
     or
-    <div class="codehilite"><pre><span></span><span class="nx">diamond</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>       <span class="c1">// diamond.x</span>
-<span class="nx">diamond</span><span class="p">.</span><span class="nx">top</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>        <span class="c1">// diamond.y</span>
-<span class="nx">diamond</span><span class="p">.</span><span class="nx">right</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>      <span class="c1">// diamond.x</span>
-<span class="nx">diamond</span><span class="p">.</span><span class="nx">bottom</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>     <span class="c1">// diamond.y</span>
+    <div class="codehilite"><pre><span></span><span class="nx">rhombus</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>       <span class="c1">// rhombus.x</span>
+<span class="nx">rhombus</span><span class="p">.</span><span class="nx">top</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>        <span class="c1">// rhombus.y</span>
+<span class="nx">rhombus</span><span class="p">.</span><span class="nx">right</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>      <span class="c1">// rhombus.x</span>
+<span class="nx">rhombus</span><span class="p">.</span><span class="nx">bottom</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>     <span class="c1">// rhombus.y</span>
 </pre></div></li>
 <li>Size
-    <div class="codehilite"><pre><span></span><span class="nx">diamond</span><span class="p">.</span><span class="nx">setSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><span class="nx">rhombus</span><span class="p">.</span><span class="nx">setSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
 </pre></div>
     or
-    <div class="codehilite"><pre><span></span><span class="nx">diamond</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span><span class="p">;</span>
-<span class="nx">diamond</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">height</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><span class="nx">rhombus</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span><span class="p">;</span>
+<span class="nx">rhombus</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">height</span><span class="p">;</span>
 </pre></div></li>
 </ul>
 <h3 id="get-properties">Get properties<a class="headerlink" href="#get-properties" title="Permanent link">&para;</a></h3>
@@ -2900,32 +2900,32 @@ or
 <ul>
 <li>Position<ul>
 <li>Center
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">centerX</span> <span class="o">=</span> <span class="nx">diamond</span><span class="p">.</span><span class="nx">centerX</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">centerY</span> <span class="o">=</span> <span class="nx">diamond</span><span class="p">.</span><span class="nx">centerY</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">centerX</span> <span class="o">=</span> <span class="nx">rhombus</span><span class="p">.</span><span class="nx">centerX</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">centerY</span> <span class="o">=</span> <span class="nx">rhombus</span><span class="p">.</span><span class="nx">centerY</span><span class="p">;</span>
 </pre></div></li>
 <li>Bound
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">top</span> <span class="o">=</span> <span class="nx">diamond</span><span class="p">.</span><span class="nx">top</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">left</span> <span class="o">=</span> <span class="nx">diamond</span><span class="p">.</span><span class="nx">left</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">right</span> <span class="o">=</span> <span class="nx">diamond</span><span class="p">.</span><span class="nx">right</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">bottom</span> <span class="o">=</span> <span class="nx">diamond</span><span class="p">.</span><span class="nx">bottom</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">top</span> <span class="o">=</span> <span class="nx">rhombus</span><span class="p">.</span><span class="nx">top</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">left</span> <span class="o">=</span> <span class="nx">rhombus</span><span class="p">.</span><span class="nx">left</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">right</span> <span class="o">=</span> <span class="nx">rhombus</span><span class="p">.</span><span class="nx">right</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">bottom</span> <span class="o">=</span> <span class="nx">rhombus</span><span class="p">.</span><span class="nx">bottom</span><span class="p">;</span>
 </pre></div></li>
 </ul>
 </li>
 <li>Width
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">width</span> <span class="o">=</span> <span class="nx">diamond</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">width</span> <span class="o">=</span> <span class="nx">rhombus</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
 </pre></div></li>
 <li>Height
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">width</span> <span class="o">=</span> <span class="nx">diamond</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">width</span> <span class="o">=</span> <span class="nx">rhombus</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
 </pre></div></li>
-<li>Lines around diamond
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">edge01</span> <span class="o">=</span> <span class="nx">diamond</span><span class="p">.</span><span class="nx">getLineA</span><span class="p">();</span>
-<span class="kd">var</span> <span class="nx">edge12</span> <span class="o">=</span> <span class="nx">diamond</span><span class="p">.</span><span class="nx">getLineB</span><span class="p">();</span>
-<span class="kd">var</span> <span class="nx">edge23</span> <span class="o">=</span> <span class="nx">diamond</span><span class="p">.</span><span class="nx">getLineC</span><span class="p">();</span>
-<span class="kd">var</span> <span class="nx">edge34</span> <span class="o">=</span> <span class="nx">diamond</span><span class="p">.</span><span class="nx">getLineD</span><span class="p">();</span>
+<li>Lines around rhombus
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">edge01</span> <span class="o">=</span> <span class="nx">rhombus</span><span class="p">.</span><span class="nx">getLineA</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">edge12</span> <span class="o">=</span> <span class="nx">rhombus</span><span class="p">.</span><span class="nx">getLineB</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">edge23</span> <span class="o">=</span> <span class="nx">rhombus</span><span class="p">.</span><span class="nx">getLineC</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">edge34</span> <span class="o">=</span> <span class="nx">rhombus</span><span class="p">.</span><span class="nx">getLineD</span><span class="p">();</span>
 </pre></div>
     or
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">edge</span> <span class="o">=</span> <span class="nx">diamond</span><span class="p">.</span><span class="nx">getEdge</span><span class="p">(</span><span class="nx">edgeIdx</span><span class="p">);</span>
-<span class="c1">// var out = diamond.getEdge(edgeIdx, out);</span>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">edge</span> <span class="o">=</span> <span class="nx">rhombus</span><span class="p">.</span><span class="nx">getEdge</span><span class="p">(</span><span class="nx">edgeIdx</span><span class="p">);</span>
+<span class="c1">// var out = rhombus.getEdge(edgeIdx, out);</span>
 </pre></div></li>
 </ul>
 <h3 id="points-shape">Point(s) &amp; shape<a class="headerlink" href="#points-shape" title="Permanent link">&para;</a></h3>

@@ -1,6 +1,6 @@
 'use strict'
 
-import DiamondPlugin from 'rexPlugins/diamond-plugin.js';
+import RhombusPlugin from 'rexPlugins/rhombus-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -14,25 +14,25 @@ class Demo extends Phaser.Scene {
     create() {
         var printTxt = this.add.text(0, 0, '');
 
-        var diamond = this.plugins.get('rexDiamond').add(0, 0, 120, 60);
-        DiamondShape(this, diamond, 0x0000ff, 0xffffff, 2)
+        var rhombus = this.plugins.get('rexRhombus').add(0, 0, 120, 60);
+        RhombusShape(this, rhombus, 0x0000ff, 0xffffff, 2)
             .setPosition(300, 300)
             .on('pointerdown', function () {
-                printTxt.text += 'click diamond0\n';
+                printTxt.text += 'click rhombus0\n';
             });
 
-        DiamondShape(this, diamond, 0x00ff00, 0xffffff, 2)
+        RhombusShape(this, rhombus, 0x00ff00, 0xffffff, 2)
             .setPosition(500, 300)
             .on('pointerdown', function () {
-                printTxt.text += 'click diamond1\n';
+                printTxt.text += 'click rhombus1\n';
             });
     }
 
     update() {}
 }
 
-var DiamondShape = function (scene, diamond, fillColor, lineColor, lineWidth) {
-    var points = diamond.points;
+var RhombusShape = function (scene, rhombus, fillColor, lineColor, lineWidth) {
+    var points = rhombus.points;
     // draw shape on a Graphics object
     var graphics = scene.add.graphics()
         .fillStyle(fillColor)
@@ -40,7 +40,7 @@ var DiamondShape = function (scene, diamond, fillColor, lineColor, lineWidth) {
         .lineStyle(lineWidth, lineColor)
         .strokePoints(points, true)
         // set hit area
-        .setInteractive(diamond, Phaser.Geom.Polygon.Contains);
+        .setInteractive(rhombus, Phaser.Geom.Polygon.Contains);
 
     return graphics;
 }
@@ -53,8 +53,8 @@ var config = {
     scene: Demo,
     plugins: {
         global: [{
-            key: 'rexDiamond',
-            plugin: DiamondPlugin,
+            key: 'rexRhombus',
+            plugin: RhombusPlugin,
             start: true
         }]
     }

@@ -12,7 +12,6 @@
 1. [ContainerLite](containerlite.md): Control the position and angle of children game objects.
 1. [CSV-scenario](csvscenario.md): Run script in csv format.
 1. [CSV-to-hash-table](csvtohashtable.md): Hash table indexed by (col-key, row-key) from csv string.
-1. [Diamond](geom-diamond.md): Diamond shape and methods.
 1. [Drag](drag.md): Drag game object.
 1. [Eight direction](eightdirection.md): Move game object by cursor keys.
 1. [Fade-out-destroy](fadeoutdestroy.md): Fade out game object then destroy it.
@@ -26,6 +25,7 @@
 1. [Page](textpage.md): Display text page by page on text object.
 1. [Path follower](pathfollower.md): Set position of game object on a path.
 1. [Pixelation-pipeline](pixelationpipeline.md): Pixelation post processing filter.
+1. [Rhombus](geom-rhombus.md): Rhombus shape and methods.
 1. [RotateTo](rotateto.md): Rotate game object towards target position with a steady speed.
 1. [Run-commands](runcommands.md): Run commands in array.
 1. [Scroller](scroller.md): Drag content. Slow down when dragging released, pull back when out of bounds.

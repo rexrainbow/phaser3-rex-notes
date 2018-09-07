@@ -78,8 +78,8 @@ Call `gameObject.setInteractive(...)` to register touch input of Game Object bef
     - [Hexagon](geom-hexagon.md)
         - shape : `new Phaser.Geom.rexHexagon(x, y, size, type)`
         - callback : `Phaser.Geom.Polygon.Contains`
-    - [Diamond](geom-diamond.md)
-        - shape : `new Phaser.Geom.rexDiamond(x, y, width, height)`
+    - [Rhombus](geom-rhombus.md)
+        - shape : `new Phaser.Geom.rexRhombus(x, y, width, height)`
         - callback : `Phaser.Geom.Polygon.Contains`
 - Set interactive configuration
     ```javascript

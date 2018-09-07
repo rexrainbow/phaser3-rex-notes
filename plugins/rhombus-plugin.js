@@ -1,8 +1,8 @@
 'use strict'
 
-import Diamond from './diamond.js';
+import Rhombus from './rhombus.js';
 
-class DiamondPlugin extends Phaser.Plugins.BasePlugin {
+class RhombusPlugin extends Phaser.Plugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);
@@ -14,8 +14,8 @@ class DiamondPlugin extends Phaser.Plugins.BasePlugin {
     }
 
     add(x, y, width, height) {
-        return new Diamond(x, y, width, height);
+        return new Rhombus(x, y, width, height);
     }
 }
 
-export default DiamondPlugin;
+export default RhombusPlugin;

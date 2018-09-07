@@ -124,7 +124,7 @@ nav:
         - Ellipse: geom-ellipse.md
         - Triangle: geom-triangle.md        
         - Polygon: geom-polygon.md
-        - Diamond: geom-diamond.md
+        - Rhombus: geom-rhombus.md
         - Hexagon: geom-hexagon.md
     - Path: path.md
 - String:
