@@ -127,10 +127,12 @@ scene.plugins.get('rexGridAlign').hexagon(items, {
     - `12`, or `Phaser.Display.Align.BOTTOM_RIGHT`
 - `x`, `y` : Position of first item.
 
+#### Types of hexagon grid
 
-`staggeraxis`, `staggerindex` : [Reference](https://www.redblobgames.com/grids/hexagons/#coordinates-offset)
+[Reference](https://www.redblobgames.com/grids/hexagons/#coordinates-offset)
 
-    - staggeraxis = `x`, staggerindex = `odd` : `odd-r`
-    - staggeraxis = `x`, staggerindex = `even` : `even-r`
-    - staggeraxis = `y`, staggerindex = `odd` : `odd-q`
-    - staggeraxis = `y`, staggerindex = `even` : `even-q`
+- `odd-r` : staggeraxis = `x`, staggerindex = `odd`
+- `even-r` : staggeraxis = `x`, staggerindex = `even`
+- `odd-q` : staggeraxis = `y`, staggerindex = `odd`
+- `even-q` :staggeraxis = `y`, staggerindex = `even`
+
