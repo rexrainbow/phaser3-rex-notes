@@ -3,7 +3,7 @@
 Encrypt or decrypt string by XOR algorithm.
 
 - Author: Rex
-- Functions collection
+- Methods
 
 ## Source code
 

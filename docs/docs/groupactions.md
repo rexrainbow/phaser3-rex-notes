@@ -6,24 +6,24 @@ Set properties of game objects, built-in methods of phaser.
 
 ## Usage
 
-### Call
+### Call function
 
 ```javascript
 Phaser.Actions.Call(gameObjects, callback, context);
 ```
 
-### Any property
+### Set any property
 
 ```javascript
 Phaser.Actions.PropertyValueSet(gameObjects, key, value, step, index, direction);
 ```
 
-- gameObjects : The array of game objects to be updated by this action.
-- key : The property to be updated.
-- value : The amount to be added to the property.
-- step : This is added to the `value` amount, multiplied by the iteration counter.
-- index : An optional offset to start searching from within the items array.
-- direction :
+- `gameObjects` : An array of game objects.
+- `key` : The property to be updated.
+- `value` : The amount to be added to the property.
+- `step` : This is added to the `value` amount, multiplied by the iteration counter.
+- `index` : An optional offset to start searching from within the items array.
+- `direction` :
     - `1` : from beginning to end.
     - `-1`: from end to beginning.
 
@@ -93,7 +93,29 @@ Phaser.Actions.GridAlign(gameObjects, {
 });
 ```
 
+- `width` : The width of the grid in items (not pixels). -1 means lay all items out horizontally, regardless of quantity.
+- `height` : The height of the grid in items (not pixels). -1 means lay all items out vertically, regardless of quantity.
+- `cellWidth` : The width of the cell, in pixels.
+- `cellHeight` : The height of the cell, in pixels.
+- `position` : The alignment position.
+    - `0`, or `Phaser.Display.Align.TOP_LEFT` 
+    - `1`, or `Phaser.Display.Align.TOP_CENTER`
+    - `2`, or `Phaser.Display.Align.TOP_RIGHT`
+    - `3`, or `Phaser.Display.Align.LEFT_TOP`
+    - `4`, or `Phaser.Display.Align.LEFT_CENTER`
+    - `5`, or `Phaser.Display.Align.LEFT_BOTTOM`
+    - `6`, or `Phaser.Display.Align.CENTER`
+    - `7`, or `Phaser.Display.Align.RIGHT_TOP`
+    - `8`, or `Phaser.Display.Align.RIGHT_CENTER`
+    - `9`, or `Phaser.Display.Align.RIGHT_BOTTOM`
+    - `10`, or `Phaser.Display.Align.BOTTOM_LEFT`
+    - `11`, or `Phaser.Display.Align.BOTTOM_CENTER`    
+    - `12`, or `Phaser.Display.Align.BOTTOM_RIGHT`
+- `x`, `y` : Position of first item.
+
 #### Line
+
+[Line](geom-line.md) :
 
 ```javascript
 var line = new Phaser.Geom.Line(x1, y1, x2, y2);
@@ -109,6 +131,8 @@ Phaser.Actions.RandomLine(gameObjects, line);
 
 #### Circle
 
+[Circle](geom-circle.md) :
+
 ```javascript
 var circle = new Phaser.Geom.Circle(x, y, radius);
 ```
@@ -123,6 +147,8 @@ Phaser.Actions.RandomCircle(gameObjects, circle);
 
 #### Ellipse
 
+[Ellipse](geom-ellipse.md) :
+
 ```javascript
 var ellipse = new Phaser.Geom.Ellipse(x, y, width, height);
 ```
@@ -132,6 +158,8 @@ Phaser.Actions.PlaceOnEllipse(gameObjects, ellipse, startAngle, endAngle);
 ```
 
 #### Triangle
+
+[Triangle](geom-triangle.md) :
 
 ```javascript
 var triangle = new Phaser.Geom.Triangle(x1, y1, x2, y2, x3, y3);
@@ -146,6 +174,8 @@ Phaser.Actions.RandomTriangle(gameObjects, triangle);
 ```
 
 #### Rectangle
+
+[Rectangle](geom-rectangle.md) :
 
 ```javascript
 var rect = new Phaser.Geom.Rectangle(x, y, width, height);
@@ -243,29 +273,28 @@ Phaser.Actions.SetHitArea(gameObjects, hitArea, hitAreaCallback);
 ### Blend mode
 
 ```javascript
-Phaser.Actions.SetHitArea(gameObjects, value, index, direction);
+Phaser.Actions.SetBlendMode(gameObjects, blendMode, index, direction);
 ```
 
-Blend mode :
-
-- Phaser.BlendModes.SKIP_CHECK
-- Phaser.BlendModes.NORMAL
-- Phaser.BlendModes.ADD
-- Phaser.BlendModes.MULTIPLY
-- Phaser.BlendModes.SCREEN
-- Phaser.BlendModes.OVERLAY
-- Phaser.BlendModes.DARKEN
-- Phaser.BlendModes.LIGHTEN
-- Phaser.BlendModes.COLOR_DODGE
-- Phaser.BlendModes.COLOR_BURN
-- Phaser.BlendModes.HARD_LIGHT
-- Phaser.BlendModes.SOFT_LIGHT
-- Phaser.BlendModes.DIFFERENCE
-- Phaser.BlendModes.EXCLUSION
-- Phaser.BlendModes.HUE
-- Phaser.BlendModes.SATURATION
-- Phaser.BlendModes.COLOR
-- Phaser.BlendModes.LUMINOSITY
+- `blendMode` :
+    - `Phaser.BlendModes.SKIP_CHECK`
+    - `Phaser.BlendModes.NORMAL`
+    - `Phaser.BlendModes.ADD`
+    - `Phaser.BlendModes.MULTIPLY`
+    - `Phaser.BlendModes.SCREEN`
+    - `Phaser.BlendModes.OVERLAY`
+    - `Phaser.BlendModes.DARKEN`
+    - `Phaser.BlendModes.LIGHTEN`
+    - `Phaser.BlendModes.COLOR_DODGE`
+    - `Phaser.BlendModes.COLOR_BURN`
+    - `Phaser.BlendModes.HARD_LIGHT`
+    - `Phaser.BlendModes.SOFT_LIGHT`
+    - `Phaser.BlendModes.DIFFERENCE`
+    - `Phaser.BlendModes.EXCLUSION`
+    - `Phaser.BlendModes.HUE`
+    - `Phaser.BlendModes.SATURATION`
+    - `Phaser.BlendModes.COLOR`
+    - `Phaser.BlendModes.LUMINOSITY`
 
 ### Play animation
 

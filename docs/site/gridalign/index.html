@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/input/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/gridalign/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Input - Notes of Phaser 3</title>
+        <title>Quad/Hexagon grid align - Notes of Phaser 3</title>
       
     
     
@@ -128,7 +128,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Input
+                Quad/Hexagon grid align
               </span>
             
           
@@ -447,10 +447,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
     
     <label class="md-nav__link" for="nav-4">
       Game object
@@ -1030,10 +1032,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-9" type="checkbox" id="nav-4-9">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-9" type="checkbox" id="nav-4-9" checked>
     
     <label class="md-nav__link" for="nav-4-9">
       Behaviors
@@ -1049,10 +1053,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-9-1" type="checkbox" id="nav-4-9-1">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-9-1" type="checkbox" id="nav-4-9-1" checked>
     
     <label class="md-nav__link" for="nav-4-9-1">
       Actions
@@ -1080,11 +1086,93 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../gridalign/" title="Quad/Hexagon grid align" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Quad/Hexagon grid align
+      </label>
+    
+    <a href="./" title="Quad/Hexagon grid align" class="md-nav__link md-nav__link--active">
       Quad/Hexagon grid align
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#import-class" title="Import class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
+    Install global plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quadrilateral-grid" title="Quadrilateral grid" class="md-nav__link">
+    Quadrilateral grid
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hexagon-grid" title="Hexagon grid" class="md-nav__link">
+    Hexagon grid
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -1263,12 +1351,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
     
     <label class="md-nav__link" for="nav-5">
       Input
@@ -1284,65 +1370,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Input
-      </label>
-    
-    <a href="./" title="Input" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../input/" title="Input" class="md-nav__link">
       Input
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#enabledisable" title="Enable/disable" class="md-nav__link">
-    Enable/disable
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -2709,6 +2741,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#usage" title="Usage" class="md-nav__link">
     Usage
   </a>
@@ -2717,8 +2756,29 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#enabledisable" title="Enable/disable" class="md-nav__link">
-    Enable/disable
+  <a href="#import-class" title="Import class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
+    Install global plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quadrilateral-grid" title="Quadrilateral grid" class="md-nav__link">
+    Quadrilateral grid
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hexagon-grid" title="Hexagon grid" class="md-nav__link">
+    Hexagon grid
   </a>
   
 </li>
@@ -2744,20 +2804,147 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/input.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/gridalign.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Input</h1>
+                  <h1>Quad/Hexagon grid align</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Input system of each scene, built-in object of phaser.</p>
+<p>Align objects on quadrilateral or hexagon grid. 
+See also <a href="groupactions.md/#grid-align">built-in grid-align</a>.</p>
 <ul>
-<li>Author: Richard Davey</li>
+<li>Author: Rex</li>
+<li>Methods</li>
 </ul>
+<h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/gridalign-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexgridalignplugin.min.js">minify</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<h3 id="enabledisable">Enable/disable<a class="headerlink" href="#enabledisable" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">enabled</span> <span class="o">=</span> <span class="nx">enabled</span><span class="p">;</span> <span class="c1">// enabled: true/false</span>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/gridalign">Sample code</a></p>
+<p>User could import class directly, or install it by global plugin.</p>
+<h3 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">rexGridAlign</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/gridalign.js&#39;</span><span class="p">;</span>
 </pre></div>
+
+<h3 id="install-global-plugin">Install global plugin<a class="headerlink" href="#install-global-plugin" title="Permanent link">&para;</a></h3>
+<p>Install plugin in <a href="../game/#configuration">configuration of game</a></p>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">GridAlignPlugin</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/gridalign-plugin.js&#39;</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexGridAlign&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">GridAlignPlugin</span><span class="p">,</span>
+            <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="p">}</span>
+        <span class="c1">// ...</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</pre></div>
+
+<h3 id="quadrilateral-grid">Quadrilateral grid<a class="headerlink" href="#quadrilateral-grid" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexGridAlign&#39;</span><span class="p">).</span><span class="nx">quad</span><span class="p">(</span><span class="nx">items</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="nx">cellWidth</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nx">cellHeight</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;orthogonal&#39;</span><span class="p">,</span>
+    <span class="nx">position</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Display</span><span class="p">.</span><span class="nx">Align</span><span class="p">.</span><span class="nx">CENTER</span><span class="p">,</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span>
+<span class="p">});</span>
+</pre></div>
+
+<ul>
+<li><code>width</code> : The width of the grid in items (not pixels). -1 means lay all items out horizontally, regardless of quantity.</li>
+<li><code>height</code> : The height of the grid in items (not pixels). -1 means lay all items out vertically, regardless of quantity.</li>
+<li><code>cellWidth</code> : The width of the cell, in pixels.</li>
+<li><code>cellHeight</code> : The height of the cell, in pixels.</li>
+<li><code>type</code><ul>
+<li><code>0</code>, or <code>orthogonal</code></li>
+<li><code>1</code>, or <code>isometric</code></li>
+<li><code>2</code>, or <code>staggered</code></li>
+</ul>
+</li>
+<li><code>position</code> : The alignment position.<ul>
+<li><code>0</code>, or <code>Phaser.Display.Align.TOP_LEFT</code> </li>
+<li><code>1</code>, or <code>Phaser.Display.Align.TOP_CENTER</code></li>
+<li><code>2</code>, or <code>Phaser.Display.Align.TOP_RIGHT</code></li>
+<li><code>3</code>, or <code>Phaser.Display.Align.LEFT_TOP</code></li>
+<li><code>4</code>, or <code>Phaser.Display.Align.LEFT_CENTER</code></li>
+<li><code>5</code>, or <code>Phaser.Display.Align.LEFT_BOTTOM</code></li>
+<li><code>6</code>, or <code>Phaser.Display.Align.CENTER</code></li>
+<li><code>7</code>, or <code>Phaser.Display.Align.RIGHT_TOP</code></li>
+<li><code>8</code>, or <code>Phaser.Display.Align.RIGHT_CENTER</code></li>
+<li><code>9</code>, or <code>Phaser.Display.Align.RIGHT_BOTTOM</code></li>
+<li><code>10</code>, or <code>Phaser.Display.Align.BOTTOM_LEFT</code></li>
+<li><code>11</code>, or <code>Phaser.Display.Align.BOTTOM_CENTER</code>    </li>
+<li><code>12</code>, or <code>Phaser.Display.Align.BOTTOM_RIGHT</code></li>
+</ul>
+</li>
+<li><code>x</code>, <code>y</code> : Position of first item.</li>
+</ul>
+<h3 id="hexagon-grid">Hexagon grid<a class="headerlink" href="#hexagon-grid" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexGridAlign&#39;</span><span class="p">).</span><span class="nx">hexagon</span><span class="p">(</span><span class="nx">items</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="nx">cellWidth</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nx">cellHeight</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nx">staggeraxis</span><span class="o">:</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span>
+    <span class="nx">staggerindex</span><span class="o">:</span> <span class="s1">&#39;odd&#39;</span><span class="p">,</span>
+    <span class="nx">position</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Display</span><span class="p">.</span><span class="nx">Align</span><span class="p">.</span><span class="nx">CENTER</span><span class="p">,</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span>
+<span class="p">});</span>
+</pre></div>
+
+<ul>
+<li><code>width</code> : The width of the grid in items (not pixels). -1 means lay all items out horizontally, regardless of quantity.</li>
+<li><code>height</code> : The height of the grid in items (not pixels). -1 means lay all items out vertically, regardless of quantity.</li>
+<li><code>cellWidth</code> : The width of the cell, in pixels.</li>
+<li><code>cellHeight</code> : The height of the cell, in pixels.</li>
+<li><code>staggeraxis</code><ul>
+<li><code>0</code>, or <code>y</code></li>
+<li><code>1</code>, or <code>x</code></li>
+</ul>
+</li>
+<li><code>staggerindex</code><ul>
+<li><code>0</code>, or <code>even</code></li>
+<li><code>1</code>, or <code>odd</code></li>
+</ul>
+</li>
+<li><code>position</code> : The alignment position.<ul>
+<li><code>0</code>, or <code>Phaser.Display.Align.TOP_LEFT</code> </li>
+<li><code>1</code>, or <code>Phaser.Display.Align.TOP_CENTER</code></li>
+<li><code>2</code>, or <code>Phaser.Display.Align.TOP_RIGHT</code></li>
+<li><code>3</code>, or <code>Phaser.Display.Align.LEFT_TOP</code></li>
+<li><code>4</code>, or <code>Phaser.Display.Align.LEFT_CENTER</code></li>
+<li><code>5</code>, or <code>Phaser.Display.Align.LEFT_BOTTOM</code></li>
+<li><code>6</code>, or <code>Phaser.Display.Align.CENTER</code></li>
+<li><code>7</code>, or <code>Phaser.Display.Align.RIGHT_TOP</code></li>
+<li><code>8</code>, or <code>Phaser.Display.Align.RIGHT_CENTER</code></li>
+<li><code>9</code>, or <code>Phaser.Display.Align.RIGHT_BOTTOM</code></li>
+<li><code>10</code>, or <code>Phaser.Display.Align.BOTTOM_LEFT</code></li>
+<li><code>11</code>, or <code>Phaser.Display.Align.BOTTOM_CENTER</code>    </li>
+<li><code>12</code>, or <code>Phaser.Display.Align.BOTTOM_RIGHT</code></li>
+</ul>
+</li>
+<li>
+<p><code>x</code>, <code>y</code> : Position of first item.</p>
+</li>
+<li>
+<p><code>staggeraxis</code>, <code>staggerindex</code> : <a href="https://www.redblobgames.com/grids/hexagons/#coordinates-offset">Reference</a></p>
+<ul>
+<li>staggeraxis = <code>x</code>, staggerindex = <code>odd</code> : <code>odd-r</code></li>
+<li>staggeraxis = <code>x</code>, staggerindex = <code>even</code> : <code>even-r</code></li>
+<li>staggeraxis = <code>y</code>, staggerindex = <code>odd</code> : <code>odd-q</code></li>
+<li>staggeraxis = <code>y</code>, staggerindex = <code>even</code> : <code>even-q</code></li>
+</ul>
+</li>
+</ul>
                 
                   
                 
@@ -2778,7 +2965,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../mask/" title="Mask" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../groupactions/" title="Group actions" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -2787,19 +2974,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Mask
+                Group actions
               </span>
             </div>
           </a>
         
         
-          <a href="../touchevents/" title="Touch events" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../moveto/" title="Move to" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Touch events
+                Move to
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

@@ -24,7 +24,7 @@ var tempQuadGrid = new QuadGrid();
  *                                   If both this value and `width` are set to -1 then `width` overrides it and this value is ignored.
  * @property {integer} [cellWidth=1] - The width of the cell, in pixels, in which the item is positioned.
  * @property {integer} [cellHeight=1] - The height of the cell, in pixels, in which the item is positioned.
- * @property {integer} [position=0] - The alignment position. One of the Phaser.Display.Align consts such as `TOP_LEFT` or `RIGHT_CENTER`.
+ * @property {integer} [position=6] - The alignment position. One of the Phaser.Display.Align consts such as `TOP_LEFT` or `RIGHT_CENTER`.
  * @property {number} [x=0] - Optionally place the top-left of the final grid at this coordinate.
  * @property {number} [y=0] - Optionally place the top-left of the final grid at this coordinate.
  */
@@ -39,7 +39,7 @@ var GridAlign = function (items, options) {
     var cellWidth = GetFastValue(options, 'cellWidth', 1);
     var cellHeight = GetFastValue(options, 'cellHeight', cellWidth);
     var type = GetFastValue(options, 'type', 0);
-    var position = GetFastValue(options, 'position', Phaser.Display.Align.TOP_LEFT);
+    var position = GetFastValue(options, 'position', Phaser.Display.Align.CENTER);
     var x = GetFastValue(options, 'x', 0);
     var y = GetFastValue(options, 'y', 0);
 

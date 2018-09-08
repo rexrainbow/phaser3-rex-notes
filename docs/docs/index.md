@@ -18,6 +18,7 @@
 1. [Fade-volume](fadevolume.md): Fade-in/fade-out volume of sound.
 1. [FSM](fsm.md): Finite state machine.
 1. [Gashapon](gashapon.md): Pick random item from box.
+1. [Grid align](gridalign.md): Align objects on quadrilateral or hexagon grid.
 1. [Grid table](gridtable.md): Viewer of grid table, to manipulate game object of each visible cell.
 1. [Hexagon](geom-hexagon.md): Hexagon shape and methods.
 1. [LZ-string](lzstring.md): Compress string using LZ-based compression algorithm.

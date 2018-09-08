@@ -5,6 +5,8 @@
 import CONST from './const.js';
 import GetWorldX from './GetWorldX.js';
 import GetWorldY from './GetWorldY.js';
+import GetTileX from './GetTileX.js';
+import GetTileY from './GetTileY.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const ODD_R = CONST.ODD_R;
@@ -21,7 +23,7 @@ class Hexagon {
     resetFromJSON(o) {
         this.setOriginPosition(GetValue(o, 'x', 0), GetValue(o, 'y', 0));
         this.setCellSize(GetValue(o, 'cellWidth', 33), GetValue(o, 'cellHeight', 42));
-        this.setType(GetValue(o, 'staggeraxis', 0), GetValue(o, 'staggerindex', 0));
+        this.setType(GetValue(o, 'staggeraxis', 1), GetValue(o, 'staggerindex', 1));
     }
 
     setOriginPosition(x, y) {
@@ -53,7 +55,6 @@ class Hexagon {
     }
 
     setType(staggeraxis, staggerindex) {
-        debugger
         if (typeof (staggeraxis) === 'string') {
             staggeraxis = STAGGERAXIS[staggeraxis]
         }
@@ -78,6 +79,14 @@ class Hexagon {
     getWorldY(tileX, tileY) {
         return GetWorldY(this, tileX, tileY);
     }
+
+    getTileX(worldX, worldY) {
+        return GetTileX(this, worldX, worldY);
+    }
+
+    getTileY(worldX, worldY) {
+        return GetTileY(this, worldX, worldY);
+    }    
 }
 
 const STAGGERAXIS = {

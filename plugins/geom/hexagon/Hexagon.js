@@ -20,7 +20,7 @@ class Hexagon extends Polygon {
             x = GetValue(config, 'x', 0);
             y = GetValue(config, 'y', 0);
             size = GetValue(config, 'size', 0);
-            type = GetValue(config, 'type', 0);
+            type = GetValue(config, 'type', 1);
         }
         var points = this.points;
         for (var i = 0; i < 6; i++) {

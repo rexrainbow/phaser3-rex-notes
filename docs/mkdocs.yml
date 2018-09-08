@@ -45,13 +45,15 @@ nav:
     - Container:
         - Container: container.md
         - Container Lite: containerlite.md
-        - Group: group.md
-        - Group actions: groupactions.md
+        - Group: group.md        
         - Grid table: gridtable.md
     - Zone: zone.md
     - DOM element:
         - DOM element: domelement.md
     - Behaviors:
+        - Actions:
+            - Group actions: groupactions.md
+            - Quad/Hexagon grid align: gridalign.md    
         - Move to: moveto.md
         - Rotate to: rotateto.md
         - Fade out destroy: fadeoutdestroy.md
