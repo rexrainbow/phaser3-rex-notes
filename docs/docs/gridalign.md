@@ -1,7 +1,8 @@
 ## Introduction
 
 Align objects on quadrilateral or hexagon grid. 
-See also [built-in grid-align](groupactions.md/#grid-align).
+
+See also [built-in grid-align](groupactions.md#grid-align).
 
 - Author: Rex
 - Methods
