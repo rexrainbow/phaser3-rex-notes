@@ -73,7 +73,7 @@ var hexagon = new rexHexagon(x, y, size, type);
 
 ### Draw on [graphics](graphics.md)
 
-See [Polygon shape](geom-hexagon.md#draw-on-graphics).
+See [Polygon shape](geom-polygon.md#draw-on-graphics).
 
 ### Set properties
 
@@ -119,7 +119,7 @@ See [Polygon shape](geom-hexagon.md#draw-on-graphics).
 
 ### Get properties
 
-See [Polygon shape](geom-hexagon.md#get-properties).
+See [Polygon shape](geom-polygon.md#get-properties).
 
 - Position
     - Center
@@ -160,4 +160,4 @@ See [Polygon shape](geom-hexagon.md#get-properties).
 
 ### Point(s) & shape
 
-See [Polygon shape](geom-hexagon.md#points-shape).
+See [Polygon shape](geom-polygon.md#points-shape).
