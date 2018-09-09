@@ -1,4 +1,4 @@
-import HexagonGrid from 'rexPlugins/utils/grid/hexagon/HexagonCore.js';
+import HexagonGrid from 'rexPlugins/utils/grid/hexagon/Hexagon.js';
 
 const AlignIn = Phaser.Display.Align.In.QuickSet;
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;

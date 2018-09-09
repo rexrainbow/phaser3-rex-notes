@@ -1,4 +1,4 @@
-import QuadGrid from 'rexPlugins/utils/grid/quad/QuadCore.js';
+import QuadGrid from 'rexPlugins/utils/grid/quad/Quad.js';
 
 const AlignIn = Phaser.Display.Align.In.QuickSet;
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
