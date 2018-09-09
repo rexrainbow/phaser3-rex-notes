@@ -2,7 +2,7 @@
 
 import Clone from 'rexPlugins/utils/object/Clone.js';
 import IsEmpty from 'rexPlugins/utils/Object/IsEmpty.js';
-import Clean from 'rexPlugins/utils/object/Clean.js';
+import Clear from 'rexPlugins/utils/object/Clear.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -266,9 +266,9 @@ class Gashapon {
 
     destroy() {
         // data
-        Clean(this.items);
-        Clean(this.remain);
-        Clean(this._list);
+        Clear(this.items);
+        Clear(this.remain);
+        Clear(this._list);
 
         // result
         this.result = null;

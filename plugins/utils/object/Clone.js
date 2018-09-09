@@ -1,6 +1,6 @@
 'use strict'
 
-import Clean from './Clean.js';
+import Clear from './Clear.js';
 
 /**
  * Shallow Object Clone. Will not clone nested objects.
@@ -14,7 +14,7 @@ var Clone = function (obj, ret) {
 
     if (ret != null) {
         clone = ret;
-        Clean(clone);
+        Clear(clone);
     } else {
         clone = (objIsArray) ? [] : {};
     }

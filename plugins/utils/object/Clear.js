@@ -1,6 +1,6 @@
 'use strict'
 
-var Clean = function (obj) {
+var Clear = function (obj) {
     if (Array.isArray(obj)) {
         obj.length = 0;
     } else {
@@ -9,4 +9,4 @@ var Clean = function (obj) {
         }
     }
 }
-export default Clean;
+export default Clear;

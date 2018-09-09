@@ -1,7 +1,7 @@
 'use strict'
 
 import Clone from 'rexPlugins/utils/object/Clone.js';
-import Clean from 'rexPlugins/utils/object/Clean.js';
+import Clear from 'rexPlugins/utils/object/Clear.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -17,7 +17,7 @@ class InstMem {
     resetFromJSON(o) {
         var queue = GetValue(o, 'queue', undefined);
         if (queue === undefined) {
-            Clean(this.queue);
+            Clear(this.queue);
         } else {
             Clone(queue, this.queue);
         }

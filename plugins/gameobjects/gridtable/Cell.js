@@ -1,4 +1,4 @@
-import Clean from 'rexPlugins/utils/object/Clean.js';
+import Clear from 'rexPlugins/utils/object/Clear.js';
 
 class Cell {
     constructor(parent, config) {
@@ -92,7 +92,7 @@ class Cell {
 
     cleanData() {
         if (this.data) {
-            Clean(this.data);
+            Clear(this.data);
         }
     }
 

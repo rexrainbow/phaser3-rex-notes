@@ -2,7 +2,7 @@
 
 import BaseCmd from './BaseCmd.js';
 import Clone from 'rexPlugins/utils/object/Clone.js';
-import Clean from 'rexPlugins/utils/object/Clean.js';
+import Clear from 'rexPlugins/utils/object/Clear.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -20,7 +20,7 @@ class LabelCmd extends BaseCmd {
         this.lastLabel = GetValue(o, 'lastLabel', '');
         var labels = GetValue(o, 'labels', undefined);
         if (labels === undefined) {
-            Clean(this.labels);
+            Clear(this.labels);
         } else {
             Clone(labels, this.labels);
         }
