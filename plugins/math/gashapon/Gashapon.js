@@ -152,7 +152,7 @@ class Gashapon {
         return this.remain[name] || 0;
     }
 
-    eachItem(callback, scope) {
+    forEachItem(callback, scope) {
         var args = [null, undefined];
 
         for (var i = 2, len = arguments.length; i < len; i++) {
@@ -173,7 +173,7 @@ class Gashapon {
         return this;
     }
 
-    eachRemain(callback, scope) {
+    forEachRemain(callback, scope) {
         var args = [null, undefined];
 
         for (var i = 1; i < arguments.length; i++) {

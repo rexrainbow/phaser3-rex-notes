@@ -7,10 +7,10 @@ const EVEN_R = CONST.EVEN_R;
 const ODD_Q = CONST.ODD_Q;
 const EVEN_Q = CONST.EVEN_Q;
 
-var GetWorldY = function (hexagon, tileX, tileY) {
-    var height = hexagon.height;
+var GetWorldY = function (tileX, tileY) {
+    var height = this.height;
     var worldY = (tileY * height);
-    switch (hexagon.mode) {
+    switch (this.mode) {
         case ODD_R:
         case EVEN_R:
             worldY *= 0.75;
@@ -28,7 +28,7 @@ var GetWorldY = function (hexagon, tileX, tileY) {
             }
             break;
     }
-    return worldY + hexagon.y;
+    return worldY + this.y;
 }
 
 export default GetWorldY;

@@ -70,15 +70,16 @@ class Quad {
         this.mode = type; // orthogonal, isometric, or staggered
         return this;
     }
-
-    getWorldX(tileX, tileY) {
-        return GetWorldX(this, tileX, tileY);
-    }
-
-    getWorldY(tileX, tileY) {
-        return GetWorldY(this, tileX, tileY);
-    }
 }
+
+var methods = {
+    getWorldX: GetWorldX,
+    getWorldY: GetWorldY
+}
+Object.assign(
+    Quad.prototype,
+    methods
+);
 
 const ORIENTATIONTYPE = {
     'orthogonal': 0,

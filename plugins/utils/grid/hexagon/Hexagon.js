@@ -60,7 +60,7 @@ class Hexagon {
         }
         if (typeof (staggerindex) === 'string') {
             staggerindex = STAGGERINDEX[staggerindex]
-        }        
+        }
         this.staggeraxis = staggeraxis; // y(flat), or x(pointy)
         this.staggerindex = staggerindex; // even, or odd
 
@@ -71,23 +71,18 @@ class Hexagon {
         }
         return this;
     }
-
-    getWorldX(tileX, tileY) {
-        return GetWorldX(this, tileX, tileY);
-    }
-
-    getWorldY(tileX, tileY) {
-        return GetWorldY(this, tileX, tileY);
-    }
-
-    getTileX(worldX, worldY) {
-        return GetTileX(this, worldX, worldY);
-    }
-
-    getTileY(worldX, worldY) {
-        return GetTileY(this, worldX, worldY);
-    }    
 }
+
+var methods = {
+    getWorldX: GetWorldX,
+    getWorldY: GetWorldY,
+    getTileX: GetTileX,
+    getTileY: GetTileY
+}
+Object.assign(
+    Hexagon.prototype,
+    methods
+);
 
 const STAGGERAXIS = {
     'y': 0,

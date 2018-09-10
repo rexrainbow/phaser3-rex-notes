@@ -1,20 +1,20 @@
 'use strict'
 
-var GetWorldY = function (quad, tileX, tileY) {
+var GetWorldY = function (tileX, tileY) {
     var worldY;
-    switch (quad.mode) {
+    switch (this.mode) {
         case 0: // orthogonal
-            worldY = tileY * quad.height;
+            worldY = tileY * this.height;
             break;
         case 1: // isometric
-            worldY = (tileX + tileY) * quad._halfHeight;
+            worldY = (tileX + tileY) * this._halfHeight;
             break;
         case 2: // staggered
-            worldY = tileY * quad._halfHeight;
+            worldY = tileY * this._halfHeight;
             break;
     }
 
-    return worldY + quad.y;
+    return worldY + this.y;
 }
 
 export default GetWorldY;

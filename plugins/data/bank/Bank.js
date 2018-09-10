@@ -21,7 +21,7 @@ class Bank {
             }
         }
 
-        if (uid === undefined) {
+        if (uid == null) {
             do {
                 uid = this.nextId;
                 this.nextId++;
