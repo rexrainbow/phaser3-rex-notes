@@ -5,8 +5,16 @@ import Bank from 'rexPlugins/bank.js';
 class Chess {
     constructor(parent, uid) {
         this.parent = parent;
-        Chess.chessBank.add(this, uid);
+        Chess.chessBank.add(this, uid); // uid is stored in `this.$uid`
         this.board = null;
+        this.boot();
+    }
+
+    boot() {
+        var type = typeof (this.parent);
+        if ((type !== 'number') && (type !== 'string') && this.parent.on) {
+            this.parent.on('destroy', this.destroy, this);
+        }
     }
 
     destroy() {

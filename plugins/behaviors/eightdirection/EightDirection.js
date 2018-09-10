@@ -10,7 +10,7 @@ class EightDirection {
     constructor(gameObject, config) {
         this.setParent(gameObject);
         this.resetFromJSON(config);
-        this.boot(config);
+        this.boot();
     }
 
     resetFromJSON(o) {
@@ -30,7 +30,7 @@ class EightDirection {
         };
     }
 
-    boot(config) {
+    boot() {
         if (this.gameObject.on) { // oops, bob object does not have event emitter
             this.gameObject.on('destroy', this.destroy, this);
         }
