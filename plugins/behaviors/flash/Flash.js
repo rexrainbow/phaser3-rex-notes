@@ -68,8 +68,8 @@ class Flash extends EE {
 
         if (IsPlainObject(duration)) {
             var config = duration;
-            duration = GetValue(config, 'x', undefined);
-            repeat = GetValue(config, 'y', undefined);
+            duration = GetValue(config, 'duration', undefined);
+            repeat = GetValue(config, 'repeat', undefined);
         }
         if (duration !== undefined) {
             this.setDuration(duration);
