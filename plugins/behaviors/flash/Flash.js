@@ -78,9 +78,14 @@ class Flash extends EE {
             this.setRepeat(repeat);
         }
 
-        this.isRunning = true;
-        this.repeatCounter = 0;
-        this.nowTime = 0;
+        if (this.isRunning) {
+            // pend task
+            this.repeatCounter = -1;
+        } else {
+            this.isRunning = true;
+            this.repeatCounter = 0;
+            this.nowTime = 0;
+        }        
         return this;
     }
 
