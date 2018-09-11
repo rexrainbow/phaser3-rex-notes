@@ -6,15 +6,16 @@ import ArrayCopy from 'rexPlugins/utils/array/Copy.js';
 import RunCommands from 'rexPlugins/runcommands.js';
 
 const EE = Phaser.Events.EventEmitter;
-const GetFastValue = Phaser.Utils.Objects.GetFastValue;
+const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Player extends EE {
     constructor(parent, config) {
         super();
+        this.parent = parent;
+        this.scene = GetSceneObject(parent);
         this.clock = new Clock(parent, {
             tickMe: false
         });
-        this.parent = parent;
         this.resetFromJSON(config); // this function had been called in super(config)
         this.boot();
     }
@@ -25,15 +26,15 @@ class Player extends EE {
      * @returns {object} this object
      */
     resetFromJSON(o) {
-        var clockConfig = GetFastValue(o, 'clock', undefined);
-        this.clock.resetFromJSON(clockConfig);
-        this.commands = GetFastValue(o, 'commands', []); // [[dt, cmds], [dt, cmds], ...]
-        this.scope = GetFastValue(o, 'scope', undefined);
-        this.timeUnit = GetFastValue(o, 'timeUnit', 0);
-        this.dtMode = GetFastValue(o, 'dtMode', 0);
-        this.index = GetFastValue(o, 'index', 0);
-        this.state = GetFastValue(o, 'state', 0); // 0= idle, 1= run
-        this.nextDt = GetFastValue(o, 'nextDt', 0);
+        this.commands = GetValue(o, 'commands', []); // [[dt, cmds], [dt, cmds], ...]
+        this.scope = GetValue(o, 'scope', undefined);
+        this.setTimeUnit(GetValue(o, 'timeUnit', 0));
+        this.setDtMode(GetValue(o, 'dtMode', 0));
+        this.setTimeScale(GetValue(o, 'timeScale', 1));
+        this.index = GetValue(o, 'index', 0);
+        this.state = GetValue(o, 'state', 0); // 0= idle, 1= run
+        this.nextDt = GetValue(o, 'nextDt', 0);
+        this.clock.resetFromJSON(GetValue(o, 'clock', undefined));
         return this;
     }
 
@@ -55,15 +56,18 @@ class Player extends EE {
     }
 
     boot() {
-        var scene = GetSceneObject(this.parent);
-        scene.events.on('update', this.runNextCommands, this);
+        this.scene.events.on('update', this.runNextCommands, this);
     }
 
     shutdown() {
         super.shutdown();
+
+        this.scene.events.off('update', this.runNextCommands, this);
         this.clock.shutdown();
-        var scene = GetSceneObject(this.parent);
-        scene.events.off('update', this.runNextCommands, this);
+
+        this.parent = undefined;
+        this.scene = undefined;
+        this.clock = undefined;
         this.commands = undefined;
     }
 
@@ -73,13 +77,13 @@ class Player extends EE {
 
     load(commands, scope, config) {
         this.stop();
-        this.timeUnit = GetFastValue(config, 'timeUnit', this.timeUnit);
-        if (typeof (this.timeUnit) === 'string') {
-            this.timeUnit = TIMEUNITMODE[this.timeUnit];
+        var timeUnit = GetValue(config, 'timeUnit', undefined);
+        if (timeUnit !== undefined) {
+            this.setTimeUnit(timeUnit)
         }
-        this.dtMode = GetFastValue(config, 'dtMode', this.dtMode);
-        if (typeof (this.dtMode) === 'string') {
-            this.dtMode = DTMODE[this.dtMode];
+        var dtMode = GetValue(config, 'dtMode', undefined);
+        if (dtMode !== undefined) {
+            this.setDtMode(dtMode);
         }
         commands = commands
             .filter(function (item) {
@@ -155,8 +159,12 @@ class Player extends EE {
         return this.clock.timeScale;
     }
 
-    set timeScale(timeScale) {
-        this.clock.timeScale = timeScale;
+    set timeScale(value) {
+        this.clock.timeScale = value;
+    }
+
+    setTimeScale(value) {
+        this.timeScale = value;
     }
 
     get now() {
@@ -164,11 +172,14 @@ class Player extends EE {
     }
 
     runNextCommands(time, delta) {
+        if (this.timeScale === 0) {
+            return;
+        }
+
         var clock = this.clock;
-        clock.update(time, delta);
-        var clockNowTime = clock.now;
+        var nowTime = clock.update(time, delta).now;
         if (!clock.isRunning ||
-            (this.nextDt > clockNowTime)) {
+            (this.nextDt > nowTime)) {
             return;
         }
 
@@ -190,7 +201,7 @@ class Player extends EE {
                 // next dt
                 this.index++; // point to next item
                 this.nextDt = this.getNextDt(this.nextDt);
-                if (this.nextDt > clockNowTime) {
+                if (this.nextDt > nowTime) {
                     return;
                 }
                 // next dt
@@ -216,6 +227,22 @@ class Player extends EE {
         }
 
         return dt;
+    }
+
+    setDtMode(dtMode) {
+        if (typeof (dtMode) === 'string') {
+            dtMode = DTMODE[dtMode];
+        }
+        this.dtMode = dtMode;
+        return this;
+    }
+
+    setTimeUnit(timeUnit) {
+        if (typeof (timeUnit) === 'string') {
+            timeUnit = TIMEUNITMODE[timeUnit];
+        }
+        this.timeUnit = timeUnit;
+        return this;
     }
 }
 

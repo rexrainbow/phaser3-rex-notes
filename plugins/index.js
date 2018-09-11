@@ -32,6 +32,7 @@ import RotateTo from './rotateto.js';
 import Fade from './fade.js';
 import FadeOutDestroy from './fade-out-destroy.js';
 import PathFollower from './pathfollower.js';
+import Flash from './flash.js';
 
 
 import EightDirection from './eightdirection.js';
@@ -98,6 +99,7 @@ export {
     Fade,
     FadeOutDestroy,
     PathFollower,
+    Flash,
 
     EightDirection,
 

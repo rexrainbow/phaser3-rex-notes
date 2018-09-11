@@ -16,6 +16,7 @@
 1. [Eight direction](eightdirection.md): Move game object by cursor keys.
 1. [Fade-out-destroy](fadeoutdestroy.md): Fade out game object then destroy it.
 1. [Fade-volume](fadevolume.md): Fade-in/fade-out volume of sound.
+1. [Flash](flash.md): Flashing (set invisible then visible) game object.
 1. [FSM](fsm.md): Finite state machine.
 1. [Gashapon](gashapon.md): Pick random item from box.
 1. [Grid align](gridalign.md): Align objects on quadrilateral or hexagon grid.

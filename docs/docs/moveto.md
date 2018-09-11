@@ -108,5 +108,5 @@ moveTo.setRotateToTarget(rotateToTarget);
 
 - Is moving
     ```javascript
-    var isMoving = moveTo.isMoving;
+    var isRunning = moveTo.isRunning;
     ```

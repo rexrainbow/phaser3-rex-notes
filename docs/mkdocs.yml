@@ -56,6 +56,7 @@ nav:
             - Quad/Hexagon grid align: gridalign.md    
         - Move to: moveto.md
         - Rotate to: rotateto.md
+        - Flash: flash.md
         - Fade out destroy: fadeoutdestroy.md
         - Path follower: pathfollower.md
         - Arcade:

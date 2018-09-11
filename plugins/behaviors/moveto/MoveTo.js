@@ -17,13 +17,12 @@ class MoveTo extends EE {
         this.gameObject = gameObject;
         this.scene = GetSceneObject(gameObject);
 
-        this.tween = undefined;
         this.resetFromJSON(config);
         this.boot();
     }
 
     resetFromJSON(o) {
-        this.isMoving = GetValue(o, 'isMoving', false);
+        this.isRunning = GetValue(o, 'isRunning', false);
         this.timeScale = GetValue(o, 'timeScale', 1);
         this.setSpeed(GetValue(o, 'speed', 400));
         this.setRotateToTarget(GetValue(o, 'rotateToTarget', false));
@@ -35,7 +34,7 @@ class MoveTo extends EE {
 
     toJSON() {
         return {
-            isMoving: this.isMoving,
+            isRunning: this.isRunning,
             timeScale: this.timeScale,
             speed: this.speed,
             rotateToTarget: this.rotateToTarget,
@@ -86,12 +85,12 @@ class MoveTo extends EE {
             this.speed = speed;
         }
 
-        this.isMoving = true;
+        this.isRunning = true;
         return this;
     }
 
     stop() {
-        this.isMoving = false;
+        this.isRunning = false;
     }
 
     setSpeed(speed) {
@@ -105,8 +104,8 @@ class MoveTo extends EE {
     }
 
     update(time, delta) {
-        if (!this.isMoving) {
-            return;
+        if (!this.isRunning) {
+            return this;
         }
 
         var gameObject = this.gameObject;
@@ -116,11 +115,11 @@ class MoveTo extends EE {
             targetY = this.targetY;
         if ((curX === targetX) && (curY === targetY)) {
             this.onReachTarget();
-            return;
+            return this;
         }
 
-        if ((this.speed === 0) || (delta === 0)) {
-            return;
+        if ((this.speed === 0) || (delta === 0) || (this.timeScale === 0)) {
+            return this;
         }
 
         var dt = (delta * this.timeScale) / 1000;
@@ -140,10 +139,11 @@ class MoveTo extends EE {
         if (this.rotateToTarget) {
             gameObject.rotation = AngleBetween(curX, curY, newX, newY);
         }
+        return this;
     }
 
     onReachTarget() {
-        this.isMoving = false;
+        this.isRunning = false;
         this.emit('complete', this, this.gameObject);
     }
 }

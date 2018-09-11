@@ -1123,6 +1123,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../flash/" title="Flash" class="md-nav__link">
+      Flash
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../fadeoutdestroy/" title="Fade out destroy" class="md-nav__link">
       Fade out destroy
     </a>
@@ -1148,13 +1160,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-9-6" type="checkbox" id="nav-4-9-6">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-9-7" type="checkbox" id="nav-4-9-7">
     
-    <label class="md-nav__link" for="nav-4-9-6">
+    <label class="md-nav__link" for="nav-4-9-7">
       Arcade
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-4-9-6">
+      <label class="md-nav__title" for="nav-4-9-7">
         Arcade
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -2933,6 +2945,7 @@
     <span class="c1">// timeUnit: 0,        // &#39;ms&#39;|0|&#39;s&#39;|&#39;sec&#39;|1</span>
     <span class="c1">// dtMode: 0,          // &#39;abs&#39;|&#39;absolute&#39;|0|&#39;inc&#39;|&#39;increment&#39;|1</span>
     <span class="c1">// commands: [],       // [[dt, command], [dt, command], ...]</span>
+    <span class="c1">// timeScale: 1,       // 0~1</span>
     <span class="c1">// scope: undefined</span>
 <span class="p">});</span>
 </pre></div>
@@ -2941,6 +2954,7 @@
 <li><code>timeUnit</code> : see <a href="./#load-commands">next section</a></li>
 <li><code>dtMode</code> : see <a href="./#load-commands">next section</a></li>
 <li><code>commands</code> : see <a href="./#load-commands">next section</a></li>
+<li><code>timeScale</code></li>
 </ul>
 <h3 id="load-commands">Load commands<a class="headerlink" href="#load-commands" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="nx">player</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="nx">commands</span><span class="p">,</span> <span class="nx">scope</span><span class="p">,</span> <span class="p">{</span>
@@ -3008,9 +3022,15 @@
 </pre></div>
 
 <h3 id="time-scale">Time-scale<a class="headerlink" href="#time-scale" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">timeScale</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">timeScale</span><span class="p">;</span>
-<span class="nx">player</span><span class="p">.</span><span class="nx">timeScale</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">;</span>
-</pre></div>
+<ul>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">player</span><span class="p">.</span><span class="nx">setTimeScale</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>  <span class="c1">// 0~1</span>
+<span class="c1">// player.timeScale = value;</span>
+</pre></div></li>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">timeScale</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">timeScale</span><span class="p">;</span>
+</pre></div></li>
+</ul>
                 
                   
                 

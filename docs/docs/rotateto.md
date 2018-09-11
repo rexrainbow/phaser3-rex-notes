@@ -116,5 +116,5 @@ rotateTo.setSpeed(speed);
 
 - Is moving
     ```javascript
-    var isMoving = rotateTo.isMoving;
+    var isRunning = rotateTo.isRunning;
     ```

@@ -7,6 +7,7 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 class Clock {
     constructor(parent, config) {
         this.parent = parent;
+        this.scene = GetSceneObject(this.parent);
         this.resetFromJSON(config);
         this.boot();
     }
@@ -29,18 +30,21 @@ class Clock {
     }
 
     boot() {
+        if (this.parent.on) {
+            this.parent.on('destroy', this.destroy, this);
+        }
+
         if (this.tickMe) {
-            var scene = GetSceneObject(this.parent);
-            scene.events.on('update', this.update, this);
+            this.scene.events.on('update', this.update, this);
         }
     }
 
     shutdown() {
         if (this.tickMe) {
-            var scene = GetSceneObject(this.parent);
-            scene.events.off('update', this.update, this);
+            this.scene.events.off('update', this.update, this);
         }
         this.parent = undefined;
+        this.scene = undefined;
     }
 
     destroy() {
@@ -81,10 +85,11 @@ class Clock {
     }
 
     update(time, delta) {
-        if (this.state === 0) {
+        if ((this.state === 0) || (this.timeScale === 0)) {
             return this;
         }
         this.now += (delta * this.timeScale);
+        return this;
     }
 }
 

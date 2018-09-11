@@ -51,6 +51,7 @@ var player = scene.plugins.get('rexTextTyping').addPlayer(scene, {
     // timeUnit: 0,        // 'ms'|0|'s'|'sec'|1
     // dtMode: 0,          // 'abs'|'absolute'|0|'inc'|'increment'|1
     // commands: [],       // [[dt, command], [dt, command], ...]
+    // timeScale: 1,       // 0~1
     // scope: undefined
 });
 ```
@@ -58,6 +59,7 @@ var player = scene.plugins.get('rexTextTyping').addPlayer(scene, {
 - `timeUnit` : see [next section](tcrpplayerplugin.md#load-commands)
 - `dtMode` : see [next section](tcrpplayerplugin.md#load-commands)
 - `commands` : see [next section](tcrpplayerplugin.md#load-commands)
+- `timeScale`
 
 ### Load commands
 
@@ -135,7 +137,12 @@ var now = player.now;
 
 ### Time-scale
 
-```javascript
-var timeScale = player.timeScale;
-player.timeScale = 0.5;
-```
+- Set
+    ```javascript
+    player.setTimeScale(value);  // 0~1
+    // player.timeScale = value;
+    ```
+- Get
+    ```javascript
+    var timeScale = player.timeScale;
+    ```
