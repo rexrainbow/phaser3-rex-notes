@@ -12,7 +12,10 @@ var RemoveChess = function (gameObject, tileX, tileY, tileZ) {
             return this;
         }
     }
-    this.boardData.removeChess(tileX, tileY, tileZ);
+
+    this.boardData.removeUID(tileX, tileY, tileZ);
+    this.getChessData(gameObject).setBoard(null);
+
     return this;
 }
 

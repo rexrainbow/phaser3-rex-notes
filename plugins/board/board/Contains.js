@@ -8,7 +8,7 @@ var Contains = function (tileX, tileY, tileZ) {
         result = (tileX >= 0) && (tileX < this.width) && (tileY >= 0) && (tileY < this.height);
     }
 
-    if (result && (tileZ !== undefined)) {
+    if (result && (tileZ != null)) {
         result = this.boardData.contains(tileX, tileY, tileZ);
     }
     return result;

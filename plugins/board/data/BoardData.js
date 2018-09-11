@@ -10,8 +10,19 @@ class Board {
         this.reset();
     }
 
+    shutdown() {
+        this.XYZToUID = undefined;
+        this.UIDToXYZ = undefined;
+        return this;
+    }
+
+    destroy() {
+        this.shutdown();
+        return this;
+    }
+
     reset() {
-        this.removeAllChess();
+        this.removeAll();
         return this;
     }
 
@@ -23,14 +34,14 @@ class Board {
         return this;
     }
 
-    removeAllChess() {
+    removeAll() {
         Clear(this.UIDToXYZ);
         Clear(this.XYZToUID);
         this.clearBounds();
         return this;
     }
 
-    addChess(uid, x, y, z) {
+    addUID(uid, x, y, z) {
         if (!this.XYZToUID.hasOwnProperty(x)) {
             this.XYZToUID[x] = {};
         }
@@ -50,7 +61,7 @@ class Board {
         return this;
     }
 
-    getChess(x, y, z) {
+    getUID(x, y, z) {
         // (x,y,z) -> uid
         // (x,y) -> zHash = {z:uid}
         var tmp = this.XYZToUID[x];
@@ -65,7 +76,7 @@ class Board {
         return tmp;
     }
 
-    removeChess(x, y, z) {
+    removeUID(x, y, z) {
         if (!this.XYZToUID.hasOwnProperty(x)) {
             return this;
         }
@@ -97,10 +108,10 @@ class Board {
     }
 
     contains(x, y, z) {
-        return (this.getChess(x, y, z) != null);
+        return (this.getUID(x, y, z) != null);
     }
 
-    getChessXYZ(uid) {
+    getXYZ(uid) {
         return this.UIDToXYZ[uid];
     }
 

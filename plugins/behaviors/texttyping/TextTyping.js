@@ -80,16 +80,13 @@ class TextTyping extends EE {
     shutdown() {
         super.shutdown();
         this.freeTimer();
-
         this.gameObject = undefined;
         this.scene = undefined;
-
         return this;
     }
 
     destroy() {
         this.shutdown();
-
         return this;
     }
 

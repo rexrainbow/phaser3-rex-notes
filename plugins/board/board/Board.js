@@ -1,5 +1,6 @@
 'use strict'
 
+import ChessBank from './ChessBank.js';
 import BoardData from '../data/BoardData.js';
 import ChessData from '../data/ChessData.js';
 
@@ -12,11 +13,17 @@ import MoveChess from './MoveChess.js';
 import SwapChess from './SwapChess.js';
 import Contains from './Contains.js';
 import ForEachTileXY from './ForEachTileXY.js';
+import PointerToTileXY from './PointerToTileXY.js';
+import SetInteractive from './SetInteractive.js';
 
+const EE = Phaser.Events.EventEmitter;
 const GetValue = Phaser.Utils.Objects.GetValue;
+const uidKey = ChessBank.uidKey;
 
-class Board {
+class Board extends EE {
     constructor(scene, config) {
+        super();
+
         this.scene = scene;
         this.boardData = new BoardData();
 
@@ -25,6 +32,21 @@ class Board {
         this.setInfinityBoard(GetValue(config, 'inifinity', false));
         this.setBoardWidth(GetValue(config, 'width', 8));
         this.setBoardHeight(GetValue(config, 'height', 8));
+    }
+
+    shutdown() {
+        super.shutdown();
+        this.boardData.shutdown();
+
+        this.scene = undefined;
+        this.boardData = undefined;
+        return this;
+    }
+
+    destroy() {
+        this.emit('destroy');
+        this.shutdown();
+        return this;
     }
 
     setGrid(grid) {
@@ -59,20 +81,47 @@ class Board {
         return this.boardData.exists(this.getChessUID(gameObject));
     }
 
-    tileXYZToChess(tileX, tileY, tileZ) {
-        return this.boardData.getChess(tileX, tileY, tileZ);
+    uidToChess(uid) {
+        if (uid == null) {
+            return null;
+        }
+        return ChessBank.get(uid);
     }
 
-    tileXYToChess(tileX, tileY) {
-        return this.boardData.getChess(tileX, tileY);
+    tileXYZToChess(tileX, tileY, tileZ) {
+        var uid = this.boardData.getUID(tileX, tileY, tileZ);
+        return this.uidToChess(uid);
+    }
+
+    tileXYToChess(tileX, tileY, out) {
+        if (out === undefined) {
+            out = [];
+        }
+        var tileZToUIDs = this.boardData.getUID(tileX, tileY);
+        if (tileZToUIDs == null) {
+            return out;
+        }
+
+        for (var tileZ in tileZToUIDs) {
+            out.push(this.uidToChess(tileZToUIDs[tileZ]));
+        }
+        return out;
     }
 
     getChessData(gameObject) {
-        if (!gameObject.hasOwnProperty('rexChess')) {
-            gameObject.rexChess = new ChessData(gameObject);
+        // game object or uid
+        var type = typeof (gameObject);
+        if ((type === 'number') || (type === 'string')) {
+            // uid
+            var uid = gameObject;
+            return ChessBank.get(uid);
+        } else {
+            // game object
+            if (!gameObject.hasOwnProperty('rexChess')) {
+                gameObject.rexChess = new ChessData(gameObject);
+            }
+            return gameObject.rexChess;
         }
-
-        return gameObject.rexChess;
     }
 
     getChessUID(gameObject) {
@@ -82,14 +131,14 @@ class Board {
         if ((type === 'number') || (type === 'string')) {
             uid = gameObject;
         } else {
-            uid = this.getChessData(gameObject).$uid;
+            uid = this.getChessData(gameObject)[uidKey];
         }
         return uid;
     }
 
     getChessXYZ(gameObject) {
         // game object or uid
-        return this.boardData.getChessXYZ(this.getChessUID(gameObject));
+        return this.boardData.getXYZ(this.getChessUID(gameObject));
     }
 }
 
@@ -103,6 +152,8 @@ var methods = {
     swapChess: SwapChess,
     forEachTileXY: ForEachTileXY,
     contains: Contains,
+    pointerToTileXY: PointerToTileXY,
+    setInteractive: SetInteractive,
 }
 Object.assign(
     Board.prototype,

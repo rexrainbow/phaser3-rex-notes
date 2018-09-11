@@ -1,11 +1,12 @@
 'use strict'
 
-import Bank from 'rexPlugins/bank.js';
+import ChessBank from './ChessBank.js';
 
+const uidKey = ChessBank.uidKey;
 class Chess {
     constructor(parent, uid) {
         this.parent = parent;
-        Chess.chessBank.add(this, uid); // uid is stored in `this.$uid`
+        ChessBank.add(this, uid); // uid is stored in `this.$uid`
         this.board = null;
         this.boot();
     }
@@ -18,43 +19,50 @@ class Chess {
     }
 
     destroy() {
+        if (this.board) {
+            this.board.RemoveChess(this[uidKey]);
+        }
+        ChessBank.remove(this[uidKey]);
+
         this.parent = undefined;
-        Chess.chessBank.remove(this.uid);
-        this.board = undefined;
+        this.board = null;
+    }
+
+    setBoard(board) {
+        this.board = board;
+        return this;
     }
 
     get tileXYZ() {
         if (this.board == null) {
             return null;
         }
-        return this.board.getChessXYZ(this.$uid);
+        return this.board.getXYZ(this[uidKey]);
     }
 
     get tileX() {
         var tileXYZ = this.tileXYZ;
-        if (tileXYZ == null) {
-            return null;
+        if (tileXYZ) {
+            return tileXYZ.x;
         }
-        return tileXYZ.x;
+        return null;
     }
 
     get tileY() {
         var tileXYZ = this.tileXYZ;
-        if (tileXYZ == null) {
-            return null;
+        if (tileXYZ) {
+            return tileXYZ.y;
         }
-        return tileXYZ.y;
+        return null;
     }
 
     get tileZ() {
         var tileXYZ = this.tileXYZ;
-        if (tileXYZ == null) {
-            return null;
+        if (tileXYZ) {
+            return tileXYZ.z;
         }
-        return tileXYZ.z;
+        return null;
     }
 }
-
-Chess.chessBank = new Bank();
 
 export default Chess;

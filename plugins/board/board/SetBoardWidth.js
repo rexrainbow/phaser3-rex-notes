@@ -10,11 +10,11 @@ var SetBoardWidth = function (width) {
     }
 
     // this.width > width : collapse
-    var tileX, tileY, tileZ, zChess;
+    var tileX, tileY, tileZ, tileZToUIDs;
     for (tileX = width; tileX < this.width; tileX++) {
         for (tileY = 0; tileY < this.height; tileY++) {
-            zChess = this.tileXYToChess(tileX, tileY);
-            for (tileZ in zChess) {
+            tileZToUIDs = this.boardData.getUID(tileX, tileY);
+            for (tileZ in tileZToUIDs) {
                 this.RemoveChess(false, tileX, tileY, tileZ);
             }
         }
