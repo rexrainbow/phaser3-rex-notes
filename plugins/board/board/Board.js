@@ -1,6 +1,6 @@
 'use strict'
 
-import ChessBank from './ChessBank.js';
+import ChessBank from '../data/ChessBank.js';
 import BoardData from '../data/BoardData.js';
 import ChessData from '../data/ChessData.js';
 
@@ -13,7 +13,7 @@ import MoveChess from './MoveChess.js';
 import SwapChess from './SwapChess.js';
 import Contains from './Contains.js';
 import ForEachTileXY from './ForEachTileXY.js';
-import PointerToTileXY from './PointerToTileXY.js';
+import WorldXYToTileXY from './WorldXYToTileXY.js';
 import SetInteractive from './SetInteractive.js';
 
 const EE = Phaser.Events.EventEmitter;
@@ -76,38 +76,6 @@ class Board extends EE {
         return this;
     }
 
-    exists(gameObject) {
-        // game object or uid
-        return this.boardData.exists(this.getChessUID(gameObject));
-    }
-
-    uidToChess(uid) {
-        if (uid == null) {
-            return null;
-        }
-        return ChessBank.get(uid);
-    }
-
-    tileXYZToChess(tileX, tileY, tileZ) {
-        var uid = this.boardData.getUID(tileX, tileY, tileZ);
-        return this.uidToChess(uid);
-    }
-
-    tileXYToChess(tileX, tileY, out) {
-        if (out === undefined) {
-            out = [];
-        }
-        var tileZToUIDs = this.boardData.getUID(tileX, tileY);
-        if (tileZToUIDs == null) {
-            return out;
-        }
-
-        for (var tileZ in tileZToUIDs) {
-            out.push(this.uidToChess(tileZToUIDs[tileZ]));
-        }
-        return out;
-    }
-
     getChessData(gameObject) {
         // game object or uid
         var type = typeof (gameObject);
@@ -140,6 +108,38 @@ class Board extends EE {
         // game object or uid
         return this.boardData.getXYZ(this.getChessUID(gameObject));
     }
+
+    exists(gameObject) {
+        // game object or uid
+        return this.boardData.exists(this.getChessUID(gameObject));
+    }
+
+    uidToChess(uid) {
+        if (uid == null) {
+            return null;
+        }
+        return ChessBank.get(uid);
+    }
+
+    tileXYZToChess(tileX, tileY, tileZ) {
+        var uid = this.boardData.getUID(tileX, tileY, tileZ);
+        return this.uidToChess(uid);
+    }
+
+    tileXYToChess(tileX, tileY, out) {
+        if (out === undefined) {
+            out = [];
+        }
+        var tileZToUIDs = this.boardData.getUID(tileX, tileY);
+        if (tileZToUIDs == null) {
+            return out;
+        }
+
+        for (var tileZ in tileZToUIDs) {
+            out.push(this.uidToChess(tileZToUIDs[tileZ]));
+        }
+        return out;
+    }
 }
 
 var methods = {
@@ -152,7 +152,7 @@ var methods = {
     swapChess: SwapChess,
     forEachTileXY: ForEachTileXY,
     contains: Contains,
-    pointerToTileXY: PointerToTileXY,
+    worldXYToTileXY: WorldXYToTileXY,
     setInteractive: SetInteractive,
 }
 Object.assign(

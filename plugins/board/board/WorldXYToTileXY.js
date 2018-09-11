@@ -1,6 +1,6 @@
 'use strict'
 
-var PointerToTileXY = function (pointer, out) {
+var WorldXYToTileXY = function (pointer, out) {
     if (out === undefined) {
         out = tmpTileXY;
     }
@@ -18,4 +18,4 @@ var tmpTileXY = {
     y: 0
 }
 
-export default PointerToTileXY;
+export default WorldXYToTileXY;

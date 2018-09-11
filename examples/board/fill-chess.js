@@ -24,8 +24,8 @@ class Demo extends Phaser.Scene {
         var image = texture.getSourceImage();
 
         var grid = new HexahonGrid({
-            x: 100,
-            y: 100,
+            x: 200,
+            y: 200,
             cellWidth: image.width,
             cellHeight: image.height,
             staggeraxis: staggeraxis,
@@ -41,6 +41,15 @@ class Demo extends Phaser.Scene {
                 .setTint(Random(0, 0xffffff));
             board.addChess(chess, tileX, tileY);
         }, this);
+
+        this.board = board;
+        this.print = this.add.text(0, 0, '');
+    }
+
+    update() {
+        var pointer = this.input.activePointer;
+        var tileXY = this.board.worldXYToTileXY(pointer)
+        this.print.setText(tileXY.x + ',' + tileXY.y);
     }
 }
 

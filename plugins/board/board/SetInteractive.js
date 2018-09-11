@@ -30,7 +30,7 @@ var onPointerDown = function (pointer) {
         return;
     }
 
-    var tmpTileXY = this.pointerToTileXY(pointer);
+    var tmpTileXY = this.worldXYToTileXY(pointer);
     var tileX = tmpTileXY.x,
         tileY = tmpTileXY.y;
     if (!this.contains(tileX, tileY)) {
@@ -55,7 +55,7 @@ var onPointerUp = function (pointer) {
         return;
     }
 
-    var tmpTileXY = this.pointerToTileXY(pointer);
+    var tmpTileXY = this.worldXYToTileXY(pointer);
     var tileX = tmpTileXY.x,
         tileY = tmpTileXY.y;
     if (!this.contains(tileX, tileY)) {

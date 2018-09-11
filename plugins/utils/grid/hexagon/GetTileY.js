@@ -17,14 +17,14 @@ var GetTileY = function (worldX, worldY) {
             break;
 
         case ODD_Q:
-            var tileX = this.GetTileX(worldX, worldY);
+            var tileX = this.getTileX(worldX, worldY);
             if (tileX & 1) {
                 worldY -= (height / 2);
             }
             break;
 
         case EVEN_Q:
-            var tileX = this.GetTileX(worldX, worldY);
+            var tileX = this.getTileX(worldX, worldY);
             if (tileX & 1) {
                 worldY += (height / 2);
             }

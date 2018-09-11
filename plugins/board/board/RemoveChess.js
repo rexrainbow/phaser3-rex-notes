@@ -11,6 +11,12 @@ var RemoveChess = function (gameObject, tileX, tileY, tileZ) {
             // chess is not in this board
             return this;
         }
+    } else {
+        gameObject = this.tileXYZToChess(tileX, tileY, tileZ);
+        if (!gameObject) {
+            // chess is not in this board
+            return this;
+        }
     }
 
     this.boardData.removeUID(tileX, tileY, tileZ);

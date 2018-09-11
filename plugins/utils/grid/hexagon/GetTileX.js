@@ -12,14 +12,14 @@ var GetTileX = function (worldX, worldY) {
     worldX -= this.x;
     switch (this.mode) {
         case ODD_R:
-            var tileY = this.GetTileY(worldX, worldY);
+            var tileY = this.getTileY(worldX, worldY);
             if (tileY & 1) {
                 worldX -= (this.width / 2);
             }
             break;
 
         case EVEN_R:
-            var tileY = this.GetTileY(worldX, worldY);
+            var tileY = this.getTileY(worldX, worldY);
             if (tileY & 1) {
                 worldX += (this.width / 2);
             }
