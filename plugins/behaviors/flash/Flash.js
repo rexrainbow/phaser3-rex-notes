@@ -64,7 +64,7 @@ class Flash extends EE {
     }
 
     flash(duration, repeat) {
-        this.stop();
+        // this.stop();
 
         if (IsPlainObject(duration)) {
             var config = duration;
@@ -86,6 +86,7 @@ class Flash extends EE {
 
     stop() {
         this.isRunning = false;
+        this.gameObject.setVisible(true);
     }
 
     setDuration(duration) {
