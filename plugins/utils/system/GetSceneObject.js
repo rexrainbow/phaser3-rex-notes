@@ -1,15 +1,18 @@
 'use strict'
 
-const SceneKlass = Phaser.Scene;
-
-var GetSceneObject = function (parent) {
-    if (parent instanceof SceneKlass) { // parent = scene
-        return parent;
-    } else if (parent.scene && (parent.scene instanceof SceneKlass)) { // parent = game object
-        return parent.scene;
-    } else if (parent.parent && parent.parent.scene && (parent.parent.scene instanceof SceneKlass)) { // parent = bob object
-        return parent.parent.scene;
+var GetSceneObject = function (object) {
+    if (isSceneObject(object)) { // object = scene
+        return object;
+    } else if (object.scene && isSceneObject(object.scene)) { // object = game object
+        return object.scene;
+    } else if (object.parent && object.parent.scene && isSceneObject(object.parent.scene)) { // parent = bob object
+        return object.parent.scene;
     }
+}
+
+const SceneKlass = Phaser.Scene;
+var isSceneObject = function(object) {
+    return (object instanceof SceneKlass);
 }
 
 export default GetSceneObject;

@@ -2,12 +2,15 @@
 
 // https://labs.phaser.io/view.html?src=src\physics\arcade\asteroids%20movement.js
 
+import TickTask from 'rexPlugins/utils/ticktask/TickTask.js';
 import Proxy from 'rexPlugins/utils/arcade/proxy.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class Ship {
+class Ship extends TickTask {
     constructor(gameObject, config) {
+        super(gameObject, config);
+
         this.setParent(gameObject);
         this.resetFromJSON(config);
         this.boot();
@@ -22,30 +25,24 @@ class Ship {
         this.setTurnSpeed(GetValue(o, 'turnSpeed', 300));
         this.setWrapMode(GetValue(o, 'wrap', true), GetValue(o, 'padding', 0));
         this.setCursorKeys(GetValue(o, 'cursorKeys', undefined));
-        this.tickMe = GetValue(o, 'tickMe', true); // true to enable 'preupdate' callback
         return this;
     }
 
     toJSON() {
         return {
-            tickMe: this.tickMe
+            tickingMode: this.tickingMode
         };
     }
 
     boot() {
+        super.boot();
         if (this.gameObject.on) { // oops, bob object does not have event emitter
             this.gameObject.on('destroy', this.destroy, this);
-        }
-
-        if (this.tickMe) {
-            this.scene.events.on('preupdate', this.preupdate, this);
         }
     }
 
     shutdown() {
-        if (this.tickMe) {
-            this.scene.events.off('preupdate', this.preupdate, this);
-        }
+        super.shutdown();
         this.gameObject = undefined;
         this.scene = undefined;
     }
@@ -54,16 +51,30 @@ class Ship {
         this.shutdown();
     }
 
+    startTicking() {
+        super.startTicking();
+        this.scene.events.on('preupdate', this.preupdate, this);
+    }
+
+    stopTicking() {
+        super.stopTicking();
+        this.scene.events.off('preupdate', this.preupdate, this);
+    }
+
+    get enable() {
+        return this.isRunning;
+    }
+
+    set enable(value) {
+        this.isRunning = value;
+    }
+
     setEnable(e) {
         if (e == undefined) {
             e = true;
-        } else {
-            e = !!e;
-        }
-        if (e === this.enable) {
-            return;
         }
         this.enable = e;
+        return this;
     }
 
     setMaxSpeed(speed) {

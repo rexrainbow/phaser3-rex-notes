@@ -35,8 +35,8 @@
 1. [Slider](slider.md): Drag thumb on a slider bar.
 1. [Swirl-pipeline](swirlpipeline.md): Swirl post processing filter.
 1. [TagText](tagtext.md): Displays text with multi-color, font face, or font size with tags.
-1. [TCRP.Player](tcrpplayerplugin.md): Run commands on time.
-1. [TCRP.Recorder](tcrpplayerplugin.md): Store commands with time.
+1. [TCRP.Player](tcrp-player.md): Run commands on time.
+1. [TCRP.Recorder](tcrp-recoder.md): Store commands with time.
 1. [Typing](texttyping.md): Typing text on text object.
 1. [Virtual joystick](virtualjoystick.md): Simulate curosr keys according touch events.
 1. [Webfont-loader](webfontloader.md): Load web font by google webfont loader in preload stage.

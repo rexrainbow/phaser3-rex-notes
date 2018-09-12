@@ -1,15 +1,15 @@
 'use strict'
 
+import TickTask from 'rexPlugins/utils/ticktask/TickTask.js';
 import GetSceneObject from 'rexPlugins/utils/system/GetSceneObject.js';
 
-const EE = Phaser.Events.EventEmitter;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
 
-class Flash extends EE {
+class Flash extends TickTask {
     constructor(gameObject, config) {
-        super();
+        super(gameObject, config);
 
         this.gameObject = gameObject;
         this.scene = GetSceneObject(gameObject);
@@ -24,7 +24,6 @@ class Flash extends EE {
         this.repeatCounter = GetValue(o, 'repeatCounter', 0);
         this.nowTime = GetValue(o, 'nowTime', 0);
         this.timeScale = GetValue(o, 'timeScale', 1);
-        this.tickMe = GetValue(o, 'tickMe', true); // true to enable 'update' callback
         return this;
     }
 
@@ -36,31 +35,35 @@ class Flash extends EE {
             repeatCounter: this.repeatCounter,
             nowTime: this.nowTime,
             timeScale: this.timeScale,
-            tickMe: this.tickMe
+            tickingMode: this.tickingMode
         };
     }
 
     boot() {
+        super.boot();
         if (this.gameObject.on) { // oops, bob object does not have event emitter
             this.gameObject.on('destroy', this.destroy, this);
-        }
-
-        if (this.tickMe) {
-            this.scene.events.on('update', this.update, this);
         }
     }
 
     shutdown() {
         super.shutdown();
-        if (this.tickMe) {
-            this.scene.events.off('update', this.update, this);
-        }
         this.gameObject = undefined;
         this.scene = undefined;
     }
 
     destroy() {
         this.shutdown();
+    }
+
+    startTicking() {
+        super.startTicking();
+        this.scene.events.on('update', this.update, this);
+    }
+
+    stopTicking() {
+        super.stopTicking();
+        this.scene.events.off('update', this.update, this);
     }
 
     flash(duration, repeat) {
@@ -122,15 +125,10 @@ class Flash extends EE {
                 this.repeatCounter++;
                 this.nowTime -= this.duration;
             } else {
-                this.onReachTarget();
+                this.complete();
             }
         }
         return this;
-    }
-
-    onReachTarget() {
-        this.isRunning = false;
-        this.emit('complete', this, this.gameObject);
     }
 }
 

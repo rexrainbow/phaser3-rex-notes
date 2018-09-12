@@ -1,8 +1,8 @@
 'use strict'
 
+import TickTask from 'rexPlugins/utils/ticktask/TickTask.js';
 import GetSceneObject from 'rexPlugins/utils/system/GetSceneObject.js';
 
-const EE = Phaser.Events.EventEmitter;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const DistanceBetween = Phaser.Math.Distance.Between;
@@ -10,9 +10,9 @@ const Lerp = Phaser.Math.Linear;
 const AngleBetween = Phaser.Math.Angle.Between;
 
 
-class MoveTo extends EE {
+class MoveTo extends TickTask {
     constructor(gameObject, config) {
-        super();
+        super(gameObject, config);
 
         this.gameObject = gameObject;
         this.scene = GetSceneObject(gameObject);
@@ -28,7 +28,6 @@ class MoveTo extends EE {
         this.setRotateToTarget(GetValue(o, 'rotateToTarget', false));
         this.targetX = GetValue(o, 'targetX', 0);
         this.targetY = GetValue(o, 'targetY', 0);
-        this.tickMe = GetValue(o, 'tickMe', true); // true to enable 'update' callback
         return this;
     }
 
@@ -40,31 +39,35 @@ class MoveTo extends EE {
             rotateToTarget: this.rotateToTarget,
             targetX: this.targetX,
             targetY: this.targetY,
-            tickMe: this.tickMe
+            tickingMode: this.tickingMode
         };
     }
 
     boot() {
+        super.boot();
         if (this.gameObject.on) { // oops, bob object does not have event emitter
             this.gameObject.on('destroy', this.destroy, this);
-        }
-
-        if (this.tickMe) {
-            this.scene.events.on('update', this.update, this);
         }
     }
 
     shutdown() {
         super.shutdown();
-        if (this.tickMe) {
-            this.scene.events.off('update', this.update, this);
-        }
         this.gameObject = undefined;
         this.scene = undefined;
     }
 
     destroy() {
         this.shutdown();
+    }
+
+    startTicking() {
+        super.startTicking();
+        this.scene.events.on('update', this.update, this);
+    }
+
+    stopTicking() {
+        super.stopTicking();
+        this.scene.events.off('update', this.update, this);
     }
 
     moveTo(x, y, speed) {
@@ -114,7 +117,7 @@ class MoveTo extends EE {
         var targetX = this.targetX,
             targetY = this.targetY;
         if ((curX === targetX) && (curY === targetY)) {
-            this.onReachTarget();
+            this.complete();
             return this;
         }
 
@@ -140,11 +143,6 @@ class MoveTo extends EE {
             gameObject.rotation = AngleBetween(curX, curY, newX, newY);
         }
         return this;
-    }
-
-    onReachTarget() {
-        this.isRunning = false;
-        this.emit('complete', this, this.gameObject);
     }
 }
 

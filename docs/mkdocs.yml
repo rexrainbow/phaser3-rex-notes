@@ -94,8 +94,8 @@ nav:
       - Sequence: sequence.md
       - CSV scenario: csvscenario.md
       - TCRP:
-          - Recoder: tcrprecoderplugin.md
-          - Player: tcrpplayerplugin.md
+          - Recoder: tcrp-recoder.md
+          - Player: tcrp-player.md
     - FSM: fsm.md
 - Data:
     - Data manager: datamanager.md

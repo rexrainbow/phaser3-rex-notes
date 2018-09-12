@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/tcrprecoderplugin/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/tcrp-player/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Recoder - Notes of Phaser 3</title>
+        <title>Player - Notes of Phaser 3</title>
       
     
     
@@ -128,7 +128,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Recoder
+                Player
               </span>
             
           
@@ -1710,6 +1710,18 @@
           
           
 
+
+  <li class="md-nav__item">
+    <a href="../tcrp-recoder/" title="Recoder" class="md-nav__link">
+      Recoder
+    </a>
+  </li>
+
+        
+          
+          
+          
+
   
 
 
@@ -1719,11 +1731,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        Recoder
+        Player
       </label>
     
-    <a href="./" title="Recoder" class="md-nav__link md-nav__link--active">
-      Recoder
+    <a href="./" title="Player" class="md-nav__link md-nav__link--active">
+      Player
     </a>
     
       
@@ -1778,29 +1790,29 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#start-recording" title="Start recording" class="md-nav__link">
-    Start recording
+  <a href="#load-commands" title="Load commands" class="md-nav__link">
+    Load commands
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#push-commands" title="Push commands" class="md-nav__link">
-    Push commands
+  <a href="#start-playing" title="Start playing" class="md-nav__link">
+    Start playing
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-commands" title="Get commands" class="md-nav__link">
-    Get commands
+  <a href="#events" title="Events" class="md-nav__link">
+    Events
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#pause-resume-stop-recording" title="Pause, Resume, stop recording" class="md-nav__link">
-    Pause, Resume, stop recording
+  <a href="#pause-resume-stop-playing" title="Pause, Resume, stop playing" class="md-nav__link">
+    Pause, Resume, stop playing
   </a>
   
 </li>
@@ -1813,8 +1825,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#state-of-recorder" title="State of recorder" class="md-nav__link">
-    State of recorder
+  <a href="#state-of-player" title="State of player" class="md-nav__link">
+    State of player
   </a>
   
 </li>
@@ -1839,18 +1851,6 @@
   
 </nav>
     
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../tcrpplayerplugin/" title="Player" class="md-nav__link">
-      Player
-    </a>
   </li>
 
         
@@ -2831,29 +2831,29 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#start-recording" title="Start recording" class="md-nav__link">
-    Start recording
+  <a href="#load-commands" title="Load commands" class="md-nav__link">
+    Load commands
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#push-commands" title="Push commands" class="md-nav__link">
-    Push commands
+  <a href="#start-playing" title="Start playing" class="md-nav__link">
+    Start playing
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-commands" title="Get commands" class="md-nav__link">
-    Get commands
+  <a href="#events" title="Events" class="md-nav__link">
+    Events
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#pause-resume-stop-recording" title="Pause, Resume, stop recording" class="md-nav__link">
-    Pause, Resume, stop recording
+  <a href="#pause-resume-stop-playing" title="Pause, Resume, stop playing" class="md-nav__link">
+    Pause, Resume, stop playing
   </a>
   
 </li>
@@ -2866,8 +2866,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#state-of-recorder" title="State of recorder" class="md-nav__link">
-    State of recorder
+  <a href="#state-of-player" title="State of player" class="md-nav__link">
+    State of player
   </a>
   
 </li>
@@ -2900,19 +2900,19 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/tcrprecoderplugin.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/tcrp-player.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Recoder</h1>
+                  <h1>Player</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Recorder of <strong>T</strong> ime-<strong>C</strong> ommand-<strong>R</strong> ecorder-<strong>P</strong> layer, to store commands with time.</p>
+<p>Player of <strong>T</strong> ime-<strong>C</strong> ommand-<strong>R</strong> ecorder-<strong>P</strong> layer, to run commands on time.</p>
 <ul>
 <li>Author: Rex</li>
 <li>Member of scene</li>
 </ul>
 <h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/tcrp-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rextcrpplugin.min.js">minify</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/tcrp/PlayerPlugin.js">Link</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/tcrp">Sample code</a></p>
 <p>User could import class directly, or install it by global plugin.</p>
@@ -2941,53 +2941,96 @@
 </pre></div>
 
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">recorder</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexTextTyping&#39;</span><span class="p">).</span><span class="nx">addRecorder</span><span class="p">(</span><span class="nx">scene</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">player</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexTextTyping&#39;</span><span class="p">).</span><span class="nx">addPlayer</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
+    <span class="c1">// timeUnit: 0,        // &#39;ms&#39;|0|&#39;s&#39;|&#39;sec&#39;|1</span>
+    <span class="c1">// dtMode: 0,          // &#39;abs&#39;|&#39;absolute&#39;|0|&#39;inc&#39;|&#39;increment&#39;|1</span>
+    <span class="c1">// commands: [],       // [[dt, command], [dt, command], ...]</span>
+    <span class="c1">// timeScale: 1,       // 0~1</span>
+    <span class="c1">// scope: undefined</span>
+<span class="p">});</span>
 </pre></div>
 
-<h3 id="start-recording">Start recording<a class="headerlink" href="#start-recording" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">recorder</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
-<span class="c1">// recorder.start(startAt);  // start-at time in ms</span>
+<ul>
+<li><code>timeUnit</code> : see <a href="./#load-commands">next section</a></li>
+<li><code>dtMode</code> : see <a href="./#load-commands">next section</a></li>
+<li><code>commands</code> : see <a href="./#load-commands">next section</a></li>
+<li><code>timeScale</code></li>
+</ul>
+<h3 id="load-commands">Load commands<a class="headerlink" href="#load-commands" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">player</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="nx">commands</span><span class="p">,</span> <span class="nx">scope</span><span class="p">,</span> <span class="p">{</span>
+    <span class="c1">// timeUnit: 0,        // &#39;ms&#39;|0|&#39;s&#39;|&#39;sec&#39;|1</span>
+    <span class="c1">// dtMode: 0           // &#39;abs&#39;|&#39;absolute&#39;|0|&#39;inc&#39;|&#39;increment&#39;|1</span>
+<span class="p">});</span>
 </pre></div>
 
-<h3 id="push-commands">Push commands<a class="headerlink" href="#push-commands" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">recorder</span><span class="p">.</span><span class="nx">addCommand</span><span class="p">([</span><span class="nx">fnName</span><span class="p">,</span> <span class="nx">param0</span><span class="p">,</span> <span class="nx">param1</span><span class="p">,</span> <span class="p">...]);</span>
-<span class="c1">// recorder.addCommand([command0, command1, ...]);</span>
-<span class="c1">// recorder.addCommand([fnName, param0, param1, ...], offset);  // time-offset in ms</span>
-</pre></div>
-
-<p>See also <a href="../runcommands/">Run commands</a></p>
-<h3 id="get-commands">Get commands<a class="headerlink" href="#get-commands" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">commands</span> <span class="o">=</span> <span class="nx">recorder</span><span class="p">.</span><span class="nx">getCommands</span><span class="p">();</span>        <span class="c1">// get a shallow copy of commands</span>
-<span class="c1">// var commands = recorder.getCommands(true); // get reference of commands</span>
-</pre></div>
-
-<p>Format of return commands:</p>
-<div class="codehilite"><pre><span></span><span class="p">[</span>
-    <span class="p">[</span><span class="nx">dt</span><span class="p">,</span> <span class="p">[</span><span class="nx">command</span><span class="p">]],</span>
-    <span class="p">[</span><span class="nx">dt</span><span class="p">,</span> <span class="p">[</span><span class="nx">command0</span><span class="p">,</span><span class="nx">command1</span><span class="p">]],</span>
+<ul>
+<li>Commands : see also <a href="../runcommands/">Run commands</a>
+    <div class="codehilite"><pre><span></span><span class="p">[</span>
+    <span class="p">[</span><span class="nx">dt</span><span class="p">,</span> <span class="nx">command</span><span class="p">],</span>
+    <span class="p">[</span><span class="nx">dt</span><span class="p">,</span> <span class="nx">command</span><span class="p">],</span>
     <span class="p">...</span>
 <span class="p">]</span>
+</pre></div><ul>
+<li>Format of each row :
+    <div class="codehilite"><pre><span></span><span class="p">[</span><span class="nx">dt</span><span class="p">,</span> <span class="nx">fnName</span><span class="p">,</span> <span class="nx">param0</span><span class="p">,</span> <span class="nx">param1</span><span class="p">,</span> <span class="p">...]</span>
+</pre></div>
+    <div class="codehilite"><pre><span></span><span class="p">[</span><span class="nx">dt</span><span class="p">,</span> <span class="p">[</span><span class="nx">fnName</span><span class="p">,</span> <span class="nx">param0</span><span class="p">,</span> <span class="nx">param1</span><span class="p">,</span> <span class="p">...]]</span>
+</pre></div>
+    <div class="codehilite"><pre><span></span><span class="p">[</span><span class="nx">dt</span><span class="p">,</span> <span class="p">[</span><span class="nx">command0</span><span class="p">,</span> <span class="nx">command1</span><span class="p">,</span> <span class="p">...]]</span>
+</pre></div></li>
+</ul>
+</li>
+<li>timeUnit: time-unit of dt<ul>
+<li><code>'ms'</code>, or <code>0</code> : dt in millisecond</li>
+<li><code>'s'</code>, <code>'sec'</code>, or 1 : dt in second</li>
+</ul>
+</li>
+<li>dtMode: mode of counting dt<ul>
+<li><code>'abs'</code>, <code>'absolute'</code>, or <code>0</code> : timeout = dt</li>
+<li><code>'inc'</code>, <code>'increment'</code>, <code>1</code> : timeout = dt + previous-timeout</li>
+</ul>
+</li>
+</ul>
+<h3 id="start-playing">Start playing<a class="headerlink" href="#start-playing" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">player</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
+<span class="c1">// player.start(startAt);  // start-at time in ms</span>
 </pre></div>
 
-<h3 id="pause-resume-stop-recording">Pause, Resume, stop recording<a class="headerlink" href="#pause-resume-stop-recording" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">recorder</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
-<span class="nx">recorder</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
-<span class="nx">recorder</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
+<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Complete
+    <div class="codehilite"><pre><span></span><span class="nx">player</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">player</span><span class="p">){});</span>
+</pre></div></li>
+<li>Run command
+    <div class="codehilite"><pre><span></span><span class="nx">player</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;runcommand&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">commands</span><span class="p">,</span> <span class="nx">scope</span><span class="p">){});</span>
+</pre></div></li>
+</ul>
+<h3 id="pause-resume-stop-playing">Pause, Resume, stop playing<a class="headerlink" href="#pause-resume-stop-playing" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">player</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
+<span class="nx">player</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
+<span class="nx">player</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
 </pre></div>
 
 <h3 id="seek-elapsed-time">Seek elapsed time<a class="headerlink" href="#seek-elapsed-time" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">recorder</span><span class="p">.</span><span class="nx">seek</span><span class="p">(</span><span class="nx">time</span><span class="p">);</span>   <span class="c1">// elapsed time in ms</span>
+<div class="codehilite"><pre><span></span><span class="nx">player</span><span class="p">.</span><span class="nx">seek</span><span class="p">(</span><span class="nx">time</span><span class="p">);</span>   <span class="c1">// elapsed time in ms</span>
 </pre></div>
 
-<h3 id="state-of-recorder">State of recorder<a class="headerlink" href="#state-of-recorder" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isRecording</span> <span class="o">=</span> <span class="nx">recorder</span><span class="p">.</span><span class="nx">isRecording</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">now</span> <span class="o">=</span> <span class="nx">recorder</span><span class="p">.</span><span class="nx">now</span><span class="p">;</span>
+<h3 id="state-of-player">State of player<a class="headerlink" href="#state-of-player" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isPlaying</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">isPlaying</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">completed</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">completed</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">now</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">now</span><span class="p">;</span>
 </pre></div>
 
 <h3 id="time-scale">Time-scale<a class="headerlink" href="#time-scale" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">timeScale</span> <span class="o">=</span> <span class="nx">recorder</span><span class="p">.</span><span class="nx">timeScale</span><span class="p">;</span>
-<span class="nx">recorder</span><span class="p">.</span><span class="nx">timeScale</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">;</span>
-</pre></div>
+<ul>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">player</span><span class="p">.</span><span class="nx">setTimeScale</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>  <span class="c1">// 0~1</span>
+<span class="c1">// player.timeScale = value;</span>
+</pre></div></li>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">timeScale</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">timeScale</span><span class="p">;</span>
+</pre></div></li>
+</ul>
                 
                   
                 
@@ -3008,7 +3051,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../csvscenario/" title="CSV scenario" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../tcrp-recoder/" title="Recoder" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -3017,19 +3060,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                CSV scenario
+                Recoder
               </span>
             </div>
           </a>
         
         
-          <a href="../tcrpplayerplugin/" title="Player" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../fsm/" title="FSM" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Player
+                FSM
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

@@ -56,9 +56,9 @@ var player = scene.plugins.get('rexTextTyping').addPlayer(scene, {
 });
 ```
 
-- `timeUnit` : see [next section](tcrpplayerplugin.md#load-commands)
-- `dtMode` : see [next section](tcrpplayerplugin.md#load-commands)
-- `commands` : see [next section](tcrpplayerplugin.md#load-commands)
+- `timeUnit` : see [next section](tcrp-player.md#load-commands)
+- `dtMode` : see [next section](tcrp-player.md#load-commands)
+- `commands` : see [next section](tcrp-player.md#load-commands)
 - `timeScale`
 
 ### Load commands
@@ -131,7 +131,7 @@ player.seek(time);   // elapsed time in ms
 
 ```javascript
 var isPlaying = player.isPlaying;
-var isComplete = player.isComplate;
+var completed = player.completed;
 var now = player.now;
 ```
 

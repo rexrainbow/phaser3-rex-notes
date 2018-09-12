@@ -1,78 +1,77 @@
 'use strict'
 
-import Clock from 'rexPlugins/clock.js'
+import TickTask from 'rexPlugins/utils/ticktask/TickTask.js';
 import GetSceneObject from 'rexPlugins/utils/system/GetSceneObject.js';
 import ArrayCopy from 'rexPlugins/utils/array/Copy.js';
 import RunCommands from 'rexPlugins/runcommands.js';
 
-const EE = Phaser.Events.EventEmitter;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class Player extends EE {
+class Player extends TickTask {
     constructor(parent, config) {
-        super();
+        super(parent, config);
+
         this.parent = parent;
         this.scene = GetSceneObject(parent);
-        this.clock = new Clock(parent, {
-            tickMe: false
-        });
         this.resetFromJSON(config); // this function had been called in super(config)
         this.boot();
     }
 
-    /**
-     * Reset status by JSON object
-     * @param {object} o JSON object
-     * @returns {object} this object
-     */
     resetFromJSON(o) {
+        this.isRunning = GetValue(o, 'isRunning', false);
+        this.state = GetValue(o, 'state', 0); // 0=idle, 1=run, 2=completed
         this.commands = GetValue(o, 'commands', []); // [[dt, cmds], [dt, cmds], ...]
         this.scope = GetValue(o, 'scope', undefined);
         this.setTimeUnit(GetValue(o, 'timeUnit', 0));
         this.setDtMode(GetValue(o, 'dtMode', 0));
         this.setTimeScale(GetValue(o, 'timeScale', 1));
         this.index = GetValue(o, 'index', 0);
-        this.state = GetValue(o, 'state', 0); // 0= idle, 1= run
         this.nextDt = GetValue(o, 'nextDt', 0);
-        this.clock.resetFromJSON(GetValue(o, 'clock', undefined));
+        this.seek(GetValue(o, 'now', 0));
+        this.timeScale = GetValue(o, 'timeScale', 1);
         return this;
     }
 
-    /**
-     * Return status in JSON object
-     * @returns JSON object
-     */
     toJSON() {
         return {
-            clock: this.clock.toJSON(),
+            isRunning: this.isRunning,
+            state: this.state,
             commands: this.commands,
             scope: this.scope,
             timeUnit: this.timeUnit,
             dtMode: this.dtMode,
             index: this.index,
-            state: this.state,
-            nextDt: this.nextDt
+            nextDt: this.nextDt,
+            now: this.now,
+            timeScale: this.timeScale,
+            tickingMode: this.tickingMode
         };
     }
 
     boot() {
-        this.scene.events.on('update', this.runNextCommands, this);
+        super.boot();
     }
 
     shutdown() {
         super.shutdown();
 
-        this.scene.events.off('update', this.runNextCommands, this);
-        this.clock.shutdown();
-
         this.parent = undefined;
         this.scene = undefined;
-        this.clock = undefined;
         this.commands = undefined;
     }
 
     destroy() {
         this.shutdown();
+    }
+
+    startTicking() {
+        super.startTicking();
+        this.scene.events.on('update', this.update, this);
+    }
+
+    stopTicking() {
+        super.stopTicking();
+        this.scene.events.off('update', this.update, this);
     }
 
     load(commands, scope, config) {
@@ -113,74 +112,64 @@ class Player extends EE {
     }
 
     start(startAt) {
-        this.stop();
-
-        this.index = 0;
-        this.state = 1;
-        if (this.commands.length === 0) {
-            this.complete();
-        } else {
-            this.nextDt = this.getNextDt(0);
-            this.clock.start(startAt);
+        if (startAt === undefined) {
+            startAt = 0;
         }
+
+        this.stop();
+        this.index = 0;
+        this.isRunning = true;
+        this.state = 1;
+        this.nextDt = this.getNextDt(0);
+        this.seek(startAt);
         return this;
     }
 
     pause() {
-        this.clock.pause();
+        this.isRunning = false;
         return this;
     }
 
     resume() {
-        this.clock.resume();
+        this.isRunning = true;
         return this;
     }
 
     stop() {
+        this.isRunning = false;
         this.state = 0;
-        this.clock.stop();
         return this;
     }
 
     seek(time) {
-        this.clock.seek(time);
+        this.now = time;
         return this;
     }
 
     get isPlaying() {
-        return this.clock.isRunning;
+        return this.isRunning;
     }
 
     get completed() {
-        return (this.state === 0);
-    }
-
-    get timeScale() {
-        return this.clock.timeScale;
-    }
-
-    set timeScale(value) {
-        this.clock.timeScale = value;
+        return (this.state === 2);
     }
 
     setTimeScale(value) {
         this.timeScale = value;
     }
 
-    get now() {
-        return this.clock.now;
-    }
-
-    runNextCommands(time, delta) {
-        if (this.timeScale === 0) {
-            return;
+    update(time, delta) {
+        if (!this.isRunning) {
+            return this;
         }
 
-        var clock = this.clock;
-        var nowTime = clock.update(time, delta).now;
-        if (!clock.isRunning ||
-            (this.nextDt > nowTime)) {
-            return;
+        if ((this.timeScale === 0) || (delta === 0)) {
+            return this;
+        }
+
+        this.now += (delta * this.timeScale);
+        if (this.nextDt > this.now) {
+            return this;
         }
 
         while (1) {
@@ -196,13 +185,13 @@ class Player extends EE {
 
             if (this.index === (this.commands.length - 1)) {
                 this.complete();
-                return;
+                return this;
             } else {
                 // next dt
                 this.index++; // point to next item
                 this.nextDt = this.getNextDt(this.nextDt);
-                if (this.nextDt > nowTime) {
-                    return;
+                if (this.nextDt > this.now) {
+                    return this;
                 }
                 // next dt
             }
@@ -211,9 +200,8 @@ class Player extends EE {
     }
 
     complete() {
-        this.state = 0;
-        this.clock.stop();
-        this.emit('complete', this);
+        super.complete();
+        this.state = 2;
     }
 
     getNextDt(currentDt) {

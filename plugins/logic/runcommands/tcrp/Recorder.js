@@ -12,11 +12,6 @@ class Recorder {
         this.resetFromJSON(config); // this function had been called in super(config)
     }
 
-    /**
-     * Reset status by JSON object
-     * @param {object} o JSON object
-     * @returns {object} this object
-     */
     resetFromJSON(o) {
         var clockConfig = GetFastValue(o, 'clock', undefined);
         this.clock.resetFromJSON(clockConfig);
@@ -24,10 +19,6 @@ class Recorder {
         return this;
     }
 
-    /**
-     * Return status in JSON object
-     * @returns JSON object
-     */
     toJSON() {
         return {
             clock: this.clock.toJSON(),

@@ -1,11 +1,14 @@
 'use strict'
 
+import TickTask from 'rexPlugins/utils/ticktask/TickTask.js';
 import GetSceneObject from 'rexPlugins/utils/system/GetSceneObject.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class Clock {
+class Clock extends TickTask {
     constructor(parent, config) {
+        super(parent, config);
+
         this.parent = parent;
         this.scene = GetSceneObject(this.parent);
         this.resetFromJSON(config);
@@ -13,36 +16,31 @@ class Clock {
     }
 
     resetFromJSON(o) {
-        this.state = GetValue(o, 'state', 0); // 0=IDLE, 1=RUN
-        this.now = GetValue(o, 'now', 0);
+        this.isRunning = GetValue(o, 'isRunning', false);
         this.timeScale = GetValue(o, 'timeScale', 1);
-        this.tickMe = GetValue(o, 'tickMe', true); // true to enable 'update' callback
+        this.now = GetValue(o, 'now', 0);        
         return this;
     }
 
     toJSON() {
         return {
-            state: this.state,
-            now: this.now,
+            isRunning: this.isRunning,
             timeScale: this.timeScale,
-            tickMe: this.tickMe
+            now: this.now,            
+            tickingMode: this.tickingMode
         };
     }
 
     boot() {
+        super.boot();
+
         if (this.parent.on) {
             this.parent.on('destroy', this.destroy, this);
-        }
-
-        if (this.tickMe) {
-            this.scene.events.on('update', this.update, this);
         }
     }
 
     shutdown() {
-        if (this.tickMe) {
-            this.scene.events.off('update', this.update, this);
-        }
+        super.shutdown();
         this.parent = undefined;
         this.scene = undefined;
     }
@@ -51,27 +49,37 @@ class Clock {
         this.shutdown();
     }
 
+    startTicking() {
+        super.startTicking();
+        this.scene.events.on('update', this.update, this);
+    }
+
+    stopTicking() {
+        super.stopTicking();
+        this.scene.events.off('update', this.update, this);
+    }
+
     start(startAt) {
         if (startAt === undefined) {
             startAt = 0;
         }
-        this.state = 1;
+        this.isRunning = true;
         this.now = startAt;
         return this;
     }
 
     pause() {
-        this.state = 0;
+        this.isRunning = false;
         return this;
     }
 
     resume() {
-        this.state = 1;
+        this.isRunning = true;
         return this;
     }
 
     stop() {
-        this.state = 0;
+        this.isRunning = false;
         return this;
     }
 
@@ -80,12 +88,8 @@ class Clock {
         return this;
     }
 
-    get isRunning() {
-        return (this.state === 1);
-    }
-
     update(time, delta) {
-        if ((this.state === 0) || (this.timeScale === 0)) {
+        if ((!this.isRunning) || (this.timeScale === 0)) {
             return this;
         }
         this.now += (delta * this.timeScale);

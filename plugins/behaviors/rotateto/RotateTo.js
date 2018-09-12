@@ -1,8 +1,8 @@
 'use strict'
 
+import TickTask from 'rexPlugins/utils/ticktask/TickTask.js';
 import GetSceneObject from 'rexPlugins/utils/system/GetSceneObject.js';
 
-const EE = Phaser.Events.EventEmitter;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const MathWrap = Phaser.Math.Wrap;
@@ -12,9 +12,9 @@ const DegToRad = Phaser.Math.DegToRad;
 const AngleBetween = Phaser.Math.Angle.Between;
 
 
-class RotateTo extends EE {
+class RotateTo extends TickTask {
     constructor(gameObject, config) {
-        super();
+        super(gameObject, config);
 
         this.gameObject = gameObject;
         this.scene = GetSceneObject(gameObject);
@@ -29,7 +29,6 @@ class RotateTo extends EE {
         this.setSpeed(GetValue(o, 'speed', 180));
         this.target = GetValue(o, 'target', 0);
         this.dir = GetValue(o, 'dir', 0);
-        this.tickMe = GetValue(o, 'tickMe', true); // true to enable 'update' callback
         return this;
     }
 
@@ -40,31 +39,35 @@ class RotateTo extends EE {
             speed: this.speed,
             target: this.target,
             dir: this.dir,
-            tickMe: this.tickMe
+            tickingMode: this.tickingMode
         };
     }
 
     boot() {
+        super.boot();
         if (this.gameObject.on) { // oops, bob object does not have event emitter
             this.gameObject.on('destroy', this.destroy, this);
-        }
-
-        if (this.tickMe) {
-            this.scene.events.on('update', this.update, this);
         }
     }
 
     shutdown() {
         super.shutdown();
-        if (this.tickMe) {
-            this.scene.events.off('update', this.update, this);
-        }
         this.gameObject = undefined;
         this.scene = undefined;
     }
 
     destroy() {
         this.shutdown();
+    }
+
+    startTicking() {
+        super.startTicking();
+        this.scene.events.on('update', this.update, this);
+    }
+
+    stopTicking() {
+        super.stopTicking();
+        this.scene.events.off('update', this.update, this);
     }
 
     rotateTo(angle, dir, speed) {
@@ -118,7 +121,7 @@ class RotateTo extends EE {
         var targetRad = WrapAngle(DegToRad(target)); // -PI~PI
         var gameObject = this.gameObject;
         if (targetRad === gameObject.rotation) {
-            this.onReachTarget();
+            this.complete();
             return this;
         }
 
@@ -159,11 +162,6 @@ class RotateTo extends EE {
 
         gameObject.rotation = DegToRad(newAngle);
         return this;
-    }
-
-    onReachTarget() {
-        this.isRunning = false;
-        this.emit('complete', this, this.gameObject);
     }
 }
 
