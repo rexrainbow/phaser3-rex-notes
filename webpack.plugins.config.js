@@ -80,6 +80,9 @@ module.exports = {
         'swirlpipelineplugin': './plugins/swirlpipeline-plugin.js',
         'pixelationpipelineplugin': './plugins/pixelationpipeline-plugin.js',
 
+        // board
+        'boardplugin': './plugins/board-plugin.js',
+
     },
     output: {
         pathinfo: true,

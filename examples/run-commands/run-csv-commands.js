@@ -1,5 +1,3 @@
-'use strict'
-
 import CSVToArray from 'rexPlugins/csvtoarray.js';
 import runCommands from 'rexPlugins/runcommands.js';
 

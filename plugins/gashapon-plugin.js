@@ -1,5 +1,3 @@
-'use strict'
-
 import Gashapon from './gashapon.js';
 
 class GashaponPlugin extends Phaser.Plugins.BasePlugin {

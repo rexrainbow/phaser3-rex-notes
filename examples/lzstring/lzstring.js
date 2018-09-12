@@ -1,5 +1,3 @@
-'use strict'
-
 import LZStringPlugin from 'rexPlugins/lzstring-plugin.js';
 
 const GetRandom = Phaser.Utils.Array.GetRandom;

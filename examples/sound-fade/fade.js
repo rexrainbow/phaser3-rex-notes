@@ -1,5 +1,3 @@
-'use strict'
-
 import SoundFadePlugin from 'rexPlugins/soundfade-plugin.js';
 
 const Format = Phaser.Utils.String.Format;

@@ -1,5 +1,3 @@
-'use strict'
-
 import Hexagon from 'rexPlugins/utils/grid/hexagon/Hexagon.js';
 
 class HexagonGrid extends Hexagon{

@@ -1,5 +1,3 @@
-'use strict'
-
 var GetSceneObject = function (object) {
     if (isSceneObject(object)) { // object = scene
         return object;

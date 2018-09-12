@@ -1,5 +1,3 @@
-'use strict'
-
 import runCommands from 'rexPlugins/runcommands.js';
 
 const Map = Phaser.Structs.Map;

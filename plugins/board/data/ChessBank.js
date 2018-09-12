@@ -1,4 +1,3 @@
-'use strict'
 import Bank from 'rexPlugins/bank.js';
 
 var ChessBank = new Bank({

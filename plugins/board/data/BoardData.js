@@ -1,5 +1,3 @@
-'use strict'
-
 import Clear from 'rexPlugins/utils/object/Clear.js';
 import IsEmpty from 'rexPlugins/utils/object/IsEmpty.js';
 

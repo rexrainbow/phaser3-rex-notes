@@ -1,5 +1,3 @@
-'use strict'
-
 import MoveTo from './moveto.js';
 
 class MoveToPlugin extends Phaser.Plugins.BasePlugin {

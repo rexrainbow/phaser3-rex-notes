@@ -1,5 +1,3 @@
-'use strict'
-
 import RotateToPlugin from 'rexPlugins/rotateto-plugin.js';
 
 class Demo extends Phaser.Scene {

@@ -1,5 +1,3 @@
-'use strict'
-
 import Clock from 'rexPlugins/clock.js'
 import Clone from 'rexPlugins/utils/object/Clone.js';
 
@@ -7,9 +5,11 @@ const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 
 class Recorder {
     constructor(parent, config) {
-        this.clock = new Clock(parent);
         this.parent = parent;
+        this.scene = GetSceneObject(parent);
+        this.clock = new Clock(parent);
         this.resetFromJSON(config); // this function had been called in super(config)
+        this.boot();
     }
 
     resetFromJSON(o) {
@@ -26,8 +26,13 @@ class Recorder {
         };
     }
 
+    boot() {}
+
     shutdown() {
         this.clock.shutdown();
+
+        this.parent = undefined;
+        this.scene = undefined;
         this.commands = undefined;
     }
 

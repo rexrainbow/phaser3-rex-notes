@@ -1,5 +1,3 @@
-'use strict'
-
 import Clone from 'rexPlugins/utils/object/Clone.js';
 
 var SetInteractive = function (enable) {
@@ -9,7 +7,8 @@ var SetInteractive = function (enable) {
     if (!this.input) {
         this.input = {
             enable: true,
-            preTouchedChess: [],
+            preTileX: undefined,
+            preTileY: undefined
         };
         this.scene.input.on('pointerdown', onPointerDown, this);
         this.scene.input.on('pointerup', onPointerUp, this);
@@ -23,59 +22,87 @@ var SetInteractive = function (enable) {
     }
 
     this.input.enable = enable;
+    return this;
 };
 
 var onPointerDown = function (pointer) {
-    if (this.grid === undefined) {
+    var tmpTileXY = this.worldXYToTileXY(pointer.x, pointer.y);
+    if (!tmpTileXY) {
         return;
     }
-
-    var tmpTileXY = this.worldXYToTileXY(pointer);
     var tileX = tmpTileXY.x,
         tileY = tmpTileXY.y;
     if (!this.contains(tileX, tileY)) {
         return;
     }
-    this.emit('celldown', this, tileX, tileY);
+    this.emit('tiledown', pointer, tmpTileXY);
 
     tmpChess.length = 0;
-    var chess = this.tileXYToChess(tileX, tileY, tmpChess);
-    if (chess.length === 0) {
+    var gameObjects = this.tileXYToChess(tileX, tileY, tmpChess);
+    if (gameObjects.length === 0) {
         return;
     }
-    Clone(chess, this.input.preTouchedChess);
-    for (var i = 0, cnt = chess.length; i < cnt; i++) {
-        this.emit('chessdown', this, chess[i]);
-        this.emit('chessover', this, chess[i]);
+    for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+        this.emit('gameobjectdown', pointer, gameObjects[i]);
     }
+
+    var inputData = this.input;
+    inputData.preTileX = tileX;
+    inputData.preTileY = tileY;
 };
 
 var onPointerUp = function (pointer) {
-    if (this.grid === undefined) {
+    var tmpTileXY = this.worldXYToTileXY(pointer.x, pointer.y);
+    if (!tmpTileXY) {
         return;
     }
-
-    var tmpTileXY = this.worldXYToTileXY(pointer);
     var tileX = tmpTileXY.x,
         tileY = tmpTileXY.y;
     if (!this.contains(tileX, tileY)) {
         return;
     }
-    this.emit('cellup', this, tileX, tileY);
+    this.emit('tileup', pointer, tmpTileXY);
 
     tmpChess.length = 0;
-    var chess = this.tileXYToChess(tileX, tileY, tmpChess);
-    if (chess.length === 0) {
+    var gameObjects = this.tileXYToChess(tileX, tileY, tmpChess);
+    if (gameObjects.length === 0) {
         return;
     }
-    for (var i = 0, cnt = chess.length; i < cnt; i++) {
-        this.emit('chessup', this, chess[i]);
-        this.emit('chessout', this, chess[i]);
+    for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+        this.emit('gameobjectup', pointer, gameObjects[i]);
     }
-    this.input.preTouchedChess.length = 0;
 };
 
-var onPointerMove = function (pointer) {};
+var onPointerMove = function (pointer) {
+    var tmpTileXY = this.worldXYToTileXY(pointer.x, pointer.y);
+    if (!tmpTileXY) {
+        return;
+    }
+    var tileX = tmpTileXY.x,
+        tileY = tmpTileXY.y;
+    if (!this.contains(tileX, tileY)) {
+        return;
+    }
+
+    var inputData = this.input;
+    if ((inputData.preTileX === tileX) && (inputData.preTileY === tileY)) {
+        return;
+    }
+    this.emit('tilemove', pointer, tmpTileXY);
+
+    tmpChess.length = 0;
+    var gameObjects = this.tileXYToChess(tileX, tileY, tmpChess);
+    if (gameObjects.length === 0) {
+        return;
+    }
+    for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+        this.emit('gameobjectmove', pointer, gameObjects[i]);
+    }
+
+    var inputData = this.input;
+    inputData.preTileX = tileX;
+    inputData.preTileY = tileY;
+};
 
 var tmpChess = [];
 

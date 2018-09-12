@@ -1,5 +1,3 @@
-'use strict'
-
 import Flash from './flash.js';
 
 class FlashPlugin extends Phaser.Plugins.BasePlugin {

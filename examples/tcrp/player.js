@@ -1,5 +1,3 @@
-'use strict'
-
 import TCRPPlugin from 'rexPlugins/tcrp-plugin.js';
 
 const PlayerPlugin = TCRPPlugin.Player;

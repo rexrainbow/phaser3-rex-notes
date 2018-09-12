@@ -1,5 +1,3 @@
-'use strict'
-
 import SliderPlugin from 'rexPlugins/slider-plugin.js';
 
 class Demo extends Phaser.Scene {

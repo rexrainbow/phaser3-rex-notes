@@ -1,5 +1,3 @@
-'use strict'
-
 var Clear = function (obj) {
     if (Array.isArray(obj)) {
         obj.length = 0;

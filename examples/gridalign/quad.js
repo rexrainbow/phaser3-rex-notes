@@ -1,5 +1,3 @@
-'use strict'
-
 import GridAlignPlugin from 'rexPlugins/gridalign-plugin.js';
 import RhombusPlugin from 'rexPlugins/rhombus-plugin.js';
 

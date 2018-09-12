@@ -1,5 +1,3 @@
-'use strict'
-
 var Copy = function (dest, src, startIdx, endIdx) {
     if (startIdx === undefined) {
         startIdx = 0

@@ -1,5 +1,3 @@
-'use strict'
-
 import AwaitLoaderPlugin from 'rexPlugins/awaitloader-plugin.js';
 
 class Demo extends Phaser.Scene {

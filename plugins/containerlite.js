@@ -1,5 +1,3 @@
-'use strict'
-
 import ContainerLite from './gameobjects/containerlite/ContainerLite.js';
 
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;

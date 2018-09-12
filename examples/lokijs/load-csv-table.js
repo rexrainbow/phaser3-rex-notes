@@ -1,5 +1,3 @@
-'use strict'
-
 import Papa from 'rexPlugins/utils/papaparser/papaparse.js';
 import loki from 'rexPlugins/utils/lokijs/lokijs.min.js';
 

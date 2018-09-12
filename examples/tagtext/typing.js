@@ -1,5 +1,3 @@
-'use strict'
-
 import TagTextPlugin from 'rexPlugins/tagtext-plugin.js';
 import TextTypingPlugin from 'rexPlugins/texttyping-plugin.js';
 

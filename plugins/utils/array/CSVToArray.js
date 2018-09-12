@@ -1,5 +1,3 @@
-'use strict'
-
 // copy from    
 // http://www.bennadel.com/blog/1504-Ask-Ben-Parsing-CSV-Strings-With-Javascript-Exec-Regular-Expression-Command.htm
 // This will parse a delimited string into an array of

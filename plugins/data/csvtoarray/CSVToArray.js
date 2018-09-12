@@ -1,5 +1,3 @@
-'use strict'
-
 import CSVParser from 'rexPlugins/utils/papaparser/papaparse.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;

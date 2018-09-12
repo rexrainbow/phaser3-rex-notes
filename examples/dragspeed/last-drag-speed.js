@@ -1,5 +1,3 @@
-'use strict'
-
 import DragSpeedPlugin from 'rexPlugins/dragspeed-plugin.js';
 
 class Demo extends Phaser.Scene {

@@ -1,5 +1,3 @@
-'use strict'
-
 var FLOAT = /^\s*-?(\d*\.?\d+|\d+\.?\d*)(e[-+]?\d+)?\s*$/i;
 var convert = function (s) {
     if (typeof (s) !== 'string') {

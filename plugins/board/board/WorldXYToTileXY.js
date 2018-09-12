@@ -1,19 +1,15 @@
-'use strict'
-
-var WorldXYToTileXY = function (pointer, out) {
+var WorldXYToTileXY = function (worldX, worldY, out) {
     if (out === undefined) {
-        out = tmpTileXY;
+        out = tmp;
     }
     if (this.grid === undefined) {
-        return out;
+        return null;
     }
-    var worldX = pointer.x;
-    var worldY = pointer.y;
     out.x = this.grid.getTileX(worldX, worldY);
     out.y = this.grid.getTileY(worldX, worldY);
     return out;
 }
-var tmpTileXY = {
+var tmp = {
     x: 0,
     y: 0
 }

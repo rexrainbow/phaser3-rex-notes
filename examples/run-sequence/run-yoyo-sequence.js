@@ -1,5 +1,3 @@
-'use strict'
-
 import SequencePlugin from 'rexPlugins/sequence-plugin.js';
 
 class ActionKlass extends Phaser.Events.EventEmitter {

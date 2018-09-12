@@ -1,5 +1,3 @@
-'use strict'
-
 var SetBoardHeight = function (height) {
     if (this.infinityMode) {
         return this;

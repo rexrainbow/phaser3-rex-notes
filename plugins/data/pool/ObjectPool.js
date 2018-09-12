@@ -1,5 +1,3 @@
-'use strict'
-
 import Pool from 'rexPlugins/pool.js';
 
 class ObjectPool extends Pool {

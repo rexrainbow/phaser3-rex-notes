@@ -1,5 +1,3 @@
-'use strict'
-
 import RotateTo from './rotateto.js';
 
 class RotateToPlugin extends Phaser.Plugins.BasePlugin {

@@ -1,6 +1,3 @@
-
-'use strict'
-
 import loaderCallback from './loader/webfontloader/webFontLoaderCallback.js';
 
 class WebFontLoaderPlugin extends Phaser.Plugins.BasePlugin {

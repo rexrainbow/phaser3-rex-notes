@@ -1,5 +1,3 @@
-'use strict'
-
 import Papa from 'rexPlugins/utils/papaparser/papaparse.js';
 
 class Demo extends Phaser.Scene {

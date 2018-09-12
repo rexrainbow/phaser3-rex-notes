@@ -1,5 +1,3 @@
-'use strict'
-
 import MoveToPlugin from 'rexPlugins/moveto-plugin.js';
 
 class Demo extends Phaser.Scene {

@@ -1,5 +1,3 @@
-'use strict'
-
 import Drag from './drag.js';
 
 class DragPlugin extends Phaser.Plugins.BasePlugin {

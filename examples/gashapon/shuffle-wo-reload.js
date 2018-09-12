@@ -1,5 +1,3 @@
-'use strict'
-
 import GashaponPlugin from 'rexPlugins/gashapon-plugin.js';
 
 class Demo extends Phaser.Scene {

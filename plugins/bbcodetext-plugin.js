@@ -1,5 +1,3 @@
-'use strict'
-
 import BBCodeText from './gameobjects/bbocdetext/BbcodeText.js';
 
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;

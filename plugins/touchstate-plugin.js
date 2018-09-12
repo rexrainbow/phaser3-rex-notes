@@ -1,5 +1,3 @@
-'use strict'
-
 import TouchState from './touchstate.js';
 
 class TouchStatePlugin extends Phaser.Plugins.BasePlugin {

@@ -1,4 +1,3 @@
-'use strict'
 import GridTablePlugin from 'rexPlugins/gridtable-plugin.js';
 import TouchStatePlugin from 'rexPlugins/touchstate-plugin.js';
 import ObjectPoolPlugin from 'rexPlugins/objectpool-plugin.js';

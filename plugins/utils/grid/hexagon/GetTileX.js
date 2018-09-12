@@ -1,5 +1,3 @@
-'use strict'
-
 import CONST from './const.js';
 
 const ODD_R = CONST.ODD_R;

@@ -1,5 +1,3 @@
-'use strict'
-
 // https://labs.phaser.io/view.html?src=src\physics\arcade\asteroids%20movement.js
 
 import TickTask from 'rexPlugins/utils/ticktask/TickTask.js';

@@ -1,5 +1,3 @@
-'use strict'
-
 import ContainerLitePlugin from 'rexPlugins/containerlite-plugin.js';
 
 class Demo extends Phaser.Scene {

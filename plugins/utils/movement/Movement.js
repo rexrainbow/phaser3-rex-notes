@@ -1,5 +1,3 @@
-'use strict'
-
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Movement {

@@ -1,5 +1,3 @@
-'use strict'
-
 import firebase from 'firebase/app';
 import 'firebase/storage';
 import firebaseConfig from './firebaseConfig.js';

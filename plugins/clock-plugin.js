@@ -1,5 +1,3 @@
-'use strict'
-
 import Clock from './clock.js';
 
 class ClockPlugin extends Phaser.Plugins.BasePlugin {

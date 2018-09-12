@@ -1,5 +1,3 @@
-'use strict'
-
 import ScrollerPlugin from 'rexPlugins/scroller-plugin.js';
 
 const slidingDeceleration = 5000;

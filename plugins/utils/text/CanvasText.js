@@ -1,5 +1,3 @@
-'use strict'
-
 import PensManagerKlass from './PensManager.js';
 import CONST from './const.js';
 import WrapText from './WrapText.js';

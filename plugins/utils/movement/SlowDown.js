@@ -1,5 +1,3 @@
-'use strict'
-
 import Movement from './Movement.js';
 
 class SlowDown {

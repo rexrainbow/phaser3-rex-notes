@@ -1,5 +1,3 @@
-'use strict'
-
 var GridAlign = function (gameObject, tileX, tileY, tileZ) {
     var grid = this.grid;
     if (!grid) {

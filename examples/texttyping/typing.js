@@ -1,5 +1,3 @@
-'use strict'
-
 import TextTypingPlugin from 'rexPlugins/texttyping-plugin.js';
 
 class Demo extends Phaser.Scene {

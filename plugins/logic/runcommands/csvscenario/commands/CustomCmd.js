@@ -1,5 +1,3 @@
-'use strict'
-
 import BaseCmd from './BaseCmd.js';
 import ArrayCopy from 'rexPlugins/utils/array/Copy.js';
 import RunCommands from 'rexPlugins/runcommands.js';

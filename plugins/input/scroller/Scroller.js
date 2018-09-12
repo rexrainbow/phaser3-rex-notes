@@ -1,5 +1,3 @@
-'use strict'
-
 import GetSceneObject from 'rexPlugins/utils/system/GetSceneObject.js';
 import State from './State.js';
 import DrapSpeed from 'rexPlugins/dragspeed.js';

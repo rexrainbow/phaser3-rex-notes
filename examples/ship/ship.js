@@ -1,5 +1,3 @@
-'use strict'
-
 import ShipPlugin from 'rexPlugins/ship-plugin.js';
 
 class Demo extends Phaser.Scene {

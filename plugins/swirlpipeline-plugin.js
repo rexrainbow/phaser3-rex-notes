@@ -1,5 +1,3 @@
-'use strict'
-
 import Swirlpipeline from './swirlpipeline.js';
 
 class SwirlpipelinePlugin extends Phaser.Plugins.BasePlugin {

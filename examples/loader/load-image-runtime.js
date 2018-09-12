@@ -1,5 +1,3 @@
-'use strict'
-
 const ImageFile = Phaser.Loader.FileTypes.ImageFile;
 const XHRLoader = Phaser.Loader.XHRLoader;
 

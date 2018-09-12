@@ -1,5 +1,3 @@
-'use strict'
-
 import TickTask from 'rexPlugins/utils/ticktask/TickTask.js';
 import GetSceneObject from 'rexPlugins/utils/system/GetSceneObject.js';
 

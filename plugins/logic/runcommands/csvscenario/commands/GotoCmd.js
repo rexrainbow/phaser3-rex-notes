@@ -1,4 +1,3 @@
-'use strict'
 import BaseCmd from './BaseCmd.js';
 
 class GotoCmd extends BaseCmd {

@@ -1,5 +1,3 @@
-'use strict'
-
 import FSM from './fsm.js';
 
 class FSMPlugin extends Phaser.Plugins.BasePlugin {

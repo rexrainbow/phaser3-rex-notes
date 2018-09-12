@@ -1,5 +1,3 @@
-'use strict'
-
 const HSVToRGB = Phaser.Display.Color.HSVToRGB;
 const DegToRad = Phaser.Math.DegToRad;
 

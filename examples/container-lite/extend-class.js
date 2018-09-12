@@ -1,5 +1,3 @@
-'use strict'
-
 import ContainerLite from 'rexPlugins/containerlite.js';
 
 class MyContainer extends ContainerLite {

@@ -1,5 +1,3 @@
-'use strict'
-
 import loki from 'rexPlugins/utils/lokijs/lokijs.min.js';
 
 class Demo extends Phaser.Scene {

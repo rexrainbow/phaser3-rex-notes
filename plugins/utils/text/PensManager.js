@@ -1,5 +1,3 @@
-'use strict'
-
 import PoolKlass from 'rexPlugins/utils/object/Stack.js';
 import PenKlass from './Pen.js';
 import CONST from './const.js';

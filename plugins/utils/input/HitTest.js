@@ -1,5 +1,3 @@
-'use strict'
-
 var HitTest = function (pointer, gameObject) {
     if (!pointer.isDown) {
         return false;

@@ -1,5 +1,3 @@
-'use strict'
-
 import lzstring from 'rexPlugins/utils/lzstring/lz-string.min.js';
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 

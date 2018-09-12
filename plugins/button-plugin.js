@@ -1,5 +1,3 @@
-'use strict'
-
 import Button from './button.js';
 
 class ButtonPlugin extends Phaser.Plugins.BasePlugin {

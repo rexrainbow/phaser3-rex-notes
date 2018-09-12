@@ -1,5 +1,3 @@
-'use strict'
-
 import EightDirection from './eightdirection.js';
 
 class EightDirectionPlugin extends Phaser.Plugins.BasePlugin {

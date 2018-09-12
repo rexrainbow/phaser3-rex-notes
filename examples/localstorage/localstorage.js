@@ -1,5 +1,3 @@
-'use strict'
-
 class Demo extends Phaser.Scene {
 
     constructor() {

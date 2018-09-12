@@ -1,5 +1,3 @@
-'use strict'
-
 import AwaitFile from './awaitFile.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;

@@ -1,5 +1,3 @@
-'use strict'
-
 import WebFontLoaderPlugin from 'rexPlugins/webfontloader-plugin.js';
 
 var sceneConfig = {

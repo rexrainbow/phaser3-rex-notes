@@ -1,5 +1,3 @@
-'use strict'
-
 import GridAlignPlugin from 'rexPlugins/gridalign-plugin.js';
 import HexagonPlugin from 'rexPlugins/hexagon-plugin.js';
 

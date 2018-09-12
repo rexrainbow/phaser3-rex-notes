@@ -1,5 +1,3 @@
-'use strict'
-
 import midiParser from 'rexPlugins/utils/midi-parser/midi-parser.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;

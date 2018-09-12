@@ -1,5 +1,3 @@
-'use strict'
-
 import Fade from './fade.js';
 import fadeOutDestroy from './fade-out-destroy.js';
 

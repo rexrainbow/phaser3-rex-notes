@@ -1,5 +1,3 @@
-'use strict'
-
 var GetWorldX = function (tileX, tileY) {
     var worldX;
     switch (this.mode) {

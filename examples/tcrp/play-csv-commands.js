@@ -1,5 +1,3 @@
-'use strict'
-
 import CSVToArrayPlugin from 'rexPlugins/csvtoarray-plugin.js';
 import TCRPPlugin from 'rexPlugins/tcrp-plugin.js';
 

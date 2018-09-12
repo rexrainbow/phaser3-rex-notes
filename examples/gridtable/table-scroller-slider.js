@@ -1,4 +1,3 @@
-'use strict'
 import GridTablePlugin from 'rexPlugins/gridtable-plugin.js';
 import ScrollerPlugin from 'rexPlugins/scroller-plugin.js';
 import SliderPlugin from 'rexPlugins/slider-plugin.js';

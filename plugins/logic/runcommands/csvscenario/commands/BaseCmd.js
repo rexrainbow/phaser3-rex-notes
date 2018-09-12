@@ -1,4 +1,3 @@
-'use strict'
 class BaseCmd {
     constructor(scenario, type) {
         this.scenario = scenario;

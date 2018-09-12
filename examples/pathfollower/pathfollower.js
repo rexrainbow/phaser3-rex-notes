@@ -1,5 +1,3 @@
-'use strict'
-
 import PathFollowerPlugin from 'rexPlugins/pathfollower-plugin.js';
 
 class Demo extends Phaser.Scene {

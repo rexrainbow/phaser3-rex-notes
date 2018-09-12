@@ -1,5 +1,3 @@
-'use strict'
-
 import ChessBank from './ChessBank.js';
 
 const uidKey = ChessBank.uidKey;

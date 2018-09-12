@@ -1,5 +1,3 @@
-'use strict'
-
 import TagText from './gameobjects/tagtext/TagText.js';
 
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;

@@ -1,5 +1,3 @@
-'use strict'
-
 import ChessBank from '../data/ChessBank.js';
 import BoardData from '../data/BoardData.js';
 import ChessData from '../data/ChessData.js';
@@ -16,6 +14,7 @@ import ForEachTileXY from './ForEachTileXY.js';
 import WorldXYToTileXY from './WorldXYToTileXY.js';
 import SetInteractive from './SetInteractive.js';
 
+
 const EE = Phaser.Events.EventEmitter;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const uidKey = ChessBank.uidKey;
@@ -30,8 +29,8 @@ class Board extends EE {
         this.setGrid(GetValue(config, 'grid', undefined));
         this.setWrapMode(GetValue(config, 'wrap', false));
         this.setInfinityBoard(GetValue(config, 'inifinity', false));
-        this.setBoardWidth(GetValue(config, 'width', 8));
-        this.setBoardHeight(GetValue(config, 'height', 8));
+        this.setBoardWidth(GetValue(config, 'width', 0));
+        this.setBoardHeight(GetValue(config, 'height', 0));
     }
 
     shutdown() {
@@ -117,9 +116,30 @@ class Board extends EE {
     uidToChess(uid) {
         if (uid == null) {
             return null;
+        } else {
+            // single uid
+            if (!this.boardData.exists(uid)) {
+                return null;
+            }
+            return ChessBank.get(uid);
         }
-        return ChessBank.get(uid);
     }
+
+    uidArrayToChess(uid, out) {
+        if (out === undefined) {
+            out = [];
+        }
+        var uidArray = uid;
+        for (var i = 0, cnt = uidArray.length; i < cnt; i++) {
+            uid = uidArray[i];
+            if (!this.boardData.exists(uid)) {
+                continue;
+            }
+            out.push(ChessBank.get(uid));
+        }
+        return out;
+    }
+
 
     tileXYZToChess(tileX, tileY, tileZ) {
         var uid = this.boardData.getUID(tileX, tileY, tileZ);

@@ -1,5 +1,3 @@
-'use strict'
-
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Key = Phaser.Input.Keyboard.Key;
 const GetDist = Phaser.Math.Distance.Between;

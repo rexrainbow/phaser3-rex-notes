@@ -1,5 +1,3 @@
-'use strict'
-
 import VirtualJoyStickPlugin from 'rexPlugins/virtualjoystick-plugin.js';
 
 class Demo extends Phaser.Scene {

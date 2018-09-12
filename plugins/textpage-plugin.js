@@ -1,5 +1,3 @@
-'use strict'
-
 import TextPage from './textpage.js';
 
 class TextPagePlugin extends Phaser.Plugins.BasePlugin {

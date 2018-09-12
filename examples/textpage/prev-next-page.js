@@ -1,5 +1,3 @@
-'use strict'
-
 import TextPagePlugin from 'rexPlugins/textpage-plugin.js'
 
 class Demo extends Phaser.Scene {

@@ -1,5 +1,3 @@
-'use strict'
-
 import GetSceneObject from 'rexPlugins/utils/system/GetSceneObject.js';
 
 const TextKlass = Phaser.GameObjects.Text;

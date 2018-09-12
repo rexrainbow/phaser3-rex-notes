@@ -1,5 +1,3 @@
-'use strict'
-
 var Offset = function (hexagon, x, y) {
     var points = hexagon.points,
         point;

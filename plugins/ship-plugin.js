@@ -1,5 +1,3 @@
-'use strict'
-
 import Ship from './ship.js';
 
 class ShipPlugin extends Phaser.Plugins.BasePlugin {

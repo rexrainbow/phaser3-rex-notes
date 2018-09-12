@@ -64,6 +64,11 @@ import Hexagon from './hexagon.js';
 import SwirlPipeline from './swirlpipeline.js';
 import PixelationPipeline from './pixelationpipeline.js';
 
+// board
+import Board from './board/board/Board.js';
+import HexagonGrid from './board/grid/Hexagon.js';
+import QuadGrid from './board/grid/Quad.js';
+
 export {
     // game objects
     BBCodeText,
@@ -130,5 +135,10 @@ export {
 
     // shader
     SwirlPipeline,
-    PixelationPipeline
+    PixelationPipeline,
+
+    // board
+    Board,
+    HexagonGrid,
+    QuadGrid,
 };

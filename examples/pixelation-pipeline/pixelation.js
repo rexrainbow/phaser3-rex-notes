@@ -1,5 +1,3 @@
-'use strict'
-
 import PixelationPipelinePlugin from 'rexPlugins/pixelationpipeline-plugin.js'
 
 class Demo extends Phaser.Scene {

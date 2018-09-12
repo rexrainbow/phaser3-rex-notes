@@ -1,5 +1,3 @@
-'use strict'
-
 import ButtonPlugin from 'rexPlugins/button-plugin.js';
 
 class Demo extends Phaser.Scene {

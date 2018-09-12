@@ -1,5 +1,3 @@
-'use strict'
-
 import SequencePlugin from 'rexPlugins/sequence-plugin.js';
 import CSVToArrayPlugin from 'rexPlugins/csvtoarray-plugin.js';
 

@@ -1,5 +1,3 @@
-'use strict'
-
 import SwirlPipelinePlugin from 'rexPlugins/swirlpipeline-plugin.js'
 
 class Demo extends Phaser.Scene {

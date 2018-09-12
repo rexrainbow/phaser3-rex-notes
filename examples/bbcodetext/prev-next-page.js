@@ -1,4 +1,3 @@
-'use strict'
 import BBCodeTextPlugin from 'rexPlugins/bbcodetext-plugin.js';
 import TextPagePlugin from 'rexPlugins/textpage-plugin.js'
 

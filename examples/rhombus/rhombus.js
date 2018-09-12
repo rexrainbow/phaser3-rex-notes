@@ -1,5 +1,3 @@
-'use strict'
-
 import RhombusPlugin from 'rexPlugins/rhombus-plugin.js';
 
 class Demo extends Phaser.Scene {

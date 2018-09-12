@@ -1,5 +1,3 @@
-'use strict'
-
 import TickTask from 'rexPlugins/utils/ticktask/TickTask.js';
 import Proxy from 'rexPlugins/utils/arcade/proxy.js';
 

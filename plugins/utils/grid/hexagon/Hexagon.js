@@ -1,5 +1,3 @@
-'use strict'
-
 // https://www.redblobgames.com/grids/hexagons/
 
 import CONST from './const.js';
@@ -22,7 +20,7 @@ class Hexagon {
 
     resetFromJSON(o) {
         this.setOriginPosition(GetValue(o, 'x', 0), GetValue(o, 'y', 0));
-        this.setCellSize(GetValue(o, 'cellWidth', 33), GetValue(o, 'cellHeight', 42));
+        this.setCellSize(GetValue(o, 'cellWidth', 0), GetValue(o, 'cellHeight', 0));
         this.setType(GetValue(o, 'staggeraxis', 1), GetValue(o, 'staggerindex', 1));
     }
 

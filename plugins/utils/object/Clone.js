@@ -1,5 +1,3 @@
-'use strict'
-
 import Clear from './Clear.js';
 
 /**

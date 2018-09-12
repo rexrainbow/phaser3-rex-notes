@@ -1,5 +1,3 @@
-'use strict'
-
 function encrypt(str, pwd) {
     if (pwd == null || pwd.length <= 0) {
         return null;

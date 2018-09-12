@@ -1,5 +1,3 @@
-'use strict'
-
 function decrypt(str, pwd) {
     if (str == null || str.length < 8) {
         return null;

@@ -1,5 +1,3 @@
-'use strict'
-
 import CSVScenarioPlugin from 'rexPlugins/csvscenario-plugin.js';
 
 var csvString =

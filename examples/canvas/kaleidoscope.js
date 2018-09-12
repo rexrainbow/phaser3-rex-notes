@@ -1,5 +1,3 @@
-'use strict'
-
 import CanvasPlugin from 'rexPlugins/canvas-plugin.js'
 import TouchStatePlugin from 'rexPlugins/touchstate-plugin.js';
 

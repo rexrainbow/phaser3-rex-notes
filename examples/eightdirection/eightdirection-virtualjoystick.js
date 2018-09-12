@@ -1,5 +1,3 @@
-'use strict'
-
 import EightDirectionPlugin from 'rexPlugins/eightdirection-plugin.js';
 import VirtualJoyStickPlugin from 'rexPlugins/virtualjoystick-plugin.js';
 

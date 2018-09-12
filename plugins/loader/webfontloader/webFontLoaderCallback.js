@@ -1,5 +1,3 @@
-'use strict'
-
 import WebFontFile from './webFontFile.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;

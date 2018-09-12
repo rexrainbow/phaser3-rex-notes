@@ -1,5 +1,3 @@
-'use strict'
-
 import PixelationPipeline from './pixelationpipeline.js';
 
 class PixelationPipelinePlugin extends Phaser.Plugins.BasePlugin {

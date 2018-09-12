@@ -1,5 +1,3 @@
-'use strict'
-
 import Hexagon from './hexagon.js';
 
 class HexagonPlugin extends Phaser.Plugins.BasePlugin {

@@ -1,5 +1,3 @@
-'use strict'
-
 import Bank from './bank.js';
 
 class BankPlugin extends Phaser.Plugins.BasePlugin {

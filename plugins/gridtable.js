@@ -1,5 +1,3 @@
-'use strict'
-
 import GridTable from './gameobjects/gridtable/GridTable.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;

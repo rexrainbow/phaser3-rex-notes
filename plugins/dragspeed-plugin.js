@@ -1,5 +1,3 @@
-'use strict'
-
 import DragSpeed from './dragspeed.js';
 
 class DragSpeedPlugin extends Phaser.Plugins.BasePlugin {

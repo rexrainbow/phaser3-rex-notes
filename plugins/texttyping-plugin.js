@@ -1,5 +1,3 @@
-'use strict'
-
 import TextTyping from './texttyping.js';
 
 class TextTypingPlugin extends Phaser.Plugins.BasePlugin {

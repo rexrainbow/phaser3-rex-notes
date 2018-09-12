@@ -1,5 +1,3 @@
-'use strict'
-
 import VectorToCursorKeys from 'rexPlugins/utils/vectortocursorkeys/VectorToCursorKeys.js';
 
 const EE = Phaser.Events.EventEmitter;

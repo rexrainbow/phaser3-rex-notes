@@ -1,5 +1,3 @@
-'use strict'
-
 import Rhombus from './rhombus.js';
 
 class RhombusPlugin extends Phaser.Plugins.BasePlugin {

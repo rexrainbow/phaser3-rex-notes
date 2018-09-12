@@ -1,5 +1,3 @@
-'use strict'
-
 import CSVToArray from 'rexPlugins/utils/array/CSVToArray.js'; // use simple csv parser
 import ArrayCopy from 'rexPlugins/utils/array/Copy.js';
 import TypeConvert from 'rexPlugins/utils/string/TypeConvert.js';

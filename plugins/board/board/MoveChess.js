@@ -1,6 +1,4 @@
-'use strict'
-
-var MoveChess = function (gameObject, toTileX, toTileY, toTileZ) {
+var MoveChess = function (gameObject, toTileX, toTileY, toTileZ, align) {
     if (typeof (toTileX) !== 'number') {
         var toChess = toTileX;
         var toTileXYZ = this.getChessXYZ(toChess);
@@ -19,7 +17,7 @@ var MoveChess = function (gameObject, toTileX, toTileY, toTileZ) {
         return this;
     }
     this.removeChess(gameObject);
-    this.addChess(gameObject, toTileX, toTileY, toTileZ);
+    this.addChess(gameObject, toTileX, toTileY, toTileZ, align);
     return this;
 };
 

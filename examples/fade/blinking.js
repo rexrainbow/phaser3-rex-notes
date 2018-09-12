@@ -1,5 +1,3 @@
-'use strict'
-
 import FadePlugin from 'rexPlugins/fade-plugin.js';
 
 const Between = Phaser.Math.Between;

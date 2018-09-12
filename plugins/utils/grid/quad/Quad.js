@@ -1,5 +1,3 @@
-'use strict'
-
 import GetWorldX from './GetWorldX.js';
 import GetWorldY from './GetWorldY.js';
 
@@ -12,7 +10,7 @@ class Quad {
 
     resetFromJSON(o) {
         this.setOriginPosition(GetValue(o, 'x', 0), GetValue(o, 'y', 0));
-        this.setCellSize(GetValue(o, 'cellWidth', 33), GetValue(o, 'cellHeight', 42));
+        this.setCellSize(GetValue(o, 'cellWidth', 0), GetValue(o, 'cellHeight', 0));
         this.setType(GetValue(o, 'type', 0));
 
     }

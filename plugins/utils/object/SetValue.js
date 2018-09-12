@@ -1,5 +1,3 @@
-'use strict'
-
 var isInValidKey = function (keys) {
     return (keys == null) || (keys === "") || (keys.length === 0);
 };

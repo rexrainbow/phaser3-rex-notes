@@ -1,5 +1,3 @@
-'use strict'
-
 var Proxy = {
     cascadeMode: false,
     setParent: function(gameObject) {

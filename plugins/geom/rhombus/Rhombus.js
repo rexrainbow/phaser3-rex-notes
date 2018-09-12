@@ -1,5 +1,3 @@
-'use strict'
-
 // https://www.redblobgames.com/grids/hexagons/
 
 import Offset from './Offset.js';

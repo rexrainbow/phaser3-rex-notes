@@ -1,5 +1,3 @@
-'use strict'
-
 import BBCodeTextPlugin from 'rexPlugins/bbcodetext-plugin.js';
 
 class Demo extends Phaser.Scene {

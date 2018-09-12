@@ -1,5 +1,3 @@
-'use strict'
-
 var SetBoardWidth = function (width) {
     if (this.infinityMode) {
         return this;

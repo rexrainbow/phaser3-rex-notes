@@ -1,11 +1,6 @@
-'use strict'
-
 var AddChess = function (gameObject, tileX, tileY, tileZ, align) {
     if (tileZ === undefined) {
         tileZ = 0;
-    }
-    if (align === undefined) {
-        align = true;
     }
 
     if (!this.contains(tileX, tileY)) {
@@ -20,6 +15,8 @@ var AddChess = function (gameObject, tileX, tileY, tileZ, align) {
     if (align) {
         this.gridAlign(gameObject);
     }
+
+    return this;
 };
 
 export default AddChess;

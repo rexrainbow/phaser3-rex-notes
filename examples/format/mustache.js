@@ -1,5 +1,3 @@
-'use strict'
-
 import Mustache from 'rexPlugins/utils/mustache/mustache.min.js';
 
 class Demo extends Phaser.Scene {

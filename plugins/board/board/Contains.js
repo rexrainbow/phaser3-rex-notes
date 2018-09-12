@@ -1,5 +1,3 @@
-'use strict'
-
 var Contains = function (tileX, tileY, tileZ) {
     var result;
     if (this.infinityMode) {

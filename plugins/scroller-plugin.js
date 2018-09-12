@@ -1,5 +1,3 @@
-'use strict'
-
 import Scroller from './scroller.js';
 
 class ScrollerPlugin extends Phaser.Plugins.BasePlugin {

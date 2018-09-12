@@ -1,5 +1,3 @@
-'use strict'
-
 import FSMPlugin from 'rexPlugins/fsm-plugin.js';
 
 var stateConfig = {

@@ -1,5 +1,3 @@
-'use strict'
-
 import PathFollower from './pathfollower.js';
 
 class PathFollowerPlugin extends Phaser.Plugins.BasePlugin {

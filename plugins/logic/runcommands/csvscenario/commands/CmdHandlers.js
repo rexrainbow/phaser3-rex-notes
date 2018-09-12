@@ -1,4 +1,3 @@
-'use strict'
 import CustomCmd from './CustomCmd.js';
 import WaitCmd from './WaitCmd.js';
 import LabelCmd from './LabelCmd.js';

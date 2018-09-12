@@ -1,5 +1,3 @@
-'use strict'
-
 const EE = Phaser.Events.EventEmitter;
 const GetValue = Phaser.Utils.Objects.GetValue;
 

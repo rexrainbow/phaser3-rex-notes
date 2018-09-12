@@ -1,5 +1,3 @@
-'use strict'
-
 import Slider from './slider.js';
 
 class SliderPlugin extends Phaser.Plugins.BasePlugin {

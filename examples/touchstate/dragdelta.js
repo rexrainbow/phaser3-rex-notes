@@ -1,5 +1,3 @@
-'use strict'
-
 import TouchStatePlugin from 'rexPlugins/touchstate-plugin.js';
 
 class Demo extends Phaser.Scene {

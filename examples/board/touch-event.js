@@ -1,9 +1,5 @@
-'use strict'
-
 import HexagonPlugin from 'rexPlugins/hexagon-plugin.js';
-
-import HexahonGrid from 'rexPlugins/board/grid/Hexagon.js';
-import Board from 'rexPlugins/board/board/Board.js';
+import BoardPlugin from 'rexPlugins/board-plugin.js';
 
 const Random = Phaser.Math.Between;
 
@@ -23,24 +19,38 @@ class Demo extends Phaser.Scene {
         var texture = createHexagonTexture(this, key, staggeraxis, staggerindex);
         var image = texture.getSourceImage();
 
-        var grid = new HexahonGrid({
-            x: 200,
-            y: 200,
-            cellWidth: image.width,
-            cellHeight: image.height,
-            staggeraxis: staggeraxis,
-            staggerindex: staggerindex
-        });
-        var board = new Board(this, {
-            grid: grid,
+        var board = this.rexBoard.add.board({
+            grid: this.rexBoard.add.hexagonGrid({
+                x: 200,
+                y: 200,
+                cellWidth: image.width,
+                cellHeight: image.height,
+                staggeraxis: staggeraxis,
+                staggerindex: staggerindex
+            }),
             width: 8,
             height: 8
         })
-        board.forEachTileXY(function (board, tileX, tileY) {
+        board.forEachTileXY(function (tileXY, board) {
             var chess = this.add.image(0, 0, key)
                 .setTint(Random(0, 0xffffff));
-            board.addChess(chess, tileX, tileY);
+            board.addChess(chess, tileXY.x, tileXY.y, 0, true);
+            this.add.text(chess.x, chess.y, tileXY.x + ',' + tileXY.y)
+                .setOrigin(0.5)
+                .setTint(0x0);
         }, this);
+
+        board
+            .setInteractive()
+            .on('tiledown', function (pointer, tileXY) {
+                console.log('down ' + tileXY.x + ',' + tileXY.y);
+            })
+            .on('tileup', function (pointer, tileXY) {
+                console.log('up ' + tileXY.x + ',' + tileXY.y);
+            })
+            .on('tilemove', function (pointer, tileXY) {
+                console.log('move ' + tileXY.x + ',' + tileXY.y);
+            });
 
         this.board = board;
         this.print = this.add.text(0, 0, '');
@@ -48,7 +58,7 @@ class Demo extends Phaser.Scene {
 
     update() {
         var pointer = this.input.activePointer;
-        var tileXY = this.board.worldXYToTileXY(pointer)
+        var tileXY = this.board.worldXYToTileXY(pointer.x, pointer.y);
         this.print.setText(tileXY.x + ',' + tileXY.y);
     }
 }
@@ -78,6 +88,11 @@ var config = {
             key: 'rexHexagon',
             plugin: HexagonPlugin,
             start: true
+        }],
+        scene: [{
+            key: 'boardPlugin',
+            plugin: BoardPlugin,
+            mapping: 'rexBoard'
         }]
     }
 };

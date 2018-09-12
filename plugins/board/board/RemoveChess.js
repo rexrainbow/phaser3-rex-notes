@@ -1,6 +1,4 @@
-'use strict'
-
-var RemoveChess = function (gameObject, tileX, tileY, tileZ) {
+var RemoveChess = function (gameObject, tileX, tileY, tileZ, destroy) {
     if (gameObject) {
         var tileXYZ = this.getChessXYZ(gameObject);
         if (tileXYZ) {
@@ -21,6 +19,10 @@ var RemoveChess = function (gameObject, tileX, tileY, tileZ) {
 
     this.boardData.removeUID(tileX, tileY, tileZ);
     this.getChessData(gameObject).setBoard(null);
+
+    if (destroy && gameObject.destroy) {
+        gameObject.destroy();
+    }
 
     return this;
 }

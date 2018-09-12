@@ -1,5 +1,3 @@
-'use strict'
-
 import BaseCmd from './BaseCmd.js';
 import Clone from 'rexPlugins/utils/object/Clone.js';
 import Clear from 'rexPlugins/utils/object/Clear.js';

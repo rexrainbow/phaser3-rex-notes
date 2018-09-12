@@ -1,5 +1,3 @@
-'use strict'
-
 import ContainerLite from 'rexPlugins/gameobjects/containerlite/ContainerLite.js';
 import Table from './Table.js';
 

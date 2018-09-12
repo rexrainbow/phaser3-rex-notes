@@ -1,5 +1,3 @@
-'use strict'
-
 import BBCodeTextPlugin from 'rexPlugins/bbcodetext-plugin.js';
 import TextTypingPlugin from 'rexPlugins/texttyping-plugin.js';
 

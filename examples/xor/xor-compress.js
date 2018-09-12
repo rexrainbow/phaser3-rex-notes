@@ -1,5 +1,3 @@
-'use strict'
-
 import XOR from 'rexPlugins/xor.js';
 import LZString from 'rexPlugins/lzstring.js';
 

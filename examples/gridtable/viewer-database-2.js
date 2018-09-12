@@ -1,5 +1,3 @@
-'use strict'
-
 import Phaser from 'phaser';
 import GridTablePlugin from 'rexPlugins/gridtable-plugin.js';
 import TouchStatePlugin from 'rexPlugins/touchstate-plugin.js';

@@ -1,5 +1,3 @@
-'use strict'
-
 import FSM from 'rexPlugins/fsm.js';
 
 class State extends FSM {

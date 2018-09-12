@@ -1,5 +1,3 @@
-'use strict'
-
 import GetSceneObject from 'rexPlugins/utils/system/GetSceneObject.js';
 import HitTest from 'rexPlugins/utils/input/HitTest.js';
 
