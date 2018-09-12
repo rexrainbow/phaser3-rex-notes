@@ -30,7 +30,7 @@ class Demo extends Phaser.Scene {
             }),
             width: 8,
             height: 8
-        })
+        });
         board.forEachTileXY(function (tileXY, board) {
             var chess = this.add.image(0, 0, key)
                 .setTint(Random(0, 0xffffff));
@@ -50,6 +50,9 @@ class Demo extends Phaser.Scene {
             })
             .on('tilemove', function (pointer, tileXY) {
                 console.log('move ' + tileXY.x + ',' + tileXY.y);
+            })
+            .on('gameobjectdown', function (pointer, gameObject) {
+                gameObject.setTint(Random(0, 0xffffff));
             });
 
         this.board = board;

@@ -121,7 +121,7 @@ class Board extends EE {
             if (!this.boardData.exists(uid)) {
                 return null;
             }
-            return ChessBank.get(uid);
+            return ChessBank.get(uid).parent;
         }
     }
 
