@@ -1,8 +1,4 @@
 var GridAlign = function (gameObject, tileX, tileY, tileZ) {
-    var grid = this.grid;
-    if (!grid) {
-        return this;
-    }
     if (!gameObject.hasOwnProperty('x')) {
         return this;
     }
@@ -13,8 +9,8 @@ var GridAlign = function (gameObject, tileX, tileY, tileZ) {
         tileZ = tileXYZ.z;
     }
 
-    gameObject.x = grid.getWorldX(tileX, tileY, tileZ);
-    gameObject.y = grid.getWorldY(tileX, tileY, tileZ);
+    gameObject.x = this.grid.getWorldX(tileX, tileY, tileZ);
+    gameObject.y = this.grid.getWorldY(tileX, tileY, tileZ);
 };
 
 export default GridAlign;

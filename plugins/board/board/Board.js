@@ -12,6 +12,7 @@ import SwapChess from './SwapChess.js';
 import Contains from './Contains.js';
 import ForEachTileXY from './ForEachTileXY.js';
 import WorldXYToTileXY from './WorldXYToTileXY.js';
+import GetNeighborTileXY from './GetNeighborTileXY.js';
 import SetInteractive from './SetInteractive.js';
 
 
@@ -25,12 +26,16 @@ class Board extends EE {
 
         this.scene = scene;
         this.boardData = new BoardData();
+        this.resetFromJSON(config);
+    }
 
-        this.setGrid(GetValue(config, 'grid', undefined));
-        this.setWrapMode(GetValue(config, 'wrap', false));
-        this.setInfinityBoard(GetValue(config, 'inifinity', false));
-        this.setBoardWidth(GetValue(config, 'width', 0));
-        this.setBoardHeight(GetValue(config, 'height', 0));
+    resetFromJSON(o) {
+        this.setGrid(GetValue(o, 'grid', undefined));
+        this.setWrapMode(GetValue(o, 'wrap', false));
+        this.setInfinityBoard(GetValue(o, 'inifinity', false));
+        this.setBoardWidth(GetValue(o, 'width', 0));
+        this.setBoardHeight(GetValue(o, 'height', 0));
+        return this;
     }
 
     shutdown() {
@@ -173,6 +178,7 @@ var methods = {
     forEachTileXY: ForEachTileXY,
     contains: Contains,
     worldXYToTileXY: WorldXYToTileXY,
+    getNeighborTileXY: GetNeighborTileXY,
     setInteractive: SetInteractive,
 }
 Object.assign(
