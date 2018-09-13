@@ -26,6 +26,9 @@ var SetInteractive = function (enable) {
 };
 
 var onPointerDown = function (pointer) {
+    if (!this.input.enable) {
+        return;
+    }
     var tmpTileXY = this.worldXYToTileXY(pointer.x, pointer.y);
     if (!tmpTileXY) {
         return;
@@ -52,6 +55,9 @@ var onPointerDown = function (pointer) {
 };
 
 var onPointerUp = function (pointer) {
+    if (!this.input.enable) {
+        return;
+    }
     var tmpTileXY = this.worldXYToTileXY(pointer.x, pointer.y);
     if (!tmpTileXY) {
         return;
@@ -74,6 +80,9 @@ var onPointerUp = function (pointer) {
 };
 
 var onPointerMove = function (pointer) {
+    if (!this.input.enable) {
+        return;
+    }
     var tmpTileXY = this.worldXYToTileXY(pointer.x, pointer.y);
     if (!tmpTileXY) {
         return;

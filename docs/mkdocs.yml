@@ -155,6 +155,11 @@ nav:
             - Authentication: firebase-auth.md
             - Firestore: firebase-firestore.md
             - Storage: firebase-storage.md
+- Board:
+    - Board: board.md
+    - Grid:    
+        - Quad: board-quadgrid.md
+        - Hexagon: board-hexagongrid.md
 
 
 extra_javascript:

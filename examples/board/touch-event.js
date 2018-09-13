@@ -21,8 +21,8 @@ class Demo extends Phaser.Scene {
 
         var board = this.rexBoard.add.board({
             grid: this.rexBoard.add.hexagonGrid({
-                x: 200,
-                y: 200,
+                x: 100,
+                y: 100,
                 cellWidth: image.width,
                 cellHeight: image.height,
                 staggeraxis: staggeraxis,
@@ -93,7 +93,7 @@ var config = {
             start: true
         }],
         scene: [{
-            key: 'boardPlugin',
+            key: 'rexBoard',
             plugin: BoardPlugin,
             mapping: 'rexBoard'
         }]

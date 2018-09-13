@@ -1,15 +1,4 @@
 var MoveChess = function (gameObject, toTileX, toTileY, toTileZ, align) {
-    if (typeof (toTileX) !== 'number') {
-        var toChess = toTileX;
-        var toTileXYZ = this.getChessXYZ(toChess);
-        if (toTileXYZ) {
-            toTileX = toTileXYZ.x;
-            toTileY = toTileXYZ.y;
-            toTileZ = toTileXYZ.z;
-        } else {
-            return this;
-        }
-    }
     var fromTileXYZ = this.getChessXYZ(gameObject);
     if (fromTileXYZ &&
         (fromTileXYZ.x === toTileX) && (fromTileXYZ.y === toTileY) && (fromTileXYZ.z === toTileZ)) {

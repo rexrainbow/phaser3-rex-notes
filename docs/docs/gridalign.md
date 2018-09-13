@@ -54,7 +54,7 @@ scene.plugins.get('rexGridAlign').quad(items, {
     height: -1,
     cellWidth: 1,
     cellHeight: 1,
-    type: 'orthogonal',
+    type: 0,
     position: Phaser.Display.Align.CENTER,
     x: 0,
     y: 0
@@ -70,7 +70,7 @@ scene.plugins.get('rexGridAlign').quad(items, {
     - `1`, or `isometric`
     - `2`, or `staggered`
 - `position` : The alignment position.
-    - `0`, or `Phaser.Display.Align.TOP_LEFT` 
+    - `0`, or `Phaser.Display.Align.TOP_LEFT`
     - `1`, or `Phaser.Display.Align.TOP_CENTER`
     - `2`, or `Phaser.Display.Align.TOP_RIGHT`
     - `3`, or `Phaser.Display.Align.LEFT_TOP`
@@ -81,7 +81,7 @@ scene.plugins.get('rexGridAlign').quad(items, {
     - `8`, or `Phaser.Display.Align.RIGHT_CENTER`
     - `9`, or `Phaser.Display.Align.RIGHT_BOTTOM`
     - `10`, or `Phaser.Display.Align.BOTTOM_LEFT`
-    - `11`, or `Phaser.Display.Align.BOTTOM_CENTER`    
+    - `11`, or `Phaser.Display.Align.BOTTOM_CENTER`
     - `12`, or `Phaser.Display.Align.BOTTOM_RIGHT`
 - `x`, `y` : Position of first item.
 
@@ -112,7 +112,7 @@ scene.plugins.get('rexGridAlign').hexagon(items, {
     - `0`, or `even`
     - `1`, or `odd`
 - `position` : The alignment position.
-    - `0`, or `Phaser.Display.Align.TOP_LEFT` 
+    - `0`, or `Phaser.Display.Align.TOP_LEFT`
     - `1`, or `Phaser.Display.Align.TOP_CENTER`
     - `2`, or `Phaser.Display.Align.TOP_RIGHT`
     - `3`, or `Phaser.Display.Align.LEFT_TOP`
@@ -123,7 +123,7 @@ scene.plugins.get('rexGridAlign').hexagon(items, {
     - `8`, or `Phaser.Display.Align.RIGHT_CENTER`
     - `9`, or `Phaser.Display.Align.RIGHT_BOTTOM`
     - `10`, or `Phaser.Display.Align.BOTTOM_LEFT`
-    - `11`, or `Phaser.Display.Align.BOTTOM_CENTER`    
+    - `11`, or `Phaser.Display.Align.BOTTOM_CENTER`
     - `12`, or `Phaser.Display.Align.BOTTOM_RIGHT`
 - `x`, `y` : Position of first item.
 
