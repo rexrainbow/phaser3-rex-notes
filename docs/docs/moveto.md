@@ -82,6 +82,25 @@ moveTo.moveTo(config);
 moveTo.stop();
 ```
 
+### Enable
+
+- Enable/resume (default)
+    ```javascript
+    moveTo.setEnable();
+    ```
+    or
+    ```javascript
+    moveTo.enable = true;
+    ```
+- Disable/pause
+    ```javascript
+    moveTo.setEnable(false);
+    ```
+    or
+    ```javascript
+    moveTo.enable = false;
+    ```
+
 ### Set speed
 
 ```javascript

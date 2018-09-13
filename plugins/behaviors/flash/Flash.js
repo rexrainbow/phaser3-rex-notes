@@ -17,6 +17,7 @@ class Flash extends TickTask {
 
     resetFromJSON(o) {
         this.isRunning = GetValue(o, 'isRunning', false);
+        this.setEnable(GetValue(o, 'enable', true));
         this.setDuration(GetValue(o, 'duration', 500));
         this.setRepeat(GetValue(o, 'repeat', 2));
         this.repeatCounter = GetValue(o, 'repeatCounter', 0);
@@ -64,6 +65,24 @@ class Flash extends TickTask {
         this.scene.events.off('update', this.update, this);
     }
 
+    setEnable(e) {
+        if (e == undefined) {
+            e = true;
+        }
+        this.enable = e;
+        return this;
+    }
+
+    setDuration(duration) {
+        this.duration = duration;
+        return this;
+    }
+
+    setRepeat(repeat) {
+        this.repeat = repeat;
+        return this;
+    }
+
     flash(duration, repeat) {
         // this.stop();
 
@@ -86,7 +105,7 @@ class Flash extends TickTask {
             this.isRunning = true;
             this.repeatCounter = 0;
             this.nowTime = 0;
-        }        
+        }
         return this;
     }
 
@@ -95,18 +114,8 @@ class Flash extends TickTask {
         this.gameObject.setVisible(true);
     }
 
-    setDuration(duration) {
-        this.duration = duration;
-        return this;
-    }
-
-    setRepeat(repeat) {
-        this.repeat = repeat;
-        return this;
-    }
-
     update(time, delta) {
-        if (!this.isRunning) {
+        if ((!this.isRunning) || (!this.enable)) {
             return this;
         }
 

@@ -96,6 +96,25 @@ var rotateTo = scene.plugins.get('rexRotateTo').add(gameObject, {
 rotateTo.stop();
 ```
 
+### Enable
+
+- Enable/resume (default)
+    ```javascript
+    rotateTo.setEnable();
+    ```
+    or
+    ```javascript
+    rotateTo.enable = true;
+    ```
+- Disable/pause
+    ```javascript
+    rotateTo.setEnable(false);
+    ```
+    or
+    ```javascript
+    rotateTo.enable = false;
+    ```
+
 ### Set speed
 
 ```javascript

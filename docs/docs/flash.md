@@ -79,6 +79,25 @@ flash.flash(config);
 flash.stop();
 ```
 
+### Enable
+
+- Enable/resume (default)
+    ```javascript
+    flash.setEnable();
+    ```
+    or
+    ```javascript
+    flash.enable = true;
+    ```
+- Disable/pause
+    ```javascript
+    flash.setEnable(false);
+    ```
+    or
+    ```javascript
+    flash.enable = false;
+    ```
+
 ### Set duration
 
 ```javascript

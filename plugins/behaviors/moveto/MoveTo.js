@@ -21,6 +21,7 @@ class MoveTo extends TickTask {
 
     resetFromJSON(o) {
         this.isRunning = GetValue(o, 'isRunning', false);
+        this.setEnable(GetValue(o, 'enable', true));
         this.timeScale = GetValue(o, 'timeScale', 1);
         this.setSpeed(GetValue(o, 'speed', 400));
         this.setRotateToTarget(GetValue(o, 'rotateToTarget', false));
@@ -32,6 +33,7 @@ class MoveTo extends TickTask {
     toJSON() {
         return {
             isRunning: this.isRunning,
+            enable: this.enable,
             timeScale: this.timeScale,
             speed: this.speed,
             rotateToTarget: this.rotateToTarget,
@@ -68,6 +70,24 @@ class MoveTo extends TickTask {
         this.scene.events.off('update', this.update, this);
     }
 
+    setEnable(e) {
+        if (e == undefined) {
+            e = true;
+        }
+        this.enable = e;
+        return this;
+    }
+
+    setSpeed(speed) {
+        this.speed = speed;
+        return this;
+    }
+
+    setRotateToTarget(rotateToTarget) {
+        this.rotateToTarget = rotateToTarget;
+        return this;
+    }
+
     moveTo(x, y, speed) {
         this.stop();
 
@@ -94,18 +114,8 @@ class MoveTo extends TickTask {
         this.isRunning = false;
     }
 
-    setSpeed(speed) {
-        this.speed = speed;
-        return this;
-    }
-
-    setRotateToTarget(rotateToTarget) {
-        this.rotateToTarget = rotateToTarget;
-        return this;
-    }
-
     update(time, delta) {
-        if (!this.isRunning) {
+        if ((!this.isRunning) || (!this.enable)) {
             return this;
         }
 

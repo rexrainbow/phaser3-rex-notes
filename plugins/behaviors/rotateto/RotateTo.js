@@ -23,6 +23,7 @@ class RotateTo extends TickTask {
 
     resetFromJSON(o) {
         this.isRunning = GetValue(o, 'isRunning', false);
+        this.setEnable(GetValue(o, 'enable', true));
         this.timeScale = GetValue(o, 'timeScale', 1);
         this.setSpeed(GetValue(o, 'speed', 180));
         this.target = GetValue(o, 'target', 0);
@@ -68,6 +69,19 @@ class RotateTo extends TickTask {
         this.scene.events.off('update', this.update, this);
     }
 
+    setEnable(e) {
+        if (e == undefined) {
+            e = true;
+        }
+        this.enable = e;
+        return this;
+    }
+
+    setSpeed(speed) {
+        this.speed = speed;
+        return this;
+    }
+
     rotateTo(angle, dir, speed) {
         this.stop();
 
@@ -105,13 +119,8 @@ class RotateTo extends TickTask {
         this.isRunning = false;
     }
 
-    setSpeed(speed) {
-        this.speed = speed;
-        return this;
-    }
-
     update(time, delta) {
-        if (!this.isRunning) {
+        if ((!this.isRunning) || (!this.enable)) {
             return this;
         }
 
