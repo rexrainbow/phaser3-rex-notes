@@ -43,7 +43,7 @@ var game = new Phaser.Game(config);
 - Quad board
     ```javascript
     var board = scene.rexBoard.add.board({
-        grid: scene.rexBoard.add.hexagonGrid({
+        grid: scene.rexBoard.add.quadGrid({
             x: 0,
             y: 0,
             cellWidth: 0,
