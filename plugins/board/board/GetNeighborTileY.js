@@ -1,5 +1,5 @@
-var GetNeighborTileY = function (tileX, tileY, dir) {
-    var tileY = this.grid.getNeighborTileY(tileX, tileY, dir);
+var GetNeighborTileY = function (tileX, tileY, direction) {
+    var tileY = this.grid.getNeighborTileY(tileX, tileY, direction);
     if (!this.infinityMode) {
         if (this.wrapMode) {
             tileY = this.getWrapTileY(tileX, tileY);

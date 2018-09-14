@@ -44,6 +44,7 @@ class Demo extends Phaser.Scene {
                 .setTint(0x0);
         }, this);
 
+        var matchedCount = 0;
         var match = this.rexBoard.add.match({
                 board: board
             })
@@ -54,16 +55,18 @@ class Demo extends Phaser.Scene {
                 }
                 return chess.getData('symbol');
             })
-            .match(3, function (matchedTileXY, dir, board) {
+            .match(3, function (result, board) {
+                var matchedTileXY = result.tileXY;
                 var tileXY, chess;
                 for (var i = 0, cnt = matchedTileXY.length; i < cnt; i++) {
                     tileXY = matchedTileXY[i];
                     chess = board.tileXYZToChess(tileXY.x, tileXY.y, 0);
                     chess.setScale(0.8);
                 }
+                matchedCount++;
             });
 
-        this.add.text(0,0, 'Match count =' + match.matchedCount);
+        this.add.text(0, 0, 'Match count= ' + matchedCount);
     }
 
     update() {}

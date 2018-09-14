@@ -1,6 +1,5 @@
 import IsFunction from 'rexPlugins/utils/object/IsFunction.js';
 import MatchAll from './MatchAll.js';
-import MatchAt from './MatchAt.js';
 import MatchAtDir from './MatchAtDir.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -138,10 +137,6 @@ class Match {
     anyMatch(pattern) {
         return this.match(pattern, null, null, true);
     }
-
-    anyMatchAt(pattern, startTileX, startTileY) {
-        return this.matchAt(pattern, startTileX, startTileY, null, null, true);
-    }    
 }
 
 var tmp = {
@@ -151,7 +146,6 @@ var tmp = {
 
 var methods = {
     match: MatchAll,
-    matchAt: MatchAt,
     matchAtDir: MatchAtDir,
 };
 Object.assign(

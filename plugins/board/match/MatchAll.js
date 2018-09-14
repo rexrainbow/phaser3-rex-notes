@@ -7,7 +7,7 @@ var MatchBoard = function (pattern, callback, scope, getFirst) {
         dirMask = this.dirMask;
     var width = board.width,
         height = board.height;
-    var matchedTileXY;
+    var result;
     for (var i = 0, cnt = dirs.length; i < cnt; i++) {
         dir = dirs[i];
         if (dirMask[dir] === false) {
@@ -16,20 +16,20 @@ var MatchBoard = function (pattern, callback, scope, getFirst) {
 
         for (var tileY = 0; tileY < height; tileY++) {
             for (var tileX = 0; tileX < width; tileX++) {
-                matchedTileXY = this.matchAtDir(pattern, tileX, tileY, dir);
-                if (matchedTileXY === false) {
+                result = this.matchAtDir(pattern, tileX, tileY, dir);
+                if (result === false) {
                     continue;
                 }
 
                 if (callback) {
                     if (scope) {
-                        callback.call(scope, matchedTileXY, dir, board);
+                        callback.call(scope, result, board);
                     } else {
-                        callback(matchedTileXY, dir, board);
+                        callback(result, board);
                     }
                 }
                 if (getFirst) {
-                    return matchedTileXY;
+                    return result;
                 }
             }
         }

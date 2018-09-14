@@ -1,4 +1,4 @@
-var MatchAtDir = function (pattern, startTileX, startTileY, dir) {
+var MatchAtDir = function (pattern, startTileX, startTileY, direction) {
     // pattern: pattern list or repeat count
     var matchNMode = typeof (pattern) === 'number';
     var patternLength;
@@ -13,15 +13,16 @@ var MatchAtDir = function (pattern, startTileX, startTileY, dir) {
     var curTileX, curTileY;
     var tmpTileX, tmpTileY;
     var board = this.board;
-    var matchedTileXY;
+    var matchedTileXY = result.tileXY;
+    matchedTileXY.length = 0;
     for (var i = 0; i < patternLength; i++) {
         if (curTileX === undefined) {
             curTileX = startTileX
             curTileY = startTileY;
         } else {
             // get next tileXY
-            tmpTileX = board.getNeighborTileX(curTileX, curTileY, dir);
-            tmpTileY = board.getNeighborTileY(curTileX, curTileY, dir);
+            tmpTileX = board.getNeighborTileX(curTileX, curTileY, direction);
+            tmpTileY = board.getNeighborTileY(curTileX, curTileY, direction);
             if ((tmpTileX === null) || (tmpTileY === null)) {
                 return false;
             }
@@ -45,16 +46,20 @@ var MatchAtDir = function (pattern, startTileX, startTileY, dir) {
             }
         }
 
-        if (matchedTileXY === undefined) {
-            matchedTileXY = [];
-        }
         matchedTileXY.push({
             x: curTileX,
             y: curTileY
         });
     }
 
-    return matchedTileXY;
+    result.direction = direction;
+    result.pattern = pattern;
+    return result;
 };
 
+var result = {
+    tileXY : [],
+    direction: undefined,
+    pattern: undefined
+};
 export default MatchAtDir;
