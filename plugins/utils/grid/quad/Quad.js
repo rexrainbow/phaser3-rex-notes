@@ -1,5 +1,7 @@
 import GetWorldX from './GetWorldX.js';
 import GetWorldY from './GetWorldY.js';
+import GetTileX from './GetTileX.js';
+import GetTileY from './GetTileY.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -72,7 +74,9 @@ class Quad {
 
 var methods = {
     getWorldX: GetWorldX,
-    getWorldY: GetWorldY
+    getWorldY: GetWorldY,
+    getTileX: GetTileX,
+    getTileY: GetTileY
 }
 Object.assign(
     Quad.prototype,

@@ -1,4 +1,6 @@
 import Quad from 'rexPlugins/utils/grid/quad/Quad.js';
+import GetNeighborTileX from 'rexPlugins/utils/grid/quad/GetNeighborTileX.js';
+import GetNeighborTileY from 'rexPlugins/utils/grid/quad/GetNeighborTileY.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -40,6 +42,15 @@ const FULLDIR4 = [0, 1, 2, 3];
 const FULLDIR8 = [0, 1, 2, 3, 4, 5, 6, 7];
 const HALFDIR4 = [0, 1];
 const HALFDIR8 = [0, 1, 4, 5];
+
+var methods = {
+    getNeighborTileX: GetNeighborTileX,
+    getNeighborTileY: GetNeighborTileY,
+}
+Object.assign(
+    QuadGrid.prototype,
+    methods
+);
 
 const DIRMODE = {
     '4dir': 4,
