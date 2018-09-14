@@ -1,4 +1,5 @@
-var GetNeighborTileXY = function (tileX, tileY, dir, out) {
-    return this.grid.getNeighborTileXY(tileX, tileY, dir, out);
+var GetNeighborTileX = function (tileX, tileY, dir) {
+    // TODO: wrap mode
+    return this.grid.getNeighborTileX(tileX, tileY, dir);
 };
-export default GetNeighborTileXY;
+export default GetNeighborTileX;

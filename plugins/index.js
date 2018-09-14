@@ -66,8 +66,8 @@ import PixelationPipeline from './pixelationpipeline.js';
 
 // board
 import Board from './board/board/Board.js';
-import HexagonGrid from './board/grid/Hexagon.js';
-import QuadGrid from './board/grid/Quad.js';
+import HexagonGrid from './board/grid/hexagon/Hexagon.js';
+import QuadGrid from './board/grid/quad/Quad.js';
 
 export {
     // game objects

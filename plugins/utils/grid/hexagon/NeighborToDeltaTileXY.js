@@ -1,7 +1,8 @@
-// direction to delta tileXY
+// Not included in Base Gird object.
+// Direction to delta tileXY
 
-const ODD_R = {
-    x: [
+const ODD_R = [
+    [
         [+1, 0],
         [0, +1],
         [-1, +1],
@@ -9,7 +10,7 @@ const ODD_R = {
         [-1, -1],
         [0, -1]
     ],
-    y: [
+    [
         [+1, 0],
         [+1, +1],
         [0, +1],
@@ -17,9 +18,9 @@ const ODD_R = {
         [0, -1],
         [+1, -1]
     ]
-};
-const EVEN_R = {
-    x: [
+];
+const EVEN_R = [
+    [
         [+1, 0],
         [+1, +1],
         [0, +1],
@@ -27,7 +28,7 @@ const EVEN_R = {
         [0, -1],
         [+1, -1]
     ],
-    y: [
+    [
         [+1, 0],
         [0, +1],
         [-1, +1],
@@ -35,9 +36,9 @@ const EVEN_R = {
         [-1, -1],
         [0, -1]
     ]
-};
-const ODD_Q = {
-    x: [
+];
+const ODD_Q = [
+    [
         [+1, 0],
         [0, +1],
         [-1, 0],
@@ -45,7 +46,7 @@ const ODD_Q = {
         [0, -1],
         [+1, -1]
     ],
-    y: [
+    [
         [+1, +1],
         [0, +1],
         [-1, +1],
@@ -53,9 +54,9 @@ const ODD_Q = {
         [0, -1],
         [+1, 0]
     ]
-};
-const EVEN_Q = {
-    x: [
+];
+const EVEN_Q = [
+    [
         [+1, +1],
         [0, +1],
         [-1, +1],
@@ -63,7 +64,7 @@ const EVEN_Q = {
         [0, -1],
         [+1, 0]
     ],
-    y: [
+    [
         [+1, 0],
         [0, +1],
         [-1, 0],
@@ -71,7 +72,7 @@ const EVEN_Q = {
         [0, -1],
         [+1, -1]
     ]
-};
+];
 const Neighbors = [
     ODD_R,
     EVEN_R,

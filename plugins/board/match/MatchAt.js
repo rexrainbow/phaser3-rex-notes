@@ -1,4 +1,4 @@
-var MatchAt = function (pattern, startTileXY, dir) {
+var MatchAt = function (pattern, startTileX, startTileY, dir) {
     var matchNMode = typeof (pattern) === 'number';
     var patternLength;
     if (matchNMode) {
@@ -9,12 +9,22 @@ var MatchAt = function (pattern, startTileXY, dir) {
     }
 
     var symbol;
-    var curTileX = startTileXY.x,
-        curTileY = startTileXY.y;
-    var tmpTileXY;
+    var curTileX, curTileY;
+    var tmpTileX, tmpTileY;
     var board = this.board;
     var matchedTileXY = [];
     for (var i = 0; i < patternLength; i++) {
+        if (curTileX === undefined) {
+            curTileX = startTileX
+            curTileY = startTileY;
+        } else {
+            // get next tileXY
+            tmpTileX = board.getNeighborTileX(curTileX, curTileY, dir);
+            tmpTileY = board.getNeighborTileY(curTileX, curTileY, dir);
+            curTileX = tmpTileX;
+            curTileY = tmpTileY;
+        }
+
         symbol = this.getSymbol(curTileX, curTileY);
         if (!isValidSymbol(symbol)) {
             return false;
@@ -34,10 +44,6 @@ var MatchAt = function (pattern, startTileXY, dir) {
             x: curTileX,
             y: curTileY
         });
-        // get next tileXY
-        tmpTileXY = board.getNeighborTileXY(curTileX, curTileY, dir);
-        curTileX = tmpTileXY.x;
-        curTileY = tmpTileXY.y;
     }
 
     return matchedTileXY;

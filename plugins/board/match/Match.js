@@ -6,13 +6,13 @@ import MatchAt from './MatchAt.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Match {
-    constructor(board, config) {
-        this.board = board;
+    constructor(config) {
         this.symbols = []; // tileX+(tileY*board.width)
         this.resetFromJSON(config);
     }
 
     resetFromJSON(o) {
+        this.setBoard(GetValue(o, 'board', undefined));
         this.setWildcard(GetValue(o, 'wildcard', undefined));
         this.clearSymbols();
         return this;
@@ -27,6 +27,10 @@ class Match {
     destroy() {
         this.shutdown();
         return this;
+    }
+
+    setBoard(board) {
+        this.board = board;
     }
 
     clearSymbols() {
@@ -82,7 +86,7 @@ class Match {
         var tileXY;
         for (var i = 0, cnt = this.symbols.length; i < cnt; i++) {
             tileXY = this.keyToTileXY(i);
-            this.setSymbol(tileXY.x, tileXY, y, callback, scope);
+            this.setSymbol(tileXY.x, tileXY.y, callback, scope);
         }
         return this;
     }
@@ -133,7 +137,7 @@ var methods = {
     matchAt: MatchAt,
 }
 Object.assign(
-    Board.prototype,
+    Match.prototype,
     methods
 );
 

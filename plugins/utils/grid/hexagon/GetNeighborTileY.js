@@ -6,10 +6,7 @@ const EVEN_R = CONST.EVEN_R;
 const ODD_Q = CONST.ODD_Q;
 const EVEN_Q = CONST.EVEN_Q;
 
-var GetNeighborTileXY = function (tileX, tileY, dir, out) {
-    if (out === undefined) {
-        out = tmp;
-    }
+var GetNeighborTileY = function (tileX, tileY, dir) {
     var parity;
     switch (this.mode) {
         case ODD_R:
@@ -22,14 +19,7 @@ var GetNeighborTileXY = function (tileX, tileY, dir, out) {
             parity = tileX & 1;
             break;
     }
-    var deltaTileXY = NeighborToDeltaTileXY[this.mode][parity][dir];
-    out.x = tileX + deltaTileXY.x;
-    out.y = tileY + deltaTileXY.y;
-    return out;
+    return tileY + NeighborToDeltaTileXY[this.mode][parity][dir][1];
 };
 
-var tmp = {
-    x: 0,
-    y: 0
-};
-export default GetNeighborTileXY;
+export default GetNeighborTileY;

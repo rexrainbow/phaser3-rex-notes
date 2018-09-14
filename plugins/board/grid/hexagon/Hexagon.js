@@ -1,5 +1,6 @@
 import Hexagon from 'rexPlugins/utils/grid/hexagon/Hexagon.js';
-import GetNeighborTileXY from 'rexPlugins/utils/grid/hexagon/GetNeighborTileXY.js';
+import GetNeighborTileX from 'rexPlugins/utils/grid/hexagon/GetNeighborTileX.js';
+import GetNeighborTileY from 'rexPlugins/utils/grid/hexagon/GetNeighborTileY.js';
 
 class HexagonGrid extends Hexagon{
     constructor(config) {
@@ -10,10 +11,16 @@ class HexagonGrid extends Hexagon{
     resetFromJSON(o) {
         super.resetFromJSON(o);
     }
+
+    // getWorldX
+    // getWorldY
+    // getTileX
+    // getTileY
 }
 
 var methods = {
-    getNeighborTileXY: GetNeighborTileXY,
+    getNeighborTileX: GetNeighborTileX,
+    getNeighborTileY: GetNeighborTileY,
 }
 Object.assign(
     HexagonGrid.prototype,

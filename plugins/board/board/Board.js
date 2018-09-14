@@ -12,7 +12,8 @@ import SwapChess from './SwapChess.js';
 import Contains from './Contains.js';
 import ForEachTileXY from './ForEachTileXY.js';
 import WorldXYToTileXY from './WorldXYToTileXY.js';
-import GetNeighborTileXY from './GetNeighborTileXY.js';
+import GetNeighborTileX from './GetNeighborTileX.js';
+import GetNeighborTileY from './GetNeighborTileY.js';
 import SetInteractive from './SetInteractive.js';
 
 
@@ -178,7 +179,8 @@ var methods = {
     forEachTileXY: ForEachTileXY,
     contains: Contains,
     worldXYToTileXY: WorldXYToTileXY,
-    getNeighborTileXY: GetNeighborTileXY,
+    getNeighborTileX: GetNeighborTileX,
+    getNeighborTileY: GetNeighborTileY,
     setInteractive: SetInteractive,
 }
 Object.assign(

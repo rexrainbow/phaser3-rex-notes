@@ -18,6 +18,11 @@ class QuadGrid extends Quad {
         }
         this.directions = mode;
     }
+
+    // getWorldX
+    // getWorldY
+    // getTileX
+    // getTileY    
 }
 
 const DIRMODE = {
