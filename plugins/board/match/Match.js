@@ -1,13 +1,14 @@
 import IsFunction from 'rexPlugins/utils/object/IsFunction.js';
-import MatchHexagon from './MatchHexagon.js';
-import MatchQuad from './MatchQuad.js';
+import MatchBoard from './MatchBoard.js';
 import MatchAt from './MatchAt.js';
+import MatchAtDir from './MatchAtDir.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Match {
     constructor(config) {
         this.symbols = []; // tileX+(tileY*board.width)
+        this.dirMask = {};
         this.resetFromJSON(config);
     }
 
@@ -15,6 +16,11 @@ class Match {
         this.setBoard(GetValue(o, 'board', undefined));
         this.setWildcard(GetValue(o, 'wildcard', undefined));
         this.clearSymbols();
+
+        var dirMask = GetValue(o, 'dirMask', undefined);
+        if (dirMask !== undefined) {
+            this.setDirMask(dirMask);
+        }
         return this;
     }
 
@@ -31,6 +37,24 @@ class Match {
 
     setBoard(board) {
         this.board = board;
+    }
+
+    setDirMask(dirMask) {
+        var maskValue;
+        for (var dir in dirMask) {
+            maskValue = dirMask[dir];
+            if (DIRMASKMODE.hasOwnProperty(dir)) {
+                dir = DIRMASKMODE[dir];
+            }
+
+            this.dirMask[dir] = maskValue;
+        }
+        return this;
+    }
+
+    setDirectionMode(mode) {
+        this.board.grid.setDirectionMode(mode);
+        return this;
     }
 
     clearSymbols() {
@@ -96,20 +120,6 @@ class Match {
         return this;
     }
 
-    match(pattern, getFirst, callback, scope) {
-        var directions = this.board.grid.directions;
-        switch (directions) {
-            case 4:
-            case 8:
-                this.matchQuad(pattern, getFirst, callback, scope);
-                break;
-            case 6:
-                this.matchHexagon(pattern, getFirst, callback, scope);
-                break;
-        }
-        return this;
-    }
-
     tileXYToKey(tileX, tileY) {
         return tileX + (tileY * this.board.width);
     }
@@ -130,16 +140,20 @@ var tmp = {
     y: 0
 };
 
-
 var methods = {
-    matchHexagon: MatchHexagon,
-    matchQuad: MatchQuad,
+    match: MatchBoard,
     matchAt: MatchAt,
-}
+    matchAtDir: MatchAtDir,
+};
 Object.assign(
     Match.prototype,
     methods
 );
+
+const DIRMASKMODE = {
+    'x': 0,
+    'y': 1
+}
 
 
 export default Match;

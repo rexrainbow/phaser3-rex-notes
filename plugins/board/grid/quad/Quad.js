@@ -16,7 +16,18 @@ class QuadGrid extends Quad {
         if (typeof (mode) === 'string') {
             mode = DIRMODE[mode];
         }
+
         this.directions = mode;
+        return this;
+    }
+
+    get fullDirections() {
+        return (this.directions === 4) ? FULLDIR4 : FULLDIR8;
+    }
+    
+    // board-match
+    get halfDirections() {
+        return (this.directions === 4) ? HALFDIR4 : HALFDIR8;
     }
 
     // getWorldX
@@ -24,6 +35,11 @@ class QuadGrid extends Quad {
     // getTileX
     // getTileY    
 }
+
+const FULLDIR4 = [0, 1, 2, 3];
+const FULLDIR8 = [0, 1, 2, 3, 4, 5, 6, 7];
+const HALFDIR4 = [0, 1];
+const HALFDIR8 = [0, 1, 4, 5];
 
 const DIRMODE = {
     '4dir': 4,

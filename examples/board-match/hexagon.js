@@ -39,7 +39,7 @@ class Demo extends Phaser.Scene {
                 .setData('symbol', index)
                 .setTint(colorArray[index * 60].color);
             board.addChess(chess, tileXY.x, tileXY.y, 0, true);
-            this.add.text(chess.x, chess.y, tileXY.x + ',' + tileXY.y)
+            this.add.text(chess.x, chess.y, index)
                 .setOrigin(0.5)
                 .setTint(0x0);
         }, this);
@@ -47,16 +47,19 @@ class Demo extends Phaser.Scene {
         var match = this.rexBoard.add.match({
                 board: board
             })
-            .refreshSymbols(function(tileXY, board){
+            .refreshSymbols(function (tileXY, board) {
                 var chess = board.tileXYZToChess(tileXY.x, tileXY.y, 0);
+                if (chess == null) {
+                    return null;
+                }
                 return chess.getData('symbol');
             })
-            .match(3, false, function(matched){
-                var chess, tileXY;
-                for(var i =0, cnt=matched.length; i<cnt; i++) {
-                    tileXY = matched[i];
+            .match(3, function (matchedTileXY, dir, board) {
+                var tileXY, chess;
+                for (var i = 0, cnt = matchedTileXY.length; i < cnt; i++) {
+                    tileXY = matchedTileXY[i];
                     chess = board.tileXYZToChess(tileXY.x, tileXY.y, 0);
-                    chess.setScale(0.75);
+                    chess.setScale(0.8);
                 }
             });
     }
@@ -65,7 +68,7 @@ class Demo extends Phaser.Scene {
 }
 
 var createHexagonTexture = function (scene, key, staggeraxis) {
-    var hexagon = new Phaser.Geom.rexHexagon(0, 0, 30, staggeraxis);
+    var hexagon = new Phaser.Geom.rexHexagon(0, 0, 40, staggeraxis);
     hexagon.left = 0;
     hexagon.top = 0;
 

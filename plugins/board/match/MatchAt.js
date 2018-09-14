@@ -1,60 +1,34 @@
-var MatchAt = function (pattern, startTileX, startTileY, dir) {
-    var matchNMode = typeof (pattern) === 'number';
-    var patternLength;
-    if (matchNMode) {
-        patternLength = pattern;
-        pattern = null;
-    } else {
-        patternLength = pattern.length;
-    }
-
-    var symbol;
-    var curTileX, curTileY;
-    var tmpTileX, tmpTileY;
-    var board = this.board;
-    var matchedTileXY = [];
-    for (var i = 0; i < patternLength; i++) {
-        if (curTileX === undefined) {
-            curTileX = startTileX
-            curTileY = startTileY;
-        } else {
-            // get next tileXY
-            tmpTileX = board.getNeighborTileX(curTileX, curTileY, dir);
-            tmpTileY = board.getNeighborTileY(curTileX, curTileY, dir);
-            curTileX = tmpTileX;
-            curTileY = tmpTileY;
+var MatchAtDir = function (pattern, startTileX, startTileY, callback, scope, getFirst) {
+    // pattern: pattern list or repeat count
+    var board = this.board,
+        grid = board.grid;
+    var dirs = grid.fullDirections,
+        dir,
+        dirMask = this.dirMask;
+    var matchedTileXY;
+    for (var i = 0, cnt = dirs.length; i < cnt; i++) {
+        dir = dirs[i];
+        if (dirMask[dir] === false) {
+            continue;
         }
 
-        symbol = this.getSymbol(curTileX, curTileY);
-        if (!isValidSymbol(symbol)) {
-            return false;
+        matchedTileXY = this.matchAtDir(pattern, startTileX, startTileY, dir);
+        if (matchedTileXY === false) {
+            continue;
         }
-        if (!isWildcardSymbol(symbol, this.wildcard)) {
-            if (matchNMode) {
-                if (pattern === null) {
-                    pattern = symbol;
-                } else if (pattern !== symbol) {
-                    return false;
-                }
-            } else if (pattern[i] !== symbol) { // pattern list mode
-                return false;
+        if (callback) {
+            if (scope) {
+                callback.call(scope, matchedTileXY, dir, board);
+            } else {
+                callback(matchedTileXY, dir, board);
             }
         }
-        matchedTileXY.push({
-            x: curTileX,
-            y: curTileY
-        });
+        if (getFirst) {
+            return matchedTileXY;
+        }
     }
 
-    return matchedTileXY;
+    return this;
 };
 
-var isValidSymbol = function (symbol) {
-    return symbol && (symbol !== '');
-}
-
-var isWildcardSymbol = function (symbol, wildcard) {
-    return wildcard && (wildcard !== '') && (symbol === wildcard);
-};
-
-export default MatchAt;
+export default MatchAtDir;
