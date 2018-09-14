@@ -2753,15 +2753,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-tile-position" title="Get tile position" class="md-nav__link">
-    Get tile position
+  <a href="#chess-tile-position" title="Chess -&gt; tile position" class="md-nav__link">
+    Chess -&gt; tile position
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-chess" title="Get chess" class="md-nav__link">
-    Get chess
+  <a href="#tile-position-chess" title="Tile position -&gt; chess" class="md-nav__link">
+    Tile position -&gt; chess
   </a>
   
 </li>
@@ -2959,15 +2959,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-tile-position" title="Get tile position" class="md-nav__link">
-    Get tile position
+  <a href="#chess-tile-position" title="Chess -&gt; tile position" class="md-nav__link">
+    Chess -&gt; tile position
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-chess" title="Get chess" class="md-nav__link">
-    Get chess
+  <a href="#tile-position-chess" title="Tile position -&gt; chess" class="md-nav__link">
+    Tile position -&gt; chess
   </a>
   
 </li>
@@ -3158,15 +3158,15 @@
 <li><code>chessA</code>, <code>chessB</code> : Game objects</li>
 <li><code>align</code> : Set <code>true</code> to align (i.e. set position) chess to grid (tileX, tileY).</li>
 </ul>
-<h3 id="get-tile-position">Get tile position<a class="headerlink" href="#get-tile-position" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tileXYZ</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getChessXYZ</span><span class="p">(</span><span class="nx">chess</span><span class="p">);</span>
+<h3 id="chess-tile-position">Chess -&gt; tile position<a class="headerlink" href="#chess-tile-position" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tileXYZ</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">chessToTileXYZ</span><span class="p">(</span><span class="nx">chess</span><span class="p">);</span>
 </pre></div>
 
 <ul>
 <li><code>chess</code> : A game object</li>
 <li><code>tileXYZ</code> : <code>{x,y,z}</code> or <code>null</code> if chess is not added to board.</li>
 </ul>
-<h3 id="get-chess">Get chess<a class="headerlink" href="#get-chess" title="Permanent link">&para;</a></h3>
+<h3 id="tile-position-chess">Tile position -&gt; chess<a class="headerlink" href="#tile-position-chess" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get chess at (tileX, tileY, tileZ)
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">chess</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">tileXYZToChess</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">,</span> <span class="nx">tileZ</span><span class="p">);</span>

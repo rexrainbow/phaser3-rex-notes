@@ -29,15 +29,13 @@ var onPointerDown = function (pointer) {
     if (!this.input.enable) {
         return;
     }
-    var tmpTileXY = this.worldXYToTileXY(pointer.x, pointer.y);
-    if (!tmpTileXY) {
-        return;
-    }
-    var tileX = tmpTileXY.x,
-        tileY = tmpTileXY.y;
+    var tileX = this.worldXYToTileX(pointer.x, pointer.y),
+        tileY = this.worldXYToTileY(pointer.x, pointer.y);
     if (!this.contains(tileX, tileY)) {
         return;
     }
+    tmpTileXY.x = tileX;
+    tmpTileXY.y = tileY;    
     this.emit('tiledown', pointer, tmpTileXY);
 
     tmpChess.length = 0;
@@ -58,15 +56,13 @@ var onPointerUp = function (pointer) {
     if (!this.input.enable) {
         return;
     }
-    var tmpTileXY = this.worldXYToTileXY(pointer.x, pointer.y);
-    if (!tmpTileXY) {
-        return;
-    }
-    var tileX = tmpTileXY.x,
-        tileY = tmpTileXY.y;
+    var tileX = this.worldXYToTileX(pointer.x, pointer.y),
+        tileY = this.worldXYToTileY(pointer.x, pointer.y);
     if (!this.contains(tileX, tileY)) {
         return;
     }
+    tmpTileXY.x = tileX;
+    tmpTileXY.y = tileY;    
     this.emit('tileup', pointer, tmpTileXY);
 
     tmpChess.length = 0;
@@ -83,12 +79,8 @@ var onPointerMove = function (pointer) {
     if (!this.input.enable) {
         return;
     }
-    var tmpTileXY = this.worldXYToTileXY(pointer.x, pointer.y);
-    if (!tmpTileXY) {
-        return;
-    }
-    var tileX = tmpTileXY.x,
-        tileY = tmpTileXY.y;
+    var tileX = this.worldXYToTileX(pointer.x, pointer.y),
+        tileY = this.worldXYToTileY(pointer.x, pointer.y);
     if (!this.contains(tileX, tileY)) {
         return;
     }
@@ -97,6 +89,8 @@ var onPointerMove = function (pointer) {
     if ((inputData.preTileX === tileX) && (inputData.preTileY === tileY)) {
         return;
     }
+    tmpTileXY.x = tileX;
+    tmpTileXY.y = tileY;
     this.emit('tilemove', pointer, tmpTileXY);
 
     tmpChess.length = 0;
@@ -113,6 +107,10 @@ var onPointerMove = function (pointer) {
     inputData.preTileY = tileY;
 };
 
+var tmpTileXY = {
+    x: 0,
+    y: 0
+};
 var tmpChess = [];
 
 export default SetInteractive;

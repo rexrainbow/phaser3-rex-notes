@@ -2,7 +2,7 @@ var MatchAtDir = function (pattern, startTileX, startTileY, callback, scope, get
     // pattern: pattern list or repeat count
     var board = this.board,
         grid = board.grid;
-    var dirs = grid.fullDirections,
+    var dirs = grid.allDirections,
         dir,
         dirMask = this.dirMask;
     var matchedTileXY;
@@ -16,6 +16,7 @@ var MatchAtDir = function (pattern, startTileX, startTileY, callback, scope, get
         if (matchedTileXY === false) {
             continue;
         }
+
         if (callback) {
             if (scope) {
                 callback.call(scope, matchedTileXY, dir, board);

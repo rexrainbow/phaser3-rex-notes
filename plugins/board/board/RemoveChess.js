@@ -1,6 +1,6 @@
 var RemoveChess = function (gameObject, tileX, tileY, tileZ, destroy) {
     if (gameObject) {
-        var tileXYZ = this.getChessXYZ(gameObject);
+        var tileXYZ = this.chessToTileXYZ(gameObject);
         if (tileXYZ) {
             tileX = tileXYZ.x;
             tileY = tileXYZ.y;

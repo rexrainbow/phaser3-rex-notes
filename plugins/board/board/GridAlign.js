@@ -3,7 +3,7 @@ var GridAlign = function (gameObject, tileX, tileY, tileZ) {
         return this;
     }
     if (tileX === undefined) {
-        var tileXYZ = this.getChessXYZ(gameObject);
+        var tileXYZ = this.chessToTileXYZ(gameObject);
         tileX = tileXYZ.x;
         tileY = tileXYZ.y;
         tileZ = tileXYZ.z;

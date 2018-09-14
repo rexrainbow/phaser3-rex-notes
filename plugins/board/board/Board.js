@@ -11,9 +11,16 @@ import MoveChess from './MoveChess.js';
 import SwapChess from './SwapChess.js';
 import Contains from './Contains.js';
 import ForEachTileXY from './ForEachTileXY.js';
-import WorldXYToTileXY from './WorldXYToTileXY.js';
+import GetWrapTileX from './GetWrapTileX.js';
+import GetWrapTileY from './GetWrapTileY.js';
+import TileXYZToChess from './TileXYZToChess.js';
+import TileXYToChess from './TileXYToChess.js';
+import ChessToTileXYZ from './ChessToTileXYZ.js';
 import GetNeighborTileX from './GetNeighborTileX.js';
 import GetNeighborTileY from './GetNeighborTileY.js';
+import GetNeighborChess from './GetNeighborChess.js';
+import WorldXYToTileX from './WorldXYToTileX.js';
+import WorldXYToTileY from './WorldXYToTileY.js';
 import SetInteractive from './SetInteractive.js';
 
 
@@ -109,11 +116,6 @@ class Board extends EE {
         return uid;
     }
 
-    getChessXYZ(gameObject) {
-        // game object or uid
-        return this.boardData.getXYZ(this.getChessUID(gameObject));
-    }
-
     exists(gameObject) {
         // game object or uid
         return this.boardData.exists(this.getChessUID(gameObject));
@@ -145,27 +147,6 @@ class Board extends EE {
         }
         return out;
     }
-
-
-    tileXYZToChess(tileX, tileY, tileZ) {
-        var uid = this.boardData.getUID(tileX, tileY, tileZ);
-        return this.uidToChess(uid);
-    }
-
-    tileXYToChess(tileX, tileY, out) {
-        if (out === undefined) {
-            out = [];
-        }
-        var tileZToUIDs = this.boardData.getUID(tileX, tileY);
-        if (tileZToUIDs == null) {
-            return out;
-        }
-
-        for (var tileZ in tileZToUIDs) {
-            out.push(this.uidToChess(tileZToUIDs[tileZ]));
-        }
-        return out;
-    }
 }
 
 var methods = {
@@ -178,9 +159,16 @@ var methods = {
     swapChess: SwapChess,
     forEachTileXY: ForEachTileXY,
     contains: Contains,
-    worldXYToTileXY: WorldXYToTileXY,
+    getWrapTileX: GetWrapTileX,
+    getWrapTileY: GetWrapTileY,
+    tileXYZToChess: TileXYZToChess,
+    tileXYToChess: TileXYToChess,
+    chessToTileXYZ: ChessToTileXYZ,
     getNeighborTileX: GetNeighborTileX,
     getNeighborTileY: GetNeighborTileY,
+    getNeighborChess: GetNeighborChess,
+    worldXYToTileX: WorldXYToTileX,
+    worldXYToTileY: WorldXYToTileY,
     setInteractive: SetInteractive,
 }
 Object.assign(

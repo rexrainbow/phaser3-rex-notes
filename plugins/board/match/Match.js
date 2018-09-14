@@ -1,5 +1,5 @@
 import IsFunction from 'rexPlugins/utils/object/IsFunction.js';
-import MatchBoard from './MatchBoard.js';
+import MatchAll from './MatchAll.js';
 import MatchAt from './MatchAt.js';
 import MatchAtDir from './MatchAtDir.js';
 
@@ -27,6 +27,7 @@ class Match {
     shutdown() {
         this.board = undefined;
         this.symbols = undefined;
+        this.dirMask = undefined;
         return this;
     }
 
@@ -85,7 +86,7 @@ class Match {
         return this.symbols[this.tileXYToKey(tileX, tileY)];
     }
 
-    getSymobls(callback, scope) {
+    dumpSymobls(callback, scope) {
         var board = this.board;
         var tileXY, symbol
         var width = board.width,
@@ -133,6 +134,14 @@ class Match {
         out.y = Math.floor(key / width);
         return out;
     }
+
+    anyMatch(pattern) {
+        return this.match(pattern, null, null, true);
+    }
+
+    anyMatchAt(pattern, startTileX, startTileY) {
+        return this.matchAt(pattern, startTileX, startTileY, null, null, true);
+    }    
 }
 
 var tmp = {
@@ -141,7 +150,7 @@ var tmp = {
 };
 
 var methods = {
-    match: MatchBoard,
+    match: MatchAll,
     matchAt: MatchAt,
     matchAtDir: MatchAtDir,
 };

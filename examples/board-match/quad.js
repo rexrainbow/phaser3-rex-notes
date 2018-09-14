@@ -60,6 +60,8 @@ class Demo extends Phaser.Scene {
                     chess.setScale(0.7);
                 }
             });
+
+        this.add.text(0, 0, 'Match count =' + match.matchedCount);
     }
 
     update() {}

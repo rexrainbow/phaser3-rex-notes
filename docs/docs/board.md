@@ -126,16 +126,16 @@ board.swapChess(chessA, chessB, align);
 - `chessA`, `chessB` : Game objects
 - `align` : Set `true` to align (i.e. set position) chess to grid (tileX, tileY).
 
-### Get tile position
+### Chess -> tile position
 
 ```javascript
-var tileXYZ = board.getChessXYZ(chess);
+var tileXYZ = board.chessToTileXYZ(chess);
 ```
 
 - `chess` : A game object
 - `tileXYZ` : `{x,y,z}` or `null` if chess is not added to board.
 
-### Get chess
+### Tile position -> chess
 
 - Get chess at (tileX, tileY, tileZ)
     ```javascript

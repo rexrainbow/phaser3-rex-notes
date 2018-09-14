@@ -20,6 +20,7 @@ var MatchBoard = function (pattern, callback, scope, getFirst) {
                 if (matchedTileXY === false) {
                     continue;
                 }
+
                 if (callback) {
                     if (scope) {
                         callback.call(scope, matchedTileXY, dir, board);

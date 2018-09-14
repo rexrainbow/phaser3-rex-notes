@@ -16,8 +16,8 @@ class HexagonGrid extends Hexagon {
         return this;
     }
 
-    get fullDirections() {
-        return FULLDIR;
+    get allDirections() {
+        return ALLDIR;
     }
 
     // board-match    
@@ -31,7 +31,7 @@ class HexagonGrid extends Hexagon {
     // getTileY
 }
 
-const FULLDIR = [0, 1, 2, 3, 4, 5];
+const ALLDIR = [0, 1, 2, 3, 4, 5];
 const HALFDIR = [0, 1, 2];
 
 var methods = {

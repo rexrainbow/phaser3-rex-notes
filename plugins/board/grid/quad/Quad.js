@@ -23,8 +23,8 @@ class QuadGrid extends Quad {
         return this;
     }
 
-    get fullDirections() {
-        return (this.directions === 4) ? FULLDIR4 : FULLDIR8;
+    get allDirections() {
+        return (this.directions === 4) ? ALLDIR4 : ALLDIR8;
     }
     
     // board-match
@@ -38,8 +38,8 @@ class QuadGrid extends Quad {
     // getTileY    
 }
 
-const FULLDIR4 = [0, 1, 2, 3];
-const FULLDIR8 = [0, 1, 2, 3, 4, 5, 6, 7];
+const ALLDIR4 = [0, 1, 2, 3];
+const ALLDIR8 = [0, 1, 2, 3, 4, 5, 6, 7];
 const HALFDIR4 = [0, 1];
 const HALFDIR8 = [0, 1, 4, 5];
 

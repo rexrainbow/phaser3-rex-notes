@@ -1,5 +1,5 @@
 var MoveChess = function (gameObject, toTileX, toTileY, toTileZ, align) {
-    var fromTileXYZ = this.getChessXYZ(gameObject);
+    var fromTileXYZ = this.chessToTileXYZ(gameObject);
     if (fromTileXYZ &&
         (fromTileXYZ.x === toTileX) && (fromTileXYZ.y === toTileY) && (fromTileXYZ.z === toTileZ)) {
         // move to current position
