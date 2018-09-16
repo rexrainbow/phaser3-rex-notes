@@ -9,9 +9,9 @@ Built-in javascript object.
 ### Run function for each element
 
 ```javascript
-var callback = function(element, index, arr) {};
-arr.forEach(callback);
-// arr.forEach(callback, scope);
+arr.forEach(function(element, index, arr) {
+    //
+}, scope);
 ```
 
 ### Filter elements
@@ -19,29 +19,23 @@ arr.forEach(callback);
 Creates a new array with all elements that pass the test function.
 
 ```javascript
-var callback = function(element, index, arr) {
+var result = arr.filter(function(element, index, arr) {
     return true; // false
-};
-var result = arr.filter(callback);
-// var result = arr.filter(callback, scope);
+}, scope);
 ```
 
 ### Find one element
 
 ```javascript
-var callback = function(element, index, arr) {
+var element = arr.find(function(element, index, arr) {
     return true; // false
-};
-var element = arr.find(callback);
-// var element = arr.find(callback, scope);
+}, scope);
 ```
 
 ### Map elements to a new array
 
 ```javascript
-var callback = function(element, index, arr) {
+var newArray = arr.map(function(element, index, arr) {
     return newElement;
-};
-var newArray = arr.map(callback);
-// var newArray = arr.map(callback, scope);
+}, scope);
 ```

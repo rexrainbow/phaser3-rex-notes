@@ -3,6 +3,7 @@ import MatchAll from './MatchAll.js';
 import MatchAtDir from './MatchAtDir.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
+const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
 class Match {
     constructor(config) {
@@ -39,15 +40,22 @@ class Match {
         this.board = board;
     }
 
-    setDirMask(dirMask) {
-        var maskValue;
-        for (var dir in dirMask) {
-            maskValue = dirMask[dir];
+    setDirMask(dir, value) {
+        if (IsPlainObject(dir)) {
+            var dirMask = dir;
+            for (dir in dirMask) {
+                value = dirMask[dir];
+                if (DIRMASKMODE.hasOwnProperty(dir)) {
+                    dir = DIRMASKMODE[dir];
+                }
+
+                this.dirMask[dir] = value;
+            }
+        } else {
             if (DIRMASKMODE.hasOwnProperty(dir)) {
                 dir = DIRMASKMODE[dir];
             }
-
-            this.dirMask[dir] = maskValue;
+            this.dirMask[dir] = value;
         }
         return this;
     }
@@ -64,6 +72,9 @@ class Match {
 
     setSymbol(tileX, tileY, callback, scope) {
         var board = this.board;
+        if (!board.Contains(tileX, tileY)) {
+            return this;
+        }
         var symbol;
         if (IsFunction(callback)) {
             tmp.x = tileX;

@@ -99,6 +99,7 @@ nav:
     - FSM: fsm.md
 - Data:
     - Data manager: datamanager.md
+    - Set: set.md
     - Array:
         - Filter/Map: array-filter.md
         - Number array: create-number-array.md
@@ -160,6 +161,7 @@ nav:
     - Grid:    
         - Quad: board-quadgrid.md
         - Hexagon: board-hexagongrid.md
+    - Match: board-match.md
 
 
 extra_javascript:

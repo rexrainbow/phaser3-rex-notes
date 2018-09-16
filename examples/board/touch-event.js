@@ -61,8 +61,9 @@ class Demo extends Phaser.Scene {
 
     update() {
         var pointer = this.input.activePointer;
-        var tileXY = this.board.worldXYToTileXY(pointer.x, pointer.y);
-        this.print.setText(tileXY.x + ',' + tileXY.y);
+        var tileX = this.board.worldXYToTileX(pointer.x, pointer.y);
+        var tileY = this.board.worldXYToTileY(pointer.x, pointer.y);
+        this.print.setText(tileX + ',' + tileY);
     }
 }
 

@@ -1787,15 +1787,27 @@
           
 
 
+  <li class="md-nav__item">
+    <a href="../set/" title="Set" class="md-nav__link">
+      Set
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10-2" type="checkbox" id="nav-10-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10-3" type="checkbox" id="nav-10-3">
     
-    <label class="md-nav__link" for="nav-10-2">
+    <label class="md-nav__link" for="nav-10-3">
       Array
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-10-2">
+      <label class="md-nav__title" for="nav-10-3">
         Array
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1837,13 +1849,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10-3" type="checkbox" id="nav-10-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10-4" type="checkbox" id="nav-10-4">
     
-    <label class="md-nav__link" for="nav-10-3">
+    <label class="md-nav__link" for="nav-10-4">
       CSV
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-10-3">
+      <label class="md-nav__title" for="nav-10-4">
         CSV
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1885,13 +1897,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10-4" type="checkbox" id="nav-10-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10-5" type="checkbox" id="nav-10-5">
     
-    <label class="md-nav__link" for="nav-10-4">
+    <label class="md-nav__link" for="nav-10-5">
       Database
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-10-4">
+      <label class="md-nav__title" for="nav-10-5">
         Database
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -2771,6 +2783,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#directions" title="Directions" class="md-nav__link">
+    Directions
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2801,6 +2820,18 @@
         
       </ul>
     </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../board-match/" title="Match" class="md-nav__link">
+      Match
+    </a>
   </li>
 
         
@@ -2877,6 +2908,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#directions" title="Directions" class="md-nav__link">
+    Directions
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2921,7 +2959,8 @@
     <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">cellWidth</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">cellHeight</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">type</span><span class="o">:</span> <span class="mi">0</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="c1">// dir: 4</span>
 <span class="p">});</span>
 </pre></div>
 
@@ -2935,6 +2974,11 @@
 <li><code>2</code>, or <code>staggered</code></li>
 </ul>
 </li>
+<li><code>dir</code> :<ul>
+<li><code>4</code> or <code>'4dir'</code> : Up/left/down/right</li>
+<li><code>8</code> or <code>'8dir'</code> : Up/left/down/right/up-left/up-right/down-left/dowm-right</li>
+</ul>
+</li>
 </ul>
 <h3 id="get-world-position">Get world position<a class="headerlink" href="#get-world-position" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">worldX</span> <span class="o">=</span> <span class="nx">grid</span><span class="p">.</span><span class="nx">getWorldX</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">);</span>
@@ -2945,6 +2989,18 @@
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tileX</span> <span class="o">=</span> <span class="nx">grid</span><span class="p">.</span><span class="nx">getTileX</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">tileY</span> <span class="o">=</span> <span class="nx">grid</span><span class="p">.</span><span class="nx">getTileY</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">);</span>
 </pre></div>
+
+<h3 id="directions">Directions<a class="headerlink" href="#directions" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>0</code> : Left</li>
+<li><code>1</code> : Down</li>
+<li><code>2</code> : Right</li>
+<li><code>3</code> : Up</li>
+<li><code>4</code> : Left-down</li>
+<li><code>5</code> : Down-right</li>
+<li><code>6</code> : Right-up</li>
+<li><code>7</code> : Up-left</li>
+</ul>
                 
                   
                 

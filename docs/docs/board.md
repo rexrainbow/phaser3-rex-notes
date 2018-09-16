@@ -148,6 +148,18 @@ var tileXYZ = board.chessToTileXYZ(chess);
     // var out = board.tileXYToChess(tileX, tileY, out);
     ```
     - `out` : An array of chess
+- Get chess from array of (tileX, tileY)
+    ```javascript
+    var out = board.tileXYArrayToChess(tileXYArray);
+    // var out = board.tileXYArrayToChess(tileXYArray, out);
+    ```
+    or
+    ```javascript
+    var out = board.tileXYArrayToChess(tileXYArray, tileZ);
+    // var out = board.tileXYArrayToChess(tileXYArray, tileZ, out);
+    ```
+    - `tileXYArray` : An array of tileXY `{x, y}`
+    - `out` : An array of chess
 
 ### Contains
 
@@ -168,11 +180,24 @@ var tileXYZ = board.chessToTileXYZ(chess);
 ### For each tile
 
 ```javascript
-var callback = function(tileXY, board) {
+board.forEachTileXY(function(tileXY, board) {
     // var tileX = tileXY.x;
     // var tileY = tileXY.y;
-}
-board.forEachTileXY(callback, scopr);
+}, scopr);
+```
+
+### Tile position <-> world position
+
+```javascript
+var worldX = board.tileXYToWorldX(tileX, tileY);
+var worldY = board.tileXYToWorldY(tileX, tileY);
+```
+
+### World position <-> tile position
+
+```javascript
+var tileX = board.worldXYToTileX(worldX, worldY);
+var tileY = board.worldXYToTileY(worldX, worldY);
 ```
 
 ### Touch events

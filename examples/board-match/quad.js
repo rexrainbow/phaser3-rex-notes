@@ -1,8 +1,6 @@
 import RhombusPlugin from 'rexPlugins/rhombus-plugin.js';
 import BoardPlugin from 'rexPlugins/board-plugin.js';
 
-const Random = Phaser.Math.Between;
-
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -30,6 +28,7 @@ class Demo extends Phaser.Scene {
             height: 8
         });
 
+        const Random = Phaser.Math.Between;
         var colorArray = Phaser.Display.Color.HSVColorWheel(0.5, 1);
         board.forEachTileXY(function (tileXY, board) {
             var index = Random(0, 5);
@@ -42,6 +41,7 @@ class Demo extends Phaser.Scene {
                 .setTint(0x0);
         }, this);
 
+        const GroupCall = Phaser.Actions.Call;
         var matchedCount = 0;
         var match = this.rexBoard.add.match({
                 board: board
@@ -54,13 +54,10 @@ class Demo extends Phaser.Scene {
                 return chess.getData('symbol');
             })
             .match(3, function (result, board) {
-                var matchedTileXY = result.tileXY;
-                var tileXY, chess;
-                for (var i = 0, cnt = matchedTileXY.length; i < cnt; i++) {
-                    tileXY = matchedTileXY[i];
-                    chess = board.tileXYZToChess(tileXY.x, tileXY.y, 0);
+                var chess = board.tileXYArrayToChess(result.tileXY, 0);
+                GroupCall(chess, function (chess) {
                     chess.setScale(0.7);
-                }
+                });
                 matchedCount++;
             });
 

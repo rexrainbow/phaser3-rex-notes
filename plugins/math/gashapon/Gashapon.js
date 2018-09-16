@@ -1,5 +1,5 @@
 import Clone from 'rexPlugins/utils/object/Clone.js';
-import IsEmpty from 'rexPlugins/utils/Object/IsEmpty.js';
+import IsEmpty from 'rexPlugins/utils/object/IsEmpty.js';
 import Clear from 'rexPlugins/utils/object/Clear.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;

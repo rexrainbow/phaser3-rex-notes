@@ -1,6 +1,7 @@
-import ChessBank from '../data/ChessBank.js';
-import BoardData from '../data/BoardData.js';
-import ChessData from '../data/ChessData.js';
+import ChessBank from '../data/chess/ChessBank.js';
+import GetChessData from '../data/chess/GetChessData.js';
+import GetChessUID from '../data/chess/GetChessUID.js';
+import BoardData from '../data/board/BoardData.js';
 
 import SetBoardWidth from './SetBoardWidth.js';
 import SetBoardHeight from './SetBoardHeight.js';
@@ -15,10 +16,13 @@ import GetWrapTileX from './GetWrapTileX.js';
 import GetWrapTileY from './GetWrapTileY.js';
 import TileXYZToChess from './TileXYZToChess.js';
 import TileXYToChess from './TileXYToChess.js';
+import TileXYArrayToChess from './TileXYArrayToChess.js';
 import ChessToTileXYZ from './ChessToTileXYZ.js';
 import GetNeighborTileX from './GetNeighborTileX.js';
 import GetNeighborTileY from './GetNeighborTileY.js';
 import GetNeighborChess from './GetNeighborChess.js';
+import TileXYToWorldX from './TileXYToWorldX.js';
+import TileXYToWorldY from './TileXYToWorldY.js';
 import WorldXYToTileX from './WorldXYToTileX.js';
 import WorldXYToTileY from './WorldXYToTileY.js';
 import SetInteractive from './SetInteractive.js';
@@ -26,7 +30,6 @@ import SetInteractive from './SetInteractive.js';
 
 const EE = Phaser.Events.EventEmitter;
 const GetValue = Phaser.Utils.Objects.GetValue;
-const uidKey = ChessBank.uidKey;
 
 class Board extends EE {
     constructor(scene, config) {
@@ -88,34 +91,6 @@ class Board extends EE {
         return this;
     }
 
-    getChessData(gameObject) {
-        // game object or uid
-        var type = typeof (gameObject);
-        if ((type === 'number') || (type === 'string')) {
-            // uid
-            var uid = gameObject;
-            return ChessBank.get(uid);
-        } else {
-            // game object
-            if (!gameObject.hasOwnProperty('rexChess')) {
-                gameObject.rexChess = new ChessData(gameObject);
-            }
-            return gameObject.rexChess;
-        }
-    }
-
-    getChessUID(gameObject) {
-        // game object or uid
-        var uid;
-        var type = typeof (gameObject);
-        if ((type === 'number') || (type === 'string')) {
-            uid = gameObject;
-        } else {
-            uid = this.getChessData(gameObject)[uidKey];
-        }
-        return uid;
-    }
-
     exists(gameObject) {
         // game object or uid
         return this.boardData.exists(this.getChessUID(gameObject));
@@ -152,6 +127,8 @@ class Board extends EE {
 var methods = {
     setBoardWidth: SetBoardWidth,
     setBoardHeight: SetBoardHeight,
+    getChessData: GetChessData,
+    getChessUID: GetChessUID,
     addChess: AddChess,
     gridAlign: GridAlign,
     removeChess: RemoveChess,
@@ -163,10 +140,13 @@ var methods = {
     getWrapTileY: GetWrapTileY,
     tileXYZToChess: TileXYZToChess,
     tileXYToChess: TileXYToChess,
+    tileXYArrayToChess: TileXYArrayToChess,
     chessToTileXYZ: ChessToTileXYZ,
     getNeighborTileX: GetNeighborTileX,
     getNeighborTileY: GetNeighborTileY,
     getNeighborChess: GetNeighborChess,
+    tileXYToWorldX: TileXYToWorldX,
+    tileXYToWorldY: TileXYToWorldY,
     worldXYToTileX: WorldXYToTileX,
     worldXYToTileY: WorldXYToTileY,
     setInteractive: SetInteractive,

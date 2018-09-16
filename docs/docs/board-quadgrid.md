@@ -25,7 +25,8 @@ var grid = scene.rexBoard.add.quadGrid({
     y: 0,
     cellWidth: 0,
     cellHeight: 0,
-    type: 0
+    type: 0,
+    // dir: 4
 });
 ```
 
@@ -36,6 +37,9 @@ var grid = scene.rexBoard.add.quadGrid({
     - `0`, or `orthogonal`
     - `1`, or `isometric`
     - `2`, or `staggered`
+- `dir` :
+    - `4` or `'4dir'` : Up/left/down/right
+    - `8` or `'8dir'` : Up/left/down/right/up-left/up-right/down-left/dowm-right
 
 ### Get world position
 
@@ -50,3 +54,14 @@ var worldY = grid.getWorldY(tileX, tileY);
 var tileX = grid.getTileX(worldX, worldY);
 var tileY = grid.getTileY(worldX, worldY);
 ```
+
+### Directions
+
+- `0` : Left
+- `1` : Down
+- `2` : Right
+- `3` : Up
+- `4` : Left-down
+- `5` : Down-right
+- `6` : Right-up
+- `7` : Up-left

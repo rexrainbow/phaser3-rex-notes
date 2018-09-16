@@ -9,8 +9,8 @@ var GridAlign = function (gameObject, tileX, tileY, tileZ) {
         tileZ = tileXYZ.z;
     }
 
-    gameObject.x = this.grid.getWorldX(tileX, tileY, tileZ);
-    gameObject.y = this.grid.getWorldY(tileX, tileY, tileZ);
+    gameObject.x = this.tileXYToWorldX(tileX, tileY);
+    gameObject.y = this.tileXYToWorldY(tileX, tileY);
 };
 
 export default GridAlign;

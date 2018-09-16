@@ -62,7 +62,9 @@ class TickTask extends EE {
 
     complete() {
         this.isRunning = false;
-        this.emit('complete', this, this.gameObject);
+        if (this.tickingMode !== 0) {
+            this.emit('complete', this, this.gameObject);
+        }
     }
 }
 
