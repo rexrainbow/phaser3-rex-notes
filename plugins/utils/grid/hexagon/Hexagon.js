@@ -59,7 +59,7 @@ class Hexagon {
         if (typeof (staggerindex) === 'string') {
             staggerindex = STAGGERINDEX[staggerindex]
         }
-        this.staggeraxis = staggeraxis; // y(flat), or x(pointy)
+        this.staggeraxis = staggeraxis; // 0|y(flat), or 1|x(pointy)
         this.staggerindex = staggerindex; // even, or odd
 
         if (staggeraxis === 0) { // flat

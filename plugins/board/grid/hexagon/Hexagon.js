@@ -1,6 +1,7 @@
 import Hexagon from 'rexPlugins/utils/grid/hexagon/Hexagon.js';
 import GetNeighborTileX from 'rexPlugins/utils/grid/hexagon/GetNeighborTileX.js';
 import GetNeighborTileY from 'rexPlugins/utils/grid/hexagon/GetNeighborTileY.js';
+import GetGridPolygon from 'rexPlugins/utils/grid/hexagon/GetGridPolygon.js';
 
 class HexagonGrid extends Hexagon {
     constructor(config) {
@@ -29,6 +30,7 @@ class HexagonGrid extends Hexagon {
     // getWorldY
     // getTileX
     // getTileY
+    // getGridPolygon
 }
 
 const ALLDIR = [0, 1, 2, 3, 4, 5];
@@ -37,6 +39,7 @@ const HALFDIR = [0, 1, 2];
 var methods = {
     getNeighborTileX: GetNeighborTileX,
     getNeighborTileY: GetNeighborTileY,
+    getGridPolygon: GetGridPolygon,
 }
 Object.assign(
     HexagonGrid.prototype,

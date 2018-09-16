@@ -72,6 +72,22 @@ class Hexagon extends Polygon {
         var offsetY = value - this.y;
         Offset(this, 0, offsetY);
     }
+    
+    get centerX() {
+        return this.x;
+    }
+
+    set centerX(value) {
+        this.x = value;
+    }
+
+    get centerY() {
+        return this.y;
+    }
+
+    set centerY(value) {
+        this.y = value;
+    }
 
     setPosition(x, y) {
         var offsetX = x - this.x;

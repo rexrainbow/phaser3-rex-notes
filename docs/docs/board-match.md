@@ -1,6 +1,6 @@
 ## Introduction
 
-Get chess with matched patterns.
+Get matched chess.
 
 - Author: Rex
 - Application of Board system
@@ -90,6 +90,12 @@ match.setSymbol(tileX, tileY, (function(tileXY, board) {
     // if (chess == null) { return null; }
     return symbol;
 }, scope);
+```
+
+#### Get symbol
+
+```javascript
+var symbol = match.getSymbol(tileX, tileY);
 ```
 
 #### Dump symbols

@@ -1,6 +1,7 @@
 import Quad from 'rexPlugins/utils/grid/quad/Quad.js';
 import GetNeighborTileX from 'rexPlugins/utils/grid/quad/GetNeighborTileX.js';
 import GetNeighborTileY from 'rexPlugins/utils/grid/quad/GetNeighborTileY.js';
+import GetGridPolygon from 'rexPlugins/utils/grid/hexagon/GetGridPolygon.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -26,7 +27,7 @@ class QuadGrid extends Quad {
     get allDirections() {
         return (this.directions === 4) ? ALLDIR4 : ALLDIR8;
     }
-    
+
     // board-match
     get halfDirections() {
         return (this.directions === 4) ? HALFDIR4 : HALFDIR8;
@@ -35,7 +36,8 @@ class QuadGrid extends Quad {
     // getWorldX
     // getWorldY
     // getTileX
-    // getTileY    
+    // getTileY
+    // getGridPolygon        
 }
 
 const ALLDIR4 = [0, 1, 2, 3];
@@ -46,6 +48,7 @@ const HALFDIR8 = [0, 1, 4, 5];
 var methods = {
     getNeighborTileX: GetNeighborTileX,
     getNeighborTileY: GetNeighborTileY,
+    getGridPolygon: GetGridPolygon
 }
 Object.assign(
     QuadGrid.prototype,

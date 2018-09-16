@@ -92,6 +92,11 @@ See [Polygon shape](geom-polygon.md#draw-on-graphics).
     ```
     or
     ```javascript
+    hexagon.centerX = 0;  // equal to hexagon.x
+    hexagon.centerY = 0;  // equal to hexagon.y
+    ```    
+    or
+    ```javascript
     hexagon.left = 0;       // hexagon.x
     hexagon.top = 0;        // hexagon.y
     hexagon.right = 0;      // hexagon.x
@@ -124,8 +129,13 @@ See [Polygon shape](geom-polygon.md#get-properties).
 - Position
     - Center
         ```javascript
-        var x = hexagon.x;
-        var y = hexagon.y;
+        var centerX = hexagon.centerX;
+        var centerY = hexagon.centerY;
+        ```
+        or
+        ```javascript
+        var centerX = hexagon.x;
+        var centerY = hexagon.y;
         ```
     - Bound
         ```javascript
