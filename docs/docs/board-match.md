@@ -129,7 +129,7 @@ match.match(n, function (result, board) {
 }, scope);
 ```
 
-- `n` : A number, to get matched chess with n
+- `n` : A number, to get matched chess with n equal symbols
 - `result` : A group of chess
     ```javascript
     {
@@ -138,7 +138,7 @@ match.match(n, function (result, board) {
         pattern: symbol
     }
     ```
-    - `tileXY` : Tile position `{x, y}`
+    - `tileXY` : An array of tile positions `{x, y}`
     - `direction` : Direction of this chess group
         - `0`, `1`, for [quad grid](board-quadgrid.md) with 4 directions
         - `0`, `1`, `4`, `5`, for [quad grid](board-quadgrid.md) with 8 directions
