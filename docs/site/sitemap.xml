@@ -531,6 +531,26 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/board/</loc>
+     <lastmod>2018-09-16</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/board-quadgrid/</loc>
+     <lastmod>2018-09-16</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/board-hexagongrid/</loc>
+     <lastmod>2018-09-16</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/board-match/</loc>
+     <lastmod>2018-09-16</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
      <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/localstorage/</loc>
      <lastmod>2018-09-16</lastmod>
      <changefreq>daily</changefreq>
@@ -552,26 +572,6 @@
     </url>
     <url>
      <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/firebase-storage/</loc>
-     <lastmod>2018-09-16</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/board/</loc>
-     <lastmod>2018-09-16</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/board-quadgrid/</loc>
-     <lastmod>2018-09-16</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/board-hexagongrid/</loc>
-     <lastmod>2018-09-16</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/board-match/</loc>
      <lastmod>2018-09-16</lastmod>
      <changefreq>daily</changefreq>
     </url>
