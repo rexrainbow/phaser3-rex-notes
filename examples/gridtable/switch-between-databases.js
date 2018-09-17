@@ -70,7 +70,7 @@ var getDataBase = function (count) {
     var startIdx = Math.floor(Math.random() * 100);
     for (var i = 0; i < count; i++) {
         data.push({
-            id: i + startIdx
+            id: i
         });
     }
     return data;
