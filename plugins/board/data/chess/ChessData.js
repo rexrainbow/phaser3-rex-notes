@@ -18,7 +18,7 @@ class Chess {
 
     destroy() {
         if (this.board) {
-            this.board.RemoveChess(this[uidKey]);
+            this.board.removeChess(this[uidKey]);
         }
         ChessBank.remove(this[uidKey]);
 

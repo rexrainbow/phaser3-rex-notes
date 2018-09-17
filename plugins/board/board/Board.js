@@ -62,7 +62,7 @@ class Board extends EE {
 
     destroy() {
         this.emit('destroy');
-        this.removeAllChess();
+        this.removeAllChess(true, true);
         this.shutdown();
         return this;
     }

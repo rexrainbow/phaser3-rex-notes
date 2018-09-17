@@ -1,4 +1,7 @@
-var RemoveChess = function (gameObject, tileX, tileY, tileZ, destroy) {
+var RemoveChess = function (gameObject, tileX, tileY, tileZ, destroy, fromBoardRemove) {
+    if (fromBoardRemove === undefined) {
+        fromBoardRemove = false;
+    }
     if (gameObject) {
         var tileXYZ = this.chessToTileXYZ(gameObject);
         if (tileXYZ) {
@@ -17,7 +20,9 @@ var RemoveChess = function (gameObject, tileX, tileY, tileZ, destroy) {
         }
     }
 
-    this.boardData.removeUID(tileX, tileY, tileZ);
+    if (!fromBoardRemove) {
+        this.boardData.removeUID(tileX, tileY, tileZ);
+    }
     this.getChessData(gameObject).setBoard(null);
 
     if (destroy && gameObject.destroy) {
