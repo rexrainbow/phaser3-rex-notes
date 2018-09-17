@@ -186,6 +186,21 @@ board.forEachTileXY(function(tileXY, board) {
 }, scopr);
 ```
 
+Iteration order :
+
+```javascript
+board.forEachTileXY(function(tileXY, board, order) {
+    // var tileX = tileXY.x;
+    // var tileY = tileXY.y;
+}, scopr);
+```
+
+- `order` :
+    - `0`, or `x+` : Increasing x, increasing y.
+    - `1`, or `x-` : Decreasing x, increasing y.
+    - `2`, or `y+` : Increasing y, increasing x.
+    - `3`, or `y-` : Decreasing y, increasing x.
+
 ### Tile position <-> world position
 
 ```javascript
@@ -252,4 +267,16 @@ var tileY = board.worldXYToTileY(worldX, worldY);
     ```javascript
     board.on('gameobjectup', function(pointer, gameObject) {
     })
+    ```
+
+### Grid polygon
+
+- Get a [polygon object](geom-polygon.md) at tile position (tileX, tileY).
+    ```javascript
+    var poly = board.getGridPolygon(tileX, tileY);
+    // var out = board.getGridPolygon(tileX, tileY, out);
+    ```
+- Draw grid polygon on [graphics object](graphics.md#lines)
+    ```javascript
+    graphics.strokePoints(poly.points, true);
     ```

@@ -2,7 +2,7 @@ import {
     qr2x,
     qr2y,
     qr2z
-} from './Cube.js';
+} from './CubeTransfer.js';
 
 var Distance = function (tileA, tileB, roughMode) {
     var mode = this.mode;

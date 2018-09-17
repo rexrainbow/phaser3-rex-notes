@@ -1,7 +1,7 @@
 import Quad from 'rexPlugins/utils/grid/quad/Quad.js';
 import GetNeighborTileX from 'rexPlugins/utils/grid/quad/GetNeighborTileX.js';
 import GetNeighborTileY from 'rexPlugins/utils/grid/quad/GetNeighborTileY.js';
-import GetGridPolygon from 'rexPlugins/utils/grid/hexagon/GetGridPolygon.js';
+import GetGridPolygon from './GetGridPolygon.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 

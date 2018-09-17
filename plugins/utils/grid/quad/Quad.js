@@ -11,10 +11,9 @@ class Quad {
     }
 
     resetFromJSON(o) {
+        this.setType(GetValue(o, 'type', 0));        
         this.setOriginPosition(GetValue(o, 'x', 0), GetValue(o, 'y', 0));
         this.setCellSize(GetValue(o, 'cellWidth', 0), GetValue(o, 'cellHeight', 0));
-        this.setType(GetValue(o, 'type', 0));
-
     }
 
     setOriginPosition(x, y) {

@@ -1,5 +1,7 @@
 // https://www.redblobgames.com/grids/hexagons/
 
+import GetCellWidth from 'rexPlugins/geom/hexagon/Width.js';
+import GetCellHeight from 'rexPlugins/geom/hexagon/Height.js';
 import CONST from './const.js';
 import GetWorldX from './GetWorldX.js';
 import GetWorldY from './GetWorldY.js';
@@ -19,9 +21,20 @@ class Hexagon {
     }
 
     resetFromJSON(o) {
-        this.setOriginPosition(GetValue(o, 'x', 0), GetValue(o, 'y', 0));
-        this.setCellSize(GetValue(o, 'cellWidth', 0), GetValue(o, 'cellHeight', 0));
         this.setType(GetValue(o, 'staggeraxis', 1), GetValue(o, 'staggerindex', 1));
+        this.setOriginPosition(GetValue(o, 'x', 0), GetValue(o, 'y', 0));
+        var size = GetValue(o, 'size', undefined);
+        if (size !== undefined) {
+            var hexagon = {
+                size: size,
+                type: this.staggeraxis
+            }
+            var cellWidth = GetCellWidth(hexagon);
+            var cellHeight = GetCellHeight(hexagon);
+            this.setCellSize(cellWidth, cellHeight);
+        } else {
+            this.setCellSize(GetValue(o, 'cellWidth', 0), GetValue(o, 'cellHeight', 0));
+        }
     }
 
     setOriginPosition(x, y) {

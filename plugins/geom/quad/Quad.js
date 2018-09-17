@@ -7,8 +7,8 @@ const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Line = Phaser.Geom.Line;
 
-class Rhombus extends Polygon {
-    constructor(x, y, width, height) {
+class Quad extends Polygon {
+    constructor(x, y, width, height, type) {
         super();
         if (IsPlainObject(x)) {
             var config = x;
@@ -16,38 +16,55 @@ class Rhombus extends Polygon {
             y = GetValue(config, 'y', 0);
             width = GetValue(config, 'width', 0);
             height = GetValue(config, 'height', 0);
+            type = GetValue(config, 'type', 0);
         }
         var points = this.points;
         for (var i = 0; i < 4; i++) {
             points.push({});
         }
-        this.setTo(x, y, width, height);
+        this.setTo(x, y, width, height, type);
     }
 
     // override
-    setTo(x, y, width, height) {
+    setTo(x, y, width, height, type) {
+        if (typeof (type) === 'string') {
+            type = QUADTYPE[type];
+        }
+        this.type = type;
         this._x = x;
         this._y = y;
         this._width = width;
         this._height = height;
         var points = this.points;
 
-        var centerX = this.centerX,
-            centerY = this.centerY;
-        var helfWidth = width / 2;
-        var helfHeight = height / 2;
-        // 0
-        points[0].x = centerX + helfWidth;
-        points[0].y = centerY;
-        // 90
-        points[1].x = centerX;
-        points[1].y = centerY + helfHeight;
-        // 180
-        points[2].x = centerX - helfWidth;
-        points[2].y = centerY;
-        // 270
-        points[3].x = centerX;
-        points[3].y = centerY - helfHeight;
+        if (type === 0) { // rectangle
+            points[0].x = x;
+            points[0].y = y;
+            points[1].x = x + width;
+            points[1].y = y;
+            points[2].x = x + width;
+            points[2].y = y + height;
+            points[3].x = x;
+            points[3].y = y + height;
+        } else { // rhombus
+            var centerX = this.centerX,
+                centerY = this.centerY;
+            var helfWidth = width / 2;
+            var helfHeight = height / 2;
+            // 0
+            points[0].x = centerX + helfWidth;
+            points[0].y = centerY;
+            // 90
+            points[1].x = centerX;
+            points[1].y = centerY + helfHeight;
+            // 180
+            points[2].x = centerX - helfWidth;
+            points[2].y = centerY;
+            // 270
+            points[3].x = centerX;
+            points[3].y = centerY - helfHeight;            
+        }
+
         this.calculateArea();
         return this;
     }
@@ -135,7 +152,7 @@ class Rhombus extends Polygon {
     }
 
     set centerY(value) {
-        this.y += (value - this.centetY);
+        this.y += (value - this.centerY);
     }
 
     get width() {
@@ -190,7 +207,12 @@ class Rhombus extends Polygon {
     }
 }
 
-// use `rexRhombus` to prevent name conflict
-Phaser.Geom.rexRhombus = Rhombus;
+const QUADTYPE = {
+    'rectangle': 0,
+    'rhombus': 1
+}
 
-export default Rhombus;
+// use `rexQuad` to prevent name conflict
+Phaser.Geom.rexQuad = Quad;
+
+export default Quad;

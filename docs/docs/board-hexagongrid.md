@@ -25,6 +25,7 @@ var grid = scene.rexBoard.add.hexagonGrid({
     y: 0,
     cellWidth: 0,
     cellHeight: 0,
+    // size: undefined,
     staggeraxis: 1,
     staggerindex: 1
 });
@@ -33,6 +34,7 @@ var grid = scene.rexBoard.add.hexagonGrid({
 - `x`, `y` : World position of origin tile (i.e. tileX = 0, tileY = 0)
 - `cellWidth` : The width of the cell, in pixels.
 - `cellHeight` : The height of the cell, in pixels.
+- `size` : Distance between center to each corner. Get `cellWidth` and `cellHeight` from `size` if this parameter is not undefined.
 - `staggeraxis`
     - `0`, or `y`
     - `1`, or `x`

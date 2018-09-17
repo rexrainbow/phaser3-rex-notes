@@ -4,7 +4,7 @@ import {
     qr2z,
     xyz2q,
     xyz2r
-} from './Cube.js';
+} from './CubeTransfer.js';
 
 var Rotate = function (src, dir, out) {
     if (out === undefined) {

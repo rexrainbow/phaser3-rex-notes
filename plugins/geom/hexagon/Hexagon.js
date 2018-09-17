@@ -61,7 +61,11 @@ class Hexagon extends Polygon {
 
     set x(value) {
         var offsetX = value - this.x;
+        if (offsetX === 0) {
+            return;
+        }
         Offset(this, offsetX, 0);
+        this._x = value;
     }
 
     get y() {
@@ -70,9 +74,13 @@ class Hexagon extends Polygon {
 
     set y(value) {
         var offsetY = value - this.y;
+        if (offsetY === 0) {
+            return;
+        }
         Offset(this, 0, offsetY);
+        this._y = value;
     }
-    
+
     get centerX() {
         return this.x;
     }
@@ -92,9 +100,12 @@ class Hexagon extends Polygon {
     setPosition(x, y) {
         var offsetX = x - this.x;
         var offsetY = y - this.y;
-        this._x = x;
-        this._y = y;
+        if ((offsetX === 0) && (offsetY === 0)) {
+            return this;
+        }
         Offset(this, offsetX, offsetY);
+        this._x = x;
+        this._y = y;        
         return this;
     }
 
