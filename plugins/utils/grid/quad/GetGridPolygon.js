@@ -2,6 +2,12 @@ import Rhombus from 'rexPlugins/geom/rhombus/Rhombus.js';
 
 const Polygon = Phaser.Geom.Polygon;
 var GetGridPolygon = function (tileX, tileY, poly) {
+    if (tileX === undefined) {
+        tileX = 0;
+    }
+    if (tileY === undefined) {
+        tileY = 0;
+    }
     var worldX = this.getWorldX(tileX, tileY);
     var worldY = this.getWorldY(tileX, tileY);
     switch (this.type) {

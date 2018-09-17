@@ -26,6 +26,7 @@ import TileXYToWorldY from './TileXYToWorldY.js';
 import WorldXYToTileX from './WorldXYToTileX.js';
 import WorldXYToTileY from './WorldXYToTileY.js';
 import SetInteractive from './SetInteractive.js';
+import GetGridPolygon from './GetGridPolygon.js';
 
 
 const EE = Phaser.Events.EventEmitter;
@@ -150,6 +151,7 @@ var methods = {
     worldXYToTileX: WorldXYToTileX,
     worldXYToTileY: WorldXYToTileY,
     setInteractive: SetInteractive,
+    getGridPolygon: GetGridPolygon,
 }
 Object.assign(
     Board.prototype,
