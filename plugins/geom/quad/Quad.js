@@ -36,21 +36,25 @@ class Quad extends Polygon {
         this._width = width;
         this._height = height;
         var points = this.points;
+        var centerX = this.centerX,
+            centerY = this.centerY;
+        var helfWidth = width / 2;
+        var helfHeight = height / 2;
 
         if (type === 0) { // rectangle
-            points[0].x = x;
-            points[0].y = y;
-            points[1].x = x + width;
-            points[1].y = y;
-            points[2].x = x + width;
-            points[2].y = y + height;
-            points[3].x = x;
-            points[3].y = y + height;
+            // top-left
+            points[0].x = centerX - helfWidth;
+            points[0].y = centerY - helfHeight;
+            // top-right
+            points[1].x = centerX + helfWidth;
+            points[1].y = centerY - helfHeight;
+            // bottom-right
+            points[2].x = centerX + helfWidth;
+            points[2].y = centerY + helfHeight;
+            // bottom-left
+            points[3].x = centerX - helfWidth;
+            points[3].y = centerY + helfHeight;
         } else { // rhombus
-            var centerX = this.centerX,
-                centerY = this.centerY;
-            var helfWidth = width / 2;
-            var helfHeight = height / 2;
             // 0
             points[0].x = centerX + helfWidth;
             points[0].y = centerY;
@@ -62,7 +66,7 @@ class Quad extends Polygon {
             points[2].y = centerY;
             // 270
             points[3].x = centerX;
-            points[3].y = centerY - helfHeight;            
+            points[3].y = centerY - helfHeight;
         }
 
         this.calculateArea();
@@ -108,7 +112,7 @@ class Quad extends Polygon {
     }
 
     get left() {
-        return this.x;
+        return this.x - (this.width / 2);
     }
 
     set left(value) {
@@ -116,7 +120,7 @@ class Quad extends Polygon {
     }
 
     get right() {
-        return this.x + this.width;
+        return this.x + (this.width / 2);
     }
 
     set right(value) {
@@ -124,7 +128,7 @@ class Quad extends Polygon {
     }
 
     get top() {
-        return this.y;
+        return this.y - (this.height / 2);
     }
 
     set top(value) {
@@ -132,7 +136,7 @@ class Quad extends Polygon {
     }
 
     get bottom() {
-        return this.y + this.height;
+        return this.y + (this.height / 2);
     }
 
     set bottom(value) {
@@ -140,7 +144,7 @@ class Quad extends Polygon {
     }
 
     get centerX() {
-        return this.x + (this.width / 2);
+        return this.x;
     }
 
     set centerX(value) {
@@ -148,7 +152,7 @@ class Quad extends Polygon {
     }
 
     get centerY() {
-        return this.y + (this.height / 2);
+        return this.y;
     }
 
     set centerY(value) {

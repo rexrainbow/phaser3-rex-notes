@@ -58,7 +58,9 @@ var ForEachTileXY = function (callback, scope, order) {
                 }
             }
     }
+    return this;
 };
+
 var tmp = {
     x: 0,
     y: 0

@@ -405,10 +405,10 @@ Whether this Body is colliding with a tile or the world boundary.
         ```javascript
         {
             none: true,
-            up: true,
-            down: true,
-            left: true,
-            right: true
+            up: false,
+            down: false,
+            left: false,
+            right: false
         }
         ```
 

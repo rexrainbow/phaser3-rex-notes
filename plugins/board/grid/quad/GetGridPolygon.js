@@ -11,12 +11,10 @@ var GetGridPolygon = function (tileX, tileY, poly) {
     var worldY = this.getWorldY(tileX, tileY);
     var quadType = (this.mode === 0) ? 0 : 1;
     if (poly === undefined) {
-        poly = new QuadPolygon(0, 0, this.width, this.height, quadType);
+        poly = new QuadPolygon(worldX, worldY, this.width, this.height, quadType);
     } else {
-        poly.setTo(0, 0, this.width, this.height, quadType);
+        poly.setTo(worldX, worldY, this.width, this.height, quadType);
     }
-    poly.centerX = worldX;
-    poly.centerY = worldY;
     return poly;
 }
 

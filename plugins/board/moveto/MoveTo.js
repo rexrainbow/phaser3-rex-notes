@@ -120,7 +120,18 @@ class MoveTo extends TickTask {
     }
 
     canMoveTo(tileX, tileY) {
-        if (!this.chessData.board) {
+        var board = this.chessData.board;
+        // chess is not in a board
+        if (board == null) {
+            return false;
+        }
+        var myTileXYZ = this.chessData.tileXYZ;
+        // move to current position
+        if ((tileX === myTileXYZ.x) && (tileY === myTileXYZ.y)) {
+            return true;
+        }
+        // target position is not in board
+        if (!board.contains(tileX, tileY)) {
             return false;
         }
         return true;

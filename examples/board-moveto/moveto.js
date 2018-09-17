@@ -1,4 +1,3 @@
-import RhombusPlugin from 'rexPlugins/rhombus-plugin.js';
 import BoardPlugin from 'rexPlugins/board-plugin.js';
 
 class Demo extends Phaser.Scene {
@@ -11,25 +10,34 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        var key = 'shape';
-        var texture = createRhombusTexture(this, key);
-        var image = texture.getSourceImage();
-
-        var board = this.rexBoard.add.board({
-            grid: this.rexBoard.add.quadGrid({
-                x: 400,
-                y: 100,
-                cellWidth: image.width,
-                cellHeight: image.height,
-                type: 1, // isometric
-                dir: 8
-            }),
-            width: 8,
-            height: 8
+        var graphics = this.add.graphics({
+            lineStyle: {
+                width: 1,
+                color: 0xffffff,
+                alpha: 1
+            }
         });
+        var board = this.rexBoard.add.board({
+                grid: this.rexBoard.add.quadGrid({
+                    x: 100,
+                    y: 100,
+                    cellWidth: 60,
+                    cellHeight: 60,
+                    type: 0,
+                    dir: 4
+                }),
+                width: 8,
+                height: 8
+            })
+            .forEachTileXY(function (tileXY, board) {
+                var poly = board.getGridPolygon(tileXY.x, tileXY.y);
+                graphics.strokePoints(poly.points, true);
+            }, this);
 
+        var key = 'shape';
+        createGridPolygonTexture(board, key);
         var chess = this.add.image(0, 0, key)
-            .setTint(0xff00ff);
+            .setTint(0xCC0000);
         board.addChess(chess, 0, 0, 0, true);
         chess.moveTo = this.rexBoard.add.moveTo(chess)
             .on('complete', function () {
@@ -39,14 +47,15 @@ class Demo extends Phaser.Scene {
     }
 }
 
-var createRhombusTexture = function (scene, key) {
-    var rhombus = new Phaser.Geom.rexRhombus(0, 0, 100, 50);
-
-    var points = rhombus.points;
+var createGridPolygonTexture = function (board, key) {
+    var poly = board.getGridPolygon();
+    poly.left = 0;
+    poly.top = 0;
+    var scene = board.scene;
     scene.add.graphics()
         .fillStyle(0xffffff)
-        .fillPoints(points, true)
-        .generateTexture(key, Math.floor(rhombus.width), Math.floor(rhombus.height))
+        .fillPoints(poly.points, true)
+        .generateTexture(key, poly.width, poly.height)
         .destroy();
     return scene.textures.get(key);
 }
@@ -58,11 +67,6 @@ var config = {
     height: 600,
     scene: Demo,
     plugins: {
-        global: [{
-            key: 'rexRhombus',
-            plugin: RhombusPlugin,
-            start: true
-        }],
         scene: [{
             key: 'rexBoard',
             plugin: BoardPlugin,

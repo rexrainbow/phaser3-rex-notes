@@ -35,7 +35,7 @@ class Chess {
         if (this.board == null) {
             return null;
         }
-        return this.board.getXYZ(this[uidKey]);
+        return this.board.chessToTileXYZ(this[uidKey]);
     }
 
     get tileX() {

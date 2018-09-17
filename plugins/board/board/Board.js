@@ -8,7 +8,7 @@ import SetBoardHeight from './SetBoardHeight.js';
 import AddChess from './AddChess.js';
 import GridAlign from './GridAlign.js';
 import RemoveChess from './RemoveChess.js';
-import MoveChess from './MoveChess.js';
+import RemoveAllChess from './RemoveAllChess.js';
 import SwapChess from './SwapChess.js';
 import Contains from './Contains.js';
 import ForEachTileXY from './ForEachTileXY.js';
@@ -18,6 +18,7 @@ import TileXYZToChess from './TileXYZToChess.js';
 import TileXYToChess from './TileXYToChess.js';
 import TileXYArrayToChess from './TileXYArrayToChess.js';
 import ChessToTileXYZ from './ChessToTileXYZ.js';
+import GetAllChess from './GetAllChess.js';
 import GetNeighborTileX from './GetNeighborTileX.js';
 import GetNeighborTileY from './GetNeighborTileY.js';
 import GetNeighborChess from './GetNeighborChess.js';
@@ -61,6 +62,7 @@ class Board extends EE {
 
     destroy() {
         this.emit('destroy');
+        this.removeAllChess();
         this.shutdown();
         return this;
     }
@@ -133,7 +135,8 @@ var methods = {
     addChess: AddChess,
     gridAlign: GridAlign,
     removeChess: RemoveChess,
-    moveChess: MoveChess,
+    removeAllChess: RemoveAllChess,
+    moveChess: AddChess,
     swapChess: SwapChess,
     forEachTileXY: ForEachTileXY,
     contains: Contains,
@@ -143,6 +146,7 @@ var methods = {
     tileXYToChess: TileXYToChess,
     tileXYArrayToChess: TileXYArrayToChess,
     chessToTileXYZ: ChessToTileXYZ,
+    getAllChess: GetAllChess,
     getNeighborTileX: GetNeighborTileX,
     getNeighborTileY: GetNeighborTileY,
     getNeighborChess: GetNeighborChess,

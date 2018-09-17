@@ -201,6 +201,18 @@ board.forEachTileXY(function(tileXY, board, order) {
     - `2`, or `y+` : Increasing y, increasing x.
     - `3`, or `y-` : Decreasing y, increasing x.
 
+Or using for-loop
+
+```javascript
+for (var tileY = 0; tileY < board.height; tileY++) {
+    for (var tileX = 0; tileX > board.width; tileX++) {
+        // ...
+    }
+}
+```
+
+- `board.width` , `board.height` : Board width/height in tiles.
+
 ### Tile position <-> world position
 
 ```javascript

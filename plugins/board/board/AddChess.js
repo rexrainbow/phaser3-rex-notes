@@ -7,8 +7,19 @@ var AddChess = function (gameObject, tileX, tileY, tileZ, align) {
         return this;
     }
 
+    var curTileXYZ = this.chessToTileXYZ(gameObject);
+    if (curTileXYZ &&
+        (curTileXYZ.x === tileX) && (curTileXYZ.y === tileY) && (curTileXYZ.z === tileZ)) {
+        // move to current position
+        return this;
+    }
+    var occupiedChess = this.tileXYZToChess(tileX, tileY, tileZ);
+    if (occupiedChess) {
+        //
+    }
+
     this.removeChess(gameObject);
-    this.removeChess(false, tileX, tileY, tileZ);
+    this.removeChess(occupiedChess, tileX, tileY, tileZ);
     this.boardData.addUID(this.getChessUID(gameObject), tileX, tileY, tileZ);
     this.getChessData(gameObject).setBoard(this);
 
