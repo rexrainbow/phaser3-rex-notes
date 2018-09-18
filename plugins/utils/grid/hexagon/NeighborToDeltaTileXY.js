@@ -80,4 +80,6 @@ const Neighbors = [
     EVEN_Q
 ];
 
+// Neighbors[mode][parity][dir]: [x/y]
+
 export default Neighbors;

@@ -1,13 +1,16 @@
 var AddChess = function (gameObject, tileX, tileY, tileZ, align) {
-    if (tileZ === undefined) {
-        tileZ = 0;
-    }
-
     if (!this.contains(tileX, tileY)) {
         return this;
     }
 
     var curTileXYZ = this.chessToTileXYZ(gameObject);
+    if (tileZ === undefined) {
+        if (curTileXYZ) {
+            tileZ = curTileXYZ.z;
+        } else {
+            tileZ = 0;
+        }
+    }
     if (curTileXYZ &&
         (curTileXYZ.x === tileX) && (curTileXYZ.y === tileY) && (curTileXYZ.z === tileZ)) {
         // move to current position
@@ -15,7 +18,7 @@ var AddChess = function (gameObject, tileX, tileY, tileZ, align) {
     }
     var occupiedChess = this.tileXYZToChess(tileX, tileY, tileZ);
     if (occupiedChess) {
-        //
+        // TODO
     }
 
     this.removeChess(gameObject);

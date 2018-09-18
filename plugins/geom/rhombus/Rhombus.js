@@ -168,7 +168,7 @@ class Rhombus extends Polygon {
             line = new Line();
         }
         var p0 = this.points[idx];
-        var p1 = this.points[(idx + 1) % 6];
+        var p1 = this.points[(idx + 1) % 4];
         line.setTo(p0.x, p0.y, p1.x, p1.y);
         return line;
     }

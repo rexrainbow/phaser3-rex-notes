@@ -19,8 +19,7 @@ import TileXYToChess from './TileXYToChess.js';
 import TileXYArrayToChess from './TileXYArrayToChess.js';
 import ChessToTileXYZ from './ChessToTileXYZ.js';
 import GetAllChess from './GetAllChess.js';
-import GetNeighborTileX from './GetNeighborTileX.js';
-import GetNeighborTileY from './GetNeighborTileY.js';
+import GetNeighborTileXY from './GetNeighborTileXY.js';
 import GetNeighborChess from './GetNeighborChess.js';
 import TileXYToWorldX from './TileXYToWorldX.js';
 import TileXYToWorldY from './TileXYToWorldY.js';
@@ -147,8 +146,7 @@ var methods = {
     tileXYArrayToChess: TileXYArrayToChess,
     chessToTileXYZ: ChessToTileXYZ,
     getAllChess: GetAllChess,
-    getNeighborTileX: GetNeighborTileX,
-    getNeighborTileY: GetNeighborTileY,
+    getNeighborTileXY: GetNeighborTileXY,
     getNeighborChess: GetNeighborChess,
     tileXYToWorldX: TileXYToWorldX,
     tileXYToWorldY: TileXYToWorldY,

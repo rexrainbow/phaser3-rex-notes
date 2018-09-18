@@ -42,18 +42,18 @@ class Quad extends Polygon {
         var helfHeight = height / 2;
 
         if (type === 0) { // rectangle
-            // top-left
-            points[0].x = centerX - helfWidth;
-            points[0].y = centerY - helfHeight;
             // top-right
-            points[1].x = centerX + helfWidth;
-            points[1].y = centerY - helfHeight;
+            points[0].x = centerX + helfWidth;
+            points[0].y = centerY - helfHeight;
             // bottom-right
-            points[2].x = centerX + helfWidth;
-            points[2].y = centerY + helfHeight;
+            points[1].x = centerX + helfWidth;
+            points[1].y = centerY + helfHeight;
             // bottom-left
+            points[2].x = centerX - helfWidth;
+            points[2].y = centerY + helfHeight;            
+            // top-left
             points[3].x = centerX - helfWidth;
-            points[3].y = centerY + helfHeight;
+            points[3].y = centerY - helfHeight;
         } else { // rhombus
             // 0
             points[0].x = centerX + helfWidth;
@@ -189,7 +189,7 @@ class Quad extends Polygon {
             line = new Line();
         }
         var p0 = this.points[idx];
-        var p1 = this.points[(idx + 1) % 6];
+        var p1 = this.points[(idx + 1) % 4];
         line.setTo(p0.x, p0.y, p1.x, p1.y);
         return line;
     }

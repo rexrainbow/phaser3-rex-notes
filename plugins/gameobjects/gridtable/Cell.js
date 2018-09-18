@@ -18,7 +18,19 @@ class Cell {
     //    return this;
     //}
 
-    get table () {
+    destroy() {
+        var table = this.parent;
+        if (this.deltaHeight !== 0) {
+            table.nonZeroDeltaHeightCount--;
+        }
+
+        this.cleanData();
+        this.destroyContainer();
+        this.parent = undefined;
+        this.parentContainer = undefined;
+    }
+
+    get table() {
         return this.parent;
     }
 
@@ -140,23 +152,10 @@ class Cell {
         return this;
     }
 
-    get width () {
+    get width() {
         var table = this.parent;
         return table.defaultCellWidth;
     }
-
-    destroy() {
-        var table = this.parent;
-        if (this.deltaHeight !== 0) {
-            table.nonZeroDeltaHeightCount--;
-        }
-
-        this.cleanData();
-        this.destroyContainer();
-        this.parent = undefined;
-        this.parentContainer = undefined;
-    }
-
 };
 
 export default Cell;

@@ -72,7 +72,7 @@ class Match {
 
     setSymbol(tileX, tileY, callback, scope) {
         var board = this.board;
-        if (!board.Contains(tileX, tileY)) {
+        if (!board.contains(tileX, tileY)) {
             return this;
         }
         var symbol;

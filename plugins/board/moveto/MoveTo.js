@@ -50,6 +50,7 @@ class MoveTo extends TickTask {
     }
 
     shutdown() {
+        this.moveToTask.shutdown();
         super.shutdown();
         this.gameObject = undefined;
         this.scene = undefined;
@@ -161,9 +162,24 @@ class MoveTo extends TickTask {
         var board = this.chessData.board;
         var worldX = board.tileXYToWorldX(tileX, tileY);
         var worldY = board.tileXYToWorldY(tileX, tileY);
+        board.moveChess(this.gameObject, tileX, tileY);
         this.moveToTask.moveTo(worldX, worldY);
 
         this.isRunning = true;
+        return this;
+    }
+
+    moveToDir(direction) {
+        var myTileXYZ = this.chessData.tileXYZ;
+        if (myTileXYZ == null) { // not in board
+            return this;
+        }
+        var board = this.chessData.board;
+        var targetTileXY = board.getNeighborTileXY(myTileXYZ, direction);
+        if (targetTileXY === null) {
+            return this;
+        }
+        this.moveTo(targetTileXY.x, targetTileXY.y);
         return this;
     }
 

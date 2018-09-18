@@ -23,6 +23,11 @@ class Table {
         return this;
     }
 
+    destroy() {
+        this.parent = undefined;
+        this.cells = undefined;
+    }
+
     get nonZeroDeltaHeightCount() {
         return this._nonZeroDeltaHeightCount;
     }
@@ -320,10 +325,6 @@ class Table {
         cell.destroy();
         CellsPool.push(cell);
         return this;
-    }
-
-    destroy() {
-        this.parent = undefined;
     }
 }
 

@@ -48,6 +48,12 @@ class Demo extends Phaser.Scene {
                 var dy = pointer.y - pointer.prevPosition.y;
                 table.addTableOXY(dx, dy).updateTable();
             });
+
+        this.add.text(0, 580, 'Destroy table')
+            .setInteractive()
+            .on('pointerdown', function () {
+                table.destroy();
+            })
     }
 
     update() {}

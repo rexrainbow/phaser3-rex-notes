@@ -51,6 +51,17 @@ class GridTable extends Container {
         this.updateTable();
     }
 
+    destroy() {
+        //  This Game Object has already been destroyed
+        if (!this.scene) {
+            return;
+        }
+        this.setCellsCount(0);
+        this.table.destroy();
+        this.table = undefined;
+        super.destroy();
+    }
+
     setScrollMode(mode) {
         if (typeof (mode) === 'string') {
             mode = SCROLLMODE[mode.toLowerCase()];
@@ -592,12 +603,6 @@ class GridTable extends Container {
         var oy = (this.scrollMode === 0) ? this.topLeftY : this.topLeftX;
         var y = this.tableOY + this.table.rowIndexToHeight(0, rowIdx - 1) + oy;
         return y;
-    }
-
-    destroy() {
-        this.setCellsCount(0);
-        this.table.destroy();
-        super.destroy();
     }
 };
 

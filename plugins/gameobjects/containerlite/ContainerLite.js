@@ -27,6 +27,16 @@ class ContainerLite extends Zone {
         }
     }
 
+    destroy() {
+        //  This Game Object has already been destroyed
+        if (!this.scene) {
+            return;
+        }        
+        this.children.destroy(true);
+        this.children = undefined;
+        super.destroy();
+    }
+
     add(gameObject) {
         if (Array.isArray(gameObject)) {
             this.addMultiple(gameObject);
@@ -207,12 +217,6 @@ class ContainerLite extends Zone {
     syncProperties() {
         this.syncPosition().syncVisible().syncAlpha().syncMask();
         return this;
-    }
-
-    destroy() {
-        this.children.destroy(true);
-        this.children = undefined;
-        super.destroy();
     }
 
     getLocalState(gameObject) {

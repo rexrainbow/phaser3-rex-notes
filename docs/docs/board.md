@@ -106,6 +106,11 @@ board.addChess(chess, tileX, tileY, tileZ, align);
     ```
     - `tileX`, `tileY`, `tileZ` : Tile position
     - `destroy` : Set `true` to desrtoy chess object.
+- Remove all chess
+    ```javascript
+    board.removeAllChess(destroy);
+    ```
+    - `destroy` : Set `true` to desrtoy chess object.
 
 ### Move chess
 
@@ -226,6 +231,20 @@ var worldY = board.tileXYToWorldY(tileX, tileY);
 var tileX = board.worldXYToTileX(worldX, worldY);
 var tileY = board.worldXYToTileY(worldX, worldY);
 ```
+
+### Neighobrs
+
+- Get tile position of neighbor
+    ```javascript
+    var neighborTileXY = board.getNeighborTileXY(srcTileXY, direction);
+    // var out = board.getNeighborTileXY(srcTileXY, direction, out);
+    ```
+    - `srcTileXY` : Tile position `{x, y}` of source.
+    - `direction` :
+        - `0` ~ `3` : [Quad grid](board-quadgrid.md#directions) in 4 directions mode.
+        - `0` ~ `7` : [Quad grid](board-quadgrid.md#directions) in 8 directions mode.
+        - `0` ~ `5` : [Hexagon grid](board-hexagongrid.md#directions).
+    - `neighborTileXY` : Tile position `{x, y}` of neighbor. Retrun `null` if no neighbor there (i.e. source chess is at the edge of board.)
 
 ### Touch events
 

@@ -55,3 +55,20 @@ var worldY = grid.getWorldY(tileX, tileY);
 var tileX = grid.getTileX(worldX, worldY);
 var tileY = grid.getTileY(worldX, worldY);
 ```
+
+### Directions
+
+- staggeraxis = `0`/`y`
+    - `0` : Down-right
+    - `1` : Down
+    - `2` : Down-left
+    - `3` : Up-left
+    - `4` : Up
+    - `5` : Up-right
+- staggeraxis = `1`/`x`
+    - `0` : Right
+    - `1` : Down-right
+    - `2` : Down-left
+    - `3` : Left
+    - `4` : Up-left
+    - `5` : Up-right

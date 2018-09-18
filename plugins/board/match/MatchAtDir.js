@@ -10,27 +10,25 @@ var MatchAtDir = function (pattern, startTileX, startTileY, direction) {
     }
 
     var symbol, wildcard = this.wildcard;
-    var curTileX, curTileY;
-    var tmpTileX, tmpTileY;
+    var curTileXY;
     var board = this.board;
     var matchedTileXY = result.tileXY;
     matchedTileXY.length = 0;
     for (var i = 0; i < patternLength; i++) {
-        if (curTileX === undefined) {
-            curTileX = startTileX
-            curTileY = startTileY;
+        if (curTileXY === undefined) {
+            curTileXY = {
+                x: startTileX,
+                y: startTileY
+            };
         } else {
-            // get next tileXY
-            tmpTileX = board.getNeighborTileX(curTileX, curTileY, direction);
-            tmpTileY = board.getNeighborTileY(curTileX, curTileY, direction);
-            if ((tmpTileX === null) || (tmpTileY === null)) {
+            // get next tileXY 
+            curTileXY = board.getNeighborTileXY(curTileXY, direction, curTileXY);
+            if (curTileXY === null) {
                 return false;
             }
-            curTileX = tmpTileX;
-            curTileY = tmpTileY;
         }
 
-        symbol = this.getSymbol(curTileX, curTileY);
+        symbol = this.getSymbol(curTileXY.x, curTileXY.y);
         if (symbol == null) {
             return false;
         }
@@ -47,8 +45,8 @@ var MatchAtDir = function (pattern, startTileX, startTileY, direction) {
         }
 
         matchedTileXY.push({
-            x: curTileX,
-            y: curTileY
+            x: curTileXY.x,
+            y: curTileXY.y
         });
     }
 
@@ -58,7 +56,7 @@ var MatchAtDir = function (pattern, startTileX, startTileY, direction) {
 };
 
 var result = {
-    tileXY : [],
+    tileXY: [],
     direction: undefined,
     pattern: undefined
 };

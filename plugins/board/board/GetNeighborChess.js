@@ -1,6 +1,9 @@
 var GetNeighborChess = function (chess, directions, neighborTileZ, out) {
     var tileXYZ = this.chessToTileXYZ(chess);
-    var dir, neighborTileX, neighborTileY;
+    if (tileXYZ === null) {
+        return null;
+    }
+    var dir, neighborTileXY;
     if (neighborTileZ == null) {
         neighborTileZ = tileXYZ.z;
     }
@@ -8,12 +11,11 @@ var GetNeighborChess = function (chess, directions, neighborTileZ, out) {
     if (typeof (directions) === 'number') {
         // 1 direction
         dir = directions;
-        neighborTileX = this.getNeighborTileX(tileX, tileY, dir);
-        neighborTileY = this.getNeighborTileY(tileX, tileY, dir);
-        if ((neighborTileX === null) || (neighborTileY === null)) {
+        neighborTileXY = this.getNeighborTileXY(tileXYZ, dir);
+        if (neighborTileXY === null) {
             return null;
         }
-        return this.tileXYZToChess(neighborTileX, neighborTileY, neighborTileZ);
+        return this.tileXYZToChess(neighborTileXY.x, neighborTileXY.y, neighborTileZ);
     } else {
         // directions
         if (!directions) {
@@ -22,14 +24,18 @@ var GetNeighborChess = function (chess, directions, neighborTileZ, out) {
         if (out === undefined) {
             out = [];
         }
+        var neighborChess;
         for (var i = 0, cnt = directions.length; i < cnt; i++) {
             dir = directions[i];
-            neighborTileX = this.getNeighborTileX(tileX, tileY, dir);
-            neighborTileY = this.getNeighborTileY(tileX, tileY, dir);
-            if ((neighborTileX === null) || (neighborTileY === null)) {
+            neighborTileXY = this.getNeighborTileXY(tileXYZ, dir);
+            if (neighborTileXY === null) {
                 continue;
             }
-            out.push(this.tileXYZToChess(neighborTileX, neighborTileY, neighborTileZ));
+            neighborChess = this.tileXYZToChess(neighborTileXY.x, neighborTileXY.y, neighborTileZ);
+            if (neighborChess == null) {
+                continue;
+            }
+            out.push(neighborChess);
         }
         return out;
     }
