@@ -79,7 +79,7 @@ class ChessGroup extends Group {
         return groupC;
     }
 
-    isSubSet(groupB) {
+    isSubset(groupB) {
         var setA = this.children;
         var chessB = groupB.chess;
         for (var i = 0, cnt = chessB.length; i < cnt; i++) {

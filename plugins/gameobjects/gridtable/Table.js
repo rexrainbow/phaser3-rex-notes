@@ -24,8 +24,11 @@ class Table {
     }
 
     destroy() {
-        this.parent = undefined;
+        for (var i = 0, cnt = this.cells.length; i < cnt; i++) {
+            this.freeCell(this.cells[i]);
+        }
         this.cells = undefined;
+        this.parent = undefined;
     }
 
     get nonZeroDeltaHeightCount() {

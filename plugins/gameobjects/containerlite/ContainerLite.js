@@ -27,14 +27,14 @@ class ContainerLite extends Zone {
         }
     }
 
-    destroy() {
+    destroy(fromScene) {
         //  This Game Object has already been destroyed
         if (!this.scene) {
             return;
         }        
         this.children.destroy(true);
         this.children = undefined;
-        super.destroy();
+        super.destroy(fromScene);
     }
 
     add(gameObject) {

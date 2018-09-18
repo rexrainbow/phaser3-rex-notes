@@ -50,10 +50,7 @@ class Demo extends Phaser.Scene {
             })
             .refreshSymbols(function (tileXY, board) {
                 var chess = board.tileXYZToChess(tileXY.x, tileXY.y, 0);
-                if (chess == null) {
-                    return null;
-                }
-                return chess.getData('symbol');
+                return (chess === null) ? null : chess.getData('symbol');
             })
             .match(3, function (result, board) {
                 var chess = board.tileXYArrayToChess(result.tileXY, 0);

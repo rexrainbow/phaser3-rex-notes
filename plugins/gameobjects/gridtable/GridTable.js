@@ -51,7 +51,7 @@ class GridTable extends Container {
         this.updateTable();
     }
 
-    destroy() {
+    destroy(fromScene) {
         //  This Game Object has already been destroyed
         if (!this.scene) {
             return;
@@ -59,7 +59,7 @@ class GridTable extends Container {
         this.setCellsCount(0);
         this.table.destroy();
         this.table = undefined;
-        super.destroy();
+        super.destroy(fromScene);
     }
 
     setScrollMode(mode) {

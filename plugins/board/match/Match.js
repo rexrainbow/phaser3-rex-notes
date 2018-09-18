@@ -44,17 +44,9 @@ class Match {
         if (IsPlainObject(dir)) {
             var dirMask = dir;
             for (dir in dirMask) {
-                value = dirMask[dir];
-                if (DIRMASKMODE.hasOwnProperty(dir)) {
-                    dir = DIRMASKMODE[dir];
-                }
-
-                this.dirMask[dir] = value;
+                this.dirMask[dir] = dirMask[dir];
             }
         } else {
-            if (DIRMASKMODE.hasOwnProperty(dir)) {
-                dir = DIRMASKMODE[dir];
-            }
             this.dirMask[dir] = value;
         }
         return this;
@@ -118,10 +110,27 @@ class Match {
         var width = board.width,
             height = board.height;
         this.symbols.length = width * height;
-        var tileXY;
-        for (var i = 0, cnt = this.symbols.length; i < cnt; i++) {
-            tileXY = this.keyToTileXY(i);
-            this.setSymbol(tileXY.x, tileXY.y, callback, scope);
+
+        var symbol;
+        if (IsFunction(callback)) {
+            // Get symbol by callback
+            var tileXY;
+            for (var i = 0, cnt = this.symbols.length; i < cnt; i++) {
+                tileXY = this.keyToTileXY(i);
+                if (scope) {
+                    symbol = callback.call(scope, tileXY, board);
+                } else {
+                    symbol = callback(tileXY, board);
+                }
+                this.symbols[i] = symbol;
+            }
+            
+        } else {
+            // Fill a given symbol
+            symbol = callback;
+            for (var i = 0, cnt = this.symbols.length; i < cnt; i++) {
+                this.symbols[i] = symbol;
+            }
         }
         return this;
     }
@@ -163,11 +172,5 @@ Object.assign(
     Match.prototype,
     methods
 );
-
-const DIRMASKMODE = {
-    'x': 0,
-    'y': 1
-}
-
 
 export default Match;
