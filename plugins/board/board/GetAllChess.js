@@ -1,4 +1,4 @@
-import ChessBank from '../data/chess/ChessBank.js';
+import ChessBank from '../chess/ChessBank.js';
 
 var GetAllChess = function (out) {
     if (out === undefined) {

@@ -1,11 +1,14 @@
 import ChessBank from './ChessBank.js';
 
 const uidKey = ChessBank.uidKey;
+const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+
 class Chess {
     constructor(parent, uid) {
         this.parent = parent;
         ChessBank.add(this, uid); // uid is stored in `this.$uid`
         this.board = null;
+        this.blocker = false;
         this.boot();
     }
 
@@ -60,6 +63,38 @@ class Chess {
             return tileXYZ.z;
         }
         return null;
+    }
+
+    setBlockEdge(direction, value) {
+        if (this.blocker === false) {
+            this.blocker = {};
+        }
+        var blocker = this.blocker;
+        if (IsPlainObject(direction)) {
+            var blockEdges = direction;
+            for (direction in blockEdges) {
+                blocker[direction] = blockEdges[direction];
+            }
+        } else {
+            if (value === undefined) {
+                value = true;
+            }
+            blocker[direction] = value;
+        }
+        return this;
+    }
+
+    getBlockEdge(direction) {
+        var blocker = this.blocker;
+        if (blocker === false) {
+            return false;
+        }
+
+        if (!blocker.hasOwnProperty(direction)) {
+            return false;
+        } else {
+            return blocker[direction];
+        }
     }
 }
 
