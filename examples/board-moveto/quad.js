@@ -41,9 +41,9 @@ class Demo extends Phaser.Scene {
         board.addChess(chess, 0, 0, 0, true);
         chess.moveTo = this.rexBoard.add.moveTo(chess)
             .on('complete', function () {
-                chess.moveTo.moveToDir(0);
+                chess.moveTo.moveToward(0);
             })
-        chess.moveTo.moveToDir(0);
+        chess.moveTo.moveToward(0);
     }
 }
 

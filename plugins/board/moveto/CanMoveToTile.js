@@ -2,6 +2,7 @@ var CanMoveToTile = function(tileX, tileY, direction) {
     var board = this.chessData.board;
     // chess is not in a board
     if (board == null) {
+        this.lastMoveableResult = false;
         return false;
     }
     var myTileXYZ = this.chessData.tileXYZ;
@@ -9,10 +10,12 @@ var CanMoveToTile = function(tileX, tileY, direction) {
         myTileY = myTileXYZ.y;
     // move to current position
     if ((tileX === myTileX) && (tileY === myTileY)) {
+        this.lastMoveableResult = false;
         return true;
     }
     // target position is not in board
     if (!board.contains(tileX, tileY)) {
+        this.lastMoveableResult = false;
         return false;
     }
 
@@ -23,6 +26,7 @@ var CanMoveToTile = function(tileX, tileY, direction) {
     // blocker test
     if (this.blockerTest) {
         if (board.hasBlocker(tileX, tileY)) {
+            this.lastMoveableResult = false;
             return false;
         }
     }
@@ -37,6 +41,7 @@ var CanMoveToTile = function(tileX, tileY, direction) {
                 }
                 if (board.hasEdgeBlocker(myTileX, myTileY, this.chessToTileXYZ(chess[i]).z, direction)) {
                     tmpChessArray.length = 0;
+                    this.lastMoveableResult = false;
                     return false;
                 }
             }
@@ -57,10 +62,12 @@ var CanMoveToTile = function(tileX, tileY, direction) {
             var moveable = this.moveableTestCallback(myTileXYZ, tmpTileXYZ, board);
         }
         if (!moveable) {
+            this.lastMoveableResult = false;
             return false;
         }
     }
 
+    this.lastMoveableResult = true;
     return true;
 }
 

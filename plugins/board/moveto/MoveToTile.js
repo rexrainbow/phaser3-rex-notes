@@ -14,25 +14,23 @@ var MoveToTile = function (tileX, tileY, direction, speed) {
     }
 
     // invalid tile position
-    if ((tileX == null) || (tileY == null)) {   
+    if ((tileX == null) || (tileY == null)) {
         return this;
     }
-    if (speed !== undefined) {
-        this.speed = speed;
-    }
-
     if (direction === undefined) {
         direction = this.chessData.getTileDirection(tileX, tileY);
+    }
+    if (!this.canMoveTo(tileX, tileY, direction)) {
+        return this;
     }
     this.destinationTileX = tileX;
     this.destinationTileY = tileY;
     this.destinationDirection = direction;
-    if (!this.canMoveTo(tileX, tileY, direction)) {
-        this.stop();
-        return this;
-    }
     var worldX = board.tileXYToWorldX(tileX, tileY);
     var worldY = board.tileXYToWorldY(tileX, tileY);
+    if (speed !== undefined) {
+        this.speed = speed;
+    }
     board.moveChess(this.gameObject, tileX, tileY);
     this.moveToTask.moveTo(worldX, worldY);
 
