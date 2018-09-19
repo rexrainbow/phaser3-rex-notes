@@ -15,6 +15,7 @@ var MoveToTile = function (tileX, tileY, direction, speed) {
 
     // invalid tile position
     if ((tileX == null) || (tileY == null)) {
+        this.lastMoveableResult = false;
         return this;
     }
     if (direction === undefined) {
@@ -34,6 +35,7 @@ var MoveToTile = function (tileX, tileY, direction, speed) {
     board.moveChess(this.gameObject, tileX, tileY);
     this.moveToTask.moveTo(worldX, worldY);
 
+    this.lastMoveableResult = true;
     this.isRunning = true;
     return this;
 }

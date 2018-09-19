@@ -6,6 +6,7 @@ var MoveToward = function (direction) {
     var board = this.chessData.board;
     var targetTileXY = board.getNeighborTileXY(myTileXYZ, direction);
     if (targetTileXY === null) {
+        this.lastMoveableResult = false;
         return this;
     }
     this.moveTo(targetTileXY.x, targetTileXY.y, direction);
