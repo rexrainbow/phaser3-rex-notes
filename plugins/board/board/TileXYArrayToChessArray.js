@@ -1,4 +1,4 @@
-var TileXYArrayToChess = function (tileXYArray, tileZ, out) {
+var TileXYArrayToChessArray = function (tileXYArray, tileZ, out) {
     if (Array.isArray(tileZ)) {
         out = tileZ;
         tileZ = undefined;
@@ -13,9 +13,9 @@ var TileXYArrayToChess = function (tileXYArray, tileZ, out) {
         if (tileZMode) {
             out.push(this.tileXYZToChess(tileXY.x, tileXY.y, tileZ));
         } else {
-            this.tileXYToChess(tileXY.x, tileXY.y, out);
+            this.tileXYToChessArray(tileXY.x, tileXY.y, out);
         }
     }
     return out;
 }
-export default TileXYArrayToChess;
+export default TileXYArrayToChessArray;

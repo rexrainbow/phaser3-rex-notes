@@ -24,8 +24,12 @@ class MoveTo extends TickTask {
         this.timeScale = GetValue(o, 'timeScale', 1);
         this.setSpeed(GetValue(o, 'speed', 400));
         this.setRotateToTarget(GetValue(o, 'rotateToTarget', false));
-        this.targetX = GetValue(o, 'targetX', 0);
-        this.targetY = GetValue(o, 'targetY', 0);
+        this.setBlockerTest(GetValue(o, 'blockerTest', false));
+        this.setEdgeBlockerTest(GetValue(o, 'edgeBlockerTest', false));
+        this.setMoveableTestCallback(GetValue(o, 'moveableTest', undefined), GetValue(o, 'moveableTestScope', undefined));
+        this.destinationTileX = GetValue(o, 'destinationTileX', null);
+        this.destinationTileY = GetValue(o, 'destinationTileY', null);
+        this.destinationDirection = GetValue(o, 'destinationDirection', null);
         return this;
     }
 
@@ -35,9 +39,14 @@ class MoveTo extends TickTask {
             enable: this.enable,
             timeScale: this.timeScale,
             speed: this.speed,
+            blockerTest: this.blockerTest,
+            edgeBlockerTest: this.edgeBlockerTest,
+            moveableTest: this.moveableTestCallback,
+            moveableTestScope: this.moveableTestScope,
             rotateToTarget: this.rotateToTarget,
-            targetX: this.targetX,
-            targetY: this.targetY,
+            destinationTileX: this.destinationTileX,
+            destinationTileY: this.destinationTileY,
+            destinationDirection: this.destinationDirection,
             tickingMode: this.tickingMode
         };
     }
@@ -120,46 +129,124 @@ class MoveTo extends TickTask {
         return this;
     }
 
-    canMoveTo(tileX, tileY) {
+    setBlockerTest(value) {
+        if (value === undefined) {
+            value = true;
+        }
+        this.blockerTest = value;
+        return this;
+    }
+
+    setEdgeBlockerTest(value) {
+        if (value === undefined) {
+            value = true;
+        }
+        this.edgeBlockerTest = value;
+        return this;
+    }
+
+    setMoveableTestCallback(callback, scope) {
+        this.moveableTestCallback = callback;
+        this.moveableTestScope = scope;
+        return this;
+    }
+
+    canMoveTo(tileX, tileY, direction) {
         var board = this.chessData.board;
         // chess is not in a board
         if (board == null) {
             return false;
         }
         var myTileXYZ = this.chessData.tileXYZ;
+        var myTileX = myTileXYZ.x,
+            myTileY = myTileXYZ.y;
         // move to current position
-        if ((tileX === myTileXYZ.x) && (tileY === myTileXYZ.y)) {
+        if ((tileX === myTileX) && (tileY === myTileY)) {
             return true;
         }
         // target position is not in board
         if (!board.contains(tileX, tileY)) {
             return false;
         }
+
+        if (direction === undefined) {
+            direction = this.getTileDirection(tileX, tileY);
+        }
+
+        // blocker test
+        if (this.blockerTest) {
+            if (board.hasBlocker(tileX, tileY)) {
+                return false;
+            }
+        }
+
+        // edge-blocker test
+        if (this.edgeBlockerTest) {
+            var chess = this.TileXYToChessArray(myTileX, myTileY, tmpChessArray);
+            if (chess.length > 1) {
+                for (var i = 0, cnt = chess.length; i < cnt; i++) {
+                    if (chess[i] === this.gameObject) {
+                        continue;
+                    }
+                    if (board.hasEdgeBlocker(myTileX, myTileY, this.chessToTileXYZ(chess[i]).z, direction)) {
+                        tmpChessArray.length = 0;
+                        return false;
+                    }
+                }
+            }
+            tmpChessArray.length = 0;
+
+            // TODO
+        }
+
+        // custom moveable test
+        if (this.moveableTestCallback) {
+            tmpTileXYZ.x = tileX;
+            tmpTileXYZ.y = tileY;
+            tmpTileXYZ.direction = direction;
+            if (this.moveableTestScope) {
+                var moveable = this.moveableTestCallback.call(this.moveableTestScope, myTileXYZ, tmpTileXYZ, board);
+            } else {
+                var moveable = this.moveableTestCallback(myTileXYZ, tmpTileXYZ, board);
+            }
+            if (!moveable) {
+                return false;
+            }
+        }
+
         return true;
     }
 
-    moveTo(tileX, tileY, speed) {
-        this.stop();
+    moveTo(tileX, tileY, direction, speed) {
+        var board = this.chessData.board;
+        if (board === null) { // chess is not in a board
+            return this;
+        }
 
+        this.stop();
         if (IsPlainObject(tileX)) {
             var config = tileX;
             tileX = GetValue(config, 'x', undefined);
             tileY = GetValue(config, 'y', undefined);
+            direction = GetValue(config, 'direction', undefined);
             speed = GetValue(config, 'speed', undefined);
         }
-        this.targetX = tileX;
-        this.targetY = tileY;
+
         if ((tileX == null) || (tileY == null)) {
+            this.setDestination(null, null, null);
             return this;
         }
         if (speed !== undefined) {
             this.speed = speed;
         }
 
-        if (!this.canMoveTo(tileX, tileY)) {
+        if (direction === undefined) {
+            direction = this.getTileDirection(tileX, tileY);
+        }
+        this.setDestination(tileX, tileY, direction);
+        if (!this.canMoveTo(tileX, tileY, direction)) {
             return this;
         }
-        var board = this.chessData.board;
         var worldX = board.tileXYToWorldX(tileX, tileY);
         var worldY = board.tileXYToWorldY(tileX, tileY);
         board.moveChess(this.gameObject, tileX, tileY);
@@ -179,7 +266,7 @@ class MoveTo extends TickTask {
         if (targetTileXY === null) {
             return this;
         }
-        this.moveTo(targetTileXY.x, targetTileXY.y);
+        this.moveTo(targetTileXY.x, targetTileXY.y, direction);
         return this;
     }
 
@@ -200,7 +287,29 @@ class MoveTo extends TickTask {
         }
         return this;
     }
+
+    setDestination(tileX, tileY, direction) {
+        this.destinationTileX = tileX;
+        this.destinationTileY = tileY;
+        this.destinationDirection = direction;
+        return this;
+    }
+
+    getTileDirection(tileX, tileY) {
+        var board = this.chessData.board;
+        tmpTileXYZ.x = tileX;
+        tmpTileXYZ.y = tileY;
+        return board.getNeighborTileDirection(this.chessData.tileXYZ, tmpTileXYZ);
+    }
 }
+
+var tmpTileXYZ = {
+    x: 0,
+    y: 0,
+    direction: null
+};
+
+var tmpChessArray = [];
 
 const moveToTaskConfig = {
     tickingMode: 0

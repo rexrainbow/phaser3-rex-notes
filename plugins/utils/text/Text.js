@@ -430,8 +430,8 @@ var Text = new Phaser.Class({
         return text.split(SPLITREGEXP);
     },
 
-    getRawText: function (text, start, end) {
-        return this.canvasText.getRawText(text, start, end);
+    getPlainText: function (text, start, end) {
+        return this.canvasText.getPlainText(text, start, end);
     },
 
     getText: function (text, start, end) {

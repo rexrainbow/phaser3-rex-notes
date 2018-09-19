@@ -1,7 +1,7 @@
 import DeltaTileXYToNeighbor from './DeltaTileXYToNeighbor.js';
 import GetParity from './GetParity.js';
 
-var GetNeighborTileDir = function (srcTileXY, neighborTileXY) {
+var GetNeighborTileDirection = function (srcTileXY, neighborTileXY) {
     var parity = GetParity(this.mode, tileX, tileY);
     var deltaTileXYToDirMap = DeltaTileXYToNeighbor[this.mode][parity];
 
@@ -15,4 +15,4 @@ var GetNeighborTileDir = function (srcTileXY, neighborTileXY) {
     }
     return null;
 }
-export default GetNeighborTileDir;
+export default GetNeighborTileDirection;

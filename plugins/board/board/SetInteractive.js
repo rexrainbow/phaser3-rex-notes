@@ -38,8 +38,8 @@ var onPointerDown = function (pointer) {
     tmpTileXY.y = tileY;    
     this.emit('tiledown', pointer, tmpTileXY);
 
-    tmpChess.length = 0;
-    var gameObjects = this.tileXYToChess(tileX, tileY, tmpChess);
+    tmpChessArray.length = 0;
+    var gameObjects = this.tileXYToChessArray(tileX, tileY, tmpChessArray);
     if (gameObjects.length === 0) {
         return;
     }
@@ -65,8 +65,8 @@ var onPointerUp = function (pointer) {
     tmpTileXY.y = tileY;    
     this.emit('tileup', pointer, tmpTileXY);
 
-    tmpChess.length = 0;
-    var gameObjects = this.tileXYToChess(tileX, tileY, tmpChess);
+    tmpChessArray.length = 0;
+    var gameObjects = this.tileXYToChessArray(tileX, tileY, tmpChessArray);
     if (gameObjects.length === 0) {
         return;
     }
@@ -93,8 +93,8 @@ var onPointerMove = function (pointer) {
     tmpTileXY.y = tileY;
     this.emit('tilemove', pointer, tmpTileXY);
 
-    tmpChess.length = 0;
-    var gameObjects = this.tileXYToChess(tileX, tileY, tmpChess);
+    tmpChessArray.length = 0;
+    var gameObjects = this.tileXYToChessArray(tileX, tileY, tmpChessArray);
     if (gameObjects.length === 0) {
         return;
     }
@@ -111,6 +111,6 @@ var tmpTileXY = {
     x: 0,
     y: 0
 };
-var tmpChess = [];
+var tmpChessArray = [];
 
 export default SetInteractive;

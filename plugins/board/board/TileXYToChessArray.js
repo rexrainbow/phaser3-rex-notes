@@ -1,4 +1,4 @@
-var TileXYToChess = function (tileX, tileY, out) {
+var TileXYToChessArray = function (tileX, tileY, out) {
     if (out === undefined) {
         out = [];
     }
@@ -12,4 +12,4 @@ var TileXYToChess = function (tileX, tileY, out) {
     }
     return out;
 }
-export default TileXYToChess;
+export default TileXYToChessArray;

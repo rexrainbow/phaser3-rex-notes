@@ -284,6 +284,11 @@ Or mix them
 
 ### Get text
 
-```javascript
-var curContent = txt.text;
-```
+- Source text
+    ```javascript
+    var curContent = txt.text;
+    ```
+- Plain text
+    ```javascript
+    var plainText = txt.getPlainText();
+    ```

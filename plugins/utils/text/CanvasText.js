@@ -307,12 +307,12 @@ class CanvasText {
         return this._tmpPensManager;
     }
 
-    getRawText(text, start, end) {
+    getPlainText(text, start, end) {
         var rawText;
         if (text == null) {
             rawText = this.pensManager.rawText;
         } else {
-            var m, match = this.parser.splitText(text, 1); // RAWTEXTONLY_MODE
+            var m, match = this.parser.splitText(text, 1); // PLAINTEXTONLY_MODE
             rawText = "";
             for (var i = 0, len = match.length; i < len; i++) {
                 rawText += match[i];

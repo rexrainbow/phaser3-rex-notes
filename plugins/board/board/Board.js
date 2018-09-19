@@ -3,6 +3,10 @@ import GetChessData from '../chess/GetChessData.js';
 import GetChessUID from '../chess/GetChessUID.js';
 import BoardData from '../data/board/BoardData.js';
 
+import TileXYToWorldX from './TileXYToWorldX.js';
+import TileXYToWorldY from './TileXYToWorldY.js';
+import WorldXYToTileX from './WorldXYToTileX.js';
+import WorldXYToTileY from './WorldXYToTileY.js';
 import SetBoardWidth from './SetBoardWidth.js';
 import SetBoardHeight from './SetBoardHeight.js';
 import AddChess from './AddChess.js';
@@ -15,16 +19,19 @@ import ForEachTileXY from './ForEachTileXY.js';
 import GetWrapTileX from './GetWrapTileX.js';
 import GetWrapTileY from './GetWrapTileY.js';
 import TileXYZToChess from './TileXYZToChess.js';
-import TileXYToChess from './TileXYToChess.js';
-import TileXYArrayToChess from './TileXYArrayToChess.js';
+import TileXYToChessArray from './TileXYToChessArray.js';
+import TileXYArrayToChessArray from './TileXYArrayToChessArray.js';
 import ChessToTileXYZ from './ChessToTileXYZ.js';
 import GetAllChess from './GetAllChess.js';
+import GetEmptyTileXYArray from './GetEmptyTileXYArray.js';
+import GetRandomEmptyTileXY from './GetRandomEmptyTileXY.js';
 import GetNeighborTileXY from './GetNeighborTileXY.js';
 import GetNeighborChess from './GetNeighborChess.js';
-import TileXYToWorldX from './TileXYToWorldX.js';
-import TileXYToWorldY from './TileXYToWorldY.js';
-import WorldXYToTileX from './WorldXYToTileX.js';
-import WorldXYToTileY from './WorldXYToTileY.js';
+import GetNeighborTileDirection from './GetNeighborTileDirection.js';
+import GetNeighborChessDirection from './GetNeighborChessDirection.js';
+import AreNeighbors from './AreNeighbors.js';
+import HasBlocker from './HasBlocker.js';
+import HasEdgeBlocker from './HasEdgeBlocker.js';
 import SetInteractive from './SetInteractive.js';
 import GetGridPolygon from './GetGridPolygon.js';
 
@@ -124,9 +131,17 @@ class Board extends EE {
         }
         return out;
     }
+
+    get chessCount() {
+        return this.boardData.chessCount;
+    }
 }
 
 var methods = {
+    tileXYToWorldX: TileXYToWorldX,
+    tileXYToWorldY: TileXYToWorldY,
+    worldXYToTileX: WorldXYToTileX,
+    worldXYToTileY: WorldXYToTileY,
     setBoardWidth: SetBoardWidth,
     setBoardHeight: SetBoardHeight,
     getChessData: GetChessData,
@@ -142,16 +157,19 @@ var methods = {
     getWrapTileX: GetWrapTileX,
     getWrapTileY: GetWrapTileY,
     tileXYZToChess: TileXYZToChess,
-    tileXYToChess: TileXYToChess,
-    tileXYArrayToChess: TileXYArrayToChess,
+    tileXYToChessArray: TileXYToChessArray,
+    tileXYArrayToChess: TileXYArrayToChessArray,
     chessToTileXYZ: ChessToTileXYZ,
     getAllChess: GetAllChess,
+    getEmptyTileXYArray: GetEmptyTileXYArray,
+    getRandomEmptyTileXY: GetRandomEmptyTileXY,
     getNeighborTileXY: GetNeighborTileXY,
     getNeighborChess: GetNeighborChess,
-    tileXYToWorldX: TileXYToWorldX,
-    tileXYToWorldY: TileXYToWorldY,
-    worldXYToTileX: WorldXYToTileX,
-    worldXYToTileY: WorldXYToTileY,
+    getNeighborTileDirection: GetNeighborTileDirection,
+    getNeighborChessDirection: GetNeighborChessDirection,
+    areNeighbors: AreNeighbors,
+    hasBlocker: HasBlocker,
+    hasEdgeBlocker: HasEdgeBlocker,
     setInteractive: SetInteractive,
     getGridPolygon: GetGridPolygon,
 }

@@ -35,6 +35,7 @@ class Board {
     removeAll() {
         Clear(this.UIDToXYZ);
         Clear(this.XYZToUID);
+        this.chessCount = 0;
         this.clearBounds();
         return this;
     }
@@ -55,6 +56,7 @@ class Board {
             z: z
         };
 
+        this.chessCount++;
         this.clearBounds();
         return this;
     }
@@ -97,6 +99,7 @@ class Board {
             delete this.XYZToUID[x];
         }
 
+        this.chessCount--;
         this.clearBounds();
         return this;
     }
@@ -110,7 +113,10 @@ class Board {
     }
 
     getXYZ(uid) {
-        return this.UIDToXYZ[uid];
+        if (this.exists(uid)) {
+            return this.UIDToXYZ[uid];
+        }
+        return null;
     }
 
     get xMax() {

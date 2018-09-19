@@ -4,7 +4,7 @@ import {
     StaggeredMap
 } from './DeltaTileXYToNeighbor.js';
 
-var GetNeighborTileDir = function (srcTileXY, neighborTileXY) {
+var GetNeighborTileDirection = function (srcTileXY, neighborTileXY) {
     var deltaTileXYToDirMap
     switch (this.mode) {
         case 0: // orthogonal
@@ -28,4 +28,4 @@ var GetNeighborTileDir = function (srcTileXY, neighborTileXY) {
     }
     return null;
 }
-export default GetNeighborTileDir;
+export default GetNeighborTileDirection;

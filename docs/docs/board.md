@@ -149,19 +149,19 @@ var tileXYZ = board.chessToTileXYZ(chess);
     - `chess` : A game object
 - Get chess at (tileX, tileY)
     ```javascript
-    var out = board.tileXYToChess(tileX, tileY);
-    // var out = board.tileXYToChess(tileX, tileY, out);
+    var out = board.tileXYToChessArray(tileX, tileY);
+    // var out = board.tileXYToChessArray(tileX, tileY, out);
     ```
     - `out` : An array of chess
 - Get chess from array of (tileX, tileY)
     ```javascript
-    var out = board.tileXYArrayToChess(tileXYArray);
-    // var out = board.tileXYArrayToChess(tileXYArray, out);
+    var out = board.tileXYArrayToChessArray(tileXYArray);
+    // var out = board.tileXYArrayToChessArray(tileXYArray, out);
     ```
     or
     ```javascript
-    var out = board.tileXYArrayToChess(tileXYArray, tileZ);
-    // var out = board.tileXYArrayToChess(tileXYArray, tileZ, out);
+    var out = board.tileXYArrayToChessArray(tileXYArray, tileZ);
+    // var out = board.tileXYArrayToChessArray(tileXYArray, tileZ, out);
     ```
     - `tileXYArray` : An array of tileXY `{x, y}`
     - `out` : An array of chess
@@ -218,19 +218,30 @@ for (var tileY = 0; tileY < board.height; tileY++) {
 
 - `board.width` , `board.height` : Board width/height in tiles.
 
-### Tile position <-> world position
+### Tile position -> world position
 
 ```javascript
 var worldX = board.tileXYToWorldX(tileX, tileY);
 var worldY = board.tileXYToWorldY(tileX, tileY);
 ```
 
-### World position <-> tile position
+### World position -> tile position
 
 ```javascript
 var tileX = board.worldXYToTileX(worldX, worldY);
 var tileY = board.worldXYToTileY(worldX, worldY);
 ```
+
+### Align world position to grid
+
+- Align one chess object
+    ```javascript
+    board.gridAlign(chess);
+    ```
+- Align all chess
+    ```javascript
+    board.gridAlign();
+    ```
 
 ### Neighobrs
 
