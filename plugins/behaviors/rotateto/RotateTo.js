@@ -83,22 +83,21 @@ class RotateTo extends TickTask {
     }
 
     rotateTo(angle, dir, speed) {
-        this.stop();
-
         if (IsPlainObject(angle)) {
             var config = angle;
             angle = GetValue(config, 'angle', undefined);
             dir = GetValue(config, 'dir', undefined);
             speed = GetValue(config, 'speed', undefined);
         }
+        // invalid target angle
+        if (angle == null) {
+            return this;
+        }        
         this.target = MathWrap(angle, 0, 360); // 0~360
         if (dir === undefined) {
             dir = 0;
         }
         this.dir = (typeof (dir) === 'string') ? DIRMODE[dir] : dir;
-        if (angle == null) {
-            return this;
-        }
         if (speed !== undefined) {
             this.speed = speed;
         }

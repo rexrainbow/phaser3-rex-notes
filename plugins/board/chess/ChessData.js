@@ -1,5 +1,7 @@
 import ChessBank from './ChessBank.js';
 
+import GetTileDirection from './GetTileDirection.js';
+
 const uidKey = ChessBank.uidKey;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
@@ -98,4 +100,11 @@ class Chess {
     }
 }
 
+var methods = {
+    getTileDirection: GetTileDirection
+};
+Object.assign(
+    Chess.prototype,
+    methods
+);
 export default Chess;

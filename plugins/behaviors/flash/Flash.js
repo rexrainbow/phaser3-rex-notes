@@ -84,8 +84,6 @@ class Flash extends TickTask {
     }
 
     flash(duration, repeat) {
-        // this.stop();
-
         if (IsPlainObject(duration)) {
             var config = duration;
             duration = GetValue(config, 'duration', undefined);
