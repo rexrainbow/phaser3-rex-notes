@@ -1,6 +1,6 @@
-import ChessBank from '../data/chess/ChessBank.js';
-import GetChessData from '../data/chess/GetChessData.js';
-import GetChessUID from '../data/chess/GetChessUID.js';
+import ChessBank from '../chess/ChessBank.js';
+import GetChessData from '../chess/GetChessData.js';
+import GetChessUID from '../chess/GetChessUID.js';
 import BoardData from '../data/board/BoardData.js';
 
 import SetBoardWidth from './SetBoardWidth.js';

@@ -1,6 +1,6 @@
 import MoveToTask from 'rexPlugins/behaviors/moveto/MoveTo.js';
 import TickTask from 'rexPlugins/utils/ticktask/TickTask.js';
-import GetChessData from '../data/chess/GetChessData.js';
+import GetChessData from '../chess/GetChessData.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
