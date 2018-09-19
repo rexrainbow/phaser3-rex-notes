@@ -1,7 +1,8 @@
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-var MoveToTile = function (tileX, tileY, direction, speed) {
+var MoveToTile = function (tileX, tileY, direction) {
     var board = this.chessData.board;
     if (board === null) { // chess is not in a board
+        this.lastMoveToResult = false;
         return this;
     }
 
@@ -10,18 +11,28 @@ var MoveToTile = function (tileX, tileY, direction, speed) {
         tileX = GetValue(config, 'x', undefined);
         tileY = GetValue(config, 'y', undefined);
         direction = GetValue(config, 'direction', undefined);
-        speed = GetValue(config, 'speed', undefined);
+    }
+    if (direction !== undefined) {
+        var targetTileXY = board.getNeighborTileXY(this.chessData.tileXYZ, direction);
+        if (targetTileXY !== null) {
+            tileX = targetTileXY.x;
+            tileY = targetTileXY.y;
+        } else {
+            tileX = null;
+            tileY = null;
+        }
     }
 
     // invalid tile position
     if ((tileX == null) || (tileY == null)) {
-        this.lastMoveableResult = false;
+        this.lastMoveToResult = false;
         return this;
     }
     if (direction === undefined) {
         direction = this.chessData.getTileDirection(tileX, tileY);
     }
     if (!this.canMoveTo(tileX, tileY, direction)) {
+        this.lastMoveToResult = false;
         return this;
     }
     this.destinationTileX = tileX;
@@ -29,14 +40,11 @@ var MoveToTile = function (tileX, tileY, direction, speed) {
     this.destinationDirection = direction;
     var worldX = board.tileXYToWorldX(tileX, tileY);
     var worldY = board.tileXYToWorldY(tileX, tileY);
-    if (speed !== undefined) {
-        this.speed = speed;
-    }
     board.moveChess(this.gameObject, tileX, tileY);
     this.moveToTask.moveTo(worldX, worldY);
 
-    this.lastMoveableResult = true;
     this.isRunning = true;
+    this.lastMoveToResult = true;    
     return this;
 }
 

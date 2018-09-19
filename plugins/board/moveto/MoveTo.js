@@ -33,7 +33,7 @@ class MoveTo extends TickTask {
         this.destinationTileX = GetValue(o, 'destinationTileX', null);
         this.destinationTileY = GetValue(o, 'destinationTileY', null);
         this.destinationDirection = GetValue(o, 'destinationDirection', null);
-        this.lastMoveableResult = GetValue(o, 'lastMoveableResult', undefined);
+        this.lastMoveToResult = GetValue(o, 'lastMoveToResult', undefined);
         return this;
     }
 
@@ -51,7 +51,7 @@ class MoveTo extends TickTask {
             destinationTileX: this.destinationTileX,
             destinationTileY: this.destinationTileY,
             destinationDirection: this.destinationDirection,
-            lastMoveableResult: this.lastMoveableResult,
+            lastMoveToResult: this.lastMoveToResult,
             tickingMode: this.tickingMode
         };
     }

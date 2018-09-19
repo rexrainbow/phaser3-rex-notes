@@ -88,20 +88,16 @@ class MoveTo extends TickTask {
         return this;
     }
 
-    moveTo(x, y, speed) {
+    moveTo(x, y) {
         if (IsPlainObject(x)) {
             var config = x;
             x = GetValue(config, 'x', undefined);
             y = GetValue(config, 'y', undefined);
-            speed = GetValue(config, 'speed', undefined);
         }
 
         // invalid position
         if ((x == null) || (y == null)) {       
             return this;
-        }
-        if (speed !== undefined) {
-            this.speed = speed;
         }
 
         this.targetX = x;
