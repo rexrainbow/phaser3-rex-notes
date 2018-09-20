@@ -2613,15 +2613,29 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#tile-position-world-position" title="Tile position &lt;-&gt; world position" class="md-nav__link">
-    Tile position &lt;-&gt; world position
+  <a href="#tile-position-world-position" title="Tile position -&gt; world position" class="md-nav__link">
+    Tile position -&gt; world position
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#world-position-tile-position" title="World position &lt;-&gt; tile position" class="md-nav__link">
-    World position &lt;-&gt; tile position
+  <a href="#world-position-tile-position" title="World position -&gt; tile position" class="md-nav__link">
+    World position -&gt; tile position
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#align-world-position-to-grid" title="Align world position to grid" class="md-nav__link">
+    Align world position to grid
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#neighobrs" title="Neighobrs" class="md-nav__link">
+    Neighobrs
   </a>
   
 </li>
@@ -2650,6 +2664,13 @@
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#grid-polygon" title="Grid polygon" class="md-nav__link">
+    Grid polygon
+  </a>
   
 </li>
         
@@ -3025,15 +3046,29 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#tile-position-world-position" title="Tile position &lt;-&gt; world position" class="md-nav__link">
-    Tile position &lt;-&gt; world position
+  <a href="#tile-position-world-position" title="Tile position -&gt; world position" class="md-nav__link">
+    Tile position -&gt; world position
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#world-position-tile-position" title="World position &lt;-&gt; tile position" class="md-nav__link">
-    World position &lt;-&gt; tile position
+  <a href="#world-position-tile-position" title="World position -&gt; tile position" class="md-nav__link">
+    World position -&gt; tile position
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#align-world-position-to-grid" title="Align world position to grid" class="md-nav__link">
+    Align world position to grid
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#neighobrs" title="Neighobrs" class="md-nav__link">
+    Neighobrs
   </a>
   
 </li>
@@ -3062,6 +3097,13 @@
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#grid-polygon" title="Grid polygon" class="md-nav__link">
+    Grid polygon
+  </a>
   
 </li>
         
@@ -3192,6 +3234,12 @@
 <li><code>destroy</code> : Set <code>true</code> to desrtoy chess object.</li>
 </ul>
 </li>
+<li>Remove all chess
+    <div class="codehilite"><pre><span></span><span class="nx">board</span><span class="p">.</span><span class="nx">removeAllChess</span><span class="p">(</span><span class="nx">destroy</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>destroy</code> : Set <code>true</code> to desrtoy chess object.</li>
+</ul>
+</li>
 </ul>
 <h3 id="move-chess">Move chess<a class="headerlink" href="#move-chess" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="nx">board</span><span class="p">.</span><span class="nx">moveChess</span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="nx">toTileX</span><span class="p">,</span> <span class="nx">toTileY</span><span class="p">,</span> <span class="nx">toTileZ</span><span class="p">,</span> <span class="nx">align</span><span class="p">);</span>
@@ -3227,19 +3275,19 @@
 </ul>
 </li>
 <li>Get chess at (tileX, tileY)
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">tileXYToChess</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">);</span>
-<span class="c1">// var out = board.tileXYToChess(tileX, tileY, out);</span>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">tileXYToChessArray</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">);</span>
+<span class="c1">// var out = board.tileXYToChessArray(tileX, tileY, out);</span>
 </pre></div><ul>
 <li><code>out</code> : An array of chess</li>
 </ul>
 </li>
 <li>Get chess from array of (tileX, tileY)
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">tileXYArrayToChess</span><span class="p">(</span><span class="nx">tileXYArray</span><span class="p">);</span>
-<span class="c1">// var out = board.tileXYArrayToChess(tileXYArray, out);</span>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">tileXYArrayToChessArray</span><span class="p">(</span><span class="nx">tileXYArray</span><span class="p">);</span>
+<span class="c1">// var out = board.tileXYArrayToChessArray(tileXYArray, out);</span>
 </pre></div>
     or
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">tileXYArrayToChess</span><span class="p">(</span><span class="nx">tileXYArray</span><span class="p">,</span> <span class="nx">tileZ</span><span class="p">);</span>
-<span class="c1">// var out = board.tileXYArrayToChess(tileXYArray, tileZ, out);</span>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">tileXYArrayToChessArray</span><span class="p">(</span><span class="nx">tileXYArray</span><span class="p">,</span> <span class="nx">tileZ</span><span class="p">);</span>
+<span class="c1">// var out = board.tileXYArrayToChessArray(tileXYArray, tileZ, out);</span>
 </pre></div><ul>
 <li><code>tileXYArray</code> : An array of tileXY <code>{x, y}</code></li>
 <li><code>out</code> : An array of chess</li>
@@ -3268,16 +3316,69 @@
 <span class="p">},</span> <span class="nx">scopr</span><span class="p">);</span>
 </pre></div>
 
-<h3 id="tile-position-world-position">Tile position &lt;-&gt; world position<a class="headerlink" href="#tile-position-world-position" title="Permanent link">&para;</a></h3>
+<p>Iteration order :</p>
+<div class="codehilite"><pre><span></span><span class="nx">board</span><span class="p">.</span><span class="nx">forEachTileXY</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">tileXY</span><span class="p">,</span> <span class="nx">board</span><span class="p">,</span> <span class="nx">order</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// var tileX = tileXY.x;</span>
+    <span class="c1">// var tileY = tileXY.y;</span>
+<span class="p">},</span> <span class="nx">scopr</span><span class="p">);</span>
+</pre></div>
+
+<ul>
+<li><code>order</code> :<ul>
+<li><code>0</code>, or <code>x+</code> : Increasing x, increasing y.</li>
+<li><code>1</code>, or <code>x-</code> : Decreasing x, increasing y.</li>
+<li><code>2</code>, or <code>y+</code> : Increasing y, increasing x.</li>
+<li><code>3</code>, or <code>y-</code> : Decreasing y, increasing x.</li>
+</ul>
+</li>
+</ul>
+<p>Or using for-loop</p>
+<div class="codehilite"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">tileY</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">tileY</span> <span class="o">&lt;</span> <span class="nx">board</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span> <span class="nx">tileY</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">tileX</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">tileX</span> <span class="o">&gt;</span> <span class="nx">board</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span> <span class="nx">tileX</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+<ul>
+<li><code>board.width</code> , <code>board.height</code> : Board width/height in tiles.</li>
+</ul>
+<h3 id="tile-position-world-position">Tile position -&gt; world position<a class="headerlink" href="#tile-position-world-position" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">worldX</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">tileXYToWorldX</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">worldY</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">tileXYToWorldY</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">);</span>
 </pre></div>
 
-<h3 id="world-position-tile-position">World position &lt;-&gt; tile position<a class="headerlink" href="#world-position-tile-position" title="Permanent link">&para;</a></h3>
+<h3 id="world-position-tile-position">World position -&gt; tile position<a class="headerlink" href="#world-position-tile-position" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tileX</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">worldXYToTileX</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">tileY</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">worldXYToTileY</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">);</span>
 </pre></div>
 
+<h3 id="align-world-position-to-grid">Align world position to grid<a class="headerlink" href="#align-world-position-to-grid" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Align one chess object
+    <div class="codehilite"><pre><span></span><span class="nx">board</span><span class="p">.</span><span class="nx">gridAlign</span><span class="p">(</span><span class="nx">chess</span><span class="p">);</span>
+</pre></div></li>
+<li>Align all chess
+    <div class="codehilite"><pre><span></span><span class="nx">board</span><span class="p">.</span><span class="nx">gridAlign</span><span class="p">();</span>
+</pre></div></li>
+</ul>
+<h3 id="neighobrs">Neighobrs<a class="headerlink" href="#neighobrs" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get tile position of neighbor
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">neighborTileXY</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getNeighborTileXY</span><span class="p">(</span><span class="nx">srcTileXY</span><span class="p">,</span> <span class="nx">direction</span><span class="p">);</span>
+<span class="c1">// var out = board.getNeighborTileXY(srcTileXY, direction, out);</span>
+</pre></div><ul>
+<li><code>srcTileXY</code> : Tile position <code>{x, y}</code> of source.</li>
+<li><code>direction</code> :<ul>
+<li><code>0</code> ~ <code>3</code> : <a href="../board-quadgrid/#directions">Quad grid</a> in 4 directions mode.</li>
+<li><code>0</code> ~ <code>7</code> : <a href="../board-quadgrid/#directions">Quad grid</a> in 8 directions mode.</li>
+<li><code>0</code> ~ <code>5</code> : <a href="../board-hexagongrid/#directions">Hexagon grid</a>.</li>
+</ul>
+</li>
+<li><code>neighborTileXY</code> : Tile position <code>{x, y}</code> of neighbor. Retrun <code>null</code> if no neighbor there (i.e. source chess is at the edge of board.)</li>
+</ul>
+</li>
+</ul>
 <h3 id="touch-events">Touch events<a class="headerlink" href="#touch-events" title="Permanent link">&para;</a></h3>
 <h4 id="set-interactive">Set interactive<a class="headerlink" href="#set-interactive" title="Permanent link">&para;</a></h4>
 <ul>
@@ -3330,6 +3431,16 @@
 <li>Pointer up at a chess
     <div class="codehilite"><pre><span></span><span class="nx">board</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;gameobjectup&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">)</span> <span class="p">{</span>
 <span class="p">})</span>
+</pre></div></li>
+</ul>
+<h3 id="grid-polygon">Grid polygon<a class="headerlink" href="#grid-polygon" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get a <a href="../geom-polygon/">polygon object</a> at tile position (tileX, tileY).
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">poly</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getGridPolygon</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">);</span>
+<span class="c1">// var out = board.getGridPolygon(tileX, tileY, out);</span>
+</pre></div></li>
+<li>Draw grid polygon on <a href="../graphics/#lines">graphics object</a>
+    <div class="codehilite"><pre><span></span><span class="nx">graphics</span><span class="p">.</span><span class="nx">strokePoints</span><span class="p">(</span><span class="nx">poly</span><span class="p">.</span><span class="nx">points</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 </pre></div></li>
 </ul>
                 

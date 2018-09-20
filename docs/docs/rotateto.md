@@ -66,7 +66,6 @@ var rotateTo = scene.plugins.get('rexRotateTo').add(gameObject, {
 - Clockwise/counter-clockwise
     ```javascript
     rotateTo.rotateTowardsPosition(x, y, dir);
-    // rotateTo.rotateTowardsPosition(x, y, dir, speed);
     ```
     - `dir` :
         - `0` : Shortest angle

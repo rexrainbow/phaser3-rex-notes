@@ -2615,6 +2615,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#directions" title="Directions" class="md-nav__link">
+    Directions
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2901,6 +2908,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#directions" title="Directions" class="md-nav__link">
+    Directions
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2945,6 +2959,7 @@
     <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">cellWidth</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">cellHeight</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="c1">// size: undefined,</span>
     <span class="nx">staggeraxis</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
     <span class="nx">staggerindex</span><span class="o">:</span> <span class="mi">1</span>
 <span class="p">});</span>
@@ -2954,6 +2969,7 @@
 <li><code>x</code>, <code>y</code> : World position of origin tile (i.e. tileX = 0, tileY = 0)</li>
 <li><code>cellWidth</code> : The width of the cell, in pixels.</li>
 <li><code>cellHeight</code> : The height of the cell, in pixels.</li>
+<li><code>size</code> : Distance between center to each corner. Get <code>cellWidth</code> and <code>cellHeight</code> from <code>size</code> if this parameter is not undefined.</li>
 <li><code>staggeraxis</code><ul>
 <li><code>0</code>, or <code>y</code></li>
 <li><code>1</code>, or <code>x</code></li>
@@ -2974,6 +2990,28 @@
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tileX</span> <span class="o">=</span> <span class="nx">grid</span><span class="p">.</span><span class="nx">getTileX</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">tileY</span> <span class="o">=</span> <span class="nx">grid</span><span class="p">.</span><span class="nx">getTileY</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">);</span>
 </pre></div>
+
+<h3 id="directions">Directions<a class="headerlink" href="#directions" title="Permanent link">&para;</a></h3>
+<ul>
+<li>staggeraxis = <code>0</code>/<code>y</code><ul>
+<li><code>0</code> : Down-right</li>
+<li><code>1</code> : Down</li>
+<li><code>2</code> : Down-left</li>
+<li><code>3</code> : Up-left</li>
+<li><code>4</code> : Up</li>
+<li><code>5</code> : Up-right</li>
+</ul>
+</li>
+<li>staggeraxis = <code>1</code>/<code>x</code><ul>
+<li><code>0</code> : Right</li>
+<li><code>1</code> : Down-right</li>
+<li><code>2</code> : Down-left</li>
+<li><code>3</code> : Left</li>
+<li><code>4</code> : Up-left</li>
+<li><code>5</code> : Up-right</li>
+</ul>
+</li>
+</ul>
                 
                   
                 

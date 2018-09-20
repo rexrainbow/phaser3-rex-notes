@@ -60,7 +60,6 @@ var moveTo = scene.plugins.get('rexMoveTo').add(gameObject, {
 
 ```javascript
 moveTo.moveTo(x, y);
-// moveTo.moveTo(x, y, speed);
 ```
 
 - `x` , `y` : Target position
