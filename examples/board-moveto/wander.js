@@ -10,8 +10,6 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        var staggeraxis = 'x';
-        var staggerindex = 'odd';
         var graphics = this.add.graphics({
             lineStyle: {
                 width: 1,
@@ -20,13 +18,8 @@ class Demo extends Phaser.Scene {
             }
         });
         var board = this.rexBoard.add.board({
-                grid: this.rexBoard.add.hexagonGrid({
-                    x: 100,
-                    y: 100,
-                    size: 30,
-                    staggeraxis: staggeraxis,
-                    staggerindex: staggerindex
-                }),
+                grid: getHexagonGrid(this),
+                // grid: getQuadGrid(this),
                 width: 8,
                 height: 8
             })
@@ -62,6 +55,30 @@ class Demo extends Phaser.Scene {
         chess.moveTo.moveToRandomNeighbor();
     }
 }
+
+var getQuadGrid = function (scene) {
+    var grid = scene.rexBoard.add.quadGrid({
+        x: 400,
+        y: 100,
+        cellWidth: 100,
+        cellHeight: 50,
+        type: 1
+    });
+    return grid;
+}
+
+var getHexagonGrid = function (scene) {
+    var staggeraxis = 'x';
+    var staggerindex = 'odd';
+    var grid = scene.rexBoard.add.hexagonGrid({
+        x: 100,
+        y: 100,
+        size: 30,
+        staggeraxis: staggeraxis,
+        staggerindex: staggerindex
+    })
+    return grid;
+};
 
 var createGridPolygonTexture = function (board, key) {
     var poly = board.getGridPolygon();

@@ -11,23 +11,15 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        var key = 'shape';
-        var texture = createRhombusTexture(this, key);
-        var image = texture.getSourceImage();
-
         var board = this.rexBoard.add.board({
-            grid: this.rexBoard.add.quadGrid({
-                x: 400,
-                y: 100,
-                cellWidth: image.width,
-                cellHeight: image.height,
-                type: 1, // isometric
-                dir: 8
-            }),
+            grid: getHexagonGrid(this),
+            // grid: getQuadGrid(this),
             width: 8,
             height: 8
         });
-
+        var key = 'shape';        
+        createGridPolygonTexture(board, key);
+        
         const Random = Phaser.Math.Between;
         var colorArray = Phaser.Display.Color.HSVColorWheel(0.5, 1);
         board.forEachTileXY(function (tileXY, board) {
@@ -64,14 +56,40 @@ class Demo extends Phaser.Scene {
     update() {}
 }
 
-var createRhombusTexture = function (scene, key) {
-    var rhombus = new Phaser.Geom.rexRhombus(0, 0, 100, 50);
 
-    var points = rhombus.points;
+var getQuadGrid = function (scene) {
+    var grid = scene.rexBoard.add.quadGrid({
+        x: 400,
+        y: 100,
+        cellWidth: 100,
+        cellHeight: 50,
+        type: 1
+    });
+    return grid;
+}
+
+var getHexagonGrid = function (scene) {
+    var staggeraxis = 'x';
+    var staggerindex = 'odd';
+    var grid = scene.rexBoard.add.hexagonGrid({
+        x: 100,
+        y: 100,
+        size: 30,
+        staggeraxis: staggeraxis,
+        staggerindex: staggerindex
+    })
+    return grid;
+};
+
+var createGridPolygonTexture = function (board, key) {
+    var poly = board.getGridPolygon();
+    poly.left = 0;
+    poly.top = 0;
+    var scene = board.scene;
     scene.add.graphics()
         .fillStyle(0xffffff)
-        .fillPoints(points, true)
-        .generateTexture(key, Math.floor(rhombus.width), Math.floor(rhombus.height))
+        .fillPoints(poly.points, true)
+        .generateTexture(key, poly.width, poly.height)
         .destroy();
     return scene.textures.get(key);
 }
