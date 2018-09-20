@@ -18,22 +18,3 @@ var value = Phaser.Math.Between(min, max);
 var vec = Phaser.Math.RandomXY(vec);    // return vec {x, y}
 // var vec = Phaser.Math.RandomXY(vec, scale);
 ```
-
-### Get random item
-
-```javascript
-var item = Phaser.Utils.Array.GetRandom(array);
-// var item = Phaser.Utils.Array.GetRandom(array, startIndex, length);
-```
-
-### Remove random item
-
-```javascript
-var item = Phaser.Utils.Array.RemoveRandomElement(array);
-```
-
-### Shuffle
-
-```javascript
-var arr = Phaser.Utils.Array.Shuffle(array);
-```

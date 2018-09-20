@@ -2,8 +2,8 @@ import Clone from 'rexPlugins/utils/object/Clone.js';
 import IsEmpty from 'rexPlugins/utils/object/IsEmpty.js';
 import Clear from 'rexPlugins/utils/object/Clear.js';
 
-const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 const GetValue = Phaser.Utils.Objects.GetValue;
+const Shuffle = Phaser.Utils.Array.Shuffle;
 
 class Gashapon {
     constructor(config) {
@@ -20,33 +20,26 @@ class Gashapon {
         if (this._list == undefined) {
             this._list = [];
         }
-        if (this.customRnd == undefined) {
-            this.customRnd = [null, null];
-        }
 
-        this.setMode(GetFastValue(o, 'mode', 0));
-        this.setReload(GetFastValue(o, 'reload', true));
+        this.setMode(GetValue(o, 'mode', 0));
+        this.setReload(GetValue(o, 'reload', true));
 
         // data
 
-        this.items = Clone(GetFastValue(o, 'items', {}), this.items);
+        this.items = Clone(GetValue(o, 'items', {}), this.items);
         this._list.length = 0;
 
         // result
-        this.result = GetFastValue(o, 'result', null);
+        this.result = GetValue(o, 'result', null);
 
         // flags
         this._restartFlag = true; // force restart to rebuild this._list
-
-        // custom function to return random real number between 0 and 1
-        this.customRnd[0] = GetValue(o, 'rnd.fn', null);
-        this.customRnd[1] = GetValue(o, 'rnd.ctx', null);
 
         // initialize
         if (this._restartFlag) {
             this.startGen();
         }
-        var remain = GetFastValue(o, 'remain', undefined);
+        var remain = GetValue(o, 'remain', undefined);
         if (remain) {
             this.remain = Clone(remain, this.remain);
         }
@@ -68,10 +61,7 @@ class Gashapon {
             result: this.result,
 
             // flags
-            restart: true, // force restart to rebuild this._list
-
-            // custom function to return random real number between 0 and 1
-            rnd: Clone(this.customRnd)
+            restart: true // force restart to rebuild this._list
         };
     };
 
@@ -235,10 +225,10 @@ class Gashapon {
         if (name == null) {
             if (this.mode === 0) { // shuffle mode
                 this.resetItemList(this.remain);
-                result = this.getRndItem(this._list);
+                result = Shuffle(this._list);
                 this.addRemainItem(result, -1);
             } else { // random mode
-                result = this.getRndItem(this._list);
+                result = Shuffle(this._list);
             }
 
         } else { // force pick
@@ -256,12 +246,6 @@ class Gashapon {
         return result;
     }
 
-    setRandomGen(callback, scope) {
-        this.customRnd[0] = callback;
-        this.customRnd[1] = scope;
-        return this;
-    }
-
     destroy() {
         // data
         Clear(this.items);
@@ -273,10 +257,6 @@ class Gashapon {
 
         // flags
         this._restartFlag = false;
-
-        // custom function to return random real number between 0 and 1
-        this.customRnd[0] = null;
-        this.customRnd[1] = null;
 
         return this;
     }
@@ -325,39 +305,6 @@ class Gashapon {
 
         return this;
     }
-
-    /** @private */
-    getRndValue() {
-        var value;
-        if (this.customRnd[0]) {
-            if (this.customRnd[1]) {
-                value = this.customRnd[0].call(this.customRnd[1]);
-            } else {
-                value = this.customRnd[0]();
-            }
-        } else {
-            value = Math.random();
-        }
-        return value;
-    }
-
-    /** @private */
-    getRndItem(list) {
-        var value = this.getRndValue();
-        var result = null,
-            i, cnt = list.length,
-            item
-        for (i = 0; i < cnt; i++) {
-            item = list[i];
-            value -= item[1];
-            if (value < 0) {
-                result = item[0];
-                break;
-            }
-        }
-        return result;
-    }
-
 }
 
 const MODE = {

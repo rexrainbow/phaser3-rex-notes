@@ -1,30 +1,28 @@
 import Clear from './Clear.js';
 
 /**
- * Shallow Object Clone. Will not clone nested objects.
+ * Shallow Object Clone. Will not out nested objects.
  * @param {object} obj JSON object
  * @param {object} ret JSON object to return, set null to return a new object
  * @returns {object} this object
  */
-var Clone = function (obj, ret) {
-    var clone;
+var Clone = function (obj, out) {
     var objIsArray = Array.isArray(obj);
 
-    if (ret != null) {
-        clone = ret;
-        Clear(clone);
+    if (out === undefined) {
+        out = (objIsArray) ? [] : {};
     } else {
-        clone = (objIsArray) ? [] : {};
+        Clear(out);
     }
 
     if (objIsArray) {
-        clone.length = obj.length;
+        out.length = obj.length;
     }
     for (var key in obj) {
-        clone[key] = obj[key];
+        out[key] = obj[key];
     }
 
-    return clone;
+    return out;
 };
 
 export default Clone;

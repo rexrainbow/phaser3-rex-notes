@@ -5,6 +5,7 @@ import GetChessData from '../chess/GetChessData.js';
 import CanMoveToTile from './CanMoveToTile.js';
 import MoveToTile from './MoveToTile.js';
 import MoveToward from './MoveToward.js';
+import MoveToRandomNeighbor from './MoveToRandomNeighbor.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -33,7 +34,7 @@ class MoveTo extends TickTask {
         this.destinationTileX = GetValue(o, 'destinationTileX', null);
         this.destinationTileY = GetValue(o, 'destinationTileY', null);
         this.destinationDirection = GetValue(o, 'destinationDirection', null);
-        this.lastMoveToResult = GetValue(o, 'lastMoveToResult', undefined);
+        this.lastMoveResult = GetValue(o, 'lastMoveResult', undefined);
         return this;
     }
 
@@ -51,7 +52,7 @@ class MoveTo extends TickTask {
             destinationTileX: this.destinationTileX,
             destinationTileY: this.destinationTileY,
             destinationDirection: this.destinationDirection,
-            lastMoveToResult: this.lastMoveToResult,
+            lastMoveResult: this.lastMoveResult,
             tickingMode: this.tickingMode
         };
     }
@@ -183,6 +184,7 @@ var methods = {
     canMoveTo: CanMoveToTile,
     moveTo: MoveToTile,
     moveToward: MoveToward,
+    moveToRandomNeighbor: MoveToRandomNeighbor,
 };
 Object.assign(
     MoveTo.prototype,

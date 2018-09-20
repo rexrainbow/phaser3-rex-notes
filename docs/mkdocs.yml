@@ -102,6 +102,7 @@ nav:
     - Set: structs-set.md
     - Array:
         - Filter/Map: array-filter.md
+        - Random: random-array.md
         - Number array: create-number-array.md
     - CSV:
         - CSV to array: csvtoarray.md

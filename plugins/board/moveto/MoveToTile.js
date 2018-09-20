@@ -2,7 +2,7 @@ const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 var MoveToTile = function (tileX, tileY, direction) {
     var board = this.chessData.board;
     if (board === null) { // chess is not in a board
-        this.lastMoveToResult = false;
+        this.lastMoveResult = false;
         return this;
     }
 
@@ -25,14 +25,14 @@ var MoveToTile = function (tileX, tileY, direction) {
 
     // invalid tile position
     if ((tileX == null) || (tileY == null)) {
-        this.lastMoveToResult = false;
+        this.lastMoveResult = false;
         return this;
     }
     if (direction === undefined) {
         direction = this.chessData.getTileDirection(tileX, tileY);
     }
     if (!this.canMoveTo(tileX, tileY, direction)) {
-        this.lastMoveToResult = false;
+        this.lastMoveResult = false;
         return this;
     }
     this.destinationTileX = tileX;
@@ -44,7 +44,7 @@ var MoveToTile = function (tileX, tileY, direction) {
     this.moveToTask.moveTo(worldX, worldY);
 
     this.isRunning = true;
-    this.lastMoveToResult = true;    
+    this.lastMoveResult = true;    
     return this;
 }
 

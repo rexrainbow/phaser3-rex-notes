@@ -67,6 +67,14 @@ class Chess {
         return null;
     }
 
+    setBlocker(value) {
+        if (value === undefined) {
+            value = true;
+        }
+        this.blocker = value;
+        return this;
+    }
+
     setBlockEdge(direction, value) {
         if (this.blocker === false) {
             this.blocker = {};

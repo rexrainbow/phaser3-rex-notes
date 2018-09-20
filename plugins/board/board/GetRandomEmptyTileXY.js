@@ -1,9 +1,7 @@
 const Random = Phaser.Math.Between;
-var GetRandomEmptyTileXY = function (tileZ, out) {
-    if ((this.width * this.height) === this.chessCount) {
-        return null;
-    }
+const GetRandomItem = Phaser.Utils.Array.GetRandom;
 
+var GetRandomEmptyTileXY = function (tileZ, out) {
     if (tileZ === undefined) {
         tileZ = 0;
     }
@@ -30,7 +28,7 @@ var GetRandomEmptyTileXY = function (tileZ, out) {
         if (tmpTileXYArray.length === 0) {
             return null;
         } else {
-            var tileXY = tmpTileXYArray[Random(0, tmpTileXYArray.length - 1)];
+            var tileXY = GetRandomItem(tmpTileXYArray);
             out.x = tileXY.x;
             out.y = tileXY.y;
             tmpTileXYArray.length = 0;

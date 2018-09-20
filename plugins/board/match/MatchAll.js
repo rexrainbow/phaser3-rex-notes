@@ -2,14 +2,14 @@ var MatchBoard = function (pattern, callback, scope, getFirst) {
     // pattern: pattern list or repeat count
     var board = this.board,
         grid = board.grid;
-    var dirs = grid.halfDirections,
+    var directions = grid.halfDirections,
         dir,
         dirMask = this.dirMask;
     var width = board.width,
         height = board.height;
     var result;
-    for (var i = 0, cnt = dirs.length; i < cnt; i++) {
-        dir = dirs[i];
+    for (var i = 0, cnt = directions.length; i < cnt; i++) {
+        dir = directions[i];
         if (dirMask[dir] === false) {
             continue;
         }
