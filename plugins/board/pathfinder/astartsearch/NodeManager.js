@@ -16,15 +16,15 @@ class NodeCache {
     }
 
     getNode(tileX, tileY, createNewNode) {
-        if (createNewNode === undefined) {
-            createNewNode = true;
-        }
         if (typeof (tileX) !== 'number') {
             var tileXY = tileX;
             createNewNode = tileY;
             tileX = tileXY.x;
             tileY = tileXY.y;
         }
+        if (createNewNode === undefined) {
+            createNewNode = true;
+        }        
 
         this.sn++;
         var key = TileXYToKey(tileX, tileY);
