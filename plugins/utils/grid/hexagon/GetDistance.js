@@ -4,7 +4,7 @@ import {
     qr2z
 } from './CubeTransfer.js';
 
-var Distance = function (tileA, tileB, roughMode) {
+var GetDistance = function (tileA, tileB, roughMode) {
     var mode = this.mode;
     var q0 = tileA.x,
         r0 = tileA.y,
@@ -18,4 +18,4 @@ var Distance = function (tileA, tileB, roughMode) {
 var quickAbs = function (x) {
     return x < 0 ? -x : x;
 };
-export default Distance;
+export default GetDistance;

@@ -1,7 +1,7 @@
 import ChessBank from '../chess/ChessBank.js';
 import GetChessData from '../chess/GetChessData.js';
 import GetChessUID from '../chess/GetChessUID.js';
-import BoardData from '../data/board/BoardData.js';
+import BoardData from '../utils/boarddata/BoardData.js';
 
 import TileXYToWorldX from './TileXYToWorldX.js';
 import TileXYToWorldY from './TileXYToWorldY.js';
@@ -30,6 +30,7 @@ import GetNeighborChess from './GetNeighborChess.js';
 import GetNeighborTileDirection from './GetNeighborTileDirection.js';
 import GetNeighborChessDirection from './GetNeighborChessDirection.js';
 import AreNeighbors from './AreNeighbors.js';
+import GetDistance from './GetDistance.js';
 import HasBlocker from './HasBlocker.js';
 import HasEdgeBlocker from './HasEdgeBlocker.js';
 import SetInteractive from './SetInteractive.js';
@@ -168,6 +169,7 @@ var methods = {
     getNeighborTileDirection: GetNeighborTileDirection,
     getNeighborChessDirection: GetNeighborChessDirection,
     areNeighbors: AreNeighbors,
+    getDistance: GetDistance,
     hasBlocker: HasBlocker,
     hasEdgeBlocker: HasEdgeBlocker,
     setInteractive: SetInteractive,

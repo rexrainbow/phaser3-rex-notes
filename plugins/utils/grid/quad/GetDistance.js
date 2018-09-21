@@ -1,4 +1,4 @@
-var Distance = function (tileA, tileB, roughMode) {
+var GetDistance = function (tileA, tileB, roughMode) {
     var dx = tileB.x - tileA.x;
     var dy = tileB.y - tileA.y;
     var dist;
@@ -12,4 +12,4 @@ var Distance = function (tileA, tileB, roughMode) {
 var quickAbs = function (x) {
     return x < 0 ? -x : x;
 };
-export default Distance;
+export default GetDistance;

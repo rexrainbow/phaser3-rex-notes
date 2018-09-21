@@ -80,7 +80,7 @@ class BinaryHeap {
         }
     }
 
-    bubbleUp = function (n) {
+    bubbleUp(n) {
         // Look up the target element and its score.
         var length = this.content.length,
             element = this.content[n],

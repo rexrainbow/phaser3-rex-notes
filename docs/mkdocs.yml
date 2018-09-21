@@ -38,8 +38,16 @@ nav:
             - Page: textpage.md
     - Graphics:
         - Graphics: graphics.md
-        - Canvas: canvas.md
         - Render texture: rendertexture.md
+        - Shape:
+            - Rectangle: shape-rectangle.md
+            - Circle: shape-circle.md
+            - Line: shape-line.md
+            - Ellipse: shape-ellipse.md
+            - Polygon: shape-polygon.md
+            - Curve: shape-curve.md
+            - Star: shape-star.md
+        - Canvas: canvas.md        
     - Tile map:
         - Tile map: tilemap.md
     - Container:

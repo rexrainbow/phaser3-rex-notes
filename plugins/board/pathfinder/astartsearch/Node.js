@@ -1,31 +1,35 @@
+const AngleBetween = Phaser.Math.Angle.Between;
+const Shuffle = Phaser.Utils.Array.Shuffle;
+
 class Node {
-    constructor() {
-        this.parents = [];
+    constructor(manager) {
+        this.preNodeKeys = [];
+        this.manager = manager;
     }
 
     reset() {
         // overwrite
         this.pathFinder = undefined;
-        this.sn = sn; // for sorting by created order        
-        this.key = key;
-        this.x = 0;
-        this.y = 0;
+        this.sn = undefined; // for sorting by created order        
+        this.key = undefined;
+        this.x = undefined;
+        this.y = undefined;
         // overwrite
 
-        this.px = null;
-        this.py = null;
-        this.cost = null;
+        this._px = undefined;
+        this._py = undefined;
+        this.cost = undefined; // cost cache
         this.f = 0;
         this.g = 0;
         this.h = 0;
         this.closerH = 0;
         this.visited = false;
         this.closed = false;
-        this.parents.length = 0;
+        this.preNodeKeys.length = 0;
     }
 
     destroy() {
-        this.parents.length = 0;
+        this.preNodeKeys.length = 0;
         this.pathFinder = undefined;
     }
 
@@ -34,14 +38,13 @@ class Node {
             return 0;
         }
 
-        var h;
-        var dist = this.pathFinder.lxy2dist(endNode.x, endNode.y, this.x, this.y) * this.pathFinder.weightHeuristic;
+        var h, dist = this.board.getDistance(endNode, this, true) * this.pathFinder.weightHeuristic;
 
         if ((pathMode === 1) && (baseNode !== undefined)) {
-            var da = endNode.angleTo(baseNode) - this.angleTo(baseNode);
-            h = dist + quickAbs(da);
+            var deltaAngle = endNode.angleTo(baseNode) - this.angleTo(baseNode);
+            h = dist + quickAbs(deltaAngle);
         } else if (pathMode === 2) {
-            h = dist + this.pathFinder.Random();
+            h = dist + Math.random();
         } else {
             h = dist;
         }
@@ -50,19 +53,51 @@ class Node {
     }
 
     getNeighborNodes() {
-        var neighborsLXY = this.pathFinder.getNeighborsLXY(this.x, this.y);
-        var _n, _uid;
-        var neighborNodes = [];
-        for (var i = 0, cnt = neighborsLXY.length; i < cnt; i++) {
-            _n = neighborsLXY[i];
-            _uid = this.plugin.xyz2uid(_n.x, _n.y, 0);
-            if (_uid != null) {
-                neighborNodes.push(this.pathFinder.getAStartNode(_uid));
-            }
+        var neighborsLXY = this.board.getNeighborTileXY(this);
+        if (this.pathFinder.shuffleNeighbors) {
+            Shuffle(neighborsLXY);
         }
 
+        var node, neighborNodes = [];
+        for (var i = 0, cnt = neighborsLXY.length; i < cnt; i++) {
+            node = this.manager.getNode(neighborsLXY[i]);
+            neighborNodes.push(node)
+        }
         return neighborNodes;
-    };
+    }
+
+    getCost(preNode) {
+        if (this.pathFinder.costCache) {
+            if (this.cost === undefined) {
+                this.cost = this.pathFinder.getCost(this, preNode);
+            }
+        } else {
+            this.cost = this.pathFinder.getCost(this, preNode);
+        }
+        return this.cost;
+    }
+
+    angleTo(endNode) {
+        return AngleBetween(this.worldX, this.wroldY, endNode.worldX, endNode.wroldY);
+    }
+
+    get board() {
+        return this.pathFinder.board;
+    }
+
+    get worldX() {
+        if (this._px === undefined) {
+            this._px = this.board.tileXYToWroldX(this.x, this.y);
+        }
+        return this._px;
+    }
+
+    get wroldY() {
+        if (this._py === undefined) {
+            this._py = this.board.tileXYToWroldY(this.x, this.y);
+        }
+        return this._py;
+    }
 }
 
 function quickAbs(x) {

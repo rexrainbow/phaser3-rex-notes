@@ -22,7 +22,6 @@ var CanMoveToTile = function(tileX, tileY, direction) {
 
     // blocker test
     if (this.blockerTest) {
-        debugger
         if (board.hasBlocker(tileX, tileY)) {
             return false;
         }

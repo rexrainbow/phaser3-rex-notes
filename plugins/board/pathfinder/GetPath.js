@@ -4,7 +4,7 @@ import CONST from './const.js';
 const PATH_MODE = CONST.PATH_MODE;
 const NEAREST_PATH_MODE = CONST.NEAREST_PATH_MODE;
 
-var GetPath = function (chess, endTileXY, movingPoints, isNearest, out) {
+var GetPath = function (chess, endTileXY, movingPoints, isClosest, out) {
     if (out === undefined) {
         out = [];
     }
@@ -17,11 +17,17 @@ var GetPath = function (chess, endTileXY, movingPoints, isNearest, out) {
         return out;
     }
 
-    var mode = (isNearest) ? NEAREST_PATH_MODE : PATH_MODE;
-    var nodes = this.aStarSearch(chess, endTileXY, movingPoints, mode);
-    if (nodes === null) {
-        return out;
-    }
-    // TODO
+    var mode = (isClosest) ? NEAREST_PATH_MODE : PATH_MODE;
+    this.aStarSearch(chess, endTileXY, movingPoints, mode, function (nodeManager, closestNode) {
+        var startTileXYZ = chessData.tileXYZ;
+        var startNode = nodeManager.getNode(startTileXYZ, false);
+        var endNode = (isClosest) ? closestNode : nodeManager.getNode(endTileXY, false);
+        if (endNode === null) {
+            return;
+        }
+        // TODO
+        // endNode.pathTo(startNode, out);
+    });
+    return out;
 }
 export default GetPath;

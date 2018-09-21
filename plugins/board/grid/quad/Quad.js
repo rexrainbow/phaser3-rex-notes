@@ -2,6 +2,7 @@ import Quad from 'rexPlugins/utils/grid/quad/Quad.js';
 import GetNeighborTileX from 'rexPlugins/utils/grid/quad/GetNeighborTileX.js';
 import GetNeighborTileY from 'rexPlugins/utils/grid/quad/GetNeighborTileY.js';
 import GetNeighborTileDirection from 'rexPlugins/utils/grid/quad/GetNeighborTileDirection.js';
+import GetDistance from 'rexPlugins/utils/grid/quad/GetDistance.js';
 import GetGridPolygon from './GetGridPolygon.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -50,6 +51,7 @@ var methods = {
     getNeighborTileX: GetNeighborTileX,
     getNeighborTileY: GetNeighborTileY,
     getNeighborTileDirection: GetNeighborTileDirection,
+    getDistance: GetDistance,
     getGridPolygon: GetGridPolygon
 }
 Object.assign(

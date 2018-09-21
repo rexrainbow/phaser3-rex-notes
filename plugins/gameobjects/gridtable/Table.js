@@ -269,15 +269,15 @@ class Table {
         return Math.floor(cellIdx / this.colCount);
     }
 
-    getCell(cellIdx, createNewCellInst) {
+    getCell(cellIdx, createNewCell) {
         if (!this.isValidCellIdx(cellIdx)) {
             return null;
         }
 
-        if (createNewCellInst === undefined) {
-            createNewCellInst = true;
+        if (createNewCell === undefined) {
+            createNewCell = true;
         }
-        if ((this.cells[cellIdx] === null) && createNewCellInst) {
+        if ((this.cells[cellIdx] === null) && createNewCell) {
             var cell = this.newCell(cellIdx);
             this.cells[cellIdx] = cell;
         }

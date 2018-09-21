@@ -17,21 +17,14 @@ var GetNeighborChess = function (chess, directions, neighborTileZ, out) {
         }
         return this.tileXYZToChess(neighborTileXY.x, neighborTileXY.y, neighborTileZ);
     } else {
-        // directions
-        if (!directions) {
-            directions = this.grid.allDirections;
-        }
+        // directions array
         if (out === undefined) {
             out = [];
         }
+        neighborTileXY = this.getNeighborTileXY(tileXYZ, directions);
         var neighborChess;
-        for (var i = 0, cnt = directions.length; i < cnt; i++) {
-            dir = directions[i];
-            neighborTileXY = this.getNeighborTileXY(tileXYZ, dir);
-            if (neighborTileXY === null) {
-                continue;
-            }
-            neighborChess = this.tileXYZToChess(neighborTileXY.x, neighborTileXY.y, neighborTileZ);
+        for (var i = 0, cnt = neighborTileXY.length; i < cnt; i++) {
+            neighborChess = this.tileXYZToChess(neighborTileXY[i].x, neighborTileXY[i].y, neighborTileZ);
             if (neighborChess == null) {
                 continue;
             }
