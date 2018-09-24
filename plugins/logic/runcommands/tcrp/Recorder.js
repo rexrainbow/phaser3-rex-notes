@@ -26,7 +26,9 @@ class Recorder {
         };
     }
 
-    boot() {}
+    boot() {
+        this.scene.events.on('destroy', this.destroy, this);
+    }
 
     shutdown() {
         this.clock.shutdown();

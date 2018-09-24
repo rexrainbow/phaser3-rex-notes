@@ -65,6 +65,7 @@ class Scroller extends EE {
 
     boot() {
         this.scene.events.on('update', this._state.update, this._state);
+        this.gameObject.on('destroy', this.destroy, this);
     }
 
     shutdown() {

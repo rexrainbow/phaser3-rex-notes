@@ -12,11 +12,6 @@ class Fade {
         this.boot();
     }
 
-    /**
-     * Reset status by JSON object
-     * @param {object} o JSON object
-     * @returns {object} this object
-     */
     resetFromJSON(o) {
         this.setMode(GetValue(o, 'mode', 0));
         this.setVolumeRange(
@@ -28,10 +23,6 @@ class Fade {
         return this;
     }
 
-    /**
-     * Return status in JSON object
-     * @returns JSON object
-     */
     toJSON() {
         return {
             mode: this.mode,

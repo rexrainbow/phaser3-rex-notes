@@ -10,6 +10,7 @@ class Match {
         this.symbols = []; // tileX+(tileY*board.width)
         this.dirMask = {};
         this.resetFromJSON(config);
+        this.boot();
     }
 
     resetFromJSON(o) {
@@ -22,6 +23,10 @@ class Match {
             this.setDirMask(dirMask);
         }
         return this;
+    }
+
+    boot() {
+        this.scene.events.on('destroy', this.destroy, this);
     }
 
     shutdown() {

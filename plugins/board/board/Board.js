@@ -49,6 +49,7 @@ class Board extends EE {
         this.scene = scene;
         this.boardData = new BoardData();
         this.resetFromJSON(config);
+        this.boot();
     }
 
     resetFromJSON(o) {
@@ -58,6 +59,10 @@ class Board extends EE {
         this.setBoardWidth(GetValue(o, 'width', 0));
         this.setBoardHeight(GetValue(o, 'height', 0));
         return this;
+    }
+
+    boot() {
+        this.scene.events.on('destroy', this.destroy, this);
     }
 
     shutdown() {

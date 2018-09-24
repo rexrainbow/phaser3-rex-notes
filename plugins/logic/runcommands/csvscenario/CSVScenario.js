@@ -47,7 +47,9 @@ class CSVScenario extends EE {
         };
     }
 
-    boot() {}
+    boot() {
+        this.scene.events.on('destroy', this.destroy, this);
+    }
 
     shutdown() {
         super.shutdown();

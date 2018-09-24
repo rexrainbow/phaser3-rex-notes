@@ -36,7 +36,6 @@ class TouchState extends EE {
         this.gameObject.on('pointermove', this.onPointerMove, this);
 
         this.gameObject.on('destroy', this.destroy, this);
-
     }
 
     shutdown() {

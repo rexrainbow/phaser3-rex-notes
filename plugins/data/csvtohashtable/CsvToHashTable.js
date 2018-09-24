@@ -9,11 +9,6 @@ class CsvToHashTable {
         this.resetFromJSON(config);
     }
 
-    /**
-     * Reset status by JSON object
-     * @param {object} o JSON object
-     * @returns {object} this object
-     */
     resetFromJSON(o) {
         this.table = GetValue(o, 'table', {}); // 2d hash table
         this.rowKeys = GetValue(o, 'row', []);
@@ -22,10 +17,6 @@ class CsvToHashTable {
         return this;
     }
 
-    /**
-     * Return status in JSON object
-     * @returns JSON object
-     */
     toJSON() {
         return {
             table: this.table,

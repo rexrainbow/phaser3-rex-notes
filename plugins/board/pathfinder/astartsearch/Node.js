@@ -22,7 +22,7 @@ class Node {
         this._py = undefined;
         this.cost = undefined; // cost cache
         this.f = 0;
-        this.g = 0;
+        this.g = 0; // path cost
         this.h = 0;
         this.closerH = 0;
         this.visited = false;

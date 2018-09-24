@@ -48,6 +48,7 @@ class Player extends TickTask {
 
     boot() {
         super.boot();
+        this.scene.events.on('destroy', this.destroy, this);
     }
 
     shutdown() {

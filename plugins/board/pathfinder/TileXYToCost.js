@@ -1,4 +1,4 @@
-var TileXYToCost = function (tileX, tileY) {
+var TileXYToCost = function (tileX, tileY, pathCost) {
     if (this.nodesManager === undefined) {
         return null;
     }
@@ -6,6 +6,9 @@ var TileXYToCost = function (tileX, tileY) {
     if (node === null) {
         return null;
     }
-    return node.cost;
+    if (pathCost === undefined) {
+        pathCost = true;
+    }
+    return (pathCost)? node.g:node.cost;
 }
 export default TileXYToCost;
