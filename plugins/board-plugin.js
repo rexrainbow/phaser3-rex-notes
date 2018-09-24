@@ -12,7 +12,7 @@ class BoardPlugin extends Phaser.Plugins.ScenePlugin {
         super(scene, pluginManager);
 
         this.add = new ObjectFactory(scene);
-    }
+    }    
 }
 
 export default BoardPlugin;

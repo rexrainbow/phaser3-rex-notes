@@ -35,7 +35,7 @@ var onPointerDown = function (pointer) {
         return;
     }
     tmpTileXY.x = tileX;
-    tmpTileXY.y = tileY;    
+    tmpTileXY.y = tileY;
     this.emit('tiledown', pointer, tmpTileXY);
 
     tmpChessArray.length = 0;
@@ -43,8 +43,13 @@ var onPointerDown = function (pointer) {
     if (gameObjects.length === 0) {
         return;
     }
+    var gameObject;
     for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-        this.emit('gameobjectdown', pointer, gameObjects[i]);
+        gameObject = gameObjects[i];
+        this.emit('gameobjectdown', pointer, gameObject);
+        if (gameObject.emit) {
+            gameObject.emit('board.pointerdown', pointer);
+        }
     }
 
     var inputData = this.input;
@@ -62,7 +67,7 @@ var onPointerUp = function (pointer) {
         return;
     }
     tmpTileXY.x = tileX;
-    tmpTileXY.y = tileY;    
+    tmpTileXY.y = tileY;
     this.emit('tileup', pointer, tmpTileXY);
 
     tmpChessArray.length = 0;
@@ -70,8 +75,13 @@ var onPointerUp = function (pointer) {
     if (gameObjects.length === 0) {
         return;
     }
+    var gameObject;
     for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-        this.emit('gameobjectup', pointer, gameObjects[i]);
+        gameObject = gameObjects[i];
+        this.emit('gameobjectup', pointer, gameObject);
+        if (gameObject.emit) {
+            gameObject.emit('board.pointerup', pointer);
+        }
     }
 };
 
@@ -98,8 +108,13 @@ var onPointerMove = function (pointer) {
     if (gameObjects.length === 0) {
         return;
     }
+    var gameObject;
     for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-        this.emit('gameobjectmove', pointer, gameObjects[i]);
+        gameObject = gameObjects[i];
+        this.emit('gameobjectmove', pointer, gameObject);
+        if (gameObject.emit) {
+            gameObject.emit('board.pointermove', pointer);
+        }
     }
 
     var inputData = this.input;
