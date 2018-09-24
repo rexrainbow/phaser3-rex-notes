@@ -2,6 +2,7 @@ import Quad from 'rexPlugins/utils/grid/quad/Quad.js';
 import GetNeighborTileX from 'rexPlugins/utils/grid/quad/GetNeighborTileX.js';
 import GetNeighborTileY from 'rexPlugins/utils/grid/quad/GetNeighborTileY.js';
 import GetNeighborTileDirection from 'rexPlugins/utils/grid/quad/GetNeighborTileDirection.js';
+import GetOppositeDirection from 'rexPlugins/utils/grid/hexagon/GetOppositeDirection.js';
 import GetDistance from 'rexPlugins/utils/grid/quad/GetDistance.js';
 import GetGridPolygon from './GetGridPolygon.js';
 
@@ -51,6 +52,7 @@ var methods = {
     getNeighborTileX: GetNeighborTileX,
     getNeighborTileY: GetNeighborTileY,
     getNeighborTileDirection: GetNeighborTileDirection,
+    getOppositeDirection: GetOppositeDirection,
     getDistance: GetDistance,
     getGridPolygon: GetGridPolygon
 }

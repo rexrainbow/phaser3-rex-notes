@@ -1,14 +1,20 @@
+import GetChessData from '../chess/GetChessData.js';
 import CONST from './const.js';
 import AStarSearch from './astartsearch/AStarSearch.js';
 import GetCost from './GetCost.js';
-import GetArea from './GetArea.js';
+import FindArea from './FindArea.js';
 import GetPath from './GetPath.js';
+import FindPath from './FindPath.js';
 import TileXYToCost from './TileXYToCost.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
+const ASTAR = CONST['A*'];
 
 class PathFinder {
-    constructor(config) {
+    constructor(gameObject, config) {
+        this.gameObject = gameObject;
+        this.chessData = GetChessData(gameObject);
+        this.nodesManager = undefined;
         this.resetFromJSON(config);
     }
 
@@ -19,17 +25,27 @@ class PathFinder {
             costCallback = GetValue(o, 'cost', 1);
         }
         this.setCostFunction(costCallback, costCallbackScope);
-        this.setPathMode(GetValue(o, 'pathMode', 0));
+        this.setPathMode(GetValue(o, 'pathMode', ASTAR));
         this.setCostCacheMode(GetValue(o, 'costCache', true));
         this.setBlockerTest(GetValue(o, 'blockerTest', false));
-        this.setEdgeBlockerTest(GetValue(o, 'edgeBlockerTest', false));        
+        this.setEdgeBlockerTest(GetValue(o, 'edgeBlockerTest', false));
         this.setWeight(GetValue(o, 'weight', 10));
         this.setShuffleNeighborsMode(GetValue(o, 'shuffleNeighbors', false));
-        this.costCache = {}; // { tilexyKey: cost}
         return this;
     }
 
+    boot() {
+        if (this.gameObject.on) { // oops, bob object does not have event emitter
+            this.gameObject.on('destroy', this.destroy, this);
+        }
+    }
+
     shutdown() {
+        if (this.nodesManager !== undefined) {
+            this.nodesManager.destroy();
+        }
+        this.gameObject = undefined;
+        this.chessData = undefined;
         return this;
     }
 
@@ -88,13 +104,18 @@ class PathFinder {
         this.shuffleNeighbors = value;
         return this;
     }
+
+    get board() {
+        return this.chessData.board;
+    }
 }
 
 var methods = {
     aStarSearch: AStarSearch,
     getCost: GetCost,
-    getArea: GetArea,
+    findArea: FindArea,
     getPath: GetPath,
+    findPath: FindPath,
     tileXYToCost: TileXYToCost,
 };
 Object.assign(

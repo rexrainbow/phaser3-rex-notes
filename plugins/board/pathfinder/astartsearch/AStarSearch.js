@@ -9,56 +9,51 @@ http://eloquentjavascript.net/appendix2.html
 
 */
 
-import GetChessData from '../../chess/GetChessData.js';
 import NodeManager from './NodeManager.js';
 import BinaryHeap from './BinaryHeap.js';
 import CONST from '../const.js';
 
 const AREA_MODE = CONST.AREA_MODE;
 const PATH_MODE = CONST.PATH_MODE;
-const NEAREST_PATH_MODE = CONST.NEAREST_PATH_MODE;
 
 const ASTAR = CONST['A*'];
 const ASTAR_LINE = CONST['A*-line'];
 const ASTAR_RANDOM = CONST['A*-random'];
 
-const BLOCKER = CONST['blocker'];
-const INFINITY = CONST['infinity'];
+const BLOCKER = CONST.blocker;
+const INFINITY = CONST.infinity;
 
-// global objects
-var gNodeManager = new NodeManager();
+// global object
 var gOpenHeap = new BinaryHeap(function (node) {
     return node.f;
 });
-// global objects
+// global object
 
-var AStarSerach = function (startChess, endTileXY, movingPoints, mode, callback) {
-    // initial object references
-    var chessData = GetChessData(startChess);
-    this.board = chessData.board;
-    gNodeManager.setPathFinder(this);
-    // initial object references
+var AStarSerach = function (startTileXYZ, endTileXY, movingPoints, mode) {
+    if (this.nodesManager === undefined) {
+        this.nodesManager = new NodeManager(this);
+    }
+    var nodesManager = this.nodesManager;
+    nodesManager.freeAllNodes();
 
-
-    var isAreaSearch = (mode === AREA_MODE);
-    var isPathSearch = ((mode === PATH_MODE) || (mode === NEAREST_PATH_MODE));
-    var isAStarMode = (this.pathMode === ASTAR) || (this.pathMode === ASTAR_LINE) || (this.pathMode === ASTAR_RANDOM);
-    var astarHeuristicEnable = isPathSearch && isAStarMode;
-    var shortestPathEnable = isPathSearch && (!isAStarMode);
-    var astarHeuristicMode = (!astarHeuristicEnable) ? null :
+    const isAreaSearch = (mode === AREA_MODE);
+    const isPathSearch = (mode === PATH_MODE);
+    const isAStarMode = (this.pathMode === ASTAR) || (this.pathMode === ASTAR_LINE) || (this.pathMode === ASTAR_RANDOM);
+    const astarHeuristicEnable = isPathSearch && isAStarMode;
+    const shortestPathEnable = isPathSearch && (!isAStarMode);
+    const astarHeuristicMode = (!astarHeuristicEnable) ? null :
         (this.pathMode == ASTAR) ? 0 :
         (this.pathMode == ASTAR_LINE) ? 1 :
         (this.pathMode == ASTAR_RANDOM) ? 2 :
         null;
 
-    var end = (endTileXY !== null) ? gNodeManager.getNode(endTileXY.x, endTileXY.y) : null;
-    var startTileXYZ = chessData.tileXYZ;
-    var start = gNodeManager.getNode(startTileXYZ.x, startTileXYZ.y);
+    var end = (endTileXY !== null) ? nodesManager.getNode(endTileXY.x, endTileXY.y, true) : null;
+    var start = nodesManager.getNode(startTileXYZ.x, startTileXYZ.y, true);
     start.h = start.heuristic(end, astarHeuristicMode);
 
     // NEAREST NODE
     var closestNode = start;
-    // helper function to update closerH                
+    // helper function to update closerH
     var updateCloserH = function (node, baseNode) {
         if (astarHeuristicEnable) {
             node.closerH = node.h;
@@ -112,12 +107,11 @@ var AStarSerach = function (startChess, endTileXY, movingPoints, mode, callback)
 
                 // Found an optimal (so far) path to this node.  Take score for node to see how good it is.
                 neighbor.visited = true;
-                neighbor.preNodeKeys.length = 0;
-                neighbor.preNodeKeys.push(curNode.key);
+                neighbor.preNodes.length = 0;
+                neighbor.preNodes.push(curNode);
                 neighbor.h = neighbor.h || neighbor.heuristic(end, astarHeuristicMode, start);
                 neighbor.g = gScore;
                 neighbor.f = neighbor.g + neighbor.h;
-                this.costCache[neighbor.key] = gScore;
 
                 // NEAREST NODE
                 if (isPathSearch) {
@@ -141,10 +135,10 @@ var AStarSerach = function (startChess, endTileXY, movingPoints, mode, callback)
                     //log("reorder ("+neighbor.x+","+neighbor.y+") ")
                 }
             } else if (shortestPathEnable && (gScore == neighbor.g)) {
-                neighbor.preNodeKeys.push(curNode.key);
+                neighbor.preNodes.push(curNode);
 
-                //if (neighbor.preNodeKeys.indexOf(curNode.key) == -1)                    
-                //    neighbor.preNodeKeys.push(curNode.key);                    
+                //if (neighbor.preNodes.indexOf(curNode) == -1)                    
+                //    neighbor.preNodes.push(curNode);                    
                 //else                    
                 //    debugger;                 
 
@@ -156,16 +150,8 @@ var AStarSerach = function (startChess, endTileXY, movingPoints, mode, callback)
 
     }
 
-
-    if (callback) {
-        callback(gNodeManager, closestNode);
-    }
-    // release object references    
+    nodesManager.closestNode = (isPathSearch) ? closestNode : null;
     gOpenHeap.clear();
-    this.board = undefined;
-    gNodeManager.setPathFinder(undefined);
-    gNodeManager.freeAllNodes();
-    // release object references
     return this;
 }
 export default AStarSerach;

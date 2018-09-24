@@ -1,15 +1,17 @@
+import QuickAbs from 'rexPlugins/utils/math/QuickAbs.js';
+
 const AngleBetween = Phaser.Math.Angle.Between;
 const Shuffle = Phaser.Utils.Array.Shuffle;
 
 class Node {
-    constructor(manager) {
-        this.preNodeKeys = [];
-        this.manager = manager;
+    constructor() {
+        this.preNodes = [];
+        this.manager = undefined;
     }
 
-    reset() {
+    reset(manager) {
+        this.manager = manager;        
         // overwrite
-        this.pathFinder = undefined;
         this.sn = undefined; // for sorting by created order        
         this.key = undefined;
         this.x = undefined;
@@ -25,12 +27,12 @@ class Node {
         this.closerH = 0;
         this.visited = false;
         this.closed = false;
-        this.preNodeKeys.length = 0;
+        this.preNodes.length = 0;
     }
 
     destroy() {
-        this.preNodeKeys.length = 0;
-        this.pathFinder = undefined;
+        this.preNodes.length = 0;
+        this.manager = undefined;
     }
 
     heuristic(endNode, pathMode, baseNode) {
@@ -38,11 +40,11 @@ class Node {
             return 0;
         }
 
-        var h, dist = this.board.getDistance(endNode, this, true) * this.pathFinder.weightHeuristic;
+        var h, dist = this.board.getDistance(endNode, this, true) * this.pathFinder.weight;
 
         if ((pathMode === 1) && (baseNode !== undefined)) {
             var deltaAngle = endNode.angleTo(baseNode) - this.angleTo(baseNode);
-            h = dist + quickAbs(deltaAngle);
+            h = dist + QuickAbs(deltaAngle);
         } else if (pathMode === 2) {
             h = dist + Math.random();
         } else {
@@ -60,7 +62,7 @@ class Node {
 
         var node, neighborNodes = [];
         for (var i = 0, cnt = neighborsLXY.length; i < cnt; i++) {
-            node = this.manager.getNode(neighborsLXY[i]);
+            node = this.manager.getNode(neighborsLXY[i], true);
             neighborNodes.push(node)
         }
         return neighborNodes;
@@ -81,8 +83,12 @@ class Node {
         return AngleBetween(this.worldX, this.wroldY, endNode.worldX, endNode.wroldY);
     }
 
+    get pathFinder() {
+        return this.manager.pathFinder;
+    }
+
     get board() {
-        return this.pathFinder.board;
+        return this.manager.pathFinder.board;
     }
 
     get worldX() {
@@ -99,8 +105,4 @@ class Node {
         return this._py;
     }
 }
-
-function quickAbs(x) {
-    return x < 0 ? -x : x;
-};
 export default Node;

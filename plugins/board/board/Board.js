@@ -15,6 +15,7 @@ import RemoveChess from './RemoveChess.js';
 import RemoveAllChess from './RemoveAllChess.js';
 import SwapChess from './SwapChess.js';
 import Contains from './Contains.js';
+import TileXYIsEqual from './TileXYIsEqual.js';
 import ForEachTileXY from './ForEachTileXY.js';
 import GetWrapTileX from './GetWrapTileX.js';
 import GetWrapTileY from './GetWrapTileY.js';
@@ -30,6 +31,7 @@ import GetNeighborChess from './GetNeighborChess.js';
 import GetNeighborTileDirection from './GetNeighborTileDirection.js';
 import GetNeighborChessDirection from './GetNeighborChessDirection.js';
 import AreNeighbors from './AreNeighbors.js';
+import GetOppositeDirection from './GetOppositeDirection.js';
 import GetDistance from './GetDistance.js';
 import HasBlocker from './HasBlocker.js';
 import HasEdgeBlocker from './HasEdgeBlocker.js';
@@ -155,6 +157,7 @@ var methods = {
     swapChess: SwapChess,
     forEachTileXY: ForEachTileXY,
     contains: Contains,
+    tileXYIsEqual: TileXYIsEqual,
     getWrapTileX: GetWrapTileX,
     getWrapTileY: GetWrapTileY,
     tileXYZToChess: TileXYZToChess,
@@ -169,6 +172,7 @@ var methods = {
     getNeighborTileDirection: GetNeighborTileDirection,
     getNeighborChessDirection: GetNeighborChessDirection,
     areNeighbors: AreNeighbors,
+    getOppositeDirection: GetOppositeDirection,
     getDistance: GetDistance,
     hasBlocker: HasBlocker,
     hasEdgeBlocker: HasEdgeBlocker,

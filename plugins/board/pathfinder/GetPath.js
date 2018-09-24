@@ -1,33 +1,30 @@
-import GetChessData from '../chess/GetChessData.js';
-import CONST from './const.js';
-
-const PATH_MODE = CONST.PATH_MODE;
-const NEAREST_PATH_MODE = CONST.NEAREST_PATH_MODE;
-
-var GetPath = function (chess, endTileXY, movingPoints, isClosest, out) {
+import GetNodePath from './astartsearch/GetNodePath.js';
+var GetPath = function (endTileXY, out) {
     if (out === undefined) {
         out = [];
     }
-    if (movingPoints <= 0) {
+    if (this.board === undefined) {
         return out;
     }
-    var chessData = GetChessData(chess);
-    var board = chessData.board;
-    if (board === null) { // chess is not in board
+    var nodesManager = this.nodesManager;
+    if (nodesManager === undefined) {
         return out;
     }
-
-    var mode = (isClosest) ? NEAREST_PATH_MODE : PATH_MODE;
-    this.aStarSearch(chess, endTileXY, movingPoints, mode, function (nodeManager, closestNode) {
-        var startTileXYZ = chessData.tileXYZ;
-        var startNode = nodeManager.getNode(startTileXYZ, false);
-        var endNode = (isClosest) ? closestNode : nodeManager.getNode(endTileXY, false);
-        if (endNode === null) {
-            return;
-        }
-        // TODO
-        // endNode.pathTo(startNode, out);
-    });
+    var startNode = nodesManager.getNode(this.chessData.tileXYZ, false);
+    var endNode = nodesManager.getNode(endTileXY, false);
+    if ((startNode === null) || (endNode === null)) {
+        return out;
+    }
+    var nodes = GetNodePath(startNode, endNode, this.pathMode);
+    var node;
+    for (var i = 0, cnt = nodes.length; i < cnt; i++) {
+        node = nodes[i];
+        out.push({
+            x: node.x,
+            y: node.y,
+            cost: node.g
+        });
+    }
     return out;
 }
 export default GetPath;

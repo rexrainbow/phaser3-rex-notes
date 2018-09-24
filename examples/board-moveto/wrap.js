@@ -32,28 +32,17 @@ class Demo extends Phaser.Scene {
         var key = 'shape';
         createGridPolygonTexture(board, key);
 
-        var emptyTileXY, chess, blocker;
 
-        // add some blockers
-        for (var i = 0; i < 20; i++) {
-            blocker = this.add.image(0, 0, key).setTint(0x555555);
-            emptyTileXY = board.getRandomEmptyTileXY(0);
-            board.addChess(blocker, emptyTileXY.x, emptyTileXY.y, 0, true);
-            blocker.rexChess.setBlocker();
-        }
-
+        var direction = 1;
         // add chess
-        chess = this.add.image(0, 0, key)
+        var chess = this.add.image(0, 0, key)
             .setTint(0x00CC00);
-        emptyTileXY = board.getRandomEmptyTileXY(0);
-        board.addChess(chess, emptyTileXY.x, emptyTileXY.y, 0, true);
-        chess.moveTo = this.rexBoard.add.moveTo(chess, {
-                blockerTest: true
-            })
+        board.addChess(chess, 0, 0, 0, true);
+        chess.moveTo = this.rexBoard.add.moveTo(chess)
             .on('complete', function () {
-                chess.moveTo.moveToRandomNeighbor();
+                chess.moveTo.moveToward(direction);
             })
-        chess.moveTo.moveToRandomNeighbor();
+        chess.moveTo.moveToward(direction);
     }
 }
 

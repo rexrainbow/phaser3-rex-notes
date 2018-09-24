@@ -1,6 +1,6 @@
 import CONST from './const.js';
 
-const BLOCKER = CONST['blocker'];
+const BLOCKER = CONST.blocker;
 
 var GetCost = function (curNode, preNode) {
     if (this.blockerTest) {
@@ -9,6 +9,7 @@ var GetCost = function (curNode, preNode) {
         }
     }
     if (this.edgeBlockerTest) {
+        // TODO
     }
 
     if (typeof (this.costCallback) === 'number') {

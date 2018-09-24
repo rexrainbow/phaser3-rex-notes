@@ -21,8 +21,7 @@ class Demo extends Phaser.Scene {
                 grid: getHexagonGrid(this),
                 // grid: getQuadGrid(this),
                 width: 8,
-                height: 8,
-                wrap: true
+                height: 8
             })
             .forEachTileXY(function (tileXY, board) {
                 var poly = board.getGridPolygon(tileXY.x, tileXY.y);
@@ -32,10 +31,22 @@ class Demo extends Phaser.Scene {
         var key = 'shape';
         createGridPolygonTexture(board, key);
 
-        var emptyTileXY, chess, blocker;
+        var chessA = this.add.image(0, 0, key)
+            .setTint(0x00CC00)
+            .setDepth(1);
+        chessA.pathFinder = this.rexBoard.add.pathFinder(chessA, {
+            blockerTest: true
+        });
+        board.addChess(chessA, 0, 0, 0, true);
+
+        var chessB = this.add.image(0, 0, key)
+            .setTint(0x005500);
+        board.addChess(chessB, 7, 7, 0, true);
+
+        var emptyTileXY, blocker;
 
         // add some blockers
-        for (var i = 0; i < 20; i++) {
+        for (var i = 0; i < 10; i++) {
             blocker = this.add.image(0, 0, key).setTint(0x555555);
             emptyTileXY = board.getRandomEmptyTileXY(0);
             board.addChess(blocker, emptyTileXY.x, emptyTileXY.y, 0, true);
@@ -43,17 +54,25 @@ class Demo extends Phaser.Scene {
         }
 
         // add chess
-        chess = this.add.image(0, 0, key)
-            .setTint(0x00CC00);
-        emptyTileXY = board.getRandomEmptyTileXY(0);
-        board.addChess(chess, emptyTileXY.x, emptyTileXY.y, 0, true);
-        chess.moveTo = this.rexBoard.add.moveTo(chess, {
-                blockerTest: true
-            })
-            .on('complete', function () {
-                chess.moveTo.moveToRandomNeighbor();
-            })
-        chess.moveTo.moveToRandomNeighbor();
+        var endTileXY = chessB.rexChess.tileXYZ;
+        var tileXYArray = chessA.pathFinder.findPath(endTileXY),
+            tileXY;
+        for (var i = 0, cnt = tileXYArray.length; i < cnt; i++) {
+            tileXY = tileXYArray[i];
+            this.add.text(board.tileXYToWorldX(tileXY.x, tileXY.y),
+                    board.tileXYToWorldY(tileXY.x, tileXY.y),
+                    tileXY.cost)
+                .setOrigin(0.5);
+        }
+
+        // move along path
+        chessA.moveTo = this.rexBoard.add.moveTo(chessA);
+        chessA.moveTo.on('complete', function () {
+            if (tileXYArray.length) {
+                chessA.moveTo.moveTo(tileXYArray.shift());
+            }
+        });
+        chessA.moveTo.moveTo(tileXYArray.shift());
     }
 }
 

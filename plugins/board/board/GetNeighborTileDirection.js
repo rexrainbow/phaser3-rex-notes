@@ -3,38 +3,38 @@ var GetNeighborTileDirection = function (srcTileXY, neighborTileXY) {
         return null;
     }
     var direction = this.grid.getNeighborTileDirection(srcTileXY, neighborTileXY);
-    if ((direction === null) && this.wrapMode) {
+    if (this.wrapMode && (direction === null)) {
         const maxTileX = (this.width - 1);
         const minTileX = 0;
         const maxTileY = (this.height - 1);
         const minTileY = 0;
         const neighborTileX = neighborTileXY.x;
         const neighborTileY = neighborTileXY.y;
-        var revWrap = false;
+        var isWrapped = false;
         if (neighborTileX === minTileX) {
-            revWrapTileXY.x = maxTileX;
-            revWrap = true;
+            tmpTileXY.x = maxTileX;
+            isWrapped = true;
         } else if (neighborTileX === maxTileX) {
-            revWrapTileXY.x = minTileX;
-            revWrap = true;
+            tmpTileXY.x = minTileX;
+            isWrapped = true;
         }
 
         if (neighborTileY === minTileY) {
-            revWrapTileXY.y = maxTileY;
-            revWrap = true;
+            tmpTileXY.y = maxTileY;
+            isWrapped = true;
         } else if (neighborTileY === maxTileY) {
-            revWrapTileXY.y = minTileY;
-            revWrap = true;
+            tmpTileXY.y = minTileY;
+            isWrapped = true;
         }
 
-        if (revWrap) {
-            direction = this.grid.getNeighborTileDirection(srcTileXY, revWrapTileXY);
+        if (isWrapped) {
+            direction = this.grid.getNeighborTileDirection(srcTileXY, tmpTileXY);
         }
     }
     return direction;
 }
 
-var revWrapTileXY = {
+var tmpTileXY = {
     x: 0,
     y: 0
 }

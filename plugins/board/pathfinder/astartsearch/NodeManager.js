@@ -2,32 +2,49 @@ import Pool from 'rexPlugins/utils/object/Stack.js';
 import TileXYToKey from '../../utils/tilexyzkey/TileXYToKey.js';
 import Node from './Node.js';
 
+// global object
+var NodesPool = new Pool(); // recycle dead nodes
+// global object
+
 class NodeCache {
-    constructor() {
+    constructor(pathFinder) {
         this.sn = 0;
-        this.pool = new Pool(); // recycle dead nodes
+        this.pool = NodesPool;
         this.nodes = {}; // {tileXYKey:node}
-        this.pathFinder = undefined;
+        this.pathFinder = pathFinder;
+        this.closestNode = null;
     }
 
-    setPathFinder(pathFinder) {
-        this.pathFinder = pathFinder;
+    destroy() {
+        this.freeAllNodes();
+        this.pathFinder = null;
+        this.pool = undefined;
         return this;
     }
 
     getNode(tileX, tileY, createNewNode) {
-        if (typeof (tileX) !== 'number') {
-            var tileXY = tileX;
-            createNewNode = tileY;
-            tileX = tileXY.x;
-            tileY = tileXY.y;
+        var key;
+        switch (typeof (tileX)) {
+            case 'number': // (tileX, tileY, createNewNode)
+                key = TileXYToKey(tileX, tileY);
+                break;
+            case 'string': // (key, createNewNode)
+                key = tileX;
+                createNewNode = tileY;
+                break;
+            default: // (tileXY, createNewNode)
+                var tileXY = tileX;
+                createNewNode = tileY;
+                tileX = tileXY.x;
+                tileY = tileXY.y;
+                key = TileXYToKey(tileX, tileY);
+                break;
         }
         if (createNewNode === undefined) {
-            createNewNode = true;
-        }        
+            createNewNode = false;
+        }
 
         this.sn++;
-        var key = TileXYToKey(tileX, tileY);
         if (!this.nodes.hasOwnProperty(key)) {
             if (!createNewNode) {
                 return null;
@@ -35,10 +52,9 @@ class NodeCache {
 
             var node = this.pool.pop();
             if (node === null) {
-                node = new Node(this);
+                node = new Node();
             }
-            node.reset();
-            node.pathFinder = this.pathFinder;
+            node.reset(this);
             node.sn = this.sn;
             node.key = key;
             node.x = tileX;
@@ -49,6 +65,7 @@ class NodeCache {
     }
 
     freeAllNodes() {
+        this.closestNode = null;
         var nodes = this.nodes,
             pool = this.pool;
         var node;

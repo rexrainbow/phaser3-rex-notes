@@ -44,12 +44,12 @@ class Demo extends Phaser.Scene {
         // add chess
         chess = this.add.image(0, 0, key)
             .setTint(0x00CC00);
-        emptyTileXY = board.getRandomEmptyTileXY(0);
-        board.addChess(chess, emptyTileXY.x, emptyTileXY.y, 0, true);
-        var pathfinder = this.rexBoard.add.pathFinder({
+        chess.pathFinder = this.rexBoard.add.pathFinder(chess, {
             blockerTest: true
         });
-        var tileXYArray = pathfinder.getArea(chess, 2),
+        emptyTileXY = board.getRandomEmptyTileXY(0);
+        board.addChess(chess, emptyTileXY.x, emptyTileXY.y, 0, true);
+        var tileXYArray = chess.pathFinder.findArea(2),
             tileXY;
         for (var i = 0, cnt = tileXYArray.length; i < cnt; i++) {
             tileXY = tileXYArray[i];

@@ -14,9 +14,9 @@ class MoveTo extends TickTask {
         super(gameObject, config);
 
         this.gameObject = gameObject;
+        this.chessData = GetChessData(gameObject);
         this.scene = gameObject.scene;
         this.moveToTask = new MoveToTask(gameObject, moveToTaskConfig);
-        this.chessData = GetChessData(gameObject);
 
         this.resetFromJSON(config);
         this.boot();
@@ -161,6 +161,45 @@ class MoveTo extends TickTask {
         this.isRunning = false;
     }
 
+    /** @private */
+    moveAlongLine(startX, startY, endX, endY) {
+        if (startX !== undefined) {
+            this.gameObject.x = startX;
+        }
+        if (startY !== undefined) {
+            this.gameObject.y = startY;
+        }
+        this.moveToTask.moveTo(endX, endY);
+        return this;
+    };
+
+    /** @private */
+    addMoveLine(startX, startY, endX, endY) {
+        if (!this.moveToTask.hasOwnProperty('nextlines')) {
+            this.moveToTask.nextlines = [];
+        }
+        this.moveToTask.nextlines.push(
+            [startX, startY, endX, endY]
+        );
+        return this;
+    };
+
+    /** @private */
+    moveNextLine() {
+        var nextlines = this.moveToTask.nextlines;
+        if (!nextlines) {
+            return false;
+        }
+        if (nextlines.length === 0) {
+            return false;
+        }
+        // has next line
+        this.moveAlongLine.apply(this, nextlines[0]);
+        nextlines.length = 0;
+        return true;
+    }
+
+    /** @private */
     update(time, delta) {
         if ((!this.isRunning) || (!this.enable)) {
             return this;
@@ -169,7 +208,9 @@ class MoveTo extends TickTask {
         var moveToTask = this.moveToTask;
         moveToTask.update(time, delta);
         if (!moveToTask.isRunning) {
-            this.complete();
+            if (!this.moveNextLine()) {
+                this.complete();
+            }
             return this;
         }
         return this;
