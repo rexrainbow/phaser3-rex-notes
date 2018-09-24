@@ -847,8 +847,39 @@
 
 
   <li class="md-nav__item">
-    <a href="../canvas/" title="Canvas" class="md-nav__link">
-      Canvas
+    <a href="../rendertexture/" title="Render texture" class="md-nav__link">
+      Render texture
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-4-3" type="checkbox" id="nav-4-4-3">
+    
+    <label class="md-nav__link" for="nav-4-4-3">
+      Shape
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-4-3">
+        Shape
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../shape-rectangle/" title="Rectangle" class="md-nav__link">
+      Rectangle
     </a>
   </li>
 
@@ -859,8 +890,85 @@
 
 
   <li class="md-nav__item">
-    <a href="../rendertexture/" title="Render texture" class="md-nav__link">
-      Render texture
+    <a href="../shape-circle.md" title="Circle" class="md-nav__link">
+      Circle
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../shape-line/" title="Line" class="md-nav__link">
+      Line
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../shape-ellipse/" title="Ellipse" class="md-nav__link">
+      Ellipse
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../shape-polygon/" title="Polygon" class="md-nav__link">
+      Polygon
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../shape-curve/" title="Curve" class="md-nav__link">
+      Curve
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../shape-star/" title="Star" class="md-nav__link">
+      Star
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../canvas/" title="Canvas" class="md-nav__link">
+      Canvas
     </a>
   </li>
 
@@ -1831,6 +1939,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../random-array/" title="Random" class="md-nav__link">
+      Random
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../create-number-array/" title="Number array" class="md-nav__link">
       Number array
     </a>
@@ -2122,27 +2242,6 @@
           <li class="md-nav__item">
   <a href="#get-random-vector" title="Get random vector" class="md-nav__link">
     Get random vector
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-random-item" title="Get random item" class="md-nav__link">
-    Get random item
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#remove-random-item" title="Remove random item" class="md-nav__link">
-    Remove random item
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#shuffle" title="Shuffle" class="md-nav__link">
-    Shuffle
   </a>
   
 </li>
@@ -2880,27 +2979,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#get-random-item" title="Get random item" class="md-nav__link">
-    Get random item
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#remove-random-item" title="Remove random item" class="md-nav__link">
-    Remove random item
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#shuffle" title="Shuffle" class="md-nav__link">
-    Shuffle
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -2940,19 +3018,6 @@
 <h3 id="get-random-vector">Get random vector<a class="headerlink" href="#get-random-vector" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">vec</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">RandomXY</span><span class="p">(</span><span class="nx">vec</span><span class="p">);</span>    <span class="c1">// return vec {x, y}</span>
 <span class="c1">// var vec = Phaser.Math.RandomXY(vec, scale);</span>
-</pre></div>
-
-<h3 id="get-random-item">Get random item<a class="headerlink" href="#get-random-item" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Utils</span><span class="p">.</span><span class="nb">Array</span><span class="p">.</span><span class="nx">GetRandom</span><span class="p">(</span><span class="nx">array</span><span class="p">);</span>
-<span class="c1">// var item = Phaser.Utils.Array.GetRandom(array, startIndex, length);</span>
-</pre></div>
-
-<h3 id="remove-random-item">Remove random item<a class="headerlink" href="#remove-random-item" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Utils</span><span class="p">.</span><span class="nb">Array</span><span class="p">.</span><span class="nx">RemoveRandomElement</span><span class="p">(</span><span class="nx">array</span><span class="p">);</span>
-</pre></div>
-
-<h3 id="shuffle">Shuffle<a class="headerlink" href="#shuffle" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Utils</span><span class="p">.</span><span class="nb">Array</span><span class="p">.</span><span class="nx">Shuffle</span><span class="p">(</span><span class="nx">array</span><span class="p">);</span>
 </pre></div>
                 
                   
