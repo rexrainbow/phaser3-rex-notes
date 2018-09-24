@@ -5,4 +5,9 @@ ObjectFactory.register('moveTo', function (gameObject, config) {
     return new MoveTo(gameObject, config);
 });
 
+if (Phaser.rexBoard === undefined) {
+    Phaser.rexBoard = {};
+}
+Phaser.rexBoard.MoveTo = MoveTo;
+
 export default MoveTo;

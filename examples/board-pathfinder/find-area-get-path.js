@@ -1,5 +1,35 @@
 import BoardPlugin from 'rexPlugins/board-plugin.js';
 
+class Board extends Phaser.rexBoard.Board {
+    constructor(scene) {
+        // create board
+        var config = {
+            grid: getHexagonGrid(scene),
+            // grid: getQuadGrid(scene),
+            width: 8,
+            height: 8,
+            wrap: true
+        }
+        super(scene, config);
+        // draw grid
+        var graphics = scene.add.graphics({
+            lineStyle: {
+                width: 1,
+                color: 0xffffff,
+                alpha: 1
+            }
+        });
+        this.forEachTileXY(function (tileXY, board) {
+            var poly = board.getGridPolygon(tileXY.x, tileXY.y);
+            graphics.strokePoints(poly.points, true);
+        })
+        // create grid texture
+        createGridPolygonTexture(this, scene.shapeTextureKey);
+        // enable touch events
+        this.setInteractive();
+    }
+}
+
 class Blocker extends Phaser.GameObjects.Image {
     constructor(board, tileXY) {
         var scene = board.scene;
@@ -8,6 +38,9 @@ class Blocker extends Phaser.GameObjects.Image {
         scene.add.existing(this);
         this.setTint(0x555555);
         // add to board
+        if (tileXY === undefined) {
+            tileXY = board.getRandomEmptyTileXY(0);
+        }
         board.addChess(this, tileXY.x, tileXY.y, 0, true);
         // set blocker
         this.rexChess.setBlocker();
@@ -22,6 +55,9 @@ class ChessA extends Phaser.GameObjects.Image {
         scene.add.existing(this);
         this.setTint(0x00CC00);
         // add to board
+        if (tileXY === undefined) {
+            tileXY = board.getRandomEmptyTileXY(0);
+        }
         board.addChess(this, tileXY.x, tileXY.y, 0, true);
         // add behaviors        
         this.moveTo = scene.rexBoard.add.moveTo(this);
@@ -35,16 +71,22 @@ class ChessA extends Phaser.GameObjects.Image {
     }
 
     showMoveableArea() {
-        for (var i = 0, cnt = this.moveableTiles.length; i < cnt; i++) {
-            this.moveableTiles[i].destroy();
-        }
-        this.moveableTiles.length = 0;
+        this.hideMoveableArea();
         var tileXYArray = this.pathFinder.findArea(this.movingPoints);
         for (var i = 0, cnt = tileXYArray.length; i < cnt; i++) {
             this.moveableTiles.push(
                 new MoveableTile(this, tileXYArray[i])
             );
         }
+        return this;
+    }
+
+    hideMoveableArea() {
+        for (var i = 0, cnt = this.moveableTiles.length; i < cnt; i++) {
+            this.moveableTiles[i].destroy();
+        }
+        this.moveableTiles.length = 0;
+        return this;
     }
 
     moveToTile(endTile) {
@@ -66,6 +108,7 @@ class ChessA extends Phaser.GameObjects.Image {
             this.moveAlongPath(path);
         }, this);
         this.moveTo.moveTo(path.shift());
+        return this;
     }
 }
 
@@ -105,44 +148,19 @@ class Demo extends Phaser.Scene {
 
     create() {
         // create board
-        var graphics = this.add.graphics({
-            lineStyle: {
-                width: 1,
-                color: 0xffffff,
-                alpha: 1
-            }
-        });
-        this.board = this.rexBoard.add.board({
-                grid: getHexagonGrid(this),
-                // grid: getQuadGrid(this),
-                width: 8,
-                height: 8
-            })
-            // draw grid
-            .forEachTileXY(function (tileXY, board) {
-                var poly = board.getGridPolygon(tileXY.x, tileXY.y);
-                graphics.strokePoints(poly.points, true);
-            }, this)
-            .setInteractive();
-        // create board
-
-        // create grid texture
-        createGridPolygonTexture(this.board, this.shapeTextureKey);
-        // create grid texture
+        this.board = new Board(this);
 
         // add chess
-        this.chessA = new ChessA(this.board, this.board.getRandomEmptyTileXY(0));
-        // add chess
+        this.chessA = new ChessA(this.board);
 
         // add some blockers
         for (var i = 0; i < 20; i++) {
             this.blockers.push(
-                new Blocker(this.board, this.board.getRandomEmptyTileXY(0))
+                new Blocker(this.board)
             );
         }
-        // add some blockers
 
-        this.chessA.showMoveableArea(4);
+        this.chessA.showMoveableArea();
     }
 }
 
