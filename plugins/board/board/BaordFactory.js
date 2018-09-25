@@ -1,13 +1,11 @@
 import Board from './Board.js';
 import ObjectFactory from '../ObjectFactory.js';
+import SetValue from 'rexPlugins/utils/object/SetValue.js';
 
 ObjectFactory.register('board', function (config) {
     return new Board(this.scene, config);
 });
 
-if (Phaser.rexBoard === undefined) {
-    Phaser.rexBoard = {};
-}
-Phaser.rexBoard.Board = Board;
+SetValue(window, 'RexPlugins.Board.Board', Board);
 
 export default Board;

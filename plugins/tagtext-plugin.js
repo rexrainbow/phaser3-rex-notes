@@ -1,4 +1,5 @@
 import TagText from './gameobjects/tagtext/TagText.js';
+import SetValue from 'rexPlugins/utils/object/SetValue.js';
 
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 const BuildGameObject = Phaser.GameObjects.BuildGameObject;
@@ -74,5 +75,7 @@ class TagTextPlugin extends Phaser.Plugins.BasePlugin {
         return TagText;
     }
 }
+
+SetValue(window, 'RexPlugins.GameObjects.TagText', TagText);
 
 export default TagTextPlugin;

@@ -1,4 +1,5 @@
 import Canvas from './gameobjects/canvas/Canvas.js';
+import SetValue from 'rexPlugins/utils/object/SetValue.js';
 
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 const BuildGameObject = Phaser.GameObjects.BuildGameObject;
@@ -38,5 +39,7 @@ class CanvasPlugin extends Phaser.Plugins.BasePlugin {
         return Canvas;
     }
 }
+
+SetValue(window, 'RexPlugins.GameObjects.Canvas', Canvas);
 
 export default CanvasPlugin;

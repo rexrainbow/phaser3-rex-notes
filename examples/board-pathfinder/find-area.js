@@ -10,54 +10,45 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        var graphics = this.add.graphics({
+        this.shapeTextureKey = 'shape';
+        var board = new Board(this);
+
+        // add some blockers
+        for (var i = 0; i < 10; i++) {
+            new Blocker(board);
+        }
+
+        // add chess
+        var chess = new ChessA(board);
+        chess.showMoveableArea();
+    }
+}
+
+class Board extends RexPlugins.Board.Board {
+    constructor(scene) {
+        // create board
+        var config = {
+            grid: getHexagonGrid(scene),
+            // grid: getQuadGrid(scene),
+            width: 8,
+            height: 8,
+            // wrap: true
+        }
+        super(scene, config);
+        // draw grid
+        var graphics = scene.add.graphics({
             lineStyle: {
                 width: 1,
                 color: 0xffffff,
                 alpha: 1
             }
         });
-        var board = this.rexBoard.add.board({
-                grid: getHexagonGrid(this),
-                // grid: getQuadGrid(this),
-                width: 8,
-                height: 8
-            })
-            .forEachTileXY(function (tileXY, board) {
-                var poly = board.getGridPolygon(tileXY.x, tileXY.y);
-                graphics.strokePoints(poly.points, true);
-            }, this);
-
-        var key = 'shape';
-        createGridPolygonTexture(board, key);
-
-        var emptyTileXY, chess, blocker;
-
-        // add some blockers
-        for (var i = 0; i < 10; i++) {
-            blocker = this.add.image(0, 0, key).setTint(0x555555);
-            emptyTileXY = board.getRandomEmptyTileXY(0);
-            board.addChess(blocker, emptyTileXY.x, emptyTileXY.y, 0, true);
-            blocker.rexChess.setBlocker();
-        }
-
-        // add chess
-        chess = this.add.image(0, 0, key)
-            .setTint(0x00CC00);
-        chess.pathFinder = this.rexBoard.add.pathFinder(chess, {
-            blockerTest: true
-        });
-        emptyTileXY = board.getRandomEmptyTileXY(0);
-        board.addChess(chess, emptyTileXY.x, emptyTileXY.y, 0, true);
-        var tileXYArray = chess.pathFinder.findArea(2),
-            tileXY;
-        for (var i = 0, cnt = tileXYArray.length; i < cnt; i++) {
-            tileXY = tileXYArray[i];
-            this.add.text(board.tileXYToWorldX(tileXY.x, tileXY.y),
-                    board.tileXYToWorldY(tileXY.x, tileXY.y),
-                    tileXY.cost)
-                .setOrigin(0.5);
-        }
+        this.forEachTileXY(function (tileXY, board) {
+            var poly = board.getGridPolygon(tileXY.x, tileXY.y);
+            graphics.strokePoints(poly.points, true);
+        })
+        // create grid texture
+        createGridPolygonTexture(this, scene.shapeTextureKey);
     }
 }
 
@@ -85,7 +76,7 @@ var getHexagonGrid = function (scene) {
     return grid;
 };
 
-var createGridPolygonTexture = function (board, key) {
+var createGridPolygonTexture = function (board, shapeTextureKey) {
     var poly = board.getGridPolygon();
     poly.left = 0;
     poly.top = 0;
@@ -93,9 +84,73 @@ var createGridPolygonTexture = function (board, key) {
     scene.add.graphics()
         .fillStyle(0xffffff)
         .fillPoints(poly.points, true)
-        .generateTexture(key, poly.width, poly.height)
+        .generateTexture(shapeTextureKey, poly.width, poly.height)
         .destroy();
-    return scene.textures.get(key);
+    return scene.textures.get(shapeTextureKey);
+}
+
+class Blocker extends Phaser.GameObjects.Image {
+    constructor(board, tileXY) {
+        var scene = board.scene;
+        // create game object
+        super(scene, 0, 0, scene.shapeTextureKey);
+        scene.add.existing(this);
+        this.setTint(0x555555);
+        // add to board
+        if (tileXY === undefined) {
+            tileXY = board.getRandomEmptyTileXY(0);
+        }
+        board.addChess(this, tileXY.x, tileXY.y, 0, true);
+        // set blocker
+        this.rexChess.setBlocker();
+    }
+}
+
+class ChessA extends Phaser.GameObjects.Image {
+    constructor(board, tileXY) {
+        var scene = board.scene;
+        // create game object
+        super(scene, 0, 0, scene.shapeTextureKey);
+        scene.add.existing(this);
+        this.setTint(0x00CC00);
+        // add to board
+        if (tileXY === undefined) {
+            tileXY = board.getRandomEmptyTileXY(0);
+        }
+        board.addChess(this, tileXY.x, tileXY.y, 0, true);
+        // add behaviors        
+        this.moveTo = scene.rexBoard.add.moveTo(this);
+        this.pathFinder = scene.rexBoard.add.pathFinder(this, {
+            blockerTest: true
+        });
+
+        // private members
+        this.movingPoints = 3;
+        this.moveableTiles = [];
+    }
+
+    showMoveableArea() {
+        this.hideMoveableArea();
+        var tileXYArray = this.pathFinder.findArea(this.movingPoints),
+            tileXY;
+        var scene = this.scene,
+            board = this.rexChess.board;
+        for (var i = 0, cnt = tileXYArray.length; i < cnt; i++) {
+            tileXY = tileXYArray[i];
+            var text = scene.add.text(board.tileXYToWorldX(tileXY.x, tileXY.y), board.tileXYToWorldY(tileXY.x, tileXY.y), tileXY.cost)
+                .setOrigin(0.5);
+            this.moveableTiles.push(text);
+        }
+        return this;
+    }
+
+    hideMoveableArea() {
+        for (var i = 0, cnt = this.moveableTiles.length; i < cnt; i++) {
+            this.moveableTiles[i].destroy();
+        }
+        this.moveableTiles.length = 0;
+        return this;
+    }
 }
 
 var config = {

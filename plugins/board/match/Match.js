@@ -25,9 +25,7 @@ class Match {
         return this;
     }
 
-    boot() {
-        this.scene.events.on('destroy', this.destroy, this);
-    }
+    boot() {}
 
     shutdown() {
         this.board = undefined;
@@ -129,7 +127,7 @@ class Match {
                 }
                 this.symbols[i] = symbol;
             }
-            
+
         } else {
             // Fill a given symbol
             symbol = callback;

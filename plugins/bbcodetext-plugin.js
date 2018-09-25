@@ -1,4 +1,5 @@
 import BBCodeText from './gameobjects/bbocdetext/BbcodeText.js';
+import SetValue from 'rexPlugins/utils/object/SetValue.js';
 
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 const BuildGameObject = Phaser.GameObjects.BuildGameObject;
@@ -74,5 +75,7 @@ class BBCodeTextPlugin extends Phaser.Plugins.BasePlugin {
         return BBCodeText;
     }
 }
+
+SetValue(window, 'RexPlugins.GameObjects.BBCodeText', BBCodeText);
 
 export default BBCodeTextPlugin;

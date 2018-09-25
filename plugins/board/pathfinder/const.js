@@ -13,8 +13,8 @@ export default {
     'A*-random': 12,    
 
     // special cost
-    'blocker': -1,
+    'BLOCKER': null,
 
     // special moving point
-    'infinity': undefined,
+    'INFINITY': undefined,
 };

@@ -20,8 +20,8 @@ const ASTAR = CONST['A*'];
 const ASTAR_LINE = CONST['A*-line'];
 const ASTAR_RANDOM = CONST['A*-random'];
 
-const BLOCKER = CONST.blocker;
-const INFINITY = CONST.infinity;
+const BLOCKER = CONST.BLOCKER;
+const INFINITY = CONST.INFINITY;
 
 // global object
 var gOpenHeap = new BinaryHeap(function (node) {

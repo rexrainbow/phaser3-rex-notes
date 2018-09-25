@@ -1,7 +1,7 @@
 import CONST from './const.js';
 
 const AREA_MODE = CONST.AREA_MODE;
-const INFINITY = CONST.infinity
+const INFINITY = CONST.INFINITY
 
 var FindArea = function (movingPoints, out) {
     if (out === undefined) {

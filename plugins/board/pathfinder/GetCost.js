@@ -1,6 +1,6 @@
 import CONST from './const.js';
 
-const BLOCKER = CONST.blocker;
+const BLOCKER = CONST.BLOCKER;
 
 var GetCost = function (curNode, preNode) {
     if (this.blockerTest) {
@@ -16,9 +16,9 @@ var GetCost = function (curNode, preNode) {
         return this.costCallback;
     }
     if (this.costCallbackScope) {
-        return this.costCallback.call(this.costCallbackScope, curNode, preNode, this);
+        return this.costCallback.call(this.costCallbackScope, curNode, preNode);
     } else {
-        return this.costCallback(curNode, preNode, this);
+        return this.costCallback(curNode, preNode);
     }
 }
 export default GetCost;

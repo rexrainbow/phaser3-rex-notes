@@ -1,6 +1,37 @@
 import BoardPlugin from 'rexPlugins/board-plugin.js';
 
-class Board extends Phaser.rexBoard.Board {
+class Demo extends Phaser.Scene {
+    constructor() {
+        super({
+            key: 'examples'
+        })
+        this.board;
+        this.shapeTextureKey = 'shape';
+        this.blockers = [];
+        this.chessA;
+    }
+
+    preload() {}
+
+    create() {
+        // create board
+        this.board = new Board(this);
+
+        // add chess
+        this.chessA = new ChessA(this.board);
+
+        // add some blockers
+        for (var i = 0; i < 20; i++) {
+            this.blockers.push(
+                new Blocker(this.board)
+            );
+        }
+
+        this.chessA.showMoveableArea();
+    }
+}
+
+class Board extends RexPlugins.Board.Board {
     constructor(scene) {
         // create board
         var config = {
@@ -167,37 +198,6 @@ class MoveableTile extends Phaser.GameObjects.Image {
             }
             this.setTint(0xff0000);
         }, this);
-    }
-}
-
-class Demo extends Phaser.Scene {
-    constructor() {
-        super({
-            key: 'examples'
-        })
-        this.board;
-        this.shapeTextureKey = 'shape';
-        this.blockers = [];
-        this.chessA;
-    }
-
-    preload() {}
-
-    create() {
-        // create board
-        this.board = new Board(this);
-
-        // add chess
-        this.chessA = new ChessA(this.board);
-
-        // add some blockers
-        for (var i = 0; i < 20; i++) {
-            this.blockers.push(
-                new Blocker(this.board)
-            );
-        }
-
-        this.chessA.showMoveableArea();
     }
 }
 

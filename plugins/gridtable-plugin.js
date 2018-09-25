@@ -1,4 +1,5 @@
 import GridTable from './gameobjects/gridtable/GridTable.js';
+import SetValue from 'rexPlugins/utils/object/SetValue.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const BuildGameObject = Phaser.GameObjects.BuildGameObject;
@@ -40,5 +41,7 @@ class GridTablePlugin extends Phaser.Plugins.BasePlugin {
         return GridTable;
     }
 }
+
+SetValue(window, 'RexPlugins.GameObjects.GridTable', GridTable);
 
 export default GridTablePlugin;
