@@ -44,7 +44,7 @@ class Demo extends Phaser.Scene {
             tags: tags
         });
         console.log(text.getWrappedText());
-        console.log(text.getRawText());
+        console.log(text.getPlainText());
         console.log(text.getText(undefined, 1, 4));
 
     }

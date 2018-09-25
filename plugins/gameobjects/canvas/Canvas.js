@@ -218,6 +218,4 @@ var Canvas = new Phaser.Class({
 
 });
 
-var updateTextureCallbackParams = [null, null];
-
 export default Canvas;
