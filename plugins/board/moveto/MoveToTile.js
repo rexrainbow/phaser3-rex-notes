@@ -8,7 +8,7 @@ var MoveToTile = function (tileX, tileY, direction) {
         return this;
     }
 
-    if (typeof (tileX) !== 'number') {
+    if ((tileX != null) && (typeof (tileX) !== 'number')) {
         var config = tileX;
         tileX = GetValue(config, 'x', undefined);
         tileY = GetValue(config, 'y', undefined);
