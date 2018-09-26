@@ -13,13 +13,11 @@ Included in [board plugin](board.md#source-code).
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/board-match)
 
-User could import class directly, or install it by global plugin.
-
 ### Install scene plugin
 
 Included in board plugin.
 
-### Create instance
+### Add match object
 
 ```javascript
 var match = scene.rexBoard.add.match({
@@ -55,7 +53,24 @@ var match = scene.rexBoard.add.match({
             1: true,
             3: true
         }
-        ```    
+        ```
+
+### Custom class
+
+- Define class
+    ```javascript
+    class MyMatch extends RexPlugins.Board.Match {
+        constructor(config) {
+            super(config);
+            // ...
+        }
+        // ...
+    }
+    ```
+- Create instance
+    ```javascript
+    var match = new MyMatch(config);
+    ```
 
 ### Update symbols
 
@@ -108,7 +123,7 @@ match.dumpSymobls(function(tileXY, symbol, board) {
 - `tileXY` : Tile position `{x, y}`
 - `symbol` : A string or a number
     - `null` : No symbol
-- `board` : [Board](board.md) object    
+- `board` : [Board](board.md) object
 
 ### Directions mask
 
@@ -122,7 +137,7 @@ match.setDirMask(dir, value);
     - [Quad grid](board-quadgrid.md), 4 directions : `0`, `1`
     - [Quad grid](board-quadgrid.md), 8 directions : `0`, `1`, `4`, `5`
     - [Hexagon grid](board-hexagongrid.md) : `0`, `1`, `2`
-- `value` : `true`/`false`
+- `value` : `true` or `false`
 
 ### Match
 
@@ -161,4 +176,4 @@ match.match(pattern, function (result, board) {
 }, scope);
 ```
 
-- `pattern` : A symbol list
+- `pattern` : A list of symbols

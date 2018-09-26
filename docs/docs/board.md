@@ -38,7 +38,7 @@ var config = {
 var game = new Phaser.Game(config);
 ```
 
-### Create instance
+### Add board object
 
 - Quad board
     ```javascript
@@ -75,6 +75,54 @@ Configuration
 - `grid` : [Quad grid](board-quadgrid.md) or [hexagon grid](board-hexagongrid.md)
 - `width` : Board width in tiles
 - `height` : Board height in tiles
+
+### Custom class
+
+- Define class
+    ```javascript
+    class MyBoard extends RexPlugins.Board.Board {
+        constructor(scene) {
+            super(scene, {
+                grid: scene.rexBoard.add.quadGrid({
+                    x: 0,
+                    y: 0,
+                    cellWidth: 0,
+                    cellHeight: 0,
+                    type: 'orthogonal'  // 'orthogonal'|'isometric'|'staggered'
+                }),
+                width: 0,
+                height: 0
+            });
+            // ...
+        }
+        // ...
+    }
+    ```
+- Create instance
+    ```javascript
+    var board = new MyBoard(scene);
+    ```
+
+### Board size
+
+- Width : Board width in tiles
+    - Get
+        ```javascript
+        var width = board.width;
+        ```
+    - Set
+        ```javascript
+        board.setBoardWidth(width);
+        ```
+- Height : Board height in tiles
+    - Get
+        ```javascript
+        var height = board.height;
+        ```
+    - Set
+        ```javascript
+        board.setBoardHeight(height);
+        ```
 
 ### Add chess
 
@@ -256,6 +304,71 @@ var tileY = board.worldXYToTileY(worldX, worldY);
         - `0` ~ `7` : [Quad grid](board-quadgrid.md#directions) in 8 directions mode.
         - `0` ~ `5` : [Hexagon grid](board-hexagongrid.md#directions).
     - `neighborTileXY` : Tile position `{x, y}` of neighbor. Retrun `null` if no neighbor there (i.e. source chess is at the edge of board.)
+- Get all directions of neighbor chess
+    ```javascript
+    var out = board.getNeighborTileXY(srcTileXY, null);
+    // var out = board.getNeighborTileXY(srcTileXY, null, out);
+    ```
+    - `out` : Tile position array of all neighbors
+- Get neighbor chess
+    ```javascript
+    var neighborChess = board.getNeighborChess(chess, direction); // neighborTileZ = tileZ of chess
+    // var neighborChess = board.getNeighborChess(chess, direction, neighborTileZ);
+    ```
+- Get chess of all neighbors
+    ```javascript
+    var out = board.getNeighborChess(chess, null); // neighborTileZ = tileZ of chess
+    // var out = board.getNeighborChess(chess, null, neighborTileZ);
+    ```
+    - `out` : Chess array of all neighbors
+- Are 2 chess neighbors?
+   ```javascript
+   var areNeighbor = board.areNeighbors(chessA, chessB);
+   ```
+   - `areNeighbor` : Return `true` if `chessA` and `chessB` are neighbors.
+- Get direction between 2 tile positions
+    ```javascript
+    var direction = board.getNeighborTileDirection(srcTile, neighborTileXY);
+    ```
+    - `direction` : Return `null` if these 2 tile positions are not neighbors.
+- Get direction between 2 chess
+    ```javascript
+    var direction = board.getNeighborChessDirection(chess, neighborChess);
+    ```
+    - `direction` : Return `null` if these 2 chess are not neighbors.
+
+### Empty tile position
+
+- Get a random tile position which does not have any chess
+    ```javascript
+    var tileXY = board.getRandomEmptyTileXY(tileZ);
+    // var out = board.getRandomEmptyTileXY(tileZ, out);
+    ```
+    - `tileXY` : Tile position `{x, y}`, return `null` if all positions are occupied.
+- Get an array of tile position which does not have any chess
+    ```javascript
+    var tileXYArray = board.getEmptyTileXYArray(tileZ);
+    // var out = board.getEmptyTileXYArray(tileZ, out);
+    ```
+    - `tileXYArray` : An array of tile position
+
+### Get all chess
+
+```javascript
+var chessArray = board.getAllChess();
+```
+
+### Blocker
+
+- Set blocker property : See [chess data](board-chessdata.md#blocker)
+- Has blocker at tile position (tileX, tileY, tileZ)
+    ```javascript
+    var hasBlocker = board.hasBlocker(tileX, tileY, tileZ);
+    ```
+- Any chess at (tileX, tileY) has `blocker` property
+    ```javascript
+    var hasBlocker = board.hasBlocker(tileX, tileY);
+    ```
 
 ### Touch events
 

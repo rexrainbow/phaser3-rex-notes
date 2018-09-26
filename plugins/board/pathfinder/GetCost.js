@@ -16,9 +16,9 @@ var GetCost = function (curNode, preNode) {
         return this.costCallback;
     }
     if (this.costCallbackScope) {
-        return this.costCallback.call(this.costCallbackScope, curNode, preNode);
+        return this.costCallback.call(this.costCallbackScope, curNode, preNode, this);
     } else {
-        return this.costCallback(curNode, preNode);
+        return this.costCallback(curNode, preNode, this);
     }
 }
 export default GetCost;

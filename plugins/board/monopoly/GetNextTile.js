@@ -2,12 +2,10 @@ import TileData from './TileData.js';
 
 const GetRandom = Phaser.Utils.Array.GetRandom;
 
-var GetNextTile = function (curTileData) {
+var GetNextTile = function (curTileData, preTileData) {
     var board = this.board;
     var directions = board.grid.allDirections;
-    var forwardDirection = curTileData.direction,
-        forwardTileData = null;
-    var backwardDirection = board.getOppositeDirection(curTileData.x, curTileData.y, curTileData.direction),
+    var forwardTileData = null,
         backwardTileData = null;
     var neighborTileXArray = []; // forward and other neighbors, exclude backward
     var neighborTileXY, neighborTileData = null;
@@ -16,23 +14,18 @@ var GetNextTile = function (curTileData) {
         if (neighborTileXY === null) {
             continue;
         }
-        if (this.blockerTest) {
-            if (board.hasBlocker(neighborTileXY.x, neighborTileXY.y)) {
-                continue;
-            }
-        }
-        if (this.edgeBlockerTest) {
-            // TODO
+        if (!board.contains(neighborTileXY.x, neighborTileXY.y, this.pathTileZ)) {
+            continue;
         }
         neighborTileData = new TileData(neighborTileXY.x, neighborTileXY.y, directions[i]);
-        switch (directions[i]) {
-            case forwardDirection:
-                forwardTileData = neighborTileData;
-                neighborTileXArray.push(neighborTileData);
-                break;
-            case backwardDirection:
-                backwardTileData = neighborTileData;
-                break;
+
+        if (directions[i] === curTileData.direction) {
+            forwardTileData = neighborTileData;
+        }
+        if ((preTileData !== undefined) && (board.tileXYIsEqual(neighborTileXY, preTileData))) {
+            backwardTileData = neighborTileData;
+        } else {
+            neighborTileXArray.push(neighborTileData);
         }
     }
 
@@ -40,12 +33,12 @@ var GetNextTile = function (curTileData) {
     if ((backwardTileData === null) && (neighborTileXArray.length === 0)) {
         // no valid neighbor
         nextTileData = null;
+    } else if ((backwardTileData === null) && (neighborTileXArray.length === 1)) {
+        // 1 neighbor
+        nextTileData = neighborTileXArray[0];        
     } else if ((backwardTileData !== null) && (neighborTileXArray.length === 0)) {
         // 1 backward neighbor
         nextTileData = backwardTileData;
-    } else if ((backwardTileData === null) && (neighborTileXArray.length === 1)) {
-        // 1 neighbor
-        nextTileData = neighborTileXArray[0];
     } else {
         // 2 or more neighobrs
         switch (this.pickMode) {

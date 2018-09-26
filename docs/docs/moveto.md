@@ -53,8 +53,8 @@ var moveTo = scene.plugins.get('rexMoveTo').add(gameObject, {
 });
 ```
 
-- `speed` : moving speed, pixels in second
-- `rotateToTarget` : Set true to change angle towards path
+- `speed` : moving speed, pixels in second.
+- `rotateToTarget` : Set true to change angle towards path.
 
 ### Start moving
 
@@ -120,6 +120,7 @@ moveTo.setRotateToTarget(rotateToTarget);
 - On reached target
     ```javascript
     moveTo.on('complete', function(moveTo, gameObject){});
+    // moveTo.once('complete', function(moveTo, gameObject){});
     ```
 
 ### Status

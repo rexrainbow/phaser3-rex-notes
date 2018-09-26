@@ -13,6 +13,7 @@ class Monopoly {
     }
 
     resetFromJSON(o) {
+        this.preTileXY = GetValue(o, 'preTileXY', undefined);
         var costCallback = GetValue(o, 'costCallback', undefined);
         var costCallbackScope = GetValue(o, 'costCallbackScope', undefined);
         if (costCallback === undefined) {
@@ -20,8 +21,7 @@ class Monopoly {
         }
         this.setFaceDirection(GetValue(o, 'face', 0));
         this.setPathMode(GetValue(o, 'pathMode', 0));
-        this.setBlockerTest(GetValue(o, 'blockerTest', false));
-        this.setEdgeBlockerTest(GetValue(o, 'edgeBlockerTest', false));
+        this.setPathTileZ(GetValue(o, 'pathTileZ', 0));
         this.setCostFunction(costCallback, costCallbackScope);
         return this;
     }
@@ -62,19 +62,11 @@ class Monopoly {
         return this;
     }
 
-    setBlockerTest(value) {
+    setPathTileZ(value) {
         if (value === undefined) {
             value = true;
         }
-        this.blockerTest = value;
-        return this;
-    }
-
-    setEdgeBlockerTest(value) {
-        if (value === undefined) {
-            value = true;
-        }
-        this.edgeBlockerTest = value;
+        this.pathTileZ = value;
         return this;
     }
 

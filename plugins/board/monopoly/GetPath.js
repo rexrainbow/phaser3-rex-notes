@@ -15,7 +15,7 @@ var GetPath = function (movingPoints, out) {
         nextTileData;
     var cost;
     while (movingPoints > 0) {
-        nextTileData = this.getNextTile(curTileData);
+        nextTileData = this.getNextTile(curTileData, this.preTileXY);
         if (nextTileData === null) {
             break;
         }
@@ -27,6 +27,8 @@ var GetPath = function (movingPoints, out) {
             out.push(nextTileData);
         }
         movingPoints -= cost;
+
+        this.preTileXY = curTileData;
         curTileData = nextTileData;
     }
     return out;

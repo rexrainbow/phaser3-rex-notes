@@ -41,6 +41,7 @@ class Match {
 
     setBoard(board) {
         this.board = board;
+        return this;
     }
 
     setDirMask(dir, value) {

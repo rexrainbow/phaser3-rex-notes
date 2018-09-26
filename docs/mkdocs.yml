@@ -160,7 +160,10 @@ nav:
     - Grid:    
         - Quad: board-quadgrid.md
         - Hexagon: board-hexagongrid.md
-    - Match: board-match.md    
+    - Chess data: board-chessdata.md
+    - Move to: board-moveto.md
+    - Path finder: board-pathfinder.md
+    - Match: board-match.md  
 - Storage:
     - Offline:
         - Key-value pairs:

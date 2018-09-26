@@ -7,10 +7,10 @@ export default {
     'random': 0,
     'diagonal': 1,
     'straight': 2,
-    'line': 3,    
+    'line': 3,
     'A*': 10,
-    'A*-line': 11,
-    'A*-random': 12,    
+    'A*-random': 11,
+    'A*-line': 12,
 
     // special cost
     'BLOCKER': null,

@@ -69,7 +69,7 @@ class Node {
     }
 
     getCost(preNode) {
-        if (this.pathFinder.costCache) {
+        if (this.pathFinder.cacheCost) {
             if (this.cost === undefined) {
                 this.cost = this.pathFinder.getCost(this, preNode);
             }

@@ -8,7 +8,6 @@ import FindPath from './FindPath.js';
 import TileXYToCost from './TileXYToCost.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
-const ASTAR = CONST['A*'];
 
 class PathFinder {
     constructor(gameObject, config) {
@@ -27,8 +26,8 @@ class PathFinder {
         this.setBlockerTest(GetValue(o, 'blockerTest', false));
         this.setEdgeBlockerTest(GetValue(o, 'edgeBlockerTest', false));        
         this.setCostFunction(costCallback, costCallbackScope);
-        this.setPathMode(GetValue(o, 'pathMode', ASTAR));
-        this.setCostCacheMode(GetValue(o, 'costCache', true));
+        this.setPathMode(GetValue(o, 'pathMode', 0));
+        this.setCacheCostMode(GetValue(o, 'cacheCost', true));
         this.setWeight(GetValue(o, 'weight', 10));
         this.setShuffleNeighborsMode(GetValue(o, 'shuffleNeighbors', false));
         return this;
@@ -68,11 +67,11 @@ class PathFinder {
         return this;
     }
 
-    setCostCacheMode(value) {
+    setCacheCostMode(value) {
         if (value === undefined) {
             value = true;
         }
-        this.costCache = value;
+        this.cacheCost = value;
         return this;
     }
 

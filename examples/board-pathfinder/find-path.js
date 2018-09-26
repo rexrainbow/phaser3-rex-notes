@@ -127,7 +127,8 @@ class ChessA extends Phaser.GameObjects.Image {
         // add behaviors        
         this.moveTo = scene.rexBoard.add.moveTo(this);
         this.pathFinder = scene.rexBoard.add.pathFinder(this, {
-            blockerTest: true
+            blockerTest: true,
+            pathMode: 'A*',
         });
 
         // private members
