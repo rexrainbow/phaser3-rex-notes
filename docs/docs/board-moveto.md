@@ -57,6 +57,30 @@ moveTo.moveToward(direction);
 moveTo.moveToRandomNeighbor();
 ```
 
+### Can move to tile
+
+```javascript
+var canMoveTo = moveTo.canMoveTo(tileX, tileY);
+```
+
+Return `true` if chess can move to (tileX, tileY)
+
+### Last move result
+
+```javascript
+var lastMoveResult = moveTo.lastMoveResult;
+```
+
+Return `true` if chess is moved by `moveTo.moveTo()`, `moveTo.moveToward()`, or `moveTo.moveToRandomNeighbor()`
+
+#### Destination
+
+```javascript
+var destinationTileX = moveTo.destinationTileX;
+var destinationTileY = moveTo.destinationTileY;
+var destinationDirection = moveTo.destinationDirection;
+```
+
 ### Stop moving
 
 ```javascript

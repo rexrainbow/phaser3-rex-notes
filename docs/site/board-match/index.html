@@ -890,7 +890,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../shape-circle.md" title="Circle" class="md-nav__link">
+    <a href="../shape-circle/" title="Circle" class="md-nav__link">
       Circle
     </a>
   </li>
@@ -2676,6 +2676,42 @@
           
           
 
+
+  <li class="md-nav__item">
+    <a href="../board-chessdata/" title="Chess data" class="md-nav__link">
+      Chess data
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../board-moveto/" title="Move to" class="md-nav__link">
+      Move to
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../board-pathfinder/" title="Path finder" class="md-nav__link">
+      Path finder
+    </a>
+  </li>
+
+        
+          
+          
+          
+
   
 
 
@@ -2730,8 +2766,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
+  <a href="#add-match-object" title="Add match object" class="md-nav__link">
+    Add match object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-class" title="Custom class" class="md-nav__link">
+    Custom class
   </a>
   
 </li>
@@ -3060,8 +3103,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
+  <a href="#add-match-object" title="Add match object" class="md-nav__link">
+    Add match object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-class" title="Custom class" class="md-nav__link">
+    Custom class
   </a>
   
 </li>
@@ -3177,10 +3227,9 @@
 <p>Included in <a href="../board/#source-code">board plugin</a>.</p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/board-match">Sample code</a></p>
-<p>User could import class directly, or install it by global plugin.</p>
 <h3 id="install-scene-plugin">Install scene plugin<a class="headerlink" href="#install-scene-plugin" title="Permanent link">&para;</a></h3>
 <p>Included in board plugin.</p>
-<h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
+<h3 id="add-match-object">Add match object<a class="headerlink" href="#add-match-object" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">match</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">match</span><span class="p">({</span>
    <span class="nx">board</span><span class="o">:</span> <span class="nx">board</span><span class="p">,</span>
    <span class="c1">// wildcard: undefined</span>
@@ -3215,6 +3264,21 @@
 </pre></div></li>
 </ul>
 </li>
+</ul>
+<h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Define class
+    <div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">MyMatch</span> <span class="kr">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">Board</span><span class="p">.</span><span class="nx">Match</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div></li>
+<li>Create instance
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">match</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyMatch</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</pre></div></li>
 </ul>
 <h3 id="update-symbols">Update symbols<a class="headerlink" href="#update-symbols" title="Permanent link">&para;</a></h3>
 <p>Each tile position (tileX, tileY)  has a symbol.</p>
@@ -3261,7 +3325,7 @@
 <li><code>null</code> : No symbol</li>
 </ul>
 </li>
-<li><code>board</code> : <a href="../board/">Board</a> object    </li>
+<li><code>board</code> : <a href="../board/">Board</a> object</li>
 </ul>
 <h3 id="directions-mask">Directions mask<a class="headerlink" href="#directions-mask" title="Permanent link">&para;</a></h3>
 <p>Enable/Disable matching at directions, all directions are enbale by default.</p>
@@ -3275,7 +3339,7 @@
 <li><a href="../board-hexagongrid/">Hexagon grid</a> : <code>0</code>, <code>1</code>, <code>2</code></li>
 </ul>
 </li>
-<li><code>value</code> : <code>true</code>/<code>false</code></li>
+<li><code>value</code> : <code>true</code> or <code>false</code></li>
 </ul>
 <h3 id="match">Match<a class="headerlink" href="#match" title="Permanent link">&para;</a></h3>
 <h4 id="match-n">Match-N<a class="headerlink" href="#match-n" title="Permanent link">&para;</a></h4>
@@ -3314,7 +3378,7 @@
 </pre></div>
 
 <ul>
-<li><code>pattern</code> : A symbol list</li>
+<li><code>pattern</code> : A list of symbols</li>
 </ul>
                 
                   
@@ -3336,7 +3400,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../board-hexagongrid/" title="Hexagon" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../board-pathfinder/" title="Path finder" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -3345,7 +3409,7 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Hexagon
+                Path finder
               </span>
             </div>
           </a>

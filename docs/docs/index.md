@@ -7,6 +7,9 @@
 1. [AwaitLoader](awaitloader.md): Await custom task in preload stage.
 1. [BBCodeText](bbcodetext.md): Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
 1. [Board](board.md): Core object of Board system.
+1. [Board - Match](board-match.md): Get matched chess.
+1. [Board - Move To](board-moveto.md): Move chess towards target position with a steady speed.
+1. [Board - Path finder](board-pathfinder.md): Find moveable area or moving path.
 1. [Button](button.md): Fires 'click' event when touch releasd after pressed.
 1. [Canvas](canvas.md): Drawing on [canvas](https://www.w3schools.com/html/html5_canvas.asp).
 1. [Clock](clock.md): A clock to count elapsed time.

@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/shape-circel/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/board-chessdata/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Shape circel - Notes of Phaser 3</title>
+        <title>Chess data - Notes of Phaser 3</title>
       
     
     
@@ -128,7 +128,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Shape circel
+                Chess data
               </span>
             
           
@@ -890,7 +890,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../shape-circle.md" title="Circle" class="md-nav__link">
+    <a href="../shape-circle/" title="Circle" class="md-nav__link">
       Circle
     </a>
   </li>
@@ -2595,10 +2595,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-14" type="checkbox" id="nav-14">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-14" type="checkbox" id="nav-14" checked>
     
     <label class="md-nav__link" for="nav-14">
       Board
@@ -2667,6 +2669,137 @@
         
       </ul>
     </nav>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Chess data
+      </label>
+    
+    <a href="./" title="Chess data" class="md-nav__link md-nav__link--active">
+      Chess data
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-chess-data-object" title="Add chess data object" class="md-nav__link">
+    Add chess data object
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-chess-data" title="Get chess data" class="md-nav__link">
+    Get chess data
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-tile-position" title="Get tile position" class="md-nav__link">
+    Get tile position
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-board" title="Get board" class="md-nav__link">
+    Get board
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#blocker" title="Blocker" class="md-nav__link">
+    Blocker
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../board-moveto/" title="Move to" class="md-nav__link">
+      Move to
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../board-pathfinder/" title="Path finder" class="md-nav__link">
+      Path finder
+    </a>
   </li>
 
         
@@ -2893,6 +3026,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#usage" title="Usage" class="md-nav__link">
     Usage
   </a>
@@ -2901,22 +3041,42 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#create-shape" title="Create shape" class="md-nav__link">
-    Create shape
+  <a href="#add-chess-data-object" title="Add chess data object" class="md-nav__link">
+    Add chess data object
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-chess-data" title="Get chess data" class="md-nav__link">
+    Get chess data
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-tile-position" title="Get tile position" class="md-nav__link">
+    Get tile position
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-shape-object" title="Add shape object" class="md-nav__link">
-    Add shape object
+  <a href="#get-board" title="Get board" class="md-nav__link">
+    Get board
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#other-properties" title="Other properties" class="md-nav__link">
-    Other properties
+  <a href="#blocker" title="Blocker" class="md-nav__link">
+    Blocker
   </a>
   
 </li>
@@ -2942,25 +3102,59 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/shape-circel.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/board-chessdata.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Shape circel</h1>
+                  <h1>Chess data</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Circle shape, built-in game object of phaser.</p>
+<p>Properties of chess, chess behavior of Board system.</p>
 <ul>
-<li>Author: Richard Davey</li>
+<li>Author: Rex</li>
+<li>Behavior of chess</li>
 </ul>
+<h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
+<p>Included in <a href="../board/#source-code">board plugin</a>.</p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<h3 id="create-shape">Create shape<a class="headerlink" href="#create-shape" title="Permanent link">&para;</a></h3>
-<h3 id="add-shape-object">Add shape object<a class="headerlink" href="#add-shape-object" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">circle</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">circle</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">fillColor</span><span class="p">);</span>
-<span class="c1">// var circle = scene.add.circle(x, y, radius, fillColor, fillAlpha);</span>
+<h3 id="add-chess-data-object">Add chess data object<a class="headerlink" href="#add-chess-data-object" title="Permanent link">&para;</a></h3>
+<p>Chess data will be added to game object via <code>gameObject.rexChess</code> once adding this game object to board, or attach any chess behavior.</p>
+<h4 id="get-chess-data">Get chess data<a class="headerlink" href="#get-chess-data" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">chessData</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">rexChess</span><span class="p">;</span>
 </pre></div>
 
-<h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
-<p>See <a href="../gameobject/">game object</a></p>
+<h3 id="get-tile-position">Get tile position<a class="headerlink" href="#get-tile-position" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tileXYZ</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">rexChess</span><span class="p">.</span><span class="nx">tileXYZ</span><span class="p">;</span>
+</pre></div>
+
+<p>or</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tileX</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">rexChess</span><span class="p">.</span><span class="nx">tileX</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">tileY</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">rexChess</span><span class="p">.</span><span class="nx">tileY</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">tileZ</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">rexChess</span><span class="p">.</span><span class="nx">tileZ</span><span class="p">;</span>
+</pre></div>
+
+<ul>
+<li><code>tileXYZ</code> : Tile position <code>{x,y,z}</code>, return <code>null</code> if this chess is not added to any board.</li>
+<li><code>tileX</code>, <code>tileY</code>, <code>tileZ</code> : Return <code>null</code> if this chess is not added to any board.</li>
+</ul>
+<h3 id="get-board">Get board<a class="headerlink" href="#get-board" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">board</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">rexChess</span><span class="p">.</span><span class="nx">board</span><span class="p">;</span>
+</pre></div>
+
+<ul>
+<li><code>board</code> : <a href="../board/">Board object</a>, or <code>null</code> if this chess is not added to any board.</li>
+</ul>
+<h3 id="blocker">Blocker<a class="headerlink" href="#blocker" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">rexChess</span><span class="p">.</span><span class="nx">setBlocker</span><span class="p">();</span>
+</pre></div></li>
+<li>Disable
+    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">rexChess</span><span class="p">.</span><span class="nx">setBlocker</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</pre></div></li>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">blocker</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">rexChess</span><span class="p">.</span><span class="nx">blocker</span><span class="p">;</span>
+</pre></div></li>
+</ul>
                 
                   
                 
@@ -2977,6 +3171,41 @@
       
         
 <footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../board-hexagongrid/" title="Hexagon" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Hexagon
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../board-moveto/" title="Move to" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Move to
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">

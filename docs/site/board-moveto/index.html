@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/structs-set/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/board-moveto/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Set - Notes of Phaser 3</title>
+        <title>Move to - Notes of Phaser 3</title>
       
     
     
@@ -128,7 +128,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Set
+                Move to
               </span>
             
           
@@ -1863,12 +1863,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
     
     <label class="md-nav__link" for="nav-10">
       Data
@@ -1896,121 +1894,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Set
-      </label>
-    
-    <a href="./" title="Set" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../structs-set/" title="Set" class="md-nav__link">
       Set
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#add-an-element" title="Add an element" class="md-nav__link">
-    Add an element
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#remove-an-element" title="Remove an element" class="md-nav__link">
-    Remove an element
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#remove-all-elements" title="Remove all elements" class="md-nav__link">
-    Remove all elements
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#has-element" title="Has element" class="md-nav__link">
-    Has element
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-array" title="Get array" class="md-nav__link">
-    Get array
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#element-counts" title="Element counts" class="md-nav__link">
-    Element counts
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#for-each-element" title="For each element" class="md-nav__link">
-    For each element
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set-operations" title="Set operations" class="md-nav__link">
-    Set operations
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -2707,10 +2595,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-14" type="checkbox" id="nav-14">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-14" type="checkbox" id="nav-14" checked>
     
     <label class="md-nav__link" for="nav-14">
       Board
@@ -2798,11 +2688,175 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../board-moveto/" title="Move to" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Move to
+      </label>
+    
+    <a href="./" title="Move to" class="md-nav__link md-nav__link--active">
       Move to
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-scene-plugin" title="Install scene plugin" class="md-nav__link">
+    Install scene plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-instance" title="Create instance" class="md-nav__link">
+    Create instance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#move-to-destination-tile" title="Move to destination tile" class="md-nav__link">
+    Move to destination tile
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#move-to-neighbor-tile" title="Move to neighbor tile" class="md-nav__link">
+    Move to neighbor tile
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#move-to-random-neighbor-tile" title="Move to random neighbor tile" class="md-nav__link">
+    Move to random neighbor tile
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#can-move-to-tile" title="Can move to tile" class="md-nav__link">
+    Can move to tile
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#last-move-result" title="Last move result" class="md-nav__link">
+    Last move result
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#destination" title="Destination" class="md-nav__link">
+    Destination
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stop-moving" title="Stop moving" class="md-nav__link">
+    Stop moving
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enable" title="Enable" class="md-nav__link">
+    Enable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-speed" title="Set speed" class="md-nav__link">
+    Set speed
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-rotate-to-target" title="Set rotate-to-target" class="md-nav__link">
+    Set rotate-to-target
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" title="Events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#status" title="Status" class="md-nav__link">
+    Status
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -3041,12 +3095,26 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#usage" title="Usage" class="md-nav__link">
     Usage
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-scene-plugin" title="Install scene plugin" class="md-nav__link">
+    Install scene plugin
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#create-instance" title="Create instance" class="md-nav__link">
@@ -3056,57 +3124,97 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-an-element" title="Add an element" class="md-nav__link">
-    Add an element
+  <a href="#move-to-destination-tile" title="Move to destination tile" class="md-nav__link">
+    Move to destination tile
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#remove-an-element" title="Remove an element" class="md-nav__link">
-    Remove an element
+  <a href="#move-to-neighbor-tile" title="Move to neighbor tile" class="md-nav__link">
+    Move to neighbor tile
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#move-to-random-neighbor-tile" title="Move to random neighbor tile" class="md-nav__link">
+    Move to random neighbor tile
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#can-move-to-tile" title="Can move to tile" class="md-nav__link">
+    Can move to tile
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#remove-all-elements" title="Remove all elements" class="md-nav__link">
-    Remove all elements
+  <a href="#last-move-result" title="Last move result" class="md-nav__link">
+    Last move result
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#destination" title="Destination" class="md-nav__link">
+    Destination
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stop-moving" title="Stop moving" class="md-nav__link">
+    Stop moving
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#has-element" title="Has element" class="md-nav__link">
-    Has element
+  <a href="#enable" title="Enable" class="md-nav__link">
+    Enable
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-array" title="Get array" class="md-nav__link">
-    Get array
+  <a href="#set-speed" title="Set speed" class="md-nav__link">
+    Set speed
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#element-counts" title="Element counts" class="md-nav__link">
-    Element counts
+  <a href="#set-rotate-to-target" title="Set rotate-to-target" class="md-nav__link">
+    Set rotate-to-target
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#for-each-element" title="For each element" class="md-nav__link">
-    For each element
+  <a href="#events" title="Events" class="md-nav__link">
+    Events
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#set-operations" title="Set operations" class="md-nav__link">
-    Set operations
+  <a href="#status" title="Status" class="md-nav__link">
+    Status
   </a>
   
 </li>
@@ -3132,72 +3240,118 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/structs-set.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/board-moveto.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Set</h1>
+                  <h1>Move to</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>A collection of unique elements, built-in data structure of phaser.</p>
+<p>Move chess towards target position with a steady speed, chess behavior of Board system.</p>
 <ul>
-<li>Author: Richard Davey</li>
+<li>Author: Rex</li>
+<li>Behavior of chess</li>
 </ul>
+<h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
+<p>Included in <a href="../board/#source-code">board plugin</a>.</p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/board-moveto">Sample code</a></p>
+<h3 id="install-scene-plugin">Install scene plugin<a class="headerlink" href="#install-scene-plugin" title="Permanent link">&para;</a></h3>
+<p>Included in board plugin.</p>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">set</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Structs</span><span class="p">.</span><span class="nx">Set</span><span class="p">();</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">moveTo</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="p">{</span>
+    <span class="c1">// speed: 400,</span>
+    <span class="c1">// rotateToTarget: false,</span>
+    <span class="c1">// blockerTest: false</span>
+<span class="p">})</span>
 </pre></div>
 
-<p>or</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">set</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Structs</span><span class="p">.</span><span class="nx">Set</span><span class="p">(</span><span class="nx">elements</span><span class="p">);</span>
-</pre></div>
-
-<h3 id="add-an-element">Add an element<a class="headerlink" href="#add-an-element" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">set</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">element</span><span class="p">);</span>
-</pre></div>
-
-<h3 id="remove-an-element">Remove an element<a class="headerlink" href="#remove-an-element" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">set</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="nx">element</span><span class="p">);</span>
-</pre></div>
-
-<h3 id="remove-all-elements">Remove all elements<a class="headerlink" href="#remove-all-elements" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">set</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
-</pre></div>
-
-<h3 id="has-element">Has element<a class="headerlink" href="#has-element" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">set</span><span class="p">.</span><span class="nx">contains</span><span class="p">(</span><span class="nx">element</span><span class="p">);</span>
-</pre></div>
-
-<h3 id="get-array">Get array<a class="headerlink" href="#get-array" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">elements</span> <span class="o">=</span> <span class="nx">set</span><span class="p">.</span><span class="nx">getArray</span><span class="p">();</span>
-</pre></div>
-
-<h3 id="element-counts">Element counts<a class="headerlink" href="#element-counts" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">size</span> <span class="o">=</span> <span class="nx">set</span><span class="p">.</span><span class="nx">size</span><span class="p">;</span>
-</pre></div>
-
-<h3 id="for-each-element">For each element<a class="headerlink" href="#for-each-element" title="Permanent link">&para;</a></h3>
 <ul>
-<li>For when you know this Set will be modified during the iteration.
-    <div class="codehilite"><pre><span></span><span class="nx">set</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// return false;  // return false to cancel iteration</span>
-<span class="p">},</span> <span class="nx">scope</span><span class="p">)</span>
+<li><code>speed</code> : moving speed, pixels in second.</li>
+<li><code>rotateToTarget</code> : Set true to change angle towards path.</li>
+<li><code>blockerTest</code> : Set <code>true</code> to test <a href="../board-chessdata/#blocker">blocker property</a> in moveable testing.</li>
+</ul>
+<h3 id="move-to-destination-tile">Move to destination tile<a class="headerlink" href="#move-to-destination-tile" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">moveTo</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">);</span>
+<span class="c1">// moveTo.moveTo(tileXY);</span>
+</pre></div>
+
+<ul>
+<li><code>tileXY</code> : Tile position <code>{x,y}</code></li>
+</ul>
+<h3 id="move-to-neighbor-tile">Move to neighbor tile<a class="headerlink" href="#move-to-neighbor-tile" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">moveTo</span><span class="p">.</span><span class="nx">moveToward</span><span class="p">(</span><span class="nx">direction</span><span class="p">);</span>
+</pre></div>
+
+<ul>
+<li><code>direction</code> :<ul>
+<li><code>0</code> ~ <code>3</code> : <a href="../board-quadgrid/#directions">Quad grid</a> in 4 directions mode.</li>
+<li><code>0</code> ~ <code>7</code> : <a href="../board-quadgrid/#directions">Quad grid</a> in 8 directions mode.</li>
+<li><code>0</code> ~ <code>5</code> : <a href="../board-hexagongrid/#directions">Hexagon grid</a>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="move-to-random-neighbor-tile">Move to random neighbor tile<a class="headerlink" href="#move-to-random-neighbor-tile" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">moveTo</span><span class="p">.</span><span class="nx">moveToRandomNeighbor</span><span class="p">();</span>
+</pre></div>
+
+<h3 id="can-move-to-tile">Can move to tile<a class="headerlink" href="#can-move-to-tile" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">canMoveTo</span> <span class="o">=</span> <span class="nx">moveTo</span><span class="p">.</span><span class="nx">canMoveTo</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">);</span>
+</pre></div>
+
+<p>Return <code>true</code> if chess can move to (tileX, tileY)</p>
+<h3 id="last-move-result">Last move result<a class="headerlink" href="#last-move-result" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">lastMoveResult</span> <span class="o">=</span> <span class="nx">moveTo</span><span class="p">.</span><span class="nx">lastMoveResult</span><span class="p">;</span>
+</pre></div>
+
+<p>Return <code>true</code> if chess is moved by <code>moveTo.moveTo()</code>, <code>moveTo.moveToward()</code>, or <code>moveTo.moveToRandomNeighbor()</code></p>
+<h4 id="destination">Destination<a class="headerlink" href="#destination" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">destinationTileX</span> <span class="o">=</span> <span class="nx">moveTo</span><span class="p">.</span><span class="nx">destinationTileX</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">destinationTileY</span> <span class="o">=</span> <span class="nx">moveTo</span><span class="p">.</span><span class="nx">destinationTileY</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">destinationDirection</span> <span class="o">=</span> <span class="nx">moveTo</span><span class="p">.</span><span class="nx">destinationDirection</span><span class="p">;</span>
+</pre></div>
+
+<h3 id="stop-moving">Stop moving<a class="headerlink" href="#stop-moving" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">moveTo</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
+</pre></div>
+
+<h3 id="enable">Enable<a class="headerlink" href="#enable" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Enable/resume (default)
+    <div class="codehilite"><pre><span></span><span class="nx">moveTo</span><span class="p">.</span><span class="nx">setEnable</span><span class="p">();</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">moveTo</span><span class="p">.</span><span class="nx">enable</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
 </pre></div></li>
-<li>For when you absolutely know this Set won't be modified during the iteration.
-    <div class="codehilite"><pre><span></span><span class="nx">set</span><span class="p">.</span><span class="nx">iterate</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// return false;  // return false to cancel iteration</span>
-<span class="p">},</span> <span class="nx">scope</span><span class="p">)</span>
+<li>Disable/pause
+    <div class="codehilite"><pre><span></span><span class="nx">moveTo</span><span class="p">.</span><span class="nx">setEnable</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">moveTo</span><span class="p">.</span><span class="nx">enable</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
 </pre></div></li>
 </ul>
-<h3 id="set-operations">Set operations<a class="headerlink" href="#set-operations" title="Permanent link">&para;</a></h3>
+<h3 id="set-speed">Set speed<a class="headerlink" href="#set-speed" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">moveTo</span><span class="p">.</span><span class="nx">setSpeed</span><span class="p">(</span><span class="nx">speed</span><span class="p">);</span>
+<span class="c1">// moveTo.speed = speed;</span>
+</pre></div>
+
+<h3 id="set-rotate-to-target">Set rotate-to-target<a class="headerlink" href="#set-rotate-to-target" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">moveTo</span><span class="p">.</span><span class="nx">setRotateToTarget</span><span class="p">(</span><span class="nx">rotateToTarget</span><span class="p">);</span>
+</pre></div>
+
 <ul>
-<li>C = A | B
-   <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">setC</span> <span class="o">=</span> <span class="nx">setA</span><span class="p">.</span><span class="nx">union</span><span class="p">(</span><span class="nx">setB</span><span class="p">);</span>
+<li><code>rotateToTarget</code> : Set true to change angle towards target</li>
+</ul>
+<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
+<ul>
+<li>On reached target
+    <div class="codehilite"><pre><span></span><span class="nx">moveTo</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">moveTo</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">){});</span>
+<span class="c1">// moveTo.once(&#39;complete&#39;, function(moveTo, gameObject){});</span>
 </pre></div></li>
-<li>C = A &amp; B
-   <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">setC</span> <span class="o">=</span> <span class="nx">setA</span><span class="p">.</span><span class="nx">intersect</span><span class="p">(</span><span class="nx">setB</span><span class="p">);</span>
-</pre></div></li>
-<li>C = A - B
-   <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">setC</span> <span class="o">=</span> <span class="nx">setA</span><span class="p">.</span><span class="nx">difference</span><span class="p">(</span><span class="nx">setB</span><span class="p">);</span>
+</ul>
+<h3 id="status">Status<a class="headerlink" href="#status" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Is moving
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isRunning</span> <span class="o">=</span> <span class="nx">moveTo</span><span class="p">.</span><span class="nx">isRunning</span><span class="p">;</span>
 </pre></div></li>
 </ul>
                 
@@ -3220,7 +3374,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../datamanager/" title="Data manager" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../board-chessdata/" title="Chess data" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -3229,19 +3383,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Data manager
+                Chess data
               </span>
             </div>
           </a>
         
         
-          <a href="../array-filter/" title="Filter/Map" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../board-pathfinder/" title="Path finder" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Filter/Map
+                Path finder
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

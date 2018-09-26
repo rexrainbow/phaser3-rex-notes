@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/structs-set/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/board-pathfinder/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Set - Notes of Phaser 3</title>
+        <title>Path finder - Notes of Phaser 3</title>
       
     
     
@@ -128,7 +128,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Set
+                Path finder
               </span>
             
           
@@ -1863,12 +1863,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
     
     <label class="md-nav__link" for="nav-10">
       Data
@@ -1896,121 +1894,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Set
-      </label>
-    
-    <a href="./" title="Set" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../structs-set/" title="Set" class="md-nav__link">
       Set
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#add-an-element" title="Add an element" class="md-nav__link">
-    Add an element
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#remove-an-element" title="Remove an element" class="md-nav__link">
-    Remove an element
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#remove-all-elements" title="Remove all elements" class="md-nav__link">
-    Remove all elements
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#has-element" title="Has element" class="md-nav__link">
-    Has element
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-array" title="Get array" class="md-nav__link">
-    Get array
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#element-counts" title="Element counts" class="md-nav__link">
-    Element counts
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#for-each-element" title="For each element" class="md-nav__link">
-    For each element
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set-operations" title="Set operations" class="md-nav__link">
-    Set operations
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -2707,10 +2595,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-14" type="checkbox" id="nav-14">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-14" type="checkbox" id="nav-14" checked>
     
     <label class="md-nav__link" for="nav-14">
       Board
@@ -2810,11 +2700,106 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../board-pathfinder/" title="Path finder" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Path finder
+      </label>
+    
+    <a href="./" title="Path finder" class="md-nav__link md-nav__link--active">
       Path finder
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-scene-plugin" title="Install scene plugin" class="md-nav__link">
+    Install scene plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-instance" title="Create instance" class="md-nav__link">
+    Create instance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#find-moveable-area" title="Find moveable area" class="md-nav__link">
+    Find moveable area
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-shortest-path-to-a-moveable-tile" title="Get shortest path to a moveable tile" class="md-nav__link">
+    Get shortest path to a moveable tile
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#find-moving-path" title="Find moving path" class="md-nav__link">
+    Find moving path
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -3041,12 +3026,26 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#usage" title="Usage" class="md-nav__link">
     Usage
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-scene-plugin" title="Install scene plugin" class="md-nav__link">
+    Install scene plugin
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#create-instance" title="Create instance" class="md-nav__link">
@@ -3056,57 +3055,28 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-an-element" title="Add an element" class="md-nav__link">
-    Add an element
+  <a href="#find-moveable-area" title="Find moveable area" class="md-nav__link">
+    Find moveable area
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-shortest-path-to-a-moveable-tile" title="Get shortest path to a moveable tile" class="md-nav__link">
+    Get shortest path to a moveable tile
   </a>
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#remove-an-element" title="Remove an element" class="md-nav__link">
-    Remove an element
-  </a>
+      </ul>
+    </nav>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#remove-all-elements" title="Remove all elements" class="md-nav__link">
-    Remove all elements
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#has-element" title="Has element" class="md-nav__link">
-    Has element
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-array" title="Get array" class="md-nav__link">
-    Get array
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#element-counts" title="Element counts" class="md-nav__link">
-    Element counts
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#for-each-element" title="For each element" class="md-nav__link">
-    For each element
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set-operations" title="Set operations" class="md-nav__link">
-    Set operations
+  <a href="#find-moving-path" title="Find moving path" class="md-nav__link">
+    Find moving path
   </a>
   
 </li>
@@ -3132,74 +3102,110 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/structs-set.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/board-pathfinder.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Set</h1>
+                  <h1>Path finder</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>A collection of unique elements, built-in data structure of phaser.</p>
+<p>Find moveable area or moving path, chess behavior of Board system.</p>
 <ul>
-<li>Author: Richard Davey</li>
+<li>Author: Rex</li>
+<li>Behavior of chess</li>
 </ul>
+<h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
+<p>Included in <a href="../board/#source-code">board plugin</a>.</p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/board-pathfinder">Sample code</a></p>
+<h3 id="install-scene-plugin">Install scene plugin<a class="headerlink" href="#install-scene-plugin" title="Permanent link">&para;</a></h3>
+<p>Included in board plugin.</p>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">set</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Structs</span><span class="p">.</span><span class="nx">Set</span><span class="p">();</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">pathFinder</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">pathFinder</span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="p">{</span>
+    <span class="c1">// blockerTest: false,</span>
+
+    <span class="c1">// ** cost **</span>
+    <span class="c1">// cost: 1,   // constant cost</span>
+    <span class="c1">// costCallback: undefined,</span>
+    <span class="c1">// costCallbackScope: undefined</span>
+    <span class="c1">// cacheCost: true,</span>
+
+    <span class="c1">// pathMode: 10,  // A*</span>
+    <span class="c1">// weight: 10,   // weight for A* searching mode</span>
+<span class="p">})</span>
 </pre></div>
 
-<p>or</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">set</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Structs</span><span class="p">.</span><span class="nx">Set</span><span class="p">(</span><span class="nx">elements</span><span class="p">);</span>
-</pre></div>
-
-<h3 id="add-an-element">Add an element<a class="headerlink" href="#add-an-element" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">set</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="nx">element</span><span class="p">);</span>
-</pre></div>
-
-<h3 id="remove-an-element">Remove an element<a class="headerlink" href="#remove-an-element" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">set</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="nx">element</span><span class="p">);</span>
-</pre></div>
-
-<h3 id="remove-all-elements">Remove all elements<a class="headerlink" href="#remove-all-elements" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">set</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
-</pre></div>
-
-<h3 id="has-element">Has element<a class="headerlink" href="#has-element" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">set</span><span class="p">.</span><span class="nx">contains</span><span class="p">(</span><span class="nx">element</span><span class="p">);</span>
-</pre></div>
-
-<h3 id="get-array">Get array<a class="headerlink" href="#get-array" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">elements</span> <span class="o">=</span> <span class="nx">set</span><span class="p">.</span><span class="nx">getArray</span><span class="p">();</span>
-</pre></div>
-
-<h3 id="element-counts">Element counts<a class="headerlink" href="#element-counts" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">size</span> <span class="o">=</span> <span class="nx">set</span><span class="p">.</span><span class="nx">size</span><span class="p">;</span>
-</pre></div>
-
-<h3 id="for-each-element">For each element<a class="headerlink" href="#for-each-element" title="Permanent link">&para;</a></h3>
 <ul>
-<li>For when you know this Set will be modified during the iteration.
-    <div class="codehilite"><pre><span></span><span class="nx">set</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// return false;  // return false to cancel iteration</span>
-<span class="p">},</span> <span class="nx">scope</span><span class="p">)</span>
-</pre></div></li>
-<li>For when you absolutely know this Set won't be modified during the iteration.
-    <div class="codehilite"><pre><span></span><span class="nx">set</span><span class="p">.</span><span class="nx">iterate</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">element</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// return false;  // return false to cancel iteration</span>
-<span class="p">},</span> <span class="nx">scope</span><span class="p">)</span>
+<li><code>blockerTest</code> : Set <code>true</code> to test <a href="../board-chessdata/#blocker">blocker property</a> in cost function.</li>
+<li>Cost function<ul>
+<li><code>cost</code> : A constant cost for each non-blocked tile</li>
+<li><code>costCallback</code>, <code>costCallbackScope</code> :  Get cost via callback
+    <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">curTile</span><span class="p">,</span> <span class="nx">preTile</span><span class="p">,</span> <span class="nx">board</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">cost</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div></li>
 </ul>
-<h3 id="set-operations">Set operations<a class="headerlink" href="#set-operations" title="Permanent link">&para;</a></h3>
-<ul>
-<li>C = A | B
-   <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">setC</span> <span class="o">=</span> <span class="nx">setA</span><span class="p">.</span><span class="nx">union</span><span class="p">(</span><span class="nx">setB</span><span class="p">);</span>
-</pre></div></li>
-<li>C = A &amp; B
-   <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">setC</span> <span class="o">=</span> <span class="nx">setA</span><span class="p">.</span><span class="nx">intersect</span><span class="p">(</span><span class="nx">setB</span><span class="p">);</span>
-</pre></div></li>
-<li>C = A - B
-   <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">setC</span> <span class="o">=</span> <span class="nx">setA</span><span class="p">.</span><span class="nx">difference</span><span class="p">(</span><span class="nx">setB</span><span class="p">);</span>
-</pre></div></li>
+</li>
+<li><code>pathMode</code><ul>
+<li>Shortest path<ul>
+<li><code>'random'</code>, or <code>0</code></li>
+<li><code>'diagonal'</code>, or <code>1</code></li>
+<li><code>'straight'</code>, or <code>2</code></li>
+<li><code>'line'</code>, or <code>3</code></li>
 </ul>
+</li>
+<li>A* path<ul>
+<li><code>'A*'</code>, or <code>10</code></li>
+<li><code>'A*-random'</code>, or <code>11</code></li>
+<li><code>'A*-line'</code>, or <code>12</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>weight</code> : Weight parameter for A* searching mode</li>
+<li><code>costCache</code> : Set <code>true</code></li>
+</ul>
+<h3 id="find-moveable-area">Find moveable area<a class="headerlink" href="#find-moveable-area" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tileXYArray</span> <span class="o">=</span> <span class="nx">pathFinder</span><span class="p">.</span><span class="nx">findArea</span><span class="p">(</span><span class="nx">movingPoints</span><span class="p">);</span>
+<span class="c1">// var out = pathFinder.findArea(movingPoints, out);</span>
+</pre></div>
+
+<ul>
+<li><code>tileXYArray</code> : An array of moveable tile positions <code>{x,y,pathCost}</code></li>
+</ul>
+<h4 id="get-shortest-path-to-a-moveable-tile">Get shortest path to a moveable tile<a class="headerlink" href="#get-shortest-path-to-a-moveable-tile" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tileXYArray</span> <span class="o">=</span> <span class="nx">pathFinder</span><span class="p">.</span><span class="nx">getPath</span><span class="p">(</span><span class="nx">endTileXY</span><span class="p">);</span>
+</pre></div>
+
+<ul>
+<li><code>endTileXY</code> : Tile position of moveable area in last result of <code>pathFinder.findArea()</code></li>
+<li><code>tileXYArray</code> : Moving path in an array of tile positions <code>{x,y,pathCost}</code><ul>
+<li>Uses <a href="../board-moveto/">moveTo behavior</a> to move chess along path.</li>
+</ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Path mode</p>
+<ul>
+<li>Path info of each tile is calculated during <code>pathFinder.findArea()</code></li>
+</ul>
+</div>
+<h3 id="find-moving-path">Find moving path<a class="headerlink" href="#find-moving-path" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tileXYArray</span> <span class="o">=</span> <span class="nx">pathFinder</span><span class="p">.</span><span class="nx">findPath</span><span class="p">(</span><span class="nx">endTileXY</span><span class="p">);</span>
+</pre></div>
+
+<ul>
+<li><code>endTileXY</code> : Tile position</li>
+<li><code>tileXYArray</code> : Moving path in an array of tile positions <code>{x,y,pathCost}</code><ul>
+<li>Uses <a href="../board-moveto/">moveTo behavior</a> to move chess along path.</li>
+</ul>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Path mode</p>
+<ul>
+<li>Set <code>pathMode</code> to A* (<code>'A*'</code>, <code>'A*-random'</code>, or <code>'A*-line'</code>) to speed up calculating.</li>
+</ul>
+</div>
                 
                   
                 
@@ -3220,7 +3226,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../datamanager/" title="Data manager" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../board-moveto/" title="Move to" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -3229,19 +3235,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Data manager
+                Move to
               </span>
             </div>
           </a>
         
         
-          <a href="../array-filter/" title="Filter/Map" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../board-match/" title="Match" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Filter/Map
+                Match
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

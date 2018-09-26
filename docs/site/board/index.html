@@ -890,7 +890,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../shape-circle.md" title="Circle" class="md-nav__link">
+    <a href="../shape-circle/" title="Circle" class="md-nav__link">
       Circle
     </a>
   </li>
@@ -2670,8 +2670,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
+  <a href="#add-board-object" title="Add board object" class="md-nav__link">
+    Add board object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-class" title="Custom class" class="md-nav__link">
+    Custom class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#board-size" title="Board size" class="md-nav__link">
+    Board size
   </a>
   
 </li>
@@ -2756,6 +2770,27 @@
           <li class="md-nav__item">
   <a href="#neighobrs" title="Neighobrs" class="md-nav__link">
     Neighobrs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#empty-tile-position" title="Empty tile position" class="md-nav__link">
+    Empty tile position
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-all-chess" title="Get all chess" class="md-nav__link">
+    Get all chess
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#blocker" title="Blocker" class="md-nav__link">
+    Blocker
   </a>
   
 </li>
@@ -2855,6 +2890,42 @@
         
       </ul>
     </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../board-chessdata/" title="Chess data" class="md-nav__link">
+      Chess data
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../board-moveto/" title="Move to" class="md-nav__link">
+      Move to
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../board-pathfinder/" title="Path finder" class="md-nav__link">
+      Path finder
+    </a>
   </li>
 
         
@@ -3103,8 +3174,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
+  <a href="#add-board-object" title="Add board object" class="md-nav__link">
+    Add board object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-class" title="Custom class" class="md-nav__link">
+    Custom class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#board-size" title="Board size" class="md-nav__link">
+    Board size
   </a>
   
 </li>
@@ -3189,6 +3274,27 @@
           <li class="md-nav__item">
   <a href="#neighobrs" title="Neighobrs" class="md-nav__link">
     Neighobrs
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#empty-tile-position" title="Empty tile position" class="md-nav__link">
+    Empty tile position
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-all-chess" title="Get all chess" class="md-nav__link">
+    Get all chess
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#blocker" title="Blocker" class="md-nav__link">
+    Blocker
   </a>
   
 </li>
@@ -3284,7 +3390,7 @@
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </pre></div>
 
-<h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
+<h3 id="add-board-object">Add board object<a class="headerlink" href="#add-board-object" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Quad board
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">board</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">board</span><span class="p">({</span>
@@ -3319,6 +3425,52 @@
 <li><code>grid</code> : <a href="../board-quadgrid/">Quad grid</a> or <a href="../board-hexagongrid/">hexagon grid</a></li>
 <li><code>width</code> : Board width in tiles</li>
 <li><code>height</code> : Board height in tiles</li>
+</ul>
+<h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Define class
+    <div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">MyBoard</span> <span class="kr">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">Board</span><span class="p">.</span><span class="nx">Board</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
+            <span class="nx">grid</span><span class="o">:</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">quadGrid</span><span class="p">({</span>
+                <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="nx">cellWidth</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="nx">cellHeight</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+                <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;orthogonal&#39;</span>  <span class="c1">// &#39;orthogonal&#39;|&#39;isometric&#39;|&#39;staggered&#39;</span>
+            <span class="p">}),</span>
+            <span class="nx">width</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="nx">height</span><span class="o">:</span> <span class="mi">0</span>
+        <span class="p">});</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div></li>
+<li>Create instance
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">board</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyBoard</span><span class="p">(</span><span class="nx">scene</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h3 id="board-size">Board size<a class="headerlink" href="#board-size" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Width : Board width in tiles<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">width</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">board</span><span class="p">.</span><span class="nx">setBoardWidth</span><span class="p">(</span><span class="nx">width</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+</li>
+<li>Height : Board height in tiles<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">height</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">board</span><span class="p">.</span><span class="nx">setBoardHeight</span><span class="p">(</span><span class="nx">height</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+</li>
 </ul>
 <h3 id="add-chess">Add chess<a class="headerlink" href="#add-chess" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="nx">board</span><span class="p">.</span><span class="nx">addChess</span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">,</span> <span class="nx">tileZ</span><span class="p">,</span> <span class="nx">align</span><span class="p">);</span>
@@ -3498,6 +3650,71 @@
 <li><code>neighborTileXY</code> : Tile position <code>{x, y}</code> of neighbor. Retrun <code>null</code> if no neighbor there (i.e. source chess is at the edge of board.)</li>
 </ul>
 </li>
+<li>Get all directions of neighbor chess
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getNeighborTileXY</span><span class="p">(</span><span class="nx">srcTileXY</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
+<span class="c1">// var out = board.getNeighborTileXY(srcTileXY, null, out);</span>
+</pre></div><ul>
+<li><code>out</code> : Tile position array of all neighbors</li>
+</ul>
+</li>
+<li>Get neighbor chess
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">neighborChess</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getNeighborChess</span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="nx">direction</span><span class="p">);</span> <span class="c1">// neighborTileZ = tileZ of chess</span>
+<span class="c1">// var neighborChess = board.getNeighborChess(chess, direction, neighborTileZ);</span>
+</pre></div></li>
+<li>Get chess of all neighbors
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getNeighborChess</span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span> <span class="c1">// neighborTileZ = tileZ of chess</span>
+<span class="c1">// var out = board.getNeighborChess(chess, null, neighborTileZ);</span>
+</pre></div><ul>
+<li><code>out</code> : Chess array of all neighbors</li>
+</ul>
+</li>
+<li>Are 2 chess neighbors?
+   <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">areNeighbor</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">areNeighbors</span><span class="p">(</span><span class="nx">chessA</span><span class="p">,</span> <span class="nx">chessB</span><span class="p">);</span>
+</pre></div></li>
+<li><code>areNeighbor</code> : Return <code>true</code> if <code>chessA</code> and <code>chessB</code> are neighbors.</li>
+<li>Get direction between 2 tile positions
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">direction</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getNeighborTileDirection</span><span class="p">(</span><span class="nx">srcTile</span><span class="p">,</span> <span class="nx">neighborTileXY</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>direction</code> : Return <code>null</code> if these 2 tile positions are not neighbors.</li>
+</ul>
+</li>
+<li>Get direction between 2 chess
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">direction</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getNeighborChessDirection</span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="nx">neighborChess</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>direction</code> : Return <code>null</code> if these 2 chess are not neighbors.</li>
+</ul>
+</li>
+</ul>
+<h3 id="empty-tile-position">Empty tile position<a class="headerlink" href="#empty-tile-position" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get a random tile position which does not have any chess
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tileXY</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getRandomEmptyTileXY</span><span class="p">(</span><span class="nx">tileZ</span><span class="p">);</span>
+<span class="c1">// var out = board.getRandomEmptyTileXY(tileZ, out);</span>
+</pre></div><ul>
+<li><code>tileXY</code> : Tile position <code>{x, y}</code>, return <code>null</code> if all positions are occupied.</li>
+</ul>
+</li>
+<li>Get an array of tile position which does not have any chess
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tileXYArray</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getEmptyTileXYArray</span><span class="p">(</span><span class="nx">tileZ</span><span class="p">);</span>
+<span class="c1">// var out = board.getEmptyTileXYArray(tileZ, out);</span>
+</pre></div><ul>
+<li><code>tileXYArray</code> : An array of tile position</li>
+</ul>
+</li>
+</ul>
+<h3 id="get-all-chess">Get all chess<a class="headerlink" href="#get-all-chess" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">chessArray</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getAllChess</span><span class="p">();</span>
+</pre></div>
+
+<h3 id="blocker">Blocker<a class="headerlink" href="#blocker" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Set blocker property : See <a href="../board-chessdata/#blocker">chess data</a></li>
+<li>Has blocker at tile position (tileX, tileY, tileZ)
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">hasBlocker</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">hasBlocker</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">,</span> <span class="nx">tileZ</span><span class="p">);</span>
+</pre></div></li>
+<li>Any chess at (tileX, tileY) has <code>blocker</code> property
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">hasBlocker</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">hasBlocker</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">);</span>
+</pre></div></li>
 </ul>
 <h3 id="touch-events">Touch events<a class="headerlink" href="#touch-events" title="Permanent link">&para;</a></h3>
 <h4 id="set-interactive">Set interactive<a class="headerlink" href="#set-interactive" title="Permanent link">&para;</a></h4>
