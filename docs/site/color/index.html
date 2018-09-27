@@ -2273,6 +2273,47 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#color-object" title="Color object" class="md-nav__link">
+    Color object
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-color-object" title="create color object" class="md-nav__link">
+    create color object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-color" title="Set color" class="md-nav__link">
+    Set color
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clone" title="Clone" class="md-nav__link">
+    Clone
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#properties" title="Properties" class="md-nav__link">
+    Properties
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3013,6 +3054,47 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#color-object" title="Color object" class="md-nav__link">
+    Color object
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-color-object" title="create color object" class="md-nav__link">
+    create color object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-color" title="Set color" class="md-nav__link">
+    Set color
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#clone" title="Clone" class="md-nav__link">
+    Clone
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#properties" title="Properties" class="md-nav__link">
+    Properties
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3066,7 +3148,7 @@
 </ul>
 </li>
 <li>RGB string to color
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Display</span><span class="p">.</span><span class="nx">Color</span><span class="p">.</span><span class="nx">RGBStringToColor</span><span class="p">(</span><span class="nx">rgb</span><span class="p">);</span> 
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Display</span><span class="p">.</span><span class="nx">Color</span><span class="p">.</span><span class="nx">RGBStringToColor</span><span class="p">(</span><span class="nx">rgb</span><span class="p">);</span>
 </pre></div><ul>
 <li>rgb : <code>'rgb(r,g,b)'</code>, or <code>'rgba(r,g,b,a)'</code><ul>
 <li>r, g, b : 0 ~ 255</li>
@@ -3083,12 +3165,167 @@
 </li>
 </ul>
 <h3 id="hsv-color-wheel">HSV color wheel<a class="headerlink" href="#hsv-color-wheel" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">colorArray</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Display</span><span class="p">.</span><span class="nx">Color</span><span class="p">.</span><span class="nx">HSVColorWheel</span><span class="p">(</span><span class="nx">s</span><span class="p">,</span> <span class="nx">v</span><span class="p">);</span>
+<ol>
+<li>Create color array
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">colorArray</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Display</span><span class="p">.</span><span class="nx">Color</span><span class="p">.</span><span class="nx">HSVColorWheel</span><span class="p">(</span><span class="nx">s</span><span class="p">,</span> <span class="nx">v</span><span class="p">);</span>
+</pre></div></li>
+<li>Get color
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">colorArray</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">color</span><span class="p">;</span>  <span class="c1">// i : 0 ~ 359</span>
+</pre></div></li>
+</ol>
+<h3 id="color-object">Color object<a class="headerlink" href="#color-object" title="Permanent link">&para;</a></h3>
+<h4 id="create-color-object">create color object<a class="headerlink" href="#create-color-object" title="Permanent link">&para;</a></h4>
+<p><div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Display</span><span class="p">.</span><span class="nx">Color</span><span class="p">(</span><span class="nx">red</span><span class="p">,</span> <span class="nx">green</span><span class="p">,</span> <span class="nx">blue</span><span class="p">);</span> <span class="c1">// alpha = 255</span>
+<span class="c1">// var color = new Phaser.Display.Color(red, green, blue, alpha);</span>
+</pre></div>
+- <code>red</code>, <code>green</code>, <code>blue</code>, <code>alpha</code>: 0 ~ 255</p>
+<h4 id="set-color">Set color<a class="headerlink" href="#set-color" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Set color
+    <div class="codehilite"><pre><span></span><span class="nx">color</span><span class="p">.</span><span class="nx">setTo</span><span class="p">(</span><span class="nx">red</span><span class="p">,</span> <span class="nx">green</span><span class="p">,</span> <span class="nx">blue</span><span class="p">);</span>  <span class="c1">// alpha = 255</span>
+<span class="c1">// color.setTo(red, green, blue, alpha);</span>
+</pre></div><ul>
+<li><code>red</code>, <code>green</code>, <code>blue</code>, <code>alpha</code>: 0 ~ 255</li>
+</ul>
+</li>
+<li>Set color in GL values
+    <div class="codehilite"><pre><span></span><span class="nx">color</span><span class="p">.</span><span class="nx">setGLTo</span><span class="p">(</span><span class="nx">red</span><span class="p">,</span> <span class="nx">green</span><span class="p">,</span> <span class="nx">blue</span><span class="p">);</span>  <span class="c1">// alpha = 1</span>
+<span class="c1">// color.setTo(red, green, blue, alpha);</span>
+</pre></div><ul>
+<li><code>red</code>, <code>green</code>, <code>blue</code>, <code>alpha</code>: 0 ~ 1</li>
+</ul>
+</li>
+<li>Set color from color object
+    <div class="codehilite"><pre><span></span><span class="nx">color</span><span class="p">.</span><span class="nx">setFromRGB</span><span class="p">(</span><span class="nx">color</span><span class="p">);</span>
+</pre></div><ul>
+<li>color :
+    <div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nx">r</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">g</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">b</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="c1">// a: 0</span>
+<span class="p">}</span>
+</pre></div></li>
+</ul>
+</li>
+<li>Set color from HSV
+    <div class="codehilite"><pre><span></span><span class="nx">color</span><span class="p">.</span><span class="nx">setFromHSV</span><span class="p">(</span><span class="nx">h</span><span class="p">,</span> <span class="nx">s</span><span class="p">,</span> <span class="nx">v</span><span class="p">);</span>
+</pre></div></li>
+<li>Set to transparent ()
+    <div class="codehilite"><pre><span></span><span class="nx">color</span><span class="p">.</span><span class="nx">transparent</span><span class="p">();</span>
+</pre></div><ul>
+<li>Set (red, green, blue) to <code>0</code></li>
+</ul>
+</li>
+<li>Set to gray color
+   <div class="codehilite"><pre><span></span><span class="nx">color</span><span class="p">.</span><span class="nx">gray</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+</pre></div></li>
+<li>Set (red, green, blue) to value</li>
+<li>Set to a random color
+    <div class="codehilite"><pre><span></span><span class="nx">color</span><span class="p">.</span><span class="nx">random</span><span class="p">();</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">color</span><span class="p">.</span><span class="nx">random</span><span class="p">(</span><span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span>
+</pre></div></li>
+<li>Set to random gray
+    <div class="codehilite"><pre><span></span><span class="nx">color</span><span class="p">.</span><span class="nx">randomGray</span><span class="p">();</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">color</span><span class="p">.</span><span class="nx">randomGray</span><span class="p">(</span><span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span>
+</pre></div></li>
+<li>Set red/green/blue/alpha channel : 0 ~ 255
+    <div class="codehilite"><pre><span></span><span class="nx">color</span><span class="p">.</span><span class="nx">red</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+<span class="c1">// color.red += value;</span>
+<span class="nx">color</span><span class="p">.</span><span class="nx">green</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+<span class="c1">// color.green += value;</span>
+<span class="nx">color</span><span class="p">.</span><span class="nx">blue</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+<span class="c1">// color.blue += value;</span>
+<span class="nx">color</span><span class="p">.</span><span class="nx">alpha</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+<span class="c1">// color.alpha += value;</span>
+</pre></div>
+    -</li>
+<li>Set H/S/V channel : 0 ~ 1
+    <div class="codehilite"><pre><span></span><span class="nx">color</span><span class="p">.</span><span class="nx">h</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+<span class="c1">// color.h += value;</span>
+<span class="nx">color</span><span class="p">.</span><span class="nx">s</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+<span class="c1">// color.s += value;</span>
+<span class="nx">color</span><span class="p">.</span><span class="nx">v</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+<span class="c1">// color.v += value;</span>
+</pre></div></li>
+<li>Set normalized red, green, blue, alpha : 0 ~ 1
+    <div class="codehilite"><pre><span></span><span class="nx">color</span><span class="p">.</span><span class="nx">redGL</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+<span class="c1">// color.redGL += value;</span>
+<span class="nx">color</span><span class="p">.</span><span class="nx">greenGL</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+<span class="c1">// color.greenGL += value;</span>
+<span class="nx">color</span><span class="p">.</span><span class="nx">blueGL</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+<span class="c1">// color.blueGL += value;</span>
+<span class="nx">color</span><span class="p">.</span><span class="nx">alphaGL</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+<span class="c1">// color.alphaGL += value;</span>
+</pre></div></li>
+<li>Set brighten
+    <div class="codehilite"><pre><span></span><span class="nx">color</span><span class="p">.</span><span class="nx">brighten</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>value</code> : Percentage, 0 ~ 100</li>
+</ul>
+</li>
+<li>Saturate : Increase the saturation (S) of this Color by the percentage amount given.
+    <div class="codehilite"><pre><span></span><span class="nx">color</span><span class="p">.</span><span class="nx">saturate</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>value</code> : Percentage, 0 ~ 100</li>
+</ul>
+</li>
+<li>Desaturate : Decrease the saturation (S) of this Color by the percentage amount given.
+    <div class="codehilite"><pre><span></span><span class="nx">color</span><span class="p">.</span><span class="nx">desaturate</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>value</code> : Percentage, 0 ~ 100</li>
+</ul>
+</li>
+<li>Lighten : Increase the lightness (V) of this Color by the percentage amount given.
+    <div class="codehilite"><pre><span></span><span class="nx">color</span><span class="p">.</span><span class="nx">lighten</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>value</code> : Percentage, 0 ~ 100</li>
+</ul>
+</li>
+<li>Darken : Decrease the lightness (V) of this Color by the percentage amount given.
+    <div class="codehilite"><pre><span></span><span class="nx">color</span><span class="p">.</span><span class="nx">darken</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>value</code> : Percentage, 0 ~ 100</li>
+</ul>
+</li>
+</ul>
+<h4 id="clone">Clone<a class="headerlink" href="#clone" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">newColor</span> <span class="o">=</span> <span class="nx">color</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
 </pre></div>
 
-<p>Get color
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">colorArray</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">color</span><span class="p">;</span>  <span class="c1">// i : 0 ~ 359</span>
-</pre></div></p>
+<h4 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h4>
+<ul>
+<li>RGB Color, not including the alpha channel
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="nx">color</span><span class="p">.</span><span class="nx">color</span><span class="p">;</span>
+</pre></div></li>
+<li>RGB Color, including the alpha channel.
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="nx">color</span><span class="p">.</span><span class="nx">color32</span><span class="p">;</span>
+</pre></div></li>
+<li>RGB color string which can be used in CSS color values.
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="nx">color</span><span class="p">.</span><span class="nx">rgba</span><span class="p">;</span>
+</pre></div></li>
+<li>Red, green, blue, alpha : 0 ~ 255
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">r</span> <span class="o">=</span> <span class="nx">color</span><span class="p">.</span><span class="nx">red</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">g</span> <span class="o">=</span> <span class="nx">color</span><span class="p">.</span><span class="nx">green</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="nx">color</span><span class="p">.</span><span class="nx">blue</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="nx">color</span><span class="p">.</span><span class="nx">alpha</span><span class="p">;</span>
+</pre></div></li>
+<li>H, S, V : 0 ~ 1
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">h</span> <span class="o">=</span> <span class="nx">color</span><span class="p">.</span><span class="nx">h</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="nx">color</span><span class="p">.</span><span class="nx">s</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">v</span> <span class="o">=</span> <span class="nx">color</span><span class="p">.</span><span class="nx">v</span><span class="p">;</span>
+</pre></div></li>
+<li>Normalized red, green, blue, alpha : 0 ~ 1
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">r</span> <span class="o">=</span> <span class="nx">color</span><span class="p">.</span><span class="nx">redGL</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">g</span> <span class="o">=</span> <span class="nx">color</span><span class="p">.</span><span class="nx">greenGL</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="nx">color</span><span class="p">.</span><span class="nx">blueGL</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="nx">color</span><span class="p">.</span><span class="nx">alphaGL</span><span class="p">;</span>
+</pre></div></li>
+</ul>
                 
                   
                 

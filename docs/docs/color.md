@@ -114,9 +114,101 @@ var color = new Phaser.Display.Color(red, green, blue); // alpha = 255
     ```javascript
     color.randomGray(min, max);
     ```
+- Set red/green/blue/alpha channel : 0 ~ 255
+    ```javascript
+    color.red = value;
+    // color.red += value;
+    color.green = value;
+    // color.green += value;
+    color.blue = value;
+    // color.blue += value;
+    color.alpha = value;
+    // color.alpha += value;
+    ```
+    -
+- Set H/S/V channel : 0 ~ 1
+    ```javascript
+    color.h = value;
+    // color.h += value;
+    color.s = value;
+    // color.s += value;
+    color.v = value;
+    // color.v += value;
+    ```
+- Set normalized red, green, blue, alpha : 0 ~ 1
+    ```javascript
+    color.redGL = value;
+    // color.redGL += value;
+    color.greenGL = value;
+    // color.greenGL += value;
+    color.blueGL = value;
+    // color.blueGL += value;
+    color.alphaGL = value;
+    // color.alphaGL += value;
+    ```
+- Set brighten
+    ```javascript
+    color.brighten(value);
+    ```
+    - `value` : Percentage, 0 ~ 100
+- Saturate : Increase the saturation (S) of this Color by the percentage amount given.
+    ```javascript
+    color.saturate(value);
+    ```
+    - `value` : Percentage, 0 ~ 100
+- Desaturate : Decrease the saturation (S) of this Color by the percentage amount given.
+    ```javascript
+    color.desaturate(value);
+    ```
+    - `value` : Percentage, 0 ~ 100
+- Lighten : Increase the lightness (V) of this Color by the percentage amount given.
+    ```javascript
+    color.lighten(value);
+    ```
+    - `value` : Percentage, 0 ~ 100
+- Darken : Decrease the lightness (V) of this Color by the percentage amount given.
+    ```javascript
+    color.darken(value);
+    ```
+    - `value` : Percentage, 0 ~ 100
 
 #### Clone
 
 ```javascript
 var newColor = color.clone();
 ```
+
+#### Properties
+
+- RGB Color, not including the alpha channel
+    ```javascript
+    var c = color.color;
+    ```
+- RGB Color, including the alpha channel.
+    ```javascript
+    var c = color.color32;
+    ```
+- RGB color string which can be used in CSS color values.
+    ```javascript
+    var c = color.rgba;
+    ```
+- Red, green, blue, alpha : 0 ~ 255
+    ```javascript
+    var r = color.red;
+    var g = color.green;
+    var b = color.blue;
+    var a = color.alpha;
+    ```
+- H, S, V : 0 ~ 1
+    ```javascript
+    var h = color.h;
+    var s = color.s;
+    var v = color.v;
+    ```
+- Normalized red, green, blue, alpha : 0 ~ 1
+    ```javascript
+    var r = color.redGL;
+    var g = color.greenGL;
+    var b = color.blueGL;
+    var a = color.alphaGL;
+    ```

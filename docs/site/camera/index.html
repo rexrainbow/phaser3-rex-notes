@@ -3804,6 +3804,9 @@ An invisible camera will not render anything and will skip input tests.</p>
 <li>Float
     <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat1</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">);</span>
 </pre></div></li>
+<li>uniform1fv
+    <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat1v</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">);</span>
+</pre></div></li>
 <li>Int
     <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setInt1</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">);</span>
 </pre></div></li>
@@ -3812,6 +3815,9 @@ An invisible camera will not render anything and will skip input tests.</p>
 <li>Property with 2 values<ul>
 <li>Float
     <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat2</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">);</span>
+</pre></div></li>
+<li>uniform2fv
+    <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat2v</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">);</span>
 </pre></div></li>
 <li>Int
     <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setInt2</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">);</span>
@@ -3822,6 +3828,9 @@ An invisible camera will not render anything and will skip input tests.</p>
 <li>Float
     <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat3</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">);</span>
 </pre></div></li>
+<li>uniform3fv
+    <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat2v</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">);</span>
+</pre></div></li>
 <li>Int
     <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setInt3</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">);</span>
 </pre></div></li>
@@ -3831,6 +3840,9 @@ An invisible camera will not render anything and will skip input tests.</p>
 <li>Float
     <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat4</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">,</span> <span class="nx">value3</span><span class="p">);</span>
 </pre></div></li>
+<li>uniform4fv
+    <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat2v</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">,</span> <span class="nx">value3</span><span class="p">);</span>
+</pre></div></li>
 <li>Int
     <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setInt4</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">,</span> <span class="nx">value3</span><span class="p">);</span>
 </pre></div></li>
@@ -3839,7 +3851,15 @@ An invisible camera will not render anything and will skip input tests.</p>
 </ul>
 </li>
 </ol>
-<p>WebGL only</p>
+<p>Other methods :</p>
+<ul>
+<li>Change filter
+    <div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">setPipeline</span><span class="p">(</span><span class="nx">filter</span><span class="p">);</span>
+</pre></div></li>
+<li>Clear filter
+    <div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">clearRenderToTexture</span><span class="p">();</span>
+</pre></div></li>
+</ul>
 <h3 id="set-background-color">Set background color<a class="headerlink" href="#set-background-color" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">setBackgroundColor</span><span class="p">(</span><span class="nx">color</span><span class="p">);</span>
 </pre></div>

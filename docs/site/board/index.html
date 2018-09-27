@@ -2829,6 +2829,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#other-properties" title="Other properties" class="md-nav__link">
+    Other properties
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3333,6 +3340,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#other-properties" title="Other properties" class="md-nav__link">
+    Other properties
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3762,11 +3776,27 @@
 <span class="p">})</span>
 </pre></div><ul>
 <li><code>pointer</code> : <a href="../touchevents/#properties-of-point">Touch pointer</a></li>
-<li><code>gameObject</code> : Game object at touched (tileX, tileY)</li>
+<li><code>gameObject</code> : Game object at touched (tileX, tileY)
+or
+<div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;board.pointerdown&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">})</span>
+</pre></div></li>
 </ul>
 </li>
 <li>Pointer up at a chess
     <div class="codehilite"><pre><span></span><span class="nx">board</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;gameobjectup&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">})</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;board.pointerup&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">})</span>
+</pre></div></li>
+<li>Pointer move to another chess
+    <div class="codehilite"><pre><span></span><span class="nx">board</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;gameobjectmove&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">})</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;board.pointermove&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span>
 <span class="p">})</span>
 </pre></div></li>
 </ul>
@@ -3778,6 +3808,12 @@
 </pre></div></li>
 <li>Draw grid polygon on <a href="../graphics/#lines">graphics object</a>
     <div class="codehilite"><pre><span></span><span class="nx">graphics</span><span class="p">.</span><span class="nx">strokePoints</span><span class="p">(</span><span class="nx">poly</span><span class="p">.</span><span class="nx">points</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Scene
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">scene</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">scene</span><span class="p">;</span>
 </pre></div></li>
 </ul>
                 

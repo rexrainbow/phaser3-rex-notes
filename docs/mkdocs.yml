@@ -163,7 +163,6 @@ nav:
     - Chess data: board-chessdata.md
     - Move to: board-moveto.md
     - Path finder: board-pathfinder.md
-    - Monopoly: board-monopoly.md
     - Match: board-match.md  
 - Storage:
     - Offline:
