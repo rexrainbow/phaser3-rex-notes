@@ -58,7 +58,7 @@ var txt = scene.make.text({
         left: 64,
         right: 16,
         top: 20,
-        bottom: 40        
+        bottom: 40
         //x: 32,    // 32px padding on the left/right
         //y: 16     // 16px padding on the top/bottom
     },
@@ -180,6 +180,14 @@ txt.setShadowColor(color);
 txt.setShadowBlur(blur);
 txt.setShadowStroke(enabled);
 txt.setShadowFill(enabled);
+```
+
+### Set line spacing
+
+This value is *added* to the height of the font when calculating the overall line height.
+
+```javascript
+txt.setLineSpacing(value);
 ```
 
 ### Set padding

@@ -35,13 +35,13 @@ Built-in touch/mouse events of phaser.
     ```
 - On touch game object start
     ```javascript
-    gameObject.setInteractive().on('pointerdown', function(pointer, localX, localY, camera){
+    gameObject.setInteractive().on('pointerdown', function(pointer, localX, localY, event){
         // ...
     })
     ```
 - On touch game object end
     ```javascript
-    gameObject.setInteractive().on('pointerup', function(pointer, localX, localY, camera){
+    gameObject.setInteractive().on('pointerup', function(pointer, localX, localY, event){
         // ...
     })
     ```
@@ -141,31 +141,41 @@ If set to `false` it will emit events from all Game Objects below a Pointer, not
 
 ### Touch events
 
-- Events to get **all** touched Game Objects
+1. Events on touched Game object
+    ```javascript
+    gameObject.on('pointerdown', function(pointer, localX, localY, event){ /* ... */ });
+    gameObject.on('pointerup', function(pointer, localX, localY, event){ /* ... */ });
+    gameObject.on('pointermove', function(pointer, localX, localY, event){ /* ... */ });
+    gameObject.on('pointerover', function(pointer, localX, localY, event){ /* ... */ });
+    gameObject.on('pointerout', function(pointer, event){ /* ... */ });
+    ```
+    - Cancel remaining touched events
+        ```javascript
+        function(pointer, localX, localY, event) {
+            event.stopPropagation();
+        }
+        ```
+1. Event on input plugin for each touched Game object
+    ```javascript
+    scene.input.on('gameobjectdown', function(pointer, gameObject, event){ /* ... */ });
+    scene.input.on('gameobjectup', function(pointer, gameObject, event){ /* ... */ });
+    scene.input.on('gameobjectmove', function(pointer, gameObject, event){ /* ... */ });
+    scene.input.on('gameobjectover', function(pointer, gameObject, event){ /* ... */ });
+    scene.input.on('gameobjectout', function(pointer, gameObject, event){ /* ... */ });
+    ```
+    - Cancel remaining touched events
+        ```javascript
+        function(pointer, gameObject, event) {
+            event.stopPropagation();
+        }
+        ```
+1. Events to get **all** touched Game Objects
     ```javascript
     scene.input.on('pointerdown', function(pointer, currentlyOver){ /* ... */ });
     scene.input.on('pointerup', function(pointer, currentlyOver){ /* ... */ });
     scene.input.on('pointermove', function(pointer, currentlyOver){ /* ... */ });
-
     scene.input.on('pointerover', function(pointer, justOver){ /* ... */ });
     scene.input.on('pointerout', function(pointer, justOut){ /* ... */ });
-    ```
-- Events to get touched Game object
-    ```javascript
-    gameObject.on('pointerdown', function(pointer, localX, localY, camera){ /* ... */ });
-    gameObject.on('pointerup', function(pointer, localX, localY){ /* ... */ });
-    gameObject.on('pointermove', function(pointer, localX, localY){ /* ... */ });
-    
-    gameObject.on('pointerover', function(pointer, localX, localY){ /* ... */ });
-    gameObject.on('pointerout', function(pointer){ /* ... */ });
-    ```
-    ```javascript
-    scene.input.on('gameobjectdown', function(pointer, gameObject){ /* ... */ });
-    scene.input.on('gameobjectup', function(pointer, gameObject){ /* ... */ });
-    scene.input.on('gameobjectmove', function(pointer, gameObject){ /* ... */ });
-    
-    scene.input.on('gameobjectover', function(pointer, gameObject){ /* ... */ });
-    scene.input.on('gameobjectout', function(pointer, gameObject){ /* ... */ });
     ```
 
 ### Dragging

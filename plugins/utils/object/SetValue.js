@@ -3,6 +3,9 @@ var isInValidKey = function (keys) {
 };
 
 var getEntry = function (target, keys, defaultEntry) {
+    if (defaultEntry === undefined) {
+        defaultEntry = {};
+    }
     var entry = target;
     if (isInValidKey(keys)) {
         //entry = root;
@@ -17,7 +20,7 @@ var getEntry = function (target, keys, defaultEntry) {
             if ((entry[key] == null) || (typeof (entry[key]) !== "object")) {
                 var newEntry;
                 if (i === cnt - 1) {
-                    newEntry = defaultEntry || {};
+                    newEntry = defaultEntry;
                 } else {
                     newEntry = {};
                 }

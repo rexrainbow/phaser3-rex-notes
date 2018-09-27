@@ -301,6 +301,12 @@ class TextStyle {
         return this.update(false);
     }
 
+    setLineSpacing(value) {
+        this.lineSpacing = value;
+
+        return this.update(false);
+    }
+
     setBackgroundColor(color) {
         this.backgroundColor = color;
 

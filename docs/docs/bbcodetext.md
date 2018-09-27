@@ -84,6 +84,7 @@ Default style
     maxLines: 0,
     fixedWidth: 0,
     fixedHeight: 0,
+    lineSpacing: 0,
     testString: '|MÉqgy',
     wrap: {
         mode: 'none'     // 0|'none'|1|'word'|2|'char'|'character'
@@ -207,6 +208,14 @@ txt.setUnderline(color, thinkness, ofset);
 txt.setUnderlineColor(color);
 txt.setUnderlineThinkness(thinkness);
 txt.setUnderlineOffset(ofset);
+```
+
+### Set line spacing
+
+This value is *added* to the height of the font when calculating the overall line height.
+
+```javascript
+txt.setLineSpacing(value);
 ```
 
 ### Set padding

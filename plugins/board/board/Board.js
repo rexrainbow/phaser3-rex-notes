@@ -35,6 +35,7 @@ import GetOppositeDirection from './GetOppositeDirection.js';
 import GetDistance from './GetDistance.js';
 import HasBlocker from './HasBlocker.js';
 import HasEdgeBlocker from './HasEdgeBlocker.js';
+import Offset from './Offset.js';
 import SetInteractive from './SetInteractive.js';
 import GetGridPolygon from './GetGridPolygon.js';
 
@@ -181,6 +182,7 @@ var methods = {
     getDistance: GetDistance,
     hasBlocker: HasBlocker,
     hasEdgeBlocker: HasEdgeBlocker,
+    offset: Offset,
     setInteractive: SetInteractive,
     getGridPolygon: GetGridPolygon,
 }

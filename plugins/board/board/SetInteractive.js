@@ -46,10 +46,10 @@ var onPointerDown = function (pointer) {
     var gameObject;
     for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
         gameObject = gameObjects[i];
-        this.emit('gameobjectdown', pointer, gameObject);
         if (gameObject.emit) {
             gameObject.emit('board.pointerdown', pointer);
         }
+        this.emit('gameobjectdown', pointer, gameObject);
     }
 
     var inputData = this.input;
@@ -78,10 +78,10 @@ var onPointerUp = function (pointer) {
     var gameObject;
     for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
         gameObject = gameObjects[i];
-        this.emit('gameobjectup', pointer, gameObject);
         if (gameObject.emit) {
             gameObject.emit('board.pointerup', pointer);
         }
+        this.emit('gameobjectup', pointer, gameObject);
     }
 };
 
@@ -111,10 +111,10 @@ var onPointerMove = function (pointer) {
     var gameObject;
     for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
         gameObject = gameObjects[i];
-        this.emit('gameobjectmove', pointer, gameObject);
         if (gameObject.emit) {
             gameObject.emit('board.pointermove', pointer);
         }
+        this.emit('gameobjectmove', pointer, gameObject);
     }
 
     var inputData = this.input;

@@ -1,5 +1,14 @@
 import BoardPlugin from 'rexPlugins/board-plugin.js';
 
+const TILESMAP =
+    `1,1,1,.,1,1,1
+1,.,1,.,1,.,1
+1,1,0,1,0,1,1
+.,.,1,.,1,.,.
+1,1,0,1,0,1,1 
+1,.,1,.,1,.,1
+1,1,1,.,1,1,1`;
+const Between = Phaser.Math.Between;
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -11,28 +20,22 @@ class Demo extends Phaser.Scene {
 
     create() {
         this.shapeTextureKey = 'shape';
-        var board = new Board(this);
+        var board = new Board(this, TILESMAP);
         var chessA = new ChessA(board, 0, 0);
 
+        var movingPointsTxt = this.add.text(0, 0, '');
         this.input.on('pointerdown', function (pointer) {
-            chessA.moveForward(4);
+            var movingPoints = Between(1, 6);
+            movingPointsTxt.setText(movingPoints)
+            chessA.moveForward(movingPoints);
         });
     }
 }
 
-const TILESMAP =
-    `1,1,1,.,1,1,1
-1,.,1,.,1,.,1
-1,1,0,1,0,1,1
-.,.,1,.,1,.,.
-1,1,0,1,0,1,1 
-1,.,1,.,1,.,1
-1,1,1,.,1,1,1`;
 const COLORMAP = [0x005500, 0x00AA00, 0x00FF00];
 class Board extends RexPlugins.Board.Board {
-    constructor(scene) {
+    constructor(scene, tilesMap) {
         var tiles = createTileMap(TILESMAP);
-
         // create board
         var config = {
             // grid: getHexagonGrid(scene),
@@ -105,6 +108,30 @@ class ChessA extends Phaser.GameObjects.Image {
             costCallbackScope: board
         });
         this.moveTo = scene.rexBoard.add.moveTo(this);
+
+        // private members
+        this.movingPathTiles = [];
+    }
+
+    showMovingPath(tileXYArray) {
+        this.hideMovingPath();
+        var tileXY;
+        var scene = this.scene,
+            board = this.rexChess.board;
+        for (var i = 0, cnt = tileXYArray.length; i < cnt; i++) {
+            tileXY = tileXYArray[i];
+            var image = scene.add.image(board.tileXYToWorldX(tileXY.x, tileXY.y), board.tileXYToWorldY(tileXY.x, tileXY.y), scene.shapeTextureKey)
+                .setScale(0.3)
+            this.movingPathTiles.push(image);
+        }
+    }
+
+    hideMovingPath() {
+        for (var i = 0, cnt = this.movingPathTiles.length; i < cnt; i++) {
+            this.movingPathTiles[i].destroy();
+        }
+        this.movingPathTiles.length = 0;
+        return this;
     }
 
     moveForward(movingPoints) {
@@ -113,6 +140,7 @@ class ChessA extends Phaser.GameObjects.Image {
         }
 
         var path = this.monopoly.getPath(movingPoints);
+        this.showMovingPath(path);
         this.moveAlongPath(path);
         return this;
     }

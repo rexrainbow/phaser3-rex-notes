@@ -11,7 +11,14 @@ class Demo extends Phaser.Scene {
 
     create() {
         this.shapeTextureKey = 'shape';
-        var board = new Board(this);
+        var config = {
+            grid: getHexagonGrid(this),
+            // grid: getQuadGrid(this),
+            width: 8,
+            height: 8,
+            // wrap: true
+        }
+        var board = new Board(this, config);
 
         // add some blockers
         for (var i = 0; i < 10; i++) {
@@ -21,34 +28,6 @@ class Demo extends Phaser.Scene {
         // add chess
         var chessA = new ChessA(board);
         chessA.wander();
-    }
-}
-
-class Board extends RexPlugins.Board.Board {
-    constructor(scene) {
-        // create board
-        var config = {
-            grid: getHexagonGrid(scene),
-            // grid: getQuadGrid(scene),
-            width: 8,
-            height: 8,
-            // wrap: true
-        }
-        super(scene, config);
-        // draw grid
-        var graphics = scene.add.graphics({
-            lineStyle: {
-                width: 1,
-                color: 0xffffff,
-                alpha: 1
-            }
-        });
-        this.forEachTileXY(function (tileXY, board) {
-            var poly = board.getGridPolygon(tileXY.x, tileXY.y);
-            graphics.strokePoints(poly.points, true);
-        })
-        // create grid texture
-        createGridPolygonTexture(this, scene.shapeTextureKey);
     }
 }
 
@@ -75,6 +54,27 @@ var getHexagonGrid = function (scene) {
     })
     return grid;
 };
+
+class Board extends RexPlugins.Board.Board {
+    constructor(scene, config) {
+        // create board
+        super(scene, config);
+        // draw grid
+        var graphics = scene.add.graphics({
+            lineStyle: {
+                width: 1,
+                color: 0xffffff,
+                alpha: 1
+            }
+        });
+        this.forEachTileXY(function (tileXY, board) {
+            var poly = board.getGridPolygon(tileXY.x, tileXY.y);
+            graphics.strokePoints(poly.points, true);
+        })
+        // create grid texture
+        createGridPolygonTexture(this, scene.shapeTextureKey);
+    }
+}
 
 var createGridPolygonTexture = function (board, shapeTextureKey) {
     var poly = board.getGridPolygon();

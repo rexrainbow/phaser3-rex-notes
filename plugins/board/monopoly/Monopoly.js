@@ -2,8 +2,11 @@ import GetChessData from '../chess/GetChessData.js';
 import GetPath from './GetPath.js';
 import GetNextTile from './GetNextTile.js';
 import GetCost from './GetCost.js';
+import CONST from './const.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
+const BLOCKER = CONST.BLOCKER;
+const STOP = CONST.STOP;
 
 class Monopoly {
     constructor(gameObject, config) {
@@ -68,6 +71,14 @@ class Monopoly {
         }
         this.pathTileZ = value;
         return this;
+    }
+
+    get BLOCKER() {
+        return BLOCKER;
+    }
+
+    get STOP() {
+        return STOP;
     }
 
     get board() {

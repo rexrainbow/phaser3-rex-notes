@@ -12,7 +12,14 @@ class Demo extends Phaser.Scene {
 
     create() {
         this.shapeTextureKey = 'shape';
-        var board = new Board(this);
+        var config = {
+            grid: getHexagonGrid(this),
+            // grid: getQuadGrid(this),
+            width: 8,
+            height: 8,
+            // wrap: true
+        }
+        var board = new Board(this, config);
         board.fillChess().match3();
         this.add.text(0, 0, 'Match count= ' + board.lastMatchedCount);
     }
@@ -20,18 +27,35 @@ class Demo extends Phaser.Scene {
     update() {}
 }
 
+var getQuadGrid = function (scene) {
+    var grid = scene.rexBoard.add.quadGrid({
+        x: 400,
+        y: 100,
+        cellWidth: 100,
+        cellHeight: 50,
+        type: 1
+    });
+    return grid;
+}
+
+var getHexagonGrid = function (scene) {
+    var staggeraxis = 'x';
+    var staggerindex = 'odd';
+    var grid = scene.rexBoard.add.hexagonGrid({
+        x: 100,
+        y: 100,
+        size: 30,
+        staggeraxis: staggeraxis,
+        staggerindex: staggerindex
+    })
+    return grid;
+};
+
 const Random = Phaser.Math.Between;
 var colorArray = Phaser.Display.Color.HSVColorWheel(0.5, 1);
 class Board extends RexPlugins.Board.Board {
-    constructor(scene) {
+    constructor(scene, config) {
         // create board
-        var config = {
-            grid: getHexagonGrid(scene),
-            // grid: getQuadGrid(scene),
-            width: 8,
-            height: 8,
-            // wrap: true
-        }
         super(scene, config);
         // draw grid
         var graphics = scene.add.graphics({
@@ -91,30 +115,6 @@ class Board extends RexPlugins.Board.Board {
         return this;
     }
 }
-
-var getQuadGrid = function (scene) {
-    var grid = scene.rexBoard.add.quadGrid({
-        x: 400,
-        y: 100,
-        cellWidth: 100,
-        cellHeight: 50,
-        type: 1
-    });
-    return grid;
-}
-
-var getHexagonGrid = function (scene) {
-    var staggeraxis = 'x';
-    var staggerindex = 'odd';
-    var grid = scene.rexBoard.add.hexagonGrid({
-        x: 100,
-        y: 100,
-        size: 30,
-        staggeraxis: staggeraxis,
-        staggerindex: staggerindex
-    })
-    return grid;
-};
 
 var createGridPolygonTexture = function (board, shapeTextureKey) {
     var poly = board.getGridPolygon();

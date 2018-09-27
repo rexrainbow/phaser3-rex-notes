@@ -6,6 +6,7 @@ import GetOppositeDirection from 'rexPlugins/utils/grid/hexagon/GetOppositeDirec
 import GetDistance from 'rexPlugins/utils/grid/hexagon/GetDistance.js';
 import GetGridPolygon from './GetGridPolygon.js';
 
+
 class HexagonGrid extends Hexagon {
     constructor(config) {
         super(config);
@@ -45,7 +46,7 @@ var methods = {
     getNeighborTileDirection: GetNeighborTileDirection,
     getOppositeDirection: GetOppositeDirection,
     getDistance: GetDistance,
-    getGridPolygon: GetGridPolygon,
+    getGridPolygon: GetGridPolygon
 }
 Object.assign(
     HexagonGrid.prototype,

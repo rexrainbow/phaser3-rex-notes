@@ -8,6 +8,8 @@ import FindPath from './FindPath.js';
 import TileXYToCost from './TileXYToCost.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
+const BLOCKER = CONST.BLOCKER;
+const INFINITY = CONST.INFINITY;
 
 class PathFinder {
     constructor(gameObject, config) {
@@ -102,6 +104,14 @@ class PathFinder {
         }
         this.shuffleNeighbors = value;
         return this;
+    }
+
+    get BLOCKER() {
+        return BLOCKER;
+    }
+
+    get INFINITY(){
+        return INFINITY;
     }
 
     get board() {

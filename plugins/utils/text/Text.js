@@ -260,6 +260,10 @@ var Text = new Phaser.Class({
         return this.style.setHAlign(align);
     },
 
+    setLineSpacing: function (value) {
+        return this.style.setLineSpacing(value);
+    },
+
     setPadding: function (left, top, right, bottom) {
         if (typeof left === 'object') {
             var config = left;

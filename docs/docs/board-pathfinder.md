@@ -39,10 +39,11 @@ var pathFinder = scene.rexBoard.add.pathFinder(chess, {
     - `cost` : A constant cost for each non-blocked tile
     - `costCallback`, `costCallbackScope` :  Get cost via callback
         ```javascript
-        function(curTile, preTile, board) {
+        function(curTile, preTile, pathFinder) {
             return cost;
         }
         ```
+        - Cost of blocker : `pathFinder.BLOCKER`
 - `pathMode`
     - Shortest path
         - `'random'`, or `0`
@@ -55,6 +56,34 @@ var pathFinder = scene.rexBoard.add.pathFinder(chess, {
         - `'A*-line'`, or `12`
 - `weight` : Weight parameter for A* searching mode
 - `costCache` : Set `true`
+
+### Set cost function
+
+- Constant cost for each non-blocked tile
+    ```javascript
+    pathFinder.setCostFunction(cost);
+    ```
+- Get cost via callback
+    ```javascript
+    pathFinder.setCostFunction(callback, scope);
+    ```
+
+### Set path mode
+
+```javascript
+pathFinder.setPathMode(pathMode)
+```
+
+- `pathMode`
+    - Shortest path
+        - `'random'`, or `0`
+        - `'diagonal'`, or `1`
+        - `'straight'`, or `2`
+        - `'line'`, or `3`
+    - A* path
+        - `'A*'`, or `10`
+        - `'A*-random'`, or `11`
+        - `'A*-line'`, or `12`
 
 ### Find moveable area
 

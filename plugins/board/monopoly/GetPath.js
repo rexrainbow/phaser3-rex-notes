@@ -23,6 +23,7 @@ var GetPath = function (movingPoints, out) {
         if (cost === STOP) {
             cost = movingPoints;
         }
+        nextTileData.cost = cost;
         if (movingPoints >= cost) {
             out.push(nextTileData);
         }
@@ -30,6 +31,15 @@ var GetPath = function (movingPoints, out) {
 
         this.preTileXY = curTileData;
         curTileData = nextTileData;
+    }
+
+    // remove cost = 0 at tail
+    for (var i = out.length - 1; i >= 0; i--) {
+        if (out[i].cost === 0) {
+            out.length = i;
+        } else {
+            break;
+        }
     }
     return out;
 }
