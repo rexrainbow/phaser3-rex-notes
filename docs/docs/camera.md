@@ -382,7 +382,7 @@ camera.on('camerazoomcomplete', camera, zoom);
             ```
         - uniform3fv
             ```javascript
-            filter.setFloat2v(name, value0, value1, value2);
+            filter.setFloat3v(name, value0, value1, value2);
             ```
         - Int
             ```javascript
@@ -395,7 +395,7 @@ camera.on('camerazoomcomplete', camera, zoom);
             ```
         - uniform4fv
             ```javascript
-            filter.setFloat2v(name, value0, value1, value2, value3);
+            filter.setFloat4v(name, value0, value1, value2, value3);
             ```
         - Int
             ```javascript

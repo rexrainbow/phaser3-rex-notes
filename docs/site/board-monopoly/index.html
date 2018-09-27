@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/camera/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/board-monopoly/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Camera - Notes of Phaser 3</title>
+        <title>Board monopoly - Notes of Phaser 3</title>
       
     
     
@@ -128,7 +128,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Camera
+                Board monopoly
               </span>
             
           
@@ -1611,12 +1611,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
     
     <label class="md-nav__link" for="nav-7">
       Camera
@@ -1632,309 +1630,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Camera
-      </label>
-    
-    <a href="./" title="Camera" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../camera/" title="Camera" class="md-nav__link">
       Camera
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#get-camera" title="Get camera" class="md-nav__link">
-    Get camera
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#remove-camera" title="Remove camera" class="md-nav__link">
-    Remove camera
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#destroy-camera" title="Destroy camera" class="md-nav__link">
-    Destroy camera
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#view-port" title="View port" class="md-nav__link">
-    View port
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#visible" title="Visible" class="md-nav__link">
-    Visible
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#alpha" title="Alpha" class="md-nav__link">
-    Alpha
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scroll-camera" title="Scroll camera" class="md-nav__link">
-    Scroll camera
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#follow-game-object" title="Follow game object" class="md-nav__link">
-    Follow game object
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scroll-factor" title="Scroll factor" class="md-nav__link">
-    Scroll factor
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set-bounds" title="Set bounds" class="md-nav__link">
-    Set bounds
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#effects" title="Effects" class="md-nav__link">
-    Effects
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#fade-in-fade-out" title="Fade-in / fade-out" class="md-nav__link">
-    Fade-in / fade-out
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#events" title="Events" class="md-nav__link">
-    Events
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#flash" title="Flash" class="md-nav__link">
-    Flash
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#events_1" title="Events" class="md-nav__link">
-    Events
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#shake" title="Shake" class="md-nav__link">
-    Shake
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#events_2" title="Events" class="md-nav__link">
-    Events
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pan" title="Pan" class="md-nav__link">
-    Pan
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#events_3" title="Events" class="md-nav__link">
-    Events
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#zoom" title="Zoom" class="md-nav__link">
-    Zoom
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#events_4" title="Events" class="md-nav__link">
-    Events
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#filter" title="Filter" class="md-nav__link">
-    Filter
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set-background-color" title="Set background color" class="md-nav__link">
-    Set background color
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ignore-game-object" title="Ignore game object" class="md-nav__link">
-    Ignore game object
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#camera-controllor" title="Camera Controllor" class="md-nav__link">
-    Camera Controllor
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#create-controllor" title="Create controllor" class="md-nav__link">
-    Create controllor
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#update" title="Update" class="md-nav__link">
-    Update
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#start-stop" title="Start / stop" class="md-nav__link">
-    Start / stop
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#other-methods" title="Other methods" class="md-nav__link">
-    Other methods
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -3229,6 +2929,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#usage" title="Usage" class="md-nav__link">
     Usage
   </a>
@@ -3237,253 +2944,30 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#get-camera" title="Get camera" class="md-nav__link">
-    Get camera
+  <a href="#install-scene-plugin" title="Install scene plugin" class="md-nav__link">
+    Install scene plugin
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#remove-camera" title="Remove camera" class="md-nav__link">
-    Remove camera
+  <a href="#create-instance" title="Create instance" class="md-nav__link">
+    Create instance
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#destroy-camera" title="Destroy camera" class="md-nav__link">
-    Destroy camera
+  <a href="#set-face-direction" title="Set face direction" class="md-nav__link">
+    Set face direction
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#view-port" title="View port" class="md-nav__link">
-    View port
+  <a href="#get-path" title="Get path" class="md-nav__link">
+    Get path
   </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#visible" title="Visible" class="md-nav__link">
-    Visible
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#alpha" title="Alpha" class="md-nav__link">
-    Alpha
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scroll-camera" title="Scroll camera" class="md-nav__link">
-    Scroll camera
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#follow-game-object" title="Follow game object" class="md-nav__link">
-    Follow game object
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scroll-factor" title="Scroll factor" class="md-nav__link">
-    Scroll factor
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set-bounds" title="Set bounds" class="md-nav__link">
-    Set bounds
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#effects" title="Effects" class="md-nav__link">
-    Effects
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#fade-in-fade-out" title="Fade-in / fade-out" class="md-nav__link">
-    Fade-in / fade-out
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#events" title="Events" class="md-nav__link">
-    Events
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#flash" title="Flash" class="md-nav__link">
-    Flash
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#events_1" title="Events" class="md-nav__link">
-    Events
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#shake" title="Shake" class="md-nav__link">
-    Shake
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#events_2" title="Events" class="md-nav__link">
-    Events
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pan" title="Pan" class="md-nav__link">
-    Pan
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#events_3" title="Events" class="md-nav__link">
-    Events
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#zoom" title="Zoom" class="md-nav__link">
-    Zoom
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#events_4" title="Events" class="md-nav__link">
-    Events
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#filter" title="Filter" class="md-nav__link">
-    Filter
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set-background-color" title="Set background color" class="md-nav__link">
-    Set background color
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ignore-game-object" title="Ignore game object" class="md-nav__link">
-    Ignore game object
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#camera-controllor" title="Camera Controllor" class="md-nav__link">
-    Camera Controllor
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#create-controllor" title="Create controllor" class="md-nav__link">
-    Create controllor
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#update" title="Update" class="md-nav__link">
-    Update
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#start-stop" title="Start / stop" class="md-nav__link">
-    Start / stop
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#other-methods" title="Other methods" class="md-nav__link">
-    Other methods
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -3508,420 +2992,77 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/camera.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/board-monopoly.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Camera</h1>
+                  <h1>Board monopoly</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Camera to display game objects, built-in object of phaser.</p>
+<p>Move through path tiles, used in monopoly-like application, chess behavior of Board system.</p>
 <ul>
-<li>Author: Richard Davey</li>
+<li>Author: Rex</li>
+<li>Behavior of chess</li>
 </ul>
+<h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
+<p>Included in <a href="../board/#source-code">board plugin</a>.</p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<h3 id="get-camera">Get camera<a class="headerlink" href="#get-camera" title="Permanent link">&para;</a></h3>
-<p>Each scene has one or more cameras.</p>
-<ul>
-<li>Main camera
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">camera</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cameras</span><span class="p">.</span><span class="nx">main</span><span class="p">;</span>
-</pre></div></li>
-<li>
-<p>Add new camera
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">camera</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cameras</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
-</pre></div></p>
-</li>
-<li>
-<p>Add existed camera
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">cameras</span><span class="p">.</span><span class="nx">addExisting</span><span class="p">(</span><span class="nx">camera</span><span class="p">);</span>
-</pre></div></p>
-</li>
-</ul>
-<h3 id="remove-camera">Remove camera<a class="headerlink" href="#remove-camera" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">cameras</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">camera</span><span class="p">);</span>
-</pre></div>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/board-monopoly">Sample code</a></p>
+<h3 id="install-scene-plugin">Install scene plugin<a class="headerlink" href="#install-scene-plugin" title="Permanent link">&para;</a></h3>
+<p>Included in board plugin.</p>
+<h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">monopoly</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">monopoly</span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">face</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">pathTileZ</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
 
-<h3 id="destroy-camera">Destroy camera<a class="headerlink" href="#destroy-camera" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
-</pre></div>
-
-<h3 id="view-port">View port<a class="headerlink" href="#view-port" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Set<ul>
-<li>Top(x), Left(y), Width, Height
-    <div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">setViewport</span><span class="p">(</span><span class="nx">top</span><span class="p">,</span> <span class="nx">left</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
-</pre></div>
-    <div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">top</span><span class="p">,</span> <span class="nx">left</span><span class="p">);</span>
-<span class="c1">// camera.x = top;</span>
-<span class="c1">// camera.y = left;</span>
-</pre></div>
-    <div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">setSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
-<span class="c1">// camera.width = width;</span>
-<span class="c1">// camera.height = height;</span>
-</pre></div>
-    <div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">centerOn</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>  <span class="c1">// centered on the given coordinates</span>
-</pre></div>
-    <div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">centerToBounds</span><span class="p">();</span>
-</pre></div></li>
-<li>Zoom
-    <div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">setZoom</span><span class="p">(</span><span class="nx">zoomValue</span><span class="p">);</span>  <span class="c1">// The minimum it can be is 0.001.</span>
-<span class="nx">camera</span><span class="p">.</span><span class="nx">zoom</span> <span class="o">=</span> <span class="nx">zoomValue</span><span class="p">;</span>
-</pre></div></li>
-<li>Rotation
-    <div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">setAngle</span><span class="p">(</span><span class="nx">angle</span><span class="p">);</span>  <span class="c1">// angle in degree</span>
-<span class="nx">camera</span><span class="p">.</span><span class="nx">setRotation</span><span class="p">(</span><span class="nx">angle</span><span class="p">);</span>  <span class="c1">// angle in radians</span>
-<span class="nx">camera</span><span class="p">.</span><span class="nx">rotation</span> <span class="o">=</span> <span class="nx">angle</span><span class="p">;</span> <span class="c1">// angle in radians</span>
-</pre></div></li>
-</ul>
-</li>
-<li>Get<ul>
-<li>Position<ul>
-<li>Top-left
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">top</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">left</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
-</pre></div></li>
-<li>Center, relative to the top-left of the game canvas.
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">centerX</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">centerY</span><span class="p">;</span>
-</pre></div></li>
-<li>Middle point, in 'world' coordinates.
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">midPoint</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">midPoint</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
-</pre></div></li>
-</ul>
-</li>
-<li>Width &amp; height
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">width</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">height</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
-</pre></div>
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">displayWidth</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">displayWidth</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">displayHeight</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">displayHeight</span><span class="p">;</span>
-</pre></div></li>
-<li>Zoom
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">zoomValue</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">zoom</span><span class="p">;</span>
-</pre></div></li>
-<li>Rotation
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">angle</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">rotation</span><span class="p">;</span>  <span class="c1">// angle in radians</span>
-</pre></div></li>
-<li>World view, a <a href="../geom-rectangle/">rectangle object</a>
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">worldView</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">worldView</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">worldView</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">worldView</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">width</span> <span class="o">=</span> <span class="nx">worldView</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>  <span class="c1">// displayWidth</span>
-<span class="kd">var</span> <span class="nx">height</span> <span class="o">=</span> <span class="nx">worldView</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span> <span class="c1">// displayHeight</span>
-<span class="kd">var</span> <span class="nx">left</span> <span class="o">=</span> <span class="nx">worldView</span><span class="p">.</span><span class="nx">left</span><span class="p">;</span>  <span class="c1">// x</span>
-<span class="kd">var</span> <span class="nx">right</span> <span class="o">=</span> <span class="nx">worldView</span><span class="p">.</span><span class="nx">right</span><span class="p">;</span>  <span class="c1">// x + width</span>
-<span class="kd">var</span> <span class="nx">top</span> <span class="o">=</span> <span class="nx">worldView</span><span class="p">.</span><span class="nx">top</span><span class="p">;</span>  <span class="c1">// y</span>
-<span class="kd">var</span> <span class="nx">bottom</span> <span class="o">=</span> <span class="nx">worldView</span><span class="p">.</span><span class="nx">bottom</span><span class="p">;</span>  <span class="c1">// y + height</span>
-<span class="kd">var</span> <span class="nx">centerX</span> <span class="o">=</span> <span class="nx">worldView</span><span class="p">.</span><span class="nx">centerX</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">centerY</span> <span class="o">=</span> <span class="nx">worldView</span><span class="p">.</span><span class="nx">centerY</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">isInside</span> <span class="o">=</span> <span class="nx">worldView</span><span class="p">.</span><span class="nx">contains</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">randPoint</span> <span class="o">=</span> <span class="nx">worldView</span><span class="p">.</span><span class="nx">getRandomPoint</span><span class="p">(</span><span class="nx">point</span><span class="p">);</span> <span class="c1">// point: {x, y}</span>
-</pre></div></li>
-</ul>
-</li>
-</ul>
-<h3 id="visible">Visible<a class="headerlink" href="#visible" title="Permanent link">&para;</a></h3>
-<p>A visible camera will render and perform input tests.
-An invisible camera will not render anything and will skip input tests.</p>
-<div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">setVisible</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
-<span class="c1">// camera.visible = value</span>
-</pre></div>
-
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">visible</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">visible</span><span class="p">;</span>
-</pre></div>
-
-<h3 id="alpha">Alpha<a class="headerlink" href="#alpha" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">setAlpha</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
-<span class="c1">// camera.alpha = value;</span>
-</pre></div>
-
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">alpha</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">alpha</span><span class="p">;</span>
-</pre></div>
-
-<h3 id="scroll-camera">Scroll camera<a class="headerlink" href="#scroll-camera" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">setScroll</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span>
-</pre></div>
-
-<div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">scrollX</span> <span class="o">=</span> <span class="nx">scrollX</span><span class="p">;</span>
-<span class="nx">camera</span><span class="p">.</span><span class="nx">scrollY</span> <span class="o">=</span> <span class="nx">scrollY</span><span class="p">;</span>
-</pre></div>
-
-<div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">centerToBounds</span><span class="p">();</span>
-</pre></div>
-
-<div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">centerToSize</span><span class="p">();</span>
-</pre></div>
-
-<h4 id="follow-game-object">Follow game object<a class="headerlink" href="#follow-game-object" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Start following
-    <div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">startFollow</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
-<span class="c1">// camera.startFollow(gameObject, roundPx, lerpX, lerpY, offsetX, offsetY);  // </span>
-</pre></div>
-    roundPx : set true to round the camera position to integers</li>
-<li>Stop following
-    <div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">stopFollow</span><span class="p">();</span>
-</pre></div></li>
-<li>Set follow offset
-    <div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">setFollowOffset</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
-</pre></div></li>
-<li>Set lerp
-    <div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">setLerp</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
-</pre></div><ul>
-<li><code>1</code> : Camera will instantly snap to the target coordinates.</li>
-<li><code>0.1</code> : Camera will more slowly track the target, giving a smooth transition.</li>
-</ul>
-</li>
-<li>Deadzone
-    <div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">setDeadzone</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
-</pre></div>
-    If the target moves outside of this area, the camera will begin scrolling in order to follow it.<ul>
-<li>Boundaries
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">left</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">deadzone</span><span class="p">.</span><span class="nx">left</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">right</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">deadzone</span><span class="p">.</span><span class="nx">right</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">top</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">deadzone</span><span class="p">.</span><span class="nx">top</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">bootom</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">deadzone</span><span class="p">.</span><span class="nx">bottom</span><span class="p">;</span>
-</pre></div></li>
-<li>Clear deadzone
-    <div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">setDeadzone</span><span class="p">();</span>
-</pre></div></li>
-</ul>
-</li>
-</ul>
-<h4 id="scroll-factor">Scroll factor<a class="headerlink" href="#scroll-factor" title="Permanent link">&para;</a></h4>
-<p>See <a href="../gameobject/#scroll-factor">Scroll factor</a> in game object.</p>
-<h4 id="set-bounds">Set bounds<a class="headerlink" href="#set-bounds" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">setBounds</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">)</span>
-</pre></div>
-
-<h3 id="effects">Effects<a class="headerlink" href="#effects" title="Permanent link">&para;</a></h3>
-<h4 id="fade-in-fade-out">Fade-in / fade-out<a class="headerlink" href="#fade-in-fade-out" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">fadeIn</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>   <span class="c1">// duration in ms</span>
-<span class="c1">// camera.fadeIn(duration, red, green, blue, callback, context);</span>
-<span class="c1">// red/green/blue: the value to fade the red/green/blue channel from. A value between 0 and 255.</span>
-</pre></div>
-
-<div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">fadeOut</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>   <span class="c1">// duration in ms</span>
-<span class="c1">// camera.fadeOut(duration, red, green, blue, callback, context);</span>
+    <span class="c1">// ** cost **</span>
+    <span class="c1">// cost: 1,   // constant cost</span>
+    <span class="c1">// costCallback: undefined,</span>
+    <span class="c1">// costCallbackScope: undefined</span>
+<span class="p">})</span>
 </pre></div>
 
 <ul>
-<li><code>callback</code> , <code>context</code> : It will be invoked every frame for the duration of the effect.
-    <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">camera</span><span class="p">,</span> <span class="nx">progress</span><span class="p">)</span> <span class="p">{}</span>
-</pre></div></li>
-</ul>
-<h5 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h5>
-<div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;camerafadeincomplete&#39;</span><span class="p">,</span> <span class="nx">camera</span><span class="p">,</span> <span class="nx">fade</span><span class="p">);</span>
-</pre></div>
-
-<div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;camerafadeoutcomplete&#39;</span><span class="p">,</span> <span class="nx">camera</span><span class="p">,</span> <span class="nx">fade</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="flash">Flash<a class="headerlink" href="#flash" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">flash</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>   <span class="c1">// duration in ms</span>
-<span class="c1">// camera.flash(duration, red, green, blue, force, callback, context);</span>
-</pre></div>
-
-<ul>
-<li><code>callback</code> , <code>context</code> : It will be invoked every frame for the duration of the effect.
-    <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">camera</span><span class="p">,</span> <span class="nx">progress</span><span class="p">)</span> <span class="p">{}</span>
-</pre></div></li>
-</ul>
-<h5 id="events_1">Events<a class="headerlink" href="#events_1" title="Permanent link">&para;</a></h5>
-<div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cameraflashstart&#39;</span><span class="p">,</span> <span class="nx">camera</span><span class="p">,</span> <span class="nx">flash</span><span class="p">,</span> <span class="nx">duration</span><span class="p">,</span> <span class="nx">red</span><span class="p">,</span> <span class="nx">green</span><span class="p">,</span> <span class="nx">blue</span><span class="p">);</span>
-</pre></div>
-
-<div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cameraflashcomplete&#39;</span><span class="p">,</span> <span class="nx">camera</span><span class="p">,</span> <span class="nx">flash</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="shake">Shake<a class="headerlink" href="#shake" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">shake</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>   <span class="c1">// duration in ms</span>
-<span class="c1">// camera.shake(duration, intensity, force, callback, context);  // callback: invoked when completed</span>
-</pre></div>
-
-<ul>
-<li><code>callback</code> , <code>context</code> : It will be invoked every frame for the duration of the effect.
-    <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">camera</span><span class="p">,</span> <span class="nx">progress</span><span class="p">)</span> <span class="p">{}</span>
-</pre></div></li>
-</ul>
-<h5 id="events_2">Events<a class="headerlink" href="#events_2" title="Permanent link">&para;</a></h5>
-<div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;camerashakestart&#39;</span><span class="p">,</span> <span class="nx">camera</span><span class="p">,</span> <span class="nx">shake</span><span class="p">,</span> <span class="nx">duration</span><span class="p">,</span> <span class="nx">intensity</span><span class="p">);</span>
-</pre></div>
-
-<div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;camerashakecomplete&#39;</span><span class="p">,</span> <span class="nx">camera</span><span class="p">,</span> <span class="nx">shake</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="pan">Pan<a class="headerlink" href="#pan" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">pan</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">duration</span><span class="p">);</span>   <span class="c1">// duration in ms</span>
-<span class="c1">// camera.pan(x, y, duration, ease, force, callback, context);</span>
-</pre></div>
-
-<ul>
-<li><code>callback</code> , <code>context</code> : It will be invoked every frame for the duration of the effect.
-    <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">camera</span><span class="p">,</span> <span class="nx">progress</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{}</span>
-</pre></div></li>
-</ul>
-<h5 id="events_3">Events<a class="headerlink" href="#events_3" title="Permanent link">&para;</a></h5>
-<div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;camerapanstart&#39;</span><span class="p">,</span> <span class="nx">camera</span><span class="p">,</span> <span class="nx">pan</span><span class="p">,</span> <span class="nx">duration</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
-</pre></div>
-
-<div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;camerapancomplete&#39;</span><span class="p">,</span> <span class="nx">camera</span><span class="p">,</span> <span class="nx">pan</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="zoom">Zoom<a class="headerlink" href="#zoom" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">zoomTo</span><span class="p">(</span><span class="nx">zoomValue</span><span class="p">,</span> <span class="nx">duration</span><span class="p">);</span>   <span class="c1">// duration in ms</span>
-<span class="c1">// camera.zoomTo(zoomValue, duration, ease, force, callback, context);</span>
-</pre></div>
-
-<ul>
-<li><code>callback</code> , <code>context</code> : It will be invoked every frame for the duration of the effect.
-    <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">camera</span><span class="p">,</span> <span class="nx">progress</span><span class="p">,</span> <span class="nx">zoomValue</span><span class="p">)</span> <span class="p">{}</span>
-</pre></div></li>
-</ul>
-<h5 id="events_4">Events<a class="headerlink" href="#events_4" title="Permanent link">&para;</a></h5>
-<div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;camerazoomstart&#39;</span><span class="p">,</span> <span class="nx">camera</span><span class="p">,</span> <span class="nx">zoom</span><span class="p">,</span> <span class="nx">duration</span><span class="p">,</span> <span class="nx">zoomValue</span><span class="p">);</span>
-</pre></div>
-
-<div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;camerazoomcomplete&#39;</span><span class="p">,</span> <span class="nx">camera</span><span class="p">,</span> <span class="nx">zoom</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="filter">Filter<a class="headerlink" href="#filter" title="Permanent link">&para;</a></h4>
-<ol>
-<li>Create filter
-   <div class="codehilite"><pre><span></span> <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
-     <span class="nx">game</span><span class="o">:</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">game</span><span class="p">,</span>
-     <span class="nx">renderer</span><span class="o">:</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">renderer</span><span class="p">,</span>
-     <span class="nx">fragShader</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span>  <span class="c1">// GLSL shader</span>
- <span class="p">};</span>
- <span class="kd">var</span> <span class="nx">customPipeline</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Renderer</span><span class="p">.</span><span class="nx">WebGL</span><span class="p">.</span><span class="nx">Pipelines</span><span class="p">.</span><span class="nx">TextureTintPipeline</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
- <span class="kd">var</span> <span class="nx">filter</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">renderer</span><span class="p">.</span><span class="nx">addPipeline</span><span class="p">(</span><span class="nx">pipeName</span><span class="p">,</span> <span class="nx">customPipeline</span><span class="p">);</span>
-</pre></div></li>
-<li>Add filter
-    <div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">setRenderToTexture</span><span class="p">(</span><span class="nx">filter</span><span class="p">);</span>
-</pre></div></li>
-<li>Set/change properties of filter<ul>
-<li>Property with 1 value<ul>
-<li>Float
-    <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat1</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">);</span>
-</pre></div></li>
-<li>uniform1fv
-    <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat1v</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">);</span>
-</pre></div></li>
-<li>Int
-    <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setInt1</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">);</span>
-</pre></div></li>
+<li><code>face</code> : Get path toward this face direction.<ul>
+<li><code>0</code> ~ <code>3</code> : <a href="../board-quadgrid/#directions">Quad grid</a> in 4 directions mode.</li>
+<li><code>0</code> ~ <code>7</code> : <a href="../board-quadgrid/#directions">Quad grid</a> in 8 directions mode.</li>
+<li><code>0</code> ~ <code>5</code> : <a href="../board-hexagongrid/#directions">Hexagon grid</a>.</li>
 </ul>
 </li>
-<li>Property with 2 values<ul>
-<li>Float
-    <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat2</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">);</span>
-</pre></div></li>
-<li>uniform2fv
-    <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat2v</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">);</span>
-</pre></div></li>
-<li>Int
-    <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setInt2</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">);</span>
-</pre></div></li>
-</ul>
-</li>
-<li>Property with 3 value<ul>
-<li>Float
-    <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat3</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">);</span>
-</pre></div></li>
-<li>uniform3fv
-    <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat3v</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">);</span>
-</pre></div></li>
-<li>Int
-    <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setInt3</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">);</span>
-</pre></div></li>
-</ul>
-</li>
-<li>Property with 4 values<ul>
-<li>Float
-    <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat4</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">,</span> <span class="nx">value3</span><span class="p">);</span>
-</pre></div></li>
-<li>uniform4fv
-    <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat4v</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">,</span> <span class="nx">value3</span><span class="p">);</span>
-</pre></div></li>
-<li>Int
-    <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setInt4</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">,</span> <span class="nx">value3</span><span class="p">);</span>
-</pre></div></li>
-</ul>
-</li>
-</ul>
-</li>
-</ol>
-<p>Other methods :</p>
-<ul>
-<li>Change filter
-    <div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">setPipeline</span><span class="p">(</span><span class="nx">filter</span><span class="p">);</span>
-</pre></div></li>
-<li>Clear filter
-    <div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">clearRenderToTexture</span><span class="p">();</span>
-</pre></div></li>
-</ul>
-<h3 id="set-background-color">Set background color<a class="headerlink" href="#set-background-color" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">setBackgroundColor</span><span class="p">(</span><span class="nx">color</span><span class="p">);</span>
-</pre></div>
-
-<h3 id="ignore-game-object">Ignore game object<a class="headerlink" href="#ignore-game-object" title="Permanent link">&para;</a></h3>
-<p>Ignored game objects won't show at that camera.</p>
-<div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">ignore</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>  <span class="c1">// a game object, or an array of game objects</span>
-</pre></div>
-
-<h3 id="camera-controllor">Camera Controllor<a class="headerlink" href="#camera-controllor" title="Permanent link">&para;</a></h3>
-<h4 id="create-controllor">Create controllor<a class="headerlink" href="#create-controllor" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="c1">// var cursors = scene.input.keyboard.createCursorKeys();</span>
-<span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="nx">camera</span><span class="o">:</span> <span class="nx">camera</span><span class="p">,</span>
-
-    <span class="nx">left</span><span class="o">:</span> <span class="nx">cursors</span><span class="p">.</span><span class="nx">left</span><span class="p">,</span>    <span class="c1">// { isDown, isUp }</span>
-    <span class="nx">right</span><span class="o">:</span> <span class="nx">cursors</span><span class="p">.</span><span class="nx">right</span><span class="p">,</span>  <span class="c1">// { isDown, isUp }</span>
-    <span class="nx">up</span><span class="o">:</span> <span class="nx">cursors</span><span class="p">.</span><span class="nx">up</span><span class="p">,</span>        <span class="c1">// { isDown, isUp }</span>
-    <span class="nx">down</span><span class="o">:</span> <span class="nx">cursors</span><span class="p">.</span><span class="nx">down</span><span class="p">,</span>    <span class="c1">// { isDown, isUp }</span>
-    <span class="nx">zoomIn</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>          <span class="c1">// { isDown, isUp }</span>
-    <span class="nx">zoomOut</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>         <span class="c1">// { isDown, isUp }</span>
-
-    <span class="nx">zoomSpeed</span><span class="o">:</span> <span class="mf">0.01</span><span class="p">,</span>
-
-    <span class="nx">acceleration</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="c1">// acceleration: {</span>
-    <span class="c1">//    x: 0,</span>
-    <span class="c1">//    y: 0</span>
-    <span class="c1">// }</span>
-
-    <span class="nx">drag</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="c1">// drag: {</span>
-    <span class="c1">//    x: 0,</span>
-    <span class="c1">//    y: 0</span>
-    <span class="c1">// }</span>
-
-    <span class="nx">maxSpeed</span><span class="o">:</span> <span class="kc">null</span>
-    <span class="c1">// maxSpeed: {</span>
-    <span class="c1">//    x: 0,</span>
-    <span class="c1">//    y: 0</span>
-    <span class="c1">// }</span>
-<span class="p">};</span>
-<span class="kd">var</span> <span class="nx">controls</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Cameras</span><span class="p">.</span><span class="nx">Controls</span><span class="p">.</span><span class="nx">SmoothedKeyControl</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-<span class="c1">// var controls = new Phaser.Cameras.Controls.FixedKeyControl(config);</span>
-</pre></div>
-
-<h4 id="update">Update<a class="headerlink" href="#update" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">update</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">controls</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">delta</span><span class="p">);</span>
+<li><code>pathTileZ</code> : TileZ of path tile.</li>
+<li>Cost function<ul>
+<li><code>cost</code> : A constant cost for each non-blocked tile</li>
+<li><code>costCallback</code>, <code>costCallbackScope</code> :  Get cost via callback
+    <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">curTile</span><span class="p">,</span> <span class="nx">monopoly</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">cost</span><span class="p">;</span>
 <span class="p">}</span>
+</pre></div></li>
+</ul>
+</li>
+</ul>
+<h3 id="set-face-direction">Set face direction<a class="headerlink" href="#set-face-direction" title="Permanent link">&para;</a></h3>
+<p>Get path toward this face direction.</p>
+<div class="codehilite"><pre><span></span><span class="nx">monopoly</span><span class="p">.</span><span class="nx">setFaceDirection</span><span class="p">(</span><span class="nx">direction</span><span class="p">);</span>
 </pre></div>
 
-<h4 id="start-stop">Start / stop<a class="headerlink" href="#start-stop" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">controls</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
+<ul>
+<li><code>direction</code> :<ul>
+<li><code>0</code> ~ <code>3</code> : <a href="../board-quadgrid/#directions">Quad grid</a> in 4 directions mode.</li>
+<li><code>0</code> ~ <code>7</code> : <a href="../board-quadgrid/#directions">Quad grid</a> in 8 directions mode.</li>
+<li><code>0</code> ~ <code>5</code> : <a href="../board-hexagongrid/#directions">Hexagon grid</a>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="get-path">Get path<a class="headerlink" href="#get-path" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tileXYArray</span> <span class="o">=</span> <span class="nx">monopoly</span><span class="p">.</span><span class="nx">getPath</span><span class="p">(</span><span class="nx">movingPoints</span><span class="p">);</span>
+<span class="c1">// var out = monopoly.getPath(movingPoints, out);</span>
 </pre></div>
 
-<div class="codehilite"><pre><span></span><span class="nx">controls</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
-</pre></div>
-
-<h4 id="other-methods">Other methods<a class="headerlink" href="#other-methods" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">controls</span><span class="p">.</span><span class="nx">setCamera</span><span class="p">(</span><span class="nx">camera</span><span class="p">);</span>
-</pre></div>
+<ul>
+<li><code>tileXYArray</code> : Moving path in an array of tile positions <code>{x,y}</code><ul>
+<li>Uses <a href="../board-moveto/">moveTo behavior</a> to move chess along path.</li>
+</ul>
+</li>
+</ul>
                 
                   
                 
@@ -3938,41 +3079,6 @@ An invisible camera will not render anything and will skip input tests.</p>
       
         
 <footer class="md-footer">
-  
-    <div class="md-footer-nav">
-      <nav class="md-footer-nav__inner md-grid">
-        
-          <a href="../fadevolume/" title="Volume fading" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
-            </div>
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
-                  Previous
-                </span>
-                Volume fading
-              </span>
-            </div>
-          </a>
-        
-        
-          <a href="../swirlpipeline/" title="Swirl" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
-                  Next
-                </span>
-                Swirl
-              </span>
-            </div>
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
-            </div>
-          </a>
-        
-      </nav>
-    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
