@@ -69,7 +69,8 @@ class Board extends RexPlugins.Board.Board {
             }
         });
         this.forEachTileXY(function (tileXY, board) {
-            graphics.strokePoints(board.getGridPoints(tileXY.x, tileXY.y, true), true);
+            var points = board.getGridPoints(tileXY.x, tileXY.y, true);
+            graphics.strokePoints(points, true);
         });
         // enable touch events
         this.setInteractive();
@@ -163,7 +164,7 @@ class MoveableTile extends RexPlugins.Board.Shape {
         super(board, tileXY.x, tileXY.y, -1, 0x330000);
         scene.add.existing(this);
         this.setScale(0.5);
-        
+
         // on pointer down, move to this tile
         this.on('board.pointerdown', function () {
             if (!chess.moveToTile(this)) {

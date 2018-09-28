@@ -20,7 +20,10 @@ class Demo extends Phaser.Scene {
 
     create() {
         var board = new Board(this, TILESMAP);
-        var chessA = new ChessA(board, 0, 0);
+        var chessA = new ChessA(board, {
+            x: 0,
+            y: 0
+        });
 
         var movingPointsTxt = this.add.text(0, 0, '');
         this.input.on('pointerdown', function (pointer) {
@@ -49,8 +52,8 @@ class Board extends RexPlugins.Board.Board {
 
     createPath(tiles) {
         // tiles : 2d array
-        var scene = this.scene;
         var line, symbol, cost;
+        var rexBoardAdd = this.scene.rexBoard.add
         for (var tileY = 0, ycnt = tiles.length; tileY < ycnt; tileY++) {
             line = tiles[tileY];
             for (var tileX = 0, xcnt = line.length; tileX < xcnt; tileX++) {
@@ -60,7 +63,7 @@ class Board extends RexPlugins.Board.Board {
                 }
 
                 cost = parseFloat(symbol);
-                scene.rexBoard.add.shape(this, tileX, tileY, 0, COLORMAP[cost])
+                rexBoardAdd.shape(this, tileX, tileY, 0, COLORMAP[cost])
                     .setScale(0.95)
                     .setData('cost', cost);
             }
@@ -82,7 +85,7 @@ class ChessA extends RexPlugins.Board.Shape {
         // Shape(board, tileX, tileY, tileZ, fillColor, fillAlpha, addToBoard)
         super(board, tileXY.x, tileXY.y, 1, 0x000055);
         scene.add.existing(this);
-        this.setDepth(1);
+        this.setScale(0.9);
 
         // add behaviors        
         this.monopoly = scene.rexBoard.add.monopoly(this, {

@@ -25,8 +25,8 @@ class Demo extends Phaser.Scene {
                 height: 8
             })
             .forEachTileXY(function (tileXY, board) {
-                var poly = board.getGridPolygon(tileXY.x, tileXY.y);
-                graphics.strokePoints(poly.points, true);
+                var points = board.getGridPoints(tileXY.x, tileXY.y, true);
+                graphics.strokePoints(points, true);
             }, this);
     }
 

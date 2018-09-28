@@ -26,16 +26,14 @@ class Demo extends Phaser.Scene {
                 height: 8
             })
             .forEachTileXY(function (tileXY, board) {
-                var poly = board.getGridPolygon(tileXY.x, tileXY.y);
-                graphics.strokePoints(poly.points, true);
+                var points = board.getGridPoints(tileXY.x, tileXY.y, true);
+                graphics.strokePoints(points, true);
             }, this);
 
-        var key = 'shape';
-        createGridPolygonTexture(board, key);
+        var rexBoardAdd = this.rexBoard.add;
         for (var i = 0; i < 20; i++) {
-            var chess = this.add.image(0, 0, key).setTint(Random(0, 0xffffff));
             var emptyTileXY = board.getRandomEmptyTileXY(0);
-            board.addChess(chess, emptyTileXY.x, emptyTileXY.y, 0, true);
+            rexBoardAdd.shape(board, emptyTileXY.x, emptyTileXY.y, 0, Random(0, 0xffffff));
         }
     }
 }

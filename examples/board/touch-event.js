@@ -19,12 +19,9 @@ class Demo extends Phaser.Scene {
             width: 8,
             height: 8
         });
-        var key = 'shape';        
-        createGridPolygonTexture(board, key);
+        var rexBoardAdd = this.rexBoard.add;
         board.forEachTileXY(function (tileXY, board) {
-            var chess = this.add.image(0, 0, key)
-                .setTint(Random(0, 0xffffff));
-            board.addChess(chess, tileXY.x, tileXY.y, 0, true);
+            var chess = rexBoardAdd.shape(board, tileXY.x, tileXY.y, 0, Random(0, 0xffffff));
             this.add.text(chess.x, chess.y, tileXY.x + ',' + tileXY.y)
                 .setOrigin(0.5)
                 .setTint(0x0);
@@ -42,7 +39,7 @@ class Demo extends Phaser.Scene {
                 console.log('move ' + tileXY.x + ',' + tileXY.y);
             })
             .on('gameobjectdown', function (pointer, gameObject) {
-                gameObject.setTint(Random(0, 0xffffff));
+                gameObject.setFillStyle(Random(0, 0xffffff));
             });
 
         this.board = board;

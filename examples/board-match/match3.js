@@ -65,7 +65,8 @@ class Board extends RexPlugins.Board.Board {
             }
         });
         this.forEachTileXY(function (tileXY, board) {
-            graphics.strokePoints(board.getGridPoints(tileXY.x, tileXY.y, true), true);
+            var points = board.getGridPoints(tileXY.x, tileXY.y, true);
+            graphics.strokePoints(points, true);
         });
 
         this.match = scene.rexBoard.add.match({
