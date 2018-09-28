@@ -40,6 +40,6 @@ var GetParallelogramMap = function (board, type, width, height, out) {
             }
             break;
     }
-    return board.offset(out);
+    return board.shiftToO(out);
 }
 export default GetParallelogramMap;

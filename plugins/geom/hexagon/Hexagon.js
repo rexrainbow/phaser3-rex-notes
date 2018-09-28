@@ -1,13 +1,13 @@
 // https://www.redblobgames.com/grids/hexagons/
 
-import Offset from './Offset.js';
+import Offset from '../utils/Offset.js';
 import Width from './Width.js';
 import Height from './Height.js';
+import SetPoints from './SetPoints.js';
 
 const Polygon = Phaser.Geom.Polygon;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
-const DegToRad = Phaser.Math.DegToRad;
 const Line = Phaser.Geom.Line;
 
 class Hexagon extends Polygon {
@@ -38,17 +38,7 @@ class Hexagon extends Polygon {
         this._size = size;
         this._type = type;
 
-        var points = this.points,
-            point;
-        var angleOffset = (type === 0) ? 0 : -30;
-        var angleDeg, angleRad;
-        for (var i = 0; i < 6; i++) {
-            angleDeg = (60 * i) + angleOffset;
-            angleRad = DegToRad(angleDeg);
-            point = points[i];
-            point.x = x + size * Math.cos(angleRad);
-            point.y = y + size * Math.sin(angleRad);
-        }
+        SetPoints(x, y, size, type, this.points);
         this.calculateArea();
         this.width = Width(this);
         this.height = Height(this);
@@ -105,7 +95,7 @@ class Hexagon extends Polygon {
         }
         Offset(this, offsetX, offsetY);
         this._x = x;
-        this._y = y;        
+        this._y = y;
         return this;
     }
 

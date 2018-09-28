@@ -1,6 +1,6 @@
 // https://www.redblobgames.com/grids/hexagons/
 
-import Offset from './Offset.js';
+import Offset from '../utils/Offset.js';
 
 const Polygon = Phaser.Geom.Polygon;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;

@@ -70,10 +70,6 @@ class BBCodeTextPlugin extends Phaser.Plugins.BasePlugin {
 
         return text;
     }
-
-    getClass() {
-        return BBCodeText;
-    }
 }
 
 SetValue(window, 'RexPlugins.GameObjects.BBCodeText', BBCodeText);

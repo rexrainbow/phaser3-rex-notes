@@ -11,7 +11,6 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        this.shapeTextureKey = 'shape';
         var config = {
             grid: getHexagonGrid(this),
             // grid: getQuadGrid(this),
@@ -66,11 +65,8 @@ class Board extends RexPlugins.Board.Board {
             }
         });
         this.forEachTileXY(function (tileXY, board) {
-            var poly = board.getGridPolygon(tileXY.x, tileXY.y);
-            graphics.strokePoints(poly.points, true);
-        })
-        // create grid texture
-        createGridPolygonTexture(this, scene.shapeTextureKey);
+            graphics.strokePoints(board.getGridPoints(tileXY.x, tileXY.y, true), true);
+        });
 
         this.match = scene.rexBoard.add.match({
             board: this
@@ -82,10 +78,8 @@ class Board extends RexPlugins.Board.Board {
         var scene = this.scene;
         this.forEachTileXY(function (tileXY, board) {
             var index = Random(0, 5);
-            var chess = scene.add.image(0, 0, scene.shapeTextureKey)
-                .setData('symbol', index)
-                .setTint(colorArray[index * 60].color);
-            board.addChess(chess, tileXY.x, tileXY.y, 0, true);
+            var chess = scene.rexBoard.add.shape(board, ileXY.x, tileXY.y, 0, colorArray[index * 60].color)
+                .setData('symbol', index);
             scene.add.text(chess.x, chess.y, index)
                 .setOrigin(0.5)
                 .setTint(0x0);

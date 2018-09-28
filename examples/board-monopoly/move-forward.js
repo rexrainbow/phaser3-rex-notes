@@ -19,7 +19,6 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        this.shapeTextureKey = 'shape';
         var board = new Board(this, TILESMAP);
         var chessA = new ChessA(board, 0, 0);
 
@@ -45,21 +44,6 @@ class Board extends RexPlugins.Board.Board {
             // wrap: true
         }
         super(scene, config);
-        // draw grid
-        // var graphics = scene.add.graphics({
-        //     lineStyle: {
-        //         width: 1,
-        //         color: 0xffffff,
-        //         alpha: 1
-        //     }
-        // });
-        // this.forEachTileXY(function (tileXY, board) {
-        //     var poly = board.getGridPolygon(tileXY.x, tileXY.y);
-        //     graphics.strokePoints(poly.points, true);
-        // })
-        // create grid texture
-        createGridPolygonTexture(this, scene.shapeTextureKey);
-
         this.createPath(tiles);
     }
 
@@ -92,14 +76,17 @@ class Board extends RexPlugins.Board.Board {
     }
 }
 
-class ChessA extends Phaser.GameObjects.Image {
-    constructor(board, tileX, tileY) {
+class ChessA extends RexPlugins.Board.Shape {
+    constructor(board, tileXY) {
         var scene = board.scene;
-        super(scene, 0, 0, scene.shapeTextureKey);
+        if (tileXY === undefined) {
+            tileXY = board.getRandomEmptyTileXY(0);
+        }
+        // Shape(board, tileX, tileY, tileZ, fillColor, fillAlpha, addToBoard)
+        super(board, tileXY.x, tileXY.y, 1, 0x00CC00);
         scene.add.existing(this);
-        this.setTint(0x000055)
-            .setScale(0.9);
-        board.addChess(this, tileX, tileY, 1, true);
+        this.setDepth(1);
+
         // add behaviors        
         this.monopoly = scene.rexBoard.add.monopoly(this, {
             face: 0,
@@ -120,9 +107,9 @@ class ChessA extends Phaser.GameObjects.Image {
             board = this.rexChess.board;
         for (var i = 0, cnt = tileXYArray.length; i < cnt; i++) {
             tileXY = tileXYArray[i];
-            var image = scene.add.image(board.tileXYToWorldX(tileXY.x, tileXY.y), board.tileXYToWorldY(tileXY.x, tileXY.y), scene.shapeTextureKey)
+            var shape = scene.rexBoard.add.shape(board, tileXY.x, tileXY.y, -1, 0xffffff)
                 .setScale(0.3)
-            this.movingPathTiles.push(image);
+            this.movingPathTiles.push(shape);
         }
     }
 

@@ -36,10 +36,6 @@ class GridTablePlugin extends Phaser.Plugins.BasePlugin {
 
         return table;
     }
-
-    getClass() {
-        return GridTable;
-    }
 }
 
 SetValue(window, 'RexPlugins.GameObjects.GridTable', GridTable);

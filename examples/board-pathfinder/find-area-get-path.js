@@ -10,14 +10,13 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        this.shapeTextureKey = 'shape';
         // create board
         var config = {
             grid: getHexagonGrid(this),
             // grid: getQuadGrid(this),
             width: 8,
             height: 8,
-            wrap: true
+            // wrap: true
         }
         this.board = new Board(this, config);
 
@@ -70,58 +69,39 @@ class Board extends RexPlugins.Board.Board {
             }
         });
         this.forEachTileXY(function (tileXY, board) {
-            var poly = board.getGridPolygon(tileXY.x, tileXY.y);
-            graphics.strokePoints(poly.points, true);
-        })
-        // create grid texture
-        createGridPolygonTexture(this, scene.shapeTextureKey);
+            graphics.strokePoints(board.getGridPoints(tileXY.x, tileXY.y, true), true);
+        });
         // enable touch events
         this.setInteractive();
     }
 }
 
-var createGridPolygonTexture = function (board, shapeTextureKey) {
-    var poly = board.getGridPolygon();
-    poly.left = 0;
-    poly.top = 0;
-    var scene = board.scene;
-    scene.add.graphics()
-        .fillStyle(0xffffff)
-        .fillPoints(poly.points, true)
-        .generateTexture(shapeTextureKey, poly.width, poly.height)
-        .destroy();
-    return scene.textures.get(shapeTextureKey);
-}
-
-class Blocker extends Phaser.GameObjects.Image {
+class Blocker extends RexPlugins.Board.Shape {
     constructor(board, tileXY) {
         var scene = board.scene;
-        // create game object
-        super(scene, 0, 0, scene.shapeTextureKey);
-        scene.add.existing(this);
-        this.setTint(0x555555);
-        // add to board
         if (tileXY === undefined) {
             tileXY = board.getRandomEmptyTileXY(0);
         }
-        board.addChess(this, tileXY.x, tileXY.y, 0, true);
+        // Shape(board, tileX, tileY, tileZ, fillColor, fillAlpha, addToBoard)
+        super(board, tileXY.x, tileXY.y, 0, 0x555555);
+        scene.add.existing(this);
+
         // set blocker
         this.rexChess.setBlocker();
     }
 }
 
-class ChessA extends Phaser.GameObjects.Image {
+class ChessA extends RexPlugins.Board.Shape {
     constructor(board, tileXY) {
         var scene = board.scene;
-        // create game object
-        super(scene, 0, 0, scene.shapeTextureKey);
-        scene.add.existing(this);
-        this.setTint(0x00CC00);
-        // add to board
         if (tileXY === undefined) {
             tileXY = board.getRandomEmptyTileXY(0);
         }
-        board.addChess(this, tileXY.x, tileXY.y, 0, true);
+        // Shape(board, tileX, tileY, tileZ, fillColor, fillAlpha, addToBoard)
+        super(board, tileXY.x, tileXY.y, 0, 0x00CC00);
+        scene.add.existing(this);
+        this.setDepth(1);
+
         // add behaviors        
         this.moveTo = scene.rexBoard.add.moveTo(this);
         this.pathFinder = scene.rexBoard.add.pathFinder(this, {
@@ -175,23 +155,21 @@ class ChessA extends Phaser.GameObjects.Image {
     }
 }
 
-class MoveableTile extends Phaser.GameObjects.Image {
+class MoveableTile extends RexPlugins.Board.Shape {
     constructor(chess, tileXY) {
-        var scene = chess.scene;
-        // create game object
-        super(scene, 0, 0, scene.shapeTextureKey);
-        scene.add.existing(this);
-        this.setTint(0x330000).setScale(0.5);
-        // add to board
         var board = chess.rexChess.board;
-        board.addChess(this, tileXY.x, tileXY.y, -1, true);
-
+        var scene = board.scene;
+        // Shape(board, tileX, tileY, tileZ, fillColor, fillAlpha, addToBoard)
+        super(board, tileXY.x, tileXY.y, -1, 0x330000);
+        scene.add.existing(this);
+        this.setScale(0.5);
+        
         // on pointer down, move to this tile
         this.on('board.pointerdown', function () {
             if (!chess.moveToTile(this)) {
                 return;
             }
-            this.setTint(0xff0000);
+            this.setFillStyle(0xff0000);
         }, this);
     }
 }

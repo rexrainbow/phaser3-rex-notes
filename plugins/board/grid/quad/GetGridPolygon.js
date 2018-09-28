@@ -13,9 +13,14 @@ var GetGridPolygon = function (tileX, tileY, poly) {
     if (poly === undefined) {
         poly = new QuadPolygon(worldX, worldY, this.width, this.height, quadType);
     } else {
+        if (poly === true) {
+            poly = tmpPoly;
+        }
         poly.setTo(worldX, worldY, this.width, this.height, quadType);
     }
     return poly;
 }
+
+var tmpPoly = new QuadPolygon();
 
 export default GetGridPolygon;

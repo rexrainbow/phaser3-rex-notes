@@ -1,6 +1,7 @@
 // https://www.redblobgames.com/grids/hexagons/
 
-import Offset from './Offset.js';
+import Offset from '../utils/Offset.js';
+import SetPoints from './SetPoints.js';
 
 const Polygon = Phaser.Geom.Polygon;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
@@ -35,40 +36,8 @@ class Quad extends Polygon {
         this._y = y;
         this._width = width;
         this._height = height;
-        var points = this.points;
-        var centerX = this.centerX,
-            centerY = this.centerY;
-        var helfWidth = width / 2;
-        var helfHeight = height / 2;
 
-        if (type === 0) { // rectangle
-            // top-right
-            points[0].x = centerX + helfWidth;
-            points[0].y = centerY - helfHeight;
-            // bottom-right
-            points[1].x = centerX + helfWidth;
-            points[1].y = centerY + helfHeight;
-            // bottom-left
-            points[2].x = centerX - helfWidth;
-            points[2].y = centerY + helfHeight;            
-            // top-left
-            points[3].x = centerX - helfWidth;
-            points[3].y = centerY - helfHeight;
-        } else { // rhombus
-            // 0
-            points[0].x = centerX + helfWidth;
-            points[0].y = centerY;
-            // 90
-            points[1].x = centerX;
-            points[1].y = centerY + helfHeight;
-            // 180
-            points[2].x = centerX - helfWidth;
-            points[2].y = centerY;
-            // 270
-            points[3].x = centerX;
-            points[3].y = centerY - helfHeight;
-        }
-
+        SetPoints(this.centerX, this.centerY, width, height, type, this.points);
         this.calculateArea();
         return this;
     }

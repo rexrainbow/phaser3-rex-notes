@@ -34,10 +34,6 @@ class CanvasPlugin extends Phaser.Plugins.BasePlugin {
         canvas.fill(fillColor);
         return canvas;
     }
-
-    getClass() {
-        return Canvas;
-    }
 }
 
 SetValue(window, 'RexPlugins.GameObjects.Canvas', Canvas);

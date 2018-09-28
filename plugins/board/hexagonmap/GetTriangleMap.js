@@ -25,7 +25,7 @@ var GetTriangleMap = function (board, type, height, out) {
             });
         }
     }
-    return board.offset(out);
+    return board.shiftToO(out);
 }
 
 export default GetTriangleMap

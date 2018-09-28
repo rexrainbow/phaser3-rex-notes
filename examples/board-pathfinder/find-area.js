@@ -10,7 +10,6 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        this.shapeTextureKey = 'shape';
         var config = {
             grid: getHexagonGrid(this),
             // grid: getQuadGrid(this),
@@ -68,11 +67,8 @@ class Board extends RexPlugins.Board.Board {
             }
         });
         this.forEachTileXY(function (tileXY, board) {
-            var poly = board.getGridPolygon(tileXY.x, tileXY.y);
-            graphics.strokePoints(poly.points, true);
+            graphics.strokePoints(board.getGridPoints(tileXY.x, tileXY.y, true), true);
         })
-        // create grid texture
-        createGridPolygonTexture(this, scene.shapeTextureKey);
     }
 }
 
@@ -89,35 +85,32 @@ var createGridPolygonTexture = function (board, shapeTextureKey) {
     return scene.textures.get(shapeTextureKey);
 }
 
-class Blocker extends Phaser.GameObjects.Image {
+class Blocker extends RexPlugins.Board.Shape {
     constructor(board, tileXY) {
         var scene = board.scene;
-        // create game object
-        super(scene, 0, 0, scene.shapeTextureKey);
-        scene.add.existing(this);
-        this.setTint(0x555555);
-        // add to board
         if (tileXY === undefined) {
             tileXY = board.getRandomEmptyTileXY(0);
         }
-        board.addChess(this, tileXY.x, tileXY.y, 0, true);
+        // Shape(board, tileX, tileY, tileZ, fillColor, fillAlpha, addToBoard)
+        super(board, tileXY.x, tileXY.y, 0, 0x555555);
+        scene.add.existing(this);
+
         // set blocker
         this.rexChess.setBlocker();
     }
 }
 
-class ChessA extends Phaser.GameObjects.Image {
+class ChessA extends RexPlugins.Board.Shape {
     constructor(board, tileXY) {
         var scene = board.scene;
-        // create game object
-        super(scene, 0, 0, scene.shapeTextureKey);
-        scene.add.existing(this);
-        this.setTint(0x00CC00);
-        // add to board
         if (tileXY === undefined) {
             tileXY = board.getRandomEmptyTileXY(0);
         }
-        board.addChess(this, tileXY.x, tileXY.y, 0, true);
+        // Shape(board, tileX, tileY, tileZ, fillColor, fillAlpha, addToBoard)
+        super(board, tileXY.x, tileXY.y, 0, 0x00CC00);
+        scene.add.existing(this);
+        this.setDepth(1);
+
         // add behaviors        
         this.moveTo = scene.rexBoard.add.moveTo(this);
         this.pathFinder = scene.rexBoard.add.pathFinder(this, {

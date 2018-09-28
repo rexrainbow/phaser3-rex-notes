@@ -19,6 +19,6 @@ var GetHexagonMap = function (board, radius, out) {
             });
         }
     }
-    return board.offset(out);
+    return board.shiftToO(out);
 }
 export default GetHexagonMap;

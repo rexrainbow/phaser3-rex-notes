@@ -4,6 +4,7 @@ import GetNeighborTileY from 'rexPlugins/utils/grid/hexagon/GetNeighborTileY.js'
 import GetNeighborTileDirection from 'rexPlugins/utils/grid/hexagon/GetNeighborTileDirection.js';
 import GetOppositeDirection from 'rexPlugins/utils/grid/hexagon/GetOppositeDirection.js';
 import GetDistance from 'rexPlugins/utils/grid/hexagon/GetDistance.js';
+import GetGridPoints from './GetGridPoints.js';
 import GetGridPolygon from './GetGridPolygon.js';
 
 
@@ -46,6 +47,7 @@ var methods = {
     getNeighborTileDirection: GetNeighborTileDirection,
     getOppositeDirection: GetOppositeDirection,
     getDistance: GetDistance,
+    getGridPoints: GetGridPoints,
     getGridPolygon: GetGridPolygon
 }
 Object.assign(

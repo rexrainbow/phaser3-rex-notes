@@ -70,10 +70,6 @@ class TagTextPlugin extends Phaser.Plugins.BasePlugin {
 
         return text;
     }
-
-    getClass() {
-        return TagText;
-    }
 }
 
 SetValue(window, 'RexPlugins.GameObjects.TagText', TagText);
