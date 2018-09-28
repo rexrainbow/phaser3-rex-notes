@@ -78,7 +78,7 @@ class Board extends RexPlugins.Board.Board {
         var scene = this.scene;
         this.forEachTileXY(function (tileXY, board) {
             var index = Random(0, 5);
-            var chess = scene.rexBoard.add.shape(board, ileXY.x, tileXY.y, 0, colorArray[index * 60].color)
+            var chess = scene.rexBoard.add.shape(board, tileXY.x, tileXY.y, 0, colorArray[index * 60].color)
                 .setData('symbol', index);
             scene.add.text(chess.x, chess.y, index)
                 .setOrigin(0.5)

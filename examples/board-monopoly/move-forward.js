@@ -50,7 +50,7 @@ class Board extends RexPlugins.Board.Board {
     createPath(tiles) {
         // tiles : 2d array
         var scene = this.scene;
-        var line, symbol, tile, cost, color;
+        var line, symbol, cost;
         for (var tileY = 0, ycnt = tiles.length; tileY < ycnt; tileY++) {
             line = tiles[tileY];
             for (var tileX = 0, xcnt = line.length; tileX < xcnt; tileX++) {
@@ -60,12 +60,9 @@ class Board extends RexPlugins.Board.Board {
                 }
 
                 cost = parseFloat(symbol);
-                color = COLORMAP[cost];
-                tile = scene.add.image(0, 0, scene.shapeTextureKey)
-                    .setTint(color)
+                scene.rexBoard.add.shape(this, tileX, tileY, 0, COLORMAP[cost])
                     .setScale(0.95)
                     .setData('cost', cost);
-                this.addChess(tile, tileX, tileY, 0, true);
             }
         }
         return this;
@@ -83,7 +80,7 @@ class ChessA extends RexPlugins.Board.Shape {
             tileXY = board.getRandomEmptyTileXY(0);
         }
         // Shape(board, tileX, tileY, tileZ, fillColor, fillAlpha, addToBoard)
-        super(board, tileXY.x, tileXY.y, 1, 0x00CC00);
+        super(board, tileXY.x, tileXY.y, 1, 0x000055);
         scene.add.existing(this);
         this.setDepth(1);
 
