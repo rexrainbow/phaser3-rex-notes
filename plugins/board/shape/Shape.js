@@ -1,3 +1,5 @@
+import GetChessData from '../chess/GetChessData.js';
+
 class Shape extends Phaser.GameObjects.Polygon {
     constructor(board, tileX, tileY, tileZ, fillColor, fillAlpha, addToBoard) {
         if (addToBoard === undefined) {
@@ -18,6 +20,8 @@ class Shape extends Phaser.GameObjects.Polygon {
 
         if (addToBoard) {
             board.addChess(this, tileX, tileY, tileZ, true);
+        } else {
+            GetChessData(this);
         }
     }
 }
