@@ -44,7 +44,7 @@ Included in board plugin.
     ```
 - Stroke color
     ```javascript
-    polygon.setFillStyle(lineWidth, color, alpha)
+    polygon.setStrokeStyle(lineWidth, color, alpha)
     ```
 
 !!! warning "No tint methods"
