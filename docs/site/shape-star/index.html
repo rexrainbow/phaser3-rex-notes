@@ -908,6 +908,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../shape-arc/" title="Arc" class="md-nav__link">
+      Arc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../shape-line/" title="Line" class="md-nav__link">
       Line
     </a>
@@ -1008,6 +1020,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#set-color" title="Set color" class="md-nav__link">
+    Set color
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#properties" title="Properties" class="md-nav__link">
+    Properties
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" title="Other properties" class="md-nav__link">
     Other properties
   </a>
@@ -1027,6 +1053,54 @@
   
 </nav>
     
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../shape-triangle/" title="Triangle" class="md-nav__link">
+      Triangle
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../shape-grid/" title="Grid" class="md-nav__link">
+      Grid
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../shape-isobox/" title="Iso box" class="md-nav__link">
+      Iso box
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../shape-isotriangle/" title="Iso triangle" class="md-nav__link">
+      Iso triangle
+    </a>
   </li>
 
         
@@ -2762,6 +2836,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../board-shape/" title="Shape" class="md-nav__link">
+      Shape
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../board-moveto/" title="Move to" class="md-nav__link">
       Move to
     </a>
@@ -3025,6 +3111,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#set-color" title="Set color" class="md-nav__link">
+    Set color
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#properties" title="Properties" class="md-nav__link">
+    Properties
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" title="Other properties" class="md-nav__link">
     Other properties
   </a>
@@ -3070,9 +3170,61 @@
 </pre></div>
 
 <ul>
-<li><code>points</code> : The number of points on the star.</li>
-<li><code>innerRadius</code> : The inner radius of the star.</li>
-<li><code>outerRadius</code> : The outer radius of the star.</li>
+<li><code>points</code> : The number of points on the star. Default is 5.</li>
+<li><code>innerRadius</code> : The inner radius of the star. Default is 32.</li>
+<li><code>outerRadius</code> : The outer radius of the star. Default is 64.</li>
+</ul>
+<h3 id="set-color">Set color<a class="headerlink" href="#set-color" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Fill color
+    <div class="codehilite"><pre><span></span><span class="nx">line</span><span class="p">.</span><span class="nx">setFillStyle</span><span class="p">(</span><span class="nx">color</span><span class="p">,</span> <span class="nx">alpha</span><span class="p">);</span>
+</pre></div></li>
+<li>Stroke color
+    <div class="codehilite"><pre><span></span><span class="nx">line</span><span class="p">.</span><span class="nx">setStrokeStyle</span><span class="p">(</span><span class="nx">lineWidth</span><span class="p">,</span> <span class="nx">color</span><span class="p">,</span> <span class="nx">alpha</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">No tint methods</p>
+<p>Uses <code>line.setFillStyle(color, alpha)</code> to change color.</p>
+</div>
+<h3 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Inner radius<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">innerRadius</span> <span class="o">=</span> <span class="nx">star</span><span class="p">.</span><span class="nx">innerRadius</span><span class="p">;</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">star</span><span class="p">.</span><span class="nx">setInnerRadius</span><span class="p">(</span><span class="nx">innerRadius</span><span class="p">);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">star</span><span class="p">.</span><span class="nx">innerRadius</span> <span class="o">=</span> <span class="nx">innerRadius</span><span class="p">;</span>
+</pre></div></li>
+</ul>
+</li>
+<li>Outer radius<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">outerRadius</span> <span class="o">=</span> <span class="nx">star</span><span class="p">.</span><span class="nx">outerRadius</span><span class="p">;</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">star</span><span class="p">.</span><span class="nx">setOuterRadius</span><span class="p">(</span><span class="nx">outerRadius</span><span class="p">);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">star</span><span class="p">.</span><span class="nx">outerRadius</span> <span class="o">=</span> <span class="nx">outerRadius</span><span class="p">;</span>
+</pre></div></li>
+</ul>
+</li>
+<li>Points<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="nx">star</span><span class="p">.</span><span class="nx">points</span><span class="p">;</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">star</span><span class="p">.</span><span class="nx">setPoints</span><span class="p">(</span><span class="nx">points</span><span class="p">);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">star</span><span class="p">.</span><span class="nx">points</span> <span class="o">=</span> <span class="nx">points</span><span class="p">;</span>
+</pre></div></li>
+</ul>
+</li>
 </ul>
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
 <p>See <a href="../gameobject/">game object</a></p>
@@ -3111,13 +3263,13 @@
           </a>
         
         
-          <a href="../canvas/" title="Canvas" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../shape-triangle/" title="Triangle" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Canvas
+                Triangle
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

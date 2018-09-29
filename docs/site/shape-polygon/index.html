@@ -908,6 +908,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../shape-arc/" title="Arc" class="md-nav__link">
+      Arc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../shape-line/" title="Line" class="md-nav__link">
       Line
     </a>
@@ -984,6 +996,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#set-color" title="Set color" class="md-nav__link">
+    Set color
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#smooth" title="Smooth" class="md-nav__link">
+    Smooth
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" title="Other properties" class="md-nav__link">
     Other properties
   </a>
@@ -1026,6 +1052,54 @@
   <li class="md-nav__item">
     <a href="../shape-star/" title="Star" class="md-nav__link">
       Star
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../shape-triangle/" title="Triangle" class="md-nav__link">
+      Triangle
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../shape-grid/" title="Grid" class="md-nav__link">
+      Grid
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../shape-isobox/" title="Iso box" class="md-nav__link">
+      Iso box
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../shape-isotriangle/" title="Iso triangle" class="md-nav__link">
+      Iso triangle
     </a>
   </li>
 
@@ -2762,6 +2836,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../board-shape/" title="Shape" class="md-nav__link">
+      Shape
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../board-moveto/" title="Move to" class="md-nav__link">
       Move to
     </a>
@@ -3025,6 +3111,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#set-color" title="Set color" class="md-nav__link">
+    Set color
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#smooth" title="Smooth" class="md-nav__link">
+    Smooth
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" title="Other properties" class="md-nav__link">
     Other properties
   </a>
@@ -3067,6 +3167,28 @@
 <h3 id="add-shape-object">Add shape object<a class="headerlink" href="#add-shape-object" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">polygon</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">polygon</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">points</span><span class="p">,</span> <span class="nx">fillColor</span><span class="p">);</span>
 <span class="c1">// var polygon = scene.add.polygon(x, y, points, fillColor, fillAlpha);</span>
+</pre></div>
+
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Shift given points to align position <strong>(0, 0)</strong></p>
+</div>
+<h3 id="set-color">Set color<a class="headerlink" href="#set-color" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Fill color
+    <div class="codehilite"><pre><span></span><span class="nx">polygon</span><span class="p">.</span><span class="nx">setFillStyle</span><span class="p">(</span><span class="nx">color</span><span class="p">,</span> <span class="nx">alpha</span><span class="p">);</span>
+</pre></div></li>
+<li>Stroke color
+    <div class="codehilite"><pre><span></span><span class="nx">polygon</span><span class="p">.</span><span class="nx">setStrokeStyle</span><span class="p">(</span><span class="nx">lineWidth</span><span class="p">,</span> <span class="nx">color</span><span class="p">,</span> <span class="nx">alpha</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">No tint methods</p>
+<p>Uses <code>polygon.setFillStyle(color, alpha)</code> to change color.</p>
+</div>
+<h3 id="smooth">Smooth<a class="headerlink" href="#smooth" title="Permanent link">&para;</a></h3>
+<p>Smooths the polygon over the number of iterations specified.</p>
+<div class="codehilite"><pre><span></span><span class="nx">polygon</span><span class="p">.</span><span class="nx">smooth</span><span class="p">(</span><span class="nx">iterations</span><span class="p">);</span>
 </pre></div>
 
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>

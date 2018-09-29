@@ -906,6 +906,18 @@
           
           
 
+
+  <li class="md-nav__item">
+    <a href="../shape-arc/" title="Arc" class="md-nav__link">
+      Arc
+    </a>
+  </li>
+
+        
+          
+          
+          
+
   
 
 
@@ -955,6 +967,27 @@
           <li class="md-nav__item">
   <a href="#add-shape-object" title="Add shape object" class="md-nav__link">
     Add shape object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-color" title="Set color" class="md-nav__link">
+    Set color
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-end-points" title="Set end points" class="md-nav__link">
+    Set end points
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#line-width" title="Line width" class="md-nav__link">
+    Line width
   </a>
   
 </li>
@@ -1026,6 +1059,54 @@
   <li class="md-nav__item">
     <a href="../shape-star/" title="Star" class="md-nav__link">
       Star
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../shape-triangle/" title="Triangle" class="md-nav__link">
+      Triangle
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../shape-grid/" title="Grid" class="md-nav__link">
+      Grid
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../shape-isobox/" title="Iso box" class="md-nav__link">
+      Iso box
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../shape-isotriangle/" title="Iso triangle" class="md-nav__link">
+      Iso triangle
     </a>
   </li>
 
@@ -2762,6 +2843,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../board-shape/" title="Shape" class="md-nav__link">
+      Shape
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../board-moveto/" title="Move to" class="md-nav__link">
       Move to
     </a>
@@ -3025,6 +3118,27 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#set-color" title="Set color" class="md-nav__link">
+    Set color
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-end-points" title="Set end points" class="md-nav__link">
+    Set end points
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#line-width" title="Line width" class="md-nav__link">
+    Line width
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" title="Other properties" class="md-nav__link">
     Other properties
   </a>
@@ -3069,6 +3183,30 @@
 <span class="c1">// var line = scene.add.line(x, y, x1, y1, x2, y2, strokeColor, strokeAlpha);</span>
 </pre></div>
 
+<h3 id="set-color">Set color<a class="headerlink" href="#set-color" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Fill color
+    <div class="codehilite"><pre><span></span><span class="nx">line</span><span class="p">.</span><span class="nx">setFillStyle</span><span class="p">(</span><span class="nx">color</span><span class="p">,</span> <span class="nx">alpha</span><span class="p">);</span>
+</pre></div></li>
+<li>Stroke color
+    <div class="codehilite"><pre><span></span><span class="nx">line</span><span class="p">.</span><span class="nx">setStrokeStyle</span><span class="p">(</span><span class="nx">lineWidth</span><span class="p">,</span> <span class="nx">color</span><span class="p">,</span> <span class="nx">alpha</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">No tint methods</p>
+<p>Uses <code>line.setFillStyle(color, alpha)</code> to change color.</p>
+</div>
+<h3 id="set-end-points">Set end points<a class="headerlink" href="#set-end-points" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">line</span><span class="p">.</span><span class="nx">setTo</span><span class="p">(</span><span class="nx">x1</span><span class="p">,</span> <span class="nx">y1</span><span class="p">,</span> <span class="nx">x2</span><span class="p">,</span> <span class="nx">y2</span><span class="p">);</span>
+</pre></div>
+
+<h3 id="line-width">Line width<a class="headerlink" href="#line-width" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">line</span><span class="p">.</span><span class="nx">setLineWidth</span><span class="p">(</span><span class="nx">startWidth</span><span class="p">,</span> <span class="nx">endWidth</span><span class="p">);</span>
+</pre></div>
+
+<ul>
+<li><code>endWidth</code> : The end width of the line. Only used in WebGL.</li>
+</ul>
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
 <p>See <a href="../gameobject/">game object</a></p>
                 
@@ -3091,7 +3229,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../shape-circle/" title="Circle" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../shape-arc/" title="Arc" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -3100,7 +3238,7 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Circle
+                Arc
               </span>
             </div>
           </a>

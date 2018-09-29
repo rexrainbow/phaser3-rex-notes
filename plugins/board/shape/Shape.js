@@ -27,17 +27,13 @@ class Shape extends Phaser.GameObjects.Polygon {
 }
 
 var shiftToO = function (points) {
-    var minX = undefined,
-        minY = undefined;
+    var minX = Infinity;
+    var minY = Infinity;
     var point;
     for (var i = 0, cnt = points.length; i < cnt; i++) {
         point = points[i];
-        if ((minX === undefined) || (point.x < minX)) {
-            minX = point.x;
-        }
-        if ((minY === undefined) || (point.y < minY)) {
-            minY = point.y;
-        }
+        minX = Math.min(minX, point.x);
+        minY = Math.min(minY, point.y);
     }
     if ((minX === 0) && (minY === 0)) {
         return points;

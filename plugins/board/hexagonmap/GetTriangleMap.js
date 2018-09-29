@@ -2,11 +2,10 @@ import {
     xyz2q,
     xyz2r
 } from 'rexPlugins/utils/grid/hexagon/CubeTransfer.js';
+import ForEachTile from './ForEachTile.js';
 
-var GetTriangleMap = function (board, type, height, out) {
-    if (out === undefined) {
-        out = [];
-    }
+var GetTriangleMap = function (board, type, height, callback, scope) {
+    var tileXYArray = [];
     var mode = board.grid.mode;
     var rStart, rEnd
     for (var q = 0; q <= height; q++) {
@@ -19,13 +18,14 @@ var GetTriangleMap = function (board, type, height, out) {
         }
 
         for (var r = rStart; r <= rEnd; r++) {
-            out.push({
+            tileXYArray.push({
                 x: xyz2q(mode, q, r, -q - r),
                 y: xyz2r(mode, q, r, -q - r)
             });
         }
     }
-    return board.shiftToO(out);
+
+    return ForEachTile(tileXYArray, board, callback, scope);
 }
 
 export default GetTriangleMap

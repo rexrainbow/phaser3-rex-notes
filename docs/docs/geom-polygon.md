@@ -91,3 +91,7 @@ polygon.setTo(points);
     ```javascript
     var polygon = Phaser.Geom.Polygon.Reverse(polygon);
     ```
+- Smooth : Takes a Polygon object and applies Chaikin's smoothing algorithm on its points.
+    ```javascript
+    Phaser.Geom.Polygon.Smooth(polygon)
+    ```

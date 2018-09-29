@@ -36,7 +36,6 @@ import GetDistance from './GetDistance.js';
 import HasBlocker from './HasBlocker.js';
 import HasEdgeBlocker from './HasEdgeBlocker.js';
 import Offset from './Offset.js';
-import ShiftToO from './ShiftToO.js';
 import SetInteractive from './SetInteractive.js';
 import GetGridPoints from './GetGridPoints.js';
 import GetGridPolygon from './GetGridPolygon.js';
@@ -185,7 +184,6 @@ var methods = {
     hasBlocker: HasBlocker,
     hasEdgeBlocker: HasEdgeBlocker,
     offset: Offset,
-    shiftToO: ShiftToO,
     setInteractive: SetInteractive,
     getGridPoints: GetGridPoints,
     getGridPolygon: GetGridPolygon,

@@ -42,11 +42,16 @@ nav:
         - Shape:
             - Rectangle: shape-rectangle.md
             - Circle: shape-circle.md
+            - Arc: shape-arc.md
             - Line: shape-line.md
             - Ellipse: shape-ellipse.md
             - Polygon: shape-polygon.md
             - Curve: shape-curve.md
             - Star: shape-star.md
+            - Triangle: shape-triangle.md
+            - Grid: shape-grid.md
+            - Iso box: shape-isobox.md
+            - Iso triangle: shape-isotriangle.md
         - Canvas: canvas.md        
     - Tile map:
         - Tile map: tilemap.md
@@ -161,6 +166,7 @@ nav:
         - Quad: board-quadgrid.md
         - Hexagon: board-hexagongrid.md
     - Chess data: board-chessdata.md
+    - Shape: board-shape.md
     - Move to: board-moveto.md
     - Path finder: board-pathfinder.md
     - Match: board-match.md  
