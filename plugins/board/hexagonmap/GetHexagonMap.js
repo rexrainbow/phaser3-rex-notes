@@ -4,7 +4,7 @@ import {
 } from 'rexPlugins/utils/grid/hexagon/CubeTransfer.js';
 import ForEachTile from './ForEachTile.js';
 
-var ForEachTileInHexagonMap = function (board, radius, callback, scope) {
+var GetHexagonMap = function (board, radius, callback, scope) {
     var tileXYArray = [];
     var mode = board.grid.mode;
     var r1, r2;
@@ -21,4 +21,4 @@ var ForEachTileInHexagonMap = function (board, radius, callback, scope) {
 
     return ForEachTile(tileXYArray, board, callback, scope);
 }
-export default ForEachTileInHexagonMap;
+export default GetHexagonMap;

@@ -40,9 +40,11 @@ import SetInteractive from './SetInteractive.js';
 import GetGridPoints from './GetGridPoints.js';
 import GetGridPolygon from './GetGridPolygon.js';
 
+import DefaultGrids from '../grid/index.js';
 
 const EE = Phaser.Events.EventEmitter;
 const GetValue = Phaser.Utils.Objects.GetValue;
+const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
 class Board extends EE {
     constructor(scene, config) {
@@ -84,6 +86,11 @@ class Board extends EE {
     }
 
     setGrid(grid) {
+        if (IsPlainObject(grid)) {
+            var config = grid;
+            var gridType = GetValue(config, 'gridType', 'quadGrid');
+            var grid = new DefaultGrids[gridType](config);
+        }
         this.grid = grid;
         return this;
     }

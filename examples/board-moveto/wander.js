@@ -31,27 +31,25 @@ class Demo extends Phaser.Scene {
 }
 
 var getQuadGrid = function (scene) {
-    var grid = scene.rexBoard.add.quadGrid({
+    return {
+        gridType: 'quadGrid',
         x: 400,
         y: 100,
         cellWidth: 100,
         cellHeight: 50,
         type: 1
-    });
-    return grid;
+    };
 }
 
 var getHexagonGrid = function (scene) {
-    var staggeraxis = 'x';
-    var staggerindex = 'odd';
-    var grid = scene.rexBoard.add.hexagonGrid({
+    return {
+        gridType: 'hexagonGrid',
         x: 100,
         y: 100,
         size: 30,
-        staggeraxis: staggeraxis,
-        staggerindex: staggerindex
-    })
-    return grid;
+        staggeraxis: 'x',
+        staggerindex: 'odd'
+    };
 };
 
 class Board extends RexPlugins.Board.Board {

@@ -27,16 +27,7 @@ var chessData = gameObject.rexChess;
 var tileXYZ = gameObject.rexChess.tileXYZ;
 ```
 
-or
-
-```javascript
-var tileX = gameObject.rexChess.tileX;
-var tileY = gameObject.rexChess.tileY;
-var tileZ = gameObject.rexChess.tileZ;
-```
-
 - `tileXYZ` : Tile position `{x,y,z}`, return `null` if this chess is not added to any board.
-- `tileX`, `tileY`, `tileZ` : Return `null` if this chess is not added to any board.
 
 ### Get board
 

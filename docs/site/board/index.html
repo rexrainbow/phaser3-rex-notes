@@ -3480,27 +3480,29 @@
 <ul>
 <li>Quad board
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">board</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">board</span><span class="p">({</span>
-    <span class="nx">grid</span><span class="o">:</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">quadGrid</span><span class="p">({</span>
+    <span class="nx">grid</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">gridType</span><span class="o">:</span> <span class="s1">&#39;quadGrid&#39;</span><span class="p">,</span>
         <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">cellWidth</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">cellHeight</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;orthogonal&#39;</span>  <span class="c1">// &#39;orthogonal&#39;|&#39;isometric&#39;|&#39;staggered&#39;</span>
-    <span class="p">}),</span>
+    <span class="p">},</span>
     <span class="nx">width</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">height</span><span class="o">:</span> <span class="mi">0</span>
 <span class="p">});</span>
 </pre></div></li>
 <li>Hexagon board
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">board</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">board</span><span class="p">({</span>
-    <span class="nx">grid</span><span class="o">:</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">hexagonGrid</span><span class="p">({</span>
+    <span class="nx">grid</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">gridType</span><span class="o">:</span> <span class="s1">&#39;hexagonGrid&#39;</span><span class="p">,</span>
         <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">cellWidth</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">cellHeight</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">staggeraxis</span><span class="o">:</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span>   <span class="c1">// &#39;x&#39;|&#39;y&#39;</span>
         <span class="nx">staggerindex</span><span class="o">:</span> <span class="s1">&#39;odd&#39;</span> <span class="c1">// &#39;odd&#39;|&#39;even&#39;</span>
-    <span class="p">}),</span>
+    <span class="p">},</span>
     <span class="nx">width</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">height</span><span class="o">:</span> <span class="mi">0</span>
 <span class="p">});</span>
@@ -3508,7 +3510,14 @@
 </ul>
 <p>Configuration</p>
 <ul>
-<li><code>grid</code> : <a href="../board-quadgrid/">Quad grid</a> or <a href="../board-hexagongrid/">hexagon grid</a></li>
+<li><code>grid</code> :<ul>
+<li><code>gridType</code> :<ul>
+<li><code>'quadGrid'</code> : <a href="../board-quadgrid/">Quad grid</a></li>
+<li><code>'hexagonGrid'</code> : <a href="../board-hexagongrid/">hexagon grid</a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li><code>width</code> : Board width in tiles</li>
 <li><code>height</code> : Board height in tiles</li>
 </ul>

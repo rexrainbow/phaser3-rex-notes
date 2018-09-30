@@ -43,13 +43,14 @@ var game = new Phaser.Game(config);
 - Quad board
     ```javascript
     var board = scene.rexBoard.add.board({
-        grid: scene.rexBoard.add.quadGrid({
+        grid: {
+            gridType: 'quadGrid',
             x: 0,
             y: 0,
             cellWidth: 0,
             cellHeight: 0,
             type: 'orthogonal'  // 'orthogonal'|'isometric'|'staggered'
-        }),
+        },
         width: 0,
         height: 0
     });
@@ -57,14 +58,15 @@ var game = new Phaser.Game(config);
 - Hexagon board
     ```javascript
     var board = scene.rexBoard.add.board({
-        grid: scene.rexBoard.add.hexagonGrid({
+        grid: {
+            gridType: 'hexagonGrid',
             x: 0,
             y: 0,
             cellWidth: 0,
             cellHeight: 0,
             staggeraxis: 'x',   // 'x'|'y'
             staggerindex: 'odd' // 'odd'|'even'
-        }),
+        },
         width: 0,
         height: 0
     });
@@ -72,7 +74,10 @@ var game = new Phaser.Game(config);
 
 Configuration
 
-- `grid` : [Quad grid](board-quadgrid.md) or [hexagon grid](board-hexagongrid.md)
+- `grid` :
+    - `gridType` :
+        - `'quadGrid'` : [Quad grid](board-quadgrid.md)
+        - `'hexagonGrid'` : [hexagon grid](board-hexagongrid.md)
 - `width` : Board width in tiles
 - `height` : Board height in tiles
 

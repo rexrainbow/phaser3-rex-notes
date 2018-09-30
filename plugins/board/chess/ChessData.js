@@ -43,30 +43,6 @@ class Chess {
         return this.board.chessToTileXYZ(this[uidKey]);
     }
 
-    get tileX() {
-        var tileXYZ = this.tileXYZ;
-        if (tileXYZ) {
-            return tileXYZ.x;
-        }
-        return null;
-    }
-
-    get tileY() {
-        var tileXYZ = this.tileXYZ;
-        if (tileXYZ) {
-            return tileXYZ.y;
-        }
-        return null;
-    }
-
-    get tileZ() {
-        var tileXYZ = this.tileXYZ;
-        if (tileXYZ) {
-            return tileXYZ.z;
-        }
-        return null;
-    }
-
     setBlocker(value) {
         if (value === undefined) {
             value = true;

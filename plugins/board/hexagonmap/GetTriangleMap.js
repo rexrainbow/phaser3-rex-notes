@@ -28,4 +28,4 @@ var GetTriangleMap = function (board, type, height, callback, scope) {
     return ForEachTile(tileXYArray, board, callback, scope);
 }
 
-export default GetTriangleMap
+export default GetTriangleMap;
