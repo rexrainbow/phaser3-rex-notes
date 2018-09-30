@@ -20,7 +20,7 @@ module.exports = {
     mode: 'development',
     entry: {
         app: [
-            'babel-polyfill',
+            '@babel/polyfill',
             projectName
         ],
         vendor: ['phaser']
