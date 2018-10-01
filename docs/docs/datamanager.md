@@ -34,17 +34,17 @@ parent.data.merge(data, false);  // won't overwrite existed keys
 Fires `setdata` event when a value is first set.
 
 ```javascript
-parent.data.event.on('setdata', function(parent, key, value){ /* ... */ });
+parent.data.events.on('setdata', function(parent, key, value){ /* ... */ });
 ```
 
 Fires `changedata`, and `changedata_ + key` events when a value is set that already exists.
 
 ```javascript
-parent.data.event.on('changedata', function(parent, key, value){ /* ... */ });
+parent.data.events.on('changedata', function(parent, key, value, previousValue){ /* ... */ });
 ```
 
 ```javascript
-parent.data.event.on('changedata_' + key, function(parent, value){ /* ... */ });
+parent.data.events.on('changedata_' + key, function(parent, value, previousValue){ /* ... */ });
 ```
 
 ### Read
@@ -103,7 +103,7 @@ Get and remove that key.
 Fires `removedata` event when a key is removed.
 
 ```javascript
-parent.data.event.on('removedata', function(parent, key, value){ /* ... */ });
+parent.data.events.on('removedata', function(parent, key, value){ /* ... */ });
 ```
 
 ### Freeze

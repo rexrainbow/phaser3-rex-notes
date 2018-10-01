@@ -175,6 +175,12 @@ match.match(n, function (result, board) {
     - `pattern` : Matched symbol
 - `board` : [Board](board.md) object
 
+##### Any match-N
+
+```javascript
+var hasAnyMatchN = match.anyMatch(n);
+```
+
 #### Match pattern
 
 ```javascript
@@ -185,3 +191,9 @@ match.match(pattern, function (result, board) {
 ```
 
 - `pattern` : A list of symbols
+
+##### Any match pattern
+
+```javascript
+var hasAnyMatchN = match.anyMatch(pattern);
+```

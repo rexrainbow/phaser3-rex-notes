@@ -222,6 +222,10 @@ var output = gameObject.getBounds(output);      // output: {x, y, width, height}
     gameObject.data.values[key] = value;
     gameObject.data.values[key] += inc;
     ```
+- Enable
+    ```javascript
+    gameObject.setDataEnabled();
+    ```
 
 See [data manager](datamanager.md)
 

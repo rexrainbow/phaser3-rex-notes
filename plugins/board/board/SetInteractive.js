@@ -29,6 +29,9 @@ var onPointerDown = function (pointer) {
     if (!this.input.enable) {
         return;
     }
+    if (!pointer.isDown) {
+        return;
+    }
     var tileX = this.worldXYToTileX(pointer.x, pointer.y),
         tileY = this.worldXYToTileY(pointer.x, pointer.y);
     if (!this.contains(tileX, tileY)) {

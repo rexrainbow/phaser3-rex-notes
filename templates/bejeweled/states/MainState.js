@@ -5,7 +5,9 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 class State extends FSM {
     constructor(parent, config) {
         super(config);
-        this.parent = parent;
+        this.parent = parent; // Bejeweled
+        this.scene = parent.scene; // Bejeweled.scene
+        this.board = parent.board; // Bejeweled.board
 
         var debug = GetValue(config, 'debug', false);
         if (debug) {
@@ -15,7 +17,7 @@ class State extends FSM {
 
     // START
     enter_START() {
-        this.parent.board.init();
+        this.board.init(); // Fill background tiles
         this.next();
     }
     next_START() {
@@ -25,8 +27,9 @@ class State extends FSM {
 
     // RESET
     enter_RESET() {
-        this.parent.board.reset();
-    }    
+        this.board.reset(); // Refill chess
+        this.next();
+    }
     next_RESET() {
         return 'PRETEST';
     }
@@ -34,9 +37,12 @@ class State extends FSM {
 
 
     // PRETEST
+    enter_PRETEST() {
+        this.next();
+    }
     next_PRETEST() {
         var nextState;
-        if (HAS_POSSIBLE_MATCH3) {
+        if (this.board.preTest()) {
             nextState = 'SELECT1';
         } else {
             nextState = 'RESET';
@@ -44,18 +50,11 @@ class State extends FSM {
         return nextState;
     }
 
-    enter_PRETEST() {
-
-    }
-
     // SELECT1
     next_SELECT1() {
         return 'SELECT2';
     }
 
-    enter_PRETEST() {
-
-    }
 
     // SELECT2
     next_SELECT2() {
@@ -83,8 +82,23 @@ class State extends FSM {
         return 'SELECT1';
     }
 
+    // debug
     printState() {
         console.log('Main state: ' + this.prevState + ' -> ' + this.state);
+    }
+
+    // select chess
+    selectChess(chess) {
+        switch (this.state) {
+            case 'SELECT1':
+                this.selectedChess1 = chess; // TODO:
+                this.next();
+                break;
+            case 'SELECT2':
+                this.selectedChess2 = chess; // TODO:
+                this.next();
+                break;
+        }
     }
 }
 

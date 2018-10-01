@@ -107,7 +107,6 @@ module.exports = {
                 uglifyOptions: {
                     compress: true,
                     ie8: false,
-                    ecma: 5,
                     output: {
                         comments: false
                     },
