@@ -72,6 +72,14 @@ var match = scene.rexBoard.add.match({
     var match = new MyMatch(config);
     ```
 
+### Set board
+
+[Board object](board.md) could be assigned later.
+
+```javascript
+match.setBoard(board);
+```
+
 ### Update symbols
 
 Each tile position (tileX, tileY)  has a symbol.

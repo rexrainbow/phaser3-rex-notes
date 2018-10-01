@@ -21,6 +21,7 @@ import GetWrapTileX from './GetWrapTileX.js';
 import GetWrapTileY from './GetWrapTileY.js';
 import TileXYZToChess from './TileXYZToChess.js';
 import TileXYToChessArray from './TileXYToChessArray.js';
+import TileZToChessArray from './TileZToChessArray.js';
 import TileXYArrayToChessArray from './TileXYArrayToChessArray.js';
 import ChessToTileXYZ from './ChessToTileXYZ.js';
 import GetAllChess from './GetAllChess.js';
@@ -176,6 +177,7 @@ var methods = {
     getWrapTileY: GetWrapTileY,
     tileXYZToChess: TileXYZToChess,
     tileXYToChessArray: TileXYToChessArray,
+    tileZToChessArray: TileZToChessArray,
     tileXYArrayToChess: TileXYArrayToChessArray,
     chessToTileXYZ: ChessToTileXYZ,
     getAllChess: GetAllChess,

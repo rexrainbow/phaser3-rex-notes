@@ -16,7 +16,6 @@ class Match {
     resetFromJSON(o) {
         this.setBoard(GetValue(o, 'board', undefined));
         this.setWildcard(GetValue(o, 'wildcard', undefined));
-        this.clearSymbols();
 
         var dirMask = GetValue(o, 'dirMask', undefined);
         if (dirMask !== undefined) {
@@ -41,6 +40,9 @@ class Match {
 
     setBoard(board) {
         this.board = board;
+        if (board) {
+            this.clearSymbols();
+        }
         return this;
     }
 

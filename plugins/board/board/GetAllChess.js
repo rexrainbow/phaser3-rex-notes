@@ -1,10 +1,8 @@
-import ChessBank from '../chess/ChessBank.js';
-
 var GetAllChess = function (out) {
     if (out === undefined) {
         out = [];
     }
-    var uids = ChessBank.refs;
+    var uids = this.boardData.UIDToXYZ;
     for (var uid in uids) {
         out.push(this.uidToChess(uid));
     }
