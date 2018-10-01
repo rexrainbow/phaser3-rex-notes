@@ -2852,6 +2852,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#set-board" title="Set board" class="md-nav__link">
+    Set board
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#update-symbols" title="Update symbols" class="md-nav__link">
     Update symbols
   </a>
@@ -2912,12 +2919,38 @@
     Match-N
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#any-match-n" title="Any match-N" class="md-nav__link">
+    Any match-N
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
   <a href="#match-pattern" title="Match pattern" class="md-nav__link">
     Match pattern
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#any-match-pattern" title="Any match pattern" class="md-nav__link">
+    Any match pattern
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -3189,6 +3222,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#set-board" title="Set board" class="md-nav__link">
+    Set board
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#update-symbols" title="Update symbols" class="md-nav__link">
     Update symbols
   </a>
@@ -3249,12 +3289,38 @@
     Match-N
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#any-match-n" title="Any match-N" class="md-nav__link">
+    Any match-N
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
   <a href="#match-pattern" title="Match pattern" class="md-nav__link">
     Match pattern
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#any-match-pattern" title="Any match pattern" class="md-nav__link">
+    Any match pattern
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -3352,6 +3418,11 @@
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">match</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyMatch</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </pre></div></li>
 </ul>
+<h3 id="set-board">Set board<a class="headerlink" href="#set-board" title="Permanent link">&para;</a></h3>
+<p><a href="../board/">Board object</a> could be assigned later.</p>
+<div class="codehilite"><pre><span></span><span class="nx">match</span><span class="p">.</span><span class="nx">setBoard</span><span class="p">(</span><span class="nx">board</span><span class="p">);</span>
+</pre></div>
+
 <h3 id="update-symbols">Update symbols<a class="headerlink" href="#update-symbols" title="Permanent link">&para;</a></h3>
 <p>Each tile position (tileX, tileY)  has a symbol.</p>
 <h4 id="update-all-symbols-in-board">Update all symbols in board<a class="headerlink" href="#update-all-symbols-in-board" title="Permanent link">&para;</a></h4>
@@ -3442,6 +3513,10 @@
 </li>
 <li><code>board</code> : <a href="../board/">Board</a> object</li>
 </ul>
+<h5 id="any-match-n">Any match-N<a class="headerlink" href="#any-match-n" title="Permanent link">&para;</a></h5>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">hasAnyMatchN</span> <span class="o">=</span> <span class="nx">match</span><span class="p">.</span><span class="nx">anyMatch</span><span class="p">(</span><span class="nx">n</span><span class="p">);</span>
+</pre></div>
+
 <h4 id="match-pattern">Match pattern<a class="headerlink" href="#match-pattern" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><span class="nx">match</span><span class="p">.</span><span class="nx">match</span><span class="p">(</span><span class="nx">pattern</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">,</span> <span class="nx">board</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// var chess = board.tileXYArrayToChess(result.tileXY, 0);</span>
@@ -3452,6 +3527,9 @@
 <ul>
 <li><code>pattern</code> : A list of symbols</li>
 </ul>
+<h5 id="any-match-pattern">Any match pattern<a class="headerlink" href="#any-match-pattern" title="Permanent link">&para;</a></h5>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">hasAnyMatchN</span> <span class="o">=</span> <span class="nx">match</span><span class="p">.</span><span class="nx">anyMatch</span><span class="p">(</span><span class="nx">pattern</span><span class="p">);</span>
+</pre></div>
                 
                   
                 

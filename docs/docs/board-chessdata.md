@@ -21,6 +21,14 @@ Chess data will be added to game object via `gameObject.rexChess` once adding th
 var chessData = gameObject.rexChess;
 ```
 
+### Set tile Z
+
+```javascript
+gameObject.rexChess.setTileZ(tileZ);
+```
+
+`(tileX, tileY)` won't be changed.
+
 ### Get tile position
 
 ```javascript
