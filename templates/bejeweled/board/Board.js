@@ -1,17 +1,19 @@
 // methods
 import Init from './Init.js'
 import Reset from './Reset.js';
+import CreateChess from './chess/CreateChess.js';
 import Fill from './Fill.js';
 import BreakMatch3 from './BreakMatch3.js';
 import PreTest from './PreTest.js';
-import Fall from './Fall.js';
-import GetMatchLines from './match/GetMatchLines.js';
-import AnyMatchLine from './match/AnyMatchLine.js';
+import EliminateChess from './EliminateChess.js';
+import Falling from './Falling.js';
 import SwapChess from './SwapChess.js';
+import GetAllMatch from './match/GetAllMatch.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 class Board {
     constructor(scene, config) {
+        this.scene = scene;
         this.board = scene.rexBoard.add.board(GetValue(config, 'board', undefined));
         this.match = scene.rexBoard.add.match(GetValue(config, 'match', undefined));
         this.match.setBoard(this.board);
@@ -24,6 +26,7 @@ class Board {
         this.chessCreateCallback = GetValue(config, 'chess.create', undefined);
         this.chessMoveTo = GetValue(config, 'chess.moveTo', {});
         this.chessMoveTo.blockerTest = true;
+
     }
 
     setBoardWidth(width) {
@@ -33,12 +36,6 @@ class Board {
 
     setBoardHeight(height) {
         this.board.setBoardHeight(height);
-        return this;
-    }
-
-    setChessCreateCallback(callback, scope) {
-        this.chessCallbackScope = callback;
-        this.chessCallbackScope = scope;
         return this;
     }
 
@@ -87,13 +84,14 @@ class Board {
 var methods = {
     init: Init,
     reset: Reset,
+    createChess: CreateChess,
     fill: Fill,
     breakMatch3: BreakMatch3,
     preTest: PreTest,
-    fall: Fall,
-    getMatchLines: GetMatchLines,
-    anyMatchLine: AnyMatchLine,
+    eliminateChess: EliminateChess,
+    falling: Falling,
     swapChess: SwapChess,
+    getAllMatch: GetAllMatch,
 }
 Object.assign(
     Board.prototype,

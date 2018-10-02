@@ -2,10 +2,14 @@
 1. Test if there has any matched line after chess swapping
 */
 
+import RefreshSymbolCache from './match/RefreshSymbolCache.js';
+import AnyMatch from './match/AnyMatch.js';
+
 var PreTest = function () {
     var match = this.match;
     var directions = this.board.grid.halfDirections;
     var tileB;
+    RefreshSymbolCache.call(this); // only refresh symbol cache once
     for (var tileY = (this.board.height / 2), rowCnt = this.board.height; tileY < rowCnt; tileY++) {
         for (var tileX = 0, colCnt = this.board.width; tileX < colCnt; tileX++) {
             tileA.x = tileX;
@@ -15,7 +19,7 @@ var PreTest = function () {
                 // swap symbol
                 swapSymbols(match, tileA, tileB);
                 // any match?
-                this.preTestResult = this.anyMatchLine(3);
+                this.preTestResult = AnyMatch.call(this, 3);
                 // swap symbol back
                 swapSymbols(match, tileA, tileB);
 

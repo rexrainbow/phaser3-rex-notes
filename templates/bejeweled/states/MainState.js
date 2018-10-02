@@ -100,7 +100,7 @@ class State extends FSM {
     }
     next_MATCH3() {
         var nextState;
-        if (matchedCnt === 0) {
+        if (this.matchState.totalMatchedLinesCount === 0) {
             nextState = 'UNDOSWAP';
         } else {
             nextState = 'PRETEST';

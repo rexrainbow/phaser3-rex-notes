@@ -83,6 +83,8 @@ module.exports = {
         // board
         'boardplugin': './plugins/board-plugin.js',
 
+        // templates
+        'bejeweled': './templates/bejeweled/Bejeweled.js',
     },
     output: {
         pathinfo: true,
@@ -126,7 +128,8 @@ module.exports = {
     ],
     resolve: {
         alias: {
-            'rexPlugins': path.resolve(__dirname, 'plugins/')
+            'rexPlugins': path.resolve(__dirname, 'plugins/'),
+            'rexTemplates': path.resolve(__dirname, 'templates/'),            
         }
     }
 }

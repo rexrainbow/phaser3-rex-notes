@@ -1,4 +1,4 @@
-import Bejeweled from './Bejeweled.js';
+import Bejeweled from 'rexTemplates/bejeweled/Bejeweled.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -10,9 +10,8 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        debugger
         this.bejeweled = new Bejeweled(this, {
-            debug: true,
+            // debug: true, // Show state changed log
             board: {
                 grid: {
                     gridType: 'quadGrid',
@@ -30,12 +29,6 @@ class Demo extends Phaser.Scene {
                 // dirMask: undefined
             },
             chess: {
-                // tileZ: 1,
-
-                moveTo: {
-                    speed: 400
-                },
-
                 // pick random symbol from array, or a callback to return symbol
                 symbols: [0, 1, 2, 3, 4, 5],
                 // symbols: function(board, tileX, tileY, excluded) { return symbol; }
@@ -56,7 +49,31 @@ class Demo extends Phaser.Scene {
 
                 // scope for callbacks
                 scope: undefined,
-            }
+
+                // moveTo behavior
+                moveTo: {
+                    speed: 400
+                },                
+                // tileZ: 1,                
+            },
+
+            // callback of matched lines
+            onMatchLinesCallback: function (lines, board) {
+            },
+            onMatchLinesCallbackScope: undefined,
+
+            // callback of eliminating chess
+            onEliminatingChessCallback: function (chess, board) {
+                // return eventEmitter; // custom eliminating task, fires 'complete' event to continue FSM
+            },
+            onEliminatingChessCallbackScope: undefined,
+
+            // callback of falling chess
+            onFallingChessCallback: function (board) {
+                // return eventEmitter; // custom falling task, fires 'complete' event to continue FSM
+            },
+            onFallingChessCallback: undefined,
+
         });
         this.bejeweled.start();
     }

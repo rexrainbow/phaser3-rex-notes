@@ -2,8 +2,6 @@
 1. Fill empty grids
 */
 
-import Chess from '../chess/Chess.js';
-
 var Fill = function (map) {
     var symbol;
     var board = this.board,
@@ -20,7 +18,7 @@ var Fill = function (map) {
                     symbols = symbol;
                 }
             }
-            new Chess(this, tileX, tileY, symbols);
+            this.createChess(tileX, tileY, symbols);
         }
     }
 }
