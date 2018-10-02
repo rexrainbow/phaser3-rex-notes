@@ -12,12 +12,35 @@ class Bejeweled extends EE {
         this.scene = scene;
         this.board = new Board(scene, config);
         this.mainState = new MainState(this, config);
-        
+
+        this.boot();
+    }
+
+    boot() {
         // touch control
         this.board
             .onPointerDown(this.selectChess, this)
             .onPointerMove(this.selectChess, this)
             .onPointerUp(this.cancelSelecting, this);
+
+        this.scene.events.on('destroy', this.destroy, this);
+    }
+
+    shutdown() {
+        super.shutdown();
+        this.board.shutdown();
+        this.mainState.shutdown();
+
+        this.scene = undefined;
+        this.board = undefined;
+        this.mainState = undefined;
+        return this;
+    }
+
+    destroy() {
+        this.emit('destroy');
+        this.shutdown();
+        return this;
     }
 
     setBoardSize(width, height) {

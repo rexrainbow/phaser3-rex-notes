@@ -12,9 +12,9 @@ var SwapChess = function (chess1, chess2, completeCallback, scope) {
     var tileXYZ2 = rexChess2.tileXYZ;
     var tileX2 = tileXYZ2.x,
         tileY2 = tileXYZ2.y;
-    chess1.moveTo.once('complete', completeCallback, scope);
-    chess1.moveTo.moveTo(tileX2, tileY2);
-    chess2.moveTo.moveTo(tileX1, tileY1);
+    chess1.rexMoveTo.once('complete', completeCallback, scope);
+    chess1.rexMoveTo.moveTo(tileX2, tileY2);
+    chess2.rexMoveTo.moveTo(tileX1, tileY1);
 
     rexChess1.setTileZ(this.chessTileZ); // moveto tileZ back
     rexChess2.setTileZ(this.chessTileZ); // moveto tileZ back

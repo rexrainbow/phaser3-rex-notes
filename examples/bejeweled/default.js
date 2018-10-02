@@ -53,12 +53,25 @@ class Demo extends Phaser.Scene {
                 // moveTo behavior
                 moveTo: {
                     speed: 400
-                },                
+                },
                 // tileZ: 1,                
             },
 
             // callback of matched lines
             onMatchLinesCallback: function (lines, board) {
+                // get Game object/tile position of matched lines
+                var line, gameObject, tileXYZ;
+                for (var i = 0, icnt = lines.length; i < icnt; i++) {
+                    line = lines[i];
+                    var s = 'Get matched ' + line.size;
+                    var chessArray = line.entries;
+                    for (var j = 0, jcnt = chessArray.length; j < jcnt; j++) {
+                        gameObject = chessArray[j];
+                        tileXYZ = gameObject.rexChess.tileXYZ;
+                        s += ' (' + tileXYZ.x + ',' + tileXYZ.y + ')';
+                    }
+                    console.log(s);
+                }
             },
             onMatchLinesCallbackScope: undefined,
 

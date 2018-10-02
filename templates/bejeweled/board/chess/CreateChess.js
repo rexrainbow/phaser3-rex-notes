@@ -21,7 +21,7 @@ var CreateChess = function (tileX, tileY, symbols) {
     // Add blocker
     gameObject.rexChess.setBlocker();
     // behaviors
-    gameObject.moveTo = scene.rexBoard.add.moveTo(gameObject, this.chessMoveTo);
+    gameObject.rexMoveTo = scene.rexBoard.add.moveTo(gameObject, this.chessMoveTo);
 }
 
 export default CreateChess;

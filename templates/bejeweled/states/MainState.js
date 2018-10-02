@@ -6,17 +6,34 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 class State extends FSM {
     constructor(parent, config) {
         super(config);
-        this.matchState = new MatchState(parent, config); // sub-state
         this.parent = parent; // Bejeweled
         this.scene = parent.scene; // Bejeweled.scene
         this.board = parent.board; // Bejeweled.board
         this.selectedChess1;
         this.selectedChess2;
+        this.matchState = new MatchState(parent, config); // sub-state        
 
         var debug = GetValue(config, 'debug', false);
         if (debug) {
             this.on('statechange', this.printState, this);
         }
+    }
+
+    shutdown() {
+        super.shutdown();
+        this.matchState.shutdown();
+
+        this.parent = undefined;
+        this.scene = undefined;
+        this.board = undefined;
+        this.selectedChess1 = undefined;
+        this.selectedChess2 = undefined;
+        return this;
+    }
+
+    destroy() {
+        this.shutdown();
+        return this;
     }
 
     // START

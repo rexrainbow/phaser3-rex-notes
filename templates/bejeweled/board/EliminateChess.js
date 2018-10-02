@@ -4,7 +4,7 @@ var EliminateChess = function (chess, completeCallback, scope) {
     chess.forEach(function (item) {
         FadeOutDestroy(item, duration);
     });
-    this.scene.time.delayedCall(duration, completeCallback, [], scope); // delay in ms
+    this.eliminatingTimer = this.scene.time.delayedCall(duration, completeCallback, [], scope); // delay in ms
     return this;
 }
 export default EliminateChess;

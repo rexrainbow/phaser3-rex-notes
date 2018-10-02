@@ -45,6 +45,10 @@ class FSM extends EE {
         this.resetFromJSON(config);
     }
 
+    // shutdown() {
+    //     super.shutdown();
+    // }
+
     resetFromJSON(o) {
         this.setEnable(GetValue(o, 'enable', true));
         this.start(GetValue(o, 'start', undefined));

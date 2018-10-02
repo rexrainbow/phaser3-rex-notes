@@ -29,6 +29,27 @@ class State extends FSM {
         }
     }
 
+    shutdown() {
+        super.shutdown();
+
+        this.parent = undefined;
+        this.scene = undefined;
+        this.board = undefined;
+        this.eliminatedChessArray = undefined;
+        this.onMatchLinesCallback = undefined;
+        this.onMatchLinesCallbackScope = undefined;
+        this.onEliminatingChessCallback = undefined;
+        this.onEliminatingChessCallbackScope = undefined;
+        this.onFallingChessCallback = undefined;
+        this.onFallingChessCallbackScope = undefined;
+        return this;
+    }
+
+    destroy() {
+        this.shutdown();
+        return this;
+    }
+
     // START
     enter_START() {
         this.totalMatchedLinesCount = 0;
@@ -59,14 +80,24 @@ class State extends FSM {
         if (eliminatedLines === undefined) {
             eliminatedLines = matchedLines;
         }
-        // Put all chess to a set
-        var newSet = new SetStruct();
-        for (var i = 0, cnt = eliminatedLines.length; i < cnt; i++) {
-            eliminatedLines[i].entries.forEach(function (value) {
-                newSet.set(value);
-            });
+        switch (eliminatedLines.length) {
+            case 0:
+                this.eliminatedChessArray = [];
+                break;
+            case 1:
+                this.eliminatedChessArray = eliminatedLines[0].entries;
+                break;
+            default:
+                // Put all chess to a set
+                var newSet = new SetStruct();
+                for (var i = 0, cnt = eliminatedLines.length; i < cnt; i++) {
+                    eliminatedLines[i].entries.forEach(function (value) {
+                        newSet.set(value);
+                    });
+                }
+                this.eliminatedChessArray = newSet.entries;
+                break;
         }
-        this.eliminatedChessArray = newSet.entries;
         this.next();
     }
     next_MATCH3() {

@@ -27,6 +27,37 @@ class Board {
         this.chessMoveTo = GetValue(config, 'chess.moveTo', {});
         this.chessMoveTo.blockerTest = true;
 
+        // internal reference
+        this.eliminatingTimer = undefined; // EliminateChess
+        this.waitEvent = undefined; // Falling
+    }
+
+    shutdown() {
+        this.match.destroy();
+        this.board.destroy();
+
+        this.board = undefined;
+        this.match = undefined;
+        this.initSymbolsMap = undefined;
+        this.candidateSymbols = undefined;
+        this.chessCallbackScope = undefined;
+        this.chessCreateCallback = undefined;
+        this.chessMoveTo = undefined;
+
+        if (this.eliminatingTimer) {
+            this.eliminatingTimer.remove();
+            this.eliminatingTimer = undefined;
+        }
+        if (this.waitEvent) {
+            this.waitEvent.destroy();
+            this.waitEvent = undefined;
+        }
+        return this;
+    }
+
+    destroy() {
+        this.shutdown();
+        return this;
     }
 
     setBoardWidth(width) {
