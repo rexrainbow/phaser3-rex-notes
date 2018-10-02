@@ -30,7 +30,11 @@ class Demo extends Phaser.Scene {
                 // dirMask: undefined
             },
             chess: {
-                tileZ: 1,
+                // tileZ: 1,
+
+                moveTo: {
+                    speed: 400
+                },
 
                 // pick random symbol from array, or a callback to return symbol
                 symbols: [0, 1, 2, 3, 4, 5],

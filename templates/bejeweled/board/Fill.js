@@ -5,15 +5,12 @@
 import Chess from '../chess/Chess.js';
 
 var Fill = function (map) {
-    var tileZ = this.chessTileZ,
-        createCallback = this.chessCreateCallback,
-        scope = this.chessCallbackScope,
-        symbols = this.candidateSymbols;
     var symbol;
-    var board = this.board;
+    var board = this.board,
+        symbols = this.candidateSymbols;
     for (var tileY = 0, height = this.board.height; tileY < height; tileY++) {
         for (var tileX = 0, width = this.board.width; tileX < width; tileX++) {
-            if (board.contains(tileX, tileY, tileZ)) { // not empty                
+            if (board.contains(tileX, tileY, this.chessTileZ)) { // not empty                
                 continue;
             }
 
@@ -23,10 +20,7 @@ var Fill = function (map) {
                     symbols = symbol;
                 }
             }
-            new Chess(board, tileX, tileY, tileZ,
-                symbols,
-                createCallback,
-                scope);
+            new Chess(this, tileX, tileY, symbols);
         }
     }
 }

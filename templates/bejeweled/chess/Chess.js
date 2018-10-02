@@ -4,11 +4,11 @@ import MoveTo from 'rexPlugins/board/moveto/MoveTo.js';
 
 
 class Chess {
-    constructor(board, tileX, tileY, tileZ,
-        symbols,
-        createCallback,
-        scope
-    ) {
+    constructor(parent, tileX, tileY, symbols) {
+        var board = parent.board,
+            tileZ = parent.chessTileZ,
+            createCallback = parent.chessCreateCallback,
+            scope = parent.chessCallbackScope;
         // Get symbol
         var symbol = RandomSymbol(board, tileX, tileY, symbols, scope);
         // Create game object
@@ -19,9 +19,7 @@ class Chess {
         board.addChess(gameObject, tileX, tileY, tileZ, true);
         this.gameObject = gameObject;
         // behaviors
-        this.moveTo = new MoveTo(gameObject, {
-            blockerTest: true,
-        });
+        gameObject.moveTo = new MoveTo(gameObject, parent.chessMoveTo);
     }
 }
 

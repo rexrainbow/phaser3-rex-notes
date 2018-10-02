@@ -1,6 +1,5 @@
 import BoardPlugin from 'rexPlugins/board-plugin.js'
 import MainState from './states/MainState.js';
-import MatchState from './states/MatchState.js';
 import Board from './board/Board.js';
 
 const EE = Phaser.Events.EventEmitter;
@@ -13,12 +12,12 @@ class Bejeweled extends EE {
         this.scene = scene;
         this.board = new Board(scene, config);
         this.mainState = new MainState(this, config);
-        this.matchState = new MatchState(this, config);
-
+        
         // touch control
         this.board
             .onPointerDown(this.selectChess, this)
-            .onPointerMove(this.selectChess, this);
+            .onPointerMove(this.selectChess, this)
+            .onPointerUp(this.cancelSelecting, this);
     }
 
     setBoardSize(width, height) {
@@ -31,8 +30,12 @@ class Bejeweled extends EE {
         return this;
     }
 
-    selectChess(chess) {
+    selectChess(pointer, chess) {
         this.mainState.selectChess(chess);
+    }
+
+    cancelSelecting() {
+        this.mainState.selectChess();
     }
 }
 

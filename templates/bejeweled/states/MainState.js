@@ -1,13 +1,17 @@
 import FSM from 'rexPlugins/fsm.js';
+import MatchState from './MatchState.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class State extends FSM {
     constructor(parent, config) {
         super(config);
+        this.matchState = new MatchState(parent, config); // sub-state
         this.parent = parent; // Bejeweled
         this.scene = parent.scene; // Bejeweled.scene
         this.board = parent.board; // Bejeweled.board
+        this.selectedChess1;
+        this.selectedChess2;
 
         var debug = GetValue(config, 'debug', false);
         if (debug) {
@@ -49,24 +53,51 @@ class State extends FSM {
         }
         return nextState;
     }
+    // PRETEST
 
     // SELECT1
+    enter_SELECT1() {
+        this.selectedChess1 = undefined;
+        this.selectedChess2 = undefined;
+    }
     next_SELECT1() {
-        return 'SELECT2';
+        var nextState;
+        if (this.selectedChess1 !== undefined) {
+            nextState = 'SELECT2';
+        }
+        return nextState;
     }
+    // SELECT1
 
 
-    // SELECT2
+    // SELECT2    
     next_SELECT2() {
-        return 'SWAP';
+        var nextState;
+        if ((this.selectedChess2 !== undefined) &&
+            this.board.board.areNeighbors(this.selectedChess1, this.selectedChess2)) {
+            nextState = 'SWAP';
+        } else {
+            nextState = 'SELECT1';
+        }
+        return nextState;
     }
+    // SELECT2
 
     // SWAP
+    enter_SWAP() {
+        this.board.swapChess(this.selectedChess1, this.selectedChess2, this.next, this);
+    }
     next_SWAP() {
         return 'MATCH3';
     }
+    // SWAP
 
     // MATCH3
+    enter_MATCH3() {
+        this.matchState
+            .once('complete', this.next, this)
+            .goto('START');
+    }
     next_MATCH3() {
         var nextState;
         if (matchedCnt === 0) {
@@ -76,26 +107,31 @@ class State extends FSM {
         }
         return nextState;
     }
+    // MATCH3
 
     // UNDO_SWAP
+    enter_UNDOSWAP() {
+        this.board.swapChess(this.selectedChess1, this.selectedChess2, this.next, this);
+    }
     next_UNDOSWAP() {
         return 'SELECT1';
     }
+    // UNDO_SWAP
 
     // debug
     printState() {
         console.log('Main state: ' + this.prevState + ' -> ' + this.state);
     }
 
-    // select chess
+    // Select chess
     selectChess(chess) {
         switch (this.state) {
             case 'SELECT1':
-                this.selectedChess1 = chess; // TODO:
+                this.selectedChess1 = chess;
                 this.next();
                 break;
             case 'SELECT2':
-                this.selectedChess2 = chess; // TODO:
+                this.selectedChess2 = chess;
                 this.next();
                 break;
         }

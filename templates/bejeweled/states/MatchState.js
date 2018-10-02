@@ -6,6 +6,7 @@ class State extends FSM {
     constructor(parent, config) {
         super(config);
         this.parent = parent;
+        this.matchedLines = 0;
 
         var debug = GetValue(config, 'debug', false);
         if (debug) {
@@ -14,9 +15,13 @@ class State extends FSM {
     }
 
     // START
+    enter_START() {
+        this.matchedLines = 0;
+    }
     next_START() {
         return 'MATCH3';
     }
+    // START
 
     // MATCH3
     next_MATCH3() {
@@ -28,22 +33,30 @@ class State extends FSM {
         }
         return nextState;
     }
+    // MATCH3
 
     // ELIMINATION
     next_ELIMINATION() {
         return 'FALL';
     }
+    // ELIMINATION
 
     // FALL
     next_FALL() {
         return 'FILL';
     }
+    // FALL
 
     // FILL
     next_FILL() {
         return 'MATCH3';
     }
+    // FILL
 
+    // END
+    enter_END() {
+        this.emit('complete');
+    }
     // END
 
 

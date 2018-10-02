@@ -7,6 +7,7 @@ import PreTest from './PreTest.js';
 import Fall from './Fall.js';
 import GetMatchLines from './match/GetMatchLines.js';
 import AnyMatchLine from './match/AnyMatchLine.js';
+import SwapChess from './SwapChess.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 class Board {
@@ -21,7 +22,8 @@ class Board {
         this.candidateSymbols = GetValue(config, 'chess.symbols', undefined);
         this.chessCallbackScope = GetValue(config, 'chess.scope', undefined);
         this.chessCreateCallback = GetValue(config, 'chess.create', undefined);
-
+        this.chessMoveTo = GetValue(config, 'chess.moveTo', {});
+        this.chessMoveTo.blockerTest = true;
     }
 
     setBoardWidth(width) {
@@ -91,6 +93,7 @@ var methods = {
     fall: Fall,
     getMatchLines: GetMatchLines,
     anyMatchLine: AnyMatchLine,
+    swapChess: SwapChess,
 }
 Object.assign(
     Board.prototype,
