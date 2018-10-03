@@ -41,6 +41,6 @@
     },
     "dependencies": {
         "firebase": "^5.0.4",
-        "phaser": "3.13.0"
+        "phaser": "3.14.0"
     }
 }
