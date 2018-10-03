@@ -1,5 +1,5 @@
 @echo off
-set myproj=./examples/bejeweled/default.js
+set myproj=./examples/board-bejeweled/default.js
 cd ..
 cd ..
 npm run dev

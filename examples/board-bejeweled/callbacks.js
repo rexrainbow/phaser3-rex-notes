@@ -34,7 +34,7 @@ class Demo extends Phaser.Scene {
                 // symbols: function(board, tileX, tileY, excluded) { return symbol; }
 
                 // User-defined chess game object
-                create: function (board, tileX, tileY) {
+                create: function (board) {
                     var scene = board.scene;
                     var gameObject = scene.rexBoard.add.shape(board, 0, 0, 0, 0x0, 1, false)
                         .setScale(0.95)
