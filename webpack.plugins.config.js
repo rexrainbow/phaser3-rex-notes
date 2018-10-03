@@ -25,11 +25,7 @@ module.exports = {
         'webfontloaderplugin': './plugins/webfontloader-plugin.js',
         'awaitloaderplugin': './plugins/awaitloader-plugin.js',
 
-        // functions
-        'xorplugin': './plugins/xor-plugin.js',
-        'lzstringplugin': './plugins/lzstring-plugin.js',
-        'csvtoarrayplugin': './plugins/csvtoarray-plugin.js',
-        'sequenceplugin': './plugins/sequence-plugin.js',
+        // actions                    
         'gridalignplugin': './plugins/gridalign-plugin.js',
 
         // input
@@ -60,14 +56,17 @@ module.exports = {
         'soundfadeplugin': './plugins/soundfade-plugin.js',
 
         // control
+        'sequenceplugin': './plugins/sequence-plugin.js',
         'fsmplugin': './plugins/fsm-plugin.js',
         'tcrpplugin': './plugins/tcrp-plugin.js',
         'csvscenarioplugin': './plugins/csvscenario-plugin.js',
+        'waitevents': './plugins/waitevents-plugin.js',
 
         // time
         'clockplugin': './plugins/clock-plugin.js',
 
         // data structure
+        'csvtoarrayplugin': './plugins/csvtoarray-plugin.js',
         'csvtohashtableplugin': './plugins/csvtohashtable-plugin.js',
 
         // math
@@ -75,6 +74,10 @@ module.exports = {
         // geom
         'rhombusplugin': './plugins/rhombus-plugin.js',
         'hexagonplugin': './plugins/hexagon-plugin.js',
+
+        // string
+        'xorplugin': './plugins/xor-plugin.js',
+        'lzstringplugin': './plugins/lzstring-plugin.js',
 
         // shader
         'swirlpipelineplugin': './plugins/swirlpipeline-plugin.js',
@@ -129,7 +132,7 @@ module.exports = {
     resolve: {
         alias: {
             'rexPlugins': path.resolve(__dirname, 'plugins/'),
-            'rexTemplates': path.resolve(__dirname, 'templates/'),            
+            'rexTemplates': path.resolve(__dirname, 'templates/'),
         }
     }
 }

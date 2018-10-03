@@ -40,7 +40,7 @@ class Demo extends Phaser.Scene {
                         .setScale(0.95)
                         .setData('symbol', undefined);
                     // Symbol is stored in gameObject's data manager (`gameObject.getData('symbol')`)
-                    // Add data changed event
+                    // Add data changed event to change the appearance of game object via new symbol value
                     gameObject.data.events.on('changedata_symbol', function (gameObject, value, previousValue) {
                         gameObject.setFillStyle(getColor(value));
                     });

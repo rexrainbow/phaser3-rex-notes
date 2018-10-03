@@ -110,6 +110,7 @@ nav:
           - Recoder: tcrp-recoder.md
           - Player: tcrp-player.md
     - FSM: fsm.md
+    - Wait events: waitevents.md
 - Data:
     - Data manager: datamanager.md
     - Set: structs-set.md

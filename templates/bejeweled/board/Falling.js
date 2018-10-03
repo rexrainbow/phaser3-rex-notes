@@ -7,9 +7,9 @@ var Falling = function (completeCallback, scope) {
     var board = this.board,
         chess, moveTo;
     if (this.waitEvents === undefined) {
-        this.waitEvent = new WaitEvents();
+        this.waitEvents = new WaitEvents();
     }
-    this.waitEvent.setCompleteCallback(completeCallback, scope);
+    this.waitEvents.setCompleteCallback(completeCallback, scope);
     for (var tileY = (this.board.height - 1); tileY >= 0; tileY--) { // bottom to top
         for (var tileX = 0, cnt = this.board.width; tileX < cnt; tileX++) { // left to right
             chess = board.tileXYZToChess(tileX, tileY, this.chessTileZ);
@@ -21,7 +21,7 @@ var Falling = function (completeCallback, scope) {
                 moveTo.moveToward(1);
             } while (moveTo.lastMoveResult)
             if (moveTo.isRunning) {
-                this.waitEvent.wait(moveTo, 'complete');
+                this.waitEvents.waitEvent(moveTo, 'complete');
             }
         }
     }

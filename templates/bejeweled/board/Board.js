@@ -29,7 +29,7 @@ class Board {
 
         // internal reference
         this.eliminatingTimer = undefined; // EliminateChess
-        this.waitEvent = undefined; // Falling
+        this.waitEvents = undefined; // Falling
     }
 
     shutdown() {
@@ -48,9 +48,9 @@ class Board {
             this.eliminatingTimer.remove();
             this.eliminatingTimer = undefined;
         }
-        if (this.waitEvent) {
-            this.waitEvent.destroy();
-            this.waitEvent = undefined;
+        if (this.waitEvents) {
+            this.waitEvents.destroy();
+            this.waitEvents = undefined;
         }
         return this;
     }

@@ -9,11 +9,7 @@ import TagText from './tagtext.js';
 import WebFontLoader from './webfontloader.js';
 import Awaitloader from './awaitloader.js'
 
-// functions
-import XOR from './xor.js';
-import LZString from './lzstring.js';
-import CSVToArray from './csvtoarray.js';
-import Sequence from './sequence.js';
+// actions
 import {
     HexagonGridAlign,
     QuadGridAlign
@@ -49,12 +45,14 @@ import TextPage from './textpage.js';
 // audio
 import SoundFade from './soundfade.js';
 // control
+import Sequence from './sequence.js';
 import FSM from './fsm.js';
 import TCRP from './tcrp.js';
 import CSVScenario from './csvscenario.js';
 // time
 import Clock from './clock.js';
 // data structure
+import CSVToArray from './csvtoarray.js';
 import CSVToHashTable from './csvtohashtable.js';
 
 // math
@@ -63,14 +61,22 @@ import Gashapon from './gashapon.js';
 import Rhombus from './rhombus.js';
 import Hexagon from './hexagon.js';
 
+// string
+import XOR from './xor.js';
+import LZString from './lzstring.js';
+
 // shader
 import SwirlPipeline from './swirlpipeline.js';
 import PixelationPipeline from './pixelationpipeline.js';
 
 // board
 import Board from './board/board/Board.js';
-import HexagonGrid from './board/grid/hexagon/Hexagon.js';
 import QuadGrid from './board/grid/quad/Quad.js';
+import HexagonGrid from './board/grid/hexagon/Hexagon.js';
+import ChessShape from './board/shape/Shape.js';
+import ChessMoveTo from './board/moveto/MoveTo.js';
+import Match from './board/match/Match.js';
+import PathFinder from './board/pathfinder/PathFinder.js';
 
 export {
     // game objects
@@ -84,16 +90,12 @@ export {
     WebFontLoader,
     Awaitloader,
 
-    // functions
-    XOR,
-    LZString,
-    CSVToArray,
-    Sequence,
+    // actions
     HexagonGridAlign,
     QuadGridAlign,
 
     // input
-    TouchState,    
+    TouchState,
     Drag,
     DragSpeed,
     Slider,
@@ -104,7 +106,7 @@ export {
 
     // member of game object
     MoveTo,
-    RotateTo,    
+    RotateTo,
     Fade,
     FadeOutDestroy,
     PathFollower,
@@ -121,6 +123,7 @@ export {
     SoundFade,
 
     // control
+    Sequence,
     FSM,
     TCRP,
     CSVScenario,
@@ -129,6 +132,7 @@ export {
     Clock,
 
     // data structure
+    CSVToArray,
     CSVToHashTable,
 
     // math
@@ -137,12 +141,20 @@ export {
     Rhombus,
     Hexagon,
 
+    // string
+    XOR,
+    LZString,
+
     // shader
     SwirlPipeline,
     PixelationPipeline,
 
     // board
     Board,
-    HexagonGrid,
     QuadGrid,
+    HexagonGrid,
+    ChessShape,
+    ChessMoveTo,
+    Match,
+    PathFinder,
 };

@@ -4,12 +4,14 @@ class WaitEvents {
         this.setCompleteCallback(completeCallback, scope);
         this.events = new SetStruct();
     }
+
     shutdown() {
         this.setCompleteCallback(undefined, undefined);
         this.events.clear();
         this.event = undefined;
         return this;
     }
+
     destroy() {
         this.shutdown();
         return this;
@@ -18,15 +20,20 @@ class WaitEvents {
     setCompleteCallback(callback, scope) {
         this.completeCallback = callback;
         this.scope = scope;
+        return this;
     }
 
-    wait(eventEmitter, eventName) {
-        this.events.set(eventEmitter);
-
+    waitCallback() {
         var self = this;
-        eventEmitter.once(eventName, function () {
-            self.remove(this);
-        }, eventEmitter);
+        var callback = function () {
+            self.remove(callback);
+        }
+        this.events.set(callback);
+        return callback;
+    }
+
+    waitEvent(eventEmitter, eventName) {
+        eventEmitter.once(eventName, this.waitCallback());
         return this;
     }
 
