@@ -39,7 +39,7 @@ var bejeweled = new Bejeweled(scene, {
         // symbols: function(board, tileX, tileY, excluded) { return symbol; }
 
         // User-defined chess game object
-        create: function (board, tileX, tileY) {
+        create: function (board) {
             // Create Game object (Shape, Image, or Sprite)
             var scene = board.scene;
             var gameObject = scene.add.sprite(0, 0, textureKey, frame);
@@ -90,9 +90,13 @@ Configurations
     - `board.grid.x`, `board.grid.y` : World position of tile (0, 0)
     - `board.grid.cellWidth`, `board.grid.cellHeight` : The width/height of the cell, in pixels.
 - Chess properties
-    - `chess.symbol` : An array of possible symbols.
+    - `chess.symbols` : An array of possible symbols, or a callback to return a symbol. See [Generate symbol](board-bejeweled.md#generate-symbol)
     - `chess.create`, `chess.scope` : Callback of [creating chess object](board-bejeweled.md#create-chess-object).
     - `chess.moveTo.speed` : Constant moving speed of chess, in pixel per-second.
+- Callbacks
+    - `onMatchLinesCallback`, `onMatchLinesCallbackScope`
+    - `onEliminatingChessCallback`, `onEliminatingChessCallbackScope`
+    - `onFallingChessCallback`, `onFallingChessCallback` 
 
 #### Board height
 
@@ -103,12 +107,24 @@ Board is separated into two parts: upper and bottom
 
 For example, if amount of visible rows is `10`, `board.height` should set to `20`.
 
+#### Generate symbol
+
+Symbols are declared in property `chess.symbols` in a symbol array like `[0, 1, 2, 3, 4, 5]`, or a callback to return a symbol. The callback also use `chess.scope` as the scope.
+
+```javascript
+function(board, tileX, tileY, excluded) {
+    return symbol
+}
+```
+
+- `excluded` : `undefined` or a symbol array. Don't return these symbols.
+
 #### Create chess object
 
 Return a game object from a callback.
 
 ```javascript
-function(board, tileX, tileY) {
+function(board) {
     // Create Game object (Shape, Image, or Sprite)
     var scene = board.scene;
     var gameObject = scene.add.sprite(0, 0, textureKey, frame);

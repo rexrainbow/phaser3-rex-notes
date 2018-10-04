@@ -10,9 +10,9 @@ var CreateChess = function (tileX, tileY, symbols) {
     // Create game object
     var gameObject;
     if (scope) {
-        gameObject = this.chessCreateCallback.call(scope, board, tileX, tileY);
+        gameObject = this.chessCreateCallback.call(scope, board);
     } else {
-        gameObject = this.chessCreateCallback(board, tileX, tileY);
+        gameObject = this.chessCreateCallback(board);
     }
     // Set symbol, it also fires 'changedata_symbol' event
     gameObject.setData('symbol', symbol);

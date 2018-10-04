@@ -5,18 +5,12 @@ var RandomSymbol = function (board, tileX, tileY, callback, scope, excluded) {
     if (Array.isArray(callback)) {
         // pick random symbol from symbol array
         var symbols = callback;
+        // excluded: undefined or a symbol array
         if (excluded !== undefined) {
-            var isExcludedArray = Array.isArray(excluded);
             for (var i = 0, cnt = symbols.length; i < cnt; i++) {
                 symbol = symbols[i];
-                if (isExcludedArray) { // excluded symbols array
-                    if (excluded.indexOf(symbol) !== -1) {
-                        continue;
-                    }
-                } else { // excluded symbol
-                    if (symbol === excluded) {
-                        continue;
-                    }
+                if (excluded.indexOf(symbol) !== -1) {
+                    continue;
                 }
                 tmpSymbolArray.push(symbol);
             }

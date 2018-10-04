@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/scenemanager/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/board-bejeweled/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Scene manager - Notes of Phaser 3</title>
+        <title>Bejeweled - Notes of Phaser 3</title>
       
     
     
@@ -102,7 +102,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="../#add-new-scene" tabindex="1" class="md-skip">
+      <a href="../#introduction" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -128,7 +128,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Scene manager
+                Bejeweled
               </span>
             
           
@@ -255,12 +255,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
     
     <label class="md-nav__link" for="nav-2">
       System
@@ -324,12 +322,10 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-2" type="checkbox" id="nav-2-2" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-2" type="checkbox" id="nav-2-2">
     
     <label class="md-nav__link" for="nav-2-2">
       Scene
@@ -357,141 +353,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Scene manager
-      </label>
-    
-    <a href="./" title="Scene manager" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../scenemanager/" title="Scene manager" class="md-nav__link">
       Scene manager
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#add-new-scene" title="Add new scene" class="md-nav__link">
-    Add new scene
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#load-scene-from-external-files" title="Load scene from external files" class="md-nav__link">
-    Load scene from external files
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#destroy-scene" title="Destroy scene" class="md-nav__link">
-    Destroy scene
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#start-scene" title="Start scene" class="md-nav__link">
-    Start scene
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#pauseresume-scene" title="Pause/Resume scene" class="md-nav__link">
-    Pause/Resume scene
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#run-scene" title="Run scene" class="md-nav__link">
-    Run scene
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#stop-scene" title="Stop scene" class="md-nav__link">
-    Stop scene
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#set-visible" title="Set visible" class="md-nav__link">
-    Set visible
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#read-status" title="Read status" class="md-nav__link">
-    Read status
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#get-scene" title="Get scene" class="md-nav__link">
-    Get scene
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#order-of-scenes" title="Order of scenes" class="md-nav__link">
-    Order of scenes
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#transition" title="Transition" class="md-nav__link">
-    Transition
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#events" title="Events" class="md-nav__link">
-    Events
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -2801,10 +2667,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-14" type="checkbox" id="nav-14">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-14" type="checkbox" id="nav-14" checked>
     
     <label class="md-nav__link" for="nav-14">
       Board
@@ -2940,11 +2808,106 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../board-bejeweled/" title="Bejeweled" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Bejeweled
+      </label>
+    
+    <a href="./" title="Bejeweled" class="md-nav__link md-nav__link--active">
       Bejeweled
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-bejeweled-object" title="Create bejeweled object" class="md-nav__link">
+    Create bejeweled object
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#board-height" title="Board height" class="md-nav__link">
+    Board height
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generate-symbol" title="Generate symbol" class="md-nav__link">
+    Generate symbol
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-chess-object" title="Create chess object" class="md-nav__link">
+    Create chess object
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#start-gameplay" title="Start gameplay" class="md-nav__link">
+    Start gameplay
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -3152,16 +3115,52 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#add-new-scene" title="Add new scene" class="md-nav__link">
-    Add new scene
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#load-scene-from-external-files" title="Load scene from external files" class="md-nav__link">
-    Load scene from external files
+  <a href="#create-bejeweled-object" title="Create bejeweled object" class="md-nav__link">
+    Create bejeweled object
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#board-height" title="Board height" class="md-nav__link">
+    Board height
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#generate-symbol" title="Generate symbol" class="md-nav__link">
+    Generate symbol
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-chess-object" title="Create chess object" class="md-nav__link">
+    Create chess object
   </a>
   
 </li>
@@ -3170,81 +3169,10 @@
     </nav>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#destroy-scene" title="Destroy scene" class="md-nav__link">
-    Destroy scene
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#start-scene" title="Start scene" class="md-nav__link">
-    Start scene
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#pauseresume-scene" title="Pause/Resume scene" class="md-nav__link">
-    Pause/Resume scene
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#run-scene" title="Run scene" class="md-nav__link">
-    Run scene
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#stop-scene" title="Stop scene" class="md-nav__link">
-    Stop scene
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#set-visible" title="Set visible" class="md-nav__link">
-    Set visible
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#read-status" title="Read status" class="md-nav__link">
-    Read status
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#get-scene" title="Get scene" class="md-nav__link">
-    Get scene
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#order-of-scenes" title="Order of scenes" class="md-nav__link">
-    Order of scenes
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#transition" title="Transition" class="md-nav__link">
-    Transition
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#events" title="Events" class="md-nav__link">
-    Events
+  <a href="#start-gameplay" title="Start gameplay" class="md-nav__link">
+    Start gameplay
   </a>
   
 </li>
@@ -3270,211 +3198,147 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/scenemanager.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/board-bejeweled.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Scene manager</h1>
+                  <h1>Bejeweled</h1>
                 
-                <p>Scene manager:</p>
+                <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
+<p>Match3-like gameplay.</p>
 <ul>
-<li>In each scene instance: <code>scene.scene</code></li>
+<li>Author: Rex</li>
+<li>Template</li>
 </ul>
-<h2 id="add-new-scene">Add new scene<a class="headerlink" href="#add-new-scene" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">sceneConfig</span><span class="p">,</span> <span class="nx">autoStart</span><span class="p">);</span>
-<span class="c1">// game.scene.add(key, sceneConfig, autoStart);</span>
-</pre></div>
+<h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/bejeweled/Bejeweled.js">Template</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexbejeweled.min.js">minify</a></p>
+<h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/board-bejeweled">Sample code</a></p>
+<h3 id="create-bejeweled-object">Create bejeweled object<a class="headerlink" href="#create-bejeweled-object" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bejeweled</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Bejeweled</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">board</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">grid</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">gridType</span><span class="o">:</span> <span class="s1">&#39;quadGrid&#39;</span><span class="p">,</span>
+            <span class="nx">x</span><span class="o">:</span> <span class="mi">30</span><span class="p">,</span>
+            <span class="nx">y</span><span class="o">:</span> <span class="mi">30</span> <span class="o">-</span> <span class="mi">600</span><span class="p">,</span>
+            <span class="nx">cellWidth</span><span class="o">:</span> <span class="mi">60</span><span class="p">,</span>
+            <span class="nx">cellHeight</span><span class="o">:</span> <span class="mi">60</span><span class="p">,</span>
+            <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;orthogonal&#39;</span> <span class="c1">// &#39;orthogonal&#39;|&#39;isometric&#39;|&#39;staggered&#39;</span>
+        <span class="p">},</span>
+        <span class="nx">width</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="nx">height</span><span class="o">:</span> <span class="mi">20</span> <span class="c1">// Prepared rows: upper 10 rows</span>
+    <span class="p">},</span>
+    <span class="nx">match</span><span class="o">:</span> <span class="p">{</span>
+        <span class="c1">// wildcard: undefined</span>
+        <span class="c1">// dirMask: undefined</span>
+    <span class="p">},</span>
+    <span class="nx">chess</span><span class="o">:</span> <span class="p">{</span>
+        <span class="c1">// pick random symbol from array, or a callback to return symbol</span>
+        <span class="nx">symbols</span><span class="o">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
+        <span class="c1">// symbols: function(board, tileX, tileY, excluded) { return symbol; }</span>
 
-<h3 id="load-scene-from-external-files">Load scene from external files<a class="headerlink" href="#load-scene-from-external-files" title="Permanent link">&para;</a></h3>
-<ol>
-<li><a href="../loader/#script">load script</a>
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">script</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
-</pre></div></li>
-<li>add new scene
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">sceneConfig</span><span class="p">,</span> <span class="nx">autoStart</span><span class="p">);</span>
-<span class="c1">// game.scene.add(key, sceneConfig, autoStart);</span>
-</pre></div></li>
-</ol>
-<h2 id="destroy-scene">Destroy scene<a class="headerlink" href="#destroy-scene" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</pre></div>
+        <span class="c1">// User-defined chess game object</span>
+        <span class="nx">create</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">board</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// Create Game object (Shape, Image, or Sprite)</span>
+            <span class="kd">var</span> <span class="nx">scene</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">scene</span><span class="p">;</span>
+            <span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">sprite</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">textureKey</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>
+            <span class="c1">// Enable data manager</span>
+            <span class="nx">gameObject</span><span class="p">.</span><span class="nx">setData</span><span class="p">(</span><span class="s1">&#39;symbol&#39;</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">);</span>
+            <span class="c1">// Add data changed event of &#39;symbol` key</span>
+            <span class="nx">gameObject</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;changedata_symbol&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">previousValue</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// Change the appearance of game object via new symbol value</span>
+                <span class="nx">gameObject</span><span class="p">.</span><span class="nx">setFrame</span><span class="p">(</span><span class="nx">newFrame</span><span class="p">);</span>
+            <span class="p">});</span>
+            <span class="k">return</span> <span class="nx">gameObject</span><span class="p">;</span>
+        <span class="p">},</span>
 
-<ul>
-<li>Fires scene.events <code>destroy</code></li>
-</ul>
-<h2 id="start-scene">Start scene<a class="headerlink" href="#start-scene" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Launch the given Scene and run it in parallel with this one
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">launch</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
-</pre></div></li>
-<li>Shutdown this Scene and run the given one
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
-</pre></div></li>
-<li>Restarts this Scene
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">restart</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
-</pre></div></li>
-</ul>
-<h2 id="pauseresume-scene">Pause/Resume scene<a class="headerlink" href="#pauseresume-scene" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Pause : stops the update step but still renders
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">pause</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-<span class="c1">// scene.scene.pause();  // pause myself</span>
-</pre></div><ul>
-<li>Fires scene.events <code>pause</code></li>
-</ul>
-</li>
-<li>Resume : starts the update loop again
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">resume</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-<span class="c1">// scene.scene.resume();  // resume myself</span>
-</pre></div><ul>
-<li>Fires scene.events <code>resume</code></li>
-</ul>
-</li>
-<li>Sleep : no update, no render but doesn't shutdown
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">sleep</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-<span class="c1">// scene.scene.sleep();  // sleep myself</span>
-</pre></div><ul>
-<li>Fires scene.events <code>sleep</code></li>
-</ul>
-</li>
-<li>Wake-up: starts update and render
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">wake</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-<span class="c1">// scene.scene.wake();  // wake-up myself</span>
-</pre></div><ul>
-<li>Fires scene.events <code>wake</code></li>
-</ul>
-</li>
-<li>Makes this Scene sleep then starts the Scene given
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="k">switch</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</pre></div></li>
-</ul>
-<h2 id="run-scene">Run scene<a class="headerlink" href="#run-scene" title="Permanent link">&para;</a></h2>
-<p>Runs the given Scene, but does not change the state of this Scene.</p>
-<p>If the given Scene is paused, it will resume it. If sleeping, it will wake it.
-If not running at all, it will be started.</p>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">run</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
-</pre></div>
+        <span class="c1">// scope for callbacks</span>
+        <span class="nx">scope</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
 
-<h2 id="stop-scene">Stop scene<a class="headerlink" href="#stop-scene" title="Permanent link">&para;</a></h2>
-<p>Stop : shutdown the Scene, clearing display list, timers, etc.</p>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">stop</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-<span class="c1">// scene.scene.stop();  // stop myself</span>
-</pre></div>
+        <span class="c1">// moveTo behavior</span>
+        <span class="nx">moveTo</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">speed</span><span class="o">:</span> <span class="mi">400</span>
+        <span class="p">},</span>
+        <span class="c1">// tileZ: 1,</span>
+    <span class="p">},</span>
 
-<h2 id="set-visible">Set visible<a class="headerlink" href="#set-visible" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">setVisible</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>  <span class="c1">// value: true/false</span>
-<span class="c1">// scene.scene.setVisible(value);    // set visible to myself</span>
-</pre></div>
+    <span class="c1">// callback of matched lines</span>
+    <span class="nx">onMatchLinesCallback</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">lines</span><span class="p">,</span> <span class="nx">board</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">},</span>
+    <span class="nx">onMatchLinesCallbackScope</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
 
-<h2 id="read-status">Read status<a class="headerlink" href="#read-status" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isSleep</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">isSleeping</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-<span class="c1">// var isSleep = scene.scene.isSleeping();</span>
-</pre></div>
+    <span class="c1">// callback of eliminating chess</span>
+    <span class="nx">onEliminatingChessCallback</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="nx">board</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// return eventEmitter; // custom eliminating task, fires &#39;complete&#39; event to continue FSM</span>
+    <span class="p">},</span>
+    <span class="nx">onEliminatingChessCallbackScope</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
 
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isActive</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">isActive</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-<span class="c1">// var isActive = scene.scene.isActive();</span>
-</pre></div>
-
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isVisible</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">isVisible</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-<span class="c1">// var isVisible = scene.scene.isVisible();</span>
-</pre></div>
-
-<table>
-<thead>
-<tr>
-<th></th>
-<th>Update/isActive</th>
-<th>Render/isVisible</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Run</td>
-<td><img alt="✔️" class="emojione" src="https://cdn.jsdelivr.net/emojione/assets/3.1/png/64/2714.png" title=":heavy_check_mark:" /></td>
-<td><img alt="✔️" class="emojione" src="https://cdn.jsdelivr.net/emojione/assets/3.1/png/64/2714.png" title=":heavy_check_mark:" /></td>
-</tr>
-<tr>
-<td>Pause</td>
-<td></td>
-<td><img alt="✔️" class="emojione" src="https://cdn.jsdelivr.net/emojione/assets/3.1/png/64/2714.png" title=":heavy_check_mark:" /></td>
-</tr>
-<tr>
-<td>Sleep</td>
-<td></td>
-<td></td>
-</tr>
-</tbody>
-</table>
-<h2 id="get-scene">Get scene<a class="headerlink" href="#get-scene" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">scene</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</pre></div>
-
-<h2 id="order-of-scenes">Order of scenes<a class="headerlink" href="#order-of-scenes" title="Permanent link">&para;</a></h2>
-<p>Swaps the position of two scenes in the Scenes list.</p>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">swapPosition</span><span class="p">(</span><span class="nx">keyA</span><span class="p">,</span> <span class="nx">keyB</span><span class="p">);</span>
-<span class="c1">// scene.scene.stop(keyA);</span>
-</pre></div>
-
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">moveAbove</span><span class="p">(</span><span class="nx">keyA</span><span class="p">,</span> <span class="nx">keyB</span><span class="p">);</span>
-<span class="c1">// scene.scene.moveAbove(keyA);</span>
-</pre></div>
-
-<p>Scene B is directly above Scene A.</p>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">moveBelow</span><span class="p">(</span><span class="nx">keyA</span><span class="p">,</span> <span class="nx">keyB</span><span class="p">);</span>
-<span class="c1">// scene.scene.moveBelow(keyA);</span>
-</pre></div>
-
-<p>Scene B is directly below Scene A.</p>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">moveUp</span><span class="p">(</span><span class="nx">keyA</span><span class="p">);</span>
-<span class="c1">// scene.scene.moveBelow();</span>
-</pre></div>
-
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">moveDown</span><span class="p">(</span><span class="nx">keyA</span><span class="p">);</span>
-<span class="c1">// scene.scene.moveDown();</span>
-</pre></div>
-
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">bringToTop</span><span class="p">(</span><span class="nx">keyA</span><span class="p">);</span>
-<span class="c1">// scene.scene.bringToTop();</span>
-</pre></div>
-
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">sendToBack</span><span class="p">(</span><span class="nx">keyA</span><span class="p">);</span>
-<span class="c1">// scene.scene.sendToBack();</span>
-</pre></div>
-
-<h2 id="transition">Transition<a class="headerlink" href="#transition" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">transition</span><span class="p">({</span>
-    <span class="nx">target</span><span class="o">:</span> <span class="nx">nextSceneClass</span><span class="p">,</span>   <span class="c1">// the Scene key to transition to</span>
-    <span class="c1">// data: null,            // an object containing any data you wish to be passed to the target scenes init / create methods.</span>
-    <span class="c1">// moveAbove: false,      // move the target Scene to be above this current scene before the transition starts</span>
-    <span class="c1">// moveBelow: false,      // move the target Scene to be below this current scene before the transition starts</span>
-
-    <span class="nx">duration</span><span class="o">:</span> <span class="mi">1000</span><span class="p">,</span>           <span class="c1">// the duration, in ms</span>
-
-    <span class="c1">// sleep: false,          // set true to sleep this scene, set false to stop this scene</span>
-    <span class="c1">// allowInput: false,     // set true to enable input system of current scene and target scene</span>
-
-    <span class="c1">// onUpdate: null,</span>
-    <span class="c1">// onUpdateScope: scene</span>
+    <span class="c1">// callback of falling chess</span>
+    <span class="nx">onFallingChessCallback</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">board</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// return eventEmitter; // custom falling task, fires &#39;complete&#39; event to continue FSM</span>
+    <span class="p">},</span>
+    <span class="nx">onFallingChessCallback</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
 <span class="p">})</span>
 </pre></div>
 
-<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
+<p>Configurations</p>
 <ul>
-<li>boot
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;transitioninit&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fromScene</span><span class="p">,</span> <span class="nx">duration</span><span class="p">)){});</span>
-</pre></div></li>
-<li>start
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;transitionstart&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fromScene</span><span class="p">,</span> <span class="nx">duration</span><span class="p">){});</span>
-</pre></div></li>
-<li>transition-out
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;transitionout&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">targetScene</span><span class="p">){});</span>
-</pre></div></li>
-<li>complete
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;transitioncomplete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">scene</span><span class="p">){});</span>
-</pre></div></li>
-<li>wake : wake-up target scene if it was previously asleep
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;transitionwake&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fromScene</span><span class="p">,</span> <span class="nx">duration</span><span class="p">){});</span>
-</pre></div></li>
+<li>Board properties<ul>
+<li><code>board.width</code> : Board width in tiles.</li>
+<li><code>board.height</code> : <a href="./#board-height">Board height</a> in tiles.</li>
+<li><code>board.grid.x</code>, <code>board.grid.y</code> : World position of tile (0, 0)</li>
+<li><code>board.grid.cellWidth</code>, <code>board.grid.cellHeight</code> : The width/height of the cell, in pixels.</li>
 </ul>
+</li>
+<li>Chess properties<ul>
+<li><code>chess.symbols</code> : An array of possible symbols, or a callback to return a symbol. See <a href="./#generate-symbol">Generate symbol</a></li>
+<li><code>chess.create</code>, <code>chess.scope</code> : Callback of <a href="./#create-chess-object">creating chess object</a>.</li>
+<li><code>chess.moveTo.speed</code> : Constant moving speed of chess, in pixel per-second.</li>
+</ul>
+</li>
+<li>Callbacks<ul>
+<li><code>onMatchLinesCallback</code>, <code>onMatchLinesCallbackScope</code></li>
+<li><code>onEliminatingChessCallback</code>, <code>onEliminatingChessCallbackScope</code></li>
+<li><code>onFallingChessCallback</code>, <code>onFallingChessCallback</code> </li>
+</ul>
+</li>
+</ul>
+<h4 id="board-height">Board height<a class="headerlink" href="#board-height" title="Permanent link">&para;</a></h4>
+<p>Board is separated into two parts: upper and bottom</p>
+<ul>
+<li>Bottom : <strong>Visible N rows</strong>, to swap chess and run matching.</li>
+<li>Upper : <strong>Invisible N rows</strong>, chess in these rows will move down, to fill bottom rows.</li>
+</ul>
+<p>For example, if amount of visible rows is <code>10</code>, <code>board.height</code> should set to <code>20</code>.</p>
+<h4 id="generate-symbol">Generate symbol<a class="headerlink" href="#generate-symbol" title="Permanent link">&para;</a></h4>
+<p>Symbols are declared in property <code>chess.symbols</code> in a symbol array like <code>[0, 1, 2, 3, 4, 5]</code>, or a callback to return a symbol. The callback also use <code>chess.scope</code> as the scope.</p>
+<div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">board</span><span class="p">,</span> <span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">,</span> <span class="nx">excluded</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">symbol</span>
+<span class="p">}</span>
+</pre></div>
+
+<ul>
+<li><code>excluded</code> : <code>undefined</code> or a symbol array. Don't return these symbols.</li>
+</ul>
+<h4 id="create-chess-object">Create chess object<a class="headerlink" href="#create-chess-object" title="Permanent link">&para;</a></h4>
+<p>Return a game object from a callback.</p>
+<div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">board</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Create Game object (Shape, Image, or Sprite)</span>
+    <span class="kd">var</span> <span class="nx">scene</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">scene</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">sprite</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">textureKey</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>
+    <span class="c1">// Enable data manager</span>
+    <span class="nx">gameObject</span><span class="p">.</span><span class="nx">setData</span><span class="p">(</span><span class="s1">&#39;symbol&#39;</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">);</span>
+    <span class="c1">// Add data changed event of &#39;symbol` key</span>
+    <span class="nx">gameObject</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;changedata_symbol&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">previousValue</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// Change the appearance of game object via new symbol value</span>
+        <span class="nx">gameObject</span><span class="p">.</span><span class="nx">setFrame</span><span class="p">(</span><span class="nx">newFrame</span><span class="p">);</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>Each chess has a <code>symbol</code> value stored in <code>'symbol'</code> key in private data. Add data changed event of 'symbol` key to change the appearance of game object via new symbol value.</p>
+<h3 id="start-gameplay">Start gameplay<a class="headerlink" href="#start-gameplay" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
+</pre></div>
                 
                   
                 
@@ -3495,7 +3359,7 @@ If not running at all, it will be started.</p>
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../scene/" title="Scene" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../board-match/" title="Match" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -3504,19 +3368,19 @@ If not running at all, it will be started.</p>
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Scene
+                Match
               </span>
             </div>
           </a>
         
         
-          <a href="../snapshot/" title="Snapshot" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../localstorage/" title="LocalStorage" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Snapshot
+                LocalStorage
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

@@ -170,7 +170,8 @@ nav:
     - Shape: board-shape.md
     - Move to: board-moveto.md
     - Path finder: board-pathfinder.md
-    - Match: board-match.md  
+    - Match: board-match.md
+    - Bejeweled: board-bejeweled.md
 - Storage:
     - Offline:
         - Key-value pairs:
