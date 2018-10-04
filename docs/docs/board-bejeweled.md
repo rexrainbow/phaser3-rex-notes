@@ -1,6 +1,6 @@
 ## Introduction
 
-Match3-like gameplay.
+Match3-like gameplay template.
 
 - Author: Rex
 - Template
@@ -43,7 +43,7 @@ var bejeweled = new Bejeweled(scene, {
             // Create Game object (Shape, Image, or Sprite)
             var scene = board.scene;
             var gameObject = scene.add.sprite(0, 0, textureKey, frame);
-            // Enable data manager
+            // Initial 'symbol' value
             gameObject.setData('symbol', undefined);
             // Add data changed event of 'symbol` key
             gameObject.data.events.on('changedata_symbol', function (gameObject, value, previousValue) {
@@ -94,9 +94,11 @@ Configurations
     - `chess.create`, `chess.scope` : Callback of [creating chess object](board-bejeweled.md#create-chess-object).
     - `chess.moveTo.speed` : Constant moving speed of chess, in pixel per-second.
 - Callbacks
-    - `onMatchLinesCallback`, `onMatchLinesCallbackScope`
-    - `onEliminatingChessCallback`, `onEliminatingChessCallbackScope`
-    - `onFallingChessCallback`, `onFallingChessCallback` 
+    - `onMatchLinesCallback`, `onMatchLinesCallbackScope` : [On matched lines](board-bejeweled.md#on-matched-lines)
+    - `onEliminatingChessCallback`, `onEliminatingChessCallbackScope` : [On eliminating chess](board-bejeweled.md#on-eliminating-chess)
+    - `onFallingChessCallback`, `onFallingChessCallback` : [On falling chess](board-bejeweled.md#on-falling-chess)
+
+It also install [Board plugins](board.md) into Game system.
 
 #### Board height
 
@@ -125,20 +127,71 @@ Return a game object from a callback.
 
 ```javascript
 function(board) {
-    // Create Game object (Shape, Image, or Sprite)
+    // Create Game object (Image, Sprite, or Shape)
     var scene = board.scene;
     var gameObject = scene.add.sprite(0, 0, textureKey, frame);
-    // Enable data manager
+    // Initial 'symbol' value
     gameObject.setData('symbol', undefined);
     // Add data changed event of 'symbol` key
     gameObject.data.events.on('changedata_symbol', function (gameObject, value, previousValue) {
         // Change the appearance of game object via new symbol value
         gameObject.setFrame(newFrame);
     });
+    return gameObject;
 }
 ```
 
 Each chess has a `symbol` value stored in `'symbol'` key in private data. Add data changed event of 'symbol` key to change the appearance of game object via new symbol value.
+
+#### Callbacks
+
+##### On matched lines
+
+```javascript
+function(lines, board) {
+
+}
+```
+
+- `lines` : An array of matched lines, each line is a [built-in Set object](struct-set.md).
+    - Length of each line (`lines[i].size`) could be *5*, *4*, or *3*.
+    - `lines[i].entries` : An array of chess (Game Object) in a matched line.
+    - All chess game objects in matched lines will be eliminated in next stage. Add/remove chess game object in these lines, or add new line in `lines` array to change the eliminated targets.
+- `board` : [Board object](board.md).
+    - Get tile position `{x,y,z}` of a chess game object via
+        ```javascript
+        var tileXYZ = gameObject.rexChess.tileXYZ;
+        ```
+    - Get chess game object of a tile position `{x,y,z}` via
+        ```javascript
+        var gameObject = board.tileXYZToChess(tileX, tileY, tileZ);
+        ```
+    - Get array of neighbor chess of a chess game object via
+        ```javascript
+        var gameObjects = board.getNeighborChess(chess, null);
+        ```
+
+Use cases:
+
+- Get cross chess of two lines via `lineA.intersect(lineB)`.
+- Add chess into line(s) to eliminate more chess.
+
+##### On eliminating chess
+
+```javascript
+function(chessArray, board) {
+    // return eventEmitter; // custom eliminating task, fires 'complete' event to continue FSM
+}
+```
+
+- `chessArray` : An array of chess (Game Object) to be eliminated
+- `board` : [Board object](board.md)
+
+Use csees:
+
+- Accumulate scores via amount of eliminated chess
+
+##### On falling chess
 
 ### Start gameplay
 

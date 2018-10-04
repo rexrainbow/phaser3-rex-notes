@@ -65,33 +65,29 @@ class State extends FSM {
         var matchedLines = this.board.getAllMatch();
         this.totalMatchedLinesCount += matchedLines.length;
         // callback
-        var eliminatedLines;
         var callback = this.onMatchLinesCallback,
             scope = this.onMatchLinesCallbackScope;
         if (callback) {
             var board = this.board.board;
             if (scope) {
-                eliminatedLines = callback.call(scope, matchedLines, board);
+                callback.call(scope, matchedLines, board);
             } else {
-                eliminatedLines = callback(matchedLines, board);
+                callback(matchedLines, board);
             }
-            // add or remove more eliminated chess
+            // add or remove eliminated chess
         }
-        if (eliminatedLines === undefined) {
-            eliminatedLines = matchedLines;
-        }
-        switch (eliminatedLines.length) {
+        switch (matchedLines.length) {
             case 0:
                 this.eliminatedChessArray = [];
                 break;
             case 1:
-                this.eliminatedChessArray = eliminatedLines[0].entries;
+                this.eliminatedChessArray = matchedLines[0].entries;
                 break;
             default:
                 // Put all chess to a set
                 var newSet = new SetStruct();
-                for (var i = 0, cnt = eliminatedLines.length; i < cnt; i++) {
-                    eliminatedLines[i].entries.forEach(function (value) {
+                for (var i = 0, cnt = matchedLines.length; i < cnt; i++) {
+                    matchedLines[i].entries.forEach(function (value) {
                         newSet.set(value);
                     });
                 }
@@ -142,7 +138,7 @@ class State extends FSM {
         return 'FALLING';
     }
     exit_ELIMINATING() {
-        this.eliminatedChessArray.length = 0;
+        this.eliminatedChessArray = undefined;
     }
     // ELIMINATING
 

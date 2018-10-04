@@ -32,6 +32,7 @@ class Demo extends Phaser.Scene {
                     var scene = board.scene;
                     var gameObject = scene.rexBoard.add.shape(board, 0, 0, 0, 0x0, 1, false)
                         .setScale(0.95)
+                        // Initial 'symbol' value
                         .setData('symbol', undefined);
                     // Symbol is stored in gameObject's data manager (`gameObject.getData('symbol')`)
                     // Add data changed event to change the appearance of game object via new symbol value

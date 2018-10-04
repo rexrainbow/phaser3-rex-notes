@@ -10,6 +10,17 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
+        this.data.set('scores', undefined);  // Initial 'scores' value
+        var txtScore = this.add.text(650, 30, '?', {
+            fontSize: '24px',
+            color: '#fff'
+        });
+
+        this.data.events.on('changedata_scores', function (scene, value, previousValue) {            
+            txtScore.setText(value);
+        });
+        this.data.set('scores', 0);
+
         this.bejeweled = new Bejeweled(this, {
             // debug: true, // Show state changed log
             board: {
@@ -38,6 +49,7 @@ class Demo extends Phaser.Scene {
                     var scene = board.scene;
                     var gameObject = scene.rexBoard.add.shape(board, 0, 0, 0, 0x0, 1, false)
                         .setScale(0.95)
+                        // Initial 'symbol' value
                         .setData('symbol', undefined);
                     // Symbol is stored in gameObject's data manager (`gameObject.getData('symbol')`)
                     // Add data changed event to change the appearance of game object via new symbol value
@@ -76,7 +88,10 @@ class Demo extends Phaser.Scene {
             onMatchLinesCallbackScope: undefined,
 
             // callback of eliminating chess
-            onEliminatingChessCallback: function (chess, board) {
+            onEliminatingChessCallback: function (chessArray, board) {
+                var scene = board.scene;
+                // Accumulate scores 
+                scene.data.set('scores', scene.data.get('scores') + chessArray.length);
                 // return eventEmitter; // custom eliminating task, fires 'complete' event to continue FSM
             },
             onEliminatingChessCallbackScope: undefined,

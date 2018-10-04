@@ -42,7 +42,13 @@ set.clear();
 set.contains(element);
 ```
 
-### Get array
+### Get elements
+
+```javascript
+var elements = set.entries;
+```
+
+or get a shallow copy of elements
 
 ```javascript
 var elements = set.getArray();

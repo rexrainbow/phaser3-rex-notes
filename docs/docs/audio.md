@@ -108,48 +108,48 @@ var music = this.sound.add(key, config);
 
 ##### Mute
 
-- Set mute
+- Set
     ```javascript
     music.setMute(mute); // mute: true/false
     // music.mute = mute;
     ```
-- Get mute
+- Get
     ```javascript
     var mute = music.mute;
     ```
 
 ##### Volume
 
-- Set volume
+- Set
     ```javascript
     music.setVolume(volume); // volume: 0 to 1
     // music.volume = volume;
     ```
-- Get volume
+- Get
     ```javascript
     var volume = music.volume;
     ```
 
 ##### Detune
 
-- Set detune
+- Set
     ```javascript
     music.setDetune(detune); // detune: -1200 to 1200
     // music.detune = detune;
     ```
-- Get detune
+- Get
     ```javascript
     var detune = music.detune;
     ```
 
 ##### Play-rate
 
-- Set play-rate
+- Set
     ```javascript
     music.setRate(rate); // rate: 1.0(normal speed), 0.5(half speed), 2.0(double speed)
     // music.rate = rate;
     ```
-- Get play-rate
+- Get
     ```javascript
     var rate = music.rate;
     ```
@@ -168,12 +168,12 @@ var music = this.sound.add(key, config);
 
 ##### Loop
 
-- Set loop
+- Set
     ```javascript
     music.setLoop(loop); // loop: true/false
     // music.loop = loop;
     ```
-- Get loop
+- Get
     ```javascript
     var loop = music.loop;
     ```
@@ -359,48 +359,48 @@ music.play(markerName, config);
 
 ##### Mute
 
-- Set mute
+- Set
     ```javascript
     scene.sound.setMute(mute); // mute: true/false
     // scene.sound.mute = mute;
     ```
-- Get mute
+- Get
     ```javascript
     var mute = scene.sound.mute;
     ```
 
 ##### Volume
 
-- Set volume
+- Set
     ```javascript
     scene.sound.setVolume(volume); // volume: 0 to 1
     // scene.sound.volume = volume;
     ```
-- Get volume
+- Get
     ```javascript
     var volume = scene.sound.volume;
     ```
 
 ##### Detune
 
-- Set detune
+- Set
     ```javascript
     scene.sound.setDetune(detune); // detune: -1200 to 1200
     // scene.sound.detune = detune;
     ```
-- Get detune
+- Get
     ```javascript
     var detune = scene.sound.detune;
     ```
 
 ##### Play-rate
 
-- Set play-rate
+- Set
     ```javascript
     scene.sound.setRate(rate); // rate: 1.0(normal speed), 0.5(half speed), 2.0(double speed)
     // scene.sound.rate = rate;
     ```
-- Get play-rate
+- Get
     ```javascript
     var rate = scene.sound.rate;
     ```

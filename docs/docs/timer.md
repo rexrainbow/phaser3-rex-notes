@@ -35,7 +35,7 @@ Execute callback when time-out, built-in object of phaser.
 - Oneshot timer
 
     ```javascript
-    var timer = scene.time.delayedCall(delay, callback, args, callbackscope);  // delay in ms
+    var timer = scene.time.delayedCall(delay, callback, args, scope);  // delay in ms
     ```
 
 - All properties of timer
