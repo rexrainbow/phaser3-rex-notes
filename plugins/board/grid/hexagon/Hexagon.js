@@ -31,6 +31,9 @@ class HexagonGrid extends Hexagon {
         return HALFDIR;
     }
 
+    // setOriginPosition
+    // setCellSize
+    // setType
     // getWorldX
     // getWorldY
     // getTileX

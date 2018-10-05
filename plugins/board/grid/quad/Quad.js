@@ -37,6 +37,9 @@ class QuadGrid extends Quad {
         return (this.directions === 4) ? HALFDIR4 : HALFDIR8;
     }
 
+    // setOriginPosition
+    // setCellSize
+    // setType
     // getWorldX
     // getWorldY
     // getTileX

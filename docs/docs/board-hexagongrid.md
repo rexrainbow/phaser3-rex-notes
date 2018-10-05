@@ -42,6 +42,31 @@ var grid = scene.rexBoard.add.hexagonGrid({
     - `0`, or `even`
     - `1`, or `odd`
 
+### Set world position of tile (0, 0)
+
+```javascript
+grid.setOriginPosition(worldX, worldY);
+```
+
+### Set cell size
+
+```javascript
+grid.setCellSize(cellWidth, cellHeight);
+```
+
+### Set grid type
+
+```javascript
+grid.setType(staggeraxis, staggerindex);
+```
+
+- `staggeraxis`
+    - `0`, or `y`
+    - `1`, or `x`
+- `staggerindex`
+    - `0`, or `even`
+    - `1`, or `odd`
+
 ### Get world position
 
 ```javascript

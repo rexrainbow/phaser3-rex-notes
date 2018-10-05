@@ -57,6 +57,27 @@ moveTo.moveToward(direction);
 moveTo.moveToRandomNeighbor();
 ```
 
+#### Move away or move closer
+
+- Move away from a tile position
+    ```javascript
+    moveTo.moveAway(tileX, tileY);
+    ```
+    or
+    ```javascript
+    moveTo.moveAway(tileXY);
+    ```
+    - `tileXY` : Tile position `{x,y}`
+- Move closer to a tile position
+    ```javascript
+    moveTo.moveCloser(tileX, tileY);
+    ```
+    or
+    ```javascript
+    moveTo.moveCloser(tileXY);
+    ```
+    - `tileXY` : Tile position `{x,y}`
+
 ### Can move to tile
 
 ```javascript

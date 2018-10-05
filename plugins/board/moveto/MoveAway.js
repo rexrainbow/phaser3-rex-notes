@@ -1,17 +1,19 @@
-var MoveAway = function (tileX, tileY) {
+var MoveAway = function (tileX, tileY, moveAwayMode) {
     var board = this.chessData.board;
     if (board === null) { // chess is not in a board
         this.lastMoveResult = false;
         return this;
     }
 
-    if (typeof (tileX) === 'number') {
-        targetTileXY.x = tileX;
-        targetTileXY.y = tileY;
-    } else {
-        var tileXY = tileX;
-        targetTileXY.x = tileXY.x;
-        targetTileXY.y = tileXY.y;
+    if (typeof (tileX) !== 'number') {
+        var config = tileX;
+        tileX = config.x;
+        tileY = config.y;
+    }
+    targetTileXY.x = tileX;
+    targetTileXY.y = tileY;
+    if (moveAwayMode === undefined) {
+        moveAwayMode = true;
     }
 
     var myTileXYZ = this.chessData.tileXYZ,
@@ -50,23 +52,47 @@ var MoveAway = function (tileX, tileY) {
         }
         chessInfo.distance = board.getDistance(chessInfo, targetTileXY, true);
     }
+    var previousDirection = this.destinationDirection;
     // Sort chess info
     tmpChessInfo.sort(function (infoA, infoB) {
-        return (infoA.distance === null) ? 1 :
-            (infoB.distance === null) ? -1 :
-            (infoA.distance > infoB.distance) ? -1 :
-            (infoA.distance < infoB.distance) ? 1 :
-            // Equal-to case
-            (infoA.direction === null) ? 1 :
-            (infoB.direction === null) ? -1 :
-            0;
+        // Invalid tile position
+        if (infoA.distance === null) {
+            return 1;
+        }
+        if (infoB.distance === null) {
+            return -1;
+        }
+
+        if (infoA.distance > infoB.distance) {
+            return (moveAwayMode) ? -1 : 1;
+        }
+        if (infoA.distance < infoB.distance) {
+            return (moveAwayMode) ? 1 : -1;
+        }
+
+        // Equal-to case
+        // Diagonal
+        if (infoA.direction === previousDirection) {
+            return 1;
+        }
+        if (infoB.direction === previousDirection) {
+            return -1;
+        }
+        // Current tile position
+        if (infoA.direction === null) {
+            return 1;
+        }
+        if (infoB.direction === null) {
+            return -1;
+        }
+        return 0;
     });
-    // Find moveable neighbor, or don't move (current tile position)
+    // Try move to neighbor, or current tile position
     for (var i = 0, cnt = tmpChessInfo.length; i < cnt; i++) {
         chessInfo = tmpChessInfo[i];
         if (chessInfo.distance === null) { // Invalid tile position
             return this;
-        }        
+        }
         this.moveTo(chessInfo);
         if (this.lastMoveResult) {
             return this;

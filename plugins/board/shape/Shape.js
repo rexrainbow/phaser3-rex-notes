@@ -1,10 +1,19 @@
-import GetChessData from '../chess/GetChessData.js';
+import CreateChessData from '../chess/GetChessData.js';
 
 class Shape extends Phaser.GameObjects.Polygon {
     constructor(board, tileX, tileY, tileZ, fillColor, fillAlpha, addToBoard) {
         if (addToBoard === undefined) {
             addToBoard = true;
         }
+
+        // Chess-Container
+        var isChessContainer = (board.type === 'rexChessContainer'),
+            chessContainer;
+        if (isChessContainer) {
+            chessContainer = board;
+            board = chessContainer.board;
+        }
+
         var scene = board.scene;
         var worldX, worldY;
         if (addToBoard) {
@@ -19,9 +28,13 @@ class Shape extends Phaser.GameObjects.Polygon {
         super(scene, worldX, worldY, points, fillColor, fillAlpha);
 
         if (addToBoard) {
-            board.addChess(this, tileX, tileY, tileZ, true);
+            if (isChessContainer) { // Chess-Container
+                chessContainer.addChess(this, tileX, tileY, tileZ);
+            } else {
+                board.addChess(this, tileX, tileY, tileZ, true);
+            }
         } else {
-            GetChessData(this);
+            CreateChessData(this);
         }
     }
 }

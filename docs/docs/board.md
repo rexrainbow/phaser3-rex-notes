@@ -388,7 +388,7 @@ var chessArray = board.getAllChess();
     board.setInteractive(false);
     ```
 
-#### Touch events
+#### Touch input
 
 - Pointer down at any tile
     ```javascript
@@ -421,13 +421,13 @@ var chessArray = board.getAllChess();
     board.on('gameobjectdown', function(pointer, gameObject) {
     })
     ```
-    - `pointer` : [Touch pointer](touchevents.md#properties-of-point)
-    - `gameObject` : Game object at touched (tileX, tileY)
     or
     ```javascript
     gameObject.on('board.pointerdown', function(pointer) {
     })
     ```
+    - `pointer` : [Touch pointer](touchevents.md#properties-of-point)
+    - `gameObject` : Game object at touched (tileX, tileY)
 - Pointer up at a chess
     ```javascript
     board.on('gameobjectup', function(pointer, gameObject) {
@@ -438,6 +438,8 @@ var chessArray = board.getAllChess();
     gameObject.on('board.pointerup', function(pointer) {
     })
     ```
+    - `pointer` : [Touch pointer](touchevents.md#properties-of-point)
+    - `gameObject` : Game object at touched (tileX, tileY)    
 - Pointer move to another chess
     ```javascript
     board.on('gameobjectmove', function(pointer, gameObject) {
@@ -448,6 +450,8 @@ var chessArray = board.getAllChess();
     gameObject.on('board.pointermove', function(pointer) {
     })
     ```
+    - `pointer` : [Touch pointer](touchevents.md#properties-of-point)
+    - `gameObject` : Game object at touched (tileX, tileY)    
 
 ### Grid polygon
 

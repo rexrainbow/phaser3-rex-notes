@@ -1,7 +1,7 @@
 import Clear from 'rexPlugins/utils/object/Clear.js';
 import IsEmpty from 'rexPlugins/utils/object/IsEmpty.js';
 
-class Board {
+class BoardData {
     constructor() {
         this.XYZToUID = {}; // [x][y][z] : uid
         this.UIDToXYZ = {}; // uid : xyz
@@ -184,4 +184,4 @@ class Board {
     }
 }
 
-export default Board;
+export default BoardData;

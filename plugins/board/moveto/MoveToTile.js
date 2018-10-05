@@ -14,7 +14,9 @@ var MoveToTile = function (tileX, tileY, direction) {
         direction = GetValue(config, 'direction', undefined);
     }
     var myTileXYZ = this.chessData.tileXYZ;
-    if (direction !== undefined) {
+    if ((direction !== undefined) &&
+        (tileX == null) || (tileY == null)) {
+        // Get neighbor tile position if direction is not undefined
         var targetTileXY = board.getNeighborTileXY(myTileXYZ, direction);
         if (targetTileXY !== null) {
             tileX = targetTileXY.x;

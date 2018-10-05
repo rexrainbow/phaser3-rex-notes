@@ -30,6 +30,14 @@ class Demo extends Phaser.Scene {
         }
 
         chessA.moveAway(0, 0);
+
+        var btnText = ['Move away (0,0)', 'Move closer (0,0)']
+        var btnMode = this.add.text(0, 0, btnText[0])
+            .setInteractive()
+            .on('pointerdown', function () {
+                chessA.moveAwayMode = !chessA.moveAwayMode;
+                btnMode.setText(btnText[(chessA.moveAwayMode) ? 0 : 1]);
+            })
     }
 }
 
@@ -105,6 +113,7 @@ class ChessA extends RexPlugins.Board.Shape {
             speed: 200,
             blockerTest: true
         });
+        this.moveAwayMode = true;
     }
 
     moveAway(tileX, tileY) {
@@ -115,7 +124,7 @@ class ChessA extends RexPlugins.Board.Shape {
             .once('complete', function () {
                 this.moveAway(tileX, tileY);
             }, this)
-            .moveAway(tileX, tileY);
+            .moveAway(tileX, tileY, this.moveAwayMode);
     }
 }
 

@@ -1,5 +1,3 @@
-import Clone from 'rexPlugins/utils/object/Clone.js';
-
 var SetInteractive = function (enable) {
     if (enable === undefined) {
         enable = true;

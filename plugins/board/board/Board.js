@@ -1,7 +1,7 @@
 import ChessBank from '../chess/ChessBank.js';
 import GetChessData from '../chess/GetChessData.js';
 import GetChessUID from '../chess/GetChessUID.js';
-import BoardData from '../utils/boarddata/BoardData.js';
+import BoardData from './BoardData.js';
 
 import TileXYToWorldX from './TileXYToWorldX.js';
 import TileXYToWorldY from './TileXYToWorldY.js';

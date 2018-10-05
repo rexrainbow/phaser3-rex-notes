@@ -10,6 +10,8 @@ import MatchFactory from './board/match/MatchFactory.js';
 import PathFinderFactory from './board/pathfinder/PathFinderFactory.js';
 import MonopolyFactory from './board/monopoly/MonopolyFactory.js';
 
+import ChessContainer from './board/chesscontainer/chesscontainer/ChessContainerFactory.js';
+
 class BoardPlugin extends Phaser.Plugins.ScenePlugin {
     constructor(scene, pluginManager) {
         super(scene, pluginManager);
