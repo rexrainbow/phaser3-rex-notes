@@ -6,6 +6,7 @@ import CanMoveToTile from './CanMoveToTile.js';
 import MoveToTile from './MoveToTile.js';
 import MoveToward from './MoveToward.js';
 import MoveToRandomNeighbor from './MoveToRandomNeighbor.js';
+import MoveAway from './MoveAway.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -226,6 +227,7 @@ var methods = {
     moveTo: MoveToTile,
     moveToward: MoveToward,
     moveToRandomNeighbor: MoveToRandomNeighbor,
+    moveAway: MoveAway,
 };
 Object.assign(
     MoveTo.prototype,

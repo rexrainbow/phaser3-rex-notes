@@ -1,6 +1,5 @@
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 var MoveToTile = function (tileX, tileY, direction) {
     var board = this.chessData.board;
     if (board === null) { // chess is not in a board

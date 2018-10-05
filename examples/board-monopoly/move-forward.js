@@ -170,19 +170,6 @@ var getHexagonGrid = function (scene) {
     return grid;
 };
 
-var createGridPolygonTexture = function (board, shapeTextureKey) {
-    var poly = board.getGridPolygon();
-    poly.left = 0;
-    poly.top = 0;
-    var scene = board.scene;
-    scene.add.graphics()
-        .fillStyle(0xffffff)
-        .fillPoints(poly.points, true)
-        .generateTexture(shapeTextureKey, poly.width, poly.height)
-        .destroy();
-    return scene.textures.get(shapeTextureKey);
-}
-
 var createTileMap = function (tilesMap, out) {
     if (out === undefined) {
         out = [];

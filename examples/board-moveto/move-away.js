@@ -19,39 +19,40 @@ class Demo extends Phaser.Scene {
         }
         var board = new Board(this, config);
 
+        // add chess
+        var chessA = new ChessA(board, {
+            x: 3,
+            y: 3
+        });
         // add some blockers
         for (var i = 0; i < 10; i++) {
             new Blocker(board);
         }
 
-        // add chess
-        var chess = new ChessA(board);
-        chess.showMoveableArea();
+        chessA.moveAway(0, 0);
     }
 }
 
 var getQuadGrid = function (scene) {
-    var grid = scene.rexBoard.add.quadGrid({
+    return {
+        gridType: 'quadGrid',
         x: 400,
         y: 100,
         cellWidth: 100,
         cellHeight: 50,
         type: 1
-    });
-    return grid;
+    };
 }
 
 var getHexagonGrid = function (scene) {
-    var staggeraxis = 'x';
-    var staggerindex = 'odd';
-    var grid = scene.rexBoard.add.hexagonGrid({
+    return {
+        gridType: 'hexagonGrid',
         x: 100,
         y: 100,
         size: 30,
-        staggeraxis: staggeraxis,
-        staggerindex: staggerindex
-    })
-    return grid;
+        staggeraxis: 'x',
+        staggerindex: 'odd'
+    };
 };
 
 class Board extends RexPlugins.Board.Board {
@@ -100,37 +101,21 @@ class ChessA extends RexPlugins.Board.Shape {
         this.setDepth(1);
 
         // add behaviors        
-        this.moveTo = scene.rexBoard.add.moveTo(this);
-        this.pathFinder = scene.rexBoard.add.pathFinder(this, {
+        this.moveTo = scene.rexBoard.add.moveTo(this, {
+            speed: 200,
             blockerTest: true
         });
-
-        // private members
-        this.movingPoints = 3;
-        this.moveableTiles = [];
     }
 
-    showMoveableArea() {
-        this.hideMoveableArea();
-        var tileXYArray = this.pathFinder.findArea(this.movingPoints),
-            tileXY;
-        var scene = this.scene,
-            board = this.rexChess.board;
-        for (var i = 0, cnt = tileXYArray.length; i < cnt; i++) {
-            tileXY = tileXYArray[i];
-            var text = scene.add.text(board.tileXYToWorldX(tileXY.x, tileXY.y), board.tileXYToWorldY(tileXY.x, tileXY.y), tileXY.cost)
-                .setOrigin(0.5);
-            this.moveableTiles.push(text);
+    moveAway(tileX, tileY) {
+        if (this.moveTo.isRunning) {
+            return;
         }
-        return this;
-    }
-
-    hideMoveableArea() {
-        for (var i = 0, cnt = this.moveableTiles.length; i < cnt; i++) {
-            this.moveableTiles[i].destroy();
-        }
-        this.moveableTiles.length = 0;
-        return this;
+        this.moveTo
+            .once('complete', function () {
+                this.moveAway(tileX, tileY);
+            }, this)
+            .moveAway(tileX, tileY);
     }
 }
 

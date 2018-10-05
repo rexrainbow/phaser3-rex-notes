@@ -68,19 +68,6 @@ class Board extends RexPlugins.Board.Board {
     }
 }
 
-var createGridPolygonTexture = function (board, shapeTextureKey) {
-    var poly = board.getGridPolygon();
-    poly.left = 0;
-    poly.top = 0;
-    var scene = board.scene;
-    scene.add.graphics()
-        .fillStyle(0xffffff)
-        .fillPoints(poly.points, true)
-        .generateTexture(shapeTextureKey, poly.width, poly.height)
-        .destroy();
-    return scene.textures.get(shapeTextureKey);
-}
-
 class ChessA extends RexPlugins.Board.Shape {
     constructor(board, tileXY) {
         var scene = board.scene;
