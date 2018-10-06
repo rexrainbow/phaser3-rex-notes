@@ -7,10 +7,10 @@ import RemoveAllChess from './RemoveAllChess.js';
 
 const Container = ContainerLite;
 
-class ChessContainer extends Container {
+class MiniBoard extends Container {
     constructor(scene, x, y, gridConfig) {
         super(scene, x, y, 0, 0);
-        this.type = 'rexChessContainer';
+        this.type = 'rexMiniBoard';
         var boardConfig = {
             grid: gridConfig,
             inifinity: true,
@@ -82,8 +82,8 @@ var methods = {
     removeAllChess: RemoveAllChess,
 }
 Object.assign(
-    ChessContainer.prototype,
+    MiniBoard.prototype,
     methods
 );
 
-export default ChessContainer;
+export default MiniBoard;

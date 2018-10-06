@@ -12,17 +12,18 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        var chessContainer = this.rexBoard.add.chessContainer(100, 100,
-            getHexagonGrid(this)
+        var miniBoard = this.rexBoard.add.miniBoard(100, 100,
+            getQuadGrid(this)
+            //getHexagonGrid(this)
         );
 
         for (var tileY = -1; tileY <= 1; tileY++) {
             for (var tileX = -1; tileX <= 1; tileX++) {
-                this.rexBoard.add.shape(chessContainer, tileX, tileY, 0, Random(0, 0xffffff));
+                this.rexBoard.add.shape(miniBoard, tileX, tileY, 0, Random(0, 0xffffff));
             }
         }
 
-        chessContainer.setPosition(400, 300);
+        miniBoard.setPosition(400, 300);
     }
 
     update() {}
@@ -31,11 +32,9 @@ class Demo extends Phaser.Scene {
 
 var getQuadGrid = function (scene) {
     var grid = scene.rexBoard.add.quadGrid({
-        x: 400,
-        y: 100,
-        cellWidth: 100,
-        cellHeight: 50,
-        type: 1
+        cellWidth: 80,
+        cellHeight: 80,
+        type: 0
     });
     return grid;
 }

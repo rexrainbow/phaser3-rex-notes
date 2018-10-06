@@ -7,11 +7,11 @@ class Shape extends Phaser.GameObjects.Polygon {
         }
 
         // Chess-Container
-        var isChessContainer = (board.type === 'rexChessContainer'),
-            chessContainer;
-        if (isChessContainer) {
-            chessContainer = board;
-            board = chessContainer.board;
+        var isMiniBoard = (board.type === 'rexMiniBoard'),
+            miniBoard;
+        if (isMiniBoard) {
+            miniBoard = board;
+            board = miniBoard.board;
         }
 
         var scene = board.scene;
@@ -28,8 +28,8 @@ class Shape extends Phaser.GameObjects.Polygon {
         super(scene, worldX, worldY, points, fillColor, fillAlpha);
 
         if (addToBoard) {
-            if (isChessContainer) { // Chess-Container
-                chessContainer.addChess(this, tileX, tileY, tileZ);
+            if (isMiniBoard) { // Chess-Container
+                miniBoard.addChess(this, tileX, tileY, tileZ);
             } else {
                 board.addChess(this, tileX, tileY, tileZ, true);
             }
