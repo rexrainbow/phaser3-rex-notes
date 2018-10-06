@@ -2883,8 +2883,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#touch-events_1" title="Touch events" class="md-nav__link">
-    Touch events
+  <a href="#touch-input" title="Touch input" class="md-nav__link">
+    Touch input
   </a>
   
 </li>
@@ -3418,8 +3418,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#touch-events_1" title="Touch events" class="md-nav__link">
-    Touch events
+  <a href="#touch-input" title="Touch input" class="md-nav__link">
+    Touch input
   </a>
   
 </li>
@@ -3845,7 +3845,7 @@
     <div class="codehilite"><pre><span></span><span class="nx">board</span><span class="p">.</span><span class="nx">setInteractive</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
 </pre></div></li>
 </ul>
-<h4 id="touch-events_1">Touch events<a class="headerlink" href="#touch-events_1" title="Permanent link">&para;</a></h4>
+<h4 id="touch-input">Touch input<a class="headerlink" href="#touch-input" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Pointer down at any tile
     <div class="codehilite"><pre><span></span><span class="nx">board</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;tiledown&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">tileXY</span><span class="p">)</span> <span class="p">{</span>
@@ -3879,13 +3879,13 @@
 <li>Pointer down at a chess
     <div class="codehilite"><pre><span></span><span class="nx">board</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;gameobjectdown&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">)</span> <span class="p">{</span>
 <span class="p">})</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;board.pointerdown&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">})</span>
 </pre></div><ul>
 <li><code>pointer</code> : <a href="../touchevents/#properties-of-point">Touch pointer</a></li>
-<li><code>gameObject</code> : Game object at touched (tileX, tileY)
-or
-<div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;board.pointerdown&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span>
-<span class="p">})</span>
-</pre></div></li>
+<li><code>gameObject</code> : Game object at touched (tileX, tileY)</li>
 </ul>
 </li>
 <li>Pointer up at a chess
@@ -3895,7 +3895,11 @@ or
     or
     <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;board.pointerup&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span>
 <span class="p">})</span>
-</pre></div></li>
+</pre></div><ul>
+<li><code>pointer</code> : <a href="../touchevents/#properties-of-point">Touch pointer</a></li>
+<li><code>gameObject</code> : Game object at touched (tileX, tileY)    </li>
+</ul>
+</li>
 <li>Pointer move to another chess
     <div class="codehilite"><pre><span></span><span class="nx">board</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;gameobjectmove&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">)</span> <span class="p">{</span>
 <span class="p">})</span>
@@ -3903,7 +3907,11 @@ or
     or
     <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;board.pointermove&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span>
 <span class="p">})</span>
-</pre></div></li>
+</pre></div><ul>
+<li><code>pointer</code> : <a href="../touchevents/#properties-of-point">Touch pointer</a></li>
+<li><code>gameObject</code> : Game object at touched (tileX, tileY)    </li>
+</ul>
+</li>
 </ul>
 <h3 id="grid-polygon">Grid polygon<a class="headerlink" href="#grid-polygon" title="Permanent link">&para;</a></h3>
 <ul>

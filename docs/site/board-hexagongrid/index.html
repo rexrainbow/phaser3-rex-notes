@@ -2794,6 +2794,27 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#set-world-position-of-tile-0-0" title="Set world position of tile (0, 0)" class="md-nav__link">
+    Set world position of tile (0, 0)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-cell-size" title="Set cell size" class="md-nav__link">
+    Set cell size
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-grid-type" title="Set grid type" class="md-nav__link">
+    Set grid type
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#get-world-position" title="Get world position" class="md-nav__link">
     Get world position
   </a>
@@ -3147,6 +3168,27 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#set-world-position-of-tile-0-0" title="Set world position of tile (0, 0)" class="md-nav__link">
+    Set world position of tile (0, 0)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-cell-size" title="Set cell size" class="md-nav__link">
+    Set cell size
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-grid-type" title="Set grid type" class="md-nav__link">
+    Set grid type
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#get-world-position" title="Get world position" class="md-nav__link">
     Get world position
   </a>
@@ -3222,6 +3264,30 @@
 <li><code>cellWidth</code> : The width of the cell, in pixels.</li>
 <li><code>cellHeight</code> : The height of the cell, in pixels.</li>
 <li><code>size</code> : Distance between center to each corner. Get <code>cellWidth</code> and <code>cellHeight</code> from <code>size</code> if this parameter is not undefined.</li>
+<li><code>staggeraxis</code><ul>
+<li><code>0</code>, or <code>y</code></li>
+<li><code>1</code>, or <code>x</code></li>
+</ul>
+</li>
+<li><code>staggerindex</code><ul>
+<li><code>0</code>, or <code>even</code></li>
+<li><code>1</code>, or <code>odd</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="set-world-position-of-tile-0-0">Set world position of tile (0, 0)<a class="headerlink" href="#set-world-position-of-tile-0-0" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">grid</span><span class="p">.</span><span class="nx">setOriginPosition</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">);</span>
+</pre></div>
+
+<h3 id="set-cell-size">Set cell size<a class="headerlink" href="#set-cell-size" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">grid</span><span class="p">.</span><span class="nx">setCellSize</span><span class="p">(</span><span class="nx">cellWidth</span><span class="p">,</span> <span class="nx">cellHeight</span><span class="p">);</span>
+</pre></div>
+
+<h3 id="set-grid-type">Set grid type<a class="headerlink" href="#set-grid-type" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">grid</span><span class="p">.</span><span class="nx">setType</span><span class="p">(</span><span class="nx">staggeraxis</span><span class="p">,</span> <span class="nx">staggerindex</span><span class="p">);</span>
+</pre></div>
+
+<ul>
 <li><code>staggeraxis</code><ul>
 <li><code>0</code>, or <code>y</code></li>
 <li><code>1</code>, or <code>x</code></li>

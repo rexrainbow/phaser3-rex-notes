@@ -12,8 +12,6 @@ Store data in key-value pairs, built-inobject of phaser.
 
 ```javascript
 parent.data.set(key, value);
-// parent.data.values[key] = value;
-// parent.data.values[key] += inc;
 ```
 
 #### Set values
@@ -53,7 +51,6 @@ parent.data.events.on('changedata_' + key, function(parent, value, previousValue
 
 ```javascript
 var value = parent.data.get(key);
-// var value = parent.data.values[key];
 ```
 
 #### Get values

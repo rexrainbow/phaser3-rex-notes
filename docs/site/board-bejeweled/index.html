@@ -2883,6 +2883,40 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#callbacks" title="Callbacks" class="md-nav__link">
+    Callbacks
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#on-matched-lines" title="On matched lines" class="md-nav__link">
+    On matched lines
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#on-eliminating-chess" title="On eliminating chess" class="md-nav__link">
+    On eliminating chess
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#on-falling-chess" title="On falling chess" class="md-nav__link">
+    On falling chess
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3165,6 +3199,40 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#callbacks" title="Callbacks" class="md-nav__link">
+    Callbacks
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#on-matched-lines" title="On matched lines" class="md-nav__link">
+    On matched lines
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#on-eliminating-chess" title="On eliminating chess" class="md-nav__link">
+    On eliminating chess
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#on-falling-chess" title="On falling chess" class="md-nav__link">
+    On falling chess
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3204,7 +3272,7 @@
                   <h1>Bejeweled</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Match3-like gameplay.</p>
+<p>Match3-like gameplay template.</p>
 <ul>
 <li>Author: Rex</li>
 <li>Template</li>
@@ -3241,7 +3309,7 @@
             <span class="c1">// Create Game object (Shape, Image, or Sprite)</span>
             <span class="kd">var</span> <span class="nx">scene</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">scene</span><span class="p">;</span>
             <span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">sprite</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">textureKey</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>
-            <span class="c1">// Enable data manager</span>
+            <span class="c1">// Initial &#39;symbol&#39; value</span>
             <span class="nx">gameObject</span><span class="p">.</span><span class="nx">setData</span><span class="p">(</span><span class="s1">&#39;symbol&#39;</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">);</span>
             <span class="c1">// Add data changed event of &#39;symbol` key</span>
             <span class="nx">gameObject</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;changedata_symbol&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">previousValue</span><span class="p">)</span> <span class="p">{</span>
@@ -3296,12 +3364,13 @@
 </ul>
 </li>
 <li>Callbacks<ul>
-<li><code>onMatchLinesCallback</code>, <code>onMatchLinesCallbackScope</code></li>
-<li><code>onEliminatingChessCallback</code>, <code>onEliminatingChessCallbackScope</code></li>
-<li><code>onFallingChessCallback</code>, <code>onFallingChessCallback</code> </li>
+<li><code>onMatchLinesCallback</code>, <code>onMatchLinesCallbackScope</code> : <a href="./#on-matched-lines">On matched lines</a></li>
+<li><code>onEliminatingChessCallback</code>, <code>onEliminatingChessCallbackScope</code> : <a href="./#on-eliminating-chess">On eliminating chess</a></li>
+<li><code>onFallingChessCallback</code>, <code>onFallingChessCallback</code> : <a href="./#on-falling-chess">On falling chess</a></li>
 </ul>
 </li>
 </ul>
+<p>It also install <a href="../board/">Board plugins</a> into Game system.</p>
 <h4 id="board-height">Board height<a class="headerlink" href="#board-height" title="Permanent link">&para;</a></h4>
 <p>Board is separated into two parts: upper and bottom</p>
 <ul>
@@ -3322,20 +3391,68 @@
 <h4 id="create-chess-object">Create chess object<a class="headerlink" href="#create-chess-object" title="Permanent link">&para;</a></h4>
 <p>Return a game object from a callback.</p>
 <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">board</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// Create Game object (Shape, Image, or Sprite)</span>
+    <span class="c1">// Create Game object (Image, Sprite, or Shape)</span>
     <span class="kd">var</span> <span class="nx">scene</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">scene</span><span class="p">;</span>
     <span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">sprite</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">textureKey</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>
-    <span class="c1">// Enable data manager</span>
+    <span class="c1">// Initial &#39;symbol&#39; value</span>
     <span class="nx">gameObject</span><span class="p">.</span><span class="nx">setData</span><span class="p">(</span><span class="s1">&#39;symbol&#39;</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">);</span>
     <span class="c1">// Add data changed event of &#39;symbol` key</span>
     <span class="nx">gameObject</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;changedata_symbol&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">previousValue</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// Change the appearance of game object via new symbol value</span>
         <span class="nx">gameObject</span><span class="p">.</span><span class="nx">setFrame</span><span class="p">(</span><span class="nx">newFrame</span><span class="p">);</span>
     <span class="p">});</span>
+    <span class="k">return</span> <span class="nx">gameObject</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 
 <p>Each chess has a <code>symbol</code> value stored in <code>'symbol'</code> key in private data. Add data changed event of 'symbol` key to change the appearance of game object via new symbol value.</p>
+<h4 id="callbacks">Callbacks<a class="headerlink" href="#callbacks" title="Permanent link">&para;</a></h4>
+<h5 id="on-matched-lines">On matched lines<a class="headerlink" href="#on-matched-lines" title="Permanent link">&para;</a></h5>
+<div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">lines</span><span class="p">,</span> <span class="nx">board</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="p">}</span>
+</pre></div>
+
+<ul>
+<li><code>lines</code> : An array of matched lines, each line is a <a href="struct-set.md">built-in Set object</a>.<ul>
+<li>Length of each line (<code>lines[i].size</code>) could be <em>5</em>, <em>4</em>, or <em>3</em>.</li>
+<li><code>lines[i].entries</code> : An array of chess (Game Object) in a matched line.</li>
+<li>All chess game objects in matched lines will be eliminated in next stage. Add/remove chess game object in these lines, or add new line in <code>lines</code> array to change the eliminated targets.</li>
+</ul>
+</li>
+<li><code>board</code> : <a href="../board/">Board object</a>.<ul>
+<li>Get tile position <code>{x,y,z}</code> of a chess game object via
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tileXYZ</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">rexChess</span><span class="p">.</span><span class="nx">tileXYZ</span><span class="p">;</span>
+</pre></div></li>
+<li>Get chess game object of a tile position <code>{x,y,z}</code> via
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">tileXYZToChess</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">,</span> <span class="nx">tileZ</span><span class="p">);</span>
+</pre></div></li>
+<li>Get array of neighbor chess of a chess game object via
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gameObjects</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getNeighborChess</span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+</li>
+</ul>
+<p>Use cases:</p>
+<ul>
+<li>Get cross chess of two lines via <code>lineA.intersect(lineB)</code>.</li>
+<li>Add chess into line(s) to eliminate more chess.</li>
+</ul>
+<h5 id="on-eliminating-chess">On eliminating chess<a class="headerlink" href="#on-eliminating-chess" title="Permanent link">&para;</a></h5>
+<div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">chessArray</span><span class="p">,</span> <span class="nx">board</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// return eventEmitter; // custom eliminating task, fires &#39;complete&#39; event to continue FSM</span>
+<span class="p">}</span>
+</pre></div>
+
+<ul>
+<li><code>chessArray</code> : An array of chess (Game Object) to be eliminated</li>
+<li><code>board</code> : <a href="../board/">Board object</a></li>
+</ul>
+<p>Use csees:</p>
+<ul>
+<li>Accumulate scores via amount of eliminated chess</li>
+</ul>
+<h5 id="on-falling-chess">On falling chess<a class="headerlink" href="#on-falling-chess" title="Permanent link">&para;</a></h5>
 <h3 id="start-gameplay">Start gameplay<a class="headerlink" href="#start-gameplay" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
 </pre></div>

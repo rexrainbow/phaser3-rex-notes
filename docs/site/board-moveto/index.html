@@ -2854,6 +2854,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#move-away-or-move-closer" title="Move away or move closer" class="md-nav__link">
+    Move away or move closer
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3241,6 +3248,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#move-away-or-move-closer" title="Move away or move closer" class="md-nav__link">
+    Move away or move closer
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3390,6 +3404,27 @@
 <div class="codehilite"><pre><span></span><span class="nx">moveTo</span><span class="p">.</span><span class="nx">moveToRandomNeighbor</span><span class="p">();</span>
 </pre></div>
 
+<h4 id="move-away-or-move-closer">Move away or move closer<a class="headerlink" href="#move-away-or-move-closer" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Move away from a tile position
+    <div class="codehilite"><pre><span></span><span class="nx">moveTo</span><span class="p">.</span><span class="nx">moveAway</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">moveTo</span><span class="p">.</span><span class="nx">moveAway</span><span class="p">(</span><span class="nx">tileXY</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>tileXY</code> : Tile position <code>{x,y}</code></li>
+</ul>
+</li>
+<li>Move closer to a tile position
+    <div class="codehilite"><pre><span></span><span class="nx">moveTo</span><span class="p">.</span><span class="nx">moveCloser</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">moveTo</span><span class="p">.</span><span class="nx">moveCloser</span><span class="p">(</span><span class="nx">tileXY</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>tileXY</code> : Tile position <code>{x,y}</code></li>
+</ul>
+</li>
+</ul>
 <h3 id="can-move-to-tile">Can move to tile<a class="headerlink" href="#can-move-to-tile" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">canMoveTo</span> <span class="o">=</span> <span class="nx">moveTo</span><span class="p">.</span><span class="nx">canMoveTo</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">);</span>
 </pre></div>
