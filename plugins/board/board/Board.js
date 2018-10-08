@@ -14,8 +14,8 @@ import GridAlign from './GridAlign.js';
 import RemoveChess from './RemoveChess.js';
 import RemoveAllChess from './RemoveAllChess.js';
 import SwapChess from './SwapChess.js';
-import IsInside from './IsInside.js';
 import Contains from './Contains.js';
+import ContainPoint from './ContainPoint.js';
 import TileXYIsEqual from './TileXYIsEqual.js';
 import ForEachTileXY from './ForEachTileXY.js';
 import GetWrapTileX from './GetWrapTileX.js';
@@ -172,8 +172,8 @@ var methods = {
     moveChess: AddChess,
     swapChess: SwapChess,
     forEachTileXY: ForEachTileXY,
-    isInside: IsInside,
     contains: Contains,
+    containPoint: ContainPoint,
     tileXYIsEqual: TileXYIsEqual,
     getWrapTileX: GetWrapTileX,
     getWrapTileY: GetWrapTileY,

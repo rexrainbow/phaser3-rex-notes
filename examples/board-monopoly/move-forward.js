@@ -1,13 +1,14 @@
 import BoardPlugin from 'rexPlugins/board-plugin.js';
 
-const TILESMAP =
-    `1,1,1,.,1,1,1
-1,.,1,.,1,.,1
-1,1,0,1,0,1,1
-.,.,1,.,1,.,.
-1,1,0,1,0,1,1 
-1,.,1,.,1,.,1
-1,1,1,.,1,1,1`;
+const TILESMAP = [
+    '111 111',
+    '1 1 1 1',
+    '1101011',
+    '  1 1  ',
+    '1101011',    
+    '1 1 1 1',
+    '111 111'
+];
 const Between = Phaser.Math.Between;
 class Demo extends Phaser.Scene {
     constructor() {
@@ -58,7 +59,7 @@ class Board extends RexPlugins.Board.Board {
             line = tiles[tileY];
             for (var tileX = 0, xcnt = line.length; tileX < xcnt; tileX++) {
                 symbol = line[tileX];
-                if (isNaN(symbol)) {
+                if (symbol === ' ') {
                     continue;
                 }
 
@@ -174,9 +175,8 @@ var createTileMap = function (tilesMap, out) {
     if (out === undefined) {
         out = [];
     }
-    var lines = tilesMap.split('\n');
-    for (var i = 0, cnt = lines.length; i < cnt; i++) {
-        out.push(lines[i].split(','));
+    for (var i = 0, cnt = tilesMap.length; i < cnt; i++) {
+        out.push(tilesMap[i].split(''));
     }
     return out;
 }

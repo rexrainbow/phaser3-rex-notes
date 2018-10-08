@@ -1,11 +1,11 @@
-var GetAABB = function (tileXYArray, out) {
+var GetAABB = function (tileXYMap, out) {
     if (out === undefined) {
         out = tmpOut;
     }
 
     var tileXY;
-    for (var i = 0, cnt = tileXYArray.length; i < cnt; i++) {
-        tileXY = tileXYArray[i];
+    for (var i in tileXYMap) {
+        tileXY = tileXYMap[i];
         minX = Math.min(minX, tileXY.x);
         minY = Math.min(minY, tileXY.y);
         maxX = Math.max(maxX, tileXY.x);

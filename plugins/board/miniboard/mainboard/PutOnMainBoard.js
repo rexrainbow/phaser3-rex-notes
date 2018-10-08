@@ -3,6 +3,16 @@ var PutOnMainBoard = function (mainBoard, tileX, tileY, align) {
         return this;
     }
 
+    if (tileX === undefined) {
+        tileX = mainBoard.worldXYToTileX(this.x, this.y);
+    }
+    if (tileY === undefined) {
+        tileY = mainBoard.worldXYToTileY(this.x, this.y);
+    }
+    if (align === undefined) {
+        align = true;
+    }
+
     this.pullOutFromMainBoard();
     if (!this.canPutOnMainBoard(mainBoard, tileX, tileY)) {
         return this;
@@ -19,7 +29,7 @@ var PutOnMainBoard = function (mainBoard, tileX, tileY, align) {
         mainBoard.addChess(uid, mappedTileXY.x, mappedTileXY.y, chessTileXYZ.z);
     }
     if (align) {
-        mainBoard.gridAlign(this, tileX, tileY);
+        this.alignToMainBoard(mainBoard, tileX, tileY);
     }
 
     return this;

@@ -6,7 +6,7 @@ import GetNeighborTileY from 'rexPlugins/utils/grid/quad/GetNeighborTileY.js';
 import GetNeighborTileDirection from 'rexPlugins/utils/grid/quad/GetNeighborTileDirection.js';
 import GetOppositeDirection from 'rexPlugins/utils/grid/hexagon/GetOppositeDirection.js';
 import Offset from 'rexPlugins/utils/grid/quad/Offset.js';
-import Rotate from 'rexPlugins/utils/grid/hexagon/Rotate.js';
+import Rotate from 'rexPlugins/utils/grid/quad/Rotate.js';
 import GetDistance from 'rexPlugins/utils/grid/quad/GetDistance.js';
 import GetGridPoints from './GetGridPoints.js';
 import GetGridPolygon from './GetGridPolygon.js';

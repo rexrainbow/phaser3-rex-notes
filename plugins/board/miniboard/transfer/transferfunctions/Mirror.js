@@ -1,8 +1,8 @@
 var Mirror = function (mode, chessTileXYZMap, out) {
     if (mode === undefined) {
-        mode = 2;
+        mode = 1;
     }
-    if (typof(mode) === 'string') {
+    if (typeof (mode) === 'string') {
         mode = MODE[mode];
     }
     if (chessTileXYZMap === undefined) {
@@ -12,7 +12,7 @@ var Mirror = function (mode, chessTileXYZMap, out) {
         out = {};
     }
     var chessTileXYZ;
-    for (var uid in tileXYZMap) {
+    for (var uid in chessTileXYZMap) {
         chessTileXYZ = chessTileXYZMap[uid];
         out[uid] = {
             x: (mode & 1) ? -chessTileXYZ.x : chessTileXYZ.x,
@@ -24,8 +24,8 @@ var Mirror = function (mode, chessTileXYZMap, out) {
 }
 
 const MODE = {
-    y: 1,
-    x: 2,    
+    x: 1,    
+    y: 2,
     'x&y': 3
 }
 export default Mirror;

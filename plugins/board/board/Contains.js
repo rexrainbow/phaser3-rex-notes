@@ -1,5 +1,10 @@
 var Contains = function (tileX, tileY, tileZ) {
-    var result = this.isInside(tileX, tileY);
+    var result;
+    if (this.infinityMode) {
+        result = true;
+    } else {
+        result = (tileX >= 0) && (tileX < this.width) && (tileY >= 0) && (tileY < this.height);
+    }
     if (result && (tileZ != null)) {
         result = this.boardData.contains(tileX, tileY, tileZ);
     }

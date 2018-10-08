@@ -111,6 +111,7 @@ class Drag {
             return;
         }
         this.pointer.dragState = 5;
+        return this;
     }
 
     onDragStart(pointer, dragX, dragY) {

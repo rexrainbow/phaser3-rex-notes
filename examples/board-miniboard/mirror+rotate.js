@@ -21,10 +21,10 @@ class Demo extends Phaser.Scene {
         });
 
         var grid = this.rexBoard.add.quadGrid({
-            x: 40,
-            y: 40,
-            cellWidth: 60,
-            cellHeight: 60,
+            x: 100,
+            y: 200,
+            cellWidth: 40,
+            cellHeight: 40,
             type: 0
         });
         var mainBoard = this.rexBoard.add.board({
@@ -38,17 +38,40 @@ class Demo extends Phaser.Scene {
             }, this);
 
 
-        var miniBoard = this.rexBoard.add.miniBoard(100, 100, grid),
-            gameObject;
-        for (var tileY = -1; tileY <= 1; tileY++) {
-            for (var tileX = -1; tileX <= 1; tileX++) {
-                gameObject = this.rexBoard.add.shape(miniBoard, 0, 0, 0, Random(0, 0xffffff), 1, false)
-                    .setScale(0.7);
-                miniBoard.addChess(gameObject, tileX, tileY, 0, true);
+        var miniBoard = this.rexBoard.add.miniBoard(100, 100, {
+            grid: grid
+        });
+        var map = [
+                '0  ',
+                '000',
+                '  0'
+            ],
+            line;
+        for (var i = 0, icnt = map.length; i < icnt; i++) {
+            line = map[i].split('');
+            for (var j = 0, jcnt = line.length; j < jcnt; j++) {
+                if (line[j] !== ' ') {
+                    this.rexBoard.add.shape(miniBoard, j - 1, i - 1, 0, Random(0, 0xffffff));
+                }
             }
         }
-        miniBoard.setPosition(400, 300);
         miniBoard.putOnMainBoard(mainBoard, 4, 4, true);
+
+        this.add.text(20, 20, 'Mirror X')
+            .setInteractive()
+            .on('pointerdown', function () {
+                miniBoard.mirror('x');
+            });
+        this.add.text(20, 50, 'Mirror Y')
+            .setInteractive()
+            .on('pointerdown', function () {
+                miniBoard.mirror('y');
+            });
+        this.add.text(20, 80, 'Rotate')
+            .setInteractive()
+            .on('pointerdown', function () {
+                miniBoard.rotate(1);
+            });
     }
 
     update() {}

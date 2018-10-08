@@ -6,11 +6,14 @@ import {
     xyz2r
 } from './CubeTransfer.js';
 
+const Wrap = Phaser.Math.Wrap;
+
 var Rotate = function (src, dir, out) {
     if (out === undefined) {
         out = tmp;
     }
 
+    dir = Wrap(dir, 0, 5);
     var mode = this.mode;
     var q = src.x,
         r = src.y;

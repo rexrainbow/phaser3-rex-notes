@@ -29,7 +29,7 @@ var AddChess = function (gameObject, tileX, tileY, tileZ, align) {
     this.getChessData(gameObject).setBoard(this);
 
     if (align) {
-        this.gridAlign(gameObject, tileX, tileY, tileZ);
+        this.gridAlign(gameObject, tileX, tileY);
     }
 
     return this;

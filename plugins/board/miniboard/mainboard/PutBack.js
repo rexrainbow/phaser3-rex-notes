@@ -1,8 +1,8 @@
 var PutBack = function () {
-    var mainboard = this.lastMainBoardRef.mainboard;
+    var mainBoard = this.lastMainBoardRef.mainBoard;
     var tileX = this.lastMainBoardRef.tileX;
     var tileY = this.lastMainBoardRef.tileY;
-    this.putOnMainBoard(mainboard, tileX, tileY);
+    this.putOnMainBoard(mainBoard, tileX, tileY, false);
     return this;
 }
 export default PutBack;

@@ -5,8 +5,11 @@ var SetInteractive = function (enable) {
     if (!this.input) {
         this.input = {
             enable: true,
-            preTileX: undefined,
-            preTileY: undefined
+            pointer: null,
+            tilePosition: {
+                x: undefined,
+                y: undefined
+            },
         };
         this.scene.input.on('pointerdown', onPointerDown, this);
         this.scene.input.on('pointerup', onPointerUp, this);
@@ -20,6 +23,9 @@ var SetInteractive = function (enable) {
     }
 
     this.input.enable = enable;
+    if (!enable) {
+        this.input.pointer = null;
+    }
     return this;
 };
 
@@ -35,9 +41,12 @@ var onPointerDown = function (pointer) {
     if (!this.contains(tileX, tileY)) {
         return;
     }
-    tmpTileXY.x = tileX;
-    tmpTileXY.y = tileY;
-    this.emit('tiledown', pointer, tmpTileXY);
+    if (this.input.pointer === null) { // Catch new touch pointer
+        this.input.pointer = pointer;
+    }
+    this.input.tilePosition.x = tileX;
+    this.input.tilePosition.y = tileY;
+    this.emit('tiledown', pointer, this.input.tilePosition);
 
     tmpChessArray.length = 0;
     var gameObjects = this.tileXYToChessArray(tileX, tileY, tmpChessArray);
@@ -52,10 +61,6 @@ var onPointerDown = function (pointer) {
         }
         this.emit('gameobjectdown', pointer, gameObject);
     }
-
-    var inputData = this.input;
-    inputData.preTileX = tileX;
-    inputData.preTileY = tileY;
 };
 
 var onPointerUp = function (pointer) {
@@ -67,9 +72,12 @@ var onPointerUp = function (pointer) {
     if (!this.contains(tileX, tileY)) {
         return;
     }
-    tmpTileXY.x = tileX;
-    tmpTileXY.y = tileY;
-    this.emit('tileup', pointer, tmpTileXY);
+    if (this.input.pointer === pointer) { // Release touch pointer
+        this.input.pointer = null;
+    }
+    this.input.tilePosition.x = tileX;
+    this.input.tilePosition.y = tileY;
+    this.emit('tileup', pointer, this.input.tilePosition);
 
     tmpChessArray.length = 0;
     var gameObjects = this.tileXYToChessArray(tileX, tileY, tmpChessArray);
@@ -93,16 +101,22 @@ var onPointerMove = function (pointer) {
     var tileX = this.worldXYToTileX(pointer.x, pointer.y),
         tileY = this.worldXYToTileY(pointer.x, pointer.y);
     if (!this.contains(tileX, tileY)) {
+        if (this.input.pointer === pointer) { // Release touch pointer
+            this.input.pointer = null;
+        }
         return;
     }
 
-    var inputData = this.input;
-    if ((inputData.preTileX === tileX) && (inputData.preTileY === tileY)) {
+    if (this.input.pointer === null) { // Catch new touch pointer
+        this.input.pointer = pointer;
+    }
+
+    if ((this.input.tilePosition.x === tileX) && (this.input.tilePosition.y === tileY)) {
         return;
     }
-    tmpTileXY.x = tileX;
-    tmpTileXY.y = tileY;
-    this.emit('tilemove', pointer, tmpTileXY);
+    this.input.tilePosition.x = tileX;
+    this.input.tilePosition.y = tileY;
+    this.emit('tileup', pointer, this.input.tilePosition);
 
     tmpChessArray.length = 0;
     var gameObjects = this.tileXYToChessArray(tileX, tileY, tmpChessArray);
@@ -117,16 +131,8 @@ var onPointerMove = function (pointer) {
         }
         this.emit('gameobjectmove', pointer, gameObject);
     }
-
-    var inputData = this.input;
-    inputData.preTileX = tileX;
-    inputData.preTileY = tileY;
 };
 
-var tmpTileXY = {
-    x: 0,
-    y: 0
-};
 var tmpChessArray = [];
 
 export default SetInteractive;

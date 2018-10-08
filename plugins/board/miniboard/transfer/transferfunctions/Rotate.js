@@ -8,11 +8,12 @@ var Rotate = function (direction, chessTileXYZMap, out) {
     if (out === undefined) {
         out = {};
     }
-    var grid = this.board.grid;
+    var grid = this.grid;
     var chessTileXYZ, newTileXYZ;
-    for (var uid in tileXYZMap) {
+    for (var uid in chessTileXYZMap) {
         chessTileXYZ = chessTileXYZMap[uid];
-        newTileXYZ = grid.rotate(chessTileXYZ, direction, newTileXYZ);
+        newTileXYZ = {};
+        grid.rotate(chessTileXYZ, direction, newTileXYZ);
         newTileXYZ.z = chessTileXYZ.z;
         out[uid] = newTileXYZ;
     }

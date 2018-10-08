@@ -1,6 +1,6 @@
 import MirrorTransfer from './transferfunctions/Mirror.js';
 var CanMirror = function(mode) {
-    if (this.mainBoard == null) {
+    if (this.mainBoard === null) {
         return true;
     }
     var newTileXYZMap = MirrorTransfer.call(this, mode);

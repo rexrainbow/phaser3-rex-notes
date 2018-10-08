@@ -1,6 +1,6 @@
 var PullOutFromMainBoard = function () {
     var mainBoard = this.mainBoard;
-    if (mainBoard == null) {
+    if (mainBoard === null) {
         return this;
     }
 

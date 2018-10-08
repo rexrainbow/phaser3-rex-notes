@@ -1,7 +1,9 @@
+const Wrap = Phaser.Math.Wrap;
 var Rotate = function (src, dir, out) {
     if (out === undefined) {
         out = tmp;
     }
+    dir = Wrap(dir, 0, 3);
     var newTileX;
     var newTileY;
     switch (dir) {

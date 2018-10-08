@@ -1,10 +1,11 @@
 class MainBoardReference {
     constructor(miniBoard) {
         this.miniBoard = miniBoard;
-        this.set();
+        this.set(null);
     }
     set(mainBoard, tileX, tileY) {
-        if (mainBoard == null) {
+        if (!mainBoard) {
+            mainBoard = null;
             tileX = null;
             tileY = null;
         }
