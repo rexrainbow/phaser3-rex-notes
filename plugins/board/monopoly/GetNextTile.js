@@ -1,4 +1,5 @@
 import TileData from './TileData.js';
+import TileXYIsEqual from '../utils/TileXYIsEqual.js';
 
 const GetRandom = Phaser.Utils.Array.GetRandom;
 
@@ -22,7 +23,7 @@ var GetNextTile = function (curTileData, preTileData) {
         if (directions[i] === curTileData.direction) {
             forwardTileData = neighborTileData;
         }
-        if ((preTileData !== undefined) && (board.tileXYIsEqual(neighborTileXY, preTileData))) {
+        if ((preTileData !== undefined) && (TileXYIsEqual(neighborTileXY, preTileData))) {
             backwardTileData = neighborTileData;
         } else {
             neighborTileXArray.push(neighborTileData);

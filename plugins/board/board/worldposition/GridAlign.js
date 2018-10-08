@@ -1,4 +1,4 @@
-import IsUID from '../chess/IsUID.js';
+import IsUID from '../../chess/IsUID.js';
 
 var GridAlign = function (gameObject, tileX, tileY) {
     if (gameObject === undefined) {

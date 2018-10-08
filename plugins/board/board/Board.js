@@ -3,40 +3,39 @@ import GetChessData from '../chess/GetChessData.js';
 import GetChessUID from '../chess/GetChessUID.js';
 import BoardData from './BoardData.js';
 
-import TileXYToWorldX from './TileXYToWorldX.js';
-import TileXYToWorldY from './TileXYToWorldY.js';
-import WorldXYToTileX from './WorldXYToTileX.js';
-import WorldXYToTileY from './WorldXYToTileY.js';
+import TileXYToWorldX from './worldposition/TileXYToWorldX.js';
+import TileXYToWorldY from './worldposition/TileXYToWorldY.js';
+import WorldXYToTileX from './worldposition/WorldXYToTileX.js';
+import WorldXYToTileY from './worldposition/WorldXYToTileY.js';
+import GridAlign from './worldposition/GridAlign.js';
+import ContainPoint from './worldposition/ContainPoint.js';
 import SetBoardWidth from './SetBoardWidth.js';
 import SetBoardHeight from './SetBoardHeight.js';
 import AddChess from './AddChess.js';
-import GridAlign from './GridAlign.js';
 import RemoveChess from './RemoveChess.js';
 import RemoveAllChess from './RemoveAllChess.js';
 import SwapChess from './SwapChess.js';
-import Contains from './Contains.js';
-import ContainPoint from './ContainPoint.js';
-import TileXYIsEqual from './TileXYIsEqual.js';
-import ForEachTileXY from './ForEachTileXY.js';
-import GetWrapTileX from './GetWrapTileX.js';
-import GetWrapTileY from './GetWrapTileY.js';
-import TileXYZToChess from './TileXYZToChess.js';
-import TileXYToChessArray from './TileXYToChessArray.js';
-import TileZToChessArray from './TileZToChessArray.js';
-import TileXYArrayToChessArray from './TileXYArrayToChessArray.js';
-import ChessToTileXYZ from './ChessToTileXYZ.js';
+import Contains from './tileposition/Contains.js';
+import ForEachTileXY from './tileposition/ForEachTileXY.js';
+import GetWrapTileX from './tileposition/GetWrapTileX.js';
+import GetWrapTileY from './tileposition/GetWrapTileY.js';
+import TileXYZToChess from './tileposition/TileXYZToChess.js';
+import TileXYToChessArray from './tileposition/TileXYToChessArray.js';
+import TileZToChessArray from './tileposition/TileZToChessArray.js';
+import TileXYArrayToChessArray from './tileposition/TileXYArrayToChessArray.js';
+import ChessToTileXYZ from './tileposition/ChessToTileXYZ.js';
 import GetAllChess from './GetAllChess.js';
-import GetEmptyTileXYArray from './GetEmptyTileXYArray.js';
-import GetRandomEmptyTileXY from './GetRandomEmptyTileXY.js';
-import GetNeighborTileXY from './GetNeighborTileXY.js';
-import GetNeighborChess from './GetNeighborChess.js';
-import GetNeighborTileDirection from './GetNeighborTileDirection.js';
-import GetNeighborChessDirection from './GetNeighborChessDirection.js';
-import AreNeighbors from './AreNeighbors.js';
+import GetEmptyTileXYArray from './empty/GetEmptyTileXYArray.js';
+import GetRandomEmptyTileXY from './empty/GetRandomEmptyTileXY.js';
+import GetNeighborTileXY from './neighbors/GetNeighborTileXY.js';
+import GetNeighborChess from './neighbors/GetNeighborChess.js';
+import GetNeighborTileDirection from './neighbors/GetNeighborTileDirection.js';
+import GetNeighborChessDirection from './neighbors/GetNeighborChessDirection.js';
+import AreNeighbors from './neighbors/AreNeighbors.js';
 import GetOppositeDirection from './GetOppositeDirection.js';
 import GetDistance from './GetDistance.js';
-import HasBlocker from './HasBlocker.js';
-import HasEdgeBlocker from './HasEdgeBlocker.js';
+import HasBlocker from './blocker/HasBlocker.js';
+import HasEdgeBlocker from './blocker/HasEdgeBlocker.js';
 import Offset from './Offset.js';
 import SetInteractive from './SetInteractive.js';
 import GetGridPoints from './GetGridPoints.js';
@@ -174,7 +173,6 @@ var methods = {
     forEachTileXY: ForEachTileXY,
     contains: Contains,
     containPoint: ContainPoint,
-    tileXYIsEqual: TileXYIsEqual,
     getWrapTileX: GetWrapTileX,
     getWrapTileY: GetWrapTileY,
     tileXYZToChess: TileXYZToChess,
