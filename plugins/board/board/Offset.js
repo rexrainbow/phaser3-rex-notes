@@ -1,15 +1,18 @@
-var Offset = function (tileXYArray, offsetX, offsetY) {
+var Offset = function (tileXY, offsetX, offsetY, out) {
+    if (out === undefined) {
+        out = tmp;
+    }
     if ((offsetX === 0) && (offsetY === 0)) {
-        return tileXYArray;
+        out.x = tileXY.x;
+        out.y = tileXY.y;
+    } else {
+        out = this.grid.offset(tileXY, offsetX, offsetY, out);
     }
-    var grid = this.grid;
-    var tileXY, newTileXY;
-    for (var i = 0, cnt = tileXYArray.length; i < cnt; i++) {
-        tileXY = tileXYArray[i];
-        newTileXY = grid.offset(tileXY, offsetX, offsetY);
-        tileXY.x = newTileXY.x;
-        tileXY.y = newTileXY.y;
-    }
-    return tileXYArray;
+    return out;
 };
+
+var tmp = {
+    x: 0,
+    y: 0
+}
 export default Offset;

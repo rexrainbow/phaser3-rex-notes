@@ -1,7 +1,11 @@
 // internal method
 var ForEachTile = function (tileXYArray, board, callback, scope) {
     var bound = GetAABB(tileXYArray);
-    board.offset(tileXYArray, -bound.x, -bound.y);
+    var tileXY;
+    for (var i = 0, cnt = tileXYArray.length; i < cnt; i++) {
+        tileXY = tileXYArray[i];
+        board.offset(tileXY, -bound.x, -bound.y, tileXY);
+    }
     board.setBoardWidth(bound.width).setBoardHeight(bound.height);
 
     for (var i = 0, cnt = tileXYArray.length; i < cnt; i++) {

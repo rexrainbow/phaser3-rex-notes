@@ -1,3 +1,5 @@
+import IsUID from '../chess/IsUID.js';
+
 var GridAlign = function (gameObject, tileX, tileY) {
     if (gameObject === undefined) {
         var chess = this.getAllChess();
@@ -5,8 +7,8 @@ var GridAlign = function (gameObject, tileX, tileY) {
             this.gridAlign(chess[i]);
         }
     } else {
-        if (!gameObject.hasOwnProperty('x')) {
-            return this;
+        if (IsUID(gameObject)) {
+            gameObject = this.uidToChess(gameObject);
         }
         if (tileX === undefined) {
             var tileXYZ = this.chessToTileXYZ(gameObject);
