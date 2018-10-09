@@ -18,8 +18,6 @@ var CreateChess = function (tileX, tileY, symbols) {
     gameObject.setData('symbol', symbol);
     // Add to board
     board.addChess(gameObject, tileX, tileY, this.chessTileZ, true);
-    // Add blocker
-    gameObject.rexChess.setBlocker();
     // behaviors
     gameObject.rexMoveTo = scene.rexBoard.add.moveTo(gameObject, this.chessMoveTo);
 }

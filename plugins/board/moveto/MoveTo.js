@@ -30,6 +30,7 @@ class MoveTo extends TickTask {
         this.timeScale = GetValue(o, 'timeScale', 1);
         this.setSpeed(GetValue(o, 'speed', 400));
         this.setRotateToTarget(GetValue(o, 'rotateToTarget', false));
+        this.setOccupiedTest(GetValue(o, 'occupiedTest', false));
         this.setBlockerTest(GetValue(o, 'blockerTest', false));
         this.setEdgeBlockerTest(GetValue(o, 'edgeBlockerTest', false));
         this.setMoveableTestCallback(GetValue(o, 'moveableTest', undefined), GetValue(o, 'moveableTestScope', undefined));
@@ -46,6 +47,7 @@ class MoveTo extends TickTask {
             enable: this.enable,
             timeScale: this.timeScale,
             speed: this.speed,
+            occupiedTest: this.occupiedTest,
             blockerTest: this.blockerTest,
             edgeBlockerTest: this.edgeBlockerTest,
             moveableTest: this.moveableTestCallback,
@@ -137,19 +139,27 @@ class MoveTo extends TickTask {
         return this;
     }
 
-    setBlockerTest(value) {
-        if (value === undefined) {
-            value = true;
+    setOccupiedTest(enable) {
+        if (enable === undefined) {
+            enable = true;
         }
-        this.blockerTest = value;
+        this.occupiedTest = enable;
         return this;
     }
 
-    setEdgeBlockerTest(value) {
-        if (value === undefined) {
-            value = true;
+    setBlockerTest(enable) {
+        if (enable === undefined) {
+            enable = true;
         }
-        this.edgeBlockerTest = value;
+        this.blockerTest = enable;
+        return this;
+    }
+
+    setEdgeBlockerTest(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+        this.edgeBlockerTest = enable;
         return this;
     }
 

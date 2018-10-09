@@ -86,9 +86,6 @@ class Blocker extends RexPlugins.Board.Shape {
         // Shape(board, tileX, tileY, tileZ, fillColor, fillAlpha, addToBoard)
         super(board, tileXY.x, tileXY.y, 0, 0x555555);
         scene.add.existing(this);
-
-        // set blocker
-        this.rexChess.setBlocker();
     }
 }
 
@@ -106,7 +103,7 @@ class ChessA extends RexPlugins.Board.Shape {
         // add behaviors        
         this.moveTo = scene.rexBoard.add.moveTo(this);
         this.pathFinder = scene.rexBoard.add.pathFinder(this, {
-            blockerTest: true
+            occupiedTest: true
         });
 
         // private members

@@ -1,17 +1,18 @@
-var CanMoveToTile = function(tileX, tileY, direction) {
+var CanMoveToTile = function (tileX, tileY, direction) {
     var board = this.chessData.board;
-    // chess is not in a board
+    // Chess is not in a board
     if (board == null) {
         return false;
     }
     var myTileXYZ = this.chessData.tileXYZ;
     var myTileX = myTileXYZ.x,
-        myTileY = myTileXYZ.y;
-    // move to current position
+        myTileY = myTileXYZ.y,
+        myTileZ = myTileXYZ.z;
+    // Move to current position
     if ((tileX === myTileX) && (tileY === myTileY)) {
         return true;
     }
-    // target position is not in board
+    // Target position is not in board
     if (!board.contains(tileX, tileY)) {
         return false;
     }
@@ -20,14 +21,21 @@ var CanMoveToTile = function(tileX, tileY, direction) {
         direction = this.chessData.getTileDirection(tileX, tileY);
     }
 
-    // blocker test
+    // Occupied test
+    if (this.occupiedTest) {
+        if (board.contains(tileX, tileY, myTileZ)) {
+            return false;
+        }
+    }
+
+    // Blocker test
     if (this.blockerTest) {
         if (board.hasBlocker(tileX, tileY)) {
             return false;
         }
     }
 
-    // edge-blocker test
+    // Edge-blocker test
     if (this.edgeBlockerTest) {
         var chess = this.TileXYToChessArray(myTileX, myTileY, tmpChessArray);
         if (chess.length > 1) {
@@ -46,7 +54,7 @@ var CanMoveToTile = function(tileX, tileY, direction) {
         // TODO
     }
 
-    // custom moveable test
+    // Custom moveable test
     if (this.moveableTestCallback) {
         tmpTileXYZ.x = tileX;
         tmpTileXYZ.y = tileY;

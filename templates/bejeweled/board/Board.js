@@ -25,7 +25,7 @@ class Board {
         this.chessCallbackScope = GetValue(config, 'chess.scope', undefined);
         this.chessCreateCallback = GetValue(config, 'chess.create', undefined);
         this.chessMoveTo = GetValue(config, 'chess.moveTo', {});
-        this.chessMoveTo.blockerTest = true;
+        this.chessMoveTo.occupiedTest = true;
 
         // internal reference
         this.eliminatingTimer = undefined; // EliminateChess

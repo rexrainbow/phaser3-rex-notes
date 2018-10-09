@@ -25,8 +25,9 @@ class PathFinder {
         if (costCallback === undefined) {
             costCallback = GetValue(o, 'cost', 1);
         }
+        this.setOccupiedTest(GetValue(o, 'occupiedTest', false));
         this.setBlockerTest(GetValue(o, 'blockerTest', false));
-        this.setEdgeBlockerTest(GetValue(o, 'edgeBlockerTest', false));        
+        this.setEdgeBlockerTest(GetValue(o, 'edgeBlockerTest', false));
         this.setCostFunction(costCallback, costCallbackScope);
         this.setPathMode(GetValue(o, 'pathMode', 0));
         this.setCacheCostMode(GetValue(o, 'cacheCost', true));
@@ -77,19 +78,27 @@ class PathFinder {
         return this;
     }
 
-    setBlockerTest(value) {
-        if (value === undefined) {
-            value = true;
+    setOccupiedTest(enable) {
+        if (enable === undefined) {
+            enable = true;
         }
-        this.blockerTest = value;
+        this.occupiedTest = enable;
         return this;
     }
 
-    setEdgeBlockerTest(value) {
-        if (value === undefined) {
-            value = true;
+    setBlockerTest(enable) {
+        if (enable === undefined) {
+            enable = true;
         }
-        this.edgeBlockerTest = value;
+        this.blockerTest = enable;
+        return this;
+    }
+
+    setEdgeBlockerTest(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+        this.edgeBlockerTest = enable;
         return this;
     }
 
@@ -110,7 +119,7 @@ class PathFinder {
         return BLOCKER;
     }
 
-    get INFINITY(){
+    get INFINITY() {
         return INFINITY;
     }
 

@@ -80,9 +80,7 @@ class ChessA extends RexPlugins.Board.Shape {
         this.setDepth(1);
 
         // add behaviors        
-        this.moveTo = scene.rexBoard.add.moveTo(this, {
-            blockerTest: true
-        });
+        this.moveTo = scene.rexBoard.add.moveTo(this);
     }
 
     continueMoveToward(direction) {
