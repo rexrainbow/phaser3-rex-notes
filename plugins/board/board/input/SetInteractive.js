@@ -36,23 +36,24 @@ var onPointerDown = function (pointer) {
     if (!pointer.isDown) {
         return;
     }
-    var tileX = this.worldXYToTileX(pointer.x, pointer.y),
-        tileY = this.worldXYToTileY(pointer.x, pointer.y);
-    if (!this.contains(tileX, tileY)) {
-        return;
-    }
     if (this.input.pointer === null) { // Catch new touch pointer
         this.input.pointer = pointer;
     }
+
+    // Get touched tileX, tileY
+    var tileX = this.worldXYToTileX(pointer.x, pointer.y),
+        tileY = this.worldXYToTileY(pointer.x, pointer.y);
     this.input.tilePosition.x = tileX;
     this.input.tilePosition.y = tileY;
-    this.emit('tiledown', pointer, this.input.tilePosition);
-
-    tmpChessArray.length = 0;
-    var gameObjects = this.tileXYToChessArray(tileX, tileY, tmpChessArray);
-    if (gameObjects.length === 0) {
+    if (!this.contains(tileX, tileY)) {
         return;
     }
+    this.emit('tiledown', pointer, this.input.tilePosition);
+
+    // Get touched chess
+    tmpChessArray.length = 0;
+    var gameObjects = this.tileXYToChessArray(tileX, tileY, tmpChessArray);
+    // Fire events
     var gameObject;
     for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
         gameObject = gameObjects[i];
@@ -61,29 +62,28 @@ var onPointerDown = function (pointer) {
         }
         this.emit('gameobjectdown', pointer, gameObject);
     }
+    tmpChessArray.length = 0;
 };
 
 var onPointerUp = function (pointer) {
     if (!this.input.enable) {
         return;
     }
+
+    // Get touched tileX, tileY
     var tileX = this.worldXYToTileX(pointer.x, pointer.y),
         tileY = this.worldXYToTileY(pointer.x, pointer.y);
+    this.input.tilePosition.x = tileX;
+    this.input.tilePosition.y = tileY;
     if (!this.contains(tileX, tileY)) {
         return;
     }
-    if (this.input.pointer === pointer) { // Release touch pointer
-        this.input.pointer = null;
-    }
-    this.input.tilePosition.x = tileX;
-    this.input.tilePosition.y = tileY;
     this.emit('tileup', pointer, this.input.tilePosition);
 
+    // Get touched chess
     tmpChessArray.length = 0;
     var gameObjects = this.tileXYToChessArray(tileX, tileY, tmpChessArray);
-    if (gameObjects.length === 0) {
-        return;
-    }
+    // Fire events
     var gameObject;
     for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
         gameObject = gameObjects[i];
@@ -92,37 +92,43 @@ var onPointerUp = function (pointer) {
         }
         this.emit('gameobjectup', pointer, gameObject);
     }
+    tmpChessArray.length = 0;
+
+    if (this.input.pointer === pointer) { // Release touch pointer
+        this.input.pointer = null;
+    }
 };
 
 var onPointerMove = function (pointer) {
     if (!this.input.enable) {
         return;
     }
+
+    // Get touched tileX, tileY
     var tileX = this.worldXYToTileX(pointer.x, pointer.y),
         tileY = this.worldXYToTileY(pointer.x, pointer.y);
+    if ((this.input.tilePosition.x === tileX) && (this.input.tilePosition.y === tileY)) {
+        // Tile position dose not change
+        return;
+    }
+    this.input.tilePosition.x = tileX;
+    this.input.tilePosition.y = tileY;
     if (!this.contains(tileX, tileY)) {
+        // Move outside
         if (this.input.pointer === pointer) { // Release touch pointer
             this.input.pointer = null;
         }
         return;
     }
-
     if (this.input.pointer === null) { // Catch new touch pointer
         this.input.pointer = pointer;
     }
+    this.emit('tilemove', pointer, this.input.tilePosition);
 
-    if ((this.input.tilePosition.x === tileX) && (this.input.tilePosition.y === tileY)) {
-        return;
-    }
-    this.input.tilePosition.x = tileX;
-    this.input.tilePosition.y = tileY;
-    this.emit('tileup', pointer, this.input.tilePosition);
-
+    // Get touched chess
     tmpChessArray.length = 0;
     var gameObjects = this.tileXYToChessArray(tileX, tileY, tmpChessArray);
-    if (gameObjects.length === 0) {
-        return;
-    }
+    // Fire events
     var gameObject;
     for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
         gameObject = gameObjects[i];
@@ -131,6 +137,7 @@ var onPointerMove = function (pointer) {
         }
         this.emit('gameobjectmove', pointer, gameObject);
     }
+    tmpChessArray.length = 0;
 };
 
 var tmpChessArray = [];

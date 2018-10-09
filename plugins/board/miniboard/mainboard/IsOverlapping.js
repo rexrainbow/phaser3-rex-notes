@@ -1,15 +1,12 @@
-var IsOverlapping = function (mainBoard) {
+var IsOverlapping = function (mainBoard, tileZ) {
     if (!mainBoard) {
         return false;
-    }
-    if (mainBoard.infinityMode) {
-        return true;
     }
 
     var gameObject;
     for (var uid in this.tileXYZMap) {
         gameObject = this.board.uidToChess(uid);
-        if (mainBoard.containPoint(gameObject.x, gameObject.y)) {
+        if (mainBoard.isOverlappingPoint(gameObject.x, gameObject.y, tileZ)) {
             return true;
         }
     }

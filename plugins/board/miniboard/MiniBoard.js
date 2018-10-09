@@ -1,12 +1,12 @@
 import ContainerLite from 'rexPlugins/gameobjects/containerlite/ContainerLite.js';
 import Board from '../board/Board.js';
 
-import AddChess from './AddChess.js';
-import RemoveChess from './RemoveChess.js';
-import RemoveAllChess from './RemoveAllChess.js';
-import IsOverlappingPoint from './IsOverlappingPoint.js';
+import AddChess from './chess/AddChess.js';
+import RemoveChess from './chess/RemoveChess.js';
+import RemoveAllChess from './chess/RemoveAllChess.js';
 
 import MainBoardReference from './mainboard/MainBoardReference.js';
+import SetMainBoard from './mainboard/SetMainboard.js';
 import CanPutOnMainBoard from './mainboard/CanPutOnMainBoard.js';
 import PutOnMainBoard from './mainboard/PutOnMainBoard.js';
 import PullOutFromMainBoard from './mainboard/PullOutFromMainBoard.js';
@@ -105,14 +105,6 @@ class MiniBoard extends Container {
         return this.board.boardData.UIDToXYZ; // {uid:{x,y,z}}
     }
 
-    setMainBoard(mainBoard, tileX, tileY) {
-        this.mainBoardRef.set(mainBoard, tileX, tileY);
-        if (mainBoard) {
-            this.lastMainBoardRef.set(mainBoard, tileX, tileY);
-        }
-        return this;
-    }
-
     setPutTestCallback(callback, scope) {
         this.putTestCallback = callback;
         this.putTestCallbackScpe = scope;
@@ -124,7 +116,6 @@ var methods = {
     addChess: AddChess,
     removeChess: RemoveChess,
     removeAllChess: RemoveAllChess,
-    isOverlappingPoint: IsOverlappingPoint,
 
     pullOutFromMainBoard: PullOutFromMainBoard,
     canPutOnMainBoard: CanPutOnMainBoard,
@@ -137,6 +128,7 @@ var methods = {
     setDragEnable: SetDragEnable,
     dragEnd: DragEnd,
 
+    setMainBoard: SetMainBoard,
     canMirror: CanMirror,
     mirror: Mirror,
     canRotate: CanRotate,

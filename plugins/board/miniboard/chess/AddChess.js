@@ -1,4 +1,4 @@
-import IsUID from '../chess/IsUID.js';
+import IsUID from '../../chess/IsUID.js';
 
 var AddChess = function (gameObject, tileX, tileY, tileZ) {
     var gird = this.grid;

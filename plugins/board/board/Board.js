@@ -1,20 +1,24 @@
-import ChessBank from '../chess/ChessBank.js';
 import GetChessData from '../chess/GetChessData.js';
 import GetChessUID from '../chess/GetChessUID.js';
-import BoardData from './BoardData.js';
+
+import BoardData from './boarddata/BoardData.js';
+import SetBoardWidth from './boarddata/SetBoardWidth.js';
+import SetBoardHeight from './boarddata/SetBoardHeight.js';
 
 import TileXYToWorldX from './worldposition/TileXYToWorldX.js';
 import TileXYToWorldY from './worldposition/TileXYToWorldY.js';
 import WorldXYToTileX from './worldposition/WorldXYToTileX.js';
 import WorldXYToTileY from './worldposition/WorldXYToTileY.js';
+import IsOverlappingPoint from './worldposition/IsOverlappingPoint.js';
 import GridAlign from './worldposition/GridAlign.js';
-import ContainPoint from './worldposition/ContainPoint.js';
-import SetBoardWidth from './SetBoardWidth.js';
-import SetBoardHeight from './SetBoardHeight.js';
-import AddChess from './AddChess.js';
-import RemoveChess from './RemoveChess.js';
-import RemoveAllChess from './RemoveAllChess.js';
-import SwapChess from './SwapChess.js';
+
+import UidToChess from './chess/UidToChess.js';
+import AddChess from './chess/AddChess.js';
+import RemoveChess from './chess/RemoveChess.js';
+import RemoveAllChess from './chess/RemoveAllChess.js';
+import SwapChess from './chess/SwapChess.js';
+import GetAllChess from './chess/GetAllChess.js';
+
 import Contains from './tileposition/Contains.js';
 import ForEachTileXY from './tileposition/ForEachTileXY.js';
 import GetWrapTileX from './tileposition/GetWrapTileX.js';
@@ -24,22 +28,27 @@ import TileXYToChessArray from './tileposition/TileXYToChessArray.js';
 import TileZToChessArray from './tileposition/TileZToChessArray.js';
 import TileXYArrayToChessArray from './tileposition/TileXYArrayToChessArray.js';
 import ChessToTileXYZ from './tileposition/ChessToTileXYZ.js';
-import GetAllChess from './GetAllChess.js';
+import Offset from './tileposition/Offset.js';
+import GetOppositeDirection from './tileposition/GetOppositeDirection.js';
+import GetDistance from './tileposition/GetDistance.js';
+import Fit from './tileposition/Fit.js';
+
 import GetEmptyTileXYArray from './empty/GetEmptyTileXYArray.js';
 import GetRandomEmptyTileXY from './empty/GetRandomEmptyTileXY.js';
+
 import GetNeighborTileXY from './neighbors/GetNeighborTileXY.js';
 import GetNeighborChess from './neighbors/GetNeighborChess.js';
 import GetNeighborTileDirection from './neighbors/GetNeighborTileDirection.js';
 import GetNeighborChessDirection from './neighbors/GetNeighborChessDirection.js';
 import AreNeighbors from './neighbors/AreNeighbors.js';
-import GetOppositeDirection from './GetOppositeDirection.js';
-import GetDistance from './GetDistance.js';
+
 import HasBlocker from './blocker/HasBlocker.js';
 import HasEdgeBlocker from './blocker/HasEdgeBlocker.js';
-import Offset from './Offset.js';
-import SetInteractive from './SetInteractive.js';
-import GetGridPoints from './GetGridPoints.js';
-import GetGridPolygon from './GetGridPolygon.js';
+
+import SetInteractive from './input/SetInteractive.js';
+
+import GetGridPoints from './gridpolygon/GetGridPoints.js';
+import GetGridPolygon from './gridpolygon/GetGridPolygon.js';
 
 import DefaultGrids from '../grid/index.js';
 
@@ -123,56 +132,35 @@ class Board extends EE {
         return this.boardData.exists(this.getChessUID(gameObject));
     }
 
-    uidToChess(uid) {
-        if (uid == null) {
-            return null;
-        } else {
-            // single uid
-            if (!this.boardData.exists(uid)) {
-                return null;
-            }
-            return ChessBank.get(uid).parent;
-        }
-    }
-
-    uidArrayToChess(uid, out) {
-        if (out === undefined) {
-            out = [];
-        }
-        var uidArray = uid;
-        for (var i = 0, cnt = uidArray.length; i < cnt; i++) {
-            uid = uidArray[i];
-            if (!this.boardData.exists(uid)) {
-                continue;
-            }
-            out.push(ChessBank.get(uid));
-        }
-        return out;
-    }
-
     get chessCount() {
         return this.boardData.chessCount;
     }
 }
 
 var methods = {
+    getChessData: GetChessData,
+    getChessUID: GetChessUID,
+
+    setBoardWidth: SetBoardWidth,
+    setBoardHeight: SetBoardHeight,
+
     tileXYToWorldX: TileXYToWorldX,
     tileXYToWorldY: TileXYToWorldY,
     worldXYToTileX: WorldXYToTileX,
     worldXYToTileY: WorldXYToTileY,
-    setBoardWidth: SetBoardWidth,
-    setBoardHeight: SetBoardHeight,
-    getChessData: GetChessData,
-    getChessUID: GetChessUID,
-    addChess: AddChess,
+    isOverlappingPoint: IsOverlappingPoint,
     gridAlign: GridAlign,
+
+    uidToChess: UidToChess,
+    addChess: AddChess,
     removeChess: RemoveChess,
     removeAllChess: RemoveAllChess,
-    moveChess: AddChess,
     swapChess: SwapChess,
-    forEachTileXY: ForEachTileXY,
+    moveChess: AddChess,
+    getAllChess: GetAllChess,
+
     contains: Contains,
-    containPoint: ContainPoint,
+    forEachTileXY: ForEachTileXY,
     getWrapTileX: GetWrapTileX,
     getWrapTileY: GetWrapTileY,
     tileXYZToChess: TileXYZToChess,
@@ -180,20 +168,25 @@ var methods = {
     tileZToChessArray: TileZToChessArray,
     tileXYArrayToChess: TileXYArrayToChessArray,
     chessToTileXYZ: ChessToTileXYZ,
-    getAllChess: GetAllChess,
+    offset: Offset,
+    getOppositeDirection: GetOppositeDirection,
+    getDistance: GetDistance,
+    fit: Fit,
+
     getEmptyTileXYArray: GetEmptyTileXYArray,
     getRandomEmptyTileXY: GetRandomEmptyTileXY,
+
     getNeighborTileXY: GetNeighborTileXY,
     getNeighborChess: GetNeighborChess,
     getNeighborTileDirection: GetNeighborTileDirection,
     getNeighborChessDirection: GetNeighborChessDirection,
     areNeighbors: AreNeighbors,
-    getOppositeDirection: GetOppositeDirection,
-    getDistance: GetDistance,
+
     hasBlocker: HasBlocker,
     hasEdgeBlocker: HasEdgeBlocker,
-    offset: Offset,
+
     setInteractive: SetInteractive,
+
     getGridPoints: GetGridPoints,
     getGridPolygon: GetGridPolygon,
 }
