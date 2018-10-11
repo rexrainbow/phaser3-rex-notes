@@ -23,7 +23,7 @@ class Demo extends Phaser.Scene {
             }
         });
 
-        var tileXYArray = board.fit(this.rexBoard.hexagonMap.triangle(board.grid, 0, 4));
+        var tileXYArray = board.fit(this.rexBoard.hexagonMap.triangle(board, 0, 4));
 
         var graphics = this.add.graphics({
             lineStyle: {

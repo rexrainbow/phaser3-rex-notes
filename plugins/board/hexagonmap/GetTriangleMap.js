@@ -3,19 +3,19 @@ import {
     xyz2r
 } from 'rexPlugins/utils/grid/hexagon/CubeTransfer.js';
 
-var GetTriangleMap = function (grid, type, height, out) {
+var GetTriangleMap = function (board, type, height, out) {
     if (out === undefined) {
         out = [];
     }
-    var mode = grid.mode;
+    var mode = board.grid.mode;
     var rStart, rEnd
     for (var q = 0; q <= height; q++) {
-        if (type === 0) {
-            rStart = 0;
-            rEnd = height - q;
-        } else {
+        if (type === 1) {
             rStart = height - q;
             rEnd = height;
+        } else {
+            rStart = 0;
+            rEnd = height - q;
         }
 
         for (var r = rStart; r <= rEnd; r++) {

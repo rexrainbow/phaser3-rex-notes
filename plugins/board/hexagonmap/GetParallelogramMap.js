@@ -3,22 +3,12 @@ import {
     xyz2r
 } from 'rexPlugins/utils/grid/hexagon/CubeTransfer.js';
 
-var GetParallelogramMap = function (grid, type, width, height, out) {
+var GetParallelogramMap = function (board, type, width, height, out) {
     if (out === undefined) {
         out = [];
     }
-    var mode = grid.mode;
+    var mode = board.grid.mode;
     switch (type) {
-        case 0:
-            for (var q = 0; q <= width; q++) {
-                for (var r = 0; r <= height; r++) {
-                    out.push({
-                        x: xyz2q(mode, q, r, -q - r),
-                        y: xyz2r(mode, q, r, -q - r)
-                    });
-                }
-            }
-            break;
         case 1:
             for (var s = 0; s <= width; s++) {
                 for (var q = 0; q <= height; q++) {
@@ -35,6 +25,16 @@ var GetParallelogramMap = function (grid, type, width, height, out) {
                     out.push({
                         x: xyz2q(mode, -r - s, r, s),
                         y: xyz2r(mode, -r - s, r, s)
+                    });
+                }
+            }
+            break;
+        default: // case 0
+            for (var q = 0; q <= width; q++) {
+                for (var r = 0; r <= height; r++) {
+                    out.push({
+                        x: xyz2q(mode, q, r, -q - r),
+                        y: xyz2r(mode, q, r, -q - r)
                     });
                 }
             }

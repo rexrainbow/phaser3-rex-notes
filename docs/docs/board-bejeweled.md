@@ -153,7 +153,7 @@ function(lines, board) {
 }
 ```
 
-- `lines` : An array of matched lines, each line is a [built-in Set object](struct-set.md).
+- `lines` : An array of matched lines, each line is a [built-in Set object](structs-set.md).
     - Length of each line (`lines[i].size`) could be *5*, *4*, or *3*.
     - `lines[i].entries` : An array of chess (Game Object) in a matched line.
     - All chess game objects in matched lines will be eliminated in next stage. Add/remove chess game object in these lines, or add new line in `lines` array to change the eliminated targets.

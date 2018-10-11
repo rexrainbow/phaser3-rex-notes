@@ -13,12 +13,12 @@ var AddChess = function (gameObject, tileX, tileY, tileZ, align) {
     }
     if (curTileXYZ &&
         (curTileXYZ.x === tileX) && (curTileXYZ.y === tileY) && (curTileXYZ.z === tileZ)) {
-        // move to current position
+        // Move to current position
         return this;
     }
     var occupiedChess = this.tileXYZToChess(tileX, tileY, tileZ);
     if (occupiedChess) {
-        // TODO
+        this.emit('kickout', gameObject, occupiedChess);
     }
 
     this.removeChess(gameObject);

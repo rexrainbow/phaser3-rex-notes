@@ -171,6 +171,7 @@ nav:
     - Move to: board-moveto.md
     - Path finder: board-pathfinder.md
     - Match: board-match.md
+    - Hexagon map: board-hexagonmap.md
     - Bejeweled: board-bejeweled.md
 - Storage:
     - Offline:

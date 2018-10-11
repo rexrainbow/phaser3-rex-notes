@@ -3,11 +3,11 @@ import {
     xyz2r
 } from 'rexPlugins/utils/grid/hexagon/CubeTransfer.js';
 
-var GetHexagonMap = function (grid, radius, out) {
+var GetHexagonMap = function (board, radius, out) {
     if (out === undefined) {
         out = [];
     }
-    var mode = grid.mode;
+    var mode = board.grid.mode;
     var r1, r2;
     for (var q = -radius; q <= radius; q++) {
         r1 = Math.max(-radius, -q - radius);

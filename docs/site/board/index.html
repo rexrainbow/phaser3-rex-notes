@@ -3038,6 +3038,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../board-hexagonmap/" title="Hexagon map" class="md-nav__link">
+      Hexagon map
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../board-bejeweled/" title="Bejeweled" class="md-nav__link">
       Bejeweled
     </a>
@@ -3551,13 +3563,14 @@
     <div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">MyBoard</span> <span class="kr">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">Board</span><span class="p">.</span><span class="nx">Board</span> <span class="p">{</span>
     <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">)</span> <span class="p">{</span>
         <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
-            <span class="nx">grid</span><span class="o">:</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">quadGrid</span><span class="p">({</span>
+            <span class="nx">grid</span><span class="o">:</span> <span class="p">{</span>
+                <span class="nx">gridType</span><span class="o">:</span> <span class="s1">&#39;quadGrid&#39;</span><span class="p">,</span>
                 <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
                 <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
                 <span class="nx">cellWidth</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
                 <span class="nx">cellHeight</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
                 <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;orthogonal&#39;</span>  <span class="c1">// &#39;orthogonal&#39;|&#39;isometric&#39;|&#39;staggered&#39;</span>
-            <span class="p">}),</span>
+            <span class="p">},</span>
             <span class="nx">width</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
             <span class="nx">height</span><span class="o">:</span> <span class="mi">0</span>
         <span class="p">});</span>
