@@ -2930,6 +2930,42 @@
           
 
 
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-14-9" type="checkbox" id="nav-14-9">
+    
+    <label class="md-nav__link" for="nav-14-9">
+      Mini board
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-14-9">
+        Mini board
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../board-miniboard/" title="Mini board" class="md-nav__link">
+      Mini board
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
   <li class="md-nav__item">
     <a href="../board-bejeweled/" title="Bejeweled" class="md-nav__link">
       Bejeweled
@@ -3257,6 +3293,7 @@
 <p>Included in board plugin.</p>
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">pathFinder</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">pathFinder</span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="p">{</span>
+    <span class="c1">// occupiedTest: false,</span>
     <span class="c1">// blockerTest: false,</span>
 
     <span class="c1">// ** cost **</span>
@@ -3271,6 +3308,7 @@
 </pre></div>
 
 <ul>
+<li><code>occupiedTest</code> : Set <code>true</code> to test if target tile position is occupied or not, in cost function.</li>
 <li><code>blockerTest</code> : Set <code>true</code> to test <a href="../board-chessdata/#blocker">blocker property</a> in cost function.</li>
 <li>Cost function<ul>
 <li><code>cost</code> : A constant cost for each non-blocked tile</li>

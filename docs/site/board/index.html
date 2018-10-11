@@ -2767,6 +2767,19 @@
     Add chess
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kick-out-event" title="Kick-out event" class="md-nav__link">
+    Kick-out event
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -2840,6 +2853,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#is-overlapping-with-world-position" title="Is overlapping with world position" class="md-nav__link">
+    Is overlapping with world position
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#neighobrs" title="Neighobrs" class="md-nav__link">
     Neighobrs
   </a>
@@ -2856,6 +2876,13 @@
           <li class="md-nav__item">
   <a href="#get-all-chess" title="Get all chess" class="md-nav__link">
     Get all chess
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fit" title="Fit" class="md-nav__link">
+    Fit
   </a>
   
 </li>
@@ -2895,8 +2922,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#grid-polygon" title="Grid polygon" class="md-nav__link">
-    Grid polygon
+  <a href="#grid-points" title="Grid points" class="md-nav__link">
+    Grid points
   </a>
   
 </li>
@@ -3041,6 +3068,42 @@
     <a href="../board-hexagonmap/" title="Hexagon map" class="md-nav__link">
       Hexagon map
     </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-14-9" type="checkbox" id="nav-14-9">
+    
+    <label class="md-nav__link" for="nav-14-9">
+      Mini board
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-14-9">
+        Mini board
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../board-miniboard/" title="Mini board" class="md-nav__link">
+      Mini board
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
         
@@ -3314,6 +3377,19 @@
     Add chess
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#kick-out-event" title="Kick-out event" class="md-nav__link">
+    Kick-out event
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -3387,6 +3463,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#is-overlapping-with-world-position" title="Is overlapping with world position" class="md-nav__link">
+    Is overlapping with world position
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#neighobrs" title="Neighobrs" class="md-nav__link">
     Neighobrs
   </a>
@@ -3403,6 +3486,13 @@
           <li class="md-nav__item">
   <a href="#get-all-chess" title="Get all chess" class="md-nav__link">
     Get all chess
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fit" title="Fit" class="md-nav__link">
+    Fit
   </a>
   
 </li>
@@ -3442,8 +3532,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#grid-polygon" title="Grid polygon" class="md-nav__link">
-    Grid polygon
+  <a href="#grid-points" title="Grid points" class="md-nav__link">
+    Grid points
   </a>
   
 </li>
@@ -3622,6 +3712,13 @@
 <li>tileZ is not equal to <code>depth</code>.</li>
 </ul>
 </div>
+<h4 id="kick-out-event">Kick-out event<a class="headerlink" href="#kick-out-event" title="Permanent link">&para;</a></h4>
+<p>Board will fire <code>kickout</code> event when adding chess to an occupied grid.</p>
+<div class="codehilite"><pre><span></span><span class="nx">board</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;kickout&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">chessToAdd</span><span class="p">,</span> <span class="nx">occupiedChess</span><span class="p">,</span> <span class="nx">tileXYZ</span><span class="p">){</span>
+<span class="p">})</span>
+</pre></div>
+
+<p><code>chessToAdd</code> kicks out <code>occupiedChess</code> at tile position <code>tileXYZ</code>(<code>{x,y,z}</code>).</p>
 <h3 id="remove-chess">Remove chess<a class="headerlink" href="#remove-chess" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Remove chess object from board
@@ -3681,6 +3778,13 @@
 <li>Get chess at (tileX, tileY)
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">tileXYToChessArray</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">);</span>
 <span class="c1">// var out = board.tileXYToChessArray(tileX, tileY, out);</span>
+</pre></div><ul>
+<li><code>out</code> : An array of chess</li>
+</ul>
+</li>
+<li>Get chess at tileZ
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">tileZToChessArray</span><span class="p">(</span><span class="nx">tileZ</span><span class="p">);</span>
+<span class="c1">// var out = board.tileZToChessArray(tileZ, out);</span>
 </pre></div><ul>
 <li><code>out</code> : An array of chess</li>
 </ul>
@@ -3766,6 +3870,14 @@
     <div class="codehilite"><pre><span></span><span class="nx">board</span><span class="p">.</span><span class="nx">gridAlign</span><span class="p">();</span>
 </pre></div></li>
 </ul>
+<h3 id="is-overlapping-with-world-position">Is overlapping with world position<a class="headerlink" href="#is-overlapping-with-world-position" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isOverlapping</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">isOverlappingPoint</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">);</span>
+</pre></div>
+
+<p>or</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isOverlapping</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">isOverlappingPoint</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">,</span> <span class="nx">tileZ</span><span class="p">);</span>
+</pre></div>
+
 <h3 id="neighobrs">Neighobrs<a class="headerlink" href="#neighobrs" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get tile position of neighbor
@@ -3838,6 +3950,14 @@
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">chessArray</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getAllChess</span><span class="p">();</span>
 </pre></div>
 
+<h3 id="fit">Fit<a class="headerlink" href="#fit" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">fit</span><span class="p">(</span><span class="nx">tileXYArray</span><span class="p">);</span>
+</pre></div>
+
+<ul>
+<li><code>tileXYArray</code> : An array of tile position <code>{x,y}</code>.</li>
+</ul>
+<p>Offset all of tile positions to <code>(0, 0)</code>, and set board size to fit these tile positions.</p>
 <h3 id="blocker">Blocker<a class="headerlink" href="#blocker" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Set blocker property : See <a href="../board-chessdata/#blocker">chess data</a></li>
@@ -3922,18 +4042,18 @@
 <span class="p">})</span>
 </pre></div><ul>
 <li><code>pointer</code> : <a href="../touchevents/#properties-of-point">Touch pointer</a></li>
-<li><code>gameObject</code> : Game object at touched (tileX, tileY)    </li>
+<li><code>gameObject</code> : Game object at touched (tileX, tileY)</li>
 </ul>
 </li>
 </ul>
-<h3 id="grid-polygon">Grid polygon<a class="headerlink" href="#grid-polygon" title="Permanent link">&para;</a></h3>
+<h3 id="grid-points">Grid points<a class="headerlink" href="#grid-points" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Get a <a href="../geom-polygon/">polygon object</a> at tile position (tileX, tileY).
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">poly</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getGridPolygon</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">);</span>
-<span class="c1">// var out = board.getGridPolygon(tileX, tileY, out);</span>
+<li>Get an array of grid points at tile position (tileX, tileY).
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getGridPoints</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">);</span>
+<span class="c1">// var out = board.getGridPoints(tileX, tileY, out);</span>
 </pre></div></li>
 <li>Draw grid polygon on <a href="../graphics/#lines">graphics object</a>
-    <div class="codehilite"><pre><span></span><span class="nx">graphics</span><span class="p">.</span><span class="nx">strokePoints</span><span class="p">(</span><span class="nx">poly</span><span class="p">.</span><span class="nx">points</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><span class="nx">graphics</span><span class="p">.</span><span class="nx">strokePoints</span><span class="p">(</span><span class="nx">points</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 </pre></div></li>
 </ul>
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>

@@ -2992,6 +2992,42 @@
           
 
 
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-14-9" type="checkbox" id="nav-14-9">
+    
+    <label class="md-nav__link" for="nav-14-9">
+      Mini board
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-14-9">
+        Mini board
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../board-miniboard/" title="Mini board" class="md-nav__link">
+      Mini board
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
   <li class="md-nav__item">
     <a href="../board-bejeweled/" title="Bejeweled" class="md-nav__link">
       Bejeweled
@@ -3383,13 +3419,15 @@
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">moveTo</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="p">{</span>
     <span class="c1">// speed: 400,</span>
     <span class="c1">// rotateToTarget: false,</span>
+    <span class="c1">// occupiedTest: false,</span>
     <span class="c1">// blockerTest: false</span>
 <span class="p">})</span>
 </pre></div>
 
 <ul>
 <li><code>speed</code> : moving speed, pixels in second.</li>
-<li><code>rotateToTarget</code> : Set true to change angle towards path.</li>
+<li><code>rotateToTarget</code> : Set <code>true</code> to change angle towards path.</li>
+<li><code>occupiedTest</code> : Set <code>true</code> to test if target tile position is occupied or not, in moveable testing.</li>
 <li><code>blockerTest</code> : Set <code>true</code> to test <a href="../board-chessdata/#blocker">blocker property</a> in moveable testing.</li>
 </ul>
 <h3 id="move-to-destination-tile">Move to destination tile<a class="headerlink" href="#move-to-destination-tile" title="Permanent link">&para;</a></h3>
