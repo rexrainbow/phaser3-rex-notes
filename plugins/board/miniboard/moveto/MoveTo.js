@@ -4,6 +4,7 @@ import TickTask from 'rexPlugins/utils/ticktask/TickTask.js';
 import CanMoveToTile from './CanMoveToTile.js';
 import MoveToTile from './MoveToTile.js';
 import MoveToward from './MoveToward.js';
+import MoveToRandomNeighbor from './MoveToRandomNeighbor.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -24,7 +25,6 @@ class MoveTo extends TickTask {
         this.setEnable(GetValue(o, 'enable', true));
         this.timeScale = GetValue(o, 'timeScale', 1);
         this.setSpeed(GetValue(o, 'speed', 400));
-        this.setMoveableTestCallback(GetValue(o, 'moveableTest', undefined), GetValue(o, 'moveableTestScope', undefined));
         this.destinationTileX = GetValue(o, 'destinationTileX', null);
         this.destinationTileY = GetValue(o, 'destinationTileY', null);
         this.destinationDirection = GetValue(o, 'destinationDirection', null);
@@ -40,7 +40,6 @@ class MoveTo extends TickTask {
             speed: this.speed,
             moveableTest: this.moveableTestCallback,
             moveableTestScope: this.moveableTestScope,
-            rotateToTarget: this.rotateToTarget,
             destinationTileX: this.destinationTileX,
             destinationTileY: this.destinationTileY,
             destinationDirection: this.destinationDirection,
@@ -114,41 +113,6 @@ class MoveTo extends TickTask {
         return this;
     }
 
-    set rotateToTarget(value) {
-        this.moveToTask.setRotateToTarget(value);
-    }
-
-    get rotateToTarget() {
-        return this.moveToTask.rotateToTarget;
-    }
-
-    setRotateToTarget(rotateToTarget) {
-        this.rotateToTarget = rotateToTarget;
-        return this;
-    }
-
-    setBlockerTest(value) {
-        if (value === undefined) {
-            value = true;
-        }
-        this.blockerTest = value;
-        return this;
-    }
-
-    setEdgeBlockerTest(value) {
-        if (value === undefined) {
-            value = true;
-        }
-        this.edgeBlockerTest = value;
-        return this;
-    }
-
-    setMoveableTestCallback(callback, scope) {
-        this.moveableTestCallback = callback;
-        this.moveableTestScope = scope;
-        return this;
-    }
-
     stop() {
         this.isRunning = false;
     }
@@ -166,32 +130,6 @@ class MoveTo extends TickTask {
     };
 
     /** @private */
-    addMoveLine(startX, startY, endX, endY) {
-        if (!this.moveToTask.hasOwnProperty('nextlines')) {
-            this.moveToTask.nextlines = [];
-        }
-        this.moveToTask.nextlines.push(
-            [startX, startY, endX, endY]
-        );
-        return this;
-    };
-
-    /** @private */
-    moveNextLine() {
-        var nextlines = this.moveToTask.nextlines;
-        if (!nextlines) {
-            return false;
-        }
-        if (nextlines.length === 0) {
-            return false;
-        }
-        // has next line
-        this.moveAlongLine.apply(this, nextlines[0]);
-        nextlines.length = 0;
-        return true;
-    }
-
-    /** @private */
     update(time, delta) {
         if ((!this.isRunning) || (!this.enable)) {
             return this;
@@ -200,9 +138,7 @@ class MoveTo extends TickTask {
         var moveToTask = this.moveToTask;
         moveToTask.update(time, delta);
         if (!moveToTask.isRunning) {
-            if (!this.moveNextLine()) {
-                this.complete();
-            }
+            this.complete();
             return this;
         }
         return this;
@@ -218,8 +154,6 @@ var methods = {
     moveTo: MoveToTile,
     moveToward: MoveToward,
     moveToRandomNeighbor: MoveToRandomNeighbor,
-    moveAway: MoveAway,
-    moveCloser: MoveCloser,
 };
 Object.assign(
     MoveTo.prototype,

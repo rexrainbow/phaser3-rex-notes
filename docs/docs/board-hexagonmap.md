@@ -57,6 +57,7 @@ var tileXYArray = scene.rexBoard.hexagonMap.parallelogram(board, type, width, he
 var tileXYArray = scene.rexBoard.hexagonMap.triangle(board, type, height);
 // var out = scene.rexBoard.hexagonMap.triangle(board, type, height, out);
 ```
+
 - `tileXYArray` : An array of tile position `{x, y}`.
 - `board` : [Board object](board.md).
 - `height` : Size of Triangle
@@ -68,7 +69,7 @@ var tileXYArray = scene.rexBoard.hexagonMap.triangle(board, type, height);
 
 #### Retrieve tile positions
 
-1. Offset tile positions, and set board size to fit these tile position
+1. Offset all of tile positions to `(0, 0)`, and set board size to fit these tile positions.
     ```javascript
     var tileXYArray = board.fit(tileXYArray);
     ```

@@ -1,4 +1,4 @@
-var Rotate = function (direction, chessTileXYZMap, out) {
+var Offset = function (tileX, tileY, chessTileXYZMap, out) {
     if (direction === undefined) {
         direction = 0;
     }
@@ -12,11 +12,11 @@ var Rotate = function (direction, chessTileXYZMap, out) {
     for (var uid in chessTileXYZMap) {
         chessTileXYZ = chessTileXYZMap[uid];
         newTileXYZ = {};
-        this.board.rotate(chessTileXYZ, direction, undefined, newTileXYZ);
+        mainBoard.offset(chessTileXYZ, tileX, tileY, newTileXYZ);
         newTileXYZ.z = chessTileXYZ.z;
         out[uid] = newTileXYZ;
     }
     return out; // {uid:{x,y,z}}
 }
 
-export default Rotate;
+export default Offset;

@@ -23,12 +23,14 @@ Included in board plugin.
 var moveTo = scene.rexBoard.add.moveTo(chess, {
     // speed: 400,
     // rotateToTarget: false,
+    // occupiedTest: false,
     // blockerTest: false
 })
 ```
 
 - `speed` : moving speed, pixels in second.
-- `rotateToTarget` : Set true to change angle towards path.
+- `rotateToTarget` : Set `true` to change angle towards path.
+- `occupiedTest` : Set `true` to test if target tile position is occupied or not, in moveable testing.
 - `blockerTest` : Set `true` to test [blocker property](board-chessdata.md#blocker) in moveable testing.
 
 ### Move to destination tile

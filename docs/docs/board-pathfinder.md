@@ -21,6 +21,7 @@ Included in board plugin.
 
 ```javascript
 var pathFinder = scene.rexBoard.add.pathFinder(chess, {
+    // occupiedTest: false,
     // blockerTest: false,
 
     // ** cost **
@@ -34,6 +35,7 @@ var pathFinder = scene.rexBoard.add.pathFinder(chess, {
 })
 ```
 
+- `occupiedTest` : Set `true` to test if target tile position is occupied or not, in cost function.
 - `blockerTest` : Set `true` to test [blocker property](board-chessdata.md#blocker) in cost function.
 - Cost function
     - `cost` : A constant cost for each non-blocked tile

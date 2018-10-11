@@ -18,7 +18,7 @@ var AddChess = function (gameObject, tileX, tileY, tileZ, align) {
     }
     var occupiedChess = this.tileXYZToChess(tileX, tileY, tileZ);
     if (occupiedChess) {
-        this.emit('kickout', gameObject, occupiedChess);
+        this.emit('kickout', gameObject, occupiedChess, curTileXYZ);
     }
 
     this.removeChess(gameObject);

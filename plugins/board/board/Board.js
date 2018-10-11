@@ -29,6 +29,7 @@ import TileZToChessArray from './tileposition/TileZToChessArray.js';
 import TileXYArrayToChessArray from './tileposition/TileXYArrayToChessArray.js';
 import ChessToTileXYZ from './tileposition/ChessToTileXYZ.js';
 import Offset from './tileposition/Offset.js';
+import Rotate from './tileposition/Rotate.js';
 import GetOppositeDirection from './tileposition/GetOppositeDirection.js';
 import GetDistance from './tileposition/GetDistance.js';
 import Fit from './tileposition/Fit.js';
@@ -169,6 +170,7 @@ var methods = {
     tileXYArrayToChess: TileXYArrayToChessArray,
     chessToTileXYZ: ChessToTileXYZ,
     offset: Offset,
+    rotate: Rotate,
     getOppositeDirection: GetOppositeDirection,
     getDistance: GetDistance,
     fit: Fit,

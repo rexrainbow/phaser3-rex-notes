@@ -146,6 +146,17 @@ board.addChess(chess, tileX, tileY, tileZ, align);
     - (tileX, tileY) could have more then 1 chess with different tileZ index.
     - tileZ is not equal to `depth`.
 
+#### Kick-out event
+
+Board will fire `kickout` event when adding chess to an occupied grid.
+
+```javascript
+board.on('kickout', function(chessToAdd, occupiedChess, tileXYZ){
+})
+```
+
+`chessToAdd` kicks out `occupiedChess` at tile position `tileXYZ`(`{x,y,z}`).
+
 ### Remove chess
 
 - Remove chess object from board
@@ -205,6 +216,12 @@ var tileXYZ = board.chessToTileXYZ(chess);
     ```javascript
     var out = board.tileXYToChessArray(tileX, tileY);
     // var out = board.tileXYToChessArray(tileX, tileY, out);
+    ```
+    - `out` : An array of chess
+- Get chess at tileZ
+    ```javascript
+    var out = board.tileZToChessArray(tileZ);
+    // var out = board.tileZToChessArray(tileZ, out);
     ```
     - `out` : An array of chess
 - Get chess from array of (tileX, tileY)
@@ -297,6 +314,18 @@ var tileY = board.worldXYToTileY(worldX, worldY);
     board.gridAlign();
     ```
 
+### Is overlapping with world position
+
+```javascript
+var isOverlapping = board.isOverlappingPoint(worldX, worldY);
+```
+
+or
+
+```javascript
+var isOverlapping = board.isOverlappingPoint(worldX, worldY, tileZ);
+```
+
 ### Neighobrs
 
 - Get tile position of neighbor
@@ -363,6 +392,16 @@ var tileY = board.worldXYToTileY(worldX, worldY);
 ```javascript
 var chessArray = board.getAllChess();
 ```
+
+### Fit
+
+```javascript
+var out = board.fit(tileXYArray);
+```
+
+- `tileXYArray` : An array of tile position `{x,y}`.
+
+Offset all of tile positions to `(0, 0)`, and set board size to fit these tile positions.
 
 ### Blocker
 
@@ -452,18 +491,18 @@ var chessArray = board.getAllChess();
     })
     ```
     - `pointer` : [Touch pointer](touchevents.md#properties-of-point)
-    - `gameObject` : Game object at touched (tileX, tileY)    
+    - `gameObject` : Game object at touched (tileX, tileY)
 
-### Grid polygon
+### Grid points
 
-- Get a [polygon object](geom-polygon.md) at tile position (tileX, tileY).
+- Get an array of grid points at tile position (tileX, tileY).
     ```javascript
-    var poly = board.getGridPolygon(tileX, tileY);
-    // var out = board.getGridPolygon(tileX, tileY, out);
+    var points = board.getGridPoints(tileX, tileY);
+    // var out = board.getGridPoints(tileX, tileY, out);
     ```
 - Draw grid polygon on [graphics object](graphics.md#lines)
     ```javascript
-    graphics.strokePoints(poly.points, true);
+    graphics.strokePoints(points, true);
     ```
 
 ### Other properties
