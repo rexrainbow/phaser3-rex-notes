@@ -1068,6 +1068,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#custom-class" title="Custom class" class="md-nav__link">
+    Custom class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#set-color" title="Set color" class="md-nav__link">
     Set color
   </a>
@@ -2403,10 +2410,46 @@
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11-6" type="checkbox" id="nav-11-6">
     
     <label class="md-nav__link" for="nav-11-6">
-      Geometry
+      Vector
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
       <label class="md-nav__title" for="nav-11-6">
+        Vector
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../vector2/" title="Vector2" class="md-nav__link">
+      Vector2
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11-7" type="checkbox" id="nav-11-7">
+    
+    <label class="md-nav__link" for="nav-11-7">
+      Geometry
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-11-7">
         Geometry
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -3190,6 +3233,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#custom-class" title="Custom class" class="md-nav__link">
+    Custom class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#set-color" title="Set color" class="md-nav__link">
     Set color
   </a>
@@ -3251,16 +3301,32 @@
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <h3 id="create-shape">Create shape<a class="headerlink" href="#create-shape" title="Permanent link">&para;</a></h3>
 <h3 id="add-shape-object">Add shape object<a class="headerlink" href="#add-shape-object" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isotriangle</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">isotriangle</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">size</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">reversed</span><span class="p">,</span> <span class="nx">fillTop</span><span class="p">,</span> <span class="nx">fillLeft</span><span class="p">,</span> <span class="nx">fillRight</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isoTriangle</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">isotriangle</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">size</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">reversed</span><span class="p">,</span> <span class="nx">fillTop</span><span class="p">,</span> <span class="nx">fillLeft</span><span class="p">,</span> <span class="nx">fillRight</span><span class="p">);</span>
 </pre></div>
 
+<h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Define class
+    <div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">MyIsoTriangle</span> <span class="kr">extends</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">GameObjects</span><span class="p">.</span><span class="nx">IsoTriangle</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">size</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">reversed</span><span class="p">,</span> <span class="nx">fillTop</span><span class="p">,</span> <span class="nx">fillLeft</span><span class="p">,</span> <span class="nx">fillRight</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">size</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">reversed</span><span class="p">,</span> <span class="nx">fillTop</span><span class="p">,</span> <span class="nx">fillLeft</span><span class="p">,</span> <span class="nx">fillRight</span><span class="p">);</span>
+        <span class="c1">// ...</span>
+        <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div></li>
+<li>Create instance
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isoTriangle</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyIsoTriangle</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">size</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">reversed</span><span class="p">,</span> <span class="nx">fillTop</span><span class="p">,</span> <span class="nx">fillLeft</span><span class="p">,</span> <span class="nx">fillRight</span><span class="p">);</span>
+</pre></div></li>
+</ul>
 <h3 id="set-color">Set color<a class="headerlink" href="#set-color" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Fill color
-    <div class="codehilite"><pre><span></span><span class="nx">isotriangle</span><span class="p">.</span><span class="nx">setFillStyle</span><span class="p">(</span><span class="nx">fillTop</span><span class="p">,</span> <span class="nx">fillLeft</span><span class="p">,</span> <span class="nx">fillRight</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><span class="nx">isoTriangle</span><span class="p">.</span><span class="nx">setFillStyle</span><span class="p">(</span><span class="nx">fillTop</span><span class="p">,</span> <span class="nx">fillLeft</span><span class="p">,</span> <span class="nx">fillRight</span><span class="p">);</span>
 </pre></div></li>
 <li>Show face
-    <div class="codehilite"><pre><span></span><span class="nx">isotriangle</span><span class="p">.</span><span class="nx">setFaces</span><span class="p">(</span><span class="nx">showTop</span><span class="p">,</span> <span class="nx">showLeft</span><span class="p">,</span> <span class="nx">showRight</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><span class="nx">isoTriangle</span><span class="p">.</span><span class="nx">setFaces</span><span class="p">(</span><span class="nx">showTop</span><span class="p">,</span> <span class="nx">showLeft</span><span class="p">,</span> <span class="nx">showRight</span><span class="p">);</span>
 </pre></div><ul>
 <li><code>showTop</code>, <code>showLeft</code>, <code>showRight</code>: Set <code>true</code> to show that face</li>
 </ul>
@@ -3268,27 +3334,27 @@
 </ul>
 <div class="admonition warning">
 <p class="admonition-title">No tint methods</p>
-<p>Uses <code>isotriangle.setFillStyle(fillTop, fillLeft, fillRight)</code> to change color.</p>
+<p>Uses <code>isoTriangle.setFillStyle(fillTop, fillLeft, fillRight)</code> to change color.</p>
 </div>
 <h3 id="projection">Projection<a class="headerlink" href="#projection" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get
-   <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">projection</span> <span class="o">=</span> <span class="nx">isotriangle</span><span class="p">.</span><span class="nx">projection</span><span class="p">;</span>
+   <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">projection</span> <span class="o">=</span> <span class="nx">isoTriangle</span><span class="p">.</span><span class="nx">projection</span><span class="p">;</span>
 </pre></div></li>
 <li>Set
-   <div class="codehilite"><pre><span></span><span class="nx">isotriangle</span><span class="p">.</span><span class="nx">setProjection</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span>
+   <div class="codehilite"><pre><span></span><span class="nx">isoTriangle</span><span class="p">.</span><span class="nx">setProjection</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span>
 </pre></div>
    or
-   <div class="codehilite"><pre><span></span><span class="nx">isotriangle</span><span class="p">.</span><span class="nx">projection</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+   <div class="codehilite"><pre><span></span><span class="nx">isoTriangle</span><span class="p">.</span><span class="nx">projection</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
 </pre></div></li>
 </ul>
 <h3 id="reverse">Reverse<a class="headerlink" href="#reverse" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get
-   <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isReversed</span> <span class="o">=</span> <span class="nx">isotriangle</span><span class="p">.</span><span class="nx">isReversed</span><span class="p">;</span>
+   <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isReversed</span> <span class="o">=</span> <span class="nx">isoTriangle</span><span class="p">.</span><span class="nx">isReversed</span><span class="p">;</span>
 </pre></div></li>
 <li>Set
-   <div class="codehilite"><pre><span></span><span class="nx">isotriangle</span><span class="p">.</span><span class="nx">setReversed</span><span class="p">(</span><span class="nx">reversed</span><span class="p">);</span>
+   <div class="codehilite"><pre><span></span><span class="nx">isoTriangle</span><span class="p">.</span><span class="nx">setReversed</span><span class="p">(</span><span class="nx">reversed</span><span class="p">);</span>
 </pre></div>
    or
    <div class="codehilite"><pre><span></span><span class="nx">isotrianhle</span><span class="p">.</span><span class="nx">reversed</span> <span class="o">=</span> <span class="nx">reversed</span><span class="p">;</span>

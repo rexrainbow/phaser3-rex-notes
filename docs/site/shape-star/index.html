@@ -1020,6 +1020,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#custom-class" title="Custom class" class="md-nav__link">
+    Custom class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#set-color" title="Set color" class="md-nav__link">
     Set color
   </a>
@@ -2396,10 +2403,46 @@
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11-6" type="checkbox" id="nav-11-6">
     
     <label class="md-nav__link" for="nav-11-6">
-      Geometry
+      Vector
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
       <label class="md-nav__title" for="nav-11-6">
+        Vector
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../vector2/" title="Vector2" class="md-nav__link">
+      Vector2
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11-7" type="checkbox" id="nav-11-7">
+    
+    <label class="md-nav__link" for="nav-11-7">
+      Geometry
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-11-7">
         Geometry
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -3183,6 +3226,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#custom-class" title="Custom class" class="md-nav__link">
+    Custom class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#set-color" title="Set color" class="md-nav__link">
     Set color
   </a>
@@ -3245,6 +3295,22 @@
 <li><code>points</code> : The number of points on the star. Default is 5.</li>
 <li><code>innerRadius</code> : The inner radius of the star. Default is 32.</li>
 <li><code>outerRadius</code> : The outer radius of the star. Default is 64.</li>
+</ul>
+<h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Define class
+    <div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">MyStar</span> <span class="kr">extends</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">GameObjects</span><span class="p">.</span><span class="nx">Star</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">points</span><span class="p">,</span> <span class="nx">innerRadius</span><span class="p">,</span> <span class="nx">outerRadius</span><span class="p">,</span> <span class="nx">fillColor</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">points</span><span class="p">,</span> <span class="nx">innerRadius</span><span class="p">,</span> <span class="nx">outerRadius</span><span class="p">,</span> <span class="nx">fillColor</span><span class="p">);</span>
+        <span class="c1">// ...</span>
+        <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div></li>
+<li>Create instance
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">star</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyStar</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">points</span><span class="p">,</span> <span class="nx">innerRadius</span><span class="p">,</span> <span class="nx">outerRadius</span><span class="p">,</span> <span class="nx">fillColor</span><span class="p">);</span>
+</pre></div></li>
 </ul>
 <h3 id="set-color">Set color<a class="headerlink" href="#set-color" title="Permanent link">&para;</a></h3>
 <ul>
