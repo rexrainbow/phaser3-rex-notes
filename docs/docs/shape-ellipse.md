@@ -15,6 +15,24 @@ var ellipse = scene.add.ellipse(x, y, width, height, fillColor);
 // var ellipse = scene.add.ellipse(x, y, width, height, fillColor, fillAlpha);
 ```
 
+### Custom class
+
+- Define class
+    ```javascript
+    class MyEllipse extends Phaser.GameObjects.Ellipse {
+        constructor(scene, x, y, width, height, fillColor, fillAlpha) {
+            super(scene, x, y, width, height, fillColor, fillAlpha);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
+- Create instance
+    ```javascript
+    var ellipse = new MyEllipse(scene, x, y, width, height, fillColor, fillAlpha);
+    ```
+
 ### Set color
 
 - Fill color

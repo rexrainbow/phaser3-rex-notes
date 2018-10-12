@@ -20,8 +20,12 @@ var group = scene.add.group(config);
     classType: Phaser.GameObjects.Sprite,
     defaultKey: null,
     defaultFrame: null,
+    active: true,
     maxSize: -1,
     runChildUpdate: false    // run gameObject.update() if true
+    createCallback: null,
+    removeCallback: null,
+    createMultipleCallback: null
 }
 ```
 

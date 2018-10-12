@@ -19,6 +19,24 @@ var star = scene.add.star(x, y, points, innerRadius, outerRadius, fillColor);
 - `innerRadius` : The inner radius of the star. Default is 32.
 - `outerRadius` : The outer radius of the star. Default is 64.
 
+### Custom class
+
+- Define class
+    ```javascript
+    class MyStar extends Phaser.GameObjects.Star {
+        constructor(scene, x, y, points, innerRadius, outerRadius, fillColor) {
+            super(scene, x, y, points, innerRadius, outerRadius, fillColor);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
+- Create instance
+    ```javascript
+    var star = new MyStar(scene, x, y, points, innerRadius, outerRadius, fillColor);
+    ```
+
 ### Set color
 
 - Fill color

@@ -15,11 +15,6 @@ class Drag {
         this.boot();
     }
 
-    /**
-     * Reset status by JSON object
-     * @param {object} o JSON object
-     * @returns {object} this object
-     */
     resetFromJSON(o) {
         this.pointer = undefined;
         this.setEnable(GetValue(o, "enable", true));
@@ -28,10 +23,6 @@ class Drag {
         return this;
     }
 
-    /**
-     * Return status in JSON object
-     * @returns JSON object
-     */
     toJSON() {
         return {
             enable: this.enable,

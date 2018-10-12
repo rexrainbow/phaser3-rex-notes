@@ -15,6 +15,24 @@ var circle = scene.add.circle(x, y, radius, fillColor);
 // var circle = scene.add.circle(x, y, radius, fillColor, fillAlpha);
 ```
 
+### Custom class
+
+- Define class
+    ```javascript
+    class MyCircle extends Phaser.GameObjects.Arc {
+        constructor(scene, x, y, radius, fillColor, fillAlpha) {
+            super(scene, x, y, radius, 0, 360, false, fillColor, fillAlpha);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
+- Create instance
+    ```javascript
+    var circle = new MyCircle(scene, x, y, radius, fillColor, fillAlpha);
+    ```
+
 ### Set color
 
 - Fill color

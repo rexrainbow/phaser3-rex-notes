@@ -18,6 +18,24 @@ var polygon = scene.add.polygon(x, y, points, fillColor);
 !!! note
     Shift given points to align position **(0, 0)**
 
+### Custom class
+
+- Define class
+    ```javascript
+    class MyPolygon extends Phaser.GameObjects.Polygon {
+        constructor(scene, x, y, points, fillColor) {
+            super(scene, x, y, points, fillColor);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
+- Create instance
+    ```javascript
+    var polygon = new MyPolygon(scene, x, y, points, fillColor);
+    ```
+
 ### Set color
 
 - Fill color

@@ -15,6 +15,24 @@ var arc = scene.add.arc(x, y, radius, startAngle, endAngle, anticlockwise, fillC
 // var arc = scene.add.arc(x, y, radius, startAngle, endAngle, anticlockwise, fillColor, fillAlpha);
 ```
 
+### Custom class
+
+- Define class
+    ```javascript
+    class MyArc extends Phaser.GameObjects.Arc {
+        constructor(scene, x, y, radius, startAngle, endAngle, anticlockwise, fillColor) {
+            super(scene, x, y, radius, startAngle, endAngle, anticlockwise, fillColor);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
+- Create instance
+    ```javascript
+    var arc = new MyArc(scene, x, y, radius, startAngle, endAngle, anticlockwise, fillColor);
+    ```
+
 ### Set color
 
 - Fill color

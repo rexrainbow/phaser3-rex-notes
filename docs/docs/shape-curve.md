@@ -17,6 +17,24 @@ var curve = scene.add.curve(x, y, path, fillColor);
 
 - `path` : [Path object](path.md).
 
+### Custom class
+
+- Define class
+    ```javascript
+    class MyCurve extends Phaser.GameObjects.Curve {
+        constructor(scene, x, y, path, fillColor, fillAlpha) {
+            super(scene, x, y, path, fillColor, fillAlpha);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
+- Create instance
+    ```javascript
+    var curve = new MyCurve(scene, x, y, path, fillColor, fillAlpha);
+    ```
+
 ### Set color
 
 - Fill color

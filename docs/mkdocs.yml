@@ -134,7 +134,9 @@ nav:
     - Random:
         - Random number: random.md
         - Gashapon: gashapon.md
-    - Color: color.md  
+    - Color: color.md
+    - Vector:
+        - Vector2: vector2.md
     - Geometry:
         - Circle: geom-circle.md
         - Rectangle: geom-rectangle.md

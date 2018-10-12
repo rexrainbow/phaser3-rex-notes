@@ -15,6 +15,24 @@ var line = scene.add.line(x, y, x1, y1, x2, y2, strokeColor);
 // var line = scene.add.line(x, y, x1, y1, x2, y2, strokeColor, strokeAlpha);
 ```
 
+### Custom class
+
+- Define class
+    ```javascript
+    class MyCurve extends Phaser.GameObjects.Line {
+        constructor(scene, x, y, x1, y1, x2, y2, strokeColor) {
+            super(scene, x, y, x1, y1, x2, y2, strokeColor);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
+- Create instance
+    ```javascript
+    var line = new MyLine(scene, x, y, x1, y1, x2, y2, strokeColor);
+    ```
+
 ### Set color
 
 - Fill color

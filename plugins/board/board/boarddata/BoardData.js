@@ -121,12 +121,12 @@ class BoardData {
 
     get xMax() {
         if (this._xMax === undefined) {
+            this._xMax = -Infinity;
             var UIDToXYZ = this.UIDToXYZ,
                 x;
             for (var uid in UIDToXYZ) {
                 x = UIDToXYZ[uid].x;
-                if ((this._xMax === undefined) ||
-                    (this._xMax < x)) {
+                if (this._xMax < x) {
                     this._xMax = x;
                 }
             }
@@ -137,12 +137,12 @@ class BoardData {
 
     get xMin() {
         if (this._xMin === undefined) {
+            this._xMin = Infinity;
             var UIDToXYZ = this.UIDToXYZ,
                 x;
             for (var uid in UIDToXYZ) {
                 x = UIDToXYZ[uid].x;
-                if ((this._xMin === undefined) ||
-                    (this._xMin > x)) {
+                if (this._xMin > x) {
                     this._xMin = x;
                 }
             }
@@ -153,12 +153,12 @@ class BoardData {
 
     get yMax() {
         if (this._yMax === undefined) {
+            this._yMax = -Infinity;
             var UIDToXYZ = this.UIDToXYZ,
                 y;
             for (var uid in UIDToXYZ) {
                 y = UIDToXYZ[uid].y;
-                if ((this._yMax === undefined) ||
-                    (this._yMax < y)) {
+                if (this._yMax < y) {
                     this._yMax = y;
                 }
             }
@@ -169,12 +169,12 @@ class BoardData {
 
     get yMin() {
         if (this._yMin === undefined) {
+            this._yMin = Infinity;
             var UIDToXYZ = this.UIDToXYZ,
                 y;
             for (var uid in UIDToXYZ) {
                 y = UIDToXYZ[uid].y;
-                if ((this._yMin === undefined) ||
-                    (this._yMin > y)) {
+                if (this._yMin > y) {
                     this._yMin = y;
                 }
             }
