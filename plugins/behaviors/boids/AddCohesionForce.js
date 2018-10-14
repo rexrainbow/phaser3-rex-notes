@@ -30,14 +30,19 @@ var AddCohesionForce = function (myAgent, neighbors, weight, distanceThreshold, 
     }
     if (validNeighborsCount === 0) {
         return out;
-    }        
+    }
     centerPosition.scale(1 / validNeighborsCount);
 
     var dx = centerPosition.x - myAgent.x;
     var dy = centerPosition.y - myAgent.y;
     var d = Math.sqrt((dx * dx) + (dy * dy));
+
+    var p = weight;
+    if (distanceThreshold !== Infinity) {
+        p *= (d / distanceThreshold);
+    }
+
     var angle = Math.atan2(dy, dx);
-    var p = weight * (d / distanceThreshold);
     out.x += (Math.cos(angle) * p);
     out.y += (Math.sin(angle) * p);
 

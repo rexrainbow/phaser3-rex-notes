@@ -1,4 +1,4 @@
-import EightDirectionPlugin from 'rexPlugins/eightdirection-plugin.js';
+import BulletPlugin from 'rexPlugins/bullet-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -12,16 +12,18 @@ class Demo extends Phaser.Scene {
 
     create() {
         var obj = this.add.line(400, 300, 30, 0, 0, 0, 0x00cccc).setLineWidth(4, 15);
-        obj.eightDirection = this.plugins.get('rexEightDirection').add(obj, {
-            dir: 3,
-            rotateToDirection: true
+        obj.bullet = this.plugins.get('rexBullet').add(obj, {
+            speed: 100
         });
-        obj.body
-            .setSize(30, 30)
-            .setCollideWorldBounds();
+        obj.body.setSize(30, 30);
+
+
+        this.bullet = obj;
     }
 
-    update() {}
+    update() {
+        this.bullet.angle++;
+    }
 }
 
 var config = {
@@ -39,8 +41,8 @@ var config = {
     },
     plugins: {
         global: [{
-            key: 'rexEightDirection',
-            plugin: EightDirectionPlugin,
+            key: 'rexBullet',
+            plugin: BulletPlugin,
             start: true
         }]
     }

@@ -27,8 +27,12 @@ var AddSeparationForce = function (myAgent, neighbors, weight, distanceThreshold
         if (d > distanceThreshold) { // out-of-range
             continue;
         }
-        angle = Math.atan2(dy, dx);
-        p = weight * ((distanceThreshold - d) / distanceThreshold);
+
+        p = weight;
+        if (distanceThreshold !== Infinity) {
+            p *= (distanceThreshold - d) / distanceThreshold;
+        }
+        angle = Math.atan2(dy, dx);        
         out.x += (Math.cos(angle) * p);
         out.y += (Math.sin(angle) * p);
     }

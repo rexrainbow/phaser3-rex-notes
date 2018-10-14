@@ -16,7 +16,7 @@ class Boids {
     resetFromJSON(o) {
         this.setSeparationParameters(GetValue(o, 'separation.weight', 0), GetValue(o, 'separation.distance', Infinity));
         this.setCohesionParameters(GetValue(o, 'cohesion.weight', 0), GetValue(o, 'cohesion.distance', Infinity));
-        this.setAlignmentParameters(GetValue(o, 'alignment.weight', 0), GetValue(o, 'cohesion.distance', Infinity));
+        this.setAlignmentParameters(GetValue(o, 'alignment.weight', 0), GetValue(o, 'alignment.distance', Infinity));
         return this;
     }
 
@@ -56,8 +56,8 @@ class Boids {
     update(neighbors) {
         this.output.reset();
         AddSeparationForce(this.gameObject, neighbors, this.separationWeight, this.separationDistance, this.output);
-        AddAlignmentForce(this.gameObject, neighbors, this.alignmentWeight, this.alignmentDistance, this.output);
         AddCohesionForce(this.gameObject, neighbors, this.cohesionWeight, this.cohesionDistance, this.output);
+        AddAlignmentForce(this.gameObject, neighbors, this.alignmentWeight, this.alignmentDistance, this.output);
         return this;
     }
 

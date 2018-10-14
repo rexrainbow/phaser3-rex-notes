@@ -18,22 +18,15 @@ class Demo extends Phaser.Scene {
             radius: 100
         })
 
-        var obj = this.add.graphics()
-            .fillStyle(0x00cccc, 1)
-            .fillPoint(0, 0, 30)
-            .fillStyle(0xcc0000, 1)
-            .fillPoint(10, 0, 10)
-            .setPosition(400, 300);
-        this.physics.add.existing(obj, false);
-        obj.body
-            .setSize(30, 30)
-            .setOffset(-15, -15)
-            .setCollideWorldBounds();
+        var obj = this.add.line(400, 300, 30, 0, 0, 0, 0x00cccc).setLineWidth(4, 15);
         obj.eightDirection = this.plugins.get('rexEightDirection').add(obj, {
             dir: 3,
             rotateToDirection: true,
             cursorKeys: joyStick.createCursorKeys()
         });
+        obj.body
+            .setSize(30, 30)
+            .setCollideWorldBounds();
     }
 
     update() {}
@@ -49,7 +42,7 @@ var config = {
     physics: {
         default: 'arcade',
         arcade: {
-            // debug: true
+            debug: true
         }
     },
     plugins: {

@@ -2,7 +2,6 @@ import TickTask from 'rexPlugins/utils/ticktask/TickTask.js';
 import Proxy from 'rexPlugins/utils/arcade/proxy.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
-const AngleBetween = Phaser.Math.Angle.Between;
 const DegToRad = Phaser.Math.DegToRad;
 
 class EightDirection extends TickTask {
@@ -15,6 +14,9 @@ class EightDirection extends TickTask {
     }
 
     resetFromJSON(o) {
+        if (this.body === undefined) {
+            this.scene.physics.add.existing(this.gameObject, false);
+        }
         this.setCascadeMode(GetValue(o, 'cascade', false));
         this.setEnable(GetValue(o, 'enable', true));
         this.setDirMode(GetValue(o, 'dir', '8dir'));
@@ -70,6 +72,9 @@ class EightDirection extends TickTask {
             e = true;
         }
         this.enable = e;
+        if (e && (this.body === undefined)) {
+            this.scene.physics.add.existing(this.gameObject, false);
+        }
         return this;
     }
 
@@ -139,8 +144,7 @@ class EightDirection extends TickTask {
             vy = this.speed * dy;
             rotation = (dy === 1) ? RAD90 : RAD270;
         } else { // (dx !== 0) && (dy !== 0)
-            rotation = AngleBetween(0, 0, dx, dy);
-            // TODO maxSpeed?
+            rotation = Math.atan2(dy, dx);
             vx = this.speed * Math.cos(rotation);
             vy = this.speed * Math.sin(rotation);
         }

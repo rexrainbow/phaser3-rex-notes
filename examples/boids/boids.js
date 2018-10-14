@@ -18,8 +18,8 @@ class Demo extends Phaser.Scene {
         var x, y, radius = 10,
             color;
         for (var i = 0; i < 10; i++) {
-            x = Random(100, 700);
-            y = Random(100, 500);
+            x = Random(0, 800);
+            y = Random(0, 600);
             color = Random(0, 0xffffff);
             new Bird(this.birds, x, y, radius, color);
         }
@@ -35,29 +35,32 @@ class Bird extends Phaser.GameObjects.Line {
         group.add(this);
 
         this.setLineWidth(3, 8);
+        this.body.setCollideWorldBounds()
         this.birds = group;
         this.boids = scene.plugins.get('rexBoids').add(this, {
             separation: {
-                weight: 1,
-                //distance: 100
+                weight: 2,
+                distance: 100
             },
             cohesion: {
                 weight: 1,
-                //distance: 200
+                distance: 200
             },
-            alignment: {
-                weight: 1,
-                //distance: 100
-            }
+            // alignment: {
+            //     weight: 1,
+            //     distance: 100
+            // }
         });
     }
 
-    update() {
+    update() {        
         this.boids.update(this.birds.getChildren());
         var output = this.boids.output;
-        output.normalize().scale(30);
-        this.body.setVelocity(output.x, output.y);
-        this.rotation = output.angle();
+        if ((output.x !== 0) || (output.y !== 0)) {
+            this.rotation = output.angle();            
+            output.normalize().scale(30);
+            this.body.setVelocity(output.x, output.y);            
+        }
     }
 }
 
@@ -68,7 +71,7 @@ var config = {
     height: 600,
     scene: Demo,
     physics: {
-        default: 'arcade',
+        default: 'arcade',      
     },
     plugins: {
         global: [{

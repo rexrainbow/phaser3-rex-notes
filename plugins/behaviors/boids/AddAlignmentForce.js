@@ -14,8 +14,8 @@ var AddAlignmentForce = function (myAgent, neighbors, weight, distanceThreshold,
         return out;
     }
 
-    var sum = 0;
-    var agent, validNeighborsCount;
+    var sum = 0, validNeighborsCount = 0;
+    var agent;
     for (var i = 0, cnt = neighbors.length; i < cnt; i++) {
         agent = neighbors[i];
         if (agent === myAgent) {
