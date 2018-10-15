@@ -1344,8 +1344,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#stop-moving" title="Stop moving" class="md-nav__link">
-    Stop moving
+  <a href="#pause-resume-stop-moving" title="Pause, Resume, stop moving" class="md-nav__link">
+    Pause, Resume, stop moving
   </a>
   
 </li>
@@ -3280,8 +3280,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#stop-moving" title="Stop moving" class="md-nav__link">
-    Stop moving
+  <a href="#pause-resume-stop-moving" title="Pause, Resume, stop moving" class="md-nav__link">
+    Pause, Resume, stop moving
   </a>
   
 </li>
@@ -3409,8 +3409,10 @@
 <span class="nx">moveTo</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </pre></div>
 
-<h3 id="stop-moving">Stop moving<a class="headerlink" href="#stop-moving" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">moveTo</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
+<h3 id="pause-resume-stop-moving">Pause, Resume, stop moving<a class="headerlink" href="#pause-resume-stop-moving" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">moveTo</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
+<span class="nx">moveTo</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
+<span class="nx">moveTo</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
 </pre></div>
 
 <h3 id="enable">Enable<a class="headerlink" href="#enable" title="Permanent link">&para;</a></h3>
@@ -3443,8 +3445,8 @@
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
 <li>On reached target
-    <div class="codehilite"><pre><span></span><span class="nx">moveTo</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">moveTo</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">){});</span>
-<span class="c1">// moveTo.once(&#39;complete&#39;, function(moveTo, gameObject){});</span>
+    <div class="codehilite"><pre><span></span><span class="nx">moveTo</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">moveTo</span><span class="p">){});</span>
+<span class="c1">// moveTo.once(&#39;complete&#39;, function(gameObject, moveTo){});</span>
 </pre></div></li>
 </ul>
 <h3 id="status">Status<a class="headerlink" href="#status" title="Permanent link">&para;</a></h3>
