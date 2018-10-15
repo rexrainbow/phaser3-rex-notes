@@ -75,9 +75,11 @@ var config = {
 moveTo.moveTo(config);
 ```
 
-### Stop moving
+### Pause, Resume, stop moving
 
 ```javascript
+moveTo.pause();
+moveTo.resume();
 moveTo.stop();
 ```
 
@@ -119,8 +121,8 @@ moveTo.setRotateToTarget(rotateToTarget);
 
 - On reached target
     ```javascript
-    moveTo.on('complete', function(moveTo, gameObject){});
-    // moveTo.once('complete', function(moveTo, gameObject){});
+    moveTo.on('complete', function(gameObject, moveTo){});
+    // moveTo.once('complete', function(gameObject, moveTo){});
     ```
 
 ### Status

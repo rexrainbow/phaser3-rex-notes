@@ -12,8 +12,8 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        this.rexClock = this.plugins.get('rexClock');
-        this.clock = this.rexClock.add(this).start();
+        this.clock = this.plugins.get('rexClock').add(this);
+        this.clock.start();
         this.text = this.add.text(100, 100, '');
 
         this.input.on('pointerdown', this.clock.pause, this.clock);

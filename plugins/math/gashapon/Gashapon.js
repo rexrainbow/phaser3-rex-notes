@@ -14,8 +14,8 @@ class Gashapon {
         if (this.items == undefined) {
             this.items = {};
         }
-        if (this.remain == undefined) {
-            this.remain = {};
+        if (this.remainder == undefined) {
+            this.remainder = {};
         }
         if (this._list == undefined) {
             this._list = [];
@@ -39,9 +39,9 @@ class Gashapon {
         if (this._restartFlag) {
             this.startGen();
         }
-        var remain = GetValue(o, 'remain', undefined);
-        if (remain) {
-            this.remain = Clone(remain, this.remain);
+        var remainder = GetValue(o, 'remainder', undefined);
+        if (remainder) {
+            this.remainder = Clone(remainder, this.remainder);
         }
 
         return this;
@@ -55,7 +55,7 @@ class Gashapon {
 
             // data
             items: Clone(this.items),
-            remain: Clone(this.remain),
+            remainder: Clone(this.remainder),
 
             // result
             result: this.result,
@@ -67,21 +67,21 @@ class Gashapon {
 
     startGen() {
         var name;
-        // clear remain items
-        for (name in this.remain) {
+        // clear remainder items
+        for (name in this.remainder) {
             if (!this.items.hasOwnProperty(name)) {
-                delete this.remain[name];
+                delete this.remainder[name];
             }
         }
-        // init remain items
+        // init remainder items
         for (name in this.items) {
             var count = this.items[name];
             if (count > 0)
-                this.remain[name] = count;
+                this.remainder[name] = count;
         }
 
         if (this.mode === 1) { // random mode
-            this.resetItemList(this.remain);
+            this.resetItemList(this.remainder);
         }
         this._restartFlag = false;
 
@@ -129,7 +129,7 @@ class Gashapon {
     }
 
     getRemain() {
-        return Clone(this.remain);
+        return Clone(this.remainder);
     }
 
     getItemCount(name) {
@@ -137,7 +137,7 @@ class Gashapon {
     }
 
     getRemainCount(name) {
-        return this.remain[name] || 0;
+        return this.remainder[name] || 0;
     }
 
     forEachItem(callback, scope) {
@@ -167,9 +167,9 @@ class Gashapon {
         for (var i = 1; i < arguments.length; i++) {
             args.push(arguments[i]);
         }
-        for (var name in this.remain) {
+        for (var name in this.remainder) {
             args[1] = name;
-            args[2] = this.remain[name];
+            args[2] = this.remainder[name];
             if (scope) {
                 callback.apply(scope, args);
             } else {
@@ -193,7 +193,7 @@ class Gashapon {
         if (this.mode === 0) { // shuffle mode
             this.addRemainItem(name, count);
         } else { // random mode
-            this.resetItemList(this.remain);
+            this.resetItemList(this.remainder);
         }
         return this;
     }
@@ -209,8 +209,8 @@ class Gashapon {
             return;
 
         // generator had started  
-        if (!this.remain.hasOwnProperty(name))
-            this.remain[name] = 0;
+        if (!this.remainder.hasOwnProperty(name))
+            this.remainder[name] = 0;
 
         this.addShadowPattern(name, count, this.items[name]);
         return this;
@@ -224,7 +224,7 @@ class Gashapon {
 
         if (name == null) {
             if (this.mode === 0) { // shuffle mode
-                this.resetItemList(this.remain);
+                this.resetItemList(this.remainder);
                 result = Shuffle(this._list);
                 this.addRemainItem(result, -1);
             } else { // random mode
@@ -232,7 +232,7 @@ class Gashapon {
             }
 
         } else { // force pick
-            if (!this.remain.hasOwnProperty(name)) {
+            if (!this.remainder.hasOwnProperty(name)) {
                 result = null; // can not pick that result
             } else {
                 if (this.mode === 0) {
@@ -249,7 +249,7 @@ class Gashapon {
     destroy() {
         // data
         Clear(this.items);
-        Clear(this.remain);
+        Clear(this.remainder);
         Clear(this._list);
 
         // result
@@ -290,17 +290,17 @@ class Gashapon {
         if ((name == null) || (inc === 0))
             return this;
 
-        if (!this.remain.hasOwnProperty(name))
-            this.remain[name] = 0;
+        if (!this.remainder.hasOwnProperty(name))
+            this.remainder[name] = 0;
 
-        this.remain[name] += inc;
-        if ((maxCount != null) && (this.remain[name] > maxCount))
-            this.remain[name] = maxCount
+        this.remainder[name] += inc;
+        if ((maxCount != null) && (this.remainder[name] > maxCount))
+            this.remainder[name] = maxCount
 
-        if (this.remain[name] <= 0)
-            delete this.remain[name];
+        if (this.remainder[name] <= 0)
+            delete this.remainder[name];
 
-        if ((this.mode === 0) && this.reload && IsEmpty(this.remain))
+        if ((this.mode === 0) && this.reload && IsEmpty(this.remainder))
             this._restartFlag = true;
 
         return this;

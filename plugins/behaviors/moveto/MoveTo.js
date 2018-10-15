@@ -96,18 +96,29 @@ class MoveTo extends TickTask {
         }
 
         // invalid position
-        if ((x == null) || (y == null)) {       
+        if ((x == null) || (y == null)) {
             return this;
         }
 
         this.targetX = x;
-        this.targetY = y; 
+        this.targetY = y;
+        this.isRunning = true;
+        return this;
+    }
+
+    pause() {
+        this.isRunning = false;
+        return this;
+    }
+
+    resume() {
         this.isRunning = true;
         return this;
     }
 
     stop() {
         this.isRunning = false;
+        return this;
     }
 
     update(time, delta) {

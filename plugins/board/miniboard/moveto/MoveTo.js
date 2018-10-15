@@ -113,8 +113,19 @@ class MoveTo extends TickTask {
         return this;
     }
 
+    pause() {
+        this.isRunning = false;
+        return this;
+    }
+
+    resume() {
+        this.isRunning = true;
+        return this;
+    }
+
     stop() {
         this.isRunning = false;
+        return this;
     }
 
     /** @private */

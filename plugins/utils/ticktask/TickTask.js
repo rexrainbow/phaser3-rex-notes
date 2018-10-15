@@ -4,6 +4,7 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 class TickTask extends EE {
     constructor(parent, config) {
         super();
+        this.parent = parent;
         this._isRunning = false;
         this.tickingState = false;
         this.setTickingMode(GetValue(config, 'tickingMode', 1));
@@ -63,7 +64,7 @@ class TickTask extends EE {
     complete() {
         this.isRunning = false;
         if (this.tickingMode !== 0) {
-            this.emit('complete', this, this.gameObject);
+            this.emit('complete', this.parent, this);
         }
     }
 }

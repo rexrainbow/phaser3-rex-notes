@@ -44,8 +44,10 @@ module.exports = {
         'movetoplugin': './plugins/moveto-plugin.js',
         'rotatetoplugin': './plugins/rotateto-plugin.js',
         'flashplugin': './plugins/flash-plugin.js',
+        'lifetimeplugin': './plugins/lifetime-plugin.js',
         // member of game object, arcade behavior
         'eightdirectionplugin': './plugins/eightdirection-plugin.js',
+        'bulletplugin': './plugins/bullet-plugin.js',
 
         // member of text
         'texttypingplugin': './plugins/texttyping-plugin.js',

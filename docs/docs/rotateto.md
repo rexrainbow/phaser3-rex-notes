@@ -89,9 +89,11 @@ var rotateTo = scene.plugins.get('rexRotateTo').add(gameObject, {
         - `1`, or `cw` : Clockwise
         - `2`, or `ccw` : Counter-clockwise
 
-### Stop moving
+### Pause, Resume, stop rotating
 
 ```javascript
+rotateTo.pause();
+rotateTo.resume();
 rotateTo.stop();
 ```
 
@@ -127,7 +129,7 @@ rotateTo.setSpeed(speed);
 
 - On reached target
     ```javascript
-    rotateTo.on('complete', function(rotateTo, gameObject){});
+    rotateTo.on('complete', function(gameObject, rotateTo){});
     ```
 
 ### Status

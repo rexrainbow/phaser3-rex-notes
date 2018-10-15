@@ -32,9 +32,11 @@ import Fade from './fade.js';
 import FadeOutDestroy from './fade-out-destroy.js';
 import PathFollower from './pathfollower.js';
 import Flash from './flash.js';
+import LifeTime from './lifetime.js';
 
-
+// member of game object, arcade behavior
 import EightDirection from './eightdirection.js';
+import Bullet from './bullet.js';
 
 
 // member of text
@@ -111,8 +113,11 @@ export {
     FadeOutDestroy,
     PathFollower,
     Flash,
+    LifeTime,
 
+    // member of game object, arcade behavior
     EightDirection,
+    Bullet,
 
     // member of text
     TextTyping,

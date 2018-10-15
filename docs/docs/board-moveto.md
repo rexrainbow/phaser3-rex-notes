@@ -104,9 +104,11 @@ var destinationTileY = moveTo.destinationTileY;
 var destinationDirection = moveTo.destinationDirection;
 ```
 
-### Stop moving
+### Pause, Resume, stop moving
 
 ```javascript
+moveTo.pause();
+moveTo.resume();
 moveTo.stop();
 ```
 

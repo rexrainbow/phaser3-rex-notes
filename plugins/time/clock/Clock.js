@@ -8,7 +8,7 @@ class Clock extends TickTask {
         super(parent, config);
 
         this.parent = parent;
-        this.scene = GetSceneObject(this.parent);
+        this.scene = GetSceneObject(parent);
         this.resetFromJSON(config);
         this.boot();
     }

@@ -143,20 +143,20 @@ class Table {
 
         // count cell height one by one
         var rowCount = this.rowCount;
-        var remain = height,
+        var remainder = height,
             isValidIdx;
         var cell, rowHeight, rowIdx = 0;
 
         while (1) {
             rowHeight = this.getRowHeight(rowIdx);
-            remain -= rowHeight;
+            remainder -= rowHeight;
 
             isValidIdx = (rowIdx >= 0) && (rowIdx < rowCount);
-            if ((remain > 0) && isValidIdx) {
+            if ((remainder > 0) && isValidIdx) {
                 rowIdx += 1;
-            } else if (remain === 0)
+            } else if (remainder === 0) {
                 return rowIdx;
-            else {
+            } else {
                 if (isCeil) {
                     var preRowIdx = rowIdx;
                     rowIdx += 1;
