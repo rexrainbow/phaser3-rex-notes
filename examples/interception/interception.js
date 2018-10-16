@@ -35,10 +35,11 @@ class Demo extends Phaser.Scene {
             // enable: false
         });
 
-        // this.physics.add.collider(target, tracer, function (target, tracer) {            
-        //     target.bullet.setEnable(false);
-        //     tracer.bullet.setEnable(false);
-        // });
+        this.physics.add.collider(target, tracer, function (target, tracer) {
+            target.bullet.setEnable(false);
+            tracer.bullet.setEnable(false);
+            tracer.interception.setTarget(undefined);
+        });
 
         this.target = target;
         this.tracer = tracer;
@@ -46,13 +47,15 @@ class Demo extends Phaser.Scene {
     }
 
     update() {
-        var predictedPosition = this.tracer.interception.predictedPosition;
-        this.tracer.rotation = BetweenPoints(this.tracer, predictedPosition);
+        if (this.tracer.interception.target) {
+            var predictedPosition = this.tracer.interception.predictedPosition;
+            this.tracer.rotation = BetweenPoints(this.tracer, predictedPosition);
 
-        this.graphics
-            .clear()
-            .fillStyle(0xff0000)
-            .fillPointShape(predictedPosition, 10)
+            this.graphics
+                .clear()
+                .fillStyle(0xff0000)
+                .fillPointShape(predictedPosition, 10);
+        }
     }
 }
 
