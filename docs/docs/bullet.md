@@ -62,9 +62,14 @@ var bullet = scene.plugins.get('rexBullet').add(gameObject, {
 - `speed` : moving speed, pixels in second.
 - `enable` : set `false` to disable moving.
 
-### Set speed
+### Speed
 
-```javascript
-bullet.setSpeed(speed);
-// bullet.speed = speed;
-```
+- Set
+    ```javascript
+    bullet.setSpeed(speed);
+    // bullet.speed = speed;
+    ```
+- Get
+    ```javascript
+    var speed = bullet.speed;
+    ```

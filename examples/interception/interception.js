@@ -1,7 +1,6 @@
 import InterceptionPlugin from 'rexPlugins/interception-plugin.js';
 import BulletPlugin from 'rexPlugins/bullet-plugin.js';
 
-const BetweenPoints = Phaser.Math.Angle.BetweenPoints;
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -47,14 +46,14 @@ class Demo extends Phaser.Scene {
     }
 
     update() {
-        if (this.tracer.interception.target) {
-            var predictedPosition = this.tracer.interception.predictedPosition;
-            this.tracer.rotation = BetweenPoints(this.tracer, predictedPosition);
+        var interception = this.tracer.interception;
+        if (interception.target) {
+            this.tracer.rotation = interception.predictedAngle;
 
             this.graphics
                 .clear()
                 .fillStyle(0xff0000)
-                .fillPointShape(predictedPosition, 10);
+                .fillPointShape(interception.predictedPosition, 10);
         }
     }
 }

@@ -90,8 +90,13 @@ var interception = scene.plugins.get('rexInterception').add(gameObject, {
     interception.setEnable(false);
     ```
 
-### Predicted position
+### Predicted result
 
-```javascript
-var position = interception.predictedPosition; // {x, y}
-```
+- Predicted position
+    ```javascript
+    var position = interception.predictedPosition; // {x, y}
+    ```
+- Angle to predicted position
+    ```javascript
+    var rotation = interception.predictedAngle; // Angle in radian
+    ```

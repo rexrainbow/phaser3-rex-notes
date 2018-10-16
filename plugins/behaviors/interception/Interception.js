@@ -5,6 +5,7 @@ import SpeedMonitor from 'rexPlugins/utils/speedmonitor/SpeedMonitor.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Vector2 = Phaser.Math.Vector2;
 const Distance = Phaser.Math.Distance.Between;
+const AngleBetweenPoint = Phaser.Math.Angle.BetweenPoints;
 
 class Interception extends TickTask {
     constructor(gameObject, config) {
@@ -145,6 +146,10 @@ class Interception extends TickTask {
             )
         }
         return this;
+    }
+
+    get predictedAngle() {
+        return AngleBetweenPoint(this.gameObject, this.predictedPosition);
     }
 }
 
