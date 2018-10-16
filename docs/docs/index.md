@@ -13,6 +13,7 @@
 1. [Board - Move To](board-moveto.md): Move chess towards target position with a steady speed.
 1. [Board - Path finder](board-pathfinder.md): Find moveable area or moving path.
 1. [Board - Shape](board-shape.md): Grid (polygon) shape object.
+1. [Bullet](bullet.md): Move game object toward current angle of game object, with a constant speed.
 1. [Button](button.md): Fires 'click' event when touch releasd after pressed.
 1. [Canvas](canvas.md): Drawing on [canvas](https://www.w3schools.com/html/html5_canvas.asp).
 1. [Clock](clock.md): A clock to count elapsed time.
@@ -20,7 +21,7 @@
 1. [CSV-scenario](csvscenario.md): Run script in csv format.
 1. [CSV-to-hash-table](csvtohashtable.md): Hash table indexed by (col-key, row-key) from csv string.
 1. [Drag](drag.md): Drag game object.
-1. [Eight direction](eightdirection.md): Move game object by cursor keys.
+1. [Eight direction](eightdirection.md): Move game object by cursor keys, with a constant speed.
 1. [Fade-out-destroy](fadeoutdestroy.md): Fade out game object then destroy it.
 1. [Fade-volume](fadevolume.md): Fade-in/fade-out volume of sound.
 1. [Flash](flash.md): Flashing (set invisible then visible) game object.
@@ -29,6 +30,7 @@
 1. [Grid align](gridalign.md): Align objects on quadrilateral or hexagon grid.
 1. [Grid table](gridtable.md): Viewer of grid table, to manipulate game object of each visible cell.
 1. [Hexagon](geom-hexagon.md): Hexagon shape and methods.
+1. [Life time](lifetime.md): Destroy game object when time-out.
 1. [LZ-string](lzstring.md): Compress string using LZ-based compression algorithm.
 1. [Move to](moveto.md): Move game object towards target position with a steady speed.
 1. [Page](textpage.md): Display text page by page on text object.

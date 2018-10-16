@@ -1,2 +1,2 @@
-import LifeTime from './behaviors/lifetime/LifeTime.js';
+import LifeTime from './time/lifetime/LifeTime.js';
 export default LifeTime;

@@ -2,8 +2,6 @@ import TickTask from 'rexPlugins/utils/ticktask/TickTask.js';
 import GetSceneObject from 'rexPlugins/utils/system/GetSceneObject.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-
 
 class Flash extends TickTask {
     constructor(gameObject, config) {
@@ -84,7 +82,7 @@ class Flash extends TickTask {
     }
 
     flash(duration, repeat) {
-        if (IsPlainObject(duration)) {
+        if (typeof (duration) !== 'number') {
             var config = duration;
             duration = GetValue(config, 'duration', undefined);
             repeat = GetValue(config, 'repeat', undefined);
@@ -99,17 +97,18 @@ class Flash extends TickTask {
         if (this.isRunning) {
             // pend task
             this.repeatCounter = -1;
-        } else {
-            this.isRunning = true;
+        } else {            
             this.repeatCounter = 0;
             this.nowTime = 0;
+            super.start();            
         }
         return this;
     }
 
-    stop() {
-        this.isRunning = false;
+    stop() {        
         this.gameObject.setVisible(true);
+        super.stop();
+        return this;
     }
 
     update(time, delta) {

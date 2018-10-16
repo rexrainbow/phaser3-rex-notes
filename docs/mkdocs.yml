@@ -76,7 +76,8 @@ nav:
             - World: arcade-world.md
             - Body: arcade-body.md
             - Game object: arcade-gameobject.md
-            - 8 direction: eightdirection.md     
+            - 8 direction: eightdirection.md
+            - Bullet: bullet.md
     - Display:
         - Mask: mask.md
 - Input:
@@ -163,6 +164,7 @@ nav:
     - Timer: timer.md
     - Timeline: timeline.md    
     - Clock: clock.md
+    - Life time: lifetime.md
 - Board:
     - Board: board.md
     - Grid:    

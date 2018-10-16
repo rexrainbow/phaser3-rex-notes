@@ -1,9 +1,9 @@
 ## Introduction
 
-Move game object by cursor keys.
+Move game object by cursor keys, with a constant speed.
 
 - Author: Rex
-- Arcade behavior of game object, 
+- Arcade behavior of game object
 
 ## Source code
 
@@ -54,27 +54,23 @@ var game = new Phaser.Game(config);
 
 ```javascript
 var eightDirection = scene.plugins.get('rexEightDirection').add(gameObject, {
+    speed: 200,
     // dir: '8dir',     // 0|'up&down'|1|'left&right'|2|'4dir'|3|'8dir'
-    // speed: 200,
     // rotateToDirection: false,
     // enable: true,
-    // cursorKeys: scene.input.keyboard.createCursorKeys(),
-    // cascade: false
+    // cursorKeys: scene.input.keyboard.createCursorKeys()
 });
 ```
 
+- `speed` : moving speed, pixels in second.
 - `dir` :
     - `'up&down'`, or `0` :Aaccept up or down cursor keys only.
     - `'left&right'`, or `1` : Aaccept left or right cursor keys only.
     - `'4dir'`, or `2` : Aaccept up, down, left or right cursor keys.
     - `'8dir'`, or `3` : Aaccept up, up-left, up-right, down, down-left, down-right, left, or right cursor keys.
-- `speed` : moving speed, pixels in second
-- `rotateToDirection` : Set true to change angle towards moving direction
-- `enable` : set `false` to disable moving
+- `rotateToDirection` : Set true to change angle towards moving direction.
+- `enable` : set `false` to disable moving.
 - `cursorKeys` : CursorKey object, using [keyboard's cursorKeys](keyboardevents.md#get-state-of-cursorkeys) by default.
-- `cascade` :
-    - `false` : Velicity, acceleration will be **set** to body directly. Default setting.
-    - `true` : Velicity, acceleration will be **added** to body. Uses this mode when body is not only controlled by this behavior.
 
 ### Set speed
 

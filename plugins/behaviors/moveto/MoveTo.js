@@ -2,7 +2,6 @@ import TickTask from 'rexPlugins/utils/ticktask/TickTask.js';
 import GetSceneObject from 'rexPlugins/utils/system/GetSceneObject.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const DistanceBetween = Phaser.Math.Distance.Between;
 const Lerp = Phaser.Math.Linear;
 const AngleBetween = Phaser.Math.Angle.Between;
@@ -89,7 +88,7 @@ class MoveTo extends TickTask {
     }
 
     moveTo(x, y) {
-        if (IsPlainObject(x)) {
+        if (typeof (x) !== 'number') {
             var config = x;
             x = GetValue(config, 'x', undefined);
             y = GetValue(config, 'y', undefined);
@@ -102,22 +101,7 @@ class MoveTo extends TickTask {
 
         this.targetX = x;
         this.targetY = y;
-        this.isRunning = true;
-        return this;
-    }
-
-    pause() {
-        this.isRunning = false;
-        return this;
-    }
-
-    resume() {
-        this.isRunning = true;
-        return this;
-    }
-
-    stop() {
-        this.isRunning = false;
+        super.start();
         return this;
     }
 

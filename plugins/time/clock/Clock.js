@@ -61,23 +61,8 @@ class Clock extends TickTask {
         if (startAt === undefined) {
             startAt = 0;
         }
-        this.isRunning = true;
         this.now = startAt;
-        return this;
-    }
-
-    pause() {
-        this.isRunning = false;
-        return this;
-    }
-
-    resume() {
-        this.isRunning = true;
-        return this;
-    }
-
-    stop() {
-        this.isRunning = false;
+        super.start();
         return this;
     }
 

@@ -89,17 +89,9 @@ var rotateTo = scene.plugins.get('rexRotateTo').add(gameObject, {
         - `1`, or `cw` : Clockwise
         - `2`, or `ccw` : Counter-clockwise
 
-### Pause, Resume, stop rotating
-
-```javascript
-rotateTo.pause();
-rotateTo.resume();
-rotateTo.stop();
-```
-
 ### Enable
 
-- Enable/resume (default)
+- Enable (default)
     ```javascript
     rotateTo.setEnable();
     ```
@@ -107,7 +99,7 @@ rotateTo.stop();
     ```javascript
     rotateTo.enable = true;
     ```
-- Disable/pause
+- Disable
     ```javascript
     rotateTo.setEnable(false);
     ```
@@ -115,6 +107,14 @@ rotateTo.stop();
     ```javascript
     rotateTo.enable = false;
     ```
+
+### Pause, Resume, stop rotating
+
+```javascript
+rotateTo.pause();
+rotateTo.resume();
+rotateTo.stop();
+```
 
 ### Set speed
 

@@ -75,17 +75,9 @@ var config = {
 moveTo.moveTo(config);
 ```
 
-### Pause, Resume, stop moving
-
-```javascript
-moveTo.pause();
-moveTo.resume();
-moveTo.stop();
-```
-
 ### Enable
 
-- Enable/resume (default)
+- Enable (default)
     ```javascript
     moveTo.setEnable();
     ```
@@ -93,7 +85,7 @@ moveTo.stop();
     ```javascript
     moveTo.enable = true;
     ```
-- Disable/pause
+- Disable
     ```javascript
     moveTo.setEnable(false);
     ```
@@ -101,6 +93,14 @@ moveTo.stop();
     ```javascript
     moveTo.enable = false;
     ```
+
+### Pause, Resume, stop moving
+
+```javascript
+moveTo.pause();
+moveTo.resume();
+moveTo.stop();
+```
 
 ### Set speed
 

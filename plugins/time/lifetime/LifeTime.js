@@ -37,6 +37,10 @@ class LifeTime extends Clock {
         return this;
     }
 
+    get isAlive() {
+        return this.now < this.lifeTime;
+    }
+
     get remainder() {
         var remainder = this.lifeTime - this.now;
         if (remainder < 0) {
@@ -51,8 +55,8 @@ class LifeTime extends Clock {
         }
 
         super.update(time, delta);
-        if (this.now >= this.lifeTime) {
-            this.emit('die', this.gameObject);
+        if (!this.isAlive) {
+            this.complete();
             if (this.destroyMode) {
                 this.gameObject.destroy();
             }

@@ -61,6 +61,9 @@ class Bullet extends TickTask {
 
     set enable(value) {
         this.isRunning = value;
+        if (!value) {
+            this.bodySetVelocity(0, 0);
+        }
     }
 
     setEnable(e) {

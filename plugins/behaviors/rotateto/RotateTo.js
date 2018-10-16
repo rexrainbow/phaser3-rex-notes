@@ -2,7 +2,6 @@ import TickTask from 'rexPlugins/utils/ticktask/TickTask.js';
 import GetSceneObject from 'rexPlugins/utils/system/GetSceneObject.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const MathWrap = Phaser.Math.Wrap;
 const WrapAngle = Phaser.Math.Angle.Wrap;
 const RadToDeg = Phaser.Math.RadToDeg;
@@ -83,7 +82,7 @@ class RotateTo extends TickTask {
     }
 
     rotateTo(angle, dir) {
-        if (IsPlainObject(angle)) {
+        if (typeof (angle) !== 'number') {
             var config = angle;
             angle = GetValue(config, 'angle', undefined);
             dir = GetValue(config, 'dir', undefined);
@@ -97,7 +96,7 @@ class RotateTo extends TickTask {
             dir = 0;
         }
         this.dir = (typeof (dir) === 'string') ? DIRMODE[dir] : dir;
-        this.isRunning = true;
+        super.start();
         return this;
     }
 
@@ -106,21 +105,6 @@ class RotateTo extends TickTask {
         var rad = AngleBetween(gameObject.x, gameObject.y, x, y);
         var angle = RadToDeg(rad);
         this.rotateTo(angle, dir, speed);
-        return this;
-    }
-
-    pause() {
-        this.isRunning = false;
-        return this;
-    }
-
-    resume() {
-        this.isRunning = true;
-        return this;
-    }
-
-    stop() {
-        this.isRunning = false;
         return this;
     }
 
