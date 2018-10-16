@@ -72,6 +72,7 @@ nav:
         - Flash: flash.md
         - Fade out destroy: fadeoutdestroy.md
         - Path follower: pathfollower.md
+        - Intersection: intersection.md
         - Arcade:
             - World: arcade-world.md
             - Body: arcade-body.md

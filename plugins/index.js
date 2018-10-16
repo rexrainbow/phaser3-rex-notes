@@ -33,6 +33,7 @@ import FadeOutDestroy from './fade-out-destroy.js';
 import PathFollower from './pathfollower.js';
 import Flash from './flash.js';
 import LifeTime from './lifetime.js';
+import Interception from './interception.js';
 
 // member of game object, arcade behavior
 import EightDirection from './eightdirection.js';
@@ -114,6 +115,7 @@ export {
     PathFollower,
     Flash,
     LifeTime,
+    Interception,
 
     // member of game object, arcade behavior
     EightDirection,

@@ -1329,18 +1329,30 @@
           
           
 
+
+  <li class="md-nav__item">
+    <a href="../intersection.md" title="Intersection" class="md-nav__link">
+      Intersection
+    </a>
+  </li>
+
+        
+          
+          
+          
+
   
 
 
   <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-9-7" type="checkbox" id="nav-4-9-7" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-9-8" type="checkbox" id="nav-4-9-8" checked>
     
-    <label class="md-nav__link" for="nav-4-9-7">
+    <label class="md-nav__link" for="nav-4-9-8">
       Arcade
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-4-9-7">
+      <label class="md-nav__title" for="nav-4-9-8">
         Arcade
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1487,6 +1499,18 @@
   
 </nav>
     
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../bullet/" title="Bullet" class="md-nav__link">
+      Bullet
+    </a>
   </li>
 
         
@@ -2796,6 +2820,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../lifetime/" title="Life time" class="md-nav__link">
+      Life time
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -3294,10 +3330,10 @@
                   <h1>8 direction</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Move game object by cursor keys.</p>
+<p>Move game object by cursor keys, with a constant speed.</p>
 <ul>
 <li>Author: Rex</li>
-<li>Arcade behavior of game object, </li>
+<li>Arcade behavior of game object</li>
 </ul>
 <h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/eightdirection-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexeightdirectionplugin.min.js">minify</a></p>
@@ -3336,16 +3372,16 @@
 
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">eightDirection</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexEightDirection&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">speed</span><span class="o">:</span> <span class="mi">200</span><span class="p">,</span>
     <span class="c1">// dir: &#39;8dir&#39;,     // 0|&#39;up&amp;down&#39;|1|&#39;left&amp;right&#39;|2|&#39;4dir&#39;|3|&#39;8dir&#39;</span>
-    <span class="c1">// speed: 200,</span>
     <span class="c1">// rotateToDirection: false,</span>
     <span class="c1">// enable: true,</span>
-    <span class="c1">// cursorKeys: scene.input.keyboard.createCursorKeys(),</span>
-    <span class="c1">// cascade: false</span>
+    <span class="c1">// cursorKeys: scene.input.keyboard.createCursorKeys()</span>
 <span class="p">});</span>
 </pre></div>
 
 <ul>
+<li><code>speed</code> : moving speed, pixels in second.</li>
 <li><code>dir</code> :<ul>
 <li><code>'up&amp;down'</code>, or <code>0</code> :Aaccept up or down cursor keys only.</li>
 <li><code>'left&amp;right'</code>, or <code>1</code> : Aaccept left or right cursor keys only.</li>
@@ -3353,15 +3389,9 @@
 <li><code>'8dir'</code>, or <code>3</code> : Aaccept up, up-left, up-right, down, down-left, down-right, left, or right cursor keys.</li>
 </ul>
 </li>
-<li><code>speed</code> : moving speed, pixels in second</li>
-<li><code>rotateToDirection</code> : Set true to change angle towards moving direction</li>
-<li><code>enable</code> : set <code>false</code> to disable moving</li>
+<li><code>rotateToDirection</code> : Set true to change angle towards moving direction.</li>
+<li><code>enable</code> : set <code>false</code> to disable moving.</li>
 <li><code>cursorKeys</code> : CursorKey object, using <a href="../keyboardevents/#get-state-of-cursorkeys">keyboard's cursorKeys</a> by default.</li>
-<li><code>cascade</code> :<ul>
-<li><code>false</code> : Velicity, acceleration will be <strong>set</strong> to body directly. Default setting.</li>
-<li><code>true</code> : Velicity, acceleration will be <strong>added</strong> to body. Uses this mode when body is not only controlled by this behavior.</li>
-</ul>
-</li>
 </ul>
 <h3 id="set-speed">Set speed<a class="headerlink" href="#set-speed" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="nx">eightDirection</span><span class="p">.</span><span class="nx">setSpeed</span><span class="p">(</span><span class="nx">speed</span><span class="p">);</span>
@@ -3423,13 +3453,13 @@
           </a>
         
         
-          <a href="../mask/" title="Mask" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../bullet/" title="Bullet" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Mask
+                Bullet
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

@@ -3,6 +3,7 @@
 Destroy game object when time-out.
 
 - Author: Rex
+- Behavior of game object
 
 ## Source code
 

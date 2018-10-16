@@ -45,6 +45,7 @@ module.exports = {
         'rotatetoplugin': './plugins/rotateto-plugin.js',
         'flashplugin': './plugins/flash-plugin.js',
         'lifetimeplugin': './plugins/lifetime-plugin.js',
+        'interceptionplugin': './plugins/interception-plugin.js',
         // member of game object, arcade behavior
         'eightdirectionplugin': './plugins/eightdirection-plugin.js',
         'bulletplugin': './plugins/bullet-plugin.js',
