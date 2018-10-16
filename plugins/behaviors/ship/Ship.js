@@ -68,6 +68,10 @@ class Ship extends TickTask {
 
     set enable(value) {
         this.isRunning = value;
+        if (!value) {
+            this.bodySetAcceleration(0);
+            this.bodySetAngularVelocity(0);
+        }
     }
 
     setEnable(e) {

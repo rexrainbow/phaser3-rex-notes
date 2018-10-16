@@ -12,6 +12,7 @@ class Interception extends TickTask {
 
         this.gameObject = gameObject;
         this.scene = GetSceneObject(gameObject);
+        this._target = undefined;
         this.mySpeedMonitor = new SpeedMonitor();
         this.targetSpeedMonitor = new SpeedMonitor();
         this.predictedPosition = new Vector2();
@@ -69,7 +70,11 @@ class Interception extends TickTask {
         return this;
     }
 
-    setTarget(target) {
+    get target() {
+        return this._target;
+    }
+
+    set target(target) {
         if (target == null) {
             target = undefined;
         }
@@ -86,7 +91,7 @@ class Interception extends TickTask {
             if (target) {
                 target.once('destroy', this.setTarget, this);
             }
-            this.target = target;
+            this._target = target;
         }
 
         if (this.isRunning) {
@@ -101,6 +106,11 @@ class Interception extends TickTask {
                 super.start();
             }
         }
+        return this;
+    }
+
+    setTarget(target) {
+        this.target = target;
         return this;
     }
 
