@@ -30,6 +30,7 @@
 1. [Grid align](gridalign.md): Align objects on quadrilateral or hexagon grid.
 1. [Grid table](gridtable.md): Viewer of grid table, to manipulate game object of each visible cell.
 1. [Hexagon](geom-hexagon.md): Hexagon shape and methods.
+1. [Interception](interception.md): Predict the intersection position of two game objects with constant moving speed.
 1. [Life time](lifetime.md): Destroy game object when time-out.
 1. [LZ-string](lzstring.md): Compress string using LZ-based compression algorithm.
 1. [Move to](moveto.md): Move game object towards target position with a steady speed.
