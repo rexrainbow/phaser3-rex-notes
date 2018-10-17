@@ -57,7 +57,7 @@ var Canvas = new Phaser.Class({
             this.setPosition(x, y);
             this.setSize(width, height);
             this.setOrigin(0.5, 0.5);
-            this.initPipeline('TextureTintPipeline');
+            this.initPipeline();
 
             this._crop = this.resetCropObject();
 
@@ -129,7 +129,7 @@ var Canvas = new Phaser.Class({
             }
         }
         if (this.renderer.gl) {
-            this.frame.source.glTexture = this.renderer.canvasToTexture(this.canvas, this.frame.source.glTexture);
+            this.frame.source.glTexture = this.renderer.canvasToTexture(this.canvas, this.frame.source.glTexture, true);
             this.frame.glTexture = this.frame.source.glTexture;
         }
         this.dirty = false;

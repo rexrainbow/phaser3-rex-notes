@@ -52,7 +52,7 @@ var Text = new Phaser.Class({
 
             this.setPosition(x, y);
             this.setOrigin(0, 0);
-            this.initPipeline('TextureTintPipeline');
+            this.initPipeline();
 
             this.canvas = CanvasPool.create(this);
 
@@ -384,7 +384,7 @@ var Text = new Phaser.Class({
         context.restore();
 
         if (this.renderer.gl) {
-            this.frame.source.glTexture = this.renderer.canvasToTexture(canvas, this.frame.source.glTexture);
+            this.frame.source.glTexture = this.renderer.canvasToTexture(canvas, this.frame.source.glTexture, true);
             this.frame.glTexture = this.frame.source.glTexture;
         }
 
