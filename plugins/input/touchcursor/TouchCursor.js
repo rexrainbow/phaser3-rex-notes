@@ -2,7 +2,8 @@ import VectorToCursorKeys from 'rexPlugins/utils/vectortocursorkeys/VectorToCurs
 
 const EE = Phaser.Events.EventEmitter;
 const GetValue = Phaser.Utils.Objects.GetValue;
-const Geom = Phaser.Geom;
+const CircleClass = Phaser.Geom.Circle;
+const CircleContains = Phaser.Geom.Circle.Contains;
 
 class TouchCursor extends VectorToCursorKeys {
     constructor(gameObject, config) {
@@ -13,7 +14,10 @@ class TouchCursor extends VectorToCursorKeys {
         this.scene = gameObject.scene;
         this.gameObject = gameObject;
         this.radius = GetValue(config, 'radius', 100);
-        gameObject.setInteractive(new Geom.Circle(0, 0, this.radius), Geom.Circle.Contains);
+        // Center of game object, or (0, 0)
+        var x = gameObject.hasOwnProperty('width') ? (gameObject.width / 2) : 0;
+        var y = gameObject.hasOwnProperty('height') ? (gameObject.height / 2) : 0;
+        gameObject.setInteractive(new CircleClass(x, y, this.radius), CircleContains);
         this.boot();
     }
 

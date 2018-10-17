@@ -14,8 +14,8 @@ class Demo extends Phaser.Scene {
                 x: 400,
                 y: 300,
                 radius: 100,
-                // base: this.add.graphics().fillStyle(0x888888).fillCircle(0, 0, 100),
-                // thumb: this.add.graphics().fillStyle(0xcccccc).fillCircle(0, 0,50),
+                // base: this.add.circle(0, 0, 100, 0x888888),
+                // thumb: this.add.circle(0, 0, 50, 0xcccccc),
                 // dir: '8dir',   // 'up&down'|0|'left&right'|1|'4dir'|2|'8dir'|3
                 // forceMin: 16,
                 // enable: true

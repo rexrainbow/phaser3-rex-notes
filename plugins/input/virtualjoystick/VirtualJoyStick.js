@@ -157,13 +157,12 @@ class VirtualJoyStick {
     addBase(gameObject, config) {
         if (this.base) {
             this.base.destroy();
-            // also destroy touchCursor behavior
+            // Also destroy touchCursor behavior
         }
 
         if (gameObject === undefined) {
-            gameObject = this.scene.add.graphics()
-                .lineStyle(3, 0x0000ff)
-                .strokeCircle(0, 0, this.radius);
+            gameObject = this.scene.add.circle(0, 0, this.radius)
+                .setStrokeStyle(3, 0x0000ff);
         }
         this.touchCursor = new TouchCursor(gameObject, config)
         this.base = gameObject;
@@ -176,9 +175,8 @@ class VirtualJoyStick {
         }
 
         if (gameObject === undefined) {
-            gameObject = this.scene.add.graphics()
-                .lineStyle(3, 0x00ff00)
-                .strokeCircle(0, 0, 40);
+            gameObject = this.scene.add.circle(0, 0, 40)
+                .setStrokeStyle(3, 0x00ff00);
         }
         this.thumb = gameObject;
         return this;
@@ -194,7 +192,7 @@ class VirtualJoyStick {
     }
 
     destroy() {
-        this.base.destroy(); // also destroy touchCursor behavior
+        this.base.destroy(); // Also destroy touchCursor behavior
         this.thumb.destroy();
 
         this.base = undefined;

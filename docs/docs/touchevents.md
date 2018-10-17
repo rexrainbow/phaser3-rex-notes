@@ -81,6 +81,7 @@ Call `gameObject.setInteractive(...)` to register touch input of Game Object bef
     - [Rhombus](geom-rhombus.md)
         - shape : `new Phaser.Geom.rexRhombus(x, y, width, height)`
         - callback : `Phaser.Geom.Polygon.Contains`
+    - Note: `x`, `y` relate to the **top-left** of the gameObject.
 - Set interactive configuration
     ```javascript
     gameObject.setInteractive({
