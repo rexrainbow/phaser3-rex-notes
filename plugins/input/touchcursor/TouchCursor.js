@@ -14,10 +14,7 @@ class TouchCursor extends VectorToCursorKeys {
         this.scene = gameObject.scene;
         this.gameObject = gameObject;
         this.radius = GetValue(config, 'radius', 100);
-        // Center of game object, or (0, 0)
-        var x = gameObject.hasOwnProperty('width') ? (gameObject.width / 2) : 0;
-        var y = gameObject.hasOwnProperty('height') ? (gameObject.height / 2) : 0;
-        gameObject.setInteractive(new CircleClass(x, y, this.radius), CircleContains);
+        gameObject.setInteractive(new CircleClass(gameObject.displayOriginX, gameObject.displayOriginY, this.radius), CircleContains);
         this.boot();
     }
 
