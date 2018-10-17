@@ -36,9 +36,17 @@ Whether this Body is updated by the physics simulation.
 
 - Enable (default)
     ```javascript
+    body.setEnable();
+    ```
+    or
+    ```javascript
     body.enable = true;
     ```
 - Disable
+    ```javascript
+    body.setEnable(false);
+    ```
+    or
     ```javascript
     body.enable = false;
     ```

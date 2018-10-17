@@ -71,6 +71,7 @@ module.exports = {
         // data structure
         'csvtoarrayplugin': './plugins/csvtoarray-plugin.js',
         'csvtohashtableplugin': './plugins/csvtohashtable-plugin.js',
+        'achievementsplugin': './plugins/achievements-plugin.js',
 
         // math
         'gashaponplugin': './plugins/gashapon-plugin.js',

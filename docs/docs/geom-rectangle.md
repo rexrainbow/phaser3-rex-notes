@@ -276,11 +276,14 @@ var rect1 = Phaser.Geom.Rectangle.Clone(rect0);
 
 ### Equal
 
-```javascript
-var isEqual = Phaser.Geom.Rectangle.Equals(rect0, rect1);
-```
-
-Position and size are equal.
+- Position, width, and height are the same
+    ```javascript
+    var isEqual = Phaser.Geom.Rectangle.Equals(rect0, rect1);
+    ```
+- Width and height are the same
+    ```javascript
+    var isEqual = Phaser.Geom.Rectangle.SameDimensions(rect0, rect1);
+    ```
 
 ### Intersection
 

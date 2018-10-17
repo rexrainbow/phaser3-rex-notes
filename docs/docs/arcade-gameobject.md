@@ -48,6 +48,7 @@ Arcade physics Image/Sprite/Group object.
         ```javascript
         var config = {
             classType: ArcadeSprite,
+            enable: true,
             setCollideWorldBounds: false,
             setAccelerationX: 0,
             setAccelerationY: 0,

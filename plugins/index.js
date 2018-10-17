@@ -57,6 +57,7 @@ import Clock from './clock.js';
 // data structure
 import CSVToArray from './csvtoarray.js';
 import CSVToHashTable from './csvtohashtable.js';
+import Achievements from './achievements.js';
 
 // math
 import Gashapon from './gashapon.js';
@@ -141,6 +142,7 @@ export {
     // data structure
     CSVToArray,
     CSVToHashTable,
+    Achievements,
 
     // math
     Gashapon,

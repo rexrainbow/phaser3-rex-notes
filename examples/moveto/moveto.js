@@ -10,14 +10,11 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        var dot = this.add.graphics()
-            .fillStyle(0xffffff, 1)
-            .fillPoint(0, 0, 20)
-            .setPosition(100, 100);
+        var dot = this.add.circle(100, 100, 20, 0xffffff);
         dot.moveTo = this.plugins.get('rexMoveTo').add(dot, {
             speed: 400,
             rotateToTarget: true
-        }).on('complete', function(){
+        }).on('complete', function () {
             console.log('Reach target');
         })
         this.input.on('pointerdown', function (pointer) {

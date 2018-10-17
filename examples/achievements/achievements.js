@@ -1,0 +1,57 @@
+import AchievementsPlugin from 'rexPlugins/achievements-plugin.js';
+
+class Demo extends Phaser.Scene {
+    constructor() {
+        super({
+            key: 'examples'
+        })
+        this.print;
+    }
+
+    preload() {}
+
+    create() {
+        var rules = `,,A,A
+1,AchA,>= 10,< 20
+1,AchB,>= 20,< 50
+1,AchC,>= 50,`;
+        var achievements = this.plugins.get('rexAchievements').add({
+            rules: rules
+        });
+
+        var dumpState = function (levelName, achievementName, obtainedState) {
+            console.log(levelName + '-' + achievementName + ': ' + obtainedState.isObtained);
+        }
+        console.log('---- Run test ----');
+        achievements
+            .runTest('1', {
+                A: 30
+            })
+            .forEachObtainedState('1', dumpState);
+        console.log('---- Run test ----');
+        achievements
+            .runTest('1', {
+                A: 100
+            })
+            .forEachObtainedState('1', dumpState);
+    }
+
+    update() {}
+}
+
+var config = {
+    type: Phaser.AUTO,
+    parent: 'phaser-example',
+    width: 800,
+    height: 600,
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexAchievements',
+            plugin: AchievementsPlugin,
+            start: true
+        }]
+    }
+};
+
+var game = new Phaser.Game(config);

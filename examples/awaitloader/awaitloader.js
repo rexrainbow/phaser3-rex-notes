@@ -35,7 +35,7 @@ var config = {
     scene: Demo,
     plugins: {
         global: [{
-            key: 'AwaitLoader',
+            key: 'rexAwaitLoader',
             plugin: AwaitLoaderPlugin,
             start: true
         }]
