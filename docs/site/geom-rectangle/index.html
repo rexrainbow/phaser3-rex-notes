@@ -3617,10 +3617,14 @@
 </pre></div></li>
 </ul>
 <h3 id="equal">Equal<a class="headerlink" href="#equal" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isEqual</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Rectangle</span><span class="p">.</span><span class="nx">Equals</span><span class="p">(</span><span class="nx">rect0</span><span class="p">,</span> <span class="nx">rect1</span><span class="p">);</span>
-</pre></div>
-
-<p>Position and size are equal.</p>
+<ul>
+<li>Position, width, and height are the same
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isEqual</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Rectangle</span><span class="p">.</span><span class="nx">Equals</span><span class="p">(</span><span class="nx">rect0</span><span class="p">,</span> <span class="nx">rect1</span><span class="p">);</span>
+</pre></div></li>
+<li>Width and height are the same
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isEqual</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Geom</span><span class="p">.</span><span class="nx">Rectangle</span><span class="p">.</span><span class="nx">SameDimensions</span><span class="p">(</span><span class="nx">rect0</span><span class="p">,</span> <span class="nx">rect1</span><span class="p">);</span>
+</pre></div></li>
+</ul>
 <h3 id="intersection">Intersection<a class="headerlink" href="#intersection" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Rectangle to <a href="../geom-circle/">circle</a>
