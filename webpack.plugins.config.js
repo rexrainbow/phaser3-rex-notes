@@ -44,7 +44,6 @@ module.exports = {
         'movetoplugin': './plugins/moveto-plugin.js',
         'rotatetoplugin': './plugins/rotateto-plugin.js',
         'flashplugin': './plugins/flash-plugin.js',
-        'lifetimeplugin': './plugins/lifetime-plugin.js',
         'interceptionplugin': './plugins/interception-plugin.js',
         // member of game object, arcade behavior
         'eightdirectionplugin': './plugins/eightdirection-plugin.js',
@@ -64,14 +63,16 @@ module.exports = {
         'tcrpplugin': './plugins/tcrp-plugin.js',
         'csvscenarioplugin': './plugins/csvscenario-plugin.js',
         'waitevents': './plugins/waitevents-plugin.js',
+        'achievementsplugin': './plugins/achievements-plugin.js',        
+        'conditionstableplugin': './plugins/conditionstable-plugin.js',            
 
         // time
         'clockplugin': './plugins/clock-plugin.js',
+        'lifetimeplugin': './plugins/lifetime-plugin.js',        
 
         // data structure
         'csvtoarrayplugin': './plugins/csvtoarray-plugin.js',
         'csvtohashtableplugin': './plugins/csvtohashtable-plugin.js',
-        'achievementsplugin': './plugins/achievements-plugin.js',
 
         // math
         'gashaponplugin': './plugins/gashapon-plugin.js',

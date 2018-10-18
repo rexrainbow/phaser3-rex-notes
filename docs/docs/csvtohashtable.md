@@ -62,6 +62,11 @@ table.loadCSV(csvString, {
 
 For exameple, csv string
 
+|name |hp |mp|
+|-----|---|--|
+|Rex  |100|20|
+|Alice|300|40|
+
 ```raw
 name,hp,mp
 Rex,100,20

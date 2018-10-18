@@ -11,16 +11,21 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        var rules = `,,A,A
-1,AchA,>= 10,< 20
-1,AchB,>= 20,< 50
-1,AchC,>= 50,`;
-        var achievements = this.plugins.get('rexAchievements').add({
-            rules: rules
-        });
+        var table = `,,A,A
+1,A,>= 10,< 20
+1,B,>= 20,< 50
+1,C,>= 50,`;
+        var achievements = this.plugins.get('rexAchievements').add().loadCSV(table);
 
         var dumpState = function (levelName, achievementName, obtainedState) {
-            console.log(levelName + '-' + achievementName + ': ' + obtainedState.isObtained);
+            var s = levelName + '-' + achievementName + ': ';
+            if (obtainedState.wasObtained) {
+                s += 'O';
+            }
+            if (obtainedState.justObtained) {
+                s += ' (+)'
+            }
+            console.log(s);
         }
         console.log('---- Run test ----');
         achievements

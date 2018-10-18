@@ -32,7 +32,6 @@ import Fade from './fade.js';
 import FadeOutDestroy from './fade-out-destroy.js';
 import PathFollower from './pathfollower.js';
 import Flash from './flash.js';
-import LifeTime from './lifetime.js';
 import Interception from './interception.js';
 
 // member of game object, arcade behavior
@@ -52,12 +51,16 @@ import Sequence from './sequence.js';
 import FSM from './fsm.js';
 import TCRP from './tcrp.js';
 import CSVScenario from './csvscenario.js';
+import WaitEvents from './waitevents.js';
+import Achievements from './achievements.js';
+import ConditionsTable from './conditionstable.js';
+
 // time
 import Clock from './clock.js';
+import LifeTime from './lifetime.js';
 // data structure
 import CSVToArray from './csvtoarray.js';
 import CSVToHashTable from './csvtohashtable.js';
-import Achievements from './achievements.js';
 
 // math
 import Gashapon from './gashapon.js';
@@ -115,7 +118,6 @@ export {
     FadeOutDestroy,
     PathFollower,
     Flash,
-    LifeTime,
     Interception,
 
     // member of game object, arcade behavior
@@ -135,14 +137,17 @@ export {
     FSM,
     TCRP,
     CSVScenario,
+    WaitEvents,
+    Achievements,
+    ConditionsTable,
 
     // time
     Clock,
+    LifeTime,
 
     // data structure
     CSVToArray,
     CSVToHashTable,
-    Achievements,
 
     // math
     Gashapon,

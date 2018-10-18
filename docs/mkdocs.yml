@@ -113,6 +113,8 @@ nav:
           - Player: tcrp-player.md
     - FSM: fsm.md
     - Wait events: waitevents.md
+    - CSV table:
+        - Conditions table: conditionstable.md
 - Data:
     - Data manager: datamanager.md
     - Set: structs-set.md

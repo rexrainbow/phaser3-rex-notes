@@ -1,4 +1,4 @@
-import CSVToArray from 'rexPlugins/utils/array/CSVToArray.js'; // use simple csv parser
+import CSVParser from 'rexPlugins/utils/papaparser/papaparse.js';
 import ArrayCopy from 'rexPlugins/utils/array/Copy.js';
 import TypeConvert from 'rexPlugins/utils/string/TypeConvert.js';
 
@@ -43,8 +43,9 @@ class CsvToHashTable {
         }
 
         this.clear();
-        var arr = CSVToArray(csvString, delimiter);
-
+        var arr = CSVParser.parse(csvString, {
+            delimiter: delimiter
+        }).data;
 
         this.colKeys = ArrayCopy(this.colKeys, arr[0]);
         this.rowKeys.length = arr.length - 1;

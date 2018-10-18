@@ -12,19 +12,14 @@ class Achievements {
     }
 
     resetFromJSON(o) {
-        var rules = GetValue(o, 'rules', undefined);
-        var delimiter = GetValue(o, 'delimiter', undefined);
-        if (rules !== undefined) {
-            this.loadRules(rules, delimiter);
-        }
         this.setObtainedState(GetValue(o, 'obtained', {}));
         return this;
     }
 
-    loadRules(rules, delimiter) {
+    loadCSV(csvString, config) {
         Clear(this.achievements);
-
-        var table = CSVParser.parse(rules, {
+        var delimiter = GetValue(config, 'delimiter', ',');
+        var table = CSVParser.parse(csvString, {
             delimiter: delimiter
         }).data;
         var keys = table[0];
@@ -56,11 +51,7 @@ class Achievements {
             return out;
         }
         for (var i = 0, cnt = achievements.length; i < cnt; i++) {
-            n = achievements[i].name;
-            if (!names_map.hasOwnProperty(n)) {
-                names.push(n);
-                names_map[n] = true;
-            }
+            out.push(achievements[i].name);
         }
         return names;
     }
@@ -71,9 +62,8 @@ class Achievements {
         }
         if (!this.obtainedStates[levelName].hasOwnProperty(achievementName)) {
             this.obtainedStates[levelName][achievementName] = {
-                isObtained: false,
-                pre: false,
-                cur: false
+                wasObtained: false,
+                justObtained: false
             };
         }
         return this.obtainedStates[levelName][achievementName];
@@ -88,15 +78,17 @@ class Achievements {
         var obtainedState;
         for (var i = 0, cnt = achievements.length; i < cnt; i++) {
             obtainedState = this.getObtainedState(levelName, achievements[i].name);
-            obtainedState.pre = obtainedState.isObtained;
-            obtainedState.cur = false;
+            obtainedState.justObtained = false;
+            if (obtainedState.wasObtained) {
+                continue;
+            }
 
             if (!achievements[i].runTest(values)) {
                 continue;
             }
 
-            obtainedState.cur = true;
-            obtainedState.isObtained = true;
+            obtainedState.justObtained = true;
+            obtainedState.wasObtained = true;
         }
 
         return this;
@@ -126,8 +118,10 @@ class Achievements {
             value = true;
         }
         var obtainedState = this.getObtainedState(levelName, achievementName);
-        obtainedState.isObtained = value;
-        obtainedState.cur = value;
+        if (obtainedState.wasObtained !== value) {
+            obtainedState.justObtained = value;
+            obtainedState.wasObtained = value;
+        }
         return this;
     }
 

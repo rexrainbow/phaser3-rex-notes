@@ -1,2 +1,2 @@
-import Achievements from './data/achievements/Achievements.js';
+import Achievements from './logic/achievements/Achievements.js';
 export default Achievements;

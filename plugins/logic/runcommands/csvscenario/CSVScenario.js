@@ -1,4 +1,4 @@
-import CSVToArray from 'rexPlugins/utils/array/CSVToArray.js'; // use simple csv parser
+import CSVParser from 'rexPlugins/utils/papaparser/papaparse.js';
 import InstMem from './InstMem.js';
 import CmdHandlers from './commands/CmdHandlers.js';
 
@@ -162,8 +162,14 @@ class CSVScenario extends EE {
         return this;
     }
 
-    append(strCmd) {
-        this.parse(CSVToArray(strCmd));
+    append(csvString, delimiter) {
+        if (delimiter === undefined) {
+            delimiter = ',';
+        }
+        var arr = CSVParser.parse(csvString, {
+            delimiter: delimiter
+        }).data;
+        this.parse(arr);
         return this;
     }
 
