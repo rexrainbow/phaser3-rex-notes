@@ -65,20 +65,22 @@ class ContainerLite extends Zone {
         return this.children.getChildren();
     }
 
-    getAllChildren() {
-        var allChildren = [];
+    getAllChildren(out) {
+        if (out === undefined) {
+            out = [];
+        }
         var myCildren = this.getChildren(),
             myChild;
         for (var i = 0, cnt = myCildren.length; i < cnt; i++) {
             myChild = myCildren[i];
-            allChildren.push(myChild);
+            out.push(myChild);
 
             if (myChild.hasOwnProperty('isRexContainerLite')) {
-                allChildren.push(...myChild.getAllChildren());
+                out.push(...myChild.getAllChildren());
             }
         }
 
-        return allChildren;
+        return out;
     }
 
     contains(gameObject) {
@@ -291,7 +293,7 @@ class ContainerLite extends Zone {
         this.syncPosition();
     }
 
-    // override
+    // Override
     get rotation() {
         return super.rotation;
     }
@@ -305,7 +307,7 @@ class ContainerLite extends Zone {
         this.syncPosition();
     }
 
-    // override
+    // Override
     get scaleX() {
         return super.scaleX;
     }
@@ -319,7 +321,7 @@ class ContainerLite extends Zone {
         this.syncPosition();
     }
 
-    // override
+    // Override
     get scaleY() {
         return super.scaleY;
     }
@@ -333,7 +335,7 @@ class ContainerLite extends Zone {
         this.syncPosition();
     }
 
-    // override
+    // Override
     get flipX() {
         return this._flipX;
     }
@@ -347,7 +349,7 @@ class ContainerLite extends Zone {
         this.syncPosition();
     }
 
-    // override
+    // Override
     get flipY() {
         return this._flipY;
     }
@@ -361,7 +363,7 @@ class ContainerLite extends Zone {
         this.syncPosition();
     }
 
-    // override
+    // Override
     get visible() {
         return super.visible;
     }
@@ -375,7 +377,7 @@ class ContainerLite extends Zone {
         this.syncVisible();
     }
 
-    // override
+    // Override
     get alpha() {
         return this._alpha;
     }
@@ -389,7 +391,7 @@ class ContainerLite extends Zone {
         this.syncAlpha();
     }
 
-    // override
+    // Override
     get mask() {
         return this._mask;
     }
@@ -419,7 +421,7 @@ class ContainerLite extends Zone {
         return this;
     }
 
-    // override
+    // Override
     get scrollFactorX() {
         return this._scrollFactorX;
     }
@@ -445,7 +447,7 @@ class ContainerLite extends Zone {
         this.syncScrollFactor();
     }
 
-    // compatiable with container plugin
+    // Compatiable with container plugin
     get list() {
         return this.getChildren();
     }
