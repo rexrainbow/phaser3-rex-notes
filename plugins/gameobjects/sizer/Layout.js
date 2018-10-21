@@ -3,6 +3,11 @@ const NOOP = function () {};
 const AlignIn = Phaser.Display.Align.In.QuickSet;
 
 var Layout = function (parent) {
+    // Skip invisible sizer
+    if (!this.visible) {
+        return this;
+    }
+
     // Clear childrenWidth/childrenHeight/childrenProportion of all sizers
     if (parent === undefined) {
         var children = this.getAllChildrenSizer([this]),
@@ -70,6 +75,10 @@ var Layout = function (parent) {
     for (var i = 0, cnt = children.length; i < cnt; i++) {
         child = children[i];
         if (!child.hasOwnProperty('rexSizer')) {
+            continue;
+        }
+        // Skip invisible child
+        if (!child.visible) {
             continue;
         }
 

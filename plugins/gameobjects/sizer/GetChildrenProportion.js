@@ -7,6 +7,10 @@ var GetChildrenProportion = function () {
         if (!child.hasOwnProperty('rexSizer')) {
             continue;
         }
+        // Skip invisible child
+        if (!child.visible) {
+            continue;
+        }
         proportion = child.rexSizer.proportion;
         if (proportion > 0) {
             result += proportion;

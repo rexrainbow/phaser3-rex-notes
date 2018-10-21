@@ -1,4 +1,8 @@
 var GetChildrenWidth = function () {
+    if (!this.visible) {
+        return 0;
+    }
+
     var result = 0;
     var children = this.getChildren();
     var child, padding, childWidth;
@@ -7,6 +11,10 @@ var GetChildrenWidth = function () {
         for (var i = 0, cnt = children.length; i < cnt; i++) {
             child = children[i];
             if (!child.hasOwnProperty('rexSizer')) {
+                continue;
+            }
+            // Skip invisible child
+            if (!child.visible) {
                 continue;
             }
 
@@ -24,6 +32,10 @@ var GetChildrenWidth = function () {
         for (var i = 0, cnt = children.length; i < cnt; i++) {
             child = children[i];
             if (!child.hasOwnProperty('rexSizer')) {
+                continue;
+            }
+            // Skip invisible child
+            if (!child.visible) {
                 continue;
             }
 
