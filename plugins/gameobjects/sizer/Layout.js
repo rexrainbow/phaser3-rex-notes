@@ -97,8 +97,8 @@ var Layout = function (parent) {
                     break;
                 case -1:
                     x = (startX + padding.left);
-                    width = this.width;
-                    child.width = width;
+                    width = this.width - padding.left - padding.right;
+                    child.displayWidth = width;
                     break;
                 default:
                     x = (itemX + padding.left);
@@ -112,13 +112,13 @@ var Layout = function (parent) {
             switch (childConfig.proportion) {
                 case 0:
                     y = (itemY + padding.top);
-                    height = child.height;
+                    height = child.height - padding.top - padding.bottom;
                     itemY += (height + padding.top + padding.bottom);
                     break;
                 case -1:
                     y = (startY + padding.top);
                     height = this.height;
-                    child.height = height;
+                    child.displayHeight = height;
                     break;
                 default:
                     y = (itemY + padding.top);
@@ -132,7 +132,7 @@ var Layout = function (parent) {
 
         tmpZone.setPosition(x, y).setSize(width, height);
         AlignIn(child, tmpZone, childConfig.align);
-        this.setChildLocalPosition(child, child.x - this.x, child.y - this.y);
+        this.resetChildState(child)
     }
     return this;
 }

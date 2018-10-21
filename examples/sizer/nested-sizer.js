@@ -44,7 +44,7 @@ class Demo extends Phaser.Scene {
 }
 
 var getRow = function (scene, data) {
-    // var background = scene.add.rectangle(0, 0, 0, 60, 0x888888); // TODO: Resize?
+    var background = scene.add.rectangle(0, 0, 2, 40, 0x888888);
     var icon = scene.add.rectangle(0, 0, 30, 30, data.icon);
     var nameLabel = scene.add.text(0, 0, data.name, {
         fontSize: '24px',
@@ -57,8 +57,8 @@ var getRow = function (scene, data) {
     var sizer = scene.add.rexSizer({
             orientation: 'x',
         })
-        // .add(background, -1)
-        .add(icon)
+        .add(background, -1) // Extend width equal to sizer width
+        .add(icon) // Minimum size
         .add(nameLabel, 2, 'left')
         .add(contentLabel, 5, 'left');
 

@@ -50,7 +50,7 @@ class Sizer extends Container {
 
         } else if (proportionType === 'string') {
             proportion = PROPORTIONMODE[proportion];
-        } else if (proportion !== undefined) {
+        } else if (IsPlainObject(proportion)) {
             var config = proportion;
             proportion = GetValue(config, 'proportion', 0);
             align = GetValue(config, 'align', ALIGN_CENTER);
