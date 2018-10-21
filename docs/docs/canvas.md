@@ -24,7 +24,7 @@ var config = {
     // ...
     plugins: {
         global: [{
-            key: 'CanvasPlugin',
+            key: 'rexCanvasPlugin',
             plugin: CanvasPlugin,
             start: true
         },

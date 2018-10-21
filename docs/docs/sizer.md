@@ -1,0 +1,180 @@
+## Introduction
+
+Layout children game objects.
+
+It is inspired from [wxSizer](https://docs.wxwidgets.org/3.0/overview_sizer.html).
+
+- Author: Rex
+- A kind of game object, installed by global plugin
+
+## Source code
+
+[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/sizer-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexsizerplugin.min.js)
+
+[Class](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/sizer.js)
+
+## Usage
+
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/sizer)
+
+### Install plugin
+
+Install plugin in [configuration of game](game.md#configuration)
+
+```javascript
+var config = {
+    // ...
+    plugins: {
+        global: [{
+            key: 'rexSizerPlugin',
+            plugin: SizerPlugin,
+            start: true
+        },
+        // ...
+        ]
+    }
+    // ...
+};
+var game = new Phaser.Game(config);
+```
+
+### Add sizer object
+
+```javascript
+var sizer = scene.add.rexSizer(x, y, {
+    orientation: 0, // 0|'x'|'h'|'horizontal'|1|'y'|'v'|'vertical'
+    // boundsColor: 0xff0000
+});
+```
+
+or
+
+```javascript
+var sizer = scene.add.rexSizer(x, y, minWidth, minHeight, {
+    orientation: 0, // 0|'x'|'h'|'horizontal'|1|'y'|'v'|'vertical'
+    // boundsColor: 0xff0000
+});
+```
+
+or
+
+```javascript
+var sizer = scene.add.rexSizer({
+    orientation: 0, // 0|'x'|'h'|'horizontal'|1|'y'|'v'|'vertical'
+    // boundsColor: 0xff0000
+});
+```
+
+or
+
+```javascript
+var sizer = scene.add.rexSizer(x, y, minWidth, minHeight, orientation);
+```
+
+Add sizer from JSON
+
+```javascript
+var sizer = scene.make.rexSizer({
+    x: 0,
+    y: 0,
+    minWidth: undefined,
+    minHeight: undefined,
+    orientation: 0,
+    // boundsColor: 0xff0000,
+
+    // angle: 0,
+    // alpha: 1
+    // flipX: true,
+    // flipY: true,
+    // scale : {
+    //    x: 1,
+    //    y: 1
+    //}
+});
+```
+
+- `x`, `y` : Position of sizer. Only available for top-sizer, children-sizers will be changed by parent.
+- `orientation` : Mmain orientation of the sizer 
+    - `'horizontal'`,`'h'`, `'x'`, or `0` : Arrange game objects on horizontal/x axis.
+    - `'vertical'`,`'v'`, `'y'`, or `1` : Arrange game objects on vertical/y axis.
+- `minWidth` : Minimum width. i.e. Width of this sizer will bigger then this value.
+- `minHeight` : Minimum height. i.e. Hieght of this sizer will bigger then this value.
+- `boundsColor` : Color of bounds, see [Draw bounds](sizer.md#draw-bounds)
+
+### Custom class
+
+- Define class
+    ```javascript
+    class MySizer extends Sizer {
+        constructor(scene, x, y, minWidth, minHeight, config) {
+            super(scene, x, y, minWidth, minHeight, config);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
+- Create instance
+    ```javascript
+    var sizer = new MySizer(scene, x, y, minWidth, minHeight, config);
+    ```
+
+### Add child
+
+Add a game obejct to sizer
+
+```javascript
+sizer.add(child);
+```
+
+or
+
+```javascript
+sizer.add(child, proportion, align, paddingConfig);
+```
+
+- `child` : A game object
+- `proportion` :
+    `0` : Place next game object closely. Default value.
+    `> 0` :
+    `-1` : Stretch game object in the main orientation of the sizer.
+    `null` : Don't arrange this child
+- `align` :
+    - `'center'`, or `Phaser.Display.Align.CENTER` : Align game object at center. Default value.
+    - `'left'`, or `Phaser.Display.Align.LEFT_CENTER` : Align game object at left-center.
+    - `'right'`, or `Phaser.Display.Align.RIGHT_CENTER` : Align game object at right-center.
+    - `'top'`, or `Phaser.Display.Align.RIGHT_CENTER` : Align game object at top-center.
+    - `'bottom'`, or `Phaser.Display.Align.BOTTOM_CENTER` : Align game object at bottom-center.
+- `paddingConfig` : Add space between bounds. Default is 0.
+    - A number for left/right/top/bottom bounds
+    - Or a plain object
+        ```javascript
+        {
+            left: 0,
+            right: 0,
+            top: 0,
+            bottom: 0
+        }
+        ```
+
+### Layout children
+
+Arrange position of all children.
+
+```javascript
+sizer.layout();
+```
+
+### Draw bounds
+
+Draw all bounds of children.
+
+```javascript
+sizer.drawBounds(graphics);
+```
+
+- `graphics` : [Graphics game object](graphics.md)
+
+### Other properties
+
+This sizer game object inherits from [ContainerLite](containerlite.md).

@@ -15,6 +15,27 @@ Viewer of grid table, to manipulate game object of each visible cell.
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/gridtable)
 
+### Install plugin
+
+Install plugin in [configuration of game](game.md#configuration)
+
+```javascript
+var config = {
+    // ...
+    plugins: {
+        global: [{
+            key: 'rexGridTablePlugin',
+            plugin: GridTablePlugin,
+            start: true
+        },
+        // ...
+        ]
+    }
+    // ...
+};
+var game = new Phaser.Game(config);
+```
+
 ### Create instance
 
 ```javascript

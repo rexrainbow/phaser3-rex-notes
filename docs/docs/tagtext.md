@@ -24,7 +24,7 @@ var config = {
     // ...
     plugins: {
         global: [{
-            key: 'TagTextPlugin',
+            key: 'rexTagTextPlugin',
             plugin: TagTextPlugin,
             start: true
         },

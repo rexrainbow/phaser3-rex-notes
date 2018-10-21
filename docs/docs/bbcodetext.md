@@ -36,7 +36,7 @@ var config = {
     // ...
     plugins: {
         global: [{
-            key: 'BBCodeTextPlugin',
+            key: 'rexBBCodeTextPlugin',
             plugin: BBCodeTextPlugin,
             start: true
         },

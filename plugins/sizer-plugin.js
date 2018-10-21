@@ -22,7 +22,7 @@ class SizerPlugin extends Phaser.Plugins.BasePlugin {
     }
 
     makeContainer(config) {
-        var minWidth = GetAdvancedValue(config, 'minWidth', 1);
+        var minWidth = GetAdvancedValue(config, 'minWidth', undefined);
         var minHeight = GetAdvancedValue(config, 'minHeight', minWidth);
         var sizer = new Sizer(this.scene, 0, 0, minWidth, minHeight);
 

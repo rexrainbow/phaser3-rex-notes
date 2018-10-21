@@ -5,37 +5,29 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {
-        this.load.image('bg', 'assets/images/white-dot.png');
-    }
+    preload() {}
 
     create() {
-        var isInTouched = false;
-        this.input.addPointer(3);
-        var bg = this.add.image(400, 300, 'bg')
-            .setDisplaySize(150, 150)
-            .setTint(0xcccccc)
-            .setInteractive()
-            .on('pointerover', function (pointer, localX, localY) {
-                if (pointer.isDown) {
-                    isInTouched = true;
-                    console.log(isInTouched);
-                }
-            })
-            .on('pointerout', function (pointer) {
-                if (pointer.isDown) {
-                    isInTouched = false;
-                    console.log(isInTouched);
-                }
-            })
-            .on('pointerdown', function (pointer, localX, localY, camera) {
-                isInTouched = true;
-                console.log(isInTouched);
-            })
-            .on('pointerup', function (pointer, localX, localY) {
-                isInTouched = false;
-                console.log(isInTouched);
-            })            
+        var graphics = this.add.graphics({
+            lineStyle: {
+                width: 1,
+                color: 0xff0000,
+                alpha: 1
+            },
+            fillStyle: {
+                color: 0xff0000,
+                alpha: 1
+            },
+        });
+
+        var rect1 = this.add.rectangle(400, 200, 1, 30, 0x555555);
+        var rect2 = this.add.rectangle(400, 300, 2, 30, 0x555555);
+
+        rect1.displayWidth = 60;
+        rect2.displayWidth = 60;
+
+        graphics.strokeRectShape(rect1.getBounds());
+        graphics.strokeRectShape(rect2.getBounds());
     }
 
     update() {}

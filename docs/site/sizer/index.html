@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/eightdirection/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/sizer/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>8 direction - Notes of Phaser 3</title>
+        <title>Sizer - Notes of Phaser 3</title>
       
     
     
@@ -128,7 +128,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                8 direction
+                Sizer
               </span>
             
           
@@ -1080,10 +1080,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-6" type="checkbox" id="nav-4-6">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-6" type="checkbox" id="nav-4-6" checked>
     
     <label class="md-nav__link" for="nav-4-6">
       Container
@@ -1147,11 +1149,114 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../sizer/" title="Sizer" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Sizer
+      </label>
+    
+    <a href="./" title="Sizer" class="md-nav__link md-nav__link--active">
       Sizer
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-plugin" title="Install plugin" class="md-nav__link">
+    Install plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-sizer-object" title="Add sizer object" class="md-nav__link">
+    Add sizer object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-class" title="Custom class" class="md-nav__link">
+    Custom class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-child" title="Add child" class="md-nav__link">
+    Add child
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#layout-children" title="Layout children" class="md-nav__link">
+    Layout children
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#draw-bounds" title="Draw bounds" class="md-nav__link">
+    Draw bounds
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-properties" title="Other properties" class="md-nav__link">
+    Other properties
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -1212,12 +1317,10 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-9" type="checkbox" id="nav-4-9" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-9" type="checkbox" id="nav-4-9">
     
     <label class="md-nav__link" for="nav-4-9">
       Behaviors
@@ -1353,12 +1456,10 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-9-8" type="checkbox" id="nav-4-9-8" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-9-8" type="checkbox" id="nav-4-9-8">
     
     <label class="md-nav__link" for="nav-4-9-8">
       Arcade
@@ -1410,107 +1511,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        8 direction
-      </label>
-    
-    <a href="./" title="8 direction" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../eightdirection/" title="8 direction" class="md-nav__link">
       8 direction
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#source-code" title="Source code" class="md-nav__link">
-    Source code
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#import-class" title="Import class" class="md-nav__link">
-    Import class
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
-    Install global plugin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set-speed" title="Set speed" class="md-nav__link">
-    Set speed
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set-rotate-to-direction" title="Set rotate-to-direction" class="md-nav__link">
-    Set rotate-to-direction
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set-direction-mode" title="Set direction mode" class="md-nav__link">
-    Set direction mode
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -3310,43 +3315,50 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#import-class" title="Import class" class="md-nav__link">
-    Import class
+  <a href="#install-plugin" title="Install plugin" class="md-nav__link">
+    Install plugin
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
-    Install global plugin
+  <a href="#add-sizer-object" title="Add sizer object" class="md-nav__link">
+    Add sizer object
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
+  <a href="#custom-class" title="Custom class" class="md-nav__link">
+    Custom class
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#set-speed" title="Set speed" class="md-nav__link">
-    Set speed
+  <a href="#add-child" title="Add child" class="md-nav__link">
+    Add child
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#set-rotate-to-direction" title="Set rotate-to-direction" class="md-nav__link">
-    Set rotate-to-direction
+  <a href="#layout-children" title="Layout children" class="md-nav__link">
+    Layout children
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#set-direction-mode" title="Set direction mode" class="md-nav__link">
-    Set direction mode
+  <a href="#draw-bounds" title="Draw bounds" class="md-nav__link">
+    Draw bounds
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-properties" title="Other properties" class="md-nav__link">
+    Other properties
   </a>
   
 </li>
@@ -3372,42 +3384,31 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/eightdirection.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/sizer.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>8 direction</h1>
+                  <h1>Sizer</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Move game object by cursor keys, with a constant speed.</p>
+<p>Layout children game objects.</p>
+<p>It is inspired from <a href="https://docs.wxwidgets.org/3.0/overview_sizer.html">wxSizer</a>.</p>
 <ul>
 <li>Author: Rex</li>
-<li>Arcade behavior of game object</li>
+<li>A kind of game object, installed by global plugin</li>
 </ul>
 <h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/eightdirection-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexeightdirectionplugin.min.js">minify</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/sizer-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexsizerplugin.min.js">minify</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/sizer.js">Class</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/eightdirection">Sample code</a></p>
-<p>User could import class directly, or install it by global plugin.</p>
-<h3 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">rexEightDirection</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/eightdirection.js&#39;</span><span class="p">;</span>
-</pre></div>
-
-<h3 id="install-global-plugin">Install global plugin<a class="headerlink" href="#install-global-plugin" title="Permanent link">&para;</a></h3>
-<p>Enable <a href="../arcade-world/">arcade physics engine</a> and install plugin in <a href="../game/#configuration">configuration of game</a></p>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">EightDirectionPlugin</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/eightdirection-plugin.js&#39;</span><span class="p">;</span>
-
-<span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/sizer">Sample code</a></p>
+<h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
+<p>Install plugin in <a href="../game/#configuration">configuration of game</a></p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
-    <span class="nx">physics</span><span class="o">:</span> <span class="p">{</span>
-        <span class="k">default</span><span class="o">:</span> <span class="s1">&#39;arcade&#39;</span><span class="p">,</span>
-        <span class="nx">arcade</span><span class="o">:</span> <span class="p">{</span>
-            <span class="c1">// debug: true</span>
-        <span class="p">}</span>
-    <span class="p">},</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
-            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexEightDirection&#39;</span><span class="p">,</span>
-            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">EightDirectionPlugin</span><span class="p">,</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexSizerPlugin&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">SizerPlugin</span><span class="p">,</span>
             <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
         <span class="p">},</span>
         <span class="c1">// ...</span>
@@ -3418,54 +3419,130 @@
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </pre></div>
 
-<h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">eightDirection</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexEightDirection&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="p">{</span>
-    <span class="nx">speed</span><span class="o">:</span> <span class="mi">200</span><span class="p">,</span>
-    <span class="c1">// dir: &#39;8dir&#39;,     // 0|&#39;up&amp;down&#39;|1|&#39;left&amp;right&#39;|2|&#39;4dir&#39;|3|&#39;8dir&#39;</span>
-    <span class="c1">// rotateToDirection: false,</span>
-    <span class="c1">// enable: true,</span>
-    <span class="c1">// cursorKeys: scene.input.keyboard.createCursorKeys()</span>
+<h3 id="add-sizer-object">Add sizer object<a class="headerlink" href="#add-sizer-object" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexSizer</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">orientation</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="c1">// 0|&#39;x&#39;|&#39;h&#39;|&#39;horizontal&#39;|1|&#39;y&#39;|&#39;v&#39;|&#39;vertical&#39;</span>
+    <span class="c1">// boundsColor: 0xff0000</span>
+<span class="p">});</span>
+</pre></div>
+
+<p>or</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexSizer</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">minWidth</span><span class="p">,</span> <span class="nx">minHeight</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">orientation</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="c1">// 0|&#39;x&#39;|&#39;h&#39;|&#39;horizontal&#39;|1|&#39;y&#39;|&#39;v&#39;|&#39;vertical&#39;</span>
+    <span class="c1">// boundsColor: 0xff0000</span>
+<span class="p">});</span>
+</pre></div>
+
+<p>or</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexSizer</span><span class="p">({</span>
+    <span class="nx">orientation</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="c1">// 0|&#39;x&#39;|&#39;h&#39;|&#39;horizontal&#39;|1|&#39;y&#39;|&#39;v&#39;|&#39;vertical&#39;</span>
+    <span class="c1">// boundsColor: 0xff0000</span>
+<span class="p">});</span>
+</pre></div>
+
+<p>or</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexSizer</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">minWidth</span><span class="p">,</span> <span class="nx">minHeight</span><span class="p">,</span> <span class="nx">orientation</span><span class="p">);</span>
+</pre></div>
+
+<p>Add sizer from JSON</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">rexSizer</span><span class="p">({</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">minWidth</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">minHeight</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">orientation</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="c1">// boundsColor: 0xff0000,</span>
+
+    <span class="c1">// angle: 0,</span>
+    <span class="c1">// alpha: 1</span>
+    <span class="c1">// flipX: true,</span>
+    <span class="c1">// flipY: true,</span>
+    <span class="c1">// scale : {</span>
+    <span class="c1">//    x: 1,</span>
+    <span class="c1">//    y: 1</span>
+    <span class="c1">//}</span>
 <span class="p">});</span>
 </pre></div>
 
 <ul>
-<li><code>speed</code> : moving speed, pixels in second.</li>
-<li><code>dir</code> :<ul>
-<li><code>'up&amp;down'</code>, or <code>0</code> :Aaccept up or down cursor keys only.</li>
-<li><code>'left&amp;right'</code>, or <code>1</code> : Aaccept left or right cursor keys only.</li>
-<li><code>'4dir'</code>, or <code>2</code> : Aaccept up, down, left or right cursor keys.</li>
-<li><code>'8dir'</code>, or <code>3</code> : Aaccept up, up-left, up-right, down, down-left, down-right, left, or right cursor keys.</li>
+<li><code>x</code>, <code>y</code> : Position of sizer. Only available for top-sizer, children-sizers will be changed by parent.</li>
+<li><code>orientation</code> : Mmain orientation of the sizer <ul>
+<li><code>'horizontal'</code>,<code>'h'</code>, <code>'x'</code>, or <code>0</code> : Arrange game objects on horizontal/x axis.</li>
+<li><code>'vertical'</code>,<code>'v'</code>, <code>'y'</code>, or <code>1</code> : Arrange game objects on vertical/y axis.</li>
 </ul>
 </li>
-<li><code>rotateToDirection</code> : Set true to change angle towards moving direction.</li>
-<li><code>enable</code> : set <code>false</code> to disable moving.</li>
-<li><code>cursorKeys</code> : CursorKey object, using <a href="../keyboardevents/#get-state-of-cursorkeys">keyboard's cursorKeys</a> by default.</li>
+<li><code>minWidth</code> : Minimum width. i.e. Width of this sizer will bigger then this value.</li>
+<li><code>minHeight</code> : Minimum height. i.e. Hieght of this sizer will bigger then this value.</li>
+<li><code>boundsColor</code> : Color of bounds, see <a href="./#draw-bounds">Draw bounds</a></li>
 </ul>
-<h3 id="set-speed">Set speed<a class="headerlink" href="#set-speed" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">eightDirection</span><span class="p">.</span><span class="nx">setSpeed</span><span class="p">(</span><span class="nx">speed</span><span class="p">);</span>
-<span class="c1">// eightDirection.speed = speed;</span>
+<h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Define class
+    <div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">MySizer</span> <span class="kr">extends</span> <span class="nx">Sizer</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">minWidth</span><span class="p">,</span> <span class="nx">minHeight</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">minWidth</span><span class="p">,</span> <span class="nx">minHeight</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+        <span class="c1">// ...</span>
+        <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div></li>
+<li>Create instance
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MySizer</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">minWidth</span><span class="p">,</span> <span class="nx">minHeight</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h3 id="add-child">Add child<a class="headerlink" href="#add-child" title="Permanent link">&para;</a></h3>
+<p>Add a game obejct to sizer</p>
+<div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
 </pre></div>
 
-<h3 id="set-rotate-to-direction">Set rotate-to-direction<a class="headerlink" href="#set-rotate-to-direction" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">eightDirection</span><span class="p">.</span><span class="nx">setRotateToDirection</span><span class="p">(</span><span class="nx">rotateToDirection</span><span class="p">);</span>
+<p>or</p>
+<div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">proportion</span><span class="p">,</span> <span class="nx">align</span><span class="p">,</span> <span class="nx">paddingConfig</span><span class="p">);</span>
 </pre></div>
 
 <ul>
-<li><code>rotateToDirection</code> : Set true to change angle towards moving direction</li>
+<li><code>child</code> : A game object</li>
+<li><code>proportion</code> :
+    <code>0</code> : Place next game object closely. Default value.
+    <code>&gt; 0</code> :
+    <code>-1</code> : Stretch game object in the main orientation of the sizer.
+    <code>null</code> : Don't arrange this child</li>
+<li><code>align</code> :<ul>
+<li><code>'center'</code>, or <code>Phaser.Display.Align.CENTER</code> : Align game object at center. Default value.</li>
+<li><code>'left'</code>, or <code>Phaser.Display.Align.LEFT_CENTER</code> : Align game object at left-center.</li>
+<li><code>'right'</code>, or <code>Phaser.Display.Align.RIGHT_CENTER</code> : Align game object at right-center.</li>
+<li><code>'top'</code>, or <code>Phaser.Display.Align.RIGHT_CENTER</code> : Align game object at top-center.</li>
+<li><code>'bottom'</code>, or <code>Phaser.Display.Align.BOTTOM_CENTER</code> : Align game object at bottom-center.</li>
 </ul>
-<h3 id="set-direction-mode">Set direction mode<a class="headerlink" href="#set-direction-mode" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">eightDirection</span><span class="p">.</span><span class="nx">setDirMode</span><span class="p">(</span><span class="nx">dir</span><span class="p">);</span>
-</pre></div>
-
-<ul>
-<li><code>dir</code> :<ul>
-<li><code>'up&amp;down'</code>, or <code>0</code> :Aaccept up or down cursor keys only.</li>
-<li><code>'left&amp;right'</code>, or <code>1</code> : Aaccept left or right cursor keys only.</li>
-<li><code>'4dir'</code>, or <code>2</code> : Aaccept up, down, left or right cursor keys.</li>
-<li><code>'8dir'</code>, or <code>3</code> : Aaccept up, up-left, up-right, down, down-left, down-right, left, or right cursor keys.</li>
+</li>
+<li><code>paddingConfig</code> : Add space between bounds. Default is 0.<ul>
+<li>A number for left/right/top/bottom bounds</li>
+<li>Or a plain object
+    <div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nx">left</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">right</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">top</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">bottom</span><span class="o">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+</pre></div></li>
 </ul>
 </li>
 </ul>
+<h3 id="layout-children">Layout children<a class="headerlink" href="#layout-children" title="Permanent link">&para;</a></h3>
+<p>Arrange position of all children.</p>
+<div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">layout</span><span class="p">();</span>
+</pre></div>
+
+<h3 id="draw-bounds">Draw bounds<a class="headerlink" href="#draw-bounds" title="Permanent link">&para;</a></h3>
+<p>Draw all bounds of children.</p>
+<div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">drawBounds</span><span class="p">(</span><span class="nx">graphics</span><span class="p">);</span>
+</pre></div>
+
+<ul>
+<li><code>graphics</code> : <a href="../graphics/">Graphics game object</a></li>
+</ul>
+<h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
+<p>This sizer game object inherits from <a href="../containerlite/">ContainerLite</a>.</p>
                 
                   
                 
@@ -3486,7 +3563,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../arcade-gameobject/" title="Game object" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../gridtable/" title="Grid table" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -3495,19 +3572,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Game object
+                Grid table
               </span>
             </div>
           </a>
         
         
-          <a href="../bullet/" title="Bullet" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../zone/" title="Zone" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Bullet
+                Zone
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

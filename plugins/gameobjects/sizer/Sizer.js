@@ -19,11 +19,15 @@ class Sizer extends Container {
             y = 0;
             minWidth = undefined;
             minHeight = undefined;
-        }
-        if (IsPlainObject(minWidth)) {
+        } else if (IsPlainObject(minWidth)) {
             config = minWidth;
             minWidth = undefined;
             minHeight = undefined;
+        } else if (!IsPlainObject(config)) {
+            var orientation = config;
+            config = {
+                orientation: orientation
+            }
         }
         super(scene, x, y, minWidth, minHeight);
         this.type = 'rexSizer';
@@ -46,7 +50,9 @@ class Sizer extends Container {
         super.add(gameObject);
 
         var proportionType = typeof (proportion);
-        if (proportionType === 'number') {
+        if (proportion === null) {
+            return this;
+        } else if (proportionType === 'number') {
 
         } else if (proportionType === 'string') {
             proportion = PROPORTIONMODE[proportion];
@@ -158,7 +164,7 @@ const ALIGNMODE = {
     center: Phaser.Display.Align.CENTER,
     left: Phaser.Display.Align.LEFT_CENTER,
     right: Phaser.Display.Align.RIGHT_CENTER,
-    top: Phaser.Display.Align.RIGHT_CENTER,
+    top: Phaser.Display.Align.TOP_CENTER,
     bottom: Phaser.Display.Align.BOTTOM_CENTER,
 }
 const ORIENTATIONMODE = {

@@ -26,8 +26,8 @@ var config = {
     // ...
     plugins: {
         global: [{
-            key: 'ContainerLitePlugin',
-            plugin: ContainerLitetPlugin,
+            key: 'rexContainerLitePlugin',
+            plugin: ContainerLitePlugin,
             start: true
         },
         // ...

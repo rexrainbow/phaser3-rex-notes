@@ -1184,6 +1184,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#install-plugin" title="Install plugin" class="md-nav__link">
+    Install plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#create-instance" title="Create instance" class="md-nav__link">
     Create instance
   </a>
@@ -1340,6 +1347,18 @@
   
 </nav>
     
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../sizer/" title="Sizer" class="md-nav__link">
+      Sizer
+    </a>
   </li>
 
         
@@ -2149,6 +2168,42 @@
     <a href="../waitevents/" title="Wait events" class="md-nav__link">
       Wait events
     </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-5" type="checkbox" id="nav-9-5">
+    
+    <label class="md-nav__link" for="nav-9-5">
+      CSV table
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-9-5">
+        CSV table
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../conditionstable/" title="Conditions table" class="md-nav__link">
+      Conditions table
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
         
@@ -3362,6 +3417,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#install-plugin" title="Install plugin" class="md-nav__link">
+    Install plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#create-instance" title="Create instance" class="md-nav__link">
     Create instance
   </a>
@@ -3542,6 +3604,24 @@
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/gridtable.js">Class</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/gridtable">Sample code</a></p>
+<h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
+<p>Install plugin in <a href="../game/#configuration">configuration of game</a></p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexGridTablePlugin&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">GridTablePlugin</span><span class="p">,</span>
+            <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="p">},</span>
+        <span class="c1">// ...</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</pre></div>
+
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="nx">cellsCount</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
@@ -3823,13 +3903,13 @@
           </a>
         
         
-          <a href="../zone/" title="Zone" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../sizer/" title="Sizer" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Zone
+                Sizer
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
