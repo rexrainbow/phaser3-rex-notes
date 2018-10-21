@@ -2,83 +2,128 @@ const Zone = Phaser.GameObjects.Zone;
 const NOOP = function () {};
 const AlignIn = Phaser.Display.Align.In.QuickSet;
 
-var Layout = function () {
-    var children = this.getChildren(),
-        child,
-        sizerChildren = [],
-        state;
-    var totalProportion = 0,
-        totalFixLength0 = 0,
-        maxLength1 = -Infinity;
-    // Get sizer children
+var Layout = function (parent) {
+    // Clear childrenWidth/childrenHeight/childrenProportion of all sizers
+    if (parent === undefined) {
+        var children = this.getAllChildrenSizer([this]),
+            child;
+        for (var i = 0, cnt = children.length; i < cnt; i++) {
+            child = children[i];
+            child._childrenWidth = undefined;
+            child._childrenHeight = undefined;
+            child._childrenProportion = undefined;
+        }
+    }
+
+    // Set size
+    var childrenProportion = this.childrenProportion;
+    if (this.orientation === 0) {
+        // Width
+        if (childrenProportion === 0) {
+            this.width = this.childrenWidth;
+        } else if (parent) {
+            var padding = this.rexSizer.padding;
+            this.width = parent.width - padding.left - padding.right;
+        } else {
+            this.width = this.childrenWidth;
+        }
+
+        // Height
+        this.height = this.childrenHeight;
+
+    } else {
+        // Width
+        this.width = this.childrenWidth;
+
+        // Height
+        if (childrenProportion === 0) {
+            this.height = this.childrenHeight;
+        } else if (parent) {
+            var padding = this.rexSizer.padding;
+            this.height = parent.height - padding.top - padding.bottom;
+        } else {
+            this.height = this.childrenHeight;
+        }
+    }
+
+    var proportionLength;
+    if ((childrenProportion > 0) && (parent !== undefined)) {
+        var remainder;
+        if (this.orientation === 0) {
+            remainder = this.width - this.childrenWidth;
+        } else {
+            remainder = this.height - this.childrenHeight;
+        }
+        proportionLength = remainder / childrenProportion;
+    } else {
+        proportionLength = 0;
+    }
+
+    // Layout children    
+    var children = this.getChildren();
+    var child, childConfig, padding;
+    var startX = this.x - (this.displayWidth * this.originX),
+        startY = this.y - (this.displayHeight * this.originY);
+    var itemX = startX,
+        itemY = startY;
+    var x, y, width, height; // Align zone
     for (var i = 0, cnt = children.length; i < cnt; i++) {
         child = children[i];
-        state = this.getLocalState(child);
-        if (!state.hasOwnProperty('sizeFlag')) {
+        if (!child.hasOwnProperty('rexSizer')) {
             continue;
         }
-        sizerChildren.push(child);
 
-        if ((state.sizeFlag === 0) || (state.proportion === 0)) { // MIN size
-            totalFixLength0 += (this.orientation === 0) ? child.width : child.height;
-        } else { // Not MIN size
-            totalProportion += state.proportion;
+        if (child.isRexSizer) {
+            child.layout(this);
         }
 
-        maxLength1 = Math.max((this.orientation === 0) ? child.height : child.width, maxLength1);
-    }
-    if (sizerChildren.length === 0) {
-        return this;
-    }
-
-    if (this.orientation === 0) {
-        this.height = maxLength1;
-    } else {
-        this.width = maxLength1;
-    }
-
-    var proportionLength = 0;
-    if (totalProportion === 0) {
+        childConfig = child.rexSizer;
+        padding = childConfig.padding;
         if (this.orientation === 0) {
-            this.width = totalFixLength0;
+            switch (childConfig.proportion) {
+                case 0:
+                    x = (itemX + padding.left);
+                    width = child.width;
+                    itemX += (width + padding.left + padding.right);
+                    break;
+                case -1:
+                    x = (startX + padding.left);
+                    width = this.width;
+                    child.width = width;
+                    break;
+                default:
+                    x = (itemX + padding.left);
+                    width = (childConfig.proportion * proportionLength);
+                    itemX += (width + padding.left + padding.right);
+                    break;
+            }
+            y = (startY + padding.top);
+            height = (this.height - padding.top - padding.bottom);
         } else {
-            this.height = totalFixLength0;
+            switch (childConfig.proportion) {
+                case 0:
+                    y = (itemY + padding.top);
+                    height = child.height;
+                    itemY += (height + padding.top + padding.bottom);
+                    break;
+                case -1:
+                    y = (startY + padding.top);
+                    height = this.height;
+                    child.height = height;
+                    break;
+                default:
+                    y = (itemY + padding.top);
+                    height = (childConfig.proportion * proportionLength);
+                    itemY += (height + padding.top + padding.bottom);
+                    break;
+            }
+            x = (startX + padding.left);
+            width = (this.width - padding.left - padding.right);
         }
-    } else { // Fix sizer
-        var remainder = ((this.orientation === 0) ? this.width : this.height) - totalFixLength0;
-        proportionLength = remainder / totalProportion;
-    }
 
-    var x = this.x - (this.displayWidth * this.originX),
-        y = this.y - (this.displayHeight * this.originY),
-        width, height;
-    if (this.orientation === 0) {
-        height = this.height;
-    } else {
-        width = this.width;
-    }
-    for (var i = 0, cnt = sizerChildren.length; i < cnt; i++) {
-        child = sizerChildren[i];
-        state = this.getLocalState(child);
-        if (this.orientation === 0) {
-            width = (state.proportion === 0) ? child.width : (state.proportion * proportionLength);
-        } else {
-            height = (state.proportion === 0) ? child.height : (state.proportion * proportionLength);
-        }
         tmpZone.setPosition(x, y).setSize(width, height);
-        AlignIn(child, tmpZone, Phaser.Display.Align.CENTER);
+        AlignIn(child, tmpZone, childConfig.align);
         this.setChildLocalPosition(child, child.x - this.x, child.y - this.y);
-
-        // TODO: Nestest layout
-        // if (child.isRexSizer) {
-        //     child.layout();
-        // }
-
-        if (this.orientation === 0) {
-            x += width;
-        } else {
-            y += height;
-        }
     }
     return this;
 }
