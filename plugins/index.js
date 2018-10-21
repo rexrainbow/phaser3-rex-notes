@@ -1,9 +1,10 @@
 // game objects
 import BBCodeText from './bbcodetext.js';
+import TagText from './tagtext.js';
 import Canvas from './canvas.js';
 import ContainerLite from './containerlite.js';
 import GridTable from './gridtable.js';
-import TagText from './tagtext.js';
+import Sizer from './sizer.js';
 
 // custom file loader      
 import WebFontLoader from './webfontloader.js';
@@ -88,10 +89,11 @@ import PathFinder from './board/pathfinder/PathFinder.js';
 export {
     // game objects
     BBCodeText,
+    TagText,
     Canvas,
     ContainerLite,
     GridTable,
-    TagText,
+    Sizer,
 
     // custom file loader 
     WebFontLoader,

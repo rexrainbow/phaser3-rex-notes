@@ -18,6 +18,8 @@ module.exports = {
         'containerlite': './plugins/containerlite.js',
         'gridtableplugin': './plugins/gridtable-plugin.js',
         'gridtable': './plugins/gridtable.js',
+        'sizerplugin': './plugins/sizer-plugin.js',
+        'sizer': './plugins/sizer.js',
         'tagtextplugin': './plugins/tagtext-plugin.js',
         'tagtext': './plugins/tagtext.js',
 
@@ -63,12 +65,12 @@ module.exports = {
         'tcrpplugin': './plugins/tcrp-plugin.js',
         'csvscenarioplugin': './plugins/csvscenario-plugin.js',
         'waitevents': './plugins/waitevents-plugin.js',
-        'achievementsplugin': './plugins/achievements-plugin.js',        
-        'conditionstableplugin': './plugins/conditionstable-plugin.js',            
+        'achievementsplugin': './plugins/achievements-plugin.js',
+        'conditionstableplugin': './plugins/conditionstable-plugin.js',
 
         // time
         'clockplugin': './plugins/clock-plugin.js',
-        'lifetimeplugin': './plugins/lifetime-plugin.js',        
+        'lifetimeplugin': './plugins/lifetime-plugin.js',
 
         // data structure
         'csvtoarrayplugin': './plugins/csvtoarray-plugin.js',
