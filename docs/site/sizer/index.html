@@ -3466,7 +3466,7 @@
 
 <ul>
 <li><code>x</code>, <code>y</code> : Position of sizer. Only available for top-sizer, children-sizers will be changed by parent.</li>
-<li><code>orientation</code> : Mmain orientation of the sizer <ul>
+<li><code>orientation</code> : Main orientation of the sizer <ul>
 <li><code>'horizontal'</code>,<code>'h'</code>, <code>'x'</code>, or <code>0</code> : Arrange game objects on horizontal/x axis.</li>
 <li><code>'vertical'</code>,<code>'v'</code>, <code>'y'</code>, or <code>1</code> : Arrange game objects on vertical/y axis.</li>
 </ul>
@@ -3502,11 +3502,13 @@
 
 <ul>
 <li><code>child</code> : A game object</li>
-<li><code>proportion</code> :
-    <code>0</code> : Place next game object closely. Default value.
-    <code>&gt; 0</code> :
-    <code>-1</code> : Stretch game object in the main orientation of the sizer.
-    <code>null</code> : Don't arrange this child</li>
+<li><code>proportion</code> :<ul>
+<li><code>0</code> : Place next game object closely. Default value.</li>
+<li><code>&gt; 0</code> :</li>
+<li><code>-1</code> : Stretch game object in the main orientation of the sizer.</li>
+<li><code>null</code> : Don't arrange this child</li>
+</ul>
+</li>
 <li><code>align</code> :<ul>
 <li><code>'center'</code>, or <code>Phaser.Display.Align.CENTER</code> : Align game object at center. Default value.</li>
 <li><code>'left'</code>, or <code>Phaser.Display.Align.LEFT_CENTER</code> : Align game object at left-center.</li>

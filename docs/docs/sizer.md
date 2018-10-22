@@ -94,7 +94,7 @@ var sizer = scene.make.rexSizer({
 ```
 
 - `x`, `y` : Position of sizer. Only available for top-sizer, children-sizers will be changed by parent.
-- `orientation` : Mmain orientation of the sizer 
+- `orientation` : Main orientation of the sizer 
     - `'horizontal'`,`'h'`, `'x'`, or `0` : Arrange game objects on horizontal/x axis.
     - `'vertical'`,`'v'`, `'y'`, or `1` : Arrange game objects on vertical/y axis.
 - `minWidth` : Minimum width. i.e. Width of this sizer will bigger then this value.
@@ -135,10 +135,10 @@ sizer.add(child, proportion, align, paddingConfig);
 
 - `child` : A game object
 - `proportion` :
-    `0` : Place next game object closely. Default value.
-    `> 0` :
-    `-1` : Stretch game object in the main orientation of the sizer.
-    `null` : Don't arrange this child
+    - `0` : Place next game object closely. Default value.
+    - `> 0` :
+    - `-1` : Stretch game object in the main orientation of the sizer.
+    - `null` : Don't arrange this child
 - `align` :
     - `'center'`, or `Phaser.Display.Align.CENTER` : Align game object at center. Default value.
     - `'left'`, or `Phaser.Display.Align.LEFT_CENTER` : Align game object at left-center.
