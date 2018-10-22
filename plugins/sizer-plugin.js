@@ -9,7 +9,7 @@ class SizerPlugin extends Phaser.Plugins.BasePlugin {
         super(pluginManager);
 
         //  Register our new Game Object type
-        pluginManager.registerGameObject('rexSizer', this.addContainer, this.makeContainer);
+        pluginManager.registerGameObject('rexSizer', this.addSizer, this.makeSizer);
     }
 
     start() {
@@ -17,11 +17,11 @@ class SizerPlugin extends Phaser.Plugins.BasePlugin {
         eventEmitter.once('destroy', this.destroy, this);
     }
 
-    addContainer(x, y, minWidth, minHeight, config) {
+    addSizer(x, y, minWidth, minHeight, config) {
         return this.displayList.add(new Sizer(this.scene, x, y, minWidth, minHeight, config));
     }
 
-    makeContainer(config) {
+    makeSizer(config) {
         var minWidth = GetAdvancedValue(config, 'minWidth', undefined);
         var minHeight = GetAdvancedValue(config, 'minHeight', minWidth);
         var sizer = new Sizer(this.scene, 0, 0, minWidth, minHeight);

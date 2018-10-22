@@ -1,5 +1,5 @@
 const Zone = Phaser.GameObjects.Zone;
-const NOOP = function () {};
+const NOOP = Phaser.Utils.NOOP;
 const AlignIn = Phaser.Display.Align.In.QuickSet;
 
 var Layout = function (parent) {
