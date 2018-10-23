@@ -1,30 +1,12 @@
-/**
- * @author       Richard Davey <rich@photonstorm.com>
- * @copyright    2018 Photon Storm Ltd.
- * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
- */
+import FillStyleCanvas from '../FillStyleCanvas.js';
+import LineStyleCanvas from '../LineStyleCanvas.js';
 
-var FillStyleCanvas = require('../FillStyleCanvas');
-var LineStyleCanvas = require('../LineStyleCanvas');
-var SetTransform = require('../../../renderer/canvas/utils/SetTransform');
+const SetTransform = Phaser.Renderer.Canvas.SetTransform;
 
-/**
- * Renders this Game Object with the Canvas Renderer to the given Camera.
- * The object will not render if any of its renderFlags are set or it is being actively filtered out by the Camera.
- * This method should not be called directly. It is a utility function of the Render module.
- *
- * @method Phaser.GameObjects.Polygon#renderCanvas
- * @since 3.13.0
- * @private
- *
- * @param {Phaser.Renderer.Canvas.CanvasRenderer} renderer - A reference to the current active Canvas renderer.
- * @param {Phaser.GameObjects.Polygon} src - The Game Object being rendered in this call.
- * @param {number} interpolationPercentage - Reserved for future use and custom pipelines.
- * @param {Phaser.Cameras.Scene2D.Camera} camera - The Camera that is rendering the Game Object.
- * @param {Phaser.GameObjects.Components.TransformMatrix} parentMatrix - This transform matrix is defined if the game object is nested
- */
-var PolygonCanvasRenderer = function (renderer, src, interpolationPercentage, camera, parentMatrix)
+var RoundRectangleCanvasRenderer = function (renderer, src, interpolationPercentage, camera, parentMatrix)
 {
+    // TODO: Draw arc directly
+    
     var ctx = renderer.currentContext;
 
     if (SetTransform(renderer, ctx, src, camera, parentMatrix))
@@ -73,4 +55,4 @@ var PolygonCanvasRenderer = function (renderer, src, interpolationPercentage, ca
     }
 };
 
-module.exports = PolygonCanvasRenderer;
+export default RoundRectangleCanvasRenderer;

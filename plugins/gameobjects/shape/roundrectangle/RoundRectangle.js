@@ -1,11 +1,10 @@
-import CONST from 'rexPlugins/geom/roundrectangle/const.js';
 import GeomRoundRectangle from 'rexPlugins/geom/roundrectangle/RoundRectangle.js';
+import LineTo from './LineTo';
+import ArcTo from './ArcTo.js';
 import Earcut from 'rexPlugins/geom/utils/Earcut.js'
 import Render from './RoundRectangleRender.js';
 
-const RECTANGLE = CONST.RECTANGLE;
-const CIRCLE = CONST.CIRCLE;
-const DegToRad = Phaser.Math.DegToRad;
+const GetValue = Phaser.Utils.Objects.GetValue;
 
 class RoundRectangle extends Phaser.GameObjects.Shape {
     constructor(scene, x, y, width, height, radiusConfig, fillColor, fillAlpha) {
@@ -16,10 +15,12 @@ class RoundRectangle extends Phaser.GameObjects.Shape {
             y = 0;
         }
 
+        var iteration = GetValue(radiusConfig, 'iteration', undefined);
+        radiusConfig = GetValue(radiusConfig, 'radius', radiusConfig);
         var geom = new GeomRoundRectangle(0, 0, width, height, radiusConfig);
         super(scene, 'RoundRectangle', geom);
 
-        this._smoothness = 32;
+        this.setIteration(iteration);
         this.setPosition(x, y);
         this.setSize(geom.width, geom.height);
 
@@ -31,8 +32,11 @@ class RoundRectangle extends Phaser.GameObjects.Shape {
         this.updateData();
     }
 
-    setSmoothness(value) {
-        this.smoothness = value;
+    setIteration(iteration) {
+        if (iteration === undefined) {
+            iteration = 6;
+        }
+        this.iteration = iteration;
         return this;
     }
 
@@ -40,42 +44,55 @@ class RoundRectangle extends Phaser.GameObjects.Shape {
         var geom = this.geom;
         var pathData = this.pathData;
 
-        var ox = this.displayOriginX;
-        var oy = this.displayOriginY;
         pathData.length = 0;
-        switch (geom.type) {
-            case CIRCLE:
-                var step = DegToRad(360 / this.smoothness);
-                var x, y, angle, radius = geom.radius;
-                for (var i = 0, cnt = this.smoothness; i < cnt; i++) {
-                    angle = i * step;
-                    x = ox + (radius * Math.cos(angle));
-                    y = oy + (radius * Math.sin(angle));
-                    pathData.push(x, y);
-                }
-                break;
-            case RECTANGLE:
-                pathData.push(ox + geom.left, oy + geom.top);
-                pathData.push(ox + geom.right, oy + geom.top);
-                pathData.push(ox + geom.right, oy + geom.bottom);
-                pathData.push(ox + geom.left, oy + geom.bottom);
-                break;
-            default:
-                break;
+
+        var cornerRadius = geom.cornerRadius,
+            radius,
+            iteration = this.iteration + 1;
+        // bottom-right
+        radius = cornerRadius.br;
+        if (radius === 0) {
+            LineTo(geom.width, geom.height, pathData);
+        } else {
+            var centerX = geom.width - radius;
+            var centerY = geom.height - radius;
+            ArcTo(centerX, centerY, radius, 0, 90, iteration, pathData);
         }
+
+        // bottom-left
+        radius = cornerRadius.bl;
+        if (radius === 0) {
+            LineTo(0, geom.height, pathData);
+        } else {
+            var centerX = radius;
+            var centerY = geom.height - radius;
+            ArcTo(centerX, centerY, radius, 90, 180, iteration, pathData);
+        }
+
+        // top-left
+        radius = cornerRadius.tl;
+        if (radius === 0) {
+            LineTo(0, 0, pathData);
+        } else {
+            var centerX = radius;
+            var centerY = radius;
+            ArcTo(centerX, centerY, radius, 180, 270, iteration, pathData);
+        }
+
+        // top-right
+        radius = cornerRadius.tr;
+        if (radius === 0) {
+            LineTo(geom.width, 0, pathData);
+        } else {
+            var centerX = geom.width - radius;
+            var centerY = radius;
+            ArcTo(centerX, centerY, radius, 270, 360, iteration, pathData);
+        }
+
 
         pathData.push(pathData[0], pathData[1]); // Repeat first point to close curve
         this.pathIndexes = Earcut(pathData);
         return this;
-    }
-
-    get smoothness() {
-        return this._smoothness;
-    }
-
-    set smoothness(value) {
-        this._smoothness = value;
-        this.updateData();
     }
 }
 
