@@ -4,9 +4,7 @@ import LineStyleCanvas from '../LineStyleCanvas.js';
 const SetTransform = Phaser.Renderer.Canvas.SetTransform;
 
 var RoundRectangleCanvasRenderer = function (renderer, src, interpolationPercentage, camera, parentMatrix)
-{
-    // TODO: Draw arc directly
-    
+{  
     var ctx = renderer.currentContext;
 
     if (SetTransform(renderer, ctx, src, camera, parentMatrix))
