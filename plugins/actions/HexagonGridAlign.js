@@ -1,8 +1,8 @@
 import HexagonGrid from 'rexPlugins/utils/grid/hexagon/Hexagon.js';
+import NOOP from 'rexPlugins/utils/object/NOOP.js';
 
 const AlignIn = Phaser.Display.Align.In.QuickSet;
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
-const NOOP = Phaser.Utils.NOOP;
 const Zone = Phaser.GameObjects.Zone;
 
 var tempZone = new Zone({

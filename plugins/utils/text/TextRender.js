@@ -5,8 +5,8 @@
  */
 import WebGLRenderer from './TextWebGLRenderer.js';
 import CanvasRenderer from './TextCanvasRenderer.js';
+import NOOP from 'rexPlugins/utils/object/NOOP.js';
 
-const NOOP = Phaser.Utils.NOOP;
 var renderWebGL = NOOP;
 var renderCanvas = NOOP;
 

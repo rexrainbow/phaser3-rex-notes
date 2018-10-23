@@ -1,7 +1,7 @@
 import WebGLRenderer from './RoundRectangleWebGLRenderer.js'
 import CanvasRenderer from './RoundRectangleCanvasRenderer.js';
+import NOOP from 'rexPlugins/utils/object/NOOP.js';
 
-const NOOP = Phaser.Utils.NOOP;
 var renderWebGL = NOOP;
 var renderCanvas = NOOP;
 
