@@ -12,6 +12,8 @@ module.exports = {
         // game objects
         'bbcodetextplugin': './plugins/bbcodetext-plugin.js',
         'bbcodetext': './plugins/bbcodetext.js',
+        'tagtextplugin': './plugins/tagtext-plugin.js',
+        'tagtext': './plugins/tagtext.js',        
         'canvasplugin': './plugins/canvas-plugin.js',
         'canvas': './plugins/canvas.js',
         'containerliteplugin': './plugins/containerlite-plugin.js',
@@ -20,8 +22,8 @@ module.exports = {
         'gridtable': './plugins/gridtable.js',
         'sizerplugin': './plugins/sizer-plugin.js',
         'sizer': './plugins/sizer.js',
-        'tagtextplugin': './plugins/tagtext-plugin.js',
-        'tagtext': './plugins/tagtext.js',
+        'roundrectangleplugin': './plugins/roundrectangle-plugin.js',
+        'roundrectangle': './plugins/roundrectangle.js',
 
         // custom file loader      
         'webfontloaderplugin': './plugins/webfontloader-plugin.js',
