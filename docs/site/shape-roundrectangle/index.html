@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/lokijs/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/shape-roundrectangle/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>LokiJs - Notes of Phaser 3</title>
+        <title>Round Rectangle - Notes of Phaser 3</title>
       
     
     
@@ -128,7 +128,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                LokiJs
+                Round Rectangle
               </span>
             
           
@@ -447,10 +447,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
     
     <label class="md-nav__link" for="nav-4">
       Game object
@@ -814,10 +816,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-4" type="checkbox" id="nav-4-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-4" type="checkbox" id="nav-4-4" checked>
     
     <label class="md-nav__link" for="nav-4-4">
       Graphics
@@ -857,10 +861,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-4-3" type="checkbox" id="nav-4-4-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-4-3" type="checkbox" id="nav-4-4-3" checked>
     
     <label class="md-nav__link" for="nav-4-4-3">
       Shape
@@ -1020,11 +1026,120 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../shape-roundrectangle/" title="Round Rectangle" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Round Rectangle
+      </label>
+    
+    <a href="./" title="Round Rectangle" class="md-nav__link md-nav__link--active">
       Round Rectangle
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-plugin" title="Install plugin" class="md-nav__link">
+    Install plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-shape" title="Create shape" class="md-nav__link">
+    Create shape
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-shape-object" title="Add shape object" class="md-nav__link">
+    Add shape object
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#deform" title="Deform" class="md-nav__link">
+    Deform
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-class" title="Custom class" class="md-nav__link">
+    Custom class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-color" title="Set color" class="md-nav__link">
+    Set color
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-properties" title="Other properties" class="md-nav__link">
+    Other properties
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -2019,12 +2134,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
     
     <label class="md-nav__link" for="nav-10">
       Data
@@ -2172,12 +2285,10 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10-5" type="checkbox" id="nav-10-5" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10-5" type="checkbox" id="nav-10-5">
     
     <label class="md-nav__link" for="nav-10-5">
       Database
@@ -2193,230 +2304,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        LokiJs
-      </label>
-    
-    <a href="./" title="LokiJs" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../lokijs/" title="LokiJs" class="md-nav__link">
       LokiJs
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#create-database" title="Create database" class="md-nav__link">
-    Create database
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#create-collection" title="Create collection" class="md-nav__link">
-    Create collection
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#insert-document" title="Insert document" class="md-nav__link">
-    Insert document
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#insert-documents" title="Insert documents" class="md-nav__link">
-    Insert documents
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#query" title="Query" class="md-nav__link">
-    Query
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#get-document-by-id" title="Get document by id" class="md-nav__link">
-    Get document by id
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#filter-documents" title="Filter documents" class="md-nav__link">
-    Filter documents
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#find-one-document" title="Find one document" class="md-nav__link">
-    Find one document
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#filter-by-function" title="Filter by function" class="md-nav__link">
-    Filter by function
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sort" title="Sort" class="md-nav__link">
-    Sort
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pagination" title="Pagination" class="md-nav__link">
-    Pagination
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#update" title="Update" class="md-nav__link">
-    Update
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#remove" title="Remove" class="md-nav__link">
-    Remove
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#map" title="Map" class="md-nav__link">
-    Map
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#map-reduce" title="Map-reduce" class="md-nav__link">
-    Map-reduce
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#clone-result-set" title="Clone result set" class="md-nav__link">
-    Clone result set
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#dynamic-view" title="Dynamic view" class="md-nav__link">
-    Dynamic view
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#speed-up-quering" title="Speed-up quering" class="md-nav__link">
-    Speed-up quering
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#custom-unique-index" title="Custom unique index" class="md-nav__link">
-    Custom unique index
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#binary-indices" title="Binary indices" class="md-nav__link">
-    Binary indices
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#methods-of-collection" title="Methods of collection" class="md-nav__link">
-    Methods of collection
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#serialize-deserialize" title="Serialize &amp; Deserialize" class="md-nav__link">
-    Serialize &amp; Deserialize
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -3428,6 +3320,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#usage" title="Usage" class="md-nav__link">
     Usage
   </a>
@@ -3436,30 +3335,30 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#create-database" title="Create database" class="md-nav__link">
-    Create database
+  <a href="#install-plugin" title="Install plugin" class="md-nav__link">
+    Install plugin
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-collection" title="Create collection" class="md-nav__link">
-    Create collection
+  <a href="#create-shape" title="Create shape" class="md-nav__link">
+    Create shape
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#insert-document" title="Insert document" class="md-nav__link">
-    Insert document
+  <a href="#add-shape-object" title="Add shape object" class="md-nav__link">
+    Add shape object
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#insert-documents" title="Insert documents" class="md-nav__link">
-    Insert documents
+  <a href="#deform" title="Deform" class="md-nav__link">
+    Deform
   </a>
   
 </li>
@@ -3470,139 +3369,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#query" title="Query" class="md-nav__link">
-    Query
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#get-document-by-id" title="Get document by id" class="md-nav__link">
-    Get document by id
+  <a href="#custom-class" title="Custom class" class="md-nav__link">
+    Custom class
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#filter-documents" title="Filter documents" class="md-nav__link">
-    Filter documents
+  <a href="#set-color" title="Set color" class="md-nav__link">
+    Set color
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#find-one-document" title="Find one document" class="md-nav__link">
-    Find one document
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#filter-by-function" title="Filter by function" class="md-nav__link">
-    Filter by function
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sort" title="Sort" class="md-nav__link">
-    Sort
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pagination" title="Pagination" class="md-nav__link">
-    Pagination
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#update" title="Update" class="md-nav__link">
-    Update
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#remove" title="Remove" class="md-nav__link">
-    Remove
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#map" title="Map" class="md-nav__link">
-    Map
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#map-reduce" title="Map-reduce" class="md-nav__link">
-    Map-reduce
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#clone-result-set" title="Clone result set" class="md-nav__link">
-    Clone result set
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#dynamic-view" title="Dynamic view" class="md-nav__link">
-    Dynamic view
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#speed-up-quering" title="Speed-up quering" class="md-nav__link">
-    Speed-up quering
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#custom-unique-index" title="Custom unique index" class="md-nav__link">
-    Custom unique index
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#binary-indices" title="Binary indices" class="md-nav__link">
-    Binary indices
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#methods-of-collection" title="Methods of collection" class="md-nav__link">
-    Methods of collection
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#serialize-deserialize" title="Serialize &amp; Deserialize" class="md-nav__link">
-    Serialize &amp; Deserialize
+  <a href="#other-properties" title="Other properties" class="md-nav__link">
+    Other properties
   </a>
   
 </li>
@@ -3628,300 +3410,147 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/lokijs.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/shape-roundrectangle.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>LokiJs</h1>
+                  <h1>Round Rectangle</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>In-memory JavaScript Datastore with Persistence.</p>
+<p>Round rectangle shape.</p>
 <ul>
-<li><a href="http://lokijs.org/">Reference</a></li>
-<li><a href="https://rawgit.com/techfort/LokiJS/master/jsdoc/index.html">API</a></li>
+<li>Author: Rex</li>
+<li>A kind of game object</li>
 </ul>
+<h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/roundrectangle-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexroundrectangleplugin.min.js">minify</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/roundrectangle.js">Class</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/lokijs">Sample code</a></p>
-<h3 id="create-database">Create database<a class="headerlink" href="#create-database" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">db</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">loki</span><span class="p">();</span>
-<span class="c1">// var db = new loki(&#39;loki.json&#39;);  // load database from file</span>
-</pre></div>
-
-<h3 id="create-collection">Create collection<a class="headerlink" href="#create-collection" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">collection</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">addCollection</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
-</pre></div>
-
-<h3 id="insert-document">Insert document<a class="headerlink" href="#insert-document" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">docInColl</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">insert</span><span class="p">(</span><span class="nx">doc</span><span class="p">);</span>  <span class="c1">// doc: an object</span>
-</pre></div>
-
-<p>Get Id</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">id</span> <span class="o">=</span> <span class="nx">docInColl</span><span class="p">.</span><span class="nx">$loki</span><span class="p">;</span>
-</pre></div>
-
-<h4 id="insert-documents">Insert documents<a class="headerlink" href="#insert-documents" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">collection</span><span class="p">.</span><span class="nx">insert</span><span class="p">(</span><span class="nx">docArray</span><span class="p">);</span>  <span class="c1">// documents in array</span>
-</pre></div>
-
-<h3 id="query">Query<a class="headerlink" href="#query" title="Permanent link">&para;</a></h3>
-<h4 id="get-document-by-id">Get document by id<a class="headerlink" href="#get-document-by-id" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">doc</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">id</span><span class="p">);</span>  <span class="c1">// id: `$loki`</span>
-</pre></div>
-
-<h4 id="filter-documents">Filter documents<a class="headerlink" href="#filter-documents" title="Permanent link">&para;</a></h4>
-<ul>
-<li><strong>$eq</strong> : filter for document(s) with property of (strict) equality
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="nx">value</span><span class="p">});</span>
-<span class="c1">// var docArray = collection.find({key: {&#39;$eq&#39;: value});</span>
-</pre></div></li>
-<li><strong>$aeq</strong> : filter for document(s) with property of abstract (loose) equality
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$aeq&#39;</span><span class="o">:</span> <span class="nx">value</span><span class="p">});</span>
-</pre></div>
-    For example
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">results</span> <span class="o">=</span> <span class="nx">coll</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">age</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$aeq&#39;</span><span class="o">:</span> <span class="mi">20</span><span class="p">}});</span>  <span class="c1">// age == &#39;20&#39; or age == 20</span>
-</pre></div></li>
-<li><strong>$ne</strong> : filter for document(s) with property not equal to provided value
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$ne&#39;</span><span class="o">:</span> <span class="nx">value</span><span class="p">});</span>
-</pre></div></li>
-<li><strong>$gt</strong> : filter for document(s) with property greater than provided value
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$gt&#39;</span><span class="o">:</span> <span class="nx">value</span><span class="p">});</span>
-</pre></div></li>
-<li><strong>$gte</strong> : filter for document(s) with property greater or equal to provided value
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$gte&#39;</span><span class="o">:</span> <span class="nx">value</span><span class="p">});</span>
-</pre></div></li>
-<li><strong>$lt</strong> : filter for document(s) with property less than provided value
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$lt&#39;</span><span class="o">:</span> <span class="nx">value</span><span class="p">});</span>
-</pre></div></li>
-<li><strong>$lte</strong> : filter for document(s) with property less than or equal to provided value
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$lte&#39;</span><span class="o">:</span> <span class="nx">value</span><span class="p">});</span>
-</pre></div></li>
-<li><strong>$between</strong> : filter for documents(s) with property between provided values
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$between&#39;</span><span class="o">:</span> <span class="p">[</span><span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">]});</span>
-</pre></div></li>
-<li><strong>$in</strong> : filter for document(s) with property matching any of the provided array values
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$in&#39;</span><span class="o">:</span> <span class="p">[</span><span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="p">...]});</span>
-</pre></div>
-    Your property should not be an array but your compare values should be.</li>
-<li><strong>$nin</strong> : filter for document(s) with property not matching any of the provided array values
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$nin&#39;</span><span class="o">:</span> <span class="p">[</span><span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="p">...]});</span>
-</pre></div></li>
-<li><strong>$contains</strong> : filter for document(s) with property containing the provided value
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$contains&#39;</span><span class="o">:</span> <span class="nx">value</span><span class="p">});</span>
-</pre></div>
-    Use this when your property contains an array but your compare value is not an array</li>
-<li><strong>$containsAny</strong> : filter for document(s) with property containing any of the provided values
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$containsAny&#39;</span><span class="o">:</span> <span class="p">[</span><span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="p">...]});</span>
-</pre></div></li>
-<li><strong>$containsNone</strong> : filter for documents(s) with property containing none of the provided values
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$containsNone&#39;</span><span class="o">:</span> <span class="p">[</span><span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="p">...]});</span>
-</pre></div></li>
-<li><strong>$regex</strong> : filter for document(s) with property matching provided regular expression
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$regex&#39;</span><span class="o">:</span> <span class="nx">pattern</span><span class="p">});</span>
-<span class="c1">// var docArray = collection.find({key: {&#39;$regex&#39;: [pattern, options]});</span>
-</pre></div>
-    For example
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="p">{</span> <span class="s1">&#39;$regex&#39;</span><span class="o">:</span> <span class="s1">&#39;din&#39;</span> <span class="p">}});</span>
-<span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="p">{</span> <span class="s1">&#39;$regex&#39;</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;din&#39;</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">]</span> <span class="p">}});</span>
-</pre></div></li>
-<li><strong>$dteq</strong>: filter for document(s) with date property equal to provided date value
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$dteq&#39;</span><span class="o">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">(</span><span class="s1">&#39;1/1/2017&#39;</span><span class="p">)});</span>
-</pre></div></li>
-<li><strong>$type</strong> : filter for documents which have a property of a specified type
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$type&#39;</span><span class="o">:</span> <span class="nx">value</span><span class="p">});</span> <span class="c1">// &#39;string&#39;, or &#39;number&#39;, ...</span>
-</pre></div></li>
-<li><strong>$size</strong> : filter for documents which have array property of specified size
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$size&#39;</span><span class="o">:</span> <span class="nx">value</span><span class="p">});</span>
-</pre></div>
-    <em>(does not work for strings)</em></li>
-<li><strong>$len</strong> : filter for documents which have string property of specified length
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$len&#39;</span><span class="o">:</span> <span class="nx">value</span><span class="p">});</span>
-</pre></div></li>
-<li><strong>$or</strong> : filter for documents which meet any of the nested subexpressions
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="s1">&#39;$or&#39;</span><span class="o">:</span> <span class="p">[</span>
-    <span class="p">{</span><span class="nx">key0</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$lt&#39;</span><span class="o">:</span> <span class="nx">value0</span><span class="p">},</span>
-    <span class="p">{</span><span class="nx">key1</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$gte&#39;</span><span class="o">:</span> <span class="nx">value1</span><span class="p">},</span>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/roundrectangle">Sample code</a></p>
+<h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
+<p>Install plugin in <a href="../game/#configuration">configuration of game</a></p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
-<span class="p">]});</span>
-</pre></div></li>
-</ul>
-<h4 id="find-one-document">Find one document<a class="headerlink" href="#find-one-document" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">doc</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({});</span>
-</pre></div>
-
-<h4 id="filter-by-function">Filter by function<a class="headerlink" href="#filter-by-function" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">where</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">doc</span><span class="p">){</span>
-    <span class="c1">// ...</span>
-    <span class="k">return</span> <span class="nx">isPicked</span><span class="p">;</span>  <span class="c1">// true to pick this document</span>
-<span class="p">})</span>
-</pre></div>
-
-<h4 id="sort">Sort<a class="headerlink" href="#sort" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Sort with a key
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">chain</span><span class="p">().</span><span class="nx">find</span><span class="p">({}).</span><span class="nx">simplesort</span><span class="p">(</span><span class="nx">key</span><span class="p">).</span><span class="nx">data</span><span class="p">();</span>  <span class="c1">// ascending</span>
-<span class="c1">// var docArray = collection.chain().find({}).simplesort(key, {desc: true}).data();  // descending</span>
-</pre></div></li>
-<li>Sort with mutiple keys
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">chain</span><span class="p">().</span><span class="nx">find</span><span class="p">({}).</span><span class="nx">compoundsort</span><span class="p">([</span><span class="nx">key0</span><span class="p">,</span> <span class="nx">key1</span><span class="p">]).</span><span class="nx">data</span><span class="p">();</span>  <span class="c1">// key0, key1: ascending</span>
-<span class="c1">// var docArray = collection.chain().find({}).compoundsort([key0, [key1, true]]).data(); // key0: ascending, key1: descending</span>
-</pre></div></li>
-<li>Sort with function
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">chain</span><span class="p">().</span><span class="nx">find</span><span class="p">({}).</span><span class="nx">sort</span><span class="p">(</span>
-    <span class="kd">function</span><span class="p">(</span><span class="nx">doc1</span><span class="p">,</span> <span class="nx">doc2</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="nx">result</span><span class="p">;</span> <span class="c1">// 0, 1, -1</span>
-    <span class="p">})</span>
-    <span class="p">.</span><span class="nx">data</span><span class="p">();</span>
-</pre></div>
-    result:<ul>
-<li><code>0</code>: equal</li>
-<li><code>1</code>: greater</li>
-<li><code>-1</code>: less</li>
-</ul>
-</li>
-</ul>
-<h4 id="pagination">Pagination<a class="headerlink" href="#pagination" title="Permanent link">&para;</a></h4>
-<p>Get documents from <code>start</code> to <code>start+count-1</code>.</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">chain</span><span class="p">().</span><span class="nx">find</span><span class="p">({}).</span><span class="nx">offset</span><span class="p">(</span><span class="nx">start</span><span class="p">).</span><span class="nx">limit</span><span class="p">(</span><span class="nx">count</span><span class="p">).</span><span class="nx">data</span><span class="p">();</span>
-</pre></div>
-
-<h4 id="update">Update<a class="headerlink" href="#update" title="Permanent link">&para;</a></h4>
-<p>Update each filtered documents.</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">chain</span><span class="p">().</span><span class="nx">find</span><span class="p">({}).</span><span class="nx">update</span><span class="p">(</span>
-    <span class="kd">function</span><span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span> 
-        <span class="c1">//</span>
-        <span class="k">return</span> <span class="nx">doc</span><span class="p">;</span>
-    <span class="p">});</span>
-</pre></div>
-
-<h4 id="remove">Remove<a class="headerlink" href="#remove" title="Permanent link">&para;</a></h4>
-<p>Remove filtered documents.</p>
-<div class="codehilite"><pre><span></span><span class="nx">collection</span><span class="p">.</span><span class="nx">chain</span><span class="p">().</span><span class="nx">find</span><span class="p">({}).</span><span class="nx">remove</span><span class="p">();</span>
-</pre></div>
-
-<h4 id="map">Map<a class="headerlink" href="#map" title="Permanent link">&para;</a></h4>
-<p>Map document into a new anonymous collection, won't affect original collection.</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">chain</span><span class="p">().</span><span class="nx">find</span><span class="p">({}).</span><span class="nx">map</span><span class="p">(</span>
-    <span class="kd">function</span><span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexRoundRectanglePlugin&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">RoundRectanglePlugin</span><span class="p">,</span>
+            <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="p">},</span>
         <span class="c1">// ...</span>
-        <span class="k">return</span> <span class="nx">doc</span>
-    <span class="p">})</span>
-    <span class="p">.</span><span class="nx">data</span><span class="p">();</span>
-</pre></div>
-
-<h4 id="map-reduce">Map-reduce<a class="headerlink" href="#map-reduce" title="Permanent link">&para;</a></h4>
-<ol>
-<li>Map document into a new anonymous collection</li>
-<li>Run reduceFn to get final result value from result set of step 1.</li>
-</ol>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">mapFn</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
     <span class="c1">// ...</span>
-    <span class="k">return</span> <span class="nx">doc</span>
 <span class="p">};</span>
-<span class="kd">var</span> <span class="nx">reduceFn</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">docArray</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// ...</span>
-    <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</pre></div>
+
+<h3 id="create-shape">Create shape<a class="headerlink" href="#create-shape" title="Permanent link">&para;</a></h3>
+<h3 id="add-shape-object">Add shape object<a class="headerlink" href="#add-shape-object" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexRoundRectangle</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">fillColor</span><span class="p">);</span>
+<span class="c1">// var rect = scene.add.rexRoundRectangle(x, y, width, height, radius, fillColor, fillAlpha);</span>
+</pre></div>
+
+<p>or</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexRoundRectangle</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">tl</span><span class="o">:</span> <span class="nx">radius</span><span class="p">,</span>
+    <span class="nx">tr</span><span class="o">:</span> <span class="nx">radius</span><span class="p">,</span>
+    <span class="nx">bl</span><span class="o">:</span> <span class="nx">radius</span><span class="p">,</span>
+    <span class="nx">br</span><span class="o">:</span> <span class="nx">radius</span>
+<span class="p">},</span> <span class="nx">fillColor</span><span class="p">,</span> <span class="nx">fillAlpha</span><span class="p">);</span>
+</pre></div>
+
+<p>or</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexRoundRectangle</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">radius</span><span class="o">:</span> <span class="nx">radius</span><span class="p">,</span>
+    <span class="nx">iteration</span><span class="o">:</span> <span class="mi">6</span>
+<span class="p">},</span> <span class="nx">fillColor</span><span class="p">,</span> <span class="nx">fillAlpha</span><span class="p">);</span>
+</pre></div>
+
+<p>or</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexRoundRectangle</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">tl</span><span class="o">:</span> <span class="nx">radius</span><span class="p">,</span>
+    <span class="nx">tr</span><span class="o">:</span> <span class="nx">radius</span><span class="p">,</span>
+    <span class="nx">bl</span><span class="o">:</span> <span class="nx">radius</span><span class="p">,</span>
+    <span class="nx">br</span><span class="o">:</span> <span class="nx">radius</span><span class="p">,</span>
+    <span class="nx">iteration</span><span class="o">:</span> <span class="mi">6</span>
+<span class="p">},</span> <span class="nx">fillColor</span><span class="p">,</span> <span class="nx">fillAlpha</span><span class="p">);</span>
+</pre></div>
+
+<ul>
+<li><code>width</code>, <code>height</code> : Size of rectangle.<ul>
+<li><code>undefined</code> : Set ot <code>undefined</code> to draw a circle.</li>
+</ul>
+</li>
+<li><code>radius</code> : Radius of four corners.<ul>
+<li><code>0</code>, or <code>undefined</code> : Disable round corner.</li>
+<li>Number: 4 corners with the same radius.</li>
+<li>JSON : Defined each radius of corner
+    <div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nx">tl</span><span class="o">:</span> <span class="nx">radius</span><span class="p">,</span>
+    <span class="nx">tr</span><span class="o">:</span> <span class="nx">radius</span><span class="p">,</span>
+    <span class="nx">bl</span><span class="o">:</span> <span class="nx">radius</span><span class="p">,</span>
+    <span class="nx">br</span><span class="o">:</span> <span class="nx">radius</span>
 <span class="p">}</span>
-<span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">chain</span><span class="p">().</span><span class="nx">find</span><span class="p">({}).</span><span class="nx">mapReduce</span><span class="p">(</span><span class="nx">mapFn</span><span class="p">,</span> <span class="nx">reduceFn</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="clone-result-set">Clone result set<a class="headerlink" href="#clone-result-set" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">resultSet</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">chain</span><span class="p">().</span><span class="nx">find</span><span class="p">({});</span>
-<span class="kd">var</span> <span class="nx">resultSetClone</span> <span class="o">=</span> <span class="nx">resultSet</span><span class="p">.</span><span class="nx">branch</span><span class="p">();</span>
-
-<span class="c1">// resultSetClone.find({}).data();</span>
-</pre></div>
-
-<h3 id="dynamic-view">Dynamic view<a class="headerlink" href="#dynamic-view" title="Permanent link">&para;</a></h3>
-<ol>
-<li>Create dynamic view
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">view</span> <span class="o">=</span> <span class="nx">children</span><span class="p">.</span><span class="nx">addDynamicView</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
 </pre></div></li>
-<li>Add filters<ul>
-<li>find
-    <div class="codehilite"><pre><span></span><span class="nx">view</span><span class="p">.</span><span class="nx">applyFind</span><span class="p">({});</span>
-</pre></div></li>
-<li>where
-    <div class="codehilite"><pre><span></span><span class="nx">view</span><span class="p">.</span><span class="nx">applyWhere</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">doc</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="kc">true</span><span class="p">;</span> <span class="p">});</span>
-</pre></div></li>
-<li>simple sort
-    <div class="codehilite"><pre><span></span><span class="nx">view</span><span class="p">.</span><span class="nx">applySimpleSort</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</pre></div></li>
-<li>sort by multiple keys
-    <div class="codehilite"><pre><span></span><span class="nx">view</span><span class="p">.</span><span class="nx">applySortCriteria</span><span class="p">([</span><span class="nx">key0</span><span class="p">,</span> <span class="nx">key1</span><span class="p">]);</span>
-<span class="c1">// view.applySortCriteria([key0, [key1, true]]);</span>
-</pre></div></li>
-<li>sort function
-    <div class="codehilite"><pre><span></span><span class="nx">view</span><span class="p">.</span><span class="nx">applySort</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">doc1</span><span class="p">,</span> <span class="nx">doc2</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">result</span><span class="p">;</span> <span class="c1">// 0, 1, -1</span>
-<span class="p">});</span>
-</pre></div>
-    result:<ul>
-<li><code>0</code>: equal</li>
-<li><code>1</code>: greater</li>
-<li><code>-1</code>: less</li>
+</ul>
+</li>
+<li><code>iteration</code> : Number of interpolation points in each round corner. Default value is <code>4</code>.<ul>
+<li><code>0</code> : Draw a straight line instead of arc.</li>
 </ul>
 </li>
 </ul>
-</li>
-<li>Get result data
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">data</span><span class="p">();</span>
-</pre></div></li>
-</ol>
-<p>Add new filters
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">branchResultset</span><span class="p">().</span><span class="nx">find</span><span class="p">({}).</span><span class="nx">data</span><span class="p">();</span>
-</pre></div></p>
-<h3 id="speed-up-quering">Speed-up quering<a class="headerlink" href="#speed-up-quering" title="Permanent link">&para;</a></h3>
-<h4 id="custom-unique-index">Custom unique index<a class="headerlink" href="#custom-unique-index" title="Permanent link">&para;</a></h4>
-<ol>
-<li>Define custom unique index
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">collection</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">addCollection</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="p">{</span>
-    <span class="nx">unique</span><span class="o">:</span> <span class="p">[</span><span class="nx">key0</span><span class="p">]</span>
-<span class="p">});</span>
-</pre></div></li>
-<li>Get document by custom unique index
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">doc</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">by</span><span class="p">(</span><span class="nx">key0</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
-</pre></div></li>
-</ol>
-<h4 id="binary-indices">Binary indices<a class="headerlink" href="#binary-indices" title="Permanent link">&para;</a></h4>
-<ol>
-<li>Define binary index
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">collection</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">addCollection</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="p">{</span>
-    <span class="nx">indices</span><span class="o">:</span> <span class="p">[</span><span class="nx">key0</span><span class="p">]</span>
-<span class="p">});</span>
-</pre></div>
-    Or
-    <div class="codehilite"><pre><span></span><span class="nx">collection</span><span class="p">.</span><span class="nx">ensureIndex</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</pre></div></li>
-<li>Get documents by normal filters
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">docArray</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">find</span><span class="p">({</span><span class="nx">key0</span><span class="o">:</span> <span class="p">{</span><span class="s1">&#39;$gt&#39;</span><span class="o">:</span> <span class="nx">value</span><span class="p">}});</span>
-</pre></div></li>
-</ol>
-<h3 id="methods-of-collection">Methods of collection<a class="headerlink" href="#methods-of-collection" title="Permanent link">&para;</a></h3>
+<h4 id="deform">Deform<a class="headerlink" href="#deform" title="Permanent link">&para;</a></h4>
 <ul>
-<li>Average value of a property
-   <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">avgValue</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">avg</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+<li>Rectangle, set radius of 4 corners to <code>0</code>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexRoundRectangle</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span>  <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">fillColor</span><span class="p">,</span> <span class="nx">fillAlpha</span><span class="p">);</span>
 </pre></div></li>
-<li>Maximum value of a property
-   <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">maxValue</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+<li>Circle, set width and height to <code>undefined</code>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexRoundRectangle</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">fillColor</span><span class="p">,</span> <span class="nx">fillAlpha</span><span class="p">);</span>
 </pre></div></li>
-<li>Minimum value of a property
-   <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">minValue</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">min</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+<li>Rhombus, set width and height to <code>undefined</code>, and assign iteration to <code>0</code>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexRoundRectangle</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">radius</span><span class="o">:</span> <span class="nx">radius</span><span class="p">,</span>
+    <span class="nx">iteration</span><span class="o">:</span> <span class="mi">0</span>
+<span class="p">},</span> <span class="nx">fillColor</span><span class="p">,</span> <span class="nx">fillAlpha</span><span class="p">);</span>
 </pre></div></li>
-<li>Median value of a property
-   <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">medianValue</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">median</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</pre></div></li>
-<li>Amount of documents
-   <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">amount</span> <span class="o">=</span> <span class="nx">collection</span><span class="p">.</span><span class="nx">count</span><span class="p">(</span><span class="nx">query</span><span class="p">);</span>  <span class="c1">// {key: {&#39;$gt&#39;: value}}</span>
+<li>Octagon, assign iteration to <code>0</code>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexRoundRectangle</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">radius</span><span class="o">:</span> <span class="nx">radius</span><span class="p">,</span>
+    <span class="nx">iteration</span><span class="o">:</span> <span class="mi">0</span>
+<span class="p">},</span> <span class="nx">fillColor</span><span class="p">,</span> <span class="nx">fillAlpha</span><span class="p">);</span>
 </pre></div></li>
 </ul>
-<h3 id="serialize-deserialize">Serialize &amp; Deserialize<a class="headerlink" href="#serialize-deserialize" title="Permanent link">&para;</a></h3>
+<h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Database as string
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="nx">db</span><span class="p">.</span><span class="nx">serialize</span><span class="p">();</span>
+<li>Define class
+    <div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">MyRoundRectangle</span> <span class="kr">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">GameObjects</span><span class="p">.</span><span class="nx">RoundRectangle</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">fillColor</span><span class="p">,</span> <span class="nx">fillAlpha</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">fillColor</span><span class="p">,</span> <span class="nx">fillAlpha</span><span class="p">);</span>
+        <span class="c1">// ...</span>
+        <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
 </pre></div></li>
-<li>Load database from string
-    <div class="codehilite"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">loadJSON</span><span class="p">(</span><span class="nx">s</span><span class="p">);</span>
+<li>Create instance
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyRoundRectangle</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">fillColor</span><span class="p">,</span> <span class="nx">fillAlpha</span><span class="p">);</span>
 </pre></div></li>
 </ul>
+<h3 id="set-color">Set color<a class="headerlink" href="#set-color" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Fill color
+    <div class="codehilite"><pre><span></span><span class="nx">rect</span><span class="p">.</span><span class="nx">setFillStyle</span><span class="p">(</span><span class="nx">color</span><span class="p">,</span> <span class="nx">alpha</span><span class="p">);</span>
+</pre></div></li>
+<li>Stroke color
+    <div class="codehilite"><pre><span></span><span class="nx">rect</span><span class="p">.</span><span class="nx">setStrokeStyle</span><span class="p">(</span><span class="nx">lineWidth</span><span class="p">,</span> <span class="nx">color</span><span class="p">,</span> <span class="nx">alpha</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">No tint methods</p>
+<p>Uses <code>rect.setFillStyle(color, alpha)</code> to change color.</p>
+</div>
+<h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
+<p>See <a href="../gameobject/">game object</a></p>
                 
                   
                 
@@ -3942,7 +3571,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../csvtohashtable/" title="CSV to hash table" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../shape-isotriangle/" title="Iso triangle" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -3951,19 +3580,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                CSV to hash table
+                Iso triangle
               </span>
             </div>
           </a>
         
         
-          <a href="../interpolation/" title="Interpolation" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../canvas/" title="Canvas" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Interpolation
+                Canvas
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
