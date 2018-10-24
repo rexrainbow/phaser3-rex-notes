@@ -52,6 +52,7 @@ nav:
             - Grid: shape-grid.md
             - Iso box: shape-isobox.md
             - Iso triangle: shape-isotriangle.md
+            - Round Rectangle: shape-roundrectangle.md
         - Canvas: canvas.md        
     - Tile map:
         - Tile map: tilemap.md

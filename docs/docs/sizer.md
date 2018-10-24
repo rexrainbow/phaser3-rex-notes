@@ -5,7 +5,7 @@ Layout children game objects.
 It is inspired from [wxSizer](https://docs.wxwidgets.org/3.0/overview_sizer.html).
 
 - Author: Rex
-- A kind of game object, installed by global plugin
+- A kind of game object
 
 ## Source code
 
@@ -80,7 +80,6 @@ var sizer = scene.make.rexSizer({
     minWidth: undefined,
     minHeight: undefined,
     orientation: 0,
-    // boundsColor: 0xff0000,
 
     // angle: 0,
     // alpha: 1
@@ -99,13 +98,12 @@ var sizer = scene.make.rexSizer({
     - `'vertical'`,`'v'`, `'y'`, or `1` : Arrange game objects from top to bottom.
 - `minWidth` : Minimum width. i.e. Width of this sizer will bigger then this value.
 - `minHeight` : Minimum height. i.e. Hieght of this sizer will bigger then this value.
-- `boundsColor` : Color of bounds, see [Draw bounds](sizer.md#draw-bounds)
 
 ### Custom class
 
 - Define class
     ```javascript
-    class MySizer extends Sizer {
+    class MySizer extends RexPlugins.GameObjects.Sizer {
         constructor(scene, x, y, minWidth, minHeight, config) {
             super(scene, x, y, minWidth, minHeight, config);
             // ...
@@ -170,10 +168,11 @@ sizer.layout();
 Draw all bounds of children.
 
 ```javascript
-sizer.drawBounds(graphics);
+sizer.drawBounds(graphics, color);
 ```
 
 - `graphics` : [Graphics game object](graphics.md)
+- `color` : Default value is `0xffffff`
 
 ### Other properties
 

@@ -3,7 +3,7 @@
 Await custom task in preload stage.
 
 - Author: Rex
-- Custom File of loader, installed by global plugin
+- Custom File of loader
 
 ## Source code
 

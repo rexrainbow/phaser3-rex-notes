@@ -1,5 +1,5 @@
-import FillPathWebGL from '../FillPathWebGL.js';
-import StrokePathWebGL from '../StrokePathWebGL.js';
+import FillPathWebGL from '../utils/FillPathWebGL.js';
+import StrokePathWebGL from '../utils/StrokePathWebGL.js';
 
 var RoundRectangleWebGLRenderer = function (renderer, src, interpolationPercentage, camera, parentMatrix)
 {

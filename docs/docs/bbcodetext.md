@@ -3,7 +3,7 @@
 Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
 
 - Author: Rex
-- A kind of game object, installed by global plugin
+- A kind of game object
 
 ## Source code
 

@@ -1,5 +1,5 @@
-import FillStyleCanvas from '../FillStyleCanvas.js';
-import LineStyleCanvas from '../LineStyleCanvas.js';
+import FillStyleCanvas from '../utils/FillStyleCanvas.js';
+import LineStyleCanvas from '../utils/LineStyleCanvas.js';
 
 const SetTransform = Phaser.Renderer.Canvas.SetTransform;
 

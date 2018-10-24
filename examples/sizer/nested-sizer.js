@@ -37,7 +37,7 @@ class Demo extends Phaser.Scene {
             };
 
         var sizer = getTable(this, x, y, minWidth, minHeight, table);
-        sizer.drawBounds(this.add.graphics());
+        sizer.drawBounds(this.add.graphics(), 0xff0000);
     }
 
     update() {}

@@ -3,7 +3,7 @@
 Displays text with multi-color, font face, or font size with tags.
 
 - Author: Rex
-- A kind of game object, installed by global plugin
+- A kind of game object
 
 ## Source code
 

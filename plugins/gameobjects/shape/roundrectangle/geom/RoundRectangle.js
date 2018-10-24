@@ -1,17 +1,8 @@
-import CONST from './const.js';
-import IsRectangle from './IsRectangle.js';
-import IsCircle from './IsCircle.js';
-import Contains from './Contains.js';
-
 const GetValue = Phaser.Utils.Objects.GetValue;
-const ROUNDRECTANGLE = CONST.ROUNDRECTANGLE;
-const RECTANGLE = CONST.RECTANGLE;
-const CIRCLE = CONST.CIRCLE;
 
 class RoundRectangle {
     constructor(x, y, width, height, radiusConfig) {
         this.cornerRadius = {};
-        this.radius = 0;
         this.width = 0;
         this.height = 0;
         this.setTo(x, y, width, height, radiusConfig);
@@ -52,7 +43,6 @@ class RoundRectangle {
             radius.bl = GetValue(radiusConfig, 'bl', 0);
             radius.br = GetValue(radiusConfig, 'br', 0);
         }
-        this.updateType();
         return this;
     }
 
@@ -67,61 +57,7 @@ class RoundRectangle {
         }
         this.width = width;
         this.height = height;
-        this.updateType();
         return this;
-    }
-
-    setEmpty() {
-        this.setSize(0, 0);
-        return this;
-    }
-
-    updateType() {
-        if (IsRectangle(this)) {
-            this.type = RECTANGLE;
-        } else if (IsCircle(this)) {
-            this.type = CIRCLE;
-            this.radius = this.cornerRadius.tl;
-        } else {
-            this.type = ROUNDRECTANGLE;
-        }
-        return this;
-    }
-
-    contains(x, y) {
-        return Contains(this, x, y);
-    }
-
-    get left() {
-        return this.x - (this.width / 2);
-    }
-
-    set left(value) {
-        this.x = value + (this.width / 2);
-    }
-
-    get right() {
-        return this.x + (this.width / 2);
-    }
-
-    set right(value) {
-        this.x = value - (this.width / 2);
-    }
-
-    get top() {
-        return this.y - (this.height / 2);
-    }
-
-    set top(value) {
-        this.y = value + (this.height / 2);
-    }
-
-    get bottom() {
-        return this.y + (this.height / 2);
-    }
-
-    set bottom(value) {
-        this.y = value - (this.height / 2);
     }
 }
 export default RoundRectangle;

@@ -1,6 +1,6 @@
-import GeomRoundRectangle from 'rexPlugins/geom/roundrectangle/RoundRectangle.js';
-import LineTo from './LineTo';
-import ArcTo from './ArcTo.js';
+import GeomRoundRectangle from './geom/RoundRectangle.js';
+import LineTo from '../utils/LineTo.js';
+import ArcTo from '../utils/ArcTo.js';
 import Earcut from 'rexPlugins/geom/utils/Earcut.js'
 import Render from './RoundRectangleRender.js';
 
@@ -56,7 +56,7 @@ class RoundRectangle extends Phaser.GameObjects.Shape {
         } else {
             var centerX = geom.width - radius;
             var centerY = geom.height - radius;
-            ArcTo(centerX, centerY, radius, 0, 90, iteration, pathData);
+            ArcTo(centerX, centerY, radius, 0, 90, false, iteration, pathData);
         }
 
         // bottom-left
@@ -66,7 +66,7 @@ class RoundRectangle extends Phaser.GameObjects.Shape {
         } else {
             var centerX = radius;
             var centerY = geom.height - radius;
-            ArcTo(centerX, centerY, radius, 90, 180, iteration, pathData);
+            ArcTo(centerX, centerY, radius, 90, 180, false, iteration, pathData);
         }
 
         // top-left
@@ -76,7 +76,7 @@ class RoundRectangle extends Phaser.GameObjects.Shape {
         } else {
             var centerX = radius;
             var centerY = radius;
-            ArcTo(centerX, centerY, radius, 180, 270, iteration, pathData);
+            ArcTo(centerX, centerY, radius, 180, 270, false, iteration, pathData);
         }
 
         // top-right
@@ -86,9 +86,8 @@ class RoundRectangle extends Phaser.GameObjects.Shape {
         } else {
             var centerX = geom.width - radius;
             var centerY = radius;
-            ArcTo(centerX, centerY, radius, 270, 360, iteration, pathData);
+            ArcTo(centerX, centerY, radius, 270, 360, false, iteration, pathData);
         }
-
 
         pathData.push(pathData[0], pathData[1]); // Repeat first point to close curve
         this.pathIndexes = Earcut(pathData);

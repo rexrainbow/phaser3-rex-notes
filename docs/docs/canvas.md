@@ -3,7 +3,7 @@
 Drawing on [canvas](https://www.w3schools.com/html/html5_canvas.asp).
 
 - Author: Rex
-- A kind of game object, installed by global plugin
+- A kind of game object
 
 ## Source code
 

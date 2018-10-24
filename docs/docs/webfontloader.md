@@ -3,7 +3,7 @@
 Load web font by [google webfont loader](https://github.com/typekit/webfontloader) in payload or preload stage.
 
 - Author: Rex
-- Custom File of loader, installed by global plugin
+- Custom File of loader
 
 ## Source code
 

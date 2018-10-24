@@ -40,6 +40,7 @@
 1. [Pixelation-pipeline](pixelationpipeline.md): Pixelation post processing filter.
 1. [Rhombus](geom-rhombus.md): Rhombus shape and methods.
 1. [RotateTo](rotateto.md): Rotate game object towards target position with a steady speed.
+1. [Round-Rectangle](shape-roundrectangle.md): Round rectangle shape.
 1. [Run-commands](runcommands.md): Run commands in array.
 1. [Scroller](scroller.md): Drag content. Slow down when dragging released, pull back when out of bounds.
 1. [Sequence](sequence.md): Run sequence commands in array.

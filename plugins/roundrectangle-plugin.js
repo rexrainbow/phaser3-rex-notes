@@ -1,4 +1,5 @@
 import RoundRectangle from './gameobjects/shape/roundrectangle/RoundRectangle.js';
+import SetValue from 'rexPlugins/utils/object/SetValue.js';
 
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -36,5 +37,7 @@ class RoundRectanglePlugin extends Phaser.Plugins.BasePlugin {
     }
 
 }
+
+SetValue(window, 'RexPlugins.GameObjects.RoundRectangle', RoundRectangle);
 
 export default RoundRectanglePlugin;

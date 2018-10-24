@@ -5,7 +5,7 @@ Control the position and angle of children game objects.
 It is inspired from [Ziao/phaser3-interim-containers](https://github.com/Ziao/phaser3-interim-containers).
 
 - Author: Rex
-- A kind of game object, installed by global plugin
+- A kind of game object
 
 ## Source code
 
