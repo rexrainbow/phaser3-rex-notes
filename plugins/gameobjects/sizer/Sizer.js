@@ -35,7 +35,6 @@ class Sizer extends Container {
         this.setOrientation(GetValue(config, 'orientation', 0));
         this.setMinWidth(minWidth);
         this.setMinHeight(minHeight);
-        this.setBoundsColor(GetValue(config, 'boundsColor', 0xff0000));
     }
 
     setOrientation(orientation) {
@@ -110,11 +109,6 @@ class Sizer extends Container {
             minHeight = 0;
         }
         this.minHeight = minHeight;
-        return this;
-    }
-
-    setBoundsColor(color) {
-        this.boundsColor = color;
         return this;
     }
 

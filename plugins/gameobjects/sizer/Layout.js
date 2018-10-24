@@ -113,12 +113,12 @@ var Layout = function (parent) {
             switch (childConfig.proportion) {
                 case 0:
                     y = (itemY + padding.top);
-                    height = child.height - padding.top - padding.bottom;
+                    height = child.height;
                     itemY += (height + padding.top + padding.bottom);
                     break;
                 case -1:
                     y = (startY + padding.top);
-                    height = this.height;
+                    height = this.height - padding.top - padding.bottom;
                     child.displayHeight = height;
                     break;
                 default:

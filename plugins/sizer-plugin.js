@@ -1,4 +1,5 @@
 import Sizer from './gameobjects/sizer/Sizer.js';
+import SetValue from 'rexPlugins/utils/object/SetValue.js';
 
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 const BuildGameObject = Phaser.GameObjects.BuildGameObject;
@@ -36,5 +37,7 @@ class SizerPlugin extends Phaser.Plugins.BasePlugin {
     }
 
 }
+
+SetValue(window, 'RexPlugins.GameObjects.Sizer', Sizer);
 
 export default SizerPlugin;
