@@ -26,3 +26,4 @@
 ## Showcase
 
 -   [Kaleidoscope](https://rexrainbow.github.io/phaser3-rex-notes/app/kaleidoscope/index.html)
+-   [Board: Find area/Get path](https://rexrainbow.github.io/phaser3-rex-notes/app/find-area-get-path/index.html)
