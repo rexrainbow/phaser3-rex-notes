@@ -22,6 +22,7 @@ class RoundRectangle extends Phaser.GameObjects.Shape {
 
         this.setIteration(iteration);
         this.setPosition(x, y);
+        // this.setSize(this.geom.width, this.geom.height);
 
         if (fillColor !== undefined) {
             this.setFillStyle(fillColor, fillAlpha);
@@ -29,14 +30,6 @@ class RoundRectangle extends Phaser.GameObjects.Shape {
 
         this.updateDisplayOrigin();
         this.updateData();
-    }
-
-    setIteration(iteration) {
-        if (iteration === undefined) {
-            iteration = 6;
-        }
-        this.iteration = iteration;
-        return this;
     }
 
     updateData() {
@@ -105,6 +98,7 @@ class RoundRectangle extends Phaser.GameObjects.Shape {
         this.updateDisplayOrigin();
         this.updateData();
     }
+
     get height() {
         return this.geom.height;
     }
@@ -138,6 +132,14 @@ class RoundRectangle extends Phaser.GameObjects.Shape {
         this.updateData();
     }
 
+    setIteration(iteration) {
+        if (iteration === undefined) {
+            iteration = 6;
+        }
+        this.iteration = iteration;
+        return this;
+    }
+
     get radius() {
         return this.geom.radius;
     }
@@ -148,14 +150,24 @@ class RoundRectangle extends Phaser.GameObjects.Shape {
         this.updateData();
     }
 
+    setRadius(value) {
+        if (value === undefined) {
+            value = 0;
+        }
+        this.radius = value;
+        return this;
+    }
+
     get cornerRadius() {
         return this.geom.cornerRadius;
     }
 
     set cornerRadius(value) {
-        this.geom.setRadius(value);
-        this.updateDisplayOrigin();
-        this.updateData();  
+        this.radius = value;
+    }
+
+    setCornerRadius(value) {
+        return this.setRadius(value);
     }
 }
 

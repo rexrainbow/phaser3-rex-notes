@@ -173,6 +173,99 @@ var rect = scene.add.rexRoundRectangle(x, y, width, height, radius, fillColor);
 !!! warning "No tint methods"
     Uses `rect.setFillStyle(color, alpha)` to change color.
 
+### Size
+
+- Get
+    ```javascript
+    var width = rect.width;
+    var height = rect.height;
+    ```
+- Set
+    ```javascript
+    rect.setSize(width, height);
+    ```
+    or
+    ```javascript
+    rect.width = width;
+    rect.height = height;
+    ```
+
+### Radius
+
+- Get
+    ```javascript
+    var radius = rect.radius;
+    ```
+    or
+    ```javascript
+    var cornerRadius = rect.cornerRadius;
+    ```
+    - `radius` : Number, maximum radius of 4 corners.
+    - `cornerRadius` : JSON object of 4 corners.
+        ```javascript
+        {
+            tl: {x : radiusX, y: radiusY},
+            tr: {x : radiusX, y: radiusY},
+            bl: {x : radiusX, y: radiusY},
+            br: {x : radiusX, y: radiusY},
+        }
+        ```
+- Set
+    ```javascript
+    rect.setRadius(value);
+    ```
+    or
+    ```javascript
+    rect.radius = radius;
+    ```
+    - `radius` :
+        - Number : 4 corners with the same radius.
+        - JSON
+            - 4 corners with the same radius X/Y
+                ```javascript
+                {
+                    x: radiusX,
+                    y: radiusY
+                }
+                ```
+            - Eeach radius of corner
+                ```javascript
+                {
+                    tl: radius,
+                    tr: radius,
+                    bl: radius,
+                    br: radius
+                }
+                ```
+                or
+                ```javascript
+                {
+                    tl: {x : radiusX, y: radiusY},
+                    tr: {x : radiusX, y: radiusY},
+                    bl: {x : radiusX, y: radiusY},
+                    br: {x : radiusX, y: radiusY},
+                }
+                ```
+
+### Iteration
+
+- Get
+    ```javascript
+    var iteration = rect.iteration;
+    ```
+- Set
+    ```javascript
+    rect.setIteration(value);
+    ```
+    or
+    ```javascript
+    rect.iteration = value;
+    ```
+
+Number of interpolation points in each round corner. Default value is `4`.
+
+- `0` : Draw a straight line instead of arc.
+
 ### Other properties
 
 See [game object](gameobject.md)

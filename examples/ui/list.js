@@ -1,4 +1,4 @@
-import UI from 'rexTemplates/ui/index.js';
+import UIPlugin from 'rexTemplates/ui/ui-plugin.js';
 
 const Random = Phaser.Math.Between;
 
@@ -13,26 +13,25 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        var list = new UI.List(this, {
-            x: 400,
-            y: 300,
+        this.rexUI.add.list({
+                x: 400,
+                y: 300,
 
-            title: this.add.text(0, 0, 'Title', {
-                fontSize: '36px'
-            }),
+                title: this.add.text(0, 0, 'Title', {
+                    fontSize: '36px'
+                }),
 
-            items: [
-                getItem(this, Random(0, 0xffffff), 'Hello'),
-                getItem(this, Random(0, 0xffffff), 'World'),
-                getItem(this, Random(0, 0xffffff), 'Phaser3')
-            ],
+                items: [
+                    getItem(this, Random(0, 0xffffff), 'Hello'),
+                    getItem(this, Random(0, 0xffffff), 'World'),
+                    getItem(this, Random(0, 0xffffff), 'Phaser3')
+                ],
 
-            space: {
-                title: 25,
-                item: 15
-            }
-        });
-        list
+                space: {
+                    title: 25,
+                    item: 15
+                }
+            })
             .layout()
             .drawBounds(this.add.graphics(), 0xff0000);
     }
@@ -41,7 +40,7 @@ class Demo extends Phaser.Scene {
 }
 
 var getItem = function (scene, iconColor, content) {
-    return new UI.Label(scene, {
+    return scene.rexUI.add.label({
         x: 400,
         y: 300,
 
@@ -62,7 +61,14 @@ var config = {
     parent: 'phaser-example',
     width: 800,
     height: 600,
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        scene: [{
+            key: 'rexUI',
+            plugin: UIPlugin,
+            mapping: 'rexUI'
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);

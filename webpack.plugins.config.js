@@ -97,6 +97,7 @@ module.exports = {
 
         // templates
         'bejeweled': './templates/bejeweled/Bejeweled.js',
+        'ui': './templates/ui/ui-plugin.js',
     },
     output: {
         pathinfo: true,
