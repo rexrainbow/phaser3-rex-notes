@@ -1121,6 +1121,27 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#size" title="Size" class="md-nav__link">
+    Size
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#radius" title="Radius" class="md-nav__link">
+    Radius
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iteration" title="Iteration" class="md-nav__link">
+    Iteration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" title="Other properties" class="md-nav__link">
     Other properties
   </a>
@@ -3383,6 +3404,27 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#size" title="Size" class="md-nav__link">
+    Size
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#radius" title="Radius" class="md-nav__link">
+    Radius
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#iteration" title="Iteration" class="md-nav__link">
+    Iteration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" title="Other properties" class="md-nav__link">
     Other properties
   </a>
@@ -3450,32 +3492,6 @@
 <span class="c1">// var rect = scene.add.rexRoundRectangle(x, y, width, height, radius, fillColor, fillAlpha);</span>
 </pre></div>
 
-<p>or</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexRoundRectangle</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="p">{</span>
-    <span class="nx">tl</span><span class="o">:</span> <span class="nx">radius</span><span class="p">,</span>
-    <span class="nx">tr</span><span class="o">:</span> <span class="nx">radius</span><span class="p">,</span>
-    <span class="nx">bl</span><span class="o">:</span> <span class="nx">radius</span><span class="p">,</span>
-    <span class="nx">br</span><span class="o">:</span> <span class="nx">radius</span>
-<span class="p">},</span> <span class="nx">fillColor</span><span class="p">,</span> <span class="nx">fillAlpha</span><span class="p">);</span>
-</pre></div>
-
-<p>or</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexRoundRectangle</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="p">{</span>
-    <span class="nx">radius</span><span class="o">:</span> <span class="nx">radius</span><span class="p">,</span>
-    <span class="nx">iteration</span><span class="o">:</span> <span class="mi">6</span>
-<span class="p">},</span> <span class="nx">fillColor</span><span class="p">,</span> <span class="nx">fillAlpha</span><span class="p">);</span>
-</pre></div>
-
-<p>or</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexRoundRectangle</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="p">{</span>
-    <span class="nx">tl</span><span class="o">:</span> <span class="nx">radius</span><span class="p">,</span>
-    <span class="nx">tr</span><span class="o">:</span> <span class="nx">radius</span><span class="p">,</span>
-    <span class="nx">bl</span><span class="o">:</span> <span class="nx">radius</span><span class="p">,</span>
-    <span class="nx">br</span><span class="o">:</span> <span class="nx">radius</span><span class="p">,</span>
-    <span class="nx">iteration</span><span class="o">:</span> <span class="mi">6</span>
-<span class="p">},</span> <span class="nx">fillColor</span><span class="p">,</span> <span class="nx">fillAlpha</span><span class="p">);</span>
-</pre></div>
-
 <ul>
 <li><code>width</code>, <code>height</code> : Size of rectangle.<ul>
 <li><code>undefined</code> : Set ot <code>undefined</code> to draw a circle.</li>
@@ -3484,28 +3500,79 @@
 <li><code>radius</code> : Radius of four corners.<ul>
 <li><code>0</code>, or <code>undefined</code> : Disable round corner.</li>
 <li>Number: 4 corners with the same radius.</li>
-<li>JSON : Defined each radius of corner
+<li>JSON<ul>
+<li>4 corners with the same radius X/Y
+    <div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="nx">radiusX</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="nx">radiusY</span>
+<span class="p">}</span>
+</pre></div></li>
+<li>Eeach radius of corner
     <div class="codehilite"><pre><span></span><span class="p">{</span>
     <span class="nx">tl</span><span class="o">:</span> <span class="nx">radius</span><span class="p">,</span>
     <span class="nx">tr</span><span class="o">:</span> <span class="nx">radius</span><span class="p">,</span>
     <span class="nx">bl</span><span class="o">:</span> <span class="nx">radius</span><span class="p">,</span>
     <span class="nx">br</span><span class="o">:</span> <span class="nx">radius</span>
 <span class="p">}</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nx">tl</span><span class="o">:</span> <span class="p">{</span><span class="nx">x</span> <span class="o">:</span> <span class="nx">radiusX</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="nx">radiusY</span><span class="p">},</span>
+    <span class="nx">tr</span><span class="o">:</span> <span class="p">{</span><span class="nx">x</span> <span class="o">:</span> <span class="nx">radiusX</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="nx">radiusY</span><span class="p">},</span>
+    <span class="nx">bl</span><span class="o">:</span> <span class="p">{</span><span class="nx">x</span> <span class="o">:</span> <span class="nx">radiusX</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="nx">radiusY</span><span class="p">},</span>
+    <span class="nx">br</span><span class="o">:</span> <span class="p">{</span><span class="nx">x</span> <span class="o">:</span> <span class="nx">radiusX</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="nx">radiusY</span><span class="p">},</span>
+<span class="p">}</span>
 </pre></div></li>
-</ul>
-</li>
+<li>Radius and iteration
+    <div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nx">radius</span><span class="o">:</span> <span class="nx">radius</span><span class="p">,</span>
+    <span class="nx">iteration</span><span class="o">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nx">radius</span><span class="o">:</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span> <span class="nx">radiusX</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="nx">radiusY</span><span class="p">},</span>
+    <span class="nx">iteration</span><span class="o">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nx">radius</span><span class="o">:</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span> <span class="nx">radiusX</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="nx">radiusY</span><span class="p">},</span>
+    <span class="nx">iteration</span><span class="o">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nx">radius</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">tl</span><span class="o">:</span> <span class="p">{</span><span class="nx">x</span> <span class="o">:</span> <span class="nx">radiusX</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="nx">radiusY</span><span class="p">},</span>
+        <span class="nx">tr</span><span class="o">:</span> <span class="p">{</span><span class="nx">x</span> <span class="o">:</span> <span class="nx">radiusX</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="nx">radiusY</span><span class="p">},</span>
+        <span class="nx">bl</span><span class="o">:</span> <span class="p">{</span><span class="nx">x</span> <span class="o">:</span> <span class="nx">radiusX</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="nx">radiusY</span><span class="p">},</span>
+        <span class="nx">br</span><span class="o">:</span> <span class="p">{</span><span class="nx">x</span> <span class="o">:</span> <span class="nx">radiusX</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="nx">radiusY</span><span class="p">},</span>
+    <span class="p">},</span>
+    <span class="nx">iteration</span><span class="o">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+</pre></div><ul>
 <li><code>iteration</code> : Number of interpolation points in each round corner. Default value is <code>4</code>.<ul>
 <li><code>0</code> : Draw a straight line instead of arc.</li>
 </ul>
 </li>
 </ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h4 id="deform">Deform<a class="headerlink" href="#deform" title="Permanent link">&para;</a></h4>
 <ul>
-<li>Rectangle, set radius of 4 corners to <code>0</code>
+<li>Rectangle, set radius of 4 corners to <code>0</code>.
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexRoundRectangle</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span>  <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">fillColor</span><span class="p">,</span> <span class="nx">fillAlpha</span><span class="p">);</span>
 </pre></div></li>
-<li>Circle, set width and height to <code>undefined</code>
+<li>Circle, set width and height to <code>undefined</code>.
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexRoundRectangle</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">fillColor</span><span class="p">,</span> <span class="nx">fillAlpha</span><span class="p">);</span>
+</pre></div></li>
+<li>Ellipse, set width and height to <code>undefined</code>, and radiusX/radiusY.
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexRoundRectangle</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">,</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span> <span class="nx">radiusX</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="nx">radiusY</span><span class="p">},</span> <span class="nx">fillColor</span><span class="p">,</span> <span class="nx">fillAlpha</span><span class="p">);</span>
 </pre></div></li>
 <li>Rhombus, set width and height to <code>undefined</code>, and assign iteration to <code>0</code>
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexRoundRectangle</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">,</span> <span class="p">{</span>
@@ -3549,6 +3616,93 @@
 <p class="admonition-title">No tint methods</p>
 <p>Uses <code>rect.setFillStyle(color, alpha)</code> to change color.</p>
 </div>
+<h3 id="size">Size<a class="headerlink" href="#size" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">width</span> <span class="o">=</span> <span class="nx">rect</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">height</span> <span class="o">=</span> <span class="nx">rect</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">rect</span><span class="p">.</span><span class="nx">setSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">rect</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span><span class="p">;</span>
+<span class="nx">rect</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">height</span><span class="p">;</span>
+</pre></div></li>
+</ul>
+<h3 id="radius">Radius<a class="headerlink" href="#radius" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">radius</span> <span class="o">=</span> <span class="nx">rect</span><span class="p">.</span><span class="nx">radius</span><span class="p">;</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cornerRadius</span> <span class="o">=</span> <span class="nx">rect</span><span class="p">.</span><span class="nx">cornerRadius</span><span class="p">;</span>
+</pre></div><ul>
+<li><code>radius</code> : Number, maximum radius of 4 corners.</li>
+<li><code>cornerRadius</code> : JSON object of 4 corners.
+    <div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nx">tl</span><span class="o">:</span> <span class="p">{</span><span class="nx">x</span> <span class="o">:</span> <span class="nx">radiusX</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="nx">radiusY</span><span class="p">},</span>
+    <span class="nx">tr</span><span class="o">:</span> <span class="p">{</span><span class="nx">x</span> <span class="o">:</span> <span class="nx">radiusX</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="nx">radiusY</span><span class="p">},</span>
+    <span class="nx">bl</span><span class="o">:</span> <span class="p">{</span><span class="nx">x</span> <span class="o">:</span> <span class="nx">radiusX</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="nx">radiusY</span><span class="p">},</span>
+    <span class="nx">br</span><span class="o">:</span> <span class="p">{</span><span class="nx">x</span> <span class="o">:</span> <span class="nx">radiusX</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="nx">radiusY</span><span class="p">},</span>
+<span class="p">}</span>
+</pre></div></li>
+</ul>
+</li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">rect</span><span class="p">.</span><span class="nx">setRadius</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">rect</span><span class="p">.</span><span class="nx">radius</span> <span class="o">=</span> <span class="nx">radius</span><span class="p">;</span>
+</pre></div><ul>
+<li><code>radius</code> :<ul>
+<li>Number : 4 corners with the same radius.</li>
+<li>JSON<ul>
+<li>4 corners with the same radius X/Y
+    <div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="nx">radiusX</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="nx">radiusY</span>
+<span class="p">}</span>
+</pre></div></li>
+<li>Eeach radius of corner
+    <div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nx">tl</span><span class="o">:</span> <span class="nx">radius</span><span class="p">,</span>
+    <span class="nx">tr</span><span class="o">:</span> <span class="nx">radius</span><span class="p">,</span>
+    <span class="nx">bl</span><span class="o">:</span> <span class="nx">radius</span><span class="p">,</span>
+    <span class="nx">br</span><span class="o">:</span> <span class="nx">radius</span>
+<span class="p">}</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nx">tl</span><span class="o">:</span> <span class="p">{</span><span class="nx">x</span> <span class="o">:</span> <span class="nx">radiusX</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="nx">radiusY</span><span class="p">},</span>
+    <span class="nx">tr</span><span class="o">:</span> <span class="p">{</span><span class="nx">x</span> <span class="o">:</span> <span class="nx">radiusX</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="nx">radiusY</span><span class="p">},</span>
+    <span class="nx">bl</span><span class="o">:</span> <span class="p">{</span><span class="nx">x</span> <span class="o">:</span> <span class="nx">radiusX</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="nx">radiusY</span><span class="p">},</span>
+    <span class="nx">br</span><span class="o">:</span> <span class="p">{</span><span class="nx">x</span> <span class="o">:</span> <span class="nx">radiusX</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="nx">radiusY</span><span class="p">},</span>
+<span class="p">}</span>
+</pre></div></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="iteration">Iteration<a class="headerlink" href="#iteration" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">iteration</span> <span class="o">=</span> <span class="nx">rect</span><span class="p">.</span><span class="nx">iteration</span><span class="p">;</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">rect</span><span class="p">.</span><span class="nx">setIteration</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">rect</span><span class="p">.</span><span class="nx">iteration</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+</pre></div></li>
+</ul>
+<p>Number of interpolation points in each round corner. Default value is <code>4</code>.</p>
+<ul>
+<li><code>0</code> : Draw a straight line instead of arc.</li>
+</ul>
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
 <p>See <a href="../gameobject/">game object</a></p>
                 
