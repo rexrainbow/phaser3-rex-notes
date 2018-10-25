@@ -45,64 +45,86 @@ var rect = scene.add.rexRoundRectangle(x, y, width, height, radius, fillColor);
 // var rect = scene.add.rexRoundRectangle(x, y, width, height, radius, fillColor, fillAlpha);
 ```
 
-or
-
-```javascript
-var rect = scene.add.rexRoundRectangle(x, y, width, height, {
-    tl: radius,
-    tr: radius,
-    bl: radius,
-    br: radius
-}, fillColor, fillAlpha);
-```
-
-or
-
-```javascript
-var rect = scene.add.rexRoundRectangle(x, y, width, height, {
-    radius: radius,
-    iteration: 6
-}, fillColor, fillAlpha);
-```
-
-or
-
-```javascript
-var rect = scene.add.rexRoundRectangle(x, y, width, height, {
-    tl: radius,
-    tr: radius,
-    bl: radius,
-    br: radius,
-    iteration: 6
-}, fillColor, fillAlpha);
-```
-
 - `width`, `height` : Size of rectangle.
     - `undefined` : Set ot `undefined` to draw a circle.
 - `radius` : Radius of four corners.
     - `0`, or `undefined` : Disable round corner.
     - Number: 4 corners with the same radius.
-    - JSON : Defined each radius of corner
-        ```javascript
-        {
-            tl: radius,
-            tr: radius,
-            bl: radius,
-            br: radius
-        }
-        ```
-- `iteration` : Number of interpolation points in each round corner. Default value is `4`.
-    - `0` : Draw a straight line instead of arc.
+    - JSON
+        - 4 corners with the same radius X/Y
+            ```javascript
+            {
+                x: radiusX,
+                y: radiusY
+            }
+            ```
+        - Eeach radius of corner
+            ```javascript
+            {
+                tl: radius,
+                tr: radius,
+                bl: radius,
+                br: radius
+            }
+            ```
+            or
+            ```javascript
+            {
+                tl: {x : radiusX, y: radiusY},
+                tr: {x : radiusX, y: radiusY},
+                bl: {x : radiusX, y: radiusY},
+                br: {x : radiusX, y: radiusY},
+            }
+            ```
+        - Radius and iteration
+            ```javascript
+            {
+                radius: radius,
+                iteration: 0
+            }
+            ```
+            or
+            ```javascript
+            {
+                radius: {x: radiusX, y: radiusY},
+                iteration: 0
+            }
+            ```
+            or
+            ```javascript
+            {
+                radius: {x: radiusX, y: radiusY},
+                iteration: 0
+            }
+            ```
+            or
+            ```javascript
+            {
+                radius: {
+                    tl: {x : radiusX, y: radiusY},
+                    tr: {x : radiusX, y: radiusY},
+                    bl: {x : radiusX, y: radiusY},
+                    br: {x : radiusX, y: radiusY},
+                },
+                iteration: 0
+            }
+            ```
+            - `iteration` : Number of interpolation points in each round corner. Default value is `4`.
+                - `0` : Draw a straight line instead of arc.
 
 #### Deform
 
-- Rectangle, set radius of 4 corners to `0`
+- Rectangle, set radius of 4 corners to `0`.
     ```javascript
     var rect = scene.add.rexRoundRectangle(x, y,  width, height, 0, fillColor, fillAlpha);
     ```
-- Circle, set width and height to `undefined`
+- Circle, set width and height to `undefined`.
     ```javascript
     var rect = scene.add.rexRoundRectangle(x, y, undefined, undefined, radius, fillColor, fillAlpha);
+    ```
+- Ellipse, set width and height to `undefined`, and radiusX/radiusY.
+    ```javascript
+    var rect = scene.add.rexRoundRectangle(x, y, undefined, undefined, {x: radiusX, y: radiusY}, fillColor, fillAlpha);
     ```
 - Rhombus, set width and height to `undefined`, and assign iteration to `0`
     ```javascript

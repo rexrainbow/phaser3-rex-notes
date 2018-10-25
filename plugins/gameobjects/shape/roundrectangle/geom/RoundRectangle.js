@@ -27,37 +27,55 @@ class RoundRectangle {
         return this;
     }
 
-    setRadius(radiusConfig) {
-        if (radiusConfig === undefined) {
-            radiusConfig = 0;
+    setRadius(config) {
+        if (config === undefined) {
+            config = 0;
         }
-        var radius = this.cornerRadius;
-        if (typeof (radiusConfig) === 'number') {
-            radius.tl = radiusConfig;
-            radius.tr = radiusConfig;
-            radius.bl = radiusConfig;
-            radius.br = radiusConfig;
+        var defaultRadiusX, defaultRadiusY;
+        if (typeof (config) === 'number') {
+            defaultRadiusX = config;
+            defaultRadiusY = config;
         } else {
-            radius.tl = GetValue(radiusConfig, 'tl', 0);
-            radius.tr = GetValue(radiusConfig, 'tr', 0);
-            radius.bl = GetValue(radiusConfig, 'bl', 0);
-            radius.br = GetValue(radiusConfig, 'br', 0);
+            defaultRadiusX = GetValue(config, 'x', 0);
+            defaultRadiusY = GetValue(config, 'y', 0);
         }
+
+        var radius = this.cornerRadius;
+        radius.tl = GetRadius(GetValue(config, 'tl', undefined), defaultRadiusX, defaultRadiusY);
+        radius.tr = GetRadius(GetValue(config, 'tr', undefined), defaultRadiusX, defaultRadiusY);
+        radius.bl = GetRadius(GetValue(config, 'bl', undefined), defaultRadiusX, defaultRadiusY);
+        radius.br = GetRadius(GetValue(config, 'br', undefined), defaultRadiusX, defaultRadiusY);
         return this;
     }
 
     setSize(width, height) {
         if (width === undefined) {
             var radius = this.cornerRadius;
-            width = Math.max(radius.tl + radius.tr, radius.bl + radius.br);
+            width = Math.max(radius.tl.x + radius.tr.x, radius.bl.x + radius.br.x);
         }
         if (height === undefined) {
             var radius = this.cornerRadius;
-            height = Math.max(radius.tl + radius.bl, radius.tr + radius.br);
+            height = Math.max(radius.tl.y + radius.bl.y, radius.tr.y + radius.br.y);
         }
         this.width = width;
         this.height = height;
         return this;
+    }
+}
+
+var GetRadius = function (radius, defaultRadiusX, defaultRadiusY) {
+    if (radius === undefined) {
+        return {
+            x: defaultRadiusX,
+            y: defaultRadiusY
+        };
+    } else if (typeof (radius) === 'number') {
+        return {
+            x: radius,
+            y: radius
+        };
+    } else {
+        return radius;
     }
 }
 export default RoundRectangle;
