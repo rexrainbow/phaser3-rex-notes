@@ -22,7 +22,6 @@ class RoundRectangle extends Phaser.GameObjects.Shape {
 
         this.setIteration(iteration);
         this.setPosition(x, y);
-        this.setSize(geom.width, geom.height);
 
         if (fillColor !== undefined) {
             this.setFillStyle(fillColor, fillAlpha);
@@ -95,42 +94,68 @@ class RoundRectangle extends Phaser.GameObjects.Shape {
     }
 
     get width() {
-        return this._width;
+        return this.geom.width;
     }
     set width(value) {
-        // Set width first time
-        if (this._width === undefined) {
-            this._width = value;
-            return;
-        }
-
         // Change width value
-        if (this._width === value) {
+        if (this.width === value) {
             return;
         }
         this.geom.width = value;
-        this._width = this.geom.width;
         this.updateDisplayOrigin();
         this.updateData();
     }
     get height() {
-        return this._height;
+        return this.geom.height;
     }
     set height(value) {
-        // Set width first time
-        if (this._height === undefined) {
-            this._height = value;
-            return;
-        }
-
         // Change height value
-        if (this._height === value) {
+        if (this.height === value) {
             return;
         }
         this.geom.height = value;
-        this._height = this.geom.height;
         this.updateDisplayOrigin();
         this.updateData();
+    }
+
+    get iteration() {
+        return this._iteration;
+    }
+
+    set iteration(value) {
+        // Set iteration first time
+        if (this._iteration === undefined) {
+            this._iteration = value;
+            return;
+        }
+
+        // Change iteration value
+        if (this._iteration === value) {
+            return;
+        }
+
+        this._iteration = value;
+        this.updateData();
+    }
+
+    get radius() {
+        return this.geom.radius;
+    }
+
+    set radius(value) {
+        this.geom.setRadius(value);
+        this.updateDisplayOrigin();
+        this.updateData();
+    }
+
+    get cornerRadius() {
+        return this.geom.cornerRadius;
+    }
+
+    set cornerRadius(value) {
+        this.geom.setRadius(value);
+        this.updateDisplayOrigin();
+        this.updateData();  
     }
 }
 

@@ -85,6 +85,16 @@ class RoundRectangle {
         }
         this._height = Math.max(value, this.minHeight);
     }
+
+    get radius() {
+        var radius = this.cornerRadius;
+        return Math.max(
+            radius.tl.x, radius.tl.y,
+            radius.tr.x, radius.tr.y,
+            radius.bl.x, radius.bl.y,
+            radius.br.x, radius.br.y,
+        )
+    }
 }
 
 var GetRadius = function (radius, defaultRadiusX, defaultRadiusY) {
