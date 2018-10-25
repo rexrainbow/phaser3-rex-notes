@@ -10,16 +10,27 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        var shape = this.add.rexRoundRectangle(400, 300, 240, 100, 50, 0x008888).setScale(0, 1);
+        var rect0 = this.add.rexRoundRectangle(400, 150, 240, 100, 50, 0x008888).setScale(0, 1);
 
-        var tween = this.tweens.add({
-            targets: shape,
+        this.tweens.add({
+            targets: rect0,
             scaleX: 1, // '+=100'
             ease: 'Linear', // 'Cubic', 'Elastic', 'Bounce', 'Back'
-            duration: 1000,
-            repeat: 0, // -1: infinity
-            yoyo: false
+            duration: 2000,
+            repeat: -1, // -1: infinity
+            yoyo: true
         });
+
+        var rect1 = this.add.rexRoundRectangle(400, 300, 0, 0, 30, 0x008888);
+
+        this.tweens.add({
+            targets: rect1,
+            width: '+=200', // '+=100'
+            ease: 'Linear', // 'Cubic', 'Elastic', 'Bounce', 'Back'
+            duration: 2000,
+            repeat: -1, // -1: infinity
+            yoyo: true
+        });        
     }
 
     update() {}

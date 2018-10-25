@@ -93,6 +93,45 @@ class RoundRectangle extends Phaser.GameObjects.Shape {
         this.pathIndexes = Earcut(pathData);
         return this;
     }
+
+    get width() {
+        return this._width;
+    }
+    set width(value) {
+        // Set width first time
+        if (this._width === undefined) {
+            this._width = value;
+            return;
+        }
+
+        // Change width value
+        if (this._width === value) {
+            return;
+        }
+        this.geom.width = value;
+        this._width = this.geom.width;
+        this.updateDisplayOrigin();
+        this.updateData();
+    }
+    get height() {
+        return this._height;
+    }
+    set height(value) {
+        // Set width first time
+        if (this._height === undefined) {
+            this._height = value;
+            return;
+        }
+
+        // Change height value
+        if (this._height === value) {
+            return;
+        }
+        this.geom.height = value;
+        this._height = this.geom.height;
+        this.updateDisplayOrigin();
+        this.updateData();
+    }
 }
 
 var isArcCorner = function (radius) {

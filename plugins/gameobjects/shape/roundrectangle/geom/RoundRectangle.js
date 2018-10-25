@@ -3,8 +3,8 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 class RoundRectangle {
     constructor(x, y, width, height, radiusConfig) {
         this.cornerRadius = {};
-        this.width = 0;
-        this.height = 0;
+        this._width = 0;
+        this._height = 0;
         this.setTo(x, y, width, height, radiusConfig);
     }
 
@@ -49,17 +49,41 @@ class RoundRectangle {
     }
 
     setSize(width, height) {
-        if (width === undefined) {
-            var radius = this.cornerRadius;
-            width = Math.max(radius.tl.x + radius.tr.x, radius.bl.x + radius.br.x);
-        }
-        if (height === undefined) {
-            var radius = this.cornerRadius;
-            height = Math.max(radius.tl.y + radius.bl.y, radius.tr.y + radius.br.y);
-        }
         this.width = width;
         this.height = height;
         return this;
+    }
+
+    get minWidth() {
+        var radius = this.cornerRadius;
+        return Math.max(radius.tl.x + radius.tr.x, radius.bl.x + radius.br.x);
+    }
+
+    get minHeight() {
+        var radius = this.cornerRadius;
+        return Math.max(radius.tl.y + radius.bl.y, radius.tr.y + radius.br.y);
+    }
+
+    get width() {
+        return this._width;
+    }
+
+    set width(value) {
+        if (value == null) {
+            value = 0;
+        }
+        this._width = Math.max(value, this.minWidth);
+    }
+
+    get height() {
+        return this._height;
+    }
+
+    set height(value) {
+        if (value == null) {
+            value = 0;
+        }
+        this._height = Math.max(value, this.minHeight);
     }
 }
 
