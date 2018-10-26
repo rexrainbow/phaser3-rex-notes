@@ -31,7 +31,7 @@ class Label extends Sizer {
         if (iconObject) {
             var padding = {
                 left: paddingLeft,
-                right: (textObject)? space : paddingRight,
+                right: (textObject) ? space : paddingRight,
                 top: 0,
                 bottom: 0
             }
@@ -40,7 +40,7 @@ class Label extends Sizer {
 
         if (textObject) {
             var padding = {
-                left: (iconObject)? 0:paddingLeft,
+                left: (iconObject) ? 0 : paddingLeft,
                 right: paddingRight,
                 top: 0,
                 bottom: 0

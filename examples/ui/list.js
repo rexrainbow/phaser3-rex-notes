@@ -17,6 +17,8 @@ class Demo extends Phaser.Scene {
                 x: 400,
                 y: 300,
 
+                background: this.rexUI.add.roundRectangle(0, 0, 100, 100, 10, 0x444400),
+
                 title: this.add.text(0, 0, 'Title', {
                     fontSize: '36px'
                 }),
@@ -29,7 +31,11 @@ class Demo extends Phaser.Scene {
 
                 space: {
                     title: 25,
-                    item: 15
+                    item: 15,
+                    left: 20,
+                    right: 20,
+                    top: 20,
+                    bottom: 20
                 }
             })
             .layout()

@@ -12,7 +12,7 @@ const Container = ContainerLite;
 const ALIGN_CENTER = Phaser.Display.Align.CENTER;
 
 class Sizer extends Container {
-    constructor(scene, x, y, minWidth, minHeight, orientation, extend) {
+    constructor(scene, x, y, minWidth, minHeight, orientation) {
         var config;
         if (IsPlainObject(x)) {
             config = x;
@@ -29,14 +29,12 @@ class Sizer extends Container {
         }
         if (config !== undefined) {
             orientation = GetValue(config, 'orientation', 0);
-            extend = GetValue(config, 'extend', true);
         }
 
         super(scene, x, y, minWidth, minHeight);
         this.type = 'rexSizer';
         this.isRexSizer = true;
         this.setOrientation(orientation);
-        this.setExtendFlag(extend);
         this.setMinWidth(minWidth);
         this.setMinHeight(minHeight);
     }
@@ -57,7 +55,7 @@ class Sizer extends Container {
         return this;
     }
 
-    add(gameObject, proportion, align, paddingConfig) {
+    add(gameObject, proportion, align, paddingConfig, extend) {
         super.add(gameObject);
 
         var proportionType = typeof (proportion);
@@ -87,6 +85,9 @@ class Sizer extends Container {
         if (paddingConfig === undefined) {
             paddingConfig = 0;
         }
+        if (extend === undefined) {
+            extend = false;
+        }
 
         var padding = {};
         if (typeof (paddingConfig) === 'number') {
@@ -105,6 +106,7 @@ class Sizer extends Container {
         config.proportion = proportion;
         config.align = align;
         config.padding = padding;
+        config.extend = extend;
         return this;
     }
 

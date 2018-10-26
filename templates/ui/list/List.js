@@ -19,33 +19,37 @@ class List extends Sizer {
         // Add elements
         var backgroundObject = GetValue(config, 'background', undefined);
         if (backgroundObject) {
-            this.add(backgroundObject, -1);
+            this.add(backgroundObject, -1, undefined, undefined, true);
         }
 
         var titleObject = GetValue(config, 'title', undefined);
         var items = GetValue(config, 'items', undefined);
         var titleSpace = (items && (items.length > 0)) ? GetValue(config, 'space.title', 0) : 0;
         var itemSpace = GetValue(config, 'space.item', 0);
+        var paddingLeft = GetValue(config, 'space.left', 0);
+        var paddingRight = GetValue(config, 'space.right', 0);
+        var paddingTop = GetValue(config, 'space.top', 0);
+        var paddingBottom = GetValue(config, 'space.bottom', 0);
 
         if (titleObject) {
-            var padding;
-            if (titleSpace > 0) {
-                padding = {
-                    bottom: titleSpace
-                }
+            var padding = {
+                left: paddingLeft,
+                right: paddingRight,
+                top: paddingTop,
+                bottom: (items === undefined) ? paddingBottom : 0
             }
             this.add(titleObject, 0, 'center', padding);
         }
 
         if (items) {
-            var padding;
-            if (itemSpace > 0) {
-                padding = {
-                    bottom: itemSpace,
-                }
-            }
             for (var i = 0, cnt = items.length; i < cnt; i++) {
-                this.add(items[i], 0, 'left', (i < (cnt - 1)) ? padding : 0);
+                var padding = {
+                    left: paddingLeft,
+                    right: paddingRight,
+                    top: (i === 0) ? ((titleObject) ? titleSpace : paddingTop) : itemSpace,
+                    bottom: (i === (cnt - 1)) ? paddingBottom : 0
+                }
+                this.add(items[i], 0, 'left', padding, true);
             }
         }
 

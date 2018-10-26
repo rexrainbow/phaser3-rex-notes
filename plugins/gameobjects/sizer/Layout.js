@@ -24,30 +24,25 @@ var Layout = function (parent) {
     // Set size
     var childrenProportion = this.childrenProportion;
     if (this.orientation === 0) { // x
-        // Width
         if (parent === undefined) {
             this.width = this.childrenWidth;
+            this.height = this.childrenHeight;
         } else {
-            if (this.extendFlag || (this.childrenProportion > 0)) {
+            if (this.rexSizer.extend || (this.childrenProportion > 0)) {
                 var padding = this.rexSizer.padding;
                 this.width = parent.width - padding.left - padding.right;
             } else {
                 this.width = this.childrenWidth;
             }
+            this.height = this.childrenHeight;
         }
-
-        // Height
-        this.height = this.childrenHeight;
-
     } else { // y
-        // Width
-        this.width = this.childrenWidth;
-
-        // Height
         if (parent === undefined) {
+            this.width = this.childrenWidth;
             this.height = this.childrenHeight;
         } else {
-            if (this.extendFlag || (this.childrenProportion > 0)) {
+            this.width = this.childrenWidth;
+            if (this.rexSizer.extend || (this.childrenProportion > 0)) {
                 var padding = this.rexSizer.padding;
                 this.height = parent.height - padding.top - padding.bottom;
             } else {
@@ -87,12 +82,13 @@ var Layout = function (parent) {
             continue;
         }
 
+        childConfig = child.rexSizer;
+        padding = childConfig.padding;
+
         if (child.isRexSizer) {
             child.layout(this);
         }
 
-        childConfig = child.rexSizer;
-        padding = childConfig.padding;
         if (this.orientation === 0) { // x
             switch (childConfig.proportion) {
                 case 0:
@@ -113,6 +109,10 @@ var Layout = function (parent) {
             }
             y = (startY + padding.top);
             height = (this.height - padding.top - padding.bottom);
+
+            if (childConfig.extend) {
+                child.displayHeight = height;
+            }
         } else { // y
             switch (childConfig.proportion) {
                 case 0:
@@ -133,6 +133,10 @@ var Layout = function (parent) {
             }
             x = (startX + padding.left);
             width = (this.width - padding.left - padding.right);
+
+            if (childConfig.extend) {
+                child.displayWidth = width;
+            }
         }
 
         tmpZone.setPosition(x, y).setSize(width, height);
