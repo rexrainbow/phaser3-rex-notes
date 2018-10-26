@@ -214,8 +214,15 @@ var Canvas = new Phaser.Class({
             this.setSize(destCanvas.width / this.resolution, destCanvas.height / this.resolution);
         }
         return this;
-    }
+    },
 
+    resize: function (width, height) {
+        this.canvas.width = this.resolution * width;
+        this.canvas.height = this.resolution * height;
+        this.setSize(width, height);
+        this.updateDisplayOrigin();
+        return this;
+    }
 });
 
 export default Canvas;

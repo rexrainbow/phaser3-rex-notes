@@ -72,6 +72,7 @@ var Layout = function (parent) {
     var itemX = startX,
         itemY = startY;
     var x, y, width, height; // Align zone
+    var newChildWidth, newChildHeight;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
         child = children[i];
         if (!child.hasOwnProperty('rexSizer')) {
@@ -89,6 +90,8 @@ var Layout = function (parent) {
             child.layout(this);
         }
 
+        newChildWidth = undefined;
+        newChildHeight = undefined;
         if (this.orientation === 0) { // x
             switch (childConfig.proportion) {
                 case 0:
@@ -99,7 +102,8 @@ var Layout = function (parent) {
                 case -1:
                     x = (startX + padding.left);
                     width = this.width - padding.left - padding.right;
-                    child.displayWidth = width;
+                    newChildWidth = width;
+                    // child.displayWidth = width;
                     break;
                 default:
                     x = (itemX + padding.left);
@@ -111,7 +115,8 @@ var Layout = function (parent) {
             height = (this.height - padding.top - padding.bottom);
 
             if (childConfig.extend) {
-                child.displayHeight = height;
+                newChildHeight = height;
+                // child.displayHeight = height;
             }
         } else { // y
             switch (childConfig.proportion) {
@@ -123,7 +128,8 @@ var Layout = function (parent) {
                 case -1:
                     y = (startY + padding.top);
                     height = this.height - padding.top - padding.bottom;
-                    child.displayHeight = height;
+                    // child.displayHeight = height;
+                    newChildHeight = height;
                     break;
                 default:
                     y = (itemY + padding.top);
@@ -135,7 +141,28 @@ var Layout = function (parent) {
             width = (this.width - padding.left - padding.right);
 
             if (childConfig.extend) {
-                child.displayWidth = width;
+                newChildWidth = width;
+                // child.displayWidth = width;
+            }
+        }
+
+        // Set size of child
+        if ((newChildWidth !== undefined) || (newChildHeight !== undefined)) {
+            if (child.resize) { // Has `resize` method
+                if (newChildWidth === undefined) {
+                    newChildWidth = child.width;
+                }
+                if (newChildHeight === undefined) {
+                    newChildHeight = child.height;
+                }
+                child.resize(newChildWidth, newChildHeight);
+            } else { // Set display width/height
+                if (newChildWidth !== undefined) {
+                    child.displayWidth = newChildWidth;
+                }
+                if (newChildHeight !== undefined) {
+                    child.displayHeight = newChildHeight;
+                }
             }
         }
 

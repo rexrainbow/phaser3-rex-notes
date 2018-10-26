@@ -36,11 +36,12 @@
         "html-webpack-plugin": "^3.2.0",
         "raw-loader": "^0.5.1",
         "webpack": "^4.10.0",
-        "webpack-cli": "^3.0.1",
+        "webpack-cli": "^3.1.2",
         "uglifyjs-webpack-plugin": "^1.2.5"
     },
     "dependencies": {
         "firebase": "^5.0.4",
+        "phaser3-nineslice": "jdotrjs/phaser3-nineslice",
         "phaser": "3.15.1"
     }
 }
