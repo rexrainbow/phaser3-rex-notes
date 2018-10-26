@@ -1,4 +1,4 @@
-import Sizer from 'rexPlugins/sizer.js';
+import Sizer from '../sizer/Sizer.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 

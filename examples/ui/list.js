@@ -33,7 +33,7 @@ class Demo extends Phaser.Scene {
                 }
             })
             .layout()
-            .drawBounds(this.add.graphics(), 0xff0000);
+            //.drawBounds(this.add.graphics(), 0xff0000);
     }
 
     update() {}
@@ -44,14 +44,18 @@ var getItem = function (scene, iconColor, content) {
         x: 400,
         y: 300,
 
+        background: scene.rexUI.add.roundRectangle(0, 0, 100, 40, 20, 0x888800),
+
         text: scene.add.text(0, 0, content, {
             fontSize: '24px'
         }),
 
-        icon: scene.add.rectangle(0, 0, 30, 30, iconColor),
+        icon: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 15, iconColor),
 
         space: {
-            icon: 10
+            icon: 10,
+            left: 15,
+            right: 15
         }
     });
 }

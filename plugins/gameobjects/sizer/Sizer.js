@@ -12,7 +12,8 @@ const Container = ContainerLite;
 const ALIGN_CENTER = Phaser.Display.Align.CENTER;
 
 class Sizer extends Container {
-    constructor(scene, x, y, minWidth, minHeight, config) {
+    constructor(scene, x, y, minWidth, minHeight, orientation, extend) {
+        var config;
         if (IsPlainObject(x)) {
             config = x;
             x = 0;
@@ -23,16 +24,19 @@ class Sizer extends Container {
             config = minWidth;
             minWidth = undefined;
             minHeight = undefined;
-        } else if (!IsPlainObject(config)) {
-            var orientation = config;
-            config = {
-                orientation: orientation
-            }
+        } else if (IsPlainObject(orientation)) {
+            config = orientation;
         }
+        if (config !== undefined) {
+            orientation = GetValue(config, 'orientation', 0);
+            extend = GetValue(config, 'extend', true);
+        }
+
         super(scene, x, y, minWidth, minHeight);
         this.type = 'rexSizer';
         this.isRexSizer = true;
-        this.setOrientation(GetValue(config, 'orientation', 0));
+        this.setOrientation(orientation);
+        this.setExtendFlag(extend);
         this.setMinWidth(minWidth);
         this.setMinHeight(minHeight);
     }
@@ -42,6 +46,14 @@ class Sizer extends Container {
             orientation = ORIENTATIONMODE[orientation];
         }
         this.orientation = orientation;
+        return this;
+    }
+
+    setExtendFlag(extendFlag) {
+        if (extendFlag === undefined) {
+            extendFlag = true;
+        }
+        this.extendFlag = extendFlag;
         return this;
     }
 

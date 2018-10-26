@@ -1,4 +1,4 @@
-import Sizer from 'rexPlugins/sizer.js';
+import Sizer from '../sizer/Sizer.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -21,23 +21,31 @@ class Label extends Sizer {
         var iconObject = GetValue(config, 'icon', undefined);
         var textObject = GetValue(config, 'text', undefined);
         var space = (iconObject && textObject) ? GetValue(config, 'space.icon', 0) : 0;
+        var paddingLeft = (iconObject || textObject) ? GetValue(config, 'space.left', 0) : 0;
+        var paddingRight = (iconObject || textObject) ? GetValue(config, 'space.right', 0) : 0;
 
         if (backgroundObject) {
             this.add(backgroundObject, -1);
         }
 
         if (iconObject) {
-            var padding;
-            if (space !== 0) {
-                padding = {
-                    right: space
-                }
+            var padding = {
+                left: paddingLeft,
+                right: (textObject)? space : paddingRight,
+                top: 0,
+                bottom: 0
             }
             this.add(iconObject, 0, undefined, padding);
         }
 
         if (textObject) {
-            this.add(textObject, 0, 'left');
+            var padding = {
+                left: (iconObject)? 0:paddingLeft,
+                right: paddingRight,
+                top: 0,
+                bottom: 0
+            }
+            this.add(textObject, 0, 'left', padding);
         }
 
         this.childrenMap = {};

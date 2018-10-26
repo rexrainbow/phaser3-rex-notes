@@ -23,32 +23,36 @@ var Layout = function (parent) {
 
     // Set size
     var childrenProportion = this.childrenProportion;
-    if (this.orientation === 0) {
+    if (this.orientation === 0) { // x
         // Width
-        if (childrenProportion === 0) {
+        if (parent === undefined) {
             this.width = this.childrenWidth;
-        } else if (parent) {
-            var padding = this.rexSizer.padding;
-            this.width = parent.width - padding.left - padding.right;
         } else {
-            this.width = this.childrenWidth;
+            if (this.extendFlag || (this.childrenProportion > 0)) {
+                var padding = this.rexSizer.padding;
+                this.width = parent.width - padding.left - padding.right;
+            } else {
+                this.width = this.childrenWidth;
+            }
         }
 
         // Height
         this.height = this.childrenHeight;
 
-    } else {
+    } else { // y
         // Width
         this.width = this.childrenWidth;
 
         // Height
-        if (childrenProportion === 0) {
+        if (parent === undefined) {
             this.height = this.childrenHeight;
-        } else if (parent) {
-            var padding = this.rexSizer.padding;
-            this.height = parent.height - padding.top - padding.bottom;
         } else {
-            this.height = this.childrenHeight;
+            if (this.extendFlag || (this.childrenProportion > 0)) {
+                var padding = this.rexSizer.padding;
+                this.height = parent.height - padding.top - padding.bottom;
+            } else {
+                this.height = this.childrenHeight;
+            }
         }
     }
 
@@ -89,7 +93,7 @@ var Layout = function (parent) {
 
         childConfig = child.rexSizer;
         padding = childConfig.padding;
-        if (this.orientation === 0) {
+        if (this.orientation === 0) { // x
             switch (childConfig.proportion) {
                 case 0:
                     x = (itemX + padding.left);
@@ -109,7 +113,7 @@ var Layout = function (parent) {
             }
             y = (startY + padding.top);
             height = (this.height - padding.top - padding.bottom);
-        } else {
+        } else { // y
             switch (childConfig.proportion) {
                 case 0:
                     y = (itemY + padding.top);
