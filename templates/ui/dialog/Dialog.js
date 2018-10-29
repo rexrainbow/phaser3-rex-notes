@@ -105,9 +105,9 @@ class Dialog extends Sizer {
                 // Add click callback
                 button
                     .setInteractive()
-                    .on('pointerdown', fireEvent('click', button, i), this)
-                    .on('pointerover', fireEvent('over', button, i), this)
-                    .on('pointerout', fireEvent('out', button, i), this)
+                    .on('pointerdown', fireEvent('button.click', button, i), this)
+                    .on('pointerover', fireEvent('button.over', button, i), this)
+                    .on('pointerout', fireEvent('button.out', button, i), this)
             }
         }
 
