@@ -19,7 +19,7 @@ var GetChildrenWidth = function () {
             }
 
             if (child.isRexSizer) {
-                childWidth = child.childrenWidth;
+                childWidth = (child.rexSizer.proportion === 0) ? child.childrenWidth : 0;
             } else {
                 childWidth = (child.rexSizer.proportion === 0) ? child.width : 0;
             }

@@ -40,7 +40,7 @@ var GetChildrenHeight = function () {
             }
 
             if (child.isRexSizer) {
-                childHeight = child.childrenHeight;
+                childHeight = (child.rexSizer.proportion === 0) ? child.childrenHeight : 0;
             } else {
                 childHeight = (child.rexSizer.proportion === 0) ? child.height : 0;
             }

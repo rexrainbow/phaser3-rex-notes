@@ -24,32 +24,34 @@ var Layout = function (parent) {
     // Set size
     var childrenProportion = this.childrenProportion;
     var newWidth, newHeight;
-    if (this.orientation === 0) { // x
-        if (parent === undefined) {
-            newWidth = this.childrenWidth;
-            newHeight = this.childrenHeight;
-        } else {
-            if (this.rexSizer.extend || (this.childrenProportion > 0)) {
-                var padding = this.rexSizer.padding;
-                newWidth = parent.width - padding.left - padding.right;
+    var extendX, extendY;
+    if (parent) {
+        if (this.rexSizer.extend) {
+            if (parent.orientation === 0) {
+                extendY = true;
             } else {
-                newWidth = this.childrenWidth;
-            }
-            newHeight = this.childrenHeight;
-        }
-    } else { // y
-        if (parent === undefined) {
-            newWidth = this.childrenWidth;
-            newHeight = this.childrenHeight;
-        } else {
-            newWidth = this.childrenWidth;
-            if (this.rexSizer.extend || (this.childrenProportion > 0)) {
-                var padding = this.rexSizer.padding;
-                newHeight = parent.height - padding.top - padding.bottom;
-            } else {
-                newHeight = this.childrenHeight;
+                extendX = true;
             }
         }
+        if (this.childrenProportion > 0) {
+            if (this.orientation === 0) {
+                extendX = true;
+            } else {
+                extendY = true;
+            }
+        }
+    }
+    if (extendX) {
+        var padding = this.rexSizer.padding;
+        newWidth = parent.width - padding.left - padding.right;
+    } else {
+        newWidth = this.childrenWidth;
+    }
+    if (extendY) {
+        var padding = this.rexSizer.padding;
+        newHeight = parent.height - padding.top - padding.bottom;
+    } else {
+        newHeight = this.childrenHeight;
     }
     this.resize(newWidth, newHeight);
 
@@ -115,7 +117,7 @@ var Layout = function (parent) {
             y = (startY + padding.top);
             height = (this.height - padding.top - padding.bottom);
 
-            if (childConfig.extend) {
+            if ((!child.isRexSizer) && childConfig.extend) {
                 newChildHeight = height;
             }
         } else { // y
@@ -139,7 +141,7 @@ var Layout = function (parent) {
             x = (startX + padding.left);
             width = (this.width - padding.left - padding.right);
 
-            if (childConfig.extend) {
+            if ((!child.isRexSizer) && childConfig.extend) {
                 newChildWidth = width;
             }
         }

@@ -4,7 +4,6 @@ import GetChildrenHeight from './GetChildrenHeight.js';
 import GetChildrenProportion from './GetChildrenProportion.js';
 import GetAllChildrenSizer from './GetAllChildrenSizer.js';
 import Layout from './Layout.js';
-import Resize from './Resize.js';
 import DrawBounds from './DrawBounds.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
@@ -127,6 +126,12 @@ class Sizer extends Container {
         return this;
     }
 
+    resize(width, height) {
+        this.setSize(width, height);
+        this.updateDisplayOrigin(); // Remove this line until it has merged in `zone.setSize()` function
+        return this;
+    }
+
     getSizerConfig(gameObject) {
         if (!gameObject.hasOwnProperty('rexSizer')) {
             gameObject.rexSizer = {};
@@ -162,7 +167,6 @@ var methods = {
     getChildrenProportion: GetChildrenProportion,
     getAllChildrenSizer: GetAllChildrenSizer,
     layout: Layout,
-    resize: Resize,
     drawBounds: DrawBounds,
 }
 Object.assign(
