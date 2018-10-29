@@ -20,14 +20,27 @@ class Demo extends Phaser.Scene {
             },
         });
 
-        var rect1 = this.add.rectangle(400, 200, 1, 30, 0x555555);
-        var rect2 = this.add.rectangle(400, 300, 2, 30, 0x555555);
+        var print = this.add.text(0, 0, '');
 
-        rect1.displayWidth = 60;
-        rect2.displayWidth = 60;
+        var zone1 = this.add.zone(50, 350, 100, 100)
+            .setInteractive().on('pointerdown', function (pointer, localX, localY, event) {
+                print.text += 'click zone1\n';
+            });
+        var zone2 = this.add.zone(150, 350, 10, 10)
+            .setInteractive().on('pointerdown', function (pointer, localX, localY, event) {
+                print.text += 'click zone2\n';
+            });
+        var zone3 = this.add.zone(250, 350, 10, 10)
+            .setInteractive().on('pointerdown', function (pointer, localX, localY, event) {
+                print.text += 'click zone3\n';
+            });
 
-        graphics.strokeRectShape(rect1.getBounds());
-        graphics.strokeRectShape(rect2.getBounds());
+        zone2.setSize(100, 100).updateDisplayOrigin();
+        zone3.setSize(100, 100);
+
+        graphics.strokeRectShape(zone1.getBounds());
+        graphics.strokeRectShape(zone2.getBounds());
+        graphics.strokeRectShape(zone3.getBounds());
     }
 
     update() {}

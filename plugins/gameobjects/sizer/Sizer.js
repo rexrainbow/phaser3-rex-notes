@@ -4,6 +4,7 @@ import GetChildrenHeight from './GetChildrenHeight.js';
 import GetChildrenProportion from './GetChildrenProportion.js';
 import GetAllChildrenSizer from './GetAllChildrenSizer.js';
 import Layout from './Layout.js';
+import Resize from './Resize.js';
 import DrawBounds from './DrawBounds.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
@@ -31,7 +32,7 @@ class Sizer extends Container {
             orientation = GetValue(config, 'orientation', 0);
         }
 
-        super(scene, x, y, minWidth, minHeight);
+        super(scene, x, y, 2, 2);
         this.type = 'rexSizer';
         this.isRexSizer = true;
         this.setOrientation(orientation);
@@ -161,6 +162,7 @@ var methods = {
     getChildrenProportion: GetChildrenProportion,
     getAllChildrenSizer: GetAllChildrenSizer,
     layout: Layout,
+    resize: Resize,
     drawBounds: DrawBounds,
 }
 Object.assign(

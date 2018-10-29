@@ -178,9 +178,12 @@ var output = gameObject.getBounds(output);      // output: {x, y, width, height}
         ```
     - Set
         ```javascript
+        gameObject.setSize(width, height);
+        ```
+        or
+        ```javascript
         gameObject.width = width;
         gameObject.height = height;
-        gameObject.setSize(width, height);
         ```
 - Display size
     - Get
@@ -190,9 +193,12 @@ var output = gameObject.getBounds(output);      // output: {x, y, width, height}
         ```
     - Set
         ```javascript
+        gameObject.setDisplaySize(displayWidth, displayHeight);
+        ```
+        or
+        ```javascript
         gameObject.displayWidth = displayWidth;
         gameObject.displayHeight = displayHeight;
-        gameObject.setDisplaySize(displayWidth, displayHeight);
         ```
 - Scale
     - Get
@@ -202,10 +208,23 @@ var output = gameObject.getBounds(output);      // output: {x, y, width, height}
         ```
     - Set
         ```javascript
-        gameObject.scaleX = scaleX;
-        gameObject.scaleY = scaleY;
         gameObject.setScale(scaleX, scaleY);
         ```
+        or
+        ```javascript
+        gameObject.scaleX = scaleX;
+        gameObject.scaleY = scaleY;  
+        ```
+
+### Click
+
+```javascript
+gameObject.setInteractive().on('pointerdown', function(pointer, localX, localY, event){
+    // ...
+});
+```
+
+See [touch event](touchevents.md#quick-start)
 
 ### Private data
 
@@ -276,7 +295,7 @@ Only [image](image.md) and sprite game object have teuture componment.
         constructor(scene, x, y) {
             super(scene, x, y;
             // ...
-            scene.add.existing(this);  // add this game object to update list and display list
+            scene.add.existing(this);  // Add this game object to update list and display list
         }
         // ...
     }

@@ -16,6 +16,8 @@ class Label extends Sizer {
         super(scene, x, y, minWidth, minHeight, config);
         scene.add.existing(this);
 
+        this.setName(GetValue(config, 'name', ''));
+
         // Add elements
         var backgroundObject = GetValue(config, 'background', undefined);
         var iconObject = GetValue(config, 'icon', undefined);
@@ -48,6 +50,12 @@ class Label extends Sizer {
             this.add(textObject, 0, 'left', padding);
         }
 
+        var clickCallback = GetValue(config, 'click', undefined);
+        if (clickCallback) {
+            this.setInteractive();
+            this.on('pointerdown', clickCallback, this);
+        }
+
         this.childrenMap = {};
         this.childrenMap.background = backgroundObject;
         this.childrenMap.icon = iconObject;
@@ -60,7 +68,7 @@ class Label extends Sizer {
             return '';
         }
         var value;
-        if (textObject.hasOwnProperty('text')) {
+        if (textObject.text) {
             value = textObject.text;
         } else {
             value = textObject.getData('text');
@@ -87,7 +95,6 @@ class Label extends Sizer {
 
     appendText(value) {
         this.text += value;
-        return this;
     }
 }
 

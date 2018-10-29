@@ -3756,9 +3756,17 @@
 <p>This is an expensive process, should only be enabled on Game Objects that really need it.</p>
 </div>
 <h3 id="disable-interactive">Disable interactive<a class="headerlink" href="#disable-interactive" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setInteractive</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+<ul>
+<li>Disable temporary
+    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">disableInteractive</span><span class="p">();</span>
 </pre></div>
-
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setInteractive</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</pre></div></li>
+<li>Remove interaction
+    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">removeInteractive</span><span class="p">();</span>
+</pre></div></li>
+</ul>
 <h3 id="top-only">Top only<a class="headerlink" href="#top-only" title="Permanent link">&para;</a></h3>
 <p>When set to <code>true</code> this Input Plugin will emulate DOM behavior by only emitting events from the top-most Game Objects in the Display List.
 If set to <code>false</code> it will emit events from all Game Objects below a Pointer, not just the top one.</p>

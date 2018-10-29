@@ -13,7 +13,7 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        this.rexUI.add.list({
+        var list = this.rexUI.add.list({
                 x: 400,
                 y: 300,
 
@@ -39,7 +39,18 @@ class Demo extends Phaser.Scene {
                 }
             })
             .layout()
-            //.drawBounds(this.add.graphics(), 0xff0000);
+            //.drawBounds(this.add.graphics(), 0xff0000)
+            //.setScale(0);
+
+        //var tween = this.tweens.add({
+        //    targets: list,
+        //    scaleX: 1,
+        //    scaleY: 1,
+        //    ease: 'Bounce', // 'Cubic', 'Elastic', 'Bounce', 'Back'
+        //    duration: 1000,
+        //    repeat: 0, // -1: infinity
+        //    yoyo: false
+        //});
     }
 
     update() {}
@@ -62,6 +73,10 @@ var getItem = function (scene, iconColor, content) {
             icon: 10,
             left: 15,
             right: 15
+        },
+
+        click: function () {
+            console.log(this.text);
         }
     });
 }

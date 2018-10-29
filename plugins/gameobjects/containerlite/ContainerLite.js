@@ -69,7 +69,7 @@ class ContainerLite extends Zone {
         if (out === undefined) {
             out = [];
         }
-        var myCildren = this.getChildren(),
+        var myCildren = this.children.getChildren(),
             myChild;
         for (var i = 0, cnt = myCildren.length; i < cnt; i++) {
             myChild = myCildren[i];
@@ -183,35 +183,35 @@ class ContainerLite extends Zone {
 
     syncPosition() {
         if (this.children && this.syncChildrenEnable) {
-            this.getChildren().forEach(this.updateChildPosition, this);
+            this.children.getChildren().forEach(this.updateChildPosition, this);
         }
         return this;
     }
 
     syncVisible() {
         if (this.children && this.syncChildrenEnable) {
-            this.getChildren().forEach(this.updateChildVisible, this);
+            this.children.getChildren().forEach(this.updateChildVisible, this);
         }
         return this;
     }
 
     syncAlpha() {
         if (this.children && this.syncChildrenEnable) {
-            this.getChildren().forEach(this.updateChildAlpha, this);
+            this.children.getChildren().forEach(this.updateChildAlpha, this);
         }
         return this;
     }
 
     syncMask() {
         if (this.children && this.syncChildrenEnable) {
-            this.getChildren().forEach(this.updateChildMask, this);
+            this.children.getChildren().forEach(this.updateChildMask, this);
         }
         return this;
     }
 
     syncScrollFactor() {
         if (this.children && this.syncChildrenEnable) {
-            this.getChildren().forEach(this.updateChildScrollFactor, this);
+            this.children.getChildren().forEach(this.updateChildScrollFactor, this);
         }
         return this;
     }
@@ -449,7 +449,7 @@ class ContainerLite extends Zone {
 
     // Compatiable with container plugin
     get list() {
-        return this.getChildren();
+        return this.children.getChildren();
     }
 
     getByName(name) {

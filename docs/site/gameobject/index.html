@@ -585,6 +585,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#click" title="Click" class="md-nav__link">
+    Click
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#private-data" title="Private data" class="md-nav__link">
     Private data
   </a>
@@ -3444,6 +3451,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#click" title="Click" class="md-nav__link">
+    Click
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#private-data" title="Private data" class="md-nav__link">
     Private data
   </a>
@@ -3658,9 +3672,11 @@
 <span class="kd">var</span> <span class="nx">height</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
 </pre></div></li>
 <li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+</pre></div>
+    or
     <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span><span class="p">;</span>
 <span class="nx">gameObject</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">height</span><span class="p">;</span>
-<span class="nx">gameObject</span><span class="p">.</span><span class="nx">setSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
 </pre></div></li>
 </ul>
 </li>
@@ -3670,9 +3686,11 @@
 <span class="kd">var</span> <span class="nx">displayHeight</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">displayHeight</span><span class="p">;</span>
 </pre></div></li>
 <li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setDisplaySize</span><span class="p">(</span><span class="nx">displayWidth</span><span class="p">,</span> <span class="nx">displayHeight</span><span class="p">);</span>
+</pre></div>
+    or
     <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">displayWidth</span> <span class="o">=</span> <span class="nx">displayWidth</span><span class="p">;</span>
 <span class="nx">gameObject</span><span class="p">.</span><span class="nx">displayHeight</span> <span class="o">=</span> <span class="nx">displayHeight</span><span class="p">;</span>
-<span class="nx">gameObject</span><span class="p">.</span><span class="nx">setDisplaySize</span><span class="p">(</span><span class="nx">displayWidth</span><span class="p">,</span> <span class="nx">displayHeight</span><span class="p">);</span>
 </pre></div></li>
 </ul>
 </li>
@@ -3682,13 +3700,22 @@
 <span class="kd">var</span> <span class="nx">scaleY</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">scaleY</span><span class="p">;</span>
 </pre></div></li>
 <li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setScale</span><span class="p">(</span><span class="nx">scaleX</span><span class="p">,</span> <span class="nx">scaleY</span><span class="p">);</span>
+</pre></div>
+    or
     <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">scaleX</span> <span class="o">=</span> <span class="nx">scaleX</span><span class="p">;</span>
-<span class="nx">gameObject</span><span class="p">.</span><span class="nx">scaleY</span> <span class="o">=</span> <span class="nx">scaleY</span><span class="p">;</span>
-<span class="nx">gameObject</span><span class="p">.</span><span class="nx">setScale</span><span class="p">(</span><span class="nx">scaleX</span><span class="p">,</span> <span class="nx">scaleY</span><span class="p">);</span>
+<span class="nx">gameObject</span><span class="p">.</span><span class="nx">scaleY</span> <span class="o">=</span> <span class="nx">scaleY</span><span class="p">;</span>  
 </pre></div></li>
 </ul>
 </li>
 </ul>
+<h3 id="click">Click<a class="headerlink" href="#click" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setInteractive</span><span class="p">().</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerdown&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">localX</span><span class="p">,</span> <span class="nx">localY</span><span class="p">,</span> <span class="nx">event</span><span class="p">){</span>
+    <span class="c1">// ...</span>
+<span class="p">});</span>
+</pre></div>
+
+<p>See <a href="../touchevents/#quick-start">touch event</a></p>
 <h3 id="private-data">Private data<a class="headerlink" href="#private-data" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get
@@ -3750,7 +3777,7 @@
     <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="p">{</span>
         <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">;</span>
         <span class="c1">// ...</span>
-        <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>  <span class="c1">// add this game object to update list and display list</span>
+        <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>  <span class="c1">// Add this game object to update list and display list</span>
     <span class="p">}</span>
     <span class="c1">// ...</span>
 <span class="p">}</span>
