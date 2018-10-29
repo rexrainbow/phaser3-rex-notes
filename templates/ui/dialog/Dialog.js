@@ -1,4 +1,5 @@
 import Sizer from '../sizer/Sizer.js';
+import GetElement from '../utils/GetElement.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -104,7 +105,9 @@ class Dialog extends Sizer {
                 // Add click callback
                 button
                     .setInteractive()
-                    .on('pointerdown', createClickCallback(i, button), this);
+                    .on('pointerdown', fireEvent('click', button, i), this)
+                    .on('pointerover', fireEvent('over', button, i), this)
+                    .on('pointerout', fireEvent('out', button, i), this)
             }
         }
 
@@ -116,11 +119,18 @@ class Dialog extends Sizer {
     }
 }
 
-var createClickCallback = function (index, button) {
+var fireEvent = function (eventName, button, index) {
     return function () {
-        this.emit('click', index, button);
+        this.emit(eventName, button, index);
     }
 }
+var methods = {
+    getElement: GetElement,
+}
+Object.assign(
+    Dialog.prototype,
+    methods
+);
 
 const defaultConfig = {};
 

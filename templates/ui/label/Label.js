@@ -1,5 +1,6 @@
 import Sizer from '../sizer/Sizer.js';
 import AddClickCallback from './AddClickCallback.js';
+import GetElement from '../utils/GetElement.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -104,6 +105,7 @@ class Label extends Sizer {
 
 var methods = {
     addClickCallback: AddClickCallback,
+    getElement: GetElement,
 }
 Object.assign(
     Label.prototype,
