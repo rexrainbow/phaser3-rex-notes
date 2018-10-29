@@ -59,25 +59,44 @@ class Dialog extends Sizer {
         }
 
         if (buttons) {
-            var buttonsSizer = new Sizer(scene, 0, 0, 0, 0, {
-                orientation: 0 // Left to right
-            });
-            var padding = {
-                left: paddingLeft,
-                right: paddingRight,
-                top: (title || content) ? 0 : paddingTop,
-                bottom: paddingBottom
+            var buttonsOrientation = GetValue(config, 'buttonsOrientation', 0);
+            if (typeof (buttonsOrientation) === 'string') {
+                buttonsOrientation = ORIENTATIONMODE[buttonsOrientation];
             }
-            this.add(buttonsSizer, 0, 'center', padding, true);
+            var buttonsSizer;
+            if (buttonsOrientation === 0) { // Left-right
+                buttonsSizer = new Sizer(scene, 0, 0, 0, 0, {
+                    orientation: 0 // Left-right
+                });
+                var padding = {
+                    left: paddingLeft,
+                    right: paddingRight,
+                    top: (title || content) ? 0 : paddingTop,
+                    bottom: paddingBottom
+                }
+                this.add(buttonsSizer, 0, 'center', padding, true);
+            } else { // Top-bottom               
+                buttonsSizer = this;
+            }
 
             for (var i = 0, cnt = buttons.length; i < cnt; i++) {
-                var padding = {
-                    left: (i >= 1) ? buttonSpace : 0,
-                    right: 0,
-                    top: 0,
-                    bottom: 0
+                if (buttonsOrientation === 0) { // Left-right
+                    var padding = {
+                        left: (i >= 1) ? buttonSpace : 0,
+                        right: 0,
+                        top: 0,
+                        bottom: 0
+                    }
+                    buttonsSizer.add(buttons[i], 1, 'center', padding, true);
+                } else { // Top-bottom       
+                    var padding = {
+                        left: paddingLeft,
+                        right: paddingRight,
+                        top: (i >= 1) ? buttonSpace : 0,
+                        bottom: (i === (cnt - 1)) ? paddingBottom : 0
+                    }
+                    buttonsSizer.add(buttons[i], 0, 'center', padding, true);
                 }
-                buttonsSizer.add(buttons[i], 1, 'center', padding, true);
             }
         }
 
@@ -90,5 +109,14 @@ class Dialog extends Sizer {
 }
 
 const defaultConfig = {};
+
+const ORIENTATIONMODE = {
+    x: 0,
+    h: 0,
+    horizontal: 0,
+    y: 1,
+    v: 1,
+    vertical: 1
+}
 
 export default Dialog;
