@@ -79,7 +79,10 @@ class Dialog extends Sizer {
                 buttonsSizer = this;
             }
 
+            var button;
             for (var i = 0, cnt = buttons.length; i < cnt; i++) {
+                button = buttons[i];
+                // Add to sizer
                 if (buttonsOrientation === 0) { // Left-right
                     var padding = {
                         left: (i >= 1) ? buttonSpace : 0,
@@ -87,7 +90,7 @@ class Dialog extends Sizer {
                         top: 0,
                         bottom: 0
                     }
-                    buttonsSizer.add(buttons[i], 1, 'center', padding, true);
+                    buttonsSizer.add(button, 1, 'center', padding, true);
                 } else { // Top-bottom       
                     var padding = {
                         left: paddingLeft,
@@ -95,8 +98,13 @@ class Dialog extends Sizer {
                         top: (i >= 1) ? buttonSpace : 0,
                         bottom: (i === (cnt - 1)) ? paddingBottom : 0
                     }
-                    buttonsSizer.add(buttons[i], 0, 'center', padding, true);
+                    buttonsSizer.add(button, 0, 'center', padding, true);
                 }
+
+                // Add click callback
+                button
+                    .setInteractive()
+                    .on('pointerdown', createClickCallback(i, button), this);
             }
         }
 
@@ -105,6 +113,12 @@ class Dialog extends Sizer {
         this.childrenMap.title = title;
         this.childrenMap.content = content;
         this.childrenMap.buttons = buttons;
+    }
+}
+
+var createClickCallback = function (index, button) {
+    return function () {
+        this.emit('click', index, button);
     }
 }
 

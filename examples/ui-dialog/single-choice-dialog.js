@@ -66,6 +66,11 @@ class Demo extends Phaser.Scene {
             repeat: 0, // -1: infinity
             yoyo: false
         });
+
+        this.print = this.add.text(0, 0, '');
+        dialog.on('click', function (index, button) {
+            this.print.text += index + ': ' + button.text + '\n';
+        }, this);   
     }
 
     update() {}
