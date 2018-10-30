@@ -32,13 +32,11 @@ class parser {
                 break;
             }
 
-
             m = arr[0];
             matchStart = RE_SPLITTEXT.lastIndex - m.length;
 
             if (charIdx < matchStart) {
                 result.push(text.substring(charIdx, matchStart));
-
             }
             if (mode === undefined) {
                 result.push(m);

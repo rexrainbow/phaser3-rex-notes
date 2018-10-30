@@ -26,11 +26,11 @@ var parser = {
 
             if (charIdx < matchStart) {
                 result.push(text.substring(charIdx, matchStart));
-
             }
 
-            if (mode === undefined)
+            if (mode === undefined) {
                 result.push(m);
+            }
 
             charIdx = RE_SPLITTEXT.lastIndex;
         }
