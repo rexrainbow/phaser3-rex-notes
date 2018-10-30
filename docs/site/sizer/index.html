@@ -1164,6 +1164,27 @@
   
 
 
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-6-5" type="checkbox" id="nav-4-6-5" checked>
+    
+    <label class="md-nav__link" for="nav-4-6-5">
+      UI
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-6-5">
+        UI
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
   <li class="md-nav__item md-nav__item--active">
     
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
@@ -1269,6 +1290,35 @@
   
 </nav>
     
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ui-label/" title="Label" class="md-nav__link">
+      Label
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ui-dialog/" title="Dialog" class="md-nav__link">
+      Dialog
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
         
@@ -3433,22 +3483,19 @@
 
 <h3 id="add-sizer-object">Add sizer object<a class="headerlink" href="#add-sizer-object" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexSizer</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="p">{</span>
-    <span class="nx">orientation</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="c1">// 0|&#39;x&#39;|&#39;h&#39;|&#39;horizontal&#39;|1|&#39;y&#39;|&#39;v&#39;|&#39;vertical&#39;</span>
-    <span class="c1">// boundsColor: 0xff0000</span>
+    <span class="nx">orientation</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
 <span class="p">});</span>
 </pre></div>
 
 <p>or</p>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexSizer</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">minWidth</span><span class="p">,</span> <span class="nx">minHeight</span><span class="p">,</span> <span class="p">{</span>
-    <span class="nx">orientation</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="c1">// 0|&#39;x&#39;|&#39;h&#39;|&#39;horizontal&#39;|1|&#39;y&#39;|&#39;v&#39;|&#39;vertical&#39;</span>
-    <span class="c1">// boundsColor: 0xff0000</span>
+    <span class="nx">orientation</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
 <span class="p">});</span>
 </pre></div>
 
 <p>or</p>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexSizer</span><span class="p">({</span>
-    <span class="nx">orientation</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="c1">// 0|&#39;x&#39;|&#39;h&#39;|&#39;horizontal&#39;|1|&#39;y&#39;|&#39;v&#39;|&#39;vertical&#39;</span>
-    <span class="c1">// boundsColor: 0xff0000</span>
+    <span class="nx">orientation</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
 <span class="p">});</span>
 </pre></div>
 
@@ -3478,8 +3525,8 @@
 <ul>
 <li><code>x</code>, <code>y</code> : Position of sizer. Only available for top-sizer, children-sizers will be changed by parent.</li>
 <li><code>orientation</code> : Main orientation of the sizer.<ul>
-<li><code>'horizontal'</code>,<code>'h'</code>, <code>'x'</code>, or <code>0</code> : Arrange game objects from left ot right.</li>
-<li><code>'vertical'</code>,<code>'v'</code>, <code>'y'</code>, or <code>1</code> : Arrange game objects from top to bottom.</li>
+<li><code>'left-to-right'</code>, <code>'horizontal'</code>,<code>'h'</code>, <code>'x'</code>, or <code>0</code> : Arrange game objects from left ot right.</li>
+<li><code>'top-to-bottom'</code>, <code>'vertical'</code>,<code>'v'</code>, <code>'y'</code>, or <code>1</code> : Arrange game objects from top to bottom.</li>
 </ul>
 </li>
 <li><code>minWidth</code> : Minimum width. i.e. Width of this sizer will bigger then this value.</li>
@@ -3507,7 +3554,7 @@
 </pre></div>
 
 <p>or</p>
-<div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">proportion</span><span class="p">,</span> <span class="nx">align</span><span class="p">,</span> <span class="nx">paddingConfig</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">proportion</span><span class="p">,</span> <span class="nx">align</span><span class="p">,</span> <span class="nx">paddingConfig</span><span class="p">,</span> <span class="nx">expand</span><span class="p">);</span>
 </pre></div>
 
 <ul>
@@ -3537,6 +3584,11 @@
     <span class="nx">bottom</span><span class="o">:</span> <span class="mi">0</span>
 <span class="p">}</span>
 </pre></div></li>
+</ul>
+</li>
+<li><code>expand</code> : Set <code>true</code> to<ul>
+<li>Expand height when <code>orientation</code> is <code>0</code> (<code>left-to-right</code>), or</li>
+<li>Expand width when <code>orientation</code> is <code>1</code> (<code>top-to-bottom</code>)</li>
 </ul>
 </li>
 </ul>
@@ -3591,13 +3643,13 @@
           </a>
         
         
-          <a href="../zone/" title="Zone" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../ui-label/" title="Label" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Zone
+                Label
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
