@@ -61,7 +61,10 @@ nav:
         - Container Lite: containerlite.md
         - Group: group.md        
         - Grid table: gridtable.md
-        - Sizer: sizer.md
+        - UI:
+            - Sizer: sizer.md
+            - Label: ui-label.md
+            - Dialog: ui-dialog.md
     - Zone: zone.md
     - DOM element:
         - DOM element: domelement.md

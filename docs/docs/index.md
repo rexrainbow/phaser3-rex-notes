@@ -51,6 +51,8 @@
 1. [TCRP.Player](tcrp-player.md): Run commands on time.
 1. [TCRP.Recorder](tcrp-recoder.md): Store commands with time.
 1. [Typing](texttyping.md): Typing text on text object.
+1. [UI-label](ui-label.md): A game object container with a icon, text, and background.
+1. [UI-dialog](ui-dialog.md): A container with a title, content, buttons and backgrounds.
 1. [Virtual joystick](virtualjoystick.md): Simulate curosr keys according touch events.
 1. [Wait events](waitevents.md): Wait fired events or callbacks.
 1. [Webfont-loader](webfontloader.md): Load web font by google webfont loader in preload stage.

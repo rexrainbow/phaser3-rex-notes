@@ -5,6 +5,7 @@ import GetChildrenProportion from './GetChildrenProportion.js';
 import GetAllChildrenSizer from './GetAllChildrenSizer.js';
 import Layout from './Layout.js';
 import DrawBounds from './DrawBounds.js';
+import ORIENTATIONMODE from './Const.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -47,15 +48,15 @@ class Sizer extends Container {
         return this;
     }
 
-    setExtendFlag(extendFlag) {
-        if (extendFlag === undefined) {
-            extendFlag = true;
+    setExtendFlag(expandFlag) {
+        if (expandFlag === undefined) {
+            expandFlag = true;
         }
-        this.extendFlag = extendFlag;
+        this.expandFlag = expandFlag;
         return this;
     }
 
-    add(gameObject, proportion, align, paddingConfig, extend) {
+    add(gameObject, proportion, align, paddingConfig, expand) {
         super.add(gameObject);
 
         var proportionType = typeof (proportion);
@@ -85,8 +86,8 @@ class Sizer extends Container {
         if (paddingConfig === undefined) {
             paddingConfig = 0;
         }
-        if (extend === undefined) {
-            extend = false;
+        if (expand === undefined) {
+            expand = false;
         }
 
         var padding = {};
@@ -106,7 +107,7 @@ class Sizer extends Container {
         config.proportion = proportion;
         config.align = align;
         config.padding = padding;
-        config.extend = extend;
+        config.expand = expand;
         return this;
     }
 
@@ -180,16 +181,6 @@ const ALIGNMODE = {
     right: Phaser.Display.Align.RIGHT_CENTER,
     top: Phaser.Display.Align.TOP_CENTER,
     bottom: Phaser.Display.Align.BOTTOM_CENTER,
-}
-const ORIENTATIONMODE = {
-    x: 0,
-    h: 0,
-    horizontal: 0,
-    'left-to-right': 0,
-    y: 1,
-    v: 1,
-    vertical: 1,
-    'top-to-bottom': 1
 }
 
 const PROPORTIONMODE = {

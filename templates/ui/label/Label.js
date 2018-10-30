@@ -14,7 +14,7 @@ class Label extends Sizer {
         var y = GetValue(config, 'y', 0);
         var minWidth = GetValue(config, 'width', 0);
         var minHeight = GetValue(config, 'height', 0);
-        config.orientation = 0; // Left to right
+        config.orientation = GetValue(config, 'orientation', 0);
         super(scene, x, y, minWidth, minHeight, config);
         scene.add.existing(this);
 
@@ -26,32 +26,52 @@ class Label extends Sizer {
         var icon = GetValue(config, 'icon', undefined);
         var text = GetValue(config, 'text', undefined);
         // Space
-        var iconSpace = GetValue(config, 'space.icon', 0);
         var paddingLeft = GetValue(config, 'space.left', 0);
         var paddingRight = GetValue(config, 'space.right', 0);
         var paddingTop = GetValue(config, 'space.top', 0);
-        var paddingBottom = GetValue(config, 'space.bottom', 0);
+        var paddingBottom = GetValue(config, 'space.bottom', 0);        
+        var iconSpace = GetValue(config, 'space.icon', 0);
 
         if (background) {
             this.add(background, -1, undefined, undefined, true);
         }
 
         if (icon) {
-            var padding = {
-                left: paddingLeft,
-                right: (text) ? iconSpace : paddingRight,
-                top: paddingTop,
-                bottom: paddingBottom
+            var padding;
+            if (this.orientation === 0) {
+                padding = {
+                    left: paddingLeft,
+                    right: (text) ? iconSpace : paddingRight,
+                    top: paddingTop,
+                    bottom: paddingBottom
+                }
+            } else {
+                padding = {
+                    left: paddingLeft,
+                    right: paddingRight,
+                    top: paddingTop,
+                    bottom: (text) ? iconSpace : paddingBottom
+                }
             }
             this.add(icon, 0, 'center', padding);
         }
 
         if (text) {
-            var padding = {
-                left: (icon) ? 0 : paddingLeft,
-                right: paddingRight,
-                top: paddingTop,
-                bottom: paddingBottom
+            var padding;
+            if (this.orientation === 0) {
+                padding = {
+                    left: (icon) ? 0 : paddingLeft,
+                    right: paddingRight,
+                    top: paddingTop,
+                    bottom: paddingBottom
+                }
+            } else {
+                padding = {
+                    left: paddingLeft,
+                    right: paddingRight,
+                    top: (icon) ? 0 : paddingTop,
+                    bottom: paddingBottom
+                }
             }
             this.add(text, 0, 'center', padding);
         }

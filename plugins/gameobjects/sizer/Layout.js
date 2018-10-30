@@ -24,30 +24,30 @@ var Layout = function (parent) {
     // Set size
     var childrenProportion = this.childrenProportion;
     var newWidth, newHeight;
-    var extendX, extendY;
+    var expandX, expandY;
     if (parent) {
-        if (this.rexSizer.extend) {
+        if (this.rexSizer.expand) {
             if (parent.orientation === 0) {
-                extendY = true;
+                expandY = true;
             } else {
-                extendX = true;
+                expandX = true;
             }
         }
         if (this.childrenProportion > 0) {
             if (this.orientation === 0) {
-                extendX = true;
+                expandX = true;
             } else {
-                extendY = true;
+                expandY = true;
             }
         }
     }
-    if (extendX) {
+    if (expandX) {
         var padding = this.rexSizer.padding;
         newWidth = parent.width - padding.left - padding.right;
     } else {
         newWidth = this.childrenWidth;
     }
-    if (extendY) {
+    if (expandY) {
         var padding = this.rexSizer.padding;
         newHeight = parent.height - padding.top - padding.bottom;
     } else {
@@ -117,7 +117,7 @@ var Layout = function (parent) {
             y = (startY + padding.top);
             height = (this.height - padding.top - padding.bottom);
 
-            if ((!child.isRexSizer) && childConfig.extend) {
+            if ((!child.isRexSizer) && childConfig.expand) {
                 newChildHeight = height;
             }
         } else { // y
@@ -141,7 +141,7 @@ var Layout = function (parent) {
             x = (startX + padding.left);
             width = (this.width - padding.left - padding.right);
 
-            if ((!child.isRexSizer) && childConfig.extend) {
+            if ((!child.isRexSizer) && childConfig.expand) {
                 newChildWidth = width;
             }
         }

@@ -42,8 +42,7 @@ var game = new Phaser.Game(config);
 
 ```javascript
 var sizer = scene.add.rexSizer(x, y, {
-    orientation: 0, // 0|'x'|'h'|'horizontal'|1|'y'|'v'|'vertical'
-    // boundsColor: 0xff0000
+    orientation: 0,
 });
 ```
 
@@ -51,8 +50,7 @@ or
 
 ```javascript
 var sizer = scene.add.rexSizer(x, y, minWidth, minHeight, {
-    orientation: 0, // 0|'x'|'h'|'horizontal'|1|'y'|'v'|'vertical'
-    // boundsColor: 0xff0000
+    orientation: 0,
 });
 ```
 
@@ -60,8 +58,7 @@ or
 
 ```javascript
 var sizer = scene.add.rexSizer({
-    orientation: 0, // 0|'x'|'h'|'horizontal'|1|'y'|'v'|'vertical'
-    // boundsColor: 0xff0000
+    orientation: 0,
 });
 ```
 
@@ -94,8 +91,8 @@ var sizer = scene.make.rexSizer({
 
 - `x`, `y` : Position of sizer. Only available for top-sizer, children-sizers will be changed by parent.
 - `orientation` : Main orientation of the sizer.
-    - `'horizontal'`,`'h'`, `'x'`, or `0` : Arrange game objects from left ot right.
-    - `'vertical'`,`'v'`, `'y'`, or `1` : Arrange game objects from top to bottom.
+    - `'left-to-right'`, `'horizontal'`,`'h'`, `'x'`, or `0` : Arrange game objects from left ot right.
+    - `'top-to-bottom'`, `'vertical'`,`'v'`, `'y'`, or `1` : Arrange game objects from top to bottom.
 - `minWidth` : Minimum width. i.e. Width of this sizer will bigger then this value.
 - `minHeight` : Minimum height. i.e. Hieght of this sizer will bigger then this value.
 
@@ -128,7 +125,7 @@ sizer.add(child);
 or
 
 ```javascript
-sizer.add(child, proportion, align, paddingConfig);
+sizer.add(child, proportion, align, paddingConfig, expand);
 ```
 
 - `child` : A game object
@@ -154,6 +151,9 @@ sizer.add(child, proportion, align, paddingConfig);
             bottom: 0
         }
         ```
+- `expand` : Set `true` to
+    - Expand height when `orientation` is `0` (`left-to-right`), or
+    - Expand width when `orientation` is `1` (`top-to-bottom`)
 
 ### Layout children
 

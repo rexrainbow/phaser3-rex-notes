@@ -1,5 +1,6 @@
 import Sizer from '../sizer/Sizer.js';
 import GetElement from '../utils/GetElement.js';
+import ORIENTATIONMODE from '../utils/OrientationConst.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -27,13 +28,13 @@ class Dialog extends Sizer {
         }
 
         // Space
-        var titleSpace = GetValue(config, 'space.title', 0);
-        var contentSpace = GetValue(config, 'space.content', 0);
-        var buttonSpace = GetValue(config, 'space.button', 0);
         var paddingLeft = GetValue(config, 'space.left', 0);
         var paddingRight = GetValue(config, 'space.right', 0);
         var paddingTop = GetValue(config, 'space.top', 0);
-        var paddingBottom = GetValue(config, 'space.bottom', 0);
+        var paddingBottom = GetValue(config, 'space.bottom', 0);        
+        var titleSpace = GetValue(config, 'space.title', 0);
+        var contentSpace = GetValue(config, 'space.content', 0);
+        var buttonSpace = GetValue(config, 'space.button', 0);
 
         if (background) {
             this.add(background, -1, undefined, undefined, true);
@@ -133,14 +134,5 @@ Object.assign(
 );
 
 const defaultConfig = {};
-
-const ORIENTATIONMODE = {
-    x: 0,
-    h: 0,
-    horizontal: 0,
-    y: 1,
-    v: 1,
-    vertical: 1
-}
 
 export default Dialog;
