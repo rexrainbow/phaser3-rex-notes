@@ -4,7 +4,6 @@ import TagText from './tagtext.js';
 import Canvas from './canvas.js';
 import ContainerLite from './containerlite.js';
 import GridTable from './gridtable.js';
-import Sizer from './sizer.js';
 import RoundRectangle from './roundrectangle.js';
 
 // custom file loader      
@@ -94,7 +93,6 @@ export {
     Canvas,
     ContainerLite,
     GridTable,
-    Sizer,
     RoundRectangle,
 
     // custom file loader 

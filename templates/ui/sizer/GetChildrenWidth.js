@@ -4,15 +4,12 @@ var GetChildrenWidth = function () {
     }
 
     var result = 0;
-    var children = this.getChildren();
+    var children = this.sizerChildren;
     var child, padding, childWidth;
     if (this.orientation === 0) { // x
         // Get summation of minimum width
         for (var i = 0, cnt = children.length; i < cnt; i++) {
             child = children[i];
-            if (!child.hasOwnProperty('rexSizer')) {
-                continue;
-            }
             // Skip invisible child
             if (!child.visible) {
                 continue;

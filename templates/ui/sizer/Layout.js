@@ -69,7 +69,7 @@ var Layout = function (parent) {
     }
 
     // Layout children    
-    var children = this.getChildren();
+    var children = this.sizerChildren;
     var child, childConfig, padding;
     var startX = this.x - (this.displayWidth * this.originX),
         startY = this.y - (this.displayHeight * this.originY);
@@ -79,9 +79,6 @@ var Layout = function (parent) {
     var newChildWidth, newChildHeight;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
         child = children[i];
-        if (!child.hasOwnProperty('rexSizer')) {
-            continue;
-        }
         // Skip invisible child
         if (!child.visible) {
             continue;
@@ -117,7 +114,7 @@ var Layout = function (parent) {
             y = (startY + padding.top);
             height = (this.height - padding.top - padding.bottom);
 
-            if ((!child.isRexSizer) && childConfig.expand) {
+            if (childConfig.expand) {
                 newChildHeight = height;
             }
         } else { // y
@@ -141,14 +138,16 @@ var Layout = function (parent) {
             x = (startX + padding.left);
             width = (this.width - padding.left - padding.right);
 
-            if ((!child.isRexSizer) && childConfig.expand) {
+            if (childConfig.expand) {
                 newChildWidth = width;
             }
         }
 
         // Set size of child
         if ((newChildWidth !== undefined) || (newChildHeight !== undefined)) {
-            if (child.resize) { // Has `resize` method
+            if (child.isRexSizer) {
+                // Don't resize again
+            } else if (child.resize) { // Has `resize` method
                 if (newChildWidth === undefined) {
                     newChildWidth = child.width;
                 }

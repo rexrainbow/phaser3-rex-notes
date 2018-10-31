@@ -20,8 +20,6 @@ module.exports = {
         'containerlite': './plugins/containerlite.js',
         'gridtableplugin': './plugins/gridtable-plugin.js',
         'gridtable': './plugins/gridtable.js',
-        'sizerplugin': './plugins/sizer-plugin.js',
-        'sizer': './plugins/sizer.js',
         'roundrectangleplugin': './plugins/roundrectangle-plugin.js',
         'roundrectangle': './plugins/roundrectangle.js',
 

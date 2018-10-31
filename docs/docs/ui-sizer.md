@@ -9,13 +9,13 @@ It is inspired from [wxSizer](https://docs.wxwidgets.org/3.0/overview_sizer.html
 
 ## Source code
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/sizer-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexsizerplugin.min.js)
+[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/ui/ui-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexuiplugin.min.js)
 
-[Class](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/sizer.js)
+[Class](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/ui/sizer/Sizer.js)
 
 ## Usage
 
-[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/sizer)
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-sizer)
 
 ### Install plugin
 
@@ -41,7 +41,7 @@ var game = new Phaser.Game(config);
 ### Add sizer object
 
 ```javascript
-var sizer = scene.add.rexSizer(x, y, {
+var sizer = scene.rexUI.add.sizer(x, y, {
     orientation: 0,
 });
 ```
@@ -49,7 +49,7 @@ var sizer = scene.add.rexSizer(x, y, {
 or
 
 ```javascript
-var sizer = scene.add.rexSizer(x, y, minWidth, minHeight, {
+var sizer = scene.rexUI.add.sizer(x, y, minWidth, minHeight, {
     orientation: 0,
 });
 ```
@@ -57,7 +57,7 @@ var sizer = scene.add.rexSizer(x, y, minWidth, minHeight, {
 or
 
 ```javascript
-var sizer = scene.add.rexSizer({
+var sizer = scene.rexUI.add.sizer({
     orientation: 0,
 });
 ```
@@ -65,13 +65,13 @@ var sizer = scene.add.rexSizer({
 or
 
 ```javascript
-var sizer = scene.add.rexSizer(x, y, minWidth, minHeight, orientation);
+var sizer = scene.rexUI.add.sizer(x, y, minWidth, minHeight, orientation);
 ```
 
 Add sizer from JSON
 
 ```javascript
-var sizer = scene.make.rexSizer({
+var sizer = scene.rexUI.add.sizer({
     x: 0,
     y: 0,
     minWidth: undefined,
@@ -100,7 +100,7 @@ var sizer = scene.make.rexSizer({
 
 - Define class
     ```javascript
-    class MySizer extends RexPlugins.GameObjects.Sizer {
+    class MySizer extends RexPlugins.UI.Sizer {
         constructor(scene, x, y, minWidth, minHeight, config) {
             super(scene, x, y, minWidth, minHeight, config);
             // ...

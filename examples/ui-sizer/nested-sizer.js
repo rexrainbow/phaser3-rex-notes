@@ -1,4 +1,4 @@
-import SizerPlugin from 'rexPlugins/sizer-plugin.js';
+import UIPlugin from 'rexTemplates/ui/ui-plugin.js';
 
 const Random = Phaser.Math.Between;
 
@@ -54,7 +54,7 @@ var getRow = function (scene, data) {
         fontSize: '24px',
         color: 'white'
     });
-    var sizer = scene.add.rexSizer({
+    var sizer = scene.rexUI.add.sizer({
             orientation: 'x',
         })
         .add(background, -1) // Extend width equal to sizer width
@@ -71,7 +71,7 @@ var getTable = function (scene, x, y, width, height, table) {
         color: 'white'
     });
 
-    var sizer = scene.add.rexSizer(x, y, width, height, {
+    var sizer = scene.rexUI.add.sizer(x, y, width, height, {
             orientation: 'y',
         })
         .add(title);
@@ -97,10 +97,10 @@ var config = {
     height: 600,
     scene: Demo,
     plugins: {
-        global: [{
-            key: 'rexSizer',
-            plugin: SizerPlugin,
-            start: true
+        scene: [{
+            key: 'rexUI',
+            plugin: UIPlugin,
+            mapping: 'rexUI'
         }]
     }
 };

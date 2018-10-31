@@ -62,7 +62,7 @@ nav:
         - Group: group.md        
         - Grid table: gridtable.md
         - UI:
-            - Sizer: sizer.md
+            - Sizer: ui-sizer.md
             - Label: ui-label.md
             - Dialog: ui-dialog.md
     - Zone: zone.md

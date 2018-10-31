@@ -1,12 +1,9 @@
 var GetChildrenProportion = function () {
     var result = 0;
-    var children = this.getChildren();
+    var children = this.sizerChildren;
     var child, proportion;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
         child = children[i];
-        if (!child.hasOwnProperty('rexSizer')) {
-            continue;
-        }
         // Skip invisible child
         if (!child.visible) {
             continue;

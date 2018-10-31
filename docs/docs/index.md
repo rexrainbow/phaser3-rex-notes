@@ -44,7 +44,6 @@
 1. [Run-commands](runcommands.md): Run commands in array.
 1. [Scroller](scroller.md): Drag content. Slow down when dragging released, pull back when out of bounds.
 1. [Sequence](sequence.md): Run sequence commands in array.
-1. [Sizer](sizer.md): Layout children game objects.
 1. [Slider](slider.md): Drag thumb on a slider bar.
 1. [Swirl-pipeline](swirlpipeline.md): Swirl post processing filter.
 1. [TagText](tagtext.md): Displays text with multi-color, font face, or font size with tags.
@@ -53,6 +52,7 @@
 1. [Typing](texttyping.md): Typing text on text object.
 1. [UI-label](ui-label.md): A game object container with a icon, text, and background.
 1. [UI-dialog](ui-dialog.md): A container with a title, content, buttons and backgrounds.
+1. [UI-Sizer](ui-sizer.md): Layout children game objects.
 1. [Virtual joystick](virtualjoystick.md): Simulate curosr keys according touch events.
 1. [Wait events](waitevents.md): Wait fired events or callbacks.
 1. [Webfont-loader](webfontloader.md): Load web font by google webfont loader in preload stage.
