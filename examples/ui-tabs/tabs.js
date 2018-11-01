@@ -18,7 +18,7 @@ class Demo extends Phaser.Scene {
 
                 background: this.rexUI.add.roundRectangle(0, 0, 10, 10, 0, 0x333333),
 
-                panel: this.rexUI.add.roundRectangle(0, 0, 400, 400, 20, 0x283593),
+                panel: this.rexUI.add.roundRectangle(0, 0, 400, 400, 20, 0x0),
 
                 leftButtons: [
                     this.rexUI.add.roundRectangle(0, 0, 100, 50, {
@@ -98,7 +98,7 @@ class Demo extends Phaser.Scene {
                 }
             })
             .layout()
-            // .drawBounds(this.add.graphics(), 0xff0000);
+        // .drawBounds(this.add.graphics(), 0xff0000);
 
         this.print = this.add.text(0, 0, '');
         tabs
@@ -106,6 +106,8 @@ class Demo extends Phaser.Scene {
                 this.print.text += groupName + '-' + index + '\n';
                 tabs.getElement('panel').setFillStyle(button.fillColor);
             }, this)
+
+        tabs.emitButtonClick('left', 0);
     }
 
     update() {}

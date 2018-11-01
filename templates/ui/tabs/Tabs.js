@@ -108,6 +108,15 @@ class Tabs extends GridSizer {
         this.childrenMap.topButtons = topButtons;
         this.childrenMap.bottomButtons = bottomButtons;
     }
+
+    emitButtonClick(groupName, index) {
+        var button = this.getElement(groupName + 'Buttons[' + index + ']');
+        if (!button) {
+            return this;
+        }
+        this.emit('button.click', button, groupName, index);
+        return this;
+    }
 }
 
 var CreateTab = function (tabs, buttons, orientation, space, groupName) {
