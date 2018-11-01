@@ -1051,8 +1051,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#set-color" title="Set color" class="md-nav__link">
-    Set color
+  <a href="#color" title="Color" class="md-nav__link">
+    Color
   </a>
   
 </li>
@@ -3370,8 +3370,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#set-color" title="Set color" class="md-nav__link">
-    Set color
+  <a href="#color" title="Color" class="md-nav__link">
+    Color
   </a>
   
 </li>
@@ -3436,20 +3436,44 @@
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">grid</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyGrid</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">cellWidth</span><span class="p">,</span> <span class="nx">cellHeight</span><span class="p">,</span> <span class="nx">fillColor</span><span class="p">,</span> <span class="nx">fillAlpha</span><span class="p">,</span> <span class="nx">outlineFillColor</span><span class="p">,</span> <span class="nx">outlineFillAlpha</span><span class="p">);</span>
 </pre></div></li>
 </ul>
-<h3 id="set-color">Set color<a class="headerlink" href="#set-color" title="Permanent link">&para;</a></h3>
+<h3 id="color">Color<a class="headerlink" href="#color" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Fill color
+<li>Fill color<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">grid</span><span class="p">.</span><span class="nx">fillColor</span><span class="p">;</span>
+</pre></div></li>
+<li>Set
     <div class="codehilite"><pre><span></span><span class="nx">grid</span><span class="p">.</span><span class="nx">setFillStyle</span><span class="p">(</span><span class="nx">color</span><span class="p">,</span> <span class="nx">alpha</span><span class="p">);</span>
 </pre></div></li>
-<li>Stroke color
+</ul>
+</li>
+<li>Stroke color<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">grid</span><span class="p">.</span><span class="nx">strokeColor</span><span class="p">;</span>
+</pre></div></li>
+<li>Set
     <div class="codehilite"><pre><span></span><span class="nx">grid</span><span class="p">.</span><span class="nx">setStrokeStyle</span><span class="p">(</span><span class="nx">lineWidth</span><span class="p">,</span> <span class="nx">color</span><span class="p">,</span> <span class="nx">alpha</span><span class="p">);</span>
 </pre></div></li>
-<li>Alternating color
+</ul>
+</li>
+<li>Alternating color<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">grid</span><span class="p">.</span><span class="nx">altFillColor</span><span class="p">;</span>
+</pre></div></li>
+<li>Set
     <div class="codehilite"><pre><span></span><span class="nx">grid</span><span class="p">.</span><span class="nx">setAltFillStyle</span><span class="p">(</span><span class="nx">color</span><span class="p">,</span> <span class="nx">alpha</span><span class="p">);</span>
 </pre></div></li>
-<li>Outline color
+</ul>
+</li>
+<li>Outline color<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">grid</span><span class="p">.</span><span class="nx">outlineFillColor</span><span class="p">;</span>
+</pre></div></li>
+<li>Set
     <div class="codehilite"><pre><span></span><span class="nx">grid</span><span class="p">.</span><span class="nx">setOutlineStyle</span><span class="p">(</span><span class="nx">color</span><span class="p">,</span> <span class="nx">alpha</span><span class="p">;</span>
 </pre></div></li>
+</ul>
+</li>
 </ul>
 <div class="admonition warning">
 <p class="admonition-title">No tint methods</p>

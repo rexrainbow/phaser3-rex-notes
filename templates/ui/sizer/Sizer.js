@@ -115,8 +115,8 @@ class Sizer extends Container {
         return this;
     }
 
-    addBackground(gameObject) {
-        this.add(gameObject, -1, undefined, undefined, true);
+    addBackground(gameObject, paddingConfig) {
+        this.add(gameObject, -1, undefined, paddingConfig, true);
         return this;
     }
 

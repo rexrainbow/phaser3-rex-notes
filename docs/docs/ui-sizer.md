@@ -155,6 +155,12 @@ sizer.add(child, proportion, align, paddingConfig, expand);
     - Expand height when `orientation` is `0` (`left-to-right`), or
     - Expand width when `orientation` is `1` (`top-to-bottom`)
 
+### Add background
+
+```javascript
+sizer.addBackground(child, paddingConfig);
+```
+
 ### Layout children
 
 Arrange position of all children.
