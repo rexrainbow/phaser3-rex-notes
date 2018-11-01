@@ -33,16 +33,26 @@ var triangle = scene.add.triangle(x, y, x1, y1, x2, y2, x3, y3, fillColor);
     var triangle = new MyTriangle(scene, x, y, x1, y1, x2, y2, x3, y3, fillColor);
     ```
 
-### Set color
+### Color
 
 - Fill color
-    ```javascript
-    triangle.setFillStyle(color, alpha);
-    ```
+    - Get
+        ```javascript
+        var color = triangle.fillColor;
+        ```
+    - Set
+        ```javascript
+        triangle.setFillStyle(color, alpha);
+        ```
 - Stroke color
-    ```javascript
-    triangle.setStrokeStyle(lineWidth, color, alpha);
-    ```
+    - Get
+        ```javascript
+        var color = triangle.strokeColor;
+        ```
+    - Set
+        ```javascript
+        triangle.setStrokeStyle(lineWidth, color, alpha);
+        ```
 
 !!! warning "No tint methods"
     Uses `triangle.setFillStyle(color, alpha)` to change color.

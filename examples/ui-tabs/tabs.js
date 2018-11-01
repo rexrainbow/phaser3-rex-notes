@@ -16,32 +16,68 @@ class Demo extends Phaser.Scene {
                 x: 400,
                 y: 300,
 
-                background: this.rexUI.add.roundRectangle(0, 0, 10, 10, 0, 0x001064),
+                background: this.rexUI.add.roundRectangle(0, 0, 10, 10, 0, 0x333333),
 
-                panel: this.rexUI.add.roundRectangle(0, 0, 400, 400, 0, 0x283593),
+                panel: this.rexUI.add.roundRectangle(0, 0, 400, 400, 20, 0x283593),
 
                 leftButtons: [
-                    this.rexUI.add.roundRectangle(0, 0, 100, 50, 0, 0x5f5fc4),
-                    this.rexUI.add.roundRectangle(0, 0, 100, 50, 0, 0x5f5fc4),
-                    this.rexUI.add.roundRectangle(0, 0, 100, 50, 0, 0x5f5fc4)
+                    this.rexUI.add.roundRectangle(0, 0, 100, 50, {
+                        tl: 25,
+                        bl: 25
+                    }, Random(0, 0xffffff)),
+                    this.rexUI.add.roundRectangle(0, 0, 100, 50, {
+                        tl: 25,
+                        bl: 25
+                    }, Random(0, 0xffffff)),
+                    this.rexUI.add.roundRectangle(0, 0, 100, 50, {
+                        tl: 25,
+                        bl: 25
+                    }, Random(0, 0xffffff)),
                 ],
 
                 rightButtons: [
-                    this.rexUI.add.roundRectangle(0, 0, 100, 50, 0, 0x5f5fc4),
-                    this.rexUI.add.roundRectangle(0, 0, 100, 50, 0, 0x5f5fc4),
-                    this.rexUI.add.roundRectangle(0, 0, 100, 50, 0, 0x5f5fc4)
+                    this.rexUI.add.roundRectangle(0, 0, 100, 50, {
+                        br: 25,
+                        tr: 25
+                    }, Random(0, 0xffffff)),
+                    this.rexUI.add.roundRectangle(0, 0, 100, 50, {
+                        br: 25,
+                        tr: 25
+                    }, Random(0, 0xffffff)),
+                    this.rexUI.add.roundRectangle(0, 0, 100, 50, {
+                        br: 25,
+                        tr: 25
+                    }, Random(0, 0xffffff)),
                 ],
 
                 topButtons: [
-                    this.rexUI.add.roundRectangle(0, 0, 100, 50, 0, 0x5f5fc4),
-                    this.rexUI.add.roundRectangle(0, 0, 100, 50, 0, 0x5f5fc4),
-                    this.rexUI.add.roundRectangle(0, 0, 100, 50, 0, 0x5f5fc4)
+                    this.rexUI.add.roundRectangle(0, 0, 100, 50, {
+                        tl: 50,
+                        tr: 50
+                    }, Random(0, 0xffffff)),
+                    this.rexUI.add.roundRectangle(0, 0, 100, 50, {
+                        tl: 50,
+                        tr: 50
+                    }, Random(0, 0xffffff)),
+                    this.rexUI.add.roundRectangle(0, 0, 100, 50, {
+                        tl: 50,
+                        tr: 50
+                    }, Random(0, 0xffffff)),
                 ],
 
                 bottomButtons: [
-                    this.rexUI.add.roundRectangle(0, 0, 100, 50, 0, 0x5f5fc4),
-                    this.rexUI.add.roundRectangle(0, 0, 100, 50, 0, 0x5f5fc4),
-                    this.rexUI.add.roundRectangle(0, 0, 100, 50, 0, 0x5f5fc4)
+                    this.rexUI.add.roundRectangle(0, 0, 100, 50, {
+                        bl: 50,
+                        br: 50
+                    }, Random(0, 0xffffff)),
+                    this.rexUI.add.roundRectangle(0, 0, 100, 50, {
+                        bl: 50,
+                        br: 50
+                    }, Random(0, 0xffffff)),
+                    this.rexUI.add.roundRectangle(0, 0, 100, 50, {
+                        bl: 50,
+                        br: 50
+                    }, Random(0, 0xffffff)),
                 ],
 
                 space: {
@@ -62,7 +98,14 @@ class Demo extends Phaser.Scene {
                 }
             })
             .layout()
-            .drawBounds(this.add.graphics(), 0xff0000);
+            // .drawBounds(this.add.graphics(), 0xff0000);
+
+        this.print = this.add.text(0, 0, '');
+        tabs
+            .on('button.click', function (button, groupName, index) {
+                this.print.text += groupName + '-' + index + '\n';
+                tabs.getElement('panel').setFillStyle(button.fillColor);
+            }, this)
     }
 
     update() {}

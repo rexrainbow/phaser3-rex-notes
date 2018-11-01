@@ -36,16 +36,26 @@ var polygon = scene.add.polygon(x, y, points, fillColor);
     var polygon = new MyPolygon(scene, x, y, points, fillColor);
     ```
 
-### Set color
+### Color
 
 - Fill color
-    ```javascript
-    polygon.setFillStyle(color, alpha);
-    ```
+    - Get
+        ```javascript
+        var color = polygon.fillColor;
+        ```
+    - Set
+        ```javascript
+        polygon.setFillStyle(color, alpha);
+        ```
 - Stroke color
-    ```javascript
-    polygon.setStrokeStyle(lineWidth, color, alpha);
-    ```
+    - Get
+        ```javascript
+        var color = polygon.strokeColor;
+        ```
+    - Set
+        ```javascript
+        polygon.setStrokeStyle(lineWidth, color, alpha);
+        ```
 
 !!! warning "No tint methods"
     Uses `polygon.setFillStyle(color, alpha)` to change color.

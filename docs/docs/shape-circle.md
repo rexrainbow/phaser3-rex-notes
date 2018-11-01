@@ -33,16 +33,26 @@ var circle = scene.add.circle(x, y, radius, fillColor);
     var circle = new MyCircle(scene, x, y, radius, fillColor, fillAlpha);
     ```
 
-### Set color
+### Color
 
 - Fill color
-    ```javascript
-    circle.setFillStyle(color, alpha);
-    ```
+    - Get
+        ```javascript
+        var color = circle.fillColor;
+        ```
+    - Set
+        ```javascript
+        circle.setFillStyle(color, alpha);
+        ```
 - Stroke color
-    ```javascript
-    circle.setStrokeStyle(lineWidth, color, alpha);
-    ```
+    - Get
+        ```javascript
+        var color = circle.strokeColor;
+        ```
+    - Set
+        ```javascript
+        circle.setStrokeStyle(lineWidth, color, alpha);
+        ```
 
 !!! warning "No tint methods"
     Uses `circle.setFillStyle(color, alpha)` to change color.
@@ -65,11 +75,11 @@ var circle = scene.add.circle(x, y, radius, fillColor);
 - Iterations: Increase this value for smoother arcs, at the cost of more polygons being rendered. Default is `0.01`
     - Get
         ```javascript
-        var iterations = arc.iterations;
+        var iterations = circle.iterations;
         ```
     - Set
         ```javascript
-        arc.iterations = iterations;
+        circle.iterations = iterations;
         ```
 
 ### Other properties

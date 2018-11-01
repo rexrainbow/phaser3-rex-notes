@@ -33,16 +33,26 @@ var arc = scene.add.arc(x, y, radius, startAngle, endAngle, anticlockwise, fillC
     var arc = new MyArc(scene, x, y, radius, startAngle, endAngle, anticlockwise, fillColor);
     ```
 
-### Set color
+### Color
 
 - Fill color
-    ```javascript
-    arc.setFillStyle(color, alpha);
-    ```
+    - Get
+        ```javascript
+        var color = arc.fillColor;
+        ```
+    - Set
+        ```javascript
+        arc.setFillStyle(color, alpha);
+        ```
 - Stroke color
-    ```javascript
-    arc.setStrokeStyle(lineWidth, color, alpha);
-    ```
+    - Get
+        ```javascript
+        var color = arc.strokeColor;
+        ```
+    - Set
+        ```javascript
+        arc.setStrokeStyle(lineWidth, color, alpha);
+        ```
 
 !!! warning "No tint methods"
     Uses `arc.setFillStyle(color, alpha)` to change color.

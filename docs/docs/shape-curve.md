@@ -35,16 +35,26 @@ var curve = scene.add.curve(x, y, path, fillColor);
     var curve = new MyCurve(scene, x, y, path, fillColor, fillAlpha);
     ```
 
-### Set color
+### Color
 
 - Fill color
-    ```javascript
-    curve.setFillStyle(color, alpha);
-    ```
+    - Get
+        ```javascript
+        var color = curve.fillColor;
+        ```
+    - Set
+        ```javascript
+        curve.setFillStyle(color, alpha);
+        ```
 - Stroke color
-    ```javascript
-    curve.setStrokeStyle(lineWidth, color, alpha);
-    ```
+    - Get
+        ```javascript
+        var color = curve.strokeColor;
+        ```
+    - Set
+        ```javascript
+        curve.setStrokeStyle(lineWidth, color, alpha);
+        ```
 
 !!! warning "No tint methods"
     Uses `curve.setFillStyle(color, alpha)` to change color.

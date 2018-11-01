@@ -36,13 +36,23 @@ var line = scene.add.line(x, y, x1, y1, x2, y2, strokeColor);
 ### Set color
 
 - Fill color
-    ```javascript
-    line.setFillStyle(color, alpha);
-    ```
+    - Get
+        ```javascript
+        var color = line.fillColor;
+        ```
+    - Set
+        ```javascript
+        line.setFillStyle(color, alpha);
+        ```
 - Stroke color
-    ```javascript
-    line.setStrokeStyle(lineWidth, color, alpha);
-    ```
+    - Get
+        ```javascript
+        var color = line.strokeColor;
+        ```
+    - Set
+        ```javascript
+        line.setStrokeStyle(lineWidth, color, alpha);
+        ```
 
 !!! warning "No tint methods"
     Uses `line.setFillStyle(color, alpha)` to change color.

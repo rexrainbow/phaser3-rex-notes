@@ -33,16 +33,26 @@ var rect = scene.add.rectangle(x, y, width, height, fillColor);
     var rect = new MyRectangle(scene, x, y, width, height, fillColor);
     ```
 
-### Set color
+### Color
 
 - Fill color
-    ```javascript
-    rect.setFillStyle(color, alpha);
-    ```
+    - Get
+        ```javascript
+        var color = rect.fillColor;
+        ```
+    - Set
+        ```javascript
+        rect.setFillStyle(color, alpha);
+        ```
 - Stroke color
-    ```javascript
-    rect.setStrokeStyle(lineWidth, color, alpha);
-    ```
+    - Get
+        ```javascript
+        var color = rect.strokeColor;
+        ```
+    - Set
+        ```javascript
+        rect.setStrokeStyle(lineWidth, color, alpha);
+        ```
 
 !!! warning "No tint methods"
     Uses `rect.setFillStyle(color, alpha)` to change color.

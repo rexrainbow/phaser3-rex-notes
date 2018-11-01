@@ -37,19 +37,29 @@ var star = scene.add.star(x, y, points, innerRadius, outerRadius, fillColor);
     var star = new MyStar(scene, x, y, points, innerRadius, outerRadius, fillColor);
     ```
 
-### Set color
+### Color
 
 - Fill color
-    ```javascript
-    line.setFillStyle(color, alpha);
-    ```
+    - Get
+        ```javascript
+        var color = star.fillColor;
+        ```
+    - Set
+        ```javascript
+        star.setFillStyle(color, alpha);
+        ```
 - Stroke color
-    ```javascript
-    line.setStrokeStyle(lineWidth, color, alpha);
-    ```
+    - Get
+        ```javascript
+        var color = star.strokeColor;
+        ```
+    - Set
+        ```javascript
+        star.setStrokeStyle(lineWidth, color, alpha);
+        ```
 
 !!! warning "No tint methods"
-    Uses `line.setFillStyle(color, alpha)` to change color.
+    Uses `star.setFillStyle(color, alpha)` to change color.
 
 ### Properties
 

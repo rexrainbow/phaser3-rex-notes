@@ -64,7 +64,7 @@ class Tabs extends GridSizer {
         }
 
         if (leftButtons) {
-            var buttonsSizer = CreateTab(leftButtons, 1, leftButtonSpace);
+            var buttonsSizer = CreateTab(this, leftButtons, 1, leftButtonSpace, 'left');
             var padding = {
                 left: paddingLeft,
                 top: leftButtonsOffset,
@@ -73,7 +73,7 @@ class Tabs extends GridSizer {
         }
 
         if (rightButtons) {
-            var buttonsSizer = CreateTab(rightButtons, 1, rightButtonSpace);
+            var buttonsSizer = CreateTab(this, rightButtons, 1, rightButtonSpace, 'right');
             var padding = {
                 right: paddingRight,
                 top: rightButtonsOffset,
@@ -82,7 +82,7 @@ class Tabs extends GridSizer {
         }
 
         if (topButtons) {
-            var buttonsSizer = CreateTab(topButtons, 0, topButtonSpace);
+            var buttonsSizer = CreateTab(this, topButtons, 0, topButtonSpace, 'top');
             var padding = {
                 top: paddingTop,
                 left: toptButtonsOffset,
@@ -91,7 +91,7 @@ class Tabs extends GridSizer {
         }
 
         if (bottomButtons) {
-            var buttonsSizer = CreateTab(bottomButtons, 0, bottomButtonSpace);
+            var buttonsSizer = CreateTab(this, bottomButtons, 0, bottomButtonSpace, 'bottom');
             var padding = {
                 bottom: paddingBottom,
                 left: bottomButtonsOffset,
@@ -102,6 +102,7 @@ class Tabs extends GridSizer {
 
         this.childrenMap = {};
         this.childrenMap.background = background;
+        this.childrenMap.panel = panel;
         this.childrenMap.leftButtons = leftButtons;
         this.childrenMap.rightButtons = rightButtons;
         this.childrenMap.topButtons = topButtons;
@@ -109,14 +110,16 @@ class Tabs extends GridSizer {
     }
 }
 
-var CreateTab = function (buttons, orientation, space) {
-    var scene = buttons[0].scene;
+var CreateTab = function (tabs, buttons, orientation, space, groupName) {
+    var scene = tabs.scene;
     var buttonsSizer = new Sizer(scene, {
         orientation: orientation
     });
 
+    var button;
     var padding = 0;
     for (var i = 0, cnt = buttons.length; i < cnt; i++) {
+        button = buttons[i];
         if (i >= 1) {
             padding = {
                 left: (orientation === 0) ? space : 0,
@@ -127,8 +130,28 @@ var CreateTab = function (buttons, orientation, space) {
         }
 
         buttonsSizer.add(buttons[i], 0, 'center', padding, true);
+        // Add click callback
+        button
+            .setInteractive()
+            .on('pointerdown', fireEvent('button.click', button, groupName, i), tabs)
+            .on('pointerover', fireEvent('button.over', button, groupName, i), tabs)
+            .on('pointerout', fireEvent('button.out', button, groupName, i), tabs)
     }
     return buttonsSizer;
 }
+
+var fireEvent = function (eventName, button, groupName, index) {
+    return function () {
+        this.emit(eventName, button, groupName, index);
+    }
+}
+
+var methods = {
+    getElement: GetElement,
+}
+Object.assign(
+    Tabs.prototype,
+    methods
+);
 
 export default Tabs;

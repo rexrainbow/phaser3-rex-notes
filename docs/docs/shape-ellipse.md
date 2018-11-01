@@ -33,16 +33,26 @@ var ellipse = scene.add.ellipse(x, y, width, height, fillColor);
     var ellipse = new MyEllipse(scene, x, y, width, height, fillColor, fillAlpha);
     ```
 
-### Set color
+### Color
 
 - Fill color
-    ```javascript
-    ellipse.setFillStyle(color, alpha);
-    ```
+    - Get
+        ```javascript
+        var color = ellipse.fillColor;
+        ```
+    - Set
+        ```javascript
+        ellipse.setFillStyle(color, alpha);
+        ```
 - Stroke color
-    ```javascript
-    ellipse.setStrokeStyle(lineWidth, color, alpha);
-    ```
+    - Get
+        ```javascript
+        var color = ellipse.strokeColor;
+        ```
+    - Set
+        ```javascript
+        ellipse.setStrokeStyle(lineWidth, color, alpha);
+        ```
 
 !!! warning "No tint methods"
     Uses `ellipse.setFillStyle(color, alpha)` to change color.
@@ -64,11 +74,11 @@ var ellipse = scene.add.ellipse(x, y, width, height, fillColor);
 The number of points used when rendering it. Increase this value for smoother curves, at the cost of more polygons being rendered.
 
 ```javascript
-curve.setSmoothness(smoothness);
+ellipse.setSmoothness(smoothness);
 ```
 or
 ```javascript
-curve.smoothness = smoothness;
+ellipse.smoothness = smoothness;
 ```
 
 ### Other properties
