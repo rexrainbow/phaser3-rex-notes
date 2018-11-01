@@ -1,4 +1,5 @@
 import NOOP from 'rexPlugins/utils/object/NOOP.js';
+import ResizeGameObject from '../utils/ResizeGameObject.js';
 
 const Zone = Phaser.GameObjects.Zone;
 const AlignIn = Phaser.Display.Align.In.QuickSet;
@@ -22,7 +23,6 @@ var Layout = function (parent) {
     }
 
     // Set size
-    var childrenProportion = this.childrenProportion;
     var newWidth, newHeight;
     var expandX, expandY;
     if (parent) {
@@ -56,14 +56,14 @@ var Layout = function (parent) {
     this.resize(newWidth, newHeight);
 
     var proportionLength;
-    if ((childrenProportion > 0) && (parent !== undefined)) {
+    if ((this.childrenProportion > 0) && (parent !== undefined)) {
         var remainder;
         if (this.orientation === 0) {
             remainder = this.width - this.childrenWidth;
         } else {
             remainder = this.height - this.childrenHeight;
         }
-        proportionLength = remainder / childrenProportion;
+        proportionLength = remainder / this.childrenProportion;
     } else {
         proportionLength = 0;
     }
@@ -84,13 +84,12 @@ var Layout = function (parent) {
             continue;
         }
 
-        childConfig = child.rexSizer;
-        padding = childConfig.padding;
-
         if (child.isRexSizer) {
             child.layout(this);
         }
 
+        childConfig = child.rexSizer;
+        padding = childConfig.padding;
         newChildWidth = undefined;
         newChildHeight = undefined;
         if (this.orientation === 0) { // x
@@ -144,30 +143,13 @@ var Layout = function (parent) {
         }
 
         // Set size of child
-        if ((newChildWidth !== undefined) || (newChildHeight !== undefined)) {
-            if (child.isRexSizer) {
-                // Don't resize again
-            } else if (child.resize) { // Has `resize` method
-                if (newChildWidth === undefined) {
-                    newChildWidth = child.width;
-                }
-                if (newChildHeight === undefined) {
-                    newChildHeight = child.height;
-                }
-                child.resize(newChildWidth, newChildHeight);
-            } else { // Set display width/height
-                if (newChildWidth !== undefined) {
-                    child.displayWidth = newChildWidth;
-                }
-                if (newChildHeight !== undefined) {
-                    child.displayHeight = newChildHeight;
-                }
-            }
+        if (!child.isRexSizer) { // Don't resize sizer again
+            ResizeGameObject(child, newChildWidth, newChildHeight);
         }
 
         tmpZone.setPosition(x, y).setSize(width, height);
         AlignIn(child, tmpZone, childConfig.align);
-        this.resetChildState(child)
+        this.resetChildState(child);
     }
     return this;
 }

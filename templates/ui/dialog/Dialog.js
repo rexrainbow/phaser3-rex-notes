@@ -31,13 +31,13 @@ class Dialog extends Sizer {
         var paddingLeft = GetValue(config, 'space.left', 0);
         var paddingRight = GetValue(config, 'space.right', 0);
         var paddingTop = GetValue(config, 'space.top', 0);
-        var paddingBottom = GetValue(config, 'space.bottom', 0);        
+        var paddingBottom = GetValue(config, 'space.bottom', 0);
         var titleSpace = GetValue(config, 'space.title', 0);
         var contentSpace = GetValue(config, 'space.content', 0);
         var buttonSpace = GetValue(config, 'space.button', 0);
 
         if (background) {
-            this.add(background, -1, undefined, undefined, true);
+            this.addBackground(background);
         }
 
         if (title) {

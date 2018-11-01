@@ -1,11 +1,15 @@
 import ContainerLite from 'rexPlugins/gameobjects/containerlite/ContainerLite.js';
+import ParsePaddingConfig from '../utils/ParsePaddingConfig.js'
+import GetSizerConfig from './GetSizerConfig.js';
 import GetChildrenWidth from './GetChildrenWidth.js';
 import GetChildrenHeight from './GetChildrenHeight.js';
 import GetChildrenProportion from './GetChildrenProportion.js';
 import GetAllChildrenSizer from './GetAllChildrenSizer.js';
+import Resize from './Resize.js';
 import Layout from './Layout.js';
-import DrawBounds from './DrawBounds.js';
+import DrawBounds from '../utils/DrawBounds.js';
 import ORIENTATIONMODE from '../utils/OrientationConst.js';
+import ALIGNMODE from '../utils/AlignConst.js';
 
 const Container = ContainerLite;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
@@ -102,25 +106,17 @@ class Sizer extends Container {
             expand = false;
         }
 
-        var padding = {};
-        if (typeof (paddingConfig) === 'number') {
-            padding.left = paddingConfig;
-            padding.right = paddingConfig;
-            padding.top = paddingConfig;
-            padding.bottom = paddingConfig;
-        } else {
-            padding.left = GetValue(paddingConfig, 'left', 0);
-            padding.right = GetValue(paddingConfig, 'right', 0);
-            padding.top = GetValue(paddingConfig, 'top', 0);
-            padding.bottom = GetValue(paddingConfig, 'bottom', 0);
-        }
-
         var config = this.getSizerConfig(gameObject);
         config.proportion = proportion;
         config.align = align;
-        config.padding = padding;
+        config.padding = ParsePaddingConfig(paddingConfig);
         config.expand = expand;
         this.sizerChildren.push(gameObject);
+        return this;
+    }
+
+    addBackground(gameObject) {
+        this.add(gameObject, -1, undefined, undefined, true);
         return this;
     }
 
@@ -146,19 +142,6 @@ class Sizer extends Container {
         return this;
     }
 
-    resize(width, height) {
-        this.setSize(width, height);
-        this.updateDisplayOrigin(); // Remove this line until it has merged in `zone.setSize()` function
-        return this;
-    }
-
-    getSizerConfig(gameObject) {
-        if (!gameObject.hasOwnProperty('rexSizer')) {
-            gameObject.rexSizer = {};
-        }
-        return gameObject.rexSizer;
-    }
-
     get childrenWidth() {
         if (this._childrenWidth === undefined) {
             this._childrenWidth = this.getChildrenWidth();
@@ -182,10 +165,12 @@ class Sizer extends Container {
 }
 
 var methods = {
+    getSizerConfig: GetSizerConfig,
     getChildrenWidth: GetChildrenWidth,
     getChildrenHeight: GetChildrenHeight,
     getChildrenProportion: GetChildrenProportion,
     getAllChildrenSizer: GetAllChildrenSizer,
+    resize: Resize,
     layout: Layout,
     drawBounds: DrawBounds,
 }
@@ -193,14 +178,6 @@ Object.assign(
     Sizer.prototype,
     methods
 );
-
-const ALIGNMODE = {
-    center: Phaser.Display.Align.CENTER,
-    left: Phaser.Display.Align.LEFT_CENTER,
-    right: Phaser.Display.Align.RIGHT_CENTER,
-    top: Phaser.Display.Align.TOP_CENTER,
-    bottom: Phaser.Display.Align.BOTTOM_CENTER,
-}
 
 const PROPORTIONMODE = {
     min: 0,

@@ -1,7 +1,13 @@
 import ContainerLite from 'rexPlugins/gameobjects/containerlite/ContainerLite.js';
+import ParsePaddingConfig from '../utils/ParsePaddingConfig.js';
+import GetSizerConfig from '../sizer/GetSizerConfig.js';
 import GetChildrenWidth from './GetChildrenWidth.js';
 import GetChildrenHeight from './GetChildrenHeight.js';
+import GetAllChildrenSizer from './GetAllChildrenSizer.js';
+import Resize from '../sizer/Resize.js';
 import Layout from './Layout.js';
+import DrawBounds from '../utils/DrawBounds.js';
+import ALIGNMODE from '../utils/AlignConst.js';
 
 const Container = ContainerLite;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
@@ -35,16 +41,7 @@ class GridSizer extends Container {
         this.type = 'rexGridSizer';
         this.isRexSizer = true;
 
-        // Initial grid
-        this.columnCount = columnCount;
-        this.rowCount = rowCount;
-        this.sizerChildren = [];
-        this.sizerChildren.length = columnCount * rowCount;
-        this.columnProportions = [];
-        this.columnProportions.length = columnCount;
-        this.rowProportions = [];
-        this.rowProportions.length = rowCount;
-
+        this.initialGrid(columnCount, rowCount);
         this.setMinWidth(minWidth);
         this.setMinHeight(minHeight);
     }
@@ -54,7 +51,8 @@ class GridSizer extends Container {
         if (!this.scene) {
             return;
         }
-        this.sizerChildren.length = 0;
+        this.gridChildren.length = 0;
+        this.backgroundChildren.length = 0;
         super.destroy(fromScene);
     }
 
@@ -72,7 +70,7 @@ class GridSizer extends Container {
         }
         this.rowProportions[rowIndex] = proportion;
         return this;
-    }    
+    }
 
     add(gameObject, columnIndex, rowIndex, align, paddingConfig, expand) {
         super.add(gameObject);
@@ -97,30 +95,34 @@ class GridSizer extends Container {
             expand = false;
         }
 
-        var padding = {};
-        if (typeof (paddingConfig) === 'number') {
-            padding.left = paddingConfig;
-            padding.right = paddingConfig;
-            padding.top = paddingConfig;
-            padding.bottom = paddingConfig;
-        } else {
-            padding.left = GetValue(paddingConfig, 'left', 0);
-            padding.right = GetValue(paddingConfig, 'right', 0);
-            padding.top = GetValue(paddingConfig, 'top', 0);
-            padding.bottom = GetValue(paddingConfig, 'bottom', 0);
+        var config = this.getSizerConfig(gameObject);
+        // config.proportion = 0;
+        config.align = align;
+        config.padding = ParsePaddingConfig(paddingConfig);
+        config.expand = expand;
+        this.gridChildren[(rowIndex * this.columnCount) + columnIndex] = gameObject;
+        return this;
+    }
+
+    addBackground(gameObject, paddingConfig) {
+        super.add(gameObject);
+        if (paddingConfig === undefined) {
+            paddingConfig = 0;
         }
 
         var config = this.getSizerConfig(gameObject);
         // config.proportion = 0;
-        config.align = align;
-        config.padding = padding;
-        config.expand = expand;
-        this.sizerChildren[(columnIndex * this.columnCount) + rowIndex] = gameObject;
+        config.align = ALIGN_CENTER;
+        config.padding = ParsePaddingConfig(paddingConfig);
+        config.expand = true;
+        this.backgroundChildren.push(gameObject);
         return this;
+        f
     }
 
     remove(gameObject) {
-        RemoveItem(this.sizerChildren, gameObject);
+        RemoveItem(this.gridChildren, gameObject);
+        RemoveItem(this.backgroundChildren, gameObject);
         super.remove(gameObject);
         return this;
     }
@@ -141,12 +143,6 @@ class GridSizer extends Container {
         return this;
     }
 
-    resize(width, height) {
-        this.setSize(width, height);
-        this.updateDisplayOrigin(); // Remove this line until it has merged in `zone.setSize()` function
-        return this;
-    }
-
     get childrenWidth() {
         if (this._childrenWidth === undefined) {
             this._childrenWidth = this.getChildrenWidth();
@@ -160,11 +156,57 @@ class GridSizer extends Container {
         }
         return this._childrenHeight;
     }
+
+    get totalColumnProportions() {
+        var result = 0,
+            proportion;
+        for (var i = 0; i < this.columnCount; i++) {
+            proportion = this.columnProportions[i];
+            if (proportion > 0) {
+                result += proportion;
+            }
+        }
+        return result;
+    }
+
+    get totalRowProportions() {
+        var result = 0,
+            proportion;
+        for (var i = 0; i < this.rowCount; i++) {
+            proportion = this.rowProportions[i];
+            if (proportion > 0) {
+                result += proportion;
+            }
+        }
+        return result;
+    }
+
+    initialGrid(columnCount, rowCount) {
+        this.columnCount = columnCount;
+        this.rowCount = rowCount;
+        this.gridChildren = [];
+        this.gridChildren.length = columnCount * rowCount;
+        this.backgroundChildren = [];
+        this.columnProportions = [];
+        this.columnProportions.length = columnCount;
+        this.columnWidth = [];
+        this.columnWidth.length = columnCount;
+        this.rowProportions = [];
+        this.rowProportions.length = rowCount;
+        this.rowHeight = [];
+        this.rowHeight.length = rowCount;
+        return this;
+    }
+
 }
 var methods = {
+    getSizerConfig: GetSizerConfig,
     getChildrenWidth: GetChildrenWidth,
     getChildrenHeight: GetChildrenHeight,
+    getAllChildrenSizer: GetAllChildrenSizer,
+    resize: Resize,
     layout: Layout,
+    drawBounds: DrawBounds,
 }
 Object.assign(
     GridSizer.prototype,

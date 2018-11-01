@@ -15,11 +15,7 @@ var GetChildrenHeight = function () {
                 continue;
             }
 
-            if (child.isRexSizer) {
-                childHeight = child.childrenHeight;
-            } else {
-                childHeight = child.height;
-            }
+            childHeight = (child.isRexSizer) ? child.childrenHeight : child.height;
             padding = child.rexSizer.padding;
             childHeight += (padding.top + padding.bottom);
             result = Math.max(childHeight, result);
@@ -36,10 +32,10 @@ var GetChildrenHeight = function () {
                 continue;
             }
 
-            if (child.isRexSizer) {
-                childHeight = (child.rexSizer.proportion === 0) ? child.childrenHeight : 0;
+            if (child.rexSizer.proportion === 0) {
+                childHeight = (child.isRexSizer) ? child.childrenHeight : child.height;
             } else {
-                childHeight = (child.rexSizer.proportion === 0) ? child.height : 0;
+                childHeight = 0;
             }
             padding = child.rexSizer.padding;
             childHeight += (padding.top + padding.bottom);

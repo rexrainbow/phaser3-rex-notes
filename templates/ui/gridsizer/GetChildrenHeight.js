@@ -5,30 +5,30 @@ var GetChildrenHeight = function () {
 
     var result = 0,
         rowHeight;
-    var children = this.sizerChildren;
+    var children = this.gridChildren;
     var child, padding, childHeight, proportion;
 
-    for (var i = 0; i < this.rowCount; i++) {
-        rowHeight = 0;
+    for (var i = 0; i < this.rowCount; i++) {        
         proportion = this.rowProportions[i];
-        for (var j = 0; j < this.columnCount; j++) {
-            child = children[(j * this.columnCount) + i];
-            if (!child) {
-                continue;
-            }
-            if (!child.visible) {
-                continue;
-            }
+        rowHeight = 0;
+        if ((proportion === undefined) || (proportion === 0)) {
+            for (var j = 0; j < this.columnCount; j++) {
+                child = children[(i * this.columnCount) + j];
+                if (!child) {
+                    continue;
+                }
+                if (!child.visible) {
+                    continue;
+                }
 
-            if (proportion > 0) {
-                childHeight = 0;
-            } else {
                 childHeight = (child.isRexSizer) ? child.childrenHeight : child.height;
+                padding = child.rexSizer.padding;
+                childHeight += (padding.top + padding.bottom);
+                rowHeight = Math.max(rowHeight, childHeight);
             }
-            padding = child.rexSizer.padding;
-            childHeight += (padding.top + padding.bottom);
-            rowHeight = Math.max(rowHeight, childHeight);
+            result += rowHeight;
         }
+        this.rowHeight[i] = rowHeight;
     }
     result = Math.max(result, this.minHeight);
     return result;
