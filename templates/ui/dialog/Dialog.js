@@ -9,14 +9,9 @@ class Dialog extends Sizer {
         if (config === undefined) {
             config = defaultConfig;
         }
-        // Create sizer
-        var x = GetValue(config, 'x', 0);
-        var y = GetValue(config, 'y', 0);
-        var minWidth = GetValue(config, 'width', 0);
-        var minHeight = GetValue(config, 'height', 0);
+        // Create sizer        
         config.orientation = 1; // Top to bottom
-        super(scene, x, y, minWidth, minHeight, config);
-        scene.add.existing(this);
+        super(scene, config);
         this.type = 'rexDialog';
 
         // Add elements

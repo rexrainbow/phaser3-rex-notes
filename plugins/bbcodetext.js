@@ -4,7 +4,9 @@ const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 const BuildGameObject = Phaser.GameObjects.BuildGameObject;
 
 Phaser.GameObjects.GameObjectFactory.register('rexBBCodeText', function (x, y, text, style) {
-    return this.displayList.add(new BBCodeText(this.scene, x, y, text, style));
+    var text = new BBCodeText(this.scene, x, y, text, style);
+    this.displayList.add(text);
+    return text;
 });
 Phaser.GameObjects.GameObjectCreator.register('rexBBCodeText', function (config, addToScene) {
     // style Object = {

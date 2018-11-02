@@ -6,20 +6,9 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Label extends Sizer {
     constructor(scene, config) {
-        if (config === undefined) {
-            config = defaultConfig;
-        }
         // Create sizer
-        var x = GetValue(config, 'x', 0);
-        var y = GetValue(config, 'y', 0);
-        var minWidth = GetValue(config, 'width', 0);
-        var minHeight = GetValue(config, 'height', 0);
-        config.orientation = GetValue(config, 'orientation', 0);
-        super(scene, x, y, minWidth, minHeight, config);
-        scene.add.existing(this);
+        super(scene, config);
         this.type = 'rexLabel';
-
-        this.setName(GetValue(config, 'name', ''));
 
         // Add elements
         // Elements
@@ -132,7 +121,5 @@ Object.assign(
     Label.prototype,
     methods
 );
-
-const defaultConfig = {};
 
 export default Label;

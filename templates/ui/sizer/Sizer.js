@@ -39,7 +39,8 @@ class Sizer extends Container {
 
         super(scene, x, y, 2, 2);
         scene.add.existing(this);
-        
+        this.setName(GetValue(config, 'name', ''));
+
         this.type = 'rexSizer';
         this.isRexSizer = true;
         this.sizerChildren = [];

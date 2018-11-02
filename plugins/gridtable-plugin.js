@@ -19,7 +19,9 @@ class GridTablePlugin extends Phaser.Plugins.BasePlugin {
     }
 
     addGridTable(x, y, width, height, config) {
-        return this.displayList.add(new GridTable(this.scene, x, y, width, height, config));
+        var table = new GridTable(this.scene, x, y, width, height, config);
+        this.displayList.add(table);
+        return table;
     }
 
     makeGridTable(config) {

@@ -10,12 +10,8 @@ class GridTable extends Sizer {
             config = defaultConfig;
         }
         // Create sizer
-        var x = GetValue(config, 'x', 0);
-        var y = GetValue(config, 'y', 0);
-        var minWidth = GetValue(config, 'width', 0);
-        var minHeight = GetValue(config, 'height', 0);
         config.orientation = 0; // Left-to-right
-        super(scene, x, y, minWidth, minHeight, config);
+        super(scene, config);
         scene.add.existing(this);
         this.type = 'rexGridTable';
 

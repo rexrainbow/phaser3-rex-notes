@@ -4,7 +4,9 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 const BuildGameObject = Phaser.GameObjects.BuildGameObject;
 
 Phaser.GameObjects.GameObjectFactory.register('rexGridTable', function (x, y, width, height, config) {
-    return this.displayList.add(new GridTable(this.scene, x, y, width, height, config));
+    var table = new GridTable(this.scene, x, y, width, height, config);
+    this.displayList.add(table);
+    return table;
 });
 Phaser.GameObjects.GameObjectCreator.register('rexGridTable', function (config) {
     var width = GetValue(config, 'width', 256);

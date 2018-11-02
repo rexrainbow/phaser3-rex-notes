@@ -1,18 +1,18 @@
 import GridSizer from '../gridsizer/GridSizer.js';
-import Sizer from '../sizer/Sizer.js';
+import CreateButtonsGroup from './CreateButtonsGroup.js';
 import GetElement from '../utils/GetElement.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Tabs extends GridSizer {
     constructor(scene, config) {
+        if (config === undefined) {
+            config = defaultConfig;
+        }
         // Create sizer
-        var x = GetValue(config, 'x', 0);
-        var y = GetValue(config, 'y', 0);
-        var minWidth = GetValue(config, 'width', 0);
-        var minHeight = GetValue(config, 'height', 0);
-        super(scene, x, y, minWidth, minHeight, 3, 3);
-        scene.add.existing(this);
+        config.column = 3;
+        config.row = 3;
+        super(scene, config);
         this.type = 'rexTabs';
 
         // Add elements
@@ -65,7 +65,7 @@ class Tabs extends GridSizer {
         }
 
         if (leftButtons) {
-            var buttonsSizer = CreateTab(this, leftButtons, 1, leftButtonSpace, 'left');
+            var buttonsSizer = CreateButtonsGroup.call(this, 'left', leftButtons, 1, leftButtonSpace);
             var padding = {
                 left: paddingLeft,
                 top: leftButtonsOffset,
@@ -74,7 +74,7 @@ class Tabs extends GridSizer {
         }
 
         if (rightButtons) {
-            var buttonsSizer = CreateTab(this, rightButtons, 1, rightButtonSpace, 'right');
+            var buttonsSizer = CreateButtonsGroup.call(this, 'right', rightButtons, 1, rightButtonSpace);
             var padding = {
                 right: paddingRight,
                 top: rightButtonsOffset,
@@ -83,7 +83,7 @@ class Tabs extends GridSizer {
         }
 
         if (topButtons) {
-            var buttonsSizer = CreateTab(this, topButtons, 0, topButtonSpace, 'top');
+            var buttonsSizer = CreateButtonsGroup.call(this, 'top', topButtons, 0, topButtonSpace);
             var padding = {
                 top: paddingTop,
                 left: toptButtonsOffset,
@@ -92,7 +92,7 @@ class Tabs extends GridSizer {
         }
 
         if (bottomButtons) {
-            var buttonsSizer = CreateTab(this, bottomButtons, 0, bottomButtonSpace, 'bottom');
+            var buttonsSizer = CreateButtonsGroup.call(this, 'bottom', bottomButtons, 0, bottomButtonSpace);
             var padding = {
                 bottom: paddingBottom,
                 left: bottomButtonsOffset,
@@ -120,42 +120,6 @@ class Tabs extends GridSizer {
     }
 }
 
-var CreateTab = function (tabs, buttons, orientation, space, groupName) {
-    var scene = tabs.scene;
-    var buttonsSizer = new Sizer(scene, {
-        orientation: orientation
-    });
-
-    var button;
-    var padding = 0;
-    for (var i = 0, cnt = buttons.length; i < cnt; i++) {
-        button = buttons[i];
-        if (i >= 1) {
-            padding = {
-                left: (orientation === 0) ? space : 0,
-                right: 0,
-                top: (orientation === 1) ? space : 0,
-                bottom: 0
-            }
-        }
-
-        buttonsSizer.add(buttons[i], 0, 'center', padding, true);
-        // Add click callback
-        button
-            .setInteractive()
-            .on('pointerdown', fireEvent('button.click', button, groupName, i), tabs)
-            .on('pointerover', fireEvent('button.over', button, groupName, i), tabs)
-            .on('pointerout', fireEvent('button.out', button, groupName, i), tabs)
-    }
-    return buttonsSizer;
-}
-
-var fireEvent = function (eventName, button, groupName, index) {
-    return function () {
-        this.emit(eventName, button, groupName, index);
-    }
-}
-
 var methods = {
     getElement: GetElement,
 }
@@ -163,5 +127,7 @@ Object.assign(
     Tabs.prototype,
     methods
 );
+
+const defaultConfig = {};
 
 export default Tabs;

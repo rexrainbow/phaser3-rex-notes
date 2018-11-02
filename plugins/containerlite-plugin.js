@@ -19,7 +19,9 @@ class ContainerLitePlugin extends Phaser.Plugins.BasePlugin {
     }
 
     addContainer(x, y, width, height, children) {
-        return this.displayList.add(new ContainerLite(this.scene, x, y, width, height, children));
+        var container = new ContainerLite(this.scene, x, y, width, height, children);
+        this.displayList.add(container);
+        return container;
     }
 
     makeContainer(config) {

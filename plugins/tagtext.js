@@ -4,7 +4,9 @@ const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 const BuildGameObject = Phaser.GameObjects.BuildGameObject;
 
 Phaser.GameObjects.GameObjectFactory.register('rexTagText', function (x, y, text, style) {
-    return this.displayList.add(new TagText(this.scene, x, y, text, style));
+    var text = new TagText(this.scene, x, y, text, style);
+    this.displayList.add(text);
+    return text;
 });
 Phaser.GameObjects.GameObjectCreator.register('rexTagText', function (config, addToScene) {
     // style Object = {

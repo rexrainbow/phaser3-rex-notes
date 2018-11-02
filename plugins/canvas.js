@@ -4,7 +4,9 @@ const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 const BuildGameObject = Phaser.GameObjects.BuildGameObject;
 
 Phaser.GameObjects.GameObjectFactory.register('rexCanvas', function (x, y, width, height) {
-    return this.displayList.add(new Canvas(this.scene, x, y, width, height));
+    var canvas = new Canvas(this.scene, x, y, width, height);
+    this.displayList.add(canvas);
+    return canvas;
 });
 Phaser.GameObjects.GameObjectCreator.register('rexCanvas', function (config, addToScene) {
     var width = GetAdvancedValue(config, 'width', 256);

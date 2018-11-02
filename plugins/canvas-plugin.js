@@ -19,7 +19,9 @@ class CanvasPlugin extends Phaser.Plugins.BasePlugin {
     }
 
     addCanvas(x, y, width, height) {
-        return this.displayList.add(new Canvas(this.scene, x, y, width, height));
+        var canvas = new Canvas(this.scene, x, y, width, height);
+        this.displayList.add(canvas);
+        return canvas;
     }
 
     makeCanvas(config, addToScene) {

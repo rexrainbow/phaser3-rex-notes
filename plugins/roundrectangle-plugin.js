@@ -20,7 +20,9 @@ class RoundRectanglePlugin extends Phaser.Plugins.BasePlugin {
     }
 
     addRoundRectangle(x, y, width, height, radiusConfig, fillColor, fillAlpha) {
-        return this.displayList.add(new RoundRectangle(this.scene, x, y, width, height, radiusConfig, fillColor, fillAlpha));
+        var roundRectangle = new RoundRectangle(this.scene, x, y, width, height, radiusConfig, fillColor, fillAlpha);
+        this.displayList.add(roundRectangle);
+        return roundRectangle;
     }
 
     makeRoundRectangle(config) {
@@ -30,9 +32,9 @@ class RoundRectanglePlugin extends Phaser.Plugins.BasePlugin {
         var fillColor = GetAdvancedValue(config, 'fillColor', undefined);
         var fillAlpha = GetAdvancedValue(config, 'fillAlpha', undefined);
         var roundRectangle = new RoundRectangle(this.scene, 0, 0, width, height, radiusConfig, fillColor, fillAlpha);
-    
+
         BuildGameObject(this.scene, roundRectangle, config);
-    
+
         return roundRectangle;
     }
 

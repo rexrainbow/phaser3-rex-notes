@@ -19,7 +19,9 @@ class BBCodeTextPlugin extends Phaser.Plugins.BasePlugin {
     }
 
     addBBCodeText(x, y, text, style) {
-        return this.displayList.add(new BBCodeText(this.scene, x, y, text, style));
+        var text = new BBCodeText(this.scene, x, y, text, style);
+        this.displayList.add(text);
+        return text;
     }
 
     makeBBCodeText(config, addToScene) {
@@ -59,7 +61,7 @@ class BBCodeTextPlugin extends Phaser.Plugins.BasePlugin {
         if (addToScene !== undefined) {
             config.add = addToScene;
         }
-    
+
         var text = new BBCodeText(this.scene, 0, 0, content, style);
         BuildGameObject(this.scene, text, config);
 

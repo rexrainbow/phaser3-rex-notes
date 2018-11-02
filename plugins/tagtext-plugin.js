@@ -19,7 +19,9 @@ class TagTextPlugin extends Phaser.Plugins.BasePlugin {
     }
 
     addTagText(x, y, text, style) {
-        return this.displayList.add(new TagText(this.scene, x, y, text, style));
+        var text = new TagText(this.scene, x, y, text, style);
+        this.displayList.add(text);
+        return text;
     }
 
     makeTagText(config, addToScene) {
