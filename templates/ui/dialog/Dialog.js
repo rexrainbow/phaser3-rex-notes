@@ -17,6 +17,7 @@ class Dialog extends Sizer {
         config.orientation = 1; // Top to bottom
         super(scene, x, y, minWidth, minHeight, config);
         scene.add.existing(this);
+        this.type = 'rexDialog';
 
         // Add elements
         var background = GetValue(config, 'background', undefined);

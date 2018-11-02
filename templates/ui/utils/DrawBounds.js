@@ -2,9 +2,14 @@ var DrawBounds = function (graphics, color) {
     if (color === undefined) {
         color = 0xffffff;
     }
-    var children = this.getAllChildren([this]);
+    var children = this.getAllChildren([this]),
+        child;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
-        graphics.lineStyle(1, color).strokeRectShape(children[i].getBounds());
+        child = children[i];
+        if (!child.getBounds) {
+            continue;
+        }
+        graphics.lineStyle(1, color).strokeRectShape(child.getBounds());
     }
     return this;
 }

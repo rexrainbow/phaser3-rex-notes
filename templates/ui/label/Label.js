@@ -17,6 +17,7 @@ class Label extends Sizer {
         config.orientation = GetValue(config, 'orientation', 0);
         super(scene, x, y, minWidth, minHeight, config);
         scene.add.existing(this);
+        this.type = 'rexLabel';
 
         this.setName(GetValue(config, 'name', ''));
 

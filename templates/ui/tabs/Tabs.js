@@ -13,6 +13,7 @@ class Tabs extends GridSizer {
         var minHeight = GetValue(config, 'height', 0);
         super(scene, x, y, minWidth, minHeight, 3, 3);
         scene.add.existing(this);
+        this.type = 'rexTabs';
 
         // Add elements
         var background = GetValue(config, 'background', undefined);
