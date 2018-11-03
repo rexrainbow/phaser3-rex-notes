@@ -19,9 +19,9 @@ class DefaultMask extends Graphics {
         var y = -(table.height * table.originY);
         this
             .clear()
+            .fillStyle(0xffffff)
             .fillRect(x, y, table.width, table.height)
-            .setPosition(table.x, table.y)
-            .fillStyle(0xffffff);
+            .setPosition(table.x, table.y);
         return this;
     }
 }
