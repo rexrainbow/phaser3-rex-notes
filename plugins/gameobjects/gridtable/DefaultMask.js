@@ -2,9 +2,13 @@ const Graphics = Phaser.GameObjects.Graphics;
 
 class DefaultMask extends Graphics {
     constructor(table) {
-        super(table.scene);
+        super(table.scene, {
+            x: table.x,
+            y: table.y
+        });
         this.table = table;
         this.resize();
+        // Don't add it to display list        
     }
 
     destroy() {
@@ -15,13 +19,15 @@ class DefaultMask extends Graphics {
 
     resize() {
         var table = this.table;
-        var x = -(table.width * table.originX);
-        var y = -(table.height * table.originY);
         this
             .clear()
             .fillStyle(0xffffff)
-            .fillRect(x, y, table.width, table.height)
-            .setPosition(table.x, table.y);
+            .fillRect(
+                -(table.width * table.originX),
+                -(table.height * table.originY),
+                table.width,
+                table.height
+            );
         return this;
     }
 }

@@ -375,11 +375,11 @@ class GridTable extends Container {
         this.updateTable(true);
 
         if (this.mask) {
-            var gameObject = (this.mask.geometryMask) ? this.mask.geometryMask : this.mask.bitmapMask;
+            var gameObject = (this.mask.hasOwnProperty('geometryMask')) ? this.mask.geometryMask : this.mask.bitmapMask;
             if (gameObject.resize) {
                 gameObject.resize(width, height);
             }
-        }        
+        }
         return this;
     }
 
