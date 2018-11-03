@@ -1,5 +1,6 @@
 import ContainerLite from 'rexPlugins/gameobjects/containerlite/ContainerLite.js';
 import Table from './Table.js';
+import DefaultMask from './DefaultMask.js';
 
 const Container = ContainerLite;
 const Components = Phaser.GameObjects.Components;
@@ -357,15 +358,29 @@ class GridTable extends Container {
 
     // internal
     getDefaultMask() {
-        var x = -(this.width * this.originX);
-        var y = -(this.height * this.originY);
-        var shape = this.scene.make.graphics(undefined, false)
-            .fillStyle(0xffffff)
-            .fillRect(x, y, this.width, this.height)
-            .setPosition(this.x, this.y);
+        var shape = new DefaultMask(this);
         this.add(shape);
         var mask = shape.createGeometryMask();
         return mask;
+    }
+
+    setMask(mask) {
+        super.setMask(mask);
+        this.mask = mask;
+        return this;
+    }
+
+    resize(width, height) {
+        super.resize(width, height);
+        this.updateTable(true);
+
+        if (this.mask) {
+            var gameObject = (this.mask.geometryMask) ? this.mask.geometryMask : this.mask.bitmapMask;
+            if (gameObject.resize) {
+                gameObject.resize(width, height);
+            }
+        }        
+        return this;
     }
 
     cleanVisibleCellIndexes() {
