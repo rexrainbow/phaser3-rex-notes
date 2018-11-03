@@ -486,6 +486,12 @@ class ContainerLite extends Zone {
         ArrayUtils.SetAll(this.list, property, value, startIndex, endIndex);
         return this;
     }
+
+    resize(width, height) {
+        this.setSize(width, height);
+        this.updateDisplayOrigin(); // Remove this line until it has merged in `zone.setSize()` function
+        return this;
+    }
 }
 
 Object.assign(

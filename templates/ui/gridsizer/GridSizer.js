@@ -4,7 +4,6 @@ import GetSizerConfig from '../sizer/GetSizerConfig.js';
 import GetChildrenWidth from './GetChildrenWidth.js';
 import GetChildrenHeight from './GetChildrenHeight.js';
 import GetAllChildrenSizer from './GetAllChildrenSizer.js';
-import Resize from '../sizer/Resize.js';
 import Layout from './Layout.js';
 import DrawBounds from '../utils/DrawBounds.js';
 import ALIGNMODE from '../utils/AlignConst.js';
@@ -206,7 +205,6 @@ var methods = {
     getChildrenWidth: GetChildrenWidth,
     getChildrenHeight: GetChildrenHeight,
     getAllChildrenSizer: GetAllChildrenSizer,
-    resize: Resize,
     layout: Layout,
     drawBounds: DrawBounds,
 }

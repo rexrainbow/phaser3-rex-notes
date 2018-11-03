@@ -5,7 +5,6 @@ import GetChildrenWidth from './GetChildrenWidth.js';
 import GetChildrenHeight from './GetChildrenHeight.js';
 import GetChildrenProportion from './GetChildrenProportion.js';
 import GetAllChildrenSizer from './GetAllChildrenSizer.js';
-import Resize from './Resize.js';
 import Layout from './Layout.js';
 import DrawBounds from '../utils/DrawBounds.js';
 import ORIENTATIONMODE from '../utils/OrientationConst.js';
@@ -173,7 +172,6 @@ var methods = {
     getChildrenHeight: GetChildrenHeight,
     getChildrenProportion: GetChildrenProportion,
     getAllChildrenSizer: GetAllChildrenSizer,
-    resize: Resize,
     layout: Layout,
     drawBounds: DrawBounds,
 }
