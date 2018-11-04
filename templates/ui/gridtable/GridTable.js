@@ -1,6 +1,7 @@
 import Sizer from '../sizer/Sizer.js';
-import Slider from '../slider/Slider.js';
 import CreateTable from './CreateTable.js';
+import Slider from '../slider/Slider.js';
+import Scroller from 'rexPlugins/scroller.js'
 import NOOP from 'rexPlugins/utils/object/NOOP.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -44,11 +45,37 @@ class GridTable extends Sizer {
         if (sliderConfig) {
             sliderConfig.orientation = config.orientation;
             slider = new Slider(scene, sliderConfig);
-            slider.on('valuechange', function (newValue) {
-                table.setTableOYByPercentage(newValue).updateTable();
-            })
             this.add(slider, 0, 'center', undefined, true);
         }
+
+        var scroller = new Scroller(table, {
+            bounds: [
+                table.bottomTableOY,
+                table.topTableOY
+            ],
+            value: table.topTableOY
+        })
+
+        // Control
+        if (slider) {
+            slider.on('valuechange', function (newValue) {
+                table.setTableOYByPercentage(newValue).updateTable();
+                // reflect to scroller
+                if (scroller) {
+                    scroller.setValue(table.tableOY);
+                }
+            })
+        }
+        if (scroller) {
+            scroller.on('valuechange', function (newValue) {
+                table.setTableOY(newValue).updateTable();
+                // reflect to slider
+                if (slider) {
+                    slider.setValue(table.getTableOYPercentage());
+                }
+            });
+        }
+
 
         this.childrenMap = {};
         this.childrenMap.table = table;
