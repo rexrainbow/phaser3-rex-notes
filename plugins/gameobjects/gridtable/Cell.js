@@ -156,6 +156,10 @@ class Cell {
         var table = this.parent;
         return table.defaultCellWidth;
     }
+
+    get scene() {
+        return this.parentContainer.scene;
+    }
 };
 
 export default Cell;

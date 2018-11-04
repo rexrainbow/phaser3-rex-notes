@@ -1,5 +1,7 @@
 import Sizer from '../sizer/Sizer.js';
 import OnDragThumb from './OnDragThumb.js';
+import GetStartPoint from './GetStartPoint.js';
+import GetEndPoint from './GetEndPoint.js';
 import UpdateThumb from './UpdateThumb.js';
 import GetElement from '../utils/GetElement.js';
 
@@ -19,19 +21,26 @@ class Slider extends Sizer {
         var thumb = GetValue(config, 'thumb', undefined);
 
         if (track) {
-            this.addBackground(track);
+            this.add(track, 0, undefined, 0, true);
         }
 
         if (thumb) {
-            this.add(thumb); // Put into container but not layout it
-            thumb
-                .setInteractive()
-                .on('drag', OnDragThumb, this);
+            this.add(thumb, null); // Put into container but not layout it
+            thumb.setInteractive()
+            this.scene.input.setDraggable(thumb);
+            thumb.on('drag', OnDragThumb, this);
         }
 
         this.childrenMap = {};
         this.childrenMap.track = track;
         this.childrenMap.thumb = thumb;
+
+        var callback = GetValue(config, 'valuechangeCallback', null);
+        if (callback !== null) {
+            var scope = GetValue(config, 'valuechangeCallbackScope', undefined);
+            this.on('valuechange', callback, scope);
+        }
+        this.setValue(GetValue(config, 'value', 0));
     }
 
     get value() {
@@ -43,7 +52,7 @@ class Slider extends Sizer {
         this._value = Clamp(value, 0, 1);
 
         if (oldValue !== this._value) {
-            UpdateThumb.call(this, this._value);
+            this.updateThumb(this._value);
             this.emit('valuechange', this._value, oldValue);
         }
     }
@@ -71,9 +80,18 @@ class Slider extends Sizer {
         }
         return value;
     }
+
+    layout(parent) {
+        super.layout(parent);
+        this.updateThumb();
+        return this;
+    }
 }
 
 var methods = {
+    getStartPoint: GetStartPoint,
+    getEndPoint: GetEndPoint,
+    updateThumb: UpdateThumb,
     getElement: GetElement,
 }
 Object.assign(

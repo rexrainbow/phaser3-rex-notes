@@ -10,7 +10,8 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        var newCellObject = function (scene, cell) {
+        var newCellObject = function (cell) {
+            var scene = cell.scene;
             var cellIdx = cell.index;
             // cell.height = (cellIdx % 2) ? 40 : 80;  // se height of visible cell
 
@@ -24,7 +25,7 @@ class Demo extends Phaser.Scene {
         }
 
         var onCellVisible = function (cell) {
-            cell.setContainer(newCellObject(this, cell));
+            cell.setContainer(newCellObject(cell));
             //console.log('Cell ' + cell.index + ' visible');
         };
         var table = this.add.rexGridTable(400, 300, 250, 400, {
@@ -36,12 +37,12 @@ class Demo extends Phaser.Scene {
         });
 
         // set height of all cells
-        for(var i=0, cnt= table.cellsCount; i<cnt; i++) {
+        for (var i = 0, cnt = table.cellsCount; i < cnt; i++) {
             var cellHeight = (i % 2) ? 40 : 80;
             table.setCellHeight(i, cellHeight);
         }
-        table.updateTable(true);  // refresh visible cells
-        
+        table.updateTable(true); // refresh visible cells
+
         // draw bound
         this.add.graphics()
             .lineStyle(3, 0xff0000)

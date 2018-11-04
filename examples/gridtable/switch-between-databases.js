@@ -32,7 +32,7 @@ class Demo extends Phaser.Scene {
             cellHeight: 60,
             cellWidth: 60,
             cellsCount: 0,
-            columns: 1
+            columns: 4
         };
         var table = newTable(this, config);
 
@@ -79,7 +79,8 @@ var getDataBase = function (count) {
 var newTable = function (scene, config) {
     var table;
 
-    var newCellObject = function (scene, cell) {
+    var newCellObject = function (cell) {
+        var scene = cell.scene;
         var database = table.database;
         var data = database[cell.index];
         var bg = scene.add.image(30, 30, 'bg')
@@ -97,7 +98,7 @@ var newTable = function (scene, config) {
     };
 
     config.cellVisibleCallback = function (cell) {
-        cell.setContainer(newCellObject(scene, cell));
+        cell.setContainer(newCellObject(cell));
         //console.log('Cell ' + cell.index + ' visible');
     };
     table = scene.make.rexGridTable(config);

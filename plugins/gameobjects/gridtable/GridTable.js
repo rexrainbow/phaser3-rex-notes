@@ -364,12 +364,6 @@ class GridTable extends Container {
         return mask;
     }
 
-    setMask(mask) {
-        super.setMask(mask);
-        this.mask = mask;
-        return this;
-    }
-
     resize(width, height) {
         super.resize(width, height);
         this.updateTable(true);

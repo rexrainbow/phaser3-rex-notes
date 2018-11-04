@@ -60,7 +60,8 @@ var newTable = function (scene, config) {
     var table;
     var database = GetValue(config, 'database', []);
 
-    var newCellObject = function (scene, cell) {
+    var newCellObject = function (cell) {
+        var scene = cell.scene;
         var data = database[cell.index];
         var bg = scene.add.image(30, 30, 'bg')
             .setName('background')
@@ -97,7 +98,7 @@ var newTable = function (scene, config) {
     };
 
     config.cellVisibleCallback = function (cell) {
-        cell.setContainer(newCellObject(scene, cell));
+        cell.setContainer(newCellObject(cell));
         //console.log('Cell ' + cell.index + ' visible');
     };
     table = scene.make.rexGridTable(config);

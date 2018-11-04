@@ -14,7 +14,8 @@ class Demo extends Phaser.Scene {
     create() {
         var cellObjectsPool = this.plugins.get('rexObjectPool').add();
 
-        var newCellObject = function (scene, cell) {
+        var newCellObject = function (cell) {
+            var scene = cell.scene;
             var container = cellObjectsPool.pop();
             if (container === null) {
                 console.log(cell.index + ': create new gameboject')
@@ -35,12 +36,12 @@ class Demo extends Phaser.Scene {
         }
 
         var onCellVisible = function (cell) {
-            cell.setContainer(newCellObject(this, cell));
+            cell.setContainer(newCellObject(cell));
             //console.log('Cell ' + cell.index + ' visible');
         };
         var onCellInvisible = function (cell) {
             var container = cell.popContainer();
-            container.setPosition(-100,-100);
+            container.setPosition(-100, -100);
             container.visible = false;
             cellObjectsPool.push(container);
             console.log(cell.index + ': push to pool')

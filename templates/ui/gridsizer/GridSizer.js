@@ -37,7 +37,6 @@ class GridSizer extends Container {
             rowCount = GetValue(config, 'row', 0);
         }
         super(scene, x, y, 2, 2);
-        scene.add.existing(this);
         this.type = 'rexGridSizer';
         this.isRexSizer = true;
         this.setName(GetValue(config, 'name', ''));

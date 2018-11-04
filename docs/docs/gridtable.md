@@ -128,6 +128,17 @@ It is equal to `cellVisibleCallback` in configuration.
 
 Each cell only has **one** container gameObject, old container will be destroyed when assigning a new container.
 
+#### Properties of cell object
+
+- Scene object, for creating Game Object.
+    ```javascript
+    var scene = cell.scene;
+    ```
+- Index of table grid
+    ```javascript
+    var index = cell.index;
+    ```
+
 ### Cell begins invisible
 
 Container of an invisible cell will be destroyed automatically.

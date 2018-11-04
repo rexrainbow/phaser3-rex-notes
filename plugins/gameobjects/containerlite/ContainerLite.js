@@ -170,8 +170,14 @@ class ContainerLite extends Zone {
     }
 
     updateChildMask(child) {
-        if (this._mask !== child) {
-            child.mask = this._mask;
+        // Don't propagate null mask to clear children's mask
+        if (this.mask == null) {
+            return this;
+        }
+
+        var maskGameObject = (this.mask.hasOwnProperty('geometryMask')) ? this.mask.geometryMask : this.mask.bitmapMask;
+        if (maskGameObject !== child) {
+            child.mask = this.mask;
         }
         return this;
     }

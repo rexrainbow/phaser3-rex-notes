@@ -11,7 +11,8 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        var newCellObject = function (scene, cell) {
+        var newCellObject = function (cell) {
+            var scene = cell.scene;
             var bg = scene.add.graphics()
                 .fillStyle(0x555555)
                 .fillRect(2, 2, 240 - 2, 100 - 2);
@@ -21,7 +22,7 @@ class Demo extends Phaser.Scene {
         }
 
         var onCellVisible = function (cell) {
-            cell.setContainer(newCellObject(this, cell));
+            cell.setContainer(newCellObject(cell));
             console.log('Cell ' + cell.index + ' visible');
         };
         var table = this.add.rexGridTable(400, 300, 250, 400, {
