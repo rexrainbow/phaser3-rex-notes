@@ -1,6 +1,7 @@
 import Sizer from '../sizer/Sizer.js';
 import AddClickCallback from './AddClickCallback.js';
 import GetElement from '../utils/GetElement.js';
+import DefaultMask from 'rexPlugins/utils/mask/DefaultMask.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -14,6 +15,7 @@ class Label extends Sizer {
         // Elements
         var background = GetValue(config, 'background', undefined);
         var icon = GetValue(config, 'icon', undefined);
+        var iconMask = GetValue(config, 'iconMask', undefined);
         var text = GetValue(config, 'text', undefined);
         // Space
         var paddingLeft = GetValue(config, 'space.left', 0);
@@ -43,7 +45,14 @@ class Label extends Sizer {
                     bottom: (text) ? iconSpace : paddingBottom
                 }
             }
+
             this.add(icon, 0, 'center', padding);
+
+            if (iconMask) {
+                iconMask = new DefaultMask(icon, 1); // Circle mask
+                icon.setMask(iconMask.createGeometryMask());
+                this.add(iconMask, null);
+            }
         }
 
         if (text) {
@@ -74,6 +83,7 @@ class Label extends Sizer {
         this.childrenMap = {};
         this.childrenMap.background = background;
         this.childrenMap.icon = icon;
+        this.childrenMap.iconMask = iconMask;
         this.childrenMap.text = text;
     }
 
@@ -110,6 +120,27 @@ class Label extends Sizer {
 
     appendText(value) {
         this.text += value;
+    }
+
+    layout(parent) {
+        super.layout(parent);
+        // Pin icon-mask to icon game object
+        var iconMask = this.childrenMap.iconMask;
+        if (iconMask) {
+            iconMask.setPosition();
+            this.resetChildState(iconMask);
+        }
+        return this;
+    }
+
+    resize(width, height) {
+        super.resize(width, height);
+        // Resize icon-mask to icon game object
+        var iconMask = this.childrenMap.iconMask;
+        if (iconMask) {
+            iconMask.resize();
+        }
+        return this;
     }
 }
 

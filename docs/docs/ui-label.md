@@ -44,6 +44,7 @@ var game = new Phaser.Game(config);
 var label = scene.rexUI.add.label({
     orientation: 0,
     icon: iconGameObject,
+    iconMask: false,
     text: textGameObject,
     background: backgroundGameObject,
     space: {
@@ -66,6 +67,7 @@ var label = scene.rexUI.add.label({
     - `'left-to-right'`, `'horizontal'`,`'h'`, `'x'`, or `0` : Put icon at left side, and text at right side.
     - `'top-to-bottom'`, `'vertical'`,`'v'`, `'y'`, or `1` : Put icon at top side, and text at bottom side.
 - `icon` : Game object of icon, optional.
+- `iconMask` : Set true to add a *circle* mask on icon game object.
 - `text` : Game object of text, optional.
 - `background` : Game object of background, optional. This background game object will be resized to fit the size of label.
 - `space` : Pads spaces

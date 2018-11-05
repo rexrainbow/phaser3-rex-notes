@@ -32,8 +32,12 @@ class Sizer extends Container {
         } else if (IsPlainObject(orientation)) {
             config = orientation;
         }
+
         if (config !== undefined) {
             orientation = GetValue(config, 'orientation', 0);
+        }
+        if (orientation === undefined) {
+            orientation = 0;
         }
 
         super(scene, x, y, 2, 2);

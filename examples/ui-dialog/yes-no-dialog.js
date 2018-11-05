@@ -34,6 +34,8 @@ class Demo extends Phaser.Scene {
                     fontSize: '24px'
                 }),
 
+                buttonsAlign: 'center', // 'center'|'left'|'right'
+
                 buttons: [
                     createButton(this, 'Yes'),
                     createButton(this, 'No')

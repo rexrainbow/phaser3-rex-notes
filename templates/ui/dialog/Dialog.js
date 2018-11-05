@@ -18,6 +18,7 @@ class Dialog extends Sizer {
         var background = GetValue(config, 'background', undefined);
         var title = GetValue(config, 'title', undefined);
         var content = GetValue(config, 'content', undefined);
+        var description = GetValue(config, 'description', undefined);
         var buttons = GetValue(config, 'buttons', undefined);
         if (buttons && buttons.length === 0) {
             buttons = undefined;
@@ -30,6 +31,7 @@ class Dialog extends Sizer {
         var paddingBottom = GetValue(config, 'space.bottom', 0);
         var titleSpace = GetValue(config, 'space.title', 0);
         var contentSpace = GetValue(config, 'space.content', 0);
+        var descriptionSpace = GetValue(config, 'space.description', 0);
         var buttonSpace = GetValue(config, 'space.button', 0);
 
         if (background) {
@@ -41,7 +43,7 @@ class Dialog extends Sizer {
                 left: paddingLeft,
                 right: paddingRight,
                 top: paddingTop,
-                bottom: (content || buttons) ? titleSpace : paddingBottom
+                bottom: (content || description || buttons) ? titleSpace : paddingBottom
             }
             this.add(title, 0, 'center', padding, true);
         }
@@ -51,9 +53,19 @@ class Dialog extends Sizer {
                 left: paddingLeft,
                 right: paddingRight,
                 top: (title) ? 0 : paddingTop,
-                bottom: (buttons) ? contentSpace : paddingBottom
+                bottom: (description || buttons) ? contentSpace : paddingBottom
             }
             this.add(content, 0, 'center', padding);
+        }
+
+        if (description) {
+            var padding = {
+                left: paddingLeft,
+                right: paddingRight,
+                top: (title) ? 0 : paddingTop,
+                bottom: (buttons) ? descriptionSpace : paddingBottom
+            }
+            this.add(description, 0, 'center', padding);
         }
 
         if (buttons) {
@@ -61,6 +73,7 @@ class Dialog extends Sizer {
             if (typeof (buttonsOrientation) === 'string') {
                 buttonsOrientation = ORIENTATIONMODE[buttonsOrientation];
             }
+            var buttonsAlign = GetValue(config, 'buttonsAlign', 'center');
             var buttonsSizer;
             if (buttonsOrientation === 0) { // Left-right
                 buttonsSizer = new Sizer(scene, 0, 0, 0, 0, {
@@ -77,7 +90,7 @@ class Dialog extends Sizer {
                 buttonsSizer = this;
             }
 
-            var button;
+            var button, proportion;
             for (var i = 0, cnt = buttons.length; i < cnt; i++) {
                 button = buttons[i];
                 // Add to sizer
@@ -88,7 +101,18 @@ class Dialog extends Sizer {
                         top: 0,
                         bottom: 0
                     }
-                    buttonsSizer.add(button, 1, 'center', padding, true);
+                    switch (buttonsAlign) {
+                        case 'left':
+                            proportion = 0;
+                            break;
+                        case 'right':
+                            proportion = (i === 0) ? 1 : 0;
+                            break;
+                        default:
+                            proportion = 1;
+                            break;
+                    }
+                    buttonsSizer.add(button, proportion, buttonsAlign, padding, true);
                 } else { // Top-bottom       
                     var padding = {
                         left: paddingLeft,
