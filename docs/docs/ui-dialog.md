@@ -50,7 +50,9 @@ var dialog = scene.rexUI.add.dialog({
     background: backgroundGameObject,
     title: titleGameObject,
     content: contentGameObject,
+    description: descriptionGameObject,
     buttonsOrientation: 0,
+    buttonsAlign: 'center,
     buttons: [
         button0GameObject,
         button1GameObject,
@@ -78,9 +80,14 @@ var dialog = scene.rexUI.add.dialog({
 - `background` : Game object of background, optional. This background game object will be resized to fit the size of dialog.
 - `title` : Game object of title, optional.
 - `content` : Game object of content, optional.
+- `description` : Game object of description, optional.
 - `buttonsOrientation` :
     - `'left-to-right'`, `'horizontal'`,`'h'`, `'x'`, or `0` : Arrange button game objects from left ot right.
     - `'top-to-bottom'`, `'vertical'`,`'v'`, `'y'`, or `1` : Arrange button game objects from top ot buttom.
+- `buttonsAlign` : Alignment of *left-to-right* buttons
+    - `'center'`
+    - `'left'`
+    - `'right'`
 - `space` : Pads spaces
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds
     - `space.title` : Space between title game object and below game object (content or buttons).
