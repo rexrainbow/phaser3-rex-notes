@@ -38,6 +38,10 @@ class DefaultMask extends Graphics {
 
     resize() {
         var parent = this.parent;
+        if ((this.widthSave === parent.width) && (this.heightSave === parent.height)) {
+            return this;
+        }
+
         this.clear().fillStyle(0xffffff);
         switch (this.shape) {
             case 1: // circle
@@ -57,7 +61,8 @@ class DefaultMask extends Graphics {
                 );
                 break;
         }
-
+        this.widthSave = parent.width;
+        this.heightSave = parent.height;
         return this;
     }
 }

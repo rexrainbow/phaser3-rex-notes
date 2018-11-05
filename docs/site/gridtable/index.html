@@ -1221,6 +1221,19 @@
     Cell begins visible
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#properties-of-cell-object" title="Properties of cell object" class="md-nav__link">
+    Properties of cell object
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -3502,6 +3515,19 @@
     Cell begins visible
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#properties-of-cell-object" title="Properties of cell object" class="md-nav__link">
+    Properties of cell object
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -3769,6 +3795,15 @@
 </pre></div>
 
 <p>Each cell only has <strong>one</strong> container gameObject, old container will be destroyed when assigning a new container.</p>
+<h4 id="properties-of-cell-object">Properties of cell object<a class="headerlink" href="#properties-of-cell-object" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Scene object, for creating Game Object.
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">scene</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">scene</span><span class="p">;</span>
+</pre></div></li>
+<li>Index of table grid
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">index</span><span class="p">;</span>
+</pre></div></li>
+</ul>
 <h3 id="cell-begins-invisible">Cell begins invisible<a class="headerlink" href="#cell-begins-invisible" title="Permanent link">&para;</a></h3>
 <p>Container of an invisible cell will be destroyed automatically.</p>
 <p>To resue container gameObject, user could pop that container by <code>cell.popContainer()</code> in event <code>cellinvisible</code>.</p>

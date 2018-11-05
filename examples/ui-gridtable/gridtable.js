@@ -26,10 +26,11 @@ class Demo extends Phaser.Scene {
                     cellHeight: 60,
                     columns: 2,
                 },
-                // slider: {
-                //     track: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, 0x260e04),
-                //     thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 13, 0x7b5e57),
-                // },
+
+                slider: {
+                    track: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, 0x260e04),
+                    thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 13, 0x7b5e57),
+                },
 
                 createCellContainerCallback: function (cell) {
                     var scene = cell.scene,

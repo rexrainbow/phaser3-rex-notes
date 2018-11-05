@@ -80,6 +80,7 @@ class GridTable extends Sizer {
         this.childrenMap = {};
         this.childrenMap.table = table;
         this.childrenMap.slider = slider;
+        this.childrenMap.scroller = scroller;
 
         var callback = GetValue(config, 'createCellContainerCallback', NOOP);
         var scope = GetValue(config, 'createCellContainerCallbackScope', undefined);
@@ -100,6 +101,12 @@ class GridTable extends Sizer {
             this.items = items;
         }
         this.childrenMap.table.setCellsCount(this.items.length).setTableOY(0).updateTable(true);
+
+        var scroller = this.childrenMap.scroller;
+        if (scroller) {
+            var table = this.childrenMap.table;
+            scroller.setBounds(table.bottomTableOY, table.topTableOY);
+        }
         return this;
     }
 }
