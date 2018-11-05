@@ -1,6 +1,6 @@
 import ContainerLite from 'rexPlugins/gameobjects/containerlite/ContainerLite.js';
 import Table from './Table.js';
-import DefaultMask from './DefaultMask.js';
+import DefaultMask from 'rexPlugins/utils/mask/DefaultMask.js';
 
 const Container = ContainerLite;
 const Components = Phaser.GameObjects.Components;
