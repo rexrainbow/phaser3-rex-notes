@@ -56,7 +56,7 @@ class Scroller extends EE {
         if (bounds) {
             this.setBounds(bounds);
         } else {
-            this.setBounds(GetValue(o, 'max', undefined), GetValue(o, 'min', undefined));
+            this.setBounds(GetValue(o, 'max', 0), GetValue(o, 'min', 0));
         }
         this.setValue(GetValue(o, 'value', this.maxValue || 0));
         this.setEnable(GetValue(o, "enable", true));

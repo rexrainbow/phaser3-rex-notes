@@ -3,6 +3,7 @@ import CreateTable from './CreateTable.js';
 import Slider from '../slider/Slider.js';
 import Scroller from 'rexPlugins/scroller.js'
 import NOOP from 'rexPlugins/utils/object/NOOP.js';
+import SetItems from './Setitem.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -20,6 +21,7 @@ class GridTable extends Sizer {
         var background = GetValue(config, 'background', undefined);
         var tableConfig = GetValue(config, 'table', undefined)
         var sliderConfig = GetValue(config, 'slider', undefined);
+        var scrollerConfig = GetValue(config, 'scrollerConfig', true);
 
         if (background) {
             this.addBackground(background);
@@ -43,18 +45,21 @@ class GridTable extends Sizer {
 
         var slider;
         if (sliderConfig) {
+            if (sliderConfig === true) {
+                sliderConfig = {};
+            }
             sliderConfig.orientation = config.orientation;
             slider = new Slider(scene, sliderConfig);
             this.add(slider, 0, 'center', undefined, true);
         }
 
-        var scroller = new Scroller(table, {
-            bounds: [
-                table.bottomTableOY,
-                table.topTableOY
-            ],
-            value: table.topTableOY
-        })
+        var scroller;
+        if (scrollerConfig) {
+            if (scrollerConfig === true) {
+                scrollerConfig = {};
+            }
+            scroller = new Scroller(table, scrollerConfig);
+        }
 
         // Control
         if (slider) {
@@ -94,26 +99,13 @@ class GridTable extends Sizer {
         return this;
     }
 
-    setItems(items) {
-        if (items === undefined) {
-            this.items.length = 0;
-        } else {
-            this.items = items;
-        }
-        this.childrenMap.table.setCellsCount(this.items.length).setTableOY(0).updateTable(true);
-
-        var scroller = this.childrenMap.scroller;
-        if (scroller) {
-            var table = this.childrenMap.table;
-            scroller.setBounds(table.bottomTableOY, table.topTableOY);
-        }
-        return this;
-    }
 }
 
 const defaultConfig = {};
 
-var methods = {}
+var methods = {
+    setItems: SetItems
+}
 Object.assign(
     GridTable.prototype,
     methods
