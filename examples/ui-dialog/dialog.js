@@ -17,33 +17,31 @@ class Demo extends Phaser.Scene {
 
                 background: this.rexUI.add.roundRectangle(0, 0, 100, 100, 20, 0x1565c0),
 
-                title: this.rexUI.add.label({
-                    background: this.rexUI.add.roundRectangle(0, 0, 100, 40, 20, 0x003c8f),
-                    text: this.add.text(0, 0, 'Title', {
-                        fontSize: '24px'
-                    }),
-                    space: {
-                        left: 15,
-                        right: 15,
-                        top: 10,
-                        bottom: 10
-                    }
-                }),
+                title: createLabel(this, 'Title'),
 
-                content: this.add.text(0, 0, 'Do you want to build a snow man?', {
-                    fontSize: '24px'
-                }),
+                content: createLabel(this, 'Content'),
 
-                actions: [
-                    createButton(this, 'Yes'),
-                    createButton(this, 'No')
+                description: createLabel(this, 'Description'),
+
+                choices: [
+                    createLabel(this, 'Choice0'),
+                    createLabel(this, 'Choice1'),
+                    createLabel(this, 'Choice2')
                 ],
 
-                actionsAlign: 'center', // 'center'|'left'|'right'                
+                actions: [
+                    createLabel(this, 'Action0'),
+                    createLabel(this, 'Action1')
+                ],
+
+                actionsAlign: 'left', // 'center'|'left'|'right'
 
                 space: {
                     title: 25,
                     content: 25,
+                    description: 25,
+                    choices: 25,
+                    choice: 15,
                     action: 15,
 
                     left: 20,
@@ -69,7 +67,7 @@ class Demo extends Phaser.Scene {
         this.print = this.add.text(0, 0, '');
         dialog
             .on('button.click', function (button, groupName, index) {
-                this.print.text += index + ': ' + button.text + '\n';
+                this.print.text += groupName + '-' + index + ': ' + button.text + '\n';
             }, this)
             .on('button.over', function (button, groupName, index) {
                 button.getElement('background').setStrokeStyle(1, 0xffffff);
@@ -82,7 +80,7 @@ class Demo extends Phaser.Scene {
     update() {}
 }
 
-var createButton = function (scene, text) {
+var createLabel = function (scene, text) {
     return scene.rexUI.add.label({
         background: scene.rexUI.add.roundRectangle(0, 0, 100, 40, 20, 0x5e92f3),
 

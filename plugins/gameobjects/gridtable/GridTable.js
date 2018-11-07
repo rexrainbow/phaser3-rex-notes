@@ -344,6 +344,13 @@ class GridTable extends Container {
         return this;
     }
 
+    // TODO:
+    //pointerToCellIndex(x, y) {
+    //    P0.x = x;
+    //    P0.y = y;
+    //    this.worldToLocal(P0);
+    //}
+
     // For when you know this Set will be modified during the iteration
     eachVisibleCell(callback, scope) {
         this.visibleCells.each(callback, scope);
@@ -372,6 +379,9 @@ class GridTable extends Container {
             var gameObject = (this.mask.hasOwnProperty('geometryMask')) ? this.mask.geometryMask : this.mask.bitmapMask;
             if (gameObject.resize) {
                 gameObject.resize(width, height);
+            } else {
+                gameObject.displayWidth = width;
+                gameObject.displayHeight = height;
             }
         }
         return this;

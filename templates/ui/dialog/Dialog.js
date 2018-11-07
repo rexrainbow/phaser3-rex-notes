@@ -1,6 +1,5 @@
 import Sizer from '../sizer/Sizer.js';
 import GetElement from '../utils/GetElement.js';
-import ORIENTATIONMODE from '../utils/OrientationConst.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -19,9 +18,13 @@ class Dialog extends Sizer {
         var title = GetValue(config, 'title', undefined);
         var content = GetValue(config, 'content', undefined);
         var description = GetValue(config, 'description', undefined);
-        var buttons = GetValue(config, 'buttons', undefined);
-        if (buttons && buttons.length === 0) {
-            buttons = undefined;
+        var choices = GetValue(config, 'choices', undefined);
+        if (choices && choices.length === 0) {
+            choices = undefined;
+        }
+        var actions = GetValue(config, 'actions', undefined);
+        if (actions && actions.length === 0) {
+            actions = undefined;
         }
 
         // Space
@@ -32,7 +35,9 @@ class Dialog extends Sizer {
         var titleSpace = GetValue(config, 'space.title', 0);
         var contentSpace = GetValue(config, 'space.content', 0);
         var descriptionSpace = GetValue(config, 'space.description', 0);
-        var buttonSpace = GetValue(config, 'space.button', 0);
+        var choicesSpace = GetValue(config, 'space.choices', 0);
+        var choiceSpace = GetValue(config, 'space.choice', 0);
+        var actionSpace = GetValue(config, 'space.action', 0);
 
         if (background) {
             this.addBackground(background);
@@ -43,7 +48,7 @@ class Dialog extends Sizer {
                 left: paddingLeft,
                 right: paddingRight,
                 top: paddingTop,
-                bottom: (content || description || buttons) ? titleSpace : paddingBottom
+                bottom: (content || description || choices || actions) ? titleSpace : paddingBottom
             }
             this.add(title, 0, 'center', padding, true);
         }
@@ -53,7 +58,7 @@ class Dialog extends Sizer {
                 left: paddingLeft,
                 right: paddingRight,
                 top: (title) ? 0 : paddingTop,
-                bottom: (description || buttons) ? contentSpace : paddingBottom
+                bottom: (description || choices || actions) ? contentSpace : paddingBottom
             }
             this.add(content, 0, 'center', padding);
         }
@@ -63,72 +68,65 @@ class Dialog extends Sizer {
                 left: paddingLeft,
                 right: paddingRight,
                 top: (title) ? 0 : paddingTop,
-                bottom: (buttons) ? descriptionSpace : paddingBottom
+                bottom: (choices || actions) ? descriptionSpace : paddingBottom
             }
             this.add(description, 0, 'center', padding);
         }
 
-        if (buttons) {
-            var buttonsOrientation = GetValue(config, 'buttonsOrientation', 0);
-            if (typeof (buttonsOrientation) === 'string') {
-                buttonsOrientation = ORIENTATIONMODE[buttonsOrientation];
-            }
-            var buttonsAlign = GetValue(config, 'buttonsAlign', 'center');
-            var buttonsSizer;
-            if (buttonsOrientation === 0) { // Left-right
-                buttonsSizer = new Sizer(scene, 0, 0, 0, 0, {
-                    orientation: 0 // Left-right
-                });
+        if (choices) {
+            var buttonsSizer = this;
+            var button, proportion;
+            var lastBottomPadding = (actions) ? choicesSpace : paddingBottom;
+            for (var i = 0, cnt = choices.length; i < cnt; i++) {
+                button = choices[i];
+                // Add to sizer
                 var padding = {
                     left: paddingLeft,
                     right: paddingRight,
-                    top: (title || content) ? 0 : paddingTop,
-                    bottom: paddingBottom
+                    top: (i >= 1) ? choiceSpace : 0,
+                    bottom: (i === (cnt - 1)) ? lastBottomPadding : 0
                 }
-                this.add(buttonsSizer, 0, 'center', padding, true);
-            } else { // Top-bottom               
-                buttonsSizer = this;
+                buttonsSizer.add(button, 0, 'center', padding, true);
+                buttonSetInteractive.call(this, button, 'choices', i);
             }
+        }
 
+        if (actions) {
+            var buttonsSizer = new Sizer(scene, 0, 0, 0, 0, {
+                orientation: 0 // Left-right
+            });
+            var padding = {
+                left: paddingLeft,
+                right: paddingRight,
+                top: (title || content || description || choices) ? 0 : paddingTop,
+                bottom: paddingBottom
+            }
+            this.add(buttonsSizer, 0, 'center', padding, true);
+
+            var actionsAlign = GetValue(config, 'actionsAlign', 'center');
             var button, proportion;
-            for (var i = 0, cnt = buttons.length; i < cnt; i++) {
-                button = buttons[i];
+            for (var i = 0, cnt = actions.length; i < cnt; i++) {
+                button = actions[i];
                 // Add to sizer
-                if (buttonsOrientation === 0) { // Left-right
-                    var padding = {
-                        left: (i >= 1) ? buttonSpace : 0,
-                        right: 0,
-                        top: 0,
-                        bottom: 0
-                    }
-                    switch (buttonsAlign) {
-                        case 'left':
-                            proportion = 0;
-                            break;
-                        case 'right':
-                            proportion = (i === 0) ? 1 : 0;
-                            break;
-                        default:
-                            proportion = 1;
-                            break;
-                    }
-                    buttonsSizer.add(button, proportion, buttonsAlign, padding, true);
-                } else { // Top-bottom       
-                    var padding = {
-                        left: paddingLeft,
-                        right: paddingRight,
-                        top: (i >= 1) ? buttonSpace : 0,
-                        bottom: (i === (cnt - 1)) ? paddingBottom : 0
-                    }
-                    buttonsSizer.add(button, 0, 'center', padding, true);
+                var padding = {
+                    left: (i >= 1) ? actionSpace : 0,
+                    right: 0,
+                    top: 0,
+                    bottom: 0
                 }
-
-                // Add click callback
-                button
-                    .setInteractive()
-                    .on('pointerdown', fireEvent('button.click', button, i), this)
-                    .on('pointerover', fireEvent('button.over', button, i), this)
-                    .on('pointerout', fireEvent('button.out', button, i), this)
+                switch (actionsAlign) {
+                    case 'left':
+                        proportion = 0;
+                        break;
+                    case 'right':
+                        proportion = (i === 0) ? 1 : 0;
+                        break;
+                    default:
+                        proportion = 1;
+                        break;
+                }
+                buttonsSizer.add(button, proportion, actionsAlign, padding, true);
+                buttonSetInteractive.call(this, button, 'actions', i);
             }
         }
 
@@ -136,13 +134,22 @@ class Dialog extends Sizer {
         this.childrenMap.background = background;
         this.childrenMap.title = title;
         this.childrenMap.content = content;
-        this.childrenMap.buttons = buttons;
+        this.childrenMap.choices = choices;
+        this.childrenMap.actions = actions;
     }
 }
 
-var fireEvent = function (eventName, button, index) {
+var buttonSetInteractive = function (button, groupName, index) {
+    button
+        .setInteractive()
+        .on('pointerdown', fireEvent('button.click', button, groupName, index), this)
+        .on('pointerover', fireEvent('button.over', button, groupName, index), this)
+        .on('pointerout', fireEvent('button.out', button, groupName, index), this);
+}
+
+var fireEvent = function (eventName, button, groupName, index) {
     return function () {
-        this.emit(eventName, button, index);
+        this.emit(eventName, button, groupName, index);
     }
 }
 var methods = {

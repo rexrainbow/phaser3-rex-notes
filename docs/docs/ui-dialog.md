@@ -51,11 +51,15 @@ var dialog = scene.rexUI.add.dialog({
     title: titleGameObject,
     content: contentGameObject,
     description: descriptionGameObject,
-    buttonsOrientation: 0,
-    buttonsAlign: 'center,
-    buttons: [
-        button0GameObject,
-        button1GameObject,
+    choices: [
+        gameObject,
+        gameObject,
+        // ...
+    ],
+    actionsAlign: 'center,
+    actions: [
+        gameObject,
+        gameObject,
         // ...
     ],
 
@@ -81,18 +85,20 @@ var dialog = scene.rexUI.add.dialog({
 - `title` : Game object of title, optional.
 - `content` : Game object of content, optional.
 - `description` : Game object of description, optional.
-- `buttonsOrientation` :
-    - `'left-to-right'`, `'horizontal'`,`'h'`, `'x'`, or `0` : Arrange button game objects from left ot right.
-    - `'top-to-bottom'`, `'vertical'`,`'v'`, `'y'`, or `1` : Arrange button game objects from top ot buttom.
-- `buttonsAlign` : Alignment of *left-to-right* buttons
+- `choices` : Array of Game objects for choice-buttons group which arranged top-to-bottom, optional.
+- `actions` : Array of Game objects for action-buttons group which arranged left-to-right, optional.
+- `actionsAlign` : Alignment of action-buttons
     - `'center'`
     - `'left'`
     - `'right'`
 - `space` : Pads spaces
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds
-    - `space.title` : Space between title game object and below game object (content or buttons).
-    - `space.content` : Space between content game object and below game object (buttons).
-    - `space.button` : Space between 2 button game objects.
+    - `space.title` : Space between title game object and below game object.
+    - `space.content` : Space between content game object and below game object.
+    - `space.description` : Space between description game object and below game object.
+    - `space.choices` : Space between last choice-button and below game object.
+    - `space.choice` : Space between 2 choice-button game objects.
+    - `space.action` : Space between 2 action-button game objects.
 - `name` : Set name of this dialog.
 - `x`, `y` : Position of this dialog object, it is valid when this dialog is the top object.
 - `width`, `height` : Minimum width, minimum height.
@@ -109,28 +115,31 @@ dialog.layout();
 
 - Click button
     ```javascript
-    dialog.on('button.click', function(button, index) {
+    dialog.on('button.click', function(button, groupName, index) {
         // ...
     }, scope);
     ```
-    - `button` : Triggered button game object
-    - `index` : Index of triggered button game object
+    - `button` : Triggered button game object.
+    - `groupName` : `'choices'` or `'actions'`.
+    - `index` : Index of triggered button game object.
 - Pointer-over button
     ```javascript
-    dialog.on('button.over', function(button, index) {
+    dialog.on('button.over', function(button, groupName, index) {
         // ...
     }, scope);
     ```
     - `button` : Triggered button game object
+    - `groupName` : `'choices'` or `'actions'`.
     - `index` : Index of triggered button game object
 - Pointer-out button
     ```javascript
-    dialog.on('button.out', function(button, index) {
+    dialog.on('button.out', function(button, groupName, index) {
         // ...
     }, scope);
     ```
-    - `button` : Triggered button game object
-    - `index` : Index of triggered button game object
+    - `button` : Triggered button game object.
+    - `groupName` : `'choices'` or `'actions'`.
+    - `index` : Index of triggered button game object.
 
 ### Get element
 

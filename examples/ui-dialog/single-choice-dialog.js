@@ -34,9 +34,7 @@ class Demo extends Phaser.Scene {
                     fontSize: '24px'
                 }),
 
-                buttonsOrientation: 1,
-
-                buttons: [
+                choices: [
                     createButton(this, '3'),
                     createButton(this, '4'),
                     createButton(this, '5'),
@@ -46,11 +44,12 @@ class Demo extends Phaser.Scene {
                 space: {
                     title: 25,
                     content: 25,
-                    button: 15,
+                    choice: 15,
+
                     left: 25,
                     right: 25,
                     top: 25,
-                    bottom: 25
+                    bottom: 25,
                 }
             })
             .layout()
@@ -69,13 +68,13 @@ class Demo extends Phaser.Scene {
 
         this.print = this.add.text(0, 0, '');
         dialog
-            .on('button.click', function (button, index) {
+            .on('button.click', function (button, groupName, index) {
                 this.print.text += index + ': ' + button.text + '\n';
             }, this)
-            .on('button.over', function (button, index) {
+            .on('button.over', function (button, groupName, index) {
                 button.getElement('background').setStrokeStyle(1, 0xffffff);
             })
-            .on('button.out', function (button, index) {
+            .on('button.out', function (button, groupName, index) {
                 button.getElement('background').setStrokeStyle();
             });
     }
