@@ -52,14 +52,14 @@ var dialog = scene.rexUI.add.dialog({
     content: contentGameObject,
     description: descriptionGameObject,
     choices: [
-        gameObject,
-        gameObject,
+        buttonGameObject,
+        buttonGameObject,
         // ...
     ],
-    actionsAlign: 'center,
+    actionsAlign: 'center',
     actions: [
-        gameObject,
-        gameObject,
+        buttonGameObject,
+        buttonGameObject,
         // ...
     ],
 
@@ -85,8 +85,8 @@ var dialog = scene.rexUI.add.dialog({
 - `title` : Game object of title, optional.
 - `content` : Game object of content, optional.
 - `description` : Game object of description, optional.
-- `choices` : Array of Game objects for choice-buttons group which arranged top-to-bottom, optional.
-- `actions` : Array of Game objects for action-buttons group which arranged left-to-right, optional.
+- `choices` : Array of Game objects for choice-buttons group which arranged from top to bottom, optional.
+- `actions` : Array of Game objects for action-buttons group which arranged from left to right, optional.
 - `actionsAlign` : Alignment of action-buttons
     - `'center'`
     - `'left'`
@@ -100,7 +100,6 @@ var dialog = scene.rexUI.add.dialog({
     - `space.choice` : Space between 2 choice-button game objects.
     - `space.action` : Space between 2 action-button game objects.
 - `name` : Set name of this dialog.
-- `x`, `y` : Position of this dialog object, it is valid when this dialog is the top object.
 - `width`, `height` : Minimum width, minimum height.
 
 ### Layout children
@@ -158,8 +157,12 @@ dialog.layout();
         ```
     - Button game object
         ```javascript
-        var button = dialog.getElement('button[' + index + ']');
+        var button = dialog.getElement('choices[' + index + ']');
         ```
+        or
+        ```javascript
+        var button = dialog.getElement('actions[' + index + ']');
+        ```        
 - Get by name
     ```javascript
     var gameObject = dialog.getElement('#' + name);

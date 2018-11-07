@@ -3479,28 +3479,32 @@
     <span class="nx">title</span><span class="o">:</span> <span class="nx">titleGameObject</span><span class="p">,</span>
     <span class="nx">content</span><span class="o">:</span> <span class="nx">contentGameObject</span><span class="p">,</span>
     <span class="nx">description</span><span class="o">:</span> <span class="nx">descriptionGameObject</span><span class="p">,</span>
-    <span class="nx">buttonsOrientation</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">buttonsAlign</span><span class="o">:</span> <span class="s1">&#39;center,</span>
-<span class="s1">    buttons: [</span>
-<span class="s1">        button0GameObject,</span>
-<span class="s1">        button1GameObject,</span>
-<span class="s1">        // ...</span>
-<span class="s1">    ],</span>
+    <span class="nx">choices</span><span class="o">:</span> <span class="p">[</span>
+        <span class="nx">buttonGameObject</span><span class="p">,</span>
+        <span class="nx">buttonGameObject</span><span class="p">,</span>
+        <span class="c1">// ...</span>
+    <span class="p">],</span>
+    <span class="nx">actionsAlign</span><span class="o">:</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span>
+    <span class="nx">actions</span><span class="o">:</span> <span class="p">[</span>
+        <span class="nx">buttonGameObject</span><span class="p">,</span>
+        <span class="nx">buttonGameObject</span><span class="p">,</span>
+        <span class="c1">// ...</span>
+    <span class="p">],</span>
 
-<span class="s1">    // Space</span>
-<span class="s1">    space: {</span>
-<span class="s1">        left: 0,</span>
-<span class="s1">        right: 0,</span>
-<span class="s1">        top: 0,</span>
-<span class="s1">        bottom: 0,</span>
-<span class="s1">        title: 0,</span>
-<span class="s1">        content: 0,</span>
-<span class="s1">        button: 0,</span>
-<span class="s1">    },</span>
+    <span class="c1">// Space</span>
+    <span class="nx">space</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">left</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">right</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">top</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">bottom</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">title</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">content</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">button</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="p">},</span>
 
-<span class="s1">    width: 0,</span>
-<span class="s1">    height: 0,</span>
-<span class="s1">    name: &#39;</span><span class="err">&#39;</span><span class="p">,</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
 <span class="p">});</span>
 </pre></div>
 
@@ -3510,12 +3514,9 @@
 <li><code>title</code> : Game object of title, optional.</li>
 <li><code>content</code> : Game object of content, optional.</li>
 <li><code>description</code> : Game object of description, optional.</li>
-<li><code>buttonsOrientation</code> :<ul>
-<li><code>'left-to-right'</code>, <code>'horizontal'</code>,<code>'h'</code>, <code>'x'</code>, or <code>0</code> : Arrange button game objects from left ot right.</li>
-<li><code>'top-to-bottom'</code>, <code>'vertical'</code>,<code>'v'</code>, <code>'y'</code>, or <code>1</code> : Arrange button game objects from top ot buttom.</li>
-</ul>
-</li>
-<li><code>buttonsAlign</code> : Alignment of <em>left-to-right</em> buttons<ul>
+<li><code>choices</code> : Array of Game objects for choice-buttons group which arranged from top to bottom, optional.</li>
+<li><code>actions</code> : Array of Game objects for action-buttons group which arranged from left to right, optional.</li>
+<li><code>actionsAlign</code> : Alignment of action-buttons<ul>
 <li><code>'center'</code></li>
 <li><code>'left'</code></li>
 <li><code>'right'</code></li>
@@ -3523,13 +3524,15 @@
 </li>
 <li><code>space</code> : Pads spaces<ul>
 <li><code>space.left</code>, <code>space.right</code>, <code>space.top</code>, <code>space.bottom</code> : Space of bounds</li>
-<li><code>space.title</code> : Space between title game object and below game object (content or buttons).</li>
-<li><code>space.content</code> : Space between content game object and below game object (buttons).</li>
-<li><code>space.button</code> : Space between 2 button game objects.</li>
+<li><code>space.title</code> : Space between title game object and below game object.</li>
+<li><code>space.content</code> : Space between content game object and below game object.</li>
+<li><code>space.description</code> : Space between description game object and below game object.</li>
+<li><code>space.choices</code> : Space between last choice-button and below game object.</li>
+<li><code>space.choice</code> : Space between 2 choice-button game objects.</li>
+<li><code>space.action</code> : Space between 2 action-button game objects.</li>
 </ul>
 </li>
 <li><code>name</code> : Set name of this dialog.</li>
-<li><code>x</code>, <code>y</code> : Position of this dialog object, it is valid when this dialog is the top object.</li>
 <li><code>width</code>, <code>height</code> : Minimum width, minimum height.</li>
 </ul>
 <h3 id="layout-children">Layout children<a class="headerlink" href="#layout-children" title="Permanent link">&para;</a></h3>
@@ -3540,30 +3543,33 @@
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Click button
-    <div class="codehilite"><pre><span></span><span class="nx">dialog</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;button.click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
+    <div class="codehilite"><pre><span></span><span class="nx">dialog</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;button.click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">groupName</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </pre></div><ul>
-<li><code>button</code> : Triggered button game object</li>
-<li><code>index</code> : Index of triggered button game object</li>
+<li><code>button</code> : Triggered button game object.</li>
+<li><code>groupName</code> : <code>'choices'</code> or <code>'actions'</code>.</li>
+<li><code>index</code> : Index of triggered button game object.</li>
 </ul>
 </li>
 <li>Pointer-over button
-    <div class="codehilite"><pre><span></span><span class="nx">dialog</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;button.over&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
+    <div class="codehilite"><pre><span></span><span class="nx">dialog</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;button.over&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">groupName</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </pre></div><ul>
 <li><code>button</code> : Triggered button game object</li>
+<li><code>groupName</code> : <code>'choices'</code> or <code>'actions'</code>.</li>
 <li><code>index</code> : Index of triggered button game object</li>
 </ul>
 </li>
 <li>Pointer-out button
-    <div class="codehilite"><pre><span></span><span class="nx">dialog</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;button.out&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
+    <div class="codehilite"><pre><span></span><span class="nx">dialog</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;button.out&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">groupName</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </pre></div><ul>
-<li><code>button</code> : Triggered button game object</li>
-<li><code>index</code> : Index of triggered button game object</li>
+<li><code>button</code> : Triggered button game object.</li>
+<li><code>groupName</code> : <code>'choices'</code> or <code>'actions'</code>.</li>
+<li><code>index</code> : Index of triggered button game object.</li>
 </ul>
 </li>
 </ul>
@@ -3580,7 +3586,10 @@
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">content</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">);</span>
 </pre></div></li>
 <li>Button game object
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">button</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;button[&#39;</span> <span class="o">+</span> <span class="nx">index</span> <span class="o">+</span> <span class="s1">&#39;]&#39;</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">button</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;choices[&#39;</span> <span class="o">+</span> <span class="nx">index</span> <span class="o">+</span> <span class="s1">&#39;]&#39;</span><span class="p">);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">button</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;actions[&#39;</span> <span class="o">+</span> <span class="nx">index</span> <span class="o">+</span> <span class="s1">&#39;]&#39;</span><span class="p">);</span>
 </pre></div></li>
 </ul>
 </li>
