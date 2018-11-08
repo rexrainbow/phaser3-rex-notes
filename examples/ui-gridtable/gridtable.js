@@ -58,6 +58,23 @@ class Demo extends Phaser.Scene {
             })
             .layout()
         //.drawBounds(this.add.graphics(), 0xff0000);
+
+        this.print = this.add.text(0, 0, '');
+        gridTable
+            .on('cell.click', function (cellContainer, cellIndex) {
+                this.print.text += cellIndex + ': ' + cellContainer.text + '\n';
+            }, this)
+            .on('cell.over', function (cellContainer, cellIndex) {
+                var background = cellContainer.getElement('background');
+                background.setStrokeStyle(1, 0xffffff);
+                background._depthSave = background.depth;
+                background.depth++;
+            }, this)
+            .on('cell.out', function (cellContainer, cellIndex) {
+                var background = cellContainer.getElement('background');
+                background.setStrokeStyle(2, 0x260e04);
+                background.depth = background._depthSave;
+            }, this)
     }
 
     update() {}
@@ -65,7 +82,7 @@ class Demo extends Phaser.Scene {
 
 var getItems = function (count) {
     var data = [];
-    var startIdx = Random(0, 100);
+    var startIdx = 0; // Random(0, 100);
     for (var i = 0; i < count; i++) {
         data.push({
             id: startIdx + i,

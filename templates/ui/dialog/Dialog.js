@@ -1,5 +1,6 @@
 import Sizer from '../sizer/Sizer.js';
 import GetElement from '../utils/GetElement.js';
+import ButtonSetInteractive from '../utils/ButtonSetInteractive.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -87,7 +88,7 @@ class Dialog extends Sizer {
                     bottom: (i === (cnt - 1)) ? lastBottomPadding : 0
                 }
                 buttonsSizer.add(button, 0, 'center', padding, true);
-                buttonSetInteractive.call(this, button, 'choices', i);
+                ButtonSetInteractive.call(this, button, 'choices', i);
             }
         }
 
@@ -126,7 +127,7 @@ class Dialog extends Sizer {
                         break;
                 }
                 buttonsSizer.add(button, proportion, actionsAlign, padding, true);
-                buttonSetInteractive.call(this, button, 'actions', i);
+                ButtonSetInteractive.call(this, button, 'actions', i);
             }
         }
 
@@ -139,19 +140,7 @@ class Dialog extends Sizer {
     }
 }
 
-var buttonSetInteractive = function (button, groupName, index) {
-    button
-        .setInteractive()
-        .on('pointerdown', fireEvent('button.click', button, groupName, index), this)
-        .on('pointerover', fireEvent('button.over', button, groupName, index), this)
-        .on('pointerout', fireEvent('button.out', button, groupName, index), this);
-}
 
-var fireEvent = function (eventName, button, groupName, index) {
-    return function () {
-        this.emit(eventName, button, groupName, index);
-    }
-}
 var methods = {
     getElement: GetElement,
 }

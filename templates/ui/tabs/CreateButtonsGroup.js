@@ -1,4 +1,5 @@
 import Sizer from '../sizer/Sizer.js';
+import ButtonSetInteractive from '../utils/ButtonSetInteractive.js';
 
 var CreateButtonsGroup = function(groupName, buttons, orientation, space) {
     var scene = this.scene;
@@ -21,19 +22,9 @@ var CreateButtonsGroup = function(groupName, buttons, orientation, space) {
 
         buttonsSizer.add(buttons[i], 0, 'center', padding, true);
         // Add click callback
-        button
-            .setInteractive()
-            .on('pointerdown', fireEvent('button.click', button, groupName, i), this)
-            .on('pointerover', fireEvent('button.over', button, groupName, i), this)
-            .on('pointerout', fireEvent('button.out', button, groupName, i), this)
+        ButtonSetInteractive.call(this, button, groupName, i);
     }
     return buttonsSizer;
-}
-
-var fireEvent = function (eventName, button, groupName, index) {
-    return function () {
-        this.emit(eventName, button, groupName, index);
-    }
 }
 
 export default CreateButtonsGroup;

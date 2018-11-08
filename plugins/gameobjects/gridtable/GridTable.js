@@ -328,6 +328,15 @@ class GridTable extends Container {
         return this.table.getCell(cellIdx, true);
     }
 
+    getCellContainer(cellIdx) {
+        var cell = this.table.getCell(cellIdx, false);
+        var container;
+        if (cell) {
+            container = cell.getContainer();
+        }
+        return container;
+    }
+
     get cellsCount() {
         return this.table.cellsCount;
     }
@@ -344,12 +353,34 @@ class GridTable extends Container {
         return this;
     }
 
-    // TODO:
-    //pointerToCellIndex(x, y) {
-    //    P0.x = x;
-    //    P0.y = y;
-    //    this.worldToLocal(P0);
-    //}
+    pointerToCellIndex(x, y) {
+        y -= (this.y + this.topLeftY);
+        x -= (this.x + this.topLeftX);
+        var offsetTableOY = this.tableOY - y;
+        var offsetTableOX = this.tableOX - x;
+
+        var table = this.table;
+        var rowIdx = table.heightToRowIndex(-offsetTableOY);
+        var colIdx = table.widthToColIndex(-offsetTableOX);
+        var cellIdx = table.colRowToCellIndex(colIdx, rowIdx);
+        if (!this.cellIsVisible(cellIdx)) {
+            cellIdx = null;
+        }
+        return cellIdx;
+    }
+
+    pointerToCellContainer(x, y) {
+        var cellIdx = this.pointerToCellIndex(x, y);
+        if (cellIdx === null) {
+            return undefined;
+        }
+        return this.getCellContainer(cellIdx);
+    }
+
+    cellIsVisible(cellIdx) {
+        var cell = this.table.getCell(cellIdx, false);
+        return cell && this.visibleCells.contains(cell);
+    }
 
     // For when you know this Set will be modified during the iteration
     eachVisibleCell(callback, scope) {

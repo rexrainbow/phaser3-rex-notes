@@ -4,6 +4,7 @@ import Slider from '../slider/Slider.js';
 import Scroller from 'rexPlugins/scroller.js'
 import NOOP from 'rexPlugins/utils/object/NOOP.js';
 import SetItems from './Setitem.js';
+import TableSetInteractive from './TableSetInteractive.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -87,9 +88,10 @@ class GridTable extends Sizer {
         this.childrenMap.slider = slider;
         this.childrenMap.scroller = scroller;
 
+        TableSetInteractive.call(this, table);        
         var callback = GetValue(config, 'createCellContainerCallback', NOOP);
         var scope = GetValue(config, 'createCellContainerCallbackScope', undefined);
-        this.setCreateCellContainerCallback(callback, scope)
+        this.setCreateCellContainerCallback(callback, scope);        
         this.setItems(GetValue(config, 'items', []));
     }
 
