@@ -65,15 +65,14 @@ class Demo extends Phaser.Scene {
                 this.print.text += cellIndex + ': ' + cellContainer.text + '\n';
             }, this)
             .on('cell.over', function (cellContainer, cellIndex) {
-                var background = cellContainer.getElement('background');
-                background.setStrokeStyle(1, 0xffffff);
-                background._depthSave = background.depth;
-                background.depth++;
+                cellContainer.getElement('background')
+                    .setStrokeStyle(1, 0xffffff)
+                    .setDepth(1);
             }, this)
             .on('cell.out', function (cellContainer, cellIndex) {
-                var background = cellContainer.getElement('background');
-                background.setStrokeStyle(2, 0x260e04);
-                background.depth = background._depthSave;
+                cellContainer.getElement('background')
+                    .setStrokeStyle(2, 0x260e04)
+                    .setDepth(0);
             }, this)
     }
 

@@ -356,8 +356,8 @@ class GridTable extends Container {
     pointerToCellIndex(x, y) {
         y -= (this.y + this.topLeftY);
         x -= (this.x + this.topLeftX);
-        var offsetTableOY = this.tableOY - y;
-        var offsetTableOX = this.tableOX - x;
+        var offsetTableOY = this.tableOY - ((this.scrollMode === 0) ? y : x);
+        var offsetTableOX = this.tableOX - ((this.scrollMode === 0) ? x : y);
 
         var table = this.table;
         var rowIdx = table.heightToRowIndex(-offsetTableOY);
