@@ -9,6 +9,7 @@ import DialogFactory from './dialog/DialogFactory.js';
 import TabsFactory from './tabs/TabsFactory.js';
 import SliderFactory from './slider/SliderFactory.js';
 import GridTableFactory from './gridtable/GridTableFactory.js';
+import TabsTableFactory from './tabstable/TabsTableFactory.js';
 
 class UIPlugin extends Phaser.Plugins.ScenePlugin {
     constructor(scene, pluginManager) {

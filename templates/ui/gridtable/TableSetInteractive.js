@@ -30,7 +30,7 @@ var OnCellClick = function (pointer) {
         return;
     }
     var cellContainer = table.getCellContainer(cellIndex);
-    this.emit('cell.click', cellContainer, cellIndex);
+    this.eventEmitter.emit('cell.click', cellContainer, cellIndex);
 }
 
 var OnCellOver = function (pointer) {
@@ -46,12 +46,12 @@ var OnCellOver = function (pointer) {
     if (this.lastOverCellIndex !== undefined) {
         cellContainer = table.getCellContainer(this.lastOverCellIndex);
         if (cellContainer != null) {
-            this.emit('cell.out', cellContainer, this.lastOverCellIndex);
+            this.eventEmitter.emit('cell.out', cellContainer, this.lastOverCellIndex);
         }
     }
     cellContainer = table.getCellContainer(cellIndex);
     if (cellContainer != null) {
-        this.emit('cell.over', cellContainer, cellIndex);
+        this.eventEmitter.emit('cell.over', cellContainer, cellIndex);
     }    
     this.lastOverCellIndex = cellIndex;
 }
@@ -60,7 +60,7 @@ var OnCellOut = function () {
     var table = this.childrenMap.table;
     var cellContainer = table.getCellContainer(this.lastOverCellIndex);
     if (cellContainer != null) {
-        this.emit('cell.out', cellContainer, this.lastOverCellIndex);
+        this.eventEmitter.emit('cell.out', cellContainer, this.lastOverCellIndex);
     }
     this.lastOverCellIndex = undefined;
 }

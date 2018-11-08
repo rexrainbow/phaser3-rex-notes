@@ -13,6 +13,7 @@ class Dialog extends Sizer {
         config.orientation = 1; // Top to bottom
         super(scene, config);
         this.type = 'rexDialog';
+        this.eventEmitter = GetValue(config, 'eventEmitter', this);
 
         // Add elements
         var background = GetValue(config, 'background', undefined);

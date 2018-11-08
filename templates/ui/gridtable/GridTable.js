@@ -17,6 +17,7 @@ class GridTable extends Sizer {
         config.orientation = 0; // Left-to-right
         super(scene, config);
         this.type = 'rexGridTable';
+        this.eventEmitter = GetValue(config, 'eventEmitter', this);
 
         // Add elements
         var background = GetValue(config, 'background', undefined);
@@ -88,10 +89,10 @@ class GridTable extends Sizer {
         this.childrenMap.slider = slider;
         this.childrenMap.scroller = scroller;
 
-        TableSetInteractive.call(this, table);        
+        TableSetInteractive.call(this, table);
         var callback = GetValue(config, 'createCellContainerCallback', NOOP);
         var scope = GetValue(config, 'createCellContainerCallbackScope', undefined);
-        this.setCreateCellContainerCallback(callback, scope);        
+        this.setCreateCellContainerCallback(callback, scope);
         this.setItems(GetValue(config, 'items', []));
     }
 

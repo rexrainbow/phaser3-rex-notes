@@ -14,6 +14,7 @@ class Tabs extends GridSizer {
         config.row = 3;
         super(scene, config);
         this.type = 'rexTabs';
+        this.eventEmitter = GetValue(config, 'eventEmitter', this);
 
         // Add elements
         var background = GetValue(config, 'background', undefined);
