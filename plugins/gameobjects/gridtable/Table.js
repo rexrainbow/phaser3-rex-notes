@@ -184,6 +184,9 @@ class Table {
     }
 
     colRowToCellIndex(colIdx, rowIdx) {
+        if (colIdx >= this.colCount) {
+            return null;
+        }
         return (rowIdx * this.colCount) + colIdx;
     }
 

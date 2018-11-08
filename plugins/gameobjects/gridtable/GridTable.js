@@ -363,8 +363,11 @@ class GridTable extends Container {
         var rowIdx = table.heightToRowIndex(-offsetTableOY);
         var colIdx = table.widthToColIndex(-offsetTableOX);
         var cellIdx = table.colRowToCellIndex(colIdx, rowIdx);
+        if (cellIdx === null) {
+            return null;
+        }
         if (!this.cellIsVisible(cellIdx)) {
-            cellIdx = null;
+            return null;
         }
         return cellIdx;
     }
