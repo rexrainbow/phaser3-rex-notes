@@ -81,10 +81,9 @@ class Demo extends Phaser.Scene {
 
 var getItems = function (count) {
     var data = [];
-    var startIdx = 0; // Random(0, 100);
     for (var i = 0; i < count; i++) {
         data.push({
-            id: startIdx + i,
+            id: i,
             color: Random(0, 0xffffff)
         });
     }

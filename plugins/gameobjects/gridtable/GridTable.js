@@ -315,10 +315,10 @@ class GridTable extends Container {
 
         this.updateFlag = false;
         if (refresh) {
-            this.cleanVisibleCellIndexes();
+            this.clearVisibleCellIndexes();
             this.hideCells();
         }
-        this.cleanVisibleCellIndexes();
+        this.clearVisibleCellIndexes();
         this.showCells();
         this.hideCells();
         return this;
@@ -421,7 +421,7 @@ class GridTable extends Container {
         return this;
     }
 
-    cleanVisibleCellIndexes() {
+    clearVisibleCellIndexes() {
         var tmp = this.preVisibleCells;
         this.preVisibleCells = this.visibleCells;
         this.visibleCells = tmp;
@@ -429,6 +429,9 @@ class GridTable extends Container {
     }
 
     showCells() {
+        if (this.cellsCount === 0) {
+            return;
+        }
         var table = this.table;
         var rowIdx = table.heightToRowIndex(-this.tableOY);
         if (rowIdx < 0) {
