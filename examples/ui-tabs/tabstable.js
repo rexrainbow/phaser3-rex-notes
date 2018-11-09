@@ -98,14 +98,6 @@ class Demo extends Phaser.Scene {
                         if (this._prevSortButton === undefined) {
                             return;
                         }
-
-                        // Load items into grid table
-                        loadItems(
-                            this.getElement('panel'),
-                            db,
-                            this._prevTypeButton.text,
-                            this._prevSortButton.text,
-                        );
                         break;
 
                     case 'right':
@@ -118,16 +110,20 @@ class Demo extends Phaser.Scene {
                         if (this._prevTypeButton === undefined) {
                             return;
                         }
-
-                        // Load items into grid table
-                        loadItems(
-                            this.getElement('panel'),
-                            db,
-                            this._prevTypeButton.text,
-                            this._prevSortButton.text,
-                        );
                         break;
                 }
+
+                // Load items into grid table
+                var items = db
+                    .chain()
+                    .find({
+                        type: this._prevTypeButton.text
+                    })
+                    .simplesort('id', {
+                        desc: (this._prevSortButton.text === '-') // sort descending
+                    })
+                    .data();
+                this.getElement('panel').setItems(items);
             }, tabs)
 
         tabs.emitButtonClick('left', 0).emitButtonClick('right', 0);
@@ -180,20 +176,6 @@ var createButton = function (scene, direction, text) {
         }
     });
 }
-
-var loadItems = function (table, db, type, sort) {
-    var items = db
-        .chain()
-        .find({
-            type: type
-        })
-        .simplesort('id', {
-            desc: (sort === '-') // sort descending
-        })
-        .data();
-    table.setItems(items);
-}
-
 
 var config = {
     type: Phaser.AUTO,
