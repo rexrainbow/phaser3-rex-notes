@@ -15,8 +15,9 @@ var SetItems = function (items) {
     } else if (slider) {
         slider.setValue(0);
     } else {
-        table.setTableOY(0).updateTable(true);
+        table.setTableOY(0);
     }
+    table.updateTable(true);
     return this;
 }
 
