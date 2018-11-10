@@ -1306,6 +1306,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../ui-gridsizer/" title="Grid sizer" class="md-nav__link">
+      Grid sizer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../ui-label/" title="Label" class="md-nav__link">
       Label
     </a>
@@ -3520,55 +3532,42 @@
 </pre></div>
 
 <h3 id="add-sizer-object">Add sizer object<a class="headerlink" href="#add-sizer-object" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">sizer</span><span class="p">({</span>
+    <span class="nx">orientation</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>    
+    <span class="c1">// x: 0,</span>
+    <span class="c1">// y: 0,</span>
+    <span class="c1">// width: undefined,</span>
+    <span class="c1">// height: undefined</span>
+<span class="p">});</span>
+</pre></div>
+
+<p>or</p>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">sizer</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="p">{</span>
     <span class="nx">orientation</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="c1">// width: undefined,</span>
+    <span class="c1">// height: undefined</span>
 <span class="p">});</span>
 </pre></div>
 
 <p>or</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">sizer</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">minWidth</span><span class="p">,</span> <span class="nx">minHeight</span><span class="p">,</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">sizer</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="p">{</span>
     <span class="nx">orientation</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
 <span class="p">});</span>
 </pre></div>
 
 <p>or</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">sizer</span><span class="p">({</span>
-    <span class="nx">orientation</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-<span class="p">});</span>
-</pre></div>
-
-<p>or</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">sizer</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">minWidth</span><span class="p">,</span> <span class="nx">minHeight</span><span class="p">,</span> <span class="nx">orientation</span><span class="p">);</span>
-</pre></div>
-
-<p>Add sizer from JSON</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">sizer</span><span class="p">({</span>
-    <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">minWidth</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-    <span class="nx">minHeight</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-    <span class="nx">orientation</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-
-    <span class="c1">// angle: 0,</span>
-    <span class="c1">// alpha: 1</span>
-    <span class="c1">// flipX: true,</span>
-    <span class="c1">// flipY: true,</span>
-    <span class="c1">// scale : {</span>
-    <span class="c1">//    x: 1,</span>
-    <span class="c1">//    y: 1</span>
-    <span class="c1">//}</span>
-<span class="p">});</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">sizer</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">orientation</span><span class="p">);</span>
 </pre></div>
 
 <ul>
-<li><code>x</code>, <code>y</code> : Position of sizer. Only available for top-sizer, children-sizers will be changed by parent.</li>
 <li><code>orientation</code> : Main orientation of the sizer.<ul>
 <li><code>'left-to-right'</code>, <code>'horizontal'</code>,<code>'h'</code>, <code>'x'</code>, or <code>0</code> : Arrange game objects from left ot right.</li>
 <li><code>'top-to-bottom'</code>, <code>'vertical'</code>,<code>'v'</code>, <code>'y'</code>, or <code>1</code> : Arrange game objects from top to bottom.</li>
 </ul>
 </li>
-<li><code>minWidth</code> : Minimum width. i.e. Width of this sizer will bigger then this value.</li>
-<li><code>minHeight</code> : Minimum height. i.e. Hieght of this sizer will bigger then this value.</li>
+<li><code>x</code>, <code>y</code> : Position of sizer. Only available for top-sizer, children-sizers will be changed by parent.</li>
+<li><code>width</code> : Minimum width. i.e. Width of this sizer will bigger then this value.</li>
+<li><code>height</code> : Minimum height. i.e. Hieght of this sizer will bigger then this value.</li>
 </ul>
 <h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
 <ul>
@@ -3577,7 +3576,6 @@
     <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">minWidth</span><span class="p">,</span> <span class="nx">minHeight</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
         <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">minWidth</span><span class="p">,</span> <span class="nx">minHeight</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
         <span class="c1">// ...</span>
-        <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
     <span class="p">}</span>
     <span class="c1">// ...</span>
 <span class="p">}</span>
@@ -3685,13 +3683,13 @@
           </a>
         
         
-          <a href="../ui-label/" title="Label" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../ui-gridsizer/" title="Grid sizer" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Label
+                Grid sizer
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

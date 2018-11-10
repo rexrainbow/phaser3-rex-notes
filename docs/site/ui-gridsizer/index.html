@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/board-bejeweled/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/ui-gridsizer/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Bejeweled - Notes of Phaser 3</title>
+        <title>Grid sizer - Notes of Phaser 3</title>
       
     
     
@@ -128,7 +128,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Bejeweled
+                Grid sizer
               </span>
             
           
@@ -447,10 +447,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
     
     <label class="md-nav__link" for="nav-4">
       Game object
@@ -1090,10 +1092,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-6" type="checkbox" id="nav-4-6">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-6" type="checkbox" id="nav-4-6" checked>
     
     <label class="md-nav__link" for="nav-4-6">
       Container
@@ -1157,10 +1161,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-6-5" type="checkbox" id="nav-4-6-5">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-6-5" type="checkbox" id="nav-4-6-5" checked>
     
     <label class="md-nav__link" for="nav-4-6-5">
       UI
@@ -1188,11 +1194,128 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../ui-gridsizer/" title="Grid sizer" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Grid sizer
+      </label>
+    
+    <a href="./" title="Grid sizer" class="md-nav__link md-nav__link--active">
       Grid sizer
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-plugin" title="Install plugin" class="md-nav__link">
+    Install plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-grid-sizer-object" title="Add grid sizer object" class="md-nav__link">
+    Add grid sizer object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-class" title="Custom class" class="md-nav__link">
+    Custom class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-child" title="Add child" class="md-nav__link">
+    Add child
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-background" title="Add background" class="md-nav__link">
+    Add background
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#proportion" title="Proportion" class="md-nav__link">
+    Proportion
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#layout-children" title="Layout children" class="md-nav__link">
+    Layout children
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#draw-bounds" title="Draw bounds" class="md-nav__link">
+    Draw bounds
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-properties" title="Other properties" class="md-nav__link">
+    Other properties
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -2883,12 +3006,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-14" type="checkbox" id="nav-14" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-14" type="checkbox" id="nav-14">
     
     <label class="md-nav__link" for="nav-14">
       Board
@@ -3072,140 +3193,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Bejeweled
-      </label>
-    
-    <a href="./" title="Bejeweled" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../board-bejeweled/" title="Bejeweled" class="md-nav__link">
       Bejeweled
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#source-code" title="Source code" class="md-nav__link">
-    Source code
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#create-bejeweled-object" title="Create bejeweled object" class="md-nav__link">
-    Create bejeweled object
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#board-height" title="Board height" class="md-nav__link">
-    Board height
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#generate-symbol" title="Generate symbol" class="md-nav__link">
-    Generate symbol
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#create-chess-object" title="Create chess object" class="md-nav__link">
-    Create chess object
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#callbacks" title="Callbacks" class="md-nav__link">
-    Callbacks
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#on-matched-lines" title="On matched lines" class="md-nav__link">
-    On matched lines
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#on-eliminating-chess" title="On eliminating chess" class="md-nav__link">
-    On eliminating chess
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#on-falling-chess" title="On falling chess" class="md-nav__link">
-    On falling chess
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#start-gameplay" title="Start gameplay" class="md-nav__link">
-    Start gameplay
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -3435,76 +3427,64 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#create-bejeweled-object" title="Create bejeweled object" class="md-nav__link">
-    Create bejeweled object
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#board-height" title="Board height" class="md-nav__link">
-    Board height
+  <a href="#install-plugin" title="Install plugin" class="md-nav__link">
+    Install plugin
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#generate-symbol" title="Generate symbol" class="md-nav__link">
-    Generate symbol
+  <a href="#add-grid-sizer-object" title="Add grid sizer object" class="md-nav__link">
+    Add grid sizer object
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-chess-object" title="Create chess object" class="md-nav__link">
-    Create chess object
+  <a href="#custom-class" title="Custom class" class="md-nav__link">
+    Custom class
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#callbacks" title="Callbacks" class="md-nav__link">
-    Callbacks
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#on-matched-lines" title="On matched lines" class="md-nav__link">
-    On matched lines
+  <a href="#add-child" title="Add child" class="md-nav__link">
+    Add child
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#on-eliminating-chess" title="On eliminating chess" class="md-nav__link">
-    On eliminating chess
+  <a href="#add-background" title="Add background" class="md-nav__link">
+    Add background
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#on-falling-chess" title="On falling chess" class="md-nav__link">
-    On falling chess
+  <a href="#proportion" title="Proportion" class="md-nav__link">
+    Proportion
   </a>
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
+          <li class="md-nav__item">
+  <a href="#layout-children" title="Layout children" class="md-nav__link">
+    Layout children
+  </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#start-gameplay" title="Start gameplay" class="md-nav__link">
-    Start gameplay
+  <a href="#draw-bounds" title="Draw bounds" class="md-nav__link">
+    Draw bounds
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-properties" title="Other properties" class="md-nav__link">
+    Other properties
   </a>
   
 </li>
@@ -3530,196 +3510,153 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/board-bejeweled.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/ui-gridsizer.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Bejeweled</h1>
+                  <h1>Grid sizer</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Match3-like gameplay template.</p>
+<p>Layout children game objects in grids.</p>
 <ul>
 <li>Author: Rex</li>
-<li>Template</li>
+<li>A kind of game object</li>
 </ul>
 <h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/bejeweled/Bejeweled.js">Template</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexbejeweled.min.js">minify</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/ui/ui-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexuiplugin.min.js">minify</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/ui/gridsizer/GridSizer.js">Class</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/board-bejeweled">Sample code</a></p>
-<h3 id="create-bejeweled-object">Create bejeweled object<a class="headerlink" href="#create-bejeweled-object" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bejeweled</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Bejeweled</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
-    <span class="nx">board</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">grid</span><span class="o">:</span> <span class="p">{</span>
-            <span class="nx">gridType</span><span class="o">:</span> <span class="s1">&#39;quadGrid&#39;</span><span class="p">,</span>
-            <span class="nx">x</span><span class="o">:</span> <span class="mi">30</span><span class="p">,</span>
-            <span class="nx">y</span><span class="o">:</span> <span class="mi">30</span> <span class="o">-</span> <span class="mi">600</span><span class="p">,</span>
-            <span class="nx">cellWidth</span><span class="o">:</span> <span class="mi">60</span><span class="p">,</span>
-            <span class="nx">cellHeight</span><span class="o">:</span> <span class="mi">60</span><span class="p">,</span>
-            <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;orthogonal&#39;</span> <span class="c1">// &#39;orthogonal&#39;|&#39;isometric&#39;|&#39;staggered&#39;</span>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-gridsizer">Sample code</a></p>
+<h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
+<p>Install plugin in <a href="../game/#configuration">configuration of game</a></p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexSizerPlugin&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">SizerPlugin</span><span class="p">,</span>
+            <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
         <span class="p">},</span>
-        <span class="nx">width</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
-        <span class="nx">height</span><span class="o">:</span> <span class="mi">20</span> <span class="c1">// Prepared rows: upper 10 rows</span>
-    <span class="p">},</span>
-    <span class="nx">match</span><span class="o">:</span> <span class="p">{</span>
-        <span class="c1">// wildcard: undefined</span>
-        <span class="c1">// dirMask: undefined</span>
-    <span class="p">},</span>
-    <span class="nx">chess</span><span class="o">:</span> <span class="p">{</span>
-        <span class="c1">// pick random symbol from array, or a callback to return symbol</span>
-        <span class="nx">symbols</span><span class="o">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span>
-        <span class="c1">// symbols: function(board, tileX, tileY, excluded) { return symbol; }</span>
-
-        <span class="c1">// User-defined chess game object</span>
-        <span class="nx">create</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">board</span><span class="p">)</span> <span class="p">{</span>
-            <span class="c1">// Create Game object (Shape, Image, or Sprite)</span>
-            <span class="kd">var</span> <span class="nx">scene</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">scene</span><span class="p">;</span>
-            <span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">sprite</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">textureKey</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>
-            <span class="c1">// Initial &#39;symbol&#39; value</span>
-            <span class="nx">gameObject</span><span class="p">.</span><span class="nx">setData</span><span class="p">(</span><span class="s1">&#39;symbol&#39;</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">);</span>
-            <span class="c1">// Add data changed event of &#39;symbol` key</span>
-            <span class="nx">gameObject</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;changedata_symbol&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">previousValue</span><span class="p">)</span> <span class="p">{</span>
-                <span class="c1">// Change the appearance of game object via new symbol value</span>
-                <span class="nx">gameObject</span><span class="p">.</span><span class="nx">setFrame</span><span class="p">(</span><span class="nx">newFrame</span><span class="p">);</span>
-            <span class="p">});</span>
-            <span class="k">return</span> <span class="nx">gameObject</span><span class="p">;</span>
-        <span class="p">},</span>
-
-        <span class="c1">// scope for callbacks</span>
-        <span class="nx">scope</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-
-        <span class="c1">// moveTo behavior</span>
-        <span class="nx">moveTo</span><span class="o">:</span> <span class="p">{</span>
-            <span class="nx">speed</span><span class="o">:</span> <span class="mi">400</span>
-        <span class="p">},</span>
-        <span class="c1">// tileZ: 1,</span>
-    <span class="p">},</span>
-
-    <span class="c1">// callback of matched lines</span>
-    <span class="nx">onMatchLinesCallback</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">lines</span><span class="p">,</span> <span class="nx">board</span><span class="p">)</span> <span class="p">{</span>
-    <span class="p">},</span>
-    <span class="nx">onMatchLinesCallbackScope</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-
-    <span class="c1">// callback of eliminating chess</span>
-    <span class="nx">onEliminatingChessCallback</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="nx">board</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// return eventEmitter; // custom eliminating task, fires &#39;complete&#39; event to continue FSM</span>
-    <span class="p">},</span>
-    <span class="nx">onEliminatingChessCallbackScope</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-
-    <span class="c1">// callback of falling chess</span>
-    <span class="nx">onFallingChessCallback</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">board</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// return eventEmitter; // custom falling task, fires &#39;complete&#39; event to continue FSM</span>
-    <span class="p">},</span>
-    <span class="nx">onFallingChessCallback</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-<span class="p">})</span>
+        <span class="c1">// ...</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </pre></div>
 
-<p>Configurations</p>
+<h3 id="add-grid-sizer-object">Add grid sizer object<a class="headerlink" href="#add-grid-sizer-object" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gridSizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">gridSizer</span><span class="p">({</span>
+    <span class="nx">column</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">row</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="c1">// x: 0,</span>
+    <span class="c1">// y: 0,</span>
+    <span class="c1">// width: undefined,</span>
+    <span class="c1">// height: undefined</span>
+<span class="p">});</span>
+</pre></div>
+
+<p>or</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gridSizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">gridSizer</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">column</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">row</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="c1">// width: undefined,</span>
+    <span class="c1">// height: undefined</span>
+<span class="p">});</span>
+</pre></div>
+
+<p>or</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gridSizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">gridSizer</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">column</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">row</span><span class="o">:</span> <span class="mi">0</span>
+<span class="p">});</span>
+</pre></div>
+
+<p>or</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gridSizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">gridSizer</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">column</span><span class="p">,</span> <span class="nx">row</span><span class="p">);</span>
+</pre></div>
+
 <ul>
-<li>Board properties<ul>
-<li><code>board.width</code> : Board width in tiles.</li>
-<li><code>board.height</code> : <a href="./#board-height">Board height</a> in tiles.</li>
-<li><code>board.grid.x</code>, <code>board.grid.y</code> : World position of tile (0, 0)</li>
-<li><code>board.grid.cellWidth</code>, <code>board.grid.cellHeight</code> : The width/height of the cell, in pixels.</li>
+<li><code>column</code> : Amount of column grids.</li>
+<li><code>row</code> : Amount of row grids.</li>
+<li><code>x</code>, <code>y</code> : Position of gridSizer. Only available for top-gridSizer, children-sizers will be changed by parent.</li>
+<li><code>width</code> : Minimum width. i.e. Width of this gridSizer will bigger then this value.</li>
+<li><code>height</code> : Minimum height. i.e. Hieght of this gridSizer will bigger then this value.</li>
 </ul>
-</li>
-<li>Chess properties<ul>
-<li><code>chess.symbols</code> : An array of possible symbols, or a callback to return a symbol. See <a href="./#generate-symbol">Generate symbol</a></li>
-<li><code>chess.create</code>, <code>chess.scope</code> : Callback of <a href="./#create-chess-object">creating chess object</a>.</li>
-<li><code>chess.moveTo.speed</code> : Constant moving speed of chess, in pixel per-second.</li>
-</ul>
-</li>
-<li>Callbacks<ul>
-<li><code>onMatchLinesCallback</code>, <code>onMatchLinesCallbackScope</code> : <a href="./#on-matched-lines">On matched lines</a></li>
-<li><code>onEliminatingChessCallback</code>, <code>onEliminatingChessCallbackScope</code> : <a href="./#on-eliminating-chess">On eliminating chess</a></li>
-<li><code>onFallingChessCallback</code>, <code>onFallingChessCallback</code> : <a href="./#on-falling-chess">On falling chess</a></li>
-</ul>
-</li>
-</ul>
-<p>It also install <a href="../board/">Board plugins</a> into Game system.</p>
-<h4 id="board-height">Board height<a class="headerlink" href="#board-height" title="Permanent link">&para;</a></h4>
-<p>Board is separated into two parts: upper and bottom</p>
+<h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Bottom : <strong>Visible N rows</strong>, to swap chess and run matching.</li>
-<li>Upper : <strong>Invisible N rows</strong>, chess in these rows will move down, to fill bottom rows.</li>
-</ul>
-<p>For example, if amount of visible rows is <code>10</code>, <code>board.height</code> should set to <code>20</code>.</p>
-<h4 id="generate-symbol">Generate symbol<a class="headerlink" href="#generate-symbol" title="Permanent link">&para;</a></h4>
-<p>Symbols are declared in property <code>chess.symbols</code> in a symbol array like <code>[0, 1, 2, 3, 4, 5]</code>, or a callback to return a symbol. The callback also use <code>chess.scope</code> as the scope.</p>
-<div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">board</span><span class="p">,</span> <span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">,</span> <span class="nx">excluded</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">symbol</span>
+<li>Define class
+    <div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">MyGridSizer</span> <span class="kr">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">GridSizer</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">minWidth</span><span class="p">,</span> <span class="nx">minHeight</span><span class="p">,</span> <span class="nx">column</span><span class="p">,</span> <span class="nx">row</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">minWidth</span><span class="p">,</span> <span class="nx">minHeight</span><span class="p">,</span> <span class="nx">column</span><span class="p">,</span> <span class="nx">ro</span><span class="p">);</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
 <span class="p">}</span>
-</pre></div>
-
-<ul>
-<li><code>excluded</code> : <code>undefined</code> or a symbol array. Don't return these symbols.</li>
-</ul>
-<h4 id="create-chess-object">Create chess object<a class="headerlink" href="#create-chess-object" title="Permanent link">&para;</a></h4>
-<p>Return a game object from a callback.</p>
-<div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">board</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// Create Game object (Image, Sprite, or Shape)</span>
-    <span class="kd">var</span> <span class="nx">scene</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">scene</span><span class="p">;</span>
-    <span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">sprite</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">textureKey</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>
-    <span class="c1">// Initial &#39;symbol&#39; value</span>
-    <span class="nx">gameObject</span><span class="p">.</span><span class="nx">setData</span><span class="p">(</span><span class="s1">&#39;symbol&#39;</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">);</span>
-    <span class="c1">// Add data changed event of &#39;symbol` key</span>
-    <span class="nx">gameObject</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;changedata_symbol&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">previousValue</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// Change the appearance of game object via new symbol value</span>
-        <span class="nx">gameObject</span><span class="p">.</span><span class="nx">setFrame</span><span class="p">(</span><span class="nx">newFrame</span><span class="p">);</span>
-    <span class="p">});</span>
-    <span class="k">return</span> <span class="nx">gameObject</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-
-<p>Each chess has a <code>symbol</code> value stored in <code>'symbol'</code> key in private data. Add data changed event of 'symbol` key to change the appearance of game object via new symbol value.</p>
-<h4 id="callbacks">Callbacks<a class="headerlink" href="#callbacks" title="Permanent link">&para;</a></h4>
-<h5 id="on-matched-lines">On matched lines<a class="headerlink" href="#on-matched-lines" title="Permanent link">&para;</a></h5>
-<div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">lines</span><span class="p">,</span> <span class="nx">board</span><span class="p">)</span> <span class="p">{</span>
-
-<span class="p">}</span>
-</pre></div>
-
-<ul>
-<li><code>lines</code> : An array of matched lines, each line is a <a href="../structs-set/">built-in Set object</a>.<ul>
-<li>Length of each line (<code>lines[i].size</code>) could be <em>5</em>, <em>4</em>, or <em>3</em>.</li>
-<li><code>lines[i].entries</code> : An array of chess (Game Object) in a matched line.</li>
-<li>All chess game objects in matched lines will be eliminated in next stage. Add/remove chess game object in these lines, or add new line in <code>lines</code> array to change the eliminated targets.</li>
-</ul>
-</li>
-<li><code>board</code> : <a href="../board/">Board object</a>.<ul>
-<li>Get tile position <code>{x,y,z}</code> of a chess game object via
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tileXYZ</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">rexChess</span><span class="p">.</span><span class="nx">tileXYZ</span><span class="p">;</span>
 </pre></div></li>
-<li>Get chess game object of a tile position <code>{x,y,z}</code> via
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">tileXYZToChess</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">,</span> <span class="nx">tileZ</span><span class="p">);</span>
+<li>Create instance
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gridSizer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyGridSizer</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">minWidth</span><span class="p">,</span> <span class="nx">minHeight</span><span class="p">,</span> <span class="nx">column</span><span class="p">,</span> <span class="nx">row</span><span class="p">);</span>
 </pre></div></li>
-<li>Get array of neighbor chess of a chess game object via
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gameObjects</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getNeighborChess</span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
+</ul>
+<h3 id="add-child">Add child<a class="headerlink" href="#add-child" title="Permanent link">&para;</a></h3>
+<p>Add a game obejct to grid sizer</p>
+<div class="codehilite"><pre><span></span><span class="nx">gridSizer</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">columnIndex</span><span class="p">,</span> <span class="nx">rowIndex</span><span class="p">);</span>
+</pre></div>
+
+<p>or</p>
+<div class="codehilite"><pre><span></span><span class="nx">gridSizer</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">columnIndex</span><span class="p">,</span> <span class="nx">rowIndex</span><span class="p">,</span> <span class="nx">align</span><span class="p">,</span> <span class="nx">paddingConfig</span><span class="p">,</span> <span class="nx">expand</span><span class="p">);</span>
+</pre></div>
+
+<ul>
+<li><code>child</code> : A game object</li>
+<li><code>columnIndex</code>, <code>rowIndex</code> : Index of grid to add.</li>
+<li><code>align</code> :<ul>
+<li><code>'center'</code>, or <code>Phaser.Display.Align.CENTER</code> : Align game object at center. Default value.</li>
+<li><code>'left'</code>, or <code>Phaser.Display.Align.LEFT_CENTER</code> : Align game object at left-center.</li>
+<li><code>'right'</code>, or <code>Phaser.Display.Align.RIGHT_CENTER</code> : Align game object at right-center.</li>
+<li><code>'top'</code>, or <code>Phaser.Display.Align.RIGHT_CENTER</code> : Align game object at top-center.</li>
+<li><code>'bottom'</code>, or <code>Phaser.Display.Align.BOTTOM_CENTER</code> : Align game object at bottom-center.</li>
+</ul>
+</li>
+<li><code>paddingConfig</code> : Add space between bounds. Default is 0.<ul>
+<li>A number for left/right/top/bottom bounds</li>
+<li>Or a plain object
+    <div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nx">left</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">right</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">top</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">bottom</span><span class="o">:</span> <span class="mi">0</span>
+<span class="p">}</span>
 </pre></div></li>
 </ul>
 </li>
+<li><code>expand</code> : Set <code>true</code> to height and width.</li>
 </ul>
-<p>Use cases:</p>
-<ul>
-<li>Get cross chess of two lines via <code>lineA.intersect(lineB)</code>.</li>
-<li>Add chess into line(s) to eliminate more chess.</li>
-</ul>
-<h5 id="on-eliminating-chess">On eliminating chess<a class="headerlink" href="#on-eliminating-chess" title="Permanent link">&para;</a></h5>
-<div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">chessArray</span><span class="p">,</span> <span class="nx">board</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// return eventEmitter; // custom eliminating task, fires &#39;complete&#39; event to continue FSM</span>
-<span class="p">}</span>
+<h3 id="add-background">Add background<a class="headerlink" href="#add-background" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">gridSizer</span><span class="p">.</span><span class="nx">addBackground</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">paddingConfig</span><span class="p">);</span>
+</pre></div>
+
+<h3 id="proportion">Proportion<a class="headerlink" href="#proportion" title="Permanent link">&para;</a></h3>
+<p>Set proportion of each column or row via</p>
+<div class="codehilite"><pre><span></span><span class="nx">gridSizer</span><span class="p">.</span><span class="nx">setColumnProportion</span><span class="p">(</span><span class="nx">columnIndex</span><span class="p">,</span> <span class="nx">proportion</span><span class="p">);</span>
+<span class="nx">gridSizer</span><span class="p">.</span><span class="nx">setRowProportion</span><span class="p">(</span><span class="nx">rowIndex</span><span class="p">,</span> <span class="nx">proportion</span><span class="p">);</span>
+</pre></div>
+
+<h3 id="layout-children">Layout children<a class="headerlink" href="#layout-children" title="Permanent link">&para;</a></h3>
+<p>Arrange position of all children.</p>
+<div class="codehilite"><pre><span></span><span class="nx">gridSizer</span><span class="p">.</span><span class="nx">layout</span><span class="p">();</span>
+</pre></div>
+
+<h3 id="draw-bounds">Draw bounds<a class="headerlink" href="#draw-bounds" title="Permanent link">&para;</a></h3>
+<p>Draw all bounds of children.</p>
+<div class="codehilite"><pre><span></span><span class="nx">gridSizer</span><span class="p">.</span><span class="nx">drawBounds</span><span class="p">(</span><span class="nx">graphics</span><span class="p">,</span> <span class="nx">color</span><span class="p">);</span>
 </pre></div>
 
 <ul>
-<li><code>chessArray</code> : An array of chess (Game Object) to be eliminated</li>
-<li><code>board</code> : <a href="../board/">Board object</a></li>
+<li><code>graphics</code> : <a href="../graphics/">Graphics game object</a></li>
+<li><code>color</code> : Default value is <code>0xffffff</code></li>
 </ul>
-<p>Use csees:</p>
-<ul>
-<li>Accumulate scores via amount of eliminated chess</li>
-</ul>
-<h5 id="on-falling-chess">On falling chess<a class="headerlink" href="#on-falling-chess" title="Permanent link">&para;</a></h5>
-<h3 id="start-gameplay">Start gameplay<a class="headerlink" href="#start-gameplay" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">bejeweled</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
-</pre></div>
+<h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
+<p>This gridSizer game object inherits from <a href="../containerlite/">ContainerLite</a>.</p>
                 
                   
                 
@@ -3740,7 +3677,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../board-miniboard/" title="Mini board" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../ui-sizer/" title="Sizer" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -3749,19 +3686,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Mini board
+                Sizer
               </span>
             </div>
           </a>
         
         
-          <a href="../localstorage/" title="LocalStorage" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../ui-label/" title="Label" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                LocalStorage
+                Label
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

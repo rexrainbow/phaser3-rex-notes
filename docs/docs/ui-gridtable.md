@@ -107,6 +107,7 @@ var gridTable = scene.rexUI.add.gridTable({
         - `cell.height` : Height of this cell, in pixels.
         - `cell.item` : Item of this cell to display.
         - `cell.index` : Index of this cell.
+    - **Set origin of returned cell container to (0, 0)**
 - `items` : Array of item data for each cell.
 - `name` : Set name of this gridTable.
 

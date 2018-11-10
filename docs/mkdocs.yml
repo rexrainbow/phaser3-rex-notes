@@ -63,6 +63,7 @@ nav:
         - Grid table: gridtable.md
         - UI:
             - Sizer: ui-sizer.md
+            - Grid sizer: ui-gridsizer.md
             - Label: ui-label.md
             - Dialog: ui-dialog.md
             - Grid table: ui-gridtable.md

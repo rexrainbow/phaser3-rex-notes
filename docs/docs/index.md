@@ -52,6 +52,7 @@
 1. [Typing](texttyping.md): Typing text on text object.
 1. [UI-label](ui-label.md): A game object container with a icon, text, and background.
 1. [UI-dialog](ui-dialog.md): A container with a title, content, buttons and backgrounds.
+1. [UI-grid sizer](ui-gridsizer.md): Layout children game objects in grids.
 1. [UI-gird table](ui-gridtable.md): A container with a grid table, slider, and scroller.
 1. [UI-sizer](ui-sizer.md): Layout children game objects.
 1. [UI-tabs](ui-tabs.md): A container with 4 groups of buttons around a center panel.

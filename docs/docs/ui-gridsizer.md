@@ -1,8 +1,6 @@
 ## Introduction
 
-Layout children game objects.
-
-It is inspired from [wxSizer](https://docs.wxwidgets.org/3.0/overview_sizer.html).
+Layout children game objects in grids.
 
 - Author: Rex
 - A kind of game object
@@ -11,11 +9,11 @@ It is inspired from [wxSizer](https://docs.wxwidgets.org/3.0/overview_sizer.html
 
 [Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/ui/ui-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexuiplugin.min.js)
 
-[Class](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/ui/sizer/Sizer.js)
+[Class](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/ui/gridsizer/GridSizer.js)
 
 ## Usage
 
-[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-sizer)
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-gridsizer)
 
 ### Install plugin
 
@@ -38,11 +36,12 @@ var config = {
 var game = new Phaser.Game(config);
 ```
 
-### Add sizer object
+### Add grid sizer object
 
 ```javascript
-var sizer = scene.rexUI.add.sizer({
-    orientation: 0,    
+var gridSizer = scene.rexUI.add.gridSizer({
+    column: 0,
+    row: 0,
     // x: 0,
     // y: 0,
     // width: undefined,
@@ -53,8 +52,9 @@ var sizer = scene.rexUI.add.sizer({
 or
 
 ```javascript
-var sizer = scene.rexUI.add.sizer(x, y, {
-    orientation: 0,
+var gridSizer = scene.rexUI.add.gridSizer(x, y, {
+    column: 0,
+    row: 0,
     // width: undefined,
     // height: undefined
 });
@@ -63,31 +63,31 @@ var sizer = scene.rexUI.add.sizer(x, y, {
 or
 
 ```javascript
-var sizer = scene.rexUI.add.sizer(x, y, width, height, {
-    orientation: 0,
+var gridSizer = scene.rexUI.add.gridSizer(x, y, width, height, {
+    column: 0,
+    row: 0
 });
 ```
 
 or
 
 ```javascript
-var sizer = scene.rexUI.add.sizer(x, y, width, height, orientation);
+var gridSizer = scene.rexUI.add.gridSizer(x, y, width, height, column, row);
 ```
 
-- `orientation` : Main orientation of the sizer.
-    - `'left-to-right'`, `'horizontal'`,`'h'`, `'x'`, or `0` : Arrange game objects from left ot right.
-    - `'top-to-bottom'`, `'vertical'`,`'v'`, `'y'`, or `1` : Arrange game objects from top to bottom.
-- `x`, `y` : Position of sizer. Only available for top-sizer, children-sizers will be changed by parent.
-- `width` : Minimum width. i.e. Width of this sizer will bigger then this value.
-- `height` : Minimum height. i.e. Hieght of this sizer will bigger then this value.
+- `column` : Amount of column grids.
+- `row` : Amount of row grids.
+- `x`, `y` : Position of gridSizer. Only available for top-gridSizer, children-sizers will be changed by parent.
+- `width` : Minimum width. i.e. Width of this gridSizer will bigger then this value.
+- `height` : Minimum height. i.e. Hieght of this gridSizer will bigger then this value.
 
 ### Custom class
 
 - Define class
     ```javascript
-    class MySizer extends RexPlugins.UI.Sizer {
-        constructor(scene, x, y, minWidth, minHeight, config) {
-            super(scene, x, y, minWidth, minHeight, config);
+    class MyGridSizer extends RexPlugins.UI.GridSizer {
+        constructor(scene, x, y, minWidth, minHeight, column, row) {
+            super(scene, x, y, minWidth, minHeight, column, ro);
             // ...
         }
         // ...
@@ -95,29 +95,25 @@ var sizer = scene.rexUI.add.sizer(x, y, width, height, orientation);
     ```
 - Create instance
     ```javascript
-    var sizer = new MySizer(scene, x, y, minWidth, minHeight, config);
+    var gridSizer = new MyGridSizer(scene, x, y, minWidth, minHeight, column, row);
     ```
 
 ### Add child
 
-Add a game obejct to sizer
+Add a game obejct to grid sizer
 
 ```javascript
-sizer.add(child);
+gridSizer.add(child, columnIndex, rowIndex);
 ```
 
 or
 
 ```javascript
-sizer.add(child, proportion, align, paddingConfig, expand);
+gridSizer.add(child, columnIndex, rowIndex, align, paddingConfig, expand);
 ```
 
 - `child` : A game object
-- `proportion` :
-    - `0`, or `'min'` : Place next game object closely. Default value.
-    - `> 0` :
-    - `-1`, or `'full'` : Stretch game object in the main orientation of the sizer.
-    - `null` : Don't arrange this child
+- `columnIndex`, `rowIndex` : Index of grid to add.
 - `align` :
     - `'center'`, or `Phaser.Display.Align.CENTER` : Align game object at center. Default value.
     - `'left'`, or `Phaser.Display.Align.LEFT_CENTER` : Align game object at left-center.
@@ -135,14 +131,21 @@ sizer.add(child, proportion, align, paddingConfig, expand);
             bottom: 0
         }
         ```
-- `expand` : Set `true` to
-    - Expand height when `orientation` is `0` (`left-to-right`), or
-    - Expand width when `orientation` is `1` (`top-to-bottom`)
+- `expand` : Set `true` to height and width.
 
 ### Add background
 
 ```javascript
-sizer.addBackground(child, paddingConfig);
+gridSizer.addBackground(child, paddingConfig);
+```
+
+### Proportion
+
+Set proportion of each column or row via
+
+```javascript
+gridSizer.setColumnProportion(columnIndex, proportion);
+gridSizer.setRowProportion(rowIndex, proportion);
 ```
 
 ### Layout children
@@ -150,7 +153,7 @@ sizer.addBackground(child, paddingConfig);
 Arrange position of all children.
 
 ```javascript
-sizer.layout();
+gridSizer.layout();
 ```
 
 ### Draw bounds
@@ -158,7 +161,7 @@ sizer.layout();
 Draw all bounds of children.
 
 ```javascript
-sizer.drawBounds(graphics, color);
+gridSizer.drawBounds(graphics, color);
 ```
 
 - `graphics` : [Graphics game object](graphics.md)
@@ -166,4 +169,4 @@ sizer.drawBounds(graphics, color);
 
 ### Other properties
 
-This sizer game object inherits from [ContainerLite](containerlite.md).
+This gridSizer game object inherits from [ContainerLite](containerlite.md).
