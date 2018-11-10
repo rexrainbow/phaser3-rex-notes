@@ -145,7 +145,7 @@ dialog.layout();
 - Get element
     - Background game object
         ```javascript
-        var icon = dialog.getElement('background');
+        var background = dialog.getElement('background');
         ```
     - Title game object
         ```javascript

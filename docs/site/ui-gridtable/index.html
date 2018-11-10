@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/loader/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/ui-gridtable/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Loader - Notes of Phaser 3</title>
+        <title>Grid table - Notes of Phaser 3</title>
       
     
     
@@ -128,7 +128,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Loader
+                Grid table
               </span>
             
           
@@ -387,12 +387,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
     
     <label class="md-nav__link" for="nav-3">
       Loader
@@ -408,246 +406,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Loader
-      </label>
-    
-    <a href="./" title="Loader" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../loader/" title="Loader" class="md-nav__link">
       Loader
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#loading-in-preload-stage" title="Loading in preload stage" class="md-nav__link">
-    Loading in preload stage
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#loading-after-preload-stage" title="Loading after preload stage" class="md-nav__link">
-    Loading after preload stage
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#events" title="Events" class="md-nav__link">
-    Events
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#status-of-loader" title="Status of loader" class="md-nav__link">
-    Status of loader
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#file-types" title="File types" class="md-nav__link">
-    File types
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#image" title="Image" class="md-nav__link">
-    Image
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sprite-sheet" title="Sprite sheet" class="md-nav__link">
-    Sprite sheet
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#texture-atlas" title="Texture atlas" class="md-nav__link">
-    Texture atlas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#multi-file-texture-atlas" title="Multi file texture atlas" class="md-nav__link">
-    Multi file texture atlas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#unity-texture-atlas" title="Unity texture atlas" class="md-nav__link">
-    Unity texture atlas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#animation" title="Animation" class="md-nav__link">
-    Animation
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#audio" title="Audio" class="md-nav__link">
-    Audio
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#audio-sprite" title="Audio sprite" class="md-nav__link">
-    Audio sprite
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#bitmap-font" title="Bitmap font" class="md-nav__link">
-    Bitmap font
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#tile-map" title="Tile map" class="md-nav__link">
-    Tile map
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#text" title="Text" class="md-nav__link">
-    Text
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#json" title="JSON" class="md-nav__link">
-    JSON
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#xml" title="XML" class="md-nav__link">
-    XML
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#html" title="HTML" class="md-nav__link">
-    HTML
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#script" title="Script" class="md-nav__link">
-    Script
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#glsl" title="GLSL" class="md-nav__link">
-    GLSL
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#binary" title="Binary" class="md-nav__link">
-    Binary
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#plugin" title="Plugin" class="md-nav__link">
-    Plugin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#file-pack" title="File pack" class="md-nav__link">
-    File pack
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#release-data" title="Release data" class="md-nav__link">
-    Release data
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#data-in-cache" title="Data in cache" class="md-nav__link">
-    Data in cache
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -684,10 +447,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
     
     <label class="md-nav__link" for="nav-4">
       Game object
@@ -1327,10 +1092,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-6" type="checkbox" id="nav-4-6">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-6" type="checkbox" id="nav-4-6" checked>
     
     <label class="md-nav__link" for="nav-4-6">
       Container
@@ -1394,10 +1161,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-6-5" type="checkbox" id="nav-4-6-5">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-6-5" type="checkbox" id="nav-4-6-5" checked>
     
     <label class="md-nav__link" for="nav-4-6-5">
       UI
@@ -1449,11 +1218,114 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../ui-gridtable/" title="Grid table" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Grid table
+      </label>
+    
+    <a href="./" title="Grid table" class="md-nav__link md-nav__link--active">
       Grid table
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-scene-plugin" title="Install scene plugin" class="md-nav__link">
+    Install scene plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-grid-table-object" title="Add grid table object" class="md-nav__link">
+    Add grid table object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#layout-children" title="Layout children" class="md-nav__link">
+    Layout children
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#items" title="Items" class="md-nav__link">
+    Items
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" title="Events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-element" title="Get element" class="md-nav__link">
+    Get element
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#draw-bounds" title="Draw bounds" class="md-nav__link">
+    Draw bounds
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -3514,6 +3386,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#usage" title="Usage" class="md-nav__link">
     Usage
   </a>
@@ -3522,15 +3401,29 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#loading-in-preload-stage" title="Loading in preload stage" class="md-nav__link">
-    Loading in preload stage
+  <a href="#install-scene-plugin" title="Install scene plugin" class="md-nav__link">
+    Install scene plugin
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#loading-after-preload-stage" title="Loading after preload stage" class="md-nav__link">
-    Loading after preload stage
+  <a href="#add-grid-table-object" title="Add grid table object" class="md-nav__link">
+    Add grid table object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#layout-children" title="Layout children" class="md-nav__link">
+    Layout children
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#items" title="Items" class="md-nav__link">
+    Items
   </a>
   
 </li>
@@ -3543,168 +3436,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#status-of-loader" title="Status of loader" class="md-nav__link">
-    Status of loader
+  <a href="#get-element" title="Get element" class="md-nav__link">
+    Get element
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#file-types" title="File types" class="md-nav__link">
-    File types
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#image" title="Image" class="md-nav__link">
-    Image
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sprite-sheet" title="Sprite sheet" class="md-nav__link">
-    Sprite sheet
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#texture-atlas" title="Texture atlas" class="md-nav__link">
-    Texture atlas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#multi-file-texture-atlas" title="Multi file texture atlas" class="md-nav__link">
-    Multi file texture atlas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#unity-texture-atlas" title="Unity texture atlas" class="md-nav__link">
-    Unity texture atlas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#animation" title="Animation" class="md-nav__link">
-    Animation
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#audio" title="Audio" class="md-nav__link">
-    Audio
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#audio-sprite" title="Audio sprite" class="md-nav__link">
-    Audio sprite
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#bitmap-font" title="Bitmap font" class="md-nav__link">
-    Bitmap font
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#tile-map" title="Tile map" class="md-nav__link">
-    Tile map
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#text" title="Text" class="md-nav__link">
-    Text
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#json" title="JSON" class="md-nav__link">
-    JSON
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#xml" title="XML" class="md-nav__link">
-    XML
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#html" title="HTML" class="md-nav__link">
-    HTML
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#script" title="Script" class="md-nav__link">
-    Script
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#glsl" title="GLSL" class="md-nav__link">
-    GLSL
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#binary" title="Binary" class="md-nav__link">
-    Binary
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#plugin" title="Plugin" class="md-nav__link">
-    Plugin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#file-pack" title="File pack" class="md-nav__link">
-    File pack
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#release-data" title="Release data" class="md-nav__link">
-    Release data
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#data-in-cache" title="Data in cache" class="md-nav__link">
-    Data in cache
+  <a href="#draw-bounds" title="Draw bounds" class="md-nav__link">
+    Draw bounds
   </a>
   
 </li>
@@ -3730,275 +3470,214 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/loader.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/ui-gridtable.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Loader</h1>
+                  <h1>Grid table</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Load assets, built-in object of phaser.</p>
+<p>A container with a <a href="../gridtable/">grid table</a>, slider, and scroller.</p>
 <ul>
-<li>Author: Richard Davey</li>
+<li>Author: Rex</li>
+<li>A kind of game object</li>
 </ul>
+<h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/ui/ui-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexuiplugin.min.js">minify</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/ui/gridtable/GridTable.js">Class</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<h3 id="loading-in-preload-stage">Loading in preload stage<a class="headerlink" href="#loading-in-preload-stage" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">image</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
-<span class="c1">// scene.load.image(config); // config: {key, url}</span>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-gridtable">Sample code</a></p>
+<h3 id="install-scene-plugin">Install scene plugin<a class="headerlink" href="#install-scene-plugin" title="Permanent link">&para;</a></h3>
+<p>Install plugin in <a href="../game/#configuration">configuration of game</a></p>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">UIPlugin</span> <span class="nx">from</span> <span class="s1">&#39;rexTemplates/ui/ui-plugin.js&#39;</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">scene</span><span class="o">:</span> <span class="p">[{</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexUI&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">UIPlugin</span><span class="p">,</span>
+            <span class="nx">mapping</span><span class="o">:</span> <span class="s1">&#39;rexUI&#39;</span>
+        <span class="p">},</span>
+        <span class="c1">// ...</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </pre></div>
 
-<p>Loader in preload stage will start loading automatically by scene.</p>
-<h3 id="loading-after-preload-stage">Loading after preload stage<a class="headerlink" href="#loading-after-preload-stage" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">image</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>   <span class="c1">// add task</span>
-<span class="c1">// scene.load.image(config); // config: {key, url}</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>  <span class="c1">// add callback of &#39;complete&#39; event</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>                     <span class="c1">// start loading</span>
-</pre></div>
+<h3 id="add-grid-table-object">Add grid table object<a class="headerlink" href="#add-grid-table-object" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gridTable</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">gridTable</span><span class="p">({</span>
+    <span class="c1">// Position</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
 
-<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Start loading
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
-</pre></div></li>
-<li>Loading progressing
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;progress&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">progress</span><span class="p">){});</span>
-</pre></div></li>
-<li>Loading a file object successful
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fileObj</span><span class="p">){});</span>
-</pre></div></li>
-<li>Loading a file object failed
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;loaderror&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fileObj</span><span class="p">){});</span>
-</pre></div></li>
-<li>All loading completed
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
-</pre></div></li>
-</ul>
-<h3 id="status-of-loader">Status of loader<a class="headerlink" href="#status-of-loader" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Ready to start loading
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isReady</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">isReady</span><span class="p">();</span>
-</pre></div></li>
-<li>Is loading
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isLoading</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">isLoading</span><span class="p">();</span>
-</pre></div></li>
-</ul>
-<h3 id="file-types">File types<a class="headerlink" href="#file-types" title="Permanent link">&para;</a></h3>
-<h4 id="image">Image<a class="headerlink" href="#image" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Image
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">image</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
-</pre></div></li>
-<li>SVG
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">svg</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
-<span class="c1">// scene.load.svg(key, url, {width, height});</span>
-<span class="c1">// scene.load.svg(key, url, {scale});</span>
-</pre></div></li>
-<li>Html texture
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">htmlTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
-</pre></div></li>
-</ul>
-<p>Get data from texture cache</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</pre></div>
+    <span class="c1">// Elements</span>
+    <span class="nx">background</span><span class="o">:</span> <span class="nx">backgroundGameObject</span><span class="p">,</span>
 
-<h4 id="sprite-sheet">Sprite sheet<a class="headerlink" href="#sprite-sheet" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">spritesheet</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="p">{</span>
-    <span class="c1">// frameWidth: frameWidth,</span>
-    <span class="c1">// frameHeight: frameHeight,</span>
-    <span class="c1">// startFrame: startFrame,</span>
-    <span class="c1">// endFrame: endFrame,</span>
-    <span class="c1">// margin: margin,</span>
-    <span class="c1">// spacing: spacing</span>
+    <span class="nx">table</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">width</span><span class="o">:</span> <span class="mi">250</span><span class="p">,</span>
+        <span class="nx">height</span><span class="o">:</span> <span class="mi">400</span><span class="p">,</span>
+
+        <span class="nx">cellWidth</span><span class="o">:</span> <span class="mi">120</span><span class="p">,</span>
+        <span class="nx">cellHeight</span><span class="o">:</span> <span class="mi">60</span><span class="p">,</span>
+        <span class="nx">columns</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="p">},</span>
+
+    <span class="nx">slider</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">track</span><span class="o">:</span> <span class="nx">trackGameObject</span><span class="p">,</span>
+        <span class="nx">thumb</span><span class="o">:</span> <span class="nx">thumbGameObject</span><span class="p">,</span>
+    <span class="p">},</span>
+
+    <span class="nx">scroller</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">slidingDeceleration</span><span class="o">:</span> <span class="mi">5000</span><span class="p">,</span>
+        <span class="nx">backDeceleration</span><span class="o">:</span> <span class="mi">2000</span><span class="p">,</span>
+    <span class="p">},</span>
+
+    <span class="nx">createCellContainerCallback</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cell</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">scene</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">scene</span><span class="p">,</span>
+            <span class="nx">width</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span>
+            <span class="nx">height</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">height</span><span class="p">,</span>
+            <span class="nx">item</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">item</span><span class="p">,</span>
+            <span class="nx">index</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">index</span><span class="p">;</span>
+        <span class="c1">// container = ...</span>
+        <span class="k">return</span> <span class="nx">container</span><span class="p">;</span>
+    <span class="p">},</span>
+
+    <span class="nx">items</span><span class="o">:</span> <span class="p">[],</span>
+
+    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
 <span class="p">});</span>
 </pre></div>
 
-<p>Get data from texture cache</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="texture-atlas">Texture atlas<a class="headerlink" href="#texture-atlas" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">atlas</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">textureURL</span><span class="p">,</span> <span class="nx">atlasURL</span><span class="p">);</span>
-</pre></div>
-
-<p>Get data from texture cache</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="multi-file-texture-atlas">Multi file texture atlas<a class="headerlink" href="#multi-file-texture-atlas" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">multiatlas</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">textureURLs</span><span class="p">,</span> <span class="nx">atlasURLs</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="unity-texture-atlas">Unity texture atlas<a class="headerlink" href="#unity-texture-atlas" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">unityAtlas</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">textureURL</span><span class="p">,</span> <span class="nx">atlasURL</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="animation">Animation<a class="headerlink" href="#animation" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">animation</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="audio">Audio<a class="headerlink" href="#audio" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">audio</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">urls</span><span class="p">);</span>
-</pre></div>
-
-<p>Get data from cache</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">audio</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="audio-sprite">Audio sprite<a class="headerlink" href="#audio-sprite" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">audioSprite</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">urls</span><span class="p">,</span> <span class="nx">json</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="bitmap-font">Bitmap font<a class="headerlink" href="#bitmap-font" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">bitmapFont</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">textureURL</span><span class="p">,</span> <span class="nx">xmlURL</span><span class="p">);</span>
-</pre></div>
-
-<p>Get data from cache</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">bitmapFont</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="tile-map">Tile map<a class="headerlink" href="#tile-map" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">tilemapWeltmeister</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>  <span class="c1">// JSON</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">tilemapCSV</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>          <span class="c1">// CSV</span>
-</pre></div>
-
-<p>Get data from cache</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">tilemap</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="text">Text<a class="headerlink" href="#text" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
-</pre></div>
-
-<p>Get data from cache</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">text</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="json">JSON<a class="headerlink" href="#json" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">json</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
-</pre></div>
-
-<p>Get data from cache</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">json</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="xml">XML<a class="headerlink" href="#xml" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">xml</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
-</pre></div>
-
-<p>Get data from cache</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">xml</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="html">HTML<a class="headerlink" href="#html" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
-</pre></div>
-
-<p>Get data from cache</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">html</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="script">Script<a class="headerlink" href="#script" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">script</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="glsl">GLSL<a class="headerlink" href="#glsl" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">glsl</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
-</pre></div>
-
-<p>Get data from cache</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">shader</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="binary">Binary<a class="headerlink" href="#binary" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">binary</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="nx">dataType</span><span class="p">);</span>  <span class="c1">// dataType: Uint8Array</span>
-<span class="c1">// scene.load.binary(config); // config: {key, url, dataType}</span>
-</pre></div>
-
-<p>Get data from cache</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">binary</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="plugin">Plugin<a class="headerlink" href="#plugin" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span> <span class="c1">// start plugin when loaded</span>
-</pre></div>
-
-<h4 id="file-pack">File pack<a class="headerlink" href="#file-pack" title="Permanent link">&para;</a></h4>
-<p>Load files in JSON format.</p>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">pack</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="nx">dataKey</span><span class="p">);</span>
-</pre></div>
-
-<p>JSON pack file:</p>
-<div class="codehilite"><pre><span></span><span class="p">{</span>
-    <span class="s1">&#39;dataKey&#39;</span><span class="o">:</span> <span class="p">{</span>
-        <span class="c1">// &quot;prefix&quot;: &quot;...&quot;,          // optional, extend key by prefix</span>
-        <span class="c1">// &quot;path&quot;: &quot;...&quot;,            // optional, extend url by path</span>
-        <span class="c1">// &quot;defaultType&quot;: &quot;image&quot;,   // optional, default file type</span>
-        <span class="s1">&#39;files&#39;</span><span class="o">:</span> <span class="p">[</span> 
-            <span class="p">{</span>
-                <span class="s1">&#39;type&#39;</span><span class="o">:</span> <span class="s1">&#39;image&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;key&#39;</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;url&#39;</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span>
-            <span class="p">},</span>
-            <span class="p">{</span>
-                <span class="s1">&#39;type&#39;</span><span class="o">:</span> <span class="s1">&#39;image&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;key&#39;</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
-                <span class="s1">&#39;url&#39;</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span>
-            <span class="p">}</span>            
-            <span class="c1">// ...</span>
-        <span class="p">]</span>
-    <span class="p">},</span>
-
-    <span class="s1">&#39;node0&#39;</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s1">&#39;node1&#39;</span><span class="o">:</span> <span class="p">{</span>
-            <span class="s1">&#39;node2&#39;</span><span class="o">:</span> <span class="p">{</span>
-                <span class="s1">&#39;files&#39;</span><span class="o">:</span> <span class="p">[</span>
-                    <span class="c1">// ....</span>
-                <span class="p">]</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="c1">// dataKey: &#39;node0.node1.node2&#39;</span>
-<span class="p">}</span>
-</pre></div>
-
-<p>File type:</p>
 <ul>
-<li><code>animationJSON</code></li>
-<li><code>audio</code></li>
-<li><code>binary</code></li>
-<li><code>glsl</code></li>
-<li><code>html</code></li>
-<li><code>htmlTexture</code></li>
-<li><code>image</code></li>
-<li><code>json</code></li>
-<li><code>script</code></li>
-<li><code>spritesheet</code></li>
-<li><code>svg</code></li>
-<li><code>text</code></li>
-<li><code>tilemapCSV</code></li>
-<li><code>tilemapJSON</code></li>
-<li><code>xml</code></li>
+<li><code>x</code>, <code>y</code> : Position of this grid table object, it is valid when this gridTable is the top object.</li>
+<li><code>background</code> : Game object of background, optional. This background game object will be resized to fit the size of grid table.</li>
+<li><code>table</code> : Configuration of grid table.<ul>
+<li><code>table.width</code> : Width of table, in pixels.</li>
+<li><code>table.height</code> : Height of table, in pixels.</li>
+<li><code>table.cellHeight</code> : Default height of each cell, in pixels</li>
+<li><code>table.cellWidth</code> : Width of each cell, in pixels.</li>
+<li><code>table.columns</code> : Columns count of each row.</li>
 </ul>
-<h3 id="release-data">Release data<a class="headerlink" href="#release-data" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">text</span><span class="p">;</span>
-<span class="nx">cache</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</li>
+<li><code>slider</code> : Componments of slider, optional.<ul>
+<li><code>slider.track</code> : Game object of track.</li>
+<li><code>slider.thumb</code> : Game object of thumb.</li>
+</ul>
+</li>
+<li><code>scroller</code> : Configuration of scroller behavior.<ul>
+<li><code>scroller.slidingDeceleration</code> : Deceleration of slow down when dragging released.<ul>
+<li>Set <code>false</code> to disable it.</li>
+</ul>
+</li>
+<li><code>scroller.backDeceleration</code> : Deceleration of pull back when out of bounds.<ul>
+<li>Set <code>false</code> to disable it.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>createCellContainerCallback</code> : Callback to return container object of each visible cell.<ul>
+<li>Properties of <code>cell</code> parameter<ul>
+<li><code>cell.scene</code> : Scene of this grid table object.</li>
+<li><code>cell.width</code> : Width of this cell, in pixels.</li>
+<li><code>cell.height</code> : Height of this cell, in pixels.</li>
+<li><code>cell.item</code> : Item of this cell to display.</li>
+<li><code>cell.index</code> : Index of this cell.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>items</code> : Array of item data for each cell.</li>
+<li><code>name</code> : Set name of this gridTable.</li>
+</ul>
+<h3 id="layout-children">Layout children<a class="headerlink" href="#layout-children" title="Permanent link">&para;</a></h3>
+<p>Arrange position of all elements.</p>
+<div class="codehilite"><pre><span></span><span class="nx">gridTable</span><span class="p">.</span><span class="nx">layout</span><span class="p">();</span>
 </pre></div>
 
-<h3 id="data-in-cache">Data in cache<a class="headerlink" href="#data-in-cache" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cache</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cache</span><span class="p">.</span><span class="nx">text</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">hasData</span> <span class="o">=</span> <span class="nx">cache</span><span class="p">.</span><span class="nx">has</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+<h3 id="items">Items<a class="headerlink" href="#items" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">gridTable</span><span class="p">.</span><span class="nx">setItems</span><span class="p">(</span><span class="nx">items</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>items</code> : Array of item data for each cell.</li>
+<li>This method will update each visible cell of grid table.</li>
+</ul>
+</li>
+<li>Clear all items
+    <div class="codehilite"><pre><span></span><span class="nx">gridTable</span><span class="p">.</span><span class="nx">setItems</span><span class="p">();</span>
+</pre></div></li>
+<li>Get
+   <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">items</span> <span class="o">=</span> <span class="nx">gridTable</span><span class="p">.</span><span class="nx">items</span><span class="p">;</span>
+</pre></div></li>
+</ul>
+<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Click cell
+    <div class="codehilite"><pre><span></span><span class="nx">gridTable</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cell.click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">,</span> <span class="nx">cellIndex</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>cellContainer</code> : Container game object of triggered cell.</li>
+<li><code>cellIndex</code> : Index of triggered cell.</li>
+</ul>
+</li>
+<li>Pointer-over cell
+    <div class="codehilite"><pre><span></span><span class="nx">gridTable</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cell.over&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">,</span> <span class="nx">cellIndex</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>cellContainer</code> : Container game object of triggered cell.</li>
+<li><code>cellIndex</code> : Index of triggered cell.</li>
+</ul>
+</li>
+<li>Pointer-out cell
+    <div class="codehilite"><pre><span></span><span class="nx">gridTable</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cell.out&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">,</span> <span class="nx">cellIndex</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>cellContainer</code> : Container game object of triggered cell.</li>
+<li><code>cellIndex</code> : Index of triggered cell.</li>
+</ul>
+</li>
+</ul>
+<h3 id="get-element">Get element<a class="headerlink" href="#get-element" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get element<ul>
+<li>Background game object
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">background</span> <span class="o">=</span> <span class="nx">gridTable</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;background&#39;</span><span class="p">);</span>
+</pre></div></li>
+<li>Grid table
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">table</span> <span class="o">=</span> <span class="nx">gridTable</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;table&#39;</span><span class="p">);</span>
+</pre></div></li>
+<li>Slider<ul>
+<li>Track
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">track</span> <span class="o">=</span> <span class="nx">gridTable</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;slider.track&#39;</span><span class="p">);</span>
+</pre></div></li>
+<li>Thumb
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">thumb</span> <span class="o">=</span> <span class="nx">gridTable</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;slider.thumb&#39;</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+</li>
+<li>Scroller
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">scroller</span> <span class="o">=</span> <span class="nx">gridTable</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;scroller&#39;</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+</li>
+<li>Get by name
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">gridTable</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;#&#39;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h3 id="draw-bounds">Draw bounds<a class="headerlink" href="#draw-bounds" title="Permanent link">&para;</a></h3>
+<p>Draw all bounds of elements.</p>
+<div class="codehilite"><pre><span></span><span class="nx">gridTable</span><span class="p">.</span><span class="nx">drawBounds</span><span class="p">(</span><span class="nx">graphics</span><span class="p">,</span> <span class="nx">color</span><span class="p">);</span>
 </pre></div>
+
+<ul>
+<li><code>graphics</code> : <a href="../graphics/">Graphics game object</a></li>
+<li><code>color</code> : Default value is <code>0xffffff</code></li>
+</ul>
                 
                   
                 
@@ -4019,7 +3698,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../snapshot/" title="Snapshot" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../ui-dialog/" title="Dialog" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -4028,19 +3707,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Snapshot
+                Dialog
               </span>
             </div>
           </a>
         
         
-          <a href="../webfontloader/" title="Webfont loader" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../ui-tabs/" title="Tabs" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Webfont loader
+                Tabs
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

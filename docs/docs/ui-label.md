@@ -90,7 +90,7 @@ label.layout();
 - Get element
     - Background game object
         ```javascript
-        var icon = label.getElement('background');
+        var background = label.getElement('background');
         ```
     - Icon game object
         ```javascript

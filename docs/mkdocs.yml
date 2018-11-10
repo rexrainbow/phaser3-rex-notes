@@ -65,6 +65,8 @@ nav:
             - Sizer: ui-sizer.md
             - Label: ui-label.md
             - Dialog: ui-dialog.md
+            - Grid table: ui-gridtable.md
+            - Tabs: ui-tabs.md
     - Zone: zone.md
     - DOM element:
         - DOM element: domelement.md
