@@ -5,6 +5,7 @@ import SizerFactory from './sizer/SizerFactory.js';
 import GridSizer from './gridsizer/GridSizerFactory.js';
 
 import LabelFactory from './label/LabelFactory.js';
+import ButtonsFactory from './buttons/ButtonsFactory.js';
 import DialogFactory from './dialog/DialogFactory.js';
 import TabsFactory from './tabs/TabsFactory.js';
 import SliderFactory from './slider/SliderFactory.js';

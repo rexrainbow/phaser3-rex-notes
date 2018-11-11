@@ -1,6 +1,6 @@
 import Sizer from '../sizer/Sizer.js';
+import Buttons from '../buttons/Buttons.js';
 import GetElement from '../utils/GetElement.js';
-import ButtonSetInteractive from '../utils/ButtonSetInteractive.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -69,34 +69,38 @@ class Dialog extends Sizer {
             var padding = {
                 left: paddingLeft,
                 right: paddingRight,
-                top: (title) ? 0 : paddingTop,
+                top: (title || content) ? 0 : paddingTop,
                 bottom: (choices || actions) ? descriptionSpace : paddingBottom
             }
             this.add(description, 0, 'center', padding);
         }
 
         if (choices) {
-            var buttonsSizer = this;
-            var button, proportion;
-            var lastBottomPadding = (actions) ? choicesSpace : paddingBottom;
-            for (var i = 0, cnt = choices.length; i < cnt; i++) {
-                button = choices[i];
-                // Add to sizer
-                var padding = {
-                    left: paddingLeft,
-                    right: paddingRight,
-                    top: (i >= 1) ? choiceSpace : 0,
-                    bottom: (i === (cnt - 1)) ? lastBottomPadding : 0
-                }
-                buttonsSizer.add(button, 0, 'center', padding, true);
-                ButtonSetInteractive.call(this, button, 'choices', i);
+            var buttonsSizer = new Buttons(scene, {
+                groupName: 'choices',
+                buttons: choices,
+                orientation: 1, // Top-Bottom
+                space: choiceSpace,
+                eventEmitter: this,
+            });
+            var padding = {
+                left: paddingLeft,
+                right: paddingRight,
+                top: (title || content || description) ? 0 : paddingTop,
+                bottom: (actions) ? choicesSpace : paddingBottom
             }
+            this.add(buttonsSizer, 0, 'center', padding, true);
         }
 
         if (actions) {
-            var buttonsSizer = new Sizer(scene, 0, 0, 0, 0, {
-                orientation: 0 // Left-right
-            });
+            var buttonsSizer = new Buttons(scene, {
+                groupName: 'actions',
+                buttons: actions,
+                orientation: 0, // Left-right
+                space: actionSpace,
+                align: GetValue(config, 'actionsAlign', 'center'),
+                eventEmitter: this,
+            })
             var padding = {
                 left: paddingLeft,
                 right: paddingRight,
@@ -104,32 +108,6 @@ class Dialog extends Sizer {
                 bottom: paddingBottom
             }
             this.add(buttonsSizer, 0, 'center', padding, true);
-
-            var actionsAlign = GetValue(config, 'actionsAlign', 'center');
-            var button, proportion;
-            for (var i = 0, cnt = actions.length; i < cnt; i++) {
-                button = actions[i];
-                // Add to sizer
-                var padding = {
-                    left: (i >= 1) ? actionSpace : 0,
-                    right: 0,
-                    top: 0,
-                    bottom: 0
-                }
-                switch (actionsAlign) {
-                    case 'left':
-                        proportion = 0;
-                        break;
-                    case 'right':
-                        proportion = (i === 0) ? 1 : 0;
-                        break;
-                    default:
-                        proportion = 1;
-                        break;
-                }
-                buttonsSizer.add(button, proportion, actionsAlign, padding, true);
-                ButtonSetInteractive.call(this, button, 'actions', i);
-            }
         }
 
         this.childrenMap = {};

@@ -1,4 +1,5 @@
 import GridSizer from '../gridsizer/GridSizer.js';
+import Buttons from '../buttons/Buttons.js';
 import CreateButtonsGroup from './CreateButtonsGroup.js';
 import GetElement from '../utils/GetElement.js';
 
@@ -66,7 +67,13 @@ class Tabs extends GridSizer {
         }
 
         if (leftButtons) {
-            var buttonsSizer = CreateButtonsGroup.call(this, 'left', leftButtons, 1, leftButtonSpace);
+            var buttonsSizer = new Buttons(scene, {
+                groupName: 'left',
+                buttons: leftButtons,
+                orientation: 1, // Top-Bottom
+                space: leftButtonSpace,
+                eventEmitter: this,
+            });
             var padding = {
                 left: paddingLeft,
                 top: leftButtonsOffset,
@@ -75,7 +82,13 @@ class Tabs extends GridSizer {
         }
 
         if (rightButtons) {
-            var buttonsSizer = CreateButtonsGroup.call(this, 'right', rightButtons, 1, rightButtonSpace);
+            var buttonsSizer = new Buttons(scene, {
+                groupName: 'right',
+                buttons: rightButtons,
+                orientation: 1, // Top-Bottom
+                space: rightButtonSpace,
+                eventEmitter: this,
+            });
             var padding = {
                 right: paddingRight,
                 top: rightButtonsOffset,
@@ -84,7 +97,14 @@ class Tabs extends GridSizer {
         }
 
         if (topButtons) {
-            var buttonsSizer = CreateButtonsGroup.call(this, 'top', topButtons, 0, topButtonSpace);
+            var buttonsSizer = new Buttons(scene, {
+                groupName: 'top',
+                buttons: topButtons,
+                orientation: 0, // Left-Right
+                space: topButtonSpace,
+                align: 'left',
+                eventEmitter: this,
+            });
             var padding = {
                 top: paddingTop,
                 left: toptButtonsOffset,
@@ -93,7 +113,14 @@ class Tabs extends GridSizer {
         }
 
         if (bottomButtons) {
-            var buttonsSizer = CreateButtonsGroup.call(this, 'bottom', bottomButtons, 0, bottomButtonSpace);
+            var buttonsSizer = new Buttons(scene, {
+                groupName: 'bottom',
+                buttons: bottomButtons,
+                orientation: 0, // Left-Right
+                space: bottomButtonSpace,
+                align: 'left',
+                eventEmitter: this,
+            });
             var padding = {
                 bottom: paddingBottom,
                 left: bottomButtonsOffset,
