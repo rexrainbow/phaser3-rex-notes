@@ -2,7 +2,7 @@ import Buttons from './Buttons.js';
 import ObjectFactory from '../ObjectFactory.js';
 import SetValue from 'rexPlugins/utils/object/SetValue.js';
 
-ObjectFactory.register('dialog', function (config) {
+ObjectFactory.register('buttons', function (config) {
     return new Buttons(this.scene, config);
 });
 
