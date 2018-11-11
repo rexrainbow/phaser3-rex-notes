@@ -1,6 +1,5 @@
 import GridSizer from '../gridsizer/GridSizer.js';
 import Buttons from '../buttons/Buttons.js';
-import CreateButtonsGroup from './CreateButtonsGroup.js';
 import GetElement from '../utils/GetElement.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
