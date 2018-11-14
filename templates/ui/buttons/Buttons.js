@@ -31,7 +31,7 @@ class Buttons extends Sizer {
         if (buttons) {
             var groupName = GetValue(config, 'groupName', undefined);
             if (this.orientation === 0) {
-                var buttonsAlign = GetValue(config, 'align', 'center');
+                var buttonsAlign = GetValue(config, 'align', undefined); // Default is 'left'
                 var button, proportion;
                 for (var i = 0, cnt = buttons.length; i < cnt; i++) {
                     button = buttons[i];
@@ -43,14 +43,14 @@ class Buttons extends Sizer {
                         bottom: 0
                     }
                     switch (buttonsAlign) {
-                        case 'left':
-                            proportion = 0;
-                            break;
                         case 'right':
                             proportion = (i === 0) ? 1 : 0;
                             break;
-                        default:
+                        case 'center':
                             proportion = 1;
+                            break;
+                        default: // 'left'
+                            proportion = 0;
                             break;
                     }
                     this.add(button, proportion, buttonsAlign, padding, true);

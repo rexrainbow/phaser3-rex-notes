@@ -4,6 +4,7 @@ import GetSizerConfig from '../sizer/GetSizerConfig.js';
 import GetChildrenWidth from './GetChildrenWidth.js';
 import GetChildrenHeight from './GetChildrenHeight.js';
 import GetAllChildrenSizer from './GetAllChildrenSizer.js';
+import PushIntoBounds from '../utils/PushIntoBounds.js';
 import Layout from './Layout.js';
 import DrawBounds from '../utils/DrawBounds.js';
 import ALIGNMODE from '../utils/AlignConst.js';
@@ -198,12 +199,64 @@ class GridSizer extends Container {
         return this;
     }
 
+    get left() {
+        return this.x - (this.displayWidth * this.originX);
+    }
+
+    set left(value) {
+        this.x += (value - this.left);
+    }
+
+    alignLeft(value) {
+        this.left = value;
+        return this;
+    }
+
+    get right() {
+        return (this.x - (this.displayWidth * this.originX)) + this.displayWidth;
+    }
+
+    set right(value) {
+        this.x += (value - this.right);
+    }
+
+    alignRight(value) {
+        this.right = value;
+        return this;
+    }
+
+    get top() {
+        return this.y - (this.displayHeight * this.originY);
+    }
+
+    set top(value) {
+        this.y += (value - this.top);
+    }
+
+    alignTop(value) {
+        this.top = value;
+        return this;
+    }
+
+    get bottom() {
+        return (this.y - (this.displayHeight * this.originY)) + this.displayHeight;
+    }
+
+    set bottom(value) {
+        this.y += (value - this.bottom);
+    }
+
+    alignBottom(value) {
+        this.bottom = value;
+        return this;
+    }
 }
 var methods = {
     getSizerConfig: GetSizerConfig,
     getChildrenWidth: GetChildrenWidth,
     getChildrenHeight: GetChildrenHeight,
     getAllChildrenSizer: GetAllChildrenSizer,
+    pushIntoBounds: PushIntoBounds,
     layout: Layout,
     drawBounds: DrawBounds,
 }

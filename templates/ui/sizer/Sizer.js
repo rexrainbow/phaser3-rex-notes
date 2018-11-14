@@ -5,6 +5,7 @@ import GetChildrenWidth from './GetChildrenWidth.js';
 import GetChildrenHeight from './GetChildrenHeight.js';
 import GetChildrenProportion from './GetChildrenProportion.js';
 import GetAllChildrenSizer from './GetAllChildrenSizer.js';
+import PushIntoBounds from '../utils/PushIntoBounds.js';
 import Layout from './Layout.js';
 import DrawBounds from '../utils/DrawBounds.js';
 import ORIENTATIONMODE from '../utils/OrientationConst.js';
@@ -65,14 +66,6 @@ class Sizer extends Container {
             orientation = ORIENTATIONMODE[orientation];
         }
         this.orientation = orientation;
-        return this;
-    }
-
-    setExtendFlag(expandFlag) {
-        if (expandFlag === undefined) {
-            expandFlag = true;
-        }
-        this.expandFlag = expandFlag;
         return this;
     }
 
@@ -167,6 +160,58 @@ class Sizer extends Container {
         }
         return this._childrenProportion;
     }
+
+    get left() {
+        return this.x - (this.displayWidth * this.originX);
+    }
+
+    set left(value) {
+        this.x += (value - this.left);
+    }
+
+    alignLeft(value) {
+        this.left = value;
+        return this;
+    }
+
+    get right() {
+        return (this.x - (this.displayWidth * this.originX)) + this.displayWidth;
+    }
+
+    set right(value) {
+        this.x += (value - this.right);
+    }
+
+    alignRight(value) {
+        this.right = value;
+        return this;
+    }
+
+    get top() {
+        return this.y - (this.displayHeight * this.originY);
+    }
+
+    set top(value) {
+        this.y += (value - this.top);
+    }
+
+    alignTop(value) {
+        this.top = value;
+        return this;
+    }
+
+    get bottom() {
+        return (this.y - (this.displayHeight * this.originY)) + this.displayHeight;
+    }
+
+    set bottom(value) {
+        this.y += (value - this.bottom);
+    }
+
+    alignBottom(value) {
+        this.bottom = value;
+        return this;
+    }
 }
 
 var methods = {
@@ -175,6 +220,7 @@ var methods = {
     getChildrenHeight: GetChildrenHeight,
     getChildrenProportion: GetChildrenProportion,
     getAllChildrenSizer: GetAllChildrenSizer,
+    pushIntoBounds: PushIntoBounds,
     layout: Layout,
     drawBounds: DrawBounds,
 }

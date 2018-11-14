@@ -10,8 +10,9 @@ var Layout = function (parent) {
         return this;
     }
 
+    var isTopSizer = (parent === undefined);
     // Clear childrenWidth/childrenHeight/childrenProportion of all sizers
-    if (parent === undefined) {
+    if (isTopSizer) {
         var children = this.getAllChildrenSizer([this]),
             child;
         for (var i = 0, cnt = children.length; i < cnt; i++) {
@@ -25,7 +26,7 @@ var Layout = function (parent) {
     // Set size
     var newWidth, newHeight;
     var expandX, expandY;
-    if (parent) {
+    if (!isTopSizer) {
         if (this.rexSizer.expand) {
             if (parent.orientation === 0) {
                 expandY = true;
@@ -56,7 +57,7 @@ var Layout = function (parent) {
     this.resize(newWidth, newHeight);
 
     var proportionLength;
-    if ((this.childrenProportion > 0) && (parent !== undefined)) {
+    if ((this.childrenProportion > 0) && (!isTopSizer)) {
         var remainder;
         if (this.orientation === 0) {
             remainder = this.width - this.childrenWidth;
