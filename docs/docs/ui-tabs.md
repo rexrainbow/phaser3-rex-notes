@@ -111,6 +111,22 @@ Arrange position of all elements.
 tabs.layout();
 ```
 
+### Push into bounds
+
+Align tabs to bound if overlapping it.
+
+```javascript
+tabs.pushIntoBounds();
+```
+
+or
+
+```javascript
+tabs.pushIntoBounds(bounds);
+```
+
+- `bounds` : Bounds in [rectangle object](geom-rectangle.md).
+
 ### Events
 
 - Click button

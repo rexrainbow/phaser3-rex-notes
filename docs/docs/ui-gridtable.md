@@ -136,6 +136,22 @@ gridTable.layout();
    var items = gridTable.items;
    ```
 
+### Push into bounds
+
+Align table to bound if overlapping it.
+
+```javascript
+gridTable.pushIntoBounds();
+```
+
+or
+
+```javascript
+gridTable.pushIntoBounds(bounds);
+```
+
+- `bounds` : Bounds in [rectangle object](geom-rectangle.md).
+
 ### Events
 
 - Click cell

@@ -153,6 +153,22 @@ Arrange position of all children.
 sizer.layout();
 ```
 
+### Push into bounds
+
+Align sizer to bound if overlapping it.
+
+```javascript
+sizer.pushIntoBounds();
+```
+
+or
+
+```javascript
+sizer.pushIntoBounds(bounds);
+```
+
+- `bounds` : Bounds in [rectangle object](geom-rectangle.md).
+
 ### Draw bounds
 
 Draw all bounds of children.

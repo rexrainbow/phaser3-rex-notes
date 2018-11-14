@@ -156,6 +156,22 @@ Arrange position of all children.
 gridSizer.layout();
 ```
 
+### Push into bounds
+
+Align sizer to bound if overlapping it.
+
+```javascript
+gridSizer.pushIntoBounds();
+```
+
+or
+
+```javascript
+gridSizer.pushIntoBounds(bounds);
+```
+
+- `bounds` : Bounds in [rectangle object](geom-rectangle.md).
+
 ### Draw bounds
 
 Draw all bounds of children.

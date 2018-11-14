@@ -110,6 +110,22 @@ Arrange position of all elements.
 dialog.layout();
 ```
 
+### Push into bounds
+
+Align dialog to bound if overlapping it.
+
+```javascript
+dialog.pushIntoBounds();
+```
+
+or
+
+```javascript
+dialog.pushIntoBounds(bounds);
+```
+
+- `bounds` : Bounds in [rectangle object](geom-rectangle.md).
+
 ### Events
 
 - Click button
