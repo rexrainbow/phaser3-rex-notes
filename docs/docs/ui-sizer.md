@@ -153,6 +153,30 @@ Arrange position of all children.
 sizer.layout();
 ```
 
+### Bounds of sizer
+
+- Get
+    ```javascript
+    var leftBound = sizer.left;
+    var rightBound = sizer.right;
+    var topBound = sizer.top;
+    var bottomBound = sizer.bottom;
+    ```
+- Set
+    ```javascript
+    sizer.left = leftBound;
+    sizer.right = rightBound;
+    sizer.top = topBound;
+    sizer.bottom = bottomBound;
+    ```
+    or
+    ```javascript
+    sizer.alignLeft(leftBound);
+    sizer.alignRight(rightBound);
+    sizer.alignTop(topBound);
+    sizer.alignBottom(bottomBound);
+    ```
+
 ### Push into bounds
 
 Align sizer to bound if overlapping it.

@@ -1290,6 +1290,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#bounds-of-grid-sizer" title="Bounds of grid sizer" class="md-nav__link">
+    Bounds of grid sizer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#push-into-bounds" title="Push into bounds" class="md-nav__link">
+    Push into bounds
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#draw-bounds" title="Draw bounds" class="md-nav__link">
     Draw bounds
   </a>
@@ -3476,6 +3490,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#bounds-of-grid-sizer" title="Bounds of grid sizer" class="md-nav__link">
+    Bounds of grid sizer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#push-into-bounds" title="Push into bounds" class="md-nav__link">
+    Push into bounds
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#draw-bounds" title="Draw bounds" class="md-nav__link">
     Draw bounds
   </a>
@@ -3646,6 +3674,39 @@
 <div class="codehilite"><pre><span></span><span class="nx">gridSizer</span><span class="p">.</span><span class="nx">layout</span><span class="p">();</span>
 </pre></div>
 
+<h3 id="bounds-of-grid-sizer">Bounds of grid sizer<a class="headerlink" href="#bounds-of-grid-sizer" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">leftBound</span> <span class="o">=</span> <span class="nx">gridSizer</span><span class="p">.</span><span class="nx">left</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">rightBound</span> <span class="o">=</span> <span class="nx">gridSizer</span><span class="p">.</span><span class="nx">right</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">topBound</span> <span class="o">=</span> <span class="nx">gridSizer</span><span class="p">.</span><span class="nx">top</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">bottomBound</span> <span class="o">=</span> <span class="nx">gridSizer</span><span class="p">.</span><span class="nx">bottom</span><span class="p">;</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">gridSizer</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="nx">leftBound</span><span class="p">;</span>
+<span class="nx">gridSizer</span><span class="p">.</span><span class="nx">right</span> <span class="o">=</span> <span class="nx">rightBound</span><span class="p">;</span>
+<span class="nx">gridSizer</span><span class="p">.</span><span class="nx">top</span> <span class="o">=</span> <span class="nx">topBound</span><span class="p">;</span>
+<span class="nx">gridSizer</span><span class="p">.</span><span class="nx">bottom</span> <span class="o">=</span> <span class="nx">bottomBound</span><span class="p">;</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">gridSizer</span><span class="p">.</span><span class="nx">alignLeft</span><span class="p">(</span><span class="nx">leftBound</span><span class="p">);</span>
+<span class="nx">gridSizer</span><span class="p">.</span><span class="nx">alignRight</span><span class="p">(</span><span class="nx">rightBound</span><span class="p">);</span>
+<span class="nx">gridSizer</span><span class="p">.</span><span class="nx">alignTop</span><span class="p">(</span><span class="nx">topBound</span><span class="p">);</span>
+<span class="nx">gridSizer</span><span class="p">.</span><span class="nx">alignBottom</span><span class="p">(</span><span class="nx">bottomBound</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h3 id="push-into-bounds">Push into bounds<a class="headerlink" href="#push-into-bounds" title="Permanent link">&para;</a></h3>
+<p>Align grid sizer to bound if overlapping it.</p>
+<div class="codehilite"><pre><span></span><span class="nx">gridSizer</span><span class="p">.</span><span class="nx">pushIntoBounds</span><span class="p">();</span>
+</pre></div>
+
+<p>or</p>
+<div class="codehilite"><pre><span></span><span class="nx">gridSizer</span><span class="p">.</span><span class="nx">pushIntoBounds</span><span class="p">(</span><span class="nx">bounds</span><span class="p">);</span>
+</pre></div>
+
+<ul>
+<li><code>bounds</code> : Bounds in <a href="../geom-rectangle/">rectangle object</a>.</li>
+</ul>
 <h3 id="draw-bounds">Draw bounds<a class="headerlink" href="#draw-bounds" title="Permanent link">&para;</a></h3>
 <p>Draw all bounds of children.</p>
 <div class="codehilite"><pre><span></span><span class="nx">gridSizer</span><span class="p">.</span><span class="nx">drawBounds</span><span class="p">(</span><span class="nx">graphics</span><span class="p">,</span> <span class="nx">color</span><span class="p">);</span>

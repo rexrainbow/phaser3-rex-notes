@@ -110,21 +110,9 @@ Arrange position of all elements.
 dialog.layout();
 ```
 
-### Push into bounds
+### Other properties
 
-Align dialog to bound if overlapping it.
-
-```javascript
-dialog.pushIntoBounds();
-```
-
-or
-
-```javascript
-dialog.pushIntoBounds(bounds);
-```
-
-- `bounds` : Bounds in [rectangle object](geom-rectangle.md).
+See [sizer object](ui-sizer.md)
 
 ### Events
 

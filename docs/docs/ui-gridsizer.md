@@ -156,9 +156,33 @@ Arrange position of all children.
 gridSizer.layout();
 ```
 
+### Bounds of grid sizer
+
+- Get
+    ```javascript
+    var leftBound = gridSizer.left;
+    var rightBound = gridSizer.right;
+    var topBound = gridSizer.top;
+    var bottomBound = gridSizer.bottom;
+    ```
+- Set
+    ```javascript
+    gridSizer.left = leftBound;
+    gridSizer.right = rightBound;
+    gridSizer.top = topBound;
+    gridSizer.bottom = bottomBound;
+    ```
+    or
+    ```javascript
+    gridSizer.alignLeft(leftBound);
+    gridSizer.alignRight(rightBound);
+    gridSizer.alignTop(topBound);
+    gridSizer.alignBottom(bottomBound);
+    ```
+
 ### Push into bounds
 
-Align sizer to bound if overlapping it.
+Align grid sizer to bound if overlapping it.
 
 ```javascript
 gridSizer.pushIntoBounds();

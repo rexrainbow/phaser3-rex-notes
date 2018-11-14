@@ -116,21 +116,9 @@ label.layout();
     var icon = label.getElement('text');
     ```
 
-### Push into bounds
+### Other properties
 
-Align label to bound if overlapping it.
-
-```javascript
-label.pushIntoBounds();
-```
-
-or
-
-```javascript
-label.pushIntoBounds(bounds);
-```
-
-- `bounds` : Bounds in [rectangle object](geom-rectangle.md).
+See [sizer object](ui-sizer.md)
 
 ### Draw bounds
 
