@@ -1,21 +1,17 @@
-import ContainerLite from 'rexPlugins/gameobjects/containerlite/ContainerLite.js';
+import BaseSizer from '../basesizer/BaseSizer.js';
 import ParsePaddingConfig from '../utils/ParsePaddingConfig.js';
-import GetSizerConfig from '../sizer/GetSizerConfig.js';
 import GetChildrenWidth from './GetChildrenWidth.js';
 import GetChildrenHeight from './GetChildrenHeight.js';
 import GetAllChildrenSizer from './GetAllChildrenSizer.js';
-import PushIntoBounds from '../utils/PushIntoBounds.js';
 import Layout from './Layout.js';
-import DrawBounds from '../utils/DrawBounds.js';
 import ALIGNMODE from '../utils/AlignConst.js';
 
-const Container = ContainerLite;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const RemoveItem = Phaser.Utils.Array.Remove;
 const ALIGN_CENTER = Phaser.Display.Align.CENTER;
 
-class GridSizer extends Container {
+class GridSizer extends BaseSizer {
     constructor(scene, x, y, minWidth, minHeight, columnCount, rowCount) {
         var config;
         if (IsPlainObject(x)) {
@@ -37,14 +33,10 @@ class GridSizer extends Container {
             columnCount = GetValue(config, 'column', 0);
             rowCount = GetValue(config, 'row', 0);
         }
-        super(scene, x, y, 2, 2);
-        this.type = 'rexGridSizer';
-        this.isRexSizer = true;
-        this.setName(GetValue(config, 'name', ''));
+        super(scene, x, y, minWidth, minHeight, config);
 
+        this.type = 'rexGridSizer';
         this.initialGrid(columnCount, rowCount);
-        this.setMinWidth(minWidth);
-        this.setMinHeight(minHeight);
     }
 
     destroy(fromScene) {
@@ -128,36 +120,6 @@ class GridSizer extends Container {
         return this;
     }
 
-    setMinWidth(minWidth) {
-        if (minWidth == null) {
-            minWidth = 0;
-        }
-        this.minWidth = minWidth;
-        return this;
-    }
-
-    setMinHeight(minHeight) {
-        if (minHeight == null) {
-            minHeight = 0;
-        }
-        this.minHeight = minHeight;
-        return this;
-    }
-
-    get childrenWidth() {
-        if (this._childrenWidth === undefined) {
-            this._childrenWidth = this.getChildrenWidth();
-        }
-        return this._childrenWidth
-    }
-
-    get childrenHeight() {
-        if (this._childrenHeight === undefined) {
-            this._childrenHeight = this.getChildrenHeight();
-        }
-        return this._childrenHeight;
-    }
-
     get totalColumnProportions() {
         var result = 0,
             proportion;
@@ -198,67 +160,13 @@ class GridSizer extends Container {
         this.rowHeight.length = rowCount;
         return this;
     }
-
-    get left() {
-        return this.x - (this.displayWidth * this.originX);
-    }
-
-    set left(value) {
-        this.x += (value - this.left);
-    }
-
-    alignLeft(value) {
-        this.left = value;
-        return this;
-    }
-
-    get right() {
-        return (this.x - (this.displayWidth * this.originX)) + this.displayWidth;
-    }
-
-    set right(value) {
-        this.x += (value - this.right);
-    }
-
-    alignRight(value) {
-        this.right = value;
-        return this;
-    }
-
-    get top() {
-        return this.y - (this.displayHeight * this.originY);
-    }
-
-    set top(value) {
-        this.y += (value - this.top);
-    }
-
-    alignTop(value) {
-        this.top = value;
-        return this;
-    }
-
-    get bottom() {
-        return (this.y - (this.displayHeight * this.originY)) + this.displayHeight;
-    }
-
-    set bottom(value) {
-        this.y += (value - this.bottom);
-    }
-
-    alignBottom(value) {
-        this.bottom = value;
-        return this;
-    }
 }
+
 var methods = {
-    getSizerConfig: GetSizerConfig,
     getChildrenWidth: GetChildrenWidth,
     getChildrenHeight: GetChildrenHeight,
     getAllChildrenSizer: GetAllChildrenSizer,
-    pushIntoBounds: PushIntoBounds,
     layout: Layout,
-    drawBounds: DrawBounds,
 }
 Object.assign(
     GridSizer.prototype,

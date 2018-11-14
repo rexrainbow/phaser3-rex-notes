@@ -1,23 +1,19 @@
-import ContainerLite from 'rexPlugins/gameobjects/containerlite/ContainerLite.js';
+import BaseSizer from '../basesizer/BaseSizer.js';
 import ParsePaddingConfig from '../utils/ParsePaddingConfig.js'
-import GetSizerConfig from './GetSizerConfig.js';
 import GetChildrenWidth from './GetChildrenWidth.js';
 import GetChildrenHeight from './GetChildrenHeight.js';
 import GetChildrenProportion from './GetChildrenProportion.js';
 import GetAllChildrenSizer from './GetAllChildrenSizer.js';
-import PushIntoBounds from '../utils/PushIntoBounds.js';
 import Layout from './Layout.js';
-import DrawBounds from '../utils/DrawBounds.js';
 import ORIENTATIONMODE from '../utils/OrientationConst.js';
 import ALIGNMODE from '../utils/AlignConst.js';
 
-const Container = ContainerLite;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const RemoveItem = Phaser.Utils.Array.Remove;
 const ALIGN_CENTER = Phaser.Display.Align.CENTER;
 
-class Sizer extends Container {
+class Sizer extends BaseSizer {
     constructor(scene, x, y, minWidth, minHeight, orientation) {
         var config;
         if (IsPlainObject(x)) {
@@ -40,16 +36,11 @@ class Sizer extends Container {
         if (orientation === undefined) {
             orientation = 0;
         }
-
-        super(scene, x, y, 2, 2);
-        this.setName(GetValue(config, 'name', ''));
+        super(scene, x, y, minWidth, minHeight, config);
 
         this.type = 'rexSizer';
-        this.isRexSizer = true;
         this.sizerChildren = [];
         this.setOrientation(orientation);
-        this.setMinWidth(minWidth);
-        this.setMinHeight(minHeight);
     }
 
     destroy(fromScene) {
@@ -124,105 +115,20 @@ class Sizer extends Container {
         return this;
     }
 
-    setMinWidth(minWidth) {
-        if (minWidth == null) {
-            minWidth = 0;
-        }
-        this.minWidth = minWidth;
-        return this;
-    }
-
-    setMinHeight(minHeight) {
-        if (minHeight == null) {
-            minHeight = 0;
-        }
-        this.minHeight = minHeight;
-        return this;
-    }
-
-    get childrenWidth() {
-        if (this._childrenWidth === undefined) {
-            this._childrenWidth = this.getChildrenWidth();
-        }
-        return this._childrenWidth
-    }
-
-    get childrenHeight() {
-        if (this._childrenHeight === undefined) {
-            this._childrenHeight = this.getChildrenHeight();
-        }
-        return this._childrenHeight;
-    }
-
     get childrenProportion() {
         if (this._childrenProportion === undefined) {
             this._childrenProportion = this.getChildrenProportion();
         }
         return this._childrenProportion;
     }
-
-    get left() {
-        return this.x - (this.displayWidth * this.originX);
-    }
-
-    set left(value) {
-        this.x += (value - this.left);
-    }
-
-    alignLeft(value) {
-        this.left = value;
-        return this;
-    }
-
-    get right() {
-        return (this.x - (this.displayWidth * this.originX)) + this.displayWidth;
-    }
-
-    set right(value) {
-        this.x += (value - this.right);
-    }
-
-    alignRight(value) {
-        this.right = value;
-        return this;
-    }
-
-    get top() {
-        return this.y - (this.displayHeight * this.originY);
-    }
-
-    set top(value) {
-        this.y += (value - this.top);
-    }
-
-    alignTop(value) {
-        this.top = value;
-        return this;
-    }
-
-    get bottom() {
-        return (this.y - (this.displayHeight * this.originY)) + this.displayHeight;
-    }
-
-    set bottom(value) {
-        this.y += (value - this.bottom);
-    }
-
-    alignBottom(value) {
-        this.bottom = value;
-        return this;
-    }
 }
 
 var methods = {
-    getSizerConfig: GetSizerConfig,
     getChildrenWidth: GetChildrenWidth,
     getChildrenHeight: GetChildrenHeight,
     getChildrenProportion: GetChildrenProportion,
     getAllChildrenSizer: GetAllChildrenSizer,
-    pushIntoBounds: PushIntoBounds,
     layout: Layout,
-    drawBounds: DrawBounds,
 }
 Object.assign(
     Sizer.prototype,
