@@ -30,46 +30,40 @@ class Buttons extends Sizer {
 
         if (buttons) {
             var groupName = GetValue(config, 'groupName', undefined);
-            if (this.orientation === 0) {
-                var buttonsAlign = GetValue(config, 'align', undefined); // Default is 'center'
-                var button, proportion;
-                for (var i = 0, cnt = buttons.length; i < cnt; i++) {
-                    button = buttons[i];
-                    // Add to sizer
-                    var padding = {
+            var buttonsAlign = GetValue(config, 'align', undefined); // Default is 'center'
+            var button, proportion, padding;
+            for (var i = 0, cnt = buttons.length; i < cnt; i++) {
+                button = buttons[i];
+                // Add to sizer
+                switch (buttonsAlign) {
+                    case 'right':
+                    case 'bottom':
+                        proportion = (i === 0) ? 1 : 0;
+                        break;
+                    case 'center':
+                        proportion = 1;
+                        break;
+                    default: // 'left', 'top'
+                        proportion = 0;
+                        break;
+                }
+                if (this.orientation === 0) {
+                    padding = {
                         left: (i >= 1) ? buttonSpace : 0,
                         right: 0,
                         top: 0,
                         bottom: 0
                     }
-                    switch (buttonsAlign) {
-                        case 'right':
-                            proportion = (i === 0) ? 1 : 0;
-                            break;
-                        case 'left':
-                            proportion = 0;
-                            break;
-                        default: // 'center'
-                            proportion = 1;
-                            break;
-                    }
-                    this.add(button, proportion, buttonsAlign, padding, true);
-                    ButtonSetInteractive.call(this, button, groupName, i);
-                }
-            } else {
-                var button;
-                for (var i = 0, cnt = buttons.length; i < cnt; i++) {
-                    button = buttons[i];
-                    // Add to sizer
-                    var padding = {
+                } else {
+                    padding = {
                         left: 0,
                         right: 0,
                         top: (i >= 1) ? buttonSpace : 0,
                         bottom: 0
                     }
-                    this.add(button, 0, 'center', padding, true);
-                    ButtonSetInteractive.call(this, button, groupName, i);
                 }
+                this.add(button, proportion, buttonsAlign, padding, true);
+                ButtonSetInteractive.call(this, button, groupName, i);
             }
         }
 
