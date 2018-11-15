@@ -66,7 +66,7 @@ var popup = function (scene, x, y, onClick) {
                 scene.rexUI.add.roundRectangle(0, 0, 0, 0, 20, 0xcddc39),
             ],
 
-            actionsAlign: 'left',
+            actionsAlign: 'center',
 
             space: {
                 title: 10,

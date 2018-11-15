@@ -1,6 +1,10 @@
-var GetChildrenWidth = function () {
+var GetChildrenWidth = function (minimumMode) {
     if (!this.visible) {
         return 0;
+    }
+
+    if (minimumMode === undefined) {
+        minimumMode = true;
     }
 
     var result = 0;
@@ -15,7 +19,10 @@ var GetChildrenWidth = function () {
                 continue;
             }
 
-            if (child.rexSizer.proportion === 0) {
+            if (
+                (child.rexSizer.proportion === 0) ||
+                (minimumMode && (child.rexSizer.proportion > 0))
+            ) {
                 childWidth = (child.isRexSizer) ? child.childrenWidth : child.width;
             } else {
                 childWidth = 0;

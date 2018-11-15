@@ -1,6 +1,10 @@
-var GetChildrenHeight = function () {
+var GetChildrenHeight = function (minimumMode) {
     if (!this.visible) {
         return 0;
+    }
+
+    if (minimumMode === undefined) {
+        minimumMode = true;
     }
 
     var result = 0;
@@ -32,7 +36,10 @@ var GetChildrenHeight = function () {
                 continue;
             }
 
-            if (child.rexSizer.proportion === 0) {
+            if (
+                (child.rexSizer.proportion === 0) ||
+                (minimumMode && (child.rexSizer.proportion > 0))
+            ) {
                 childHeight = (child.isRexSizer) ? child.childrenHeight : child.height;
             } else {
                 childHeight = 0;

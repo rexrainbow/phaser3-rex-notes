@@ -5,6 +5,7 @@ const Zone = Phaser.GameObjects.Zone;
 const AlignIn = Phaser.Display.Align.In.QuickSet;
 
 var Layout = function (parent) {
+    debugger
     // Skip invisible sizer
     if (!this.visible) {
         return this;
@@ -56,13 +57,20 @@ var Layout = function (parent) {
     }
     this.resize(newWidth, newHeight);
 
+    var remainder;
+    if (isTopSizer) {
+        remainder = 0;
+    } else if (this.orientation === 0) {
+        remainder = this.width - this.childrenWidth;
+    } else {
+        remainder = this.height - this.childrenHeight;
+    }
     var proportionLength;
-    if ((this.childrenProportion > 0) && (!isTopSizer)) {
-        var remainder;
+    if ((!isTopSizer) && (remainder > 0) && (this.childrenProportion > 0)) {
         if (this.orientation === 0) {
-            remainder = this.width - this.childrenWidth;
+            remainder = this.width - this.getChildrenWidth(false);
         } else {
-            remainder = this.height - this.childrenHeight;
+            remainder = this.height - this.getChildrenHeight(false);
         }
         proportionLength = remainder / this.childrenProportion;
     } else {
@@ -72,8 +80,8 @@ var Layout = function (parent) {
     // Layout children    
     var children = this.sizerChildren;
     var child, childConfig, padding;
-    var startX = this.x - (this.displayWidth * this.originX),
-        startY = this.y - (this.displayHeight * this.originY);
+    var startX = this.left,
+        startY = this.top;
     var itemX = startX,
         itemY = startY;
     var x, y, width, height; // Align zone
@@ -94,22 +102,18 @@ var Layout = function (parent) {
         newChildWidth = undefined;
         newChildHeight = undefined;
         if (this.orientation === 0) { // x
-            switch (childConfig.proportion) {
-                case 0:
-                    x = (itemX + padding.left);
-                    width = child.width;
-                    itemX += (width + padding.left + padding.right);
-                    break;
-                case -1:
-                    x = (startX + padding.left);
-                    width = this.width - padding.left - padding.right;
-                    newChildWidth = width;
-                    break;
-                default:
-                    x = (itemX + padding.left);
-                    width = (childConfig.proportion * proportionLength);
-                    itemX += (width + padding.left + padding.right);
-                    break;
+            if (childConfig.proportion === -1) {
+                x = (startX + padding.left);
+                width = this.width - padding.left - padding.right;
+                newChildWidth = width;
+            } else if (proportionLength === 0) {
+                x = (itemX + padding.left);
+                width = child.width;
+                itemX += (width + padding.left + padding.right);
+            } else {
+                x = (itemX + padding.left);
+                width = (childConfig.proportion * proportionLength);
+                itemX += (width + padding.left + padding.right);
             }
             y = (startY + padding.top);
             height = (this.height - padding.top - padding.bottom);
@@ -118,22 +122,18 @@ var Layout = function (parent) {
                 newChildHeight = height;
             }
         } else { // y
-            switch (childConfig.proportion) {
-                case 0:
-                    y = (itemY + padding.top);
-                    height = child.height;
-                    itemY += (height + padding.top + padding.bottom);
-                    break;
-                case -1:
-                    y = (startY + padding.top);
-                    height = this.height - padding.top - padding.bottom;
-                    newChildHeight = height;
-                    break;
-                default:
-                    y = (itemY + padding.top);
-                    height = (childConfig.proportion * proportionLength);
-                    itemY += (height + padding.top + padding.bottom);
-                    break;
+            if (childConfig.proportion === -1) {
+                y = (startY + padding.top);
+                height = this.height - padding.top - padding.bottom;
+                newChildHeight = height;
+            } else if (proportionLength === 0) {
+                y = (itemY + padding.top);
+                height = child.height;
+                itemY += (height + padding.top + padding.bottom);
+            } else {
+                y = (itemY + padding.top);
+                height = (childConfig.proportion * proportionLength);
+                itemY += (height + padding.top + padding.bottom);
             }
             x = (startX + padding.left);
             width = (this.width - padding.left - padding.right);

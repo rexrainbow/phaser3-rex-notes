@@ -74,8 +74,8 @@ var Layout = function (parent) {
 
     // Layout children
     var child, childConfig, padding;
-    var startX = this.x - (this.displayWidth * this.originX),
-        startY = this.y - (this.displayHeight * this.originY);
+    var startX = this.left,
+        startY = this.top;
     var itemX = startX,
         itemY = startY;
     var x, y, width, height; // Align zone
