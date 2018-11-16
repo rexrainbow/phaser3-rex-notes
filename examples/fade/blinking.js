@@ -9,20 +9,16 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {
-        this.load.image('dot', 'assets/images/white-dot.png');
-    }
+    preload() {}
 
     create() {
         for (var i = 0; i < 500; i++) {
-            var img = this.add.image(Between(5, 795), Between(5, 595), 'dot').setAlpha(0);
-            var fade = this.plugins.get('rexFade').add(img, {
+            var dot = this.add.circle(Between(5, 795), Between(5, 595), 3, 0xffffff).setAlpha(0);
+            var fade = this.plugins.get('rexFade').add(dot, {
                 delay: Between(0, 100),
                 duration: Between(500, 1000),
-                alpha: {
-                    start: Math.random(),
-                    end: Math.random()
-                },
+                start: Math.random(),
+                end: Math.random(),
                 mode: 'yoyo'
             });
             fade.start();

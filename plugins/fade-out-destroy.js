@@ -1,17 +1,14 @@
 import Fade from './fade.js';
 
-var fadeOutDestroy = function (gameObject, duration) {
-    CONFIG.mode = 1;
-    CONFIG.alpha.start = gameObject.alpha;
-    CONFIG.alpha.end = 0;
-    CONFIG.duration = duration;
-    var fade = new Fade(gameObject, CONFIG);
+var FadeOutDestroy = function (gameObject, duration) {
+    defaultConfig.mode = 1;
+    defaultConfig.end = 0;
+    defaultConfig.duration = duration;
+    var fade = new Fade(gameObject, defaultConfig);
     fade.start();
     return fade;
 };
 
-var CONFIG = {
-    alpha: {}
-}; // reuse this config
+var defaultConfig = {}; // reuse this config
 
-export default fadeOutDestroy;
+export default FadeOutDestroy;

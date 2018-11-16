@@ -16,6 +16,8 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
+        this.print = this.add.text(0, 0, '');
+        
         var db = createDataBase(400);
 
         var tabs = this.rexUI.add.tabs({
@@ -124,7 +126,23 @@ class Demo extends Phaser.Scene {
                     })
                     .data();
                 this.getElement('panel').setItems(items);
-            }, tabs)
+            }, tabs);
+
+        // Grid table
+        tabs.getElement('panel')
+            .on('cell.click', function (cellContainer, cellIndex) {
+                this.print.text += cellIndex + ': ' + cellContainer.text + '\n';
+            }, this)
+            .on('cell.over', function (cellContainer, cellIndex) {
+                cellContainer.getElement('background')
+                    .setStrokeStyle(1, 0xffffff)
+                    .setDepth(1);
+            }, this)
+            .on('cell.out', function (cellContainer, cellIndex) {
+                cellContainer.getElement('background')
+                    .setStrokeStyle(2, 0x260e04)
+                    .setDepth(0);
+            }, this);
 
         tabs.emitButtonClick('left', 0).emitButtonClick('right', 0);
     }

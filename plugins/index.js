@@ -31,6 +31,8 @@ import MoveTo from './moveto.js';
 import RotateTo from './rotateto.js';
 import Fade from './fade.js';
 import FadeOutDestroy from './fade-out-destroy.js';
+import Scale from './scale.js';
+import ScaleDownDestroy from './scale-down-destroy.js';
 import PathFollower from './pathfollower.js';
 import Flash from './flash.js';
 import Interception from './interception.js';
@@ -118,6 +120,8 @@ export {
     RotateTo,
     Fade,
     FadeOutDestroy,
+    Scale,
+    ScaleDownDestroy,
     PathFollower,
     Flash,
     Interception,

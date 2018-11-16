@@ -5,13 +5,9 @@ class Demo extends Phaser.Scene {
         super({
             key: 'examples'
         })
-        this.txt;
-        this.group;
     }
 
-    preload() {
-        this.load.image('dot', 'assets/images/white-dot.png');
-    }
+    preload() {}
 
     create() {
         this.txt = this.add.text(0, 0, '????');
@@ -20,10 +16,10 @@ class Demo extends Phaser.Scene {
 
     update() {
         var pointer = this.input.activePointer;
-        var img = this.add.image(pointer.x, pointer.y, 'dot');
-        this.plugins.get('rexFade').fadeOutDestroy(img, 2000);
+        var dot = this.add.circle(pointer.x, pointer.y, 5, 0xffffff);
+        this.plugins.get('rexFade').fadeOutDestroy(dot, 2000);
 
-        this.group.add(img);
+        this.group.add(dot);
         this.txt.setText(this.group.getLength().toString());
     }
 }

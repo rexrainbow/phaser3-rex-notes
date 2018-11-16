@@ -3,13 +3,13 @@ import GetSceneObject from 'rexPlugins/utils/system/GetSceneObject.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 
-class Fade {
+class Scale {
     constructor(gameObject, config) {
         this.gameObject = gameObject;
         this.scene = GetSceneObject(gameObject);
 
-        this.alphaStart = undefined;
-        this.alphaEnd = undefined;
+        this.scaleStart = {};
+        this.scaleEnd = {};
         this.tween = undefined;
         this.resetFromJSON(config);
         this.boot();
@@ -17,8 +17,8 @@ class Fade {
 
     resetFromJSON(o) {
         this.setMode(GetValue(o, 'mode', 0));
-        this.setAlphaRange(
-            GetAdvancedValue(o, 'start', this.gameObject.alpha),
+        this.setScaleRange(
+            GetAdvancedValue(o, 'start', undefined),
             GetAdvancedValue(o, 'end', 0)
         );
         this.setDelay(GetAdvancedValue(o, 'delay', 0));
@@ -29,8 +29,8 @@ class Fade {
     toJSON() {
         return {
             mode: this.mode,
-            start: this.alphaStart,
-            end: this.alphaEnd,
+            start: this.scaleStart,
+            end: this.scaleEnd,
             delay: this.delay,
             duration: this.duration
         };
@@ -59,9 +59,21 @@ class Fade {
         this.mode = m;
         return this;
     }
-    setAlphaRange(start, end) {
-        this.alphaStart = start;
-        this.alphaEnd = end;
+    setScaleRange(start, end) {
+        if (typeof (start) === 'number') {
+            this.scaleStart.x = start;
+            this.scaleStart.y = start;
+        } else {
+            this.scaleStart.x = GetValue(start, 'x', this.gameObject.scaleX);
+            this.scaleStart.y = GetValue(start, 'y', this.gameObject.scaleY);
+        }
+        if (typeof (end) === 'number') {
+            this.scaleEnd.x = end;
+            this.scaleEnd.y = end;
+        } else {
+            this.scaleEnd.x = GetValue(end, 'x', this.scaleStart.x);
+            this.scaleEnd.y = GetValue(end, 'y', this.scaleStart.y);
+        }
         return this;
     }
     setDelay(time) {
@@ -78,10 +90,12 @@ class Fade {
             return;
         }
 
-        this.gameObject.alpha = this.alphaStart;
+        this.gameObject.scaleX = this.scaleStart.x;
+        this.gameObject.scaleY = this.scaleStart.y;
         this.tween = this.scene.tweens.add({
             targets: this.gameObject,
-            alpha: this.alphaEnd,
+            scaleX: this.scaleEnd.x,
+            scaleY: this.scaleEnd.y,
 
             delay: this.delay,
             duration: this.duration,
@@ -118,4 +132,4 @@ const MODE = {
     yoyo: 2
 }
 
-export default Fade;
+export default Scale;

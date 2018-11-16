@@ -73,7 +73,7 @@ class Demo extends Phaser.Scene {
                 cellContainer.getElement('background')
                     .setStrokeStyle(2, 0x260e04)
                     .setDepth(0);
-            }, this)
+            }, this);
     }
 
     update() {}

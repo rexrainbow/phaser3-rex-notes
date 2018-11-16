@@ -13,7 +13,7 @@ module.exports = {
         'bbcodetextplugin': './plugins/bbcodetext-plugin.js',
         'bbcodetext': './plugins/bbcodetext.js',
         'tagtextplugin': './plugins/tagtext-plugin.js',
-        'tagtext': './plugins/tagtext.js',        
+        'tagtext': './plugins/tagtext.js',
         'canvasplugin': './plugins/canvas-plugin.js',
         'canvas': './plugins/canvas.js',
         'containerliteplugin': './plugins/containerlite-plugin.js',
@@ -42,6 +42,7 @@ module.exports = {
 
         // member of game object
         'fadeplugin': './plugins/fade-plugin.js',
+        'scaleplugin': './plugins/scale-plugin.js',
         'pathfollowerplugin': './plugins/pathfollower-plugin.js',
         'movetoplugin': './plugins/moveto-plugin.js',
         'rotatetoplugin': './plugins/rotateto-plugin.js',

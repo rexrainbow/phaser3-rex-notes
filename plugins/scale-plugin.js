@@ -1,7 +1,7 @@
-import Fade from './fade.js';
-import FadeOutDestroy from './fade-out-destroy.js';
+import Scale from './scale.js';
+import ScaleDownDestroy from './scale-down-destroy.js';
 
-class FadePlugin extends Phaser.Plugins.BasePlugin {
+class ScalePlugin extends Phaser.Plugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);
@@ -13,17 +13,17 @@ class FadePlugin extends Phaser.Plugins.BasePlugin {
     }
 
     add(gameObject, config) {
-        return new Fade(gameObject, config);
+        return new Scale(gameObject, config);
     }
 }
 
 // mixin
 var methods = {
-    fadeOutDestroy: FadeOutDestroy
-};
+    scaleDownDestroy: ScaleDownDestroy
+}
 Object.assign(
-    FadePlugin.prototype,
+    ScalePlugin.prototype,
     methods
 );
 
-export default FadePlugin;
+export default ScalePlugin;
