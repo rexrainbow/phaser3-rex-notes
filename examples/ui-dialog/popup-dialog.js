@@ -21,14 +21,14 @@ class Demo extends Phaser.Scene {
 
             if (dialog === undefined) {
                 // Click 0
-                dialog = popup(this, x, y, function (color) {
+                dialog = createDialog(this, x, y, function (color) {
                     scene.rexUI.add.roundRectangle(x, y, 0, 0, 20, color)
                     scene.print.text = 'Add object at (' + x + ',' + y + ')';
                 });
                 scene.print.text = 'Click (' + x + ',' + y + ')';
             } else {
                 // Click 1
-                dialog.destroy();
+                dialog.scaleDownDestroy(100);
                 dialog = undefined;
             }
         }, this);
@@ -37,7 +37,7 @@ class Demo extends Phaser.Scene {
     update() {}
 }
 
-var popup = function (scene, x, y, onClick) {
+var createDialog = function (scene, x, y, onClick) {
     var dialog = scene.rexUI.add.dialog({
             x: x,
             y: y,
@@ -81,17 +81,7 @@ var popup = function (scene, x, y, onClick) {
         .layout()
         .pushIntoBounds()
         //.drawBounds(this.add.graphics(), 0xff0000)
-        .setScale(0);
-
-    var tween = scene.tweens.add({
-        targets: dialog,
-        scaleX: 1,
-        scaleY: 1,
-        ease: 'Bounce', // 'Cubic', 'Elastic', 'Bounce', 'Back'
-        duration: 1000,
-        repeat: 0, // -1: infinity
-        yoyo: false
-    });
+        .popUp(500);
 
     dialog
         .on('button.click', function (button, groupName, index) {

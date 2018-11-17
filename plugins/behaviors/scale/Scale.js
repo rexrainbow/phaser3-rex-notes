@@ -23,6 +23,7 @@ class Scale {
         );
         this.setDelay(GetAdvancedValue(o, 'delay', 0));
         this.setFadeOutTime(GetAdvancedValue(o, 'duration', 1000));
+        this.setEase(GetValue(o, 'ease', undefined));
         return this;
     }
 
@@ -46,10 +47,12 @@ class Scale {
         this.stop();
         this.gameObject = undefined;
         this.scene = undefined;
+        return this;
     }
 
     destroy() {
         this.shutdown();
+        return this;
     }
 
     setMode(m) {
@@ -76,18 +79,28 @@ class Scale {
         }
         return this;
     }
+
     setDelay(time) {
         this.delay = time;
         return this;
     }
+
     setFadeOutTime(time) {
         this.duration = time;
         return this;
     }
 
+    setEase(ease) {
+        if (ease === undefined) {
+            ease = 'Linear';
+        }
+        this.ease = ease;
+        return this;
+    }
+
     start() {
         if (this.tween) {
-            return;
+            return this;
         }
 
         this.gameObject.scaleX = this.scaleStart.x;
@@ -99,7 +112,7 @@ class Scale {
 
             delay: this.delay,
             duration: this.duration,
-            ease: 'Linear',
+            ease: this.ease,
             yoyo: (this.mode == 2),
             repeat: ((this.mode == 2) ? -1 : 0),
             onComplete: this.complete,
@@ -110,7 +123,7 @@ class Scale {
 
     stop() {
         if (!this.tween) {
-            return;
+            return this;
         }
 
         this.tween.stop();

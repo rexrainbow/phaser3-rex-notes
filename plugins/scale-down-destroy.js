@@ -1,8 +1,8 @@
 import Scale from './scale.js';
 
-var ScaleDownDestroy = function (gameObject, duration, axis) {
+var ScaleDownDestroy = function (gameObject, duration, orientation, ease) {
     defaultConfig.mode = 1;
-    switch (axis) {
+    switch (orientation) {
         case 'x':
             defaultConfig.end = {
                 x: 0
@@ -18,6 +18,7 @@ var ScaleDownDestroy = function (gameObject, duration, axis) {
             break;
     }
     defaultConfig.duration = duration;
+    defaultConfig.ease = (ease === undefined) ? 'Linear' : ease;
     var scale = new Scale(gameObject, defaultConfig);
     scale.start();
     return scale;

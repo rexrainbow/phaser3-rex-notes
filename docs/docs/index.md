@@ -38,6 +38,7 @@
 1. [Page](textpage.md): Display text page by page on text object.
 1. [Path follower](pathfollower.md): Set position of game object on a path.
 1. [Pixelation-pipeline](pixelationpipeline.md): Pixelation post processing filter.
+1. [Pop up](popup.md): Scale up game object.
 1. [Rhombus](geom-rhombus.md): Rhombus shape and methods.
 1. [RotateTo](rotateto.md): Rotate game object towards target position with a steady speed.
 1. [Round-Rectangle](shape-roundrectangle.md): Round rectangle shape.

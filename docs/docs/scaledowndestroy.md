@@ -1,6 +1,6 @@
 ## Introduction
 
-Scale down game object then destroy it.
+Scale down (i.e. ease scaleX, scaleY to `0`) game object then destroy it.
 
 - Author: Rex
 - Method only

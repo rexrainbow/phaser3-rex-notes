@@ -46,10 +46,12 @@ class Fade {
         this.stop();
         this.gameObject = undefined;
         this.scene = undefined;
+        return this;
     }
 
     destroy() {
         this.shutdown();
+        return this;
     }
 
     setMode(m) {
@@ -75,7 +77,7 @@ class Fade {
 
     start() {
         if (this.tween) {
-            return;
+            return this;
         }
 
         this.gameObject.alpha = this.alphaStart;
@@ -96,7 +98,7 @@ class Fade {
 
     stop() {
         if (!this.tween) {
-            return;
+            return this;
         }
 
         this.tween.stop();

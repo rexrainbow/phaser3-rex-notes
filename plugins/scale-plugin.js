@@ -1,5 +1,6 @@
 import Scale from './scale.js';
 import ScaleDownDestroy from './scale-down-destroy.js';
+import Popup from './popup.js';
 
 class ScalePlugin extends Phaser.Plugins.BasePlugin {
 
@@ -19,7 +20,8 @@ class ScalePlugin extends Phaser.Plugins.BasePlugin {
 
 // mixin
 var methods = {
-    scaleDownDestroy: ScaleDownDestroy
+    scaleDownDestroy: ScaleDownDestroy,
+    popup: Popup,
 }
 Object.assign(
     ScalePlugin.prototype,

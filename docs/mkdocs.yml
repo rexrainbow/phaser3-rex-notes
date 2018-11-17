@@ -79,6 +79,7 @@ nav:
         - Rotate to: rotateto.md
         - Flash: flash.md
         - Fade out destroy: fadeoutdestroy.md
+        - Pop up: popup.md
         - Scale down destroy: scaledowndestroy.md
         - Path follower: pathfollower.md
         - Interception: interception.md

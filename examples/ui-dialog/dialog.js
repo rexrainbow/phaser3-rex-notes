@@ -52,17 +52,7 @@ class Demo extends Phaser.Scene {
             })
             .layout()
             // .drawBounds(this.add.graphics(), 0xff0000)
-            .setScale(0);
-
-        var tween = this.tweens.add({
-            targets: dialog,
-            scaleX: 1,
-            scaleY: 1,
-            ease: 'Bounce', // 'Cubic', 'Elastic', 'Bounce', 'Back'
-            duration: 1000,
-            repeat: 0, // -1: infinity
-            yoyo: false
-        });
+            .popUp(1000);
 
         this.print = this.add.text(0, 0, '');
         dialog

@@ -1,6 +1,10 @@
 import ContainerLite from 'rexPlugins/gameobjects/containerlite/ContainerLite.js';
 import PushIntoBounds from './PushIntoBounds.js';
 import DrawBounds from '../utils/DrawBounds.js';
+import PopUp from './PopUp.js';
+import ScaleDownDestroy from './ScaleDownDestroy.js';
+import FadeIn from './FadeIn.js';
+import FadeOutDestroy from './FadeOutDestroy.js';
 
 const Container = ContainerLite;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -108,6 +112,10 @@ class Base extends Container {
 var methods = {
     pushIntoBounds: PushIntoBounds,
     drawBounds: DrawBounds,
+    popUp: PopUp,
+    scaleDownDestroy: ScaleDownDestroy,
+    fadeIn: FadeIn,
+    fadeOutDestroy: FadeOutDestroy,
 }
 
 Object.assign(

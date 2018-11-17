@@ -33,6 +33,7 @@ import Fade from './fade.js';
 import FadeOutDestroy from './fade-out-destroy.js';
 import Scale from './scale.js';
 import ScaleDownDestroy from './scale-down-destroy.js';
+import PopUp from './popup.js';
 import PathFollower from './pathfollower.js';
 import Flash from './flash.js';
 import Interception from './interception.js';
@@ -122,6 +123,7 @@ export {
     FadeOutDestroy,
     Scale,
     ScaleDownDestroy,
+    PopUp,
     PathFollower,
     Flash,
     Interception,

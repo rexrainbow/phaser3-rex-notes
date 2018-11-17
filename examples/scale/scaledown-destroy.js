@@ -10,8 +10,16 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        var obj = this.add.rectangle(400, 300, 200, 200, 0x00bcd4);
-        this.plugins.get('rexScale').scaleDownDestroy(obj, 2000);
+        var obj;
+        this.input.on('pointerdown', function (pointer) {
+            if (obj) {
+                this.plugins.get('rexScale').scaleDownDestroy(obj, 500);
+                obj = undefined;
+            } else {
+                obj = this.add.rectangle(pointer.x, pointer.y, 200, 200, 0x00bcd4);
+                this.plugins.get('rexScale').popup(obj, 1000);
+            }
+        }, this);
     }
 
     update() {}

@@ -5,7 +5,6 @@ const Zone = Phaser.GameObjects.Zone;
 const AlignIn = Phaser.Display.Align.In.QuickSet;
 
 var Layout = function (parent) {
-    debugger
     // Skip invisible sizer
     if (!this.visible) {
         return this;
