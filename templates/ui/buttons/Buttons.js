@@ -1,5 +1,5 @@
 import Sizer from '../sizer/Sizer.js';
-import ButtonSetInteractive from '../utils/ButtonSetInteractive.js';
+import ButtonSetInteractive from './ButtonSetInteractive.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 

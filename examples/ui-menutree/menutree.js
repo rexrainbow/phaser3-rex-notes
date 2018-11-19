@@ -10,60 +10,60 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        debugger
+        var items = [{
+                name: 'AA',
+                children: [{
+                        name: 'AA-0'
+                    },
+                    {
+                        name: 'AA-1'
+                    },
+                    {
+                        name: 'AA-2'
+                    },
+                ]
+            },
+            {
+                name: 'BB',
+                children: [{
+                        name: 'BB-0'
+                    },
+                    {
+                        name: 'BB-1'
+                    },
+                    {
+                        name: 'BB-2'
+                    },
+                ]
+            },
+            {
+                name: 'CC',
+                children: [{
+                        name: 'CC-0'
+                    },
+                    {
+                        name: 'CC-1'
+                    },
+                    {
+                        name: 'CC-2'
+                    },
+                ]
+            },
+        ];
         var menuTree = this.rexUI.add.menuTree({
-                items: [{
-                        name: 'AA',
-                        children: [{
-                                name: 'AA-0'
-                            },
-                            {
-                                name: 'AA-1'
-                            },
-                            {
-                                name: 'AA-2'
-                            },
-                        ]
-                    },
-                    {
-                        name: 'BB',
-                        children: [{
-                                name: 'BB-0'
-                            },
-                            {
-                                name: 'BB-1'
-                            },
-                            {
-                                name: 'BB-2'
-                            },
-                        ]
-                    },
-                    {
-                        name: 'CC',
-                        children: [{
-                                name: 'CC-0'
-                            },
-                            {
-                                name: 'CC-1'
-                            },
-                            {
-                                name: 'CC-2'
-                            },
-                        ]
-                    },
-                ],
+                items: items,
                 createButtonCallback: function (scene, item, i) {
                     return scene.rexUI.add.label({
-                        background: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20, 0x1a237e),
+                        background: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 0, 0x1a237e),
                         text: scene.add.text(0, 0, item.name, {
-                            fontSize: '24px'
+                            fontSize: '20px'
                         }),
-                        icon: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 20, 0x534bae),
+                        icon: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 10, 0x534bae),
                         space: {
-                            left: 20,
-                            right: 20,
-                            top: 20,
-                            bottom: 20,
+                            left: 10,
+                            right: 10,
+                            top: 10,
+                            bottom: 10,
                             icon: 10
                         }
                     })

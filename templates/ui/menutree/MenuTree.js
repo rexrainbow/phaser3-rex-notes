@@ -1,4 +1,6 @@
 import Buttons from '../buttons/Buttons.js';
+import ShowSubMenu from './ShowSubMenu.js';
+import HideSubMenu from './HideSubMenu.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -33,6 +35,15 @@ class MenuTree extends Buttons {
         config.buttons = buttons;
         super(scene, config);
         this.type = 'rexMenuTree';
+        this.items = items;
+        this.easeIn = GetValue(config, 'easeIn', undefined);
+        this.easeOut = GetValue(config, 'easeOut', undefined);
+        this.root = GetValue(config, 'root', this);
+        if (this.root === this) {
+            this.createButtonCallback = callback;
+            this.createButtonCallbackScope = scope;
+        }
+        this.subMenu = undefined;
         this
             .setOrigin(0)
             .layout();
@@ -48,14 +59,27 @@ class MenuTree extends Buttons {
         }
 
         // Ease in menu
-        var easeIn = GetValue(config, 'easeIn', undefined);
-        if (easeIn) {
-            this.popUp(easeIn);
+        if (this.easeIn) {
+            this.popUp(this.easeIn);
         }
-        var easeOut = GetValue(config, 'easeIn', undefined);
-
-        this.items = items;
+        this.on('button.click', function (button, index) {
+            var subItems = this.items[index].children;
+            if (subItems) {
+                this.showSubMenu(button, subItems);
+            } else {
+                // this.root.on('button.click', button); // TODO
+            }
+        }, this);
     }
 }
 
+var methods = {
+    showSubMenu: ShowSubMenu,
+    hideSubMenu: HideSubMenu,
+}
+
+Object.assign(
+    MenuTree.prototype,
+    methods
+);
 export default MenuTree;
