@@ -3,7 +3,6 @@ import OnDragThumb from './OnDragThumb.js';
 import GetStartPoint from './GetStartPoint.js';
 import GetEndPoint from './GetEndPoint.js';
 import UpdateThumb from './UpdateThumb.js';
-import GetElement from '../utils/GetElement.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Clamp = Phaser.Math.Clamp;
@@ -92,7 +91,6 @@ var methods = {
     getStartPoint: GetStartPoint,
     getEndPoint: GetEndPoint,
     updateThumb: UpdateThumb,
-    getElement: GetElement,
 }
 Object.assign(
     Slider.prototype,

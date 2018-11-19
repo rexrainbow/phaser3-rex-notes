@@ -1,6 +1,5 @@
 import Sizer from '../sizer/Sizer.js';
 import Buttons from '../buttons/Buttons.js';
-import GetElement from '../utils/GetElement.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -118,15 +117,6 @@ class Dialog extends Sizer {
         this.childrenMap.actions = actions;
     }
 }
-
-
-var methods = {
-    getElement: GetElement,
-}
-Object.assign(
-    Dialog.prototype,
-    methods
-);
 
 const defaultConfig = {};
 

@@ -164,7 +164,7 @@ tabs.emitButtonClick(groupName, index);
     - Panel game object
         ```javascript
         var panel = tabs.getElement('panel');
-        ```        
+        ```
     - Buttons
         - Left buttons
             ```javascript
@@ -181,7 +181,7 @@ tabs.emitButtonClick(groupName, index);
         - Bottom buttons
             ```javascript
             var bottons = tabs.getElement('bottomButtons');
-            ```            
+            ```
 - Get by name
     ```javascript
     var gameObject = tabs.getElement('#' + name);

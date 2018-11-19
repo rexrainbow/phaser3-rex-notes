@@ -62,6 +62,7 @@ class Scale {
         this.mode = m;
         return this;
     }
+
     setScaleRange(start, end) {
         if (typeof (start) === 'number') {
             this.scaleStart.x = start;
@@ -110,7 +111,6 @@ class Scale {
             scaleX: this.scaleEnd.x,
             scaleY: this.scaleEnd.y,
 
-            delay: this.delay,
             duration: this.duration,
             ease: this.ease,
             yoyo: (this.mode == 2),

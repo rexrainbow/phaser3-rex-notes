@@ -1,6 +1,5 @@
 import GridSizer from '../gridsizer/GridSizer.js';
 import Buttons from '../buttons/Buttons.js';
-import GetElement from '../utils/GetElement.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -146,14 +145,6 @@ class Tabs extends GridSizer {
         return this;
     }
 }
-
-var methods = {
-    getElement: GetElement,
-}
-Object.assign(
-    Tabs.prototype,
-    methods
-);
 
 const defaultConfig = {};
 

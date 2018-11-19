@@ -1,5 +1,4 @@
 import Sizer from '../sizer/Sizer.js';
-import GetElement from '../utils/GetElement.js';
 import ButtonSetInteractive from '../utils/ButtonSetInteractive.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -72,15 +71,6 @@ class Buttons extends Sizer {
         this.childrenMap.buttons = buttons;
     }
 }
-
-
-var methods = {
-    getElement: GetElement,
-}
-Object.assign(
-    Buttons.prototype,
-    methods
-);
 
 const defaultConfig = {};
 

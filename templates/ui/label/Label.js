@@ -1,6 +1,5 @@
 import Sizer from '../sizer/Sizer.js';
 import AddClickCallback from './AddClickCallback.js';
-import GetElement from '../utils/GetElement.js';
 import DefaultMask from 'rexPlugins/utils/mask/DefaultMask.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -146,7 +145,6 @@ class Label extends Sizer {
 
 var methods = {
     addClickCallback: AddClickCallback,
-    getElement: GetElement,
 }
 Object.assign(
     Label.prototype,
