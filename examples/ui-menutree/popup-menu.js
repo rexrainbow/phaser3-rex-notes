@@ -93,6 +93,9 @@ class Demo extends Phaser.Scene {
 
             if (menu === undefined) {
                 menu = createMenu(scene, x, y, items);
+            } else if (!menu.isInTouching(pointer)) {
+                menu.hide();
+                menu = undefined;
             }
         }, this);
     }

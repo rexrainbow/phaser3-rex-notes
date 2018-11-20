@@ -56,6 +56,16 @@ class MenuTree extends Buttons {
             this.popUp(this.root.easeIn);
         }
     }
+
+    isInTouching(pointer) {
+        if (super.isInTouching(pointer)) {
+            return true;
+        } else if (this.childrenMap.subMenu) {
+            return this.childrenMap.subMenu.isInTouching(pointer);
+        } else {
+            return false;
+        }
+    }
 }
 
 var methods = {

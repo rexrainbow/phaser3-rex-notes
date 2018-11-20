@@ -6,6 +6,7 @@ import PopUp from './PopUp.js';
 import ScaleDownDestroy from './ScaleDownDestroy.js';
 import FadeIn from './FadeIn.js';
 import FadeOutDestroy from './FadeOutDestroy.js';
+import IsInTouching from './IsInTouching.js';
 
 const Container = ContainerLite;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -118,6 +119,7 @@ var methods = {
     scaleDownDestroy: ScaleDownDestroy,
     fadeIn: FadeIn,
     fadeOutDestroy: FadeOutDestroy,
+    isInTouching: IsInTouching,
 }
 
 Object.assign(

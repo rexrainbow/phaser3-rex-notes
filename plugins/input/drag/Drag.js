@@ -1,5 +1,5 @@
 import GetSceneObject from 'rexPlugins/utils/system/GetSceneObject.js';
-import HitTest from 'rexPlugins/utils/input/HitTest.js';
+import IsObjectInTouching from 'rexPlugins/utils/input/IsObjectInTouching.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const DistanceBetween = Phaser.Math.Distance.Between;
@@ -90,7 +90,7 @@ class Drag {
             if (pointer.dragState > 0) {
                 continue;
             }
-            if (HitTest(pointer, this.gameObject)) {
+            if (IsObjectInTouching(this.gameObject, pointer)) {
                 pointer.dragState = 1;
                 break;
             }
