@@ -1,4 +1,8 @@
 var GetElement = function (mapNameList) {
+    if (this.childrenMap === undefined) {
+        return undefined;
+    }
+
     if (typeof (mapNameList) === 'string') {
         mapNameList = mapNameList.split('.');
     }

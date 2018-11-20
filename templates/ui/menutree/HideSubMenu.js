@@ -1,12 +1,13 @@
 var HideSubMenu = function () {
-    if (this.subMenu !== undefined) {
-        if (this.easeOut) {
-            this.subMenu.scaleDownDestroy(this.easeOut);
-        } else {
-            this.subMenu.destroy();
-        }
+    if (this.childrenMap.subMenu === undefined) {
+        return this;
     }
-    this.subMenu = undefined;
+
+    var subMenu = this.childrenMap.subMenu;
+    this.childrenMap.subMenu = undefined;
+    this.remove(subMenu);
+    subMenu.hideSubMenu();
+    subMenu.hide();
     return this;
 }
 export default HideSubMenu;

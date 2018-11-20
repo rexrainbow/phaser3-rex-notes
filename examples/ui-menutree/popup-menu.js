@@ -85,51 +85,65 @@ class Demo extends Phaser.Scene {
             },
         ];
 
-        var scene = this;
-        var menuTree = this.rexUI.add.menuTree({
-            x: 50,
-            y: 50,
+        var scene = this,
+            menu = undefined;
+        this.input.on('pointerdown', function (pointer) {
+            var x = pointer.x,
+                y = pointer.y;
 
-            items: items,
-            createButtonCallback: function (item, i) {
-                return scene.rexUI.add.label({
-                    background: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 0, COLOR_PRIMARY),
-                    text: scene.add.text(0, 0, item.name, {
-                        fontSize: '20px'
-                    }),
-                    icon: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_DARK),
-                    space: {
-                        left: 10,
-                        right: 10,
-                        top: 10,
-                        bottom: 10,
-                        icon: 10
-                    }
-                })
-            },
-
-            easeIn: {
-                duration: 500,
-                orientation: 'y'
-            },
-
-            easeOut: {
-                duration: 100,
-                orientation: 'y'
+            if (menu === undefined) {
+                menu = createMenu(scene, x, y, items);
             }
-
-        });
-
-        menuTree
-            .on('button.over', function (button) {
-                button.getElement('background').setStrokeStyle(1, 0xffffff);
-            })
-            .on('button.out', function (button) {
-                button.getElement('background').setStrokeStyle();
-            });
+        }, this);
     }
 
     update() {}
+}
+
+var createMenu = function (scene, x, y, items) {
+    var menu = scene.rexUI.add.menuTree({
+        x: x,
+        y: y,
+
+        items: items,
+        createButtonCallback: function (item, i) {
+            return scene.rexUI.add.label({
+                background: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 0, COLOR_PRIMARY),
+                text: scene.add.text(0, 0, item.name, {
+                    fontSize: '20px'
+                }),
+                icon: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_DARK),
+                space: {
+                    left: 10,
+                    right: 10,
+                    top: 10,
+                    bottom: 10,
+                    icon: 10
+                }
+            })
+        },
+
+        easeIn: {
+            duration: 500,
+            orientation: 'y'
+        },
+
+        easeOut: {
+            duration: 100,
+            orientation: 'y'
+        }
+
+    });
+
+    menu
+        .on('button.over', function (button) {
+            button.getElement('background').setStrokeStyle(1, 0xffffff);
+        })
+        .on('button.out', function (button) {
+            button.getElement('background').setStrokeStyle();
+        });
+
+    return menu;
 }
 
 var config = {
