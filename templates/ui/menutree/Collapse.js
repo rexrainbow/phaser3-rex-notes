@@ -1,4 +1,4 @@
-var Hide = function () {
+var Collapse = function () {
     if (this.root.easeOut) {
         this.scaleDownDestroy(this.root.easeOut);
     } else {
@@ -6,4 +6,4 @@ var Hide = function () {
     }
     return this;
 }
-export default Hide;
+export default Collapse;

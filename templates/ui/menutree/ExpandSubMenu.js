@@ -1,7 +1,7 @@
 import MenuTree from './MenuTree.js';
 
-var ShowSubMenu = function (parentButton, items) {
-    this.hideSubMenu();
+var ExpandSubMenu = function (parentButton, items) {
+    this.collapseSubMenu();
     var subMenu = new MenuTree(this.scene, {
         items: items,
         orientation: this.orientation,
@@ -14,8 +14,8 @@ var ShowSubMenu = function (parentButton, items) {
         parent: parentButton
     });
     this.add(subMenu, null);
-    this.childrenMap.subMenu = subMenu;
+    this.childrenMap.subMenu = subMenu;    
     return this;
 }
 
-export default ShowSubMenu;
+export default ExpandSubMenu;

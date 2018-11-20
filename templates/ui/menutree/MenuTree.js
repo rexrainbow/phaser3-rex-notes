@@ -1,9 +1,9 @@
 import Buttons from '../buttons/Buttons.js';
 import CreateButtons from './CreateButtons.js';
 import MenuSetInteractive from './MenuSetInteractive.js';
-import ShowSubMenu from './ShowSubMenu.js';
-import Hide from './Hide.js';
-import HideSubMenu from './HideSubMenu.js';
+import ExpandSubMenu from './ExpandSubMenu.js';
+import Collapse from './Collapse.js';
+import CollapseSubMenu from './CollapseSubMenu.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -27,6 +27,7 @@ class MenuTree extends Buttons {
         this.items = items;
         this.root = GetValue(config, 'root', this);
         if (this.root === this) {
+            this.expandEventName = GetValue(config, 'expandEvent', 'button.click');
             this.easeIn = GetValue(config, 'easeIn', undefined);
             this.easeOut = GetValue(config, 'easeOut', undefined);
             this.bounds = GetValue(config, 'bounds', undefined);
@@ -69,9 +70,9 @@ class MenuTree extends Buttons {
 }
 
 var methods = {
-    showSubMenu: ShowSubMenu,
-    hide: Hide,
-    hideSubMenu: HideSubMenu,
+    expandSubMenu: ExpandSubMenu,
+    collapse: Collapse,
+    collapseSubMenu: CollapseSubMenu,
 }
 
 Object.assign(

@@ -1,16 +1,18 @@
 var MenuSetInteractive = function (menu) {
     menu
-        .on('button.click', function (button, index) {
+        // Expand sub event
+        .on(menu.root.expandEventName, function (button, index) {
             if (this.isPassedEvent) {
                 return;
             }
             var subItems = this.items[index].children;
             if (subItems) {
-                this.showSubMenu(button, subItems);
+                this.expandSubMenu(button, subItems);
             } else {
                 // this.root.on('button.click', button); // TODO
             }
         }, menu)
+        // Click any button
         .on('button.click', function (button, index) {
             // Pass event to root menu object
             if (this !== this.root) {
@@ -19,6 +21,7 @@ var MenuSetInteractive = function (menu) {
                 this.root.isPassedEvent = false;
             }
         }, menu)
+        //Pointer over any button
         .on('button.over', function (button, index) {
             // Pass event to root menu object
             if (this !== this.root) {
@@ -27,6 +30,7 @@ var MenuSetInteractive = function (menu) {
                 this.root.isPassedEvent = false;
             }
         }, menu)
+        //Pointer out any button
         .on('button.out', function (button, index) {
             // Pass event to root menu object
             if (this !== this.root) {

@@ -87,15 +87,16 @@ class Demo extends Phaser.Scene {
 
         var scene = this,
             menu = undefined;
+        this.print = this.add.text(0, 0, '');
         this.input.on('pointerdown', function (pointer) {
-            var x = pointer.x,
-                y = pointer.y;
-
             if (menu === undefined) {
-                menu = createMenu(scene, x, y, items);
+                menu = createMenu(scene, pointer.x, pointer.y, items, function (button) {
+                    scene.print.text += 'Click ' + button.text + '\n';
+                });
             } else if (!menu.isInTouching(pointer)) {
-                menu.hide();
+                menu.collapse();
                 menu = undefined;
+                scene.print.text = '';
             }
         }, this);
     }
@@ -103,7 +104,7 @@ class Demo extends Phaser.Scene {
     update() {}
 }
 
-var createMenu = function (scene, x, y, items) {
+var createMenu = function (scene, x, y, items, onClick) {
     var menu = scene.rexUI.add.menuTree({
         x: x,
         y: y,
@@ -134,8 +135,9 @@ var createMenu = function (scene, x, y, items) {
         easeOut: {
             duration: 100,
             orientation: 'y'
-        }
+        },
 
+        // expandEvent: 'button.over'
     });
 
     menu
@@ -144,7 +146,10 @@ var createMenu = function (scene, x, y, items) {
         })
         .on('button.out', function (button) {
             button.getElement('background').setStrokeStyle();
-        });
+        })
+        .on('button.click', function (button) {
+            onClick(button);
+        })
 
     return menu;
 }

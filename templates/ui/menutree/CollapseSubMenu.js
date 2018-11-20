@@ -1,4 +1,4 @@
-var HideSubMenu = function () {
+var CollapseSubMenu = function () {
     if (this.childrenMap.subMenu === undefined) {
         return this;
     }
@@ -6,8 +6,8 @@ var HideSubMenu = function () {
     var subMenu = this.childrenMap.subMenu;
     this.childrenMap.subMenu = undefined;
     this.remove(subMenu);
-    subMenu.hideSubMenu();
-    subMenu.hide();
+    subMenu.collapseSubMenu();
+    subMenu.collapse();
     return this;
 }
-export default HideSubMenu;
+export default CollapseSubMenu;

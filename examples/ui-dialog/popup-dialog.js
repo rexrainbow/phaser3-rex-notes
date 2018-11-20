@@ -20,14 +20,16 @@ class Demo extends Phaser.Scene {
                 y = pointer.y;
 
             if (dialog === undefined) {
-                // Click 0
                 dialog = createDialog(this, x, y, function (color) {
                     scene.rexUI.add.roundRectangle(x, y, 0, 0, 20, color)
                     scene.print.text = 'Add object at (' + x + ',' + y + ')';
+                    dialog.scaleDownDestroy(100);
+                    dialog.state = -1;
                 });
                 scene.print.text = 'Click (' + x + ',' + y + ')';
-            } else {
-                // Click 1
+            } else if (dialog.state === -1) {
+                dialog = undefined;
+            } else if (!dialog.isInTouching(pointer)) {
                 dialog.scaleDownDestroy(100);
                 dialog = undefined;
             }
