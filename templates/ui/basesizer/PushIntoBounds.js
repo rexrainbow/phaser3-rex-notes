@@ -1,8 +1,8 @@
+import GetDefaultBounds from '../utils/GetDefaultBounds.js';
+
 var PushIntoBounds = function (bounds) {
     if (bounds === undefined) {
-        var gameConfig = this.scene.sys.game.config;
-        defaultBounds.setTo(0, 0, gameConfig.width, gameConfig.height);
-        bounds = defaultBounds;
+        bounds = GetDefaultBounds(this.scene);
     }
 
     this.left = Math.max(this.left, bounds.left);
@@ -11,7 +11,5 @@ var PushIntoBounds = function (bounds) {
     this.bottom = Math.min(this.bottom, bounds.bottom);
     return this;
 }
-
-var defaultBounds = new Phaser.Geom.Rectangle();
 
 export default PushIntoBounds;

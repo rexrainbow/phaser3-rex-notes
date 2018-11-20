@@ -1,5 +1,6 @@
 import Buttons from '../buttons/Buttons.js';
 import CreateButtons from './CreateButtons.js';
+import GetDefaultBounds from './../utils/GetDefaultBounds.js';
 import MenuSetInteractive from './MenuSetInteractive.js';
 import ExpandSubMenu from './ExpandSubMenu.js';
 import Collapse from './Collapse.js';
@@ -31,6 +32,20 @@ class MenuTree extends Buttons {
             this.easeIn = GetValue(config, 'easeIn', undefined);
             this.easeOut = GetValue(config, 'easeOut', undefined);
             this.bounds = GetValue(config, 'bounds', undefined);
+            this.expandOrientation = GetValue(config, 'expandOrientation', undefined);
+            if (this.expandOrientation === undefined) {
+                var bounds = this.bounds;
+                if (bounds === undefined) {
+                    bounds = GetDefaultBounds(scene);
+                }
+                if (this.orientation === 0) { // x
+                    // Expand down(1)/up(3)
+                    this.expandOrientation = (this.y < bounds.centerY) ? 1 : 3;
+                } else {
+                    // Expand right(0)/left(2)
+                    this.expandOrientation = (this.x < bounds.centerX) ? 0 : 2;
+                }
+            }
             this.createButtonCallback = callback;
             this.createButtonCallbackScope = scope;
             this.isPassedEvent = false;
@@ -42,10 +57,19 @@ class MenuTree extends Buttons {
         // Set position to align parent
         var parent = GetValue(config, 'parent', undefined);
         if (parent) {
-            if (this.orientation === 0) { // x
-                this.alignLeft(parent.left).alignTop(parent.bottom);
-            } else { // y
-                this.alignTop(parent.top).alignLeft(parent.right);
+            switch (this.root.expandOrientation) {
+                case 0: //Expand right
+                    this.alignTop(parent.top).alignLeft(parent.right);
+                    break;
+                case 1: //Expand down
+                    this.alignLeft(parent.left).alignTop(parent.bottom);
+                    break;
+                case 2: //Expand left
+                    this.alignTop(parent.top).alignRight(parent.left);
+                    break;
+                case 3: //Expand up
+                    this.alignLeft(parent.left).alignBottom(parent.top);
+                    break;
             }
         }
         this.pushIntoBounds(this.root.bounds);
