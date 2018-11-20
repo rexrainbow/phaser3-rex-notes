@@ -105,7 +105,7 @@ class Demo extends Phaser.Scene {
 }
 
 var createMenu = function (scene, x, y, items, onClick) {
-    var menu = scene.rexUI.add.menuTree({
+    var menu = scene.rexUI.add.menu({
         x: x,
         y: y,
 

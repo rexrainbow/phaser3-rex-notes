@@ -1,6 +1,6 @@
 import Buttons from '../buttons/Buttons.js';
 import CreateButtons from './CreateButtons.js';
-import GetDefaultBounds from './../utils/GetDefaultBounds.js';
+import GetDefaultBounds from '../utils/GetDefaultBounds.js';
 import MenuSetInteractive from './MenuSetInteractive.js';
 import ExpandSubMenu from './ExpandSubMenu.js';
 import Collapse from './Collapse.js';
@@ -8,7 +8,7 @@ import CollapseSubMenu from './CollapseSubMenu.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class MenuTree extends Buttons {
+class Menu extends Buttons {
     constructor(scene, config) {
         if (config === undefined) {
             config = {};
@@ -24,7 +24,7 @@ class MenuTree extends Buttons {
         var scope = GetValue(config, 'createButtonCallbackScope', undefined);
         config.buttons = CreateButtons(scene, items, callback, scope);
         super(scene, config);
-        this.type = 'rexMenuTree';
+        this.type = 'rexMenu';
         this.items = items;
         this.root = GetValue(config, 'root', this);
         if (this.root === this) {
@@ -100,7 +100,7 @@ var methods = {
 }
 
 Object.assign(
-    MenuTree.prototype,
+    Menu.prototype,
     methods
 );
-export default MenuTree;
+export default Menu;

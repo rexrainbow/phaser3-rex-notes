@@ -1,8 +1,8 @@
-import MenuTree from './MenuTree.js';
+import Menu from './Menu.js';
 
 var ExpandSubMenu = function (parentButton, items) {
     this.collapseSubMenu();
-    var subMenu = new MenuTree(this.scene, {
+    var subMenu = new Menu(this.scene, {
         items: items,
         orientation: this.orientation,
         createButtonCallback: this.root.createButtonCallback,

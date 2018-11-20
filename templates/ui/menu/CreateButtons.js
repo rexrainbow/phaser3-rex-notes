@@ -1,5 +1,3 @@
-const GetValue = Phaser.Utils.Objects.GetValue;
-
 var CreateButtons = function (scene, items, callback, scope) {
     var item;
     var buttons = [],
