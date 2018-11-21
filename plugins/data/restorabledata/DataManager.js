@@ -80,7 +80,7 @@ class DataManager extends Base {
         return this;
     }
 
-    rollback(value) {
+    restore(value) {
         this.version = value;
         return this;
     }

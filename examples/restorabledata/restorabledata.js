@@ -25,22 +25,22 @@ class Demo extends Phaser.Scene {
             .commit() // version 3: {a:30, b:300}
             .set('b', 400)
 
-        var rollback = function (version) {
+        var restore = function (version) {
             print.text += 'Restore to version: ' + version + '\n';
             data
-                .rollback(version)
+                .restore(version)
                 .each(function (parent, key, data) {
                     print.text += key + ':' + data + '\n';
                 });
             print.text += '----\n';
         }
 
-        rollback(1);
-        rollback(2);
-        rollback(1);
-        rollback(3);
-        rollback(0);
-        rollback(2);
+        restore(1);
+        restore(2);
+        restore(1);
+        restore(3);
+        restore(0);
+        restore(2);
 
         print.text += 'Current version: ' + data.version + '\n';
         print.text += 'Last version: ' + data.lastVersion + '\n';
