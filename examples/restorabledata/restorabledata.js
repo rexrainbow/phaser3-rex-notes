@@ -1,4 +1,4 @@
-import VDataPlugin from 'rexPlugins/vdata-plugin.js';
+import RDataPlugin from 'rexPlugins/restorabledata-plugin.js';
 
 const Random = Phaser.Math.Between;
 
@@ -12,26 +12,27 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        var data = this.plugins.get('rexVData').add(this, new Phaser.Events.EventEmitter());
+        var print = this.add.text(0, 0, '');
+        var data = this.plugins.get('rexRData').add(this, new Phaser.Events.EventEmitter());
         data
             .set('a', 10)
             .set('b', 100)
-            .commit() // version: 1
+            .commit() // version 1: {a:10, b:100}
             .set('a', 20)
-            .commit() // version: 2
+            .commit() // version 2: {a:20, b:100}
             .set('a', 30)
             .set('b', 300)
-            .commit() // version: 3
+            .commit() // version 3: {a:30, b:300}
             .set('b', 400)
 
         var rollback = function (version) {
-            console.log('Rollback to version: ' + version);
+            print.text += 'Restore to version: ' + version + '\n';
             data
                 .rollback(version)
                 .each(function (parent, key, data) {
-                    console.log(key + ':' + data)
-                })
-            console.log('----');
+                    print.text += key + ':' + data + '\n';
+                });
+            print.text += '----\n';
         }
 
         rollback(1);
@@ -41,8 +42,8 @@ class Demo extends Phaser.Scene {
         rollback(0);
         rollback(2);
 
-        console.log('Current version: ' + data.version);
-        console.log('Last version: ' + data.lastVersion);
+        print.text += 'Current version: ' + data.version + '\n';
+        print.text += 'Last version: ' + data.lastVersion + '\n';
     }
 
     update() {}
@@ -56,8 +57,8 @@ var config = {
     scene: Demo,
     plugins: {
         global: [{
-            key: 'rexVData',
-            plugin: VDataPlugin,
+            key: 'rexRData',
+            plugin: RDataPlugin,
             start: true
         }]
     }

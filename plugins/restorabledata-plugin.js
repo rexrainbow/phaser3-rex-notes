@@ -1,4 +1,4 @@
-import DataManager from './vdata.js';
+import DataManager from './restorabledata.js';
 
 class DataManagerPlugin extends Phaser.Plugins.BasePlugin {
 

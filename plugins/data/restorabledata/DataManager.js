@@ -60,7 +60,7 @@ class DataManager extends Base {
         for (var key in merged) {
             value = merged[key];
             if (value === undefined) {
-                this.remove(key);
+                this.removeValue(key);
             } else {
                 this.setValue(key, value);
             }
