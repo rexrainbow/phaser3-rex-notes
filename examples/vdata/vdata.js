@@ -1,4 +1,4 @@
-import DataManager from 'rexPlugins/data/vdata/DataManager.js';
+import VDataPlugin from 'rexPlugins/vdata-plugin.js';
 
 const Random = Phaser.Math.Between;
 
@@ -12,7 +12,7 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        var data = new DataManager(this, new Phaser.Events.EventEmitter());
+        var data = this.plugins.get('rexVData').add(this, new Phaser.Events.EventEmitter());
         data
             .set('a', 10)
             .set('b', 100)
@@ -53,7 +53,14 @@ var config = {
     parent: 'phaser-example',
     width: 800,
     height: 600,
-    scene: Demo
+    scene: Demo,
+    plugins: {
+        global: [{
+            key: 'rexVData',
+            plugin: VDataPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);
