@@ -23,10 +23,10 @@ class Hexagon {
     resetFromJSON(o) {
         this.setType(GetValue(o, 'staggeraxis', 1), GetValue(o, 'staggerindex', 1));
         this.setOriginPosition(GetValue(o, 'x', 0), GetValue(o, 'y', 0));
-        var size = GetValue(o, 'size', undefined);
-        if (size !== undefined) {
+        this.size = GetValue(o, 'size', undefined);
+        if (this.size !== undefined) {
             var hexagon = {
-                size: size,
+                size: this.size,
                 type: this.staggeraxis
             }
             var cellWidth = GetCellWidth(hexagon);

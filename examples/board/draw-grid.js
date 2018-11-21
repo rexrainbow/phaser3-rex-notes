@@ -50,7 +50,9 @@ var getHexagonGrid = function (scene) {
     var grid = scene.rexBoard.add.hexagonGrid({
         x: 100,
         y: 100,
-        size: 30,
+        // size: 30,
+        cellWidth: 72,
+        cellHeight: 72,
         staggeraxis: staggeraxis,
         staggerindex: staggerindex
     })

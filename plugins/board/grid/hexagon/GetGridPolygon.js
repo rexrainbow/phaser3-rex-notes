@@ -9,7 +9,15 @@ var GetGridPolygon = function (tileX, tileY, poly) {
         worldX = this.getWorldX(tileX, tileY);
         worldY = this.getWorldY(tileX, tileY);
     }
-    var size = (this.staggeraxis === 0) ? (this.width / 2) : (this.height / 2);
+
+    var size;
+    if (this.size !== undefined) {
+        size = this.size;
+    } else {
+        size = tmpSize;
+        size.width = this.width;
+        size.height = this.height;
+    }
     if (poly === undefined) {
         poly = new HexagonPolygon(worldX, worldY, size, this.staggeraxis);
     } else {
@@ -22,5 +30,6 @@ var GetGridPolygon = function (tileX, tileY, poly) {
 }
 
 var tmpPoly = new HexagonPolygon();
+var tmpSize = {};
 
 export default GetGridPolygon;

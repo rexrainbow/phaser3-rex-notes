@@ -16,11 +16,19 @@ var GetGridPoints = function (tileX, tileY, points) {
         worldX = this.getWorldX(tileX, tileY);
         worldY = this.getWorldY(tileX, tileY);
     }
-    var size = (this.staggeraxis === 0) ? (this.width / 2) : (this.height / 2);
+    var size;
+    if (this.size !== undefined) {
+        size = this.size;
+    } else {
+        size = tmpSize;
+        size.width = this.width;
+        size.height = this.height;
+    }
     SetPoints(worldX, worldY, size, this.staggeraxis, points);
     return points;
 }
 
 var tmpPoints = InitPoints(6);
+var tmpSize = {};
 
 export default GetGridPoints;

@@ -10,7 +10,7 @@ import MatchFactory from './board/match/MatchFactory.js';
 import PathFinderFactory from './board/pathfinder/PathFinderFactory.js';
 import MonopolyFactory from './board/monopoly/MonopolyFactory.js';
 
-import MiniBoardFactory from './board/miniBoard/MiniBoardFactory.js';
+import MiniBoardFactory from './board/miniboard/MiniBoardFactory.js';
 
 import HexagonMap from './board/hexagonmap/index.js';
 
