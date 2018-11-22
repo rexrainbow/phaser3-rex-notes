@@ -7,7 +7,7 @@ class DataManager extends Base {
     constructor(parent, eventEmitter, config) {
         super(parent, eventEmitter);
 
-        this.recordEnable = true;
+        this._recordEnable = true;
         this.resetFromJSON(config);
 
         this.events
@@ -22,17 +22,19 @@ class DataManager extends Base {
 
     resetFromJSON(o) {
         this._version = GetValue(o, 'version', 0);
-        this.changeList = GetValue(o, 'changeList', {});
-        this.repository = GetValue(o, 'repository', []);
+        this.versionAlias = GetValue(o, 'versionAlias', '');
+        this._changeList = GetValue(o, 'changeList', {});
+        this._repository = GetValue(o, 'repository', []);
+        this._versionAliases = GetValue(o, 'versionAliases', {});
 
         var data = GetValue(o, 'data', undefined);
         if (data) {
-            this.recordEnable = false;
+            this._recordEnable = false;
             this.set(data);
-            this.recordEnable = true;
+            this._recordEnable = true;
         } else {
             // Restore from version 0 to current version
-            var currentVersion = this._version;
+            var currentVersion = (this.versionAlias !== '') ? this.versionAlias : this._version;
             this._version = 0;
             this.restore(currentVersion);
         }
@@ -44,8 +46,10 @@ class DataManager extends Base {
         }
         var o = {
             version: this._version,
-            changeList: this.changeList,
-            repository: this.repository,
+            versionAlias: this.versionAlias,
+            changeList: this._changeList,
+            repository: this._repository,
+            versionAliases: this._versionAliases,
         };
         if (includeData) {
             o.data = this.list;
@@ -58,31 +62,49 @@ class DataManager extends Base {
     }
 
     set version(value) {
-        if (value === undefined) {
-            value = this._version;
+        var alias;
+        if (typeof (value) === 'string') {
+            alias = value;
+            value = this._versionAliases[value];
         }
-        value = Math.min(value, this.repository.length);
+        if (typeof (value) !== 'number') {
+            this.versionAlias = '';
+            return;
+        }
+
+        this.versionAlias = (alias) ? alias : '';
+        if (value === 0) {
+            this._recordEnable = false;
+            super.reset();
+            this._version = 0;
+            Clear(this._changeList);
+            this._recordEnable = true;
+            return;
+        }
+
+        value = Math.min(value, this._repository.length);
+
         var changeList, merged = {};
-        if (this._version < value) {
+        // Reverse current change
+        for (var key in this._changeList) {
+            merged[key] = this._changeList[key][1];
+            delete this._changeList[key];
+        }
+
+        if (this._version === value) {
+            // Do nothing
+        } else if (this._version < value) {
             // Forward
-            for (var key in this.changeList) {
-                merged[key] = this.changeList[key][0];
-                delete this.changeList[key];
-            }
             for (var i = this._version; i < value; i++) {
-                changeList = this.repository[i];
+                changeList = this._repository[i];
                 for (var key in changeList) {
                     merged[key] = changeList[key][0];
                 }
             }
         } else {
-            // Backward
-            for (var key in this.changeList) {
-                merged[key] = this.changeList[key][1];
-                delete this.changeList[key];
-            }
+            // Backward            
             for (var i = this._version - 1; i >= value; i--) {
-                changeList = this.repository[i];
+                changeList = this._repository[i];
                 for (var key in changeList) {
                     merged[key] = changeList[key][1];
                 }
@@ -91,7 +113,7 @@ class DataManager extends Base {
 
         this._version = value;
         var value;
-        this.recordEnable = false;
+        this._recordEnable = false;
         for (var key in merged) {
             value = merged[key];
             if (value === null) {
@@ -100,43 +122,71 @@ class DataManager extends Base {
                 this.setValue(key, value);
             }
         }
-        this.recordEnable = true;
+        this._recordEnable = true;
     }
 
     get lastVersion() {
-        return this.repository.length;
+        return this._repository.length;
     }
 
-    commit() {
-        this.repository.length = this._version;
-        this.repository.push(this.changeList);
-        this.changeList = {};
+    get versionAliases() {
+        var aliases = [];
+        for (var name in this._versionAliases) {
+            aliases.push(name);
+        }
+        return aliases;
+    }
+
+    commit(alias) {
+        this._repository.length = this._version;
+        for (var name in this._versionAliases) {
+            if (this._versionAliases[name] > this._version) {
+                delete this._versionAliases[name];
+            }
+        }
+
+        this._repository.push(this._changeList);
+        this._changeList = {};
         this._version++;
+
+        if (typeof (alias) === 'string') {
+            this.versionAlias = alias;
+            this._versionAliases[alias] = this._version;
+        }
         return this;
     }
 
-    restore(value) {
+    restore(value, restoreFromVersion0) {
+        if (value === undefined) {
+            value = (this.versionAlias !== '') ? this.versionAlias : this._version;
+        }
+        if (restoreFromVersion0 === undefined) {
+            restoreFromVersion0 = false;
+        }
+
+        if (restoreFromVersion0) {
+            this.version = 0;
+        }
         this.version = value;
         return this;
     }
 
     reset() {
-        super.reset();
-        this._version = 0;
-        Clear(this.changeList);
-        this.repository.length = 0;
+        this.version = 0;
+        this._repository.length = 0;
+        Clear(this._versionAliases);
         return this;
     }
 
     onValueChange(parent, key, value, previousValue) {
-        if (!this.recordEnable) {
+        if (!this._recordEnable) {
             return;
         }
 
-        if (this.changeList.hasOwnProperty(key)) {
-            this.changeList[key][0] = value;
+        if (this._changeList.hasOwnProperty(key)) {
+            this._changeList[key][0] = value;
         } else {
-            this.changeList[key] = [value, previousValue];
+            this._changeList[key] = [value, previousValue];
             // [newData, previousData]
         }
     }
