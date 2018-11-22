@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/ui-dialog/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/ui-menu/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Dialog - Notes of Phaser 3</title>
+        <title>Menue - Notes of Phaser 3</title>
       
     
     
@@ -128,7 +128,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Dialog
+                Menue
               </span>
             
           
@@ -1218,6 +1218,42 @@
           
           
 
+
+  <li class="md-nav__item">
+    <a href="../ui-dialog/" title="Dialog" class="md-nav__link">
+      Dialog
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ui-gridtable/" title="Grid table" class="md-nav__link">
+      Grid table
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ui-tabs/" title="Tabs" class="md-nav__link">
+      Tabs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
   
 
 
@@ -1227,11 +1263,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        Dialog
+        Menue
       </label>
     
-    <a href="./" title="Dialog" class="md-nav__link md-nav__link--active">
-      Dialog
+    <a href="./" title="Menue" class="md-nav__link md-nav__link--active">
+      Menue
     </a>
     
       
@@ -1272,8 +1308,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-dialog-object" title="Add dialog object" class="md-nav__link">
-    Add dialog object
+  <a href="#add-grid-table-object" title="Add grid table object" class="md-nav__link">
+    Add grid table object
   </a>
   
 </li>
@@ -1299,13 +1335,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#get-element" title="Get element" class="md-nav__link">
-    Get element
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -1319,42 +1348,6 @@
   
 </nav>
     
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../ui-gridtable/" title="Grid table" class="md-nav__link">
-      Grid table
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../ui-tabs/" title="Tabs" class="md-nav__link">
-      Tabs
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../ui-menu/" title="Menue" class="md-nav__link">
-      Menue
-    </a>
   </li>
 
         
@@ -3485,8 +3478,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-dialog-object" title="Add dialog object" class="md-nav__link">
-    Add dialog object
+  <a href="#add-grid-table-object" title="Add grid table object" class="md-nav__link">
+    Add grid table object
   </a>
   
 </li>
@@ -3512,13 +3505,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#get-element" title="Get element" class="md-nav__link">
-    Get element
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -3540,22 +3526,22 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/ui-dialog.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/ui-menu.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Dialog</h1>
+                  <h1>Menue</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>A container with a title, content, buttons and background.</p>
+<p>A container with buttons and sub-menu.</p>
 <ul>
 <li>Author: Rex</li>
 <li>A kind of game object</li>
 </ul>
 <h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/ui/ui-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexuiplugin.min.js">minify</a></p>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/ui/dialog/Dialog.js">Class</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/ui/menu/Menu.js">Class</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-dialog">Sample code</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-menu">Sample code</a></p>
 <h3 id="install-scene-plugin">Install scene plugin<a class="headerlink" href="#install-scene-plugin" title="Permanent link">&para;</a></h3>
 <p>Install plugin in <a href="../game/#configuration">configuration of game</a></p>
 <div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">UIPlugin</span> <span class="nx">from</span> <span class="s1">&#39;rexTemplates/ui/ui-plugin.js&#39;</span><span class="p">;</span>
@@ -3576,76 +3562,89 @@
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </pre></div>
 
-<h3 id="add-dialog-object">Add dialog object<a class="headerlink" href="#add-dialog-object" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">dialog</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">dialog</span><span class="p">({</span>
+<h3 id="add-grid-table-object">Add grid table object<a class="headerlink" href="#add-grid-table-object" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">menu</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">menu</span><span class="p">({</span>
     <span class="c1">// Position</span>
     <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
 
-    <span class="c1">// Elements</span>
-    <span class="nx">background</span><span class="o">:</span> <span class="nx">backgroundGameObject</span><span class="p">,</span>
-    <span class="nx">title</span><span class="o">:</span> <span class="nx">titleGameObject</span><span class="p">,</span>
-    <span class="nx">content</span><span class="o">:</span> <span class="nx">contentGameObject</span><span class="p">,</span>
-    <span class="nx">description</span><span class="o">:</span> <span class="nx">descriptionGameObject</span><span class="p">,</span>
-    <span class="nx">choices</span><span class="o">:</span> <span class="p">[</span>
-        <span class="nx">buttonGameObject</span><span class="p">,</span>
-        <span class="nx">buttonGameObject</span><span class="p">,</span>
-        <span class="c1">// ...</span>
-    <span class="p">],</span>
-    <span class="nx">actionsAlign</span><span class="o">:</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span>
-    <span class="nx">actions</span><span class="o">:</span> <span class="p">[</span>
-        <span class="nx">buttonGameObject</span><span class="p">,</span>
-        <span class="nx">buttonGameObject</span><span class="p">,</span>
-        <span class="c1">// ...</span>
-    <span class="p">],</span>
-
-    <span class="c1">// Space</span>
-    <span class="nx">space</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">left</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">right</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">top</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">bottom</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">title</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">content</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">button</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="c1">// orientation: 1,</span>
+    <span class="nx">items</span><span class="o">:</span> <span class="p">[],</span>
+    <span class="nx">createButtonCallback</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">item</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">scene</span> <span class="o">=</span> <span class="nx">item</span><span class="p">.</span><span class="nx">scene</span><span class="p">;</span>
+        <span class="c1">// container = ...</span>
+        <span class="k">return</span> <span class="nx">container</span><span class="p">;</span>
     <span class="p">},</span>
+    <span class="nx">createButtonCallbackScope</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
 
-    <span class="nx">width</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">height</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">easeIn</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">duration</span><span class="o">:</span> <span class="mi">500</span><span class="p">,</span>
+        <span class="nx">orientation</span><span class="o">:</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span>
+        <span class="c1">// ease: &#39;Cubic&#39;</span>
+    <span class="p">}</span>
+    <span class="nx">easeOut</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">duration</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
+        <span class="nx">orientation</span><span class="o">:</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span>
+        <span class="c1">// ease: &#39;Linear&#39;</span>
+    <span class="p">},</span>
+    <span class="c1">// expandEvent: &#39;button.click&#39;</span>
     <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
 <span class="p">});</span>
 </pre></div>
 
 <ul>
-<li><code>x</code>, <code>y</code> : Position of this dialog object, it is valid when this dialog is the top object.</li>
-<li><code>background</code> : Game object of background, optional. This background game object will be resized to fit the size of dialog.</li>
-<li><code>title</code> : Game object of title, optional.</li>
-<li><code>content</code> : Game object of content, optional.</li>
-<li><code>description</code> : Game object of description, optional.</li>
-<li><code>choices</code> : Array of Game objects for choice-buttons group which arranged from top to bottom, optional.</li>
-<li><code>actions</code> : Array of Game objects for action-buttons group which arranged from left to right, optional.</li>
-<li><code>actionsAlign</code> : Alignment of action-buttons<ul>
-<li><code>'center'</code></li>
-<li><code>'left'</code></li>
-<li><code>'right'</code></li>
+<li><code>x</code>, <code>y</code> : Position of this menu object, it is valid when this menu is the top object.</li>
+<li><code>orientation</code> : Main orientation of the menu, default is <code>1</code> (top to bottom)<ul>
+<li><code>'left-to-right'</code>, <code>'horizontal'</code>,<code>'h'</code>, <code>'x'</code>, or <code>0</code> : Arrange buttons from left ot right.</li>
+<li><code>'top-to-bottom'</code>, <code>'vertical'</code>,<code>'v'</code>, <code>'y'</code>, or <code>1</code> : Arrange buttons from top to bottom.</li>
 </ul>
 </li>
-<li><code>space</code> : Pads spaces<ul>
-<li><code>space.left</code>, <code>space.right</code>, <code>space.top</code>, <code>space.bottom</code> : Space of bounds</li>
-<li><code>space.title</code> : Space between title game object and below game object.</li>
-<li><code>space.content</code> : Space between content game object and below game object.</li>
-<li><code>space.description</code> : Space between description game object and below game object.</li>
-<li><code>space.choices</code> : Space between last choice-button and below game object.</li>
-<li><code>space.choice</code> : Space between 2 choice-button game objects.</li>
-<li><code>space.action</code> : Space between 2 action-button game objects.</li>
+<li><code>items</code> : Array of item data for each button. Each item has<ul>
+<li><code>children</code> : An array of items for sub-menu, optional.</li>
+<li>Other custom properties</li>
 </ul>
 </li>
-<li><code>name</code> : Set name of this dialog.</li>
-<li><code>width</code>, <code>height</code> : Minimum width, minimum height.</li>
+<li><code>createCellContainerCallback</code> : Callback to return container object of each item.<ul>
+<li>Properties of <code>item</code> parameter<ul>
+<li><code>item.scene</code> : Scene of this menu object.</li>
+<li>Other custom properties</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>easeIn</code> : Scale up size when extend menu.<ul>
+<li><code>easeIn.duration</code> : Duration of ease, in milliseconds.</li>
+<li><code>easeIn.orientation</code> :<ul>
+<li><code>'y'</code> : Scale up height.</li>
+<li><code>'x'</code> : Scale up width.</li>
+<li>Others: Scale up width and height.</li>
+</ul>
+</li>
+<li><code>easeIn.ease</code> : Ease function, default is <code>'Cubic'</code></li>
+</ul>
+</li>
+<li><code>easeOut</code> : Scale down size when extend menu.<ul>
+<li><code>easeOut.duration</code> : Duration of ease, in milliseconds.</li>
+<li><code>easeOut.orientation</code> :<ul>
+<li><code>'y'</code> : Scale up height.</li>
+<li><code>'x'</code> : Scale up width.</li>
+<li>Others: Scale up width and height.</li>
+</ul>
+</li>
+<li><code>easeOut.ease</code> : Ease function, default is <code>'Linear'</code></li>
+</ul>
+</li>
+<li><code>expandEvent</code> : Event name of expanding sub-menu.<ul>
+<li><code>'button.click'</code> : Default value</li>
+<li><code>'button.over'</code></li>
+</ul>
+</li>
+<li><code>name</code> : Set name of this menu.</li>
 </ul>
 <h3 id="layout-children">Layout children<a class="headerlink" href="#layout-children" title="Permanent link">&para;</a></h3>
-<p>Arrange position of all elements.</p>
-<div class="codehilite"><pre><span></span><span class="nx">dialog</span><span class="p">.</span><span class="nx">layout</span><span class="p">();</span>
+<p>Arrange position of all children. 
+<em>This will be called when menu object created, user does not need call it again generally.</em></p>
+<div class="codehilite"><pre><span></span><span class="nx">gridSizer</span><span class="p">.</span><span class="nx">layout</span><span class="p">();</span>
 </pre></div>
 
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
@@ -3653,59 +3652,32 @@
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Click button
-    <div class="codehilite"><pre><span></span><span class="nx">dialog</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;button.click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">groupName</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
+    <div class="codehilite"><pre><span></span><span class="nx">menu</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;button.click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </pre></div><ul>
-<li><code>button</code> : Triggered button game object.</li>
-<li><code>groupName</code> : <code>'choices'</code> or <code>'actions'</code>.</li>
-<li><code>index</code> : Index of triggered button game object.</li>
+<li><code>button</code> : Game object of triggered button.</li>
+<li><code>index</code> : Index of triggered button.</li>
 </ul>
 </li>
 <li>Pointer-over button
-    <div class="codehilite"><pre><span></span><span class="nx">dialog</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;button.over&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">groupName</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
+    <div class="codehilite"><pre><span></span><span class="nx">menu</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;button.over&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </pre></div><ul>
-<li><code>button</code> : Triggered button game object</li>
-<li><code>groupName</code> : <code>'choices'</code> or <code>'actions'</code>.</li>
-<li><code>index</code> : Index of triggered button game object</li>
+<li><code>button</code> : Game object of triggered button.</li>
+<li><code>index</code> : Index of triggered button.</li>
 </ul>
 </li>
 <li>Pointer-out button
-    <div class="codehilite"><pre><span></span><span class="nx">dialog</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;button.out&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">groupName</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
+    <div class="codehilite"><pre><span></span><span class="nx">menu</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;button.out&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">index</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </pre></div><ul>
-<li><code>button</code> : Triggered button game object.</li>
-<li><code>groupName</code> : <code>'choices'</code> or <code>'actions'</code>.</li>
-<li><code>index</code> : Index of triggered button game object.</li>
+<li><code>button</code> : Game object of triggered button.</li>
+<li><code>index</code> : Index of triggered button.</li>
 </ul>
 </li>
-</ul>
-<h3 id="get-element">Get element<a class="headerlink" href="#get-element" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Get element<ul>
-<li>Background game object
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">background</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;background&#39;</span><span class="p">);</span>
-</pre></div></li>
-<li>Title game object
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">title</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">);</span>
-</pre></div></li>
-<li>Content game object
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">content</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">);</span>
-</pre></div></li>
-<li>Button game object
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">button</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;choices[&#39;</span> <span class="o">+</span> <span class="nx">index</span> <span class="o">+</span> <span class="s1">&#39;]&#39;</span><span class="p">);</span>
-</pre></div>
-    or
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">button</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;actions[&#39;</span> <span class="o">+</span> <span class="nx">index</span> <span class="o">+</span> <span class="s1">&#39;]&#39;</span><span class="p">);</span>
-</pre></div></li>
-</ul>
-</li>
-<li>Get by name
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;#&#39;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">);</span>
-</pre></div></li>
 </ul>
                 
                   
@@ -3727,7 +3699,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../ui-label/" title="Label" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../ui-tabs/" title="Tabs" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -3736,19 +3708,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Label
+                Tabs
               </span>
             </div>
           </a>
         
         
-          <a href="../ui-gridtable/" title="Grid table" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../zone/" title="Zone" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Grid table
+                Zone
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

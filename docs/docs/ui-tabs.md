@@ -186,14 +186,3 @@ tabs.emitButtonClick(groupName, index);
     ```javascript
     var gameObject = tabs.getElement('#' + name);
     ```
-
-### Draw bounds
-
-Draw all bounds of elements.
-
-```javascript
-tabs.drawBounds(graphics, color);
-```
-
-- `graphics` : [Graphics game object](graphics.md)
-- `color` : Default value is `0xffffff`

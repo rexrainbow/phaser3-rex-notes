@@ -171,14 +171,3 @@ See [sizer object](ui-sizer.md)
     ```javascript
     var gameObject = dialog.getElement('#' + name);
     ```
-
-### Draw bounds
-
-Draw all bounds of elements.
-
-```javascript
-dialog.drawBounds(graphics, color);
-```
-
-- `graphics` : [Graphics game object](graphics.md)
-- `color` : Default value is `0xffffff`

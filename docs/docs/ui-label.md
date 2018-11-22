@@ -119,14 +119,3 @@ label.layout();
 ### Other properties
 
 See [sizer object](ui-sizer.md)
-
-### Draw bounds
-
-Draw all bounds of elements.
-
-```javascript
-label.drawBounds(graphics, color);
-```
-
-- `graphics` : [Graphics game object](graphics.md)
-- `color` : Default value is `0xffffff`

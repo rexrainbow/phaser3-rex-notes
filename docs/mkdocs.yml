@@ -68,6 +68,7 @@ nav:
             - Dialog: ui-dialog.md
             - Grid table: ui-gridtable.md
             - Tabs: ui-tabs.md
+            - Menue: ui-menu.md
     - Zone: zone.md
     - DOM element:
         - DOM element: domelement.md
