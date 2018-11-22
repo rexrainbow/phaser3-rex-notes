@@ -1,16 +1,56 @@
+import Clear from 'rexPlugins/utils/object/Clear.js';
+
 const Base = Phaser.Data.DataManager;
+const GetValue = Phaser.Utils.Objects.GetValue;
 
 class DataManager extends Base {
-    constructor(parent, eventEmitter) {
+    constructor(parent, eventEmitter, config) {
         super(parent, eventEmitter);
 
-        this._version = 0;
-        this.changeList = {};
-        this.repository = [];
-        this.rollbackFlag = false;
+        this.recordEnable = true;
+        this.resetFromJSON(config);
 
-        this.events.on('setdata', this.onValueChange, this);
-        this.events.on('changedata', this.onValueChange, this);
+        this.events
+            .on('changedata', this.onValueChange, this)
+            .on('setdata', function (parent, key, value) {
+                this.onValueChange(parent, key, value, null);
+            }, this)
+            .on('removedata', function (parent, key, value) {
+                this.onValueChange(parent, key, null, value);
+            }, this);
+    }
+
+    resetFromJSON(o) {
+        this._version = GetValue(o, 'version', 0);
+        this.changeList = GetValue(o, 'changeList', {});
+        this.repository = GetValue(o, 'repository', []);
+
+        var data = GetValue(o, 'data', undefined);
+        if (data) {
+            this.recordEnable = false;
+            this.set(data);
+            this.recordEnable = true;
+        } else {
+            // Restore from version 0 to current version
+            var currentVersion = this._version;
+            this._version = 0;
+            this.restore(currentVersion);
+        }
+    }
+
+    toJSON(includeData) {
+        if (includeData === undefined) {
+            includeData = false;
+        }
+        var o = {
+            version: this._version,
+            changeList: this.changeList,
+            repository: this.repository,
+        };
+        if (includeData) {
+            o.data = this.list;
+        }
+        return o;
     }
 
     get version() {
@@ -18,15 +58,10 @@ class DataManager extends Base {
     }
 
     set version(value) {
-        if (this.repository.length === 0) {
-            return;
+        if (value === undefined) {
+            value = this._version;
         }
-
         value = Math.min(value, this.repository.length);
-        if (this._version === value) {
-            return;
-        }
-
         var changeList, merged = {};
         if (this._version < value) {
             // Forward
@@ -56,16 +91,16 @@ class DataManager extends Base {
 
         this._version = value;
         var value;
-        this.rollbackFlag = true;
+        this.recordEnable = false;
         for (var key in merged) {
             value = merged[key];
-            if (value === undefined) {
+            if (value === null) {
                 this.removeValue(key);
             } else {
                 this.setValue(key, value);
             }
         }
-        this.rollbackFlag = false;
+        this.recordEnable = true;
     }
 
     get lastVersion() {
@@ -85,8 +120,16 @@ class DataManager extends Base {
         return this;
     }
 
+    reset() {
+        super.reset();
+        this._version = 0;
+        Clear(this.changeList);
+        this.repository.length = 0;
+        return this;
+    }
+
     onValueChange(parent, key, value, previousValue) {
-        if (this.rollbackFlag) {
+        if (!this.recordEnable) {
             return;
         }
 

@@ -65,6 +65,7 @@ import LifeTime from './lifetime.js';
 // data structure
 import CSVToArray from './csvtoarray.js';
 import CSVToHashTable from './csvtohashtable.js';
+import RestorableData from './restorabledata.js';
 
 // math
 import Gashapon from './gashapon.js';
@@ -156,6 +157,7 @@ export {
     // data structure
     CSVToArray,
     CSVToHashTable,
+    RestorableData,
 
     // math
     Gashapon,
