@@ -15,15 +15,16 @@ class PageTypingText extends Phaser.GameObjects.Text {
 
     start(text, speed) {
         this.page.setText(text);
-        this.typeNextPage(speed);
+        if (speed !== undefined) {
+            this.typing.setTypeSpeed(speed);
+        }
+        this.typeNextPage();
     }
 
-    typeNextPage(speed) {
-        //console.log('curText:\n' + this.text);
-        if (!this.page.isLastPage) {            
+    typeNextPage() {
+        if (!this.page.isLastPage) {
             var txt = this.page.getNextPage();
-            //console.log('nextText:\n' + txt.join('\n'));
-            this.typing.start(txt, speed);
+            this.typing.start(txt);
         } else {
             this.emit('complete');
         }

@@ -18,14 +18,16 @@ class PageTypingText extends BaseTextClass {
 
     start(text, speed) {
         this.page.setText(text);
-        this.typeNextPage(speed);
+        if (speed !== undefined) {
+            this.typing.setTypeSpeed(speed);
+        }
+        this.typeNextPage();
     }
 
-    typeNextPage(speed) {
-        //console.log('curText:\n' + this.text);
+    typeNextPage() {
         if (!this.page.isLastPage) {
             var txt = this.page.getNextPage();
-            this.typing.start(txt, speed);
+            this.typing.start(txt);
         } else {
             this.emit('complete');
         }

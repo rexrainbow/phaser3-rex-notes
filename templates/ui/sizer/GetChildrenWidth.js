@@ -43,7 +43,11 @@ var GetChildrenWidth = function (minimumMode) {
                 continue;
             }
 
-            childWidth = (child.isRexSizer) ? child.childrenWidth : child.width;
+            if (child.rexSizer.proportion === -1) { // Background
+                childWidth = 0;
+            } else {
+                childWidth = (child.isRexSizer) ? child.childrenWidth : child.width;
+            }
             padding = child.rexSizer.padding;
             childWidth += (padding.left + padding.right);
             result = Math.max(childWidth, result);

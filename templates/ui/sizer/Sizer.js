@@ -96,6 +96,7 @@ class Sizer extends BaseSizer {
         }
 
         var config = this.getSizerConfig(gameObject);
+        config.parent = this;
         config.proportion = proportion;
         config.align = align;
         config.padding = ParsePaddingConfig(paddingConfig);
@@ -110,6 +111,8 @@ class Sizer extends BaseSizer {
     }
 
     remove(gameObject) {
+        var config = this.getSizerConfig(gameObject);
+        config.parent = undefined;
         RemoveItem(this.sizerChildren, gameObject);
         super.remove(gameObject);
         return this;

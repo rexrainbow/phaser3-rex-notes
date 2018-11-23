@@ -1,4 +1,5 @@
 import ContainerLite from 'rexPlugins/gameobjects/containerlite/ContainerLite.js';
+import GetSizerConfig from '../utils/GetSizerConfig.js';
 import PushIntoBounds from './PushIntoBounds.js';
 import DrawBounds from '../utils/DrawBounds.js';
 import GetElement from './GetElement.js';
@@ -7,6 +8,7 @@ import ScaleDownDestroy from './ScaleDownDestroy.js';
 import FadeIn from './FadeIn.js';
 import FadeOutDestroy from './FadeOutDestroy.js';
 import IsInTouching from './IsInTouching.js';
+import GetTopmostSizer from '../utils/GetTopmostSizer.js';
 
 const Container = ContainerLite;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -35,13 +37,6 @@ class Base extends Container {
         }
         this.minHeight = minHeight;
         return this;
-    }
-
-    getSizerConfig(gameObject) {
-        if (!gameObject.hasOwnProperty('rexSizer')) {
-            gameObject.rexSizer = {};
-        }
-        return gameObject.rexSizer;
     }
 
     get childrenWidth() {
@@ -112,6 +107,7 @@ class Base extends Container {
 }
 
 var methods = {
+    getSizerConfig: GetSizerConfig,
     pushIntoBounds: PushIntoBounds,
     drawBounds: DrawBounds,
     getElement: GetElement,
@@ -120,6 +116,7 @@ var methods = {
     fadeIn: FadeIn,
     fadeOutDestroy: FadeOutDestroy,
     isInTouching: IsInTouching,
+    getTopmostSizer: GetTopmostSizer,
 }
 
 Object.assign(

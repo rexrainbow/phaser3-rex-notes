@@ -11,7 +11,6 @@ class Label extends Sizer {
         this.type = 'rexLabel';
 
         // Add elements
-        // Elements
         var background = GetValue(config, 'background', undefined);
         var icon = GetValue(config, 'icon', undefined);
         var iconMask = GetValue(config, 'iconMask', undefined);

@@ -89,6 +89,7 @@ class GridSizer extends BaseSizer {
         }
 
         var config = this.getSizerConfig(gameObject);
+        config.parent = this;
         // config.proportion = 0;
         config.align = align;
         config.padding = ParsePaddingConfig(paddingConfig);
@@ -104,6 +105,7 @@ class GridSizer extends BaseSizer {
         }
 
         var config = this.getSizerConfig(gameObject);
+        config.parent = this;
         // config.proportion = 0;
         config.align = ALIGN_CENTER;
         config.padding = ParsePaddingConfig(paddingConfig);
@@ -114,6 +116,8 @@ class GridSizer extends BaseSizer {
     }
 
     remove(gameObject) {
+        var config = this.getSizerConfig(gameObject);
+        config.parent = undefined;
         RemoveItem(this.gridChildren, gameObject);
         RemoveItem(this.backgroundChildren, gameObject);
         super.remove(gameObject);

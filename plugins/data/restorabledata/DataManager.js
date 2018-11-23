@@ -22,10 +22,10 @@ class DataManager extends Base {
 
     resetFromJSON(o) {
         this._version = GetValue(o, 'version', 0);
-        this.versionAlias = GetValue(o, 'versionAlias', '');
-        this._changeList = GetValue(o, 'changeList', {});
+        this._versionAlias = GetValue(o, 'versionAlias', '');
         this._repository = GetValue(o, 'repository', []);
         this._versionAliases = GetValue(o, 'versionAliases', {});
+        var changeList = GetValue(o, 'changeList', {});
 
         var data = GetValue(o, 'data', undefined);
         if (data) {
@@ -34,10 +34,18 @@ class DataManager extends Base {
             this._recordEnable = true;
         } else {
             // Restore from version 0 to current version
-            var currentVersion = (this.versionAlias !== '') ? this.versionAlias : this._version;
+            var currentVersion = (this._versionAlias !== '') ? this._versionAlias : this._version;
             this._version = 0;
             this.restore(currentVersion);
+            // Restore change list
+            this._recordEnable = false;
+            for (var key in changeList) {
+                this.setValue(key, changeList[key][0]);
+            }
+            this._recordEnable = true;
         }
+
+        this._changeList = changeList;
     }
 
     toJSON(includeData) {
@@ -46,7 +54,7 @@ class DataManager extends Base {
         }
         var o = {
             version: this._version,
-            versionAlias: this.versionAlias,
+            versionAlias: this._versionAlias,
             changeList: this._changeList,
             repository: this._repository,
             versionAliases: this._versionAliases,
@@ -68,11 +76,11 @@ class DataManager extends Base {
             value = this._versionAliases[value];
         }
         if (typeof (value) !== 'number') {
-            this.versionAlias = '';
+            this._versionAlias = '';
             return;
         }
 
-        this.versionAlias = (alias) ? alias : '';
+        this._versionAlias = (alias) ? alias : '';
         if (value === 0) {
             this._recordEnable = false;
             super.reset();
@@ -125,6 +133,10 @@ class DataManager extends Base {
         this._recordEnable = true;
     }
 
+    get versionAlias() {
+        return this._versionAlias;
+    }
+
     get lastVersion() {
         return this._repository.length;
     }
@@ -150,7 +162,7 @@ class DataManager extends Base {
         this._version++;
 
         if (typeof (alias) === 'string') {
-            this.versionAlias = alias;
+            this._versionAlias = alias;
             this._versionAliases[alias] = this._version;
         }
         return this;
@@ -158,7 +170,7 @@ class DataManager extends Base {
 
     restore(value, restoreFromVersion0) {
         if (value === undefined) {
-            value = (this.versionAlias !== '') ? this.versionAlias : this._version;
+            value = (this._versionAlias !== '') ? this._versionAlias : this._version;
         }
         if (restoreFromVersion0 === undefined) {
             restoreFromVersion0 = false;
@@ -172,7 +184,7 @@ class DataManager extends Base {
     }
 
     reset() {
-        this.version = 0;
+        this.restore(0);
         this._repository.length = 0;
         Clear(this._versionAliases);
         return this;
