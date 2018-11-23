@@ -11,7 +11,7 @@ import TabsFactory from './tabs/TabsFactory.js';
 import SliderFactory from './slider/SliderFactory.js';
 import GridTableFactory from './gridtable/GridTableFactory.js';
 import MenuFactory from './menu/MenuFactory.js';
-// import TextBoxFactory from './textbox/TextboxFactory.js';
+import TextBoxFactory from './textbox/TextboxFactory.js';
 
 class UIPlugin extends Phaser.Plugins.ScenePlugin {
     constructor(scene, pluginManager) {
