@@ -20,8 +20,8 @@ class TextBox extends Label {
         this.page = new TextPage(text, GetValue(config, 'page', undefined));
         this.typing = new TextTyping(text, GetValue(config, 'type', undefined));
         this.typing
-            .on('complete', this.typeNextPage, this)
-            .on('type', this.onTextChange, this);
+            .on('complete', this.onPageEnd, this)
+            .on('type', this.onType, this);
 
         this.textWidth = text.width;
         this.textHeight = text.height;
@@ -33,6 +33,7 @@ class TextBox extends Label {
             this.typing.setTypeSpeed(speed);
         }
         this.typeNextPage();
+        return this;
     }
 
     typeNextPage() {
@@ -42,17 +43,42 @@ class TextBox extends Label {
         } else {
             this.emit('complete');
         }
+        return this;
     }
 
-    onTextChange() {
-        var text = this.childrenMap.text;
-        if ((this.textWidth === text.width) && (this.textHeight === text.height)) {
-            return;
-        }
-        this.textWidth = text.width;
-        this.textHeight = text.height;
-        this.getTopmostSizer().layout();
+    pause() {
+        this.typing.pause();
+        return this;
     }
+
+    resume() {
+        this.typing.resume();
+        return this;
+    }
+
+    stop(showAllText) {
+        this.typing.stop(showAllText);
+        return this;
+    }
+
+    get isTyping() {
+        return this.typing.isTyping;
+    }
+
+    onType() {
+        var text = this.childrenMap.text;
+        if ((this.textWidth !== text.width) || (this.textHeight !== text.height)) {
+            this.textWidth = text.width;
+            this.textHeight = text.height;
+            this.getTopmostSizer().layout();
+        }
+        this.emit('type');
+    }
+
+    onPageEnd() {
+        this.emit('pageend');
+    }
+
 }
 
 var createDefaultTextObject = function (scene) {

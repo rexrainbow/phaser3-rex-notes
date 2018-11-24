@@ -17,9 +17,7 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-
-
-        this.rexUI.add.textBox({
+        var textBox = this.rexUI.add.textBox({
                 x: 100,
                 y: 100,
 
@@ -37,7 +35,23 @@ class Demo extends Phaser.Scene {
                 }
             })
             .setOrigin(0)
-            .layout()
+            .layout();
+
+        textBox
+            .setInteractive()
+            .on('pointerdown', function () {
+                if (this.isTyping) {
+                    this.stop(true);
+                } else {
+                    this.typeNextPage();
+                }
+            }, textBox)
+            //.on('pageend', function () {
+            //}, textBox)
+            //.on('type', function () {
+            //})
+
+        textBox
             .start(content, 50);
     }
 
@@ -50,7 +64,7 @@ var getBuiltInText = function (scene) {
         wordWrap: {
             width: 500
         },
-        maxLines: 7
+        maxLines: 3
     })
 }
 
@@ -61,7 +75,7 @@ var getBBcodeText = function (scene) {
             mode: 'word',
             width: 500
         },
-        maxLines: 7
+        maxLines: 3
     })
 }
 

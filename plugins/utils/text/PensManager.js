@@ -213,7 +213,7 @@ class PensManager {
         for (var i = 0, len = this.pens.length; i < len; i++) {
             pen = this.pens[i];
             penEndIdx = pen.endIndex;
-            if (penEndIdx < start) {
+            if (penEndIdx <= start) {
                 continue;
             }
             pen = this.pens[i];
