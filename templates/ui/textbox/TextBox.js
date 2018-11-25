@@ -12,7 +12,6 @@ class TextBox extends Label {
             }
         }
 
-        // Create sizer
         super(scene, config);
         this.type = 'rexTextBox';
 
@@ -63,6 +62,22 @@ class TextBox extends Label {
 
     get isTyping() {
         return this.typing.isTyping;
+    }
+
+    get isLastPage() {
+        return this.page.isLastPage;
+    }
+
+    get isFirstPage() {
+        return this.page.isFirstPage;
+    }
+
+    get pageCount() {
+        return this.page.pageCount;
+    }
+
+    get pageIndex() {
+        return this.page.pageIdx;
     }
 
     onType() {

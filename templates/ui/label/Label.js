@@ -1,5 +1,4 @@
 import Sizer from '../sizer/Sizer.js';
-import AddClickCallback from './AddClickCallback.js';
 import DefaultMask from 'rexPlugins/utils/mask/DefaultMask.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -73,11 +72,6 @@ class Label extends Sizer {
             this.add(text, 0, 'center', padding);
         }
 
-        var clickCallback = GetValue(config, 'click', undefined);
-        if (clickCallback) {
-            this.addClickCallback(clickCallback, this);
-        }
-
         this.childrenMap = {};
         this.childrenMap.background = background;
         this.childrenMap.icon = icon;
@@ -141,13 +135,5 @@ class Label extends Sizer {
         return this;
     }
 }
-
-var methods = {
-    addClickCallback: AddClickCallback,
-}
-Object.assign(
-    Label.prototype,
-    methods
-);
 
 export default Label;
