@@ -1,6 +1,6 @@
 ## Introduction
 
-A container with a icon, (typing and paging) text, and background.
+A container with a icon, ([typing](texttyping.md) and [paging](textpage.md)) text, and background.
 
 - Author: Rex
 - A kind of game object
@@ -75,11 +75,11 @@ var textBox = scene.rexUI.add.textBox({
 - `text` : Game object of text.
     - Max lines and wrapped width
         - [Built-in text object](text.md) : `maxLines` and wrap width (`wordWrap.width`).
-        - [BBcode text object](bbocdetext.md) : `maxLines` and wrap width (`wrap.width`).
+        - [BBcode text object](bbcodetext.md) : `maxLines` and wrap width (`wrap.width`).
         - [Tag text object](tagtext.md) : `maxLines` and wrap width (`wrap.width`).
     - Fixed width and fixed height
         - [Built-in text object](text.md) : `fixedWidth` and `fixedHeight`, set to `0` to disable this feature.
-        - [BBcode text object](bbocdetext.md) : `fixedWidth` and `fixedHeight`, set to `0` to disable this feature.
+        - [BBcode text object](bbcodetext.md) : `fixedWidth` and `fixedHeight`, set to `0` to disable this feature.
         - [Tag text object](tagtext.md) : `fixedWidth` and `fixedHeight`, set to `0` to disable this feature.
 - `action` : Game object of action icon, optional.
 - `actionMask` : Set true to add a *circle* mask on action icon game object.
