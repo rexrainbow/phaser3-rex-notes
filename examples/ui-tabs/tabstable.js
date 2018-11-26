@@ -17,7 +17,7 @@ class Demo extends Phaser.Scene {
 
     create() {
         this.print = this.add.text(0, 0, '');
-        
+
         var db = createDataBase(400);
 
         var tabs = this.rexUI.add.tabs({
@@ -185,6 +185,7 @@ var createButton = function (scene, direction, text) {
     }
     return scene.rexUI.add.label({
         width: 50,
+        height: 40,
         background: scene.rexUI.add.roundRectangle(0, 0, 50, 50, radius, COLOR_DARK),
         text: scene.add.text(0, 0, text, {
             fontSize: '18pt'
