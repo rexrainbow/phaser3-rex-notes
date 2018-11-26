@@ -1316,6 +1316,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../ui-textbox/" title="Text box" class="md-nav__link">
+      Text box
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../ui-dialog/" title="Dialog" class="md-nav__link">
       Dialog
     </a>
@@ -3579,16 +3591,19 @@
 <h3 id="add-label-object">Add label object<a class="headerlink" href="#add-label-object" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">label</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">label</span><span class="p">({</span>
     <span class="nx">orientation</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">background</span><span class="o">:</span> <span class="nx">backgroundGameObject</span><span class="p">,</span>
     <span class="nx">icon</span><span class="o">:</span> <span class="nx">iconGameObject</span><span class="p">,</span>
     <span class="nx">iconMask</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="nx">text</span><span class="o">:</span> <span class="nx">textGameObject</span><span class="p">,</span>
-    <span class="nx">background</span><span class="o">:</span> <span class="nx">backgroundGameObject</span><span class="p">,</span>
+    <span class="nx">action</span><span class="o">:</span> <span class="nx">actionGameObject</span><span class="p">,</span>
+    <span class="nx">actionMask</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="nx">space</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">left</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">right</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">top</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">bottom</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">icon</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">text</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="p">},</span>
 
     <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
@@ -3605,13 +3620,16 @@
 <li><code>'top-to-bottom'</code>, <code>'vertical'</code>,<code>'v'</code>, <code>'y'</code>, or <code>1</code> : Put icon at top side, and text at bottom side.</li>
 </ul>
 </li>
+<li><code>background</code> : Game object of background, optional. This background game object will be resized to fit the size of label.</li>
 <li><code>icon</code> : Game object of icon, optional.</li>
 <li><code>iconMask</code> : Set true to add a <em>circle</em> mask on icon game object.</li>
 <li><code>text</code> : Game object of text, optional.</li>
-<li><code>background</code> : Game object of background, optional. This background game object will be resized to fit the size of label.</li>
+<li><code>action</code> : Game object of action icon, optional.</li>
+<li><code>actionMask</code> : Set true to add a <em>circle</em> mask on action icon game object.</li>
 <li><code>space</code> : Pads spaces<ul>
 <li><code>space.left</code>, <code>space.right</code>, <code>space.top</code>, <code>space.bottom</code> : Space of bounds</li>
 <li><code>space.icon</code> : Space between icon game object and text game object.</li>
+<li><code>space.text</code> : Space between text game object and action icon game object.</li>
 </ul>
 </li>
 <li><code>name</code> : Set name of this label.</li>
@@ -3634,6 +3652,9 @@
 </pre></div></li>
 <li>Text game object
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">icon</span> <span class="o">=</span> <span class="nx">label</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">);</span>
+</pre></div></li>
+<li>Action icon game object
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">action</span> <span class="o">=</span> <span class="nx">label</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;action&#39;</span><span class="p">);</span>
 </pre></div></li>
 </ul>
 </li>
@@ -3687,13 +3708,13 @@
           </a>
         
         
-          <a href="../ui-dialog/" title="Dialog" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../ui-textbox/" title="Text box" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Dialog
+                Text box
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

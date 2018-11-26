@@ -57,17 +57,17 @@ var typing = scene.plugins.get('rexTextTyping').add(txt, {
 
 Configuration
 
-- speed: typing speed in ms
-- typeMode :
-    - `'left-to-right'`, or `0` : typing characters from left to right.
-    - `'right-to-left'`, or `1` : typing characters from right to left.
-    - `'middle-to-sides'`, or `2` : typing characters from middle to sides, optional.
-    - `'sides-to-middle'`, or `3` : typing characters from sides to middle.
-- setTextCallback : callback befor set-text, to decorate display text.
+- `speed` : Typing speed in ms.
+- `typeMode` :
+    - `'left-to-right'`, or `0` : Typing characters from left to right.
+    - `'right-to-left'`, or `1` : Typing characters from right to left.
+    - `'middle-to-sides'`, or `2` : Typing characters from middle to sides.
+    - `'sides-to-middle'`, or `3` : Typing characters from sides to middle.
+- `setTextCallback` : Callback befor set-text, to decorate display text.
     ```javascript
     function(text, isLastChar, insertIdx) { return text; }
     ```
-- setTextCallbackScope : scope of setTextCallback function.
+- `setTextCallbackScope` : Scope of setTextCallback function.
 
 ### Start typing
 

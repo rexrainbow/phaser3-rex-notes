@@ -38,7 +38,7 @@ class TextPagePlugin {
         return {
             text: this.text,
             start: this.startLineIdx,
-            page: this.pageIdx,
+            page: this.pageIndex,
 
             pageCount: this.pageCount
 
@@ -80,11 +80,11 @@ class TextPagePlugin {
     }
 
     get isFirstPage() {
-        return (this.pageIdx <= 0);
+        return (this.pageIndex <= 0);
     }
 
     get isLastPage() {
-        return (this.pageIdx >= (this.pageCount - 1));
+        return (this.pageIndex >= (this.pageCount - 1));
     }
 
     setText(text, resetPageIdx) {
@@ -122,17 +122,17 @@ class TextPagePlugin {
 
     getPage(idx) {
         if (idx === undefined) {
-            idx = this.pageIdx;
+            idx = this.pageIndex;
         }
         return this.setPageIdx(idx).getLines();
     }
 
     getNextPage() {
-        return this.getPage(this.pageIdx + 1);
+        return this.getPage(this.pageIndex + 1);
     }
 
     getPreviousPage() {
-        return this.getPage(this.pageIdx - 1);
+        return this.getPage(this.pageIndex - 1);
     }
 
     showPage(idx) {
@@ -172,13 +172,13 @@ class TextPagePlugin {
     }
 
     resetPageIdx() {
-        this.pageIdx = -1;
+        this.pageIndex = -1;
     }
 
     setPageIdx(idx) {
         idx = Clamp(idx, 0, this.pageCount - 1);
-        this.pageIdx = idx;
-        this.setStartIdx(this.pageIdx * this.pageLineCount);
+        this.pageIndex = idx;
+        this.setStartIdx(this.pageIndex * this.pageLineCount);
         return this;
     }
 

@@ -92,7 +92,19 @@ var lines = page.getPreviousPage(); // get lines of previous page
 
 ### Other properties
 
-- Current page index : `page.pageIdx`
-- Number of pages : `page.pageCount`
-- Is last page: `page.isLastPage`
-- Is first page: `page.isFirstPage`
+- Is last page
+    ```javascript
+    var isLastPage = page.isLastPage;
+    ```
+- Is first page
+    ```javascript
+    var isLastPage = page.isFirstPage;
+    ```
+- Current page index
+    ```javascript
+    var pageIndex = page.pageIndex;
+    ```
+- Number of pages
+    ```javascript
+    var pageIndex = page.pageCount;
+    ```

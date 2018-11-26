@@ -77,7 +77,7 @@ class TextBox extends Label {
     }
 
     get pageIndex() {
-        return this.page.pageIdx;
+        return this.page.pageIndex;
     }
 
     onType() {

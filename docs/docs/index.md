@@ -59,6 +59,7 @@
 1. [UI-gird table](ui-gridtable.md): A container with a grid table, slider, and scroller.
 1. [UI-sizer](ui-sizer.md): Layout children game objects.
 1. [UI-tabs](ui-tabs.md): A container with 4 groups of buttons around a center panel.
+1. [UI-text box](ui-textbox): A container with a icon, (typing and paging) text, and background.
 1. [UI-menu](ui-menu.md): A container with buttons and sub-menu.
 1. [Virtual joystick](virtualjoystick.md): Simulate curosr keys according touch events.
 1. [Wait events](waitevents.md): Wait fired events or callbacks.
