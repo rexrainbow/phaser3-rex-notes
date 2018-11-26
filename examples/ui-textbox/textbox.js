@@ -53,7 +53,7 @@ var createTextBox = function (scene, x, y, config) {
             // text: getBuiltInText(scene, wrapWidth, fixedWidth, fixedHeight),
             text: getBBcodeText(scene, wrapWidth, fixedWidth, fixedHeight),
 
-            action: scene.add.image(0, 0, 'nextPage').setTint(COLOR_LIGHT),
+            action: scene.add.image(0, 0, 'nextPage').setTint(COLOR_LIGHT).setAlpha(0),
 
             space: {
                 left: 20,
@@ -70,6 +70,7 @@ var createTextBox = function (scene, x, y, config) {
     textBox
         .setInteractive()
         .on('pointerdown', function () {
+            this.getElement('action').setAlpha(0);
             if (this.isTyping) {
                 this.stop(true);
             } else {
@@ -77,8 +78,20 @@ var createTextBox = function (scene, x, y, config) {
             }
         }, textBox)
         .on('pageend', function () {
-            var alpha = (!this.isLastPage) ? 1 : 0.1;
-            this.getElement('action').setAlpha(alpha);
+            if (this.isLastPage) {
+                return;
+            }
+
+            var icon = this.getElement('action').setAlpha(1);
+            icon.y -= 30;
+            var tween = scene.tweens.add({
+                targets: icon,
+                y: '+=30', // '+=100'
+                ease: 'Bounce', // 'Cubic', 'Elastic', 'Bounce', 'Back'
+                duration: 500,
+                repeat: 0, // -1: infinity
+                yoyo: false
+            });
         }, textBox)
     //.on('type', function () {
     //})
