@@ -67,7 +67,7 @@ var Text = new Phaser.Class({
 
             this.autoRound = true;
 
-            this._text = '';
+            this._text = undefined;
 
             this.padding = {
                 left: 0,
@@ -343,13 +343,8 @@ var Text = new Phaser.Class({
         var w = boxWidth + padding.left + padding.right;
         var h = boxHeight + padding.top + padding.bottom;
 
-        if (style.fixedWidth === 0) {
-            this.width = w;
-        }
-
-        if (style.fixedHeight === 0) {
-            this.height = h;
-        }
+        this.width = (style.fixedWidth === 0) ? w : style.fixedWidth;
+        this.height = (style.fixedHeight === 0) ? h : style.fixedHeight;
 
         this.updateDisplayOrigin();
 

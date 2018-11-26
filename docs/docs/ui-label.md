@@ -43,16 +43,19 @@ var game = new Phaser.Game(config);
 ```javascript
 var label = scene.rexUI.add.label({
     orientation: 0,
+    background: backgroundGameObject,
     icon: iconGameObject,
     iconMask: false,
     text: textGameObject,
-    background: backgroundGameObject,
+    action: actionGameObject,
+    actionMask: false,
     space: {
         left: 0,
         right: 0,
         top: 0,
         bottom: 0,
         icon: 0,
+        text: 0,
     },
 
     x: 0,
@@ -66,13 +69,16 @@ var label = scene.rexUI.add.label({
 - `orientation` :
     - `'left-to-right'`, `'horizontal'`,`'h'`, `'x'`, or `0` : Put icon at left side, and text at right side.
     - `'top-to-bottom'`, `'vertical'`,`'v'`, `'y'`, or `1` : Put icon at top side, and text at bottom side.
+- `background` : Game object of background, optional. This background game object will be resized to fit the size of label.
 - `icon` : Game object of icon, optional.
 - `iconMask` : Set true to add a *circle* mask on icon game object.
 - `text` : Game object of text, optional.
-- `background` : Game object of background, optional. This background game object will be resized to fit the size of label.
+- `action` : Game object of action icon, optional.
+- `actionMask` : Set true to add a *circle* mask on action icon game object.
 - `space` : Pads spaces
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds
     - `space.icon` : Space between icon game object and text game object.
+    - `space.text` : Space between text game object and action icon game object.
 - `name` : Set name of this label.
 - `x`, `y` : Position of this label object, it is valid when this label is the top object.
 - `width`, `height` : Minimum width, minimum height.
@@ -99,6 +105,10 @@ label.layout();
     - Text game object
         ```javascript
         var icon = label.getElement('text');
+        ```
+    - Action icon game object
+        ```javascript
+        var action = label.getElement('action');
         ```
 - Get by name
     ```javascript
