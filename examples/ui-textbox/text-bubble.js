@@ -14,7 +14,9 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {}
+    preload() {
+        this.load.image('nextPage', 'assets/images/arrow-down-left.png');
+    }
 
     create() {
         var textBox = this.rexUI.add.textBox({
@@ -23,15 +25,21 @@ class Demo extends Phaser.Scene {
 
                 background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_PRIMARY)
                     .setStrokeStyle(2, COLOR_LIGHT),
+
+                icon: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_DARK),
+
                 // text: getBuiltInText(this),
                 text: getBBcodeText(this),
+
+                action: this.add.image(0, 0, 'nextPage').setTint(COLOR_LIGHT),
 
                 space: {
                     left: 20,
                     right: 20,
                     top: 20,
                     bottom: 20,
-                    icon: 10
+                    icon: 10,
+                    text: 10,
                 }
             })
             .setOrigin(0)
@@ -46,10 +54,12 @@ class Demo extends Phaser.Scene {
                     this.typeNextPage();
                 }
             }, textBox)
-            //.on('pageend', function () {
-            //}, textBox)
-            //.on('type', function () {
-            //})
+            .on('pageend', function () {
+                var alpha = (!this.isLastPage) ? 1 : 0.1;
+                this.getElement('action').setAlpha(alpha);
+            }, textBox)
+        //.on('type', function () {
+        //})
 
         textBox
             .start(content, 50);

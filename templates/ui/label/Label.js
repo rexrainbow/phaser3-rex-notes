@@ -14,12 +14,15 @@ class Label extends Sizer {
         var icon = GetValue(config, 'icon', undefined);
         var iconMask = GetValue(config, 'iconMask', undefined);
         var text = GetValue(config, 'text', undefined);
+        var action = GetValue(config, 'action', undefined);
+        var actionMask = GetValue(config, 'actionMask', undefined);
         // Space
         var paddingLeft = GetValue(config, 'space.left', 0);
         var paddingRight = GetValue(config, 'space.right', 0);
         var paddingTop = GetValue(config, 'space.top', 0);
         var paddingBottom = GetValue(config, 'space.bottom', 0);
         var iconSpace = GetValue(config, 'space.icon', 0);
+        var textSpace = GetValue(config, 'space.text', 0);
 
         if (background) {
             this.addBackground(background);
@@ -30,7 +33,7 @@ class Label extends Sizer {
             if (this.orientation === 0) {
                 padding = {
                     left: paddingLeft,
-                    right: (text) ? iconSpace : paddingRight,
+                    right: (text || action) ? iconSpace : paddingRight,
                     top: paddingTop,
                     bottom: paddingBottom
                 }
@@ -39,7 +42,7 @@ class Label extends Sizer {
                     left: paddingLeft,
                     right: paddingRight,
                     top: paddingTop,
-                    bottom: (text) ? iconSpace : paddingBottom
+                    bottom: (text || action) ? iconSpace : paddingBottom
                 }
             }
 
@@ -57,7 +60,7 @@ class Label extends Sizer {
             if (this.orientation === 0) {
                 padding = {
                     left: (icon) ? 0 : paddingLeft,
-                    right: paddingRight,
+                    right: (action) ? textSpace : paddingRight,
                     top: paddingTop,
                     bottom: paddingBottom
                 }
@@ -66,10 +69,36 @@ class Label extends Sizer {
                     left: paddingLeft,
                     right: paddingRight,
                     top: (icon) ? 0 : paddingTop,
-                    bottom: paddingBottom
+                    bottom: (action) ? textSpace : paddingBottom
                 }
             }
             this.add(text, 0, 'center', padding);
+        }
+
+        if (action) {
+            var padding;
+            if (this.orientation === 0) {
+                padding = {
+                    left: (icon || text) ? 0 : paddingLeft,
+                    right: paddingRight,
+                    top: paddingTop,
+                    bottom: paddingBottom
+                }
+            } else {
+                padding = {
+                    left: paddingLeft,
+                    right: paddingRight,
+                    top: (icon || text) ? 0 : paddingTop,
+                    bottom: paddingBottom
+                }
+            }
+            this.add(action, 0, 'center', padding);
+
+            if (actionMask) {
+                actionMask = new DefaultMask(action, 1); // Circle mask
+                icon.setMask(actionMask.createGeometryMask());
+                this.add(actionMask, null);
+            }
         }
 
         this.childrenMap = {};
@@ -77,6 +106,8 @@ class Label extends Sizer {
         this.childrenMap.icon = icon;
         this.childrenMap.iconMask = iconMask;
         this.childrenMap.text = text;
+        this.childrenMap.action = action;
+        this.childrenMap.actionMask = actionMask;
     }
 
     get text() {
@@ -122,6 +153,12 @@ class Label extends Sizer {
             iconMask.setPosition();
             this.resetChildState(iconMask);
         }
+        // Pin action-mask to action game object
+        var actionMask = this.childrenMap.actionMask;
+        if (actionMask) {
+            actionMask.setPosition();
+            this.resetChildState(actionMask);
+        }
         return this;
     }
 
@@ -131,6 +168,11 @@ class Label extends Sizer {
         var iconMask = this.childrenMap.iconMask;
         if (iconMask) {
             iconMask.resize();
+        }
+        // Resize action-mask to icon game object
+        var actionMask = this.childrenMap.actionMask;
+        if (actionMask) {
+            actionMask.resize();
         }
         return this;
     }
