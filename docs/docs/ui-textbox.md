@@ -1,6 +1,6 @@
 ## Introduction
 
-A container with a icon, ([typing](texttyping.md) and [paging](textpage.md)) text, and background.
+A container with an icon, ([typing](texttyping.md) and [paging](textpage.md)) text, and background.
 
 - Author: Rex
 - A kind of game object

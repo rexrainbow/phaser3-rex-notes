@@ -53,13 +53,13 @@
 1. [TCRP.Player](tcrp-player.md): Run commands on time.
 1. [TCRP.Recorder](tcrp-recoder.md): Store commands with time.
 1. [Typing](texttyping.md): Typing text on text object.
-1. [UI-label](ui-label.md): A game object container with a icon, text, and background.
+1. [UI-label](ui-label.md): A game object container with an icon, text, and background.
 1. [UI-dialog](ui-dialog.md): A container with a title, content, buttons and backgrounds.
 1. [UI-grid sizer](ui-gridsizer.md): Layout children game objects in grids.
 1. [UI-gird table](ui-gridtable.md): A container with a grid table, slider, and scroller.
 1. [UI-sizer](ui-sizer.md): Layout children game objects.
 1. [UI-tabs](ui-tabs.md): A container with 4 groups of buttons around a center panel.
-1. [UI-text box](ui-textbox): A container with a icon, (typing and paging) text, and background.
+1. [UI-text box](ui-textbox): A container with an icon, (typing and paging) text, and background.
 1. [UI-menu](ui-menu.md): A container with buttons and sub-menu.
 1. [Virtual joystick](virtualjoystick.md): Simulate curosr keys according touch events.
 1. [Wait events](waitevents.md): Wait fired events or callbacks.

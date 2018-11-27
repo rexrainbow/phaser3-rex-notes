@@ -1,6 +1,6 @@
 ## Introduction
 
-A container with a icon, text, and background.
+A container with an icon, text, and background.
 
 - Author: Rex
 - A kind of game object
