@@ -36,7 +36,7 @@ var AStarSerach = function (startTileXYZ, endTileXY, movingPoints, mode) {
     var nodesManager = this.nodesManager;
     nodesManager.freeAllNodes();
 
-    const isAreaSearch = (mode === AREA_MODE);
+    // const isAreaSearch = (mode === AREA_MODE);
     const isPathSearch = (mode === PATH_MODE);
     const isAStarMode = (this.pathMode === ASTAR) || (this.pathMode === ASTAR_LINE) || (this.pathMode === ASTAR_RANDOM);
     const astarHeuristicEnable = isPathSearch && isAStarMode;
@@ -72,7 +72,8 @@ var AStarSerach = function (startTileXYZ, endTileXY, movingPoints, mode) {
         var curNode = gOpenHeap.pop();
 
         // End case -- result has been found, return the traced path.
-        if (astarHeuristicEnable && (curNode === end)) {
+        if (isPathSearch && (curNode === end)) {
+            closestNode = end;
             break;
         }
 
@@ -103,7 +104,7 @@ var AStarSerach = function (startTileXYZ, endTileXY, movingPoints, mode) {
                 continue;
             }
 
-            if (!beenVisited || gScore < neighbor.g) {
+            if ((!beenVisited) || (gScore < neighbor.g)) {
 
                 // Found an optimal (so far) path to this node.  Take score for node to see how good it is.
                 neighbor.visited = true;
