@@ -1,5 +1,7 @@
 import BoardPlugin from 'rexPlugins/board-plugin.js';
 
+const Random = Phaser.Math.Between;
+
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -10,7 +12,6 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        // create board
         var config = {
             grid: getHexagonGrid(this),
             // grid: getQuadGrid(this),
@@ -18,17 +19,11 @@ class Demo extends Phaser.Scene {
             height: 8,
             // wrap: true
         }
-        this.board = new Board(this, config);
+        var board = new Board(this, config);
 
-        // add chess
-        this.chessA = new ChessA(this.board);
-
-        // add some blockers
-        for (var i = 0; i < 20; i++) {
-            new Blocker(this.board);
-        }
-
-        this.chessA.showMoveableArea();
+        // create chess
+        var chessA = new ChessA(board);
+        chessA.showMoveableArea();
     }
 }
 
@@ -58,34 +53,30 @@ var getHexagonGrid = function (scene) {
 
 class Board extends RexPlugins.Board.Board {
     constructor(scene, config) {
-        // create board
         super(scene, config);
-        // draw grid
-        var graphics = scene.add.graphics({
-            lineStyle: {
-                width: 1,
-                color: 0xffffff,
-                alpha: 1
-            }
-        });
-        this.forEachTileXY(function (tileXY, board) {
-            var points = board.getGridPoints(tileXY.x, tileXY.y, true);
-            graphics.strokePoints(points, true);
-        });
-        // enable touch events
-        this.setInteractive();
+
+        this
+            // Fill tiles
+            .forEachTileXY(function (tileXY, board) {
+                new Tile(board, tileXY);
+            })
+            // Enable touch events
+            .setInteractive();
     }
 }
 
-class Blocker extends RexPlugins.Board.Shape {
-    constructor(board, tileXY) {
+const LevelToColor = [0x388e3c, 0x6abf69];
+class Tile extends RexPlugins.Board.Shape {
+    constructor(board, tileXY, level) {
         var scene = board.scene;
-        if (tileXY === undefined) {
-            tileXY = board.getRandomEmptyTileXY(0);
+        if (level === undefined) {
+            level = Random(0, 1);
         }
         // Shape(board, tileX, tileY, tileZ, fillColor, fillAlpha, addToBoard)
-        super(board, tileXY.x, tileXY.y, 0, 0x555555);
+        super(board, tileXY.x, tileXY.y, 0, LevelToColor[level]);
         scene.add.existing(this);
+        this.setStrokeStyle(1, 0xffffff);
+        this.setData('level', level); // Store level value for cost function
     }
 }
 
@@ -93,21 +84,33 @@ class ChessA extends RexPlugins.Board.Shape {
     constructor(board, tileXY) {
         var scene = board.scene;
         if (tileXY === undefined) {
-            tileXY = board.getRandomEmptyTileXY(0);
+            tileXY = board.getRandomEmptyTileXY(1);
         }
         // Shape(board, tileX, tileY, tileZ, fillColor, fillAlpha, addToBoard)
-        super(board, tileXY.x, tileXY.y, 0, 0x00CC00);
+        super(board, tileXY.x, tileXY.y, 1, 0xfa5788);
         scene.add.existing(this);
-        this.setDepth(1);
+        this
+            .setScale(0.7)
+            .setDepth(1);
 
         // add behaviors        
         this.moveTo = scene.rexBoard.add.moveTo(this);
         this.pathFinder = scene.rexBoard.add.pathFinder(this, {
-            occupiedTest: true
+            occupiedTest: true,
+            pathMode: 'A*',
+            cost: function (curTile, preTile, pathFinder) {
+                var board = pathFinder.board;
+                curTile = board.tileXYZToChess(curTile.x, curTile.y, 0);
+                preTile = board.tileXYZToChess(preTile.x, preTile.y, 0);
+                var curLevel = curTile.getData('level');
+                var preLevel = preTile.getData('level');
+                return (preLevel >= curLevel) ? 0 : pathFinder.BLOCKER;
+            },
+            cacheCost: false,
         });
 
         // private members
-        this.movingPoints = 4;
+        this.movingPoints = 1;
         this.moveableTiles = [];
     }
 
@@ -153,12 +156,13 @@ class ChessA extends RexPlugins.Board.Shape {
     }
 }
 
+
 class MoveableMarker extends RexPlugins.Board.Shape {
     constructor(chess, tileXY) {
         var board = chess.rexChess.board;
         var scene = board.scene;
         // Shape(board, tileX, tileY, tileZ, fillColor, fillAlpha, addToBoard)
-        super(board, tileXY.x, tileXY.y, -1, 0x330000);
+        super(board, tileXY.x, tileXY.y, -1, 0x8c0032);
         scene.add.existing(this);
         this.setScale(0.5);
 
@@ -167,7 +171,7 @@ class MoveableMarker extends RexPlugins.Board.Shape {
             if (!chess.moveToTile(this)) {
                 return;
             }
-            this.setFillStyle(0xff0000);
+            this.setFillStyle(0x8c0032, 0.3);
         }, this);
     }
 }
