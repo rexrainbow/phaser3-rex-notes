@@ -95,7 +95,7 @@ nav:
         - Mask: mask.md
 - Input:
     - Input: input.md
-    - Touch:    
+    - Touch:
         - Touch events: touchevents.md
         - Cursor: cursor.md
         - Button: button.md
@@ -103,6 +103,7 @@ nav:
         - Slider: slider.md
         - Scroller: scroller.md
         - Virtual joystick: virtualjoystick.md
+        - Cursor at bound: cursoratbound.md
     - Keyboard:
         - Keyboard events: keyboardevents.md
 - Audio:

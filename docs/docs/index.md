@@ -21,6 +21,7 @@
 1. [ContainerLite](containerlite.md): Control the position and angle of children game objects.
 1. [CSV-scenario](csvscenario.md): Run script in csv format.
 1. [CSV-to-hash-table](csvtohashtable.md): Hash table indexed by (col-key, row-key) from csv string.
+1. [Cursor at bound](cursoratbound.md): Map position pf cursor to cursor key state.
 1. [Drag](drag.md): Drag game object.
 1. [Eight direction](eightdirection.md): Move game object by cursor keys, with a constant speed.
 1. [Fade-out-destroy](fadeoutdestroy.md): Fade out game object then destroy it.
