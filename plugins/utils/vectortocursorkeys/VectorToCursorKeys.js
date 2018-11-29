@@ -1,12 +1,14 @@
+import CursorKeys from '../cursorkeys/CursorKeys.js';
+
 const GetValue = Phaser.Utils.Objects.GetValue;
-const Key = Phaser.Input.Keyboard.Key;
 const GetDist = Phaser.Math.Distance.Between;
 const GetAngle = Phaser.Math.Angle.Between;
 const RadToDeg = Phaser.Math.RadToDeg;
 const MathWrap = Phaser.Math.Wrap;
 
-class VectorToCursorKeys {
+class VectorToCursorKeys extends CursorKeys {
     constructor(config) {
+        super();
         this.resetFromJSON(config);
     }
 
@@ -17,16 +19,6 @@ class VectorToCursorKeys {
         if (this.end == undefined) {
             this.end = {};
         }
-        this.noKeyDown = GetValue(o, 'noKeyDown', true);
-        if (this.cursorKeys == undefined) {
-            this.cursorKeys = {
-                up: new Key(),
-                down: new Key(),
-                left: new Key(),
-                right: new Key()
-            }
-        }
-
         this.setEnable(GetValue(o, 'enable', true));
         this.setMode(GetValue(o, 'dir', '8dir'));
         this.setDistanceThreshold(GetValue(o, 'forceMin', 16));
@@ -45,7 +37,6 @@ class VectorToCursorKeys {
             dir: this.dirMode,
             forceMin: this.forceMin,
 
-            noKeyDown: this.noKeyDown,
             start: {
                 x: this.start.x,
                 y: this.start.y
@@ -75,9 +66,10 @@ class VectorToCursorKeys {
             return;
         }
         if (e === false) {
-            this.cleanVector();
+            this.clearVector();
         }
         this.enable = e;
+        return this;
     }
 
     setDistanceThreshold(d) {
@@ -88,44 +80,17 @@ class VectorToCursorKeys {
         return this;
     }
 
-    createCursorKeys() {
-        return this.cursorKeys;
-    }
-
-    setKeyState(keyName, isDown) {
-        var key = this.cursorKeys[keyName];
-
-        if (!key.enabled) {
-            return;
-        }
-
-        var isUp = !isDown;
-        key.isDown = isDown;
-        key.isUp = isUp;
-        if (isDown) {
-            this.noKeyDown = false;
-        }
-    }
-
-    getKeyState(keyName) {
-        return this.cursorKeys[keyName];
-    }
-
-    cleanVector() {
+    clearVector() {
         this.start.x = 0;
         this.start.y = 0;
         this.end.x = 0;
         this.end.y = 0;
-        this.noKeyDown = true;
-        for (var keyName in this.cursorKeys) {
-            this.setKeyState(keyName, false);
-        }
-
+        this.clearAllKeysState();
         return this;
     }
 
     setVector(x0, y0, x1, y1) {
-        this.cleanVector();
+        this.clearVector();
         if (!this.enable) {
             return this;
         }
@@ -219,26 +184,6 @@ class VectorToCursorKeys {
             octant = (this.rightKeyDown) ? 315 : 270;
         }
         return octant;
-    }
-
-    get upKeyDown() {
-        return this.cursorKeys.up.isDown;
-    }
-
-    get downKeyDown() {
-        return this.cursorKeys.down.isDown;
-    }
-
-    get leftKeyDown() {
-        return this.cursorKeys.left.isDown;
-    }
-
-    get rightKeyDown() {
-        return this.cursorKeys.right.isDown;
-    }
-
-    get anyKeyDown() {
-        return !this.noKeyDown;
     }
 }
 

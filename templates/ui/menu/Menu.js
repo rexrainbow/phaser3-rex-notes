@@ -1,6 +1,6 @@
 import Buttons from '../buttons/Buttons.js';
 import CreateButtons from './CreateButtons.js';
-import GetDefaultBounds from '../utils/GetDefaultBounds.js';
+import GetDefaultBounds from 'rexPlugins/utils/object/GetDefaultBounds.js';
 import MenuSetInteractive from './MenuSetInteractive.js';
 import ExpandSubMenu from './ExpandSubMenu.js';
 import Collapse from './Collapse.js';

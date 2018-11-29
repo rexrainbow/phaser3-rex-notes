@@ -25,6 +25,7 @@ import Scroller from './scroller.js';
 import Button from './button.js';
 import TouchCursor from './touchcursor.js';
 import VirtualJoyStick from './virtualjoystick.js';
+import CursorAtBound from './cursoratbound.js';
 
 // member of game object
 import MoveTo from './moveto.js';
@@ -116,6 +117,7 @@ export {
     Button,
     TouchCursor,
     VirtualJoyStick,
+    CursorAtBound,
 
     // member of game object
     MoveTo,

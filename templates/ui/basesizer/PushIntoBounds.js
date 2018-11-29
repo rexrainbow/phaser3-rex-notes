@@ -1,4 +1,4 @@
-import GetDefaultBounds from '../utils/GetDefaultBounds.js';
+import GetDefaultBounds from 'rexPlugins/utils/object/GetDefaultBounds.js';
 
 var PushIntoBounds = function (bounds) {
     if (bounds === undefined) {
