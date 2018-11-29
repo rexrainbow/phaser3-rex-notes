@@ -34,29 +34,12 @@ class Demo extends Phaser.Scene {
 
             acceleration: 0.06,
             drag: 0.003,
-            maxSpeed: 0.5
+            maxSpeed: 0.3
         });
-
-        this.print = this.add.text(0, 0, '').setScrollFactor(0);
     }
 
     update(time, delta) {
-        var camera = this.cameras.main;
-        this.print.text = camera.x + ',' + camera.y;
-        var cursorKeys = this.cursorAtBounds.createCursorKeys();
-        var s = 'Key down: ';
-        for (var name in cursorKeys) {
-            if (cursorKeys[name].isDown) {
-                s += name + ' ';
-            }
-        }
-        s += '\n';
-
         this.cameraController.update(delta);
-        var camera = this.cameras.main;
-        s += camera.scrollX + ',' + camera.scrollY;
-
-        this.print.text = s;
     }
 }
 
