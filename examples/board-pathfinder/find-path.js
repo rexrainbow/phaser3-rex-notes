@@ -110,7 +110,7 @@ class ChessA extends RexPlugins.Board.Shape {
         });
 
         // private members
-        this.movingPathTiles = [];
+        this._marker = [];
     }
 
     moveToTileXY(endTileXY) {
@@ -144,15 +144,15 @@ class ChessA extends RexPlugins.Board.Shape {
             tileXY = tileXYArray[i];
             var text = scene.add.text(board.tileXYToWorldX(tileXY.x, tileXY.y), board.tileXYToWorldY(tileXY.x, tileXY.y), tileXY.cost)
                 .setOrigin(0.5);
-            this.movingPathTiles.push(text);
+            this._marker.push(text);
         }
     }
 
     hideMovingPath() {
-        for (var i = 0, cnt = this.movingPathTiles.length; i < cnt; i++) {
-            this.movingPathTiles[i].destroy();
+        for (var i = 0, cnt = this._marker.length; i < cnt; i++) {
+            this._marker[i].destroy();
         }
-        this.movingPathTiles.length = 0;
+        this._marker.length = 0;
         return this;
     }
 }

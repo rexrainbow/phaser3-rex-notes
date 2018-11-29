@@ -103,13 +103,13 @@ class ChessA extends RexPlugins.Board.Shape {
         });
 
         // private members
-        this.movingPoints = 3;
-        this.moveableTiles = [];
+        this._movingPoints = 3;
+        this._marker = [];
     }
 
     showMoveableArea() {
         this.hideMoveableArea();
-        var tileXYArray = this.pathFinder.findArea(this.movingPoints),
+        var tileXYArray = this.pathFinder.findArea(this._movingPoints),
             tileXY;
         var scene = this.scene,
             board = this.rexChess.board;
@@ -117,16 +117,16 @@ class ChessA extends RexPlugins.Board.Shape {
             tileXY = tileXYArray[i];
             var text = scene.add.text(board.tileXYToWorldX(tileXY.x, tileXY.y), board.tileXYToWorldY(tileXY.x, tileXY.y), tileXY.cost)
                 .setOrigin(0.5);
-            this.moveableTiles.push(text);
+            this._marker.push(text);
         }
         return this;
     }
 
     hideMoveableArea() {
-        for (var i = 0, cnt = this.moveableTiles.length; i < cnt; i++) {
-            this.moveableTiles[i].destroy();
+        for (var i = 0, cnt = this._marker.length; i < cnt; i++) {
+            this._marker[i].destroy();
         }
-        this.moveableTiles.length = 0;
+        this._marker.length = 0;
         return this;
     }
 }

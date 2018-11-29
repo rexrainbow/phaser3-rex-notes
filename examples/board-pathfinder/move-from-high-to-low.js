@@ -97,7 +97,7 @@ class ChessA extends RexPlugins.Board.Shape {
         this.moveTo = scene.rexBoard.add.moveTo(this);
         this.pathFinder = scene.rexBoard.add.pathFinder(this, {
             occupiedTest: true,
-            pathMode: 'A*',
+            pathMode: 'random',
             cost: function (curTile, preTile, pathFinder) {
                 var board = pathFinder.board;
                 curTile = board.tileXYZToChess(curTile.x, curTile.y, 0);
@@ -110,15 +110,14 @@ class ChessA extends RexPlugins.Board.Shape {
         });
 
         // private members
-        this.movingPoints = 1;
-        this.moveableTiles = [];
+        this._markers = [];
     }
 
     showMoveableArea() {
         this.hideMoveableArea();
-        var tileXYArray = this.pathFinder.findArea(this.movingPoints);
+        var tileXYArray = this.pathFinder.findArea(1);
         for (var i = 0, cnt = tileXYArray.length; i < cnt; i++) {
-            this.moveableTiles.push(
+            this._markers.push(
                 new MoveableMarker(this, tileXYArray[i])
             );
         }
@@ -126,10 +125,10 @@ class ChessA extends RexPlugins.Board.Shape {
     }
 
     hideMoveableArea() {
-        for (var i = 0, cnt = this.moveableTiles.length; i < cnt; i++) {
-            this.moveableTiles[i].destroy();
+        for (var i = 0, cnt = this._markers.length; i < cnt; i++) {
+            this._markers[i].destroy();
         }
-        this.moveableTiles.length = 0;
+        this._markers.length = 0;
         return this;
     }
 
@@ -162,7 +161,7 @@ class MoveableMarker extends RexPlugins.Board.Shape {
         var board = chess.rexChess.board;
         var scene = board.scene;
         // Shape(board, tileX, tileY, tileZ, fillColor, fillAlpha, addToBoard)
-        super(board, tileXY.x, tileXY.y, -1, 0x8c0032);
+        super(board, tileXY.x, tileXY.y, -1, 0x8c0032, 0.5);
         scene.add.existing(this);
         this.setScale(0.5);
 
@@ -171,7 +170,7 @@ class MoveableMarker extends RexPlugins.Board.Shape {
             if (!chess.moveToTile(this)) {
                 return;
             }
-            this.setFillStyle(0x8c0032, 0.3);
+            this.setFillStyle(0x8c0032, 1);
         }, this);
     }
 }
