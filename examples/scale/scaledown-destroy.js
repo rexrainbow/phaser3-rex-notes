@@ -1,4 +1,4 @@
-import ScalePlugin from 'rexPlugins/scale-plugin.js';
+import ScalePlugin from '../../plugins/scale-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

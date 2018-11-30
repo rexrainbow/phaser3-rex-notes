@@ -1,5 +1,5 @@
-import TagTextPlugin from 'rexPlugins/tagtext-plugin.js';
-import TextPagePlugin from 'rexPlugins/textpage-plugin.js'
+import TagTextPlugin from '../../plugins/tagtext-plugin.js';
+import TextPagePlugin from '../../plugins/textpage-plugin.js'
 
 class Demo extends Phaser.Scene {
     constructor() {

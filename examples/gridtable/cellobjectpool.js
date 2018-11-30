@@ -1,6 +1,6 @@
-import GridTablePlugin from 'rexPlugins/gridtable-plugin.js';
-import TouchStatePlugin from 'rexPlugins/touchstate-plugin.js';
-import ObjectPoolPlugin from 'rexPlugins/objectpool-plugin.js';
+import GridTablePlugin from '../../plugins/gridtable-plugin.js';
+import TouchStatePlugin from '../../plugins/touchstate-plugin.js';
+import ObjectPoolPlugin from '../../plugins/objectpool-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

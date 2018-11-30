@@ -1,4 +1,4 @@
-import AchievementsPlugin from 'rexPlugins/achievements-plugin.js';
+import AchievementsPlugin from '../../plugins/achievements-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

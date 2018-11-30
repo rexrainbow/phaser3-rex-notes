@@ -1,4 +1,4 @@
-import runCommands from 'rexPlugins/runcommands.js';
+import runCommands from '../../plugins/runcommands.js';
 
 const Map = Phaser.Structs.Map;
 

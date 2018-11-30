@@ -1,4 +1,4 @@
-import RotateToPlugin from 'rexPlugins/rotateto-plugin.js';
+import RotateToPlugin from '../../plugins/rotateto-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

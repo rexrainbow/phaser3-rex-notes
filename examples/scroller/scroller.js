@@ -1,4 +1,4 @@
-import ScrollerPlugin from 'rexPlugins/scroller-plugin.js';
+import ScrollerPlugin from '../../plugins/scroller-plugin.js';
 
 const slidingDeceleration = 5000;
 const backDeceleration = 2000;

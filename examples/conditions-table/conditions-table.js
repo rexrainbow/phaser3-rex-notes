@@ -1,4 +1,4 @@
-import ConditionsTablePlugin from 'rexPlugins/conditionstable-plugin.js';
+import ConditionsTablePlugin from '../../plugins/conditionstable-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

@@ -1,4 +1,4 @@
-import DragPlugin from 'rexPlugins/drag-plugin.js';
+import DragPlugin from '../../plugins/drag-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

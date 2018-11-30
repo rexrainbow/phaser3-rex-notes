@@ -1,4 +1,4 @@
-import CursorAtBoundPlugin from 'rexPlugins/cursoratbound-plugin.js';
+import CursorAtBoundPlugin from '../../plugins/cursoratbound-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

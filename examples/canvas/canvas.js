@@ -1,4 +1,4 @@
-import CanvasPlugin from 'rexPlugins/canvas-plugin.js'
+import CanvasPlugin from '../../plugins/canvas-plugin.js'
 
 class Demo extends Phaser.Scene {
     constructor() {

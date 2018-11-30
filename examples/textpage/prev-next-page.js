@@ -1,4 +1,4 @@
-import TextPagePlugin from 'rexPlugins/textpage-plugin.js'
+import TextPagePlugin from '../../plugins/textpage-plugin.js'
 
 class Demo extends Phaser.Scene {
     constructor() {

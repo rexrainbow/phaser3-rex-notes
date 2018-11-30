@@ -1,5 +1,5 @@
-import GridTablePlugin from 'rexPlugins/gridtable-plugin.js';
-import ScrollerPlugin from 'rexPlugins/scroller-plugin.js';
+import GridTablePlugin from '../../plugins/gridtable-plugin.js';
+import ScrollerPlugin from '../../plugins/scroller-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

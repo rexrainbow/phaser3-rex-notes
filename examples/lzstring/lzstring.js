@@ -1,4 +1,4 @@
-import LZStringPlugin from 'rexPlugins/lzstring-plugin.js';
+import LZStringPlugin from '../../plugins/lzstring-plugin.js';
 
 const GetRandom = Phaser.Utils.Array.GetRandom;
 

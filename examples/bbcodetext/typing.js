@@ -1,5 +1,5 @@
-import BBCodeTextPlugin from 'rexPlugins/bbcodetext-plugin.js';
-import TextTypingPlugin from 'rexPlugins/texttyping-plugin.js';
+import BBCodeTextPlugin from '../../plugins/bbcodetext-plugin.js';
+import TextTypingPlugin from '../../plugins/texttyping-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

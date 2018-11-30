@@ -1,4 +1,4 @@
-import LifeTimePlugin from 'rexPlugins/lifetime-plugin.js';
+import LifeTimePlugin from '../../plugins/lifetime-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

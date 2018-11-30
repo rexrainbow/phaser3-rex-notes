@@ -1,5 +1,5 @@
-import HexagonPlugin from 'rexPlugins/hexagon-plugin.js';
-import BoardPlugin from 'rexPlugins/board-plugin.js';
+import HexagonPlugin from '../../plugins/hexagon-plugin.js';
+import BoardPlugin from '../../plugins/board-plugin.js';
 
 const Random = Phaser.Math.Between;
 

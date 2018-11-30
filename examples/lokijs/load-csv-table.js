@@ -1,5 +1,5 @@
-import Papa from 'rexPlugins/utils/papaparser/papaparse.js';
-import loki from 'rexPlugins/utils/lokijs/lokijs.min.js';
+import Papa from '../../plugins/utils/papaparser/papaparse.js';
+import loki from '../../plugins/utils/lokijs/lokijs.min.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

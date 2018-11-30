@@ -1,4 +1,4 @@
-import loki from 'rexPlugins/utils/lokijs/lokijs.min.js';
+import loki from '../../plugins/utils/lokijs/lokijs.min.js';
 
 var Between = Phaser.Math.Between;
 

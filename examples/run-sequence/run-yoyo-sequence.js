@@ -1,4 +1,4 @@
-import SequencePlugin from 'rexPlugins/sequence-plugin.js';
+import SequencePlugin from '../../plugins/sequence-plugin.js';
 
 class ActionKlass extends Phaser.Events.EventEmitter {
     constructor(scene) {

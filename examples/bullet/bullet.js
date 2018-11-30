@@ -1,4 +1,4 @@
-import BulletPlugin from 'rexPlugins/bullet-plugin.js';
+import BulletPlugin from '../../plugins/bullet-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

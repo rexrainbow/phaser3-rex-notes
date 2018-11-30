@@ -1,4 +1,4 @@
-import CursorAtBoundPlugin from 'rexPlugins/cursoratbound-plugin.js';
+import CursorAtBoundPlugin from '../../plugins/cursoratbound-plugin.js';
 
 const Random = Phaser.Math.Between;
 
@@ -14,6 +14,8 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
+        this.cameras.main.setBounds(-1000, -1000, 2000, 2000);
+
         DrawSomethings(this);
 
         this.cursorAtBounds = this.plugins.get('rexCursorAtBound').add(this, {
@@ -44,8 +46,18 @@ class Demo extends Phaser.Scene {
 }
 
 var DrawSomethings = function (scene) {
+    var bounds = scene.cameras.main._bounds; // TODO: getBounds()
+    var left = bounds.left,
+        right = bounds.right,
+        top = bounds.top,
+        bottom = bounds.bottom;
     for (var i = 0; i < 500; i++) {
-        scene.add.circle(Random(-1000, 1000), Random(-1000, 1000), Random(10, 100), Random(0, 0xffffff), 0.5);
+        scene.add.circle(
+            Random(left, right), Random(top, bottom), // x, y
+            Random(10, 100), // r
+            Random(0, 0xffffff), // color
+            0.5 // alpha
+        );
     }
 }
 

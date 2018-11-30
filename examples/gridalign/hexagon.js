@@ -1,5 +1,5 @@
-import GridAlignPlugin from 'rexPlugins/gridalign-plugin.js';
-import HexagonPlugin from 'rexPlugins/hexagon-plugin.js';
+import GridAlignPlugin from '../../plugins/gridalign-plugin.js';
+import HexagonPlugin from '../../plugins/hexagon-plugin.js';
 
 const Random = Phaser.Math.Between;
 

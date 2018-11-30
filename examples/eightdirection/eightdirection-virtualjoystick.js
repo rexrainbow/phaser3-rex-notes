@@ -1,5 +1,5 @@
-import EightDirectionPlugin from 'rexPlugins/eightdirection-plugin.js';
-import VirtualJoyStickPlugin from 'rexPlugins/virtualjoystick-plugin.js';
+import EightDirectionPlugin from '../../plugins/eightdirection-plugin.js';
+import VirtualJoyStickPlugin from '../../plugins/virtualjoystick-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

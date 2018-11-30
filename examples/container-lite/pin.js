@@ -1,4 +1,4 @@
-import ContainerLitePlugin from 'rexPlugins/containerlite-plugin.js';
+import ContainerLitePlugin from '../../plugins/containerlite-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

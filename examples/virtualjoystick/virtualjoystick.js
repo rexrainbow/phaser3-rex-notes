@@ -1,4 +1,4 @@
-import VirtualJoyStickPlugin from 'rexPlugins/virtualjoystick-plugin.js';
+import VirtualJoyStickPlugin from '../../plugins/virtualjoystick-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

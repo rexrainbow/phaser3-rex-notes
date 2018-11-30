@@ -1,4 +1,4 @@
-import ShipPlugin from 'rexPlugins/ship-plugin.js';
+import ShipPlugin from '../../plugins/ship-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

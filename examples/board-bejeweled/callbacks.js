@@ -1,4 +1,4 @@
-import Bejeweled from 'rexTemplates/bejeweled/Bejeweled.js';
+import Bejeweled from '../../templates/bejeweled/Bejeweled.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

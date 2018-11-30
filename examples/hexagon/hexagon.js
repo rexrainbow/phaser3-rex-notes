@@ -1,4 +1,4 @@
-import HexagonPlugin from 'rexPlugins/hexagon-plugin.js';
+import HexagonPlugin from '../../plugins/hexagon-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

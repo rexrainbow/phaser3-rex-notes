@@ -1,4 +1,4 @@
-import WebFontLoaderPlugin from 'rexPlugins/webfontloader-plugin.js';
+import WebFontLoaderPlugin from '../../plugins/webfontloader-plugin.js';
 
 var preload = function () {
     this.add.text(100, 0, 'default font', {

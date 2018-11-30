@@ -1,4 +1,4 @@
-import EightDirectionPlugin from 'rexPlugins/eightdirection-plugin.js';
+import EightDirectionPlugin from '../../plugins/eightdirection-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

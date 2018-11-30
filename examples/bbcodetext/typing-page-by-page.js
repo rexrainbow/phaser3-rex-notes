@@ -1,6 +1,6 @@
-import BBCodeText from 'rexPlugins/bbcodetext.js';
-import TextPage from 'rexPlugins/textpage.js'
-import TextTyping from 'rexPlugins/texttyping.js';
+import BBCodeText from '../../plugins/bbcodetext.js';
+import TextPage from '../../plugins/textpage.js'
+import TextTyping from '../../plugins/texttyping.js';
 
 const BaseTextClass = BBCodeText;
 const GetValue = Phaser.Utils.Objects.GetValue;

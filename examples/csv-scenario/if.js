@@ -1,4 +1,4 @@
-import CSVScenarioPlugin from 'rexPlugins/csvscenario-plugin.js';
+import CSVScenarioPlugin from '../../plugins/csvscenario-plugin.js';
 
 var csvString =
 `#IF,this.coin > 100,AA

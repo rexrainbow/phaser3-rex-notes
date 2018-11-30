@@ -1,5 +1,5 @@
-import GridAlignPlugin from 'rexPlugins/gridalign-plugin.js';
-import RhombusPlugin from 'rexPlugins/rhombus-plugin.js';
+import GridAlignPlugin from '../../plugins/gridalign-plugin.js';
+import RhombusPlugin from '../../plugins/rhombus-plugin.js';
 
 const Random = Phaser.Math.Between;
 

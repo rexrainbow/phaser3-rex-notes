@@ -1,4 +1,4 @@
-import ButtonPlugin from 'rexPlugins/button-plugin.js';
+import ButtonPlugin from '../../plugins/button-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

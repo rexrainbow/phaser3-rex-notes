@@ -1,4 +1,4 @@
-import HashTablePlugin from 'rexPlugins/csvtohashtable-plugin.js';
+import HashTablePlugin from '../../plugins/csvtohashtable-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

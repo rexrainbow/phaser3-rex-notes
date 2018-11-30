@@ -1,4 +1,4 @@
-import TCRPPlugin from 'rexPlugins/tcrp-plugin.js';
+import TCRPPlugin from '../../plugins/tcrp-plugin.js';
 
 const PlayerPlugin = TCRPPlugin.Player;
 

@@ -1,4 +1,4 @@
-import ContainerLite from 'rexPlugins/containerlite.js';
+import ContainerLite from '../../plugins/containerlite.js';
 
 class MyContainer extends ContainerLite {
     constructor(scene, x, y, width, height, children) {

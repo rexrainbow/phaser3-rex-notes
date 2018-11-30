@@ -1,5 +1,5 @@
-import RhombusPlugin from 'rexPlugins/rhombus-plugin.js';
-import BoardPlugin from 'rexPlugins/board-plugin.js';
+import RhombusPlugin from '../../plugins/rhombus-plugin.js';
+import BoardPlugin from '../../plugins/board-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

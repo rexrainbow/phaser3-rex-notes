@@ -1,5 +1,5 @@
-import CanvasPlugin from 'rexPlugins/canvas-plugin.js'
-import TouchStatePlugin from 'rexPlugins/touchstate-plugin.js';
+import CanvasPlugin from '../../plugins/canvas-plugin.js'
+import TouchStatePlugin from '../../plugins/touchstate-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

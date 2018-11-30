@@ -3,7 +3,7 @@ import 'firebase/storage';
 import firebaseConfig from './firebaseConfig.js';
 import {
     canvasToBlob
-} from 'rexPlugins/utils/blob-util/blob-util.js';
+} from '../../plugins/utils/blob-util/blob-util.js';
 
 const CanvasPool = Phaser.Display.Canvas.Pool;
 

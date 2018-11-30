@@ -1,4 +1,4 @@
-import CSVToArrayPlugin from 'rexPlugins/csvtoarray-plugin.js';
+import CSVToArrayPlugin from '../../plugins/csvtoarray-plugin.js';
 
 class Demo extends Phaser.Scene {
 

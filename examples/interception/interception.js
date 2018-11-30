@@ -1,5 +1,5 @@
-import InterceptionPlugin from 'rexPlugins/interception-plugin.js';
-import BulletPlugin from 'rexPlugins/bullet-plugin.js';
+import InterceptionPlugin from '../../plugins/interception-plugin.js';
+import BulletPlugin from '../../plugins/bullet-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

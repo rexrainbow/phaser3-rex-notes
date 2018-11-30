@@ -1,7 +1,7 @@
 import Phaser from 'phaser';
-import GridTablePlugin from 'rexPlugins/gridtable-plugin.js';
-import TouchStatePlugin from 'rexPlugins/touchstate-plugin.js';
-import ContainerLitePlugin from 'rexPlugins/containerlite-plugin.js';
+import GridTablePlugin from '../../plugins/gridtable-plugin.js';
+import TouchStatePlugin from '../../plugins/touchstate-plugin.js';
+import ContainerLitePlugin from '../../plugins/containerlite-plugin.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 

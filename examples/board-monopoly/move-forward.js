@@ -1,4 +1,4 @@
-import BoardPlugin from 'rexPlugins/board-plugin.js';
+import BoardPlugin from '../../plugins/board-plugin.js';
 
 const TILESMAP = [
     '111 111',

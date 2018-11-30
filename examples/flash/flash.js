@@ -1,4 +1,4 @@
-import FlashPlugin from 'rexPlugins/flash-plugin.js';
+import FlashPlugin from '../../plugins/flash-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

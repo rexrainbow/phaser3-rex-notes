@@ -1,4 +1,4 @@
-import WaitEventsPlugin from 'rexPlugins/waitevents-plugin.js';
+import WaitEventsPlugin from '../../plugins/waitevents-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

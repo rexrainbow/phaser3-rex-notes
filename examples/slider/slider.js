@@ -1,4 +1,4 @@
-import SliderPlugin from 'rexPlugins/slider-plugin.js';
+import SliderPlugin from '../../plugins/slider-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

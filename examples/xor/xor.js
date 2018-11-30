@@ -1,4 +1,4 @@
-import XORPlugin from 'rexPlugins/xor-plugin.js';
+import XORPlugin from '../../plugins/xor-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

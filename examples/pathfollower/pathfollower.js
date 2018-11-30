@@ -1,4 +1,4 @@
-import PathFollowerPlugin from 'rexPlugins/pathfollower-plugin.js';
+import PathFollowerPlugin from '../../plugins/pathfollower-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

@@ -1,4 +1,4 @@
-import UIPlugin from 'rexTemplates/ui/ui-plugin.js';
+import UIPlugin from '../../templates/ui/ui-plugin.js';
 
 const Random = Phaser.Math.Between;
 

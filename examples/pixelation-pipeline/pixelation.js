@@ -1,4 +1,4 @@
-import PixelationPipelinePlugin from 'rexPlugins/pixelationpipeline-plugin.js'
+import PixelationPipelinePlugin from '../../plugins/pixelationpipeline-plugin.js'
 
 class Demo extends Phaser.Scene {
     constructor() {

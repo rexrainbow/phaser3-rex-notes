@@ -1,5 +1,5 @@
-import SequencePlugin from 'rexPlugins/sequence-plugin.js';
-import CSVToArrayPlugin from 'rexPlugins/csvtoarray-plugin.js';
+import SequencePlugin from '../../plugins/sequence-plugin.js';
+import CSVToArrayPlugin from '../../plugins/csvtoarray-plugin.js';
 
 class ActionKlass extends Phaser.Events.EventEmitter {
     constructor(scene) {

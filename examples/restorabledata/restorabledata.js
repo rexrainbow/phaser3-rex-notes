@@ -1,4 +1,4 @@
-import RDataPlugin from 'rexPlugins/restorabledata-plugin.js';
+import RDataPlugin from '../../plugins/restorabledata-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

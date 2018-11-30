@@ -1,4 +1,4 @@
-import localforage from 'rexPlugins/utils/storage/localforage/localforage.min.js';
+import localforage from '../../plugins/utils/storage/localforage/localforage.min.js';
 
 class Demo extends Phaser.Scene {
 

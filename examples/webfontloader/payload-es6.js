@@ -1,4 +1,4 @@
-import WebFontLoaderPlugin from 'rexPlugins/webfontloader-plugin.js';
+import WebFontLoaderPlugin from '../../plugins/webfontloader-plugin.js';
 
 var sceneConfig = {
     key: 'examples',
