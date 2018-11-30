@@ -16,12 +16,12 @@ class Demo extends Phaser.Scene {
         var board = this.rexBoard.add.board({
             grid: getHexagonGrid(this),
             // grid: getQuadGrid(this),
-            width: 8,
-            height: 8
+            width: 20,
+            height: 20
         });
         var rexBoardAdd = this.rexBoard.add;
         board.forEachTileXY(function (tileXY, board) {
-            var chess = rexBoardAdd.shape(board, tileXY.x, tileXY.y, 0, Random(0, 0xffffff));
+            var chess = rexBoardAdd.shape(board, tileXY.x, tileXY.y, 0, Random(0, 0xffffff), 0.7);
             this.add.text(chess.x, chess.y, tileXY.x + ',' + tileXY.y)
                 .setOrigin(0.5)
                 .setTint(0x0);
@@ -39,28 +39,47 @@ class Demo extends Phaser.Scene {
                 console.log('move ' + tileXY.x + ',' + tileXY.y);
             })
             .on('gameobjectdown', function (pointer, gameObject) {
-                gameObject.setFillStyle(Random(0, 0xffffff));
+                gameObject.setFillStyle(Random(0, 0xffffff), 0.7);
             });
 
         this.board = board;
-        this.print = this.add.text(0, 0, '');
+        this.print = this.add.text(0, 0, '').setScrollFactor(0);
+
+
+        var cursors = this.input.keyboard.createCursorKeys();
+        this.cameraController = new Phaser.Cameras.Controls.SmoothedKeyControl({
+            camera: this.cameras.main,
+
+            left: cursors.left,
+            right: cursors.right,
+            up: cursors.up,
+            down: cursors.down,
+            zoomIn: null,
+            zoomOut: null,
+
+            acceleration: 0.06,
+            drag: 0.003,
+            maxSpeed: 0.3
+        });
     }
 
-    update() {
+    update(time, delta) {
+        this.cameraController.update(delta);
+
         var pointer = this.input.activePointer;
-        var tileX = this.board.worldXYToTileX(pointer.x, pointer.y);
-        var tileY = this.board.worldXYToTileY(pointer.x, pointer.y);
+        var tileX = this.board.worldXYToTileX(pointer.worldX, pointer.worldY);
+        var tileY = this.board.worldXYToTileY(pointer.worldX, pointer.worldY);
         this.print.setText(tileX + ',' + tileY);
     }
 }
 
 var getQuadGrid = function (scene) {
     var grid = scene.rexBoard.add.quadGrid({
-        x: 400,
-        y: 100,
+        x: 50,
+        y: 50,
         cellWidth: 100,
-        cellHeight: 50,
-        type: 1
+        cellHeight: 100,
+        type: 0
     });
     return grid;
 }
@@ -69,9 +88,9 @@ var getHexagonGrid = function (scene) {
     var staggeraxis = 'x';
     var staggerindex = 'odd';
     var grid = scene.rexBoard.add.hexagonGrid({
-        x: 100,
-        y: 100,
-        size: 30,
+        x: 50,
+        y: 50,
+        size: 50,
         staggeraxis: staggeraxis,
         staggerindex: staggerindex
     })

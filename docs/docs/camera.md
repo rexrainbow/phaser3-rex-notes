@@ -214,6 +214,13 @@ See [Scroll factor](gameobject.md#scroll-factor) in game object.
 camera.setBounds(x, y, width, height)
 ```
 
+##### Get bounds
+
+```javascript
+var bounds = camera.getBounds();  // bounds: a rectangle object
+// var out = camera.getBounds(out);
+```
+
 ### Effects
 
 #### Fade-in / fade-out

@@ -25,7 +25,7 @@ var OnCellClick = function (pointer) {
         return;
     }
     var table = this.childrenMap.table;
-    var cellIndex = table.pointerToCellIndex(pointer.x, pointer.y);
+    var cellIndex = table.pointerToCellIndex(pointer.worldX, pointer.worldY);
     if (cellIndex === null) {
         return;
     }
@@ -38,7 +38,7 @@ var OnCellOver = function (pointer) {
         return;
     }
     var table = this.childrenMap.table;
-    var cellIndex = table.pointerToCellIndex(pointer.x, pointer.y);
+    var cellIndex = table.pointerToCellIndex(pointer.worldX, pointer.worldY);
     if (cellIndex === this.lastOverCellIndex) {
         return;
     }
