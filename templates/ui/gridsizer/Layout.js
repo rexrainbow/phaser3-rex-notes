@@ -1,4 +1,4 @@
-import NOOP from 'rexPlugins/utils/object/NOOP.js';
+import NOOP from '../../../plugins/utils/object/NOOP.js';
 import ResizeGameObject from '../utils/ResizeGameObject.js';
 
 const Zone = Phaser.GameObjects.Zone;

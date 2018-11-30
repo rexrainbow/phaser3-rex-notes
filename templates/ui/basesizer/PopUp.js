@@ -1,4 +1,4 @@
-import PopUp from 'rexPlugins/popup.js';
+import PopUp from '../../../plugins/popup.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;

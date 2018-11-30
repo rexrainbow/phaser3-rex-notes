@@ -1,7 +1,7 @@
 // https://www.redblobgames.com/grids/hexagons/
 
-import GetCellWidth from 'rexPlugins/geom/hexagon/Width.js';
-import GetCellHeight from 'rexPlugins/geom/hexagon/Height.js';
+import GetCellWidth from '../../../geom/hexagon/Width.js';
+import GetCellHeight from '../../../geom/hexagon/Height.js';
 import CONST from './const.js';
 import GetWorldX from './GetWorldX.js';
 import GetWorldY from './GetWorldY.js';

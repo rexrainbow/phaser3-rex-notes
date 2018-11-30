@@ -1,7 +1,7 @@
 import GeomRoundRectangle from './geom/RoundRectangle.js';
 import LineTo from '../utils/LineTo.js';
 import ArcTo from '../utils/ArcTo.js';
-import Earcut from 'rexPlugins/geom/utils/Earcut.js'
+import Earcut from '../../../geom/utils/Earcut.js';
 import Render from './RoundRectangleRender.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;

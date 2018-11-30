@@ -1,5 +1,5 @@
-import GetSceneObject from 'rexPlugins/utils/system/GetSceneObject.js';
-import IsObjectInTouching from 'rexPlugins/utils/input/IsObjectInTouching.js';
+import GetSceneObject from '../../utils/system/GetSceneObject.js';
+import IsObjectInTouching from '../../utils/input/IsObjectInTouching.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const DistanceBetween = Phaser.Math.Distance.Between;

@@ -1,6 +1,6 @@
-import CSVParser from 'rexPlugins/utils/papaparser/papaparse.js';
-import ArrayCopy from 'rexPlugins/utils/array/Copy.js';
-import TypeConvert from 'rexPlugins/utils/string/TypeConvert.js';
+import CSVParser from '../../utils/papaparser/papaparse.js';
+import ArrayCopy from '../../utils/array/Copy.js';
+import TypeConvert from '../../utils/string/TypeConvert.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 

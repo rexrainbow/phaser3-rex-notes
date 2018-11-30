@@ -1,7 +1,7 @@
-import GetSceneObject from 'rexPlugins/utils/system/GetSceneObject.js';
+import GetSceneObject from '../../utils/system/GetSceneObject.js';
 import State from './State.js';
-import DrapSpeed from 'rexPlugins/dragspeed.js';
-import SlowDown from 'rexPlugins/utils/movement/SlowDown.js';
+import DrapSpeed from '../../dragspeed.js';
+import SlowDown from '../../utils/movement/SlowDown.js';
 
 const EE = Phaser.Events.EventEmitter;
 const GetValue = Phaser.Utils.Objects.GetValue;

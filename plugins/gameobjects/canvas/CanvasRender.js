@@ -1,6 +1,6 @@
 import WebGLRenderer from './CanvasWebGLRenderer.js';
 import CanvasRenderer from './CanvasCanvasRenderer.js';
-import NOOP from 'rexPlugins/utils/object/NOOP.js';
+import NOOP from '../../utils/object/NOOP.js';
 
 var renderWebGL = NOOP;
 var renderCanvas = NOOP;

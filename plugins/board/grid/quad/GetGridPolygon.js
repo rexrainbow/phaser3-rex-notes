@@ -1,4 +1,4 @@
-import QuadPolygon from 'rexPlugins/geom/quad/Quad.js';
+import QuadPolygon from '../../../geom/quad/Quad.js';
 
 var GetGridPolygon = function (tileX, tileY, poly) {
     if (tileX === undefined) {

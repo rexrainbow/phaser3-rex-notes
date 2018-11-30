@@ -1,4 +1,5 @@
-import lzstring from 'rexPlugins/utils/lzstring/lz-string.min.js';
+import lzstring from '../../utils/lzstring/lz-string.min.js';
+
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 
 class LZStringKlass {

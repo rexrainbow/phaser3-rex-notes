@@ -1,7 +1,7 @@
 /* 
 1. Falling down all chess
 */
-import WaitEvents from 'rexPlugins/waitevents.js';
+import WaitEvents from '../../../plugins/waitevents.js';
 
 var Falling = function (completeCallback, scope) {
     var board = this.board,

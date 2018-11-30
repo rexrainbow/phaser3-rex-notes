@@ -1,5 +1,5 @@
-import TickTask from 'rexPlugins/utils/ticktask/TickTask.js';
-import Proxy from 'rexPlugins/utils/arcade/proxy.js';
+import TickTask from '../../utils/ticktask/TickTask.js';
+import Proxy from '../../utils/arcade/proxy.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 

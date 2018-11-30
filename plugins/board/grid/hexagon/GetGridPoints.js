@@ -1,5 +1,5 @@
-import SetPoints from 'rexPlugins/geom/hexagon/SetPoints.js';
-import InitPoints from 'rexPlugins/geom/utils/InitPoints.js';
+import SetPoints from '../../../geom/hexagon/SetPoints.js';
+import InitPoints from '../../../geom/utils/InitPoints.js';
 
 var GetGridPoints = function (tileX, tileY, points) {
     if (points === undefined) {

@@ -1,7 +1,6 @@
 import BaseCmd from './BaseCmd.js';
-import ArrayCopy from 'rexPlugins/utils/array/Copy.js';
-import RunCommands from 'rexPlugins/runcommands.js';
-import TypeConvert from 'rexPlugins/utils/string/TypeConvert.js';
+import RunCommands from '../../../../runcommands.js';
+import TypeConvert from '../../../../utils/string/TypeConvert.js';
 
 const SpliceOne = Phaser.Utils.Array.SpliceOne;
 

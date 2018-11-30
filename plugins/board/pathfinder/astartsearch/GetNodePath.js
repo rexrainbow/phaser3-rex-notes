@@ -1,5 +1,5 @@
 import CONST from '../const.js';
-import QuickAbs from 'rexPlugins/utils/math/QuickAbs.js';
+import QuickAbs from '../../../utils/math/QuickAbs.js';
 
 const randomInt = Phaser.Math.Between;
 

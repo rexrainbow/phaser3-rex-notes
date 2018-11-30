@@ -1,4 +1,4 @@
-import ScaleDownDestroy from 'rexPlugins/scale-down-destroy.js';
+import ScaleDownDestroy from '../../../plugins/scale-down-destroy.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;

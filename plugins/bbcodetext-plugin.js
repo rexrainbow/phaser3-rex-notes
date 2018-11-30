@@ -1,5 +1,5 @@
 import BBCodeText from './gameobjects/bbocdetext/BbcodeText.js';
-import SetValue from 'rexPlugins/utils/object/SetValue.js';
+import SetValue from './utils/object/SetValue.js';
 
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 const BuildGameObject = Phaser.GameObjects.BuildGameObject;

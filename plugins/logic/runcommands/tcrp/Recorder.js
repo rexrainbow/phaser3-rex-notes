@@ -1,5 +1,5 @@
-import Clock from 'rexPlugins/clock.js'
-import Clone from 'rexPlugins/utils/object/Clone.js';
+import Clock from '../../../clock.js';
+import Clone from '../../../utils/object/Clone.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 

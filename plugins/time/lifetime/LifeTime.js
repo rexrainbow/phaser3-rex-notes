@@ -1,4 +1,4 @@
-import Clock from 'rexPlugins/clock.js';
+import Clock from '../../clock.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 

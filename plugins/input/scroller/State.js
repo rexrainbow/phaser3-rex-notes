@@ -1,4 +1,4 @@
-import FSM from 'rexPlugins/fsm.js';
+import FSM from '../../fsm.js';
 
 class State extends FSM {
     constructor(parent, config) {

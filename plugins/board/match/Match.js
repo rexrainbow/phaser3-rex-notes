@@ -1,4 +1,4 @@
-import IsFunction from 'rexPlugins/utils/object/IsFunction.js';
+import IsFunction from '../../utils/object/IsFunction.js';
 import MatchAll from './MatchAll.js';
 import MatchAtDir from './MatchAtDir.js';
 

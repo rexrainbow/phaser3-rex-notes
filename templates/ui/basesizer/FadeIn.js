@@ -1,4 +1,4 @@
-import Fade from 'rexPlugins/fade.js';
+import Fade from '../../../plugins/fade.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;

@@ -1,8 +1,8 @@
-import PoolKlass from 'rexPlugins/utils/object/Stack.js';
+import PoolKlass from '../../pool.js';
 import PenKlass from './Pen.js';
 import CONST from './const.js';
-import Clone from 'rexPlugins/utils/object/Clone.js';
-import NOOP from 'rexPlugins/utils/object/NOOP.js';
+import Clone from '../object/Clone.js';
+import NOOP from '../object/NOOP.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 const NO_NEWLINE = CONST.NO_NEWLINE;

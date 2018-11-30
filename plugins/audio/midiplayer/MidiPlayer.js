@@ -1,4 +1,4 @@
-import midiParser from 'rexPlugins/utils/midi-parser/midi-parser.js';
+import midiParser from '../../utils/midi-parser/midi-parser.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;

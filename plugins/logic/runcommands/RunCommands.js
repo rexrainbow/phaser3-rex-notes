@@ -1,5 +1,5 @@
-import ArrayCopy from 'rexPlugins/utils/array/Copy.js';
-import TypeConvert from 'rexPlugins/utils/string/TypeConvert.js';
+import ArrayCopy from '../../utils/array/Copy.js';
+import TypeConvert from '../../utils/string/TypeConvert.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 

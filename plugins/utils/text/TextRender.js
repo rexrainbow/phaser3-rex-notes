@@ -5,7 +5,7 @@
  */
 import WebGLRenderer from './TextWebGLRenderer.js';
 import CanvasRenderer from './TextCanvasRenderer.js';
-import NOOP from 'rexPlugins/utils/object/NOOP.js';
+import NOOP from '../object/NOOP.js';
 
 var renderWebGL = NOOP;
 var renderCanvas = NOOP;

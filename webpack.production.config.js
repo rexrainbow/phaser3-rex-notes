@@ -101,8 +101,8 @@ module.exports = {
     resolve: {
         alias: {
             'phaser': phaser,
-            'rexPlugins': path.resolve(__dirname, 'plugins/'),
-            'rexTemplates': path.resolve(__dirname, 'templates/'),
+            // 'rexPlugins': path.resolve(__dirname, 'plugins/'),
+            // 'rexTemplates': path.resolve(__dirname, 'templates/'),
         }
     }
 }

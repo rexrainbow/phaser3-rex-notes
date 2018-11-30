@@ -1,5 +1,5 @@
 import CellKlass from './Cell.js';
-import PoolKlass from 'rexPlugins/pool.js';
+import PoolKlass from '../../pool.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const SpliceOne = Phaser.Utils.Array.SpliceOne;

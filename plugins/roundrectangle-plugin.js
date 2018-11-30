@@ -1,5 +1,5 @@
 import RoundRectangle from './gameobjects/shape/roundrectangle/RoundRectangle.js';
-import SetValue from 'rexPlugins/utils/object/SetValue.js';
+import SetValue from './utils/object/SetValue.js';
 
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 const GetValue = Phaser.Utils.Objects.GetValue;

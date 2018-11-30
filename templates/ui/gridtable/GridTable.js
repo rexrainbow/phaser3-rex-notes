@@ -1,8 +1,8 @@
 import Sizer from '../sizer/Sizer.js';
 import CreateTable from './CreateTable.js';
 import Slider from '../slider/Slider.js';
-import Scroller from 'rexPlugins/scroller.js'
-import NOOP from 'rexPlugins/utils/object/NOOP.js';
+import Scroller from '../../../plugins/scroller.js';
+import NOOP from '../../../plugins/utils/object/NOOP.js';
 import SetItems from './Setitem.js';
 import TableSetInteractive from './TableSetInteractive.js';
 

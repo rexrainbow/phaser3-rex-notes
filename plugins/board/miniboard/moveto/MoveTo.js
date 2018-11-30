@@ -1,5 +1,5 @@
-import MoveToTask from 'rexPlugins/behaviors/moveto/MoveTo.js';
-import TickTask from 'rexPlugins/utils/ticktask/TickTask.js';
+import MoveToTask from '../../../behaviors/moveto/MoveTo.js';
+import TickTask from '../../../utils/ticktask/TickTask.js';
 
 import CanMoveToTile from './CanMoveToTile.js';
 import MoveToTile from './MoveToTile.js';

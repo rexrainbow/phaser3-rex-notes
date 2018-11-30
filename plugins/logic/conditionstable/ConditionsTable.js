@@ -1,5 +1,5 @@
-import CSVParser from 'rexPlugins/utils/papaparser/papaparse.js';
-import Clear from 'rexPlugins/utils/object/Clear.js';
+import CSVParser from '../../utils/papaparser/papaparse.js';
+import Clear from '../../utils/object/Clear.js';
 import CreateTestFunction from './CreateTestFunction.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;

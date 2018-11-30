@@ -1,4 +1,4 @@
-import Bank from 'rexPlugins/bank.js';
+import Bank from '../../bank.js';
 
 var ChessBank = new Bank({
     uidKey: '$uid',

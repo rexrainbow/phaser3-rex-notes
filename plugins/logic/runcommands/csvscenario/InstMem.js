@@ -1,5 +1,5 @@
-import Clone from 'rexPlugins/utils/object/Clone.js';
-import Clear from 'rexPlugins/utils/object/Clear.js';
+import Clone from '../../../utils/object/Clone.js';
+import Clear from '../../../utils/object/Clear.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 

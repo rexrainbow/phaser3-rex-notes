@@ -1,4 +1,4 @@
-import Pool from 'rexPlugins/pool.js';
+import Pool from '../../pool.js';
 
 class ObjectPool extends Pool {
     constructor() {

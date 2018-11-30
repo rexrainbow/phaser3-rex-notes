@@ -1,5 +1,5 @@
-import CursorKeys from 'rexPlugins/utils/cursorkeys/CursorKeys.js'
-import GetDefaultBounds from 'rexPlugins/utils/object/GetDefaultBounds.js';
+import CursorKeys from '../../utils/cursorkeys/CursorKeys.js'
+import GetDefaultBounds from '../../utils/object/GetDefaultBounds.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 

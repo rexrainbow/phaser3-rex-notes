@@ -1,4 +1,4 @@
-import FadeOutDestroy from 'rexPlugins/fade-out-destroy.js';
+import FadeOutDestroy from '../../../plugins/fade-out-destroy.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;

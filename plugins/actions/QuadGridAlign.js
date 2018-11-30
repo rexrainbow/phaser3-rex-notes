@@ -1,5 +1,5 @@
-import QuadGrid from 'rexPlugins/utils/grid/quad/Quad.js';
-import NOOP from 'rexPlugins/utils/object/NOOP.js';
+import QuadGrid from '../utils/grid/quad/Quad.js';
+import NOOP from '../utils/object/NOOP.js';
 
 const AlignIn = Phaser.Display.Align.In.QuickSet;
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;

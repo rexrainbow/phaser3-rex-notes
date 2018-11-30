@@ -1,7 +1,7 @@
 import {
     xyz2q,
     xyz2r
-} from 'rexPlugins/utils/grid/hexagon/CubeTransfer.js';
+} from '../../utils/grid/hexagon/CubeTransfer.js';
 
 var GetParallelogramMap = function (board, type, width, height, out) {
     if (out === undefined) {

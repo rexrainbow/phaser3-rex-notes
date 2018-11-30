@@ -1,7 +1,7 @@
-import TickTask from 'rexPlugins/utils/ticktask/TickTask.js';
-import GetSceneObject from 'rexPlugins/utils/system/GetSceneObject.js';
-import ArrayCopy from 'rexPlugins/utils/array/Copy.js';
-import RunCommands from 'rexPlugins/runcommands.js';
+import TickTask from '../../../utils/ticktask/TickTask.js';
+import GetSceneObject from '../../../utils/system/GetSceneObject.js';
+import ArrayCopy from '../../../utils/array/Copy.js';
+import RunCommands from '../../../runcommands.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 

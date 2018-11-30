@@ -14,6 +14,7 @@ class ActionKlass extends Phaser.Events.EventEmitter {
     // callbacks
     print(msg) {
         this.myConsole.setText(msg);
+        return this.waitClick(); // comment it to run next command immediately
     }
 
     waitClick() {

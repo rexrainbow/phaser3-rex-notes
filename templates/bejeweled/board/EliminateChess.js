@@ -1,4 +1,4 @@
-import FadeOutDestroy from 'rexPlugins/fade-out-destroy.js';
+import FadeOutDestroy from '../../../plugins/fade-out-destroy.js';
 var EliminateChess = function (chess, completeCallback, scope) {
     const duration = 500; //ms
     chess.forEach(function (item) {

@@ -1,5 +1,5 @@
-import TickTask from 'rexPlugins/utils/ticktask/TickTask.js';
-import GetSceneObject from 'rexPlugins/utils/system/GetSceneObject.js';
+import TickTask from '../../utils/ticktask/TickTask.js';
+import GetSceneObject from '../../utils/system/GetSceneObject.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const DistanceBetween = Phaser.Math.Distance.Between;

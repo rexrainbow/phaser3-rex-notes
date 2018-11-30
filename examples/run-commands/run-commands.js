@@ -1,4 +1,4 @@
-import runCommands from '../../plugins/runcommands.js';
+import RunCommands from '../../plugins/runcommands.js';
 
 const Map = Phaser.Structs.Map;
 
@@ -62,7 +62,7 @@ class Demo extends Phaser.Scene {
 
         ];
 
-        runCommands(cmds, myCmds);
+        RunCommands(cmds, myCmds);
     }
 
     update() {}

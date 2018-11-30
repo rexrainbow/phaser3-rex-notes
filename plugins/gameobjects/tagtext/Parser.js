@@ -1,4 +1,4 @@
-import TextStyle from 'rexPlugins/utils/text/TextStyle.js';
+import TextStyle from '../../utils/text/TextStyle.js';
 
 var GETPROP_RESULT = {
     rawText: null,

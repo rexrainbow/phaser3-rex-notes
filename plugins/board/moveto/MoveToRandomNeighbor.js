@@ -1,4 +1,4 @@
-import Clone from 'rexPlugins/utils/object/Clone.js';
+import Clone from '../../utils/object/Clone.js';
 
 const Shuffle = Phaser.Utils.Array.Shuffle;
 

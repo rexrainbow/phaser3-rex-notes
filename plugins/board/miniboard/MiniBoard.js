@@ -1,4 +1,4 @@
-import ContainerLite from 'rexPlugins/gameobjects/containerlite/ContainerLite.js';
+import ContainerLite from '../../gameobjects/containerlite/ContainerLite.js';
 import Board from '../board/Board.js';
 
 import AddChess from './chess/AddChess.js';

@@ -1,4 +1,4 @@
-import HexagonPolygon from 'rexPlugins/geom/hexagon/Hexagon.js';
+import HexagonPolygon from '../../../geom/hexagon/Hexagon.js';
 
 var GetGridPolygon = function (tileX, tileY, poly) {
     var worldX, worldY;

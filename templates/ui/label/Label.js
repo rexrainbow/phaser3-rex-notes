@@ -1,5 +1,5 @@
 import Sizer from '../sizer/Sizer.js';
-import DefaultMask from 'rexPlugins/utils/mask/DefaultMask.js';
+import DefaultMask from '../../../plugins/utils/mask/DefaultMask.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 

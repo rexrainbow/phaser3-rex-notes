@@ -1,4 +1,4 @@
-import FSM from 'rexPlugins/fsm.js';
+import FSM from '../../../plugins/fsm.js';
 import MatchState from './MatchState.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;

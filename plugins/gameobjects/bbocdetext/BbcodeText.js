@@ -1,4 +1,4 @@
-import Text from 'rexPlugins/utils/text/Text.js';
+import Text from '../../utils/text/Text';
 import parser from './Parser.js';
 
 class BBCodeText extends Text {

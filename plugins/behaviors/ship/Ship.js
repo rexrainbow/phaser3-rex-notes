@@ -1,7 +1,7 @@
 // https://labs.phaser.io/view.html?src=src\physics\arcade\asteroids%20movement.js
 
-import TickTask from 'rexPlugins/utils/ticktask/TickTask.js';
-import Proxy from 'rexPlugins/utils/arcade/proxy.js';
+import TickTask from '../../utils/ticktask/TickTask.js';
+import Proxy from '../../utils/arcade/proxy.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 

@@ -1,6 +1,6 @@
 import Dialog from './Dialog.js';
 import ObjectFactory from '../ObjectFactory.js';
-import SetValue from 'rexPlugins/utils/object/SetValue.js';
+import SetValue from '../../../plugins/utils/object/SetValue.js';
 
 ObjectFactory.register('dialog', function (config) {
     return new Dialog(this.scene, config);

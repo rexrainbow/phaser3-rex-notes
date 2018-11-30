@@ -1,6 +1,6 @@
 import Label from '../label/Label.js';
-import TextPage from 'rexPlugins/textpage.js';
-import TextTyping from 'rexPlugins/texttyping.js';
+import TextPage from '../../../plugins/textpage.js';
+import TextTyping from '../../../plugins/texttyping.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 

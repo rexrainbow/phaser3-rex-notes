@@ -1,4 +1,4 @@
-import WebFont from 'rexPlugins/utils/webfontloader/webfontloader.js';
+import WebFont from '../../utils/webfontloader/webfontloader.js';
 
 const FILE_POPULATED = Phaser.Loader.FILE_POPULATED;
 

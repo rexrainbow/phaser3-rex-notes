@@ -1,5 +1,5 @@
-import HexagonGrid from 'rexPlugins/utils/grid/hexagon/Hexagon.js';
-import NOOP from 'rexPlugins/utils/object/NOOP.js';
+import HexagonGrid from '../utils/grid/hexagon/Hexagon.js';
+import NOOP from '../utils/object/NOOP.js';
 
 const AlignIn = Phaser.Display.Align.In.QuickSet;
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;

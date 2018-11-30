@@ -1,5 +1,5 @@
-import Clear from 'rexPlugins/utils/object/Clear.js';
-import IsEmpty from 'rexPlugins/utils/object/IsEmpty.js';
+import Clear from '../../../utils/object/Clear.js';
+import IsEmpty from '../../../utils/object/IsEmpty.js';
 
 class BoardData {
     constructor() {

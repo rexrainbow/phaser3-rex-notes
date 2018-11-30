@@ -1,4 +1,4 @@
-import ContainerLite from 'rexPlugins/gameobjects/containerlite/ContainerLite.js';
+import ContainerLite from '../../../plugins/gameobjects/containerlite/ContainerLite.js';
 import GetSizerConfig from '../utils/GetSizerConfig.js';
 import PushIntoBounds from './PushIntoBounds.js';
 import DrawBounds from '../utils/DrawBounds.js';

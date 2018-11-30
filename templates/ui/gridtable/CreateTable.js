@@ -1,4 +1,4 @@
-import GridTable from 'rexPlugins/gridtable.js';
+import GridTable from '../../../plugins/gameobjects/gridtable/GridTable.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 

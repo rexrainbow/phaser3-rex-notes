@@ -1,5 +1,5 @@
 import GridTable from './gameobjects/gridtable/GridTable.js';
-import SetValue from 'rexPlugins/utils/object/SetValue.js';
+import SetValue from './utils/object/SetValue.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const BuildGameObject = Phaser.GameObjects.BuildGameObject;

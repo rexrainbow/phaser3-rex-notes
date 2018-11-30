@@ -1,4 +1,4 @@
-import QuickAbs from 'rexPlugins/utils/math/QuickAbs.js';
+import QuickAbs from '../../math/QuickAbs.js';
 
 var GetDistance = function (tileA, tileB, roughMode) {
     var dx = tileB.x - tileA.x;

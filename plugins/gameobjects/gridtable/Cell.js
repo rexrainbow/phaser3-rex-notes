@@ -1,4 +1,4 @@
-import Clear from 'rexPlugins/utils/object/Clear.js';
+import Clear from '../../utils/object/Clear.js';
 
 class Cell {
     constructor(parent, config) {

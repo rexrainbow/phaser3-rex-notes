@@ -3,7 +3,7 @@ import {
     qr2y,
     qr2z
 } from './CubeTransfer.js';
-import QuickAbs from 'rexPlugins/utils/math/QuickAbs.js';
+import QuickAbs from '../../math/QuickAbs.js';
 
 var GetDistance = function (tileA, tileB, roughMode) {
     var mode = this.mode;

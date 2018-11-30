@@ -1,5 +1,5 @@
-import RunCommands from 'rexPlugins/runcommands.js';
-import ArrayCopy from 'rexPlugins/utils/array/Copy.js';
+import RunCommands from '../../../runcommands.js';
+import ArrayCopy from '../../../utils/array/Copy.js';
 
 const EE = Phaser.Events.EventEmitter;
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;

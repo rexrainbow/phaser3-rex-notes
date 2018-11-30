@@ -1,4 +1,4 @@
-import BoardPlugin from 'rexPlugins/board-plugin.js'
+import BoardPlugin from '../../plugins/board-plugin.js';
 import MainState from './states/MainState.js';
 import Board from './board/Board.js';
 

@@ -1,4 +1,4 @@
-import QuickAbs from 'rexPlugins/utils/math/QuickAbs.js';
+import QuickAbs from '../../../utils/math/QuickAbs.js';
 
 const AngleBetween = Phaser.Math.Angle.Between;
 const Shuffle = Phaser.Utils.Array.Shuffle;
