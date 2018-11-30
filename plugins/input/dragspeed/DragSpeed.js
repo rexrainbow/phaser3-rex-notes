@@ -42,7 +42,9 @@ class DragSpeed extends EE {
 
     shutdown() {
         super.shutdown();
-        this.scene.events.off('preupdate', this.preupdate, this);
+        if (this.scene) { // Scene might be destoryed
+            this.scene.events.off('preupdate', this.preupdate, this);
+        }
         this.pointer = undefined;
         this.gameObject = undefined;
         this.scene = undefined;

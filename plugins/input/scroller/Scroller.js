@@ -70,7 +70,9 @@ class Scroller extends EE {
 
     shutdown() {
         super.shutdown();
-        this.scene.events.off('update', this._state.update, this._state);
+        if (this.scene) { // Scene might be destoryed
+            this.scene.events.off('update', this._state.update, this._state);
+        }
         this.gameObject = undefined;
         this.scene = undefined;
         this._state.destroy();

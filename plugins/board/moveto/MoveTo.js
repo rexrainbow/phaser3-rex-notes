@@ -86,7 +86,9 @@ class MoveTo extends TickTask {
 
     stopTicking() {
         super.stopTicking();
-        this.scene.events.off('update', this.update, this);
+        if (this.scene) { // Scene might be destoryed
+            this.scene.events.off('update', this.update, this);
+        }
     }
 
     set enable(value) {

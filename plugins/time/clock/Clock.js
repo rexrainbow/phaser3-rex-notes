@@ -16,7 +16,7 @@ class Clock extends TickTask {
     resetFromJSON(o) {
         this.isRunning = GetValue(o, 'isRunning', false);
         this.timeScale = GetValue(o, 'timeScale', 1);
-        this.now = GetValue(o, 'now', 0);        
+        this.now = GetValue(o, 'now', 0);
         return this;
     }
 
@@ -24,7 +24,7 @@ class Clock extends TickTask {
         return {
             isRunning: this.isRunning,
             timeScale: this.timeScale,
-            now: this.now,            
+            now: this.now,
             tickingMode: this.tickingMode
         };
     }
@@ -54,7 +54,9 @@ class Clock extends TickTask {
 
     stopTicking() {
         super.stopTicking();
-        this.scene.events.off('update', this.update, this);
+        if (this.scene) { // Scene might be destoryed
+            this.scene.events.off('update', this.update, this);
+        }
     }
 
     start(startAt) {

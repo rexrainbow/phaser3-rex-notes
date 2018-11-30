@@ -70,7 +70,9 @@ class Player extends TickTask {
 
     stopTicking() {
         super.stopTicking();
-        this.scene.events.off('update', this.update, this);
+        if (this.scene) { // Scene might be destoryed
+            this.scene.events.off('update', this.update, this);
+        }
     }
 
     load(commands, scope, config) {

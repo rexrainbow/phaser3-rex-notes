@@ -60,7 +60,9 @@ class Flash extends TickTask {
 
     stopTicking() {
         super.stopTicking();
-        this.scene.events.off('update', this.update, this);
+        if (this.scene) { // Scene might be destoryed
+            this.scene.events.off('update', this.update, this);
+        }
     }
 
     setEnable(e) {
@@ -97,15 +99,15 @@ class Flash extends TickTask {
         if (this.isRunning) {
             // pend task
             this.repeatCounter = -1;
-        } else {            
+        } else {
             this.repeatCounter = 0;
             this.nowTime = 0;
-            super.start();            
+            super.start();
         }
         return this;
     }
 
-    stop() {        
+    stop() {
         this.gameObject.setVisible(true);
         super.stop();
         return this;

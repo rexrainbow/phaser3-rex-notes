@@ -65,7 +65,9 @@ class RotateTo extends TickTask {
 
     stopTicking() {
         super.stopTicking();
-        this.scene.events.off('update', this.update, this);
+        if (this.scene) { // Scene might be destoryed
+            this.scene.events.off('update', this.update, this);
+        }
     }
 
     setEnable(e) {
@@ -90,7 +92,7 @@ class RotateTo extends TickTask {
         // invalid target angle
         if (angle == null) {
             return this;
-        }        
+        }
         this.target = MathWrap(angle, 0, 360); // 0~360
         if (dir === undefined) {
             dir = 0;
