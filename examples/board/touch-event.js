@@ -54,8 +54,8 @@ class Demo extends Phaser.Scene {
             right: cursors.right,
             up: cursors.up,
             down: cursors.down,
-            zoomIn: null,
-            zoomOut: null,
+            zoomIn: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A),
+            zoomOut: this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.E),
 
             acceleration: 0.06,
             drag: 0.003,
