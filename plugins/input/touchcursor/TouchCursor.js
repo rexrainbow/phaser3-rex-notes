@@ -84,7 +84,7 @@ class TouchCursor extends VectorToCursorKeys {
             return;
         }
         this.pointer = undefined;
-        this.cleanVector();
+        this.clearVector();
         this.events.emit('update');
     }
 
