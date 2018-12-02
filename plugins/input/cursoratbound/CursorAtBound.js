@@ -25,7 +25,9 @@ class CursorAtBound extends CursorKeys {
     }
 
     shutdown() {
-        this.scene.input.off('pointermove', this.onPointerMove, this);
+        if (this.scene) {
+            this.scene.input.off('pointermove', this.onPointerMove, this);
+        }
     }
 
     destroy() {

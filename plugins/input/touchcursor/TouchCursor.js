@@ -43,8 +43,10 @@ class TouchCursor extends VectorToCursorKeys {
     }
 
     shutdown() {
-        this.scene.input.off('pointermove', this.onKeyDown, this);
-        this.scene.input.off('pointerup', this.onKeyUp, this);
+        if (this.scene) {
+            this.scene.input.off('pointermove', this.onKeyDown, this);
+            this.scene.input.off('pointerup', this.onKeyUp, this);
+        }
         // gameObject events will be removed when this gameObject destroyed 
 
         this.events.destroy();

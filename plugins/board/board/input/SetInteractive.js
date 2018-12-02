@@ -16,9 +16,11 @@ var SetInteractive = function (enable) {
         this.scene.input.on('pointermove', onPointerMove, this);
 
         this.on('destroy', function () {
-            this.scene.input.off('pointerdown', onPointerDown, this);
-            this.scene.input.off('pointerup', onPointerUp, this);
-            this.scene.input.off('pointermove', onPointerMove, this);
+            if (this.scene) {
+                this.scene.input.off('pointerdown', onPointerDown, this);
+                this.scene.input.off('pointerup', onPointerUp, this);
+                this.scene.input.off('pointermove', onPointerMove, this);
+            }
         }, this);
     }
 
