@@ -1,4 +1,5 @@
 import CursorAtBoundPlugin from '../../plugins/cursoratbound-plugin.js';
+import MouseWheelToUpDownPlugin from '../../plugins/mousewheeltoupdown-plugin.js';
 
 const Random = Phaser.Math.Between;
 
@@ -22,8 +23,10 @@ class Demo extends Phaser.Scene {
             sensitiveDistance: 20,
             // bounds: new Phaser.Geom.Rectangle(x, y, width, height)
         });
+        this.mouseWheelToUpDown = this.plugins.get('rexMouseWheelToUpDown').add(this);
 
         var cursors = this.cursorAtBounds.createCursorKeys();
+        var zoomKeys = this.mouseWheelToUpDown.createCursorKeys();
         this.cameraController = new Phaser.Cameras.Controls.SmoothedKeyControl({
             camera: this.cameras.main,
 
@@ -31,12 +34,13 @@ class Demo extends Phaser.Scene {
             right: cursors.right,
             up: cursors.up,
             down: cursors.down,
-            zoomIn: null,
-            zoomOut: null,
+            zoomIn: zoomKeys.down,
+            zoomOut: zoomKeys.up,
 
             acceleration: 0.06,
             drag: 0.003,
-            maxSpeed: 0.3
+            maxSpeed: 0.3,
+            zoomSpeed: 0.05
         });
     }
 
@@ -69,10 +73,16 @@ var config = {
     scene: Demo,
     plugins: {
         global: [{
-            key: 'rexCursorAtBound',
-            plugin: CursorAtBoundPlugin,
-            start: true
-        }]
+                key: 'rexCursorAtBound',
+                plugin: CursorAtBoundPlugin,
+                start: true
+            },
+            {
+                key: 'rexMouseWheelToUpDown',
+                plugin: MouseWheelToUpDownPlugin,
+                start: true
+            }
+        ]
     }
 };
 
