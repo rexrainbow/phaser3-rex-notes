@@ -46,8 +46,24 @@ class Demo extends Phaser.Scene {
 
                     left: 20,
                     right: 20,
-                    top: 20,
-                    bottom: 20,
+                    top: -20,
+                    bottom: -20,
+                },
+
+                expand: {
+                    title: false,
+                    content: false,
+                    description: false,
+                    choices: false,
+                    actions: false,
+                },
+
+                align: {
+                    title: 'left',
+                    content: 'left',
+                    description: 'left',
+                    choices: 'left',
+                    actions: 'left'
                 }
             })
             .layout()

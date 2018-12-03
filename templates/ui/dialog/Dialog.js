@@ -45,36 +45,43 @@ class Dialog extends Sizer {
         }
 
         if (title) {
+            var align = GetValue(config, 'align.title', 'center');
             var padding = {
                 left: paddingLeft,
                 right: paddingRight,
                 top: paddingTop,
                 bottom: (content || description || choices || actions) ? titleSpace : paddingBottom
             }
-            this.add(title, 0, 'center', padding, true);
+            var expand = GetValue(config, 'expand.title', true);
+            this.add(title, 0, align, padding, expand);
         }
 
         if (content) {
+            var align = GetValue(config, 'align.content', 'center');
             var padding = {
                 left: paddingLeft,
                 right: paddingRight,
                 top: (title) ? 0 : paddingTop,
                 bottom: (description || choices || actions) ? contentSpace : paddingBottom
             }
-            this.add(content, 0, 'center', padding);
+            var expand = GetValue(config, 'expand.content', true);
+            this.add(content, 0, align, padding, expand);
         }
 
         if (description) {
+            var align = GetValue(config, 'align.description', 'center');
             var padding = {
                 left: paddingLeft,
                 right: paddingRight,
                 top: (title || content) ? 0 : paddingTop,
                 bottom: (choices || actions) ? descriptionSpace : paddingBottom
             }
-            this.add(description, 0, 'center', padding);
+            var expand = GetValue(config, 'expand.description', true);
+            this.add(description, 0, align, padding, expand);
         }
 
         if (choices) {
+            var align = GetValue(config, 'align.choices', 'center');
             var buttonsSizer = new Buttons(scene, {
                 groupName: 'choices',
                 buttons: choices,
@@ -88,10 +95,12 @@ class Dialog extends Sizer {
                 top: (title || content || description) ? 0 : paddingTop,
                 bottom: (actions) ? choicesSpace : paddingBottom
             }
-            this.add(buttonsSizer, 0, 'center', padding, true);
+            var expand = GetValue(config, 'expand.choices', true);
+            this.add(buttonsSizer, 0, align, padding, expand);
         }
 
         if (actions) {
+            var align = GetValue(config, 'align.actions', 'center');
             var buttonsSizer = new Buttons(scene, {
                 groupName: 'actions',
                 buttons: actions,
@@ -106,7 +115,8 @@ class Dialog extends Sizer {
                 top: (title || content || description || choices) ? 0 : paddingTop,
                 bottom: paddingBottom
             }
-            this.add(buttonsSizer, 0, 'center', padding, true);
+            var expand = GetValue(config, 'expand.actions', true);
+            this.add(buttonsSizer, 0, align, padding, expand);
         }
 
         this.childrenMap = {};

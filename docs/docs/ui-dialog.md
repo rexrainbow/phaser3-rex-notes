@@ -74,6 +74,22 @@ var dialog = scene.rexUI.add.dialog({
         button: 0,
     },
 
+    expand: {
+        title: true,
+        content: true,
+        description: true,
+        choices: true,
+        actions: true,
+    },
+
+    align: {
+        title: 'center',
+        content: 'center',
+        description: 'center',
+        choices: 'center',
+        actions: 'center'
+    },
+
     width: 0,
     height: 0,
     name: '',
@@ -99,6 +115,21 @@ var dialog = scene.rexUI.add.dialog({
     - `space.choices` : Space between last choice-button and below game object.
     - `space.choice` : Space between 2 choice-button game objects.
     - `space.action` : Space between 2 action-button game objects.
+- `expand` : Expand width of element
+    - `expand.title` : Set `true` to expand width of title game object.
+    - `expand.content`
+    - `expand.description`
+    - `expand.choices`
+    - `expand.actions`
+- `align` : Align element
+    - `align.title`
+        - `'center'`, or `Phaser.Display.Align.CENTER` : Align game object at center. Default value.
+        - `'left'`, or `Phaser.Display.Align.LEFT_CENTER` : Align game object at left-center.
+        - `'right'`, or `Phaser.Display.Align.RIGHT_CENTER` : Align game object at right-center.    
+    - `align.content`
+    - `align.description`
+    - `align.choices`
+    - `align.actions`
 - `name` : Set name of this dialog.
 - `width`, `height` : Minimum width, minimum height.
 
