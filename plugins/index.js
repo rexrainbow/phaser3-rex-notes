@@ -27,6 +27,7 @@ import TouchCursor from './touchcursor.js';
 import VirtualJoyStick from './virtualjoystick.js';
 import CursorAtBound from './cursoratbound.js';
 import MouseWheelToUpDown from './mousewheeltoupdown.js';
+import DragScale from './dragscale.js';
 
 // member of game object
 import MoveTo from './moveto.js';
@@ -120,6 +121,7 @@ export {
     VirtualJoyStick,
     CursorAtBound,
     MouseWheelToUpDown,
+    DragScale,
 
     // member of game object
     MoveTo,
