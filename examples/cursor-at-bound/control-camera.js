@@ -25,15 +25,15 @@ class Demo extends Phaser.Scene {
         });
         this.mouseWheelToUpDown = this.plugins.get('rexMouseWheelToUpDown').add(this);
 
-        var cursors = this.cursorAtBounds.createCursorKeys();
+        var cursorKeys = this.cursorAtBounds.createCursorKeys();
         var zoomKeys = this.mouseWheelToUpDown.createCursorKeys();
         this.cameraController = new Phaser.Cameras.Controls.SmoothedKeyControl({
             camera: this.cameras.main,
 
-            left: cursors.left,
-            right: cursors.right,
-            up: cursors.up,
-            down: cursors.down,
+            left: cursorKeys.left,
+            right: cursorKeys.right,
+            up: cursorKeys.up,
+            down: cursorKeys.down,
             zoomIn: zoomKeys.down,
             zoomOut: zoomKeys.up,
 

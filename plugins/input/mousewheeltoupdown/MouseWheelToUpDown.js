@@ -13,7 +13,7 @@ class MouseWheelToUpDown extends CursorKeys {
         this.onWheeling = function (event) {
             var deltaY = event.deltaY;
 
-            self.clearAllKeysState();
+            // self.clearAllKeysState();
             self.setKeyState('up', deltaY < 0);
             self.setKeyState('down', deltaY > 0);
         }
