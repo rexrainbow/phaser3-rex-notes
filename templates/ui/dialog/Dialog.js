@@ -101,13 +101,12 @@ class Dialog extends Sizer {
         }
 
         if (actions) {
-            var align = GetValue(config, 'align.actions', 'center');
             var buttonsSizer = new Buttons(scene, {
                 groupName: 'actions',
                 buttons: actions,
                 orientation: 0, // Left-right
                 space: actionSpace,
-                align: GetValue(config, 'align.action', 'center'),
+                align: GetValue(config, 'align.actions', 'center'),
                 eventEmitter: this.eventEmitter,
             })
             var padding = {
@@ -117,7 +116,7 @@ class Dialog extends Sizer {
                 bottom: paddingBottom
             }
             var expand = GetValue(config, 'expand.actions', true);
-            this.add(buttonsSizer, 0, align, padding, expand);
+            this.add(buttonsSizer, 0, 'center', padding, expand);
         }
 
         this.childrenMap = {};

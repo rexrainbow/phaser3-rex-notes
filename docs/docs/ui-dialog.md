@@ -92,7 +92,6 @@ var dialog = scene.rexUI.add.dialog({
         description: 'center',
         choices: 'center',
         actions: 'center',
-        action: 'center',
     },
 
     width: 0,
@@ -130,8 +129,7 @@ var dialog = scene.rexUI.add.dialog({
     - `align.content`
     - `align.description`
     - `align.choices`
-    - `align.actions`
-    - `align.action` : Alignment of action-buttons
+    - `align.actions` : Alignment of action-buttons
 - `name` : Set name of this dialog.
 - `width`, `height` : Minimum width, minimum height.
 

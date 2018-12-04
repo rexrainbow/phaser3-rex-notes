@@ -51,7 +51,7 @@ class Demo extends Phaser.Scene {
                 },
 
                 align: {
-                    action: 'right', // 'center'|'left'|'right'
+                    actions: 'right', // 'center'|'left'|'right'
                 }
             })
             .layout()
