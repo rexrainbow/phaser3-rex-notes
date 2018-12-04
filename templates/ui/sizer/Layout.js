@@ -66,6 +66,7 @@ var Layout = function (parent) {
     } else {
         proportionLength = 0;
     }
+    this.proportionLength = proportionLength;
 
     // Layout children    
     var children = this.sizerChildren;

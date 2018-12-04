@@ -110,6 +110,12 @@ class Sizer extends BaseSizer {
         return this;
     }
 
+    insert(index, gameObject, proportion, align, paddingConfig, expand) {
+        this.add(gameObject, proportion, align, paddingConfig, expand);
+        this.moveTo(gameObject, index);
+        return this;
+    }
+
     remove(gameObject) {
         var config = this.getSizerConfig(gameObject);
         config.parent = undefined;

@@ -172,6 +172,7 @@ class Dialog extends Sizer {
         this.childrenMap = {};
         this.childrenMap.background = background;
         this.childrenMap.title = title;
+        this.childrenMap.toolbar = toolbar;
         this.childrenMap.content = content;
         this.childrenMap.choices = choices;
         this.childrenMap.actions = actions;
