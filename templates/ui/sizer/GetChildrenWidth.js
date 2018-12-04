@@ -23,7 +23,9 @@ var GetChildrenWidth = function (minimumMode) {
                 (child.rexSizer.proportion === 0) ||
                 (minimumMode && (child.rexSizer.proportion > 0))
             ) {
-                childWidth = (child.isRexSizer) ? child.childrenWidth : child.width;
+                childWidth = (child.isRexSizer) ?
+                    Math.max(child.minWidth, child.childrenWidth) :
+                    child.width;
             } else {
                 childWidth = 0;
             }
@@ -46,14 +48,16 @@ var GetChildrenWidth = function (minimumMode) {
             if (child.rexSizer.proportion === -1) { // Background
                 childWidth = 0;
             } else {
-                childWidth = (child.isRexSizer) ? child.childrenWidth : child.width;
+
+                childWidth = (child.isRexSizer) ?
+                    Math.max(child.minWidth, child.childrenWidth) :
+                    child.width;
             }
             padding = child.rexSizer.padding;
             childWidth += (padding.left + padding.right);
             result = Math.max(childWidth, result);
         }
     }
-    result = Math.max(result, this.minWidth);
     return result;
 }
 

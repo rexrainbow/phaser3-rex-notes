@@ -34,13 +34,12 @@ class Demo extends Phaser.Scene {
                     createLabel(this, 'Action1')
                 ],
 
-                actionsAlign: 'left', // 'center'|'left'|'right'
-
                 space: {
                     title: 25,
                     content: 25,
                     description: 25,
                     choices: 25,
+
                     choice: 15,
                     action: 15,
 
@@ -63,7 +62,8 @@ class Demo extends Phaser.Scene {
                     content: 'left',
                     description: 'left',
                     choices: 'left',
-                    actions: 'left'
+                    actions: 'left',
+                    action: 'left',
                 }
             })
             .layout()
@@ -88,7 +88,10 @@ class Demo extends Phaser.Scene {
 
 var createLabel = function (scene, text) {
     return scene.rexUI.add.label({
-        background: scene.rexUI.add.roundRectangle(0, 0, 100, 40, 20, 0x5e92f3),
+        width: 40, // Minimum width of round-rectangle
+        height: 40, // Minimum height of round-rectangle
+
+        background: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 20, 0x5e92f3),
 
         text: scene.add.text(0, 0, text, {
             fontSize: '24px'

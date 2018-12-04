@@ -18,13 +18,17 @@ class Demo extends Phaser.Scene {
         var buttons = this.rexUI.add.buttons({
                 x: 400,
                 y: 300,
+                width: 300,
+                height: 300,
 
-                orientation: 1, // Top-Bottom
+                orientation: 0,
 
                 buttons: [
-                    createButton(this, 2, 'AA'),
-                    createButton(this, 2, 'BB'),
-                ]
+                    createButton(this, 'A'),
+                    createButton(this, 'A'),
+                ],
+
+                align: 'right'
             })
             .layout()
             .drawBounds(this.add.graphics(), 0xff0000)
@@ -34,31 +38,17 @@ class Demo extends Phaser.Scene {
     update() {}
 }
 
-var createButton = function (scene, direction, text) {
-    var radius;
-    switch (direction) {
-        case 0: // Right
-            radius = {
-                tr: 20,
-                br: 20
-            }
-            break;
-        case 2: // Left
-            radius = {
-                tl: 20,
-                bl: 20
-            }
-            break;
-    }
+var createButton = function (scene, text) {
     return scene.rexUI.add.label({
-        width: 50,
+        width: 40,
         height: 40,
-        background: scene.rexUI.add.roundRectangle(0, 0, 50, 50, radius, COLOR_DARK),
+        background: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 20, COLOR_LIGHT),
         text: scene.add.text(0, 0, text, {
-            fontSize: '18pt'
+            fontSize: 18
         }),
         space: {
-            left: 10
+            left: 10,
+            right: 10,
         }
     });
 }

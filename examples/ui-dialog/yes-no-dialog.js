@@ -39,8 +39,6 @@ class Demo extends Phaser.Scene {
                     createButton(this, 'No')
                 ],
 
-                actionsAlign: 'center', // 'center'|'left'|'right'                
-
                 space: {
                     title: 25,
                     content: 25,
@@ -50,6 +48,10 @@ class Demo extends Phaser.Scene {
                     right: 20,
                     top: 20,
                     bottom: 20,
+                },
+
+                align: {
+                    action: 'right', // 'center'|'left'|'right'
                 }
             })
             .layout()
@@ -74,7 +76,10 @@ class Demo extends Phaser.Scene {
 
 var createButton = function (scene, text) {
     return scene.rexUI.add.label({
-        background: scene.rexUI.add.roundRectangle(0, 0, 100, 40, 20, 0x5e92f3),
+        // width: 40,
+        // height: 40,
+
+        background: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 20, 0x5e92f3),
 
         text: scene.add.text(0, 0, text, {
             fontSize: '24px'

@@ -87,6 +87,7 @@ class Dialog extends Sizer {
                 buttons: choices,
                 orientation: 1, // Top-Bottom
                 space: choiceSpace,
+                align: 'left',
                 eventEmitter: this.eventEmitter,
             });
             var padding = {
@@ -106,7 +107,7 @@ class Dialog extends Sizer {
                 buttons: actions,
                 orientation: 0, // Left-right
                 space: actionSpace,
-                align: GetValue(config, 'actionsAlign', 'center'),
+                align: GetValue(config, 'align.action', 'center'),
                 eventEmitter: this.eventEmitter,
             })
             var padding = {

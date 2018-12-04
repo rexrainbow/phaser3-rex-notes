@@ -68,8 +68,6 @@ var createDialog = function (scene, x, y, onClick) {
                 scene.rexUI.add.roundRectangle(0, 0, 0, 0, 20, 0xcddc39),
             ],
 
-            actionsAlign: 'center',
-
             space: {
                 title: 10,
                 action: 5,
@@ -78,7 +76,7 @@ var createDialog = function (scene, x, y, onClick) {
                 right: 10,
                 top: 10,
                 bottom: 10,
-            }
+            },
         })
         .layout()
         .pushIntoBounds()

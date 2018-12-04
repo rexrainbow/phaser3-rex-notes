@@ -2,7 +2,7 @@ import Fade from './fade.js';
 
 var FadeIn = function (gameObject, duration, endAlpha) {
     if (endAlpha === undefined) {
-        endAlpha = 1;
+        endAlpha = gameObject.alpha;
     }
     defaultConfig.mode = 0;
     defaultConfig.start = 0;

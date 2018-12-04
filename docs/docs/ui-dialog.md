@@ -48,15 +48,19 @@ var dialog = scene.rexUI.add.dialog({
 
     // Elements
     background: backgroundGameObject,
+
     title: titleGameObject,
+
     content: contentGameObject,
+
     description: descriptionGameObject,
+
     choices: [
         buttonGameObject,
         buttonGameObject,
         // ...
     ],
-    actionsAlign: 'center',
+
     actions: [
         buttonGameObject,
         buttonGameObject,
@@ -87,7 +91,8 @@ var dialog = scene.rexUI.add.dialog({
         content: 'center',
         description: 'center',
         choices: 'center',
-        actions: 'center'
+        actions: 'center',
+        action: 'center',
     },
 
     width: 0,
@@ -103,10 +108,6 @@ var dialog = scene.rexUI.add.dialog({
 - `description` : Game object of description, optional.
 - `choices` : Array of Game objects for choice-buttons group which arranged from top to bottom, optional.
 - `actions` : Array of Game objects for action-buttons group which arranged from left to right, optional.
-- `actionsAlign` : Alignment of action-buttons
-    - `'center'`
-    - `'left'`
-    - `'right'`
 - `space` : Pads spaces
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds
     - `space.title` : Space between title game object and below game object.
@@ -130,6 +131,7 @@ var dialog = scene.rexUI.add.dialog({
     - `align.description`
     - `align.choices`
     - `align.actions`
+    - `align.action` : Alignment of action-buttons
 - `name` : Set name of this dialog.
 - `width`, `height` : Minimum width, minimum height.
 

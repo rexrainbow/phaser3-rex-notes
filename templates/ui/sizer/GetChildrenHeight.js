@@ -22,7 +22,9 @@ var GetChildrenHeight = function (minimumMode) {
             if (child.rexSizer.proportion === -1) { // Background
                 childHeight = 0;
             } else {
-                childHeight = (child.isRexSizer) ? child.childrenHeight : child.height;
+                childHeight = (child.isRexSizer) ?
+                    Math.max(child.minHeight, child.childrenHeight) :
+                    child.height;
             }
             padding = child.rexSizer.padding;
             childHeight += (padding.top + padding.bottom);
@@ -44,7 +46,9 @@ var GetChildrenHeight = function (minimumMode) {
                 (child.rexSizer.proportion === 0) ||
                 (minimumMode && (child.rexSizer.proportion > 0))
             ) {
-                childHeight = (child.isRexSizer) ? child.childrenHeight : child.height;
+                childHeight = (child.isRexSizer) ?
+                    Math.max(child.minHeight, child.childrenHeight) :
+                    child.height;
             } else {
                 childHeight = 0;
             }
@@ -53,7 +57,6 @@ var GetChildrenHeight = function (minimumMode) {
             result += childHeight;
         }
     }
-    result = Math.max(result, this.minHeight);
     return result;
 }
 

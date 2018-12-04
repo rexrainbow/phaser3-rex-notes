@@ -29,7 +29,7 @@ class Buttons extends Sizer {
 
         if (buttons) {
             var groupName = GetValue(config, 'groupName', undefined);
-            var buttonsAlign = GetValue(config, 'align', undefined); // Default is 'center'
+            var buttonsAlign = GetValue(config, 'align', undefined); // Default is 'left'/'top'
             var button, proportion, padding;
             for (var i = 0, cnt = buttons.length; i < cnt; i++) {
                 button = buttons[i];
