@@ -34,13 +34,6 @@ var Layout = function (parent) {
                 expandX = true;
             }
         }
-        if (this.childrenProportion > 0) {
-            if (this.orientation === 0) {
-                expandX = true;
-            } else {
-                expandY = true;
-            }
-        }
     }
     if (expandX) {
         var padding = this.rexSizer.padding;

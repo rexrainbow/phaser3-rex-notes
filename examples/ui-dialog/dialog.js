@@ -14,10 +14,16 @@ class Demo extends Phaser.Scene {
         var dialog = this.rexUI.add.dialog({
                 x: 400,
                 y: 300,
+                width: 500,
 
                 background: this.rexUI.add.roundRectangle(0, 0, 100, 100, 20, 0x1565c0),
 
                 title: createLabel(this, 'Title'),
+
+                toolbar: [
+                    createLabel(this, 'O'),
+                    createLabel(this, 'X')
+                ],
 
                 content: createLabel(this, 'Content'),
 
@@ -50,20 +56,19 @@ class Demo extends Phaser.Scene {
                 },
 
                 expand: {
-                    title: false,
-                    content: false,
-                    description: false,
-                    choices: false,
-                    actions: false,
+                    // title: false,
+                    // content: false,
+                    // description: false,
+                    // choices: false,
+                    // actions: false,
                 },
 
                 align: {
                     title: 'left',
-                    content: 'left',
-                    description: 'left',
-                    choices: 'left',
-                    actions: 'left',
-                    action: 'left',
+                    // content: 'left',
+                    // description: 'left',
+                    // choices: 'left',
+                    actions: 'left', // 'center'|'left'|'right'
                 }
             })
             .layout()

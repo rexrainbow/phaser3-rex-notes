@@ -17,6 +17,10 @@ class Dialog extends Sizer {
         // Add elements
         var background = GetValue(config, 'background', undefined);
         var title = GetValue(config, 'title', undefined);
+        var toolbar = GetValue(config, 'toolbar', undefined);
+        if (toolbar && toolbar.length === 0) {
+            toolbar = undefined;
+        }
         var content = GetValue(config, 'content', undefined);
         var description = GetValue(config, 'description', undefined);
         var choices = GetValue(config, 'choices', undefined);
@@ -33,19 +37,15 @@ class Dialog extends Sizer {
         var paddingRight = GetValue(config, 'space.right', 0);
         var paddingTop = GetValue(config, 'space.top', 0);
         var paddingBottom = GetValue(config, 'space.bottom', 0);
-        var titleSpace = GetValue(config, 'space.title', 0);
-        var contentSpace = GetValue(config, 'space.content', 0);
-        var descriptionSpace = GetValue(config, 'space.description', 0);
-        var choicesSpace = GetValue(config, 'space.choices', 0);
-        var choiceSpace = GetValue(config, 'space.choice', 0);
-        var actionSpace = GetValue(config, 'space.action', 0);
 
         if (background) {
             this.addBackground(background);
         }
 
-        if (title) {
+        // title only
+        if (title && !toolbar) {
             var align = GetValue(config, 'align.title', 'center');
+            var titleSpace = GetValue(config, 'space.title', 0);
             var padding = {
                 left: paddingLeft,
                 right: paddingRight,
@@ -56,12 +56,60 @@ class Dialog extends Sizer {
             this.add(title, 0, align, padding, expand);
         }
 
-        if (content) {
-            var align = GetValue(config, 'align.content', 'center');
+        var toolbarSizer;
+        if (toolbar) {
+            toolbarSizer = new Buttons(scene, {
+                groupName: 'toolbar',
+                buttons: toolbar,
+                orientation: 0, // Left-right
+                space: GetValue(config, 'space.toolbarItem', 0),
+                align: GetValue(config, 'align.toolbar', 'right'),
+                eventEmitter: this.eventEmitter,
+            });
+        }
+
+        // toolbar only
+        if (toolbar && !title) {
+            var titleSpace = GetValue(config, 'space.title', 0);
             var padding = {
                 left: paddingLeft,
                 right: paddingRight,
-                top: (title) ? 0 : paddingTop,
+                top: paddingTop,
+                bottom: (content || description || choices || actions) ? titleSpace : paddingBottom
+            }
+            var expand = GetValue(config, 'expand.toolbar', true);
+            this.add(toolbarSizer, 0, 'center', padding, expand);
+        }
+
+        // tilte and toolbar
+        if (title && toolbar) {
+            var titleSizer = new Sizer(scene, {
+                orientation: 0
+            });
+            // Add title
+            var align = GetValue(config, 'align.title', 'center');
+            var expand = GetValue(config, 'expand.title', true);
+            titleSizer.add(title, 1, align, 0, expand);
+            // Add toolbar
+            titleSizer.add(toolbarSizer, 0, 'right', 0, false);
+            // Add sizer to dialog
+            var titleSpace = GetValue(config, 'space.title', 0);
+            var padding = {
+                left: paddingLeft,
+                right: paddingRight,
+                top: paddingTop,
+                bottom: (content || description || choices || actions) ? titleSpace : paddingBottom
+            };
+            this.add(titleSizer, 0, 'center', padding, true);
+        }
+
+        if (content) {
+            var align = GetValue(config, 'align.content', 'center');
+            var contentSpace = GetValue(config, 'space.content', 0);
+            var padding = {
+                left: paddingLeft,
+                right: paddingRight,
+                top: (title || toolbar) ? 0 : paddingTop,
                 bottom: (description || choices || actions) ? contentSpace : paddingBottom
             }
             var expand = GetValue(config, 'expand.content', true);
@@ -70,10 +118,11 @@ class Dialog extends Sizer {
 
         if (description) {
             var align = GetValue(config, 'align.description', 'center');
+            var descriptionSpace = GetValue(config, 'space.description', 0);
             var padding = {
                 left: paddingLeft,
                 right: paddingRight,
-                top: (title || content) ? 0 : paddingTop,
+                top: (title || toolbar || content) ? 0 : paddingTop,
                 bottom: (choices || actions) ? descriptionSpace : paddingBottom
             }
             var expand = GetValue(config, 'expand.description', true);
@@ -86,14 +135,15 @@ class Dialog extends Sizer {
                 groupName: 'choices',
                 buttons: choices,
                 orientation: 1, // Top-Bottom
-                space: choiceSpace,
+                space: GetValue(config, 'space.choice', 0),
                 align: 'left',
                 eventEmitter: this.eventEmitter,
             });
+            var choicesSpace = GetValue(config, 'space.choices', 0);
             var padding = {
                 left: paddingLeft,
                 right: paddingRight,
-                top: (title || content || description) ? 0 : paddingTop,
+                top: (title || toolbar || content || description) ? 0 : paddingTop,
                 bottom: (actions) ? choicesSpace : paddingBottom
             }
             var expand = GetValue(config, 'expand.choices', true);
@@ -105,14 +155,14 @@ class Dialog extends Sizer {
                 groupName: 'actions',
                 buttons: actions,
                 orientation: 0, // Left-right
-                space: actionSpace,
+                space: GetValue(config, 'space.action', 0),
                 align: GetValue(config, 'align.actions', 'center'),
                 eventEmitter: this.eventEmitter,
             })
             var padding = {
                 left: paddingLeft,
                 right: paddingRight,
-                top: (title || content || description || choices) ? 0 : paddingTop,
+                top: (title || toolbar || content || description || choices) ? 0 : paddingTop,
                 bottom: paddingBottom
             }
             var expand = GetValue(config, 'expand.actions', true);
