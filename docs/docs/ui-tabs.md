@@ -38,7 +38,7 @@ var config = {
 var game = new Phaser.Game(config);
 ```
 
-### Add TABS object
+### Add Tabs object
 
 ```javascript
 var tabs = scene.rexUI.add.tabs({
@@ -102,6 +102,23 @@ var tabs = scene.rexUI.add.tabs({
     - `space.topButtonsOffset`, `space.bottomButtonsOffset` : Left offset of buttons group.
     - `space.leftButton`, `space.rightButton`, `space.topButton`, `space.bottomButton` : Space between 2 button game objects.
 - `name` : Set name of this tabs.
+
+### Custom class
+
+- Define class
+    ```javascript
+    class MyTabs extends RexPlugins.UI.Tabs {
+        constructor(scene, config) {
+            super(scene, config);
+            // ...
+        }
+        // ...
+    }
+    ```
+- Create instance
+    ```javascript
+    var tabs = new MyTabs(scene, config);
+    ```
 
 ### Layout children
 

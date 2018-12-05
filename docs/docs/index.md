@@ -35,6 +35,7 @@
 1. [Interception](interception.md): Predict the intersection position of two game objects with constant moving speed.
 1. [Life time](lifetime.md): Destroy game object when time-out.
 1. [LZ-string](lzstring.md): Compress string using LZ-based compression algorithm.
+1. [Mouse-wheel to up/down](mousewheeltoupdown.md): Map mouse-wheeling to (up/down) cursor key state.
 1. [Move to](moveto.md): Move game object towards target position with a steady speed.
 1. [Page](textpage.md): Display text page by page on text object.
 1. [Path follower](pathfollower.md): Set position of game object on a path.

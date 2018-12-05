@@ -104,6 +104,7 @@ nav:
         - Scroller: scroller.md
         - Virtual joystick: virtualjoystick.md
         - Cursor at bound: cursoratbound.md
+        - Mouse-wheel to up/down: mousewheeltoupdown.md
     - Keyboard:
         - Keyboard events: keyboardevents.md
 - Audio:

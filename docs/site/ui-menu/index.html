@@ -40,7 +40,7 @@
     
     
       
-        <title>Menue - Notes of Phaser 3</title>
+        <title>Menu - Notes of Phaser 3</title>
       
     
     
@@ -128,7 +128,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Menue
+                Menu
               </span>
             
           
@@ -1275,11 +1275,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        Menue
+        Menu
       </label>
     
-    <a href="./" title="Menue" class="md-nav__link md-nav__link--active">
-      Menue
+    <a href="./" title="Menu" class="md-nav__link md-nav__link--active">
+      Menu
     </a>
     
       
@@ -1322,6 +1322,13 @@
           <li class="md-nav__item">
   <a href="#add-grid-table-object" title="Add grid table object" class="md-nav__link">
     Add grid table object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-class" title="Custom class" class="md-nav__link">
+    Custom class
   </a>
   
 </li>
@@ -1856,6 +1863,18 @@
   <li class="md-nav__item">
     <a href="../cursoratbound/" title="Cursor at bound" class="md-nav__link">
       Cursor at bound
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mousewheeltoupdown/" title="Mouse-wheel to up/down" class="md-nav__link">
+      Mouse-wheel to up/down
     </a>
   </li>
 
@@ -3509,6 +3528,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#custom-class" title="Custom class" class="md-nav__link">
+    Custom class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#layout-children" title="Layout children" class="md-nav__link">
     Layout children
   </a>
@@ -3553,7 +3579,7 @@
                   <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/ui-menu.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Menue</h1>
+                  <h1>Menu</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
 <p>A container with buttons and sub-menu.</p>
@@ -3665,10 +3691,25 @@
 </li>
 <li><code>name</code> : Set name of this menu.</li>
 </ul>
+<h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Define class
+    <div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">MyMenu</span> <span class="kr">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Menu</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div></li>
+<li>Create instance
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">menu</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyMenu</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</pre></div></li>
+</ul>
 <h3 id="layout-children">Layout children<a class="headerlink" href="#layout-children" title="Permanent link">&para;</a></h3>
 <p>Arrange position of all children. 
 <em>This will be called when menu object created, user does not need call it again generally.</em></p>
-<div class="codehilite"><pre><span></span><span class="nx">gridSizer</span><span class="p">.</span><span class="nx">layout</span><span class="p">();</span>
+<div class="codehilite"><pre><span></span><span class="nx">menu</span><span class="p">.</span><span class="nx">layout</span><span class="p">();</span>
 </pre></div>
 
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>

@@ -1267,6 +1267,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#custom-class" title="Custom class" class="md-nav__link">
+    Custom class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#layout-children" title="Layout children" class="md-nav__link">
     Layout children
   </a>
@@ -1364,8 +1371,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../ui-menu/" title="Menue" class="md-nav__link">
-      Menue
+    <a href="../ui-menu/" title="Menu" class="md-nav__link">
+      Menu
     </a>
   </li>
 
@@ -1863,6 +1870,18 @@
   <li class="md-nav__item">
     <a href="../cursoratbound/" title="Cursor at bound" class="md-nav__link">
       Cursor at bound
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mousewheeltoupdown/" title="Mouse-wheel to up/down" class="md-nav__link">
+      Mouse-wheel to up/down
     </a>
   </li>
 
@@ -3516,6 +3535,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#custom-class" title="Custom class" class="md-nav__link">
+    Custom class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#layout-children" title="Layout children" class="md-nav__link">
     Layout children
   </a>
@@ -3647,6 +3673,21 @@
 <li><code>name</code> : Set name of this label.</li>
 <li><code>x</code>, <code>y</code> : Position of this label object, it is valid when this label is the top object.</li>
 <li><code>width</code>, <code>height</code> : Minimum width, minimum height.</li>
+</ul>
+<h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Define class
+    <div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">MyLabel</span> <span class="kr">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Label</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div></li>
+<li>Create instance
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">label</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyLabel</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</pre></div></li>
 </ul>
 <h3 id="layout-children">Layout children<a class="headerlink" href="#layout-children" title="Permanent link">&para;</a></h3>
 <p>Arrange position of all elements.</p>

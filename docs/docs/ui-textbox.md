@@ -91,6 +91,23 @@ var textBox = scene.rexUI.add.textBox({
 - `x`, `y` : Position of this textbox object, it is valid when this textbox is the top object.
 - `width`, `height` : Minimum width, minimum height.
 
+### Custom class
+
+- Define class
+    ```javascript
+    class MyTextBox extends RexPlugins.UI.TextBox {
+        constructor(scene, config) {
+            super(scene, config);
+            // ...
+        }
+        // ...
+    }
+    ```
+- Create instance
+    ```javascript
+    var textBox = new MyTextBox(scene, config);
+    ```
+
 ### Layout children
 
 Arrange position of all elements.

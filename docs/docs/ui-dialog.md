@@ -51,6 +51,12 @@ var dialog = scene.rexUI.add.dialog({
 
     title: titleGameObject,
 
+    toolbar: [
+        buttonGameObject,
+        buttonGameObject,
+        // ...
+    ],
+
     content: contentGameObject,
 
     description: descriptionGameObject,
@@ -73,6 +79,7 @@ var dialog = scene.rexUI.add.dialog({
         right: 0,
         top: 0,
         bottom: 0,
+
         title: 0,
         content: 0,
         button: 0,
@@ -103,6 +110,7 @@ var dialog = scene.rexUI.add.dialog({
 - `x`, `y` : Position of this dialog object, it is valid when this dialog is the top object.
 - `background` : Game object of background, optional. This background game object will be resized to fit the size of dialog.
 - `title` : Game object of title, optional.
+- `toolbar` : Array of Game objects for toolbar-buttons group which arranged from left to right, optional.
 - `content` : Game object of content, optional.
 - `description` : Game object of description, optional.
 - `choices` : Array of Game objects for choice-buttons group which arranged from top to bottom, optional.
@@ -132,6 +140,23 @@ var dialog = scene.rexUI.add.dialog({
     - `align.actions` : Alignment of action-buttons
 - `name` : Set name of this dialog.
 - `width`, `height` : Minimum width, minimum height.
+
+### Custom class
+
+- Define class
+    ```javascript
+    class MyDialog extends RexPlugins.UI.Dialog {
+        constructor(scene, config) {
+            super(scene, config);
+            // ...
+        }
+        // ...
+    }
+    ```
+- Create instance
+    ```javascript
+    var dialog = new MyDialog(scene, config);
+    ```
 
 ### Layout children
 

@@ -1308,8 +1308,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-tabs-object" title="Add TABS object" class="md-nav__link">
-    Add TABS object
+  <a href="#add-tabs-object" title="Add Tabs object" class="md-nav__link">
+    Add Tabs object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-class" title="Custom class" class="md-nav__link">
+    Custom class
   </a>
   
 </li>
@@ -1377,8 +1384,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../ui-menu/" title="Menue" class="md-nav__link">
-      Menue
+    <a href="../ui-menu/" title="Menu" class="md-nav__link">
+      Menu
     </a>
   </li>
 
@@ -1876,6 +1883,18 @@
   <li class="md-nav__item">
     <a href="../cursoratbound/" title="Cursor at bound" class="md-nav__link">
       Cursor at bound
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../mousewheeltoupdown/" title="Mouse-wheel to up/down" class="md-nav__link">
+      Mouse-wheel to up/down
     </a>
   </li>
 
@@ -3522,8 +3541,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-tabs-object" title="Add TABS object" class="md-nav__link">
-    Add TABS object
+  <a href="#add-tabs-object" title="Add Tabs object" class="md-nav__link">
+    Add Tabs object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-class" title="Custom class" class="md-nav__link">
+    Custom class
   </a>
   
 </li>
@@ -3626,7 +3652,7 @@
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </pre></div>
 
-<h3 id="add-tabs-object">Add TABS object<a class="headerlink" href="#add-tabs-object" title="Permanent link">&para;</a></h3>
+<h3 id="add-tabs-object">Add Tabs object<a class="headerlink" href="#add-tabs-object" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tabs</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">tabs</span><span class="p">({</span>
     <span class="c1">// Position</span>
     <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
@@ -3691,6 +3717,21 @@
 </ul>
 </li>
 <li><code>name</code> : Set name of this tabs.</li>
+</ul>
+<h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Define class
+    <div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">MyTabs</span> <span class="kr">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Tabs</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div></li>
+<li>Create instance
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tabs</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyTabs</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</pre></div></li>
 </ul>
 <h3 id="layout-children">Layout children<a class="headerlink" href="#layout-children" title="Permanent link">&para;</a></h3>
 <p>Arrange position of all elements.</p>
@@ -3805,13 +3846,13 @@
           </a>
         
         
-          <a href="../ui-menu/" title="Menue" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../ui-menu/" title="Menu" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Menue
+                Menu
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

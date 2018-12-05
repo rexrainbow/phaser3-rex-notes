@@ -100,13 +100,30 @@ var menu = scene.rexUI.add.menu({
     - `'button.over'`
 - `name` : Set name of this menu.
 
+### Custom class
+
+- Define class
+    ```javascript
+    class MyMenu extends RexPlugins.UI.Menu {
+        constructor(scene, config) {
+            super(scene, config);
+            // ...
+        }
+        // ...
+    }
+    ```
+- Create instance
+    ```javascript
+    var menu = new MyMenu(scene, config);
+    ```
+
 ### Layout children
 
 Arrange position of all children. 
 *This will be called when menu object created, user does not need call it again generally.*
 
 ```javascript
-gridSizer.layout();
+menu.layout();
 ```
 
 ### Other properties

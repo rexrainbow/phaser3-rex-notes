@@ -111,6 +111,23 @@ var gridTable = scene.rexUI.add.gridTable({
 - `items` : Array of item data for each cell.
 - `name` : Set name of this gridTable.
 
+### Custom class
+
+- Define class
+    ```javascript
+    class MyGridTable extends RexPlugins.UI.GridTable {
+        constructor(scene, config) {
+            super(scene, config);
+            // ...
+        }
+        // ...
+    }
+    ```
+- Create instance
+    ```javascript
+    var gridTable = new MyTextBox(scene, config);
+    ```
+
 ### Layout children
 
 Arrange position of all elements.

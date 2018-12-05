@@ -83,6 +83,23 @@ var label = scene.rexUI.add.label({
 - `x`, `y` : Position of this label object, it is valid when this label is the top object.
 - `width`, `height` : Minimum width, minimum height.
 
+### Custom class
+
+- Define class
+    ```javascript
+    class MyLabel extends RexPlugins.UI.Label {
+        constructor(scene, config) {
+            super(scene, config);
+            // ...
+        }
+        // ...
+    }
+    ```
+- Create instance
+    ```javascript
+    var label = new MyLabel(scene, config);
+    ```
+
 ### Layout children
 
 Arrange position of all elements.
