@@ -121,7 +121,9 @@ class Button extends EE {
 
 const CLICKMODE = {
     'press': 0,
-    'release': 1
+    'pointerdown': 0,
+    'release': 1,
+    'pointerup': 1,
 };
 
 export default Button;

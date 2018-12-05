@@ -56,8 +56,8 @@ var button = scene.plugins.get('rexButton').add(gameObject, {
 
 - `enable` : drag-able
 - `mode` :
-    - `'press'`, or `0` : Fire 'click' event when touch pressed.
-    - `'release'`, or `1` : Fire 'click' event when touch released after pressed.
+    - `'pointerdown'`, `'press'`, or `0` : Fire 'click' event when touch pressed.
+    - `'pointerup'`, `'release'`, or `1` : Fire 'click' event when touch released after pressed.
 - `clickInterval` : Interval between 2 'click' events, in ms.
 
 ### Events

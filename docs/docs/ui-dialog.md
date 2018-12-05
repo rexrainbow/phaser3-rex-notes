@@ -116,6 +116,11 @@ var dialog = scene.rexUI.add.dialog({
         actions: 'center',
     },
 
+    click: {
+        mode: 'pointerup',
+        clickInterval: 100
+    }
+
     width: 0,
     height: 0,
     name: '',
@@ -158,7 +163,12 @@ var dialog = scene.rexUI.add.dialog({
     - `align.content`
     - `align.description`
     - `align.choices`
-    - `align.actions` : Alignment of action-buttons
+    - `align.actions` : Alignment of action-buttons.
+- `click`: Configuration of [button clicking](button.md).
+    - `click.mode` :
+        - `'pointerdown'`, `'press'`, or `0` : Fire 'click' event when touch pressed.
+        - `'pointerup'`, `'release'`, or `1` : Fire 'click' event when touch released after pressed.
+    - `click.clickInterval` : Interval between 2 'click' events, in ms.
 - `name` : Set name of this dialog.
 - `width`, `height` : Minimum width, minimum height.
 
