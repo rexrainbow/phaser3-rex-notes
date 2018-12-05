@@ -73,6 +73,10 @@ class Demo extends Phaser.Scene {
                     // description: 'left',
                     // choices: 'left',
                     actions: 'left', // 'center'|'left'|'right'
+                },
+
+                click: {
+                    mode: 'release'
                 }
             })
             .layout()
