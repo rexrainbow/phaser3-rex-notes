@@ -34,6 +34,7 @@ class Tabs extends GridSizer {
         if (bottomButtons && bottomButtons.length === 0) {
             bottomButtons = undefined;
         }
+        var clickConfig = GetValue(config, 'click', undefined);        
 
         // Space
         var paddingLeft = GetValue(config, 'space.left', 0);
@@ -71,6 +72,7 @@ class Tabs extends GridSizer {
                 orientation: 1, // Top-Bottom
                 space: leftButtonSpace,
                 align: GetValue(config, 'align.leftButtons', undefined),
+                click: clickConfig,
                 eventEmitter: this.eventEmitter,
             });
             var padding = {
@@ -87,6 +89,7 @@ class Tabs extends GridSizer {
                 orientation: 1, // Top-Bottom
                 space: rightButtonSpace,
                 align: GetValue(config, 'align.rightButtons', undefined),
+                click: clickConfig,
                 eventEmitter: this.eventEmitter,
             });
             var padding = {
@@ -103,6 +106,7 @@ class Tabs extends GridSizer {
                 orientation: 0, // Left-Right
                 space: topButtonSpace,
                 align: GetValue(config, 'align.topButtons', undefined),
+                click: clickConfig,
                 eventEmitter: this.eventEmitter,
             });
             var padding = {
@@ -119,6 +123,7 @@ class Tabs extends GridSizer {
                 orientation: 0, // Left-Right
                 space: bottomButtonSpace,
                 align: GetValue(config, 'align.bottomButtons', undefined),
+                click: clickConfig,
                 eventEmitter: this.eventEmitter,
             });
             var padding = {

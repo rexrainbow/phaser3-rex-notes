@@ -31,6 +31,7 @@ class Buttons extends Sizer {
         if (buttons) {
             var groupName = GetValue(config, 'groupName', undefined);
             var buttonsAlign = GetValue(config, 'align', undefined); // undefined/left/top: no space
+            var clickConfig = GetValue(config, 'click', undefined);
 
             // Add space
             if (
@@ -61,7 +62,7 @@ class Buttons extends Sizer {
                     }
                 }
                 this.add(button, 0, 'center', padding, true);
-                ButtonSetInteractive.call(this, button, groupName, i);
+                ButtonSetInteractive.call(this, button, groupName, i, clickConfig);
             }
 
             // Add space

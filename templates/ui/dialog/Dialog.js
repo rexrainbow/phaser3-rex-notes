@@ -32,6 +32,7 @@ class Dialog extends Sizer {
         if (actions && actions.length === 0) {
             actions = undefined;
         }
+        var clickConfig = GetValue(config, 'click', undefined);
 
         // Space
         var paddingLeft = GetValue(config, 'space.left', 0);
@@ -64,6 +65,7 @@ class Dialog extends Sizer {
                 buttons: toolbar,
                 orientation: 0, // Left-right
                 space: GetValue(config, 'space.toolbarItem', 0),
+                click: clickConfig,
                 eventEmitter: this.eventEmitter,
             });
         }
@@ -156,6 +158,7 @@ class Dialog extends Sizer {
                 buttons: choices,
                 orientation: 1, // Top-Bottom
                 space: GetValue(config, 'space.choice', 0),
+                click: clickConfig,
                 eventEmitter: this.eventEmitter,
             });
             var choicesSpace = GetValue(config, 'space.choices', 0);
@@ -176,6 +179,7 @@ class Dialog extends Sizer {
                 orientation: 0, // Left-right
                 space: GetValue(config, 'space.action', 0),
                 align: GetValue(config, 'align.actions', 'center'),
+                click: clickConfig,
                 eventEmitter: this.eventEmitter,
             })
             var padding = {

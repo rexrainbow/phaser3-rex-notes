@@ -1,7 +1,10 @@
-var ButtonSetInteractive = function (button, groupName, index) {
+import ButtonBehavior from '../../../plugins/input/button/Button.js';
+
+var ButtonSetInteractive = function (button, groupName, index, clickConfig) {
+    button._buttonBehavior = new ButtonBehavior(button, clickConfig);
+    button._buttonBehavior.on('click', FireEvent('button.click', button, groupName, index), this);
+
     button
-        .setInteractive()
-        .on('pointerdown', FireEvent('button.click', button, groupName, index), this)
         .on('pointerover', FireEvent('button.over', button, groupName, index), this)
         .on('pointerout', FireEvent('button.out', button, groupName, index), this);
 }
