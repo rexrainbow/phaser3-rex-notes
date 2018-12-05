@@ -28,24 +28,45 @@ var Layout = function (parent) {
     var expandX, expandY;
     if (!isTopSizer) {
         if (this.rexSizer.expand) {
-            if (parent.orientation === 0) {
-                expandY = true;
-            } else {
-                expandX = true;
+            if (parent.orientation === 0) { // x
+                expandY = 1;
+            } else { // y
+                expandX = 1;
+            }
+        }
+        if (this.rexSizer.proportion > 0) {
+            if (parent.orientation === 0) { // x
+                expandX = 2;
+            } else { // y
+                expandY = 2;
             }
         }
     }
-    if (expandX) {
-        var padding = this.rexSizer.padding;
-        newWidth = parent.width - padding.left - padding.right;
-    } else {
-        newWidth = Math.max(this.childrenWidth, this.minWidth);
+    switch (expandX) {
+        case 1: // rexSizer.expand
+            var padding = this.rexSizer.padding;
+            newWidth = parent.width - padding.left - padding.right;
+            break;
+        case 2: // rexSizer.proportion > 0
+            var padding = this.rexSizer.padding;
+            newWidth = (this.rexSizer.proportion * parent.proportionLength) - padding.left - padding.right;
+            break;
+        default:
+            newWidth = Math.max(this.childrenWidth, this.minWidth);
+            break;
     }
-    if (expandY) {
-        var padding = this.rexSizer.padding;
-        newHeight = parent.height - padding.top - padding.bottom;
-    } else {
-        newHeight = Math.max(this.childrenHeight, this.minHeight);
+    switch (expandY) {
+        case 1: // rexSizer.expand
+            var padding = this.rexSizer.padding;
+            newHeight = parent.height - padding.top - padding.bottom;
+            break;
+        case 2: // rexSizer.proportion > 0
+            var padding = this.rexSizer.padding;
+            newHeight = (this.rexSizer.proportion * parent.proportionLength) - padding.top - padding.bottom;
+            break;
+        default:
+            newHeight = Math.max(this.childrenHeight, this.minHeight);
+            break;
     }
     this.resize(newWidth, newHeight);
 
@@ -95,7 +116,7 @@ var Layout = function (parent) {
         if (this.orientation === 0) { // x
             if (childConfig.proportion === -1) { // Background
                 x = (startX + padding.left);
-                width = this.width - padding.left - padding.right;
+                width = this.width - padding.left - padding.right; // Expand width of child
                 newChildWidth = width;
             } else if (
                 (childConfig.proportion === 0) ||

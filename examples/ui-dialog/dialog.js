@@ -56,7 +56,7 @@ class Demo extends Phaser.Scene {
                 },
 
                 expand: {
-                    // title: false,
+                    title: false,
                     // content: false,
                     // description: false,
                     // choices: false,
@@ -64,8 +64,8 @@ class Demo extends Phaser.Scene {
                 },
 
                 align: {
-                    title: 'left',
-                    // content: 'left',
+                    // title: 'center',
+                    // content: 'right',
                     // description: 'left',
                     // choices: 'left',
                     actions: 'left', // 'center'|'left'|'right'

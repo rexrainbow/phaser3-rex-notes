@@ -1,5 +1,6 @@
 import Sizer from '../sizer/Sizer.js';
 import Buttons from '../buttons/Buttons.js';
+import Space from '../utils/Space.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -63,7 +64,6 @@ class Dialog extends Sizer {
                 buttons: toolbar,
                 orientation: 0, // Left-right
                 space: GetValue(config, 'space.toolbarItem', 0),
-                align: GetValue(config, 'align.toolbar', 'right'),
                 eventEmitter: this.eventEmitter,
             });
         }
@@ -87,9 +87,23 @@ class Dialog extends Sizer {
                 orientation: 0
             });
             // Add title
-            var align = GetValue(config, 'align.title', 'center');
+            var align = GetValue(config, 'align.title', 'left');
             var expand = GetValue(config, 'expand.title', true);
-            titleSizer.add(title, 1, align, 0, expand);
+            // Add space if not expand
+            if (
+                !expand &&
+                ((align === 'right') || (align === 'center'))
+            ) {
+                titleSizer.add(Space(scene), 1, 'center', 0, false);
+            }
+            titleSizer.add(title, (expand) ? 1 : 0, 'center', 0, expand);
+            // Add space if not expand
+            if (
+                !expand &&
+                ((align === 'left') || (align === 'center'))
+            ) {
+                titleSizer.add(Space(scene), 1, 'center', 0, false);
+            }
             // Add toolbar
             titleSizer.add(toolbarSizer, 0, 'right', 0, false);
             // Add sizer to dialog
@@ -136,7 +150,6 @@ class Dialog extends Sizer {
                 buttons: choices,
                 orientation: 1, // Top-Bottom
                 space: GetValue(config, 'space.choice', 0),
-                align: 'left',
                 eventEmitter: this.eventEmitter,
             });
             var choicesSpace = GetValue(config, 'space.choices', 0);

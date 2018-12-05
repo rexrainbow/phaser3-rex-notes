@@ -1,4 +1,5 @@
 import Sizer from '../sizer/Sizer.js';
+import Space from '../utils/Space.js';
 import ButtonSetInteractive from './ButtonSetInteractive.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -29,23 +30,21 @@ class Buttons extends Sizer {
 
         if (buttons) {
             var groupName = GetValue(config, 'groupName', undefined);
-            var buttonsAlign = GetValue(config, 'align', undefined); // Default is 'left'/'top'
-            var button, proportion, padding;
+            var buttonsAlign = GetValue(config, 'align', undefined); // undefined/left/top: no space
+
+            // Add space
+            if (
+                (buttonsAlign === 'right') ||
+                (buttonsAlign === 'bottom') ||
+                (buttonsAlign === 'center')
+            ) {
+                this.add(Space(scene), 1, 'center', 0, false);
+            }
+
+            var button, padding;
             for (var i = 0, cnt = buttons.length; i < cnt; i++) {
                 button = buttons[i];
                 // Add to sizer
-                switch (buttonsAlign) {
-                    case 'right':
-                    case 'bottom':
-                        proportion = (i === 0) ? 1 : 0;
-                        break;
-                    case 'center':
-                        proportion = 1;
-                        break;
-                    default: // 'left', 'top'
-                        proportion = 0;
-                        break;
-                }
                 if (this.orientation === 0) {
                     padding = {
                         left: (i >= 1) ? buttonSpace : 0,
@@ -61,8 +60,13 @@ class Buttons extends Sizer {
                         bottom: 0
                     }
                 }
-                this.add(button, proportion, buttonsAlign, padding, true);
+                this.add(button, 0, 'center', padding, true);
                 ButtonSetInteractive.call(this, button, groupName, i);
+            }
+
+            // Add space
+            if (buttonsAlign === 'center') {
+                this.add(Space(scene), 1, 'center', 0, false);
             }
         }
 
