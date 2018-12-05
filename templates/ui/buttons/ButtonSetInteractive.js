@@ -1,6 +1,12 @@
 import ButtonBehavior from '../../../plugins/input/button/Button.js';
 
 var ButtonSetInteractive = function (button, groupName, index, clickConfig) {
+    if (clickConfig === undefined) {
+        clickConfig = defaultConfig;
+    }
+    if (!clickConfig.hasOwnProperty('mode')) {
+        clickConfig.mode = 0; // Default is 'press'('pointerdown')
+    }
     button._buttonBehavior = new ButtonBehavior(button, clickConfig);
     button._buttonBehavior.on('click', FireEvent('button.click', button, groupName, index), this);
 
@@ -21,6 +27,10 @@ var FireEvent = function (eventName, button, groupName, index) {
         }
     }
     return callback;
+}
+
+var defaultConfig = {
+
 }
 
 export default ButtonSetInteractive;
