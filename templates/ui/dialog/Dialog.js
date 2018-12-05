@@ -96,7 +96,13 @@ class Dialog extends Sizer {
             ) {
                 titleSizer.add(Space(scene), 1, 'center', 0, false);
             }
-            titleSizer.add(title, (expand) ? 1 : 0, 'center', 0, expand);
+            var padding = {
+                left: GetValue(config, 'space.titleLeft', 0),
+                right: GetValue(config, 'space.titleRight', 0),
+                top: 0,
+                bottom: 0
+            }
+            titleSizer.add(title, (expand) ? 1 : 0, 'center', padding, expand);
             // Add space if not expand
             if (
                 !expand &&
@@ -121,8 +127,8 @@ class Dialog extends Sizer {
             var align = GetValue(config, 'align.content', 'center');
             var contentSpace = GetValue(config, 'space.content', 0);
             var padding = {
-                left: paddingLeft,
-                right: paddingRight,
+                left: paddingLeft + GetValue(config, 'space.contentLeft', 0),
+                right: paddingRight + GetValue(config, 'space.contentRight', 0),
                 top: (title || toolbar) ? 0 : paddingTop,
                 bottom: (description || choices || actions) ? contentSpace : paddingBottom
             }
@@ -134,8 +140,8 @@ class Dialog extends Sizer {
             var align = GetValue(config, 'align.description', 'center');
             var descriptionSpace = GetValue(config, 'space.description', 0);
             var padding = {
-                left: paddingLeft,
-                right: paddingRight,
+                left: paddingLeft + GetValue(config, 'space.descriptionLeft', 0),
+                right: paddingRight + GetValue(config, 'space.descriptionRight', 0),
                 top: (title || toolbar || content) ? 0 : paddingTop,
                 bottom: (choices || actions) ? descriptionSpace : paddingBottom
             }
@@ -154,8 +160,8 @@ class Dialog extends Sizer {
             });
             var choicesSpace = GetValue(config, 'space.choices', 0);
             var padding = {
-                left: paddingLeft,
-                right: paddingRight,
+                left: paddingLeft + GetValue(config, 'space.choicesLeft', 0),
+                right: paddingRight + GetValue(config, 'space.choicesRight', 0),
                 top: (title || toolbar || content || description) ? 0 : paddingTop,
                 bottom: (actions) ? choicesSpace : paddingBottom
             }
@@ -173,8 +179,8 @@ class Dialog extends Sizer {
                 eventEmitter: this.eventEmitter,
             })
             var padding = {
-                left: paddingLeft,
-                right: paddingRight,
+                left: paddingLeft + GetValue(config, 'space.actionsLeft', 0),
+                right: paddingRight + GetValue(config, 'space.actionsRight', 0),
                 top: (title || toolbar || content || description || choices) ? 0 : paddingTop,
                 bottom: paddingBottom
             }

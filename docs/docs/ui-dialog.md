@@ -81,8 +81,23 @@ var dialog = scene.rexUI.add.dialog({
         bottom: 0,
 
         title: 0,
+        titleLeft: 0,
+        titleRight: 0,
         content: 0,
-        button: 0,
+        contentLeft: 0,
+        contentRight: 0,
+        description: 0,
+        descriptionLeft: 0,
+        descriptionRight: 0
+        choices: 0,
+        choicesLeft: 0,
+        choicesRight: 0,
+        actionsLeft: 0,
+        actionsRight: 0,
+
+        toolbarItem: 0,
+        choice: 0,
+        action: 0,
     },
 
     expand: {
@@ -118,9 +133,15 @@ var dialog = scene.rexUI.add.dialog({
 - `space` : Pads spaces
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds
     - `space.title` : Space between title game object and below game object.
+    - `space.titleLeft`, `space.titleRight` : Extra left/right padding of title game object.
     - `space.content` : Space between content game object and below game object.
+    - `space.contentLeft`, `space.contentRight` : Extra left/right padding of content game object.
     - `space.description` : Space between description game object and below game object.
+    - `space.descriptionLeft`, `space.descriptionRight` : Extra left/right padding of description game object.
     - `space.choices` : Space between last choice-button and below game object.
+    - `space.choicesLeft`, `space.choicesRight` : Extra left/right padding of choice buttons.
+    - `space.actionsLeft`, `space.actionsRight` : Extra left/right padding of actions buttons.
+    - `space.toolbarItem` : Space between 2 toolbar item game objects.
     - `space.choice` : Space between 2 choice-button game objects.
     - `space.action` : Space between 2 action-button game objects.
 - `expand` : Expand width of element

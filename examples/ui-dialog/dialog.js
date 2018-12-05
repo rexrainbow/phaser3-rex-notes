@@ -41,18 +41,22 @@ class Demo extends Phaser.Scene {
                 ],
 
                 space: {
-                    title: 25,
-                    content: 25,
-                    description: 25,
-                    choices: 25,
-
-                    choice: 15,
-                    action: 15,
-
                     left: 20,
                     right: 20,
                     top: -20,
                     bottom: -20,
+
+                    title: 25,
+                    // titleLeft: 30,
+                    content: 25,
+                    description: 25,
+                    // descriptionLeft: 20,
+                    // descriptionRight: 20,
+                    choices: 25,
+
+                    // toolbarItem: 5,
+                    choice: 15,
+                    action: 15,
                 },
 
                 expand: {
