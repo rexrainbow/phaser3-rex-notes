@@ -1,5 +1,7 @@
 import ContainerLite from '../../../plugins/gameobjects/containerlite/ContainerLite.js';
-import Element from './Element.js';
+import SetBackground from './SetBackground.js';
+import SetCharacter from './SetCharacter.js';
+import GetCharacter from './GetCharacter.js';
 import GetElement from './GetElement.js';
 
 const Container = ContainerLite;
@@ -16,31 +18,71 @@ class Stage extends Container {
         super(scene, x, y, 2, 2);
         this.setName(GetValue(config, 'name', ''));
 
-        this.backgroundDepth = GetValue(config, 'depth.background', -10);
-        this.characterDepth = GetValue(config, 'depth.characher', this.backgroundDepth + 10);
+        this.characterDepth = GetValue(config, 'depth.characher', -2);
+        this.backgroundDepth = GetValue(config, 'depth.background', this.characterDepth - 10);
 
         this.childrenMap = {};
-        this.childrenMap.background = new Element(scene, x, y);
-        this.childrenMap.characters = [];
+        this.childrenMap.background;
+        this.childrenMap.characters = {};
     }
 
-    setBackground(gameObject, duration) {
-        if (duration === undefined) {
-            duration = 0;
-        }
+    get left() {
+        return this.x - (this.displayWidth * this.originX);
+    }
 
-        if (gameObject) {
-            gameObject.setPosition(this.x, this.y);
-            gameObject.depth = this.backgroundDepth;
-        }
-        var background = this.childrenMap.background;
-        background.replace(gameObject, duration);
-        this.setSize(background.width, background.height);
+    set left(value) {
+        this.x += (value - this.left);
+    }
+
+    alignLeft(value) {
+        this.left = value;
+        return this;
+    }
+
+    get right() {
+        return (this.x - (this.displayWidth * this.originX)) + this.displayWidth;
+    }
+
+    set right(value) {
+        this.x += (value - this.right);
+    }
+
+    alignRight(value) {
+        this.right = value;
+        return this;
+    }
+
+    get top() {
+        return this.y - (this.displayHeight * this.originY);
+    }
+
+    set top(value) {
+        this.y += (value - this.top);
+    }
+
+    alignTop(value) {
+        this.top = value;
+        return this;
+    }
+
+    get bottom() {
+        return (this.y - (this.displayHeight * this.originY)) + this.displayHeight;
+    }
+
+    set bottom(value) {
+        this.y += (value - this.bottom);
+    }
+
+    alignBottom(value) {
+        this.bottom = value;
         return this;
     }
 }
 
 var methods = {
+    setBackground: SetBackground,
+    setCharacter: SetCharacter,
+    getCharacter: GetCharacter,
     getElement: GetElement,
 }
 

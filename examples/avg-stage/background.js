@@ -15,12 +15,12 @@ class Demo extends Phaser.Scene {
 
     create() {
         this.stage = new Stage(this, 400, 300);
-        this.stage.setBackground(this.add.image(0, 0, 'road'), 2000);
+        this.stage.setBackground('road', 2000);
 
         this.input.on('pointerdown', function (pointer) {
             var textureKey = this.stage.getElement('background').textureKey;
             var nextKey = (textureKey === 'road') ? 'classroom' : 'road';
-            this.stage.setBackground(this.add.image(0, 0, nextKey), 2000);
+            this.stage.setBackground(nextKey, 2000);
         }, this);
     }
 

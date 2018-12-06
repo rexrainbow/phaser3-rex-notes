@@ -17,7 +17,7 @@ class DragScale extends EE {
         this.state = TOUCH0;
         this.pointers = [];
         this.prevDragDistance = 0;
-        this.setAutoScaleEnable(GetValue(config, 'autoScale', true));
+        this.setAutoScaleEnable(GetValue(config, 'autoScale', false));
         this.boot();
     }
     boot() {
