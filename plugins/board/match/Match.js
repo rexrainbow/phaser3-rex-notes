@@ -2,8 +2,8 @@ import IsFunction from '../../utils/object/IsFunction.js';
 import MatchAll from './MatchAll.js';
 import MatchAtDir from './MatchAtDir.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+import GetValue from '../../utils/object/GetValue.js';
+import IsPlainObject from '../../utils/object/IsPlainObject.js';
 
 class Match {
     constructor(config) {

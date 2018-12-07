@@ -1,7 +1,7 @@
 import TileData from './TileData.js';
 import TileXYIsEqual from '../utils/TileXYIsEqual.js';
 
-const GetRandom = Phaser.Utils.Array.GetRandom;
+import GetRandom from '../../utils/array/GetRandom.js';
 
 var GetNextTile = function (curTileData, preTileData) {
     var board = this.board;

@@ -7,13 +7,12 @@ import GetWorldX from './GetWorldX.js';
 import GetWorldY from './GetWorldY.js';
 import GetTileX from './GetTileX.js';
 import GetTileY from './GetTileY.js';
+import GetValue from '../../object/GetValue.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
 const ODD_R = CONST.ODD_R;
 const EVEN_R = CONST.EVEN_R;
 const ODD_Q = CONST.ODD_Q;
 const EVEN_Q = CONST.EVEN_Q;
-
 
 class Hexagon {
     constructor(config) {

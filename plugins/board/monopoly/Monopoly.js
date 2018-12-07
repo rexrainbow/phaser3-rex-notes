@@ -3,8 +3,8 @@ import GetPath from './GetPath.js';
 import GetNextTile from './GetNextTile.js';
 import GetCost from './GetCost.js';
 import CONST from './const.js';
+import GetValue from '../../utils/object/GetValue.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
 const BLOCKER = CONST.BLOCKER;
 const STOP = CONST.STOP;
 

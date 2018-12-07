@@ -1,7 +1,6 @@
 import CONST from '../const.js';
 import QuickAbs from '../../../utils/math/QuickAbs.js';
-
-const randomInt = Phaser.Math.Between;
+import RandomInt from '../../../utils/math/Between.js';
 
 const RANDOM = CONST['random'];
 const DIAGONAL = CONST['diagonal'];
@@ -34,7 +33,7 @@ var GetNodePath = function (startNode, endNode, pathMode) {
                 break;
 
             case RANDOM:
-                preNode = (preNodeKeysCnt === 1) ? curNode.preNodes[0] : curNode.preNodes[randomInt(0, preNodeKeysCnt - 1)];
+                preNode = (preNodeKeysCnt === 1) ? curNode.preNodes[0] : curNode.preNodes[RandomInt(0, preNodeKeysCnt - 1)];
                 curNode = preNode;
                 break;
 

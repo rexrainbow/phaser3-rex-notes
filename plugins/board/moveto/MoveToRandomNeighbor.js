@@ -1,6 +1,5 @@
 import Clone from '../../utils/object/Clone.js';
-
-const Shuffle = Phaser.Utils.Array.Shuffle;
+import Shuffle from '../../utils/array/Shuffle.js';
 
 var MoveToRandomNeighbor = function () {
     var board = this.chessData.board;

@@ -8,8 +8,7 @@ import MoveToward from './MoveToward.js';
 import MoveToRandomNeighbor from './MoveToRandomNeighbor.js';
 import MoveAway from './MoveAway.js';
 import MoveCloser from './MoveCloser.js';
-
-const GetValue = Phaser.Utils.Objects.GetValue;
+import GetValue from '../../utils/object/GetValue.js';
 
 class MoveTo extends TickTask {
     constructor(gameObject, config) {

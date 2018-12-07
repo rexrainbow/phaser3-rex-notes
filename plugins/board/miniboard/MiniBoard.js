@@ -25,9 +25,10 @@ import Rotate from './transfer/Rotate.js';
 import CanRotateTo from './transfer/CanRotateTo.js';
 import RotateTo from './transfer/RotateTo.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
+import GetValue from '../../utils/object/GetValue.js';
+import Wrap from '../../utils/math/Wrap.js';
+
 const Container = ContainerLite;
-const Wrap = Phaser.Math.Wrap;
 
 class MiniBoard extends Container {
     constructor(scene, x, y, config) {

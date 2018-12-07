@@ -53,9 +53,9 @@ import GetGridPolygon from './gridpolygon/GetGridPolygon.js';
 
 import DefaultGrids from '../grid/index.js';
 
-const EE = Phaser.Events.EventEmitter;
-const GetValue = Phaser.Utils.Objects.GetValue;
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+import EE from '../../utils/eventemitter/EventEmitter.js';
+import GetValue from '../../utils/object/GetValue.js';
+import IsPlainObject from '../../utils/object/IsPlainObject.js';
 
 class Board extends EE {
     constructor(scene, config) {

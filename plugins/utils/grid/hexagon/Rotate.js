@@ -6,7 +6,7 @@ import {
     xyz2r
 } from './CubeTransfer.js';
 
-const Wrap = Phaser.Math.Wrap;
+import Wrap from '../../math/Wrap.js';
 
 var Rotate = function (src, dir, out) {
     if (out === undefined) {

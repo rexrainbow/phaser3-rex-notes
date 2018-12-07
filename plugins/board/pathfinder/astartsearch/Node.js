@@ -1,7 +1,6 @@
 import QuickAbs from '../../../utils/math/QuickAbs.js';
-
-const AngleBetween = Phaser.Math.Angle.Between;
-const Shuffle = Phaser.Utils.Array.Shuffle;
+import Shuffle from '../../../utils/array/Shuffle.js';
+import AngleBetween from '../../../utils/math/angle/Between.js';
 
 class Node {
     constructor() {

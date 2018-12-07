@@ -1,4 +1,5 @@
-const Wrap = Phaser.Math.Wrap;
+import Wrap from '../../math/Wrap.js';
+
 var Rotate = function (src, dir, out) {
     if (out === undefined) {
         out = tmp;

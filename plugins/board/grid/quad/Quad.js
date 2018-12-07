@@ -10,8 +10,7 @@ import Rotate from '../../../utils/grid/quad/Rotate.js';
 import GetDistance from '../../../utils/grid/quad/GetDistance.js';
 import GetGridPoints from './GetGridPoints.js';
 import GetGridPolygon from './GetGridPolygon.js';
-
-const GetValue = Phaser.Utils.Objects.GetValue;
+import GetValue from '../../../utils/object/GetValue.js';
 
 class QuadGrid extends Quad {
     constructor(config) {

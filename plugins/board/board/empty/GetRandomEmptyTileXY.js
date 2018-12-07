@@ -1,5 +1,5 @@
-const Random = Phaser.Math.Between;
-const GetRandomItem = Phaser.Utils.Array.GetRandom;
+import Random from '../../../utils/math/Between.js';
+import GetRandomItem from '../../../utils/array/GetRandom.js';
 
 var GetRandomEmptyTileXY = function (tileZ, out) {
     if (tileZ === undefined) {

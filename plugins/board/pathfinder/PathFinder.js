@@ -6,8 +6,8 @@ import FindArea from './FindArea.js';
 import GetPath from './GetPath.js';
 import FindPath from './FindPath.js';
 import TileXYToCost from './TileXYToCost.js';
+import GetValue from '../../utils/object/GetValue.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
 const BLOCKER = CONST.BLOCKER;
 const INFINITY = CONST.INFINITY;
 

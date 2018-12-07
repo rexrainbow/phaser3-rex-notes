@@ -1,9 +1,8 @@
 import ChessBank from './ChessBank.js';
-
 import GetTileDirection from './GetTileDirection.js';
+import IsPlainObject from '../../utils/object/IsPlainObject.js';
 
 const uidKey = ChessBank.uidKey;
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 
 class Chess {
     constructor(parent, uid) {

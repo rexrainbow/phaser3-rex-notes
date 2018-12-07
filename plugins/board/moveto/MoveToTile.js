@@ -1,4 +1,4 @@
-const GetValue = Phaser.Utils.Objects.GetValue;
+import GetValue from '../../utils/object/GetValue.js';
 
 var MoveToTile = function (tileX, tileY, direction) {
     var board = this.chessData.board;

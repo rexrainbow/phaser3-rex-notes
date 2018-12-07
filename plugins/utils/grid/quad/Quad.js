@@ -2,8 +2,7 @@ import GetWorldX from './GetWorldX.js';
 import GetWorldY from './GetWorldY.js';
 import GetTileX from './GetTileX.js';
 import GetTileY from './GetTileY.js';
-
-const GetValue = Phaser.Utils.Objects.GetValue;
+import GetValue from '../../object/GetValue.js';
 
 class Quad {
     constructor(config) {

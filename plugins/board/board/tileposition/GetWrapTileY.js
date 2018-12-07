@@ -1,4 +1,5 @@
-const Wrap = Phaser.Math.Wrap;
+import Wrap from '../../../utils/math/Wrap.js';
+
 var GetWrapTileY = function (tileX, tileY) {
     if (this.wrapMode) {
         tileY = Wrap(tileY, 0, this.height);
