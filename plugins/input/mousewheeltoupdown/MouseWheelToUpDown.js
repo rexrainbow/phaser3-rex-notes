@@ -1,4 +1,4 @@
-import CursorKeys from '../../utils/cursorkeys/CursorKeys.js';
+import CursorKeys from '../../utils/input/CursorKeys.js';
 
 class MouseWheelToUpDown extends CursorKeys {
     constructor(scene, config) {

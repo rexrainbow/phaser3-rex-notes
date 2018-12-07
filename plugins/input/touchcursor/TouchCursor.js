@@ -1,4 +1,4 @@
-import VectorToCursorKeys from '../../utils/vectortocursorkeys/VectorToCursorKeys.js';
+import VectorToCursorKeys from '../../utils/input/VectorToCursorKeys.js';
 
 const EE = Phaser.Events.EventEmitter;
 const GetValue = Phaser.Utils.Objects.GetValue;
