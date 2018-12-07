@@ -77,13 +77,18 @@ class Board extends EE {
     }
 
     boot() {
-        this.scene.events.on('destroy', this.destroy, this);
+        if (this.scene) {
+            this.scene.events.on('destroy', this.destroy, this);
+        }
     }
 
     shutdown() {
         this.removeAllChess(true, true);
         super.shutdown();
         this.boardData.shutdown();
+        if (this.scene) {
+            this.scene.events.off('destroy', this.destroy, this);
+        }
 
         this.scene = undefined;
         this.boardData = undefined;

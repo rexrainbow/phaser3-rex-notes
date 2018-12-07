@@ -1,4 +1,4 @@
-import ObjectFactory from './board/ObjectFactory.js';
+// import ObjectFactory from './board/ObjectFactory.js';
 
 import BoardFactory from './board/board/BaordFactory.js';
 import HexagonFactory from './board/grid/hexagon/HexagonFactory.js';
@@ -14,15 +14,19 @@ import MonopolyFactory from './board/monopoly/MonopolyFactory.js';
 
 import HexagonMap from './board/hexagonmap/index.js';
 
-class BoardPlugin extends Phaser.Plugins.ScenePlugin {
-    constructor(scene, pluginManager) {
-        super(scene, pluginManager);
+import Board from './board/board/Board.js';
+import Hexagon from './board/grid/hexagon/Hexagon.js';
+import Quad from './board/grid/quad/Quad.js';
+import Match from './board/match/Match.js';
+import PathFinder from './board/pathfinder/PathFinder.js';
+import Monopoly from './board/monopoly/Monopoly.js';
 
-        this.add = new ObjectFactory(scene);
-
-        // Helper functions
-        this.hexagonMap = HexagonMap;
-    }        
-}
-
-export default BoardPlugin;
+export {
+    Board,
+    Hexagon,
+    Quad,
+    Match,
+    PathFinder,
+    Monopoly,
+    HexagonMap,
+};
