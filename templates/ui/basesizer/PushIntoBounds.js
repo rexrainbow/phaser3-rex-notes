@@ -1,4 +1,4 @@
-import GetDefaultBounds from '../../../plugins/utils/object/GetDefaultBounds.js';
+import GetDefaultBounds from '../../../plugins/utils/defaultbounds/GetDefaultBounds.js';
 
 var PushIntoBounds = function (bounds) {
     if (bounds === undefined) {
