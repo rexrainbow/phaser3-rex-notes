@@ -1,53 +1,56 @@
+import GetDefaultBounds from '../../utils/defaultbounds/GetDefaultBounds.js';
+
 const EE = Phaser.Events.EventEmitter;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const SpliceOne = Phaser.Utils.Array.SpliceOne;
 const DistanceBetween = Phaser.Math.Distance.Between;
 
 class DragScale extends EE {
-    constructor(gameObject, config) {
-        var scene = gameObject.scene;
+    constructor(scene, config) {
         var amount = scene.input.manager.pointersTotal;
         if (amount < 2) {
             scene.input.addPointer(2 - amount);
         }
 
         super();
-        this.gameObject = gameObject;
         this.scene = scene;
+
+        var bounds = GetValue(config, 'bounds', undefined);
+        if (bounds === undefined) {
+            bounds = GetDefaultBounds(scene);
+        }
+        this.bounds = bounds;
         this.state = TOUCH0;
         this.pointers = [];
         this.prevDragDistance = 0;
-        this.setAutoScaleEnable(GetValue(config, 'autoScale', false));
         this.boot();
     }
     boot() {
-        this.gameObject.on('pointerdown', this.onPointerDown, this);
-        this.gameObject.on('pointerup', this.onPointerUp, this);
-        this.gameObject.on('pointermove', this.onPointerMove, this);
-        this.gameObject.on('pointerout', this.onPointerUp, this);
-
-        this.gameObject.on('destroy', this.destroy, this);
+        this.scene.input.on('pointerdown', this.onPointerDown, this);
+        this.scene.input.on('pointerup', this.onPointerUp, this);
+        this.scene.input.on('pointermove', this.onPointerMove, this);
+        this.scene.on('destroy', this.destroy, this);
     }
 
     shutdown() {
-        // gameObject events will be removed when this gameObject destroyed 
+        if (this.scene) {
+            this.scene.input.off('pointerdown', this.onPointerDown, this);
+            this.scene.input.off('pointerup', this.onPointerUp, this);
+            this.scene.input.off('pointermove', this.onPointerMove, this);
+            this.scene.off('destroy', this.destroy, this);
+        }
     }
 
     destroy() {
         this.shutdown();
     }
 
-    setAutoScaleEnable(enable) {
-        if (enable === undefined) {
-            enable = true;
+    onPointerDown(pointer) {
+        if (!this.bounds.contains(pointer.x, pointer.y)) {
+            return;
         }
 
-        this.autoScale = enable;
-        return this;
-    }
-
-    onPointerDown(pointer) {
-        if (this.pointer.length === 2) {
+        if (this.pointers.length === 2) {
             return;
         } else {
             this.pointers.push(pointer);
@@ -65,7 +68,11 @@ class DragScale extends EE {
     }
 
     onPointerUp(pointer) {
-        var index = this.pointers.indexOf(pointer)
+        if (!this.bounds.contains(pointer.x, pointer.y)) {
+            return;
+        }
+
+        var index = this.pointers.indexOf(pointer);
         if (index === -1) {
             return;
         } else {
@@ -84,6 +91,16 @@ class DragScale extends EE {
     }
 
     onPointerMove(pointer) {
+        var isInsideBounds = this.bounds.contains(pointer.x, pointer.y);
+        var isCatchedPointer = (this.pointers.indexOf(pointer) !== -1);
+        if (!isCatchedPointer && isInsideBounds) {
+            this.onPointerDown(pointer);
+            return;
+        } else if (isCatchedPointer && !isInsideBounds) {
+            this.onPointerUp(pointer);
+            return;
+        }
+
         if (this.state !== TOUCH2) {
             return;
         }
@@ -108,11 +125,6 @@ class DragScale extends EE {
     }
 
     onDragging() {
-        if (this.autoScale) {
-            var scaleFactor = this.scaleFactor;
-            this.gameObject.scaleX *= scaleFactor;
-            this.gameObject.scaleY *= scaleFactor;
-        }
         this.emit('drag', this);
     }
 

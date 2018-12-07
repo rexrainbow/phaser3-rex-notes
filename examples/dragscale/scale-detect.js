@@ -10,10 +10,7 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        var rectangle = this.add.rectangle(0, 0, 800, 600, 0x333333).setOrigin(0);
-        this.plugins.get('rexDragScale').add(rectangle, {
-                // autoScale: true
-            })
+        this.plugins.get('rexDragScale').add(this)
             .on('dragstart', function (dragScale) {
                 this.print.text = 'dragstart';
             }, this)

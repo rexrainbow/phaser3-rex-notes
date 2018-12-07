@@ -11,8 +11,8 @@ class DragScalePlugin extends Phaser.Plugins.BasePlugin {
         eventEmitter.once('destroy', this.destroy, this);
     }
 
-    add(gameObject, config) {
-        return new DragScale(gameObject, config);
+    add(scene, config) {
+        return new DragScale(scene, config);
     }
 
 }
