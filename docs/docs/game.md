@@ -153,6 +153,12 @@ game.destroy();
 - Pause (window is invisible) : game.events `pause` event
 - Resume (window is visible) : game.events `resume` event
 
-## Global data
+## Global members
+
+### Scene manager
+
+Global [scene manager](scenemanager.md) in `game.scene`, or `scene.scene` in each scene.
+
+### Global data
 
 Insatance of [data manager](datamanager.md) in `game.registry`, or `scene.registry` in each scene.

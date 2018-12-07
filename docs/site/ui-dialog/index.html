@@ -3667,8 +3667,23 @@
         <span class="nx">bottom</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
 
         <span class="nx">title</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">titleLeft</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">titleRight</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">content</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">button</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">contentLeft</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">contentRight</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">description</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">descriptionLeft</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">descriptionRight</span><span class="o">:</span> <span class="mi">0</span>
+        <span class="nx">choices</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">choicesLeft</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">choicesRight</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">actionsLeft</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">actionsRight</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+
+        <span class="nx">toolbarItem</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">choice</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">action</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="p">},</span>
 
     <span class="nx">expand</span><span class="o">:</span> <span class="p">{</span>
@@ -3686,6 +3701,11 @@
         <span class="nx">choices</span><span class="o">:</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span>
         <span class="nx">actions</span><span class="o">:</span> <span class="s1">&#39;center&#39;</span><span class="p">,</span>
     <span class="p">},</span>
+
+    <span class="nx">click</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">mode</span><span class="o">:</span> <span class="s1">&#39;pointerup&#39;</span><span class="p">,</span>
+        <span class="nx">clickInterval</span><span class="o">:</span> <span class="mi">100</span>
+    <span class="p">}</span>
 
     <span class="nx">width</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">height</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
@@ -3705,9 +3725,15 @@
 <li><code>space</code> : Pads spaces<ul>
 <li><code>space.left</code>, <code>space.right</code>, <code>space.top</code>, <code>space.bottom</code> : Space of bounds</li>
 <li><code>space.title</code> : Space between title game object and below game object.</li>
+<li><code>space.titleLeft</code>, <code>space.titleRight</code> : Extra left/right padding of title game object.</li>
 <li><code>space.content</code> : Space between content game object and below game object.</li>
+<li><code>space.contentLeft</code>, <code>space.contentRight</code> : Extra left/right padding of content game object.</li>
 <li><code>space.description</code> : Space between description game object and below game object.</li>
+<li><code>space.descriptionLeft</code>, <code>space.descriptionRight</code> : Extra left/right padding of description game object.</li>
 <li><code>space.choices</code> : Space between last choice-button and below game object.</li>
+<li><code>space.choicesLeft</code>, <code>space.choicesRight</code> : Extra left/right padding of choice buttons.</li>
+<li><code>space.actionsLeft</code>, <code>space.actionsRight</code> : Extra left/right padding of actions buttons.</li>
+<li><code>space.toolbarItem</code> : Space between 2 toolbar item game objects.</li>
 <li><code>space.choice</code> : Space between 2 choice-button game objects.</li>
 <li><code>space.action</code> : Space between 2 action-button game objects.</li>
 </ul>
@@ -3730,7 +3756,16 @@
 <li><code>align.content</code></li>
 <li><code>align.description</code></li>
 <li><code>align.choices</code></li>
-<li><code>align.actions</code> : Alignment of action-buttons</li>
+<li><code>align.actions</code> : Alignment of action-buttons.</li>
+</ul>
+</li>
+<li><code>click</code>: Configuration of <a href="../button/">button clicking</a>.<ul>
+<li><code>click.mode</code> :<ul>
+<li><code>'pointerdown'</code>, <code>'press'</code>, or <code>0</code> : Fire 'click' event when touch pressed.</li>
+<li><code>'pointerup'</code>, <code>'release'</code>, or <code>1</code> : Fire 'click' event when touch released after pressed.</li>
+</ul>
+</li>
+<li><code>click.clickInterval</code> : Interval between 2 'click' events, in ms.</li>
 </ul>
 </li>
 <li><code>name</code> : Set name of this dialog.</li>

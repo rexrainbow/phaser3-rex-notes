@@ -5,9 +5,14 @@ Scene manager:
 ## Add new scene
 
 ```javascript
-scene.scene.add(key, sceneConfig, autoStart);
-// game.scene.add(key, sceneConfig, autoStart);
+scene.scene.add(key, sceneConfig, autoStart, data);
+// game.scene.add(key, sceneConfig, autoStart, data);
 ```
+
+- `key` : A unique key used to reference the Scene.
+- `sceneConfig` : The [config for the Scene](scene.md#configuration-of-scene), or a [scene](scene.md#es6-class) class.
+- `autoStart` : Set `true` to start scene immediately after added.
+- `data` : Optional data object. This will be set as Scene.settings.data and passed to `Scene.init`.
 
 ### Load scene from external files
 

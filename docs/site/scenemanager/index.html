@@ -3652,10 +3652,16 @@
 <li>In each scene instance: <code>scene.scene</code></li>
 </ul>
 <h2 id="add-new-scene">Add new scene<a class="headerlink" href="#add-new-scene" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">sceneConfig</span><span class="p">,</span> <span class="nx">autoStart</span><span class="p">);</span>
-<span class="c1">// game.scene.add(key, sceneConfig, autoStart);</span>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">sceneConfig</span><span class="p">,</span> <span class="nx">autoStart</span><span class="p">,</span> <span class="nx">data</span><span class="p">);</span>
+<span class="c1">// game.scene.add(key, sceneConfig, autoStart, data);</span>
 </pre></div>
 
+<ul>
+<li><code>key</code> : A unique key used to reference the Scene.</li>
+<li><code>sceneConfig</code> : The <a href="../scene/#configuration-of-scene">config for the Scene</a>, or a <a href="../scene/#es6-class">scene</a> class.</li>
+<li><code>autoStart</code> : Set <code>true</code> to start scene immediately after added.</li>
+<li><code>data</code> : Optional data object. This will be set as Scene.settings.data and passed to <code>Scene.init</code>.</li>
+</ul>
 <h3 id="load-scene-from-external-files">Load scene from external files<a class="headerlink" href="#load-scene-from-external-files" title="Permanent link">&para;</a></h3>
 <ol>
 <li><a href="../loader/#script">load script</a>
