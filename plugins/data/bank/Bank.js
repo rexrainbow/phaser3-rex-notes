@@ -1,4 +1,4 @@
-const GetValue = Phaser.Utils.Objects.GetValue;
+import GetValue from '../../utils/object/GetValue.js';
 
 class Bank {
     constructor(config) {
