@@ -48,8 +48,7 @@ import HasEdgeBlocker from './blocker/HasEdgeBlocker.js';
 
 import SetInteractive from './input/SetInteractive.js';
 
-import GetGridPoints from './gridpolygon/GetGridPoints.js';
-import GetGridPolygon from './gridpolygon/GetGridPolygon.js';
+import GetGridPoints from './gridpoints/GetGridPoints.js';
 
 import DefaultGrids from '../grid/index.js';
 
@@ -195,7 +194,6 @@ var methods = {
     setInteractive: SetInteractive,
 
     getGridPoints: GetGridPoints,
-    getGridPolygon: GetGridPolygon,
 }
 Object.assign(
     Board.prototype,
