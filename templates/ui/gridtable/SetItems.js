@@ -7,17 +7,22 @@ var SetItems = function (items) {
 
     var table = this.childrenMap.table;
     table.setCellsCount(this.items.length);
+    table.updateTable(true);
 
+    // Controller
     var scroller = this.childrenMap.scroller;
     var slider = this.childrenMap.slider;
     if (scroller) {
         scroller.setBounds(table.bottomTableOY, table.topTableOY).setValue(table.topTableOY);
+        // Scroller also reflects to slider
     } else if (slider) {
         slider.setValue(0);
     } else {
         table.setTableOY(0);
     }
-    table.updateTable(true);
+    if (slider) {
+        slider.setEnable(table.tableHeight > table.instHeight);
+    }
     return this;
 }
 

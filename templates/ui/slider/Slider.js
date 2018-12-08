@@ -39,7 +39,16 @@ class Slider extends Sizer {
             var scope = GetValue(config, 'valuechangeCallbackScope', undefined);
             this.on('valuechange', callback, scope);
         }
+        this.setEnable(GetValue(config, 'enable', undefined));
         this.setValue(GetValue(config, 'value', 0));
+    }
+
+    setEnable(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+        this.enable = enable;
+        return this;
     }
 
     get value() {
@@ -47,6 +56,9 @@ class Slider extends Sizer {
     }
 
     set value(value) {
+        if (!this.enable) {
+            return;
+        }
         var oldValue = this._value;
         this._value = Clamp(value, 0, 1);
 

@@ -3,7 +3,7 @@ import CreateTable from './CreateTable.js';
 import Slider from '../slider/Slider.js';
 import Scroller from '../../../plugins/scroller.js';
 import NOOP from '../../../plugins/utils/object/NOOP.js';
-import SetItems from './Setitem.js';
+import SetItems from './SetItems.js';
 import TableSetInteractive from './TableSetInteractive.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -64,20 +64,31 @@ class GridTable extends Sizer {
         }
 
         // Control
+        var ignored = false; // Set true to ignore event handler
         if (slider) {
             slider.on('valuechange', function (newValue) {
+                if (ignored) {
+                    ignored = false;
+                    return;
+                }
                 table.setTableOYByPercentage(newValue).updateTable();
                 // reflect to scroller
                 if (scroller) {
+                    ignored = true;
                     scroller.setValue(table.tableOY);
                 }
             })
         }
         if (scroller) {
             scroller.on('valuechange', function (newValue) {
+                if (ignored) {
+                    ignored = false;
+                    return;
+                }
                 table.setTableOY(newValue).updateTable();
                 // reflect to slider
                 if (slider) {
+                    ignored = true;
                     slider.setValue(table.getTableOYPercentage());
                 }
             });
