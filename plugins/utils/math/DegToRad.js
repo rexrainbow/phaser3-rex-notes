@@ -4,7 +4,7 @@
  * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
  */
 
-var CONST = require('./const');
+const DEG_TO_RAD = Math.PI / 180;
 
 /**
  * Convert the given angle from degrees, to the equivalent angle in radians.
@@ -18,7 +18,7 @@ var CONST = require('./const');
  */
 var DegToRad = function (degrees)
 {
-    return degrees * CONST.DEG_TO_RAD;
+    return degrees * DEG_TO_RAD;
 };
 
 module.exports = DegToRad;

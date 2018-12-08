@@ -1,6 +1,5 @@
 import InitPoints from '../utils/InitPoints.js';
-
-const DegToRad = Phaser.Math.DegToRad;
+import DegToRad from '../../utils/math/DegToRad.js';
 
 var SetPoints = function (x, y, size, type, points) {
     if (points === undefined) {
