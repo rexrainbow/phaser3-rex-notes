@@ -1,11 +1,11 @@
 import TickTask from '../../utils/ticktask/TickTask.js';
 import GetSceneObject from '../../utils/system/GetSceneObject.js';
+import DegToRad from '../../utils/math/DegToRad.js';
+import RadToDeg from '../../utils/math/RadToDeg.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const MathWrap = Phaser.Math.Wrap;
 const WrapAngle = Phaser.Math.Angle.Wrap;
-const RadToDeg = Phaser.Math.RadToDeg;
-const DegToRad = Phaser.Math.DegToRad;
 const AngleBetween = Phaser.Math.Angle.Between;
 
 

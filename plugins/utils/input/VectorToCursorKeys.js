@@ -1,9 +1,9 @@
 import CursorKeys from './CursorKeys.js';
+import RadToDeg from '../../utils/math/RadToDeg.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const GetDist = Phaser.Math.Distance.Between;
 const GetAngle = Phaser.Math.Angle.Between;
-const RadToDeg = Phaser.Math.RadToDeg;
 
 class VectorToCursorKeys extends CursorKeys {
     constructor(config) {

@@ -24,12 +24,14 @@ class DragScale extends EE {
         this.pointers = [];
         this.prevDragDistance = 0;
         this.boot();
+
+        this.debug = scene.add.text(0, 580, '');
     }
     boot() {
         this.scene.input.on('pointerdown', this.onPointerDown, this);
         this.scene.input.on('pointerup', this.onPointerUp, this);
         this.scene.input.on('pointermove', this.onPointerMove, this);
-        this.scene.on('destroy', this.destroy, this);
+        this.scene.events.on('destroy', this.destroy, this);
     }
 
     shutdown() {
@@ -37,7 +39,7 @@ class DragScale extends EE {
             this.scene.input.off('pointerdown', this.onPointerDown, this);
             this.scene.input.off('pointerup', this.onPointerUp, this);
             this.scene.input.off('pointermove', this.onPointerMove, this);
-            this.scene.off('destroy', this.destroy, this);
+            this.scene.events.off('destroy', this.destroy, this);
         }
     }
 
@@ -65,6 +67,8 @@ class DragScale extends EE {
                 this.onDragStart();
                 break;
         }
+
+        this.debug.text = this.state;
     }
 
     onPointerUp(pointer) {
@@ -88,9 +92,13 @@ class DragScale extends EE {
                 this.onDragEnd();
                 break;
         }
+        this.debug.text = this.state;
     }
 
     onPointerMove(pointer) {
+        if (!pointer.isDown) {
+            return;
+        }
         var isInsideBounds = this.bounds.contains(pointer.x, pointer.y);
         var isCatchedPointer = (this.pointers.indexOf(pointer) !== -1);
         if (!isCatchedPointer && isInsideBounds) {

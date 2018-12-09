@@ -1,7 +1,7 @@
 import GetSceneObject from '../../utils/system/GetSceneObject.js';
+import DegToRad from '../../utils/math/DegToRad.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
-const DegToRad = Phaser.Math.DegToRad;
 const AngleBetween = Phaser.Math.Angle.Between;
 
 class PathFollower {

@@ -1,8 +1,8 @@
 import frag from './swirl-frag.js';
+import DegToRad from '../../utils/math/DegToRad.js';
+import RadToDeg from '../../utils/math/RadToDeg.js';
 
 const TextureTintPipeline = Phaser.Renderer.WebGL.Pipelines.TextureTintPipeline;
-const DegToRad = Phaser.Math.DegToRad;
-const RadToDeg = Phaser.Math.RadToDeg;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class SwirlPipeline extends TextureTintPipeline {

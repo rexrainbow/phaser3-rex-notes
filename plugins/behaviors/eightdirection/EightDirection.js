@@ -1,8 +1,8 @@
 import TickTask from '../../utils/ticktask/TickTask.js';
 import Proxy from '../../utils/arcade/proxy.js';
+import DegToRad from '../../utils/math/DegToRad.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
-const DegToRad = Phaser.Math.DegToRad;
 
 class EightDirection extends TickTask {
     constructor(gameObject, config) {
