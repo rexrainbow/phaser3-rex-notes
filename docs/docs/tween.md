@@ -129,7 +129,7 @@ var tween = scene.tweens.add({
 - `yoyo` : boolean - Does the tween reverse itself (yoyo) when it reaches the end?
 - `flipX` : flip X the GameObject on tween end
 - `flipY` : flip Y the GameObject on tween end
-- `offset` : Used when the Tween is part of a Timeline
+- `offset` : Used when the Tween is part of a [Timeline](tween-timeline.md)
 - `completeDelay` : The time the tween will wait before the onComplete event is dispatched once it has     completed
 - `loop` : `-1` for an infinite loop
 - `loopDelay`

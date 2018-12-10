@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/pad/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/tween-timeline/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Pad - Notes of Phaser 3</title>
+        <title>Timeline of tween tasks - Notes of Phaser 3</title>
       
     
     
@@ -128,7 +128,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Pad
+                Timeline of tween tasks
               </span>
             
           
@@ -1959,10 +1959,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8" checked>
     
     <label class="md-nav__link" for="nav-8">
       Tween
@@ -1990,11 +1992,72 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../tween-timeline/" title="Timeline of tween tasks" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Timeline of tween tasks
+      </label>
+    
+    <a href="./" title="Timeline of tween tasks" class="md-nav__link md-nav__link--active">
       Timeline of tween tasks
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-timeline-then-chain-tween-tasks" title="Create timeline, then chain tween tasks" class="md-nav__link">
+    Create timeline, then chain tween tasks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-timeline-included-tween-tasks" title="Create timeline, included tween tasks" class="md-nav__link">
+    Create timeline, included tween tasks
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -2799,12 +2862,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-12" type="checkbox" id="nav-12" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-12" type="checkbox" id="nav-12">
     
     <label class="md-nav__link" for="nav-12">
       String
@@ -2868,52 +2929,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Pad
-      </label>
-    
-    <a href="./" title="Pad" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../pad/" title="Pad" class="md-nav__link">
       Pad
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -3480,6 +3500,26 @@
     Usage
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-timeline-then-chain-tween-tasks" title="Create timeline, then chain tween tasks" class="md-nav__link">
+    Create timeline, then chain tween tasks
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-timeline-included-tween-tasks" title="Create timeline, included tween tasks" class="md-nav__link">
+    Create timeline, included tween tasks
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
       
@@ -3498,31 +3538,65 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/pad.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/tween-timeline.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Pad</h1>
+                  <h1>Timeline of tween tasks</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Takes the given string and pads it out, to the length required, built-in method of phaser.</p>
+<p>Chain a series of <a href="../tween/">tween tasks</a>, built-in object of phaser.</p>
 <ul>
 <li>Author: Richard Davey</li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Utils</span><span class="p">.</span><span class="nb">String</span><span class="p">.</span><span class="nx">Pad</span><span class="p">(</span><span class="nx">str</span><span class="p">,</span> <span class="nx">len</span><span class="p">,</span> <span class="nx">pad</span><span class="p">,</span> <span class="nx">dir</span><span class="p">);</span>
-</pre></div>
-
-<ul>
-<li><code>str</code> : String, or number.</li>
-<li><code>len</code> : Length or result string.</li>
-<li><code>pad</code> : The string to pad it out.</li>
-<li><code>dir</code> : <ul>
-<li><code>1</code> : Left</li>
-<li><code>2</code> : Right</li>
-<li><code>3</code> : Both</li>
+<h3 id="create-timeline-then-chain-tween-tasks">Create timeline, then chain tween tasks<a class="headerlink" href="#create-timeline-then-chain-tween-tasks" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Create timeline
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">timeline</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">tweens</span><span class="p">.</span><span class="nx">createTimeline</span><span class="p">();</span>
+</pre></div></li>
+<li>Add tween task configuration
+    <div class="codehilite"><pre><span></span><span class="nx">timeline</span><span class="p">.</span><span class="nx">add</span><span class="p">({</span>
+    <span class="nx">targets</span><span class="o">:</span> <span class="nx">gameObject</span><span class="p">,</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="mi">400</span><span class="p">,</span>               <span class="c1">// &#39;+=100&#39;</span>
+    <span class="nx">ease</span><span class="o">:</span> <span class="s1">&#39;Linear&#39;</span><span class="p">,</span>       <span class="c1">// &#39;Cubic&#39;, &#39;Elastic&#39;, &#39;Bounce&#39;, &#39;Back&#39;</span>
+    <span class="nx">duration</span><span class="o">:</span> <span class="mi">1000</span><span class="p">,</span>
+    <span class="nx">repeat</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>            <span class="c1">// -1: infinity</span>
+    <span class="nx">yoyo</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="c1">// offset: &#39;-=500&#39;,   // starts 500ms before previous tween ends</span>
+<span class="p">})</span>
+</pre></div><ul>
+<li><code>offset</code> : Start this tween task with a time offset.<ul>
+<li>A number : Absolute offsets, start this tween task after timeline start.</li>
+<li>A string, <code>'-=n'</code> : Relative offsets, start this tween task before previous tween ends.</li>
 </ul>
 </li>
 </ul>
+</li>
+<li>Start tween tasks
+    <div class="codehilite"><pre><span></span><span class="nx">timeline</span><span class="p">.</span><span class="nx">play</span><span class="p">();</span>
+</pre></div></li>
+</ol>
+<h3 id="create-timeline-included-tween-tasks">Create timeline, included tween tasks<a class="headerlink" href="#create-timeline-included-tween-tasks" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">timeline</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">tweens</span><span class="p">.</span><span class="nx">timeline</span><span class="p">({</span>
+    <span class="nx">targets</span><span class="o">:</span> <span class="nx">gameObject</span><span class="p">,</span>
+    <span class="nx">ease</span><span class="o">:</span> <span class="s1">&#39;Linear&#39;</span><span class="p">,</span>       <span class="c1">// &#39;Cubic&#39;, &#39;Elastic&#39;, &#39;Bounce&#39;, &#39;Back&#39;</span>
+    <span class="nx">duration</span><span class="o">:</span> <span class="mi">1000</span><span class="p">,</span>
+    <span class="nx">loop</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+
+    <span class="nx">tweens</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nx">targets</span><span class="o">:</span> <span class="nx">gameObject</span><span class="p">,</span>
+            <span class="nx">x</span><span class="o">:</span> <span class="mi">400</span><span class="p">,</span>               <span class="c1">// &#39;+=100&#39;</span>
+            <span class="c1">// ease: &#39;Linear&#39;,       // &#39;Cubic&#39;, &#39;Elastic&#39;, &#39;Bounce&#39;, &#39;Back&#39;</span>
+            <span class="c1">// duration: 1000,</span>
+            <span class="c1">// repeat: 0,            // -1: infinity</span>
+            <span class="c1">// yoyo: false,</span>
+            <span class="c1">// offset: &#39;-=500&#39;,   // starts 500ms before previous tween ends</span>
+        <span class="p">},</span>
+        <span class="c1">// ...</span>
+    <span class="p">]</span>
+<span class="p">});</span>
+</pre></div>
                 
                   
                 
@@ -3543,7 +3617,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../mustache/" title="Mustache" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../tween/" title="Tween task" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -3552,19 +3626,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Mustache
+                Tween task
               </span>
             </div>
           </a>
         
         
-          <a href="../capitalizes-first/" title="Capitalizes first" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../eventemitter3/" title="Event emitter" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Capitalizes first
+                Event emitter
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

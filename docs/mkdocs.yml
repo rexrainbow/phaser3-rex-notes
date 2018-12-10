@@ -115,7 +115,7 @@ nav:
     - Filters:
         - Swirl: swirlpipeline.md
         - Pixelation: pixelationpipeline.md
-- Tween: tween.md
+- Tween:
     - Tween task: tween.md
     - Timeline of tween tasks: tween-timeline.md
 - Logic:
