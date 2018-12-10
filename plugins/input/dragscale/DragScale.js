@@ -48,6 +48,7 @@ class DragScale extends EE {
     }
 
     onPointerDown(pointer) {
+        this.debug.text += 'pointer ' + pointer.id + ' down\n';
         if (!this.bounds.contains(pointer.x, pointer.y)) {
             return;
         }
@@ -67,11 +68,10 @@ class DragScale extends EE {
                 this.onDragStart();
                 break;
         }
-
-        this.debug.text = this.state;
     }
 
     onPointerUp(pointer) {
+        this.debug.text += 'pointer ' + pointer.id + ' up\n';
         if (!this.bounds.contains(pointer.x, pointer.y)) {
             return;
         }
@@ -92,10 +92,10 @@ class DragScale extends EE {
                 this.onDragEnd();
                 break;
         }
-        this.debug.text = this.state;
     }
 
     onPointerMove(pointer) {
+        this.debug.text += 'pointer ' + pointer.id + ' move\n';
         if (!pointer.isDown) {
             return;
         }
