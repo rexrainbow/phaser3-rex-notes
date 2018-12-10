@@ -321,6 +321,8 @@ scene.input.addPointer(num);  // total points = num + 1
     ```javascript
     var amount = scene.input.manager.pointersTotal;
     ```
+    - `1` in desktop
+    - `2` in touch device. (`0` for mouse, `1` for 1 touch pointer)
 
 ### Properties of point
 

@@ -7,7 +7,7 @@ const DistanceBetween = Phaser.Math.Distance.Between;
 
 class DragScale extends EE {
     constructor(scene, config) {
-        var amount = scene.input.manager.pointersTotal;
+        var amount = scene.input.manager.pointersTotal - 1;
         if (amount < 2) {
             scene.input.addPointer(2 - amount);
         }
@@ -25,7 +25,8 @@ class DragScale extends EE {
         this.prevDragDistance = 0;
         this.boot();
 
-        this.debug = scene.add.text(0, 580, '');
+        this.debug = scene.add.text(0, 0, '');
+        this.dragIdx = 0;
     }
     boot() {
         this.scene.input.on('pointerdown', this.onPointerDown, this);
@@ -48,7 +49,6 @@ class DragScale extends EE {
     }
 
     onPointerDown(pointer) {
-        this.debug.text += 'pointer ' + pointer.id + ' down\n';
         if (!this.bounds.contains(pointer.x, pointer.y)) {
             return;
         }
@@ -71,7 +71,6 @@ class DragScale extends EE {
     }
 
     onPointerUp(pointer) {
-        this.debug.text += 'pointer ' + pointer.id + ' up\n';
         if (!this.bounds.contains(pointer.x, pointer.y)) {
             return;
         }
@@ -95,7 +94,6 @@ class DragScale extends EE {
     }
 
     onPointerMove(pointer) {
-        this.debug.text += 'pointer ' + pointer.id + ' move\n';
         if (!pointer.isDown) {
             return;
         }
@@ -134,6 +132,7 @@ class DragScale extends EE {
 
     onDragging() {
         this.emit('drag', this);
+        console.log(this.scaleFactor);
     }
 
     get isDragging() {
@@ -146,6 +145,7 @@ class DragScale extends EE {
         }
         var p0 = this.pointers[0],
             p1 = this.pointers[1];
+
         return DistanceBetween(p0.x, p0.y, p1.x, p1.y);
     }
 
@@ -153,8 +153,8 @@ class DragScale extends EE {
         if (!this.isDragging) {
             return 0;
         }
-        var curDragDistance = this.prevDragDistance;
-        var scaleFactor = curDragDistance / this.prevDragDistance;
+        var curDragDistance = this.dragDistance;
+        var scaleFactor = (curDragDistance / this.prevDragDistance);
         this.prevDragDistance = curDragDistance;
         return scaleFactor;
     }
