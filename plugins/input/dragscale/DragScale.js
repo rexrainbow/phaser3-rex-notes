@@ -24,9 +24,6 @@ class DragScale extends EE {
         this.pointers = [];
         this.prevDragDistance = 0;
         this.boot();
-
-        this.debug = scene.add.text(0, 0, '');
-        this.dragIdx = 0;
     }
     boot() {
         this.scene.input.on('pointerdown', this.onPointerDown, this);
