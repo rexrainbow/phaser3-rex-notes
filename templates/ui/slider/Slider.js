@@ -32,14 +32,17 @@ class Slider extends Sizer {
         if (thumb) {
             this.add(thumb, null); // Put into container but not layout it
 
-            var controlMode = GetValue(config, 'control', 'drag');
+            var controlMode = GetValue(config, 'control', 0);
+            if (typeof (controlMode) === 'string') {
+                controlMode = CONTROLMODE[controlMode];
+            }
             switch (controlMode) {
-                case 'drag':
+                case 0: // 'drag'
                     thumb.setInteractive();
                     this.scene.input.setDraggable(thumb);
                     thumb.on('drag', OnDragThumb, this);
                     break;
-                case 'click':
+                case 1: // 'click'
                     this.setInteractive()
                         .on('pointerdown', OnTouchTrack, this)
                         .on('pointermove', OnTouchTrack, this);
@@ -115,6 +118,12 @@ class Slider extends Sizer {
         this.updateThumb();
         return this;
     }
+}
+
+const CONTROLMODE = {
+    drag: 0,
+    click: 1,
+    none: -1,
 }
 
 var methods = {
