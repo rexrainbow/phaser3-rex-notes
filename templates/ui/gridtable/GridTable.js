@@ -96,6 +96,7 @@ class GridTable extends Sizer {
 
 
         this.childrenMap = {};
+        this.childrenMap.background = background;
         this.childrenMap.table = table;
         this.childrenMap.slider = slider;
         this.childrenMap.scroller = scroller;

@@ -1,5 +1,6 @@
 import Sizer from '../sizer/Sizer.js';
 import OnDragThumb from './OnDragThumb.js';
+import OnTouchTrack from './OnTouchTrack.js';
 import GetStartPoint from './GetStartPoint.js';
 import GetEndPoint from './GetEndPoint.js';
 import UpdateThumb from './UpdateThumb.js';
@@ -16,8 +17,13 @@ class Slider extends Sizer {
         this.type = 'rexSlider';
 
         // Add elements
+        var background = GetValue(config, 'background', undefined);
         var track = GetValue(config, 'track', undefined);
         var thumb = GetValue(config, 'thumb', undefined);
+
+        if (background) {
+            this.addBackground(background);
+        }
 
         if (track) {
             this.add(track, 0, undefined, 0, true);
@@ -25,12 +31,24 @@ class Slider extends Sizer {
 
         if (thumb) {
             this.add(thumb, null); // Put into container but not layout it
-            thumb.setInteractive()
-            this.scene.input.setDraggable(thumb);
-            thumb.on('drag', OnDragThumb, this);
+
+            var controlMode = GetValue(config, 'control', 'drag');
+            switch (controlMode) {
+                case 'drag':
+                    thumb.setInteractive();
+                    this.scene.input.setDraggable(thumb);
+                    thumb.on('drag', OnDragThumb, this);
+                    break;
+                case 'click':
+                    this.setInteractive()
+                        .on('pointerdown', OnTouchTrack, this)
+                        .on('pointermove', OnTouchTrack, this);
+                    break;
+            }
         }
 
         this.childrenMap = {};
+        this.childrenMap.background = background;
         this.childrenMap.track = track;
         this.childrenMap.thumb = thumb;
 
@@ -64,7 +82,7 @@ class Slider extends Sizer {
 
         if (oldValue !== this._value) {
             this.updateThumb(this._value);
-            this.emit('valuechange', this._value, oldValue);
+            this.emit('valuechange', this._value, oldValue, this);
         }
     }
 
