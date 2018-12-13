@@ -41,11 +41,11 @@ class Slider extends Sizer {
         }
 
         // Input
-        var controlMode = GetValue(config, 'control', 0);
-        if (typeof (controlMode) === 'string') {
-            controlMode = CONTROLMODE[controlMode];
+        var inputMode = GetValue(config, 'input', 0);
+        if (typeof (inputMode) === 'string') {
+            inputMode = INPUTMODE[inputMode];
         }
-        switch (controlMode) {
+        switch (inputMode) {
             case 0: // 'drag'
                 if (thumb) {
                     thumb.setInteractive();
@@ -133,7 +133,7 @@ class Slider extends Sizer {
     }
 }
 
-const CONTROLMODE = {
+const INPUTMODE = {
     drag: 0,
     click: 1,
     none: -1,

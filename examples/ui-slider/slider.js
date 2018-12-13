@@ -29,7 +29,7 @@ class Demo extends Phaser.Scene {
                 valuechangeCallback: function (value) {
                     print0.text = value;
                 },
-                control: 'drag', // 'drag'|'click'
+                input: 'drag', // 'drag'|'click'
             })
             .layout();
 
@@ -48,7 +48,7 @@ class Demo extends Phaser.Scene {
                 valuechangeCallback: function (value) {
                     print1.text = value;
                 },
-                control: 'click', // 'drag'|'click'
+                input: 'click', // 'drag'|'click'
             })
             .layout();
     }
