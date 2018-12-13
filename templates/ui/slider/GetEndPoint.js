@@ -7,8 +7,19 @@ var GetEndoint = function (out) {
     if (out === undefined) {
         out = tmpPoint;
     }
-    var align = (this.orientation === 1) ? AlignRight : AlignBottom;
-    return GetThumbAlignPoint.call(this, align, out);
+    if (this.childrenMap.thumb) {
+        var align = (this.orientation === 1) ? AlignRight : AlignBottom;
+        GetThumbAlignPoint.call(this, align, out);
+    } else {
+        if (this.orientation === 0) {
+            out.y = this.bottom;
+            out.x = (this.left + this.right) / 2;
+        } else {
+            out.x = this.right;
+            out.y = (this.top + this.bottom) / 2;
+        }
+    }
+    return out;
 }
 
 var tmpPoint = {};

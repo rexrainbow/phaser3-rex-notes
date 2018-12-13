@@ -4,6 +4,7 @@ import OnTouchTrack from './OnTouchTrack.js';
 import GetStartPoint from './GetStartPoint.js';
 import GetEndPoint from './GetEndPoint.js';
 import UpdateThumb from './UpdateThumb.js';
+import UpdateIndicator from './UpdateIndicator.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Clamp = Phaser.Math.Clamp;
@@ -19,7 +20,9 @@ class Slider extends Sizer {
         // Add elements
         var background = GetValue(config, 'background', undefined);
         var track = GetValue(config, 'track', undefined);
+        var indicator = GetValue(config, 'indicator', undefined);
         var thumb = GetValue(config, 'thumb', undefined);
+
 
         if (background) {
             this.addBackground(background);
@@ -28,31 +31,39 @@ class Slider extends Sizer {
         if (track) {
             this.add(track, 0, undefined, 0, true);
         }
+        if (indicator) {
+            this.add(indicator, null); // Put into container but not layout it
+        }
 
         if (thumb) {
             this.add(thumb, null); // Put into container but not layout it
 
-            var controlMode = GetValue(config, 'control', 0);
-            if (typeof (controlMode) === 'string') {
-                controlMode = CONTROLMODE[controlMode];
-            }
-            switch (controlMode) {
-                case 0: // 'drag'
+        }
+
+        // Input
+        var controlMode = GetValue(config, 'control', 0);
+        if (typeof (controlMode) === 'string') {
+            controlMode = CONTROLMODE[controlMode];
+        }
+        switch (controlMode) {
+            case 0: // 'drag'
+                if (thumb) {
                     thumb.setInteractive();
                     this.scene.input.setDraggable(thumb);
                     thumb.on('drag', OnDragThumb, this);
-                    break;
-                case 1: // 'click'
-                    this.setInteractive()
-                        .on('pointerdown', OnTouchTrack, this)
-                        .on('pointermove', OnTouchTrack, this);
-                    break;
-            }
+                }
+                break;
+            case 1: // 'click'
+                this.setInteractive()
+                    .on('pointerdown', OnTouchTrack, this)
+                    .on('pointermove', OnTouchTrack, this);
+                break;
         }
 
         this.childrenMap = {};
         this.childrenMap.background = background;
         this.childrenMap.track = track;
+        this.childrenMap.indicator = indicator;
         this.childrenMap.thumb = thumb;
 
         var callback = GetValue(config, 'valuechangeCallback', null);
@@ -85,6 +96,7 @@ class Slider extends Sizer {
 
         if (oldValue !== this._value) {
             this.updateThumb(this._value);
+            this.updateIndicator(this._value);
             this.emit('valuechange', this._value, oldValue, this);
         }
     }
@@ -116,6 +128,7 @@ class Slider extends Sizer {
     layout(parent) {
         super.layout(parent);
         this.updateThumb();
+        this.updateIndicator();
         return this;
     }
 }
@@ -130,6 +143,7 @@ var methods = {
     getStartPoint: GetStartPoint,
     getEndPoint: GetEndPoint,
     updateThumb: UpdateThumb,
+    updateIndicator: UpdateIndicator,
 }
 Object.assign(
     Slider.prototype,

@@ -23,13 +23,13 @@ class Demo extends Phaser.Scene {
                 height: 200,
                 orientation: 'x',
 
-                track: this.rexUI.add.roundRectangle(0, 0, 0, 0, 8, COLOR_PRIMARY),
+                track: this.rexUI.add.roundRectangle(0, 0, 0, 0, 8, COLOR_DARK),
                 thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_LIGHT),
 
                 valuechangeCallback: function (value) {
                     print0.text = value;
                 },
-                control: 'drag',  // 'drag'|'click'
+                control: 'drag', // 'drag'|'click'
             })
             .layout();
 
@@ -41,13 +41,14 @@ class Demo extends Phaser.Scene {
                 height: 20,
                 orientation: 'y',
 
-                track: this.rexUI.add.roundRectangle(0, 0, 0, 0, 8, COLOR_PRIMARY),
-                thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_LIGHT),
+                track: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_DARK),
+                indicator: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_PRIMARY),
+                thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_PRIMARY),
 
                 valuechangeCallback: function (value) {
                     print1.text = value;
                 },
-                control: 'click',  // 'drag'|'click'
+                control: 'click', // 'drag'|'click'
             })
             .layout();
     }

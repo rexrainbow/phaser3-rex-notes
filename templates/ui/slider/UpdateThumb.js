@@ -1,14 +1,15 @@
-const Linear = Phaser.Math.Linear;
+import PercentToPosition from './PercentToPosition.js';
 
 var UpdateThumb = function (t) {
+    var thumb = this.childrenMap.thumb;
+    if (thumb === undefined) {
+        return this;
+    }
+
     if (t === undefined) {
         t = this.value;
     }
-    var startPoint = this.getStartPoint();
-    var endPoint = this.getEndPoint();
-    var thumb = this.childrenMap.thumb;
-    thumb.x = Linear(startPoint.x, endPoint.x, t);
-    thumb.y = Linear(startPoint.y, endPoint.y, t);
+    PercentToPosition(t, this.getStartPoint(), this.getEndPoint(), thumb);
     this.resetChildState(thumb);
     return this;
 }
