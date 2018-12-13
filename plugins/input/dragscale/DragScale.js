@@ -46,6 +46,11 @@ class DragScale extends EE {
     }
 
     onPointerDown(pointer) {
+        var index = this.pointers.indexOf(pointer);
+        if (index !== -1) { // Already in catched pointers
+            return;
+        }
+
         if (!this.bounds.contains(pointer.x, pointer.y)) {
             return;
         }
@@ -73,7 +78,7 @@ class DragScale extends EE {
         }
 
         var index = this.pointers.indexOf(pointer);
-        if (index === -1) {
+        if (index === -1) { // Not in catched pointers
             return;
         } else {
             SpliceOne(this.pointers, index);
