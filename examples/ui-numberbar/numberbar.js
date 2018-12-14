@@ -4,8 +4,6 @@ const COLOR_PRIMARY = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
-const Linear = Phaser.Math.Linear;
-
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -44,8 +42,8 @@ class Demo extends Phaser.Scene {
                     slider: 10,
                 },
 
-                valuechangeCallback: function (value, oldValue, numberBar) {
-                    numberBar.text = Math.round(Linear(0, 100, value));
+                valuechangeCallback: function (newValue, oldValue, numberBar) {
+                    numberBar.text = Math.round(Phaser.Math.Linear(0, 100, newValue));
                 },
             })
             .layout();

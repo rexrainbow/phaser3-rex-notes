@@ -37,7 +37,7 @@ var GetElement = function (mapNameList) {
     if (mapNameList.length === 0) {
         return element;
     } else if (element && element.childrenMap) {
-        return element.GetElement(mapNameList);
+        return element.getElement(mapNameList);
     } else {
         return null;
     }

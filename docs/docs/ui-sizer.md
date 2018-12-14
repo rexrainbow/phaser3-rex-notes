@@ -42,7 +42,7 @@ var game = new Phaser.Game(config);
 
 ```javascript
 var sizer = scene.rexUI.add.sizer({
-    orientation: 0,    
+    orientation: 0,
     // x: 0,
     // y: 0,
     // width: undefined,

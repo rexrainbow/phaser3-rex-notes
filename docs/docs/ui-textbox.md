@@ -43,17 +43,20 @@ var game = new Phaser.Game(config);
 ```javascript
 var textBox = scene.rexUI.add.textBox({
     orientation: 0,
+
     background: backgroundGameObject,
     icon: iconGameObject,
     iconMask: false,
     text: textGameObject,
     action: actionGameObject,
     actionMask: false,
+
     space: {
         left: 0,
         right: 0,
         top: 0,
         bottom: 0,
+
         icon: 0,
         text: 0,
     },

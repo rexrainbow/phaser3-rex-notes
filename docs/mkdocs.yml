@@ -70,6 +70,7 @@ nav:
             - Grid table: ui-gridtable.md
             - Tabs: ui-tabs.md
             - Menu: ui-menu.md
+            - Number bar: ui-numberbar.md
     - Zone: zone.md
     - DOM element:
         - DOM element: domelement.md

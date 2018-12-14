@@ -43,17 +43,20 @@ var game = new Phaser.Game(config);
 ```javascript
 var label = scene.rexUI.add.label({
     orientation: 0,
+
     background: backgroundGameObject,
     icon: iconGameObject,
     iconMask: false,
     text: textGameObject,
     action: actionGameObject,
     actionMask: false,
+
     space: {
         left: 0,
         right: 0,
         top: 0,
         bottom: 0,
+
         icon: 0,
         text: 0,
     },
@@ -132,15 +135,19 @@ label.layout();
     var gameObject = label.getElement('#' + name);
     ```
 
-### Get text
+### Text
 
 - Get text string
     ```javascript
     var s = label.text;
     ```
-- Get text game object
+- Set text string
     ```javascript
-    var icon = label.getElement('text');
+    label.setText(s);
+    ```
+    or
+    ```javascript
+    label.text = s;
     ```
 
 ### Other properties

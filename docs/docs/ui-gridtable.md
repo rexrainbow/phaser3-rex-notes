@@ -102,6 +102,7 @@ var gridTable = scene.rexUI.add.gridTable({
     - `table.cellWidth` : Width of each cell, in pixels.
     - `table.columns` : Columns count of each row.
 - `slider` : Componments of slider, optional.
+    - `slider.background` : Game object of slider background, optional.
     - `slider.track` : Game object of track.
     - `slider.thumb` : Game object of thumb.
     - `slider.input` :

@@ -77,7 +77,7 @@ var menu = scene.rexUI.add.menu({
 - `items` : Array of item data for each button. Each item has
     - `children` : An array of items for sub-menu, optional.
     - Other custom properties
-- `createCellContainerCallback` : Callback to return container object of each item.
+- `createButtonCallback` : Callback to return container object of each item.
     - Properties of `item` parameter
         - `item.scene` : Scene of this menu object.
         - Other custom properties

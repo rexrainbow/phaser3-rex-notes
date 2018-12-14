@@ -60,9 +60,6 @@ class NumberBar extends Sizer {
 
         var slider;
         if (sliderConfig) {
-            if (sliderConfig === true) {
-                sliderConfig = {};
-            }
             sliderConfig.orientation = (this.orientation == 0) ? 1 : 0;
             sliderConfig.eventEmitter = this;
             sliderConfig.value = null;
