@@ -88,7 +88,17 @@ class NumberBar extends Sizer {
                 }
             }
 
-            this.add(slider, 0, 'center', padding);
+            var proportion = 1;
+            if (this.orientation === 0) {
+                if (sliderConfig.hasOwnProperty('width')) {
+                    proportion = 0;
+                }
+            } else {
+                if (sliderConfig.hasOwnProperty('height')) {
+                    proportion = 0;
+                }
+            }
+            this.add(slider, proportion, 'center', padding);
         }
 
 
@@ -121,7 +131,7 @@ class NumberBar extends Sizer {
         var callback = GetValue(config, 'valuechangeCallback', null);
         if (callback !== null) {
             var scope = GetValue(config, 'valuechangeCallbackScope', undefined);
-            this.on('valuechange', callback, scope);            
+            this.on('valuechange', callback, scope);
         }
         this.setEnable(GetValue(config, 'enable', undefined));
         this.setValue(GetValue(config, 'value', 0));

@@ -19,13 +19,14 @@ class Demo extends Phaser.Scene {
         var numberBar = this.rexUI.add.numberBar({
                 x: 400,
                 y: 300,
+                width: 300, // Fixed width
 
                 background: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_DARK),
 
                 icon: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_LIGHT),
 
                 slider: {
-                    width: 120,
+                    // width: 120, // Fixed width
                     track: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_PRIMARY),
                     indicator: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_LIGHT),
                     input: 'click',

@@ -12,11 +12,11 @@ var GetStartPoint = function (out) {
         GetThumbAlignPoint.call(this, align, out);
     } else {
         if (this.orientation === 0) {
-            out.y = this.top;
-            out.x = (this.left + this.right) / 2;
+            out.x = this.centerX;
+            out.y = this.top + 1; // Add 1 pixel margin
         } else {
-            out.x = this.left;
-            out.y = (this.top + this.bottom) / 2;
+            out.x = this.left + 1; // Add 1 pixel margin
+            out.y = this.centerY;
         }
     }
     return out;

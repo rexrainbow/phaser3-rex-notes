@@ -79,6 +79,19 @@ class Base extends Container {
         return this;
     }
 
+    get centerX() {
+        return (this.left + this.right)/2;
+    }
+
+    set centerX(value) {
+        this.x += (value - this.centerX);
+    }
+
+    alignCenterX(value) {
+        this.centerX = value;
+        return this;
+    }
+
     get top() {
         return this.y - (this.displayHeight * this.originY);
     }
@@ -102,6 +115,19 @@ class Base extends Container {
 
     alignBottom(value) {
         this.bottom = value;
+        return this;
+    }
+
+    get centerY() {
+        return (this.top + this.bottom)/2;
+    }
+
+    set centerY(value) {
+        this.y += (value - this.centerY);
+    }
+
+    alignCenterY(value) {
+        this.centerY = value;
         return this;
     }
 }
