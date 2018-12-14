@@ -16,6 +16,7 @@ class Slider extends Sizer {
         // Create sizer
         super(scene, config);
         this.type = 'rexSlider';
+        this.eventEmitter = GetValue(config, 'eventEmitter', this);
 
         // Add elements
         var background = GetValue(config, 'background', undefined);
@@ -31,6 +32,7 @@ class Slider extends Sizer {
         if (track) {
             this.add(track, 0, undefined, 0, true);
         }
+
         if (indicator) {
             this.add(indicator, null); // Put into container but not layout it
         }
@@ -69,7 +71,7 @@ class Slider extends Sizer {
         var callback = GetValue(config, 'valuechangeCallback', null);
         if (callback !== null) {
             var scope = GetValue(config, 'valuechangeCallbackScope', undefined);
-            this.on('valuechange', callback, scope);
+            this.eventEmitter.on('valuechange', callback, scope);
         }
         this.setEnable(GetValue(config, 'enable', undefined));
         this.setValue(GetValue(config, 'value', 0));
@@ -97,11 +99,15 @@ class Slider extends Sizer {
         if (oldValue !== this._value) {
             this.updateThumb(this._value);
             this.updateIndicator(this._value);
-            this.emit('valuechange', this._value, oldValue, this);
+            this.eventEmitter.emit('valuechange', this._value, oldValue, this.eventEmitter);
         }
     }
 
     setValue(value, min, max) {
+        if ((value === undefined) || (value === null)) {
+            return this;
+        }
+
         if (min !== undefined) {
             value = Percent(value, min, max);
         }

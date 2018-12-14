@@ -45,10 +45,11 @@ class Demo extends Phaser.Scene {
                 indicator: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_PRIMARY),
                 thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_PRIMARY),
 
+                input: 'click', // 'drag'|'click'
                 valuechangeCallback: function (value) {
                     print1.text = value;
                 },
-                input: 'click', // 'drag'|'click'
+
             })
             .layout();
     }

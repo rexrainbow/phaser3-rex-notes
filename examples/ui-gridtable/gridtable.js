@@ -32,6 +32,15 @@ class Demo extends Phaser.Scene {
                     thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 13, 0x7b5e57),
                 },
 
+                space: {
+                    left: 20,
+                    right: 20,
+                    top: 20,
+                    bottom: 20,
+
+                    table: 10,
+                },
+
                 createCellContainerCallback: function (cell) {
                     var scene = cell.scene,
                         width = cell.width,

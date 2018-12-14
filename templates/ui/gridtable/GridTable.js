@@ -25,6 +25,13 @@ class GridTable extends Sizer {
         var sliderConfig = GetValue(config, 'slider', undefined);
         var scrollerConfig = GetValue(config, 'scrollerConfig', true);
 
+        // Space
+        var paddingLeft = GetValue(config, 'space.left', 0);
+        var paddingRight = GetValue(config, 'space.right', 0);
+        var paddingTop = GetValue(config, 'space.top', 0);
+        var paddingBottom = GetValue(config, 'space.bottom', 0);
+        var tableSpace = GetValue(config, 'space.table', 0);
+
         if (background) {
             this.addBackground(background);
         }
@@ -43,16 +50,29 @@ class GridTable extends Sizer {
             cell.item = undefined;
             cell.setContainer(container);
         }, this);
-        this.add(table, 0, 'center', undefined, true);
+
+        var padding = {
+            left: paddingLeft,
+            right: (sliderConfig) ? tableSpace : paddingRight,
+            top: paddingTop,
+            bottom: paddingBottom
+        }
+        this.add(table, 0, 'center', padding, true);
 
         var slider;
         if (sliderConfig) {
             if (sliderConfig === true) {
                 sliderConfig = {};
             }
-            sliderConfig.orientation = config.orientation;
+            sliderConfig.orientation = this.orientation;
             slider = new Slider(scene, sliderConfig);
-            this.add(slider, 0, 'center', undefined, true);
+            var padding = {
+                left: (table) ? 0 : paddingLeft,
+                right: paddingRight,
+                top: paddingTop,
+                bottom: paddingBottom
+            }
+            this.add(slider, 0, 'center', padding, true);
         }
 
         var scroller;

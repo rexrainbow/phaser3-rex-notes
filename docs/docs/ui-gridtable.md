@@ -68,6 +68,15 @@ var gridTable = scene.rexUI.add.gridTable({
         backDeceleration: 2000,
     },
 
+    space: {
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: 0,
+
+        table: 0,
+    },
+
     createCellContainerCallback: function(cell) {
         var scene = cell.scene,
             width = cell.width,
@@ -95,6 +104,10 @@ var gridTable = scene.rexUI.add.gridTable({
 - `slider` : Componments of slider, optional.
     - `slider.track` : Game object of track.
     - `slider.thumb` : Game object of thumb.
+    - `slider.input` :
+        - `'drag'` : Control slider by dragging thumb game object. Default setting.
+        - `'click'` : Control slider by touching track game object.
+        - `'none'` : Disable sider controlling.
 - `scroller` : Configuration of scroller behavior.
     - `scroller.slidingDeceleration` : Deceleration of slow down when dragging released.
         - Set `false` to disable it.
@@ -108,6 +121,9 @@ var gridTable = scene.rexUI.add.gridTable({
         - `cell.item` : Item of this cell to display.
         - `cell.index` : Index of this cell.
     - **Set origin of returned cell container to (0, 0)**
+- `space` : Pads spaces
+    - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds
+    - `space.table` : Space between table object and slider object.
 - `items` : Array of item data for each cell.
 - `name` : Set name of this gridTable.
 
