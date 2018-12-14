@@ -136,7 +136,7 @@ var dialog = scene.rexUI.add.dialog({
 - `choices` : Array of Game objects for choice-buttons group which arranged from top to bottom, optional.
 - `actions` : Array of Game objects for action-buttons group which arranged from left to right, optional.
 - `space` : Pads spaces
-    - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds
+    - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
     - `space.title` : Space between title game object and below game object.
     - `space.titleLeft`, `space.titleRight` : Extra left/right padding of title game object.
     - `space.content` : Space between content game object and below game object.

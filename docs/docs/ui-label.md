@@ -79,7 +79,7 @@ var label = scene.rexUI.add.label({
 - `action` : Game object of action icon, optional.
 - `actionMask` : Set true to add a *circle* mask on action icon game object.
 - `space` : Pads spaces
-    - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds
+    - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
     - `space.icon` : Space between icon game object and text game object.
     - `space.text` : Space between text game object and action icon game object.
 - `name` : Set name of this label.

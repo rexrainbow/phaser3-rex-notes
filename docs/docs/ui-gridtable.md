@@ -123,7 +123,7 @@ var gridTable = scene.rexUI.add.gridTable({
         - `cell.index` : Index of this cell.
     - **Set origin of returned cell container to (0, 0)**
 - `space` : Pads spaces
-    - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds
+    - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
     - `space.table` : Space between table object and slider object.
 - `items` : Array of item data for each cell.
 - `name` : Set name of this gridTable.

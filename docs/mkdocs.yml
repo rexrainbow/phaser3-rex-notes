@@ -66,6 +66,7 @@ nav:
             - Grid sizer: ui-gridsizer.md
             - Label: ui-label.md
             - Text box: ui-textbox.md
+            - Slider: ui-slider.md
             - Dialog: ui-dialog.md
             - Grid table: ui-gridtable.md
             - Tabs: ui-tabs.md

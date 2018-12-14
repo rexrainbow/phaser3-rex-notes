@@ -1232,6 +1232,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../ui-slider/" title="Slider" class="md-nav__link">
+      Slider
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../ui-dialog/" title="Dialog" class="md-nav__link">
       Dialog
     </a>
@@ -1387,6 +1399,18 @@
   <li class="md-nav__item">
     <a href="../ui-menu/" title="Menu" class="md-nav__link">
       Menu
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ui-numberbar/" title="Number bar" class="md-nav__link">
+      Number bar
     </a>
   </li>
 
@@ -3718,6 +3742,15 @@
         <span class="nx">backDeceleration</span><span class="o">:</span> <span class="mi">2000</span><span class="p">,</span>
     <span class="p">},</span>
 
+    <span class="nx">space</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">left</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">right</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">top</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">bottom</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+
+        <span class="nx">table</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="p">},</span>
+
     <span class="nx">createCellContainerCallback</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cell</span><span class="p">)</span> <span class="p">{</span>
         <span class="kd">var</span> <span class="nx">scene</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">scene</span><span class="p">,</span>
             <span class="nx">width</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span>
@@ -3746,8 +3779,15 @@
 </ul>
 </li>
 <li><code>slider</code> : Componments of slider, optional.<ul>
+<li><code>slider.background</code> : Game object of slider background, optional.</li>
 <li><code>slider.track</code> : Game object of track.</li>
 <li><code>slider.thumb</code> : Game object of thumb.</li>
+<li><code>slider.input</code> :<ul>
+<li><code>'drag'</code> : Control slider by dragging thumb game object. Default setting.</li>
+<li><code>'click'</code> : Control slider by touching track game object.</li>
+<li><code>'none'</code> : Disable sider controlling.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><code>scroller</code> : Configuration of scroller behavior.<ul>
@@ -3771,6 +3811,11 @@
 </ul>
 </li>
 <li><strong>Set origin of returned cell container to (0, 0)</strong></li>
+</ul>
+</li>
+<li><code>space</code> : Pads spaces<ul>
+<li><code>space.left</code>, <code>space.right</code>, <code>space.top</code>, <code>space.bottom</code> : Space of bounds.</li>
+<li><code>space.table</code> : Space between table object and slider object.</li>
 </ul>
 </li>
 <li><code>items</code> : Array of item data for each cell.</li>

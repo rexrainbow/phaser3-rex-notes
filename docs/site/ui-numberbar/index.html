@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/swirlpipeline/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/ui-numberbar/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Swirl - Notes of Phaser 3</title>
+        <title>Number bar - Notes of Phaser 3</title>
       
     
     
@@ -128,7 +128,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Swirl
+                Number bar
               </span>
             
           
@@ -447,10 +447,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
     
     <label class="md-nav__link" for="nav-4">
       Game object
@@ -1090,10 +1092,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-6" type="checkbox" id="nav-4-6">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-6" type="checkbox" id="nav-4-6" checked>
     
     <label class="md-nav__link" for="nav-4-6">
       Container
@@ -1157,10 +1161,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-6-5" type="checkbox" id="nav-4-6-5">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-6-5" type="checkbox" id="nav-4-6-5" checked>
     
     <label class="md-nav__link" for="nav-4-6-5">
       UI
@@ -1284,11 +1290,128 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../ui-numberbar/" title="Number bar" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Number bar
+      </label>
+    
+    <a href="./" title="Number bar" class="md-nav__link md-nav__link--active">
       Number bar
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-scene-plugin" title="Install scene plugin" class="md-nav__link">
+    Install scene plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-number-bar-object" title="Add number bar object" class="md-nav__link">
+    Add number bar object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-class" title="Custom class" class="md-nav__link">
+    Custom class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#layout-children" title="Layout children" class="md-nav__link">
+    Layout children
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-element" title="Get element" class="md-nav__link">
+    Get element
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#value" title="Value" class="md-nav__link">
+    Value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#text" title="Text" class="md-nav__link">
+    Text
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-properties" title="Other properties" class="md-nav__link">
+    Other properties
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" title="Events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -1899,12 +2022,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
     
     <label class="md-nav__link" for="nav-7">
       Camera
@@ -1932,12 +2053,10 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2" type="checkbox" id="nav-7-2" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2" type="checkbox" id="nav-7-2">
     
     <label class="md-nav__link" for="nav-7-2">
       Filters
@@ -1953,107 +2072,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Swirl
-      </label>
-    
-    <a href="./" title="Swirl" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../swirlpipeline/" title="Swirl" class="md-nav__link">
       Swirl
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#source-code" title="Source code" class="md-nav__link">
-    Source code
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#import-class" title="Import class" class="md-nav__link">
-    Import class
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
-    Install global plugin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#apply-filter" title="Apply filter" class="md-nav__link">
-    Apply filter
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#radius" title="Radius" class="md-nav__link">
-    Radius
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#rotation" title="Rotation" class="md-nav__link">
-    Rotation
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#center-position" title="Center position" class="md-nav__link">
-    Center position
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -3572,43 +3595,64 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#import-class" title="Import class" class="md-nav__link">
-    Import class
+  <a href="#install-scene-plugin" title="Install scene plugin" class="md-nav__link">
+    Install scene plugin
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
-    Install global plugin
+  <a href="#add-number-bar-object" title="Add number bar object" class="md-nav__link">
+    Add number bar object
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#apply-filter" title="Apply filter" class="md-nav__link">
-    Apply filter
+  <a href="#custom-class" title="Custom class" class="md-nav__link">
+    Custom class
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#radius" title="Radius" class="md-nav__link">
-    Radius
+  <a href="#layout-children" title="Layout children" class="md-nav__link">
+    Layout children
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#rotation" title="Rotation" class="md-nav__link">
-    Rotation
+  <a href="#get-element" title="Get element" class="md-nav__link">
+    Get element
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#center-position" title="Center position" class="md-nav__link">
-    Center position
+  <a href="#value" title="Value" class="md-nav__link">
+    Value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#text" title="Text" class="md-nav__link">
+    Text
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-properties" title="Other properties" class="md-nav__link">
+    Other properties
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" title="Events" class="md-nav__link">
+    Events
   </a>
   
 </li>
@@ -3634,37 +3678,33 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/swirlpipeline.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/ui-numberbar.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Swirl</h1>
+                  <h1>Number bar</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Swirl post processing filter. <a href="https://www.geeks3d.com/20110428/shader-library-swirl-post-processing-filter-in-glsl/">Reference</a></p>
+<p>A container with an icon, slider, text, and background.</p>
 <ul>
 <li>Author: Rex</li>
-<li>A camera filter</li>
+<li>A kind of game object</li>
 </ul>
 <h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/swirlpipeline-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexswirlpipelineplugin.min.js">minify</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/ui/ui-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexuiplugin.min.js">minify</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/ui/numberbar/NumberBar.js">Class</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/swirl-pipeline">Sample code</a></p>
-<p>User could import class directly, or install it by global plugin.</p>
-<h3 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">rexSwirlpipeline</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/swirlpipeline.js&#39;</span><span class="p">;</span>
-</pre></div>
-
-<h3 id="install-global-plugin">Install global plugin<a class="headerlink" href="#install-global-plugin" title="Permanent link">&para;</a></h3>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-numberbar">Sample code</a></p>
+<h3 id="install-scene-plugin">Install scene plugin<a class="headerlink" href="#install-scene-plugin" title="Permanent link">&para;</a></h3>
 <p>Install plugin in <a href="../game/#configuration">configuration of game</a></p>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">SwirlPipelinePlugin</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/swirlpipeline-plugin.js&#39;</span><span class="p">;</span>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">UIPlugin</span> <span class="nx">from</span> <span class="s1">&#39;rexTemplates/ui/ui-plugin.js&#39;</span><span class="p">;</span>
 
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
-            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexSwirlPipeline&#39;</span><span class="p">,</span>
-            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">SwirlPipelinePlugin</span><span class="p">,</span>
-            <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="nx">scene</span><span class="o">:</span> <span class="p">[{</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexUI&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">UIPlugin</span><span class="p">,</span>
+            <span class="nx">mapping</span><span class="o">:</span> <span class="s1">&#39;rexUI&#39;</span>
         <span class="p">},</span>
         <span class="c1">// ...</span>
         <span class="p">]</span>
@@ -3674,67 +3714,176 @@
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </pre></div>
 
-<h3 id="apply-filter">Apply filter<a class="headerlink" href="#apply-filter" title="Permanent link">&para;</a></h3>
-<ol>
-<li>Create pipeline instance
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">customPipeline</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexSwirlPipeline&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="p">{</span>
-    <span class="c1">// center: {</span>
-    <span class="c1">//    x: windowWidth / 2,</span>
-    <span class="c1">//    y: windowHeight / 2</span>
-    <span class="c1">//}</span>
-    <span class="c1">// radius: 0,</span>
-    <span class="c1">// rotation: 0,  // or angle: 0</span>
+<h3 id="add-number-bar-object">Add number bar object<a class="headerlink" href="#add-number-bar-object" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">numberBar</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">numberBar</span><span class="p">({</span>
+    <span class="nx">background</span><span class="o">:</span> <span class="nx">backgroundGameObject</span><span class="p">,</span>
+    <span class="nx">icon</span><span class="o">:</span> <span class="nx">iconGameObject</span><span class="p">,</span>
+    <span class="nx">iconMask</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">slider</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">background</span><span class="o">:</span> <span class="nx">sliderBackgroundGameObject</span><span class="p">,</span>
+        <span class="nx">track</span><span class="o">:</span> <span class="nx">sliderTrackGameObject</span><span class="p">,</span>
+        <span class="nx">indicator</span><span class="o">:</span> <span class="nx">sliderIndicatorGameObject</span><span class="p">,</span>
+        <span class="nx">thumb</span><span class="o">:</span> <span class="nx">sliderThumbGameObject</span><span class="p">,</span>
+        <span class="nx">input</span><span class="o">:</span> <span class="s1">&#39;none&#39;</span>
+    <span class="p">}</span>
+    <span class="nx">text</span><span class="o">:</span> <span class="nx">textGameObject</span><span class="p">,</span>
+
+    <span class="nx">valuechangeCallback</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">newValue</span><span class="p">,</span> <span class="nx">oldValue</span><span class="p">,</span> <span class="nx">numberBar</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// numberBar.text = Math.round(Phaser.Math.Linear(0, 100, newValue));</span>
+    <span class="p">}</span>
+
+    <span class="nx">space</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">left</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">right</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">top</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">bottom</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+
+        <span class="nx">icon</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">slider</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="p">},</span>
+
+    <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
 <span class="p">});</span>
-</pre></div></li>
-<li>Add pipeline to camera
-    <div class="codehilite"><pre><span></span><span class="c1">// var camera = scene.cameras.main;</span>
-<span class="nx">camera</span><span class="p">.</span><span class="nx">setRenderToTexture</span><span class="p">(</span><span class="nx">customPipeline</span><span class="p">);</span>
-</pre></div></li>
-</ol>
-<h3 id="radius">Radius<a class="headerlink" href="#radius" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Get
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">radius</span> <span class="o">=</span> <span class="nx">customPipeline</span><span class="p">.</span><span class="nx">radius</span><span class="p">;</span>
-</pre></div></li>
-<li>Set
-    <div class="codehilite"><pre><span></span><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">radius</span> <span class="o">=</span> <span class="nx">radius</span><span class="p">;</span>
-<span class="c1">// customPipeline.radius += value;</span>
 </pre></div>
-    or
-    <div class="codehilite"><pre><span></span><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">setRadius</span><span class="p">(</span><span class="nx">radius</span><span class="p">);</span>
+
+<ul>
+<li><code>background</code> : Game object of background, optional. This background game object will be resized to fit the size of numberBar.</li>
+<li><code>icon</code> : Game object of icon, optional.</li>
+<li><code>iconMask</code> : Set true to add a <em>circle</em> mask on icon game object.</li>
+<li><code>slider</code> : Slider game object which composed of<ul>
+<li><code>slider.width</code> : Fixed width of slider, optional. Width of slider will be extended if this value is not set.</li>
+<li><code>slider.background</code> : Game object of slider background, optional.</li>
+<li><code>slider.track</code> : Game object of slider track.</li>
+<li><code>slider.indicator</code> : Game object of slider indicator, optional.</li>
+<li><code>slider.thumb</code> : Game object of slider thumb, optional.</li>
+<li><code>slider.input</code> :<ul>
+<li><code>'drag'</code> : Control slider by dragging thumb game object.</li>
+<li><code>'click'</code> : Control slider by touching track game object.</li>
+<li><code>'none'</code> : Disable sider controlling. Default setting.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>text</code> : Game object of text, optional.</li>
+<li><code>space</code> : Pads spaces<ul>
+<li><code>space.left</code>, <code>space.right</code>, <code>space.top</code>, <code>space.bottom</code> : Space of bounds</li>
+<li><code>space.icon</code> : Space between icon game object and text game object.</li>
+<li><code>space.slider</code> : Space between slider game object and text game object.</li>
+</ul>
+</li>
+<li><code>valuechangeCallback</code> : callback function when value changed.</li>
+<li><code>name</code> : Set name of this numberBar.</li>
+<li><code>x</code>, <code>y</code> : Position of this numberBar object, it is valid when this numberBar is the top object.</li>
+<li><code>width</code>, <code>height</code> : Minimum width, minimum height.</li>
+</ul>
+<h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Define class
+    <div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">MyNumberBar</span> <span class="kr">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">NumberBar</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div></li>
+<li>Create instance
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">numberBar</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyNumberBar</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </pre></div></li>
 </ul>
-<h3 id="rotation">Rotation<a class="headerlink" href="#rotation" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Get
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rotation</span> <span class="o">=</span> <span class="nx">customPipeline</span><span class="p">.</span><span class="nx">rotation</span><span class="p">;</span>  <span class="c1">// radians</span>
-<span class="c1">// var angle = customPipeline.angle;     // degrees</span>
-</pre></div></li>
-<li>Set
-    <div class="codehilite"><pre><span></span><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">rotation</span> <span class="o">=</span> <span class="nx">rotation</span><span class="p">;</span>
-<span class="nx">customPipeline</span><span class="p">.</span><span class="nx">rotation</span> <span class="o">+=</span> <span class="nx">value</span><span class="p">;</span>
-<span class="c1">// customPipeline.angle = angle;</span>
-<span class="c1">// customPipeline.angle += value;   </span>
+<h3 id="layout-children">Layout children<a class="headerlink" href="#layout-children" title="Permanent link">&para;</a></h3>
+<p>Arrange position of all elements.</p>
+<div class="codehilite"><pre><span></span><span class="nx">numberBar</span><span class="p">.</span><span class="nx">layout</span><span class="p">();</span>
 </pre></div>
-    or
-    <div class="codehilite"><pre><span></span><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">setRotation</span><span class="p">(</span><span class="nx">rotation</span><span class="p">);</span>
-<span class="c1">// customPipeline.setAngle(angle);</span>
+
+<h3 id="get-element">Get element<a class="headerlink" href="#get-element" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get element<ul>
+<li>Background game object
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">background</span> <span class="o">=</span> <span class="nx">numberBar</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;background&#39;</span><span class="p">);</span>
+</pre></div></li>
+<li>Icon game object
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">icon</span> <span class="o">=</span> <span class="nx">numberBar</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;icon&#39;</span><span class="p">);</span>
+</pre></div></li>
+<li>Slider game object<ul>
+<li>Slider background
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">sliderBackground</span> <span class="o">=</span> <span class="nx">numberBar</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;slider.background&#39;</span><span class="p">);</span>
+</pre></div></li>
+<li>Slider track
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">sliderTrack</span> <span class="o">=</span> <span class="nx">numberBar</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;slider.track&#39;</span><span class="p">);</span>
+</pre></div></li>
+<li>Slider indicator
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">sliderIndicator</span> <span class="o">=</span> <span class="nx">numberBar</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;slider.indicator&#39;</span><span class="p">);</span>
+</pre></div></li>
+<li>Slider thumb
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">sliderThumb</span> <span class="o">=</span> <span class="nx">numberBar</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;slider.thumb&#39;</span><span class="p">);</span>
 </pre></div></li>
 </ul>
-<h3 id="center-position">Center position<a class="headerlink" href="#center-position" title="Permanent link">&para;</a></h3>
-<p>Default value is center of window.</p>
-<ul>
-<li>Get
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">customPipeline</span><span class="p">.</span><span class="nx">centerX</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">customPipeline</span><span class="p">.</span><span class="nx">centerY</span><span class="p">;</span>
+</li>
+<li>Text game object
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">icon</span> <span class="o">=</span> <span class="nx">numberBar</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">);</span>
 </pre></div></li>
-<li>Set
-    <div class="codehilite"><pre><span></span><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">centerX</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
-<span class="nx">customPipeline</span><span class="p">.</span><span class="nx">centerY</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
+</ul>
+</li>
+<li>Get by name
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">numberBar</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;#&#39;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h3 id="value">Value<a class="headerlink" href="#value" title="Permanent link">&para;</a></h3>
+<p>Change value will also change the position of slider thumb and width of slider indicator.</p>
+<ul>
+<li>Get value
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">numberBar</span><span class="p">.</span><span class="nx">getValue</span><span class="p">(</span><span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span> <span class="c1">// value : min ~ max</span>
 </pre></div>
     or
-    <div class="codehilite"><pre><span></span><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">setCenter</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
-<span class="c1">// customPipeline.setCenter();   // set to center of window</span>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">numberBar</span><span class="p">.</span><span class="nx">getValue</span><span class="p">();</span> <span class="c1">// value: 0 ~ 1</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">numberBar</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span> <span class="c1">// value: 0 ~ 1</span>
+</pre></div></li>
+<li>Set value
+    <div class="codehilite"><pre><span></span><span class="nx">numberBar</span><span class="p">.</span><span class="nx">setValue</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span> <span class="c1">// value: min ~ max</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">numberBar</span><span class="p">.</span><span class="nx">setValue</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span> <span class="c1">// value: 0 ~ 1</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">numberBar</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span> <span class="c1">// value: 0 ~ 1</span>
+</pre></div></li>
+<li>Increase value
+    <div class="codehilite"><pre><span></span><span class="nx">numberBar</span><span class="p">.</span><span class="nx">addValue</span><span class="p">(</span><span class="nx">inc</span><span class="p">,</span> <span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span> <span class="c1">// inc: min ~ max</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">numberBar</span><span class="p">.</span><span class="nx">addValue</span><span class="p">(</span><span class="nx">inc</span><span class="p">);</span> <span class="c1">// inc: 0 ~ 1</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">numberBar</span><span class="p">.</span><span class="nx">value</span> <span class="o">+=</span> <span class="nx">inc</span><span class="p">;</span> <span class="c1">// inc: 0 ~ 1</span>
+</pre></div></li>
+</ul>
+<h3 id="text">Text<a class="headerlink" href="#text" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get text string
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="nx">numberBar</span><span class="p">.</span><span class="nx">text</span><span class="p">;</span>
+</pre></div></li>
+<li>Set text string
+    <div class="codehilite"><pre><span></span><span class="nx">numberBar</span><span class="p">.</span><span class="nx">setText</span><span class="p">(</span><span class="nx">s</span><span class="p">);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">numberBar</span><span class="p">.</span><span class="nx">text</span> <span class="o">=</span> <span class="nx">s</span><span class="p">;</span>
+</pre></div></li>
+</ul>
+<h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
+<p>See <a href="../ui-sizer/">sizer object</a></p>
+<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
+<ul>
+<li>On value changed
+    <div class="codehilite"><pre><span></span><span class="nx">numberBar</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;valuechange&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">newValue</span><span class="p">,</span> <span class="nx">oldValue</span><span class="p">,</span> <span class="nx">numberBar</span><span class="p">){</span>
+    <span class="c1">// numberBar.text = Math.round(Phaser.Math.Linear(0, 100, newValue));</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </pre></div></li>
 </ul>
                 
@@ -3757,7 +3906,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../camera/" title="Camera" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../ui-menu/" title="Menu" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -3766,19 +3915,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Camera
+                Menu
               </span>
             </div>
           </a>
         
         
-          <a href="../pixelationpipeline/" title="Pixelation" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../zone/" title="Zone" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Pixelation
+                Zone
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
