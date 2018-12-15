@@ -101,9 +101,6 @@ class Slider extends Sizer {
     }
 
     set value(value) {
-        if (!this.enable) {
-            return;
-        }
         var oldValue = this._value;
         this._value = Clamp(value, 0, 1);
 

@@ -1,6 +1,9 @@
 import PositionToPercent from './PositionToPercent.js';
 
 var OnTouchTrack = function (pointer, localX, localY) {
+    if (!this.enable) {
+        return;
+    }
     if (!pointer.isDown) {
         return;
     }

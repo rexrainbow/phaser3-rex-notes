@@ -80,9 +80,9 @@ var slider = scene.rexUI.add.slider({
 - `indicator` : Game object of indicator, optional.
 - `thumb` : Game object of thumb, optional.
 - `input` :
-    - `'drag'` : Control slider by dragging thumb game object. Default setting.
-    - `'click'` : Control slider by touching track game object.
-    - `'none'` : Disable sider controlling.
+    - `'drag'`, or `0` : Control slider by dragging thumb game object. Default setting.
+    - `'click'`, or `1` : Control slider by touching track game object.
+    - `'none'`, or `-1` : Disable sider controlling.
 - `value` : Initial value (0 ~ 1).
 - `valuechangeCallback` : callback function when value changed.
 - `space` : Pads spaces
