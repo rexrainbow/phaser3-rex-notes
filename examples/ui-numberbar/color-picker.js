@@ -66,18 +66,21 @@ var createController = function (scene) {
             redSlider, //child
             0, // proportion
             'center', // align
+            0, // paddingConfig
             true, // expand
         )
         .add(
             greenSlider, //child
             0, // proportion
             'center', // align
+            0, // paddingConfig
             true, // expand
         )
         .add(
             blueSlider, //child
             0, // proportion
             'center', // align
+            0, // paddingConfig
             true, // expand
         );
 
@@ -96,9 +99,6 @@ var createController = function (scene) {
 
 var createSlider = function (scene, colorText, colorPrimary, colorDark, colorLight) {
     return scene.rexUI.add.numberBar({
-        x: 400,
-        y: 300,
-
         background: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 0, colorDark),
 
         icon: scene.add.text(0, 0, colorText, {
