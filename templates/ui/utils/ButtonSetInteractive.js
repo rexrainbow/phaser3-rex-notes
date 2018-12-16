@@ -29,8 +29,6 @@ var FireEvent = function (eventName, button, groupName, index) {
     return callback;
 }
 
-var defaultConfig = {
-
-}
+var defaultConfig = {};
 
 export default ButtonSetInteractive;
