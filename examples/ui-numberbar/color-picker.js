@@ -20,7 +20,7 @@ class Demo extends Phaser.Scene {
 }
 
 var createMainPanel = function (scene) {
-    // Create componments
+    // Create components
     var objectPanel = scene.add.rectangle(0, 0, 200, 200);
     var controller = createController(scene);
     var mainPanel = scene.rexUI.add.sizer({
@@ -55,7 +55,7 @@ var createMainPanel = function (scene) {
 };
 
 var createController = function (scene) {
-    // Create componments
+    // Create components
     var redSlider = createSlider(scene, 'R', 0xd50000, 0x9b0000, 0xff5131).setName('R');
     var greenSlider = createSlider(scene, 'G', 0x00c853, 0x009624, 0x5efc82).setName('G');
     var blueSlider = createSlider(scene, 'B', 0x304ffe, 0x0026ca, 0x7a7cff).setName('B');
