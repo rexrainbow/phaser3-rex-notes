@@ -78,7 +78,13 @@ var state = dragscale.state;
 - `2` : Catch 2 touch pointers
     - Fire `'dragstart'` event when catching 2 touch pointers.
     - Fire `'drag'` event when any catched touch pointer moved.
-    - Fire `'dragend'` event when releasing any catched touch pointer.
+    - Fire `'dragend'` event when releasing any catched touch pointer.    
+
+```javascript
+var isDragging = dragscale.isDragging;
+```
+
+Return `true` if `(dragscale.state === 2)`
 
 ### Events
 
