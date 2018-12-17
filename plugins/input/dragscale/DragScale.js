@@ -94,7 +94,7 @@ class DragScale extends EE {
                 break;
             case TOUCH1:
                 this.state = TOUCH2;
-                this.onDragStart();
+                this.onDrag2Start();
                 break;
         }
     }
@@ -121,7 +121,7 @@ class DragScale extends EE {
                 break;
             case TOUCH2:
                 this.state = TOUCH1;
-                this.onDragEnd();
+                this.onDrag2End();
                 break;
         }
     }
@@ -144,33 +144,41 @@ class DragScale extends EE {
             return;
         }
 
-        if (this.state !== TOUCH2) {
-            return;
+        switch (this.state) {
+            case TOUCH1:
+                this.onDrag1();
+                break;
+            case TOUCH2:
+                this.onDrag2();
+                break;
         }
-        this.onDragging();
     }
 
     dragCancel() {
         if (this.state === TOUCH2) {
-            this.onDragEnd();
+            this.onDrag2End();
         }
         this.pointers.length = 0;
         this.state = TOUCH0;
         return this;
     }
 
-    onDragStart() {
+    onDrag1() {
+        this.emit('drag1', this);
+    }
+
+    onDrag2Start() {
         this.prevDragDistance = this.dragDistance;
-        this.emit('dragstart', this);
+        this.emit('drag2start', this);
     }
 
-    onDragEnd() {
+    onDrag2End() {
         this.prevDragDistance = 0;
-        this.emit('dragend', this);
+        this.emit('drag2end', this);
     }
 
-    onDragging() {
-        this.emit('drag', this);
+    onDrag2() {
+        this.emit('drag2', this);
     }
 
     get isDragging() {
@@ -196,10 +204,24 @@ class DragScale extends EE {
         this.prevDragDistance = curDragDistance;
         return scaleFactor;
     }
+
+    get drag1Vector() {
+        var pointer = this.pointers[0];
+        if (pointer) {
+            tmpDragVector.x = pointer.x - pointer.prevPosition.x;
+            tmpDragVector.y = pointer.y - pointer.prevPosition.y;
+        } else {
+            tmpDragVector.x = 0;
+            tmpDragVector.y = 0;
+        }
+        return tmpDragVector;
+    }
 }
 
 const TOUCH0 = 0;
 const TOUCH1 = 1;
 const TOUCH2 = 2;
+
+var tmpDragVector = {};
 
 export default DragScale;

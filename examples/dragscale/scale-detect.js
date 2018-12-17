@@ -15,18 +15,23 @@ class Demo extends Phaser.Scene {
         var circle = this.add.circle(400,300, 200, 0x888888);
         var dragScale = this.plugins.get('rexDragScale').add(this);
         dragScale
-            .on('dragstart', function (dragScale) {
+            .on('drag2start', function (dragScale) {
                 // print.text = 'dragstart';
             }, this)
-            .on('dragend', function (dragScale) {
+            .on('drag2end', function (dragScale) {
                 // print.text = 'dragend';
             }, this)
-            .on('drag', function (dragScale) {
+            .on('drag2', function (dragScale) {
                 var scaleFactor = dragScale.scaleFactor;
                 circle.scaleX *= scaleFactor;
                 circle.scaleY *= scaleFactor;
                 print.text = circle.scaleX;
-            }, this);
+            }, this)
+            .on('drag1', function(dragScale) {
+                var drag1Vector = dragScale.drag1Vector;
+                circle.x += drag1Vector.x;
+                circle.y += drag1Vector.y;
+            })
     }
 }
 
