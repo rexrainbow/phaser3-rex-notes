@@ -54,7 +54,7 @@ var drag = scene.plugins.get('rexDrag').add(gameObject, {
 });
 ```
 
-- `enable` : Enable
+- `enable` : Set `false` to disable input events.
 - `axis` :
     - `'both'`,`'h&v'`, `'x&y'`, or `0` : Dragging on all directions.
     - `'horizontal'`,`'h'`, `'x'`, or `1` : Dragging on horizontal/x axis.

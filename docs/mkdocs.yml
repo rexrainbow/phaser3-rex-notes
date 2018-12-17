@@ -106,6 +106,7 @@ nav:
         - Scroller: scroller.md
         - Virtual joystick: virtualjoystick.md
         - Cursor at bound: cursoratbound.md
+        - Drag scale: dragscale.md
         - Mouse-wheel to up/down: mousewheeltoupdown.md
     - Keyboard:
         - Keyboard events: keyboardevents.md

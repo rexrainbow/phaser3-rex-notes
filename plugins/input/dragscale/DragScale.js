@@ -14,17 +14,24 @@ class DragScale extends EE {
 
         super();
         this.scene = scene;
-
-        var bounds = GetValue(config, 'bounds', undefined);
-        if (bounds === undefined) {
-            bounds = GetDefaultBounds(scene);
-        }
-        this.bounds = bounds;
-        this.state = TOUCH0;
         this.pointers = [];
-        this.prevDragDistance = 0;
+        this.resetFromJSON(config);
         this.boot();
     }
+
+    resetFromJSON(o) {
+        this.setEnable(GetValue(o, "enable", true));
+        var bounds = GetValue(o, 'bounds', undefined);
+        if (bounds === undefined) {
+            bounds = GetDefaultBounds(this.scene);
+        }
+        this.bounds = bounds;
+
+        this.state = TOUCH0;
+        this.pointers.length = 0;
+        this.prevDragDistance = 0;
+    }
+
     boot() {
         this.scene.input.on('pointerdown', this.onPointerDown, this);
         this.scene.input.on('pointerup', this.onPointerUp, this);
@@ -45,7 +52,27 @@ class DragScale extends EE {
         this.shutdown();
     }
 
+    setEnable(e) {
+        if (e === undefined) {
+            e = true;
+        }
+
+        if (this.enable === e) {
+            return this;
+        }
+
+        if (!e) {
+            this.dragCancel();
+        }
+        this.enable = e;
+        return this;
+    }
+
     onPointerDown(pointer) {
+        if (!this.enable) {
+            return;
+        }
+
         var index = this.pointers.indexOf(pointer);
         if (index !== -1) { // Already in catched pointers
             return;
@@ -73,6 +100,10 @@ class DragScale extends EE {
     }
 
     onPointerUp(pointer) {
+        if (!this.enable) {
+            return;
+        }
+
         if (!this.bounds.contains(pointer.x, pointer.y)) {
             return;
         }
@@ -96,6 +127,10 @@ class DragScale extends EE {
     }
 
     onPointerMove(pointer) {
+        if (!this.enable) {
+            return;
+        }
+
         if (!pointer.isDown) {
             return;
         }
@@ -115,10 +150,12 @@ class DragScale extends EE {
         this.onDragging();
     }
 
-    cancel() {
+    dragCancel() {
+        if (this.state === TOUCH2) {
+            this.onDragEnd();
+        }
         this.pointers.length = 0;
         this.state = TOUCH0;
-        this.onDragEnd();
         return this;
     }
 
@@ -134,7 +171,6 @@ class DragScale extends EE {
 
     onDragging() {
         this.emit('drag', this);
-        console.log(this.scaleFactor);
     }
 
     get isDragging() {
