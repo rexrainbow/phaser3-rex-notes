@@ -1,5 +1,5 @@
 import TickTask from '../../utils/ticktask/TickTask.js';
-import Proxy from '../../utils/arcade/proxy.js';
+import Helpers from '../../utils/arcade/Helpers.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -97,7 +97,7 @@ class Bullet extends TickTask {
 // mixin
 Object.assign(
     Bullet.prototype,
-    Proxy
+    Helpers
 );
 
 export default Bullet;

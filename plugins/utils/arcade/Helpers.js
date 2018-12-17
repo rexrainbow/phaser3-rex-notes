@@ -68,4 +68,5 @@ var Proxy = {
         }
     },
 };
+
 export default Proxy;

@@ -1,7 +1,7 @@
 // https://labs.phaser.io/view.html?src=src\physics\arcade\asteroids%20movement.js
 
 import TickTask from '../../utils/ticktask/TickTask.js';
-import Proxy from '../../utils/arcade/proxy.js';
+import Helpers from '../../utils/arcade/Helpers.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -159,7 +159,7 @@ class Ship extends TickTask {
 // mixin
 Object.assign(
     Ship.prototype,
-    Proxy
+    Helpers
 );
 
 export default Ship;

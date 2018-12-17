@@ -1,5 +1,5 @@
 import TickTask from '../../utils/ticktask/TickTask.js';
-import Proxy from '../../utils/arcade/proxy.js';
+import Helpers from '../../utils/arcade/Helpers.js';
 import DegToRad from '../../utils/math/DegToRad.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -164,7 +164,7 @@ class EightDirection extends TickTask {
 // mixin
 Object.assign(
     EightDirection.prototype,
-    Proxy
+    Helpers
 );
 
 /** @private */
