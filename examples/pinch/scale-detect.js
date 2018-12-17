@@ -1,4 +1,4 @@
-import DragScalePlugin from '../../plugins/dragscale-plugin.js';
+import PinchPlugin from '../../plugins/pinch-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -13,30 +13,30 @@ class Demo extends Phaser.Scene {
         var print = this.add.text(0, 0, '')
 
         var circle = this.add.circle(400, 300, 200, 0x888888);
-        var dragScale = this.plugins.get('rexDragScale').add(this);
-        dragScale
-            .on('drag1', function (dragScale) {
-                var drag1Vector = dragScale.drag1Vector;
+        var pinch = this.plugins.get('rexPinch').add(this);
+        pinch
+            .on('drag1', function (pinch) {
+                var drag1Vector = pinch.drag1Vector;
                 circle.x += drag1Vector.x;
                 circle.y += drag1Vector.y;
             })
-            .on('drag2', function (dragScale) {
-                var scaleFactor = dragScale.scaleFactor;
+            .on('pinch', function (pinch) {
+                var scaleFactor = pinch.scaleFactor;
                 circle.scaleX *= scaleFactor;
                 circle.scaleY *= scaleFactor;
                 print.text = circle.scaleX;
             }, this)
-            .on('drag1start', function (dragScale) {
+            .on('drag1start', function (pinch) {
                 print.text = 'drag1start';
             }, this)
-            .on('drag1end', function (dragScale) {
+            .on('drag1end', function (pinch) {
                 print.text = 'drag1end';
             }, this)
-            .on('drag2start', function (dragScale) {
-                print.text = 'drag2start';
+            .on('pinchstart', function (pinch) {
+                print.text = 'pinchstart';
             }, this)
-            .on('drag2end', function (dragScale) {
-                print.text = 'drag2end';
+            .on('pinchend', function (pinch) {
+                print.text = 'pinchend';
             }, this)
 
 
@@ -51,8 +51,8 @@ var config = {
     scene: Demo,
     plugins: {
         global: [{
-            key: 'rexDragScale',
-            plugin: DragScalePlugin,
+            key: 'rexPinch',
+            plugin: PinchPlugin,
             start: true
         }]
     }

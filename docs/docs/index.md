@@ -23,7 +23,6 @@
 1. [CSV-to-hash-table](csvtohashtable.md): Hash table indexed by (col-key, row-key) from csv string.
 1. [Cursor at bound](cursoratbound.md): Map position pf cursor to cursor key state.
 1. [Drag](drag.md): Drag game object.
-1. [Drag scale](dragscale.md): Get scale factor ftom 2 dragging touch pointers.
 1. [Eight direction](eightdirection.md): Move game object by cursor keys, with a constant speed.
 1. [Fade-out-destroy](fadeoutdestroy.md): Fade out game object then destroy it.
 1. [Fade-volume](fadevolume.md): Fade-in/fade-out volume of sound.
@@ -40,6 +39,7 @@
 1. [Move to](moveto.md): Move game object towards target position with a steady speed.
 1. [Page](textpage.md): Display text page by page on text object.
 1. [Path follower](pathfollower.md): Set position of game object on a path.
+1. [Pinch](pinch.md): Get scale factor ftom 2 dragging touch pointers.
 1. [Pixelation-pipeline](pixelationpipeline.md): Pixelation post processing filter.
 1. [Pop up](popup.md): Scale up game object.
 1. [Restorable data](restorabledata.md): Restorable data manager.

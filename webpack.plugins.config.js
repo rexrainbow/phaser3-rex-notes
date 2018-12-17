@@ -41,7 +41,7 @@ module.exports = {
         'virtualjoystickplugin': './plugins/virtualjoystick-plugin.js',
         'cursoratboundplugin': './plugins/cursoratbound-plugin.js',
         'mousewheeltoupdownplugin': './plugins/mousewheeltoupdown-plugin.js',
-        'dragscaleplugin': './plugins/dragscale-plugin.js',
+        'pinchplugin': './plugins/pinch-plugin.js',
 
         // member of game object
         'fadeplugin': './plugins/fade-plugin.js',

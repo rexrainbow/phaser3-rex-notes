@@ -1,6 +1,6 @@
-import DragScale from './dragscale.js';
+import Pinch from './pinch.js';
 
-class DragScalePlugin extends Phaser.Plugins.BasePlugin {
+class PinchPlugin extends Phaser.Plugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);
@@ -12,9 +12,9 @@ class DragScalePlugin extends Phaser.Plugins.BasePlugin {
     }
 
     add(scene, config) {
-        return new DragScale(scene, config);
+        return new Pinch(scene, config);
     }
 
 }
 
-export default DragScalePlugin;
+export default PinchPlugin;

@@ -1,4 +1,4 @@
-import DragScalePlugin from '../../plugins/dragscale-plugin.js';
+import PinchPlugin from '../../plugins/pinch-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -12,17 +12,17 @@ class Demo extends Phaser.Scene {
     create() {
         DrawSomethings(this);
 
-        var dragScale = this.plugins.get('rexDragScale').add(this);
+        var pinch = this.plugins.get('rexPinch').add(this);
 
         var camera = this.cameras.main;
-        dragScale
-            .on('drag1', function (dragScale) {
-                var drag1Vector = dragScale.drag1Vector;
+        pinch
+            .on('drag1', function (pinch) {
+                var drag1Vector = pinch.drag1Vector;
                 camera.scrollX -= drag1Vector.x / camera.zoom;
                 camera.scrollY -= drag1Vector.y / camera.zoom;
             })
-            .on('drag2', function (dragScale) {
-                var scaleFactor = dragScale.scaleFactor;
+            .on('pinch', function (pinch) {
+                var scaleFactor = pinch.scaleFactor;
                 camera.zoom *= scaleFactor;
             }, this)
     }
@@ -48,8 +48,8 @@ var config = {
     scene: Demo,
     plugins: {
         global: [{
-            key: 'rexDragScale',
-            plugin: DragScalePlugin,
+            key: 'rexPinch',
+            plugin: PinchPlugin,
             start: true
         }]
     }

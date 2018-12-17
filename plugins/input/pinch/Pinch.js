@@ -5,7 +5,7 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 const SpliceOne = Phaser.Utils.Array.SpliceOne;
 const DistanceBetween = Phaser.Math.Distance.Between;
 
-class DragScale extends EE {
+class Pinch extends EE {
     constructor(scene, config) {
         var amount = scene.input.manager.pointersTotal - 1;
         if (amount < 2) {
@@ -180,24 +180,28 @@ class DragScale extends EE {
 
     onDrag2Start() {
         this.prevDragDistance = this.dragDistance;
-        this.emit('drag2start', this);
+        this.emit('pinchstart', this);
     }
 
     onDrag2End() {
         this.prevDragDistance = 0;
-        this.emit('drag2end', this);
+        this.emit('pinchend', this);
     }
 
     onDrag2() {
-        this.emit('drag2', this);
+        this.emit('pinch', this);
     }
 
     get isDragging() {
+        return (this.state === TOUCH1);
+    }
+
+    get isPinching() {
         return (this.state === TOUCH2);
     }
 
     get dragDistance() {
-        if (!this.isDragging) {
+        if (!this.isPinching) {
             return 0;
         }
         var p0 = this.pointers[0],
@@ -207,7 +211,7 @@ class DragScale extends EE {
     }
 
     get scaleFactor() {
-        if (!this.isDragging) {
+        if (!this.isPinching) {
             return 0;
         }
         var curDragDistance = this.dragDistance;
@@ -235,4 +239,4 @@ const TOUCH2 = 2;
 
 var tmpDragVector = {};
 
-export default DragScale;
+export default Pinch;
