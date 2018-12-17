@@ -47,15 +47,12 @@ var game = new Phaser.Game(config);
 ### Create instance
 
 ```javascript
-var data = scene.plugins.get('rexRData').add(parent, eventEmitter);
+var data = scene.plugins.get('rexRData').add(parent);
+// var data = scene.plugins.get('rexRData').add(parent, eventEmitter);
 ```
 
 - `parent` : The object (a scene, or a game object) that this DataManager belongs to.
 - `eventEmitter` : The DataManager's [event emitter](eventemitter3.md).
-    - Create a new event emitter
-        ```javascript
-        var ee = new Phaser.Events.EventEmitter();
-        ```
 
 ### Get/set/remove value
 

@@ -2,9 +2,13 @@ import Clear from '../../utils/object/Clear.js';
 
 const Base = Phaser.Data.DataManager;
 const GetValue = Phaser.Utils.Objects.GetValue;
+const EventEmitterKlass = Phaser.Events.EventEmitter;
 
 class DataManager extends Base {
     constructor(parent, eventEmitter, config) {
+        if (eventEmitter === undefined) {
+            eventEmitter = new EventEmitterKlass();
+        }
         super(parent, eventEmitter);
 
         this._recordEnable = true;

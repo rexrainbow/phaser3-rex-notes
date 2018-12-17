@@ -10,7 +10,7 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        var data = this.plugins.get('rexRData').add(this, new Phaser.Events.EventEmitter());
+        var data = this.plugins.get('rexRData').add(this);
         data
             .set('a', 10)
             .set('b', 100)
