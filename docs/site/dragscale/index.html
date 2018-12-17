@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/csvscenario/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/dragscale/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>CSV scenario - Notes of Phaser 3</title>
+        <title>Drag scale - Notes of Phaser 3</title>
       
     
     
@@ -128,7 +128,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                CSV scenario
+                Drag scale
               </span>
             
           
@@ -1647,10 +1647,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
     
     <label class="md-nav__link" for="nav-5">
       Input
@@ -1678,10 +1680,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2" type="checkbox" id="nav-5-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2" type="checkbox" id="nav-5-2" checked>
     
     <label class="md-nav__link" for="nav-5-2">
       Touch
@@ -1793,11 +1797,148 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../dragscale/" title="Drag scale" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Drag scale
+      </label>
+    
+    <a href="./" title="Drag scale" class="md-nav__link md-nav__link--active">
       Drag scale
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#import-class" title="Import class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
+    Install global plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-instance" title="Create instance" class="md-nav__link">
+    Create instance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enable" title="Enable" class="md-nav__link">
+    Enable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-dragging-state" title="Get dragging state" class="md-nav__link">
+    Get dragging state
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" title="Events" class="md-nav__link">
+    Events
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#on-dragging" title="On dragging" class="md-nav__link">
+    On dragging
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#on-drag-start-on-drag-end" title="On drag start, on drag end" class="md-nav__link">
+    On drag start, on drag end
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scale-factor" title="Scale factor" class="md-nav__link">
+    Scale factor
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drag-vector-of-1st-touch-pointer" title="Drag vector of 1st touch pointer" class="md-nav__link">
+    Drag vector of 1st touch pointer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#catched-touch-pointers" title="Catched touch pointers" class="md-nav__link">
+    Catched touch pointers
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -2043,12 +2184,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
     
     <label class="md-nav__link" for="nav-9">
       Logic
@@ -2076,12 +2215,10 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-2" type="checkbox" id="nav-9-2" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-2" type="checkbox" id="nav-9-2">
     
     <label class="md-nav__link" for="nav-9-2">
       Run commands
@@ -2121,216 +2258,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        CSV scenario
-      </label>
-    
-    <a href="./" title="CSV scenario" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../csvscenario/" title="CSV scenario" class="md-nav__link">
       CSV scenario
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#source-code" title="Source code" class="md-nav__link">
-    Source code
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#import-class" title="Import class" class="md-nav__link">
-    Import class
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
-    Install global plugin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#load-csv-script" title="Load csv script" class="md-nav__link">
-    Load csv script
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#start-running-instructions" title="Start running instructions" class="md-nav__link">
-    Start running instructions
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#events" title="Events" class="md-nav__link">
-    Events
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#types-of-instructions" title="Types of instructions" class="md-nav__link">
-    Types of instructions
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#run-custom-function" title="Run custom function" class="md-nav__link">
-    Run custom function
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#delay-execution" title="Delay execution" class="md-nav__link">
-    Delay execution
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#wait-then-execution" title="Wait then execution" class="md-nav__link">
-    Wait then execution
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#task" title="Task" class="md-nav__link">
-    Task
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#label" title="Label" class="md-nav__link">
-    Label
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#exit" title="Exit" class="md-nav__link">
-    Exit
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#goto" title="Goto" class="md-nav__link">
-    Goto
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#if-goto" title="If-goto" class="md-nav__link">
-    If-goto
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#wait" title="Wait" class="md-nav__link">
-    Wait
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#other-methods" title="Other methods" class="md-nav__link">
-    Other methods
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#pause" title="Pause" class="md-nav__link">
-    Pause
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#resume" title="Resume" class="md-nav__link">
-    Resume
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -3714,15 +3646,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#load-csv-script" title="Load csv script" class="md-nav__link">
-    Load csv script
+  <a href="#enable" title="Enable" class="md-nav__link">
+    Enable
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#start-running-instructions" title="Start running instructions" class="md-nav__link">
-    Start running instructions
+  <a href="#get-dragging-state" title="Get dragging state" class="md-nav__link">
+    Get dragging state
   </a>
   
 </li>
@@ -3732,41 +3664,19 @@
     Events
   </a>
   
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#types-of-instructions" title="Types of instructions" class="md-nav__link">
-    Types of instructions
-  </a>
-  
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#run-custom-function" title="Run custom function" class="md-nav__link">
-    Run custom function
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#delay-execution" title="Delay execution" class="md-nav__link">
-    Delay execution
+  <a href="#on-dragging" title="On dragging" class="md-nav__link">
+    On dragging
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#wait-then-execution" title="Wait then execution" class="md-nav__link">
-    Wait then execution
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#task" title="Task" class="md-nav__link">
-    Task
+  <a href="#on-drag-start-on-drag-end" title="On drag start, on drag end" class="md-nav__link">
+    On drag start, on drag end
   </a>
   
 </li>
@@ -3777,69 +3687,23 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#label" title="Label" class="md-nav__link">
-    Label
+  <a href="#scale-factor" title="Scale factor" class="md-nav__link">
+    Scale factor
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#exit" title="Exit" class="md-nav__link">
-    Exit
+  <a href="#drag-vector-of-1st-touch-pointer" title="Drag vector of 1st touch pointer" class="md-nav__link">
+    Drag vector of 1st touch pointer
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#goto" title="Goto" class="md-nav__link">
-    Goto
+  <a href="#catched-touch-pointers" title="Catched touch pointers" class="md-nav__link">
+    Catched touch pointers
   </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#if-goto" title="If-goto" class="md-nav__link">
-    If-goto
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#wait" title="Wait" class="md-nav__link">
-    Wait
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#other-methods" title="Other methods" class="md-nav__link">
-    Other methods
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#pause" title="Pause" class="md-nav__link">
-    Pause
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#resume" title="Resume" class="md-nav__link">
-    Resume
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -3864,38 +3728,38 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/csvscenario.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/dragscale.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>CSV scenario</h1>
+                  <h1>Drag scale</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Run script in csv format. Csv could be edited by excel or google document.</p>
+<p>Get scale factor ftom 2 dragging touch pointers.</p>
 <ul>
 <li>Author: Rex</li>
 <li>Member of scene</li>
 </ul>
 <h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/csvscenario-plugin.js">Link</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dragscale-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexdragscaleplugin.min.js">minify</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/csv-scenario">Sample code</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/dragscale">Sample code</a></p>
 <p>User could import class directly, or install it by global plugin.</p>
 <h3 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">rexCSVScenario</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/csvscenario.js&#39;</span><span class="p">;</span>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">rexDragScale</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/dragscale.js&#39;</span><span class="p">;</span>
 </pre></div>
 
 <h3 id="install-global-plugin">Install global plugin<a class="headerlink" href="#install-global-plugin" title="Permanent link">&para;</a></h3>
 <p>Install plugin in <a href="../game/#configuration">configuration of game</a></p>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">CSVScenarioPlugin</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/csvscenario-plugin.js&#39;</span><span class="p">;</span>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">DragScalePlugin</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/dragscale-plugin.js&#39;</span><span class="p">;</span>
 
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
-            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexCSVScenario&#39;</span><span class="p">,</span>
-            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">CSVScenarioPlugin</span><span class="p">,</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexDragScale&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">DragScalePlugin</span><span class="p">,</span>
             <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
-        <span class="p">}</span>
+        <span class="p">},</span>
         <span class="c1">// ...</span>
         <span class="p">]</span>
     <span class="p">}</span>
@@ -3905,193 +3769,113 @@
 </pre></div>
 
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">scenario</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexCSVScenario&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">);</span>
-</pre></div>
-
-<h3 id="load-csv-script">Load csv script<a class="headerlink" href="#load-csv-script" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">scenario</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="nx">csvString</span><span class="p">,</span> <span class="nx">scope</span><span class="p">,</span> <span class="p">{</span>
-    <span class="c1">// timeUnit: 0,        // &#39;ms&#39;|0|&#39;s&#39;|&#39;sec&#39;|1</span>
-    <span class="c1">// prefix: /^#([a-zA-Z]+)/</span>
-    <span class="c1">// argsConvert: true,</span>
-    <span class="c1">// argsConvertScope: undefined</span>
-<span class="p">})</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">dragScale</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexDragScale&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="p">{</span>
+    <span class="c1">// enable: true,</span>
+    <span class="c1">// bounds: undefined,</span>
+<span class="p">});</span>
 </pre></div>
 
 <ul>
-<li>timeUnit: time-unit of dt, for <a href="./#delay-execution">delay-execution</a><ul>
-<li><code>'ms'</code>, or <code>0</code> : dt in millisecond</li>
-<li><code>'s'</code>, <code>'sec'</code>, or 1 : dt in second</li>
+<li><code>enable</code> : Set <code>false</code> to disable input events.</li>
+<li><code>bounds</code> : A <a href="../geom-rectangle/">rectangle object</a>ㄝ or <code>undefined</code> (to use game window as rectangle object), for detecting the position of cursor.</li>
+</ul>
+<h3 id="enable">Enable<a class="headerlink" href="#enable" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">enable</span> <span class="o">=</span> <span class="nx">dragScale</span><span class="p">.</span><span class="nx">enable</span><span class="p">;</span>  <span class="c1">// enable: true, or false</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">dragScale</span><span class="p">.</span><span class="nx">setEnable</span><span class="p">(</span><span class="nx">enable</span><span class="p">);</span>  <span class="c1">// enable: true, or false</span>
+</pre></div></li>
+</ul>
+<h3 id="get-dragging-state">Get dragging state<a class="headerlink" href="#get-dragging-state" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="nx">dragScale</span><span class="p">.</span><span class="nx">state</span><span class="p">;</span>
+</pre></div>
+
+<ul>
+<li><code>0</code> : No touch pointer</li>
+<li><code>1</code> : Catch 1 touch pointer</li>
+<li><code>2</code> : Catch 2 touch pointers<ul>
+<li>Fire <code>'drag2start'</code> event when catching 2 touch pointers.</li>
+<li>Fire <code>'drag2'</code> event when any catched touch pointer moved.</li>
+<li>Fire <code>'drag2end'</code> event when releasing any catched touch pointer.    </li>
 </ul>
 </li>
-<li>prefix: regex of picking control instructions</li>
-<li>argsConvert: a callback to convert parameters of <a href="./#run-custom-function">run-custom-function</a>, or <code>true</code> to use default convert function</li>
-<li>argsConvertScope: scope of argsConvert</li>
 </ul>
-<h3 id="start-running-instructions">Start running instructions<a class="headerlink" href="#start-running-instructions" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">scenario</span><span class="p">.</span><span class="nx">start</span><span class="p">({</span>
-    <span class="c1">// label: &#39;&#39;,</span>
-    <span class="c1">// offset: 0</span>
-<span class="p">})</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isDragging</span> <span class="o">=</span> <span class="nx">dragScale</span><span class="p">.</span><span class="nx">isDragging</span><span class="p">;</span>
 </pre></div>
 
-<ul>
-<li><code>label</code> : Go to the label and execute. '' label is starting from 1<sup>st</sup> instruction</li>
-<li><code>offset</code> : Offset time</li>
-</ul>
+<p>Return <code>true</code> if <code>(dragScale.state === 2)</code></p>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
+<h4 id="on-dragging">On dragging<a class="headerlink" href="#on-dragging" title="Permanent link">&para;</a></h4>
 <ul>
-<li>Complete
-    <div class="codehilite"><pre><span></span><span class="nx">scenario</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">scenario</span><span class="p">){});</span>
-</pre></div></li>
-<li>Label has changed
-    <div class="codehilite"><pre><span></span><span class="nx">scenario</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;labelchange&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
-</pre></div></li>
-<li>Dump execution log
-    <div class="codehilite"><pre><span></span><span class="nx">scenario</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
-</pre></div></li>
-<li>Notify error
-    <div class="codehilite"><pre><span></span><span class="nx">scenario</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(){});</span>
-</pre></div></li>
-</ul>
-<h3 id="types-of-instructions">Types of instructions<a class="headerlink" href="#types-of-instructions" title="Permanent link">&para;</a></h3>
-<p>Each row in csv table is an instruction.</p>
-<h4 id="run-custom-function">Run custom function<a class="headerlink" href="#run-custom-function" title="Permanent link">&para;</a></h4>
-<p>Run custom function of <code>scope</code>, which passed from <code>scenario.load(...)</code></p>
-<p>Format:</p>
-<div class="codehilite"><pre><span></span><span class="err">-,fnName,param0,param1,...</span>
-</pre></div>
-
-<ul>
-<li>1<sup>st</sup> column of instruction: <code>-</code></li>
-<li>Parameters will be converted to number, boolean, null, or string by default.</li>
-</ul>
-<h5 id="delay-execution">Delay execution<a class="headerlink" href="#delay-execution" title="Permanent link">&para;</a></h5>
-<p>Run custom function after a delay.</p>
-<p>Format:</p>
-<div class="codehilite"><pre><span></span><span class="err">time,fnName,param0,param1,...</span>
-</pre></div>
-
-<ul>
-<li>1<sup>st</sup> column of instruction: a number</li>
-<li>time-unit of delay is set from <code>scenario.load(...)</code></li>
-<li>Parameters will be converted to number, boolean, null, or string by default.</li>
-</ul>
-<h5 id="wait-then-execution">Wait then execution<a class="headerlink" href="#wait-then-execution" title="Permanent link">&para;</a></h5>
-<p>Run custom function until <code>scenario.continue(eventName)</code></p>
-<p>Format:</p>
-<div class="codehilite"><pre><span></span><span class="err">eventName,fnName,param0,param1,...</span>
-</pre></div>
-
-<ul>
-<li>1<sup>st</sup> column of instruction: not a number, not a string start from <code>#</code></li>
-<li>Execution will be hang until <code>scenario.continue(eventName)</code> is called</li>
-<li>Parameters will be converted to number, boolean, null, or string by default.</li>
-</ul>
-<h5 id="task">Task<a class="headerlink" href="#task" title="Permanent link">&para;</a></h5>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/csv-scenario/task.js">Sample code</a></p>
-<p>Scenario will be paused if custom function return an <a href="../eventemitter3/">event emitter</a>, resumed when that evnt emitter fires <code>complete</code> event.</p>
-<p>See also: <a href="../sequence/#action-of-commands">Sequence</a></p>
-<h4 id="label">Label<a class="headerlink" href="#label" title="Permanent link">&para;</a></h4>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/csv-scenario/label-exit.js">Sample code</a></p>
-<p>A label for <code>#GOTO</code> or <code>#IF</code> instructions.</p>
-<p>Format:</p>
-<div class="codehilite"><pre><span></span><span class="err">#LABEL,label</span>
-</pre></div>
-
-<ul>
-<li>1<sup>st</sup> column of instruction: <code>#LABEL</code>, case insensitive.</li>
-<li>Label <code>''</code> is reserved, don't use <code>''</code> for label name.</li>
-</ul>
-<p>Example: A label named 'AA'</p>
-<div class="codehilite"><pre><span></span><span class="err">#LABEL,AA</span>
-</pre></div>
-
-<h4 id="exit">Exit<a class="headerlink" href="#exit" title="Permanent link">&para;</a></h4>
-<p>Exit current execution.</p>
-<p>Format:</p>
-<div class="codehilite"><pre><span></span><span class="err">#EXIT</span>
-</pre></div>
-
-<ul>
-<li>1<sup>st</sup> column of instruction: <code>#EXIT</code>, case insensitive.</li>
-</ul>
-<h4 id="goto">Goto<a class="headerlink" href="#goto" title="Permanent link">&para;</a></h4>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/csv-scenario/goto.js">Sample code</a></p>
-<p>Go to <em>label</em> and execute.</p>
-<p>Format:</p>
-<div class="codehilite"><pre><span></span><span class="err">#GOTO,label</span>
-</pre></div>
-
-<ul>
-<li>1<sup>st</sup> column of instruction: <code>#GOTO</code>, case insensitive.</li>
-<li>An <code>error</code> event will be fired if label is not found.</li>
-</ul>
-<p>Example: Goto label 'AA'</p>
-<div class="codehilite"><pre><span></span><span class="err">#GOTO,AA</span>
-</pre></div>
-
-<h4 id="if-goto">If-goto<a class="headerlink" href="#if-goto" title="Permanent link">&para;</a></h4>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/csv-scenario/if.js">Sample code</a></p>
-<p>Go to <em>trueLabel</em> if condition is true, otherwise go to <em>falseLabel</em>.</p>
-<p>Format:</p>
-<div class="codehilite"><pre><span></span><span class="err">#IF,condition,trueLabel,falseLabel</span>
-</pre></div>
-
-<ul>
-<li>1<sup>st</sup> column of instruction: <code>#IF</code>, case insensitive.</li>
-<li>conditon: boolean equation<ul>
-<li><em>this</em> is the <code>scope</code> passed from <code>scenario.load(...)</code></li>
+<li>On dragging 1<sup>st</sup> touch pointer, fired when 1<sup>st</sup> touch pointer is moving
+    <div class="codehilite"><pre><span></span><span class="nx">dragScale</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;drag1&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">dragScale</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// var drag1Vector = dragScale.drag1Vector; // drag1Vector: {x, y}</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>dragScale.drag1Vector</code> : Drag vector from prevoius touch position to current touch position of 1<sup>st</sup> catched touch pointer.</li>
 </ul>
 </li>
-<li>trueLabel/falseLabel: go to this label if condition is true/false<ul>
-<li>run next instruction if label is <code>''</code></li>
-<li>An <code>error</code> event will be fired if label is not found.</li>
+<li>On dragging 2 touch pointers, fired when any catched touch pointer moved.
+    <div class="codehilite"><pre><span></span><span class="nx">dragScale</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;drag2&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">dragScale</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// var scaleFactor = dragScale.scaleFactor;</span>
+    <span class="c1">// gameObject.scaleX *= scaleFactor;</span>
+    <span class="c1">// gameObject.scaleY *= scaleFactor;</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>dragScale.scaleFactor</code> : Rate of distance change between 2 catched touch pointers.</li>
 </ul>
 </li>
 </ul>
-<p>Example: Goto label 'AA' if (this.coin &gt; 100), else run next instruction</p>
-<div class="codehilite"><pre><span></span><span class="err">#IF,this.coin &gt; 100,AA</span>
-</pre></div>
-
-<h4 id="wait">Wait<a class="headerlink" href="#wait" title="Permanent link">&para;</a></h4>
-<p>Run next instruction after a delay time, or <code>scenario.continue(eventName)</code>.</p>
-<p>Format:</p>
-<div class="codehilite"><pre><span></span><span class="err">#WAIT,time</span>
-</pre></div>
-
-<div class="codehilite"><pre><span></span><span class="err">#WAIT,eventName</span>
-</pre></div>
-
+<h4 id="on-drag-start-on-drag-end">On drag start, on drag end<a class="headerlink" href="#on-drag-start-on-drag-end" title="Permanent link">&para;</a></h4>
 <ul>
-<li>1<sup>st</sup> column of instruction: <code>#WAIT</code>, case insensitive.</li>
-<li>2<sup>nd</sup> colume of instruction:<ul>
-<li>a number: a delay time<ul>
-<li>time-unit of delay is set from <code>scenario.load(...)</code></li>
-</ul>
-</li>
-<li>a string: an event name for <code>scenario.continue(eventName)</code></li>
-</ul>
-</li>
-</ul>
-<p>Example: </p>
-<ul>
-<li>Wait 1 time-unit
-    <div class="codehilite"><pre><span></span><span class="err">#WAIT,1</span>
+<li>On drag 1 touch pointer start, fired when catching 1<sup>st</sup> touch pointer.
+    <div class="codehilite"><pre><span></span><span class="nx">dragScale</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;drag1start&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">dragScale</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </pre></div></li>
-<li>Wait until 'click'
-    <div class="codehilite"><pre><span></span><span class="err">#WAIT,click</span>
-</pre></div>
-    <div class="codehilite"><pre><span></span><span class="nx">scenario</span><span class="p">.</span><span class="k">continue</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">)</span>
+<li>On drag 1 touch pointer end, fired when releasing the last one catched touch pointer.
+    <div class="codehilite"><pre><span></span><span class="nx">dragScale</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;drag1end&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">dragScale</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+<li>On drag 2 touch pointers start, fired when catching 2 touch pointers.
+    <div class="codehilite"><pre><span></span><span class="nx">dragScale</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;drag2start&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">dragScale</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+<li>On drag 2 touch pointers end, fired when releasing any catched touch pointer.
+    <div class="codehilite"><pre><span></span><span class="nx">dragScale</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;drag2end&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">dragScale</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </pre></div></li>
 </ul>
-<h3 id="other-methods">Other methods<a class="headerlink" href="#other-methods" title="Permanent link">&para;</a></h3>
-<h4 id="pause">Pause<a class="headerlink" href="#pause" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">scenario</span><span class="p">.</span><span class="nx">pause</span><span class="p">()</span>
+<h3 id="scale-factor">Scale factor<a class="headerlink" href="#scale-factor" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">scaleFactor</span> <span class="o">=</span> <span class="nx">dragScale</span><span class="p">.</span><span class="nx">scaleFactor</span><span class="p">;</span>
 </pre></div>
 
-<h4 id="resume">Resume<a class="headerlink" href="#resume" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">scenario</span><span class="p">.</span><span class="nx">resume</span><span class="p">()</span>
+<p>Rate of distance change between 2 catched touch pointers. 
+(i.e current distance between 2 catched touch pointers / previous distance ).</p>
+<h3 id="drag-vector-of-1st-touch-pointer">Drag vector of 1<sup>st</sup> touch pointer<a class="headerlink" href="#drag-vector-of-1st-touch-pointer" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">drag1Vector</span> <span class="o">=</span> <span class="nx">dragScale</span><span class="p">.</span><span class="nx">drag1Vector</span><span class="p">;</span> <span class="c1">// {x, y}</span>
 </pre></div>
+
+<h3 id="catched-touch-pointers">Catched touch pointers<a class="headerlink" href="#catched-touch-pointers" title="Permanent link">&para;</a></h3>
+<ul>
+<li><a href="../touchevents/#properties-of-point">Pointer</a> 0, available when state is <code>1</code>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">pointer0</span> <span class="o">=</span> <span class="nx">dragScale</span><span class="p">.</span><span class="nx">pointers</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+</pre></div><ul>
+<li>Position of pointer
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">pointer0</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">pointer0</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+</pre></div></li>
+</ul>
+</li>
+<li><a href="../touchevents/#properties-of-point">Pointer</a> 1, available when state is <code>2</code>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">pointer0</span> <span class="o">=</span> <span class="nx">dragScale</span><span class="p">.</span><span class="nx">pointers</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+</pre></div></li>
+</ul>
                 
                   
                 
@@ -4112,7 +3896,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../sequence/" title="Sequence" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../cursoratbound/" title="Cursor at bound" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -4121,19 +3905,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Sequence
+                Cursor at bound
               </span>
             </div>
           </a>
         
         
-          <a href="../tcrp-recoder/" title="Recoder" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../mousewheeltoupdown/" title="Mouse-wheel to up/down" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Recoder
+                Mouse-wheel to up/down
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

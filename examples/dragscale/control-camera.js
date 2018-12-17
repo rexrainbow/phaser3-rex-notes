@@ -10,36 +10,33 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        var print = this.add.text(0, 0, '')
+        DrawSomethings(this);
 
-        var circle = this.add.circle(400, 300, 200, 0x888888);
         var dragScale = this.plugins.get('rexDragScale').add(this);
+
+        var camera = this.cameras.main;
         dragScale
             .on('drag1', function (dragScale) {
                 var drag1Vector = dragScale.drag1Vector;
-                circle.x += drag1Vector.x;
-                circle.y += drag1Vector.y;
+                camera.scrollX -= drag1Vector.x / camera.zoom;
+                camera.scrollY -= drag1Vector.y / camera.zoom;
             })
             .on('drag2', function (dragScale) {
                 var scaleFactor = dragScale.scaleFactor;
-                circle.scaleX *= scaleFactor;
-                circle.scaleY *= scaleFactor;
-                print.text = circle.scaleX;
+                camera.zoom *= scaleFactor;
             }, this)
-            .on('drag1start', function (dragScale) {
-                print.text = 'drag1start';
-            }, this)
-            .on('drag1end', function (dragScale) {
-                print.text = 'drag1end';
-            }, this)
-            .on('drag2start', function (dragScale) {
-                print.text = 'drag2start';
-            }, this)
-            .on('drag2end', function (dragScale) {
-                print.text = 'drag2end';
-            }, this)
+    }
+}
 
-
+const Random = Phaser.Math.Between;
+var DrawSomethings = function (scene) {
+    for (var i = 0; i < 500; i++) {
+        scene.add.circle(
+            Random(-1000, 1000), Random(-1000, 1000), // x, y
+            Random(10, 100), // r
+            Random(0, 0xffffff), // color
+            0.5 // alpha
+        );
     }
 }
 

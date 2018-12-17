@@ -1,8 +1,6 @@
 import CursorAtBoundPlugin from '../../plugins/cursoratbound-plugin.js';
 import MouseWheelToUpDownPlugin from '../../plugins/mousewheeltoupdown-plugin.js';
 
-const Random = Phaser.Math.Between;
-
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -49,6 +47,7 @@ class Demo extends Phaser.Scene {
     }
 }
 
+const Random = Phaser.Math.Between;
 var DrawSomethings = function (scene) {
     var bounds = scene.cameras.main._bounds; // TODO: getBounds()
     var left = bounds.left,

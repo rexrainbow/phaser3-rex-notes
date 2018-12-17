@@ -1795,6 +1795,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../dragscale/" title="Drag scale" class="md-nav__link">
+      Drag scale
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../mousewheeltoupdown/" title="Mouse-wheel to up/down" class="md-nav__link">
       Mouse-wheel to up/down
     </a>
@@ -3703,17 +3715,13 @@
 </pre></div>
 
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexRData&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">parent</span><span class="p">,</span> <span class="nx">eventEmitter</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexRData&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">parent</span><span class="p">);</span>
+<span class="c1">// var data = scene.plugins.get(&#39;rexRData&#39;).add(parent, eventEmitter);</span>
 </pre></div>
 
 <ul>
 <li><code>parent</code> : The object (a scene, or a game object) that this DataManager belongs to.</li>
-<li><code>eventEmitter</code> : The DataManager's <a href="../eventemitter3/">event emitter</a>.<ul>
-<li>Create a new event emitter
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">ee</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Events</span><span class="p">.</span><span class="nx">EventEmitter</span><span class="p">();</span>
-</pre></div></li>
-</ul>
-</li>
+<li><code>eventEmitter</code> : The DataManager's <a href="../eventemitter3/">event emitter</a>.</li>
 </ul>
 <h3 id="getsetremove-value">Get/set/remove value<a class="headerlink" href="#getsetremove-value" title="Permanent link">&para;</a></h3>
 <p>See <a href="../datamanager/">built-in data manager</a>.</p>

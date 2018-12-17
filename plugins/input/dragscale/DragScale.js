@@ -91,6 +91,7 @@ class DragScale extends EE {
         switch (this.state) {
             case TOUCH0:
                 this.state = TOUCH1;
+                this.onDrag1Start();
                 break;
             case TOUCH1:
                 this.state = TOUCH2;
@@ -118,10 +119,12 @@ class DragScale extends EE {
         switch (this.state) {
             case TOUCH1:
                 this.state = TOUCH0;
+                this.onDrag1End();
                 break;
             case TOUCH2:
                 this.state = TOUCH1;
                 this.onDrag2End();
+                this.onDrag1Start();
                 break;
         }
     }
@@ -161,6 +164,14 @@ class DragScale extends EE {
         this.pointers.length = 0;
         this.state = TOUCH0;
         return this;
+    }
+
+    onDrag1Start() {
+        this.emit('drag1start', this);
+    }
+
+    onDrag1End() {
+        this.emit('drag1end', this);
     }
 
     onDrag1() {

@@ -88,12 +88,15 @@ Return `true` if `(dragScale.state === 2)`
 
 ### Events
 
-- On drag 2 touch pointers start, fired when catching 2 touch pointers.
-    ```javascript
-    dragScale.on('drag2start', function(dragScale) {
+#### On dragging
 
+- On dragging 1st touch pointer, fired when 1st touch pointer is moving
+    ```javascript
+    dragScale.on('drag1', function(dragScale) {
+        // var drag1Vector = dragScale.drag1Vector; // drag1Vector: {x, y}
     }, scope);
     ```
+    - `dragScale.drag1Vector` : Drag vector from prevoius touch position to current touch position of 1st catched touch pointer.
 - On dragging 2 touch pointers, fired when any catched touch pointer moved.
     ```javascript
     dragScale.on('drag2', function(dragScale) {
@@ -102,16 +105,32 @@ Return `true` if `(dragScale.state === 2)`
         // gameObject.scaleY *= scaleFactor;
     }, scope);
     ```
+    - `dragScale.scaleFactor` : Rate of distance change between 2 catched touch pointers.
+
+#### On drag start, on drag end
+
+- On drag 1 touch pointer start, fired when catching 1st touch pointer.
+    ```javascript
+    dragScale.on('drag1start', function(dragScale) {
+
+    }, scope);
+    ```
+- On drag 1 touch pointer end, fired when releasing the last one catched touch pointer.
+    ```javascript
+    dragScale.on('drag1end', function(dragScale) {
+
+    }, scope);
+    ```
+- On drag 2 touch pointers start, fired when catching 2 touch pointers.
+    ```javascript
+    dragScale.on('drag2start', function(dragScale) {
+
+    }, scope);
+    ```
 - On drag 2 touch pointers end, fired when releasing any catched touch pointer.
     ```javascript
     dragScale.on('drag2end', function(dragScale) {
 
-    }, scope);
-    ```
-- On dragging 1st touch pointer, fired when 1st touch pointer is moving
-    ```javascript
-    dragScale.on('drag1', function(dragScale) {
-        // var drag1Vector = dragScale.drag1Vector; // drag1Vector: {x, y}
     }, scope);
     ```
 
@@ -121,7 +140,7 @@ Return `true` if `(dragScale.state === 2)`
 var scaleFactor = dragScale.scaleFactor;
 ```
 
-Changing ratio of distance between 2 catched touch pointers. 
+Rate of distance change between 2 catched touch pointers. 
 (i.e current distance between 2 catched touch pointers / previous distance ).
 
 ### Drag vector of 1st touch pointer
