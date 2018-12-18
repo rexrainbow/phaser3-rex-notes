@@ -151,6 +151,8 @@ If set to `false` it will emit events from all Game Objects below a Pointer, not
 
 ### Touch events
 
+Scenes will trigger these events from top scene to bottom scene.
+
 1. Events on touched Game object
     ```javascript
     gameObject.on('pointerdown', function(pointer, localX, localY, event){ /* ... */ });

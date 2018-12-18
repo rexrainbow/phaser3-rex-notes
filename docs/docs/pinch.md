@@ -78,23 +78,23 @@ var state = pinch.state;
 - `2` : Catch 2 touch pointers
     - Fire `'pinchstart'` event when catching 2 touch pointers.
     - Fire `'pinch'` event when any catched touch pointer moved.
-    - Fire `'pinchend'` event when releasing any catched touch pointer.    
+    - Fire `'pinchend'` event when releasing any catched touch pointer.
 
-### Is 1st dragging
-
-```javascript
-var isDragging = pinch.isDragging;
-```
-
-Return `true` if `(pinch.state === 1)`
-
-### Is pinching
+### Is 1st drag
 
 ```javascript
-var isPinching = pinch.isPinching;
+var isDrag = pinch.isDrag;
 ```
 
-Return `true` if `(pinch.state === 2)`
+Return `true` if `(pinch.state === 1)` and 1st touch pointer just moved.
+
+### Is pinch
+
+```javascript
+var isPinch = pinch.isPinch;
+```
+
+Return `true` if `(pinch.state === 2)` and any touch pointer just moved.
 
 ### Events
 

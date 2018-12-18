@@ -192,16 +192,16 @@ class Pinch extends EE {
         this.emit('pinch', this);
     }
 
-    get isDragging() {
-        return (this.state === TOUCH1);
+    get isDrag() {
+        return (this.state === TOUCH1) && (this.pointers[0].justMoved);
     }
 
-    get isPinching() {
-        return (this.state === TOUCH2);
+    get isPinch() {
+        return (this.state === TOUCH2) && (this.pointers[0].justMoved || this.pointers[1].justMoved);
     }
 
     get dragDistance() {
-        if (!this.isPinching) {
+        if (this.state !== TOUCH2) {
             return 0;
         }
         var p0 = this.pointers[0],
@@ -211,7 +211,7 @@ class Pinch extends EE {
     }
 
     get scaleFactor() {
-        if (!this.isPinching) {
+        if (this.state !== TOUCH2) {
             return 0;
         }
         var curDragDistance = this.dragDistance;
