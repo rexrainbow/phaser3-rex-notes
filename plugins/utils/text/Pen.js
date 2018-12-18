@@ -25,7 +25,7 @@ class Pen {
         this.startIndex = GetValue(o, 'startIndex', 0);
     }
 
-    get rawText() {
+    get plainText() {
         var txt = this.text;
         if (this.newLineMode === RAW_NEWLINE) {
             txt += "\n";

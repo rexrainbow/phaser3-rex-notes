@@ -1,7 +1,7 @@
 import TextStyle from '../../utils/text/TextStyle.js';
 
 var GETPROP_RESULT = {
-    rawText: null,
+    plainText: null,
     prevProp: null
 };
 
@@ -42,7 +42,7 @@ var parser = {
     },
 
     tagTextToProp: function (text, prevProp) {
-        var rawText, innerMatch;
+        var plainText, innerMatch;
 
         if (prevProp == null) {
             prevProp = {};
@@ -55,70 +55,70 @@ var parser = {
         // Check if current fragment is a class tag
         if (RE_BLOD_OPEN.test(text)) {
             updateProp(prevProp, PROP_ADD, "b", true);
-            rawText = "";
+            plainText = "";
         } else if (RE_BLOD_CLOSE.test(text)) {
             updateProp(prevProp, PROP_REMOVE, "b");
-            rawText = "";
+            plainText = "";
         } else if (RE_ITALICS_OPEN.test(text)) {
             updateProp(prevProp, PROP_ADD, "i", true);
-            rawText = "";
+            plainText = "";
         } else if (RE_ITALICS_CLOSE.test(text)) {
             updateProp(prevProp, PROP_REMOVE, "i");
-            rawText = "";
+            plainText = "";
         } else if (RE_SIZE_OPEN.test(text)) {
             innerMatch = text.match(RE_SIZE_OPEN);
             updateProp(prevProp, PROP_ADD, "size", innerMatch[1] + "px");
-            rawText = "";
+            plainText = "";
         } else if (RE_SIZE_CLOSE.test(text)) {
             updateProp(prevProp, PROP_REMOVE, "size");
-            rawText = "";
+            plainText = "";
         } else if (RE_COLOR_OPEN.test(text)) {
             innerMatch = text.match(RE_COLOR_OPEN);
             updateProp(prevProp, PROP_ADD, "color", innerMatch[1]);
-            rawText = "";
+            plainText = "";
         } else if (RE_COLOR_CLOSE.test(text)) {
             updateProp(prevProp, PROP_REMOVE, "color");
-            rawText = "";
+            plainText = "";
         } else if (RE_UNDERLINE_OPEN.test(text)) {
             innerMatch = text.match(RE_UNDERLINE_OPEN);
             updateProp(prevProp, PROP_ADD, "u", true);
-            rawText = "";
+            plainText = "";
         } else if (RE_UNDERLINE_OPENC.test(text)) {
             innerMatch = text.match(RE_UNDERLINE_OPENC);
             updateProp(prevProp, PROP_ADD, "u", innerMatch[1]);
-            rawText = "";
+            plainText = "";
         } else if (RE_UNDERLINE_CLOSE.test(text)) {
             updateProp(prevProp, PROP_REMOVE, "u");
-            rawText = "";
+            plainText = "";
         } else if (RE_SHADOW_OPEN.test(text)) {
             updateProp(prevProp, PROP_ADD, "shadow", true);
-            rawText = "";
+            plainText = "";
         } else if (RE_SHADOW_CLOSE.test(text)) {
             updateProp(prevProp, PROP_REMOVE, "shadow");
-            rawText = "";
+            plainText = "";
         } else if (RE_STROKE_OPEN.test(text)) {
             updateProp(prevProp, PROP_ADD, "stroke", true);
-            rawText = "";
+            plainText = "";
         } else if (RE_STROKE_OPENC.test(text)) {
             innerMatch = text.match(RE_STROKE_OPENC);
             updateProp(prevProp, PROP_ADD, "stroke", innerMatch[1]);
-            rawText = "";
+            plainText = "";
         } else if (RE_STROKE_CLOSE.test(text)) {
             updateProp(prevProp, PROP_REMOVE, "stroke");
-            rawText = "";
+            plainText = "";
         } else if (RE_IMAGE_OPEN.test(text)) {
             innerMatch = text.match(RE_IMAGE_OPEN);
             updateProp(prevProp, PROP_ADD, "img", innerMatch[1]);
-            rawText = "";
+            plainText = "";
         } else if (RE_IMAGE_CLOSE.test(text)) {
             updateProp(prevProp, PROP_REMOVE, "img");
-            rawText = "";
+            plainText = "";
         } else {
-            rawText = text
+            plainText = text
         }
 
         var result = GETPROP_RESULT;
-        result.rawText = rawText;
+        result.plainText = plainText;
         result.prop = prevProp;
         return result;
     },

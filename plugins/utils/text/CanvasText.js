@@ -46,16 +46,16 @@ class CanvasText {
         var cursorX = 0,
             cursorY = 0;
 
-        var rawText, curProp, curStyle;
+        var plainText, curProp, curStyle;
         var match = this.parser.splitText(text),
             result, wrapLines;
         for (var i = 0, len = match.length; i < len; i++) {
             result = this.parser.tagTextToProp(match[i], curProp);
-            rawText = result.rawText;
+            plainText = result.plainText;
             curProp = result.prop;
 
             // wrap text to lines
-            if (rawText !== '') {
+            if (plainText !== '') {
                 // Save the current context.
                 this.context.save();
                 curStyle = this.parser.propToContextStyle(
@@ -66,7 +66,7 @@ class CanvasText {
                 curStyle.syncFont(canvas, context);
                 curStyle.syncStyle(canvas, context);
                 wrapLines = WrapText(
-                    rawText,
+                    plainText,
                     this.getTextWidth,
                     wrapMode,
                     wrapWidth,
@@ -308,14 +308,14 @@ class CanvasText {
     }
 
     getPlainText(text, start, end) {
-        var rawText;
+        var plainText;
         if (text == null) {
-            rawText = this.pensManager.rawText;
+            plainText = this.pensManager.plainText;
         } else {
             var m, match = this.parser.splitText(text, 1); // PLAINTEXTONLY_MODE
-            rawText = "";
+            plainText = "";
             for (var i = 0, len = match.length; i < len; i++) {
-                rawText += match[i];
+                plainText += match[i];
             }
         }
 
@@ -324,12 +324,12 @@ class CanvasText {
                 start = 0;
             }
             if (end == null) {
-                end = rawText.length;
+                end = plainText.length;
             }
-            rawText = rawText.substring(start, end);
+            plainText = plainText.substring(start, end);
         }
 
-        return rawText;
+        return plainText;
     }
 
     getPenManager(text, retPensManager) {

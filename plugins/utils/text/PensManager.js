@@ -171,11 +171,11 @@ class PensManager {
         return this.lines.length;
     }
 
-    get rawText() {
+    get plainText() {
         var txt = "",
             pens = this.pens;
         for (var i = 0, len = pens.length; i < len; i++) {
-            txt += pens[i].rawText;
+            txt += pens[i].plainText;
         }
 
         return txt;
@@ -217,7 +217,7 @@ class PensManager {
                 continue;
             }
             pen = this.pens[i];
-            penTxt = (!wrap) ? pen.rawText : pen.wrapText;
+            penTxt = (!wrap) ? pen.plainText : pen.wrapText;
             currentProp = pen.prop;
             penStartIdx = pen.startIndex;
 

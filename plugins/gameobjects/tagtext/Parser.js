@@ -1,7 +1,7 @@
 import TextStyle from '../../utils/text/TextStyle.js';
 
 var GETPROP_RESULT = {
-    rawText: null,
+    plainText: null,
     prevProp: null
 };
 
@@ -61,7 +61,7 @@ class parser {
     }
 
     tagTextToProp(text, prevProp) {
-        var rawText, propOut;
+        var plainText, propOut;
         if (RE_CLASS_HEADER.test(text)) {
             var innerMatch = text.match(RE_CLASS);
             if (innerMatch != null) {
@@ -73,7 +73,7 @@ class parser {
                     propOut = {};
                 }
                 propOut._class = name;
-                rawText = innerMatch[2];
+                plainText = innerMatch[2];
             }
         } else if (RE_STYLE_HEADER.test(text)) {
             var innerMatch = text.match(RE_STYLE);
@@ -81,12 +81,12 @@ class parser {
                 var style = innerMatch[1];
                 propOut = styleToProp(style);
                 propOut._style = style;
-                rawText = innerMatch[2];
+                plainText = innerMatch[2];
             }
         }
 
-        if (rawText == null) {
-            rawText = text;
+        if (plainText == null) {
+            plainText = text;
         }
 
         if (propOut == null) {
@@ -94,7 +94,7 @@ class parser {
         }
 
         var result = GETPROP_RESULT;
-        result.rawText = rawText;
+        result.plainText = plainText;
         result.prop = propOut;
         return result;
     }
