@@ -1879,15 +1879,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#is-1st-dragging" title="Is 1st dragging" class="md-nav__link">
-    Is 1st dragging
+  <a href="#is-1st-drag" title="Is 1st drag" class="md-nav__link">
+    Is 1st drag
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#is-pinching" title="Is pinching" class="md-nav__link">
-    Is pinching
+  <a href="#is-pinch" title="Is pinch" class="md-nav__link">
+    Is pinch
   </a>
   
 </li>
@@ -3674,15 +3674,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#is-1st-dragging" title="Is 1st dragging" class="md-nav__link">
-    Is 1st dragging
+  <a href="#is-1st-drag" title="Is 1st drag" class="md-nav__link">
+    Is 1st drag
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#is-pinching" title="Is pinching" class="md-nav__link">
-    Is pinching
+  <a href="#is-pinch" title="Is pinch" class="md-nav__link">
+    Is pinch
   </a>
   
 </li>
@@ -3826,20 +3826,20 @@
 <li><code>2</code> : Catch 2 touch pointers<ul>
 <li>Fire <code>'pinchstart'</code> event when catching 2 touch pointers.</li>
 <li>Fire <code>'pinch'</code> event when any catched touch pointer moved.</li>
-<li>Fire <code>'pinchend'</code> event when releasing any catched touch pointer.    </li>
+<li>Fire <code>'pinchend'</code> event when releasing any catched touch pointer.</li>
 </ul>
 </li>
 </ul>
-<h3 id="is-1st-dragging">Is 1<sup>st</sup> dragging<a class="headerlink" href="#is-1st-dragging" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isDragging</span> <span class="o">=</span> <span class="nx">pinch</span><span class="p">.</span><span class="nx">isDragging</span><span class="p">;</span>
+<h3 id="is-1st-drag">Is 1<sup>st</sup> drag<a class="headerlink" href="#is-1st-drag" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isDrag</span> <span class="o">=</span> <span class="nx">pinch</span><span class="p">.</span><span class="nx">isDrag</span><span class="p">;</span>
 </pre></div>
 
-<p>Return <code>true</code> if <code>(pinch.state === 1)</code></p>
-<h3 id="is-pinching">Is pinching<a class="headerlink" href="#is-pinching" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isPinching</span> <span class="o">=</span> <span class="nx">pinch</span><span class="p">.</span><span class="nx">isPinching</span><span class="p">;</span>
+<p>Return <code>true</code> if <code>(pinch.state === 1)</code> and 1<sup>st</sup> touch pointer just moved.</p>
+<h3 id="is-pinch">Is pinch<a class="headerlink" href="#is-pinch" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isPinch</span> <span class="o">=</span> <span class="nx">pinch</span><span class="p">.</span><span class="nx">isPinch</span><span class="p">;</span>
 </pre></div>
 
-<p>Return <code>true</code> if <code>(pinch.state === 2)</code></p>
+<p>Return <code>true</code> if <code>(pinch.state === 2)</code> and any touch pointer just moved.</p>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <h4 id="on-dragging">On dragging<a class="headerlink" href="#on-dragging" title="Permanent link">&para;</a></h4>
 <ul>
