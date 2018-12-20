@@ -3828,7 +3828,7 @@
 <h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Define class
-    <div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">MyText</span> <span class="kr">extends</span> <span class="nx">BitmapText</span> <span class="p">{</span>
+    <div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">MyText</span> <span class="kr">extends</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">GameObjects</span><span class="p">.</span><span class="nx">BitmapText</span> <span class="p">{</span>
     <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">text</span><span class="p">,</span> <span class="nx">size</span><span class="p">,</span> <span class="nx">align</span><span class="p">)</span> <span class="p">{</span>
         <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">text</span><span class="p">,</span> <span class="nx">size</span><span class="p">,</span> <span class="nx">align</span><span class="p">);</span>
         <span class="c1">// ...</span>
@@ -3901,7 +3901,7 @@
 </pre></div>
 
 <p>or</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bounds</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">setFixedSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bounds</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">getTextBounds</span><span class="p">(</span><span class="nx">round</span><span class="p">);</span>
 <span class="c1">// bounds = {</span>
 <span class="c1">//     local: {</span>
 <span class="c1">//         x: 0,</span>
@@ -3924,9 +3924,10 @@
 </pre></div>
 
 <ul>
-<li><code>local</code> : The BitmapText based on fontSize and 0x0 coords</li>
-<li><code>global</code> : The BitmapText, taking into account scale and world position</li>
-<li><code>lines</code> : The BitmapText line data</li>
+<li><code>round</code> : Set <code>true</code> to round the results to the nearest integer.</li>
+<li><code>local</code> : The BitmapText based on fontSize and 0x0 coords.</li>
+<li><code>global</code> : The BitmapText, taking into account scale and world position.</li>
+<li><code>lines</code> : The BitmapText line data.</li>
 </ul>
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
 <p>See <a href="../gameobject/">game object</a></p>
