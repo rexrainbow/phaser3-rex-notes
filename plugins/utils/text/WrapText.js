@@ -1,7 +1,6 @@
 import PoolKlass from '../../pool.js';
 import CONST from './const.js';
 
-const GetValue = Phaser.Utils.GetValue;
 const NO_NEWLINE = CONST.NO_NEWLINE;
 const RAW_NEWLINE = CONST.RAW_NEWLINE;
 const WRAPPED_NEWLINE = CONST.WRAPPED_NEWLINE;

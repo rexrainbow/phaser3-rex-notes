@@ -86,7 +86,7 @@ var txt = scene.make.bitmapText({
 
 - Define class
     ```javascript
-    class MyText extends BitmapText {
+    class MyText extends Phaser.GameObjects.BitmapText {
         constructor(scene, x, y, key, text, size, align) {
             super(scene, x, y, key, text, size, align);
             // ...
@@ -181,7 +181,7 @@ var height = txt.height;
 or
 
 ```javascript
-var bounds = txt.setFixedSize(width, height);
+var bounds = txt.getTextBounds(round);
 // bounds = {
 //     local: {
 //         x: 0,
@@ -203,9 +203,10 @@ var bounds = txt.setFixedSize(width, height);
 // };
 ```
 
-- `local` : The BitmapText based on fontSize and 0x0 coords
-- `global` : The BitmapText, taking into account scale and world position
-- `lines` : The BitmapText line data
+- `round` : Set `true` to round the results to the nearest integer.
+- `local` : The BitmapText based on fontSize and 0x0 coords.
+- `global` : The BitmapText, taking into account scale and world position.
+- `lines` : The BitmapText line data.
 
 ### Other properties
 
