@@ -50,10 +50,11 @@ class PensManager {
         pen.resetFromJSON(PEN_CONFIG);
 
         var previousPen = this.lastPen;
-        if (previousPen == null)
+        if (previousPen == null) {
             pen.startIndex = 0;
-        else
+        } else {
             pen.startIndex = previousPen.endIndex;
+        }
         this.pens.push(pen);
 
         // maintan lines
@@ -109,7 +110,7 @@ class PensManager {
             return this.getLineEndIndex(i);
         } else {
             var line = this.lines[i];
-            return (line[0])? line[0].startIndex : 0;
+            return (line[0]) ? line[0].startIndex : 0;
         }
     }
 
@@ -122,11 +123,13 @@ class PensManager {
         for (li = i; li >= 0; li--) {
             line = this.lines[li];
             hasLastPen = (line != null) && (line.length > 0);
-            if (hasLastPen)
+            if (hasLastPen) {
                 break;
+            }
         }
-        if (!hasLastPen)
+        if (!hasLastPen) {
             return 0;
+        }
 
         var lastPen = line[line.length - 1];
         return lastPen.endIndex;
@@ -138,8 +141,9 @@ class PensManager {
             return 0;
 
         var lastPen = line[line.length - 1];
-        if (lastPen == null)
+        if (lastPen == null) {
             return 0;
+        }
 
         var lineWidth = lastPen.lastX; // start from 0
         return lineWidth;
@@ -152,8 +156,9 @@ class PensManager {
         var w, maxW = 0;
         for (var i = 0, len = this.lines.length; i < len; i++) {
             w = this.getLineWidth(i);
-            if (w > maxW)
+            if (w > maxW) {
                 maxW = w;
+            }
         }
         this.maxLinesWidth = maxW;
         return maxW;
@@ -197,8 +202,9 @@ class PensManager {
         }
         if (end === undefined) {
             var lastPen = this.lastPen;
-            if (lastPen == null)
+            if (lastPen == null) {
                 return "";
+            }
 
             end = lastPen.endIndex;
         }

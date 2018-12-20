@@ -149,8 +149,9 @@ class CanvasText {
         offsetY += startY;
         for (var lineIdx = drawLineStartIdx; lineIdx < drawLineEndIdx; lineIdx++) {
             lineWidth = pensManager.getLineWidth(lineIdx);
-            if (lineWidth === 0)
+            if (lineWidth === 0) {
                 continue;
+            }
 
             if (halign === HALIGN_CENTER) { // center
                 offsetX = (boxWidth - lineWidth) / 2;
