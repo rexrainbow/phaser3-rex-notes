@@ -303,6 +303,15 @@ var tileX = board.worldXYToTileX(worldX, worldY);
 var tileY = board.worldXYToTileY(worldX, worldY);
 ```
 
+### Angle between world position of 2 tiles
+
+```javascript
+var radian = board.angleBetween(tileXY0, tileXY1);
+```
+
+- `radian` : Angle between world position of 2 tiles, in radian
+- `tileXY0`, `tileXY1` : tile position `{x, y}`
+
 ### Align world position to grid
 
 - Align one chess object
