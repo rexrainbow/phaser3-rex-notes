@@ -1,8 +1,22 @@
 export default {
     addBuff: function (key, buffKey, value) {
+        var buffValueType = typeof (value);
+        if (buffValueType === 'number') {
+            buffValueType = ADD;
+        } else if (buffValueType === 'string') {
+            if (value.indexOf('%') !== -1) {
+                buffValueType = ADD_BASE_PERCENT;
+                value = parseFloat(value) / 100;
+            } else {
+                buffValueType = ADD;
+                value = parseFloat(value);
+            }
+        }
+
         this.enableBuff(key, buffKey);
         var buff = this.buffs[key][buffKey];
         buff.value = value;
+        buff.type = buffValueType;
         return this;
     },
 
@@ -16,7 +30,8 @@ export default {
         if (!this.buffs[key].hasOwnProperty(buffKey)) {
             this.buffs[key][buffKey] = {
                 enable: true,
-                value: undefined
+                value: 0,
+                type: ADD,
             }
         }
         var buff = this.buffs[key][buffKey];
@@ -63,16 +78,15 @@ export default {
                 continue;
             }
 
+            buffValueType = buffValue.type;
             buffValue = buffValue.value;
-            buffValueType = typeof (buffValue);
-            if (buffValueType === 'number') {
-                result += buffValue;
-            } else if (buffValueType === 'string') {
-                if (buffValue.indexOf('%') !== -1) {
-                    result += baseValue * parseFloat(buffValue) / 100;
-                } else {
-                    result += parseFloat(buffValue);
-                }
+            switch (buffValueType) {
+                case ADD:
+                    result += buffValue;
+                    break;
+                case ADD_BASE_PERCENT:
+                    result += baseValue * buffValue;
+                    break;
             }
         }
         return result;
@@ -106,3 +120,6 @@ export default {
         return this.bounds[key];
     },
 };
+
+const ADD = 0
+const ADD_BASE_PERCENT = 1;
