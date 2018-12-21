@@ -1,5 +1,5 @@
 import BuffMethods from './Buff.js';
-import Init from './Init';
+import Extend from './Extend';
 
 const Base = Phaser.Data.DataManager;
 const EventEmitterKlass = Phaser.Events.EventEmitter;
@@ -11,10 +11,7 @@ class DataManager extends Base {
         }
         super(parent, eventEmitter);
 
-        this.buffs = {};
-        this.bounds = {};
-
-        Init(this, config);
+        Extend(this, config);
     }
 }
 
