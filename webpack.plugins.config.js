@@ -80,6 +80,7 @@ module.exports = {
         'csvtoarrayplugin': './plugins/csvtoarray-plugin.js',
         'csvtohashtableplugin': './plugins/csvtohashtable-plugin.js',
         'restorabledataplugin': './plugins/restorabledata-plugin.js',
+        'buffdataplugin': './plugins/buffdata-plugin.js',
 
         // math
         'gashaponplugin': './plugins/gashapon-plugin.js',
