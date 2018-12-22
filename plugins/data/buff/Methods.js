@@ -35,10 +35,31 @@ export default {
     },
 
     removeBuff: function (key, buffKey) {
-        if (!this.buffs.hasOwnProperty(key)) {
-            return this;
+        if (this.buffs.hasOwnProperty(key)) {
+            if (buffKey === undefined) {
+                delete this.buffs[key];
+            } else {
+                this.buffs[key].remove(buffKey);
+            }
         }
-        this.buffs[key].remove(buffKey);
+        this.set(key, this.getBuffResult(key));
+        return this;
+    },
+
+    setMin: function (key, min) {
+        if (!this.bounds.hasOwnProperty(key)) {
+            this.bounds[key] = new MinMaxBounds();
+        }
+        this.bounds[key].setMin(min);
+        this.set(key, this.getBuffResult(key));
+        return this;
+    },
+
+    setMax: function (key, max) {
+        if (!this.bounds.hasOwnProperty(key)) {
+            this.bounds[key] = new MinMaxBounds();
+        }
+        this.bounds[key].setMax(max);
         this.set(key, this.getBuffResult(key));
         return this;
     },
@@ -83,11 +104,22 @@ export default {
         return this.baseValues[key];
     },
 
-    getBuffs: function (key) {
-        return this.buffs[key];
+    getBuffs: function (key, buffKey) {
+        var buffs = this.buffs[key];
+        if (buffKey === undefined) {
+            return buffs;
+        }
+        if (buffs && buffs.hasOwnProperty(buffKey)) {
+            return buffs[buffKey];
+        }
+
+        return undefined;
     },
 
     getBounds: function (key) {
+        if (!this.bounds.hasOwnProperty(key)) {
+            this.bounds[key] = new MinMaxBounds();
+        }
         return this.bounds[key];
     },
 };

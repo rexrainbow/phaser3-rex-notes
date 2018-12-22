@@ -138,6 +138,7 @@ nav:
     - Data manager: 
         - Built-in data: datamanager.md
         - Restorable data: restorabledata.md    
+        - Buff data: buffdata.md
     - Set: structs-set.md
     - Array:
         - Filter/Map: array-filter.md
