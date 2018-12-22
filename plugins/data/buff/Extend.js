@@ -1,31 +1,12 @@
-import BuffMethods from './Buff';
+import methods from './Methods.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-
-var Extend = function (dataManager, config) {
+var Extend = function (dataManager) {
     if (dataManager.buffs === undefined) {
         dataManager.buffs = {};
         dataManager.bounds = {};
     }
     if (dataManager.addBuff === undefined) {
-        Object.assign(dataManager, BuffMethods);
-    }
-    
-    var buffs = GetValue(config, 'buff', undefined);
-    if (buffs) {
-        for (var key in buffs) {
-            for (var buffKey in buffs) {
-                dataManager.addBuff(key, buffKey, buffs[buffKey]);
-            }
-        }
-    }
-    var bounds = GetValue(config, 'bounds', undefined);
-    if (bounds) {
-        var b;
-        for (var key in bounds) {
-            b = bounds[key];
-            dataManager.setBounds(key, b.min, b.max);
-        }
+        Object.assign(dataManager, methods);
     }
     return dataManager;
 }

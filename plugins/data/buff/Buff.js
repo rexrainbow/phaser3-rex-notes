@@ -1,125 +1,77 @@
-export default {
-    addBuff: function (key, buffKey, value) {
-        var buffValueType = typeof (value);
-        if (buffValueType === 'number') {
-            buffValueType = ADD;
-        } else if (buffValueType === 'string') {
-            if (value.indexOf('%') !== -1) {
-                buffValueType = ADD_BASE_PERCENT;
-                value = parseFloat(value) / 100;
-            } else {
-                buffValueType = ADD;
-                value = parseFloat(value);
-            }
-        }
+class Buff {
+    constructor() {
+        this.buffs = {};
+    }
 
-        this.enableBuff(key, buffKey);
-        var buff = this.buffs[key][buffKey];
-        buff.value = value;
-        buff.type = buffValueType;
-        return this;
-    },
-
-    enableBuff: function (key, buffKey, enable) {
+    setEnable(key, enable) {
         if (enable === undefined) {
             enable = true;
         }
         if (!this.buffs.hasOwnProperty(key)) {
-            this.buffs[key] = {};
-        }
-        if (!this.buffs[key].hasOwnProperty(buffKey)) {
-            this.buffs[key][buffKey] = {
+            this.buffs[key] = {
                 enable: true,
                 value: 0,
                 type: ADD,
+            };
+        }
+        this.buffs[key].enable = enable;
+        return this;
+    }
+
+    add(key, value) {
+        this.setEnable(key);
+
+        var valueType = typeof (value);
+        if (valueType === 'number') {
+            valueType = ADD;
+        } else if (valueType === 'string') {
+            if (value.indexOf('%') !== -1) {
+                valueType = ADD_BASE_PERCENT;
+                value = parseFloat(value) / 100;
+            } else {
+                valueType = ADD;
+                value = parseFloat(value);
             }
         }
-        var buff = this.buffs[key][buffKey];
-        buff.enable = enable;
+        var buff = this.buffs[key];
+        buff.value = value;
+        buff.type = valueType;
         return this;
-    },
+    }
 
-    removeBuff: function (key, buffKey) {
-        if (!this.buffs.hasOwnProperty(key)) {
-            // Do nothing
-        } else if (this.buffs[key].hasOwnProperty(buffKey)) {
-            delete this.buffs[key][buffKey];
+    remove(key) {
+        if (this.buffs.hasOwnProperty(key)) {
+            delete this.buffs[key];
         }
         return this;
-    },
+    }
 
-    setBounds: function (key, min, max) {
-        if (!this.bounds.hasOwnProperty(key)) {
-            this.bounds[key] = [undefined, undefined];
-        }
-        this.bounds[key][0] = min;
-        this.bounds[key][1] = max;
-        return this;
-    },
-
-    getBuffResult: function (key) {
-        return this.clamp(key, this.buff(key));
-    },
-
-    buff: function (key, baseValue) {
-        if (baseValue === undefined) {
-            baseValue = this.list[key];
-        }
+    buff(baseValue) {
         var result = baseValue;
-        if (!this.buffs.hasOwnProperty(key)) {
-            return result;
-        }
-
-        var buffs = this.buffs[key],
-            buffValue, buffValueType;
-        for (var buffKey in buffs) {
-            buffValue = buffs[buffKey];
-            if (!buffValue.enable) {
+        var buffs = this.buffs,
+            value, valueType;
+        for (var key in buffs) {
+            value = buffs[key];
+            if (!value.enable) {
                 continue;
             }
 
-            buffValueType = buffValue.type;
-            buffValue = buffValue.value;
-            switch (buffValueType) {
+            valueType = value.type;
+            value = value.value;
+            switch (valueType) {
                 case ADD:
-                    result += buffValue;
+                    result += value;
                     break;
                 case ADD_BASE_PERCENT:
-                    result += baseValue * buffValue;
+                    result += baseValue * value;
                     break;
             }
         }
         return result;
-    },
-
-    clamp: function (key, value) {
-        if (value === undefined) {
-            value = this.list[key];
-        }
-
-        if (!this.bounds.hasOwnProperty(key)) {
-            return value;
-        }
-
-        var bounds = this.bounds[key];
-        var min = bounds[0],
-            max = bounds[1];
-        if ((min !== undefined) && (value < min)) {
-            value = min;
-        } else if ((max !== undefined) && (value > max)) {
-            value = max;
-        }
-        return value;
-    },
-
-    getBuffs: function (key) {
-        return this.buffs[key];
-    },
-
-    getBounds: function (key) {
-        return this.bounds[key];
-    },
-};
+    }
+}
 
 const ADD = 0
 const ADD_BASE_PERCENT = 1;
+
+export default Buff;

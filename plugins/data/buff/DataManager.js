@@ -1,23 +1,23 @@
-import BuffMethods from './Buff.js';
-import Extend from './Extend';
+import methods from './Methods.js';
+import Extend from './Extend.js';
 
 const Base = Phaser.Data.DataManager;
 const EventEmitterKlass = Phaser.Events.EventEmitter;
 
 class DataManager extends Base {
-    constructor(parent, eventEmitter, config) {
+    constructor(parent, eventEmitter) {
         if (eventEmitter === undefined) {
             eventEmitter = new EventEmitterKlass();
         }
         super(parent, eventEmitter);
 
-        Extend(this, config);
+        Extend(this);
     }
 }
 
 Object.assign(
     DataManager.prototype,
-    BuffMethods
+    methods
 );
 
 export default DataManager;

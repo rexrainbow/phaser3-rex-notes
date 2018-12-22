@@ -12,12 +12,12 @@ class DataManagerPlugin extends Phaser.Plugins.BasePlugin {
         eventEmitter.once('destroy', this.destroy, this);
     }
 
-    add(parent, eventEmitter, config) {
-        return new DataManager(parent, eventEmitter, config);
+    add(parent, eventEmitter) {
+        return new DataManager(parent, eventEmitter);
     }
 
-    extend(dataManager, config) {
-        return Extend(dataManager, config);
+    extend(dataManager) {
+        return Extend(dataManager);
     }
 }
 
