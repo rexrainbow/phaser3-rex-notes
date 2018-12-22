@@ -58,7 +58,7 @@ export default {
 
     buff: function (key, baseValue) {
         if (baseValue === undefined) {
-            baseValue = this.baseValues[key];
+            baseValue = this.getBaseValue(key);
         }
         if (!this.buffs.hasOwnProperty(key)) {
             return baseValue;
@@ -77,6 +77,9 @@ export default {
     },
 
     getBaseValue: function (key) {
+        if (!this.baseValues.hasOwnProperty(key)) {
+            this.baseValues[key] = 0;
+        }
         return this.baseValues[key];
     },
 
