@@ -212,33 +212,37 @@ var parser = {
     },
 
     propToTagText: function (text, prop, prevProp) {
-        if (prevProp == null)
+        if (prevProp == null) {
             prevProp = EMPTYPROP;
+        }
 
         for (var k in prevProp) {
-            if (prop.hasOwnProperty(k))
+            if (prop.hasOwnProperty(k)) {
                 continue;
+            }
 
             text = "[/" + k + "]" + text;
         }
 
         var header = "";
         for (var k in prop) {
-            if (prevProp[k] === prop[k])
+            if (prevProp[k] === prop[k]) {
                 continue;
+            }
 
-            if (k === "size")
+            if (k === "size") {
                 header += ("[size=" + prop[k].replace("px", "") + "]");
-            else if ((k === "color") || (k === "stroke") || (k === "img"))
+            } else if ((k === "color") || (k === "stroke") || (k === "img")) {
                 header += ("[" + k + "=" + prop[k] + "]");
-
-            else if (k === "u") {
-                if (prop[k] === true)
+            } else if (k === "u") {
+                if (prop[k] === true) {
                     header += "[u]";
-                else
+                } else {
                     header += ("[u=" + prop[k] + "]");
-            } else
+                }
+            } else {
                 header += ("[" + k + "]");
+            }
         }
         text = header + text;
 
@@ -261,14 +265,15 @@ var updateProp = function (prop, op, key, value) {
 };
 
 var getFontStyle = function (isBold, isItalic) {
-    if (isBold && isItalic)
+    if (isBold && isItalic) {
         return "bold italic";
-    else if (isBold)
+    } else if (isBold) {
         return "bold";
-    else if (isItalic)
+    } else if (isItalic) {
         return "italic";
-    else
+    } else {
         return "";
+    }
 };
 
 var RE_SPLITTEXT = /\[b\]|\[\/b\]|\[i\]|\[\/i\]|\[size=(\d+)\]|\[\/size\]|\[color=([a-z]+|#[0-9abcdef]+)\]|\[\/color\]|\[u\]|\[u=([a-z]+|#[0-9abcdef]+)\]|\[\/u\]|\[shadow\]|\[\/shadow\]|\[stroke\]|\[stroke=([a-z]+|#[0-9abcdef]+)\]|\[\/stroke\]|\[img=([^\]]+)\]|\[\/img\]/ig;
