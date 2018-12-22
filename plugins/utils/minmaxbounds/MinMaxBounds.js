@@ -1,7 +1,7 @@
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class Bounds {
+class MinMaxBounds {
     constructor(min, max) {
         if (IsPlainObject(min)) {
             var config = min;
@@ -32,4 +32,4 @@ class Bounds {
     }
 }
 
-export default Bounds;
+export default MinMaxBounds;

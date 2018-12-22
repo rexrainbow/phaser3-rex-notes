@@ -1,5 +1,5 @@
-import Buff from './Buff.js';
-import Bounds from './Bounds.js';
+import Buff from '../../utils/buff/Buff.js';
+import MinMaxBounds from '../../utils/minmaxbounds/MinMaxBounds.js';
 
 export default {
     addBuff: function (key, buffKey, value) {
@@ -27,7 +27,7 @@ export default {
 
     setBounds: function (key, min, max) {
         if (!this.bounds.hasOwnProperty(key)) {
-            this.bounds[key] = new Bounds();
+            this.bounds[key] = new MinMaxBounds();
         }
         this.bounds[key].setMin(min).setMax(max);
         return this;
