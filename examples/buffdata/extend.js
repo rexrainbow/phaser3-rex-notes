@@ -12,18 +12,18 @@ class Demo extends Phaser.Scene {
     create() {
         this.plugins.get('rexBuffData').extend(this.data);
 
-        this.data.set('attack', 50);
-        console.log(this.data.getBuffResult('attack'));
+        this.data.setBaseValue('attack', 50);
+        console.log(this.data.get('attack'));
 
-        this.data.addBuff('attack', 'a', '50%');
-        this.data.addBuff('attack', 'b', -3);
-        console.log(this.data.getBuffResult('attack')); // 50 + (50*0.5) + (-3) = 72
+        this.data.setBuff('attack', 'a', '50%');
+        this.data.setBuff('attack', 'b', -3);
+        console.log(this.data.get('attack')); // 50 + (50*0.5) + (-3) = 72
 
         this.data.setBounds('attack', 0, 100);
-        console.log(this.data.getBuffResult('attack'));
+        console.log(this.data.get('attack'));
 
-        this.data.addBuff('attack', 'c', 100);
-        console.log(this.data.getBuffResult('attack'));
+        this.data.setBuff('attack', 'c', 100);
+        console.log(this.data.get('attack'));
     }
 
     update() {}

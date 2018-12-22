@@ -18,7 +18,7 @@ class Buff {
         return this;
     }
 
-    add(key, value) {
+    set(key, value) {
         this.setEnable(key);
 
         var valueType = typeof (value);

@@ -2,9 +2,26 @@ import Buff from '../../utils/buff/Buff.js';
 import MinMaxBounds from '../../utils/minmaxbounds/MinMaxBounds.js';
 
 export default {
-    addBuff: function (key, buffKey, value) {
-        this.enableBuff(key, buffKey, true);
-        this.buffs[key].add(buffKey, value);
+    setBaseValue: function (key, value) {
+        this.baseValues[key] = value;
+        this.set(key, this.getBuffResult(key));
+        return this;
+    },
+
+    removeBaseValue: function (key) {
+        if (this.baseValues.hasOwnProperty(key)) {
+            delete this.baseValues[key];
+            this.remove(key);
+        }
+        return this;
+    },
+
+    setBuff: function (key, buffKey, value) {
+        if (!this.buffs.hasOwnProperty(key)) {
+            this.buffs[key] = new Buff();
+        }
+        this.buffs[key].set(buffKey, value);
+        this.set(key, this.getBuffResult(key));
         return this;
     },
 
@@ -13,6 +30,7 @@ export default {
             this.buffs[key] = new Buff();
         }
         this.buffs[key].setEnable(buffKey, enable);
+        this.set(key, this.getBuffResult(key));
         return this;
     },
 
@@ -20,8 +38,8 @@ export default {
         if (!this.buffs.hasOwnProperty(key)) {
             return this;
         }
-
         this.buffs[key].remove(buffKey);
+        this.set(key, this.getBuffResult(key));
         return this;
     },
 
@@ -30,6 +48,7 @@ export default {
             this.bounds[key] = new MinMaxBounds();
         }
         this.bounds[key].setMin(min).setMax(max);
+        this.set(key, this.getBuffResult(key));
         return this;
     },
 
@@ -39,7 +58,7 @@ export default {
 
     buff: function (key, baseValue) {
         if (baseValue === undefined) {
-            baseValue = this.list[key];
+            baseValue = this.baseValues[key];
         }
         if (!this.buffs.hasOwnProperty(key)) {
             return baseValue;
@@ -55,6 +74,10 @@ export default {
             return value;
         }
         return this.bounds[key].clamp(value);
+    },
+
+    getBaseValue: function (key) {
+        return this.baseValues[key];
     },
 
     getBuffs: function (key) {
