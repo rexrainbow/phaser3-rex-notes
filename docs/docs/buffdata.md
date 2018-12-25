@@ -123,3 +123,4 @@ A value is composed of `baseValue`, and some `buffs`, clamped by `min`, `max` va
         ```javascript
         var result = data.get(key);
         ```
+    - [Events](datamanager.md#events)

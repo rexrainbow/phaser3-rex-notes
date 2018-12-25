@@ -67,6 +67,8 @@ waitevents.setCompleteCallback(completeCallback, completeCallbackScope);
 var callback = waitevents.waitCallback();
 ```
 
+- `callback` : A function object which invoked when waitting event finished.
+
 For example, invokes `completeCallback` when all timers are time-out.
 
 ```javascript

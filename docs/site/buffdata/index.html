@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/board-hexagongrid/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/buffdata/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Hexagon - Notes of Phaser 3</title>
+        <title>Buff data - Notes of Phaser 3</title>
       
     
     
@@ -128,7 +128,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Hexagon
+                Buff data
               </span>
             
           
@@ -2247,10 +2247,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10" checked>
     
     <label class="md-nav__link" for="nav-10">
       Data
@@ -2266,10 +2268,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10-1" type="checkbox" id="nav-10-1">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10-1" type="checkbox" id="nav-10-1" checked>
     
     <label class="md-nav__link" for="nav-10-1">
       Data manager
@@ -2309,11 +2313,106 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../buffdata/" title="Buff data" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Buff data
+      </label>
+    
+    <a href="./" title="Buff data" class="md-nav__link md-nav__link--active">
       Buff data
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#import-class" title="Import class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
+    Install global plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-instance" title="Create instance" class="md-nav__link">
+    Create instance
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#extend-existing-data-manager" title="Extend existing data manager" class="md-nav__link">
+    Extend existing data manager
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#buff" title="Buff" class="md-nav__link">
+    Buff
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -3075,12 +3174,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-14" type="checkbox" id="nav-14" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-14" type="checkbox" id="nav-14">
     
     <label class="md-nav__link" for="nav-14">
       Board
@@ -3108,12 +3205,10 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-14-2" type="checkbox" id="nav-14-2" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-14-2" type="checkbox" id="nav-14-2">
     
     <label class="md-nav__link" for="nav-14-2">
       Grid
@@ -3141,121 +3236,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Hexagon
-      </label>
-    
-    <a href="./" title="Hexagon" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../board-hexagongrid/" title="Hexagon" class="md-nav__link">
       Hexagon
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#source-code" title="Source code" class="md-nav__link">
-    Source code
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#install-scene-plugin" title="Install scene plugin" class="md-nav__link">
-    Install scene plugin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set-world-position-of-tile-0-0" title="Set world position of tile (0, 0)" class="md-nav__link">
-    Set world position of tile (0, 0)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set-cell-size" title="Set cell size" class="md-nav__link">
-    Set cell size
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set-grid-type" title="Set grid type" class="md-nav__link">
-    Set grid type
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-world-position" title="Get world position" class="md-nav__link">
-    Get world position
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-tile-position" title="Get tile position" class="md-nav__link">
-    Get tile position
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#directions" title="Directions" class="md-nav__link">
-    Directions
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -3610,8 +3595,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#install-scene-plugin" title="Install scene plugin" class="md-nav__link">
-    Install scene plugin
+  <a href="#import-class" title="Import class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
+    Install global plugin
   </a>
   
 </li>
@@ -3621,46 +3613,24 @@
     Create instance
   </a>
   
-</li>
+    <nav class="md-nav">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#set-world-position-of-tile-0-0" title="Set world position of tile (0, 0)" class="md-nav__link">
-    Set world position of tile (0, 0)
+  <a href="#extend-existing-data-manager" title="Extend existing data manager" class="md-nav__link">
+    Extend existing data manager
   </a>
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#set-cell-size" title="Set cell size" class="md-nav__link">
-    Set cell size
-  </a>
+      </ul>
+    </nav>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#set-grid-type" title="Set grid type" class="md-nav__link">
-    Set grid type
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-world-position" title="Get world position" class="md-nav__link">
-    Get world position
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-tile-position" title="Get tile position" class="md-nav__link">
-    Get tile position
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#directions" title="Directions" class="md-nav__link">
-    Directions
+  <a href="#buff" title="Buff" class="md-nav__link">
+    Buff
   </a>
   
 </li>
@@ -3686,103 +3656,126 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/board-hexagongrid.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/buffdata.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Hexagon</h1>
+                  <h1>Buff data</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Hexagon grid object of Board system.</p>
+<p>Data manager with buffs, extends from <a href="../datamanager/">built-in data manager</a>.</p>
 <ul>
 <li>Author: Rex</li>
-<li>Grid object of board</li>
+<li>Member of scene</li>
 </ul>
 <h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p>Included in <a href="../board/#source-code">board plugin</a>.</p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/buffdata-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexbuffdataplugin.min.js">minify</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p>See <a href="../board/#usage">board examples</a>.</p>
-<h3 id="install-scene-plugin">Install scene plugin<a class="headerlink" href="#install-scene-plugin" title="Permanent link">&para;</a></h3>
-<p>Included in board plugin.</p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/buffdata">Sample code</a></p>
+<p>User could import class directly, or install it by global plugin.</p>
+<h3 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">rexBuffData</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/buffdata.js&#39;</span><span class="p">;</span>
+</pre></div>
+
+<h3 id="install-global-plugin">Install global plugin<a class="headerlink" href="#install-global-plugin" title="Permanent link">&para;</a></h3>
+<p>Install plugin in <a href="../game/#configuration">configuration of game</a></p>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">BuffDataPlugin</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/buffdata-plugin.js&#39;</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexBuffData&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">BuffDataPlugin</span><span class="p">,</span>
+            <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="p">}</span>
+        <span class="c1">// ...</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</pre></div>
+
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">grid</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">hexagonGrid</span><span class="p">({</span>
-    <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">cellWidth</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">cellHeight</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="c1">// size: undefined,</span>
-    <span class="nx">staggeraxis</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="nx">staggerindex</span><span class="o">:</span> <span class="mi">1</span>
-<span class="p">});</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexBuffData&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">parent</span><span class="p">);</span>
+<span class="c1">// var data = scene.plugins.get(&#39;rexBuffData&#39;).add(parent, eventEmitter);</span>
 </pre></div>
 
 <ul>
-<li><code>x</code>, <code>y</code> : World position of origin tile (i.e. tileX = 0, tileY = 0)</li>
-<li><code>cellWidth</code> : The width of the cell, in pixels.</li>
-<li><code>cellHeight</code> : The height of the cell, in pixels.</li>
-<li><code>size</code> : Distance between center to each corner. Get <code>cellWidth</code> and <code>cellHeight</code> from <code>size</code> if this parameter is not undefined.</li>
-<li><code>staggeraxis</code><ul>
-<li><code>0</code>, or <code>y</code></li>
-<li><code>1</code>, or <code>x</code></li>
+<li><code>data</code> : Buff data manager</li>
+<li><code>parent</code> : The object (a scene, or a game object) that this DataManager belongs to.</li>
+<li><code>eventEmitter</code> : The DataManager's <a href="../eventemitter3/">event emitter</a>.</li>
 </ul>
-</li>
-<li><code>staggerindex</code><ul>
-<li><code>0</code>, or <code>even</code></li>
-<li><code>1</code>, or <code>odd</code></li>
-</ul>
-</li>
-</ul>
-<h3 id="set-world-position-of-tile-0-0">Set world position of tile (0, 0)<a class="headerlink" href="#set-world-position-of-tile-0-0" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">grid</span><span class="p">.</span><span class="nx">setOriginPosition</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">);</span>
-</pre></div>
-
-<h3 id="set-cell-size">Set cell size<a class="headerlink" href="#set-cell-size" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">grid</span><span class="p">.</span><span class="nx">setCellSize</span><span class="p">(</span><span class="nx">cellWidth</span><span class="p">,</span> <span class="nx">cellHeight</span><span class="p">);</span>
-</pre></div>
-
-<h3 id="set-grid-type">Set grid type<a class="headerlink" href="#set-grid-type" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">grid</span><span class="p">.</span><span class="nx">setType</span><span class="p">(</span><span class="nx">staggeraxis</span><span class="p">,</span> <span class="nx">staggerindex</span><span class="p">);</span>
+<h4 id="extend-existing-data-manager">Extend existing data manager<a class="headerlink" href="#extend-existing-data-manager" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexBuffData&#39;</span><span class="p">).</span><span class="nx">extend</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
 </pre></div>
 
 <ul>
-<li><code>staggeraxis</code><ul>
-<li><code>0</code>, or <code>y</code></li>
-<li><code>1</code>, or <code>x</code></li>
+<li><code>data</code> : Existing data manager</li>
 </ul>
-</li>
-<li><code>staggerindex</code><ul>
-<li><code>0</code>, or <code>even</code></li>
-<li><code>1</code>, or <code>odd</code></li>
-</ul>
-</li>
-</ul>
-<h3 id="get-world-position">Get world position<a class="headerlink" href="#get-world-position" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">worldX</span> <span class="o">=</span> <span class="nx">grid</span><span class="p">.</span><span class="nx">getWorldX</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">worldY</span> <span class="o">=</span> <span class="nx">grid</span><span class="p">.</span><span class="nx">getWorldY</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">);</span>
-</pre></div>
-
-<h3 id="get-tile-position">Get tile position<a class="headerlink" href="#get-tile-position" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tileX</span> <span class="o">=</span> <span class="nx">grid</span><span class="p">.</span><span class="nx">getTileX</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">tileY</span> <span class="o">=</span> <span class="nx">grid</span><span class="p">.</span><span class="nx">getTileY</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">);</span>
-</pre></div>
-
-<h3 id="directions">Directions<a class="headerlink" href="#directions" title="Permanent link">&para;</a></h3>
+<h3 id="buff">Buff<a class="headerlink" href="#buff" title="Permanent link">&para;</a></h3>
+<p>A value is composed of <code>baseValue</code>, and some <code>buffs</code>, clamped by <code>min</code>, <code>max</code> values.</p>
 <ul>
-<li>staggeraxis = <code>0</code>/<code>y</code><ul>
-<li><code>0</code> : Down-right</li>
-<li><code>1</code> : Down</li>
-<li><code>2</code> : Down-left</li>
-<li><code>3</code> : Up-left</li>
-<li><code>4</code> : Up</li>
-<li><code>5</code> : Up-right</li>
+<li>
+<p>Base value</p>
+<ul>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">data</span><span class="p">.</span><span class="nx">setBaseValue</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+</pre></div></li>
+<li>Remove
+    <div class="codehilite"><pre><span></span><span class="nx">data</span><span class="p">.</span><span class="nx">removeBaseValue</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</pre></div></li>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">baseValue</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">getBaseValue</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</pre></div></li>
 </ul>
 </li>
-<li>staggeraxis = <code>1</code>/<code>x</code><ul>
-<li><code>0</code> : Right</li>
-<li><code>1</code> : Down-right</li>
-<li><code>2</code> : Down-left</li>
-<li><code>3</code> : Left</li>
-<li><code>4</code> : Up-left</li>
-<li><code>5</code> : Up-right</li>
+<li>
+<p>Buffs, each value can have many buffs, or no buff.</p>
+<ul>
+<li>Add/set a buff
+    <div class="codehilite"><pre><span></span><span class="nx">data</span><span class="p">.</span><span class="nx">setBuff</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">buffKey</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>value</code> :<ul>
+<li>A number</li>
+<li>A string for percentage like <code>'10%'</code>, which means that <code>(baseValue * percentage)</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Remove a buff of a key
+    <div class="codehilite"><pre><span></span><span class="nx">data</span><span class="p">.</span><span class="nx">removeBuff</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">buffKey</span><span class="p">);</span>
+</pre></div></li>
+<li>Remove all buffs of a key
+    <div class="codehilite"><pre><span></span><span class="nx">data</span><span class="p">.</span><span class="nx">removeBuff</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</pre></div></li>
+<li>Get a buff value
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">buffValue</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">getBuffs</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">buffKey</span><span class="p">).</span><span class="nx">value</span><span class="p">;</span>
+</pre></div></li>
+</ul>
+</li>
+<li>Min, max bounds, optional.<ul>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">data</span><span class="p">.</span><span class="nx">setMin</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">min</span><span class="p">);</span>
+</pre></div>
+    <div class="codehilite"><pre><span></span><span class="nx">data</span><span class="p">.</span><span class="nx">setMax</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span>
+</pre></div>
+    <div class="codehilite"><pre><span></span><span class="nx">data</span><span class="p">.</span><span class="nx">setBounds</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>min</code>, <code>max</code> : Clamp buffed result value between <code>min</code> and <code>max</code> value. Set <code>undefined</code> to ignore it.</li>
+</ul>
+</li>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">min</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">getBounds</span><span class="p">(</span><span class="nx">key</span><span class="p">).</span><span class="nx">min</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">getBounds</span><span class="p">(</span><span class="nx">key</span><span class="p">).</span><span class="nx">max</span><span class="p">;</span>
+</pre></div></li>
+</ul>
+</li>
+<li>Buffed result<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</pre></div></li>
+<li><a href="../datamanager/#events">Events</a></li>
 </ul>
 </li>
 </ul>
@@ -3806,7 +3799,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../board-quadgrid/" title="Quad" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../restorabledata/" title="Restorable data" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -3815,19 +3808,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Quad
+                Restorable data
               </span>
             </div>
           </a>
         
         
-          <a href="../board-chessdata/" title="Chess data" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../structs-set/" title="Set" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Chess data
+                Set
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
