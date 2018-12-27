@@ -497,3 +497,10 @@ controls.stop();
 ```javascript
 controls.setCamera(camera);
 ```
+
+### Get world position
+
+```javascript
+var out = camera.getWorldPoint(x, y);
+// var out = camera.getWorldPoint(x, y, out);
+```
