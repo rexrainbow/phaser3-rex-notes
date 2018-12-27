@@ -504,3 +504,9 @@ controls.setCamera(camera);
 var out = camera.getWorldPoint(x, y);
 // var out = camera.getWorldPoint(x, y, out);
 ```
+
+- `x` , `y` : Position of camera.
+- `out` : World position `{x, y}`
+
+!!! warning
+    Works for zoom of 1 with any resolution, but resolution > 1 and zoom !== 1 breaks

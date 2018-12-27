@@ -2235,6 +2235,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#get-world-position" title="Get world position" class="md-nav__link">
+    Get world position
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4065,6 +4072,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#get-world-position" title="Get world position" class="md-nav__link">
+    Get world position
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4505,6 +4519,20 @@ An invisible camera will not render anything and will skip input tests.</p>
 <h4 id="other-methods">Other methods<a class="headerlink" href="#other-methods" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><span class="nx">controls</span><span class="p">.</span><span class="nx">setCamera</span><span class="p">(</span><span class="nx">camera</span><span class="p">);</span>
 </pre></div>
+
+<h3 id="get-world-position">Get world position<a class="headerlink" href="#get-world-position" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">getWorldPoint</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+<span class="c1">// var out = camera.getWorldPoint(x, y, out);</span>
+</pre></div>
+
+<ul>
+<li><code>x</code> , <code>y</code> : Position of camera.</li>
+<li><code>out</code> : World position <code>{x, y}</code></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Works for zoom of 1 with any resolution, but resolution &gt; 1 and zoom !== 1 breaks</p>
+</div>
                 
                   
                 
