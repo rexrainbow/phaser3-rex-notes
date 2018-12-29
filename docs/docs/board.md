@@ -259,16 +259,16 @@ var tileXYZ = board.chessToTileXYZ(chess);
 board.forEachTileXY(function(tileXY, board) {
     // var tileX = tileXY.x;
     // var tileY = tileXY.y;
-}, scopr);
+}, scope, order);
 ```
 
 Iteration order :
 
 ```javascript
-board.forEachTileXY(function(tileXY, board, order) {
+board.forEachTileXY(function(tileXY, board) {
     // var tileX = tileXY.x;
     // var tileY = tileXY.y;
-}, scopr);
+}, scope, order);
 ```
 
 - `order` :
@@ -281,7 +281,7 @@ Or using for-loop
 
 ```javascript
 for (var tileY = 0; tileY < board.height; tileY++) {
-    for (var tileX = 0; tileX > board.width; tileX++) {
+    for (var tileX = 0; tileX < board.width; tileX++) {
         // ...
     }
 }

@@ -4257,14 +4257,14 @@
 <div class="codehilite"><pre><span></span><span class="nx">board</span><span class="p">.</span><span class="nx">forEachTileXY</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">tileXY</span><span class="p">,</span> <span class="nx">board</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// var tileX = tileXY.x;</span>
     <span class="c1">// var tileY = tileXY.y;</span>
-<span class="p">},</span> <span class="nx">scopr</span><span class="p">);</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">,</span> <span class="nx">order</span><span class="p">);</span>
 </pre></div>
 
 <p>Iteration order :</p>
-<div class="codehilite"><pre><span></span><span class="nx">board</span><span class="p">.</span><span class="nx">forEachTileXY</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">tileXY</span><span class="p">,</span> <span class="nx">board</span><span class="p">,</span> <span class="nx">order</span><span class="p">)</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><span class="nx">board</span><span class="p">.</span><span class="nx">forEachTileXY</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">tileXY</span><span class="p">,</span> <span class="nx">board</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// var tileX = tileXY.x;</span>
     <span class="c1">// var tileY = tileXY.y;</span>
-<span class="p">},</span> <span class="nx">scopr</span><span class="p">);</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">,</span> <span class="nx">order</span><span class="p">);</span>
 </pre></div>
 
 <ul>
@@ -4278,7 +4278,7 @@
 </ul>
 <p>Or using for-loop</p>
 <div class="codehilite"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">tileY</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">tileY</span> <span class="o">&lt;</span> <span class="nx">board</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span> <span class="nx">tileY</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">tileX</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">tileX</span> <span class="o">&gt;</span> <span class="nx">board</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span> <span class="nx">tileX</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">tileX</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">tileX</span> <span class="o">&lt;</span> <span class="nx">board</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span> <span class="nx">tileX</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// ...</span>
     <span class="p">}</span>
 <span class="p">}</span>
