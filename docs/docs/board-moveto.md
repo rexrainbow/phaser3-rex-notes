@@ -24,7 +24,8 @@ var moveTo = scene.rexBoard.add.moveTo(chess, {
     // speed: 400,
     // rotateToTarget: false,
     // occupiedTest: false,
-    // blockerTest: false
+    // blockerTest: false,
+    // sneak: false,
 })
 ```
 
@@ -32,6 +33,8 @@ var moveTo = scene.rexBoard.add.moveTo(chess, {
 - `rotateToTarget` : Set `true` to change angle towards path.
 - `occupiedTest` : Set `true` to test if target tile position is occupied or not, in moveable testing.
 - `blockerTest` : Set `true` to test [blocker property](board-chessdata.md#blocker) in moveable testing.
+- `sneak` : Set `true` to allow changing tileZ when target tile position is occupied. Changing back when target tile position is not occupied.
+    - `occupiedTest` will be ignored when `sneak` is `true`.
 
 ### Move to destination tile
 

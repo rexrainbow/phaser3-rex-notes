@@ -3828,7 +3828,8 @@
     <span class="c1">// speed: 400,</span>
     <span class="c1">// rotateToTarget: false,</span>
     <span class="c1">// occupiedTest: false,</span>
-    <span class="c1">// blockerTest: false</span>
+    <span class="c1">// blockerTest: false,</span>
+    <span class="c1">// sneak: false,</span>
 <span class="p">})</span>
 </pre></div>
 
@@ -3837,6 +3838,10 @@
 <li><code>rotateToTarget</code> : Set <code>true</code> to change angle towards path.</li>
 <li><code>occupiedTest</code> : Set <code>true</code> to test if target tile position is occupied or not, in moveable testing.</li>
 <li><code>blockerTest</code> : Set <code>true</code> to test <a href="../board-chessdata/#blocker">blocker property</a> in moveable testing.</li>
+<li><code>sneak</code> : Set <code>true</code> to allow changing tileZ when target tile position is occupied. Changing back when target tile position is not occupied.<ul>
+<li><code>occupiedTest</code> will be ignored when <code>sneak</code> is <code>true</code>.</li>
+</ul>
+</li>
 </ul>
 <h3 id="move-to-destination-tile">Move to destination tile<a class="headerlink" href="#move-to-destination-tile" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="nx">moveTo</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">);</span>

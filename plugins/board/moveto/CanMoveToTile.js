@@ -1,3 +1,5 @@
+import GetSneakTileZ from './GetSneakTileZ.js';
+
 var CanMoveToTile = function (tileX, tileY, direction) {
     var board = this.chessData.board;
     // Chess is not in a board
@@ -21,8 +23,32 @@ var CanMoveToTile = function (tileX, tileY, direction) {
         direction = this.chessData.getTileDirection(tileX, tileY);
     }
 
+    if (this.sneakMode) {
+        if (this.tileZSave === undefined) {
+            if (board.contains(tileX, tileY, myTileZ)) {
+                // Sneak
+                this.tileZSave = myTileZ;
+                var sneakTileZ = GetSneakTileZ.call(this, this.tileZSave);
+                board.moveChess(this.gameObject, tileX, tileY, sneakTileZ);
+                myTileZ = sneakTileZ;
+            }
+        } else {
+            if (board.contains(tileX, tileY, this.tileZSave)) {
+                // Sneak
+                var sneakTileZ = GetSneakTileZ.call(this, this.tileZSave);
+                board.moveChess(this.gameObject, tileX, tileY, sneakTileZ);
+                myTileZ = sneakTileZ;
+            } else {
+                // Go back
+                board.moveChess(this.gameObject, tileX, tileY, this.tileZSave);
+                myTileZ = this.tileZSave;
+                this.tileZSave = undefined;
+            }
+        }
+    }
+
     // Occupied test
-    if (this.occupiedTest) {
+    if (this.occupiedTest && !this.sneakMode) {
         if (board.contains(tileX, tileY, myTileZ)) {
             return false;
         }

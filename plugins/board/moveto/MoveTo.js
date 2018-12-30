@@ -33,6 +33,7 @@ class MoveTo extends TickTask {
         this.setBlockerTest(GetValue(o, 'blockerTest', false));
         this.setEdgeBlockerTest(GetValue(o, 'edgeBlockerTest', false));
         this.setMoveableTestCallback(GetValue(o, 'moveableTest', undefined), GetValue(o, 'moveableTestScope', undefined));
+        this.setSneakEnable(GetValue(o, 'sneak', false));
         this.destinationTileX = GetValue(o, 'destinationTileX', null);
         this.destinationTileY = GetValue(o, 'destinationTileY', null);
         this.destinationDirection = GetValue(o, 'destinationDirection', null);
@@ -167,6 +168,16 @@ class MoveTo extends TickTask {
     setMoveableTestCallback(callback, scope) {
         this.moveableTestCallback = callback;
         this.moveableTestScope = scope;
+        return this;
+    }
+
+    setSneakEnable(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+
+        this.sneakMode = enable;
+        this.tileZSave = undefined;
         return this;
     }
 
