@@ -39,6 +39,7 @@ import ScaleDownDestroy from './scale-down-destroy.js';
 import PopUp from './popup.js';
 import PathFollower from './pathfollower.js';
 import Flash from './flash.js';
+import ShakePosition from './shakeposition.js';
 import Interception from './interception.js';
 
 // member of game object, arcade behavior
@@ -133,6 +134,7 @@ export {
     PopUp,
     PathFollower,
     Flash,
+    ShakePosition,
     Interception,
 
     // member of game object, arcade behavior

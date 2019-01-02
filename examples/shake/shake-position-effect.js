@@ -1,4 +1,4 @@
-import FlashPlugin from '../../plugins/flash-plugin.js';
+import ShakePlugin from '../../plugins/shakeposition-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -11,18 +11,25 @@ class Demo extends Phaser.Scene {
 
     create() {
         var dot = this.add.circle(200, 200, 20, 0x888888);
-        dot.flash = this.plugins.get('rexFlash').add(dot, {
+        dot.shake = this.plugins.get('rexShake').add(dot, {
             duration: 1000,
-            repeat: 2
+            // magnitude: 50,
+            // mode: 'effect'
         }).on('complete', function () {
             console.log('complete');
         })
         this.input.on('pointerdown', function (pointer) {
-            dot.flash.flash();
+            dot.shake.shake();
         });
+
+        this.dot = dot;
+        this.print = this.add.text(0, 0, '');
     }
 
-    update() {}
+    update() {
+        // Position won't be changed here if mode is 'effect'
+        this.print.text = this.dot.x + ',' + this.dot.y;
+    }
 }
 
 var config = {
@@ -33,8 +40,8 @@ var config = {
     scene: Demo,
     plugins: {
         global: [{
-            key: 'rexFlash',
-            plugin: FlashPlugin,
+            key: 'rexShake',
+            plugin: ShakePlugin,
             start: true
         }]
     }

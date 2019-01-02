@@ -83,7 +83,7 @@ class Flash extends TickTask {
         return this;
     }
 
-    flash(duration, repeat) {
+    start(duration, repeat) {
         if (typeof (duration) !== 'number') {
             var config = duration;
             duration = GetValue(config, 'duration', undefined);
@@ -104,6 +104,11 @@ class Flash extends TickTask {
             this.nowTime = 0;
             super.start();
         }
+        return this;
+    }
+
+    flash(duration, repeat) {
+        this.start(duration, repeat);
         return this;
     }
 
