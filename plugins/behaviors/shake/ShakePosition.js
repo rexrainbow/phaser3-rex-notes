@@ -30,12 +30,16 @@ class ShakePosition extends TickTask {
 
     toJSON() {
         return {
+            mode: this.mode,
             isRunning: this.isRunning,
+            enable: this.enable,
             timeScale: this.timeScale,
+            magnitudeMode: magnitudeMode,
             duration: this.duration,
             magnitude: this.magnitude,
             nowTime: this.nowTime,
-            magnitudeMode: magnitudeMode,
+            ox: this.ox,
+            oy: this.oy,
         };
     }
 
@@ -115,9 +119,9 @@ class ShakePosition extends TickTask {
         return this;
     }
 
-    start(magnitude, duration) {
-        if (typeof (magnitude) !== 'number') {
-            var config = magnitude;
+    start(duration, magnitude) {
+        if (typeof (duration) !== 'number') {
+            var config = duration;
             magnitude = GetValue(config, 'magnitude', undefined);
             duration = GetValue(config, 'duration', undefined);
         }
@@ -133,8 +137,8 @@ class ShakePosition extends TickTask {
         return this;
     }
 
-    shake(magnitude, duration) {
-        this.start(magnitude, duration);
+    shake(duration, magnitude) {
+        this.start(duration, magnitude);
         return this;
     }
 

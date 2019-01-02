@@ -53,7 +53,7 @@ var flash = scene.plugins.get('rexFlash').add(gameObject, {
 });
 ```
 
-- `duration` : Duration of invisible(50%) and visible(50%).
+- `duration` : Duration of invisible(50%) and visible(50%), in millisecond.
 - `repeat` : The number of times the flashing will repeat itself (a value of 1 means the flash will play twice, as it repeated once)
 
 ### Start flashing
@@ -66,11 +66,10 @@ flash.flash();
 or
 
 ```javascript
-var config = {
+flash.flash({
     duration: 500,
     repeat: 2
-}
-flash.flash(config);
+});
 ```
 
 ### Stop flashing

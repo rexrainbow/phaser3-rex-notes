@@ -51,6 +51,7 @@
 1. [Scale-down-destroy](scaledowndestroy.md): Scale down game object then destroy it.
 1. [Scroller](scroller.md): Drag content. Slow down when dragging released, pull back when out of bounds.
 1. [Sequence](sequence.md): Run sequence commands in array.
+1. [Shake-position](shake-position.md): Shake position of game object.
 1. [Slider](slider.md): Drag thumb on a slider bar.
 1. [Swirl-pipeline](swirlpipeline.md): Swirl post processing filter.
 1. [TagText](tagtext.md): Displays text with multi-color, font face, or font size with tags.
