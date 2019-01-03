@@ -14,7 +14,7 @@ class Demo extends Phaser.Scene {
         dot.shake = this.plugins.get('rexShake').add(dot, {
             duration: 1000,
             // magnitude: 50,
-            // mode: 'effect'
+            mode: 'effect'
         }).on('complete', function () {
             console.log('complete');
         })
