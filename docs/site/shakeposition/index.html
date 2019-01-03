@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/lifetime/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/shakeposition/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Life time - Notes of Phaser 3</title>
+        <title>Shakeposition - Notes of Phaser 3</title>
       
     
     
@@ -128,7 +128,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Life time
+                Shakeposition
               </span>
             
           
@@ -3003,12 +3003,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-13" type="checkbox" id="nav-13" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-13" type="checkbox" id="nav-13">
     
     <label class="md-nav__link" for="nav-13">
       Time
@@ -3072,107 +3070,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Life time
-      </label>
-    
-    <a href="./" title="Life time" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../lifetime/" title="Life time" class="md-nav__link">
       Life time
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#source-code" title="Source code" class="md-nav__link">
-    Source code
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#import-class" title="Import class" class="md-nav__link">
-    Import class
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
-    Install global plugin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#events" title="Events" class="md-nav__link">
-    Events
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#life-time" title="Life-time" class="md-nav__link">
-    Life-time
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#startstoppauseresume" title="Start/Stop/Pause/Resume" class="md-nav__link">
-    Start/Stop/Pause/Resume
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -3627,6 +3529,55 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#start-shaking" title="Start shaking" class="md-nav__link">
+    Start shaking
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stop-shakeing" title="Stop shakeing" class="md-nav__link">
+    Stop shakeing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enable" title="Enable" class="md-nav__link">
+    Enable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-updating-mode" title="Set updating mode" class="md-nav__link">
+    Set updating mode
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-duration" title="Set duration" class="md-nav__link">
+    Set duration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-magnitude" title="Set magnitude" class="md-nav__link">
+    Set magnitude
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-magnitude-mode" title="Set magnitude mode" class="md-nav__link">
+    Set magnitude mode
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#events" title="Events" class="md-nav__link">
     Events
   </a>
@@ -3634,15 +3585,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#life-time" title="Life-time" class="md-nav__link">
-    Life-time
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#startstoppauseresume" title="Start/Stop/Pause/Resume" class="md-nav__link">
-    Start/Stop/Pause/Resume
+  <a href="#status" title="Status" class="md-nav__link">
+    Status
   </a>
   
 </li>
@@ -3668,38 +3612,38 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/lifetime.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/shakeposition.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Life time</h1>
+                  <h1>Shakeposition</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Destroy game object when time-out.</p>
+<p>Shake position of game object.</p>
 <ul>
 <li>Author: Rex</li>
 <li>Behavior of game object</li>
 </ul>
 <h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/lifeTime-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexlifeTimeplugin.min.js">minify</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/shakeposition-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexshakepositionplugin.min.js">minify</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/lifeTime">Sample code</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/shake">Sample code</a></p>
 <p>User could import class directly, or install it by global plugin.</p>
 <h3 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">rexLifeTime</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/lifeTime.js&#39;</span><span class="p">;</span>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">rexShake</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/shakeposition.js&#39;</span><span class="p">;</span>
 </pre></div>
 
 <h3 id="install-global-plugin">Install global plugin<a class="headerlink" href="#install-global-plugin" title="Permanent link">&para;</a></h3>
 <p>Install plugin in <a href="../game/#configuration">configuration of game</a></p>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">LifeTimePlugin</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/lifeTime-plugin.js&#39;</span><span class="p">;</span>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">ShakePlugin</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/shakeposition-plugin.js&#39;</span><span class="p">;</span>
 
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
-            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexLifeTime&#39;</span><span class="p">,</span>
-            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">LifeTimePlugin</span><span class="p">,</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexShake&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">ShakePlugin</span><span class="p">,</span>
             <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
-        <span class="p">}</span>
+        <span class="p">},</span>
         <span class="c1">// ...</span>
         <span class="p">]</span>
     <span class="p">}</span>
@@ -3709,56 +3653,105 @@
 </pre></div>
 
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">lifeTime</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexLifeTime&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="p">{</span>
-    <span class="nx">lifeTime</span><span class="o">:</span> <span class="mi">1000</span><span class="p">,</span>
-    <span class="c1">// destroy: true,</span>
-    <span class="c1">// start: true</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">shake</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexShake&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="p">{</span>
+    <span class="c1">// mode: 1, // 0|&#39;effect&#39;|1|&#39;behavior&#39;</span>
+    <span class="c1">// duration: 500,</span>
+    <span class="c1">// magnitude: 10,</span>
+    <span class="c1">// magnitudeMode: 1, // 0|&#39;constant&#39;|1|&#39;decay&#39;</span>
 <span class="p">});</span>
 </pre></div>
 
 <ul>
-<li><code>lifeTime</code> : Life time in ms.</li>
-<li><code>destroy</code> : Set <code>true</code> to destroy game object when time-out.</li>
-<li><code>start</code>: Set <code>true</code> to starting counting now.</li>
+<li><code>mode</code> :<ul>
+<li><code>'effect'</code>, or <code>0</code> : Shake position in post-update stage, and restore in pre-update stage.</li>
+<li><code>'behavior'</code>, or <code>1</code> : Shake position in pre-update stage.</li>
+</ul>
+</li>
+<li><code>duration</code> : Duration of shaking, in millisecond.</li>
+<li><code>magnitude</code> : The strength of the shake, in pixels.</li>
+<li><code>magnitudeMode</code> :<ul>
+<li><code>'constant'</code>, or <code>0</code> : Constant strength of the shake.</li>
+<li><code>'decay'</code>, or <code>1</code> : Decay the strength of the shake.</li>
+</ul>
+</li>
+</ul>
+<h3 id="start-shaking">Start shaking<a class="headerlink" href="#start-shaking" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">shake</span><span class="p">.</span><span class="nx">shake</span><span class="p">();</span>
+<span class="c1">// shake.shake(duration, magnitude);</span>
+</pre></div>
+
+<p>or</p>
+<div class="codehilite"><pre><span></span><span class="nx">shake</span><span class="p">.</span><span class="nx">shake</span><span class="p">({</span>
+    <span class="nx">duration</span><span class="o">:</span> <span class="mi">500</span><span class="p">,</span>
+    <span class="nx">magnitude</span><span class="o">:</span> <span class="mi">10</span>
+<span class="p">});</span>
+</pre></div>
+
+<h3 id="stop-shakeing">Stop shakeing<a class="headerlink" href="#stop-shakeing" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">shake</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
+</pre></div>
+
+<h3 id="enable">Enable<a class="headerlink" href="#enable" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Enable/resume (default)
+    <div class="codehilite"><pre><span></span><span class="nx">shake</span><span class="p">.</span><span class="nx">setEnable</span><span class="p">();</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">shake</span><span class="p">.</span><span class="nx">enable</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</pre></div></li>
+<li>Disable/pause
+    <div class="codehilite"><pre><span></span><span class="nx">shake</span><span class="p">.</span><span class="nx">setEnable</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">shake</span><span class="p">.</span><span class="nx">enable</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</pre></div></li>
+</ul>
+<h3 id="set-updating-mode">Set updating mode<a class="headerlink" href="#set-updating-mode" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">shake</span><span class="p">.</span><span class="nx">setMode</span><span class="p">(</span><span class="nx">mode</span><span class="p">);</span>
+</pre></div>
+
+<ul>
+<li><code>mode</code> :<ul>
+<li><code>'effect'</code>, or <code>0</code> : Shake position in post-update stage, and restore in pre-update stage.</li>
+<li><code>'behavior'</code>, or <code>1</code> : Shake position in pre-update stage.</li>
+</ul>
+</li>
+</ul>
+<h3 id="set-duration">Set duration<a class="headerlink" href="#set-duration" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">shake</span><span class="p">.</span><span class="nx">setDuration</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>
+<span class="c1">// shake.duration = duration;</span>
+</pre></div>
+
+<h3 id="set-magnitude">Set magnitude<a class="headerlink" href="#set-magnitude" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">shake</span><span class="p">.</span><span class="nx">setMagnitude</span><span class="p">(</span><span class="nx">magnitude</span><span class="p">);</span>
+<span class="nx">shake</span><span class="p">.</span><span class="nx">magnitude</span> <span class="o">=</span> <span class="nx">magnitude</span><span class="p">;</span>
+</pre></div>
+
+<ul>
+<li><code>magnitude</code> : The strength of the shake, in pixels.</li>
+</ul>
+<h3 id="set-magnitude-mode">Set magnitude mode<a class="headerlink" href="#set-magnitude-mode" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">shake</span><span class="p">.</span><span class="nx">setMagnitudeMode</span><span class="p">(</span><span class="nx">magnitudeMode</span><span class="p">);</span>
+<span class="c1">// shake.magnitudeMode = magnitudeMode;</span>
+</pre></div>
+
+<ul>
+<li><code>magnitudeMode</code> :<ul>
+<li><code>'constant'</code>, or <code>0</code> : Constant strength of the shake.</li>
+<li><code>'decay'</code>, or <code>1</code> : Decay the strength of the shake.</li>
+</ul>
+</li>
 </ul>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
-<li>On time-out
-    <div class="codehilite"><pre><span></span><span class="nx">lifeTime</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">lifeTime</span><span class="p">){});</span>
-<span class="c1">// lifeTime.once(&#39;complete&#39;, function(gameObject, lifeTime){});</span>
+<li>On reached target
+    <div class="codehilite"><pre><span></span><span class="nx">shake</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">shake</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">){});</span>
 </pre></div></li>
 </ul>
-<h3 id="life-time">Life-time<a class="headerlink" href="#life-time" title="Permanent link">&para;</a></h3>
+<h3 id="status">Status<a class="headerlink" href="#status" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Set
-    <div class="codehilite"><pre><span></span><span class="nx">lifeTime</span><span class="p">.</span><span class="nx">setLifeTime</span><span class="p">(</span><span class="nx">time</span><span class="p">);</span>
-</pre></div></li>
-<li>Add to
-    <div class="codehilite"><pre><span></span><span class="nx">lifeTime</span><span class="p">.</span><span class="nx">addToLifeTime</span><span class="p">(</span><span class="nx">time</span><span class="p">);</span>
-</pre></div></li>
-<li>Get life-time
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">time</span> <span class="o">=</span> <span class="nx">lifeTime</span><span class="p">.</span><span class="nx">lifeTime</span><span class="p">;</span>
-</pre></div></li>
-<li>Get remainder time
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">time</span> <span class="o">=</span> <span class="nx">lifeTime</span><span class="p">.</span><span class="nx">remainder</span><span class="p">;</span>
-</pre></div></li>
-<li>Is alive
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isAlive</span> <span class="o">=</span> <span class="nx">lifeTime</span><span class="p">.</span><span class="nx">isAlive</span><span class="p">;</span>
-</pre></div></li>
-</ul>
-<h3 id="startstoppauseresume">Start/Stop/Pause/Resume<a class="headerlink" href="#startstoppauseresume" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Start
-    <div class="codehilite"><pre><span></span><span class="nx">lifeTime</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
-</pre></div></li>
-<li>Stop
-    <div class="codehilite"><pre><span></span><span class="nx">lifeTime</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
-</pre></div></li>
-<li>Pause
-    <div class="codehilite"><pre><span></span><span class="nx">lifeTime</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
-</pre></div></li>
-<li>Resume
-    <div class="codehilite"><pre><span></span><span class="nx">lifeTime</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
+<li>Is shakeing
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isRunning</span> <span class="o">=</span> <span class="nx">shake</span><span class="p">.</span><span class="nx">isRunning</span><span class="p">;</span>
 </pre></div></li>
 </ul>
                 
@@ -3777,41 +3770,6 @@
       
         
 <footer class="md-footer">
-  
-    <div class="md-footer-nav">
-      <nav class="md-footer-nav__inner md-grid">
-        
-          <a href="../clock/" title="Clock" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
-            </div>
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
-                  Previous
-                </span>
-                Clock
-              </span>
-            </div>
-          </a>
-        
-        
-          <a href="../board/" title="Board" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
-                  Next
-                </span>
-                Board
-              </span>
-            </div>
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
-            </div>
-          </a>
-        
-      </nav>
-    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
