@@ -3592,19 +3592,36 @@
                   <h1>Main loop</h1>
                 
                 <ol>
-<li>game.events <code>prestep</code> event<ol>
+<li>game.events <code>prestep</code> event. Global Managers like Input and Sound update.<ol>
 <li>trigger <code>game.input.update()</code></li>
 <li>trigger <code>game.sound.update()</code></li>
 </ol>
 </li>
-<li>game.events <code>step</code> event</li>
-<li>SceneManager.update, for each active scene<ol>
+<li>game.events <code>step</code> event. User-land code and plugins<ul>
+<li>Register event
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;step&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">){</span>
+    <span class="c1">//</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+</li>
+<li>Update the Scene Manager and all active Scenes<ol>
 <li>scene.sys.events <code>preupdate</code> event<ul>
+<li>Register event
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">sys</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;preupdate&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">){</span>
+    <span class="c1">//</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
 <li>TweenManager.preUpdate() to arrange active targets</li>
 <li>UpdateList.preUpdate(), to arrange game objects in UpdateList</li>
 </ul>
 </li>
 <li>scene.sys.events <code>update</code> event<ul>
+<li>Register event
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">sys</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;update&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">){</span>
+    <span class="c1">//</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
 <li>TweenManager.update(), to run active tweens</li>
 <li>UpdateList.update<ul>
 <li>gameObject.preUpdate</li>
@@ -3613,20 +3630,55 @@
 </ul>
 </li>
 <li>scene.update()</li>
-<li>scene.sys.events <code>postupdate</code> event</li>
+<li>scene.sys.events <code>postupdate</code> event<ul>
+<li>Register event
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">sys</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;postupdate&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">){</span>
+    <span class="c1">//</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+</li>
 </ol>
 </li>
-<li>game.events <code>poststep</code> event</li>
+<li>game.events <code>poststep</code> event. Final event before rendering starts.<ul>
+<li>Register event
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;poststep&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">){</span>
+    <span class="c1">//</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+</li>
 <li>game.renderer.preRender()</li>
-<li>game.events <code>prerender</code> event</li>
+<li>game.events <code>prerender</code> event<ul>
+<li>Register event
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;prerender&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">renderer</span><span class="p">,</span> <span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">){</span>
+    <span class="c1">//</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+</li>
 <li>SceneManager.render()<ol>
 <li>Sort display list</li>
 <li>Render cameras</li>
-<li>scene.sys.events <code>render</code> event</li>
+<li>scene.sys.events <code>render</code> event<ul>
+<li>Register event
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;render&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">renderer</span><span class="p">){</span>
+    <span class="c1">//</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+</li>
 </ol>
 </li>
 <li>game.renderer.postRender()</li>
-<li>game.events <code>postrender</code> event</li>
+<li>game.events <code>postrender</code> event. Final event before the step repeats.<ul>
+<li>Register event
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;postrender&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">renderer</span><span class="p">,</span> <span class="nx">time</span><span class="p">,</span> <span class="nx">delta</span><span class="p">){</span>
+    <span class="c1">//</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+</li>
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
