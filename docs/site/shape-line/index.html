@@ -2694,6 +2694,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../snap/" title="Snap" class="md-nav__link">
+      Snap
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../distance/" title="Distance" class="md-nav__link">
       Distance
     </a>
@@ -2719,13 +2731,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11-4" type="checkbox" id="nav-11-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11-5" type="checkbox" id="nav-11-5">
     
-    <label class="md-nav__link" for="nav-11-4">
+    <label class="md-nav__link" for="nav-11-5">
       Random
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-11-4">
+      <label class="md-nav__title" for="nav-11-5">
         Random
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -2779,13 +2791,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11-6" type="checkbox" id="nav-11-6">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11-7" type="checkbox" id="nav-11-7">
     
-    <label class="md-nav__link" for="nav-11-6">
+    <label class="md-nav__link" for="nav-11-7">
       Vector
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-11-6">
+      <label class="md-nav__title" for="nav-11-7">
         Vector
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -2815,13 +2827,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11-7" type="checkbox" id="nav-11-7">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11-8" type="checkbox" id="nav-11-8">
     
-    <label class="md-nav__link" for="nav-11-7">
+    <label class="md-nav__link" for="nav-11-8">
       Geometry
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-11-7">
+      <label class="md-nav__title" for="nav-11-8">
         Geometry
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -3699,8 +3711,17 @@
         <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
     <span class="p">}</span>
     <span class="c1">// ...</span>
+
+    <span class="c1">// preUpdate(time, delta) {}</span>
 <span class="p">}</span>
-</pre></div></li>
+</pre></div><ul>
+<li><code>scene.add.existing(gameObject)</code> : Adds an existing Game Object to this Scene.<ul>
+<li>If the Game Object renders, it will be added to the Display List.</li>
+<li>If it has a <code>preUpdate</code> method, it will be added to the Update List.</li>
+</ul>
+</li>
+</ul>
+</li>
 <li>Create instance
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">line</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyLine</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">x1</span><span class="p">,</span> <span class="nx">y1</span><span class="p">,</span> <span class="nx">x2</span><span class="p">,</span> <span class="nx">y2</span><span class="p">,</span> <span class="nx">strokeColor</span><span class="p">);</span>
 </pre></div></li>

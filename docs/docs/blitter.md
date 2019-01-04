@@ -50,8 +50,13 @@ var blitter = scene.make.blitter({
             scene.add.existing(this);
         }
         // ...
+
+        // preUpdate(time, delta) {}
     }
     ```
+    - `scene.add.existing(gameObject)` : Adds an existing Game Object to this Scene.
+        - If the Game Object renders, it will be added to the Display List.
+        - If it has a `preUpdate` method, it will be added to the Update List.
 - Create instance
     ```javascript
     var blitter = new MyBlitter(scene, x, y, key);

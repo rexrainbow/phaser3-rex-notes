@@ -26,8 +26,13 @@ var triangle = scene.add.triangle(x, y, x1, y1, x2, y2, x3, y3, fillColor);
             scene.add.existing(this);
         }
         // ...
+
+        // preUpdate(time, delta) {}
     }
     ```
+    - `scene.add.existing(gameObject)` : Adds an existing Game Object to this Scene.
+        - If the Game Object renders, it will be added to the Display List.
+        - If it has a `preUpdate` method, it will be added to the Update List.
 - Create instance
     ```javascript
     var triangle = new MyTriangle(scene, x, y, x1, y1, x2, y2, x3, y3, fillColor);

@@ -163,8 +163,13 @@ var txt = scene.make.rexTagText({
             scene.add.existing(this);
         }
         // ...
+
+        // preUpdate(time, delta) {}
     }
     ```
+    - `scene.add.existing(gameObject)` : Adds an existing Game Object to this Scene.
+        - If the Game Object renders, it will be added to the Display List.
+        - If it has a `preUpdate` method, it will be added to the Update List.
 - Create instance
     ```javascript
     var txt = new MyText(scene, x, y, '<style="tag0">h</style>ello', {tags:tags});

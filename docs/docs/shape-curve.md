@@ -28,8 +28,13 @@ var curve = scene.add.curve(x, y, path, fillColor);
             scene.add.existing(this);
         }
         // ...
+
+        // preUpdate(time, delta) {}
     }
     ```
+    - `scene.add.existing(gameObject)` : Adds an existing Game Object to this Scene.
+        - If the Game Object renders, it will be added to the Display List.
+        - If it has a `preUpdate` method, it will be added to the Update List.
 - Create instance
     ```javascript
     var curve = new MyCurve(scene, x, y, path, fillColor, fillAlpha);
