@@ -142,7 +142,7 @@ Reference: [load image](loader.md#image)
         - `{start, end, random}`
             - `random`: `true` or `false`
         - `{min, max, steps}` : Pick values between min to max, with steps.
-        - `{onEmit: function() {return value}}` : Get return value from a function invoking.
+        - `{onEmit: function(particle, key, t, value) {return value}}` : Get return value from a function invoking.
     - `on` : Controls if the emitter is currently emitting a particle flow (when frequency >= 0). Already alive particles will continue to update until they expire.
     - `active` : Whether this emitter updates itself and its particles.
     - `frequency`
