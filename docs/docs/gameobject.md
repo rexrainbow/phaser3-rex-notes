@@ -295,11 +295,16 @@ Only [image](image.md) and sprite game object have teuture componment.
         constructor(scene, x, y) {
             super(scene, x, y;
             // ...
-            scene.add.existing(this);  // Add this game object to update list and display list
+            scene.add.existing(this);
         }
         // ...
+
+        // preUpdate(time, delta) {}
     }
     ```
+    - `scene.add.existing(gameObject)` : Adds an existing Game Object to this Scene.
+        - If the Game Object renders, it will be added to the Display List.
+        - If it has a `preUpdate` method, it will be added to the Update List.
 - Create instance
     ```javascript
     var image = new MyClass(scene, x, y, key);
