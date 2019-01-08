@@ -93,13 +93,6 @@ var rect = scene.add.rexRoundRectangle(x, y, width, height, radius, fillColor);
             or
             ```javascript
             {
-                radius: {x: radiusX, y: radiusY},
-                iteration: 0
-            }
-            ```
-            or
-            ```javascript
-            {
                 radius: {
                     tl: {x : radiusX, y: radiusY},
                     tr: {x : radiusX, y: radiusY},
