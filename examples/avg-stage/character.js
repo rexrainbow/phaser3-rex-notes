@@ -10,14 +10,12 @@ class Demo extends Phaser.Scene {
 
     preload() {
         this.load.image('classroom', 'assets/images/backgrounds/classroom.png');
-        debugger
         this.load.atlas('characters', 'assets/images/characters/characters.png', 'assets/images/characters/characters.json');
     }
 
     create() {
         this.stage = new Stage(this, 400, 300);
         this.stage.setBackground('classroom');
-        debugger
         this.stage.setCharacter('A', 'characters', 'A-smile', 1000);
 
         var characterA = this.stage.getCharacter('A');

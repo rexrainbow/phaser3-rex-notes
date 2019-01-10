@@ -11,6 +11,7 @@ var SetCharacter = function (name, textureKey, frame, duration) {
     if (typeof (frame) === 'number') {
         duration = frame;
     }
+
     if (duration === undefined) {
         duration = 0;
     }
