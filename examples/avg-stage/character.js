@@ -10,21 +10,15 @@ class Demo extends Phaser.Scene {
 
     preload() {
         this.load.image('classroom', 'assets/images/backgrounds/classroom.png');
-
-        var key, url;
-        for (var i = 0, icnt = names.length; i < icnt; i++) {
-            for (var j = 0, jcnt = states.length; j < jcnt; j++) {
-                key = getCharacterKey(names[i], states[j]);
-                url = 'assets/images/characters/' + key + '.png';
-                this.load.image(key, url);
-            }
-        }
+        debugger
+        this.load.atlas('characters', 'assets/images/characters/characters.png', 'assets/images/characters/characters.json');
     }
 
     create() {
         this.stage = new Stage(this, 400, 300);
         this.stage.setBackground('classroom');
-        this.stage.setCharacter('A', getCharacterKey('A', 'smile'), 1000);
+        debugger
+        this.stage.setCharacter('A', 'characters', 'A-smile', 1000);
 
         var characterA = this.stage.getCharacter('A');
         characterA.setRx(0.3);
@@ -41,26 +35,6 @@ class Demo extends Phaser.Scene {
 
     update() {}
 }
-
-var getCharacterKey = function (name, state) {
-    return name + '-' + state;
-}
-
-var names = [
-    'A',
-    'B',
-    'C'
-];
-var states = [
-    'anger',
-    'confuse',
-    'dizzy',
-    'happy',
-    'none',
-    'shock',
-    'smile'
-];
-
 
 var config = {
     type: Phaser.AUTO,

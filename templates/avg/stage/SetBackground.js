@@ -1,16 +1,15 @@
 import Element from './Element.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const GetValue = Phaser.Utils.Objects.GetValue;
-
-var SetBackground = function (gameObject, duration) {
-    if (IsPlainObject(gameObject)) {
-        var config = gameObject;
-        gameObject = GetValue(config, 'background', undefined);
+var SetBackground = function (textureKey, frame, duration) {
+    var gameObject;
+    if (typeof (textureKey) === 'string') {
+        gameObject = this.scene.add.image(0, 0, textureKey, frame);
+    } else {
+        gameObject = textureKey;
     }
-    if (typeof (gameObject) === 'string') {
-        var textureKey = gameObject;
-        gameObject = this.scene.add.image(0, 0, textureKey);
+
+    if (typeof (frame) === 'number') {
+        duration = frame;
     }
 
     if (duration === undefined) {

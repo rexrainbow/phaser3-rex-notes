@@ -1,9 +1,15 @@
 import Element from './Element.js';
 
-var SetCharacter = function (name, gameObject, duration) {
-    if (typeof (gameObject) === 'string') {
-        var textureKey = gameObject;
-        gameObject = this.scene.add.image(0, 0, textureKey);
+var SetCharacter = function (name, textureKey, frame, duration) {
+    var gameObject;
+    if (typeof (textureKey) === 'string') {
+        gameObject = this.scene.add.image(0, 0, textureKey, frame);
+    } else {
+        gameObject = textureKey;
+    }
+
+    if (typeof (frame) === 'number') {
+        duration = frame;
     }
     if (duration === undefined) {
         duration = 0;
@@ -22,4 +28,5 @@ var SetCharacter = function (name, gameObject, duration) {
     characters[name].replace(gameObject, duration);
     return this;
 }
+
 export default SetCharacter;
