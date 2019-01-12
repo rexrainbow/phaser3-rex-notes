@@ -1,4 +1,4 @@
-import GetAngle from '../../../utils/math/Between.js';
+import GetAngle from '../../../utils/math/angle/Between.js';
 
 var AngleBetween = function (tileXY0, tileXY1) {
     var x0 = this.tileXYToWorldX(tileXY0.x, tileXY0.y);
