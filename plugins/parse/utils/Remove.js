@@ -1,3 +1,4 @@
+import Parse from 'parse';
 import Query from './Query.js';
 
 var Remove = function (query, onSuccess, onError) {

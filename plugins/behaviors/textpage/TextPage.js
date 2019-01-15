@@ -1,9 +1,7 @@
 import GetSceneObject from '../../utils/system/GetSceneObject.js';
 
 const TextKlass = Phaser.GameObjects.Text;
-const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 const GetValue = Phaser.Utils.Objects.GetValue;
-const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 const Clamp = Phaser.Math.Clamp;
 
 class TextPagePlugin {
@@ -23,10 +21,10 @@ class TextPagePlugin {
      * @returns {object} this object
      */
     resetFromJSON(o) {
-        this.setText(GetFastValue(o, 'text', ''));
-        this.setWrapMode(GetFastValue(o, 'wrap', true))
-        this.setStartIdx(GetFastValue(o, 'start', 0));
-        this.setPageIdx(GetFastValue(o, 'page', -1));
+        this.setText(GetValue(o, 'text', ''));
+        this.setWrapMode(GetValue(o, 'wrap', true))
+        this.setStartIdx(GetValue(o, 'start', 0));
+        this.setPageIdx(GetValue(o, 'page', -1));
         return this;
     }
 

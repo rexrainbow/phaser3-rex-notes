@@ -1,24 +1,30 @@
+import EE from '../../utils/eventemitter/EventEmitter.js';
+import GetValue from '../../utils/object/GetValue.js';
 import Query from './Query.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
-
-class ItemPage {
+class Loader {
     constructor(config) {
-        // export
-        this.onReceived = null;
-        this.onReceivedError = null;
-        this.onGetIterItem = null; // used in ForEachItem
-        // export
         this.items = [];
-        this.startIndex = 0;
-        this.linesInPage = GetValue(config, 'linesCnt', 10);
-        this.pageIndex = 0;
-        this.isLastPage = false;
+        this.resetFromJSON(config);
     }
 
-    reset() {
+    resetFromJSON(o) {
         this.items.length = 0;
         this.startIndex = 0;
+        this.pageIndex = 0;
+        this.isLastPage = false;
+
+        var eventEmitter = GetValue(o, 'eventEmitter', undefined);
+        if (eventEmitter === undefined) {
+            eventEmitter = new EE();
+        }
+        this.eventEmitter = eventEmitter;
+        this.setLinesCount(GetValue(o, 'lines', 10));        
+    }
+
+    setLinesCount(linesCnt) {
+        this.linesInPage = linesCnt;
+        return this;
     }
 
     request(query, startIndex, linesCnt) {
@@ -43,16 +49,12 @@ class ItemPage {
                 self.isLastPage = true;
             }
 
-            if (self.onReceived) {
-                self.onReceived();
-            }
+            self.emit('load', items);
         };
         var onError = function (error) {
             self.isLastPage = false;
 
-            if (self.onReceivedError) {
-                self.onReceivedError(error);
-            }
+            self.emit('loadfail', error);
         };
         Query(query, onSuccess, onError, startIndex, linesCnt);
     }
@@ -80,10 +82,6 @@ class ItemPage {
         this.request(query, startIndex, this.linesInPage);
     }
 
-    loadAllItems(query) {
-        this.request(query);
-    }
-
     getItem(i) {
         return this.items[i - this.startIndex];
     }
@@ -102,4 +100,4 @@ class ItemPage {
 
 }
 
-export default ItemPage;
+export default Loader;
