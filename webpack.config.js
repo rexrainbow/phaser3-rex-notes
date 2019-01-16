@@ -14,7 +14,7 @@ if (!testMode) {
     phaser = path.join(phaserModule, 'src/phaser.js')
 }
 
-var projectName = process.env.myproj || "./examples/sample.js"
+var projectName = process.env.myproj || './examples/test/test.js'
 
 module.exports = {
     mode: 'development',
