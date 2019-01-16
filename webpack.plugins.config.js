@@ -100,6 +100,9 @@ module.exports = {
         // board
         'boardplugin': './plugins/board-plugin.js',
 
+        // parse
+        'parse': './plugins/parse.js',
+
         // templates
         'bejeweled': './templates/bejeweled/Bejeweled.js',
         'uiplugin': './templates/ui/ui-plugin.js',
