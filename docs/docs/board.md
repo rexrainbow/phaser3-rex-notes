@@ -295,12 +295,22 @@ for (var tileY = 0; tileY < board.height; tileY++) {
 var worldX = board.tileXYToWorldX(tileX, tileY);
 var worldY = board.tileXYToWorldY(tileX, tileY);
 ```
+or
+```javascript
+var worldXY = board.tileXYToWorldXY(tileX, tileY);  // worldXY: {x, y}
+// var out = board.tileXYToWorldXY(tileX, tileY, out);
+```
 
 ### World position -> tile position
 
 ```javascript
 var tileX = board.worldXYToTileX(worldX, worldY);
 var tileY = board.worldXYToTileY(worldX, worldY);
+```
+or
+```javascript
+var tileXY = board.worldXYToTileXY(worldX, worldY);  // tileXY: {x, y}
+// var out = board.worldXYToTileXY(worldX, worldY, out);
 ```
 
 ### Angle between world position of 2 tiles
