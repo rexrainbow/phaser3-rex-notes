@@ -1,13 +1,10 @@
 import Parse from 'parse';
-import EE from '../../utils/eventemitter/EventEmitter.js';
 import GetValue from '../../utils/object/GetValue.js';
 import Loader from '../utils/Loader.js';
 import Save from './Save.js';
 
-class ItemTable extends EE {
+class ItemTable{
     constructor(config) {
-        super();
-
         this.setClassName(GetValue(config, 'className', 'Item'));
         this.primaryKeys = {};
         var primaryKeys = GetValue(config, 'primaryKeys', undefined);
@@ -16,7 +13,6 @@ class ItemTable extends EE {
         }
 
         this.loader = new Loader({
-            eventEmitter: this,
             lines: GetValue(config, 'lines', 10)
         });
     }

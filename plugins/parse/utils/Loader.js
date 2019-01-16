@@ -1,4 +1,3 @@
-import EE from '../../utils/eventemitter/EventEmitter.js';
 import GetValue from '../../utils/object/GetValue.js';
 import Query from './Query.js';
 
@@ -13,12 +12,6 @@ class Loader {
         this.startIndex = 0;
         this.pageIndex = 0;
         this.isLastPage = false;
-
-        var eventEmitter = GetValue(o, 'eventEmitter', undefined);
-        if (eventEmitter === undefined) {
-            eventEmitter = new EE();
-        }
-        this.eventEmitter = eventEmitter;
         this.setLinesCount(GetValue(o, 'lines', 10));
     }
 
@@ -50,13 +43,11 @@ class Loader {
                         self.isLastPage = true;
                     }
 
-                    self.emit('load', items);
                     resolve(item);
                 })
                 .catch(function (error) {
                     self.isLastPage = false;
 
-                    self.emit('loadfail', error);
                     reject(error);
                 })
         });

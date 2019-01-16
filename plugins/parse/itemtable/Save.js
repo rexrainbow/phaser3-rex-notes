@@ -1,15 +1,6 @@
 var Save = function (data) {
     var self = this;
     return new Promise(function (resolve, reject) {
-        var onSave = function (item) {
-            self.emit('save', item);
-            resolve(item);
-        }
-        var onSaveFail = function (error) {
-            self.emit('savefail', error);
-            reject(error);
-        }
-
         var query = getQuery.call(self, data);
         if (query) {
             query
@@ -23,11 +14,11 @@ var Save = function (data) {
                             data.id = itemID;
                         }
                     }
-                    saveItem.call(self, data).then(onSave).catch(onSaveFail);
+                    saveItem.call(self, data).then(resolve).catch(reject);
                 })
-                .catch(onSaveFail);
+                .catch(reject);
         } else {
-            saveItem.call(self, data).then(onSave).catch(onSaveFail);
+            saveItem.call(self, data).then(resolve).catch(reject);
         }
     });
 }
