@@ -24,18 +24,43 @@ class Demo extends Phaser.Scene {
         });
 
         table
+            // Save json data
             .save({
-                name: 'rex',
+                name: 'Rex',
                 hp: 20,
                 mp: 5,
                 coin: 20
             })
             .then(function (item) {
-                console.log(item.id);
+                console.log(JSON.parse(JSON.stringify(item)));
+                return table.createQuery().get(item.id);
+            })
+            .then(function (item) {
+                console.log(JSON.parse(JSON.stringify(item)));
             })
             .catch(function (error) {
                 console.log(error);
+            });
+
+        table
+            // save parse item
+            .save(
+                table.createItem()
+                .set('name', 'Alice')
+                .set('hp', 100)
+                .increment('mp', 1)
+                .set('coin', 100)
+            )
+            .then(function (item) {
+                console.log(JSON.parse(JSON.stringify(item)));
+                return table.createQuery().get(item.id);
             })
+            .then(function (item) {
+                console.log(JSON.parse(JSON.stringify(item)));
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     }
 
     update() {}

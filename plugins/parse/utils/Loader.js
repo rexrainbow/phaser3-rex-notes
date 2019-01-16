@@ -19,7 +19,7 @@ class Loader {
             eventEmitter = new EE();
         }
         this.eventEmitter = eventEmitter;
-        this.setLinesCount(GetValue(o, 'lines', 10));        
+        this.setLinesCount(GetValue(o, 'lines', 10));
     }
 
     setLinesCount(linesCnt) {
@@ -27,7 +27,7 @@ class Loader {
         return this;
     }
 
-    request(query, startIndex, linesCnt) {
+    load(query, startIndex, linesCnt) {
         if (startIndex === undefined) {
             startIndex = 0;
         }
@@ -38,48 +38,51 @@ class Loader {
         this.items.length = 0;
 
         var self = this;
-        var onSuccess = function (items) {
-            self.items = items;
-            self.startIndex = startIndex;
-            self.pageIndex = Math.floor(startIndex / self.linesInPage);
+        return new Promise(function (resolve, reject) {
+            Query(query, startIndex, linesCnt)
+                .then(function (items) {
+                    self.items = items;
+                    self.startIndex = startIndex;
+                    self.pageIndex = Math.floor(startIndex / self.linesInPage);
+                    if (linesCnt <= 1000) {
+                        self.isLastPage = (items.length < linesCnt);
+                    } else {
+                        self.isLastPage = true;
+                    }
 
-            if (linesCnt <= 1000) {
-                self.isLastPage = (items.length < linesCnt);
-            } else {
-                self.isLastPage = true;
-            }
+                    self.emit('load', items);
+                    resolve(item);
+                })
+                .catch(function (error) {
+                    self.isLastPage = false;
 
-            self.emit('load', items);
-        };
-        var onError = function (error) {
-            self.isLastPage = false;
-
-            self.emit('loadfail', error);
-        };
-        Query(query, onSuccess, onError, startIndex, linesCnt);
+                    self.emit('loadfail', error);
+                    reject(error);
+                })
+        });
     }
 
     requestInRange(query, startIndex, linesCnt) {
-        this.request(query, startIndex, linesCnt);
+        this.load(query, startIndex, linesCnt);
     }
 
     requestTurnToPage(query, pageIndex) {
         var startIndex = pageIndex * this.linesInPage;
-        this.request(query, startIndex, this.linesInPage);
+        this.load(query, startIndex, this.linesInPage);
     }
 
     requestUpdateCurrentPage(query) {
-        this.request(query, this.startIndex, this.linesInPage);
+        this.load(query, this.startIndex, this.linesInPage);
     }
 
     requestTurnToNextPage(query) {
         var startIndex = this.startIndex + this.linesInPage;
-        this.request(query, startIndex, this.linesInPage);
+        this.load(query, startIndex, this.linesInPage);
     }
 
     requestTurnToPreviousPage(query) {
         var startIndex = this.startIndex - this.linesInPage;
-        this.request(query, startIndex, this.linesInPage);
+        this.load(query, startIndex, this.linesInPage);
     }
 
     getItem(i) {
