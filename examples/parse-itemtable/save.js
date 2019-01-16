@@ -20,23 +20,22 @@ class Demo extends Phaser.Scene {
 
         var table = new ItemTable({
             className: 'characters',
-            primaryKeys: ['name'],
-            lines: 25,
+            primaryKeys: ['name']
         });
 
         table
-            .once('save', function (item) {
-                console.log(item.id);
-            })
-            .once('savefail', function (error) {
-                console.log(error);
-            })
             .save({
                 name: 'rex',
                 hp: 20,
                 mp: 5,
                 coin: 20
-            });
+            })
+            .then(function (item) {
+                console.log(item.id);
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
     }
 
     update() {}
