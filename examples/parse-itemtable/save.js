@@ -22,15 +22,21 @@ class Demo extends Phaser.Scene {
             className: 'characters',
             primaryKeys: ['name'],
             lines: 25,
-        })
-
-        debugger
-        table.save({
-            name: 'rex',
-            hp: 20,
-            mp: 5,
-            coin: 20
         });
+
+        table
+            .once('save', function (item) {
+                console.log(item.id);
+            })
+            .once('savefail', function (error) {
+                console.log(error);
+            })
+            .save({
+                name: 'rex',
+                hp: 20,
+                mp: 5,
+                coin: 20
+            });
     }
 
     update() {}
