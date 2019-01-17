@@ -2,6 +2,7 @@ import Parse from 'parse';
 import GetValue from '../../utils/object/GetValue.js';
 import PageLoader from '../utils/PageLoader.js';
 import Save from './Save.js';
+import Remove from '../utils/Remove.js';
 
 class ItemTable {
     constructor(config) {
@@ -44,6 +45,10 @@ class ItemTable {
     }
 
     // Load methods
+    loadItem(itemId) {
+        return this.createQuery().get(itemId);
+    }
+
     loadPage(query, pageIndex) {
         return this.pageLoader.loadPage(query, pageIndex);
     }
@@ -82,10 +87,24 @@ class ItemTable {
     get isLastPage() {
         return this.pageLoader.isLastPage;
     }
+
+    // Remove
+    removeItem(itemId) {
+        return this.createItem().set('id', itemId).destroy();
+    }
+
+    // Get items count
+    getItemCount(query) {
+        if (query === undefined) {
+            query = this.createQuery();
+        }
+        return query.count();
+    }
 }
 
 var methods = {
     save: Save,
+    remove: Remove,
 }
 Object.assign(
     ItemTable.prototype,

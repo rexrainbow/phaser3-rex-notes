@@ -33,7 +33,7 @@ class Demo extends Phaser.Scene {
             })
             .then(function (item) {
                 console.log(JSON.parse(JSON.stringify(item)));
-                return table.createQuery().get(item.id);
+                return table.loadItem(item.id);
             })
             .then(function (item) {
                 console.log(JSON.parse(JSON.stringify(item)));
@@ -53,7 +53,7 @@ class Demo extends Phaser.Scene {
             )
             .then(function (item) {
                 console.log(JSON.parse(JSON.stringify(item)));
-                return table.createQuery().get(item.id);
+                return table.loadItem(item.id);
             })
             .then(function (item) {
                 console.log(JSON.parse(JSON.stringify(item)));
