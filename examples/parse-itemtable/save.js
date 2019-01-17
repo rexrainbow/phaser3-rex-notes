@@ -26,7 +26,7 @@ class Demo extends Phaser.Scene {
         table
             // Save json data
             .save({
-                name: 'Rex',
+                name: 'player0',
                 hp: 20,
                 mp: 5,
                 coin: 20
@@ -46,7 +46,7 @@ class Demo extends Phaser.Scene {
             // save parse item
             .save(
                 table.createItem()
-                .set('name', 'Alice')
+                .set('name', 'player1')
                 .set('hp', 100)
                 .increment('mp', 1)
                 .set('coin', 100)

@@ -3,6 +3,7 @@ import GetValue from '../../utils/object/GetValue.js';
 import PageLoader from '../utils/PageLoader.js';
 import Save from './Save.js';
 import Remove from '../utils/Remove.js';
+import Shuffle from '../../utils/array/Shuffle.js';
 
 class ItemTable {
     constructor(config) {
@@ -86,6 +87,39 @@ class ItemTable {
 
     get isLastPage() {
         return this.pageLoader.isLastPage;
+    }
+
+    loadRandomItems(query, count) {
+        if (typeof (query) === 'number') {
+            count = query;
+            query = undefined;
+        }
+
+        if (query === undefined) {
+            query = this.createQuery();
+        }
+        if (count === undefined) {
+            count = 1;
+        }
+
+        var self = this;
+        return new Promise(function (resolve, reject) {
+            // Load all item Id
+            query.select('id');
+            self.loadAll(query)
+                .then(function (results) {
+                    // Shuffle items
+                    Shuffle(results);
+                    var itemIds = [];
+                    for (var i = 0; i < count; i++) {
+                        itemIds.push(results[i].id);
+                    }
+                    // Load first N items by item Id
+                    query = self.createQuery().containedIn('objectId', itemIds);
+                    self.loadAll(query).then(resolve).catch(reject);
+                })
+                .catch(reject)
+        });
     }
 
     // Remove
