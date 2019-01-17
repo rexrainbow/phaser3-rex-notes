@@ -138,7 +138,7 @@ board.addChess(chess, tileX, tileY, tileZ, align);
 
 - `chess` : A game object.
 - `tileX` , `tileY` , `tileZ` : Tile position.
-- `align` : Set `true` to align (i.e. set position) chess to grid (tileX, tileY).
+- `align` : Set `true` to align (i.e. set position) chess to grid (tileX, tileY). Default is `true`.
 
 !!! note "Chess and tile position"
     - Any chess has a **(tileX, tileY, tileZ)** index

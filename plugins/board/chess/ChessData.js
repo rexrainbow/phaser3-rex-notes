@@ -47,7 +47,7 @@ class Chess {
             return this;
         }
         var tileXYZ = this.tileXYZ;
-        this.board.addChess(this.$uid, tileXYZ.x, tileXYZ.y, tileZ);
+        this.board.addChess(this.$uid, tileXYZ.x, tileXYZ.y, tileZ, false);
     }
 
     setBlocker(value) {

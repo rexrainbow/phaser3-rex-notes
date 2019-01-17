@@ -2,6 +2,9 @@ var AddChess = function (gameObject, tileX, tileY, tileZ, align) {
     if (!this.contains(tileX, tileY)) {
         return this;
     }
+    if (align === undefined) {
+        align = true;
+    }
 
     var curTileXYZ = this.chessToTileXYZ(gameObject);
     if (tileZ === undefined) {

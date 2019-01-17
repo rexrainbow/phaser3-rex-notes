@@ -4,7 +4,7 @@ var ResetChessTileXYZ = function(newTileXYZMap) {
     for(var uid in newTileXYZMap) {
         newTileXYZ = newTileXYZMap[uid];
         uid = parseInt(uid);
-        this.addChess(uid, newTileXYZ.x, newTileXYZ.y, newTileXYZ.z);
+        this.addChess(uid, newTileXYZ.x, newTileXYZ.y, newTileXYZ.z, false);
     }
     return this;
 }

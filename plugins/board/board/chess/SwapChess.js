@@ -1,4 +1,8 @@
-var SwapChess = function(gameObjectA, gameObjectB, align) {   
+var SwapChess = function (gameObjectA, gameObjectB, align) {
+    if (align === undefined) {
+        align = true;
+    }
+
     var tileXYZA = this.chessToTileXYZ(gameObjectA);
     var tileXYZB = this.chessToTileXYZ(gameObjectB);
     if ((tileXYZA == null) || (tileXYZB == null)) {
