@@ -1,4 +1,4 @@
-var Request = function (query, startIndex, linesCnt) {
+var Load = function (query, startIndex, linesCnt) {
     if (startIndex === undefined) {
         startIndex = 0;
     }
@@ -34,4 +34,4 @@ var Request = function (query, startIndex, linesCnt) {
     });
 };
 
-export default Request;
+export default Load;

@@ -1,9 +1,9 @@
 import Parse from 'parse';
 import GetValue from '../../utils/object/GetValue.js';
-import Loader from '../utils/Loader.js';
+import PageLoader from '../utils/PageLoader.js';
 import Save from './Save.js';
 
-class ItemTable{
+class ItemTable {
     constructor(config) {
         this.setClassName(GetValue(config, 'className', 'Item'));
         this.primaryKeys = {};
@@ -12,7 +12,7 @@ class ItemTable{
             this.addPrimaryKey(primaryKeys);
         }
 
-        this.loader = new Loader({
+        this.pageLoader = new PageLoader({
             lines: GetValue(config, 'lines', 10)
         });
     }
@@ -41,6 +41,46 @@ class ItemTable{
 
     createQuery() {
         return new Parse.Query(this.customClass);
+    }
+
+    // Load methods
+    loadPage(query, pageIndex) {
+        return this.pageLoader.loadPage(query, pageIndex);
+    }
+
+    loadCurrentPage(query) {
+        return this.pageLoader.loadCurrentPage(query);
+    }
+
+    loadNextPage(query) {
+        return this.pageLoader.loadNextPage(query);
+    }
+
+    loadPreviousPage(query) {
+        return this.pageLoader.loadPreviousPage(query);
+    }
+
+    loadLines(query, startIndex, linesCnt) {
+        return this.pageLoader.loadLines(query, startIndex, linesCnt);
+    }
+
+    loadAll(query) {
+        if (query === undefined) {
+            query = this.createQuery();
+        }
+        return this.pageLoader.loadLines(query);
+    }
+
+    get startIndex() {
+        return this.pageLoader.startIndex;
+    }
+
+    get pageIndex() {
+        return this.pageLoader.pageIndex;
+    }
+
+    get isLastPage() {
+        return this.pageLoader.isLastPage;
     }
 }
 

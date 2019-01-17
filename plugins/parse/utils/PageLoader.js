@@ -1,7 +1,7 @@
 import GetValue from '../../utils/object/GetValue.js';
-import Query from './Query.js';
+import Load from './Load.js';
 
-class Loader {
+class PageLoader {
     constructor(config) {
         this.items = [];
         this.resetFromJSON(config);
@@ -20,7 +20,7 @@ class Loader {
         return this;
     }
 
-    load(query, startIndex, linesCnt) {
+    loadLines(query, startIndex, linesCnt) {
         if (startIndex === undefined) {
             startIndex = 0;
         }
@@ -32,7 +32,7 @@ class Loader {
 
         var self = this;
         return new Promise(function (resolve, reject) {
-            Query(query, startIndex, linesCnt)
+            Load(query, startIndex, linesCnt)
                 .then(function (items) {
                     self.items = items;
                     self.startIndex = startIndex;
@@ -43,7 +43,7 @@ class Loader {
                         self.isLastPage = true;
                     }
 
-                    resolve(item);
+                    resolve(items, startIndex);
                 })
                 .catch(function (error) {
                     self.isLastPage = false;
@@ -53,27 +53,23 @@ class Loader {
         });
     }
 
-    requestInRange(query, startIndex, linesCnt) {
-        this.load(query, startIndex, linesCnt);
-    }
-
-    requestTurnToPage(query, pageIndex) {
+    loadPage(query, pageIndex) {
         var startIndex = pageIndex * this.linesInPage;
-        this.load(query, startIndex, this.linesInPage);
+        return this.loadLines(query, startIndex, this.linesInPage);
     }
 
-    requestUpdateCurrentPage(query) {
-        this.load(query, this.startIndex, this.linesInPage);
+    loadCurrentPage(query) {
+        return this.loadLines(query, this.startIndex, this.linesInPage);
     }
 
-    requestTurnToNextPage(query) {
+    loadNextPage(query) {
         var startIndex = this.startIndex + this.linesInPage;
-        this.load(query, startIndex, this.linesInPage);
+        return this.loadLines(query, startIndex, this.linesInPage);
     }
 
-    requestTurnToPreviousPage(query) {
+    loadPreviousPage(query) {
         var startIndex = this.startIndex - this.linesInPage;
-        this.load(query, startIndex, this.linesInPage);
+        return this.loadLines(query, startIndex, this.linesInPage);
     }
 
     getItem(i) {
@@ -94,4 +90,4 @@ class Loader {
 
 }
 
-export default Loader;
+export default PageLoader;

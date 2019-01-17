@@ -1,11 +1,11 @@
 import Parse from 'parse';
-import Query from './Query.js';
+import Load from './Load.js';
 
 var Remove = function (query) {
     query.select('id');
 
     return new Promise(function (resolve, reject) {
-        Query(query)
+        Load(query)
             .then(function (items) {
                 if (items.length === 0) {
                     resolve(items);

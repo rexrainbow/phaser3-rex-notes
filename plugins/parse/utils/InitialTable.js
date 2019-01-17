@@ -1,9 +1,13 @@
 var InitialTable = function (item) {
-    item
-        .save()
-        .then(function (result) {
-            result.destroy();
-        });
+    return new Promise(function (resolve, reject) {
+        item
+            .save()
+            .then(function (result) {
+                return result.destroy();
+            })
+            .then(resolve)
+            .catch(reject);
+    });
 }
 
 export default InitialTable;
