@@ -24,9 +24,10 @@ var Save = function (data) {
 }
 
 var getQuery = function (data) {
-    var query, value;
+    var query, key, value;
     var isItem = (data instanceof this.customClass);
-    for (var key in this.primaryKeys) {
+    for (var i = 0, cnt = this.primaryKeys.length; i < cnt; i++) {
+        key = this.primaryKeys[i];
         if (query === undefined) {
             query = this.createQuery().select('id');
         }

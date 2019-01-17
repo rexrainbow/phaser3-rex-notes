@@ -1,17 +1,19 @@
 import Parse from 'parse';
 import GetValue from '../../utils/object/GetValue.js';
 import PageLoader from '../utils/PageLoader.js';
+import Copy from '../../utils/array/Copy.js'
 import Save from './Save.js';
 import Remove from '../utils/Remove.js';
 import LoadRandomItems from './LoadRandomItems.js';
+import GetItemCount from './GetItemCount.js';
 
 class ItemTable {
     constructor(config) {
         this.setClassName(GetValue(config, 'className', 'Item'));
-        this.primaryKeys = {};
+        this.primaryKeys = [];
         var primaryKeys = GetValue(config, 'primaryKeys', undefined);
         if (primaryKeys) {
-            this.addPrimaryKey(primaryKeys);
+            this.setPrimaryKey(primaryKeys);
         }
 
         this.pageLoader = new PageLoader({
@@ -24,15 +26,12 @@ class ItemTable {
         return this;
     }
 
-    addPrimaryKey(key) {
+    setPrimaryKey(key) {
         if (typeof (key) === 'string') {
-            this.primaryKeys[key] = true;
-            return this;
-        }
-
-        var keys = key;
-        for (var i = 0, cnt = keys.length; i < cnt; i++) {
-            this.addPrimaryKey(keys[i]);
+            this.primaryKeys.length = 1;
+            this.primaryKeys[0] = key;
+        } else {
+            Copy(this.primaryKeys, key);
         }
         return this;
     }
@@ -93,20 +92,13 @@ class ItemTable {
     removeItem(itemId) {
         return this.createItem().set('id', itemId).destroy();
     }
-
-    // Get items count
-    getItemCount(query) {
-        if (query === undefined) {
-            query = this.createQuery();
-        }
-        return query.count();
-    }
 }
 
 var methods = {
     save: Save,
     remove: Remove,
     loadRandomItems: LoadRandomItems,
+    getItemCount: GetItemCount,
 }
 Object.assign(
     ItemTable.prototype,

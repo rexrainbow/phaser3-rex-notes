@@ -1,6 +1,6 @@
 import Shuffle from '../../utils/array/Shuffle.js';
 
-var LoadRandomItems = function(query, count) {
+var LoadRandomItems = function (query, count) {
     if (typeof (query) === 'number') {
         count = query;
         query = undefined;
@@ -21,6 +21,7 @@ var LoadRandomItems = function(query, count) {
             .then(function (results) {
                 // Shuffle items
                 Shuffle(results);
+                count = Math.min(count, results.length);
                 var itemIds = [];
                 for (var i = 0; i < count; i++) {
                     itemIds.push(results[i].id);
