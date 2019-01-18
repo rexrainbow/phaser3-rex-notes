@@ -3,6 +3,7 @@ import GetValue from '../../utils/object/GetValue.js';
 import PageLoader from '../utils/PageLoader.js';
 import Copy from '../../utils/array/Copy.js'
 import Save from './Save.js';
+import SaveItems from './SaveItems.js';
 import Remove from '../utils/Remove.js';
 import LoadRandomItems from './LoadRandomItems.js';
 import GetItemCount from './GetItemCount.js';
@@ -16,6 +17,9 @@ class ItemTable {
             this.setPrimaryKey(primaryKeys);
         }
 
+        this.setOwnerReadMode(GetValue(config, 'ownerRead', undefined));
+        this.setOwnerWriteMode(GetValue(config, 'ownerWrite', undefined));
+
         this.pageLoader = new PageLoader({
             lines: GetValue(config, 'lines', 10)
         });
@@ -27,12 +31,24 @@ class ItemTable {
     }
 
     setPrimaryKey(key) {
-        if (typeof (key) === 'string') {
+        if (!key) {
+            this.primaryKeys.length = 0;
+        } else if (typeof (key) === 'string') {
             this.primaryKeys.length = 1;
             this.primaryKeys[0] = key;
         } else {
             Copy(this.primaryKeys, key);
         }
+        return this;
+    }
+
+    setOwnerReadMode(mode) {
+        this.ownerRead = mode;
+        return this;
+    }
+
+    setOwnerWriteMode(mode) {
+        this.ownerWrite = mode;
         return this;
     }
 
@@ -96,6 +112,7 @@ class ItemTable {
 
 var methods = {
     save: Save,
+    saveItems: SaveItems,
     remove: Remove,
     loadRandomItems: LoadRandomItems,
     getItemCount: GetItemCount,

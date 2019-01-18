@@ -1,9 +1,16 @@
+import IsArray from '../../utils/object/IsArray.js';
+import DataToItem from '../utils/DataToItem.js';
+import SetOwnerAccessMode from '../utils/SetOwnerAccessMode.js';
+
 var Save = function (data) {
+    if (IsArray(data)) {
+        return this.saveItems(data);
+    }
+
     var self = this;
     return new Promise(function (resolve, reject) {
-        var query = getQuery.call(self, data);
-        if (query) {
-            query
+        if (self.primaryKeys.length > 0) {
+            getQuery.call(self, data)
                 .first()
                 .then(function (result) {
                     if (result) {
@@ -24,13 +31,11 @@ var Save = function (data) {
 }
 
 var getQuery = function (data) {
-    var query, key, value;
+    var query = this.createQuery().select('id');
     var isItem = (data instanceof this.customClass);
+    var key, value;
     for (var i = 0, cnt = this.primaryKeys.length; i < cnt; i++) {
         key = this.primaryKeys[i];
-        if (query === undefined) {
-            query = this.createQuery().select('id');
-        }
         value = (isItem) ? data.get(key) : data[key]
         query.equalTo(key, value);
     }
@@ -38,15 +43,8 @@ var getQuery = function (data) {
 }
 
 var saveItem = function (data) {
-    var item;
-    if (data instanceof this.customClass) {
-        item = data;
-    } else {
-        var item = this.createItem();
-        for (var key in data) {
-            item.set(key, data[key]);
-        }
-    }
+    var item = DataToItem(data, this.customClass);
+    SetOwnerAccessMode(item, this.ownerRead, this.ownerWrite);
     return item.save();
 }
 
