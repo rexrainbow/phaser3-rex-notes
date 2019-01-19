@@ -84,6 +84,7 @@ import LZString from './lzstring.js';
 // shader
 import SwirlPipeline from './swirlpipeline.js';
 import PixelationPipeline from './pixelationpipeline.js';
+import GrayScalePipeline from './grayscalepipeline.js';
 
 // board
 import Board from './board/board/Board.js';
@@ -180,6 +181,7 @@ export {
     // shader
     SwirlPipeline,
     PixelationPipeline,
+    GrayScalePipeline,
 
     // board
     Board,

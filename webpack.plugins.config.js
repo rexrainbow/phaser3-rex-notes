@@ -96,6 +96,7 @@ module.exports = {
         // shader
         'swirlpipelineplugin': './plugins/swirlpipeline-plugin.js',
         'pixelationpipelineplugin': './plugins/pixelationpipeline-plugin.js',
+        'grayscalepipelineplugin': './plugins/grayscalepipeline-plugin.js',
 
         // board
         'boardplugin': './plugins/board-plugin.js',
