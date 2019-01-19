@@ -30,6 +30,7 @@
 1. [Flash](flash.md): Flashing (set invisible then visible) game object.
 1. [FSM](fsm.md): Finite state machine.
 1. [Gashapon](gashapon.md): Pick random item from box.
+1. [Gray-scale-pipeline](grayscalepipeline.md): Gray scale post processing filter.
 1. [Grid align](gridalign.md): Align objects on quadrilateral or hexagon grid.
 1. [Grid table](gridtable.md): Viewer of grid table, to manipulate game object of each visible cell.
 1. [Hexagon](geom-hexagon.md): Hexagon shape and methods.
