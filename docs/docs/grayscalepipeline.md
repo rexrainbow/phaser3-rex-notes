@@ -52,6 +52,7 @@ var game = new Phaser.Game(config);
         // intensity: 0
     });
     ```
+    - `intensity` : 0(original color) ~ 1(gray scale)
 2. Add pipeline to camera
     ```javascript
     // var camera = scene.cameras.main;
@@ -73,3 +74,4 @@ var game = new Phaser.Game(config);
     ```javascript
     customPipeline.setIntensity(radius);
     ```
+    - `intensity` : 0(original color) ~ 1(gray scale)
