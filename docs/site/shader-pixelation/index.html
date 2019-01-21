@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/grayscalepipeline/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/shader-pixelation/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Gray scale - Notes of Phaser 3</title>
+        <title>Pixelation - Notes of Phaser 3</title>
       
     
     
@@ -128,7 +128,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Gray scale
+                Pixelation
               </span>
             
           
@@ -1978,9 +1978,28 @@
           
 
 
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2-1" type="checkbox" id="nav-7-2-1">
+    
+    <label class="md-nav__link" for="nav-7-2-1">
+      Color
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-7-2-1">
+        Color
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
   <li class="md-nav__item">
-    <a href="../swirlpipeline/" title="Swirl" class="md-nav__link">
-      Swirl
+    <a href="../shader-grayscale/" title="Gray scale" class="md-nav__link">
+      Gray scale
     </a>
   </li>
 
@@ -1991,8 +2010,46 @@
 
 
   <li class="md-nav__item">
-    <a href="../pixelationpipeline/" title="Pixelation" class="md-nav__link">
-      Pixelation
+    <a href="../shader-inverse/" title="Inverse" class="md-nav__link">
+      Inverse
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2-2" type="checkbox" id="nav-7-2-2" checked>
+    
+    <label class="md-nav__link" for="nav-7-2-2">
+      Position
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-7-2-2">
+        Position
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../shader-swirl/" title="Swirl" class="md-nav__link">
+      Swirl
     </a>
   </li>
 
@@ -2010,11 +2067,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        Gray scale
+        Pixelation
       </label>
     
-    <a href="./" title="Gray scale" class="md-nav__link md-nav__link--active">
-      Gray scale
+    <a href="./" title="Pixelation" class="md-nav__link md-nav__link--active">
+      Pixelation
     </a>
     
       
@@ -2069,8 +2126,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#intensity" title="Intensity" class="md-nav__link">
-    Intensity
+  <a href="#pixel-size" title="Pixel size" class="md-nav__link">
+    Pixel size
   </a>
   
 </li>
@@ -2088,6 +2145,11 @@
   
 </nav>
     
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
         
@@ -3639,8 +3701,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#intensity" title="Intensity" class="md-nav__link">
-    Intensity
+  <a href="#pixel-size" title="Pixel size" class="md-nav__link">
+    Pixel size
   </a>
   
 </li>
@@ -3666,36 +3728,36 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/grayscalepipeline.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/shader-pixelation.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Gray scale</h1>
+                  <h1>Pixelation</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Gray scale post processing filter.</p>
+<p>Pixelation post processing filter. <a href="https://www.geeks3d.com/20101029/shader-library-pixelation-post-processing-effect-glsl/">Reference</a></p>
 <ul>
 <li>Author: Rex</li>
 <li>A camera filter</li>
 </ul>
 <h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/grayscalepipeline-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexgrayscalepipelineplugin.min.js">minify</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/pixelationpipeline-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexpixelationpipelineplugin.min.js">minify</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/grayscale-pipeline">Sample code</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/pixelation-pipeline">Sample code</a></p>
 <p>User could import class directly, or install it by global plugin.</p>
 <h3 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">rexGrayScalepipeline</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/grayscalepipeline.js&#39;</span><span class="p">;</span>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">rexPixelationPipeline</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/pixelationpipeline.js&#39;</span><span class="p">;</span>
 </pre></div>
 
 <h3 id="install-global-plugin">Install global plugin<a class="headerlink" href="#install-global-plugin" title="Permanent link">&para;</a></h3>
 <p>Install plugin in <a href="../game/#configuration">configuration of game</a></p>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">GrayScalePipelinePlugin</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/grayscalepipeline-plugin.js&#39;</span><span class="p">;</span>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">PixelationPipelinePlugin</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/pixelationpipeline-plugin.js&#39;</span><span class="p">;</span>
 
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
-            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexGrayScalePipeline&#39;</span><span class="p">,</span>
-            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">GrayScalePipelinePlugin</span><span class="p">,</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexPixelationPipeline&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">PixelationPipelinePlugin</span><span class="p">,</span>
             <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
         <span class="p">},</span>
         <span class="c1">// ...</span>
@@ -3709,33 +3771,33 @@
 <h3 id="apply-filter">Apply filter<a class="headerlink" href="#apply-filter" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Create pipeline instance
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">customPipeline</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexGrayScalePipeline&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="p">{</span>
-    <span class="c1">// intensity: 0</span>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">customPipeline</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexPixelationPipeline&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="p">{</span>
+    <span class="c1">// pixelWidth: 0,</span>
+    <span class="c1">// pixelHeight: 0</span>
 <span class="p">});</span>
-</pre></div><ul>
-<li><code>intensity</code> : 0(original color) ~ 1(gray scale)</li>
-</ul>
-</li>
+</pre></div></li>
 <li>Add pipeline to camera
     <div class="codehilite"><pre><span></span><span class="c1">// var camera = scene.cameras.main;</span>
 <span class="nx">camera</span><span class="p">.</span><span class="nx">setRenderToTexture</span><span class="p">(</span><span class="nx">customPipeline</span><span class="p">);</span>
 </pre></div></li>
 </ol>
-<h3 id="intensity">Intensity<a class="headerlink" href="#intensity" title="Permanent link">&para;</a></h3>
+<h3 id="pixel-size">Pixel size<a class="headerlink" href="#pixel-size" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">intensity</span> <span class="o">=</span> <span class="nx">customPipeline</span><span class="p">.</span><span class="nx">intensity</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">pixelWidth</span> <span class="o">=</span> <span class="nx">customPipeline</span><span class="p">.</span><span class="nx">pixelWidth</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">pixelHeight</span> <span class="o">=</span> <span class="nx">customPipeline</span><span class="p">.</span><span class="nx">pixelHeight</span><span class="p">;</span>
 </pre></div></li>
 <li>Set
-    <div class="codehilite"><pre><span></span><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">intensity</span> <span class="o">=</span> <span class="nx">intensity</span><span class="p">;</span>
-<span class="c1">// customPipeline.intensity += value;</span>
+    <div class="codehilite"><pre><span></span><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">pixelWidth</span> <span class="o">=</span> <span class="nx">pixelWidth</span><span class="p">;</span>
+<span class="nx">customPipeline</span><span class="p">.</span><span class="nx">pixelHeight</span> <span class="o">=</span> <span class="nx">pixelHeight</span><span class="p">;</span>
+<span class="c1">// customPipeline.pixelWidth += value;</span>
+<span class="c1">// customPipeline.pixelHeight += value;</span>
 </pre></div>
     or
-    <div class="codehilite"><pre><span></span><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">setIntensity</span><span class="p">(</span><span class="nx">radius</span><span class="p">);</span>
-</pre></div><ul>
-<li><code>intensity</code> : 0(original color) ~ 1(gray scale)</li>
-</ul>
-</li>
+    <div class="codehilite"><pre><span></span><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">setPixelWidth</span><span class="p">(</span><span class="nx">pixelWidth</span><span class="p">);</span>
+<span class="nx">customPipeline</span><span class="p">.</span><span class="nx">setPixelHeight</span><span class="p">(</span><span class="nx">pixelHeight</span><span class="p">);</span>
+<span class="nx">customPipeline</span><span class="p">.</span><span class="nx">setPixelSize</span><span class="p">(</span><span class="nx">pixelWidth</span><span class="p">,</span> <span class="nx">pixelHeight</span><span class="p">);</span>
+</pre></div></li>
 </ul>
                 
                   
@@ -3757,7 +3819,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../pixelationpipeline/" title="Pixelation" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../shader-swirl/" title="Swirl" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -3766,7 +3828,7 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Pixelation
+                Swirl
               </span>
             </div>
           </a>

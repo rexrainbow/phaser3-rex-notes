@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/random-array/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/shader-grayscale/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Random - Notes of Phaser 3</title>
+        <title>Gray scale - Notes of Phaser 3</title>
       
     
     
@@ -128,7 +128,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Random
+                Gray scale
               </span>
             
           
@@ -1923,10 +1923,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7" checked>
     
     <label class="md-nav__link" for="nav-7">
       Camera
@@ -1954,10 +1956,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2" type="checkbox" id="nav-7-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2" type="checkbox" id="nav-7-2" checked>
     
     <label class="md-nav__link" for="nav-7-2">
       Filters
@@ -1973,10 +1977,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2-1" type="checkbox" id="nav-7-2-1">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2-1" type="checkbox" id="nav-7-2-1" checked>
     
     <label class="md-nav__link" for="nav-7-2-1">
       Color
@@ -1992,11 +1998,93 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../shader-grayscale/" title="Gray scale" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Gray scale
+      </label>
+    
+    <a href="./" title="Gray scale" class="md-nav__link md-nav__link--active">
       Gray scale
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#import-class" title="Import class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
+    Install global plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apply-filter" title="Apply filter" class="md-nav__link">
+    Apply filter
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intensity" title="Intensity" class="md-nav__link">
+    Intensity
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -2331,12 +2419,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
     
     <label class="md-nav__link" for="nav-10">
       Data
@@ -2424,12 +2510,10 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10-3" type="checkbox" id="nav-10-3" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10-3" type="checkbox" id="nav-10-3">
     
     <label class="md-nav__link" for="nav-10-3">
       Array
@@ -2457,79 +2541,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Random
-      </label>
-    
-    <a href="./" title="Random" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../random-array/" title="Random" class="md-nav__link">
       Random
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#get-random-item" title="Get random item" class="md-nav__link">
-    Get random item
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#remove-random-item" title="Remove random item" class="md-nav__link">
-    Remove random item
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#shuffle" title="Shuffle" class="md-nav__link">
-    Shuffle
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -3649,6 +3665,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#usage" title="Usage" class="md-nav__link">
     Usage
   </a>
@@ -3657,22 +3680,29 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#get-random-item" title="Get random item" class="md-nav__link">
-    Get random item
+  <a href="#import-class" title="Import class" class="md-nav__link">
+    Import class
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#remove-random-item" title="Remove random item" class="md-nav__link">
-    Remove random item
+  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
+    Install global plugin
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#shuffle" title="Shuffle" class="md-nav__link">
-    Shuffle
+  <a href="#apply-filter" title="Apply filter" class="md-nav__link">
+    Apply filter
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intensity" title="Intensity" class="md-nav__link">
+    Intensity
   </a>
   
 </li>
@@ -3698,29 +3728,77 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/random-array.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/shader-grayscale.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Random</h1>
+                  <h1>Gray scale</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Random operation of an array, built-in methods of phaser.</p>
+<p>Gray scale post processing filter.</p>
 <ul>
-<li>Author: Richard Davey</li>
+<li>Author: Rex</li>
+<li>A camera filter</li>
 </ul>
+<h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/grayscalepipeline-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexgrayscalepipelineplugin.min.js">minify</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<h3 id="get-random-item">Get random item<a class="headerlink" href="#get-random-item" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Utils</span><span class="p">.</span><span class="nb">Array</span><span class="p">.</span><span class="nx">GetRandom</span><span class="p">(</span><span class="nx">arr</span><span class="p">);</span>
-<span class="c1">// var item = Phaser.Utils.Array.GetRandom(arr, startIndex, length);</span>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/grayscale-pipeline">Sample code</a></p>
+<p>User could import class directly, or install it by global plugin.</p>
+<h3 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">rexGrayScalepipeline</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/grayscalepipeline.js&#39;</span><span class="p">;</span>
 </pre></div>
 
-<h3 id="remove-random-item">Remove random item<a class="headerlink" href="#remove-random-item" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Utils</span><span class="p">.</span><span class="nb">Array</span><span class="p">.</span><span class="nx">RemoveRandomElement</span><span class="p">(</span><span class="nx">arr</span><span class="p">);</span>
+<h3 id="install-global-plugin">Install global plugin<a class="headerlink" href="#install-global-plugin" title="Permanent link">&para;</a></h3>
+<p>Install plugin in <a href="../game/#configuration">configuration of game</a></p>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">GrayScalePipelinePlugin</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/grayscalepipeline-plugin.js&#39;</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexGrayScalePipeline&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">GrayScalePipelinePlugin</span><span class="p">,</span>
+            <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="p">},</span>
+        <span class="c1">// ...</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </pre></div>
 
-<h3 id="shuffle">Shuffle<a class="headerlink" href="#shuffle" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">arr</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Utils</span><span class="p">.</span><span class="nb">Array</span><span class="p">.</span><span class="nx">Shuffle</span><span class="p">(</span><span class="nx">arr</span><span class="p">);</span>
+<h3 id="apply-filter">Apply filter<a class="headerlink" href="#apply-filter" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Create pipeline instance
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">customPipeline</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexGrayScalePipeline&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="p">{</span>
+    <span class="c1">// intensity: 0</span>
+<span class="p">});</span>
+</pre></div><ul>
+<li><code>intensity</code> : 0(original color) ~ 1(gray scale)</li>
+</ul>
+</li>
+<li>Add pipeline to camera
+    <div class="codehilite"><pre><span></span><span class="c1">// var camera = scene.cameras.main;</span>
+<span class="nx">camera</span><span class="p">.</span><span class="nx">setRenderToTexture</span><span class="p">(</span><span class="nx">customPipeline</span><span class="p">);</span>
+</pre></div></li>
+</ol>
+<h3 id="intensity">Intensity<a class="headerlink" href="#intensity" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">intensity</span> <span class="o">=</span> <span class="nx">customPipeline</span><span class="p">.</span><span class="nx">intensity</span><span class="p">;</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">intensity</span> <span class="o">=</span> <span class="nx">intensity</span><span class="p">;</span>
+<span class="c1">// customPipeline.intensity += value;</span>
 </pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">setIntensity</span><span class="p">(</span><span class="nx">radius</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>intensity</code> : 0(original color) ~ 1(gray scale)</li>
+</ul>
+</li>
+</ul>
                 
                   
                 
@@ -3741,7 +3819,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../array-filter/" title="Filter/Map" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../camera/" title="Camera" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -3750,19 +3828,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Filter/Map
+                Camera
               </span>
             </div>
           </a>
         
         
-          <a href="../create-number-array/" title="Number array" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../shader-inverse/" title="Inverse" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Number array
+                Inverse
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

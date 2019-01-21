@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/swirlpipeline/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/shader-inverse/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Swirl - Notes of Phaser 3</title>
+        <title>Inverse - Notes of Phaser 3</title>
       
     
     
@@ -128,7 +128,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Swirl
+                Inverse
               </span>
             
           
@@ -1980,17 +1980,50 @@
   
 
 
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2-1" type="checkbox" id="nav-7-2-1" checked>
+    
+    <label class="md-nav__link" for="nav-7-2-1">
+      Color
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-7-2-1">
+        Color
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../shader-grayscale/" title="Gray scale" class="md-nav__link">
+      Gray scale
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
   <li class="md-nav__item md-nav__item--active">
     
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        Swirl
+        Inverse
       </label>
     
-    <a href="./" title="Swirl" class="md-nav__link md-nav__link--active">
-      Swirl
+    <a href="./" title="Inverse" class="md-nav__link md-nav__link--active">
+      Inverse
     </a>
     
       
@@ -2045,22 +2078,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#radius" title="Radius" class="md-nav__link">
-    Radius
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#rotation" title="Rotation" class="md-nav__link">
-    Rotation
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#center-position" title="Center position" class="md-nav__link">
-    Center position
+  <a href="#intensity" title="Intensity" class="md-nav__link">
+    Intensity
   </a>
   
 </li>
@@ -2081,14 +2100,38 @@
   </li>
 
         
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2-2" type="checkbox" id="nav-7-2-2">
+    
+    <label class="md-nav__link" for="nav-7-2-2">
+      Position
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-7-2-2">
+        Position
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
           
           
           
 
 
   <li class="md-nav__item">
-    <a href="../pixelationpipeline/" title="Pixelation" class="md-nav__link">
-      Pixelation
+    <a href="../shader-swirl/" title="Swirl" class="md-nav__link">
+      Swirl
     </a>
   </li>
 
@@ -2099,9 +2142,14 @@
 
 
   <li class="md-nav__item">
-    <a href="../grayscalepipeline/" title="Gray scale" class="md-nav__link">
-      Gray scale
+    <a href="../shader-pixelation/" title="Pixelation" class="md-nav__link">
+      Pixelation
     </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
         
@@ -3653,22 +3701,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#radius" title="Radius" class="md-nav__link">
-    Radius
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#rotation" title="Rotation" class="md-nav__link">
-    Rotation
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#center-position" title="Center position" class="md-nav__link">
-    Center position
+  <a href="#intensity" title="Intensity" class="md-nav__link">
+    Intensity
   </a>
   
 </li>
@@ -3694,36 +3728,36 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/swirlpipeline.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/shader-inverse.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Swirl</h1>
+                  <h1>Inverse</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Swirl post processing filter. <a href="https://www.geeks3d.com/20110428/shader-library-swirl-post-processing-filter-in-glsl/">Reference</a></p>
+<p>Inverse color post processing filter.</p>
 <ul>
 <li>Author: Rex</li>
 <li>A camera filter</li>
 </ul>
 <h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/swirlpipeline-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexswirlpipelineplugin.min.js">minify</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/inversepipeline-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexinversepipelineplugin.min.js">minify</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/swirl-pipeline">Sample code</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/inverse-pipeline">Sample code</a></p>
 <p>User could import class directly, or install it by global plugin.</p>
 <h3 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">rexSwirlpipeline</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/swirlpipeline.js&#39;</span><span class="p">;</span>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">rexInversepipeline</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/inversepipeline.js&#39;</span><span class="p">;</span>
 </pre></div>
 
 <h3 id="install-global-plugin">Install global plugin<a class="headerlink" href="#install-global-plugin" title="Permanent link">&para;</a></h3>
 <p>Install plugin in <a href="../game/#configuration">configuration of game</a></p>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">SwirlPipelinePlugin</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/swirlpipeline-plugin.js&#39;</span><span class="p">;</span>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">InversePipelinePlugin</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/inversepipeline-plugin.js&#39;</span><span class="p">;</span>
 
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
-            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexSwirlPipeline&#39;</span><span class="p">,</span>
-            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">SwirlPipelinePlugin</span><span class="p">,</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexInversePipeline&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">InversePipelinePlugin</span><span class="p">,</span>
             <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
         <span class="p">},</span>
         <span class="c1">// ...</span>
@@ -3737,65 +3771,33 @@
 <h3 id="apply-filter">Apply filter<a class="headerlink" href="#apply-filter" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Create pipeline instance
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">customPipeline</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexSwirlPipeline&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="p">{</span>
-    <span class="c1">// center: {</span>
-    <span class="c1">//    x: windowWidth / 2,</span>
-    <span class="c1">//    y: windowHeight / 2</span>
-    <span class="c1">//}</span>
-    <span class="c1">// radius: 0,</span>
-    <span class="c1">// rotation: 0,  // or angle: 0</span>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">customPipeline</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexInversePipeline&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="p">{</span>
+    <span class="c1">// intensity: 0</span>
 <span class="p">});</span>
-</pre></div></li>
+</pre></div><ul>
+<li><code>intensity</code> : 0(original color) ~ 1(gray scale)</li>
+</ul>
+</li>
 <li>Add pipeline to camera
     <div class="codehilite"><pre><span></span><span class="c1">// var camera = scene.cameras.main;</span>
 <span class="nx">camera</span><span class="p">.</span><span class="nx">setRenderToTexture</span><span class="p">(</span><span class="nx">customPipeline</span><span class="p">);</span>
 </pre></div></li>
 </ol>
-<h3 id="radius">Radius<a class="headerlink" href="#radius" title="Permanent link">&para;</a></h3>
+<h3 id="intensity">Intensity<a class="headerlink" href="#intensity" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">radius</span> <span class="o">=</span> <span class="nx">customPipeline</span><span class="p">.</span><span class="nx">radius</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">intensity</span> <span class="o">=</span> <span class="nx">customPipeline</span><span class="p">.</span><span class="nx">intensity</span><span class="p">;</span>
 </pre></div></li>
 <li>Set
-    <div class="codehilite"><pre><span></span><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">radius</span> <span class="o">=</span> <span class="nx">radius</span><span class="p">;</span>
-<span class="c1">// customPipeline.radius += value;</span>
+    <div class="codehilite"><pre><span></span><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">intensity</span> <span class="o">=</span> <span class="nx">intensity</span><span class="p">;</span>
+<span class="c1">// customPipeline.intensity += value;</span>
 </pre></div>
     or
-    <div class="codehilite"><pre><span></span><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">setRadius</span><span class="p">(</span><span class="nx">radius</span><span class="p">);</span>
-</pre></div></li>
+    <div class="codehilite"><pre><span></span><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">setIntensity</span><span class="p">(</span><span class="nx">radius</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>intensity</code> : 0(original color) ~ 1(inverse color)</li>
 </ul>
-<h3 id="rotation">Rotation<a class="headerlink" href="#rotation" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Get
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rotation</span> <span class="o">=</span> <span class="nx">customPipeline</span><span class="p">.</span><span class="nx">rotation</span><span class="p">;</span>  <span class="c1">// radians</span>
-<span class="c1">// var angle = customPipeline.angle;     // degrees</span>
-</pre></div></li>
-<li>Set
-    <div class="codehilite"><pre><span></span><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">rotation</span> <span class="o">=</span> <span class="nx">rotation</span><span class="p">;</span>
-<span class="nx">customPipeline</span><span class="p">.</span><span class="nx">rotation</span> <span class="o">+=</span> <span class="nx">value</span><span class="p">;</span>
-<span class="c1">// customPipeline.angle = angle;</span>
-<span class="c1">// customPipeline.angle += value;   </span>
-</pre></div>
-    or
-    <div class="codehilite"><pre><span></span><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">setRotation</span><span class="p">(</span><span class="nx">rotation</span><span class="p">);</span>
-<span class="c1">// customPipeline.setAngle(angle);</span>
-</pre></div></li>
-</ul>
-<h3 id="center-position">Center position<a class="headerlink" href="#center-position" title="Permanent link">&para;</a></h3>
-<p>Default value is center of window.</p>
-<ul>
-<li>Get
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">customPipeline</span><span class="p">.</span><span class="nx">centerX</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">customPipeline</span><span class="p">.</span><span class="nx">centerY</span><span class="p">;</span>
-</pre></div></li>
-<li>Set
-    <div class="codehilite"><pre><span></span><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">centerX</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
-<span class="nx">customPipeline</span><span class="p">.</span><span class="nx">centerY</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
-</pre></div>
-    or
-    <div class="codehilite"><pre><span></span><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">setCenter</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
-<span class="c1">// customPipeline.setCenter();   // set to center of window</span>
-</pre></div></li>
+</li>
 </ul>
                 
                   
@@ -3817,7 +3819,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../camera/" title="Camera" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../shader-grayscale/" title="Gray scale" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -3826,19 +3828,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Camera
+                Gray scale
               </span>
             </div>
           </a>
         
         
-          <a href="../pixelationpipeline/" title="Pixelation" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../shader-swirl/" title="Swirl" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Pixelation
+                Swirl
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
