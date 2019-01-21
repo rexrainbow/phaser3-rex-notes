@@ -30,7 +30,6 @@
 1. [Flash](flash.md): Flashing (set invisible then visible) game object.
 1. [FSM](fsm.md): Finite state machine.
 1. [Gashapon](gashapon.md): Pick random item from box.
-1. [Gray-scale-pipeline](grayscalepipeline.md): Gray scale post processing filter.
 1. [Grid align](gridalign.md): Align objects on quadrilateral or hexagon grid.
 1. [Grid table](gridtable.md): Viewer of grid table, to manipulate game object of each visible cell.
 1. [Hexagon](geom-hexagon.md): Hexagon shape and methods.
@@ -42,7 +41,6 @@
 1. [Page](textpage.md): Display text page by page on text object.
 1. [Path follower](pathfollower.md): Set position of game object on a path.
 1. [Pinch](pinch.md): Get scale factor ftom 2 dragging touch pointers.
-1. [Pixelation-pipeline](pixelationpipeline.md): Pixelation post processing filter.
 1. [Pop up](popup.md): Scale up game object.
 1. [Restorable data](restorabledata.md): Restorable data manager.
 1. [Rhombus](geom-rhombus.md): Rhombus shape and methods.
@@ -52,9 +50,11 @@
 1. [Scale-down-destroy](scaledowndestroy.md): Scale down game object then destroy it.
 1. [Scroller](scroller.md): Drag content. Slow down when dragging released, pull back when out of bounds.
 1. [Sequence](sequence.md): Run sequence commands in array.
+1. [Shader-gray-scale](shader-grayscale.md): Gray scale post processing filter.
+1. [Shader-pixelation](shader-pixelation.md): Pixelation post processing filter.
+1. [Shader-swirl](shader-swirl.md): Swirl post processing filter.
 1. [Shake-position](shake-position.md): Shake position of game object.
 1. [Slider](slider.md): Drag thumb on a slider bar.
-1. [Swirl-pipeline](swirlpipeline.md): Swirl post processing filter.
 1. [TagText](tagtext.md): Displays text with multi-color, font face, or font size with tags.
 1. [TCRP.Player](tcrp-player.md): Run commands on time.
 1. [TCRP.Recorder](tcrp-recoder.md): Store commands with time.

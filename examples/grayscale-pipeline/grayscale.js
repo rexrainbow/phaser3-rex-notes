@@ -32,12 +32,7 @@ class Demo extends Phaser.Scene {
     update() {
         var activePointer = this.input.activePointer;
         if (activePointer.isDown) {
-            var intensity = this.cameraFilter.intensity;
-            intensity += 0.01;
-            if (intensity > 1) {
-                intensity = 1;
-            }
-            this.cameraFilter.intensity = intensity;
+            this.cameraFilter.intensity += 0.01;
         }
     }
 }

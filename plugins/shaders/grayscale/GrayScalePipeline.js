@@ -2,6 +2,7 @@ import frag from './grayscale-frag.js';
 
 const TextureTintPipeline = Phaser.Renderer.WebGL.Pipelines.TextureTintPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;
+const Clamp = Phaser.Math.Clamp;
 
 class GrayScalePipeline extends TextureTintPipeline {
     constructor(scene, key, config) {
@@ -28,6 +29,11 @@ class GrayScalePipeline extends TextureTintPipeline {
     }
 
     set intensity(value) {
+        value = Clamp(value, 0, 1);
+        if (this._intensity === value) {
+            return;
+        }
+
         this._intensity = value;
         this.setFloat1('intensity', value);
     }

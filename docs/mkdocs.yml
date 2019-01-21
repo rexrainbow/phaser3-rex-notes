@@ -117,9 +117,9 @@ nav:
 - Camera:
     - Camera: camera.md
     - Filters:
-        - Swirl: swirlpipeline.md
-        - Pixelation: pixelationpipeline.md
-        - Gray scale: grayscalepipeline.md
+        - Swirl: shader-swirl.md
+        - Pixelation: shader-pixelation.md
+        - Gray scale: shader-grayscale.md
 - Tween:
     - Tween task: tween.md
     - Timeline of tween tasks: tween-timeline.md
