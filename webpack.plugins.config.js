@@ -97,6 +97,7 @@ module.exports = {
         'swirlpipelineplugin': './plugins/swirlpipeline-plugin.js',
         'pixelationpipelineplugin': './plugins/pixelationpipeline-plugin.js',
         'grayscalepipelineplugin': './plugins/grayscalepipeline-plugin.js',
+        'inversepipelineplugin': './plugins/inversepipeline-plugin.js',
 
         // board
         'boardplugin': './plugins/board-plugin.js',

@@ -120,6 +120,7 @@ nav:
         - Swirl: shader-swirl.md
         - Pixelation: shader-pixelation.md
         - Gray scale: shader-grayscale.md
+        - Inverse: shader-inverse.md
 - Tween:
     - Tween task: tween.md
     - Timeline of tween tasks: tween-timeline.md

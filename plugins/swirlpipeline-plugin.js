@@ -1,6 +1,6 @@
-import Swirlpipeline from './swirlpipeline.js';
+import SwirlPipeline from './swirlpipeline.js';
 
-class SwirlpipelinePlugin extends Phaser.Plugins.BasePlugin {
+class SwirlPipelinePlugin extends Phaser.Plugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);
@@ -12,9 +12,9 @@ class SwirlpipelinePlugin extends Phaser.Plugins.BasePlugin {
     }
 
     add(scene, key, config) {
-        return new Swirlpipeline(scene, key, config);
+        return new SwirlPipeline(scene, key, config);
     }
 
 }
 
-export default SwirlpipelinePlugin;
+export default SwirlPipelinePlugin;

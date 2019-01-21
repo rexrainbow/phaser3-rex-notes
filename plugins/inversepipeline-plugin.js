@@ -1,6 +1,6 @@
-import GrayScalePipeline from './grayscalepipeline.js';
+import InversePipeline from './inversepipeline.js';
 
-class GrayScalePipelinePlugin extends Phaser.Plugins.BasePlugin {
+class InversePipelinePlugin extends Phaser.Plugins.BasePlugin {
 
     constructor(pluginManager) {
         super(pluginManager);
@@ -12,9 +12,9 @@ class GrayScalePipelinePlugin extends Phaser.Plugins.BasePlugin {
     }
 
     add(scene, key, config) {
-        return new GrayScalePipeline(scene, key, config);
+        return new InversePipeline(scene, key, config);
     }
 
 }
 
-export default GrayScalePipelinePlugin;
+export default InversePipelinePlugin;

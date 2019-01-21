@@ -51,6 +51,7 @@
 1. [Scroller](scroller.md): Drag content. Slow down when dragging released, pull back when out of bounds.
 1. [Sequence](sequence.md): Run sequence commands in array.
 1. [Shader-gray-scale](shader-grayscale.md): Gray scale post processing filter.
+1. [Shader-inverse](shader-inverse.md): Inverse color post processing filter.
 1. [Shader-pixelation](shader-pixelation.md): Pixelation post processing filter.
 1. [Shader-swirl](shader-swirl.md): Swirl post processing filter.
 1. [Shake-position](shake-position.md): Shake position of game object.
