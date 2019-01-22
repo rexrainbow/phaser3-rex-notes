@@ -25,8 +25,7 @@ void main (void) {
                    dxy.y*( floor(outTexCoord.y/dxy.y) + 0.5 )
                   );
     gl_FragColor = texture2D(uMainSampler, tc);
-  }
-  else {        
+  } else {        
     gl_FragColor = texture2D(uMainSampler, outTexCoord);
   }
 }
