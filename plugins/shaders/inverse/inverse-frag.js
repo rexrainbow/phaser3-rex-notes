@@ -10,7 +10,7 @@ precision highmedp float;
 uniform sampler2D uMainSampler; 
 varying vec2 outTexCoord;
 
-// Gray scale effect parameters
+// Effect parameters
 uniform float intensity;
 
 void main (void) {

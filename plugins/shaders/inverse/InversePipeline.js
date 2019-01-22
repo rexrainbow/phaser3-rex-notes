@@ -19,7 +19,7 @@ class InversePipeline extends TextureTintPipeline {
     }
 
     resetFromJSON(o) {
-        this.intensity = GetValue(o, 'intensity', 0);
+        this.setIntensity(GetValue(o, 'intensity', 0));
         return this;
     }
 

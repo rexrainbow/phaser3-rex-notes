@@ -12,10 +12,9 @@ precision highmedp float;
 uniform sampler2D uMainSampler; 
 varying vec2 outTexCoord;
 
+// Effect parameters
 uniform vec2 texSize;
 uniform vec2 pixelSize;
-
-// Swirl effect parameters
 uniform float radius;
 uniform float angle;
 

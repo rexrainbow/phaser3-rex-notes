@@ -11,7 +11,7 @@ Pixelation post processing filter. [Reference](https://www.geeks3d.com/20101029/
 
 ## Usage
 
-[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/pixelation-pipeline)
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/shader-pixelation)
 
 User could import class directly, or install it by global plugin.
 

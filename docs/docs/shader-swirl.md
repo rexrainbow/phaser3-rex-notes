@@ -11,7 +11,7 @@ Swirl post processing filter. [Reference](https://www.geeks3d.com/20110428/shade
 
 ## Usage
 
-[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/swirl-pipeline)
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/shader-swirl)
 
 User could import class directly, or install it by global plugin.
 

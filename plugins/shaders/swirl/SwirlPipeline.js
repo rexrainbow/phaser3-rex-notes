@@ -28,9 +28,9 @@ class SwirlPipeline extends TextureTintPipeline {
         this.radius = GetValue(o, 'radius', 0);
         var rotation = GetValue(o, 'rotation', undefined);
         if (rotation === undefined) {
-            this.angle = GetValue(o, 'angle', 0);
+            this.setAngle(GetValue(o, 'angle', 0));
         } else {
-            this.rotation = rotation;
+            this.setRotation(rotation);
         }
         this.setCenter(GetValue(o, 'center.x', undefined), GetValue(o, 'center.y', undefined));
         return this;

@@ -15,7 +15,7 @@ varying vec2 outTexCoord;
 uniform vec2 texSize;
 uniform vec2 center;
 
-// Swirl effect parameters
+// Effect parameters
 uniform float radius;
 uniform float angle;
 

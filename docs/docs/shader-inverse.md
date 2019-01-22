@@ -11,7 +11,7 @@ Inverse color post processing filter.
 
 ## Usage
 
-[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/inverse-pipeline)
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/shader-inverse)
 
 User could import class directly, or install it by global plugin.
 
