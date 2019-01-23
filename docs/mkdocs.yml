@@ -120,6 +120,7 @@ nav:
         - Color:
             - Gray scale: shader-grayscale.md
             - Inverse: shader-inverse.md
+            - HSL adjust: shader-hsladjust.md
         - Position:
             - Swirl: shader-swirl.md
             - Pixelation: shader-pixelation.md        

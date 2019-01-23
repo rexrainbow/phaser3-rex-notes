@@ -1,4 +1,5 @@
 import HslAdjustPipelinePlugin from '../../plugins/hsladjustpipeline-plugin.js'
+import Dat from '../../plugins/utils/dat.gui/dat.gui.min.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -14,45 +15,35 @@ class Demo extends Phaser.Scene {
 
         var customPipeline = this.plugins.get('rexHslAdjustPipeline').add(this, 'HslAdjust');
         this.cameras.main.setRenderToTexture(customPipeline);
-        this.cameraFilter = customPipeline;
 
-        var scene = this;
-        this.input.on('pointerup', function (pointer, currentlyOver) {
-            scene.tweens.add({
-                targets: customPipeline,
-                // hueRotate: 0,
-                satAdjust: 0,
-                ease: 'Linear',
-                duration: 1000,
-                repeat: 0,
-                yoyo: false
-            });
-        });
+        var gui = new Dat.GUI();
+        gui.add(customPipeline, 'hueRotate', 0, 1);
+        gui.add(customPipeline, 'satAdjust', 0);
+        gui.add(customPipeline, 'lumAdjust', 0, 1);
     }
 
-    update() {
-        var activePointer = this.input.activePointer;
-        if (activePointer.isDown) {
-            // this.cameraFilter.hueRotate += 0.01;
-            this.cameraFilter.satAdjust += 0.01;
-        }
-    }
+    update() {}
 }
 
-const Between = Phaser.Math.Between;
+const DegToRad = Phaser.Math.DegToRad;
 
 var drawSomething = function (scene) {
-    var graphics = scene.add.graphics();
-    var camera = scene.cameras.main;
-    var w = camera.width,
-        h = camera.height;
-    for (var i = 0; i < 1000; i++) {
-        graphics
-            .fillStyle(Between(0, 0x1000000), Math.random())
-            .fillCircle(Between(0, w), Between(0, w), Between(5, 30));
-    }
+    var colors = Phaser.Display.Color.HSVColorWheel(1, 1);
 
-    var rt = scene.add.renderTexture(0, 0, w, h);
+    var graphics = scene.add.graphics();
+    var r = 100;
+    colors.forEach(function (item, i) {
+        var a = DegToRad(i);
+        graphics
+            .lineStyle(2, item.color)
+            .lineBetween(
+                400,
+                300,
+                400 + (r * Math.cos(a)),
+                300 + (r * Math.sin(a))
+            )
+    })
+    var rt = scene.add.renderTexture(0, 0, 800, 600);
     rt.draw(graphics, 0, 0);
     graphics.destroy();
 }

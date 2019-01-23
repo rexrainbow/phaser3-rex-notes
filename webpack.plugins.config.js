@@ -98,6 +98,7 @@ module.exports = {
         'pixelationpipelineplugin': './plugins/pixelationpipeline-plugin.js',
         'grayscalepipelineplugin': './plugins/grayscalepipeline-plugin.js',
         'inversepipelineplugin': './plugins/inversepipeline-plugin.js',
+        'hsladjustpipelineplugin': './plugins/hsladjustpipeline-plugin.js',
 
         // board
         'boardplugin': './plugins/board-plugin.js',

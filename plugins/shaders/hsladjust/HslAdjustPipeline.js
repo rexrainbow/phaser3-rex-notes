@@ -23,7 +23,7 @@ class HslAdjustPipeline extends TextureTintPipeline {
     resetFromJSON(o) {
         this.setHueRotate(GetValue(o, 'hueRotate', 0));
         this.setSatAdjust(GetValue(o, 'satAdjust', 1));
-        this.setLumAdjust(GetValue(o, 'lumAdjust', 1));
+        this.setLumAdjust(GetValue(o, 'lumAdjust', 0.5));
         return this;
     }
 
@@ -33,7 +33,7 @@ class HslAdjustPipeline extends TextureTintPipeline {
     }
 
     set hueRotate(value) {
-        this._hueRotate = value;
+        this._hueRotate = value; // 0: rotate 0 degrees, 0.5: rotate 180 degrees, 1: rotate 360 degrees
         this.setFloat1('hueRotate', value % 1);
     }
 
@@ -48,7 +48,7 @@ class HslAdjustPipeline extends TextureTintPipeline {
     }
 
     set satAdjust(value) {
-        this._satAdjust = value;
+        this._satAdjust = value; // 0: gray, 1: original color, > 1: 
         this.setFloat1('satAdjust', value);
     }
 
@@ -57,13 +57,13 @@ class HslAdjustPipeline extends TextureTintPipeline {
         return this;
     }
 
-    // satAdjust
+    // lumAdjust
     get lumAdjust() {
         return this._lumAdjust;
     }
 
     set lumAdjust(value) {
-        this._lumAdjust = value;
+        this._lumAdjust = value; // 0: dark, 0.5: original color, 1: white
         this.setFloat1('lumAdjust', value);
     }
 
