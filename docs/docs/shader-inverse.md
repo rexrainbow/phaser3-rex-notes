@@ -18,7 +18,7 @@ User could import class directly, or install it by global plugin.
 ### Import class
 
 ```javascript
-import rexInversepipeline from './plugins/inversepipeline.js';
+import rexInversePipeline from './plugins/inversepipeline.js';
 ```
 
 ### Install global plugin

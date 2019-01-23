@@ -21,9 +21,9 @@ uniform float lumAdjust;
 void main(void) {
 	vec4 front = texture2D(uMainSampler, outTexCoord);
 	vec3 hsl = RGBToHSL(front.rgb);
-	hsl.x += hueRotate;
+	hsl.x -= hueRotate;
 	hsl.y *= satAdjust;
-	hsl.z += (lumAdjust - 1.0) * front.a;
+	hsl.z += (lumAdjust - 0.5) * front.a;
 	vec3 rgb = HSLToRGB(hsl);
 	gl_FragColor = vec4(rgb, front.a);
 }
