@@ -1,5 +1,5 @@
 @echo off
-set myproj=./examples/ui-buttons/buttons.js
+set main=./examples/ui-buttons/buttons.js
 cd ..
 cd ..
 npm run dev

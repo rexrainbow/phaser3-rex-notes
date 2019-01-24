@@ -1,5 +1,5 @@
 @echo off
-set myproj=./examples/tagtext/tagtext.js
+set main=./examples/tagtext/tagtext.js
 cd ..
 cd ..
 npm run dev

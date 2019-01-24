@@ -1,11 +1,11 @@
-var path = require('path');
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 // Phaser webpack config
 var phaser;
-var testMode = process.env.testmode || false;
+const testMode = process.env.testmode || false;
 if (!testMode) {
     var phaserModule = path.join(__dirname, '/node_modules/phaser/')
     phaser = path.join(phaserModule, 'src/phaser.js')
@@ -14,14 +14,15 @@ if (!testMode) {
     phaser = path.join(phaserModule, 'src/phaser.js')
 }
 
-var projectName = process.env.myproj || './examples/test/test.js'
+const projectMain = process.env.main;
+const assetsFolder = process.env.assets;
 
 module.exports = {
     mode: 'development',
     entry: {
         app: [
             '@babel/polyfill',
-            projectName
+            projectMain
         ],
         vendor: ['phaser']
     },

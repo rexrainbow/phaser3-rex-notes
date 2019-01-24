@@ -1,5 +1,5 @@
 @echo off
-set myproj=./examples/pathfollower/pathfollower.js
+set main=./examples/pathfollower/pathfollower.js
 cd ..
 cd ..
 npm run dev

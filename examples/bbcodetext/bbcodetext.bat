@@ -1,5 +1,5 @@
 @echo off
-set myproj=./examples/bbcodetext/bbcodetext.js
+set main=./examples/bbcodetext/bbcodetext.js
 cd ..
 cd ..
 npm run dev

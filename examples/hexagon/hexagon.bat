@@ -1,4 +1,4 @@
-set myproj=./examples/hexagon/hexagon.js
+set main=./examples/hexagon/hexagon.js
 cd ..
 cd ..
 webpack

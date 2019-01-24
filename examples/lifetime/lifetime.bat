@@ -1,5 +1,5 @@
 @echo off
-set myproj=./examples/lifetime/lifetime.js
+set main=./examples/lifetime/lifetime.js
 cd ..
 cd ..
 npm run dev

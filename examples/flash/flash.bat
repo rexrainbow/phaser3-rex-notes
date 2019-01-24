@@ -1,4 +1,4 @@
-set myproj=./examples/flash/flash.js
+set main=./examples/flash/flash.js
 cd ..
 cd ..
 webpack

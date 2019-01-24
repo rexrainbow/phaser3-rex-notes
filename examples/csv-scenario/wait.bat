@@ -1,5 +1,5 @@
 @echo off
-set myproj=./examples/csv-scenario/wait.js
+set main=./examples/csv-scenario/wait.js
 cd ..
 cd ..
 npm run dev

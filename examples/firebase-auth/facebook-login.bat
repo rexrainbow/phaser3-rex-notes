@@ -1,5 +1,5 @@
 @echo off
-set myproj=./examples/firebase-auth/google-login.js
+set main=./examples/firebase-auth/google-login.js
 cd ..
 cd ..
 npm run dev

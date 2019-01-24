@@ -1,5 +1,5 @@
 @echo off
-set myproj=./examples/drag/try-drag.js
+set main=./examples/drag/try-drag.js
 cd ..
 cd ..
 npm run dev

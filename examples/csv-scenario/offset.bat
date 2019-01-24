@@ -1,5 +1,5 @@
 @echo off
-set myproj=./examples/csv-scenario/offset.js
+set main=./examples/csv-scenario/offset.js
 cd ..
 cd ..
 npm run dev

@@ -1,5 +1,5 @@
 @echo off
-set myproj=./examples/ui-textbox/textbox.js
+set main=./examples/ui-textbox/textbox.js
 cd ..
 cd ..
 npm run dev

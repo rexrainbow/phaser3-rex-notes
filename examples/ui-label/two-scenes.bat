@@ -1,4 +1,4 @@
-set myproj=./examples/ui-label/two-scenes.js
+set main=./examples/ui-label/two-scenes.js
 cd ..
 cd ..
 webpack

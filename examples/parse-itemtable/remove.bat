@@ -1,4 +1,4 @@
-set myproj=./examples/parse-itemtable/remove.js
+set main=./examples/parse-itemtable/remove.js
 cd ..
 cd ..
 webpack

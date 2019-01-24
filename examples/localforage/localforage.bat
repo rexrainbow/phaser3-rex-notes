@@ -1,5 +1,5 @@
 @echo off
-set myproj=./examples/localforage/localforage.js
+set main=./examples/localforage/localforage.js
 cd ..
 cd ..
 npm run dev

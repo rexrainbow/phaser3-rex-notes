@@ -1,5 +1,5 @@
 @echo off
-set myproj=./examples/canvas/canvas.js
+set main=./examples/canvas/canvas.js
 cd ..
 cd ..
 npm run dev

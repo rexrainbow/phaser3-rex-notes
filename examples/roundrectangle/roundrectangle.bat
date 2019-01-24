@@ -1,4 +1,4 @@
-set myproj=./examples/roundrectangle/roundrectangle.js
+set main=./examples/roundrectangle/roundrectangle.js
 cd ..
 cd ..
 webpack

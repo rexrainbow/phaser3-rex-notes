@@ -1,5 +1,5 @@
 @echo off
-set myproj=./examples/localstorage/localstorage.js
+set main=./examples/localstorage/localstorage.js
 cd ..
 cd ..
 npm run dev

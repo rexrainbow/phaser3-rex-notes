@@ -1,5 +1,5 @@
 @echo off
-set myproj=./examples/shader-swirl/swirl.js
+set main=./examples/shader-swirl/swirl.js
 cd ..
 cd ..
 npm run dev

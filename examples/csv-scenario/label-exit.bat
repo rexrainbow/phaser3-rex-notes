@@ -1,5 +1,5 @@
 @echo off
-set myproj=./examples/csv-scenario/label-exit.js
+set main=./examples/csv-scenario/label-exit.js
 cd ..
 cd ..
 npm run dev

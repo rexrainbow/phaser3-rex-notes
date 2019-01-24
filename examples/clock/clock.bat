@@ -1,5 +1,5 @@
 @echo off
-set myproj=./examples/clock/clock.js
+set main=./examples/clock/clock.js
 cd ..
 cd ..
 npm run dev

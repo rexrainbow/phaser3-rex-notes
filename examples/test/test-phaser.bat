@@ -1,5 +1,5 @@
 set testmode=1
-set myproj=./examples/test/test-phaser.js
+set main=./examples/test/test-phaser.js
 cd ..
 cd ..
 webpack

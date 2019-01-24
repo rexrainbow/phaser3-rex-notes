@@ -1,5 +1,5 @@
 @echo off
-set myproj=./examples/csv-to-array/load-csv-to-array.js
+set main=./examples/csv-to-array/load-csv-to-array.js
 cd ..
 cd ..
 npm run dev

@@ -1,4 +1,4 @@
-set myproj=./examples/mousewheeltoupdown/updown.js
+set main=./examples/mousewheeltoupdown/updown.js
 cd ..
 cd ..
 webpack

@@ -1,5 +1,5 @@
 @echo off
-set myproj=./examples/gridtable/resize.js
+set main=./examples/gridtable/resize.js
 cd ..
 cd ..
 npm run dev

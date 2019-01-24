@@ -1,5 +1,5 @@
 @echo off
-set myproj=./examples/papaparser/parse-csv.js
+set main=./examples/papaparser/parse-csv.js
 cd ..
 cd ..
 npm run dev

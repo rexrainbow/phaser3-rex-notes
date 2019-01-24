@@ -1,4 +1,4 @@
-set myproj=./examples/moveto/moveto.js
+set main=./examples/moveto/moveto.js
 cd ..
 cd ..
 webpack

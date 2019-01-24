@@ -1,5 +1,5 @@
 @echo off
-set myproj=./examples/gridtable/table-scroller.js
+set main=./examples/gridtable/table-scroller.js
 cd ..
 cd ..
 npm run dev

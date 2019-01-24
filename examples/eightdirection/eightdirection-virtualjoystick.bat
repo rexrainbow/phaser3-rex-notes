@@ -1,5 +1,5 @@
 @echo off
-set myproj=./examples/eightdirection/eightdirection-virtualjoystick.js
+set main=./examples/eightdirection/eightdirection-virtualjoystick.js
 cd ..
 cd ..
 npm run dev

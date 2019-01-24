@@ -1,5 +1,5 @@
 @echo off
-set myproj=./examples/gridtable/cellobjectpool.js
+set main=./examples/gridtable/cellobjectpool.js
 cd ..
 cd ..
 npm run dev

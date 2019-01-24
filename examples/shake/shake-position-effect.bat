@@ -1,4 +1,4 @@
-set myproj=./examples/shake/shake-position-effect.js
+set main=./examples/shake/shake-position-effect.js
 cd ..
 cd ..
 webpack

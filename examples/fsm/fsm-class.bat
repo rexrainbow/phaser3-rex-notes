@@ -1,5 +1,5 @@
 @echo off
-set myproj=./examples/fsm/fsm-class.js
+set main=./examples/fsm/fsm-class.js
 cd ..
 cd ..
 npm run dev

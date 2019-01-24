@@ -1,4 +1,4 @@
-set myproj=./examples/rotateto/rotateto.js
+set main=./examples/rotateto/rotateto.js
 cd ..
 cd ..
 webpack

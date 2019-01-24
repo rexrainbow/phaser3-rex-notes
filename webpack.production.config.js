@@ -11,8 +11,8 @@ const phaser = path.join(phaserModule, 'src/phaser.js');
 
 const projectName = process.env.myprojname;
 const projectMain = process.env.main;
-const distFolder = path.resolve(__dirname, 'app/' + projectName);
 const assetsFolder = process.env.assets;
+const distFolder = path.resolve(__dirname, 'app/' + projectName);
 
 module.exports = {
     mode: 'production',

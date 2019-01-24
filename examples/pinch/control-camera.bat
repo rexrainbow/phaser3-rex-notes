@@ -1,5 +1,5 @@
 @echo off
-set myproj=./examples/pinch/control-camera.js
+set main=./examples/pinch/control-camera.js
 cd ..
 cd ..
 npm run dev

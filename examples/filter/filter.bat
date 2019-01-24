@@ -1,5 +1,5 @@
 @echo off
-set myproj=./examples/filter/filter.js
+set main=./examples/filter/filter.js
 cd ..
 cd ..
 npm run dev

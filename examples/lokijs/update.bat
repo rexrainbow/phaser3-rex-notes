@@ -1,5 +1,5 @@
 @echo off
-set myproj=./examples/lokijs/update.js
+set main=./examples/lokijs/update.js
 cd ..
 cd ..
 npm run dev

@@ -1,5 +1,5 @@
 @echo off
-set myproj=./examples/ui-gridsizer/gridsizer.js
+set main=./examples/ui-gridsizer/gridsizer.js
 cd ..
 cd ..
 npm run dev

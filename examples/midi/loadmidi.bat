@@ -1,5 +1,5 @@
 @echo off
-set myproj=./examples/midi/loadmidi.js
+set main=./examples/midi/loadmidi.js
 cd ..
 cd ..
 npm run dev

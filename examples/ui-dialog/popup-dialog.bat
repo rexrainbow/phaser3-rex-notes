@@ -1,5 +1,5 @@
 @echo off
-set myproj=./examples/ui-dialog/popup-dialog.js
+set main=./examples/ui-dialog/popup-dialog.js
 cd ..
 cd ..
 npm run dev

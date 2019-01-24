@@ -1,5 +1,5 @@
 @echo off
-set myproj=./examples/buffdata/extend.js
+set main=./examples/buffdata/extend.js
 cd ..
 cd ..
 npm run dev

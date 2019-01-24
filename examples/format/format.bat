@@ -1,5 +1,5 @@
 @echo off
-set myproj=./examples/format/format.js
+set main=./examples/format/format.js
 cd ..
 cd ..
 npm run dev

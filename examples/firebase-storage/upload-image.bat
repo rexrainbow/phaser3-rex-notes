@@ -1,5 +1,5 @@
 @echo off
-set myproj=./examples/firebase-storage/upload-image.js
+set main=./examples/firebase-storage/upload-image.js
 cd ..
 cd ..
 npm run dev

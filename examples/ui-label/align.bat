@@ -1,5 +1,5 @@
 @echo off
-set myproj=./examples/ui-label/align.js
+set main=./examples/ui-label/align.js
 cd ..
 cd ..
 npm run dev

@@ -1,5 +1,5 @@
 @echo off
-set myproj=./examples/lokijs/dynamicview.js
+set main=./examples/lokijs/dynamicview.js
 cd ..
 cd ..
 npm run dev
