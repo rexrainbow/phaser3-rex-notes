@@ -15,7 +15,7 @@ if (!testMode) {
 }
 
 const projectMain = process.env.main;
-const assetsFolder = process.env.assets;
+const assetsFolder = process.env.assets || './assets';
 const htmlTemplate = process.env.htmltemplate || './examples/index.tmpl';
 
 module.exports = {
@@ -64,8 +64,11 @@ module.exports = {
             host: process.env.IP || 'localhost',
             port: process.env.PORT || 3000,
             server: {
-                baseDir: ['./', './build']
-            }
+                baseDir: './',
+                routes: {
+                    '/assets': assetsFolder,
+                }
+            },
         })
     ],
     module: {

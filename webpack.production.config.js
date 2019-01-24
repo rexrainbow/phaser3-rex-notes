@@ -13,6 +13,7 @@ const projectName = process.env.myprojname;
 const projectMain = process.env.main;
 const assetsFolder = process.env.assets;
 const htmlTemplate = process.env.htmltemplate || './examples/index.tmpl';
+
 const distFolder = path.resolve(__dirname, 'app/' + projectName);
 
 module.exports = {
@@ -25,7 +26,7 @@ module.exports = {
         vendor: ['phaser']
     },
     output: {
-        path: distFolder, // path.resolve(__dirname, 'build'),
+        path: distFolder,
         publicPath: './',
         library: '[name]',
         libraryTarget: 'umd',
