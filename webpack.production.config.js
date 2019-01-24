@@ -79,7 +79,7 @@ module.exports = {
         }),
         new CopyWebpackPlugin([{
             from: assetsFolder,
-            to: distFolder + 'assets/'
+            to: distFolder + '/assets/'
         }])
     ],
     module: {
