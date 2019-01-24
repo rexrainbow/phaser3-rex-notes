@@ -16,6 +16,7 @@ if (!testMode) {
 
 const projectMain = process.env.main;
 const assetsFolder = process.env.assets;
+const htmlTemplate = process.env.htmltemplate || './examples/index.html';
 
 module.exports = {
     mode: 'development',
@@ -44,7 +45,7 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             filename: '../index.html',
-            template: './examples/index.html',
+            template: htmlTemplate,
             chunks: ['vendor', 'app'],
             chunksSortMode: 'manual',
             minify: {

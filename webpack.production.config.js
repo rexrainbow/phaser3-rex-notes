@@ -12,6 +12,7 @@ const phaser = path.join(phaserModule, 'src/phaser.js');
 const projectName = process.env.myprojname;
 const projectMain = process.env.main;
 const assetsFolder = process.env.assets;
+const htmlTemplate = process.env.htmltemplate || './examples/index.html';
 const distFolder = path.resolve(__dirname, 'app/' + projectName);
 
 module.exports = {
@@ -62,7 +63,7 @@ module.exports = {
         new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
         new HtmlWebpackPlugin({
             filename: distFolder + '/index.html',
-            template: './examples/index.html',
+            template: htmlTemplate,
             chunks: ['vendor', 'app'],
             chunksSortMode: 'manual',
             minify: {
