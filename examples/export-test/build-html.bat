@@ -1,5 +1,5 @@
 @echo off
-set myprojname=export-test
+set myprojname=export-html-test
 set main=./examples/export-test/main.js
 set assets=./examples/export-test/assets
 cd ..
