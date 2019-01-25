@@ -1,5 +1,5 @@
 const frag = `
-vec3 HSVtoRGB(float h, float s, float v) {
+vec3 HSVToRGB(float h, float s, float v) {
   int i;
   float f, p, q, t;
   vec3 res;
