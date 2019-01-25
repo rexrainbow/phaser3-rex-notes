@@ -7,8 +7,7 @@ const frag = `#ifdef GL_FRAGMENT_PRECISION_HIGH
 #define highmedp mediump
 #endif
 precision highmedp float;
-` + RGBToHSL + HSLToRGB + 
-`
+
 // Scene buffer
 uniform sampler2D uMainSampler; 
 varying vec2 outTexCoord;
@@ -17,7 +16,9 @@ varying vec2 outTexCoord;
 uniform float hueRotate;
 uniform float satAdjust;
 uniform float lumAdjust;
-
+`
++ RGBToHSL + HSLToRGB + 
+`
 void main(void) {
 	vec4 front = texture2D(uMainSampler, outTexCoord);
 	vec3 hsl = RGBToHSL(front.rgb);
