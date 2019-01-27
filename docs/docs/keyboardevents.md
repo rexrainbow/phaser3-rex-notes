@@ -16,8 +16,8 @@ scene.input.keyboard.on('keyup', function (event) { /* ... */});
 ### Specific key down/up events
 
 ```javascript
-scene.input.keyboard.on('keydown_' + 'A', function (event) { /* ... */});
-scene.input.keyboard.on('keyup_' + 'A', function (event) { /* ... */});
+scene.input.keyboard.on('keydown-' + 'A', function (event) { /* ... */});
+scene.input.keyboard.on('keyup-' + 'A', function (event) { /* ... */});
 ```
 
 ### Get state of key
