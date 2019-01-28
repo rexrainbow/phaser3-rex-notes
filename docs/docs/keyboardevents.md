@@ -6,42 +6,73 @@ Built-in keyboard events of phaser.
 
 ## Usage
 
-### Any key down/up events
+### Quick start
 
-```javascript
-scene.input.keyboard.on('keydown', function (event) { /* ... */});
-scene.input.keyboard.on('keyup', function (event) { /* ... */});
-```
-
-### Specific key down/up events
-
-```javascript
-scene.input.keyboard.on('keydown-' + 'A', function (event) { /* ... */});
-scene.input.keyboard.on('keyup-' + 'A', function (event) { /* ... */});
-```
-
-### Get state of key
-
-1. Get state object of a key
+- Is key-down/is key-up
     ```javascript
-    var WKey = scene.input.keyboard.addKey('W');  // see `Key map` section
-    // var WKey = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+    var keyObj = scene.input.keyboard.addKey('W');  // Get key object
+    var isDown = keyObj.isDown;
+    var isUp = keyObj.isUp;
     ```
-    - Get state object of keys
-        ```javascript
-        var keys = scene.input.keyboard.addKey('W,S,A,D'); // comma-separated string
-        ```
-1. Get key state
+- Key is down after a duration
     ```javascript
-    var isDown = WKey.isDown;
-    var isUp = WKey.isUp;
+    var keyObj = scene.input.keyboard.addKey('W');  // Get key object
+    var isDown = scene.input.keyboard.checkDown(keyObj, duration);
     ```
-    - Key is down after a duration.
-        ```javascript
-        var isDown = scene.input.keyboard.checkDown(WKey, duration);
-        ```
+- On key-down/on key-up
+    ```javascript
+    var keyObj = scene.input.keyboard.addKey('W');  // Get key object
+    keyObj.on('down', function(event) { /* ... */ });
+    keyObj.on('up', function(event) { /* ... */ });
+    ```
+    or
+    ```javascript
+    scene.input.keyboard.on('keydown-' + 'W', function (event) { /* ... */ });
+    scene.input.keyboard.on('keyup-' + 'W', function (event) { /* ... */ });
+    ```
+- Any key-down/any key-up
+    ```javascript
+    scene.input.keyboard.on('keydown', function (eventName, event) { /* ... */ });
+    scene.input.keyboard.on('keyup', function (eventName, event) { /* ... */ });
+    ```
+    - `eventName` : `'keydown-' + 'W'`, or `'keyup-' + 'W'`
 
-### Get state of cursorkeys
+### Key object
+
+- Get key object
+    ```javascript
+    var keyObj = scene.input.keyboard.addKey('W');  // see `Key map` section
+    // var keyObj = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+    ```
+- Get key objects
+    ```javascript
+    var keys = scene.input.keyboard.addKeys('W,S,A,D');  // keys.W, keys.S, keys.A, keys.D
+    ```
+    or
+    ```javascript
+    var keys = scene.input.keyboard.addKeys({
+        up: 'up',
+        down: 'down',
+        left: 'left',
+        right: 'right'
+    });  // keys.up, keys.down, keys.left, keys.right
+    ```
+- Remove key object
+    ```javascript
+    scene.input.keyboard.removeKey('W');
+    // scene.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.W);
+    ```
+- Key-down/key-up state
+    ```javascript
+    var isDown = keyObj.isDown;
+    var isUp = keyObj.isUp;
+    ```
+- Enable/disable
+    ```javascript
+    keyObj.enabled = enabled; // Set false to disable key event
+    ```
+
+### Key object of cursorkeys
 
 1. Get key state object
     ```javascript
@@ -57,14 +88,54 @@ scene.input.keyboard.on('keyup-' + 'A', function (event) { /* ... */});
     var isShiftDown = cursorKeys.shift.isDown;
     ```
 
-### Remove key state
+### Order of key-down/key-up events
 
-```javascript
-scene.input.keyboard.removeKey('W');
-// scene.input.keyboard.removeKey(Phaser.Input.Keyboard.KeyCodes.W);
-```
+1. Key-down/key-up events of key object
+    ```javascript
+    var keyObj = scene.input.keyboard.addKey('W');  // Get key object
+    keyObj.on('down', function(event) { /* ... */ });
+    keyObj.on('up', function(event) { /* ... */ });
+    ```
+    - `event.stopImmediatePropagation()` : Stop any further listeners from being invoked in the current Scene.
+    - `event.stopPropagation()` : Stop it reaching any other Scene.
+1. On key-down/on key-up
+    ```javascript
+    scene.input.keyboard.on('keydown-' + 'W', function (event) { /* ... */ });
+    scene.input.keyboard.on('keyup-' + 'W', function (event) { /* ... */ });
+    ```
+    - `event.stopImmediatePropagation()` : Stop any further listeners from being invoked in the current Scene.
+    - `event.stopPropagation()` : Stop it reaching any other Scene.    
+1. Any key-down/on key-up
+    ```javascript
+    scene.input.keyboard.on('keydown', function (eventName, event) { /* ... */ });
+    scene.input.keyboard.on('keyup', function (eventName, event) { /* ... */ });
+    ```
+    - `event.stopImmediatePropagation()` : Stop any further listeners from being invoked in the current Scene.
+    - `event.stopPropagation()` : Stop it reaching any other Scene.
 
-Removed key state won't be updated.
+### Combo
+
+1. Create combo
+    ```javascript
+    var keyCombo = scene.input.keyboard.createCombo(keys, {
+        // resetOnWrongKey: true,
+        // maxKeyDelay: 0,
+        // resetOnMatch: false,
+        // deleteOnMatch: false,
+    });
+    ```
+    - `keys` : Array of keyCodes
+        - In strings. ex: `['up', 'up', 'down', 'down']`, or `['UP', 'UP', 'DOWN', 'DOWN']`
+        - In key map. ex: `[Phaser.Input.Keyboard.KeyCodes.UP, ... ]`
+        - In numbers. ex: `[38, 38, 40, 40]`
+    - `resetOnWrongKey` : Set `true` to reset the combo when press the wrong key.
+    - `maxKeyDelay` : The max delay in ms between each key press. Set `0` to disable this feature.
+    - `resetOnMatch` : Set `true` to reset the combo when previously matched.
+    - `deleteOnMatch` : Set `true` to delete this combo when matched.
+1. Listen combo matching event
+    ```javascript
+    scene.input.keyboard.on('keycombomatch', function (keyCombo, keyboardEvent) { /* ... */ });
+    ```
 
 ### Key map
 
@@ -87,3 +158,4 @@ Removed key state won't be updated.
 - `ZERO`, `ONE`, `TWO`, `THREE`, `FOUR`, `FIVE`, `SIX`, `SEVEN`, `EIGHT`, `NINE`
 - `NUMPAD_ZERO`, `NUMPAD_ONE`, `NUMPAD_TWO`, `NUMPAD_THREE`, `NUMPAD_FOUR`, `NUMPAD_FIVE`, `NUMPAD_SIX`, `NUMPAD_SEVEN`, `NUMPAD_EIGHT`, `NUMPAD_NINE`
 - `OPEN_BRACKET`, `CLOSED_BRACKET`
+- `SEMICOLON_FIREFOX`, `COLON`, `COMMA_FIREFOX_WINDOWS`, `COMMA_FIREFOX`, `BRACKET_RIGHT_FIREFOX`, `BRACKET_LEFT_FIREFOX`

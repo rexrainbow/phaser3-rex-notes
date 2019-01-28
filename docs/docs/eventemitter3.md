@@ -32,7 +32,7 @@ ee.addListener(eventName, callback, scope, true);  // only fire listeners one ti
 ### Fire event
 
 ```javascript
-ee.emit(eventName);
+ee.emit(eventName, parameter0, ...);
 ```
 
 ### Remove listeners

@@ -1,3 +1,5 @@
+const Key = Phaser.Input.Keyboard.Key;
+
 class CursorKeys {
     constructor() {
         this.cursorKeys = {
@@ -61,9 +63,4 @@ class CursorKeys {
     }
 }
 
-var Key = function () {
-    this.enabled = true;
-    this.isUp = true;
-    this.isDown = false;
-}
 export default CursorKeys;
