@@ -21,12 +21,19 @@ class CursorKeys {
         if (!key.enabled) {
             return this;
         }
-
-        key.isDown = isDown;
-        key.isUp = !isDown;
         if (isDown) {
             this.noKeyDown = false;
         }
+
+        if (key.isDown !== isDown) {
+            fakeEvent.timeDown = Date.now();
+            if (isDown) {
+                key.onDown(fakeEvent);
+            } else {
+                key.onUp(fakeEvent);
+            }
+        }
+
         return this;
     }
 
@@ -62,5 +69,13 @@ class CursorKeys {
         return !this.noKeyDown;
     }
 }
+
+var fakeEvent = {
+    altKey: false,
+    ctrlKey: false,
+    shiftKey: false,
+    metaKey: false,
+    location: 0,
+};
 
 export default CursorKeys;

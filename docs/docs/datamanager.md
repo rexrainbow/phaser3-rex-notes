@@ -35,14 +35,14 @@ Fires `setdata` event when a value is first set.
 parent.data.events.on('setdata', function(parent, key, value){ /* ... */ });
 ```
 
-Fires `changedata`, and `changedata_ + key` events when a value is set that already exists.
+Fires `changedata`, and `changedata- + key` events when a value is set that already exists.
 
 ```javascript
 parent.data.events.on('changedata', function(parent, key, value, previousValue){ /* ... */ });
 ```
 
 ```javascript
-parent.data.events.on('changedata_' + key, function(parent, value, previousValue){ /* ... */ });
+parent.data.events.on('changedata-' + key, function(parent, value, previousValue){ /* ... */ });
 ```
 
 ### Read

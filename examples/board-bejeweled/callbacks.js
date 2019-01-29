@@ -16,7 +16,7 @@ class Demo extends Phaser.Scene {
             color: '#fff'
         });
 
-        this.data.events.on('changedata_scores', function (scene, value, previousValue) {            
+        this.data.events.on('changedata-scores', function (scene, value, previousValue) {            
             txtScore.setText(value);
         });
         this.data.set('scores', 0);
@@ -53,7 +53,7 @@ class Demo extends Phaser.Scene {
                         .setData('symbol', undefined);
                     // Symbol is stored in gameObject's data manager (`gameObject.getData('symbol')`)
                     // Add data changed event to change the appearance of game object via new symbol value
-                    gameObject.data.events.on('changedata_symbol', function (gameObject, value, previousValue) {
+                    gameObject.data.events.on('changedata-symbol', function (gameObject, value, previousValue) {
                         gameObject.setFillStyle(getColor(value));
                     });
                     return gameObject;

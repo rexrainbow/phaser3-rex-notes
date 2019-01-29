@@ -184,7 +184,9 @@ Trigger these events from top scene to bottom scene.
 1. Events to get **all** touched Game Objects
     ```javascript
     scene.input.on('pointerdown', function(pointer, currentlyOver){ /* ... */ });
+    scene.input.on('pointerdownoutside', function(pointer){ /* ... */ });
     scene.input.on('pointerup', function(pointer, currentlyOver){ /* ... */ });
+    scene.input.on('pointerupoutside', function(pointer){ /* ... */ });
     scene.input.on('pointermove', function(pointer, currentlyOver){ /* ... */ });
     scene.input.on('pointerover', function(pointer, justOver){ /* ... */ });
     scene.input.on('pointerout', function(pointer, justOut){ /* ... */ });
@@ -333,9 +335,19 @@ scene.input.addPointer(num);  // total points = num + 1
         - Position in screen : `pointer.x` , `pointer.y`
         - Position in camera : `pointer.worldX` , `pointer.worldY`
         - Position of previous moving : `pointer.prevPosition.x` , `pointer.prevPosition.y`
-    - Dragable object
+        - Interpolated position :
+            ```javascript
+            var points = pointer.getInterpolatedPosition(step);
+            // var out = pointer.getInterpolatedPosition(step, out);
+            ```
+    - Drag
         - Touching start : `pointer.downX`, `pointer.downY`
         - Touching end : `pointer.upX`, `pointer.upY`
+        - Drag distance : `pointer.getDistance()`
+            - Horizontal drag distance : `pointer.getDistanceX()`
+            - Vertical drag distance : `pointer.getDistanceY()`
+        - Drag duration : `pointer.getDuration()`
+        - Drag angle : `pointer.getAngle()`
 - Touch state
     - Is touching :  `pointer.isDown`
     - Is touching start : `pointer.justDown`
@@ -349,3 +361,33 @@ scene.input.addPointer(num);  // total points = num + 1
     - Is back botton down : `pointer.backButtonDown()`
     - Is forward button down : `pointer.forwardButtonDown()`
 - Index in `scene.input.manager.pointers` : `pointer.id`
+- Motion
+    - Angle: `pointer.angle`
+    - Disatance: `pointer.distance`
+    - Velocity: `pointer.velocity`
+        - `pointer.velocity.x`, ``pointer.velocity.y`
+
+### Smooth
+
+Get touch position from interpolation of previous touch position and current touch position.
+
+```
+Touch-position = (current-touch-position * smooth-factor) + (previous-touch-position * (1 - smooth-factor))
+```
+
+1. Set smooth factor. In [game configuration](game.md#configuration)
+    ```javascript
+    var config = {
+        // ....
+        input: {
+            smoothFactor: 0
+        }
+    }
+    ```
+1. Get touch position
+    ```javascript
+    var x = pointer.x;
+    var y = pointer.y;
+    var worldX = pointer.worldX;
+    var worldY = pointer.worldY;
+    ```

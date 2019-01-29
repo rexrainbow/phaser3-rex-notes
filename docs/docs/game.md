@@ -22,6 +22,7 @@ var game = new Phaser.Game(config);
     height: 768,
     zoom: 1,
     resolution: 1,
+    autoRound: false,
     type: Phaser.AUTO,
 
     parent: null,
@@ -53,7 +54,8 @@ var game = new Phaser.Game(config);
         touch: {
             target: null,
             capture: true
-        }
+        },
+        smoothFactor: 0,
         gamepad: false
     },
 
@@ -61,7 +63,6 @@ var game = new Phaser.Game(config);
     render: {
         antialias: true,
         pixelArt: false,
-        autoResize: false,
         roundPixels: false,
         transparent: false,
         clearBeforeRender: true,
@@ -130,14 +131,6 @@ var game = new Phaser.Game(config);
     }
 }
 ```
-
-## Resize
-
-```javascript
-game.resize(width, height);
-```
-
-Also fires game.events `resize` event.
 
 ## Destroy
 

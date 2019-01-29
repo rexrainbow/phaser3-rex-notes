@@ -81,17 +81,18 @@ class Drag {
     }
 
     drag() {
-        var inputManager = this.scene.input.manager;
+        var inputPlugin = this.scene.input;
+        var inputManager = inputPlugin.manager;
         var pointersTotal = inputManager.pointersTotal;
         var pointers = inputManager.pointers,
             pointer;
         for (var i = 0; i < pointersTotal; i++) {
             pointer = pointers[i];
-            if (pointer.dragState > 0) {
+            if (inputPlugin.getDragState(pointer) > 0) {
                 continue;
             }
             if (IsObjectInTouching(this.gameObject, pointer)) {
-                pointer.dragState = 1;
+                inputPlugin.setDragState(pointer, 1);
                 break;
             }
         }
