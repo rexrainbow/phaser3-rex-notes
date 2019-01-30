@@ -201,7 +201,7 @@ var music = this.sound.add(key, config);
     ```
 - Playback end
     ```javascript
-    music.once('ended', function(music){});
+    music.once('complete', function(music){});
     ```
 - Looping
     ```javascript

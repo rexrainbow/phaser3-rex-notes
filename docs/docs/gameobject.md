@@ -166,6 +166,28 @@ var output = gameObject.getBounds(output);      // output: {x, y, width, height}
     - `'ADD'`, or `Phaser.BlendModes.ADD`, or `1`
     - `'MULTIPLY'`, or `Phaser.BlendModes.MULTIPLY`, or `2`
     - `'SCREEN'`, or `Phaser.BlendModes.SCREEN`, or `3`
+    - `'ERASE'`, or `Phaser.BlendModes.ERASE`, or `17`
+        - Only works when rendering to a framebuffer, like a *Render Texture*
+    - `'SOURCE_IN'`, or `Phaser.BlendModes.SOURCE_IN`, or `18`
+        - Canvas render mode only
+    - `'SOURCE_OUT'`, or `Phaser.BlendModes.SOURCE_OUT`, or `19`
+        - Canvas render mode only
+    - `'SOURCE_ATOP'`, or `Phaser.BlendModes.SOURCE_ATOP`, or `20`
+        - Canvas render mode only
+    - `'DESTINATION_OVER'`, or `Phaser.BlendModes.DESTINATION_OVER`, or `21`
+        - Canvas render mode only
+    - `'DESTINATION_IN'`, or `Phaser.BlendModes.DESTINATION_IN`, or `22`
+        - Canvas render mode only
+    - `'DESTINATION_OUT'`, or `Phaser.BlendModes.DESTINATION_OUT`, or `23`
+        - Canvas render mode only
+    - `'DESTINATION_ATOP'`, or `Phaser.BlendModes.DESTINATION_ATOP`, or `24`
+        - Canvas render mode only
+    - `'LIGHTER'`, or `Phaser.BlendModes.LIGHTER`, or `25`
+        - Canvas render mode only
+    - `'COPY'`, or `Phaser.BlendModes.COPY`, or `26`
+        - Canvas render mode only
+    - `'XOR'`, or `Phaser.BlendModes.XOR`, or `27`
+        - Canvas render mode only
 - Canvas has more available depending on browser support
 
 ### Size
@@ -225,6 +247,17 @@ gameObject.setInteractive().on('pointerdown', function(pointer, localX, localY, 
 ```
 
 See [touch event](touchevents.md#quick-start)
+
+### State
+
+- Get
+    ```javascript
+    var state = gameObject.state;
+    ```
+- Set
+    ```javascript
+    gameObject.setState(state);
+    ```
 
 ### Private data
 

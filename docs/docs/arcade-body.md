@@ -92,6 +92,17 @@ Whether the Body's position and rotation are affected by its velocity, accelerat
     var vy = body.velocity.y;
     ```
 
+##### Max speed
+
+- Set
+    ```javascript
+    body.setMaxSpeed(speed);
+    ```
+- Get
+    ```javascript
+    var speed = body.maxSpeed;
+    ```
+
 ##### Max velocity
 
 - Set

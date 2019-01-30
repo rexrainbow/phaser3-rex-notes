@@ -24,7 +24,7 @@ nav:
             - Blitter: blitter.md
             - Particles: particles.md        
             - Tile sprite: tilesprite.md
-        - Texture: texture.md
+        - Texture: texture.md        
     - Text:
         - Canvas text:
             - Text: text.md
@@ -53,7 +53,8 @@ nav:
             - Iso box: shape-isobox.md
             - Iso triangle: shape-isotriangle.md
             - Round Rectangle: shape-roundrectangle.md
-        - Canvas: canvas.md        
+        - Canvas: canvas.md
+        - Canvas texture: canvas-texture.md
     - Tile map:
         - Tile map: tilemap.md
     - Container:
@@ -117,7 +118,10 @@ nav:
     - Volume fading: fadevolume.md
 - Camera:
     - Camera: camera.md
-    - Filters:
+    - Effects: camera-effects.md
+    - Controllor: camera-controllor.md    
+    - Shader effects:
+        - Shader effect: camera-shader-effect.md
         - Color:
             - Gray scale: shader-grayscale.md
             - Inverse: shader-inverse.md

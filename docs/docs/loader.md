@@ -233,6 +233,14 @@ var cache = scene.cache.html;
 var data = cache.get(key);
 ```
 
+#### Scene
+
+```javascript
+scene.load.sceneFile(key, url);
+```
+
+The `key` matches the **class name** in the JavaScript file.
+
 #### Script
 
 ```javascript
@@ -288,7 +296,7 @@ JSON pack file:
         // "prefix": "...",          // optional, extend key by prefix
         // "path": "...",            // optional, extend url by path
         // "defaultType": "image",   // optional, default file type
-        'files': [ 
+        'files': [
             {
                 'type': 'image',
                 'key': '...',
@@ -298,7 +306,7 @@ JSON pack file:
                 'type': 'image',
                 'key': '...',
                 'url': '...'
-            }            
+            }
             // ...
         ]
     },
@@ -348,3 +356,8 @@ cache.remove(key);
 var cache = scene.cache.text;
 var hasData = cache.has(key);
 ```
+
+### Replace
+
+1. [Remove key](loader.md#release-data).
+1. Load file again.

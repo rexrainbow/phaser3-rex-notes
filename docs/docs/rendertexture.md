@@ -101,6 +101,14 @@ rt.setGlobalTint(tint);
 // rt.globalTint = tint;
 ```
 
+### Erase
+
+```javascript
+rt.erase(gameObject, x, y);
+```
+
+- `gameObject` : a game object, or an array of game objects
+
 ### Clear
 
 ```javascript

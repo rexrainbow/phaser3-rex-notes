@@ -86,7 +86,7 @@ class Ship extends TickTask {
 
     setMaxSpeed(speed) {
         var body = this.gameObject.body;
-        body.setMaxVelocity(speed);
+        body.setMaxSpeed(speed);
         return this;
     }
 

@@ -92,6 +92,10 @@ graphics.strokeLineShape(line);
             ```javascript
             var rad = Phaser.Math.DegToRad(deg);
             ```
+- Extend
+    ```javascript
+    var line = Phaser.Geom.Line.Extend(line, left, right);
+    ```
 
 ### Get properties
 
@@ -198,6 +202,15 @@ graphics.strokeLineShape(line);
     ```javascript
     var points = Phaser.Geom.Line.BresenhamPoints(line, step);
     // var points = Phaser.Geom.Line.BresenhamPoints(line, step, points);  // push points
+    ```
+- Get the nearest point on a line perpendicular to the given point.
+    ```javascript
+    var point = Phaser.Geom.Line.GetNearestPoint(line, pointIn);
+    // var point = Phaser.Geom.Line.GetNearestPoint(line, pointIn, point);
+    ```
+- Get the shortest distance from a Line to the given Point.
+    ```javascript
+    var distance = Phaser.Geom.Line.GetShortestDistance(line, point);
     ```
 
 ### Equal

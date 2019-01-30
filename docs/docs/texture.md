@@ -21,60 +21,6 @@ Textures cache, built-in object of phaser.
     // var height = image.height;
     ```
 
-### Canvas texture
-
-- Create canvas texture
-    ```javascript
-    var texture = scene.textures.createCanvas(key, width, height);
-    ```
-- Get canvas element
-    ```javascript
-    var canvas = texture.getSourceImage();
-    var context = canvas.getContext('2d');
-    ```
-    [Canvas api](https://www.w3schools.com/html/html5_canvas.asp)
-- Copy image to canvas
-    ```javascript
-    var image = scene.textures.get(srcKey).getSourceImage();
-    var canvas = scene.textures.createCanvas(destKey, image.width, image.height).getSourceImage();
-    var context = canvas.getContext('2d');
-    context.drawImage(image, 0, 0);
-    // var pixels = context.getImageData(0, 0, image.width, image.height);  // 1d array. [r,g,b,a,r,g,b,a,...]
-    ```
-    - Create canvas from canvas pool
-        ```javascript
-        var canvas = Phaser.Display.Canvas.Pool.create(parent, width, height);
-        ```
-    - Release canvas
-        ```javascript
-        CanvasPool.remove(canvas);
-        ```
-- Refresh canvas texture
-    ```javascript
-    texture.refresh();
-    ```
-- Generate
-    ```javascript
-    var config = {
-        data: data,
-        // 3x3:
-        // [ '...',
-        //   '...',
-        //   '...' ]
-
-        pixelWidth: 1,    // pixel width of each data
-        pixelHeight: 1,   // pixel height of each data
-
-        preRender: null,  // callback, function(canvas, ctx) {}
-        postRender: null, // callback, function(canvas, ctx) {}
-        
-        canvas: null,  // create a canvas if null
-        resizeCanvas: true,
-        clearCanvas: true
-    };
-    var texture = scene.textures.generate(key, config);
-    ```
-
 ### Get pixel
 
 ```javascript
@@ -98,6 +44,27 @@ var alpha = scene.textures.getPixelAlpha(x, y, key);
 alpha : 0 ~ 255
 
 Return `null` if the coordinates were out of bounds.
+
+### Generate texture from array
+
+```javascript
+var config = {
+    data: data,
+    // 3x3:
+    // [ '...',
+    //   '...',
+    //   '...' ]
+    pixelWidth: 1,    // pixel width of each data
+    pixelHeight: 1,   // pixel height of each data
+    preRender: null,  // callback, function(canvas, ctx) {}
+    postRender: null, // callback, function(canvas, ctx) {}
+
+    canvas: null,  // create a canvas if null
+    resizeCanvas: true,
+    clearCanvas: true
+};
+var texture = scene.textures.generate(key, config);
+```
 
 ### Has key
 

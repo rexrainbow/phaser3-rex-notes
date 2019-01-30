@@ -100,8 +100,11 @@ x, y are equal.
 
 - Point to [line](geom-line.md)
     ```javascript
+    var result = Phaser.Geom.Intersects.PointToLine(point, line);
+    // var result = Phaser.Geom.Intersects.PointToLine(point, line, lineThickness);
+    ```
+    ```javascript
     var result = Phaser.Geom.Intersects.PointToLineSegment(point, line);
-    //var result = Phaser.Geom.Intersects.PointToLine(point, line);
     ```
 
 ### Point as Vector

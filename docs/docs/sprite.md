@@ -171,6 +171,22 @@ scene.anims.create(config);
     sprite.anims.playReverse(key);
     // sprite.playReverse(key, ignoreIfPlaying, startFrame);
     ```
+- Set to next frame
+    ```javascript
+    sprite.anims.nextFrame();
+    ```
+- Set to previous frame
+    ```javascript
+    sprite.anims.previousFrame();
+    ```
+- Chain next animation
+    ```javascript
+    sprite.anims.chain(key);
+    ```
+    - Reset
+        ```javascript
+        sprite.anims.chain();
+        ```
 - Time scale
     ```javascript
     sprite.anims.setTimeScale(value);
@@ -210,7 +226,7 @@ scene.anims.create(config);
     - Set yoyo
         ```javascript
         sprite.anims.setYoyo(value);
-        ```    
+        ```
     - Stop repeat
         ```javascript
         sprite.anims.stopOnRepeat();
@@ -267,17 +283,47 @@ scene.anims.create(config);
 
 #### Events
 
+##### Sprite
+
 - On start
     ```javascript
-    sprite.on('animationstart', function(currentAnim, currentFrame){});
+    sprite.on('animationstart', function(currentAnim, currentFrame, sprite){});
+    ```
+    ```javascript
+    sprite.on('animationstart-' + key, function(currentAnim, currentFrame, sprite){});
     ```
 - On complete
     ```javascript
-    sprite.on('animationcomplete', function(currentAnim, currentFrame){});
+    sprite.on('animationcomplete', function(currentAnim, currentFramee, sprite){});
+    ```
+    ```javascript
+    sprite.on('animationcomplete-' + key, function(currentAnim, currentFramee, sprite){});
     ```
 - On update
     ```javascript
-    sprite.on('animationupdate', function(currentAnim, currentFrame){});
+    sprite.on('animationupdate', function(currentAnim, currentFrame, sprite){});
+    ```
+    ```javascript
+    sprite.on('animationupdate-' + key, function(currentAnim, currentFrame, sprite){});
+    ```
+
+#### Animation
+
+- Get animation
+    ```javascript
+    var anim = scene.anims.get(key);
+    ```
+- On start
+    ```javascript
+    anim.on('start', function(currentAnim, currentFrame, sprite){});
+    ```
+- On complete
+    ```javascript
+    anim.on('complete', function(currentAnim, currentFrame, sprite){});
+    ```
+- On restart
+    ```javascript
+    anim.on('restart', function(currentAnim, currentFrame, sprite){});
     ```
 
 ### Animation manager
@@ -304,6 +350,14 @@ scene.anims.create(config);
 - Resume all animations
     ```javascript
     scene.anims.resumeAll();
+    ```
+- Key exists
+    ```javascript
+    var exists = scene.anims.exists(key);
+    ```
+- Get animation
+    ```javascript
+    var anim = scene.anims.get(key);
     ```
 
 #### Events

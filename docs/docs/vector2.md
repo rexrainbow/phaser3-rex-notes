@@ -119,3 +119,30 @@ var newVector = vector.clone();
     vector.lerp(src, t); // src: {x, y}
     ```
     - `t` : The interpolation percentage, between 0 and 1.
+
+### Constant
+
+- Zero `(0,0)`
+    ```javascript
+    var vector = Phaser.Math.Vector2.ZERO;
+    ```
+- One `(1,1)`
+    ```javascript
+    var vector = Phaser.Math.Vector2.ONE;
+    ```
+- Right `(1,0)`
+    ```javascript
+    var vector = Phaser.Math.Vector2.RIGHT;
+    ```
+- Left `(-1,0)`
+    ```javascript
+    var vector = Phaser.Math.Vector2.LEFT;
+    ```
+- Up `(0,-1)`
+    ```javascript
+    var vector = Phaser.Math.Vector2.UP;
+    ```
+- Down `(0,1)`
+    ```javascript
+    var vector = Phaser.Math.Vector2.DOWN;
+    ```

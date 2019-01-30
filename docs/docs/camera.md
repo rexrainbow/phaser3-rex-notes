@@ -39,37 +39,20 @@ camera.destroy();
 ### View port
 
 - Set
-    - Top(x), Left(y), Width, Height
-        ```javascript
-        camera.setViewport(top, left, width, height);
-        ```
-        ```javascript
-        camera.setPosition(top, left);
-        // camera.x = top;
-        // camera.y = left;
-        ```
-        ```javascript
-        camera.setSize(width, height);
-        // camera.width = width;
-        // camera.height = height;
-        ```
-        ```javascript
-        camera.centerOn(x, y);  // centered on the given coordinates
-        ```
-        ```javascript
-        camera.centerToBounds();
-        ```
-    - Zoom
-        ```javascript
-        camera.setZoom(zoomValue);  // The minimum it can be is 0.001.
-        camera.zoom = zoomValue;
-        ```
-    - Rotation
-        ```javascript
-        camera.setAngle(angle);  // angle in degree
-        camera.setRotation(angle);  // angle in radians
-        camera.rotation = angle; // angle in radians
-        ```
+    ```javascript
+    camera.setViewport(top, left, width, height);
+    ```
+    or
+    ```javascript
+    camera.setPosition(top, left);
+    // camera.x = top;
+    // camera.y = left;
+    ```
+    ```javascript
+    camera.setSize(width, height);
+    // camera.width = width;
+    // camera.height = height;
+    ```
 - Get
     - Position
         - Top-left
@@ -82,11 +65,6 @@ camera.destroy();
             var x = camera.centerX;
             var y = camera.centerY;
             ```
-        - Middle point, in 'world' coordinates.
-            ```javascript
-            var x = camera.midPoint.x;
-            var y = camera.midPoint.y;
-            ```
     - Width & height
         ```javascript
         var width = camera.width;
@@ -96,30 +74,55 @@ camera.destroy();
         var displayWidth = camera.displayWidth;
         var displayHeight = camera.displayHeight;
         ```
-    - Zoom
-        ```javascript
-        var zoomValue = camera.zoom;
-        ```
-    - Rotation
-        ```javascript
-        var angle = camera.rotation;  // angle in radians
-        ```
-    - World view, a [rectangle object](geom-rectangle.md)
-        ```javascript
-        var worldView = camera.worldView;
-        var x = worldView.x;
-        var y = worldView.y;
-        var width = worldView.width;  // displayWidth
-        var height = worldView.height; // displayHeight
-        var left = worldView.left;  // x
-        var right = worldView.right;  // x + width
-        var top = worldView.top;  // y
-        var bottom = worldView.bottom;  // y + height
-        var centerX = worldView.centerX;
-        var centerY = worldView.centerY;
-        var isInside = worldView.contains(x, y);
-        var randPoint = worldView.getRandomPoint(point); // point: {x, y}
-        ```
+
+#### World coordinates
+
+- World view, a [rectangle object](geom-rectangle.md)
+    ```javascript
+    var worldView = camera.worldView;
+    var x = worldView.x;
+    var y = worldView.y;
+    var width = worldView.width;  // displayWidth
+    var height = worldView.height; // displayHeight
+    var left = worldView.left;  // x
+    var right = worldView.right;  // x + width
+    var top = worldView.top;  // y
+    var bottom = worldView.bottom;  // y + height
+    var centerX = worldView.centerX;
+    var centerY = worldView.centerY;
+    var isInside = worldView.contains(x, y);
+    var randPoint = worldView.getRandomPoint(point); // point: {x, y}
+    ```
+- Middle point
+    ```javascript
+    var x = camera.midPoint.x;
+    var y = camera.midPoint.y;
+    ```
+
+### Zoom
+
+- Set
+    ```javascript
+    camera.setZoom(zoomValue);  // The minimum it can be is 0.001.
+    camera.zoom = zoomValue;
+    ```
+- Get
+    ```javascript
+    var zoomValue = camera.zoom;
+    ```
+
+### Rotation
+
+- Set
+    ```javascript
+    camera.setAngle(angle);  // angle in degree
+    camera.setRotation(angle);  // angle in radians
+    camera.rotation = angle; // angle in radians
+    ```
+- Get
+    ```javascript
+    var angle = camera.rotation;  // angle in radians
+    ```
 
 ### Visible
 
@@ -146,7 +149,7 @@ camera.setAlpha(value);
 var alpha = camera.alpha;
 ```
 
-### Scroll camera
+### Scroll
 
 ```javascript
 camera.setScroll(x, y)
@@ -159,6 +162,15 @@ camera.scrollY = scrollY;
 
 ```javascript
 camera.centerToBounds();
+```
+
+```javascript
+camera.centerOn(x, y);  // centered on the given coordinates
+```
+
+```javascript
+camera.centerOnX(x);
+camera.centerOnY(y);
 ```
 
 ```javascript
@@ -208,216 +220,16 @@ camera.centerToSize();
 
 See [Scroll factor](gameobject.md#scroll-factor) in game object.
 
-#### Set bounds
+#### Bounds
 
-```javascript
-camera.setBounds(x, y, width, height)
-```
-
-##### Get bounds
-
-```javascript
-var bounds = camera.getBounds();  // bounds: a rectangle object
-// var out = camera.getBounds(out);
-```
-
-### Effects
-
-#### Fade-in / fade-out
-
-```javascript
-camera.fadeIn(duration);   // duration in ms
-// camera.fadeIn(duration, red, green, blue, callback, context);
-// red/green/blue: the value to fade the red/green/blue channel from. A value between 0 and 255.
-```
-
-```javascript
-camera.fadeOut(duration);   // duration in ms
-// camera.fadeOut(duration, red, green, blue, callback, context);
-```
-
-- `callback` , `context` : It will be invoked every frame for the duration of the effect.
+- Set
     ```javascript
-    function(camera, progress) {}
+    camera.setBounds(x, y, width, height)
     ```
-
-##### Events
-
-```javascript
-camera.on('camerafadeincomplete', camera, fade);
-```
-
-```javascript
-camera.on('camerafadeoutcomplete', camera, fade);
-```
-
-#### Flash
-
-```javascript
-camera.flash(duration);   // duration in ms
-// camera.flash(duration, red, green, blue, force, callback, context);
-```
-
-- `callback` , `context` : It will be invoked every frame for the duration of the effect.
+- Get
     ```javascript
-    function(camera, progress) {}
-    ```
-
-##### Events
-
-```javascript
-camera.on('cameraflashstart', camera, flash, duration, red, green, blue);
-```
-
-```javascript
-camera.on('cameraflashcomplete', camera, flash);
-```
-
-#### Shake
-
-```javascript
-camera.shake(duration);   // duration in ms
-// camera.shake(duration, intensity, force, callback, context);  // callback: invoked when completed
-```
-
-- `callback` , `context` : It will be invoked every frame for the duration of the effect.
-    ```javascript
-    function(camera, progress) {}
-    ```
-
-##### Events
-
-```javascript
-camera.on('camerashakestart', camera, shake, duration, intensity);
-```
-
-```javascript
-camera.on('camerashakecomplete', camera, shake);
-```
-
-#### Pan
-
-```javascript
-camera.pan(x, y, duration);   // duration in ms
-// camera.pan(x, y, duration, ease, force, callback, context);
-```
-
-- `callback` , `context` : It will be invoked every frame for the duration of the effect.
-    ```javascript
-    function(camera, progress, x, y) {}
-    ```
-
-##### Events
-
-```javascript
-camera.on('camerapanstart', camera, pan, duration, x, y);
-```
-
-```javascript
-camera.on('camerapancomplete', camera, pan);
-```
-
-#### Zoom
-
-```javascript
-camera.zoomTo(zoomValue, duration);   // duration in ms
-// camera.zoomTo(zoomValue, duration, ease, force, callback, context);
-```
-
-- `callback` , `context` : It will be invoked every frame for the duration of the effect.
-    ```javascript
-    function(camera, progress, zoomValue) {}
-    ```
-
-##### Events
-
-```javascript
-camera.on('camerazoomstart', camera, zoom, duration, zoomValue);
-```
-
-```javascript
-camera.on('camerazoomcomplete', camera, zoom);
-```
-
-#### Filter
-
-1. Create filter
-   ```javascript
-    var config = {
-        game: scene.game,
-        renderer: scene.game.renderer,
-        fragShader: '...'  // GLSL shader
-    };
-    var customPipeline = new Phaser.Renderer.WebGL.Pipelines.TextureTintPipeline(config);
-    var filter = scene.game.renderer.addPipeline(pipeName, customPipeline);
-   ```
-1. Add filter
-    ```javascript
-    camera.setRenderToTexture(filter);
-    ```
-1. Set/change properties of filter
-    - Property with 1 value
-        - Float
-            ```javascript
-            filter.setFloat1(name, value0);
-            ```
-        - uniform1fv
-            ```javascript
-            filter.setFloat1v(name, value0);
-            ```
-        - Int
-            ```javascript
-            filter.setInt1(name, value0);
-            ```
-    - Property with 2 values
-        - Float
-            ```javascript
-            filter.setFloat2(name, value0, value1);
-            ```
-        - uniform2fv
-            ```javascript
-            filter.setFloat2v(name, value0, value1);
-            ```
-        - Int
-            ```javascript
-            filter.setInt2(name, value0, value1);
-            ``` 
-    - Property with 3 value
-        - Float
-            ```javascript
-            filter.setFloat3(name, value0, value1, value2);
-            ```
-        - uniform3fv
-            ```javascript
-            filter.setFloat3v(name, value0, value1, value2);
-            ```
-        - Int
-            ```javascript
-            filter.setInt3(name, value0, value1, value2);
-            ```
-    - Property with 4 values
-        - Float
-            ```javascript
-            filter.setFloat4(name, value0, value1, value2, value3);
-            ```
-        - uniform4fv
-            ```javascript
-            filter.setFloat4v(name, value0, value1, value2, value3);
-            ```
-        - Int
-            ```javascript
-            filter.setInt4(name, value0, value1, value2, value3);
-            ```
-
-Other methods :
-
-- Change filter
-    ```javascript
-    camera.setPipeline(filter);
-    ```
-- Clear filter
-    ```javascript
-    camera.clearRenderToTexture();
+    var bounds = camera.getBounds();  // bounds: a rectangle object
+    // var out = camera.getBounds(out);
     ```
 
 ### Set background color
@@ -434,70 +246,6 @@ Ignored game objects won't show at that camera.
 camera.ignore(gameObject);  // a game object, or an array of game objects
 ```
 
-### Camera Controllor
-
-#### Create controllor
-
-```javascript
-// var cursors = scene.input.keyboard.createCursorKeys();
-var config = {
-    camera: camera,
-
-    left: cursors.left,    // { isDown, isUp }
-    right: cursors.right,  // { isDown, isUp }
-    up: cursors.up,        // { isDown, isUp }
-    down: cursors.down,    // { isDown, isUp }
-    zoomIn: null,          // { isDown, isUp }
-    zoomOut: null,         // { isDown, isUp }
-
-    zoomSpeed: 0.01,
-
-    acceleration: null,
-    // acceleration: {
-    //    x: 0,
-    //    y: 0
-    // }
-
-    drag: null,
-    // drag: {
-    //    x: 0,
-    //    y: 0
-    // }
-
-    maxSpeed: null
-    // maxSpeed: {
-    //    x: 0,
-    //    y: 0
-    // }
-};
-var controls = new Phaser.Cameras.Controls.SmoothedKeyControl(config);
-// var controls = new Phaser.Cameras.Controls.FixedKeyControl(config);
-```
-
-#### Update
-
-```javascript
-scene.update = function (time, delta) {
-    controls.update(delta);
-}
-```
-
-#### Start / stop
-
-```javascript
-controls.start();
-```
-
-```javascript
-controls.stop();
-```
-
-#### Other methods
-
-```javascript
-controls.setCamera(camera);
-```
-
 ### Get world position
 
 ```javascript
@@ -509,4 +257,4 @@ var out = camera.getWorldPoint(x, y);
 - `out` : World position `{x, y}`
 
 !!! warning
-    Works for zoom of 1 with any resolution, but resolution > 1 and zoom !== 1 breaks
+    Works for zoom of 1 with any resolution, but **resolution > 1 and zoom !== 1 breaks**

@@ -125,6 +125,18 @@ var amount = container.count(property, value, startIndex, endIndex);
 // value: the value to test the property against. Must pass a strict (`===`) comparison check.
 ```
 
+#### Sort choldren
+
+```javascript
+container.sort(property);
+```
+
+```javascript
+container.sort(property, function(childA, childB){
+    return 0; // 0, 1, -1
+});
+```
+
 #### Remove child
 
 ```javascript

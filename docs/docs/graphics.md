@@ -104,8 +104,8 @@ graphics.clear();
 ```javascript
 graphics.beginPath();
 graphics.closePath();
-graphics.fillPath();
-graphics.strokePath();
+graphics.fillPath(); // = graphics.fill()
+graphics.strokePath(); // = graphics.stroke()
 ```
 
 #### Rectangle
