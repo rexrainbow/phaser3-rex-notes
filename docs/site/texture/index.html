@@ -668,15 +668,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#canvas-texture" title="Canvas texture" class="md-nav__link">
-    Canvas texture
+  <a href="#get-pixel" title="Get pixel" class="md-nav__link">
+    Get pixel
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-pixel" title="Get pixel" class="md-nav__link">
-    Get pixel
+  <a href="#generate-texture-from-array" title="Generate texture from array" class="md-nav__link">
+    Generate texture from array
   </a>
   
 </li>
@@ -1138,6 +1138,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../canvas-texture/" title="Canvas texture" class="md-nav__link">
+      Canvas texture
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -1552,7 +1564,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../shake-position.md" title="Shake position" class="md-nav__link">
+    <a href="../shake-position/" title="Shake position" class="md-nav__link">
       Shake position
     </a>
   </li>
@@ -1954,6 +1966,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../keyboardcombo/" title="Combo events" class="md-nav__link">
+      Combo events
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -2048,16 +2072,40 @@
           
 
 
+  <li class="md-nav__item">
+    <a href="../camera-effects/" title="Effects" class="md-nav__link">
+      Effects
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../camera-controllor/" title="Controllor" class="md-nav__link">
+      Controllor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2" type="checkbox" id="nav-7-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4" type="checkbox" id="nav-7-4">
     
-    <label class="md-nav__link" for="nav-7-2">
-      Filters
+    <label class="md-nav__link" for="nav-7-4">
+      Shader effects
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-7-2">
-        Filters
+      <label class="md-nav__title" for="nav-7-4">
+        Shader effects
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -2067,15 +2115,27 @@
           
 
 
+  <li class="md-nav__item">
+    <a href="../camera-shader-effect/" title="Shader effect" class="md-nav__link">
+      Shader effect
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2-1" type="checkbox" id="nav-7-2-1">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4-2" type="checkbox" id="nav-7-4-2">
     
-    <label class="md-nav__link" for="nav-7-2-1">
+    <label class="md-nav__link" for="nav-7-4-2">
       Color
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-7-2-1">
+      <label class="md-nav__title" for="nav-7-4-2">
         Color
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -2129,13 +2189,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2-2" type="checkbox" id="nav-7-2-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4-3" type="checkbox" id="nav-7-4-3">
     
-    <label class="md-nav__link" for="nav-7-2-2">
+    <label class="md-nav__link" for="nav-7-4-3">
       Position
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-7-2-2">
+      <label class="md-nav__title" for="nav-7-4-3">
         Position
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -3697,15 +3757,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#canvas-texture" title="Canvas texture" class="md-nav__link">
-    Canvas texture
+  <a href="#get-pixel" title="Get pixel" class="md-nav__link">
+    Get pixel
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-pixel" title="Get pixel" class="md-nav__link">
-    Get pixel
+  <a href="#generate-texture-from-array" title="Generate texture from array" class="md-nav__link">
+    Generate texture from array
   </a>
   
 </li>
@@ -3776,55 +3836,6 @@
 <span class="c1">// var height = image.height;</span>
 </pre></div></li>
 </ul>
-<h3 id="canvas-texture">Canvas texture<a class="headerlink" href="#canvas-texture" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Create canvas texture
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">texture</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">createCanvas</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
-</pre></div></li>
-<li>Get canvas element
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">canvas</span> <span class="o">=</span> <span class="nx">texture</span><span class="p">.</span><span class="nx">getSourceImage</span><span class="p">();</span>
-<span class="kd">var</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">canvas</span><span class="p">.</span><span class="nx">getContext</span><span class="p">(</span><span class="s1">&#39;2d&#39;</span><span class="p">);</span>
-</pre></div>
-    <a href="https://www.w3schools.com/html/html5_canvas.asp">Canvas api</a></li>
-<li>Copy image to canvas
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">srcKey</span><span class="p">).</span><span class="nx">getSourceImage</span><span class="p">();</span>
-<span class="kd">var</span> <span class="nx">canvas</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">createCanvas</span><span class="p">(</span><span class="nx">destKey</span><span class="p">,</span> <span class="nx">image</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span> <span class="nx">image</span><span class="p">.</span><span class="nx">height</span><span class="p">).</span><span class="nx">getSourceImage</span><span class="p">();</span>
-<span class="kd">var</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">canvas</span><span class="p">.</span><span class="nx">getContext</span><span class="p">(</span><span class="s1">&#39;2d&#39;</span><span class="p">);</span>
-<span class="nx">context</span><span class="p">.</span><span class="nx">drawImage</span><span class="p">(</span><span class="nx">image</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-<span class="c1">// var pixels = context.getImageData(0, 0, image.width, image.height);  // 1d array. [r,g,b,a,r,g,b,a,...]</span>
-</pre></div><ul>
-<li>Create canvas from canvas pool
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">canvas</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Display</span><span class="p">.</span><span class="nx">Canvas</span><span class="p">.</span><span class="nx">Pool</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">parent</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
-</pre></div></li>
-<li>Release canvas
-    <div class="codehilite"><pre><span></span><span class="nx">CanvasPool</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">canvas</span><span class="p">);</span>
-</pre></div></li>
-</ul>
-</li>
-<li>Refresh canvas texture
-    <div class="codehilite"><pre><span></span><span class="nx">texture</span><span class="p">.</span><span class="nx">refresh</span><span class="p">();</span>
-</pre></div></li>
-<li>Generate
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="nx">data</span><span class="o">:</span> <span class="nx">data</span><span class="p">,</span>
-    <span class="c1">// 3x3:</span>
-    <span class="c1">// [ &#39;...&#39;,</span>
-    <span class="c1">//   &#39;...&#39;,</span>
-    <span class="c1">//   &#39;...&#39; ]</span>
-
-    <span class="nx">pixelWidth</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>    <span class="c1">// pixel width of each data</span>
-    <span class="nx">pixelHeight</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>   <span class="c1">// pixel height of each data</span>
-
-    <span class="nx">preRender</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>  <span class="c1">// callback, function(canvas, ctx) {}</span>
-    <span class="nx">postRender</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="c1">// callback, function(canvas, ctx) {}</span>
-
-    <span class="nx">canvas</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>  <span class="c1">// create a canvas if null</span>
-    <span class="nx">resizeCanvas</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="nx">clearCanvas</span><span class="o">:</span> <span class="kc">true</span>
-<span class="p">};</span>
-<span class="kd">var</span> <span class="nx">texture</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">generate</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
-</pre></div></li>
-</ul>
 <h3 id="get-pixel">Get pixel<a class="headerlink" href="#get-pixel" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">getPixel</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
 <span class="c1">// var color = scene.textures.getPixel(x, y, key, frame);</span>
@@ -3844,6 +3855,25 @@
 
 <p>alpha : 0 ~ 255</p>
 <p>Return <code>null</code> if the coordinates were out of bounds.</p>
+<h3 id="generate-texture-from-array">Generate texture from array<a class="headerlink" href="#generate-texture-from-array" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">data</span><span class="o">:</span> <span class="nx">data</span><span class="p">,</span>
+    <span class="c1">// 3x3:</span>
+    <span class="c1">// [ &#39;...&#39;,</span>
+    <span class="c1">//   &#39;...&#39;,</span>
+    <span class="c1">//   &#39;...&#39; ]</span>
+    <span class="nx">pixelWidth</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>    <span class="c1">// pixel width of each data</span>
+    <span class="nx">pixelHeight</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>   <span class="c1">// pixel height of each data</span>
+    <span class="nx">preRender</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>  <span class="c1">// callback, function(canvas, ctx) {}</span>
+    <span class="nx">postRender</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="c1">// callback, function(canvas, ctx) {}</span>
+
+    <span class="nx">canvas</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>  <span class="c1">// create a canvas if null</span>
+    <span class="nx">resizeCanvas</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">clearCanvas</span><span class="o">:</span> <span class="kc">true</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">texture</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">generate</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</pre></div>
+
 <h3 id="has-key">Has key<a class="headerlink" href="#has-key" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">hasKey</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">exists</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </pre></div>

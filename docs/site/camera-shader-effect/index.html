@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/shakeposition/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/camera-shader-effect/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Shakeposition - Notes of Phaser 3</title>
+        <title>Shader effect - Notes of Phaser 3</title>
       
     
     
@@ -128,7 +128,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Shakeposition
+                Shader effect
               </span>
             
           
@@ -1045,6 +1045,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../canvas-texture/" title="Canvas texture" class="md-nav__link">
+      Canvas texture
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -1459,7 +1471,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../shake-position.md" title="Shake position" class="md-nav__link">
+    <a href="../shake-position/" title="Shake position" class="md-nav__link">
       Shake position
     </a>
   </li>
@@ -1861,6 +1873,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../keyboardcombo/" title="Combo events" class="md-nav__link">
+      Combo events
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -1923,10 +1947,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7" checked>
     
     <label class="md-nav__link" for="nav-7">
       Camera
@@ -1955,16 +1981,42 @@
           
 
 
-  <li class="md-nav__item md-nav__item--nested">
+  <li class="md-nav__item">
+    <a href="../camera-effects/" title="Effects" class="md-nav__link">
+      Effects
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../camera-controllor/" title="Controllor" class="md-nav__link">
+      Controllor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2" type="checkbox" id="nav-7-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4" type="checkbox" id="nav-7-4" checked>
     
-    <label class="md-nav__link" for="nav-7-2">
-      Filters
+    <label class="md-nav__link" for="nav-7-4">
+      Shader effects
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-7-2">
-        Filters
+      <label class="md-nav__title" for="nav-7-4">
+        Shader effects
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -1973,16 +2025,89 @@
           
           
 
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Shader effect
+      </label>
+    
+    <a href="./" title="Shader effect" class="md-nav__link md-nav__link--active">
+      Shader effect
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setup" title="Setup" class="md-nav__link">
+    Setup
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-methods" title="Other methods" class="md-nav__link">
+    Other methods
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2-1" type="checkbox" id="nav-7-2-1">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4-2" type="checkbox" id="nav-7-4-2">
     
-    <label class="md-nav__link" for="nav-7-2-1">
+    <label class="md-nav__link" for="nav-7-4-2">
       Color
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-7-2-1">
+      <label class="md-nav__title" for="nav-7-4-2">
         Color
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -2036,13 +2161,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2-2" type="checkbox" id="nav-7-2-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4-3" type="checkbox" id="nav-7-4-3">
     
-    <label class="md-nav__link" for="nav-7-2-2">
+    <label class="md-nav__link" for="nav-7-4-3">
       Position
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-7-2-2">
+      <label class="md-nav__title" for="nav-7-4-3">
         Position
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -3589,13 +3714,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#source-code" title="Source code" class="md-nav__link">
-    Source code
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#usage" title="Usage" class="md-nav__link">
     Usage
   </a>
@@ -3604,85 +3722,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#import-class" title="Import class" class="md-nav__link">
-    Import class
+  <a href="#setup" title="Setup" class="md-nav__link">
+    Setup
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
-    Install global plugin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#start-shaking" title="Start shaking" class="md-nav__link">
-    Start shaking
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#stop-shakeing" title="Stop shakeing" class="md-nav__link">
-    Stop shakeing
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#enable" title="Enable" class="md-nav__link">
-    Enable
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set-updating-mode" title="Set updating mode" class="md-nav__link">
-    Set updating mode
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set-duration" title="Set duration" class="md-nav__link">
-    Set duration
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set-magnitude" title="Set magnitude" class="md-nav__link">
-    Set magnitude
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set-magnitude-mode" title="Set magnitude mode" class="md-nav__link">
-    Set magnitude mode
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#events" title="Events" class="md-nav__link">
-    Events
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#status" title="Status" class="md-nav__link">
-    Status
+  <a href="#other-methods" title="Other methods" class="md-nav__link">
+    Other methods
   </a>
   
 </li>
@@ -3708,146 +3756,90 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/shakeposition.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/camera-shader-effect.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Shakeposition</h1>
+                  <h1>Shader effect</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Shake position of game object.</p>
+<p>Shader effect of camera.</p>
 <ul>
-<li>Author: Rex</li>
-<li>Behavior of game object</li>
+<li>Author: Richard Davey</li>
 </ul>
-<h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/shakeposition-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexshakepositionplugin.min.js">minify</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/shake">Sample code</a></p>
-<p>User could import class directly, or install it by global plugin.</p>
-<h3 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">rexShake</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/shakeposition.js&#39;</span><span class="p">;</span>
-</pre></div>
-
-<h3 id="install-global-plugin">Install global plugin<a class="headerlink" href="#install-global-plugin" title="Permanent link">&para;</a></h3>
-<p>Install plugin in <a href="../game/#configuration">configuration of game</a></p>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">ShakePlugin</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/shakeposition-plugin.js&#39;</span><span class="p">;</span>
-
-<span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="c1">// ...</span>
-    <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
-            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexShake&#39;</span><span class="p">,</span>
-            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">ShakePlugin</span><span class="p">,</span>
-            <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
-        <span class="p">},</span>
-        <span class="c1">// ...</span>
-        <span class="p">]</span>
-    <span class="p">}</span>
-    <span class="c1">// ...</span>
-<span class="p">};</span>
-<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-</pre></div>
-
-<h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">shake</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexShake&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="p">{</span>
-    <span class="c1">// mode: 1, // 0|&#39;effect&#39;|1|&#39;behavior&#39;</span>
-    <span class="c1">// duration: 500,</span>
-    <span class="c1">// magnitude: 10,</span>
-    <span class="c1">// magnitudeMode: 1, // 0|&#39;constant&#39;|1|&#39;decay&#39;</span>
-<span class="p">});</span>
-</pre></div>
-
-<ul>
-<li><code>mode</code> :<ul>
-<li><code>'effect'</code>, or <code>0</code> : Shake position in <code>'poststep'</code> game event, and restore in <code>'step'</code> game event.</li>
-<li><code>'behavior'</code>, or <code>1</code> : Shake position in <code>'preupdate'</code> scene event.</li>
-</ul>
-</li>
-<li><code>duration</code> : Duration of shaking, in millisecond.</li>
-<li><code>magnitude</code> : The strength of the shake, in pixels.</li>
-<li><code>magnitudeMode</code> :<ul>
-<li><code>'constant'</code>, or <code>0</code> : Constant strength of the shake.</li>
-<li><code>'decay'</code>, or <code>1</code> : Decay the strength of the shake.</li>
-</ul>
-</li>
-</ul>
-<h3 id="start-shaking">Start shaking<a class="headerlink" href="#start-shaking" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">shake</span><span class="p">.</span><span class="nx">shake</span><span class="p">();</span>
-<span class="c1">// shake.shake(duration, magnitude);</span>
-</pre></div>
-
-<p>or</p>
-<div class="codehilite"><pre><span></span><span class="nx">shake</span><span class="p">.</span><span class="nx">shake</span><span class="p">({</span>
-    <span class="nx">duration</span><span class="o">:</span> <span class="mi">500</span><span class="p">,</span>
-    <span class="nx">magnitude</span><span class="o">:</span> <span class="mi">10</span>
-<span class="p">});</span>
-</pre></div>
-
-<h3 id="stop-shakeing">Stop shakeing<a class="headerlink" href="#stop-shakeing" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">shake</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
-</pre></div>
-
-<h3 id="enable">Enable<a class="headerlink" href="#enable" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Enable/resume (default)
-    <div class="codehilite"><pre><span></span><span class="nx">shake</span><span class="p">.</span><span class="nx">setEnable</span><span class="p">();</span>
-</pre></div>
-    or
-    <div class="codehilite"><pre><span></span><span class="nx">shake</span><span class="p">.</span><span class="nx">enable</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+<h3 id="setup">Setup<a class="headerlink" href="#setup" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Create filter
+   <div class="codehilite"><pre><span></span> <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+     <span class="nx">game</span><span class="o">:</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">game</span><span class="p">,</span>
+     <span class="nx">renderer</span><span class="o">:</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">renderer</span><span class="p">,</span>
+     <span class="nx">fragShader</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span>  <span class="c1">// GLSL shader</span>
+ <span class="p">};</span>
+ <span class="kd">var</span> <span class="nx">customPipeline</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Renderer</span><span class="p">.</span><span class="nx">WebGL</span><span class="p">.</span><span class="nx">Pipelines</span><span class="p">.</span><span class="nx">TextureTintPipeline</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+ <span class="kd">var</span> <span class="nx">filter</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">renderer</span><span class="p">.</span><span class="nx">addPipeline</span><span class="p">(</span><span class="nx">pipeName</span><span class="p">,</span> <span class="nx">customPipeline</span><span class="p">);</span>
 </pre></div></li>
-<li>Disable/pause
-    <div class="codehilite"><pre><span></span><span class="nx">shake</span><span class="p">.</span><span class="nx">setEnable</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
-</pre></div>
-    or
-    <div class="codehilite"><pre><span></span><span class="nx">shake</span><span class="p">.</span><span class="nx">enable</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+<li>Add filter
+    <div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">setRenderToTexture</span><span class="p">(</span><span class="nx">filter</span><span class="p">);</span>
+</pre></div></li>
+<li>Set/change properties of filter<ul>
+<li>Property with 1 value<ul>
+<li>Float
+    <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat1</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">);</span>
+</pre></div></li>
+<li>uniform1fv
+    <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat1v</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">);</span>
+</pre></div></li>
+<li>Int
+    <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setInt1</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">);</span>
 </pre></div></li>
 </ul>
-<h3 id="set-updating-mode">Set updating mode<a class="headerlink" href="#set-updating-mode" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">shake</span><span class="p">.</span><span class="nx">setMode</span><span class="p">(</span><span class="nx">mode</span><span class="p">);</span>
-</pre></div>
-
-<ul>
-<li><code>mode</code> :<ul>
-<li><code>'effect'</code>, or <code>0</code> : Shake position in post-update stage, and restore in pre-update stage.</li>
-<li><code>'behavior'</code>, or <code>1</code> : Shake position in pre-update stage.</li>
-</ul>
 </li>
-</ul>
-<h3 id="set-duration">Set duration<a class="headerlink" href="#set-duration" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">shake</span><span class="p">.</span><span class="nx">setDuration</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>
-<span class="c1">// shake.duration = duration;</span>
-</pre></div>
-
-<h3 id="set-magnitude">Set magnitude<a class="headerlink" href="#set-magnitude" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">shake</span><span class="p">.</span><span class="nx">setMagnitude</span><span class="p">(</span><span class="nx">magnitude</span><span class="p">);</span>
-<span class="nx">shake</span><span class="p">.</span><span class="nx">magnitude</span> <span class="o">=</span> <span class="nx">magnitude</span><span class="p">;</span>
-</pre></div>
-
-<ul>
-<li><code>magnitude</code> : The strength of the shake, in pixels.</li>
-</ul>
-<h3 id="set-magnitude-mode">Set magnitude mode<a class="headerlink" href="#set-magnitude-mode" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">shake</span><span class="p">.</span><span class="nx">setMagnitudeMode</span><span class="p">(</span><span class="nx">magnitudeMode</span><span class="p">);</span>
-<span class="c1">// shake.magnitudeMode = magnitudeMode;</span>
-</pre></div>
-
-<ul>
-<li><code>magnitudeMode</code> :<ul>
-<li><code>'constant'</code>, or <code>0</code> : Constant strength of the shake.</li>
-<li><code>'decay'</code>, or <code>1</code> : Decay the strength of the shake.</li>
-</ul>
-</li>
-</ul>
-<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
-<ul>
-<li>On reached target
-    <div class="codehilite"><pre><span></span><span class="nx">shake</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">shake</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">){});</span>
+<li>Property with 2 values<ul>
+<li>Float
+    <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat2</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">);</span>
+</pre></div></li>
+<li>uniform2fv
+    <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat2v</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">);</span>
+</pre></div></li>
+<li>Int
+    <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setInt2</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">);</span>
 </pre></div></li>
 </ul>
-<h3 id="status">Status<a class="headerlink" href="#status" title="Permanent link">&para;</a></h3>
+</li>
+<li>Property with 3 value<ul>
+<li>Float
+    <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat3</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">);</span>
+</pre></div></li>
+<li>uniform3fv
+    <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat3v</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">);</span>
+</pre></div></li>
+<li>Int
+    <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setInt3</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+</li>
+<li>Property with 4 values<ul>
+<li>Float
+    <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat4</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">,</span> <span class="nx">value3</span><span class="p">);</span>
+</pre></div></li>
+<li>uniform4fv
+    <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat4v</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">,</span> <span class="nx">value3</span><span class="p">);</span>
+</pre></div></li>
+<li>Int
+    <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setInt4</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">,</span> <span class="nx">value3</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="other-methods">Other methods<a class="headerlink" href="#other-methods" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Is shakeing
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isRunning</span> <span class="o">=</span> <span class="nx">shake</span><span class="p">.</span><span class="nx">isRunning</span><span class="p">;</span>
+<li>Change filter
+    <div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">setPipeline</span><span class="p">(</span><span class="nx">filter</span><span class="p">);</span>
+</pre></div></li>
+<li>Clear filter
+    <div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">clearRenderToTexture</span><span class="p">();</span>
 </pre></div></li>
 </ul>
                 
@@ -3866,6 +3858,41 @@
       
         
 <footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../camera-controllor/" title="Controllor" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Controllor
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../shader-grayscale/" title="Gray scale" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Gray scale
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">

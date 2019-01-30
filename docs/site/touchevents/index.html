@@ -1045,6 +1045,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../canvas-texture/" title="Canvas texture" class="md-nav__link">
+      Canvas texture
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -1459,7 +1471,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../shake-position.md" title="Shake position" class="md-nav__link">
+    <a href="../shake-position/" title="Shake position" class="md-nav__link">
       Shake position
     </a>
   </li>
@@ -1916,6 +1928,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#smooth" title="Smooth" class="md-nav__link">
+    Smooth
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2076,6 +2095,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../keyboardcombo/" title="Combo events" class="md-nav__link">
+      Combo events
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -2170,16 +2201,40 @@
           
 
 
+  <li class="md-nav__item">
+    <a href="../camera-effects/" title="Effects" class="md-nav__link">
+      Effects
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../camera-controllor/" title="Controllor" class="md-nav__link">
+      Controllor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2" type="checkbox" id="nav-7-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4" type="checkbox" id="nav-7-4">
     
-    <label class="md-nav__link" for="nav-7-2">
-      Filters
+    <label class="md-nav__link" for="nav-7-4">
+      Shader effects
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-7-2">
-        Filters
+      <label class="md-nav__title" for="nav-7-4">
+        Shader effects
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -2189,15 +2244,27 @@
           
 
 
+  <li class="md-nav__item">
+    <a href="../camera-shader-effect/" title="Shader effect" class="md-nav__link">
+      Shader effect
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2-1" type="checkbox" id="nav-7-2-1">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4-2" type="checkbox" id="nav-7-4-2">
     
-    <label class="md-nav__link" for="nav-7-2-1">
+    <label class="md-nav__link" for="nav-7-4-2">
       Color
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-7-2-1">
+      <label class="md-nav__title" for="nav-7-4-2">
         Color
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -2251,13 +2318,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2-2" type="checkbox" id="nav-7-2-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4-3" type="checkbox" id="nav-7-4-3">
     
-    <label class="md-nav__link" for="nav-7-2-2">
+    <label class="md-nav__link" for="nav-7-4-3">
       Position
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-7-2-2">
+      <label class="md-nav__title" for="nav-7-4-3">
         Position
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -3975,6 +4042,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#smooth" title="Smooth" class="md-nav__link">
+    Smooth
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4196,7 +4270,9 @@ If set to <code>false</code> it will emit events from all Game Objects below a P
 </li>
 <li>Events to get <strong>all</strong> touched Game Objects
     <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerdown&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">currentlyOver</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerdownoutside&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerup&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">currentlyOver</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerupoutside&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointermove&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">currentlyOver</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerover&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">justOver</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerout&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">justOut</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
@@ -4316,11 +4392,22 @@ If set to <code>false</code> it will emit events from all Game Objects below a P
 <li>Position in screen : <code>pointer.x</code> , <code>pointer.y</code></li>
 <li>Position in camera : <code>pointer.worldX</code> , <code>pointer.worldY</code></li>
 <li>Position of previous moving : <code>pointer.prevPosition.x</code> , <code>pointer.prevPosition.y</code></li>
+<li>Interpolated position :
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="nx">pointer</span><span class="p">.</span><span class="nx">getInterpolatedPosition</span><span class="p">(</span><span class="nx">step</span><span class="p">);</span>
+<span class="c1">// var out = pointer.getInterpolatedPosition(step, out);</span>
+</pre></div></li>
 </ul>
 </li>
-<li>Dragable object<ul>
+<li>Drag<ul>
 <li>Touching start : <code>pointer.downX</code>, <code>pointer.downY</code></li>
 <li>Touching end : <code>pointer.upX</code>, <code>pointer.upY</code></li>
+<li>Drag distance : <code>pointer.getDistance()</code><ul>
+<li>Horizontal drag distance : <code>pointer.getDistanceX()</code></li>
+<li>Vertical drag distance : <code>pointer.getDistanceY()</code></li>
+</ul>
+</li>
+<li>Drag duration : <code>pointer.getDuration()</code></li>
+<li>Drag angle : <code>pointer.getAngle()</code></li>
 </ul>
 </li>
 </ul>
@@ -4342,7 +4429,37 @@ If set to <code>false</code> it will emit events from all Game Objects below a P
 </ul>
 </li>
 <li>Index in <code>scene.input.manager.pointers</code> : <code>pointer.id</code></li>
+<li>Motion<ul>
+<li>Angle: <code>pointer.angle</code></li>
+<li>Disatance: <code>pointer.distance</code></li>
+<li>Velocity: <code>pointer.velocity</code><ul>
+<li><code>pointer.velocity.x</code>, <code>`pointer.velocity.y</code></li>
 </ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="smooth">Smooth<a class="headerlink" href="#smooth" title="Permanent link">&para;</a></h3>
+<p>Get touch position from interpolation of previous touch position and current touch position.</p>
+<div class="codehilite"><pre><span></span>Touch-position = (current-touch-position * smooth-factor) + (previous-touch-position * (1 - smooth-factor))
+</pre></div>
+
+<ol>
+<li>Set smooth factor. In <a href="../game/#configuration">game configuration</a>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// ....</span>
+    <span class="nx">input</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">smoothFactor</span><span class="o">:</span> <span class="mi">0</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div></li>
+<li>Get touch position
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">pointer</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">pointer</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">worldX</span> <span class="o">=</span> <span class="nx">pointer</span><span class="p">.</span><span class="nx">worldX</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">worldY</span> <span class="o">=</span> <span class="nx">pointer</span><span class="p">.</span><span class="nx">worldY</span><span class="p">;</span>
+</pre></div></li>
+</ol>
                 
                   
                 

@@ -592,6 +592,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#state" title="State" class="md-nav__link">
+    State
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#private-data" title="Private data" class="md-nav__link">
     Private data
   </a>
@@ -1206,6 +1213,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../canvas-texture/" title="Canvas texture" class="md-nav__link">
+      Canvas texture
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -1620,7 +1639,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../shake-position.md" title="Shake position" class="md-nav__link">
+    <a href="../shake-position/" title="Shake position" class="md-nav__link">
       Shake position
     </a>
   </li>
@@ -2022,6 +2041,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../keyboardcombo/" title="Combo events" class="md-nav__link">
+      Combo events
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -2116,16 +2147,40 @@
           
 
 
+  <li class="md-nav__item">
+    <a href="../camera-effects/" title="Effects" class="md-nav__link">
+      Effects
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../camera-controllor/" title="Controllor" class="md-nav__link">
+      Controllor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2" type="checkbox" id="nav-7-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4" type="checkbox" id="nav-7-4">
     
-    <label class="md-nav__link" for="nav-7-2">
-      Filters
+    <label class="md-nav__link" for="nav-7-4">
+      Shader effects
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-7-2">
-        Filters
+      <label class="md-nav__title" for="nav-7-4">
+        Shader effects
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -2135,15 +2190,27 @@
           
 
 
+  <li class="md-nav__item">
+    <a href="../camera-shader-effect/" title="Shader effect" class="md-nav__link">
+      Shader effect
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2-1" type="checkbox" id="nav-7-2-1">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4-2" type="checkbox" id="nav-7-4-2">
     
-    <label class="md-nav__link" for="nav-7-2-1">
+    <label class="md-nav__link" for="nav-7-4-2">
       Color
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-7-2-1">
+      <label class="md-nav__title" for="nav-7-4-2">
         Color
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -2197,13 +2264,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-2-2" type="checkbox" id="nav-7-2-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4-3" type="checkbox" id="nav-7-4-3">
     
-    <label class="md-nav__link" for="nav-7-2-2">
+    <label class="md-nav__link" for="nav-7-4-3">
       Position
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-7-2-2">
+      <label class="md-nav__title" for="nav-7-4-3">
         Position
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -3842,6 +3909,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#state" title="State" class="md-nav__link">
+    State
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#private-data" title="Private data" class="md-nav__link">
     Private data
   </a>
@@ -4044,6 +4118,50 @@
 <li><code>'ADD'</code>, or <code>Phaser.BlendModes.ADD</code>, or <code>1</code></li>
 <li><code>'MULTIPLY'</code>, or <code>Phaser.BlendModes.MULTIPLY</code>, or <code>2</code></li>
 <li><code>'SCREEN'</code>, or <code>Phaser.BlendModes.SCREEN</code>, or <code>3</code></li>
+<li><code>'ERASE'</code>, or <code>Phaser.BlendModes.ERASE</code>, or <code>17</code><ul>
+<li>Only works when rendering to a framebuffer, like a <em>Render Texture</em></li>
+</ul>
+</li>
+<li><code>'SOURCE_IN'</code>, or <code>Phaser.BlendModes.SOURCE_IN</code>, or <code>18</code><ul>
+<li>Canvas render mode only</li>
+</ul>
+</li>
+<li><code>'SOURCE_OUT'</code>, or <code>Phaser.BlendModes.SOURCE_OUT</code>, or <code>19</code><ul>
+<li>Canvas render mode only</li>
+</ul>
+</li>
+<li><code>'SOURCE_ATOP'</code>, or <code>Phaser.BlendModes.SOURCE_ATOP</code>, or <code>20</code><ul>
+<li>Canvas render mode only</li>
+</ul>
+</li>
+<li><code>'DESTINATION_OVER'</code>, or <code>Phaser.BlendModes.DESTINATION_OVER</code>, or <code>21</code><ul>
+<li>Canvas render mode only</li>
+</ul>
+</li>
+<li><code>'DESTINATION_IN'</code>, or <code>Phaser.BlendModes.DESTINATION_IN</code>, or <code>22</code><ul>
+<li>Canvas render mode only</li>
+</ul>
+</li>
+<li><code>'DESTINATION_OUT'</code>, or <code>Phaser.BlendModes.DESTINATION_OUT</code>, or <code>23</code><ul>
+<li>Canvas render mode only</li>
+</ul>
+</li>
+<li><code>'DESTINATION_ATOP'</code>, or <code>Phaser.BlendModes.DESTINATION_ATOP</code>, or <code>24</code><ul>
+<li>Canvas render mode only</li>
+</ul>
+</li>
+<li><code>'LIGHTER'</code>, or <code>Phaser.BlendModes.LIGHTER</code>, or <code>25</code><ul>
+<li>Canvas render mode only</li>
+</ul>
+</li>
+<li><code>'COPY'</code>, or <code>Phaser.BlendModes.COPY</code>, or <code>26</code><ul>
+<li>Canvas render mode only</li>
+</ul>
+</li>
+<li><code>'XOR'</code>, or <code>Phaser.BlendModes.XOR</code>, or <code>27</code><ul>
+<li>Canvas render mode only</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>Canvas has more available depending on browser support</li>
@@ -4100,6 +4218,15 @@
 </pre></div>
 
 <p>See <a href="../touchevents/#quick-start">touch event</a></p>
+<h3 id="state">State<a class="headerlink" href="#state" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">state</span><span class="p">;</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setState</span><span class="p">(</span><span class="nx">state</span><span class="p">);</span>
+</pre></div></li>
+</ul>
 <h3 id="private-data">Private data<a class="headerlink" href="#private-data" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get
