@@ -5,19 +5,12 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {}
+    preload() {
+        this.load.image('classroom', 'assets/images/backgrounds/classroom.png');
+    }
 
     create() {
-        this.input
-            .on('pointerup', function () {
-                console.log('pointerup');
-            })
-            .on('pointerupoutside', function () {
-                console.log('pointerupoutside');
-            })
-            .on('gameout', function () {
-                console.log('gameout');
-            })
+        this.add.image(400, 300, 'classroom');
     }
 
     update() {}

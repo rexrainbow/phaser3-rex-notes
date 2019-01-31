@@ -3,7 +3,7 @@ import Game from './scenes/Game.js';
 
 var config = {
     type: Phaser.AUTO,
-    parent: 'phaser-example',
+    parent: 'game',
     width: 600,
     height: 800,
     scene: [Boot, Game]
