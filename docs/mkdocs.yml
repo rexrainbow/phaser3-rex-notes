@@ -95,6 +95,7 @@ nav:
             - Game object: arcade-gameobject.md
             - 8 direction: eightdirection.md
             - Bullet: bullet.md
+            - Ship: ship.md
     - Display:
         - Mask: mask.md
 - Input:

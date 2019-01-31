@@ -8,10 +8,12 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {}
+    preload() {
+        this.load.image('classroom', 'assets/images/backgrounds/classroom.png');
+    }
 
     create() {
-        drawSomething(this);
+        this.add.image(400, 300, 'classroom');
 
         var customPipeline = this.plugins.get('rexToonifyPipeline').add(this, 'Toonify');
         this.cameras.main.setRenderToTexture(customPipeline);
@@ -19,32 +21,12 @@ class Demo extends Phaser.Scene {
         var gui = new Dat.GUI();
         gui.add(customPipeline, 'edgeGain');
         gui.add(customPipeline, 'edgeThreshold', 0, 1);
+        gui.add(customPipeline, 'hueLevels', 0, 10);
+        gui.add(customPipeline, 'satLevels', 0, 10);
+        gui.add(customPipeline, 'valLevels', 0, 10);
     }
 
     update() {}
-}
-
-const DegToRad = Phaser.Math.DegToRad;
-
-var drawSomething = function (scene) {
-    var colors = Phaser.Display.Color.HSVColorWheel(1, 1);
-
-    var graphics = scene.add.graphics();
-    var r = 100;
-    colors.forEach(function (item, i) {
-        var a = DegToRad(i);
-        graphics
-            .lineStyle(2, item.color)
-            .lineBetween(
-                400,
-                300,
-                400 + (r * Math.cos(a)),
-                300 + (r * Math.sin(a))
-            )
-    })
-    var rt = scene.add.renderTexture(0, 0, 800, 600);
-    rt.draw(graphics, 0, 0);
-    graphics.destroy();
 }
 
 var config = {

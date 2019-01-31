@@ -11,17 +11,15 @@ float Edge(vec2 coords, vec2 texSize, float gain) {
   float delta;
 
   // read neighboring pixel intensities
-  for (int i=-1; i<2; i++) {
-    for(int j=-1; j<2; j++) {
-      pixel[k] = AvgRGB( 
-        texture2D(
-          uMainSampler, 
-          (tc + vec2(float(i), float(j))) / texSize 
-        ) 
-      );     
-      k++;
-    }
-  }
+  pixel[0] = AvgRGB( texture2D( uMainSampler, (tc + vec2(float(-1), float(-1))) / texSize )  );
+  pixel[1] = AvgRGB( texture2D( uMainSampler, (tc + vec2(float(-1), float( 0))) / texSize )  );
+  pixel[2] = AvgRGB( texture2D( uMainSampler, (tc + vec2(float(-1), float( 1))) / texSize )  );
+  pixel[3] = AvgRGB( texture2D( uMainSampler, (tc + vec2(float( 0), float(-1))) / texSize )  );
+  pixel[4] = AvgRGB( texture2D( uMainSampler, (tc + vec2(float( 0), float( 0))) / texSize )  );
+  pixel[5] = AvgRGB( texture2D( uMainSampler, (tc + vec2(float( 0), float( 1))) / texSize )  );
+  pixel[6] = AvgRGB( texture2D( uMainSampler, (tc + vec2(float( 1), float(-1))) / texSize )  );
+  pixel[7] = AvgRGB( texture2D( uMainSampler, (tc + vec2(float( 1), float( 0))) / texSize )  );
+  pixel[8] = AvgRGB( texture2D( uMainSampler, (tc + vec2(float( 1), float( 1))) / texSize )  );
 
   // average color differences around neighboring pixels
   delta = (abs(pixel[1]-pixel[7])+

@@ -11,11 +11,14 @@ class ToonifyPipeline extends TextureTintPipeline {
             game: game,
             renderer: game.renderer,
             fragShader: frag // GLSL shader
-        });    
+        });
         this._width = 0; // width wo resolution
         this._height = 0; // height wo resolution
         this._edgeGain = 0;
         this._edgeThreshold = 0;
+        this._hueLevels = 0;
+        this._satLevels = 0;
+        this._valLevels = 0;
 
         game.renderer.addPipeline(key, this);
         this.resetFromJSON(config);
@@ -24,6 +27,9 @@ class ToonifyPipeline extends TextureTintPipeline {
     resetFromJSON(o) {
         this.setEdgeGain(GetValue(o, 'edgeGain', 5));
         this.setEdgeThreshold(GetValue(o, 'edgeGain', 0.2));
+        this.setHueLevels(GetValue(o, 'hLevels', 0));
+        this.setSatLevels(GetValue(o, 'sLevels', 0));
+        this.setValLevels(GetValue(o, 'vLevels', 0));
         return this;
     }
 
@@ -41,7 +47,7 @@ class ToonifyPipeline extends TextureTintPipeline {
         this.edgeGain = value;
         return this;
     }
-    
+
     // edgeThreshold
     get edgeThreshold() {
         return this._edgeThreshold;
@@ -56,7 +62,55 @@ class ToonifyPipeline extends TextureTintPipeline {
         this.edgeThreshold = value;
         return this;
     }
-    
+
+    // hueLevels
+    get hueLevels() {
+        return this._hueLevels;
+    }
+
+    set hueLevels(value) {
+        this._hueLevels = value;
+        value = (value > 0) ? 360 / value : 0;
+        this.setFloat1('hStep', value);
+    }
+
+    setHueLevels(value) {
+        this.hueLevels = value;
+        return this;
+    }
+
+    // satLevels
+    get satLevels() {
+        return this._satLevels;
+    }
+
+    set satLevels(value) {
+        this._satLevels = value;
+        value = (value > 0) ? 1 / value : 0;
+        this.setFloat1('sStep', value);
+    }
+
+    setSatLevels(value) {
+        this.satLevels = value;
+        return this;
+    }
+
+    // valLevels
+    get valLevels() {
+        return this._valLevels;
+    }
+
+    set valLevels(value) {
+        this._valLevels = value;
+        value = (value > 0) ? 1 / value : 0;
+        this.setFloat1('vStep', value);
+    }
+
+    setValLevels(value) {
+        this.valLevels = value;
+        return this;
+    }
+
     // size
     resize(width, height, resolution) {
         this._width = width;

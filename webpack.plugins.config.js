@@ -55,6 +55,7 @@ module.exports = {
         // member of game object, arcade behavior
         'eightdirectionplugin': './plugins/eightdirection-plugin.js',
         'bulletplugin': './plugins/bullet-plugin.js',
+        'shipplugin': './plugins/ship-plugin.js',
 
         // member of text
         'texttypingplugin': './plugins/texttyping-plugin.js',
@@ -99,6 +100,7 @@ module.exports = {
         'grayscalepipelineplugin': './plugins/grayscalepipeline-plugin.js',
         'inversepipelineplugin': './plugins/inversepipeline-plugin.js',
         'hsladjustpipelineplugin': './plugins/hsladjustpipeline-plugin.js',
+        'toonifypipelineplugin': './plugins/toonifypipeline-plugin.js',
 
         // board
         'boardplugin': './plugins/board-plugin.js',

@@ -1,5 +1,5 @@
 const frag = `
-vec3 RGBtoHSV(vec3 color) 
+vec3 RGBToHSV(vec3 color) 
 {
   float minv, maxv, delta;
   vec3 res;
