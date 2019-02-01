@@ -127,9 +127,11 @@ nav:
             - Gray scale: shader-grayscale.md
             - Inverse: shader-inverse.md
             - HSL adjust: shader-hsladjust.md
+        - Edge:
+            - Toonify: shader-toonify.md
         - Position:
             - Swirl: shader-swirl.md
-            - Pixelation: shader-pixelation.md        
+            - Pixelation: shader-pixelation.md
 - Tween:
     - Tween task: tween.md
     - Timeline of tween tasks: tween-timeline.md

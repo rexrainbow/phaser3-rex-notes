@@ -1,6 +1,6 @@
 ## Introduction
 
-Adjust color in HSL domain post processing filter.
+Adjust color in HSL domain, post processing filter.
 
 - Author: Rex
 - A camera filter

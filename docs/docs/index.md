@@ -51,12 +51,14 @@
 1. [Scroller](scroller.md): Drag content. Slow down when dragging released, pull back when out of bounds.
 1. [Sequence](sequence.md): Run sequence commands in array.
 1. [Shader-gray-scale](shader-grayscale.md): Gray scale post processing filter.
-1. [Shader-hsl-adjust](shader-hsladjust.md): Adjust color in HSL domain post processing filter.
+1. [Shader-hsl-adjust](shader-hsladjust.md): Adjust color in HSL domain, post processing filter.
 1. [Shader-inverse](shader-inverse.md): Inverse color post processing filter.
 1. [Shader-pixelation](shader-pixelation.md): Pixelation post processing filter.
 1. [Shader-swirl](shader-swirl.md): Swirl post processing filter.
+1. [Shader-toonify](shader-toonfiy.md): Draw edges and quantize color in HSV domain, post processing filter.
 1. [Shake-position](shake-position.md): Shake position of game object.
 1. [Slider](slider.md): Drag thumb on a slider bar.
+1. [Ship](ship.md): Move game object as a space ship by cursor keys.
 1. [TagText](tagtext.md): Displays text with multi-color, font face, or font size with tags.
 1. [TCRP.Player](tcrp-player.md): Run commands on time.
 1. [TCRP.Recorder](tcrp-recoder.md): Store commands with time.

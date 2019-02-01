@@ -1,10 +1,9 @@
 ## Introduction
 
-Move game object as a space ship by cursor keys.
+Move game object as a [space ship](https://labs.phaser.io/view.html?src=src\physics\arcade\asteroids%20movement.js) by cursor keys.
 
 - Author: Rex
 - Arcade behavior of game object
-- [Reference](https://labs.phaser.io/view.html?src=src\physics\arcade\asteroids%20movement.js)
 
 ## Source code
 
