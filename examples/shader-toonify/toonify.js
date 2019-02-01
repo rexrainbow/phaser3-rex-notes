@@ -19,8 +19,7 @@ class Demo extends Phaser.Scene {
         this.cameras.main.setRenderToTexture(customPipeline);
 
         var gui = new Dat.GUI();
-        gui.add(customPipeline, 'edgeGain');
-        gui.add(customPipeline, 'edgeThreshold', 0, 1);
+        gui.add(customPipeline, 'edgeThreshold', 0, 1.1);
         gui.add(customPipeline, 'hueLevels', 0, 10);
         gui.add(customPipeline, 'satLevels', 0, 10);
         gui.add(customPipeline, 'valLevels', 0, 10);

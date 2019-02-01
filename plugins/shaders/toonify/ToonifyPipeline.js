@@ -25,26 +25,10 @@ class ToonifyPipeline extends TextureTintPipeline {
     }
 
     resetFromJSON(o) {
-        this.setEdgeGain(GetValue(o, 'edgeGain', 5));
-        this.setEdgeThreshold(GetValue(o, 'edgeGain', 0.2));
+        this.setEdgeThreshold(GetValue(o, 'edgeThreshold', 0.2));
         this.setHueLevels(GetValue(o, 'hLevels', 0));
         this.setSatLevels(GetValue(o, 'sLevels', 0));
         this.setValLevels(GetValue(o, 'vLevels', 0));
-        return this;
-    }
-
-    // edgeGain
-    get edgeGain() {
-        return this._edgeGain;
-    }
-
-    set edgeGain(value) {
-        this._edgeGain = value;
-        this.setFloat1('edgeGain', value);
-    }
-
-    setEdgeGain(value) {
-        this.edgeGain = value;
         return this;
     }
 

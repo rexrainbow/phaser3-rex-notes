@@ -3,7 +3,12 @@ import AvgRGB from './AvgRGB.js';
 const frag = 
 AvgRGB + 
 `
-float Edge(vec2 coords, vec2 texSize, float gain) {
+#define EDGEGAIN 5.0
+bool IsEdge(vec2 coords, vec2 texSize, float threshold) {
+  if (threshold > 1.0) {
+    return false;
+  }
+
   vec2 tc = coords * texSize;
   
   float pixel[9];
@@ -26,9 +31,9 @@ float Edge(vec2 coords, vec2 texSize, float gain) {
            abs(pixel[5]-pixel[3]) +
            abs(pixel[0]-pixel[8])+
            abs(pixel[2]-pixel[6])
-           )/4.;
+           )/4.0;
 
-  return clamp(delta*gain, 0.0, 1.0);
+  return (clamp(delta*EDGEGAIN, 0.0, 1.0) >= threshold);
 }
 `;
 export default frag;
