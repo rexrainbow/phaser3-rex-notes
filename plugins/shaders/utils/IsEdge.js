@@ -4,7 +4,7 @@ const frag =
 AvgRGB + 
 `
 #define EDGEGAIN 5.0
-bool IsOutline(vec2 coords, vec2 texSize, float threshold) {
+bool IsEdge(vec2 coords, vec2 texSize, float threshold) {
   if (threshold > 1.0) {
     return false;
   }
