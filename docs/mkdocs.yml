@@ -127,7 +127,7 @@ nav:
             - Gray scale: shader-grayscale.md
             - Inverse: shader-inverse.md
             - HSL adjust: shader-hsladjust.md
-        - Edge:
+        - Outline:
             - Toonify: shader-toonify.md
         - Position:
             - Swirl: shader-swirl.md

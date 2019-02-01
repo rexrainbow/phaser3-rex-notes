@@ -55,7 +55,7 @@
 1. [Shader-inverse](shader-inverse.md): Inverse color post processing filter.
 1. [Shader-pixelation](shader-pixelation.md): Pixelation post processing filter.
 1. [Shader-swirl](shader-swirl.md): Swirl post processing filter.
-1. [Shader-toonify](shader-toonfiy.md): Draw edges and quantize color in HSV domain, post processing filter.
+1. [Shader-toonify](shader-toonfiy.md): Draw outlines and quantize color in HSV domain, post processing filter.
 1. [Shake-position](shake-position.md): Shake position of game object.
 1. [Slider](slider.md): Drag thumb on a slider bar.
 1. [Ship](ship.md): Move game object as a space ship by cursor keys.

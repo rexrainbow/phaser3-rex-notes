@@ -1,6 +1,6 @@
 ## Introduction
 
-Draw edges and quantize color in HSV domain, post processing filter. [Reference](https://www.geeks3d.com/20140523/glsl-shader-library-toonify-post-processing-filter/)
+Draw outlines and quantize color in HSV domain, post processing filter. [Reference](https://www.geeks3d.com/20140523/glsl-shader-library-toonify-post-processing-filter/)
 
 - Author: Rex
 - A camera filter

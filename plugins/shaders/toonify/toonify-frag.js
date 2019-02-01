@@ -1,6 +1,6 @@
 import RGBToHSV from '../utils/RGBToHSV.js';
 import HSVToRGB from '../utils/HSVToRGB.js';
-import IsEdge from '../utils/IsEdge.js';
+import IsOutline from '../utils/IsOutline.js';
 
 const frag = `
 #ifdef GL_FRAGMENT_PRECISION_HIGH
@@ -21,7 +21,7 @@ uniform float hStep;  // 60
 uniform float sStep;  // 0.15
 uniform float vStep;  // 0.33
 `
-+ RGBToHSV + IsEdge + HSVToRGB +
++ RGBToHSV + IsOutline + HSVToRGB +
 `
 void main()
 {  
@@ -43,7 +43,7 @@ void main()
     colorLevel = front.rgb;
   }
 
-  vec3 outColor = (IsEdge(outTexCoord, texSize, edgeThreshold))? vec3(0.0, 0.0, 0.0) : colorLevel;
+  vec3 outColor = (IsOutline(outTexCoord, texSize, edgeThreshold))? vec3(0.0, 0.0, 0.0) : colorLevel;
   gl_FragColor = vec4(outColor, front.a);
 }
 `;
