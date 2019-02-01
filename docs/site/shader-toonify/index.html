@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/lzstring/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/shader-toonify/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>LZ string - Notes of Phaser 3</title>
+        <title>Toonify - Notes of Phaser 3</title>
       
     
     
@@ -128,7 +128,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                LZ string
+                Toonify
               </span>
             
           
@@ -1959,10 +1959,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7" checked>
     
     <label class="md-nav__link" for="nav-7">
       Camera
@@ -2014,10 +2016,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4" type="checkbox" id="nav-7-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4" type="checkbox" id="nav-7-4" checked>
     
     <label class="md-nav__link" for="nav-7-4">
       Shader effects
@@ -2105,10 +2109,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4-3" type="checkbox" id="nav-7-4-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4-3" type="checkbox" id="nav-7-4-3" checked>
     
     <label class="md-nav__link" for="nav-7-4-3">
       Outline
@@ -2124,11 +2130,114 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../shader-toonify/" title="Toonify" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Toonify
+      </label>
+    
+    <a href="./" title="Toonify" class="md-nav__link md-nav__link--active">
       Toonify
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#import-class" title="Import class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
+    Install global plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apply-filter" title="Apply filter" class="md-nav__link">
+    Apply filter
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#edge-threshold" title="Edge threshold" class="md-nav__link">
+    Edge threshold
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hue-levels" title="Hue levels" class="md-nav__link">
+    Hue levels
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#saturation-levels" title="Saturation levels" class="md-nav__link">
+    Saturation levels
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#value-levels" title="Value levels" class="md-nav__link">
+    Value levels
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -3063,12 +3172,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-12" type="checkbox" id="nav-12" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-12" type="checkbox" id="nav-12">
     
     <label class="md-nav__link" for="nav-12">
       String
@@ -3168,107 +3275,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        LZ string
-      </label>
-    
-    <a href="./" title="LZ string" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../lzstring/" title="LZ string" class="md-nav__link">
       LZ string
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#source-code" title="Source code" class="md-nav__link">
-    Source code
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#import-class" title="Import class" class="md-nav__link">
-    Import class
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
-    Install global plugin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#compression" title="Compression" class="md-nav__link">
-    Compression
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#decompression" title="Decompression" class="md-nav__link">
-    Decompression
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set-encoding" title="Set encoding" class="md-nav__link">
-    Set encoding
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -3824,29 +3835,36 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
+  <a href="#apply-filter" title="Apply filter" class="md-nav__link">
+    Apply filter
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#compression" title="Compression" class="md-nav__link">
-    Compression
+  <a href="#edge-threshold" title="Edge threshold" class="md-nav__link">
+    Edge threshold
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#decompression" title="Decompression" class="md-nav__link">
-    Decompression
+  <a href="#hue-levels" title="Hue levels" class="md-nav__link">
+    Hue levels
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#set-encoding" title="Set encoding" class="md-nav__link">
-    Set encoding
+  <a href="#saturation-levels" title="Saturation levels" class="md-nav__link">
+    Saturation levels
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#value-levels" title="Value levels" class="md-nav__link">
+    Value levels
   </a>
   
 </li>
@@ -3872,36 +3890,36 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/lzstring.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/shader-toonify.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>LZ string</h1>
+                  <h1>Toonify</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Compress string using LZ-based compression algorithm. <a href="https://github.com/pieroxy/lz-string">Reference</a></p>
+<p>Draw outlines and quantize color in HSV domain, post processing filter. <a href="https://www.geeks3d.com/20140523/glsl-shader-library-toonify-post-processing-filter/">Reference</a></p>
 <ul>
 <li>Author: Rex</li>
-<li>Member of scene</li>
+<li>A camera filter</li>
 </ul>
 <h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/lzstring-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexlzstringplugin.min.js">minify</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/toonifypipeline-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rextoonifypipelineplugin.min.js">minify</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/lzstring">Sample code</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/shader-toonify">Sample code</a></p>
 <p>User could import class directly, or install it by global plugin.</p>
 <h3 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">rexXOR</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/xor.js&#39;</span><span class="p">;</span>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">rexToonifyPipeline</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/toonifypipeline.js&#39;</span><span class="p">;</span>
 </pre></div>
 
 <h3 id="install-global-plugin">Install global plugin<a class="headerlink" href="#install-global-plugin" title="Permanent link">&para;</a></h3>
 <p>Install plugin in <a href="../game/#configuration">configuration of game</a></p>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">LZString</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/lzstring-plugin.js&#39;</span><span class="p">;</span>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">ToonifyPipelinePlugin</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/toonifypipeline-plugin.js&#39;</span><span class="p">;</span>
 
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
-            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexLZString&#39;</span><span class="p">,</span>
-            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">LZString</span><span class="p">,</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexToonifyPipeline&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">ToonifyPipelinePlugin</span><span class="p">,</span>
             <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
         <span class="p">},</span>
         <span class="c1">// ...</span>
@@ -3912,32 +3930,87 @@
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </pre></div>
 
-<h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">lzstring</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexLZString&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">({</span>
-    <span class="c1">// encoding: &#39;none&#39;     // &#39;none&#39;|0, &#39;base64&#39;|1, &#39;utf16&#39;|2, &#39;uri&#39;|3</span>
+<h3 id="apply-filter">Apply filter<a class="headerlink" href="#apply-filter" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Create pipeline instance
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">customPipeline</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexToonifyPipeline&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="p">{</span>
+    <span class="c1">// edgeThreshold: 0.2,</span>
+    <span class="c1">// hueLevels: 0,</span>
+    <span class="c1">// sLevels: 0,</span>
+    <span class="c1">// vLevels: 0</span>
 <span class="p">});</span>
-</pre></div>
-
+</pre></div><ul>
+<li><code>edgeThreshold</code> : Threshold of edge. Set <code>1.1</code> (or any number larger then <code>1</code>) to disable this feature.</li>
+<li><code>hueLevels</code> : Amount of hue levels. Set <code>0</code> to disable this feature.</li>
+<li><code>sLevels</code> : Amount of saturation levels. Set <code>0</code> to disable this feature.</li>
+<li><code>vLevels</code> : Amount of value levels. Set <code>0</code> to disable this feature.</li>
+</ul>
+</li>
+<li>Add pipeline to camera
+    <div class="codehilite"><pre><span></span><span class="c1">// var camera = scene.cameras.main;</span>
+<span class="nx">camera</span><span class="p">.</span><span class="nx">setRenderToTexture</span><span class="p">(</span><span class="nx">customPipeline</span><span class="p">);</span>
+</pre></div></li>
+</ol>
+<h3 id="edge-threshold">Edge threshold<a class="headerlink" href="#edge-threshold" title="Permanent link">&para;</a></h3>
 <ul>
-<li><code>encoding</code> : <ul>
-<li><code>'none'</code>, or <code>0</code> : no encoding.</li>
-<li><code>'base64'</code>, or <code>1</code> : base64 encoding.</li>
-<li><code>'utf16'</code>, or <code>2</code> : UTF16 encoding.</li>
-<li><code>'uri'</code>, or <code>3</code> : URI encoding.</li>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">edgeThreshold</span> <span class="o">=</span> <span class="nx">customPipeline</span><span class="p">.</span><span class="nx">edgeThreshold</span><span class="p">;</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">edgeThreshold</span> <span class="o">=</span> <span class="nx">edgeThreshold</span><span class="p">;</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">setEdgeThreshold</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+</pre></div><ul>
+<li>Set <code>1.1</code> (or any number larger then <code>1</code>) to disable this feature.</li>
 </ul>
 </li>
 </ul>
-<h3 id="compression">Compression<a class="headerlink" href="#compression" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">compressionResult</span> <span class="o">=</span> <span class="nx">lzstring</span><span class="p">.</span><span class="nx">compress</span><span class="p">(</span><span class="nx">src</span><span class="p">);</span>
+<h3 id="hue-levels">Hue levels<a class="headerlink" href="#hue-levels" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">hueLevels</span> <span class="o">=</span> <span class="nx">customPipeline</span><span class="p">.</span><span class="nx">hueLevels</span><span class="p">;</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">hueLevels</span> <span class="o">=</span> <span class="nx">hueLevels</span><span class="p">;</span>
 </pre></div>
-
-<h3 id="decompression">Decompression<a class="headerlink" href="#decompression" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">decompressionResult</span> <span class="o">=</span> <span class="nx">lzstring</span><span class="p">.</span><span class="nx">decompress</span><span class="p">(</span><span class="nx">compressionResult</span><span class="p">);</span>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">setHueLevels</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+</pre></div><ul>
+<li>Set <code>0</code> to disable this feature.</li>
+</ul>
+</li>
+</ul>
+<h3 id="saturation-levels">Saturation levels<a class="headerlink" href="#saturation-levels" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">satLevels</span> <span class="o">=</span> <span class="nx">customPipeline</span><span class="p">.</span><span class="nx">satLevels</span><span class="p">;</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">satLevels</span> <span class="o">=</span> <span class="nx">satLevels</span><span class="p">;</span>
 </pre></div>
-
-<h3 id="set-encoding">Set encoding<a class="headerlink" href="#set-encoding" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">lzstring</span><span class="p">.</span><span class="nx">setEncoding</span><span class="p">(</span><span class="nx">m</span><span class="p">);</span>  <span class="c1">// 0|&#39;none&#39;|1|&#39;base64&#39;|2|&#39;utf16&#39;|3|&#39;uri&#39;</span>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">setSatLevels</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+</pre></div><ul>
+<li>Set <code>0</code> to disable this feature.</li>
+</ul>
+</li>
+</ul>
+<h3 id="value-levels">Value levels<a class="headerlink" href="#value-levels" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">valLevels</span> <span class="o">=</span> <span class="nx">customPipeline</span><span class="p">.</span><span class="nx">valLevels</span><span class="p">;</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">valLevels</span> <span class="o">=</span> <span class="nx">valLevels</span><span class="p">;</span>
 </pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">setValLevels</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+</pre></div><ul>
+<li>Set <code>0</code> to disable this feature.</li>
+</ul>
+</li>
+</ul>
                 
                   
                 
@@ -3958,7 +4031,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../reverse-string/" title="Reverse" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../shader-hsladjust/" title="HSL adjust" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -3967,19 +4040,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Reverse
+                HSL adjust
               </span>
             </div>
           </a>
         
         
-          <a href="../xor/" title="XOR" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../shader-swirl/" title="Swirl" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                XOR
+                Swirl
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

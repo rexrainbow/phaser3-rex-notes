@@ -1708,6 +1708,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ship/" title="Ship" class="md-nav__link">
+      Ship
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -2191,10 +2203,46 @@
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4-3" type="checkbox" id="nav-7-4-3">
     
     <label class="md-nav__link" for="nav-7-4-3">
-      Position
+      Outline
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
       <label class="md-nav__title" for="nav-7-4-3">
+        Outline
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../shader-toonify/" title="Toonify" class="md-nav__link">
+      Toonify
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4-4" type="checkbox" id="nav-7-4-4">
+    
+    <label class="md-nav__link" for="nav-7-4-4">
+      Position
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-7-4-4">
         Position
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -3830,14 +3878,30 @@
 <h3 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h3>
 <p><a href="https://photonstorm.github.io/phaser3-docs/global.html?fbclid=IwAR2qMGrPGJwu2t_ijZy64Kg6pEoDpofRYkuvwa6QxtwyVe-g9l0kG6DRhKM#GameConfig">Reference</a></p>
 <div class="codehilite"><pre><span></span><span class="p">{</span>
-    <span class="nx">width</span><span class="o">:</span> <span class="mi">1024</span><span class="p">,</span>
-    <span class="nx">height</span><span class="o">:</span> <span class="mi">768</span><span class="p">,</span>
-    <span class="nx">zoom</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="nx">resolution</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">AUTO</span><span class="p">,</span>
+    <span class="nx">parent</span><span class="o">:</span> <span class="s1">&#39;phaser-example&#39;</span><span class="p">,</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="mi">800</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="mi">600</span><span class="p">,</span>
+    <span class="nx">scale</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">mode</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scale</span><span class="p">.</span><span class="nx">FIT</span><span class="p">,</span>
+        <span class="nx">autoCenter</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scale</span><span class="p">.</span><span class="nx">CENTER_BOTH</span>
+    <span class="p">},</span>
+    <span class="nx">scene</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">backgroundColor</span><span class="o">:</span> <span class="mh">0x333333</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>or</p>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
     <span class="nx">autoRound</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="nx">type</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">AUTO</span><span class="p">,</span>
-
     <span class="nx">parent</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="mi">800</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="mi">600</span><span class="p">,</span>
+    <span class="nx">scale</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">mode</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scale</span><span class="p">.</span><span class="nx">NONE</span><span class="p">,</span>
+        <span class="nx">autoCenter</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scale</span><span class="p">.</span><span class="nx">NO_CENTER</span>
+    <span class="p">},</span>
     <span class="nx">canvas</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="nx">canvasStyle</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
 
