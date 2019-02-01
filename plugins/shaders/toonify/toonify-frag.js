@@ -30,13 +30,13 @@ void main()
   if ((hStep > 0.0) || (sStep > 0.0) || (vStep > 0.0)) {
     vec3 colorHsv = RGBToHSV(front.rgb);  
     if (hStep > 0.0) {
-      colorHsv.x = min(ceil(colorHsv.x / hStep) * hStep, 360.0);
+      colorHsv.x = min(floor((colorHsv.x / hStep) + 0.5) * hStep, 360.0);
     }
     if (sStep > 0.0) {
-      colorHsv.y = min(ceil(colorHsv.y / sStep) * sStep, 1.0);
+      colorHsv.y = min(floor((colorHsv.y / sStep) + 0.5) * sStep, 1.0);
     }
     if (vStep > 0.0) {
-      colorHsv.z = min(ceil(colorHsv.z / vStep) * vStep, 1.0);
+      colorHsv.z = min(floor((colorHsv.z / vStep) + 0.5) * vStep, 1.0);
     }
     colorLevel = HSVToRGB(colorHsv.x, colorHsv.y, colorHsv.z);
   } else {
