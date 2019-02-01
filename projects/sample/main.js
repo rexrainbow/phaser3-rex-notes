@@ -6,6 +6,10 @@ var config = {
     parent: 'game',
     width: 600,
     height: 800,
+    scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+    },    
     scene: [Boot, Game]
 };
 

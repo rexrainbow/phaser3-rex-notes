@@ -18,14 +18,32 @@ var game = new Phaser.Game(config);
 
 ```javascript
 {
-    width: 1024,
-    height: 768,
-    zoom: 1,
-    resolution: 1,
+    type: Phaser.AUTO,
+    parent: 'phaser-example',
+    width: 800,
+    height: 600,
+    scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH
+    },
+    scene: null,
+    backgroundColor: 0x333333
+}
+```
+
+or
+
+```javascript
+{
     autoRound: false,
     type: Phaser.AUTO,
-
     parent: null,
+    width: 800,
+    height: 600,
+    scale: {
+        mode: Phaser.Scale.NONE,
+        autoCenter: Phaser.Scale.NO_CENTER
+    },
     canvas: null,
     canvasStyle: null,
 
