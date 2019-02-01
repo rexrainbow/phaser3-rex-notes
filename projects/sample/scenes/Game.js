@@ -7,12 +7,12 @@ class Game extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('textureKey', 'assets/img.png');
+        this.load.image('classroom', 'assets/classroom.png');
     }
 
     create() {
         console.log('Game');
-        this.add.image(300, 400, 'textureKey');
+        this.add.image(400, 300, 'classroom');
     }
 
     update() {}
