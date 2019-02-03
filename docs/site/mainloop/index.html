@@ -419,8 +419,44 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../scalemanager/" title="Scale manager" class="md-nav__link">
+      Scale manager
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../fullscreen/" title="Full screen" class="md-nav__link">
+      Full screen
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../orientation.md" title="Orientation" class="md-nav__link">
+      Orientation
+    </a>
   </li>
 
         
@@ -3797,7 +3833,6 @@
                 
                 <ol>
 <li>game.events <code>prestep</code> event. Global Managers like Input and Sound update.<ol>
-<li>trigger <code>game.input.update()</code></li>
 <li>trigger <code>game.sound.update()</code></li>
 </ol>
 </li>
@@ -3901,7 +3936,7 @@ GameEventPostRender&gt;&quot;game.events: postrender&quot;]
 end
 
 subgraph Step
-GameEventPreStep&gt;&quot;game.events: prestep&lt;br&gt;&lt;br&gt;input.update()&lt;br&gt;sound.update()&quot;]
+GameEventPreStep&gt;&quot;game.events: prestep&lt;br&gt;&lt;br&gt;sound.update()&quot;]
 GameEventStep&gt;&quot;game.events: step&quot;]
 SceneManagerUpdate[&quot;SceneManager.update()&lt;br&gt;...See 'Scene steps'...&quot;]
 GameEventPostStep&gt;&quot;game.events: poststep&quot;]

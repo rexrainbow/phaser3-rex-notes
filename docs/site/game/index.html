@@ -453,8 +453,44 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../scalemanager/" title="Scale manager" class="md-nav__link">
+      Scale manager
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../fullscreen/" title="Full screen" class="md-nav__link">
+      Full screen
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../orientation.md" title="Orientation" class="md-nav__link">
+      Orientation
+    </a>
   </li>
 
         
@@ -3865,10 +3901,14 @@
                 
                 <h2 id="boot">Boot<a class="headerlink" href="#boot" title="Permanent link">&para;</a></h2>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">AUTO</span><span class="p">,</span>
+    <span class="nx">parent</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>    
     <span class="nx">width</span><span class="o">:</span> <span class="mi">1024</span><span class="p">,</span>
     <span class="nx">height</span><span class="o">:</span> <span class="mi">768</span><span class="p">,</span>
-    <span class="nx">type</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">AUTO</span><span class="p">,</span>
-    <span class="nx">parent</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">scale</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">mode</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scale</span><span class="p">.</span><span class="nx">FIT</span><span class="p">,</span>
+        <span class="nx">autoCenter</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scale</span><span class="p">.</span><span class="nx">CENTER_BOTH</span>
+    <span class="p">},</span>
 
     <span class="nx">scene</span><span class="o">:</span> <span class="kc">null</span>
 <span class="p">};</span>
@@ -3892,8 +3932,7 @@
 </pre></div>
 
 <p>or</p>
-<div class="codehilite"><pre><span></span><span class="p">{</span>
-    <span class="nx">autoRound</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+<div class="codehilite"><pre><span></span><span class="p">{</span>    
     <span class="nx">type</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">AUTO</span><span class="p">,</span>
     <span class="nx">parent</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="nx">width</span><span class="o">:</span> <span class="mi">800</span><span class="p">,</span>
@@ -3902,6 +3941,7 @@
         <span class="nx">mode</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scale</span><span class="p">.</span><span class="nx">NONE</span><span class="p">,</span>
         <span class="nx">autoCenter</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scale</span><span class="p">.</span><span class="nx">NO_CENTER</span>
     <span class="p">},</span>
+    <span class="nx">autoRound</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>    
     <span class="nx">canvas</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="nx">canvasStyle</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
 
@@ -4020,8 +4060,12 @@
 </ul>
 <h2 id="pause-resume-events">Pause / Resume events<a class="headerlink" href="#pause-resume-events" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Pause (window is invisible) : game.events <code>pause</code> event</li>
-<li>Resume (window is visible) : game.events <code>resume</code> event</li>
+<li>Pause (window is invisible)
+    <div class="codehilite"><pre><span></span><span class="nx">game</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pause&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{});</span>
+</pre></div></li>
+<li>Resume (window is visible)
+    <div class="codehilite"><pre><span></span><span class="nx">game</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;resume&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{});</span>
+</pre></div></li>
 </ul>
 <h2 id="global-members">Global members<a class="headerlink" href="#global-members" title="Permanent link">&para;</a></h2>
 <h3 id="scene-manager">Scene manager<a class="headerlink" href="#scene-manager" title="Permanent link">&para;</a></h3>

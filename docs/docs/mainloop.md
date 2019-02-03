@@ -1,5 +1,4 @@
 1.  game.events `prestep` event. Global Managers like Input and Sound update.
-    1.  trigger `game.input.update()`
     1.  trigger `game.sound.update()`
 1.  game.events `step` event. User-land code and plugins
     - Register event
@@ -89,7 +88,7 @@ GameEventPostRender>"game.events: postrender"]
 end
 
 subgraph Step
-GameEventPreStep>"game.events: prestep<br><br>input.update()<br>sound.update()"]
+GameEventPreStep>"game.events: prestep<br><br>sound.update()"]
 GameEventStep>"game.events: step"]
 SceneManagerUpdate["SceneManager.update()<br>...See 'Scene steps'..."]
 GameEventPostStep>"game.events: poststep"]

@@ -37,7 +37,7 @@ Built-in touch/mouse events of phaser.
     ```javascript
     gameObject.setInteractive().on('pointerdown', function(pointer, localX, localY, event){
         // ...
-    })
+    });
     ```
 - On touch game object end
     ```javascript

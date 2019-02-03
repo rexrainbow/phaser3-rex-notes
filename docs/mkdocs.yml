@@ -8,6 +8,9 @@ nav:
     - Scene:
         - Scene: scene.md
         - Scene manager: scenemanager.md
+        - Scale manager: scalemanager.md
+    - Full screen: fullscreen.md
+    - Orientation: orientation.md
     - Snapshot: snapshot.md
 - Loader:
     - Loader: loader.md

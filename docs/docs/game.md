@@ -2,10 +2,14 @@
 
 ```javascript
 var config = {
+    type: Phaser.AUTO,
+    parent: null,    
     width: 1024,
     height: 768,
-    type: Phaser.AUTO,
-    parent: null,
+    scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH
+    },
 
     scene: null
 };
@@ -34,8 +38,7 @@ var game = new Phaser.Game(config);
 or
 
 ```javascript
-{
-    autoRound: false,
+{    
     type: Phaser.AUTO,
     parent: null,
     width: 800,
@@ -44,6 +47,7 @@ or
         mode: Phaser.Scale.NONE,
         autoCenter: Phaser.Scale.NO_CENTER
     },
+    autoRound: false,    
     canvas: null,
     canvasStyle: null,
 
@@ -163,8 +167,14 @@ game.destroy();
 
 ## Pause / Resume events
 
-- Pause (window is invisible) : game.events `pause` event
-- Resume (window is visible) : game.events `resume` event
+- Pause (window is invisible)
+    ```javascript
+    game.events.on('pause', function() {});
+    ```
+- Resume (window is visible)
+    ```javascript
+    game.events.on('resume', function() {});
+    ```
 
 ## Global members
 
