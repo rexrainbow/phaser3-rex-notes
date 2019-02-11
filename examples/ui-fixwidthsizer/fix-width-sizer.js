@@ -19,12 +19,12 @@ class Demo extends Phaser.Scene {
             y = 300,
             minWidth = 200,
             minHeight = 500;
-        var sizer = this.rexUI.add.fixWidthSizer(x, y, minWidth, minHeight);
+        var sizer = this.rexUI.add.fixWidthSizer(x, y, minWidth, minHeight)
+            .addBackground(this.rexUI.add.roundRectangle(0, 0, 10, 10, 0, COLOR_DARK));
         for (var i = 0; i < 20; i++) {
             sizer.add(createItem(this), 2);
         }
         sizer.layout();
-        sizer.drawBounds(this.add.graphics(), 0xff0000);
     }
 
     update() {}

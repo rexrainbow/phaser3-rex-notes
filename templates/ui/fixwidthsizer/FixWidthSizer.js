@@ -38,6 +38,7 @@ class FixWidthSizer extends BaseSizer {
 
         this.type = 'rexSizer';
         this.sizerChildren = [];
+        this.backgroundChildren = [];
         this.setOrientation(orientation);
     }
 
@@ -58,17 +59,21 @@ class FixWidthSizer extends BaseSizer {
         return this;
     }
 
-    add(gameObject, paddingConfig) {
+    add(gameObject, paddingConfig, expand) {
         super.add(gameObject);
 
         if (paddingConfig === undefined) {
             paddingConfig = 0;
+        }
+        if (expand === undefined) {
+            expand = false;
         }
 
         var config = this.getSizerConfig(gameObject);
         config.parent = this;
         config.align = ALIGN_CENTER;
         config.padding = ParsePaddingConfig(paddingConfig);
+        config.expand = expand;
         this.sizerChildren.push(gameObject);
         return this;
     }
@@ -76,6 +81,22 @@ class FixWidthSizer extends BaseSizer {
     insert(index, gameObject, paddingConfig, expand) {
         this.add(gameObject, paddingConfig, expand);
         this.moveTo(gameObject, index);
+        return this;
+    }
+
+    addBackground(gameObject, paddingConfig) {
+        super.add(gameObject);
+        if (paddingConfig === undefined) {
+            paddingConfig = 0;
+        }
+
+        var config = this.getSizerConfig(gameObject);
+        config.parent = this;
+        // config.proportion = 0;
+        config.align = ALIGN_CENTER;
+        config.padding = ParsePaddingConfig(paddingConfig);
+        config.expand = true;
+        this.backgroundChildren.push(gameObject);
         return this;
     }
 

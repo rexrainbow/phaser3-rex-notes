@@ -112,7 +112,6 @@ class GridSizer extends BaseSizer {
         config.expand = true;
         this.backgroundChildren.push(gameObject);
         return this;
-        f
     }
 
     remove(gameObject) {
