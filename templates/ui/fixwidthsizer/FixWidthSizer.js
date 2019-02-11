@@ -2,10 +2,13 @@ import BaseSizer from '../basesizer/BaseSizer.js';
 import ParsePaddingConfig from '../utils/ParsePaddingConfig.js'
 import Layout from './Layout.js';
 import ORIENTATIONMODE from '../utils/OrientationConst.js';
+import GetMaxChildWidth from './GetMaxChildWidth.js';
+import GetMaxChildHeight from './GetMaxChildHeight.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const RemoveItem = Phaser.Utils.Array.Remove;
+const ALIGN_CENTER = Phaser.Display.Align.CENTER;
 
 class FixWidthSizer extends BaseSizer {
     constructor(scene, x, y, width, height, orientation) {
@@ -26,6 +29,7 @@ class FixWidthSizer extends BaseSizer {
 
         if (config !== undefined) {
             orientation = GetValue(config, 'orientation', 0);
+            space = GetValue(config, 'space', 0);
         }
         if (orientation === undefined) {
             orientation = 0;
@@ -54,20 +58,17 @@ class FixWidthSizer extends BaseSizer {
         return this;
     }
 
-    add(gameObject, paddingConfig, expand) {
+    add(gameObject, paddingConfig) {
         super.add(gameObject);
 
         if (paddingConfig === undefined) {
             paddingConfig = 0;
         }
-        if (expand === undefined) {
-            expand = false;
-        }
 
         var config = this.getSizerConfig(gameObject);
         config.parent = this;
+        config.align = ALIGN_CENTER;
         config.padding = ParsePaddingConfig(paddingConfig);
-        config.expand = expand;
         this.sizerChildren.push(gameObject);
         return this;
     }
@@ -84,6 +85,14 @@ class FixWidthSizer extends BaseSizer {
         RemoveItem(this.sizerChildren, gameObject);
         super.remove(gameObject);
         return this;
+    }
+
+    get maxChildWidth() {
+        return GetMaxChildWidth.call(this);
+    }
+
+    get maxChildHeight() {
+        return GetMaxChildHeight.call(this);
     }
 }
 

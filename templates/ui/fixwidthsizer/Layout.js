@@ -1,5 +1,8 @@
 import NOOP from '../../../plugins/utils/object/NOOP.js';
-import ResizeGameObject from '../utils/ResizeGameObject.js';
+import GetChildWidth from './GetChildWidth.js';
+import GetChildHeight from './GetChildHeight.js';
+import GetMaxChildWidth from './GetMaxChildWidth.js';
+import GetMaxChildHeight from './GetMaxChildHeight.js';
 
 const Zone = Phaser.GameObjects.Zone;
 const AlignIn = Phaser.Display.Align.In.QuickSet;
@@ -41,7 +44,7 @@ var Layout = function (parent) {
             newWidth = (this.rexSizer.proportion * parent.proportionLength) - padding.left - padding.right;
             break;
         default:
-            newWidth = this.minWidth;
+            newWidth = Math.max(this.maxChildWidth, this.minWidth);
             break;
     }
     switch (expandY) {
@@ -54,7 +57,7 @@ var Layout = function (parent) {
             newHeight = (this.rexSizer.proportion * parent.proportionLength) - padding.top - padding.bottom;
             break;
         default:
-            newHeight = this.minHeight;
+            newHeight = Math.max(this.maxChildHeight, this.minHeight);
             break;
     }
     this.resize(newWidth, newHeight);
@@ -63,11 +66,14 @@ var Layout = function (parent) {
     var children = this.sizerChildren;
     var child, childConfig, padding;
     var startX = this.left,
-        startY = this.top;
+        startY = this.top,
+        endX = this.right,
+        endY = this.bottom;
     var itemX = startX,
         itemY = startY;
     var x, y, width, height; // Align zone
-    var newChildWidth, newChildHeight;
+    var childWidth, childHeight;
+    var rowChildren = [];
     for (var i = 0, cnt = children.length; i < cnt; i++) {
         child = children[i];
         // Skip invisible child
@@ -81,62 +87,39 @@ var Layout = function (parent) {
 
         childConfig = child.rexSizer;
         padding = childConfig.padding;
-        newChildWidth = undefined;
-        newChildHeight = undefined;
         if (this.orientation === 0) { // x
-            if (childConfig.proportion === -1) { // Background
-                x = (startX + padding.left);
-                width = this.width - padding.left - padding.right; // Expand width of child
-                newChildWidth = width;
-            } else if (
-                (childConfig.proportion === 0) ||
-                (proportionLength === 0)
-            ) {
-                x = (itemX + padding.left);
-                width = child.width;
-                itemX += (width + padding.left + padding.right);
-            } else {
-                x = (itemX + padding.left);
-                width = (childConfig.proportion * proportionLength) - padding.left - padding.right;
-                itemX += (width + padding.left + padding.right);
+            childWidth = GetChildWidth(child);
+            if ((itemX + childWidth) > endX) {
+                itemX = startX;
+                itemY += GetMaxChildHeight(rowChildren);;
+                rowChildren.length = 0;
             }
-            y = (startY + padding.top);
-            height = (this.height - padding.top - padding.bottom);
-
-            if (childConfig.expand) {
-                newChildHeight = height;
-            }
+            x = (itemX + padding.left);
+            y = (itemY + padding.top);
+            width = child.width;
+            height = child.height;
+            itemX += childWidth;
         } else { // y
-            if (childConfig.proportion === -1) { // Background
-                y = (startY + padding.top);
-                height = this.height - padding.top - padding.bottom;
-                newChildHeight = height;
-            } else if (proportionLength === 0) {
-                y = (itemY + padding.top);
-                height = child.height;
-                itemY += (height + padding.top + padding.bottom);
-            } else {
-                y = (itemY + padding.top);
-                height = (childConfig.proportion * proportionLength) - padding.top - padding.bottom;
-                itemY += (height + padding.top + padding.bottom);
+            childHeight = GetChildHeight(child);
+            if ((itemY + childHeight) > endY) {
+                itemY = startY;
+                itemX += GetMaxChildWidth(rowChildren);
+                rowChildren.length = 0;
             }
-            x = (startX + padding.left);
-            width = (this.width - padding.left - padding.right);
-
-            if (childConfig.expand) {
-                newChildWidth = width;
-            }
+            x = (itemX + padding.left);
+            y = (itemY + padding.top);
+            width = child.width;
+            height = child.height;
+            itemY += childHeight;
         }
 
-        // Set size of child
-        if (!child.isRexSizer) { // Don't resize sizer again
-            ResizeGameObject(child, newChildWidth, newChildHeight);
-        }
-
+        rowChildren.push(child);
         tmpZone.setPosition(x, y).setSize(width, height);
         AlignIn(child, tmpZone, childConfig.align);
         this.resetChildState(child);
     }
+
+    rowChildren.length = 0;
     return this;
 }
 

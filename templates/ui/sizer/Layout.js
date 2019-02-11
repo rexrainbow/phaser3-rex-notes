@@ -130,7 +130,7 @@ var Layout = function (parent) {
                 width = (childConfig.proportion * proportionLength) - padding.left - padding.right;
                 itemX += (width + padding.left + padding.right);
             }
-            y = (startY + padding.top);
+            y = (itemY + padding.top);
             height = (this.height - padding.top - padding.bottom);
 
             if (childConfig.expand) {
@@ -150,7 +150,7 @@ var Layout = function (parent) {
                 height = (childConfig.proportion * proportionLength) - padding.top - padding.bottom;
                 itemY += (height + padding.top + padding.bottom);
             }
-            x = (startX + padding.left);
+            x = (itemX + padding.left);
             width = (this.width - padding.left - padding.right);
 
             if (childConfig.expand) {

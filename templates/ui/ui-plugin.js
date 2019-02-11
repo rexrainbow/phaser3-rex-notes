@@ -2,7 +2,8 @@ import ObjectFactory from './ObjectFactory.js';
 import RoundRectangleFactory from './roundrectangle/RoundRectangleFactory.js';
 
 import SizerFactory from './sizer/SizerFactory.js';
-import GridSizer from './gridsizer/GridSizerFactory.js';
+import GridSizerFactory from './gridsizer/GridSizerFactory.js';
+import FixWidthSizerFactory from './fixwidthsizer/FixWidthSizerFactory.js';
 
 import LabelFactory from './label/LabelFactory.js';
 import ButtonsFactory from './buttons/ButtonsFactory.js';
