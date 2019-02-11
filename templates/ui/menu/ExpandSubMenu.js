@@ -1,8 +1,6 @@
-import Menu from './Menu.js';
-
 var ExpandSubMenu = function (parentButton, items) {
     this.collapseSubMenu();
-    var subMenu = new Menu(this.scene, {
+    var subMenu = new this.constructor(this.scene, {
         items: items,
         orientation: this.orientation,
         createButtonCallback: this.root.createButtonCallback,
