@@ -1,6 +1,6 @@
 ## Introduction
 
-Layout children game objects in grids.
+Layout children game objects in rows.
 
 - Author: Rex
 - A kind of game object
@@ -9,11 +9,11 @@ Layout children game objects in grids.
 
 [Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/ui/ui-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexuiplugin.min.js)
 
-[Class](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/ui/gridsizer/GridSizer.js)
+[Class](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/ui/fixwidthsizer/FixWidthSizer.js)
 
 ## Usage
 
-[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-gridsizer)
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-fixwidthsizer)
 
 ### Install plugin
 
@@ -37,58 +37,57 @@ var config = {
 };
 var game = new Phaser.Game(config);
 ```
-### Add grid sizer object
+
+### Add sizer object
 
 ```javascript
-var gridSizer = scene.rexUI.add.gridSizer({
-    column: 0,
-    row: 0,
+var sizer = scene.rexUI.add.fixWidthSizer({
+    width: 2,
+    height: 2
+    orientation: 0,
     // x: 0,
-    // y: 0,
-    // width: undefined,
-    // height: undefined
+    // y: 0
 });
 ```
 
 or
 
 ```javascript
-var gridSizer = scene.rexUI.add.gridSizer(x, y, {
-    column: 0,
-    row: 0,
-    // width: undefined,
-    // height: undefined
+var sizer = scene.rexUI.add.fixWidthSizer(x, y, {
+    width: 2,
+    height: 2
+    orientation: 0,
 });
 ```
 
 or
 
 ```javascript
-var gridSizer = scene.rexUI.add.gridSizer(x, y, width, height, {
-    column: 0,
-    row: 0
+var sizer = scene.rexUI.add.fixWidthSizer(x, y, width, height, {
+    orientation: 0,
 });
 ```
 
 or
 
 ```javascript
-var gridSizer = scene.rexUI.add.gridSizer(x, y, width, height, column, row);
+var sizer = scene.rexUI.add.fixWidthSizer(x, y, width, height, orientation);
 ```
 
-- `column` : Amount of column grids.
-- `row` : Amount of row grids.
-- `x`, `y` : Position of gridSizer. Only available for top-gridSizer, children-sizers will be changed by parent.
-- `width` : Minimum width. i.e. Width of this gridSizer will larger then this value.
-- `height` : Minimum height. i.e. Hieght of this gridSizer will larger then this value.
+- `orientation` : Main orientation of the sizer.
+    - `'left-to-right'`, `'horizontal'`,`'h'`, `'x'`, or `0` : Arrange game objects from left ot right.
+    - `'top-to-bottom'`, `'vertical'`,`'v'`, `'y'`, or `1` : Arrange game objects from top to bottom.
+- `x`, `y` : Position of sizer. Only available for top-sizer, children-sizers will be changed by parent.
+- `width` : Minimum width. i.e. Width of this sizer will larger then this value.
+- `height` : Minimum height. i.e. Hieght of this sizer will larger then this value.
 
 ### Custom class
 
 - Define class
     ```javascript
-    class MyGridSizer extends RexPlugins.UI.GridSizer {
-        constructor(scene, x, y, minWidth, minHeight, column, row) {
-            super(scene, x, y, minWidth, minHeight, column, ro);
+    class MySizer extends RexPlugins.UI.FixWidthSizer {
+        constructor(scene, x, y, minWidth, minHeight, orientation) {
+            super(scene, x, y, minWidth, minHeight, orientation);
             // ...
         }
         // ...
@@ -96,31 +95,24 @@ var gridSizer = scene.rexUI.add.gridSizer(x, y, width, height, column, row);
     ```
 - Create instance
     ```javascript
-    var gridSizer = new MyGridSizer(scene, x, y, minWidth, minHeight, column, row);
+    var sizer = new MySizer(scene, x, y, minWidth, minHeight, orientation);
     ```
 
 ### Add child
 
-Add a game obejct to grid sizer
+Add a game obejct to sizer
 
 ```javascript
-gridSizer.add(child, columnIndex, rowIndex);
+sizer.add(child);
 ```
 
 or
 
 ```javascript
-gridSizer.add(child, columnIndex, rowIndex, align, paddingConfig, expand);
+sizer.add(child, paddingConfig);
 ```
 
 - `child` : A game object
-- `columnIndex`, `rowIndex` : Index of grid to add.
-- `align` :
-    - `'center'`, or `Phaser.Display.Align.CENTER` : Align game object at center. Default value.
-    - `'left'`, or `Phaser.Display.Align.LEFT_CENTER` : Align game object at left-center.
-    - `'right'`, or `Phaser.Display.Align.RIGHT_CENTER` : Align game object at right-center.
-    - `'top'`, or `Phaser.Display.Align.RIGHT_CENTER` : Align game object at top-center.
-    - `'bottom'`, or `Phaser.Display.Align.BOTTOM_CENTER` : Align game object at bottom-center.
 - `paddingConfig` : Add space between bounds. Default is 0.
     - A number for left/right/top/bottom bounds
     - Or a plain object
@@ -132,21 +124,11 @@ gridSizer.add(child, columnIndex, rowIndex, align, paddingConfig, expand);
             bottom: 0
         }
         ```
-- `expand` : Set `true` to height and width.
 
 ### Add background
 
 ```javascript
-gridSizer.addBackground(child, paddingConfig);
-```
-
-### Proportion
-
-Set proportion of each column or row via
-
-```javascript
-gridSizer.setColumnProportion(columnIndex, proportion);
-gridSizer.setRowProportion(rowIndex, proportion);
+sizer.addBackground(child, paddingConfig);
 ```
 
 ### Layout children
@@ -154,45 +136,45 @@ gridSizer.setRowProportion(rowIndex, proportion);
 Arrange position of all children.
 
 ```javascript
-gridSizer.layout();
+sizer.layout();
 ```
 
-### Bounds of grid sizer
+### Bounds of sizer
 
 - Get
     ```javascript
-    var leftBound = gridSizer.left;
-    var rightBound = gridSizer.right;
-    var topBound = gridSizer.top;
-    var bottomBound = gridSizer.bottom;
+    var leftBound = sizer.left;
+    var rightBound = sizer.right;
+    var topBound = sizer.top;
+    var bottomBound = sizer.bottom;
     ```
 - Set
     ```javascript
-    gridSizer.left = leftBound;
-    gridSizer.right = rightBound;
-    gridSizer.top = topBound;
-    gridSizer.bottom = bottomBound;
+    sizer.left = leftBound;
+    sizer.right = rightBound;
+    sizer.top = topBound;
+    sizer.bottom = bottomBound;
     ```
     or
     ```javascript
-    gridSizer.alignLeft(leftBound);
-    gridSizer.alignRight(rightBound);
-    gridSizer.alignTop(topBound);
-    gridSizer.alignBottom(bottomBound);
+    sizer.alignLeft(leftBound);
+    sizer.alignRight(rightBound);
+    sizer.alignTop(topBound);
+    sizer.alignBottom(bottomBound);
     ```
 
 ### Push into bounds
 
-Align grid sizer to bound if overlapping it.
+Align sizer to bound if overlapping it.
 
 ```javascript
-gridSizer.pushIntoBounds();
+sizer.pushIntoBounds();
 ```
 
 or
 
 ```javascript
-gridSizer.pushIntoBounds(bounds);
+sizer.pushIntoBounds(bounds);
 ```
 
 - `bounds` : Bounds in [rectangle object](geom-rectangle.md).
@@ -248,7 +230,7 @@ gridSizer.pushIntoBounds(bounds);
 Draw all bounds of children.
 
 ```javascript
-gridSizer.drawBounds(graphics, color);
+sizer.drawBounds(graphics, color);
 ```
 
 - `graphics` : [Graphics game object](graphics.md)
@@ -256,4 +238,4 @@ gridSizer.drawBounds(graphics, color);
 
 ### Other properties
 
-This gridSizer game object inherits from [ContainerLite](containerlite.md).
+This sizer game object inherits from [ContainerLite](containerlite.md).

@@ -22,13 +22,15 @@ It is inspired from [wxSizer](https://docs.wxwidgets.org/3.0/overview_sizer.html
 Install plugin in [configuration of game](game.md#configuration)
 
 ```javascript
+import UIPlugin from 'rexTemplates/ui/ui-plugin.js';
+
 var config = {
     // ...
     plugins: {
-        global: [{
-            key: 'rexSizerPlugin',
-            plugin: SizerPlugin,
-            start: true
+        scene: [{
+            key: 'rexUI',
+            plugin: UIPlugin,
+            mapping: 'rexUI'
         },
         // ...
         ]
@@ -78,16 +80,16 @@ var sizer = scene.rexUI.add.sizer(x, y, width, height, orientation);
     - `'left-to-right'`, `'horizontal'`,`'h'`, `'x'`, or `0` : Arrange game objects from left ot right.
     - `'top-to-bottom'`, `'vertical'`,`'v'`, `'y'`, or `1` : Arrange game objects from top to bottom.
 - `x`, `y` : Position of sizer. Only available for top-sizer, children-sizers will be changed by parent.
-- `width` : Minimum width. i.e. Width of this sizer will bigger then this value.
-- `height` : Minimum height. i.e. Hieght of this sizer will bigger then this value.
+- `width` : Minimum width. i.e. Width of this sizer will larger then this value.
+- `height` : Minimum height. i.e. Hieght of this sizer will larger then this value.
 
 ### Custom class
 
 - Define class
     ```javascript
     class MySizer extends RexPlugins.UI.Sizer {
-        constructor(scene, x, y, minWidth, minHeight, config) {
-            super(scene, x, y, minWidth, minHeight, config);
+        constructor(scene, x, y, minWidth, minHeight, orientation) {
+            super(scene, x, y, minWidth, minHeight, orientation);
             // ...
         }
         // ...
@@ -95,7 +97,7 @@ var sizer = scene.rexUI.add.sizer(x, y, width, height, orientation);
     ```
 - Create instance
     ```javascript
-    var sizer = new MySizer(scene, x, y, minWidth, minHeight, config);
+    var sizer = new MySizer(scene, x, y, minWidth, minHeight, orientation);
     ```
 
 ### Add child

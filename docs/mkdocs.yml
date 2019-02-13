@@ -68,6 +68,7 @@ nav:
         - UI:
             - Sizer: ui-sizer.md
             - Grid sizer: ui-gridsizer.md
+            - Fix-width sizer: ui-fixwidthsizer.md
             - Label: ui-label.md
             - Text box: ui-textbox.md
             - Slider: ui-slider.md
