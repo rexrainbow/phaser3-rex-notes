@@ -16,10 +16,6 @@ var RunChildrenWrap = function (out) {
             continue;
         }
 
-        if (child.isRexSizer) {
-            child.layout(this);
-        }
-
         childWidth = GetChildWidth(child, this.orientation);
         if (remainder < childWidth) {
             lastRow = {

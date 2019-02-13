@@ -11,6 +11,13 @@ class Demo extends Phaser.Scene {
 
     create() {
         this.add.image(400, 300, 'classroom');
+        this.scale.on('resize', function () {
+            var rect = this.scale.canvasBounds;
+            console.log(rect.x + ',' +
+                rect.y + ' - ' +
+                rect.width + 'x' +
+                rect.height);
+        }, this)
     }
 
     update() {}
@@ -22,7 +29,7 @@ var config = {
     width: 800,
     height: 600,
     scale: {
-        mode: Phaser.Scale.FIT,
+        mode: Phaser.Scale.ENVELOP,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
     scene: Demo,

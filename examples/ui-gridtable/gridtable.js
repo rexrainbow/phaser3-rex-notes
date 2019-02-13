@@ -60,8 +60,7 @@ class Demo extends Phaser.Scene {
                                 left: 15
                             }
                         })
-                        .setOrigin(0)
-                        .layout();
+                        .setOrigin(0);
                 },
                 items: getItems(100)
             })

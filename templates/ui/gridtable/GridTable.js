@@ -47,6 +47,10 @@ class GridTable extends Sizer {
             } else {
                 container = callback(cell);
             }
+            if (container.isRexSizer) {
+                container.layout();
+            }
+
             cell.item = undefined;
             cell.setContainer(container);
         }, this);

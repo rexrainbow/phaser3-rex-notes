@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/restorabledata/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/ui-fixwidthsizer/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Restorable data - Notes of Phaser 3</title>
+        <title>Fix-width sizer - Notes of Phaser 3</title>
       
     
     
@@ -128,7 +128,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Restorable data
+                Fix-width sizer
               </span>
             
           
@@ -483,10 +483,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
     
     <label class="md-nav__link" for="nav-4">
       Game object
@@ -1138,10 +1140,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-6" type="checkbox" id="nav-4-6">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-6" type="checkbox" id="nav-4-6" checked>
     
     <label class="md-nav__link" for="nav-4-6">
       Container
@@ -1205,10 +1209,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-6-5" type="checkbox" id="nav-4-6-5">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-6-5" type="checkbox" id="nav-4-6-5" checked>
     
     <label class="md-nav__link" for="nav-4-6-5">
       UI
@@ -1248,11 +1254,149 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../ui-fixwidthsizer/" title="Fix-width sizer" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Fix-width sizer
+      </label>
+    
+    <a href="./" title="Fix-width sizer" class="md-nav__link md-nav__link--active">
       Fix-width sizer
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-plugin" title="Install plugin" class="md-nav__link">
+    Install plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-sizer-object" title="Add sizer object" class="md-nav__link">
+    Add sizer object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-class" title="Custom class" class="md-nav__link">
+    Custom class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-child" title="Add child" class="md-nav__link">
+    Add child
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-background" title="Add background" class="md-nav__link">
+    Add background
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#layout-children" title="Layout children" class="md-nav__link">
+    Layout children
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bounds-of-sizer" title="Bounds of sizer" class="md-nav__link">
+    Bounds of sizer
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#push-into-bounds" title="Push into bounds" class="md-nav__link">
+    Push into bounds
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scale" title="Scale" class="md-nav__link">
+    Scale
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fade" title="Fade" class="md-nav__link">
+    Fade
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#draw-bounds" title="Draw bounds" class="md-nav__link">
+    Draw bounds
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-properties" title="Other properties" class="md-nav__link">
+    Other properties
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -2499,12 +2643,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
     
     <label class="md-nav__link" for="nav-10">
       Data
@@ -2520,12 +2662,10 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10-1" type="checkbox" id="nav-10-1" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10-1" type="checkbox" id="nav-10-1">
     
     <label class="md-nav__link" for="nav-10-1">
       Data manager
@@ -2553,121 +2693,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Restorable data
-      </label>
-    
-    <a href="./" title="Restorable data" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../restorabledata/" title="Restorable data" class="md-nav__link">
       Restorable data
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#source-code" title="Source code" class="md-nav__link">
-    Source code
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#import-class" title="Import class" class="md-nav__link">
-    Import class
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
-    Install global plugin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#getsetremove-value" title="Get/set/remove value" class="md-nav__link">
-    Get/set/remove value
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#commit" title="Commit" class="md-nav__link">
-    Commit
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#restore" title="Restore" class="md-nav__link">
-    Restore
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#version" title="Version" class="md-nav__link">
-    Version
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#saveload-status" title="Save/load status" class="md-nav__link">
-    Save/load status
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -3874,57 +3904,85 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#import-class" title="Import class" class="md-nav__link">
-    Import class
+  <a href="#install-plugin" title="Install plugin" class="md-nav__link">
+    Install plugin
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
-    Install global plugin
+  <a href="#add-sizer-object" title="Add sizer object" class="md-nav__link">
+    Add sizer object
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
+  <a href="#custom-class" title="Custom class" class="md-nav__link">
+    Custom class
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#getsetremove-value" title="Get/set/remove value" class="md-nav__link">
-    Get/set/remove value
+  <a href="#add-child" title="Add child" class="md-nav__link">
+    Add child
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#commit" title="Commit" class="md-nav__link">
-    Commit
+  <a href="#add-background" title="Add background" class="md-nav__link">
+    Add background
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#restore" title="Restore" class="md-nav__link">
-    Restore
+  <a href="#layout-children" title="Layout children" class="md-nav__link">
+    Layout children
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#version" title="Version" class="md-nav__link">
-    Version
+  <a href="#bounds-of-sizer" title="Bounds of sizer" class="md-nav__link">
+    Bounds of sizer
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#saveload-status" title="Save/load status" class="md-nav__link">
-    Save/load status
+  <a href="#push-into-bounds" title="Push into bounds" class="md-nav__link">
+    Push into bounds
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scale" title="Scale" class="md-nav__link">
+    Scale
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fade" title="Fade" class="md-nav__link">
+    Fade
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#draw-bounds" title="Draw bounds" class="md-nav__link">
+    Draw bounds
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-properties" title="Other properties" class="md-nav__link">
+    Other properties
   </a>
   
 </li>
@@ -3950,38 +4008,34 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/restorabledata.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/ui-fixwidthsizer.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Restorable data</h1>
+                  <h1>Fix-width sizer</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Restorable data manager, extends from <a href="../datamanager/">built-in data manager</a>.</p>
+<p>Layout children game objects into rows.</p>
 <ul>
 <li>Author: Rex</li>
-<li>Member of scene</li>
+<li>A kind of game object</li>
 </ul>
 <h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/restorabledata-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexrestorabledataplugin.min.js">minify</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/ui/ui-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexuiplugin.min.js">minify</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/ui/fixwidthsizer/FixWidthSizer.js">Class</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/restorabledata">Sample code</a></p>
-<p>User could import class directly, or install it by global plugin.</p>
-<h3 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">rexRData</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/restorabledata.js&#39;</span><span class="p">;</span>
-</pre></div>
-
-<h3 id="install-global-plugin">Install global plugin<a class="headerlink" href="#install-global-plugin" title="Permanent link">&para;</a></h3>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-fixwidthsizer">Sample code</a></p>
+<h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
 <p>Install plugin in <a href="../game/#configuration">configuration of game</a></p>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">RDataPlugin</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/restorabledata-plugin.js&#39;</span><span class="p">;</span>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">UIPlugin</span> <span class="nx">from</span> <span class="s1">&#39;rexTemplates/ui/ui-plugin.js&#39;</span><span class="p">;</span>
 
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
-            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexRData&#39;</span><span class="p">,</span>
-            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">RDataPlugin</span><span class="p">,</span>
-            <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
-        <span class="p">}</span>
+        <span class="nx">scene</span><span class="o">:</span> <span class="p">[{</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexUI&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">UIPlugin</span><span class="p">,</span>
+            <span class="nx">mapping</span><span class="o">:</span> <span class="s1">&#39;rexUI&#39;</span>
+        <span class="p">},</span>
         <span class="c1">// ...</span>
         <span class="p">]</span>
     <span class="p">}</span>
@@ -3990,75 +4044,184 @@
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </pre></div>
 
-<h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexRData&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">parent</span><span class="p">);</span>
-<span class="c1">// var data = scene.plugins.get(&#39;rexRData&#39;).add(parent, eventEmitter);</span>
-</pre></div>
-
-<ul>
-<li><code>parent</code> : The object (a scene, or a game object) that this DataManager belongs to.</li>
-<li><code>eventEmitter</code> : The DataManager's <a href="../eventemitter3/">event emitter</a>.</li>
-</ul>
-<h3 id="getsetremove-value">Get/set/remove value<a class="headerlink" href="#getsetremove-value" title="Permanent link">&para;</a></h3>
-<p>See <a href="../datamanager/">built-in data manager</a>.</p>
-<h3 id="commit">Commit<a class="headerlink" href="#commit" title="Permanent link">&para;</a></h3>
-<p>Commit current data status into repository, and increase current version number.</p>
-<div class="codehilite"><pre><span></span><span class="nx">data</span><span class="p">.</span><span class="nx">commit</span><span class="p">();</span>
+<h3 id="add-sizer-object">Add sizer object<a class="headerlink" href="#add-sizer-object" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">fixWidthSizer</span><span class="p">({</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="mi">2</span>
+    <span class="nx">orientation</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="c1">// x: 0,</span>
+    <span class="c1">// y: 0</span>
+<span class="p">});</span>
 </pre></div>
 
 <p>or</p>
-<div class="codehilite"><pre><span></span><span class="nx">data</span><span class="p">.</span><span class="nx">commit</span><span class="p">(</span><span class="nx">alias</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">fixWidthSizer</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="mi">2</span>
+    <span class="nx">orientation</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+<span class="p">});</span>
+</pre></div>
+
+<p>or</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">fixWidthSizer</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">orientation</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+<span class="p">});</span>
+</pre></div>
+
+<p>or</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">fixWidthSizer</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">orientation</span><span class="p">);</span>
 </pre></div>
 
 <ul>
-<li><code>alias</code> : A version alias string.</li>
+<li><code>orientation</code> : Main orientation of the sizer.<ul>
+<li><code>'left-to-right'</code>, <code>'horizontal'</code>,<code>'h'</code>, <code>'x'</code>, or <code>0</code> : Arrange game objects from left ot right.</li>
+<li><code>'top-to-bottom'</code>, <code>'vertical'</code>,<code>'v'</code>, <code>'y'</code>, or <code>1</code> : Arrange game objects from top to bottom.</li>
 </ul>
-<h3 id="restore">Restore<a class="headerlink" href="#restore" title="Permanent link">&para;</a></h3>
+</li>
+<li><code>x</code>, <code>y</code> : Position of sizer. Only available for top-sizer, children-sizers will be changed by parent.</li>
+<li><code>width</code> : Minimum width. i.e. Width of this sizer will larger then this value.</li>
+<li><code>height</code> : Minimum height. i.e. Hieght of this sizer will larger then this value.</li>
+</ul>
+<h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Restore data status to a specific version.
-    <div class="codehilite"><pre><span></span><span class="nx">data</span><span class="p">.</span><span class="nx">restore</span><span class="p">(</span><span class="nx">version</span><span class="p">);</span>
+<li>Define class
+    <div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">MySizer</span> <span class="kr">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">FixWidthSizer</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">minWidth</span><span class="p">,</span> <span class="nx">minHeight</span><span class="p">,</span> <span class="nx">orientation</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">minWidth</span><span class="p">,</span> <span class="nx">minHeight</span><span class="p">,</span> <span class="nx">orientation</span><span class="p">);</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div></li>
+<li>Create instance
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MySizer</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">minWidth</span><span class="p">,</span> <span class="nx">minHeight</span><span class="p">,</span> <span class="nx">orientation</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h3 id="add-child">Add child<a class="headerlink" href="#add-child" title="Permanent link">&para;</a></h3>
+<p>Add a game obejct to sizer</p>
+<div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
+</pre></div>
+
+<p>or</p>
+<div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">paddingConfig</span><span class="p">);</span>
+</pre></div>
+
+<ul>
+<li><code>child</code> : A game object</li>
+<li><code>paddingConfig</code> : Add space between bounds. Default is 0.<ul>
+<li>A number for left/right/top/bottom bounds</li>
+<li>Or a plain object
+    <div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nx">left</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">right</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">top</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">bottom</span><span class="o">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+</pre></div></li>
+</ul>
+</li>
+</ul>
+<h3 id="add-background">Add background<a class="headerlink" href="#add-background" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">addBackground</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">paddingConfig</span><span class="p">);</span>
+</pre></div>
+
+<h3 id="layout-children">Layout children<a class="headerlink" href="#layout-children" title="Permanent link">&para;</a></h3>
+<p>Arrange position of all children.</p>
+<div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">layout</span><span class="p">();</span>
+</pre></div>
+
+<h3 id="bounds-of-sizer">Bounds of sizer<a class="headerlink" href="#bounds-of-sizer" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">leftBound</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">left</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">rightBound</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">right</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">topBound</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">top</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">bottomBound</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">bottom</span><span class="p">;</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="nx">leftBound</span><span class="p">;</span>
+<span class="nx">sizer</span><span class="p">.</span><span class="nx">right</span> <span class="o">=</span> <span class="nx">rightBound</span><span class="p">;</span>
+<span class="nx">sizer</span><span class="p">.</span><span class="nx">top</span> <span class="o">=</span> <span class="nx">topBound</span><span class="p">;</span>
+<span class="nx">sizer</span><span class="p">.</span><span class="nx">bottom</span> <span class="o">=</span> <span class="nx">bottomBound</span><span class="p">;</span>
 </pre></div>
     or
-    <div class="codehilite"><pre><span></span><span class="nx">data</span><span class="p">.</span><span class="nx">version</span> <span class="o">=</span> <span class="nx">version</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">alignLeft</span><span class="p">(</span><span class="nx">leftBound</span><span class="p">);</span>
+<span class="nx">sizer</span><span class="p">.</span><span class="nx">alignRight</span><span class="p">(</span><span class="nx">rightBound</span><span class="p">);</span>
+<span class="nx">sizer</span><span class="p">.</span><span class="nx">alignTop</span><span class="p">(</span><span class="nx">topBound</span><span class="p">);</span>
+<span class="nx">sizer</span><span class="p">.</span><span class="nx">alignBottom</span><span class="p">(</span><span class="nx">bottomBound</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h3 id="push-into-bounds">Push into bounds<a class="headerlink" href="#push-into-bounds" title="Permanent link">&para;</a></h3>
+<p>Align sizer to bound if overlapping it.</p>
+<div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">pushIntoBounds</span><span class="p">();</span>
+</pre></div>
+
+<p>or</p>
+<div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">pushIntoBounds</span><span class="p">(</span><span class="nx">bounds</span><span class="p">);</span>
+</pre></div>
+
+<ul>
+<li><code>bounds</code> : Bounds in <a href="../geom-rectangle/">rectangle object</a>.</li>
+</ul>
+<h3 id="scale">Scale<a class="headerlink" href="#scale" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Pop up<ul>
+<li>Pop up width and height
+    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">popUp</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>
+<span class="c1">// sizer.popUp(duration, undefined, ease);</span>
 </pre></div><ul>
-<li><code>version</code> : Version number or version alias string.</li>
+<li><code>ease</code> : <a href="tween.md/#ease-equations">Ease function</a>, default is <code>'Cubic'</code>.</li>
 </ul>
 </li>
-<li>Rebuild data status from version <code>0</code> to a specific version.
-    <div class="codehilite"><pre><span></span><span class="nx">data</span><span class="p">.</span><span class="nx">restore</span><span class="p">(</span><span class="nx">version</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+<li>Pop up width only
+    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">popUp</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">);</span>
+<span class="c1">// sizer.popUp(duration, &#39;x&#39;, ease);</span>
 </pre></div><ul>
-<li><code>version</code> : Version number or version alias string.</li>
+<li><code>ease</code> : <a href="tween.md/#ease-equations">Ease function</a>, default is <code>'Cubic'</code>.</li>
 </ul>
 </li>
-<li>Reverse data status to last version.
-    <div class="codehilite"><pre><span></span><span class="nx">data</span><span class="p">.</span><span class="nx">restore</span><span class="p">();</span>
+<li>Pop up height only
+    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">popUp</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">);</span>
+<span class="c1">// sizer.popUp(duration, &#39;y&#39;, ease);</span>
+</pre></div><ul>
+<li><code>ease</code> : <a href="tween.md/#ease-equations">Ease function</a>, default is <code>'Cubic'</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Scale down destroy<ul>
+<li>Scale down width and height
+    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">scaleDownDestroy</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>
+</pre></div></li>
+<li>Scale down width only
+    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">scaleDownDestroy</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">);</span>
+</pre></div></li>
+<li>Scale down height only
+    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">scaleDownDestroy</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">);</span>
 </pre></div></li>
 </ul>
-<h3 id="version">Version<a class="headerlink" href="#version" title="Permanent link">&para;</a></h3>
+</li>
+</ul>
+<h3 id="fade">Fade<a class="headerlink" href="#fade" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Get current version alias string
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">version</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">versionAlias</span><span class="p">;</span>
+<li>Fade in
+    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">fadeIn</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>
 </pre></div></li>
-<li>Get all version alias strings
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">aliases</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">versionAliases</span><span class="p">;</span>
-</pre></div></li>
-<li>Get current version number
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">version</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">version</span><span class="p">;</span>
-</pre></div></li>
-<li>Get last version number
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">version</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">lastVersion</span><span class="p">;</span>
+<li>Fade out destroy
+    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">fadeOutDestroy</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>
 </pre></div></li>
 </ul>
-<p>Version starts from <code>0</code> which has no data. Each <code>data.commit()</code> will increase this version number.</p>
-<h3 id="saveload-status">Save/load status<a class="headerlink" href="#saveload-status" title="Permanent link">&para;</a></h3>
+<h3 id="draw-bounds">Draw bounds<a class="headerlink" href="#draw-bounds" title="Permanent link">&para;</a></h3>
+<p>Draw all bounds of children.</p>
+<div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">drawBounds</span><span class="p">(</span><span class="nx">graphics</span><span class="p">,</span> <span class="nx">color</span><span class="p">);</span>
+</pre></div>
+
 <ul>
-<li>Get current status via JSON string
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
-</pre></div></li>
-<li>Load status via JSON string
-    <div class="codehilite"><pre><span></span><span class="nx">data</span><span class="p">.</span><span class="nx">resetFromJSON</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">s</span><span class="p">));</span>
-</pre></div></li>
+<li><code>graphics</code> : <a href="../graphics/">Graphics game object</a></li>
+<li><code>color</code> : Default value is <code>0xffffff</code></li>
 </ul>
+<h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
+<p>This sizer game object inherits from <a href="../containerlite/">ContainerLite</a>.</p>
                 
                   
                 
@@ -4079,7 +4242,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../datamanager/" title="Built-in data" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../ui-gridsizer/" title="Grid sizer" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -4088,19 +4251,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Built-in data
+                Grid sizer
               </span>
             </div>
           </a>
         
         
-          <a href="../buffdata/" title="Buff data" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../ui-label/" title="Label" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Buff data
+                Label
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

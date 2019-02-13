@@ -65,7 +65,7 @@ var Layout = function (parent) {
     this.resize(newWidth, newHeight);
 
     // Layout children    
-    // var children = this.sizerChildren;
+    var children = this.sizerChildren;
     var child, childConfig, padding;
     var startX = this.left,
         startY = this.top;
@@ -73,7 +73,22 @@ var Layout = function (parent) {
         itemY = startY;
     var x, y, width, height; // Align zone
 
+    // Get size of children
+    for (var i = 0, cnt = children.length; i < cnt; i++) {
+        child = children[i];
+        // Skip invisible child
+        if (!child.visible) {
+            continue;
+        }
+
+        if (child.isRexSizer) {
+            child.layout();
+        }
+    }
+
     var rows = RunChildrenWrap.call(this);
+
+    // Layout each row
     var row, rowChildren;
     for (var i = 0, icnt = rows.length; i < icnt; i++) {
         row = rows[i];
