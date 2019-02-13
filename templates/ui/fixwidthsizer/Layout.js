@@ -1,9 +1,10 @@
 import NOOP from '../../../plugins/utils/object/NOOP.js';
 import ResizeGameObject from '../utils/ResizeGameObject.js';
+import RunChildrenWrap from './RunChildrenWrap.js';
 import GetChildWidth from './GetChildWidth.js';
 import GetChildHeight from './GetChildHeight.js';
-import GetMaxChildWidth from './GetMaxChildWidth.js';
-import GetMaxChildHeight from './GetMaxChildHeight.js';
+// import GetMaxChildWidth from './GetMaxChildWidth.js';
+// import GetMaxChildHeight from './GetMaxChildHeight.js';
 
 const Zone = Phaser.GameObjects.Zone;
 const AlignIn = Phaser.Display.Align.In.QuickSet;
@@ -64,61 +65,49 @@ var Layout = function (parent) {
     this.resize(newWidth, newHeight);
 
     // Layout children    
-    var children = this.sizerChildren;
+    // var children = this.sizerChildren;
     var child, childConfig, padding;
     var startX = this.left,
-        startY = this.top,
-        endX = this.right,
-        endY = this.bottom;
+        startY = this.top;
     var itemX = startX,
         itemY = startY;
     var x, y, width, height; // Align zone
-    var childWidth, childHeight;
 
-    var rowChildren = [];
-    for (var i = 0, cnt = children.length; i < cnt; i++) {
-        child = children[i];
-        // Skip invisible child
-        if (!child.visible) {
-            continue;
+    var rows = RunChildrenWrap.call(this);
+    var row, rowChildren;
+    for (var i = 0, icnt = rows.length; i < icnt; i++) {
+        row = rows[i];
+        rowChildren = row.children;
+        for (var j = 0, jcnt = rowChildren.length; j < jcnt; j++) {
+            child = rowChildren[j];
+            childConfig = child.rexSizer;
+            padding = childConfig.padding;
+            if (this.orientation === 0) { // x
+                x = (itemX + padding.left);
+                y = (itemY + padding.top);
+                width = child.width;
+                height = child.height;
+                itemX += GetChildWidth(child);
+            } else { // y
+                x = (itemX + padding.left);
+                y = (itemY + padding.top);
+                width = child.width;
+                height = child.height;
+                itemY += GetChildHeight(child);
+            }
+
+            tmpZone.setPosition(x, y).setSize(width, height);
+            AlignIn(child, tmpZone, childConfig.align);
+            this.resetChildState(child);
         }
 
-        if (child.isRexSizer) {
-            child.layout(this);
-        }
-
-        childConfig = child.rexSizer;
-        padding = childConfig.padding;
         if (this.orientation === 0) { // x
-            childWidth = GetChildWidth(child);
-            if ((itemX + childWidth) > endX) {
-                itemX = startX;
-                itemY += GetMaxChildHeight(rowChildren);;
-                rowChildren.length = 0;
-            }
-            x = (itemX + padding.left);
-            y = (itemY + padding.top);
-            width = child.width;
-            height = child.height;
-            itemX += childWidth;
-        } else { // y
-            childHeight = GetChildHeight(child);
-            if ((itemY + childHeight) > endY) {
-                itemY = startY;
-                itemX += GetMaxChildWidth(rowChildren);
-                rowChildren.length = 0;
-            }
-            x = (itemX + padding.left);
-            y = (itemY + padding.top);
-            width = child.width;
-            height = child.height;
-            itemY += childHeight;
+            itemX = startX;
+            itemY += row.height;
+        } else {
+            itemX += row.height;
+            itemY = startY;
         }
-
-        rowChildren.push(child);
-        tmpZone.setPosition(x, y).setSize(width, height);
-        AlignIn(child, tmpZone, childConfig.align);
-        this.resetChildState(child);
     }
 
     // Layout background children

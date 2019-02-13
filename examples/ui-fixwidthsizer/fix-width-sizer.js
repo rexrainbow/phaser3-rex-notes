@@ -19,12 +19,13 @@ class Demo extends Phaser.Scene {
             y = 300,
             minWidth = 200,
             minHeight = 500;
-        var sizer = this.rexUI.add.fixWidthSizer(x, y, minWidth, minHeight)
+        var sizer = this.rexUI.add.fixWidthSizer(x, y, minWidth, minHeight, 0, true)
             .addBackground(this.rexUI.add.roundRectangle(0, 0, 10, 10, 0, COLOR_DARK));
         for (var i = 0; i < 20; i++) {
             sizer.add(createItem(this), 2);
         }
         sizer.layout();
+        sizer.drawBounds(this.add.graphics(), 0xff0000);
     }
 
     update() {}
@@ -53,7 +54,7 @@ const RandomItem = Phaser.Utils.Array.GetRandom;
 const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 var genText = function () {
     var s = '';
-    for (var j = 0, jcnt = RandomInt(1, 6); j < jcnt; j++) {
+    for (var j = 0, jcnt = RandomInt(3, 6); j < jcnt; j++) {
         s += RandomItem(possible);
     }
     return s;

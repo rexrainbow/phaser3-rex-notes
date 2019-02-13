@@ -11,30 +11,29 @@ const RemoveItem = Phaser.Utils.Array.Remove;
 const ALIGN_CENTER = Phaser.Display.Align.CENTER;
 
 class FixWidthSizer extends BaseSizer {
-    constructor(scene, x, y, width, height, orientation) {
+    constructor(scene, x, y, minWidth, minHeight, orientation) {
         var config;
         if (IsPlainObject(x)) {
             config = x;
             x = GetValue(config, 'x', 0);
             y = GetValue(config, 'y', 0);
-            width = GetValue(config, 'width', undefined);
-            height = GetValue(config, 'height', undefined);
-        } else if (IsPlainObject(width)) {
-            config = width;
-            width = GetValue(config, 'width', undefined);
-            height = GetValue(config, 'height', undefined);
+            minWidth = GetValue(config, 'width', undefined);
+            minHeight = GetValue(config, 'height', undefined);
+        } else if (IsPlainObject(minWidth)) {
+            config = minWidth;
+            minWidth = GetValue(config, 'width', undefined);
+            minHeight = GetValue(config, 'height', undefined);
         } else if (IsPlainObject(orientation)) {
             config = orientation;
         }
 
         if (config !== undefined) {
             orientation = GetValue(config, 'orientation', 0);
-            space = GetValue(config, 'space', 0);
         }
         if (orientation === undefined) {
             orientation = 0;
         }
-        super(scene, x, y, width, height, config);
+        super(scene, x, y, minWidth, minHeight, config);
 
         this.type = 'rexSizer';
         this.sizerChildren = [];
@@ -59,21 +58,17 @@ class FixWidthSizer extends BaseSizer {
         return this;
     }
 
-    add(gameObject, paddingConfig, expand) {
+    add(gameObject, paddingConfig) {
         super.add(gameObject);
 
         if (paddingConfig === undefined) {
             paddingConfig = 0;
-        }
-        if (expand === undefined) {
-            expand = false;
         }
 
         var config = this.getSizerConfig(gameObject);
         config.parent = this;
         config.align = ALIGN_CENTER;
         config.padding = ParsePaddingConfig(paddingConfig);
-        config.expand = expand;
         this.sizerChildren.push(gameObject);
         return this;
     }
