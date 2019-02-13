@@ -1,6 +1,6 @@
 ## Introduction
 
-Layout children game objects in rows.
+Layout children game objects into rows.
 
 - Author: Rex
 - A kind of game object
