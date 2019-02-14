@@ -60,6 +60,20 @@ var Layout = function (parent) {
             newHeight = Math.max(this.maxChildHeight + padding.top + padding.bottom, this.minHeight);
             break;
     }
+
+    var lineInnerWidth, padding = this.padding;
+    if (this.orientation === 0) { // x
+        lineInnerWidth = newWidth - padding.left - padding.right;
+    } else { // y
+        lineInnerWidth = newHeight - padding.top - padding.bottom;
+    }
+    var wrapResult = RunChildrenWrap.call(this, lineInnerWidth);   
+    // Expand height is less then min-lines-height
+    if (this.orientation === 0) { // x
+        newHeight = Math.max(newHeight, wrapResult.height + padding.top + padding.bottom);
+    } else { // y
+        newWidth = Math.max(newWidth, wrapResult.height + left + padding.right);
+    }
     this.resize(newWidth, newHeight);
 
     // Layout children    
@@ -70,23 +84,10 @@ var Layout = function (parent) {
     var itemX, itemY;
     var x, y, width, height; // Align zone
 
-    // Get size of children
-    for (var i = 0, cnt = children.length; i < cnt; i++) {
-        child = children[i];
-        // Skip invisible child
-        if (!child.visible) {
-            continue;
-        }
 
-        if (child.isRexSizer) {
-            child.layout();
-        }
-    }
-
-    var rows = RunChildrenWrap.call(this);
-
-    // Layout each row
-    var row, rowChildren;
+    // Layout each line
+    var lines = wrapResult.lines;
+    var line, lineChlidren;
     if (this.orientation === 0) { // x
         itemX = startX
         itemY = startY + this.padding.top;
@@ -94,12 +95,12 @@ var Layout = function (parent) {
         itemX = startX + this.padding.left;
         itemY = startY
     }
-    for (var i = 0, icnt = rows.length; i < icnt; i++) {
-        row = rows[i];
-        rowChildren = row.children;
+    for (var i = 0, icnt = lines.length; i < icnt; i++) {
+        line = lines[i];
+        lineChlidren = line.children;
 
-        for (var j = 0, jcnt = rowChildren.length; j < jcnt; j++) {
-            child = rowChildren[j];
+        for (var j = 0, jcnt = lineChlidren.length; j < jcnt; j++) {
+            child = lineChlidren[j];
             childConfig = child.rexSizer;
             padding = childConfig.padding;
             if (this.orientation === 0) { // x
@@ -136,9 +137,9 @@ var Layout = function (parent) {
 
         if (this.orientation === 0) { // x
             itemX = startX;
-            itemY += row.height + this.lineSpacing;
-        } else {
-            itemX += row.height + this.lineSpacing;
+            itemY += line.height + this.lineSpacing;
+        } else { // y
+            itemX += line.height + this.lineSpacing;
             itemY = startY;
         }
     }

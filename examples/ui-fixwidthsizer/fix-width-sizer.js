@@ -17,9 +17,8 @@ class Demo extends Phaser.Scene {
     create() {
         var x = 400,
             y = 300,
-            minWidth = 250,
-            minHeight = 500;
-        var sizer = this.rexUI.add.fixWidthSizer(x, y, minWidth, minHeight, 0, {
+            minWidth = 250;
+        var sizer = this.rexUI.add.fixWidthSizer(x, y, minWidth, undefined, 'x', {
                 left: 3,
                 right: 3,
                 top: 3,

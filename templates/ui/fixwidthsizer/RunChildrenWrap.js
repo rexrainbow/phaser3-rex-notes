@@ -1,14 +1,15 @@
 import GetWidth from './GetChildWidth.js';
 import GetHeight from './GetChildHeight.js';
 
-var RunChildrenWrap = function (out) {
-    if (out === undefined) {
-        out = [];
-    }
+var RunChildrenWrap = function (lineWidth) {
+    var result = {
+        lines: [],
+        width: 0,
+        height: 0
+    };
     var children = this.sizerChildren;
-    var child, childWidth, remainder, lastRow;
-    var parentWidth = GetParentWidth(this, this.orientation);
-    remainder = 0;
+    var child, childWidth, remainder = 0;
+    var lastLine, lines = result.lines;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
         child = children[i];
         // Skip invisible child
@@ -16,31 +17,38 @@ var RunChildrenWrap = function (out) {
             continue;
         }
 
+        if (child.isRexSizer) {
+            child.layout();
+        }
+
         childWidth = GetChildWidth(child, this.orientation);
         // New line
         if (remainder < childWidth) {
-            lastRow = {
+            if (lastLine) {
+                var curLineWidth = lineWidth - (remainder + this.itemSpacing);
+                result.width = Math.max(result.width, curLineWidth);
+                result.height += lastLine.height + this.lineSpacing;
+            }
+
+            lastLine = {
                 children: [],
                 remainder: 0,
                 height: 0
             };
-            out.push(lastRow);
-            remainder = parentWidth;
+            lines.push(lastLine);
+            remainder = lineWidth;
         }
 
         remainder -= childWidth + this.itemSpacing;
-        lastRow.children.push(child);
-        lastRow.remainder = remainder;
-        lastRow.height = Math.max(lastRow.height, GeChildHeight(child, this.orientation));
+        lastLine.children.push(child);
+        lastLine.remainder = remainder;
+        lastLine.height = Math.max(lastLine.height, GeChildHeight(child, this.orientation));
     }
-    return out;
-}
 
-var GetParentWidth = function (parent, orientation) {
-    var padding = parent.padding;
-    return (orientation === 0) ?
-        (parent.width - padding.left - padding.right) :
-        (parent.height - padding.top - padding.bottom);
+    if (lastLine) {
+        result.height += lastLine.height;
+    }
+    return result;
 }
 
 var GetChildWidth = function (child, orientation) {
