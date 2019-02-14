@@ -1,6 +1,6 @@
 ## Introduction
 
-Layout children game objects into rows.
+Layout children game objects into lines.
 
 - Author: Rex
 - A kind of game object
@@ -42,11 +42,19 @@ var game = new Phaser.Game(config);
 
 ```javascript
 var sizer = scene.rexUI.add.fixWidthSizer({
+    x: 0,
+    y: 0,
     width: 2,
     height: 2
     orientation: 0,
-    // x: 0,
-    // y: 0
+    space: {
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: 0,
+        item: 0,
+        line: 0
+    }
 });
 ```
 
@@ -57,6 +65,14 @@ var sizer = scene.rexUI.add.fixWidthSizer(x, y, {
     width: 2,
     height: 2
     orientation: 0,
+    space: {
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: 0,
+        item: 0,
+        line: 0
+    }
 });
 ```
 
@@ -65,13 +81,30 @@ or
 ```javascript
 var sizer = scene.rexUI.add.fixWidthSizer(x, y, width, height, {
     orientation: 0,
+    space: {
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: 0,
+        item: 0,
+        line: 0
+    }
 });
 ```
 
 or
 
 ```javascript
-var sizer = scene.rexUI.add.fixWidthSizer(x, y, width, height, orientation);
+var sizer = scene.rexUI.add.fixWidthSizer(x, y, width, height, orientation,
+    {
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: 0,
+        item: 0,
+        line: 0
+    }
+);
 ```
 
 - `orientation` : Main orientation of the sizer.
@@ -80,6 +113,10 @@ var sizer = scene.rexUI.add.fixWidthSizer(x, y, width, height, orientation);
 - `x`, `y` : Position of sizer. Only available for top-sizer, children-sizers will be changed by parent.
 - `width` : Minimum width. i.e. Width of this sizer will larger then this value.
 - `height` : Minimum height. i.e. Hieght of this sizer will larger then this value.
+- `space` : Pads spaces
+    - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
+    - `space.item` : Space betwen each child of a line.
+    - `space.line` : Space between each line.
 
 ### Custom class
 

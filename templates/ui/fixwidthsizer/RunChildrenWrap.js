@@ -17,6 +17,7 @@ var RunChildrenWrap = function (out) {
         }
 
         childWidth = GetChildWidth(child, this.orientation);
+        // New line
         if (remainder < childWidth) {
             lastRow = {
                 children: [],
@@ -27,7 +28,7 @@ var RunChildrenWrap = function (out) {
             remainder = parentWidth;
         }
 
-        remainder -= childWidth;
+        remainder -= childWidth + this.itemSpacing;
         lastRow.children.push(child);
         lastRow.remainder = remainder;
         lastRow.height = Math.max(lastRow.height, GeChildHeight(child, this.orientation));
@@ -36,7 +37,10 @@ var RunChildrenWrap = function (out) {
 }
 
 var GetParentWidth = function (parent, orientation) {
-    return (orientation === 0) ? parent.width : parent.height;
+    var padding = parent.padding;
+    return (orientation === 0) ?
+        (parent.width - padding.left - padding.right) :
+        (parent.height - padding.top - padding.bottom);
 }
 
 var GetChildWidth = function (child, orientation) {

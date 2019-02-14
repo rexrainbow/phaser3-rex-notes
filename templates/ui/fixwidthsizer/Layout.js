@@ -1,10 +1,6 @@
 import NOOP from '../../../plugins/utils/object/NOOP.js';
 import ResizeGameObject from '../utils/ResizeGameObject.js';
 import RunChildrenWrap from './RunChildrenWrap.js';
-import GetChildWidth from './GetChildWidth.js';
-import GetChildHeight from './GetChildHeight.js';
-// import GetMaxChildWidth from './GetMaxChildWidth.js';
-// import GetMaxChildHeight from './GetMaxChildHeight.js';
 
 const Zone = Phaser.GameObjects.Zone;
 const AlignIn = Phaser.Display.Align.In.QuickSet;
@@ -46,7 +42,8 @@ var Layout = function (parent) {
             newWidth = (this.rexSizer.proportion * parent.proportionLength) - padding.left - padding.right;
             break;
         default:
-            newWidth = Math.max(this.maxChildWidth, this.minWidth);
+            var padding = this.padding;
+            newWidth = Math.max(this.maxChildWidth + padding.left + padding.right, this.minWidth);
             break;
     }
     switch (expandY) {
@@ -59,7 +56,8 @@ var Layout = function (parent) {
             newHeight = (this.rexSizer.proportion * parent.proportionLength) - padding.top - padding.bottom;
             break;
         default:
-            newHeight = Math.max(this.maxChildHeight, this.minHeight);
+            var padding = this.padding;
+            newHeight = Math.max(this.maxChildHeight + padding.top + padding.bottom, this.minHeight);
             break;
     }
     this.resize(newWidth, newHeight);
@@ -69,8 +67,7 @@ var Layout = function (parent) {
     var child, childConfig, padding;
     var startX = this.left,
         startY = this.top;
-    var itemX = startX,
-        itemY = startY;
+    var itemX, itemY;
     var x, y, width, height; // Align zone
 
     // Get size of children
@@ -90,25 +87,46 @@ var Layout = function (parent) {
 
     // Layout each row
     var row, rowChildren;
+    if (this.orientation === 0) { // x
+        itemX = startX
+        itemY = startY + this.padding.top;
+    } else {
+        itemX = startX + this.padding.left;
+        itemY = startY
+    }
     for (var i = 0, icnt = rows.length; i < icnt; i++) {
         row = rows[i];
         rowChildren = row.children;
+
         for (var j = 0, jcnt = rowChildren.length; j < jcnt; j++) {
             child = rowChildren[j];
             childConfig = child.rexSizer;
             padding = childConfig.padding;
             if (this.orientation === 0) { // x
                 x = (itemX + padding.left);
+                if (j === 0) {
+                    x += this.padding.left;
+                } else {
+                    x += this.itemSpacing;
+                }
+
                 y = (itemY + padding.top);
                 width = child.width;
                 height = child.height;
-                itemX += GetChildWidth(child);
+                itemX = x + child.width + padding.right;
             } else { // y
                 x = (itemX + padding.left);
+
                 y = (itemY + padding.top);
+                if (j === 0) {
+                    y += this.padding.top;
+                } else {
+                    y += this.itemSpacing;
+                }
+
                 width = child.width;
                 height = child.height;
-                itemY += GetChildHeight(child);
+                itemY = y + child.height + padding.bottom;
             }
 
             tmpZone.setPosition(x, y).setSize(width, height);
@@ -118,9 +136,9 @@ var Layout = function (parent) {
 
         if (this.orientation === 0) { // x
             itemX = startX;
-            itemY += row.height;
+            itemY += row.height + this.lineSpacing;
         } else {
-            itemX += row.height;
+            itemX += row.height + this.lineSpacing;
             itemY = startY;
         }
     }

@@ -11,7 +11,7 @@ const RemoveItem = Phaser.Utils.Array.Remove;
 const ALIGN_CENTER = Phaser.Display.Align.CENTER;
 
 class FixWidthSizer extends BaseSizer {
-    constructor(scene, x, y, minWidth, minHeight, orientation) {
+    constructor(scene, x, y, minWidth, minHeight, orientation, space) {
         var config;
         if (IsPlainObject(x)) {
             config = x;
@@ -25,13 +25,19 @@ class FixWidthSizer extends BaseSizer {
             minHeight = GetValue(config, 'height', undefined);
         } else if (IsPlainObject(orientation)) {
             config = orientation;
+        } else if (IsPlainObject(space)) {
+            config = space;
         }
 
         if (config !== undefined) {
             orientation = GetValue(config, 'orientation', 0);
+            space = GetValue(config, 'space', config);
         }
         if (orientation === undefined) {
             orientation = 0;
+        }
+        if (space === undefined) {
+            space = 0;
         }
         super(scene, x, y, minWidth, minHeight, config);
 
@@ -39,6 +45,9 @@ class FixWidthSizer extends BaseSizer {
         this.sizerChildren = [];
         this.backgroundChildren = [];
         this.setOrientation(orientation);
+        this.setPadding(space);
+        this.setItemSpacing(GetValue(space, 'item', 0));
+        this.setLineSpacing(GetValue(space, 'line', 0));
     }
 
     destroy(fromScene) {
@@ -55,6 +64,21 @@ class FixWidthSizer extends BaseSizer {
             orientation = ORIENTATIONMODE[orientation];
         }
         this.orientation = orientation;
+        return this;
+    }
+
+    setPadding(paddingConfig) {
+        this.padding = ParsePaddingConfig(paddingConfig);
+        return this;
+    }
+
+    setItemSpacing(space) {
+        this.itemSpacing = space;
+        return this;
+    }
+
+    setLineSpacing(space) {
+        this.lineSpacing = space;
         return this;
     }
 
