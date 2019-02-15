@@ -15,20 +15,18 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        var x = 400,
-            y = 300,
-            minWidth = 250;
-        var sizer = this.rexUI.add.fixWidthSizer(x, y, minWidth, undefined, 'x', {
-                left: 3,
-                right: 3,
-                top: 3,
-                bottom: 3,
-                item: 8,
-                line: 8,
-            })
-            .addBackground(this.rexUI.add.roundRectangle(0, 0, 10, 10, 0, COLOR_DARK));
-        for (var i = 0; i < 20; i++) {
-            sizer.add(createItem(this));
+        var sizer = this.rexUI.add.sizer({
+            x: 400,
+            y: 300,
+            width: 750,
+            height: 500,
+            orientation: 'x'
+        })
+        for (var i = 0; i < 3; i++) {
+            sizer.add(
+                createList(this),
+                1
+            )
         }
         sizer.layout();
         sizer.drawBounds(this.add.graphics(), 0xff0000);
@@ -37,10 +35,59 @@ class Demo extends Phaser.Scene {
     update() {}
 }
 
-var createItem = function (scene) {
+var createList = function (scene) {
+    var sizer = scene.rexUI.add.sizer({
+            orientation: 'y'
+        })
+        .add(
+            createTitle(scene),
+            0
+        )
+        .add(
+            createItems(scene),
+            1
+        );
+    return sizer;
+}
+
+var createTitle = function (scene) {
     var text = genText();
     return scene.rexUI.add.label({
         background: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 14, COLOR_LIGHT),
+        text: scene.add.text(0, 0, text, {
+            fontSize: 20
+        }),
+        space: {
+            left: 14,
+            right: 14,
+            top: 14,
+            bottom: 14,
+        }
+    });
+}
+
+var createItems = function (scene) {
+    var sizer = scene.rexUI.add.fixWidthSizer({
+        orientation: 'x',
+        space: {
+            left: 3,
+            right: 3,
+            top: 3,
+            bottom: 3,
+            item: 8,
+            line: 8,
+        }
+    });
+    for (var i = 0; i < 20; i++) {
+        sizer.add(createItem(scene));
+    }
+    return sizer;
+}
+
+var createItem = function (scene) {
+    var text = genText();
+    return scene.rexUI.add.label({
+        background: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 14, COLOR_PRIMARY),
         text: scene.add.text(0, 0, text, {
             fontSize: 18
         }),

@@ -3,8 +3,11 @@ import ParsePaddingConfig from '../utils/ParsePaddingConfig.js'
 import GetChildrenWidth from './GetChildrenWidth.js';
 import GetChildrenHeight from './GetChildrenHeight.js';
 import GetChildrenProportion from './GetChildrenProportion.js';
-import GetAllChildrenSizer from './GetAllChildrenSizer.js';
+import GetChildrenSizers from './GetChildrenSizers.js';
 import Layout from './Layout.js';
+import LayoutReset from './LayoutReset.js';
+import GetExpandedChildWidth from './GetExpandedChildWidth.js';
+import GetExpandedChildHeight from './GetExpandedChildHeight.js';
 import ORIENTATIONMODE from '../utils/OrientationConst.js';
 import ALIGNMODE from '../utils/AlignConst.js';
 
@@ -136,8 +139,11 @@ var methods = {
     getChildrenWidth: GetChildrenWidth,
     getChildrenHeight: GetChildrenHeight,
     getChildrenProportion: GetChildrenProportion,
-    getAllChildrenSizer: GetAllChildrenSizer,
+    getChildrenSizers: GetChildrenSizers,
     layout: Layout,
+    layoutReset: LayoutReset,
+    getExpandedChildWidth: GetExpandedChildWidth,
+    getExpandedChildHeight: GetExpandedChildHeight,
 }
 Object.assign(
     Sizer.prototype,

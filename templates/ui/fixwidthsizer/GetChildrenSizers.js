@@ -1,4 +1,4 @@
-var GetAllChildrenSizer = function (out) {
+var GetChildrenSizers = function(out) {
     if (out === undefined) {
         out = [];
     }
@@ -6,13 +6,10 @@ var GetAllChildrenSizer = function (out) {
         child;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
         child = children[i];
-        if (!child.isRexSizer) {
-            continue;
+        if (child.isRexSizer) {
+            out.push(child);
         }
-        out.push(child);
-        out.push(...child.getAllChildrenSizer());
     }
-
     return out;
 }
-export default GetAllChildrenSizer;
+export default GetChildrenSizers;

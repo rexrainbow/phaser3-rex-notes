@@ -11,63 +11,31 @@ var Layout = function (parent) {
     }
 
     var isTopSizer = (parent === undefined);
-    // Clear childrenWidth/childrenHeight/childrenProportion of all sizers
     if (isTopSizer) {
-        var children = this.getAllChildrenSizer([this]),
-            child;
+        var children = this.getAllChildrenSizers([this]);
+        var child, parent;
         for (var i = 0, cnt = children.length; i < cnt; i++) {
             child = children[i];
-            child._childrenWidth = undefined;
-            child._childrenHeight = undefined;
-            child._childrenProportion = undefined;
+            if (!child.rexSizer) {
+                continue;
+            }
+            parent = child.rexSizer.parent;
+            parent.layoutReset(child);
         }
     }
 
     // Set size
     var newWidth, newHeight;
-    var expandX, expandY;
     if (!isTopSizer) {
-        if (this.rexSizer.expand) {
-            if (parent.orientation === 0) { // x
-                expandY = 1;
-            } else { // y
-                expandX = 1;
-            }
-        }
-        if (this.rexSizer.proportion > 0) {
-            if (parent.orientation === 0) { // x
-                expandX = 2;
-            } else { // y
-                expandY = 2;
-            }
-        }
+        newWidth = parent.getExpandedChildWidth(this);
+        newHeight = parent.getExpandedChildHeight(this);
     }
-    switch (expandX) {
-        case 1: // rexSizer.expand
-            var padding = this.rexSizer.padding;
-            newWidth = parent.width - padding.left - padding.right;
-            break;
-        case 2: // rexSizer.proportion > 0
-            var padding = this.rexSizer.padding;
-            newWidth = (this.rexSizer.proportion * parent.proportionLength) - padding.left - padding.right;
-            break;
-        default:
-            newWidth = Math.max(this.childrenWidth, this.minWidth);
-            break;
+    if (newWidth === undefined) {
+        newWidth = Math.max(this.childrenWidth, this.minWidth);
     }
-    switch (expandY) {
-        case 1: // rexSizer.expand
-            var padding = this.rexSizer.padding;
-            newHeight = parent.height - padding.top - padding.bottom;
-            break;
-        case 2: // rexSizer.proportion > 0
-            var padding = this.rexSizer.padding;
-            newHeight = (this.rexSizer.proportion * parent.proportionLength) - padding.top - padding.bottom;
-            break;
-        default:
-            newHeight = Math.max(this.childrenHeight, this.minHeight);
-            break;
-    }
+    if (newHeight === undefined) {
+        newHeight = Math.max(this.childrenHeight, this.minHeight);
+    }    
     this.resize(newWidth, newHeight);
 
     var remainder;

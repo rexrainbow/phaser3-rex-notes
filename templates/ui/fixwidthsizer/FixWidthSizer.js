@@ -1,5 +1,8 @@
 import BaseSizer from '../basesizer/BaseSizer.js';
 import ParsePaddingConfig from '../utils/ParsePaddingConfig.js'
+import GetChildrenWidth from './GetChildrenWidth.js';
+import GetChildrenHeight from './GetChildrenHeight.js';
+import GetChildrenSizers from './GetChildrenSizers.js';
 import Layout from './Layout.js';
 import ORIENTATIONMODE from '../utils/OrientationConst.js';
 import GetMaxChildWidth from './GetMaxChildWidth.js';
@@ -126,15 +129,24 @@ class FixWidthSizer extends BaseSizer {
     }
 
     get maxChildWidth() {
-        return GetMaxChildWidth.call(this);
+        if (this._maxChildWidth === undefined) {
+            this._maxChildWidth = GetMaxChildWidth.call(this);
+        }
+        return this._maxChildWidth;
     }
 
     get maxChildHeight() {
-        return GetMaxChildHeight.call(this);
+        if (this._maxChildHeight === undefined) {
+            this._maxChildHeight = GetMaxChildHeight.call(this);
+        }
+        return this._maxChildHeight;
     }
 }
 
 var methods = {
+    getChildrenWidth: GetChildrenWidth,
+    getChildrenHeight: GetChildrenHeight,
+    getChildrenSizers: GetChildrenSizers,
     layout: Layout,
 }
 Object.assign(
@@ -142,8 +154,4 @@ Object.assign(
     methods
 );
 
-const PROPORTIONMODE = {
-    min: 0,
-    full: -1,
-}
 export default FixWidthSizer;

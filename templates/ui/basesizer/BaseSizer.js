@@ -3,6 +3,14 @@ import GetSizerConfig from '../utils/GetSizerConfig.js';
 import PushIntoBounds from './PushIntoBounds.js';
 import DrawBounds from '../utils/DrawBounds.js';
 import GetElement from './GetElement.js';
+import GetChildrenWidth from './GetChildrenWidth.js';
+import GetChildrenHeight from './GetChildrenHeight.js';
+import GetAllChildrenSizers from './GetAllChildrenSizers.js';
+import GetChildrenSizers from './GetChildrenSizers.js';
+import Layout from './Layout.js';
+import LayoutReset from './LayoutReset.js';
+import GetExpandedChildWidth from './GetExpandedChildWidth.js';
+import GetExpandedChildHeight from './GetExpandedChildHeight.js';
 import PopUp from './PopUp.js';
 import ScaleDownDestroy from './ScaleDownDestroy.js';
 import FadeIn from './FadeIn.js';
@@ -43,7 +51,7 @@ class Base extends Container {
         if (this._childrenWidth === undefined) {
             this._childrenWidth = this.getChildrenWidth();
         }
-        return this._childrenWidth
+        return this._childrenWidth;
     }
 
     get childrenHeight() {
@@ -80,7 +88,7 @@ class Base extends Container {
     }
 
     get centerX() {
-        return (this.left + this.right)/2;
+        return (this.left + this.right) / 2;
     }
 
     set centerX(value) {
@@ -119,7 +127,7 @@ class Base extends Container {
     }
 
     get centerY() {
-        return (this.top + this.bottom)/2;
+        return (this.top + this.bottom) / 2;
     }
 
     set centerY(value) {
@@ -136,7 +144,15 @@ var methods = {
     getSizerConfig: GetSizerConfig,
     pushIntoBounds: PushIntoBounds,
     drawBounds: DrawBounds,
+    getChildrenWidth: GetChildrenWidth,
+    getChildrenHeight: GetChildrenHeight,
     getElement: GetElement,
+    getAllChildrenSizers: GetAllChildrenSizers,
+    getChildrenSizers: GetChildrenSizers,
+    layout: Layout,
+    layoutReset: LayoutReset,
+    getExpandedChildWidth: GetExpandedChildWidth,
+    getExpandedChildHeight: GetExpandedChildHeight,
     popUp: PopUp,
     scaleDownDestroy: ScaleDownDestroy,
     fadeIn: FadeIn,

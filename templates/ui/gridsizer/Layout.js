@@ -11,22 +11,23 @@ var Layout = function (parent) {
     }
 
     var isTopSizer = (parent === undefined);
-    // Clear childrenWidth/childrenHeight/childrenProportion of all sizers
     if (isTopSizer) {
-        var children = this.getAllChildrenSizer([this]),
-            child;
+        var children = this.getAllChildrenSizers([this]);
+        var child, parent;
         for (var i = 0, cnt = children.length; i < cnt; i++) {
             child = children[i];
-            child._childrenWidth = undefined;
-            child._childrenHeight = undefined;
-            child._childrenProportion = undefined;
+            if (!child.rexSizer) {
+                continue;
+            }
+            parent = child.rexSizer.parent;
+            parent.layoutReset(child);
         }
     }
 
     var totalColumnProportions = this.totalColumnProportions;
     var totalRowProportions = this.totalRowProportions;
-    // Set size
-    var newWidth, newHeight;
+
+    // Set size    
     var expandX, expandY;
     if (!isTopSizer) {
         if (this.rexSizer.expand) {
@@ -43,6 +44,7 @@ var Layout = function (parent) {
             expandY = true;
         }
     }
+    var newWidth, newHeight;
     if (expandX) {
         var padding = this.rexSizer.padding;
         newWidth = parent.width - padding.left - padding.right;
@@ -136,7 +138,7 @@ var Layout = function (parent) {
         itemY += this.rowHeight[rowIndex];
     }
 
-    
+
     // Layout background children
     for (var i = 0, cnt = this.backgroundChildren.length; i < cnt; i++) {
         child = this.backgroundChildren[i];

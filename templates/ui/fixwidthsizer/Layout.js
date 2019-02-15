@@ -12,6 +12,18 @@ var Layout = function (parent) {
     }
 
     var isTopSizer = (parent === undefined);
+    if (isTopSizer) {
+        var children = this.getAllChildrenSizers([this]);
+        var child, parent;
+        for (var i = 0, cnt = children.length; i < cnt; i++) {
+            child = children[i];
+            if (!child.rexSizer) {
+                continue;
+            }
+            parent = child.rexSizer.parent;
+            parent.layoutReset(child);
+        }
+    }
 
     // Set size
     var newWidth, newHeight;
@@ -67,7 +79,7 @@ var Layout = function (parent) {
     } else { // y
         lineInnerWidth = newHeight - padding.top - padding.bottom;
     }
-    var wrapResult = RunChildrenWrap.call(this, lineInnerWidth);   
+    var wrapResult = RunChildrenWrap.call(this, lineInnerWidth);
     // Expand height is less then min-lines-height
     if (this.orientation === 0) { // x
         newHeight = Math.max(newHeight, wrapResult.height + padding.top + padding.bottom);
