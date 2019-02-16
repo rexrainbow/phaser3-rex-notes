@@ -1,6 +1,6 @@
-var LayoutReset = function (child) {
+var _layoutInitChild = function (child) {
     child._childrenWidth = undefined;
     child._childrenHeight = undefined;
     child._childrenProportion = undefined;
 }
-export default LayoutReset;
+export default _layoutInitChild;

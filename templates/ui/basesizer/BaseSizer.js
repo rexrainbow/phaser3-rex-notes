@@ -8,7 +8,8 @@ import GetChildrenHeight from './GetChildrenHeight.js';
 import GetAllChildrenSizers from './GetAllChildrenSizers.js';
 import GetChildrenSizers from './GetChildrenSizers.js';
 import Layout from './Layout.js';
-import LayoutReset from './LayoutReset.js';
+import LayoutInit from './LayoutInit.js';
+import _layoutInitChild from './_layoutInitChild.js';
 import GetExpandedChildWidth from './GetExpandedChildWidth.js';
 import GetExpandedChildHeight from './GetExpandedChildHeight.js';
 import PopUp from './PopUp.js';
@@ -150,7 +151,8 @@ var methods = {
     getAllChildrenSizers: GetAllChildrenSizers,
     getChildrenSizers: GetChildrenSizers,
     layout: Layout,
-    layoutReset: LayoutReset,
+    layoutInit: LayoutInit,
+    _layoutInitChild: _layoutInitChild,
     getExpandedChildWidth: GetExpandedChildWidth,
     getExpandedChildHeight: GetExpandedChildHeight,
     popUp: PopUp,

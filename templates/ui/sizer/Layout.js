@@ -9,20 +9,9 @@ var Layout = function (parent) {
     if (!this.visible) {
         return this;
     }
-
+    
+    this.layoutInit(parent);
     var isTopSizer = (parent === undefined);
-    if (isTopSizer) {
-        var children = this.getAllChildrenSizers([this]);
-        var child, parent;
-        for (var i = 0, cnt = children.length; i < cnt; i++) {
-            child = children[i];
-            if (!child.rexSizer) {
-                continue;
-            }
-            parent = child.rexSizer.parent;
-            parent.layoutReset(child);
-        }
-    }
 
     // Set size
     var newWidth, newHeight;

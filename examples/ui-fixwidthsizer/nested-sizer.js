@@ -24,8 +24,11 @@ class Demo extends Phaser.Scene {
         })
         for (var i = 0; i < 3; i++) {
             sizer.add(
-                createList(this),
-                1
+                createList(this), // child
+                1, // proportion
+                'center', // align
+                0, // paddingConfig
+                true // expand
             )
         }
         sizer.layout();
@@ -45,7 +48,10 @@ var createList = function (scene) {
         )
         .add(
             createItems(scene),
-            1
+            0, // proportion
+            'center', // align
+            0, // paddingConfig
+            true // expand
         );
     return sizer;
 }

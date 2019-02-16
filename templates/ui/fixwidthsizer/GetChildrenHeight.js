@@ -5,7 +5,7 @@ var GetChildrenHeight = function () {
 
     var result;
     if (this.orientation === 0) { // x
-
+        result = 0; // TODO:
     } else { // y
         result = this.maxChildHeight;
     }
