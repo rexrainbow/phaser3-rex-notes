@@ -49,14 +49,14 @@ var Layout = function (parent) {
     this.resize(newWidth, newHeight);
 
     var proportionWidthLength;
-    if ((totalColumnProportions > 0) && (!isTopSizer)) {
+    if (totalColumnProportions > 0) {
         var remainder = this.width - this.childrenWidth;
         proportionWidthLength = remainder / totalColumnProportions;
     } else {
         proportionWidthLength = 0;
     }
     var proportionHeightLength;
-    if ((totalRowProportions > 0) && (!isTopSizer)) {
+    if (totalRowProportions > 0) {
         var remainder = this.height - this.childrenWidth;
         proportionHeightLength = remainder / totalRowProportions;
     } else {

@@ -7,7 +7,7 @@ var GetChildrenWidth = function () {
     if (this.orientation === 0) { // x
         result = this.maxChildWidth;
     } else { // y
-        result = 0; // TODO:
+        result = 0;
     }
     result = Math.max(result, this.minWidth);
     return result;

@@ -12,15 +12,13 @@ var Layout = function (parent) {
     }
 
     this.layoutInit(parent);
-    var isTopSizer = (parent === undefined);
 
     // Set size
     var newWidth, newHeight;
-    if (!isTopSizer) {
+    if (parent) {
         newWidth = parent.getExpandedChildWidth(this);
         newHeight = parent.getExpandedChildHeight(this);
     }
-    // TODO
     if (newWidth === undefined) {
         var padding = this.padding;
         newWidth = Math.max(this.maxChildWidth + padding.left + padding.right, this.minWidth);

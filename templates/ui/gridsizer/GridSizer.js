@@ -4,7 +4,7 @@ import GetChildrenWidth from './GetChildrenWidth.js';
 import GetChildrenHeight from './GetChildrenHeight.js';
 import GetChildrenSizers from './GetChildrenSizers.js';
 import Layout from './Layout.js';
-import _layoutInitChild from './_layoutInitChild.js';
+import LayoutInitChild from './LayoutInitChild.js';
 import ALIGNMODE from '../utils/AlignConst.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
@@ -171,7 +171,7 @@ var methods = {
     getChildrenHeight: GetChildrenHeight,
     getChildrenSizers: GetChildrenSizers,
     layout: Layout,
-    _layoutInitChild: _layoutInitChild,
+    layoutInitChild: LayoutInitChild,
 }
 Object.assign(
     GridSizer.prototype,

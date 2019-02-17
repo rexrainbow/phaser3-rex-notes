@@ -1,6 +1,6 @@
-var _layoutInitChild = function (child) {
+var LayoutInitChild = function (child) {
     child._childrenWidth = undefined;
     child._childrenHeight = undefined;
     child._childrenProportion = undefined;
 }
-export default _layoutInitChild;
+export default LayoutInitChild;

@@ -1,4 +1,4 @@
-var LayoutReset = function (parent) {
+var LayoutInit = function (parent) {
     if (parent) {
         return;
     }
@@ -11,7 +11,7 @@ var LayoutReset = function (parent) {
             continue;
         }
         parent = child.rexSizer.parent;
-        parent._layoutInitChild(child);
+        parent.layoutInitChild(child);
     }
 }
-export default LayoutReset;
+export default LayoutInit;
