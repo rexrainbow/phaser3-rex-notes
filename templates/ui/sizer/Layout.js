@@ -9,13 +9,12 @@ var Layout = function (parent) {
     if (!this.visible) {
         return this;
     }
-    
+
     this.layoutInit(parent);
-    var isTopSizer = (parent === undefined);
 
     // Set size
     var newWidth, newHeight;
-    if (!isTopSizer) {
+    if (parent) {
         newWidth = parent.getExpandedChildWidth(this);
         newHeight = parent.getExpandedChildHeight(this);
     }
@@ -24,7 +23,7 @@ var Layout = function (parent) {
     }
     if (newHeight === undefined) {
         newHeight = Math.max(this.childrenHeight, this.minHeight);
-    }    
+    }
     this.resize(newWidth, newHeight);
 
     var remainder;

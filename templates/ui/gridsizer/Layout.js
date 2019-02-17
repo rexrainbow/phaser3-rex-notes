@@ -11,40 +11,31 @@ var Layout = function (parent) {
     }
 
     this.layoutInit(parent);
-    var isTopSizer = (parent === undefined);
 
     var totalColumnProportions = this.totalColumnProportions;
     var totalRowProportions = this.totalRowProportions;
 
-    // Set size    
-    var expandX, expandY;
-    if (!isTopSizer) {
-        if (this.rexSizer.expand) {
-            if (parent.orientation === 0) {
-                expandY = true;
-            } else {
-                expandX = true;
-            }
-        }
-        if (totalColumnProportions > 0) {
-            expandX = true;
-        }
-        if (totalRowProportions > 0) {
-            expandY = true;
-        }
-    }
+    // Set size
     var newWidth, newHeight;
-    if (expandX) {
-        var padding = this.rexSizer.padding;
-        newWidth = parent.width - padding.left - padding.right;
-    } else {
-        newWidth = this.childrenWidth;
+    if (parent) {
+        newWidth = parent.getExpandedChildWidth(this);
+        newHeight = parent.getExpandedChildHeight(this);
     }
-    if (expandY) {
-        var padding = this.rexSizer.padding;
-        newHeight = parent.height - padding.top - padding.bottom;
-    } else {
-        newHeight = this.childrenHeight;
+    if (newWidth === undefined) {
+        if (totalColumnProportions > 0) {
+            var padding = this.rexSizer.padding;
+            newWidth = parent.width - padding.left - padding.right;
+        } else {
+            newWidth = Math.max(this.childrenWidth, this.minWidth);
+        }
+    }
+    if (newHeight === undefined) {
+        if (totalRowProportions > 0) {
+            var padding = this.rexSizer.padding;
+            newHeight = parent.height - padding.top - padding.bottom;
+        } else {
+            newHeight = Math.max(this.childrenHeight, this.minHeight);
+        }
     }
     this.resize(newWidth, newHeight);
 
@@ -74,6 +65,7 @@ var Layout = function (parent) {
     // Layout grid children
     var childWidthProportion, childHeightProportion;
     for (var rowIndex = 0; rowIndex < this.rowCount; rowIndex++) {
+        childHeightProportion = this.rowProportions[rowIndex];
         itemX = startX;
         for (var columnIndex = 0; columnIndex < this.columnCount; columnIndex++) {
             child = this.gridChildren[(rowIndex * this.columnCount) + columnIndex];
@@ -94,16 +86,17 @@ var Layout = function (parent) {
             childConfig = child.rexSizer;
             padding = childConfig.padding;
             childWidthProportion = this.columnProportions[columnIndex];
-            childHeightProportion = this.rowProportions[rowIndex];
             switch (childWidthProportion) {
                 case 0:
                 case undefined:
                     x = (itemX + padding.left);
                     width = child.width;
+                    itemX += this.columnWidth[columnIndex];
                     break;
                 default:
                     x = (itemX + padding.left);
                     width = (childWidthProportion * proportionWidthLength);
+                    itemX += width;
                     break;
             }
             switch (childHeightProportion) {
@@ -121,10 +114,18 @@ var Layout = function (parent) {
             tmpZone.setPosition(x, y).setSize(width, height);
             AlignIn(child, tmpZone, childConfig.align);
             this.resetChildState(child);
-
-            itemX += this.columnWidth[columnIndex];
         }
-        itemY += this.rowHeight[rowIndex];
+
+        switch (childHeightProportion) {
+            case 0:
+            case undefined:
+                itemY += this.rowHeight[rowIndex];
+                break;
+            default:
+                itemY += (childHeightProportion * proportionHeightLength);
+                break;
+        }
+
     }
 
 

@@ -35,7 +35,7 @@ var Layout = function (parent) {
         lineInnerWidth = newHeight - padding.top - padding.bottom;
     }
     var wrapResult = RunChildrenWrap.call(this, lineInnerWidth);
-    // Expand height is less then min-lines-height
+    // Expanded height is less then min-lines-height
     if (this.orientation === 0) { // x
         newHeight = Math.max(newHeight, wrapResult.height + padding.top + padding.bottom);
     } else { // y
