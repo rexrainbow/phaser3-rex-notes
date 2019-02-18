@@ -10,8 +10,7 @@ var LayoutInit = function (parent) {
         if (!child.rexSizer) {
             continue;
         }
-        parent = child.rexSizer.parent;
-        parent.layoutInitChild(child);
+        child._layoutInit();
     }
 }
 export default LayoutInit;

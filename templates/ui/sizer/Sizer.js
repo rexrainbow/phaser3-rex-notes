@@ -5,7 +5,7 @@ import GetChildrenHeight from './GetChildrenHeight.js';
 import GetChildrenProportion from './GetChildrenProportion.js';
 import GetChildrenSizers from './GetChildrenSizers.js';
 import Layout from './Layout.js';
-import LayoutInitChild from './LayoutInitChild.js';
+import _layoutInit from './_layoutInit.js';
 import ORIENTATIONMODE from '../utils/OrientationConst.js';
 import ALIGNMODE from '../utils/AlignConst.js';
 
@@ -139,7 +139,7 @@ var methods = {
     getChildrenProportion: GetChildrenProportion,
     getChildrenSizers: GetChildrenSizers,
     layout: Layout,
-    layoutInitChild: LayoutInitChild,
+    _layoutInit: _layoutInit,
 }
 Object.assign(
     Sizer.prototype,
