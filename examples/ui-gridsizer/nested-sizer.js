@@ -75,13 +75,12 @@ var createTitle = function (scene) {
 var createGrid = function (scene) {
     var sizer = scene.rexUI.add.gridSizer({
         column: 3,
-        row: 3
+        row: 3,
+        columnProportions: 1,
+        rowProportions: 1
     })
     for (var i = 0; i < 3; i++) {
-        sizer.setColumnProportion(i, 1);
         for (var j = 0; j < 3; j++) {
-            sizer.setRowProportion(j, 1);
-
             sizer.add(
                 createItem(scene), // child
                 i, // columnIndex

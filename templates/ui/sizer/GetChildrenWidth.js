@@ -48,7 +48,6 @@ var GetChildrenWidth = function (minimumMode) {
             if (child.rexSizer.proportion === -1) { // Background
                 childWidth = 0;
             } else {
-
                 childWidth = (child.isRexSizer) ?
                     Math.max(child.minWidth, child.childrenWidth) :
                     child.width;

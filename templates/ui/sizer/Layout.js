@@ -69,12 +69,15 @@ var Layout = function (parent) {
         padding = childConfig.padding;
         newChildWidth = undefined;
         newChildHeight = undefined;
-        if (this.orientation === 0) { // x
-            if (childConfig.proportion === -1) { // Background
-                x = (startX + padding.left);
-                width = this.width - padding.left - padding.right; // Expand width of child
-                newChildWidth = width;
-            } else if (
+        if (childConfig.proportion === -1) { // Background
+            x = (startX + padding.left);
+            y = (startY + padding.top);
+            width = this.width - padding.left - padding.right;
+            height = this.height - padding.top - padding.bottom;
+            newChildWidth = width;
+            newChildHeight = height;
+        } else if (this.orientation === 0) { // x
+            if (
                 (childConfig.proportion === 0) ||
                 (proportionLength === 0)
             ) {
@@ -93,11 +96,7 @@ var Layout = function (parent) {
                 newChildHeight = height;
             }
         } else { // y
-            if (childConfig.proportion === -1) { // Background
-                y = (startY + padding.top);
-                height = this.height - padding.top - padding.bottom;
-                newChildHeight = height;
-            } else if (proportionLength === 0) {
+            if (proportionLength === 0) {
                 y = (itemY + padding.top);
                 height = child.height;
                 itemY += (height + padding.top + padding.bottom);

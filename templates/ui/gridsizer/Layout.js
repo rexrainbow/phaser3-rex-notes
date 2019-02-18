@@ -10,7 +10,6 @@ var Layout = function (parent) {
         return this;
     }
 
-    debugger
     this.layoutInit(parent);
 
     var totalColumnProportions = this.totalColumnProportions;
