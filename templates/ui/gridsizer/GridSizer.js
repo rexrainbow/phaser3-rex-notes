@@ -13,7 +13,7 @@ const RemoveItem = Phaser.Utils.Array.Remove;
 const ALIGN_CENTER = Phaser.Display.Align.CENTER;
 
 class GridSizer extends BaseSizer {
-    constructor(scene, x, y, minWidth, minHeight, columnCount, rowCount) {
+    constructor(scene, x, y, minWidth, minHeight, columnCount, rowCount, columnProportions, rowProportions) {
         var config;
         if (IsPlainObject(x)) {
             config = x;
@@ -23,21 +23,32 @@ class GridSizer extends BaseSizer {
             minHeight = GetValue(config, 'height', undefined);
             columnCount = GetValue(config, 'column', 0);
             rowCount = GetValue(config, 'row', 0);
+            columnProportions = GetValue(config, 'columnProportions', undefined);
+            rowProportions = GetValue(config, 'rowProportions', undefined);
         } else if (IsPlainObject(minWidth)) {
             config = minWidth;
             minWidth = GetValue(config, 'width', undefined);
             minHeight = GetValue(config, 'height', undefined);
             columnCount = GetValue(config, 'column', 0);
             rowCount = GetValue(config, 'row', 0);
+            columnProportions = GetValue(config, 'columnProportions', undefined);
+            rowProportions = GetValue(config, 'rowProportions', undefined);
         } else if (IsPlainObject(columnCount)) {
             config = columnCount;
             columnCount = GetValue(config, 'column', 0);
             rowCount = GetValue(config, 'row', 0);
+            columnProportions = GetValue(config, 'columnProportions', undefined);
+            rowProportions = GetValue(config, 'rowProportions', undefined);
+        } else if (IsPlainObject(columnProportions)) {
+            config = columnProportions;
+            columnProportions = GetValue(config, 'columnProportions', undefined);
+            rowProportions = GetValue(config, 'rowProportions', undefined);
         }
         super(scene, x, y, minWidth, minHeight, config);
 
         this.type = 'rexGridSizer';
-        this.initialGrid(columnCount, rowCount);
+        this.initialGrid(columnCount, rowCount, columnProportions, rowProportions);
+
     }
 
     destroy(fromScene) {
@@ -148,7 +159,7 @@ class GridSizer extends BaseSizer {
         return result;
     }
 
-    initialGrid(columnCount, rowCount) {
+    initialGrid(columnCount, rowCount, columnProportions, rowProportions) {
         this.columnCount = columnCount;
         this.rowCount = rowCount;
         this.gridChildren = [];
@@ -162,6 +173,34 @@ class GridSizer extends BaseSizer {
         this.rowProportions.length = rowCount;
         this.rowHeight = [];
         this.rowHeight.length = rowCount;
+
+        if (columnProportions) {
+            var columnProportionsIsNumber = (typeof (columnProportions) === 'number');
+            for (var i = 0; i < columnCount; i++) {
+                if (columnProportionsIsNumber) {
+                    this.setColumnProportion(i, columnProportions);
+                } else {
+                    var columnProportion = columnProportions[i];
+                    if (columnProportion > 0) {
+                        this.setColumnProportion(i, columnProportion);
+                    }
+                }
+            }
+        }
+        if (rowProportions) {
+            var rowProportionsIsNumber = (typeof (rowProportions) === 'number');
+            for (var i = 0; i < rowCount; i++) {
+                if (rowProportionsIsNumber) {
+                    this.setRowProportion(i, rowProportions);
+                } else {
+                    var rowProportion = rowProportions[i];
+                    if (rowProportion > 0) {
+                        this.setRowProportion(i, rowProportion);
+                    }
+                }
+            }
+        }
+
         return this;
     }
 }

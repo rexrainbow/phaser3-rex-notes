@@ -10,6 +10,7 @@ var Layout = function (parent) {
         return this;
     }
 
+    debugger
     this.layoutInit(parent);
 
     var totalColumnProportions = this.totalColumnProportions;
@@ -22,7 +23,7 @@ var Layout = function (parent) {
         newHeight = parent.getExpandedChildHeight(this);
     }
     if (newWidth === undefined) {
-        if (totalColumnProportions > 0) {
+        if (parent && (totalColumnProportions > 0)) {
             var padding = this.rexSizer.padding;
             newWidth = parent.width - padding.left - padding.right;
         } else {
@@ -30,7 +31,7 @@ var Layout = function (parent) {
         }
     }
     if (newHeight === undefined) {
-        if (totalRowProportions > 0) {
+        if (parent && (totalRowProportions > 0)) {
             var padding = this.rexSizer.padding;
             newHeight = parent.height - padding.top - padding.bottom;
         } else {
@@ -61,6 +62,7 @@ var Layout = function (parent) {
     var itemX = startX,
         itemY = startY;
     var x, y, width, height; // Align zone
+    var newChildWidth, newChildHeight;
 
     // Layout grid children
     var childWidthProportion, childHeightProportion;
@@ -85,6 +87,8 @@ var Layout = function (parent) {
 
             childConfig = child.rexSizer;
             padding = childConfig.padding;
+            newChildWidth = undefined;
+            newChildHeight = undefined;
             childWidthProportion = this.columnProportions[columnIndex];
             switch (childWidthProportion) {
                 case 0:
@@ -95,8 +99,9 @@ var Layout = function (parent) {
                     break;
                 default:
                     x = (itemX + padding.left);
-                    width = (childWidthProportion * proportionWidthLength);
-                    itemX += width;
+                    width = (childWidthProportion * proportionWidthLength) - padding.left - padding.right;
+                    newChildWidth = width;
+                    itemX += (width + padding.left + padding.right);
                     break;
             }
             switch (childHeightProportion) {
@@ -107,8 +112,14 @@ var Layout = function (parent) {
                     break;
                 default:
                     y = (itemY + padding.top);
-                    height = (childHeightProportion * proportionHeightLength);
+                    height = (childHeightProportion * proportionHeightLength) - padding.top - padding.bottom;
+                    newChildHeight = height;
                     break;
+            }
+
+            // Set size of child
+            if (!child.isRexSizer) { // Don't resize sizer again
+                ResizeGameObject(child, newChildWidth, newChildHeight);
             }
 
             tmpZone.setPosition(x, y).setSize(width, height);

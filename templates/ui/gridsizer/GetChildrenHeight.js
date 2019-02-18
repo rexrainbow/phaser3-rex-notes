@@ -8,7 +8,7 @@ var GetChildrenHeight = function () {
     var children = this.gridChildren;
     var child, padding, childHeight, proportion;
 
-    for (var i = 0; i < this.rowCount; i++) {        
+    for (var i = 0; i < this.rowCount; i++) {
         proportion = this.rowProportions[i];
         rowHeight = 0;
         if ((proportion === undefined) || (proportion === 0)) {
@@ -21,7 +21,9 @@ var GetChildrenHeight = function () {
                     continue;
                 }
 
-                childHeight = (child.isRexSizer) ? child.childrenHeight : child.height;
+                childHeight = (child.isRexSizer) ?
+                    Math.max(child.minHeight, child.childrenHeight) :
+                    child.height;
                 padding = child.rexSizer.padding;
                 childHeight += (padding.top + padding.bottom);
                 rowHeight = Math.max(rowHeight, childHeight);
@@ -30,7 +32,6 @@ var GetChildrenHeight = function () {
         }
         this.rowHeight[i] = rowHeight;
     }
-    result = Math.max(result, this.minHeight);
     return result;
 }
 

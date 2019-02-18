@@ -21,7 +21,9 @@ var GetChildrenWidth = function () {
                     continue;
                 }
 
-                childWidth = (child.isRexSizer) ? child.childrenWidth : child.width;
+                childWidth = (child.isRexSizer) ?
+                    Math.max(child.minWidth, child.childrenWidth) :
+                    child.width;
                 padding = child.rexSizer.padding;
                 childWidth += (padding.left + padding.right);
                 columnWidth = Math.max(columnWidth, childWidth);
@@ -29,8 +31,7 @@ var GetChildrenWidth = function () {
             result += columnWidth;
         }
         this.columnWidth[i] = columnWidth;
-    }
-    result = Math.max(result, this.minWidth);
+    }    
     return result;
 }
 
