@@ -96,7 +96,10 @@ var Layout = function (parent) {
                 newChildHeight = height;
             }
         } else { // y
-            if (proportionLength === 0) {
+            if (
+                (childConfig.proportion === 0) ||
+                (proportionLength === 0)
+            ) {
                 y = (itemY + padding.top);
                 height = child.height;
                 itemY += (height + padding.top + padding.bottom);

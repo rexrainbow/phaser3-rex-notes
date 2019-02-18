@@ -48,7 +48,7 @@ var createList = function (scene) {
         )
         .add(
             createGrid(scene),
-            0, // proportion
+            1, // proportion
             'center', // align
             0, // paddingConfig
             true // expand
