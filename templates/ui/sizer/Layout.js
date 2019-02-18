@@ -1,10 +1,12 @@
+import GetExpandedChildWidth from './GetExpandedChildWidth.js';
+import GetExpandedChildHeight from './GetExpandedChildHeight.js';
 import NOOP from '../../../plugins/utils/object/NOOP.js';
 import ResizeGameObject from '../utils/ResizeGameObject.js';
 
 const Zone = Phaser.GameObjects.Zone;
 const AlignIn = Phaser.Display.Align.In.QuickSet;
 
-var Layout = function (parent) {
+var Layout = function (parent, newWidth, newHeight) {
     // Skip invisible sizer
     if (!this.visible) {
         return this;
@@ -13,11 +15,6 @@ var Layout = function (parent) {
     this.layoutInit(parent);
 
     // Set size
-    var newWidth, newHeight;
-    if (parent) {
-        newWidth = parent.getExpandedChildWidth(this);
-        newHeight = parent.getExpandedChildHeight(this);
-    }
     if (newWidth === undefined) {
         newWidth = Math.max(this.childrenWidth, this.minWidth);
     }
@@ -61,21 +58,35 @@ var Layout = function (parent) {
             continue;
         }
 
-        if (child.isRexSizer) {
-            child.layout(this);
-        }
-
         childConfig = child.rexSizer;
         padding = childConfig.padding;
-        newChildWidth = undefined;
-        newChildHeight = undefined;
+
+        // Set size
+        if (child.isRexSizer) {
+            child.layout(
+                this,
+                GetExpandedChildWidth(this, child),
+                GetExpandedChildHeight(this, child));
+        } else {
+            newChildWidth = undefined;
+            newChildHeight = undefined;
+            if (childConfig.proportion === -1) { // Background
+                newChildWidth = this.width - padding.left - padding.right;
+                newChildHeight = this.height - padding.top - padding.bottom;
+            } else if (childConfig.expand && (this.orientation === 0)) { // x, expand height
+                newChildHeight = this.height - padding.top - padding.bottom;
+            } else if (childConfig.expand && (this.orientation === 1)) { // y, expand width
+                newChildWidth = this.width - padding.left - padding.right;
+            }
+            ResizeGameObject(child, newChildWidth, newChildHeight);
+        }
+
+        // Set position
         if (childConfig.proportion === -1) { // Background
             x = (startX + padding.left);
             y = (startY + padding.top);
             width = this.width - padding.left - padding.right;
             height = this.height - padding.top - padding.bottom;
-            newChildWidth = width;
-            newChildHeight = height;
         } else if (this.orientation === 0) { // x
             if (
                 (childConfig.proportion === 0) ||
@@ -91,10 +102,6 @@ var Layout = function (parent) {
             }
             y = (itemY + padding.top);
             height = (this.height - padding.top - padding.bottom);
-
-            if (childConfig.expand) {
-                newChildHeight = height;
-            }
         } else { // y
             if (
                 (childConfig.proportion === 0) ||
@@ -110,15 +117,6 @@ var Layout = function (parent) {
             }
             x = (itemX + padding.left);
             width = (this.width - padding.left - padding.right);
-
-            if (childConfig.expand) {
-                newChildWidth = width;
-            }
-        }
-
-        // Set size of child
-        if (!child.isRexSizer) { // Don't resize sizer again
-            ResizeGameObject(child, newChildWidth, newChildHeight);
         }
 
         tmpZone.setPosition(x, y).setSize(width, height);

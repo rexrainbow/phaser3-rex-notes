@@ -10,8 +10,6 @@ import GetChildrenSizers from './GetChildrenSizers.js';
 import Layout from './Layout.js';
 import LayoutInit from './LayoutInit.js';
 import LayoutInitChild from './LayoutInitChild.js';
-import GetExpandedChildWidth from './GetExpandedChildWidth.js';
-import GetExpandedChildHeight from './GetExpandedChildHeight.js';
 import PopUp from './PopUp.js';
 import ScaleDownDestroy from './ScaleDownDestroy.js';
 import FadeIn from './FadeIn.js';
@@ -153,8 +151,6 @@ var methods = {
     layout: Layout,
     layoutInit: LayoutInit,
     layoutInitChild: LayoutInitChild,
-    getExpandedChildWidth: GetExpandedChildWidth,
-    getExpandedChildHeight: GetExpandedChildHeight,
     popUp: PopUp,
     scaleDownDestroy: ScaleDownDestroy,
     fadeIn: FadeIn,

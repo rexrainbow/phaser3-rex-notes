@@ -18,7 +18,7 @@ var RunChildrenWrap = function (lineWidth) {
         }
 
         if (child.isRexSizer) {
-            child.layout();
+            child.layout(); // Use original size
         }
 
         childWidth = GetChildWidth(child, this.orientation);

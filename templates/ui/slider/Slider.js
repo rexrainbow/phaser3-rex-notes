@@ -139,8 +139,8 @@ class Slider extends Sizer {
         return value;
     }
 
-    layout(parent) {
-        super.layout(parent);
+    layout(parent, newWidth, newHeight) {
+        super.layout(parent, newWidth, newHeight);
         this.updateThumb();
         this.updateIndicator();
         return this;

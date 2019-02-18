@@ -1,10 +1,12 @@
+import GetExpandedChildWidth from './GetExpandedChildWidth.js';
+import GetExpandedChildHeight from './GetExpandedChildHeight.js';
 import NOOP from '../../../plugins/utils/object/NOOP.js';
 import ResizeGameObject from '../utils/ResizeGameObject.js';
 
 const Zone = Phaser.GameObjects.Zone;
 const AlignIn = Phaser.Display.Align.In.QuickSet;
 
-var Layout = function (parent) {
+var Layout = function (parent, newWidth, newHeight) {
     // Skip invisible sizer
     if (!this.visible) {
         return this;
@@ -16,11 +18,6 @@ var Layout = function (parent) {
     var totalRowProportions = this.totalRowProportions;
 
     // Set size
-    var newWidth, newHeight;
-    if (parent) {
-        newWidth = parent.getExpandedChildWidth(this);
-        newHeight = parent.getExpandedChildHeight(this);
-    }
     if (newWidth === undefined) {
         if (parent && (totalColumnProportions > 0)) {
             var padding = this.rexSizer.padding;
@@ -66,7 +63,7 @@ var Layout = function (parent) {
     // Layout grid children
     var childWidthProportion, childHeightProportion;
     for (var rowIndex = 0; rowIndex < this.rowCount; rowIndex++) {
-        childHeightProportion = this.rowProportions[rowIndex];
+        childHeightProportion = this.rowProportions[rowIndex] || 0;
         itemX = startX;
         for (var columnIndex = 0; columnIndex < this.columnCount; columnIndex++) {
             child = this.gridChildren[(rowIndex * this.columnCount) + columnIndex];
@@ -80,15 +77,20 @@ var Layout = function (parent) {
                 continue;
             }
 
-            if (child.isRexSizer) {
-                child.layout(this);
-            }
-
             childConfig = child.rexSizer;
             padding = childConfig.padding;
             newChildWidth = undefined;
             newChildHeight = undefined;
-            childWidthProportion = this.columnProportions[columnIndex];
+            childWidthProportion = this.columnProportions[columnIndex] || 0;
+
+            if (child.isRexSizer) {
+                child.layout(
+                    this,
+                    GetExpandedChildWidth(child, childWidthProportion * proportionWidthLength),
+                    GetExpandedChildHeight(child, childHeightProportion * proportionHeightLength),
+                );
+            }
+
             switch (childWidthProportion) {
                 case 0:
                 case undefined:

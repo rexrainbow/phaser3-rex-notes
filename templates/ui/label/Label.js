@@ -145,8 +145,8 @@ class Label extends Sizer {
         this.text += value;
     }
 
-    layout(parent) {
-        super.layout(parent);
+    layout(parent, newWidth, newHeight) {
+        super.layout(parent, newWidth, newHeight);
         // Pin icon-mask to icon game object
         var iconMask = this.childrenMap.iconMask;
         if (iconMask) {

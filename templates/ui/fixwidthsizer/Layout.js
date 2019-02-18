@@ -5,7 +5,7 @@ import RunChildrenWrap from './RunChildrenWrap.js';
 const Zone = Phaser.GameObjects.Zone;
 const AlignIn = Phaser.Display.Align.In.QuickSet;
 
-var Layout = function (parent) {
+var Layout = function (parent, newWidth, newHeight) {
     // Skip invisible sizer
     if (!this.visible) {
         return this;
@@ -14,11 +14,6 @@ var Layout = function (parent) {
     this.layoutInit(parent);
 
     // Set size
-    var newWidth, newHeight;
-    if (parent) {
-        newWidth = parent.getExpandedChildWidth(this);
-        newHeight = parent.getExpandedChildHeight(this);
-    }
     if (newWidth === undefined) {
         var padding = this.padding;
         newWidth = Math.max(this.maxChildWidth + padding.left + padding.right, this.minWidth);

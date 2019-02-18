@@ -1,15 +1,8 @@
-var GetExpandedChildHeight = function (child) {
+var GetExpandedChildHeight = function (child, proportionLength) {
     var newHeight;
-    var childConfig = child.rexSizer;
-    var padding = childConfig.padding;
-    if (this.orientation === 0) { // x
-        if (childConfig.expand) {
-            newHeight = this.height - padding.top - padding.bottom;
-        }
-    } else { // y
-        if (childConfig.proportion > 0) {
-            newHeight = (childConfig.proportion * this.proportionLength) - padding.top - padding.bottom;
-        }
+    if (proportionLength > 0) {
+        var padding = child.rexSizer.padding;
+        newHeight = proportionLength - padding.top - padding.bottom;
     }
     return newHeight;
 }
