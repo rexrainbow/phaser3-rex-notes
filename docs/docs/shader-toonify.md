@@ -52,13 +52,15 @@ var game = new Phaser.Game(config);
         // edgeThreshold: 0.2,
         // hueLevels: 0,
         // sLevels: 0,
-        // vLevels: 0
+        // vLevels: 0,
+        // edgeColor: 0
     });
     ```
     - `edgeThreshold` : Threshold of edge. Set `1.1` (or any number larger then `1`) to disable this feature.
     - `hueLevels` : Amount of hue levels. Set `0` to disable this feature.
     - `sLevels` : Amount of saturation levels. Set `0` to disable this feature.
     - `vLevels` : Amount of value levels. Set `0` to disable this feature.
+    - `edgeColor` : Color of edge, could be a number `0xRRGGBB`, or a JSON object `{r:255, g:255, b:255}`
 2. Add pipeline to camera
     ```javascript
     // var camera = scene.cameras.main;
@@ -129,5 +131,18 @@ var game = new Phaser.Game(config);
     ```
     - Set `0` to disable this feature.
 
+### Edge color
 
-
+- Get
+    ```javascript
+    var color = customPipeline.edgeColor;
+    ```
+    - `color` : [Color](color.md) object.
+        - Red: `color.red`, 0~255.
+        - Green: `color.green`, 0~255.
+        - Blue: `color.blue`, 0~255.
+- Set
+    ```javascript
+    customPipeline.edgeColor = value;
+    ```
+    - `value` : A number `0xRRGGBB`, or a JSON object `{r:255, g:255, b:255}`

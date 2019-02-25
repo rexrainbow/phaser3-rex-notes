@@ -1891,6 +1891,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../dragrotate/" title="Drag rotate" class="md-nav__link">
+      Drag rotate
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../mousewheeltoupdown/" title="Mouse-wheel to up/down" class="md-nav__link">
       Mouse-wheel to up/down
     </a>
@@ -2269,6 +2281,13 @@
           <li class="md-nav__item">
   <a href="#value-levels" title="Value levels" class="md-nav__link">
     Value levels
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#edge-color" title="Edge color" class="md-nav__link">
+    Edge color
   </a>
   
 </li>
@@ -3917,6 +3936,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#edge-color" title="Edge color" class="md-nav__link">
+    Edge color
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -3985,13 +4011,15 @@
     <span class="c1">// edgeThreshold: 0.2,</span>
     <span class="c1">// hueLevels: 0,</span>
     <span class="c1">// sLevels: 0,</span>
-    <span class="c1">// vLevels: 0</span>
+    <span class="c1">// vLevels: 0,</span>
+    <span class="c1">// edgeColor: 0</span>
 <span class="p">});</span>
 </pre></div><ul>
 <li><code>edgeThreshold</code> : Threshold of edge. Set <code>1.1</code> (or any number larger then <code>1</code>) to disable this feature.</li>
 <li><code>hueLevels</code> : Amount of hue levels. Set <code>0</code> to disable this feature.</li>
 <li><code>sLevels</code> : Amount of saturation levels. Set <code>0</code> to disable this feature.</li>
 <li><code>vLevels</code> : Amount of value levels. Set <code>0</code> to disable this feature.</li>
+<li><code>edgeColor</code> : Color of edge, could be a number <code>0xRRGGBB</code>, or a JSON object <code>{r:255, g:255, b:255}</code></li>
 </ul>
 </li>
 <li>Add pipeline to camera
@@ -4056,6 +4084,26 @@
     <div class="codehilite"><pre><span></span><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">setValLevels</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
 </pre></div><ul>
 <li>Set <code>0</code> to disable this feature.</li>
+</ul>
+</li>
+</ul>
+<h3 id="edge-color">Edge color<a class="headerlink" href="#edge-color" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">customPipeline</span><span class="p">.</span><span class="nx">edgeColor</span><span class="p">;</span>
+</pre></div><ul>
+<li><code>color</code> : <a href="../color/">Color</a> object.<ul>
+<li>Red: <code>color.red</code>, 0~255.</li>
+<li>Green: <code>color.green</code>, 0~255.</li>
+<li>Blue: <code>color.blue</code>, 0~255.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">edgeColor</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+</pre></div><ul>
+<li><code>value</code> : A number <code>0xRRGGBB</code>, or a JSON object <code>{r:255, g:255, b:255}</code></li>
 </ul>
 </li>
 </ul>

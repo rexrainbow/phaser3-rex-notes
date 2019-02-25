@@ -2113,6 +2113,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../dragrotate/" title="Drag rotate" class="md-nav__link">
+      Drag rotate
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../mousewheeltoupdown/" title="Mouse-wheel to up/down" class="md-nav__link">
       Mouse-wheel to up/down
     </a>
@@ -4487,7 +4499,10 @@ If set to <code>false</code> it will emit events from all Game Objects below a P
 <li>Current touching<ul>
 <li>Position in screen : <code>pointer.x</code> , <code>pointer.y</code></li>
 <li>Position in camera : <code>pointer.worldX</code> , <code>pointer.worldY</code></li>
-<li>Position of previous moving : <code>pointer.prevPosition.x</code> , <code>pointer.prevPosition.y</code></li>
+<li>Position of previous moving : <code>pointer.prevPosition.x</code> , <code>pointer.prevPosition.y</code><ul>
+<li>Updating when pointer-down, potiner-move, or pointer-up.</li>
+</ul>
+</li>
 <li>Interpolated position :
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="nx">pointer</span><span class="p">.</span><span class="nx">getInterpolatedPosition</span><span class="p">(</span><span class="nx">step</span><span class="p">);</span>
 <span class="c1">// var out = pointer.getInterpolatedPosition(step, out);</span>
