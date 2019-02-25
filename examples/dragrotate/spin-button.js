@@ -48,18 +48,18 @@ var createButton = function (scene, x, y, radius) {
         .draw(buttonGraphics)
         .setOrigin(0.5)
         .setTint(ColorGray);
+    buttonGraphics.destroy();
+
     scene.plugins.get('rexDragRotate').add(scene, config)
         .on('drag', function (dragRotate) {
-            var deltaRotation = dragRotate.deltaRotation;
             button.rotation += dragRotate.deltaRotation;
-            var color = (deltaRotation > 0) ? ColorBlue : ColorRed;
+            var color = (dragRotate.cw) ? ColorBlue : ColorRed;
             button.setTint(color);
         })
         .on('dragend', function () {
             button.setTint(ColorGray);
         })
 
-    buttonGraphics.destroy();
     return button;
 }
 

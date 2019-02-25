@@ -186,7 +186,7 @@ class DragRotate extends EE {
         }
 
         return this._deltaRotation;
-        
+
     }
 
     get deltaAngle() {
@@ -195,6 +195,14 @@ class DragRotate extends EE {
         }
 
         return RadToDeg(this.deltaRotation);
+    }
+
+    get cw() {
+        return (this.deltaRotation >= 0);
+    }
+
+    get ccw() {
+        return !this.cw;
     }
 }
 
