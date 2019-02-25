@@ -3,7 +3,7 @@
 A container with a [grid table](gridtable.md), slider, and scroller.
 
 - Author: Rex
-- A kind of game object
+- Game object
 
 ## Source code
 

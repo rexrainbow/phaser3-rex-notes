@@ -3,7 +3,7 @@
 Drawing on [canvas](https://www.w3schools.com/html/html5_canvas.asp).
 
 - Author: Rex
-- A kind of game object
+- Game object
 
 ## Source code
 

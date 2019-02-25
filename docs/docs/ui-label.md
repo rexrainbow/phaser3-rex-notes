@@ -3,7 +3,7 @@
 A container with an icon, text, and background.
 
 - Author: Rex
-- A kind of game object
+- Game object
 
 ## Source code
 

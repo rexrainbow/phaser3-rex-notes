@@ -3,7 +3,7 @@
 Layout children game objects in grids.
 
 - Author: Rex
-- A kind of game object
+- Game object
 
 ## Source code
 

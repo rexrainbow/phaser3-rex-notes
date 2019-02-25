@@ -3,7 +3,7 @@
 A container with 4 groups of buttons around a center panel.
 
 - Author: Rex
-- A kind of game object
+- Game object
 
 ## Source code
 

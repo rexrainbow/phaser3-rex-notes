@@ -3,7 +3,7 @@
 A container with buttons and sub-menu.
 
 - Author: Rex
-- A kind of game object
+- Game object
 
 ## Source code
 

@@ -5,7 +5,7 @@ Layout children game objects.
 It is inspired from [wxSizer](https://docs.wxwidgets.org/3.0/overview_sizer.html).
 
 - Author: Rex
-- A kind of game object
+- Game object
 
 ## Source code
 

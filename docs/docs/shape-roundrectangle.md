@@ -3,7 +3,7 @@
 Round rectangle shape.
 
 - Author: Rex
-- A kind of game object
+- Game object
 
 ## Source code
 

@@ -3,7 +3,7 @@
 A container with a track, indicator, thumb and background.
 
 - Author: Rex
-- A kind of game object
+- Game object
 
 ## Source code
 
