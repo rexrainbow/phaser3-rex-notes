@@ -23,6 +23,7 @@ class Demo extends Phaser.Scene {
         gui.add(customPipeline, 'hueLevels', 0, 10);
         gui.add(customPipeline, 'satLevels', 0, 10);
         gui.add(customPipeline, 'valLevels', 0, 10);
+        gui.addColor(customPipeline, 'edgeColor');
     }
 
     update() {}

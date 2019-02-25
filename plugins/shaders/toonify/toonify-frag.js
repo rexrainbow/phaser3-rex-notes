@@ -20,6 +20,7 @@ uniform float edgeThreshold; // 0.2;
 uniform float hStep;  // 60
 uniform float sStep;  // 0.15
 uniform float vStep;  // 0.33
+uniform vec3 edgeColor; // (0, 0, 0);
 `
 + RGBToHSV + IsEdge + HSVToRGB +
 `
@@ -43,7 +44,7 @@ void main()
     colorLevel = front.rgb;
   }
 
-  vec3 outColor = (IsEdge(outTexCoord, texSize, edgeThreshold))? vec3(0.0, 0.0, 0.0) : colorLevel;
+  vec3 outColor = (IsEdge(outTexCoord, texSize, edgeThreshold))? edgeColor : colorLevel;
   gl_FragColor = vec4(outColor, front.a);
 }
 `;

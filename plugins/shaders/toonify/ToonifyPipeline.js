@@ -2,6 +2,8 @@ import frag from './toonify-frag.js';
 
 const TextureTintPipeline = Phaser.Renderer.WebGL.Pipelines.TextureTintPipeline;
 const GetValue = Phaser.Utils.Objects.GetValue;
+const IntegerToRGB = Phaser.Display.Color.IntegerToRGB;
+const Color = Phaser.Display.Color;
 
 class ToonifyPipeline extends TextureTintPipeline {
     constructor(scene, key, config) {
@@ -19,6 +21,7 @@ class ToonifyPipeline extends TextureTintPipeline {
         this._hueLevels = 0;
         this._satLevels = 0;
         this._valLevels = 0;
+        this._edgeColor = new Color();
 
         game.renderer.addPipeline(key, this);
         this.resetFromJSON(config);
@@ -29,6 +32,7 @@ class ToonifyPipeline extends TextureTintPipeline {
         this.setHueLevels(GetValue(o, 'hueLevels', 0));
         this.setSatLevels(GetValue(o, 'satLevels', 0));
         this.setValLevels(GetValue(o, 'valLevels', 0));
+        this.setEdgeColor(GetValue(o, 'edgeColor', 0));
         return this;
     }
 
@@ -92,6 +96,26 @@ class ToonifyPipeline extends TextureTintPipeline {
 
     setValLevels(value) {
         this.valLevels = value;
+        return this;
+    }
+
+    // edgeColor
+    get edgeColor() {
+        return this._edgeColor;
+    }
+
+    set edgeColor(value) {
+        if (typeof (value) === 'number') {
+            value = IntegerToRGB(value);
+        }
+        // value: {r, g, b}
+        var color = this._edgeColor;
+        color.setFromRGB(value);
+        this.setFloat3('edgeColor', color.redGL, color.greenGL, color.blueGL);
+    }
+
+    setEdgeColor(value) {
+        this.edgeColor = value;
         return this;
     }
 
