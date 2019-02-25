@@ -114,6 +114,7 @@ nav:
         - Virtual joystick: virtualjoystick.md
         - Cursor at bound: cursoratbound.md
         - Pinch: pinch.md
+        - Drag rotate: dragrotate.md
         - Mouse-wheel to up/down: mousewheeltoupdown.md
     - Keyboard:
         - Keyboard events: keyboardevents.md
