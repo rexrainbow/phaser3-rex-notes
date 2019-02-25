@@ -34,6 +34,9 @@ var rt = scene.make.renderTexture({
 });
 ```
 
+!!! note "Origin position"
+    Origin position of this render texture is `(0,0)` (top-left)
+
 ### Custom class
 
 - Define class

@@ -42,6 +42,7 @@ module.exports = {
         'cursoratboundplugin': './plugins/cursoratbound-plugin.js',
         'mousewheeltoupdownplugin': './plugins/mousewheeltoupdown-plugin.js',
         'pinchplugin': './plugins/pinch-plugin.js',
+        'dragrotateplugin': './plugins/dragrotate-plugin.js',
 
         // member of game object
         'fadeplugin': './plugins/fade-plugin.js',

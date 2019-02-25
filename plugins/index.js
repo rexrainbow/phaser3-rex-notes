@@ -28,6 +28,7 @@ import VirtualJoyStick from './virtualjoystick.js';
 import CursorAtBound from './cursoratbound.js';
 import MouseWheelToUpDown from './mousewheeltoupdown.js';
 import Pinch from './pinch.js';
+import DragRotate from './dragrotate.js';
 
 // member of game object
 import MoveTo from './moveto.js';
@@ -124,6 +125,7 @@ export {
     CursorAtBound,
     MouseWheelToUpDown,
     Pinch,
+    DragRotate,
 
     // member of game object
     MoveTo,
