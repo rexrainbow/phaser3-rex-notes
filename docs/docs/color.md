@@ -36,6 +36,15 @@ Get color value, built-in methods of phaser.
     ```
     - h, s, v : 0 ~ 1
 
+### Color integer to RGB
+
+```javascript
+var rgb = Phaser.Display.Color.IntegerToRGB(color);
+```
+
+- color : Color integer (`0xAARRGGBB`)
+- rgb : JSON object (`{r, g, b, a}`)
+
 ### HSV color wheel
 
 1. Create color array
@@ -51,11 +60,17 @@ Get color value, built-in methods of phaser.
 
 #### create color object
 
-```javascript
-var color = new Phaser.Display.Color(red, green, blue); // alpha = 255
-// var color = new Phaser.Display.Color(red, green, blue, alpha);
-```
-- `red`, `green`, `blue`, `alpha`: 0 ~ 255
+- Create via r,g,b,a components
+    ```javascript
+    var color = new Phaser.Display.Color(red, green, blue); // alpha = 255
+    // var color = new Phaser.Display.Color(red, green, blue, alpha);
+    ```
+    - `red`, `green`, `blue`, `alpha`: 0 ~ 255
+- Create via color integer
+    ```javascript
+    var color = Phaser.Display.Color.IntegerToColor(colorInteger);
+    ```
+    - colorInteger : Color integer (`0xAARRGGBB`)
 
 #### Set color
 
@@ -73,9 +88,9 @@ var color = new Phaser.Display.Color(red, green, blue); // alpha = 255
     - `red`, `green`, `blue`, `alpha`: 0 ~ 1
 - Set color from color object
     ```javascript
-    color.setFromRGB(color);
+    color.setFromRGB(rgba);
     ```
-    - color :
+    - rgba :
         ```javascript
         {
             r: 0,
@@ -125,7 +140,6 @@ var color = new Phaser.Display.Color(red, green, blue); // alpha = 255
     color.alpha = value;
     // color.alpha += value;
     ```
-    -
 - Set H/S/V channel : 0 ~ 1
     ```javascript
     color.h = value;
