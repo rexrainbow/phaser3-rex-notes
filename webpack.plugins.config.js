@@ -53,6 +53,7 @@ module.exports = {
         'flashplugin': './plugins/flash-plugin.js',
         'shakepositionplugin': './plugins/shakeposition-plugin.js',
         'interceptionplugin': './plugins/interception-plugin.js',
+        'anchorplugin': './plugins/anchor-plugin.js',
         // member of game object, arcade behavior
         'eightdirectionplugin': './plugins/eightdirection-plugin.js',
         'bulletplugin': './plugins/bullet-plugin.js',
