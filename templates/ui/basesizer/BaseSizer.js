@@ -1,4 +1,5 @@
 import ContainerLite from '../../../plugins/gameobjects/containerlite/ContainerLite.js';
+import Anchor from '../../../plugins/behaviors/anchor/Anchor.js';
 import GetSizerConfig from '../utils/GetSizerConfig.js';
 import PushIntoBounds from './PushIntoBounds.js';
 import DrawBounds from '../utils/DrawBounds.js';
@@ -22,12 +23,27 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Base extends Container {
     constructor(scene, x, y, minWidth, minHeight, config) {
+        var anchorX, anchorY;
+        if (typeof (x) === 'string') {
+            anchorX = x;
+            anchorY = y;
+            x = 0;
+            y = 0;
+        }
+
         super(scene, x, y, 2, 2);
 
         this.isRexSizer = true;
         this.setMinWidth(minWidth);
         this.setMinHeight(minHeight);
         this.setName(GetValue(config, 'name', ''));
+
+        if (anchorX !== undefined) {
+            this._anchor = new Anchor(this, {
+                x: anchorX,
+                y: anchorY,
+            });;
+        }
     }
 
     setMinWidth(minWidth) {
