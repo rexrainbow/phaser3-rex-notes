@@ -1,6 +1,6 @@
 import ObjectFactory from './board/ObjectFactory.js';
 
-import BoardFactory from './board/board/BaordFactory.js';
+import BoardFactory from './board/board/BoardFactory.js';
 import HexagonFactory from './board/grid/hexagon/HexagonFactory.js';
 import QuadFactory from './board/grid/quad/QuadFactory.js';
 import ShapeFactory from './board/shape/ShapeFactory.js';
