@@ -5,7 +5,6 @@ import {
 } from './NeighborToDeltaTileXY.js';
 
 var GetNeighborTileY = function (tileX, tileY, dir) {
-    var tileY;
     switch (this.mode) {
         case 0: // orthogonal
             tileY += OrthogonalMap[dir][1];

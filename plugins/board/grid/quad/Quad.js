@@ -4,7 +4,7 @@ import RestoreOrigin from '../utils/RestoreOrigin.js';
 import GetNeighborTileX from '../../../utils/grid/quad/GetNeighborTileX.js';
 import GetNeighborTileY from '../../../utils/grid/quad/GetNeighborTileY.js';
 import GetNeighborTileDirection from '../../../utils/grid/quad/GetNeighborTileDirection.js';
-import GetOppositeDirection from '../../../utils/grid/hexagon/GetOppositeDirection.js';
+import GetOppositeDirection from '../../../utils/grid/quad/GetOppositeDirection.js';
 import Offset from '../../../utils/grid/quad/Offset.js';
 import Rotate from '../../../utils/grid/quad/Rotate.js';
 import GetDistance from '../../../utils/grid/quad/GetDistance.js';

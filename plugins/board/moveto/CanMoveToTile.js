@@ -29,18 +29,18 @@ var CanMoveToTile = function (tileX, tileY, direction) {
                 // Sneak
                 this.tileZSave = myTileZ;
                 var sneakTileZ = GetSneakTileZ.call(this, this.tileZSave);
-                board.moveChess(this.gameObject, tileX, tileY, sneakTileZ);
+                board.moveChess(this.gameObject, tileX, tileY, sneakTileZ, false);
                 myTileZ = sneakTileZ;
             }
         } else {
             if (board.contains(tileX, tileY, this.tileZSave)) {
                 // Sneak
                 var sneakTileZ = GetSneakTileZ.call(this, this.tileZSave);
-                board.moveChess(this.gameObject, tileX, tileY, sneakTileZ);
+                board.moveChess(this.gameObject, tileX, tileY, sneakTileZ, false);
                 myTileZ = sneakTileZ;
             } else {
                 // Go back
-                board.moveChess(this.gameObject, tileX, tileY, this.tileZSave);
+                board.moveChess(this.gameObject, tileX, tileY, this.tileZSave, false);
                 myTileZ = this.tileZSave;
                 this.tileZSave = undefined;
             }

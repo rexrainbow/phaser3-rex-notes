@@ -81,7 +81,7 @@ var MoveToTile = function (tileX, tileY, direction) {
         var worldY = board.tileXYToWorldY(tileX, tileY);
         this.moveAlongLine(undefined, undefined, worldX, worldY);
     }
-    board.moveChess(this.gameObject, tileX, tileY);
+    board.moveChess(this.gameObject, tileX, tileY, undefined, false);
 
     this.isRunning = true;
     this.lastMoveResult = true;
