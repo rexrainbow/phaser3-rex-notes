@@ -12,8 +12,8 @@ class Demo extends Phaser.Scene {
 
     create() {
         var dialog = this.rexUI.add.dialog({
-                x: 400,
-                y: 300,
+                x: 'center',
+                y: 'center',
                 width: 500,
 
                 background: this.rexUI.add.roundRectangle(0, 0, 100, 100, 20, 0x1565c0),
