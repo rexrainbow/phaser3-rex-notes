@@ -1,7 +1,7 @@
 var GetNeighborTileXY = function (srcTileXY, directions, out) {
     var dir, neighborTileXY;
 
-    if (typeof (directions) === 'number') {
+    if (isNaN(parseInt(directions)) === false) {
         dir = directions;
         if (out === undefined) {
             out = {};
@@ -18,7 +18,7 @@ var GetNeighborTileXY = function (srcTileXY, directions, out) {
         }
         return out;
 
-    } else {
+    } else if (Array.isArray(directions) || directions == null) {
         // directions array
         if (directions == null) {
             directions = this.grid.allDirections;
@@ -38,6 +38,7 @@ var GetNeighborTileXY = function (srcTileXY, directions, out) {
             });
         }
         return out;
-    }
+    } else
+        throw "Error: unsupported 'directions' argument type: must be integer, array or null!";
 };
 export default GetNeighborTileXY;
