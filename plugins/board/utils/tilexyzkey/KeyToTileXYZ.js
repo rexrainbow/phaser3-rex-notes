@@ -1,6 +1,6 @@
 var KeyToTileXYZ = function (key, out, separator) {
     if (out === undefined) {
-        out = tmp;
+        out = {};
     }
     if (separator === undefined) {
         separator = ',';
@@ -11,11 +11,5 @@ var KeyToTileXYZ = function (key, out, separator) {
     out.z = items[2];
     return out;
 }
-
-var tmp = {
-    x: 0,
-    y: 0,
-    z: 0
-};
 
 export default KeyToTileXYZ;

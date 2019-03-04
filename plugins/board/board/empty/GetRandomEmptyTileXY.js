@@ -6,7 +6,7 @@ var GetRandomEmptyTileXY = function (tileZ, out) {
         tileZ = 0;
     }
     if (out === undefined) {
-        out = tmpTileXY;
+        out = {};
     }
 
     var tileX, tileY;
@@ -24,22 +24,18 @@ var GetRandomEmptyTileXY = function (tileZ, out) {
         out.y = tileY;
         return out;
     } else {
-        var tmpTileXYArray = this.getEmptyTileXYArray(tileZ, tmpTileXYArray);
-        if (tmpTileXYArray.length === 0) {
+        globTileXYArray = this.getEmptyTileXYArray(tileZ, globTileXYArray);
+        if (globTileXYArray.length === 0) {
             return null;
         } else {
-            var tileXY = GetRandomItem(tmpTileXYArray);
+            var tileXY = GetRandomItem(globTileXYArray);
             out.x = tileXY.x;
             out.y = tileXY.y;
-            tmpTileXYArray.length = 0;
+            globTileXYArray.length = 0;
             return out;
         }
     }
 }
 
-var tmpTileXYArray = [];
-var tmpTileXY = {
-    x: 0,
-    y: 0
-}
+var globTileXYArray = [];
 export default GetRandomEmptyTileXY;

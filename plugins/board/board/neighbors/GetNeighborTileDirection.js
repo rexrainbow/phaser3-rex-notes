@@ -9,18 +9,18 @@ var GetNeighborTileDirection = function (srcTileXY, neighborTileXY) {
     }
     var direction = this.grid.getNeighborTileDirection(srcTileXY, neighborTileXY);
     if (this.wrapMode && (direction === null)) {
-        tmpNeighborTileXYArray = this.getNeighborTileXY(srcTileXY, null, tmpNeighborTileXYArray);
-        for (var i = 0, cnt = tmpNeighborTileXYArray.length; i < cnt; i++) {
-            if (TileXYIsEqual(neighborTileXY, tmpNeighborTileXYArray[i])) {
+        globNeighborTileXYArray = this.getNeighborTileXY(srcTileXY, null, globNeighborTileXYArray);
+        for (var i = 0, cnt = globNeighborTileXYArray.length; i < cnt; i++) {
+            if (TileXYIsEqual(neighborTileXY, globNeighborTileXYArray[i])) {
                 direction = i;
                 break;
             }
         }
-        tmpNeighborTileXYArray.length = 0;
+        globNeighborTileXYArray.length = 0;
     }
     return direction;
 }
 
-var tmpNeighborTileXYArray = [];
+var globNeighborTileXYArray = [];
 
 export default GetNeighborTileDirection;

@@ -20,23 +20,23 @@ var MoveAway = function (tileX, tileY, moveAwayMode) {
         chessInfo, direction;
     var directions = board.grid.allDirections;
     // Initial chess info of each neighbor and current tile position
-    if (tmpChessInfo.length !== (directions.length + 1)) {
-        tmpChessInfo.length = 0;
+    if (globChessInfo.length !== (directions.length + 1)) {
+        globChessInfo.length = 0;
         // Neighbors
         for (var i = 0, cnt = directions.length; i < cnt; i++) {
-            tmpChessInfo.push({
+            globChessInfo.push({
                 direction: i
             });
         }
         // current tile position
-        tmpChessInfo.push({
+        globChessInfo.push({
             direction: null
         });
     }
     // Get tileXY and distance of each neighbor and current tile position
     var out;
-    for (var i = 0, cnt = tmpChessInfo.length; i < cnt; i++) {
-        chessInfo = tmpChessInfo[i];
+    for (var i = 0, cnt = globChessInfo.length; i < cnt; i++) {
+        chessInfo = globChessInfo[i];
         direction = chessInfo.direction;
         if (direction === null) { // Current tile position
             chessInfo.x = myTileXYZ.x;
@@ -54,7 +54,7 @@ var MoveAway = function (tileX, tileY, moveAwayMode) {
     }
     var previousDirection = this.destinationDirection;
     // Sort chess info
-    tmpChessInfo.sort(function (infoA, infoB) {
+    globChessInfo.sort(function (infoA, infoB) {
         // Invalid tile position
         if (infoA.distance === null) {
             return 1;
@@ -88,8 +88,8 @@ var MoveAway = function (tileX, tileY, moveAwayMode) {
         return 0;
     });
     // Try move to neighbor, or current tile position
-    for (var i = 0, cnt = tmpChessInfo.length; i < cnt; i++) {
-        chessInfo = tmpChessInfo[i];
+    for (var i = 0, cnt = globChessInfo.length; i < cnt; i++) {
+        chessInfo = globChessInfo[i];
         if (chessInfo.distance === null) { // Invalid tile position
             return this;
         }
@@ -105,5 +105,5 @@ var targetTileXY = {
     x: 0,
     y: 0
 }
-var tmpChessInfo = [];
+var globChessInfo = [];
 export default MoveAway;

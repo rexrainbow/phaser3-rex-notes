@@ -2,15 +2,15 @@ var HasBlocker = function (tileX, tileY, tileZ) {
     var chess, blocker;
     if (tileZ === undefined) {
         // any chess at (tileX, tileY) has blocker
-        chess = this.tileXYToChessArray(tileX, tileY, tmpChessArray);
+        chess = this.tileXYToChessArray(tileX, tileY, globChessArray);
         for (var i = 0, cnt = chess.length; i < cnt; i++) {
             blocker = this.getChessData(chess[i]).blocker;
             if (blocker === true) {
-                tmpChessArray.length = 0;
+                globChessArray.length = 0;
                 return true;
             }
         }
-        tmpChessArray.length = 0;
+        globChessArray.length = 0;
         return false;
 
     } else {
@@ -24,6 +24,6 @@ var HasBlocker = function (tileX, tileY, tileZ) {
 
     }
 }
-var tmpChessArray = [];
+var globChessArray = [];
 
 export default HasBlocker;

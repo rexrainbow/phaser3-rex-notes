@@ -5,7 +5,7 @@ var GetGridPoints = function (tileX, tileY, points) {
     if (points === undefined) {
         points = InitPoints(6);
     } else if (points === true) {
-        points = tmpPoints;
+        points = globPoints;
     }
 
     var worldX, worldY;
@@ -20,7 +20,7 @@ var GetGridPoints = function (tileX, tileY, points) {
     if (this.size !== undefined) {
         size = this.size;
     } else {
-        size = tmpSize;
+        size = globSize;
         size.width = this.width;
         size.height = this.height;
     }
@@ -28,7 +28,7 @@ var GetGridPoints = function (tileX, tileY, points) {
     return points;
 }
 
-var tmpPoints = InitPoints(6);
-var tmpSize = {};
+var globPoints = InitPoints(6);
+var globSize = {};
 
 export default GetGridPoints;

@@ -1,6 +1,6 @@
 var Offset = function (tileXY, OffsetTileX, OffsetTileY, out) {
     if (out === undefined) {
-        out = tmp;
+        out = {};
     }
     if ((OffsetTileX === 0) && (OffsetTileY === 0)) {
         out.x = tileXY.x;
@@ -13,8 +13,4 @@ var Offset = function (tileXY, OffsetTileX, OffsetTileY, out) {
     return out;
 };
 
-var tmp = {
-    x: 0,
-    y: 0
-}
 export default Offset;

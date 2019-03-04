@@ -24,8 +24,8 @@ var OnTouchTileMove = function (pointer) {
     this.input.tilePosition.y = tileY;
 
     // Get touched chess
-    tmpChessArray.length = 0;
-    var gameObjects = this.board.tileXYToChessArray(tileX, tileY, tmpChessArray);
+    globChessArray.length = 0;
+    var gameObjects = this.board.tileXYToChessArray(tileX, tileY, globChessArray);
     // Fire events
     var gameObject;
     for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
@@ -42,7 +42,7 @@ var OnTouchTileMove = function (pointer) {
             this.input.pointer = null;
         }
     }
-    tmpChessArray.length = 0;
+    globChessArray.length = 0;
 
     // Not dragging
     if (this.input.drag.state === 0) {
@@ -69,6 +69,6 @@ var OnDrag = function (pointer) {
     this.emit('drag', pointer, dragX, dragY);
 }
 
-var tmpChessArray = [];
+var globChessArray = [];
 
 export default OnPointerMove;

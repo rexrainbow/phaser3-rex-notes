@@ -53,6 +53,4 @@ var targetTileXY = {
     direction: null
 };
 
-var tmpChessArray = [];
-
 export default CanMoveToTile;

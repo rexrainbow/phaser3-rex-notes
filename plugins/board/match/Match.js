@@ -75,12 +75,12 @@ class Match {
         }
         var symbol;
         if (IsFunction(callback)) {
-            tmp.x = tileX;
-            tmp.y = tileY;
+            globTileXY.x = tileX;
+            globTileXY.y = tileY;
             if (scope) {
-                symbol = callback.call(scope, tmp, board);
+                symbol = callback.call(scope, globTileXY, board);
             } else {
-                symbol = callback(tmp, board);
+                symbol = callback(globTileXY, board);
             }
         } else {
             symbol = callback;
@@ -96,9 +96,7 @@ class Match {
 
     dumpSymobls(callback, scope) {
         var board = this.board;
-        var tileXY, symbol
-        var width = board.width,
-            height = board.height;
+        var tileXY, symbol;
         for (var i = 0, cnt = this.symbols.length; i < cnt; i++) {
             symbol = this.symbols[i];
             tileXY = this.keyToTileXY(i);
@@ -152,7 +150,7 @@ class Match {
 
     keyToTileXY(key, out) {
         if (out === undefined) {
-            out = tmp;
+            out = {};
         }
         var width = this.board.width;
         out.x = key % width;
@@ -165,7 +163,7 @@ class Match {
     }
 }
 
-var tmp = {
+var globTileXY = {
     x: 0,
     y: 0
 };

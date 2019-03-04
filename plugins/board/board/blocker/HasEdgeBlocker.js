@@ -2,14 +2,14 @@ var HasEdgeBlocker = function (tileX, tileY, tileZ, direction) {
     var chess, blocker;
     if (tileZ === undefined) {
         // any chess at (tileX, tileY) has blocker
-        chess = this.tileXYToChessArray(tileX, tileY, tmpChessArray);
+        chess = this.tileXYToChessArray(tileX, tileY, globChessArray);
         for (var i = 0, cnt = chess.length; i < cnt; i++) {
             if (isEdgeBlocker(this.getChessData(chess[i]).blocker)) {
-                tmpChessArray.length = 0;
+                globChessArray.length = 0;
                 return true;
             }
         }
-        tmpChessArray.length = 0;
+        globChessArray.length = 0;
         return false;
 
     } else {
@@ -30,6 +30,6 @@ var isEdgeBlocker = function (blocker, direction) {
     }
 }
 
-var tmpChessArray = [];
+var globChessArray = [];
 
 export default HasEdgeBlocker;

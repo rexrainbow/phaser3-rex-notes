@@ -3,12 +3,12 @@ var GetTileDirection = function(tileX, tileY) {
     if (board === null) {
         return null;
     }
-    tmpTileXYZ.x = tileX;
-    tmpTileXYZ.y = tileY;
-    return board.getNeighborTileDirection(this.tileXYZ, tmpTileXYZ);
+    globTileXY.x = tileX;
+    globTileXY.y = tileY;
+    return board.getNeighborTileDirection(this.tileXYZ, globTileXY);
 }
 
-var tmpTileXYZ = {
+var globTileXY = {
     x: 0,
     y: 0
 };

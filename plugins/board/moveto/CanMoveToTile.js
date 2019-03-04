@@ -63,32 +63,32 @@ var CanMoveToTile = function (tileX, tileY, direction) {
 
     // Edge-blocker test
     if (this.edgeBlockerTest) {
-        var chess = this.TileXYToChessArray(myTileX, myTileY, tmpChessArray);
+        var chess = this.TileXYToChessArray(myTileX, myTileY, globChessArray);
         if (chess.length > 1) {
             for (var i = 0, cnt = chess.length; i < cnt; i++) {
                 if (chess[i] === this.gameObject) {
                     continue;
                 }
                 if (board.hasEdgeBlocker(myTileX, myTileY, this.chessToTileXYZ(chess[i]).z, direction)) {
-                    tmpChessArray.length = 0;
+                    globChessArray.length = 0;
                     return false;
                 }
             }
         }
-        tmpChessArray.length = 0;
+        globChessArray.length = 0;
 
         // TODO
     }
 
     // Custom moveable test
     if (this.moveableTestCallback) {
-        tmpTileXYZ.x = tileX;
-        tmpTileXYZ.y = tileY;
-        tmpTileXYZ.direction = direction;
+        globTileXYZ.x = tileX;
+        globTileXYZ.y = tileY;
+        globTileXYZ.direction = direction;
         if (this.moveableTestScope) {
-            var moveable = this.moveableTestCallback.call(this.moveableTestScope, myTileXYZ, tmpTileXYZ, board);
+            var moveable = this.moveableTestCallback.call(this.moveableTestScope, myTileXYZ, globTileXYZ, board);
         } else {
-            var moveable = this.moveableTestCallback(myTileXYZ, tmpTileXYZ, board);
+            var moveable = this.moveableTestCallback(myTileXYZ, globTileXYZ, board);
         }
         if (!moveable) {
             return false;
@@ -98,12 +98,12 @@ var CanMoveToTile = function (tileX, tileY, direction) {
     return true;
 }
 
-var tmpTileXYZ = {
+var globTileXYZ = {
     x: 0,
     y: 0,
     direction: null
 };
 
-var tmpChessArray = [];
+var globChessArray = [];
 
 export default CanMoveToTile;

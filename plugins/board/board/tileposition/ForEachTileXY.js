@@ -6,12 +6,12 @@ var ForEachTileXY = function (callback, scope, order) {
         case 0: // x+,y+
             for (var tileY = 0; tileY < this.height; tileY++) {
                 for (var tileX = 0; tileX < this.width; tileX++) {
-                    tmp.x = tileX;
-                    tmp.y = tileY;
+                    globTileXY.x = tileX;
+                    globTileXY.y = tileY;
                     if (scope) {
-                        callback.call(scope, tmp, this);
+                        callback.call(scope, globTileXY, this);
                     } else {
-                        callback(tmp, this);
+                        callback(globTileXY, this);
                     }
                 }
             }
@@ -20,12 +20,12 @@ var ForEachTileXY = function (callback, scope, order) {
         case 1: // x-,y+
             for (var tileY = 0; tileY < this.height; tileY++) {
                 for (var tileX = this.width - 1; tileX >= 0; tileX--) {
-                    tmp.x = tileX;
-                    tmp.y = tileY;
+                    globTileXY.x = tileX;
+                    globTileXY.y = tileY;
                     if (scope) {
-                        callback.call(scope, tmp, this);
+                        callback.call(scope, globTileXY, this);
                     } else {
-                        callback(tmp, this);
+                        callback(globTileXY, this);
                     }
                 }
             }
@@ -34,12 +34,12 @@ var ForEachTileXY = function (callback, scope, order) {
         case 2: // y+,x+
             for (var tileX = 0; tileX < this.width; tileX++) {
                 for (var tileY = 0; tileY < this.height; tileY++) {
-                    tmp.x = tileX;
-                    tmp.y = tileY;
+                    globTileXY.x = tileX;
+                    globTileXY.y = tileY;
                     if (scope) {
-                        callback.call(scope, tmp, this);
+                        callback.call(scope, globTileXY, this);
                     } else {
-                        callback(tmp, this);
+                        callback(globTileXY, this);
                     }
                 }
             }
@@ -48,12 +48,12 @@ var ForEachTileXY = function (callback, scope, order) {
         case 3: // y-,x+
             for (var tileX = 0; tileX < this.width; tileX++) {
                 for (var tileY = this.height - 1; tileY >= 0; tileY--) {
-                    tmp.x = tileX;
-                    tmp.y = tileY;
+                    globTileXY.x = tileX;
+                    globTileXY.y = tileY;
                     if (scope) {
-                        callback.call(scope, tmp, this);
+                        callback.call(scope, globTileXY, this);
                     } else {
-                        callback(tmp, this);
+                        callback(globTileXY, this);
                     }
                 }
             }
@@ -61,16 +61,9 @@ var ForEachTileXY = function (callback, scope, order) {
     return this;
 };
 
-var tmp = {
+var globTileXY = {
     x: 0,
     y: 0
-}
-
-var ORDERTYPE = {
-    'x+': 0,
-    'x-': 1,
-    'y+': 2,
-    'y-': 3
 }
 
 export default ForEachTileXY;

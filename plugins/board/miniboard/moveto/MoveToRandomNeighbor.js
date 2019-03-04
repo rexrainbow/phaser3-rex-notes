@@ -11,12 +11,12 @@ var MoveToRandomNeighbor = function () {
     }
 
     var directions = mainBoard.grid.allDirections;
-    if (tmpDirections.length !== directions.length) {
-        Clone(directions, tmpDirections);
+    if (globDirections.length !== directions.length) {
+        Clone(directions, globDirections);
     }
-    Shuffle(tmpDirections);
-    for (var i = 0, cnt = tmpDirections.length; i < cnt; i++) {
-        this.moveToward(tmpDirections[i]);
+    Shuffle(globDirections);
+    for (var i = 0, cnt = globDirections.length; i < cnt; i++) {
+        this.moveToward(globDirections[i]);
         if (this.lastMoveResult) {
             return this;
         }
@@ -24,5 +24,5 @@ var MoveToRandomNeighbor = function () {
     return this;
 }
 
-var tmpDirections = [];
+var globDirections = [];
 export default MoveToRandomNeighbor;

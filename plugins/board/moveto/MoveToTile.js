@@ -33,9 +33,9 @@ var MoveToTile = function (tileX, tileY, direction) {
         return this;
     }
     if (direction === undefined) {
-        tmpTileXYZ.x = tileX;
-        tmpTileXYZ.y = tileY
-        direction = board.getNeighborTileDirection(myTileXYZ, tmpTileXYZ);
+        globTileXYZ.x = tileX;
+        globTileXYZ.y = tileY
+        direction = board.getNeighborTileDirection(myTileXYZ, globTileXYZ);
     }
     if (!this.canMoveTo(tileX, tileY, direction)) {
         this.lastMoveResult = false;
@@ -88,7 +88,7 @@ var MoveToTile = function (tileX, tileY, direction) {
     return this;
 }
 
-var tmpTileXYZ = {
+var globTileXYZ = {
     x: 0,
     y: 0
 };

@@ -4,7 +4,7 @@ var GetNeighborTileXY = function (srcTileXY, directions, out) {
     if (typeof (directions) === 'number') {
         dir = directions;
         if (out === undefined) {
-            out = tmpTileXY;
+            out = {};
         }
         var tileX = this.grid.getNeighborTileX(srcTileXY.x, srcTileXY.y, dir);
         var tileY = this.grid.getNeighborTileY(srcTileXY.x, srcTileXY.y, dir);
@@ -40,9 +40,4 @@ var GetNeighborTileXY = function (srcTileXY, directions, out) {
         return out;
     }
 };
-
-var tmpTileXY = {
-    x: 0,
-    y: 0
-}
 export default GetNeighborTileXY;

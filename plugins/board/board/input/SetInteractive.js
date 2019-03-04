@@ -53,8 +53,8 @@ var onPointerDown = function (pointer) {
     this.emit('tiledown', pointer, this.input.tilePosition);
 
     // Get touched chess
-    tmpChessArray.length = 0;
-    var gameObjects = this.tileXYToChessArray(tileX, tileY, tmpChessArray);
+    globChessArray.length = 0;
+    var gameObjects = this.tileXYToChessArray(tileX, tileY, globChessArray);
     // Fire events
     var gameObject;
     for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
@@ -64,7 +64,7 @@ var onPointerDown = function (pointer) {
         }
         this.emit('gameobjectdown', pointer, gameObject);
     }
-    tmpChessArray.length = 0;
+    globChessArray.length = 0;
 };
 
 var onPointerUp = function (pointer) {
@@ -83,8 +83,8 @@ var onPointerUp = function (pointer) {
     this.emit('tileup', pointer, this.input.tilePosition);
 
     // Get touched chess
-    tmpChessArray.length = 0;
-    var gameObjects = this.tileXYToChessArray(tileX, tileY, tmpChessArray);
+    globChessArray.length = 0;
+    var gameObjects = this.tileXYToChessArray(tileX, tileY, globChessArray);
     // Fire events
     var gameObject;
     for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
@@ -94,7 +94,7 @@ var onPointerUp = function (pointer) {
         }
         this.emit('gameobjectup', pointer, gameObject);
     }
-    tmpChessArray.length = 0;
+    globChessArray.length = 0;
 
     if (this.input.pointer === pointer) { // Release touch pointer
         this.input.pointer = null;
@@ -128,8 +128,8 @@ var onPointerMove = function (pointer) {
     this.emit('tilemove', pointer, this.input.tilePosition);
 
     // Get touched chess
-    tmpChessArray.length = 0;
-    var gameObjects = this.tileXYToChessArray(tileX, tileY, tmpChessArray);
+    globChessArray.length = 0;
+    var gameObjects = this.tileXYToChessArray(tileX, tileY, globChessArray);
     // Fire events
     var gameObject;
     for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
@@ -139,9 +139,9 @@ var onPointerMove = function (pointer) {
         }
         this.emit('gameobjectmove', pointer, gameObject);
     }
-    tmpChessArray.length = 0;
+    globChessArray.length = 0;
 };
 
-var tmpChessArray = [];
+var globChessArray = [];
 
 export default SetInteractive;

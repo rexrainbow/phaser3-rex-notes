@@ -25,8 +25,8 @@ var OnTouchTileEnd = function (pointer) {
     this.input.tilePosition.y = tileY;
 
     // Get touched chess
-    tmpChessArray.length = 0;
-    var gameObjects = this.board.tileXYToChessArray(tileX, tileY, tmpChessArray);
+    globChessArray.length = 0;
+    var gameObjects = this.board.tileXYToChessArray(tileX, tileY, globChessArray);
     // Fire events
     var gameObject;
     for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
@@ -36,9 +36,9 @@ var OnTouchTileEnd = function (pointer) {
         }
         this.emit('gameobjectup', pointer, gameObject);
     }
-    tmpChessArray.length = 0;
+    globChessArray.length = 0;
 }
 
-var tmpChessArray = [];
+var globChessArray = [];
 
 export default OnPointerUp;
