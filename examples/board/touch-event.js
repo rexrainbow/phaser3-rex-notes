@@ -1,4 +1,3 @@
-import HexagonPlugin from '../../plugins/hexagon-plugin.js';
 import BoardPlugin from '../../plugins/board-plugin.js';
 
 const Random = Phaser.Math.Between;
@@ -108,11 +107,6 @@ var config = {
     },
     scene: Demo,
     plugins: {
-        global: [{
-            key: 'rexHexagon',
-            plugin: HexagonPlugin,
-            start: true
-        }],
         scene: [{
             key: 'rexBoard',
             plugin: BoardPlugin,

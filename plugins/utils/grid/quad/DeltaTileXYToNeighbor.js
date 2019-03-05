@@ -16,7 +16,7 @@ var ReverseDirMap = function (dirMap) {
         if (!out.hasOwnProperty(x)) {
             out[x] = {}
         }
-        out[x][y] = dir;
+        out[x][y] = parseInt(dir);
     }
     return out;
 }
