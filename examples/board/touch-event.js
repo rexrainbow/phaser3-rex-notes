@@ -13,18 +13,17 @@ class Demo extends Phaser.Scene {
 
     create() {
         var board = this.rexBoard.add.board({
-            grid: getHexagonGrid(this),
-            // grid: getQuadGrid(this),
-            width: 20,
-            height: 20
-        });
-        var rexBoardAdd = this.rexBoard.add;
-        board.forEachTileXY(function (tileXY, board) {
-            var chess = rexBoardAdd.shape(board, tileXY.x, tileXY.y, 0, Random(0, 0xffffff), 0.7);
-            this.add.text(chess.x, chess.y, tileXY.x + ',' + tileXY.y)
-                .setOrigin(0.5)
-                .setTint(0x0);
-        }, this);
+                grid: getHexagonGrid(this),
+                // grid: getQuadGrid(this),
+                width: 20,
+                height: 20
+            })
+            .forEachTileXY(function (tileXY, board) {
+                var chess = this.rexBoard.add.shape(board, tileXY.x, tileXY.y, 0, Random(0, 0xffffff), 0.7);
+                this.add.text(chess.x, chess.y, tileXY.x + ',' + tileXY.y)
+                    .setOrigin(0.5)
+                    .setTint(0x0);
+            }, this);
 
         board
             .setInteractive()
