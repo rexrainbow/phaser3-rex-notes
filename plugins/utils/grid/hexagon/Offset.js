@@ -7,7 +7,9 @@ const EVEN_Q = CONST.EVEN_Q;
 
 var Offset = function (src, offsetX, offsetY, out) {
     if (out === undefined) {
-        out = tmp;
+        out = {};
+    } else if (out === true) {
+        out = globTileXY;
     }
 
     var newX = src.x + offsetX;
@@ -48,8 +50,6 @@ var Offset = function (src, offsetX, offsetY, out) {
     out.y = newY;
     return out;
 }
-var tmp = {
-    x: 0,
-    y: 0
-};
+
+var globTileXY = {};
 export default Offset;

@@ -11,8 +11,7 @@ var Offset = function (tileX, tileY, chessTileXYZMap, out) {
     var chessTileXYZ, newTileXYZ;
     for (var uid in chessTileXYZMap) {
         chessTileXYZ = chessTileXYZMap[uid];
-        newTileXYZ = {};
-        mainBoard.offset(chessTileXYZ, tileX, tileY, newTileXYZ);
+        newTileXYZ = mainBoard.offset(chessTileXYZ, tileX, tileY);
         newTileXYZ.z = chessTileXYZ.z;
         out[uid] = newTileXYZ;
     }

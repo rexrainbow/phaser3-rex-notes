@@ -20,7 +20,7 @@ var MoveToTile = function (tileX, tileY, direction) {
     if ((direction !== undefined) &&
         (tileX == null) || (tileY == null)) {
         // Get neighbor tile position if direction is not undefined
-        var out = mainBoard.getNeighborTileXY(myTileXY, direction);
+        var out = mainBoard.getNeighborTileXY(myTileXY, direction, true);
         if (out !== null) {
             tileX = out.x;
             tileY = out.y;

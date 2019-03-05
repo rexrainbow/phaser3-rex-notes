@@ -4,6 +4,8 @@ var Rotate = function (tileXY, direction, originTileXY, out) {
     }
     if (out === undefined) {
         out = {};
+    } else if (out === true) {
+        out = globTileXY;
     }
 
     this.offset(tileXY, -originTileXY.x, -originTileXY.y, out);
@@ -16,4 +18,5 @@ var defaultOriginTileXY = {
     x: 0,
     y: 0
 };
+var globTileXY = {};
 export default Rotate;

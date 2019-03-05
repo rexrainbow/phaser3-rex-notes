@@ -1,7 +1,10 @@
 var KeyToTileXYZ = function (key, out, separator) {
     if (out === undefined) {
         out = {};
+    } else if (out === true) {
+        out = globTileXYZ;
     }
+
     if (separator === undefined) {
         separator = ',';
     }
@@ -12,4 +15,5 @@ var KeyToTileXYZ = function (key, out, separator) {
     return out;
 }
 
+var globTileXYZ = {};
 export default KeyToTileXYZ;

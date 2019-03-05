@@ -25,7 +25,7 @@ var PutOnMainBoard = function (mainBoard, tileX, tileY, align) {
         chessTileXYZ = tileXYZMap[uid];
         uid = parseInt(uid);
 
-        mappedTileXY = mainBoard.offset(chessTileXYZ, tileX, tileY);
+        mappedTileXY = mainBoard.offset(chessTileXYZ, tileX, tileY, true);
         mainBoard.addChess(uid, mappedTileXY.x, mappedTileXY.y, chessTileXYZ.z, false);
     }
     if (align) {

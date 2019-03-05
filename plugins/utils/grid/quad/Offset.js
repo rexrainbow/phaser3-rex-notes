@@ -1,7 +1,10 @@
 var Offset = function (srcTile, offsetTileX, offsetTileY, out) {
     if (out === undefined) {
-        out = tmp;
+        out = {};
+    } else if (out === true) {
+        out = globTileXY;
     }
+
     var newTileX = srcTile.x + offsetTileX;
     var newTileY = srcTile.y + offsetTileY;
     // TODO: staggered?
@@ -9,8 +12,6 @@ var Offset = function (srcTile, offsetTileX, offsetTileY, out) {
     out.y = newTileY;
     return out;
 }
-var tmp = {
-    x: 0,
-    y: 0
-};
+
+var globTileXY = {};
 export default Offset;

@@ -7,6 +7,8 @@ var GetRandomEmptyTileXY = function (tileZ, out) {
     }
     if (out === undefined) {
         out = {};
+    } else if (out === true) {
+        out = globTileXY;
     }
 
     var tileX, tileY;
@@ -38,4 +40,5 @@ var GetRandomEmptyTileXY = function (tileZ, out) {
 }
 
 var globTileXYArray = [];
+var globTileXY = {};
 export default GetRandomEmptyTileXY;

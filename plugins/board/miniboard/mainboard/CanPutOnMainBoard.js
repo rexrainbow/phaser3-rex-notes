@@ -9,7 +9,7 @@ var CanPutOnMainBoard = function (mainBoard, tileX, tileY, chessTileXYMap) {
     var chessTileXYZ, mappedTileXY, isOccupied;
     for (var uid in chessTileXYMap) {
         chessTileXYZ = chessTileXYMap[uid];
-        mappedTileXY = mainBoard.offset(chessTileXYZ, tileX, tileY);
+        mappedTileXY = mainBoard.offset(chessTileXYZ, tileX, tileY, true);
         if (!mainBoard.contains(mappedTileXY.x, mappedTileXY.y)) {
             return false;
         }

@@ -1,11 +1,12 @@
 var GetNeighborTileXY = function (srcTileXY, directions, out) {
-    var dir, neighborTileXY;
-
     if (typeof (directions) === 'number') {
-        dir = directions;
+        var dir = directions;
         if (out === undefined) {
             out = {};
+        } else if (out === true) {
+            out = globTileXY;
         }
+
         var tileX = this.grid.getNeighborTileX(srcTileXY.x, srcTileXY.y, dir);
         var tileY = this.grid.getNeighborTileY(srcTileXY.x, srcTileXY.y, dir);
         var wrapTileX = this.getWrapTileX(tileX, tileY);
@@ -19,6 +20,8 @@ var GetNeighborTileXY = function (srcTileXY, directions, out) {
         return out;
 
     } else {
+        var dir, neighborTileXY;
+
         // directions array
         if (directions == null) {
             directions = this.grid.allDirections;
@@ -32,12 +35,11 @@ var GetNeighborTileXY = function (srcTileXY, directions, out) {
             if (neighborTileXY === null) {
                 continue;
             }
-            out.push({
-                x: neighborTileXY.x,
-                y: neighborTileXY.y
-            });
+            out.push(neighborTileXY);
         }
         return out;
     }
 };
+
+var globTileXY = {};
 export default GetNeighborTileXY;

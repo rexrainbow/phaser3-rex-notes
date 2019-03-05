@@ -11,7 +11,7 @@ var GetNextTile = function (curTileData, preTileData) {
     var neighborTileXArray = []; // forward and other neighbors, exclude backward
     var neighborTileXY, neighborTileData = null;
     for (var i = 0, cnt = directions.length; i < cnt; i++) {
-        neighborTileXY = board.getNeighborTileXY(curTileData, directions[i]);
+        neighborTileXY = board.getNeighborTileXY(curTileData, directions[i], true);
         if (neighborTileXY === null) {
             continue;
         }
@@ -36,7 +36,7 @@ var GetNextTile = function (curTileData, preTileData) {
         nextTileData = null;
     } else if ((backwardTileData === null) && (neighborTileXArray.length === 1)) {
         // 1 neighbor
-        nextTileData = neighborTileXArray[0];        
+        nextTileData = neighborTileXArray[0];
     } else if ((backwardTileData !== null) && (neighborTileXArray.length === 0)) {
         // 1 backward neighbor
         nextTileData = backwardTileData;

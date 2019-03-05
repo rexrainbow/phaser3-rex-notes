@@ -2,8 +2,11 @@ import Wrap from '../../math/Wrap.js';
 
 var Rotate = function (src, dir, out) {
     if (out === undefined) {
-        out = tmp;
+        out = {};
+    } else if (out === true) {
+        out = globTileXY;
     }
+
     dir = Wrap(dir, 0, 3);
     var newTileX;
     var newTileY;
@@ -30,8 +33,6 @@ var Rotate = function (src, dir, out) {
     out.y = newTileY;
     return out;
 }
-var tmp = {
-    x: 0,
-    y: 0
-};
+
+var globTileXY = {};
 export default Rotate;

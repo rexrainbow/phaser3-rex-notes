@@ -3,15 +3,14 @@ var GetNeighborChess = function (chess, directions, neighborTileZ, out) {
     if (tileXYZ === null) {
         return null;
     }
-    var dir, neighborTileXY;
     if (neighborTileZ == null) {
         neighborTileZ = tileXYZ.z;
     }
 
     if (typeof (directions) === 'number') {
         // 1 direction
-        dir = directions;
-        neighborTileXY = this.getNeighborTileXY(tileXYZ, dir);
+        var dir = directions;
+        var neighborTileXY = this.getNeighborTileXY(tileXYZ, dir, true);
         if (neighborTileXY === null) {
             return null;
         }
@@ -21,16 +20,19 @@ var GetNeighborChess = function (chess, directions, neighborTileZ, out) {
         if (out === undefined) {
             out = [];
         }
-        neighborTileXY = this.getNeighborTileXY(tileXYZ, directions);
+        this.getNeighborTileXY(tileXYZ, directions, globTileXYArray);
         var neighborChess;
-        for (var i = 0, cnt = neighborTileXY.length; i < cnt; i++) {
-            neighborChess = this.tileXYZToChess(neighborTileXY[i].x, neighborTileXY[i].y, neighborTileZ);
+        for (var i = 0, cnt = globTileXYArray.length; i < cnt; i++) {
+            neighborChess = this.tileXYZToChess(globTileXYArray[i].x, globTileXYArray[i].y, neighborTileZ);
             if (neighborChess == null) {
                 continue;
             }
             out.push(neighborChess);
         }
+        globTileXYArray.length = 0;
         return out;
     }
 }
+
+var globTileXYArray = [];
 export default GetNeighborChess;
