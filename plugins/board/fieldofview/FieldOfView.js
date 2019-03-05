@@ -1,4 +1,3 @@
-import PathFinder from './../pathfinder/PathFinder.js';
 import FindFOV from './FindFOV.js';
 import IsInLOS from './IsInLOS.js';
 

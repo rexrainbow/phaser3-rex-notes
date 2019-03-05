@@ -14,6 +14,7 @@ import WorldXYToTileXY from './worldposition/WorldXYToTileXY.js';
 import AngleBetween from './worldposition/AngleBetween.js';
 import IsOverlappingPoint from './worldposition/IsOverlappingPoint.js';
 import GridAlign from './worldposition/GridAlign.js';
+import LineToTileXYArray from './worldposition/LineToTileXYArray.js';
 
 import UidToChess from './chess/UidToChess.js';
 import AddChess from './chess/AddChess.js';
@@ -161,6 +162,7 @@ var methods = {
     angleBetween: AngleBetween,
     isOverlappingPoint: IsOverlappingPoint,
     gridAlign: GridAlign,
+    lineToTileXYArray: LineToTileXYArray,
 
     uidToChess: UidToChess,
     addChess: AddChess,
