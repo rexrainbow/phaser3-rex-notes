@@ -73,11 +73,11 @@ class Demo extends Phaser.Scene {
 
 var getQuadGrid = function (scene) {
     var grid = scene.rexBoard.add.quadGrid({
-        x: 50,
-        y: 50,
+        x: 400,
+        y: 100,
         cellWidth: 100,
-        cellHeight: 100,
-        type: 0
+        cellHeight: 50,
+        type: 1
     });
     return grid;
 }

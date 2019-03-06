@@ -313,6 +313,18 @@ var tileXY = board.worldXYToTileXY(worldX, worldY);  // tileXY: {x, y}
 // var out = board.worldXYToTileXY(worldX, worldY, out);
 ```
 
+### Line -> tile position
+
+Get array of tile position along a line defined via (`startWorldX`, `startWorldY`) to (`endWorldX`, `endWorldY`)
+
+```javascript
+var out = board.lineToTileXYArray(startWorldX, startWorldY, endWorldX, endWorldY);
+// var out = board.lineToTileXYArray(startWorldX, startWorldY, endWorldX, endWorldY, out);
+```
+
+- `startWorldX`, `startWorldY`, `endWorldX`, `endWorldY` : Line
+- `out` : An array of tile position
+
 ### Angle between world position of 2 tiles
 
 ```javascript

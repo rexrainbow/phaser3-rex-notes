@@ -24,7 +24,7 @@ class Demo extends Phaser.Scene {
 
         var lineGraphics = this.add.graphics({
                 lineStyle: {
-                    width: 1,
+                    width: 3,
                     color: 0xff0000,
                     alpha: 1
                 }
@@ -48,9 +48,9 @@ class Demo extends Phaser.Scene {
                 startX = pointer.x;
                 startY = pointer.y;
                 lineGraphics.clear();
-                var chess = board.tileZToChessArray(0);
-                for (var i = 0, cnt = chess.length; i < cnt; i++) {
-                    chess[i].destroy();
+                var chessArray = board.tileZToChessArray(0);
+                for (var i = 0, cnt = chessArray.length; i < cnt; i++) {
+                    chessArray[i].destroy();
                 }
             })
             .on('pointermove', function (pointer) {
@@ -64,12 +64,12 @@ class Demo extends Phaser.Scene {
             .on('pointerup', function (pointer) {
                 endX = pointer.x;
                 endY = pointer.y;
-                lineGraphics.lineBetween(startX, startY, endX, endY);
+                lineGraphics.clear().lineBetween(startX, startY, endX, endY);
                 var tileXYArray = board.lineToTileXYArray(startX, startY, endX, endY);
                 var tileXY;
                 for (var i = 0, cnt = tileXYArray.length; i < cnt; i++) {
                     tileXY = tileXYArray[i];
-                    this.rexBoard.add.shape(board, tileXY.x, tileXY.y, 0, COLOR_LIGHT).setScale(0.75);
+                    this.rexBoard.add.shape(board, tileXY.x, tileXY.y, 0, COLOR_LIGHT).setScale(0.7);
                 }
             }, this);
     }

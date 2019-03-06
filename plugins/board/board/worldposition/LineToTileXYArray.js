@@ -8,7 +8,7 @@ var LineToTileXYArray = function (startX, startY, endX, endY, out) {
     }
 
     var totalDistance = DistanceBetween(startX, startY, endX, endY);
-    var gridSize = Math.min(this.grid.cellWidth, this.grid.cellHeight)/2;
+    var gridSize = Math.min(this.grid.cellWidth, this.grid.cellHeight) / 2;
     var quantity = Math.ceil(totalDistance / gridSize),
         t;
     var worldX, worldY;

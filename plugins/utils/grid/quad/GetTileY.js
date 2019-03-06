@@ -8,7 +8,7 @@ var GetTileY = function (worldX, worldY) {
         case 1: // isometric
             worldX -= this.x;
             worldY -= this.y;
-            tileY = 0.5 * (Math.round(worldY / this._halfHeight) - Math.round(worldX / this._halfWidth));
+            tileY = Math.round((worldY / this.height) - (worldX / this.width));
             break;
         case 2: // staggered
             worldY -= this.y;
