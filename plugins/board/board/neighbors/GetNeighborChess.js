@@ -1,10 +1,9 @@
-var GetNeighborChess = function (chessOrTileXYZ, directions, neighborTileZ, out) {
-    var tileXYZ;
-    if (chessOrTileXYZ.x && chessOrTileXYZ.y && chessOrTileXYZ.z) {
-        tileXYZ = chessOrTileXYZ;
-    } else {
-        tileXYZ = this.chessToTileXYZ(chessOrTileXYZ);
+var GetNeighborChess = function (tileXYZ, directions, neighborTileZ, out) {
+    if (tileXYZ.rexChess) { // tileXYZ is a Chess game object
+        var chess = tileXYZ;
+        tileXYZ = this.chessToTileXYZ(chess);
     }
+
     if (tileXYZ === null) {
         return null;
     }
@@ -12,7 +11,11 @@ var GetNeighborChess = function (chessOrTileXYZ, directions, neighborTileZ, out)
         neighborTileZ = tileXYZ.z;
     }
 
-    if (typeof (directions) === 'number') {
+    var typeOfDirection = typeof (directions);
+    if (
+        (typeOfDirection === 'number') ||
+        ((typeOfDirection === 'string') && (directions.indexOf(',') === -1))
+    ) {
         // 1 direction
         var dir = directions;
         var neighborTileXY = this.getNeighborTileXY(tileXYZ, dir, true);
