@@ -12,6 +12,7 @@ import WorldXYToTileX from './worldposition/WorldXYToTileX.js';
 import WorldXYToTileY from './worldposition/WorldXYToTileY.js';
 import WorldXYToTileXY from './worldposition/WorldXYToTileXY.js';
 import AngleBetween from './worldposition/AngleBetween.js';
+import AngleToward from './worldposition/AngleToward.js';
 import IsOverlappingPoint from './worldposition/IsOverlappingPoint.js';
 import GridAlign from './worldposition/GridAlign.js';
 import LineToTileXYArray from './worldposition/LineToTileXYArray.js';
@@ -160,6 +161,7 @@ var methods = {
     worldXYToTileY: WorldXYToTileY,
     worldXYToTileXY: WorldXYToTileXY,
     angleBetween: AngleBetween,
+    angleToward: AngleToward,
     isOverlappingPoint: IsOverlappingPoint,
     gridAlign: GridAlign,
     lineToTileXYArray: LineToTileXYArray,
