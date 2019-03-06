@@ -363,7 +363,7 @@ or
 var isOverlapping = board.isOverlappingPoint(worldX, worldY, tileZ);
 ```
 
-### Neighobrs
+### Neighbors
 
 - Get tile position of neighbor
     ```javascript
