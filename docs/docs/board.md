@@ -365,7 +365,9 @@ var isOverlapping = board.isOverlappingPoint(worldX, worldY, tileZ);
 
 ### Neighobrs
 
-- Get tile position of neighbor
+#### Neighbor tile position
+
+- Get neighbor tile position at 1 direction
     ```javascript
     var neighborTileXY = board.getNeighborTileXY(srcTileXY, direction);
     // var out = board.getNeighborTileXY(srcTileXY, direction, out);
@@ -376,7 +378,7 @@ var isOverlapping = board.isOverlappingPoint(worldX, worldY, tileZ);
         - `0` ~ `7` : [Quad grid](board-quadgrid.md#directions) in 8 directions mode.
         - `0` ~ `5` : [Hexagon grid](board-hexagongrid.md#directions).
     - `neighborTileXY` : Tile position `{x, y}` of neighbor. Retrun `null` if no neighbor there (i.e. source chess is at the edge of board.)
-- Get directions of neighbors
+- Get neighbor tile position at directions
     ```javascript
     var neighborTileXY = board.getNeighborTileXY(srcTileXY, directions);
     // var out = board.getNeighborTileXY(srcTileXY, directions, out);
@@ -385,38 +387,58 @@ var isOverlapping = board.isOverlappingPoint(worldX, worldY, tileZ);
         - Array of numbers, `[0, 2, 4]`.
         - String number concatenated via `,`, `'0,2,4'`.
     - `out` : Tile position array of all neighbors
-- Get all directions of neighbors
+- Get neighbor tile position at all directions
     ```javascript
     var out = board.getNeighborTileXY(srcTileXY, null);
     // var out = board.getNeighborTileXY(srcTileXY, null, out);
     ```
     - `out` : Tile position array of all neighbors
-- Get neighbor chess
-    ```javascript
-    var neighborChess = board.getNeighborChess(chess, direction); // neighborTileZ = tileZ of chess
-    // var neighborChess = board.getNeighborChess(chess, direction, neighborTileZ);
-    ```
-- Get chess of all neighbors
-    ```javascript
-    var out = board.getNeighborChess(chess, null); // neighborTileZ = tileZ of chess
-    // var out = board.getNeighborChess(chess, null, neighborTileZ);
-    ```
-    - `out` : Chess array of all neighbors
-- Are 2 chess neighbors?
-   ```javascript
-   var areNeighbor = board.areNeighbors(chessA, chessB);
-   ```
-   - `areNeighbor` : Return `true` if `chessA` and `chessB` are neighbors.
 - Get direction between 2 tile positions
     ```javascript
     var direction = board.getNeighborTileDirection(srcTile, neighborTileXY);
     ```
     - `direction` : Return `null` if these 2 tile positions are not neighbors.
+
+#### Neighbor chess
+
+- Get neighbor chess at 1 direction
+    ```javascript
+    var neighborChess = board.getNeighborChess(chess, direction); // neighborTileZ = tileZ of chess
+    // var neighborChess = board.getNeighborChess(chess, direction, neighborTileZ);
+    ```
+    - `chess` : A chess object, or tile position `{x,y,z}`.
+    - `direction` : Number, or string number.
+        - `0` ~ `3` : [Quad grid](board-quadgrid.md#directions) in 4 directions mode.
+        - `0` ~ `7` : [Quad grid](board-quadgrid.md#directions) in 8 directions mode.
+        - `0` ~ `5` : [Hexagon grid](board-hexagongrid.md#directions).
+    - `neighborChess` : A chess object.
+- Get neighbor chess at directions
+    ```javascript
+    var out = board.getNeighborChess(chess, directions); // neighborTileZ = tileZ of chess
+    // var out = board.getNeighborChess(chess, directions, neighborTileZ);
+    ```
+    - `chess` : A chess object, or tile position `{x,y,z}`.
+    - `directions`
+        - Array of numbers, `[0, 2, 4]`.
+        - String number concatenated via `,`, `'0,2,4'`.
+    - `out` : Chess array of neighbors.
+- Get neighbor chess at all directions
+    ```javascript
+    var out = board.getNeighborChess(chess, null); // neighborTileZ = tileZ of chess
+    // var out = board.getNeighborChess(chess, null, neighborTileZ);
+    ```
+    - `chess` : A chess object, or tile position `{x,y,z}`.
+    - `out` : Chess array of all neighbors.
 - Get direction between 2 chess
     ```javascript
     var direction = board.getNeighborChessDirection(chess, neighborChess);
     ```
     - `direction` : Return `null` if these 2 chess are not neighbors.
+- Are 2 chess neighbors?
+   ```javascript
+   var areNeighbor = board.areNeighbors(chessA, chessB);
+   ```
+   - `areNeighbor` : Return `true` if `chessA` and `chessB` are neighbors.
 
 ### Empty tile position
 
