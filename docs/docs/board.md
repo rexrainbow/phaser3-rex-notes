@@ -371,12 +371,21 @@ var isOverlapping = board.isOverlappingPoint(worldX, worldY, tileZ);
     // var out = board.getNeighborTileXY(srcTileXY, direction, out);
     ```
     - `srcTileXY` : Tile position `{x, y}` of source.
-    - `direction` :
+    - `direction` : Number, or string number.
         - `0` ~ `3` : [Quad grid](board-quadgrid.md#directions) in 4 directions mode.
         - `0` ~ `7` : [Quad grid](board-quadgrid.md#directions) in 8 directions mode.
         - `0` ~ `5` : [Hexagon grid](board-hexagongrid.md#directions).
     - `neighborTileXY` : Tile position `{x, y}` of neighbor. Retrun `null` if no neighbor there (i.e. source chess is at the edge of board.)
-- Get all directions of neighbor chess
+- Get directions of neighbors
+    ```javascript
+    var neighborTileXY = board.getNeighborTileXY(srcTileXY, directions);
+    // var out = board.getNeighborTileXY(srcTileXY, directions, out);
+    ```
+    - `directions`
+        - Array of numbers, `[0, 2, 4]`.
+        - String number concatenated via `,`, `'0,2,4'`.
+    - `out` : Tile position array of all neighbors
+- Get all directions of neighbors
     ```javascript
     var out = board.getNeighborTileXY(srcTileXY, null);
     // var out = board.getNeighborTileXY(srcTileXY, null, out);

@@ -1,4 +1,12 @@
 var GetNeighborTileXY = function (srcTileXY, directions, out) {
+    if (typeof (directions) === 'string') {
+        if (directions.indexOf(',') === -1) {
+            directions = parseInt(directions);
+        } else {
+            directions = directions.split(',');
+        }
+    }
+
     if (typeof (directions) === 'number') {
         var dir = directions;
         if (out === undefined) {
