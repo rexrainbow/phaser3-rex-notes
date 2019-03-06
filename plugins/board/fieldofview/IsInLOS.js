@@ -14,7 +14,7 @@ var IsInLOS = function (targetTileXY, visiblePoints) {
     var myTileXYZ = this.chessData.tileXYZ;
     var targetAngle = board.angleBetween(myTileXYZ, targetTileXY);
     var deltaAngle = Math.abs(targetAngle - this.faceAngle);
-    if (!Equal(deltaAngle, this.halfConeRad) && (deltaAngle > this.faceAngle)) {
+    if (!Equal(deltaAngle, this.halfConeRad) && (deltaAngle > this.halfConeRad)) {
         return false;
     }
     board.lineToTileXYArray(
