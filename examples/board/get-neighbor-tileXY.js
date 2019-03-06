@@ -36,10 +36,10 @@ class Demo extends Phaser.Scene {
         board
             .setInteractive()
             .on('tiledown', function (pointer, tileXY) {
-                var chessArray = board.tileZToChessArray(0);
-                for (var i = 0, cnt = chessArray.length; i < cnt; i++) {
-                    chessArray[i].destroy();
-                }
+                Phaser.Actions.Call(board.tileZToChessArray(0), function (gameObject) {
+                    gameObject.destroy();
+                });
+
                 if (!board.contains(tileXY.x, tileXY.y)) {
                     return;
                 }

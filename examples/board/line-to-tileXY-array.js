@@ -48,10 +48,9 @@ class Demo extends Phaser.Scene {
                 startX = pointer.x;
                 startY = pointer.y;
                 lineGraphics.clear();
-                var chessArray = board.tileZToChessArray(0);
-                for (var i = 0, cnt = chessArray.length; i < cnt; i++) {
-                    chessArray[i].destroy();
-                }
+                Phaser.Actions.Call(board.tileZToChessArray(0), function (gameObject) {
+                    gameObject.destroy();
+                });
             })
             .on('pointermove', function (pointer) {
                 if (!pointer.isDown) {
