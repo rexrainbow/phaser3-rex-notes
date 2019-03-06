@@ -3530,6 +3530,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#line-tile-position" title="Line -&gt; tile position" class="md-nav__link">
+    Line -&gt; tile position
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#angle-between-world-position-of-2-tiles" title="Angle between world position of 2 tiles" class="md-nav__link">
     Angle between world position of 2 tiles
   </a>
@@ -3558,9 +3565,29 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#neighobrs" title="Neighobrs" class="md-nav__link">
-    Neighobrs
+  <a href="#neighbors" title="Neighbors" class="md-nav__link">
+    Neighbors
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#neighbor-tile-position" title="Neighbor tile position" class="md-nav__link">
+    Neighbor tile position
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#neighbor-chess" title="Neighbor chess" class="md-nav__link">
+    Neighbor chess
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -4154,6 +4181,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#line-tile-position" title="Line -&gt; tile position" class="md-nav__link">
+    Line -&gt; tile position
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#angle-between-world-position-of-2-tiles" title="Angle between world position of 2 tiles" class="md-nav__link">
     Angle between world position of 2 tiles
   </a>
@@ -4182,9 +4216,29 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#neighobrs" title="Neighobrs" class="md-nav__link">
-    Neighobrs
+  <a href="#neighbors" title="Neighbors" class="md-nav__link">
+    Neighbors
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#neighbor-tile-position" title="Neighbor tile position" class="md-nav__link">
+    Neighbor tile position
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#neighbor-chess" title="Neighbor chess" class="md-nav__link">
+    Neighbor chess
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -4579,6 +4633,16 @@ or
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tileXY</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">worldXYToTileXY</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">);</span>  <span class="c1">// tileXY: {x, y}</span>
 <span class="c1">// var out = board.worldXYToTileXY(worldX, worldY, out);</span>
 </pre></div></p>
+<h3 id="line-tile-position">Line -&gt; tile position<a class="headerlink" href="#line-tile-position" title="Permanent link">&para;</a></h3>
+<p>Get array of tile position along a line defined via (<code>startWorldX</code>, <code>startWorldY</code>) to (<code>endWorldX</code>, <code>endWorldY</code>)</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">lineToTileXYArray</span><span class="p">(</span><span class="nx">startWorldX</span><span class="p">,</span> <span class="nx">startWorldY</span><span class="p">,</span> <span class="nx">endWorldX</span><span class="p">,</span> <span class="nx">endWorldY</span><span class="p">);</span>
+<span class="c1">// var out = board.lineToTileXYArray(startWorldX, startWorldY, endWorldX, endWorldY, out);</span>
+</pre></div>
+
+<ul>
+<li><code>startWorldX</code>, <code>startWorldY</code>, <code>endWorldX</code>, <code>endWorldY</code> : Line</li>
+<li><code>out</code> : An array of tile position</li>
+</ul>
 <h3 id="angle-between-world-position-of-2-tiles">Angle between world position of 2 tiles<a class="headerlink" href="#angle-between-world-position-of-2-tiles" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">radian</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">angleBetween</span><span class="p">(</span><span class="nx">tileXY0</span><span class="p">,</span> <span class="nx">tileXY1</span><span class="p">);</span>
 </pre></div>
@@ -4608,14 +4672,15 @@ or
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isOverlapping</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">isOverlappingPoint</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">,</span> <span class="nx">tileZ</span><span class="p">);</span>
 </pre></div>
 
-<h3 id="neighobrs">Neighobrs<a class="headerlink" href="#neighobrs" title="Permanent link">&para;</a></h3>
+<h3 id="neighbors">Neighbors<a class="headerlink" href="#neighbors" title="Permanent link">&para;</a></h3>
+<h4 id="neighbor-tile-position">Neighbor tile position<a class="headerlink" href="#neighbor-tile-position" title="Permanent link">&para;</a></h4>
 <ul>
-<li>Get tile position of neighbor
+<li>Get neighbor tile position at 1 direction
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">neighborTileXY</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getNeighborTileXY</span><span class="p">(</span><span class="nx">srcTileXY</span><span class="p">,</span> <span class="nx">direction</span><span class="p">);</span>
 <span class="c1">// var out = board.getNeighborTileXY(srcTileXY, direction, out);</span>
 </pre></div><ul>
 <li><code>srcTileXY</code> : Tile position <code>{x, y}</code> of source.</li>
-<li><code>direction</code> :<ul>
+<li><code>direction</code> : Number, or string number.<ul>
 <li><code>0</code> ~ <code>3</code> : <a href="../board-quadgrid/#directions">Quad grid</a> in 4 directions mode.</li>
 <li><code>0</code> ~ <code>7</code> : <a href="../board-quadgrid/#directions">Quad grid</a> in 8 directions mode.</li>
 <li><code>0</code> ~ <code>5</code> : <a href="../board-hexagongrid/#directions">Hexagon grid</a>.</li>
@@ -4624,32 +4689,67 @@ or
 <li><code>neighborTileXY</code> : Tile position <code>{x, y}</code> of neighbor. Retrun <code>null</code> if no neighbor there (i.e. source chess is at the edge of board.)</li>
 </ul>
 </li>
-<li>Get all directions of neighbor chess
+<li>Get neighbor tile position at directions
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">neighborTileXY</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getNeighborTileXY</span><span class="p">(</span><span class="nx">srcTileXY</span><span class="p">,</span> <span class="nx">directions</span><span class="p">);</span>
+<span class="c1">// var out = board.getNeighborTileXY(srcTileXY, directions, out);</span>
+</pre></div><ul>
+<li><code>directions</code><ul>
+<li>Array of numbers, <code>[0, 2, 4]</code>.</li>
+<li>String number concatenated via <code>,</code>, <code>'0,2,4'</code>.</li>
+</ul>
+</li>
+<li><code>out</code> : Tile position array of all neighbors</li>
+</ul>
+</li>
+<li>Get neighbor tile position at all directions
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getNeighborTileXY</span><span class="p">(</span><span class="nx">srcTileXY</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
 <span class="c1">// var out = board.getNeighborTileXY(srcTileXY, null, out);</span>
 </pre></div><ul>
 <li><code>out</code> : Tile position array of all neighbors</li>
 </ul>
 </li>
-<li>Get neighbor chess
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">neighborChess</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getNeighborChess</span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="nx">direction</span><span class="p">);</span> <span class="c1">// neighborTileZ = tileZ of chess</span>
-<span class="c1">// var neighborChess = board.getNeighborChess(chess, direction, neighborTileZ);</span>
-</pre></div></li>
-<li>Get chess of all neighbors
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getNeighborChess</span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span> <span class="c1">// neighborTileZ = tileZ of chess</span>
-<span class="c1">// var out = board.getNeighborChess(chess, null, neighborTileZ);</span>
-</pre></div><ul>
-<li><code>out</code> : Chess array of all neighbors</li>
-</ul>
-</li>
-<li>Are 2 chess neighbors?
-   <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">areNeighbor</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">areNeighbors</span><span class="p">(</span><span class="nx">chessA</span><span class="p">,</span> <span class="nx">chessB</span><span class="p">);</span>
-</pre></div></li>
-<li><code>areNeighbor</code> : Return <code>true</code> if <code>chessA</code> and <code>chessB</code> are neighbors.</li>
 <li>Get direction between 2 tile positions
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">direction</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getNeighborTileDirection</span><span class="p">(</span><span class="nx">srcTile</span><span class="p">,</span> <span class="nx">neighborTileXY</span><span class="p">);</span>
 </pre></div><ul>
 <li><code>direction</code> : Return <code>null</code> if these 2 tile positions are not neighbors.</li>
+</ul>
+</li>
+</ul>
+<h4 id="neighbor-chess">Neighbor chess<a class="headerlink" href="#neighbor-chess" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Get neighbor chess at 1 direction
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">neighborChess</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getNeighborChess</span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="nx">direction</span><span class="p">);</span> <span class="c1">// neighborTileZ = tileZ of chess</span>
+<span class="c1">// var neighborChess = board.getNeighborChess(chess, direction, neighborTileZ);</span>
+</pre></div><ul>
+<li><code>chess</code> : A chess object, or tile position <code>{x,y,z}</code>.</li>
+<li><code>direction</code> : Number, or string number.<ul>
+<li><code>0</code> ~ <code>3</code> : <a href="../board-quadgrid/#directions">Quad grid</a> in 4 directions mode.</li>
+<li><code>0</code> ~ <code>7</code> : <a href="../board-quadgrid/#directions">Quad grid</a> in 8 directions mode.</li>
+<li><code>0</code> ~ <code>5</code> : <a href="../board-hexagongrid/#directions">Hexagon grid</a>.</li>
+</ul>
+</li>
+<li><code>neighborChess</code> : A chess object.</li>
+</ul>
+</li>
+<li>Get neighbor chess at directions
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getNeighborChess</span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="nx">directions</span><span class="p">);</span> <span class="c1">// neighborTileZ = tileZ of chess</span>
+<span class="c1">// var out = board.getNeighborChess(chess, directions, neighborTileZ);</span>
+</pre></div><ul>
+<li><code>chess</code> : A chess object, or tile position <code>{x,y,z}</code>.</li>
+<li><code>directions</code><ul>
+<li>Array of numbers, <code>[0, 2, 4]</code>.</li>
+<li>String number concatenated via <code>,</code>, <code>'0,2,4'</code>.</li>
+</ul>
+</li>
+<li><code>out</code> : Chess array of neighbors.</li>
+</ul>
+</li>
+<li>Get neighbor chess at all directions
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getNeighborChess</span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span> <span class="c1">// neighborTileZ = tileZ of chess</span>
+<span class="c1">// var out = board.getNeighborChess(chess, null, neighborTileZ);</span>
+</pre></div><ul>
+<li><code>chess</code> : A chess object, or tile position <code>{x,y,z}</code>.</li>
+<li><code>out</code> : Chess array of all neighbors.</li>
 </ul>
 </li>
 <li>Get direction between 2 chess
@@ -4658,6 +4758,10 @@ or
 <li><code>direction</code> : Return <code>null</code> if these 2 chess are not neighbors.</li>
 </ul>
 </li>
+<li>Are 2 chess neighbors?
+   <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">areNeighbor</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">areNeighbors</span><span class="p">(</span><span class="nx">chessA</span><span class="p">,</span> <span class="nx">chessB</span><span class="p">);</span>
+</pre></div></li>
+<li><code>areNeighbor</code> : Return <code>true</code> if <code>chessA</code> and <code>chessB</code> are neighbors.</li>
 </ul>
 <h3 id="empty-tile-position">Empty tile position<a class="headerlink" href="#empty-tile-position" title="Permanent link">&para;</a></h3>
 <ul>

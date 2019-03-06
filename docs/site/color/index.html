@@ -2975,6 +2975,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#color-integer-to-rgb" title="Color integer to RGB" class="md-nav__link">
+    Color integer to RGB
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#hsv-color-wheel" title="HSV color wheel" class="md-nav__link">
     HSV color wheel
   </a>
@@ -3876,6 +3883,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#color-integer-to-rgb" title="Color integer to RGB" class="md-nav__link">
+    Color integer to RGB
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#hsv-color-wheel" title="HSV color wheel" class="md-nav__link">
     HSV color wheel
   </a>
@@ -3992,6 +4006,14 @@
 </ul>
 </li>
 </ul>
+<h3 id="color-integer-to-rgb">Color integer to RGB<a class="headerlink" href="#color-integer-to-rgb" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rgb</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Display</span><span class="p">.</span><span class="nx">Color</span><span class="p">.</span><span class="nx">IntegerToRGB</span><span class="p">(</span><span class="nx">color</span><span class="p">);</span>
+</pre></div>
+
+<ul>
+<li>color : Color integer (<code>0xAARRGGBB</code>)</li>
+<li>rgb : JSON object (<code>{r, g, b, a}</code>)</li>
+</ul>
 <h3 id="hsv-color-wheel">HSV color wheel<a class="headerlink" href="#hsv-color-wheel" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Create color array
@@ -4003,10 +4025,21 @@
 </ol>
 <h3 id="color-object">Color object<a class="headerlink" href="#color-object" title="Permanent link">&para;</a></h3>
 <h4 id="create-color-object">create color object<a class="headerlink" href="#create-color-object" title="Permanent link">&para;</a></h4>
-<p><div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Display</span><span class="p">.</span><span class="nx">Color</span><span class="p">(</span><span class="nx">red</span><span class="p">,</span> <span class="nx">green</span><span class="p">,</span> <span class="nx">blue</span><span class="p">);</span> <span class="c1">// alpha = 255</span>
+<ul>
+<li>Create via r,g,b,a components
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Display</span><span class="p">.</span><span class="nx">Color</span><span class="p">(</span><span class="nx">red</span><span class="p">,</span> <span class="nx">green</span><span class="p">,</span> <span class="nx">blue</span><span class="p">);</span> <span class="c1">// alpha = 255</span>
 <span class="c1">// var color = new Phaser.Display.Color(red, green, blue, alpha);</span>
-</pre></div>
-- <code>red</code>, <code>green</code>, <code>blue</code>, <code>alpha</code>: 0 ~ 255</p>
+</pre></div><ul>
+<li><code>red</code>, <code>green</code>, <code>blue</code>, <code>alpha</code>: 0 ~ 255</li>
+</ul>
+</li>
+<li>Create via color integer
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Display</span><span class="p">.</span><span class="nx">Color</span><span class="p">.</span><span class="nx">IntegerToColor</span><span class="p">(</span><span class="nx">colorInteger</span><span class="p">);</span>
+</pre></div><ul>
+<li>colorInteger : Color integer (<code>0xAARRGGBB</code>)</li>
+</ul>
+</li>
+</ul>
 <h4 id="set-color">Set color<a class="headerlink" href="#set-color" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Set color
@@ -4024,9 +4057,9 @@
 </ul>
 </li>
 <li>Set color from color object
-    <div class="codehilite"><pre><span></span><span class="nx">color</span><span class="p">.</span><span class="nx">setFromRGB</span><span class="p">(</span><span class="nx">color</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><span class="nx">color</span><span class="p">.</span><span class="nx">setFromRGB</span><span class="p">(</span><span class="nx">rgba</span><span class="p">);</span>
 </pre></div><ul>
-<li>color :
+<li>rgba :
     <div class="codehilite"><pre><span></span><span class="p">{</span>
     <span class="nx">r</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">g</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
@@ -4070,8 +4103,7 @@
 <span class="c1">// color.blue += value;</span>
 <span class="nx">color</span><span class="p">.</span><span class="nx">alpha</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
 <span class="c1">// color.alpha += value;</span>
-</pre></div>
-    -</li>
+</pre></div></li>
 <li>Set H/S/V channel : 0 ~ 1
     <div class="codehilite"><pre><span></span><span class="nx">color</span><span class="p">.</span><span class="nx">h</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
 <span class="c1">// color.h += value;</span>
