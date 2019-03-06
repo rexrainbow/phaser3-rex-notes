@@ -1,4 +1,6 @@
 import CONST from './const.js';
+import Equal from '../../utils/math/fuzzy/Equal.js';
+import GreaterThan from '../../utils/math/fuzzy/GreaterThan.js';
 
 const BLOCKER = CONST.BLOCKER;
 const INFINITY = CONST.INFINITY;
@@ -12,7 +14,7 @@ var IsInLOS = function (targetTileXY, visiblePoints) {
     var myTileXYZ = this.chessData.tileXYZ;
     var targetAngle = board.angleBetween(myTileXYZ, targetTileXY);
     var deltaAngle = Math.abs(targetAngle - this.faceAngle);
-    if (deltaAngle > this.halfCone) {
+    if (!Equal(deltaAngle, this.halfConeRad) && (deltaAngle > this.faceAngle)) {
         return false;
     }
     board.lineToTileXYArray(

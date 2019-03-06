@@ -1,10 +1,10 @@
 var GetNeighborChess = function (tileXYZ, directions, neighborTileZ, out) {
-    if (tileXYZ === null) {
-        return null;
-    }
-    if (tileXYZ.rexChess) { // tileXYZ is a Chess game object
+    if (tileXYZ && tileXYZ.rexChess) { // tileXYZ is a Chess game object
         var chess = tileXYZ;
         tileXYZ = this.chessToTileXYZ(chess);
+    }
+    if (tileXYZ === null) {
+        return null;
     }
 
     if (neighborTileZ == null) {

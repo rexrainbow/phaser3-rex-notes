@@ -1,6 +1,7 @@
 import GetChessData from '../chess/GetChessData.js';
 import FindFOV from './FindFOV.js';
 import IsInLOS from './IsInLOS.js';
+import LOS from './LOS.js';
 import GetCost from './GetCost.js';
 import CONST from './const.js';
 import DegToRad from '../../utils/math/DegToRad.js';
@@ -24,6 +25,9 @@ class FieldOfView {
         }
         this.setFaceDirection(GetValue(o, 'face', 0));
         this.setCone(GetValue(o, 'cone', 360));
+        this.setOccupiedTest(GetValue(o, 'occupiedTest', false));
+        this.setBlockerTest(GetValue(o, 'blockerTest', false));
+        this.setEdgeBlockerTest(GetValue(o, 'edgeBlockerTest', false));
         this.setCostFunction(costCallback, costCallbackScope);
         return this;
     }
@@ -45,14 +49,55 @@ class FieldOfView {
         return this;
     }
 
+    get face() {
+        return this._face;
+    }
+
+    set face(direction) {
+        this._face = direction;
+        this.faceAngle = this.board.angleToward(this.chessData.tileXYZ, direction);
+    }
+
     setFaceDirection(direction) {
         this.face = direction;
-        this.faceAngle = this.board.angleToward(this.chessData.tileXYZ, this.face);
         return this;
     }
 
+    get cone() {
+        return this._cone;
+    }
+
+    set cone(degrees) {
+        this._cone = degrees;
+        this.halfConeRad = DegToRad(degrees / 2);
+    }
+
     setCone(degrees) {
-        this.halfCone = DegToRad(degrees/2);
+        this.cone = degrees;
+        return this;
+    }
+
+    setOccupiedTest(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+        this.occupiedTest = enable;
+        return this;
+    }
+
+    setBlockerTest(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+        this.blockerTest = enable;
+        return this;
+    }
+
+    setEdgeBlockerTest(enable) {
+        if (enable === undefined) {
+            enable = true;
+        }
+        this.edgeBlockerTest = enable;
         return this;
     }
 
@@ -78,6 +123,7 @@ class FieldOfView {
 var methods = {
     findFOV: FindFOV,
     isInLOS: IsInLOS,
+    LOS: LOS,
     getCost: GetCost,
 };
 Object.assign(
