@@ -1730,6 +1730,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../anchor/" title="Anchor" class="md-nav__link">
+      Anchor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../interception/" title="Interception" class="md-nav__link">
       Interception
     </a>
@@ -1743,13 +1755,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-9-11" type="checkbox" id="nav-4-9-11">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-9-12" type="checkbox" id="nav-4-9-12">
     
-    <label class="md-nav__link" for="nav-4-9-11">
+    <label class="md-nav__link" for="nav-4-9-12">
       Arcade
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-4-9-11">
+      <label class="md-nav__title" for="nav-4-9-12">
         Arcade
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -4104,7 +4116,11 @@
 <ul>
 <li><code>column</code> : Amount of column grids.</li>
 <li><code>row</code> : Amount of row grids.</li>
-<li><code>x</code>, <code>y</code> : Position of gridSizer. Only available for top-gridSizer, children-sizers will be changed by parent.</li>
+<li><code>x</code>, <code>y</code> : Position of this dialog object, it is valid when this dialog is the top object.<ul>
+<li>Number : World position in pixels.</li>
+<li>String (<code>'p%+n'</code>) : Position based on visible window. See <a href="../anchor/#create-instance">anchor</a>.</li>
+</ul>
+</li>
 <li><code>width</code> : Minimum width. i.e. Width of this gridSizer will larger then this value.</li>
 <li><code>height</code> : Minimum height. i.e. Hieght of this gridSizer will larger then this value.</li>
 </ul>

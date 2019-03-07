@@ -1702,6 +1702,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../anchor/" title="Anchor" class="md-nav__link">
+      Anchor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../interception/" title="Interception" class="md-nav__link">
       Interception
     </a>
@@ -1715,13 +1727,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-9-11" type="checkbox" id="nav-4-9-11">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-9-12" type="checkbox" id="nav-4-9-12">
     
-    <label class="md-nav__link" for="nav-4-9-11">
+    <label class="md-nav__link" for="nav-4-9-12">
       Arcade
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-4-9-11">
+      <label class="md-nav__title" for="nav-4-9-12">
         Arcade
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -4016,9 +4028,10 @@
 
 <h3 id="add-grid-table-object">Add grid table object<a class="headerlink" href="#add-grid-table-object" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gridTable</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">gridTable</span><span class="p">({</span>
-    <span class="c1">// Position</span>
     <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
 
     <span class="c1">// Elements</span>
     <span class="nx">background</span><span class="o">:</span> <span class="nx">backgroundGameObject</span><span class="p">,</span>
@@ -4068,7 +4081,12 @@
 </pre></div>
 
 <ul>
-<li><code>x</code>, <code>y</code> : Position of this grid table object, it is valid when this gridTable is the top object.</li>
+<li><code>x</code>, <code>y</code> : Position of this dialog object, it is valid when this dialog is the top object.<ul>
+<li>Number : World position in pixels.</li>
+<li>String (<code>'p%+n'</code>) : Position based on visible window. See <a href="../anchor/#create-instance">anchor</a>.</li>
+</ul>
+</li>
+<li><code>width</code>, <code>height</code> : Minimum width, minimum height.</li>
 <li><code>background</code> : Game object of background, optional. This background game object will be resized to fit the size of grid table.</li>
 <li><code>table</code> : Configuration of grid table.<ul>
 <li><code>table.width</code> : Width of table, in pixels.</li>

@@ -1695,6 +1695,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../anchor/" title="Anchor" class="md-nav__link">
+      Anchor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../interception/" title="Interception" class="md-nav__link">
       Interception
     </a>
@@ -1708,13 +1720,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-9-11" type="checkbox" id="nav-4-9-11">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-9-12" type="checkbox" id="nav-4-9-12">
     
-    <label class="md-nav__link" for="nav-4-9-11">
+    <label class="md-nav__link" for="nav-4-9-12">
       Arcade
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-4-9-11">
+      <label class="md-nav__title" for="nav-4-9-12">
         Arcade
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -4023,13 +4035,19 @@
 
     <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">width</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">height</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
 <span class="p">});</span>
 </pre></div>
 
 <ul>
+<li><code>x</code>, <code>y</code> : Position of this dialog object, it is valid when this dialog is the top object.<ul>
+<li>Number : World position in pixels.</li>
+<li>String (<code>'p%+n'</code>) : Position based on visible window. See <a href="../anchor/#create-instance">anchor</a>.</li>
+</ul>
+</li>
+<li><code>width</code>, <code>height</code> : Minimum width, minimum height.</li>
 <li><code>orientation</code> :<ul>
 <li><code>'left-to-right'</code>, <code>'horizontal'</code>,<code>'h'</code>, <code>'x'</code>, or <code>0</code> : Put icon at left side, and text at right side.</li>
 <li><code>'top-to-bottom'</code>, <code>'vertical'</code>,<code>'v'</code>, <code>'y'</code>, or <code>1</code> : Put icon at top side, and text at bottom side.</li>
@@ -4062,8 +4080,6 @@
 </ul>
 </li>
 <li><code>name</code> : Set name of this textBox.</li>
-<li><code>x</code>, <code>y</code> : Position of this textbox object, it is valid when this textbox is the top object.</li>
-<li><code>width</code>, <code>height</code> : Minimum width, minimum height.</li>
 </ul>
 <h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
 <ul>

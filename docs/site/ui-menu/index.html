@@ -1681,6 +1681,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../anchor/" title="Anchor" class="md-nav__link">
+      Anchor
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../interception/" title="Interception" class="md-nav__link">
       Interception
     </a>
@@ -1694,13 +1706,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-9-11" type="checkbox" id="nav-4-9-11">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-9-12" type="checkbox" id="nav-4-9-12">
     
-    <label class="md-nav__link" for="nav-4-9-11">
+    <label class="md-nav__link" for="nav-4-9-12">
       Arcade
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-4-9-11">
+      <label class="md-nav__title" for="nav-4-9-12">
         Arcade
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -4003,7 +4015,11 @@
 </pre></div>
 
 <ul>
-<li><code>x</code>, <code>y</code> : Position of this menu object, it is valid when this menu is the top object.</li>
+<li><code>x</code>, <code>y</code> : Position of this dialog object, it is valid when this dialog is the top object.<ul>
+<li>Number : World position in pixels.</li>
+<li>String (<code>'p%+n'</code>) : Position based on visible window. See <a href="../anchor/#create-instance">anchor</a>.</li>
+</ul>
+</li>
 <li><code>orientation</code> : Main orientation of the menu, default is <code>1</code> (top to bottom)<ul>
 <li><code>'left-to-right'</code>, <code>'horizontal'</code>,<code>'h'</code>, <code>'x'</code>, or <code>0</code> : Arrange buttons from left ot right.</li>
 <li><code>'top-to-bottom'</code>, <code>'vertical'</code>,<code>'v'</code>, <code>'y'</code>, or <code>1</code> : Arrange buttons from top to bottom.</li>
