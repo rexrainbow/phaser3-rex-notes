@@ -63,12 +63,16 @@ var textBox = scene.rexUI.add.textBox({
 
     x: 0,
     y: 0,
-    width: 0,
-    height: 0,
+    width: undefined,
+    height: undefined,
     name: '',
 });
 ```
 
+- `x`, `y` : Position of this dialog object, it is valid when this dialog is the top object.
+    - Number : World position in pixels.
+    - String (`'p%+n'`) : Position based on visible window. See [anchor](anchor.md#create-instance).
+- `width`, `height` : Minimum width, minimum height.
 - `orientation` :
     - `'left-to-right'`, `'horizontal'`,`'h'`, `'x'`, or `0` : Put icon at left side, and text at right side.
     - `'top-to-bottom'`, `'vertical'`,`'v'`, `'y'`, or `1` : Put icon at top side, and text at bottom side.
@@ -91,8 +95,6 @@ var textBox = scene.rexUI.add.textBox({
     - `space.icon` : Space between icon game object and text game object.
     - `space.text` : Space between text game object and action icon game object.
 - `name` : Set name of this textBox.
-- `x`, `y` : Position of this textbox object, it is valid when this textbox is the top object.
-- `width`, `height` : Minimum width, minimum height.
 
 ### Custom class
 

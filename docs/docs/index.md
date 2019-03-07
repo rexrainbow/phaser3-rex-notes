@@ -4,6 +4,7 @@
 
 ## List of my plugins
 
+1. [Anchor](anchor.md): Set position based on visible window.
 1. [AwaitLoader](awaitloader.md): Await custom task in preload stage.
 1. [BBCodeText](bbcodetext.md): Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
 1. [Board](board.md): Core object of Board system.

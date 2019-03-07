@@ -70,7 +70,9 @@ var menu = scene.rexUI.add.menu({
 });
 ```
 
-- `x`, `y` : Position of this menu object, it is valid when this menu is the top object.
+- `x`, `y` : Position of this dialog object, it is valid when this dialog is the top object.
+    - Number : World position in pixels.
+    - String (`'p%+n'`) : Position based on visible window. See [anchor](anchor.md#create-instance).
 - `orientation` : Main orientation of the menu, default is `1` (top to bottom)
     - `'left-to-right'`, `'horizontal'`,`'h'`, `'x'`, or `0` : Arrange buttons from left ot right.
     - `'top-to-bottom'`, `'vertical'`,`'v'`, `'y'`, or `1` : Arrange buttons from top to bottom.

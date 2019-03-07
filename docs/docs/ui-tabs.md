@@ -42,9 +42,10 @@ var game = new Phaser.Game(config);
 
 ```javascript
 var tabs = scene.rexUI.add.tabs({
-    // Position
     x: 0,
     y: 0,
+    width: undefined,
+    height: undefined,
 
     // Elements
     background: backgroundGameObject,
@@ -92,7 +93,10 @@ var tabs = scene.rexUI.add.tabs({
 });
 ```
 
-- `x`, `y` : Position of this grid table object, it is valid when this tabs is the top object.
+- `x`, `y` : Position of this dialog object, it is valid when this dialog is the top object.
+    - Number : World position in pixels.
+    - String (`'p%+n'`) : Position based on visible window. See [anchor](anchor.md#create-instance).
+- `width`, `height` : Minimum width, minimum height.
 - `background` : Game object of background, optional. This background game object will be resized to fit the size of grid table.
 - `panel` : Game object of center panel.
 - `leftButtons`, `rightButtons`, `topButtons`, `bottomButtons` : Array of button game object.

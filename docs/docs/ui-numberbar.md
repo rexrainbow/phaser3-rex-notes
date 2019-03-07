@@ -70,12 +70,16 @@ var numberBar = scene.rexUI.add.numberBar({
 
     x: 0,
     y: 0,
-    width: 0,
-    height: 0,
+    width: undefined,
+    height: undefined,
     name: '',
 });
 ```
 
+- `x`, `y` : Position of this dialog object, it is valid when this dialog is the top object.
+    - Number : World position in pixels.
+    - String (`'p%+n'`) : Position based on visible window. See [anchor](anchor.md#create-instance).
+- `width`, `height` : Minimum width, minimum height.
 - `background` : Game object of background, optional. This background game object will be resized to fit the size of numberBar.
 - `icon` : Game object of icon, optional.
 - `iconMask` : Set true to add a *circle* mask on icon game object.
@@ -96,8 +100,6 @@ var numberBar = scene.rexUI.add.numberBar({
     - `space.slider` : Space between slider game object and text game object.
 - `valuechangeCallback` : callback function when value changed.
 - `name` : Set name of this numberBar.
-- `x`, `y` : Position of this numberBar object, it is valid when this numberBar is the top object.
-- `width`, `height` : Minimum width, minimum height.
 
 ### Custom class
 

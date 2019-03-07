@@ -66,12 +66,16 @@ var slider = scene.rexUI.add.slider({
 
     x: 0,
     y: 0,
-    width: 0,
-    height: 0,
+    width: undefined,
+    height: undefined,
     name: '',
 });
 ```
 
+- `x`, `y` : Position of this dialog object, it is valid when this dialog is the top object.
+    - Number : World position in pixels.
+    - String (`'p%+n'`) : Position based on visible window. See [anchor](anchor.md#create-instance).
+- `width`, `height` : Minimum width, minimum height.
 - `orientation` :
     - `'left-to-right'`, `'horizontal'`,`'h'`, `'x'`, or `0` : Horizontal slider.
     - `'top-to-bottom'`, `'vertical'`,`'v'`, `'y'`, or `1` : Vertical slider.
@@ -89,8 +93,6 @@ var slider = scene.rexUI.add.slider({
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
 - `enable` : Set `false` to disable controlling.
 - `name` : Set name of this slider.
-- `x`, `y` : Position of this slider object, it is valid when this slider is the top object.
-- `width`, `height` : Minimum width, minimum height.
 
 ### Custom class
 

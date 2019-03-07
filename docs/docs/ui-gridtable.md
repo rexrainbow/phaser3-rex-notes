@@ -42,9 +42,10 @@ var game = new Phaser.Game(config);
 
 ```javascript
 var gridTable = scene.rexUI.add.gridTable({
-    // Position
     x: 0,
     y: 0,
+    width: 2,
+    height: 2,
 
     // Elements
     background: backgroundGameObject,
@@ -93,7 +94,10 @@ var gridTable = scene.rexUI.add.gridTable({
 });
 ```
 
-- `x`, `y` : Position of this grid table object, it is valid when this gridTable is the top object.
+- `x`, `y` : Position of this dialog object, it is valid when this dialog is the top object.
+    - Number : World position in pixels.
+    - String (`'p%+n'`) : Position based on visible window. See [anchor](anchor.md#create-instance).
+- `width`, `height` : Minimum width, minimum height.
 - `background` : Game object of background, optional. This background game object will be resized to fit the size of grid table.
 - `table` : Configuration of grid table.
     - `table.width` : Width of table, in pixels.

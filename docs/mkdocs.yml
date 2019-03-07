@@ -92,6 +92,7 @@ nav:
         - Pop up: popup.md
         - Scale down destroy: scaledowndestroy.md
         - Path follower: pathfollower.md
+        - Anchor: anchor.md
         - Interception: interception.md
         - Arcade:
             - World: arcade-world.md

@@ -128,6 +128,9 @@ var dialog = scene.rexUI.add.dialog({
 ```
 
 - `x`, `y` : Position of this dialog object, it is valid when this dialog is the top object.
+    - Number : World position in pixels.
+    - String (`'p%+n'`) : Position based on visible window. See [anchor](anchor.md#create-instance).
+- `width`, `height` : Minimum width, minimum height.
 - `background` : Game object of background, optional. This background game object will be resized to fit the size of dialog.
 - `title` : Game object of title, optional.
 - `toolbar` : Array of Game objects for toolbar-buttons group which arranged from left to right, optional.
@@ -170,7 +173,6 @@ var dialog = scene.rexUI.add.dialog({
         - `'pointerup'`, `'release'`, or `1` : Fire 'click' event when touch released after pressed.
     - `click.clickInterval` : Interval between 2 'click' events, in ms.
 - `name` : Set name of this dialog.
-- `width`, `height` : Minimum width, minimum height.
 
 ### Custom class
 

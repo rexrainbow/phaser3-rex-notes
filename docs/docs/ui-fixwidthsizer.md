@@ -107,12 +107,13 @@ var sizer = scene.rexUI.add.fixWidthSizer(x, y, width, height, orientation,
 );
 ```
 
+- `x`, `y` : Position of this dialog object, it is valid when this dialog is the top object.
+    - Number : World position in pixels.
+    - String (`'p%+n'`) : Position based on visible window. See [anchor](anchor.md#create-instance).
+- `width`, `height` : Minimum width, minimum height.
 - `orientation` : Main orientation of the sizer.
     - `'left-to-right'`, `'horizontal'`,`'h'`, `'x'`, or `0` : Arrange game objects from left ot right.
     - `'top-to-bottom'`, `'vertical'`,`'v'`, `'y'`, or `1` : Arrange game objects from top to bottom.
-- `x`, `y` : Position of sizer. Only available for top-sizer, children-sizers will be changed by parent.
-- `width` : Minimum width. i.e. Width of this sizer will larger then this value.
-- `height` : Minimum height. i.e. Hieght of this sizer will larger then this value.
 - `space` : Pads spaces
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
     - `space.item` : Space betwen each child of a line.
