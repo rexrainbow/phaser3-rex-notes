@@ -61,9 +61,9 @@ var joystick = scene.plugins.get('rexVirtualJoyStick').add(scene, {
 ```
 
 - `base` : Base game object.
-    - Create a graphics object if no base game object passed.
+    - Create a circle shape object if no base game object passed.
 - `thumb` : Thumb game object.
-    - Create a graphics object if no thumb game object passed.
+    - Create a circle shape object if no thumb game object passed.
 - `x`, `y` : Position of base game object
 - `radius` : Circle hit-area of base game object
 - `dir` : 
