@@ -36,7 +36,6 @@ var grid = scene.rexBoard.add.quadGrid({
 - `type`
     - `0`, or `orthogonal`
     - `1`, or `isometric`
-    - `2`, or `staggered`
 - `dir` :
     - `4` or `'4dir'` : Up/left/down/right
     - `8` or `'8dir'` : Up/left/down/right/up-left/up-right/down-left/dowm-right
@@ -62,7 +61,6 @@ grid.setType(type);
 - `type`
     - `0`, or `orthogonal`
     - `1`, or `isometric`
-    - `2`, or `staggered`
 
 ### Get world position
 
