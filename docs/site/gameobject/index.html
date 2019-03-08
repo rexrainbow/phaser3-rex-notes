@@ -614,6 +614,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#render-pipeline" title="Render pipeline" class="md-nav__link">
+    Render pipeline
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#size" title="Size" class="md-nav__link">
     Size
   </a>
@@ -4015,6 +4022,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#render-pipeline" title="Render pipeline" class="md-nav__link">
+    Render pipeline
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#size" title="Size" class="md-nav__link">
     Size
   </a>
@@ -4226,15 +4240,11 @@
 <li>Get
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">blendMode</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">blendMode</span><span class="p">;</span>
 </pre></div></li>
-<li>
-<p>Set
+<li>Set
     <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">blendMode</span> <span class="o">=</span> <span class="nx">blendMode</span><span class="p">;</span>
 <span class="nx">gameObject</span><span class="p">.</span><span class="nx">setBlendMode</span><span class="p">(</span><span class="nx">blendMode</span><span class="p">);</span>
-</pre></div></p>
-</li>
-<li>
-<p>Under WebGL only the following Blend Modes are available</p>
-<ul>
+</pre></div></li>
+<li>Under WebGL only the following Blend Modes are available<ul>
 <li><code>'ADD'</code>, or <code>Phaser.BlendModes.ADD</code>, or <code>1</code></li>
 <li><code>'MULTIPLY'</code>, or <code>Phaser.BlendModes.MULTIPLY</code>, or <code>2</code></li>
 <li><code>'SCREEN'</code>, or <code>Phaser.BlendModes.SCREEN</code>, or <code>3</code></li>
@@ -4284,7 +4294,52 @@
 </li>
 </ul>
 </li>
-<li>Canvas has more available depending on browser support</li>
+<li>Canvas has more available depending on browser support.</li>
+</ul>
+<h3 id="render-pipeline">Render pipeline<a class="headerlink" href="#render-pipeline" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Defaule name of render pipeline : 'TextureTintPipeline'</li>
+<li>Set custom render pipeline<ol>
+<li>Create filter
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">game</span><span class="o">:</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">game</span><span class="p">,</span>
+    <span class="nx">renderer</span><span class="o">:</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">renderer</span><span class="p">,</span>
+    <span class="nx">fragShader</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span>  <span class="c1">// GLSL shader</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">customPipeline</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Renderer</span><span class="p">.</span><span class="nx">WebGL</span><span class="p">.</span><span class="nx">Pipelines</span><span class="p">.</span><span class="nx">TextureTintPipeline</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">filter</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">renderer</span><span class="p">.</span><span class="nx">addPipeline</span><span class="p">(</span><span class="nx">pipelineName</span><span class="p">,</span> <span class="nx">customPipeline</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>pipelineName</code> : Name of this render pipeline, a string.</li>
+</ul>
+</li>
+<li>Set filter
+    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setPipeline</span><span class="p">(</span><span class="nx">pipelineName</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>pipelineName</code> : Name of this render pipeline, a string.</li>
+</ul>
+</li>
+<li>Set/change properties of filter
+    <div class="codehilite"><pre><span></span><span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat1</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">);</span>
+<span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat1v</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">);</span>
+<span class="nx">filter</span><span class="p">.</span><span class="nx">setInt1</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">);</span>
+<span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat2</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">);</span>
+<span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat2v</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">);</span>
+<span class="nx">filter</span><span class="p">.</span><span class="nx">setInt2</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">);</span>
+<span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat3</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">);</span>
+<span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat3v</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">);</span>
+<span class="nx">filter</span><span class="p">.</span><span class="nx">setInt3</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">);</span>
+<span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat4</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">,</span> <span class="nx">value3</span><span class="p">);</span>
+<span class="nx">filter</span><span class="p">.</span><span class="nx">setFloat4v</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">,</span> <span class="nx">value3</span><span class="p">);</span>
+<span class="nx">filter</span><span class="p">.</span><span class="nx">setInt4</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">value0</span><span class="p">,</span> <span class="nx">value1</span><span class="p">,</span> <span class="nx">value2</span><span class="p">,</span> <span class="nx">value3</span><span class="p">);</span>
+</pre></div></li>
+</ol>
+</li>
+<li>Reset custom render pipeline to defaule render pipeline
+    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">resetPipeline</span><span class="p">();</span>
+</pre></div></li>
+<li>Get current name of render pipeline:
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">pipelineName</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">getPipelineName</span><span class="p">();</span>
+</pre></div></li>
 </ul>
 <h3 id="size">Size<a class="headerlink" href="#size" title="Permanent link">&para;</a></h3>
 <ul>

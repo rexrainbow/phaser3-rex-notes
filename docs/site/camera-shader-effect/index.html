@@ -3890,14 +3890,17 @@
 <h3 id="setup">Setup<a class="headerlink" href="#setup" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Create filter
-   <div class="codehilite"><pre><span></span> <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
-     <span class="nx">game</span><span class="o">:</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">game</span><span class="p">,</span>
-     <span class="nx">renderer</span><span class="o">:</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">renderer</span><span class="p">,</span>
-     <span class="nx">fragShader</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span>  <span class="c1">// GLSL shader</span>
- <span class="p">};</span>
- <span class="kd">var</span> <span class="nx">customPipeline</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Renderer</span><span class="p">.</span><span class="nx">WebGL</span><span class="p">.</span><span class="nx">Pipelines</span><span class="p">.</span><span class="nx">TextureTintPipeline</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
- <span class="kd">var</span> <span class="nx">filter</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">game</span><span class="p">.</span><span class="nx">renderer</span><span class="p">.</span><span class="nx">addPipeline</span><span class="p">(</span><span class="nx">pipeName</span><span class="p">,</span> <span class="nx">customPipeline</span><span class="p">);</span>
-</pre></div></li>
+   <code>javascript
+    var config = {
+        game: scene.game,
+        renderer: scene.game.renderer,
+        fragShader: '...'  // GLSL shader
+    };
+    var customPipeline = new Phaser.Renderer.WebGL.Pipelines.TextureTintPipeline(config);
+    var filter = scene.game.renderer.addPipeline(pipelineName, customPipeline);</code><ul>
+<li><code>pipelineName</code> : Name of this render pipeline, a string.</li>
+</ul>
+</li>
 <li>Add filter
     <div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">setRenderToTexture</span><span class="p">(</span><span class="nx">filter</span><span class="p">);</span>
 </pre></div></li>
@@ -3956,8 +3959,14 @@
 <h3 id="other-methods">Other methods<a class="headerlink" href="#other-methods" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Change filter
+    <div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">setPipeline</span><span class="p">(</span><span class="nx">pipelineName</span><span class="p">);</span>
+</pre></div>
+    or
     <div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">setPipeline</span><span class="p">(</span><span class="nx">filter</span><span class="p">);</span>
-</pre></div></li>
+</pre></div><ul>
+<li><code>pipelineName</code> : Name of this render pipeline, a string.</li>
+</ul>
+</li>
 <li>Clear filter
     <div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">clearRenderToTexture</span><span class="p">();</span>
 </pre></div></li>
