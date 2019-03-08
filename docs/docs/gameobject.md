@@ -161,7 +161,6 @@ var output = gameObject.getBounds(output);      // output: {x, y, width, height}
     gameObject.blendMode = blendMode;
     gameObject.setBlendMode(blendMode);
     ```
-
 - Under WebGL only the following Blend Modes are available
     - `'ADD'`, or `Phaser.BlendModes.ADD`, or `1`
     - `'MULTIPLY'`, or `Phaser.BlendModes.MULTIPLY`, or `2`
@@ -188,7 +187,51 @@ var output = gameObject.getBounds(output);      // output: {x, y, width, height}
         - Canvas render mode only
     - `'XOR'`, or `Phaser.BlendModes.XOR`, or `27`
         - Canvas render mode only
-- Canvas has more available depending on browser support
+- Canvas has more available depending on browser support.
+
+### Render pipeline
+
+- Defaule name of render pipeline : 'TextureTintPipeline'
+- Set custom render pipeline
+    1. Create filter
+        ```javascript
+        var config = {
+            game: scene.game,
+            renderer: scene.game.renderer,
+            fragShader: '...'  // GLSL shader
+        };
+        var customPipeline = new Phaser.Renderer.WebGL.Pipelines.TextureTintPipeline(config);
+        var filter = scene.game.renderer.addPipeline(pipelineName, customPipeline);
+        ```
+        - `pipelineName` : Name of this render pipeline, a string.
+    1. Set filter
+        ```javascript
+        gameObject.setPipeline(pipelineName);
+        ```
+        - `pipelineName` : Name of this render pipeline, a string.
+    1. Set/change properties of filter
+        ```javascript
+        filter.setFloat1(name, value0);
+        filter.setFloat1v(name, value0);
+        filter.setInt1(name, value0);
+        filter.setFloat2(name, value0, value1);
+        filter.setFloat2v(name, value0, value1);
+        filter.setInt2(name, value0, value1);
+        filter.setFloat3(name, value0, value1, value2);
+        filter.setFloat3v(name, value0, value1, value2);
+        filter.setInt3(name, value0, value1, value2);
+        filter.setFloat4(name, value0, value1, value2, value3);
+        filter.setFloat4v(name, value0, value1, value2, value3);
+        filter.setInt4(name, value0, value1, value2, value3);
+        ```
+- Reset custom render pipeline to defaule render pipeline
+    ```javascript
+    gameObject.resetPipeline();
+    ```
+- Get current name of render pipeline:
+    ```javascript
+    var pipelineName = gameObject.getPipelineName();
+    ```
 
 ### Size
 

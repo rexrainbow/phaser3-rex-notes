@@ -16,8 +16,9 @@ Shader effect of camera.
         fragShader: '...'  // GLSL shader
     };
     var customPipeline = new Phaser.Renderer.WebGL.Pipelines.TextureTintPipeline(config);
-    var filter = scene.game.renderer.addPipeline(pipeName, customPipeline);
-   ```
+    var filter = scene.game.renderer.addPipeline(pipelineName, customPipeline);
+    ```
+    - `pipelineName` : Name of this render pipeline, a string.
 1. Add filter
     ```javascript
     camera.setRenderToTexture(filter);
@@ -80,8 +81,13 @@ Shader effect of camera.
 
 - Change filter
     ```javascript
+    camera.setPipeline(pipelineName);
+    ```
+    or
+    ```javascript
     camera.setPipeline(filter);
     ```
+    - `pipelineName` : Name of this render pipeline, a string.
 - Clear filter
     ```javascript
     camera.clearRenderToTexture();
