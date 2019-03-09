@@ -8,6 +8,8 @@ import GetOppositeDirection from '../../../utils/grid/quad/GetOppositeDirection.
 import Offset from '../../../utils/grid/quad/Offset.js';
 import Rotate from '../../../utils/grid/quad/Rotate.js';
 import GetDistance from '../../../utils/grid/quad/GetDistance.js';
+import DirectionBetween from '../../../utils/grid/quad/DirectionBetween.js';
+import DirectionNormalize from '../utils/DirectionNormalize.js';
 import GetValue from '../../../utils/object/GetValue.js';
 
 import GetGridPoints from './GetGridPoints.js';
@@ -19,23 +21,15 @@ class QuadGrid extends Quad {
 
     resetFromJSON(o) {
         super.resetFromJSON(o);
-        this.setDirectionMode(GetValue(o, 'dir', 4));
+        this.directions = 4; // Faces
     }
 
-    setDirectionMode(mode) {
-        if (typeof (mode) === 'string') {
-            mode = DIRMODE[mode];
-        }
-
-        this.directions = mode;
-        return this;
-    }
-
+    // Direction of neighbors
     get allDirections() {
         return (this.directions === 4) ? ALLDIR4 : ALLDIR8;
     }
 
-    // board-match
+    // Board-match
     get halfDirections() {
         return (this.directions === 4) ? HALFDIR4 : HALFDIR8;
     }
@@ -65,6 +59,8 @@ var methods = {
     offset: Offset,
     rotate: Rotate,
     getDistance: GetDistance,
+    directionBetween: DirectionBetween,
+    directionNormalize: DirectionNormalize,
     getGridPoints: GetGridPoints,
 }
 Object.assign(

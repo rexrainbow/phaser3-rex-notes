@@ -1,9 +1,6 @@
 import {
-    qr2x,
-    qr2y,
-    qr2z,
-    xyz2q,
-    xyz2r
+    qr2xyz,
+    xyz2qr
 } from './CubeTransfer.js';
 
 import Wrap from '../../math/Wrap.js';
@@ -17,47 +14,42 @@ var Rotate = function (src, dir, out) {
 
     dir = Wrap(dir, 0, 5);
     var mode = this.mode;
-    var q = src.x,
-        r = src.y;
-    var cubeX = qr2x(mode, q, r);
-    var cubeY = qr2y(mode, q, r);
-    var cubeZ = qr2z(mode, q, r);
+    var cubeXYZ = qr2xyz(this.mode, src.x, src.y, true);
     var newCubeX, newCubeY, newCubeZ;
     switch (dir) {
         case 1:
-            newCubeX = -cubeZ;
-            newCubeY = -cubeX;
-            newCubeZ = -cubeY;
+            newCubeX = -cubeXYZ.z;
+            newCubeY = -cubeXYZ.x;
+            newCubeZ = -cubeXYZ.y;
             break;
         case 2:
-            newCubeX = cubeY;
-            newCubeY = cubeZ;
-            newCubeZ = cubeX;
+            newCubeX = cubeXYZ.y;
+            newCubeY = cubeXYZ.z;
+            newCubeZ = cubeXYZ.x;
             break;
         case 3:
-            newCubeX = -x;
-            newCubeY = -y;
-            newCubeZ = -z;
+            newCubeX = -cubeXYZ.x;
+            newCubeY = -cubeXYZ.y;
+            newCubeZ = -cubeXYZ.z;
             break;
         case 4:
-            newCubeX = cubeZ;
-            newCubeY = cubeX;
-            newCubeZ = cubeY;
+            newCubeX = cubeXYZ.z;
+            newCubeY = cubeXYZ.x;
+            newCubeZ = cubeXYZ.y;
             break;
         case 5:
-            newCubeX = -cubeY;
-            newCubeY = -cubeZ;
-            newCubeZ = -cubeX;
+            newCubeX = -cubeXYZ.y;
+            newCubeY = -cubeXYZ.z;
+            newCubeZ = -cubeXYZ.x;
             break;
         default:
-            newCubeX = cubeX;
-            newCubeY = cubeY;
-            newCubeZ = cubeZ;
+            newCubeX = cubeXYZ.x;
+            newCubeY = cubeXYZ.y;
+            newCubeZ = cubeXYZ.z;
             break;
     }
 
-    out.x = xyz2q(mode, newCubeX, newCubeY, newCubeZ);
-    out.y = xyz2r(mode, newCubeX, newCubeY, newCubeZ);
+    xyz2qr(this.mode, newCubeX, newCubeY, newCubeZ, out);
     return out;
 }
 

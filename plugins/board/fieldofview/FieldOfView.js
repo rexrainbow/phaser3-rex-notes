@@ -1,10 +1,12 @@
 import GetChessData from '../chess/GetChessData.js';
-import FindFOV from './FindFOV.js';
+import GetCost from './GetCost.js';
+import IsInCone from './IsInCone.js';
 import IsInLOS from './IsInLOS.js';
 import LOS from './LOS.js';
-import GetCost from './GetCost.js';
+import FindFOV from './FindFOV.js';
 import CONST from './const.js';
 import DegToRad from '../../utils/math/DegToRad.js';
+import AngleNormalize from '../../utils/math/angle/Normalize.js';
 import GetValue from '../../utils/object/GetValue.js';
 
 const BLOCKER = CONST.BLOCKER;
@@ -24,7 +26,8 @@ class FieldOfView {
             costCallback = GetValue(o, 'cost', 0);
         }
         this.setFaceDirection(GetValue(o, 'face', 0));
-        this.setCone(GetValue(o, 'cone', 360));
+        this.setConeMode(GetValue(o, 'coneMode', 0));
+        this.setCone(GetValue(o, 'cone', undefined));
         this.setOccupiedTest(GetValue(o, 'occupiedTest', false));
         this.setBlockerTest(GetValue(o, 'blockerTest', false));
         this.setEdgeBlockerTest(GetValue(o, 'edgeBlockerTest', false));
@@ -54,8 +57,14 @@ class FieldOfView {
     }
 
     set face(direction) {
+        direction = this.board.grid.directionNormalize(direction);
         this._face = direction;
-        this.faceAngle = this.board.angleToward(this.chessData.tileXYZ, direction);
+        if (this.coneMode === 0) { // Direction
+            // Do nothing
+        } else { // Angle
+            var angle = this.board.angleToward(this.chessData.tileXYZ, direction); // -PI~PI
+            this.faceAngle = AngleNormalize(angle); // 0~2PI
+        }
     }
 
     setFaceDirection(direction) {
@@ -67,13 +76,28 @@ class FieldOfView {
         return this._cone;
     }
 
-    set cone(degrees) {
-        this._cone = degrees;
-        this.halfConeRad = DegToRad(degrees / 2);
+    set cone(value) {
+        this._cone = value;
+
+        if (value !== undefined) {
+            if (this.coneMode === 0) { // Direction
+                this.halfConeRad = value;
+            } else { // Angle
+                this.halfConeRad = DegToRad(value / 2);
+            }
+        }
     }
 
-    setCone(degrees) {
-        this.cone = degrees;
+    setConeMode(mode) {
+        if (typeof (mode) === 'string') {
+            mode = CONEMODE[mode];
+        }
+        this.coneMode = mode;
+        return this;
+    }
+
+    setCone(value) {
+        this.cone = value;
         return this;
     }
 
@@ -120,11 +144,17 @@ class FieldOfView {
     }
 }
 
+const CONEMODE = {
+    direction: 0,
+    angle: 1,
+};
+
 var methods = {
-    findFOV: FindFOV,
+    getCost: GetCost,
+    isInCone: IsInCone,
     isInLOS: IsInLOS,
     LOS: LOS,
-    getCost: GetCost,
+    findFOV: FindFOV,
 };
 Object.assign(
     FieldOfView.prototype,

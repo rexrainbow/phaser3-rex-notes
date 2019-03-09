@@ -31,10 +31,17 @@ class Demo extends Phaser.Scene {
         var chessA = new ChessA(board, {
             x: 4,
             y: 4,
-            face: 0,
-            cone: 120,
-            occupiedTest: true
+            face: 5,
+
+            coneMode: 'direction',
+            cone: 1,
+
+            // coneMode: 'angle',
+            // cone: 120,
+
+            occupiedTest: true,
         });
+
         // add some blockers
         for (var i = 0; i < 10; i++) {
             new Blocker(board);
@@ -101,6 +108,7 @@ class Blocker extends RexPlugins.Board.Shape {
             tileXY = board.getRandomEmptyTileXY(0);
         }
         // Shape(board, tileX, tileY, tileZ, fillColor, fillAlpha, addToBoard)
+        console.log(tileXY.x + ',' + tileXY.y);
         super(board, tileXY.x, tileXY.y, 0, COLOR_DARK);
         scene.add.existing(this);
     }

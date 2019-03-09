@@ -26,7 +26,6 @@ import CanRotateTo from './transfer/CanRotateTo.js';
 import RotateTo from './transfer/RotateTo.js';
 
 import GetValue from '../../utils/object/GetValue.js';
-import Wrap from '../../utils/math/Wrap.js';
 
 const Container = ContainerLite;
 
@@ -82,7 +81,7 @@ class MiniBoard extends Container {
     }
 
     setFaceDirection(direction) {
-        this.face = Wrap(direction, 0, this.board.grid.directions - 1);
+        this.face = this.board.grid.directionNormalize(direction);
         return this;
     }
 

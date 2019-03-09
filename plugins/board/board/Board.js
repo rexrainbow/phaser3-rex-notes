@@ -37,6 +37,7 @@ import Offset from './tileposition/Offset.js';
 import Rotate from './tileposition/Rotate.js';
 import GetOppositeDirection from './tileposition/GetOppositeDirection.js';
 import GetDistance from './tileposition/GetDistance.js';
+import DirectionBetween from './tileposition/DirectionBetween.js';
 import Fit from './tileposition/Fit.js';
 
 import GetEmptyTileXYArray from './empty/GetEmptyTileXYArray.js';
@@ -187,6 +188,7 @@ var methods = {
     rotate: Rotate,
     getOppositeDirection: GetOppositeDirection,
     getDistance: GetDistance,
+    directionBetween: DirectionBetween,
     fit: Fit,
 
     getEmptyTileXYArray: GetEmptyTileXYArray,

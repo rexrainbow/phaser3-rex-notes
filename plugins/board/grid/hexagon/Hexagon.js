@@ -8,6 +8,8 @@ import GetOppositeDirection from '../../../utils/grid/hexagon/GetOppositeDirecti
 import Offset from '../../../utils/grid/hexagon/Offset.js';
 import Rotate from '../../../utils/grid/hexagon/Rotate.js';
 import GetDistance from '../../../utils/grid/hexagon/GetDistance.js';
+import DirectionBetween from '../../../utils/grid/hexagon/DirectionBetween.js';
+import DirectionNormalize from '../utils/DirectionNormalize.js';
 import GetGridPoints from './GetGridPoints.js';
 
 class HexagonGrid extends Hexagon {
@@ -17,18 +19,19 @@ class HexagonGrid extends Hexagon {
 
     resetFromJSON(o) {
         super.resetFromJSON(o);
-        this.directions = 6;
+        this.directions = 6; // Faces
     }
 
     setDirectionMode(mode) {
         return this;
     }
 
+    // Direction of neighbors
     get allDirections() {
         return ALLDIR;
     }
 
-    // board-match    
+    // Board-match
     get halfDirections() {
         return HALFDIR;
     }
@@ -55,6 +58,8 @@ var methods = {
     offset: Offset,
     rotate: Rotate,
     getDistance: GetDistance,
+    directionBetween: DirectionBetween,
+    directionNormalize: DirectionNormalize,
     getGridPoints: GetGridPoints,
 }
 Object.assign(

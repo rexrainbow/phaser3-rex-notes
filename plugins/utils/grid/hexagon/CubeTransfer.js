@@ -49,6 +49,19 @@ var qr2z = function (mode, q, r) {
     return z;
 };
 
+var qr2xyz = function (mode, q, r, out) {
+    if (out === undefined) {
+        out = {};
+    } else if (out === true) {
+        out = globXYZ;
+    }
+    out.x = qr2x(mode, q, r);
+    out.y = qr2y(mode, q, r);
+    out.z = qr2z(mode, q, r);
+    return out;
+}
+
+var globXYZ = {};
 
 var xyz2q = function (mode, x, y, z) {
     var q;
@@ -86,10 +99,26 @@ var xyz2r = function (mode, x, y, z) {
     return r;
 };
 
+var xyz2qr = function (mode, x, y, z, out) {
+    if (out === undefined) {
+        out = {};
+    } else if (out === true) {
+        out = globQR;
+    }
+
+    out.q = xyz2q(mode, x, y, z);
+    out.r = xyz2r(mode, x, y, z);
+    return out;
+}
+
+var globQR = {};
+
 export {
     qr2x,
     qr2y,
     qr2z,
+    qr2xyz,
     xyz2q,
-    xyz2r
+    xyz2r,
+    xyz2qr
 };
