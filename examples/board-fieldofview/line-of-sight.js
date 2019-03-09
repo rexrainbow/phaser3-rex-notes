@@ -34,7 +34,7 @@ class Demo extends Phaser.Scene {
             face: 5,
 
             coneMode: 'direction',
-            cone: 1,
+            cone: 2,
 
             // coneMode: 'angle',
             // cone: 120,
@@ -43,7 +43,7 @@ class Demo extends Phaser.Scene {
         });
 
         // add some blockers
-        for (var i = 0; i < 10; i++) {
+        for (var i = 0; i < 5; i++) {
             new Blocker(board);
         }
 
@@ -94,7 +94,9 @@ var getHexagonGrid = function (scene) {
     var grid = scene.rexBoard.add.hexagonGrid({
         x: 100,
         y: 100,
-        size: 32,
+        // size: 32,
+        cellWidth: 64,
+        cellHeight: 64,
         staggeraxis: staggeraxis,
         staggerindex: staggerindex
     })

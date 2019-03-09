@@ -81,7 +81,7 @@ class FieldOfView {
 
         if (value !== undefined) {
             if (this.coneMode === 0) { // Direction
-                this.halfConeRad = value;
+                this.halfConeRad = value / 2;
             } else { // Angle
                 this.halfConeRad = DegToRad(value / 2);
             }
