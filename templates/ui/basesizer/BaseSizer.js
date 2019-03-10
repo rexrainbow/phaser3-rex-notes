@@ -1,4 +1,4 @@
-import ContainerLite from '../../../plugins/gameobjects/containerlite/ContainerLite.js';
+import Container from '../container/Container.js';
 import Anchor from '../../../plugins/behaviors/anchor/Anchor.js';
 import GetSizerConfig from '../utils/GetSizerConfig.js';
 import PushIntoBounds from './PushIntoBounds.js';
@@ -18,7 +18,6 @@ import FadeOutDestroy from './FadeOutDestroy.js';
 import IsInTouching from './IsInTouching.js';
 import GetTopmostSizer from '../utils/GetTopmostSizer.js';
 
-const Container = ContainerLite;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Base extends Container {
