@@ -3,16 +3,19 @@ import CONST from './const.js';
 const BLOCKER = CONST.BLOCKER;
 const INFINITY = CONST.INFINITY;
 
-var IsInLOS = function (targetTileXY, visiblePoints) {
+var IsInLOS = function (chess, visiblePoints) {
+    // chess: chess object or tileXY
     if ((visiblePoints !== INFINITY) && (visiblePoints <= 0)) {
         return false;
     }
 
+    var board = this.board;
+    var targetTileXY = board.chessToTileXYZ(chess);
     if (!this.isInCone(targetTileXY)) {
         return false;
     }
 
-    var board = this.board;
+
     var myTileXYZ = this.chessData.tileXYZ;
     board.lineToTileXYArray(
         board.tileXYToWorldX(myTileXYZ.x, myTileXYZ.y),

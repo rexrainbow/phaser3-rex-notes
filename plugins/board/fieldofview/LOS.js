@@ -1,20 +1,21 @@
 import IsArray from '../../utils/object/IsArray.js';
 
-var LOS = function (targetTileXYArray, visiblePoints, out) {
-    if (!IsArray(targetTileXYArray)) {
-        var targetTileXY = targetTileXYArray;
-        return this.isInLOS(targetTileXY, visiblePoints);
+var LOS = function (chessArray, visiblePoints, out) {
+    // chessArray: array of chess object or tileXY
+    if (!IsArray(chessArray)) {
+        var chess = chessArray;
+        return this.isInLOS(chess, visiblePoints);
     } else {
         if (out === undefined) {
             out = [];
         }
-        var targetTileXY;
-        for (var i = 0, cnt = targetTileXYArray.length; i < cnt; i++) {
-            targetTileXY = targetTileXYArray[i];
-            if (!this.isInLOS(targetTileXY, visiblePoints)) {
+        var chess;
+        for (var i = 0, cnt = chessArray.length; i < cnt; i++) {
+            chess = chessArray[i];
+            if (!this.isInLOS(chess, visiblePoints)) {
                 continue;
             }
-            out.append(targetTileXY)
+            out.append(chess)
         }
         return out;
     }

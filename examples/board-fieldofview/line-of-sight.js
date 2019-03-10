@@ -18,19 +18,19 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        var config = {
+        var board = CreateBoard(this, {
             grid: getHexagonGrid(this),
             // grid: getQuadGrid(this),
             width: 10,
             height: 10,
-            // wrap: true
-        }
-        var board = new Board(this, config);
+        });
 
         // add chess
-        var chessA = new ChessA(board, {
+        var chessA = CreateChessA(board, {
             x: 4,
             y: 4,
+
+            // FOV parameters
             face: 5,
 
             coneMode: 'direction',
@@ -39,19 +39,24 @@ class Demo extends Phaser.Scene {
             // coneMode: 'angle',
             // cone: 120,
 
-            occupiedTest: true,
+            costCallback: function (tileXY, fov) {
+                var board = fov.board;
+                return (board.tileXYZToChess(tileXY.x, tileXY.y, 0)) ? fov.BLOCKER : 0;
+            },
         });
 
         // add some blockers
-        for (var i = 0; i < 5; i++) {
-            new Blocker(board);
+        for (var i = 0; i < 10; i++) {
+            CreateBlocker(board);
         }
 
-        var marker = new Marker(board, chessA);
+        var marker = CreateMarker(board);
+        LOS(chessA, marker);
         board
             .setInteractive()
             .on('tilemove', function (pointer, tileXY) {
-                marker.setTileXY(tileXY.x, tileXY.y);
+                board.moveChess(marker, tileXY.x, tileXY.y);
+                LOS(chessA, marker);
             });
     }
 
@@ -69,31 +74,12 @@ var getQuadGrid = function (scene) {
     return grid;
 }
 
-class Board extends RexPlugins.Board.Board {
-    constructor(scene, config) {
-        // create board
-        super(scene, config);
-        // draw grid
-        var graphics = scene.add.graphics({
-            lineStyle: {
-                width: 1,
-                color: COLOR_DARK,
-                alpha: 1
-            }
-        });
-        this.forEachTileXY(function (tileXY, board) {
-            var points = board.getGridPoints(tileXY.x, tileXY.y, true);
-            graphics.strokePoints(points, true);
-        });
-    }
-}
-
 var getHexagonGrid = function (scene) {
     var staggeraxis = 'x';
     var staggerindex = 'odd';
     var grid = scene.rexBoard.add.hexagonGrid({
-        x: 100,
-        y: 100,
+        x: 50,
+        y: 50,
         // size: 32,
         cellWidth: 64,
         cellHeight: 64,
@@ -103,57 +89,67 @@ var getHexagonGrid = function (scene) {
     return grid;
 };
 
-class Blocker extends RexPlugins.Board.Shape {
-    constructor(board, tileXY) {
-        var scene = board.scene;
-        if (tileXY === undefined) {
-            tileXY = board.getRandomEmptyTileXY(0);
+var CreateBoard = function (scene, config) {
+    var board = scene.rexBoard.add.board(config);
+    // draw grid
+    var graphics = scene.add.graphics({
+        lineStyle: {
+            width: 1,
+            color: COLOR_DARK,
+            alpha: 1
         }
-        // Shape(board, tileX, tileY, tileZ, fillColor, fillAlpha, addToBoard)
-        console.log(tileXY.x + ',' + tileXY.y);
-        super(board, tileXY.x, tileXY.y, 0, COLOR_DARK);
-        scene.add.existing(this);
-    }
+    });
+    board.forEachTileXY(function (tileXY, board) {
+        var points = board.getGridPoints(tileXY.x, tileXY.y, true);
+        graphics.strokePoints(points, true);
+    });
+    return board;
 }
 
-class ChessA extends RexPlugins.Board.Shape {
-    constructor(board, config) {
-        var scene = board.scene;
-        var tileX = GetValue(config, 'x', undefined),
-            tileY = GetValue(config, 'y', undefined);
-        if (tileX === undefined) {
-            var tileXY = board.getRandomEmptyTileXY(0, true);
-            tileX = tileXY.x;
-            tileY = tileXY.y;
-        }
-        // Shape(board, tileX, tileY, tileZ, fillColor, fillAlpha, addToBoard)
-        super(board, tileX, tileY, 0, COLOR_LIGHT);
-        scene.add.existing(this);
-        this.setDepth(1);
-
-        // add behaviors
-        this.fov = scene.rexBoard.add.fieldOfView(this, config);
+var CreateBlocker = function (board, tileXY) {
+    var scene = board.scene;
+    if (tileXY === undefined) {
+        tileXY = board.getRandomEmptyTileXY(0);
     }
-
-    isInLOS(chess) {
-        return this.fov.isInLOS(chess.rexChess.tileXYZ);
-    }
+    // Shape(board, tileX, tileY, tileZ, fillColor, fillAlpha, addToBoard)
+    var blocker = scene.rexBoard.add.shape(board, tileXY.x, tileXY.y, 0, COLOR_DARK);
+    return blocker;
 }
 
-class Marker extends RexPlugins.Board.Shape {
-    constructor(board, source, tileXY) {
-        var scene = board.scene;
-        if (tileXY === undefined) {
-            tileXY = board.getRandomEmptyTileXY(0);
-        }
-        // Shape(board, tileX, tileY, tileZ, fillColor, fillAlpha, addToBoard)
-        super(board, tileXY.x, tileXY.y, -1);
-        scene.add.existing(this);
-        this
-            .setScale(0.7)
-            .setDepth(2);
-        this.source = source;
-        this.lineGraphics = scene.add.graphics({
+var CreateChessA = function (board, config) {
+    var tileX = GetValue(config, 'x', undefined),
+        tileY = GetValue(config, 'y', undefined);
+    if (tileX === undefined) {
+        var tileXY = board.getRandomEmptyTileXY(0, true);
+        tileX = tileXY.x;
+        tileY = tileXY.y;
+    }
+    var scene = board.scene;
+    var chessA = scene.rexBoard.add.shape(board, tileX, tileY, 0, COLOR_LIGHT)
+        .setDepth(1);
+    chessA.fov = scene.rexBoard.add.fieldOfView(chessA, config);
+    return chessA;
+}
+
+var CreateMarker = function (board, tileXY) {
+    var scene = board.scene;
+    if (tileXY === undefined) {
+        tileXY = board.getRandomEmptyTileXY(0);
+    }
+    var marker = scene.rexBoard.add.shape(board, tileXY.x, tileXY.y, -1)
+        .setScale(0.7)
+        .setDepth(2);
+    return marker;
+}
+
+var lineGraphics = undefined;
+var LOS = function (chessA, marker) {
+    var isInLOS = chessA.fov.isInLOS(marker);
+    marker.setFillStyle((isInLOS) ? COLOR_VISIBLE : COLOR_INVISIBLE);
+
+    // Draw line between chessA to marker
+    if (lineGraphics === undefined) {
+        lineGraphics = chessA.scene.add.graphics({
                 lineStyle: {
                     width: 2,
                     color: 0xff0000,
@@ -161,26 +157,18 @@ class Marker extends RexPlugins.Board.Shape {
                 }
             })
             .setDepth(2);
-        this.setTileXY(tileXY.x, tileXY.y);
     }
-
-    setTileXY(tileX, tileY) {
-        var board = this.rexChess.board;
-        board.moveChess(this, tileX, tileY);
-        var color = (this.source.isInLOS(this)) ? COLOR_VISIBLE : COLOR_INVISIBLE;
-        this.setFillStyle(color);
-
-        var myTileXYZ = this.rexChess.tileXYZ;
-        var sourceTileXYZ = board.chessToTileXYZ(this.source);
-        this.lineGraphics
-            .clear()
-            .lineBetween(
-                board.tileXYToWorldX(myTileXYZ.x, myTileXYZ.y),
-                board.tileXYToWorldY(myTileXYZ.x, myTileXYZ.y),
-                board.tileXYToWorldX(sourceTileXYZ.x, sourceTileXYZ.y),
-                board.tileXYToWorldY(sourceTileXYZ.x, sourceTileXYZ.y)
-            );
-    }
+    var board = chessA.rexChess.board;
+    var chessATileXYZ = board.chessToTileXYZ(chessA);
+    var markerTileXYZ = board.chessToTileXYZ(marker);
+    lineGraphics
+        .clear()
+        .lineBetween(
+            board.tileXYToWorldX(chessATileXYZ.x, chessATileXYZ.y),
+            board.tileXYToWorldY(chessATileXYZ.x, chessATileXYZ.y),
+            board.tileXYToWorldX(markerTileXYZ.x, markerTileXYZ.y),
+            board.tileXYToWorldY(markerTileXYZ.x, markerTileXYZ.y)
+        );
 }
 
 var config = {
