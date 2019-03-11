@@ -15,6 +15,7 @@ import GridTableFactory from './gridtable/GridTableFactory.js';
 import MenuFactory from './menu/MenuFactory.js';
 import TextBoxFactory from './textbox/TextboxFactory.js';
 import NumberBarFactory from './numberbar/NumberBarFactory.js';
+import PagesFactory from './pages/PagesFactory.js';
 
 class UIPlugin extends Phaser.Plugins.ScenePlugin {
     constructor(scene, pluginManager) {

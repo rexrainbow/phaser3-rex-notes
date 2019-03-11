@@ -14,6 +14,7 @@ import GridTable from './gridtable/GridTable.js';
 import Menu from './menu/Menu.js';
 import TextBox from './textbox/Textbox.js';
 import NumberBar from './numberbar/NumberBar.js';
+import Pages from './pages/Pages.js';
 
 export default {
     RoundRectangle: RoundRectangle,
@@ -31,4 +32,5 @@ export default {
     Menu: Menu,
     TextBox: TextBox,
     NumberBar: NumberBar,
+    pages: Pages,
 };
