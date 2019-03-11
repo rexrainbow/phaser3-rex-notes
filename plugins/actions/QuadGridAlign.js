@@ -1,18 +1,9 @@
 import QuadGrid from '../utils/grid/quad/Quad.js';
-import NOOP from '../utils/object/NOOP.js';
+import GlobZone from '../utils/align/GlobZone.js';
 
 const AlignIn = Phaser.Display.Align.In.QuickSet;
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
-const Zone = Phaser.GameObjects.Zone;
 
-var tempZone = new Zone({
-    sys: {
-        queueDepthSort: NOOP,
-        events: {
-            once: NOOP
-        }
-    }
-}, 0, 0, 1, 1);
 var tempQuadGrid = new QuadGrid();
 
 /**
@@ -48,7 +39,7 @@ var GridAlign = function (items, options) {
         .setCellSize(cellWidth, cellHeight)
         .setType(type);
 
-    tempZone.setSize(cellWidth, cellHeight);
+    GlobZone.setSize(cellWidth, cellHeight);
 
     var lastRowIdx = height - 1,
         lastColIdx = width - 1,
@@ -56,9 +47,9 @@ var GridAlign = function (items, options) {
         colIdx = 0;
 
     for (var i = 0, cnt = items.length; i < cnt; i++) {
-        tempZone.x = tempQuadGrid.getWorldX(colIdx, rowIdx);
-        tempZone.y = tempQuadGrid.getWorldY(colIdx, rowIdx);
-        AlignIn(items[i], tempZone, position);
+        GlobZone.x = tempQuadGrid.getWorldX(colIdx, rowIdx);
+        GlobZone.y = tempQuadGrid.getWorldY(colIdx, rowIdx);
+        AlignIn(items[i], GlobZone, position);
 
         if (width === -1) {
             rowIdx++;

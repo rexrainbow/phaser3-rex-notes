@@ -1,8 +1,7 @@
-import NOOP from '../../../plugins/utils/object/NOOP.js';
 import ResizeGameObject from '../utils/ResizeGameObject.js';
 import RunChildrenWrap from './RunChildrenWrap.js';
+import GlobZone from '../../../plugins/utils/align/GlobZone.js';
 
-const Zone = Phaser.GameObjects.Zone;
 const AlignIn = Phaser.Display.Align.In.QuickSet;
 
 var Layout = function (parent, newWidth, newHeight) {
@@ -90,8 +89,8 @@ var Layout = function (parent, newWidth, newHeight) {
                 itemY = y + child.height + padding.bottom;
             }
 
-            tmpZone.setPosition(x, y).setSize(width, height);
-            AlignIn(child, tmpZone, childConfig.align);
+            GlobZone.setPosition(x, y).setSize(width, height);
+            AlignIn(child, GlobZone, childConfig.align);
             this.resetChildState(child);
         }
 
@@ -118,22 +117,12 @@ var Layout = function (parent, newWidth, newHeight) {
         width = this.width - padding.left - padding.right;
         height = this.height - padding.top - padding.bottom;
         ResizeGameObject(child, width, height);
-        tmpZone.setPosition(x, y).setSize(width, height);
-        AlignIn(child, tmpZone, childConfig.align);
+        GlobZone.setPosition(x, y).setSize(width, height);
+        AlignIn(child, GlobZone, childConfig.align);
         this.resetChildState(child);
     }
 
     return this;
 }
-
-var tmpZone = new Zone({
-    sys: {
-        queueDepthSort: NOOP,
-        events: {
-            once: NOOP
-        }
-    }
-}, 0, 0, 1, 1);
-tmpZone.setOrigin(0);
 
 export default Layout;

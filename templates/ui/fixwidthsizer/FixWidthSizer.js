@@ -122,6 +122,9 @@ class FixWidthSizer extends BaseSizer {
 
     remove(gameObject) {
         var config = this.getSizerConfig(gameObject);
+        if (config.parent !== this) {
+            return this;
+        }
         config.parent = undefined;
         RemoveItem(this.sizerChildren, gameObject);
         super.remove(gameObject);
