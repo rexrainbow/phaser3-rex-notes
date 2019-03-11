@@ -1,7 +1,7 @@
 import BaseSizer from '../basesizer/BaseSizer.js';
 import AddPage from './AddPage.js';
 import GetPage from './GetPage.js';
-import Swap from './Swap.js';
+import SwapPage from './SwapPage.js';
 import ParsePaddingConfig from '../utils/ParsePaddingConfig.js'
 import GetChildrenWidth from './GetChildrenWidth.js';
 import GetChildrenHeight from './GetChildrenHeight.js';
@@ -30,13 +30,15 @@ class Pages extends BaseSizer {
 
         super(scene, x, y, minWidth, minHeight, config);
 
-        this.type = 'rexSizer';
+        this.type = 'rexPages';
         this.previousKey = undefined;
         this.currentKey = undefined;
         this.sizerChildren = new Map();
         this.backgroundChildren = [];
-        this.setCreatePageCallback(GetValue(config, 'createPageCallback', undefined), GetValue(config, 'createPageCallbackScope', undefined));
         this.setSwapMode(GetValue(config, 'swapMode', 0));
+
+        this.childrenMap = {};
+        this.childrenMap.pages = this.sizerChildren.entries;
     }
 
     destroy(fromScene) {
@@ -47,12 +49,6 @@ class Pages extends BaseSizer {
         this.sizerChildren.clear();
         this.backgroundChildren.length = 0;
         super.destroy(fromScene);
-    }
-
-    setCreatePageCallback(callback, scope) {
-        this.createPageCallback = callback;
-        this.createPageCallbackScope = scope;
-        return this;
     }
 
     setSwapMode(mode) {
@@ -94,7 +90,7 @@ class Pages extends BaseSizer {
 var methods = {
     addPage: AddPage,
     getPage: GetPage,
-    swap: Swap,
+    swapPage: SwapPage,
     getChildrenWidth: GetChildrenWidth,
     getChildrenHeight: GetChildrenHeight,
     getChildrenSizers: GetChildrenSizers,

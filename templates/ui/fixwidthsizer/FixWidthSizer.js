@@ -44,7 +44,7 @@ class FixWidthSizer extends BaseSizer {
         }
         super(scene, x, y, minWidth, minHeight, config);
 
-        this.type = 'rexSizer';
+        this.type = 'rexFixWidthSizer';
         this.sizerChildren = [];
         this.backgroundChildren = [];
         this.setOrientation(orientation);

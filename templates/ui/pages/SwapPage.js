@@ -1,34 +1,30 @@
-var Swap = function (key) {
+var SwapPage = function (key) {
     this.previousKey = this.currentKey;
     var prevoiusPage = this.previousPage;
     if (prevoiusPage) {
         this.remove(prevoiusPage);
         if (this.swapMode === 0) { // Invisible
             prevoiusPage.setVisible(false);
+            this.emit('pageinvisible', this.previousKey, this);
         } else { // Destroy
             prevoiusPage.destroy();
         }
     }
 
     if (key && !this.sizerChildren.has(key)) {
-        var callback = this.createPageCallback;
-        var scope = this.createPageCallbackScope;
-        if (callback) {
-            if (scope) {
-                callback.call(scope, key, this);
-            } else {
-                callback(key, this);
-            }
-        }
+        this.emit('createpage', key, this);
     }
 
     this.currentKey = key;
     var currentPage = this.currentPage;
     if (currentPage) {
         currentPage.setVisible(true);
-        this.add(currentPage);
+        this.emit('pagevisible', this.currentKey, this);
+        this
+            .add(currentPage)
+            .layout();
     }
     return this;
 }
 
-export default Swap;
+export default SwapPage;
