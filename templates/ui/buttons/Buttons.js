@@ -1,6 +1,9 @@
 import Sizer from '../sizer/Sizer.js';
 import Space from '../utils/Space.js';
-import ButtonSetInteractive from '../utils/ButtonSetInteractive.js';
+import {
+    ButtonSetInteractive,
+    FireEvent
+} from '../utils/ButtonSetInteractive.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -13,6 +16,7 @@ class Buttons extends Sizer {
         super(scene, config);
         this.type = 'rexButtons';
         this.eventEmitter = GetValue(config, 'eventEmitter', this);
+        this.groupName = GetValue(config, 'groupName', undefined);
 
         // Add elements
         var background = GetValue(config, 'background', undefined);
@@ -29,7 +33,6 @@ class Buttons extends Sizer {
         }
 
         if (buttons) {
-            var groupName = GetValue(config, 'groupName', undefined);
             var buttonsAlign = GetValue(config, 'align', undefined); // undefined/left/top: no space
             var clickConfig = GetValue(config, 'click', undefined);
 
@@ -62,7 +65,7 @@ class Buttons extends Sizer {
                     }
                 }
                 this.add(button, 0, 'center', padding, true);
-                ButtonSetInteractive.call(this, button, groupName, i, clickConfig);
+                ButtonSetInteractive.call(this, button, clickConfig);
             }
 
             // Add space
@@ -73,7 +76,13 @@ class Buttons extends Sizer {
 
         this.childrenMap = {};
         this.childrenMap.background = background;
-        this.childrenMap.buttons = buttons;
+        this.childrenMap.buttons = (buttons) ? buttons : [];
+    }
+
+    emitButtonClick(index) {
+        // index or button game object
+        FireEvent.call(this, 'button.click', index);
+        return this;
     }
 }
 

@@ -22,19 +22,23 @@ class Tabs extends GridSizer {
         if (leftButtons && leftButtons.length === 0) {
             leftButtons = undefined;
         }
+        var leftButtonsSizer;
         var rightButtons = GetValue(config, 'rightButtons', undefined);
         if (rightButtons && rightButtons.length === 0) {
             rightButtons = undefined;
         }
+        var rightButtonsSizer;
         var topButtons = GetValue(config, 'topButtons', undefined);
         if (topButtons && topButtons.length === 0) {
             topButtons = undefined;
         }
+        var topButtonsSizer;
         var bottomButtons = GetValue(config, 'bottomButtons', undefined);
         if (bottomButtons && bottomButtons.length === 0) {
             bottomButtons = undefined;
         }
-        var clickConfig = GetValue(config, 'click', undefined);        
+        var bottomButtonsSizer;
+        var clickConfig = GetValue(config, 'click', undefined);
 
         // Space
         var paddingLeft = GetValue(config, 'space.left', 0);
@@ -66,7 +70,7 @@ class Tabs extends GridSizer {
         }
 
         if (leftButtons) {
-            var buttonsSizer = new Buttons(scene, {
+            leftButtonsSizer = new Buttons(scene, {
                 groupName: 'left',
                 buttons: leftButtons,
                 orientation: 1, // Top-Bottom
@@ -79,11 +83,11 @@ class Tabs extends GridSizer {
                 left: paddingLeft,
                 top: leftButtonsOffset,
             };
-            this.add(buttonsSizer, 0, 1, undefined, padding, false);
+            this.add(leftButtonsSizer, 0, 1, undefined, padding, false);
         }
 
         if (rightButtons) {
-            var buttonsSizer = new Buttons(scene, {
+            rightButtonsSizer = new Buttons(scene, {
                 groupName: 'right',
                 buttons: rightButtons,
                 orientation: 1, // Top-Bottom
@@ -96,11 +100,11 @@ class Tabs extends GridSizer {
                 right: paddingRight,
                 top: rightButtonsOffset,
             };
-            this.add(buttonsSizer, 2, 1, undefined, padding, false);
+            this.add(rightButtonsSizer, 2, 1, undefined, padding, false);
         }
 
         if (topButtons) {
-            var buttonsSizer = new Buttons(scene, {
+            topButtonsSizer = new Buttons(scene, {
                 groupName: 'top',
                 buttons: topButtons,
                 orientation: 0, // Left-Right
@@ -113,11 +117,11 @@ class Tabs extends GridSizer {
                 top: paddingTop,
                 left: toptButtonsOffset,
             };
-            this.add(buttonsSizer, 1, 0, undefined, padding, false);
+            this.add(topButtonsSizer, 1, 0, undefined, padding, false);
         }
 
         if (bottomButtons) {
-            var buttonsSizer = new Buttons(scene, {
+            bottomButtonsSizer = new Buttons(scene, {
                 groupName: 'bottom',
                 buttons: bottomButtons,
                 orientation: 0, // Left-Right
@@ -130,7 +134,7 @@ class Tabs extends GridSizer {
                 bottom: paddingBottom,
                 left: bottomButtonsOffset,
             };
-            this.add(buttonsSizer, 1, 2, undefined, padding, false);
+            this.add(bottomButtonsSizer, 1, 2, undefined, padding, false);
         }
 
 
@@ -141,14 +145,18 @@ class Tabs extends GridSizer {
         this.childrenMap.rightButtons = rightButtons;
         this.childrenMap.topButtons = topButtons;
         this.childrenMap.bottomButtons = bottomButtons;
+        this.childrenMap.leftButtonsSizer = leftButtonsSizer;
+        this.childrenMap.rightButtonsSizer = rightButtonsSizer;
+        this.childrenMap.topButtonsSizer = topButtonsSizer;
+        this.childrenMap.bottomButtonsSizer = bottomButtonsSizer;
     }
 
     emitButtonClick(groupName, index) {
-        var button = this.getElement(groupName + 'Buttons[' + index + ']');
-        if (!button) {
+        var buttonsSizer = this.childrenMap[groupName + 'ButtonsSizer'];
+        if (!buttonsSizer) {
             return this;
         }
-        this.emit('button.click', button, groupName, index);
+        buttonsSizer.emitButtonClick(index);
         return this;
     }
 }

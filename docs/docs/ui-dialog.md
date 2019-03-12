@@ -162,7 +162,7 @@ var dialog = scene.rexUI.add.dialog({
     - `align.title`
         - `'center'`, or `Phaser.Display.Align.CENTER` : Align game object at center. Default value.
         - `'left'`, or `Phaser.Display.Align.LEFT_CENTER` : Align game object at left-center.
-        - `'right'`, or `Phaser.Display.Align.RIGHT_CENTER` : Align game object at right-center.    
+        - `'right'`, or `Phaser.Display.Align.RIGHT_CENTER` : Align game object at right-center.
     - `align.content`
     - `align.description`
     - `align.choices`

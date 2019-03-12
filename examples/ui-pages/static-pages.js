@@ -55,10 +55,7 @@ var CreateMainPanel = function (scene, keys) {
         pages.swapPage(button.text);
     });
 
-    var firstButton = buttons.getElement('buttons[0]');
-    if (firstButton) {
-        buttons.emit('button.click', firstButton);
-    }
+    buttons.emitButtonClick(0);
     return mainPanel;
 }
 

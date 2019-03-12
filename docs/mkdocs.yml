@@ -71,6 +71,7 @@ nav:
             - Fix-width sizer: ui-fixwidthsizer.md
             - Label: ui-label.md
             - Text box: ui-textbox.md
+            - Buttons: ui-buttons.md
             - Slider: ui-slider.md
             - Dialog: ui-dialog.md
             - Grid table: ui-gridtable.md

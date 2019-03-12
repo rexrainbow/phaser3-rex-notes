@@ -87,6 +87,11 @@ var tabs = scene.rexUI.add.tabs({
         rightButton: 0,
         topButton: 0,
         bottomButton: 0
+    },
+
+    click: {
+        mode: 'pointerup',
+        clickInterval: 100
     }
 
     name: '',
@@ -105,6 +110,11 @@ var tabs = scene.rexUI.add.tabs({
     - `space.leftButtonsOffset`, `space.rightButtonsOffset` : Top offset of buttons group.
     - `space.topButtonsOffset`, `space.bottomButtonsOffset` : Left offset of buttons group.
     - `space.leftButton`, `space.rightButton`, `space.topButton`, `space.bottomButton` : Space between 2 button game objects.
+- `click`: Configuration of [button clicking](button.md).
+    - `click.mode` :
+        - `'pointerdown'`, `'press'`, or `0` : Fire 'click' event when touch pressed.
+        - `'pointerup'`, `'release'`, or `1` : Fire 'click' event when touch released after pressed.
+    - `click.clickInterval` : Interval between 2 'click' events, in ms.
 - `name` : Set name of this tabs.
 
 ### Custom class
@@ -173,7 +183,7 @@ tabs.emitButtonClick(groupName, index);
 ```
 
 - `groupName` : `'left'`, `'right'`, `'top'`, or `'bottom'`.
-- `index` : Index of triggered button game object.
+- `index` : Index of triggered button game object, or a button game object.
 
 ### Get element
 
@@ -187,22 +197,42 @@ tabs.emitButtonClick(groupName, index);
         var panel = tabs.getElement('panel');
         ```
     - Buttons
-        - Left buttons
+        - Left button game objects
             ```javascript
             var bottons = tabs.getElement('leftButtons');
             ```
-        - Right buttons
+            or
+            ```javascript
+            var bottons = tabs.getElement('leftButtons[0]');
+            ```
+            - First button of left buttons.
+        - Right button game objects
             ```javascript
             var bottons = tabs.getElement('rightButtons');
             ```
-        - Top buttons
+            or
+            ```javascript
+            var bottons = tabs.getElement('rightButtons[0]');
+            ```
+            - First button of right buttons.
+        - Top button game objects
             ```javascript
             var bottons = tabs.getElement('topButtons');
             ```
-        - Bottom buttons
+            or
+            ```javascript
+            var bottons = tabs.getElement('topButtons[0]');
+            ```
+            - First button of top buttons.
+        - Bottom button game objects
             ```javascript
             var bottons = tabs.getElement('bottomButtons');
             ```
+            or
+            ```javascript
+            var bottons = tabs.getElement('bottomButtons[0]');
+            ```
+            - First button of bottom buttons.
 - Get by name
     ```javascript
     var gameObject = tabs.getElement('#' + name);

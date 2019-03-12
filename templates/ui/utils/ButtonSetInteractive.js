@@ -1,34 +1,46 @@
 import ButtonBehavior from '../../../plugins/input/button/Button.js';
 
-var ButtonSetInteractive = function (button, groupName, index, clickConfig) {
-    if (clickConfig === undefined) {
-        clickConfig = defaultConfig;
-    }
-    if (!clickConfig.hasOwnProperty('mode')) {
-        clickConfig.mode = 0; // Default is 'press'('pointerdown')
-    }
+var ButtonSetInteractive = function (button, clickConfig) {
+    //Default: Fire 'click' event when touch released after pressed.
     button._buttonBehavior = new ButtonBehavior(button, clickConfig);
-    button._buttonBehavior.on('click', FireEvent('button.click', button, groupName, index), this);
+    button._buttonBehavior.on('click', GetEventCallback.call(this, 'button.click', button));
 
     button
-        .on('pointerover', FireEvent('button.over', button, groupName, index), this)
-        .on('pointerout', FireEvent('button.out', button, groupName, index), this);
+        .on('pointerover', GetEventCallback.call(this, 'button.over', button))
+        .on('pointerout', GetEventCallback.call(this, 'button.out', button));
 }
 
-var FireEvent = function (eventName, button, groupName, index) {
-    var callback;
-    if (groupName !== undefined) {
-        callback = function () {
-            this.eventEmitter.emit(eventName, button, groupName, index);
-        }
-    } else {
-        callback = function () {
-            this.eventEmitter.emit(eventName, button, index);
-        }
+var GetEventCallback = function (eventName, button) {
+    var self = this;
+    var callback = function () {
+        FireEvent.call(self, eventName, button);
     }
     return callback;
 }
 
-var defaultConfig = {};
+var FireEvent = function (eventName, button) {
+    var index;
+    if (typeof (button) === 'number') {
+        index = button;
+        if (index >= this.childrenMap.buttons.length) {
+            return;
+        }
+        button = this.childrenMap.buttons[index];
+    } else {
+        index = this.childrenMap.buttons.indexOf(button);
+        if (index === -1) {
+            return;
+        }
+    }
 
-export default ButtonSetInteractive;
+    if (this.groupName !== undefined) {
+        this.eventEmitter.emit(eventName, button, this.groupName, index);
+    } else {
+        this.eventEmitter.emit(eventName, button, index);
+    }
+}
+
+export {
+    ButtonSetInteractive,
+    FireEvent
+};

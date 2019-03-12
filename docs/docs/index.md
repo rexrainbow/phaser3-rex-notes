@@ -65,11 +65,12 @@
 1. [TCRP.Player](tcrp-player.md): Run commands on time.
 1. [TCRP.Recorder](tcrp-recoder.md): Store commands with time.
 1. [Typing](texttyping.md): Typing text on text object.
-1. [UI-label](ui-label.md): A game object container with an icon, text, and background.
+1. [UI-buttons](ui-buttons.md): A container with a group of buttons.
 1. [UI-dialog](ui-dialog.md): A container with a title, content, buttons and backgrounds.
 1. [UI-fixwidthsizer](ui-fixwidthsizer.md): Layout children game objects into lines.
 1. [UI-grid sizer](ui-gridsizer.md): Layout children game objects in grids.
 1. [UI-gird table](ui-gridtable.md): A container with a grid table, slider, and scroller.
+1. [UI-label](ui-label.md): A game object container with an icon, text, and background.
 1. [UI-number bar](ui-numberbar.md): A container with an icon, slider, text, and background.
 1. [UI-sizer](ui-sizer.md): Layout children game objects.
 1. [UI-slider](ui-slider.md): A container with a track, indicator, thumb and background.
@@ -80,7 +81,5 @@
 1. [Wait events](waitevents.md): Wait fired events or callbacks.
 1. [Webfont-loader](webfontloader.md): Load web font by google webfont loader in preload stage.
 1. [XOR](xor.md): Encrypt or decrypt string by XOR algorithm.
-
-[Download](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexplugins.min.js) them in a signle minify file.
 
 [Bug report or suggestion](https://github.com/rexrainbow/phaser3-rex-notes/issues)
