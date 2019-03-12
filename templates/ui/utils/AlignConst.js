@@ -1,7 +1,18 @@
+const ALIGN = Phaser.Display.Align;
 export default {
-    center: Phaser.Display.Align.CENTER,
-    left: Phaser.Display.Align.LEFT_CENTER,
-    right: Phaser.Display.Align.RIGHT_CENTER,
-    top: Phaser.Display.Align.TOP_CENTER,
-    bottom: Phaser.Display.Align.BOTTOM_CENTER,
-}
+    center: ALIGN.CENTER,
+    left: ALIGN.LEFT_CENTER,
+    right: ALIGN.RIGHT_CENTER,
+    top: ALIGN.TOP_CENTER,
+    bottom: ALIGN.BOTTOM_CENTER,
+
+    'left-top': ALIGN.TOP_LEFT,
+    'left-center': ALIGN.LEFT_CENTER,
+    'left-bottom': ALIGN.LEFT_BOTTOM,
+    'center-top': ALIGN.TOP_CENTER,
+    'center-center': ALIGN.CENTER,
+    'center-bottom': ALIGN.BOTTOM_CENTER,
+    'right-top': ALIGN.TOP_RIGHT,
+    'right-center': ALIGN.RIGHT_CENTER,
+    'right-bottom': ALIGN.RIGHT_BOTTOM
+};

@@ -2,7 +2,7 @@ import ALIGNMODE from '../utils/AlignConst.js';
 import ParsePaddingConfig from '../utils/ParsePaddingConfig.js'
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const ALIGN_CENTER = Phaser.Display.Align.CENTER;
+const ALIGN_LEFTTOP = Phaser.Display.Align.TOP_LEFT;
 
 var AddPage = function (gameObject, key, align, paddingConfig, expand) {
     // Game-object Won't be added to container until swap to this page
@@ -10,7 +10,7 @@ var AddPage = function (gameObject, key, align, paddingConfig, expand) {
     if (IsPlainObject(key)) {
         var config = key;
         key = GetValue(config, 'key', 0);
-        align = GetValue(config, 'align', ALIGN_CENTER);
+        align = GetValue(config, 'align', ALIGN_LEFTTOP);
         paddingConfig = GetValue(config, 'padding', 0);
         expand = GetValue(config, 'expand', false);
     }

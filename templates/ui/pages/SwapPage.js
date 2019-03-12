@@ -1,11 +1,11 @@
 var SwapPage = function (key) {
-    this.previousKey = this.currentKey;
+    this._previousKey = this._currentKey;
     var prevoiusPage = this.previousPage;
     if (prevoiusPage) {
         this.remove(prevoiusPage);
         if (this.swapMode === 0) { // Invisible
             prevoiusPage.setVisible(false);
-            this.emit('pageinvisible', this.previousKey, this);
+            this.emit('pageinvisible', this._previousKey, this);
         } else { // Destroy
             prevoiusPage.destroy();
         }
@@ -15,11 +15,11 @@ var SwapPage = function (key) {
         this.emit('createpage', key, this);
     }
 
-    this.currentKey = key;
+    this._currentKey = key;
     var currentPage = this.currentPage;
     if (currentPage) {
         currentPage.setVisible(true);
-        this.emit('pagevisible', this.currentKey, this);
+        this.emit('pagevisible', this._currentKey, this);
         this
             .add(currentPage)
             .layout();

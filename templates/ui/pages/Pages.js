@@ -31,8 +31,8 @@ class Pages extends BaseSizer {
         super(scene, x, y, minWidth, minHeight, config);
 
         this.type = 'rexPages';
-        this.previousKey = undefined;
-        this.currentKey = undefined;
+        this._previousKey = undefined;
+        this._currentKey = undefined;
         this.sizerChildren = new Map();
         this.backgroundChildren = [];
         this.setSwapMode(GetValue(config, 'swapMode', 0));
@@ -72,6 +72,18 @@ class Pages extends BaseSizer {
         config.expand = true;
         this.backgroundChildren.push(gameObject);
         return this;
+    }
+
+    get previousKey() {
+        return this._previousKey;
+    }
+
+    get currentKey() {
+        return this._currentKey;
+    }
+
+    set currentKey(key) {
+        this.swapPage(key);
     }
 
     get currentPage() {

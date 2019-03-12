@@ -32,7 +32,6 @@ var Layout = function (parent, newWidth, newHeight) {
     // Layout current page
     child = this.currentPage;
     if (child) {
-        child = this.currentPage;
         childConfig = child.rexSizer;
         padding = childConfig.padding;
 
@@ -54,9 +53,9 @@ var Layout = function (parent, newWidth, newHeight) {
 
         // Set position
         x = (startX + padding.left);
-        width = child.width;
+        width = this.width - padding.left - padding.right;
         y = (startY + padding.top);
-        height = child.height;
+        height = this.height - padding.top - padding.bottom;
         GlobZone.setPosition(x, y).setSize(width, height);
         AlignIn(child, GlobZone, childConfig.align);
         this.resetChildState(child);

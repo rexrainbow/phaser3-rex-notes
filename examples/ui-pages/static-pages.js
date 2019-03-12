@@ -104,7 +104,7 @@ var CreatePages = function (scene, keys) {
                 })
             }), // game object
             key, // key
-            'center', // align
+            'left-top', // align
             10, // padding
             false, // extend
         )
