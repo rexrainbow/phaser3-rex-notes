@@ -50,8 +50,8 @@ var createTextBox = function (scene, x, y, config) {
 
             icon: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_DARK),
 
-            // text: getBuiltInText(scene, wrapWidth, fixedWidth, fixedHeight),
-            text: getBBcodeText(scene, wrapWidth, fixedWidth, fixedHeight),
+            text: getBuiltInText(scene, wrapWidth, fixedWidth, fixedHeight),
+            // text: getBBcodeText(scene, wrapWidth, fixedWidth, fixedHeight),
 
             action: scene.add.image(0, 0, 'nextPage').setTint(COLOR_LIGHT).setAlpha(0),
 
@@ -101,15 +101,13 @@ var createTextBox = function (scene, x, y, config) {
 
 var getBuiltInText = function (scene, wrapWidth, fixedWidth, fixedHeight) {
     return scene.add.text(0, 0, '', {
-        fixedWidth: fixedWidth,
-        fixedHeight: fixedHeight,
-
-        fontSize: '20px',
-        wordWrap: {
-            width: wrapWidth
-        },
-        maxLines: 3
-    })
+            fontSize: '20px',
+            wordWrap: {
+                width: wrapWidth
+            },
+            maxLines: 3
+        })
+        .setFixedSize(fixedWidth, fixedHeight);
 }
 
 var getBBcodeText = function (scene, wrapWidth, fixedWidth, fixedHeight) {
