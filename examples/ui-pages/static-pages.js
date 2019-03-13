@@ -15,7 +15,7 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        var keys = ['A', 'B', 'C', 'D'];
+        var keys = ['Table', 'Label'];
         var mainPanel = CreateMainPanel(this, keys)
             .setPosition(400, 300)
             .layout();
@@ -82,24 +82,20 @@ var CreateButtons = function (scene, keys) {
 }
 
 var CreatePages = function (scene, keys) {
-    var x = 400,
-        y = 300,
-        minWidth = 250,
-        minHeight = 400;
-    var pages = scene.rexUI.add.pages(x, y, minWidth, minHeight)
+    var pages = scene.rexUI.add.pages()
         .addBackground(
             scene.rexUI.add.roundRectangle(0, 0, 10, 10, 0, COLOR_PRIMARY)
         )
 
+    var createPageCallback = {
+        Table: CreateTablePage,
+        Label: CreateLabelPage,
+    }
     var key;
     for (var i = 0, cnt = keys.length; i < cnt; i++) {
         key = keys[i];
         pages.addPage(
-            scene.rexUI.add.label({
-                text: scene.add.text(0, 0, key, {
-                    fontSize: 24
-                })
-            }), // game object
+            createPageCallback[key](scene), // game object
             key, // key
             'left-top', // align
             10, // padding
@@ -108,6 +104,75 @@ var CreatePages = function (scene, keys) {
     }
     return pages;
 }
+
+var CreateTablePage = function (scene) {
+    return scene.rexUI.add.gridTable({
+        table: {
+            width: 250,
+            height: 400,
+
+            cellWidth: 120,
+            cellHeight: 60,
+            columns: 2,
+        },
+
+        slider: {
+            track: scene.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_DARK),
+            thumb: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 13, COLOR_LIGHT),
+        },
+
+        space: {
+            left: 20,
+            right: 20,
+            top: 20,
+            bottom: 20,
+
+            table: 10,
+        },
+
+        createCellContainerCallback: function (cell) {
+            var scene = cell.scene,
+                width = cell.width,
+                height = cell.height,
+                item = cell.item,
+                index = cell.index;
+            return scene.rexUI.add.label({
+                    width: width,
+                    height: height,
+
+                    background: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 0).setStrokeStyle(2, COLOR_LIGHT),
+                    icon: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 10, item.color),
+                    text: scene.add.text(0, 0, item.id),
+
+                    space: {
+                        icon: 10,
+                        left: 15
+                    }
+                })
+                .setOrigin(0);
+        },
+        items: getItems(100)
+    })
+}
+
+var getItems = function (count) {
+    var data = [];
+    for (var i = 0; i < count; i++) {
+        data.push({
+            id: i
+        });
+    }
+    return data;
+}
+
+var CreateLabelPage = function (scene) {
+    return scene.rexUI.add.label({
+        text: scene.add.text(0, 0, 'Label', {
+            fontSize: '18pt'
+        }),
+    })
+}
+
 
 var config = {
     type: Phaser.AUTO,
