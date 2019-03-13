@@ -248,12 +248,12 @@ var Text = new Phaser.Class({
         return this.style.setShadowFill(enabled);
     },
 
-    setWordWrapWidth: function (width, useAdvancedWrap) {
-        return this.style.setWordWrapWidth(width, useAdvancedWrap);
+    setWrapMode: function (mode) {
+        return this.style.setWrapMode(mode);
     },
 
-    setWordWrapCallback: function (callback, scope) {
-        return this.style.setWordWrapCallback(callback, scope);
+    setWrapWidth: function (width) {
+        return this.style.setWrapWidth(width);
     },
 
     setAlign: function (align) {

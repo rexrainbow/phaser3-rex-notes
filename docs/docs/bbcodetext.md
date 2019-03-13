@@ -142,32 +142,56 @@ var txt = scene.make.rexBBCodeText({
     var txt = new MyText(scene, x, y, '[b]h[/b]ello');
     ```
 
-### Word wrap
+### Wrap
 
-Wrap by word or character.
-
-```javascript
-var txt = scene.make.text({
-    x: 400,
-    y: 100,
-    text: 'The sky above the port was the color of television, tuned to a dead channel.',
-    origin: { x: 0.5, y: 0.5 },
-    style: {
-        font: 'bold 25px Arial',
-        fill: 'white',
-        wrap: {
-            mode: 'word'     // 0|'none'|1|'word'|2|'char'|'character'
-            width: 300
+- Wrap by word or character.
+    ```javascript
+    var txt = scene.make.text({
+        x: 400,
+        y: 100,
+        text: 'The sky above the port was the color of television, tuned to a dead channel.',
+        origin: { x: 0.5, y: 0.5 },
+        style: {
+            font: 'bold 25px Arial',
+            fill: 'white',
+            wrap: {
+                mode: 'word'     // 0|'none'|1|'word'|2|'char'|'character'
+                width: 300
+            }
         }
-    }
-});
-```
+    });
+    ```
+- Wrap mode
+    - Get
+        ```javascript
+        var mode = txt.style.wrapMode;
+        ```
+    - Set
+        ```javascript
+        txt.setWrapMode(mode);
+        ```
+        - `'none'`, or `0` : No wrap
+        - `'word'`, or `1` : Word wrap
+        - `'character'`, or `2` : Character wrap
+- Wrap width
+    - Get
+        ```javascript
+        var width = txt.style.wrapWidth;
+        ```
+    - Set
+        ```javascript
+        txt.setWrapWidth(width);
+        ```
 
 ### Content
 
-- Get
+- Get source text
     ```javascript
-    var content = txt.text;
+    var curContent = txt.text;
+    ```
+- Get plain text
+    ```javascript
+    var plainText = txt.getPlainText();
     ```
 - Set
     ```javascript
@@ -185,76 +209,125 @@ txt.setFontSize(size);
 txt.setFontStyle(style);
 ```
 
-### Set color
+### Color
 
-```javascript
-txt.setColor(color);
-txt.setStroke(color, thickness);
-txt.setBackgroundColor(color);
-txt.setFill(color);
-```
+- Text color
+    - Get
+        ```javascript
+        var color = txt.style.color;
+        ```
+    - Set
+        ```javascript
+        txt.setColor(color);
+        ```
+        or
+        ```javascript
+        txt.setFill(color);
+        ```
+- Stroke color, thickness
+    - Get
+        ```javascript
+        var color = txt.style.stroke;
+        var thickness = txt.style.strokeThickness;
+        ```
+    - Set
+        ```javascript
+        txt.setStroke(color, thickness);
+        ```
+    - Clear
+        ```javascript
+        txt.setStroke();
+        ```
+- Underline color, thickness
+    - Get
+        ```javascript
+        var color = txt.style.underlineColor;
+        var thickness = txt.style.underlineThickness;
+        var offset = txt.style.underlineOffset;
+        ```
+    - Set
+        ```javascript
+        txt.setUnderline(color, thinkness, ofset);
+        txt.setUnderlineColor(color);
+        txt.setUnderlineThinkness(thinkness);
+        txt.setUnderlineOffset(ofset);
+        ```
+- Background color
+    - Get
+        ```javascript
+        var color = txt.style.backgroundColor;
+        ```
+    - Set
+        ```javascript
+        txt.setBackgroundColor(color);
+        ```
+- Shadow
+    - Get
+        ```javascript
+        var color = txt.style.shadowColor;
+        var offsetX = txt.style.shadowOffsetX;
+        var offsetY = txt.style.shadowOffsetY;
+        var blur = txt.style.shadowBlur;
+        var stroke = txt.style.shadowStroke;
+        var enabled = txt.style.shadowFill;
+        ```
+    - Set
+        ```javascript
+        txt.setShadow(x, y, color, blur, shadowStroke, shadowFill);
+        txt.setShadowOffset(x, y);
+        txt.setShadowColor(color);
+        txt.setShadowBlur(blur);
+        txt.setShadowStroke(enabled);
+        txt.setShadowFill(enabled);
+        ```
 
-### Set shadow
-
-```javascript
-txt.setShadow(x, y, color, blur, shadowStroke, shadowFill);
-txt.setShadowOffset(x, y);
-txt.setShadowColor(color);
-txt.setShadowBlur(blur);
-txt.setShadowStroke(enabled);
-txt.setShadowFill(enabled);
-```
-
-### Set underline
-
-```javascript
-txt.setUnderline(color, thinkness, ofset);
-txt.setUnderlineColor(color);
-txt.setUnderlineThinkness(thinkness);
-txt.setUnderlineOffset(ofset);
-```
-
-### Set line spacing
+### Line spacing
 
 This value is *added* to the height of the font when calculating the overall line height.
 
-```javascript
-txt.setLineSpacing(value);
-```
+- Get
+   ```javascript
+   var lineSpacing = txt.style.lineSpacing;
+   ```
+- Set
+   ```javascript
+   txt.setLineSpacing(value);
+   ```
 
-### Set padding
+### Padding
 
-```javascript
-txt.setPadding(left, top, right, bottom);
-// txt.setPadding(padding); // padding: {left, top, right, bottom}
-```
-
-### Set max lines
-
-```javascript
-txt.setMaxLines(max);
-```
-
-### Set wrap properties
-
-```javascript
-txt.setWrapMode(mode);  // mode: 0|'none'|1|'word'|2|'char'|'character'
-txt.setWrapWidth(width);
-```
-
-### Set object size
-
-```javascript
-txt.setFixedSize(width, height);
-```
-
-### Get text
-
-- Source text
+- Get
     ```javascript
-    var curContent = txt.text;
+    var left = txt.padding.left;
+    var top = txt.padding.top;
+    var right = txt.padding.right;
+    var bottom = txt.padding.bottom;
     ```
-- Plain text
+- Set
     ```javascript
-    var plainText = txt.getPlainText();
+    txt.setPadding(left, top, right, bottom);
+    // txt.setPadding(padding); // padding: {left, top, right, bottom}
+    ```
+
+### Max lines
+
+- Get
+    ```javascript
+    var maxLines = txt.style.maxLines;
+    ```
+- Set
+    ```javascript
+    txt.setMaxLines(max);
+    ```
+
+### Fixed size
+
+- Get
+    ```javascript
+    var width = txt.style.fixedWidth;
+    var height = txt.style.fixedHeight;
+    ```
+- Set
+    ```javascript
+    txt.setFixedSize(width, height);
     ```
