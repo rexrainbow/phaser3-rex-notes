@@ -16,7 +16,7 @@ import MenuFactory from './menu/MenuFactory.js';
 import TextBoxFactory from './textbox/TextboxFactory.js';
 import NumberBarFactory from './numberbar/NumberBarFactory.js';
 import PagesFactory from './pages/PagesFactory.js';
-import TextRegionFactory from './textregion/TextRegionFactory.js';
+import TextBlockFactory from './textblock/TextBlockFactory.js';
 
 class UIPlugin extends Phaser.Plugins.ScenePlugin {
     constructor(scene, pluginManager) {

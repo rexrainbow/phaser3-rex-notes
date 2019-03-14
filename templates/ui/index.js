@@ -15,7 +15,7 @@ import Menu from './menu/Menu.js';
 import TextBox from './textbox/Textbox.js';
 import NumberBar from './numberbar/NumberBar.js';
 import Pages from './pages/Pages.js';
-import TextRegion from './textregion/TextRegion.js';
+import TextBlock from './textblock/TextBlock.js';
 
 export default {
     RoundRectangle: RoundRectangle,
@@ -34,5 +34,5 @@ export default {
     TextBox: TextBox,
     NumberBar: NumberBar,
     Pages: Pages,
-    TextRegion: TextRegion,
+    TextBlock: TextBlock,
 };

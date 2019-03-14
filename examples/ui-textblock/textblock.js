@@ -20,7 +20,7 @@ class Demo extends Phaser.Scene {
             y = 300,
             minWidth = 200,
             minHeight = 200;
-        var textRegion = this.rexUI.add.textRegion(x, y, minWidth, minHeight)
+        var textBlock = this.rexUI.add.textBlock(x, y, minWidth, minHeight)
             .addBackground(this.rexUI.add.roundRectangle(0, 0, 2, 2, 0, COLOR_PRIMARY))
             .addText(this.add.text(0, 0, content))
             .layout()

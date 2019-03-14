@@ -18,7 +18,8 @@ class Demo extends Phaser.Scene {
         var keys = ['Table', 'Label'];
         var mainPanel = CreateMainPanel(this, keys)
             .setPosition(400, 300)
-            .layout();
+            .layout()
+            //.drawBounds(this.add.graphics(), 0xff0000);
 
 
         mainPanel.getElement('pages')
@@ -39,11 +40,11 @@ var CreateMainPanel = function (scene, keys) {
     var buttons = CreateButtons(scene, keys);
     var pages = CreatePages(scene, keys);
     var mainPanel = scene.rexUI.add.sizer({
-            orientation: 'y',
+            orientation: 'x',
         }).add(
             buttons, //child
             0, // proportion
-            'left', // align
+            'top', // align
             0, // paddingConfig
             false, // expand
         )
@@ -57,6 +58,9 @@ var CreateMainPanel = function (scene, keys) {
 
     var prevButton = undefined;
     buttons.on('button.click', function (button) {
+        if (button === prevButton) {
+            return;
+        }
         button.getElement('background').setFillStyle(COLOR_PRIMARY);
         if (prevButton) {
             prevButton.getElement('background').setFillStyle(COLOR_DARK);
@@ -89,7 +93,7 @@ var CreateButtons = function (scene, keys) {
     }
     return scene.rexUI.add.buttons({
         buttons: buttons,
-        orientation: 0, // Left-right
+        orientation: 'y', // Left-right
     })
 }
 

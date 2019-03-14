@@ -7,7 +7,7 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 const ALIGN_CENTER = Phaser.Display.Align.CENTER;
 const ALIGN_LEFTTOP = Phaser.Display.Align.TOP_LEFT;
 
-class TextRegion extends BaseSizer {
+class TextBlock extends BaseSizer {
     constructor(scene, x, y, minWidth, minHeight, textGameObject, config) {
         if (IsPlainObject(x)) {
             config = x;
@@ -25,7 +25,7 @@ class TextRegion extends BaseSizer {
 
         super(scene, x, y, minWidth, minHeight, config);
 
-        this.type = 'rexTextRegion';
+        this.type = 'rexTextBlock';
         this.textChild = undefined;
         this.backgroundChildren = [];
 
@@ -78,8 +78,8 @@ var methods = {
     layout: Layout,
 }
 Object.assign(
-    TextRegion.prototype,
+    TextBlock.prototype,
     methods
 );
 
-export default TextRegion;
+export default TextBlock;
