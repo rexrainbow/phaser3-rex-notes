@@ -1,4 +1,4 @@
-import TextStyle from '../../utils/text/TextStyle.js';
+import TextStyle from '../../utils/canvastext/TextStyle.js';
 
 var GETPROP_RESULT = {
     plainText: null,
