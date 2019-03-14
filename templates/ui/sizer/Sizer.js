@@ -1,5 +1,5 @@
 import BaseSizer from '../basesizer/BaseSizer.js';
-import ParsePaddingConfig from '../utils/ParsePaddingConfig.js'
+import ParsePaddingConfig from '../utils/ParsePaddingConfig.js';
 import GetChildrenWidth from './GetChildrenWidth.js';
 import GetChildrenHeight from './GetChildrenHeight.js';
 import GetChildrenProportion from './GetChildrenProportion.js';

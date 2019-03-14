@@ -1,5 +1,5 @@
 import ALIGNMODE from '../utils/AlignConst.js';
-import ParsePaddingConfig from '../utils/ParsePaddingConfig.js'
+import ParsePaddingConfig from '../utils/ParsePaddingConfig.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const ALIGN_LEFTTOP = Phaser.Display.Align.TOP_LEFT;

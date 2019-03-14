@@ -1,6 +1,6 @@
 import GetSceneObject from '../../utils/system/GetSceneObject.js';
+import IsTextGameObject from '../../utils/object/IsTextGameObject.js';
 
-const TextKlass = Phaser.GameObjects.Text;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Clamp = Phaser.Math.Clamp;
 
@@ -68,12 +68,7 @@ class TextPagePlugin {
     }
 
     setTextObjectType() {
-        if (this.gameObject instanceof TextKlass) {
-            this.textObjectType = 0;
-        } else {
-            this.textObjectType = 1;
-        }
-
+        this.textObjectType = IsTextGameObject(this.gameObject) ? 0 : 1;
         return this;
     }
 
@@ -93,9 +88,9 @@ class TextPagePlugin {
 
         // wrap content in lines
         if (this.textObjectType === 0) {
-            this.lines = this.gameObject.getWrappedText(this.text);  // lines in array
+            this.lines = this.gameObject.getWrappedText(this.text); // lines in array
         } else {
-            this.lines = this.gameObject.getPenManager(this.text, this.lines);  // pen manager
+            this.lines = this.gameObject.getPenManager(this.text, this.lines); // pen manager
         }
 
         this.pageCount = Math.ceil(this.totalLineCount / this.pageLineCount);
