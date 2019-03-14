@@ -192,4 +192,4 @@ This method will be invoked when size of text has been changed automatically.
 
 ### Other properties
 
-See [label object](ui-label.md)
+See [label object](ui-label.md), [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).

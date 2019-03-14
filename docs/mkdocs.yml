@@ -78,6 +78,8 @@ nav:
             - Tabs: ui-tabs.md
             - Menu: ui-menu.md
             - Number bar: ui-numberbar.md
+            - Pages: ui-pages.md
+            - Base sizer: ui-basesizer.md
     - Zone: zone.md
     - DOM element:
         - DOM element: domelement.md

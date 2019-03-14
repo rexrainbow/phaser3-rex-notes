@@ -136,6 +136,12 @@ var sizer = scene.rexUI.add.fixWidthSizer(x, y, width, height, orientation,
     var sizer = new MySizer(scene, x, y, minWidth, minHeight, orientation);
     ```
 
+### Add background
+
+```javascript
+sizer.addBackground(child, paddingConfig);
+```
+
 ### Add child
 
 Add a game obejct to sizer
@@ -163,12 +169,6 @@ sizer.add(child, paddingConfig);
         }
         ```
 
-### Add background
-
-```javascript
-sizer.addBackground(child, paddingConfig);
-```
-
 ### Layout children
 
 Arrange position of all children.
@@ -177,103 +177,6 @@ Arrange position of all children.
 sizer.layout();
 ```
 
-### Bounds of sizer
-
-- Get
-    ```javascript
-    var leftBound = sizer.left;
-    var rightBound = sizer.right;
-    var topBound = sizer.top;
-    var bottomBound = sizer.bottom;
-    ```
-- Set
-    ```javascript
-    sizer.left = leftBound;
-    sizer.right = rightBound;
-    sizer.top = topBound;
-    sizer.bottom = bottomBound;
-    ```
-    or
-    ```javascript
-    sizer.alignLeft(leftBound);
-    sizer.alignRight(rightBound);
-    sizer.alignTop(topBound);
-    sizer.alignBottom(bottomBound);
-    ```
-
-### Push into bounds
-
-Align sizer to bound if overlapping it.
-
-```javascript
-sizer.pushIntoBounds();
-```
-
-or
-
-```javascript
-sizer.pushIntoBounds(bounds);
-```
-
-- `bounds` : Bounds in [rectangle object](geom-rectangle.md).
-
-### Scale
-
-- Pop up
-    - Pop up width and height
-        ```javascript
-        sizer.popUp(duration);
-        // sizer.popUp(duration, undefined, ease);
-        ```
-        - `ease` : [Ease function](tween.md/#ease-equations), default is `'Cubic'`.
-    - Pop up width only
-        ```javascript
-        sizer.popUp(duration, 'x');
-        // sizer.popUp(duration, 'x', ease);
-        ```
-        - `ease` : [Ease function](tween.md/#ease-equations), default is `'Cubic'`.
-    - Pop up height only
-        ```javascript
-        sizer.popUp(duration, 'y');
-        // sizer.popUp(duration, 'y', ease);
-        ```
-        - `ease` : [Ease function](tween.md/#ease-equations), default is `'Cubic'`.
-- Scale down destroy
-    - Scale down width and height
-        ```javascript
-        sizer.scaleDownDestroy(duration);
-        ```
-    - Scale down width only
-        ```javascript
-        sizer.scaleDownDestroy(duration, 'x');
-        ```
-    - Scale down height only
-        ```javascript
-        sizer.scaleDownDestroy(duration, 'y');
-        ```
-
-### Fade
-
-- Fade in
-    ```javascript
-    sizer.fadeIn(duration);
-    ```
-- Fade out destroy
-    ```javascript
-    sizer.fadeOutDestroy(duration);
-    ```
-
-### Draw bounds
-
-Draw all bounds of children.
-
-```javascript
-sizer.drawBounds(graphics, color);
-```
-
-- `graphics` : [Graphics game object](graphics.md)
-- `color` : Default value is `0xffffff`
-
 ### Other properties
 
-This sizer game object inherits from [ContainerLite](containerlite.md).
+See [base-sizer object](ui-basesizer.md).

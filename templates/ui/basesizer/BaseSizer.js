@@ -3,6 +3,7 @@ import Anchor from '../../../plugins/behaviors/anchor/Anchor.js';
 import GetSizerConfig from '../utils/GetSizerConfig.js';
 import PushIntoBounds from './PushIntoBounds.js';
 import DrawBounds from '../utils/DrawBounds.js';
+import AddChildrenMap from './AddChildrenMap.js';
 import GetElement from './GetElement.js';
 import GetChildrenWidth from './GetChildrenWidth.js';
 import GetChildrenHeight from './GetChildrenHeight.js';
@@ -160,6 +161,7 @@ var methods = {
     drawBounds: DrawBounds,
     getChildrenWidth: GetChildrenWidth,
     getChildrenHeight: GetChildrenHeight,
+    addChildrenMap: AddChildrenMap,
     getElement: GetElement,
     getAllChildrenSizers: GetAllChildrenSizers,
     getChildrenSizers: GetChildrenSizers,

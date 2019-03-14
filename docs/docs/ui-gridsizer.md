@@ -101,6 +101,12 @@ var gridSizer = scene.rexUI.add.gridSizer(x, y, width, height, column, row);
     var gridSizer = new MyGridSizer(scene, x, y, minWidth, minHeight, column, row);
     ```
 
+### Add background
+
+```javascript
+gridSizer.addBackground(child, paddingConfig);
+```
+
 ### Add child
 
 Add a game obejct to grid sizer
@@ -136,12 +142,6 @@ gridSizer.add(child, columnIndex, rowIndex, align, paddingConfig, expand);
         ```
 - `expand` : Set `true` to height and width.
 
-### Add background
-
-```javascript
-gridSizer.addBackground(child, paddingConfig);
-```
-
 ### Proportion
 
 Set proportion of each column or row via
@@ -159,103 +159,6 @@ Arrange position of all children.
 gridSizer.layout();
 ```
 
-### Bounds of grid sizer
-
-- Get
-    ```javascript
-    var leftBound = gridSizer.left;
-    var rightBound = gridSizer.right;
-    var topBound = gridSizer.top;
-    var bottomBound = gridSizer.bottom;
-    ```
-- Set
-    ```javascript
-    gridSizer.left = leftBound;
-    gridSizer.right = rightBound;
-    gridSizer.top = topBound;
-    gridSizer.bottom = bottomBound;
-    ```
-    or
-    ```javascript
-    gridSizer.alignLeft(leftBound);
-    gridSizer.alignRight(rightBound);
-    gridSizer.alignTop(topBound);
-    gridSizer.alignBottom(bottomBound);
-    ```
-
-### Push into bounds
-
-Align grid sizer to bound if overlapping it.
-
-```javascript
-gridSizer.pushIntoBounds();
-```
-
-or
-
-```javascript
-gridSizer.pushIntoBounds(bounds);
-```
-
-- `bounds` : Bounds in [rectangle object](geom-rectangle.md).
-
-### Scale
-
-- Pop up
-    - Pop up width and height
-        ```javascript
-        sizer.popUp(duration);
-        // sizer.popUp(duration, undefined, ease);
-        ```
-        - `ease` : [Ease function](tween.md/#ease-equations), default is `'Cubic'`.
-    - Pop up width only
-        ```javascript
-        sizer.popUp(duration, 'x');
-        // sizer.popUp(duration, 'x', ease);
-        ```
-        - `ease` : [Ease function](tween.md/#ease-equations), default is `'Cubic'`.
-    - Pop up height only
-        ```javascript
-        sizer.popUp(duration, 'y');
-        // sizer.popUp(duration, 'y', ease);
-        ```
-        - `ease` : [Ease function](tween.md/#ease-equations), default is `'Cubic'`.
-- Scale down destroy
-    - Scale down width and height
-        ```javascript
-        sizer.scaleDownDestroy(duration);
-        ```
-    - Scale down width only
-        ```javascript
-        sizer.scaleDownDestroy(duration, 'x');
-        ```
-    - Scale down height only
-        ```javascript
-        sizer.scaleDownDestroy(duration, 'y');
-        ```
-
-### Fade
-
-- Fade in
-    ```javascript
-    sizer.fadeIn(duration);
-    ```
-- Fade out destroy
-    ```javascript
-    sizer.fadeOutDestroy(duration);
-    ```
-
-### Draw bounds
-
-Draw all bounds of children.
-
-```javascript
-gridSizer.drawBounds(graphics, color);
-```
-
-- `graphics` : [Graphics game object](graphics.md)
-- `color` : Default value is `0xffffff`
-
 ### Other properties
 
-This gridSizer game object inherits from [ContainerLite](containerlite.md).
+See [base sizer object](ui-basesizer.md).

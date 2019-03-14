@@ -19,6 +19,17 @@ class Demo extends Phaser.Scene {
         var mainPanel = CreateMainPanel(this, keys)
             .setPosition(400, 300)
             .layout();
+
+
+        mainPanel.getElement('pages')
+            .on('pageinvisible', function (page, key, pages) {
+                console.log('Set page \'' + key + '\' invisible');
+            })
+            .on('pagevisible', function (page, key, pages) {
+                console.log('Set page \'' + key + '\' visible');
+            });
+
+        mainPanel.getElement('buttons').emitButtonClick(0);
     }
 
     update() {}
@@ -55,7 +66,8 @@ var CreateMainPanel = function (scene, keys) {
         pages.swapPage(button.text);
     });
 
-    buttons.emitButtonClick(0);
+    mainPanel.addChildrenMap('buttons', buttons);
+    mainPanel.addChildrenMap('pages', pages);
     return mainPanel;
 }
 

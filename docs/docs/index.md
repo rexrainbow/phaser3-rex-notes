@@ -72,6 +72,7 @@
 1. [UI-gird table](ui-gridtable.md): A container with a grid table, slider, and scroller.
 1. [UI-label](ui-label.md): A game object container with an icon, text, and background.
 1. [UI-number bar](ui-numberbar.md): A container with an icon, slider, text, and background.
+1. [UI-pages](ui-pages.md): A container with pages, only current page is visible.
 1. [UI-sizer](ui-sizer.md): Layout children game objects.
 1. [UI-slider](ui-slider.md): A container with a track, indicator, thumb and background.
 1. [UI-tabs](ui-tabs.md): A container with 4 groups of buttons around a center panel.

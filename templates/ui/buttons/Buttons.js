@@ -74,9 +74,8 @@ class Buttons extends Sizer {
             }
         }
 
-        this.childrenMap = {};
-        this.childrenMap.background = background;
-        this.childrenMap.buttons = (buttons) ? buttons : [];
+        this.addChildrenMap('background', background);
+        this.addChildrenMap('buttons', (buttons) ? buttons : []);
     }
 
     emitButtonClick(index) {

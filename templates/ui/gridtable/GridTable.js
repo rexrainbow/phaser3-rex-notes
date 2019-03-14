@@ -119,11 +119,10 @@ class GridTable extends Sizer {
         }
 
 
-        this.childrenMap = {};
-        this.childrenMap.background = background;
-        this.childrenMap.table = table;
-        this.childrenMap.slider = slider;
-        this.childrenMap.scroller = scroller;
+        this.addChildrenMap('background', background);
+        this.addChildrenMap('table', table);
+        this.addChildrenMap('slider', slider);
+        this.addChildrenMap('scroller', scroller);
 
         TableSetInteractive.call(this, table);
         var callback = GetValue(config, 'createCellContainerCallback', NOOP);

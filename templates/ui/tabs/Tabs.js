@@ -137,18 +137,16 @@ class Tabs extends GridSizer {
             this.add(bottomButtonsSizer, 1, 2, undefined, padding, false);
         }
 
-
-        this.childrenMap = {};
-        this.childrenMap.background = background;
-        this.childrenMap.panel = panel;
-        this.childrenMap.leftButtons = leftButtons;
-        this.childrenMap.rightButtons = rightButtons;
-        this.childrenMap.topButtons = topButtons;
-        this.childrenMap.bottomButtons = bottomButtons;
-        this.childrenMap.leftButtonsSizer = leftButtonsSizer;
-        this.childrenMap.rightButtonsSizer = rightButtonsSizer;
-        this.childrenMap.topButtonsSizer = topButtonsSizer;
-        this.childrenMap.bottomButtonsSizer = bottomButtonsSizer;
+        this.addChildrenMap('background', background);
+        this.addChildrenMap('panel', panel);
+        this.addChildrenMap('leftButtons', leftButtons);
+        this.addChildrenMap('rightButtons', rightButtons);
+        this.addChildrenMap('topButtons', topButtons);
+        this.addChildrenMap('bottomButtons', bottomButtons);
+        this.addChildrenMap('leftButtonsSizer', leftButtonsSizer);
+        this.addChildrenMap('rightButtonsSizer', rightButtonsSizer);
+        this.addChildrenMap('topButtonsSizer', topButtonsSizer);
+        this.addChildrenMap('bottomButtonsSizer', bottomButtonsSizer);
     }
 
     emitButtonClick(groupName, index) {

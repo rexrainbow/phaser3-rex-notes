@@ -73,11 +73,10 @@ class Slider extends Sizer {
                 break;
         }
 
-        this.childrenMap = {};
-        this.childrenMap.background = background;
-        this.childrenMap.track = track;
-        this.childrenMap.indicator = indicator;
-        this.childrenMap.thumb = thumb;
+        this.addChildrenMap('background', background);
+        this.addChildrenMap('track', track);
+        this.addChildrenMap('indicator', indicator);
+        this.addChildrenMap('thumb', thumb);
 
         var callback = GetValue(config, 'valuechangeCallback', null);
         if (callback !== null) {

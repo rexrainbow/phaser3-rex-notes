@@ -101,13 +101,12 @@ class Label extends Sizer {
             }
         }
 
-        this.childrenMap = {};
-        this.childrenMap.background = background;
-        this.childrenMap.icon = icon;
-        this.childrenMap.iconMask = iconMask;
-        this.childrenMap.text = text;
-        this.childrenMap.action = action;
-        this.childrenMap.actionMask = actionMask;
+        this.addChildrenMap('background', background);
+        this.addChildrenMap('icon', icon);
+        this.addChildrenMap('iconMask', iconMask);
+        this.addChildrenMap('text', text);
+        this.addChildrenMap('action', action);
+        this.addChildrenMap('actionMask', actionMask);
     }
 
     get text() {

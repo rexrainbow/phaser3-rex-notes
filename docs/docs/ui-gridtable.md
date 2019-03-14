@@ -176,7 +176,7 @@ gridTable.layout();
 
 ### Other properties
 
-See [sizer object](ui-sizer.md)
+See [base sizer object](ui-basesizer.md).
 
 ### Events
 
@@ -233,14 +233,3 @@ See [sizer object](ui-sizer.md)
     ```javascript
     var gameObject = gridTable.getElement('#' + name);
     ```
-
-### Draw bounds
-
-Draw all bounds of elements.
-
-```javascript
-gridTable.drawBounds(graphics, color);
-```
-
-- `graphics` : [Graphics game object](graphics.md)
-- `color` : Default value is `0xffffff`

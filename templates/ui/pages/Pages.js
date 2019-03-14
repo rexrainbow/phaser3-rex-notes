@@ -37,8 +37,7 @@ class Pages extends BaseSizer {
         this.backgroundChildren = [];
         this.setSwapMode(GetValue(config, 'swapMode', 0));
 
-        this.childrenMap = {};
-        this.childrenMap.pages = this.sizerChildren.entries;
+        this.addChildrenMap('pages', this.sizerChildren.entries);
     }
 
     destroy(fromScene) {

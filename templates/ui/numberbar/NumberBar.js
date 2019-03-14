@@ -119,11 +119,10 @@ class NumberBar extends Sizer {
             this.add(text, 0, 'center', padding);
         }
 
-        this.childrenMap = {};
-        this.childrenMap.background = background;
-        this.childrenMap.icon = icon;
-        this.childrenMap.slider = slider;
-        this.childrenMap.text = text;
+        this.addChildrenMap('background', background);
+        this.addChildrenMap('icon', icon);
+        this.addChildrenMap('slider', slider);
+        this.addChildrenMap('text', text);
 
         var callback = GetValue(config, 'valuechangeCallback', null);
         if (callback !== null) {

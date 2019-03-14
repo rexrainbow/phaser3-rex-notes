@@ -144,7 +144,7 @@ tabs.layout();
 
 ### Other properties
 
-See [grid sizer object](ui-gridsizer.md)
+See [grid sizer object](ui-gridsizer.md), [base-sizer object](ui-basesizer.md).
 
 ### Events
 

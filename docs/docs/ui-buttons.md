@@ -118,7 +118,7 @@ buttons.layout();
 
 ### Other properties
 
-See [grid sizer object](ui-gridsizer.md)
+See [sizer object](ui-sizer.md)
 
 ### Events
 

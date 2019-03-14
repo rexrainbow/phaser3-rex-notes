@@ -192,13 +192,12 @@ class Dialog extends Sizer {
             this.add(buttonsSizer, 0, 'center', padding, expand);
         }
 
-        this.childrenMap = {};
-        this.childrenMap.background = background;
-        this.childrenMap.title = title;
-        this.childrenMap.toolbar = toolbar;
-        this.childrenMap.content = content;
-        this.childrenMap.choices = choices;
-        this.childrenMap.actions = actions;
+        this.addChildrenMap('background', background);
+        this.addChildrenMap('title', title);
+        this.addChildrenMap('toolbar', toolbar);
+        this.addChildrenMap('content', content);
+        this.addChildrenMap('choices', choices);
+        this.addChildrenMap('actions', actions);
     }
 }
 
