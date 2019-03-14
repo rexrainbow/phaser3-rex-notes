@@ -789,43 +789,36 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#set-color" title="Set color" class="md-nav__link">
-    Set color
+  <a href="#color" title="Color" class="md-nav__link">
+    Color
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#set-shadow" title="Set shadow" class="md-nav__link">
-    Set shadow
+  <a href="#line-spacing" title="Line spacing" class="md-nav__link">
+    Line spacing
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#set-line-spacing" title="Set line spacing" class="md-nav__link">
-    Set line spacing
+  <a href="#padding" title="Padding" class="md-nav__link">
+    Padding
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#set-padding" title="Set padding" class="md-nav__link">
-    Set padding
+  <a href="#max-lines" title="Max lines" class="md-nav__link">
+    Max lines
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#set-max-lines" title="Set max lines" class="md-nav__link">
-    Set max lines
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set-object-size" title="Set object size" class="md-nav__link">
-    Set object size
+  <a href="#fixed-size" title="Fixed size" class="md-nav__link">
+    Fixed size
   </a>
   
 </li>
@@ -1416,6 +1409,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../ui-buttons/" title="Buttons" class="md-nav__link">
+      Buttons
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../ui-slider/" title="Slider" class="md-nav__link">
       Slider
     </a>
@@ -1478,6 +1483,30 @@
   <li class="md-nav__item">
     <a href="../ui-numberbar/" title="Number bar" class="md-nav__link">
       Number bar
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ui-pages/" title="Pages" class="md-nav__link">
+      Pages
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ui-basesizer/" title="Base sizer" class="md-nav__link">
+      Base sizer
     </a>
   </li>
 
@@ -3942,43 +3971,36 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#set-color" title="Set color" class="md-nav__link">
-    Set color
+  <a href="#color" title="Color" class="md-nav__link">
+    Color
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#set-shadow" title="Set shadow" class="md-nav__link">
-    Set shadow
+  <a href="#line-spacing" title="Line spacing" class="md-nav__link">
+    Line spacing
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#set-line-spacing" title="Set line spacing" class="md-nav__link">
-    Set line spacing
+  <a href="#padding" title="Padding" class="md-nav__link">
+    Padding
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#set-padding" title="Set padding" class="md-nav__link">
-    Set padding
+  <a href="#max-lines" title="Max lines" class="md-nav__link">
+    Max lines
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#set-max-lines" title="Set max lines" class="md-nav__link">
-    Set max lines
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set-object-size" title="Set object size" class="md-nav__link">
-    Set object size
+  <a href="#fixed-size" title="Fixed size" class="md-nav__link">
+    Fixed size
   </a>
   
 </li>
@@ -4099,12 +4121,13 @@
 </ul>
 </li>
 <li>Create instance
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">text</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyText</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="s1">&#39;hello&#39;</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyText</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="s1">&#39;hello&#39;</span><span class="p">);</span>
 </pre></div></li>
 </ul>
 <h3 id="word-wrap">Word wrap<a class="headerlink" href="#word-wrap" title="Permanent link">&para;</a></h3>
-<p>Wrap by width</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">text</span><span class="p">({</span>
+<ul>
+<li>Wrap by width
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">text</span><span class="p">({</span>
     <span class="nx">x</span><span class="o">:</span> <span class="mi">400</span><span class="p">,</span>
     <span class="nx">y</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
     <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;The sky above the port was the color of television, tuned to a dead channel.&#39;</span><span class="p">,</span>
@@ -4115,10 +4138,9 @@
         <span class="nx">wordWrap</span><span class="o">:</span> <span class="p">{</span> <span class="nx">width</span><span class="o">:</span> <span class="mi">300</span> <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">});</span>
-</pre></div>
-
-<p>Wrap by callback</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">text</span><span class="p">({</span>
+</pre></div></li>
+<li>Wrap by callback
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">text</span><span class="p">({</span>
     <span class="nx">x</span><span class="o">:</span> <span class="mi">400</span><span class="p">,</span>
     <span class="nx">y</span><span class="o">:</span> <span class="mi">300</span><span class="p">,</span>
     <span class="nx">text</span><span class="o">:</span> <span class="s1">&#39;The sky above the port was the color of television, tuned to a dead channel.&#39;</span><span class="p">,</span>
@@ -4143,8 +4165,29 @@
     <span class="c1">// the correct place.</span>
     <span class="k">return</span> <span class="nx">words</span><span class="p">;</span>
 <span class="p">}</span>
-</pre></div>
-
+</pre></div></li>
+<li>Wrap width<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">width</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">wordWrapWidth</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">useAdvancedWrap</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">wordWrapUseAdvanced</span><span class="p">;</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">setWordWrapWidth</span><span class="p">(</span><span class="nx">width</span><span class="p">);</span>
+<span class="c1">// txt.setWordWrapWidth(width, useAdvancedWrap);</span>
+</pre></div></li>
+</ul>
+</li>
+<li>Wrap callback<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">wordWrapCallback</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">scope</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">wordWrapCallbackScope</span><span class="p">;</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">setWordWrapCallback</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+</li>
+</ul>
 <h3 id="content">Content<a class="headerlink" href="#content" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get
@@ -4163,39 +4206,104 @@
 <span class="nx">txt</span><span class="p">.</span><span class="nx">setFontStyle</span><span class="p">(</span><span class="nx">style</span><span class="p">);</span>
 </pre></div>
 
-<h3 id="set-color">Set color<a class="headerlink" href="#set-color" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">setColor</span><span class="p">(</span><span class="nx">color</span><span class="p">);</span>
-<span class="nx">txt</span><span class="p">.</span><span class="nx">setStroke</span><span class="p">(</span><span class="nx">color</span><span class="p">,</span> <span class="nx">thickness</span><span class="p">);</span>
-<span class="nx">txt</span><span class="p">.</span><span class="nx">setBackgroundColor</span><span class="p">(</span><span class="nx">color</span><span class="p">);</span>
-<span class="nx">txt</span><span class="p">.</span><span class="nx">setFill</span><span class="p">(</span><span class="nx">color</span><span class="p">);</span>
+<h3 id="color">Color<a class="headerlink" href="#color" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Text color<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">color</span><span class="p">;</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">setColor</span><span class="p">(</span><span class="nx">color</span><span class="p">);</span>
 </pre></div>
-
-<h3 id="set-shadow">Set shadow<a class="headerlink" href="#set-shadow" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">setShadow</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">color</span><span class="p">,</span> <span class="nx">blur</span><span class="p">,</span> <span class="nx">shadowStroke</span><span class="p">,</span> <span class="nx">shadowFill</span><span class="p">);</span>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">setFill</span><span class="p">(</span><span class="nx">color</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+</li>
+<li>Stroke color, thickness<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">stroke</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">thickness</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">strokeThickness</span><span class="p">;</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">setStroke</span><span class="p">(</span><span class="nx">color</span><span class="p">,</span> <span class="nx">thickness</span><span class="p">);</span>
+</pre></div></li>
+<li>Clear
+    <div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">setStroke</span><span class="p">();</span>
+</pre></div></li>
+</ul>
+</li>
+<li>Background color<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundColor</span><span class="p">;</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">setBackgroundColor</span><span class="p">(</span><span class="nx">color</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+</li>
+<li>Shadow<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">shadowColor</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">offsetX</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">shadowOffsetX</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">offsetY</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">shadowOffsetY</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">blur</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">shadowBlur</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">stroke</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">shadowStroke</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">enabled</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">shadowFill</span><span class="p">;</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">setShadow</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">color</span><span class="p">,</span> <span class="nx">blur</span><span class="p">,</span> <span class="nx">shadowStroke</span><span class="p">,</span> <span class="nx">shadowFill</span><span class="p">);</span>
 <span class="nx">txt</span><span class="p">.</span><span class="nx">setShadowOffset</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 <span class="nx">txt</span><span class="p">.</span><span class="nx">setShadowColor</span><span class="p">(</span><span class="nx">color</span><span class="p">);</span>
 <span class="nx">txt</span><span class="p">.</span><span class="nx">setShadowBlur</span><span class="p">(</span><span class="nx">blur</span><span class="p">);</span>
 <span class="nx">txt</span><span class="p">.</span><span class="nx">setShadowStroke</span><span class="p">(</span><span class="nx">enabled</span><span class="p">);</span>
 <span class="nx">txt</span><span class="p">.</span><span class="nx">setShadowFill</span><span class="p">(</span><span class="nx">enabled</span><span class="p">);</span>
-</pre></div>
-
-<h3 id="set-line-spacing">Set line spacing<a class="headerlink" href="#set-line-spacing" title="Permanent link">&para;</a></h3>
+</pre></div></li>
+</ul>
+</li>
+</ul>
+<h3 id="line-spacing">Line spacing<a class="headerlink" href="#line-spacing" title="Permanent link">&para;</a></h3>
 <p>This value is <em>added</em> to the height of the font when calculating the overall line height.</p>
-<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">setLineSpacing</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
-</pre></div>
-
-<h3 id="set-padding">Set padding<a class="headerlink" href="#set-padding" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">setPadding</span><span class="p">(</span><span class="nx">left</span><span class="p">,</span> <span class="nx">top</span><span class="p">,</span> <span class="nx">right</span><span class="p">,</span> <span class="nx">bottom</span><span class="p">);</span>
+<ul>
+<li>Get
+   <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">lineSpacing</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">lineSpacing</span><span class="p">;</span>
+</pre></div></li>
+<li>Set
+   <div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">setLineSpacing</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h3 id="padding">Padding<a class="headerlink" href="#padding" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">left</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">padding</span><span class="p">.</span><span class="nx">left</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">top</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">padding</span><span class="p">.</span><span class="nx">top</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">right</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">padding</span><span class="p">.</span><span class="nx">right</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">bottom</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">padding</span><span class="p">.</span><span class="nx">bottom</span><span class="p">;</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">setPadding</span><span class="p">(</span><span class="nx">left</span><span class="p">,</span> <span class="nx">top</span><span class="p">,</span> <span class="nx">right</span><span class="p">,</span> <span class="nx">bottom</span><span class="p">);</span>
 <span class="c1">// txt.setPadding(padding); // padding: {left, top, right, bottom}</span>
-</pre></div>
-
-<h3 id="set-max-lines">Set max lines<a class="headerlink" href="#set-max-lines" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">setMaxLines</span><span class="p">(</span><span class="nx">max</span><span class="p">);</span>
-</pre></div>
-
-<h3 id="set-object-size">Set object size<a class="headerlink" href="#set-object-size" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">setFixedSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
-</pre></div>
+</pre></div></li>
+</ul>
+<h3 id="max-lines">Max lines<a class="headerlink" href="#max-lines" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">maxLines</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">maxLines</span><span class="p">;</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">setMaxLines</span><span class="p">(</span><span class="nx">max</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h3 id="fixed-size">Fixed size<a class="headerlink" href="#fixed-size" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">width</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">fixedWidth</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">height</span> <span class="o">=</span> <span class="nx">txt</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">fixedHeight</span><span class="p">;</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">setFixedSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+</pre></div></li>
+</ul>
                 
                   
                 

@@ -1322,13 +1322,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-child" title="Add child" class="md-nav__link">
-    Add child
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#add-background" title="Add background" class="md-nav__link">
     Add background
   </a>
@@ -1336,43 +1329,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#add-child" title="Add child" class="md-nav__link">
+    Add child
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#layout-children" title="Layout children" class="md-nav__link">
     Layout children
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#bounds-of-sizer" title="Bounds of sizer" class="md-nav__link">
-    Bounds of sizer
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#push-into-bounds" title="Push into bounds" class="md-nav__link">
-    Push into bounds
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scale" title="Scale" class="md-nav__link">
-    Scale
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#fade" title="Fade" class="md-nav__link">
-    Fade
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#draw-bounds" title="Draw bounds" class="md-nav__link">
-    Draw bounds
   </a>
   
 </li>
@@ -1420,6 +1385,18 @@
   <li class="md-nav__item">
     <a href="../ui-textbox/" title="Text box" class="md-nav__link">
       Text box
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ui-buttons/" title="Buttons" class="md-nav__link">
+      Buttons
     </a>
   </li>
 
@@ -1492,6 +1469,30 @@
   <li class="md-nav__item">
     <a href="../ui-numberbar/" title="Number bar" class="md-nav__link">
       Number bar
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ui-pages/" title="Pages" class="md-nav__link">
+      Pages
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ui-basesizer/" title="Base sizer" class="md-nav__link">
+      Base sizer
     </a>
   </li>
 
@@ -3949,13 +3950,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-child" title="Add child" class="md-nav__link">
-    Add child
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#add-background" title="Add background" class="md-nav__link">
     Add background
   </a>
@@ -3963,43 +3957,15 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#add-child" title="Add child" class="md-nav__link">
+    Add child
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#layout-children" title="Layout children" class="md-nav__link">
     Layout children
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#bounds-of-sizer" title="Bounds of sizer" class="md-nav__link">
-    Bounds of sizer
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#push-into-bounds" title="Push into bounds" class="md-nav__link">
-    Push into bounds
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scale" title="Scale" class="md-nav__link">
-    Scale
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#fade" title="Fade" class="md-nav__link">
-    Fade
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#draw-bounds" title="Draw bounds" class="md-nav__link">
-    Draw bounds
   </a>
   
 </li>
@@ -4163,6 +4129,10 @@
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">sizer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MySizer</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">minWidth</span><span class="p">,</span> <span class="nx">minHeight</span><span class="p">,</span> <span class="nx">orientation</span><span class="p">);</span>
 </pre></div></li>
 </ul>
+<h3 id="add-background">Add background<a class="headerlink" href="#add-background" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">addBackground</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">paddingConfig</span><span class="p">);</span>
+</pre></div>
+
 <h3 id="add-child">Add child<a class="headerlink" href="#add-child" title="Permanent link">&para;</a></h3>
 <p>Add a game obejct to sizer</p>
 <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
@@ -4187,107 +4157,13 @@
 </ul>
 </li>
 </ul>
-<h3 id="add-background">Add background<a class="headerlink" href="#add-background" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">addBackground</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">paddingConfig</span><span class="p">);</span>
-</pre></div>
-
 <h3 id="layout-children">Layout children<a class="headerlink" href="#layout-children" title="Permanent link">&para;</a></h3>
 <p>Arrange position of all children.</p>
 <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">layout</span><span class="p">();</span>
 </pre></div>
 
-<h3 id="bounds-of-sizer">Bounds of sizer<a class="headerlink" href="#bounds-of-sizer" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Get
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">leftBound</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">left</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">rightBound</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">right</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">topBound</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">top</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">bottomBound</span> <span class="o">=</span> <span class="nx">sizer</span><span class="p">.</span><span class="nx">bottom</span><span class="p">;</span>
-</pre></div></li>
-<li>Set
-    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">left</span> <span class="o">=</span> <span class="nx">leftBound</span><span class="p">;</span>
-<span class="nx">sizer</span><span class="p">.</span><span class="nx">right</span> <span class="o">=</span> <span class="nx">rightBound</span><span class="p">;</span>
-<span class="nx">sizer</span><span class="p">.</span><span class="nx">top</span> <span class="o">=</span> <span class="nx">topBound</span><span class="p">;</span>
-<span class="nx">sizer</span><span class="p">.</span><span class="nx">bottom</span> <span class="o">=</span> <span class="nx">bottomBound</span><span class="p">;</span>
-</pre></div>
-    or
-    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">alignLeft</span><span class="p">(</span><span class="nx">leftBound</span><span class="p">);</span>
-<span class="nx">sizer</span><span class="p">.</span><span class="nx">alignRight</span><span class="p">(</span><span class="nx">rightBound</span><span class="p">);</span>
-<span class="nx">sizer</span><span class="p">.</span><span class="nx">alignTop</span><span class="p">(</span><span class="nx">topBound</span><span class="p">);</span>
-<span class="nx">sizer</span><span class="p">.</span><span class="nx">alignBottom</span><span class="p">(</span><span class="nx">bottomBound</span><span class="p">);</span>
-</pre></div></li>
-</ul>
-<h3 id="push-into-bounds">Push into bounds<a class="headerlink" href="#push-into-bounds" title="Permanent link">&para;</a></h3>
-<p>Align sizer to bound if overlapping it.</p>
-<div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">pushIntoBounds</span><span class="p">();</span>
-</pre></div>
-
-<p>or</p>
-<div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">pushIntoBounds</span><span class="p">(</span><span class="nx">bounds</span><span class="p">);</span>
-</pre></div>
-
-<ul>
-<li><code>bounds</code> : Bounds in <a href="../geom-rectangle/">rectangle object</a>.</li>
-</ul>
-<h3 id="scale">Scale<a class="headerlink" href="#scale" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Pop up<ul>
-<li>Pop up width and height
-    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">popUp</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>
-<span class="c1">// sizer.popUp(duration, undefined, ease);</span>
-</pre></div><ul>
-<li><code>ease</code> : <a href="tween.md/#ease-equations">Ease function</a>, default is <code>'Cubic'</code>.</li>
-</ul>
-</li>
-<li>Pop up width only
-    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">popUp</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">);</span>
-<span class="c1">// sizer.popUp(duration, &#39;x&#39;, ease);</span>
-</pre></div><ul>
-<li><code>ease</code> : <a href="tween.md/#ease-equations">Ease function</a>, default is <code>'Cubic'</code>.</li>
-</ul>
-</li>
-<li>Pop up height only
-    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">popUp</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">);</span>
-<span class="c1">// sizer.popUp(duration, &#39;y&#39;, ease);</span>
-</pre></div><ul>
-<li><code>ease</code> : <a href="tween.md/#ease-equations">Ease function</a>, default is <code>'Cubic'</code>.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Scale down destroy<ul>
-<li>Scale down width and height
-    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">scaleDownDestroy</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>
-</pre></div></li>
-<li>Scale down width only
-    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">scaleDownDestroy</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">);</span>
-</pre></div></li>
-<li>Scale down height only
-    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">scaleDownDestroy</span><span class="p">(</span><span class="nx">duration</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">);</span>
-</pre></div></li>
-</ul>
-</li>
-</ul>
-<h3 id="fade">Fade<a class="headerlink" href="#fade" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Fade in
-    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">fadeIn</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>
-</pre></div></li>
-<li>Fade out destroy
-    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">fadeOutDestroy</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>
-</pre></div></li>
-</ul>
-<h3 id="draw-bounds">Draw bounds<a class="headerlink" href="#draw-bounds" title="Permanent link">&para;</a></h3>
-<p>Draw all bounds of children.</p>
-<div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">drawBounds</span><span class="p">(</span><span class="nx">graphics</span><span class="p">,</span> <span class="nx">color</span><span class="p">);</span>
-</pre></div>
-
-<ul>
-<li><code>graphics</code> : <a href="../graphics/">Graphics game object</a></li>
-<li><code>color</code> : Default value is <code>0xffffff</code></li>
-</ul>
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
-<p>This sizer game object inherits from <a href="../containerlite/">ContainerLite</a>.</p>
+<p>See <a href="../ui-basesizer/">base-sizer object</a>.</p>
                 
                   
                 

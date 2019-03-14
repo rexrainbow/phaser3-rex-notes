@@ -1292,6 +1292,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../ui-buttons/" title="Buttons" class="md-nav__link">
+      Buttons
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../ui-slider/" title="Slider" class="md-nav__link">
       Slider
     </a>
@@ -1470,6 +1482,30 @@
   <li class="md-nav__item">
     <a href="../ui-numberbar/" title="Number bar" class="md-nav__link">
       Number bar
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ui-pages/" title="Pages" class="md-nav__link">
+      Pages
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ui-basesizer/" title="Base sizer" class="md-nav__link">
+      Base sizer
     </a>
   </li>
 
@@ -4071,6 +4107,11 @@
         <span class="nx">rightButton</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">topButton</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">bottomButton</span><span class="o">:</span> <span class="mi">0</span>
+    <span class="p">},</span>
+
+    <span class="nx">click</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">mode</span><span class="o">:</span> <span class="s1">&#39;pointerup&#39;</span><span class="p">,</span>
+        <span class="nx">clickInterval</span><span class="o">:</span> <span class="mi">100</span>
     <span class="p">}</span>
 
     <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
@@ -4092,6 +4133,15 @@
 <li><code>space.leftButtonsOffset</code>, <code>space.rightButtonsOffset</code> : Top offset of buttons group.</li>
 <li><code>space.topButtonsOffset</code>, <code>space.bottomButtonsOffset</code> : Left offset of buttons group.</li>
 <li><code>space.leftButton</code>, <code>space.rightButton</code>, <code>space.topButton</code>, <code>space.bottomButton</code> : Space between 2 button game objects.</li>
+</ul>
+</li>
+<li><code>click</code>: Configuration of <a href="../button/">button clicking</a>.<ul>
+<li><code>click.mode</code> :<ul>
+<li><code>'pointerdown'</code>, <code>'press'</code>, or <code>0</code> : Fire 'click' event when touch pressed.</li>
+<li><code>'pointerup'</code>, <code>'release'</code>, or <code>1</code> : Fire 'click' event when touch released after pressed.</li>
+</ul>
+</li>
+<li><code>click.clickInterval</code> : Interval between 2 'click' events, in ms.</li>
 </ul>
 </li>
 <li><code>name</code> : Set name of this tabs.</li>
@@ -4117,7 +4167,7 @@
 </pre></div>
 
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
-<p>See <a href="../ui-gridsizer/">grid sizer object</a></p>
+<p>See <a href="../ui-gridsizer/">grid sizer object</a>, <a href="../ui-basesizer/">base-sizer object</a>.</p>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Click button
@@ -4157,7 +4207,7 @@
 
 <ul>
 <li><code>groupName</code> : <code>'left'</code>, <code>'right'</code>, <code>'top'</code>, or <code>'bottom'</code>.</li>
-<li><code>index</code> : Index of triggered button game object.</li>
+<li><code>index</code> : Index of triggered button game object, or a button game object.</li>
 </ul>
 <h3 id="get-element">Get element<a class="headerlink" href="#get-element" title="Permanent link">&para;</a></h3>
 <ul>
@@ -4169,18 +4219,42 @@
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">panel</span> <span class="o">=</span> <span class="nx">tabs</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;panel&#39;</span><span class="p">);</span>
 </pre></div></li>
 <li>Buttons<ul>
-<li>Left buttons
+<li>Left button game objects
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bottons</span> <span class="o">=</span> <span class="nx">tabs</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;leftButtons&#39;</span><span class="p">);</span>
-</pre></div></li>
-<li>Right buttons
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bottons</span> <span class="o">=</span> <span class="nx">tabs</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;leftButtons[0]&#39;</span><span class="p">);</span>
+</pre></div><ul>
+<li>First button of left buttons.</li>
+</ul>
+</li>
+<li>Right button game objects
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bottons</span> <span class="o">=</span> <span class="nx">tabs</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;rightButtons&#39;</span><span class="p">);</span>
-</pre></div></li>
-<li>Top buttons
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bottons</span> <span class="o">=</span> <span class="nx">tabs</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;rightButtons[0]&#39;</span><span class="p">);</span>
+</pre></div><ul>
+<li>First button of right buttons.</li>
+</ul>
+</li>
+<li>Top button game objects
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bottons</span> <span class="o">=</span> <span class="nx">tabs</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;topButtons&#39;</span><span class="p">);</span>
-</pre></div></li>
-<li>Bottom buttons
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bottons</span> <span class="o">=</span> <span class="nx">tabs</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;topButtons[0]&#39;</span><span class="p">);</span>
+</pre></div><ul>
+<li>First button of top buttons.</li>
+</ul>
+</li>
+<li>Bottom button game objects
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bottons</span> <span class="o">=</span> <span class="nx">tabs</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;bottomButtons&#39;</span><span class="p">);</span>
-</pre></div></li>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bottons</span> <span class="o">=</span> <span class="nx">tabs</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;bottomButtons[0]&#39;</span><span class="p">);</span>
+</pre></div><ul>
+<li>First button of bottom buttons.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
