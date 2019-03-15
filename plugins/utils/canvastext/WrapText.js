@@ -11,6 +11,10 @@ const splitRegExp = CONST.SPLITREGEXP;
 
 var WRAP_RESULT = [];
 var WrapText = function (text, getTextWidth, wrapMode, wrapWidth, offset) {
+    if (wrapWidth <= 0) {
+        wrapMode = NO_WRAP;
+    }
+
     var retLines = WRAP_RESULT;
     LinesPool.pushMultiple(retLines);
 

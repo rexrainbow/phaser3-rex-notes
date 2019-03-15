@@ -58,10 +58,13 @@ var Text = new Phaser.Class({
 
             this.context = this.canvas.getContext('2d');
 
-            if (style && style.hasOwnProperty('align')) {
-                var halign = style.align;
-                delete style.align;
-                style.halign = halign;
+            if (style) {
+                // Override align
+                if (style.hasOwnProperty('align')) {
+                    var halign = style.align;
+                    delete style.align;
+                    style.halign = halign;
+                }
             }
             this.style = new TextStyle(this, style);
 
@@ -178,7 +181,7 @@ var Text = new Phaser.Class({
         if (value !== this._text) {
             this._text = value.toString();
 
-            this.updateText(true);
+            this.updateText();
         }
 
         return this;
@@ -308,7 +311,7 @@ var Text = new Phaser.Class({
         this.padding.right = right;
         this.padding.bottom = bottom;
 
-        return this.updateText();
+        return this.updateText(false);
     },
 
     setResolution: function (value) {
@@ -321,7 +324,7 @@ var Text = new Phaser.Class({
 
     updateText: function (runWrap) {
         if (runWrap === undefined) {
-            runWrap = false;
+            runWrap = true;
         }
         var canvasText = this.canvasText;
 
@@ -447,6 +450,16 @@ var Text = new Phaser.Class({
 
     getPenManager: function (text, pensManager) {
         return this.canvasText.getPenManager(text, pensManager);
+    },
+
+    lineSpacing: {
+        get: function () {
+            return this.style.lineSpacing;
+        },
+
+        set: function (value) {
+            this.setLineSpacing(value);
+        }
     }
 
 });

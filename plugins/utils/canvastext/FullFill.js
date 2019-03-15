@@ -7,13 +7,13 @@ var FullFill = function (textObject, width, height) {
 
     var style = textObject.style;
     // Set wrap width
-    style.wordWrapWidth = Math.max(width, 0);
+    style.wrapWidth = Math.max(width, 0);
 
     // Set max lines
     // height = (maxLines * (lineHeight + lineSpacing)) - lineSpacing
     var lineHeight = style.metrics.fontSize + style.strokeThickness;
-    var lineSpacing = textObject.lineSpacing;
-    var maxLines = Math.floor((height - lineSpacing) / (lineHeight + lineSpacing));    
+    var lineSpacing = style.lineSpacing;
+    var maxLines = Math.floor((height - lineSpacing) / (lineHeight + lineSpacing));
     style.maxLines = Math.max(maxLines, 0);
 
     // Redraw text

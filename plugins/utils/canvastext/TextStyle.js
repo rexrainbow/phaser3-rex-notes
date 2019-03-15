@@ -63,8 +63,8 @@ var propertyMap = {
     baselineY: ['baselineY', 1.4],
 
     // wrap
-    wrapMode: ['wrap.mode', 0],
-    wrapWidth: ['wrap.width', null]
+    wrapMode: ['wrap.mode', 1],
+    wrapWidth: ['wrap.width', 0]
     //wrapCallback: ['wrap.callback', null],
     //wrapCallbackScope: ['wrap.callbackScope', null]
 };
@@ -144,7 +144,7 @@ class TextStyle {
             if (wrap.hasOwnProperty('mode')) {
                 var mode = wrap.mode;
                 if (typeof mode === 'string') {
-                    wrap.mode = WRAPMODE[mode.toLowerCase()] || 0;
+                    wrap.mode = WRAPMODE[mode];
                 }
             } else {
                 if (wrap.hasOwnProperty('width')) {
@@ -472,8 +472,7 @@ class TextStyle {
 
     setWrapWidth(width) {
         this.wrapWidth = width;
-        var runWrap = (this.wrapMode !== 0);
-        return this.update(runWrap);
+        return this.update(false);
     }
 
     setAlign(halign, valign) {
