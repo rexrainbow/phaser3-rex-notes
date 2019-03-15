@@ -106,11 +106,6 @@ class Sizer extends BaseSizer {
         return this;
     }
 
-    addBackground(gameObject, paddingConfig) {
-        this.add(gameObject, -1, undefined, paddingConfig, true);
-        return this;
-    }
-
     insert(index, gameObject, proportion, align, paddingConfig, expand) {
         this.add(gameObject, proportion, align, paddingConfig, expand);
         this.moveTo(gameObject, index);

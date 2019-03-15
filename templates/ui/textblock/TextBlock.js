@@ -27,7 +27,6 @@ class TextBlock extends BaseSizer {
 
         this.type = 'rexTextBlock';
         this.textChild = undefined;
-        this.backgroundChildren = [];
 
         if (textGameObject) {
             this.addText(textGameObject, GetValue(config, 'padding', undefined));
@@ -39,7 +38,7 @@ class TextBlock extends BaseSizer {
         if (!this.scene) {
             return;
         }
-        this.backgroundChildren.length = 0;
+        this.textChild = undefined;
         super.destroy(fromScene);
     }
 
@@ -55,21 +54,6 @@ class TextBlock extends BaseSizer {
         config.padding = ParsePaddingConfig(paddingConfig);
         config.expand = true;
         this.textChild = gameObject;
-        return this;
-    }
-
-    addBackground(gameObject, paddingConfig) {
-        super.add(gameObject);
-        if (paddingConfig === undefined) {
-            paddingConfig = 0;
-        }
-
-        var config = this.getSizerConfig(gameObject);
-        config.parent = this;
-        config.align = ALIGN_CENTER;
-        config.padding = ParsePaddingConfig(paddingConfig);
-        config.expand = true;
-        this.backgroundChildren.push(gameObject);
         return this;
     }
 }

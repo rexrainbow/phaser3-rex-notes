@@ -57,7 +57,6 @@ class GridSizer extends BaseSizer {
             return;
         }
         this.gridChildren.length = 0;
-        this.backgroundChildren.length = 0;
         super.destroy(fromScene);
     }
 
@@ -110,22 +109,6 @@ class GridSizer extends BaseSizer {
         return this;
     }
 
-    addBackground(gameObject, paddingConfig) {
-        super.add(gameObject);
-        if (paddingConfig === undefined) {
-            paddingConfig = 0;
-        }
-
-        var config = this.getSizerConfig(gameObject);
-        config.parent = this;
-        // config.proportion = 0;
-        config.align = ALIGN_CENTER;
-        config.padding = ParsePaddingConfig(paddingConfig);
-        config.expand = true;
-        this.backgroundChildren.push(gameObject);
-        return this;
-    }
-
     remove(gameObject) {
         var config = this.getSizerConfig(gameObject);
         if (config.parent !== this) {
@@ -167,7 +150,6 @@ class GridSizer extends BaseSizer {
         this.rowCount = rowCount;
         this.gridChildren = [];
         this.gridChildren.length = columnCount * rowCount;
-        this.backgroundChildren = [];
         this.columnProportions = [];
         this.columnProportions.length = columnCount;
         this.columnWidth = [];

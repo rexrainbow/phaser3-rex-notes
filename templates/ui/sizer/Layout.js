@@ -69,24 +69,18 @@ var Layout = function (parent, newWidth, newHeight) {
         } else {
             newChildWidth = undefined;
             newChildHeight = undefined;
-            if (childConfig.proportion === -1) { // Background
-                newChildWidth = this.width - padding.left - padding.right;
-                newChildHeight = this.height - padding.top - padding.bottom;
-            } else if (childConfig.expand && (this.orientation === 0)) { // x, expand height
-                newChildHeight = this.height - padding.top - padding.bottom;
-            } else if (childConfig.expand && (this.orientation === 1)) { // y, expand width
-                newChildWidth = this.width - padding.left - padding.right;
+            if (childConfig.expand) {
+                if (this.orientation === 0) { // x, expand height
+                    newChildHeight = this.height - padding.top - padding.bottom;
+                } else { // y, expand width
+                    newChildWidth = this.width - padding.left - padding.right;
+                }
             }
             ResizeGameObject(child, newChildWidth, newChildHeight);
         }
 
         // Set position
-        if (childConfig.proportion === -1) { // Background
-            x = (startX + padding.left);
-            y = (startY + padding.top);
-            width = this.width - padding.left - padding.right;
-            height = this.height - padding.top - padding.bottom;
-        } else if (this.orientation === 0) { // x
+        if (this.orientation === 0) { // x
             if (
                 (childConfig.proportion === 0) ||
                 (proportionLength === 0)
@@ -122,6 +116,10 @@ var Layout = function (parent, newWidth, newHeight) {
         AlignIn(child, GlobZone, childConfig.align);
         this.resetChildState(child);
     }
+
+    // Layout background children
+    this.layoutBackgrounds();
+
     return this;
 }
 

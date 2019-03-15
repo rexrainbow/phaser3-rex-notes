@@ -2,7 +2,6 @@ import BaseSizer from '../basesizer/BaseSizer.js';
 import AddPage from './AddPage.js';
 import GetPage from './GetPage.js';
 import SwapPage from './SwapPage.js';
-import ParsePaddingConfig from '../utils/ParsePaddingConfig.js';
 import GetChildrenWidth from './GetChildrenWidth.js';
 import GetChildrenHeight from './GetChildrenHeight.js';
 import GetChildrenSizers from './GetChildrenSizers.js';
@@ -12,7 +11,6 @@ import _layoutInit from './_layoutInit.js';
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Map = Phaser.Structs.Map;
-const ALIGN_CENTER = Phaser.Display.Align.CENTER;
 
 class Pages extends BaseSizer {
     constructor(scene, x, y, minWidth, minHeight, config) {
@@ -34,7 +32,6 @@ class Pages extends BaseSizer {
         this._previousKey = undefined;
         this._currentKey = undefined;
         this.sizerChildren = new Map();
-        this.backgroundChildren = [];
         this.setSwapMode(GetValue(config, 'swapMode', 0));
 
         this.addChildrenMap('pages', this.sizerChildren.entries);
@@ -46,7 +43,6 @@ class Pages extends BaseSizer {
             return;
         }
         this.sizerChildren.clear();
-        this.backgroundChildren.length = 0;
         super.destroy(fromScene);
     }
 
@@ -55,21 +51,6 @@ class Pages extends BaseSizer {
             mode = SWAPMODE[mode];
         }
         this.swapMode = mode;
-        return this;
-    }
-
-    addBackground(gameObject, paddingConfig) {
-        super.add(gameObject);
-        if (paddingConfig === undefined) {
-            paddingConfig = 0;
-        }
-
-        var config = this.getSizerConfig(gameObject);
-        config.parent = this;
-        config.align = ALIGN_CENTER;
-        config.padding = ParsePaddingConfig(paddingConfig);
-        config.expand = true;
-        this.backgroundChildren.push(gameObject);
         return this;
     }
 

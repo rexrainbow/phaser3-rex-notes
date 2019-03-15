@@ -46,7 +46,6 @@ class FixWidthSizer extends BaseSizer {
 
         this.type = 'rexFixWidthSizer';
         this.sizerChildren = [];
-        this.backgroundChildren = [];
         this.setOrientation(orientation);
         this.setPadding(space);
         this.setItemSpacing(GetValue(space, 'item', 0));
@@ -103,20 +102,6 @@ class FixWidthSizer extends BaseSizer {
     insert(index, gameObject, paddingConfig, expand) {
         this.add(gameObject, paddingConfig, expand);
         this.moveTo(gameObject, index);
-        return this;
-    }
-
-    addBackground(gameObject, paddingConfig) {
-        super.add(gameObject);
-        if (paddingConfig === undefined) {
-            paddingConfig = 0;
-        }
-
-        var config = this.getSizerConfig(gameObject);
-        config.parent = this;
-        config.align = ALIGN_CENTER;
-        config.padding = ParsePaddingConfig(paddingConfig);
-        this.backgroundChildren.push(gameObject);
         return this;
     }
 

@@ -18,8 +18,11 @@ import FadeIn from './FadeIn.js';
 import FadeOutDestroy from './FadeOutDestroy.js';
 import IsInTouching from './IsInTouching.js';
 import GetTopmostSizer from '../utils/GetTopmostSizer.js';
+import ParsePaddingConfig from '../utils/ParsePaddingConfig.js';
+import LayoutBackgrounds from './LayoutBackgrounds.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
+const ALIGN_CENTER = Phaser.Display.Align.CENTER;
 
 class Base extends Container {
     constructor(scene, x, y, minWidth, minHeight, config) {
@@ -37,6 +40,7 @@ class Base extends Container {
         this.setMinWidth(minWidth);
         this.setMinHeight(minHeight);
         this.setName(GetValue(config, 'name', ''));
+        this.backgroundChildren = [];
 
         if (anchorX !== undefined) {
             this._anchor = new Anchor(this, {
@@ -44,6 +48,15 @@ class Base extends Container {
                 y: anchorY,
             });;
         }
+    }
+
+    destroy(fromScene) {
+        //  This Game Object has already been destroyed
+        if (!this.scene) {
+            return;
+        }
+        this.backgroundChildren.length = 0;
+        super.destroy(fromScene);
     }
 
     setMinWidth(minWidth) {
@@ -153,6 +166,20 @@ class Base extends Container {
         this.centerY = value;
         return this;
     }
+
+    addBackground(gameObject, paddingConfig) {
+        super.add(gameObject);
+        if (paddingConfig === undefined) {
+            paddingConfig = 0;
+        }
+
+        var config = this.getSizerConfig(gameObject);
+        config.parent = this;
+        config.align = ALIGN_CENTER;
+        config.padding = ParsePaddingConfig(paddingConfig);
+        this.backgroundChildren.push(gameObject);
+        return this;
+    }
 }
 
 var methods = {
@@ -166,6 +193,7 @@ var methods = {
     getAllChildrenSizers: GetAllChildrenSizers,
     getChildrenSizers: GetChildrenSizers,
     layout: Layout,
+    layoutBackgrounds: LayoutBackgrounds,
     layoutInit: LayoutInit,
     _layoutInit: _layoutInit,
     popUp: PopUp,
