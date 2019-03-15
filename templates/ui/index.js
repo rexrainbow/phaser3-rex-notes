@@ -1,5 +1,6 @@
 import RoundRectangle from './roundrectangle/RoundRectangle.js';
 import BBCodeText from './bbcodetext/BBCodeText.js';
+import TagText from './tagtext/TagText.js';
 import Container from './container/Container.js';
 
 import Sizer from './sizer/Sizer.js';
@@ -21,6 +22,7 @@ import TextBlock from './textblock/TextBlock.js';
 export default {
     RoundRectangle: RoundRectangle,
     BBCodeText: BBCodeText,
+    TagText: TagText,
     Container: Container,
 
     Sizer: Sizer,
