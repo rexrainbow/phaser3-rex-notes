@@ -139,7 +139,7 @@ var sizer = scene.rexUI.add.fixWidthSizer(x, y, width, height, orientation,
 ### Add background
 
 ```javascript
-sizer.addBackground(child, paddingConfig);
+sizer.addBackground(child);
 ```
 
 ### Add child

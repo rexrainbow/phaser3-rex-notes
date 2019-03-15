@@ -4,23 +4,20 @@ import Layout from './Layout.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
-const ALIGN_CENTER = Phaser.Display.Align.CENTER;
 const ALIGN_LEFTTOP = Phaser.Display.Align.TOP_LEFT;
 
 class TextBlock extends BaseSizer {
-    constructor(scene, x, y, minWidth, minHeight, textGameObject, config) {
+    constructor(scene, x, y, minWidth, minHeight, config) {
         if (IsPlainObject(x)) {
             config = x;
             x = GetValue(config, 'x', 0);
             y = GetValue(config, 'y', 0);
             minWidth = GetValue(config, 'width', undefined);
             minHeight = GetValue(config, 'height', undefined);
-            textGameObject = GetValue(config, 'text', undefined);
         } else if (IsPlainObject(minWidth)) {
             config = minWidth;
             minWidth = GetValue(config, 'width', undefined);
             minHeight = GetValue(config, 'height', undefined);
-            textGameObject = GetValue(config, 'text', undefined);
         }
 
         super(scene, x, y, minWidth, minHeight, config);
@@ -28,8 +25,15 @@ class TextBlock extends BaseSizer {
         this.type = 'rexTextBlock';
         this.textChild = undefined;
 
-        if (textGameObject) {
-            this.addText(textGameObject, GetValue(config, 'padding', undefined));
+        // Add elements
+        var background = GetValue(config, 'background', undefined);
+        var textObject = GetValue(config, 'text', undefined);
+
+        if (background) {
+            this.addBackground(background);
+        }
+        if (textObject) {
+            this.addText(textObject, GetValue(config, 'space', undefined));
         }
     }
 
@@ -55,6 +59,10 @@ class TextBlock extends BaseSizer {
         config.expand = true;
         this.textChild = gameObject;
         return this;
+    }
+
+    get textObject() {
+        return this.textChild;
     }
 }
 

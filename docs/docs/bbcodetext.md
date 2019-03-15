@@ -81,6 +81,7 @@ Default style
     },
     align: 'left',  // 0|'left'|1|'center'|2|'right'
     maxLines: 0,
+    lineSpacing: 0,
     fixedWidth: 0,
     fixedHeight: 0,
     lineSpacing: 0,

@@ -1,4 +1,4 @@
-import BBCodeText from './gameobjects/bbocdetext/BBcodeText.js';
+import BBCodeText from './gameobjects/bbocdetext/BBCodeText.js';
 import SetValue from './utils/object/SetValue.js';
 
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;

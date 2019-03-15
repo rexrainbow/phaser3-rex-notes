@@ -104,7 +104,7 @@ var gridSizer = scene.rexUI.add.gridSizer(x, y, width, height, column, row);
 ### Add background
 
 ```javascript
-gridSizer.addBackground(child, paddingConfig);
+gridSizer.addBackground(child);
 ```
 
 ### Add child

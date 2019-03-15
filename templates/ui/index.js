@@ -1,6 +1,7 @@
 import RoundRectangle from './roundrectangle/RoundRectangle.js';
-
+import BBCodeText from './bbcodetext/BBCodeText.js';
 import Container from './container/Container.js';
+
 import Sizer from './sizer/Sizer.js';
 import GridSizer from './gridsizer/GridSizer.js';
 import FixWidthSizer from './fixwidthsizer/FixWidthSizer.js';
@@ -19,7 +20,9 @@ import TextBlock from './textblock/TextBlock.js';
 
 export default {
     RoundRectangle: RoundRectangle,
+    BBCodeText: BBCodeText,
     Container: Container,
+
     Sizer: Sizer,
     GridSizer: GridSizer,
     FixWidthSizer: FixWidthSizer,

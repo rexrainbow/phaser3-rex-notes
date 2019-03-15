@@ -78,7 +78,7 @@ var pages = scene.rexUI.add.pages({
 ### Add background
 
 ```javascript
-gridSizer.addBackground(child, paddingConfig);
+gridSizer.addBackground(child);
 ```
 
 ### Add page

@@ -16,13 +16,16 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        var x = 400,
-            y = 300,
-            minWidth = 200,
-            minHeight = 200;
-        var textBlock = this.rexUI.add.textBlock(x, y, minWidth, minHeight)
-            .addBackground(this.rexUI.add.roundRectangle(0, 0, 2, 2, 0, COLOR_PRIMARY))
-            .addText(this.add.text(0, 0, content))
+        var textBlock = this.rexUI.add.textBlock({
+                x: 400,
+                y: 300,
+                width: 200,
+                height: 200,
+
+                background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 0, COLOR_PRIMARY),
+                // text: this.add.text(0, 0, content),
+                text: this.rexUI.add.BBCodeText(0, 0, content),
+            })
             .layout()
             .drawBounds(this.add.graphics(), 0xff0000);
     }

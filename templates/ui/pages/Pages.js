@@ -34,13 +34,17 @@ class Pages extends BaseSizer {
         this.sizerChildren = new Map();
         this.setSwapMode(GetValue(config, 'swapMode', 0));
 
-        this.addChildrenMap('pages', this.sizerChildren.entries);
+        this.addChildrenMap('pages', this.pages);
     }
 
     destroy(fromScene) {
         //  This Game Object has already been destroyed
         if (!this.scene) {
             return;
+        }
+        var pages = this.pages;
+        for (var key in pages) {
+            pages[key].destroy(fromScene);
         }
         this.sizerChildren.clear();
         super.destroy(fromScene);
@@ -76,6 +80,10 @@ class Pages extends BaseSizer {
 
     get keys() {
         return this.sizerChildren.keys();
+    }
+
+    get pages() {
+        return this.sizerChildren.entries;
     }
 }
 

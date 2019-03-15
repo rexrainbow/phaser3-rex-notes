@@ -34,6 +34,7 @@ Default style
     },
     align: 'left',  // 'left'|'center'|'right'
     maxLines: 0,
+    lineSpacing: 0,
     fixedWidth: 0,
     fixedHeight: 0,
     rtl: false,
