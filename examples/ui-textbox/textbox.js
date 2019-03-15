@@ -1,5 +1,4 @@
 import UIPlugin from '../../templates/ui/ui-plugin.js';
-import BBCodeTextPlugin from '../../plugins/bbcodetext-plugin.js';
 
 const COLOR_PRIMARY = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
@@ -50,8 +49,8 @@ var createTextBox = function (scene, x, y, config) {
 
             icon: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_DARK),
 
-            text: getBuiltInText(scene, wrapWidth, fixedWidth, fixedHeight),
-            // text: getBBcodeText(scene, wrapWidth, fixedWidth, fixedHeight),
+            // text: getBuiltInText(scene, wrapWidth, fixedWidth, fixedHeight),
+            text: getBBcodeText(scene, wrapWidth, fixedWidth, fixedHeight),
 
             action: scene.add.image(0, 0, 'nextPage').setTint(COLOR_LIGHT).setAlpha(0),
 
@@ -111,7 +110,7 @@ var getBuiltInText = function (scene, wrapWidth, fixedWidth, fixedHeight) {
 }
 
 var getBBcodeText = function (scene, wrapWidth, fixedWidth, fixedHeight) {
-    return scene.add.rexBBCodeText(0, 0, '', {
+    return scene.rexUI.add.BBCodeText(0, 0, '', {
         fixedWidth: fixedWidth,
         fixedHeight: fixedHeight,
 
@@ -135,11 +134,6 @@ var config = {
     },
     scene: Demo,
     plugins: {
-        global: [{
-            key: 'BBCodeTextPlugin',
-            plugin: BBCodeTextPlugin,
-            start: true
-        }],
         scene: [{
             key: 'rexUI',
             plugin: UIPlugin,
