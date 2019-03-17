@@ -3575,6 +3575,19 @@
     World position -&gt; tile position
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#world-position-grid-world-position" title="World position -&gt; Grid world position" class="md-nav__link">
+    World position -&gt; Grid world position
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -4226,6 +4239,19 @@
     World position -&gt; tile position
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#world-position-grid-world-position" title="World position -&gt; Grid world position" class="md-nav__link">
+    World position -&gt; Grid world position
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -4681,6 +4707,11 @@ or
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tileXY</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">worldXYToTileXY</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">);</span>  <span class="c1">// tileXY: {x, y}</span>
 <span class="c1">// var out = board.worldXYToTileXY(worldX, worldY, out);</span>
 </pre></div></p>
+<h4 id="world-position-grid-world-position">World position -&gt; Grid world position<a class="headerlink" href="#world-position-grid-world-position" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gridWorldXY</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">worldXYSnapToGrid</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">);</span>
+<span class="c1">// var out = board.worldXYSnapToGrid(worldX, worldY, out);</span>
+</pre></div>
+
 <h3 id="line-tile-position">Line -&gt; tile position<a class="headerlink" href="#line-tile-position" title="Permanent link">&para;</a></h3>
 <p>Get array of tile position along a line defined via (<code>startWorldX</code>, <code>startWorldY</code>) to (<code>endWorldX</code>, <code>endWorldY</code>)</p>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">lineToTileXYArray</span><span class="p">(</span><span class="nx">startWorldX</span><span class="p">,</span> <span class="nx">startWorldY</span><span class="p">,</span> <span class="nx">endWorldX</span><span class="p">,</span> <span class="nx">endWorldY</span><span class="p">);</span>

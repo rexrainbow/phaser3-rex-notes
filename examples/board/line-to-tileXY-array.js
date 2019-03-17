@@ -45,8 +45,9 @@ class Demo extends Phaser.Scene {
         var startX, startY, endX, endY;
         this.input
             .on('pointerdown', function (pointer) {
-                startX = pointer.x;
-                startY = pointer.y;
+                var worldXY = board.worldXYSnapToGrid(pointer.x, pointer.y);
+                startX = worldXY.x;
+                startY = worldXY.y;
                 lineGraphics.clear();
                 Phaser.Actions.Call(board.tileZToChessArray(0), function (gameObject) {
                     gameObject.destroy();
@@ -56,13 +57,15 @@ class Demo extends Phaser.Scene {
                 if (!pointer.isDown) {
                     return;
                 }
-                endX = pointer.x;
-                endY = pointer.y;
+                var worldXY = board.worldXYSnapToGrid(pointer.x, pointer.y);
+                endX = worldXY.x;
+                endY = worldXY.y;
                 lineGraphics.clear().lineBetween(startX, startY, endX, endY);
             })
             .on('pointerup', function (pointer) {
-                endX = pointer.x;
-                endY = pointer.y;
+                var worldXY = board.worldXYSnapToGrid(pointer.x, pointer.y);
+                endX = worldXY.x;
+                endY = worldXY.y;
                 lineGraphics.clear().lineBetween(startX, startY, endX, endY);
                 var tileXYArray = board.lineToTileXYArray(startX, startY, endX, endY);
                 var tileXY;
@@ -93,8 +96,9 @@ var getHexagonGrid = function (scene) {
     var grid = scene.rexBoard.add.hexagonGrid({
         x: 100,
         y: 100,
-        cellWidth: 36,
-        cellHeight: 36,
+        size: 30,
+        //cellWidth: 36,
+        //cellHeight: 36,
         staggeraxis: staggeraxis,
         staggerindex: staggerindex
     })

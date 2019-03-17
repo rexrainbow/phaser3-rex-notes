@@ -11,6 +11,7 @@ import TileXYToWorldXY from './worldposition/TileXYToWorldXY.js';
 import WorldXYToTileX from './worldposition/WorldXYToTileX.js';
 import WorldXYToTileY from './worldposition/WorldXYToTileY.js';
 import WorldXYToTileXY from './worldposition/WorldXYToTileXY.js';
+import WorldXYSnapToGrid from './worldposition/WorldXYSnapToGrid.js';
 import AngleBetween from './worldposition/AngleBetween.js';
 import AngleToward from './worldposition/AngleToward.js';
 import IsOverlappingPoint from './worldposition/IsOverlappingPoint.js';
@@ -161,6 +162,7 @@ var methods = {
     worldXYToTileX: WorldXYToTileX,
     worldXYToTileY: WorldXYToTileY,
     worldXYToTileXY: WorldXYToTileXY,
+    worldXYSnapToGrid: WorldXYSnapToGrid,
     angleBetween: AngleBetween,
     angleToward: AngleToward,
     isOverlappingPoint: IsOverlappingPoint,

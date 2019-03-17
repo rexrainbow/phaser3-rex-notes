@@ -313,6 +313,13 @@ var tileXY = board.worldXYToTileXY(worldX, worldY);  // tileXY: {x, y}
 // var out = board.worldXYToTileXY(worldX, worldY, out);
 ```
 
+#### World position -> Grid world position
+
+```javascript
+var gridWorldXY = board.worldXYSnapToGrid(worldX, worldY);
+// var out = board.worldXYSnapToGrid(worldX, worldY, out);
+```
+
 ### Line -> tile position
 
 Get array of tile position along a line defined via (`startWorldX`, `startWorldY`) to (`endWorldX`, `endWorldY`)
