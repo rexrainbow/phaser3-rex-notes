@@ -16,11 +16,6 @@ class TextPagePlugin {
         this.boot();
     }
 
-    /**
-     * Reset status by JSON object
-     * @param {object} o JSON object
-     * @returns {object} this object
-     */
     resetFromJSON(o) {
         this.setText(GetValue(o, 'text', ''));
         this.setWrapMode(GetValue(o, 'wrap', true))
@@ -29,10 +24,6 @@ class TextPagePlugin {
         return this;
     }
 
-    /**
-     * Return status in JSON object
-     * @returns JSON object
-     */
     toJSON() {
         return {
             text: this.text,

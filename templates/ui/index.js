@@ -18,6 +18,7 @@ import TextBox from './textbox/Textbox.js';
 import NumberBar from './numberbar/NumberBar.js';
 import Pages from './pages/Pages.js';
 import TextBlock from './textblock/TextBlock.js';
+import TextArea from './textarea/TextArea.js';
 
 export default {
     RoundRectangle: RoundRectangle,
@@ -40,4 +41,5 @@ export default {
     NumberBar: NumberBar,
     Pages: Pages,
     TextBlock: TextBlock,
+    TextArea: TextArea,
 };

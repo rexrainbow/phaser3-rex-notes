@@ -20,6 +20,7 @@ import TextBoxFactory from './textbox/TextboxFactory.js';
 import NumberBarFactory from './numberbar/NumberBarFactory.js';
 import PagesFactory from './pages/PagesFactory.js';
 import TextBlockFactory from './textblock/TextBlockFactory.js';
+import TextAreaFactory from './textarea/TextAreaFactory.js';
 
 class UIPlugin extends Phaser.Plugins.ScenePlugin {
     constructor(scene, pluginManager) {

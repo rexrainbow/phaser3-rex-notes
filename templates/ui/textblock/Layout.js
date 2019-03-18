@@ -29,7 +29,7 @@ var Layout = function (parent, newWidth, newHeight) {
     // Layout text child
     // Skip invisible child
     child = this.textChild;
-    if (child && child.visible) {
+    if (child.visible) {
         childConfig = child.rexSizer;
         padding = childConfig.padding;
         x = (startX + padding.left);
@@ -44,6 +44,10 @@ var Layout = function (parent, newWidth, newHeight) {
 
     // Layout background children
     this.layoutBackgrounds();
+
+    // Layout text mask
+    this.textMask.setPosition().resize();
+    this.resetChildState(this.textMask);
 
     return this;
 }

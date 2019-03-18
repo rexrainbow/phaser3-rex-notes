@@ -74,21 +74,36 @@ var page = scene.plugins.get('rexTextPage').add(txt, {
 
 ### Show page
 
-```javascript
-page.showPage();         // display current page
-page.showNextPage();     // display next page
-page.showPreviousPage(); // display previous page
-```
+- Display current page
+    ```javascript
+    page.showPage();
+    ```
+- Display next page
+    ```javascript
+    page.showNextPage();
+    ```
+- Display previous page
+    ```javascript
+    page.showPreviousPage();
+    ```
 
-Initial page index is `-1`, so user could call `page.showNextPage()` to display first page.
+!!! note
+    Initial page index is `-1`, so user could call `page.showNextPage()` to display first page.
 
 ### Get lines of page
 
-```javascript
-var lines = page.getPage();         // get lines of current page
-var lines = page.getNextPage();     // get lines of next page
-var lines = page.getPreviousPage(); // get lines of previous page
-```
+- Get lines of current page
+    ```javascript
+    var lines = page.getPage();
+    ```
+- Get lines of next page
+    ```javascript
+    var lines = page.getNextPage();
+    ```
+- Get lines of previous page
+    ```javascript
+    var lines = page.getPreviousPage();
+    ```
 
 ### Other properties
 

@@ -16,22 +16,21 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        var textBlock = this.rexUI.add.textBlock({
+        var textArea = this.rexUI.add.textArea({
                 x: 400,
                 y: 300,
                 width: 220,
                 height: 220,
 
                 background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 0, COLOR_PRIMARY),
+
                 // text: this.add.text(0, 0, content),
                 text: this.rexUI.add.BBCodeText(0, 0, content),
 
-                space: {
-                    left: 10,
-                    right: 10,
-                    top: 10,
-                    bottom: 10,
-                }
+                slider: {
+                    track: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, 0x260e04),
+                    thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 13, 0x7b5e57),
+                },
             })
             .layout()
             .drawBounds(this.add.graphics(), 0xff0000);

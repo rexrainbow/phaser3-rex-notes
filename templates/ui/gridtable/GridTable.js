@@ -71,7 +71,7 @@ class GridTable extends Sizer {
             sliderConfig.orientation = this.orientation;
             slider = new Slider(scene, sliderConfig);
             var padding = {
-                left: (table) ? 0 : paddingLeft,
+                left: 0,
                 right: paddingRight,
                 top: paddingTop,
                 bottom: paddingBottom
