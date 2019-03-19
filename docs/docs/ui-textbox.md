@@ -69,7 +69,7 @@ var textBox = scene.rexUI.add.textBox({
 });
 ```
 
-- `x`, `y` : Position of this dialog object, it is valid when this dialog is the top object.
+- `x`, `y` : Position of this object, it is valid when this object is the top object.
     - Number : World position in pixels.
     - String (`'p%+n'`) : Position based on visible window. See [anchor](anchor.md#create-instance).
 - `width`, `height` : Minimum width, minimum height.

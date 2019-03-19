@@ -76,13 +76,13 @@ or
 var gridSizer = scene.rexUI.add.gridSizer(x, y, width, height, column, row);
 ```
 
-- `column` : Amount of column grids.
-- `row` : Amount of row grids.
-- `x`, `y` : Position of this dialog object, it is valid when this dialog is the top object.
+- `x`, `y` : Position of this object, it is valid when this object is the top object.
     - Number : World position in pixels.
     - String (`'p%+n'`) : Position based on visible window. See [anchor](anchor.md#create-instance).
 - `width` : Minimum width. i.e. Width of this gridSizer will larger then this value.
 - `height` : Minimum height. i.e. Hieght of this gridSizer will larger then this value.
+- `column` : Amount of column grids.
+- `row` : Amount of row grids.
 
 ### Custom class
 

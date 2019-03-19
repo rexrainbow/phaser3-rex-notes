@@ -47,7 +47,8 @@ class TextArea extends Sizer {
             bottom: paddingBottom
         }
         var proportion = (textWidth === undefined) ? 1 : 0;
-        this.add(textBlock, proportion, 'center', padding, true);
+        var expand = (textHeight === undefined);
+        this.add(textBlock, proportion, 'center', padding, expand);
 
         var slider;
         if (sliderConfig) {
@@ -109,6 +110,10 @@ class TextArea extends Sizer {
         this.addChildrenMap('textBlock', textBlock);
         this.addChildrenMap('slider', slider);
         this.addChildrenMap('scroller', scroller);
+    }
+
+    get text() {
+        return this.childrenMap.textBlock.text;
     }
 }
 

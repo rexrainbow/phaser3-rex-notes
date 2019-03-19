@@ -94,7 +94,7 @@ var gridTable = scene.rexUI.add.gridTable({
 });
 ```
 
-- `x`, `y` : Position of this dialog object, it is valid when this dialog is the top object.
+- `x`, `y` : Position of this object, it is valid when this object is the top object.
     - Number : World position in pixels.
     - String (`'p%+n'`) : Position based on visible window. See [anchor](anchor.md#create-instance).
 - `width`, `height` : Minimum width, minimum height.
@@ -146,7 +146,7 @@ var gridTable = scene.rexUI.add.gridTable({
     ```
 - Create instance
     ```javascript
-    var gridTable = new MyTextBox(scene, config);
+    var gridTable = new MyGridTable(scene, config);
     ```
 
 ### Layout children
@@ -215,7 +215,7 @@ See [base sizer object](ui-basesizer.md).
     - Grid table
         ```javascript
         var table = gridTable.getElement('table');
-        ```        
+        ```
     - Slider
         - Track
             ```javascript
@@ -224,11 +224,11 @@ See [base sizer object](ui-basesizer.md).
         - Thumb
             ```javascript
             var thumb = gridTable.getElement('slider.thumb');
-            ```            
+            ```
     - Scroller
         ```javascript
         var scroller = gridTable.getElement('scroller');
-        ```       
+        ```
 - Get by name
     ```javascript
     var gameObject = gridTable.getElement('#' + name);
