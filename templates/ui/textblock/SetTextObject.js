@@ -1,9 +1,11 @@
 import ParsePaddingConfig from '../utils/ParsePaddingConfig.js';
+import IsTextGameObject from '../../../plugins/utils/text/IsTextGameObject.js';
+// import IsCanvasTextGameObject from '../../../plugins/utils/canvastext/IsCanvasTextGameObject.js';
 import DefaultMask from '../../../plugins/utils/mask/DefaultMask.js';
 
 const ALIGN_LEFTTOP = Phaser.Display.Align.TOP_LEFT;
 
-var SetTextObject = function (gameObject, paddingConfig) {
+var SetTextObject = function (gameObject, maskEnable, paddingConfig) {
     this.add(gameObject);
     if (paddingConfig === undefined) {
         paddingConfig = 0;
@@ -14,12 +16,18 @@ var SetTextObject = function (gameObject, paddingConfig) {
     config.align = ALIGN_LEFTTOP;
     config.padding = ParsePaddingConfig(paddingConfig);
     config.expand = true;
-    this.textChild = gameObject;
+    this.textObject = gameObject;
+    this.textObjectType = (IsTextGameObject(gameObject)) ? 0 : 1;
+    // Add more variables
+    config.preOffsetY = 0;
+    config.offsetY = 0;
 
     // Create mask of text object
-    this.textMask = new DefaultMask(this.textChild);
-    this.textChild.setMask(this.textMask.createGeometryMask());
-    this.add(this.textMask);
+    if (maskEnable) {
+        this.textMask = new DefaultMask(this.textObject);
+        this.textObject.setMask(this.textMask.createGeometryMask());
+        this.add(this.textMask);
+    }
     return this;
 }
 

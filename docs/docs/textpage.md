@@ -55,7 +55,6 @@ var txt = scene.add.text(x, y, '', {
 });
 var page = scene.plugins.get('rexTextPage').add(txt, {
     //text: '',       // content in string or array
-    //wrap: false     // set true to add '\n' in each line end
 });
 ```
 

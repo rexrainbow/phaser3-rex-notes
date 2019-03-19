@@ -11,14 +11,13 @@ class TextPagePlugin {
         this.scene = GetSceneObject(gameObject);
         this.setTextObjectType();
 
-        this.lines = undefined; // array (default text object), or pens-manager (tag text object)
+        this.lines = undefined; // Array (default text object), or pens-manager (tag text object)
         this.resetFromJSON(config);
         this.boot();
     }
 
     resetFromJSON(o) {
         this.setText(GetValue(o, 'text', ''));
-        this.setWrapMode(GetValue(o, 'wrap', true))
         this.setStartIdx(GetValue(o, 'start', 0));
         this.setPageIdx(GetValue(o, 'page', -1));
         return this;
@@ -42,8 +41,9 @@ class TextPagePlugin {
     }
 
     shutdown() {
-        this.text = '';
-        if (this.textObjectType === 0) {
+        if (this.lines === undefined) {
+            // Do nothing
+        } else if (this.textObjectType === 0) {
             this.lines.length = 0;
         } else {
             this.lines.destroy();
@@ -78,25 +78,17 @@ class TextPagePlugin {
         }
         this.text = transferText(text);
 
-        // wrap content in lines
+        // Wrap content in lines
         if (this.textObjectType === 0) {
             this.lines = this.gameObject.getWrappedText(this.text); // lines in array
         } else {
             this.lines = this.gameObject.getPenManager(this.text, this.lines); // pen manager
         }
 
-        this.pageCount = Math.ceil(this.totalLineCount / this.pageLineCount);
+        this.pageCount = Math.ceil(this.totalLinesCount / this.pageLinesCount);
         if (resetPageIdx) {
             this.resetPageIdx();
         }
-        return this;
-    }
-
-    setWrapMode(en) {
-        if (en === undefined) {
-            en = true;
-        }
-        this.wrapMode = en;
         return this;
     }
 
@@ -151,7 +143,7 @@ class TextPagePlugin {
     }
 
     setStartIdx(idx) {
-        idx = Clamp(idx, 0, this.totalLineCount - 1);
+        idx = Clamp(idx, 0, this.totalLinesCount - 1);
         this.startLineIdx = idx;
         return this;
     }
@@ -163,11 +155,11 @@ class TextPagePlugin {
     setPageIdx(idx) {
         idx = Clamp(idx, 0, this.pageCount - 1);
         this.pageIndex = idx;
-        this.setStartIdx(this.pageIndex * this.pageLineCount);
+        this.setStartIdx(this.pageIndex * this.pageLinesCount);
         return this;
     }
 
-    get totalLineCount() {
+    get totalLinesCount() {
         var count;
         if (this.textObjectType === 0) {
             count = this.lines.length;
@@ -177,13 +169,13 @@ class TextPagePlugin {
         return count;
     }
 
-    get pageLineCount() {
+    get pageLinesCount() {
         var count;
         var maxLines = this.gameObject.style.maxLines;
         if (maxLines > 0) {
             count = maxLines;
         } else {
-            count = this.totalLineCount;
+            count = this.totalLinesCount;
         }
         return count;
     }
@@ -192,14 +184,14 @@ class TextPagePlugin {
         if (startLineIdx === undefined) {
             startLineIdx = this.startLineIdx;
         }
-        var endLineIdx = startLineIdx + this.pageLineCount;
+        var endLineIdx = startLineIdx + this.pageLinesCount;
         var text;
         if (this.textObjectType === 0) {
             text = this.lines.slice(startLineIdx, endLineIdx).join('\n');
         } else {
             var startIdx = this.lines.getLineStartIndex(startLineIdx);
             var endIdx = this.lines.getLineEndIndex(endLineIdx - 1);
-            text = this.lines.getSliceTagText(startIdx, endIdx, this.wrapMode);
+            text = this.lines.getSliceTagText(startIdx, endIdx, true);
         }
         return text;
     }

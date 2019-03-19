@@ -185,9 +185,8 @@ class GridTable extends Container {
                 oy = 0;
             } else if (tableOYExceedTop) {
                 oy = topTableOY
-            } else {
-                if (tableOYExeceedBottom)
-                    oy = bottomTableOY;
+            } else if (tableOYExeceedBottom) {
+                oy = bottomTableOY;
             }
         }
 

@@ -1,4 +1,5 @@
 import ResizeText from './ResizeText.js';
+import ResetTextObjectPosition from './ResetTextObjectPosition.js';
 import GlobZone from '../../../plugins/utils/align/GlobZone.js';
 
 const AlignIn = Phaser.Display.Align.In.QuickSet;
@@ -28,26 +29,26 @@ var Layout = function (parent, newWidth, newHeight) {
 
     // Layout text child
     // Skip invisible child
-    child = this.textChild;
-    if (child.visible) {
-        childConfig = child.rexSizer;
-        padding = childConfig.padding;
-        x = (startX + padding.left);
-        y = (startY + padding.top);
-        width = this.width - padding.left - padding.right;
-        height = this.height - padding.top - padding.bottom;
-        ResizeText(child, width, height);
-        GlobZone.setPosition(x, y).setSize(width, height);
-        AlignIn(child, GlobZone, childConfig.align);
-        this.resetChildState(child);
-    }
+    child = this.textObject;
+    childConfig = child.rexSizer;
+    padding = childConfig.padding;
+    x = (startX + padding.left);
+    y = (startY + padding.top);
+    width = this.width - padding.left - padding.right;
+    height = this.height - padding.top - padding.bottom;
+    ResizeText.call(this, child, width, height);
+    GlobZone.setPosition(x, y).setSize(width, height);
+    AlignIn(child, GlobZone, childConfig.align);
+    ResetTextObjectPosition.call(this);
 
     // Layout background children
     this.layoutBackgrounds();
 
     // Layout text mask
-    this.textMask.setPosition().resize();
-    this.resetChildState(this.textMask);
+    if (this.textMask) {
+        this.textMask.setPosition().resize();
+        this.resetChildState(this.textMask);
+    }
 
     return this;
 }
