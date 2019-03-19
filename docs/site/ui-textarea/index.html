@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/shader-hsladjust/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/ui-textarea/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>HSL adjust - Notes of Phaser 3</title>
+        <title>Text area - Notes of Phaser 3</title>
       
     
     
@@ -128,7 +128,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                HSL adjust
+                Text area
               </span>
             
           
@@ -483,10 +483,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
     
     <label class="md-nav__link" for="nav-4">
       Game object
@@ -1138,10 +1140,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-6" type="checkbox" id="nav-4-6">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-6" type="checkbox" id="nav-4-6" checked>
     
     <label class="md-nav__link" for="nav-4-6">
       Container
@@ -1205,10 +1209,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-6-5" type="checkbox" id="nav-4-6-5">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-6-5" type="checkbox" id="nav-4-6-5" checked>
     
     <label class="md-nav__link" for="nav-4-6-5">
       UI
@@ -1296,11 +1302,114 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../ui-textarea/" title="Text area" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Text area
+      </label>
+    
+    <a href="./" title="Text area" class="md-nav__link md-nav__link--active">
       Text area
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-scene-plugin" title="Install scene plugin" class="md-nav__link">
+    Install scene plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-text-area-object" title="Add text-area object" class="md-nav__link">
+    Add text-area object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-class" title="Custom class" class="md-nav__link">
+    Custom class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#layout-children" title="Layout children" class="md-nav__link">
+    Layout children
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#content" title="Content" class="md-nav__link">
+    Content
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-properties" title="Other properties" class="md-nav__link">
+    Other properties
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-element" title="Get element" class="md-nav__link">
+    Get element
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -2091,12 +2200,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
     
     <label class="md-nav__link" for="nav-7">
       Camera
@@ -2148,12 +2255,10 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4" type="checkbox" id="nav-7-4" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4" type="checkbox" id="nav-7-4">
     
     <label class="md-nav__link" for="nav-7-4">
       Shader effects
@@ -2181,12 +2286,10 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4-2" type="checkbox" id="nav-7-4-2" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7-4-2" type="checkbox" id="nav-7-4-2">
     
     <label class="md-nav__link" for="nav-7-4-2">
       Color
@@ -2226,107 +2329,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        HSL adjust
-      </label>
-    
-    <a href="./" title="HSL adjust" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../shader-hsladjust/" title="HSL adjust" class="md-nav__link">
       HSL adjust
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#source-code" title="Source code" class="md-nav__link">
-    Source code
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#import-class" title="Import class" class="md-nav__link">
-    Import class
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
-    Install global plugin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#apply-filter" title="Apply filter" class="md-nav__link">
-    Apply filter
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#hue-rotation" title="Hue rotation" class="md-nav__link">
-    Hue rotation
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#saturation-adjustment" title="Saturation adjustment" class="md-nav__link">
-    Saturation adjustment
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#lumen-adjustment" title="Lumen adjustment" class="md-nav__link">
-    Lumen adjustment
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -3946,43 +3953,50 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#import-class" title="Import class" class="md-nav__link">
-    Import class
+  <a href="#install-scene-plugin" title="Install scene plugin" class="md-nav__link">
+    Install scene plugin
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
-    Install global plugin
+  <a href="#add-text-area-object" title="Add text-area object" class="md-nav__link">
+    Add text-area object
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#apply-filter" title="Apply filter" class="md-nav__link">
-    Apply filter
+  <a href="#custom-class" title="Custom class" class="md-nav__link">
+    Custom class
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#hue-rotation" title="Hue rotation" class="md-nav__link">
-    Hue rotation
+  <a href="#layout-children" title="Layout children" class="md-nav__link">
+    Layout children
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#saturation-adjustment" title="Saturation adjustment" class="md-nav__link">
-    Saturation adjustment
+  <a href="#content" title="Content" class="md-nav__link">
+    Content
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#lumen-adjustment" title="Lumen adjustment" class="md-nav__link">
-    Lumen adjustment
+  <a href="#other-properties" title="Other properties" class="md-nav__link">
+    Other properties
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-element" title="Get element" class="md-nav__link">
+    Get element
   </a>
   
 </li>
@@ -4008,37 +4022,33 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/shader-hsladjust.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/ui-textarea.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>HSL adjust</h1>
+                  <h1>Text area</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Adjust color in HSL domain, post processing filter.</p>
+<p>A container with a text, slider, and scroller.</p>
 <ul>
 <li>Author: Rex</li>
-<li>A camera filter</li>
+<li>Game object</li>
 </ul>
 <h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/hsladjustpipeline-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexhsladjustpipelineplugin.min.js">minify</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/ui/ui-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexuiplugin.min.js">minify</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/ui/textarea/TextArea.js">Class</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/shader-hsladjust">Sample code</a></p>
-<p>User could import class directly, or install it by global plugin.</p>
-<h3 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">rexHslAdjustPipeline</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/hsladjustpipeline.js&#39;</span><span class="p">;</span>
-</pre></div>
-
-<h3 id="install-global-plugin">Install global plugin<a class="headerlink" href="#install-global-plugin" title="Permanent link">&para;</a></h3>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-textarea">Sample code</a></p>
+<h3 id="install-scene-plugin">Install scene plugin<a class="headerlink" href="#install-scene-plugin" title="Permanent link">&para;</a></h3>
 <p>Install plugin in <a href="../game/#configuration">configuration of game</a></p>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">HslAdjustPipelinePlugin</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/hsladjustpipeline-plugin.js&#39;</span><span class="p">;</span>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">UIPlugin</span> <span class="nx">from</span> <span class="s1">&#39;rexTemplates/ui/ui-plugin.js&#39;</span><span class="p">;</span>
 
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
-            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexHslAdjustPipeline&#39;</span><span class="p">,</span>
-            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">HslAdjustPipelinePlugin</span><span class="p">,</span>
-            <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="nx">scene</span><span class="o">:</span> <span class="p">[{</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexUI&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">UIPlugin</span><span class="p">,</span>
+            <span class="nx">mapping</span><span class="o">:</span> <span class="s1">&#39;rexUI&#39;</span>
         <span class="p">},</span>
         <span class="c1">// ...</span>
         <span class="p">]</span>
@@ -4048,101 +4058,141 @@
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </pre></div>
 
-<h3 id="apply-filter">Apply filter<a class="headerlink" href="#apply-filter" title="Permanent link">&para;</a></h3>
-<ol>
-<li>Create pipeline instance
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">customPipeline</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexHslAdjustPipeline&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="p">{</span>
-    <span class="c1">// hueRotate: 0,</span>
-    <span class="c1">// satAdjust: 1,</span>
-    <span class="c1">// lumAdjust: 0.5,</span>
+<h3 id="add-text-area-object">Add text-area object<a class="headerlink" href="#add-text-area-object" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">textArea</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">textArea</span><span class="p">({</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+
+    <span class="c1">// Elements</span>
+    <span class="nx">background</span><span class="o">:</span> <span class="nx">backgroundGameObject</span><span class="p">,</span>
+
+    <span class="nx">text</span><span class="o">:</span> <span class="nx">textGameObject</span><span class="p">,</span>
+    <span class="c1">// textWidth: undefined,</span>
+    <span class="c1">// textHeight: undefined,</span>
+
+    <span class="nx">slider</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">track</span><span class="o">:</span> <span class="nx">trackGameObject</span><span class="p">,</span>
+        <span class="nx">thumb</span><span class="o">:</span> <span class="nx">thumbGameObject</span><span class="p">,</span>
+    <span class="p">},</span>
+
+    <span class="nx">scroller</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">slidingDeceleration</span><span class="o">:</span> <span class="mi">5000</span><span class="p">,</span>
+        <span class="nx">backDeceleration</span><span class="o">:</span> <span class="mi">2000</span><span class="p">,</span>
+    <span class="p">},</span>
+
+    <span class="nx">space</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">left</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">right</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">top</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">bottom</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+
+        <span class="nx">text</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="p">},</span>
+
+    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
 <span class="p">});</span>
-</pre></div><ul>
-<li><code>hueRotate</code> : Hue rotation<ul>
-<li><code>0</code> : Rotate 0 degrees, original color (Default value)</li>
-<li><code>0.5</code> : Rotate 180 degrees</li>
-<li><code>1</code> : Rotate 360 degrees</li>
-</ul>
-</li>
-<li><code>satAdjust</code> : Saturation adjustment<ul>
-<li><code>0</code> : Gray</li>
-<li><code>1</code> : Original color (Default value)</li>
-<li>
-<blockquote>
-<p>1 :</p>
-</blockquote>
-</li>
-</ul>
-</li>
-<li><code>lumAdjust</code> : Lumen adjustment<ul>
-<li><code>0</code> : Dark</li>
-<li><code>0.5</code> : Original color (Default value)</li>
-<li><code>1</code> : White</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Add pipeline to camera
-    <div class="codehilite"><pre><span></span><span class="c1">// var camera = scene.cameras.main;</span>
-<span class="nx">camera</span><span class="p">.</span><span class="nx">setRenderToTexture</span><span class="p">(</span><span class="nx">customPipeline</span><span class="p">);</span>
-</pre></div></li>
-</ol>
-<h3 id="hue-rotation">Hue rotation<a class="headerlink" href="#hue-rotation" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Get
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">hueRotate</span> <span class="o">=</span> <span class="nx">customPipeline</span><span class="p">.</span><span class="nx">hueRotate</span><span class="p">;</span>
-</pre></div></li>
-<li>Set
-    <div class="codehilite"><pre><span></span><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">hueRotate</span> <span class="o">=</span> <span class="nx">hueRotate</span><span class="p">;</span>
-<span class="c1">// customPipeline.hueRotate += value;</span>
 </pre></div>
-    or
-    <div class="codehilite"><pre><span></span><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">setHueRotate</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
-</pre></div><ul>
-<li><code>0</code> : Rotate 0 degrees, original color</li>
-<li><code>0.5</code> : Rotate 180 degrees</li>
-<li><code>1</code> : Rotate 360 degrees</li>
-</ul>
-</li>
-</ul>
-<h3 id="saturation-adjustment">Saturation adjustment<a class="headerlink" href="#saturation-adjustment" title="Permanent link">&para;</a></h3>
+
 <ul>
-<li>Get
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">satAdjust</span> <span class="o">=</span> <span class="nx">customPipeline</span><span class="p">.</span><span class="nx">satAdjust</span><span class="p">;</span>
-</pre></div></li>
-<li>Set
-    <div class="codehilite"><pre><span></span><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">satAdjust</span> <span class="o">=</span> <span class="nx">satAdjust</span><span class="p">;</span>
-<span class="c1">// customPipeline.satAdjust += value;</span>
-</pre></div>
-    or
-    <div class="codehilite"><pre><span></span><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">setSatAdjust</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
-</pre></div><ul>
-<li><code>0</code> : Gray</li>
-<li><code>1</code> : Original color</li>
-<li>
-<blockquote>
-<p>1 :</p>
-</blockquote>
+<li><code>x</code>, <code>y</code> : Position of this object, it is valid when this object is the top object.<ul>
+<li>Number : World position in pixels.</li>
+<li>String (<code>'p%+n'</code>) : Position based on visible window. See <a href="../anchor/#create-instance">anchor</a>.</li>
+</ul>
 </li>
+<li><code>width</code>, <code>height</code> : Minimum width, minimum height.</li>
+<li><code>background</code> : Game object of background, optional. This background game object will be resized to fit the size of grid table.</li>
+<li><code>text</code> : Game object of text.</li>
+<li><code>textWidth</code> : Fixed width of text game object. Set <code>undefined</code> to ignore this feature.</li>
+<li><code>textHeight</code> : Fixed height of text game object. Set <code>undefined</code> to ignore this feature.</li>
+<li><code>slider</code> : Componments of slider, optional.<ul>
+<li><code>slider.background</code> : Game object of slider background, optional.</li>
+<li><code>slider.track</code> : Game object of track.</li>
+<li><code>slider.thumb</code> : Game object of thumb.</li>
+<li><code>slider.input</code> :<ul>
+<li><code>'drag'</code> : Control slider by dragging thumb game object. Default setting.</li>
+<li><code>'click'</code> : Control slider by touching track game object.</li>
+<li><code>'none'</code> : Disable sider controlling.</li>
 </ul>
 </li>
 </ul>
-<h3 id="lumen-adjustment">Lumen adjustment<a class="headerlink" href="#lumen-adjustment" title="Permanent link">&para;</a></h3>
+</li>
+<li><code>scroller</code> : Configuration of scroller behavior.<ul>
+<li><code>scroller.slidingDeceleration</code> : Deceleration of slow down when dragging released.<ul>
+<li>Set <code>false</code> to disable it.</li>
+</ul>
+</li>
+<li><code>scroller.backDeceleration</code> : Deceleration of pull back when out of bounds.<ul>
+<li>Set <code>false</code> to disable it.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>space</code> : Pads spaces<ul>
+<li><code>space.left</code>, <code>space.right</code>, <code>space.top</code>, <code>space.bottom</code> : Space of bounds.</li>
+<li><code>space.text</code> : Space between text object and slider object.</li>
+</ul>
+</li>
+<li><code>name</code> : Set name of this textArea.</li>
+</ul>
+<h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Get
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">lumAdjust</span> <span class="o">=</span> <span class="nx">customPipeline</span><span class="p">.</span><span class="nx">lumAdjust</span><span class="p">;</span>
+<li>Define class
+    <div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">MyTextArea</span> <span class="kr">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">TextArea</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
 </pre></div></li>
-<li>Set
-    <div class="codehilite"><pre><span></span><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">lumAdjust</span> <span class="o">=</span> <span class="nx">lumAdjust</span><span class="p">;</span>
-<span class="c1">// customPipeline.lumAdjust += value;</span>
+<li>Create instance
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">textArea</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyTextArea</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h3 id="layout-children">Layout children<a class="headerlink" href="#layout-children" title="Permanent link">&para;</a></h3>
+<p>Arrange position of all elements.</p>
+<div class="codehilite"><pre><span></span><span class="nx">textArea</span><span class="p">.</span><span class="nx">layout</span><span class="p">();</span>
 </pre></div>
-    or
-    <div class="codehilite"><pre><span></span><span class="nx">customPipeline</span><span class="p">.</span><span class="nx">setLumAdjust</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
-</pre></div><ul>
-<li><code>0</code> : Dark</li>
-<li><code>0.5</code> : Original color</li>
-<li><code>1</code> : White</li>
+
+<h3 id="content">Content<a class="headerlink" href="#content" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">textArea</span><span class="p">.</span><span class="nx">setText</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
+</pre></div></li>
+<li>Get
+   <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">text</span> <span class="o">=</span> <span class="nx">textArea</span><span class="p">.</span><span class="nx">text</span><span class="p">;</span>
+</pre></div></li>
+</ul>
+<h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
+<p>See <a href="../ui-sizer/">sizer object</a>, <a href="../ui-basesizer/">base sizer object</a>.</p>
+<h3 id="get-element">Get element<a class="headerlink" href="#get-element" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get element<ul>
+<li>Background game object
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">background</span> <span class="o">=</span> <span class="nx">textArea</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;background&#39;</span><span class="p">);</span>
+</pre></div></li>
+<li>Text game object
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">text</span> <span class="o">=</span> <span class="nx">textArea</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;text&#39;</span><span class="p">);</span>
+</pre></div></li>
+<li>Slider<ul>
+<li>Track
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">track</span> <span class="o">=</span> <span class="nx">textArea</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;slider.track&#39;</span><span class="p">);</span>
+</pre></div></li>
+<li>Thumb
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">thumb</span> <span class="o">=</span> <span class="nx">textArea</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;slider.thumb&#39;</span><span class="p">);</span>
+</pre></div></li>
 </ul>
 </li>
+<li>Scroller
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">scroller</span> <span class="o">=</span> <span class="nx">textArea</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;scroller&#39;</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+</li>
+<li>Get by name
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">textArea</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;#&#39;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">);</span>
+</pre></div></li>
 </ul>
                 
                   
@@ -4164,7 +4214,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../shader-inverse/" title="Inverse" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../ui-textbox/" title="Text box" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -4173,19 +4223,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Inverse
+                Text box
               </span>
             </div>
           </a>
         
         
-          <a href="../shader-toonify/" title="Toonify" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../ui-buttons/" title="Buttons" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Toonify
+                Buttons
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

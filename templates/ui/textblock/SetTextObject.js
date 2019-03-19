@@ -5,7 +5,11 @@ import DefaultMask from '../../../plugins/utils/mask/DefaultMask.js';
 
 const ALIGN_LEFTTOP = Phaser.Display.Align.TOP_LEFT;
 
-var SetTextObject = function (gameObject, maskEnable, paddingConfig) {
+var SetTextObject = function (gameObject, paddingConfig, maskEnable) {
+    if (maskEnable === undefined) {
+        maskEnable = true;
+    }
+
     this.add(gameObject);
     if (paddingConfig === undefined) {
         paddingConfig = 0;

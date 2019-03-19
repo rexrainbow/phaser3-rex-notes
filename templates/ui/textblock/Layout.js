@@ -39,6 +39,7 @@ var Layout = function (parent, newWidth, newHeight) {
     ResizeText.call(this, child, width, height);
     GlobZone.setPosition(x, y).setSize(width, height);
     AlignIn(child, GlobZone, childConfig.align);
+    childConfig.preOffsetY = 0; // Clear preOffsetY
     ResetTextObjectPosition.call(this);
 
     // Layout background children

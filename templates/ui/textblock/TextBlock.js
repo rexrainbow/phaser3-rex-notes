@@ -51,7 +51,7 @@ class TextBlock extends BaseSizer {
             this.addBackground(background);
         }
 
-        this.setTextObject(textObject, textMaskEnable, paddingConfig);
+        this.setTextObject(textObject, paddingConfig, textMaskEnable);
 
         this.setClampMode(GetValue(config, 'clamplTextOY', true));
     }

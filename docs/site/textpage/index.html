@@ -1407,6 +1407,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../ui-textarea/" title="Text area" class="md-nav__link">
+      Text area
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../ui-buttons/" title="Buttons" class="md-nav__link">
       Buttons
     </a>
@@ -4059,7 +4071,6 @@
 <span class="p">});</span>
 <span class="kd">var</span> <span class="nx">page</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexTextPage&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">txt</span><span class="p">,</span> <span class="p">{</span>
     <span class="c1">//text: &#39;&#39;,       // content in string or array</span>
-    <span class="c1">//wrap: false     // set true to add &#39;\n&#39; in each line end</span>
 <span class="p">});</span>
 </pre></div>
 
@@ -4076,18 +4087,33 @@
 </pre></div></li>
 </ul>
 <h3 id="show-page">Show page<a class="headerlink" href="#show-page" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">page</span><span class="p">.</span><span class="nx">showPage</span><span class="p">();</span>         <span class="c1">// display current page</span>
-<span class="nx">page</span><span class="p">.</span><span class="nx">showNextPage</span><span class="p">();</span>     <span class="c1">// display next page</span>
-<span class="nx">page</span><span class="p">.</span><span class="nx">showPreviousPage</span><span class="p">();</span> <span class="c1">// display previous page</span>
-</pre></div>
-
+<ul>
+<li>Display current page
+    <div class="codehilite"><pre><span></span><span class="nx">page</span><span class="p">.</span><span class="nx">showPage</span><span class="p">();</span>
+</pre></div></li>
+<li>Display next page
+    <div class="codehilite"><pre><span></span><span class="nx">page</span><span class="p">.</span><span class="nx">showNextPage</span><span class="p">();</span>
+</pre></div></li>
+<li>Display previous page
+    <div class="codehilite"><pre><span></span><span class="nx">page</span><span class="p">.</span><span class="nx">showPreviousPage</span><span class="p">();</span>
+</pre></div></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>Initial page index is <code>-1</code>, so user could call <code>page.showNextPage()</code> to display first page.</p>
+</div>
 <h3 id="get-lines-of-page">Get lines of page<a class="headerlink" href="#get-lines-of-page" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">lines</span> <span class="o">=</span> <span class="nx">page</span><span class="p">.</span><span class="nx">getPage</span><span class="p">();</span>         <span class="c1">// get lines of current page</span>
-<span class="kd">var</span> <span class="nx">lines</span> <span class="o">=</span> <span class="nx">page</span><span class="p">.</span><span class="nx">getNextPage</span><span class="p">();</span>     <span class="c1">// get lines of next page</span>
-<span class="kd">var</span> <span class="nx">lines</span> <span class="o">=</span> <span class="nx">page</span><span class="p">.</span><span class="nx">getPreviousPage</span><span class="p">();</span> <span class="c1">// get lines of previous page</span>
-</pre></div>
-
+<ul>
+<li>Get lines of current page
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">lines</span> <span class="o">=</span> <span class="nx">page</span><span class="p">.</span><span class="nx">getPage</span><span class="p">();</span>
+</pre></div></li>
+<li>Get lines of next page
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">lines</span> <span class="o">=</span> <span class="nx">page</span><span class="p">.</span><span class="nx">getNextPage</span><span class="p">();</span>
+</pre></div></li>
+<li>Get lines of previous page
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">lines</span> <span class="o">=</span> <span class="nx">page</span><span class="p">.</span><span class="nx">getPreviousPage</span><span class="p">();</span>
+</pre></div></li>
+</ul>
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Is last page
