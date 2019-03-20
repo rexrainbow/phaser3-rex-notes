@@ -93,6 +93,18 @@ sizer.pushIntoBounds(bounds);
     sizer.fadeOutDestroy(duration);
     ```
 
+### Drag top-most sizer
+
+- Draggable
+    ```javascript
+    sizer.setDraggable();
+    // sizer.setDraggable(true);
+    ```
+- Disable
+    ```javascript
+    sizer.setDraggable(false);
+    ```
+
 ### Draw bounds
 
 Draw all bounds of children.

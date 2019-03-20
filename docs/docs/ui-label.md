@@ -66,6 +66,7 @@ var label = scene.rexUI.add.label({
     width: undefined,
     height: undefined,
     name: '',
+    draggable: false,
 });
 ```
 
@@ -87,6 +88,7 @@ var label = scene.rexUI.add.label({
     - `space.icon` : Space between icon game object and text game object.
     - `space.text` : Space between text game object and action icon game object.
 - `name` : Set name of this label.
+- `draggable` : Set `true` to drag to-most sizer.
 
 ### Custom class
 
