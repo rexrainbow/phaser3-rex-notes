@@ -1,4 +1,4 @@
-import GetSizerConfig from './GetSizerConfig.js';
+import GetSizerConfig from '../utils/GetSizerConfig.js';
 
 var GetTopmostSizer = function (gameObject) {
     if (gameObject === undefined) {

@@ -3,7 +3,7 @@ import Space from '../utils/Space.js';
 import {
     ButtonSetInteractive,
     FireEvent
-} from '../utils/ButtonSetInteractive.js';
+} from './ButtonSetInteractive.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 

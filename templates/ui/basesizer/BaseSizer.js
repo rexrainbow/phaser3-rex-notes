@@ -2,7 +2,7 @@ import Container from '../container/Container.js';
 import Anchor from '../../../plugins/behaviors/anchor/Anchor.js';
 import GetSizerConfig from '../utils/GetSizerConfig.js';
 import PushIntoBounds from './PushIntoBounds.js';
-import DrawBounds from '../utils/DrawBounds.js';
+import DrawBounds from './DrawBounds.js';
 import AddChildrenMap from './AddChildrenMap.js';
 import GetElement from './GetElement.js';
 import GetChildrenWidth from './GetChildrenWidth.js';
@@ -17,9 +17,9 @@ import ScaleDownDestroy from './ScaleDownDestroy.js';
 import FadeIn from './FadeIn.js';
 import FadeOutDestroy from './FadeOutDestroy.js';
 import IsInTouching from './IsInTouching.js';
-import GetTopmostSizer from '../utils/GetTopmostSizer.js';
+import GetTopmostSizer from './GetTopmostSizer.js';
 import LayoutBackgrounds from './LayoutBackgrounds.js';
-import SetDraggable from '../utils/SetDraggable.js';
+import SetDraggable from './SetDraggable.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
