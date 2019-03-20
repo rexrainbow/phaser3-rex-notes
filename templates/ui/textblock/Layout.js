@@ -30,26 +30,29 @@ var Layout = function (parent, newWidth, newHeight) {
     // Layout text child
     // Skip invisible child
     child = this.textObject;
-    childConfig = child.rexSizer;
-    padding = childConfig.padding;
-    x = (startX + padding.left);
-    y = (startY + padding.top);
-    width = this.width - padding.left - padding.right;
-    height = this.height - padding.top - padding.bottom;
-    ResizeText.call(this, child, width, height);
-    GlobZone.setPosition(x, y).setSize(width, height);
-    AlignIn(child, GlobZone, childConfig.align);
-    childConfig.preOffsetY = 0; // Clear preOffsetY
-    ResetTextObjectPosition.call(this);
+    if (child.visible) {
+        childConfig = child.rexSizer;
+        padding = childConfig.padding;
+        x = (startX + padding.left);
+        y = (startY + padding.top);
+        width = this.width - padding.left - padding.right;
+        height = this.height - padding.top - padding.bottom;
+        ResizeText.call(this, child, width, height);
+        GlobZone.setPosition(x, y).setSize(width, height);
+        AlignIn(child, GlobZone, childConfig.align);
+
+        // Layout text mask before reset text position
+        if (this.textMask) {
+            this.textMask.setPosition().resize();
+            this.resetChildState(this.textMask);
+        }
+
+        childConfig.preOffsetY = 0; // Clear preOffsetY
+        ResetTextObjectPosition.call(this);
+    }
 
     // Layout background children
     this.layoutBackgrounds();
-
-    // Layout text mask
-    if (this.textMask) {
-        this.textMask.setPosition().resize();
-        this.resetChildState(this.textMask);
-    }
 
     return this;
 }
