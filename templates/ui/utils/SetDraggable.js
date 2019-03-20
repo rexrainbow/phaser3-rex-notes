@@ -3,19 +3,16 @@ var SetDraggable = function (draggable) {
         draggable = true;
     }
 
-    var config = this.rexSizer
-    if (draggable) {
-        if (!config.hasOwnProperty('draggable')) {
-            this.setInteractive(interactiveConfig);
-            this.scene.input.setDraggable(this);
-            this.on('drag', onDrag, this);
-        }
-        config.draggable = true;
-    } else { // !draggable
-        if (config.hasOwnProperty('draggable')) {
-            config.draggable = false;
-            this.input.draggable = false;
-        }
+    if (this.input && this.input.hasOwnProperty('draggable')) {
+        // Draggable is already registered
+        this.input.draggable = draggable;
+    } else if (draggable) {
+        // Register draggable
+        this.setInteractive(interactiveConfig);
+        this.scene.input.setDraggable(this);
+        this.on('drag', onDrag, this);
+    } else {
+        // Not draggable and draggable is not registered yet, do nothing
     }
     return this;
 }
