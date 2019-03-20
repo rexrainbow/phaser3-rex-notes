@@ -12,13 +12,13 @@ class Demo extends Phaser.Scene {
 
     create() {
         var dialog = this.rexUI.add.dialog({
-                x: 'center',
-                y: 'center',
+                x: 400,
+                y: 300,
                 width: 500,
 
                 background: this.rexUI.add.roundRectangle(0, 0, 100, 100, 20, 0x1565c0),
 
-                title: createLabel(this, 'Title'),
+                title: createLabel(this, 'Title').setDraggable(),
 
                 toolbar: [
                     createLabel(this, 'O'),

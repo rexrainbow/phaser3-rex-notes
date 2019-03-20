@@ -19,6 +19,7 @@ import FadeOutDestroy from './FadeOutDestroy.js';
 import IsInTouching from './IsInTouching.js';
 import GetTopmostSizer from '../utils/GetTopmostSizer.js';
 import LayoutBackgrounds from './LayoutBackgrounds.js';
+import SetDraggable from '../utils/SetDraggable.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -38,6 +39,7 @@ class Base extends Container {
         this.setMinWidth(minWidth);
         this.setMinHeight(minHeight);
         this.setName(GetValue(config, 'name', ''));
+        this.rexSizer = {};
         this.backgroundChildren = [];
 
         if (anchorX !== undefined) {
@@ -46,6 +48,8 @@ class Base extends Container {
                 y: anchorY,
             });;
         }
+
+        this.setDraggable(GetValue(config, 'draggable', false));
     }
 
     destroy(fromScene) {
@@ -195,6 +199,7 @@ var methods = {
     fadeOutDestroy: FadeOutDestroy,
     isInTouching: IsInTouching,
     getTopmostSizer: GetTopmostSizer,
+    setDraggable: SetDraggable,
 }
 
 Object.assign(
