@@ -1,5 +1,5 @@
 import CanvasPlugin from '../../plugins/canvas-plugin.js'
-import Chart from '../../plugins/utils/chartjs/Chart.js';
+import Chart from 'chart.js/dist/Chart.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

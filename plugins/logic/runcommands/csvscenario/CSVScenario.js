@@ -1,4 +1,4 @@
-import CSVParser from '../../../utils/papaparser/papaparse.js';
+import CSVParser from 'papaparse/papaparse.js';
 import InstMem from './InstMem.js';
 import CmdHandlers from './commands/CmdHandlers.js';
 

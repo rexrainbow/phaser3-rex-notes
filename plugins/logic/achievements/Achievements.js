@@ -1,4 +1,4 @@
-import CSVParser from '../../utils/papaparser/papaparse.js';
+import CSVParser from 'papaparse/papaparse.js';
 import Clear from '../../utils/object/Clear.js';
 import Achievement from './Achievement.js';
 
