@@ -1,4 +1,4 @@
-import Render from './TextRender.js'; // copy from text object
+import Render from '../../../node_modules/phaser/src/gameobjects/text/static/TextRender.js';
 import TextStyle from './TextStyle.js'; // extended
 import CanvasTextKlass from './CanvasText.js';
 import PoolKlass from '../../pool.js';
