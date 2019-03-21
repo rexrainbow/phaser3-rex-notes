@@ -217,6 +217,7 @@ nav:
     - Clock: clock.md
     - Life time: lifetime.md
 - Board:
+    - Overview: board-overview.md
     - Board: board.md
     - Grid:    
         - Quad: board-quadgrid.md

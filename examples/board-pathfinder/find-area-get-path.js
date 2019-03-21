@@ -64,7 +64,7 @@ class Board extends RexPlugins.Board.Board {
         var graphics = scene.add.graphics({
             lineStyle: {
                 width: 1,
-                color: 0xffffff,
+                color: COLOR_PRIMARY,
                 alpha: 1
             }
         });
@@ -84,7 +84,7 @@ class Blocker extends RexPlugins.Board.Shape {
             tileXY = board.getRandomEmptyTileXY(0);
         }
         // Shape(board, tileX, tileY, tileZ, fillColor, fillAlpha, addToBoard)
-        super(board, tileXY.x, tileXY.y, 0, 0x555555);
+        super(board, tileXY.x, tileXY.y, 0, COLOR_DARK);
         scene.add.existing(this);
     }
 }
@@ -96,7 +96,7 @@ class ChessA extends RexPlugins.Board.Shape {
             tileXY = board.getRandomEmptyTileXY(0);
         }
         // Shape(board, tileX, tileY, tileZ, fillColor, fillAlpha, addToBoard)
-        super(board, tileXY.x, tileXY.y, 0, 0x00CC00);
+        super(board, tileXY.x, tileXY.y, 0, COLOR_LIGHT);
         scene.add.existing(this);
         this.setDepth(1);
 
@@ -158,7 +158,7 @@ class MoveableMarker extends RexPlugins.Board.Shape {
         var board = chess.rexChess.board;
         var scene = board.scene;
         // Shape(board, tileX, tileY, tileZ, fillColor, fillAlpha, addToBoard)
-        super(board, tileXY.x, tileXY.y, -1, 0x330000);
+        super(board, tileXY.x, tileXY.y, -1, COLOR2_DARK);
         scene.add.existing(this);
         this.setScale(0.5);
 
@@ -167,10 +167,18 @@ class MoveableMarker extends RexPlugins.Board.Shape {
             if (!chess.moveToTile(this)) {
                 return;
             }
-            this.setFillStyle(0xff0000);
+            this.setFillStyle(COLOR2_LIGHT);
         }, this);
     }
 }
+
+const COLOR_PRIMARY = 0x43a047;
+const COLOR_LIGHT = 0x76d275;
+const COLOR_DARK = 0x00701a;
+
+const COLOR2_PRIMARY = 0xd81b60;
+const COLOR2_LIGHT = 0xff5c8d;
+const COLOR2_DARK = 0xa00037;
 
 var config = {
     type: Phaser.AUTO,

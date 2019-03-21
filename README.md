@@ -10,21 +10,31 @@
 
 ### Prepare
 
-1.  install [node.js](https://nodejs.org/en/)
-2.  Click `install.bat`
-    -   `npm install`
+1. Install [node.js](https://nodejs.org/en/)
+2. Click `install.bat`
+    - `npm install`
 
 ### Run examples
 
-1.  Click `*.bat` in folder `examples`, it will open application on browser
+1. Click `*.bat` in folder `examples`, it will open application on browser
 
 ## File structure
 
--   Folder `plugins` : source code of plugins
--   Folder `examples` : examples
--   Folder `docs` : notes
+- Folder `plugins`, `templates` : Source code of plugins and templates
+- Folder `examples` : Test code of plugins
+- Folder `docs` : Some notes of phaser3, and my plugins.
+    - `site\index.html` : Entry point.
+- Folder `projects` : User projects.
+    - `preview.bat` : Project preview.
+    - `build-html.bat` : Export html files.
 
 ## Showcase
 
--   [Kaleidoscope](https://rexrainbow.github.io/phaser3-rex-notes/app/kaleidoscope/index.html)
--   [Board: Find area/Get path](https://rexrainbow.github.io/phaser3-rex-notes/app/find-area-get-path/index.html)
+- [Virtual joystick](https://codepen.io/rexrainbow/full/oyqvQY)
+- Path finder
+    - [Find area, get path](https://codepen.io/rexrainbow/full/qvJwjJ)
+    - [Move from high to low](https://codepen.io/rexrainbow/full/NJOmQg)
+- [Bejeweled](https://codepen.io/rexrainbow/full/wEVYoY)
+- Webgl shader effect
+    - [Toonify](https://codepen.io/rexrainbow/full/ErWNXa)
+- [Kaleidoscope](https://rexrainbow.github.io/phaser3-rex-notes/app/kaleidoscope/index.html)

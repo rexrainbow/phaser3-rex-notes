@@ -1,11 +1,5 @@
 import BoardPlugin from '../../plugins/board-plugin.js';
 
-const COLOR_PRIMARY = 0x03a9f4;
-const COLOR_LIGHT = 0x67daff;
-const COLOR_DARK = 0x007ac1;
-const COLOR_VISIBLE = 0xffff6b;
-const COLOR_INVISIBLE = 0xc41c00;
-
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Demo extends Phaser.Scene {
@@ -170,6 +164,12 @@ var LOS = function (chessA, marker) {
             board.tileXYToWorldY(markerTileXYZ.x, markerTileXYZ.y)
         );
 }
+
+const COLOR_PRIMARY = 0x03a9f4;
+const COLOR_LIGHT = 0x67daff;
+const COLOR_DARK = 0x007ac1;
+const COLOR_VISIBLE = 0xffff6b;
+const COLOR_INVISIBLE = 0xc41c00;
 
 var config = {
     type: Phaser.AUTO,
