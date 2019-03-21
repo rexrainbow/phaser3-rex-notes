@@ -1,5 +1,9 @@
 import PathFollowerPlugin from '../../plugins/pathfollower-plugin.js';
 
+const COLOR_PRIMARY = 0x43a047;
+const COLOR_LIGHT = 0x76d275;
+const COLOR_DARK = 0x00701a;
+
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -20,15 +24,13 @@ class Demo extends Phaser.Scene {
         var graphics = this.add.graphics({
             lineStyle: {
                 width: 3,
-                color: 0xffff00,
+                color: COLOR_DARK,
                 alpha: 1
             }
         })
         path.draw(graphics);
 
-        var gameObject = this.add.graphics()
-            .fillStyle(0xffffff, 1)
-            .fillPoint(0, 0, 40);
+        var gameObject = this.add.rectangle(0, 0, 30, 30, COLOR_PRIMARY);
         gameObject.pathFollower = this.plugins.get('rexPathFollower').add(gameObject, {
             path: path,
             t: 0,
