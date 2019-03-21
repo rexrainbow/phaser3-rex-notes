@@ -150,31 +150,34 @@ See [grid sizer object](ui-gridsizer.md), [base-sizer object](ui-basesizer.md).
 
 - Click button
     ```javascript
-    tabs.on('button.click', function(button, groupName, index) {
+    tabs.on('button.click', function(button, groupName, index, pointer) {
         // ...
     }, scope);
     ```
     - `button` : Triggered button game object.
     - `groupName` : `'left'`, `'right'`, `'top'`, or `'bottom'`.
     - `index` : Index of triggered button game object.
+    - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
 - Pointer-over button
     ```javascript
-    tabs.on('button.over', function(button, groupName, index) {
+    tabs.on('button.over', function(button, groupName, index, pointer) {
         // ...
     }, scope);
     ```
     - `button` : Triggered button game object
     - `groupName` : `'left'`, `'right'`, `'top'`, or `'bottom'`.
-    - `index` : Index of triggered button game object
+    - `index` : Index of triggered button game object.
+    - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
 - Pointer-out button
     ```javascript
-    tabs.on('button.out', function(button, groupName, index) {
+    tabs.on('button.out', function(button, groupName, index, pointer) {
         // ...
     }, scope);
     ```
     - `button` : Triggered button game object.
     - `groupName` : `'left'`, `'right'`, `'top'`, or `'bottom'`.
     - `index` : Index of triggered button game object.
+    - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
 
 #### Emit button click event
 

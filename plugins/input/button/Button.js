@@ -79,7 +79,7 @@ class Button extends EE {
         }
         this.pointer = pointer;
         if (this.mode === 0) {
-            this.click(pointer.downTime);
+            this.click(pointer.downTime, pointer);
         }
     }
 
@@ -88,7 +88,7 @@ class Button extends EE {
             return;
         }
         if (this.mode === 1) {
-            this.click(pointer.upTime);
+            this.click(pointer.upTime, pointer);
         }
         this.pointer = undefined;
     }
@@ -100,10 +100,10 @@ class Button extends EE {
         this.pointer = undefined;
     }
 
-    click(nowTime) {
+    click(nowTime, pointer) {
         if (nowTime === undefined) {
             // fires 'click' event manually
-            this.emit('click', this, this.gameObject);
+            this.emit('click', this, this.gameObject, pointer);
             return this;
         }
 
@@ -114,7 +114,7 @@ class Button extends EE {
             return this;
         }
         this.lastClickTime = nowTime;
-        this.emit('click', this, this.gameObject);
+        this.emit('click', this, this.gameObject, pointer);
         return this;
     }
 }

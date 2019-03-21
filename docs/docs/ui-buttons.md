@@ -124,49 +124,52 @@ See [sizer object](ui-sizer.md)
 
 - Click button
     ```javascript
-    buttons.on('button.click', function(button, groupName, index) {
+    buttons.on('button.click', function(button, groupName, index, pointer) {
         // ...
     }, scope);
     ```
     or
     ```javascript
-    buttons.on('button.click', function(button, index) {
+    buttons.on('button.click', function(button, index, pointer) {
         // ...
     }, scope);
     ```
     - `button` : Triggered button game object.
     - `groupName` : Group name defined in constructor configuration. Set to `undefined` to ignore this parameter in event callback.
     - `index` : Index of triggered button game object.
+    - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
 - Pointer-over button
     ```javascript
-    buttons.on('button.over', function(button, groupName, index) {
+    buttons.on('button.over', function(button, groupName, index, pointer) {
         // ...
     }, scope);
     ```
     or
     ```javascript
-    buttons.on('button.over', function(button, index) {
+    buttons.on('button.over', function(button, index, pointer) {
         // ...
     }, scope);
     ```
     - `button` : Triggered button game object
     - `groupName` : Group name defined in constructor configuration. Set to `undefined` to ignore this parameter in event callback.
-    - `index` : Index of triggered button game object
+    - `index` : Index of triggered button game object.
+    - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
 - Pointer-out button
     ```javascript
-    buttons.on('button.out', function(button, groupName, index) {
+    buttons.on('button.out', function(button, groupName, index, pointer) {
         // ...
     }, scope);
     ```
     or
     ```javascript
-    buttons.on('button.out', function(button, index) {
+    buttons.on('button.out', function(button, index, pointer) {
         // ...
     }, scope);
     ```
     - `button` : Triggered button game object.
     - `groupName` : Group name defined in constructor configuration. Set to `undefined` to ignore this parameter in event callback.
     - `index` : Index of triggered button game object.
+    - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
 
 #### Emit button click event
 

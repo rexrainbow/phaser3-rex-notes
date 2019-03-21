@@ -3551,6 +3551,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../board-overview/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../board/" title="Board" class="md-nav__link">
       Board
     </a>
@@ -3564,13 +3576,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-14-2" type="checkbox" id="nav-14-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-14-3" type="checkbox" id="nav-14-3">
     
-    <label class="md-nav__link" for="nav-14-2">
+    <label class="md-nav__link" for="nav-14-3">
       Grid
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-14-2">
+      <label class="md-nav__title" for="nav-14-3">
         Grid
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -3684,13 +3696,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-14-9" type="checkbox" id="nav-14-9">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-14-10" type="checkbox" id="nav-14-10">
     
-    <label class="md-nav__link" for="nav-14-9">
+    <label class="md-nav__link" for="nav-14-10">
       Mini board
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-14-9">
+      <label class="md-nav__title" for="nav-14-10">
         Mini board
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -4078,7 +4090,9 @@
 <li><code>clickInterval</code> : Interval between 2 'click' events, in ms.</li>
 </ul>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">button</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">){</span> <span class="cm">/*...*/</span> <span class="p">});</span>
+<div class="codehilite"><pre><span></span><span class="nx">button</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">button</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </pre></div>
 
 <h3 id="enable">Enable<a class="headerlink" href="#enable" title="Permanent link">&para;</a></h3>
