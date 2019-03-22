@@ -1,0 +1,28 @@
+import CONST from './const.js';
+import TileXYIsEqual from '../utils/TileXYIsEqual.js';
+
+const BLOCKER = CONST.BLOCKER;
+const INFINITY = CONST.INFINITY;
+
+var IsPathVisible = function (tileXYArray, visiblePoints) {
+    var myTileXYZ = this.chessData.tileXYZ;
+    var tileXY, cost;
+    for (var i = 1, cnt = tileXYArray.length; i < cnt; i++) {
+        tileXY = tileXYArray[i];
+        if (TileXYIsEqual(myTileXYZ, tileXY)) {
+            continue;
+        }
+        cost = this.getCost(tileXY);
+        if (cost === BLOCKER) {
+            return false;
+        }
+        if (visiblePoints !== INFINITY) {
+            visiblePoints -= cost;
+            if (visiblePoints < 0) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+export default IsPathVisible;

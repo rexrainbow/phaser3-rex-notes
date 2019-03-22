@@ -96,6 +96,13 @@ var CreateBoard = function (scene, config) {
     board.forEachTileXY(function (tileXY, board) {
         var points = board.getGridPoints(tileXY.x, tileXY.y, true);
         graphics.strokePoints(points, true);
+
+        var scene = board.scene;
+        var worldX = board.tileXYToWorldX(tileXY.x, tileXY.y);
+        var worldY = board.tileXYToWorldY(tileXY.x, tileXY.y);
+        scene.add.text(worldX, worldY, tileXY.x + ',' + tileXY.y)
+            .setOrigin(0.5)
+            .setDepth(3);
     });
     return board;
 }
@@ -142,33 +149,33 @@ var LOS = function (chessA, marker) {
     marker.setFillStyle((isInLOS) ? COLOR_VISIBLE : COLOR_INVISIBLE);
 
     // Draw line between chessA to marker
-    if (lineGraphics === undefined) {
-        lineGraphics = chessA.scene.add.graphics({
-                lineStyle: {
-                    width: 2,
-                    color: 0xff0000,
-                    alpha: 1
-                }
-            })
-            .setDepth(2);
-    }
-    var board = chessA.rexChess.board;
-    var chessATileXYZ = board.chessToTileXYZ(chessA);
-    var markerTileXYZ = board.chessToTileXYZ(marker);
-    lineGraphics
-        .clear()
-        .lineBetween(
-            board.tileXYToWorldX(chessATileXYZ.x, chessATileXYZ.y),
-            board.tileXYToWorldY(chessATileXYZ.x, chessATileXYZ.y),
-            board.tileXYToWorldX(markerTileXYZ.x, markerTileXYZ.y),
-            board.tileXYToWorldY(markerTileXYZ.x, markerTileXYZ.y)
-        );
+    //if (lineGraphics === undefined) {
+    //    lineGraphics = chessA.scene.add.graphics({
+    //            lineStyle: {
+    //                width: 2,
+    //                color: 0xff0000,
+    //                alpha: 1
+    //            }
+    //        })
+    //        .setDepth(2);
+    //}
+    // var board = chessA.rexChess.board;
+    //var chessATileXYZ = board.chessToTileXYZ(chessA);
+    //var markerTileXYZ = board.chessToTileXYZ(marker);
+    //lineGraphics
+    //    .clear()
+    //    .lineBetween(
+    //        board.tileXYToWorldX(chessATileXYZ.x, chessATileXYZ.y),
+    //        board.tileXYToWorldY(chessATileXYZ.x, chessATileXYZ.y),
+    //        board.tileXYToWorldX(markerTileXYZ.x, markerTileXYZ.y),
+    //        board.tileXYToWorldY(markerTileXYZ.x, markerTileXYZ.y)
+    //    );
 }
 
 const COLOR_PRIMARY = 0x03a9f4;
 const COLOR_LIGHT = 0x67daff;
 const COLOR_DARK = 0x007ac1;
-const COLOR_VISIBLE = 0xffff6b;
+const COLOR_VISIBLE = 0xc49000;
 const COLOR_INVISIBLE = 0xc41c00;
 
 var config = {

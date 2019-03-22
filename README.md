@@ -36,5 +36,7 @@
     - [Move from high to low](https://codepen.io/rexrainbow/full/NJOmQg)
 - [Bejeweled](https://codepen.io/rexrainbow/full/wEVYoY)
 - Webgl shader effect
+    - [Swirl](https://codepen.io/rexrainbow/full/RBXQBo)
+    - [Pixelation](https://codepen.io/rexrainbow/full/MqgmgE)
     - [Toonify](https://codepen.io/rexrainbow/full/ErWNXa)
 - [Kaleidoscope](https://rexrainbow.github.io/phaser3-rex-notes/app/kaleidoscope/index.html)

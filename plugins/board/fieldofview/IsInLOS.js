@@ -1,6 +1,5 @@
 import CONST from './const.js';
 
-const BLOCKER = CONST.BLOCKER;
 const INFINITY = CONST.INFINITY;
 
 var IsInLOS = function (chess, visiblePoints) {
@@ -9,39 +8,72 @@ var IsInLOS = function (chess, visiblePoints) {
         return false;
     }
 
+    // Debug
+    if (lineGraphics === undefined) {
+        lineGraphics = this.board.scene.add.graphics({
+                lineStyle: {
+                    width: 2,
+                    color: 0xff0000,
+                    alpha: 1
+                }
+            })
+            .setDepth(10);
+    }
+    lineGraphics.clear();
+
     var board = this.board;
     var targetTileXY = board.chessToTileXYZ(chess);
     if (!this.isInCone(targetTileXY)) {
         return false;
     }
 
-
     var myTileXYZ = this.chessData.tileXYZ;
+    var startX = board.tileXYToWorldX(myTileXYZ.x, myTileXYZ.y),
+        startY = board.tileXYToWorldY(myTileXYZ.x, myTileXYZ.y),
+        endX = board.tileXYToWorldX(targetTileXY.x, targetTileXY.y),
+        endY = board.tileXYToWorldY(targetTileXY.x, targetTileXY.y);        
+    console.log('--');
+    var grid = this.board.grid;
+    var gridSize = Math.min(grid.cellWidth, grid.cellHeight) / 10;
+    var lineAngle = Math.atan2(endX - startX, endY - startY);
+    var offsetX = gridSize * Math.cos(lineAngle);
+    var offsetY = gridSize * Math.sin(lineAngle);
+
+    // Debugger
+    lineGraphics.lineBetween(startX + offsetX, startY + offsetY, endX + offsetX, endY + offsetY);
+    lineGraphics.lineBetween(startX - offsetX, startY - offsetY, endX - offsetX, endY - offsetY);
+
+
+    // Shift a small distance
     board.lineToTileXYArray(
-        board.tileXYToWorldX(myTileXYZ.x, myTileXYZ.y),
-        board.tileXYToWorldY(myTileXYZ.x, myTileXYZ.y),
-        board.tileXYToWorldX(targetTileXY.x, targetTileXY.y),
-        board.tileXYToWorldY(targetTileXY.x, targetTileXY.y),
-        globTileXYArray
-    );
-    var cost, result = true;
-    for (var i = 1, cnt = globTileXYArray.length; i < cnt; i++) {
-        cost = this.getCost(globTileXYArray[i]);
-        if (cost === BLOCKER) {
-            result = false;
-            break;
-        }
-        if (visiblePoints !== INFINITY) {
-            visiblePoints -= cost;
-            if (visiblePoints < 0) {
-                result = false;
-                break;
-            }
-        }
-    }
+        startX + offsetX,
+        startY + offsetY,
+        endX + offsetX,
+        endY + offsetY,
+        globTileXYArray);
+    var isVisivle = this.isPathVisible(globTileXYArray, visiblePoints);
+    console.log('(' + (startX + offsetX) + ',' + (startY + offsetY) + ') --> (' + (endX + offsetX) + ',' + (endY + offsetY) + ')');
+    console.log(JSON.stringify(globTileXYArray));
     globTileXYArray.length = 0;
-    return result;
+    if (isVisivle) {
+        return true;
+    }
+
+    // Shift a small distance
+    board.lineToTileXYArray(
+        startX - offsetX,
+        startY - offsetY,
+        endX - offsetX,
+        endY - offsetY,
+        globTileXYArray);
+    var isVisivle = this.isPathVisible(globTileXYArray, visiblePoints);
+    console.log('(' + (startX - offsetX) + ',' + (startY - offsetY) + ') --> (' + (endX - offsetX) + ',' + (endY - offsetY) + ')');
+    console.log(JSON.stringify(globTileXYArray));
+    globTileXYArray.length = 0;
+
+    return isVisivle;
 }
 
 var globTileXYArray = [];
+var lineGraphics = undefined;
 export default IsInLOS;
