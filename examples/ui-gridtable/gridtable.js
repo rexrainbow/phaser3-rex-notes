@@ -12,14 +12,14 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        var scrollMode = 1; // 0:vertical, 1:horizontal
+        var scrollMode = 0; // 0:vertical, 1:horizontal
         var gridTable = this.rexUI.add.gridTable({
                 x: 400,
                 y: 300,
 
-                background: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, 0x4e342e),
-
                 scrollMode: scrollMode,
+
+                background: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, 0x4e342e),
 
                 table: {
                     width: (scrollMode === 0) ? 250 : 400,

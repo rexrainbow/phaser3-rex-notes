@@ -47,6 +47,8 @@ var gridTable = scene.rexUI.add.gridTable({
     width: 2,
     height: 2,
 
+    scrollMode: 0,
+
     // Elements
     background: backgroundGameObject,
 
@@ -98,6 +100,9 @@ var gridTable = scene.rexUI.add.gridTable({
     - Number : World position in pixels.
     - String (`'p%+n'`) : Position based on visible window. See [anchor](anchor.md#create-instance).
 - `width`, `height` : Minimum width, minimum height.
+- `scrollMode` : Scroll grid table vertically, or horizontally.
+    - `0`, `'vertical'`, or `'v'` : Scroll grid table vertically. Default value.
+    - `1`, `'horizontal'`, or `'h'` : Scroll grid table horizontally.
 - `background` : Game object of background, optional. This background game object will be resized to fit the size of grid table.
 - `table` : Configuration of grid table.
     - `table.width` : Width of table, in pixels.
