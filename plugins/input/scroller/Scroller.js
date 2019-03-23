@@ -48,7 +48,7 @@ class Scroller extends EE {
     }
 
     resetFromJSON(o) {
-        this.setAxisMode(GetValue(o, 'axis', 2));
+        this.setOrientationMode(GetValue(o, 'orientation', 0));
         this.setSlidingDeceleration(GetValue(o, 'slidingDeceleration', 5000));
         this.setBackDeceleration(GetValue(o, 'backDeceleration', 2000));
 
@@ -84,11 +84,11 @@ class Scroller extends EE {
         this.shutdown();
     }
 
-    setAxisMode(m) {
+    setOrientationMode(m) {
         if (typeof (m) === 'string') {
-            m = AXISMODE[m];
+            m = ORIENTATIONMODE[m];
         }
-        this.axisMode = m;
+        this.orientationMode = m;
         return this;
     }
 
@@ -206,9 +206,9 @@ class Scroller extends EE {
     }
 
     get dragDelta() {
-        if (this.axisMode === 2) { // y
+        if (this.orientationMode === 0) { // y
             return this.dragState.dy;
-        } else if (this.axisMode === 1) { // x
+        } else if (this.orientationMode === 1) { // x
             return this.dragState.dx;
         } else {
             return 0;
@@ -216,9 +216,9 @@ class Scroller extends EE {
     }
 
     get dragSpeed() {
-        if (this.axisMode === 2) { // y
+        if (this.orientationMode === 0) { // y
             return this.dragState.speedY;
-        } else if (this.axisMode === 1) { // x
+        } else if (this.orientationMode === 1) { // x
             return this.dragState.speedX;
         } else {
             return 0;
@@ -287,13 +287,13 @@ class Scroller extends EE {
 
 
 /** @private */
-const AXISMODE = {
-    'horizontal': 1,
-    'h': 1,
-    'x': 1,
-    'vertical': 2,
-    'v': 2,
-    'y': 2
+const ORIENTATIONMODE = {
+    y: 0,
+    v: 0,
+    vertical: 0,
+    x: 1,
+    h: 1,
+    horizontal: 1,
 };
 
 export default Scroller;
