@@ -11,10 +11,15 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 class GridTable extends Sizer {
     constructor(scene, config) {
         if (config === undefined) {
-            config = defaultConfig;
+            config = {};
         }
+        var scrollMode = GetValue(config, 'scrollMode', 0); // vertical
+        if (typeof (scrollMode) === 'string') {
+            scrollMode = SCROLLMODE[tableOrientation];
+        }
+
         // Create sizer
-        config.orientation = 0; // Left-to-right
+        config.orientation = scrollMode; // Left-to-right, or top-to-bottom
         super(scene, config);
         this.type = 'rexGridTable';
         this.eventEmitter = GetValue(config, 'eventEmitter', this);
@@ -36,6 +41,10 @@ class GridTable extends Sizer {
             this.addBackground(background);
         }
 
+        if (tableConfig === undefined) {
+            tableConfig = {};
+        }
+        tableConfig.scrollMode = scrollMode;
         var table = CreateTable(scene, tableConfig);
         table.on('cellvisible', function (cell) {
             var callback = this.createCellContainerCallback;
@@ -55,11 +64,21 @@ class GridTable extends Sizer {
             cell.setContainer(container);
         }, this);
 
-        var padding = {
-            left: paddingLeft,
-            right: (sliderConfig) ? tableSpace : paddingRight,
-            top: paddingTop,
-            bottom: paddingBottom
+        var padding;
+        if (scrollMode === 0) {
+            padding = {
+                left: paddingLeft,
+                right: (sliderConfig) ? tableSpace : paddingRight,
+                top: paddingTop,
+                bottom: paddingBottom
+            }
+        } else {
+            padding = {
+                left: paddingLeft,
+                right: paddingRight,
+                top: paddingTop,
+                bottom: (sliderConfig) ? tableSpace : paddingBottom
+            }
         }
         this.add(table, 0, 'center', padding, true);
 
@@ -70,11 +89,21 @@ class GridTable extends Sizer {
             }
             sliderConfig.orientation = this.orientation;
             slider = new Slider(scene, sliderConfig);
-            var padding = {
-                left: 0,
-                right: paddingRight,
-                top: paddingTop,
-                bottom: paddingBottom
+            var padding;
+            if (scrollMode === 0) {
+                padding = {
+                    left: 0,
+                    right: paddingRight,
+                    top: paddingTop,
+                    bottom: paddingBottom
+                }
+            } else {
+                padding = {
+                    left: paddingLeft,
+                    right: paddingRight,
+                    top: 0,
+                    bottom: paddingBottom
+                }
             }
             this.add(slider, 0, 'center', padding, true);
         }
@@ -84,6 +113,7 @@ class GridTable extends Sizer {
             if (scrollerConfig === true) {
                 scrollerConfig = {};
             }
+            scrollerConfig.orientation = scrollMode;
             scroller = new Scroller(table, scrollerConfig);
         }
 
@@ -138,8 +168,12 @@ class GridTable extends Sizer {
     }
 
 }
-
-const defaultConfig = {};
+const SCROLLMODE = {
+    v: 0,
+    vertical: 0,
+    h: 1,
+    horizontal: 1
+};
 
 var methods = {
     setItems: SetItems

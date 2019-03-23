@@ -34,6 +34,10 @@ class Cell {
         return this.parent;
     }
 
+    get scrollMode() {
+        return this.parentContainer.scrollMode;
+    }
+
     get colIndx() {
         return this.parent.cellIndxeToColIndex(this.index);
     }
@@ -132,29 +136,46 @@ class Cell {
     }
 
     get height() {
-        var table = this.parent;
-        return this.deltaHeight + table.defaultCellHeight;
+        if (this.scrollMode === 0) {
+            return this.deltaHeight + this.parent.defaultCellHeight;
+        } else {
+            return this.parent.defaultCellWidth;
+        }
     }
 
     set height(height) {
-        var table = this.parent;
-        var deltaHeight;
-        if (height === undefined) {
-            deltaHeight = 0;
-        } else {
-            deltaHeight = height - table.defaultCellHeight;
+        // Only worked when scrollMode is 0
+        if (this.scrollMode === 1) {
+            return;
         }
-        this.setDeltaHeight(deltaHeight);
+        this.setDeltaHeight(height - this.parent.defaultCellHeight);
     }
 
     setHeight(height) {
+        // Only worked when scrollMode is 0
         this.height = height;
         return this;
     }
 
     get width() {
-        var table = this.parent;
-        return table.defaultCellWidth;
+        if (this.scrollMode === 0) {
+            return this.parent.defaultCellWidth;
+        } else {
+            return this.deltaHeight + this.parent.defaultCellHeight;
+        }
+    }
+
+    set width(width) {
+        // Only worked when scrollMode is 1
+        if (this.scrollMode === 0) {
+            return;
+        }
+        this.setDeltaHeight(width - this.parent.defaultCellHeight);
+    }
+
+    setWidth(width) {
+        this.width = width;
+        return this;
     }
 
     get scene() {

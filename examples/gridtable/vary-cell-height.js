@@ -15,10 +15,10 @@ class Demo extends Phaser.Scene {
             var cellIdx = cell.index;
             // cell.height = (cellIdx % 2) ? 40 : 80;  // se height of visible cell
 
-            var cellBg = (cellIdx % 2) ? 0x696969 : 0x808080;
-            var bg = scene.add.graphics()
-                .fillStyle(cellBg)
-                .fillRect(2, 2, cell.width - 2, cell.height - 2);
+            var color = (cellIdx % 2) ? 0x40241a : 0x9c786c;
+            var bg = scene.add.rectangle(0, 0, cell.width, cell.height, color, 0.5)
+                .setStrokeStyle(2, 0x9c786c)
+                .setOrigin(0);
             var txt = scene.add.text(5, 5, cellIdx);
             var container = scene.add.container(0, 0, [bg, txt]);
             return container;

@@ -12,18 +12,21 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
+        var scrollMode = 1; // 0:vertical, 1:horizontal
         var gridTable = this.rexUI.add.gridTable({
                 x: 400,
                 y: 300,
 
                 background: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, 0x4e342e),
 
-                table: {
-                    width: 250,
-                    height: 400,
+                scrollMode: scrollMode,
 
-                    cellWidth: 120,
-                    cellHeight: 60,
+                table: {
+                    width: (scrollMode === 0) ? 250 : 400,
+                    height: (scrollMode === 0) ? 400 : 250,
+
+                    cellWidth: (scrollMode === 0) ? 120 : 60,
+                    cellHeight: (scrollMode === 0) ? 60 : 120,
                     columns: 2,
                 },
 
@@ -51,13 +54,15 @@ class Demo extends Phaser.Scene {
                             width: width,
                             height: height,
 
+                            orientation: scrollMode,
                             background: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 0).setStrokeStyle(2, 0x260e04),
                             icon: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 10, item.color),
                             text: scene.add.text(0, 0, item.id),
 
                             space: {
                                 icon: 10,
-                                left: 15
+                                left: (scrollMode === 0) ? 15 : 0,
+                                top: (scrollMode === 0) ? 0 : 15,
                             }
                         })
                         .setOrigin(0);

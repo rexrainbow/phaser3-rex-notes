@@ -12,9 +12,9 @@ class Demo extends Phaser.Scene {
     create() {
         var newCellObject = function (cell) {
             var scene = cell.scene;
-            var bg = scene.add.graphics()
-                .fillStyle(0x555555)
-                .fillRect(2, 2, 58, 58);
+            var bg = scene.add.rectangle(0, 0, cell.width, cell.height, 0x40241a, 0.5)
+                .setStrokeStyle(2, 0x9c786c)
+                .setOrigin(0);
             var txt = scene.add.text(5, 5, cell.index);
             var container = scene.add.container(0, 0, [bg, txt]);
             return container;
@@ -25,10 +25,10 @@ class Demo extends Phaser.Scene {
             //console.log('Cell ' + cell.index + ' visible');
         };
         var table = this.add.rexGridTable(400, 300, 400, 250, {
-            cellHeight: 60,
+            cellHeight: 120,
             cellWidth: 60,
             cellsCount: 100,
-            columns: 4,
+            columns: 2,
             scrollMode: 1,
             cellVisibleCallback: onCellVisible.bind(this),
             // mask: false

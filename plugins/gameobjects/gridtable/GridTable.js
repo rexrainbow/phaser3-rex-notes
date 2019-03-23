@@ -10,6 +10,9 @@ const Clamp = Phaser.Math.Clamp;
 
 class GridTable extends Container {
     constructor(scene, x, y, width, height, config) {
+        if (config === undefined) {
+            config = {};
+        }
         super(scene, x, y, width, height);
         this.type = 'rexGridTable';
         this.updateFlag = true;
@@ -48,7 +51,16 @@ class GridTable extends Container {
 
         this.setScrollMode(GetValue(config, 'scrollMode', 0));
         this.setClampMode(GetValue(config, 'clamplTableOXY', true));
+
+        if (this.scrollMode === 1) { // scroll x
+            // Swap cell width and cell height
+            var cellHeight = GetValue(config, 'cellWidth', 30);
+            var cellWidth = GetValue(config, 'cellHeight', 30);
+            config.cellWidth = cellWidth;
+            config.cellHeight = cellHeight;
+        }
         this.table = new Table(this, config);
+
         this.updateTable();
     }
 
@@ -345,10 +357,24 @@ class GridTable extends Container {
     }
 
     setCellHeight(cellIdx, height) {
+        var cell;
         if (typeof (cellIdx) === 'number') {
-            var cell = this.table.getCell(cellIdx, true);
-            cell.height = height;
+            cell = this.table.getCell(cellIdx, true);
+        } else {
+            cell = cellIdx;
         }
+        cell.height = height; // Only worked when scrollMode is 0
+        return this;
+    }
+
+    setCellWidth(cellIdx, width) {
+        var cell;
+        if (typeof (cellIdx) === 'number') {
+            cell = this.table.getCell(cellIdx, true);
+        } else {
+            cell = cellIdx;
+        }
+        cell.width = width;  // Only worked when scrollMode is 1
         return this;
     }
 
