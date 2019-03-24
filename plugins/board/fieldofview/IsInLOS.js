@@ -1,4 +1,5 @@
 import CONST from './const.js';
+import AngleBetween from '../../utils/math/angle/Between.js';
 
 const INFINITY = CONST.INFINITY;
 
@@ -31,44 +32,45 @@ var IsInLOS = function (chess, visiblePoints) {
     var startX = board.tileXYToWorldX(myTileXYZ.x, myTileXYZ.y),
         startY = board.tileXYToWorldY(myTileXYZ.x, myTileXYZ.y),
         endX = board.tileXYToWorldX(targetTileXY.x, targetTileXY.y),
-        endY = board.tileXYToWorldY(targetTileXY.x, targetTileXY.y);        
-    console.log('--');
+        endY = board.tileXYToWorldY(targetTileXY.x, targetTileXY.y);
+    var lineAngle = AngleBetween(startX, startY, endX, endY),
+        offsetX, offsetY, isVisivle;
     var grid = this.board.grid;
     var gridSize = Math.min(grid.cellWidth, grid.cellHeight) / 10;
-    var lineAngle = Math.atan2(endX - startX, endY - startY);
-    var offsetX = gridSize * Math.cos(lineAngle);
-    var offsetY = gridSize * Math.sin(lineAngle);
-
-    // Debugger
-    lineGraphics.lineBetween(startX + offsetX, startY + offsetY, endX + offsetX, endY + offsetY);
-    lineGraphics.lineBetween(startX - offsetX, startY - offsetY, endX - offsetX, endY - offsetY);
+    console.log('--')
 
 
     // Shift a small distance
+    lineAngle += (Math.PI / 2);
+    offsetX = gridSize * Math.cos(lineAngle);
+    offsetY = gridSize * Math.sin(lineAngle);
     board.lineToTileXYArray(
         startX + offsetX,
         startY + offsetY,
         endX + offsetX,
         endY + offsetY,
         globTileXYArray);
-    var isVisivle = this.isPathVisible(globTileXYArray, visiblePoints);
-    console.log('(' + (startX + offsetX) + ',' + (startY + offsetY) + ') --> (' + (endX + offsetX) + ',' + (endY + offsetY) + ')');
+    isVisivle = this.isPathVisible(globTileXYArray, visiblePoints);
     console.log(JSON.stringify(globTileXYArray));
+    lineGraphics.lineBetween(startX + offsetX, startY + offsetY, endX + offsetX, endY + offsetY);
     globTileXYArray.length = 0;
     if (isVisivle) {
         return true;
     }
 
     // Shift a small distance
+    lineAngle += Math.PI;
+    offsetX = gridSize * Math.cos(lineAngle);
+    offsetY = gridSize * Math.sin(lineAngle);
     board.lineToTileXYArray(
-        startX - offsetX,
-        startY - offsetY,
-        endX - offsetX,
-        endY - offsetY,
+        startX + offsetX,
+        startY + offsetY,
+        endX + offsetX,
+        endY + offsetY,
         globTileXYArray);
-    var isVisivle = this.isPathVisible(globTileXYArray, visiblePoints);
-    console.log('(' + (startX - offsetX) + ',' + (startY - offsetY) + ') --> (' + (endX - offsetX) + ',' + (endY - offsetY) + ')');
+    isVisivle = this.isPathVisible(globTileXYArray, visiblePoints);
     console.log(JSON.stringify(globTileXYArray));
+    lineGraphics.lineBetween(startX + offsetX, startY + offsetY, endX + offsetX, endY + offsetY);
     globTileXYArray.length = 0;
 
     return isVisivle;

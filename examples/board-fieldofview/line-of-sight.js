@@ -48,7 +48,7 @@ class Demo extends Phaser.Scene {
         LOS(chessA, marker);
         board
             .setInteractive()
-            .on('tilemove', function (pointer, tileXY) {
+            .on('tileup', function (pointer, tileXY) {
                 board.moveChess(marker, tileXY.x, tileXY.y);
                 LOS(chessA, marker);
             });
