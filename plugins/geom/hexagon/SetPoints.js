@@ -6,8 +6,7 @@ var SetPoints = function (x, y, size, type, points) {
         points = InitPoints(6);
     }
 
-    if (size === undefined) {
-    } else if (typeof (size) === 'number') {
+    if (size === undefined) {} else if (typeof (size) === 'number') {
         var angleOffset = (type === 0) ? 0 : -30;
         var angleDeg, angleRad;
         for (var i = 0; i < 6; i++) {
@@ -20,42 +19,46 @@ var SetPoints = function (x, y, size, type, points) {
         var config = size;
         var w = config.width;
         var h = config.height;
+        var halfW = w / 2;
+        var quarterW = w / 4;
+        var halfH = h / 2;
+        var quarterH = h / 4;
         if (type === 0) {
-            points[0].x = x + (w / 2);
+            points[0].x = x + halfW;
             points[0].y = y;
 
-            points[1].x = x + (w / 4);
-            points[1].y = y + (h / 2);
+            points[1].x = x + quarterW;
+            points[1].y = y + halfH;
 
-            points[2].x = x - (w / 4);
-            points[2].y = y + (h / 2);
+            points[2].x = x - quarterW;
+            points[2].y = y + halfH;
 
-            points[3].x = x - (w / 2);
+            points[3].x = x - halfW;
             points[3].y = y;
 
-            points[4].x = x - (w / 4);
-            points[4].y = y - (h / 2);
+            points[4].x = x - quarterW;
+            points[4].y = y - halfH;
 
-            points[5].x = x + (w / 4);
-            points[5].y = y - (h / 2);
+            points[5].x = x + quarterW;
+            points[5].y = y - halfH;
         } else {
-            points[0].x = x + (w / 2);
-            points[0].y = y - (h / 4);
+            points[0].x = x + halfW;
+            points[0].y = y - quarterH;
 
-            points[1].x = x + (w / 2);
-            points[1].y = y + (h / 4);
+            points[1].x = x + halfW;
+            points[1].y = y + quarterH;
 
             points[2].x = x;
-            points[2].y = y + (h / 2);
+            points[2].y = y + halfH;
 
-            points[3].x = x - (w / 2);
-            points[3].y = y + (h / 4);
+            points[3].x = x - halfW;
+            points[3].y = y + quarterH;
 
-            points[4].x = x - (w / 2);
-            points[4].y = y - (h / 4);
+            points[4].x = x - halfW;
+            points[4].y = y - quarterH;
 
             points[5].x = x;
-            points[5].y = y - (h / 2);
+            points[5].y = y - halfH;
         }
     }
     return points;
