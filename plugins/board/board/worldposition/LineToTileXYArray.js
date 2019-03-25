@@ -17,7 +17,7 @@ var LineToTileXYArray = function (startX, startY, endX, endY, out) {
         t = i / quantity;
         worldX = Linear(startX, endX, t);
         worldY = Linear(startY, endY, t);
-        tileXY = this.worldXYToTileXY(worldX, worldY);
+        tileXY = this.grid.getTileXY(worldX, worldY); // TEST
         if (!this.contains(tileXY.x, tileXY.y)) {
             continue;
         }

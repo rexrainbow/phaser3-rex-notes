@@ -61,6 +61,40 @@ var qr2xyz = function (mode, q, r, out) {
     return out;
 }
 
+var roundxyz = function (x, y, z, out) {
+    if (typeof (x) !== 'number') {
+        out = x;
+        x = out.x;
+        y = out.y;
+        z = out.z;
+    }
+
+    if (out === undefined) {
+        out = {};
+    } else if (out === true) {
+        out = globXYZ;
+    }
+    var rx = Math.round(x);
+    var ry = Math.round(y);
+    var rz = Math.round(z);
+
+    var dx = Math.abs(rx - x);
+    var dy = Math.abs(ry - y);
+    var dz = Math.abs(rz - z);
+
+    if ((dx > dy) && (dx > dz)) {
+        rx = -ry - rz;
+    } else if (dy > dz) {
+        ry = -rx - rz;
+    } else {
+        rz = -rx - ry;
+    }
+    out.x = rx;
+    out.y = ry;
+    out.z = rz;
+    return out;
+}
+
 var globXYZ = {};
 
 var xyz2q = function (mode, x, y, z) {
@@ -118,6 +152,7 @@ export {
     qr2y,
     qr2z,
     qr2xyz,
+    roundxyz,
     xyz2q,
     xyz2r,
     xyz2qr

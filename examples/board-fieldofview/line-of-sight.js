@@ -12,6 +12,8 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
+        this.dbgGraphics = this.add.graphics().setDepth(10);
+
         var board = CreateBoard(this, {
             grid: getHexagonGrid(this),
             // grid: getQuadGrid(this),
@@ -28,7 +30,7 @@ class Demo extends Phaser.Scene {
             face: 5,
 
             coneMode: 'direction',
-            cone: 2,
+            // cone: 2,
 
             // coneMode: 'angle',
             // cone: 120,
@@ -41,7 +43,7 @@ class Demo extends Phaser.Scene {
 
         // add some blockers
         for (var i = 0; i < 10; i++) {
-            CreateBlocker(board);
+            // CreateBlocker(board);
         }
 
         var marker = CreateMarker(board);
@@ -74,9 +76,9 @@ var getHexagonGrid = function (scene) {
     var grid = scene.rexBoard.add.hexagonGrid({
         x: 50,
         y: 50,
-        // size: 32,
-        cellWidth: 64,
-        cellHeight: 64,
+        size: 32,
+        // cellWidth: 64,
+        // cellHeight: 64,
         staggeraxis: staggeraxis,
         staggerindex: staggerindex
     })

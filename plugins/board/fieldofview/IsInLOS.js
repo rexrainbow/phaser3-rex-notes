@@ -10,17 +10,8 @@ var IsInLOS = function (chess, visiblePoints) {
     }
 
     // Debug
-    if (lineGraphics === undefined) {
-        lineGraphics = this.board.scene.add.graphics({
-                lineStyle: {
-                    width: 2,
-                    color: 0xff0000,
-                    alpha: 1
-                }
-            })
-            .setDepth(10);
-    }
-    lineGraphics.clear();
+    var dbgGraphics = this.board.scene.dbgGraphics;
+    dbgGraphics.clear();
 
     var board = this.board;
     var targetTileXY = board.chessToTileXYZ(chess);
@@ -52,7 +43,7 @@ var IsInLOS = function (chess, visiblePoints) {
         globTileXYArray);
     isVisivle = this.isPathVisible(globTileXYArray, visiblePoints);
     console.log(JSON.stringify(globTileXYArray));
-    lineGraphics.lineBetween(startX + offsetX, startY + offsetY, endX + offsetX, endY + offsetY);
+    dbgGraphics.lineStyle(3, 0xb0003a).lineBetween(startX + offsetX, startY + offsetY, endX + offsetX, endY + offsetY);
     globTileXYArray.length = 0;
     if (isVisivle) {
         return true;
@@ -70,12 +61,11 @@ var IsInLOS = function (chess, visiblePoints) {
         globTileXYArray);
     isVisivle = this.isPathVisible(globTileXYArray, visiblePoints);
     console.log(JSON.stringify(globTileXYArray));
-    lineGraphics.lineBetween(startX + offsetX, startY + offsetY, endX + offsetX, endY + offsetY);
+    dbgGraphics.lineStyle(3, 0xb0003a).lineBetween(startX + offsetX, startY + offsetY, endX + offsetX, endY + offsetY);
     globTileXYArray.length = 0;
 
     return isVisivle;
 }
 
 var globTileXYArray = [];
-var lineGraphics = undefined;
 export default IsInLOS;
