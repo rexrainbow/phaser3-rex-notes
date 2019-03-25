@@ -14,8 +14,8 @@ var GetWorldX = function (tileX, tileY) {
             }
             break;
     }
-
-    return worldX + this.x;
+    worldX += this.x;
+    return worldX;
 }
 
 export default GetWorldX;

@@ -11,8 +11,8 @@ var GetWorldY = function (tileX, tileY) {
             worldY = tileY * this._halfHeight;
             break;
     }
-
-    return worldY + this.y;
+    worldY += this.y;
+    return worldY;
 }
 
 export default GetWorldY;

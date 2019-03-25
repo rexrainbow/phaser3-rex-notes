@@ -6,8 +6,7 @@ const ODD_Q = CONST.ODD_Q;
 const EVEN_Q = CONST.EVEN_Q;
 
 var GetWorldY = function (tileX, tileY) {
-    var height = this.height;
-    var worldY = (tileY * height);
+    var worldY = (tileY * this.height);
     switch (this.mode) {
         case ODD_R:
         case EVEN_R:
@@ -16,17 +15,18 @@ var GetWorldY = function (tileX, tileY) {
 
         case ODD_Q:
             if (tileX & 1) {
-                worldY += (height / 2);
+                worldY += this._halfHeight;
             }
             break;
 
         case EVEN_Q:
             if (tileX & 1) {
-                worldY -= (height / 2);
+                worldY -= this._halfHeight;
             }
             break;
     }
-    return worldY + this.y;
+    worldY += this.y;
+    return worldY;
 }
 
 export default GetWorldY;

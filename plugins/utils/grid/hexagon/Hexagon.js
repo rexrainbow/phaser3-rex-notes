@@ -7,6 +7,7 @@ import GetWorldX from './GetWorldX.js';
 import GetWorldY from './GetWorldY.js';
 import GetTileX from './GetTileX.js';
 import GetTileY from './GetTileY.js';
+import GetTileXY from './GetTileXY.js';
 import GetValue from '../../object/GetValue.js';
 
 const ODD_R = CONST.ODD_R;
@@ -40,6 +41,24 @@ class Hexagon {
         this.x = x;
         this.y = y;
         return this;
+    }
+
+    get width() {
+        return this._width;
+    }
+
+    set width(value) {
+        this._width = value;
+        this._halfWidth = value / 2;
+    }
+
+    get height() {
+        return this._height;
+    }
+
+    set height(value) {
+        this._height = value;
+        this._halfHeight = value / 2;
     }
 
     setCellSize(width, height) {
@@ -87,7 +106,8 @@ var methods = {
     getWorldX: GetWorldX,
     getWorldY: GetWorldY,
     getTileX: GetTileX,
-    getTileY: GetTileY
+    getTileY: GetTileY,
+    getTileXY: GetTileXY,
 }
 Object.assign(
     Hexagon.prototype,
