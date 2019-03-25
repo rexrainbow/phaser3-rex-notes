@@ -3,7 +3,7 @@ var AngleToward = function (tileXY, direction) {
     var wrapModeSave = this.wrapMode;
     var infinityModeSave = this.infinityMode;
     this.wrapMode = false;
-    this.infinityMode = false;
+    this.infinityMode = true;
 
     // Get neighborTileXY
     var neighborTileXY = this.getNeighborTileXY(tileXY, direction, true);
