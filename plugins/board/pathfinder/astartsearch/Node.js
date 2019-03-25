@@ -1,4 +1,3 @@
-import QuickAbs from '../../../utils/math/QuickAbs.js';
 import Shuffle from '../../../utils/array/Shuffle.js';
 import AngleBetween from '../../../utils/math/angle/Between.js';
 
@@ -43,7 +42,7 @@ class Node {
 
         if ((pathMode === 1) && (baseNode !== undefined)) {
             var deltaAngle = endNode.angleTo(baseNode) - this.angleTo(baseNode);
-            h = dist + QuickAbs(deltaAngle);
+            h = dist + Math.abs(deltaAngle);
         } else if (pathMode === 2) {
             h = dist + Math.random();
         } else {

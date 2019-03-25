@@ -1,5 +1,4 @@
 import CONST from '../const.js';
-import QuickAbs from '../../../utils/math/QuickAbs.js';
 import RandomInt from '../../../utils/math/Between.js';
 
 const RANDOM = CONST['random'];
@@ -71,11 +70,11 @@ var GetNodePath = function (startNode, endNode, pathMode) {
                     targetAngle = endNode.angleTo(curNode);
                 } else {
                     preNode = curNode.preNodes[0];
-                    var deltaAngle = QuickAbs(endNode.angleTo(preNode) - targetAngle);
+                    var deltaAngle = Math.abs(endNode.angleTo(preNode) - targetAngle);
                     var preNodeB, deltaAngleB;
                     for (var i = 1; i < preNodeKeysCnt; i++) {
                         preNodeB = curNode.preNodes[i];
-                        deltaAngleB = QuickAbs(endNode.angleTo(preNodeB) - targetAngle);
+                        deltaAngleB = Math.abs(endNode.angleTo(preNodeB) - targetAngle);
                         if (deltaAngleB < deltaAngle) {
                             preNode = preNodeB;
                         }
