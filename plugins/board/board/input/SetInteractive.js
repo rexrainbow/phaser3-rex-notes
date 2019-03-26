@@ -43,8 +43,9 @@ var onPointerDown = function (pointer) {
     }
 
     // Get touched tileX, tileY
-    var tileX = this.worldXYToTileX(pointer.worldX, pointer.worldY),
-        tileY = this.worldXYToTileY(pointer.worldX, pointer.worldY);
+    var out = this.worldXYToTileXY(pointer.worldX, pointer.worldY, true);
+    var tileX = out.x,
+        tileY = out.y;
     this.input.tilePosition.x = tileX;
     this.input.tilePosition.y = tileY;
     if (!this.contains(tileX, tileY)) {
@@ -73,8 +74,9 @@ var onPointerUp = function (pointer) {
     }
 
     // Get touched tileX, tileY
-    var tileX = this.worldXYToTileX(pointer.worldX, pointer.worldY),
-        tileY = this.worldXYToTileY(pointer.worldX, pointer.worldY);
+    var out = this.worldXYToTileXY(pointer.worldX, pointer.worldY, true);
+    var tileX = out.x,
+        tileY = out.y;
     this.input.tilePosition.x = tileX;
     this.input.tilePosition.y = tileY;
     if (!this.contains(tileX, tileY)) {
@@ -107,8 +109,9 @@ var onPointerMove = function (pointer) {
     }
 
     // Get touched tileX, tileY
-    var tileX = this.worldXYToTileX(pointer.worldX, pointer.worldY),
-        tileY = this.worldXYToTileY(pointer.worldX, pointer.worldY);
+    var out = this.worldXYToTileXY(pointer.worldX, pointer.worldY, true);
+    var tileX = out.x,
+        tileY = out.y;
     if ((this.input.tilePosition.x === tileX) && (this.input.tilePosition.y === tileY)) {
         // Tile position dose not change
         return;

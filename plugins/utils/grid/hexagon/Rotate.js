@@ -1,6 +1,6 @@
 import {
-    qr2xyz,
-    xyz2qr
+    cr2cube,
+    cube2cr
 } from './CubeTransfer.js';
 
 import Wrap from '../../math/Wrap.js';
@@ -13,8 +13,7 @@ var Rotate = function (src, dir, out) {
     }
 
     dir = Wrap(dir, 0, 5);
-    var mode = this.mode;
-    var cubeXYZ = qr2xyz(this.mode, src.x, src.y, true);
+    var cubeXYZ = cr2cube(this.mode, src.x, src.y, true);
     var newCubeX, newCubeY, newCubeZ;
     switch (dir) {
         case 1:
@@ -49,7 +48,7 @@ var Rotate = function (src, dir, out) {
             break;
     }
 
-    xyz2qr(this.mode, newCubeX, newCubeY, newCubeZ, out);
+    cube2cr(this.mode, newCubeX, newCubeY, newCubeZ, out);
     return out;
 }
 

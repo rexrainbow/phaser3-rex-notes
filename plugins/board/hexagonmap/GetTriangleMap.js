@@ -1,6 +1,5 @@
 import {
-    xyz2q,
-    xyz2r
+    cube2cr
 } from '../../utils/grid/hexagon/CubeTransfer.js';
 
 var GetTriangleMap = function (board, type, height, out) {
@@ -19,10 +18,7 @@ var GetTriangleMap = function (board, type, height, out) {
         }
 
         for (var r = rStart; r <= rEnd; r++) {
-            out.push({
-                x: xyz2q(mode, q, r, -q - r),
-                y: xyz2r(mode, q, r, -q - r)
-            });
+            out.push(cube2cr(mode, q, r, -q - r));
         }
     }
 

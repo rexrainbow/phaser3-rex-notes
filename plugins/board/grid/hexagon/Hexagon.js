@@ -39,10 +39,8 @@ class HexagonGrid extends Hexagon {
     // setOriginPosition
     // setCellSize
     // setType
-    // getWorldX
-    // getWorldY
-    // getTileX
-    // getTileY
+    // getWorldXY
+    // getTileXY
 }
 
 const ALLDIR = [0, 1, 2, 3, 4, 5];

@@ -1,19 +1,14 @@
 import {
-    qr2x,
-    qr2y,
-    qr2z
+    cr2cube
 } from './CubeTransfer.js';
 
 var DirectionBetween = function (tileA, tileB) {
     var direction;
-    var mode = this.mode;
-    var q0 = tileA.x,
-        r0 = tileA.y,
-        q1 = tileB.x,
-        r1 = tileB.y;
-    var dx = qr2x(mode, q1, r1) - qr2x(mode, q0, r0);
-    var dy = qr2y(mode, q1, r1) - qr2y(mode, q0, r0);
-    var dz = qr2z(mode, q1, r1) - qr2z(mode, q0, r0);
+    cr2cube(this.mode, tileA.x, tileA.y, globCubeA);
+    cr2cube(this.mode, tileB.x, tileB.y, globCubeB);
+    var dx = globCubeB.x - globCubeA.x;
+    var dy = globCubeB.y - globCubeA.y;
+    var dz = globCubeB.z - globCubeA.z;
     if (dz === 0) {
         direction = (dx > 0) ? 0 : 3;
     } else if (dx === 0) {
@@ -35,4 +30,7 @@ var DirectionBetween = function (tileA, tileB) {
     }
     return direction;
 }
+
+var globCubeA = {};
+var globCubeB = {};
 export default DirectionBetween;

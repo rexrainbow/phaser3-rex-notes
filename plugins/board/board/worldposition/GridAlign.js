@@ -16,8 +16,7 @@ var GridAlign = function (gameObject, tileX, tileY) {
             tileY = tileXYZ.y;
         }
 
-        gameObject.x = this.tileXYToWorldX(tileX, tileY);
-        gameObject.y = this.tileXYToWorldY(tileX, tileY);
+        this.tileXYToWorldXY(tileX, tileY, gameObject);
     }
     return this;
 };

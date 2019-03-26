@@ -19,8 +19,9 @@ var OnTouchTileStart = function (pointer) {
     var gird = this.grid;
     gird.saveOrigin();
     gird.setOriginPosition(this.x, this.y);
-    var tileX = this.board.worldXYToTileX(pointer.x, pointer.y);
-    var tileY = this.board.worldXYToTileY(pointer.x, pointer.y);
+    var out = this.board.worldXYToTileXY(pointer.x, pointer.y, true);
+    var tileX = out.x,
+        tileY = out.y;
     gird.restoreOrigin();
     this.input.tilePosition.x = tileX;
     this.input.tilePosition.y = tileY;

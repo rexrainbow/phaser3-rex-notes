@@ -4,10 +4,9 @@ var AlignToMainBoard = function (mainBoard, tileX, tileY) {
     }
 
     if (tileX === undefined) {
-        tileX = mainBoard.worldXYToTileX(this.x, this.y);
-    }
-    if (tileY === undefined) {
-        tileY = mainBoard.worldXYToTileY(this.x, this.y);
+        var out = mainBoard.worldXYToTileXY(this.x, this.y, true);
+        tileX = out.x;
+        tileY = out.y;
     }
     mainBoard.gridAlign(this, tileX, tileY);
     return this;

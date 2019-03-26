@@ -4,7 +4,7 @@ import GlobZone from '../utils/align/GlobZone.js';
 const AlignIn = Phaser.Display.Align.In.QuickSet;
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 
-var tempHexagonGrid = new HexagonGrid();
+var globHexagonGrid = new HexagonGrid();
 
 /**
  * @typedef {object} GridAlignConfig
@@ -35,7 +35,7 @@ var GridAlign = function (items, options) {
     var x = GetFastValue(options, 'x', 0);
     var y = GetFastValue(options, 'y', 0);
 
-    tempHexagonGrid
+    globHexagonGrid
         .setOriginPosition(x, y)
         .setCellSize(cellWidth, cellHeight)
         .setType(staggeraxis, staggerindex);
@@ -48,8 +48,7 @@ var GridAlign = function (items, options) {
         colIdx = 0;
 
     for (var i = 0, cnt = items.length; i < cnt; i++) {
-        GlobZone.x = tempHexagonGrid.getWorldX(colIdx, rowIdx);
-        GlobZone.y = tempHexagonGrid.getWorldY(colIdx, rowIdx);
+        globHexagonGrid.getWorldXY(colIdx, rowIdx, GlobZone);
         AlignIn(items[i], GlobZone, position);
 
         if (width === -1) {

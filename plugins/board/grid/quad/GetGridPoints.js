@@ -8,19 +8,18 @@ var GetGridPoints = function (tileX, tileY, points) {
         points = globPoints;
     }
 
-    var worldX, worldY;
     if (tileX === undefined) {
-        worldX = 0;
-        worldY = 0;
+        globWorldXY.x = 0;
+        globWorldXY.y = 0;
     } else {
-        worldX = this.getWorldX(tileX, tileY);
-        worldY = this.getWorldY(tileX, tileY);
+        this.getWorldXY(tileX, tileY, globWorldXY);
     }
     var quadType = (this.mode === 0) ? 0 : 1;
-    SetPoints(worldX, worldY, this.width, this.height, quadType, points);
+    SetPoints(globWorldXY.x, globWorldXY.y, this.width, this.height, quadType, points);
     return points;
 }
 
+var globWorldXY = {};
 var globPoints = InitPoints(4);
 
 export default GetGridPoints;

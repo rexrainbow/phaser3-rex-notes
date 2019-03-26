@@ -3,8 +3,7 @@ var IsOverlappingPoint = function (worldX, worldY, tileZ) {
         return true;
     }
 
-    var tileX = this.worldXYToTileX(worldX, worldY);
-    var tileY = this.worldXYToTileY(worldX, worldY);
-    return this.contains(tileX, tileY, tileZ);
+    var out = this.wroldXYToTileXY(worldX, worldY, true);
+    return this.contains(out.x, out.y, tileZ);
 }
 export default IsOverlappingPoint;

@@ -12,8 +12,6 @@ class Demo extends Phaser.Scene {
     preload() {}
 
     create() {
-        this.dbgGraphics = this.add.graphics().setDepth(10);
-
         var board = CreateBoard(this, {
             grid: getHexagonGrid(this),
             // grid: getQuadGrid(this),
@@ -30,7 +28,7 @@ class Demo extends Phaser.Scene {
             face: 5,
 
             coneMode: 'direction',
-            // cone: 2,
+            cone: 2,
 
             // coneMode: 'angle',
             // cone: 120,
@@ -43,7 +41,7 @@ class Demo extends Phaser.Scene {
 
         // add some blockers
         for (var i = 0; i < 10; i++) {
-            // CreateBlocker(board);
+            CreateBlocker(board);
         }
 
         var marker = CreateMarker(board);
@@ -76,9 +74,9 @@ var getHexagonGrid = function (scene) {
     var grid = scene.rexBoard.add.hexagonGrid({
         x: 50,
         y: 50,
-        size: 32,
-        // cellWidth: 64,
-        // cellHeight: 64,
+        // size: 32,
+        cellWidth: 64,
+        cellHeight: 64,
         staggeraxis: staggeraxis,
         staggerindex: staggerindex
     })
@@ -100,9 +98,8 @@ var CreateBoard = function (scene, config) {
         graphics.strokePoints(points, true);
 
         var scene = board.scene;
-        var worldX = board.tileXYToWorldX(tileXY.x, tileXY.y);
-        var worldY = board.tileXYToWorldY(tileXY.x, tileXY.y);
-        scene.add.text(worldX, worldY, tileXY.x + ',' + tileXY.y)
+        var out = board.tileXYToWorldXY(tileXY.x, tileXY.y, true);
+        scene.add.text(out.x, out.y, tileXY.x + ',' + tileXY.y)
             .setOrigin(0.5)
             .setDepth(3);
     });
@@ -151,27 +148,28 @@ var LOS = function (chessA, marker) {
     marker.setFillStyle((isInLOS) ? COLOR_VISIBLE : COLOR_INVISIBLE);
 
     // Draw line between chessA to marker
-    //if (lineGraphics === undefined) {
-    //    lineGraphics = chessA.scene.add.graphics({
-    //            lineStyle: {
-    //                width: 2,
-    //                color: 0xff0000,
-    //                alpha: 1
-    //            }
-    //        })
-    //        .setDepth(2);
-    //}
-    // var board = chessA.rexChess.board;
-    //var chessATileXYZ = board.chessToTileXYZ(chessA);
-    //var markerTileXYZ = board.chessToTileXYZ(marker);
-    //lineGraphics
-    //    .clear()
-    //    .lineBetween(
-    //        board.tileXYToWorldX(chessATileXYZ.x, chessATileXYZ.y),
-    //        board.tileXYToWorldY(chessATileXYZ.x, chessATileXYZ.y),
-    //        board.tileXYToWorldX(markerTileXYZ.x, markerTileXYZ.y),
-    //        board.tileXYToWorldY(markerTileXYZ.x, markerTileXYZ.y)
-    //    );
+    if (lineGraphics === undefined) {
+        lineGraphics = chessA.scene.add.graphics({
+                lineStyle: {
+                    width: 2,
+                    color: 0xff0000,
+                    alpha: 1
+                }
+            })
+            .setDepth(2);
+    }
+    var board = chessA.rexChess.board;
+    var chessATileXYZ = board.chessToTileXYZ(chessA);
+    var markerTileXYZ = board.chessToTileXYZ(marker);
+    var out = board.tileXYToWorldXY(chessATileXYZ.x, chessATileXYZ.y, true);
+    var x0 = out.x,
+        y0 = out.y;
+    out = board.tileXYToWorldXY(markerTileXYZ.x, markerTileXYZ.y, true);
+    var x1 = out.x,
+        y1 = out.y;
+    lineGraphics
+        .clear()
+        .lineBetween(x0, y0, x1, y1);
 }
 
 const COLOR_PRIMARY = 0x03a9f4;

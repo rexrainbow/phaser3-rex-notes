@@ -110,12 +110,13 @@ class ChessA extends RexPlugins.Board.Shape {
     showMoveableArea() {
         this.hideMoveableArea();
         var tileXYArray = this.pathFinder.findArea(this._movingPoints),
-            tileXY;
+            tileXY, worldXY;
         var scene = this.scene,
             board = this.rexChess.board;
         for (var i = 0, cnt = tileXYArray.length; i < cnt; i++) {
             tileXY = tileXYArray[i];
-            var text = scene.add.text(board.tileXYToWorldX(tileXY.x, tileXY.y), board.tileXYToWorldY(tileXY.x, tileXY.y), tileXY.cost)
+            worldXY = board.tileXYToWorldXY(tileXY.x, tileXY.y, true);
+            var text = scene.add.text(worldXY.x, worldXY.y, tileXY.cost)
                 .setOrigin(0.5);
             this._marker.push(text);
         }

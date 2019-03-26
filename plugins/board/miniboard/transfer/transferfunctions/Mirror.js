@@ -1,8 +1,7 @@
 var Mirror = function (mode, chessTileXYZMap, out) {
     if (mode === undefined) {
         mode = 1;
-    }
-    if (typeof (mode) === 'string') {
+    } else if (typeof (mode) === 'string') {
         mode = MODE[mode];
     }
     if (chessTileXYZMap === undefined) {
@@ -24,7 +23,7 @@ var Mirror = function (mode, chessTileXYZMap, out) {
 }
 
 const MODE = {
-    x: 1,    
+    x: 1,
     y: 2,
     'x&y': 3
 }

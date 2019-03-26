@@ -51,16 +51,17 @@ var MoveToTile = function (tileX, tileY, direction) {
         // wrap mode && neighbor
         if ((originNeighborTileX === tileX) && (originNeighborTileY === tileY)) {
             // not a wrapped neighbor
-            var worldX = board.tileXYToWorldX(tileX, tileY);
-            var worldY = board.tileXYToWorldY(tileX, tileY);
-            this.moveAlongLine(undefined, undefined, worldX, worldY);
+            var out = board.tileXYToWorldXY(tileX, tileY, true);
+            this.moveAlongLine(undefined, undefined, out.x, out.y);
         } else {
             // wrapped neighbor
             // line 0
-            var originNeighborWorldX = board.tileXYToWorldX(originNeighborTileX, originNeighborTileY);
-            var originNeighborWorldY = board.tileXYToWorldY(originNeighborTileX, originNeighborTileY);
-            var startX = board.tileXYToWorldX(myTileXYZ.x, myTileXYZ.y);
-            var startY = board.tileXYToWorldY(myTileXYZ.x, myTileXYZ.y);
+            var out = board.tileXYToWorldXY(originNeighborTileX, originNeighborTileY, true);
+            var originNeighborWorldX = out.x;
+            var originNeighborWorldY = out.y;
+            out = board.tileXYToWorldXY(myTileXYZ.x, myTileXYZ.y, true);
+            var startX = out.x;
+            var startY = out.y;
             var endX = (startX + originNeighborWorldX) / 2;
             var endY = (startY + originNeighborWorldY) / 2;
             this.moveAlongLine(undefined, undefined, endX, endY);
@@ -68,18 +69,19 @@ var MoveToTile = function (tileX, tileY, direction) {
             var oppositeDirection = board.getOppositeDirection(tileX, tileY, direction);
             originNeighborTileX = board.grid.getNeighborTileX(tileX, tileY, oppositeDirection);
             originNeighborTileY = board.grid.getNeighborTileY(tileX, tileY, oppositeDirection);
-            originNeighborWorldX = board.tileXYToWorldX(originNeighborTileX, originNeighborTileY);
-            originNeighborWorldY = board.tileXYToWorldY(originNeighborTileX, originNeighborTileY);
-            endX = board.tileXYToWorldX(tileX, tileY);
-            endY = board.tileXYToWorldY(tileX, tileY);
+            out = board.tileXYToWorldXY(originNeighborTileX, originNeighborTileY, true);
+            originNeighborWorldX = out.x;
+            originNeighborWorldY = out.y;
+            out = board.tileXYToWorldXY(tileX, tileY, true);
+            endX = out.x;
+            endY = out.y;
             startX = (originNeighborWorldX + endX) / 2;
             startY = (originNeighborWorldY + endY) / 2;
             this.addMoveLine(startX, startY, endX, endY);
         }
     } else {
-        var worldX = board.tileXYToWorldX(tileX, tileY);
-        var worldY = board.tileXYToWorldY(tileX, tileY);
-        this.moveAlongLine(undefined, undefined, worldX, worldY);
+        var out = board.tileXYToWorldXY(tileX, tileY, true);
+        this.moveAlongLine(undefined, undefined, out.x, out.y);
     }
     board.moveChess(this.gameObject, tileX, tileY, undefined, false);
 
@@ -88,9 +90,6 @@ var MoveToTile = function (tileX, tileY, direction) {
     return this;
 }
 
-var globTileXYZ = {
-    x: 0,
-    y: 0
-};
+var globTileXYZ = {};
 
 export default MoveToTile;

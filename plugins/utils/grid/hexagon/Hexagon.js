@@ -3,11 +3,12 @@
 import GetCellWidth from '../../../geom/hexagon/Width.js';
 import GetCellHeight from '../../../geom/hexagon/Height.js';
 import CONST from './const.js';
+import GetWorldXY from './GetWorldXY.js';
 import GetWorldX from './GetWorldX.js';
 import GetWorldY from './GetWorldY.js';
+import GetTileXY from './GetTileXY.js';
 import GetTileX from './GetTileX.js';
 import GetTileY from './GetTileY.js';
-import GetTileXY from './GetTileXY.js';
 import GetValue from '../../object/GetValue.js';
 
 const ODD_R = CONST.ODD_R;
@@ -103,11 +104,12 @@ class Hexagon {
 }
 
 var methods = {
+    getWorldXY: GetWorldXY,
     getWorldX: GetWorldX,
     getWorldY: GetWorldY,
+    getTileXY:GetTileXY,
     getTileX: GetTileX,
     getTileY: GetTileY,
-    getTileXY: GetTileXY,
 }
 Object.assign(
     Hexagon.prototype,

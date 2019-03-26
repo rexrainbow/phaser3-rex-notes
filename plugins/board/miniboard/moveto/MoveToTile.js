@@ -49,9 +49,8 @@ var MoveToTile = function (tileX, tileY, direction) {
     this.destinationDirection = direction;
 
     // Not support wrap mode
-    var endX = mainBoard.tileXYToWorldX(tileX, tileY);
-    var endY = mainBoard.tileXYToWorldY(tileX, tileY);
-    this.moveToTask.moveTo(endX, endY);
+    var out = mainBoard.tileXYToWorldXY(tileX, tileY, true);
+    this.moveToTask.moveTo(out.x, out.y);
     miniBoard.putOnMainBoard(mainBoard, tileX, tileY, false);
 
     this.isRunning = true;
@@ -59,13 +58,7 @@ var MoveToTile = function (tileX, tileY, direction) {
     return this;
 }
 
-var myTileXY = {
-    x: 0,
-    y: 0
-};
-var targetTileXY = {
-    x: 0,
-    y: 0
-};
+var myTileXY = {};
+var targetTileXY = {};
 
 export default MoveToTile;

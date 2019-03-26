@@ -1,5 +1,7 @@
+import GetWorldXY from './GetWorldXY.js';
 import GetWorldX from './GetWorldX.js';
 import GetWorldY from './GetWorldY.js';
+import GetTileXY from './GetTileXY.js';
 import GetTileX from './GetTileX.js';
 import GetTileY from './GetTileY.js';
 import GetValue from '../../object/GetValue.js';
@@ -71,10 +73,12 @@ class Quad {
 }
 
 var methods = {
+    getWorldXY: GetWorldXY,
     getWorldX: GetWorldX,
     getWorldY: GetWorldY,
+    getTileXY:GetTileXY,
     getTileX: GetTileX,
-    getTileY: GetTileY
+    getTileY: GetTileY,
 }
 Object.assign(
     Quad.prototype,

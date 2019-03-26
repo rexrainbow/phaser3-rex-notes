@@ -4,10 +4,9 @@ var PutOnMainBoard = function (mainBoard, tileX, tileY, align) {
     }
 
     if (tileX === undefined) {
-        tileX = mainBoard.worldXYToTileX(this.x, this.y);
-    }
-    if (tileY === undefined) {
-        tileY = mainBoard.worldXYToTileY(this.x, this.y);
+        var out = mainBoard.worldXYToTileXY(this.x, this.y, true);
+        tileX = out.x;
+        tileY = out.y;
     }
     if (align === undefined) {
         align = true;

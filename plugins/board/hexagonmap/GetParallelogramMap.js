@@ -1,6 +1,5 @@
 import {
-    xyz2q,
-    xyz2r
+    cube2cr
 } from '../../utils/grid/hexagon/CubeTransfer.js';
 
 var GetParallelogramMap = function (board, type, width, height, out) {
@@ -12,30 +11,21 @@ var GetParallelogramMap = function (board, type, width, height, out) {
         case 1:
             for (var s = 0; s <= width; s++) {
                 for (var q = 0; q <= height; q++) {
-                    out.push({
-                        x: xyz2q(mode, q, -q - s, s),
-                        y: xyz2r(mode, q, -q - s, s)
-                    });
+                    out.push(cube2cr(mode, q, -q - s, s));
                 }
             }
             break;
         case 2:
             for (var r = 0; r <= width; r++) {
                 for (var s = 0; s <= height; s++) {
-                    out.push({
-                        x: xyz2q(mode, -r - s, r, s),
-                        y: xyz2r(mode, -r - s, r, s)
-                    });
+                    out.push(cube2cr(mode, -r - s, r, s));
                 }
             }
             break;
         default: // case 0
             for (var q = 0; q <= width; q++) {
                 for (var r = 0; r <= height; r++) {
-                    out.push({
-                        x: xyz2q(mode, q, r, -q - r),
-                        y: xyz2r(mode, q, r, -q - r)
-                    });
+                    out.push(cube2cr(mode, q, r, -q - r));
                 }
             }
             break;

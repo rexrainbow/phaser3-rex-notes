@@ -37,10 +37,8 @@ class QuadGrid extends Quad {
     // setOriginPosition
     // setCellSize
     // setType
-    // getWorldX
-    // getWorldY
-    // getTileX
-    // getTileY
+    // getWorldXY
+    // getTileXY
     // getGridPolygon        
 }
 

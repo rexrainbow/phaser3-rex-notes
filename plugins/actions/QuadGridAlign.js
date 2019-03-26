@@ -4,7 +4,7 @@ import GlobZone from '../utils/align/GlobZone.js';
 const AlignIn = Phaser.Display.Align.In.QuickSet;
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 
-var tempQuadGrid = new QuadGrid();
+var globQuadGrid = new QuadGrid();
 
 /**
  * @typedef {object} GridAlignConfig
@@ -34,7 +34,7 @@ var GridAlign = function (items, options) {
     var x = GetFastValue(options, 'x', 0);
     var y = GetFastValue(options, 'y', 0);
 
-    tempQuadGrid
+    globQuadGrid
         .setOriginPosition(x, y)
         .setCellSize(cellWidth, cellHeight)
         .setType(type);
@@ -47,8 +47,7 @@ var GridAlign = function (items, options) {
         colIdx = 0;
 
     for (var i = 0, cnt = items.length; i < cnt; i++) {
-        GlobZone.x = tempQuadGrid.getWorldX(colIdx, rowIdx);
-        GlobZone.y = tempQuadGrid.getWorldY(colIdx, rowIdx);
+        globQuadGrid.getWorldXY(colIdx, rowIdx, GlobZone);
         AlignIn(items[i], GlobZone, position);
 
         if (width === -1) {

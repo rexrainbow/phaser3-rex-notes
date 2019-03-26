@@ -1,12 +1,15 @@
 var WorldXYSnapToGrid = function (worldX, worldY, out) {
     if (out === undefined) {
         out = {};
+    } else if (out === true) {
+        out = globWorldXY;
     }
-    var tileX = this.worldXYToTileX(worldX, worldY);
-    var tileY = this.worldXYToTileY(worldX, worldY);
-    out.x = this.tileXYToWorldX(tileX, tileY);
-    out.y = this.tileXYToWorldY(tileX, tileY);
+
+    this.worldXYToTileXY(worldX, worldY, out);
+    this.tileXYToWorldXY(out.x, out.y, out);
     return out;
 };
+
+var globWorldXY = {};
 
 export default WorldXYSnapToGrid;

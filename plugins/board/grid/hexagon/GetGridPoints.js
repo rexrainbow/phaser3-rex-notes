@@ -8,13 +8,11 @@ var GetGridPoints = function (tileX, tileY, points) {
         points = globPoints;
     }
 
-    var worldX, worldY;
     if (tileX === undefined) {
-        worldX = 0;
-        worldY = 0;
+        globWorldXY.x = 0;
+        globWorldXY.y = 0;
     } else {
-        worldX = this.getWorldX(tileX, tileY);
-        worldY = this.getWorldY(tileX, tileY);
+        this.getWorldXY(tileX, tileY, globWorldXY);
     }
     var size;
     if (this.size !== undefined) {
@@ -24,11 +22,12 @@ var GetGridPoints = function (tileX, tileY, points) {
         size.width = this.width;
         size.height = this.height;
     }
-    SetPoints(worldX, worldY, size, this.staggeraxis, points);
+    SetPoints(globWorldXY.x, globWorldXY.y, size, this.staggeraxis, points);
     return points;
 }
 
 var globPoints = InitPoints(6);
+var globWorldXY = {};
 var globSize = {};
 
 export default GetGridPoints;

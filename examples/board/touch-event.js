@@ -65,9 +65,8 @@ class Demo extends Phaser.Scene {
         this.cameraController.update(delta);
 
         var pointer = this.input.activePointer;
-        var tileX = this.board.worldXYToTileX(pointer.worldX, pointer.worldY);
-        var tileY = this.board.worldXYToTileY(pointer.worldX, pointer.worldY);
-        this.print.setText(tileX + ',' + tileY);
+        var out = this.board.worldXYToTileXY(pointer.worldX, pointer.worldY, true);
+        this.print.setText(out.x + ',' + out.y);
     }
 }
 
