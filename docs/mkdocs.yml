@@ -228,8 +228,6 @@ nav:
     - Path finder: board-pathfinder.md
     - Match: board-match.md
     - Hexagon map: board-hexagonmap.md
-    - Mini board:
-        - Mini board: board-miniboard.md
     - Bejeweled: board-bejeweled.md
 - Storage:
     - Offline:
