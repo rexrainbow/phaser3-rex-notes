@@ -68,7 +68,6 @@ scene.plugins.get('rexGridAlign').quad(items, {
 - `type`
     - `0`, or `orthogonal`
     - `1`, or `isometric`
-    - `2`, or `staggered`
 - `position` : The alignment position.
     - `0`, or `Phaser.Display.Align.TOP_LEFT`
     - `1`, or `Phaser.Display.Align.TOP_CENTER`

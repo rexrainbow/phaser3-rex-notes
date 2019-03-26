@@ -4692,21 +4692,15 @@
 <li><code>board.width</code> , <code>board.height</code> : Board width/height in tiles.</li>
 </ul>
 <h3 id="tile-position-world-position">Tile position -&gt; world position<a class="headerlink" href="#tile-position-world-position" title="Permanent link">&para;</a></h3>
-<p><div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">worldX</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">tileXYToWorldX</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">worldY</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">tileXYToWorldY</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">);</span>
-</pre></div>
-or
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">worldXY</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">tileXYToWorldXY</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">);</span>  <span class="c1">// worldXY: {x, y}</span>
 <span class="c1">// var out = board.tileXYToWorldXY(tileX, tileY, out);</span>
-</pre></div></p>
-<h3 id="world-position-tile-position">World position -&gt; tile position<a class="headerlink" href="#world-position-tile-position" title="Permanent link">&para;</a></h3>
-<p><div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tileX</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">worldXYToTileX</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">tileY</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">worldXYToTileY</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">);</span>
 </pre></div>
-or
+
+<h3 id="world-position-tile-position">World position -&gt; tile position<a class="headerlink" href="#world-position-tile-position" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tileXY</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">worldXYToTileXY</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">);</span>  <span class="c1">// tileXY: {x, y}</span>
 <span class="c1">// var out = board.worldXYToTileXY(worldX, worldY, out);</span>
-</pre></div></p>
+</pre></div>
+
 <h4 id="world-position-grid-world-position">World position -&gt; Grid world position<a class="headerlink" href="#world-position-grid-world-position" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gridWorldXY</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">worldXYSnapToGrid</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">);</span>
 <span class="c1">// var out = board.worldXYSnapToGrid(worldX, worldY, out);</span>

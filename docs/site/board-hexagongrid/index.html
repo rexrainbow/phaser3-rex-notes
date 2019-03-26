@@ -4080,13 +4080,13 @@
 </li>
 </ul>
 <h3 id="get-world-position">Get world position<a class="headerlink" href="#get-world-position" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">worldX</span> <span class="o">=</span> <span class="nx">grid</span><span class="p">.</span><span class="nx">getWorldX</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">worldY</span> <span class="o">=</span> <span class="nx">grid</span><span class="p">.</span><span class="nx">getWorldY</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">worldXY</span> <span class="o">=</span> <span class="nx">grid</span><span class="p">.</span><span class="nx">getWorldXY</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">);</span>  <span class="c1">// worldXY: {x, y}</span>
+<span class="c1">// var out = grid.getWorldXY(tileX, tileY, out);</span>
 </pre></div>
 
 <h3 id="get-tile-position">Get tile position<a class="headerlink" href="#get-tile-position" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tileX</span> <span class="o">=</span> <span class="nx">grid</span><span class="p">.</span><span class="nx">getTileX</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">tileY</span> <span class="o">=</span> <span class="nx">grid</span><span class="p">.</span><span class="nx">getTileY</span><span class="p">(</span><span class="nx">worldX</span><span class="p">,</span> <span class="nx">worldY</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tileXY</span> <span class="o">=</span> <span class="nx">grid</span><span class="p">.</span><span class="nx">getWorldXY</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">);</span>  <span class="c1">// tileXY: {x, y}</span>
+<span class="c1">// var out = grid.getWorldXY(tileX, tileY, out);</span>
 </pre></div>
 
 <h3 id="directions">Directions<a class="headerlink" href="#directions" title="Permanent link">&para;</a></h3>

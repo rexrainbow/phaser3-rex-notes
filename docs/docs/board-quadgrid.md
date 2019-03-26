@@ -65,15 +65,15 @@ grid.setType(type);
 ### Get world position
 
 ```javascript
-var worldX = grid.getWorldX(tileX, tileY);
-var worldY = grid.getWorldY(tileX, tileY);
+var worldXY = grid.getWorldXY(tileX, tileY);  // worldXY: {x, y}
+// var out = grid.getWorldXY(tileX, tileY, out);
 ```
 
 ### Get tile position
 
 ```javascript
-var tileX = grid.getTileX(worldX, worldY);
-var tileY = grid.getTileY(worldX, worldY);
+var tileXY = grid.getWorldXY(tileX, tileY);  // tileXY: {x, y}
+// var out = grid.getWorldXY(tileX, tileY, out);
 ```
 
 ### Directions
