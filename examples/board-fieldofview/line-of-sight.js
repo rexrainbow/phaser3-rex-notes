@@ -37,6 +37,14 @@ class Demo extends Phaser.Scene {
                 var board = fov.board;
                 return (board.tileXYZToChess(tileXY.x, tileXY.y, 0)) ? fov.BLOCKER : 0;
             },
+
+            debugGraphics: this.add.graphics({
+                lineStyle: {
+                    width: 2,
+                    color: 0xff0000,
+                    alpha: 1
+                }
+            }).setDepth(10),
         });
 
         // add some blockers
@@ -142,34 +150,10 @@ var CreateMarker = function (board, tileXY) {
     return marker;
 }
 
-var lineGraphics = undefined;
 var LOS = function (chessA, marker) {
+    chessA.fov.debugGraphics.clear();
     var isInLOS = chessA.fov.isInLOS(marker);
     marker.setFillStyle((isInLOS) ? COLOR_VISIBLE : COLOR_INVISIBLE);
-
-    // Draw line between chessA to marker
-    if (lineGraphics === undefined) {
-        lineGraphics = chessA.scene.add.graphics({
-                lineStyle: {
-                    width: 2,
-                    color: 0xff0000,
-                    alpha: 1
-                }
-            })
-            .setDepth(2);
-    }
-    var board = chessA.rexChess.board;
-    var chessATileXYZ = board.chessToTileXYZ(chessA);
-    var markerTileXYZ = board.chessToTileXYZ(marker);
-    var out = board.tileXYToWorldXY(chessATileXYZ.x, chessATileXYZ.y, true);
-    var x0 = out.x,
-        y0 = out.y;
-    out = board.tileXYToWorldXY(markerTileXYZ.x, markerTileXYZ.y, true);
-    var x1 = out.x,
-        y1 = out.y;
-    lineGraphics
-        .clear()
-        .lineBetween(x0, y0, x1, y1);
 }
 
 const COLOR_PRIMARY = 0x03a9f4;

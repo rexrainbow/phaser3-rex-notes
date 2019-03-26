@@ -1,5 +1,6 @@
 import CONST from './const.js';
 import AngleBetween from '../../utils/math/angle/Between.js';
+import TileXYIsEqual from '../utils/TileXYIsEqual.js';
 
 const INFINITY = CONST.INFINITY;
 
@@ -24,44 +25,49 @@ var IsInLOS = function (chess, visiblePoints) {
         endY = out.y;
     var lineAngle = AngleBetween(startX, startY, endX, endY),
         offsetX, offsetY, isVisivle;
-    var grid = this.board.grid;
-    var gridSize = Math.min(grid.cellWidth, grid.cellHeight) / 10;
     // console.log('--')
-
 
     // Shift a small distance
     lineAngle += (Math.PI / 2);
-    offsetX = gridSize * Math.cos(lineAngle);
-    offsetY = gridSize * Math.sin(lineAngle);
-    board.lineToTileXYArray(
-        startX + offsetX,
-        startY + offsetY,
-        endX + offsetX,
-        endY + offsetY,
-        globTileXYArray);
-    isVisivle = this.isPathVisible(globTileXYArray, visiblePoints);
-    // console.log(JSON.stringify(globTileXYArray));    
-    globTileXYArray.length = 0;
+    offsetX = 0.01 * Math.cos(lineAngle);
+    offsetY = 0.01 * Math.sin(lineAngle);
+    var x0 = startX + offsetX,
+        y0 = startY + offsetY,
+        x1 = endX + offsetX,
+        y1 = endY + offsetY;
+    if (this.debugGraphics) {
+        this.debugGraphics.lineBetween(x0, y0, x1, y1);
+    }
+    board.lineToTileXYArray(x0, y0, x1, y1, globTileXYArray0);
+    isVisivle = this.isPathVisible(globTileXYArray0, visiblePoints);
+    // console.log(JSON.stringify(globTileXYArray0));        
     if (isVisivle) {
+        globTileXYArray0.length = 0;
         return true;
     }
 
     // Shift a small distance
     lineAngle += Math.PI;
-    offsetX = gridSize * Math.cos(lineAngle);
-    offsetY = gridSize * Math.sin(lineAngle);
-    board.lineToTileXYArray(
-        startX + offsetX,
-        startY + offsetY,
-        endX + offsetX,
-        endY + offsetY,
-        globTileXYArray);
-    isVisivle = this.isPathVisible(globTileXYArray, visiblePoints);
-    // console.log(JSON.stringify(globTileXYArray));
-    globTileXYArray.length = 0;
-
+    offsetX = 0.01 * Math.cos(lineAngle);
+    offsetY = 0.01 * Math.sin(lineAngle);
+    var x0 = startX + offsetX,
+        y0 = startY + offsetY,
+        x1 = endX + offsetX,
+        y1 = endY + offsetY;
+    if (this.debugGraphics) {
+        this.debugGraphics.lineBetween(x0, y0, x1, y1);
+    }
+    board.lineToTileXYArray(x0, y0, x1, y1, globTileXYArray1);
+    // No need do visible checking if path is the same as previous one
+    if (!TileXYIsEqual(globTileXYArray0, globTileXYArray1)) { 
+        isVisivle = this.isPathVisible(globTileXYArray1, visiblePoints);
+    }
+    // console.log(JSON.stringify(globTileXYArray1));
+    globTileXYArray0.length = 0;
+    globTileXYArray1.length = 0;
     return isVisivle;
 }
 
-var globTileXYArray = [];
+var globTileXYArray0 = [],
+    globTileXYArray1 = [];
 export default IsInLOS;

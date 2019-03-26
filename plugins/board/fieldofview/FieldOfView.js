@@ -33,6 +33,7 @@ class FieldOfView {
         this.setBlockerTest(GetValue(o, 'blockerTest', false));
         this.setEdgeBlockerTest(GetValue(o, 'edgeBlockerTest', false));
         this.setCostFunction(costCallback, costCallbackScope);
+        this.setDebugGraphics(GetValue(o, 'debugGraphics', undefined));
         return this;
     }
 
@@ -129,6 +130,11 @@ class FieldOfView {
     setCostFunction(callback, scope) {
         this.costCallback = callback;
         this.costCallbackScope = scope;
+        return this;
+    }
+
+    setDebugGraphics(graphics) {
+        this.debugGraphics = graphics;
         return this;
     }
 
