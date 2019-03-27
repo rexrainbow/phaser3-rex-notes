@@ -51,6 +51,8 @@ import GetNeighborTileDirection from './neighbors/GetNeighborTileDirection.js';
 import GetNeighborChessDirection from './neighbors/GetNeighborChessDirection.js';
 import AreNeighbors from './neighbors/AreNeighbors.js';
 
+import RingToTileXYArray from './ring/RingToTileXYArray.js';
+
 import HasBlocker from './blocker/HasBlocker.js';
 import HasEdgeBlocker from './blocker/HasEdgeBlocker.js';
 
@@ -202,6 +204,8 @@ var methods = {
     getNeighborTileDirection: GetNeighborTileDirection,
     getNeighborChessDirection: GetNeighborChessDirection,
     areNeighbors: AreNeighbors,
+
+    ringToTileXYArray: RingToTileXYArray,
 
     hasBlocker: HasBlocker,
     hasEdgeBlocker: HasEdgeBlocker,

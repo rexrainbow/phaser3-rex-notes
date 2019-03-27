@@ -11,6 +11,7 @@ import GetDistance from '../../../utils/grid/hexagon/GetDistance.js';
 import DirectionBetween from '../../../utils/grid/hexagon/DirectionBetween.js';
 import DirectionNormalize from '../utils/DirectionNormalize.js';
 import GetGridPoints from './GetGridPoints.js';
+import RingToTileXYArray from '../../../utils/grid/hexagon/RingToTileXYArray.js';
 
 class HexagonGrid extends Hexagon {
     constructor(config) {
@@ -59,6 +60,7 @@ var methods = {
     directionBetween: DirectionBetween,
     directionNormalize: DirectionNormalize,
     getGridPoints: GetGridPoints,
+    ringToTileXYArray: RingToTileXYArray,
 }
 Object.assign(
     HexagonGrid.prototype,

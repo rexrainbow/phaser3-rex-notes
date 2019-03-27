@@ -49,7 +49,7 @@ class Demo extends Phaser.Scene {
 
         // add some blockers
         for (var i = 0; i < 10; i++) {
-            CreateBlocker(board);
+            // CreateBlocker(board);
         }
 
         var marker = CreateMarker(board);

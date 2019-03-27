@@ -10,9 +10,8 @@ import Rotate from '../../../utils/grid/quad/Rotate.js';
 import GetDistance from '../../../utils/grid/quad/GetDistance.js';
 import DirectionBetween from '../../../utils/grid/quad/DirectionBetween.js';
 import DirectionNormalize from '../utils/DirectionNormalize.js';
-import GetValue from '../../../utils/object/GetValue.js';
-
 import GetGridPoints from './GetGridPoints.js';
+import RingToTileXYArray from '../../../utils/grid/hexagon/RingToTileXYArray.js';
 
 class QuadGrid extends Quad {
     constructor(config) {
@@ -60,6 +59,7 @@ var methods = {
     directionBetween: DirectionBetween,
     directionNormalize: DirectionNormalize,
     getGridPoints: GetGridPoints,
+    ringToTileXYArray: RingToTileXYArray,
 }
 Object.assign(
     QuadGrid.prototype,
