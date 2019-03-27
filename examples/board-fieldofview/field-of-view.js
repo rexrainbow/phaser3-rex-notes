@@ -25,7 +25,7 @@ class Demo extends Phaser.Scene {
             y: 4,
 
             // FOV parameters
-            face: 5,
+            face: 0,
 
             coneMode: 'direction',
             cone: 2,
@@ -48,19 +48,18 @@ class Demo extends Phaser.Scene {
         });
 
         // add some blockers
-        for (var i = 0; i < 10; i++) {
+        for (var i = 0; i < 20; i++) {
             CreateBlocker(board);
         }
 
-        var tileXYArray = chessA.fov.findFOV();
-        var tileXY, worldXY;
-        for (var i = 0, cnt = tileXYArray.length; i < cnt; i++) {
-            tileXY = tileXYArray[i];
-            worldXY = board.tileXYToWorldXY(tileXY.x, tileXY.y, true);
-            this.add.circle(worldXY.x, worldXY.y, 20, COLOR_VISIBLE).setDepth(-1);
-        }
+        this.input.on('pointerdown', function (pointer) {
+            chessA.fov.face++;
+            findFOV(chessA);
+        });
 
-        // chessA.fov.debugGraphics.setVisible(false);
+        findFOV(chessA);
+
+        this.add.text(0, 580, 'Click to spin face')
     }
 
     update() {}
@@ -138,6 +137,24 @@ var CreateChessA = function (board, config) {
         .setDepth(1);
     chessA.fov = scene.rexBoard.add.fieldOfView(chessA, config);
     return chessA;
+}
+
+var findFOV = function (chessA) {
+    var board = chessA.rexChess.board;
+    var scene = board.scene;
+
+    var chessArray = board.tileZToChessArray(-1);
+    for (var i = 0, cnt = chessArray.length; i < cnt; i++) {
+        chessArray[i].destroy();
+    }
+
+    chessA.fov.debugGraphics.clear();
+    var tileXYArray = chessA.fov.findFOV();
+    var tileXY;
+    for (var i = 0, cnt = tileXYArray.length; i < cnt; i++) {
+        tileXY = tileXYArray[i];
+        scene.rexBoard.add.shape(board, tileXY.x, tileXY.y, -1, COLOR_VISIBLE, 0.3);
+    }
 }
 
 const COLOR_PRIMARY = 0x03a9f4;
