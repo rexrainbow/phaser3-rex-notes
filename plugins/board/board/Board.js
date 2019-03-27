@@ -34,12 +34,13 @@ import TileXYToChessArray from './tileposition/TileXYToChessArray.js';
 import TileZToChessArray from './tileposition/TileZToChessArray.js';
 import TileXYArrayToChessArray from './tileposition/TileXYArrayToChessArray.js';
 import ChessToTileXYZ from './tileposition/ChessToTileXYZ.js';
-import Offset from './tileposition/Offset.js';
-import Rotate from './tileposition/Rotate.js';
 import GetOppositeDirection from './tileposition/GetOppositeDirection.js';
 import GetDistance from './tileposition/GetDistance.js';
 import DirectionBetween from './tileposition/DirectionBetween.js';
-import Fit from './tileposition/Fit.js';
+
+import Offset from './transform/Offset.js';
+import Rotate from './transform/Rotate.js';
+import Fit from './transform/Fit.js';
 
 import GetEmptyTileXYArray from './empty/GetEmptyTileXYArray.js';
 import GetRandomEmptyTileXY from './empty/GetRandomEmptyTileXY.js';

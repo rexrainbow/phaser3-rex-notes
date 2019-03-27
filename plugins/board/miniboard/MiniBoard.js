@@ -18,12 +18,12 @@ import SetInteractive from './input/SetInteractive.js';
 import SetDragEnable from './input/SetDragEnable.js';
 import DragEnd from './input/DragEnd.js';
 
-import CanMirror from './transfer/CanMirror.js';
-import Mirror from './transfer/Mirror.js';
-import CanRotate from './transfer/CanRotate.js';
-import Rotate from './transfer/Rotate.js';
-import CanRotateTo from './transfer/CanRotateTo.js';
-import RotateTo from './transfer/RotateTo.js';
+import CanMirror from './transform/CanMirror.js';
+import Mirror from './transform/Mirror.js';
+import CanRotate from './transform/CanRotate.js';
+import Rotate from './transform/Rotate.js';
+import CanRotateTo from './transform/CanRotateTo.js';
+import RotateTo from './transform/RotateTo.js';
 
 import GetValue from '../../utils/object/GetValue.js';
 

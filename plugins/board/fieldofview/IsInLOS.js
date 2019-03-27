@@ -3,6 +3,7 @@ import AngleBetween from '../../utils/math/angle/Between.js';
 import AreTileXYArrayEqual from '../utils/AreTileXYArrayEqual.js';
 
 const INFINITY = CONST.INFINITY;
+const LINEOFFSET = 0.005;
 
 var IsInLOS = function (chess, visiblePoints) {
     // chess: chess object or tileXY
@@ -32,8 +33,8 @@ var IsInLOS = function (chess, visiblePoints) {
 
     // Shift a small distance
     lineAngle += (Math.PI / 2);
-    offsetX = 0.005 * Math.cos(lineAngle);
-    offsetY = 0.005 * Math.sin(lineAngle);
+    offsetX = LINEOFFSET * Math.cos(lineAngle);
+    offsetY = LINEOFFSET * Math.sin(lineAngle);
     var x0 = startX + offsetX,
         y0 = startY + offsetY,
         x1 = endX + offsetX,
@@ -51,8 +52,8 @@ var IsInLOS = function (chess, visiblePoints) {
 
     // Shift a small distance
     lineAngle += Math.PI;
-    offsetX = 0.005 * Math.cos(lineAngle);
-    offsetY = 0.005 * Math.sin(lineAngle);
+    offsetX = LINEOFFSET * Math.cos(lineAngle);
+    offsetY = LINEOFFSET * Math.sin(lineAngle);
     var x0 = startX + offsetX,
         y0 = startY + offsetY,
         x1 = endX + offsetX,
