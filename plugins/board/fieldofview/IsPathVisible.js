@@ -1,5 +1,5 @@
 import CONST from './const.js';
-import TileXYIsEqual from '../utils/TileXYIsEqual.js';
+import AreTileXYEqual from '../utils/AreTileXYEqual.js';
 
 const BLOCKER = CONST.BLOCKER;
 const INFINITY = CONST.INFINITY;
@@ -9,7 +9,7 @@ var IsPathVisible = function (tileXYArray, visiblePoints) {
     var tileXY, cost;
     for (var i = 1, cnt = tileXYArray.length; i < cnt; i++) {
         tileXY = tileXYArray[i];
-        if (TileXYIsEqual(myTileXYZ, tileXY)) {
+        if (AreTileXYEqual(myTileXYZ, tileXY)) {
             continue;
         }
         cost = this.getCost(tileXY);

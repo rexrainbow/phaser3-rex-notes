@@ -10,6 +10,9 @@ const EVEN_R = CONST.EVEN_R;
 const ODD_Q = CONST.ODD_Q;
 const EVEN_Q = CONST.EVEN_Q;
 
+const C4DIV3 = (4 / 3);
+const C2DIV3 = (2 / 3);
+
 var GetTileXY = function (worldX, worldY, out) {
     if (out === undefined) {
         out = {};
@@ -23,14 +26,14 @@ var GetTileXY = function (worldX, worldY, out) {
     switch (this.mode) {
         case ODD_R:
         case EVEN_R:
-            r = (worldY * (4 / 3)) / this.height;
-            q = (worldX / this.width) - (2 / 3) * (worldY / this.height);
+            r = (worldY * C4DIV3) / this.height;
+            q = (worldX / this.width) - C2DIV3 * (worldY / this.height);
             break;
 
         case ODD_Q:
         case EVEN_Q:
-            r = (worldY / this.height) - (2 / 3) * (worldX / this.width);
-            q = (worldX * (4 / 3)) / this.width;
+            r = (worldY / this.height) - C2DIV3 * (worldX / this.width);
+            q = (worldX * C4DIV3) / this.width;
             break;
     }
 

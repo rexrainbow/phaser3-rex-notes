@@ -1,5 +1,5 @@
 import TileData from './TileData.js';
-import TileXYIsEqual from '../utils/TileXYIsEqual.js';
+import AreTileXYEqual from '../utils/AreTileXYEqual.js';
 
 import GetRandom from '../../utils/array/GetRandom.js';
 
@@ -23,7 +23,7 @@ var GetNextTile = function (curTileData, preTileData) {
         if (directions[i] === curTileData.direction) {
             forwardTileData = neighborTileData;
         }
-        if ((preTileData !== undefined) && (TileXYIsEqual(neighborTileXY, preTileData))) {
+        if ((preTileData !== undefined) && (AreTileXYEqual(neighborTileXY, preTileData))) {
             backwardTileData = neighborTileData;
         } else {
             neighborTileXArray.push(neighborTileData);

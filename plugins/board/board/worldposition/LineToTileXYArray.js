@@ -1,6 +1,6 @@
 import DistanceBetween from '../../../utils/math/distance/DistanceBetween.js';
 import Linear from '../../../utils/math/Linear.js';
-import TileXYIsEqual from '../../utils/TileXYIsEqual.js';
+import AreTileXYEqual from '../../utils/AreTileXYEqual.js';
 
 var LineToTileXYArray = function (startX, startY, endX, endY, out) {
     if (out === undefined) {
@@ -21,7 +21,7 @@ var LineToTileXYArray = function (startX, startY, endX, endY, out) {
         if (!this.contains(tileXY.x, tileXY.y)) {
             continue;
         }
-        if (preTileXY && TileXYIsEqual(preTileXY, tileXY)) {
+        if (preTileXY && AreTileXYEqual(preTileXY, tileXY)) {
             continue;
         }
 
