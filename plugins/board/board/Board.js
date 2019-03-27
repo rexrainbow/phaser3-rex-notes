@@ -16,7 +16,7 @@ import AngleBetween from './worldposition/AngleBetween.js';
 import AngleToward from './worldposition/AngleToward.js';
 import IsOverlappingPoint from './worldposition/IsOverlappingPoint.js';
 import GridAlign from './worldposition/GridAlign.js';
-import LineToTileXYArray from './worldposition/LineToTileXYArray.js';
+import LineToTileXYArray from './line/LineToTileXYArray.js';
 
 import UidToChess from './chess/UidToChess.js';
 import AddChess from './chess/AddChess.js';

@@ -1,4 +1,4 @@
-import IsPlainObject from '../../../utils/object/IsPlainObject.js';
+import IsPlainObject from '../../utils/object/IsPlainObject.js';
 
 var IsTileXYZ = function (tileXYZ) {
     return IsPlainObject(tileXYZ) &&

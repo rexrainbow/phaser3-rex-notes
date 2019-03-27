@@ -1,6 +1,6 @@
 import IsUID from '../../chess/IsUID.js';
 import IsChess from '../../chess/IsChess';
-import IsTileXYZ from './IsTileXYZ.js';
+import IsTileXY from '../../utils/IsTileXY.js';
 
 var ChessToTileXYZ = function (chess) {
     // chess: chess object, UID, or tileXYZ
@@ -14,7 +14,7 @@ var ChessToTileXYZ = function (chess) {
     } else if (IsUID(chess)) { // UID
         var uid = chess;
         return this.boardData.getXYZ(uid);
-    } else if (IsTileXYZ(chess)) { // {x, y, z}
+    } else if (IsTileXY(chess)) { // {x, y}, or {x, y, z}
         var tileXYZ = chess;
         return tileXYZ;
     } else {
