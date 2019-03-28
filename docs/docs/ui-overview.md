@@ -17,12 +17,40 @@
 1. [TextArea](ui-textarea.md): A container with a text, slider, and scroller.
 1. [Textbox](ui-textbox.md): A container with an icon, ([typing](texttyping.md) and [paging](textpage.md)) text, and background.
 
+### Basic container
+
+1. [ContainerLite](containerlite.md): Control the position and angle of children game objects.
+    ```javascript
+    var container = scene.rexUI.add.container(x, y);
+    ```
+    or
+    ```javascript
+    class MyContainer extends RexPlugins.UI.Container {
+        constructor(scene, x, y, width, height, children) {
+            super(scene, x, y, width, height, children);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
 
 ### Shape objects
 
 1. [Round-rectangle](shape-roundrectangle.md): Round rectangle shape.
     ```javascript
     var shape = scene.rexUI.add.roundRectangle(x, y, width, height, radius, fillColor);
+    ```
+    or
+    ```javascript
+    class MyRoundRectangle extends RexPlugins.UI.RoundRectangle {
+        constructor(x, y, width, height, radius, fillColor, fillAlpha) {
+            super(x, y, width, height, radius, fillColor, fillAlpha);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
     ```
 
 ### Colored text objects
@@ -31,7 +59,29 @@
     ```javascript
     var txt = scene.rexUI.add.BBCodeText(x, y, text, style);
     ```
+    or
+    ```javascript
+    class MyText extends RexPlugins.UI.BBCodeText {
+        constructor(scene, x, y, text, style) {
+            super(scene, x, y, text, style);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
 1. [Tag text](tagtext.md): Displays text with multi-color, font face, or font size with tags.
     ```javascript
     var txt = scene.rexUI.add.tagText(x, y, text, style);
+    ```
+    or
+    ```javascript
+    class MyText extends RexPlugins.UI.TagText {
+        constructor(scene, x, y, text, style) {
+            super(scene, x, y, text, style);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
     ```
