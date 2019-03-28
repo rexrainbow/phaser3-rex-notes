@@ -50,7 +50,7 @@ var monopoly = scene.rexBoard.add.monopoly(chess, {
 Get path toward this face direction.
 
 ```javascript
-monopoly.setFaceDirection(direction);
+monopoly.setFace(direction);
 ```
 
 - `direction` :

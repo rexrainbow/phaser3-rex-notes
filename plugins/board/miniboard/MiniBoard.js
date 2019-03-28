@@ -50,7 +50,7 @@ class MiniBoard extends Container {
     }
 
     resetFromJSON(o) {
-        this.setFaceDirection(GetValue(o, 'face', 0));
+        this.setFace(GetValue(o, 'face', 0));
         var dragEnable = GetValue(o, 'draggable', undefined);
         if (dragEnable !== undefined) {
             this.setDragEnable(dragEnable);
@@ -80,7 +80,7 @@ class MiniBoard extends Container {
         return this;
     }
 
-    setFaceDirection(direction) {
+    setFace(direction) {
         this.face = this.board.grid.directionNormalize(direction);
         return this;
     }

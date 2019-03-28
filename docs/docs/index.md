@@ -8,6 +8,7 @@
 1. [AwaitLoader](awaitloader.md): Await custom task in preload stage.
 1. [BBCodeText](bbcodetext.md): Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
 1. [Board](board.md): Core object of Board system.
+1. [Board - Field of view](board-fieldofview.md): Visible testing, to find field of view.
 1. [Board - Hexagon map](board-hexagonmap.md): Create tile positions in hexagon/triangle/parallelogram geometry in hexagon grid.
 1. [Board - Match](board-match.md): Get matched chess.
 1. [Board - Move To](board-moveto.md): Move chess towards target position with a steady speed.

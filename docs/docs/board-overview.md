@@ -19,12 +19,9 @@
 ### Applications
 
 - [Path finder](board-pathfinder.md)
+- [Field of view](board-fieldofview.md)
 - [Match](board-match.md)
 - [Hexagon map](board-hexagonmap.md)
-
-### Mini-board
-
-- [Mini-board](board-miniboard.md)
 
 ### Templates
 

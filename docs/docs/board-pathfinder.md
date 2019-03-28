@@ -27,7 +27,7 @@ var pathFinder = scene.rexBoard.add.pathFinder(chess, {
     // ** cost **
     // cost: 1,   // constant cost
     // costCallback: undefined,
-    // costCallbackScope: undefined
+    // costCallbackScope: undefined,
     // cacheCost: true,
 
     // pathMode: 10,  // A*

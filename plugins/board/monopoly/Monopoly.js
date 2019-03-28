@@ -22,7 +22,7 @@ class Monopoly {
         if (costCallback === undefined) {
             costCallback = GetValue(o, 'cost', 1);
         }
-        this.setFaceDirection(GetValue(o, 'face', 0));
+        this.setFace(GetValue(o, 'face', 0));
         this.setPathMode(GetValue(o, 'pathMode', 0));
         this.setPathTileZ(GetValue(o, 'pathTileZ', 0));
         this.setCostFunction(costCallback, costCallbackScope);
@@ -46,7 +46,8 @@ class Monopoly {
         return this;
     }
 
-    setFaceDirection(direction) {
+    setFace(direction) {
+        direction = this.board.grid.directionNormalize(direction);
         this.face = direction;
         return this;
     }

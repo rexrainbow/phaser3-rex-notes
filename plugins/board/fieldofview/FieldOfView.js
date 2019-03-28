@@ -26,7 +26,7 @@ class FieldOfView {
         if (costCallback === undefined) {
             costCallback = GetValue(o, 'cost', 0);
         }
-        this.setFaceDirection(GetValue(o, 'face', 0));
+        this.setFace(GetValue(o, 'face', 0));
         this.setConeMode(GetValue(o, 'coneMode', 0));
         this.setCone(GetValue(o, 'cone', undefined));
         this.setOccupiedTest(GetValue(o, 'occupiedTest', false));
@@ -71,7 +71,7 @@ class FieldOfView {
         }
     }
 
-    setFaceDirection(direction) {
+    setFace(direction) {
         this.face = direction;
         return this;
     }

@@ -24,7 +24,7 @@ var Rotate = function (direction) {
     }
 
     if (this.lastTransferResult) {
-        this.setFaceDirection(this.face + direction);
+        this.setFace(this.face + direction);
     }
     return this;
 }

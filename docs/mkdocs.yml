@@ -65,23 +65,6 @@ nav:
         - Container Lite: containerlite.md
         - Group: group.md        
         - Grid table: gridtable.md
-        - UI:
-            - Overview: ui-overview.md
-            - Sizer: ui-sizer.md
-            - Grid sizer: ui-gridsizer.md
-            - Fix-width sizer: ui-fixwidthsizer.md
-            - Label: ui-label.md
-            - Text box: ui-textbox.md
-            - Text area: ui-textarea.md
-            - Buttons: ui-buttons.md
-            - Slider: ui-slider.md
-            - Dialog: ui-dialog.md
-            - Grid table: ui-gridtable.md
-            - Tabs: ui-tabs.md
-            - Menu: ui-menu.md
-            - Number bar: ui-numberbar.md
-            - Pages: ui-pages.md
-            - Base sizer: ui-basesizer.md
     - Zone: zone.md
     - DOM element:
         - DOM element: domelement.md
@@ -216,6 +199,23 @@ nav:
     - Timeline: timeline.md    
     - Clock: clock.md
     - Life time: lifetime.md
+- UI:
+    - Overview: ui-overview.md
+    - Sizer: ui-sizer.md
+    - Grid sizer: ui-gridsizer.md
+    - Fix-width sizer: ui-fixwidthsizer.md
+    - Label: ui-label.md
+    - Text box: ui-textbox.md
+    - Text area: ui-textarea.md
+    - Buttons: ui-buttons.md
+    - Slider: ui-slider.md
+    - Dialog: ui-dialog.md
+    - Grid table: ui-gridtable.md
+    - Tabs: ui-tabs.md
+    - Menu: ui-menu.md
+    - Number bar: ui-numberbar.md
+    - Pages: ui-pages.md
+    - Base sizer: ui-basesizer.md
 - Board:
     - Overview: board-overview.md
     - Board: board.md
@@ -226,6 +226,7 @@ nav:
     - Shape: board-shape.md
     - Move to: board-moveto.md
     - Path finder: board-pathfinder.md
+    - Field of view: board-fieldofview.md
     - Match: board-match.md
     - Hexagon map: board-hexagonmap.md
     - Bejeweled: board-bejeweled.md
