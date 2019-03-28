@@ -1,7 +1,7 @@
 import CONST from './const.js';
 
 const PATH_MODE = CONST.PATH_MODE;
-const INFINITY = CONST.INFINITY
+const INFINITY = CONST.INFINITY;  // undefined
 
 var FindPath = function (endTileXY, movingPoints, isClosest, out) {
     if (isClosest === undefined) {

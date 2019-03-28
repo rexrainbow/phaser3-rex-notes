@@ -103,7 +103,7 @@ class ChessA extends RexPlugins.Board.Shape {
                 preTile = board.tileXYZToChess(preTile.x, preTile.y, 0);
                 var curLevel = curTile.getData('level');
                 var preLevel = preTile.getData('level');
-                return (preLevel >= curLevel) ? 0 : pathFinder.BLOCKER;
+                return (preLevel >= curLevel) ? 1 : pathFinder.BLOCKER;
             },
             cacheCost: false,
         });
@@ -114,7 +114,7 @@ class ChessA extends RexPlugins.Board.Shape {
 
     showMoveableArea() {
         this.hideMoveableArea();
-        var tileXYArray = this.pathFinder.findArea(1);
+        var tileXYArray = this.pathFinder.findArea(this.pathFinder.INFINITY);
         for (var i = 0, cnt = tileXYArray.length; i < cnt; i++) {
             this._markers.push(
                 new MoveableMarker(this, tileXYArray[i])

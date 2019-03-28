@@ -94,6 +94,8 @@ var tileXYArray = pathFinder.findArea(movingPoints);
 // var out = pathFinder.findArea(movingPoints, out);
 ```
 
+- `movingPoints`
+    - `pathFinder.INFINITY` (*undefined*) : Infinity moving points. Default value.
 - `tileXYArray` : An array of moveable tile positions `{x,y,pathCost}`
 
 #### Get shortest path to a moveable tile
