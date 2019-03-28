@@ -39,4 +39,4 @@
     - [Swirl](https://codepen.io/rexrainbow/full/RBXQBo)
     - [Pixelation](https://codepen.io/rexrainbow/full/MqgmgE)
     - [Toonify](https://codepen.io/rexrainbow/full/ErWNXa)
-- [Kaleidoscope](https://rexrainbow.github.io/phaser3-rex-notes/app/kaleidoscope/index.html)
+- [Kaleidoscope](https://codepen.io/rexrainbow/full/RdzvVj)
