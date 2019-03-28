@@ -57,7 +57,7 @@ var pathFinder = scene.rexBoard.add.pathFinder(chess, {
         - `'A*-random'`, or `11`
         - `'A*-line'`, or `12`
 - `weight` : Weight parameter for A* searching mode
-- `costCache` : Set `false` to get cost every time. It is useful when cost is a function of (current tile, previous tile).
+- `cacheCost` : Set `false` to get cost every time. It is useful when cost is a function of (current tile, previous tile).
 
 ### Set cost function
 
