@@ -38,13 +38,10 @@ class Demo extends Phaser.Scene {
                 return (board.tileXYZToChess(tileXY.x, tileXY.y, 0)) ? fov.BLOCKER : 0;
             },
 
-            debugGraphics: this.add.graphics({
-                lineStyle: {
-                    width: 2,
-                    color: 0xff0000,
-                    alpha: 1
-                }
-            }).setDepth(10),
+            debug: {
+                graphics: this.add.graphics().setDepth(10),
+                log: true,
+            },
         });
 
         // add some blockers
@@ -151,8 +148,7 @@ var CreateMarker = function (board, tileXY) {
 }
 
 var LOS = function (chessA, marker) {
-    chessA.fov.debugGraphics.clear();
-    var isInLOS = chessA.fov.isInLOS(marker);
+    var isInLOS = chessA.fov.clearDebugGraphics().isInLOS(marker);
     marker.setFillStyle((isInLOS) ? COLOR_VISIBLE : COLOR_INVISIBLE);
 }
 

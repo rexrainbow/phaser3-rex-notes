@@ -33,7 +33,9 @@ class FieldOfView {
         this.setBlockerTest(GetValue(o, 'blockerTest', false));
         this.setEdgeBlockerTest(GetValue(o, 'edgeBlockerTest', false));
         this.setCostFunction(costCallback, costCallbackScope);
-        this.setDebugGraphics(GetValue(o, 'debugGraphics', undefined));
+        this.setDebugGraphics(GetValue(o, 'debug.graphics', undefined));
+        this.setDebugLineColor(GetValue(o, 'debug.visibleLineColor', 0x00ff00), GetValue(o, 'debug.invisibleLineColor', 0xff0000));
+        this.setDebugLog(GetValue(o, 'debug.log', false));
         return this;
     }
 
@@ -135,6 +137,27 @@ class FieldOfView {
 
     setDebugGraphics(graphics) {
         this.debugGraphics = graphics;
+        return this;
+    }
+
+    setDebugLineColor(visibleLineColor, invisibleLineColor) {
+        this.debugVisibleLineColor = visibleLineColor;
+        this.debugInvisibleLineColor = invisibleLineColor;
+        return this;
+    }
+
+    setDebugLog(enabled) {
+        if (enabled === undefined) {
+            enabled = true;
+        }
+        this.debugLog = enabled;
+        return this;
+    }
+
+    clearDebugGraphics() {
+        if (this.debugGraphics) {
+            this.debugGraphics.clear();
+        }
         return this;
     }
 

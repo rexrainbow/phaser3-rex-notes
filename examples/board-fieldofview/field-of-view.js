@@ -38,13 +38,9 @@ class Demo extends Phaser.Scene {
                 return (board.tileXYZToChess(tileXY.x, tileXY.y, 0)) ? fov.BLOCKER : 0;
             },
 
-            debugGraphics: this.add.graphics({
-                lineStyle: {
-                    width: 1,
-                    color: 0xff0000,
-                    alpha: 1
-                }
-            }).setDepth(10),
+            debug: {
+                graphics: this.add.graphics().setDepth(10),
+            },
         });
 
         // add some blockers
@@ -148,8 +144,7 @@ var findFOV = function (chessA) {
         chessArray[i].destroy();
     }
 
-    chessA.fov.debugGraphics.clear();
-    var tileXYArray = chessA.fov.findFOV();
+    var tileXYArray = chessA.fov.clearDebugGraphics().findFOV();
     var tileXY;
     for (var i = 0, cnt = tileXYArray.length; i < cnt; i++) {
         tileXY = tileXYArray[i];

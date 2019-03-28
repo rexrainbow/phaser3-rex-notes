@@ -3,7 +3,7 @@ import AngleBetween from '../../utils/math/angle/Between.js';
 import AreTileXYArrayEqual from '../utils/AreTileXYArrayEqual.js';
 
 const INFINITY = CONST.INFINITY;
-const LINEOFFSET = 0.005;
+const LINEOFFSET = 0.001;
 
 var IsInLOS = function (chess, visiblePoints) {
     // chess: chess object or tileXY
@@ -18,7 +18,7 @@ var IsInLOS = function (chess, visiblePoints) {
     }
 
     var myTileXYZ = this.chessData.tileXYZ;
-    if (this.debugGraphics) {
+    if (this.debugLog) {
         console.log('Visible test from (' + myTileXYZ.x + ',' + myTileXYZ.y + ') to (' + targetTileXY.x + ',' + targetTileXY.y + ')');
     }
 
@@ -40,13 +40,15 @@ var IsInLOS = function (chess, visiblePoints) {
         x1 = endX + offsetX,
         y1 = endY + offsetY;
     board.lineToTileXYArray(x0, y0, x1, y1, globTileXYArray0);
-    if (this.debugGraphics) {
+    if (this.debugLog) {
         console.log('Line 0: ' + JSON.stringify(globTileXYArray0));
-        this.debugGraphics.lineBetween(x0, y0, x1, y1);
     }
     isVisivle = this.isPathVisible(globTileXYArray0, visiblePoints);
     if (isVisivle) {
         globTileXYArray0.length = 0;
+        if (this.debugGraphics) {
+            this.debugGraphics.lineStyle(1, this.debugVisibleLineColor, 1).lineBetween(startX, startY, endX, endY);
+        }
         return true;
     }
 
@@ -59,7 +61,7 @@ var IsInLOS = function (chess, visiblePoints) {
         x1 = endX + offsetX,
         y1 = endY + offsetY;
     board.lineToTileXYArray(x0, y0, x1, y1, globTileXYArray1);
-    if (this.debugGraphics) {
+    if (this.debugLog) {
         console.log('Line 1: ' + JSON.stringify(globTileXYArray1));
         this.debugGraphics.lineBetween(x0, y0, x1, y1);
     }
@@ -69,6 +71,10 @@ var IsInLOS = function (chess, visiblePoints) {
     }
     globTileXYArray0.length = 0;
     globTileXYArray1.length = 0;
+    if (this.debugGraphics) {
+        var color = (isVisivle) ? this.debugVisibleLineColor : this.debugInvisibleLineColor;
+        this.debugGraphics.lineStyle(1, color, 1).lineBetween(startX, startY, endX, endY);
+    }
     return isVisivle;
 }
 
