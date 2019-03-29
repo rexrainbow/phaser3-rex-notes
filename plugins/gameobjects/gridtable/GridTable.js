@@ -80,6 +80,7 @@ class GridTable extends Container {
             mode = SCROLLMODE[mode.toLowerCase()];
         }
         this.scrollMode = mode;
+        return this;
     }
 
     setClampMode(mode) {
@@ -374,7 +375,7 @@ class GridTable extends Container {
         } else {
             cell = cellIdx;
         }
-        cell.width = width;  // Only worked when scrollMode is 1
+        cell.width = width; // Only worked when scrollMode is 1
         return this;
     }
 
