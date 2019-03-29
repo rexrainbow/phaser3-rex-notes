@@ -57,7 +57,9 @@ class GridTable extends Sizer {
             } else {
                 container = callback(cell);
             }
-            container.setOrign(0);
+            if (container.setOrigin) {
+                container.setOrigin(0);
+            }
             if (container.isRexSizer) {
                 container.layout(); // Use original size
             }
