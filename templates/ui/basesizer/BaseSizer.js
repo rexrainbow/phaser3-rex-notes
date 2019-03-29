@@ -40,7 +40,7 @@ class Base extends Container {
         this.setMinHeight(minHeight);
         this.setName(GetValue(config, 'name', ''));
         this.rexSizer = {};
-        this.backgroundChildren = [];
+        this.backgroundChildren = undefined;
 
         if (anchorX !== undefined) {
             this._anchor = new Anchor(this, {
@@ -57,7 +57,9 @@ class Base extends Container {
         if (!this.scene) {
             return;
         }
-        this.backgroundChildren.length = 0;
+        if (this.backgroundChildren !== undefined) {
+            this.backgroundChildren.length = 0;
+        }
         super.destroy(fromScene);
     }
 
@@ -170,6 +172,10 @@ class Base extends Container {
     }
 
     addBackground(gameObject) {
+        if (this.backgroundChildren === undefined) {
+            this.backgroundChildren = [];
+        }
+
         super.add(gameObject);
 
         var config = this.getSizerConfig(gameObject);

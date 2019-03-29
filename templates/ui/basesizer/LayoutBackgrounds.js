@@ -4,10 +4,11 @@ import GlobZone from '../../../plugins/utils/align/GlobZone.js';
 const AlignIn = Phaser.Display.Align.In.QuickSet;
 const ALIGN_CENTER = Phaser.Display.Align.CENTER;
 
-var LayoutBackgrounds = function (backgrounds) {
-    if (backgrounds === undefined) {
-        backgrounds = this.backgroundChildren;
+var LayoutBackgrounds = function () {
+    if (this.backgroundChildren === undefined) {
+        return;
     }
+    var backgrounds = this.backgroundChildren;
 
     var child;
     var x = this.left,

@@ -116,7 +116,10 @@ class GridSizer extends BaseSizer {
         }
         config.parent = undefined;
         RemoveItem(this.gridChildren, gameObject);
-        RemoveItem(this.backgroundChildren, gameObject);
+
+        if (this.backgroundChildren !== undefined) {
+            RemoveItem(this.backgroundChildren, gameObject);
+        }
         super.remove(gameObject);
         return this;
     }
