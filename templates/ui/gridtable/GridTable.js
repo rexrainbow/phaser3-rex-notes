@@ -1,4 +1,5 @@
 import Sizer from '../sizer/Sizer.js';
+import SCROLLMODE from '../utils/ScrollModeConst.js';
 import CreateTable from './CreateTable.js';
 import Slider from '../slider/Slider.js';
 import Scroller from '../../../plugins/scroller.js';
@@ -56,6 +57,7 @@ class GridTable extends Sizer {
             } else {
                 container = callback(cell);
             }
+            container.setOrign(0);
             if (container.isRexSizer) {
                 container.layout(); // Use original size
             }
@@ -168,12 +170,6 @@ class GridTable extends Sizer {
     }
 
 }
-const SCROLLMODE = {
-    v: 0,
-    vertical: 0,
-    h: 1,
-    horizontal: 1
-};
 
 var methods = {
     setItems: SetItems

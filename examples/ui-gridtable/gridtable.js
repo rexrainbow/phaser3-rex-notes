@@ -64,8 +64,7 @@ class Demo extends Phaser.Scene {
                                 left: (scrollMode === 0) ? 15 : 0,
                                 top: (scrollMode === 0) ? 0 : 15,
                             }
-                        })
-                        .setOrigin(0);
+                        });
                 },
                 items: getItems(100)
             })

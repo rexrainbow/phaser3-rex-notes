@@ -123,14 +123,14 @@ var gridTable = scene.rexUI.add.gridTable({
         - Set `false` to disable it.
     - `scroller.backDeceleration` : Deceleration of pull back when out of bounds.
         - Set `false` to disable it.
-- `createCellContainerCallback` : Callback to return container object of each visible cell.
+- `createCellContainerCallback` : Callback to return a container object of each visible cell.
     - Properties of `cell` parameter
         - `cell.scene` : Scene of this grid table object.
         - `cell.width` : Width of this cell, in pixels.
         - `cell.height` : Height of this cell, in pixels.
         - `cell.item` : Item of this cell to display.
         - `cell.index` : Index of this cell.
-    - **Set origin of returned cell container to (0, 0)**
+    - **Origin of returned cell container will be set to (0, 0)**
 - `space` : Pads spaces
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
     - `space.table` : Space between table object and slider object.

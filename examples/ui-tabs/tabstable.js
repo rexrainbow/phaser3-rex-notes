@@ -59,8 +59,7 @@ class Demo extends Phaser.Scene {
                                     icon: 10,
                                     left: 15
                                 }
-                            })
-                            .setOrigin(0);
+                            });
                     },
                 }),
 
