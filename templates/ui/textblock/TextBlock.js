@@ -36,6 +36,8 @@ class TextBlock extends BaseSizer {
         this.execeedTopState = false;
         this.execeedBottomState = false;
 
+        this.setClampMode(GetValue(config, 'clamplTextOY', true));
+
         // Add elements
         var background = GetValue(config, 'background', undefined);
         var textObject = GetValue(config, 'text', undefined);
@@ -52,8 +54,6 @@ class TextBlock extends BaseSizer {
         }
 
         this.setTextObject(textObject, paddingConfig, textMaskEnable);
-
-        this.setClampMode(GetValue(config, 'clamplTextOY', true));
     }
 
     destroy(fromScene) {
