@@ -58,17 +58,19 @@ var config = {
 var table = scene.add.rexGridTable(x, y, width, height, config);
 ```
 
-- `cellsCount` : Total cells count
-- `columns` : Columns count of each row
-- `cellHeight` : Default height of each cell
-- `cellWidth` : Width of each cell
-- `cellVisibleCallback` , `cellVisibleCallbackScope` : Callback when cell begins visible
-- `cellInvisibleCallback`, `cellInvisibleCallbackScope`: Callback when cell begins invisible
-- `clamplTableOXY` : Set `true` to clamp `tableOX`, `tableOY` when out-of-bound
+- `cellsCount` : Total cells count.
+- `columns` : Columns count of each row.
+- `cellHeight` : Default height of each cell.
+    - Expand cell height to fit table height : set `cellHeight` to `undefined`, and `scrollMode` is `'horizontal'`.
+- `cellWidth` : Width of each cell.
+    - Expand cell width to fit table width : set `cellWidth` to `undefined`, and `scrollMode` is `'vertical'`.
+- `cellVisibleCallback` , `cellVisibleCallbackScope` : Callback when cell begins visible.
+- `cellInvisibleCallback`, `cellInvisibleCallbackScope`: Callback when cell begins invisible.
+- `clamplTableOXY` : Set `true` to clamp `tableOX`, `tableOY` when out-of-bound,
     - Set `false` when dragging by [scroller](scroller.md)
 - `scrollMode` :
-    - `0`, or `'v'`, or `'vertical'`
-    - `1`, or `'h'`, or `'horizontal'`
+    - `0`, or `'v'`, or `'vertical'` : Scroll table vertically.
+    - `1`, or `'h'`, or `'horizontal'` : Scroll table horizontally.
 - `mask` : [Mask](mask.md) cells
     - `true` : Default rectangle mask
     - `false` : No mask
@@ -277,6 +279,12 @@ table.updateTable(true);
 
 !!! note "Use case"
     Set bounds of [scroller](scroller.md)
+
+### Resize table
+
+```javascript
+table.resize(width, height);
+```
 
 ### Cell
 

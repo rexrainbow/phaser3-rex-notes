@@ -16,10 +16,10 @@ class Table {
         this.colCount = undefined;
         this._nonZeroDeltaHeightCount = 0;
         this.resetTotalRowsHeight();
-        this.setDefaultCellHeight(GetValue(o, "cellHeight", 30));
-        this.setDefaultCellWidth(GetValue(o, "cellWidth", 30));
-        this.initCells(GetValue(o, "cellsCount", 0));
-        this.setColumnCount(GetValue(o, "columns", 1));
+        this.setDefaultCellHeight(GetValue(o, 'cellHeight', 30));
+        this.setDefaultCellWidth(GetValue(o, 'cellWidth', 30));
+        this.initCells(GetValue(o, 'cellsCount', 0));
+        this.setColumnCount(GetValue(o, 'columns', 1));
         return this;
     }
 

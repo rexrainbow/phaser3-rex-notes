@@ -1,4 +1,4 @@
-import ResizeGameObject from '../utils/ResizeGameObject.js';
+import ResizeGameObject from '../../../plugins/utils/size/ResizeGameObject.js';
 import RunChildrenWrap from './RunChildrenWrap.js';
 import GlobZone from '../../../plugins/utils/align/GlobZone.js';
 

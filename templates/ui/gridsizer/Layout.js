@@ -1,6 +1,6 @@
 import GetExpandedChildWidth from './GetExpandedChildWidth.js';
 import GetExpandedChildHeight from './GetExpandedChildHeight.js';
-import ResizeGameObject from '../utils/ResizeGameObject.js';
+import ResizeGameObject from '../../../plugins/utils/size/ResizeGameObject.js';
 import GlobZone from '../../../plugins/utils/align/GlobZone.js';
 
 const AlignIn = Phaser.Display.Align.In.QuickSet;

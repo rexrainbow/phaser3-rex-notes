@@ -1,6 +1,6 @@
 import GetExpandedChildWidth from './GetExpandedChildWidth.js';
 import GetExpandedChildHeight from './GetExpandedChildHeight.js';
-import ResizeGameObject from '../utils/ResizeGameObject.js';
+import ResizeGameObject from '../../../plugins/utils/size/ResizeGameObject.js';
 import GlobZone from '../../../plugins/utils/align/GlobZone.js';
 
 const AlignIn = Phaser.Display.Align.In.QuickSet;
@@ -61,21 +61,11 @@ var Layout = function (parent, newWidth, newHeight) {
         padding = childConfig.padding;
 
         // Set size
+        newChildWidth = GetExpandedChildWidth(this, child);
+        newChildHeight = GetExpandedChildHeight(this, child);
         if (child.isRexSizer) {
-            child.layout(
-                this,
-                GetExpandedChildWidth(this, child),
-                GetExpandedChildHeight(this, child));
+            child.layout(this, newChildWidth, newChildHeight);
         } else {
-            newChildWidth = undefined;
-            newChildHeight = undefined;
-            if (childConfig.expand) {
-                if (this.orientation === 0) { // x, expand height
-                    newChildHeight = this.height - padding.top - padding.bottom;
-                } else { // y, expand width
-                    newChildWidth = this.width - padding.left - padding.right;
-                }
-            }
             ResizeGameObject(child, newChildWidth, newChildHeight);
         }
 

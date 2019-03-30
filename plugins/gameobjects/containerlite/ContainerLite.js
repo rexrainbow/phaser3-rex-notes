@@ -9,6 +9,12 @@ class ContainerLite extends Zone {
             children = width;
             width = undefined;
         }
+        if (width === undefined) {
+            width = 2;
+        }
+        if (height === undefined) {
+            height = 2;
+        }
         super(scene, x, y, width, height);
         this.children = scene.add.group();
         this.type = 'rexContainerLite';

@@ -1,6 +1,6 @@
 import Sizer from '../sizer/Sizer.js';
 import SCROLLMODE from '../utils/ScrollModeConst.js';
-import CreateTable from './CreateTable.js';
+import GridTableCore from '../../../plugins/gameobjects/gridtable/GridTable.js';
 import Slider from '../slider/Slider.js';
 import Scroller from '../../../plugins/scroller.js';
 import NOOP from '../../../plugins/utils/object/NOOP.js';
@@ -46,7 +46,10 @@ class GridTable extends Sizer {
             tableConfig = {};
         }
         tableConfig.scrollMode = scrollMode;
-        var table = CreateTable(scene, tableConfig);
+        tableConfig.clamplTableOXY = false;
+        var tableWidth = GetValue(tableConfig, 'width', undefined);
+        var tableHeight = GetValue(tableConfig, 'height', undefined);
+        var table = new GridTableCore(scene, 0, 0, tableWidth, tableHeight, tableConfig);
         table.on('cellvisible', function (cell) {
             var callback = this.createCellContainerCallback;
             var scope = this.createCellContainerCallbackScope;
@@ -68,23 +71,27 @@ class GridTable extends Sizer {
             cell.setContainer(container);
         }, this);
 
-        var padding;
+        var proportion, padding, expand;
         if (scrollMode === 0) {
+            proportion = (tableWidth === undefined) ? 1 : 0;
             padding = {
                 left: paddingLeft,
                 right: (sliderConfig) ? tableSpace : paddingRight,
                 top: paddingTop,
                 bottom: paddingBottom
-            }
+            };
+            expand = (tableHeight === undefined);
         } else {
+            proportion = (tableHeight === undefined) ? 1 : 0;
             padding = {
                 left: paddingLeft,
                 right: paddingRight,
                 top: paddingTop,
                 bottom: (sliderConfig) ? tableSpace : paddingBottom
-            }
+            };
+            expand = (tableWidth === undefined);
         }
-        this.add(table, 0, 'center', padding, true);
+        this.add(table, proportion, 'center', padding, expand);
 
         var slider;
         if (sliderConfig) {

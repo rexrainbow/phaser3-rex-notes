@@ -16,17 +16,17 @@ class Demo extends Phaser.Scene {
         var gridTable = this.rexUI.add.gridTable({
                 x: 400,
                 y: 300,
+                width: 400,
+                height: 400,
 
                 scrollMode: scrollMode,
 
                 background: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, 0x4e342e),
 
                 table: {
-                    width: (scrollMode === 0) ? 250 : 400,
-                    height: (scrollMode === 0) ? 400 : 250,
+                    cellWidth: (scrollMode === 0) ? undefined : 60,
+                    cellHeight: (scrollMode === 0) ? 60 : undefined,
 
-                    cellWidth: (scrollMode === 0) ? 120 : 60,
-                    cellHeight: (scrollMode === 0) ? 60 : 120,
                     columns: 2,
                 },
 
@@ -51,20 +51,20 @@ class Demo extends Phaser.Scene {
                         item = cell.item,
                         index = cell.index;
                     return scene.rexUI.add.label({
-                            width: width,
-                            height: height,
+                        width: width,
+                        height: height,
 
-                            orientation: scrollMode,
-                            background: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 0).setStrokeStyle(2, 0x260e04),
-                            icon: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 10, item.color),
-                            text: scene.add.text(0, 0, item.id),
+                        orientation: scrollMode,
+                        background: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 0).setStrokeStyle(2, 0x260e04),
+                        icon: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 10, item.color),
+                        text: scene.add.text(0, 0, item.id),
 
-                            space: {
-                                icon: 10,
-                                left: (scrollMode === 0) ? 15 : 0,
-                                top: (scrollMode === 0) ? 0 : 15,
-                            }
-                        });
+                        space: {
+                            icon: 10,
+                            left: (scrollMode === 0) ? 15 : 0,
+                            top: (scrollMode === 0) ? 0 : 15,
+                        }
+                    });
                 },
                 items: getItems(100)
             })

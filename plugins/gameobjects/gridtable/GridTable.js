@@ -1,6 +1,7 @@
 import ContainerLite from '../containerlite/ContainerLite.js';
 import Table from './Table.js';
 import DefaultMask from '../../utils/mask/DefaultMask.js';
+import ResizeGameObject from '../../utils/size/ResizeGameObject.js';
 
 const Container = ContainerLite;
 const Components = Phaser.GameObjects.Components;
@@ -52,10 +53,19 @@ class GridTable extends Container {
         this.setScrollMode(GetValue(config, 'scrollMode', 0));
         this.setClampMode(GetValue(config, 'clamplTableOXY', true));
 
-        if (this.scrollMode === 1) { // scroll x
+        // Pre-process cell size
+        if (this.scrollMode === 0) { // scroll y
+            var cellWidth = GetValue(config, 'cellWidth', undefined);
+            this.expandCellSize = (cellWidth === undefined);
+            if (cellWidth === undefined) {
+                var columns = GetValue(config, 'columns', 1);
+                config.cellWidth = this.width / columns;
+            }
+        } else { // scroll x
             // Swap cell width and cell height
-            var cellHeight = GetValue(config, 'cellWidth', 30);
-            var cellWidth = GetValue(config, 'cellHeight', 30);
+            var cellWidth = GetValue(config, 'cellHeight', undefined);
+            var cellHeight = GetValue(config, 'cellWidth', undefined);
+            this.expandCellSize = (cellWidth === undefined);
             config.cellWidth = cellWidth;
             config.cellHeight = cellHeight;
         }
@@ -423,7 +433,7 @@ class GridTable extends Container {
         return this;
     }
 
-    // internal
+    // Internal
     getDefaultMask() {
         var shape = new DefaultMask(this);
         this.add(shape);
@@ -432,17 +442,20 @@ class GridTable extends Container {
     }
 
     resize(width, height) {
+        if ((this.width === width) && (this.height === height)) {
+            return this;
+        }
+
         super.resize(width, height);
+
+        if (this.expandCellSize) {
+            this.table.setDefaultCellWidth(this.instWidth / this.table.colCount);
+        }
         this.updateTable(true);
 
         if (this.mask) {
             var gameObject = (this.mask.hasOwnProperty('geometryMask')) ? this.mask.geometryMask : this.mask.bitmapMask;
-            if (gameObject.resize) {
-                gameObject.resize(width, height);
-            } else {
-                gameObject.displayWidth = width;
-                gameObject.displayHeight = height;
-            }
+            ResizeGameObject(gameObject, width, height);
         }
         return this;
     }
@@ -638,7 +651,7 @@ class GridTable extends Container {
         if (tableWidth > instWidth) {
             w = tableWidth - instWidth;
         } else {
-            w = tableWidth;
+            w = 0;
         }
         return w;
     };

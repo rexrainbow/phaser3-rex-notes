@@ -1,4 +1,4 @@
-import ResizeGameObject from './../utils/ResizeGameObject.js';
+import ResizeGameObject from '../../../plugins/utils/size/ResizeGameObject.js';
 
 const AlignIn = Phaser.Display.Align.In.QuickSet;
 const AlignLeft = Phaser.Display.Align.LEFT_CENTER;
