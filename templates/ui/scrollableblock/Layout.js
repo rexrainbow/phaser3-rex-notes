@@ -51,9 +51,6 @@ var Layout = function (parent, newWidth, newHeight) {
         ResetTextObjectPosition.call(this);
     }
 
-    // Layout background children
-    this.layoutBackgrounds();
-
     return this;
 }
 

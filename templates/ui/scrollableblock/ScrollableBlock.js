@@ -34,13 +34,9 @@ class ScrollableBlock extends BaseSizer {
         this.setClampMode(GetValue(config, 'clamplTextOY', true));
 
         // Add elements
-        var background = GetValue(config, 'background', undefined);
-        var child = GetValue(config, 'child', undefined); // TODO: default child?
+        // No background object, and child does not have padding
+        var child = GetValue(config, 'child', undefined);
         var childMaskEnable = GetValue(config, 'childMask', true);
-
-        if (background) {
-            this.addBackground(background);
-        }
 
         this.setChild(child, childMaskEnable);
     }

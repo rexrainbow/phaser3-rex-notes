@@ -71,33 +71,23 @@ var Layout = function (parent, newWidth, newHeight) {
 
         // Set position
         if (this.orientation === 0) { // x
-            if (
-                (childConfig.proportion === 0) ||
-                (proportionLength === 0)
-            ) {
-                x = (itemX + padding.left);
+            if ((childConfig.proportion === 0) || (proportionLength === 0)) {
                 width = child.width;
-                itemX += (width + padding.left + padding.right);
             } else {
-                x = (itemX + padding.left);
                 width = (childConfig.proportion * proportionLength);
-                itemX += (width + padding.left + padding.right);
             }
+            x = (itemX + padding.left);
+            itemX += (width + padding.left + padding.right);
             y = (itemY + padding.top);
             height = (this.height - padding.top - padding.bottom);
         } else { // y
-            if (
-                (childConfig.proportion === 0) ||
-                (proportionLength === 0)
-            ) {
-                y = (itemY + padding.top);
+            if ((childConfig.proportion === 0) || (proportionLength === 0)) {
                 height = child.height;
-                itemY += (height + padding.top + padding.bottom);
             } else {
-                y = (itemY + padding.top);
                 height = (childConfig.proportion * proportionLength);
-                itemY += (height + padding.top + padding.bottom);
             }
+            y = (itemY + padding.top);
+            itemY += (height + padding.top + padding.bottom);
             x = (itemX + padding.left);
             width = (this.width - padding.left - padding.right);
         }
