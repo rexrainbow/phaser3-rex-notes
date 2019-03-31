@@ -80,7 +80,7 @@ var Layout = function (parent, newWidth, newHeight) {
                 itemX += (width + padding.left + padding.right);
             } else {
                 x = (itemX + padding.left);
-                width = (childConfig.proportion * proportionLength) - padding.left - padding.right;
+                width = (childConfig.proportion * proportionLength);
                 itemX += (width + padding.left + padding.right);
             }
             y = (itemY + padding.top);
@@ -95,7 +95,7 @@ var Layout = function (parent, newWidth, newHeight) {
                 itemY += (height + padding.top + padding.bottom);
             } else {
                 y = (itemY + padding.top);
-                height = (childConfig.proportion * proportionLength) - padding.top - padding.bottom;
+                height = (childConfig.proportion * proportionLength);
                 itemY += (height + padding.top + padding.bottom);
             }
             x = (itemX + padding.left);

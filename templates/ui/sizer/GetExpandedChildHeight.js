@@ -10,7 +10,7 @@ var GetExpandedChildHeight = function (parent, child) {
         }
     } else { // y
         if ((childConfig.proportion > 0) && (parent.proportionLength > 0)) {
-            newHeight = (childConfig.proportion * parent.proportionLength) - padding.top - padding.bottom;
+            newHeight = (childConfig.proportion * parent.proportionLength);
         }
     }
     return newHeight;

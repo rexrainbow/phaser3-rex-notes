@@ -6,7 +6,7 @@ var GetExpandedChildWidth = function (parent, child) {
         newWidth = parent.width - padding.left - padding.right;
     } else if (parent.orientation === 0) { // x
         if ((childConfig.proportion > 0) && (parent.proportionLength > 0)) {
-            newWidth = (childConfig.proportion * parent.proportionLength) - padding.left - padding.right;
+            newWidth = (childConfig.proportion * parent.proportionLength);
         }
     } else { // y
         if (childConfig.expand) {
