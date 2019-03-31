@@ -44,8 +44,8 @@ var game = new Phaser.Game(config);
 var gridTable = scene.rexUI.add.gridTable({
     x: 0,
     y: 0,
-    width: 2,
-    height: 2,
+    width: undefined,
+    height: undefined,
 
     scrollMode: 0,
 
@@ -53,11 +53,11 @@ var gridTable = scene.rexUI.add.gridTable({
     background: backgroundGameObject,
 
     table: {
-        width: 250,
-        height: 400,
+        width: undefined,
+        height: undefined,
 
-        cellWidth: 120,
-        cellHeight: 60,
+        cellWidth: undefined,
+        cellHeight: undefined,
         columns: 2,
     },
 
@@ -100,15 +100,21 @@ var gridTable = scene.rexUI.add.gridTable({
     - Number : World position in pixels.
     - String (`'p%+n'`) : Position based on visible window. See [anchor](anchor.md#create-instance).
 - `width`, `height` : Minimum width, minimum height.
+    - Set `width` to `undefined`, and `table.width` is not `undefined`, will count width via table + slider.
+    - Set `height` to `undefined`, and `table.height` is not `undefined`, will count height via table + slider.
 - `scrollMode` : Scroll grid table vertically, or horizontally.
     - `0`, `'vertical'`, or `'v'` : Scroll grid table vertically. Default value.
     - `1`, `'horizontal'`, or `'h'` : Scroll grid table horizontally.
 - `background` : Game object of background, optional. This background game object will be resized to fit the size of grid table.
-- `table` : Configuration of grid table.
+- `table` : Configuration of grid table core.
     - `table.width` : Width of table, in pixels.
+        - Set to `undefined` to expand table width to fit this grid table object.
     - `table.height` : Height of table, in pixels.
-    - `table.cellHeight` : Default height of each cell, in pixels
-    - `table.cellWidth` : Width of each cell, in pixels.
+        - Set to `undefined` to expand table height to fit this grid table object.
+    - `table.cellHeight` : Default height of each cell.
+        - Expand cell height to fit table height : set `cellHeight` to `undefined`, and `scrollMode` is `'horizontal'`.
+    - `table.cellWidth` : Width of each cell.
+        - Expand cell width to fit table width : set `cellWidth` to `undefined`, and `scrollMode` is `'vertical'`.    
     - `table.columns` : Columns count of each row.
 - `slider` : Componments of slider, optional.
     - `slider.background` : Game object of slider background, optional.
