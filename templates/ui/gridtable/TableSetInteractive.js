@@ -12,15 +12,15 @@ var TableSetInteractive = function (table) {
         .on('pointerout', OnCellOut, this)
 }
 
-var OnCellClickPrepare = function () {
+var OnCellClickPrepare = function (pointer, localX, localY, event) {
     this.clickCellState = true;
 }
 
-var OnCellClickCancel = function () {
+var OnCellClickCancel = function (pointer, localX, localY, event) {
     this.clickCellState = false;
 }
 
-var OnCellClick = function (pointer) {
+var OnCellClick = function (pointer, localX, localY, event) {
     if (!this.clickCellState) {
         return;
     }
