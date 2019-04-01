@@ -178,6 +178,19 @@ class GridTable extends Sizer {
         return this;
     }
 
+    layout(parent, newWidth, newHeight) {
+        super.layout(parent, newWidth, newHeight);
+
+        var scroller = this.childrenMap.scroller;
+        if (scroller) {
+            var table = this.childrenMap.table;
+            var bottomOY = table.bottomTableOY,
+                topOY = table.topTableOY;
+            scroller.setBounds(bottomOY, topOY);
+        }
+        return this;
+    }
+
 }
 
 var methods = {

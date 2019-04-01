@@ -25,7 +25,7 @@ class Demo extends Phaser.Scene {
                 background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 10, COLOR_PRIMARY),
 
                 panel: createGrid(this, 3, 20),
-                panelMask: false, // Reduce usage of mask to save performance
+                // panelMask: false, // Reduce usage of mask to save performance
 
                 slider: {
                     track: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_DARK),

@@ -143,6 +143,19 @@ class ScrollablePanel extends Sizer {
         this.addChildrenMap('slider', slider);
         this.addChildrenMap('scroller', scroller);
     }
+
+    layout(parent, newWidth, newHeight) {
+        super.layout(parent, newWidth, newHeight);
+
+        var scroller = this.childrenMap.scroller;
+        if (scroller) {
+            var scrollableBlock = this.childrenMap.scrollableBlock;
+            var bottomOY = scrollableBlock.bottomChildOY,
+                topOY = scrollableBlock.topChildOY;
+            scroller.setBounds(bottomOY, topOY);
+        }
+        return this;
+    }
 }
 
 var methods = {
