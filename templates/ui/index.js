@@ -19,6 +19,8 @@ import NumberBar from './numberbar/NumberBar.js';
 import Pages from './pages/Pages.js';
 import TextBlock from './textblock/TextBlock.js';
 import TextArea from './textarea/TextArea.js';
+import ScrollableBlock from './scrollableblock/ScrollableBlock.js';
+import ScrollablePanel from './scrollablepanel/ScrollablePanel.js';
 
 export default {
     RoundRectangle: RoundRectangle,
@@ -42,4 +44,6 @@ export default {
     Pages: Pages,
     TextBlock: TextBlock,
     TextArea: TextArea,
+    ScrollableBlock: ScrollableBlock,
+    ScrollablePanel: ScrollablePanel,
 };

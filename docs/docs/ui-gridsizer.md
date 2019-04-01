@@ -43,6 +43,8 @@ var game = new Phaser.Game(config);
 var gridSizer = scene.rexUI.add.gridSizer({
     column: 0,
     row: 0,
+    // columnProportions: undefined,
+    // rowProportions: undefined,
     // x: 0,
     // y: 0,
     // width: undefined,
@@ -56,6 +58,8 @@ or
 var gridSizer = scene.rexUI.add.gridSizer(x, y, {
     column: 0,
     row: 0,
+    // columnProportions: undefined,
+    // rowProportions: undefined,
     // width: undefined,
     // height: undefined
 });
@@ -66,7 +70,9 @@ or
 ```javascript
 var gridSizer = scene.rexUI.add.gridSizer(x, y, width, height, {
     column: 0,
-    row: 0
+    row: 0,
+    // columnProportions: undefined,
+    // rowProportions: undefined,
 });
 ```
 
@@ -83,6 +89,7 @@ var gridSizer = scene.rexUI.add.gridSizer(x, y, width, height, column, row);
 - `height` : Minimum height. i.e. Hieght of this gridSizer will larger then this value.
 - `column` : Amount of column grids.
 - `row` : Amount of row grids.
+- `columnProportions`, `rowProportions` : Proportion of each column or row.
 
 ### Custom class
 

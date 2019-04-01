@@ -1,17 +1,9 @@
-var SetItems = function (items) {
-    if (items === undefined) {
-        this.items.length = 0;
-    } else {
-        this.items = items;
-    }
-
-    var table = this.childrenMap.table;
-    table.setCellsCount(this.items.length);
-    table.updateTable(true);
+var UpdatePanel = function () {
+    var scrollableBlock = this.childrenMap.scrollableBlock;
 
     // Controller
-    var bottomOY = table.bottomTableOY,
-        topOY = table.topTableOY;
+    var bottomOY = scrollableBlock.bottomChildOY,
+        topOY = scrollableBlock.topChildOY;
     var scroller = this.childrenMap.scroller;
     var slider = this.childrenMap.slider;
     if (scroller) {
@@ -22,12 +14,11 @@ var SetItems = function (items) {
     } else if (slider) {
         slider.setValue(0);
     } else {
-        table.setTableOY(topOY);
+        scrollableBlock.setChildOY(topOY);
     }
     if (slider) {
         slider.setEnable(bottomOY !== topOY);
     }
     return this;
 }
-
-export default SetItems;
+export default UpdatePanel;

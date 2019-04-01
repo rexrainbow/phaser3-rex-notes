@@ -7,6 +7,10 @@ var SetChild = function (gameObject, maskEnable) {
         maskEnable = true;
     }
 
+    if (gameObject.setOrigin) {
+        gameObject.setOrigin(0);
+    }
+
     this.add(gameObject);
 
     var config = this.getSizerConfig(gameObject);
@@ -20,6 +24,7 @@ var SetChild = function (gameObject, maskEnable) {
         this.child.setMask(this.childMask.createGeometryMask());
         this.add(this.childMask);
     }
+
     return this;
 }
 

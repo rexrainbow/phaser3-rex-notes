@@ -1,7 +1,9 @@
 import Sizer from '../sizer/Sizer.js';
 import SCROLLMODE from '../utils/ScrollModeConst.js';
+import ScrollableBlock from '../scrollableblock/ScrollableBlock.js';
 import Slider from '../slider/Slider.js';
-import Scroller from '../../../plugins/scroller.js'
+import Scroller from '../../../plugins/scroller.js';
+import UpdatePanel from './UpdatePanel.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -38,23 +40,37 @@ class ScrollablePanel extends Sizer {
             this.addBackground(background);
         }
 
-        var padding;
+        var panelWidth = GetValue(config, 'panelWidth', undefined);
+        var panelHeight = GetValue(config, 'panelHeight', undefined);
+        var panelMask = GetValue(config, 'panelMask', true);
+        var scrollableBlock = new ScrollableBlock(scene, {
+            scrollMode: scrollMode,
+            width: panelWidth,
+            height: panelHeight,
+            child: panel,
+            childMask: panelMask,
+        });
+        var proportion, padding, expand;
         if (scrollMode === 0) {
+            proportion = (panelWidth === undefined) ? 1 : 0;
             padding = {
                 left: paddingLeft,
                 right: (sliderConfig) ? panelSpace : paddingRight,
                 top: paddingTop,
                 bottom: paddingBottom
-            }
+            };
+            expand = (panelHeight === undefined);
         } else {
+            proportion = (panelHeight === undefined) ? 1 : 0;
             padding = {
                 left: paddingLeft,
                 right: paddingRight,
                 top: paddingTop,
                 bottom: (sliderConfig) ? panelSpace : paddingBottom
-            }
+            };
+            expand = (panelWidth === undefined);
         }
-        this.add(panel, 1, 'center', padding, true);
+        this.add(scrollableBlock, proportion, 'center', padding, expand);
 
         var slider;
         if (sliderConfig) {
@@ -87,7 +103,7 @@ class ScrollablePanel extends Sizer {
             if (scrollerConfig === true) {
                 scrollerConfig = {};
             }
-            scroller = new Scroller(textBlock, scrollerConfig);
+            scroller = new Scroller(scrollableBlock, scrollerConfig);
         }
 
         // Control
@@ -98,11 +114,11 @@ class ScrollablePanel extends Sizer {
                     ignored = false;
                     return;
                 }
-                textBlock.setPanelOYByPercentage(newValue);
+                scrollableBlock.setChildOYByPercentage(newValue);
                 // reflect to scroller
                 if (scroller) {
                     ignored = true;
-                    scroller.setValue(textBlock.textOY);
+                    scroller.setValue(scrollableBlock.childOY);
                 }
             })
         }
@@ -112,20 +128,29 @@ class ScrollablePanel extends Sizer {
                     ignored = false;
                     return;
                 }
-                textBlock.setPanelOY(newValue);
+                scrollableBlock.setChildOY(newValue);
                 // reflect to slider
                 if (slider) {
                     ignored = true;
-                    slider.setValue(textBlock.getPanelOYPercentage());
+                    slider.setValue(scrollableBlock.getChildOYPercentage());
                 }
             });
         }
 
         this.addChildrenMap('background', background);
+        this.addChildrenMap('scrollableBlock', scrollableBlock);
         this.addChildrenMap('panel', panel);
         this.addChildrenMap('slider', slider);
         this.addChildrenMap('scroller', scroller);
     }
 }
+
+var methods = {
+    updatePanel: UpdatePanel,
+}
+Object.assign(
+    ScrollablePanel.prototype,
+    methods
+);
 
 export default ScrollablePanel;

@@ -1,8 +1,4 @@
-import ResizeText from './ResizeText.js';
-import ResetTextObjectPosition from './ResetTextObjectPosition.js';
-import GlobZone from '../../../plugins/utils/align/GlobZone.js';
-
-const AlignIn = Phaser.Display.Align.In.QuickSet;
+import ResizeGameObject from '../../../plugins/utils/size/ResizeGameObject.js';
 
 var Layout = function (parent, newWidth, newHeight) {
     // Skip invisible sizer
@@ -21,34 +17,29 @@ var Layout = function (parent, newWidth, newHeight) {
     }
     this.resize(newWidth, newHeight);
 
-    // Layout children
-    var child, childConfig, padding;
-    var startX = this.left,
-        startY = this.top;
-    var x, y, width, height; // Align zone
-
-    // Layout text child
-    // Skip invisible child
-    child = this.child;
+    // Layout child
+    var child = this.child;
+    var newChildWidth, newChildHeight;
     if (child.visible) {
-        childConfig = child.rexSizer;
-        padding = childConfig.padding;
-        x = (startX + padding.left);
-        y = (startY + padding.top);
-        width = this.width - padding.left - padding.right;
-        height = this.height - padding.top - padding.bottom;
-        ResizeText.call(this, child, width, height);
-        GlobZone.setPosition(x, y).setSize(width, height);
-        AlignIn(child, GlobZone, childConfig.align);
-
-        // Layout text mask before reset text position
-        if (this.textMask) {
-            this.textMask.setPosition().resize();
-            this.resetChildState(this.textMask);
+        // Set size
+        if (this.scrollMode === 0) {
+            newChildWidth = this.width;
+        } else {
+            newChildHeight = this.height;
+        }
+        if (child.isRexSizer) {
+            child.layout(this, newChildWidth, newChildHeight);
+        } else {
+            ResizeGameObject(child, newChildWidth, newChildHeight);
         }
 
-        childConfig.preOffsetY = 0; // Clear preOffsetY
-        ResetTextObjectPosition.call(this);
+        this.resetChildPosition();
+
+        // Layout text mask before reset text position
+        if (this.childMask) {
+            this.childMask.setPosition().resize();
+            this.resetChildState(this.childMask);
+        }
     }
 
     return this;

@@ -40,13 +40,13 @@ class TextArea extends Sizer {
             text: textObject,
             textMask: textMask,
         });
+        var proportion = (textWidth === undefined) ? 1 : 0;
         var padding = {
             left: paddingLeft,
             right: (sliderConfig) ? textSpace : paddingRight,
             top: paddingTop,
             bottom: paddingBottom
-        }
-        var proportion = (textWidth === undefined) ? 1 : 0;
+        }        
         var expand = (textHeight === undefined);
         this.add(textBlock, proportion, 'center', padding, expand);
 

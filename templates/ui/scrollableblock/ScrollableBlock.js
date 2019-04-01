@@ -1,6 +1,9 @@
 import BaseSizer from '../basesizer/BaseSizer.js';
 import SCROLLMODE from '../utils/ScrollModeConst.js';
 import SetChild from './SetChild.js';
+import GetChildrenWidth from './GetChildrenWidth.js';
+import GetChildrenHeight from './GetChildrenHeight.js';
+import ResetChildPosition from './ResetChildPosition.js';
 import Layout from './Layout.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
@@ -20,7 +23,6 @@ class ScrollableBlock extends BaseSizer {
             minWidth = GetValue(config, 'width', undefined);
             minHeight = GetValue(config, 'height', undefined);
         }
-        scrollMode = GetValue(config, 'scrollMode', 0);
         super(scene, x, y, minWidth, minHeight, config);
 
         this.type = 'rexScrollableBlock';
@@ -31,7 +33,7 @@ class ScrollableBlock extends BaseSizer {
         this.execeedBottomState = false;
 
         this.setScrollMode(GetValue(config, 'scrollMode', true))
-        this.setClampMode(GetValue(config, 'clamplTextOY', true));
+        this.setClampMode(GetValue(config, 'clamplChildOY', true));
 
         // Add elements
         // No background object, and child does not have padding
@@ -59,15 +61,123 @@ class ScrollableBlock extends BaseSizer {
         return this;
     }
 
-
     setClampMode(mode) {
-        this.clampTextOYMode = mode;
+        this.clampChildOYMode = mode;
         return this;
+    }
+
+    get instHeight() {
+        return (this.scrollMode === 0) ? this.height : this.width;
+    }
+
+    get instWidth() {
+        return (this.scrollMode === 0) ? this.width : this.height;
+    }
+
+    get childHeight() {
+        return (this.scrollMode === 0) ? this.child.height : this.child.width;
+    }
+
+    get childWidth() {
+        return (this.scrollMode === 0) ? this.child.width : this.child.height;
+    }
+
+    get topChildOY() {
+        return 0;
+    }
+
+    get bottomChildOY() {
+        return -this.visibleHeight;
+    }
+
+    get visibleHeight() {
+        var h;
+        var childHeight = this.childHeight;
+        var instHeight = this.instHeight;
+        if (childHeight > instHeight) {
+            h = childHeight - instHeight;
+        } else {
+            h = 0;
+        }
+
+        return h;
+    }
+
+    get childOY() {
+        return this._childOY;
+    }
+
+    set childOY(oy) {
+        var topChildOY = this.topChildOY;
+        var bottomChildOY = this.bottomChildOY;
+        var childOYExceedTop = this.childOYExceedTop(oy);
+        var childOYExeceedBottom = this.childOYExeceedBottom(oy);
+
+        if (this.clampChildOYMode) {
+            if (this.instHeight > this.childHeight) {
+                oy = 0;
+            } else if (childOYExceedTop) {
+                oy = topChildOY
+            } else if (childOYExeceedBottom) {
+                oy = bottomChildOY;
+            }
+        }
+
+        if (this._childOY !== oy) {
+            this._childOY = oy;
+            this.resetChildPosition();
+        }
+
+        if (childOYExceedTop) {
+            if (!this.execeedTopState) {
+                this.emit('execeedtop', this, oy, topChildOY);
+            }
+        }
+        this.execeedTopState = childOYExceedTop;
+
+        if (childOYExeceedBottom) {
+            if (!this.execeedBottomState) {
+                this.emit('execeedbottom', this, oy, bottomChildOY);
+            }
+        }
+        this.execeedBottomState = childOYExeceedBottom;
+    }
+
+    setChildOY(oy) {
+        this.childOY = oy;
+        return this;
+    }
+
+    setChildOYByPercentage(percentage) {
+        percentage = Clamp(percentage, 0, 1);
+        this.setChildOY(-this.visibleHeight * percentage);
+        return this;
+    }
+
+    getChildOYPercentage() {
+        return (this.childOY / -this.visibleHeight);
+    }
+
+    childOYExceedTop(oy) {
+        if (oy === undefined) {
+            oy = this.childOY;
+        }
+        return (oy > this.topChildOY);
+    }
+
+    childOYExeceedBottom(oy) {
+        if (oy === undefined) {
+            oy = this.childOY;
+        }
+        return (oy < this.bottomChildOY);
     }
 }
 
 var methods = {
     setChild: SetChild,
+    getChildrenWidth: GetChildrenWidth,
+    getChildrenHeight: GetChildrenHeight,
+    resetChildPosition: ResetChildPosition,
     layout: Layout,
 }
 Object.assign(

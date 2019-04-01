@@ -24,12 +24,11 @@ class Demo extends Phaser.Scene {
 
                 // text: this.add.text(),
                 text: this.rexUI.add.BBCodeText(),
-
                 // textMask: false,
 
                 slider: {
-                    track: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, 0x260e04),
-                    thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 13, 0x7b5e57),
+                    track: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_DARK),
+                    thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 13, COLOR_LIGHT),
                 },
             })
             .layout()
