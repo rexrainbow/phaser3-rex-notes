@@ -171,6 +171,11 @@ class Base extends Container {
         return this;
     }
 
+    pin(gameObject) {
+        super.add(gameObject);
+        return this;
+    }
+
     addBackground(gameObject) {
         if (this.backgroundChildren === undefined) {
             this.backgroundChildren = [];

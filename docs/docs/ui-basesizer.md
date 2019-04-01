@@ -6,7 +6,6 @@ Base class of all ui plugins.
 
 ## Usage
 
-
 ### Bounds of sizer
 
 - Get
@@ -104,6 +103,15 @@ sizer.pushIntoBounds(bounds);
     ```javascript
     sizer.setDraggable(false);
     ```
+
+### Pin game object
+
+```javascript
+sizer.pin(gameObject);
+```
+
+!!! note
+    Method `sizer.add` is override in each sizer class usually.
 
 ### Draw bounds
 
