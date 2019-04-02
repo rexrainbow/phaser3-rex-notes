@@ -9,7 +9,7 @@ class DefaultMask extends Graphics {
             shaep = SHAPEMODE[shape];
         }
         if (padding === undefined) {
-            padding = 1;
+            padding = 0;
         }
 
         super(parent.scene);

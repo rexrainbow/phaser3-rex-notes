@@ -2,6 +2,7 @@ import ContainerLite from '../containerlite/ContainerLite.js';
 import Table from './Table.js';
 import DefaultMask from '../../utils/mask/DefaultMask.js';
 import ResizeGameObject from '../../utils/size/ResizeGameObject.js';
+import MaskToGameObject from '../../utils/mask/MaskToGameObject.js';
 
 const Container = ContainerLite;
 const Components = Phaser.GameObjects.Components;
@@ -454,8 +455,7 @@ class GridTable extends Container {
         this.updateTable(true);
 
         if (this.mask) {
-            var gameObject = (this.mask.hasOwnProperty('geometryMask')) ? this.mask.geometryMask : this.mask.bitmapMask;
-            ResizeGameObject(gameObject, width, height);
+            ResizeGameObject(MaskToGameObject(this.mask), width, height);
         }
         return this;
     }

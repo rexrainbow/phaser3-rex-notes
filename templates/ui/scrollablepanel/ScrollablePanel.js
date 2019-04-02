@@ -24,7 +24,7 @@ class ScrollablePanel extends Sizer {
 
         // Add elements
         var background = GetValue(config, 'background', undefined);
-        var panel = GetValue(config, 'panel', undefined);
+        var panelConfig = GetValue(config, 'panel', undefined);
         var sliderConfig = GetValue(config, 'slider', undefined);
         var scrollerConfig = GetValue(config, 'scrollerConfig', true);
 
@@ -40,16 +40,14 @@ class ScrollablePanel extends Sizer {
             this.addBackground(background);
         }
 
-        var panelWidth = GetValue(config, 'panelWidth', undefined);
-        var panelHeight = GetValue(config, 'panelHeight', undefined);
-        var panelMask = GetValue(config, 'panelMask', true);
-        var scrollableBlock = new ScrollableBlock(scene, {
-            scrollMode: scrollMode,
-            width: panelWidth,
-            height: panelHeight,
-            child: panel,
-            childMask: panelMask,
-        });
+        if (panelConfig === undefined) {
+            panelConfig = {};
+        }
+        panelConfig.scrollMode = scrollMode;
+        var scrollableBlock = new ScrollableBlock(scene, panelConfig);
+        var panel = GetValue(panelConfig, 'child', undefined);
+        var panelWidth = GetValue(panelConfig, 'width', undefined);
+        var panelHeight = GetValue(panelConfig, 'height', undefined);
         var proportion, padding, expand;
         if (scrollMode === 0) {
             proportion = (panelWidth === undefined) ? 1 : 0;

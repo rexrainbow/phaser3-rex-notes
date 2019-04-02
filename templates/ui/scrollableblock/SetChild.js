@@ -1,12 +1,9 @@
 import DefaultMask from '../../../plugins/utils/mask/DefaultMask.js';
 
+const GetValue = Phaser.Utils.Objects.GetValue;
 const ALIGN_LEFTTOP = Phaser.Display.Align.TOP_LEFT;
 
-var SetChild = function (gameObject, maskEnable) {
-    if (maskEnable === undefined) {
-        maskEnable = true;
-    }
-
+var SetChild = function (gameObject, maskConfig) {
     if (gameObject.setOrigin) {
         gameObject.setOrigin(0);
     }
@@ -19,10 +16,21 @@ var SetChild = function (gameObject, maskEnable) {
     this.child = gameObject;
 
     // Create mask of child object
+    var maskEnable, maskPadding;
+    if (maskConfig === true) {
+        maskEnable = true;
+        maskPadding = 0;
+    } else if (maskConfig === false) {
+        maskEnable = false;
+    } else {
+        maskEnable = GetValue(maskConfig, 'mask', true);
+        maskPadding = GetValue(maskConfig, 'padding', 0);
+    }
+
     if (maskEnable) {
-        this.childMask = new DefaultMask(this);
-        this.childMask._geometryMask = this.childMask.createGeometryMask();
-        this.add(this.childMask);
+        var maskGameObject = new DefaultMask(this, 0, maskPadding);
+        this.childMask = maskGameObject.createGeometryMask();
+        this.add(maskGameObject);
     }
 
     return this;
