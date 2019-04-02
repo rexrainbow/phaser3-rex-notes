@@ -49,6 +49,8 @@ class ScrollableBlock extends BaseSizer {
             return;
         }
         this.child = undefined;
+        this.childMask._geometryMask.destroy();
+        this.childMask._geometryMask = undefined;
         this.childMask = undefined;
         super.destroy(fromScene);
     }

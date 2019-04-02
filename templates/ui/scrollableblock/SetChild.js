@@ -21,7 +21,7 @@ var SetChild = function (gameObject, maskEnable) {
     // Create mask of child object
     if (maskEnable) {
         this.childMask = new DefaultMask(this);
-        this.child.setMask(this.childMask.createGeometryMask());
+        this.childMask._geometryMask = this.childMask.createGeometryMask();
         this.add(this.childMask);
     }
 

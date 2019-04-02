@@ -45,9 +45,14 @@ Apply mask on game object. Built-in render of phaser.
 
 ### Clear mask
 
-```javascript
-image.clearMask();
-```
+- Clear mask
+    ```javascript
+    image.clearMask();
+    ```
+- Clear mask and destroy mask object
+    ```javascript
+    image.clearMask(true);
+    ```
 
 ### Invert mask
 

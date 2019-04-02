@@ -9,8 +9,11 @@ var DrawBounds = function (graphics, color) {
         if (!child.getBounds) {
             continue;
         }
-        graphics.lineStyle(1, color).strokeRectShape(child.getBounds());
+        graphics.lineStyle(1, color).strokeRectShape(child.getBounds(globRect));
     }
     return this;
 }
+
+var globRect = new Phaser.Geom.Rectangle();
+
 export default DrawBounds;
