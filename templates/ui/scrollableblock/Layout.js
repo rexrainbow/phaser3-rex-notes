@@ -2,7 +2,7 @@ import ResizeGameObject from '../../../plugins/utils/size/ResizeGameObject.js';
 
 var Layout = function (parent, newWidth, newHeight) {
     // Skip invisible sizer
-    if (!this.visible) {
+    if (this.rexSizer.hidden) {
         return this;
     }
 
@@ -20,7 +20,7 @@ var Layout = function (parent, newWidth, newHeight) {
     // Layout child
     var child = this.child;
     var newChildWidth, newChildHeight;
-    if (child.visible) {
+    if (!child.rexSizer.hidden) {
         // Set size
         if (this.scrollMode === 0) {
             newChildWidth = this.width;

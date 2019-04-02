@@ -52,7 +52,7 @@ var createTextBox = function (scene, x, y, config) {
             // text: getBuiltInText(scene, wrapWidth, fixedWidth, fixedHeight),
             text: getBBcodeText(scene, wrapWidth, fixedWidth, fixedHeight),
 
-            action: scene.add.image(0, 0, 'nextPage').setTint(COLOR_LIGHT).setAlpha(0),
+            action: scene.add.image(0, 0, 'nextPage').setTint(COLOR_LIGHT).setVisible(false),
 
             space: {
                 left: 20,
@@ -69,7 +69,7 @@ var createTextBox = function (scene, x, y, config) {
     textBox
         .setInteractive()
         .on('pointerdown', function () {
-            this.getElement('action').setAlpha(0);
+            this.getElement('action').setVisible(false);
             if (this.isTyping) {
                 this.stop(true);
             } else {
@@ -81,7 +81,7 @@ var createTextBox = function (scene, x, y, config) {
                 return;
             }
 
-            var icon = this.getElement('action').setAlpha(1);
+            var icon = this.getElement('action').setVisible(true);
             icon.y -= 30;
             var tween = scene.tweens.add({
                 targets: icon,

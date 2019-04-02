@@ -1,5 +1,5 @@
 var GetChildrenWidth = function () {
-    if (!this.visible) {
+    if (this.rexSizer.hidden) {
         return 0;
     }
 
@@ -17,7 +17,7 @@ var GetChildrenWidth = function () {
                 if (!child) {
                     continue;
                 }
-                if (!child.visible) {
+                if (child.rexSizer.hidden) {
                     continue;
                 }
 
@@ -31,7 +31,7 @@ var GetChildrenWidth = function () {
             result += columnWidth;
         }
         this.columnWidth[i] = columnWidth;
-    }    
+    }
     return result;
 }
 

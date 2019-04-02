@@ -85,15 +85,13 @@ class NumberBar extends Sizer {
                 }
             }
 
-            var proportion = 1;
+            var proportion;
             if (this.orientation === 0) {
-                if (sliderConfig.hasOwnProperty('width')) {
-                    proportion = 0;
-                }
+                var sliderWidth = GetValue(sliderConfig, 'width', undefined);
+                proportion = (sliderWidth === undefined) ? 1 : 0;
             } else {
-                if (sliderConfig.hasOwnProperty('height')) {
-                    proportion = 0;
-                }
+                var sliderHeight = GetValue(sliderConfig, 'height', undefined);
+                proportion = (sliderHeight === undefined) ? 1 : 0;
             }
             this.add(slider, proportion, 'center', padding);
         }

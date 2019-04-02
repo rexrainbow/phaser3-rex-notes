@@ -12,8 +12,7 @@ var RunChildrenWrap = function (lineWidth) {
     var lastLine, lines = result.lines;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
         child = children[i];
-        // Skip invisible child
-        if (!child.visible) {
+        if (child.rexSizer.hidden) {
             continue;
         }
 

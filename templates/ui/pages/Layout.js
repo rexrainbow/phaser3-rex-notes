@@ -7,7 +7,7 @@ const AlignIn = Phaser.Display.Align.In.QuickSet;
 
 var Layout = function (parent, newWidth, newHeight) {
     // Skip invisible sizer
-    if (!this.visible) {
+    if (this.rexSizer.hidden) {
         return this;
     }
 

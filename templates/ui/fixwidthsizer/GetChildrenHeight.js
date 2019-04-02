@@ -1,5 +1,5 @@
 var GetChildrenHeight = function () {
-    if (!this.visible) {
+    if (this.rexSizer.hidden) {
         return 0;
     }
 

@@ -18,8 +18,7 @@ var LayoutBackgrounds = function () {
 
     for (var i = 0, cnt = backgrounds.length; i < cnt; i++) {
         child = backgrounds[i];
-        // Skip invisible child
-        if (!child.visible) {
+        if (child.rexSizer.hidden) {
             continue;
         }
         ResizeGameObject(child, width, height);

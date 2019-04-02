@@ -1,12 +1,12 @@
 var GetChildrenWidth = function (minimumMode) {
-    if (!this.visible) {
+    if (this.rexSizer.hidden) {
         return 0;
     }
 
     var result;
     if (this.scrollMode === 0) { // scroll y
         var child = this.child;
-        if (child.visible) {
+        if (!child.rexSizer.hidden) {
             result = (child.isRexSizer) ?
                 Math.max(child.minWidth, child.childrenWidth) :
                 child.width;

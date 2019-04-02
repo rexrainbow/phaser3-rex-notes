@@ -24,6 +24,9 @@ import TextAreaFactory from './textarea/TextAreaFactory.js';
 import ScrollableBlockFactory from './scrollableblock/ScrollableBlockFactory.js';
 import ScrollablePanelFactory from './scrollablepanel/ScrollablePanelFactory.js';
 
+import Hide from './utils/Hide.js';
+import Show from './utils/Show.js';
+
 class UIPlugin extends Phaser.Plugins.ScenePlugin {
     constructor(scene, pluginManager) {
         super(scene, pluginManager);
@@ -31,5 +34,16 @@ class UIPlugin extends Phaser.Plugins.ScenePlugin {
         this.add = new ObjectFactory(scene);
     }
 }
+
+var methods = {
+    hide: Hide,
+    show: Show,
+}
+
+Object.assign(
+    UIPlugin.prototype,
+    methods
+);
+
 
 export default UIPlugin;

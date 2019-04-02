@@ -6,7 +6,7 @@ const AlignIn = Phaser.Display.Align.In.QuickSet;
 
 var Layout = function (parent, newWidth, newHeight) {
     // Skip invisible sizer
-    if (!this.visible) {
+    if (this.rexSizer.hidden) {
         return this;
     }
 
@@ -30,7 +30,7 @@ var Layout = function (parent, newWidth, newHeight) {
     // Layout text child
     // Skip invisible child
     child = this.textObject;
-    if (child.visible) {
+    if (!child.rexSizer.hidden) {
         childConfig = child.rexSizer;
         padding = childConfig.padding;
         x = (startX + padding.left);

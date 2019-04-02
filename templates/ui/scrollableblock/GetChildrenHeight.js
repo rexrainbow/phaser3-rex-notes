@@ -1,5 +1,5 @@
 var GetChildrenHeight = function () {
-    if (!this.visible) {
+    if (this.rexSizer.hidden) {
         return 0;
     }
 
@@ -8,7 +8,7 @@ var GetChildrenHeight = function () {
         result = 0;
     } else { // scroll x
         var child = this.child;
-        if (child.visible) {
+        if (!child.rexSizer.hidden) {
             result = (child.isRexSizer) ?
                 Math.max(child.minHeight, child.childrenHeight) :
                 child.height;

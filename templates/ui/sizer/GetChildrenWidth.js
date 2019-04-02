@@ -1,5 +1,5 @@
 var GetChildrenWidth = function (minimumMode) {
-    if (!this.visible) {
+    if (this.rexSizer.hidden) {
         return 0;
     }
 
@@ -14,8 +14,7 @@ var GetChildrenWidth = function (minimumMode) {
         // Get summation of minimum width
         for (var i = 0, cnt = children.length; i < cnt; i++) {
             child = children[i];
-            // Skip invisible child
-            if (!child.visible) {
+            if (child.rexSizer.hidden) {
                 continue;
             }
 
@@ -40,8 +39,7 @@ var GetChildrenWidth = function (minimumMode) {
             if (!child.hasOwnProperty('rexSizer')) {
                 continue;
             }
-            // Skip invisible child
-            if (!child.visible) {
+            if (child.rexSizer.hidden) {
                 continue;
             }
 

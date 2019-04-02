@@ -22,6 +22,9 @@ import TextArea from './textarea/TextArea.js';
 import ScrollableBlock from './scrollableblock/ScrollableBlock.js';
 import ScrollablePanel from './scrollablepanel/ScrollablePanel.js';
 
+import Hide from './utils/Hide.js';
+import Show from './utils/Show.js';
+
 export default {
     RoundRectangle: RoundRectangle,
     BBCodeText: BBCodeText,
@@ -46,4 +49,7 @@ export default {
     TextArea: TextArea,
     ScrollableBlock: ScrollableBlock,
     ScrollablePanel: ScrollablePanel,
+
+    hide: Hide,
+    show: Show,
 };
