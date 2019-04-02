@@ -28,6 +28,10 @@ class Demo extends Phaser.Scene {
                     cellHeight: (scrollMode === 0) ? 60 : undefined,
 
                     columns: 2,
+
+                    mask: {
+                        padding: 1,
+                    },
                 },
 
                 slider: {

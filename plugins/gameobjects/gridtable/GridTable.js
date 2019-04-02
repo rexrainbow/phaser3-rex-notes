@@ -3,6 +3,7 @@ import Table from './Table.js';
 import DefaultMask from '../../utils/mask/DefaultMask.js';
 import ResizeGameObject from '../../utils/size/ResizeGameObject.js';
 import MaskToGameObject from '../../utils/mask/MaskToGameObject.js';
+import IsPlainObject from '../../utils/object/IsPlainObject.js';
 
 const Container = ContainerLite;
 const Components = Phaser.GameObjects.Components;
@@ -43,13 +44,7 @@ class GridTable extends Container {
             this.on('cellinvisible', callback, scope);
         }
 
-        var mask = GetValue(config, 'mask', true);
-        if (mask === true) {
-            mask = this.getDefaultMask();
-        }
-        if (mask) {
-            this.setMask(mask);
-        }
+        this.setMask(GetValue(config, 'mask', true));
 
         this.setScrollMode(GetValue(config, 'scrollMode', 0));
         this.setClampMode(GetValue(config, 'clamplTableOXY', true));
@@ -435,11 +430,26 @@ class GridTable extends Container {
     }
 
     // Internal
-    getDefaultMask() {
-        var shape = new DefaultMask(this);
+    getDefaultMask(maskConfig) {
+        var padding = GetValue(maskConfig, 'padding', 0);
+        var shape = new DefaultMask(this, 0, padding);
         this.add(shape);
         var mask = shape.createGeometryMask();
         return mask;
+    }
+
+    setMask(maskConfig) {
+        var mask;
+        if ((maskConfig === true) || (IsPlainObject(maskConfig))) {
+            mask = this.getDefaultMask(maskConfig);
+        } else if (maskConfig === false) {
+            this.clearMask();
+            return this;
+        } else {
+            mask = maskConfig;
+        }
+        super.setMask(mask);
+        return this;
     }
 
     resize(width, height) {
