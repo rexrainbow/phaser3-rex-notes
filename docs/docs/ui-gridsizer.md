@@ -89,7 +89,9 @@ var gridSizer = scene.rexUI.add.gridSizer(x, y, width, height, column, row);
 - `height` : Minimum height. i.e. Hieght of this gridSizer will larger then this value.
 - `column` : Amount of column grids.
 - `row` : Amount of row grids.
-- `columnProportions`, `rowProportions` : Proportion of each column or row.
+- `columnProportions`, `rowProportions` : Proportion of each column/row.
+    - Number : Apply this number proportion to each column/row
+    - Number array : Apply proportion of column/row through elements of this number array.
 
 ### Custom class
 

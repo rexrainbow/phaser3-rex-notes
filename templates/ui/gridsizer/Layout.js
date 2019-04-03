@@ -74,8 +74,6 @@ var Layout = function (parent, newWidth, newHeight) {
                 continue;
             }
 
-            childConfig = child.rexSizer;
-            padding = childConfig.padding;
             newChildWidth = GetExpandedChildWidth(child, colWidth);
             newChildHeight = GetExpandedChildHeight(child, rowHeight);
             if (child.isRexSizer) {
@@ -84,6 +82,8 @@ var Layout = function (parent, newWidth, newHeight) {
                 ResizeGameObject(child, newChildWidth, newChildHeight);
             }
 
+            childConfig = child.rexSizer;
+            padding = childConfig.padding;
             x = (itemX + padding.left);
             width = colWidth - padding.left - padding.right;
             y = (itemY + padding.top);
