@@ -1,5 +1,8 @@
 import MaskToGameObject from './MaskToGameObject.js';
 
+const Intersects = Phaser.Geom.Intersects.RectangleToRectangle;
+const Overlaps = Phaser.Geom.Rectangle.Overlaps;
+
 var MaskChildren = function (parent, mask) {
     var children = parent.getAllChildren();
     var parentBounds = parent.getBounds();
@@ -20,13 +23,18 @@ var MaskChildren = function (parent, mask) {
             visiblePointsNumber = containsPoints(parentBounds, childBounds);
             switch (visiblePointsNumber) {
                 case 4: // 4 points are all inside visible window, set visible
-                    child.setVisible(true).clearMask();
+                    showAll(child);
                     break;
-                case 0: // No point is inside visible window, set invisible
-                    child.setVisible(false).clearMask();
+                case 0: // No point is inside visible window
+                    // Parent intersects with child, or parent is inside child, set visible, and apply mask
+                    if (Intersects(parentBounds, childBounds) || Overlaps(parentBounds, childBounds)) {
+                        showSome(child, mask);
+                    } else { // Set invisible
+                        showNone(child);
+                    }
                     break;
                 default: // Part of points are inside visible window, set visible, and apply mask
-                    child.setVisible(true).setMask(mask);
+                    showSome(child, mask);
                     break;
             }
         } else {
@@ -48,5 +56,17 @@ var containsPoints = function (rectA, rectB) {
     result += rectA.contains(right, bottom) ? 1 : 0;
     return result;
 };
+
+var showAll = function (child) {
+    child.setVisible(true).clearMask();
+}
+
+var showSome = function (child, mask) {
+    child.setVisible(true).setMask(mask);
+}
+
+var showNone = function (child) {
+    child.setVisible(false).clearMask();
+}
 
 export default MaskChildren;
