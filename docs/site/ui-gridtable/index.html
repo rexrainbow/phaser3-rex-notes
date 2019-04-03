@@ -4060,8 +4060,8 @@
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gridTable</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">gridTable</span><span class="p">({</span>
     <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">width</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
-    <span class="nx">height</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
 
     <span class="nx">scrollMode</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
 
@@ -4069,11 +4069,11 @@
     <span class="nx">background</span><span class="o">:</span> <span class="nx">backgroundGameObject</span><span class="p">,</span>
 
     <span class="nx">table</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">width</span><span class="o">:</span> <span class="mi">250</span><span class="p">,</span>
-        <span class="nx">height</span><span class="o">:</span> <span class="mi">400</span><span class="p">,</span>
+        <span class="nx">width</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+        <span class="nx">height</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
 
-        <span class="nx">cellWidth</span><span class="o">:</span> <span class="mi">120</span><span class="p">,</span>
-        <span class="nx">cellHeight</span><span class="o">:</span> <span class="mi">60</span><span class="p">,</span>
+        <span class="nx">cellWidth</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+        <span class="nx">cellHeight</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
         <span class="nx">columns</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
     <span class="p">},</span>
 
@@ -4118,18 +4118,34 @@
 <li>String (<code>'p%+n'</code>) : Position based on visible window. See <a href="../anchor/#create-instance">anchor</a>.</li>
 </ul>
 </li>
-<li><code>width</code>, <code>height</code> : Minimum width, minimum height.</li>
+<li><code>width</code>, <code>height</code> : Minimum width, minimum height.<ul>
+<li>Set <code>width</code> to <code>undefined</code>, and <code>table.width</code> is not <code>undefined</code>, will count width via table + slider.</li>
+<li>Set <code>height</code> to <code>undefined</code>, and <code>table.height</code> is not <code>undefined</code>, will count height via table + slider.</li>
+</ul>
+</li>
 <li><code>scrollMode</code> : Scroll grid table vertically, or horizontally.<ul>
 <li><code>0</code>, <code>'vertical'</code>, or <code>'v'</code> : Scroll grid table vertically. Default value.</li>
 <li><code>1</code>, <code>'horizontal'</code>, or <code>'h'</code> : Scroll grid table horizontally.</li>
 </ul>
 </li>
 <li><code>background</code> : Game object of background, optional. This background game object will be resized to fit the size of grid table.</li>
-<li><code>table</code> : Configuration of grid table.<ul>
-<li><code>table.width</code> : Width of table, in pixels.</li>
-<li><code>table.height</code> : Height of table, in pixels.</li>
-<li><code>table.cellHeight</code> : Default height of each cell, in pixels</li>
-<li><code>table.cellWidth</code> : Width of each cell, in pixels.</li>
+<li><code>table</code> : Configuration of grid table core.<ul>
+<li><code>table.width</code> : Width of table, in pixels.<ul>
+<li>Set to <code>undefined</code> to expand table width to fit this grid table object.</li>
+</ul>
+</li>
+<li><code>table.height</code> : Height of table, in pixels.<ul>
+<li>Set to <code>undefined</code> to expand table height to fit this grid table object.</li>
+</ul>
+</li>
+<li><code>table.cellHeight</code> : Default height of each cell.<ul>
+<li>Expand cell height to fit table height : set <code>cellHeight</code> to <code>undefined</code>, and <code>scrollMode</code> is <code>'horizontal'</code>.</li>
+</ul>
+</li>
+<li><code>table.cellWidth</code> : Width of each cell.<ul>
+<li>Expand cell width to fit table width : set <code>cellWidth</code> to <code>undefined</code>, and <code>scrollMode</code> is <code>'vertical'</code>.    </li>
+</ul>
+</li>
 <li><code>table.columns</code> : Columns count of each row.</li>
 </ul>
 </li>
@@ -4156,7 +4172,7 @@
 </li>
 </ul>
 </li>
-<li><code>createCellContainerCallback</code> : Callback to return container object of each visible cell.<ul>
+<li><code>createCellContainerCallback</code> : Callback to return a container object of each visible cell.<ul>
 <li>Properties of <code>cell</code> parameter<ul>
 <li><code>cell.scene</code> : Scene of this grid table object.</li>
 <li><code>cell.width</code> : Width of this cell, in pixels.</li>
@@ -4165,7 +4181,7 @@
 <li><code>cell.index</code> : Index of this cell.</li>
 </ul>
 </li>
-<li><strong>Set origin of returned cell container to (0, 0)</strong></li>
+<li><strong>Origin of returned cell container will be set to (0, 0)</strong></li>
 </ul>
 </li>
 <li><code>space</code> : Pads spaces<ul>
