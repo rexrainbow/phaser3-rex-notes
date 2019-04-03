@@ -1,8 +1,9 @@
-var GetExpandedChildHeight = function (child, proportionLength) {
+var GetExpandedChildHeight = function (child, rowHeight) {
     var newHeight;
-    if (proportionLength > 0) {
-        var padding = child.rexSizer.padding;
-        newHeight = proportionLength - padding.top - padding.bottom;
+    var childConfig = child.rexSizer;    
+    if (childConfig.expand) {
+        var padding = childConfig.padding;
+        newHeight = rowHeight - padding.top - padding.bottom;
     }
     return newHeight;
 }

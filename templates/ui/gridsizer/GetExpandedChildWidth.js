@@ -1,8 +1,9 @@
-var GetExpandedChildWidth = function (child, proportionLength) {
+var GetExpandedChildWidth = function (child, colWidth) {
     var newWidth;
-    if (proportionLength > 0) {
-        var padding = child.rexSizer.padding;
-        newWidth = proportionLength - padding.left - padding.right;
+    var childConfig = child.rexSizer;    
+    if (childConfig.expand) {
+        var padding = childConfig.padding;
+        newWidth = colWidth - padding.left - padding.right;
     }
     return newWidth;
 }

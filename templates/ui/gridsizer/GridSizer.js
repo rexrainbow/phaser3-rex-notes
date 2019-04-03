@@ -96,7 +96,7 @@ class GridSizer extends BaseSizer {
             paddingConfig = 0;
         }
         if (expand === undefined) {
-            expand = false;
+            expand = true;
         }
 
         var config = this.getSizerConfig(gameObject);

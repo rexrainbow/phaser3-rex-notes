@@ -18,7 +18,7 @@ var Layout = function (parent, newWidth, newHeight) {
 
     // Set size
     if (newWidth === undefined) {
-        if (parent && (totalColumnProportions > 0)) {
+        if (parent && (totalColumnProportions > 0)) { // Expand to parent width
             var padding = this.rexSizer.padding;
             newWidth = parent.width - padding.left - padding.right;
         } else {
@@ -26,7 +26,7 @@ var Layout = function (parent, newWidth, newHeight) {
         }
     }
     if (newHeight === undefined) {
-        if (parent && (totalRowProportions > 0)) {
+        if (parent && (totalRowProportions > 0)) { // Expand to parent height
             var padding = this.rexSizer.padding;
             newHeight = parent.height - padding.top - padding.bottom;
         } else {
@@ -37,15 +37,13 @@ var Layout = function (parent, newWidth, newHeight) {
 
     var proportionWidthLength;
     if (totalColumnProportions > 0) {
-        var remainder = this.width - this.childrenWidth;
-        proportionWidthLength = remainder / totalColumnProportions;
+        proportionWidthLength = (this.width - this.childrenWidth) / totalColumnProportions;
     } else {
         proportionWidthLength = 0;
     }
     var proportionHeightLength;
     if (totalRowProportions > 0) {
-        var remainder = this.height - this.childrenWidth;
-        proportionHeightLength = remainder / totalRowProportions;
+        proportionHeightLength = (this.height - this.childrenHeight) / totalRowProportions;
     } else {
         proportionHeightLength = 0;
     }
@@ -58,84 +56,47 @@ var Layout = function (parent, newWidth, newHeight) {
         itemY = startY;
     var x, y, width, height; // Align zone
     var newChildWidth, newChildHeight;
-
     // Layout grid children
-    var childWidthProportion, childHeightProportion;
+    var colProportion, rowProportion,
+        colWidth, rowHeight;
     for (var rowIndex = 0; rowIndex < this.rowCount; rowIndex++) {
-        childHeightProportion = this.rowProportions[rowIndex] || 0;
+        rowProportion = this.rowProportions[rowIndex] || 0;
+        rowHeight = (rowProportion === 0) ? this.rowHeight[rowIndex] : (rowProportion * proportionHeightLength);
+
         itemX = startX;
         for (var columnIndex = 0; columnIndex < this.columnCount; columnIndex++) {
+            colProportion = this.columnProportions[columnIndex] || 0;
+            colWidth = (colProportion === 0) ? this.columnWidth[columnIndex] : (colProportion * proportionWidthLength);
+
             child = this.gridChildren[(rowIndex * this.columnCount) + columnIndex];
-            if (!child) {
-                itemX += this.columnWidth[columnIndex];
-                continue;
-            }
-            if (child.rexSizer.hidden) {
-                itemX += this.columnWidth[columnIndex];
+            if ((!child) || (child.rexSizer.hidden)) {
+                itemX += colWidth;
                 continue;
             }
 
             childConfig = child.rexSizer;
             padding = childConfig.padding;
-            newChildWidth = undefined;
-            newChildHeight = undefined;
-            childWidthProportion = this.columnProportions[columnIndex] || 0;
-
+            newChildWidth = GetExpandedChildWidth(child, colWidth);
+            newChildHeight = GetExpandedChildHeight(child, rowHeight);
             if (child.isRexSizer) {
-                child.layout(
-                    this,
-                    GetExpandedChildWidth(child, childWidthProportion * proportionWidthLength),
-                    GetExpandedChildHeight(child, childHeightProportion * proportionHeightLength),
-                );
-            }
-
-            switch (childWidthProportion) {
-                case 0:
-                case undefined:
-                    x = (itemX + padding.left);
-                    width = child.width;
-                    itemX += this.columnWidth[columnIndex];
-                    break;
-                default:
-                    x = (itemX + padding.left);
-                    width = (childWidthProportion * proportionWidthLength) - padding.left - padding.right;
-                    newChildWidth = width;
-                    itemX += (width + padding.left + padding.right);
-                    break;
-            }
-            switch (childHeightProportion) {
-                case 0:
-                case undefined:
-                    y = (itemY + padding.top);
-                    height = child.height;
-                    break;
-                default:
-                    y = (itemY + padding.top);
-                    height = (childHeightProportion * proportionHeightLength) - padding.top - padding.bottom;
-                    newChildHeight = height;
-                    break;
-            }
-
-            // Set size of child
-            if (!child.isRexSizer) { // Don't resize sizer again
+                child.layout(this, newChildWidth, newChildHeight);
+            } else {
                 ResizeGameObject(child, newChildWidth, newChildHeight);
             }
+
+            x = (itemX + padding.left);
+            width = colWidth - padding.left - padding.right;
+            y = (itemY + padding.top);
+            height = rowHeight - padding.top - padding.bottom;
 
             GlobZone.setPosition(x, y).setSize(width, height);
             AlignIn(child, GlobZone, childConfig.align);
             this.resetChildState(child);
+
+            itemX += colWidth;
         }
 
-        switch (childHeightProportion) {
-            case 0:
-            case undefined:
-                itemY += this.rowHeight[rowIndex];
-                break;
-            default:
-                itemY += (childHeightProportion * proportionHeightLength);
-                break;
-        }
-
+        itemY += rowHeight;
     }
 
 

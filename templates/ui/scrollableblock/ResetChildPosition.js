@@ -11,7 +11,9 @@ var ResetChildPosition = function () {
     this.child.setPosition(x, y);
     this.resetChildState(this.child);
 
-    MaskChildren(this, this.childMask);
+    if (this.childMask) {
+        MaskChildren(this, this.childMask);
+    }
 };
 
 export default ResetChildPosition;

@@ -22,20 +22,20 @@ var Layout = function (parent, newWidth, newHeight) {
     }
     this.resize(newWidth, newHeight);
 
-    var remainder;
-    if (this.orientation === 0) {
-        remainder = this.width - this.childrenWidth;
-    } else {
-        remainder = this.height - this.childrenHeight;
-    }
     var proportionLength;
-    if ((remainder > 0) && (this.childrenProportion > 0)) {
-        if (this.orientation === 0) {
-            remainder = this.width - this.getChildrenWidth(false);
+    if (this.childrenProportion > 0) {
+        var remainder = (this.orientation === 0) ?
+            (this.width - this.childrenWidth) :
+            (this.height - this.childrenHeight);
+
+        if (remainder > 0) {
+            remainder = (this.orientation === 0) ?
+                (this.width - this.getChildrenWidth(false)) :
+                (this.height - this.getChildrenHeight(false));
+            proportionLength = remainder / this.childrenProportion;
         } else {
-            remainder = this.height - this.getChildrenHeight(false);
+            proportionLength = 0;
         }
-        proportionLength = remainder / this.childrenProportion;
     } else {
         proportionLength = 0;
     }
@@ -70,30 +70,36 @@ var Layout = function (parent, newWidth, newHeight) {
 
         // Set position
         if (this.orientation === 0) { // x
+            x = (itemX + padding.left);
             if ((childConfig.proportion === 0) || (proportionLength === 0)) {
                 width = child.width;
             } else {
                 width = (childConfig.proportion * proportionLength);
             }
-            x = (itemX + padding.left);
-            itemX += (width + padding.left + padding.right);
+
             y = (itemY + padding.top);
             height = (this.height - padding.top - padding.bottom);
         } else { // y
+            x = (itemX + padding.left);
+            width = (this.width - padding.left - padding.right);
+
+            y = (itemY + padding.top);
             if ((childConfig.proportion === 0) || (proportionLength === 0)) {
                 height = child.height;
             } else {
                 height = (childConfig.proportion * proportionLength);
             }
-            y = (itemY + padding.top);
-            itemY += (height + padding.top + padding.bottom);
-            x = (itemX + padding.left);
-            width = (this.width - padding.left - padding.right);
         }
 
         GlobZone.setPosition(x, y).setSize(width, height);
         AlignIn(child, GlobZone, childConfig.align);
         this.resetChildState(child);
+
+        if (this.orientation === 0) { // x
+            itemX += (width + padding.left + padding.right);
+        } else { // y
+            itemY += (height + padding.top + padding.bottom);
+        }
     }
 
     // Layout background children

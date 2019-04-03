@@ -48,13 +48,9 @@ class Demo extends Phaser.Scene {
             })
             .layout()
         //.drawBounds(this.add.graphics(), 0xff0000);
-
-        this.print = this.add.text(0, 580, '');
     }
 
-    update() {
-        this.print.text = this.game.loop.actualFps;
-    }
+    update() {}
 }
 
 var createGrid = function (scene, col, row) {

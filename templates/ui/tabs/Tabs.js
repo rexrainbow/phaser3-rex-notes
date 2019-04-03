@@ -66,7 +66,7 @@ class Tabs extends GridSizer {
                 top: (topButtons) ? 0 : paddingTop,
                 bottom: (bottomButtons) ? 0 : paddingBottom
             };
-            this.add(panel, 1, 1, undefined, padding, false);
+            this.add(panel, 1, 1, 'center', padding, true);
         }
 
         if (leftButtons) {
@@ -83,7 +83,7 @@ class Tabs extends GridSizer {
                 left: paddingLeft,
                 top: leftButtonsOffset,
             };
-            this.add(leftButtonsSizer, 0, 1, undefined, padding, false);
+            this.add(leftButtonsSizer, 0, 1, 'top', padding, false);
         }
 
         if (rightButtons) {
@@ -100,7 +100,7 @@ class Tabs extends GridSizer {
                 right: paddingRight,
                 top: rightButtonsOffset,
             };
-            this.add(rightButtonsSizer, 2, 1, undefined, padding, false);
+            this.add(rightButtonsSizer, 2, 1, 'top', padding, false);
         }
 
         if (topButtons) {
@@ -117,7 +117,7 @@ class Tabs extends GridSizer {
                 top: paddingTop,
                 left: toptButtonsOffset,
             };
-            this.add(topButtonsSizer, 1, 0, undefined, padding, false);
+            this.add(topButtonsSizer, 1, 0, 'left', padding, false);
         }
 
         if (bottomButtons) {
@@ -134,7 +134,7 @@ class Tabs extends GridSizer {
                 bottom: paddingBottom,
                 left: bottomButtonsOffset,
             };
-            this.add(bottomButtonsSizer, 1, 2, undefined, padding, false);
+            this.add(bottomButtonsSizer, 1, 2, 'left', padding, false);
         }
 
         this.addChildrenMap('background', background);
