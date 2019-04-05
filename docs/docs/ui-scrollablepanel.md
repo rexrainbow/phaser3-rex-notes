@@ -1,6 +1,6 @@
 ## Introduction
 
-A container with a text, slider, and scroller.
+A container with a panel(ui component), slider, and scroller.
 
 - Author: Rex
 - Game object
@@ -9,11 +9,11 @@ A container with a text, slider, and scroller.
 
 [Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/ui/ui-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexuiplugin.min.js)
 
-[Class](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/ui/textarea/TextArea.js)
+[Class](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/ui/scollablepanel/TextArea.js)
 
 ## Usage
 
-[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-textarea)
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-scollablepanel)
 
 ### Install scene plugin
 
@@ -41,18 +41,23 @@ var game = new Phaser.Game(config);
 ### Add text-area object
 
 ```javascript
-var textArea = scene.rexUI.add.textArea({
+var scrollablePanel = scene.rexUI.add.scrollablePanel({
     x: 0,
     y: 0,
     width: 2,
     height: 2,
 
+    scrollMode: 0,
+
     // Elements
     background: backgroundGameObject,
 
-    text: textGameObject,
-    // textWidth: undefined,
-    // textHeight: undefined,
+    panel: {
+        child: panelGameObject,
+        mask: {
+            padding: 0
+        }
+    }.
 
     slider: {
         track: trackGameObject,
@@ -70,7 +75,7 @@ var textArea = scene.rexUI.add.textArea({
         top: 0,
         bottom: 0,
 
-        text: 0,
+        panel: 0,
     },
 
     name: '',
@@ -81,10 +86,15 @@ var textArea = scene.rexUI.add.textArea({
     - Number : World position in pixels.
     - String (`'p%+n'`) : Position based on visible window. See [anchor](anchor.md#create-instance).
 - `width`, `height` : Minimum width, minimum height.
-- `background` : Game object of background, optional. This background game object will be resized to fit the size of text area.
-- `text` : Game object of text.
-- `textWidth` : Fixed width of text game object. Set `undefined` to ignore this feature.
-- `textHeight` : Fixed height of text game object. Set `undefined` to ignore this feature.
+- `scrollMode` : Scroll panel vertically, or horizontally.
+    - `0`, `'vertical'`, or `'v'` : Scroll panel vertically. Default value.
+    - `1`, `'horizontal'`, or `'h'` : Scroll panel horizontally.
+- `background` : Game object of background, optional. This background game object will be resized to fit the size of scroll-able panel.
+- `panel` : Configuration of panel game object.
+    - `panel.child` : Panel game object.
+    - `panel.mask` : Configuration of panel's mask.
+        - Set `panel.mask` to `false` to disable masking.
+    - `panel.mask.padding` : Extend mask with padding. Default value is `0`.
 - `slider` : Componments of slider, optional.
     - `slider.background` : Game object of slider background, optional.
     - `slider.track` : Game object of track.
@@ -100,14 +110,14 @@ var textArea = scene.rexUI.add.textArea({
         - Set `false` to disable it.
 - `space` : Pads spaces
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
-    - `space.text` : Space between text object and slider object.
-- `name` : Set name of this textArea.
+    - `space.panel` : Space between panel object and slider object.
+- `name` : Set name of this panel.
 
 ### Custom class
 
 - Define class
     ```javascript
-    class MyTextArea extends RexPlugins.UI.TextArea {
+    class MyPanel extends RexPlugins.UI.ScrollablePanel {
         constructor(scene, config) {
             super(scene, config);
             // ...
@@ -117,7 +127,7 @@ var textArea = scene.rexUI.add.textArea({
     ```
 - Create instance
     ```javascript
-    var textArea = new MyTextArea(scene, config);
+    var scrollablePanel = new MyPanel(scene, config);
     ```
 
 ### Layout children
@@ -125,19 +135,8 @@ var textArea = scene.rexUI.add.textArea({
 Arrange position of all elements.
 
 ```javascript
-textArea.layout();
+scrollablePanel.layout();
 ```
-
-### Content
-
-- Set
-    ```javascript
-    textArea.setText(text);
-    ```
-- Get
-   ```javascript
-   var text = textArea.text;
-   ```
 
 ### Other properties
 
@@ -148,26 +147,26 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
 - Get element
     - Background game object
         ```javascript
-        var background = textArea.getElement('background');
+        var background = scrollablePanel.getElement('background');
         ```
-    - Text game object
+    - Panel game object
         ```javascript
-        var text = textArea.getElement('text');
+        var panel = scrollablePanel.getElement('panel');
         ```
     - Slider
         - Track
             ```javascript
-            var track = textArea.getElement('slider.track');
+            var track = scrollablePanel.getElement('slider.track');
             ```
         - Thumb
             ```javascript
-            var thumb = textArea.getElement('slider.thumb');
+            var thumb = scrollablePanel.getElement('slider.thumb');
             ```
     - Scroller
         ```javascript
-        var scroller = textArea.getElement('scroller');
+        var scroller = scrollablePanel.getElement('scroller');
         ```
 - Get by name
     ```javascript
-    var gameObject = textArea.getElement('#' + name);
+    var gameObject = scrollablePanel.getElement('#' + name);
     ```

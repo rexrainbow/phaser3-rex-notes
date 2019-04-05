@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/interpolation/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/ui-scrollablepanel/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Interpolation - Notes of Phaser 3</title>
+        <title>Scroll-able panel - Notes of Phaser 3</title>
       
     
     
@@ -128,7 +128,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Interpolation
+                Scroll-able panel
               </span>
             
           
@@ -2607,12 +2607,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11" type="checkbox" id="nav-11">
     
     <label class="md-nav__link" for="nav-11">
       Math
@@ -2628,12 +2626,10 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11-1" type="checkbox" id="nav-11-1" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-11-1" type="checkbox" id="nav-11-1">
     
     <label class="md-nav__link" for="nav-11-1">
       Max, min
@@ -2649,52 +2645,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Interpolation
-      </label>
-    
-    <a href="./" title="Interpolation" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../interpolation/" title="Interpolation" class="md-nav__link">
       Interpolation
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -3252,10 +3207,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-14" type="checkbox" id="nav-14">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-14" type="checkbox" id="nav-14" checked>
     
     <label class="md-nav__link" for="nav-14">
       UI
@@ -3451,11 +3408,107 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../ui-scrollablepanel/" title="Scroll-able panel" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Scroll-able panel
+      </label>
+    
+    <a href="./" title="Scroll-able panel" class="md-nav__link md-nav__link--active">
       Scroll-able panel
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-scene-plugin" title="Install scene plugin" class="md-nav__link">
+    Install scene plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-text-area-object" title="Add text-area object" class="md-nav__link">
+    Add text-area object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-class" title="Custom class" class="md-nav__link">
+    Custom class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#layout-children" title="Layout children" class="md-nav__link">
+    Layout children
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-properties" title="Other properties" class="md-nav__link">
+    Other properties
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-element" title="Get element" class="md-nav__link">
+    Get element
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -3874,9 +3927,64 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#usage" title="Usage" class="md-nav__link">
     Usage
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-scene-plugin" title="Install scene plugin" class="md-nav__link">
+    Install scene plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-text-area-object" title="Add text-area object" class="md-nav__link">
+    Add text-area object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-class" title="Custom class" class="md-nav__link">
+    Custom class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#layout-children" title="Layout children" class="md-nav__link">
+    Layout children
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#other-properties" title="Other properties" class="md-nav__link">
+    Other properties
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-element" title="Get element" class="md-nav__link">
+    Get element
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -3896,52 +4004,184 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/interpolation.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/ui-scrollablepanel.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Interpolation</h1>
+                  <h1>Scroll-able panel</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Calculates interpolation value over t (0~1), built-in method of phaser.</p>
+<p>A container with a panel(ui component), slider, and scroller.</p>
 <ul>
-<li>Author: Richard Davey</li>
+<li>Author: Rex</li>
+<li>Game object</li>
 </ul>
+<h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/ui/ui-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexuiplugin.min.js">minify</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/ui/scollablepanel/TextArea.js">Class</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-scollablepanel">Sample code</a></p>
+<h3 id="install-scene-plugin">Install scene plugin<a class="headerlink" href="#install-scene-plugin" title="Permanent link">&para;</a></h3>
+<p>Install plugin in <a href="../game/#configuration">configuration of game</a></p>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">UIPlugin</span> <span class="nx">from</span> <span class="s1">&#39;rexTemplates/ui/ui-plugin.js&#39;</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">scene</span><span class="o">:</span> <span class="p">[{</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexUI&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">UIPlugin</span><span class="p">,</span>
+            <span class="nx">mapping</span><span class="o">:</span> <span class="s1">&#39;rexUI&#39;</span>
+        <span class="p">},</span>
+        <span class="c1">// ...</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</pre></div>
+
+<h3 id="add-text-area-object">Add text-area object<a class="headerlink" href="#add-text-area-object" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">scrollablePanel</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">scrollablePanel</span><span class="p">({</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+
+    <span class="nx">scrollMode</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+
+    <span class="c1">// Elements</span>
+    <span class="nx">background</span><span class="o">:</span> <span class="nx">backgroundGameObject</span><span class="p">,</span>
+
+    <span class="nx">panel</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">child</span><span class="o">:</span> <span class="nx">panelGameObject</span><span class="p">,</span>
+        <span class="nx">mask</span><span class="o">:</span> <span class="p">{</span>
+            <span class="nx">padding</span><span class="o">:</span> <span class="mi">0</span>
+        <span class="p">}</span>
+    <span class="p">}.</span>
+
+    <span class="nx">slider</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">track</span><span class="o">:</span> <span class="nx">trackGameObject</span><span class="p">,</span>
+        <span class="nx">thumb</span><span class="o">:</span> <span class="nx">thumbGameObject</span><span class="p">,</span>
+    <span class="p">},</span>
+
+    <span class="nx">scroller</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">slidingDeceleration</span><span class="o">:</span> <span class="mi">5000</span><span class="p">,</span>
+        <span class="nx">backDeceleration</span><span class="o">:</span> <span class="mi">2000</span><span class="p">,</span>
+    <span class="p">},</span>
+
+    <span class="nx">space</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">left</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">right</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">top</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">bottom</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+
+        <span class="nx">panel</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="p">},</span>
+
+    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+<span class="p">});</span>
+</pre></div>
+
 <ul>
-<li>Linear interpolation (lerp)
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">Linear</span><span class="p">(</span><span class="nx">p0</span><span class="p">,</span> <span class="nx">p1</span><span class="p">,</span> <span class="nx">t</span><span class="p">);</span>
+<li><code>x</code>, <code>y</code> : Position of this object, it is valid when this object is the top object.<ul>
+<li>Number : World position in pixels.</li>
+<li>String (<code>'p%+n'</code>) : Position based on visible window. See <a href="../anchor/#create-instance">anchor</a>.</li>
+</ul>
+</li>
+<li><code>width</code>, <code>height</code> : Minimum width, minimum height.</li>
+<li><code>scrollMode</code> : Scroll panel vertically, or horizontally.<ul>
+<li><code>0</code>, <code>'vertical'</code>, or <code>'v'</code> : Scroll panel vertically. Default value.</li>
+<li><code>1</code>, <code>'horizontal'</code>, or <code>'h'</code> : Scroll panel horizontally.</li>
+</ul>
+</li>
+<li><code>background</code> : Game object of background, optional. This background game object will be resized to fit the size of scroll-able panel.</li>
+<li><code>panel</code> : Configuration of panel game object.<ul>
+<li><code>panel.child</code> : Panel game object.</li>
+<li><code>panel.mask</code> : Configuration of panel's mask.<ul>
+<li>Set <code>panel.mask</code> to <code>false</code> to disable masking.</li>
+</ul>
+</li>
+<li><code>panel.mask.padding</code> : Extend mask with padding. Default value is <code>0</code>.</li>
+</ul>
+</li>
+<li><code>slider</code> : Componments of slider, optional.<ul>
+<li><code>slider.background</code> : Game object of slider background, optional.</li>
+<li><code>slider.track</code> : Game object of track.</li>
+<li><code>slider.thumb</code> : Game object of thumb.</li>
+<li><code>slider.input</code> :<ul>
+<li><code>'drag'</code> : Control slider by dragging thumb game object. Default setting.</li>
+<li><code>'click'</code> : Control slider by touching track game object.</li>
+<li><code>'none'</code> : Disable sider controlling.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>scroller</code> : Configuration of scroller behavior.<ul>
+<li><code>scroller.slidingDeceleration</code> : Deceleration of slow down when dragging released.<ul>
+<li>Set <code>false</code> to disable it.</li>
+</ul>
+</li>
+<li><code>scroller.backDeceleration</code> : Deceleration of pull back when out of bounds.<ul>
+<li>Set <code>false</code> to disable it.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>space</code> : Pads spaces<ul>
+<li><code>space.left</code>, <code>space.right</code>, <code>space.top</code>, <code>space.bottom</code> : Space of bounds.</li>
+<li><code>space.panel</code> : Space between panel object and slider object.</li>
+</ul>
+</li>
+<li><code>name</code> : Set name of this panel.</li>
+</ul>
+<h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Define class
+    <div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">MyPanel</span> <span class="kr">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">ScrollablePanel</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
 </pre></div></li>
-<li>Smooth interpolation
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">Interpolation</span><span class="p">.</span><span class="nx">SmoothStep</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span>
-</pre></div><ul>
-<li><code>t</code> : 0~1</li>
+<li>Create instance
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">scrollablePanel</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyPanel</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h3 id="layout-children">Layout children<a class="headerlink" href="#layout-children" title="Permanent link">&para;</a></h3>
+<p>Arrange position of all elements.</p>
+<div class="codehilite"><pre><span></span><span class="nx">scrollablePanel</span><span class="p">.</span><span class="nx">layout</span><span class="p">();</span>
+</pre></div>
+
+<h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
+<p>See <a href="../ui-sizer/">sizer object</a>, <a href="../ui-basesizer/">base sizer object</a>.</p>
+<h3 id="get-element">Get element<a class="headerlink" href="#get-element" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get element<ul>
+<li>Background game object
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">background</span> <span class="o">=</span> <span class="nx">scrollablePanel</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;background&#39;</span><span class="p">);</span>
+</pre></div></li>
+<li>Panel game object
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">panel</span> <span class="o">=</span> <span class="nx">scrollablePanel</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;panel&#39;</span><span class="p">);</span>
+</pre></div></li>
+<li>Slider<ul>
+<li>Track
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">track</span> <span class="o">=</span> <span class="nx">scrollablePanel</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;slider.track&#39;</span><span class="p">);</span>
+</pre></div></li>
+<li>Thumb
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">thumb</span> <span class="o">=</span> <span class="nx">scrollablePanel</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;slider.thumb&#39;</span><span class="p">);</span>
+</pre></div></li>
 </ul>
 </li>
-<li>Smoother interpolation
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">Interpolation</span><span class="p">.</span><span class="nx">SmootherStep</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span>
-</pre></div><ul>
-<li><code>t</code> : 0~1</li>
+<li>Scroller
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">scroller</span> <span class="o">=</span> <span class="nx">scrollablePanel</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;scroller&#39;</span><span class="p">);</span>
+</pre></div></li>
 </ul>
 </li>
-<li>Quadratic bezier interpolation
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">Interpolation</span><span class="p">.</span><span class="nx">QuadraticBezier</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="nx">p0</span><span class="p">,</span> <span class="nx">p1</span><span class="p">,</span> <span class="nx">p2</span><span class="p">);</span>
-</pre></div><ul>
-<li><code>t</code> : 0~1</li>
-<li><code>p0</code> : The start point.</li>
-<li><code>p1</code> : The control point.</li>
-<li><code>p2</code> : The end point.</li>
-</ul>
-</li>
-<li>Cubic bezier interpolation
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nb">Math</span><span class="p">.</span><span class="nx">Interpolation</span><span class="p">.</span><span class="nx">CubicBezier</span><span class="p">(</span><span class="nx">t</span><span class="p">,</span> <span class="nx">p0</span><span class="p">,</span> <span class="nx">p1</span><span class="p">,</span> <span class="nx">p2</span><span class="p">,</span> <span class="nx">p3</span><span class="p">);</span>
-</pre></div><ul>
-<li><code>t</code> : 0~1</li>
-<li><code>p0</code> : The start point.</li>
-<li><code>p1</code> : The first control point.</li>
-<li><code>p2</code> : The second control point.</li>
-<li><code>p3</code> : The end point.</li>
-</ul>
-</li>
+<li>Get by name
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">scrollablePanel</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;#&#39;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">);</span>
+</pre></div></li>
 </ul>
                 
                   
@@ -3963,7 +4203,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../lokijs/" title="LokiJs" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../ui-pages/" title="Pages" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -3972,19 +4212,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                LokiJs
+                Pages
               </span>
             </div>
           </a>
         
         
-          <a href="../percentage/" title="Percentage" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../ui-basesizer/" title="Base sizer" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Percentage
+                Base sizer
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

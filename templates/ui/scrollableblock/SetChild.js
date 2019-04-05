@@ -3,7 +3,7 @@ import DefaultMask from '../../../plugins/utils/mask/DefaultMask.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 const ALIGN_LEFTTOP = Phaser.Display.Align.TOP_LEFT;
 
-var SetChild = function (gameObject, maskConfig) {
+var SetChild = function (gameObject, expand, maskConfig) {
     if (gameObject.setOrigin) {
         gameObject.setOrigin(0);
     }
@@ -13,6 +13,7 @@ var SetChild = function (gameObject, maskConfig) {
     var config = this.getSizerConfig(gameObject);
     config.parent = this;
     config.align = ALIGN_LEFTTOP;
+    config.expand = expand;
     this.child = gameObject;
 
     // Create mask of child object

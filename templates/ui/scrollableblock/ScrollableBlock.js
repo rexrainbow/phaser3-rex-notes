@@ -38,9 +38,10 @@ class ScrollableBlock extends BaseSizer {
         // Add elements
         // No background object, and child does not have padding
         var child = GetValue(config, 'child', undefined);
+        var expand = GetValue(config, 'expand', true);
         var childMask = GetValue(config, 'mask', undefined);
 
-        this.setChild(child, childMask);
+        this.setChild(child, expand, childMask);
     }
 
     destroy(fromScene) {

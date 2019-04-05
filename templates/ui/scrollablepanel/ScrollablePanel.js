@@ -101,6 +101,7 @@ class ScrollablePanel extends Sizer {
             if (scrollerConfig === true) {
                 scrollerConfig = {};
             }
+            scrollerConfig.orientation = scrollMode;
             scroller = new Scroller(scrollableBlock, scrollerConfig);
         }
 

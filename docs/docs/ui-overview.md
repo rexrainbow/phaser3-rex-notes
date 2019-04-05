@@ -11,6 +11,7 @@
 1. [Menu](ui-menu.md): A container with buttons and sub-menu.
 1. [Number-bar](ui-numberbar.md): A container with an icon, slider, text, and background.
 1. [Pages](ui-pages.md): A container with pages, only current page is visible.
+1. [Scroll-able panel](ui-scrollablepanel.md): A container with a panel(ui component), slider, and scroller.
 1. [Sizer](ui-sizer.md): Layout children game objects.
 1. [Slider](ui-slider.md): A container with a track, indicator, thumb and background.
 1. [Tabs](ui-tabs.md): A container with 4 groups of buttons around a center panel.
