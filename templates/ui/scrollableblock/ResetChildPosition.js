@@ -1,4 +1,4 @@
-import MaskChildren from '../../../plugins/utils/mask/MaskChildren.js';
+import MaskChildren from '../../../plugins/gameobjects/containerlite/MaskChildren.js';
 
 var ResetChildPosition = function () {
     var x = this.left;
