@@ -1,6 +1,6 @@
 ## Introduction
 
-A container with a panel(ui component), slider, and scroller.
+A container with a panel, slider, and scroller.
 
 - Author: Rex
 - Game object
