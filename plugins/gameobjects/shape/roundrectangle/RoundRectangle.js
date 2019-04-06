@@ -1,8 +1,8 @@
 import GeomRoundRectangle from './geom/RoundRectangle.js';
 import LineTo from '../utils/LineTo.js';
 import ArcTo from '../utils/ArcTo.js';
-import Earcut from '../../../../node_modules/phaser/src/geom/polygon/Earcut.js';
-import Render from '../../../../node_modules/phaser/src/gameobjects/shape/polygon/PolygonRender.js';
+import Earcut from '../utils/Earcut.js';
+import Render from './PolygonRender.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
