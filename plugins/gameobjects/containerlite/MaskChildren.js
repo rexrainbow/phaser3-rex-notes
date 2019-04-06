@@ -4,6 +4,10 @@ const Intersects = Phaser.Geom.Intersects.RectangleToRectangle;
 const Overlaps = Phaser.Geom.Rectangle.Overlaps;
 
 var MaskChildren = function (parent, mask) {
+    if (!mask) {
+        return;
+    }
+
     var children = parent.getAllChildren();
     var parentBounds = parent.getBounds();
     var maskGameObject = MaskToGameObject(mask);
