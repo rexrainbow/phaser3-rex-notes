@@ -123,7 +123,7 @@ class Demo extends Phaser.Scene {
                         desc: (this._prevSortButton.text === '-') // sort descending
                     })
                     .data();
-                this.getElement('panel').setItems(items);
+                this.getElement('panel').setItems(items).setTableOYByPercentage(0);
             }, tabs);
 
         // Grid table

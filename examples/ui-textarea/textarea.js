@@ -11,26 +11,26 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {}
+    preload() { }
 
     create() {
         var textArea = this.rexUI.add.textArea({
-                x: 400,
-                y: 300,
-                width: 220,
-                height: 220,
+            x: 400,
+            y: 300,
+            width: 220,
+            height: 220,
 
-                background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 0, COLOR_PRIMARY),
+            background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 0, COLOR_PRIMARY),
 
-                // text: this.add.text(),
-                text: this.rexUI.add.BBCodeText(),
-                // textMask: false,
+            // text: this.add.text(),
+            text: this.rexUI.add.BBCodeText(),
+            // textMask: false,
 
-                slider: {
-                    track: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_DARK),
-                    thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 13, COLOR_LIGHT),
-                },
-            })
+            slider: {
+                track: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_DARK),
+                thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 13, COLOR_LIGHT),
+            },
+        })
             .layout()
             .drawBounds(this.add.graphics(), 0xff0000);
 
@@ -38,13 +38,13 @@ class Demo extends Phaser.Scene {
             .setText(CreateContent(10000));
     }
 
-    update() {}
+    update() { }
 }
 
 var content = `Phaser is a fast, free, and fun open source HTML5 game framework that offers WebGL and Canvas rendering across desktop and mobile web browsers. Games can be compiled to iOS, Android and native apps by using 3rd party tools. You can use JavaScript or TypeScript for development.`;
 var CreateContent = function (linesCount) {
     var numbers = [];
-    for (var i = 0; i < linesCount; i++) {        
+    for (var i = 0; i < linesCount; i++) {
         numbers.push('[color=' + ((i % 2) ? 'green' : 'yellow') + ']' + i.toString() + '[/color]');
     }
     return content + '\n' + numbers.join('\n');

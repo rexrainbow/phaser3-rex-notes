@@ -9,7 +9,7 @@ A container with a panel, slider, and scroller.
 
 [Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/ui/ui-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexuiplugin.min.js)
 
-[Class](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/ui/scollablepanel/TextArea.js)
+[Class](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/ui/scollablepanel/ScrollablePanel.js)
 
 ## Usage
 
@@ -38,7 +38,7 @@ var config = {
 var game = new Phaser.Game(config);
 ```
 
-### Add text-area object
+### Add scroll-able panel object
 
 ```javascript
 var scrollablePanel = scene.rexUI.add.scrollablePanel({
@@ -103,11 +103,13 @@ var scrollablePanel = scene.rexUI.add.scrollablePanel({
         - `'drag'` : Control slider by dragging thumb game object. Default setting.
         - `'click'` : Control slider by touching track game object.
         - `'none'` : Disable sider controlling.
+    - Set to `false` to ignore slider.
 - `scroller` : Configuration of scroller behavior.
     - `scroller.slidingDeceleration` : Deceleration of slow down when dragging released.
         - Set `false` to disable it.
     - `scroller.backDeceleration` : Deceleration of pull back when out of bounds.
         - Set `false` to disable it.
+    - Set to `false` to ignore scroller.
 - `space` : Pads spaces
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
     - `space.panel` : Space between panel object and slider object.
@@ -137,6 +139,49 @@ Arrange position of all elements.
 ```javascript
 scrollablePanel.layout();
 ```
+
+### Scroll content
+
+- Set
+    ```javascript
+    scrollablePanel.setChildOY(oy);
+    ```
+    or
+    ```javascript
+    scrollablePanel.childOY = oy;
+    ```
+- Get
+    ```javascript
+    var childOY = scrollablePanel.childOY;
+    ```
+
+#### Scroll by percentage
+
+- Set
+    ```javascript
+    scrollablePanel.setChildOYByPercentage(t);  // t: 0~1
+    ```
+    or
+    ```javascript
+    scrollablePanel.t = t;
+    ```
+- Get
+    ```javascript
+    var t = scrollablePanel.t;
+    ```
+
+### Scroll to top/bottom
+
+- Scroll to top
+    ```javascript
+    scrollablePanel.scrollToTop();
+    ```
+    - Equal to `scrollablePanel.t = 0;`
+- Scroll to bottom
+    ```javascript
+    scrollablePanel.scrollToBottom();
+    ```
+    - Equal to `scrollablePanel.t = 1;`
 
 ### Other properties
 

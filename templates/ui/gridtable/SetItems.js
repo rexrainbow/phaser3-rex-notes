@@ -15,14 +15,8 @@ var SetItems = function (items) {
     var scroller = this.childrenMap.scroller;
     var slider = this.childrenMap.slider;
     if (scroller) {
-        scroller
-            .setBounds(bottomOY, topOY)
-            .setValue(topOY);
+        scroller.setBounds(bottomOY, topOY);
         // Scroller also reflects to slider
-    } else if (slider) {
-        slider.setValue(0);
-    } else {
-        table.setTableOY(topOY);
     }
     if (slider) {
         slider.setEnable(bottomOY !== topOY);

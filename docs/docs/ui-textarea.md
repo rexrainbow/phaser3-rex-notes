@@ -93,11 +93,13 @@ var textArea = scene.rexUI.add.textArea({
         - `'drag'` : Control slider by dragging thumb game object. Default setting.
         - `'click'` : Control slider by touching track game object.
         - `'none'` : Disable sider controlling.
+    - Set to `false` to ignore slider.
 - `scroller` : Configuration of scroller behavior.
     - `scroller.slidingDeceleration` : Deceleration of slow down when dragging released.
         - Set `false` to disable it.
     - `scroller.backDeceleration` : Deceleration of pull back when out of bounds.
         - Set `false` to disable it.
+    - Set to `false` to ignore scroller.
 - `space` : Pads spaces
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
     - `space.text` : Space between text object and slider object.
@@ -134,10 +136,63 @@ textArea.layout();
     ```javascript
     textArea.setText(text);
     ```
+- Append
+    ```javascript
+    textArea.appendText(text);
+    ```
 - Get
    ```javascript
    var text = textArea.text;
    ```
+
+### Scroll content
+
+- Set
+    ```javascript
+    textArea.setTextOY(oy);
+    ```
+    or
+    ```javascript
+    textArea.textOY = oy;
+    ```
+- Get
+    ```javascript
+    var textOY = textArea.textOY;
+    ```
+
+#### Scroll by percentage
+
+- Set
+    ```javascript
+    textArea.setTextOYByPercentage(t);  // t: 0~1
+    ```
+    or
+    ```javascript
+    textArea.t = t;
+    ```
+- Get
+    ```javascript
+    var t = textArea.t;
+    ```
+
+### Scroll to top/bottom
+
+- Scroll to top
+    ```javascript
+    textArea.scrollToTop();
+    ```
+    - Equal to `textArea.t = 0;`
+- Scroll to bottom
+    ```javascript
+    textArea.scrollToBottom();
+    ```
+    - Equal to `textArea.t = 1;`
+
+### Lines count
+
+```javascript
+var linesCount = textArea.linesCount;
+```
 
 ### Other properties
 

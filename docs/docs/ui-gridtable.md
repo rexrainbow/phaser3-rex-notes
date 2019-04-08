@@ -114,7 +114,7 @@ var gridTable = scene.rexUI.add.gridTable({
     - `table.cellHeight` : Default height of each cell.
         - Expand cell height to fit table height : set `cellHeight` to `undefined`, and `scrollMode` is `'horizontal'`.
     - `table.cellWidth` : Width of each cell.
-        - Expand cell width to fit table width : set `cellWidth` to `undefined`, and `scrollMode` is `'vertical'`.    
+        - Expand cell width to fit table width : set `cellWidth` to `undefined`, and `scrollMode` is `'vertical'`.
     - `table.columns` : Columns count of each row.
 - `slider` : Componments of slider, optional.
     - `slider.background` : Game object of slider background, optional.
@@ -124,11 +124,13 @@ var gridTable = scene.rexUI.add.gridTable({
         - `'drag'` : Control slider by dragging thumb game object. Default setting.
         - `'click'` : Control slider by touching track game object.
         - `'none'` : Disable sider controlling.
+    - Set to `false` to ignore slider.
 - `scroller` : Configuration of scroller behavior.
     - `scroller.slidingDeceleration` : Deceleration of slow down when dragging released.
         - Set `false` to disable it.
     - `scroller.backDeceleration` : Deceleration of pull back when out of bounds.
         - Set `false` to disable it.
+    - Set to `false` to ignore scroller.
 - `createCellContainerCallback` : Callback to return a container object of each visible cell.
     - Properties of `cell` parameter
         - `cell.scene` : Scene of this grid table object.
@@ -184,6 +186,55 @@ gridTable.layout();
    ```javascript
    var items = gridTable.items;
    ```
+
+### Scroll table content
+
+- Set
+    ```javascript
+    table.setTableOY(oy);
+    ```
+    or
+    ```javascript
+    table.tableOY = oy;
+    ```
+- Get
+    ```javascript
+    var tableOY = table.tableOY;
+    ```
+
+#### Scroll by percentage
+
+- Set
+    ```javascript
+    table.setTableOYByPercentage(t);  // t: 0~1
+    ```
+    or
+    ```javascript
+    table.t = t;
+    ```
+- Get
+    ```javascript
+    var t = table.t;
+    ```
+
+### Scroll to top/bottom
+
+- Scroll to top
+    ```javascript
+    table.scrollToTop();
+    ```
+    - Equal to `table.t = 0;`
+- Scroll to bottom
+    ```javascript
+    table.scrollToBottom();
+    ```
+    - Equal to `table.t = 1;`
+
+### Refresh table cells
+
+```javascript
+table.refresh();
+```
 
 ### Other properties
 

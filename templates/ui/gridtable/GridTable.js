@@ -129,34 +129,40 @@ class GridTable extends Sizer {
         }
 
         // Control
-        var ignored = false; // Set true to ignore event handler
+        this._triggerSource = undefined;
         if (slider) {
             slider.on('valuechange', function (newValue) {
-                if (ignored) {
-                    ignored = false;
+                if (this._triggerSource === slider) {
                     return;
                 }
-                table.setTableOYByPercentage(newValue).updateTable();
-                // reflect to scroller
-                if (scroller) {
-                    ignored = true;
-                    scroller.setValue(table.tableOY);
+                if (this._triggerSource === undefined) {
+                    this._triggerSource = slider;
                 }
-            })
+
+                table.t = newValue;
+                this.updateController();
+
+                if (this._triggerSource === slider) {
+                    this._triggerSource = undefined;
+                }
+            }, this);
         }
         if (scroller) {
             scroller.on('valuechange', function (newValue) {
-                if (ignored) {
-                    ignored = false;
+                if (this._triggerSource === scroller) {
                     return;
                 }
-                table.setTableOY(newValue).updateTable();
-                // reflect to slider
-                if (slider) {
-                    ignored = true;
-                    slider.setValue(table.getTableOYPercentage());
+                if (this._triggerSource === undefined) {
+                    this._triggerSource = scroller;
                 }
-            });
+
+                table.tableOY = newValue;
+                this.updateController();
+
+                if (this._triggerSource === scroller) {
+                    this._triggerSource = undefined;
+                }
+            }, this);
         }
 
 
@@ -191,6 +197,80 @@ class GridTable extends Sizer {
         return this;
     }
 
+    refresh() {
+        this.childrenMap.table.updateTable(true);
+        return this;
+    }
+
+    updateController() {
+        var table = this.childrenMap.table;
+        var scroller = this.childrenMap.scroller;
+        var slider = this.childrenMap.slider;
+        if (scroller) {
+            scroller.setValue(table.tableOY);
+        }
+        if (slider) {
+            slider.setValue(table.t);
+        }
+    }
+
+    set t(value) {
+        if (this._triggerSource === undefined) {
+            this._triggerSource = null;
+        }
+        this.childrenMap.table.t = value;
+        this.updateController();
+        if (this._triggerSource === null) {
+            this._triggerSource = undefined;
+        }
+    }
+
+    get t() {
+        return this.childrenMap.table.t;
+    }
+
+    setTableOYByPercentage(value) {
+        this.t = value;
+        return this;
+    }
+
+    set tableOY(value) {
+        if (this._triggerSource === undefined) {
+            this._triggerSource = null;
+        }
+        this.childrenMap.table.tableOY = value;
+        this.updateController();
+        if (this._triggerSource === null) {
+            this._triggerSource = undefined;
+        }
+    }
+
+    get tableOY() {
+        return this.childrenMap.table.tableOY;
+    }
+
+    setTableOY(value) {
+        this.tableOY = value;
+        return this;
+    }
+
+    get topTableOY() {
+        return this.childrenMap.table.topTableOY;
+    }
+
+    get bottomTableOY() {
+        return this.childrenMap.table.bottomTableOY;
+    }
+
+    scrollToTop() {
+        this.t = 0;
+        return this;
+    }
+
+    scrollToBottom() {
+        this.t = 1;
+        return this;
+    }
 }
 
 var methods = {

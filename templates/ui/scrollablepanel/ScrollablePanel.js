@@ -106,34 +106,40 @@ class ScrollablePanel extends Sizer {
         }
 
         // Control
-        var ignored = false; // Set true to ignore event handler
+        this._triggerSource = undefined;
         if (slider) {
             slider.on('valuechange', function (newValue) {
-                if (ignored) {
-                    ignored = false;
+                if (this._triggerSource === slider) {
                     return;
                 }
-                scrollableBlock.setChildOYByPercentage(newValue);
-                // reflect to scroller
-                if (scroller) {
-                    ignored = true;
-                    scroller.setValue(scrollableBlock.childOY);
+                if (this._triggerSource === undefined) {
+                    this._triggerSource = slider;
                 }
-            })
+
+                scrollableBlock.t = newValue;
+                this.updateController();
+
+                if (this._triggerSource === slider) {
+                    this._triggerSource = undefined;
+                }
+            }, this);
         }
         if (scroller) {
             scroller.on('valuechange', function (newValue) {
-                if (ignored) {
-                    ignored = false;
+                if (this._triggerSource === scroller) {
                     return;
                 }
-                scrollableBlock.setChildOY(newValue);
-                // reflect to slider
-                if (slider) {
-                    ignored = true;
-                    slider.setValue(scrollableBlock.getChildOYPercentage());
+                if (this._triggerSource === undefined) {
+                    this._triggerSource = scroller;
                 }
-            });
+
+                scrollableBlock.childOY = newValue;
+                this.updateController();
+
+                if (this._triggerSource === scroller) {
+                    this._triggerSource = undefined;
+                }
+            }, this);
         }
 
         this.addChildrenMap('background', background);
@@ -141,6 +147,18 @@ class ScrollablePanel extends Sizer {
         this.addChildrenMap('panel', panel);
         this.addChildrenMap('slider', slider);
         this.addChildrenMap('scroller', scroller);
+    }
+
+    updateController() {
+        var scrollableBlock = this.childrenMap.scrollableBlock;
+        var scroller = this.childrenMap.scroller;
+        var slider = this.childrenMap.slider;
+        if (scroller) {
+            scroller.setValue(scrollableBlock.childOY);
+        }
+        if (slider) {
+            slider.setValue(scrollableBlock.t);
+        }
     }
 
     layout(parent, newWidth, newHeight) {
@@ -153,6 +171,64 @@ class ScrollablePanel extends Sizer {
                 topOY = scrollableBlock.topChildOY;
             scroller.setBounds(bottomOY, topOY);
         }
+        return this;
+    }
+
+    set t(value) {
+        if (this._triggerSource === undefined) {
+            this._triggerSource = null;
+        }
+        this.childrenMap.scrollableBlock.t = value;
+        this.updateController();
+        if (this._triggerSource === null) {
+            this._triggerSource = undefined;
+        }
+    }
+
+    get t() {
+        return this.childrenMap.scrollableBlock.t;
+    }
+
+    setChildOYByPercentage(percentage) {
+        this.t = percentage;
+        return this;
+    }
+
+    get childOY() {
+        return this.childrenMap.scrollableBlock.childOY;
+    }
+
+    set childOY(value) {
+        if (this._triggerSource === undefined) {
+            this._triggerSource = null;
+        }
+        this.childrenMap.scrollableBlock.childOY = value;
+        this.updateController();
+        if (this._triggerSource === null) {
+            this._triggerSource = undefined;
+        }
+    }
+
+    setChildOY(value) {
+        this.childOY = value;
+        return this;
+    }
+
+    get topChildOY() {
+        return this.childrenMap.scrollableBlock.topChildOY;
+    }
+
+    get bottomChildOY() {
+        return this.childrenMap.scrollableBlock.bottomChildOY;
+    }
+
+    scrollToTop() {
+        this.t = 0;
+        return this;
+    }
+
+    scrollToBottom() {
+        this.t = 1;
         return this;
     }
 }

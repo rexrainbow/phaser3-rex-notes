@@ -87,7 +87,7 @@ class TextBlock extends BaseSizer {
         return this.textObject.lineSpacing;
     }
 
-    get totalLinesCount() {
+    get linesCount() {
         var count;
         if (this.lines === undefined) {
             count = 0;
@@ -112,7 +112,7 @@ class TextBlock extends BaseSizer {
     }
 
     get textHeight() {
-        return LinesCountToTextHeight.call(this, this.totalLinesCount);
+        return LinesCountToTextHeight.call(this, this.linesCount);
     }
 
     get textObjectHeight() {
@@ -132,6 +132,20 @@ class TextBlock extends BaseSizer {
         return h;
     }
 
+    textOYExceedTop(oy) {
+        if (oy === undefined) {
+            oy = this.textOY;
+        }
+        return (oy > this.topTextOY);
+    }
+
+    textOYExeceedBottom(oy) {
+        if (oy === undefined) {
+            oy = this.textOY;
+        }
+        return (oy < this.bottomTextOY);
+    }
+
     get textOY() {
         return this._textOY;
     }
@@ -143,7 +157,7 @@ class TextBlock extends BaseSizer {
         var textOYExeceedBottom = this.textOYExeceedBottom(oy);
 
         if (this.clampTextOYMode) {
-            if (this.visibleLinesCount > this.totalLinesCount) {
+            if (this.visibleLinesCount > this.linesCount) {
                 oy = 0;
             } else if (textOYExceedTop) {
                 oy = topTextOY
@@ -177,28 +191,17 @@ class TextBlock extends BaseSizer {
         return this;
     }
 
-    setTextOYByPercentage(percentage) {
-        percentage = Clamp(percentage, 0, 1);
-        this.setTextOY(-this.textVisibleHeight * percentage);
-        return this;
+    set t(value) {
+        this.textOY = -this.textVisibleHeight * value;
     }
 
-    getTextOYPercentage() {
+    get t() {
         return (this.textOY / -this.textVisibleHeight);
     }
 
-    textOYExceedTop(oy) {
-        if (oy === undefined) {
-            oy = this.textOY;
-        }
-        return (oy > this.topTextOY);
-    }
-
-    textOYExeceedBottom(oy) {
-        if (oy === undefined) {
-            oy = this.textOY;
-        }
-        return (oy < this.bottomTextOY);
+    setTextOYByPercentage(percentage) {
+        this.t = percentage;
+        return this;
     }
 }
 

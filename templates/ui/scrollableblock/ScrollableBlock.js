@@ -104,6 +104,20 @@ class ScrollableBlock extends BaseSizer {
         return h;
     }
 
+    childOYExceedTop(oy) {
+        if (oy === undefined) {
+            oy = this.childOY;
+        }
+        return (oy > this.topChildOY);
+    }
+
+    childOYExeceedBottom(oy) {
+        if (oy === undefined) {
+            oy = this.childOY;
+        }
+        return (oy < this.bottomChildOY);
+    }
+
     get childOY() {
         return this._childOY;
     }
@@ -149,28 +163,17 @@ class ScrollableBlock extends BaseSizer {
         return this;
     }
 
-    setChildOYByPercentage(percentage) {
-        percentage = Clamp(percentage, 0, 1);
-        this.setChildOY(-this.visibleHeight * percentage);
-        return this;
+    set t(value) {
+        this.childOY = -this.visibleHeight * value;
     }
 
-    getChildOYPercentage() {
+    get t() {
         return (this.childOY / -this.visibleHeight);
     }
 
-    childOYExceedTop(oy) {
-        if (oy === undefined) {
-            oy = this.childOY;
-        }
-        return (oy > this.topChildOY);
-    }
-
-    childOYExeceedBottom(oy) {
-        if (oy === undefined) {
-            oy = this.childOY;
-        }
-        return (oy < this.bottomChildOY);
+    setChildOYByPercentage(percentage) {
+        this.t = percentage;
+        return this;
     }
 }
 
@@ -181,6 +184,7 @@ var methods = {
     resetChildPosition: ResetChildPosition,
     layout: Layout,
 }
+
 Object.assign(
     ScrollableBlock.prototype,
     methods

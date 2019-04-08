@@ -184,12 +184,20 @@ It is equal to `cellInvisibleCallback` in configuration.
     table.setTableOXY(ox, oy).updateTable();
     table.addTableOXY(dx, dy).updateTable();
     ```
+    or
+    ```javascript
+    table.tableOY = oy;  // include table.updateTable()
+    table.tableOX = ox;
+    ```
     - These will trigger `cellvisible`, or `cellinvisible` events.
 - Get
     ```javascript
     var tableOY = table.tableOY;
     var tableOX = table.tableOX;
     ```
+
+!!! note "Use case"
+    Scroll table by [scroller](scroller.md) behavior.
 
 #### Scroll by percentage
 
@@ -266,7 +274,7 @@ table.updateTable(true);
     ```
 - Bottom bound of tableOY
     ```javascript
-    var bottomTableOY = table.bottomTableOY;
+    var bottomTableOY = table.bottomTableOY; // A negative number
     ```
 - Left bound of tableOX
     ```javascript
@@ -274,7 +282,7 @@ table.updateTable(true);
     ```
 - Right bound of tableOX
     ```javascript
-    var rightTableOX = table.rightTableOX;
+    var rightTableOX = table.rightTableOX; // A negative number
     ```
 
 !!! note "Use case"

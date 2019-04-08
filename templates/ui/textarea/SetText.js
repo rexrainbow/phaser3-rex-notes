@@ -8,14 +8,7 @@ var SetText = function (text) {
     var scroller = this.childrenMap.scroller;
     var slider = this.childrenMap.slider;
     if (scroller) {
-        scroller
-            .setBounds(bottomOY, topOY)
-            .setValue(topOY);
-        // Scroller also reflects to slider
-    } else if (slider) {
-        slider.setValue(0);
-    } else {
-        textBlock.setTextOY(topOY);
+        scroller.setBounds(bottomOY, topOY);
     }
     if (slider) {
         slider.setEnable(bottomOY !== topOY);

@@ -3,6 +3,7 @@ import TextBlock from '../textblock/TextBlock.js';
 import Slider from '../slider/Slider.js';
 import Scroller from '../../../plugins/scroller.js';
 import SetText from './SetText.js';
+import AppendText from './AppendText.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -46,7 +47,7 @@ class TextArea extends Sizer {
             right: (sliderConfig) ? textSpace : paddingRight,
             top: paddingTop,
             bottom: paddingBottom
-        }        
+        }
         var expand = (textHeight === undefined);
         this.add(textBlock, proportion, 'center', padding, expand);
 
@@ -75,34 +76,40 @@ class TextArea extends Sizer {
         }
 
         // Control
-        var ignored = false; // Set true to ignore event handler
+        this._triggerSource = undefined;
         if (slider) {
             slider.on('valuechange', function (newValue) {
-                if (ignored) {
-                    ignored = false;
+                if (this._triggerSource === slider) {
                     return;
                 }
-                textBlock.setTextOYByPercentage(newValue);
-                // reflect to scroller
-                if (scroller) {
-                    ignored = true;
-                    scroller.setValue(textBlock.textOY);
+                if (this._triggerSource === undefined) {
+                    this._triggerSource = slider;
                 }
-            })
+
+                textBlock.t = newValue;
+                this.updateController();
+
+                if (this._triggerSource === slider) {
+                    this._triggerSource = undefined;
+                }
+            }, this);
         }
         if (scroller) {
             scroller.on('valuechange', function (newValue) {
-                if (ignored) {
-                    ignored = false;
+                if (this._triggerSource === scroller) {
                     return;
                 }
-                textBlock.setTextOY(newValue);
-                // reflect to slider
-                if (slider) {
-                    ignored = true;
-                    slider.setValue(textBlock.getTextOYPercentage());
+                if (this._triggerSource === undefined) {
+                    this._triggerSource = scroller;
                 }
-            });
+
+                textBlock.textOY = newValue;
+                this.updateController();
+
+                if (this._triggerSource === scroller) {
+                    this._triggerSource = undefined;
+                }
+            }, this);
         }
 
         this.addChildrenMap('background', background);
@@ -112,13 +119,88 @@ class TextArea extends Sizer {
         this.addChildrenMap('scroller', scroller);
     }
 
+    updateController() {
+        var textBlock = this.childrenMap.textBlock;
+        var scroller = this.childrenMap.scroller;
+        var slider = this.childrenMap.slider;
+        if (scroller) {
+            scroller.setValue(textBlock.textOY);
+        }
+        if (slider) {
+            slider.setValue(textBlock.t);
+        }
+    }
+
     get text() {
         return this.childrenMap.textBlock.text;
+    }
+
+    get linesCount() {
+        return this.childrenMap.textBlock.linesCount;
+    }
+
+    set t(value) {
+        if (this._triggerSource === undefined) {
+            this._triggerSource = null;
+        }
+        this.childrenMap.textBlock.t = value;
+        this.updateController();
+        if (this._triggerSource === null) {
+            this._triggerSource = undefined;
+        }
+    }
+
+    get t() {
+        return this.childrenMap.textBlock.t;
+    }
+
+    setTextOYByPercentage(percentage) {
+        this.t = percentage;
+        return this;
+    }
+
+    get textOY() {
+        return this.childrenMap.textBlock.textOY;
+    }
+
+    set textOY(value) {
+        if (this._triggerSource === undefined) {
+            this._triggerSource = null;
+        }
+        this.childrenMap.textBlock.textOY = value;
+        this.updateController();
+        if (this._triggerSource === null) {
+            this._triggerSource = undefined;
+        }       
+    }
+
+    setTextOY(value) {
+        this.textOY = value;
+        return this;
+    }
+
+    get topTextOY() {
+        return this.childrenMap.textBlock.topTextOY;
+    }
+
+    get bottomTextOY() {
+        return this.childrenMap.textBlock.bottomTextOY;
+    }
+
+    scrollToTop() {
+        this.t = 0;
+        return this;
+    }
+
+    scrollToBottom() {
+        this.t = 1;
+        return this;
     }
 }
 
 var methods = {
-    setText: SetText
+    setText: SetText,
+    appendText: AppendText,
 }
 Object.assign(
     TextArea.prototype,

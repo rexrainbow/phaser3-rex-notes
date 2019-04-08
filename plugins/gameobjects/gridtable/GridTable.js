@@ -190,6 +190,14 @@ class GridTable extends Container {
     }
 
     set tableOY(oy) {
+        this.setTableOY(oy).updateTable();
+    }
+
+    set tableOX(ox) {
+        this.setTableOX(ox).updateTable();
+    }
+
+    setTableOY(oy) {
         var table = this.table;
         var topTableOY = this.topTableOY;
         var bottomTableOY = this.bottomTableOY;
@@ -228,9 +236,10 @@ class GridTable extends Container {
             }
         }
         this.execeedBottomState = tableOYExeceedBottom;
+        return this;
     }
 
-    set tableOX(ox) {
+    setTableOX(ox) {
         var table = this.table;
         var leftTableOX = this.leftTableOX;
         var rightTableOX = this.rightTableOX;
@@ -271,42 +280,31 @@ class GridTable extends Container {
             }
         }
         this.execeedRightState = tableOXExeceedRight;
-    }
-
-    setTableOY(oy) {
-        this.tableOY = oy;
-        return this;
-    }
-
-    setTableOX(ox) {
-        this.tableOX = ox;
         return this;
     }
 
     setTableOXY(ox, oy) {
-        this.tableOX = ox;
-        this.tableOY = oy;
-        return this;
-    }
-
-    addTableOX(dx) {
-        this.tableOX += dx;
+        this.setTableOY(oy).setTableOX(ox);
         return this;
     }
 
     addTableOY(dy) {
-        this.tableOY += dy;
+        this.setTableOY(this.tableOY + dy);
         return this;
     }
 
+    addTableOX(dx) {
+        this.setTableOX(this.tableOX + dx);
+        return this;
+    }
+
+
     addTableOXY(dx, dy) {
-        this.tableOX += dx;
-        this.tableOY += dy;
+        this.addTableOY(dy).addTableOX(dx);
         return this;
     }
 
     setTableOYByPercentage(percentage) {
-        percentage = Clamp(percentage, 0, 1);
         this.setTableOY(-this.tableVisibleHeight * percentage);
         return this;
     }
