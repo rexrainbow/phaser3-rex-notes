@@ -106,39 +106,16 @@ class ScrollablePanel extends Sizer {
         }
 
         // Control
-        this._triggerSource = undefined;
         if (slider) {
             slider.on('valuechange', function (newValue) {
-                if (this._triggerSource === slider) {
-                    return;
-                }
-                if (this._triggerSource === undefined) {
-                    this._triggerSource = slider;
-                }
-
                 scrollableBlock.t = newValue;
                 this.updateController();
-
-                if (this._triggerSource === slider) {
-                    this._triggerSource = undefined;
-                }
             }, this);
         }
         if (scroller) {
             scroller.on('valuechange', function (newValue) {
-                if (this._triggerSource === scroller) {
-                    return;
-                }
-                if (this._triggerSource === undefined) {
-                    this._triggerSource = scroller;
-                }
-
                 scrollableBlock.childOY = newValue;
                 this.updateController();
-
-                if (this._triggerSource === scroller) {
-                    this._triggerSource = undefined;
-                }
             }, this);
         }
 
@@ -175,14 +152,8 @@ class ScrollablePanel extends Sizer {
     }
 
     set t(value) {
-        if (this._triggerSource === undefined) {
-            this._triggerSource = null;
-        }
         this.childrenMap.scrollableBlock.t = value;
         this.updateController();
-        if (this._triggerSource === null) {
-            this._triggerSource = undefined;
-        }
     }
 
     get t() {
@@ -199,14 +170,8 @@ class ScrollablePanel extends Sizer {
     }
 
     set childOY(value) {
-        if (this._triggerSource === undefined) {
-            this._triggerSource = null;
-        }
         this.childrenMap.scrollableBlock.childOY = value;
         this.updateController();
-        if (this._triggerSource === null) {
-            this._triggerSource = undefined;
-        }
     }
 
     setChildOY(value) {

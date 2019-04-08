@@ -123,8 +123,11 @@ class Scroller extends EE {
     }
 
     set value(value) {
+        if (value === this._value) {
+            return;
+        }
+        
         var oldValue = this._value;
-
         var isOverMax = this.overMax(value);
         var isOverMin = this.overMin(value);
         if (isOverMax) {
@@ -140,10 +143,6 @@ class Scroller extends EE {
             if (isOverMin) {
                 value = this.minValue;
             }
-        }
-
-        if (value === this._value) {
-            return;
         }
 
         this._value = value;

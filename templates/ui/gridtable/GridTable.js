@@ -129,39 +129,16 @@ class GridTable extends Sizer {
         }
 
         // Control
-        this._triggerSource = undefined;
         if (slider) {
             slider.on('valuechange', function (newValue) {
-                if (this._triggerSource === slider) {
-                    return;
-                }
-                if (this._triggerSource === undefined) {
-                    this._triggerSource = slider;
-                }
-
                 table.t = newValue;
                 this.updateController();
-
-                if (this._triggerSource === slider) {
-                    this._triggerSource = undefined;
-                }
             }, this);
         }
         if (scroller) {
             scroller.on('valuechange', function (newValue) {
-                if (this._triggerSource === scroller) {
-                    return;
-                }
-                if (this._triggerSource === undefined) {
-                    this._triggerSource = scroller;
-                }
-
                 table.tableOY = newValue;
                 this.updateController();
-
-                if (this._triggerSource === scroller) {
-                    this._triggerSource = undefined;
-                }
             }, this);
         }
 
@@ -184,6 +161,18 @@ class GridTable extends Sizer {
         return this;
     }
 
+    updateController() {
+        var table = this.childrenMap.table;
+        var scroller = this.childrenMap.scroller;
+        var slider = this.childrenMap.slider;
+        if (scroller) {
+            scroller.setValue(table.tableOY);
+        }
+        if (slider) {
+            slider.setValue(table.t);
+        }
+    }
+
     layout(parent, newWidth, newHeight) {
         super.layout(parent, newWidth, newHeight);
 
@@ -202,27 +191,9 @@ class GridTable extends Sizer {
         return this;
     }
 
-    updateController() {
-        var table = this.childrenMap.table;
-        var scroller = this.childrenMap.scroller;
-        var slider = this.childrenMap.slider;
-        if (scroller) {
-            scroller.setValue(table.tableOY);
-        }
-        if (slider) {
-            slider.setValue(table.t);
-        }
-    }
-
     set t(value) {
-        if (this._triggerSource === undefined) {
-            this._triggerSource = null;
-        }
         this.childrenMap.table.t = value;
         this.updateController();
-        if (this._triggerSource === null) {
-            this._triggerSource = undefined;
-        }
     }
 
     get t() {
@@ -235,14 +206,8 @@ class GridTable extends Sizer {
     }
 
     set tableOY(value) {
-        if (this._triggerSource === undefined) {
-            this._triggerSource = null;
-        }
         this.childrenMap.table.tableOY = value;
         this.updateController();
-        if (this._triggerSource === null) {
-            this._triggerSource = undefined;
-        }
     }
 
     get tableOY() {

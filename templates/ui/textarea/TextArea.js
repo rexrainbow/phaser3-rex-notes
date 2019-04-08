@@ -76,39 +76,16 @@ class TextArea extends Sizer {
         }
 
         // Control
-        this._triggerSource = undefined;
         if (slider) {
             slider.on('valuechange', function (newValue) {
-                if (this._triggerSource === slider) {
-                    return;
-                }
-                if (this._triggerSource === undefined) {
-                    this._triggerSource = slider;
-                }
-
                 textBlock.t = newValue;
                 this.updateController();
-
-                if (this._triggerSource === slider) {
-                    this._triggerSource = undefined;
-                }
             }, this);
         }
         if (scroller) {
             scroller.on('valuechange', function (newValue) {
-                if (this._triggerSource === scroller) {
-                    return;
-                }
-                if (this._triggerSource === undefined) {
-                    this._triggerSource = scroller;
-                }
-
                 textBlock.textOY = newValue;
                 this.updateController();
-
-                if (this._triggerSource === scroller) {
-                    this._triggerSource = undefined;
-                }
             }, this);
         }
 
@@ -140,14 +117,8 @@ class TextArea extends Sizer {
     }
 
     set t(value) {
-        if (this._triggerSource === undefined) {
-            this._triggerSource = null;
-        }
         this.childrenMap.textBlock.t = value;
         this.updateController();
-        if (this._triggerSource === null) {
-            this._triggerSource = undefined;
-        }
     }
 
     get t() {
@@ -164,14 +135,8 @@ class TextArea extends Sizer {
     }
 
     set textOY(value) {
-        if (this._triggerSource === undefined) {
-            this._triggerSource = null;
-        }
         this.childrenMap.textBlock.textOY = value;
         this.updateController();
-        if (this._triggerSource === null) {
-            this._triggerSource = undefined;
-        }       
     }
 
     setTextOY(value) {

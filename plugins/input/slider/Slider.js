@@ -17,13 +17,13 @@ class Slider extends EE {
 
         this._value = undefined;
         this.endPoints = [{
-                x: 0,
-                y: 0
-            },
-            {
-                x: 0,
-                y: 0
-            }
+            x: 0,
+            y: 0
+        },
+        {
+            x: 0,
+            y: 0
+        }
         ];
 
         var callback = GetValue(config, 'valuechangeCallback', null);
@@ -109,13 +109,15 @@ class Slider extends EE {
     }
 
     set value(value) {
-        var oldValue = this._value;
-        this._value = Clamp(value, 0, 1);
-
-        if (oldValue !== this._value) {
-            this.updatePos(this._value);
-            this.emit('valuechange', this._value, oldValue);
+        value = Clamp(value, 0, 1);
+        if (value === this._value) {
+            return;
         }
+
+        var oldValue = this._value;
+        this._value = value
+        this.updatePos(this._value);
+        this.emit('valuechange', this._value, oldValue);
     }
 
     setValue(value, min, max) {
