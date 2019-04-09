@@ -29,7 +29,7 @@ class GridTable extends Sizer {
         var background = GetValue(config, 'background', undefined);
         var tableConfig = GetValue(config, 'table', undefined)
         var sliderConfig = GetValue(config, 'slider', undefined);
-        var scrollerConfig = GetValue(config, 'scrollerConfig', true);
+        var scrollerConfig = GetValue(config, 'scroller', true);
 
         // Space
         var paddingLeft = GetValue(config, 'space.left', 0);

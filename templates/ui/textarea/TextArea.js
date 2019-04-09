@@ -18,7 +18,7 @@ class TextArea extends Sizer {
         var background = GetValue(config, 'background', undefined);
         var textObject = GetValue(config, 'text', undefined);
         var sliderConfig = GetValue(config, 'slider', undefined);
-        var scrollerConfig = GetValue(config, 'scrollerConfig', true);
+        var scrollerConfig = GetValue(config, 'scroller', true);
 
         // Space
         var paddingLeft = GetValue(config, 'space.left', 0);
