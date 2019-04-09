@@ -4437,6 +4437,10 @@
 </pre></div>
     <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">setTableOXY</span><span class="p">(</span><span class="nx">ox</span><span class="p">,</span> <span class="nx">oy</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
 <span class="nx">table</span><span class="p">.</span><span class="nx">addTableOXY</span><span class="p">(</span><span class="nx">dx</span><span class="p">,</span> <span class="nx">dy</span><span class="p">).</span><span class="nx">updateTable</span><span class="p">();</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">tableOY</span> <span class="o">=</span> <span class="nx">oy</span><span class="p">;</span>  <span class="c1">// include table.updateTable()</span>
+<span class="nx">table</span><span class="p">.</span><span class="nx">tableOX</span> <span class="o">=</span> <span class="nx">ox</span><span class="p">;</span>
 </pre></div><ul>
 <li>These will trigger <code>cellvisible</code>, or <code>cellinvisible</code> events.</li>
 </ul>
@@ -4446,6 +4450,10 @@
 <span class="kd">var</span> <span class="nx">tableOX</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">tableOX</span><span class="p">;</span>
 </pre></div></li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Use case</p>
+<p>Scroll table by <a href="../scroller/">scroller</a> behavior.</p>
+</div>
 <h4 id="scroll-by-percentage">Scroll by percentage<a class="headerlink" href="#scroll-by-percentage" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Set
@@ -4507,13 +4515,13 @@
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">topTableOY</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">topTableOY</span><span class="p">;</span>  <span class="c1">// 0</span>
 </pre></div></li>
 <li>Bottom bound of tableOY
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bottomTableOY</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">bottomTableOY</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bottomTableOY</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">bottomTableOY</span><span class="p">;</span> <span class="c1">// A negative number</span>
 </pre></div></li>
 <li>Left bound of tableOX
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">leftTableOX</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">leftTableOX</span><span class="p">;</span>  <span class="c1">// 0</span>
 </pre></div></li>
 <li>Right bound of tableOX
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rightTableOX</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">rightTableOX</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rightTableOX</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">rightTableOX</span><span class="p">;</span> <span class="c1">// A negative number</span>
 </pre></div></li>
 </ul>
 <div class="admonition note">

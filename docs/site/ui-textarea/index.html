@@ -3382,6 +3382,40 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#scroll-content" title="Scroll content" class="md-nav__link">
+    Scroll content
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scroll-by-percentage" title="Scroll by percentage" class="md-nav__link">
+    Scroll by percentage
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scroll-to-topbottom" title="Scroll to top/bottom" class="md-nav__link">
+    Scroll to top/bottom
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lines-count" title="Lines count" class="md-nav__link">
+    Lines count
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" title="Other properties" class="md-nav__link">
     Other properties
   </a>
@@ -3984,6 +4018,40 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#scroll-content" title="Scroll content" class="md-nav__link">
+    Scroll content
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scroll-by-percentage" title="Scroll by percentage" class="md-nav__link">
+    Scroll by percentage
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scroll-to-topbottom" title="Scroll to top/bottom" class="md-nav__link">
+    Scroll to top/bottom
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#lines-count" title="Lines count" class="md-nav__link">
+    Lines count
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" title="Other properties" class="md-nav__link">
     Other properties
   </a>
@@ -4112,6 +4180,7 @@
 <li><code>'none'</code> : Disable sider controlling.</li>
 </ul>
 </li>
+<li>Set to <code>false</code> to ignore slider.</li>
 </ul>
 </li>
 <li><code>scroller</code> : Configuration of scroller behavior.<ul>
@@ -4123,6 +4192,7 @@
 <li>Set <code>false</code> to disable it.</li>
 </ul>
 </li>
+<li>Set to <code>false</code> to ignore scroller.</li>
 </ul>
 </li>
 <li><code>space</code> : Pads spaces<ul>
@@ -4157,10 +4227,56 @@
 <li>Set
     <div class="codehilite"><pre><span></span><span class="nx">textArea</span><span class="p">.</span><span class="nx">setText</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
 </pre></div></li>
+<li>Append
+    <div class="codehilite"><pre><span></span><span class="nx">textArea</span><span class="p">.</span><span class="nx">appendText</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
+</pre></div></li>
 <li>Get
    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">text</span> <span class="o">=</span> <span class="nx">textArea</span><span class="p">.</span><span class="nx">text</span><span class="p">;</span>
 </pre></div></li>
 </ul>
+<h3 id="scroll-content">Scroll content<a class="headerlink" href="#scroll-content" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">textArea</span><span class="p">.</span><span class="nx">setTextOY</span><span class="p">(</span><span class="nx">oy</span><span class="p">);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">textArea</span><span class="p">.</span><span class="nx">textOY</span> <span class="o">=</span> <span class="nx">oy</span><span class="p">;</span>
+</pre></div></li>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">textOY</span> <span class="o">=</span> <span class="nx">textArea</span><span class="p">.</span><span class="nx">textOY</span><span class="p">;</span>
+</pre></div></li>
+</ul>
+<h4 id="scroll-by-percentage">Scroll by percentage<a class="headerlink" href="#scroll-by-percentage" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">textArea</span><span class="p">.</span><span class="nx">setTextOYByPercentage</span><span class="p">(</span><span class="nx">t</span><span class="p">);</span>  <span class="c1">// t: 0~1</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">textArea</span><span class="p">.</span><span class="nx">t</span> <span class="o">=</span> <span class="nx">t</span><span class="p">;</span>
+</pre></div></li>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">t</span> <span class="o">=</span> <span class="nx">textArea</span><span class="p">.</span><span class="nx">t</span><span class="p">;</span>
+</pre></div></li>
+</ul>
+<h3 id="scroll-to-topbottom">Scroll to top/bottom<a class="headerlink" href="#scroll-to-topbottom" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Scroll to top
+    <div class="codehilite"><pre><span></span><span class="nx">textArea</span><span class="p">.</span><span class="nx">scrollToTop</span><span class="p">();</span>
+</pre></div><ul>
+<li>Equal to <code>textArea.t = 0;</code></li>
+</ul>
+</li>
+<li>Scroll to bottom
+    <div class="codehilite"><pre><span></span><span class="nx">textArea</span><span class="p">.</span><span class="nx">scrollToBottom</span><span class="p">();</span>
+</pre></div><ul>
+<li>Equal to <code>textArea.t = 1;</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="lines-count">Lines count<a class="headerlink" href="#lines-count" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">linesCount</span> <span class="o">=</span> <span class="nx">textArea</span><span class="p">.</span><span class="nx">linesCount</span><span class="p">;</span>
+</pre></div>
+
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
 <p>See <a href="../ui-sizer/">sizer object</a>, <a href="../ui-basesizer/">base sizer object</a>.</p>
 <h3 id="get-element">Get element<a class="headerlink" href="#get-element" title="Permanent link">&para;</a></h3>

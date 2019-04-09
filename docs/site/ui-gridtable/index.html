@@ -3430,6 +3430,40 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#scroll-table-content" title="Scroll table content" class="md-nav__link">
+    Scroll table content
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scroll-by-percentage" title="Scroll by percentage" class="md-nav__link">
+    Scroll by percentage
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scroll-to-topbottom" title="Scroll to top/bottom" class="md-nav__link">
+    Scroll to top/bottom
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#refresh-table-cells" title="Refresh table cells" class="md-nav__link">
+    Refresh table cells
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" title="Other properties" class="md-nav__link">
     Other properties
   </a>
@@ -3991,6 +4025,40 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#scroll-table-content" title="Scroll table content" class="md-nav__link">
+    Scroll table content
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#scroll-by-percentage" title="Scroll by percentage" class="md-nav__link">
+    Scroll by percentage
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scroll-to-topbottom" title="Scroll to top/bottom" class="md-nav__link">
+    Scroll to top/bottom
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#refresh-table-cells" title="Refresh table cells" class="md-nav__link">
+    Refresh table cells
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" title="Other properties" class="md-nav__link">
     Other properties
   </a>
@@ -4155,7 +4223,7 @@
 </ul>
 </li>
 <li><code>table.cellWidth</code> : Width of each cell.<ul>
-<li>Expand cell width to fit table width : set <code>cellWidth</code> to <code>undefined</code>, and <code>scrollMode</code> is <code>'vertical'</code>.    </li>
+<li>Expand cell width to fit table width : set <code>cellWidth</code> to <code>undefined</code>, and <code>scrollMode</code> is <code>'vertical'</code>.</li>
 </ul>
 </li>
 <li><code>table.columns</code> : Columns count of each row.</li>
@@ -4171,6 +4239,7 @@
 <li><code>'none'</code> : Disable sider controlling.</li>
 </ul>
 </li>
+<li>Set to <code>false</code> to ignore slider.</li>
 </ul>
 </li>
 <li><code>scroller</code> : Configuration of scroller behavior.<ul>
@@ -4182,6 +4251,7 @@
 <li>Set <code>false</code> to disable it.</li>
 </ul>
 </li>
+<li>Set to <code>false</code> to ignore scroller.</li>
 </ul>
 </li>
 <li><code>createCellContainerCallback</code> : Callback to return a container object of each visible cell.<ul>
@@ -4240,6 +4310,49 @@
    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">items</span> <span class="o">=</span> <span class="nx">gridTable</span><span class="p">.</span><span class="nx">items</span><span class="p">;</span>
 </pre></div></li>
 </ul>
+<h3 id="scroll-table-content">Scroll table content<a class="headerlink" href="#scroll-table-content" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">setTableOY</span><span class="p">(</span><span class="nx">oy</span><span class="p">);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">tableOY</span> <span class="o">=</span> <span class="nx">oy</span><span class="p">;</span>
+</pre></div></li>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tableOY</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">tableOY</span><span class="p">;</span>
+</pre></div></li>
+</ul>
+<h4 id="scroll-by-percentage">Scroll by percentage<a class="headerlink" href="#scroll-by-percentage" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">setTableOYByPercentage</span><span class="p">(</span><span class="nx">t</span><span class="p">);</span>  <span class="c1">// t: 0~1</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">t</span> <span class="o">=</span> <span class="nx">t</span><span class="p">;</span>
+</pre></div></li>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">t</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">t</span><span class="p">;</span>
+</pre></div></li>
+</ul>
+<h3 id="scroll-to-topbottom">Scroll to top/bottom<a class="headerlink" href="#scroll-to-topbottom" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Scroll to top
+    <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">scrollToTop</span><span class="p">();</span>
+</pre></div><ul>
+<li>Equal to <code>table.t = 0;</code></li>
+</ul>
+</li>
+<li>Scroll to bottom
+    <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">scrollToBottom</span><span class="p">();</span>
+</pre></div><ul>
+<li>Equal to <code>table.t = 1;</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="refresh-table-cells">Refresh table cells<a class="headerlink" href="#refresh-table-cells" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">refresh</span><span class="p">();</span>
+</pre></div>
+
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
 <p>See <a href="../ui-basesizer/">base sizer object</a>.</p>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
