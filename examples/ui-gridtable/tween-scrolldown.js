@@ -30,7 +30,7 @@ class Demo extends Phaser.Scene {
                 columns: 2,
 
                 mask: {
-                    padding: 1,
+                    padding: 2,
                 },
             },
 

@@ -1,5 +1,9 @@
 import GridTablePlugin from '../../plugins/gridtable-plugin.js';
 
+const COLOR_PRIMARY = 0x4e342e;
+const COLOR_LIGHT = 0x7b5e57;
+const COLOR_DARK = 0x260e04;
+
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -7,7 +11,7 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {}
+    preload() { }
 
     create() {
         var newCellObject = function (cell) {
@@ -15,9 +19,9 @@ class Demo extends Phaser.Scene {
             var cellIdx = cell.index;
             // cell.height = (cellIdx % 2) ? 40 : 80;  // se height of visible cell
 
-            var color = (cellIdx % 2) ? 0x40241a : 0x9c786c;
-            var bg = scene.add.rectangle(0, 0, cell.width, cell.height, color, 0.5)
-                .setStrokeStyle(2, 0x9c786c)
+            var color = (cellIdx % 2) ? COLOR_PRIMARY : COLOR_DARK;
+            var bg = scene.add.rectangle(0, 0, cell.width, cell.height, color)
+                .setStrokeStyle(2, COLOR_LIGHT)
                 .setOrigin(0);
             var txt = scene.add.text(5, 5, cellIdx);
             var container = scene.add.container(0, 0, [bg, txt]);
@@ -34,6 +38,9 @@ class Demo extends Phaser.Scene {
             cellsCount: 20,
             columns: 1,
             cellVisibleCallback: onCellVisible.bind(this),
+            mask: {
+                padding: 2,
+            }
         });
 
         // set height of all cells
@@ -45,8 +52,9 @@ class Demo extends Phaser.Scene {
 
         // draw bound
         this.add.graphics()
-            .lineStyle(3, 0xff0000)
-            .strokeRectShape(table.getBounds());
+            .lineStyle(2, 0xff0000)
+            .strokeRectShape(table.getBounds())
+            .setDepth(1);
 
         // drag table content
         table.setInteractive();
@@ -60,7 +68,7 @@ class Demo extends Phaser.Scene {
         });
     }
 
-    update() {}
+    update() { }
 }
 
 var config = {

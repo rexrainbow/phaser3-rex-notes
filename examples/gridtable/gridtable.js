@@ -1,5 +1,9 @@
 import GridTablePlugin from '../../plugins/gridtable-plugin.js';
 
+const COLOR_PRIMARY = 0x4e342e;
+const COLOR_LIGHT = 0x7b5e57;
+const COLOR_DARK = 0x260e04;
+
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -7,14 +11,14 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {}
+    preload() { }
 
     create() {
         var newCellObject = function (cell) {
             var scene = cell.scene;
-            var bg = scene.add.graphics()
-                .fillStyle(0x555555)
-                .fillRect(2, 2, 58, 58);
+            var bg = scene.add.rectangle(0, 0, cell.width, cell.height, COLOR_PRIMARY)
+                .setStrokeStyle(2, COLOR_LIGHT)
+                .setOrigin(0);
             var txt = scene.add.text(5, 5, cell.index);
             var container = scene.add.container(0, 0, [bg, txt]);
             return container;
@@ -30,13 +34,16 @@ class Demo extends Phaser.Scene {
             cellsCount: 100,
             columns: 4,
             cellVisibleCallback: onCellVisible.bind(this),
-            // mask: false
+            mask: {
+                padding: 2,
+            }
         });
 
         // draw bound
         this.add.graphics()
-            .lineStyle(3, 0xff0000)
-            .strokeRectShape(table.getBounds());
+            .lineStyle(2, 0xff0000)
+            .strokeRectShape(table.getBounds())
+            .setDepth(1);
 
         // drag table content
         table
@@ -57,7 +64,8 @@ class Demo extends Phaser.Scene {
             })
     }
 
-    update() {}
+    update() {
+    }
 }
 
 var config = {

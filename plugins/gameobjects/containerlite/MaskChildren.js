@@ -3,12 +3,15 @@ import MaskToGameObject from '../../utils/mask/MaskToGameObject.js';
 const Intersects = Phaser.Geom.Intersects.RectangleToRectangle;
 const Overlaps = Phaser.Geom.Rectangle.Overlaps;
 
-var MaskChildren = function (parent, mask) {
+var MaskChildren = function (parent, mask, children) {
     if (!mask) {
         return;
     }
 
-    var children = parent.getAllChildren();
+    if (children === undefined) {
+        children = parent.getAllChildren();
+    }
+
     var parentBounds = parent.getBounds();
     var maskGameObject = MaskToGameObject(mask);
 
@@ -27,18 +30,18 @@ var MaskChildren = function (parent, mask) {
             visiblePointsNumber = containsPoints(parentBounds, childBounds);
             switch (visiblePointsNumber) {
                 case 4: // 4 points are all inside visible window, set visible
-                    showAll(child, mask);
+                    showAll(parent, child, mask);
                     break;
                 case 0: // No point is inside visible window
                     // Parent intersects with child, or parent is inside child, set visible, and apply mask
                     if (Intersects(parentBounds, childBounds) || Overlaps(parentBounds, childBounds)) {
-                        showSome(child, mask);
+                        showSome(parent, child, mask);
                     } else { // Set invisible
-                        showNone(child, mask);
+                        showNone(parent, child, mask);
                     }
                     break;
                 default: // Part of points are inside visible window, set visible, and apply mask
-                    showSome(child, mask);
+                    showSome(parent, child, mask);
                     break;
             }
         } else {
@@ -61,16 +64,19 @@ var containsPoints = function (rectA, rectB) {
     return result;
 };
 
-var showAll = function (child, mask) {
-    child.setVisible(true).clearMask();
+var showAll = function (parent, child, mask) {
+    parent.setChildLocalVisible(child, true);
+    child.clearMask();
 }
 
-var showSome = function (child, mask) {
-    child.setVisible(true).setMask(mask);
+var showSome = function (parent, child, mask) {
+    parent.setChildLocalVisible(child, true);
+    child.setMask(mask);
 }
 
-var showNone = function (child, mask) {
-    child.setVisible(false).clearMask();
+var showNone = function (parent, child, mask) {
+    parent.setChildLocalVisible(child, false);
+    child.clearMask();
 }
 
 export default MaskChildren;

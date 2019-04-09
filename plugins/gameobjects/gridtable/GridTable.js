@@ -3,7 +3,7 @@ import Table from './Table.js';
 import DefaultMask from '../../utils/mask/DefaultMask.js';
 import ResizeGameObject from '../../utils/size/ResizeGameObject.js';
 import MaskToGameObject from '../../utils/mask/MaskToGameObject.js';
-import IsPlainObject from '../../utils/object/IsPlainObject.js';
+import MaskChildren from '../containerlite/MaskChildren.js';
 
 const Container = ContainerLite;
 const Components = Phaser.GameObjects.Components;
@@ -44,7 +44,8 @@ class GridTable extends Container {
             this.on('cellinvisible', callback, scope);
         }
 
-        this.setMask(GetValue(config, 'mask', true));
+        this.cellsMask = undefined;
+        this.setCellsMask(GetValue(config, 'mask', true));
 
         this.setScrollMode(GetValue(config, 'scrollMode', 0));
         this.setClampMode(GetValue(config, 'clamplTableOXY', true));
@@ -337,6 +338,7 @@ class GridTable extends Container {
         this.clearVisibleCellIndexes();
         this.showCells();
         this.hideCells();
+        this.maskCells();
         return this;
     }
 
@@ -428,26 +430,36 @@ class GridTable extends Container {
     }
 
     // Internal
-    getDefaultMask(maskConfig) {
-        var padding = GetValue(maskConfig, 'padding', 0);
-        var shape = new DefaultMask(this, 0, padding);
-        this.add(shape);
-        var mask = shape.createGeometryMask();
-        return mask;
+    setCellsMask(maskConfig) {
+        var maskEnable, maskPadding;
+        if (maskConfig === true) {
+            maskEnable = true;
+            maskPadding = 0;
+        } else if (maskConfig === false) {
+            maskEnable = false;
+        } else {
+            maskEnable = GetValue(maskConfig, 'mask', true);
+            maskPadding = GetValue(maskConfig, 'padding', 0);
+        }
+        if (maskEnable) {
+            var maskGameObject = new DefaultMask(this, 0, maskPadding);
+            this.cellsMask = maskGameObject.createGeometryMask();
+            this.add(maskGameObject);
+        }
+
+        return this;
     }
 
-    setMask(maskConfig) {
-        var mask;
-        if ((maskConfig === true) || (IsPlainObject(maskConfig))) {
-            mask = this.getDefaultMask(maskConfig);
-        } else if (maskConfig === false) {
-            this.clearMask();
-            return this;
-        } else {
-            mask = maskConfig;
+    maskCells() {
+        var children = [];
+        var cells = this.visibleCells.entries, container;
+        for (var i = 0, cnt = cells.length; i < cnt; i++) {
+            container = cells[i].getContainer();
+            if (container) {
+                container.getAllChildren(children);
+            }
         }
-        super.setMask(mask);
-        return this;
+        MaskChildren(this, this.cellsMask, children);
     }
 
     resize(width, height) {
@@ -456,15 +468,14 @@ class GridTable extends Container {
         }
 
         super.resize(width, height);
+        if (this.cellsMask) {
+            ResizeGameObject(MaskToGameObject(this.cellsMask), width, height);
+        }
 
         if (this.expandCellSize) {
             this.table.setDefaultCellWidth(this.instWidth / this.table.colCount);
         }
         this.updateTable(true);
-
-        if (this.mask) {
-            ResizeGameObject(MaskToGameObject(this.mask), width, height);
-        }
         return this;
     }
 
@@ -559,7 +570,7 @@ class GridTable extends Container {
     }
 
     showCell(cell) {
-        // attach container to cell by cell.setContainer(container) under this event
+        // Attach container to cell by cell.setContainer(container) under this event
         this.emit('cellvisible', cell);
     }
 
@@ -574,9 +585,9 @@ class GridTable extends Container {
     }
 
     hideCell(cell) {
-        // option: pop container of cell by cell.popContainer() under this event 
+        // Option: pop container of cell by cell.popContainer() under this event 
         this.emit('cellinvisible', cell);
-        cell.destroyContainer(); // destroy container of cell
+        cell.destroyContainer(); // Destroy container of cell
     }
 
     get instHeight() {

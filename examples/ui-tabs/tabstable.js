@@ -6,6 +6,7 @@ const Random = Phaser.Math.Between;
 const COLOR_PRIMARY = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
+
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -13,7 +14,7 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {}
+    preload() { }
 
     create() {
         this.print = this.add.text(0, 0, '');
@@ -21,67 +22,70 @@ class Demo extends Phaser.Scene {
         var db = createDataBase(400);
 
         var tabs = this.rexUI.add.tabs({
-                x: 400,
-                y: 300,
+            x: 400,
+            y: 300,
 
-                panel: this.rexUI.add.gridTable({
-                    background: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_PRIMARY),
+            panel: this.rexUI.add.gridTable({
+                background: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_PRIMARY),
 
-                    table: {
-                        width: 250,
-                        height: 400,
+                table: {
+                    width: 250,
+                    height: 400,
 
-                        cellWidth: 120,
-                        cellHeight: 60,
-                        columns: 2,
+                    cellWidth: 120,
+                    cellHeight: 60,
+                    columns: 2,
+                    mask: {
+                        padding: 2,
                     },
-
-                    slider: {
-                        track: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_DARK),
-                        thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 13, COLOR_LIGHT),
-                    },
-
-                    createCellContainerCallback: function (cell) {
-                        var scene = cell.scene,
-                            width = cell.width,
-                            height = cell.height,
-                            item = cell.item,
-                            index = cell.index;
-                        return scene.rexUI.add.label({
-                                width: width,
-                                height: height,
-
-                                background: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 0).setStrokeStyle(2, COLOR_DARK),
-                                icon: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 10, item.color),
-                                text: scene.add.text(0, 0, item.id),
-
-                                space: {
-                                    icon: 10,
-                                    left: 15
-                                }
-                            });
-                    },
-                }),
-
-                leftButtons: [
-                    createButton(this, 2, 'AA'),
-                    createButton(this, 2, 'BB'),
-                    createButton(this, 2, 'CC'),
-                    createButton(this, 2, 'DD'),
-                ],
-
-                rightButtons: [
-                    createButton(this, 0, '+'),
-                    createButton(this, 0, '-'),
-                ],
-
-                space: {
-                    leftButtonsOffset: 20,
-                    rightButtonsOffset: 30,
-
-                    leftButton: 1,
                 },
-            })
+
+                slider: {
+                    track: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_DARK),
+                    thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 13, COLOR_LIGHT),
+                },
+
+                createCellContainerCallback: function (cell) {
+                    var scene = cell.scene,
+                        width = cell.width,
+                        height = cell.height,
+                        item = cell.item,
+                        index = cell.index;
+                    return scene.rexUI.add.label({
+                        width: width,
+                        height: height,
+
+                        background: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 0).setStrokeStyle(2, COLOR_DARK),
+                        icon: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 10, item.color),
+                        text: scene.add.text(0, 0, item.id),
+
+                        space: {
+                            icon: 10,
+                            left: 15
+                        }
+                    });
+                },
+            }),
+
+            leftButtons: [
+                createButton(this, 2, 'AA'),
+                createButton(this, 2, 'BB'),
+                createButton(this, 2, 'CC'),
+                createButton(this, 2, 'DD'),
+            ],
+
+            rightButtons: [
+                createButton(this, 0, '+'),
+                createButton(this, 0, '-'),
+            ],
+
+            space: {
+                leftButtonsOffset: 20,
+                rightButtonsOffset: 30,
+
+                leftButton: 1,
+            },
+        })
             .layout()
         //.drawBounds(this.add.graphics(), 0xff0000);
 
@@ -133,19 +137,19 @@ class Demo extends Phaser.Scene {
             }, this)
             .on('cell.over', function (cellContainer, cellIndex) {
                 cellContainer.getElement('background')
-                    .setStrokeStyle(1, 0xffffff)
+                    .setStrokeStyle(2, COLOR_LIGHT)
                     .setDepth(1);
             }, this)
             .on('cell.out', function (cellContainer, cellIndex) {
                 cellContainer.getElement('background')
-                    .setStrokeStyle(2, 0x260e04)
+                    .setStrokeStyle(2, COLOR_DARK)
                     .setDepth(0);
             }, this);
 
         tabs.emitButtonClick('left', 0).emitButtonClick('right', 0);
     }
 
-    update() {}
+    update() { }
 }
 
 var createDataBase = function (count) {

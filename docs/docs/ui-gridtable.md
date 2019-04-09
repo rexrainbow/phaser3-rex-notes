@@ -59,6 +59,9 @@ var gridTable = scene.rexUI.add.gridTable({
         cellWidth: undefined,
         cellHeight: undefined,
         columns: 2,
+        mask: {
+            padding: 0
+        }
     },
 
     slider: {
@@ -116,6 +119,9 @@ var gridTable = scene.rexUI.add.gridTable({
     - `table.cellWidth` : Width of each cell.
         - Expand cell width to fit table width : set `cellWidth` to `undefined`, and `scrollMode` is `'vertical'`.
     - `table.columns` : Columns count of each row.
+    - `table.mask` : A rectangle mask of cells
+        - `table.mask.padding` : Extra left/right/top/bottom padding spacing of this rectangle mask. Default value is `0`.
+        - `false` : No mask.
 - `slider` : Componments of slider, optional.
     - `slider.background` : Game object of slider background, optional.
     - `slider.track` : Game object of track.

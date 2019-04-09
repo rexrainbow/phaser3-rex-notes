@@ -183,6 +183,21 @@ var group = container.children;
 
 Reference [Group](group.md)
 
+#### Change state of child
+
+- Local position
+    ```javascript
+    container.setChildLocalPosition(child, x, y);
+    ```
+- Visible
+    ```javascript
+    container.setChildLocalVisible(child, visible);
+    ```
+- Alpha
+    ```javascript
+    container.setChildLocalAlpha(child, alpha);
+    ```
+
 ### Local state of child
 
 Get local state
@@ -203,12 +218,6 @@ var localState = child.rexContainer;
     - `scaleX`, `scaleY`
     - `visible`
     - `alpha`
-
-#### Set local position
-
-```javascript
-container.setChildLocalPosition(child, x, y);
-```
 
 #### Update world properties of child
 

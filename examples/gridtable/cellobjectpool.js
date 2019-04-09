@@ -2,6 +2,10 @@ import GridTablePlugin from '../../plugins/gridtable-plugin.js';
 import TouchStatePlugin from '../../plugins/touchstate-plugin.js';
 import ObjectPoolPlugin from '../../plugins/objectpool-plugin.js';
 
+const COLOR_PRIMARY = 0x4e342e;
+const COLOR_LIGHT = 0x7b5e57;
+const COLOR_DARK = 0x260e04;
+
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -9,7 +13,7 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {}
+    preload() { }
 
     create() {
         var cellObjectsPool = this.plugins.get('rexObjectPool').add();
@@ -19,9 +23,9 @@ class Demo extends Phaser.Scene {
             var container = cellObjectsPool.pop();
             if (container === null) {
                 console.log(cell.index + ': create new gameboject')
-                var bg = scene.add.graphics()
-                    .fillStyle(0x555555)
-                    .fillRect(2, 2, 58, 58)
+                var bg = scene.add.rectangle(0, 0, cell.width, cell.height, COLOR_PRIMARY)
+                    .setStrokeStyle(2, COLOR_LIGHT)
+                    .setOrigin(0)
                     .setName('background');
                 var txt = scene.add.text(5, 5, cell.index)
                     .setName('index');
@@ -52,13 +56,17 @@ class Demo extends Phaser.Scene {
             cellsCount: 100,
             columns: 4,
             cellVisibleCallback: onCellVisible.bind(this),
-            cellInvisibleCallback: onCellInvisible.bind(this)
+            cellInvisibleCallback: onCellInvisible.bind(this),
+            mask: {
+                padding: 2,
+            }
         });
 
         // draw bound
         this.add.graphics()
-            .lineStyle(3, 0xff0000)
-            .strokeRectShape(table.getBounds());
+            .lineStyle(2, 0xff0000)
+            .strokeRectShape(table.getBounds())
+            .setDepth(1);
 
         // drag table content
         table.touchState = this.plugins.get('rexTouchState').add(table)
@@ -66,14 +74,14 @@ class Demo extends Phaser.Scene {
                 table.addTableOXY(this.dx, this.dy).updateTable();
             });
 
-        this.add.text(10, 10, 'Destroy')
+        this.add.text(0, 580, 'Destroy')
             .setInteractive()
             .on('pointerdown', function () {
                 table.destroy();
             });
     }
 
-    update() {}
+    update() { }
 }
 
 var config = {
@@ -88,20 +96,20 @@ var config = {
     scene: Demo,
     plugins: {
         global: [{
-                key: 'rexGridTable',
-                plugin: GridTablePlugin,
-                start: true
-            },
-            {
-                key: 'rexTouchState',
-                plugin: TouchStatePlugin,
-                start: true
-            },
-            {
-                key: 'rexObjectPool',
-                plugin: ObjectPoolPlugin,
-                start: true
-            }
+            key: 'rexGridTable',
+            plugin: GridTablePlugin,
+            start: true
+        },
+        {
+            key: 'rexTouchState',
+            plugin: TouchStatePlugin,
+            start: true
+        },
+        {
+            key: 'rexObjectPool',
+            plugin: ObjectPoolPlugin,
+            start: true
+        }
         ]
     }
 };

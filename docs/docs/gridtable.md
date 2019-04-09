@@ -53,7 +53,9 @@ var config = {
 
     clamplTableOXY: true,
     scrollMode: 0,        // 0|'v'|'vertical'|1|'h'|'horizontal'
-    mask: true
+    mask: {
+        padding: 0
+    }
 }
 var table = scene.add.rexGridTable(x, y, width, height, config);
 ```
@@ -71,10 +73,9 @@ var table = scene.add.rexGridTable(x, y, width, height, config);
 - `scrollMode` :
     - `0`, or `'v'`, or `'vertical'` : Scroll table vertically.
     - `1`, or `'h'`, or `'horizontal'` : Scroll table horizontally.
-- `mask` : [Mask](mask.md) cells
-    - `true` : Default rectangle mask
-    - `false` : No mask
-    - A [mask object](mask.md) : Custom mask object
+- `mask` : A rectangle mask of cells
+    - `mask.padding` : Extra left/right/top/bottom padding spacing of this rectangle mask. Default value is `0`.
+    - `false` : No mask.
 
 Add grid table from JSON
 

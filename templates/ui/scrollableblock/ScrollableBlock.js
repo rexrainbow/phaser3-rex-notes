@@ -8,7 +8,6 @@ import Layout from './Layout.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
-const Clamp = Phaser.Math.Clamp;
 
 class ScrollableBlock extends BaseSizer {
     constructor(scene, x, y, minWidth, minHeight, config) {
@@ -50,7 +49,10 @@ class ScrollableBlock extends BaseSizer {
             return;
         }
         this.child = undefined;
-        this.childMask = undefined;
+        if (this.childMask) {
+            this.childMask.destroy();
+            this.childMask = undefined;
+        }        
         super.destroy(fromScene);
     }
 

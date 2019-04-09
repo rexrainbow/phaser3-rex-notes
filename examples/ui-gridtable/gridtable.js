@@ -1,5 +1,9 @@
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
+const COLOR_PRIMARY = 0x4e342e;
+const COLOR_LIGHT = 0x7b5e57;
+const COLOR_DARK = 0x260e04;
+
 const Random = Phaser.Math.Between;
 
 class Demo extends Phaser.Scene {
@@ -30,7 +34,7 @@ class Demo extends Phaser.Scene {
                     columns: 2,
 
                     mask: {
-                        padding: 1,
+                        padding: 2,
                     },
                 },
 
@@ -59,7 +63,7 @@ class Demo extends Phaser.Scene {
                         height: height,
 
                         orientation: scrollMode,
-                        background: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 0).setStrokeStyle(2, 0x260e04),
+                        background: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 0).setStrokeStyle(2, COLOR_DARK),
                         icon: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 10, item.color),
                         text: scene.add.text(0, 0, item.id),
 
@@ -82,12 +86,12 @@ class Demo extends Phaser.Scene {
             }, this)
             .on('cell.over', function (cellContainer, cellIndex) {
                 cellContainer.getElement('background')
-                    .setStrokeStyle(1, 0xffffff)
+                    .setStrokeStyle(2, COLOR_LIGHT)
                     .setDepth(1);
             }, this)
             .on('cell.out', function (cellContainer, cellIndex) {
                 cellContainer.getElement('background')
-                    .setStrokeStyle(2, 0x260e04)
+                    .setStrokeStyle(2, COLOR_DARK)
                     .setDepth(0);
             }, this);
     }

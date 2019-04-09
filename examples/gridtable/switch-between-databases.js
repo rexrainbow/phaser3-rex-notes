@@ -3,6 +3,10 @@ import GridTablePlugin from '../../plugins/gridtable-plugin.js';
 import TouchStatePlugin from '../../plugins/touchstate-plugin.js';
 import ContainerLitePlugin from '../../plugins/containerlite-plugin.js';
 
+const COLOR_PRIMARY = 0x4e342e;
+const COLOR_LIGHT = 0x7b5e57;
+const COLOR_DARK = 0x260e04;
+
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Demo extends Phaser.Scene {
@@ -12,14 +16,12 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {
-        this.load.image('bg', 'assets/images/white-dot.png');
-    }
+    preload() { }
 
     create() {
-        var db0 = getDataBase(30);
-        var db1 = getDataBase(40);
-        var db2 = getDataBase(50);
+        var db0 = getDataBase(10);
+        var db1 = getDataBase(20);
+        var db2 = getDataBase(30);
 
 
         var config = {
@@ -32,7 +34,10 @@ class Demo extends Phaser.Scene {
             cellHeight: 60,
             cellWidth: 60,
             cellsCount: 0,
-            columns: 4
+            columns: 4,
+            mask: {
+                padding: 2,
+            }
         };
         var table = newTable(this, config);
 
@@ -45,29 +50,31 @@ class Demo extends Phaser.Scene {
             .setInteractive()
             .on('pointerup', function () {
                 setDataBase(db0);
+                console.log('Show db0');
             });
 
         this.add.text(0, 30, 'Db1')
             .setInteractive()
             .on('pointerup', function () {
                 setDataBase(db1);
+                console.log('Show db1');
             });
 
         this.add.text(0, 60, 'Db2')
             .setInteractive()
             .on('pointerup', function () {
                 setDataBase(db2);
+                console.log('Show db2');
             });
 
         setDataBase(db0);
     }
 
-    update() {}
+    update() { }
 }
 
 var getDataBase = function (count) {
     var data = [];
-    var startIdx = Math.floor(Math.random() * 100);
     for (var i = 0; i < count; i++) {
         data.push({
             id: i
@@ -83,14 +90,10 @@ var newTable = function (scene, config) {
         var scene = cell.scene;
         var database = table.database;
         var data = database[cell.index];
-        var bg = scene.add.image(30, 30, 'bg')
-            .setName('background')
-            .setDisplaySize(56, 56)
-            .setTint(0x333333);
-        var txt = scene.add.text(5, 5, data.id)
-            .setName('id');
-        cell.setData('id', data.id);
-
+        var bg = scene.add.rectangle(0, 0, cell.width, cell.height, COLOR_PRIMARY)
+            .setStrokeStyle(2, COLOR_LIGHT)
+            .setOrigin(0);
+        var txt = scene.add.text(5, 5, data.id);
         var container = scene.add.rexContainerLite(0, 0)
             .add(bg)
             .add(txt);
@@ -104,6 +107,12 @@ var newTable = function (scene, config) {
     table = scene.make.rexGridTable(config);
     table.database = GetValue(config, 'database', []);
     addDragContentBehavior(table);
+
+    // draw bound
+    scene.add.graphics()
+        .lineStyle(2, 0xff0000)
+        .strokeRectShape(table.getBounds())
+        .setDepth(1);
 
     return table;
 }
@@ -128,20 +137,20 @@ var config = {
     scene: Demo,
     plugins: {
         global: [{
-                key: 'rexGridTable',
-                plugin: GridTablePlugin,
-                start: true
-            },
-            {
-                key: 'rexTouchState',
-                plugin: TouchStatePlugin,
-                start: true
-            },
-            {
-                key: 'rexContainerLite',
-                plugin: ContainerLitePlugin,
-                start: true
-            }
+            key: 'rexGridTable',
+            plugin: GridTablePlugin,
+            start: true
+        },
+        {
+            key: 'rexTouchState',
+            plugin: TouchStatePlugin,
+            start: true
+        },
+        {
+            key: 'rexContainerLite',
+            plugin: ContainerLitePlugin,
+            start: true
+        }
         ]
     }
 };
