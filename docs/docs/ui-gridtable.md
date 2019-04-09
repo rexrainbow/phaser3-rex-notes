@@ -242,6 +242,12 @@ gridTable.layout();
 table.refresh();
 ```
 
+### Enable/disable scrolling
+
+```javascript
+table.enableScrolling(enabled);
+```
+
 ### Other properties
 
 See [base sizer object](ui-basesizer.md).

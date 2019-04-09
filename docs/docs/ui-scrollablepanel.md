@@ -183,6 +183,12 @@ scrollablePanel.layout();
     ```
     - Equal to `scrollablePanel.t = 1;`
 
+### Enable/disable scrolling
+
+```javascript
+scrollablePanel.enableScrolling(enabled);
+```
+
 ### Other properties
 
 See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).

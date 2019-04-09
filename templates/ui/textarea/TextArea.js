@@ -161,6 +161,21 @@ class TextArea extends Sizer {
         this.t = 1;
         return this;
     }
+
+    enableScrolling(enabled) {
+        if (enabled === undefined) {
+            enabled = true;
+        }
+        var scroller = this.childrenMap.scroller;
+        var slider = this.childrenMap.slider;
+        if (scroller) {
+            scroller.setEnable(enabled);
+        }
+        if (slider) {
+            slider.setEnable(enabled);
+        }
+        return this;
+    }
 }
 
 var methods = {

@@ -194,6 +194,12 @@ textArea.layout();
 var linesCount = textArea.linesCount;
 ```
 
+### Enable/disable scrolling
+
+```javascript
+textArea.enableScrolling(enabled);
+```
+
 ### Other properties
 
 See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
