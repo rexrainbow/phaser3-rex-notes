@@ -86,3 +86,20 @@
         // ...
     }
     ```
+
+## Demos
+
+- [Dialog](https://codepen.io/rexrainbow/pen/oQjMWE)
+    - [Yes/No](https://codepen.io/rexrainbow/pen/MPZWZG)
+    - [Choice](https://codepen.io/rexrainbow/pen/ePoRVz)
+    - [Pop-up](https://codepen.io/rexrainbow/pen/NEpjmP)
+- [Menu](https://codepen.io/rexrainbow/pen/PxOEBr)
+- [Text-box](https://codepen.io/rexrainbow/pen/MzGoJv)
+- [Text-area](https://codepen.io/rexrainbow/pen/JzBZzy)
+- [Number bar](https://codepen.io/rexrainbow/pen/qLZPXr)
+- [Grid table](https://codepen.io/rexrainbow/pen/XyJbWX)
+- [Tabs](https://codepen.io/rexrainbow/pen/qJeVza)
+    - [Tabs-tables](https://codepen.io/rexrainbow/pen/BGKvXK)
+- [Scroll-able panel](https://codepen.io/rexrainbow/pen/YMyBom)
+- [Pages](https://codepen.io/rexrainbow/pen/vPWzBa)
+- [Round-rectangle](https://codepen.io/rexrainbow/pen/ZqqJjG)

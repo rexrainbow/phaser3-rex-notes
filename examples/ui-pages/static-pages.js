@@ -12,14 +12,14 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {}
+    preload() { }
 
     create() {
         var keys = ['Table', 'Label'];
         var mainPanel = CreateMainPanel(this, keys)
             .setPosition(400, 300)
             .layout()
-            //.drawBounds(this.add.graphics(), 0xff0000);
+        //.drawBounds(this.add.graphics(), 0xff0000);
 
 
         mainPanel.getElement('pages')
@@ -33,21 +33,21 @@ class Demo extends Phaser.Scene {
         mainPanel.getElement('buttons').emitButtonClick(0);
     }
 
-    update() {}
+    update() { }
 }
 
 var CreateMainPanel = function (scene, keys) {
     var buttons = CreateButtons(scene, keys);
     var pages = CreatePages(scene, keys);
     var mainPanel = scene.rexUI.add.sizer({
-            orientation: 'x',
-        }).add(
-            buttons, //child
-            0, // proportion
-            'top', // align
-            0, // paddingConfig
-            false, // expand
-        )
+        orientation: 'x',
+    }).add(
+        buttons, //child
+        0, // proportion
+        'top', // align
+        0, // paddingConfig
+        false, // expand
+    )
         .add(
             pages, //child
             0, // proportion
@@ -130,6 +130,9 @@ var CreateTablePage = function (scene) {
             cellWidth: 120,
             cellHeight: 60,
             columns: 2,
+            mask: {
+                padding: 2,
+            }
         },
 
         slider: {
@@ -153,18 +156,18 @@ var CreateTablePage = function (scene) {
                 item = cell.item,
                 index = cell.index;
             return scene.rexUI.add.label({
-                    width: width,
-                    height: height,
+                width: width,
+                height: height,
 
-                    background: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 0).setStrokeStyle(2, COLOR_LIGHT),
-                    icon: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 10, item.color),
-                    text: scene.add.text(0, 0, item.id),
+                background: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 0).setStrokeStyle(2, COLOR_LIGHT),
+                icon: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 10, item.color),
+                text: scene.add.text(0, 0, item.id),
 
-                    space: {
-                        icon: 10,
-                        left: 15
-                    }
-                })
+                space: {
+                    icon: 10,
+                    left: 15
+                }
+            })
                 .setOrigin(0);
         },
         items: getItems(100)
