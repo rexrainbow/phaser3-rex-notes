@@ -149,72 +149,72 @@ textArea.layout();
 
 - Set
     ```javascript
-    scrollablePanel.setChildOY(oy);
+    textArea.setChildOY(oy);
     ```
     or
     ```javascript
-    scrollablePanel.childOY = oy;
+    textArea.childOY = oy;
     ```
 - Get
     ```javascript
-    var childOY = scrollablePanel.childOY;
+    var childOY = textArea.childOY;
     ```
 
 #### Scroll by percentage
 
 - Set
     ```javascript
-    scrollablePanel.setT(t);  // t: 0~1
+    textArea.setT(t);  // t: 0~1
     ```
     or
     ```javascript
-    scrollablePanel.t = t;
+    textArea.t = t;
     ```
 - Get
     ```javascript
-    var t = scrollablePanel.t;
+    var t = textArea.t;
     ```
 
 ### Scroll to top/bottom
 
 - Scroll to top
     ```javascript
-    scrollablePanel.scrollToTop();
+    textArea.scrollToTop();
     ```
-    - Equal to `scrollablePanel.t = 0;`
+    - Equal to `textArea.t = 0;`
 - Scroll to bottom
     ```javascript
-    scrollablePanel.scrollToBottom();
+    textArea.scrollToBottom();
     ```
-    - Equal to `scrollablePanel.t = 1;`
+    - Equal to `textArea.t = 1;`
 
 ### Enable/disable scrolling
 
 - Slider
     - Set enable state
         ```javascript
-        scrollablePanel.setSliderEnable(enabled);
+        textArea.setSliderEnable(enabled);
         ```
         or
         ```javascript
-        scrollablePanel.sliderEnable = enabled;
+        textArea.sliderEnable = enabled;
         ```
     - Get enable state
         ```javascript
-        var enable = scrollablePanel.sliderEnable;
+        var enable = textArea.sliderEnable;
         ```
 - Scroller
     - Set enable state
         ```javascript
-        scrollablePanel.setScrollerEnable(enabled);
+        textArea.setScrollerEnable(enabled);
         ```
         or
         ```javascript
-        scrollablePanel.scrollerEnable = enabled;
+        textArea.scrollerEnable = enabled;
         ```
     - Get enable state
         ```javascript
-        var enable = scrollablePanel.scrollerEnable;
+        var enable = textArea.scrollerEnable;
         ```
 
 ### Lines count

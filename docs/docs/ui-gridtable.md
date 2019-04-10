@@ -197,72 +197,72 @@ gridTable.layout();
 
 - Set
     ```javascript
-    scrollablePanel.setChildOY(oy);
+    gridTable.setChildOY(oy);
     ```
     or
     ```javascript
-    scrollablePanel.childOY = oy;
+    gridTable.childOY = oy;
     ```
 - Get
     ```javascript
-    var childOY = scrollablePanel.childOY;
+    var childOY = gridTable.childOY;
     ```
 
 #### Scroll by percentage
 
 - Set
     ```javascript
-    scrollablePanel.setT(t);  // t: 0~1
+    gridTable.setT(t);  // t: 0~1
     ```
     or
     ```javascript
-    scrollablePanel.t = t;
+    gridTable.t = t;
     ```
 - Get
     ```javascript
-    var t = scrollablePanel.t;
+    var t = gridTable.t;
     ```
 
 ### Scroll to top/bottom
 
 - Scroll to top
     ```javascript
-    scrollablePanel.scrollToTop();
+    gridTable.scrollToTop();
     ```
-    - Equal to `scrollablePanel.t = 0;`
+    - Equal to `gridTable.t = 0;`
 - Scroll to bottom
     ```javascript
-    scrollablePanel.scrollToBottom();
+    gridTable.scrollToBottom();
     ```
-    - Equal to `scrollablePanel.t = 1;`
+    - Equal to `gridTable.t = 1;`
 
 ### Enable/disable scrolling
 
 - Slider
     - Set enable state
         ```javascript
-        scrollablePanel.setSliderEnable(enabled);
+        gridTable.setSliderEnable(enabled);
         ```
         or
         ```javascript
-        scrollablePanel.sliderEnable = enabled;
+        gridTable.sliderEnable = enabled;
         ```
     - Get enable state
         ```javascript
-        var enable = scrollablePanel.sliderEnable;
+        var enable = gridTable.sliderEnable;
         ```
 - Scroller
     - Set enable state
         ```javascript
-        scrollablePanel.setScrollerEnable(enabled);
+        gridTable.setScrollerEnable(enabled);
         ```
         or
         ```javascript
-        scrollablePanel.scrollerEnable = enabled;
+        gridTable.scrollerEnable = enabled;
         ```
     - Get enable state
         ```javascript
-        var enable = scrollablePanel.scrollerEnable;
+        var enable = gridTable.scrollerEnable;
         ```
 
 ### Refresh table cells
