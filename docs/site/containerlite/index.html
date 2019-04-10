@@ -1287,6 +1287,19 @@
     Children group
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#change-state-of-child" title="Change state of child" class="md-nav__link">
+    Change state of child
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -1296,13 +1309,6 @@
   
     <nav class="md-nav">
       <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#set-local-position" title="Set local position" class="md-nav__link">
-    Set local position
-  </a>
-  
-</li>
         
           <li class="md-nav__item">
   <a href="#update-world-properties-of-child" title="Update world properties of child" class="md-nav__link">
@@ -4087,6 +4093,19 @@
     Children group
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#change-state-of-child" title="Change state of child" class="md-nav__link">
+    Change state of child
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -4096,13 +4115,6 @@
   
     <nav class="md-nav">
       <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#set-local-position" title="Set local position" class="md-nav__link">
-    Set local position
-  </a>
-  
-</li>
         
           <li class="md-nav__item">
   <a href="#update-world-properties-of-child" title="Update world properties of child" class="md-nav__link">
@@ -4319,6 +4331,18 @@
 </pre></div>
 
 <p>Reference <a href="../group/">Group</a></p>
+<h4 id="change-state-of-child">Change state of child<a class="headerlink" href="#change-state-of-child" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Local position
+    <div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">setChildLocalPosition</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</pre></div></li>
+<li>Visible
+    <div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">setChildLocalVisible</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">visible</span><span class="p">);</span>
+</pre></div></li>
+<li>Alpha
+    <div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">setChildLocalAlpha</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">alpha</span><span class="p">);</span>
+</pre></div></li>
+</ul>
 <h3 id="local-state-of-child">Local state of child<a class="headerlink" href="#local-state-of-child" title="Permanent link">&para;</a></h3>
 <p>Get local state</p>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">localState</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">getLocalState</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
@@ -4338,10 +4362,6 @@
 </ul>
 </li>
 </ul>
-<h4 id="set-local-position">Set local position<a class="headerlink" href="#set-local-position" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">setChildLocalPosition</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
-</pre></div>
-
 <h4 id="update-world-properties-of-child">Update world properties of child<a class="headerlink" href="#update-world-properties-of-child" title="Permanent link">&para;</a></h4>
 <p>Call these methods to update properties of child after changing local state of child.</p>
 <ul>

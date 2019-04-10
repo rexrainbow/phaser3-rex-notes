@@ -4313,7 +4313,9 @@
 
     <span class="nx">clamplTableOXY</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
     <span class="nx">scrollMode</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>        <span class="c1">// 0|&#39;v&#39;|&#39;vertical&#39;|1|&#39;h&#39;|&#39;horizontal&#39;</span>
-    <span class="nx">mask</span><span class="o">:</span> <span class="kc">true</span>
+    <span class="nx">mask</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">padding</span><span class="o">:</span> <span class="mi">0</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 <span class="kd">var</span> <span class="nx">table</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexGridTable</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </pre></div>
@@ -4340,10 +4342,9 @@
 <li><code>1</code>, or <code>'h'</code>, or <code>'horizontal'</code> : Scroll table horizontally.</li>
 </ul>
 </li>
-<li><code>mask</code> : <a href="../mask/">Mask</a> cells<ul>
-<li><code>true</code> : Default rectangle mask</li>
-<li><code>false</code> : No mask</li>
-<li>A <a href="../mask/">mask object</a> : Custom mask object</li>
+<li><code>mask</code> : A rectangle mask of cells<ul>
+<li><code>mask.padding</code> : Extra left/right/top/bottom padding spacing of this rectangle mask. Default value is <code>0</code>.</li>
+<li><code>false</code> : No mask.</li>
 </ul>
 </li>
 </ul>

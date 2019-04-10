@@ -3409,6 +3409,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#enabledisable-scrolling" title="Enable/disable scrolling" class="md-nav__link">
+    Enable/disable scrolling
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#lines-count" title="Lines count" class="md-nav__link">
     Lines count
   </a>
@@ -4045,6 +4052,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#enabledisable-scrolling" title="Enable/disable scrolling" class="md-nav__link">
+    Enable/disable scrolling
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#lines-count" title="Lines count" class="md-nav__link">
     Lines count
   </a>
@@ -4155,6 +4169,8 @@
         <span class="nx">text</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="p">},</span>
 
+    <span class="nx">content</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+
     <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
 <span class="p">});</span>
 </pre></div>
@@ -4200,6 +4216,7 @@
 <li><code>space.text</code> : Space between text object and slider object.</li>
 </ul>
 </li>
+<li><code>content</code> : Content of this text area.</li>
 <li><code>name</code> : Set name of this textArea.</li>
 </ul>
 <h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
@@ -4237,19 +4254,19 @@
 <h3 id="scroll-content">Scroll content<a class="headerlink" href="#scroll-content" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Set
-    <div class="codehilite"><pre><span></span><span class="nx">textArea</span><span class="p">.</span><span class="nx">setTextOY</span><span class="p">(</span><span class="nx">oy</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><span class="nx">textArea</span><span class="p">.</span><span class="nx">setChildOY</span><span class="p">(</span><span class="nx">oy</span><span class="p">);</span>
 </pre></div>
     or
-    <div class="codehilite"><pre><span></span><span class="nx">textArea</span><span class="p">.</span><span class="nx">textOY</span> <span class="o">=</span> <span class="nx">oy</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><span class="nx">textArea</span><span class="p">.</span><span class="nx">childOY</span> <span class="o">=</span> <span class="nx">oy</span><span class="p">;</span>
 </pre></div></li>
 <li>Get
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">textOY</span> <span class="o">=</span> <span class="nx">textArea</span><span class="p">.</span><span class="nx">textOY</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">childOY</span> <span class="o">=</span> <span class="nx">textArea</span><span class="p">.</span><span class="nx">childOY</span><span class="p">;</span>
 </pre></div></li>
 </ul>
 <h4 id="scroll-by-percentage">Scroll by percentage<a class="headerlink" href="#scroll-by-percentage" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Set
-    <div class="codehilite"><pre><span></span><span class="nx">textArea</span><span class="p">.</span><span class="nx">setTextOYByPercentage</span><span class="p">(</span><span class="nx">t</span><span class="p">);</span>  <span class="c1">// t: 0~1</span>
+    <div class="codehilite"><pre><span></span><span class="nx">textArea</span><span class="p">.</span><span class="nx">setT</span><span class="p">(</span><span class="nx">t</span><span class="p">);</span>  <span class="c1">// t: 0~1</span>
 </pre></div>
     or
     <div class="codehilite"><pre><span></span><span class="nx">textArea</span><span class="p">.</span><span class="nx">t</span> <span class="o">=</span> <span class="nx">t</span><span class="p">;</span>
@@ -4270,6 +4287,33 @@
     <div class="codehilite"><pre><span></span><span class="nx">textArea</span><span class="p">.</span><span class="nx">scrollToBottom</span><span class="p">();</span>
 </pre></div><ul>
 <li>Equal to <code>textArea.t = 1;</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="enabledisable-scrolling">Enable/disable scrolling<a class="headerlink" href="#enabledisable-scrolling" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Slider<ul>
+<li>Set enable state
+    <div class="codehilite"><pre><span></span><span class="nx">textArea</span><span class="p">.</span><span class="nx">setSliderEnable</span><span class="p">(</span><span class="nx">enabled</span><span class="p">);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">textArea</span><span class="p">.</span><span class="nx">sliderEnable</span> <span class="o">=</span> <span class="nx">enabled</span><span class="p">;</span>
+</pre></div></li>
+<li>Get enable state
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">enable</span> <span class="o">=</span> <span class="nx">textArea</span><span class="p">.</span><span class="nx">sliderEnable</span><span class="p">;</span>
+</pre></div></li>
+</ul>
+</li>
+<li>Scroller<ul>
+<li>Set enable state
+    <div class="codehilite"><pre><span></span><span class="nx">textArea</span><span class="p">.</span><span class="nx">setScrollerEnable</span><span class="p">(</span><span class="nx">enabled</span><span class="p">);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">textArea</span><span class="p">.</span><span class="nx">scrollerEnable</span> <span class="o">=</span> <span class="nx">enabled</span><span class="p">;</span>
+</pre></div></li>
+<li>Get enable state
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">enable</span> <span class="o">=</span> <span class="nx">textArea</span><span class="p">.</span><span class="nx">scrollerEnable</span><span class="p">;</span>
+</pre></div></li>
 </ul>
 </li>
 </ul>
