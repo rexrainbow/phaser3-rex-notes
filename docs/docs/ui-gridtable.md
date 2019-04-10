@@ -193,59 +193,82 @@ gridTable.layout();
    var items = gridTable.items;
    ```
 
-### Scroll table content
+### Scroll content
 
 - Set
     ```javascript
-    table.setTableOY(oy);
+    scrollablePanel.setChildOY(oy);
     ```
     or
     ```javascript
-    table.tableOY = oy;
+    scrollablePanel.childOY = oy;
     ```
 - Get
     ```javascript
-    var tableOY = table.tableOY;
+    var childOY = scrollablePanel.childOY;
     ```
 
 #### Scroll by percentage
 
 - Set
     ```javascript
-    table.setTableOYByPercentage(t);  // t: 0~1
+    scrollablePanel.setT(t);  // t: 0~1
     ```
     or
     ```javascript
-    table.t = t;
+    scrollablePanel.t = t;
     ```
 - Get
     ```javascript
-    var t = table.t;
+    var t = scrollablePanel.t;
     ```
 
 ### Scroll to top/bottom
 
 - Scroll to top
     ```javascript
-    table.scrollToTop();
+    scrollablePanel.scrollToTop();
     ```
-    - Equal to `table.t = 0;`
+    - Equal to `scrollablePanel.t = 0;`
 - Scroll to bottom
     ```javascript
-    table.scrollToBottom();
+    scrollablePanel.scrollToBottom();
     ```
-    - Equal to `table.t = 1;`
+    - Equal to `scrollablePanel.t = 1;`
+
+### Enable/disable scrolling
+
+- Slider
+    - Set enable state
+        ```javascript
+        scrollablePanel.setSliderEnable(enabled);
+        ```
+        or
+        ```javascript
+        scrollablePanel.sliderEnable = enabled;
+        ```
+    - Get enable state
+        ```javascript
+        var enable = scrollablePanel.sliderEnable;
+        ```
+- Scroller
+    - Set enable state
+        ```javascript
+        scrollablePanel.setScrollerEnable(enabled);
+        ```
+        or
+        ```javascript
+        scrollablePanel.scrollerEnable = enabled;
+        ```
+    - Get enable state
+        ```javascript
+        var enable = scrollablePanel.scrollerEnable;
+        ```
 
 ### Refresh table cells
 
 ```javascript
 table.refresh();
-```
-
-### Enable/disable scrolling
-
-```javascript
-table.enableScrolling(enabled);
 ```
 
 ### Other properties

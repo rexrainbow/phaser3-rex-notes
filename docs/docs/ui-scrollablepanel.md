@@ -159,7 +159,7 @@ scrollablePanel.layout();
 
 - Set
     ```javascript
-    scrollablePanel.setChildOYByPercentage(t);  // t: 0~1
+    scrollablePanel.setT(t);  // t: 0~1
     ```
     or
     ```javascript
@@ -185,9 +185,32 @@ scrollablePanel.layout();
 
 ### Enable/disable scrolling
 
-```javascript
-scrollablePanel.enableScrolling(enabled);
-```
+- Slider
+    - Set enable state
+        ```javascript
+        scrollablePanel.setSliderEnable(enabled);
+        ```
+        or
+        ```javascript
+        scrollablePanel.sliderEnable = enabled;
+        ```
+    - Get enable state
+        ```javascript
+        var enable = scrollablePanel.sliderEnable;
+        ```
+- Scroller
+    - Set enable state
+        ```javascript
+        scrollablePanel.setScrollerEnable(enabled);
+        ```
+        or
+        ```javascript
+        scrollablePanel.scrollerEnable = enabled;
+        ```
+    - Get enable state
+        ```javascript
+        var enable = scrollablePanel.scrollerEnable;
+        ```
 
 ### Other properties
 

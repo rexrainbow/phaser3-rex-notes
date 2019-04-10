@@ -5,22 +5,11 @@ var SetItems = function (items) {
         this.items = items;
     }
 
-    var table = this.childrenMap.table;
+    var table = this.childrenMap.child;
     table.setCellsCount(this.items.length);
     table.updateTable(true);
 
-    // Controller
-    var bottomOY = table.bottomTableOY,
-        topOY = table.topTableOY;
-    var scroller = this.childrenMap.scroller;
-    var slider = this.childrenMap.slider;
-    if (scroller) {
-        scroller.setBounds(bottomOY, topOY);
-        // Scroller also reflects to slider
-    }
-    if (slider) {
-        slider.setEnable(bottomOY !== topOY);
-    }
+    this.resizeController();
     return this;
 }
 

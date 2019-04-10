@@ -17,14 +17,19 @@ var OnCellClickPrepare = function (pointer, localX, localY, event) {
 }
 
 var OnCellClickCancel = function (pointer, localX, localY, event) {
-    this.clickCellState = false;
+    if (this.clickCellState) {
+        var pointerMoved = (pointer.downX !== pointer.x) && (pointer.downY !== pointer.y);
+        if (pointerMoved) {
+            this.clickCellState = false;
+        }
+    }
 }
 
 var OnCellClick = function (pointer, localX, localY, event) {
     if (!this.clickCellState) {
         return;
     }
-    var table = this.childrenMap.table;
+    var table = this.childrenMap.child;
     var cellIndex = table.pointerToCellIndex(pointer.worldX, pointer.worldY);
     if (cellIndex === null) {
         return;
@@ -37,7 +42,7 @@ var OnCellOver = function (pointer) {
     if (pointer.isDown) {
         return;
     }
-    var table = this.childrenMap.table;
+    var table = this.childrenMap.child;
     var cellIndex = table.pointerToCellIndex(pointer.worldX, pointer.worldY);
     if (cellIndex === this.lastOverCellIndex) {
         return;
@@ -52,12 +57,12 @@ var OnCellOver = function (pointer) {
     cellContainer = table.getCellContainer(cellIndex);
     if (cellContainer != null) {
         this.eventEmitter.emit('cell.over', cellContainer, cellIndex);
-    }    
+    }
     this.lastOverCellIndex = cellIndex;
 }
 
 var OnCellOut = function () {
-    var table = this.childrenMap.table;
+    var table = this.childrenMap.child;
     var cellContainer = table.getCellContainer(this.lastOverCellIndex);
     if (cellContainer != null) {
         this.eventEmitter.emit('cell.out', cellContainer, this.lastOverCellIndex);
