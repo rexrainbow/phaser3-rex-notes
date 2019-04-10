@@ -8,7 +8,6 @@ import TextHeightToLinesCount from './TextHeightToLinesCount.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
-const Clamp = Phaser.Math.Clamp;
 
 class TextBlock extends BaseSizer {
     constructor(scene, x, y, minWidth, minHeight, config) {
@@ -31,7 +30,7 @@ class TextBlock extends BaseSizer {
         this.textMask = undefined;
         this.textObjectType = undefined;
         this.lines = undefined; // array (default text object), or pens-manager (tag text object)
-        this.text = '';
+        this.text = GetValue(config, 'content', '');
         this._textOY = 0;
         this.execeedTopState = false;
         this.execeedBottomState = false;
@@ -53,7 +52,7 @@ class TextBlock extends BaseSizer {
             this.addBackground(background);
         }
 
-        this.setTextObject(textObject, paddingConfig, textMaskEnable);
+        this.setTextObject(textObject, paddingConfig, textMaskEnable);        
     }
 
     destroy(fromScene) {

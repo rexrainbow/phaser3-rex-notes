@@ -17,11 +17,13 @@ class TextArea extends Scrollable {
         var textWidth = GetValue(config, 'textWidth', undefined);
         var textHeight = GetValue(config, 'textHeight', undefined);
         var textMask = GetValue(config, 'textMask', true);
+        var content = GetValue(config, 'content', '');
         var textBlock = new TextBlock(scene, {
             width: textWidth,
             height: textHeight,
             text: textObject,
             textMask: textMask,
+            content: content,
         });
         var proportion = (textWidth === undefined) ? 1 : 0;
         var expand = (textHeight === undefined);

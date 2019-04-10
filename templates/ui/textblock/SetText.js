@@ -1,5 +1,8 @@
 var SetText = function (text) {
-    this.text = text;
+    if (text !== undefined) {
+        this.text = text;
+    }
+
     // Wrap content in lines
     if (this.textObjectType === 0) {
         this.lines = this.textObject.getWrappedText(this.text); // lines in array

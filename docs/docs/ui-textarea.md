@@ -73,6 +73,8 @@ var textArea = scene.rexUI.add.textArea({
         text: 0,
     },
 
+    content: '',
+
     name: '',
 });
 ```
@@ -103,6 +105,7 @@ var textArea = scene.rexUI.add.textArea({
 - `space` : Pads spaces
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
     - `space.text` : Space between text object and slider object.
+- `content` : Content of this text area.
 - `name` : Set name of this textArea.
 
 ### Custom class

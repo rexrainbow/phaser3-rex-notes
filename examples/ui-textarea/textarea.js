@@ -30,12 +30,13 @@ class Demo extends Phaser.Scene {
                 track: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_DARK),
                 thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 13, COLOR_LIGHT),
             },
+
+            content: CreateContent(10000),
         })
             .layout()
             .drawBounds(this.add.graphics(), 0xff0000);
 
-        textArea
-            .setText(CreateContent(10000));
+        //textArea.setText(CreateContent(10000));
     }
 
     update() { }

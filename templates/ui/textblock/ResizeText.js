@@ -16,7 +16,8 @@ var ResizeText = function (textObject, width, height) {
         style.maxLines = maxLines;
     }
 
-    textObject.updateText();
+    // Render content again
+    this.setText();
 }
 
 export default ResizeText;
