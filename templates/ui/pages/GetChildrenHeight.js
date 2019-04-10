@@ -8,11 +8,6 @@ var GetChildrenHeight = function () {
     var child, padding, childHeight, visibleSave;
     for (var key in children) {
         child = children[key];
-
-        // Page might be invisible
-        visibleSave = child.visible;
-        child.visible = true;
-
         childHeight = (child.isRexSizer) ?
             Math.max(child.minHeight, child.childrenHeight) :
             child.height;
@@ -20,8 +15,6 @@ var GetChildrenHeight = function () {
         padding = child.rexSizer.padding;
         childHeight += (padding.top + padding.bottom);
         result = Math.max(childHeight, result);
-
-        child.visible = visibleSave;
     }
     return result;
 }

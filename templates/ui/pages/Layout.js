@@ -29,6 +29,7 @@ var Layout = function (parent, newWidth, newHeight) {
     var x, y, width, height; // Align zone
     var newChildWidth, newChildHeight;
 
+    // TODO: Layout all pages?
     // Layout current page
     child = this.currentPage;
     if (child) {

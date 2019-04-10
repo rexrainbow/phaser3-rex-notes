@@ -20,9 +20,8 @@ var SwapPage = function (key) {
     if (currentPage) {
         currentPage.setVisible(true);
         this.emit('pagevisible', currentPage, this._currentKey, this);
-        this
-            .add(currentPage)
-            .layout();
+        this.add(currentPage);
+        this.getTopmostSizer().layout(); // TODO: Don't layout current page again?
     }
     return this;
 }

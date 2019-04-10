@@ -4,6 +4,7 @@ const COLOR_PRIMARY = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
+const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -15,9 +16,16 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var keys = ['Table', 'Label'];
-        var mainPanel = CreateMainPanel(this, keys)
-            .setPosition(400, 300)
+        var config = {
+            x: 400,
+            y: 300,
+            width: 400,
+            height: 400,
+            orientation: 'x',
+
+            keys: ['Table', 'Text'],
+        };
+        var mainPanel = CreateMainPanel(this, config)
             .layout()
         //.drawBounds(this.add.graphics(), 0xff0000);
 
@@ -36,24 +44,24 @@ class Demo extends Phaser.Scene {
     update() { }
 }
 
-var CreateMainPanel = function (scene, keys) {
+var CreateMainPanel = function (scene, config) {
+    var keys = GetValue(config, 'keys', []);
     var buttons = CreateButtons(scene, keys);
     var pages = CreatePages(scene, keys);
-    var mainPanel = scene.rexUI.add.sizer({
-        orientation: 'x',
-    }).add(
-        buttons, //child
-        0, // proportion
-        'top', // align
-        0, // paddingConfig
-        false, // expand
-    )
+    var mainPanel = scene.rexUI.add.sizer(config)
         .add(
-            pages, //child
+            buttons, //child
             0, // proportion
-            'center', // align
+            'top', // align
             0, // paddingConfig
             false, // expand
+        )
+        .add(
+            pages, //child
+            1, // proportion
+            'center', // align
+            0, // paddingConfig
+            true, // expand
         );
 
     var prevButton = undefined;
@@ -101,11 +109,11 @@ var CreatePages = function (scene, keys) {
     var pages = scene.rexUI.add.pages()
         .addBackground(
             scene.rexUI.add.roundRectangle(0, 0, 10, 10, 0, COLOR_PRIMARY)
-        )
+        );
 
     var createPageCallback = {
         Table: CreateTablePage,
-        Label: CreateLabelPage,
+        Text: CreateTextPage,
     }
     var key;
     for (var i = 0, cnt = keys.length; i < cnt; i++) {
@@ -115,7 +123,7 @@ var CreatePages = function (scene, keys) {
             key, // key
             'left-top', // align
             10, // padding
-            false, // extend
+            true, // extend
         )
     }
     return pages;
@@ -124,10 +132,6 @@ var CreatePages = function (scene, keys) {
 var CreateTablePage = function (scene) {
     return scene.rexUI.add.gridTable({
         table: {
-            width: 250,
-            height: 400,
-
-            cellWidth: 120,
             cellHeight: 60,
             columns: 2,
             mask: {
@@ -184,14 +188,28 @@ var getItems = function (count) {
     return data;
 }
 
-var CreateLabelPage = function (scene) {
-    return scene.rexUI.add.label({
-        text: scene.add.text(0, 0, 'Label', {
-            fontSize: '18pt'
-        }),
+var CreateTextPage = function (scene) {
+    return scene.rexUI.add.textArea({
+        // text: this.add.text(),
+        text: scene.rexUI.add.BBCodeText(),
+
+        slider: {
+            track: scene.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_DARK),
+            thumb: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 13, COLOR_LIGHT),
+        },
+
+        content: CreateContent(10000),
     })
 }
 
+var content = `Phaser is a fast, free, and fun open source HTML5 game framework that offers WebGL and Canvas rendering across desktop and mobile web browsers. Games can be compiled to iOS, Android and native apps by using 3rd party tools. You can use JavaScript or TypeScript for development.`;
+var CreateContent = function (linesCount) {
+    var numbers = [];
+    for (var i = 0; i < linesCount; i++) {
+        numbers.push('[color=' + ((i % 2) ? 'green' : 'yellow') + ']' + i.toString() + '[/color]');
+    }
+    return content + '\n' + numbers.join('\n');
+}
 
 var config = {
     type: Phaser.AUTO,

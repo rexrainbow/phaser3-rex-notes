@@ -26,7 +26,7 @@ var AddPage = function (gameObject, key, align, paddingConfig, expand) {
         paddingConfig = 0;
     }
     if (expand === undefined) {
-        expand = false;
+        expand = true;
     }
 
     var config = this.getSizerConfig(gameObject);
