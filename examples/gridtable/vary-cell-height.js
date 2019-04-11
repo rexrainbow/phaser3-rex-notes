@@ -48,7 +48,7 @@ class Demo extends Phaser.Scene {
             var cellHeight = (i % 2) ? 40 : 80;
             table.setCellHeight(i, cellHeight);
         }
-        table.updateTable(true); // refresh visible cells
+        table.updateTable(); // refresh visible cells
 
         // draw bound
         this.add.graphics()

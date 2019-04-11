@@ -20,8 +20,8 @@ class Demo extends Phaser.Scene {
         var config = {
             x: 400,
             y: 300,
-            width: 450,
-            height: 450,
+            width: 500,
+            height: 400,
             orientation: 'x',
 
             keys: ['DTable', 'Text', 'STable'],
@@ -39,7 +39,7 @@ class Demo extends Phaser.Scene {
                 console.log('Set page \'' + key + '\' visible');
             });
 
-        // mainPanel.getElement('buttons').emitButtonClick(0);
+        mainPanel.getElement('buttons').emitButtonClick(0);
     }
 
     update() { }
@@ -213,10 +213,12 @@ var CreateTextPage = function (scene) {
     })
 }
 
-var CreateSTablePage = function (scene) {    
+var CreateSTablePage = function (scene) {
     var CreateItem = function (scene, colIdx, rowIdx) {
         var text = colIdx + ',' + rowIdx;
         return scene.rexUI.add.label({
+            height: 60,
+
             background: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 0, undefined)
                 .setStrokeStyle(2, COLOR_LIGHT, 1),
             text: scene.add.text(0, 0, text, {

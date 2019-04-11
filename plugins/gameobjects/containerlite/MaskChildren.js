@@ -47,7 +47,10 @@ var MaskChildren = function (parent, mask, children) {
         } else {
             showSome(child, mask);
         }
-        parent.resetChildVisibleState(child);
+
+        parent
+            .resetChildVisibleState(child) // Reset local visible via child's visible
+            .updateChildVisible(child);  // Set child's visible via parent and local visible
     }
 }
 

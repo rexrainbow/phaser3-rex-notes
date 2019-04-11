@@ -18,7 +18,6 @@ class GridTable extends Container {
         }
         super(scene, x, y, width, height);
         this.type = 'rexGridTable';
-        this.updateFlag = true;
         this._tableOX = 0;
         this._tableOY = 0;
         this.visibleCells = new Set();
@@ -114,7 +113,6 @@ class GridTable extends Container {
             return this;
         }
         this.table.setColumnCount(count);
-        this.updateFlag = true;
         return this;
     }
 
@@ -136,9 +134,6 @@ class GridTable extends Container {
         }
         cellIdx = Clamp(cellIdx, 0, this.cellsCount);
         this.table.insertNewCell(cellIdx, count);
-        if (cellIdx <= this.lastVisibleCellIdx) {
-            this.updateFlag = true;
-        }
         return this;
     }
 
@@ -170,7 +165,6 @@ class GridTable extends Container {
                 if (cell) {
                     if (curList.contains(cell)) {
                         this.hideCell(cell);
-                        this.updateFlag = true;
                         curList.delete(cell);
                     }
                     preList.delete(cell);
@@ -219,7 +213,6 @@ class GridTable extends Container {
         }
 
         if (this._tableOY !== oy) {
-            this.updateFlag = true;
             this._tableOY = oy;
         }
 
@@ -263,7 +256,6 @@ class GridTable extends Container {
         }
 
         if (this._tableOX !== ox) {
-            this.updateFlag = true;
             this._tableOX = ox;
         }
 
@@ -323,14 +315,6 @@ class GridTable extends Container {
     }
 
     updateTable(refresh) {
-        if (refresh) {
-            this.updateFlag = true;
-        }
-        if (!this.updateFlag) {
-            return this;
-        }
-
-        this.updateFlag = false;
         if (refresh) {
             this.clearVisibleCellIndexes();
             this.hideCells();
