@@ -24,7 +24,7 @@ var LayoutBackgrounds = function () {
         ResizeGameObject(child, width, height);
         GlobZone.setPosition(x, y).setSize(width, height);
         AlignIn(child, GlobZone, ALIGN_CENTER);
-        this.resetChildState(child);
+        this.resetChildPositionState(child);
     }
 }
 

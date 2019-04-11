@@ -5,8 +5,6 @@ const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const ALIGN_LEFTTOP = Phaser.Display.Align.TOP_LEFT;
 
 var AddPage = function (gameObject, key, align, paddingConfig, expand) {
-    // Game-object Won't be added to container until swap to this page
-
     if (IsPlainObject(key)) {
         var config = key;
         key = GetValue(config, 'key', 0);
@@ -39,6 +37,7 @@ var AddPage = function (gameObject, key, align, paddingConfig, expand) {
     }
     this.sizerChildren.set(key, gameObject);
     gameObject.setVisible(false); // Default is invisible
+    this.add(gameObject);
     return this;
 }
 export default AddPage;

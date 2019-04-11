@@ -150,13 +150,13 @@ class Label extends Sizer {
         var iconMask = this.childrenMap.iconMask;
         if (iconMask) {
             iconMask.setPosition();
-            this.resetChildState(iconMask);
+            this.resetChildPositionState(iconMask);
         }
         // Pin action-mask to action game object
         var actionMask = this.childrenMap.actionMask;
         if (actionMask) {
             actionMask.setPosition();
-            this.resetChildState(actionMask);
+            this.resetChildPositionState(actionMask);
         }
         return this;
     }

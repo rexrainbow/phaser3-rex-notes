@@ -34,7 +34,7 @@ var UpdateIndicator = function (t) {
     ResizeGameObject(indicator, newWidth, newHeight);
     var align = (this.orientation === 1) ? AlignLeft : AlignTop;
     AlignIn(indicator, this, align);
-    this.resetChildState(indicator);
+    this.resetChildPositionState(indicator);
 }
 
 export default UpdateIndicator;

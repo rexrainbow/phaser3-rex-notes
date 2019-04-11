@@ -40,7 +40,7 @@ var Layout = function (parent, newWidth, newHeight) {
         if (this.childMask) {
             var maskGameObject = MaskToGameObject(this.childMask);
             maskGameObject.setPosition().resize();
-            this.resetChildState(maskGameObject);
+            this.resetChildPositionState(maskGameObject);
         }
     }
 

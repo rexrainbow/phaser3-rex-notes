@@ -91,7 +91,7 @@ var Layout = function (parent, newWidth, newHeight) {
 
             GlobZone.setPosition(x, y).setSize(width, height);
             AlignIn(child, GlobZone, childConfig.align);
-            this.resetChildState(child);
+            this.resetChildPositionState(child);
 
             itemX += colWidth;
         }

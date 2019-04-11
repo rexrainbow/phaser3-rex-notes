@@ -10,7 +10,7 @@ var ResetChildPosition = function () {
     }
     this.child.setPosition(x, y);
     MaskChildren(this, this.childMask, this.child.getAllChildren());
-    this.resetChildState(this.child);
+    this.resetChildPositionState(this.child);
 };
 
 export default ResetChildPosition;

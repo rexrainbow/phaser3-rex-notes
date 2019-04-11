@@ -2,9 +2,9 @@ var SwapPage = function (key) {
     this._previousKey = this._currentKey;
     var prevoiusPage = this.previousPage;
     if (prevoiusPage) {
-        this.remove(prevoiusPage);
         if (this.swapMode === 0) { // Invisible
             prevoiusPage.setVisible(false);
+            this.resetChildVisibleState(prevoiusPage);
             this.emit('pageinvisible', prevoiusPage, this._previousKey, this);
         } else { // Destroy
             prevoiusPage.destroy();
@@ -19,9 +19,8 @@ var SwapPage = function (key) {
     var currentPage = this.currentPage;
     if (currentPage) {
         currentPage.setVisible(true);
+        this.resetChildVisibleState(currentPage);
         this.emit('pagevisible', currentPage, this._currentKey, this);
-        this.add(currentPage);
-        this.getTopmostSizer().layout(); // TODO: Don't layout current page again?
     }
     return this;
 }

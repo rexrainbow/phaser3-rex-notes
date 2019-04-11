@@ -44,7 +44,7 @@ var Layout = function (parent, newWidth, newHeight) {
         // Layout text mask before reset text position
         if (this.textMask) {
             this.textMask.setPosition().resize();
-            this.resetChildState(this.textMask);
+            this.resetChildPositionState(this.textMask);
         }
 
         childConfig.preOffsetY = 0; // Clear preOffsetY

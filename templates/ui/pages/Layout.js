@@ -29,10 +29,10 @@ var Layout = function (parent, newWidth, newHeight) {
     var x, y, width, height; // Align zone
     var newChildWidth, newChildHeight;
 
-    // TODO: Layout all pages?
     // Layout current page
-    child = this.currentPage;
-    if (child) {
+    var pages = this.pages;
+    for (var key in pages) {
+        child = pages[key];
         childConfig = child.rexSizer;
         padding = childConfig.padding;
 
@@ -59,7 +59,7 @@ var Layout = function (parent, newWidth, newHeight) {
         height = this.height - padding.top - padding.bottom;
         GlobZone.setPosition(x, y).setSize(width, height);
         AlignIn(child, GlobZone, childConfig.align);
-        this.resetChildState(child);
+        this.resetChildPositionState(child);
     }
 
     // Layout background children

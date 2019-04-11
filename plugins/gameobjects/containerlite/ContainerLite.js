@@ -110,30 +110,30 @@ class ContainerLite extends Zone {
     }
 
     worldToLocal(point) {
-        // translate
+        // Transform
         point.x -= this.x;
         point.y -= this.y;
-        // rotate
+        // Rotate
         RotateAround(point, 0, 0, -this.rotation);
-        // scale
+        // Scale
         point.x /= this.scaleX;
         point.y /= this.scaleY;
-        // flip
+        // Flip
         point.x *= ((!this.flipX) ? 1 : -1);
         point.y *= ((!this.flipY) ? 1 : -1);
         return point;
     }
 
     localToWorld(point) {
-        // flip
+        // Flip
         point.x *= ((!this.flipX) ? 1 : -1);
         point.y *= ((!this.flipY) ? 1 : -1);
-        // scale
+        // Scale
         point.x *= this.scaleX;
         point.y *= this.scaleY;
-        // rotate
+        // Rotate
         RotateAround(point, 0, 0, this.rotation);
-        // translate
+        // Transform
         point.x += this.x;
         point.y += this.y;
         return point;
@@ -241,22 +241,10 @@ class ContainerLite extends Zone {
     }
 
     resetChildState(gameObject) {
-        var state = this.getLocalState(gameObject);
-        state.x = gameObject.x;
-        state.y = gameObject.y;
-        this.worldToLocal(state);
-
-        state.scaleX = scale(gameObject.scaleX, this.scaleX);
-        state.scaleY = scale(gameObject.scaleY, this.scaleY);
-
-        if (gameObject.flipX !== undefined) {
-            state.flipX = gameObject.flipX;
-            state.flipY = gameObject.flipY;
-        }
-
-        state.rotation = gameObject.rotation - this.rotation;
-        state.alpha = scale(gameObject.alpha, this.alpha);
-        state.visible = gameObject.visible;
+        this
+            .resetChildPositionState(gameObject)
+            .resetChildVisibleState(gameObject)
+            .resetChildAlphaState(gameObject);
         return this;
     }
 
@@ -264,6 +252,34 @@ class ContainerLite extends Zone {
         for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
             this.resetChildState(gameObjects[i]);
         }
+        return this;
+    }
+
+    resetChildPositionState(gameObject) {
+        var state = this.getLocalState(gameObject);
+        state.x = gameObject.x;
+        state.y = gameObject.y;
+        this.worldToLocal(state);
+
+        state.scaleX = Scale(gameObject.scaleX, this.scaleX);
+        state.scaleY = Scale(gameObject.scaleY, this.scaleY);
+
+        if (gameObject.flipX !== undefined) {
+            state.flipX = gameObject.flipX;
+            state.flipY = gameObject.flipY;
+        }
+
+        state.rotation = gameObject.rotation - this.rotation;
+        return this;
+    }
+
+    resetChildVisibleState(gameObject) {
+        this.getLocalState(gameObject).visible = gameObject.visible;
+        return this;
+    }
+
+    resetChildAlphaState(gameObject) {
+        this.getLocalState(gameObject).alpha = Scale(gameObject.alpha, this.alpha);
         return this;
     }
 
@@ -536,7 +552,7 @@ Object.assign(
     Components.Flip
 );
 
-var scale = function (a, b) {
+var Scale = function (a, b) {
     if (a === b) {
         return 1;
     } else {

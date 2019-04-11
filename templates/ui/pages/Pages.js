@@ -42,10 +42,6 @@ class Pages extends BaseSizer {
         if (!this.scene) {
             return;
         }
-        var pages = this.pages;
-        for (var key in pages) {
-            pages[key].destroy(fromScene);
-        }
         this.sizerChildren.clear();
         super.destroy(fromScene);
     }
