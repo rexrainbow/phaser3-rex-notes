@@ -97,17 +97,6 @@ var createItem = function (scene, colIdx, rowIdx) {
     });
 }
 
-const RandomInt = Phaser.Math.Between;
-const RandomItem = Phaser.Utils.Array.GetRandom;
-const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-var genText = function () {
-    var s = '';
-    for (var j = 0, jcnt = RandomInt(2, 4); j < jcnt; j++) {
-        s += RandomItem(possible);
-    }
-    return s;
-}
-
 var config = {
     type: Phaser.AUTO,
     parent: 'phaser-example',

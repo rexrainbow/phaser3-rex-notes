@@ -5,6 +5,7 @@ const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
 
 const GetValue = Phaser.Utils.Objects.GetValue;
+const Random = Phaser.Math.Between;
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -19,11 +20,11 @@ class Demo extends Phaser.Scene {
         var config = {
             x: 400,
             y: 300,
-            width: 400,
-            height: 400,
+            width: 450,
+            height: 450,
             orientation: 'x',
 
-            keys: ['Table', 'Text'],
+            keys: ['DTable', 'Text', 'STable'],
         };
         var mainPanel = CreateMainPanel(this, config)
             .layout()
@@ -38,7 +39,7 @@ class Demo extends Phaser.Scene {
                 console.log('Set page \'' + key + '\' visible');
             });
 
-        mainPanel.getElement('buttons').emitButtonClick(0);
+        // mainPanel.getElement('buttons').emitButtonClick(0);
     }
 
     update() { }
@@ -112,8 +113,9 @@ var CreatePages = function (scene, keys) {
         );
 
     var createPageCallback = {
-        Table: CreateTablePage,
+        DTable: CreateDTablePage,
         Text: CreateTextPage,
+        STable: CreateSTablePage,
     }
     var key;
     for (var i = 0, cnt = keys.length; i < cnt; i++) {
@@ -122,14 +124,25 @@ var CreatePages = function (scene, keys) {
             createPageCallback[key](scene), // game object
             key, // key
             'left-top', // align
-            10, // padding
+            20, // padding
             true, // extend
         )
     }
     return pages;
 }
 
-var CreateTablePage = function (scene) {
+var CreateDTablePage = function (scene) {
+    var GetItems = function (count) {
+        var data = [];
+        for (var i = 0; i < count; i++) {
+            data.push({
+                id: i,
+                color: Random(0, 0xffffff)
+            });
+        }
+        return data;
+    }
+
     return scene.rexUI.add.gridTable({
         table: {
             cellHeight: 60,
@@ -145,11 +158,6 @@ var CreateTablePage = function (scene) {
         },
 
         space: {
-            left: 20,
-            right: 20,
-            top: 20,
-            bottom: 20,
-
             table: 10,
         },
 
@@ -174,21 +182,20 @@ var CreateTablePage = function (scene) {
             })
                 .setOrigin(0);
         },
-        items: getItems(100)
+        items: GetItems(100)
     })
 }
 
-var getItems = function (count) {
-    var data = [];
-    for (var i = 0; i < count; i++) {
-        data.push({
-            id: i
-        });
-    }
-    return data;
-}
-
 var CreateTextPage = function (scene) {
+    var content = `Phaser is a fast, free, and fun open source HTML5 game framework that offers WebGL and Canvas rendering across desktop and mobile web browsers. Games can be compiled to iOS, Android and native apps by using 3rd party tools. You can use JavaScript or TypeScript for development.`;
+    var CreateContent = function (linesCount) {
+        var numbers = [];
+        for (var i = 0; i < linesCount; i++) {
+            numbers.push('[color=' + ((i % 2) ? 'green' : 'yellow') + ']' + i.toString() + '[/color]');
+        }
+        return content + '\n' + numbers.join('\n');
+    }
+
     return scene.rexUI.add.textArea({
         // text: this.add.text(),
         text: scene.rexUI.add.BBCodeText(),
@@ -198,17 +205,78 @@ var CreateTextPage = function (scene) {
             thumb: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 13, COLOR_LIGHT),
         },
 
+        space: {
+            text: 10,
+        },
+
         content: CreateContent(10000),
     })
 }
 
-var content = `Phaser is a fast, free, and fun open source HTML5 game framework that offers WebGL and Canvas rendering across desktop and mobile web browsers. Games can be compiled to iOS, Android and native apps by using 3rd party tools. You can use JavaScript or TypeScript for development.`;
-var CreateContent = function (linesCount) {
-    var numbers = [];
-    for (var i = 0; i < linesCount; i++) {
-        numbers.push('[color=' + ((i % 2) ? 'green' : 'yellow') + ']' + i.toString() + '[/color]');
+var CreateSTablePage = function (scene) {    
+    var CreateItem = function (scene, colIdx, rowIdx) {
+        var text = colIdx + ',' + rowIdx;
+        return scene.rexUI.add.label({
+            background: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 0, undefined)
+                .setStrokeStyle(2, COLOR_LIGHT, 1),
+            text: scene.add.text(0, 0, text, {
+                fontSize: 18
+            }),
+            icon: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 10, Random(0, 0xffffff)),
+            space: {
+                left: 10,
+                right: 10,
+                top: 10,
+                bottom: 10,
+
+                icon: 10,
+            }
+        });
     }
-    return content + '\n' + numbers.join('\n');
+
+    var CreateGrid = function (scene, col, row) {
+        var sizer = scene.rexUI.add.gridSizer({
+            column: col,
+            row: row,
+
+            columnProportions: 1,
+        })
+        for (var i = 0; i < col; i++) {
+            for (var j = 0; j < row; j++) {
+                sizer.add(
+                    CreateItem(scene, i, j), // child
+                    i, // columnIndex
+                    j, // rowIndex
+                    'center', // align
+                    0, // paddingConfig
+                    true, // expand
+                )
+            }
+        }
+
+        return sizer;
+    }
+
+    return scene.rexUI.add.scrollablePanel({
+        scrollMode: 0,
+
+        panel: {
+            child: CreateGrid(scene, 3, 20),
+            mask: {
+                mask: true,
+                padding: 1,
+            }
+        },
+
+        slider: {
+            track: scene.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_DARK),
+            thumb: scene.rexUI.add.roundRectangle(0, 0, 0, 0, 13, COLOR_LIGHT),
+        },
+
+        space: {
+            panel: 10,
+        }
+    })
 }
 
 var config = {
