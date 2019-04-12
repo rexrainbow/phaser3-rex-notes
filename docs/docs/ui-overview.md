@@ -18,6 +18,12 @@
 1. [TextArea](ui-textarea.md): A container with a text, slider, and scroller.
 1. [Textbox](ui-textbox.md): A container with an icon, ([typing](texttyping.md) and [paging](textpage.md)) text, and background.
 
+!!! note "Scroll-able table"
+    There are 2 kinds of scroll-able tables :
+
+    - [Grid-table](ui-gridtable.md) only creates visible objects. It is suitable for large table.
+    - [Grid-sizer](ui-gridsizer.md) adds all objects. Put this grid-sizer into scroll-able panel to have a scroll-able table.
+
 ### Basic container
 
 1. [ContainerLite](containerlite.md): Control the position and angle of children game objects.

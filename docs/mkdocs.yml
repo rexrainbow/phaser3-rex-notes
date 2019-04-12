@@ -12,6 +12,7 @@ nav:
     - Full screen: fullscreen.md
     - Orientation: orientation.md
     - Snapshot: snapshot.md
+    - Plugin system: pluginsystem.md
 - Loader:
     - Loader: loader.md
     - Webfont loader: webfontloader.md
@@ -241,6 +242,7 @@ nav:
             - Authentication: firebase-auth.md
             - Firestore: firebase-firestore.md
             - Storage: firebase-storage.md
+- Tools: tools.md
 
 
 extra_javascript:

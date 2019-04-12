@@ -8,49 +8,35 @@ Plugin system, built-in system of phaser.
 
 ### Global plugin
 
-#### Load plugin in [game configuration](game.md#configuration)
+#### Load plugin
 
-```javascript
-// import pluginKlass from '...';
-var config = {
-    // ...
-    plugins: {
-        global: [
-            {
-                key: key,
-                plugin: pluginKlass,
-                start: true             // create instance from pluginKlass
-                // mapping: memberName  // member name in each scene instance, optional
-            },
-            // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
-```
-
-#### Load plugin in scene
-
-```javascript
-var pluginInst = scene.plugins.install(key, pluginKlass, true);  // creates instacne then calls start()
-```
-
-#### Load and add plugin from file
-
-```javascript
-scene.load.plugin(key, url, true);
-```
-
-1. load file from url
-1. Create instance : `new winodw[key](pluginManager)`
-1. Put instance in `plugins[key]`
-
-#### Load plugin from file
-
-```javascript
-scene.load.plugin(key, url);
-```
+- Load plugin before any scene start  
+    In [game configuration](game.md#configuration)
+    ```javascript
+    // import pluginKlass from '...';
+    var config = {
+        // ...
+        plugins: {
+            global: [
+                {
+                    key: key,
+                    plugin: pluginKlass,
+                    start: true
+                    // mapping: memberName  // member name in each scene instance, optional
+                },
+                // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+    - `pluginKlass` : Class instance
+- Load plugin in scene
+    ```javascript
+    scene.load.plugin(key, url, true);
+    ```
+    - `url` : File url or class instance.
 
 #### Get instance
 
@@ -60,33 +46,44 @@ var pluginInst = scene.plugins.get(key);
 
 ### Scene plugin
 
-#### Load plugin in [game configuration](game.md#configuration)
+#### Load plugin
+
+- Load plugin before any scene start  
+    In [game configuration](game.md#configuration)
+    ```javascript
+    // import pluginKlass from '...';
+    var config = {
+        // ...
+        plugins: {
+            scene: [
+                {
+                    key: key,
+                    plugin: pluginKlass,
+                    mapping: sceneKey     // member name in each scene instance
+                },
+                // ...
+            ]
+        }
+        // ...
+    };
+    var game = new Phaser.Game(config);
+    ```
+    - `pluginKlass` : Class instance
+- Load plugin in scene
+    ```javascript
+    scene.load.scenePlugin(key, url, systemKey, sceneKey);
+    ```
+    - `url` : File url or class instance.
+
+#### Get instance
 
 ```javascript
-// import pluginKlass from '...';
-var config = {
-    // ...
-    plugins: {
-        scene: [
-            {
-                key: key,
-                plugin: pluginKlass,
-                mapping: sceneKey     // member name in each scene instance
-            },
-            // ...
-        ]
-    }
-    // ...
-};
-var game = new Phaser.Game(config);
+var pluginInst = scene[sceneKey];
 ```
 
-#### Load and add plugin from file
+### Plugin cache
 
-```javascript
-scene.load.scenePlugin(key, url, systemKey, sceneKey);
-```
-
-1. load file from url
-1. Create instance : `new winodw[key](pluginManager)`
-1. Put instance in `plugins[key]`
+- Has custom plugin
+    ```javascript
+    var hasPlugin = Phaser.Plugins.PluginCache.hasCustom(key);
+    ```
