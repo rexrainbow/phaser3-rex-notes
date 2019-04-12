@@ -21,7 +21,7 @@ import TextBlock from './textblock/TextBlock.js';
 import TextArea from './textarea/TextArea.js';
 import ScrollableBlock from './scrollableblock/ScrollableBlock.js';
 import ScrollablePanel from './scrollablepanel/ScrollablePanel.js';
-import Chart from './chart/Chart.js';
+// import Chart from './chart/Chart.js';
 
 import Hide from './utils/Hide.js';
 import Show from './utils/Show.js';
@@ -50,7 +50,7 @@ export default {
     TextArea: TextArea,
     ScrollableBlock: ScrollableBlock,
     ScrollablePanel: ScrollablePanel,
-    Chart: Chart,
+    // Chart: Chart,
 
     hide: Hide,
     show: Show,
