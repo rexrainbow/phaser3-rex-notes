@@ -10,7 +10,7 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 class Buttons extends Sizer {
     constructor(scene, config) {
         if (config === undefined) {
-            config = defaultConfig;
+            config = {};
         }
         // Create 
         super(scene, config);
@@ -84,7 +84,5 @@ class Buttons extends Sizer {
         return this;
     }
 }
-
-const defaultConfig = {};
 
 export default Buttons;

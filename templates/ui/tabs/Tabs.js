@@ -6,7 +6,7 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 class Tabs extends GridSizer {
     constructor(scene, config) {
         if (config === undefined) {
-            config = defaultConfig;
+            config = {};
         }
         // Create sizer
         config.column = 3;
@@ -158,7 +158,5 @@ class Tabs extends GridSizer {
         return this;
     }
 }
-
-const defaultConfig = {};
 
 export default Tabs;

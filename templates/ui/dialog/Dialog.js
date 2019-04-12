@@ -7,7 +7,7 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 class Dialog extends Sizer {
     constructor(scene, config) {
         if (config === undefined) {
-            config = defaultConfig;
+            config = {};
         }
         // Create sizer        
         config.orientation = 1; // Top to bottom
@@ -200,7 +200,5 @@ class Dialog extends Sizer {
         this.addChildrenMap('actions', actions);
     }
 }
-
-const defaultConfig = {};
 
 export default Dialog;

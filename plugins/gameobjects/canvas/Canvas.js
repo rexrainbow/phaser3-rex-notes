@@ -101,7 +101,7 @@ var Canvas = new Phaser.Class({
 
     clear: function () {
         var canvas = this.canvas;
-        var ctx = canvas.getContext('2d');
+        var ctx = this.context;
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         this.dirty = true;
         return this;
@@ -109,7 +109,7 @@ var Canvas = new Phaser.Class({
 
     fill: function (color) {
         var canvas = this.canvas;
-        var ctx = canvas.getContext('2d');
+        var ctx = this.context;
         ctx.fillStyle = color;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         this.dirty = true;

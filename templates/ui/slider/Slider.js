@@ -163,6 +163,4 @@ Object.assign(
     methods
 );
 
-const defaultConfig = {};
-
 export default Slider;

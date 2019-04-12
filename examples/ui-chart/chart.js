@@ -1,18 +1,17 @@
-import CanvasPlugin from '../../plugins/canvas-plugin.js'
-import Chart from 'chart.js/dist/Chart.js';
+import UIPlugin from '../../templates/ui/ui-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
         super({
             key: 'examples'
         })
+
     }
 
-    preload() {}
+    preload() { }
 
-    create() {        
-        var canvas = this.add.rexCanvas(0, 0, 800, 600).setOrigin(0);
-        var myChart = new Chart(canvas.context, {
+    create() {
+        var chart = this.rexUI.add.chart(400, 300, 100, 100, {
             type: 'bar',
             data: {
                 labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
@@ -46,23 +45,12 @@ class Demo extends Phaser.Scene {
                         }
                     }]
                 },
-                animation: {
-                    onProgress: function (animation) {
-                        //console.log(animation.animationObject.currentStep / animation.animationObject.numSteps);
-                        canvas.needRedraw(); // update texture in webgl mode
-                    },
-                    onComplete: function () {
-                        //console.log('onComplete');
-                    }
-                },
-                devicePixelRatio: 1,
-                responsive: false // set to false because of this canvas element has no parent node         
             }
-        });
-        //console.log(ctx.canvas.toDataURL());
+        })
+            .resize(256, 256);
     }
 
-    update() {}
+    update() { }
 }
 
 var config = {
@@ -74,13 +62,12 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    backgroundColor: 0xffffff,
     scene: Demo,
     plugins: {
-        global: [{
-            key: 'rexCanvas',
-            plugin: CanvasPlugin,
-            start: true
+        scene: [{
+            key: 'rexUI',
+            plugin: UIPlugin,
+            mapping: 'rexUI'
         }]
     }
 };
