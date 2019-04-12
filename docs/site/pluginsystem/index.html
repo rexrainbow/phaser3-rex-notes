@@ -40,7 +40,7 @@
     
     
       
-        <title>Pluginsystem - Notes of Phaser 3</title>
+        <title>Plugin system - Notes of Phaser 3</title>
       
     
     
@@ -128,7 +128,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Pluginsystem
+                Plugin system
               </span>
             
           
@@ -255,10 +255,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
     
     <label class="md-nav__link" for="nav-2">
       System
@@ -411,6 +413,126 @@
     <a href="../snapshot/" title="Snapshot" class="md-nav__link">
       Snapshot
     </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Plugin system
+      </label>
+    
+    <a href="./" title="Plugin system" class="md-nav__link md-nav__link--active">
+      Plugin system
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#global-plugin" title="Global plugin" class="md-nav__link">
+    Global plugin
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-plugin" title="Load plugin" class="md-nav__link">
+    Load plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-instance" title="Get instance" class="md-nav__link">
+    Get instance
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#scene-plugin" title="Scene plugin" class="md-nav__link">
+    Scene plugin
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#load-plugin_1" title="Load plugin" class="md-nav__link">
+    Load plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-instance_1" title="Get instance" class="md-nav__link">
+    Get instance
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plugin-cache" title="Plugin cache" class="md-nav__link">
+    Plugin cache
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -3803,6 +3925,18 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../tools/" title="Tools" class="md-nav__link">
+      Tools
+    </a>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -3845,29 +3979,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#load-plugin-in-game-configuration" title="Load plugin in game configuration" class="md-nav__link">
-    Load plugin in game configuration
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#load-plugin-in-scene" title="Load plugin in scene" class="md-nav__link">
-    Load plugin in scene
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#load-and-add-plugin-from-file" title="Load and add plugin from file" class="md-nav__link">
-    Load and add plugin from file
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#load-plugin-from-file" title="Load plugin from file" class="md-nav__link">
-    Load plugin from file
+  <a href="#load-plugin" title="Load plugin" class="md-nav__link">
+    Load plugin
   </a>
   
 </li>
@@ -3893,21 +4006,28 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#load-plugin-in-game-configuration_1" title="Load plugin in game configuration" class="md-nav__link">
-    Load plugin in game configuration
+  <a href="#load-plugin_1" title="Load plugin" class="md-nav__link">
+    Load plugin
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#load-and-add-plugin-from-file_1" title="Load and add plugin from file" class="md-nav__link">
-    Load and add plugin from file
+  <a href="#get-instance_1" title="Get instance" class="md-nav__link">
+    Get instance
   </a>
   
 </li>
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plugin-cache" title="Plugin cache" class="md-nav__link">
+    Plugin cache
+  </a>
   
 </li>
         
@@ -3935,7 +4055,7 @@
                   <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/pluginsystem.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Pluginsystem</h1>
+                  <h1>Plugin system</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
 <p>Plugin system, built-in system of phaser.</p>
@@ -3944,8 +4064,11 @@
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <h3 id="global-plugin">Global plugin<a class="headerlink" href="#global-plugin" title="Permanent link">&para;</a></h3>
-<h4 id="load-plugin-in-game-configuration">Load plugin in <a href="../game/#configuration">game configuration</a><a class="headerlink" href="#load-plugin-in-game-configuration" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="c1">// import pluginKlass from &#39;...&#39;;</span>
+<h4 id="load-plugin">Load plugin<a class="headerlink" href="#load-plugin" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Load plugin before any scene start<br />
+    In <a href="../game/#configuration">game configuration</a>
+    <div class="codehilite"><pre><span></span><span class="c1">// import pluginKlass from &#39;...&#39;;</span>
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
@@ -3953,7 +4076,7 @@
             <span class="p">{</span>
                 <span class="nx">key</span><span class="o">:</span> <span class="nx">key</span><span class="p">,</span>
                 <span class="nx">plugin</span><span class="o">:</span> <span class="nx">pluginKlass</span><span class="p">,</span>
-                <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>             <span class="c1">// create instance from pluginKlass</span>
+                <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
                 <span class="c1">// mapping: memberName  // member name in each scene instance, optional</span>
             <span class="p">},</span>
             <span class="c1">// ...</span>
@@ -3962,32 +4085,27 @@
     <span class="c1">// ...</span>
 <span class="p">};</span>
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="load-plugin-in-scene">Load plugin in scene<a class="headerlink" href="#load-plugin-in-scene" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">pluginInst</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">install</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">pluginKlass</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>  <span class="c1">// creates instacne then calls start()</span>
-</pre></div>
-
-<h4 id="load-and-add-plugin-from-file">Load and add plugin from file<a class="headerlink" href="#load-and-add-plugin-from-file" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
-</pre></div>
-
-<ol>
-<li>load file from url</li>
-<li>Create instance : <code>new winodw[key](pluginManager)</code></li>
-<li>Put instance in <code>plugins[key]</code></li>
-</ol>
-<h4 id="load-plugin-from-file">Load plugin from file<a class="headerlink" href="#load-plugin-from-file" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
-</pre></div>
-
+</pre></div><ul>
+<li><code>pluginKlass</code> : Class instance</li>
+</ul>
+</li>
+<li>Load plugin in scene
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">plugin</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>url</code> : File url or class instance.</li>
+</ul>
+</li>
+</ul>
 <h4 id="get-instance">Get instance<a class="headerlink" href="#get-instance" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">pluginInst</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </pre></div>
 
 <h3 id="scene-plugin">Scene plugin<a class="headerlink" href="#scene-plugin" title="Permanent link">&para;</a></h3>
-<h4 id="load-plugin-in-game-configuration_1">Load plugin in <a href="../game/#configuration">game configuration</a><a class="headerlink" href="#load-plugin-in-game-configuration_1" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="c1">// import pluginKlass from &#39;...&#39;;</span>
+<h4 id="load-plugin_1">Load plugin<a class="headerlink" href="#load-plugin_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Load plugin before any scene start<br />
+    In <a href="../game/#configuration">game configuration</a>
+    <div class="codehilite"><pre><span></span><span class="c1">// import pluginKlass from &#39;...&#39;;</span>
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
@@ -4003,17 +4121,27 @@
     <span class="c1">// ...</span>
 <span class="p">};</span>
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>pluginKlass</code> : Class instance</li>
+</ul>
+</li>
+<li>Load plugin in scene
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">scenePlugin</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="nx">systemKey</span><span class="p">,</span> <span class="nx">sceneKey</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>url</code> : File url or class instance.</li>
+</ul>
+</li>
+</ul>
+<h4 id="get-instance_1">Get instance<a class="headerlink" href="#get-instance_1" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">pluginInst</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">[</span><span class="nx">sceneKey</span><span class="p">];</span>
 </pre></div>
 
-<h4 id="load-and-add-plugin-from-file_1">Load and add plugin from file<a class="headerlink" href="#load-and-add-plugin-from-file_1" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">scenePlugin</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="nx">systemKey</span><span class="p">,</span> <span class="nx">sceneKey</span><span class="p">);</span>
-</pre></div>
-
-<ol>
-<li>load file from url</li>
-<li>Create instance : <code>new winodw[key](pluginManager)</code></li>
-<li>Put instance in <code>plugins[key]</code></li>
-</ol>
+<h3 id="plugin-cache">Plugin cache<a class="headerlink" href="#plugin-cache" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Has custom plugin
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">hasPlugin</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Plugins</span><span class="p">.</span><span class="nx">PluginCache</span><span class="p">.</span><span class="nx">hasCustom</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</pre></div></li>
+</ul>
                 
                   
                 
@@ -4030,6 +4158,41 @@
       
         
 <footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../snapshot/" title="Snapshot" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Snapshot
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../loader/" title="Loader" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Loader
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
