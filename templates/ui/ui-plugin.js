@@ -23,7 +23,7 @@ import TextBlockFactory from './textblock/TextBlockFactory.js';
 import TextAreaFactory from './textarea/TextAreaFactory.js';
 import ScrollableBlockFactory from './scrollableblock/ScrollableBlockFactory.js';
 import ScrollablePanelFactory from './scrollablepanel/ScrollablePanelFactory.js';
-// import ChartFactory from './chart/ChartFactory.js';
+import ChartFactory from './chart/ChartFactory.js';
 
 import Hide from './utils/Hide.js';
 import Show from './utils/Show.js';

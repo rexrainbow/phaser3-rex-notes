@@ -295,15 +295,13 @@ class ContainerLite extends Zone {
         if (visible === undefined) {
             visible = true;
         }
-        var state = this.getLocalState(gameObject);
-        state.visible = visible;
+        this.getLocalState(gameObject).visible = visible;
         this.updateChildVisible(gameObject);
         return this;
     }
 
     setChildLocalAlpha(gameObject, alpha) {
-        var state = this.getLocalState(gameObject);
-        state.alpha = alpha;
+        this.getLocalState(gameObject).alpha = Scale(gameObject.alpha, this.alpha);
         this.updateChildAlpha(gameObject);
         return this;
     }

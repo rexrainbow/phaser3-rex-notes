@@ -8,13 +8,15 @@ class Demo extends Phaser.Scene {
 
     }
 
-    preload() { }
+    preload() { 
+        this.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js');
+    }
 
     create() {
-        var chart = this.rexUI.add.chart(400, 300, 100, 100, {
+        var config = {
             type: 'bar',
             data: {
-                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
                 datasets: [{
                     label: '# of Votes',
                     data: [12, 19, 3, 5, 2, 3],
@@ -46,8 +48,9 @@ class Demo extends Phaser.Scene {
                     }]
                 },
             }
-        })
-            .resize(256, 256);
+        };
+
+        var chart = this.rexUI.add.chart(400, 300, 256, 256, config);
     }
 
     update() { }
