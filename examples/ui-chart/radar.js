@@ -41,6 +41,8 @@ class Demo extends Phaser.Scene {
 
 class Card extends RexPlugins.UI.Sizer {
     constructor(scene, x, y, data) {
+        var background = scene.rexUI.add.roundRectangle(0, 0, 0, 0, 20, COLOR_PRIMARY);
+
         var nameColor = Phaser.Display.Color.IntegerToColor(COLOR_LIGHT);
         var titleColor = Phaser.Display.Color.IntegerToColor(COLOR_DARK);
         var icon = scene.rexUI.add.roundRectangle(0, 0, 80, 80, 2, COLOR_LIGHT);
@@ -118,7 +120,7 @@ class Card extends RexPlugins.UI.Sizer {
         super(scene, x, y, undefined, undefined, 'y');
 
         this
-            .addBackground(scene.rexUI.add.roundRectangle(0, 0, 0, 0, 20, COLOR_PRIMARY).setDepth(-1))
+            .addBackground(background)
             .add(header,
                 0,
                 'left',
