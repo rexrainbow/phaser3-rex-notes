@@ -112,7 +112,6 @@ var rgb = Phaser.Display.Color.IntegerToRGB(color);
    ```javascript
    color.gray(value);
    ```
-   - Set (red, green, blue) to value
 - Set to a random color
     ```javascript
     color.random();
@@ -186,12 +185,6 @@ var rgb = Phaser.Display.Color.IntegerToRGB(color);
     ```
     - `value` : Percentage, 0 ~ 100
 
-#### Clone
-
-```javascript
-var newColor = color.clone();
-```
-
 #### Properties
 
 - RGB Color, not including the alpha channel
@@ -226,3 +219,16 @@ var newColor = color.clone();
     var b = color.blueGL;
     var a = color.alphaGL;
     ```
+
+#### Clone
+
+```javascript
+var newColor = color.clone();
+```
+
+### To hex string
+
+```javascript
+var hexString = Phaser.Display.Color.RGBToString(color.r, color.g, color.b, color.a);
+// var hexString = Phaser.Display.Color.RGBToString(color.r, color.g, color.b, color.a, prefix);
+```
