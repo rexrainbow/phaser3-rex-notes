@@ -1,5 +1,7 @@
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
+const GetValue = Phaser.Utils.Objects.GetValue;
+
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -13,65 +15,63 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var randomScalingFactor = function () {
-            return Math.round(Math.random() * 100);
-        };
+        var chart = CreateChart(this, {
+            x: 400,
+            y: 300,
+            width: 400,
+            height: 400,
+            data: [10, 20, 30, 40, 50, 60]
+        });
 
-        debugger
-        var color = Chart.helpers.color;
-        var config = {
-            type: 'radar',
-            data: {
-                labels: [['Eating', 'Dinner'], ['Drinking', 'Water'], 'Sleeping', ['Designing', 'Graphics'], 'Coding', 'Cycling', 'Running'],
-                datasets: [
-                    {
-                        label: 'My First dataset',
-                        backgroundColor: color('red').alpha(0.2).rgbString(),
-                        borderColor: 'red',
-                        pointBackgroundColor: 'red',
-                        data: [
-                            randomScalingFactor(),
-                            randomScalingFactor(),
-                            randomScalingFactor(),
-                            randomScalingFactor(),
-                            randomScalingFactor(),
-                            randomScalingFactor(),
-                            randomScalingFactor()
-                        ]
-                    },
-                    {
-                        label: 'My Second dataset',
-                        backgroundColor: color('blue').alpha(0.2).rgbString(),
-                        borderColor: 'blue',
-                        pointBackgroundColor: 'blue',
-                        data: [
-                            randomScalingFactor(),
-                            randomScalingFactor(),
-                            randomScalingFactor(),
-                            randomScalingFactor(),
-                            randomScalingFactor(),
-                            randomScalingFactor(),
-                            randomScalingFactor()
-                        ]
-                    }
-                ]
-            },
-            options: {
-                legend: {
-                    position: 'top',
-                },
-                scale: {
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        };
-
-        var chart = this.rexUI.add.chart(400, 300, 600, 600, config);
+        var dataset = chart.chart.data.datasets;
+        dataset[0].data[0] = 100;
+        chart.chart.update();
     }
 
     update() { }
+}
+
+var CreateChart = function (scene, config) {
+    var x = GetValue(config, 'x', 0);
+    var y = GetValue(config, 'y', 0);
+    var width = GetValue(config, 'width', 100);
+    var height = GetValue(config, 'height', 100);
+    var data = GetValue(config, 'data', []);
+    return scene.rexUI.add.chart(x, y, width, height, {
+        type: 'radar',
+        data: {
+            labels: ['A', 'B', 'C', 'D', 'E'],
+            datasets: [
+                {
+                    label: 'My First dataset',
+                    backgroundColor: Chart.helpers.color('red').alpha(0.5).rgbString(),
+                    borderColor: 'red',
+                    pointBackgroundColor: 'red',
+                    data: data
+                },
+            ]
+        },
+        options: {
+            legend: {
+                display: false,
+            },
+            scale: {
+                ticks: {
+                    min: 0,
+                    max: 100,
+                    beginAtZero: true,
+                    backdropColor: 'transparent'
+                },
+                angleLines: {
+                    color: Chart.helpers.color('yellow').alpha(0.3).rgbString(),
+
+                },
+                gridLines: {
+                    color: Chart.helpers.color('yellow').alpha(0.3).rgbString(),
+                }
+            }
+        }
+    })
 }
 
 var config = {
@@ -84,7 +84,6 @@ var config = {
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
     scene: Demo,
-    backgroundColor: 0xffffff,
     plugins: {
         scene: [{
             key: 'rexUI',
