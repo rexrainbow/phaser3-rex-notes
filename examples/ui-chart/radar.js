@@ -22,14 +22,13 @@ class Demo extends Phaser.Scene {
         var data = {
             name: 'rex',
             title: 'Programmer',
-            attributes: {
-                A: 10,
-                B: 20,
-                C: 30,
-                D: 40,
-                E: 50,
-                F: 60,
-            }
+
+            A: 10,
+            B: 20,
+            C: 30,
+            D: 40,
+            E: 50,
+            F: 60,
         }
         var card = new Card(this, 400, 300, data)
             .layout();
@@ -79,8 +78,11 @@ class Card extends RexPlugins.UI.Sizer {
                     ticks: {
                         min: 0,
                         max: 100,
-                        beginAtZero: true,
-                        backdropColor: 'transparent'
+                        fontColor: GetRGBAString(gridColor, 1),
+                        showLabelBackdrop: false,
+                    },
+                    pointLabels: {
+                        fontColor: GetRGBAString(gridColor, 1),
                     },
                     angleLines: {
                         color: GetRGBAString(gridColor, 1),
@@ -144,12 +146,11 @@ class Card extends RexPlugins.UI.Sizer {
         this.getElement('name').text = GetValue(data, 'name', 'Name');
         this.getElement('title').text = GetValue(data, 'title', 'Title');
 
-        var newAttributes = GetValue(data, 'attributes', undefined);
         var chart = this.getElement('attributes').chart;
         var labels = chart.data.labels;
         var dataset = chart.data.datasets[0].data;
         for (var i = 0, cnt = labels.length; i < cnt; i++) {
-            dataset[i] = GetValue(newAttributes, labels[i], 0);
+            dataset[i] = GetValue(data, labels[i], 0);
         }
         chart.update();
         return this;
