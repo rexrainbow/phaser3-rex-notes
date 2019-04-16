@@ -60,6 +60,10 @@
     }
     ```
 
+### Canvas objects
+
+1. [Chart](ui-chart.md): Draw [chart](https://www.chartjs.org/) on [canvas](canvas.md).
+
 ### Colored text objects
 
 1. [BBCode text](bbcodetext.md): Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.

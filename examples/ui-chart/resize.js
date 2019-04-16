@@ -1,4 +1,5 @@
 import UIPlugin from '../../templates/ui/ui-plugin.js';
+import Chart from 'chart.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -8,7 +9,7 @@ class Demo extends Phaser.Scene {
 
     }
 
-    preload() { 
+    preload() {
         this.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js');
     }
 
@@ -18,7 +19,7 @@ class Demo extends Phaser.Scene {
             data: {
                 labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
                 datasets: [{
-                    label: '# of Votes',
+                    label: 'Group 0',
                     data: [12, 19, 3, 5, 2, 3],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
@@ -50,7 +51,11 @@ class Demo extends Phaser.Scene {
             }
         };
 
-        var chart = this.rexUI.add.chart(400, 300, 256, 256, config);
+        var chart = this.rexUI.add.chart(400, 300, 200, 100, config)
+            .resize(600, 600)
+        //.setChart(config);
+
+        chart.setChartData('Group 0', 'Red', 20).updateChart();
     }
 
     update() { }
@@ -65,6 +70,7 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
+    backgroundColor: 0xffffff,
     scene: Demo,
     plugins: {
         scene: [{

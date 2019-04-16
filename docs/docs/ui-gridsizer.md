@@ -37,6 +37,7 @@ var config = {
 };
 var game = new Phaser.Game(config);
 ```
+
 ### Add grid sizer object
 
 ```javascript

@@ -217,6 +217,7 @@ nav:
     - Number bar: ui-numberbar.md
     - Pages: ui-pages.md
     - Scroll-able panel: ui-scrollablepanel.md
+    - Chart: ui-chart.md
     - Base sizer: ui-basesizer.md
 - Board:
     - Overview: board-overview.md

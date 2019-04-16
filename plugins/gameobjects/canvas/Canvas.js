@@ -128,6 +128,9 @@ var Canvas = new Phaser.Class({
                 callback(this.canvas, this.context);
             }
         }
+        if ((this.width !== this.frame.width) || (this.height !== this.frame.height)) {
+            this.frame.setSize(this.width, this.height);
+        }
         if (this.renderer.gl) {
             this.frame.source.glTexture = this.renderer.canvasToTexture(this.canvas, this.frame.source.glTexture, true);
             this.frame.glTexture = this.frame.source.glTexture;
@@ -219,8 +222,10 @@ var Canvas = new Phaser.Class({
     resize: function (width, height) {
         this.canvas.width = this.resolution * width;
         this.canvas.height = this.resolution * height;
-        this.setSize(width, height);
-        this.updateDisplayOrigin();
+
+        this
+            .setSize(width, height)
+            .updateDisplayOrigin();
         return this;
     }
 });

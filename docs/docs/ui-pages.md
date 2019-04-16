@@ -38,7 +38,7 @@ var config = {
 var game = new Phaser.Game(config);
 ```
 
-### Add grid table object
+### Add pages object
 
 ```javascript
 var pages = scene.rexUI.add.pages({

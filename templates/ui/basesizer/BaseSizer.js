@@ -197,6 +197,7 @@ var methods = {
     getChildrenWidth: GetChildrenWidth,
     getChildrenHeight: GetChildrenHeight,
     addChildrenMap: AddChildrenMap,
+    addElement: AddChildrenMap,
     getElement: GetElement,
     getAllChildrenSizers: GetAllChildrenSizers,
     getChildrenSizers: GetChildrenSizers,

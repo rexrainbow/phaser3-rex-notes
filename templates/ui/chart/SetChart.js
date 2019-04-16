@@ -7,7 +7,7 @@ scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.
     }
 
     if (this.chart) {
-        this.chart.destroy();
+        this.chart.destroy();        
     }
     this.chart = new Chart(this.context, FillConfig(this, config));
     return this;

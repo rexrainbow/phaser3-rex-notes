@@ -1,5 +1,7 @@
 import Canvas from '../../../plugins/gameobjects/canvas/Canvas.js';
 import SetChart from './SetChart.js';
+import SetChartData from './SetChartData.js';
+import UpdateChart from './UpdateChart.js';
 
 // This plugin does not contain chart.js
 // Load chart.js in preload stage -
@@ -29,6 +31,10 @@ class Chart extends Canvas {
     }
 
     resize(width, height) {
+        if ((width === this.width) && (height === this.height)) {
+            return this;
+        }
+
         super.resize(width, height);
 
         if (this.chart) {
@@ -44,6 +50,8 @@ class Chart extends Canvas {
 
 var methods = {
     setChart: SetChart,
+    setChartData: SetChartData,
+    updateChart: UpdateChart,
 }
 Object.assign(
     Chart.prototype,

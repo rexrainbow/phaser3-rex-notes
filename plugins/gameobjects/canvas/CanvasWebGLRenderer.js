@@ -18,7 +18,7 @@ var WebGLRenderer = function (renderer, src, interpolationPercentage, camera, pa
         frame.glTexture,
         width, height,
         src.x, src.y,
-        src.width, src.height,
+        width / src.resolution, height / src.resolution,
         src.scaleX, src.scaleY,
         src.rotation,
         src.flipX, src.flipY,
