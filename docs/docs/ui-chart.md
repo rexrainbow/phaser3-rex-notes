@@ -38,6 +38,14 @@ var config = {
 var game = new Phaser.Game(config);
 ```
 
+#### Install chart.js
+
+[Chart.js](https://www.chartjs.org/) is not included in rexUI, user needs to install it before creating any chart.
+
+```javascript
+scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js');
+```
+
 ### Add chart object
 
 ```javascript
