@@ -2879,21 +2879,28 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#clone" title="Clone" class="md-nav__link">
-    Clone
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#properties" title="Properties" class="md-nav__link">
     Properties
   </a>
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#clone" title="Clone" class="md-nav__link">
+    Clone
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#to-hex-string" title="To hex string" class="md-nav__link">
+    To hex string
+  </a>
   
 </li>
         
@@ -3543,6 +3550,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../ui-chart/" title="Chart" class="md-nav__link">
+      Chart
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../ui-basesizer/" title="Base sizer" class="md-nav__link">
       Base sizer
     </a>
@@ -4015,21 +4034,28 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#clone" title="Clone" class="md-nav__link">
-    Clone
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#properties" title="Properties" class="md-nav__link">
     Properties
   </a>
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#clone" title="Clone" class="md-nav__link">
+    Clone
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#to-hex-string" title="To hex string" class="md-nav__link">
+    To hex string
+  </a>
   
 </li>
         
@@ -4177,7 +4203,6 @@
 <li>Set to gray color
    <div class="codehilite"><pre><span></span><span class="nx">color</span><span class="p">.</span><span class="nx">gray</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
 </pre></div></li>
-<li>Set (red, green, blue) to value</li>
 <li>Set to a random color
     <div class="codehilite"><pre><span></span><span class="nx">color</span><span class="p">.</span><span class="nx">random</span><span class="p">();</span>
 </pre></div>
@@ -4249,10 +4274,6 @@
 </ul>
 </li>
 </ul>
-<h4 id="clone">Clone<a class="headerlink" href="#clone" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">newColor</span> <span class="o">=</span> <span class="nx">color</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
-</pre></div>
-
 <h4 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h4>
 <ul>
 <li>RGB Color, not including the alpha channel
@@ -4282,6 +4303,14 @@
 <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="nx">color</span><span class="p">.</span><span class="nx">alphaGL</span><span class="p">;</span>
 </pre></div></li>
 </ul>
+<h4 id="clone">Clone<a class="headerlink" href="#clone" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">newColor</span> <span class="o">=</span> <span class="nx">color</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
+</pre></div>
+
+<h3 id="to-hex-string">To hex string<a class="headerlink" href="#to-hex-string" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">hexString</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Display</span><span class="p">.</span><span class="nx">Color</span><span class="p">.</span><span class="nx">RGBToString</span><span class="p">(</span><span class="nx">color</span><span class="p">.</span><span class="nx">r</span><span class="p">,</span> <span class="nx">color</span><span class="p">.</span><span class="nx">g</span><span class="p">,</span> <span class="nx">color</span><span class="p">.</span><span class="nx">b</span><span class="p">,</span> <span class="nx">color</span><span class="p">.</span><span class="nx">a</span><span class="p">);</span>
+<span class="c1">// var hexString = Phaser.Display.Color.RGBToString(color.r, color.g, color.b, color.a, prefix);</span>
+</pre></div>
                 
                   
                 

@@ -40,7 +40,7 @@ var game = new Phaser.Game(config);
 
 #### Install chart.js
 
-[Chart.js](https://www.chartjs.org/) is not included in rexUI, user needs to install it before creating any chart.
+[Chart.js](https://www.chartjs.org/) is not included in rexUI, installs it before creating any chart.
 
 ```javascript
 scene.load.script('chartjs', 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js');
@@ -84,14 +84,25 @@ chart.setChart(config);
 
 - `config` : [Configuration](https://www.chartjs.org/docs/latest/configuration/) for creating chart.
 
-### Set chart data
+### Chart data
 
-```javascript
-chart.setChartData(datasetIndex, dataIndex, value).updateChart();
-```
-
-- `datasetIndex` : Index number or label string.
-- `dataIndex` : Index number or label string.
+- Get dataset
+    ```javascript
+    var dataset = chart.getChartDataset(datasetIndex);
+    ```
+    - `datasetIndex` : Index number or label string.
+- Get data
+    ```javascript
+    var data = chart.getChartData(datasetIndex, dataIndex);
+    ```
+    - `datasetIndex` : Index number or label string.
+    - `dataIndex` : Index number or label string.
+- Set
+    ```javascript
+    chart.setChartData(datasetIndex, dataIndex, value).updateChart();
+    ```
+    - `datasetIndex` : Index number or label string.
+    - `dataIndex` : Index number or label string.
 
 ### Manipulate chart object
 

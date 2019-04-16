@@ -3,29 +3,14 @@ var SetChartData = function (datasetIndex, dataIndex, value) {
         return this;
     }
 
+    var dataset = this.getChartDataset(datasetIndex);
     if (typeof (dataIndex) === 'string') {
         var labels = this.chart.data.labels;
         dataIndex = labels.indexOf(dataIndex);
-    }
-
-    var dataset;
-    if (typeof (datasetIndex) === 'string') {
-        var found = false;
-        var datasets = this.chart.data.datasets;
-        for (var i = 0, cnt = datasets.length; i < cnt; i++) {
-            dataset = datasets[i];
-            if (dataset.label === datasetIndex) {
-                found = true;
-                break;
-            }
-        }
-        if (!found) {
+        if (dataIndex === -1) {
             return this;
         }
-    } else {
-        dataset = this.chart.data.datasets[datasetIndex];
     }
-
     dataset.data[dataIndex] = value;
     return this;
 };
