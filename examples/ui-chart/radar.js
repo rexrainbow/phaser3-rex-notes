@@ -134,10 +134,10 @@ class Card extends RexPlugins.UI.Sizer {
                 { left: 20, right: 20, top: 0, bottom: 20 },
                 false);
 
-        this.addElement('icon', icon);
-        this.addElement('name', nameText);
-        this.addElement('title', titleText);
-        this.addElement('attributes', attributesChart);
+        this.addChildrenMap('icon', icon);
+        this.addChildrenMap('name', nameText);
+        this.addChildrenMap('title', titleText);
+        this.addChildrenMap('attributes', attributesChart);
 
         this.updateData(data);
     }
