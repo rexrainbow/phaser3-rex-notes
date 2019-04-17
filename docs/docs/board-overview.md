@@ -23,6 +23,10 @@
 - [Match](board-match.md)
 - [Hexagon map](board-hexagonmap.md)
 
+### Mini-board
+
+- [Mini-board](board-miniboard.md)
+
 ### Templates
 
 - [Bejeweled](board-bejeweled.md)
