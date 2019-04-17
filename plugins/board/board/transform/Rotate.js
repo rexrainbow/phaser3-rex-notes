@@ -1,5 +1,4 @@
 var Rotate = function (tileXY, direction, originTileXY, out) {
-    debugger
     if (out === undefined) {
         out = {};
     } else if (out === true) {

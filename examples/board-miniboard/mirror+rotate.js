@@ -20,7 +20,7 @@ class Demo extends Phaser.Scene {
             }
         });
 
-        var grid = getHexagonGrid(this);
+        var grid = getQuadGrid(this);
 
         var mainBoard = this.rexBoard.add.board({
             grid: grid,
