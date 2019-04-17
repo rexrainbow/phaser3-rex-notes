@@ -1,5 +1,4 @@
-var Rotate = function (tileXY, direction, originTileXY, out) {
-    debugger
+var Mirror = function (tileXY, mode, originTileXY, out) {
     if (out === undefined) {
         out = {};
     } else if (out === true) {
@@ -12,7 +11,7 @@ var Rotate = function (tileXY, direction, originTileXY, out) {
         out.x = tileXY.x;
         out.y = tileXY.y;
     }
-    this.grid.rotate(out, direction, out);
+    this.grid.mirror(out, mode, out);
     if (originTileXY !== undefined) {
         this.offset(out, originTileXY.x, originTileXY.y, out);
     }
@@ -20,4 +19,4 @@ var Rotate = function (tileXY, direction, originTileXY, out) {
 };
 
 var globTileXY = {};
-export default Rotate;
+export default Mirror;

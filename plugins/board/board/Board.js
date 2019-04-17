@@ -39,6 +39,7 @@ import GetDistance from './tileposition/GetDistance.js';
 import DirectionBetween from './tileposition/DirectionBetween.js';
 
 import Offset from './transform/Offset.js';
+import Mirror from './transform/Mirror.js';
 import Rotate from './transform/Rotate.js';
 import Fit from './transform/Fit.js';
 
@@ -191,6 +192,7 @@ var methods = {
     tileXYArrayToChess: TileXYArrayToChessArray,
     chessToTileXYZ: ChessToTileXYZ,
     offset: Offset,
+    mirror: Mirror,
     rotate: Rotate,
     getOppositeDirection: GetOppositeDirection,
     getDistance: GetDistance,

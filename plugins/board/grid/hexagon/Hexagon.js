@@ -6,6 +6,7 @@ import GetNeighborTileY from '../../../utils/grid/hexagon/GetNeighborTileY.js';
 import GetNeighborTileDirection from '../../../utils/grid/hexagon/GetNeighborTileDirection.js';
 import GetOppositeDirection from '../../../utils/grid/hexagon/GetOppositeDirection.js';
 import Offset from '../../../utils/grid/hexagon/Offset.js';
+import Mirror from '../../../utils/grid/hexagon/Mirror.js';
 import Rotate from '../../../utils/grid/hexagon/Rotate.js';
 import GetDistance from '../../../utils/grid/hexagon/GetDistance.js';
 import DirectionBetween from '../../../utils/grid/hexagon/DirectionBetween.js';
@@ -55,6 +56,7 @@ var methods = {
     getNeighborTileDirection: GetNeighborTileDirection,
     getOppositeDirection: GetOppositeDirection,
     offset: Offset,
+    mirror: Mirror,
     rotate: Rotate,
     getDistance: GetDistance,
     directionBetween: DirectionBetween,

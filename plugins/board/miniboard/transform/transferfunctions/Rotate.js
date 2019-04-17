@@ -11,7 +11,7 @@ var Rotate = function (direction, chessTileXYZMap, out) {
     var chessTileXYZ, newTileXYZ;
     for (var uid in chessTileXYZMap) {
         chessTileXYZ = chessTileXYZMap[uid];
-        newTileXYZ = this.board.rotate(chessTileXYZ, direction, undefined);
+        newTileXYZ = this.board.rotate(chessTileXYZ, direction);
         newTileXYZ.z = chessTileXYZ.z;
         out[uid] = newTileXYZ;
     }

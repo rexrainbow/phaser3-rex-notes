@@ -6,6 +6,7 @@ import GetNeighborTileY from '../../../utils/grid/quad/GetNeighborTileY.js';
 import GetNeighborTileDirection from '../../../utils/grid/quad/GetNeighborTileDirection.js';
 import GetOppositeDirection from '../../../utils/grid/quad/GetOppositeDirection.js';
 import Offset from '../../../utils/grid/quad/Offset.js';
+import Mirror from '../../../utils/grid/quad/Mirror.js';
 import Rotate from '../../../utils/grid/quad/Rotate.js';
 import GetDistance from '../../../utils/grid/quad/GetDistance.js';
 import DirectionBetween from '../../../utils/grid/quad/DirectionBetween.js';
@@ -54,6 +55,7 @@ var methods = {
     getNeighborTileDirection: GetNeighborTileDirection,
     getOppositeDirection: GetOppositeDirection,
     offset: Offset,
+    mirror: Mirror,
     rotate: Rotate,
     getDistance: GetDistance,
     directionBetween: DirectionBetween,

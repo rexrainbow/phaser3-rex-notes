@@ -10,14 +10,12 @@ var Mirror = function (mode, chessTileXYZMap, out) {
     if (out === undefined) {
         out = {};
     }
-    var chessTileXYZ;
+    var chessTileXYZ, newTileXYZ;
     for (var uid in chessTileXYZMap) {
         chessTileXYZ = chessTileXYZMap[uid];
-        out[uid] = {
-            x: (mode & 1) ? -chessTileXYZ.x : chessTileXYZ.x,
-            y: (mode & 2) ? -chessTileXYZ.y : chessTileXYZ.y,
-            z: chessTileXYZ.z
-        };
+        newTileXYZ = this.board.mirror(chessTileXYZ, mode);
+        newTileXYZ.z = chessTileXYZ.z;
+        out[uid] = newTileXYZ;
     }
     return out; // {uid:{x,y,z}}
 }
