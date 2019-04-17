@@ -7,7 +7,7 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {}
+    preload() { }
 
     create() {
         this.bejeweled = new Bejeweled(this, {
@@ -45,14 +45,15 @@ class Demo extends Phaser.Scene {
                 // moveTo behavior
                 moveTo: {
                     speed: 400
-                },              
+                },
             },
 
+            debug: true,
         });
         this.bejeweled.start();
     }
 
-    update() {}
+    update() { }
 }
 
 var colorArray = Phaser.Display.Color.HSVColorWheel(0.5, 1);

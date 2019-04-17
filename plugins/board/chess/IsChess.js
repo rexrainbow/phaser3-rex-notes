@@ -1,7 +1,7 @@
 import IsUID from './IsUID.js'
 
 var IsChess = function (chess) {
-    if (IsUID(chess)) { // number or string
+    if (IsUID(chess)) { // Number or string
         return false;
     } else {
         return chess && (!!chess.rexChess);

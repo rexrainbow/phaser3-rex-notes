@@ -8,7 +8,7 @@ var GetTileXY = function (worldX, worldY, out) {
     worldX -= this.x;
     worldY -= this.y;
     var tmpx = worldX / this.width;
-    var tmpy = worldY / this.hieght;
+    var tmpy = worldY / this.height;
     switch (this.mode) {
         case 0: // orthogonal
             out.x = Math.round(tmpx);

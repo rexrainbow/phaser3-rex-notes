@@ -4,7 +4,7 @@ import IsUID from './IsUID.js';
 
 const uidKey = ChessBank.uidKey;
 var GetChessUID = function (gameObject) {
-    // game object or uid
+    // Game object or uid
     var uid;
     if (IsUID(gameObject)) {
         uid = gameObject;
