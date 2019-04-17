@@ -34,6 +34,7 @@ class MiniBoard extends Container {
         super(scene, x, y, 0, 0);
         this.type = 'rexMiniBoard';
         var boardConfig = {
+            isBoard: false,
             grid: GetValue(config, 'grid', undefined),
             inifinity: true,
             wrap: false

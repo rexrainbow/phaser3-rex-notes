@@ -232,6 +232,8 @@ nav:
     - Field of view: board-fieldofview.md
     - Match: board-match.md
     - Hexagon map: board-hexagonmap.md
+    - Mini board:
+        - Mini board: board-miniboard.md
     - Bejeweled: board-bejeweled.md
 - Storage:
     - Offline:

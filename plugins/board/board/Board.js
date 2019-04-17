@@ -77,6 +77,7 @@ class Board extends EE {
     }
 
     resetFromJSON(o) {
+        this.isBoard = GetValue(o, 'isBoard', true);
         this.setGrid(GetValue(o, 'grid', undefined));
         this.setWrapMode(GetValue(o, 'wrap', false));
         this.setInfinityBoard(GetValue(o, 'inifinity', false));

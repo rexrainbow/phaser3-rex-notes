@@ -29,7 +29,10 @@ var AddChess = function (gameObject, tileX, tileY, tileZ, align) {
         this.removeChess(occupiedChess, tileX, tileY, tileZ);
     }
     this.boardData.addUID(this.getChessUID(gameObject), tileX, tileY, tileZ);
-    this.getChessData(gameObject).setBoard(this);
+
+    if (this.isBoard) {
+        this.getChessData(gameObject).setBoard(this);
+    }
 
     if (align) {
         this.gridAlign(gameObject, tileX, tileY);

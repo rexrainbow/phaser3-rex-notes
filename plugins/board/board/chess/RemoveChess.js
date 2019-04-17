@@ -23,7 +23,9 @@ var RemoveChess = function (gameObject, tileX, tileY, tileZ, destroy, fromBoardR
     if (!fromBoardRemove) {
         this.boardData.removeUID(tileX, tileY, tileZ);
     }
-    this.getChessData(gameObject).setBoard(null);
+    if (this.isBoard) {
+        this.getChessData(gameObject).setBoard(null);
+    }
 
     if (destroy && gameObject.destroy) {
         gameObject.destroy();
