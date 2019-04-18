@@ -87,11 +87,11 @@ var cube2cr = function (mode, x, y, z, out) {
 
         case ODD_Q:
             out.x = x;
-            out.z = z + (x - (x & 1)) / 2;
+            out.y = z + (x - (x & 1)) / 2;
             break;
         case EVEN_Q:
             out.x = x;
-            out.z = z + (x + (x & 1)) / 2;
+            out.y = z + (x + (x & 1)) / 2;
             break;
     }
     return out;
