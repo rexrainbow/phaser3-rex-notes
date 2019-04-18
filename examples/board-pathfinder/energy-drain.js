@@ -1,4 +1,9 @@
 import BoardPlugin from '../../plugins/board-plugin.js';
+import UIPlugin from '../../templates/ui/ui-plugin.js';
+
+const ENERGY_SOURCE = 30;
+const ENERGY_DRAIN = -10;
+const ENERGY_PIPE = -1;
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -15,12 +20,12 @@ class Demo extends Phaser.Scene {
     create() {
         var config = {
             grid: this.rexBoard.add.quadGrid({
-                x: 20,
-                y: 20,
-                cellWidth: 40,
-                cellHeight: 40
+                x: 26,
+                y: 26,
+                cellWidth: 38,
+                cellHeight: 38
             }),
-            width: 20,
+            width: 15,
             height: 15,
         }
         var board = new Board(this, config);
@@ -31,6 +36,8 @@ class Demo extends Phaser.Scene {
             board.addDrain();
         }
         board.energyDispatch();
+
+        createLabels(this);
     }
 }
 
@@ -83,21 +90,12 @@ class Board extends RexPlugins.Board.Board {
     energyDispatch() {
         this.setTilesEnergy(this.tileZToChessArray(0), false);
 
-        // Clear visited
-        for (var i = 0, cnt = this.sources.length; i < cnt; i++) {
-            this.sources[i].setData('visited', false);
-        }
-
-        var source;
+        var source, tileXYArray;
         for (var i = 0, cnt = this.sources.length; i < cnt; i++) {
             source = this.sources[i];
-            if (source.getData('visited')) {
-                continue;
-            }
-
             source.setData('remainder', source.getData('energy'));
-            var tileXYArray = [this.chessToTileXYZ(source)];
-            tileXYArray = source.pathFinder.findArea(undefined, tileXYArray);
+            tileXYArray = [this.chessToTileXYZ(source)];
+            source.pathFinder.findArea(undefined, tileXYArray);
             this.setTilesEnergy(this.tileXYArrayToChessArray(tileXYArray, 0), true);
         }
     }
@@ -119,7 +117,7 @@ class Tile extends RexPlugins.Board.Shape {
         // Shape(board, tileX, tileY, tileZ, fillColor, fillAlpha, addToBoard)
         super(board, tileXY.x, tileXY.y, 0);
         scene.add.existing(this);
-        this.setStrokeStyle(1, COLOR_BOARDER, 0.5);        
+        this.setStrokeStyle(1, COLOR_BOARDER, 0.5);
     }
 
     setEnergy(enabled) {
@@ -142,23 +140,25 @@ class Source extends Phaser.GameObjects.Image {
 
         board.addChess(this, tileXY.x, tileXY.y, 1);
         this.pathFinder = scene.rexBoard.add.pathFinder(this, {
+            shuffleNeighbors: true,
             costCallback: function (curTile, preTile, pathFinder) {
                 var board = pathFinder.board;
                 var chess = board.tileXYZToChess(curTile.x, curTile.y, 1);
                 if (!chess) {
                     return pathFinder.BLOCKER;
                 } else {
-                    if (chess instanceof Source) {
-                        chess.setData('visited', true);
-                    }
                     var remainder = this.getData('remainder') + chess.getData('energy');
-                    this.setData('remainder', remainder);
-                    return (remainder >= 0) ? 0 : pathFinder.BLOCKER;
+                    if (remainder >= 0) {
+                        this.setData('remainder', remainder);
+                        return 0;
+                    } else {
+                        return pathFinder.BLOCKER;
+                    }
                 }
             },
             costCallbackScope: this,
         });
-        this.setData('energy', 20);
+        this.setData('energy', ENERGY_SOURCE);
     }
 }
 
@@ -170,18 +170,18 @@ class Drain extends Phaser.GameObjects.Image {
         this.setTint(COLOR_DRAIN);
 
         board.addChess(this, tileXY.x, tileXY.y, 1);
-        this.setData('energy', -10);
+        this.setData('energy', ENERGY_DRAIN);
     }
 }
 
 class Pipe extends Phaser.GameObjects.Arc {
     constructor(board, tileXY) {
         var scene = board.scene;
-        super(scene, 0, 0, 10, 0, 360, false, COLOR_DRAIN, 1);
+        super(scene, 0, 0, 5, 0, 360, false, COLOR_DRAIN, 1);
         scene.add.existing(this);
 
         board.addChess(this, tileXY.x, tileXY.y, 1);
-        this.setData('energy', -1);
+        this.setData('energy', ENERGY_PIPE);
     }
 }
 
@@ -190,6 +190,38 @@ const COLOR_SOURCE = 0x6ec6ff;
 const COLOR_DRAIN = 0x0069c0;
 const COLOR_ENERGY = 0x2196f3;
 const COLOR_NOENERGY = 0xb0003a;
+
+var createLabels = function (scene) {
+    var labels = scene.rexUI.add.gridSizer({
+        x: 800 - 10,
+        y: 10,
+        height: 120,
+        column: 3,
+        row: 3,
+        rowProportions: 1,
+    })
+        .addBackground(scene.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_PRIMARY))
+
+        .add(scene.add.image(0, 0, 'source').setTint(COLOR_SOURCE), 0, 0, 'center', { left: 10, right: 10 }, false)
+        .add(scene.add.text(0, 0, 'Source'), 1, 0, 'left', 0, false)
+        .add(scene.add.text(0, 0, ENERGY_SOURCE), 2, 0, 'left', { left: 10, right: 10 }, false)
+
+        .add(scene.add.image(0, 0, 'drain').setTint(COLOR_DRAIN), 0, 1, 'center', { left: 10, right: 10 }, false)
+        .add(scene.add.text(0, 0, 'Drain'), 1, 1, 'left', 0, false)
+        .add(scene.add.text(0, 0, ENERGY_DRAIN), 2, 1, 'left', { left: 10, right: 10 }, false)
+
+        .add(scene.rexUI.add.roundRectangle(0, 0, 0, 0, 5, COLOR_DRAIN), 0, 2, 'center', { left: 10, right: 10 }, false)
+        .add(scene.add.text(0, 0, 'Pipe'), 1, 2, 'left', 0, false)
+        .add(scene.add.text(0, 0, ENERGY_PIPE), 2, 2, 'left', { left: 10, right: 10 }, false)
+
+        .setOrigin(1, 0)
+        .layout();
+    return labels;
+}
+
+const COLOR_PRIMARY = 0x4e342e;
+const COLOR_LIGHT = 0x7b5e57;
+const COLOR_DARK = 0x260e04;
 
 var config = {
     type: Phaser.AUTO,
@@ -202,11 +234,18 @@ var config = {
     },
     scene: Demo,
     plugins: {
-        scene: [{
-            key: 'rexBoard',
-            plugin: BoardPlugin,
-            mapping: 'rexBoard'
-        }]
+        scene: [
+            {
+                key: 'rexBoard',
+                plugin: BoardPlugin,
+                mapping: 'rexBoard'
+            },
+            {
+                key: 'rexUI',
+                plugin: UIPlugin,
+                mapping: 'rexUI'
+            }
+        ]
     }
 };
 

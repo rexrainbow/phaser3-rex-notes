@@ -41,11 +41,12 @@ var AStarSerach = function (startTileXYZ, endTileXY, movingPoints, mode) {
     const isAStarMode = (this.pathMode === ASTAR) || (this.pathMode === ASTAR_LINE) || (this.pathMode === ASTAR_RANDOM);
     const astarHeuristicEnable = isPathSearch && isAStarMode;
     const shortestPathEnable = isPathSearch && (!isAStarMode);
-    const astarHeuristicMode = (!astarHeuristicEnable) ? null :
-        (this.pathMode == ASTAR) ? 0 :
-        (this.pathMode == ASTAR_LINE) ? 1 :
-        (this.pathMode == ASTAR_RANDOM) ? 2 :
-        null;
+    const astarHeuristicMode =
+        (!astarHeuristicEnable) ? null :
+            (this.pathMode == ASTAR) ? 0 :
+                (this.pathMode == ASTAR_LINE) ? 1 :
+                    (this.pathMode == ASTAR_RANDOM) ? 2 :
+                        null;
 
     var end = (endTileXY !== null) ? nodesManager.getNode(endTileXY.x, endTileXY.y, true) : null;
     var start = nodesManager.getNode(startTileXYZ.x, startTileXYZ.y, true);
@@ -86,10 +87,11 @@ var AStarSerach = function (startTileXYZ, endTileXY, movingPoints, mode) {
         var neighbor, neighborCost, isNeighborMoreCloser;
         for (var i = 0, cnt = neighbors.length; i < cnt; ++i) {
             neighbor = neighbors[i];
+            if (neighbor.closed) {
+                continue;
+            }
             neighborCost = neighbor.getCost(curNode);
-            if (neighbor.closed || (neighborCost === BLOCKER)) {
-                // Not a valid node to process, skip to next neighbor.
-                //log("("+neighbor.x+","+neighbor.y+") is closed");
+            if (neighborCost === BLOCKER) {
                 continue;
             }
 
