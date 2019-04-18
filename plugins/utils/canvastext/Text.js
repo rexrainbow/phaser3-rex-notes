@@ -11,6 +11,7 @@ const GameObject = Phaser.GameObjects.GameObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const RemoveFromDOM = Phaser.DOM.RemoveFromDOM;
 const SPLITREGEXP = CONST.SPLITREGEXP;
+const Rectangle = Phaser.Geom.Rectangle;
 
 var PensPools = {};
 var Text = new Phaser.Class({
@@ -387,6 +388,11 @@ var Text = new Phaser.Class({
         }
 
         this.dirty = true;
+
+        if (this.input && this.input.hitArea instanceof Rectangle) {
+            this.input.hitArea.width = this.width;
+            this.input.hitArea.height = this.height;
+        }
 
         return this;
     },
