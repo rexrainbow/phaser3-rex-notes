@@ -189,7 +189,7 @@ var methods = {
     tileXYZToChess: TileXYZToChess,
     tileXYToChessArray: TileXYToChessArray,
     tileZToChessArray: TileZToChessArray,
-    tileXYArrayToChess: TileXYArrayToChessArray,
+    tileXYArrayToChessArray: TileXYArrayToChessArray,
     chessToTileXYZ: ChessToTileXYZ,
     offset: Offset,
     mirror: Mirror,
