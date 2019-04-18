@@ -15,9 +15,10 @@ var Mirror = function (src, mode, out) {
         out = globTileXY;
     }
     var cubeXYZ = cr2cube(this.mode, src.x, src.y, true);
-    var newCubeX, newCubeY, newCubeZ;
+    var isRMode = (this.mode === ODD_R) || (this.mode === EVEN_R);
+    var newCubeX, newCubeY, newCubeZ;    
     if (mode & 1) { // Mirror x
-        if ((this.mode === ODD_R) || (this.mode === EVEN_R)) {
+        if (isRMode) {
             newCubeX = cubeXYZ.y;
             newCubeY = cubeXYZ.x;
             newCubeZ = cubeXYZ.z;
@@ -31,7 +32,7 @@ var Mirror = function (src, mode, out) {
         cubeXYZ.z = newCubeZ;
     }
     if (mode & 2) { // Mirror y
-        if ((this.mode === ODD_R) || (this.mode === EVEN_R)) {
+        if (isRMode) {
             newCubeX = -cubeXYZ.y;
             newCubeY = -cubeXYZ.x;
             newCubeZ = -cubeXYZ.z;
