@@ -17,6 +17,7 @@ class ScrollablePanel extends Scrollable {
             panelConfig = {};
         }
         panelConfig.scrollMode = scrollMode;
+        panelConfig.clamplChildOY = GetValue(config, 'clamplChildOY', false);
         var scrollableBlock = new ScrollableBlock(scene, panelConfig);
         var panelWidth = GetValue(panelConfig, 'width', undefined);
         var panelHeight = GetValue(panelConfig, 'height', undefined);

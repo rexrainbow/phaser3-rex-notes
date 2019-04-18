@@ -22,7 +22,7 @@ class GridTable extends Scrollable {
             tableConfig = {};
         }
         tableConfig.scrollMode = scrollMode;
-        tableConfig.clamplTableOXY = false;
+        tableConfig.clamplTableOXY = GetValue(config, 'clamplChildOY', false);
         var tableWidth = GetValue(tableConfig, 'width', undefined);
         var tableHeight = GetValue(tableConfig, 'height', undefined);
         var table = new GridTableCore(scene, 0, 0, tableWidth, tableHeight, tableConfig);

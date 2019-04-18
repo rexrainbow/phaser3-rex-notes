@@ -24,6 +24,7 @@ class TextArea extends Scrollable {
             text: textObject,
             textMask: textMask,
             content: content,
+            clamplTextOY: GetValue(config, 'clamplChildOY', false),
         });
         var proportion = (textWidth === undefined) ? 1 : 0;
         var expand = (textHeight === undefined);
