@@ -87,11 +87,10 @@ var AStarSerach = function (startTileXYZ, endTileXY, movingPoints, mode) {
         var neighbor, neighborCost, isNeighborMoreCloser;
         for (var i = 0, cnt = neighbors.length; i < cnt; ++i) {
             neighbor = neighbors[i];
-            if (neighbor.closed) {
-                continue;
-            }
             neighborCost = neighbor.getCost(curNode);
-            if (neighborCost === BLOCKER) {
+            if (neighbor.closed || (neighborCost === BLOCKER)) {
+                // Not a valid node to process, skip to next neighbor.
+                //log("("+neighbor.x+","+neighbor.y+") is closed");
                 continue;
             }
 
