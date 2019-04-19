@@ -22,21 +22,21 @@ Included in board plugin.
 ```javascript
 var monopoly = scene.rexBoard.add.monopoly(chess, {
     face: 0,
-    pathTileZ: 0,
 
     // ** cost **
+    // pathTileZ: 0,
     // cost: 1,   // constant cost
     // costCallback: undefined,
     // costCallbackScope: undefined
 })
 ```
 
-- `face` : Get path toward this face direction.
+- `face` : Moving direction.
     - `0` ~ `3` : [Quad grid](board-quadgrid.md#directions) in 4 directions mode.
     - `0` ~ `7` : [Quad grid](board-quadgrid.md#directions) in 8 directions mode.
     - `0` ~ `5` : [Hexagon grid](board-hexagongrid.md#directions).
-- `pathTileZ` : TileZ of path tile.
 - Cost function
+    - `pathTileZ` : TileZ of path tiles.
     - `cost` : A constant cost for each non-blocked tile
     - `costCallback`, `costCallbackScope` :  Get cost via callback
         ```javascript
@@ -44,10 +44,38 @@ var monopoly = scene.rexBoard.add.monopoly(chess, {
             return cost;
         }
         ```
+        - Board : `monopoly.board`
+        - Cost of stop : `monopoly.STOP`
+        - Cost of blocker : `monopoly.BLOCKER`
+
+### Cost function
+
+```javascript
+var callback = function(curTileXY, preTileXY, monopoly) {
+    return cost;
+}
+```
+
+- `cost` : Number cost.
+- `curTileXY`, `preTileXY` : TileXY position `{x, y}`. Cost of moving from `preTileXY` to `curTileXY`.
+- `monopoly` : Path finder object.
+    - `monopoly.board` : [Board object](board.md)
+    - `monopoly.gameObject` : Chess game object.
+    - `monopoly.STOP` : Cost of stop. Return this value means chess will stop at `curTileXY`.
+    - `monopoly.BLOCKER` : Cost of blocker. Return this value means that chess can not move to `curTileXY`.
+
+#### Set cost function
+
+- Constant cost for each non-blocked tile
+    ```javascript
+    monopoly.setCostFunction(cost);
+    ```
+- Get cost via callback
+    ```javascript
+    monopoly.setCostFunction(callback, scope);
+    ```
 
 ### Set face direction
-
-Get path toward this face direction.
 
 ```javascript
 monopoly.setFace(direction);
@@ -57,6 +85,9 @@ monopoly.setFace(direction);
     - `0` ~ `3` : [Quad grid](board-quadgrid.md#directions) in 4 directions mode.
     - `0` ~ `7` : [Quad grid](board-quadgrid.md#directions) in 8 directions mode.
     - `0` ~ `5` : [Hexagon grid](board-hexagongrid.md#directions).
+
+!!! note "Moving direction"
+    Get path toward this face direction.
 
 ### Get path
 

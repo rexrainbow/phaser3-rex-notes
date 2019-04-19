@@ -5,7 +5,7 @@ const TILESMAP = [
     '1 1 1 1',
     '1101011',
     '  1 1  ',
-    '1101011',    
+    '1101011',
     '1 1 1 1',
     '111 111'
 ];
@@ -17,7 +17,7 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {}
+    preload() { }
 
     create() {
         var board = new Board(this, TILESMAP);
@@ -26,16 +26,18 @@ class Demo extends Phaser.Scene {
             y: 0
         });
 
-        var movingPointsTxt = this.add.text(0, 0, '');
+        var movingPointsTxt = this.add.text(10, 10, '');
         this.input.on('pointerdown', function (pointer) {
             var movingPoints = Between(1, 6);
             movingPointsTxt.setText(movingPoints)
             chessA.moveForward(movingPoints);
         });
+
+        this.add.text(0, 580, 'Click to move forward.')
     }
 }
 
-const COLORMAP = [0x005500, 0x00AA00, 0x00FF00];
+const COLORMAP = [0x087f23, 0x4caf50];
 class Board extends RexPlugins.Board.Board {
     constructor(scene, tilesMap) {
         var tiles = createTileMap(TILESMAP);
@@ -54,7 +56,6 @@ class Board extends RexPlugins.Board.Board {
     createPath(tiles) {
         // tiles : 2d array
         var line, symbol, cost;
-        var rexBoardAdd = this.scene.rexBoard.add
         for (var tileY = 0, ycnt = tiles.length; tileY < ycnt; tileY++) {
             line = tiles[tileY];
             for (var tileX = 0, xcnt = line.length; tileX < xcnt; tileX++) {
@@ -64,16 +65,12 @@ class Board extends RexPlugins.Board.Board {
                 }
 
                 cost = parseFloat(symbol);
-                rexBoardAdd.shape(this, tileX, tileY, 0, COLORMAP[cost])
-                    .setScale(0.95)
+                this.scene.rexBoard.add.shape(this, tileX, tileY, 0, COLORMAP[cost])
+                    .setStrokeStyle(1, 0xffffff, 1)
                     .setData('cost', cost);
             }
         }
         return this;
-    }
-
-    getTileCost(tileXY) {
-        return this.tileXYZToChess(tileXY.x, tileXY.y, 0).getData('cost');
     }
 }
 
@@ -84,7 +81,7 @@ class ChessA extends RexPlugins.Board.Shape {
             tileXY = board.getRandomEmptyTileXY(0);
         }
         // Shape(board, tileX, tileY, tileZ, fillColor, fillAlpha, addToBoard)
-        super(board, tileXY.x, tileXY.y, 1, 0x000055);
+        super(board, tileXY.x, tileXY.y, 1, 0x3f51b5);
         scene.add.existing(this);
         this.setScale(0.9);
 
@@ -92,8 +89,10 @@ class ChessA extends RexPlugins.Board.Shape {
         this.monopoly = scene.rexBoard.add.monopoly(this, {
             face: 0,
             pathTileZ: 0,
-            costCallback: board.getTileCost,
-            costCallbackScope: board
+            costCallback: function (curTileXY, preTileXY, monopoly) {
+                var board = monopoly.board;
+                return board.tileXYZToChess(curTileXY.x, curTileXY.y, 0).getData('cost');
+            },
         });
         this.moveTo = scene.rexBoard.add.moveTo(this);
 
@@ -103,14 +102,13 @@ class ChessA extends RexPlugins.Board.Shape {
 
     showMovingPath(tileXYArray) {
         this.hideMovingPath();
-        var tileXY;
+        var tileXY, worldXY;
         var scene = this.scene,
             board = this.rexChess.board;
         for (var i = 0, cnt = tileXYArray.length; i < cnt; i++) {
             tileXY = tileXYArray[i];
-            var shape = scene.rexBoard.add.shape(board, tileXY.x, tileXY.y, -1, 0xffffff)
-                .setScale(0.3)
-            this.movingPathTiles.push(shape);
+            worldXY = board.tileXYToWorldXY(tileXY.x, tileXY.y, true);
+            this.movingPathTiles.push(scene.add.circle(worldXY.x, worldXY.y, 10, 0xb0003a));
         }
     }
 
@@ -142,7 +140,7 @@ class ChessA extends RexPlugins.Board.Shape {
         }, this);
         var tileData = path.shift();
         this.moveTo.moveTo(tileData);
-        this.monopoly.setFaceDirection(this.moveTo.destinationDirection);
+        this.monopoly.setFace(this.moveTo.destinationDirection);
         return this;
     }
 }

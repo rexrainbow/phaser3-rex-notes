@@ -35,7 +35,7 @@ class Demo extends Phaser.Scene {
         for (var i = 0; i < 10; i++) {
             board.addDrain();
         }
-        board.energyDispatch();
+        board.energyDiffuse();
 
         CreateLabels(this);
         CreateHints(this);
@@ -56,7 +56,7 @@ class Board extends RexPlugins.Board.Board {
             .on('tiledown', function (pointer, tileXY) {
                 this
                     .tooglePipe(tileXY)
-                    .energyDispatch();
+                    .energyDiffuse();
             }, this);
     }
 
@@ -86,7 +86,7 @@ class Board extends RexPlugins.Board.Board {
         return this;
     }
 
-    energyDispatch() {
+    energyDiffuse() {
         // Initialize
         this.setTilesEnergy(this.tileZToChessArray(0), false);
         var energyChessArray = this.tileZToChessArray(1), energyChess;

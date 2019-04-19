@@ -32,6 +32,7 @@ var pathFinder = scene.rexBoard.add.pathFinder(chess, {
 
     // pathMode: 10,  // A*
     // weight: 10,   // weight for A* searching mode
+    // shuffleNeighbors: false,
 })
 ```
 
@@ -45,6 +46,7 @@ var pathFinder = scene.rexBoard.add.pathFinder(chess, {
             return cost;
         }
         ```
+        - Board : `pathFinder.board`
         - Cost of blocker : `pathFinder.BLOCKER`
 - `pathMode`
     - Shortest path
@@ -56,10 +58,26 @@ var pathFinder = scene.rexBoard.add.pathFinder(chess, {
         - `'A*'`, or `10`
         - `'A*-random'`, or `11`
         - `'A*-line'`, or `12`
-- `weight` : Weight parameter for A* searching mode
+- `weight` : Weight parameter for A* searching mode.
 - `cacheCost` : Set `false` to get cost every time. It is useful when cost is a function of (current tile, previous tile).
+- `shuffleNeighbors` : Shuffle neighbors.
 
-### Set cost function
+### Cost function
+
+```javascript
+var callback = function(curTileXY, preTileXY, pathFinder) {
+    return cost;
+}
+```
+
+- `cost` : Number cost.
+- `curTileXY`, `preTileXY` : TileXY position `{x, y}`. Cost of moving from `preTileXY` to `curTileXY`.
+- `pathFinder` : Path finder object.
+    - `pathFinder.board` : [Board object](board.md)
+    - `pathFinder.gameObject` : Chess game object.
+    - `pathFinder.BLOCKER` : Cost of blocker. Return this value means that chess can not move to `curTileXY`.
+
+#### Set cost function
 
 - Constant cost for each non-blocked tile
     ```javascript

@@ -19,6 +19,7 @@
 ### Applications
 
 - [Path finder](board-pathfinder.md)
+- [Monopoly](board-monopoly.md)
 - [Field of view](board-fieldofview.md)
 - [Match](board-match.md)
 - [Hexagon map](board-hexagonmap.md)
