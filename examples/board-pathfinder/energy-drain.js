@@ -22,11 +22,11 @@ class Demo extends Phaser.Scene {
             grid: this.rexBoard.add.quadGrid({
                 x: 26,
                 y: 26,
-                cellWidth: 38,
-                cellHeight: 38
+                cellWidth: 40,
+                cellHeight: 40
             }),
-            width: 15,
-            height: 15,
+            width: 14,
+            height: 14,
         }
         var board = new Board(this, config);
         for (var i = 0; i < 3; i++) {
@@ -37,7 +37,8 @@ class Demo extends Phaser.Scene {
         }
         board.energyDispatch();
 
-        createLabels(this);
+        CreateLabels(this);
+        CreateHints(this);
     }
 }
 
@@ -57,15 +58,13 @@ class Board extends RexPlugins.Board.Board {
                     .tooglePipe(tileXY)
                     .energyDispatch();
             }, this);
-
-        this.sources = [];
     }
 
     addSource(tileXY) {
         if (tileXY === undefined) {
             tileXY = this.getRandomEmptyTileXY(1);
         }
-        this.sources.push(new Source(this, tileXY));
+        new Source(this, tileXY);
         return this;
     }
 
@@ -88,15 +87,22 @@ class Board extends RexPlugins.Board.Board {
     }
 
     energyDispatch() {
+        // Initialize
         this.setTilesEnergy(this.tileZToChessArray(0), false);
+        var energyChessArray = this.tileZToChessArray(1), energyChess;
+        for (var i = 0, cnt = energyChessArray.length; i < cnt; i++) {
+            energyChess = energyChessArray[i];
+            energyChess.setData('remainder', energyChess.getData('energy'));
+        }
 
-        var source, tileXYArray;
-        for (var i = 0, cnt = this.sources.length; i < cnt; i++) {
-            source = this.sources[i];
-            source.setData('remainder', source.getData('energy'));
-            tileXYArray = [this.chessToTileXYZ(source)];
-            source.pathFinder.findArea(undefined, tileXYArray);
-            this.setTilesEnergy(this.tileXYArrayToChessArray(tileXYArray, 0), true);
+        // Flood-fill all energy sources
+        var tileXYArray;
+        for (var i = 0, cnt = energyChessArray.length; i < cnt; i++) {
+            energyChess = energyChessArray[i];
+            if (energyChess.pathFinder) {
+                tileXYArray = energyChess.pathFinder.findArea(undefined, [this.chessToTileXYZ(energyChess)]);
+                this.setTilesEnergy(this.tileXYArrayToChessArray(tileXYArray, 0), true);
+            }
         }
     }
 
@@ -141,24 +147,32 @@ class Source extends Phaser.GameObjects.Image {
         board.addChess(this, tileXY.x, tileXY.y, 1);
         this.pathFinder = scene.rexBoard.add.pathFinder(this, {
             shuffleNeighbors: true,
-            costCallback: function (curTile, preTile, pathFinder) {
-                var board = pathFinder.board;
-                var chess = board.tileXYZToChess(curTile.x, curTile.y, 1);
-                if (!chess) {
-                    return pathFinder.BLOCKER;
-                } else {
-                    var remainder = this.getData('remainder') + chess.getData('energy');
-                    if (remainder >= 0) {
-                        this.setData('remainder', remainder);
-                        return 0;
-                    } else {
-                        return pathFinder.BLOCKER;
-                    }
-                }
-            },
+            costCallback: this.onGetCost,
             costCallbackScope: this,
         });
         this.setData('energy', ENERGY_SOURCE);
+    }
+
+    onGetCost(curTile, preTile, pathFinder) {
+        var board = pathFinder.board;
+        var chess = board.tileXYZToChess(curTile.x, curTile.y, 1);
+        if (!chess) {
+            return pathFinder.BLOCKER;
+        } else {
+            if (chess.getData('energy') > 0) { // Energy source, pass through it
+                return 0;
+            }
+            var remainder = this.getData('remainder') + chess.getData('remainder');
+            if (remainder >= 0) {
+                this.setData('remainder', remainder);
+                chess.setData('remainder', 0);
+                return 0;
+            } else {
+                this.setData('remainder', 0);
+                chess.setData('remainder', remainder);
+                return pathFinder.BLOCKER;
+            }
+        }
     }
 }
 
@@ -191,7 +205,7 @@ const COLOR_DRAIN = 0x0069c0;
 const COLOR_ENERGY = 0x2196f3;
 const COLOR_NOENERGY = 0xb0003a;
 
-var createLabels = function (scene) {
+var CreateLabels = function (scene) {
     var labels = scene.rexUI.add.gridSizer({
         x: 800 - 10,
         y: 10,
@@ -222,6 +236,10 @@ var createLabels = function (scene) {
 const COLOR_PRIMARY = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
 const COLOR_DARK = 0x260e04;
+
+var CreateHints = function (scene) {
+    scene.add.text(0, 580, 'Click an empty cell to create a pipe, or click a pipe to remove it.');
+}
 
 var config = {
     type: Phaser.AUTO,
