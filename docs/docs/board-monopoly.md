@@ -45,6 +45,7 @@ var monopoly = scene.rexBoard.add.monopoly(chess, {
         }
         ```
         - Board : `monopoly.board`
+        - Chess game object : `monopoly.gameObject`
         - Cost of stop : `monopoly.STOP`
         - Cost of blocker : `monopoly.BLOCKER`
 

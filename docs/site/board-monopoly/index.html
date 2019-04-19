@@ -40,7 +40,7 @@
     
     
       
-        <title>Board monopoly - Notes of Phaser 3</title>
+        <title>Monopoly - Notes of Phaser 3</title>
       
     
     
@@ -128,7 +128,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Board monopoly
+                Monopoly
               </span>
             
           
@@ -3459,10 +3459,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-15" type="checkbox" id="nav-15">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-15" type="checkbox" id="nav-15" checked>
     
     <label class="md-nav__link" for="nav-15">
       Board
@@ -3598,6 +3600,120 @@
           
           
 
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Monopoly
+      </label>
+    
+    <a href="./" title="Monopoly" class="md-nav__link md-nav__link--active">
+      Monopoly
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-scene-plugin" title="Install scene plugin" class="md-nav__link">
+    Install scene plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-instance" title="Create instance" class="md-nav__link">
+    Create instance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cost-function" title="Cost function" class="md-nav__link">
+    Cost function
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set-cost-function" title="Set cost function" class="md-nav__link">
+    Set cost function
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-face-direction" title="Set face direction" class="md-nav__link">
+    Set face direction
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-path" title="Get path" class="md-nav__link">
+    Get path
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
 
   <li class="md-nav__item">
     <a href="../board-fieldofview/" title="Field of view" class="md-nav__link">
@@ -3637,13 +3753,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-15-11" type="checkbox" id="nav-15-11">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-15-12" type="checkbox" id="nav-15-12">
     
-    <label class="md-nav__link" for="nav-15-11">
+    <label class="md-nav__link" for="nav-15-12">
       Mini board
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-15-11">
+      <label class="md-nav__title" for="nav-15-12">
         Mini board
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -3930,6 +4046,26 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#cost-function" title="Cost function" class="md-nav__link">
+    Cost function
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#set-cost-function" title="Set cost function" class="md-nav__link">
+    Set cost function
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#set-face-direction" title="Set face direction" class="md-nav__link">
     Set face direction
   </a>
@@ -3967,7 +4103,7 @@
                   <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/board-monopoly.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Board monopoly</h1>
+                  <h1>Monopoly</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
 <p>Move through path tiles, used in monopoly-like application, chess behavior of Board system.</p>
@@ -3984,9 +4120,9 @@
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">monopoly</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexBoard</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">monopoly</span><span class="p">(</span><span class="nx">chess</span><span class="p">,</span> <span class="p">{</span>
     <span class="nx">face</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">pathTileZ</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
 
     <span class="c1">// ** cost **</span>
+    <span class="c1">// pathTileZ: 0,</span>
     <span class="c1">// cost: 1,   // constant cost</span>
     <span class="c1">// costCallback: undefined,</span>
     <span class="c1">// costCallbackScope: undefined</span>
@@ -3994,25 +4130,56 @@
 </pre></div>
 
 <ul>
-<li><code>face</code> : Get path toward this face direction.<ul>
+<li><code>face</code> : Moving direction.<ul>
 <li><code>0</code> ~ <code>3</code> : <a href="../board-quadgrid/#directions">Quad grid</a> in 4 directions mode.</li>
 <li><code>0</code> ~ <code>7</code> : <a href="../board-quadgrid/#directions">Quad grid</a> in 8 directions mode.</li>
 <li><code>0</code> ~ <code>5</code> : <a href="../board-hexagongrid/#directions">Hexagon grid</a>.</li>
 </ul>
 </li>
-<li><code>pathTileZ</code> : TileZ of path tile.</li>
 <li>Cost function<ul>
+<li><code>pathTileZ</code> : TileZ of path tiles.</li>
 <li><code>cost</code> : A constant cost for each non-blocked tile</li>
 <li><code>costCallback</code>, <code>costCallbackScope</code> :  Get cost via callback
     <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">curTile</span><span class="p">,</span> <span class="nx">monopoly</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nx">cost</span><span class="p">;</span>
 <span class="p">}</span>
-</pre></div></li>
+</pre></div><ul>
+<li>Board : <code>monopoly.board</code></li>
+<li>Chess game object : <code>monopoly.gameObject</code></li>
+<li>Cost of stop : <code>monopoly.STOP</code></li>
+<li>Cost of blocker : <code>monopoly.BLOCKER</code></li>
 </ul>
 </li>
 </ul>
+</li>
+</ul>
+<h3 id="cost-function">Cost function<a class="headerlink" href="#cost-function" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">curTileXY</span><span class="p">,</span> <span class="nx">preTileXY</span><span class="p">,</span> <span class="nx">monopoly</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">cost</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+<ul>
+<li><code>cost</code> : Number cost.</li>
+<li><code>curTileXY</code>, <code>preTileXY</code> : TileXY position <code>{x, y}</code>. Cost of moving from <code>preTileXY</code> to <code>curTileXY</code>.</li>
+<li><code>monopoly</code> : Path finder object.<ul>
+<li><code>monopoly.board</code> : <a href="../board/">Board object</a></li>
+<li><code>monopoly.gameObject</code> : Chess game object.</li>
+<li><code>monopoly.STOP</code> : Cost of stop. Return this value means chess will stop at <code>curTileXY</code>.</li>
+<li><code>monopoly.BLOCKER</code> : Cost of blocker. Return this value means that chess can not move to <code>curTileXY</code>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="set-cost-function">Set cost function<a class="headerlink" href="#set-cost-function" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Constant cost for each non-blocked tile
+    <div class="codehilite"><pre><span></span><span class="nx">monopoly</span><span class="p">.</span><span class="nx">setCostFunction</span><span class="p">(</span><span class="nx">cost</span><span class="p">);</span>
+</pre></div></li>
+<li>Get cost via callback
+    <div class="codehilite"><pre><span></span><span class="nx">monopoly</span><span class="p">.</span><span class="nx">setCostFunction</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+</ul>
 <h3 id="set-face-direction">Set face direction<a class="headerlink" href="#set-face-direction" title="Permanent link">&para;</a></h3>
-<p>Get path toward this face direction.</p>
 <div class="codehilite"><pre><span></span><span class="nx">monopoly</span><span class="p">.</span><span class="nx">setFace</span><span class="p">(</span><span class="nx">direction</span><span class="p">);</span>
 </pre></div>
 
@@ -4024,6 +4191,10 @@
 </ul>
 </li>
 </ul>
+<div class="admonition note">
+<p class="admonition-title">Moving direction</p>
+<p>Get path toward this face direction.</p>
+</div>
 <h3 id="get-path">Get path<a class="headerlink" href="#get-path" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tileXYArray</span> <span class="o">=</span> <span class="nx">monopoly</span><span class="p">.</span><span class="nx">getPath</span><span class="p">(</span><span class="nx">movingPoints</span><span class="p">);</span>
 <span class="c1">// var out = monopoly.getPath(movingPoints, out);</span>
@@ -4051,6 +4222,41 @@
       
         
 <footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../board-pathfinder/" title="Path finder" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Path finder
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../board-fieldofview/" title="Field of view" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Field of view
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">

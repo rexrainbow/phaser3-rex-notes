@@ -3649,9 +3649,22 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#cost-function" title="Cost function" class="md-nav__link">
+    Cost function
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#set-cost-function" title="Set cost function" class="md-nav__link">
     Set cost function
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -3711,6 +3724,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../board-monopoly/" title="Monopoly" class="md-nav__link">
+      Monopoly
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../board-fieldofview/" title="Field of view" class="md-nav__link">
       Field of view
     </a>
@@ -3748,13 +3773,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-15-11" type="checkbox" id="nav-15-11">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-15-12" type="checkbox" id="nav-15-12">
     
-    <label class="md-nav__link" for="nav-15-11">
+    <label class="md-nav__link" for="nav-15-12">
       Mini board
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-15-11">
+      <label class="md-nav__title" for="nav-15-12">
         Mini board
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -4041,9 +4066,22 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#cost-function" title="Cost function" class="md-nav__link">
+    Cost function
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#set-cost-function" title="Set cost function" class="md-nav__link">
     Set cost function
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -4132,6 +4170,7 @@
 
     <span class="c1">// pathMode: 10,  // A*</span>
     <span class="c1">// weight: 10,   // weight for A* searching mode</span>
+    <span class="c1">// shuffleNeighbors: false,</span>
 <span class="p">})</span>
 </pre></div>
 
@@ -4145,6 +4184,8 @@
     <span class="k">return</span> <span class="nx">cost</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div><ul>
+<li>Board : <code>pathFinder.board</code></li>
+<li>Chess game object : <code>pathFinder.gameObject</code></li>
 <li>Cost of blocker : <code>pathFinder.BLOCKER</code></li>
 </ul>
 </li>
@@ -4166,10 +4207,27 @@
 </li>
 </ul>
 </li>
-<li><code>weight</code> : Weight parameter for A* searching mode</li>
+<li><code>weight</code> : Weight parameter for A* searching mode.</li>
 <li><code>cacheCost</code> : Set <code>false</code> to get cost every time. It is useful when cost is a function of (current tile, previous tile).</li>
+<li><code>shuffleNeighbors</code> : Shuffle neighbors.</li>
 </ul>
-<h3 id="set-cost-function">Set cost function<a class="headerlink" href="#set-cost-function" title="Permanent link">&para;</a></h3>
+<h3 id="cost-function">Cost function<a class="headerlink" href="#cost-function" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">curTileXY</span><span class="p">,</span> <span class="nx">preTileXY</span><span class="p">,</span> <span class="nx">pathFinder</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">cost</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+<ul>
+<li><code>cost</code> : Number cost.</li>
+<li><code>curTileXY</code>, <code>preTileXY</code> : TileXY position <code>{x, y}</code>. Cost of moving from <code>preTileXY</code> to <code>curTileXY</code>.</li>
+<li><code>pathFinder</code> : Path finder object.<ul>
+<li><code>pathFinder.board</code> : <a href="../board/">Board object</a></li>
+<li><code>pathFinder.gameObject</code> : Chess game object.</li>
+<li><code>pathFinder.BLOCKER</code> : Cost of blocker. Return this value means that chess can not move to <code>curTileXY</code>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="set-cost-function">Set cost function<a class="headerlink" href="#set-cost-function" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Constant cost for each non-blocked tile
     <div class="codehilite"><pre><span></span><span class="nx">pathFinder</span><span class="p">.</span><span class="nx">setCostFunction</span><span class="p">(</span><span class="nx">cost</span><span class="p">);</span>
@@ -4281,13 +4339,13 @@
           </a>
         
         
-          <a href="../board-fieldofview/" title="Field of view" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../board-monopoly/" title="Monopoly" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Field of view
+                Monopoly
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

@@ -47,6 +47,7 @@ var pathFinder = scene.rexBoard.add.pathFinder(chess, {
         }
         ```
         - Board : `pathFinder.board`
+        - Chess game object : `pathFinder.gameObject`
         - Cost of blocker : `pathFinder.BLOCKER`
 - `pathMode`
     - Shortest path
