@@ -5,14 +5,23 @@ const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 // Phaser webpack config
 var phaser;
-const testMode = process.env.testmode || false;
-if (!testMode) {
-    var phaserModule = path.join(__dirname, '/node_modules/phaser/')
-    phaser = path.join(phaserModule, 'src/phaser.js')
-} else {
-    var phaserModule = path.join(__dirname, '/../rex-phaser/')
-    phaser = path.join(phaserModule, 'src/phaser.js')
+const testMode = process.env.testmode || '0';
+switch (testMode) {
+    case '1':
+        var phaserModule = path.join(__dirname, '/../rex-phaser/');
+        phaser = path.join(phaserModule, 'src/phaser.js');
+        break;
+    case '2':
+        var phaserModule = path.join(__dirname, '/../phaser/');
+        phaser = path.join(phaserModule, 'src/phaser.js');
+        break;
+    default:
+        var phaserModule = path.join(__dirname, '/node_modules/phaser/');
+        phaser = path.join(phaserModule, 'src/phaser.js');
+        break;
 }
+
+console.log('Phaser path:' + phaser);
 
 const projectMain = process.env.main;
 const assetsFolder = process.env.assets || './assets';
@@ -73,18 +82,18 @@ module.exports = {
     ],
     module: {
         rules: [{
-                test: /\.js$/,
-                use: ['babel-loader'],
-                include: path.join(__dirname, 'src')
-            },
-            {
-                test: /phaser-split\.js$/,
-                use: ['expose-loader?Phaser']
-            },
-            {
-                test: [/\.vert$/, /\.frag$/],
-                use: 'raw-loader'
-            }
+            test: /\.js$/,
+            use: ['babel-loader'],
+            include: path.join(__dirname, 'src')
+        },
+        {
+            test: /phaser-split\.js$/,
+            use: ['expose-loader?Phaser']
+        },
+        {
+            test: [/\.vert$/, /\.frag$/],
+            use: 'raw-loader'
+        }
         ]
     },
     node: {

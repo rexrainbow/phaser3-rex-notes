@@ -1,5 +1,4 @@
 /node_modules/*
 /dist/*
 /index.html
-/examples/test/*
 package-lock.json
