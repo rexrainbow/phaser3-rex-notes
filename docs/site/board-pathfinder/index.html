@@ -4219,7 +4219,10 @@
 
 <ul>
 <li><code>cost</code> : Number cost.</li>
-<li><code>curTileXY</code>, <code>preTileXY</code> : TileXY position <code>{x, y}</code>. Cost of moving from <code>preTileXY</code> to <code>curTileXY</code>.</li>
+<li><code>curTileXY</code>, <code>preTileXY</code> : TileXY position <code>{x, y}</code>. Cost of moving from <code>preTileXY</code> to <code>curTileXY</code>.<ul>
+<li><code>preTileXY.preNodes</code> : Previous tiles of <code>preTileXY</code>.</li>
+</ul>
+</li>
 <li><code>pathFinder</code> : Path finder object.<ul>
 <li><code>pathFinder.board</code> : <a href="../board/">Board object</a></li>
 <li><code>pathFinder.gameObject</code> : Chess game object.</li>

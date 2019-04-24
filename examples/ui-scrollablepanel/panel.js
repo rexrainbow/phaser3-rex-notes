@@ -11,113 +11,79 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {}
+    preload() { }
 
     create() {
         var data = {
             name: 'Rex',
-            skills: [{
-                    name: 'A'
-                },
-                {
-                    name: 'B'
-                },
-                {
-                    name: 'C'
-                },
-                {
-                    name: 'D'
-                },
-                {
-                    name: 'E'
-                },
+            skills: [
+                { name: 'A' },
+                { name: 'B' },
+                { name: 'C' },
+                { name: 'D' },
+                { name: 'E' },
             ],
-            items: [{
-                    name: 'A'
-                },
-                {
-                    name: 'B'
-                },
-                {
-                    name: 'C'
-                },
-                {
-                    name: 'D'
-                },
-                {
-                    name: 'E'
-                },
-                {
-                    name: 'F'
-                },
-                {
-                    name: 'G'
-                },
-                {
-                    name: 'H'
-                },
-                {
-                    name: 'I'
-                },
-                {
-                    name: 'J'
-                },
-                {
-                    name: 'K'
-                },
-                {
-                    name: 'L'
-                },
-                {
-                    name: 'M'
-                },
+            items: [
+                { name: 'A' },
+                { name: 'B' },
+                { name: 'C' },
+                { name: 'D' },
+                { name: 'E' },
+                { name: 'F' },
+                { name: 'G' },
+                { name: 'H' },
+                { name: 'I' },
+                { name: 'J' },
+                { name: 'K' },
+                { name: 'L' },
+                { name: 'M' },
             ],
 
         };
 
         var scrollablePanel = this.rexUI.add.scrollablePanel({
-                x: 400,
-                y: 300,
-                width: 400,
-                height: 220,
+            x: 400,
+            y: 300,
+            width: 400,
+            height: 220,
 
-                scrollMode: 1,
+            scrollMode: 1,
 
-                background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 10, COLOR_PRIMARY),
+            background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 10, COLOR_PRIMARY),
 
-                panel: {
-                    child: createPanel(this, data),
+            panel: {
+                child: createPanel(this, data),
 
-                    mask: {
-                        padding: 1
-                    },
+                mask: {
+                    padding: 1
                 },
+            },
 
-                slider: {
-                    track: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_DARK),
-                    thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 13, COLOR_LIGHT),
-                },
+            slider: {
+                track: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_DARK),
+                thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 13, COLOR_LIGHT),
+            },
 
-                space: {
-                    left: 10,
-                    right: 10,
-                    top: 10,
-                    bottom: 10,
+            space: {
+                left: 10,
+                right: 10,
+                top: 10,
+                bottom: 10,
 
-                    panel: 10,
-                }
-            })
+                panel: 10,
+            }
+        })
             .layout()
         //.drawBounds(this.add.graphics(), 0xff0000);
     }
 
-    update() {}
+    update() { }
 }
 
 var createPanel = function (scene, data) {
     var sizer = scene.rexUI.add.sizer({
-            orientation: 'x',
-        })
+        orientation: 'x',
+    })
         .add(
             createHeader(scene, data), // child
             0, // proportion
@@ -162,8 +128,8 @@ var createHeader = function (scene, data) {
     });
 
     return scene.rexUI.add.sizer({
-            orientation: 'y',
-        })
+        orientation: 'y',
+    })
         .addBackground(
             scene.rexUI.add.roundRectangle(0, 0, 0, 0, 0, undefined).setStrokeStyle(2, COLOR_LIGHT, 1)
         )
@@ -215,8 +181,8 @@ var createTable = function (scene, data, key, rows) {
     }
 
     return scene.rexUI.add.sizer({
-            orientation: 'y',
-        })
+        orientation: 'y',
+    })
         .addBackground(
             scene.rexUI.add.roundRectangle(0, 0, 0, 0, 0, undefined).setStrokeStyle(2, COLOR_LIGHT, 1)
         )

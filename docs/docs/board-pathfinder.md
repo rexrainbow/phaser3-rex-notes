@@ -73,6 +73,7 @@ var callback = function(curTileXY, preTileXY, pathFinder) {
 
 - `cost` : Number cost.
 - `curTileXY`, `preTileXY` : TileXY position `{x, y}`. Cost of moving from `preTileXY` to `curTileXY`.
+    - `preTileXY.preNodes` : Previous tiles of `preTileXY`.
 - `pathFinder` : Path finder object.
     - `pathFinder.board` : [Board object](board.md)
     - `pathFinder.gameObject` : Chess game object.
