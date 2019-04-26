@@ -143,3 +143,16 @@ var tileXYArray = pathFinder.findPath(endTileXY);
 
 !!! note "Path mode"
     - Set `pathMode` to A* (`'A*'`, `'A*-random'`, or `'A*-line'`) to speed up calculating.
+
+### Cost of tile
+
+After finding moveable area...
+
+- Get cost of tile
+    ```javascript
+    var tileCost = pathFinder.tileXYToCost(tileX, tileY, false);
+    ```
+- Get cost of path from chess to tile
+    ```javascript
+    var pathCost = pathFinder.tileXYToCost(tileX, tileY, true);
+    ```

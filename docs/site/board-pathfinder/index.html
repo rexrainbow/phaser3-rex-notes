@@ -3702,6 +3702,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#cost-of-tile" title="Cost of tile" class="md-nav__link">
+    Cost of tile
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4119,6 +4126,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#cost-of-tile" title="Cost of tile" class="md-nav__link">
+    Cost of tile
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4307,6 +4321,16 @@
 <li>Set <code>pathMode</code> to A* (<code>'A*'</code>, <code>'A*-random'</code>, or <code>'A*-line'</code>) to speed up calculating.</li>
 </ul>
 </div>
+<h3 id="cost-of-tile">Cost of tile<a class="headerlink" href="#cost-of-tile" title="Permanent link">&para;</a></h3>
+<p>After finding moveable area...</p>
+<ul>
+<li>Get cost of tile
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tileCost</span> <span class="o">=</span> <span class="nx">pathFinder</span><span class="p">.</span><span class="nx">tileXYToCost</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</pre></div></li>
+<li>Get cost of path from chess to tile
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">pathCost</span> <span class="o">=</span> <span class="nx">pathFinder</span><span class="p">.</span><span class="nx">tileXYToCost</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</pre></div></li>
+</ul>
                 
                   
                 
