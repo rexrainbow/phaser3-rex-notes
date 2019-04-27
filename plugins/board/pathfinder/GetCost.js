@@ -22,11 +22,17 @@ var GetCost = function (curNode, preNode) {
 
     if (typeof (this.costCallback) === 'number') {
         return this.costCallback;
-    }
-    if (this.costCallbackScope) {
-        return this.costCallback.call(this.costCallbackScope, curNode, preNode, this);
     } else {
-        return this.costCallback(curNode, preNode, this);
+        var cost;
+        if (this.costCallbackScope) {
+            cost = this.costCallback.call(this.costCallbackScope, curNode, preNode, this);
+        } else {
+            cost = this.costCallback(curNode, preNode, this);
+        }
+        if (cost === undefined) {
+            cost = BLOCKER;
+        }
+        return cost;
     }
 }
 export default GetCost;
