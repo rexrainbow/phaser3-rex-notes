@@ -148,11 +148,11 @@ var tileXYArray = pathFinder.findPath(endTileXY);
 
 After finding moveable area...
 
-- Get cost of tile
-    ```javascript
-    var tileCost = pathFinder.tileXYToCost(tileX, tileY, false);
-    ```
 - Get cost of path from chess to tile
     ```javascript
     var pathCost = pathFinder.tileXYToCost(tileX, tileY, true);
+    ```
+- Get cost of tile
+    ```javascript
+    var tileCost = pathFinder.tileXYToCost(tileX, tileY, false);
     ```
