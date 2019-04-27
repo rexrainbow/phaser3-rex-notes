@@ -119,7 +119,7 @@ class ChessA extends RexPlugins.Board.Shape {
                     }
                 }
             }
-            return PathFinder.BLOCKER;
+            return pathFinder.BLOCKER;
         }).findArea(undefined, tileXYArray);
 
         // Place MoveableMarkers
