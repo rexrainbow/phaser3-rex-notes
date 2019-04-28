@@ -99,8 +99,7 @@ class ChessA extends RexPlugins.Board.Shape {
         this.pathFinder.setCostFunction(function (curTile, preTile, pathFinder) {
             var board = pathFinder.board;
             var dir = board.getNeighborTileDirection(preTile, curTile);
-            var prePathCost = pathFinder.tileXYToCost(preTile.x, preTile.y, true);
-            if ((prePathCost & 1) === 0) { // Even
+            if ((preTile.pathCost & 1) === 0) { // Even
                 // Current tileXY has chess
                 if (board.contains(curTile.x, curTile.y, 0)) {
                     // Set dirFlags

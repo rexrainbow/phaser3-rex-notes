@@ -8,7 +8,7 @@ class Node {
     }
 
     reset(manager) {
-        this.manager = manager;        
+        this.manager = manager;
         // overwrite
         this.sn = undefined; // for sorting by created order        
         this.key = undefined;
@@ -101,6 +101,10 @@ class Node {
             this._py = this.board.tileXYToWroldY(this.x, this.y);
         }
         return this._py;
+    }
+
+    get pathCost() {
+        return this.g;
     }
 }
 export default Node;
