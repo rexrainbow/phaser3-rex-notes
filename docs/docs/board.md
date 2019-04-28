@@ -339,9 +339,18 @@ var direction = board.directionBetween(srcTileXY, targetTileXY);
 
 - `srcTileXY` : Tile position `{x, y}` of source.
 - `targetTileXY` : Tile position `{x, y}` of target.
+- `direction` : Integer number.
+    - [Quad grid](board-quadgrid.md#directions) : `0`, `1`, `2`, `3`.
+    - [Hexagon grid](board-hexagongrid.md#directions) : `0`, `1`, `2`, `3`, `4`, `5`.
+
+```javascript
+var direction = board.directionBetween(srcTileXY, targetTileXY, false);
+```
+
 - `direction` : Integer number, or float number
-    - [Quad grid](board-quadgrid.md#directions) : `0`, `1`, `2`, `3`, or float nunber between 0~1, 1~2, 2~3, 3~4.
-    - [Hexagon grid](board-hexagongrid.md#directions) : `0`, `1`, `2`, `3`, `4`, `5`, or float nunber between 0~1, 1~2, 2~3, 3~4, 4~5, 5~6.
+    - [Quad grid](board-quadgrid.md#directions) : `0`, `1`, `2`, `3`, or float number between 0~1, 1~2, 2~3, 3~4.
+    - [Hexagon grid](board-hexagongrid.md#directions) : `0`, `1`, `2`, `3`, `4`, `5`, or float number between 0~1, 1~2, 2~3, 3~4, 4~5, 5~6.
+
 
 ### Opposite direction
 
