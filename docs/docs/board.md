@@ -331,7 +331,7 @@ var radian = board.angleBetween(tileXY0, tileXY1);
 - `radian` : Angle between world position of 2 tiles, in radian
 - `tileXY0`, `tileXY1` : tile position `{x, y}`
 
-### Direction between tile position
+### Direction between 2 tiles
 
 ```javascript
 var direction = board.directionBetween(srcTileXY, targetTileXY);
