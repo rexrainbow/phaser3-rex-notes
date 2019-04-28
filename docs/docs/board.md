@@ -331,12 +331,6 @@ var radian = board.angleBetween(tileXY0, tileXY1);
 - `radian` : Angle between world position of 2 tiles, in radian
 - `tileXY0`, `tileXY1` : tile position `{x, y}`
 
-### Opposite direction
-
-```javascript
-var direction = board.getOppositeDirection(tileX, tileY, direction);
-```
-
 ### Direction between tile position
 
 ```javascript
@@ -348,6 +342,12 @@ var direction = board.directionBetween(srcTileXY, targetTileXY);
 - `direction` : Integer number, or float number
     - [Quad grid](board-quadgrid.md#directions) : `0`, `1`, `2`, `3`, or float nunber between 0~1, 1~2, 2~3, 3~4.
     - [Hexagon grid](board-hexagongrid.md#directions) : `0`, `1`, `2`, `3`, `4`, `5`, or float nunber between 0~1, 1~2, 2~3, 3~4, 4~5, 5~6.
+
+### Opposite direction
+
+```javascript
+var direction = board.getOppositeDirection(tileX, tileY, direction);
+```
 
 ### Align world position to grid
 
