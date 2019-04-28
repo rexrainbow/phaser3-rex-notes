@@ -8,10 +8,9 @@ var IsInCone = function (targetTileXY) {
     var board = this.board;
     var myTileXYZ = this.chessData.tileXYZ;
     if (this.coneMode === 0) { // Direction
-        var grid = board.grid;
-        var targetDirection = grid.directionBetween(myTileXYZ, targetTileXY);
+        var targetDirection = board.directionBetween(myTileXYZ, targetTileXY);
         var deltaDirection = Math.abs(targetDirection - this.face);
-        deltaDirection = Math.min(deltaDirection, grid.directions - deltaDirection);
+        deltaDirection = Math.min(deltaDirection, board.grid.directions - deltaDirection);
         return (deltaDirection <= this.halfConeRad);
     } else { // Angle
         var targetAngle = board.angleBetween(myTileXYZ, targetTileXY); // -PI~PI
