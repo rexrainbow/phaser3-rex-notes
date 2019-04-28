@@ -30,13 +30,14 @@
 
 ## Showcase
 
-- [Virtual joystick](https://codepen.io/rexrainbow/full/oyqvQY)
-- Path finder
-    - [Find area, get path](https://codepen.io/rexrainbow/full/qvJwjJ)
-    - [Move from high to low](https://codepen.io/rexrainbow/full/NJOmQg)
-- [Bejeweled](https://codepen.io/rexrainbow/full/wEVYoY)
 - Webgl shader effect
     - [Swirl](https://codepen.io/rexrainbow/full/RBXQBo)
     - [Pixelation](https://codepen.io/rexrainbow/full/MqgmgE)
     - [Toonify](https://codepen.io/rexrainbow/full/ErWNXa)
+- [Virtual joystick](https://codepen.io/rexrainbow/full/oyqvQY)
+- Path finder
+    - [Find area, get path](https://codepen.io/rexrainbow/full/qvJwjJ)
+    - [Move from high to low](https://codepen.io/rexrainbow/full/NJOmQg)
+    - [Energy drain](https://codepen.io/rexrainbow/pen/vMjNNm)
+- [Bejeweled](https://codepen.io/rexrainbow/full/wEVYoY)
 - [Kaleidoscope](https://codepen.io/rexrainbow/full/RdzvVj)
