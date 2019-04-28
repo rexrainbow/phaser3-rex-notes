@@ -4234,7 +4234,8 @@
 <ul>
 <li><code>cost</code> : Number cost.</li>
 <li><code>curTileXY</code>, <code>preTileXY</code> : TileXY position <code>{x, y}</code>. Cost of moving from <code>preTileXY</code> to <code>curTileXY</code>.<ul>
-<li><code>preTileXY.preNodes</code> : Previous tiles of <code>preTileXY</code>.</li>
+<li><code>preTileXY.pathCost</code> : Path cost of <code>preTilexY</code>.</li>
+<li><code>preTileXY.preNodes</code> : Previous tiles of <code>preTileXY</code>.    </li>
 </ul>
 </li>
 <li><code>pathFinder</code> : Path finder object.<ul>
@@ -4322,7 +4323,7 @@
 </ul>
 </div>
 <h3 id="cost-of-tile">Cost of tile<a class="headerlink" href="#cost-of-tile" title="Permanent link">&para;</a></h3>
-<p>After finding moveable area...</p>
+<p>During or after finding moveable area...</p>
 <ul>
 <li>Get cost of path from chess to tile
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">pathCost</span> <span class="o">=</span> <span class="nx">pathFinder</span><span class="p">.</span><span class="nx">tileXYToCost</span><span class="p">(</span><span class="nx">tileX</span><span class="p">,</span> <span class="nx">tileY</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
