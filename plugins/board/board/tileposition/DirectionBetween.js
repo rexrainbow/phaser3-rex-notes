@@ -4,7 +4,7 @@ var DirectionBetween = function (tileA, tileB, nearest) {
     }
     var direction = this.grid.directionBetween(tileA, tileB);
     if (nearest) {
-        direction = Math.ceil(direction);
+        direction = Math.round(direction);
         if (direction === this.grid.directions) {
             direction = 0;
         }
