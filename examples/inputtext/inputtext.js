@@ -10,21 +10,20 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var inputText = this.add.rexInputText(400, 300, 100, 100, {
+        var printText = this.add.text(300, 200, '', {
+            fontSize: '12px',
+        }).setOrigin(0).setFixedSize(100, 100);
+        var inputText = this.add.rexInputText(300, 400, 100, 100, {
+            type: 'textarea',
             text: 'hello world',
-            borderColor: 'rgba(255,0,0,0.5)'
-        })
-            .setOrigin(0);
-
-        this.add.graphics({
-            lineStyle: {
-                width: 1,
-                color: 0xffffff,
-                alpha: 1,
+            fontSize: '12px',
+            onTextChanged: function () {
+                debugger
+                printText.text = inputText.text;
             }
-        })
-            .strokeRect(inputText.x, inputText.y, 100, 100);
-        console.log(inputText.width + 'x' + inputText.height)
+        }).setOrigin(0);
+
+        printText.text = inputText.text;
     }
 
     update() { }
