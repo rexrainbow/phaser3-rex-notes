@@ -2,4 +2,4 @@
 set main=./examples/xor/xor.js
 cd ..
 cd ..
-npm run dev
+webpack --config webpack.config.js

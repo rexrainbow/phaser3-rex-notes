@@ -2,4 +2,4 @@
 set main=./examples/lokijs/load-csv-table.js
 cd ..
 cd ..
-npm run dev
+webpack --config webpack.config.js

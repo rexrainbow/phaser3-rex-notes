@@ -2,4 +2,4 @@
 set main=./examples/gridtable/gridtable.js
 cd ..
 cd ..
-npm run dev
+webpack --config webpack.config.js

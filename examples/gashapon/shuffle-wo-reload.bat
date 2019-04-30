@@ -2,4 +2,4 @@
 set main=./examples/gashapon/shuffle-wo-reload.js
 cd ..
 cd ..
-npm run dev
+webpack --config webpack.config.js

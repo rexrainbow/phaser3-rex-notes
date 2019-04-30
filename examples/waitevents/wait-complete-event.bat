@@ -2,4 +2,4 @@
 set main=./examples/waitevents/wait-complete-event.js
 cd ..
 cd ..
-npm run dev
+webpack --config webpack.config.js

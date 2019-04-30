@@ -1,4 +1,4 @@
 set main=./examples/rotateto/rotateto.js
 cd ..
 cd ..
-webpack
+webpack --config webpack.config.js

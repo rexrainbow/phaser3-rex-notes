@@ -2,4 +2,4 @@
 set main=./examples/ui-sizer/nested-sizer.js
 cd ..
 cd ..
-npm run dev
+webpack --config webpack.config.js

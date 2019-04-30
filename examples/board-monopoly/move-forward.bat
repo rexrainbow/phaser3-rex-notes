@@ -2,4 +2,4 @@
 set main=./examples/board-monopoly/move-forward.js
 cd ..
 cd ..
-npm run dev
+webpack --config webpack.config.js

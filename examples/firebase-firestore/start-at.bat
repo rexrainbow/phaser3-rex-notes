@@ -2,4 +2,4 @@
 set main=./examples/firebase-firestore/start-at.js
 cd ..
 cd ..
-npm run dev
+webpack --config webpack.config.js

@@ -2,4 +2,4 @@
 set main=./examples/slider/slider.js
 cd ..
 cd ..
-npm run dev
+webpack --config webpack.config.js

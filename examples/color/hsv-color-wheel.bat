@@ -2,4 +2,4 @@
 set main=./examples/color/hsv-color-wheel.js
 cd ..
 cd ..
-npm run dev
+webpack --config webpack.config.js

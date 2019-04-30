@@ -2,4 +2,4 @@
 set main=./examples/textpage/prev-next-page.js
 cd ..
 cd ..
-npm run dev
+webpack --config webpack.config.js

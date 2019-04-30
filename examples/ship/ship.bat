@@ -2,4 +2,4 @@
 set main=./examples/ship/ship.js
 cd ..
 cd ..
-npm run dev
+webpack --config webpack.config.js

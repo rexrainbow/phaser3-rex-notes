@@ -1,4 +1,4 @@
 set main=./examples/moveto/moveto.js
 cd ..
 cd ..
-webpack
+webpack --config webpack.config.js

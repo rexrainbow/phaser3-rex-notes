@@ -2,4 +2,4 @@
 set main=./examples/scale/scaledown-destroy.js
 cd ..
 cd ..
-npm run dev
+webpack --config webpack.config.js

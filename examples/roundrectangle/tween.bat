@@ -1,4 +1,4 @@
 set main=./examples/roundrectangle/tween.js
 cd ..
 cd ..
-webpack
+webpack --config webpack.config.js

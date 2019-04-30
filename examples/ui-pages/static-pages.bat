@@ -2,4 +2,4 @@
 set main=./examples/ui-pages/static-pages.js
 cd ..
 cd ..
-npm run dev
+webpack --config webpack.config.js

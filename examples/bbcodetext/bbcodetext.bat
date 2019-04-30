@@ -2,4 +2,4 @@
 set main=./examples/bbcodetext/bbcodetext.js
 cd ..
 cd ..
-npm run dev
+webpack --config webpack.config.js

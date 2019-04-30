@@ -2,4 +2,4 @@
 set main=./examples/conditions-table/conditions-table.js
 cd ..
 cd ..
-npm run dev
+webpack --config webpack.config.js

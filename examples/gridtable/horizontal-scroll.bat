@@ -2,4 +2,4 @@
 set main=./examples/gridtable/horizontal-scroll.js
 cd ..
 cd ..
-npm run dev
+webpack --config webpack.config.js

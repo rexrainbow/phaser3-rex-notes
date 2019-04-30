@@ -2,4 +2,4 @@
 set main=./examples/texttyping/typing.js
 cd ..
 cd ..
-npm run dev
+webpack --config webpack.config.js

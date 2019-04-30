@@ -1,4 +1,4 @@
 set main=./examples/hexagon/hexagon.js
 cd ..
 cd ..
-webpack
+webpack --config webpack.config.js

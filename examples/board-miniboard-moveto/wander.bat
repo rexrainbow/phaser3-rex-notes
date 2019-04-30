@@ -2,4 +2,4 @@
 set main=./examples/board-miniboard-moveto/wander.js
 cd ..
 cd ..
-npm run dev
+webpack --config webpack.config.js

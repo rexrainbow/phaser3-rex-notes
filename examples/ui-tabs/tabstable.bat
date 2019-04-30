@@ -2,4 +2,4 @@
 set main=./examples/ui-tabs/tabstable.js
 cd ..
 cd ..
-npm run dev
+webpack --config webpack.config.js

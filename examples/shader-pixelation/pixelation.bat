@@ -2,4 +2,4 @@
 set main=./examples/shader-pixelation/pixelation.js
 cd ..
 cd ..
-npm run dev
+webpack --config webpack.config.js

@@ -1,4 +1,4 @@
 set main=./examples/gridalign/quad.js
 cd ..
 cd ..
-webpack
+webpack --config webpack.config.js

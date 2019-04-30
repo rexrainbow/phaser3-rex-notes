@@ -1,4 +1,4 @@
 set main=./examples/parse-itemtable/load.js
 cd ..
 cd ..
-webpack
+webpack --config webpack.config.js

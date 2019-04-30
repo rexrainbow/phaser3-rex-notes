@@ -2,4 +2,4 @@
 set main=./examples/ui-menu/popup-menu.js
 cd ..
 cd ..
-npm run dev
+webpack --config webpack.config.js

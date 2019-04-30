@@ -2,4 +2,4 @@
 set main=./examples/scroller/scroller.js
 cd ..
 cd ..
-npm run dev
+webpack --config webpack.config.js

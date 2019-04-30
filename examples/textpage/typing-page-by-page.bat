@@ -2,4 +2,4 @@
 set main=./examples/textpage/typing-page-by-page.js
 cd ..
 cd ..
-npm run dev
+webpack --config webpack.config.js

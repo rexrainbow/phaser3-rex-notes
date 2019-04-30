@@ -2,4 +2,4 @@
 set main=./examples/bullet/bullet.js
 cd ..
 cd ..
-npm run dev
+webpack --config webpack.config.js

@@ -1,4 +1,4 @@
 set main=./examples/ui-label/two-scenes.js
 cd ..
 cd ..
-webpack
+webpack --config webpack.config.js

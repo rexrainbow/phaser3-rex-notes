@@ -2,4 +2,4 @@
 set main=./examples/bbcodetext/prev-next-page.js
 cd ..
 cd ..
-npm run dev
+webpack --config webpack.config.js

@@ -1,4 +1,4 @@
 set main=./examples/anchor/anchor.js
 cd ..
 cd ..
-webpack
+webpack --config webpack.config.js
