@@ -6,6 +6,21 @@ Carry DOM element, built-in game object of phaser.
 
 ## Usage
 
+### Configuration
+
+Set `dom.createContainer` to `true`.
+
+```javascript
+var config = {
+    // ...
+    dom: {
+        createContainer: true
+    }
+    // ...
+}
+var game = new Phaser.Game(config);
+```
+
 ### Add DOM element object
 
 #### Add html string
@@ -37,6 +52,7 @@ Carry DOM element, built-in game object of phaser.
 1. Add to scene
    ```javascript
    var domElement = scene.add.dom(x, y, el);
+   // var domElement = scene.add.dom(x, y, el, style, innerText);
    ```
 
 ### Custom class
@@ -44,8 +60,8 @@ Carry DOM element, built-in game object of phaser.
 - Define class
     ```javascript
     class MyDOMElement extends Phaser.GameObjects.DOMElement {
-        constructor(scene, x, y, element) {
-            super(scene, x, y, element);
+        constructor(scene, x, y, element, style, innerText) {
+            super(scene, x, y, element, style, innerText);
             // ...
             scene.add.existing(this);
         }
@@ -122,6 +138,7 @@ Each DOM element object has 1 DOM element.
 - Set
    ```javascript
    domElement.setElement(el);
+   // domElement.setElement(el, style, innerText);
    ```
 - Get
    ```javascript

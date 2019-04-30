@@ -85,7 +85,8 @@ module.exports = {
         }])
     ],
     module: {
-        rules: [{
+        rules: [
+            {
                 test: /\.js$/,
                 use: ['babel-loader'],
                 include: path.join(__dirname, 'src')
@@ -103,8 +104,6 @@ module.exports = {
     resolve: {
         alias: {
             'phaser': phaser,
-            // 'rexPlugins': path.resolve(__dirname, 'plugins/'),
-            // 'rexTemplates': path.resolve(__dirname, 'templates/'),
-        }
+        },
     }
 }

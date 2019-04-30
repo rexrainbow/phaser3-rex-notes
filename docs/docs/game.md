@@ -3,7 +3,7 @@
 ```javascript
 var config = {
     type: Phaser.AUTO,
-    parent: null,    
+    parent: null,
     width: 1024,
     height: 768,
     scale: {
@@ -38,7 +38,7 @@ var game = new Phaser.Game(config);
 or
 
 ```javascript
-{    
+{
     type: Phaser.AUTO,
     parent: null,
     width: 800,
@@ -47,7 +47,7 @@ or
         mode: Phaser.Scale.NONE,
         autoCenter: Phaser.Scale.NO_CENTER
     },
-    autoRound: false,    
+    autoRound: false,
     canvas: null,
     canvasStyle: null,
 
@@ -82,6 +82,7 @@ or
     },
 
     backgroundColor: 0,
+
     render: {
         antialias: true,
         pixelArt: false,
@@ -121,6 +122,11 @@ or
     images: {
         default: 'data:image/png;base64....',
         missing: 'data:image/png;base64....'
+    },
+
+    dom: {
+        createContainer: false,
+        behindCanvas: false,
     },
 
     plugins: {
