@@ -350,6 +350,13 @@ var Text = new Phaser.Class({
         this.width = (style.fixedWidth === 0) ? w : style.fixedWidth;
         this.height = (style.fixedHeight === 0) ? h : style.fixedHeight;
 
+        if (w > this.width) {
+            w = this.width;
+        }
+        if (h > this.height) {
+            h = this.height;
+        }
+
         this.updateDisplayOrigin();
 
         var resolution = style.resolution;

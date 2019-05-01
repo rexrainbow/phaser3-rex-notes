@@ -112,6 +112,19 @@ class InputText extends DOMElement {
         return this;
     }
 
+    get onTextChanged() {
+        return this.node.oninput;
+    }
+
+    set onTextChanged(callback) {
+        this.node.oninput = callback;
+    }
+
+    setOnTextChangedCallback(callback) {
+        this.onTextChanged = callback;
+        return this;
+    }
+
     get readOnly() {
         return this.node.readOnly;
     }
@@ -128,6 +141,19 @@ class InputText extends DOMElement {
         return this;
     }
 
+    get spellCheck() {
+        return this.node.spellcheck;
+    }
+
+    set spellCheck(value) {
+        this.node.spellcheck = value;
+    }
+
+    setSpellCheck(value) {
+        this.spellCheck = value;
+        return this;
+    }
+
     setStyle(key, value) {
         this.node.style[key] = value;
         return this;
@@ -137,13 +163,34 @@ class InputText extends DOMElement {
         this.node.scrollTop = this.node.scrollHeight;
         return this;
     }
+
+    setEnabled(enabled) {
+        if (enabled === undefined) {
+            enabled = true;
+        }
+        this.node.disabled = !enabled;
+        return this;
+    }
+
+    setBlur() {
+        this.node.blur();
+        return this;
+    }
+
+    setFocus() {
+        this.node.focus();
+        return this;
+    }
 }
 
 const ElementProperties = {
+    id: ['id', undefined],
     text: ['value', undefined],
     placeholder: ['placeholder', undefined],
     tooltip: ['title', undefined],
     readOnly: ['readOnly', false],
+    spellCheck: ['spellcheck', false],
+    autoComplete: ['autocomplete', 'off'],
     onTextChanged: ['oninput', undefined],
 };
 
