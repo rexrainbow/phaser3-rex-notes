@@ -13,7 +13,7 @@ class Demo extends Phaser.Scene {
         var printText = this.add.text(300, 200, '', {
             fontSize: '12px',
         }).setOrigin(0).setFixedSize(100, 100);
-        var inputText = this.add.rexInputText(300, 400, 100, 100, {
+        var inputText = this.add.rexInputText(300, 400, 10, 10, {
             type: 'textarea',
             text: 'hello world',
             fontSize: '12px',
@@ -21,7 +21,7 @@ class Demo extends Phaser.Scene {
                 debugger
                 printText.text = inputText.text;
             }
-        }).setOrigin(0);
+        }).resize(100, 100).setOrigin(0);
 
         printText.text = inputText.text;
     }

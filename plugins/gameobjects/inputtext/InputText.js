@@ -73,6 +73,15 @@ class InputText extends DOMElement {
         this.type = 'rexInputText';
     }
 
+    resize(width, height) {
+        var style = this.node.style;
+        style.width = width + 'px';
+        style.height = height + 'px';
+        var nodeBounds = this.node.getBoundingClientRect();
+        this.setSize(nodeBounds.width || 0, nodeBounds.height || 0);
+        return this;
+    }
+
     get text() {
         return this.node.value;
     }
