@@ -209,6 +209,7 @@ const StyleProperties = {
     fontSize: ['font-size', undefined],
     color: ['color', '#ffffff'],
     backgroundColor: ['backgroundColor', 'transparent'],
-    borderColor: ['borderColor', 'transparent']
+    borderColor: ['borderColor', 'transparent'],
+    outline: ['outline', 'none']
 };
 export default InputText;

@@ -18,7 +18,6 @@ class Demo extends Phaser.Scene {
             text: 'hello world',
             fontSize: '12px',
             onTextChanged: function () {
-                debugger
                 printText.text = inputText.text;
             }
         }).resize(100, 100).setOrigin(0);

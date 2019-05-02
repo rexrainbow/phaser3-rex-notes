@@ -22,6 +22,8 @@ module.exports = {
         'gridtable': './plugins/gridtable.js',
         'roundrectangleplugin': './plugins/roundrectangle-plugin.js',
         'roundrectangle': './plugins/roundrectangle.js',
+        'inputtextplugin': './plugins/inputtext-plugin.js',
+        'inputtext': './plugins/inputtext.js',
 
         // custom file loader      
         'webfontloaderplugin': './plugins/webfontloader-plugin.js',
