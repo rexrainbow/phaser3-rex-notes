@@ -24,9 +24,6 @@
 - Folder `examples` : Test code of plugins
 - Folder `docs` : Some notes of phaser3, and my plugins.
     - `site\index.html` : Entry point.
-- Folder `projects` : User projects.
-    - `preview.bat` : Project preview.
-    - `build-html.bat` : Export html files.
 
 ## Showcase
 
