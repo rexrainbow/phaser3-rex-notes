@@ -52,7 +52,7 @@ class ScrollableBlock extends BaseSizer {
         if (this.childMask) {
             this.childMask.destroy();
             this.childMask = undefined;
-        }        
+        }
         super.destroy(fromScene);
     }
 
@@ -170,7 +170,11 @@ class ScrollableBlock extends BaseSizer {
     }
 
     get t() {
-        return (this.childOY / -this.visibleHeight);
+        var visibleHeight = this.visibleHeight;
+        if (visibleHeight === 0) {
+            return 0;
+        }
+        return (this.childOY / -visibleHeight);
     }
 
     setChildOYByPercentage(percentage) {

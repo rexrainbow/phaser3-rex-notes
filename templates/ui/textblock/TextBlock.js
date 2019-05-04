@@ -52,7 +52,7 @@ class TextBlock extends BaseSizer {
             this.addBackground(background);
         }
 
-        this.setTextObject(textObject, paddingConfig, textMaskEnable);        
+        this.setTextObject(textObject, paddingConfig, textMaskEnable);
     }
 
     destroy(fromScene) {
@@ -195,7 +195,11 @@ class TextBlock extends BaseSizer {
     }
 
     get t() {
-        return (this.textOY / -this.textVisibleHeight);
+        var textVisibleHeight = this.textVisibleHeight;
+        if (textVisibleHeight === 0) {
+            return 0;
+        }
+        return (this.textOY / -textVisibleHeight);
     }
 
     setTextOYByPercentage(percentage) {

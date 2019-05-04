@@ -110,7 +110,7 @@ class PensManager {
             return this.getLineEndIndex(i);
         } else {
             var line = this.lines[i];
-            return (line[0]) ? line[0].startIndex : 0;
+            return (line && line[0]) ? line[0].startIndex : 0;
         }
     }
 
