@@ -4082,7 +4082,7 @@
                 <h2 id="boot">Boot<a class="headerlink" href="#boot" title="Permanent link">&para;</a></h2>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="nx">type</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">AUTO</span><span class="p">,</span>
-    <span class="nx">parent</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>    
+    <span class="nx">parent</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="nx">width</span><span class="o">:</span> <span class="mi">1024</span><span class="p">,</span>
     <span class="nx">height</span><span class="o">:</span> <span class="mi">768</span><span class="p">,</span>
     <span class="nx">scale</span><span class="o">:</span> <span class="p">{</span>
@@ -4112,7 +4112,7 @@
 </pre></div>
 
 <p>or</p>
-<div class="codehilite"><pre><span></span><span class="p">{</span>    
+<div class="codehilite"><pre><span></span><span class="p">{</span>
     <span class="nx">type</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">AUTO</span><span class="p">,</span>
     <span class="nx">parent</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="nx">width</span><span class="o">:</span> <span class="mi">800</span><span class="p">,</span>
@@ -4121,7 +4121,7 @@
         <span class="nx">mode</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scale</span><span class="p">.</span><span class="nx">NONE</span><span class="p">,</span>
         <span class="nx">autoCenter</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scale</span><span class="p">.</span><span class="nx">NO_CENTER</span>
     <span class="p">},</span>
-    <span class="nx">autoRound</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>    
+    <span class="nx">autoRound</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="nx">canvas</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="nx">canvasStyle</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
 
@@ -4156,6 +4156,7 @@
     <span class="p">},</span>
 
     <span class="nx">backgroundColor</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+
     <span class="nx">render</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">antialias</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
         <span class="nx">pixelArt</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
@@ -4195,6 +4196,11 @@
     <span class="nx">images</span><span class="o">:</span> <span class="p">{</span>
         <span class="k">default</span><span class="o">:</span> <span class="s1">&#39;data:image/png;base64....&#39;</span><span class="p">,</span>
         <span class="nx">missing</span><span class="o">:</span> <span class="s1">&#39;data:image/png;base64....&#39;</span>
+    <span class="p">},</span>
+
+    <span class="nx">dom</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">createContainer</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="nx">behindCanvas</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="p">},</span>
 
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>

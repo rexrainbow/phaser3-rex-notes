@@ -74,6 +74,8 @@ var gridTable = scene.rexUI.add.gridTable({
         backDeceleration: 2000,
     },
 
+    clamplChildOY: false,
+
     space: {
         left: 0,
         right: 0,
@@ -137,6 +139,7 @@ var gridTable = scene.rexUI.add.gridTable({
     - `scroller.backDeceleration` : Deceleration of pull back when out of bounds.
         - Set `false` to disable it.
     - Set to `false` to ignore scroller.
+- `clamplChildOY` : Set `true` to clamp scrolling.
 - `createCellContainerCallback` : Callback to return a container object of each visible cell.
     - Properties of `cell` parameter
         - `cell.scene` : Scene of this grid table object.
@@ -206,6 +209,14 @@ gridTable.layout();
 - Get
     ```javascript
     var childOY = gridTable.childOY;
+    ```
+- Top OY
+    ```javascript
+    var topOY = gridTable.topChildOY;
+    ```
+- Bottom OY
+    ```javascript
+    var bottomOY = gridTable.bottomChildOY;
     ```
 
 #### Scroll by percentage

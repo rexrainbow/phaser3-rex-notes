@@ -4268,6 +4268,8 @@
         <span class="nx">backDeceleration</span><span class="o">:</span> <span class="mi">2000</span><span class="p">,</span>
     <span class="p">},</span>
 
+    <span class="nx">clamplChildOY</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+
     <span class="nx">space</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">left</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">right</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
@@ -4360,6 +4362,7 @@
 <li>Set to <code>false</code> to ignore scroller.</li>
 </ul>
 </li>
+<li><code>clamplChildOY</code> : Set <code>true</code> to clamp scrolling.</li>
 <li><code>createCellContainerCallback</code> : Callback to return a container object of each visible cell.<ul>
 <li>Properties of <code>cell</code> parameter<ul>
 <li><code>cell.scene</code> : Scene of this grid table object.</li>
@@ -4426,6 +4429,12 @@
 </pre></div></li>
 <li>Get
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">childOY</span> <span class="o">=</span> <span class="nx">gridTable</span><span class="p">.</span><span class="nx">childOY</span><span class="p">;</span>
+</pre></div></li>
+<li>Top OY
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">topOY</span> <span class="o">=</span> <span class="nx">gridTable</span><span class="p">.</span><span class="nx">topChildOY</span><span class="p">;</span>
+</pre></div></li>
+<li>Bottom OY
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bottomOY</span> <span class="o">=</span> <span class="nx">gridTable</span><span class="p">.</span><span class="nx">bottomChildOY</span><span class="p">;</span>
 </pre></div></li>
 </ul>
 <h4 id="scroll-by-percentage">Scroll by percentage<a class="headerlink" href="#scroll-by-percentage" title="Permanent link">&para;</a></h4>

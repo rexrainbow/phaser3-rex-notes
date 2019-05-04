@@ -69,6 +69,8 @@ var scrollablePanel = scene.rexUI.add.scrollablePanel({
         backDeceleration: 2000,
     },
 
+    clamplChildOY: false,
+
     space: {
         left: 0,
         right: 0,
@@ -110,6 +112,7 @@ var scrollablePanel = scene.rexUI.add.scrollablePanel({
     - `scroller.backDeceleration` : Deceleration of pull back when out of bounds.
         - Set `false` to disable it.
     - Set to `false` to ignore scroller.
+- `clamplChildOY` : Set `true` to clamp scrolling.
 - `space` : Pads spaces
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
     - `space.panel` : Space between panel object and slider object.
@@ -168,6 +171,14 @@ scrollablePanel.layout();
 - Get
     ```javascript
     var t = scrollablePanel.t;
+    ```
+- Top OY
+    ```javascript
+    var topOY = scrollablePanel.topChildOY;
+    ```
+- Bottom OY
+    ```javascript
+    var bottomOY = scrollablePanel.bottomChildOY;
     ```
 
 ### Scroll to top/bottom

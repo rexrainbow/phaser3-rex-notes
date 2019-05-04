@@ -64,6 +64,8 @@ var textArea = scene.rexUI.add.textArea({
         backDeceleration: 2000,
     },
 
+    clamplChildOY: false,
+
     space: {
         left: 0,
         right: 0,
@@ -102,6 +104,7 @@ var textArea = scene.rexUI.add.textArea({
     - `scroller.backDeceleration` : Deceleration of pull back when out of bounds.
         - Set `false` to disable it.
     - Set to `false` to ignore scroller.
+- `clamplChildOY` : Set `true` to clamp scrolling.
 - `space` : Pads spaces
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
     - `space.text` : Space between text object and slider object.
@@ -161,6 +164,14 @@ textArea.layout();
 - Get
     ```javascript
     var childOY = textArea.childOY;
+    ```
+- Top OY
+    ```javascript
+    var topOY = textArea.topChildOY;
+    ```
+- Bottom OY
+    ```javascript
+    var bottomOY = textArea.bottomChildOY;
     ```
 
 #### Scroll by percentage

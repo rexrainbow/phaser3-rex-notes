@@ -4221,6 +4221,8 @@
         <span class="nx">backDeceleration</span><span class="o">:</span> <span class="mi">2000</span><span class="p">,</span>
     <span class="p">},</span>
 
+    <span class="nx">clamplChildOY</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+
     <span class="nx">space</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">left</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">right</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
@@ -4281,6 +4283,7 @@
 <li>Set to <code>false</code> to ignore scroller.</li>
 </ul>
 </li>
+<li><code>clamplChildOY</code> : Set <code>true</code> to clamp scrolling.</li>
 <li><code>space</code> : Pads spaces<ul>
 <li><code>space.left</code>, <code>space.right</code>, <code>space.top</code>, <code>space.bottom</code> : Space of bounds.</li>
 <li><code>space.panel</code> : Space between panel object and slider object.</li>
@@ -4330,6 +4333,12 @@
 </pre></div></li>
 <li>Get
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">t</span> <span class="o">=</span> <span class="nx">scrollablePanel</span><span class="p">.</span><span class="nx">t</span><span class="p">;</span>
+</pre></div></li>
+<li>Top OY
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">topOY</span> <span class="o">=</span> <span class="nx">scrollablePanel</span><span class="p">.</span><span class="nx">topChildOY</span><span class="p">;</span>
+</pre></div></li>
+<li>Bottom OY
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bottomOY</span> <span class="o">=</span> <span class="nx">scrollablePanel</span><span class="p">.</span><span class="nx">bottomChildOY</span><span class="p">;</span>
 </pre></div></li>
 </ul>
 <h3 id="scroll-to-topbottom">Scroll to top/bottom<a class="headerlink" href="#scroll-to-topbottom" title="Permanent link">&para;</a></h3>
