@@ -1,2 +1,2 @@
-import Pinch from './input/pinch/Pinch.js';
+import Pinch from './input/gesture/twopointerstracer/Pinch.js';
 export default Pinch;

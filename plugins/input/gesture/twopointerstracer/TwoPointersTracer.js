@@ -1,11 +1,13 @@
-import GetDefaultBounds from '../../utils/defaultbounds/GetDefaultBounds.js';
+import GetDefaultBounds from '../../../utils/defaultbounds/GetDefaultBounds.js';
 
 const EE = Phaser.Events.EventEmitter;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const SpliceOne = Phaser.Utils.Array.SpliceOne;
 const DistanceBetween = Phaser.Math.Distance.Between;
+const AngleBetween = Phaser.Math.Angle.Between;
+const RadToDeg = Phaser.Math.RadToDeg;
 
-class Pinch extends EE {
+class TwoPointersTracer extends EE {
     constructor(scene, config) {
         var amount = scene.input.manager.pointersTotal - 1;
         if (amount < 2) {
@@ -29,7 +31,7 @@ class Pinch extends EE {
 
         this.state = TOUCH0;
         this.pointers.length = 0;
-        this.prevDragDistance = 0;
+        return this;
     }
 
     boot() {
@@ -45,6 +47,7 @@ class Pinch extends EE {
             this.scene.input.off('pointerup', this.onPointerUp, this);
             this.scene.input.off('pointermove', this.onPointerMove, this);
             this.scene.events.off('destroy', this.destroy, this);
+            this.scene = undefined;
         }
     }
 
@@ -179,24 +182,22 @@ class Pinch extends EE {
     }
 
     onDrag2Start() {
-        this.prevDragDistance = this.dragDistance;
-        this.emit('pinchstart', this);
+        this.emit('drag2start', this);
     }
 
     onDrag2End() {
-        this.prevDragDistance = 0;
-        this.emit('pinchend', this);
+        this.emit('drag2end', this);
     }
 
     onDrag2() {
-        this.emit('pinch', this);
+        this.emit('drag2', this);
     }
 
     get isDrag() {
         return (this.state === TOUCH1) && (this.pointers[0].justMoved);
     }
 
-    get isPinch() {
+    get isDrag2() {
         return (this.state === TOUCH2) && (this.pointers[0].justMoved || this.pointers[1].justMoved);
     }
 
@@ -206,18 +207,20 @@ class Pinch extends EE {
         }
         var p0 = this.pointers[0],
             p1 = this.pointers[1];
-
         return DistanceBetween(p0.x, p0.y, p1.x, p1.y);
     }
 
-    get scaleFactor() {
+    get dragRotation() {
         if (this.state !== TOUCH2) {
             return 0;
         }
-        var curDragDistance = this.dragDistance;
-        var scaleFactor = (curDragDistance / this.prevDragDistance);
-        this.prevDragDistance = curDragDistance;
-        return scaleFactor;
+        var p0 = this.pointers[0],
+            p1 = this.pointers[1];
+        return AngleBetween(p0.x, p0.y, p1.x, p1.y);
+    }
+
+    get dragAngle() {
+        return RadToDeg(this.dragRotation);
     }
 
     get drag1Vector() {
@@ -239,4 +242,4 @@ const TOUCH2 = 2;
 
 var tmpDragVector = {};
 
-export default Pinch;
+export default TwoPointersTracer;
