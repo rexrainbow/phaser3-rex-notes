@@ -1,5 +1,5 @@
-import TickTask from '../../../utils/ticktask/TickTask.js';
-import GetDefaultBounds from '../../../utils/defaultbounds/GetDefaultBounds.js';
+import TickTask from '../../utils/ticktask/TickTask.js';
+import GetDefaultBounds from '../../utils/defaultbounds/GetDefaultBounds.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 

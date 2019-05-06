@@ -1,4 +1,4 @@
-import TwoPointersTracer from './TwoPointersTracer.js';
+import TwoPointersTracer from '../TwoPointersTracer.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const WrapDegrees = Phaser.Math.Angle.WrapDegrees; // Wrap degrees: -180 to 180 

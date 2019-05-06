@@ -1,4 +1,4 @@
-import GetDefaultBounds from '../../../utils/defaultbounds/GetDefaultBounds.js';
+import GetDefaultBounds from '../../utils/defaultbounds/GetDefaultBounds.js';
 
 const EE = Phaser.Events.EventEmitter;
 const GetValue = Phaser.Utils.Objects.GetValue;

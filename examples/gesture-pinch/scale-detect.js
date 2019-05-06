@@ -1,4 +1,4 @@
-import PinchPlugin from '../../plugins/pinch-plugin.js';
+import GesturesPlugin from '../../plugins/gestures-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -7,13 +7,13 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {}
+    preload() { }
 
     create() {
         var print = this.add.text(0, 0, '')
 
         var circle = this.add.circle(400, 300, 200, 0x888888);
-        var pinch = this.plugins.get('rexPinch').add(this);
+        var pinch = this.rexGestures.add.pinch(this);
         pinch
             .on('drag1', function (pinch) {
                 var drag1Vector = pinch.drag1Vector;
@@ -54,10 +54,10 @@ var config = {
     },
     scene: Demo,
     plugins: {
-        global: [{
-            key: 'rexPinch',
-            plugin: PinchPlugin,
-            start: true
+        scene: [{
+            key: 'rexGestures',
+            plugin: GesturesPlugin,
+            mapping: 'rexGestures'
         }]
     }
 };
