@@ -1,52 +1,58 @@
 import TwoPointersTracer from '../TwoPointersTracer.js';
+import State from './State.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const WrapDegrees = Phaser.Math.Angle.WrapDegrees; // Wrap degrees: -180 to 180 
 const ShortestBetween = Phaser.Math.Angle.ShortestBetween;
+const RadToDeg = Phaser.Math.RadToDeg;
 const DegToRad = Phaser.Math.DegToRad;
 
 class Rotate extends TwoPointersTracer {
+    constructor(scene, config) {
+        super(scene, config);
+        this.recongizedState = new State(this, config);
+    }
+
     resetFromJSON(o) {
         super.resetFromJSON(o);
         this.setRotationThreshold(GetValue(o, 'threshold', 0));
-        this.rotationStart = false;
-        this.angle = 0;
         return this;
     }
 
     onDrag2Start() {
-        this.prevDragAngle = WrapDegrees(this.dragAngle); // Degrees
+        this.prevAngle = WrapDegrees(this.dragAngle); // Degrees
         if (this.rotationThreshold === 0) {
-            this.rotationStart = true;
-            this.emit('rotatestart', this);
+            this.recongizedState.goto(RECOGNIZED);
+        } else {
+            this.recongizedState.goto(BEGIN);
         }
     }
 
     onDrag2End() {
-        this.rotationStart = false;
-        this.angle = 0;
-        this.prevDragAngle = undefined;
-        this.emit('rotateend', this);
+        this.recongizedState.goto(IDLE);
     }
 
     onDrag2() {
-        var curDragAngle = WrapDegrees(this.dragAngle);
-        this.angle = ShortestBetween(this.prevDragAngle, curDragAngle);
+        var curAngle = WrapDegrees(RadToDeg(this.angleBetween));
+        this.angle = ShortestBetween(this.prevAngle, curAngle);
 
-        if (this.rotationStart) {
-            this.prevDragAngle = curDragAngle;
-            this.emit('rotate', this);
-        } else {
+        if (this.recongizedState.state === BEGIN) {
             if (Math.abs(this.angle) >= this.rotationThreshold) {
-                this.rotationStart = true;
-                this.prevDragAngle = curDragAngle;
-                this.emit('rotatestart', this);
+                this.recongizedState.goto(RECOGNIZED);
+                this.prevAngle = curAngle;
             }
+        } else {
+            this.emit('rotate', this);
+            this.prevAngle = curAngle;
         }
     }
 
+    get state() {
+        return this.recongizedState.state;
+    }
+
     get isRotation() {
-        return this.isDrag2 && this.rotationStart;
+        return (this.state === RECOGNIZED);
     }
 
     get rotation() {
@@ -54,12 +60,13 @@ class Rotate extends TwoPointersTracer {
     }
 
     setRotationThreshold(angle) {
-        if (angle === undefined) {
-            angle = 0;
-        }
         this.rotationThreshold = angle; // Degrees
         return this;
     }
 }
+
+const IDLE = 'IDLE';
+const BEGIN = 'BEGIN';
+const RECOGNIZED = 'RECOGNIZED';
 
 export default Rotate;

@@ -21,8 +21,9 @@ class OnePointerTracer extends TickTask {
         }
         this.bounds = bounds;
 
-        this.state = TOUCH0;
+        this.tracerState = TOUCH0;
         this.pointer = undefined;
+        this.lastCatchedPointer = undefined;
         return this;
     }
 
@@ -83,7 +84,8 @@ class OnePointerTracer extends TickTask {
         }
 
         this.pointer = pointer;
-        this.state = TOUCH1;
+        this.lastCatchedPointer = pointer;
+        this.tracerState = TOUCH1;
         this.onDragStart();
     }
 
@@ -101,7 +103,7 @@ class OnePointerTracer extends TickTask {
         }
 
         this.pointer = undefined;
-        this.state = TOUCH0;
+        this.tracerState = TOUCH0;
         this.onDragEnd();
     }
 
@@ -127,11 +129,11 @@ class OnePointerTracer extends TickTask {
     }
 
     dragCancel() {
-        if (this.state === TOUCH1) {
+        if (this.tracerState === TOUCH1) {
             this.onDragEnd();
         }
         this.pointer = undefined;
-        this.state = TOUCH0;
+        this.tracerState = TOUCH0;
         return this;
     }
 
@@ -147,25 +149,24 @@ class OnePointerTracer extends TickTask {
         this.emit('drag', this);
     }
 
+    everyTick(time, delta) { }
+
     get isDrag() {
-        return (this.state === TOUCH1) && (this.pointer.justMoved);
+        return (this.tracerState === TOUCH1) && (this.pointer.justMoved);
     }
 
     startTicking() {
         super.startTicking();
-        this.scene.events.on('preupdate', this.everytick, this);
+        this.scene.events.on('preupdate', this.everyTick, this);
     }
 
     stopTicking() {
         super.stopTicking();
         if (this.scene) { // Scene might be destoryed
-            this.scene.events.off('preupdate', this.everytick, this);
+            this.scene.events.off('preupdate', this.everyTick, this);
         }
     }
 
-    everytick(time, delta) {
-        return this;
-    }
 }
 
 const TOUCH0 = 0;

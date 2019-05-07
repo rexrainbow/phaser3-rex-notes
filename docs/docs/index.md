@@ -8,14 +8,14 @@
 1. [AwaitLoader](awaitloader.md): Await custom task in preload stage.
 1. [BBCodeText](bbcodetext.md): Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
 1. [Board](board.md): Core object of Board system.
-1. [Board - Field of view](board-fieldofview.md): Visible testing, to find field of view.
-1. [Board - Hexagon map](board-hexagonmap.md): Create tile positions in hexagon/triangle/parallelogram geometry in hexagon grid.
-1. [Board - Match](board-match.md): Get matched chess.
-1. [Board - Mini board](board-miniboard.md): Chess Container, to rotate/mirror/drag chess together.
-1. [Board - Monopoly](board-monopoly.md): Move through path tiles.
-1. [Board - Move To](board-moveto.md): Move chess towards target position with a steady speed.
-1. [Board - Path finder](board-pathfinder.md): Find moveable area or moving path.
-1. [Board - Shape](board-shape.md): Grid (polygon) shape object.
+1. [Board/Field of view](board-fieldofview.md): Visible testing, to find field of view.
+1. [Board/Hexagon map](board-hexagonmap.md): Create tile positions in hexagon/triangle/parallelogram geometry in hexagon grid.
+1. [Board/Match](board-match.md): Get matched chess.
+1. [Board/Mini board](board-miniboard.md): Chess Container, to rotate/mirror/drag chess together.
+1. [Board/Monopoly](board-monopoly.md): Move through path tiles.
+1. [Board/Move To](board-moveto.md): Move chess towards target position with a steady speed.
+1. [Board/Path finder](board-pathfinder.md): Find moveable area or moving path.
+1. [Board/Shape](board-shape.md): Grid (polygon) shape object.
 1. [Buff data](buffdata.md): Data manager with buffs.
 1. [Bullet](bullet.md): Move game object toward current angle of game object, with a constant speed.
 1. [Button](button.md): Fires 'click' event when touch releasd after pressed.
@@ -54,12 +54,12 @@
 1. [Scale-down-destroy](scaledowndestroy.md): Scale down game object then destroy it.
 1. [Scroller](scroller.md): Drag content. Slow down when dragging released, pull back when out of bounds.
 1. [Sequence](sequence.md): Run sequence commands in array.
-1. [Shader-gray-scale](shader-grayscale.md): Gray scale post processing filter.
-1. [Shader-hsl-adjust](shader-hsladjust.md): Adjust color in HSL domain, post processing filter.
-1. [Shader-inverse](shader-inverse.md): Inverse color post processing filter.
-1. [Shader-pixelation](shader-pixelation.md): Pixelation post processing filter.
-1. [Shader-swirl](shader-swirl.md): Swirl post processing filter.
-1. [Shader-toonify](shader-toonify.md): Draw outlines and quantize color in HSV domain, post processing filter.
+1. [Shader/gray-scale](shader-grayscale.md): Gray scale post processing filter.
+1. [Shader/hsl-adjust](shader-hsladjust.md): Adjust color in HSL domain, post processing filter.
+1. [Shader/inverse](shader-inverse.md): Inverse color post processing filter.
+1. [Shader/pixelation](shader-pixelation.md): Pixelation post processing filter.
+1. [Shader/swirl](shader-swirl.md): Swirl post processing filter.
+1. [Shader/toonify](shader-toonify.md): Draw outlines and quantize color in HSV domain, post processing filter.
 1. [Shake-position](shake-position.md): Shake position of game object.
 1. [Slider](slider.md): Drag thumb on a slider bar.
 1. [Ship](ship.md): Move game object as a space ship by cursor keys.
@@ -67,22 +67,22 @@
 1. [TCRP.Player](tcrp-player.md): Run commands on time.
 1. [TCRP.Recorder](tcrp-recoder.md): Store commands with time.
 1. [Typing](texttyping.md): Typing text on text object.
-1. [UI-buttons](ui-buttons.md): A container with a group of buttons.
-1. [UI-chart](ui-chart.md): Draw chart on canvas.
-1. [UI-dialog](ui-dialog.md): A container with a title, content, buttons and backgrounds.
-1. [UI-fixwidthsizer](ui-fixwidthsizer.md): Layout children game objects into lines.
-1. [UI-grid sizer](ui-gridsizer.md): Layout children game objects in grids.
-1. [UI-gird table](ui-gridtable.md): A container with a grid table, slider, and scroller.
-1. [UI-label](ui-label.md): A game object container with an icon, text, and background.
-1. [UI-menu](ui-menu.md): A container with buttons and sub-menu.
-1. [UI-number bar](ui-numberbar.md): A container with an icon, slider, text, and background.
-1. [UI-pages](ui-pages.md): A container with pages, only current page is visible.
-1. [UI-Scroll-able panel](ui-scrollablepanel.md): A container with a panel, slider, and scroller.
-1. [UI-sizer](ui-sizer.md): Layout children game objects.
-1. [UI-slider](ui-slider.md): A container with a track, indicator, thumb and background.
-1. [UI-tabs](ui-tabs.md): A container with 4 groups of buttons around a center panel.
-1. [UI-text area](ui-textarea.md): A container with a text, slider, and scroller.
-1. [UI-text box](ui-textbox): A container with an icon, (typing and paging) text, and background.
+1. [UI/buttons](ui-buttons.md): A container with a group of buttons.
+1. [UI/chart](ui-chart.md): Draw chart on canvas.
+1. [UI/dialog](ui-dialog.md): A container with a title, content, buttons and backgrounds.
+1. [UI/fixwidthsizer](ui-fixwidthsizer.md): Layout children game objects into lines.
+1. [UI/grid sizer](ui-gridsizer.md): Layout children game objects in grids.
+1. [UI/gird table](ui-gridtable.md): A container with a grid table, slider, and scroller.
+1. [UI/label](ui-label.md): A game object container with an icon, text, and background.
+1. [UI/menu](ui-menu.md): A container with buttons and sub-menu.
+1. [UI/number bar](ui-numberbar.md): A container with an icon, slider, text, and background.
+1. [UI/pages](ui-pages.md): A container with pages, only current page is visible.
+1. [UI/Scroll-able panel](ui-scrollablepanel.md): A container with a panel, slider, and scroller.
+1. [UI/sizer](ui-sizer.md): Layout children game objects.
+1. [UI/slider](ui-slider.md): A container with a track, indicator, thumb and background.
+1. [UI/tabs](ui-tabs.md): A container with 4 groups of buttons around a center panel.
+1. [UI/text area](ui-textarea.md): A container with a text, slider, and scroller.
+1. [UI/text box](ui-textbox): A container with an icon, (typing and paging) text, and background.
 1. [Virtual joystick](virtualjoystick.md): Simulate curosr keys according touch events.
 1. [Wait events](waitevents.md): Wait fired events or callbacks.
 1. [Webfont-loader](webfontloader.md): Load web font by google webfont loader in preload stage.

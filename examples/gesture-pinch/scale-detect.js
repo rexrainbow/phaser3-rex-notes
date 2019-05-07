@@ -13,7 +13,7 @@ class Demo extends Phaser.Scene {
         var print = this.add.text(0, 0, '')
 
         var circle = this.add.circle(400, 300, 200, 0x888888);
-        var pinch = this.rexGestures.add.pinch(this);
+        var pinch = this.rexGestures.add.pinch();
         pinch
             .on('drag1', function (pinch) {
                 var drag1Vector = pinch.drag1Vector;

@@ -1,40 +1,73 @@
-import OnePointerTracer from "./OnePointerTracer";
+import OnePointerTracer from "../OnePointerTracer";
+import State from './State.js';
+
+const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Press extends OnePointerTracer {
+    constructor(scene, config) {
+        super(scene, config);
+        this.recongizedState = new State(this, config);
+    }
+
     resetFromJSON(o) {
-        super.resetFromJSON(o);        
+        super.resetFromJSON(o);
         this.setDragThreshold(GetValue(o, 'threshold', 9));
-        this.setMinHoldTime(GetValue(o, 'minHoldTime', 251));
-        this.pressStart = false;
+        this.setMinHoldTime(GetValue(o, 'time', 251));
         return this;
     }
 
     onDragStart() {
-        this.pressStart = true;
+        if (this.holdTime === 0) {
+            this.recongizedState.goto(RECOGNIZED);
+        } else {
+            this.recongizedState.goto(BEGIN);
+        }
     }
 
     onDragEnd() {
-        this.pressStart = false;
+        this.recongizedState.goto(IDLE);
     }
 
     onDrag() {
+        if (this.recongizedState.state === IDLE) {
+            return;
+        }
 
+        if (this.pointer.getDistance() > this.dragThreshold) {
+            this.recongizedState.goto(IDLE);
+        }
+    }
+
+    everyTick(time, delta) {
+        if (this.recongizedState.state === BEGIN) {
+            var holdTime = time - this.pointer.downTime;
+            if (holdTime > this.holdTime) {
+                this.recongizedState.goto(RECOGNIZED);
+            }
+        }
+    }
+
+    get state() {
+        return this.recongizedState.state;
+    }
+
+    get isPressed() {
+        return (this.state === RECOGNIZED);
     }
 
     setDragThreshold(distance) {
-        if (distance === undefined) {
-            distance = 0;
-        }
         this.dragThreshold = distance;
         return this;
     }
 
     setMinHoldTime(time) {
-        if (time === undefined) {
-            time = 0;
-        }
         this.holdTime = time; // ms
         return this;
     }
 }
+
+const IDLE = 'IDLE';
+const BEGIN = 'BEGIN';
+const RECOGNIZED = 'RECOGNIZED';
+
 export default Press;

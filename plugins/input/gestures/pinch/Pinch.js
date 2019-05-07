@@ -1,58 +1,64 @@
 import TwoPointersTracer from '../TwoPointersTracer.js';
+import State from './State.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Pinch extends TwoPointersTracer {
+    constructor(scene, config) {
+        super(scene, config);
+        this.recongizedState = new State(this);
+    }
+
     resetFromJSON(o) {
         super.resetFromJSON(o);
         this.setScaleThreshold(GetValue(o, 'threshold', 0));
-        this.scaleStart = false;
-        this.scaleFactor = 0;
         return this;
     }
 
     onDrag2Start() {
-        this.prevDragDistance = this.dragDistance;
+        this.prevDistance = this.distanceBetween;
         if (this.scaleThreshold === 0) {
-            this.scaleStart = true;
-            this.emit('pinchstart', this);
+            this.recongizedState.goto(RECOGNIZED);
+        } else {
+            this.recongizedState.goto(BEGIN);
         }
     }
 
     onDrag2End() {
-        this.scaleStart = false;
-        this.scaleFactor = 0;
-        this.prevDragDistance = undefined;
-        this.emit('pinchend', this);
+        this.recongizedState.goto(IDLE);
     }
 
     onDrag2() {
-        var curDragDistance = this.dragDistance;
-        this.scaleFactor = curDragDistance / this.prevDragDistance;
+        var curDistance = this.distanceBetween;
+        this.scaleFactor = curDistance / this.prevDistance;
 
-        if (this.scaleStart) {
-            this.prevDragDistance = curDragDistance;
-            this.emit('pinch', this);
-        } else {
+        if (this.recongizedState.state === BEGIN) {
             if (Math.abs(1 - this.scaleFactor) >= this.scaleThreshold) {
-                this.scaleStart = true;
-                this.prevDragDistance = curDragDistance;
-                this.emit('pinchstart', this);
+                this.recongizedState.goto(RECOGNIZED);
+                this.prevDistance = curDistance;
             }
+        } else {
+            this.emit('pinch', this);
+            this.prevDistance = curDistance;
         }
+    }
+
+    get state() {
+        return this.recongizedState.state;
     }
 
     get isPinch() {
-        return this.isDrag2 && this.scaleStart;
+        return (this.state === RECOGNIZED);
     }
 
     setScaleThreshold(scale) {
-        if (scale === undefined) {
-            scale = 0;
-        }
         this.scaleThreshold = scale;
         return this;
     }
 }
+
+const IDLE = 'IDLE';
+const BEGIN = 'BEGIN';
+const RECOGNIZED = 'RECOGNIZED';
 
 export default Pinch;

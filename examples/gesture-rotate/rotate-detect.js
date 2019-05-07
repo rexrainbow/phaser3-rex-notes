@@ -22,7 +22,7 @@ class Demo extends Phaser.Scene {
             },
         }).lineBetween(0, 0, 150, 0);
 
-        var rotate = this.rexGestures.add.rotate(this);
+        var rotate = this.rexGestures.add.rotate();
         rotate
             .on('rotate', function (rotate) {
                 line.angle += rotate.angle;

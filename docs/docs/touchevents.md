@@ -347,8 +347,11 @@ scene.input.addPointer(num);  // total points = num + 1
         - Drag distance : `pointer.getDistance()`
             - Horizontal drag distance : `pointer.getDistanceX()`
             - Vertical drag distance : `pointer.getDistanceY()`
-        - Drag duration : `pointer.getDuration()`
         - Drag angle : `pointer.getAngle()`
+- Time
+    - Touching start : `pointer.downTime`
+    - Touching end : `pointer.upTime`
+    - Drag : `pointer.getDuration()`
 - Touch state
     - Is touching :  `pointer.isDown`
     - Is touching start : `pointer.justDown`

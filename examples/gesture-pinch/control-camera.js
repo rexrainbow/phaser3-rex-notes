@@ -12,7 +12,7 @@ class Demo extends Phaser.Scene {
     create() {
         DrawSomethings(this);
 
-        var pinch = this.rexGestures.add.pinch(this);
+        var pinch = this.rexGestures.add.pinch();
 
         var camera = this.cameras.main;
         pinch

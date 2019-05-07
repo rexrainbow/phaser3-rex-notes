@@ -5,7 +5,6 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 const SpliceOne = Phaser.Utils.Array.SpliceOne;
 const DistanceBetween = Phaser.Math.Distance.Between;
 const AngleBetween = Phaser.Math.Angle.Between;
-const RadToDeg = Phaser.Math.RadToDeg;
 
 class TwoPointersTracer extends EE {
     constructor(scene, config) {
@@ -29,7 +28,7 @@ class TwoPointersTracer extends EE {
         }
         this.bounds = bounds;
 
-        this.state = TOUCH0;
+        this.tracerState = TOUCH0;
         this.pointers.length = 0;
         return this;
     }
@@ -91,13 +90,13 @@ class TwoPointersTracer extends EE {
             this.pointers.push(pointer);
         }
 
-        switch (this.state) {
+        switch (this.tracerState) {
             case TOUCH0:
-                this.state = TOUCH1;
+                this.tracerState = TOUCH1;
                 this.onDrag1Start();
                 break;
             case TOUCH1:
-                this.state = TOUCH2;
+                this.tracerState = TOUCH2;
                 this.onDrag2Start();
                 break;
         }
@@ -119,13 +118,13 @@ class TwoPointersTracer extends EE {
             SpliceOne(this.pointers, index);
         }
 
-        switch (this.state) {
+        switch (this.tracerState) {
             case TOUCH1:
-                this.state = TOUCH0;
+                this.tracerState = TOUCH0;
                 this.onDrag1End();
                 break;
             case TOUCH2:
-                this.state = TOUCH1;
+                this.tracerState = TOUCH1;
                 this.onDrag2End();
                 this.onDrag1Start();
                 break;
@@ -150,7 +149,7 @@ class TwoPointersTracer extends EE {
             return;
         }
 
-        switch (this.state) {
+        switch (this.tracerState) {
             case TOUCH1:
                 this.onDrag1();
                 break;
@@ -161,11 +160,11 @@ class TwoPointersTracer extends EE {
     }
 
     dragCancel() {
-        if (this.state === TOUCH2) {
+        if (this.tracerState === TOUCH2) {
             this.onDrag2End();
         }
         this.pointers.length = 0;
-        this.state = TOUCH0;
+        this.tracerState = TOUCH0;
         return this;
     }
 
@@ -194,15 +193,15 @@ class TwoPointersTracer extends EE {
     }
 
     get isDrag() {
-        return (this.state === TOUCH1) && (this.pointers[0].justMoved);
+        return (this.tracerState === TOUCH1) && (this.pointers[0].justMoved);
     }
 
     get isDrag2() {
-        return (this.state === TOUCH2) && (this.pointers[0].justMoved || this.pointers[1].justMoved);
+        return (this.tracerState === TOUCH2) && (this.pointers[0].justMoved || this.pointers[1].justMoved);
     }
 
-    get dragDistance() {
-        if (this.state !== TOUCH2) {
+    get distanceBetween() {
+        if (this.tracerState !== TOUCH2) {
             return 0;
         }
         var p0 = this.pointers[0],
@@ -210,17 +209,13 @@ class TwoPointersTracer extends EE {
         return DistanceBetween(p0.x, p0.y, p1.x, p1.y);
     }
 
-    get dragRotation() {
-        if (this.state !== TOUCH2) {
+    get angleBetween() {
+        if (this.tracerState !== TOUCH2) {
             return 0;
         }
         var p0 = this.pointers[0],
             p1 = this.pointers[1];
         return AngleBetween(p0.x, p0.y, p1.x, p1.y);
-    }
-
-    get dragAngle() {
-        return RadToDeg(this.dragRotation);
     }
 
     get drag1Vector() {
