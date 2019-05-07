@@ -36,7 +36,7 @@ class Rotate extends TwoPointersTracer {
         var curAngle = WrapDegrees(RadToDeg(this.angleBetween));
         this.angle = ShortestBetween(this.prevAngle, curAngle);
 
-        if (this.recongizedState.state === BEGIN) {
+        if (this.state === BEGIN) {
             if (Math.abs(this.angle) >= this.rotationThreshold) {
                 this.recongizedState.goto(RECOGNIZED);
                 this.prevAngle = curAngle;

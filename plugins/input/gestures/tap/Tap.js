@@ -12,7 +12,6 @@ class Tap extends OnePointerTracer {
 
     resetFromJSON(o) {
         super.resetFromJSON(o);
-        this.setTaps(GetValue(o, 'taps', 1));
         this.setMaxHoldTime(GetValue(o, 'time', 250)); // min-hold-time of Press is 251
         this.setTapInterval(GetValue(o, 'tapInterval', 300));
         this.setDragThreshold(GetValue(o, 'threshold', 9));
@@ -21,19 +20,21 @@ class Tap extends OnePointerTracer {
     }
 
     onDragStart() {
-        switch (this.recongizedState.state) {
+        switch (this.state) {
             case IDLE:
                 this.recongizedState.goto(BEGIN);
                 break;
 
             case BEGIN:
                 var pointer = this.pointer;
-                var tapsOffset = DistanceBetween(pointer.upX,
+                var tapsOffset = DistanceBetween(
+                    pointer.upX,
                     pointer.upY,
                     pointer.downX,
                     pointer.downY);
-                if (tapsOffset > this.tapOffset) {
-                    this.recongizedState.goto(IDLE);
+                if (tapsOffset > this.tapOffset) { // Can't recognize next level, restart here
+                    this.recongizedState.goto(RECOGNIZED);
+                    this.recongizedState.goto(BEGIN);
                 }
                 break;
 
@@ -44,25 +45,40 @@ class Tap extends OnePointerTracer {
     }
 
     onDragEnd() {
-        if (this.recongizedState.state === BEGIN) {
-            this.tapsCount++;
+        if (this.state === BEGIN) {
+            this.tapsCount++; // Try recognize next level
+            this.emit('tapping', this);
         }
     }
 
     onDrag() {
-        if (this.recongizedState.state === IDLE) {
+        if (this.state === IDLE) {
             return;
         }
 
-        if (this.pointer.getDistance() > this.dragThreshold) {
+        if (this.pointer.getDistance() > this.dragThreshold) { // Cancel
             this.recongizedState.goto(IDLE);
         }
     }
 
+    onLastPointerMove() {
+        if (this.state === BEGIN) {
+            var pointer = this.pointer;
+            var distance = DistanceBetween(
+                pointer.upX,
+                pointer.upY,
+                pointer.x,
+                pointer.y);
+            if (distance > this.tapOffset) { // Can't recognize next level, stop here
+                this.recongizedState.goto(RECOGNIZED);
+            }
+        }
+    }
+
     everyTick(time, delta) {
-        switch (this.recongizedState.state) {
+        switch (this.state) {
             case BEGIN:
-                var pointer = this.lastCatchedPointer;
+                var pointer = this.pointer;
                 if (pointer.isDown) {
                     var holdTime = time - pointer.downTime;
                     if (holdTime > this.holdTime) {
@@ -71,11 +87,7 @@ class Tap extends OnePointerTracer {
                 } else { // isUp
                     var releasedTime = time - pointer.upTime;
                     if (releasedTime > this.tapInterval) {
-                        if (this.tapsCount === this.taps) {
-                            this.recongizedState.goto(RECOGNIZED);
-                        } else {
-                            this.recongizedState.goto(IDLE);
-                        }
+                        this.recongizedState.goto(RECOGNIZED);
                     }
                 }
                 break;
@@ -93,11 +105,6 @@ class Tap extends OnePointerTracer {
 
     get isTapped() {
         return (this.state === RECOGNIZED);
-    }
-
-    setTaps(taps) {
-        this.taps = taps;
-        return this;
     }
 
     setMaxHoldTime(time) {

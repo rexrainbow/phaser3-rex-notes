@@ -13,11 +13,11 @@ class State extends FSM {
     }
 
     enter_RECOGNIZED() {
-        this.parent.emit('pinchstart');
+        this.parent.emit('pinchstart', this.parent);
     }
 
     exit_RECOGNIZED() {
-        this.parent.emit('pinchend');
+        this.parent.emit('pinchend', this.parent);
     }
 }
 

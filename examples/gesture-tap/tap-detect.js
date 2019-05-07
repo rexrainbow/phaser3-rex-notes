@@ -14,18 +14,15 @@ class Demo extends Phaser.Scene {
 
         this.rexGestures.add.tap()
             .on('tap', function (tap) {
-                print.text += 'Tap\n';
-            }, this);
+                print.text += tap.tapsCount + ' tap(s)\n';
+            }, this)
+            .on('tappingstart', function (tap) {
+                print.text = '';
+            })
+            .on('tapping', function (tap) {
+                print.text += tap.tapsCount + ' tapping\n';
+            })
 
-        this.rexGestures.add.tap({ taps: 2 })
-            .on('tap', function (tap) {
-                print.text += 'Double taps\n';
-            }, this);
-
-        this.rexGestures.add.tap({ taps: 3 })
-            .on('tap', function (tap) {
-                print.text += 'Tripple taps\n';
-            }, this);
     }
 }
 

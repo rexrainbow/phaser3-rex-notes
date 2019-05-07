@@ -7,8 +7,13 @@ class State extends FSM {
         this.goto('IDLE');
     }
 
+    enter_IDLE() {
+        this.parent.tapsCount = 0;
+    }
+
     enter_BEGIN() {
         this.parent.tapsCount = 0;
+        this.parent.emit('tappingstart', this.parent);
         this.parent.start();
     }
 
@@ -17,7 +22,7 @@ class State extends FSM {
     }
 
     enter_RECOGNIZED() {
-        this.parent.emit('tap');
+        this.parent.emit('tap', this.parent);
     }
 }
 

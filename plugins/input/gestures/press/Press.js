@@ -29,7 +29,7 @@ class Press extends OnePointerTracer {
     }
 
     onDrag() {
-        if (this.recongizedState.state === IDLE) {
+        if (this.state === IDLE) {
             return;
         }
 
@@ -39,7 +39,7 @@ class Press extends OnePointerTracer {
     }
 
     everyTick(time, delta) {
-        if (this.recongizedState.state === BEGIN) {
+        if (this.state === BEGIN) {
             var holdTime = time - this.pointer.downTime;
             if (holdTime > this.holdTime) {
                 this.recongizedState.goto(RECOGNIZED);

@@ -13,11 +13,11 @@ class State extends FSM {
     }
 
     enter_RECOGNIZED() {
-        this.parent.emit('rotatestart');
+        this.parent.emit('rotatestart', this.parent);
     }
 
     exit_RECOGNIZED() {
-        this.parent.emit('rotateend');
+        this.parent.emit('rotateend', this.parent);
     }
 }
 

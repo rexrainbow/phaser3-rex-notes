@@ -32,7 +32,7 @@ class Pinch extends TwoPointersTracer {
         var curDistance = this.distanceBetween;
         this.scaleFactor = curDistance / this.prevDistance;
 
-        if (this.recongizedState.state === BEGIN) {
+        if (this.state === BEGIN) {
             if (Math.abs(1 - this.scaleFactor) >= this.scaleThreshold) {
                 this.recongizedState.goto(RECOGNIZED);
                 this.prevDistance = curDistance;

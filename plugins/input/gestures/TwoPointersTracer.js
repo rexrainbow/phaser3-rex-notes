@@ -1,5 +1,3 @@
-import GetDefaultBounds from '../../utils/defaultbounds/GetDefaultBounds.js';
-
 const EE = Phaser.Events.EventEmitter;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const SpliceOne = Phaser.Utils.Array.SpliceOne;
@@ -22,11 +20,7 @@ class TwoPointersTracer extends EE {
 
     resetFromJSON(o) {
         this.setEnable(GetValue(o, "enable", true));
-        var bounds = GetValue(o, 'bounds', undefined);
-        if (bounds === undefined) {
-            bounds = GetDefaultBounds(this.scene);
-        }
-        this.bounds = bounds;
+        this.bounds = GetValue(o, 'bounds', undefined);
 
         this.tracerState = TOUCH0;
         this.pointers.length = 0;
@@ -80,7 +74,8 @@ class TwoPointersTracer extends EE {
             return;
         }
 
-        if (!this.bounds.contains(pointer.x, pointer.y)) {
+        var isInsideBounds = (this.bounds) ? this.bounds.contains(pointer.x, pointer.y) : true;
+        if (!isInsideBounds) {
             return;
         }
 
@@ -107,7 +102,8 @@ class TwoPointersTracer extends EE {
             return;
         }
 
-        if (!this.bounds.contains(pointer.x, pointer.y)) {
+        var isInsideBounds = (this.bounds) ? this.bounds.contains(pointer.x, pointer.y) : true;
+        if (!isInsideBounds) {
             return;
         }
 
@@ -139,23 +135,21 @@ class TwoPointersTracer extends EE {
         if (!pointer.isDown) {
             return;
         }
-        var isInsideBounds = this.bounds.contains(pointer.x, pointer.y);
+        var isInsideBounds = (this.bounds) ? this.bounds.contains(pointer.x, pointer.y) : true;
         var isCatchedPointer = (this.pointers.indexOf(pointer) !== -1);
-        if (!isCatchedPointer && isInsideBounds) {
+        if (!isCatchedPointer && isInsideBounds) { // Pointer moves into bounds
             this.onPointerDown(pointer);
-            return;
-        } else if (isCatchedPointer && !isInsideBounds) {
+        } else if (isCatchedPointer && !isInsideBounds) { // Pointer moves out of bounds
             this.onPointerUp(pointer);
-            return;
-        }
-
-        switch (this.tracerState) {
-            case TOUCH1:
-                this.onDrag1();
-                break;
-            case TOUCH2:
-                this.onDrag2();
-                break;
+        } else {  // Pointer drags in bounds
+            switch (this.tracerState) {
+                case TOUCH1:
+                    this.onDrag1();
+                    break;
+                case TOUCH2:
+                    this.onDrag2();
+                    break;
+            }
         }
     }
 

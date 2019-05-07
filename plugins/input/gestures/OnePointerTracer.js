@@ -1,5 +1,4 @@
 import TickTask from '../../utils/ticktask/TickTask.js';
-import GetDefaultBounds from '../../utils/defaultbounds/GetDefaultBounds.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -8,22 +7,17 @@ class OnePointerTracer extends TickTask {
         super(scene, config);
 
         this.scene = scene;
-        this.pointer = undefined;
         this.resetFromJSON(config);
         this.boot();
     }
 
     resetFromJSON(o) {
         this.setEnable(GetValue(o, "enable", true));
-        var bounds = GetValue(o, 'bounds', undefined);
-        if (bounds === undefined) {
-            bounds = GetDefaultBounds(this.scene);
-        }
-        this.bounds = bounds;
+        this.bounds = GetValue(o, 'bounds', undefined);
 
         this.tracerState = TOUCH0;
-        this.pointer = undefined;
-        this.lastCatchedPointer = undefined;
+        this._pointer = undefined;
+        this.pointer = undefined; // Last catched pointer
         return this;
     }
 
@@ -71,20 +65,21 @@ class OnePointerTracer extends TickTask {
             return;
         }
 
-        if (this.pointer === pointer) {
+        if (this._pointer === pointer) {
             return;
         }
 
-        if (!this.bounds.contains(pointer.x, pointer.y)) {
+        var isInsideBounds = (this.bounds) ? this.bounds.contains(pointer.x, pointer.y) : true;
+        if (!isInsideBounds) {
             return;
         }
 
-        if (this.pointer !== undefined) {
+        if (this._pointer !== undefined) {
             return;
         }
 
+        this._pointer = pointer;
         this.pointer = pointer;
-        this.lastCatchedPointer = pointer;
         this.tracerState = TOUCH1;
         this.onDragStart();
     }
@@ -94,15 +89,16 @@ class OnePointerTracer extends TickTask {
             return;
         }
 
-        if (!this.bounds.contains(pointer.x, pointer.y)) {
+        var isInsideBounds = (this.bounds) ? this.bounds.contains(pointer.x, pointer.y) : true;
+        if (!isInsideBounds) {
             return;
         }
 
-        if (this.pointer !== pointer) {
+        if (this._pointer !== pointer) {
             return;
         }
 
-        this.pointer = undefined;
+        this._pointer = undefined;
         this.tracerState = TOUCH0;
         this.onDragEnd();
     }
@@ -112,27 +108,30 @@ class OnePointerTracer extends TickTask {
             return;
         }
 
-        if (!pointer.isDown) {
-            return;
+        if (pointer.isDown) {
+            var isInsideBounds = (this.bounds) ? this.bounds.contains(pointer.x, pointer.y) : true;
+            var isCatchedPointer = (this._pointer === pointer);
+            if (!isCatchedPointer && isInsideBounds) { // Pointer moves into bounds
+                this.onPointerDown(pointer);
+            } else if (isCatchedPointer && !isInsideBounds) { // Pointer moves out of bounds
+                this.onPointerUp(pointer);
+            } else { // Pointer drags in bounds
+                this.onDrag();
+            }
+        } else {
+            var isInsideBounds = (this.bounds) ? this.bounds.contains(pointer.x, pointer.y) : true;
+            var isLastCatchedPointer = (this.pointer === pointer);
+            if (isLastCatchedPointer && isInsideBounds) {
+                this.onLastPointerMove();
+            }
         }
-        var isInsideBounds = this.bounds.contains(pointer.x, pointer.y);
-        var isCatchedPointer = (this.pointer === pointer);
-        if (!isCatchedPointer && isInsideBounds) {
-            this.onPointerDown(pointer);
-            return;
-        } else if (isCatchedPointer && !isInsideBounds) {
-            this.onPointerUp(pointer);
-            return;
-        }
-
-        this.onDrag();
     }
 
     dragCancel() {
         if (this.tracerState === TOUCH1) {
             this.onDragEnd();
         }
-        this.pointer = undefined;
+        this._pointer = undefined;
         this.tracerState = TOUCH0;
         return this;
     }
@@ -149,10 +148,12 @@ class OnePointerTracer extends TickTask {
         this.emit('drag', this);
     }
 
+    onLastPointerMove() { }
+
     everyTick(time, delta) { }
 
     get isDrag() {
-        return (this.tracerState === TOUCH1) && (this.pointer.justMoved);
+        return (this.tracerState === TOUCH1) && (this._pointer.justMoved);
     }
 
     startTicking() {
