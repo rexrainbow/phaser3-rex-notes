@@ -9,6 +9,12 @@ export default {
         return this;
     },
 
+    destroyEventEmitter() {
+        if (this.eventEmitter) {
+            this.eventEmitter.shutdown();
+        }
+    },
+
     on: function () {
         if (this.eventEmitter) {
             this.eventEmitter.on.apply(this.eventEmitter, arguments);

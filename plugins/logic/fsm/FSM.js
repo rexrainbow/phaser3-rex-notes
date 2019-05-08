@@ -49,9 +49,7 @@ class FSM {
     }
 
     shutdown() {
-        if (this.eventEmitter) {
-            this.eventEmitter.shutdown();
-        }
+        this.destroyEventEmitter();
     }
 
     resetFromJSON(o) {
