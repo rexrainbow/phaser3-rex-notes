@@ -4305,7 +4305,7 @@
         <span class="c1">// ...</span>
     <span class="p">},</span>
     <span class="nx">enable</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="nx">eventEmitter</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">eventEmitter</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
 <span class="p">}</span>
 <span class="kd">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexFSM&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span>
 </pre></div>
@@ -4325,7 +4325,7 @@
 <li><code>extend</code>: Inject key-value pairs into instance.</li>
 <li><code>enable</code>: Set <code>false</code> to block any state changing.</li>
 <li><code>eventEmitter</code><ul>
-<li><code>true</code> : Create a private event emitter.</li>
+<li><code>undefined</code> : Create a private event emitter, default value.</li>
 <li><code>false</code> : Don't add any event emitter, i.e. no event will be fired.</li>
 <li><a href="../eventemitter3/">Event emitter object</a> : Fire event through this event emitter.</li>
 </ul>

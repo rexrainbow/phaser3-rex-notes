@@ -94,7 +94,7 @@ var config = {
         // ...
     },
     enable: true,
-    eventEmitter: true,
+    eventEmitter: undefined,
 }
 var state = scene.plugins.get('rexFSM').add(config)
 ```
@@ -109,7 +109,7 @@ var state = scene.plugins.get('rexFSM').add(config)
 - `extend`: Inject key-value pairs into instance.
 - `enable`: Set `false` to block any state changing.
 - `eventEmitter`
-    - `true` : Create a private event emitter.
+    - `undefined` : Create a private event emitter, default value.
     - `false` : Don't add any event emitter, i.e. no event will be fired.
     - [Event emitter object](eventemitter3.md) : Fire event through this event emitter.
 

@@ -1,8 +1,8 @@
 const EE = Phaser.Events.EventEmitter;
 
 export default {
-    addEventEmitter(eventEmitter) {
-        if (eventEmitter === true) {
+    setEventEmitter(eventEmitter) {
+        if (eventEmitter === undefined) {
             eventEmitter = new EE();
         }
         this.eventEmitter = eventEmitter;
