@@ -49,16 +49,19 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {}
+    preload() { }
 
     create() {
-        var state = this.plugins.get('rexFSM').add(stateConfig);
+        var state = this.plugins.get('rexFSM').add(stateConfig)
+            .on('statechange', function (state) {
+                console.log('StateChange');
+            });
         this.input.on('pointerup', function () {
             state.next();
         });
     }
 
-    update() {}
+    update() { }
 }
 
 var config = {

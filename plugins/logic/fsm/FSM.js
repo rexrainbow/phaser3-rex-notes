@@ -1,7 +1,8 @@
-const EE = Phaser.Events.EventEmitter;
+import EventEmitterMethods from './EventEmitterMethods.js';
+
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class FSM extends EE {
+class FSM {
     /*
     var config = {
         start: 'A',   // default: undefined
@@ -19,19 +20,18 @@ class FSM extends EE {
             // ...
         },
         init: function() {},
-        enable: true
+        enable: true,
+        eventEmitter: true,
     };
     */
     constructor(config) {
-        super();
-
-        // attach get-next-state function
+        // Attach get-next-state function
         var states = GetValue(config, 'states', undefined);
         if (states) {
             this.addStates(states);
         }
 
-        // attach extend members
+        // Attach extend members
         var extend = GetValue(config, 'extend', undefined);
         if (extend) {
             for (var name in extend) {
@@ -41,13 +41,18 @@ class FSM extends EE {
             }
         }
 
+        // Event emitter
+        this.addEventEmitter(GetValue(config, 'eventEmitter', true));
+
         this._stateLock = false;
         this.resetFromJSON(config);
     }
 
-    // shutdown() {
-    //     super.shutdown();
-    // }
+    shutdown() {
+        if (this.eventEmitter) {
+            this.eventEmitter.shutdown();
+        }
+    }
 
     resetFromJSON(o) {
         this.setEnable(GetValue(o, 'enable', true));
@@ -123,7 +128,7 @@ class FSM extends EE {
     start(state) {
         this._start = state;
         this._prevState = undefined;
-        this._state = state; // won't fire statechange events
+        this._state = state; // Won't fire statechange events
         return this;
     }
 
@@ -192,4 +197,10 @@ class FSM extends EE {
         this.update(time, delta, 'postupdate');
     }
 }
+
+Object.assign(
+    FSM.prototype,
+    EventEmitterMethods
+);
+
 export default FSM;

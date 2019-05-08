@@ -5,7 +5,7 @@ class State extends FSM {
         super();
 
         this.i = 0;
-        this.goto('A');        
+        this.goto('A');
     }
 
     next_A() {
@@ -53,16 +53,19 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {}
+    preload() { }
 
     create() {
         var state = new State();
+        state.on('statechange', function (state) {
+            console.log('StateChange');
+        });
         this.input.on('pointerup', function () {
             state.next();
         });
     }
 
-    update() {}
+    update() { }
 }
 
 var config = {

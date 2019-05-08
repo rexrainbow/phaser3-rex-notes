@@ -25,7 +25,8 @@ class Pan extends OnePointerTracer {
             },
             init: function () {
                 this.state = IDLE;
-            }
+            },
+            eventEmitter: false,
         }
         this.setRecongizedStateObject(new FSM(stateConfig));
     }
