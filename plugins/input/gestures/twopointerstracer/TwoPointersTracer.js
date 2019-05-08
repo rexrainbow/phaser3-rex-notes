@@ -13,6 +13,7 @@ class TwoPointersTracer extends EE {
 
         super();
         this.scene = scene;
+        // this.recongizedState = new stateClass(this);
         this.pointers = [];
         this.resetFromJSON(config);
         this.boot();
@@ -223,11 +224,31 @@ class TwoPointersTracer extends EE {
         }
         return tmpDragVector;
     }
+
+    setRecongizedStateObject(stateObject) {
+        this.recongizedState = stateObject;
+        return this;
+    }
+
+    get state() {
+        return this.recongizedState.state;
+    }
+
+    set state(newState) {
+        this.recongizedState.state = newState;
+    }
+    
+    cancel() {
+        this.state = IDLE;
+        return this;
+    }
 }
 
 const TOUCH0 = 0;
 const TOUCH1 = 1;
 const TOUCH2 = 2;
+
+const IDLE = 'IDLE';
 
 var tmpDragVector = {};
 

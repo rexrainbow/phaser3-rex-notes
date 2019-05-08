@@ -1,4 +1,4 @@
-import TickTask from '../../utils/ticktask/TickTask.js';
+import TickTask from '../../../utils/ticktask/TickTask.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -16,8 +16,9 @@ class OnePointerTracer extends TickTask {
         this.bounds = GetValue(o, 'bounds', undefined);
 
         this.tracerState = TOUCH0;
-        this._pointer = undefined;
-        this.pointer = undefined; // Last catched pointer
+        // this.recongizedState = new stateClass(this);
+        this.pointer = undefined;
+        this.lastPointer = undefined; // Last catched pointer
         return this;
     }
 
@@ -65,7 +66,7 @@ class OnePointerTracer extends TickTask {
             return;
         }
 
-        if (this._pointer === pointer) {
+        if (this.pointer === pointer) {
             return;
         }
 
@@ -74,12 +75,12 @@ class OnePointerTracer extends TickTask {
             return;
         }
 
-        if (this._pointer !== undefined) {
+        if (this.pointer !== undefined) {
             return;
         }
 
-        this._pointer = pointer;
         this.pointer = pointer;
+        this.lastPointer = pointer;
         this.tracerState = TOUCH1;
         this.onDragStart();
     }
@@ -94,11 +95,11 @@ class OnePointerTracer extends TickTask {
             return;
         }
 
-        if (this._pointer !== pointer) {
+        if (this.pointer !== pointer) {
             return;
         }
 
-        this._pointer = undefined;
+        this.pointer = undefined;
         this.tracerState = TOUCH0;
         this.onDragEnd();
     }
@@ -110,7 +111,7 @@ class OnePointerTracer extends TickTask {
 
         if (pointer.isDown) {
             var isInsideBounds = (this.bounds) ? this.bounds.contains(pointer.x, pointer.y) : true;
-            var isCatchedPointer = (this._pointer === pointer);
+            var isCatchedPointer = (this.pointer === pointer);
             if (!isCatchedPointer && isInsideBounds) { // Pointer moves into bounds
                 this.onPointerDown(pointer);
             } else if (isCatchedPointer && !isInsideBounds) { // Pointer moves out of bounds
@@ -120,7 +121,7 @@ class OnePointerTracer extends TickTask {
             }
         } else {
             var isInsideBounds = (this.bounds) ? this.bounds.contains(pointer.x, pointer.y) : true;
-            var isLastCatchedPointer = (this.pointer === pointer);
+            var isLastCatchedPointer = (this.lastPointer === pointer);
             if (isLastCatchedPointer && isInsideBounds) {
                 this.onLastPointerMove();
             }
@@ -131,7 +132,7 @@ class OnePointerTracer extends TickTask {
         if (this.tracerState === TOUCH1) {
             this.onDragEnd();
         }
-        this._pointer = undefined;
+        this.pointer = undefined;
         this.tracerState = TOUCH0;
         return this;
     }
@@ -153,7 +154,7 @@ class OnePointerTracer extends TickTask {
     everyTick(time, delta) { }
 
     get isDrag() {
-        return (this.tracerState === TOUCH1) && (this._pointer.justMoved);
+        return (this.tracerState === TOUCH1) && (this.pointer.justMoved);
     }
 
     startTicking() {
@@ -168,9 +169,28 @@ class OnePointerTracer extends TickTask {
         }
     }
 
+    setRecongizedStateObject(stateObject) {
+        this.recongizedState = stateObject;
+        return this;
+    }
+
+    get state() {
+        return this.recongizedState.state;
+    }
+
+    set state(newState) {
+        this.recongizedState.state = newState;
+    }
+
+    cancel() {
+        this.state = IDLE;
+        return this;
+    }
 }
 
 const TOUCH0 = 0;
 const TOUCH1 = 1;
+
+const IDLE = 'IDLE';
 
 export default OnePointerTracer;

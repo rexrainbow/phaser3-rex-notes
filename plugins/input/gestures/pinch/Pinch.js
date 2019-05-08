@@ -1,12 +1,37 @@
-import TwoPointersTracer from '../TwoPointersTracer.js';
-import State from './State.js';
+import TwoPointersTracer from '../twopointerstracer/TwoPointersTracer.js';
+import FSM from '../../../fsm.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Pinch extends TwoPointersTracer {
     constructor(scene, config) {
         super(scene, config);
-        this.recongizedState = new State(this);
+
+        var self = this;
+        var stateConfig = {
+            states: {
+                IDLE: {
+                    enter: function () {
+                        self.prevDistance = undefined;
+                        self.scaleFactor = 1;
+                    },
+                },
+                BEGIN: {
+                },
+                RECOGNIZED: {
+                    enter: function () {
+                        self.emit('pinchstart', self);
+                    },
+                    exit: function () {
+                        self.emit('pinchend', self);
+                    }
+                }
+            },
+            init: function () {
+                this.state = IDLE;
+            }
+        }
+        this.setRecongizedStateObject(new FSM(stateConfig));
     }
 
     resetFromJSON(o) {
@@ -17,15 +42,11 @@ class Pinch extends TwoPointersTracer {
 
     onDrag2Start() {
         this.prevDistance = this.distanceBetween;
-        if (this.scaleThreshold === 0) {
-            this.recongizedState.goto(RECOGNIZED);
-        } else {
-            this.recongizedState.goto(BEGIN);
-        }
+        this.state = (this.scaleThreshold === 0) ? RECOGNIZED : BEGIN;
     }
 
     onDrag2End() {
-        this.recongizedState.goto(IDLE);
+        this.state = IDLE;
     }
 
     onDrag2() {
@@ -34,17 +55,13 @@ class Pinch extends TwoPointersTracer {
 
         if (this.state === BEGIN) {
             if (Math.abs(1 - this.scaleFactor) >= this.scaleThreshold) {
-                this.recongizedState.goto(RECOGNIZED);
+                this.state = RECOGNIZED;
                 this.prevDistance = curDistance;
             }
         } else {
             this.emit('pinch', this);
             this.prevDistance = curDistance;
         }
-    }
-
-    get state() {
-        return this.recongizedState.state;
     }
 
     get isPinch() {

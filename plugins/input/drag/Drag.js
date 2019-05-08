@@ -69,7 +69,7 @@ class Drag {
 
     setAxisMode(m) {
         if (typeof (m) === 'string') {
-            m = AXISMODE[m];
+            m = DIRECTIONNODE[m];
         }
         this.axisMode = m;
         return this;
@@ -164,7 +164,7 @@ class Drag {
 var P1 = {}; // reuse this point object
 
 /** @private */
-const AXISMODE = {
+const DIRECTIONNODE = {
     'both': 0,
     'h&v': 0,
     'x&y': 0,

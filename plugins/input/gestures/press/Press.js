@@ -1,12 +1,52 @@
-import OnePointerTracer from "../OnePointerTracer";
-import State from './State.js';
+import OnePointerTracer from "../onepointertracer/OnePointerTracer.js";
+import FSM from '../../../fsm.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Press extends OnePointerTracer {
     constructor(scene, config) {
         super(scene, config);
-        this.recongizedState = new State(this, config);
+
+        var self = this;
+        var stateConfig = {
+            states: {
+                IDLE: {
+                    enter: function () {
+                        self.x = 0;
+                        self.y = 0;
+                        self.worldX = 0;
+                        self.worldY = 0;
+                    },
+                    exit: function () {
+                        var pointer = self.lastPointer;
+                        self.x = pointer.x;
+                        self.y = pointer.y;
+                        self.worldX = pointer.worldX;
+                        self.worldY = pointer.worldY;
+                    }
+                },
+                BEGIN: {
+                    enter: function () {
+                        self.start();
+                    },
+                    exit: function () {
+                        self.stop();
+                    }
+                },
+                RECOGNIZED: {
+                    enter: function () {
+                        self.emit('pressstart', self);
+                    },
+                    exit: function () {
+                        self.emit('pressend', self);
+                    }
+                }
+            },
+            init: function () {
+                this.state = IDLE;
+            }
+        }
+        this.setRecongizedStateObject(new FSM(stateConfig));
     }
 
     resetFromJSON(o) {
@@ -17,15 +57,11 @@ class Press extends OnePointerTracer {
     }
 
     onDragStart() {
-        if (this.holdTime === 0) {
-            this.recongizedState.goto(RECOGNIZED);
-        } else {
-            this.recongizedState.goto(BEGIN);
-        }
+        this.state = (this.holdTime === 0) ? RECOGNIZED : BEGIN;
     }
 
     onDragEnd() {
-        this.recongizedState.goto(IDLE);
+        this.state = IDLE;
     }
 
     onDrag() {
@@ -34,21 +70,17 @@ class Press extends OnePointerTracer {
         }
 
         if (this.pointer.getDistance() > this.dragThreshold) {
-            this.recongizedState.goto(IDLE);
+            this.state = IDLE;
         }
     }
 
     everyTick(time, delta) {
         if (this.state === BEGIN) {
             var holdTime = time - this.pointer.downTime;
-            if (holdTime > this.holdTime) {
-                this.recongizedState.goto(RECOGNIZED);
+            if (holdTime >= this.holdTime) {
+                this.state = RECOGNIZED;
             }
         }
-    }
-
-    get state() {
-        return this.recongizedState.state;
     }
 
     get isPressed() {

@@ -1,5 +1,5 @@
-import TwoPointersTracer from '../TwoPointersTracer.js';
-import State from './State.js';
+import TwoPointersTracer from '../twopointerstracer/TwoPointersTracer.js';
+import FSM from '../../../fsm.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const WrapDegrees = Phaser.Math.Angle.WrapDegrees; // Wrap degrees: -180 to 180 
@@ -10,7 +10,32 @@ const DegToRad = Phaser.Math.DegToRad;
 class Rotate extends TwoPointersTracer {
     constructor(scene, config) {
         super(scene, config);
-        this.recongizedState = new State(this, config);
+
+        var self = this;
+        var stateConfig = {
+            states: {
+                IDLE: {
+                    enter: function () {
+                        self.prevAngle = undefined;
+                        self.angle = 0;
+                    },
+                },
+                BEGIN: {
+                },
+                RECOGNIZED: {
+                    enter: function () {
+                        self.emit('rotatestart', self);
+                    },
+                    exit: function () {
+                        self.emit('rotateend', self);
+                    }
+                }
+            },
+            init: function () {
+                this.state = IDLE;
+            }
+        }
+        this.setRecongizedStateObject(new FSM(stateConfig));
     }
 
     resetFromJSON(o) {
@@ -21,15 +46,11 @@ class Rotate extends TwoPointersTracer {
 
     onDrag2Start() {
         this.prevAngle = WrapDegrees(this.dragAngle); // Degrees
-        if (this.rotationThreshold === 0) {
-            this.recongizedState.goto(RECOGNIZED);
-        } else {
-            this.recongizedState.goto(BEGIN);
-        }
+        this.state = (this.rotationThreshold === 0) ? RECOGNIZED : BEGIN;
     }
 
     onDrag2End() {
-        this.recongizedState.goto(IDLE);
+        this.state = IDLE;
     }
 
     onDrag2() {
@@ -38,17 +59,13 @@ class Rotate extends TwoPointersTracer {
 
         if (this.state === BEGIN) {
             if (Math.abs(this.angle) >= this.rotationThreshold) {
-                this.recongizedState.goto(RECOGNIZED);
+                this.state = RECOGNIZED;
                 this.prevAngle = curAngle;
             }
         } else {
             this.emit('rotate', this);
             this.prevAngle = curAngle;
         }
-    }
-
-    get state() {
-        return this.recongizedState.state;
     }
 
     get isRotation() {
