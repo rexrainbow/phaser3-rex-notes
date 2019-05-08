@@ -14,7 +14,8 @@ class Scroller extends EE {
 
         var enable = GetValue(config, 'enable', true);
         var stateConfig = {
-            enable: enable
+            enable: enable,
+            eventEmitter: false,
         }
         this._state = new State(this, stateConfig);
 
@@ -126,7 +127,7 @@ class Scroller extends EE {
         if (value === this._value) {
             return;
         }
-        
+
         var oldValue = this._value;
         var isOverMax = this.overMax(value);
         var isOverMin = this.overMin(value);
