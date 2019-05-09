@@ -13,6 +13,7 @@ class Tap extends OnePointerTracer {
             states: {
                 IDLE: {
                     enter: function () {
+                        self.stop();
                         self.tapsCount = 0;
                         self.x = 0;
                         self.y = 0;
@@ -29,16 +30,14 @@ class Tap extends OnePointerTracer {
                 },
                 BEGIN: {
                     enter: function () {
+                        self.start();
                         self.tapsCount = 0;
                         self.emit('tappingstart', self);
-                        self.start();
                     },
-                    exit: function () {
-                        self.stop();
-                    }
                 },
                 RECOGNIZED: {
                     enter: function () {
+                        self.start();
                         self.emit('tap', self);
                     },
                 }
@@ -121,27 +120,27 @@ class Tap extends OnePointerTracer {
         }
     }
 
-    everyTick(time, delta) {
-        switch (this.state) {
-            case BEGIN:
-                var pointer = this.lastPointer;
-                if (pointer.isDown) {
-                    var holdTime = time - pointer.downTime;
-                    if (holdTime > this.holdTime) {
-                        this.state = IDLE;
-                    }
-                } else { // isUp
-                    var releasedTime = time - pointer.upTime;
-                    if (releasedTime > this.tapInterval) {
-                        this.state = RECOGNIZED;
-                    }
+    preUpdate(time, delta) {
+        if (this.state === BEGIN) {
+            var pointer = this.lastPointer;
+            if (pointer.isDown) {
+                var holdTime = time - pointer.downTime;
+                if (holdTime > this.holdTime) {
+                    this.state = IDLE;
                 }
-                break;
+            } else { // isUp
+                var releasedTime = time - pointer.upTime;
+                if (releasedTime > this.tapInterval) {
+                    this.state = RECOGNIZED;
+                }
+            }
+        }
+    }
 
-            case RECOGNIZED:
-                // Keep RECOGNIZED state in 1 tick
-                this.state = IDLE;
-                break;
+    postUpdate(time, delta) {
+        // Clear RECOGNIZED after update()
+        if (this.state === RECOGNIZED) {
+            this.state = IDLE;
         }
     }
 

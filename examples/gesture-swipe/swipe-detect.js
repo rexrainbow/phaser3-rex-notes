@@ -12,23 +12,30 @@ class Demo extends Phaser.Scene {
     create() {
         this.print = print = this.add.text(0, 0, '')
 
-        this.tapInput = this.rexGestures.add.tap()
-            .on('tap', function (tap) {
-                print.text += tap.tapsCount + ' tap(s)\n';
-            }, this)
-            .on('tappingstart', function (tap) {
-                print.text = '';
-            })
-            .on('tapping', function (tap) {
-                print.text += tap.tapsCount + ' tapping\n';
-            })
+        this.swipeInput = this.rexGestures.add.swipe()
+            .on('swipe', function (swipe) {
+                print.text += `swipe, v = ${swipe.dragVelocity}\n`;
+            }, this);
     }
 
     update() {
-        if (this.tapInput.isTapped) {
-            this.print.text += 'update(): ' + this.tapInput.tapsCount + ' tap(s)\n';
+        if (this.swipeInput.isSwiped) {
+            this.print.text += `update(): swipe ${dumpDirectionStates(this.swipeInput)}\n`;
         }
     }
+}
+
+var directions = ['left', 'right', 'up', 'down'];
+var dumpDirectionStates = function (swipe) {
+    var s = '';
+    var dir;
+    for (var i = 0, cnt = directions.length; i < cnt; i++) {
+        dir = directions[i];
+        if (swipe[dir]) {
+            s += ' ' + dir;
+        }
+    }
+    return s;
 }
 
 var config = {

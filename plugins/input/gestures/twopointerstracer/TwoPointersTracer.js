@@ -216,8 +216,10 @@ class TwoPointersTracer extends EE {
     get drag1Vector() {
         var pointer = this.pointers[0];
         if (pointer) {
-            tmpDragVector.x = pointer.x - pointer.prevPosition.x;
-            tmpDragVector.y = pointer.y - pointer.prevPosition.y;
+            var p1 = pointer.position;
+            var p0 = pointer.prevPosition;            
+            tmpDragVector.x = p1.x - p0.x;
+            tmpDragVector.y = p1.y - p0.y;
         } else {
             tmpDragVector.x = 0;
             tmpDragVector.y = 0;
@@ -237,7 +239,7 @@ class TwoPointersTracer extends EE {
     set state(newState) {
         this.recongizedState.state = newState;
     }
-    
+
     cancel() {
         this.state = IDLE;
         return this;

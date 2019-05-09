@@ -179,7 +179,7 @@ class DragRotate extends EE {
 
         if (this._deltaRotation === undefined) {
             var p0 = this.pointer.prevPosition,
-                p1 = this.pointer;
+                p1 = this.pointer.position;
             var a0 = AngleBetween(this.x, this.y, p0.x, p0.y),
                 a1 = AngleBetween(this.x, this.y, p1.x, p1.y);
             this._deltaRotation = WrapRadians(a1 - a0);

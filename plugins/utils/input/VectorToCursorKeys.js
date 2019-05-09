@@ -1,5 +1,7 @@
 import CursorKeys from './CursorKeys.js';
-import RadToDeg from '../../utils/math/RadToDeg.js';
+import RadToDeg from '../math/RadToDeg.js';
+import DIRMODE from '../math/angle/angletodirections/Const.js';
+import AngleToDirections from '../math/angle/angletodirections/AngleToDirections.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const GetDist = Phaser.Math.Distance.Between;
@@ -97,55 +99,25 @@ class VectorToCursorKeys extends CursorKeys {
             return this;
         }
 
+        if (x1 === undefined) {
+            x1 = x0;
+            x0 = 0;
+            y1 = y0;
+            y0 = 0;
+        }
         this.start.x = x0;
         this.start.y = y0;
         this.end.x = x1;
         this.end.y = y1;
-        if (this.force < this.forceMin) {
+        if ((this.forceMin > 0) && (this.force < this.forceMin)) {
             return this;
         }
 
-        var angle = (this.angle + 360) % 360;
-        switch (this.dirMode) {
-            case 0: // up & down
-                var keyName = (angle < 180) ? 'down' : 'up';
-                this.setKeyState(keyName, true);
-                break;
-            case 1: // left & right
-                var keyName = ((angle > 90) && (angle <= 270)) ? 'left' : 'right';
-                this.setKeyState(keyName, true);
-                break;
-            case 2: // 4 dir
-                var keyName =
-                    ((angle > 45) && (angle <= 135)) ? 'down' :
-                    ((angle > 135) && (angle <= 225)) ? 'left' :
-                    ((angle > 225) && (angle <= 315)) ? 'up' :
-                    'right';
-                this.setKeyState(keyName, true);
-                break;
-            case 3: // 8 dir
-                if ((angle > 22.5) && (angle <= 67.5)) {
-                    this.setKeyState('down', true);
-                    this.setKeyState('right', true);
-                } else if ((angle > 67.5) && (angle <= 112.5)) {
-                    this.setKeyState('down', true);
-                } else if ((angle > 112.5) && (angle <= 157.5)) {
-                    this.setKeyState('down', true);
-                    this.setKeyState('left', true);
-                } else if ((angle > 157.5) && (angle <= 202.5)) {
-                    this.setKeyState('left', true);
-                } else if ((angle > 202.5) && (angle <= 247.5)) {
-                    this.setKeyState('left', true);
-                    this.setKeyState('up', true);
-                } else if ((angle > 247.5) && (angle <= 292.5)) {
-                    this.setKeyState('up', true);
-                } else if ((angle > 292.5) && (angle <= 337.5)) {
-                    this.setKeyState('up', true);
-                    this.setKeyState('right', true);
-                } else {
-                    this.setKeyState('right', true);
-                }
-                break;
+        var dirStates = AngleToDirections(this.angle, this.dirMode, true);
+        for (var dir in dirStates) {
+            if (dirStates[dir]) {
+                this.setKeyState(dir, true);
+            }
         }
 
         return this;
@@ -185,13 +157,5 @@ class VectorToCursorKeys extends CursorKeys {
         return octant;
     }
 }
-
-/** @private */
-const DIRMODE = {
-    'up&down': 0,
-    'left&right': 1,
-    '4dir': 2,
-    '8dir': 3
-};
 
 export default VectorToCursorKeys;

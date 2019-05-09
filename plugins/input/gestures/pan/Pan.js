@@ -54,16 +54,16 @@ class Pan extends OnePointerTracer {
                 break;
 
             case RECOGNIZED:
-                var pointer = this.pointer;
-                var prevPointer = this.pointer.prevPosition;
-                this.dx = pointer.x - prevPointer.x;
-                this.dy = pointer.y - prevPointer.y;
+                var p1 = this.pointer.position;
+                var p0 = this.pointer.prevPosition;
+                this.dx = p1.x - p0.x;
+                this.dy = p1.y - p0.y;
                 this.emit('pan', this);
                 break;
         }
     }
 
-    get isTapped() {
+    get isPan() {
         return (this.state === RECOGNIZED);
     }
 

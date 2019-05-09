@@ -151,7 +151,9 @@ class OnePointerTracer extends TickTask {
 
     onLastPointerMove() { }
 
-    everyTick(time, delta) { }
+    preUpdate(time, delta) { }
+
+    postUpdate(time, delta) { }
 
     get isDrag() {
         return (this.tracerState === TOUCH1) && (this.pointer.justMoved);
@@ -159,13 +161,15 @@ class OnePointerTracer extends TickTask {
 
     startTicking() {
         super.startTicking();
-        this.scene.events.on('preupdate', this.everyTick, this);
+        this.scene.events.on('preupdate', this.preUpdate, this);
+        this.scene.events.on('postupdate', this.postUpdate, this);
     }
 
     stopTicking() {
         super.stopTicking();
         if (this.scene) { // Scene might be destoryed
-            this.scene.events.off('preupdate', this.everyTick, this);
+            this.scene.events.off('preupdate', this.preUpdate, this);
+            this.scene.events.off('postupdate', this.postUpdate, this);
         }
     }
 
