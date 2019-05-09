@@ -52,6 +52,10 @@ class FSM {
         this.destroyEventEmitter();
     }
 
+    destroy() {
+        this.shutdown();
+    }
+
     resetFromJSON(o) {
         this.setEnable(GetValue(o, 'enable', true));
         this.start(GetValue(o, 'start', undefined));
