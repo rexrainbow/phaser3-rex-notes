@@ -12,7 +12,7 @@ class Demo extends Phaser.Scene {
     create() {
         this.print = print = this.add.text(0, 0, '')
 
-        this.swipeInput = this.rexGestures.add.swipe()
+        this.swipeInput = this.rexGestures.add.swipe({ velocityThreshold: 1000 })
             .on('swipe', function (swipe) {
                 print.text += `swipe, v = ${swipe.dragVelocity}\n`;
             }, this);
