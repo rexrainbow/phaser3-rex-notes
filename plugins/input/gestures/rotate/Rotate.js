@@ -1,5 +1,6 @@
 import TwoPointersTracer from '../twopointerstracer/TwoPointersTracer.js';
 import FSM from '../../../fsm.js';
+import SpinObject from './SpinObject.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const WrapDegrees = Phaser.Math.Angle.WrapDegrees; // Wrap degrees: -180 to 180 
@@ -81,7 +82,17 @@ class Rotate extends TwoPointersTracer {
         this.rotationThreshold = angle; // Degrees
         return this;
     }
+
 }
+
+var methods = {
+    spinObject: SpinObject,
+};
+Object.assign(
+    Rotate.prototype,
+    methods
+);
+
 
 const IDLE = 'IDLE';
 const BEGIN = 'BEGIN';

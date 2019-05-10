@@ -10,31 +10,29 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var print = this.add.text(0, 0, '')
+        var gameObejects = DrawSomething(this);
+        var print = this.add.text(0, 580, '');
 
-        var line = this.add.graphics({
-            x: 400,
-            y: 300,
-            lineStyle: {
-                width: 10,
-                color: 0xffffff,
-                alpha: 1
-            },
-        }).lineBetween(0, 0, 150, 0);
-
-        var rotate = this.rexGestures.add.rotate();
-        rotate
+        this.rexGestures.add.rotate()
             .on('rotate', function (rotate) {
-                line.angle += rotate.angle;
-                print.text = rotate.angle;
-            }, this)
-            .on('rotatestart', function (rotate) {
-                print.text = 'rotatestart';
-            }, this)
-            .on('rotateend', function (rotate) {
-                print.text = 'rotateend';
+                rotate.spinObject(gameObejects);
             }, this)
     }
+}
+
+const RandomBetween = Phaser.Math.Between;
+var DrawSomething = function (scene) {
+    var gameObjects = []
+    for (var i = 0; i < 20; i++) {
+        gameObjects.push(
+            scene.add.rectangle(
+                RandomBetween(50, 750), RandomBetween(50, 550),
+                RandomBetween(20, 50), RandomBetween(20, 50),
+                RandomBetween(0, 0x1000000)
+            )
+        );
+    }
+    return gameObjects;
 }
 
 var config = {
