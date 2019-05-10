@@ -4654,7 +4654,13 @@ If set to <code>false</code> it will emit events from all Game Objects below a P
 <li>Position<ul>
 <li>Current touching<ul>
 <li>Position in screen : <code>pointer.x</code> , <code>pointer.y</code></li>
-<li>Position in camera : <code>pointer.worldX</code> , <code>pointer.worldY</code></li>
+<li>Position in camera : <code>pointer.worldX</code> , <code>pointer.worldY</code><ul>
+<li>Get world position in a camera
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">getWorldPoint</span><span class="p">(</span><span class="nx">pointer</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+<span class="c1">// var out = camera.getWorldPoint(pointer.x, pointer.y, out);</span>
+</pre></div></li>
+</ul>
+</li>
 <li>Position of previous moving : <code>pointer.prevPosition.x</code> , <code>pointer.prevPosition.y</code><ul>
 <li>Updating when pointer-down, potiner-move, or pointer-up.</li>
 </ul>
