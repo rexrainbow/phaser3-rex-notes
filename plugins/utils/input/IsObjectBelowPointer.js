@@ -8,6 +8,7 @@ var IsObjectBelowPointer = function (gameObject, pointer, preTest, postTest) {
         if (isHit && postTest && !postTest(gameObject, pointer)) {
             return false;
         }
+        return isHit;
     } else {
         var inputManager = gameObject.scene.input.manager;
         var pointersTotal = inputManager.pointersTotal;
@@ -24,14 +25,12 @@ var IsObjectBelowPointer = function (gameObject, pointer, preTest, postTest) {
                 continue;
             }
             if (isHit) {
-                break;
+                return true;
             }
         }
 
         return false;
     }
-
-    return isHit;
 }
 
 var HitTest = function (gameObject, pointer) {
