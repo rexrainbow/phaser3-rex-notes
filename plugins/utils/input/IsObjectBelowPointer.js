@@ -1,4 +1,4 @@
-var IsObjectInTouching = function (gameObject, pointer, callback, scope) {
+var IsObjectBelowPointer = function (gameObject, pointer, callback, scope) {
     var isHit = false;
     if (pointer) {
         isHit = HitTest(gameObject, pointer);
@@ -36,9 +36,6 @@ var IsObjectInTouching = function (gameObject, pointer, callback, scope) {
 }
 
 var HitTest = function (gameObject, pointer) {
-    if (!pointer.isDown) {
-        return false;
-    }
     var scene = gameObject.scene;
     var cameras = scene.input.cameras.getCamerasBelowPointer(pointer);
     var inputManager = scene.input.manager;
@@ -55,4 +52,4 @@ var HitTest = function (gameObject, pointer) {
     return false;
 }
 
-export default IsObjectInTouching;
+export default IsObjectBelowPointer;

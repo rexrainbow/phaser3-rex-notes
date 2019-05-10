@@ -1,9 +1,12 @@
-import IsObjectInTouching from '../../../plugins/utils/input/IsObjectInTouching.js';
+import IsObjectBelowPointer from '../../../plugins/utils/input/IsObjectBelowPointer.js';
 
 var IsInTouching = function (pointer) {
     if (!this.input) {
         this.setInteractive();
     }
-    return IsObjectInTouching(this, pointer);
+    if (pointer && (!pointer.isDown)) {
+        return false;
+    }
+    return IsObjectBelowPointer(this, pointer);
 }
 export default IsInTouching;
