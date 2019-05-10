@@ -258,3 +258,12 @@ var out = camera.getWorldPoint(x, y);
 
 !!! warning
     Works for zoom of 1 with any resolution, but **resolution > 1 and zoom !== 1 breaks**
+
+### Get cameras below pointer
+
+```javascript
+var cameras = scene.cameras.getCamerasBelowPointer(pointer);
+```
+
+- `cameras` : An array of cameras.
+- `pointer` : `{x, y}`

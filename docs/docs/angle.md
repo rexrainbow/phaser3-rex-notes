@@ -52,3 +52,14 @@ Convert angle value, built-in methods of phaser.
     - `deg` : Shortest angle in degrees
         - deg > 0 : Counter-ClockWise rotation
         - deg < 0 : ClockWise rotation
+
+### Rotate around position
+
+- Rotate a `point` around `x` and `y` by the given `angle`.
+    ```javascript
+    var out = Phaser.Math.RotateAround(point, x, y, angle);
+    ```
+- Rotate a `point` around `x` and `y` by the given `angle` and `distance`.
+    ```javascript
+    var out = Phaser.Math.RotateAroundDistance(point, x, y, angle, distance);
+    ```
