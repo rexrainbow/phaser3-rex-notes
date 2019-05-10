@@ -1,13 +1,12 @@
-var IsObjectBelowPointer = function (gameObject, pointer, callback, scope) {
+var IsObjectBelowPointer = function (gameObject, pointer, preTest, postTest) {
     var isHit = false;
     if (pointer) {
+        if (preTest && !preTest(gameObject, pointer)) {
+            return false;
+        }
         isHit = HitTest(gameObject, pointer);
-        if (isHit && callback) {
-            if (scope) {
-                isHit = callback.call(scope, pointer);
-            } else {
-                isHit = callback(pointer);
-            }
+        if (isHit && postTest && !postTest(gameObject, pointer)) {
+            return false;
         }
     } else {
         var inputManager = gameObject.scene.input.manager;
@@ -15,14 +14,14 @@ var IsObjectBelowPointer = function (gameObject, pointer, callback, scope) {
         var pointers = inputManager.pointers,
             pointer;
         for (var i = 0; i < pointersTotal; i++) {
+            isHit = false;
             pointer = pointers[i];
+            if (preTest && !preTest(gameObject, pointer)) {
+                continue;
+            }
             isHit = HitTest(gameObject, pointer);
-            if (isHit && callback) {
-                if (scope) {
-                    isHit = callback.call(scope, pointer);
-                } else {
-                    isHit = callback(pointer);
-                }
+            if (isHit && postTest && !postTest(gameObject, pointer)) {
+                continue;
             }
             if (isHit) {
                 break;

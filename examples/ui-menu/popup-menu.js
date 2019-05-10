@@ -11,76 +11,53 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {}
+    preload() { }
 
     create() {
-        var items = [{
+        var items = [
+            {
                 name: 'AA',
-                children: [{
+                children: [
+                    {
                         name: 'AA-0',
-                        children: [{
-                                name: 'AA-00'
-                            },
-                            {
-                                name: 'AA-01'
-                            },
-                            {
-                                name: 'AA-02'
-                            },
+                        children: [
+                            { name: 'AA-00' },
+                            { name: 'AA-01' },
+                            { name: 'AA-02' },
                         ]
                     },
                     {
                         name: 'AA-1',
-                        children: [{
-                                name: 'AA-10'
-                            },
-                            {
-                                name: 'AA-11'
-                            },
-                            {
-                                name: 'AA-12'
-                            },
+                        children: [
+                            { name: 'AA-10' },
+                            { name: 'AA-11' },
+                            { name: 'AA-12' },
                         ]
                     },
                     {
                         name: 'AA-2',
-                        children: [{
-                                name: 'AA-20'
-                            },
-                            {
-                                name: 'AA-21'
-                            },
-                            {
-                                name: 'AA-22'
-                            },
+                        children: [
+                            { name: 'AA-20' },
+                            { name: 'AA-21' },
+                            { name: 'AA-22' },
                         ]
                     },
                 ]
             },
             {
                 name: 'BB',
-                children: [{
-                        name: 'BB-0'
-                    },
-                    {
-                        name: 'BB-1'
-                    },
-                    {
-                        name: 'BB-2'
-                    },
+                children: [
+                    { name: 'BB-0' },
+                    { name: 'BB-1' },
+                    { name: 'BB-2' },
                 ]
             },
             {
                 name: 'CC',
-                children: [{
-                        name: 'CC-0'
-                    },
-                    {
-                        name: 'CC-1'
-                    },
-                    {
-                        name: 'CC-2'
-                    },
+                children: [
+                    { name: 'CC-0' },
+                    { name: 'CC-1' },
+                    { name: 'CC-2' },
                 ]
             },
         ];
@@ -101,7 +78,7 @@ class Demo extends Phaser.Scene {
         }, this);
     }
 
-    update() {}
+    update() { }
 }
 
 var createMenu = function (scene, x, y, items, onClick) {

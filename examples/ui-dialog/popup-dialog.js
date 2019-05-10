@@ -8,7 +8,7 @@ class Demo extends Phaser.Scene {
 
     }
 
-    preload() {}
+    preload() { }
 
     create() {
         this.print = this.add.text(0, 580, 'Click to pop-up dialog');
@@ -24,11 +24,9 @@ class Demo extends Phaser.Scene {
                     scene.rexUI.add.roundRectangle(x, y, 0, 0, 20, color)
                     scene.print.text = 'Add object at (' + x + ',' + y + ')';
                     dialog.scaleDownDestroy(100);
-                    dialog.state = -1;
+                    dialog = undefined;
                 });
                 scene.print.text = 'Click (' + x + ',' + y + ')';
-            } else if (dialog.state === -1) {
-                dialog = undefined;
             } else if (!dialog.isInTouching(pointer)) {
                 dialog.scaleDownDestroy(100);
                 dialog = undefined;
@@ -36,48 +34,48 @@ class Demo extends Phaser.Scene {
         }, this);
     }
 
-    update() {}
+    update() { }
 }
 
 var createDialog = function (scene, x, y, onClick) {
     var dialog = scene.rexUI.add.dialog({
-            x: x,
-            y: y,
+        x: x,
+        y: y,
 
-            background: scene.rexUI.add.roundRectangle(0, 0, 100, 100, 20, 0xf57f17),
+        background: scene.rexUI.add.roundRectangle(0, 0, 100, 100, 20, 0xf57f17),
 
-            title: scene.rexUI.add.label({
-                background: scene.rexUI.add.roundRectangle(0, 0, 100, 40, 20, 0xbc5100),
-                text: scene.add.text(0, 0, 'Pick a color', {
-                    fontSize: '20px'
-                }),
-                space: {
-                    left: 15,
-                    right: 15,
-                    top: 10,
-                    bottom: 10
-                }
+        title: scene.rexUI.add.label({
+            background: scene.rexUI.add.roundRectangle(0, 0, 100, 40, 20, 0xbc5100),
+            text: scene.add.text(0, 0, 'Pick a color', {
+                fontSize: '20px'
             }),
-
-            actions: [
-                scene.rexUI.add.roundRectangle(0, 0, 0, 0, 20, 0xe91e63),
-                scene.rexUI.add.roundRectangle(0, 0, 0, 0, 20, 0x673ab7),
-                scene.rexUI.add.roundRectangle(0, 0, 0, 0, 20, 0x2196f3),
-                scene.rexUI.add.roundRectangle(0, 0, 0, 0, 20, 0x00bcd4),
-                scene.rexUI.add.roundRectangle(0, 0, 0, 0, 20, 0x4caf50),
-                scene.rexUI.add.roundRectangle(0, 0, 0, 0, 20, 0xcddc39),
-            ],
-
             space: {
-                title: 10,
-                action: 5,
-
-                left: 10,
-                right: 10,
+                left: 15,
+                right: 15,
                 top: 10,
-                bottom: 10,
-            },
-        })
+                bottom: 10
+            }
+        }),
+
+        actions: [
+            scene.rexUI.add.roundRectangle(0, 0, 0, 0, 20, 0xe91e63),
+            scene.rexUI.add.roundRectangle(0, 0, 0, 0, 20, 0x673ab7),
+            scene.rexUI.add.roundRectangle(0, 0, 0, 0, 20, 0x2196f3),
+            scene.rexUI.add.roundRectangle(0, 0, 0, 0, 20, 0x00bcd4),
+            scene.rexUI.add.roundRectangle(0, 0, 0, 0, 20, 0x4caf50),
+            scene.rexUI.add.roundRectangle(0, 0, 0, 0, 20, 0xcddc39),
+        ],
+
+        space: {
+            title: 10,
+            action: 5,
+
+            left: 10,
+            right: 10,
+            top: 10,
+            bottom: 10,
+        },
+    })
         .layout()
         .pushIntoBounds()
         //.drawBounds(this.add.graphics(), 0xff0000)

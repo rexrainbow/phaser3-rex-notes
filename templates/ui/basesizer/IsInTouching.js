@@ -4,9 +4,10 @@ var IsInTouching = function (pointer) {
     if (!this.input) {
         this.setInteractive();
     }
-    if (pointer && (!pointer.isDown)) {
-        return false;
-    }
-    return IsObjectBelowPointer(this, pointer);
+    return IsObjectBelowPointer(this, pointer, preTest);
+}
+
+var preTest = function (gameObject, pointer) {
+    return pointer.isDown;
 }
 export default IsInTouching;
