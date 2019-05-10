@@ -11,12 +11,11 @@ class Demo extends Phaser.Scene {
 
     create() {
         var gameObejects = DrawSomething(this);
-        var print = this.add.text(0, 580, '');
 
         this.rexGestures.add.rotate()
             .on('rotate', function (rotate) {
                 rotate.spinObject(gameObejects);
-            }, this)
+            });
     }
 }
 

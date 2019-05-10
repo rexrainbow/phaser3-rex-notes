@@ -47,7 +47,7 @@ class Rotate extends TwoPointersTracer {
     }
 
     onDrag2Start() {
-        this.prevAngle = WrapDegrees(this.dragAngle); // Degrees
+        this.prevAngle = WrapDegrees(RadToDeg(this.angleBetween)); // Degrees
         this.state = (this.rotationThreshold === 0) ? RECOGNIZED : BEGIN;
     }
 

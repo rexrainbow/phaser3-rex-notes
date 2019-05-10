@@ -15,7 +15,7 @@ var SpinObject = function (gameObject, camera) {
         x = tmpPos.x;
         y = tmpPos.y;
     }
-
+    var angle = this.rotation;
     if (Array.isArray(gameObject)) {
         var gameObjects = gameObject;
         for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
