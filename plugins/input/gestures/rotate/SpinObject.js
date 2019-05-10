@@ -5,16 +5,18 @@ var SpinObject = function (gameObject, camera) {
         return this;
     }
 
-    var p0 = this.pointers[0];
-    var x, y;
     if (camera === undefined) {
-        x = p0.worldX;
-        y = p0.worldY;
-    } else {
-        camera.getWorldPoint(p0.x, p0.y, tmpPos);
-        x = tmpPos.x;
-        y = tmpPos.y;
+        camera = this.pointers[0].camera;
     }
+
+    var p0 = this.pointers[0],
+        p1 = this.pointers[1];
+    var x = (p0.x + p1.x) / 2,
+        y = (p0.y + p1.y) / 2;
+    camera.getWorldPoint(x, y, tmpPos);
+    x = tmpPos.x;
+    y = tmpPos.y;
+
     var angle = this.rotation;
     if (Array.isArray(gameObject)) {
         var gameObjects = gameObject;
