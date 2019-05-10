@@ -1,5 +1,5 @@
 import GetSceneObject from '../../utils/system/GetSceneObject.js';
-import IsObjectInTouching from '../../utils/input/IsObjectInTouching.js';
+import IsObjectBelowPointer from '../../utils/input/IsObjectBelowPointer.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const DistanceBetween = Phaser.Math.Distance.Between;
@@ -88,10 +88,15 @@ class Drag {
             pointer;
         for (var i = 0; i < pointersTotal; i++) {
             pointer = pointers[i];
+            if (!pointer.isDown) {
+                continue;
+            }
+
             if (inputPlugin.getDragState(pointer) > 0) {
                 continue;
             }
-            if (IsObjectInTouching(this.gameObject, pointer)) {
+
+            if (IsObjectBelowPointer(this.gameObject, pointer)) {
                 inputPlugin.setDragState(pointer, 1);
                 break;
             }

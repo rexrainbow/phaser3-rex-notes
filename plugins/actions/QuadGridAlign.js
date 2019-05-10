@@ -1,5 +1,5 @@
 import QuadGrid from '../utils/grid/quad/Quad.js';
-import GlobZone from '../utils/align/GlobZone.js';
+import GlobZone from '../utils/actions/GlobZone.js';
 
 const AlignIn = Phaser.Display.Align.In.QuickSet;
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;

@@ -1,5 +1,5 @@
 import RunChildrenWrap from './RunChildrenWrap.js';
-import GlobZone from '../../../plugins/utils/align/GlobZone.js';
+import GlobZone from '../../../plugins/utils/actions/GlobZone.js';
 
 const AlignIn = Phaser.Display.Align.In.QuickSet;
 

@@ -1,6 +1,6 @@
 import ResizeText from './ResizeText.js';
 import ResetTextObjectPosition from './ResetTextObjectPosition.js';
-import GlobZone from '../../../plugins/utils/align/GlobZone.js';
+import GlobZone from '../../../plugins/utils/actions/GlobZone.js';
 
 const AlignIn = Phaser.Display.Align.In.QuickSet;
 

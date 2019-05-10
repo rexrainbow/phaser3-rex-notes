@@ -1,5 +1,5 @@
 import ResizeGameObject from '../../../plugins/utils/size/ResizeGameObject.js';
-import GlobZone from '../../../plugins/utils/align/GlobZone.js';
+import GlobZone from '../../../plugins/utils/actions/GlobZone.js';
 
 const AlignIn = Phaser.Display.Align.In.QuickSet;
 const ALIGN_CENTER = Phaser.Display.Align.CENTER;
