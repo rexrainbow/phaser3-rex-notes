@@ -77,8 +77,7 @@ class InputText extends DOMElement {
         var style = this.node.style;
         style.width = width + 'px';
         style.height = height + 'px';
-        var nodeBounds = this.node.getBoundingClientRect();
-        this.setSize(nodeBounds.width || 0, nodeBounds.height || 0);
+        this.updateSize();
         return this;
     }
 
