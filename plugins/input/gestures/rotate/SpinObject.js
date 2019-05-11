@@ -9,21 +9,29 @@ var SpinObject = function (gameObject, camera) {
         camera = this.pointers[0].camera;
     }
 
-    var p0 = this.pointers[0],
-        p1 = this.pointers[1];
-    var x = (p0.x + p1.x) / 2,
-        y = (p0.y + p1.y) / 2;
-    camera.getWorldPoint(x, y, tmpPos);
-    x = tmpPos.x;
-    y = tmpPos.y;
+    var centerX = this.centerX,
+        centerY = this.centerY,
+        prevCenterX = this.prevCenterX,
+        prevCenterY = this.prevCenterY;
+    var deltaX = centerX - prevCenterX,
+        deltaY = centerY - prevCenterY;
+
+    camera.getWorldPoint(centerX, centerY, tmpPos);
+    var centerWorldX = tmpPos.x;
+    var centerWorldY = tmpPos.y;
 
     var angle = this.rotation;
     if (Array.isArray(gameObject)) {
         var gameObjects = gameObject;
         for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-            RotateObjectAround(gameObjects[i], x, y, angle);
+            gameObject = gameObjects[i];
+            gameObject.x += deltaX;
+            gameObject.y += deltaY;
+            RotateObjectAround(gameObject, centerWorldX, centerWorldY, angle);
         }
     } else {
+        gameObject.x += deltaX;
+        gameObject.y += deltaY;
         RotateObjectAround(gameObject, x, y, angle);
     }
     return this;

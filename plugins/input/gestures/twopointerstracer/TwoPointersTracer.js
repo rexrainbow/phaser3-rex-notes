@@ -1,3 +1,5 @@
+import Clear from '../../../utils/object/Clear.js';
+
 const EE = Phaser.Events.EventEmitter;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const SpliceOne = Phaser.Utils.Array.SpliceOne;
@@ -13,8 +15,8 @@ class TwoPointersTracer extends EE {
 
         super();
         this.scene = scene;
-        // this.recongizedState = new stateClass(this);
         this.pointers = [];
+        this.movedState = {};
         this.resetFromJSON(config);
         this.boot();
     }
@@ -25,6 +27,7 @@ class TwoPointersTracer extends EE {
 
         this.tracerState = TOUCH0;
         this.pointers.length = 0;
+        Clear(this.movedState);
         return this;
     }
 
@@ -36,6 +39,8 @@ class TwoPointersTracer extends EE {
     }
 
     shutdown() {
+        this.pointers.length = 0;
+        Clear(this.movedState);
         if (this.scene) {
             this.scene.input.off('pointerdown', this.onPointerDown, this);
             this.scene.input.off('pointerup', this.onPointerUp, this);
@@ -83,6 +88,7 @@ class TwoPointersTracer extends EE {
         if (this.pointers.length === 2) {
             return;
         } else {
+            this.movedState[pointer.id] = false;
             this.pointers.push(pointer);
         }
 
@@ -112,6 +118,7 @@ class TwoPointersTracer extends EE {
         if (index === -1) { // Not in catched pointers
             return;
         } else {
+            delete this.movedState[pointer.id];
             SpliceOne(this.pointers, index);
         }
 
@@ -133,23 +140,27 @@ class TwoPointersTracer extends EE {
             return;
         }
 
-        if (!pointer.isDown) {
-            return;
-        }
-        var isInsideBounds = (this.bounds) ? this.bounds.contains(pointer.x, pointer.y) : true;
-        var isCatchedPointer = (this.pointers.indexOf(pointer) !== -1);
-        if (!isCatchedPointer && isInsideBounds) { // Pointer moves into bounds
-            this.onPointerDown(pointer);
-        } else if (isCatchedPointer && !isInsideBounds) { // Pointer moves out of bounds
-            this.onPointerUp(pointer);
-        } else {  // Pointer drags in bounds
-            switch (this.tracerState) {
-                case TOUCH1:
-                    this.onDrag1();
-                    break;
-                case TOUCH2:
-                    this.onDrag2();
-                    break;
+        if (pointer.isDown) {
+            var isInsideBounds = (this.bounds) ? this.bounds.contains(pointer.x, pointer.y) : true;
+            var isCatchedPointer = (this.pointers.indexOf(pointer) !== -1);
+            if (!isCatchedPointer && isInsideBounds) { // Pointer moves into bounds
+                this.onPointerDown(pointer);
+            } else if (isCatchedPointer && !isInsideBounds) { // Pointer moves out of bounds
+                this.onPointerUp(pointer);
+            } else {  // Pointer drags in bounds
+                if (!this.movedState[pointer.id]) {
+                    this.movedState[pointer.id] = (pointer.x !== pointer.downX) || (pointer.y !== pointer.downY);
+                }
+                if (this.movedState[pointer.id]) {
+                    switch (this.tracerState) {
+                        case TOUCH1:
+                            this.onDrag1();
+                            break;
+                        case TOUCH2:
+                            this.onDrag2();
+                            break;
+                    }
+                }
             }
         }
     }
@@ -159,6 +170,7 @@ class TwoPointersTracer extends EE {
             this.onDrag2End();
         }
         this.pointers.length = 0;
+        Clear(this.movedState);
         this.tracerState = TOUCH0;
         return this;
     }
@@ -188,11 +200,15 @@ class TwoPointersTracer extends EE {
     }
 
     get isDrag() {
-        return (this.tracerState === TOUCH1) && (this.pointers[0].justMoved);
+        return (this.tracerState === TOUCH1) &&
+            (this.pointers[0].justMoved) &&
+            (this.movedState[this.pointers[0].id]);
     }
 
     get isDrag2() {
-        return (this.tracerState === TOUCH2) && (this.pointers[0].justMoved || this.pointers[1].justMoved);
+        return (this.tracerState === TOUCH2) &&
+            (this.pointers[0].justMoved || this.pointers[1].justMoved) &&
+            (this.movedState[this.pointers[0].id] || this.movedState[this.pointers[1].id]);
     }
 
     get distanceBetween() {
@@ -215,9 +231,9 @@ class TwoPointersTracer extends EE {
 
     get drag1Vector() {
         var pointer = this.pointers[0];
-        if (pointer) {
+        if (pointer && this.movedState[pointer.id]) {
             var p1 = pointer.position;
-            var p0 = pointer.prevPosition;            
+            var p0 = pointer.prevPosition;
             tmpDragVector.x = p1.x - p0.x;
             tmpDragVector.y = p1.y - p0.y;
         } else {
@@ -225,6 +241,42 @@ class TwoPointersTracer extends EE {
             tmpDragVector.y = 0;
         }
         return tmpDragVector;
+    }
+
+    get centerX() {
+        if (this.tracerState !== TOUCH2) {
+            return 0;
+        }
+        var p0 = this.pointers[0].position;
+        var p1 = this.pointers[1].position;
+        return (p0.x + p1.x) / 2;
+    }
+
+    get centerY() {
+        if (this.tracerState !== TOUCH2) {
+            return 0;
+        }
+        var p0 = this.pointers[0].position;
+        var p1 = this.pointers[1].position;
+        return (p0.y + p1.y) / 2;
+    }
+
+    get prevCenterX() {
+        if (this.tracerState !== TOUCH2) {
+            return 0;
+        }
+        var preP0 = (this.movedState[this.pointers[0].id]) ? this.pointers[0].prevPosition : this.pointers[0].position;
+        var preP1 = (this.movedState[this.pointers[1].id]) ? this.pointers[1].prevPosition : this.pointers[1].position;
+        return (preP0.x + preP1.x) / 2;
+    }
+
+    get prevCenterY() {
+        if (this.tracerState !== TOUCH2) {
+            return 0;
+        }
+        var preP0 = (this.movedState[this.pointers[0].id]) ? this.pointers[0].prevPosition : this.pointers[0].position;
+        var preP1 = (this.movedState[this.pointers[1].id]) ? this.pointers[1].prevPosition : this.pointers[1].position;
+        return (preP0.y + preP1.y) / 2;
     }
 
     setRecongizedStateObject(stateObject) {

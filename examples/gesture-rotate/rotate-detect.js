@@ -15,7 +15,16 @@ class Demo extends Phaser.Scene {
         this.rexGestures.add.rotate()
             .on('rotate', function (rotate) {
                 rotate.spinObject(gameObejects);
-            });
+            })
+            .on('drag1', function (rotate) {
+                var dragVector = rotate.drag1Vector;
+                var gameObeject;
+                for (var i = 0, cnt = gameObejects.length; i < cnt; i++) {
+                    gameObeject = gameObejects[i];
+                    gameObeject.x += dragVector.x;
+                    gameObeject.y += dragVector.y;
+                }
+            })
     }
 }
 

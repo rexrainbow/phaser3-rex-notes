@@ -19,6 +19,7 @@ class OnePointerTracer extends TickTask {
         // this.recongizedState = new stateClass(this);
         this.pointer = undefined;
         this.lastPointer = undefined; // Last catched pointer
+        this.movedState = false;
         return this;
     }
 
@@ -31,7 +32,9 @@ class OnePointerTracer extends TickTask {
     }
 
     shutdown() {
-        super.shutdown();
+        this.pointer = undefined;
+        this.lastPointer = undefined; // Last catched pointer
+        this.movedState = false;
         if (this.scene) {
             this.scene.input.off('pointerdown', this.onPointerDown, this);
             this.scene.input.off('pointerup', this.onPointerUp, this);
@@ -39,6 +42,7 @@ class OnePointerTracer extends TickTask {
             this.scene.events.off('destroy', this.destroy, this);
             this.scene = undefined;
         }
+        super.shutdown();
     }
 
     destroy() {
@@ -81,6 +85,7 @@ class OnePointerTracer extends TickTask {
 
         this.pointer = pointer;
         this.lastPointer = pointer;
+        this.movedState = false;
         this.tracerState = TOUCH1;
         this.onDragStart();
     }
@@ -100,6 +105,7 @@ class OnePointerTracer extends TickTask {
         }
 
         this.pointer = undefined;
+        this.movedState = false;
         this.tracerState = TOUCH0;
         this.onDragEnd();
     }
@@ -117,7 +123,12 @@ class OnePointerTracer extends TickTask {
             } else if (isCatchedPointer && !isInsideBounds) { // Pointer moves out of bounds
                 this.onPointerUp(pointer);
             } else { // Pointer drags in bounds
-                this.onDrag();
+                if (!this.movedState) {
+                    this.movedState = (pointer.x !== pointer.downX) || (pointer.y !== pointer.downY);
+                }
+                if (this.movedState) {
+                    this.onDrag();
+                }
             }
         } else {
             var isInsideBounds = (this.bounds) ? this.bounds.contains(pointer.x, pointer.y) : true;

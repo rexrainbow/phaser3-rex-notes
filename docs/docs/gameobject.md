@@ -130,6 +130,31 @@ var output = gameObject.getCenter(output);      // output: {x, y}
 var output = gameObject.getBounds(output);      // output: {x, y, width, height}
 ```
 
+### Origin
+
+- Get
+    ```javascript
+    var originX = gameObject.originX;
+    var originY = gameObject.originY;
+    ```
+- Set
+    ```javascript
+    gameObject.setOrigin(x, y);
+    // gameObject.setOrigin(x); // y = x
+    ```
+    - Set to top-left
+        ```javascript
+        gameObject.setOrigin(0);
+        ```
+    - Set to center
+        ```javascript
+        gameObject.setOrigin(0.5);
+        ```
+    - Set to bottom-right
+        ```javascript
+        gameObject.setOrigin(1);
+        ```
+
 ### Tint
 
 - Get

@@ -37,13 +37,14 @@ class Pinch extends TwoPointersTracer {
 
     resetFromJSON(o) {
         super.resetFromJSON(o);
-        this.setScaleThreshold(GetValue(o, 'threshold', 0));
+        this.setDragThreshold(GetValue(o, 'threshold', 0));
         return this;
     }
 
     onDrag2Start() {
+        this.scaleFactor = 1;
         this.prevDistance = this.distanceBetween;
-        this.state = (this.scaleThreshold === 0) ? RECOGNIZED : BEGIN;
+        this.state = (this.dragThreshold === 0) ? RECOGNIZED : BEGIN;
     }
 
     onDrag2End() {
@@ -51,17 +52,21 @@ class Pinch extends TwoPointersTracer {
     }
 
     onDrag2() {
-        var curDistance = this.distanceBetween;
-        this.scaleFactor = curDistance / this.prevDistance;
-
-        if (this.state === BEGIN) {
-            if (Math.abs(1 - this.scaleFactor) >= this.scaleThreshold) {
-                this.state = RECOGNIZED;
+        switch (this.state) {
+            case BEGIN:
+                if ((this.pointers[0].getDistance() + this.pointers[1].getDistance()) >= this.dragThreshold) {
+                    var curDistance = this.distanceBetween;
+                    this.scaleFactor = curDistance / this.prevDistance;
+                    this.prevDistance = curDistance;
+                    this.state = RECOGNIZED;
+                }
+                break;
+            case RECOGNIZED:
+                var curDistance = this.distanceBetween;
+                this.scaleFactor = curDistance / this.prevDistance;
+                this.emit('pinch', this);
                 this.prevDistance = curDistance;
-            }
-        } else {
-            this.emit('pinch', this);
-            this.prevDistance = curDistance;
+                break;
         }
     }
 
@@ -69,8 +74,8 @@ class Pinch extends TwoPointersTracer {
         return (this.state === RECOGNIZED);
     }
 
-    setScaleThreshold(scale) {
-        this.scaleThreshold = scale;
+    setDragThreshold(distance) {
+        this.dragThreshold = distance;
         return this;
     }
 }

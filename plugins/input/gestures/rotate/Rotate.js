@@ -42,7 +42,7 @@ class Rotate extends TwoPointersTracer {
 
     resetFromJSON(o) {
         super.resetFromJSON(o);
-        this.setRotationThreshold(GetValue(o, 'threshold', 0));
+        this.setDragThreshold(GetValue(o, 'threshold', 0));
         return this;
     }
 
@@ -56,17 +56,21 @@ class Rotate extends TwoPointersTracer {
     }
 
     onDrag2() {
-        var curAngle = WrapDegrees(RadToDeg(this.angleBetween));
-        this.angle = ShortestBetween(this.prevAngle, curAngle);
-
-        if (this.state === BEGIN) {
-            if (Math.abs(this.angle) >= this.rotationThreshold) {
-                this.state = RECOGNIZED;
+        switch (this.state) {
+            case BEGIN:
+                if ((this.pointers[0].getDistance() + this.pointers[1].getDistance()) >= this.dragThreshold) {
+                    var curAngle = WrapDegrees(RadToDeg(this.angleBetween));
+                    this.angle = ShortestBetween(this.prevAngle, curAngle);
+                    this.prevAngle = curAngle;
+                    this.state = RECOGNIZED;
+                }
+                break;
+            case RECOGNIZED:
+                var curAngle = WrapDegrees(RadToDeg(this.angleBetween));
+                this.angle = ShortestBetween(this.prevAngle, curAngle);
                 this.prevAngle = curAngle;
-            }
-        } else {
-            this.emit('rotate', this);
-            this.prevAngle = curAngle;
+                this.emit('rotate', this);
+                break;
         }
     }
 
@@ -78,8 +82,8 @@ class Rotate extends TwoPointersTracer {
         return DegToRad(this.angle);
     }
 
-    setRotationThreshold(angle) {
-        this.rotationThreshold = angle; // Degrees
+    setDragThreshold(distance) {
+        this.dragThreshold = distance;
         return this;
     }
 
