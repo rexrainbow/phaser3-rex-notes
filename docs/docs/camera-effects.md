@@ -121,3 +121,18 @@ camera.on('camerazoomstart', camera, zoom, duration, zoomValue);
 ```javascript
 camera.on('camerazoomcomplete', camera, zoom);
 ```
+
+### Mask
+
+- Add mask
+    ```javascript
+    camera.setMask(mask);
+    ```
+- Clear mask
+    ```javascript
+    camera.clearMask();
+    ```
+
+More detail about [mask](mask.md)
+
+

@@ -54,8 +54,15 @@ Apply mask on game object. Built-in render of phaser.
     image.clearMask(true);
     ```
 
-### Invert mask
+### Invert alpha
 
-```javascript
-mask.invertAlpha = true;
-```
+- Inverse alpha
+    ```javascript
+    mask.setInvertAlpha();
+    // mask.invertAlpha = true;
+    ```
+- Disable
+    ```javascript
+    mask.setInvertAlpha(false);
+    // mask.invertAlpha = false;
+    ```

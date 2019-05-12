@@ -67,6 +67,10 @@ Built-in keyboard events of phaser.
     var isDown = keyObj.isDown;
     var isUp = keyObj.isUp;
     ```
+- Duration of key-down
+    ```javascript
+    var duration = keyObj.getDuration(); // ms
+    ```
 - Enable/disable
     ```javascript
     keyObj.enabled = enabled; // Set false to disable key event

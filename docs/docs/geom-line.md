@@ -223,21 +223,52 @@ x1, y2, x2, y2 are equal.
 
 ### Intersection
 
-- Line to [circle](geom-circle.md)
+#### Line to [circle](geom-circle.md)
+
+- Is intersection
     ```javascript
     var result = Phaser.Geom.Intersects.LineToCircle(line, circle);
-    // var result = Phaser.Geom.Intersects.LineToCircle(line, circle, nearest);  // nearest : nearest point on line
+    // var result = Phaser.Geom.Intersects.LineToCircle(line, circle, nearest);
     ```
-- Line to [rectangle](geom-rectangle.md)
+    - `nearest` : Nearest point on line.
+- Get intersection points
+    ```javascript
+    var result = Phaser.Geom.Intersects.GetLineToCircle(line, circle);
+    // var out = Phaser.Geom.Intersects.GetLineToCircle(line, circle, out);
+    ```
+
+### Line to [rectangle](geom-rectangle.md)
+
+- Is intersection
     ```javascript
     var result = Phaser.Geom.Intersects.LineToRectangle(line, rect);
     ```
-- Line to [triangle](geom-triangle.md)
+- Get intersection points
+    ```javascript
+    var result = Phaser.Geom.Intersects.GetLineToRectangle(line, rect);
+    // var out = Phaser.Geom.Intersects.GetLineToRectangle(line, rect, out);
+    ```
+    
+#### Line to [triangle](geom-triangle.md)
+
+- Is intersection
     ```javascript
     var result = Phaser.Geom.Intersects.TriangleToLine(triangle, line);
     ```
-- Line to [line](geom-line.md)
+- Get intersection points
+    ```javascript
+    var result = Phaser.Geom.Intersects.GetTriangleToLine(triangle, line);
+    // var out = Phaser.Geom.Intersects.GetTriangleToLine(triangle, line, out);
+    ```
+    
+#### Line to [line](geom-line.md)
+
+- Is intersection
     ```javascript
     var result = Phaser.Geom.Intersects.LineToLine(line1, line2);
-    // var result = Phaser.Geom.Intersects.LineToLine(line1, line2, out);  // out : intersected point
+    ```
+    - `out` : intersected point
+- Get intersection points
+    ```javascript
+    var result = Phaser.Geom.Intersects.LineToLine(line1, line2, out);
     ```

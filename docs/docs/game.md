@@ -78,7 +78,8 @@ or
             capture: true
         },
         smoothFactor: 0,
-        gamepad: false
+        gamepad: false,
+        windowEvents: true,        
     },
 
     backgroundColor: 0,

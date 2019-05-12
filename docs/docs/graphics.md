@@ -149,19 +149,19 @@ graphics.strokeLineShape(line); // line: {x1, y1, x2, y2}
 graphics.lineBetween(x1, y1, x2, y2);
 graphics.lineTo(x, y);
 graphics.moveTo(x, y);
-graphics.lineFxTo(x, y, width, rgb);  // gradient width and color
-graphics.moveFxTo(x, y, width, rgb);  // gradient width and color
 ```
-
-- `graphics.lineFxTo` is equal to `graphics.lineTo` in CANVAS render mode
-- `graphics.moveFxTo` is equal to `graphics.moveTo` in CANVAS render mode
 
 #### Lines
 
 ```javascript
-graphics.strokePoints(points, autoClose, endIndex);  // points: [{x, y}, ...]
-graphics.fillPoints(points, autoClose, endIndex);  // points: [{x, y}, ...]
+graphics.strokePoints(points, closeShape, closePath, endIndex);  // points: [{x, y}, ...]
+graphics.fillPoints(points, closeShape, closePath, endIndex);  // points: [{x, y}, ...]
 ```
+
+- `points` : Array of `{x, y}`
+- `closeShape` : When `true`, the shape is closed by joining the last point to the first point.
+- `closePath` : When `true`, the path is closed before being stroked.
+- `endIndex` : The index of `points` to stop drawing at. Defaults to `points.length`.
 
 #### Circle
 

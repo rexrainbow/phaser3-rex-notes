@@ -58,6 +58,18 @@ container.setSize(width, height);
 
 Default size is 0x0.
 
+#### Set scroll factor
+
+```javascript
+container.setScrollFactor(x, y);
+```
+
+Apply this scrollFactor to all Container children.
+
+```javascript
+container.setScrollFactor(x, y, true);
+```
+
 #### Hit area
 
 ```javascript

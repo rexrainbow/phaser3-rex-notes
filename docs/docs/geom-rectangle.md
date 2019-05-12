@@ -287,19 +287,50 @@ var rect1 = Phaser.Geom.Rectangle.Clone(rect0);
 
 ### Intersection
 
-- Rectangle to [circle](geom-circle.md)
+#### Rectangle to [circle](geom-circle.md)
+
+- Is intersection
     ```javascript
     var result = Phaser.Geom.Intersects.CircleToRectangle(circle, rect);
     ```
-- Rectangle to [rectangle](geom-rectangle.md)
+- Get intersection points
+    ```javascript
+    var result = Phaser.Geom.Intersects.GetCircleToRectangle(circle, rect);
+    // var out = Phaser.Geom.Intersects.GetCircleToRectangle(circle, rect, out);
+    ```
+
+#### Rectangle to [rectangle](geom-rectangle.md)
+
+- Is intersection
     ```javascript
     var result = Phaser.Geom.Intersects.RectangleToRectangle(rectA, rectB);
     ```
-- Rectangle to [triangle](geom-triangle.md)
+- Get intersection points
+    ```javascript
+    var result = Phaser.Geom.Intersects.GetRectangleToRectangle(rectA, rectB);
+    // var out = Phaser.Geom.Intersects.GetRectangleToRectangle(rectA, rectB, out);
+    ```
+    
+#### Rectangle to [triangle](geom-triangle.md)
+
+- Is intersection
     ```javascript
     var result = Phaser.Geom.Intersects.RectangleToTriangle(rect, triangle);
     ```
-- Rectangle to [line](geom-line.md)
+- Get intersection points
+    ```javascript
+    var result = Phaser.Geom.Intersects.GetRectangleToTriangle(rect, triangle);
+    // var out = Phaser.Geom.Intersects.GetRectangleToTriangle(rect, triangle, out);
+    ```
+
+#### Rectangle to [line](geom-line.md)
+
+- Is intersection
     ```javascript
     var result = Phaser.Geom.Intersects.LineToRectangle(line, rect);
+    ```
+- Get intersection points
+    ```javascript
+    var result = Phaser.Geom.Intersects.GetLineToRectangle(line, rect);
+    // var out = Phaser.Geom.Intersects.GetLineToRectangle(line, rect, out);
     ```

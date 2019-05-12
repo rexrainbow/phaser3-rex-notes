@@ -222,6 +222,12 @@ tween.play();
 tween.restart();
 ```
 
+### Remove task
+
+```javascript
+tween.remove();
+```
+
 ### Time-scale
 
 ```javascript

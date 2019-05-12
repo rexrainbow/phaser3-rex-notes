@@ -233,6 +233,19 @@ var cache = scene.cache.html;
 var data = cache.get(key);
 ```
 
+#### CSS
+
+```javascript
+scene.load.css(key, url);
+```
+
+Get data from cache
+
+```javascript
+var cache = scene.cache.css;
+var data = cache.get(key);
+```
+
 #### Scene
 
 ```javascript
@@ -247,6 +260,14 @@ The `key` matches the **class name** in the JavaScript file.
 scene.load.script(key, url);
 ```
 
+##### Scripts
+
+```javascript
+scene.load.scripts(key, urlArray);
+```
+
+Add scripts in the exact order of `urlArray`.
+
 #### GLSL
 
 ```javascript
@@ -258,6 +279,19 @@ Get data from cache
 ```javascript
 var cache = scene.cache.shader;
 var data = cache.get(key);
+```
+
+A glsl file can contain multiple shaders, all separated by a frontmatter block.
+
+```GLSL
+---
+name: 
+type: 
+---
+
+void main(void)
+{
+}
 ```
 
 #### Binary

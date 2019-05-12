@@ -170,20 +170,52 @@ Position and radius are equal.
 
 ### Intersection
 
-- Circle to [circle](geom-circle.md)
+#### Circle to [circle](geom-circle.md)
+
+- Is intersection
     ```javascript
     var result = Phaser.Geom.Intersects.CircleToCircle(circleA, circleB);
     ```
-- Circle to [rectangle](geom-rectangle.md)
+- Get intersection points
+    ```javascript
+    var result = Phaser.Geom.Intersects.GetCircleToCircle(circleA, circleB);
+    // var out = Phaser.Geom.Intersects.GetCircleToCircle(circleA, circleB, out);
+    ```
+
+#### Circle to [rectangle](geom-rectangle.md)
+
+- Is intersection
     ```javascript
     var result = Phaser.Geom.Intersects.CircleToRectangle(circle, rect);
     ```
-- Circle to [triangle](geom-triangle.md)
+- Get intersection points
     ```javascript
-    var result = Phaser.Geom.Intersects.TriangleToCircle(circle, circle);
+    var result = Phaser.Geom.Intersects.GetCircleToRectangle(circle, rect);
+    // var out = Phaser.Geom.Intersects.GetCircleToRectangle(circle, rect, out);
     ```
-- Circle to [line](geom-line.md)
+
+#### Circle to [triangle](geom-triangle.md)
+
+- Is intersection
+    ```javascript
+    var result = Phaser.Geom.Intersects.TriangleToCircle(triangle, circle);
+    ```
+- Get intersection points
+    ```javascript
+    var result = Phaser.Geom.Intersects.GetTriangleToCircle(triangle, circle);
+    // var out = Phaser.Geom.Intersects.GetTriangleToCircle(triangle, circle, out);
+    ```
+    
+#### Circle to [line](geom-line.md)
+
+- Is intersection
     ```javascript
     var result = Phaser.Geom.Intersects.LineToCircle(line, circle);
-    // var result = Phaser.Geom.Intersects.LineToCircle(line, circle, nearest);  // nearest : nearest point on line
+    // var result = Phaser.Geom.Intersects.LineToCircle(line, circle, nearest);
+    ```
+    - `nearest` : Nearest point on line.
+- Get intersection points
+    ```javascript
+    var result = Phaser.Geom.Intersects.GetLineToCircle(line, circle);
+    // var out = Phaser.Geom.Intersects.GetLineToCircle(line, circle, out);
     ```

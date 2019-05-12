@@ -209,19 +209,50 @@ Position and radius are equal.
 
 ### Intersection
 
-- Triangle to [circle](geom-circle.md)
+#### Triangle to [circle](geom-circle.md)
+
+- Is intersection
     ```javascript
     var result = Phaser.Geom.Intersects.TriangleToCircle(triangle, circle);
     ```
-- Triangle to [rectangle](geom-rectangle.md)
+- Get intersection points
+    ```javascript
+    var result = Phaser.Geom.Intersects.GetTriangleToCircle(triangle, circle);
+    // var out = Phaser.Geom.Intersects.GetTriangleToCircle(triangle, circle, out);
+    ```
+
+#### Triangle to [rectangle](geom-rectangle.md)
+
+- Is intersection
     ```javascript
     var result = Phaser.Geom.Intersects.RectangleToTriangle(rect, triangle);
     ```
-- Triangle to [triangle](geom-triangle.md)
+- Get intersection points
+    ```javascript
+    var result = Phaser.Geom.Intersects.GetRectangleToTriangle(rect, triangle);
+    // var out = Phaser.Geom.Intersects.GetRectangleToTriangle(rect, triangle, out);
+    ```
+
+#### Triangle to [triangle](geom-triangle.md)
+
+- Is intersection
     ```javascript
     var result = Phaser.Geom.Intersects.TriangleToTriangle(triangleA, triangleB);
     ```
-- Triangle to [line](geom-line.md)
+- Get intersection points
+    ```javascript
+    var result = Phaser.Geom.Intersects.GetTriangleToTriangle(triangleA, triangleB);
+    // var out = Phaser.Geom.Intersects.GetTriangleToTriangle(triangleA, triangleB, out);
+    ```
+
+#### Triangle to [line](geom-line.md)
+
+- Is intersection
     ```javascript
     var result = Phaser.Geom.Intersects.TriangleToLine(triangle, line);
+    ```
+- Get intersection points
+    ```javascript
+    var result = Phaser.Geom.Intersects.GetTriangleToLine(triangle, line);
+    // var out = Phaser.Geom.Intersects.GetTriangleToLine(triangle, line, out);
     ```

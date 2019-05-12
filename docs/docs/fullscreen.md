@@ -22,7 +22,11 @@ gameObject.setInteractive().on('pointerdown', function() {
 });
 ```
 
-- Fire `'fullscreenunsupported'` or `'enterfullscreen'` event.
+Fire one of these events
+
+- `'fullscreenunsupported'` : Tried to enter fullscreen mode, but it is unsupported by the browser.
+- `'enterfullscreen'` : Entered fullscreen mode successfully.
+- `'fullscreenfailed'` : Tried to enter fullscreen mode but failed.
 
 ### Toggle
 

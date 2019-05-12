@@ -126,7 +126,7 @@ class Scale {
             return this;
         }
 
-        this.tween.stop();
+        this.tween.remove();
         this.tween = undefined;
         return this;
     }

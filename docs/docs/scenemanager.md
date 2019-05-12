@@ -1,12 +1,12 @@
-Scene manager:
+Scene manager plugin:
 
 - In each scene instance: `scene.scene`
 
 ## Add new scene
 
 ```javascript
-scene.scene.add(key, sceneConfig, autoStart, data);
-// game.scene.add(key, sceneConfig, autoStart, data);
+var newScene = scene.scene.add(key, sceneConfig, autoStart, data);
+// var newScene = game.scene.add(key, sceneConfig, autoStart, data);
 ```
 
 - `key` : A unique key used to reference the Scene.
@@ -112,6 +112,11 @@ scene.scene.setVisible(value, key);  // value: true/false
 ```javascript
 var isSleep = scene.scene.isSleeping(key);
 // var isSleep = scene.scene.isSleeping();
+```
+
+```javascript
+var isPaused = scene.scene.isPaused(key);
+// var isPaused = scene.scene.isPaused();
 ```
 
 ```javascript
