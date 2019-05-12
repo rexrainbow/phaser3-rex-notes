@@ -56,6 +56,8 @@ Apply mask on game object. Built-in render of phaser.
 
 ### Invert alpha
 
+Only GeometryMask has `inverse alpha` feature.
+
 - Inverse alpha
     ```javascript
     mask.setInvertAlpha();
