@@ -1,12 +1,14 @@
-const EE = Phaser.Events.EventEmitter;
+import EventEmitterMethods from '../eventemitter/EventEmitterMethods.js';
+
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class TickTask extends EE {
+class TickTask {
     constructor(parent, config) {
-        super();
         this.parent = parent;
         this._isRunning = false;
         this.tickingState = false;
+        // Event emitter
+        this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
         this.setTickingMode(GetValue(config, 'tickingMode', 1));
     }
 
@@ -88,6 +90,11 @@ class TickTask extends EE {
         }
     }
 }
+
+Object.assign(
+    TickTask.prototype,
+    EventEmitterMethods
+);
 
 const TICKINGMODE = {
     'no': 0,

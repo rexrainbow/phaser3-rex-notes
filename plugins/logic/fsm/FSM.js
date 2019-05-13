@@ -1,4 +1,4 @@
-import EventEmitterMethods from './EventEmitterMethods.js';
+import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 

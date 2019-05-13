@@ -1,22 +1,23 @@
+import EventEmitterMethods from '../../../utils/eventemitter/EventEmitterMethods.js';
 import Clear from '../../../utils/object/Clear.js';
 
-const EE = Phaser.Events.EventEmitter;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const SpliceOne = Phaser.Utils.Array.SpliceOne;
 const DistanceBetween = Phaser.Math.Distance.Between;
 const AngleBetween = Phaser.Math.Angle.Between;
 
-class TwoPointersTracer extends EE {
+class TwoPointersTracer {
     constructor(scene, config) {
         var amount = scene.input.manager.pointersTotal - 1;
         if (amount < 2) {
             scene.input.addPointer(2 - amount);
         }
 
-        super();
         this.scene = scene;
+        // Event emitter
+        this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
         this.pointers = [];
-        this.movedState = {};
+        this.movedState = {};        
         this.resetFromJSON(config);
         this.boot();
     }
@@ -298,12 +299,17 @@ class TwoPointersTracer extends EE {
     }
 }
 
+Object.assign(
+    TwoPointersTracer.prototype,
+    EventEmitterMethods
+);
+
+var tmpDragVector = {};
+
 const TOUCH0 = 0;
 const TOUCH1 = 1;
 const TOUCH2 = 2;
 
 const IDLE = 'IDLE';
-
-var tmpDragVector = {};
 
 export default TwoPointersTracer;
