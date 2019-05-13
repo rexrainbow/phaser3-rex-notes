@@ -23,7 +23,8 @@ nav:
         - Single image:
             - Image: image.md
             - Sprite: sprite.md
-            - Quad: quad.md    
+            - Quad: quad.md
+            - Shader: shader.md
         - Multiple images: 
             - Blitter: blitter.md
             - Particles: particles.md        
@@ -61,7 +62,6 @@ nav:
         - Canvas texture: canvas-texture.md
     - Tile map:
         - Tile map: tilemap.md
-    - Shader: shader.md
     - Container:
         - Container: container.md
         - Container Lite: containerlite.md
