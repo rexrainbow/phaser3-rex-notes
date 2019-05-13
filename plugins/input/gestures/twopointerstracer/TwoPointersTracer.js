@@ -280,6 +280,14 @@ class TwoPointersTracer {
         return (preP0.y + preP1.y) / 2;
     }
 
+    get movementCenterX() {
+        return this.centerX - this.prevCenterX;
+    }
+
+    get movementCenterY() {
+        return this.centerY - this.prevCenterY;
+    }
+
     setRecongizedStateObject(stateObject) {
         this.recongizedState = stateObject;
         return this;

@@ -58,7 +58,8 @@ class Rotate extends TwoPointersTracer {
     onDrag2() {
         switch (this.state) {
             case BEGIN:
-                if ((this.pointers[0].getDistance() + this.pointers[1].getDistance()) >= this.dragThreshold) {
+                if ((this.pointers[0].getDistance() >= this.dragThreshold) &&
+                    (this.pointers[1].getDistance() >= this.dragThreshold)) {
                     var curAngle = WrapDegrees(RadToDeg(this.angleBetween));
                     this.angle = ShortestBetween(this.prevAngle, curAngle);
                     this.prevAngle = curAngle;
