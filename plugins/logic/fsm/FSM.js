@@ -1,6 +1,5 @@
 import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
-
-const GetValue = Phaser.Utils.Objects.GetValue;
+import GetValue from '../../utils/object/GetValue.js';
 
 class FSM {
     /*
