@@ -14,10 +14,10 @@ class Demo extends Phaser.Scene {
 
         this.rexGestures.add.press()
             .on('pressstart', function (press) {
-                print.text = 'press';
+                print.text += `press ${press.x},${press.y}\n`;
             }, this)
             .on('pressend', function (press) {
-                print.text = '--';
+                print.text += 'press end\n';
             }, this)
     }
 }

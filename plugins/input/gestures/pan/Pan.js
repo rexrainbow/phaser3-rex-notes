@@ -13,12 +13,24 @@ class Pan extends OnePointerTracer {
                 IDLE: {
                 },
                 BEGIN: {
+                    enter: function () {
+                        var pointer = self.pointer;
+                        self.startX = pointer.x;
+                        self.startY = pointer.y;
+                        self.startWorldX = pointer.worldX;
+                        self.startWorldY = pointer.worldY;
+                    }
                 },
                 RECOGNIZED: {
                     enter: function () {
                         self.emit('panstart', self);
                     },
                     exit: function () {
+                        var pointer = self.lastPointer;
+                        self.endX = pointer.x;
+                        self.endY = pointer.y;
+                        self.endWorldX = pointer.worldX;
+                        self.endWorldY = pointer.worldY;
                         self.emit('panend', self);
                     }
                 }

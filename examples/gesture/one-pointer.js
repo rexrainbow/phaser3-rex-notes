@@ -32,11 +32,11 @@ class Demo extends Phaser.Scene {
             // })
             // Press
             .on('pressstart', function (press) {
-                print.text += 'press\n';
+                print.text += `press ${press.x},${press.y}\n`;
             }, this)
-            // .on('pressend', function (press) {
-            //     print.text = '--';
-            // }, this)
+            .on('pressend', function (press) {
+                print.text += 'press end\n';
+            }, this)
             // Swipe
             .on('swipe', function (swipe) {
                 print.text += `swipe, v = ${swipe.dragVelocity}\n`;
@@ -44,10 +44,6 @@ class Demo extends Phaser.Scene {
     }
 
     update() {
-        // var tap = this.rexGestures.tap;
-        // if (tap.isTapped) {
-        //     this.print.text += 'update(): ' + tap.tapsCount + ' tap(s)\n';
-        // }
     }
 }
 
