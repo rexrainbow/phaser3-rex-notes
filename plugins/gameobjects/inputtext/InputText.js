@@ -94,6 +94,11 @@ class InputText extends DOMElement {
         return this;
     }
 
+    selectText() {
+        this.node.select();
+        return this;
+    }
+
     get placeholder() {
         return this.node.placeholder;
     }
@@ -200,6 +205,10 @@ const ElementProperties = {
     spellCheck: ['spellcheck', false],
     autoComplete: ['autocomplete', 'off'],
     onTextChanged: ['oninput', undefined],
+    onClick: ['onclick', undefined],
+    onDoubleClick: ['ondblclick', undefined],
+    onFocus: ['onfocus', undefined],
+    onBlur: ['onblur', undefined],
 };
 
 const StyleProperties = {
@@ -211,4 +220,5 @@ const StyleProperties = {
     borderColor: ['borderColor', 'transparent'],
     outline: ['outline', 'none']
 };
+
 export default InputText;

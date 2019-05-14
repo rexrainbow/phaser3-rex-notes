@@ -19,10 +19,26 @@ class Demo extends Phaser.Scene {
             fontSize: '12px',
             onTextChanged: function () {
                 printText.text = inputText.text;
+            },
+            // onClick: function() {
+            //     printText.text = inputText.text;
+            // },
+            // onDoubleClick: function() {
+            //     printText.text = inputText.text;
+            // }
+            onFocus: function() {
+                console.log('OnFocus');
+            },
+            onBlur: function() {
+                console.log('OnBlur');
             }
         }).resize(100, 100).setOrigin(0.5);
 
         printText.text = inputText.text;
+
+        // this.input.keyboard.addKey('ENTER').on('down', function (event) {
+        //     console.log('enter');
+        // });
     }
 
     update() { }
