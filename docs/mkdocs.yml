@@ -12,6 +12,7 @@ nav:
     - Full screen: fullscreen.md
     - Orientation: orientation.md
     - Snapshot: snapshot.md
+    - Device: device.md
     - Plugin system: pluginsystem.md
 - Loader:
     - Loader: loader.md
