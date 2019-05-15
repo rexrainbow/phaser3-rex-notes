@@ -17,7 +17,7 @@ class TwoPointersTracer {
         // Event emitter
         this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
         this.pointers = [];
-        this.movedState = {};        
+        this.movedState = {};
         this.resetFromJSON(config);
         this.boot();
     }
@@ -76,8 +76,7 @@ class TwoPointersTracer {
             return;
         }
 
-        var index = this.pointers.indexOf(pointer);
-        if (index !== -1) { // Already in catched pointers
+        if (this.pointers.length === 2) {
             return;
         }
 
@@ -86,12 +85,13 @@ class TwoPointersTracer {
             return;
         }
 
-        if (this.pointers.length === 2) {
+        var index = this.pointers.indexOf(pointer);
+        if (index !== -1) { // Already in catched pointers
             return;
-        } else {
-            this.movedState[pointer.id] = false;
-            this.pointers.push(pointer);
         }
+
+        this.movedState[pointer.id] = false;
+        this.pointers.push(pointer);
 
         switch (this.tracerState) {
             case TOUCH0:

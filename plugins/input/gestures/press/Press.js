@@ -4,8 +4,8 @@ import FSM from '../../../fsm.js';
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Press extends OnePointerTracer {
-    constructor(scene, config) {
-        super(scene, config);
+    constructor(scene, gameObject, config) {
+        super(scene, gameObject, config);
 
         var self = this;
         var stateConfig = {
