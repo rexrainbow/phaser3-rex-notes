@@ -145,8 +145,8 @@ class TwoPointersTracer {
             var isInsideBounds = (this.bounds) ? this.bounds.contains(pointer.x, pointer.y) : true;
             var isCatchedPointer = (this.pointers.indexOf(pointer) !== -1);
             if (!isCatchedPointer && isInsideBounds) { // Pointer moves into bounds
-                this.onPointerDown(pointer);
-            } else if (isCatchedPointer && !isInsideBounds) { // Pointer moves out of bounds
+                // this.onPointerDown(pointer);
+            } else if (isCatchedPointer && !isInsideBounds) { // Pointer moves out of bounds, lose pointer
                 this.onPointerUp(pointer);
             } else {  // Pointer drags in bounds
                 if (!this.movedState[pointer.id]) {
