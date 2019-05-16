@@ -183,20 +183,47 @@ var group = container.children;
 
 Reference [Group](group.md)
 
-#### Change state of child
+### Set properties of child
 
-- Local position
-    ```javascript
-    container.setChildLocalPosition(child, x, y);
-    ```
-- Visible
-    ```javascript
-    container.setChildLocalVisible(child, visible);
-    ```
-- Alpha
-    ```javascript
-    container.setChildLocalAlpha(child, alpha);
-    ```
+#### Position
+
+```javascript
+// child.x = x;
+// child.y = y;
+container.resetChildPositionState(child);
+```
+
+or
+
+```javascript
+container.setChildPosition(child, x, y);
+```
+
+#### Visible
+
+```javascript
+// child.visible = visible;
+container.resetChildVisibleState(child);
+```
+
+or
+
+```javascript
+container.setChildVisible(child, visible);
+```
+
+#### Alpha
+
+```javascript
+// child.child = child;
+container.resetChildAlphaState(child);
+```
+
+or
+
+```javascript
+container.setChildAlpha(child, alpha);
+```
 
 ### Local state of child
 
@@ -219,24 +246,11 @@ var localState = child.rexContainer;
     - `visible`
     - `alpha`
 
-#### Update world properties of child
+#### Change local state of child
 
-Call these methods to update properties of child after changing local state of child.
-
-- Position/Angle/Scale
+- Local position
     ```javascript
-    container.updateChildPosition(gameObject);
-    // container.syncPosition();  // update position/angle/scale of all children
-    ```
-- Visible
-    ```javascript
-    container.updateChildVisible(gameObject);
-    // container.syncVisible();  // update visible of all children
-    ```
-- Alpha
-    ```javascript
-    container.updateChildAlpha(gameObject);
-    // container.syncAlpha();  // update alpha of all children
+    container.setChildLocalPosition(child, x, y);
     ```
 
 ### Mask

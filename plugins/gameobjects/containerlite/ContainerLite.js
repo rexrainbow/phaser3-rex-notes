@@ -283,6 +283,25 @@ class ContainerLite extends Zone {
         return this;
     }
 
+    setChildPosition(gameObject, x, y) {
+        gameObject.x = x;
+        gameObject.y = y;
+        this.resetChildPositionState(gameObject);
+        return this;
+    }
+
+    setChildVisible(gameObject, visible) {
+        gameObject.visible = visible;
+        this.resetChildVisibleState(gameObject);
+        return this;
+    }
+
+    setChildAlpha(gameObject, alpha) {
+        gameObject.alpha = alpha;
+        this.resetChildAlphaState(gameObject);
+        return this._add;
+    }
+
     setChildLocalPosition(gameObject, x, y) {
         var state = this.getLocalState(gameObject);
         state.x = x;
@@ -305,6 +324,7 @@ class ContainerLite extends Zone {
         this.updateChildAlpha(gameObject);
         return this;
     }
+
 
     _add(gameObject) {
         this.children.add(gameObject);
