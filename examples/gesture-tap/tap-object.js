@@ -18,13 +18,11 @@ class Demo extends Phaser.Scene {
     create() {
         this.input.addPointer(9);
 
-        var scene = this;
-        this.rexGestures.add.tap({ taps: 1 })
+        var zone = this.add.zone(0, 0, 800, 600).setOrigin(0);
+        this.rexGestures.add.tap(zone, { taps: 1 })
             .on('tap', function (tap) {
-                if (!tap.isTouchingAnyObject) {
-                    createObject(scene, tap.worldX, tap.worldY);
-                }
-            });
+                createObject(this, tap.worldX, tap.worldY);
+            }, this);
     }
 }
 
