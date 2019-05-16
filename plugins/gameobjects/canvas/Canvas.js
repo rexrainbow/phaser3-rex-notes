@@ -21,7 +21,6 @@ var Canvas = new Phaser.Class({
         Components.Mask,
         Components.Origin,
         Components.Pipeline,
-        Components.ScaleMode,
         Components.ScrollFactor,
         Components.Tint,
         Components.Transform,

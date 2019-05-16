@@ -34,6 +34,7 @@ class OnePointerTracer extends TickTask {
         this.pointer = undefined;
         this.lastPointer = undefined; // Last catched pointer
         this.movedState = false;
+        this.isTouchingAnyObject = false;
         return this;
     }
 
@@ -91,7 +92,7 @@ class OnePointerTracer extends TickTask {
         return this;
     }
 
-    onPointerDown(pointer) {
+    onPointerDown(pointer, gameObjects) {
         if (!this.enable) {
             return;
         }
@@ -113,6 +114,10 @@ class OnePointerTracer extends TickTask {
         this.lastPointer = pointer;
         this.movedState = false;
         this.tracerState = TOUCH1;
+
+        if (this.gameObject === undefined) {
+            this.isTouchingAnyObject = (gameObjects.length > 0);
+        }
         this.onDragStart();
     }
 

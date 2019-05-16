@@ -18,26 +18,33 @@ class Demo extends Phaser.Scene {
     create() {
         this.input.addPointer(9);
 
-        var gameObject;
-        for (var i = 0; i < 8; i++) {
-            gameObject = this.add.rectangle(
-                RandomBetween(100, 700),
-                RandomBetween(100, 500),
-                100,
-                100,
-                COLOR_DARK
-            )
-                .setStrokeStyle(1, COLOR_LIGHT);
-
-            this.rexGestures.add.tap(gameObject, { taps: 2 })
-                .on('tap', function (tap) {
-                    var gameObject = tap.gameObject;
-                    var curColor = gameObject.fillColor;
-                    var newColor = (curColor === COLOR_DARK) ? COLOR_PRIMARY : COLOR_DARK;
-                    gameObject.setFillStyle(newColor);
-                });
-        }
+        var scene = this;
+        this.rexGestures.add.tap({ taps: 1 })
+            .on('tap', function (tap) {
+                if (!tap.isTouchingAnyObject) {
+                    createObject(scene, tap.worldX, tap.worldY);
+                }
+            });
     }
+}
+
+var createObject = function (scene, x, y) {
+    var gameObject = scene.add.rectangle(
+        x, y,
+        100, 100,
+        COLOR_DARK
+    )
+        .setStrokeStyle(1, COLOR_LIGHT);
+
+    scene.rexGestures.add.tap(gameObject, { taps: 2 })
+        .on('tap', function (tap) {
+            var gameObject = tap.gameObject;
+            var curColor = gameObject.fillColor;
+            var newColor = (curColor === COLOR_DARK) ? COLOR_PRIMARY : COLOR_DARK;
+            gameObject.setFillStyle(newColor);
+        });
+
+    return gameObject;
 }
 
 var config = {

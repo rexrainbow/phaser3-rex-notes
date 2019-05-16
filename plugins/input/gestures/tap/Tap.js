@@ -59,7 +59,7 @@ class Tap extends OnePointerTracer {
 
         var taps = GetValue(o, 'taps', undefined);
         if (taps !== undefined) {
-            this.setMinTaps(taps).setMaxTaps(taps);
+            this.setTaps(taps);
         } else {
             this.setMaxTaps(GetValue(o, 'maxTaps', undefined));
             this.setMinTaps(GetValue(o, 'minTaps', undefined));
@@ -172,6 +172,14 @@ class Tap extends OnePointerTracer {
 
     setMinTaps(taps) {
         this.minTaps = taps;
+        return this;
+    }
+
+    setTaps(minTaps, maxTaps) {
+        if (maxTaps === undefined) {
+            maxTaps = minTaps;
+        }
+        this.setMinTaps(minTaps).setMaxTaps(maxTaps);
         return this;
     }
 }
