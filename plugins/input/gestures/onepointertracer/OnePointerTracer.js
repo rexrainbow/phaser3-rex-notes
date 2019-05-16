@@ -1,12 +1,12 @@
 import TickTask from '../../../utils/ticktask/TickTask.js';
+import GetSceneObject from '../../../utils/system/GetSceneObject.js';
 
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class OnePointerTracer extends TickTask {
-    constructor(scene, gameObject, config) {
-        if (IsPlainObject(gameObject)) {
-            config = gameObject;
+    constructor(gameObject, config) {
+        var scene = GetSceneObject(gameObject);
+        if (scene === gameObject) {
             gameObject = undefined;
         }
         super(scene, config);

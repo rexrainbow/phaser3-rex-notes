@@ -8,8 +8,8 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 const RadToDeg = Phaser.Math.RadToDeg;
 
 class Swipe extends OnePointerTracer {
-    constructor(scene, gameObject, config) {
-        super(scene, gameObject, config);
+    constructor(gameObject, config) {
+        super(gameObject, config);
 
         var self = this;
         var stateConfig = {
