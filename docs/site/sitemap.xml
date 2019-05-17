@@ -381,6 +381,26 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/gesture-overview/</loc>
+     <lastmod>2019-05-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/gesture-tap/</loc>
+     <lastmod>2019-05-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/gesture-press/</loc>
+     <lastmod>2019-05-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/gesture-pinch/</loc>
+     <lastmod>2019-05-17</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
      <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/button/</loc>
      <lastmod>2019-05-17</lastmod>
      <changefreq>daily</changefreq>
@@ -407,11 +427,6 @@
     </url>
     <url>
      <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/cursoratbound/</loc>
-     <lastmod>2019-05-17</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/pinch/</loc>
      <lastmod>2019-05-17</lastmod>
      <changefreq>daily</changefreq>
     </url>

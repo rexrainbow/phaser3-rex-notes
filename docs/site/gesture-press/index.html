@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/pinch/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/gesture-press/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Pinch - Notes of Phaser 3</title>
+        <title>Press - Notes of Phaser 3</title>
       
     
     
@@ -128,7 +128,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Pinch
+                Press
               </span>
             
           
@@ -1701,6 +1701,189 @@
           
           
 
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-3" type="checkbox" id="nav-5-2-3" checked>
+    
+    <label class="md-nav__link" for="nav-5-2-3">
+      Gestures
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-5-2-3">
+        Gestures
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../gesture-overview/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../gesture-tap/" title="Tap" class="md-nav__link">
+      Tap
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Press
+      </label>
+    
+    <a href="./" title="Press" class="md-nav__link md-nav__link--active">
+      Press
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-scene-plugin" title="Install scene plugin" class="md-nav__link">
+    Install scene plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-instance" title="Create instance" class="md-nav__link">
+    Create instance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enable" title="Enable" class="md-nav__link">
+    Enable
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" title="Events" class="md-nav__link">
+    Events
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pressing-start" title="Pressing start" class="md-nav__link">
+    Pressing start
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pressing-end" title="Pressing end" class="md-nav__link">
+    Pressing end
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is-pressed" title="Is pressed" class="md-nav__link">
+    Is pressed
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../gesture-pinch/" title="Pinch" class="md-nav__link">
+      Pinch
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
 
   <li class="md-nav__item">
     <a href="../button/" title="Button" class="md-nav__link">
@@ -1766,169 +1949,6 @@
     <a href="../cursoratbound/" title="Cursor at bound" class="md-nav__link">
       Cursor at bound
     </a>
-  </li>
-
-        
-          
-          
-          
-
-  
-
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Pinch
-      </label>
-    
-    <a href="./" title="Pinch" class="md-nav__link md-nav__link--active">
-      Pinch
-    </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#source-code" title="Source code" class="md-nav__link">
-    Source code
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#import-class" title="Import class" class="md-nav__link">
-    Import class
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
-    Install global plugin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#enable" title="Enable" class="md-nav__link">
-    Enable
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-dragging-state" title="Get dragging state" class="md-nav__link">
-    Get dragging state
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#is-1st-drag" title="Is 1st drag" class="md-nav__link">
-    Is 1st drag
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#is-pinch" title="Is pinch" class="md-nav__link">
-    Is pinch
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#events" title="Events" class="md-nav__link">
-    Events
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#on-dragging" title="On dragging" class="md-nav__link">
-    On dragging
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#on-drag-start-on-drag-end" title="On drag start, on drag end" class="md-nav__link">
-    On drag start, on drag end
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#scale-factor" title="Scale factor" class="md-nav__link">
-    Scale factor
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#drag-vector-of-1st-touch-pointer" title="Drag vector of 1st touch pointer" class="md-nav__link">
-    Drag vector of 1st touch pointer
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#catched-touch-pointers" title="Catched touch pointers" class="md-nav__link">
-    Catched touch pointers
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -4107,15 +4127,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#import-class" title="Import class" class="md-nav__link">
-    Import class
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
-    Install global plugin
+  <a href="#install-scene-plugin" title="Install scene plugin" class="md-nav__link">
+    Install scene plugin
   </a>
   
 </li>
@@ -4135,27 +4148,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-dragging-state" title="Get dragging state" class="md-nav__link">
-    Get dragging state
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#is-1st-drag" title="Is 1st drag" class="md-nav__link">
-    Is 1st drag
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#is-pinch" title="Is pinch" class="md-nav__link">
-    Is pinch
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#events" title="Events" class="md-nav__link">
     Events
   </a>
@@ -4164,15 +4156,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#on-dragging" title="On dragging" class="md-nav__link">
-    On dragging
+  <a href="#pressing-start" title="Pressing start" class="md-nav__link">
+    Pressing start
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#on-drag-start-on-drag-end" title="On drag start, on drag end" class="md-nav__link">
-    On drag start, on drag end
+  <a href="#pressing-end" title="Pressing end" class="md-nav__link">
+    Pressing end
   </a>
   
 </li>
@@ -4183,22 +4175,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#scale-factor" title="Scale factor" class="md-nav__link">
-    Scale factor
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#drag-vector-of-1st-touch-pointer" title="Drag vector of 1st touch pointer" class="md-nav__link">
-    Drag vector of 1st touch pointer
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#catched-touch-pointers" title="Catched touch pointers" class="md-nav__link">
-    Catched touch pointers
+  <a href="#is-pressed" title="Is pressed" class="md-nav__link">
+    Is pressed
   </a>
   
 </li>
@@ -4224,38 +4202,33 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/pinch.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/gesture-press.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Pinch</h1>
+                  <h1>Press</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Get scale factor ftom 2 dragging touch pointers.</p>
+<p>Get press events of a game object.</p>
 <ul>
 <li>Author: Rex</li>
-<li>Member of scene</li>
+<li>Behavior of game object</li>
 </ul>
 <h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/pinch-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexpinchplugin.min.js">minify</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/gestures-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexgesturesplugin.min.js">minify</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/pinch">Sample code</a></p>
-<p>User could import class directly, or install it by global plugin.</p>
-<h3 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">rexPinch</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/pinch.js&#39;</span><span class="p">;</span>
-</pre></div>
-
-<h3 id="install-global-plugin">Install global plugin<a class="headerlink" href="#install-global-plugin" title="Permanent link">&para;</a></h3>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/gesture-press">Sample code</a></p>
+<h3 id="install-scene-plugin">Install scene plugin<a class="headerlink" href="#install-scene-plugin" title="Permanent link">&para;</a></h3>
 <p>Install plugin in <a href="../game/#configuration">configuration of game</a></p>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">PinchPlugin</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/pinch-plugin.js&#39;</span><span class="p">;</span>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">GesturesPlugin</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/gestures-plugin.js&#39;</span><span class="p">;</span>
 
 <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
-            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexPinch&#39;</span><span class="p">,</span>
-            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">PinchPlugin</span><span class="p">,</span>
-            <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
-        <span class="p">},</span>
+        <span class="nx">scene</span><span class="o">:</span> <span class="p">[{</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexGestures&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">GesturesPlugin</span><span class="p">,</span>
+            <span class="nx">mapping</span><span class="o">:</span> <span class="s1">&#39;rexGestures&#39;</span>
+        <span class="p">}]</span>
         <span class="c1">// ...</span>
         <span class="p">]</span>
     <span class="p">}</span>
@@ -4265,119 +4238,49 @@
 </pre></div>
 
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">pinch</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexPinch&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">press</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexGestures</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">press</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="p">{</span>
     <span class="c1">// enable: true,</span>
-    <span class="c1">// bounds: undefined,</span>
+
+    <span class="c1">// time: 251,</span>
+    <span class="c1">// threshold: 9,</span>
 <span class="p">});</span>
 </pre></div>
 
 <ul>
 <li><code>enable</code> : Set <code>false</code> to disable input events.</li>
-<li><code>bounds</code> : A <a href="../geom-rectangle/">rectangle object</a>ㄝ or <code>undefined</code> (to use game window as rectangle object), for detecting the position of cursor.</li>
+<li><code>time</code> : Minimal time of the pointer to be pressed.</li>
+<li><code>threshold</code> : Minimal movement when pointer is down.</li>
 </ul>
 <h3 id="enable">Enable<a class="headerlink" href="#enable" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">enable</span> <span class="o">=</span> <span class="nx">pinch</span><span class="p">.</span><span class="nx">enable</span><span class="p">;</span>  <span class="c1">// enable: true, or false</span>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">enable</span> <span class="o">=</span> <span class="nx">press</span><span class="p">.</span><span class="nx">enable</span><span class="p">;</span>  <span class="c1">// enable: true, or false</span>
 </pre></div></li>
 <li>Set
-    <div class="codehilite"><pre><span></span><span class="nx">pinch</span><span class="p">.</span><span class="nx">setEnable</span><span class="p">(</span><span class="nx">enable</span><span class="p">);</span>  <span class="c1">// enable: true, or false</span>
+    <div class="codehilite"><pre><span></span><span class="nx">press</span><span class="p">.</span><span class="nx">setEnable</span><span class="p">(</span><span class="nx">enable</span><span class="p">);</span>  <span class="c1">// enable: true, or false</span>
 </pre></div></li>
 </ul>
-<h3 id="get-dragging-state">Get dragging state<a class="headerlink" href="#get-dragging-state" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="nx">pinch</span><span class="p">.</span><span class="nx">state</span><span class="p">;</span>
-</pre></div>
-
-<ul>
-<li><code>0</code> : No touch pointer</li>
-<li><code>1</code> : Catch 1 touch pointer</li>
-<li><code>2</code> : Catch 2 touch pointers<ul>
-<li>Fire <code>'pinchstart'</code> event when catching 2 touch pointers.</li>
-<li>Fire <code>'pinch'</code> event when any catched touch pointer moved.</li>
-<li>Fire <code>'pinchend'</code> event when releasing any catched touch pointer.</li>
-</ul>
-</li>
-</ul>
-<h3 id="is-1st-drag">Is 1<sup>st</sup> drag<a class="headerlink" href="#is-1st-drag" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isDrag</span> <span class="o">=</span> <span class="nx">pinch</span><span class="p">.</span><span class="nx">isDrag</span><span class="p">;</span>
-</pre></div>
-
-<p>Return <code>true</code> if <code>(pinch.state === 1)</code> and 1<sup>st</sup> touch pointer just moved.</p>
-<h3 id="is-pinch">Is pinch<a class="headerlink" href="#is-pinch" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isPinch</span> <span class="o">=</span> <span class="nx">pinch</span><span class="p">.</span><span class="nx">isPinch</span><span class="p">;</span>
-</pre></div>
-
-<p>Return <code>true</code> if <code>(pinch.state === 2)</code> and any touch pointer just moved.</p>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
-<h4 id="on-dragging">On dragging<a class="headerlink" href="#on-dragging" title="Permanent link">&para;</a></h4>
-<ul>
-<li>On dragging 1<sup>st</sup> touch pointer, fired when 1<sup>st</sup> touch pointer is moving
-    <div class="codehilite"><pre><span></span><span class="nx">pinch</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;drag1&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pinch</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// var drag1Vector = pinch.drag1Vector; // drag1Vector: {x, y}</span>
+<h4 id="pressing-start">Pressing start<a class="headerlink" href="#pressing-start" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">press</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pressstart&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">press</span><span class="p">){</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</pre></div><ul>
-<li><code>pinch.drag1Vector</code> : Drag vector from prevoius touch position to current touch position of 1<sup>st</sup> catched touch pointer.</li>
-</ul>
-</li>
-<li>On dragging 2 touch pointers, fired when any catched touch pointer moved.
-    <div class="codehilite"><pre><span></span><span class="nx">pinch</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pinch&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pinch</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// var scaleFactor = pinch.scaleFactor;</span>
-    <span class="c1">// gameObject.scaleX *= scaleFactor;</span>
-    <span class="c1">// gameObject.scaleY *= scaleFactor;</span>
-<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</pre></div><ul>
-<li><code>pinch.scaleFactor</code> : Rate of distance change between 2 catched touch pointers.</li>
-</ul>
-</li>
-</ul>
-<h4 id="on-drag-start-on-drag-end">On drag start, on drag end<a class="headerlink" href="#on-drag-start-on-drag-end" title="Permanent link">&para;</a></h4>
-<ul>
-<li>On drag 1 touch pointer start, fired when catching 1<sup>st</sup> touch pointer.
-    <div class="codehilite"><pre><span></span><span class="nx">pinch</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;drag1start&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pinch</span><span class="p">)</span> <span class="p">{</span>
-
-<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</pre></div></li>
-<li>On drag 1 touch pointer end, fired when releasing the last one catched touch pointer.
-    <div class="codehilite"><pre><span></span><span class="nx">pinch</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;drag1end&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pinch</span><span class="p">)</span> <span class="p">{</span>
-
-<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</pre></div></li>
-<li>On drag 2 touch pointers start, fired when catching 2 touch pointers.
-    <div class="codehilite"><pre><span></span><span class="nx">pinch</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pinchstart&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pinch</span><span class="p">)</span> <span class="p">{</span>
-
-<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</pre></div></li>
-<li>On drag 2 touch pointers end, fired when releasing any catched touch pointer.
-    <div class="codehilite"><pre><span></span><span class="nx">pinch</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pinchend&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pinch</span><span class="p">)</span> <span class="p">{</span>
-
-<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</pre></div></li>
-</ul>
-<h3 id="scale-factor">Scale factor<a class="headerlink" href="#scale-factor" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">scaleFactor</span> <span class="o">=</span> <span class="nx">pinch</span><span class="p">.</span><span class="nx">scaleFactor</span><span class="p">;</span>
 </pre></div>
 
-<p>Rate of distance change between 2 catched touch pointers. 
-(i.e current distance between 2 catched touch pointers / previous distance ).</p>
-<h3 id="drag-vector-of-1st-touch-pointer">Drag vector of 1<sup>st</sup> touch pointer<a class="headerlink" href="#drag-vector-of-1st-touch-pointer" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">drag1Vector</span> <span class="o">=</span> <span class="nx">pinch</span><span class="p">.</span><span class="nx">drag1Vector</span><span class="p">;</span> <span class="c1">// {x, y}</span>
+<ul>
+<li><code>press.gameObject</code> : Parent gameobject of this press behavior.</li>
+<li><code>press.worldX</code>, <code>press.worldY</code> : World position of pressing start.</li>
+<li><code>press.x</code>, <code>press.y</code> : Scene position of pressing start.</li>
+</ul>
+<h4 id="pressing-end">Pressing end<a class="headerlink" href="#pressing-end" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">press</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pressend&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">press</span><span class="p">){</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </pre></div>
 
-<h3 id="catched-touch-pointers">Catched touch pointers<a class="headerlink" href="#catched-touch-pointers" title="Permanent link">&para;</a></h3>
-<ul>
-<li><a href="../touchevents/#properties-of-point">Pointer</a> 0, available when state is <code>1</code>
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">pointer0</span> <span class="o">=</span> <span class="nx">pinch</span><span class="p">.</span><span class="nx">pointers</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
-</pre></div><ul>
-<li>Position of pointer
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">pointer0</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">pointer0</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
-</pre></div></li>
-</ul>
-</li>
-<li><a href="../touchevents/#properties-of-point">Pointer</a> 1, available when state is <code>2</code>
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">pointer0</span> <span class="o">=</span> <span class="nx">pinch</span><span class="p">.</span><span class="nx">pointers</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
-</pre></div></li>
-</ul>
+<h3 id="is-pressed">Is pressed<a class="headerlink" href="#is-pressed" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isPressed</span> <span class="o">=</span> <span class="nx">press</span><span class="p">.</span><span class="nx">isPressed</span><span class="p">;</span>
+</pre></div>
+
+<p>Return <code>true</code> if pressed.</p>
                 
                   
                 
@@ -4398,7 +4301,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../cursoratbound/" title="Cursor at bound" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../gesture-tap/" title="Tap" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -4407,19 +4310,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Cursor at bound
+                Tap
               </span>
             </div>
           </a>
         
         
-          <a href="../dragrotate/" title="Drag rotate" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../gesture-pinch/" title="Pinch" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Drag rotate
+                Pinch
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

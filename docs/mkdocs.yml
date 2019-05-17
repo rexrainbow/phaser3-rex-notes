@@ -100,6 +100,7 @@ nav:
         - Touch events: touchevents.md
         - Cursor: cursor.md
         - Gestures:
+            - Overview: gesture-overview.md
             - Tap: gesture-tap.md
             - Press: gesture-press.md
             - Pinch: gesture-pinch.md
