@@ -5,6 +5,7 @@
 - [Phaser3](https://github.com/photonstorm/phaser)
 - [API](https://photonstorm.github.io/phaser3-docs/index.html)
 - [Notes](https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html)
+    - [Discord channel](https://discord.gg/kWkuFZK)
 
 ## Demo
 
