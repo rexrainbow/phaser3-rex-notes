@@ -62,22 +62,6 @@ var pinch = scene.rexGestures.add.pinch({
     pinch.setEnable(enable);  // enable: true, or false
     ```
 
-### Is 1st drag
-
-```javascript
-var isDrag = pinch.isDrag;
-```
-
-Return `true` if 1st touch pointer just moves.
-
-### Is pinch
-
-```javascript
-var isPinch = pinch.isPinch;
-```
-
-Return `true` if any of two touch pointers just move.
-
 ### Events
 
 #### On dragging
@@ -158,3 +142,19 @@ var drag1Vector = pinch.drag1Vector; // {x, y}
     ```javascript
     var pointer0 = pinch.pointers[1];
     ```
+
+### Is 1st drag
+
+```javascript
+var isDrag = pinch.isDrag;
+```
+
+Return `true` if 1st touch pointer just moves.
+
+### Is pinch
+
+```javascript
+var isPinch = pinch.isPinch;
+```
+
+Return `true` if any of two touch pointers just move.

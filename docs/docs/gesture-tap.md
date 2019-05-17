@@ -76,14 +76,6 @@ var tap = scene.rexGestures.add.tap(gameObject, {
     tap.setEnable(enable);  // enable: true, or false
     ```
 
-### Is tap
-
-```javascript
-var isTapped = tap.isTapped;
-```
-
-Return `true` if tapped end.
-
 ### Events
 
 #### Tap
@@ -106,3 +98,11 @@ Each pointer-down will increase taps count and fire `tappingstart` event.
 tap.on('tappingstart', function(tap){
 }, scope);
 ```
+
+### Is tap
+
+```javascript
+var isTapped = tap.isTapped;
+```
+
+Return `true` if tapped end.
