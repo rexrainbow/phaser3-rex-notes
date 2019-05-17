@@ -132,13 +132,13 @@ var gridTable = scene.rexUI.add.gridTable({
         - `'drag'` : Control slider by dragging thumb game object. Default setting.
         - `'click'` : Control slider by touching track game object.
         - `'none'` : Disable sider controlling.
-    - Set to `false` to ignore slider.
+    - Set to `false` to skip creating slider.
 - `scroller` : Configuration of scroller behavior.
     - `scroller.slidingDeceleration` : Deceleration of slow down when dragging released.
         - Set `false` to disable it.
     - `scroller.backDeceleration` : Deceleration of pull back when out of bounds.
         - Set `false` to disable it.
-    - Set to `false` to ignore scroller.
+    - Set to `false` to skip creating scroller.
 - `clamplChildOY` : Set `true` to clamp scrolling.
 - `createCellContainerCallback` : Callback to return a container object of each visible cell.
     - Properties of `cell` parameter

@@ -7,35 +7,27 @@ Get scale factor ftom 2 dragging touch pointers.
 
 ## Source code
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/pinch-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexpinchplugin.min.js)
+[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/gestures-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexgesturesplugin.min.js)
 
 ## Usage
 
-[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/pinch)
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/gesture-pinch)
 
-User could import class directly, or install it by global plugin.
-
-### Import class
-
-```javascript
-import rexPinch from './plugins/pinch.js';
-```
-
-### Install global plugin
+### Install scene plugin
 
 Install plugin in [configuration of game](game.md#configuration)
 
 ```javascript
-import PinchPlugin from './plugins/pinch-plugin.js';
+import GesturesPlugin from './plugins/gestures-plugin.js';
 
 var config = {
     // ...
     plugins: {
-        global: [{
-            key: 'rexPinch',
-            plugin: PinchPlugin,
-            start: true
-        },
+        scene: [{
+            key: 'rexGestures',
+            plugin: GesturesPlugin,
+            mapping: 'rexGestures'
+        }]
         // ...
         ]
     }
@@ -47,14 +39,17 @@ var game = new Phaser.Game(config);
 ### Create instance
 
 ```javascript
-var pinch = scene.plugins.get('rexPinch').add(gameObject, {
+var pinch = scene.rexGestures.add.pinch({
     // enable: true,
     // bounds: undefined,
+
+    // threshold: 0,
 });
 ```
 
 - `enable` : Set `false` to disable input events.
-- `bounds` : A [rectangle object](geom-rectangle.md)ㄝ or `undefined` (to use game window as rectangle object), for detecting the position of cursor.
+- `bounds` : A [rectangle object](geom-rectangle.md) or `undefined` (to use game window as rectangle object), for detecting the position of cursor.
+- `threshold` : Fire pinch events after dragging distances of catched pointers are larger than this threshold.
 
 ### Enable
 
@@ -67,26 +62,13 @@ var pinch = scene.plugins.get('rexPinch').add(gameObject, {
     pinch.setEnable(enable);  // enable: true, or false
     ```
 
-### Get dragging state
-
-```javascript
-var state = pinch.state;
-```
-
-- `0` : No touch pointer
-- `1` : Catch 1 touch pointer
-- `2` : Catch 2 touch pointers
-    - Fire `'pinchstart'` event when catching 2 touch pointers.
-    - Fire `'pinch'` event when any catched touch pointer moved.
-    - Fire `'pinchend'` event when releasing any catched touch pointer.
-
 ### Is 1st drag
 
 ```javascript
 var isDrag = pinch.isDrag;
 ```
 
-Return `true` if `(pinch.state === 1)` and 1st touch pointer just moved.
+Return `true` if 1st touch pointer just moves.
 
 ### Is pinch
 
@@ -94,7 +76,7 @@ Return `true` if `(pinch.state === 1)` and 1st touch pointer just moved.
 var isPinch = pinch.isPinch;
 ```
 
-Return `true` if `(pinch.state === 2)` and any touch pointer just moved.
+Return `true` if any of two touch pointers just move.
 
 ### Events
 
@@ -169,6 +151,8 @@ var drag1Vector = pinch.drag1Vector; // {x, y}
         ```javascript
         var x = pointer0.x;
         var y = pointer0.y;
+        var worldX = pointer0.worldX;
+        var worldY = pointer0.worldY;
         ```
 - [Pointer](touchevents.md#properties-of-point) 1, available when state is `2`
     ```javascript

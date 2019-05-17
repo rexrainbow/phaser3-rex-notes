@@ -99,13 +99,15 @@ nav:
     - Touch:
         - Touch events: touchevents.md
         - Cursor: cursor.md
+        - Gestures:
+            - Tap: gesture-tap.md
+            - Pinch: gesture-pinch.md
         - Button: button.md
         - Drag: drag.md
         - Slider: slider.md
         - Scroller: scroller.md
         - Virtual joystick: virtualjoystick.md
         - Cursor at bound: cursoratbound.md
-        - Pinch: pinch.md
         - Drag rotate: dragrotate.md
         - Mouse-wheel to up/down: mousewheeltoupdown.md
     - Keyboard:

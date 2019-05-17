@@ -34,6 +34,8 @@
 1. [Flash](flash.md): Flashing (set invisible then visible) game object.
 1. [FSM](fsm.md): Finite state machine.
 1. [Gashapon](gashapon.md): Pick random item from box.
+1. [Gesture/Pinch](gesture-pinch.md): Get scale factor ftom 2 dragging touch pointers.
+1. [Gesture/Tap](gesture-tap.md): Get tap/multi-taps events of a game object.
 1. [Grid align](gridalign.md): Align objects on quadrilateral or hexagon grid.
 1. [Grid table](gridtable.md): Viewer of grid table, to manipulate game object of each visible cell.
 1. [Hexagon](geom-hexagon.md): Hexagon shape and methods.
@@ -44,7 +46,6 @@
 1. [Move to](moveto.md): Move game object towards target position with a steady speed.
 1. [Page](textpage.md): Display text page by page on text object.
 1. [Path follower](pathfollower.md): Set position of game object on a path.
-1. [Pinch](pinch.md): Get scale factor ftom 2 dragging touch pointers.
 1. [Pop up](popup.md): Scale up game object.
 1. [Restorable data](restorabledata.md): Restorable data manager.
 1. [Rhombus](geom-rhombus.md): Rhombus shape and methods.
