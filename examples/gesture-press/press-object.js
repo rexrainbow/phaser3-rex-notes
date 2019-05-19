@@ -2,10 +2,6 @@ import GesturesPlugin from '../../plugins/gestures-plugin.js';
 
 const RandomBetween = Phaser.Math.Between;
 
-const COLOR_PRIMARY = 0x4e342e;
-const COLOR_LIGHT = 0x7b5e57;
-const COLOR_DARK = 0x260e04;
-
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -18,6 +14,9 @@ class Demo extends Phaser.Scene {
     create() {
         this.input.addPointer(9);
 
+        var colorTag = this.add.text(0, 0, '')
+            .setVisible(false)
+            .setDepth(1);
         var gameObject;
         for (var i = 0; i < 8; i++) {
             gameObject = this.add.rectangle(
@@ -25,16 +24,18 @@ class Demo extends Phaser.Scene {
                 RandomBetween(100, 500),
                 100,
                 100,
-                COLOR_DARK
-            )
-                .setStrokeStyle(1, COLOR_LIGHT);
+                RandomBetween(0, 0x1000000)
+            );
 
             this.rexGestures.add.press(gameObject)
                 .on('pressstart', function (press) {
-                    press.gameObject.setFillStyle(COLOR_PRIMARY);
+                    colorTag
+                        .setVisible(true)
+                        .setPosition(press.worldX + 10, press.worldY + 10)
+                        .setText(press.gameObject.fillColor.toString(16));
                 })
                 .on('pressend', function (press) {
-                    press.gameObject.setFillStyle(COLOR_DARK);
+                    colorTag.setVisible(false);
                 });
         }
     }
