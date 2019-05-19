@@ -8,7 +8,7 @@ ObjectFactory.register('swipe', function (gameObject, config) {
         config = gameObject;
         gameObject = this.scene;
     }
-    return new Swipe(this.scene, gameObject, config);
+    return new Swipe(gameObject, config);
 });
 
 SetValue(window, 'RexPlugins.Gestures.Swipe', Swipe);

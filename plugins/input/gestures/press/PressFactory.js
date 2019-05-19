@@ -8,7 +8,7 @@ ObjectFactory.register('press', function (gameObject, config) {
         config = gameObject;
         gameObject = this.scene;
     }
-    return new Press(this.scene, gameObject, config);
+    return new Press(gameObject, config);
 });
 
 SetValue(window, 'RexPlugins.Gestures.Press', Press);

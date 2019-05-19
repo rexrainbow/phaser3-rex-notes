@@ -8,7 +8,7 @@ ObjectFactory.register('pan', function (gameObject, config) {
         config = gameObject;
         gameObject = this.scene;
     }
-    return new Pan(this.scene, gameObject, config);
+    return new Pan(gameObject, config);
 });
 
 SetValue(window, 'RexPlugins.Gestures.Pan', Pan);
