@@ -1,4 +1,4 @@
-import Board from './board/board/Board.js';
+import Board from './board/board/LogicBoard.js';
 import Hexagon from './board/grid/hexagon/Hexagon.js';
 import Quad from './board/grid/quad/Quad.js';
 import Match from './board/match/Match.js';
