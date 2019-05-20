@@ -1,4 +1,4 @@
-import DragRotate from './dragRotate.js';
+import DragRotate from './dragrotate.js';
 
 class DragRotatePlugin extends Phaser.Plugins.BasePlugin {
 

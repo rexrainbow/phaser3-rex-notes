@@ -1,9 +1,7 @@
-const EE = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
-
 export default {
     setEventEmitter(eventEmitter, EventEmitterClass) {
         if (EventEmitterClass === undefined) {
-            EventEmitterClass = EE;
+            EventEmitterClass = Phaser.Events.EventEmitter; // Use built-in EventEmitter class by default
         }
         this._privateEE = (eventEmitter === undefined);
         this._eventEmitter = (this._privateEE) ? (new EventEmitterClass()) : eventEmitter;

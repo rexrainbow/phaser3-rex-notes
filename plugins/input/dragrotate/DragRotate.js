@@ -1,15 +1,18 @@
-const EE = Phaser.Events.EventEmitter;
+import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
+
 const GetValue = Phaser.Utils.Objects.GetValue;
 const DistanceBetween = Phaser.Math.Distance.Between;
 const AngleBetween = Phaser.Math.Angle.Between;
 const WrapRadians = Phaser.Math.Angle.Wrap;
 const RadToDeg = Phaser.Math.RadToDeg;
 
-class DragRotate extends EE {
+class DragRotate {
     constructor(scene, config) {
-        super();
-        this._deltaRotation = undefined;
         this.scene = scene;
+        // Event emitter
+        this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
+
+        this._deltaRotation = undefined;
         this.resetFromJSON(config);
         this.boot();
     }
@@ -150,16 +153,16 @@ class DragRotate extends EE {
     }
 
     onDragStart(pointer) {
-        this._deltaRotation = undefined;
         this.pointer = pointer;
         this.state = TOUCH1;
+        this._deltaRotation = undefined;
         this.emit('dragstart', this);
     }
 
     onDragEnd() {
-        this._deltaRotation = undefined;
         this.pointer = undefined;
         this.state = TOUCH0;
+        this._deltaRotation = undefined;
         this.emit('dragend', this);
     }
 
@@ -205,6 +208,11 @@ class DragRotate extends EE {
         return !this.cw;
     }
 }
+
+Object.assign(
+    DragRotate.prototype,
+    EventEmitterMethods
+);
 
 const TOUCH0 = 0;
 const TOUCH1 = 1;
