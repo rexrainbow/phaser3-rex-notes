@@ -41,7 +41,9 @@ class FSM {
         }
 
         // Event emitter
-        this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
+        var eventEmitter = GetValue(config, 'eventEmitter', undefined);
+        var EventEmitterClass = GetValue(config, 'EventEmitterClass', undefined);
+        this.setEventEmitter(eventEmitter, EventEmitterClass);
 
         this._stateLock = false;
         this.resetFromJSON(config);

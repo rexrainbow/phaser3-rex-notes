@@ -7,7 +7,7 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {}
+    preload() { }
 
     create() {
         this.print = this.add.text(0, 0, '');
@@ -40,23 +40,17 @@ var createBtn = function (scene, config) {
     var color = GetValue(config, 'color', 0xffffff);
     var name = GetValue(config, 'name', '');
 
-    var shape = new Phaser.Geom.Circle(0, 0, 60);
-    var btn = scene.add.graphics()
-        .setName(name)
-        .fillStyle(color, 1)
-        .fillCircleShape(shape)
-        .setInteractive(shape, Phaser.Geom.Circle.Contains)
-        .setPosition(x, y);
+    var btn = scene.add.rectangle(x, y, 120, 120, color)
+        .setName(name);
     scene.add.text(x, y, name, {
-            fontSize: '20pt'
-        })
+        fontSize: '20pt'
+    })
         .setOrigin(0.5, 0.5)
     btn.button = scene.plugins.get('rexButton').add(btn, {
         // clickInterval: 1000  // ms
     });
-    btn.button.on('click', function (button, gameObject) {
-        scene.print.setText(scene.print.text + '\n' +
-            'click ' + gameObject.name);
+    btn.button.on('click', function (button) {
+        scene.print.text += 'click ' + button.gameObject.name + '\n';
     });
     return btn;
 }
