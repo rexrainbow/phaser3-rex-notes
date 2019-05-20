@@ -1,6 +1,6 @@
 import GetSceneObject from '../../utils/system/GetSceneObject.js';
+import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
 
-const EE = Phaser.Events.EventEmitter;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const BetweenPoints = Phaser.Math.Angle.BetweenPoints;
 const DistanceBetween = Phaser.Math.Distance.Between;
@@ -9,11 +9,12 @@ const Clamp = Phaser.Math.Clamp;
 const Linear = Phaser.Math.Linear;
 const Percent = Phaser.Math.Percent;
 
-class Slider extends EE {
+class Slider {
     constructor(gameObject, config) {
-        super();
         this.gameObject = gameObject;
         this.scene = GetSceneObject(gameObject);
+        // Event emitter
+        this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
 
         this._value = undefined;
         this.endPoints = [{
@@ -189,5 +190,10 @@ class Slider extends EE {
 }
 
 var P1 = {}; // reuse this point object
+
+Object.assign(
+    Slider.prototype,
+    EventEmitterMethods
+);
 
 export default Slider;

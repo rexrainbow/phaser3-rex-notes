@@ -1,14 +1,15 @@
 import GetSceneObject from '../../utils/system/GetSceneObject.js';
+import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
 
-const EE = Phaser.Events.EventEmitter;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const DistanceBetween = Phaser.Math.Distance.Between;
 
-class DragSpeed extends EE {
+class DragSpeed {
     constructor(gameObject, config) {
-        super();
         this.gameObject = gameObject;
         this.scene = GetSceneObject(gameObject);
+        // Event emitter
+        this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
 
         gameObject.setInteractive(GetValue(config, "inputConfig", undefined));
         this.resetFromJSON(config);
@@ -184,5 +185,10 @@ class DragSpeed extends EE {
         }
     }
 }
+
+Object.assign(
+    DragSpeed.prototype,
+    EventEmitterMethods
+);
 
 export default DragSpeed;

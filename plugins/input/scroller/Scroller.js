@@ -1,16 +1,17 @@
 import GetSceneObject from '../../utils/system/GetSceneObject.js';
+import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
 import State from './State.js';
 import DrapSpeed from '../../dragspeed.js';
 import SlowDown from '../../utils/movement/SlowDown.js';
 
-const EE = Phaser.Events.EventEmitter;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class Scroller extends EE {
+class Scroller {
     constructor(gameObject, config) {
-        super();
         this.gameObject = gameObject;
         this.scene = GetSceneObject(gameObject);
+        // Event emitter
+        this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
 
         var enable = GetValue(config, 'enable', true);
         var stateConfig = {
@@ -21,7 +22,8 @@ class Scroller extends EE {
 
         var drapSpeedConfig = {
             inputConfig: GetValue(config, 'inputConfig', undefined),
-            enable: enable
+            enable: enable,
+            eventEmitter: false,
         };
         this.dragState = new DrapSpeed(gameObject, drapSpeedConfig);
 
@@ -285,6 +287,10 @@ class Scroller extends EE {
 
 }
 
+Object.assign(
+    Scroller.prototype,
+    EventEmitterMethods
+);
 
 /** @private */
 const ORIENTATIONMODE = {
