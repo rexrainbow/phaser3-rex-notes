@@ -3,7 +3,7 @@ import GetScrollMode from '../utils/GetScrollMode.js';
 import GridTableCore from '../../../plugins/gameobjects/gridtable/GridTable.js';
 import InjectProperties from './InjectProperties.js';
 import TableOnCellVisible from './TableOnCellVisible.js';
-import TableSetInteractive from './TableSetInteractive.js';
+import TableSetInteractive from './input/TableSetInteractive.js';
 import NOOP from '../../../plugins/utils/object/NOOP.js';
 import SetItems from './SetItems.js';
 

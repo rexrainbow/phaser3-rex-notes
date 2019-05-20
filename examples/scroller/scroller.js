@@ -81,7 +81,7 @@ class Demo extends Phaser.Scene {
     }
 
     update() {
-        this.scrollerState.setText(this.scroller.state + "\n" + this.scroller.value);
+        this.scrollerState.text = this.scroller.state + "\n" + this.scroller.value;
     }
 }
 

@@ -52,6 +52,7 @@ class Scroller {
 
     resetFromJSON(o) {
         this.setOrientationMode(GetValue(o, 'orientation', 0));
+        this.setDragThreshold(GetValue(o, 'threshold', 10));
         this.setSlidingDeceleration(GetValue(o, 'slidingDeceleration', 5000));
         this.setBackDeceleration(GetValue(o, 'backDeceleration', 2000));
 
@@ -92,6 +93,11 @@ class Scroller {
             m = ORIENTATIONMODE[m];
         }
         this.orientationMode = m;
+        return this;
+    }
+
+    setDragThreshold(distance) {
+        this.dragThreshold = distance;
         return this;
     }
 

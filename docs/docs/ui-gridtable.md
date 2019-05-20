@@ -70,6 +70,7 @@ var gridTable = scene.rexUI.add.gridTable({
     },
 
     scroller: {
+        threshold: 10,
         slidingDeceleration: 5000,
         backDeceleration: 2000,
     },
@@ -134,6 +135,7 @@ var gridTable = scene.rexUI.add.gridTable({
         - `'none'` : Disable sider controlling.
     - Set to `false` to skip creating slider.
 - `scroller` : Configuration of scroller behavior.
+    - `scroller.threshold` : Minimal movement to scroll. Set `0` to scroll immediately.
     - `scroller.slidingDeceleration` : Deceleration of slow down when dragging released.
         - Set `false` to disable it.
     - `scroller.backDeceleration` : Deceleration of pull back when out of bounds.

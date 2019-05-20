@@ -11,20 +11,37 @@ class State extends FSM {
         this.start('IDLE');
     }
 
-    // IDLE -> DRAG
+    // IDLE -> DRAGBEGIN|DRAG
     next_IDLE() {
         var nextState,
             parent = this.parent,
             dragState = parent.dragState;
         if (dragState.isDown) {
-            nextState = 'DRAG';
+            nextState = (parent.dragThreshold === 0) ? 'DRAG' : 'DRAGBEGIN';
         }
         return nextState;
     }
     update_IDLE(time, delta) {
         this.next();
     }
-    // IDLE    
+    // IDLE
+
+    // DRAGBEGIN -> DRAG|IDLE
+    next_DRAGBEGIN() {
+        var nextState,
+            parent = this.parent,
+            dragState = parent.dragState;
+        if (dragState.isDown) {
+            nextState = (dragState.pointer.getDistance() >= parent.dragThreshold) ? 'DRAG' : 'DRAGBEGIN';
+        } else { // dragState.isUp
+            nextState = 'IDLE';
+        }
+        return nextState;
+    }
+    update_DRAGBEGIN(time, delta) {
+        this.next();
+    }
+    // DRAGBEGIN
 
     // DRAG -> BACK|SLIDE|IDLE
     next_DRAG() {

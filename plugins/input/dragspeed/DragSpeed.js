@@ -79,7 +79,7 @@ class DragSpeed {
     }
 
     get isUp() {
-        return this.pointer === undefined;
+        return !this.isDown;
     }
 
     get justMoved() {
