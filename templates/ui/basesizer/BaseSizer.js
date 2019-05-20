@@ -20,8 +20,6 @@ import IsInTouching from './IsInTouching.js';
 import GetTopmostSizer from './GetTopmostSizer.js';
 import LayoutBackgrounds from './LayoutBackgrounds.js';
 import SetDraggable from './SetDraggable.js';
-// import SetTapable from './SetTapable.js';
-// import SetPressable from './SetPressable.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -214,8 +212,6 @@ var methods = {
     isInTouching: IsInTouching,
     getTopmostSizer: GetTopmostSizer,
     setDraggable: SetDraggable,
-    //setTapable: SetTapable,
-    //setPressable: SetPressable,
 }
 
 Object.assign(
