@@ -97,6 +97,17 @@
     }
     ```
 
+### Gestures
+
+1. [Tap](gesture-tap.md): Get tap/multi-taps events of a game object.
+    ```javascript
+    var tap = scene.rexUI.add.tap(gameObject, config);
+    ```
+1. [Press](gesture-press.md): Get press events of a game object.
+    ```javascript
+    var press = scene.rexUI.add.press(gameObject, config);
+    ```
+
 ## Demos
 
 - [Dialog](https://codepen.io/rexrainbow/pen/oQjMWE)
