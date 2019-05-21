@@ -1,4 +1,4 @@
-var SetDragEnable = function (enable) {
+var SetDraggable = function (enable) {
     if (enable === undefined) {
         enable = true;
     }
@@ -9,4 +9,4 @@ var SetDragEnable = function (enable) {
     }
     return this;
 }
-export default SetDragEnable;
+export default SetDraggable;

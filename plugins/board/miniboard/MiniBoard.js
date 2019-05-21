@@ -1,5 +1,5 @@
 import ContainerLite from '../../gameobjects/containerlite/ContainerLite.js';
-import Board from '../board/Board.js';
+import Board from '../board/LogicBoard.js';
 
 import AddChess from './chess/AddChess.js';
 import RemoveChess from './chess/RemoveChess.js';
@@ -15,7 +15,7 @@ import IsOverlapping from './mainboard/IsOverlapping.js';
 import AlignToMainBoard from './mainboard/AlignToMainBoard.js';
 
 import SetInteractive from './input/SetInteractive.js';
-import SetDragEnable from './input/SetDragEnable.js';
+import SetDraggable from './input/SetDraggable.js';
 import DragEnd from './input/DragEnd.js';
 
 import CanMirror from './transform/CanMirror.js';
@@ -54,7 +54,7 @@ class MiniBoard extends Container {
         this.setFace(GetValue(o, 'face', 0));
         var dragEnable = GetValue(o, 'draggable', undefined);
         if (dragEnable !== undefined) {
-            this.setDragEnable(dragEnable);
+            this.setDraggable(dragEnable);
         }
         this.lastTransferResult = GetValue(o, 'lastTransferResult', undefined);
         return this;
@@ -126,7 +126,7 @@ var methods = {
     alignToMainBoard: AlignToMainBoard,
 
     setInteractive: SetInteractive,
-    setDragEnable: SetDragEnable,
+    setDraggable: SetDraggable,
     dragEnd: DragEnd,
 
     setMainBoard: SetMainBoard,
