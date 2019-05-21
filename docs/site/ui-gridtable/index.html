@@ -4339,7 +4339,8 @@
         <span class="nx">columns</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
         <span class="nx">mask</span><span class="o">:</span> <span class="p">{</span>
             <span class="nx">padding</span><span class="o">:</span> <span class="mi">0</span>
-        <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="nx">interactive</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
     <span class="p">},</span>
 
     <span class="nx">slider</span><span class="o">:</span> <span class="p">{</span>
@@ -4348,6 +4349,7 @@
     <span class="p">},</span>
 
     <span class="nx">scroller</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">threshold</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
         <span class="nx">slidingDeceleration</span><span class="o">:</span> <span class="mi">5000</span><span class="p">,</span>
         <span class="nx">backDeceleration</span><span class="o">:</span> <span class="mi">2000</span><span class="p">,</span>
     <span class="p">},</span>
@@ -4419,6 +4421,7 @@
 <li><code>false</code> : No mask.</li>
 </ul>
 </li>
+<li><code>table.interactive</code> : Set <code>true</code> to install touch events (tap/press/over/out/click).</li>
 </ul>
 </li>
 <li><code>slider</code> : Componments of slider, optional.<ul>
@@ -4435,6 +4438,7 @@
 </ul>
 </li>
 <li><code>scroller</code> : Configuration of scroller behavior.<ul>
+<li><code>scroller.threshold</code> : Minimal movement to scroll. Set <code>0</code> to scroll immediately.</li>
 <li><code>scroller.slidingDeceleration</code> : Deceleration of slow down when dragging released.<ul>
 <li>Set <code>false</code> to disable it.</li>
 </ul>
@@ -4583,8 +4587,22 @@
 <p>See <a href="../ui-basesizer/">base sizer object</a>.</p>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Click cell
-    <div class="codehilite"><pre><span></span><span class="nx">gridTable</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cell.click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">,</span> <span class="nx">cellIndex</span><span class="p">)</span> <span class="p">{</span>
+<li>Tap cell
+    <div class="codehilite"><pre><span></span><span class="nx">gridTable</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="nx">tapEventName</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">,</span> <span class="nx">cellIndex</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>tapEventName</code> : <code>cell.1tap</code>, <code>cell.2tap</code>, <code>cell.3tap</code>, etc ...</li>
+<li><code>cellContainer</code> : Container game object of triggered cell.</li>
+<li><code>cellIndex</code> : Index of triggered cell.</li>
+</ul>
+</li>
+<li>Press cell
+    <div class="codehilite"><pre><span></span><span class="nx">gridTable</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="sb">`cell.pressstart`</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">,</span> <span class="nx">cellIndex</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div>
+    <div class="codehilite"><pre><span></span><span class="nx">gridTable</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="sb">`cell.pressend`</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">,</span> <span class="nx">cellIndex</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </pre></div><ul>
@@ -4603,6 +4621,15 @@
 </li>
 <li>Pointer-out cell
     <div class="codehilite"><pre><span></span><span class="nx">gridTable</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cell.out&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">,</span> <span class="nx">cellIndex</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>cellContainer</code> : Container game object of triggered cell.</li>
+<li><code>cellIndex</code> : Index of triggered cell.</li>
+</ul>
+</li>
+<li>Click cell
+    <div class="codehilite"><pre><span></span><span class="nx">gridTable</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cell.click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">,</span> <span class="nx">cellIndex</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </pre></div><ul>

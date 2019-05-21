@@ -103,9 +103,17 @@
     ```javascript
     var tap = scene.rexUI.add.tap(gameObject, config);
     ```
+    or
+    ```javascript
+    var tap = new RexPlugins.UI.Tap(gameObject, config);
+    ```
 1. [Press](gesture-press.md): Get press events of a game object.
     ```javascript
     var press = scene.rexUI.add.press(gameObject, config);
+    ```
+    or
+    ```javascript
+    var press = new RexPlugins.UI.Press(gameObject, config);
     ```
 
 ## Demos

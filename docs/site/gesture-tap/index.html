@@ -4292,6 +4292,13 @@
 <li><code>tap.worldX</code>, <code>tap.worldY</code> : World position of first tapping.</li>
 <li><code>tap.x</code>, <code>tap.y</code> : Scene position of first tapping.</li>
 </ul>
+<div class="codehilite"><pre><span></span><span class="nx">tap</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="nx">tapsCount</span> <span class="o">+</span> <span class="s1">&#39;tap&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tap</span><span class="p">){</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div>
+
+<ul>
+<li><code>tapsCount + 'tap'</code> : <code>1tap</code>, <code>2tap</code>, <code>3tap</code>, etc ...</li>
+</ul>
 <h4 id="tapping-start">Tapping start<a class="headerlink" href="#tapping-start" title="Permanent link">&para;</a></h4>
 <p>Each pointer-down will increase taps count and fire <code>tappingstart</code> event.</p>
 <div class="codehilite"><pre><span></span><span class="nx">tap</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;tappingstart&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tap</span><span class="p">){</span>
