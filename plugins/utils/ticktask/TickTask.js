@@ -21,7 +21,7 @@ class TickTask {
 
     // override
     shutdown() {
-        super.shutdown();
+        this.destroyEventEmitter();
         if (this.tickingState) {
             this.stopTicking();
         }

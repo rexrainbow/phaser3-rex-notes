@@ -40,6 +40,7 @@ class TwoPointersTracer {
     }
 
     shutdown() {
+        this.destroyEventEmitter();
         this.pointers.length = 0;
         Clear(this.movedState);
         if (this.scene) {

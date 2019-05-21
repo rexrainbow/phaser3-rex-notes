@@ -42,7 +42,7 @@ class DragSpeed {
     }
 
     shutdown() {
-        super.shutdown();
+        this.destroyEventEmitter();
         if (this.scene) { // Scene might be destoryed
             this.scene.events.off('preupdate', this.preupdate, this);
         }

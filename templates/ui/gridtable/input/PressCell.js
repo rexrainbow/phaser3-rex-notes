@@ -1,5 +1,5 @@
 import Press from '../../press/Press.js';
-import FireCellEvent from './FireCellEvent.js';
+import EmitCellEvent from './EmitCellEvent.js';
 
 var PressCell = function (table) {
     table._press = new Press(table);
@@ -8,13 +8,13 @@ var PressCell = function (table) {
             var table = press.gameObject;
             var cellIndex = table.pointerToCellIndex(press.worldX, press.worldY);
             press._cellIndex = cellIndex;
-            FireCellEvent(this.eventEmitter, 'cell.pressstart', table, cellIndex);
+            EmitCellEvent(this.eventEmitter, 'cell.pressstart', table, cellIndex);
         }, this)
         .on('pressend', function (press) {
             var table = press.gameObject;
             var cellIndex = press._cellIndex;
             press._cellIndex = undefined;
-            FireCellEvent(this.eventEmitter, 'cell.pressend', table, cellIndex);
+            EmitCellEvent(this.eventEmitter, 'cell.pressend', table, cellIndex);
         }, this)
 };
 

@@ -1,6 +1,5 @@
 import ClickCell from './ClickCell.js';
 import OverCell from './OverCell.js';
-import OutCell from './OutCell.js';
 import TapCell from './TapCell.js';
 import PressCell from './PressCell.js';
 
@@ -9,7 +8,6 @@ var TableSetInteractive = function (table) {
 
     ClickCell.call(this, table);
     OverCell.call(this, table);
-    OutCell.call(this, table);
     TapCell.call(this, table);
     PressCell.call(this, table);
 }

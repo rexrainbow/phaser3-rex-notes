@@ -1,4 +1,4 @@
-var FireCellEvent = function (eventEmitter, eventName, table, worldX, worldY) {
+var EmitCellEvent = function (eventEmitter, eventName, table, worldX, worldY) {
     var cellIndex;
     if (worldY === undefined) {
         cellIndex = worldX;
@@ -12,4 +12,4 @@ var FireCellEvent = function (eventEmitter, eventName, table, worldX, worldY) {
     eventEmitter.emit(eventName, cellContainer, cellIndex);
 }
 
-export default FireCellEvent;
+export default EmitCellEvent;

@@ -1,12 +1,14 @@
-import FireCellEvent from './FireCellEvent.js';
+import EmitCellEvent from './EmitCellEvent.js';
 
 var OverCell = function (table) {
     table
-        .on('pointermove', OnCellOver, this)
-        .on('pointerover', OnCellOver, this);
+        .on('pointermove', OnMove, this)
+        .on('pointerover', OnMove, this)
+        .on('pointerup', OnOut, this)
+        .on('pointerout', OnOut, this);
 }
 
-var OnCellOver = function (pointer) {
+var OnMove = function (pointer) {
     if (pointer.isDown) {
         return;
     }
@@ -18,8 +20,15 @@ var OnCellOver = function (pointer) {
 
     var preCellIndex = this._lastOverCellIndex;
     this._lastOverCellIndex = cellIndex;
-    FireCellEvent(this.eventEmitter, 'cell.out', table, preCellIndex);
-    FireCellEvent(this.eventEmitter, 'cell.over', table, cellIndex);
+    EmitCellEvent(this.eventEmitter, 'cell.out', table, preCellIndex);
+    EmitCellEvent(this.eventEmitter, 'cell.over', table, cellIndex);
+}
+
+var OnOut = function () {
+    var table = this.childrenMap.child;
+    var cellIndxe = this._lastOverCellIndex;
+    this._lastOverCellIndex = undefined;
+    EmitCellEvent(this.eventEmitter, 'cell.out', table, cellIndxe);
 }
 
 export default OverCell;

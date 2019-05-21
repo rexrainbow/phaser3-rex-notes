@@ -34,7 +34,7 @@ class Button {
     }
 
     shutdown() {
-        super.shutdown();
+        this.destroyEventEmitter();
         this.pointer = undefined;
         this.gameObject = undefined;
         this.scene = undefined;

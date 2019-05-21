@@ -40,7 +40,7 @@ class TouchState {
     }
 
     shutdown() {
-        super.shutdown();
+        this.destroyEventEmitter();
 
         this.pointer = undefined;
         this.gameObject = undefined;
