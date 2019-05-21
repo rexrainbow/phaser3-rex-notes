@@ -1,7 +1,5 @@
+import Methods from './Methods.js';
 import GetChessData from '../chess/GetChessData.js';
-import GetPath from './GetPath.js';
-import GetNextTile from './GetNextTile.js';
-import GetCost from './GetCost.js';
 import CONST from './const.js';
 import GetValue from '../../utils/object/GetValue.js';
 
@@ -87,14 +85,9 @@ class Monopoly {
     }
 }
 
-var methods = {
-    getPath: GetPath,
-    getNextTile: GetNextTile,
-    getCost: GetCost,
-};
 Object.assign(
     Monopoly.prototype,
-    methods
+    Methods
 );
 
 const PATHMODE = {

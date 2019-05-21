@@ -1,11 +1,6 @@
 import GetChessData from '../chess/GetChessData.js';
+import Methods from './Methods.js';
 import CONST from './const.js';
-import AStarSearch from './astartsearch/AStarSearch.js';
-import GetCost from './GetCost.js';
-import FindArea from './FindArea.js';
-import GetPath from './GetPath.js';
-import FindPath from './FindPath.js';
-import TileXYToCost from './TileXYToCost.js';
 import GetValue from '../../utils/object/GetValue.js';
 
 const BLOCKER = CONST.BLOCKER;
@@ -128,17 +123,9 @@ class PathFinder {
     }
 }
 
-var methods = {
-    aStarSearch: AStarSearch,
-    getCost: GetCost,
-    findArea: FindArea,
-    getPath: GetPath,
-    findPath: FindPath,
-    tileXYToCost: TileXYToCost,
-};
 Object.assign(
     PathFinder.prototype,
-    methods
+    Methods
 );
 
 const PATHMODE = {

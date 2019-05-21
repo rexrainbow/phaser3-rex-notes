@@ -1,7 +1,5 @@
+import Methods from './Methods.js';
 import IsFunction from '../../utils/object/IsFunction.js';
-import MatchAll from './MatchAll.js';
-import MatchAtDir from './MatchAtDir.js';
-
 import GetValue from '../../utils/object/GetValue.js';
 import IsPlainObject from '../../utils/object/IsPlainObject.js';
 
@@ -168,13 +166,9 @@ var globTileXY = {
     y: 0
 };
 
-var methods = {
-    match: MatchAll,
-    matchAtDir: MatchAtDir,
-};
 Object.assign(
     Match.prototype,
-    methods
+    Methods
 );
 
 export default Match;

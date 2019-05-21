@@ -21,6 +21,7 @@ class Button {
         this.setEnable(GetValue(o, "enable", true));
         this.setMode(GetValue(o, "mode", 1));
         this.setClickInterval(GetValue(o, "clickInterval", 100));
+        this.setDragThreshold(GetValue(o, 'threshold', undefined));
         return this;
     }
 
@@ -28,6 +29,7 @@ class Button {
         this.gameObject.on('pointerdown', this.onPress, this);
         this.gameObject.on('pointerup', this.onRelease, this);
         this.gameObject.on('pointerout', this.onPointOut, this);
+        this.gameObject.on('pointermove', this.onMove, this);
         this.gameObject.on('destroy', this.destroy, this);
     }
 
@@ -53,7 +55,7 @@ class Button {
         }
 
         if (!e) {
-            this.pointer = undefined;
+            this.cancel();
         }
         this.enable = e;
         this.gameObject.input.enabled = e;
@@ -70,6 +72,11 @@ class Button {
 
     setClickInterval(interval) {
         this.clickInterval = interval; // ms
+        return this;
+    }
+
+    setDragThreshold(distance) {
+        this.dragThreshold = distance;
         return this;
     }
 
@@ -98,7 +105,21 @@ class Button {
         if (this.pointer !== pointer) {
             return;
         }
-        this.pointer = undefined;
+        this.cancel();
+    }
+
+    onMove(pointer) {
+        if (this.pointer !== pointer) {
+            return;
+        }
+
+        if (this.dragThreshold === undefined) {
+            return;
+        }
+
+        if (pointer.getDistance() >= this.dragThreshold) {
+            this.cancel();
+        }
     }
 
     click(nowTime, pointer) {
@@ -116,6 +137,11 @@ class Button {
         }
         this.lastClickTime = nowTime;
         this.emit('click', this, this.gameObject, pointer);
+        return this;
+    }
+
+    cancel() {
+        this.pointer = undefined;
         return this;
     }
 }

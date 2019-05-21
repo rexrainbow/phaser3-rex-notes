@@ -1,13 +1,7 @@
-import MoveToTask from '../../behaviors/moveto/MoveTo.js';
 import TickTask from '../../utils/ticktask/TickTask.js';
+import Methods from './Methods.js';
+import MoveToTask from '../../behaviors/moveto/MoveTo.js';
 import GetChessData from '../chess/GetChessData.js';
-
-import CanMoveToTile from './CanMoveToTile.js';
-import MoveToTile from './MoveToTile.js';
-import MoveToward from './MoveToward.js';
-import MoveToRandomNeighbor from './MoveToRandomNeighbor.js';
-import MoveAway from './MoveAway.js';
-import MoveCloser from './MoveCloser.js';
 import GetValue from '../../utils/object/GetValue.js';
 
 class MoveTo extends TickTask {
@@ -256,17 +250,9 @@ const moveToTaskConfig = {
     tickingMode: 0
 };
 
-var methods = {
-    canMoveTo: CanMoveToTile,
-    moveTo: MoveToTile,
-    moveToward: MoveToward,
-    moveToRandomNeighbor: MoveToRandomNeighbor,
-    moveAway: MoveAway,
-    moveCloser: MoveCloser,
-};
 Object.assign(
     MoveTo.prototype,
-    methods
+    Methods
 );
 
 

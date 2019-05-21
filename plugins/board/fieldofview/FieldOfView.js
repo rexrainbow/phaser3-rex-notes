@@ -1,10 +1,5 @@
+import Methods from './Methods.js';
 import GetChessData from '../chess/GetChessData.js';
-import GetCost from './GetCost.js';
-import IsInCone from './IsInCone.js';
-import IsPathVisible from './IsPathVisible.js';
-import IsInLOS from './IsInLOS.js';
-import LOS from './LOS.js';
-import FindFOV from './FindFOV.js';
 import CONST from './const.js';
 import DegToRad from '../../utils/math/DegToRad.js';
 import AngleNormalize from '../../utils/math/angle/Normalize.js';
@@ -179,17 +174,9 @@ const CONEMODE = {
     angle: 1,
 };
 
-var methods = {
-    getCost: GetCost,
-    isInCone: IsInCone,
-    isPathVisible: IsPathVisible,
-    isInLOS: IsInLOS,
-    LOS: LOS,
-    findFOV: FindFOV,
-};
 Object.assign(
     FieldOfView.prototype,
-    methods
+    Methods
 );
 
 export default FieldOfView;

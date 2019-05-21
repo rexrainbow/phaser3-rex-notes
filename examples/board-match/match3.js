@@ -100,7 +100,7 @@ class Board extends RexPlugins.Board.Board {
         var matchedCount = 0;
         this.refreshSymbols();
         this.match.match(3, function (result, board) {
-            var chess = board.tileXYArrayToChess(result.tileXY, 0);
+            var chess = board.tileXYArrayToChessArray(result.tileXY, 0);
             for (var i = 0, cnt = chess.length; i < cnt; i++) {
                 chess[i].setScale(0.7);
             }
