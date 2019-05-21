@@ -1,11 +1,6 @@
 import BaseSizer from '../basesizer/BaseSizer.js';
+import Methods from './Methods.js';
 import ParsePaddingConfig from '../utils/ParsePaddingConfig.js';
-import GetChildrenWidth from './GetChildrenWidth.js';
-import GetChildrenHeight from './GetChildrenHeight.js';
-import GetChildrenProportion from './GetChildrenProportion.js';
-import GetChildrenSizers from './GetChildrenSizers.js';
-import Layout from './Layout.js';
-import _layoutInit from './_layoutInit.js';
 import ORIENTATIONMODE from '../utils/OrientationConst.js';
 import ALIGNMODE from '../utils/AlignConst.js';
 
@@ -131,17 +126,9 @@ class Sizer extends BaseSizer {
     }
 }
 
-var methods = {
-    getChildrenWidth: GetChildrenWidth,
-    getChildrenHeight: GetChildrenHeight,
-    getChildrenProportion: GetChildrenProportion,
-    getChildrenSizers: GetChildrenSizers,
-    layout: Layout,
-    _layoutInit: _layoutInit,
-}
 Object.assign(
     Sizer.prototype,
-    methods
+    Methods
 );
 
 const PROPORTIONMODE = {

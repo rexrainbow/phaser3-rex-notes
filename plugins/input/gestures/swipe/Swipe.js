@@ -25,7 +25,7 @@ class Swipe extends OnePointerTracer {
                     enter: function () {
                         self.start();
                         self.updateDirectionStates();
-                        self.emit('swipe', self);
+                        self.emit('swipe', self, self.gameObject, self.lastPointer);
                     },
 
                     exit: function () {

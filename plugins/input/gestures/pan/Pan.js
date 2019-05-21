@@ -23,7 +23,7 @@ class Pan extends OnePointerTracer {
                 },
                 RECOGNIZED: {
                     enter: function () {
-                        self.emit('panstart', self);
+                        self.emit('panstart', self, self.gameObject, self.lastPointer);
                     },
                     exit: function () {
                         var pointer = self.lastPointer;
@@ -31,7 +31,7 @@ class Pan extends OnePointerTracer {
                         self.endY = pointer.y;
                         self.endWorldX = pointer.worldX;
                         self.endWorldY = pointer.worldY;
-                        self.emit('panend', self);
+                        self.emit('panend', self, self.gameObject, self.lastPointer);
                     }
                 }
             },

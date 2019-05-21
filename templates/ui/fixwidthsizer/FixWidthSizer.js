@@ -1,9 +1,6 @@
 import BaseSizer from '../basesizer/BaseSizer.js';
+import Methods from './Methods.js';
 import ParsePaddingConfig from '../utils/ParsePaddingConfig.js';
-import GetChildrenWidth from './GetChildrenWidth.js';
-import GetChildrenHeight from './GetChildrenHeight.js';
-import GetChildrenSizers from './GetChildrenSizers.js';
-import Layout from './Layout.js';
 import ORIENTATIONMODE from '../utils/OrientationConst.js';
 import GetMaxChildWidth from './GetMaxChildWidth.js';
 import GetMaxChildHeight from './GetMaxChildHeight.js';
@@ -131,15 +128,9 @@ class FixWidthSizer extends BaseSizer {
     }
 }
 
-var methods = {
-    getChildrenWidth: GetChildrenWidth,
-    getChildrenHeight: GetChildrenHeight,
-    getChildrenSizers: GetChildrenSizers,
-    layout: Layout,
-}
 Object.assign(
     FixWidthSizer.prototype,
-    methods
+    Methods
 );
 
 export default FixWidthSizer;

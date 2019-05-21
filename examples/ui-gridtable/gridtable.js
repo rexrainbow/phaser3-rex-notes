@@ -13,77 +13,74 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {}
+    preload() { }
 
     create() {
         var scrollMode = 0; // 0:vertical, 1:horizontal
         var gridTable = this.rexUI.add.gridTable({
-                x: 400,
-                y: 300,
-                width: (scrollMode === 0) ? 300 : 400,
-                height: (scrollMode === 0) ? 400 : 300,
+            x: 400,
+            y: 300,
+            width: (scrollMode === 0) ? 300 : 400,
+            height: (scrollMode === 0) ? 400 : 300,
 
-                scrollMode: scrollMode,
+            scrollMode: scrollMode,
 
-                background: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, 0x4e342e),
+            background: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, 0x4e342e),
 
-                table: {
-                    cellWidth: (scrollMode === 0) ? undefined : 60,
-                    cellHeight: (scrollMode === 0) ? 60 : undefined,
+            table: {
+                cellWidth: (scrollMode === 0) ? undefined : 60,
+                cellHeight: (scrollMode === 0) ? 60 : undefined,
 
-                    columns: 2,
+                columns: 2,
 
-                    mask: {
-                        padding: 2,
-                    },
+                mask: {
+                    padding: 2,
                 },
+            },
 
-                slider: {
-                    track: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, 0x260e04),
-                    thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 13, 0x7b5e57),
-                },
+            slider: {
+                track: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, 0x260e04),
+                thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 13, 0x7b5e57),
+            },
 
-                space: {
-                    left: 20,
-                    right: 20,
-                    top: 20,
-                    bottom: 20,
+            space: {
+                left: 20,
+                right: 20,
+                top: 20,
+                bottom: 20,
 
-                    table: 10,
-                },
+                table: 10,
+            },
 
-                createCellContainerCallback: function (cell) {
-                    var scene = cell.scene,
-                        width = cell.width,
-                        height = cell.height,
-                        item = cell.item,
-                        index = cell.index;
-                    return scene.rexUI.add.label({
-                        width: width,
-                        height: height,
+            createCellContainerCallback: function (cell) {
+                var scene = cell.scene,
+                    width = cell.width,
+                    height = cell.height,
+                    item = cell.item,
+                    index = cell.index;
+                return scene.rexUI.add.label({
+                    width: width,
+                    height: height,
 
-                        orientation: scrollMode,
-                        background: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 0).setStrokeStyle(2, COLOR_DARK),
-                        icon: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 10, item.color),
-                        text: scene.add.text(0, 0, item.id),
+                    orientation: scrollMode,
+                    background: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 0).setStrokeStyle(2, COLOR_DARK),
+                    icon: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 10, item.color),
+                    text: scene.add.text(0, 0, item.id),
 
-                        space: {
-                            icon: 10,
-                            left: (scrollMode === 0) ? 15 : 0,
-                            top: (scrollMode === 0) ? 0 : 15,
-                        }
-                    });
-                },
-                items: getItems(100)
-            })
+                    space: {
+                        icon: 10,
+                        left: (scrollMode === 0) ? 15 : 0,
+                        top: (scrollMode === 0) ? 0 : 15,
+                    }
+                });
+            },
+            items: getItems(100)
+        })
             .layout()
         //.drawBounds(this.add.graphics(), 0xff0000);
 
         this.print = this.add.text(0, 0, '');
         gridTable
-            .on('cell.click', function (cellContainer, cellIndex) {
-                this.print.text += cellIndex + ': ' + cellContainer.text + '\n';
-            }, this)
             .on('cell.over', function (cellContainer, cellIndex) {
                 cellContainer.getElement('background')
                     .setStrokeStyle(2, COLOR_LIGHT)
@@ -93,10 +90,25 @@ class Demo extends Phaser.Scene {
                 cellContainer.getElement('background')
                     .setStrokeStyle(2, COLOR_DARK)
                     .setDepth(0);
-            }, this);
+            }, this)
+            // .on('cell.click', function (cellContainer, cellIndex) {
+            //     this.print.text += 'click ' + cellIndex + ': ' + cellContainer.text + '\n';
+            // }, this)
+            .on('cell.1tap', function (cellContainer, cellIndex) {
+                this.print.text += '1 tap (' + cellIndex + ': ' + cellContainer.text + ')\n';
+            }, this)
+            .on('cell.2tap', function (cellContainer, cellIndex) {
+                this.print.text += '2 taps (' + cellIndex + ': ' + cellContainer.text + ')\n';
+            }, this)
+            .on('cell.pressstart', function (cellContainer, cellIndex) {
+                this.print.text += 'press-start (' + cellIndex + ': ' + cellContainer.text + ')\n';
+            }, this)
+            .on('cell.pressend', function (cellContainer, cellIndex) {
+                this.print.text += 'press-end (' + cellIndex + ': ' + cellContainer.text + ')\n';
+            }, this)
     }
 
-    update() {}
+    update() { }
 }
 
 var getItems = function (count) {

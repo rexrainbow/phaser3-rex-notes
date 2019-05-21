@@ -1,10 +1,8 @@
 import Buttons from '../buttons/Buttons.js';
+import Methods from './Methods.js';
 import CreateButtons from './CreateButtons.js';
 import GetDefaultBounds from '../../../plugins/utils/defaultbounds/GetDefaultBounds.js';
 import MenuSetInteractive from './MenuSetInteractive.js';
-import ExpandSubMenu from './ExpandSubMenu.js';
-import Collapse from './Collapse.js';
-import CollapseSubMenu from './CollapseSubMenu.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -93,14 +91,8 @@ class Menu extends Buttons {
     }
 }
 
-var methods = {
-    expandSubMenu: ExpandSubMenu,
-    collapse: Collapse,
-    collapseSubMenu: CollapseSubMenu,
-}
-
 Object.assign(
     Menu.prototype,
-    methods
+    Methods
 );
 export default Menu;

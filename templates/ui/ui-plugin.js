@@ -26,6 +26,9 @@ import ScrollablePanelFactory from './scrollablepanel/ScrollablePanelFactory.js'
 import ChartFactory from './chart/ChartFactory.js';
 // import InputTextFactory from './inputtext/InputTextFactory.js';
 
+import TapFactory from './tap/TapFactory.js';
+import PressFactory from './press/PressFactory.js';
+
 import Hide from './utils/Hide.js';
 import Show from './utils/Show.js';
 

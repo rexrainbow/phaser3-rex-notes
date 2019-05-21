@@ -1,10 +1,6 @@
 import BaseSizer from '../basesizer/BaseSizer.js';
+import Methods from './Methods.js';
 import SCROLLMODE from '../utils/ScrollModeConst.js';
-import SetChild from './SetChild.js';
-import GetChildrenWidth from './GetChildrenWidth.js';
-import GetChildrenHeight from './GetChildrenHeight.js';
-import ResetChildPosition from './ResetChildPosition.js';
-import Layout from './Layout.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -183,17 +179,9 @@ class ScrollableBlock extends BaseSizer {
     }
 }
 
-var methods = {
-    setChild: SetChild,
-    getChildrenWidth: GetChildrenWidth,
-    getChildrenHeight: GetChildrenHeight,
-    resetChildPosition: ResetChildPosition,
-    layout: Layout,
-}
-
 Object.assign(
     ScrollableBlock.prototype,
-    methods
+    Methods
 );
 
 export default ScrollableBlock;

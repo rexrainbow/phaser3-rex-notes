@@ -1,3 +1,5 @@
+import FireCellEvent from './FireCellEvent.js';
+
 var OutCell = function (table) {
     table
         .on('pointerup', OnCellOut, this)
@@ -6,11 +8,9 @@ var OutCell = function (table) {
 
 var OnCellOut = function () {
     var table = this.childrenMap.child;
-    var cellContainer = table.getCellContainer(this.lastOverCellIndex);
-    if (cellContainer != null) {
-        this.eventEmitter.emit('cell.out', cellContainer, this.lastOverCellIndex);
-    }
-    this.lastOverCellIndex = undefined;
+    var cellIndxe = this._lastOverCellIndex;
+    this._lastOverCellIndex = undefined;
+    FireCellEvent(this.eventEmitter, 'cell.out', table, cellIndxe);
 }
 
 export default OutCell;

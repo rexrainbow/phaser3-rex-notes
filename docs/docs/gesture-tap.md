@@ -90,6 +90,14 @@ tap.on('tap', function(tap){
 - `tap.worldX`, `tap.worldY` : World position of first tapping.
 - `tap.x`, `tap.y` : Scene position of first tapping.
 
+
+```javascript
+tap.on(tapsCount + 'tap', function(tap){
+}, scope);
+```
+
+- `tapsCount + 'tap'` : `1tap`, `2tap`, `3tap`, etc ...
+
 #### Tapping start
 
 Each pointer-down will increase taps count and fire `tappingstart` event.

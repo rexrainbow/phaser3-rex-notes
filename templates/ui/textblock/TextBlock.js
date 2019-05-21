@@ -1,8 +1,5 @@
 import BaseSizer from '../basesizer/BaseSizer.js';
-import SetTextObject from './SetTextObject.js';
-import SetText from './SetText.js';
-import UpdateTextObject from './UpdateTextObject.js';
-import Layout from './Layout.js';
+import Methods from './Methods.js';
 import LinesCountToTextHeight from './LinesCountToTextHeight.js';
 import TextHeightToLinesCount from './TextHeightToLinesCount.js';
 
@@ -212,15 +209,9 @@ var createDefaultTextObject = function (scene) {
     return scene.add.text(0, 0, '');
 };
 
-var methods = {
-    setTextObject: SetTextObject,
-    setText: SetText,
-    updateTextObject: UpdateTextObject,
-    layout: Layout,
-}
 Object.assign(
     TextBlock.prototype,
-    methods
+    Methods
 );
 
 export default TextBlock;

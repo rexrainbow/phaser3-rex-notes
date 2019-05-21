@@ -61,7 +61,8 @@ var gridTable = scene.rexUI.add.gridTable({
         columns: 2,
         mask: {
             padding: 0
-        }
+        },
+        interactive: true,
     },
 
     slider: {
@@ -125,6 +126,7 @@ var gridTable = scene.rexUI.add.gridTable({
     - `table.mask` : A rectangle mask of cells
         - `table.mask.padding` : Extra left/right/top/bottom padding spacing of this rectangle mask. Default value is `0`.
         - `false` : No mask.
+    - `table.interactive` : Set `true` to install touch events (tap/press/over/out/click).
 - `slider` : Componments of slider, optional.
     - `slider.background` : Game object of slider background, optional.
     - `slider.track` : Game object of track.
@@ -290,9 +292,23 @@ See [base sizer object](ui-basesizer.md).
 
 ### Events
 
-- Click cell
+- Tap cell
     ```javascript
-    gridTable.on('cell.click', function(cellContainer, cellIndex) {
+    gridTable.on(tapEventName, function(cellContainer, cellIndex) {
+        // ...
+    }, scope);
+    ```
+    - `tapEventName` : `cell.1tap`, `cell.2tap`, `cell.3tap`, etc ...
+    - `cellContainer` : Container game object of triggered cell.
+    - `cellIndex` : Index of triggered cell.
+- Press cell
+    ```javascript
+    gridTable.on(`cell.pressstart`, function(cellContainer, cellIndex) {
+        // ...
+    }, scope);
+    ```
+    ```javascript
+    gridTable.on(`cell.pressend`, function(cellContainer, cellIndex) {
         // ...
     }, scope);
     ```
@@ -309,6 +325,14 @@ See [base sizer object](ui-basesizer.md).
 - Pointer-out cell
     ```javascript
     gridTable.on('cell.out', function(cellContainer, cellIndex) {
+        // ...
+    }, scope);
+    ```
+    - `cellContainer` : Container game object of triggered cell.
+    - `cellIndex` : Index of triggered cell.
+- Click cell
+    ```javascript
+    gridTable.on('cell.click', function(cellContainer, cellIndex) {
         // ...
     }, scope);
     ```

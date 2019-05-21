@@ -1,10 +1,6 @@
 import BaseSizer from '../basesizer/BaseSizer.js';
+import Methods from './Methods.js';
 import ParsePaddingConfig from '../utils/ParsePaddingConfig.js';
-import GetChildrenWidth from './GetChildrenWidth.js';
-import GetChildrenHeight from './GetChildrenHeight.js';
-import GetChildrenSizers from './GetChildrenSizers.js';
-import Layout from './Layout.js';
-import _layoutInit from './_layoutInit.js';
 import ALIGNMODE from '../utils/AlignConst.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
@@ -192,16 +188,9 @@ class GridSizer extends BaseSizer {
     }
 }
 
-var methods = {
-    getChildrenWidth: GetChildrenWidth,
-    getChildrenHeight: GetChildrenHeight,
-    getChildrenSizers: GetChildrenSizers,
-    layout: Layout,
-    _layoutInit: _layoutInit,
-}
 Object.assign(
     GridSizer.prototype,
-    methods
+    Methods
 );
 
 export default GridSizer;

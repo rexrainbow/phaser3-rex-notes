@@ -32,13 +32,14 @@ class Tap extends OnePointerTracer {
                     enter: function () {
                         self.start();
                         self.tapsCount = 0;
-                        self.emit('tappingstart', self);
+                        self.emit('tappingstart', self, self.gameObject, self.lastPointer);
                     },
                 },
                 RECOGNIZED: {
                     enter: function () {
                         self.start();
-                        self.emit('tap', self);
+                        self.emit('tap', self, self.gameObject, self.lastPointer);
+                        self.emit(`${self.tapsCount}tap`, self, self.gameObject, self.lastPointer);
                     },
                 }
             },
@@ -95,7 +96,7 @@ class Tap extends OnePointerTracer {
     onDragEnd() {
         if (this.state === BEGIN) {
             this.tapsCount++; // Try recognize next level
-            this.emit('tapping', this);
+            this.emit('tapping', this, this.gameObject, this.lastPointer);
 
             if ((this.maxTaps !== undefined) && (this.tapsCount === this.maxTaps)) { // Reach to maxTaps, stop here                
                 this.state = RECOGNIZED;

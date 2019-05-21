@@ -35,10 +35,10 @@ class Press extends OnePointerTracer {
                 },
                 RECOGNIZED: {
                     enter: function () {
-                        self.emit('pressstart', self);
+                        self.emit('pressstart', self, self.gameObject, self.lastPointer);
                     },
                     exit: function () {
-                        self.emit('pressend', self);
+                        self.emit('pressend', self, self.gameObject, self.lastPointer);
                     }
                 }
             },
