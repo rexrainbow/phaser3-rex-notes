@@ -1,39 +1,31 @@
+import EmitChessEvent from './EmitChessEvent.js';
 
 var OnPointerUp = function (pointer) {
-    if (!this.input.enable) {
+    if (!this.enable) {
         return;
     }
 
+    var board = this.board;
     // Get touched tileX, tileY
-    var out = this.worldXYToTileXY(pointer.worldX, pointer.worldY, true);
+    var out = board.worldXYToTileXY(pointer.worldX, pointer.worldY, true);
     var tileX = out.x,
         tileY = out.y;
-    this.input.tilePosition.x = tileX;
-    this.input.tilePosition.y = tileY;
-    if (!this.contains(tileX, tileY)) {
+    this.tilePosition.x = tileX;
+    this.tilePosition.y = tileY;
+    if (!board.contains(tileX, tileY)) {
         return;
     }
-    this.emit('tileup', pointer, this.input.tilePosition);
+    board.emit('tileup', pointer, this.tilePosition);
 
-    // Get touched chess
-    globChessArray.length = 0;
-    var gameObjects = this.tileXYToChessArray(tileX, tileY, globChessArray);
-    // Fire events
-    var gameObject;
-    for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-        gameObject = gameObjects[i];
-        if (gameObject.emit) {
-            gameObject.emit('board.pointerup', pointer);
-        }
-        this.emit('gameobjectup', pointer, gameObject);
-    }
-    globChessArray.length = 0;
+    EmitChessEvent(
+        'gameobjectup', 'board.pointerup',
+        board, tileX, tileY,
+        pointer
+    );
 
-    if (this.input.pointer === pointer) { // Release touch pointer
-        this.input.pointer = null;
+    if (this.pointer === pointer) { // Release touch pointer
+        this.pointer = null;
     }
 };
-
-var globChessArray = [];
 
 export default OnPointerUp;

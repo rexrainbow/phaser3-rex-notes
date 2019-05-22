@@ -9,15 +9,15 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {}
+    preload() { }
 
     create() {
         var board = this.rexBoard.add.board({
-                grid: getHexagonGrid(this),
-                // grid: getQuadGrid(this),
-                width: 20,
-                height: 20
-            })
+            grid: getHexagonGrid(this),
+            // grid: getQuadGrid(this),
+            width: 20,
+            height: 20
+        })
             .forEachTileXY(function (tileXY, board) {
                 var chess = this.rexBoard.add.shape(board, tileXY.x, tileXY.y, 0, Random(0, 0xffffff), 0.7);
                 this.add.text(chess.x, chess.y, tileXY.x + ',' + tileXY.y)
@@ -38,7 +38,19 @@ class Demo extends Phaser.Scene {
             })
             .on('gameobjectdown', function (pointer, gameObject) {
                 gameObject.setFillStyle(Random(0, 0xffffff), 0.7);
-            });
+            })
+            .on('tile1tap', function (tap, tileXY) {
+                console.log('1 tap ' + tileXY.x + ',' + tileXY.y);
+            })
+            .on('tile2tap', function (tap, tileXY) {
+                console.log('2 tap ' + tileXY.x + ',' + tileXY.y);
+            })
+            .on('tilepressstart', function (press, tileXY) {
+                console.log('press start ' + tileXY.x + ',' + tileXY.y);
+            })
+            .on('tilepressend', function (press, tileXY) {
+                console.log('press end ' + tileXY.x + ',' + tileXY.y);
+            })
 
         this.board = board;
         this.print = this.add.text(0, 0, '').setScrollFactor(0);

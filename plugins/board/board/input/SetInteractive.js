@@ -1,37 +1,16 @@
-import OnPointerDown from './OnPointerDown.js';
-import OnPointerUp from './OnPointerUp.js';
-import OnPointerMove from './OnPointerMove.js';
+import Input from './Input.js';
 
 var SetInteractive = function (enable) {
     if (enable === undefined) {
         enable = true;
     }
+
+    // Input
     if (!this.input) {
-        this.input = {
-            enable: true,
-            pointer: null,
-            tilePosition: {
-                x: undefined,
-                y: undefined
-            },
-        };
-        this.scene.input.on('pointerdown', OnPointerDown, this);
-        this.scene.input.on('pointerup', OnPointerUp, this);
-        this.scene.input.on('pointermove', OnPointerMove, this);
-
-        this.on('destroy', function () {
-            if (this.scene) {
-                this.scene.input.off('pointerdown', OnPointerDown, this);
-                this.scene.input.off('pointerup', OnPointerUp, this);
-                this.scene.input.off('pointermove', OnPointerMove, this);
-            }
-        }, this);
+        this.input = new Input(this);
     }
+    this.input.setEnable(enable);
 
-    this.input.enable = enable;
-    if (!enable) {
-        this.input.pointer = null;
-    }
     return this;
 };
 
