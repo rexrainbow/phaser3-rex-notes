@@ -292,16 +292,16 @@ See [base sizer object](ui-basesizer.md).
 
 ### Events
 
-- Tap cell
+- [Tap](gesture-tap.md) cell
     ```javascript
     gridTable.on(tapEventName, function(cellContainer, cellIndex) {
         // ...
     }, scope);
     ```
-    - `tapEventName` : `cell.1tap`, `cell.2tap`, `cell.3tap`, etc ...
+    - `tapEventName` : `'cell.1tap'`, `'cell.2tap'`, `'cell.3tap'`, etc ...
     - `cellContainer` : Container game object of triggered cell.
     - `cellIndex` : Index of triggered cell.
-- Press cell
+- [Press](gesture-press.md) cell
     ```javascript
     gridTable.on(`cell.pressstart`, function(cellContainer, cellIndex) {
         // ...

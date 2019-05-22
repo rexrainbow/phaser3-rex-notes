@@ -514,7 +514,7 @@ Offset all of tile positions to `(0, 0)`, and set board size to fit these tile p
     board.setInteractive(false);
     ```
 
-#### Touch input
+#### Pointer down
 
 - Pointer down at any tile
     ```javascript
@@ -524,25 +524,8 @@ Offset all of tile positions to `(0, 0)`, and set board size to fit these tile p
     });
     ```
     - `pointer` : [Touch pointer](touchevents.md#properties-of-point)
-    - `tileXY`
-        - `tileXY.x`
-        - `tileXY.y`
-- Pointer up at any tile
-    ```javascript
-    board.on('tileup', function(pointer, tileXY) {
-        // var tileX = tileXY.x;
-        // var tileY = tileXY.y;
-    });
-    ```
-- Pointer move to another tile
-    ```javascript
-    board.on('tilemove', function(pointer, tileXY) {
-        // var tileX = tileXY.x;
-        // var tileY = tileXY.y;
-    });
-    ```
-    - Only triggered when `tileXY` is changed.
-- Pointer down at a chess
+    - `tileXY` : `{x, y}`
+- Pointer down at chess
     ```javascript
     board.on('gameobjectdown', function(pointer, gameObject) {
     })
@@ -554,7 +537,18 @@ Offset all of tile positions to `(0, 0)`, and set board size to fit these tile p
     ```
     - `pointer` : [Touch pointer](touchevents.md#properties-of-point)
     - `gameObject` : Game object at touched (tileX, tileY)
-- Pointer up at a chess
+
+#### Pointer up
+
+- Pointer up at any tile
+    ```javascript
+    board.on('tileup', function(pointer, tileXY) {
+        // var tileX = tileXY.x;
+        // var tileY = tileXY.y;
+    });
+    ```
+    - `tileXY` : `{x, y}`
+- Pointer up at chess
     ```javascript
     board.on('gameobjectup', function(pointer, gameObject) {
     })
@@ -565,7 +559,19 @@ Offset all of tile positions to `(0, 0)`, and set board size to fit these tile p
     })
     ```
     - `pointer` : [Touch pointer](touchevents.md#properties-of-point)
-    - `gameObject` : Game object at touched (tileX, tileY)    
+    - `gameObject` : Game object at touched (tileX, tileY)
+
+#### Pointer move
+
+- Pointer move to another tile
+    ```javascript
+    board.on('tilemove', function(pointer, tileXY) {
+        // var tileX = tileXY.x;
+        // var tileY = tileXY.y;
+    });
+    ```
+    - `tileXY` : `{x, y}`
+    - Only triggered when `tileXY` is changed.
 - Pointer move to another chess
     ```javascript
     board.on('gameobjectmove', function(pointer, gameObject) {
@@ -577,6 +583,104 @@ Offset all of tile positions to `(0, 0)`, and set board size to fit these tile p
     })
     ```
     - `pointer` : [Touch pointer](touchevents.md#properties-of-point)
+    - `gameObject` : Game object at touched (tileX, tileY)
+
+#### [Tap](gesture-tap.md)
+
+- Tap at any tile
+    ```javascript
+    board.on('tiletap', function(tap, tileXY) {
+        // var tileX = tileXY.x;
+        // var tileY = tileXY.y;
+        // var tapsCount = tap.tapsCount;
+    });
+    ```
+    - `tap` : [Tap behavior](gesture-tap.md).
+        - `tap.tapsCount` : Taps count.
+    - `tileXY` : `{x, y}`
+- N-taps at any tile
+    ```javascript
+    board.on('tile' + tapsCount + 'tap' , function(tap, tileXY) {
+        // var tileX = tileXY.x;
+        // var tileY = tileXY.y;
+    });
+    ```
+    - `'tile' + tapsCount + 'tap'` : `'tile1tap'`, `'tile2tap'`, `'tile3tap'`, etc ...
+    - `tap` : [Tap behavior](gesture-tap.md).
+    - `tileXY` : `{x, y}`
+- Tap at chess
+    ```javascript
+    board.on('gameobjecttap', function(tap, gameObject) {
+        // var tapsCount = tap.tapsCount;
+    })
+    ```
+    or
+    ```javascript
+    gameObject.on('board.tap', function(tap) {
+        // var tapsCount = tap.tapsCount;
+    })
+    ```
+    - `tap` : [Tap behavior](gesture-tap.md).
+        - `tap.tapsCount` : Taps count.
+    - `gameObject` : Game object at touched (tileX, tileY)
+- N-taps at chess
+    ```javascript
+    board.on('gameobject' + tapsCount + 'tap' , function(tap, gameObject) {
+    })
+    ```
+    or
+    ```javascript
+    gameObject.on('board.' + tapsCount + 'tap', function(tap) {
+    })
+    ```
+    - `'gameobject' + tapsCount + 'tap'` : `'gameobject1tap'`, `'gameobject2tap'`, `'gameobject3tap'`, etc ...
+    - `'board.' + tapsCount + 'tap'` : `'board.1tap'`, `'board.2tap'`, `'board.3tap'`, etc ...
+    - `tap` : [Tap behavior](gesture-tap.md).
+    - `gameObject` : Game object at touched (tileX, tileY)
+
+#### [Press](gesture-press.md)
+
+- Press-start at any tile
+    ```javascript
+    board.on('tilepressstart', function(press, tileXY) {
+        // var tileX = tileXY.x;
+        // var tileY = tileXY.y;
+    });
+    ```
+    - `press` : [Press behavior](gesture-press.md).
+    - `tileXY` : `{x, y}`
+- Press-end at any tile
+    ```javascript
+    board.on('tilepressend', function(press, tileXY) {
+        // var tileX = tileXY.x;
+        // var tileY = tileXY.y;
+    });
+    ```
+    - `press` : [Press behavior](gesture-press.md).
+    - `tileXY` : `{x, y}`
+- Press-star at chess
+    ```javascript
+    board.on('gameobjectpressstart', function(press, gameObject) {
+    })
+    ```
+    or
+    ```javascript
+    gameObject.on('board.pressstart', function(press) {
+    })
+    ```
+    - `press` : [Press behavior](gesture-tap.md).
+    - `gameObject` : Game object at touched (tileX, tileY)
+- Press-end at chess
+    ```javascript
+    board.on('gameobjectpressend', function(press, gameObject) {
+    })
+    ```
+    or
+    ```javascript
+    gameObject.on('board.pressend', function(press) {
+    })
+    ```
+    - `press` : [Press behavior](gesture-tap.md).
     - `gameObject` : Game object at touched (tileX, tileY)
 
 ### Grid points

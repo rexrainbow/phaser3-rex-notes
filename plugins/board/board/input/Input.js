@@ -19,14 +19,15 @@ class Input {
             y: undefined
         };
 
-        board.scene.input.on('pointerdown', OnPointerDown, this);
-        board.scene.input.on('pointerup', OnPointerUp, this);
-        board.scene.input.on('pointermove', OnPointerMove, this);
+        var scene = board.scene;
+        scene.input.on('pointerdown', OnPointerDown, this);
+        scene.input.on('pointerup', OnPointerUp, this);
+        scene.input.on('pointermove', OnPointerMove, this);
 
-        this._tap = new Tap(board.scene);
+        this._tap = new Tap(scene);
         this._tap.on('tap', OnTap, this);
 
-        this._press = new Press(board.scene);
+        this._press = new Press(scene);
         this._press
             .on('pressstart', OnPressStart, this)
             .on('pressend', OnPressEnd, this);
