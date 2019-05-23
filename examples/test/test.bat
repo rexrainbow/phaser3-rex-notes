@@ -1,4 +1,4 @@
-set testmode=2
+set testmode=1
 set main=./examples/test/test.js
 cd ..
 cd ..

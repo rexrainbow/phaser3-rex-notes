@@ -340,21 +340,33 @@ var Text = new Phaser.Class({
         }
 
         // resize
-        var boxWidth = canvasText.linesWidth,
-            boxHeight = canvasText.linesHeight;
         var padding = this.padding;
-        var w = boxWidth + padding.left + padding.right;
-        var h = boxHeight + padding.top + padding.bottom;
-
-        this.width = (style.fixedWidth === 0) ? w : style.fixedWidth;
-        this.height = (style.fixedHeight === 0) ? h : style.fixedHeight;
-
-        if (w > this.width) {
-            w = this.width;
+        var textWidth, textHeight;
+        if (style.fixedWidth === 0) {
+            this.width = canvasText.linesWidth + padding.left + padding.right;
+            textWidth = canvasText.linesWidth;
         }
-        if (h > this.height) {
-            h = this.height;
+        else {
+            this.width = style.fixedWidth;
+            textWidth = this.width - padding.left - padding.right;
+            if (textWidth < canvasText.linesWidth) {
+                textWidth = canvasText.linesWidth;
+            }
         }
+        if (style.fixedHeight === 0) {
+            this.height = canvasText.linesHeight + padding.top + padding.bottom;
+            textHeight = canvasText.linesHeight;
+        }
+        else {
+            this.height = style.fixedHeight;
+            textHeight = this.height - padding.top - padding.bottom;
+            if (textHeight < canvasText.linesHeight) {
+                textHeight = canvasText.linesHeight;
+            }
+        }
+
+        var w = this.width;
+        var h = this.height;
 
         this.updateDisplayOrigin();
 
@@ -382,8 +394,8 @@ var Text = new Phaser.Class({
         canvasText.draw(
             padding.left,
             padding.top,
-            boxWidth,
-            boxHeight
+            textWidth,
+            textHeight
         );
 
         context.restore();
