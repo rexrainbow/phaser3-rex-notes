@@ -33,6 +33,12 @@ Default style
         fill: false
     },
     align: 'left',  // 'left'|'center'|'right'
+    padding: {
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: 0,
+    },
     maxLines: 0,
     lineSpacing: 0,
     fixedWidth: 0,

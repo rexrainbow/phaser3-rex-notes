@@ -102,6 +102,12 @@ Default style
         offset: 0
     },
     align: 'left',  // 0|'left'|1|'center'|2|'right'
+    padding: {
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: 0,
+    },
     maxLines: 0,
     lineSpacing: 0,
     fixedWidth: 0,
