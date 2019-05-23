@@ -5,10 +5,11 @@ var CreateInputText = function (text) {
     var inputText = new InputText(scene, text.x, text.y, text.width, text.height, {
         text: text.text,
         fontSize: text.style.fontSize,
-        color: text.style.color,        
+        color: text.style.color,
+        backgroundColor: text.style.backgroundColor,
     });
     inputText.setOrigin(text.originX, text.originY);
-    scene.displayList.add(inputText);
+    scene.add.existing(inputText);
     return inputText;
 }
 

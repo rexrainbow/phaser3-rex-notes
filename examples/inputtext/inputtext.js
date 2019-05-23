@@ -12,7 +12,9 @@ class Demo extends Phaser.Scene {
     create() {
         var printText = this.add.text(400, 200, '', {
             fontSize: '12px',
-        }).setOrigin(0.5).setFixedSize(100, 100);
+            fixedWidth: 100,
+            fixedHeight: 100,
+        }).setOrigin(0.5);
         var inputText = this.add.rexInputText(400, 400, 10, 10, {
             type: 'textarea',
             text: 'hello world',
