@@ -1,13 +1,14 @@
+import EventEmitterMethods from '../../../utils/eventemitter/EventEmitterMethods.js';
+import GetValue from '../../../utils/object/GetValue.js';
 import CSVParser from 'papaparse/papaparse.js';
 import InstMem from './InstMem.js';
 import CmdHandlers from './commands/CmdHandlers.js';
 
-const EE = Phaser.Events.EventEmitter;
-const GetValue = Phaser.Utils.Objects.GetValue;
 
-class CSVScenario extends EE {
+class CSVScenario {
     constructor(scene, config) {
-        super();
+        // Event emitter
+        this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
 
         this.scene = scene;
         this.timer = undefined;
@@ -52,7 +53,7 @@ class CSVScenario extends EE {
     }
 
     shutdown() {
-        super.shutdown();
+        this.destroyEventEmitter();
         this.clear();
         this.parent = undefined;
     }
@@ -322,6 +323,11 @@ class CSVScenario extends EE {
         return this;
     }
 }
+
+Object.assign(
+    CSVScenario.prototype,
+    EventEmitterMethods
+);
 
 const TIMEUNITMODE = {
     ms: 0,

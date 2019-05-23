@@ -1,9 +1,8 @@
 import TickTask from '../../../utils/ticktask/TickTask.js';
 import GetSceneObject from '../../../utils/system/GetSceneObject.js';
+import GetValue from '../../../utils/object/GetValue.js';
 import ArrayCopy from '../../../utils/array/Copy.js';
 import RunCommands from '../../../runcommands.js';
-
-const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Player extends TickTask {
     constructor(parent, config) {

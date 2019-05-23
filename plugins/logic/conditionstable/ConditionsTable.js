@@ -1,8 +1,8 @@
+import GetValue from '../../utils/object/GetValue.js';
 import CSVParser from 'papaparse/papaparse.js';
 import Clear from '../../utils/object/Clear.js';
 import CreateTestFunction from './CreateTestFunction.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
 
 class ConditionsTable {
     constructor(config) {

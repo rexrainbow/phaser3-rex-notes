@@ -1,27 +1,28 @@
+import EventEmitterMethods from '../../../utils/eventemitter/EventEmitterMethods.js';
+import GetValue from '../../../utils/object/GetValue.js';
 import RunCommands from '../../../runcommands.js';
 import ArrayCopy from '../../../utils/array/Copy.js';
 
-const EE = Phaser.Events.EventEmitter;
-const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 
-class Sequence extends EE {
+class Sequence {
     constructor(config) {
-        super();
+        // Event emitter
+        this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
 
         this.commands = [];
         this.scope = undefined;
         this.config = undefined;
         this.index = 0;
         this.indexStep = 1; // 1, or -1
-        this.setYoyo(GetFastValue(config, 'yoyo', false));
-        this.setRepeat(GetFastValue(config, 'repeat', 0));
-        this.setLoop(GetFastValue(config, 'loop', false));
+        this.setYoyo(GetValue(config, 'yoyo', false));
+        this.setRepeat(GetValue(config, 'repeat', 0));
+        this.setLoop(GetValue(config, 'loop', false));
         this.state = 0; // 0: idle, 1: run, 2: run-last
         this.task = undefined;
     }
 
     shutdown() {
-        super.shutdown();
+        this.destroyEventEmitter();
         this.stop();
         this.commands.length = 0;
         this.scope = undefined;
@@ -31,12 +32,12 @@ class Sequence extends EE {
     destroy() {
         this.shutdown();
     }
-    
+
     load(commands, scope, config) {
         this.stop();
-        this.setYoyo(GetFastValue(config, 'yoyo', this.yoyo));
-        this.setRepeat(GetFastValue(config, 'repeat', this.repeat));
-        this.setLoop(GetFastValue(config, 'loop', this.loop));
+        this.setYoyo(GetValue(config, 'yoyo', this.yoyo));
+        this.setRepeat(GetValue(config, 'repeat', this.repeat));
+        this.setLoop(GetValue(config, 'loop', this.loop));
 
         this.commands = ArrayCopy(this.commands, commands);
         this.scope = scope;
@@ -153,5 +154,10 @@ class Sequence extends EE {
         this.emit('complete', this);
     }
 }
+
+Object.assign(
+    Sequence.prototype,
+    EventEmitterMethods
+);
 
 export default Sequence;

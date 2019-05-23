@@ -1,7 +1,7 @@
 import Clock from '../../../clock.js';
 import Clone from '../../../utils/object/Clone.js';
 
-const GetFastValue = Phaser.Utils.Objects.GetFastValue;
+const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Recorder {
     constructor(parent, config) {
@@ -13,9 +13,9 @@ class Recorder {
     }
 
     resetFromJSON(o) {
-        var clockConfig = GetFastValue(o, 'clock', undefined);
+        var clockConfig = GetValue(o, 'clock', undefined);
         this.clock.resetFromJSON(clockConfig);
-        this.commands = GetFastValue(o, 'commands', []); // [[dt, cmd], [dt, cmd], ...]
+        this.commands = GetValue(o, 'commands', []); // [[dt, cmd], [dt, cmd], ...]
         return this;
     }
 
