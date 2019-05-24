@@ -214,6 +214,7 @@ const ElementProperties = {
 const StyleProperties = {
     width: ['width', undefined],
     height: ['height', undefined],
+    fontFamily: ['font-family', undefined],
     fontSize: ['font-size', undefined],
     color: ['color', '#ffffff'],
     backgroundColor: ['backgroundColor', 'transparent'],
