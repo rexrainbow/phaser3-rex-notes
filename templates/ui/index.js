@@ -26,6 +26,7 @@ import Chart from './chart/Chart.js';
 
 import Hide from './utils/Hide.js';
 import Show from './utils/Show.js';
+import Edit from '../../plugins/behaviors/textedit/Edit.js';
 
 export default {
     RoundRectangle: RoundRectangle,
@@ -56,4 +57,5 @@ export default {
 
     hide: Hide,
     show: Show,
+    edit: Edit,
 };

@@ -11,7 +11,7 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var printText = this.add.rexBBCodeText(400, 300, 'abc', {
+        var printText = this.add.rexBBCodeText(400, 300, ' ', {
             color: 'yellow',
             fontSize: '24px',
             fixedWidth: 200,
@@ -21,8 +21,15 @@ class Demo extends Phaser.Scene {
             .setOrigin(0.5)
             .setInteractive()
             .on('pointerdown', function () {
-                this.plugins.get('rexTextEdit').edit(printText);
+                this.plugins.get('rexTextEdit').edit(printText, function (textObejct) {
+                    textObejct.setData('name', textObejct.text);
+                    console.log(printText.getData('name'));
+                });
             }, this);
+
+        printText
+            .setData('name', 'abc')
+            .setText(printText.getData('name'));
     }
 
     update() { }

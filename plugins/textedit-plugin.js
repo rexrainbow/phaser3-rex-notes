@@ -15,10 +15,14 @@ class TextEditPlugin extends Phaser.Plugins.BasePlugin {
     add(gameObject) {
         return new TextEdit(gameObject);
     }
-
-    edit(gameObject, config) {
-        return Edit(gameObject, config);
-    }
 }
+
+var methods = {
+    edit: Edit
+};
+Object.assign(
+    TextEditPlugin.prototype,
+    methods
+);
 
 export default TextEditPlugin;

@@ -1,10 +1,10 @@
 import TextEdit from './TextEdit.js';
 
-var Edit = function (gameObject, config) {
+var Edit = function (gameObject, config, onCloseCallback) {
     if (!gameObject._edit) {
         gameObject._edit = new TextEdit(gameObject);
     }
-    gameObject._edit.open(config);
+    gameObject._edit.open(config, onCloseCallback);
     return gameObject._edit;
 }
 

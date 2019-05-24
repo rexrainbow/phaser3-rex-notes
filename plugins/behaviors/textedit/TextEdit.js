@@ -1,5 +1,8 @@
 import GetSceneObject from '../../utils/system/GetSceneObject.js';
 import CreateInputTextFromText from './CreateInputText.js';
+import IsFunction from '../../utils/object/IsFunction.js';
+
+const GetValue = Phaser.Utils.Objects.GetValue;
 
 class TextEdit {
     constructor(gameObject) {
@@ -7,6 +10,7 @@ class TextEdit {
         this.scene = GetSceneObject(gameObject);
 
         this.inputText = undefined;
+        this.onClose = undefined;
         this.boot();
     }
 
@@ -30,12 +34,21 @@ class TextEdit {
         return this;
     }
 
-    open(config) {
+    open(config, onCloseCallback) {
+        if (IsFunction(config)) {
+            onCloseCallback = config;
+            config = undefined;
+        }
+        if (onCloseCallback === undefined) {
+            onCloseCallback = GetValue(config, 'onClose', undefined);
+        }
+
         this.inputText = CreateInputTextFromText(this.gameObject, config);
         this.inputText.setFocus();
         this.gameObject.text = '';
 
         // Attach close event
+        this.onClose = onCloseCallback;
         this.scene.input.keyboard.once('keydown-ENTER', this.close, this);
         return this;
     }
@@ -51,6 +64,10 @@ class TextEdit {
 
         // Remove close event
         this.scene.input.keyboard.off('keydown-ENTER', this.close, this);
+
+        if (this.onClose) {
+            this.onClose(this.gameObject);
+        }
         return this;
     }
 
