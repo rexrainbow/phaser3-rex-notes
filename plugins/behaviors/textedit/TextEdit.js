@@ -7,8 +7,6 @@ class TextEdit {
         this.scene = GetSceneObject(gameObject);
 
         this.inputText = undefined;
-        this.enterKeyObj = undefined;
-
         this.boot();
     }
 
@@ -21,6 +19,7 @@ class TextEdit {
     }
 
     shutdown() {
+        this.close();
         this.gameObject = undefined;
         this.scene = undefined;
         return this;
