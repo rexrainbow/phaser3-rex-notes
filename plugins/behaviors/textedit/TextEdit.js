@@ -2,7 +2,7 @@ import GetSceneObject from '../../utils/system/GetSceneObject.js';
 import CreateInputTextFromText from './CreateInputText.js';
 
 class TextEdit {
-    constructor(gameObject, config) {
+    constructor(gameObject) {
         this.gameObject = gameObject;
         this.scene = GetSceneObject(gameObject);
 

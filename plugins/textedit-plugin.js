@@ -1,4 +1,5 @@
 import TextEdit from './textedit.js';
+import Edit from './behaviors/textedit/Edit.js';
 
 class TextEditPlugin extends Phaser.Plugins.BasePlugin {
 
@@ -11,10 +12,13 @@ class TextEditPlugin extends Phaser.Plugins.BasePlugin {
         eventEmitter.once('destroy', this.destroy, this);
     }
 
-    add(gameObject, config) {
-        return new TextEdit(gameObject, config);
+    add(gameObject) {
+        return new TextEdit(gameObject);
     }
 
+    edit(gameObject, config) {
+        return Edit(gameObject, config);
+    }
 }
 
 export default TextEditPlugin;

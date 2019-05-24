@@ -21,10 +21,7 @@ class Demo extends Phaser.Scene {
             .setOrigin(0.5)
             .setInteractive()
             .on('pointerdown', function () {
-                if (!printText.editable) {
-                    printText.editable = this.plugins.get('rexTextEdit').add(printText);
-                }
-                printText.editable.open();
+                this.plugins.get('rexTextEdit').edit(printText);
             }, this);
     }
 
