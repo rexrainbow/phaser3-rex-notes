@@ -65,6 +65,7 @@ module.exports = {
         // member of text
         'texttypingplugin': './plugins/texttyping-plugin.js',
         'textpageplugin': './plugins/textpage-plugin.js',
+        'texteditplugin': './plugins/textedit-plugin.js',
 
         // member of scene
         // sound
