@@ -27,7 +27,7 @@ var Layout = function (parent, newWidth, newHeight) {
     var startX = this.left,
         startY = this.top;
     var x, y, width, height; // Align zone
-    var newChildWidth, newChildHeight;
+    var childWidth, childHeight;
 
     // Layout current page
     var pages = this.pages;
@@ -43,13 +43,13 @@ var Layout = function (parent, newWidth, newHeight) {
                 GetExpandedChildWidth(this, child),
                 GetExpandedChildHeight(this, child));
         } else {
-            newChildWidth = undefined;
-            newChildHeight = undefined;
+            childWidth = undefined;
+            childHeight = undefined;
             if (childConfig.expand) { // Expand height
-                newChildHeight = this.height - padding.top - padding.bottom;
-                newChildWidth = this.width - padding.left - padding.right;
+                childHeight = this.height - padding.top - padding.bottom;
+                childWidth = this.width - padding.left - padding.right;
             }
-            ResizeGameObject(child, newChildWidth, newChildHeight);
+            ResizeGameObject(child, childWidth, childHeight);
         }
 
         // Set position

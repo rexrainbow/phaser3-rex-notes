@@ -55,7 +55,7 @@ var Layout = function (parent, newWidth, newHeight) {
     var itemX = startX,
         itemY = startY;
     var x, y, width, height; // Align zone
-    var newChildWidth, newChildHeight;
+    var childWidth, childHeight;
     // Layout grid children
     var colProportion, rowProportion,
         colWidth, rowHeight;
@@ -74,12 +74,12 @@ var Layout = function (parent, newWidth, newHeight) {
                 continue;
             }
 
-            newChildWidth = GetExpandedChildWidth(child, colWidth);
-            newChildHeight = GetExpandedChildHeight(child, rowHeight);
+            childWidth = GetExpandedChildWidth(child, colWidth);
+            childHeight = GetExpandedChildHeight(child, rowHeight);
             if (child.isRexSizer) {
-                child.layout(this, newChildWidth, newChildHeight);
+                child.layout(this, childWidth, childHeight);
             } else {
-                ResizeGameObject(child, newChildWidth, newChildHeight);
+                ResizeGameObject(child, childWidth, childHeight);
             }
 
             childConfig = child.rexSizer;

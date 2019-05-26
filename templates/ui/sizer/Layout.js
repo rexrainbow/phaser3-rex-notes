@@ -49,7 +49,7 @@ var Layout = function (parent, newWidth, newHeight) {
     var itemX = startX,
         itemY = startY;
     var x, y, width, height; // Align zone
-    var newChildWidth, newChildHeight;
+    var childWidth, childHeight;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
         child = children[i];
         if (child.rexSizer.hidden) {
@@ -60,19 +60,26 @@ var Layout = function (parent, newWidth, newHeight) {
         padding = childConfig.padding;
 
         // Set size
-        newChildWidth = GetExpandedChildWidth(this, child);
-        newChildHeight = GetExpandedChildHeight(this, child);
+        childWidth = GetExpandedChildWidth(this, child);
+        childHeight = GetExpandedChildHeight(this, child);
         if (child.isRexSizer) {
-            child.layout(this, newChildWidth, newChildHeight);
+            child.layout(this, childWidth, childHeight);
         } else {
-            ResizeGameObject(child, newChildWidth, newChildHeight);
+            ResizeGameObject(child, childWidth, childHeight);
+        }
+
+        if (childWidth === undefined) {
+            childWidth = child.width;
+        }
+        if (childHeight === undefined) {
+            childHeight = child.height;
         }
 
         // Set position
         if (this.orientation === 0) { // x
             x = (itemX + padding.left);
             if ((childConfig.proportion === 0) || (proportionLength === 0)) {
-                width = child.width;
+                width = childWidth;
             } else {
                 width = (childConfig.proportion * proportionLength);
             }
@@ -85,7 +92,7 @@ var Layout = function (parent, newWidth, newHeight) {
 
             y = (itemY + padding.top);
             if ((childConfig.proportion === 0) || (proportionLength === 0)) {
-                height = child.height;
+                height = childHeight;
             } else {
                 height = (childConfig.proportion * proportionLength);
             }

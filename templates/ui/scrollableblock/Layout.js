@@ -20,18 +20,18 @@ var Layout = function (parent, newWidth, newHeight) {
 
     // Layout child
     var child = this.child;
-    var newChildWidth, newChildHeight;
+    var childWidth, childHeight;
     if (!child.rexSizer.hidden) {
         // Set size
         if (this.scrollMode === 0) {
-            newChildWidth = this.width;
+            childWidth = this.width;
         } else {
-            newChildHeight = this.height;
+            childHeight = this.height;
         }
         if (child.isRexSizer) {
-            child.layout(this, newChildWidth, newChildHeight);
+            child.layout(this, childWidth, childHeight);
         } else {
-            ResizeGameObject(child, newChildWidth, newChildHeight);
+            ResizeGameObject(child, childWidth, childHeight);
         }
 
         this.resetChildPosition();
