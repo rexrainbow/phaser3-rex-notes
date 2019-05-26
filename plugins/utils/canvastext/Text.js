@@ -476,6 +476,14 @@ var Text = new Phaser.Class({
         return this.canvasText.getPenManager(text, pensManager);
     },
 
+    setSize: function (width, height) {
+        return this.setFixedSize(width, height);
+    },
+
+    resize: function (width, height) {
+        return this.setFixedSize(width, height);
+    },
+
     lineSpacing: {
         get: function () {
             return this.style.lineSpacing;
