@@ -57,7 +57,7 @@ var getRow = function (scene, data) {
     var sizer = scene.rexUI.add.sizer({
             orientation: 'x',
         })
-        .add(background, -1) // Extend width equal to sizer width
+        .addBackground(background)
         .add(icon) // Minimum size
         .add(nameLabel, 2, 'left')
         .add(contentLabel, 5, 'left');
