@@ -11,6 +11,7 @@ class TextEdit {
 
         this.inputText = undefined;
         this.onClose = undefined;
+        this.delayCall = undefined;
         this.boot();
     }
 
@@ -51,13 +52,29 @@ class TextEdit {
             onCloseCallback = GetValue(config, 'onClose', undefined);
         }
 
+        if (config === undefined) {
+            config = {};
+        }
+        var customOnTextChanged = GetValue(config, 'onTextChanged', undefined);
+        config.onTextChanged = (function (text) {
+            if (customOnTextChanged) { // Custom on-text-changed callback
+                customOnTextChanged(this.gameObject, text);
+            } else { // Default on-text-changed callback
+                this.gameObject.text = text;
+            }
+        }).bind(this);
+
         this.inputText = CreateInputTextFromText(this.gameObject, config);
         this.inputText.setFocus();
-        this.gameObject.text = '';
+        this.gameObject.setVisible(false); // Set parent text invisible
 
         // Attach close event
         this.onClose = onCloseCallback;
         this.scene.input.keyboard.once('keydown-ENTER', this.close, this);
+         // Attach pointerdown (outside of input-text) event, at next tick
+        this.delayCall = this.scene.time.delayedCall(0, function () {
+            this.scene.input.once('pointerdown', this.close, this);
+        }, [], this);
         return this;
     }
 
@@ -67,12 +84,18 @@ class TextEdit {
             return this;
         }
 
-        this.gameObject.text = this.inputText.text;
+        this.gameObject.setVisible(true); // Set parent text visible
+
         this.inputText.destroy();
         this.inputText = undefined;
+        if (this.delayCall) {
+            this.delayCall.remove();
+            this.delayCall = undefined;
+        }
 
         // Remove close event
         this.scene.input.keyboard.off('keydown-ENTER', this.close, this);
+        this.scene.input.off('pointerdown', this.close, this);
 
         if (this.onClose) {
             this.onClose(this.gameObject);

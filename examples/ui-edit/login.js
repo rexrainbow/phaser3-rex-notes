@@ -44,8 +44,13 @@ var CreateLoginDialog = function (scene, config, onSubmit) {
     var width = GetValue(config, 'width', undefined);
     var height = GetValue(config, 'height', undefined);
 
+    // Background object
     var background = scene.rexUI.add.roundRectangle(0, 0, 10, 10, 10, COLOR_PRIMARY);
+
+    // Title field object
     var titleField = scene.add.text(0, 0, title);
+
+    // User name field object
     var userNameField = scene.rexUI.add.label({
         orientation: 'x',
         background: scene.rexUI.add.roundRectangle(0, 0, 10, 10, 10).setStrokeStyle(2, COLOR_LIGHT),
@@ -55,13 +60,16 @@ var CreateLoginDialog = function (scene, config, onSubmit) {
     })
         .setInteractive()
         .on('pointerdown', function () {
-            var onCloseCallback = function (textObject) {
-                console.log('Close username input');
-                username = textObject.text;
+            var config = {
+                onTextChanged: function(textObject, text) {
+                    username = text;
+                    textObject.text = text;
+                }
             }
-            scene.rexUI.edit(userNameField.getElement('text'), onCloseCallback);
+            scene.rexUI.edit(userNameField.getElement('text'), config);
         });
 
+    // Password field object
     var passwordField = scene.rexUI.add.label({
         orientation: 'x',
         background: scene.rexUI.add.roundRectangle(0, 0, 10, 10, 10).setStrokeStyle(2, COLOR_LIGHT),
@@ -71,18 +79,18 @@ var CreateLoginDialog = function (scene, config, onSubmit) {
     })
         .setInteractive()
         .on('pointerdown', function () {
-            var inputTextConfig = {
+            var config = {
+                type: 'password',
                 text: password,
-                type: 'password'
+                onTextChanged: function(textObject, text) {
+                    password = text;
+                    textObject.text = markPassword(password);
+                }
             };
-            var onCloseCallback = function (textObject) {
-                console.log('Close password input');
-                password = textObject.text;
-                textObject.text = markPassword(password);
-            }
-            scene.rexUI.edit(passwordField.getElement('text'), inputTextConfig, onCloseCallback);
+            scene.rexUI.edit(passwordField.getElement('text'), config);
         });
 
+    // Login button object
     var loginButton = scene.rexUI.add.label({
         orientation: 'x',
         background: scene.rexUI.add.roundRectangle(0, 0, 10, 10, 10, COLOR_LIGHT),
@@ -96,6 +104,7 @@ var CreateLoginDialog = function (scene, config, onSubmit) {
             }
         });
 
+    // Dialog and its children
     var loginDialog = scene.rexUI.add.sizer({
         orientation: 'y',
         x: x,
@@ -109,6 +118,7 @@ var CreateLoginDialog = function (scene, config, onSubmit) {
         .add(passwordField, 0, 'left', { bottom: 10, left: 10, right: 10 }, true)
         .add(loginButton, 0, 'center', { bottom: 10, left: 10, right: 10 }, false)
         .layout();
+
     return loginDialog;
 };
 var markPassword = function (password) {

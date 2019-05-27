@@ -19,8 +19,8 @@ class Demo extends Phaser.Scene {
             type: 'textarea',
             text: 'hello world',
             fontSize: '12px',
-            onTextChanged: function () {
-                printText.text = inputText.text;
+            onTextChanged: function (text) {
+                printText.text = text;
             },
             // onClick: function() {
             //     printText.text = inputText.text;

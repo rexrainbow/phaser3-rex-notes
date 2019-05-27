@@ -71,6 +71,23 @@ class InputText extends DOMElement {
         style['box-sizing'] = 'border-box';
         super(scene, x, y, element, style);
         this.type = 'rexInputText';
+        this.onTextChanged = GetValue(config, 'onTextChanged', undefined);
+
+        // Bind on-text-changed event
+        element.oninput = (function () {
+            if (this.onTextChanged) {
+                this.onTextChanged(this.text);
+            }
+        }).bind(this);
+
+        // Don't propagate touch/mouse events to parent(game canvas)
+        var callback = function (e) { e.stopPropagation(); }
+        element.addEventListener("touchstart", callback, false);
+        element.addEventListener("touchmove", callback, false);
+        element.addEventListener("touchend", callback, false);
+        element.addEventListener("mousedown", callback, false);
+        element.addEventListener("mouseup", callback, false);
+        element.addEventListener("mousemove", callback, false);
     }
 
     resize(width, height) {
@@ -123,14 +140,6 @@ class InputText extends DOMElement {
     setTooltip(value) {
         this.tooltip = value;
         return this;
-    }
-
-    get onTextChanged() {
-        return this.node.oninput;
-    }
-
-    set onTextChanged(callback) {
-        this.node.oninput = callback;
     }
 
     setOnTextChangedCallback(callback) {
@@ -204,7 +213,6 @@ const ElementProperties = {
     readOnly: ['readOnly', false],
     spellCheck: ['spellcheck', false],
     autoComplete: ['autocomplete', 'off'],
-    onTextChanged: ['oninput', undefined],
     onClick: ['onclick', undefined],
     onDoubleClick: ['ondblclick', undefined],
     onFocus: ['onfocus', undefined],
