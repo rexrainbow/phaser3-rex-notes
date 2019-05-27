@@ -28,7 +28,8 @@ class Demo extends Phaser.Scene {
         }, function (username, password) {
             print.text += `${username}:${password}\n`;
         })
-        //.drawBounds(this.add.graphics(), 0xff0000);
+            //.drawBounds(this.add.graphics(), 0xff0000);
+            .popUp(500);
     }
 
     update() { }
@@ -61,7 +62,7 @@ var CreateLoginDialog = function (scene, config, onSubmit) {
         .setInteractive()
         .on('pointerdown', function () {
             var config = {
-                onTextChanged: function(textObject, text) {
+                onTextChanged: function (textObject, text) {
                     username = text;
                     textObject.text = text;
                 }
@@ -82,7 +83,7 @@ var CreateLoginDialog = function (scene, config, onSubmit) {
             var config = {
                 type: 'password',
                 text: password,
-                onTextChanged: function(textObject, text) {
+                onTextChanged: function (textObject, text) {
                     password = text;
                     textObject.text = markPassword(password);
                 }
