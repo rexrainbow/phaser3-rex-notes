@@ -26,6 +26,9 @@ class TextEdit {
         this.close();
         this.gameObject = undefined;
         this.scene = undefined;
+        if (globLastOpenedEditor === this) {
+            globLastOpenedEditor = undefined;
+        }
         return this;
     }
 
@@ -35,6 +38,11 @@ class TextEdit {
     }
 
     open(config, onCloseCallback) {
+        if (globLastOpenedEditor !== undefined) {
+            globLastOpenedEditor.close();
+        }
+
+        globLastOpenedEditor = this;
         if (IsFunction(config)) {
             onCloseCallback = config;
             config = undefined;
@@ -54,6 +62,7 @@ class TextEdit {
     }
 
     close() {
+        globLastOpenedEditor = undefined;
         if (!this.inputText) {
             return this;
         }
@@ -79,5 +88,7 @@ class TextEdit {
         return (this.isOpened) ? this.inputText.text : this.gameObject.text;
     }
 }
+
+var globLastOpenedEditor = undefined;
 
 export default TextEdit;

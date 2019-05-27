@@ -5,6 +5,10 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 var CreateInputText = function (text, config) {
     var scene = text.scene;
     var style = text.style;
+    var backgroundColor = GetValue(config, 'backgroundColor', style.backgroundColor);
+    if (backgroundColor === null) {
+        backgroundColor = 'transparent';
+    }
     var inputText = new InputText(scene,
         text.x, text.y,
         GetValue(config, 'width', text.width),
@@ -14,7 +18,8 @@ var CreateInputText = function (text, config) {
             fontFamily: GetValue(config, 'fontFamily', style.fontFamily),
             fontSize: GetValue(config, 'fontSize', style.fontSize),
             color: GetValue(config, 'color', style.color),
-            backgroundColor: GetValue(config, 'backgroundColor', style.backgroundColor),
+            backgroundColor: backgroundColor,
+            type: GetValue(config, 'type', 'text'),
         }
     );
     inputText.setOrigin(text.originX, text.originY);

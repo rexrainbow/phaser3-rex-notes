@@ -32,7 +32,7 @@ scene.load.start();                     // start loading
     ```
 - Loading progressing
     ```javascript
-    scene.load.once('progress', function(progress){});
+    scene.load.on('progress', function(progress){});
     ```
 - Loading a file object successful
     ```javascript
