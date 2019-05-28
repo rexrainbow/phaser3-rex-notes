@@ -99,7 +99,7 @@
 
 #### Behaviors of text
 
-1. [Text editor](texteditor.md): Create an [input text object](inputtext.md) above a text object to edit string content.
+1. [Text editor](textedit.md): Create an [input text object](inputtext.md) above a text object to edit string content.
     ```javascript
     scene.rexUI.add.edit(textObject, config);
     // scene.rexUI.add.edit(textObject, config, onClose);
