@@ -2,7 +2,9 @@ const DOMElement = Phaser.GameObjects.DOMElement;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class InputText extends DOMElement {
+// TODO: Use DOMElement directly in next phaser version
+const BaseClass = (DOMElement) ? DOMElement : Object;
+class InputText extends BaseClass {
     constructor(scene, x, y, width, height, config) {
         if (IsPlainObject(x)) {
             config = x;
