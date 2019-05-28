@@ -25,9 +25,10 @@ class Demo extends Phaser.Scene {
             title: 'Welcome',
             username: 'abc',
             password: '123',
-        }, function (username, password) {
-            print.text += `${username}:${password}\n`;
         })
+            .on('login', function (username, password) {
+                print.text += `${username}:${password}\n`;
+            })
             //.drawBounds(this.add.graphics(), 0xff0000);
             .popUp(500);
     }
@@ -36,7 +37,7 @@ class Demo extends Phaser.Scene {
 }
 
 const GetValue = Phaser.Utils.Objects.GetValue;
-var CreateLoginDialog = function (scene, config, onSubmit) {
+var CreateLoginDialog = function (scene, config) {
     var username = GetValue(config, 'username', '');
     var password = GetValue(config, 'password', '');
     var title = GetValue(config, 'title', 'Welcome');
@@ -100,9 +101,7 @@ var CreateLoginDialog = function (scene, config, onSubmit) {
     })
         .setInteractive()
         .on('pointerdown', function () {
-            if (onSubmit) {
-                onSubmit(username, password);
-            }
+            loginDialog.emit('login', username, password);
         });
 
     // Dialog and its children
