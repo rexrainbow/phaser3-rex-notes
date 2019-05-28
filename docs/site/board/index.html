@@ -872,6 +872,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../textedit/" title="Edit" class="md-nav__link">
+      Edit
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -1281,6 +1293,18 @@
   <li class="md-nav__item">
     <a href="../domelement/" title="DOM element" class="md-nav__link">
       DOM element
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../inputtext/" title="Input text" class="md-nav__link">
+      Input text
     </a>
   </li>
 
@@ -2694,6 +2718,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../config-data/" title="Configuration data" class="md-nav__link">
+      Configuration data
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -3859,8 +3895,36 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#touch-input" title="Touch input" class="md-nav__link">
-    Touch input
+  <a href="#pointer-down" title="Pointer down" class="md-nav__link">
+    Pointer down
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pointer-up" title="Pointer up" class="md-nav__link">
+    Pointer up
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pointer-move" title="Pointer move" class="md-nav__link">
+    Pointer move
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tap" title="Tap" class="md-nav__link">
+    Tap
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#press" title="Press" class="md-nav__link">
+    Press
   </a>
   
 </li>
@@ -4566,8 +4630,36 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#touch-input" title="Touch input" class="md-nav__link">
-    Touch input
+  <a href="#pointer-down" title="Pointer down" class="md-nav__link">
+    Pointer down
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pointer-up" title="Pointer up" class="md-nav__link">
+    Pointer up
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pointer-move" title="Pointer move" class="md-nav__link">
+    Pointer move
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tap" title="Tap" class="md-nav__link">
+    Tap
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#press" title="Press" class="md-nav__link">
+    Press
   </a>
   
 </li>
@@ -5114,7 +5206,7 @@
     <div class="codehilite"><pre><span></span><span class="nx">board</span><span class="p">.</span><span class="nx">setInteractive</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
 </pre></div></li>
 </ul>
-<h4 id="touch-input">Touch input<a class="headerlink" href="#touch-input" title="Permanent link">&para;</a></h4>
+<h4 id="pointer-down">Pointer down<a class="headerlink" href="#pointer-down" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Pointer down at any tile
     <div class="codehilite"><pre><span></span><span class="nx">board</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;tiledown&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">tileXY</span><span class="p">)</span> <span class="p">{</span>
@@ -5123,29 +5215,10 @@
 <span class="p">});</span>
 </pre></div><ul>
 <li><code>pointer</code> : <a href="../touchevents/#properties-of-point">Touch pointer</a></li>
-<li><code>tileXY</code><ul>
-<li><code>tileXY.x</code></li>
-<li><code>tileXY.y</code></li>
+<li><code>tileXY</code> : <code>{x, y}</code></li>
 </ul>
 </li>
-</ul>
-</li>
-<li>Pointer up at any tile
-    <div class="codehilite"><pre><span></span><span class="nx">board</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;tileup&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">tileXY</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// var tileX = tileXY.x;</span>
-    <span class="c1">// var tileY = tileXY.y;</span>
-<span class="p">});</span>
-</pre></div></li>
-<li>Pointer move to another tile
-    <div class="codehilite"><pre><span></span><span class="nx">board</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;tilemove&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">tileXY</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// var tileX = tileXY.x;</span>
-    <span class="c1">// var tileY = tileXY.y;</span>
-<span class="p">});</span>
-</pre></div><ul>
-<li>Only triggered when <code>tileXY</code> is changed.</li>
-</ul>
-</li>
-<li>Pointer down at a chess
+<li>Pointer down at chess
     <div class="codehilite"><pre><span></span><span class="nx">board</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;gameobjectdown&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">)</span> <span class="p">{</span>
 <span class="p">})</span>
 </pre></div>
@@ -5157,7 +5230,19 @@
 <li><code>gameObject</code> : Game object at touched (tileX, tileY)</li>
 </ul>
 </li>
-<li>Pointer up at a chess
+</ul>
+<h4 id="pointer-up">Pointer up<a class="headerlink" href="#pointer-up" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Pointer up at any tile
+    <div class="codehilite"><pre><span></span><span class="nx">board</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;tileup&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">tileXY</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// var tileX = tileXY.x;</span>
+    <span class="c1">// var tileY = tileXY.y;</span>
+<span class="p">});</span>
+</pre></div><ul>
+<li><code>tileXY</code> : <code>{x, y}</code></li>
+</ul>
+</li>
+<li>Pointer up at chess
     <div class="codehilite"><pre><span></span><span class="nx">board</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;gameobjectup&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">)</span> <span class="p">{</span>
 <span class="p">})</span>
 </pre></div>
@@ -5166,7 +5251,20 @@
 <span class="p">})</span>
 </pre></div><ul>
 <li><code>pointer</code> : <a href="../touchevents/#properties-of-point">Touch pointer</a></li>
-<li><code>gameObject</code> : Game object at touched (tileX, tileY)    </li>
+<li><code>gameObject</code> : Game object at touched (tileX, tileY)</li>
+</ul>
+</li>
+</ul>
+<h4 id="pointer-move">Pointer move<a class="headerlink" href="#pointer-move" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Pointer move to another tile
+    <div class="codehilite"><pre><span></span><span class="nx">board</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;tilemove&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">tileXY</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// var tileX = tileXY.x;</span>
+    <span class="c1">// var tileY = tileXY.y;</span>
+<span class="p">});</span>
+</pre></div><ul>
+<li><code>tileXY</code> : <code>{x, y}</code></li>
+<li>Only triggered when <code>tileXY</code> is changed.</li>
 </ul>
 </li>
 <li>Pointer move to another chess
@@ -5178,6 +5276,112 @@
 <span class="p">})</span>
 </pre></div><ul>
 <li><code>pointer</code> : <a href="../touchevents/#properties-of-point">Touch pointer</a></li>
+<li><code>gameObject</code> : Game object at touched (tileX, tileY)</li>
+</ul>
+</li>
+</ul>
+<h4 id="tap"><a href="../gesture-tap/">Tap</a><a class="headerlink" href="#tap" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Tap at any tile
+    <div class="codehilite"><pre><span></span><span class="nx">board</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;tiletap&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tap</span><span class="p">,</span> <span class="nx">tileXY</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// var tileX = tileXY.x;</span>
+    <span class="c1">// var tileY = tileXY.y;</span>
+    <span class="c1">// var tapsCount = tap.tapsCount;</span>
+<span class="p">});</span>
+</pre></div><ul>
+<li><code>tap</code> : <a href="../gesture-tap/">Tap behavior</a>.<ul>
+<li><code>tap.tapsCount</code> : Taps count.</li>
+</ul>
+</li>
+<li><code>tileXY</code> : <code>{x, y}</code></li>
+</ul>
+</li>
+<li>N-taps at any tile
+    <div class="codehilite"><pre><span></span><span class="nx">board</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;tile&#39;</span> <span class="o">+</span> <span class="nx">tapsCount</span> <span class="o">+</span> <span class="s1">&#39;tap&#39;</span> <span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tap</span><span class="p">,</span> <span class="nx">tileXY</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// var tileX = tileXY.x;</span>
+    <span class="c1">// var tileY = tileXY.y;</span>
+<span class="p">});</span>
+</pre></div><ul>
+<li><code>'tile' + tapsCount + 'tap'</code> : <code>'tile1tap'</code>, <code>'tile2tap'</code>, <code>'tile3tap'</code>, etc ...</li>
+<li><code>tap</code> : <a href="../gesture-tap/">Tap behavior</a>.</li>
+<li><code>tileXY</code> : <code>{x, y}</code></li>
+</ul>
+</li>
+<li>Tap at chess
+    <div class="codehilite"><pre><span></span><span class="nx">board</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;gameobjecttap&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tap</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// var tapsCount = tap.tapsCount;</span>
+<span class="p">})</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;board.tap&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tap</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// var tapsCount = tap.tapsCount;</span>
+<span class="p">})</span>
+</pre></div><ul>
+<li><code>tap</code> : <a href="../gesture-tap/">Tap behavior</a>.<ul>
+<li><code>tap.tapsCount</code> : Taps count.</li>
+</ul>
+</li>
+<li><code>gameObject</code> : Game object at touched (tileX, tileY)</li>
+</ul>
+</li>
+<li>N-taps at chess
+    <div class="codehilite"><pre><span></span><span class="nx">board</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;gameobject&#39;</span> <span class="o">+</span> <span class="nx">tapsCount</span> <span class="o">+</span> <span class="s1">&#39;tap&#39;</span> <span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tap</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">})</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;board.&#39;</span> <span class="o">+</span> <span class="nx">tapsCount</span> <span class="o">+</span> <span class="s1">&#39;tap&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tap</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">})</span>
+</pre></div><ul>
+<li><code>'gameobject' + tapsCount + 'tap'</code> : <code>'gameobject1tap'</code>, <code>'gameobject2tap'</code>, <code>'gameobject3tap'</code>, etc ...</li>
+<li><code>'board.' + tapsCount + 'tap'</code> : <code>'board.1tap'</code>, <code>'board.2tap'</code>, <code>'board.3tap'</code>, etc ...</li>
+<li><code>tap</code> : <a href="../gesture-tap/">Tap behavior</a>.</li>
+<li><code>gameObject</code> : Game object at touched (tileX, tileY)</li>
+</ul>
+</li>
+</ul>
+<h4 id="press"><a href="../gesture-press/">Press</a><a class="headerlink" href="#press" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Press-start at any tile
+    <div class="codehilite"><pre><span></span><span class="nx">board</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;tilepressstart&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">press</span><span class="p">,</span> <span class="nx">tileXY</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// var tileX = tileXY.x;</span>
+    <span class="c1">// var tileY = tileXY.y;</span>
+<span class="p">});</span>
+</pre></div><ul>
+<li><code>press</code> : <a href="../gesture-press/">Press behavior</a>.</li>
+<li><code>tileXY</code> : <code>{x, y}</code></li>
+</ul>
+</li>
+<li>Press-end at any tile
+    <div class="codehilite"><pre><span></span><span class="nx">board</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;tilepressend&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">press</span><span class="p">,</span> <span class="nx">tileXY</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// var tileX = tileXY.x;</span>
+    <span class="c1">// var tileY = tileXY.y;</span>
+<span class="p">});</span>
+</pre></div><ul>
+<li><code>press</code> : <a href="../gesture-press/">Press behavior</a>.</li>
+<li><code>tileXY</code> : <code>{x, y}</code></li>
+</ul>
+</li>
+<li>Press-star at chess
+    <div class="codehilite"><pre><span></span><span class="nx">board</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;gameobjectpressstart&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">press</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">})</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;board.pressstart&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">press</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">})</span>
+</pre></div><ul>
+<li><code>press</code> : <a href="../gesture-tap/">Press behavior</a>.</li>
+<li><code>gameObject</code> : Game object at touched (tileX, tileY)</li>
+</ul>
+</li>
+<li>Press-end at chess
+    <div class="codehilite"><pre><span></span><span class="nx">board</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;gameobjectpressend&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">press</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">})</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;board.pressend&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">press</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">})</span>
+</pre></div><ul>
+<li><code>press</code> : <a href="../gesture-tap/">Press behavior</a>.</li>
 <li><code>gameObject</code> : Game object at touched (tileX, tileY)</li>
 </ul>
 </li>

@@ -166,7 +166,7 @@ nav:
         - CSV to hash table: csvtohashtable.md
     - Database:
         - LokiJs: lokijs.md
-    - Configuration data: config-object.md
+    - Configuration data: config-data.md
 - Math:
     - Max, min:
         - Interpolation: interpolation.md

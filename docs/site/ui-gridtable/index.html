@@ -872,6 +872,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../textedit/" title="Edit" class="md-nav__link">
+      Edit
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -1281,6 +1293,18 @@
   <li class="md-nav__item">
     <a href="../domelement/" title="DOM element" class="md-nav__link">
       DOM element
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../inputtext/" title="Input text" class="md-nav__link">
+      Input text
     </a>
   </li>
 
@@ -2691,6 +2715,18 @@
         
       </ul>
     </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../config-data/" title="Configuration data" class="md-nav__link">
+      Configuration data
+    </a>
   </li>
 
         
@@ -4587,17 +4623,17 @@
 <p>See <a href="../ui-basesizer/">base sizer object</a>.</p>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Tap cell
+<li><a href="../gesture-tap/">Tap</a> cell
     <div class="codehilite"><pre><span></span><span class="nx">gridTable</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="nx">tapEventName</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">,</span> <span class="nx">cellIndex</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </pre></div><ul>
-<li><code>tapEventName</code> : <code>cell.1tap</code>, <code>cell.2tap</code>, <code>cell.3tap</code>, etc ...</li>
+<li><code>tapEventName</code> : <code>'cell.1tap'</code>, <code>'cell.2tap'</code>, <code>'cell.3tap'</code>, etc ...</li>
 <li><code>cellContainer</code> : Container game object of triggered cell.</li>
 <li><code>cellIndex</code> : Index of triggered cell.</li>
 </ul>
 </li>
-<li>Press cell
+<li><a href="../gesture-press/">Press</a> cell
     <div class="codehilite"><pre><span></span><span class="nx">gridTable</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="sb">`cell.pressstart`</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">,</span> <span class="nx">cellIndex</span><span class="p">)</span> <span class="p">{</span>
     <span class="c1">// ...</span>
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
