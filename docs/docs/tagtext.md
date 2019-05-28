@@ -101,7 +101,9 @@ Default style
         thinkness: 0,
         offset: 0
     },
-    align: 'left',  // 0|'left'|1|'center'|2|'right'
+    // align: 'left',  // Equal to halign
+    halign: 'left', // 'left'|'center'|'right'
+    valign: 'top',  // 'top'|'center'|'bottom'
     padding: {
         left: 0,
         right: 0,
@@ -158,6 +160,12 @@ var txt = scene.make.rexTagText({
     add: true
 });
 ```
+
+- Alignment
+    - `halign`, or `align` : Horizontal alignment.
+        - `left`, `center`, `right`
+    - `valign` : Vertical alignment.
+        - `top`, `center`, `bottom`
 
 ### Custom class
 

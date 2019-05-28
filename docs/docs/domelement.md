@@ -18,10 +18,10 @@ Carry DOM element, built-in game object of phaser.
 ```javascript
 var config = {
     // ...
-    parent: divId,    
+    parent: divId,
     dom: {
         createContainer: true
-    }
+    },
     // ...
 }
 var game = new Phaser.Game(config);

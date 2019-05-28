@@ -56,7 +56,7 @@ var CreateLoginDialog = function (scene, config, onSubmit) {
         orientation: 'x',
         background: scene.rexUI.add.roundRectangle(0, 0, 10, 10, 10).setStrokeStyle(2, COLOR_LIGHT),
         icon: scene.add.image(0, 0, 'user'),
-        text: scene.rexUI.add.BBCodeText(0, 0, username, { fixedWidth: 150 }),
+        text: scene.rexUI.add.BBCodeText(0, 0, username, { fixedWidth: 150, fixedHeight: 36, valign: 'center' }),
         space: { top: 5, bottom: 5, left: 5, right: 5, icon: 10, }
     })
         .setInteractive()
@@ -75,7 +75,7 @@ var CreateLoginDialog = function (scene, config, onSubmit) {
         orientation: 'x',
         background: scene.rexUI.add.roundRectangle(0, 0, 10, 10, 10).setStrokeStyle(2, COLOR_LIGHT),
         icon: scene.add.image(0, 0, 'password'),
-        text: scene.rexUI.add.BBCodeText(0, 0, markPassword(password), { fixedWidth: 150 }),
+        text: scene.rexUI.add.BBCodeText(0, 0, markPassword(password), { fixedWidth: 150, fixedHeight: 36, valign: 'center' }),
         space: { top: 5, bottom: 5, left: 5, right: 5, icon: 10, }
     })
         .setInteractive()
@@ -123,7 +123,7 @@ var CreateLoginDialog = function (scene, config, onSubmit) {
     return loginDialog;
 };
 var markPassword = function (password) {
-    return new Array(password.length + 1).join('*');
+    return new Array(password.length + 1).join('•');
 };
 
 var config = {

@@ -97,6 +97,14 @@
     }
     ```
 
+#### Behaviors of text
+
+1. [Text editor](texteditor.md): Create an [input text object](inputtext.md) above a text object to edit string content.
+    ```javascript
+    scene.rexUI.add.edit(textObject, config);
+    // scene.rexUI.add.edit(textObject, config, onClose);
+    ```
+
 ### Gestures
 
 1. [Tap](gesture-tap.md): Get tap/multi-taps events of a game object.
@@ -122,6 +130,7 @@
     - [Yes/No](https://codepen.io/rexrainbow/pen/MPZWZG)
     - [Choice](https://codepen.io/rexrainbow/pen/ePoRVz)
     - [Pop-up](https://codepen.io/rexrainbow/pen/NEpjmP)
+- [Edit](https://codepen.io/rexrainbow/pen/YbvwBw)
 - [Menu](https://codepen.io/rexrainbow/pen/PxOEBr)
 - [Text-box](https://codepen.io/rexrainbow/pen/MzGoJv)
 - [Text-area](https://codepen.io/rexrainbow/pen/JzBZzy)
@@ -131,4 +140,7 @@
     - [Tabs-tables](https://codepen.io/rexrainbow/pen/BGKvXK)
 - [Scroll-able panel](https://codepen.io/rexrainbow/pen/YMyBom)
 - [Pages](https://codepen.io/rexrainbow/pen/vPWzBa)
+- [Fix-width sizer](https://codepen.io/rexrainbow/pen/WPJPdK)
+- [Chart](https://codepen.io/rexrainbow/pen/qwVBNy)
+- [Anchor](https://codepen.io/rexrainbow/pen/jJqXxB)
 - [Round-rectangle](https://codepen.io/rexrainbow/pen/ZqqJjG)

@@ -4,11 +4,18 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 
 class InputText extends DOMElement {
     constructor(scene, x, y, width, height, config) {
-        if (IsPlainObject(width)) {
+        if (IsPlainObject(x)) {
+            config = x;
+            x = GetValue(config, 'x', 0);
+            y = GetValue(config, 'y', 0);
+            width = GetValue(config, 'width', undefined);
+            height = GetValue(config, 'height', undefined);
+        } else if (IsPlainObject(width)) {
             config = width;
             width = GetValue(config, 'width', undefined);
             height = GetValue(config, 'height', undefined);
         }
+
         if (config === undefined) {
             config = {};
         }
@@ -76,7 +83,7 @@ class InputText extends DOMElement {
         // Bind on-text-changed event
         element.oninput = (function () {
             if (this.onTextChanged) {
-                this.onTextChanged(this.text);
+                this.onTextChanged(this.text, this);
             }
         }).bind(this);
 
@@ -142,7 +149,7 @@ class InputText extends DOMElement {
         return this;
     }
 
-    setOnTextChangedCallback(callback) {
+    setTextChangedCallback(callback) {
         this.onTextChanged = callback;
         return this;
     }
@@ -181,6 +188,10 @@ class InputText extends DOMElement {
         return this;
     }
 
+    getStyle(key) {
+        return this.node.style[key];
+    }
+
     scrollToBottom() {
         this.node.scrollTop = this.node.scrollHeight;
         return this;
@@ -210,7 +221,7 @@ const ElementProperties = {
     text: ['value', undefined],
     placeholder: ['placeholder', undefined],
     tooltip: ['title', undefined],
-    readOnly: ['readOnly', false],
+    readOnly: ['readonly', false],
     spellCheck: ['spellcheck', false],
     autoComplete: ['autocomplete', 'off'],
     onClick: ['onclick', undefined],
@@ -220,6 +231,7 @@ const ElementProperties = {
 };
 
 const StyleProperties = {
+    align: ['text-align', undefined],
     width: ['width', undefined],
     height: ['height', undefined],
     fontFamily: ['font-family', undefined],
@@ -227,7 +239,7 @@ const StyleProperties = {
     color: ['color', '#ffffff'],
     backgroundColor: ['backgroundColor', 'transparent'],
     borderColor: ['borderColor', 'transparent'],
-    outline: ['outline', 'none']
+    outline: ['outline', 'none'],
 };
 
 export default InputText;

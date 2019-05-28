@@ -40,12 +40,12 @@
 1. [Grid align](gridalign.md): Align objects on quadrilateral or hexagon grid.
 1. [Grid table](gridtable.md): Viewer of grid table, to manipulate game object of each visible cell.
 1. [Hexagon](geom-hexagon.md): Hexagon shape and methods.
+1. [Input text](inputtext.md): Input DOM element.
 1. [Interception](interception.md): Predict the intersection position of two game objects with constant moving speed.
 1. [Life time](lifetime.md): Destroy game object when time-out.
 1. [LZ-string](lzstring.md): Compress string using LZ-based compression algorithm.
 1. [Mouse-wheel to up/down](mousewheeltoupdown.md): Map mouse-wheeling to (up/down) cursor key state.
 1. [Move to](moveto.md): Move game object towards target position with a steady speed.
-1. [Page](textpage.md): Display text page by page on text object.
 1. [Path follower](pathfollower.md): Set position of game object on a path.
 1. [Pop up](popup.md): Scale up game object.
 1. [Restorable data](restorabledata.md): Restorable data manager.
@@ -68,7 +68,9 @@
 1. [TagText](tagtext.md): Displays text with multi-color, font face, or font size with tags.
 1. [TCRP.Player](tcrp-player.md): Run commands on time.
 1. [TCRP.Recorder](tcrp-recoder.md): Store commands with time.
-1. [Typing](texttyping.md): Typing text on text object.
+1. [Text/edit](textedit.md): Create an input text object above a text object to edit string content.
+1. [Text/typing](texttyping.md): Typing text on text object.
+1. [Text/page](textpage.md): Display text page by page on text object.
 1. [UI/buttons](ui-buttons.md): A container with a group of buttons.
 1. [UI/chart](ui-chart.md): Draw chart on canvas.
 1. [UI/dialog](ui-dialog.md): A container with a title, content, buttons and backgrounds.

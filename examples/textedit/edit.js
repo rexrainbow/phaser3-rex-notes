@@ -15,7 +15,7 @@ class Demo extends Phaser.Scene {
             color: 'yellow',
             fontSize: '24px',
             fixedWidth: 200,
-            // fixedHeight: 30,
+            fixedHeight: 50,
             backgroundColor: '#333333',
         })
             .setOrigin(0.5)

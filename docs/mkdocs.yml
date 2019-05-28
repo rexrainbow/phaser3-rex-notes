@@ -42,6 +42,7 @@ nav:
         - Behaviors:
             - Typing: texttyping.md    
             - Page: textpage.md
+            - Edit: textedit.md
     - Graphics:
         - Graphics: graphics.md
         - Render texture: rendertexture.md
@@ -71,6 +72,7 @@ nav:
     - Zone: zone.md
     - DOM element:
         - DOM element: domelement.md
+        - Input text: inputtext.md
     - Behaviors:
         - Actions:
             - Group actions: groupactions.md
