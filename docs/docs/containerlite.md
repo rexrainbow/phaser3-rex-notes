@@ -253,6 +253,25 @@ var localState = child.rexContainer;
     container.setChildLocalPosition(child, x, y);
     ```
 
+### Depth
+
+- Get depth of container
+    ```javascript
+    var depth = container.depth;
+    ```
+- Set depth of container and all children
+    ```javascript
+    container.setDepth(value);
+    ```
+- Swap depth with another container
+    ```javascript
+    containerA.swapDepth(containerB);
+    ```
+- Increase of container and all children
+    ```javascript
+    container.incDepth(value);
+    ```
+
 ### Mask
 
 - Assign [mask object](mask.md) to children

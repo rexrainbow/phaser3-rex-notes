@@ -15,12 +15,12 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var label0 = createLabel(this, 'Label0').setPosition(200, 300);
-        var label1 = createLabel(this, 'Label1').alignTop(label0.top).alignLeft(label0.right);
+        var label0 = createLabel(this, 'Label0').setPosition(200, 300).setDepth(0);
+        var label1 = createLabel(this, 'Label1').setPosition(230, 330).setDepth(1);
 
-        var graphics = this.add.graphics();
-        label0.drawBounds(graphics, 0xff0000);
-        label1.drawBounds(graphics, 0xff0000);
+        this.input.on('pointerdown', function () {
+            label0.swapDepth(label1);
+        });
     }
 
     update() { }
@@ -28,7 +28,7 @@ class Demo extends Phaser.Scene {
 
 var createLabel = function (scene, text) {
     return scene.rexUI.add.label({
-        background: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_PRIMARY),
+        background: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_PRIMARY).setStrokeStyle(1, COLOR_LIGHT),
         text: scene.add.text(0, 0, text, {
             fontSize: '24px'
         }),

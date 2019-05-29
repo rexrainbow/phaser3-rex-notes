@@ -562,6 +562,36 @@ class ContainerLite extends Zone {
         this.updateDisplayOrigin(); // Remove this line until it has merged in `zone.setSize()` function
         return this;
     }
+
+    setDepth(value) {
+        this.depth = value;
+        if (this.children) {
+            var children = this.getAllChildren();
+            for (var i = 0, cnt = children.length; i < cnt; i++) {
+                children[i].depth = value;
+            }
+        }
+        return this;
+    }
+
+    swapDepth(containerB) {
+        var depthA = this.depth;
+        var depthB = containerB.depth;
+        this.setDepth(depthB);
+        containerB.setDepth(depthA);
+        return this;
+    }
+
+    incDepth(inc) {
+        this.depth += inc;
+        if (this.children) {
+            var children = this.getAllChildren();
+            for (var i = 0, cnt = children.length; i < cnt; i++) {
+                children[i].depth += inc;
+            }
+        }
+        return this;
+    }
 }
 
 Object.assign(

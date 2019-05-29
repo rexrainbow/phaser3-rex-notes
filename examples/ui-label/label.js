@@ -53,8 +53,8 @@ class Demo extends Phaser.Scene {
         });
 
         var sizer = this.rexUI.add.sizer(400, 300, {
-                orientation: 1
-            })
+            orientation: 1
+        })
             .add(
                 horizonLabel, // Game object
                 0, // Proportion
@@ -75,7 +75,7 @@ class Demo extends Phaser.Scene {
             .drawBounds(this.add.graphics(), 0xff0000)
     }
 
-    update() {}
+    update() { }
 }
 
 var config = {
