@@ -56,24 +56,28 @@ class Label extends Sizer {
         }
 
         if (text) {
-            var proportion = (config.width !== undefined) ? 1 : 0;
-            var padding;
+            var expandTextWidth = (config.width !== undefined);
+            var proportion, padding, expand;
             if (this.orientation === 0) {
+                proportion = (expandTextWidth) ? 1 : 0;
                 padding = {
                     left: (icon) ? 0 : paddingLeft,
                     right: (action) ? textSpace : paddingRight,
                     top: paddingTop,
                     bottom: paddingBottom
-                }
+                };
+                expand = false;
             } else {
+                proportion = 0;
                 padding = {
                     left: paddingLeft,
                     right: paddingRight,
                     top: (icon) ? 0 : paddingTop,
                     bottom: (action) ? textSpace : paddingBottom
                 }
+                expand = expandTextWidth;
             }
-            this.add(text, proportion, 'center', padding);
+            this.add(text, proportion, 'center', padding, expand);
         }
 
         if (action) {
