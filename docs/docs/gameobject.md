@@ -388,6 +388,16 @@ Only [image](image.md) and sprite game object have teuture componment.
     gameObject.name = name;
     ```
 
+### Destroy event
+
+Each kind of game object will emit `destroy` event when destroyed.
+
+```javascript
+gameObject.once('destroy', function(gameObject) {
+
+}, scope);
+```
+
 ### Custom class
 
 - Define class

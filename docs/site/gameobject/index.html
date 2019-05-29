@@ -694,6 +694,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#destroy-event" title="Destroy event" class="md-nav__link">
+    Destroy event
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#custom-class" title="Custom class" class="md-nav__link">
     Custom class
   </a>
@@ -1935,6 +1942,25 @@
           
 
 
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-3-2" type="checkbox" id="nav-5-2-3-2">
+    
+    <label class="md-nav__link" for="nav-5-2-3-2">
+      One pointer gesture
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-5-2-3-2">
+        One pointer gesture
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
   <li class="md-nav__item">
     <a href="../gesture-tap/" title="Tap" class="md-nav__link">
       Tap
@@ -1960,9 +1986,74 @@
 
 
   <li class="md-nav__item">
+    <a href="../gesture-swipe/" title="Swipe" class="md-nav__link">
+      Swipe
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../gesture-pan/" title="Pan" class="md-nav__link">
+      Pan
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-3-3" type="checkbox" id="nav-5-2-3-3">
+    
+    <label class="md-nav__link" for="nav-5-2-3-3">
+      Two pointers gesture
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-5-2-3-3">
+        Two pointers gesture
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../gesture-pinch/" title="Pinch" class="md-nav__link">
       Pinch
     </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../gesture-rotate/" title="Rotate" class="md-nav__link">
+      Rotate
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
         
@@ -4349,6 +4440,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#destroy-event" title="Destroy event" class="md-nav__link">
+    Destroy event
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#custom-class" title="Custom class" class="md-nav__link">
     Custom class
   </a>
@@ -4756,6 +4854,13 @@
 <span class="nx">gameObject</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
 </pre></div></li>
 </ul>
+<h3 id="destroy-event">Destroy event<a class="headerlink" href="#destroy-event" title="Permanent link">&para;</a></h3>
+<p>Each kind of game object will emit <code>destroy</code> event when destroyed.</p>
+<div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;destroy&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div>
+
 <h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Define class

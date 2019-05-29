@@ -1392,6 +1392,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#depth" title="Depth" class="md-nav__link">
+    Depth
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#mask" title="Mask" class="md-nav__link">
     Mask
   </a>
@@ -1956,6 +1963,25 @@
           
 
 
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-3-2" type="checkbox" id="nav-5-2-3-2">
+    
+    <label class="md-nav__link" for="nav-5-2-3-2">
+      One pointer gesture
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-5-2-3-2">
+        One pointer gesture
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
   <li class="md-nav__item">
     <a href="../gesture-tap/" title="Tap" class="md-nav__link">
       Tap
@@ -1981,9 +2007,74 @@
 
 
   <li class="md-nav__item">
+    <a href="../gesture-swipe/" title="Swipe" class="md-nav__link">
+      Swipe
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../gesture-pan/" title="Pan" class="md-nav__link">
+      Pan
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-3-3" type="checkbox" id="nav-5-2-3-3">
+    
+    <label class="md-nav__link" for="nav-5-2-3-3">
+      Two pointers gesture
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-5-2-3-3">
+        Two pointers gesture
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../gesture-pinch/" title="Pinch" class="md-nav__link">
       Pinch
     </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../gesture-rotate/" title="Rotate" class="md-nav__link">
+      Rotate
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
         
@@ -4375,6 +4466,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#depth" title="Depth" class="md-nav__link">
+    Depth
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#mask" title="Mask" class="md-nav__link">
     Mask
   </a>
@@ -4629,6 +4727,21 @@
 <ul>
 <li>Local position
     <div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">setChildLocalPosition</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h3 id="depth">Depth<a class="headerlink" href="#depth" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get depth of container
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">depth</span> <span class="o">=</span> <span class="nx">container</span><span class="p">.</span><span class="nx">depth</span><span class="p">;</span>
+</pre></div></li>
+<li>Set depth of container and all children
+    <div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">setDepth</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+</pre></div></li>
+<li>Swap depth with another container
+    <div class="codehilite"><pre><span></span><span class="nx">containerA</span><span class="p">.</span><span class="nx">swapDepth</span><span class="p">(</span><span class="nx">containerB</span><span class="p">);</span>
+</pre></div></li>
+<li>Increase of container and all children
+    <div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">incDepth</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
 </pre></div></li>
 </ul>
 <h3 id="mask">Mask<a class="headerlink" href="#mask" title="Permanent link">&para;</a></h3>
