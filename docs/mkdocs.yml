@@ -103,9 +103,14 @@ nav:
         - Cursor: cursor.md
         - Gestures:
             - Overview: gesture-overview.md
-            - Tap: gesture-tap.md
-            - Press: gesture-press.md
-            - Pinch: gesture-pinch.md
+            - One pointer gesture:
+                - Tap: gesture-tap.md
+                - Press: gesture-press.md
+                - Swipe: gesture-swipe.md
+                - Pan: gesture-pan.md
+            - Two pointers gesture:
+                - Pinch: gesture-pinch.md
+                - Rotate: gesture-rotate.md
         - Button: button.md
         - Drag: drag.md
         - Slider: slider.md

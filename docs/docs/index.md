@@ -34,8 +34,11 @@
 1. [Flash](flash.md): Flashing (set invisible then visible) game object.
 1. [FSM](fsm.md): Finite state machine.
 1. [Gashapon](gashapon.md): Pick random item from box.
-1. [Gesture/Pinch](gesture-pinch.md): Get scale factor ftom 2 dragging touch pointers.
+1. [Gesture/Pan](gesture-pan.md): Get pan events of a game object.
+1. [Gesture/Pinch](gesture-pinch.md): Get scale factor from 2 dragging touch pointers.
 1. [Gesture/Press](gesture-press.md): Get press events of a game object.
+1. [Gesture/Rotate](gesture-rotate.md): Get spin angle from 2 dragging touch pointers.
+1. [Gesture/Swipe](gesture-swipe.md): Get swipe events of a game object.
 1. [Gesture/Tap](gesture-tap.md): Get tap/multi-taps events of a game object.
 1. [Grid align](gridalign.md): Align objects on quadrilateral or hexagon grid.
 1. [Grid table](gridtable.md): Viewer of grid table, to manipulate game object of each visible cell.
