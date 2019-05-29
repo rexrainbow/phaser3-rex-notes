@@ -56,6 +56,7 @@ class Label extends Sizer {
         }
 
         if (text) {
+            var proportion = (config.width !== undefined) ? 1 : 0;
             var padding;
             if (this.orientation === 0) {
                 padding = {
@@ -72,7 +73,7 @@ class Label extends Sizer {
                     bottom: (action) ? textSpace : paddingBottom
                 }
             }
-            this.add(text, 0, 'center', padding);
+            this.add(text, proportion, 'center', padding);
         }
 
         if (action) {

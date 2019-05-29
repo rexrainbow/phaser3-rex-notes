@@ -24,7 +24,6 @@ import TextAreaFactory from './textarea/TextAreaFactory.js';
 import ScrollableBlockFactory from './scrollableblock/ScrollableBlockFactory.js';
 import ScrollablePanelFactory from './scrollablepanel/ScrollablePanelFactory.js';
 import ChartFactory from './chart/ChartFactory.js';
-// import InputTextFactory from './inputtext/InputTextFactory.js';
 
 import TapFactory from './tap/TapFactory.js';
 import PressFactory from './press/PressFactory.js';

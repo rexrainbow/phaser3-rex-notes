@@ -90,6 +90,23 @@ var label = scene.rexUI.add.label({
 - `name` : Set name of this label.
 - `draggable` : Set `true` to drag to-most sizer.
 
+!!! note "Expand width of text"
+    Width of text object will be expanded if `width` parameter is not `undefined`.
+    In this case, text object should have `resize` method. For example
+    ```javascript
+    class MyText extends Phaser.GameObjects.Text {
+        constructor(scene, x, y, text, style) {
+            super(scene, x, y, text, style);
+            scene.add.existing(this);
+        }
+        resize(width, height) {
+            this.setFixedSize(width, height);
+            return this;
+        }
+    }
+    ```
+    Or uses [bbcode text object](bbcodetext.md), or [tag text object](tagtext.md)
+
 ### Custom class
 
 - Define class
