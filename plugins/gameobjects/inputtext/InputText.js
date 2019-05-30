@@ -1,3 +1,5 @@
+import StopPropagationTouchEvents from '../../utils/input/StopPropagationTouchEvents.js';
+
 const DOMElement = Phaser.GameObjects.DOMElement;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -90,13 +92,7 @@ class InputText extends BaseClass {
         }).bind(this);
 
         // Don't propagate touch/mouse events to parent(game canvas)
-        var callback = function (e) { e.stopPropagation(); }
-        element.addEventListener("touchstart", callback, false);
-        element.addEventListener("touchmove", callback, false);
-        element.addEventListener("touchend", callback, false);
-        element.addEventListener("mousedown", callback, false);
-        element.addEventListener("mouseup", callback, false);
-        element.addEventListener("mousemove", callback, false);
+        StopPropagationTouchEvents(this.node);
     }
 
     resize(width, height) {
