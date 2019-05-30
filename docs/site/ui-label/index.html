@@ -4406,10 +4406,7 @@
 <li>String (<code>'p%+n'</code>) : Position based on visible window. See <a href="../anchor/#create-instance">anchor</a>.</li>
 </ul>
 </li>
-<li><code>width</code>, <code>height</code> : Minimum width, minimum height.<ul>
-<li>Expand width/height of text object when <code>width</code>/<code>height</code> is not <code>undefined</code>.</li>
-</ul>
-</li>
+<li><code>width</code>, <code>height</code> : Minimum width, minimum height.</li>
 <li><code>orientation</code> :<ul>
 <li><code>'left-to-right'</code>, <code>'horizontal'</code>,<code>'h'</code>, <code>'x'</code>, or <code>0</code> : Put icon at left side, and text at right side.</li>
 <li><code>'top-to-bottom'</code>, <code>'vertical'</code>,<code>'v'</code>, <code>'y'</code>, or <code>1</code> : Put icon at top side, and text at bottom side.</li>
@@ -4433,11 +4430,7 @@
 <li><code>draggable</code> : Set <code>true</code> to drag to-most sizer.</li>
 </ul>
 <h4 id="expand-size-of-text">Expand size of text<a class="headerlink" href="#expand-size-of-text" title="Permanent link">&para;</a></h4>
-<p>Expand width/height of text when</p>
-<ul>
-<li><code>expandTextWidth</code>/<code>expandTextHeight</code> is <code>true</code>, or </li>
-<li><code>width</code>/<code>height</code> is not <code>undefined</code></li>
-</ul>
+<p>Expand width/height of text when <code>expandTextWidth</code>/<code>expandTextHeight</code> is <code>true</code></p>
 <p>To resize text object, text object should have <code>resize</code> method. For example</p>
 <div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">MyText</span> <span class="kr">extends</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">GameObjects</span><span class="p">.</span><span class="nx">Text</span> <span class="p">{</span>
     <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">text</span><span class="p">,</span> <span class="nx">style</span><span class="p">)</span> <span class="p">{</span>

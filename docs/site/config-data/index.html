@@ -2848,6 +2848,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#quick-start" title="Quick start" class="md-nav__link">
+    Quick start
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#get-value" title="Get value" class="md-nav__link">
     Get value
   </a>
@@ -4188,6 +4195,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#quick-start" title="Quick start" class="md-nav__link">
+    Quick start
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#get-value" title="Get value" class="md-nav__link">
     Get value
   </a>
@@ -4228,11 +4242,22 @@
                   <h1>Configuration data</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Get parameters from sourceuration object.</p>
+<p>Get parameters from configuration object.</p>
 <ul>
 <li>Author: Richard Davey</li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<h3 id="quick-start">Quick start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kr">const</span> <span class="nx">GetValue</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Utils</span><span class="p">.</span><span class="nx">Objects</span><span class="p">.</span><span class="nx">GetValue</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">myMethod</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">GetValue</span><span class="p">(</span><span class="nx">config</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">GetValue</span><span class="p">(</span><span class="nx">config</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">width</span> <span class="o">=</span> <span class="nx">GetValue</span><span class="p">(</span><span class="nx">config</span><span class="p">,</span> <span class="s1">&#39;width&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">height</span> <span class="o">=</span> <span class="nx">GetValue</span><span class="p">(</span><span class="nx">config</span><span class="p">,</span> <span class="s1">&#39;height&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+
 <h3 id="get-value">Get value<a class="headerlink" href="#get-value" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Retrieves a value from an object.

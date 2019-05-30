@@ -1401,8 +1401,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#on-text-changed" title="On text changed" class="md-nav__link">
-    On text changed
+  <a href="#events" title="Events" class="md-nav__link">
+    Events
   </a>
   
 </li>
@@ -4295,8 +4295,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#on-text-changed" title="On text changed" class="md-nav__link">
-    On text changed
+  <a href="#events" title="Events" class="md-nav__link">
+    Events
   </a>
   
 </li>
@@ -4378,7 +4378,6 @@
     <span class="nx">height</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
 
     <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;text&#39;</span><span class="p">,</span>    <span class="c1">// &#39;text&#39;|&#39;password&#39;|&#39;textarea&#39;</span>
-    <span class="nx">onTextChanged</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
 
     <span class="c1">// Element properties</span>
     <span class="nx">id</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
@@ -4388,10 +4387,6 @@
     <span class="nx">readOnly</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="nx">spellCheck</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="nx">autoComplete</span><span class="o">:</span> <span class="s1">&#39;off&#39;</span><span class="p">,</span>
-    <span class="nx">onClick</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-    <span class="nx">onDoubleClick</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-    <span class="nx">onFocus</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-    <span class="nx">onBlur</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
 
     <span class="c1">// Style properties</span>
     <span class="nx">align</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
@@ -4411,14 +4406,6 @@
 <li><code>'text'</code>, <code>'password'</code>, or <code>'textarea'</code></li>
 </ul>
 </li>
-<li><code>onTextChanged</code> : Callback invoked when input text changed (<code>oninput</code>).
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">text</span><span class="p">,</span> <span class="nx">inputText</span><span class="p">)</span> <span class="p">{</span>
-<span class="p">}</span>
-</pre></div><ul>
-<li><code>text</code> : Current text value.</li>
-<li><code>inputText</code> : Input text object.</li>
-</ul>
-</li>
 <li>Element properties<ul>
 <li><code>id</code> : <code>id</code> element property.</li>
 <li><code>text</code> : <code>value</code> element property.</li>
@@ -4427,10 +4414,6 @@
 <li><code>readOnly</code> : <code>readonly</code> element property.</li>
 <li><code>spellCheck</code> : <code>spellcheck</code> element property.</li>
 <li><code>autoComplete</code> : <code>autocomplete</code> element property.</li>
-<li><code>onClick</code> : <code>onclick</code> element property.</li>
-<li><code>onDoubleClick</code> : <code>ondblclick</code> element property.</li>
-<li><code>onFocus</code> : <code>onfocus</code> element property.</li>
-<li><code>onBlur</code> : <code>onblur</code> element property.</li>
 </ul>
 </li>
 <li>Element style properties<ul>
@@ -4507,20 +4490,23 @@
 <div class="codehilite"><pre><span></span><span class="nx">inputText</span><span class="p">.</span><span class="nx">resize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
 </pre></div>
 
-<h3 id="on-text-changed">On text changed<a class="headerlink" href="#on-text-changed" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">inputText</span><span class="p">.</span><span class="nx">setTextChangedCallback</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
-<span class="c1">// inputText.onTextChanged = callback;</span>
-</pre></div>
-
+<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
-<li><code>callback</code>
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">text</span><span class="p">,</span> <span class="nx">inputText</span><span class="p">)</span> <span class="p">{</span>
-<span class="p">}</span>
-</pre></div><ul>
-<li><code>text</code> : Current text value.</li>
-<li><code>inputText</code> : Input text object.</li>
-</ul>
-</li>
+<li>On text changed
+    <div class="codehilite"><pre><span></span><span class="nx">inputText</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;textchange&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">inputText</span><span class="p">){</span> <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+<li>On focus
+    <div class="codehilite"><pre><span></span><span class="nx">inputText</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;focus&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">inputText</span><span class="p">){</span> <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+<li>On blur
+    <div class="codehilite"><pre><span></span><span class="nx">inputText</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;blur&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">inputText</span><span class="p">){</span> <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+<li>On click, double click
+    <div class="codehilite"><pre><span></span><span class="nx">inputText</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">inputText</span><span class="p">){</span> <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div>
+    <div class="codehilite"><pre><span></span><span class="nx">inputText</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;dblclick&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">inputText</span><span class="p">){</span> <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div>
+    Touch/mouse events on input text object won't be propagated to game canvas.</li>
 </ul>
                 
                   
