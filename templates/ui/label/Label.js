@@ -56,8 +56,8 @@ class Label extends Sizer {
         }
 
         if (text) {
-            var expandTextWidth = (config.width !== undefined) || GetValue(config, 'expandTextWidth', false);
-            var expandTextHeight = (config.height !== undefined) || GetValue(config, 'expandTextHeight', false);
+            var expandTextWidth = GetValue(config, 'expandTextWidth', false);
+            var expandTextHeight = GetValue(config, 'expandTextHeight', false);
             var proportion, padding, expand;
             if (this.orientation === 0) {
                 proportion = (expandTextWidth) ? 1 : 0;

@@ -76,7 +76,6 @@ var label = scene.rexUI.add.label({
     - Number : World position in pixels.
     - String (`'p%+n'`) : Position based on visible window. See [anchor](anchor.md#create-instance).
 - `width`, `height` : Minimum width, minimum height.
-    - Expand width/height of text object when `width`/`height` is not `undefined`.
 - `orientation` :
     - `'left-to-right'`, `'horizontal'`,`'h'`, `'x'`, or `0` : Put icon at left side, and text at right side.
     - `'top-to-bottom'`, `'vertical'`,`'v'`, `'y'`, or `1` : Put icon at top side, and text at bottom side.
@@ -97,10 +96,7 @@ var label = scene.rexUI.add.label({
 
 #### Expand size of text
 
-Expand width/height of text when
-
-- `expandTextWidth`/`expandTextHeight` is `true`, or 
-- `width`/`height` is not `undefined`
+Expand width/height of text when `expandTextWidth`/`expandTextHeight` is `true`
 
 To resize text object, text object should have `resize` method. For example
 

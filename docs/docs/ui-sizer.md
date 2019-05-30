@@ -124,8 +124,7 @@ sizer.add(child, proportion, align, paddingConfig, expand);
 - `child` : A game object.
 - `proportion` :
     - `0`, or `'min'` : Place next game object closely. Default value.
-    - `> 0` :
-    - `-1`, or `'full'` : Stretch game object in the main orientation of the sizer.
+    - `> 0` : Stretch game object via proportion value.
     - `null` : Don't arrange this child.
 - `align` :
     - `'center'`, or `Phaser.Display.Align.CENTER` : Align game object at center. Default value.

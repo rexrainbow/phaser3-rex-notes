@@ -19,10 +19,11 @@ class Demo extends Phaser.Scene {
             x: 400,
             y: 300,
             width: 300,
-            orientation: 'y',
+            orientation: 'x',
 
             background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_PRIMARY),
             text: new MyText(this, 0, 0, 'abc'),
+            expandTextWidth: true,
             icon: this.rexUI.add.roundRectangle(0, 0, 0, 0, 20, COLOR_LIGHT),
             space: {
                 left: 20,
