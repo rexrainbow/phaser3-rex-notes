@@ -52,26 +52,24 @@ class TextEdit {
             onCloseCallback = GetValue(config, 'onClose', undefined);
         }
 
-        if (config === undefined) {
-            config = {};
-        }
         var customOnTextChanged = GetValue(config, 'onTextChanged', undefined);
-        config.onTextChanged = (function (text) {
-            if (customOnTextChanged) { // Custom on-text-changed callback
-                customOnTextChanged(this.gameObject, text);
-            } else { // Default on-text-changed callback
-                this.gameObject.text = text;
-            }
-        }).bind(this);
 
-        this.inputText = CreateInputTextFromText(this.gameObject, config);
-        this.inputText.setFocus();
+        this.inputText = CreateInputTextFromText(this.gameObject, config)
+            .on('textchange', function (inputText) {
+                var text = inputText.text;
+                if (customOnTextChanged) { // Custom on-text-changed callback
+                    customOnTextChanged(this.gameObject, text);
+                } else { // Default on-text-changed callback
+                    this.gameObject.text = text;
+                }
+            }, this)
+            .setFocus();
         this.gameObject.setVisible(false); // Set parent text invisible
 
         // Attach close event
         this.onClose = onCloseCallback;
         this.scene.input.keyboard.once('keydown-ENTER', this.close, this);
-         // Attach pointerdown (outside of input-text) event, at next tick
+        // Attach pointerdown (outside of input-text) event, at next tick
         this.delayCall = this.scene.time.delayedCall(0, function () {
             this.scene.input.once('pointerdown', this.close, this);
         }, [], this);

@@ -55,7 +55,7 @@ class Video extends BaseClass {
         this.setSource(GetValue(config, 'src', ''));
 
         // Apply events
-        for (var eventName in ElementEvents) {
+        for (let eventName in ElementEvents) { // Note: Don't use `var` here
             this.node.addEventListener(ElementEvents[eventName], (function () {
                 this.emit(eventName, this);
             }).bind(this));

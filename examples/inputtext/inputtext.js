@@ -19,22 +19,24 @@ class Demo extends Phaser.Scene {
             type: 'textarea',
             text: 'hello world',
             fontSize: '12px',
-            onTextChanged: function (text) {
-                printText.text = text;
-            },
-            // onClick: function() {
-            //     printText.text = inputText.text;
-            // },
-            // onDoubleClick: function() {
-            //     printText.text = inputText.text;
-            // }
-            onFocus: function() {
-                console.log('OnFocus');
-            },
-            onBlur: function() {
-                console.log('OnBlur');
-            }
-        }).resize(100, 100).setOrigin(0.5);
+        })
+            .resize(100, 100)
+            .setOrigin(0.5)
+            .on('textchange', function (inputText) {
+                printText.text = inputText.text;
+            })
+            .on('focus', function (inputText) {
+                console.log('On focus');
+            })
+            .on('blur', function (inputText) {
+                console.log('On blur');
+            })
+            .on('click', function (inputText) {
+                console.log('On click');
+            })
+            .on('dblclick', function (inputText) {
+                console.log('On dblclick');
+            })
 
         printText.text = inputText.text;
 

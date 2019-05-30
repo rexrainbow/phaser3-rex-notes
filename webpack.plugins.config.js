@@ -24,6 +24,8 @@ module.exports = {
         'roundrectangle': './plugins/roundrectangle.js',
         'inputtextplugin': './plugins/inputtext-plugin.js',
         'inputtext': './plugins/inputtext.js',
+        'videoplugin': './plugins/video-plugin.js',
+        'video': './plugins/video.js',
 
         // custom file loader      
         'webfontloaderplugin': './plugins/webfontloader-plugin.js',

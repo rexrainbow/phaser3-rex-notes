@@ -61,7 +61,6 @@ Default configuration
     height: undefined,
 
     type: 'text',    // 'text'|'password'|'textarea'
-    onTextChanged: undefined,
 
     // Element properties
     id: undefined,
@@ -71,10 +70,6 @@ Default configuration
     readOnly: false,
     spellCheck: false,
     autoComplete: 'off',
-    onClick: undefined,
-    onDoubleClick: undefined,
-    onFocus: undefined,
-    onBlur: undefined,
 
     // Style properties
     align: undefined,
@@ -91,13 +86,6 @@ Default configuration
 - `width`, `height` : Size of element
 - `type` : Type of element
     - `'text'`, `'password'`, or `'textarea'`
-- `onTextChanged` : Callback invoked when input text changed (`oninput`).
-    ```javascript
-    var callback = function(text, inputText) {
-    }
-    ```
-    - `text` : Current text value.
-    - `inputText` : Input text object.
 - Element properties
     - `id` : `id` element property.
     - `text` : `value` element property.
@@ -106,10 +94,6 @@ Default configuration
     - `readOnly` : `readonly` element property.
     - `spellCheck` : `spellcheck` element property.
     - `autoComplete` : `autocomplete` element property.
-    - `onClick` : `onclick` element property.
-    - `onDoubleClick` : `ondblclick` element property.
-    - `onFocus` : `onfocus` element property.
-    - `onBlur` : `onblur` element property.
 - Element style properties
     - `align` : `text-align` style property.
     - `fontFamily` : `font-family` style property.
@@ -190,17 +174,25 @@ Default configuration
 inputText.resize(width, height);
 ```
 
-### On text changed
+### Events
 
-```javascript
-inputText.setTextChangedCallback(callback);
-// inputText.onTextChanged = callback;
-```
-
-- `callback`
+- On text changed
     ```javascript
-    var callback = function(text, inputText) {
-    }
+    inputText.on('textchange', function(inputText){ }, scope);
     ```
-    - `text` : Current text value.
-    - `inputText` : Input text object.
+- On focus
+    ```javascript
+    inputText.on('focus', function(inputText){ }, scope);
+    ```
+- On blur
+    ```javascript
+    inputText.on('blur', function(inputText){ }, scope);
+    ```
+- On click, double click
+    ```javascript
+    inputText.on('click', function(inputText){ }, scope);
+    ```
+    ```javascript
+    inputText.on('dblclick', function(inputText){ }, scope);
+    ```
+    Touch/mouse events on input text object won't be propagated to game canvas.
