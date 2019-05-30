@@ -11,7 +11,8 @@ class Demo extends Phaser.Scene {
 
     create() {
         var video = this.add.rexVideo(400, 300, 800, 450, {
-            src: 'http://clips.vorwaerts-gmbh.de/VfE_html5.mp4'
+            src: 'http://clips.vorwaerts-gmbh.de/VfE_html5.mp4',
+            autoPlay: true,
         });
     }
 

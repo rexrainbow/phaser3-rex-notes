@@ -3,6 +3,7 @@ import GetSrc from './GetSrc.js';
 const DOMElement = Phaser.GameObjects.DOMElement;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
+const Clamp = Phaser.Math.Clamp;
 
 // TODO: Use DOMElement directly in next phaser version
 const BaseClass = (DOMElement) ? DOMElement : Object;
@@ -80,12 +81,17 @@ class Video extends BaseClass {
         return this;
     }
 
+    get isPlaying() {
+        var video = this.node;
+        return (!video.paused) && (!video.ended) && (video.currentTime > 0);
+    }
+
     pause() {
         this.node.pause();
         return this;
     }
 
-    isPaused() {
+    get isPaused() {
         return this.node.paused;
     }
 
@@ -110,6 +116,26 @@ class Video extends BaseClass {
         return this.node.duration || 0;
     }
 
+
+    get t() {
+        var duration = this.duration;
+        return (duration === 0) ? 0 : this.playbackTime / duration;
+    }
+
+    set t(value) {
+        value = Clamp(value, 0, 1);
+        this.playbackTime = this.duration * value;
+    }
+
+    setT(value) {
+        this.t = value;
+        return this;
+    }
+
+    get hasEnded() {
+        return this.node.ended;
+    }
+
     get volume() {
         return this.node.volume || 0;
     }
@@ -123,11 +149,11 @@ class Video extends BaseClass {
         return this;
     }
 
-    get mute() {
+    get muted() {
         return this.node.muted || false;
     }
 
-    set mute(value) {
+    set muted(value) {
         this.node.muted = value;
     }
 
@@ -135,7 +161,7 @@ class Video extends BaseClass {
         if (value === undefined) {
             value = true;
         }
-        this.mute = value;
+        this.muted = value;
         return this;
     }
 
@@ -162,7 +188,11 @@ const ElementProperties = {
     height: ['height', undefined],
     autoPlay: ['autoplay', true],
     controls: ['controls', false],
-
+    loop: ['loop', false],
+    poster: ['poster', undefined],
+    preload: ['preload', undefined],
+    muted: ['muted', false],
+    playsinline: ['playsinline', undefined],
 };
 
 const ElementEvents = {
