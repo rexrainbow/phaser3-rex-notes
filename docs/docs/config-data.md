@@ -1,10 +1,23 @@
 ## Introduction
 
-Get parameters from sourceuration object.
+Get parameters from configuration object.
 
 - Author: Richard Davey
 
 ## Usage
+
+### Quick start
+
+```javascript
+const GetValue = Phaser.Utils.Objects.GetValue;
+var myMethod = function(config) {
+    var x = GetValue(config, 'x', 0);
+    var y = GetValue(config, 'y', 0);
+    var width = GetValue(config, 'width', 0);
+    var height = GetValue(config, 'height', 0);
+    // ...
+}
+```
 
 ### Get value
 
