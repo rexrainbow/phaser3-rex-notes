@@ -199,8 +199,8 @@ const ElementProperties = {
     poster: ['poster', undefined],
     preload: ['preload', undefined],
     muted: ['muted', false],
-    crossOrigin: ['crossOrigin', 'anonymous'],
     playsInline: ['playsInline', true],
+    crossOrigin: ['crossOrigin', undefined],
 };
 
 const ElementEvents = {
