@@ -219,9 +219,12 @@ var Canvas = new Phaser.Class({
     },
 
     resize: function (width, height) {
+        if ((this.width === width) && (this.height === height)) {
+            return this;
+        }
+
         this.canvas.width = this.resolution * width;
         this.canvas.height = this.resolution * height;
-
         this
             .setSize(width, height)
             .updateDisplayOrigin();
