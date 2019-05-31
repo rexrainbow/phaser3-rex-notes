@@ -1,43 +1,8 @@
-const DOMElement = Phaser.GameObjects.DOMElement;
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const GetValue = Phaser.Utils.Objects.GetValue;
-const Clamp = Phaser.Math.Clamp;
-
-// TODO: Use DOMElement directly in next phaser version
-const BaseClass = (DOMElement) ? DOMElement : Object;
-class Video extends BaseClass {
-    constructor(scene, x, y, width, height, config) {
-        if (IsPlainObject(x)) {
-            config = x;
-            x = GetValue(config, 'x', 0);
-            y = GetValue(config, 'y', 0);
-            width = GetValue(config, 'width', undefined);
-            height = GetValue(config, 'height', undefined);
-        } else if (IsPlainObject(width)) {
-            config = width;
-            width = GetValue(config, 'width', undefined);
-            height = GetValue(config, 'height', undefined);
-        }
-
-        if (config === undefined) {
-            config = {};
-        }
-        var autoRound = scene.scale.autoRound;
-        if (width !== undefined) {
-            if (autoRound) {
-                width = Math.floor(width);
-            }
-            config.width = width;
-        }
-        if (height !== undefined) {
-            if (autoRound) {
-                height = Math.floor(height);
-            }
-            config.height = height;
-        }
+class Base {
+    init(scene, config) {
+        this.scene = scene;
 
         var element = document.createElement('video');
-
         // Apply registed properties
         var elemProp, elemPropValue;
         for (var key in ElementProperties) {
@@ -47,10 +12,6 @@ class Video extends BaseClass {
                 element[elemProp[0]] = elemPropValue;
             }
         }
-
-        super(scene, x, y, element);
-        this.type = 'rexVideo';
-
         // Apply events
         for (let eventName in ElementEvents) { // Note: Don't use `var` here
             this.node.addEventListener(ElementEvents[eventName], (function () {
@@ -189,6 +150,7 @@ class Video extends BaseClass {
     }
 }
 
+
 const ElementProperties = {
     id: ['id', undefined],
     width: ['width', undefined],
@@ -216,4 +178,4 @@ const ElementEvents = {
 
 const VideoTypes = ['webm', 'ogg', 'mp4', 'h264', 'vp9', 'hls'];
 
-export default Video;
+export default Base;
