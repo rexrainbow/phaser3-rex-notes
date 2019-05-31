@@ -56,10 +56,8 @@ var GetBaseClass = function (GOClass) {
                 }
             }
 
-            if (src !== '') {
-                this.video.src = src;
-                this.video.load();
-            }
+            this.video.src = src;
+            this.video.load();
             return this;
         }
 
