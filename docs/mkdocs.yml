@@ -73,6 +73,7 @@ nav:
     - DOM element:
         - DOM element: domelement.md
         - Input text: inputtext.md
+        - Video: video.md
     - Behaviors:
         - Actions:
             - Group actions: groupactions.md

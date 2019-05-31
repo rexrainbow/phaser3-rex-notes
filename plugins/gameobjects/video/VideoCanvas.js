@@ -67,8 +67,16 @@ class VideoCanvas extends GetBaseClass(Canvas) {
         } else {
             this.context.drawImage(this.video, 0, 0, width, height);
         }
+    }
 
-
+    resize(width, height) {
+        if ((this.width === width) && (this.height === height)) {
+            return this;
+        }
+        this.video.width = width;
+        this.video.height = height;
+        super.resize(width, height);
+        return this;
     }
 }
 export default VideoCanvas;
