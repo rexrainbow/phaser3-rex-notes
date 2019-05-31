@@ -28,6 +28,18 @@ var GetBaseClass = function (GOClass) {
             return element;
         }
 
+        destroy(fromScene) {
+            //  This Game Object has already been destroyed
+            if (!this.scene) {
+                return;
+            }
+            this.video.pause();
+            this.video.removeAttribute('src'); // empty source
+            this.video.load();
+            this.video = undefined;
+            super.destroy(fromScene);
+        }
+
         get availableVideoTypes() {
             return this.scene.sys.game.device.video;
         }
