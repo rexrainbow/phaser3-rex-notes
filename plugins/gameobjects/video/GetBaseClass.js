@@ -169,7 +169,7 @@ const ElementProperties = {
     preload: ['preload', undefined],
     muted: ['muted', false],
     playsInline: ['playsInline', true],
-    crossOrigin: ['crossOrigin', undefined],
+    crossOrigin: ['crossOrigin', 'anonymous'],
 };
 
 const ElementEvents = {
