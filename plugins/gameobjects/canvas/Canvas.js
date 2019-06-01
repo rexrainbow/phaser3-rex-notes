@@ -131,7 +131,7 @@ var Canvas = new Phaser.Class({
             this.frame.setSize(this.width, this.height);
         }
         if (this.renderer.gl) {
-            this.frame.source.glTexture = this.renderer.canvasToTexture(this.canvas, this.frame.source.glTexture, true);
+            this.renderer.canvasToTexture(this.canvas, this.frame.source.glTexture, true);
             this.frame.glTexture = this.frame.source.glTexture;
         }
         this.dirty = false;
@@ -183,7 +183,7 @@ var Canvas = new Phaser.Class({
         destCtx.clearRect(0, 0, width, height);
         destCtx.drawImage(srcCanvas, x, y, width, height);
         if (renderer.gl && texture) {
-            texture.source[0].glTexture = renderer.canvasToTexture(destCanvas, texture.source[0].glTexture, true, 0);
+            renderer.canvasToTexture(destCanvas, texture.source[0].glTexture, true, 0);
         }
 
         return this;
