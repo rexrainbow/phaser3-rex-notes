@@ -1,4 +1,4 @@
-import GetBaseClass from './GetBaseClass.js';
+import VideoBase from '../videobase/VideoBase.js';
 
 const DOMElement = Phaser.GameObjects.DOMElement;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
@@ -6,7 +6,7 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 
 // TODO: Use DOMElement directly in next phaser version
 const GOClass = (DOMElement) ? DOMElement : Object;
-class Video extends GetBaseClass(GOClass) {
+class VideoDOM extends VideoBase(GOClass) {
     constructor(scene, x, y, width, height, config) {
         if (IsPlainObject(x)) {
             config = x;
@@ -47,4 +47,4 @@ class Video extends GetBaseClass(GOClass) {
 
 }
 
-export default Video;
+export default VideoDOM;

@@ -1,31 +1,17 @@
-const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
-const GetValue = Phaser.Utils.Objects.GetValue;
+import CreateVideoElement from './CreateVideoElement.js';
+import Load from './Load.js';
+
 const Clamp = Phaser.Math.Clamp;
 
-var GetBaseClass = function (GOClass) {
+var VideoBase = function (GOClass) {
     return class Base extends GOClass {
         createVideoElement(config) {
-            var element = (this.video) ? this.video : document.createElement('video');
-
-            // Apply registed properties
-            var elemProp, elemPropValue;
-            for (var key in ElementProperties) {
-                elemProp = ElementProperties[key];
-                elemPropValue = GetValue(config, key, elemProp[1]);
-                if (elemPropValue !== undefined) {
-                    element[elemProp[0]] = elemPropValue;
-                }
+            if (config === undefined) {
+                config = {};
             }
-
-            // Apply events
-            for (let eventName in ElementEvents) { // Note: Don't use `var` here
-                element.addEventListener(ElementEvents[eventName], (function () {
-                    this.emit(eventName, this);
-                }).bind(this));
-            }
-
-            this.video = element;
-            return element;
+            config.eventEmitter = this;
+            this.video = CreateVideoElement(config);
+            return this.video;
         }
 
         destroy(fromScene) {
@@ -45,19 +31,7 @@ var GetBaseClass = function (GOClass) {
         }
 
         load(src) {
-            if (IsPlainObject(src)) {
-                var videoType;
-                for (var i = 0, cnt = VideoTypes.length; i < cnt; i++) {
-                    videoType = VideoTypes[i];
-                    if (this.availableVideoTypes[videoType + 'Video'] && src.hasOwnProperty(videoType)) {
-                        src = src[videoType];
-                        break;
-                    }
-                }
-            }
-
-            this.video.src = src;
-            this.video.load();
+            Load(this.video, src, this.availableVideoTypes);
             return this;
         }
 
@@ -165,34 +139,11 @@ var GetBaseClass = function (GOClass) {
             this.mute = value;
             return this;
         }
+
+        get readyState() {
+            return this.video.readyState;
+        }
     }
 };
 
-const ElementProperties = {
-    id: ['id', undefined],
-    width: ['width', undefined],
-    height: ['height', undefined],
-    autoPlay: ['autoplay', true],
-    controls: ['controls', false],
-    loop: ['loop', false],
-    poster: ['poster', undefined],
-    preload: ['preload', undefined],
-    muted: ['muted', false],
-    playsInline: ['playsInline', true],
-    crossOrigin: ['crossOrigin', 'anonymous'],
-};
-
-const ElementEvents = {
-    canplay: 'canplay',
-    canplaythrough: 'canplaythrough',
-    ended: 'ended',
-    error: 'error',
-    loadstart: 'loadstart',
-    playing: 'playing',
-    pause: 'pause',
-    stalled: 'stalled',
-};
-
-const VideoTypes = ['webm', 'ogg', 'mp4', 'h264', 'vp9', 'hls'];
-
-export default GetBaseClass;
+export default VideoBase;

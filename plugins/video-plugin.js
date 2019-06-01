@@ -1,5 +1,5 @@
-import Video from './gameobjects/video/Video.js';
-import VideoCanvas from './gameobjects/video/VideoCanvas.js';
+import VideoDOM from './gameobjects/video/videodom/VideoDOM.js';
+import VideoCanvas from './gameobjects/video/videocanvas/VideoCanvas.js';
 import SetValue from './utils/object/SetValue.js';
 
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
@@ -21,7 +21,7 @@ class VideoPlugin extends Phaser.Plugins.BasePlugin {
     }
 
     addVideo(x, y, width, height, config) {
-        var video = new Video(this.scene, x, y, width, height, config);
+        var video = new VideoDOM(this.scene, x, y, width, height, config);
         this.displayList.add(video);
         return video;
     }
@@ -32,7 +32,7 @@ class VideoPlugin extends Phaser.Plugins.BasePlugin {
         if (addToScene !== undefined) {
             config.add = addToScene;
         }
-        var video = new Video(this.scene, 0, 0, width, height, config);
+        var video = new VideoDOM(this.scene, 0, 0, width, height, config);
         BuildGameObject(this.scene, video, config);
         return video;
     }
@@ -55,7 +55,7 @@ class VideoPlugin extends Phaser.Plugins.BasePlugin {
     }
 }
 
-SetValue(window, 'RexPlugins.GameObjects.Video', Video);
+SetValue(window, 'RexPlugins.GameObjects.Video', VideoDOM);
 SetValue(window, 'RexPlugins.GameObjects.VideoCanvas', VideoCanvas);
 
 export default VideoPlugin;

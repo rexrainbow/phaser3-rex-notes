@@ -1,11 +1,11 @@
-import Video from './gameobjects/video/Video.js';
-import VideoCanvas from './gameobjects/video/VideoCanvas.js';
+import VideoDOM from './gameobjects/video/videodom/VideoDOM.js';
+import VideoCanvas from './gameobjects/video/videocanvas/VideoCanvas.js';
 
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 const BuildGameObject = Phaser.GameObjects.BuildGameObject;
 
 Phaser.GameObjects.GameObjectFactory.register('rexVideo', function (x, y, width, height, config) {
-    var video = new Video(this.scene, x, y, width, height, config);
+    var video = new VideoDOM(this.scene, x, y, width, height, config);
     this.displayList.add(video);
     return video;
 });
@@ -15,7 +15,7 @@ Phaser.GameObjects.GameObjectCreator.register('rexVideo', function (config, addT
     if (addToScene !== undefined) {
         config.add = addToScene;
     }
-    var video = new Video(this.scene, 0, 0, width, height, config);
+    var video = new VideoDOM(this.scene, 0, 0, width, height, config);
     BuildGameObject(this.scene, video, config);
     return video;
 });
@@ -36,4 +36,4 @@ Phaser.GameObjects.GameObjectCreator.register('rexVideoCanvas', function (config
     return video;
 });
 
-export { Video, VideoCanvas };
+export { VideoDOM, VideoCanvas };

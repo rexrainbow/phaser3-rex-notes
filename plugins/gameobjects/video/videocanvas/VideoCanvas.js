@@ -1,10 +1,10 @@
-import GetBaseClass from './GetBaseClass.js';
-import Canvas from '../canvas/Canvas.js';
+import VideoBase from '../videobase/VideoBase.js';
+import Canvas from '../../canvas/Canvas.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class VideoCanvas extends GetBaseClass(Canvas) {
+class VideoCanvas extends VideoBase(Canvas) {
     constructor(scene, x, y, width, height, config) {
         if (IsPlainObject(x)) {
             config = x;
@@ -40,33 +40,21 @@ class VideoCanvas extends GetBaseClass(Canvas) {
 
         this.createVideoElement(config);
         this.load(GetValue(config, 'src', ''));
-        this.boot();
     }
 
-    boot() {
-        this.scene.events.on('preupdate', this.preupdate, this);
-        return this;
-    }
-
-    destroy(fromScene) {
-        //  This Game Object has already been destroyed
-        if (!this.scene) {
-            return;
-        }
-        this.scene.events.off('preupdate', this.preupdate, this);
-        super.destroy(fromScene);
-    }
-
-    preupdate(time, delta) {
-        var width = this.canvas.width,
-            height = this.canvas.height;
-
-        if (this.renderer.gl) {
+    renderWebGL(renderer, src, interpolationPercentage, camera, parentMatrix) {
+        if (this.readyState > 0) {
             this.frame.source.glTexture = this.renderer.canvasToTexture(this.video, this.frame.source.glTexture, true);
             this.frame.glTexture = this.frame.source.glTexture;
-        } else {
-            this.context.drawImage(this.video, 0, 0, width, height);
         }
+        super.renderWebGL(renderer, src, interpolationPercentage, camera, parentMatrix);
+    }
+
+    renderCanvas(renderer, src, interpolationPercentage, camera, parentMatrix) {
+        if (this.readyState > 0) {
+            this.context.drawImage(this.video, 0, 0, this.canvas.width, this.canvas.height);
+        }
+        super.renderCanvas(renderer, src, interpolationPercentage, camera, parentMatrix);
     }
 
     resize(width, height) {
