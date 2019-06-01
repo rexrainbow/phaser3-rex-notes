@@ -1375,6 +1375,19 @@
     Add video object
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#different-between-rexvideo-and-rexvideocanvas" title="Different between rexVideo and rexVideoCanvas" class="md-nav__link">
+    Different between rexVideo and rexVideoCanvas
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -4248,6 +4261,19 @@
     Add video object
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#different-between-rexvideo-and-rexvideocanvas" title="Different between rexVideo and rexVideoCanvas" class="md-nav__link">
+    Different between rexVideo and rexVideoCanvas
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -4298,7 +4324,7 @@
                   <h1>Video</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Display video on <a href="https://www.w3schools.com/html/html5_video.asp">DOM</a>, or on canvas.</p>
+<p>Play video on <a href="https://www.w3schools.com/html/html5_video.asp">DOM</a>, or on canvas.</p>
 <ul>
 <li>Author: Rex</li>
 <li><a href="../domelement/">DOM Game object</a>, or <a href="../canvas/">Canvas Game object</a></li>
@@ -4331,7 +4357,7 @@
 </pre></div>
 
 <ul>
-<li>To display video on DOM<ul>
+<li>To play video on DOM<ul>
 <li>Set <code>parent</code> to divId</li>
 <li>Set <code>dom.createContainer</code> to <code>true</code>.</li>
 </ul>
@@ -4397,6 +4423,20 @@
 <li><code>muted</code> : <code>muted</code> element property.</li>
 <li><code>playsInline</code> : <code>playsInline</code> element property.</li>
 <li><code>crossOrigin</code> : <code>crossOrigin</code> element property.</li>
+</ul>
+</li>
+</ul>
+<h4 id="different-between-rexvideo-and-rexvideocanvas">Different between rexVideo and rexVideoCanvas<a class="headerlink" href="#different-between-rexvideo-and-rexvideocanvas" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>rexVideo</code> plays video on DOM.<ul>
+<li>DOM object always above game canvas.</li>
+<li>Won't be affected by webgl shader.</li>
+<li>Right clicks to pop up a menu.    </li>
+</ul>
+</li>
+<li><code>rexVideoCanvas</code> plays video on canvas.<ul>
+<li>Can be placed between game objects via depth setting.</li>
+<li>Can be affected by webgl shader.</li>
 </ul>
 </li>
 </ul>

@@ -1,6 +1,6 @@
 ## Introduction
 
-Display video on [DOM](https://www.w3schools.com/html/html5_video.asp), or on canvas.
+Play video on [DOM](https://www.w3schools.com/html/html5_video.asp), or on canvas.
 
 - Author: Rex
 - [DOM Game object](domelement.md), or [Canvas Game object](canvas.md)
@@ -40,7 +40,7 @@ var config = {
 var game = new Phaser.Game(config);
 ```
 
-- To display video on DOM
+- To play video on DOM
     - Set `parent` to divId
     - Set `dom.createContainer` to `true`.
 
@@ -103,6 +103,16 @@ Default configuration
     - `muted` : `muted` element property.
     - `playsInline` : `playsInline` element property.
     - `crossOrigin` : `crossOrigin` element property.
+
+#### Different between rexVideo and rexVideoCanvas
+
+- `rexVideo` plays video on DOM.
+    - DOM object always above game canvas.
+    - Won't be affected by webgl shader.
+    - Right clicks to pop up a menu.    
+- `rexVideoCanvas` plays video on canvas.
+    - Can be placed between game objects via depth setting.
+    - Can be affected by webgl shader.
 
 ### Custom class
 
