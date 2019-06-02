@@ -1,9 +1,9 @@
-var EmitCellEvent = function (eventEmitter, eventName, table, worldX, worldY) {
+var EmitCellEvent = function (eventEmitter, eventName, table, x, y) {
     var cellIndex;
-    if (worldY === undefined) {
-        cellIndex = worldX;
+    if (y === undefined) {
+        cellIndex = x;
     } else {
-        cellIndex = table.pointerToCellIndex(worldX, worldY);
+        cellIndex = table.pointerToCellIndex(x, y);
     }
     if ((cellIndex === null) || (cellIndex === undefined)) {
         return;

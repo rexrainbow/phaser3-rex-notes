@@ -6,7 +6,7 @@ var ClickCell = function (table) {
         threshold: 10
     });
     table._click.on('click', function (button, gameObject, pointer) {
-        EmitCellEvent(this.eventEmitter, 'cell.click', gameObject, pointer.worldX, pointer.worldY);
+        EmitCellEvent(this.eventEmitter, 'cell.click', gameObject, pointer.x, pointer.y);
     }, this);
 };
 

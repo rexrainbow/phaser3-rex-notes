@@ -6,7 +6,7 @@ var TapCell = function (table) {
     table._tap
         .on('tap', function (tap) {
             var eventName = `cell.${tap.tapsCount}tap`
-            EmitCellEvent(this.eventEmitter, eventName, tap.gameObject, tap.worldX, tap.worldY);
+            EmitCellEvent(this.eventEmitter, eventName, tap.gameObject, tap.x, tap.y);
         }, this)
 };
 
