@@ -24,6 +24,8 @@ import TextAreaFactory from './textarea/TextAreaFactory.js';
 import ScrollableBlockFactory from './scrollableblock/ScrollableBlockFactory.js';
 import ScrollablePanelFactory from './scrollablepanel/ScrollablePanelFactory.js';
 import ChartFactory from './chart/ChartFactory.js';
+import VideoFactory from './video/VideoFactory.js';
+import VideoCanvasFactory from './video/VideoCanvasFactory.js';
 
 import TapFactory from './tap/TapFactory.js';
 import PressFactory from './press/PressFactory.js';

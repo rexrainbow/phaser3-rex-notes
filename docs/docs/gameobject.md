@@ -346,12 +346,25 @@ See [touch event](touchevents.md#quick-start)
     ```javascript
     gameObject.setDataEnabled();
     ```
+- Events : 
+    - Set data evant
+        ```javascript
+        gameObject.data.events.on('setdata', function(parent, key, value){ /* ... */ });
+        ```
+    - Change data event
+        ```javascript
+        gameObject.data.events.on('changedata', function(parent, key, value, previousValue){ /* ... */ });
+        ```
+        ```javascript
+        gameObject.data.events.on('changedata-' + key, function(parent, value, previousValue){ /* ... */ });
+        ```           
 
 See [data manager](datamanager.md)
 
-### Texture
+!!! note
+    Ensure data manager is created before binding any data-changed events.
 
-Only [image](image.md) and sprite game object have teuture componment.
+### Texture
 
 - Set texture
     ```javascript
@@ -375,6 +388,13 @@ Only [image](image.md) and sprite game object have teuture componment.
         gameObject.setCrop();
         // gameObject.isCropped = false;
         ```
+- Get texture
+    ```javascript
+    var texture = gameObject.texture;
+    ```
+    ```javascript
+    var textureKey = gameObject.texture.key;
+    ```
 
 ### Name
 
