@@ -7,13 +7,16 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() { 
-        this.load.script('youtube', 'https://www.youtube.com/iframe_api');
+    preload() {
     }
 
     create() {
-        var youtubePlayer = this.add.rexYoutubePlayer(400, 300, 400, 400, {
-        });
+        var youtubePlayer = this.add.rexYoutubePlayer(0, 0, 600, 450, {
+            videoId: 'wDOym-mXxO4'
+        })
+            .on('ready', function () {
+                youtubePlayer.setPosition(400, 300);
+            })
     }
 
     update() { }

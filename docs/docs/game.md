@@ -30,6 +30,9 @@ var game = new Phaser.Game(config);
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH
     },
+    dom: {
+        createContainer: false,
+    },
     scene: null,
     backgroundColor: 0x333333
 }

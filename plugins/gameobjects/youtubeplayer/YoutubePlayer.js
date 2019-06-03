@@ -1,3 +1,5 @@
+import LoadAPI from './LoadAPI.js';
+
 const DOMElement = Phaser.GameObjects.DOMElement;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -35,13 +37,44 @@ class YoutubePlayer extends BaseClass {
             }
             config.height = height + 'px';
         }
+        
+        super(scene, x, y);
+        this.type = 'rexYoutubePlayer';
+        this.youtubePlayer = undefined;
+        this.videoId = GetValue(config, 'videoId', '');
 
+        // Create DIV element and add it
+        var elementId = 'YT' + Date.now();
         var element = document.createElement('div');
-        var style = {
-            width: config.width,
-            height: config.height,
+        element.id = elementId;
+        element.style.width = config.width;
+        element.style.height = config.height;
+        this.setElement(element);
+
+        // Create youtube player iframe when API ready
+        var playerVars = {
+            autoplay: GetValue(config, 'autoPlay', true),
+            controls: GetValue(config, 'controls', true),
+            showinfo: GetValue(config, 'showInfo', true),
+            disablekb: !GetValue(config, 'keyboardControl', true),
+            modestbranding: GetValue(config, 'ModestBranding', false),
         };
-        super(scene, x, y, element, style);
+        var onLoad = (function () {
+            this.youtubePlayer = new YT.Player(                
+                elementId,
+                {
+                    'videoId': this.videoId,
+                    'playerVars': playerVars,
+                    'events': {
+                        'onStateChange': (function () { this.emit('statechange'); }).bind(this),
+                        'onReady': (function () { this.emit('ready'); }).bind(this),
+                        'onError': (function () { this.emit('error'); }).bind(this),
+                    }
+                }
+            );
+            this.setElement(document.getElementById(elementId)); // Also remove previous DIV element
+        }).bind(this);
+        LoadAPI(onLoad);
     }
 }
 

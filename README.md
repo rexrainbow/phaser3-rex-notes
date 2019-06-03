@@ -56,5 +56,6 @@
     - [Pages](https://codepen.io/rexrainbow/pen/vPWzBa)
     - [Fix-width sizer](https://codepen.io/rexrainbow/pen/WPJPdK)
     - [Chart](https://codepen.io/rexrainbow/pen/qwVBNy)
+    - [Video](https://codepen.io/rexrainbow/pen/Gazmyz)
     - [Anchor](https://codepen.io/rexrainbow/pen/jJqXxB)
     - [Round-rectangle](https://codepen.io/rexrainbow/pen/ZqqJjG)
