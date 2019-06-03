@@ -3537,6 +3537,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#video" title="Video" class="md-nav__link">
+    Video
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#gestures" title="Gestures" class="md-nav__link">
     Gestures
   </a>
@@ -4282,6 +4289,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#video" title="Video" class="md-nav__link">
+    Video
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#gestures" title="Gestures" class="md-nav__link">
     Gestures
   </a>
@@ -4420,6 +4434,37 @@
 <span class="c1">// scene.rexUI.add.edit(textObject, config, onClose);</span>
 </pre></div></li>
 </ol>
+<h3 id="video">Video<a class="headerlink" href="#video" title="Permanent link">&para;</a></h3>
+<ol>
+<li><a href="../video/">Video DOM</a>: Create a video dom to play video.
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">video</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">video</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+<span class="c1">// var video = scene.rexUI.add.video(config);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">MyVideo</span> <span class="kr">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Video</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+        <span class="c1">// ...</span>
+        <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div></li>
+<li><a href="../video/">Video canvas</a>: Create a canvas to play video.
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">video</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">videoCanvas</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+<span class="c1">// var video = scene.rexUI.add.videoCanvas(config);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">MyVideo</span> <span class="kr">extends</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">VideoCanvas</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+        <span class="c1">// ...</span>
+        <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div></li>
+</ol>
 <h3 id="gestures">Gestures<a class="headerlink" href="#gestures" title="Permanent link">&para;</a></h3>
 <ol>
 <li><a href="../gesture-tap/">Tap</a>: Get tap/multi-taps events of a game object.
@@ -4457,6 +4502,7 @@
 <li><a href="https://codepen.io/rexrainbow/pen/vPWzBa">Pages</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/WPJPdK">Fix-width sizer</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/qwVBNy">Chart</a></li>
+<li><a href="https://codepen.io/rexrainbow/pen/Gazmyz">Video</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/jJqXxB">Anchor</a></li>
 <li><a href="https://codepen.io/rexrainbow/pen/ZqqJjG">Round-rectangle</a></li>
 </ul>

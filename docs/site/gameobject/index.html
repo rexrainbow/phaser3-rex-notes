@@ -4828,10 +4828,24 @@
 <li>Enable
     <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setDataEnabled</span><span class="p">();</span>
 </pre></div></li>
+<li>Events : <ul>
+<li>Set data evant
+    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;setdata&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">parent</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+</pre></div></li>
+<li>Change data event
+    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;changedata&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">parent</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">previousValue</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+</pre></div>
+    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;changedata-&#39;</span> <span class="o">+</span> <span class="nx">key</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">parent</span><span class="p">,</span> <span class="nx">value</span><span class="p">,</span> <span class="nx">previousValue</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+</pre></div></li>
+</ul>
+</li>
 </ul>
 <p>See <a href="../datamanager/">data manager</a></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Ensure data manager is created before binding any data-changed events.</p>
+</div>
 <h3 id="texture">Texture<a class="headerlink" href="#texture" title="Permanent link">&para;</a></h3>
-<p>Only <a href="../image/">image</a> and sprite game object have teuture componment.</p>
 <ul>
 <li>Set texture
     <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>
@@ -4855,6 +4869,11 @@
 </pre></div></li>
 </ul>
 </li>
+<li>Get texture
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">texture</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">texture</span><span class="p">;</span>
+</pre></div>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">textureKey</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">texture</span><span class="p">.</span><span class="nx">key</span><span class="p">;</span>
+</pre></div></li>
 </ul>
 <h3 id="name">Name<a class="headerlink" href="#name" title="Permanent link">&para;</a></h3>
 <ul>
