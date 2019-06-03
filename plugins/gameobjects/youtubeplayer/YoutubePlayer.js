@@ -37,7 +37,7 @@ class YoutubePlayer extends BaseClass {
             }
             config.height = height + 'px';
         }
-        
+
         super(scene, x, y);
         this.type = 'rexYoutubePlayer';
         this.youtubePlayer = undefined;
@@ -60,7 +60,7 @@ class YoutubePlayer extends BaseClass {
             modestbranding: GetValue(config, 'ModestBranding', false),
         };
         var onLoad = (function () {
-            this.youtubePlayer = new YT.Player(                
+            this.youtubePlayer = new YT.Player(
                 elementId,
                 {
                     'videoId': this.videoId,
@@ -75,6 +75,11 @@ class YoutubePlayer extends BaseClass {
             this.setElement(document.getElementById(elementId)); // Also remove previous DIV element
         }).bind(this);
         LoadAPI(onLoad);
+    }
+
+    play() {
+        this.youtubePlayer.playVideo();
+        return this;
     }
 }
 

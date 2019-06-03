@@ -12,7 +12,7 @@ class Demo extends Phaser.Scene {
 
     create() {
         var youtubePlayer = this.add.rexYoutubePlayer(0, 0, 600, 450, {
-            videoId: 'wDOym-mXxO4'
+            videoId: 'wDOym-mXxO4',
         })
             .on('ready', function () {
                 youtubePlayer.setPosition(400, 300);
