@@ -3,6 +3,7 @@ import LoadAPI from './LoadAPI.js';
 const DOMElement = Phaser.GameObjects.DOMElement;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
+const Clamp = Phaser.Math.Clamp;
 
 
 // TODO: Use DOMElement directly in next phaser version
@@ -41,7 +42,10 @@ class YoutubePlayer extends BaseClass {
         super(scene, x, y);
         this.type = 'rexYoutubePlayer';
         this.youtubePlayer = undefined;
+        this._videoState = undefined;
         this.videoId = GetValue(config, 'videoId', '');
+        this.loop = GetValue(config, 'loop', false);
+        this.paddingCallbacks = [];
 
         // Create DIV element and add it
         var elementId = 'YT' + Date.now();
@@ -60,15 +64,30 @@ class YoutubePlayer extends BaseClass {
             modestbranding: GetValue(config, 'ModestBranding', false),
         };
         var onLoad = (function () {
-            this.youtubePlayer = new YT.Player(
+            var youtubePlayer = new YT.Player(
                 elementId,
                 {
                     'videoId': this.videoId,
                     'playerVars': playerVars,
                     'events': {
-                        'onStateChange': (function () { this.emit('statechange'); }).bind(this),
-                        'onReady': (function () { this.emit('ready'); }).bind(this),
-                        'onError': (function () { this.emit('error'); }).bind(this),
+                        'onStateChange': (function (event) {
+                            this._videoState = event.data;
+                            if ((this._videoState === 0) && this.loop) {
+                                this.youtubePlayer.playVideo();
+                            }
+                            this.emit('statechange');
+                        }).bind(this),
+                        'onReady': (function (event) {
+                            this.youtubePlayer = youtubePlayer;
+                            for (var i = 0, cnt = this.paddingCallbacks.length; i < cnt; i++) {
+                                this.paddingCallbacks[i]();
+                            }
+                            this.paddingCallbacks.length = 0;
+                            this.emit('ready');
+                        }).bind(this),
+                        'onError': (function (event) {
+                            this.emit('error');
+                        }).bind(this),
                     }
                 }
             );
@@ -77,9 +96,156 @@ class YoutubePlayer extends BaseClass {
         LoadAPI(onLoad);
     }
 
-    play() {
-        this.youtubePlayer.playVideo();
+    runCallback(callback) {
+        if (this.youtubePlayer === undefined) {
+            this.paddingCallbacks.push(callback);
+        } else {
+            callback();
+        }
+    }
+
+    get videoState() {
+        return GetVideoStateString(this._videoState);
+    }
+
+    load(videoId) {
+        var callback = (function () {
+            this.youtubePlayer.loadVideoById(videoId);
+        }).bind(this);
+
+        runCallback(callback);
         return this;
+    }
+
+    play() {
+        var callback = (function () {
+            this.youtubePlayer.playVideo();
+        }).bind(this);
+
+        runCallback(callback);
+        return this;
+    }
+
+    get isPlaying() {
+        return (this._videoState === 1);
+    }
+
+    pause() {
+        var callback = (function () {
+            this.youtubePlayer.pauseVideo();
+        }).bind(this);
+
+        runCallback(callback);
+        return this;
+    }
+
+    get isPaused() {
+        return (this._videoState === 2);
+    }
+
+    get playbackTime() {
+        return (this.youtubePlayer) ? this.youtubePlayer.getCurrentTime() : 0;
+    }
+
+    set playbackTime(value) {
+        var callback = (function () {
+            this.youtubePlayer.seekTo(value);
+        }).bind(this);
+
+        runCallback(callback);
+    }
+
+    setPlaybackTime(time) {
+        this.playbackTime = time;
+        return this;
+    }
+
+    get duration() {
+        return (this.youtubePlayer) ? this.youtubePlayer.getDuration() : 0;
+    }
+
+    get t() {
+        var duration = this.duration;
+        return (duration === 0) ? 0 : this.playbackTime / duration;
+    }
+
+    set t(value) {
+        var callback = (function () {
+            value = Clamp(value, 0, 1);
+            this.playbackTime = this.duration * Clamp(value, 0, 1);
+        }).bind(this);
+
+        runCallback(callback);
+    }
+
+    setT(value) {
+        this.t = value;
+        return this;
+    }
+
+    get volume() {
+        return (this.youtubePlayer) ? this.youtubePlayer.getVolume() : 100;
+    }
+
+    set volume(value) {
+        var callback = (function () {
+            this.youtubePlayer.setVolume(Clamp(value, 0, 1) * 100);
+        }).bind(this);
+
+        runCallback(callback);
+    }
+
+    setVolume(value) {
+        this.volume = value;
+        return this;
+    }
+
+    get muted() {
+        return (this.youtubePlayer) ? this.youtubePlayer.isMuted() : false;
+    }
+
+    set muted(value) {
+        var callback = (function () {
+            if (value) {
+                this.youtubePlayer.mute();
+            } else {
+                this.youtubePlayer.unMute();
+            }
+        }).bind(this);
+
+        runCallback(callback);
+    }
+
+    setMute(value) {
+        if (value === undefined) {
+            value = true;
+        }
+        this.muted = value;
+        return this;
+    }
+
+    setLoop(value) {
+        if (value === undefined) {
+            value = true;
+        }
+        this.loop = value;
+        return this;
+    }
+
+}
+
+var GetVideoStateString = function (videoState) {
+    if (videoState === undefined) {
+        return '';
+    } else {
+        switch (videoState) {
+            case -1: return "Unstarted";
+            case YT.PlayerState.ENDED: return "Ended";
+            case YT.PlayerState.PLAYING: return "Playing";
+            case YT.PlayerState.PAUSED: return "Paused";
+            case YT.PlayerState.BUFFERING: return "Buffering";
+            case YT.PlayerState.CUED: return "Video cued";
+        }
     }
 }
 

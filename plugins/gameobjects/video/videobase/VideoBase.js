@@ -83,15 +83,13 @@ var VideoBase = function (GOClass) {
             return this.video.duration || 0;
         }
 
-
         get t() {
             var duration = this.duration;
             return (duration === 0) ? 0 : this.playbackTime / duration;
         }
 
         set t(value) {
-            value = Clamp(value, 0, 1);
-            this.playbackTime = this.duration * value;
+            this.playbackTime = this.duration * Clamp(value, 0, 1);
         }
 
         setT(value) {
@@ -144,7 +142,7 @@ var VideoBase = function (GOClass) {
             if (value === undefined) {
                 value = true;
             }
-            this.mute = value;
+            this.loop = value;
             return this;
         }
 
