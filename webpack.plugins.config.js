@@ -26,6 +26,8 @@ module.exports = {
         'inputtext': './plugins/inputtext.js',
         'videoplugin': './plugins/video-plugin.js',
         'video': './plugins/video.js',
+        'youtubeplayerplugin': './plugins/youtubeplayer-plugin.js',
+        'youtubeplayer': './plugins/youtubeplayer.js',
 
         // custom file loader      
         'webfontloaderplugin': './plugins/webfontloader-plugin.js',
