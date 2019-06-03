@@ -19,7 +19,8 @@ class Demo extends Phaser.Scene {
     create() {
         var mainPanel = CreateMainPanel(this, 400, 300)
             .layout()
-        //.drawBounds(this.add.graphics(), 0xff0000);
+            //.drawBounds(this.add.graphics(), 0xff0000)
+            .popUp(1000)
     }
 
     update() { }

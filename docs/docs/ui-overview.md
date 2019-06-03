@@ -105,6 +105,41 @@
     // scene.rexUI.add.edit(textObject, config, onClose);
     ```
 
+### Video
+
+1. [Video DOM](video.md): Create a video dom to play video.
+    ```javascript
+    var video = scene.rexUI.add.video(x, y, width, height, config);
+    // var video = scene.rexUI.add.video(config);
+    ```
+    or
+    ```javascript
+    class MyVideo extends RexPlugins.UI.Video {
+        constructor(scene, x, y, width, height, config) {
+            super(scene, x, y, width, height, config);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
+1. [Video canvas](video.md): Create a canvas to play video.
+    ```javascript
+    var video = scene.rexUI.add.videoCanvas(x, y, width, height, config);
+    // var video = scene.rexUI.add.videoCanvas(config);
+    ```
+    or
+    ```javascript
+    class MyVideo extends RexPlugins.UI.VideoCanvas {
+        constructor(scene, x, y, width, height, config) {
+            super(scene, x, y, width, height, config);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
+
 ### Gestures
 
 1. [Tap](gesture-tap.md): Get tap/multi-taps events of a game object.
