@@ -6,12 +6,19 @@ const Clamp = Phaser.Math.Clamp;
 var VideoBase = function (GOClass) {
     return class Base extends GOClass {
         createVideoElement(config) {
-            if (config === undefined) {
-                config = {};
+            if (!this.video) {
+                if (config === undefined) {
+                    config = {};
+                }
+                config.eventEmitter = this;
+                this.video = CreateVideoElement(config);
+                this.boot();
             }
-            config.eventEmitter = this;
-            this.video = CreateVideoElement(config);
             return this.video;
+        }
+
+        boot() {
+            this.scene.events.on('preupdate', this.preupdate, this);
         }
 
         destroy(fromScene) {
@@ -23,6 +30,7 @@ var VideoBase = function (GOClass) {
             this.video.removeAttribute('src'); // empty source
             this.video.load();
             this.video = undefined;
+            this.scene.events.off('preupdate', this.preupdate, this);
             super.destroy(fromScene);
         }
 
@@ -142,6 +150,14 @@ var VideoBase = function (GOClass) {
 
         get readyState() {
             return this.video.readyState;
+        }
+
+        preupdate(time, delta) {
+            var curT = this.playbackTime;
+            if (curT !== this.prevT) {
+                this.emit('playbacktimechange', this);
+            }
+            this.prevT = curT;
         }
     }
 };

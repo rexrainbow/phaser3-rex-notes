@@ -116,7 +116,7 @@ Default configuration
 
 ### Custom class
 
-- Define class    
+- Define class
     ```javascript
     class MyVideo extends Video {  // or VideoCanvas
         constructor(scene, x, y, width, height, config) {
@@ -137,11 +137,122 @@ Default configuration
     var video = new MyVideo(scene, x, y, width, height, config);
     ```
 
+### Load
+
+```javascript
+video.load(src);
+```
+
+- `src` : Specifies the URL of the video file.
+    - A string : url of the video file.
+    - A plain object : `{ videoType: fileURL }`
+        1. Get `webmFileURL` if browser supports webm video format.
+        1. Get `oggFileURL` if browser supports ogg video format.
+        1. Get `mp4FileURL` if browser supports mp4 video format.
+        1. Get `h264FileURL` if browser supports h264 video format.
+
+### Play
+
+```javascript
+video.play();
+```
+
+### Pause
+
+```javascript
+video.pause();
+```
+
+### Playback time
+
+- Get
+    ```javascript
+    var playbackTime = video.playbackTime; // time in seconds
+    ```
+    ```javascript
+    var t = video.t; // t: 0~1
+    ```
+- Set
+    ```javascript
+    video.setPlaybackTime(time); // time in seconds
+    // video.playbackTime = time;
+    ```
+    ```javascript
+    video.setT(t); // t: 0~1
+    // video.t = t;
+    ```
+
+### Duration
+
+```javascript
+var duration = video.duration;  // time in seconds
+```
+
+### Volume
+
+- Get
+    ```javascript
+    var volume = video.volume;  // volume: 0~1
+    ```
+- Set
+    ```javascript
+    video.setVolume(volume);  // volume: 0~1
+    // video.volume = volume;
+    ```
+
+#### Mute
+
+- Get
+    ```javascript
+    var muted = video.muted;  // muted: true/false
+    ```
+- Set
+    ```javascript
+    video.setMute(muted);  // muted: true/false
+    // video.muted = muted;
+    ```
+
+### Loop
+
+- Get
+    ```javascript
+    var loop = video.loop;  // loop: true/false
+    ```
+- Set
+    ```javascript
+    video.setLoop(loop);  // loop: true/false
+    // video.loop = loop;
+    ```
+
 ### Resize
 
 ```javascript
 video.resize(width, height);
 ```
+
+#### Status
+
+- Is playing
+    ```javascript
+    var isPlaying = video.isPlaying;
+    ```
+- Is paused
+    ```javascript
+    var isPaused = video.isPaused;
+    ```
+- Has end
+    ```javascript
+    var hasEnded = video.hasEnded;
+    ```
+- Ready state
+    ```javascript
+    var readyState = video.readyState;
+    ```
+    - `0` = HAVE_NOTHING - no information whether or not the audio/video is ready
+    - `1` = HAVE_METADATA - metadata for the audio/video is ready
+    - `2` = HAVE_CURRENT_DATA - data for the current playback position is available, but not enough data to play next frame/millisecond
+    - `3` = HAVE_FUTURE_DATA - data for the current and at least the next frame is available
+    - `4` = HAVE_ENOUGH_DATA - enough data available to start playing
 
 ### Events
 
@@ -176,4 +287,8 @@ video.resize(width, height);
 - Error
     ```javascript
     video.on('error', function(video){ }, scope);
+    ```
+- Playback time changed
+    ```javascript
+    video.on('playbacktimechange', function(video){ }, scope);
     ```
