@@ -96,4 +96,7 @@
 1. [Webfont-loader](webfontloader.md): Load web font by google webfont loader in preload stage.
 1. [XOR](xor.md): Encrypt or decrypt string by XOR algorithm.
 
-[Bug report or suggestion](https://github.com/rexrainbow/phaser3-rex-notes/issues)
+## Links
+
+- [Bug report or suggestion](https://github.com/rexrainbow/phaser3-rex-notes/issues)
+- [Discord channel](https://discord.gg/kWkuFZK)

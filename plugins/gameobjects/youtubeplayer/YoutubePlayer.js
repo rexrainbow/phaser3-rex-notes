@@ -75,18 +75,19 @@ class YoutubePlayer extends BaseClass {
                             if ((this._videoState === 0) && this.loop) {
                                 this.youtubePlayer.playVideo();
                             }
-                            this.emit('statechange');
+                            this.emit('statechange', this);
                         }).bind(this),
                         'onReady': (function (event) {
                             this.youtubePlayer = youtubePlayer;
                             for (var i = 0, cnt = this.paddingCallbacks.length; i < cnt; i++) {
                                 this.paddingCallbacks[i]();
                             }
-                            this.paddingCallbacks.length = 0;
-                            this.emit('ready');
+                            this.paddingCallbacks = undefined;
+                            this.emit('ready', this);
                         }).bind(this),
                         'onError': (function (event) {
-                            this.emit('error');
+                            this.lastError = event.data;
+                            this.emit('error', this, this.lastError);
                         }).bind(this),
                     }
                 }
@@ -96,7 +97,7 @@ class YoutubePlayer extends BaseClass {
         LoadAPI(onLoad);
     }
 
-    runCallback(callback) {
+    _runCallback(callback) {
         if (this.youtubePlayer === undefined) {
             this.paddingCallbacks.push(callback);
         } else {
@@ -105,15 +106,35 @@ class YoutubePlayer extends BaseClass {
     }
 
     get videoState() {
-        return GetVideoStateString(this._videoState);
+        if ((this._videoState === undefined) || (!YT)) {
+            return '';
+        } else {
+            switch (this._videoState) {
+                case -1: return "Unstarted";
+                case YT.PlayerState.ENDED: return "Ended";
+                case YT.PlayerState.PLAYING: return "Playing";
+                case YT.PlayerState.PAUSED: return "Paused";
+                case YT.PlayerState.BUFFERING: return "Buffering";
+                case YT.PlayerState.CUED: return "Video cued";
+            }
+        }
     }
 
-    load(videoId) {
+    load(videoId, autoPlay) {
+        if (autoPlay === undefined) {
+            autoPlay = true;
+        }
+
         var callback = (function () {
             this.youtubePlayer.loadVideoById(videoId);
+            if (autoPlay) {
+                this.youtubePlayer.playVideo();
+            } else {
+                this.youtubePlayer.pauseVideo();
+            }
         }).bind(this);
 
-        runCallback(callback);
+        this._runCallback(callback);
         return this;
     }
 
@@ -122,7 +143,7 @@ class YoutubePlayer extends BaseClass {
             this.youtubePlayer.playVideo();
         }).bind(this);
 
-        runCallback(callback);
+        this._runCallback(callback);
         return this;
     }
 
@@ -135,7 +156,7 @@ class YoutubePlayer extends BaseClass {
             this.youtubePlayer.pauseVideo();
         }).bind(this);
 
-        runCallback(callback);
+        _runCallback(callback);
         return this;
     }
 
@@ -152,7 +173,7 @@ class YoutubePlayer extends BaseClass {
             this.youtubePlayer.seekTo(value);
         }).bind(this);
 
-        runCallback(callback);
+        this._runCallback(callback);
     }
 
     setPlaybackTime(time) {
@@ -175,7 +196,7 @@ class YoutubePlayer extends BaseClass {
             this.playbackTime = this.duration * Clamp(value, 0, 1);
         }).bind(this);
 
-        runCallback(callback);
+        this._runCallback(callback);
     }
 
     setT(value) {
@@ -184,15 +205,15 @@ class YoutubePlayer extends BaseClass {
     }
 
     get volume() {
-        return (this.youtubePlayer) ? this.youtubePlayer.getVolume() : 100;
+        return (this.youtubePlayer) ? (this.youtubePlayer.getVolume() / 100) : 0;
     }
 
     set volume(value) {
         var callback = (function () {
-            this.youtubePlayer.setVolume(Clamp(value, 0, 1) * 100);
+            this.youtubePlayer.setVolume(Clamp(value * 100, 0, 100));
         }).bind(this);
 
-        runCallback(callback);
+        this._runCallback(callback);
     }
 
     setVolume(value) {
@@ -213,7 +234,7 @@ class YoutubePlayer extends BaseClass {
             }
         }).bind(this);
 
-        runCallback(callback);
+        this._runCallback(callback);
     }
 
     setMute(value) {
@@ -232,21 +253,6 @@ class YoutubePlayer extends BaseClass {
         return this;
     }
 
-}
-
-var GetVideoStateString = function (videoState) {
-    if (videoState === undefined) {
-        return '';
-    } else {
-        switch (videoState) {
-            case -1: return "Unstarted";
-            case YT.PlayerState.ENDED: return "Ended";
-            case YT.PlayerState.PLAYING: return "Playing";
-            case YT.PlayerState.PAUSED: return "Paused";
-            case YT.PlayerState.BUFFERING: return "Buffering";
-            case YT.PlayerState.CUED: return "Video cued";
-        }
-    }
 }
 
 export default YoutubePlayer;
