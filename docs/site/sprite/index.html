@@ -4566,10 +4566,11 @@
 </pre></div>
 
 <ul>
-<li><code>frames</code> : An array of frames' name
+<li><code>frames</code> : An array of frames' name<ul>
+<li>Every frame in the atlas
     <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">generateFrameNames</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
-</pre></div>
-    or
+</pre></div></li>
+<li>Frame sequence indexing from start to end
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">;</span>
 <span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">generateFrameNames</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> 
 <span class="p">{</span>
@@ -4578,10 +4579,28 @@
     <span class="nx">end</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">suffix</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
     <span class="nx">zeroPad</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">outputArray</span><span class="o">:</span> <span class="p">[],</span>
-    <span class="nx">frames</span><span class="o">:</span> <span class="kc">false</span>
+    <span class="c1">// outputArray: [], // Append frames into this array</span>
 <span class="p">});</span>
-</pre></div></li>
+</pre></div><ul>
+<li><code>prefix + Pad(i, zeroPad, '0', 1) + suffix</code>, i: start ~ end</li>
+</ul>
+</li>
+<li>Custom frame sequence
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">;</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">generateFrameNames</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> 
+<span class="p">{</span>
+    <span class="nx">prefix</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="nx">suffix</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="nx">zeroPad</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">frames</span><span class="o">:</span> <span class="p">[</span> <span class="p">...</span> <span class="p">]</span>
+    <span class="c1">// outputArray: [], // Append frames into this array            </span>
+<span class="p">});</span>
+</pre></div><ul>
+<li><code>prefix + Pad(frames[i], zeroPad, '0', 1) + suffix</code></li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <h4 id="control-animation">Control animation<a class="headerlink" href="#control-animation" title="Permanent link">&para;</a></h4>
 <ul>

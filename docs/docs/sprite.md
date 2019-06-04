@@ -132,23 +132,37 @@ scene.anims.create({
 ```
 
 - `frames` : An array of frames' name
-    ```javascript
-    scene.anims.generateFrameNames(key);
-    ```
-    or
-    ```javascript
-    var config = ;
-    scene.anims.generateFrameNames(key, 
-    {
-        prefix: '',
-        start: 0,
-        end: 0,
-        suffix: '',
-        zeroPad: 0,
-        outputArray: [],
-        frames: false
-    });
-    ```
+    - Every frame in the atlas
+        ```javascript
+        scene.anims.generateFrameNames(key);
+        ```
+    - Frame sequence indexing from start to end
+        ```javascript
+        var config = ;
+        scene.anims.generateFrameNames(key, 
+        {
+            prefix: '',
+            start: 0,
+            end: 0,
+            suffix: '',
+            zeroPad: 0,
+            // outputArray: [], // Append frames into this array
+        });
+        ```
+        - `prefix + Pad(i, zeroPad, '0', 1) + suffix`, i: start ~ end
+    - Custom frame sequence
+        ```javascript
+        var config = ;
+        scene.anims.generateFrameNames(key, 
+        {
+            prefix: '',
+            suffix: '',
+            zeroPad: 0,
+            frames: [ ... ]
+            // outputArray: [], // Append frames into this array            
+        });
+        ```
+        - `prefix + Pad(frames[i], zeroPad, '0', 1) + suffix`
 
 #### Control animation
 
