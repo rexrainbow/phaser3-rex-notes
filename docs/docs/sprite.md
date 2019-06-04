@@ -109,7 +109,7 @@ See [game object](gameobject.md)
 #### Create animation
 
 ```javascript
-var config = {
+scene.anims.create({
     key: '',
     frames: [],
     defaultTextureKey: null,
@@ -128,8 +128,7 @@ var config = {
     // visible
     showOnStart: false,
     hideOnComplete: false
-};
-scene.anims.create(config);
+});
 ```
 
 - `frames` : An array of frames' name
@@ -138,7 +137,9 @@ scene.anims.create(config);
     ```
     or
     ```javascript
-    var config = {
+    var config = ;
+    scene.anims.generateFrameNames(key, 
+    {
         prefix: '',
         start: 0,
         end: 0,
@@ -146,8 +147,7 @@ scene.anims.create(config);
         zeroPad: 0,
         outputArray: [],
         frames: false
-    };
-    scene.anims.generateFrameNames(key, config);
+    });
     ```
 
 #### Control animation

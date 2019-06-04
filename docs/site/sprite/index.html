@@ -4543,7 +4543,7 @@
 <p>See <a href="../gameobject/">game object</a></p>
 <h3 id="animation">Animation<a class="headerlink" href="#animation" title="Permanent link">&para;</a></h3>
 <h4 id="create-animation">Create animation<a class="headerlink" href="#create-animation" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
     <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
     <span class="nx">frames</span><span class="o">:</span> <span class="p">[],</span>
     <span class="nx">defaultTextureKey</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
@@ -4562,8 +4562,7 @@
     <span class="c1">// visible</span>
     <span class="nx">showOnStart</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="nx">hideOnComplete</span><span class="o">:</span> <span class="kc">false</span>
-<span class="p">};</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="p">});</span>
 </pre></div>
 
 <ul>
@@ -4571,7 +4570,9 @@
     <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">generateFrameNames</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </pre></div>
     or
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">;</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">generateFrameNames</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> 
+<span class="p">{</span>
     <span class="nx">prefix</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
     <span class="nx">start</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">end</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
@@ -4579,8 +4580,7 @@
     <span class="nx">zeroPad</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">outputArray</span><span class="o">:</span> <span class="p">[],</span>
     <span class="nx">frames</span><span class="o">:</span> <span class="kc">false</span>
-<span class="p">};</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">generateFrameNames</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+<span class="p">});</span>
 </pre></div></li>
 </ul>
 <h4 id="control-animation">Control animation<a class="headerlink" href="#control-animation" title="Permanent link">&para;</a></h4>
