@@ -70,3 +70,16 @@ texture.refresh();
     ```javascript
     var imageData = texture.getData(x, y, width, height);
     ```
+
+### Add frame
+
+```javascript
+texture.add(name, sourceIndex, x, y, width, height);
+```
+
+- `name` : The name of this Frame. The name is unique within the Texture.
+- `sourceIndex` : The index of the TextureSource that this Frame is a part of.
+- `x` : The x coordinate of the top-left of this Frame.
+- `y` : The y coordinate of the top-left of this Frame.
+- `width` : The width of this Frame.
+- `height` : The height of this Frame.

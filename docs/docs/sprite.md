@@ -108,63 +108,9 @@ See [game object](gameobject.md)
 
 #### Create animation
 
-```javascript
-scene.anims.create({
-    key: '',
-    frames: [],
-    defaultTextureKey: null,
+See [Add animation section](animation.md#add-animation).
 
-    // time
-    delay: 0,
-    frameRate: null,
-    duration: null,
-    skipMissedFrames: true,
-
-    // repeat
-    repeat: 0,              // set to (-1) to repeat forever
-    repeatDelay: 0,
-    yoyo: false,
-
-    // visible
-    showOnStart: false,
-    hideOnComplete: false
-});
-```
-
-- `frames` : An array of frames' name
-    - Every frame in the atlas
-        ```javascript
-        scene.anims.generateFrameNames(key);
-        ```
-    - Frame sequence indexing from start to end
-        ```javascript
-        var config = ;
-        scene.anims.generateFrameNames(key, 
-        {
-            prefix: '',
-            start: 0,
-            end: 0,
-            suffix: '',
-            zeroPad: 0,
-            // outputArray: [], // Append frames into this array
-        });
-        ```
-        - `prefix + Pad(i, zeroPad, '0', 1) + suffix`, i: start ~ end
-    - Custom frame sequence
-        ```javascript
-        var config = ;
-        scene.anims.generateFrameNames(key, 
-        {
-            prefix: '',
-            suffix: '',
-            zeroPad: 0,
-            frames: [ ... ]
-            // outputArray: [], // Append frames into this array            
-        });
-        ```
-        - `prefix + Pad(frames[i], zeroPad, '0', 1) + suffix`
-
-#### Control animation
+#### Play animation
 
 - Play
     ```javascript
@@ -185,14 +131,6 @@ scene.anims.create({
     sprite.anims.playReverse(key);
     // sprite.playReverse(key, ignoreIfPlaying, startFrame);
     ```
-- Set to next frame
-    ```javascript
-    sprite.anims.nextFrame();
-    ```
-- Set to previous frame
-    ```javascript
-    sprite.anims.previousFrame();
-    ```
 - Chain next animation
     ```javascript
     sprite.anims.chain(key);
@@ -201,54 +139,72 @@ scene.anims.create({
         ```javascript
         sprite.anims.chain();
         ```
+- Set to next frame
+    ```javascript
+    sprite.anims.nextFrame();
+    ```
+- Set to previous frame
+    ```javascript
+    sprite.anims.previousFrame();
+    ```
 - Time scale
     ```javascript
     sprite.anims.setTimeScale(value);
     ```
-- Pause
+
+#### Pause
+
+```javascript
+sprite.anims.pause();
+// sprite.anims.pause(atFrame);
+```
+
+#### Resume
+
+```javascript
+sprite.anims.resume();
+// sprite.anims.resume(fromFrame);
+```
+
+#### Stop
+
+```javascript
+sprite.anims.stop();
+```
+or
+```javascript
+sprite.anims.stopAfterDelay(delay);
+```
+or
+```javascript
+sprite.anims.stopOnFrame(frame);
+```
+
+#### Restart
+
+```javascript
+sprite.anims.restart();
+// sprite.anims.restart(includeDelay);
+```
+
+#### Repeat
+
+- Set repeat
     ```javascript
-    sprite.anims.pause();
-    // sprite.anims.pause(atFrame);
+    sprite.anims.setRepeat(value);
     ```
-- Resume
+- Set yoyo
     ```javascript
-    sprite.anims.resume();
-    // sprite.anims.resume(fromFrame);
+    sprite.anims.setYoyo(value);
     ```
-- Stop
+- Stop repeat
     ```javascript
-    sprite.anims.stop();
+    sprite.anims.stopOnRepeat();
     ```
-    or
+- Set repeat delay
     ```javascript
-    sprite.anims.stopAfterDelay(delay);
+    sprite.anims.setRepeatDelay();
     ```
-    or
-    ```javascript
-    sprite.anims.stopOnFrame(frame);
-    ```
-- Restart
-    ```javascript
-    sprite.anims.restart();
-    // sprite.anims.restart(includeDelay);
-    ```
-- Repeat
-    - Set repeat
-        ```javascript
-        sprite.anims.setRepeat(value);
-        ```
-    - Set yoyo
-        ```javascript
-        sprite.anims.setYoyo(value);
-        ```
-    - Stop repeat
-        ```javascript
-        sprite.anims.stopOnRepeat();
-        ```
-    - Set repeat delay
-        ```javascript
-        sprite.anims.setRepeatDelay();
-        ```
 
 #### Properties
 
@@ -297,8 +253,6 @@ scene.anims.create({
 
 #### Events
 
-##### Sprite
-
 - On start
     ```javascript
     sprite.on('animationstart', function(currentAnim, currentFrame, sprite){});
@@ -320,75 +274,3 @@ scene.anims.create({
     ```javascript
     sprite.on('animationupdate-' + key, function(currentAnim, currentFrame, sprite){});
     ```
-
-#### Animation
-
-- Get animation
-    ```javascript
-    var anim = scene.anims.get(key);
-    ```
-- On start
-    ```javascript
-    anim.on('start', function(currentAnim, currentFrame, sprite){});
-    ```
-- On complete
-    ```javascript
-    anim.on('complete', function(currentAnim, currentFrame, sprite){});
-    ```
-- On restart
-    ```javascript
-    anim.on('restart', function(currentAnim, currentFrame, sprite){});
-    ```
-
-### Animation manager
-
-- Play animation of sprites
-    - Play
-        ```javascript
-        scene.anims.play(key, children);
-        ```
-    - Stagger play (delay play)
-        ```javascript
-        scene.anims.staggerPlay(key, children, stagger);
-        ```
-        - `children` : An array of Game Objects to play the animation on
-        - `stagger` : The amount of time, in milliseconds, to offset each play time by
-- Remove animations
-    ```javascript
-    scene.anims.remove(key);
-    ```
-- Pause all animations
-    ```javascript
-    scene.anims.pauseAll();
-    ```
-- Resume all animations
-    ```javascript
-    scene.anims.resumeAll();
-    ```
-- Key exists
-    ```javascript
-    var exists = scene.anims.exists(key);
-    ```
-- Get animation
-    ```javascript
-    var anim = scene.anims.get(key);
-    ```
-
-#### Events
-
-- On add animation
-   ```javascript
-   scene.anims.on('add', function(key, anim) {});
-   ```
-- On remove animation
-   ```javascript
-   scene.anims.on('remove', function(key, anim) {});
-   ```
-- On pause all animations
-   ```javascript
-   scene.anims.on('pauseall', function() {});
-   ```
-- On resume all animations
-   ```javascript
-   scene.anims.on('resumeall', function() {});
-   ```

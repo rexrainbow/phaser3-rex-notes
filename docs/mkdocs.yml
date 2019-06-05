@@ -24,6 +24,7 @@ nav:
         - Single image:
             - Image: image.md
             - Sprite: sprite.md
+            - Animation: animation.md
             - Quad: quad.md
             - Shader: shader.md
         - Multiple images: 
