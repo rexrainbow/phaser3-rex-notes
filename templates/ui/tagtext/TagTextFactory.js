@@ -4,7 +4,7 @@ import SetValue from '../../../plugins/utils/object/SetValue.js';
 
 ObjectFactory.register('tagText', function (x, y, text, style) {
     var gameObject = new TagText(this.scene, x, y, text, style);
-    this.scene.sys.displayList.add(gameObject);
+    this.scene.add.existing(gameObject);
     return gameObject;
 });
 

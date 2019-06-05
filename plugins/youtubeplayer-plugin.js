@@ -19,9 +19,9 @@ class YoutubePlayerPlugin extends Phaser.Plugins.BasePlugin {
     }
 
     addYoutubePlayer(x, y, width, height, config) {
-        var youtubePlayer = new YoutubePlayer(this.scene, x, y, width, height, config);
-        this.displayList.add(youtubePlayer);
-        return youtubePlayer;
+        var gameObject = new YoutubePlayer(this.scene, x, y, width, height, config);
+        this.scene.add.existing(gameObject);
+        return gameObject;
     }
 
     makeYoutubePlayer(config, addToScene) {
@@ -30,9 +30,9 @@ class YoutubePlayerPlugin extends Phaser.Plugins.BasePlugin {
         if (addToScene !== undefined) {
             config.add = addToScene;
         }
-        var youtubePlayer = new YoutubePlayer(this.scene, 0, 0, width, height, config);
-        BuildGameObject(this.scene, youtubePlayer, config);
-        return youtubePlayer;
+        var gameObject = new YoutubePlayer(this.scene, 0, 0, width, height, config);
+        BuildGameObject(this.scene, gameObject, config);
+        return gameObject;
     }
 }
 

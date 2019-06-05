@@ -3,8 +3,9 @@ import ObjectFactory from '../ObjectFactory.js';
 import SetValue from '../../utils/object/SetValue.js';
 
 ObjectFactory.register('shape', function (board, tileX, tileY, tileZ, fillColor, fillAlpha, addToBoard) {
-    var shape = new Shape(board, tileX, tileY, tileZ, fillColor, fillAlpha, addToBoard);   
-    return board.scene.sys.displayList.add(shape);
+    var gameObject = new Shape(board, tileX, tileY, tileZ, fillColor, fillAlpha, addToBoard); 
+    board.scene.add.existing(gameObject);  
+    return gameObject;
 });
 
 SetValue(window, 'RexPlugins.Board.Shape', Shape);

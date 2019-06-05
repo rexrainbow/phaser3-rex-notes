@@ -19,9 +19,9 @@ class CanvasPlugin extends Phaser.Plugins.BasePlugin {
     }
 
     addCanvas(x, y, width, height) {
-        var canvas = new Canvas(this.scene, x, y, width, height);
-        this.displayList.add(canvas);
-        return canvas;
+        var gameObject = new Canvas(this.scene, x, y, width, height);
+        this.scene.add.existing(gameObject);
+        return gameObject;
     }
 
     makeCanvas(config, addToScene) {
@@ -30,11 +30,11 @@ class CanvasPlugin extends Phaser.Plugins.BasePlugin {
         if (addToScene !== undefined) {
             config.add = addToScene;
         }
-        var canvas = new Canvas(this.scene, 0, 0, width, height);
-        BuildGameObject(this.scene, canvas, config);
+        var gameObject = new Canvas(this.scene, 0, 0, width, height);
+        BuildGameObject(this.scene, gameObject, config);
         var fillColor = GetAdvancedValue(config, 'fill', null);
-        canvas.fill(fillColor);
-        return canvas;
+        gameObject.fill(fillColor);
+        return gameObject;
     }
 }
 

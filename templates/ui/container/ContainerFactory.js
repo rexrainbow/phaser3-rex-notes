@@ -3,9 +3,9 @@ import ObjectFactory from '../ObjectFactory.js';
 import SetValue from '../../../plugins/utils/object/SetValue.js';
 
 ObjectFactory.register('container', function (x, y, width, height, children) {
-    var container = new Container(this.scene, x, y, width, height, children);
-    this.scene.sys.displayList.add(container);
-    return container;
+    var gameObject = new Container(this.scene, x, y, width, height, children);
+    this.scene.add.existing(gameObject); // It won't be added to display list, neither update list
+    return gameObject;
 });
 
 SetValue(window, 'RexPlugins.UI.Container', Container);

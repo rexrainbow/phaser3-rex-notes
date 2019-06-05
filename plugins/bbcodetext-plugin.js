@@ -19,9 +19,9 @@ class BBCodeTextPlugin extends Phaser.Plugins.BasePlugin {
     }
 
     addBBCodeText(x, y, text, style) {
-        var text = new BBCodeText(this.scene, x, y, text, style);
-        this.displayList.add(text);
-        return text;
+        var gameObject = new BBCodeText(this.scene, x, y, text, style);
+        this.scene.add.existing(gameObject);
+        return gameObject;
     }
 
     makeBBCodeText(config, addToScene) {

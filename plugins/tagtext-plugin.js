@@ -19,9 +19,9 @@ class TagTextPlugin extends Phaser.Plugins.BasePlugin {
     }
 
     addTagText(x, y, text, style) {
-        var text = new TagText(this.scene, x, y, text, style);
-        this.displayList.add(text);
-        return text;
+        var gameObject = new TagText(this.scene, x, y, text, style);
+        this.scene.add.existing(gameObject);
+        return gameObject;
     }
 
     makeTagText(config, addToScene) {
@@ -62,15 +62,15 @@ class TagTextPlugin extends Phaser.Plugins.BasePlugin {
             config.add = addToScene;
         }
 
-        var text = new TagText(this.scene, 0, 0, content, style);
-        BuildGameObject(this.scene, text, config);
+        var gameObject = new TagText(this.scene, 0, 0, content, style);
+        BuildGameObject(this.scene, gameObject, config);
 
         //  Text specific config options:
 
-        text.autoRound = GetAdvancedValue(config, 'autoRound', true);
-        text.resolution = GetAdvancedValue(config, 'resolution', 1);
+        gameObject.autoRound = GetAdvancedValue(config, 'autoRound', true);
+        gameObject.resolution = GetAdvancedValue(config, 'resolution', 1);
 
-        return text;
+        return gameObject;
     }
 }
 

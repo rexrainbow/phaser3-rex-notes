@@ -12,13 +12,8 @@ var VideoBase = function (GOClass) {
                 }
                 config.eventEmitter = this;
                 this.video = CreateVideoElement(config);
-                this.boot();
             }
             return this.video;
-        }
-
-        boot() {
-            this.scene.events.on('preupdate', this.preupdate, this);
         }
 
         destroy(fromScene) {
@@ -30,8 +25,18 @@ var VideoBase = function (GOClass) {
             this.video.removeAttribute('src'); // empty source
             this.video.load();
             this.video = undefined;
-            this.scene.events.off('preupdate', this.preupdate, this);
             super.destroy(fromScene);
+        }
+
+        preUpdate(time, delta) {
+            if (super.preUpdate) {
+                super.preUpdate(time, delta);
+            }
+            var curT = this.playbackTime;
+            if (curT !== this.prevT) {
+                this.emit('playbacktimechange', this);
+            }
+            this.prevT = curT;
         }
 
         get availableVideoTypes() {
@@ -148,14 +153,6 @@ var VideoBase = function (GOClass) {
 
         get readyState() {
             return this.video.readyState;
-        }
-
-        preupdate(time, delta) {
-            var curT = this.playbackTime;
-            if (curT !== this.prevT) {
-                this.emit('playbacktimechange', this);
-            }
-            this.prevT = curT;
         }
     }
 };

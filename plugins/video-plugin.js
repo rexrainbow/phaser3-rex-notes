@@ -21,9 +21,9 @@ class VideoPlugin extends Phaser.Plugins.BasePlugin {
     }
 
     addVideo(x, y, width, height, config) {
-        var video = new VideoDOM(this.scene, x, y, width, height, config);
-        this.displayList.add(video);
-        return video;
+        var gameObject = new VideoDOM(this.scene, x, y, width, height, config);
+        this.scene.add.existing(gameObject);
+        return gameObject;
     }
 
     makeVideo(config, addToScene) {
@@ -32,15 +32,15 @@ class VideoPlugin extends Phaser.Plugins.BasePlugin {
         if (addToScene !== undefined) {
             config.add = addToScene;
         }
-        var video = new VideoDOM(this.scene, 0, 0, width, height, config);
-        BuildGameObject(this.scene, video, config);
-        return video;
+        var gameObject = new VideoDOM(this.scene, 0, 0, width, height, config);
+        BuildGameObject(this.scene, gameObject, config);
+        return gameObject;
     }
     
     addVideoCanvas(x, y, width, height, config) {
-        var video = new VideoCanvas(this.scene, x, y, width, height, config);
-        this.displayList.add(video);
-        return video;
+        var gameObject = new VideoCanvas(this.scene, x, y, width, height, config);
+        this.scene.add.existing(gameObject);
+        return gameObject;
     }
 
     makeVideoCanvas(config, addToScene) {
@@ -49,9 +49,9 @@ class VideoPlugin extends Phaser.Plugins.BasePlugin {
         if (addToScene !== undefined) {
             config.add = addToScene;
         }
-        var video = new VideoCanvas(this.scene, 0, 0, width, height, config);
-        BuildGameObject(this.scene, video, config);
-        return video;
+        var gameObject = new VideoCanvas(this.scene, 0, 0, width, height, config);
+        BuildGameObject(this.scene, gameObject, config);
+        return gameObject;
     }
 }
 

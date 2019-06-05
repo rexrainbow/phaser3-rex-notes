@@ -19,9 +19,9 @@ class InputTextPlugin extends Phaser.Plugins.BasePlugin {
     }
 
     addInputText(x, y, width, height, config) {
-        var inputText = new InputText(this.scene, x, y, width, height, config);
-        this.displayList.add(inputText);
-        return inputText;
+        var gameObject = new InputText(this.scene, x, y, width, height, config);
+        this.scene.add.existing(gameObject);
+        return gameObject;
     }
 
     makeInputText(config, addToScene) {
@@ -30,9 +30,9 @@ class InputTextPlugin extends Phaser.Plugins.BasePlugin {
         if (addToScene !== undefined) {
             config.add = addToScene;
         }
-        var inputText = new InputText(this.scene, 0, 0, width, height, config);
-        BuildGameObject(this.scene, inputText, config);
-        return inputText;
+        var gameObject = new InputText(this.scene, 0, 0, width, height, config);
+        BuildGameObject(this.scene, gameObject, config);
+        return gameObject;
     }
 }
 

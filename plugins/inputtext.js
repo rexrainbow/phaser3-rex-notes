@@ -4,9 +4,9 @@ const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 const BuildGameObject = Phaser.GameObjects.BuildGameObject;
 
 Phaser.GameObjects.GameObjectFactory.register('rexInputText', function (x, y, width, height, config) {
-    var inputText = new InputText(this.scene, x, y, width, height, config);
-    this.displayList.add(inputText);
-    return inputText;
+    var gameObject = new InputText(this.scene, x, y, width, height, config);
+    this.scene.add.existing(gameObject);
+    return gameObject;
 });
 Phaser.GameObjects.GameObjectCreator.register('rexInputText', function (config, addToScene) {
     var width = GetAdvancedValue(config, 'width', undefined);
@@ -14,9 +14,9 @@ Phaser.GameObjects.GameObjectCreator.register('rexInputText', function (config, 
     if (addToScene !== undefined) {
         config.add = addToScene;
     }
-    var inputText = new InputText(this.scene, 0, 0, width, height, config);
-    BuildGameObject(this.scene, inputText, config);
-    return inputText;
+    var gameObject = new InputText(this.scene, 0, 0, width, height, config);
+    BuildGameObject(this.scene, gameObject, config);
+    return gameObject;
 });
 
 export default InputText;

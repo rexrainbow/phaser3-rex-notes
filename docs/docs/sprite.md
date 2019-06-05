@@ -89,7 +89,9 @@ var sprite = scene.make.sprite({
         }
         // ...
 
-        // preUpdate(time, delta) {}
+        // preUpdate(time, delta) {
+        //     super.preUpdate(time, delta);
+        // }
     }
     ```
     - `scene.add.existing(gameObject)` : Adds an existing Game Object to this Scene.

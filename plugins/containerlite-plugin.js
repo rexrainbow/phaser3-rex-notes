@@ -19,25 +19,25 @@ class ContainerLitePlugin extends Phaser.Plugins.BasePlugin {
     }
 
     addContainer(x, y, width, height, children) {
-        var container = new ContainerLite(this.scene, x, y, width, height, children);
-        this.displayList.add(container);
-        return container;
+        var gameObject = new ContainerLite(this.scene, x, y, width, height, children);
+        this.scene.add.existing(gameObject);
+        return gameObject;
     }
 
     makeContainer(config) {
         var width = GetAdvancedValue(config, 'width', 1);
         var height = GetAdvancedValue(config, 'height', width);
         var children = GetValue(config, 'children', undefined);
-        var container = new ContainerLite(this.scene, 0, 0, width, height);
+        var gameObject = new ContainerLite(this.scene, 0, 0, width, height);
 
         // set properties wo modify children
-        container.syncChildrenEnable = false;
-        BuildGameObject(this.scene, container, config);
+        gameObject.syncChildrenEnable = false;
+        BuildGameObject(this.scene, gameObject, config);
         // sync properties of children
-        container.syncChildrenEnable = true;
+        gameObject.syncChildrenEnable = true;
 
-        container.add(children);
-        return container;
+        gameObject.add(children);
+        return gameObject;
     }
 
 }

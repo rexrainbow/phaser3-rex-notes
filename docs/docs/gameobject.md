@@ -430,12 +430,17 @@ gameObject.once('destroy', function(gameObject) {
         }
         // ...
 
-        // preUpdate(time, delta) {}
+        // preUpdate(time, delta) {
+        //     if (super.preUpdate) {
+        //         super.preUpdate(time, delta);
+        //     }
+        // }
     }
     ```
     - `scene.add.existing(gameObject)` : Adds an existing Game Object to this Scene.
         - If the Game Object renders, it will be added to the Display List.
         - If it has a `preUpdate` method, it will be added to the Update List.
+            - Some kinds of game object like Sprite, Dom-element has `preUpdate` method already.
 - Create instance
     ```javascript
     var image = new MyClass(scene, x, y, key);
