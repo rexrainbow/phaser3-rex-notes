@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/textpage/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/animation/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Page - Notes of Phaser 3</title>
+        <title>Animation - Notes of Phaser 3</title>
       
     
     
@@ -128,7 +128,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Page
+                Animation
               </span>
             
           
@@ -540,10 +540,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2" type="checkbox" id="nav-4-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2" type="checkbox" id="nav-4-2" checked>
     
     <label class="md-nav__link" for="nav-4-2">
       Sprite
@@ -559,10 +561,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2-1" type="checkbox" id="nav-4-2-1">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2-1" type="checkbox" id="nav-4-2-1" checked>
     
     <label class="md-nav__link" for="nav-4-2-1">
       Single image
@@ -602,11 +606,182 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../animation/" title="Animation" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Animation
+      </label>
+    
+    <a href="./" title="Animation" class="md-nav__link md-nav__link--active">
       Animation
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#animation-manager" title="Animation manager" class="md-nav__link">
+    Animation manager
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-animation" title="Add animation" class="md-nav__link">
+    Add animation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-animation" title="Remove animation" class="md-nav__link">
+    Remove animation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#play-animation" title="Play animation" class="md-nav__link">
+    Play animation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pause-all-animations" title="Pause all animations" class="md-nav__link">
+    Pause all animations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resume-all-animations" title="Resume all animations" class="md-nav__link">
+    Resume all animations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reverse-animation" title="Reverse animation" class="md-nav__link">
+    Reverse animation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#has-animation" title="Has animation" class="md-nav__link">
+    Has animation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exportload" title="Export/load" class="md-nav__link">
+    Export/load
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" title="Events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#animation-object" title="Animation object" class="md-nav__link">
+    Animation object
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-frame" title="Add frame" class="md-nav__link">
+    Add frame
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-frame" title="Remove frame" class="md-nav__link">
+    Remove frame
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-frame" title="Get frame" class="md-nav__link">
+    Get frame
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#export" title="Export" class="md-nav__link">
+    Export
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events_1" title="Events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -720,12 +895,10 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3" type="checkbox" id="nav-4-3" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3" type="checkbox" id="nav-4-3">
     
     <label class="md-nav__link" for="nav-4-3">
       Text
@@ -849,12 +1022,10 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-3" type="checkbox" id="nav-4-3-3" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-3-3" type="checkbox" id="nav-4-3-3">
     
     <label class="md-nav__link" for="nav-4-3-3">
       Behaviors
@@ -882,114 +1053,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Page
-      </label>
-    
-    <a href="./" title="Page" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../textpage/" title="Page" class="md-nav__link">
       Page
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#source-code" title="Source code" class="md-nav__link">
-    Source code
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#import-class" title="Import class" class="md-nav__link">
-    Import class
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
-    Install global plugin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#set-content" title="Set content" class="md-nav__link">
-    Set content
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#show-page" title="Show page" class="md-nav__link">
-    Show page
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-lines-of-page" title="Get lines of page" class="md-nav__link">
-    Get lines of page
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#other-properties" title="Other properties" class="md-nav__link">
-    Other properties
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -4250,13 +4318,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#source-code" title="Source code" class="md-nav__link">
-    Source code
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#usage" title="Usage" class="md-nav__link">
     Usage
   </a>
@@ -4265,51 +4326,126 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#import-class" title="Import class" class="md-nav__link">
-    Import class
+  <a href="#animation-manager" title="Animation manager" class="md-nav__link">
+    Animation manager
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-animation" title="Add animation" class="md-nav__link">
+    Add animation
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
-    Install global plugin
+  <a href="#remove-animation" title="Remove animation" class="md-nav__link">
+    Remove animation
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
+  <a href="#play-animation" title="Play animation" class="md-nav__link">
+    Play animation
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#set-content" title="Set content" class="md-nav__link">
-    Set content
+  <a href="#pause-all-animations" title="Pause all animations" class="md-nav__link">
+    Pause all animations
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#show-page" title="Show page" class="md-nav__link">
-    Show page
+  <a href="#resume-all-animations" title="Resume all animations" class="md-nav__link">
+    Resume all animations
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-lines-of-page" title="Get lines of page" class="md-nav__link">
-    Get lines of page
+  <a href="#reverse-animation" title="Reverse animation" class="md-nav__link">
+    Reverse animation
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#other-properties" title="Other properties" class="md-nav__link">
-    Other properties
+  <a href="#has-animation" title="Has animation" class="md-nav__link">
+    Has animation
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exportload" title="Export/load" class="md-nav__link">
+    Export/load
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" title="Events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#animation-object" title="Animation object" class="md-nav__link">
+    Animation object
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-frame" title="Add frame" class="md-nav__link">
+    Add frame
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-frame" title="Remove frame" class="md-nav__link">
+    Remove frame
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-frame" title="Get frame" class="md-nav__link">
+    Get frame
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#export" title="Export" class="md-nav__link">
+    Export
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events_1" title="Events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -4334,111 +4470,210 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/textpage.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/animation.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Page</h1>
+                  <h1>Animation</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Display text page by page on text object, <a href="../bbcodetext/">bbcode text object</a>, or <a href="../tagtext/">tag text boject</a>.</p>
+<p>Animation and animations manager.</p>
 <ul>
-<li>Author: Rex</li>
-<li>Behavior of text object</li>
+<li>Author: Richard Davey</li>
 </ul>
-<h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/textpage-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rextextpageplugin.min.js">minify</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/textpage">Sample code</a></p>
-<p>User could import class directly, or install it by global plugin.</p>
-<h3 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">rexTextPage</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/textpage.js&#39;</span><span class="p">;</span>
-</pre></div>
+<h3 id="animation-manager">Animation manager<a class="headerlink" href="#animation-manager" title="Permanent link">&para;</a></h3>
+<h4 id="add-animation">Add animation<a class="headerlink" href="#add-animation" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">create</span><span class="p">({</span>
+    <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="nx">frames</span><span class="o">:</span> <span class="p">[],</span>
+    <span class="nx">defaultTextureKey</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
 
-<h3 id="install-global-plugin">Install global plugin<a class="headerlink" href="#install-global-plugin" title="Permanent link">&para;</a></h3>
-<p>Install plugin in <a href="../game/#configuration">configuration of game</a></p>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">TextPagePlugin</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/textpage-plugin.js&#39;</span><span class="p">;</span>
+    <span class="c1">// time</span>
+    <span class="nx">delay</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">frameRate</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">duration</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">skipMissedFrames</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
 
-<span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="c1">// ...</span>
-    <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
-            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexTextPage&#39;</span><span class="p">,</span>
-            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">TextPagePlugin</span><span class="p">,</span>
-            <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
-        <span class="p">},</span>
-        <span class="c1">// ...</span>
-        <span class="p">]</span>
-    <span class="p">}</span>
-    <span class="c1">// ...</span>
-<span class="p">};</span>
-<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-</pre></div>
+    <span class="c1">// repeat</span>
+    <span class="nx">repeat</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>              <span class="c1">// set to (-1) to repeat forever</span>
+    <span class="nx">repeatDelay</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">yoyo</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
 
-<h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">txt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="p">{</span>
-    <span class="nx">wordWrap</span><span class="o">:</span>  <span class="p">{</span>
-        <span class="nx">width</span><span class="o">:</span> <span class="mi">500</span>
-    <span class="p">},</span>
-    <span class="nx">maxLines</span><span class="o">:</span> <span class="mi">7</span>
-<span class="p">});</span>
-<span class="kd">var</span> <span class="nx">page</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexTextPage&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">txt</span><span class="p">,</span> <span class="p">{</span>
-    <span class="c1">//text: &#39;&#39;,       // content in string or array</span>
+    <span class="c1">// visible</span>
+    <span class="nx">showOnStart</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">hideOnComplete</span><span class="o">:</span> <span class="kc">false</span>
 <span class="p">});</span>
 </pre></div>
 
 <ul>
-<li><code>text</code> : content in string or array, optional</li>
+<li><code>frames</code> : An array of <code>{key, frame}</code><ul>
+<li>Properties
+    <div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="nx">frame</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="c1">// string, or number</span>
+    <span class="nx">duration</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">visible</span><span class="o">:</span> <span class="kc">true</span>
+<span class="p">}</span>
+</pre></div></li>
+<li>Every frame in the atlas
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">generateFrameNames</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</pre></div></li>
+<li>Frame sequence indexing from start to end
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">;</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">generateFrameNames</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> 
+<span class="p">{</span>
+    <span class="nx">prefix</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="nx">start</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">end</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">suffix</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="nx">zeroPad</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="c1">// outputArray: [], // Append frames into this array</span>
+<span class="p">});</span>
+</pre></div><ul>
+<li><code>prefix + Pad(i, zeroPad, '0', 1) + suffix</code>, i: start ~ end</li>
 </ul>
-<h3 id="set-content">Set content<a class="headerlink" href="#set-content" title="Permanent link">&para;</a></h3>
+</li>
+<li>Custom frame sequence
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">;</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">generateFrameNames</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> 
+<span class="p">{</span>
+    <span class="nx">prefix</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="nx">suffix</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="nx">zeroPad</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">frames</span><span class="o">:</span> <span class="p">[</span> <span class="p">...</span> <span class="p">]</span>
+    <span class="c1">// outputArray: [], // Append frames into this array            </span>
+<span class="p">});</span>
+</pre></div><ul>
+<li><code>prefix + Pad(frames[i], zeroPad, '0', 1) + suffix</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="remove-animation">Remove animation<a class="headerlink" href="#remove-animation" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</pre></div>
+
+<h4 id="play-animation">Play animation<a class="headerlink" href="#play-animation" title="Permanent link">&para;</a></h4>
 <ul>
-<li>Set text
-    <div class="codehilite"><pre><span></span><span class="nx">page</span><span class="p">.</span><span class="nx">setText</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>   <span class="c1">// content in string or array</span>
+<li>Play
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">play</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">children</span><span class="p">);</span>
 </pre></div></li>
-<li>Append text
-    <div class="codehilite"><pre><span></span><span class="nx">page</span><span class="p">.</span><span class="nx">appendText</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span> <span class="c1">// content in string or array</span>
+<li>Stagger play (delay play)
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">staggerPlay</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">children</span><span class="p">,</span> <span class="nx">stagger</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>children</code> : An array of Game Objects to play the animation on</li>
+<li><code>stagger</code> : The amount of time, in milliseconds, to offset each play time by</li>
+</ul>
+</li>
+</ul>
+<h4 id="pause-all-animations">Pause all animations<a class="headerlink" href="#pause-all-animations" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">pauseAll</span><span class="p">();</span>
+</pre></div>
+
+<h4 id="resume-all-animations">Resume all animations<a class="headerlink" href="#resume-all-animations" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">resumeAll</span><span class="p">();</span>
+</pre></div>
+
+<h4 id="reverse-animation">Reverse animation<a class="headerlink" href="#reverse-animation" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">reverse</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</pre></div>
+
+<h4 id="has-animation">Has animation<a class="headerlink" href="#has-animation" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">exists</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">exists</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</pre></div>
+
+<h4 id="exportload">Export/load<a class="headerlink" href="#exportload" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Export JSON
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">json</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">toJSON</span><span class="p">();</span>
+</pre></div></li>
+<li>Load from JSON
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">fromJSON</span><span class="p">(</span><span class="nx">json</span><span class="p">);</span>
+</pre></div><ul>
+<li>Load JSON in preload stage
+    <code>javascript
+   scene.load.json(key, url);</code></li>
+<li>Load animation in preload stage
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">animation</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">);</span>
 </pre></div></li>
 </ul>
-<h3 id="show-page">Show page<a class="headerlink" href="#show-page" title="Permanent link">&para;</a></h3>
+</li>
+</ul>
+<h4 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h4>
 <ul>
-<li>Display current page
-    <div class="codehilite"><pre><span></span><span class="nx">page</span><span class="p">.</span><span class="nx">showPage</span><span class="p">();</span>
+<li>On add animation
+   <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;add&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">anim</span><span class="p">)</span> <span class="p">{});</span>
 </pre></div></li>
-<li>Display next page
-    <div class="codehilite"><pre><span></span><span class="nx">page</span><span class="p">.</span><span class="nx">showNextPage</span><span class="p">();</span>
+<li>On remove animation
+   <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;remove&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">anim</span><span class="p">)</span> <span class="p">{});</span>
 </pre></div></li>
-<li>Display previous page
-    <div class="codehilite"><pre><span></span><span class="nx">page</span><span class="p">.</span><span class="nx">showPreviousPage</span><span class="p">();</span>
+<li>On pause all animations
+   <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pauseall&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{});</span>
+</pre></div></li>
+<li>On resume all animations
+   <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;resumeall&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{});</span>
 </pre></div></li>
 </ul>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Initial page index is <code>-1</code>, so user could call <code>page.showNextPage()</code> to display first page.</p>
-</div>
-<h3 id="get-lines-of-page">Get lines of page<a class="headerlink" href="#get-lines-of-page" title="Permanent link">&para;</a></h3>
+<h3 id="animation-object">Animation object<a class="headerlink" href="#animation-object" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">anim</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</pre></div>
+
+<h4 id="add-frame">Add frame<a class="headerlink" href="#add-frame" title="Permanent link">&para;</a></h4>
 <ul>
-<li>Get lines of current page
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">lines</span> <span class="o">=</span> <span class="nx">page</span><span class="p">.</span><span class="nx">getPage</span><span class="p">();</span>
+<li>Append frames
+    <div class="codehilite"><pre><span></span><span class="nx">anim</span><span class="p">.</span><span class="nx">addFrame</span><span class="p">(</span><span class="nx">frame</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>frame</code> : <code>scene.anims.generateFrameNames(key, config)</code></li>
+</ul>
+</li>
+<li>Insert frames at index
+    <div class="codehilite"><pre><span></span><span class="nx">anim</span><span class="p">.</span><span class="nx">addFrameAt</span><span class="p">(</span><span class="nx">index</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>frame</code> : <code>scene.anims.generateFrameNames(key, config)</code></li>
+</ul>
+</li>
+</ul>
+<h4 id="remove-frame">Remove frame<a class="headerlink" href="#remove-frame" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Remove frame at
+    <div class="codehilite"><pre><span></span><span class="nx">anim</span><span class="p">.</span><span class="nx">removeFrameAt</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
 </pre></div></li>
-<li>Get lines of next page
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">lines</span> <span class="o">=</span> <span class="nx">page</span><span class="p">.</span><span class="nx">getNextPage</span><span class="p">();</span>
-</pre></div></li>
-<li>Get lines of previous page
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">lines</span> <span class="o">=</span> <span class="nx">page</span><span class="p">.</span><span class="nx">getPreviousPage</span><span class="p">();</span>
+<li>Remove frame
+    <div class="codehilite"><pre><span></span><span class="nx">anim</span><span class="p">.</span><span class="nx">removeFrame</span><span class="p">(</span><span class="nx">frame</span><span class="p">);</span>
 </pre></div></li>
 </ul>
-<h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
+<h4 id="get-frame">Get frame<a class="headerlink" href="#get-frame" title="Permanent link">&para;</a></h4>
 <ul>
-<li>Is last page
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isLastPage</span> <span class="o">=</span> <span class="nx">page</span><span class="p">.</span><span class="nx">isLastPage</span><span class="p">;</span>
+<li>Has frame index
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">HasFrameAt</span> <span class="o">=</span> <span class="nx">anim</span><span class="p">.</span><span class="nx">checkFrame</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
 </pre></div></li>
-<li>Is first page
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isLastPage</span> <span class="o">=</span> <span class="nx">page</span><span class="p">.</span><span class="nx">isFirstPage</span><span class="p">;</span>
+<li>Get frame at index
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">frame</span> <span class="o">=</span> <span class="nx">anim</span><span class="p">.</span><span class="nx">getFrameAt</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
 </pre></div></li>
-<li>Current page index
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">pageIndex</span> <span class="o">=</span> <span class="nx">page</span><span class="p">.</span><span class="nx">pageIndex</span><span class="p">;</span>
+<li>Get last frame
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">frame</span> <span class="o">=</span> <span class="nx">anim</span><span class="p">.</span><span class="nx">getLastFrame</span><span class="p">();</span>
 </pre></div></li>
-<li>Number of pages
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">pageIndex</span> <span class="o">=</span> <span class="nx">page</span><span class="p">.</span><span class="nx">pageCount</span><span class="p">;</span>
+</ul>
+<h4 id="export">Export<a class="headerlink" href="#export" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Export JSON
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">json</span> <span class="o">=</span> <span class="nx">anim</span><span class="p">.</span><span class="nx">toJSON</span><span class="p">();</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">jsonString</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">anim</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h4 id="events_1">Events<a class="headerlink" href="#events_1" title="Permanent link">&para;</a></h4>
+<ul>
+<li>On start
+    <div class="codehilite"><pre><span></span><span class="nx">anim</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">currentAnim</span><span class="p">,</span> <span class="nx">currentFrame</span><span class="p">,</span> <span class="nx">sprite</span><span class="p">){});</span>
+</pre></div></li>
+<li>On complete
+    <div class="codehilite"><pre><span></span><span class="nx">anim</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">currentAnim</span><span class="p">,</span> <span class="nx">currentFrame</span><span class="p">,</span> <span class="nx">sprite</span><span class="p">){});</span>
+</pre></div></li>
+<li>On restart
+    <div class="codehilite"><pre><span></span><span class="nx">anim</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;restart&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">currentAnim</span><span class="p">,</span> <span class="nx">currentFrame</span><span class="p">,</span> <span class="nx">sprite</span><span class="p">){});</span>
 </pre></div></li>
 </ul>
                 
@@ -4461,7 +4696,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../texttyping/" title="Typing" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../sprite/" title="Sprite" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -4470,19 +4705,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Typing
+                Sprite
               </span>
             </div>
           </a>
         
         
-          <a href="../textedit/" title="Edit" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../quad/" title="Quad" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Edit
+                Quad
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

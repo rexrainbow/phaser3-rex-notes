@@ -791,6 +791,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../animation/" title="Animation" class="md-nav__link">
+      Animation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../quad/" title="Quad" class="md-nav__link">
       Quad
     </a>
@@ -4903,12 +4915,19 @@
     <span class="p">}</span>
     <span class="c1">// ...</span>
 
-    <span class="c1">// preUpdate(time, delta) {}</span>
+    <span class="c1">// preUpdate(time, delta) {</span>
+    <span class="c1">//     if (super.preUpdate) {</span>
+    <span class="c1">//         super.preUpdate(time, delta);</span>
+    <span class="c1">//     }</span>
+    <span class="c1">// }</span>
 <span class="p">}</span>
 </pre></div><ul>
 <li><code>scene.add.existing(gameObject)</code> : Adds an existing Game Object to this Scene.<ul>
 <li>If the Game Object renders, it will be added to the Display List.</li>
-<li>If it has a <code>preUpdate</code> method, it will be added to the Update List.</li>
+<li>If it has a <code>preUpdate</code> method, it will be added to the Update List.<ul>
+<li>Some kinds of game object like Sprite, Dom-element has <code>preUpdate</code> method already.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

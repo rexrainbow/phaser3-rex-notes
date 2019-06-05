@@ -604,6 +604,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../animation/" title="Animation" class="md-nav__link">
+      Animation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../quad/" title="Quad" class="md-nav__link">
       Quad
     </a>
@@ -1221,6 +1233,13 @@
           <li class="md-nav__item">
   <a href="#image-data" title="Image data" class="md-nav__link">
     Image data
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-frame" title="Add frame" class="md-nav__link">
+    Add frame
   </a>
   
 </li>
@@ -4285,6 +4304,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#add-frame" title="Add frame" class="md-nav__link">
+    Add frame
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4366,6 +4392,18 @@
 <li>Get
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">imageData</span> <span class="o">=</span> <span class="nx">texture</span><span class="p">.</span><span class="nx">getData</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
 </pre></div></li>
+</ul>
+<h3 id="add-frame">Add frame<a class="headerlink" href="#add-frame" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">texture</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">sourceIndex</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+</pre></div>
+
+<ul>
+<li><code>name</code> : The name of this Frame. The name is unique within the Texture.</li>
+<li><code>sourceIndex</code> : The index of the TextureSource that this Frame is a part of.</li>
+<li><code>x</code> : The x coordinate of the top-left of this Frame.</li>
+<li><code>y</code> : The y coordinate of the top-left of this Frame.</li>
+<li><code>width</code> : The width of this Frame.</li>
+<li><code>height</code> : The height of this Frame.</li>
 </ul>
                 
                   
