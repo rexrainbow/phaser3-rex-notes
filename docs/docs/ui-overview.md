@@ -105,7 +105,7 @@
     // scene.rexUI.add.edit(textObject, config, onClose);
     ```
 
-### Video
+### Video objects
 
 1. [Video DOM](video.md): Create a video dom to play video.
     ```javascript

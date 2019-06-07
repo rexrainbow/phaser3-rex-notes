@@ -26,6 +26,7 @@ import ScrollablePanelFactory from './scrollablepanel/ScrollablePanelFactory.js'
 import ChartFactory from './chart/ChartFactory.js';
 import VideoFactory from './video/VideoFactory.js';
 import VideoCanvasFactory from './video/VideoCanvasFactory.js';
+import YoutubePlayerFactory from './youtubeplayer/YoutubePlayerFactory.js';
 
 import TapFactory from './tap/TapFactory.js';
 import PressFactory from './press/PressFactory.js';

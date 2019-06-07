@@ -42,7 +42,7 @@ class YoutubePlayer extends BaseClass {
         super(scene, x, y);
         this.type = 'rexYoutubePlayer';
         this.youtubePlayer = undefined;
-        this._videoState = undefined;
+        this.videoState = undefined;
         this.videoId = GetValue(config, 'videoId', '');
         this.loop = GetValue(config, 'loop', false);
         this.paddingCallbacks = [];
@@ -57,11 +57,11 @@ class YoutubePlayer extends BaseClass {
 
         // Create youtube player iframe when API ready
         var playerVars = {
-            autoplay: GetValue(config, 'autoPlay', true),
-            controls: GetValue(config, 'controls', true),
-            showinfo: GetValue(config, 'showInfo', true),
-            disablekb: !GetValue(config, 'keyboardControl', true),
-            modestbranding: GetValue(config, 'ModestBranding', false),
+            autoplay: GetValue(config, 'autoPlay', true) ? 1 : 0,
+            controls: GetValue(config, 'controls', true) ? 1 : 0,
+            showinfo: GetValue(config, 'showInfo', true) ? 1 : 0,
+            disablekb: !GetValue(config, 'keyboardControl', true) ? 1 : 0,
+            modestbranding: GetValue(config, 'ModestBranding', false) ? 1 : 0,
         };
         var onLoad = (function () {
             var youtubePlayer = new YT.Player(
@@ -71,11 +71,14 @@ class YoutubePlayer extends BaseClass {
                     'playerVars': playerVars,
                     'events': {
                         'onStateChange': (function (event) {
-                            this._videoState = event.data;
-                            if ((this._videoState === 0) && this.loop) {
+                            this.videoState = event.data;
+
+                            this.emit('statechange', this);
+                            this.emit(this.videoStateString, this);
+
+                            if ((this.videoState === YT.PlayerState.ENDED) && this.loop) {
                                 this.youtubePlayer.playVideo();
                             }
-                            this.emit('statechange', this);
                         }).bind(this),
                         'onReady': (function (event) {
                             this.youtubePlayer = youtubePlayer;
@@ -97,6 +100,15 @@ class YoutubePlayer extends BaseClass {
         LoadAPI(onLoad);
     }
 
+    preUpdate(time, delta) {
+        //var curT = this.playbackTime;
+        //if (curT !== this.prevT) {
+        //    this.emit('playbacktimechange', this);
+        //}
+        //this.prevT = curT;
+        super.preUpdate(time, delta);
+    }
+
     _runCallback(callback) {
         if (this.youtubePlayer === undefined) {
             this.paddingCallbacks.push(callback);
@@ -105,17 +117,17 @@ class YoutubePlayer extends BaseClass {
         }
     }
 
-    get videoState() {
-        if ((this._videoState === undefined) || (!YT)) {
+    get videoStateString() {
+        if ((this.videoState === undefined) || (!YT)) {
             return '';
         } else {
-            switch (this._videoState) {
-                case -1: return "Unstarted";
-                case YT.PlayerState.ENDED: return "Ended";
-                case YT.PlayerState.PLAYING: return "Playing";
-                case YT.PlayerState.PAUSED: return "Paused";
-                case YT.PlayerState.BUFFERING: return "Buffering";
-                case YT.PlayerState.CUED: return "Video cued";
+            switch (this.videoState) {
+                case -1: return "unstarted";
+                case YT.PlayerState.ENDED: return "ended";
+                case YT.PlayerState.PLAYING: return "playing";
+                case YT.PlayerState.PAUSED: return "pause";
+                case YT.PlayerState.BUFFERING: return "buffering";
+                case YT.PlayerState.CUED: return "cued";
             }
         }
     }
@@ -148,7 +160,7 @@ class YoutubePlayer extends BaseClass {
     }
 
     get isPlaying() {
-        return (this._videoState === 1);
+        return (this.videoState === 1);
     }
 
     pause() {
@@ -156,12 +168,12 @@ class YoutubePlayer extends BaseClass {
             this.youtubePlayer.pauseVideo();
         }).bind(this);
 
-        _runCallback(callback);
+        this._runCallback(callback);
         return this;
     }
 
     get isPaused() {
-        return (this._videoState === 2);
+        return (this.videoState === 2);
     }
 
     get playbackTime() {
@@ -253,6 +265,17 @@ class YoutubePlayer extends BaseClass {
         return this;
     }
 
+    resize(width, height) {
+        if ((this.width === width) && (this.height === height)) {
+            return this;
+        }
+
+        var style = this.node.style;
+        style.width = width + 'px';
+        style.height = height + 'px';
+        this.updateSize();
+        return this;
+    }
 }
 
 export default YoutubePlayer;

@@ -24,6 +24,7 @@ import ScrollablePanel from './scrollablepanel/ScrollablePanel.js';
 import Chart from './chart/Chart.js';
 import Video from './video/Video.js';
 import VideoCanvas from './video/VideoCanvas.js';
+import YoutubePlayer from './youtubeplayer/YoutubePlayer.js';
 
 import Hide from './utils/Hide.js';
 import Show from './utils/Show.js';
@@ -56,6 +57,7 @@ export default {
     Chart: Chart,
     Video: Video,
     VideoCanvas: VideoCanvas,
+    YoutubePlayer: YoutubePlayer,
 
     hide: Hide,
     show: Show,

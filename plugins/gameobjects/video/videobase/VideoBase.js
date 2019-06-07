@@ -29,14 +29,14 @@ var VideoBase = function (GOClass) {
         }
 
         preUpdate(time, delta) {
-            if (super.preUpdate) {
-                super.preUpdate(time, delta);
-            }
             var curT = this.playbackTime;
             if (curT !== this.prevT) {
                 this.emit('playbacktimechange', this);
             }
             this.prevT = curT;
+            if (super.preUpdate) {
+                super.preUpdate(time, delta);
+            }
         }
 
         get availableVideoTypes() {

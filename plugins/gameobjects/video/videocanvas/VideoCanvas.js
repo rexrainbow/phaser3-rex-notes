@@ -69,6 +69,7 @@ class VideoCanvas extends VideoBase(Canvas) {
         if ((this.width === width) && (this.height === height)) {
             return this;
         }
+
         this.video.width = width;
         this.video.height = height;
         super.resize(width, height);

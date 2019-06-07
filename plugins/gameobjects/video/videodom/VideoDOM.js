@@ -45,6 +45,16 @@ class VideoDOM extends VideoBase(GOClass) {
             .load(GetValue(config, 'src', ''));
     }
 
+    resize(width, height) {
+        if ((this.width === width) && (this.height === height)) {
+            return this;
+        }
+
+        this.node.width = width;
+        this.node.height = height;
+        this.updateSize();
+        return this;
+    }
 }
 
 export default VideoDOM;
