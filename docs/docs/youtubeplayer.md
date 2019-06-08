@@ -190,7 +190,7 @@ var duration = player.duration;  // time in seconds
 player.resize(width, height);
 ```
 
-#### Status
+### Status
 
 - Is playing
     ```javascript
@@ -259,5 +259,5 @@ player.resize(width, height);
     player.on('error', function(player, errorMessage){ }, scope);
     ```
 
-!!! warning No `Playback time changed` event
+!!! warning "No `Playback time changed` event"
     Get playback time every tick might cause playing video lagging.

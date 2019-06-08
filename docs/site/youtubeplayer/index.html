@@ -1475,18 +1475,12 @@
     Resize
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
+</li>
         
           <li class="md-nav__item">
   <a href="#status" title="Status" class="md-nav__link">
     Status
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -4423,18 +4417,12 @@
     Resize
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
+</li>
         
           <li class="md-nav__item">
   <a href="#status" title="Status" class="md-nav__link">
     Status
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -4635,7 +4623,7 @@
 <div class="codehilite"><pre><span></span><span class="nx">player</span><span class="p">.</span><span class="nx">resize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
 </pre></div>
 
-<h4 id="status">Status<a class="headerlink" href="#status" title="Permanent link">&para;</a></h4>
+<h3 id="status">Status<a class="headerlink" href="#status" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Is playing
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isPlaying</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">isPlaying</span><span class="p">;</span>
@@ -4694,8 +4682,10 @@
     <div class="codehilite"><pre><span></span><span class="nx">player</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">player</span><span class="p">,</span> <span class="nx">errorMessage</span><span class="p">){</span> <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </pre></div></li>
 </ul>
-<p>!!! warning No <code>Playback time changed</code> event
-    Get playback time every tick might cause playing video lagging.</p>
+<div class="admonition warning">
+<p class="admonition-title">No <code>Playback time changed</code> event</p>
+<p>Get playback time every tick might cause playing video lagging.</p>
+</div>
                 
                   
                 
