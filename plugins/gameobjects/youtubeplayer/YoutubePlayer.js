@@ -59,9 +59,8 @@ class YoutubePlayer extends BaseClass {
         var playerVars = {
             autoplay: GetValue(config, 'autoPlay', true) ? 1 : 0,
             controls: GetValue(config, 'controls', true) ? 1 : 0,
-            showinfo: GetValue(config, 'showInfo', true) ? 1 : 0,
             disablekb: !GetValue(config, 'keyboardControl', true) ? 1 : 0,
-            modestbranding: GetValue(config, 'ModestBranding', false) ? 1 : 0,
+            modestbranding: GetValue(config, 'modestBranding', false) ? 1 : 0,
         };
         var onLoad = (function () {
             var youtubePlayer = new YT.Player(
@@ -151,7 +150,7 @@ class YoutubePlayer extends BaseClass {
     }
 
     get isPlaying() {
-        return (this.videoState === 1);
+        return (this.videoState === 1); // YT.PlayerState.PLAYING
     }
 
     pause() {
@@ -164,7 +163,7 @@ class YoutubePlayer extends BaseClass {
     }
 
     get isPaused() {
-        return (this.videoState === 2);
+        return (this.videoState === 2); // YT.PlayerState.PAUSED
     }
 
     get playbackTime() {
@@ -205,6 +204,10 @@ class YoutubePlayer extends BaseClass {
     setT(value) {
         this.t = value;
         return this;
+    }
+
+    get hasEnded() {
+        return (this.videoState === 0); // YT.PlayerState.ENDED
     }
 
     get volume() {
