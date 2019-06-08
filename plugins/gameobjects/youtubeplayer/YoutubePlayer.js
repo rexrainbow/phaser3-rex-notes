@@ -100,15 +100,6 @@ class YoutubePlayer extends BaseClass {
         LoadAPI(onLoad);
     }
 
-    preUpdate(time, delta) {
-        //var curT = this.playbackTime;
-        //if (curT !== this.prevT) {
-        //    this.emit('playbacktimechange', this);
-        //}
-        //this.prevT = curT;
-        super.preUpdate(time, delta);
-    }
-
     _runCallback(callback) {
         if (this.youtubePlayer === undefined) {
             this.paddingCallbacks.push(callback);

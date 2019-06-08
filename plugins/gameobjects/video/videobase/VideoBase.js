@@ -1,6 +1,7 @@
 import CreateVideoElement from './CreateVideoElement.js';
 import Load from './Load.js';
 
+const GetValue = Phaser.Utils.Objects.GetValue;
 const Clamp = Phaser.Math.Clamp;
 
 var VideoBase = function (GOClass) {
@@ -12,6 +13,7 @@ var VideoBase = function (GOClass) {
                 }
                 config.eventEmitter = this;
                 this.video = CreateVideoElement(config);
+                this.playbackTimeChangeEventEnable = GetValue(config, 'playbackTimeChangeEventEnable', true);
             }
             return this.video;
         }
@@ -29,11 +31,13 @@ var VideoBase = function (GOClass) {
         }
 
         preUpdate(time, delta) {
-            var curT = this.playbackTime;
-            if (curT !== this.prevT) {
-                this.emit('playbacktimechange', this);
+            if (this.playbackTimeChangeEventEnable) {
+                var curT = this.playbackTime;
+                if (curT !== this.prevT) {
+                    this.emit('playbacktimechange', this);
+                }
+                this.prevT = curT;
             }
-            this.prevT = curT;
             if (super.preUpdate) {
                 super.preUpdate(time, delta);
             }
