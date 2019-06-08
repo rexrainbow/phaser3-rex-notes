@@ -128,7 +128,11 @@ Default configuration
         }
         // ...
 
-        // preUpdate(time, delta) {}
+        // preUpdate(time, delta) {
+        //     if (super.preUpdate) {
+        //         super.preUpdate(time, delta)
+        //     }
+        // }
     }
     ```
     - `scene.add.existing(gameObject)` : Adds an existing Game Object to this Scene.

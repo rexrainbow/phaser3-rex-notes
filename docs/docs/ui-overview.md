@@ -139,6 +139,22 @@
         // ...
     }
     ```
+1. [Youtube player](youtubeplayer.md): Play youtube video on iframe.
+    ```javascript
+    var video = scene.rexUI.add.youtubePlayer(x, y, width, height, config);
+    // var video = scene.rexUI.add.youtubePlayer(config);
+    ```
+    or
+    ```javascript
+    class MyVideo extends RexPlugins.UI.YoutubePlayer {
+        constructor(scene, x, y, width, height, config) {
+            super(scene, x, y, width, height, config);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
 
 ### Gestures
 

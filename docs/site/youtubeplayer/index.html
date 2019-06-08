@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/clock/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/youtubeplayer/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Clock - Notes of Phaser 3</title>
+        <title>Youtube player - Notes of Phaser 3</title>
       
     
     
@@ -128,7 +128,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Clock
+                Youtube player
               </span>
             
           
@@ -507,10 +507,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
     
     <label class="md-nav__link" for="nav-4">
       Game object
@@ -1282,10 +1284,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-8" type="checkbox" id="nav-4-8">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-8" type="checkbox" id="nav-4-8" checked>
     
     <label class="md-nav__link" for="nav-4-8">
       DOM element
@@ -1337,11 +1341,175 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../youtubeplayer/" title="Youtube player" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Youtube player
+      </label>
+    
+    <a href="./" title="Youtube player" class="md-nav__link md-nav__link--active">
       Youtube player
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-plugin" title="Install plugin" class="md-nav__link">
+    Install plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-youtube-player-object" title="Add youtube player object" class="md-nav__link">
+    Add youtube player object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-class" title="Custom class" class="md-nav__link">
+    Custom class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#load" title="Load" class="md-nav__link">
+    Load
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#play" title="Play" class="md-nav__link">
+    Play
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pause" title="Pause" class="md-nav__link">
+    Pause
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#playback-time" title="Playback time" class="md-nav__link">
+    Playback time
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#duration" title="Duration" class="md-nav__link">
+    Duration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#volume" title="Volume" class="md-nav__link">
+    Volume
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mute" title="Mute" class="md-nav__link">
+    Mute
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loop" title="Loop" class="md-nav__link">
+    Loop
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resize" title="Resize" class="md-nav__link">
+    Resize
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#status" title="Status" class="md-nav__link">
+    Status
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" title="Events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -3375,12 +3543,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-13" type="checkbox" id="nav-13" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-13" type="checkbox" id="nav-13">
     
     <label class="md-nav__link" for="nav-13">
       Time
@@ -3432,128 +3598,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Clock
-      </label>
-    
-    <a href="./" title="Clock" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../clock/" title="Clock" class="md-nav__link">
       Clock
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#source-code" title="Source code" class="md-nav__link">
-    Source code
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#import-class" title="Import class" class="md-nav__link">
-    Import class
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
-    Install global plugin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#start-counting" title="Start counting" class="md-nav__link">
-    Start counting
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-elapsed-time" title="Get elapsed time" class="md-nav__link">
-    Get elapsed time
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pause-resume-stop-counting" title="Pause, Resume, stop counting" class="md-nav__link">
-    Pause, Resume, stop counting
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#seek-elapsed-time" title="Seek elapsed time" class="md-nav__link">
-    Seek elapsed time
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#state-of-counting" title="State of counting" class="md-nav__link">
-    State of counting
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#time-scale" title="Time-scale" class="md-nav__link">
-    Time-scale
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -4287,64 +4336,111 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#import-class" title="Import class" class="md-nav__link">
-    Import class
+  <a href="#install-plugin" title="Install plugin" class="md-nav__link">
+    Install plugin
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
-    Install global plugin
+  <a href="#add-youtube-player-object" title="Add youtube player object" class="md-nav__link">
+    Add youtube player object
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
+  <a href="#custom-class" title="Custom class" class="md-nav__link">
+    Custom class
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#start-counting" title="Start counting" class="md-nav__link">
-    Start counting
+  <a href="#load" title="Load" class="md-nav__link">
+    Load
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-elapsed-time" title="Get elapsed time" class="md-nav__link">
-    Get elapsed time
+  <a href="#play" title="Play" class="md-nav__link">
+    Play
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#pause-resume-stop-counting" title="Pause, Resume, stop counting" class="md-nav__link">
-    Pause, Resume, stop counting
+  <a href="#pause" title="Pause" class="md-nav__link">
+    Pause
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#seek-elapsed-time" title="Seek elapsed time" class="md-nav__link">
-    Seek elapsed time
+  <a href="#playback-time" title="Playback time" class="md-nav__link">
+    Playback time
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#state-of-counting" title="State of counting" class="md-nav__link">
-    State of counting
+  <a href="#duration" title="Duration" class="md-nav__link">
+    Duration
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#time-scale" title="Time-scale" class="md-nav__link">
-    Time-scale
+  <a href="#volume" title="Volume" class="md-nav__link">
+    Volume
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mute" title="Mute" class="md-nav__link">
+    Mute
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loop" title="Loop" class="md-nav__link">
+    Loop
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resize" title="Resize" class="md-nav__link">
+    Resize
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#status" title="Status" class="md-nav__link">
+    Status
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" title="Events" class="md-nav__link">
+    Events
   </a>
   
 </li>
@@ -4370,38 +4466,36 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/clock.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/youtubeplayer.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Clock</h1>
+                  <h1>Youtube player</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>A clock to count elapsed time.</p>
+<p>Play youtube video on iframe.</p>
 <ul>
 <li>Author: Rex</li>
-<li>Member of scene</li>
+<li><a href="../domelement/">DOM Game object</a></li>
 </ul>
 <h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/clock-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexclockplugin.min.js">minify</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/youtubeplayer-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexyoutubeplayerplugin.min.js">minify</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/youtubeplayer.js">Class</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/clock">Sample code</a></p>
-<p>User could import class directly, or install it by global plugin.</p>
-<h3 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">rexClock</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/clock.js&#39;</span><span class="p">;</span>
-</pre></div>
-
-<h3 id="install-global-plugin">Install global plugin<a class="headerlink" href="#install-global-plugin" title="Permanent link">&para;</a></h3>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/youtubeplayer">Sample code</a></p>
+<h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
 <p>Install plugin in <a href="../game/#configuration">configuration of game</a></p>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">ClockPlugin</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/clock-plugin.js&#39;</span><span class="p">;</span>
-
-<span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
+    <span class="nx">parent</span><span class="o">:</span> <span class="nx">divId</span><span class="p">,</span>
+    <span class="nx">dom</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">createContainer</span><span class="o">:</span> <span class="kc">true</span>
+    <span class="p">},</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
-            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexClock&#39;</span><span class="p">,</span>
-            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">ClockPlugin</span><span class="p">,</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexYoutubePlayerPlugin&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">YoutubePlayerPlugin</span><span class="p">,</span>
             <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
-        <span class="p">}</span>
+        <span class="p">},</span>
         <span class="c1">// ...</span>
         <span class="p">]</span>
     <span class="p">}</span>
@@ -4410,42 +4504,198 @@
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </pre></div>
 
-<h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">clock</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexClock&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="p">{</span>
-    <span class="c1">// timeScale: 1</span>
-<span class="p">});</span>
+<ul>
+<li>Set <code>parent</code> to divId</li>
+<li>Set <code>dom.createContainer</code> to <code>true</code>.</li>
+</ul>
+<h3 id="add-youtube-player-object">Add youtube player object<a class="headerlink" href="#add-youtube-player-object" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Youtube player on DOM
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">player</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexYoutubePlayer</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+<span class="c1">// var player = scene.add.rexYoutubePlayer(x, y, config);</span>
+<span class="c1">// var player = scene.add.rexYoutubePlayer(config);</span>
+</pre></div></li>
+</ul>
+<p>Default configuration</p>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+
+    <span class="nx">videoId</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="nx">autoPlay</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">controls</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">keyboardControl</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">modestBranding</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">loop</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+<span class="p">}</span>
 </pre></div>
 
 <ul>
-<li><code>timeScale</code> : time-scale for counting elapsed time.</li>
+<li><code>x</code>, <code>y</code> : Position</li>
+<li><code>width</code>, <code>height</code> : Size of element</li>
+<li><code>videoId</code> : The YouTube video ID that identifies the video that the player will load.</li>
+<li><code>autoPlay</code> : Automatically start to play when the player loads.</li>
+<li><code>controls</code> : Whether the video player controls are displayed.</li>
+<li><code>keyboardControl</code> : Set <code>false</code> to disable keyboard controls.</li>
+<li><code>modestBranding</code> : Set <code>false</code> to prevent the YouTube logo from displaying in the control bar.</li>
+<li><code>loop</code> : Play video when ended.</li>
 </ul>
-<h3 id="start-counting">Start counting<a class="headerlink" href="#start-counting" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">clock</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
-<span class="c1">// clock.start(startAt);  // start-at time in ms</span>
+<h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Define class
+    <div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">MyYoutubePlayer</span> <span class="kr">extends</span> <span class="nx">YoutubePlayer</span> <span class="p">{</span>  <span class="c1">// or YoutubePlayerCanvas</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// ...</span>
+        <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+
+    <span class="c1">// preUpdate(time, delta) {</span>
+    <span class="c1">//     super.preUpdate(time, delta)</span>
+    <span class="c1">// }</span>
+<span class="p">}</span>
+</pre></div><ul>
+<li><code>scene.add.existing(gameObject)</code> : Adds an existing Game Object to this Scene.<ul>
+<li>If the Game Object renders, it will be added to the Display List.</li>
+<li>If it has a <code>preUpdate</code> method, it will be added to the Update List.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Create instance
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">player</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyYoutubePlayer</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h3 id="load">Load<a class="headerlink" href="#load" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">player</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="nx">videoId</span><span class="p">);</span>
+<span class="c1">// player.load(videoId, autoPlay);</span>
 </pre></div>
 
-<h3 id="get-elapsed-time">Get elapsed time<a class="headerlink" href="#get-elapsed-time" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">now</span> <span class="o">=</span> <span class="nx">clock</span><span class="p">.</span><span class="nx">now</span><span class="p">;</span>  <span class="c1">// elapsed time in ms</span>
+<h3 id="play">Play<a class="headerlink" href="#play" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">player</span><span class="p">.</span><span class="nx">play</span><span class="p">();</span>
 </pre></div>
 
-<h3 id="pause-resume-stop-counting">Pause, Resume, stop counting<a class="headerlink" href="#pause-resume-stop-counting" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">clock</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
-<span class="nx">clock</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
-<span class="nx">clock</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
+<h3 id="pause">Pause<a class="headerlink" href="#pause" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">player</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
 </pre></div>
 
-<h3 id="seek-elapsed-time">Seek elapsed time<a class="headerlink" href="#seek-elapsed-time" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">clock</span><span class="p">.</span><span class="nx">seek</span><span class="p">(</span><span class="nx">time</span><span class="p">);</span>   <span class="c1">// elapsed time in ms</span>
+<h3 id="playback-time">Playback time<a class="headerlink" href="#playback-time" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">playbackTime</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">playbackTime</span><span class="p">;</span> <span class="c1">// time in seconds</span>
+</pre></div>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">t</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">t</span><span class="p">;</span> <span class="c1">// t: 0~1</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">player</span><span class="p">.</span><span class="nx">setPlaybackTime</span><span class="p">(</span><span class="nx">time</span><span class="p">);</span> <span class="c1">// time in seconds</span>
+<span class="c1">// player.playbackTime = time;</span>
+</pre></div>
+    <div class="codehilite"><pre><span></span><span class="nx">player</span><span class="p">.</span><span class="nx">setT</span><span class="p">(</span><span class="nx">t</span><span class="p">);</span> <span class="c1">// t: 0~1</span>
+<span class="c1">// player.t = t;</span>
+</pre></div></li>
+</ul>
+<h3 id="duration">Duration<a class="headerlink" href="#duration" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">duration</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">duration</span><span class="p">;</span>  <span class="c1">// time in seconds</span>
 </pre></div>
 
-<h3 id="state-of-counting">State of counting<a class="headerlink" href="#state-of-counting" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isRunning</span> <span class="o">=</span> <span class="nx">clock</span><span class="p">.</span><span class="nx">isRunning</span><span class="p">;</span>
+<h3 id="volume">Volume<a class="headerlink" href="#volume" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">volume</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">volume</span><span class="p">;</span>  <span class="c1">// volume: 0~1</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">player</span><span class="p">.</span><span class="nx">setVolume</span><span class="p">(</span><span class="nx">volume</span><span class="p">);</span>  <span class="c1">// volume: 0~1</span>
+<span class="c1">// player.volume = volume;</span>
+</pre></div></li>
+</ul>
+<h4 id="mute">Mute<a class="headerlink" href="#mute" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">muted</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">muted</span><span class="p">;</span>  <span class="c1">// muted: true/false</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">player</span><span class="p">.</span><span class="nx">setMute</span><span class="p">(</span><span class="nx">muted</span><span class="p">);</span>  <span class="c1">// muted: true/false</span>
+<span class="c1">// player.muted = muted;</span>
+</pre></div></li>
+</ul>
+<h3 id="loop">Loop<a class="headerlink" href="#loop" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">loop</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">loop</span><span class="p">;</span>  <span class="c1">// loop: true/false</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">player</span><span class="p">.</span><span class="nx">setLoop</span><span class="p">(</span><span class="nx">loop</span><span class="p">);</span>  <span class="c1">// loop: true/false</span>
+<span class="c1">// player.loop = loop;</span>
+</pre></div></li>
+</ul>
+<h3 id="resize">Resize<a class="headerlink" href="#resize" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">player</span><span class="p">.</span><span class="nx">resize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
 </pre></div>
 
-<h3 id="time-scale">Time-scale<a class="headerlink" href="#time-scale" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">timeScale</span> <span class="o">=</span> <span class="nx">clock</span><span class="p">.</span><span class="nx">timeScale</span><span class="p">;</span>
-<span class="nx">clock</span><span class="p">.</span><span class="nx">timeScale</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">;</span>
+<h4 id="status">Status<a class="headerlink" href="#status" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Is playing
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isPlaying</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">isPlaying</span><span class="p">;</span>
+</pre></div></li>
+<li>Is paused
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isPaused</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">isPaused</span><span class="p">;</span>
+</pre></div></li>
+<li>Has end
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">hasEnded</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">hasEnded</span><span class="p">;</span>
+</pre></div></li>
+<li>Video state
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">videoState</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">videoState</span><span class="p">;</span>
 </pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">videoStateString</span> <span class="o">=</span> <span class="nx">player</span><span class="p">.</span><span class="nx">videoStateString</span><span class="p">;</span>
+</pre></div><ul>
+<li><code>-1</code> : <code>unstarted</code></li>
+<li><code>0</code> : <code>ended</code></li>
+<li><code>1</code> : <code>playing</code></li>
+<li><code>2</code> : <code>paused</code></li>
+<li><code>3</code> : <code>buffering</code></li>
+<li><code>5</code> : <code>cued</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Youtube player api ready
+    <div class="codehilite"><pre><span></span><span class="nx">player</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;ready&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">player</span><span class="p">){</span> <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+<li>State change
+    <div class="codehilite"><pre><span></span><span class="nx">player</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;statechange&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">player</span><span class="p">){</span> <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div><ul>
+<li>State : <code>player.videoState</code></li>
+</ul>
+</li>
+<li>Unstarted
+    <div class="codehilite"><pre><span></span><span class="nx">player</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;unstarted&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">player</span><span class="p">){</span> <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+<li>Playing
+    <div class="codehilite"><pre><span></span><span class="nx">player</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;playing&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">player</span><span class="p">){</span> <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+<li>Pause
+    <div class="codehilite"><pre><span></span><span class="nx">player</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pause&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">player</span><span class="p">){</span> <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+<li>Ended
+    <div class="codehilite"><pre><span></span><span class="nx">player</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;ended&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">player</span><span class="p">){</span> <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+<li>Buffering
+    <div class="codehilite"><pre><span></span><span class="nx">player</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;buffering&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">player</span><span class="p">){</span> <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+<li>Video cued
+    <div class="codehilite"><pre><span></span><span class="nx">player</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;cued&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">player</span><span class="p">){</span> <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+<li>Error
+    <div class="codehilite"><pre><span></span><span class="nx">player</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">player</span><span class="p">,</span> <span class="nx">errorMessage</span><span class="p">){</span> <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<p>!!! warning No <code>Playback time changed</code> event
+    Get playback time every tick might cause playing video lagging.</p>
                 
                   
                 
@@ -4466,7 +4716,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../timeline/" title="Timeline" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../video/" title="Video" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -4475,19 +4725,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Timeline
+                Video
               </span>
             </div>
           </a>
         
         
-          <a href="../lifetime/" title="Life time" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../groupactions/" title="Group actions" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Life time
+                Group actions
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

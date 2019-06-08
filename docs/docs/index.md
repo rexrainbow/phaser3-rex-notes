@@ -95,6 +95,7 @@
 1. [Wait events](waitevents.md): Wait fired events or callbacks.
 1. [Webfont-loader](webfontloader.md): Load web font by google webfont loader in preload stage.
 1. [XOR](xor.md): Encrypt or decrypt string by XOR algorithm.
+1. [Youtube player](youtubeplayer.md): Play youtube video on iframe.
 
 ## Links
 
