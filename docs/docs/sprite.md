@@ -112,6 +112,13 @@ See [game object](gameobject.md)
 
 See [Add animation section](animation.md#add-animation).
 
+#### Load animation
+
+```javascript
+sprite.anims.load(key);
+// sprite.anims.load(key, startFrame);
+```
+
 #### Play animation
 
 - Play
@@ -128,11 +135,19 @@ See [Add animation section](animation.md#add-animation).
         ```javascript
         sprite.anims.setCurrentFrame(frame);
         ```
+    - Set playback progress
+        ```javascript
+        sprite.anims.setProgress(t); // t: 0~1
+        ```
 - Play in reverse
     ```javascript
     sprite.anims.playReverse(key);
     // sprite.playReverse(key, ignoreIfPlaying, startFrame);
     ```
+    - Reverse the Animation that is already playing
+        ```javascript
+        sprite.anims.reverse(key);
+        ```
 - Chain next animation
     ```javascript
     sprite.anims.chain(key);

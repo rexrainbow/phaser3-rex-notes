@@ -83,6 +83,7 @@ Default configuration
     muted: false,
     playsInline: true,
     crossOrigin: 'anonymous',
+    playbackTimeChangeEventEnable: true,
 }
 ```
 
@@ -103,6 +104,7 @@ Default configuration
     - `muted` : `muted` element property.
     - `playsInline` : `playsInline` element property.
     - `crossOrigin` : `crossOrigin` element property.
+- `playbackTimeChangeEventEnable` : Set `false` to disable `playbacktimechange` event.
 
 #### Different between rexVideo and rexVideoCanvas
 
@@ -292,3 +294,4 @@ video.resize(width, height);
     ```javascript
     video.on('playbacktimechange', function(video){ }, scope);
     ```
+    - Set `playbackTimeChangeEventEnable` to `true` to enable this event.

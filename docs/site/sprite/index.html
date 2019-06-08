@@ -684,6 +684,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#load-animation" title="Load animation" class="md-nav__link">
+    Load animation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#play-animation" title="Play animation" class="md-nav__link">
     Play animation
   </a>
@@ -4363,6 +4370,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#load-animation" title="Load animation" class="md-nav__link">
+    Load animation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#play-animation" title="Play animation" class="md-nav__link">
     Play animation
   </a>
@@ -4548,6 +4562,11 @@
 <h3 id="animation">Animation<a class="headerlink" href="#animation" title="Permanent link">&para;</a></h3>
 <h4 id="create-animation">Create animation<a class="headerlink" href="#create-animation" title="Permanent link">&para;</a></h4>
 <p>See <a href="../animation/#add-animation">Add animation section</a>.</p>
+<h4 id="load-animation">Load animation<a class="headerlink" href="#load-animation" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">sprite</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+<span class="c1">// sprite.anims.load(key, startFrame);</span>
+</pre></div>
+
 <h4 id="play-animation">Play animation<a class="headerlink" href="#play-animation" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Play
@@ -4561,12 +4580,20 @@
 <li>Set current frame
     <div class="codehilite"><pre><span></span><span class="nx">sprite</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">setCurrentFrame</span><span class="p">(</span><span class="nx">frame</span><span class="p">);</span>
 </pre></div></li>
+<li>Set playback progress
+    <div class="codehilite"><pre><span></span><span class="nx">sprite</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">setProgress</span><span class="p">(</span><span class="nx">t</span><span class="p">);</span> <span class="c1">// t: 0~1</span>
+</pre></div></li>
 </ul>
 </li>
 <li>Play in reverse
     <div class="codehilite"><pre><span></span><span class="nx">sprite</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">playReverse</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 <span class="c1">// sprite.playReverse(key, ignoreIfPlaying, startFrame);</span>
+</pre></div><ul>
+<li>Reverse the Animation that is already playing
+    <div class="codehilite"><pre><span></span><span class="nx">sprite</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">reverse</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </pre></div></li>
+</ul>
+</li>
 <li>Chain next animation
     <div class="codehilite"><pre><span></span><span class="nx">sprite</span><span class="p">.</span><span class="nx">anims</span><span class="p">.</span><span class="nx">chain</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </pre></div><ul>

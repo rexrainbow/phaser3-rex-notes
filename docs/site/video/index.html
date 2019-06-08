@@ -4560,6 +4560,7 @@
     <span class="nx">muted</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="nx">playsInline</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
     <span class="nx">crossOrigin</span><span class="o">:</span> <span class="s1">&#39;anonymous&#39;</span><span class="p">,</span>
+    <span class="nx">playbackTimeChangeEventEnable</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -4587,6 +4588,7 @@
 <li><code>crossOrigin</code> : <code>crossOrigin</code> element property.</li>
 </ul>
 </li>
+<li><code>playbackTimeChangeEventEnable</code> : Set <code>false</code> to disable <code>playbacktimechange</code> event.</li>
 </ul>
 <h4 id="different-between-rexvideo-and-rexvideocanvas">Different between rexVideo and rexVideoCanvas<a class="headerlink" href="#different-between-rexvideo-and-rexvideocanvas" title="Permanent link">&para;</a></h4>
 <ul>
@@ -4755,7 +4757,10 @@
 </pre></div></li>
 <li>Playback time changed
     <div class="codehilite"><pre><span></span><span class="nx">video</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;playbacktimechange&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">video</span><span class="p">){</span> <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</pre></div></li>
+</pre></div><ul>
+<li>Set <code>playbackTimeChangeEventEnable</code> to <code>true</code> to enable this event.</li>
+</ul>
+</li>
 </ul>
                 
                   
