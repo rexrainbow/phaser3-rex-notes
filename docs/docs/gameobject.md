@@ -435,6 +435,14 @@ gameObject.once('destroy', function(gameObject) {
         //         super.preUpdate(time, delta);
         //     }
         // }
+
+        // destroy(fromScene) {
+        //     //  This Game Object has already been destroyed
+        //     if (!this.scene) {
+        //         return;
+        //     }
+        //     super.destroy(fromScene);            
+        // }
     }
     ```
     - `scene.add.existing(gameObject)` : Adds an existing Game Object to this Scene.
