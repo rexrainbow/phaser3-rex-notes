@@ -194,4 +194,4 @@ Global [scene manager](scenemanager.md) in `game.scene`, or `scene.scene` in eac
 
 ### Global data
 
-Insatance of [data manager](datamanager.md) in `game.registry`, or `scene.registry` in each scene.
+Instance of [data manager](datamanager.md) in `game.registry`, or `scene.registry` in each scene.
