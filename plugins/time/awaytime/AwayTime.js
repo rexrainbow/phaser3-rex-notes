@@ -32,9 +32,7 @@ class AwayTime {
     }
 
     start() {
-        if (this.state === UPDATING) {
-            return this;
-        }
+        this.stop();
         this.updateTime();
         this.timer = setInterval(this.updateTime.bind(this), this.period);
         this.state = UPDATING;

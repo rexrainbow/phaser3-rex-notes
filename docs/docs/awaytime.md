@@ -44,7 +44,9 @@ var config = {
 var game = new Phaser.Game(config);
 ```
 
-### Get away-time
+### Default away-timer
+
+#### Get away-time
 
 ```javascript
 var awayTime = scene.plugins.get('rexAwayTime').awayTime;
@@ -58,7 +60,7 @@ var awayTime = scene.plugins.get('rexAwayTime').awayTime;
 !!! note
     This action also starts saving current time-stamp periodically into localstorage.
 
-### Set key
+#### Set key
 
 ```javascript
 scene.plugins.get('rexAwayTime').setKey(key);
@@ -66,7 +68,7 @@ scene.plugins.get('rexAwayTime').setKey(key);
 
 - `key` : Save curent time-stamp in key of [localstorage](localstorage.md)
 
-### Set period
+#### Set period
 
 ```javascript
 scene.plugins.get('rexAwayTime').setPeriod(time);
