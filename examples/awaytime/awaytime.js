@@ -12,10 +12,11 @@ class Demo extends Phaser.Scene {
 
     create() {
         var awaytime = this.plugins.get('rexAwayTime').awayTime;
-        this.add.text(0, 0, awaytime);
+        // var awaytime = this.plugins.get('rexAwayTime').setKey('app0').awayTime;
+        this.add.text(0, 0, `${awaytime / 1000} seconds`);
     }
 
-    update() {}
+    update() { }
 }
 
 var config = {

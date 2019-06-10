@@ -16,14 +16,23 @@ class AwayTimePlugin extends Phaser.Plugins.BasePlugin {
         super.destroy();
     }
 
-    get awayTime() {
-        return this._awayTime.awayTime;
-    }
-
     add(config) {
         return new AwayTime(config);
     }
 
+    get awayTime() {
+        return this._awayTime.awayTime;
+    }
+
+    setKey(key) {
+        this._awayTime.setKey(key);
+        return this;
+    }
+
+    setPeriod(time) {
+        this._awayTime.setPeriod(time);
+        return this;
+    }
 }
 
 export default AwayTimePlugin;

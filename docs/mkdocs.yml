@@ -217,6 +217,7 @@ nav:
     - Timeline: timeline.md    
     - Clock: clock.md
     - Life time: lifetime.md
+    - Away time: awaytime.md
 - UI:
     - Overview: ui-overview.md
     - Sizer: ui-sizer.md

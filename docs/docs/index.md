@@ -6,6 +6,7 @@
 
 1. [Anchor](anchor.md): Set position based on visible window.
 1. [AwaitLoader](awaitloader.md): Await custom task in preload stage.
+1. [Away time](awaytime.md): Get time from previous closing application to now.
 1. [BBCodeText](bbcodetext.md): Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
 1. [Board](board.md): Core object of Board system.
 1. [Board/Field of view](board-fieldofview.md): Visible testing, to find field of view.

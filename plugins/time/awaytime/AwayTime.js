@@ -3,8 +3,8 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 class AwayTime {
     constructor(config) {
         this.state = IDLE;
-        this.key = GetValue(config, 'key', 'away');
-        this.period = GetValue(config, 'period', 1000);
+        this.setKey(GetValue(config, 'key', 'away'));
+        this.setPeriod(GetValue(config, 'period', 1000));
     }
 
     destroy() {
@@ -12,14 +12,18 @@ class AwayTime {
     }
 
     get awayTime() {
-        var prevTime = parseInt(localStorage.getItem(this.key));
+        var prevTime = localStorage.getItem(this.key);
+        this.start();
+        if (prevTime == null) {
+            return 0;
+        }
+        prevTime = parseInt(prevTime);
         var curTime = this.curTime;
         if ((prevTime < 0) || (prevTime > curTime)) {
             return 0;
         }
         // console.log(new Date(prevTime).toLocaleString());
-        // console.log(new Date(curTime).toLocaleString());
-        this.start();
+        // console.log(new Date(curTime).toLocaleString());        
         return curTime - prevTime;
     }
 
@@ -31,6 +35,7 @@ class AwayTime {
         if (this.state === UPDATING) {
             return this;
         }
+        this.updateTime();
         this.timer = setInterval(this.updateTime.bind(this), this.period);
         this.state = UPDATING;
         return this;
@@ -48,6 +53,16 @@ class AwayTime {
 
     updateTime() {
         localStorage.setItem(this.key, this.curTime);
+        return this;
+    }
+
+    setKey(key) {
+        this.key = key;
+        return this;
+    }
+
+    setPeriod(time) {
+        this.period = time;
         return this;
     }
 }
