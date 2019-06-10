@@ -87,6 +87,7 @@ module.exports = {
         // time
         'clockplugin': './plugins/clock-plugin.js',
         'lifetimeplugin': './plugins/lifetime-plugin.js',
+        'awaytimeplugin': './plugins/awaytime-plugin.js',
 
         // data structure
         'csvtoarrayplugin': './plugins/csvtoarray-plugin.js',

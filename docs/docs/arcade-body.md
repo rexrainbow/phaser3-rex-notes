@@ -391,11 +391,12 @@ var hit = body.hitTest(x, y);
 
 #### World bounds
 
+- [World bounds](arcade-world.md#world-bounds)
 - Enable
     ```javascript
     body.setCollideWorldBounds();
     ```
-- Disable (default))
+- Disable (default)
     ```javascript
     body.setCollideWorldBounds(false);
     ```
