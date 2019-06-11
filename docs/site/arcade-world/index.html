@@ -4739,7 +4739,7 @@
     <span class="c1">// ...</span>
 <span class="p">}</span>
 </pre></div></li>
-<li><code>processCallback</code> : Fired when gameObject1 intersects gameObject2
+<li><code>processCallback</code> : Fired when gameObject1 intersects gameObject2, optional.
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">processCallback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">gameObject1</span><span class="p">,</span> <span class="nx">gameObject2</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>  <span class="c1">// return false will discard remaining collision checking</span>
 <span class="p">}</span>
@@ -4750,6 +4750,12 @@
 </li>
 <li>Remove collider
     <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">physics</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">removeCollider</span><span class="p">(</span><span class="nx">collider</span><span class="p">);</span>
+</pre></div></li>
+<li>Deactivate collider
+    <div class="codehilite"><pre><span></span><span class="nx">collider</span><span class="p">.</span><span class="nx">active</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>  <span class="c1">// Set true to activate again</span>
+</pre></div></li>
+<li>Name of collider (unused by engine)
+    <div class="codehilite"><pre><span></span><span class="nx">collider</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
 </pre></div></li>
 </ul>
 <h4 id="testing-wo-collider">Testing wo collider<a class="headerlink" href="#testing-wo-collider" title="Permanent link">&para;</a></h4>

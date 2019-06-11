@@ -1289,19 +1289,6 @@
     Add group object
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#configuration" title="Configuration" class="md-nav__link">
-    Configuration
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
           <li class="md-nav__item">
@@ -1343,19 +1330,6 @@
   <a href="#create-game-objects" title="Create game objects" class="md-nav__link">
     Create game objects
   </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#configuration_1" title="Configuration" class="md-nav__link">
-    Configuration
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -4303,19 +4277,6 @@
     Add group object
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#configuration" title="Configuration" class="md-nav__link">
-    Configuration
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
           <li class="md-nav__item">
@@ -4358,19 +4319,6 @@
     Create game objects
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#configuration_1" title="Configuration" class="md-nav__link">
-    Configuration
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
       </ul>
@@ -4400,30 +4348,51 @@
                   <h1>Group</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Container of game objects, built-in game object of phaser.</p>
+<p>Objects pool, built-in game object of phaser.</p>
 <ul>
 <li>Author: Richard Davey</li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <h3 id="add-group-object">Add group object<a class="headerlink" href="#add-group-object" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">group</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">group</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-<span class="c1">// var group = scene.add.group(gameObjects, config);  // add game objects into group</span>
+<span class="c1">// var group = scene.add.group(gameObjects, config);  // Add game objects into group</span>
 </pre></div>
 
-<h4 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="p">{</span>
+<ul>
+<li><code>config</code>
+    <div class="codehilite"><pre><span></span><span class="p">{</span>
     <span class="nx">classType</span><span class="o">:</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">GameObjects</span><span class="p">.</span><span class="nx">Sprite</span><span class="p">,</span>
     <span class="nx">defaultKey</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="nx">defaultFrame</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="nx">active</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
     <span class="nx">maxSize</span><span class="o">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
-    <span class="nx">runChildUpdate</span><span class="o">:</span> <span class="kc">false</span>    <span class="c1">// run gameObject.update() if true</span>
+    <span class="nx">runChildUpdate</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="nx">createCallback</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="nx">removeCallback</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="nx">createMultipleCallback</span><span class="o">:</span> <span class="kc">null</span>
 <span class="p">}</span>
-</pre></div>
-
+</pre></div><ul>
+<li><code>classType</code> :<ul>
+<li><a href="../sprite/">Sprite</a> : <code>Phaser.GameObjects.Sprite</code></li>
+<li><a href="../image/">Image</a> : <code>Phaser.GameObjects.Image</code></li>
+</ul>
+</li>
+<li><code>runChildUpdate</code> : Set <code>true</code> to run <code>gameObject.update()</code> every tick.</li>
+<li><code>createCallback</code> : A function to be called when adding or creating group members.
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">}</span>
+</pre></div></li>
+<li><code>removeCallback</code> : A function to be called when removing group members.
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">}</span>
+</pre></div></li>
+<li><code>createMultipleCallback</code> : A function to be called when creating several group members at once.
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">}</span>
+</pre></div></li>
+</ul>
+</li>
+</ul>
 <h3 id="add-game-object">Add game object<a class="headerlink" href="#add-game-object" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="nx">group</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
 <span class="c1">// group.add(gameObject, true);  // add this game object to display and update list of scene</span>
@@ -4445,28 +4414,19 @@
 </pre></div>
 
 <h3 id="get-game-objects">Get game objects<a class="headerlink" href="#get-game-objects" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gameObjects</span> <span class="o">=</span> <span class="nx">group</span><span class="p">.</span><span class="nx">getChildren</span><span class="p">();</span>  <span class="c1">// array of game objects</span>
-</pre></div>
-
 <ul>
-<li>
-<p>Amount of game objects.</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">len</span> <span class="o">=</span> <span class="nx">group</span><span class="p">.</span><span class="nx">getLength</span><span class="p">();</span>
-</pre></div>
-
-</li>
-<li>
-<p>Group is full. Maximun size is set in <a href="./#configuration"><code>maxSize</code></a>.</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isFull</span> <span class="o">=</span> <span class="nx">group</span><span class="p">.</span><span class="nx">isFull</span><span class="p">();</span>
-</pre></div>
-
-</li>
-<li>
-<p>Game object is in group.</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isInGroup</span> <span class="o">=</span> <span class="nx">group</span><span class="p">.</span><span class="nx">contains</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
-</pre></div>
-
-</li>
+<li>Get all game objects.
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gameObjects</span> <span class="o">=</span> <span class="nx">group</span><span class="p">.</span><span class="nx">getChildren</span><span class="p">();</span>  <span class="c1">// array of game objects</span>
+</pre></div></li>
+<li>Amount of game objects.
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">len</span> <span class="o">=</span> <span class="nx">group</span><span class="p">.</span><span class="nx">getLength</span><span class="p">();</span>
+</pre></div></li>
+<li>Group is full. Maximun size is set in <a href="./#configuration"><code>maxSize</code></a>.
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isFull</span> <span class="o">=</span> <span class="nx">group</span><span class="p">.</span><span class="nx">isFull</span><span class="p">();</span>
+</pre></div></li>
+<li>Game object is in group.
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isInGroup</span> <span class="o">=</span> <span class="nx">group</span><span class="p">.</span><span class="nx">contains</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
+</pre></div></li>
 </ul>
 <h3 id="group-actions">Group actions<a class="headerlink" href="#group-actions" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="nx">group</span><span class="p">.</span><span class="nx">playAnimation</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">startFrame</span><span class="p">);</span>
@@ -4479,40 +4439,60 @@
 </pre></div>
 
 <h3 id="activeinactive-game-objects">Active/inactive game objects<a class="headerlink" href="#activeinactive-game-objects" title="Permanent link">&para;</a></h3>
-<p>Amount of active/inactive game objects</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">activeCount</span> <span class="o">=</span> <span class="nx">group</span><span class="p">.</span><span class="nx">countActive</span><span class="p">();</span>
-<span class="c1">// var inactiveCount = group.countActive(false);  // get amount of inactive game objects</span>
-</pre></div>
-
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">activeCount</span> <span class="o">=</span> <span class="nx">group</span><span class="p">.</span><span class="nx">getTotalUsed</span><span class="p">();</span>        <span class="c1">// equal to group.countActive()</span>
-<span class="kd">var</span> <span class="nx">freeCount</span> <span class="o">=</span> <span class="nx">group</span><span class="p">.</span><span class="nx">getTotalFree</span><span class="p">();</span>          <span class="c1">// group.maxSize - group.getTotalUsed()</span>
-</pre></div>
-
-<div class="codehilite"><pre><span></span><span class="nx">group</span><span class="p">.</span><span class="nx">kill</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>         <span class="c1">// gameObject.setActive(false)</span>
+<ul>
+<li>Set inactive
+    <div class="codehilite"><pre><span></span><span class="nx">group</span><span class="p">.</span><span class="nx">kill</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>         <span class="c1">// gameObject.setActive(false)</span>
 <span class="nx">group</span><span class="p">.</span><span class="nx">killAndHide</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>  <span class="c1">// gameObject.setActive(false).setVisible(false)</span>
+</pre></div></li>
+<li>Amount of active game objects
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">activeCount</span> <span class="o">=</span> <span class="nx">group</span><span class="p">.</span><span class="nx">countActive</span><span class="p">();</span>
 </pre></div>
-
-<p>Get first active/inactive game object, create one if <code>createIfNull</code> is <code>true</code></p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">group</span><span class="p">.</span><span class="nx">getFirst</span><span class="p">(</span><span class="nx">active</span><span class="p">,</span> <span class="nx">createIfNull</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">visible</span><span class="p">);</span>  <span class="c1">// active = true/false</span>
-<span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">group</span><span class="p">.</span><span class="nx">getFirstAlive</span><span class="p">(</span><span class="nx">createIfNull</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">visible</span><span class="p">);</span> <span class="c1">// equal to group.getFirst(true, ...)</span>
-<span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">group</span><span class="p">.</span><span class="nx">getFirstDead</span><span class="p">(</span><span class="nx">createIfNull</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">visible</span><span class="p">);</span> <span class="c1">// equal to group.getFirst(false, ...)</span>
-<span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">group</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">visible</span><span class="p">);</span> <span class="c1">// equal to group.getFirst(false, true, ...)</span>
-</pre></div>
-
+    or
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">activeCount</span> <span class="o">=</span> <span class="nx">group</span><span class="p">.</span><span class="nx">getTotalUsed</span><span class="p">();</span>
+</pre></div></li>
+<li>Amount of active game objects
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">inactiveCount</span> <span class="o">=</span> <span class="nx">group</span><span class="p">.</span><span class="nx">countActive</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</pre></div></li>
+<li>Amount of free (maxSize - activeCount) game objects
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">freeCount</span> <span class="o">=</span> <span class="nx">group</span><span class="p">.</span><span class="nx">getTotalFree</span><span class="p">();</span>  <span class="c1">// group.maxSize - group.getTotalUsed()</span>
+</pre></div></li>
+<li>Get first active/inactive game object,<ul>
+<li>Return <code>null</code> if no game object picked.
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">group</span><span class="p">.</span><span class="nx">getFirst</span><span class="p">(</span><span class="nx">active</span><span class="p">);</span>  <span class="c1">// active = true/false</span>
+<span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">group</span><span class="p">.</span><span class="nx">getFirstAlive</span><span class="p">();</span> <span class="c1">// Equal to group.getFirst(true, ...)</span>
+<span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">group</span><span class="p">.</span><span class="nx">getFirstDead</span><span class="p">();</span> <span class="c1">// Equal to group.getFirst(false, ...)</span>
+</pre></div></li>
+<li>Create one if no game object picked.
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">group</span><span class="p">.</span><span class="nx">getFirst</span><span class="p">(</span><span class="nx">active</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">visible</span><span class="p">);</span>  <span class="c1">// active = true/false</span>
+<span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">group</span><span class="p">.</span><span class="nx">getFirstAlive</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">visible</span><span class="p">);</span> <span class="c1">// Equal to group.getFirst(true, ...)</span>
+<span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">group</span><span class="p">.</span><span class="nx">getFirstDead</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">visible</span><span class="p">);</span> <span class="c1">// Equal to group.getFirst(false, ...)</span>
+<span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">group</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="nx">visible</span><span class="p">);</span> <span class="c1">// Equal to group.getFirst(false, true, ...)</span>
+</pre></div><ul>
+<li>Use (<code>x</code>, <code>y</code>, <code>key</code>, <code>frame</code>) to create <a href="../image/">Image</a>/<a href="../sprite/">Sprite</a> game object.
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">newGameObject</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">GameObjectClass</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h3 id="create-game-objects">Create game objects<a class="headerlink" href="#create-game-objects" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gameObjects</span> <span class="o">=</span> <span class="nx">group</span><span class="p">.</span><span class="nx">createFromConfig</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">gameObjects</span> <span class="o">=</span> <span class="nx">group</span><span class="p">.</span><span class="nx">createMultiple</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>    <span class="c1">// config in array</span>
 </pre></div>
 
-<h4 id="configuration_1">Configuration<a class="headerlink" href="#configuration_1" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="p">{</span>
+<ul>
+<li><code>config</code>
+    <div class="codehilite"><pre><span></span><span class="p">{</span>
     <span class="nx">classType</span><span class="o">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">classType</span><span class="p">,</span>
-    <span class="nx">key</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>             <span class="c1">// required</span>
+    <span class="nx">key</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>             <span class="c1">// Required</span>
     <span class="nx">frame</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="nx">visible</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
     <span class="nx">active</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="nx">repeat</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>                  <span class="c1">// create (1 + repeat) game objects</span>
+    <span class="nx">repeat</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>                  <span class="c1">// Create (1 + repeat) game objects</span>
+    <span class="nx">createCallback</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>  <span class="c1">// Override this.createCallback if not undefined</span>
 
+    <span class="c1">// Position</span>
     <span class="nx">setXY</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">x</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span>
         <span class="nx">y</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span>
@@ -4520,32 +4500,7 @@
         <span class="nx">stepY</span><span class="o">:</span><span class="mi">0</span>
     <span class="p">},</span>
     <span class="c1">// Actions.SetXY(gameObjects, x, y, stepX, stepY)</span>
-
-    <span class="nx">setRotation</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">value</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">step</span><span class="o">:</span>
-    <span class="p">},</span>
-    <span class="c1">// Actions.SetRotation(gameObjects, value, step)</span>
-
-    <span class="nx">setScale</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">x</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span>
-        <span class="nx">y</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span>
-        <span class="nx">stepX</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span>
-        <span class="nx">stepY</span><span class="o">:</span><span class="mi">0</span>
-    <span class="p">},</span>
-    <span class="c1">// Actions.SetScale(gameObjects, x, y, stepX, stepY)</span>
-
-    <span class="nx">setAlpha</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">value</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">step</span><span class="o">:</span>
-    <span class="p">},</span>
-    <span class="c1">// Actions.SetAlpha(gameObjects, value, step)</span>
-
-    <span class="nx">hitArea</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="nx">hitAreaCallback</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
-    <span class="c1">// Actions.SetHitArea(gameObjects, hitArea, hitAreaCallback);</span>
-
-    <span class="nx">gridAlign</span><span class="o">:</span> <span class="kc">false</span>
+    <span class="nx">gridAlign</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="c1">// {</span>
     <span class="c1">//     width: -1,</span>
     <span class="c1">//     height: -1,</span>
@@ -4555,8 +4510,45 @@
     <span class="c1">//     x: 0,</span>
     <span class="c1">//     y: 0</span>
     <span class="c1">// }</span>
+    <span class="c1">// Actions.GridAlign(gameObjects, gridAlign)</span>
+
+    <span class="c1">// Angle</span>
+    <span class="nx">setRotation</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">value</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">step</span><span class="o">:</span>
+    <span class="p">},</span>
+    <span class="c1">// Actions.SetRotation(gameObjects, value, step)</span>
+
+    <span class="c1">// Scale</span>
+    <span class="nx">setScale</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">x</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span>
+        <span class="nx">y</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span>
+        <span class="nx">stepX</span><span class="o">:</span><span class="mi">0</span><span class="p">,</span>
+        <span class="nx">stepY</span><span class="o">:</span><span class="mi">0</span>
+    <span class="p">},</span>
+    <span class="c1">// Actions.SetScale(gameObjects, x, y, stepX, stepY)</span>
+
+    <span class="c1">// Alpha</span>
+    <span class="nx">setAlpha</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">value</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">step</span><span class="o">:</span>
+    <span class="p">},</span>
+    <span class="c1">// Actions.SetAlpha(gameObjects, value, step)</span>
+
+    <span class="c1">// Input</span>
+    <span class="nx">hitArea</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="nx">hitAreaCallback</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+    <span class="c1">// Actions.SetHitArea(gameObjects, hitArea, hitAreaCallback)</span>
 <span class="p">}</span>
-</pre></div>
+</pre></div><ul>
+<li><code>classType</code> :<ul>
+<li><a href="../sprite/">Sprite</a>: <code>Phaser.GameObjects.Sprite</code></li>
+<li><a href="../image/">Image</a>: <code>Phaser.GameObjects.Image</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
                 
                   
                 
