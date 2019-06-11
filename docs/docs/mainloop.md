@@ -8,19 +8,19 @@
         }, scope);
         ```
 1.  Update the Scene Manager and all active Scenes
-    1.  scene.sys.events `preupdate` event
+    1.  scene.events `preupdate` event
         - Register event
             ```javascript
-            scene.sys.events.on('preupdate', function(time, delta){
+            scene.events.on('preupdate', function(time, delta){
                 //
             }, scope);
             ```
         - TweenManager.preUpdate() to arrange active targets
         - UpdateList.preUpdate(), to arrange game objects in UpdateList
-    1.  scene.sys.events `update` event
+    1.  scene.events `update` event
         - Register event
             ```javascript
-            scene.sys.events.on('update', function(time, delta){
+            scene.events.on('update', function(time, delta){
                 //
             }, scope);
             ```
@@ -28,10 +28,10 @@
         - UpdateList.update
             - gameObject.preUpdate
     1. scene.update()
-    1. scene.sys.events `postupdate` event
+    1. scene.events `postupdate` event
         - Register event
             ```javascript
-            scene.sys.events.on('postupdate', function(time, delta){
+            scene.events.on('postupdate', function(time, delta){
                 //
             }, scope);
             ```
@@ -53,7 +53,7 @@
 1. SceneManager.render()
     1. Sort display list
     1. Render cameras
-    1. scene.sys.events `render` event
+    1. scene.events `render` event
         - Register event
             ```javascript
             scene.game.events.on('render', function(renderer){
@@ -112,14 +112,14 @@ GameEventPostRender --> GameEventPreStep
 graph TB
 
 subgraph Render
-SceneEventRender>"scene.sys.events: render"]
+SceneEventRender>"scene.events: render"]
 end
 
 subgraph Update
-SceneEventPreUpdate>"scene.sys.events: preupdate<br><br>TweenManager.preUpdate()<br>UpdateList.preUpdate()"]
-SceneEventUpdate>"scene.sys.events: update<br><br>TweenManager.update()<br>UpdateList.update()<br>gameObject.preUpdate()"]
+SceneEventPreUpdate>"scene.events: preupdate<br><br>TweenManager.preUpdate()<br>UpdateList.preUpdate()"]
+SceneEventUpdate>"scene.events: update<br><br>TweenManager.update()<br>UpdateList.update()<br>gameObject.preUpdate()"]
 SceneUpdate["scene.update()"]
-SceneEventPostUpdate>"scene.sys.events: postupdate"]
+SceneEventPostUpdate>"scene.events: postupdate"]
 end
 
 

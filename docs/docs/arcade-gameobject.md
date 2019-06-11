@@ -88,7 +88,10 @@ Arcade physics Image/Sprite/Group object.
 - Disable body
     ```javascript
     gameObject.disableBody();
+    // gameObject.disableBody(disableGameObject, hideGameObject);
     ```
+    - `disableGameObject` : Also deactivate this Game Object.
+    - `hideGameObject` : Also hide this Game Object.
   
 ### Movement
 

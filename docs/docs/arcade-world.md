@@ -121,7 +121,7 @@ See bound in [body object](arcade-body.md#collision-bound), or [game object](arc
                 // ...
             }
             ```
-        - `processCallback` : Fired when gameObject1 intersects gameObject2
+        - `processCallback` : Fired when gameObject1 intersects gameObject2, optional.
             ```javascript
             var processCallback = function(gameObject1, gameObject2) {
                 return true;  // return false will discard remaining collision checking
@@ -130,6 +130,14 @@ See bound in [body object](arcade-body.md#collision-bound), or [game object](arc
 - Remove collider
     ```javascript
     scene.physics.world.removeCollider(collider);
+    ```
+- Deactivate collider
+    ```javascript
+    collider.active = false;  // Set true to activate again
+    ```
+- Name of collider (unused by engine)
+    ```javascript
+    collider.name = name;
     ```
 
 #### Testing wo collider

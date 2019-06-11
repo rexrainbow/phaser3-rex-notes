@@ -24,7 +24,7 @@ Arcade physics body.
         - `gameObjects` : An array of game objects, or a group object
         - `isStatic` :
             - `0` : Dynamic body
-            - `1` : Static body 
+            - `1` : Static body
 1. Get physics body
     ```javascript
     var body = gameObject.body;
@@ -72,6 +72,10 @@ Whether the Body's position and rotation are affected by its velocity, accelerat
 
 !!! note "Use case"
     Set `body.moves` to `false` when game object is controlled by tween or dragging.
+
+### Destroy
+
+Physics body will be destroyed automatically when game object is destroyed.
 
 ### Movement
 

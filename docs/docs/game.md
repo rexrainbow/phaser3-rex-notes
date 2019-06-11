@@ -82,7 +82,7 @@ or
         },
         smoothFactor: 0,
         gamepad: false,
-        windowEvents: true,        
+        windowEvents: true,
     },
 
     backgroundColor: 0,

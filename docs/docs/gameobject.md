@@ -441,7 +441,7 @@ gameObject.once('destroy', function(gameObject) {
         //     if (!this.scene) {
         //         return;
         //     }
-        //     super.destroy(fromScene);            
+        //     super.destroy(fromScene);
         // }
     }
     ```

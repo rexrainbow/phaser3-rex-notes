@@ -1,6 +1,6 @@
 ## Introduction
 
-Container of game objects, built-in game object of phaser.
+Objects pool, built-in game object of phaser.
 
 - Author: Richard Davey
 
@@ -10,24 +10,42 @@ Container of game objects, built-in game object of phaser.
 
 ```javascript
 var group = scene.add.group(config);
-// var group = scene.add.group(gameObjects, config);  // add game objects into group
+// var group = scene.add.group(gameObjects, config);  // Add game objects into group
 ```
 
-#### Configuration
-
-```javascript
-{
-    classType: Phaser.GameObjects.Sprite,
-    defaultKey: null,
-    defaultFrame: null,
-    active: true,
-    maxSize: -1,
-    runChildUpdate: false    // run gameObject.update() if true
-    createCallback: null,
-    removeCallback: null,
-    createMultipleCallback: null
-}
-```
+- `config`
+    ```javascript
+    {
+        classType: Phaser.GameObjects.Sprite,
+        defaultKey: null,
+        defaultFrame: null,
+        active: true,
+        maxSize: -1,
+        runChildUpdate: false,
+        createCallback: null,
+        removeCallback: null,
+        createMultipleCallback: null
+    }
+    ```
+    - `classType` :
+        - [Sprite](sprite.md) : `Phaser.GameObjects.Sprite`
+        - [Image](image.md) : `Phaser.GameObjects.Image`
+    - `runChildUpdate` : Set `true` to run `gameObject.update()` every tick.
+    - `createCallback` : A function to be called when adding or creating group members.
+        ```javascript
+        var callback = function(gameObject) {
+        }
+        ```
+    - `removeCallback` : A function to be called when removing group members.
+        ```javascript
+        var callback = function(gameObject) {
+        }
+        ```
+    - `createMultipleCallback` : A function to be called when creating several group members at once.
+        ```javascript
+        var callback = function(gameObjects) {
+        }
+        ```
 
 ### Add game object
 
@@ -59,24 +77,19 @@ group.clear();
 
 ### Get game objects
 
-```javascript
-var gameObjects = group.getChildren();  // array of game objects
-```
-
+- Get all game objects.
+    ```javascript
+    var gameObjects = group.getChildren();  // array of game objects
+    ```
 - Amount of game objects.
-
     ```javascript
     var len = group.getLength();
     ```
-
 - Group is full. Maximun size is set in [`maxSize`](group.md#configuration).
-
     ```javascript
     var isFull = group.isFull();
     ```
-
 - Game object is in group.
-
     ```javascript
     var isInGroup = group.contains(child);
     ```
@@ -97,31 +110,45 @@ group.setDepth(value, step);
 
 ### Active/inactive game objects
 
-Amount of active/inactive game objects
-
-```javascript
-var activeCount = group.countActive();
-// var inactiveCount = group.countActive(false);  // get amount of inactive game objects
-```
-
-```javascript
-var activeCount = group.getTotalUsed();        // equal to group.countActive()
-var freeCount = group.getTotalFree();          // group.maxSize - group.getTotalUsed()
-```
-
-```javascript
-group.kill(gameObject);         // gameObject.setActive(false)
-group.killAndHide(gameObject);  // gameObject.setActive(false).setVisible(false)
-```
-
-Get first active/inactive game object, create one if `createIfNull` is `true`
-
-```javascript
-var gameObject = group.getFirst(active, createIfNull, x, y, key, frame, visible);  // active = true/false
-var gameObject = group.getFirstAlive(createIfNull, x, y, key, frame, visible); // equal to group.getFirst(true, ...)
-var gameObject = group.getFirstDead(createIfNull, x, y, key, frame, visible); // equal to group.getFirst(false, ...)
-var gameObject = group.get(x, y, key, frame, visible); // equal to group.getFirst(false, true, ...)
-```
+- Set inactive
+    ```javascript
+    group.kill(gameObject);         // gameObject.setActive(false)
+    group.killAndHide(gameObject);  // gameObject.setActive(false).setVisible(false)
+    ```
+- Amount of active game objects
+    ```javascript
+    var activeCount = group.countActive();
+    ```
+    or
+    ```javascript
+    var activeCount = group.getTotalUsed();
+    ```
+- Amount of active game objects
+    ```javascript
+    var inactiveCount = group.countActive(false);
+    ```
+- Amount of free (maxSize - activeCount) game objects
+    ```javascript
+    var freeCount = group.getTotalFree();  // group.maxSize - group.getTotalUsed()
+    ```
+- Get first active/inactive game object,
+    - Return `null` if no game object picked.
+        ```javascript
+        var gameObject = group.getFirst(active);  // active = true/false
+        var gameObject = group.getFirstAlive(); // Equal to group.getFirst(true, ...)
+        var gameObject = group.getFirstDead(); // Equal to group.getFirst(false, ...)
+        ```
+    - Create one if no game object picked.
+        ```javascript
+        var gameObject = group.getFirst(active, true, x, y, key, frame, visible);  // active = true/false
+        var gameObject = group.getFirstAlive(true, x, y, key, frame, visible); // Equal to group.getFirst(true, ...)
+        var gameObject = group.getFirstDead(true, x, y, key, frame, visible); // Equal to group.getFirst(false, ...)
+        var gameObject = group.get(x, y, key, frame, visible); // Equal to group.getFirst(false, true, ...)
+        ```
+        - Use (`x`, `y`, `key`, `frame`) to create [Image](image.md)/[Sprite](sprite.md) game object.
+            ```javascript
+            var newGameObject = new GameObjectClass(x, y, key, frame);
+            ```
 
 ### Create game objects
 
@@ -130,58 +157,66 @@ var gameObjects = group.createFromConfig(config);
 var gameObjects = group.createMultiple(config);    // config in array
 ```
 
-#### Configuration
+-  `config`
+    ```javascript
+    {
+        classType: this.classType,
+        key: undefined,             // Required
+        frame: null,
+        visible: true,
+        active: true,
+        repeat: 0,                  // Create (1 + repeat) game objects
+        createCallback: undefined,  // Override this.createCallback if not undefined
 
-```javascript
-{
-    classType: this.classType,
-    key: undefined,             // required
-    frame: null,
-    visible: true,
-    active: true,
-    repeat: 0,                  // create (1 + repeat) game objects
+        // Position
+        setXY: {
+            x:0,
+            y:0,
+            stepX:0,
+            stepY:0
+        },
+        // Actions.SetXY(gameObjects, x, y, stepX, stepY)
+        gridAlign: false,
+        // {
+        //     width: -1,
+        //     height: -1,
+        //     cellWidth: 1,
+        //     cellHeight: 1,
+        //     position: Phaser.Display.Align.TOP_LEFT,
+        //     x: 0,
+        //     y: 0
+        // }
+        // Actions.GridAlign(gameObjects, gridAlign)
 
-    setXY: {
-        x:0,
-        y:0,
-        stepX:0,
-        stepY:0
-    },
-    // Actions.SetXY(gameObjects, x, y, stepX, stepY)
+        // Angle
+        setRotation: {
+            value: 0,
+            step:
+        },
+        // Actions.SetRotation(gameObjects, value, step)
 
-    setRotation: {
-        value: 0,
-        step:
-    },
-    // Actions.SetRotation(gameObjects, value, step)
+        // Scale
+        setScale: {
+            x:0,
+            y:0,
+            stepX:0,
+            stepY:0
+        },
+        // Actions.SetScale(gameObjects, x, y, stepX, stepY)
 
-    setScale: {
-        x:0,
-        y:0,
-        stepX:0,
-        stepY:0
-    },
-    // Actions.SetScale(gameObjects, x, y, stepX, stepY)
+        // Alpha
+        setAlpha: {
+            value: 0,
+            step:
+        },
+        // Actions.SetAlpha(gameObjects, value, step)
 
-    setAlpha: {
-        value: 0,
-        step:
-    },
-    // Actions.SetAlpha(gameObjects, value, step)
-
-    hitArea: null,
-    hitAreaCallback: null,
-    // Actions.SetHitArea(gameObjects, hitArea, hitAreaCallback);
-
-    gridAlign: false
-    // {
-    //     width: -1,
-    //     height: -1,
-    //     cellWidth: 1,
-    //     cellHeight: 1,
-    //     position: Phaser.Display.Align.TOP_LEFT,
-    //     x: 0,
-    //     y: 0
-    // }
-}
-```
+        // Input
+        hitArea: null,
+        hitAreaCallback: null,
+        // Actions.SetHitArea(gameObjects, hitArea, hitAreaCallback)
+    }
+    ```
+    - `classType` :
+        - [Sprite](sprite.md): `Phaser.GameObjects.Sprite`
+        - [Image](image.md): `Phaser.GameObjects.Image`
