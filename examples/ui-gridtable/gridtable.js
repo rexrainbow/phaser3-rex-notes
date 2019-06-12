@@ -36,6 +36,8 @@ class Demo extends Phaser.Scene {
                 mask: {
                     padding: 2,
                 },
+
+                reuseCellContainer: true,
             },
 
             slider: {
@@ -52,27 +54,38 @@ class Demo extends Phaser.Scene {
                 table: 10,
             },
 
-            createCellContainerCallback: function (cell) {
+            createCellContainerCallback: function (cell, cellContainer) {
                 var scene = cell.scene,
                     width = cell.width,
                     height = cell.height,
                     item = cell.item,
                     index = cell.index;
-                return scene.rexUI.add.label({
-                    width: width,
-                    height: height,
+                if (cellContainer === null) {
+                    cellContainer = scene.rexUI.add.label({
+                        width: width,
+                        height: height,
 
-                    orientation: scrollMode,
-                    background: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 0).setStrokeStyle(2, COLOR_DARK),
-                    icon: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 10, item.color),
-                    text: scene.add.text(0, 0, item.id),
+                        orientation: scrollMode,
+                        background: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 0).setStrokeStyle(2, COLOR_DARK),
+                        icon: scene.rexUI.add.roundRectangle(0, 0, 20, 20, 10, 0x0),
+                        text: scene.add.text(0, 0, ''),
 
-                    space: {
-                        icon: 10,
-                        left: (scrollMode === 0) ? 15 : 0,
-                        top: (scrollMode === 0) ? 0 : 15,
-                    }
-                });
+                        space: {
+                            icon: 10,
+                            left: (scrollMode === 0) ? 15 : 0,
+                            top: (scrollMode === 0) ? 0 : 15,
+                        }
+                    });
+                    console.log(cell.index + ': create new cell-container');
+                } else {
+                    console.log(cell.index + ': reuse cell-container');
+                }
+
+                // Set properties from item value
+                cellContainer.setMinSize(width, height); // Size might changed in this demo
+                cellContainer.getElement('text').setText(item.id); // Set text of text object
+                cellContainer.getElement('icon').setFillStyle(item.color); // Set fill color of round rectangle object
+                return cellContainer;
             },
             items: getItems(100)
         })

@@ -14,28 +14,41 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var onCellVisible = function (cell) {
+        var createNewCellContainer = function (cell) {
             var scene = cell.scene;
             var bg = scene.add.rectangle(0, 0, cell.width, cell.height, COLOR_PRIMARY)
                 .setStrokeStyle(2, COLOR_LIGHT)
-                .setOrigin(0);
-            var txt = scene.add.text(5, 5, cell.index);
-            var container = scene.add.container(0, 0, [bg, txt]);
+                .setOrigin(0)
+                .setName('background');
+            var txt = scene.add.text(5, 5, '')
+                .setName('index');
+            var cellContainer = scene.add.container(0, 0, [bg, txt]);
+            return cellContainer;
+        }
 
-            cell.setContainer(container);
-            //console.log('Cell ' + cell.index + ' visible');
+        var onCellVisible = function (cell, cellContainer) {
+            if (cellContainer === null) {
+                console.log(cell.index + ': create new cell-container');
+                cellContainer = createNewCellContainer(cell);
+            } else {
+                console.log(cell.index + ': reuse cell-container');
+            }
+
+            cellContainer.getByName('index').setText(cell.index);
+
+            cell.setContainer(cellContainer);
         };
-        var table = this.add.rexGridTable(400, 300, 200, 200, {
+        var table = this.add.rexGridTable(400, 300, 250, 400, {
             cellHeight: 60,
-            // cellWidth: 60, // ExpandCellSize
-            cellsCount: 40,
-            columns: 2,
+            cellWidth: 60,
+            cellsCount: 100,
+            columns: 4,
             cellVisibleCallback: onCellVisible.bind(this),
+            reuseCellContainer: true,
             mask: {
                 padding: 2,
             }
-        })
-            .resize(400, 400);
+        });
 
         // draw bound
         this.add.graphics()
@@ -55,11 +68,11 @@ class Demo extends Phaser.Scene {
                 table.addTableOXY(dx, dy).updateTable();
             });
 
-        this.add.text(0, 580, 'Destroy table')
+        this.add.text(0, 580, 'Destroy')
             .setInteractive()
             .on('pointerdown', function () {
                 table.destroy();
-            })
+            });
     }
 
     update() { }
@@ -80,7 +93,8 @@ var config = {
             key: 'rexGridTable',
             plugin: GridTablePlugin,
             start: true
-        }]
+        },
+        ]
     }
 };
 

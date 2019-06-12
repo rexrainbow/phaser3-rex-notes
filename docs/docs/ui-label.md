@@ -153,7 +153,7 @@ label.layout();
         ```
     - Text game object
         ```javascript
-        var icon = label.getElement('text');
+        var textObject = label.getElement('text');
         ```
     - Action icon game object
         ```javascript

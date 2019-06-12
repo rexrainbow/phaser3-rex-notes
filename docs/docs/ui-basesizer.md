@@ -6,6 +6,19 @@ Base class of all ui plugins.
 
 ## Usage
 
+### Minimum size
+
+```javascript
+sizer.setMinSize(width, height);
+```
+
+or
+
+```javascript
+sizer.setMinWidth(width);
+sizer.setMinHeight(height);
+```
+
 ### Bounds of sizer
 
 - Get

@@ -16,18 +16,15 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var newCellObject = function (cell) {
+        var onCellVisible = function (cell) {
             var scene = cell.scene;
             var bg = scene.add.rectangle(0, 0, cell.width, cell.height, COLOR_PRIMARY)
                 .setStrokeStyle(2, COLOR_LIGHT)
                 .setOrigin(0);
             var txt = scene.add.text(5, 5, cell.index);
             var container = scene.add.container(0, 0, [bg, txt]);
-            return container;
-        }
 
-        var onCellVisible = function (cell) {
-            cell.setContainer(newCellObject(cell));
+            cell.setContainer(container);
         };
         var table = this.add.rexGridTable(400, 300, 250, 400, {
             cellWidth: 240,

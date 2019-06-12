@@ -17,8 +17,7 @@ class Base extends Container {
         super(scene, x, y, 2, 2);
 
         this.isRexSizer = true;
-        this.setMinWidth(minWidth);
-        this.setMinHeight(minHeight);
+        this.setMinSize(minWidth, minHeight);
         this.setName(GetValue(config, 'name', ''));
         this.rexSizer = {};
         this.backgroundChildren = undefined;
@@ -42,6 +41,11 @@ class Base extends Container {
             this.backgroundChildren.length = 0;
         }
         super.destroy(fromScene);
+    }
+
+    setMinSize(minWidth, minHeight) {
+        this.setMinWidth(minWidth).setMinHeight(minHeight);
+        return this;
     }
 
     setMinWidth(minWidth) {

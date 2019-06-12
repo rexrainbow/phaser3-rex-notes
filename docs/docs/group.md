@@ -59,7 +59,8 @@ group.addMultiple(gameObjects);   // array of game objects
 // group.addMultiple(gameObjects, true);
 ```
 
-Game object will only be added once.
+- Game object will only be added once.
+- Game object will be removed automatically when destroyed.
 
 ### Remove game object
 
@@ -72,7 +73,7 @@ Remove all game objects
 
 ```javascript
 group.clear();
-// group.clear(true);  // also remove this game object from display and update list of scene
+// group.clear(removeFromScene, destroyChild);
 ```
 
 ### Get game objects

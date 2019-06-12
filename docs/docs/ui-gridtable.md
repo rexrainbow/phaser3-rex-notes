@@ -63,6 +63,7 @@ var gridTable = scene.rexUI.add.gridTable({
             padding: 0
         },
         interactive: true,
+        reuseCellContainer: false,
     },
 
     slider: {
@@ -87,14 +88,17 @@ var gridTable = scene.rexUI.add.gridTable({
         table: 0,
     },
 
-    createCellContainerCallback: function(cell) {
+    createCellContainerCallback: function(cell, cellContainer) {
         var scene = cell.scene,
             width = cell.width,
             height = cell.height,
             item = cell.item,
             index = cell.index;
-        // container = ...
-        return container;
+        if (cellContainer === null) { // No reusable cell container, create a new one
+            // cellContainer = scene.add.container();
+        }
+        // Set child properties of cell container ...
+        return cellContainer;
     },
 
     items: [],
@@ -127,6 +131,7 @@ var gridTable = scene.rexUI.add.gridTable({
         - `table.mask.padding` : Extra left/right/top/bottom padding spacing of this rectangle mask. Default value is `0`.
         - `false` : No mask.
     - `table.interactive` : Set `true` to install touch events (tap/press/over/out/click).
+    - `table.reuseCellContainer` : Set `true` to reuse cell container when creating new cell container.
 - `slider` : Componments of slider, optional.
     - `slider.background` : Game object of slider background, optional.
     - `slider.track` : Game object of track.
@@ -152,6 +157,9 @@ var gridTable = scene.rexUI.add.gridTable({
         - `cell.item` : Item of this cell to display.
         - `cell.index` : Index of this cell.
     - **Origin of returned cell container will be set to (0, 0)**
+    - `cellContainer` : Cell container picked from object pool for reusing. Set `reuseCellContainer` to `true` to enable this feature.
+        - `null` : No cell container available.
+        - Game object : Reusable cell container.
 - `space` : Pads spaces
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
     - `space.table` : Space between table object and slider object.

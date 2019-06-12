@@ -68,9 +68,9 @@ nav:
     - Container:
         - Container: container.md
         - Container Lite: containerlite.md
-        - Group: group.md        
         - Grid table: gridtable.md
     - Zone: zone.md
+    - Object pool: group.md
     - DOM element:
         - DOM element: domelement.md
         - Input text: inputtext.md
