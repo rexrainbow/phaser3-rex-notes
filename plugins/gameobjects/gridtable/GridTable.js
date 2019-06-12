@@ -82,7 +82,7 @@ class GridTable extends Container {
         this.table.destroy();
         this.table = undefined;
         if (this.cellContainersPool) {
-            this.cellContainersPool.clear(true, true);
+            this.cellContainersPool.destroy(true);
             this.cellContainersPool = undefined;
         }
         super.destroy(fromScene);
