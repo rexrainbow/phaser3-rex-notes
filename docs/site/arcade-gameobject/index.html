@@ -4887,10 +4887,14 @@
 <ul>
 <li>Enable body
     <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">enableBody</span><span class="p">();</span>
+<span class="c1">// gameObject.enableBody(false, 0, 0, enableGameObject, showGameObject);</span>
 </pre></div><ul>
 <li>Enable and reset position
     <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">enableBody</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+<span class="c1">// gameObject.enableBody(true, x, y, enableGameObject, showGameObject);</span>
 </pre></div></li>
+<li><code>enableGameObject</code> : Also activate this Game Object.</li>
+<li><code>showGameObject</code> : Also show this Game Object.</li>
 </ul>
 </li>
 <li>Disable body
