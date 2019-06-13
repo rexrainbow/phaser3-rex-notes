@@ -80,11 +80,15 @@ Arcade physics Image/Sprite/Group object.
 - Enable body
     ```javascript
     gameObject.enableBody();
+    // gameObject.enableBody(false, 0, 0, enableGameObject, showGameObject);
     ```
     - Enable and reset position
         ```javascript
         gameObject.enableBody(true, x, y);
+        // gameObject.enableBody(true, x, y, enableGameObject, showGameObject);
         ```
+    - `enableGameObject` : Also activate this Game Object.
+    - `showGameObject` : Also show this Game Object.
 - Disable body
     ```javascript
     gameObject.disableBody();
