@@ -1,5 +1,5 @@
 import ALIGNMODE from '../utils/AlignConst.js';
-import ParsePaddingConfig from '../utils/ParsePaddingConfig.js';
+import GetBoundsConfig from '../utils/GetBoundsConfig.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const ALIGN_LEFTTOP = Phaser.Display.Align.TOP_LEFT;
@@ -30,7 +30,7 @@ var AddPage = function (gameObject, key, align, paddingConfig, expand) {
     var config = this.getSizerConfig(gameObject);
     config.parent = this;
     config.align = align;
-    config.padding = ParsePaddingConfig(paddingConfig);
+    config.padding = GetBoundsConfig(paddingConfig);
     config.expand = expand;
     if (this.sizerChildren.has(key)) {
         this.sizerChildren.get(key).destroy();

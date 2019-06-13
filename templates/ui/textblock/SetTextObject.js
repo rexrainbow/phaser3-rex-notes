@@ -1,4 +1,4 @@
-import ParsePaddingConfig from '../utils/ParsePaddingConfig.js';
+import GetBoundsConfig from '../utils/GetBoundsConfig.js';
 import IsTextGameObject from '../../../plugins/utils/text/IsTextGameObject.js';
 // import IsCanvasTextGameObject from '../../../plugins/utils/canvastext/IsCanvasTextGameObject.js';
 import DefaultMask from '../../../plugins/utils/mask/DefaultMask.js';
@@ -18,7 +18,7 @@ var SetTextObject = function (gameObject, paddingConfig, maskEnable) {
     var config = this.getSizerConfig(gameObject);
     config.parent = this;
     config.align = ALIGN_LEFTTOP;
-    config.padding = ParsePaddingConfig(paddingConfig);
+    config.padding = GetBoundsConfig(paddingConfig);
     config.expand = true;
     this.textObject = gameObject;
     this.textObjectType = (IsTextGameObject(gameObject)) ? 0 : 1;

@@ -1,5 +1,5 @@
 const GetValue = Phaser.Utils.Objects.GetValue;
-var ParsePaddingConfig = function (config, out) {
+var GetBoundsConfig = function (config, out) {
     if (out === undefined) {
         out = {};
     }
@@ -16,4 +16,4 @@ var ParsePaddingConfig = function (config, out) {
     }
     return out;
 }
-export default ParsePaddingConfig;
+export default GetBoundsConfig;

@@ -1,6 +1,6 @@
 import BaseSizer from '../basesizer/BaseSizer.js';
 import Methods from './Methods.js';
-import ParsePaddingConfig from '../utils/ParsePaddingConfig.js';
+import GetBoundsConfig from '../utils/GetBoundsConfig.js';
 import ORIENTATIONMODE from '../utils/OrientationConst.js';
 import ALIGNMODE from '../utils/AlignConst.js';
 
@@ -95,7 +95,7 @@ class Sizer extends BaseSizer {
         config.parent = this;
         config.proportion = proportion;
         config.align = align;
-        config.padding = ParsePaddingConfig(paddingConfig);
+        config.padding = GetBoundsConfig(paddingConfig);
         config.expand = expand;
         this.sizerChildren.push(gameObject);
         return this;

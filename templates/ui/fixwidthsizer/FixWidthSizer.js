@@ -1,6 +1,6 @@
 import BaseSizer from '../basesizer/BaseSizer.js';
 import Methods from './Methods.js';
-import ParsePaddingConfig from '../utils/ParsePaddingConfig.js';
+import GetBoundsConfig from '../utils/GetBoundsConfig.js';
 import ORIENTATIONMODE from '../utils/OrientationConst.js';
 import GetMaxChildWidth from './GetMaxChildWidth.js';
 import GetMaxChildHeight from './GetMaxChildHeight.js';
@@ -67,7 +67,7 @@ class FixWidthSizer extends BaseSizer {
     }
 
     setPadding(paddingConfig) {
-        this.padding = ParsePaddingConfig(paddingConfig);
+        this.padding = GetBoundsConfig(paddingConfig, this.padding);
         return this;
     }
 
@@ -91,7 +91,7 @@ class FixWidthSizer extends BaseSizer {
         var config = this.getSizerConfig(gameObject);
         config.parent = this;
         config.align = ALIGN_CENTER;
-        config.padding = ParsePaddingConfig(paddingConfig);
+        config.padding = GetBoundsConfig(paddingConfig);
         this.sizerChildren.push(gameObject);
         return this;
     }
