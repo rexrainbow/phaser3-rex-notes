@@ -1585,6 +1585,25 @@
           
 
 
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-10-12-1" type="checkbox" id="nav-4-10-12-1">
+    
+    <label class="md-nav__link" for="nav-4-10-12-1">
+      Engine
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-4-10-12-1">
+        Engine
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
   <li class="md-nav__item">
     <a href="../arcade-world/" title="World" class="md-nav__link">
       World
@@ -1612,6 +1631,23 @@
   <li class="md-nav__item">
     <a href="../arcade-gameobject/" title="Game object" class="md-nav__link">
       Game object
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../buildarcadeobject/" title="Build arcade object" class="md-nav__link">
+      Build arcade object
     </a>
   </li>
 
@@ -4556,6 +4592,12 @@
         <span class="nx">bottom</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
 
         <span class="nx">table</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="c1">// table: {</span>
+        <span class="c1">//    top: 0,</span>
+        <span class="c1">//    bottom: 0,</span>
+        <span class="c1">//    left: 0,</span>
+        <span class="c1">//    right: 0,</span>
+        <span class="c1">//}</span>
     <span class="p">},</span>
 
     <span class="nx">createCellContainerCallback</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cell</span><span class="p">,</span> <span class="nx">cellContainer</span><span class="p">)</span> <span class="p">{</span>
@@ -4667,7 +4709,23 @@
 </li>
 <li><code>space</code> : Pads spaces<ul>
 <li><code>space.left</code>, <code>space.right</code>, <code>space.top</code>, <code>space.bottom</code> : Space of bounds.</li>
-<li><code>space.table</code> : Space between table object and slider object.</li>
+<li><code>space.table</code> :<ul>
+<li>A number: Space between table object and slider object.</li>
+<li>An object: Padding of table object.<ul>
+<li>If <code>scrollMode</code> is <code>0</code> (vertical) :<ul>
+<li><code>space.table.top</code>, <code>space.table.bottom</code> : Top, bottom padding space of table object.</li>
+<li><code>space.table.right</code> : Space between table object and slider object.</li>
+</ul>
+</li>
+<li>If <code>scrollMode</code> is <code>1</code> (horizontal) :<ul>
+<li><code>space.table.left</code>, <code>space.table.right</code> : Left, right padding space of table object.</li>
+<li><code>space.table.bottom</code> : Space between table object and slider object.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><code>items</code> : Array of item data for each cell.</li>
