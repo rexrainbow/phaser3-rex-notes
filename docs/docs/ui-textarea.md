@@ -74,6 +74,12 @@ var textArea = scene.rexUI.add.textArea({
         bottom: 0,
 
         text: 0,
+        // text: {
+        //    top: 0,
+        //    bottom: 0,
+        //    left: 0,
+        //    right: 0,
+        //}
     },
 
     content: '',
@@ -109,7 +115,15 @@ var textArea = scene.rexUI.add.textArea({
 - `clamplChildOY` : Set `true` to clamp scrolling.
 - `space` : Pads spaces
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
-    - `space.text` : Space between text object and slider object.
+    - `space.text` :
+        - A number: Space between text object and slider object.
+        - An object: Padding of text object.
+            - If `scrollMode` is `0` (vertical) :
+                - `space.text.top`, `space.text.bottom` : Top, bottom padding space of text object.
+                - `space.text.right` : Space between text object and slider object.
+            - If `scrollMode` is `1` (horizontal) :
+                - `space.text.left`, `space.text.right` : Left, right padding space of text object.
+                - `space.text.bottom` : Space between text object and slider object.
 - `content` : Content of this text area.
 - `name` : Set name of this textArea.
 

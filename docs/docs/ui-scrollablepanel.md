@@ -79,6 +79,12 @@ var scrollablePanel = scene.rexUI.add.scrollablePanel({
         bottom: 0,
 
         panel: 0,
+        // panel: {
+        //    top: 0,
+        //    bottom: 0,
+        //    left: 0,
+        //    right: 0,
+        //}
     },
 
     name: '',
@@ -117,7 +123,15 @@ var scrollablePanel = scene.rexUI.add.scrollablePanel({
 - `clamplChildOY` : Set `true` to clamp scrolling.
 - `space` : Pads spaces
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
-    - `space.panel` : Space between panel object and slider object.
+    - `space.panel` :
+        - A number: Space between panel object and slider object.
+        - An object: Padding of panel object.
+            - If `scrollMode` is `0` (vertical) :
+                - `space.panel.top`, `space.panel.bottom` : Top, bottom padding space of panel object.
+                - `space.panel.right` : Space between panel object and slider object.
+            - If `scrollMode` is `1` (horizontal) :
+                - `space.panel.left`, `space.panel.right` : Left, right padding space of panel object.
+                - `space.panel.bottom` : Space between panel object and slider object.
 - `name` : Set name of this panel.
 
 ### Custom class

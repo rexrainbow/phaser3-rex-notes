@@ -92,9 +92,10 @@ nav:
         - Anchor: anchor.md
         - Interception: interception.md
         - Arcade:
-            - World: arcade-world.md
-            - Body: arcade-body.md
-            - Game object: arcade-gameobject.md
+            - Engine:
+                - World: arcade-world.md
+                - Body: arcade-body.md
+                - Game object: arcade-gameobject.md
             - 8 direction: eightdirection.md
             - Bullet: bullet.md
             - Ship: ship.md

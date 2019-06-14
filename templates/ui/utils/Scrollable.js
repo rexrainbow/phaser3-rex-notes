@@ -29,6 +29,22 @@ class Scrollable extends Sizer {
         var paddingTop = GetValue(config, 'space.top', 0);
         var paddingBottom = GetValue(config, 'space.bottom', 0);
         var childSpace = GetValue(config, 'space.child', 0);
+        this.childPadding = {};
+        if (typeof (childSpace) !== 'number') {
+            var childPadding = childSpace;
+            if (scrollMode === 0) {
+                childSpace = GetValue(childPadding, 'right', 0);
+                this.childPadding.top = GetValue(childPadding, 'top', 0);
+                this.childPadding.bottom = GetValue(childPadding, 'bottom', 0);
+            } else {
+                childSpace = GetValue(childPadding, 'bottom', 0);
+                this.childPadding.top = GetValue(childPadding, 'left', 0);
+                this.childPadding.bottom = GetValue(childPadding, 'right', 0);
+            }
+        } else {
+            this.childPadding.top = 0;
+            this.childPadding.bottom = 0;
+        }
 
 
         if (background) {
@@ -129,6 +145,7 @@ class Scrollable extends Sizer {
         if (slider) {
             slider.setEnable(bottomChildOY !== topChildOY);
         }
+        this.updateController();
         return this;
     }
 
@@ -143,13 +160,34 @@ class Scrollable extends Sizer {
         }
     }
 
-    set t(value) {
-        this.childrenMap.child.t = value;
+    set t(t) {
+        // Get inner childT
+        var childPadding = this.childPadding;
+        if ((childPadding.top !== 0) || (childPadding.bottom !== 0)) {
+            var child = this.childrenMap.child
+            var innerHeight = (child.topChildOY - child.bottomChildOY);
+            var outterHeight = innerHeight + childPadding.top + childPadding.bottom;
+            var innerChildOY = (outterHeight * t) - childPadding.top;
+            t = innerChildOY / innerHeight;
+        }
+
+        this.childrenMap.child.t = t;
         this.updateController();
     }
 
     get t() {
-        return this.childrenMap.child.t;
+        var t = this.childrenMap.child.t;
+
+        // Get outter childT
+        var childPadding = this.childPadding;
+        if ((childPadding.top !== 0) || (childPadding.bottom !== 0)) {
+            var child = this.childrenMap.child
+            var innerHeight = (child.topChildOY - child.bottomChildOY);
+            var outterHeight = innerHeight + childPadding.top + childPadding.bottom;
+            var outterChildOY = (innerHeight * t) + childPadding.top;
+            t = outterChildOY / outterHeight;
+        }
+        return t;
     }
 
     set childOY(value) {
@@ -162,11 +200,11 @@ class Scrollable extends Sizer {
     }
 
     get topChildOY() {
-        return this.childrenMap.child.topChildOY;
+        return this.childrenMap.child.topChildOY + this.childPadding.top;
     }
 
     get bottomChildOY() {
-        return this.childrenMap.child.bottomChildOY;
+        return this.childrenMap.child.bottomChildOY - this.childPadding.bottom;
     }
 
     setChildOY(value) {
@@ -180,12 +218,12 @@ class Scrollable extends Sizer {
     }
 
     scrollToTop() {
-        this.t = 0;
+        this.childOY = this.topChildOY;
         return this;
     }
 
     scrollToBottom() {
-        this.t = 1;
+        this.childOY = this.bottomChildOY;
         return this;
     }
 
