@@ -65,6 +65,7 @@ module.exports = {
         'eightdirectionplugin': './plugins/eightdirection-plugin.js',
         'bulletplugin': './plugins/bullet-plugin.js',
         'shipplugin': './plugins/ship-plugin.js',
+        'buildarcadeobjectplugin': './plugins/buildarcadeobject-plugin.js',
 
         // member of text
         'texttypingplugin': './plugins/texttyping-plugin.js',

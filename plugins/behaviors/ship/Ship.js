@@ -15,7 +15,7 @@ class Ship extends TickTask {
     }
 
     resetFromJSON(o) {
-        if (this.body === undefined) {
+        if (!this.body) {
             this.scene.physics.add.existing(this.gameObject, false);
         }
         this.setCascadeMode(GetValue(o, 'cascade', false));

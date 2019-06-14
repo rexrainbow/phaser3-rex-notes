@@ -96,6 +96,7 @@ nav:
                 - World: arcade-world.md
                 - Body: arcade-body.md
                 - Game object: arcade-gameobject.md
+            - Build arcade object: buildarcadeobject.md
             - 8 direction: eightdirection.md
             - Bullet: bullet.md
             - Ship: ship.md
