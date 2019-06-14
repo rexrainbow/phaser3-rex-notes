@@ -52,6 +52,11 @@ var game = new Phaser.Game(config);
 
 ### Inject arcade object methods
 
-```javascript
-var gameObject = scene.plugins.get('rexBuildArcadeObject').add(gameObject, isStatic);
-```
+- Create dynamic arcade body
+    ```javascript
+    var gameObject = scene.plugins.get('rexBuildArcadeObject').build(gameObject);
+    ```
+- Create static arcade body
+    ```javascript
+    var gameObject = scene.plugins.get('rexBuildArcadeObject').build(gameObject, true);
+    ```
