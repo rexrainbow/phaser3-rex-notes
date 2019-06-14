@@ -17,7 +17,7 @@
 1. [Board/Move To](board-moveto.md): Move chess towards target position with a steady speed.
 1. [Board/Path finder](board-pathfinder.md): Find moveable area or moving path.
 1. [Board/Shape](board-shape.md): Grid (polygon) shape object.
-1. [build arcade object](buildarcadeobject.md): Create arcade body, and inject arcade object methods.
+1. [Build arcade object](buildarcadeobject.md): Create arcade body, and inject arcade object methods.
 1. [Buff data](buffdata.md): Data manager with buffs.
 1. [Bullet](bullet.md): Move game object toward current angle of game object, with a constant speed.
 1. [Button](button.md): Fires 'click' event when touch releasd after pressed.
