@@ -73,7 +73,9 @@ var IsInLOS = function (chess, visiblePoints) {
     globTileXYArray1.length = 0;
     if (this.debugGraphics) {
         var color = (isVisivle) ? this.debugVisibleLineColor : this.debugInvisibleLineColor;
-        this.debugGraphics.lineStyle(1, color, 1).lineBetween(startX, startY, endX, endY);
+        if (color !== undefined) {
+            this.debugGraphics.lineStyle(1, color, 1).lineBetween(startX, startY, endX, endY);
+        }
     }
     return isVisivle;
 }

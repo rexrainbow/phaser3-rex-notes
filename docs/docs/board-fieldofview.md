@@ -73,6 +73,11 @@ var fieldOfView = scene.rexBoard.add.fieldOfView(chess, {
         }
         ```
         - Cost of blocker : `fieldOfView.BLOCKER`
+- `debug` :
+    - `debug.graphics` : A [graphics](graphics.md) object for showing debug messages.
+    - `debug.visibleLineColor` : Color of visible line. Set `undefined` to not draw any line.
+    - `debug.invisibleLineColor` : Color of invisible line. Set `undefined` to not draw any line.
+    - `debug.log` : Show messages on console.
 
 ### Set cost function
 
