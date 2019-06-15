@@ -5,7 +5,6 @@ var PressCell = function (table) {
     table._press = new Press(table);
     table._press
         .on('pressstart', function (press) {
-            debugger
             var table = press.gameObject;
             var cellIndex = table.pointerToCellIndex(press.x, press.y);
             press._cellIndex = cellIndex;

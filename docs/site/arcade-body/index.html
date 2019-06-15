@@ -5241,6 +5241,12 @@
 <li>Disable (default)
     <div class="codehilite"><pre><span></span><span class="nx">body</span><span class="p">.</span><span class="nx">setCollideWorldBounds</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
 </pre></div></li>
+<li>Get world bounds <a href="../geom-rectangle/">rectangle</a>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">top</span> <span class="o">=</span> <span class="nx">body</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">bounds</span><span class="p">.</span><span class="nx">top</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">bottom</span> <span class="o">=</span> <span class="nx">body</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">bounds</span><span class="p">.</span><span class="nx">bottom</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">left</span> <span class="o">=</span> <span class="nx">body</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">bounds</span><span class="p">.</span><span class="nx">left</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">right</span> <span class="o">=</span> <span class="nx">body</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">bounds</span><span class="p">.</span><span class="nx">right</span><span class="p">;</span>
+</pre></div></li>
 </ul>
 <h5 id="blocked">Blocked<a class="headerlink" href="#blocked" title="Permanent link">&para;</a></h5>
 <p>Whether this Body is colliding with a tile or the world boundary.</p>

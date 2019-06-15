@@ -404,6 +404,13 @@ var hit = body.hitTest(x, y);
     ```javascript
     body.setCollideWorldBounds(false);
     ```
+- Get world bounds [rectangle](geom-rectangle.md)
+    ```javascript
+    var top = body.world.bounds.top;
+    var bottom = body.world.bounds.bottom;
+    var left = body.world.bounds.left;
+    var right = body.world.bounds.right;
+    ```
 
 ##### Blocked
 

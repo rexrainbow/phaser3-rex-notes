@@ -195,6 +195,13 @@ See bound in [body object](arcade-body.md#collision-bound), or [game object](arc
         scene.physics.world.checkCollision.up = up;
         scene.physics.world.checkCollision.down = down;
         ```
+    - Get bounds [rectangle](geom-rectangle.md)
+        ```javascript
+        var top = scene.physics.world.bounds.top;
+        var bottom = scene.physics.world.bounds.bottom;
+        var left = scene.physics.world.bounds.left;
+        var right = scene.physics.world.bounds.right;
+        ```
 
 #### Events
 
