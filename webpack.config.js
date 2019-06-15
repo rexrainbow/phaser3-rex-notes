@@ -88,8 +88,7 @@ module.exports = {
         rules: [
             {
                 test: /\.js$/,
-                use: ['babel-loader'],
-                include: path.join(__dirname, 'src')
+                loader: 'babel-loader',
             },
             {
                 test: /phaser-split\.js$/,
