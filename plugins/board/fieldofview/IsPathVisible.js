@@ -12,7 +12,7 @@ var IsPathVisible = function (tileXYArray, visiblePoints) {
         if (AreTileXYEqual(myTileXYZ, tileXY)) {
             continue;
         }
-        cost = this.getCost(tileXY);
+        cost = this.getCost(tileXY, tileXYArray);
         if (cost === BLOCKER) {
             return false;
         }

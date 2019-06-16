@@ -68,11 +68,13 @@ var fieldOfView = scene.rexBoard.add.fieldOfView(chess, {
     - `cost` : A constant cost for each non-blocked tile
     - `costCallback`, `costCallbackScope` :  Get cost via callback
         ```javascript
-        function(curTile, fieldOfView) {
+        function(curTile, fieldOfView, tileXYArray) {
             return cost;
         }
         ```
         - Cost of blocker : `fieldOfView.BLOCKER`
+        - `curTile` : Currest testing tileXY.
+        - `tileXYArray` : A *read only*  tileXY array of sight path.
 - `debug` :
     - `debug.graphics` : A [graphics](graphics.md) object for showing debug messages.
     - `debug.visibleLineColor` : Color of visible line. Set `undefined` to not draw any line.
@@ -89,6 +91,15 @@ var fieldOfView = scene.rexBoard.add.fieldOfView(chess, {
     ```javascript
     fieldOfView.setCostFunction(callback, scope);
     ```
+    - `callback`
+        ```javascript
+        var callback = function(curTile, fieldOfView, tileXYArray) {
+            return cost;
+        }
+        ```
+        - Cost of blocker : `fieldOfView.BLOCKER`
+        - `curTile` : Currest testing tileXY.
+        - `tileXYArray` : A *read only*  tileXY array of sight path.
 
 ### Is tileXY/chess visible
 
@@ -129,6 +140,9 @@ Face direction
     fieldOfView.face = direction;
     // fieldOfView.face ++;
     ```
+- `face` :
+    - `0` ~ `3` : [Quad grid](board-quadgrid.md#directions).
+    - `0` ~ `5` : [Hexagon grid](board-hexagongrid.md#directions).
 
 ### Debug
 
@@ -136,3 +150,8 @@ Face direction
     ```javascript
     fieldOfView.clearDebugGraphics();
     ```
+- Set color of lines
+    ```javascript
+    fieldOfView.setDebugLineColor(visibleLineColor, invisibleLineColor);
+    ```
+    - `visibleLineColor`, `invisibleLineColor` : Set `undefined` to not draw any line.

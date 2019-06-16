@@ -2,7 +2,7 @@ import CONST from './const.js';
 
 const BLOCKER = CONST.BLOCKER;
 
-var GetCost = function (curTileXY) {
+var GetCost = function (curTileXY, tileXYArray) {
     // Occupied test
     if (this.occupiedTest) {
         if (this.board.contains(curTileXY.x, curTileXY.y, this.chessData.tileXYZ.z)) {
@@ -24,9 +24,9 @@ var GetCost = function (curTileXY) {
         return this.costCallback;
     }
     if (this.costCallbackScope) {
-        return this.costCallback.call(this.costCallbackScope, curTileXY, this);
+        return this.costCallback.call(this.costCallbackScope, curTileXY, this, tileXYArray);
     } else {
-        return this.costCallback(curTileXY, this);
+        return this.costCallback(curTileXY, this, tileXYArray);
     }
 }
 export default GetCost;

@@ -4484,11 +4484,13 @@ coneMode: 1
 <li>Cost function<ul>
 <li><code>cost</code> : A constant cost for each non-blocked tile</li>
 <li><code>costCallback</code>, <code>costCallbackScope</code> :  Get cost via callback
-    <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">curTile</span><span class="p">,</span> <span class="nx">fieldOfView</span><span class="p">)</span> <span class="p">{</span>
+    <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">curTile</span><span class="p">,</span> <span class="nx">fieldOfView</span><span class="p">,</span> <span class="nx">tileXYArray</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="nx">cost</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div><ul>
 <li>Cost of blocker : <code>fieldOfView.BLOCKER</code></li>
+<li><code>curTile</code> : Currest testing tileXY.</li>
+<li><code>tileXYArray</code> : A <em>read only</em>  tileXY array of sight path.</li>
 </ul>
 </li>
 </ul>
@@ -4508,7 +4510,19 @@ coneMode: 1
 </pre></div></li>
 <li>Get cost via callback
     <div class="codehilite"><pre><span></span><span class="nx">fieldOfView</span><span class="p">.</span><span class="nx">setCostFunction</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>
-</pre></div></li>
+</pre></div><ul>
+<li><code>callback</code>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">curTile</span><span class="p">,</span> <span class="nx">fieldOfView</span><span class="p">,</span> <span class="nx">tileXYArray</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nx">cost</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div><ul>
+<li>Cost of blocker : <code>fieldOfView.BLOCKER</code></li>
+<li><code>curTile</code> : Currest testing tileXY.</li>
+<li><code>tileXYArray</code> : A <em>read only</em>  tileXY array of sight path.</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 <h3 id="is-tilexychess-visible">Is tileXY/chess visible<a class="headerlink" href="#is-tilexychess-visible" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isVisible</span> <span class="o">=</span> <span class="nx">fieldOfView</span><span class="p">.</span><span class="nx">isInLOS</span><span class="p">(</span><span class="nx">chess</span><span class="p">);</span>
@@ -4547,12 +4561,23 @@ coneMode: 1
     <div class="codehilite"><pre><span></span><span class="nx">fieldOfView</span><span class="p">.</span><span class="nx">face</span> <span class="o">=</span> <span class="nx">direction</span><span class="p">;</span>
 <span class="c1">// fieldOfView.face ++;</span>
 </pre></div></li>
+<li><code>face</code> :<ul>
+<li><code>0</code> ~ <code>3</code> : <a href="../board-quadgrid/#directions">Quad grid</a>.</li>
+<li><code>0</code> ~ <code>5</code> : <a href="../board-hexagongrid/#directions">Hexagon grid</a>.</li>
+</ul>
+</li>
 </ul>
 <h3 id="debug">Debug<a class="headerlink" href="#debug" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Clear debug graphics
     <div class="codehilite"><pre><span></span><span class="nx">fieldOfView</span><span class="p">.</span><span class="nx">clearDebugGraphics</span><span class="p">();</span>
 </pre></div></li>
+<li>Set color of lines
+    <div class="codehilite"><pre><span></span><span class="nx">fieldOfView</span><span class="p">.</span><span class="nx">setDebugLineColor</span><span class="p">(</span><span class="nx">visibleLineColor</span><span class="p">,</span> <span class="nx">invisibleLineColor</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>visibleLineColor</code>, <code>invisibleLineColor</code> : Set <code>undefined</code> to not draw any line.</li>
+</ul>
+</li>
 </ul>
                 
                   
