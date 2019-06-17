@@ -77,7 +77,6 @@ var fieldOfView = scene.rexBoard.add.fieldOfView(chess, {
         - `tileXYArray` : A *read only*  tileXY array of sight path.
 - `debug` :
     - `debug.graphics` : A [graphics](graphics.md) object for showing debug messages.
-        - It will be destroyed automatically when FOV behavior is destroyed.
     - `debug.visibleLineColor` : Color of visible line. Set `undefined` to not draw any line.
     - `debug.invisibleLineColor` : Color of invisible line. Set `undefined` to not draw any line.
 
