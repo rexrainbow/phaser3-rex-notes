@@ -5,34 +5,38 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 var ParseCSV = function (csvString, config) {
     var delimiter = GetValue(config, 'delimiter', ',');
     var arr = CSVParser.parse(csvString, {
+        header: true,
         delimiter: delimiter,
     }).data;
 
     var questType = GetValue(config, 'types.quest', 'q');
-    var optionType = GetValue(config, 'types.option', 'o');
-    var hasHeader = GetValue(config, 'header', true);
+    var optionType = GetValue(config, 'types.option', '');
 
     var items = [];
-    var row, rowType, rowObj,
+    var rowObj, rowType,
         item, option;
-    var startIdx = (hasHeader) ? 1 : 0;
-    for (var i = startIdx, cnt = arr.length; i < cnt; i++) {
-        row = arr[i];
-        rowType = row[0];
-        rowObj = {
-            name: row[1],
-            title: row[2],
-            description: row[3],
-        }
+    for (var i = 0, cnt = arr.length; i < cnt; i++) {
+        rowObj = arr[i];
+        rowType = rowObj.type;
+        delete rowObj.type;
 
         if (rowType === questType) {
             item = rowObj;
+            if ((item.key === undefined) || (item.key === '')) {
+                item.key = items.length.toString(); // Serial key
+            }
+
             item.options = [];
             items.push(item);
         } else if (rowType === optionType) {
             if (item) {
                 option = rowObj;
-                item.options.push(option);
+                if ((option.key === undefined) || (option.key === '')) {
+                    option.key = item.options.length.toString();  // Serial key
+                }
+                item.options.push(rowObj);
+            } else {
+                // Error
             }
         }
     }

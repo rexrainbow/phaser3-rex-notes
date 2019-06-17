@@ -3,13 +3,12 @@ import Clear from '../../utils/object/Clear.js';
 import Quest from './Quest.js';
 
 const RemoveItem = Phaser.Utils.Array.Remove;
-const Shuffle = Phaser.Utils.Array.Shuffle;
 
 class Form {
     constructor(config) {
         this.items = [];
         this.itemsMap = {};
-        this.quest = undefined;
+        this._quest = undefined;
     }
 
     add(item, config) {
@@ -30,18 +29,18 @@ class Form {
     }
 
     _add(item) {
-        var name = item.name;
-        if (this.itemsMap.hasOwnProperty(name)) {
-            this.remove(name);
+        var key = item.key;
+        if (this.itemsMap.hasOwnProperty(key)) {
+            this.remove(key);
         }
         this.items.push(item);
-        this.itemsMap[name] = item;
+        this.itemsMap[key] = item;
     }
 
-    remove(name) {
-        if (this.itemsMap.hasOwnProperty(name)) {
-            RemoveItem(this.items, this.itemsMap[name]);
-            delete this.itemsMap[name];
+    remove(key) {
+        if (this.itemsMap.hasOwnProperty(key)) {
+            RemoveItem(this.items, this.itemsMap[key]);
+            delete this.itemsMap[key];
         }
         return this;
     }
@@ -51,9 +50,14 @@ class Form {
         Clear(this.itemsMap);
     }
 
-    shuffle() {
-        Shuffle(this.items);
-        return this;
+    getKeys(out) {
+        if (out === undefined) {
+            out = [];
+        }
+        for (var i = 0, cnt = this.items.length; i < cnt; i++) {
+            out.push(this.items[i].key);
+        }
+        return out;
     }
 
     newQuest(config) {
@@ -62,8 +66,12 @@ class Form {
     }
 
     startQuest(config) {
-        this.quest = this.newQuest(config);
+        this._quest = this.newQuest(config);
         return this;
+    }
+
+    getNextQuest() {
+        return this._quest.getNext();
     }
 }
 

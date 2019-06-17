@@ -21,6 +21,15 @@ class Quest {
 
         this.shuffleQuests = GetValue(config, 'shuffleQuests', false);
         this.shuffleOptions = GetValue(config, 'shuffleOptions', false);
+
+        this.questsKeys = form.getKeys();
+        if (this.shuffleQuests) {
+            Shuffle(this.questsKeys);
+        }
+        this.key = this.questsKeys[0];
+    }
+
+    getNext() {
     }
 }
 

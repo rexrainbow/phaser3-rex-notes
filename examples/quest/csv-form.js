@@ -11,11 +11,11 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var csvString = `type,name,title,description
-q,Q1,Q1Title,Q1Description
-o,A1,A1Title,A1Description
-o,A2,A2Title,A2Description
-o,A3,A3Title,A3Description`;
+        var csvString = `type,title,description
+q,Q1Title,Q1Description
+,A1Title,A1Description
+,A2Title,A2Description
+,A3Title,A3Description`;
 
         var form = new Form();
         form.add(csvString);
