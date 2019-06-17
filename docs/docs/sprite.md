@@ -277,6 +277,13 @@ sprite.anims.restart();
     ```javascript
     sprite.on('animationstart-' + key, function(currentAnim, currentFrame, sprite){});
     ```
+- On restart
+    ```javascript
+    sprite.on('animationrestart', function(currentAnim, currentFrame, sprite){});
+    ```
+    ```javascript
+    sprite.on('animationrestart-' + key, function(currentAnim, currentFrame, sprite){});
+    ```
 - On complete
     ```javascript
     sprite.on('animationcomplete', function(currentAnim, currentFramee, sprite){});
@@ -290,4 +297,11 @@ sprite.anims.restart();
     ```
     ```javascript
     sprite.on('animationupdate-' + key, function(currentAnim, currentFrame, sprite){});
+    ```
+- On repeat
+    ```javascript
+    sprite.on('animationrepeat', function(currentAnim, currentFrame, sprite){});
+    ```
+    ```javascript
+    sprite.on('animationrepeat-' + key, function(currentAnim, currentFrame, sprite){});
     ```

@@ -218,11 +218,15 @@ var anim = scene.anims.get(key);
     ```javascript
     anim.on('start', function(currentAnim, currentFrame, sprite){});
     ```
+- On restart
+    ```javascript
+    anim.on('restart', function(currentAnim, currentFrame, sprite){});
+    ```
 - On complete
     ```javascript
     anim.on('complete', function(currentAnim, currentFrame, sprite){});
     ```
-- On restart
+- On repeat
     ```javascript
-    anim.on('restart', function(currentAnim, currentFrame, sprite){});
+    anim.on('repeat', function(currentAnim, currentFrame, sprite){});
     ```
