@@ -1,7 +1,7 @@
-import Sizer from '../sizer/Sizer.js';
-import GetScrollMode from './GetScrollMode.js';
-import Slider from '../slider/Slider.js';
-import Scroller from '../../../plugins/scroller.js';
+import Sizer from '../../sizer/Sizer.js';
+import GetScrollMode from '../GetScrollMode.js';
+import Slider from '../../slider/Slider.js';
+import Scroller from '../../../../plugins/scroller.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -218,12 +218,12 @@ class Scrollable extends Sizer {
     }
 
     scrollToTop() {
-        this.childOY = this.topChildOY;
+        this.t = 0;
         return this;
     }
 
     scrollToBottom() {
-        this.childOY = this.bottomChildOY;
+        this.t = 1;
         return this;
     }
 

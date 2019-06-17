@@ -1,4 +1,4 @@
-import Scrollable from '../utils/Scrollable.js';
+import Scrollable from '../utils/scrollable/Scrollable.js';
 import GetScrollMode from '../utils/GetScrollMode.js';
 import GridTableCore from '../../../plugins/gameobjects/gridtable/GridTable.js';
 import InjectProperties from './InjectProperties.js';
