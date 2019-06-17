@@ -41,6 +41,10 @@ class FieldOfView {
     }
 
     shutdown() {
+        if (this.debugGraphics) {
+            this.debugGraphics.destroy();
+            this.debugGraphics = undefined;
+        }
         this.gameObject = undefined;
         this.chessData = undefined;
         return this;
