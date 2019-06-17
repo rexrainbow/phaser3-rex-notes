@@ -65,7 +65,6 @@ var IsInLOS = function (chess, visiblePoints) {
     board.lineToTileXYArray(x0, y0, x1, y1, globTileXYArray1);
     if (this.debugLog) {
         console.log('Line 1: ' + JSON.stringify(globTileXYArray1));
-        this.debugGraphics.lineBetween(x0, y0, x1, y1);
     }
     // No need do visible checking if path is the same as previous one
     if (!AreTileXYArrayEqual(globTileXYArray0, globTileXYArray1)) {
