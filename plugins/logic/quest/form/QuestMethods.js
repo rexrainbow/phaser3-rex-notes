@@ -16,23 +16,23 @@ export default {
         return this;
     },
 
-    setNextQuestKey(key) {
+    setNextQuestionKey(key) {
         this._quest.setNextKey(key);
         return this;
     },
 
-    getQuest(key) {
+    getQuestion(key) {
         if (key !== undefined) {
-            this.setNextQuestKey(key);
+            this.setNextQuestionKey(key);
         }
         return this._quest.get();
     },
 
-    getNextQuest(key) {
+    getNextQuestion(key) {
         return this._quest.getNext(key);
     },
 
-    isLastQuest() {
+    isLastQuestion() {
         return this._quest.isLastKey;
     }
 };

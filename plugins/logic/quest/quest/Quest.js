@@ -4,18 +4,18 @@ import Shuffle from '../../../utils/array/Shuffle.js';
 class Quest {
     constructor(form, config) {
         this.form = form;
-        this.questsKeys = [];
+        this.keys = [];
 
-        this.setShuffleQuestsEnable(GetValue(config, 'shuffleQuests', false));
+        this.setShuffleQuestionsEnable(GetValue(config, 'shuffleQuestions', false));
         this.setShuffleOptionsEnable(GetValue(config, 'shuffleOptions', false));
         this.start();
     }
 
-    setShuffleQuestsEnable(enabled) {
+    setShuffleQuestionsEnable(enabled) {
         if (enabled === undefined) {
             enabled = true;
         }
-        this.shuffleQuests = enabled;
+        this.shuffleQuestionsEnable = enabled;
         return this;
     }
 
@@ -23,30 +23,30 @@ class Quest {
         if (enabled === undefined) {
             enabled = true;
         }
-        this.shuffleOptions = enabled;
+        this.shuffleOptionsEnable = enabled;
         return this;
     }
 
     start() {
-        // Reload questKeys
-        this.questsKeys.length = 0;
-        this.form.getKeys(this.questsKeys);
-        if (this.shuffleQuests) {
-            Shuffle(this.questsKeys);
+        // Reload keys
+        this.keys.length = 0;
+        this.form.getKeys(this.keys);
+        if (this.shuffleQuestionsEnable) {
+            Shuffle(this.keys);
         }
 
-        this.nextQuestIndex = -1;
-        this.nextQuestKey = undefined;
+        this.nextIndex = -1;
+        this.nextKey = undefined;
         return this;
     }
 
-    setNextKey(questKey) {
-        if (questKey === undefined) {
-            this.nextQuestIndex++;
-            this.nextQuestKey = this.questsKeys[this.nextQuestIndex];
-        } else if (this.form.has(questKey)) {
-            this.nextQuestKey = questKey;
-            this.nextQuestIndex = this.questsKeys.indexOf(questKey);
+    setNextKey(key) {
+        if (key === undefined) {
+            this.nextIndex++;
+            this.nextKey = this.keys[this.nextIndex];
+        } else if (this.form.has(key)) {
+            this.nextKey = key;
+            this.nextIndex = this.keys.indexOf(key);
         } else {
             // Error
         }
@@ -54,22 +54,22 @@ class Quest {
     }
 
     get() {
-        var quest = this.form.get(this.nextQuestKey);
-        if (this.shuffleOptions) {
-            var options = quest.options;
+        var question = this.form.get(this.nextKey);
+        if (this.shuffleOptionsEnable) {
+            var options = question.options;
             if (options) {
                 Shuffle(options);
             }
         }
-        return this.form.get(this.nextQuestKey);
+        return this.form.get(this.nextKey);
     }
 
-    getNext(questKey) {
-        return this.setNextKey(questKey).get();
+    getNext(key) {
+        return this.setNextKey(key).get();
     }
 
     get isLastKey() {
-        return this.nextQuestIndex === (this.questsKeys.length-1);
+        return this.nextIndex === (this.keys.length-1);
     }
 }
 
