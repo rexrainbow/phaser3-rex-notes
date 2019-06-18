@@ -24,8 +24,8 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var quest = this.plugins.get('rexQuest').add({
-            form: {
+        var task = this.plugins.get('rexQuest').add({
+            questions: {
                 items: csvString
             },
             quest: {
@@ -33,7 +33,7 @@ class Demo extends Phaser.Scene {
                 shuffleOptions: true,
             }
         });
-        runQuest(this, quest, function (out) {
+        runQuest(this, task, function (out) {
             console.log(out);
         });
     }
@@ -42,7 +42,7 @@ class Demo extends Phaser.Scene {
     }
 }
 
-var runQuest = function (scene, quest, onComplete, out) {
+var runQuest = function (scene, task, onComplete, out) {
     if (out === undefined) {
         out = {};
     }
@@ -50,7 +50,7 @@ var runQuest = function (scene, quest, onComplete, out) {
         scene.print = scene.add.text(0, 0, '');
     }
 
-    if (quest.isLastQuestion()) {
+    if (task.isLastQuestion()) {
         scene.print.text += JSON.stringify(out) + '\n';
         if (onComplete) {
             onComplete(out);
@@ -58,7 +58,7 @@ var runQuest = function (scene, quest, onComplete, out) {
         return;
     }
 
-    var item = quest.getNextQuestion();
+    var item = task.getNextQuestion();
     var options = item.options;
     scene.print.text += `${item.name}:${options[0].name}, ${options[1].name}, ${options[2].name} ? `;
 
@@ -78,21 +78,21 @@ var runQuest = function (scene, quest, onComplete, out) {
         .on('down', function () {
             out[item.name] = 'Z';
             scene.print.text += 'Z\n';
-            runQuest(scene, quest, onComplete, out);
+            runQuest(scene, task, onComplete, out);
         })
     scene.xKey
         .removeAllListeners()
         .on('down', function () {
             out[item.name] = 'X';
             scene.print.text += 'X\n';
-            runQuest(scene, quest, onComplete, out);
+            runQuest(scene, task, onComplete, out);
         })
     scene.cKey
         .removeAllListeners()
         .on('down', function () {
             out[item.name] = 'C';
             scene.print.text += 'C\n';
-            runQuest(scene, quest, onComplete, out);
+            runQuest(scene, task, onComplete, out);
         })
 }
 
