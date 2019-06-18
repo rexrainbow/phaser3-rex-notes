@@ -25,9 +25,7 @@ class Demo extends Phaser.Scene {
 
     create() {
         var task = this.plugins.get('rexQuest').add({
-            questions: {
-                items: csvString
-            },
+            questions: csvString,
             quest: {
                 shuffleQuestions: true,
                 shuffleOptions: true,

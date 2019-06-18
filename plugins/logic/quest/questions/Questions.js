@@ -10,9 +10,9 @@ class Questions {
         this.itemsMap = {};
         this._quest = undefined;
 
-        var formConfig = GetValue(config, 'questions', undefined);
-        if (formConfig) {
-            this.add(formConfig.items, formConfig);
+        var questions = GetValue(config, 'questions', undefined);
+        if (questions) {
+            this.add(questions, config);
         }
         var questConfig = GetValue(config, 'quest', undefined);
         if (questConfig) {
