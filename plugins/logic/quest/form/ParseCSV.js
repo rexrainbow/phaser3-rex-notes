@@ -1,6 +1,5 @@
+import GetValue from '../../../utils/object/GetValue.js';
 import CSVParser from 'papaparse/papaparse.js';
-
-const GetValue = Phaser.Utils.Objects.GetValue;
 
 var ParseCSV = function (csvString, config) {
     var delimiter = GetValue(config, 'delimiter', ',');
@@ -22,8 +21,8 @@ var ParseCSV = function (csvString, config) {
 
         if (rowType === questType) {
             item = rowObj;
-            if ((item.key === undefined) || (item.key === '')) {
-                item.key = items.length.toString(); // Serial key
+            if (item.key === '') {
+                delete item.key;
             }
 
             item.options = [];
@@ -31,8 +30,8 @@ var ParseCSV = function (csvString, config) {
         } else if (rowType === optionType) {
             if (item) {
                 option = rowObj;
-                if ((option.key === undefined) || (option.key === '')) {
-                    option.key = item.options.length.toString();  // Serial key
+                if (option.key === '') {
+                    delete option.key;
                 }
                 item.options.push(rowObj);
             } else {

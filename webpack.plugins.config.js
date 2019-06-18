@@ -81,9 +81,10 @@ module.exports = {
         'fsmplugin': './plugins/fsm-plugin.js',
         'tcrpplugin': './plugins/tcrp-plugin.js',
         'csvscenarioplugin': './plugins/csvscenario-plugin.js',
-        'waitevents': './plugins/waitevents-plugin.js',
+        'waiteventsplugin': './plugins/waitevents-plugin.js',
         'achievementsplugin': './plugins/achievements-plugin.js',
         'conditionstableplugin': './plugins/conditionstable-plugin.js',
+        'questplugin': './plugins/quest-plugin.js',
 
         // time
         'clockplugin': './plugins/clock-plugin.js',

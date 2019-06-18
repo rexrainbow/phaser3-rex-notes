@@ -1,16 +1,8 @@
 import ParseCSV from './ParseCSV.js';
-import Clear from '../../utils/object/Clear.js';
-import Quest from './Quest.js';
+import RemoveItem from '../../../utils/array/Remove.js';
+import Clear from '../../../utils/object/Clear.js';
 
-const RemoveItem = Phaser.Utils.Array.Remove;
-
-class Form {
-    constructor(config) {
-        this.items = [];
-        this.itemsMap = {};
-        this._quest = undefined;
-    }
-
+export default {
     add(item, config) {
         if (typeof (item) === 'string') {
             var csvString = item;
@@ -26,16 +18,31 @@ class Form {
             this._add(itme);
         }
         return this;
-    }
+    },
 
     _add(item) {
+        var options = item.options;
+        if (options) {
+            // Apply key via serial number
+            var option;
+            for (var i = 0, cnt = options.length; i < cnt; i++) {
+                option = options[i];
+                if (!option.hasOwnProperty('key')) {
+                    option.key = i.toString();
+                }
+            }
+        }
+        if (!item.hasOwnProperty('key')) {
+            // Apply key via serial numbers
+            item.key = this.items.length.toString();
+        }
         var key = item.key;
         if (this.itemsMap.hasOwnProperty(key)) {
             this.remove(key);
         }
         this.items.push(item);
         this.itemsMap[key] = item;
-    }
+    },
 
     remove(key) {
         if (this.itemsMap.hasOwnProperty(key)) {
@@ -43,12 +50,20 @@ class Form {
             delete this.itemsMap[key];
         }
         return this;
-    }
+    },
 
     removeAll() {
         this.items.length = 0;
         Clear(this.itemsMap);
-    }
+    },
+
+    has(key) {
+        return this.itemsMap.hasOwnProperty(key);
+    },
+
+    get(key) {
+        return this.itemsMap[key];
+    },
 
     getKeys(out) {
         if (out === undefined) {
@@ -58,21 +73,5 @@ class Form {
             out.push(this.items[i].key);
         }
         return out;
-    }
-
-    newQuest(config) {
-        var quest = new Quest(this, config);
-        return quest;
-    }
-
-    startQuest(config) {
-        this._quest = this.newQuest(config);
-        return this;
-    }
-
-    getNextQuest() {
-        return this._quest.getNext();
-    }
-}
-
-export default Form;
+    },
+};
