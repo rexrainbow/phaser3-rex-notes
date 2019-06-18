@@ -1,4 +1,4 @@
-import From from './quest.js';
+import Questions from './quest.js';
 
 class QuestPlugin extends Phaser.Plugins.BasePlugin {
     constructor(pluginManager) {
@@ -11,7 +11,7 @@ class QuestPlugin extends Phaser.Plugins.BasePlugin {
     }
 
     add(config) {
-        return new From(config);
+        return new Questions(config);
     }
 }
 

@@ -1,8 +1,33 @@
+import GetValue from '../../../utils/object/GetValue.js';
 import ParseCSV from './ParseCSV.js';
 import RemoveItem from '../../../utils/array/Remove.js';
 import Clear from '../../../utils/object/Clear.js';
+import QuestMethods from './QuestMethods.js';
 
-export default {
+class Questions {
+    constructor(config) {
+        this.items = [];
+        this.itemsMap = {};
+        this._quest = undefined;
+
+        var formConfig = GetValue(config, 'form', undefined);
+        if (formConfig) {
+            this.add(formConfig.items, formConfig);
+        }
+        var questConfig = GetValue(config, 'quest', undefined);
+        if (questConfig) {
+            this.startQuest(questConfig)
+        }
+    }
+
+    destroy() {
+        if (this._quest) {
+            this._quest.destroy();
+            this._quest = undefined;
+        }
+        // TODO:
+    }
+
     add(item, config) {
         if (typeof (item) === 'string') {
             var csvString = item;
@@ -18,7 +43,7 @@ export default {
             this._add(itme);
         }
         return this;
-    },
+    }
 
     _add(item) {
         var options = item.options;
@@ -28,13 +53,13 @@ export default {
             for (var i = 0, cnt = options.length; i < cnt; i++) {
                 option = options[i];
                 if (!option.hasOwnProperty('key')) {
-                    option.key = i.toString();
+                    option.key = `_${i}`;
                 }
             }
         }
         if (!item.hasOwnProperty('key')) {
             // Apply key via serial numbers
-            item.key = this.items.length.toString();
+            item.key = `_${this.items.length}`;
         }
         var key = item.key;
         if (this.itemsMap.hasOwnProperty(key)) {
@@ -42,7 +67,7 @@ export default {
         }
         this.items.push(item);
         this.itemsMap[key] = item;
-    },
+    }
 
     remove(key) {
         if (this.itemsMap.hasOwnProperty(key)) {
@@ -50,20 +75,20 @@ export default {
             delete this.itemsMap[key];
         }
         return this;
-    },
+    }
 
     removeAll() {
         this.items.length = 0;
         Clear(this.itemsMap);
-    },
+    }
 
     has(key) {
         return this.itemsMap.hasOwnProperty(key);
-    },
+    }
 
     get(key) {
         return this.itemsMap[key];
-    },
+    }
 
     getKeys(out) {
         if (out === undefined) {
@@ -73,5 +98,12 @@ export default {
             out.push(this.items[i].key);
         }
         return out;
-    },
-};
+    }
+}
+
+Object.assign(
+    Questions.prototype,
+    QuestMethods
+);
+
+export default Questions;
