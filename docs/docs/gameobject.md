@@ -408,15 +408,19 @@ See [data manager](datamanager.md)
     gameObject.name = name;
     ```
 
-### Destroy event
+### Destroy
 
-Each kind of game object will emit `destroy` event when destroyed.
-
-```javascript
-gameObject.once('destroy', function(gameObject) {
-
-}, scope);
-```
+- Destroy game object
+    ```javascript
+    gameObject.destroy();
+    ```
+- Game object will be destroyed automatically when scene destroyed, if it is in display list, or update list.
+- Event
+    ```javascript
+    gameObject.once('destroy', function(gameObject) {
+    
+    }, scope);
+    ```
 
 ### Custom class
 
