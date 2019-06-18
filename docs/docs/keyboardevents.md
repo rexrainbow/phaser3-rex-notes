@@ -117,6 +117,12 @@ Built-in keyboard events of phaser.
     - `event.stopImmediatePropagation()` : Stop any further listeners from being invoked in the current Scene.
     - `event.stopPropagation()` : Stop it reaching any other Scene.
 
+### Destroy key object
+
+```javascript
+keyObj.destroy();
+```
+
 ### Key map
 
 - `A` ~ `Z`
