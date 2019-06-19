@@ -1,11 +1,15 @@
+import EventEmitterMethods from '../../../utils/eventemitter/EventEmitterMethods.js';
 import GetValue from '../../../utils/object/GetValue.js';
 import ParseCSV from './ParseCSV.js';
 import RemoveItem from '../../../utils/array/Remove.js';
 import Clear from '../../../utils/object/Clear.js';
 import QuestMethods from './QuestMethods.js';
 
-class Questions {
+class QuestionManager {
     constructor(config) {
+        // Event emitter. Create a private event emitter for private quest task object.
+        this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
+
         this.items = [];
         this.itemsMap = {};
         this._quest = undefined;
@@ -20,12 +24,16 @@ class Questions {
         }
     }
 
-    destroy() {
+    shutdown() {
         if (this._quest) {
             this._quest.destroy();
             this._quest = undefined;
         }
-        // TODO:
+        this.destroyEventEmitter();
+    }
+
+    destroy() {
+        this.shutdown();
     }
 
     add(item, config) {
@@ -102,8 +110,9 @@ class Questions {
 }
 
 Object.assign(
-    Questions.prototype,
+    QuestionManager.prototype,
+    EventEmitterMethods,
     QuestMethods
 );
 
-export default Questions;
+export default QuestionManager;

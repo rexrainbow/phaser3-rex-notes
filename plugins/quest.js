@@ -1,2 +1,2 @@
-import Questions from './logic/quest/questions/Questions.js';
-export default Questions;
+import QuestionManager from './logic/quest/questions/QuestionManager.js';
+export default QuestionManager;

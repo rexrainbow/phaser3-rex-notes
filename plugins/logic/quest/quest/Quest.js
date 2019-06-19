@@ -1,14 +1,28 @@
+import EventEmitterMethods from '../../../utils/eventemitter/EventEmitterMethods.js';
 import GetValue from '../../../utils/object/GetValue.js';
 import Shuffle from '../../../utils/array/Shuffle.js';
+import DataMethods from './DataMethods.js';
 
 class Quest {
-    constructor(form, config) {
-        this.form = form;
+    constructor(questionsManager, config) {
+        // Event emitter
+        this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
+
+        this.questionsManager = questionsManager;
         this.keys = [];
 
         this.setShuffleQuestionsEnable(GetValue(config, 'shuffleQuestions', false));
         this.setShuffleOptionsEnable(GetValue(config, 'shuffleOptions', false));
         this.start();
+    }
+
+    shutdown() {
+        this.questionsManager = undefined;
+        this.destroyEventEmitter();
+    }
+
+    destroy() {
+        this.shutdown();
     }
 
     setShuffleQuestionsEnable(enabled) {
@@ -30,7 +44,7 @@ class Quest {
     start() {
         // Reload keys
         this.keys.length = 0;
-        this.form.getKeys(this.keys);
+        this.questionsManager.getKeys(this.keys);
         if (this.shuffleQuestionsEnable) {
             Shuffle(this.keys);
         }
@@ -44,7 +58,7 @@ class Quest {
         if (key === undefined) {
             this.nextIndex++;
             this.nextKey = this.keys[this.nextIndex];
-        } else if (this.form.has(key)) {
+        } else if (this.questionsManager.has(key)) {
             this.nextKey = key;
             this.nextIndex = this.keys.indexOf(key);
         } else {
@@ -54,14 +68,15 @@ class Quest {
     }
 
     get() {
-        var question = this.form.get(this.nextKey);
+        var question = this.questionsManager.get(this.nextKey);
         if (this.shuffleOptionsEnable) {
             var options = question.options;
             if (options) {
                 Shuffle(options);
             }
         }
-        return this.form.get(this.nextKey);
+        this.emit('quest', question, this.questionsManager, this);
+        return question;
     }
 
     getNext(key) {
@@ -69,8 +84,14 @@ class Quest {
     }
 
     get isLastKey() {
-        return this.nextIndex === (this.keys.length-1);
+        return this.nextIndex === (this.keys.length - 1);
     }
 }
+
+Object.assign(
+    Quest.prototype,
+    EventEmitterMethods,
+    DataMethods
+);
 
 export default Quest;

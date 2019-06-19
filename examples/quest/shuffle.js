@@ -24,74 +24,51 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var task = this.plugins.get('rexQuest').add({
+        this.print = this.add.text(0, 0, '');
+
+        this.plugins.get('rexQuest').add({
             questions: csvString,
             quest: {
                 shuffleQuestions: true,
                 shuffleOptions: true,
             }
-        });
-        runQuest(this, task, function (out) {
-            console.log(out);
-        });
+        })
+            .on('quest', function (question, questionManager, quest) {
+                // Show question and options
+                var options = question.options;
+                this.print.text += `${question.name}:${options[0].name}, ${options[1].name}, ${options[2].name} ? `;
+
+                // Register input event
+                var onKeyDown = function (event) {
+                    var keyName = event.key.toUpperCase();
+                    if ((keyName === 'Z') ||
+                        (keyName === 'X') ||
+                        (keyName === 'C')) {
+                        this.print.text += keyName + '\n';
+                        questionManager.setData(question.name, keyName);
+
+                        if (questionManager.isLastQuestion()) {
+                            this.print.text += JSON.stringify(questionManager.getData()) + '\n';
+                            questionManager.emit('complete', questionManager, quest); // User defined event
+                        } else {
+                            questionManager.getNextQuestion();
+                        }
+                    } else {
+                        // Register input event again
+                        this.input.keyboard.once('keydown', onKeyDown);
+                    }
+                }.bind(this);
+                this.input.keyboard.once('keydown', onKeyDown);
+
+            }, this)
+            .on('complete', function (quest) {
+                console.log(quest.getData());
+            }, this)
+            .getNextQuestion();
     }
 
     update() {
     }
-}
-
-var runQuest = function (scene, task, onComplete, out) {
-    if (out === undefined) {
-        out = {};
-    }
-    if (scene.print === undefined) {
-        scene.print = scene.add.text(0, 0, '');
-    }
-
-    if (task.isLastQuestion()) {
-        scene.print.text += JSON.stringify(out) + '\n';
-        if (onComplete) {
-            onComplete(out);
-        }
-        return;
-    }
-
-    var item = task.getNextQuestion();
-    var options = item.options;
-    scene.print.text += `${item.name}:${options[0].name}, ${options[1].name}, ${options[2].name} ? `;
-
-    // Input
-    if (scene.zKey === undefined) {
-        scene.zKey = scene.input.keyboard.addKey('Z');
-    }
-    if (scene.xKey === undefined) {
-        scene.xKey = scene.input.keyboard.addKey('X');
-    }
-    if (scene.cKey === undefined) {
-        scene.cKey = scene.input.keyboard.addKey('C');
-    }
-
-    scene.zKey
-        .removeAllListeners()
-        .on('down', function () {
-            out[item.name] = 'Z';
-            scene.print.text += 'Z\n';
-            runQuest(scene, task, onComplete, out);
-        })
-    scene.xKey
-        .removeAllListeners()
-        .on('down', function () {
-            out[item.name] = 'X';
-            scene.print.text += 'X\n';
-            runQuest(scene, task, onComplete, out);
-        })
-    scene.cKey
-        .removeAllListeners()
-        .on('down', function () {
-            out[item.name] = 'C';
-            scene.print.text += 'C\n';
-            runQuest(scene, task, onComplete, out);
-        })
 }
 
 var config = {
