@@ -7,9 +7,6 @@ export default {
     },
 
     startQuest(config) {
-        if (config === undefined) {
-            config = {};
-        }
         if (!config.hasOwnProperty('eventEmitter')) {
             config.eventEmitter = this;
         }

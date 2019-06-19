@@ -20,6 +20,9 @@ class QuestionManager {
         }
         var questConfig = GetValue(config, 'quest', undefined);
         if (questConfig) {
+            if (questConfig === true) {
+                questConfig = {};
+            }
             this.startQuest(questConfig)
         }
     }
