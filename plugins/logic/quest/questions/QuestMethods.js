@@ -31,15 +31,15 @@ export default {
         if (key !== undefined) {
             this.setNextQuestionKey(key);
         }
-        return this._quest.get();
+        return this._quest.getQuestion();
     },
 
     getNextQuestion(key) {
-        return this._quest.getNext(key);
+        return this._quest.getNextQuestion(key);
     },
 
     isLastQuestion() {
-        return this._quest.isLastKey;
+        return this._quest.isLastQuestion();
     },
 
     getData(key, defaultValue) {

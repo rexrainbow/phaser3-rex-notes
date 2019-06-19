@@ -67,7 +67,7 @@ class Quest {
         return this;
     }
 
-    get() {
+    getQuestion() {
         var question = this.questionsManager.get(this.nextKey);
         if (this.shuffleOptionsEnable) {
             var options = question.options;
@@ -79,11 +79,11 @@ class Quest {
         return question;
     }
 
-    getNext(key) {
-        return this.setNextKey(key).get();
+    getNextQuestion(key) {
+        return this.setNextKey(key).getQuestion();
     }
 
-    get isLastKey() {
+    isLastQuestion() {
         return this.nextIndex === (this.keys.length - 1);
     }
 }
