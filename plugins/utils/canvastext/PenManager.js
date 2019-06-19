@@ -9,7 +9,7 @@ const NO_NEWLINE = CONST.NO_NEWLINE;
 
 var PensPool = new PoolKlass(); // default pens pool
 var LinesPool = new PoolKlass(); // default lines pool
-class PensManager {
+class PenManager {
     constructor(config) {
         this.pens = []; // all pens
         this.lines = []; // pens in lines [ [],[],[],.. ]
@@ -73,17 +73,17 @@ class PensManager {
         this.maxLinesWidth = undefined;
     }
 
-    clone(targetPensManager) {
-        if (targetPensManager == null)
-            targetPensManager = new PensManager();
+    clone(targetPenManager) {
+        if (targetPenManager == null)
+            targetPenManager = new PenManager();
 
-        targetPensManager.freePens();
+        targetPenManager.freePens();
 
         for (var li = 0, llen = this.lines.length; li < llen; li++) {
             var pens = this.lines[li];
             for (var pi = 0, plen = pens.length; pi < plen; pi++) {
                 var pen = pens[pi];
-                targetPensManager.addPen(
+                targetPenManager.addPen(
                     pen.text,
                     pen.x,
                     pen.y,
@@ -94,7 +94,7 @@ class PensManager {
             }
         }
 
-        return targetPensManager;
+        return targetPenManager;
     }
 
     get lastPen() {
@@ -250,4 +250,4 @@ class PensManager {
 
 var PEN_CONFIG = {};
 
-export default PensManager;
+export default PenManager;

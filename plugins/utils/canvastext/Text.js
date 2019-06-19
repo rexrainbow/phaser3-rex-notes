@@ -331,7 +331,7 @@ var Text = new Phaser.Class({
         // wrap text to pens
         var style = this.style;
         if (runWrap) {
-            canvasText.updatePensManager(
+            canvasText.updatePenManager(
                 this._text,
                 style.wrapMode,
                 style.wrapWidth,
@@ -468,12 +468,12 @@ var Text = new Phaser.Class({
         return this.getText(text, start, end);
     },
 
-    copyPensManager: function (pensManager) {
-        return this.canvasText.copyPensManager(pensManager);
+    copyPenManager: function (penManager) {
+        return this.canvasText.copyPenManager(penManager);
     },
 
-    getPenManager: function (text, pensManager) {
-        return this.canvasText.getPenManager(text, pensManager);
+    getPenManager: function (text, penManager) {
+        return this.canvasText.getPenManager(text, penManager);
     },
 
     setSize: function (width, height) {
