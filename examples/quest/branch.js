@@ -60,8 +60,9 @@ class Demo extends Phaser.Scene {
             quest: true
         })
             .on('quest', function (question, questionManager, quest) {
-                if (question.end === '1') {                    
-                    questionManager.emit('complete', questionManager, quest, question.key); // User defined event
+                if (question.end === '1') {
+                    questionManager.setData('endAt', question.key);
+                    questionManager.emit('complete', questionManager, quest); // User defined event
                     return;
                 }
 
@@ -85,8 +86,8 @@ class Demo extends Phaser.Scene {
                 this.input.keyboard.once('keydown', onKeyDown);
 
             }, this)
-            .on('complete', function (questionManager, quest, endKey) {
-                this.print.text += `End at ${endKey}\n`;
+            .on('complete', function (questionManager, quest) {
+                this.print.text += `End at ${questionManager.getData('endAt')}\n`;
             }, this)
             .getNextQuestion();
     }

@@ -21,12 +21,18 @@ export default {
     },
 
     incData(key, inc, defaultValue) {
+        if (defaultValue === undefined) {
+            defaultValue = 0;
+        }
         this.enableData();
         this.setData(key, this.getData(key, defaultValue) + inc);
         return this;
     },
 
     mulData(key, mul, defaultValue) {
+        if (defaultValue === undefined) {
+            defaultValue = 0;
+        }
         this.enableData();
         this.setData(key, this.getData(key, defaultValue) * mul);
         return this;

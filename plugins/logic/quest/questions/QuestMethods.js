@@ -1,3 +1,5 @@
+import IsPlainObject from '../../../utils/object/IsPlainObject.js';
+import GetValue from '../../../utils/object/GetValue.js';
 import Quest from '../quest/Quest.js';
 
 export default {
@@ -7,9 +9,10 @@ export default {
     },
 
     startQuest(config) {
-        if (!config.hasOwnProperty('eventEmitter')) {
-            config.eventEmitter = this;
+        if (!IsPlainObject(config)) {
+            config = {};
         }
+        config.eventEmitter = GetValue(config, 'eventEmitter', this);
         this._quest = this.newQuest(config);
         return this;
     },
