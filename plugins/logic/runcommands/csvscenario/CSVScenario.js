@@ -53,9 +53,9 @@ class CSVScenario {
     }
 
     shutdown() {
-        this.destroyEventEmitter();
         this.clear();
         this.parent = undefined;
+        this.destroyEventEmitter();
     }
 
     destroy() {
@@ -204,7 +204,7 @@ class CSVScenario {
         return this;
     }
 
-    continue (eventName) {
+    continue(eventName) {
         if ((!this.isRunning) ||
             this.isPaused ||
             (this.waitEvent === undefined)) {
