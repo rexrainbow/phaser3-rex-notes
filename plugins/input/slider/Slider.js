@@ -62,10 +62,10 @@ class Slider {
     }
 
     shutdown() {
-        this.destroyEventEmitter();
         this.gameObject = undefined;
         this.scene = undefined;
         // gameObject event 'drag' will be removed when this gameObject destroyed 
+        this.destroyEventEmitter();
     }
 
     destroy() {

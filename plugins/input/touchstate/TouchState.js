@@ -40,12 +40,11 @@ class TouchState {
     }
 
     shutdown() {
-        this.destroyEventEmitter();
-
         this.pointer = undefined;
         this.gameObject = undefined;
         this.scene = undefined;
         // gameObject events will be removed when this gameObject destroyed 
+        this.destroyEventEmitter();
     }
 
     destroy() {

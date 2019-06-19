@@ -21,10 +21,10 @@ class TickTask {
 
     // override
     shutdown() {
-        this.destroyEventEmitter();
         if (this.tickingState) {
             this.stopTicking();
         }
+        this.destroyEventEmitter();
     }
 
     setTickingMode(mode) {

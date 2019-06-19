@@ -73,7 +73,6 @@ class Scroller {
     }
 
     shutdown() {
-        this.destroyEventEmitter();
         if (this.scene) { // Scene might be destoryed
             this.scene.events.off('update', this._state.update, this._state);
         }
@@ -82,6 +81,7 @@ class Scroller {
         this._state.destroy();
         this.dragState.destroy();
         // gameObject events will be removed when this gameObject destroyed 
+        this.destroyEventEmitter();
     }
 
     destroy() {
