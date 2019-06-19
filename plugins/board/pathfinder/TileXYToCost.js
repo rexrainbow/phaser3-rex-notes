@@ -1,8 +1,8 @@
 var TileXYToCost = function (tileX, tileY, pathCost) {
-    if (this.nodesManager === undefined) {
+    if (this.nodeManager === undefined) {
         return null;
     }
-    var node = this.nodesManager.getNode(tileX, tileY);
+    var node = this.nodeManager.getNode(tileX, tileY);
     if (node === null) {
         return null;
     }

@@ -6,12 +6,12 @@ var GetPath = function (endTileXY, out) {
     if (this.board === undefined) {
         return out;
     }
-    var nodesManager = this.nodesManager;
-    if (nodesManager === undefined) {
+    var nodeManager = this.nodeManager;
+    if (nodeManager === undefined) {
         return out;
     }
-    var startNode = nodesManager.getNode(this.chessData.tileXYZ, false);
-    var endNode = nodesManager.getNode(endTileXY, false);
+    var startNode = nodeManager.getNode(this.chessData.tileXYZ, false);
+    var endNode = nodeManager.getNode(endTileXY, false);
     if ((startNode === null) || (endNode === null)) {
         return out;
     }

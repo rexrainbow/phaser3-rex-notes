@@ -18,8 +18,8 @@ var FindArea = function (movingPoints, out) {
         startTileX = startTileXYZ.x,
         startTileY = startTileXYZ.y;
     this.aStarSearch(startTileXYZ, null, movingPoints, AREA_MODE);
-    // output : this.nodesManager.getAllNodes()
-    var nodes = this.nodesManager.getAllNodes(),
+    // output : this.nodeManager.getAllNodes()
+    var nodes = this.nodeManager.getAllNodes(),
         node, nodesList = [];
     for (var key in nodes) {
         node = nodes[key];

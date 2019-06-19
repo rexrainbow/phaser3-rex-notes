@@ -19,8 +19,8 @@ var FindPath = function (endTileXY, movingPoints, isClosest, out) {
 
     var startTileXYZ = this.chessData.tileXYZ;
     this.aStarSearch(startTileXYZ, endTileXY, movingPoints, PATH_MODE);
-    var nodesManager = this.nodesManager;
-    var endNode = (isClosest) ? nodesManager.closestNode : nodesManager.getNode(endTileXY);
+    var nodeManager = this.nodeManager;
+    var endNode = (isClosest) ? nodeManager.closestNode : nodeManager.getNode(endTileXY);
     if (endNode === null) {
         return out;
     }

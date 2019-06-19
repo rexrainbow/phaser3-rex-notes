@@ -10,7 +10,7 @@ class PathFinder {
     constructor(gameObject, config) {
         this.gameObject = gameObject;
         this.chessData = GetChessData(gameObject);
-        this.nodesManager = undefined;
+        this.nodeManager = undefined;
         this.resetFromJSON(config);
     }
 
@@ -38,8 +38,8 @@ class PathFinder {
     }
 
     shutdown() {
-        if (this.nodesManager !== undefined) {
-            this.nodesManager.destroy();
+        if (this.nodeManager !== undefined) {
+            this.nodeManager.destroy();
         }
         this.gameObject = undefined;
         this.chessData = undefined;

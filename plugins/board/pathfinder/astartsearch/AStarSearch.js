@@ -30,11 +30,11 @@ var gOpenHeap = new BinaryHeap(function (node) {
 // global object
 
 var AStarSerach = function (startTileXYZ, endTileXY, movingPoints, mode) {
-    if (this.nodesManager === undefined) {
-        this.nodesManager = new NodeManager(this);
+    if (this.nodeManager === undefined) {
+        this.nodeManager = new NodeManager(this);
     }
-    var nodesManager = this.nodesManager;
-    nodesManager.freeAllNodes();
+    var nodeManager = this.nodeManager;
+    nodeManager.freeAllNodes();
 
     // const isAreaSearch = (mode === AREA_MODE);
     const isPathSearch = (mode === PATH_MODE);
@@ -48,8 +48,8 @@ var AStarSerach = function (startTileXYZ, endTileXY, movingPoints, mode) {
                     (this.pathMode == ASTAR_RANDOM) ? 2 :
                         null;
 
-    var end = (endTileXY !== null) ? nodesManager.getNode(endTileXY.x, endTileXY.y, true) : null;
-    var start = nodesManager.getNode(startTileXYZ.x, startTileXYZ.y, true);
+    var end = (endTileXY !== null) ? nodeManager.getNode(endTileXY.x, endTileXY.y, true) : null;
+    var start = nodeManager.getNode(startTileXYZ.x, startTileXYZ.y, true);
     start.h = start.heuristic(end, astarHeuristicMode);
 
     // NEAREST NODE
@@ -152,7 +152,7 @@ var AStarSerach = function (startTileXYZ, endTileXY, movingPoints, mode) {
 
     }
 
-    nodesManager.closestNode = (isPathSearch) ? closestNode : null;
+    nodeManager.closestNode = (isPathSearch) ? closestNode : null;
     gOpenHeap.clear();
     return this;
 }
