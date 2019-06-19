@@ -694,8 +694,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#destroy-event" title="Destroy event" class="md-nav__link">
-    Destroy event
+  <a href="#destroy" title="Destroy" class="md-nav__link">
+    Destroy
   </a>
   
 </li>
@@ -4548,8 +4548,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#destroy-event" title="Destroy event" class="md-nav__link">
-    Destroy event
+  <a href="#destroy" title="Destroy" class="md-nav__link">
+    Destroy
   </a>
   
 </li>
@@ -4981,13 +4981,18 @@
 <span class="nx">gameObject</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
 </pre></div></li>
 </ul>
-<h3 id="destroy-event">Destroy event<a class="headerlink" href="#destroy-event" title="Permanent link">&para;</a></h3>
-<p>Each kind of game object will emit <code>destroy</code> event when destroyed.</p>
-<div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;destroy&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">)</span> <span class="p">{</span>
+<h3 id="destroy">Destroy<a class="headerlink" href="#destroy" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Destroy game object
+    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
+</pre></div></li>
+<li>Game object will be destroyed automatically when scene destroyed, if it is in display list, or update list.</li>
+<li>Event
+    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;destroy&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">)</span> <span class="p">{</span>
 
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
-</pre></div>
-
+</pre></div></li>
+</ul>
 <h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Define class

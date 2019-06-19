@@ -2165,6 +2165,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#destroy-key-object" title="Destroy key object" class="md-nav__link">
+    Destroy key object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#key-map" title="Key map" class="md-nav__link">
     Key map
   </a>
@@ -4347,6 +4354,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#destroy-key-object" title="Destroy key object" class="md-nav__link">
+    Destroy key object
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#key-map" title="Key map" class="md-nav__link">
     Key map
   </a>
@@ -4406,10 +4420,13 @@
 <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;keyup-&#39;</span> <span class="o">+</span> <span class="s1">&#39;W&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 </pre></div></li>
 <li>Any key-down/any key-up
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;keydown&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">eventName</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;keyup&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">eventName</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;keydown&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">keyboard</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;keyup&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">});</span>
 </pre></div><ul>
-<li><code>eventName</code> : <code>'keydown-' + 'W'</code>, or <code>'keyup-' + 'W'</code></li>
+<li><code>event</code> : <a href="https://www.w3schools.com/jsref/obj_keyboardevent.asp">KeyboardEvent</a><ul>
+<li><code>event.code</code> : 'Key' + 'W'</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -4487,6 +4504,10 @@
 </ul>
 </li>
 </ol>
+<h3 id="destroy-key-object">Destroy key object<a class="headerlink" href="#destroy-key-object" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">keyObj</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
+</pre></div>
+
 <h3 id="key-map">Key map<a class="headerlink" href="#key-map" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>A</code> ~ <code>Z</code></li>
