@@ -19,10 +19,7 @@ class QuestionManager {
             this.add(questions, config);
         }
         var questConfig = GetValue(config, 'quest', undefined);
-        if (questConfig) {
-            if (questConfig === true) {
-                questConfig = {};
-            }
+        if (questConfig) {           
             this.startQuest(questConfig)
         }
     }
