@@ -32,10 +32,11 @@ Built-in keyboard events of phaser.
     ```
 - Any key-down/any key-up
     ```javascript
-    scene.input.keyboard.on('keydown', function (eventName, event) { /* ... */ });
-    scene.input.keyboard.on('keyup', function (eventName, event) { /* ... */ });
+    scene.input.keyboard.on('keydown', function (event) { /* ... */ });
+    scene.input.keyboard.on('keyup', function (event) { /* ... */ });
     ```
-    - `eventName` : `'keydown-' + 'W'`, or `'keyup-' + 'W'`
+    - `event` : [KeyboardEvent](https://www.w3schools.com/jsref/obj_keyboardevent.asp)
+        - `event.code` : 'Key' + 'W'
 
 ### Key object
 
