@@ -53,9 +53,9 @@ class CSVScenario {
     }
 
     shutdown() {
-        this.clear();
-        this.parent = undefined;
         this.destroyEventEmitter();
+        this.clear();
+        this.scene = undefined;        
     }
 
     destroy() {

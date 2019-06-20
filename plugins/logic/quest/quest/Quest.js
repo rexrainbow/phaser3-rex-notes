@@ -17,8 +17,8 @@ class Quest {
     }
 
     shutdown() {
-        this.questionsManager = undefined;
         this.destroyEventEmitter();
+        this.questionsManager = undefined;        
     }
 
     destroy() {

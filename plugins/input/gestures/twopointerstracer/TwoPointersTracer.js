@@ -40,6 +40,7 @@ class TwoPointersTracer {
     }
 
     shutdown() {
+        this.destroyEventEmitter();
         this.pointers.length = 0;
         Clear(this.movedState);
         if (this.scene) {
@@ -49,7 +50,7 @@ class TwoPointersTracer {
             this.scene.events.off('destroy', this.destroy, this);
             this.scene = undefined;
         }
-        this.destroyEventEmitter();
+        this.scene = undefined;
     }
 
     destroy() {

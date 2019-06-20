@@ -25,11 +25,11 @@ class QuestionManager {
     }
 
     shutdown() {
+        this.destroyEventEmitter();
         if (this._quest) {
             this._quest.destroy();
             this._quest = undefined;
-        }
-        this.destroyEventEmitter();
+        }        
     }
 
     destroy() {

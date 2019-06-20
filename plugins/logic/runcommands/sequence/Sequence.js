@@ -23,10 +23,10 @@ class Sequence {
 
     shutdown() {
         this.stop();
+        this.destroyEventEmitter();
         this.commands.length = 0;
         this.scope = undefined;
         this.config = undefined;
-        this.destroyEventEmitter();
     }
 
     destroy() {

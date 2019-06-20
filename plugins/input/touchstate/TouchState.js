@@ -40,11 +40,11 @@ class TouchState {
     }
 
     shutdown() {
+        this.destroyEventEmitter();
         this.pointer = undefined;
         this.gameObject = undefined;
         this.scene = undefined;
         // gameObject events will be removed when this gameObject destroyed 
-        this.destroyEventEmitter();
     }
 
     destroy() {
@@ -103,7 +103,7 @@ class TouchState {
         var speed = d / (this.dt * 0.001);
         return speed;
     }
-    
+
     get speedX() {
         return this.dx / (this.dt * 0.001);
     }
@@ -119,7 +119,7 @@ class TouchState {
             return;
         }
         this.pointer = pointer;
-        this.isInTouched = true;        
+        this.isInTouched = true;
         this.preX = pointer.x;
         this.preY = pointer.y;
         this.x = pointer.x;
@@ -148,7 +148,7 @@ class TouchState {
         this.x = pointer.x;
         this.y = pointer.y;
         this.localX = localX;
-        this.localY = localY;        
+        this.localY = localY;
         this.emit('touchmove', pointer, localX, localY);
     }
 

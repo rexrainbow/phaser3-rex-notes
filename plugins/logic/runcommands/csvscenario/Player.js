@@ -31,11 +31,11 @@ class Player {
 
     }
 
-    shutdown() {
+    shutdown() {        
         this.stop();
+        this.destroyEventEmitter();
         this.scenario = undefined;
         this.scene = undefined;
-        this.destroyEventEmitter();
     }
 
     destroy() {

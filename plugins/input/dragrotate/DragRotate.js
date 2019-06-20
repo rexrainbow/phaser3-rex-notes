@@ -33,13 +33,14 @@ class DragRotate {
     }
 
     shutdown() {
+        this.destroyEventEmitter();
         if (this.scene) {
             this.scene.input.off('pointerdown', this.onPointerDown, this);
             this.scene.input.off('pointerup', this.onPointerUp, this);
             this.scene.input.off('pointermove', this.onPointerMove, this);
             this.scene.events.off('destroy', this.destroy, this);
         }
-        this.destroyEventEmitter();
+        this.scene = undefined;    
     }
 
     destroy() {

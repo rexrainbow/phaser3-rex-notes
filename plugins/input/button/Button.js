@@ -34,10 +34,10 @@ class Button {
     }
 
     shutdown() {
+        this.destroyEventEmitter();
         this.pointer = undefined;
         this.gameObject = undefined;
         this.scene = undefined;
-        this.destroyEventEmitter();
         // gameObject events will be removed when this gameObject destroyed 
     }
 
