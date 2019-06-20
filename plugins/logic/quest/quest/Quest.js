@@ -9,7 +9,7 @@ class Quest {
         this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
 
         this.questionsManager = questionsManager;
-        this.keys = [];
+        this.questionKeys = [];
 
         this.setShuffleQuestionsEnable(GetValue(config, 'shuffleQuestions', false));
         this.setShuffleOptionsEnable(GetValue(config, 'shuffleOptions', false));
@@ -18,7 +18,7 @@ class Quest {
 
     shutdown() {
         this.destroyEventEmitter();
-        this.questionsManager = undefined;        
+        this.questionsManager = undefined;
     }
 
     destroy() {
@@ -43,10 +43,10 @@ class Quest {
 
     start() {
         // Reload keys
-        this.keys.length = 0;
-        this.questionsManager.getKeys(this.keys);
+        this.questionKeys.length = 0;
+        this.questionsManager.getKeys(this.questionKeys);
         if (this.shuffleQuestionsEnable) {
-            Shuffle(this.keys);
+            Shuffle(this.questionKeys);
         }
 
         this.nextIndex = -1;
@@ -57,10 +57,10 @@ class Quest {
     setNextKey(key) {
         if (key === undefined) {
             this.nextIndex++;
-            this.nextKey = this.keys[this.nextIndex];
+            this.nextKey = this.questionKeys[this.nextIndex];
         } else if (this.questionsManager.has(key)) {
             this.nextKey = key;
-            this.nextIndex = this.keys.indexOf(key);
+            this.nextIndex = this.questionKeys.indexOf(key);
         } else {
             // Error
         }
@@ -84,7 +84,15 @@ class Quest {
     }
 
     isLastQuestion() {
-        return this.nextIndex === (this.keys.length - 1);
+        return this.nextIndex === (this.questionKeys.length - 1);
+    }
+
+    getOption(question, optionKey) {
+        if (optionKey === undefined) {
+            optionKey = question;
+            question = this.questionsManager.get(this.nextKey);
+        }
+        return this.questionsManager.getOption(question, optionKey);
     }
 }
 

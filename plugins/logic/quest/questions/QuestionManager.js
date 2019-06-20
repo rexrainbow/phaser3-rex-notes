@@ -107,6 +107,26 @@ class QuestionManager {
         }
         return out;
     }
+
+    getOption(question, optionKey) {
+        if (typeof (question) === 'string') {
+            question = this.get(question);
+        }
+        if (!question) {
+            return null;
+        }
+        var options = question.options;
+        if (options) {
+            var option;
+            for (var i = 0, cnt = options.length; i < cnt; i++) {
+                option = options[i];
+                if (option.key === optionKey) {
+                    return option;
+                }
+            }
+        }
+        return null;
+    }
 }
 
 Object.assign(
