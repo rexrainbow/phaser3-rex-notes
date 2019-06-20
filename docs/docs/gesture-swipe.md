@@ -80,11 +80,3 @@ swipe.on('swipe', function(swipe){
 
 - `swipe.left`, `swipe.right`, `swipe.up`, `swipe.down` : Swipe direction states.
 - `swipe.dragVelocity` : Velocity of dragging.
-
-### Is swiped
-
-```javascript
-var isSwiped = swipe.isSwiped;
-```
-
-Return `true` if swiped.

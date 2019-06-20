@@ -81,11 +81,3 @@ press.on('pressstart', function(press){
 press.on('pressend', function(press){
 }, scope);
 ```
-
-### Is pressed
-
-```javascript
-var isPressed = press.isPressed;
-```
-
-Return `true` if pressed.

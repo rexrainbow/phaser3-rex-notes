@@ -88,18 +88,27 @@ class Drag {
             pointer;
         for (var i = 0; i < pointersTotal; i++) {
             pointer = pointers[i];
-            if (!pointer.isDown) {
+            if (
+                (!pointer.primaryDown) ||
+                (inputPlugin.getDragState(pointer) !== 0) ||
+                (!IsObjectBelowPointer(this.gameObject, pointer))
+            ) {
                 continue;
             }
 
-            if (inputPlugin.getDragState(pointer) > 0) {
-                continue;
+            // For 3.18.0
+            inputPlugin.setDragState(pointer, 1);
+            inputPlugin._drag[pointer.id] = [this.gameObject];
+            if ((inputPlugin.dragDistanceThreshold === 0) || (inputPlugin.dragTimeThreshold === 0)) {
+                //  No drag criteria, so snap immediately to mode 3
+                inputPlugin.setDragState(pointer, 3);
+                inputPlugin.processDragStartList(pointer);
+            } else {
+                //  Check the distance / time on the next event
+                inputPlugin.setDragState(pointer, 2);
             }
-
-            if (IsObjectBelowPointer(this.gameObject, pointer)) {
-                inputPlugin.setDragState(pointer, 1);
-                break;
-            }
+            break;
+            // For 3.18.0
         }
     }
 

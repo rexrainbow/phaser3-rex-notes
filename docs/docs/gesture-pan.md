@@ -92,11 +92,3 @@ pan.on('panend', function(pan){
 
 - `pan.endWorldX`, `pan.endWorldY` : World position of pan-end pointer.
 - `pan.endX`, `pan.endY` : Scene position of pan-end pointer.
-
-### Is pan
-
-```javascript
-var isPan = pan.isPan;
-```
-
-Return `true` if pan.

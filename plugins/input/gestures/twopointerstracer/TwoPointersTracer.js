@@ -202,18 +202,6 @@ class TwoPointersTracer {
         this.emit('drag2', this);
     }
 
-    get isDrag() {
-        return (this.tracerState === TOUCH1) &&
-            (this.pointers[0].justMoved) &&
-            (this.movedState[this.pointers[0].id]);
-    }
-
-    get isDrag2() {
-        return (this.tracerState === TOUCH2) &&
-            (this.pointers[0].justMoved || this.pointers[1].justMoved) &&
-            (this.movedState[this.pointers[0].id] || this.movedState[this.pointers[1].id]);
-    }
-
     get distanceBetween() {
         if (this.tracerState !== TOUCH2) {
             return 0;

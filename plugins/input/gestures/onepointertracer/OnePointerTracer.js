@@ -197,10 +197,6 @@ class OnePointerTracer extends TickTask {
 
     postUpdate(time, delta) { }
 
-    get isDrag() {
-        return (this.tracerState === TOUCH1) && (this.pointer.justMoved);
-    }
-
     startTicking() {
         super.startTicking();
         this.scene.events.on('preupdate', this.preUpdate, this);

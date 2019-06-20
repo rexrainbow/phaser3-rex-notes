@@ -151,19 +151,3 @@ var drag1Vector = rotate.drag1Vector; // {x, y}
     ```javascript
     var pointer0 = rotate.pointers[1];
     ```
-
-### Is 1st drag
-
-```javascript
-var isDrag = rotate.isDrag;
-```
-
-Return `true` if 1st touch pointer just moves.
-
-### Is rotation
-
-```javascript
-var isRotation = rotate.isRotation;
-```
-
-Return `true` if any of two touch pointers just move.
