@@ -362,13 +362,21 @@ scene.input.addPointer(num);  // total points = num + 1
     - Is touching start : `pointer.justDown`
     - Is touching end : `pointer.justUp`
     - Is touching move : `pointer.justMoved`
-- Botton down
-    - No botton down : `pointer.noButtonDown()`
-    - Is primary (left) botton down : `pointer.leftButtonDown()`
-    - Is secondary (right) botton down : `pointer.rightButtonDown()`
+- Button state : `pointer.button`
+    - On Touch devices the value is always `0`.
+- Button down
+    - No button down : `pointer.noButtonDown()`
+    - Is primary (left) button down : `pointer.leftButtonDown()`
+    - Is secondary (right) button down : `pointer.rightButtonDown()`
     - Is middle (mouse wheel) button down : `pointer.middleButtonDown()`
-    - Is back botton down : `pointer.backButtonDown()`
+    - Is back button down : `pointer.backButtonDown()`
     - Is forward button down : `pointer.forwardButtonDown()`
+- Button released
+    - Is primary (left) button released : `pointer.leftButtonReleased()`
+    - Is secondary (right) button released : `pointer.rightButtonReleased()`
+    - Is middle (mouse wheel) button released : `pointer.middleButtonReleased()`
+    - Is back button released : `pointer.backButtonReleased()`
+    - Is forward button released : `pointer.forwardButtonReleased()`
 - Index in `scene.input.manager.pointers` : `pointer.id`
 - Motion
     - Angle: `pointer.angle`

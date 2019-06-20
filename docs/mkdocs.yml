@@ -107,6 +107,7 @@ nav:
     - Touch:
         - Touch events: touchevents.md
         - Cursor: cursor.md
+        - Mouse wheel: mousewheel.md
         - Gestures:
             - Overview: gesture-overview.md
             - One pointer gesture:
