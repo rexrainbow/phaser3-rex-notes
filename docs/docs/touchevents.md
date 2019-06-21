@@ -125,10 +125,6 @@ Call `gameObject.setInteractive(...)` to register touch input of Game Object bef
     ```javascript
     gameObject.disableInteractive();
     ```
-    or
-    ```javascript
-    gameObject.setInteractive(false);
-    ```
 - Remove interaction
     ```javascript
     gameObject.removeInteractive();
