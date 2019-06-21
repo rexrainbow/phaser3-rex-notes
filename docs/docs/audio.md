@@ -46,6 +46,41 @@ scene.load.audio(key, urls);  // urls: an array of file url
 
 See [loader](loader.md#audio)
 
+#### Decode audio
+
+```javascript
+scene.sound.decodeAudio(key, audioData);
+```
+
+- `audioData` : Audio data
+    - A base64 encoded string
+    - An audio media-type data uri
+    - An ArrayBuffer instance
+
+
+Or
+
+```javascript
+scene.sound.decodeAudio(audioFiles);
+```
+
+- `audioFiles` : An array of `{key, data}`
+    - `data` : Audio data
+        - A base64 encoded string
+        - An audio media-type data uri
+        - An ArrayBuffer instance
+
+##### Decoded events
+
+- Finished decoding an audio data
+    ```javascript
+    scene.sound.on('decoded', key);
+    ```
+- Finished decoding all audio data
+    ```javascript
+    scene.sound.on('decodedall');
+    ```
+
 ### Play sound
 
 Sound instance will be destroyed when playback ends.
@@ -59,11 +94,11 @@ scene.sound.play(key);
 #### Create sound instance
 
 ```javascript
-var music = this.sound.add(key);
+var music = scene.sound.add(key);
 ```
 
 ```javascript
-var music = this.sound.add(key, config);
+var music = scene.sound.add(key, config);
 ```
 
 ##### Configuration

@@ -358,10 +358,8 @@ scene.input.addPointer(num);  // total points = num + 1
     - Touching end : `pointer.upTime`
     - Drag : `pointer.getDuration()`
 - Touch state
-    - Is touching :  `pointer.isDown`
-    - Is touching start : `pointer.justDown`
-    - Is touching end : `pointer.justUp`
-    - Is touching move : `pointer.justMoved`
+    - Is touching/any button down :  `pointer.isDown`
+    - Is primary button down : `pointer.primaryDown`
 - Button state : `pointer.button`
     - On Touch devices the value is always `0`.
 - Button down

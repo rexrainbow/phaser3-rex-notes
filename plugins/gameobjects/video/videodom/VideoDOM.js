@@ -4,9 +4,7 @@ const DOMElement = Phaser.GameObjects.DOMElement;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-// TODO: Use DOMElement directly in next phaser version
-const GOClass = (DOMElement) ? DOMElement : Object;
-class VideoDOM extends VideoBase(GOClass) {
+class VideoDOM extends VideoBase(DOMElement) {
     constructor(scene, x, y, width, height, config) {
         if (IsPlainObject(x)) {
             config = x;

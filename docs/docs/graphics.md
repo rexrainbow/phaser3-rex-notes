@@ -237,9 +237,9 @@ graphics.setTexture();
 ```javascript
 graphics.save();
 graphics.restore();
-graphics.translate(x, y);
-graphics.scale(x, y);
-graphics.rotate(radians);
+graphics.translateCanvas(x, y);
+graphics.scaleCanvas(x, y);
+graphics.rotateCanvas(radians);
 ```
 
 ### Generate texture

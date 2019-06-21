@@ -97,7 +97,8 @@ or
         preserveDrawingBuffer: false,
         failIfMajorPerformanceCaveat: false,
         powerPreference: 'default', // 'high-performance', 'low-power' or 'default'
-        batchSize: 2000
+        batchSize: 2000,
+        desynchronized: false,
     },
 
     physics: {
@@ -195,3 +196,14 @@ Global [scene manager](scenemanager.md) in `game.scene`, or `scene.scene` in eac
 ### Global data
 
 Instance of [data manager](datamanager.md) in `game.registry`, or `scene.registry` in each scene.
+
+## Game time
+
+- The time that the current game step started at
+    ```javascript
+    var time = game.getTime();
+    ```
+- The current game frame
+    ```javascript
+    var frameCount = game.getFrame();
+    ```

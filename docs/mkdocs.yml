@@ -215,6 +215,7 @@ nav:
     - LZ string: lzstring.md
     - XOR: xor.md
     - UUID: uuid.md
+    - Base64: base64.md
 - Time:
     - Date: date.md
     - Timer: timer.md

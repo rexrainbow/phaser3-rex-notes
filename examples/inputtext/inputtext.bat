@@ -1,5 +1,4 @@
 @echo off
-set testmode=2
 set main=./examples/inputtext/inputtext.js
 cd ..
 cd ..

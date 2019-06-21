@@ -12,28 +12,33 @@ class Demo extends Phaser.Scene {
 
     }
 
-    preload() {}
+    preload() { }
 
     create() {
         var buttons = this.rexUI.add.buttons({
-                x: 'left+10',
-                y: 'center',
+            x: 'left+10',
+            y: 'center',
 
-                orientation: 'y',
+            orientation: 'y',
 
-                buttons: [
-                    createButton(this, 'A'),
-                    createButton(this, 'B'),
-                ],
+            buttons: [
+                createButton(this, 'A'),
+                createButton(this, 'B'),
+            ],
 
-            })
+        })
             .setOrigin(0, 0.5)
             .layout()
             .drawBounds(this.add.graphics(), 0xff0000)
 
+        buttons
+            .on('button.click', function (button, pointer) {
+                console.log(`Click button-${button.text}`);
+            })
+
     }
 
-    update() {}
+    update() { }
 }
 
 var createButton = function (scene, text) {

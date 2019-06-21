@@ -327,6 +327,7 @@ var graphics = scene.physics.world.debugGraphic;
     1. Update position & angle of each body
     1. Process each collider
     1. Update final position of each body
+    1. Emit `worldstep` event
 1. scene.sys.events: postupdate
     1. Draw debug graphics
 

@@ -5,10 +5,7 @@ const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Clamp = Phaser.Math.Clamp;
 
-
-// TODO: Use DOMElement directly in next phaser version
-const BaseClass = (DOMElement) ? DOMElement : Object;
-class YoutubePlayer extends BaseClass {
+class YoutubePlayer extends DOMElement {
     constructor(scene, x, y, width, height, config) {
         if (IsPlainObject(x)) {
             config = x;

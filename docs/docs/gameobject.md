@@ -123,8 +123,12 @@ Scroll factor: 0~1
 
 ```javascript
 var output = gameObject.getTopLeft(output);     // output: {x, y}
+var output = gameObject.getTopCenter(output);     // output: {x, y}
 var output = gameObject.getTopRight(output);    // output: {x, y}
+var output = gameObject.getLeftCenter(output);    // output: {x, y}
+var output = gameObject.getRightCenter(output);    // output: {x, y}
 var output = gameObject.getBottomLeft(output);  // output: {x, y}
+var output = gameObject.getBottomCenter(output);     // output: {x, y}
 var output = gameObject.getBottomRight(output); // output: {x, y}
 var output = gameObject.getCenter(output);      // output: {x, y}
 var output = gameObject.getBounds(output);      // output: {x, y, width, height}
@@ -296,6 +300,10 @@ var output = gameObject.getBounds(output);      // output: {x, y, width, height}
         var scaleX = gameObject.scaleX;
         var scaleY = gameObject.scaleY;
         ```
+        or
+        ```javascript
+        var scale = gameObject.scale;  // Return (scaleX + scaleY)/2
+        ```        
     - Set
         ```javascript
         gameObject.setScale(scaleX, scaleY);
@@ -303,7 +311,11 @@ var output = gameObject.getBounds(output);      // output: {x, y, width, height}
         or
         ```javascript
         gameObject.scaleX = scaleX;
-        gameObject.scaleY = scaleY;  
+        gameObject.scaleY = scaleY;
+        ```
+        or
+        ```javascript
+        gameObject.scale = scale;  // Set scaleX, scaleY to scale
         ```
 
 ### Click
