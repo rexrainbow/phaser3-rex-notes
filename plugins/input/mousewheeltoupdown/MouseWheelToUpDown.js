@@ -9,29 +9,25 @@ class MouseWheelToUpDown extends CursorKeys {
     }
 
     boot() {
-        var self = this;
-        this.onWheeling = function (event) {
-            var deltaY = event.deltaY;
-
-            // self.clearAllKeysState();
-            self.setKeyState('up', deltaY < 0);
-            self.setKeyState('down', deltaY > 0);
-        }
-
-        this.scene.sys.canvas.addEventListener('wheel', this.onWheeling, false);
+        this.scene.input.on('wheel', this.onWheeling, this);
         this.scene.events.on('postupdate', this.clearAllKeysState, this);
         this.scene.events.on('destroy', this.destroy, this);
     }
 
     shutdown() {
         if (this.scene) {
-            this.scene.sys.canvas.removeEventListener('wheel', this.onWheeling, false);
+            this.scene.input.off('wheel', this.onWheeling, this);
             this.scene.events.off('postupdate', this.clearAllKeysState, this);
         }
     }
 
     destroy() {
         this.shutdown();
+    }
+
+    onWheeling(pointer, currentlyOver, dx, dy, dz, event) {
+        this.setKeyState('up', dy < 0);
+        this.setKeyState('down', dy > 0);
     }
 }
 
