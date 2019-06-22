@@ -173,10 +173,6 @@ class DragRotate {
         this.emit('drag', this);
     }
 
-    get isDrag() {
-        return (this.state === TOUCH1) && (this.pointer.justMoved);
-    }
-
     get deltaRotation() {
         if (this.state === TOUCH0) {
             return 0;

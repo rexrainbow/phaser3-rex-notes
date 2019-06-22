@@ -1818,15 +1818,27 @@
           
 
 
+  <li class="md-nav__item">
+    <a href="../mousewheel/" title="Mouse wheel" class="md-nav__link">
+      Mouse wheel
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-3" type="checkbox" id="nav-5-2-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-4" type="checkbox" id="nav-5-2-4">
     
-    <label class="md-nav__link" for="nav-5-2-3">
+    <label class="md-nav__link" for="nav-5-2-4">
       Gestures
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-5-2-3">
+      <label class="md-nav__title" for="nav-5-2-4">
         Gestures
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1851,13 +1863,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-3-2" type="checkbox" id="nav-5-2-3-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-4-2" type="checkbox" id="nav-5-2-4-2">
     
-    <label class="md-nav__link" for="nav-5-2-3-2">
+    <label class="md-nav__link" for="nav-5-2-4-2">
       One pointer gesture
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-5-2-3-2">
+      <label class="md-nav__title" for="nav-5-2-4-2">
         One pointer gesture
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1923,13 +1935,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-3-3" type="checkbox" id="nav-5-2-3-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-4-3" type="checkbox" id="nav-5-2-4-3">
     
-    <label class="md-nav__link" for="nav-5-2-3-3">
+    <label class="md-nav__link" for="nav-5-2-4-3">
       Two pointers gesture
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-5-2-3-3">
+      <label class="md-nav__title" for="nav-5-2-4-3">
         Two pointers gesture
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -2225,6 +2237,32 @@
   <a href="#load-audio-file" title="Load audio file" class="md-nav__link">
     Load audio file
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#decode-audio" title="Decode audio" class="md-nav__link">
+    Decode audio
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#decoded-events" title="Decoded events" class="md-nav__link">
+    Decoded events
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -3774,6 +3812,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../base64/" title="Base64" class="md-nav__link">
+      Base64
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -4619,6 +4669,32 @@
     Load audio file
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#decode-audio" title="Decode audio" class="md-nav__link">
+    Decode audio
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#decoded-events" title="Decoded events" class="md-nav__link">
+    Decoded events
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -4941,6 +5017,42 @@
 </pre></div>
 
 <p>See <a href="../loader/#audio">loader</a></p>
+<h4 id="decode-audio">Decode audio<a class="headerlink" href="#decode-audio" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">sound</span><span class="p">.</span><span class="nx">decodeAudio</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">audioData</span><span class="p">);</span>
+</pre></div>
+
+<ul>
+<li><code>audioData</code> : Audio data<ul>
+<li>A base64 encoded string</li>
+<li>An audio media-type data uri</li>
+<li>An ArrayBuffer instance</li>
+</ul>
+</li>
+</ul>
+<p>Or</p>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">sound</span><span class="p">.</span><span class="nx">decodeAudio</span><span class="p">(</span><span class="nx">audioFiles</span><span class="p">);</span>
+</pre></div>
+
+<ul>
+<li><code>audioFiles</code> : An array of <code>{key, data}</code><ul>
+<li><code>data</code> : Audio data<ul>
+<li>A base64 encoded string</li>
+<li>An audio media-type data uri</li>
+<li>An ArrayBuffer instance</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="decoded-events">Decoded events<a class="headerlink" href="#decoded-events" title="Permanent link">&para;</a></h5>
+<ul>
+<li>Finished decoding an audio data
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">sound</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;decoded&#39;</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
+</pre></div></li>
+<li>Finished decoding all audio data
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">sound</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;decodedall&#39;</span><span class="p">);</span>
+</pre></div></li>
+</ul>
 <h3 id="play-sound">Play sound<a class="headerlink" href="#play-sound" title="Permanent link">&para;</a></h3>
 <p>Sound instance will be destroyed when playback ends.</p>
 <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">sound</span><span class="p">.</span><span class="nx">play</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
@@ -4948,10 +5060,10 @@
 
 <h3 id="sound-instance">Sound instance<a class="headerlink" href="#sound-instance" title="Permanent link">&para;</a></h3>
 <h4 id="create-sound-instance">Create sound instance<a class="headerlink" href="#create-sound-instance" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">music</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">sound</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">music</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">sound</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </pre></div>
 
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">music</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">sound</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">music</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">sound</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </pre></div>
 
 <h5 id="configuration_1">Configuration<a class="headerlink" href="#configuration_1" title="Permanent link">&para;</a></h5>

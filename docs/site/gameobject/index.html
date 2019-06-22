@@ -2007,15 +2007,27 @@
           
 
 
+  <li class="md-nav__item">
+    <a href="../mousewheel/" title="Mouse wheel" class="md-nav__link">
+      Mouse wheel
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-3" type="checkbox" id="nav-5-2-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-4" type="checkbox" id="nav-5-2-4">
     
-    <label class="md-nav__link" for="nav-5-2-3">
+    <label class="md-nav__link" for="nav-5-2-4">
       Gestures
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-5-2-3">
+      <label class="md-nav__title" for="nav-5-2-4">
         Gestures
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -2040,13 +2052,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-3-2" type="checkbox" id="nav-5-2-3-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-4-2" type="checkbox" id="nav-5-2-4-2">
     
-    <label class="md-nav__link" for="nav-5-2-3-2">
+    <label class="md-nav__link" for="nav-5-2-4-2">
       One pointer gesture
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-5-2-3-2">
+      <label class="md-nav__title" for="nav-5-2-4-2">
         One pointer gesture
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -2112,13 +2124,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-3-3" type="checkbox" id="nav-5-2-3-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-4-3" type="checkbox" id="nav-5-2-4-3">
     
-    <label class="md-nav__link" for="nav-5-2-3-3">
+    <label class="md-nav__link" for="nav-5-2-4-3">
       Two pointers gesture
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-5-2-3-3">
+      <label class="md-nav__title" for="nav-5-2-4-3">
         Two pointers gesture
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -3615,6 +3627,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../base64/" title="Base64" class="md-nav__link">
+      Base64
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -4694,8 +4718,12 @@
 </ul>
 <h3 id="bounds">Bounds<a class="headerlink" href="#bounds" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">output</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">getTopLeft</span><span class="p">(</span><span class="nx">output</span><span class="p">);</span>     <span class="c1">// output: {x, y}</span>
+<span class="kd">var</span> <span class="nx">output</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">getTopCenter</span><span class="p">(</span><span class="nx">output</span><span class="p">);</span>     <span class="c1">// output: {x, y}</span>
 <span class="kd">var</span> <span class="nx">output</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">getTopRight</span><span class="p">(</span><span class="nx">output</span><span class="p">);</span>    <span class="c1">// output: {x, y}</span>
+<span class="kd">var</span> <span class="nx">output</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">getLeftCenter</span><span class="p">(</span><span class="nx">output</span><span class="p">);</span>    <span class="c1">// output: {x, y}</span>
+<span class="kd">var</span> <span class="nx">output</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">getRightCenter</span><span class="p">(</span><span class="nx">output</span><span class="p">);</span>    <span class="c1">// output: {x, y}</span>
 <span class="kd">var</span> <span class="nx">output</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">getBottomLeft</span><span class="p">(</span><span class="nx">output</span><span class="p">);</span>  <span class="c1">// output: {x, y}</span>
+<span class="kd">var</span> <span class="nx">output</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">getBottomCenter</span><span class="p">(</span><span class="nx">output</span><span class="p">);</span>     <span class="c1">// output: {x, y}</span>
 <span class="kd">var</span> <span class="nx">output</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">getBottomRight</span><span class="p">(</span><span class="nx">output</span><span class="p">);</span> <span class="c1">// output: {x, y}</span>
 <span class="kd">var</span> <span class="nx">output</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">getCenter</span><span class="p">(</span><span class="nx">output</span><span class="p">);</span>      <span class="c1">// output: {x, y}</span>
 <span class="kd">var</span> <span class="nx">output</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">getBounds</span><span class="p">(</span><span class="nx">output</span><span class="p">);</span>      <span class="c1">// output: {x, y, width, height}</span>
@@ -4881,13 +4909,19 @@
 <li>Get
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">scaleX</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">scaleX</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">scaleY</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">scaleY</span><span class="p">;</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">scale</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">scale</span><span class="p">;</span>  <span class="c1">// Return (scaleX + scaleY)/2</span>
 </pre></div></li>
 <li>Set
     <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setScale</span><span class="p">(</span><span class="nx">scaleX</span><span class="p">,</span> <span class="nx">scaleY</span><span class="p">);</span>
 </pre></div>
     or
     <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">scaleX</span> <span class="o">=</span> <span class="nx">scaleX</span><span class="p">;</span>
-<span class="nx">gameObject</span><span class="p">.</span><span class="nx">scaleY</span> <span class="o">=</span> <span class="nx">scaleY</span><span class="p">;</span>  
+<span class="nx">gameObject</span><span class="p">.</span><span class="nx">scaleY</span> <span class="o">=</span> <span class="nx">scaleY</span><span class="p">;</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">scale</span> <span class="o">=</span> <span class="nx">scale</span><span class="p">;</span>  <span class="c1">// Set scaleX, scaleY to scale</span>
 </pre></div></li>
 </ul>
 </li>

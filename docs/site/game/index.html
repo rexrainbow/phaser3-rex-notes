@@ -382,6 +382,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#game-time" title="Game time" class="md-nav__link">
+    Game time
+  </a>
+  
+</li>
+      
       
       
       
@@ -1910,15 +1917,27 @@
           
 
 
+  <li class="md-nav__item">
+    <a href="../mousewheel/" title="Mouse wheel" class="md-nav__link">
+      Mouse wheel
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-3" type="checkbox" id="nav-5-2-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-4" type="checkbox" id="nav-5-2-4">
     
-    <label class="md-nav__link" for="nav-5-2-3">
+    <label class="md-nav__link" for="nav-5-2-4">
       Gestures
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-5-2-3">
+      <label class="md-nav__title" for="nav-5-2-4">
         Gestures
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1943,13 +1962,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-3-2" type="checkbox" id="nav-5-2-3-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-4-2" type="checkbox" id="nav-5-2-4-2">
     
-    <label class="md-nav__link" for="nav-5-2-3-2">
+    <label class="md-nav__link" for="nav-5-2-4-2">
       One pointer gesture
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-5-2-3-2">
+      <label class="md-nav__title" for="nav-5-2-4-2">
         One pointer gesture
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -2015,13 +2034,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-3-3" type="checkbox" id="nav-5-2-3-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-4-3" type="checkbox" id="nav-5-2-4-3">
     
-    <label class="md-nav__link" for="nav-5-2-3-3">
+    <label class="md-nav__link" for="nav-5-2-4-3">
       Two pointers gesture
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-5-2-3-3">
+      <label class="md-nav__title" for="nav-5-2-4-3">
         Two pointers gesture
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -3518,6 +3537,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../base64/" title="Base64" class="md-nav__link">
+      Base64
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -4370,6 +4401,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#game-time" title="Game time" class="md-nav__link">
+    Game time
+  </a>
+  
+</li>
+      
       
       
       
@@ -4483,7 +4521,8 @@
         <span class="nx">preserveDrawingBuffer</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
         <span class="nx">failIfMajorPerformanceCaveat</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
         <span class="nx">powerPreference</span><span class="o">:</span> <span class="s1">&#39;default&#39;</span><span class="p">,</span> <span class="c1">// &#39;high-performance&#39;, &#39;low-power&#39; or &#39;default&#39;</span>
-        <span class="nx">batchSize</span><span class="o">:</span> <span class="mi">2000</span>
+        <span class="nx">batchSize</span><span class="o">:</span> <span class="mi">2000</span><span class="p">,</span>
+        <span class="nx">desynchronized</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
     <span class="p">},</span>
 
     <span class="nx">physics</span><span class="o">:</span> <span class="p">{</span>
@@ -4574,6 +4613,15 @@
 <p>Global <a href="../scenemanager/">scene manager</a> in <code>game.scene</code>, or <code>scene.scene</code> in each scene.</p>
 <h3 id="global-data">Global data<a class="headerlink" href="#global-data" title="Permanent link">&para;</a></h3>
 <p>Instance of <a href="../datamanager/">data manager</a> in <code>game.registry</code>, or <code>scene.registry</code> in each scene.</p>
+<h2 id="game-time">Game time<a class="headerlink" href="#game-time" title="Permanent link">&para;</a></h2>
+<ul>
+<li>The time that the current game step started at
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">time</span> <span class="o">=</span> <span class="nx">game</span><span class="p">.</span><span class="nx">getTime</span><span class="p">();</span>
+</pre></div></li>
+<li>The current game frame
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">frameCount</span> <span class="o">=</span> <span class="nx">game</span><span class="p">.</span><span class="nx">getFrame</span><span class="p">();</span>
+</pre></div></li>
+</ul>
                 
                   
                 

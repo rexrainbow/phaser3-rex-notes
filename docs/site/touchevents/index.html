@@ -2040,15 +2040,27 @@
           
 
 
+  <li class="md-nav__item">
+    <a href="../mousewheel/" title="Mouse wheel" class="md-nav__link">
+      Mouse wheel
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-3" type="checkbox" id="nav-5-2-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-4" type="checkbox" id="nav-5-2-4">
     
-    <label class="md-nav__link" for="nav-5-2-3">
+    <label class="md-nav__link" for="nav-5-2-4">
       Gestures
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-5-2-3">
+      <label class="md-nav__title" for="nav-5-2-4">
         Gestures
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -2073,13 +2085,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-3-2" type="checkbox" id="nav-5-2-3-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-4-2" type="checkbox" id="nav-5-2-4-2">
     
-    <label class="md-nav__link" for="nav-5-2-3-2">
+    <label class="md-nav__link" for="nav-5-2-4-2">
       One pointer gesture
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-5-2-3-2">
+      <label class="md-nav__title" for="nav-5-2-4-2">
         One pointer gesture
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -2145,13 +2157,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-3-3" type="checkbox" id="nav-5-2-3-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-4-3" type="checkbox" id="nav-5-2-4-3">
     
-    <label class="md-nav__link" for="nav-5-2-3-3">
+    <label class="md-nav__link" for="nav-5-2-4-3">
       Two pointers gesture
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-5-2-3-3">
+      <label class="md-nav__title" for="nav-5-2-4-3">
         Two pointers gesture
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -3648,6 +3660,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../base64/" title="Base64" class="md-nav__link">
+      Base64
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -4793,9 +4817,6 @@
 <ul>
 <li>Disable temporary
     <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">disableInteractive</span><span class="p">();</span>
-</pre></div>
-    or
-    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setInteractive</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
 </pre></div></li>
 <li>Remove interaction
     <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">removeInteractive</span><span class="p">();</span>
@@ -5003,19 +5024,29 @@ If set to <code>false</code> it will emit events from all Game Objects below a P
 </ul>
 </li>
 <li>Touch state<ul>
-<li>Is touching :  <code>pointer.isDown</code></li>
-<li>Is touching start : <code>pointer.justDown</code></li>
-<li>Is touching end : <code>pointer.justUp</code></li>
-<li>Is touching move : <code>pointer.justMoved</code></li>
+<li>Is touching/any button down :  <code>pointer.isDown</code></li>
+<li>Is primary button down : <code>pointer.primaryDown</code></li>
 </ul>
 </li>
-<li>Botton down<ul>
-<li>No botton down : <code>pointer.noButtonDown()</code></li>
-<li>Is primary (left) botton down : <code>pointer.leftButtonDown()</code></li>
-<li>Is secondary (right) botton down : <code>pointer.rightButtonDown()</code></li>
+<li>Button state : <code>pointer.button</code><ul>
+<li>On Touch devices the value is always <code>0</code>.</li>
+</ul>
+</li>
+<li>Button down<ul>
+<li>No button down : <code>pointer.noButtonDown()</code></li>
+<li>Is primary (left) button down : <code>pointer.leftButtonDown()</code></li>
+<li>Is secondary (right) button down : <code>pointer.rightButtonDown()</code></li>
 <li>Is middle (mouse wheel) button down : <code>pointer.middleButtonDown()</code></li>
-<li>Is back botton down : <code>pointer.backButtonDown()</code></li>
+<li>Is back button down : <code>pointer.backButtonDown()</code></li>
 <li>Is forward button down : <code>pointer.forwardButtonDown()</code></li>
+</ul>
+</li>
+<li>Button released<ul>
+<li>Is primary (left) button released : <code>pointer.leftButtonReleased()</code></li>
+<li>Is secondary (right) button released : <code>pointer.rightButtonReleased()</code></li>
+<li>Is middle (mouse wheel) button released : <code>pointer.middleButtonReleased()</code></li>
+<li>Is back button released : <code>pointer.backButtonReleased()</code></li>
+<li>Is forward button released : <code>pointer.forwardButtonReleased()</code></li>
 </ul>
 </li>
 <li>Index in <code>scene.input.manager.pointers</code> : <code>pointer.id</code></li>

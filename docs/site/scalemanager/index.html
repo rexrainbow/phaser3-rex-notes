@@ -416,6 +416,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#resize-canvas-element" title="Resize canvas element" class="md-nav__link">
+    Resize canvas element
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-game-size" title="Set game size" class="md-nav__link">
+    Set game size
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#events" title="Events" class="md-nav__link">
     Events
   </a>
@@ -1883,15 +1897,27 @@
           
 
 
+  <li class="md-nav__item">
+    <a href="../mousewheel/" title="Mouse wheel" class="md-nav__link">
+      Mouse wheel
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-3" type="checkbox" id="nav-5-2-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-4" type="checkbox" id="nav-5-2-4">
     
-    <label class="md-nav__link" for="nav-5-2-3">
+    <label class="md-nav__link" for="nav-5-2-4">
       Gestures
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-5-2-3">
+      <label class="md-nav__title" for="nav-5-2-4">
         Gestures
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1916,13 +1942,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-3-2" type="checkbox" id="nav-5-2-3-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-4-2" type="checkbox" id="nav-5-2-4-2">
     
-    <label class="md-nav__link" for="nav-5-2-3-2">
+    <label class="md-nav__link" for="nav-5-2-4-2">
       One pointer gesture
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-5-2-3-2">
+      <label class="md-nav__title" for="nav-5-2-4-2">
         One pointer gesture
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1988,13 +2014,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-3-3" type="checkbox" id="nav-5-2-3-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2-4-3" type="checkbox" id="nav-5-2-4-3">
     
-    <label class="md-nav__link" for="nav-5-2-3-3">
+    <label class="md-nav__link" for="nav-5-2-4-3">
       Two pointers gesture
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-5-2-3-3">
+      <label class="md-nav__title" for="nav-5-2-4-3">
         Two pointers gesture
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -3491,6 +3517,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../base64/" title="Base64" class="md-nav__link">
+      Base64
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -4305,6 +4343,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#resize-canvas-element" title="Resize canvas element" class="md-nav__link">
+    Resize canvas element
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-game-size" title="Set game size" class="md-nav__link">
+    Set game size
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#events" title="Events" class="md-nav__link">
     Events
   </a>
@@ -4347,7 +4399,7 @@
 <p>Setup scale mode in <a href="../game/#configuration">game configuration</a>.</p>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
-    <span class="nx">parent</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>    
+    <span class="nx">parent</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
     <span class="nx">width</span><span class="o">:</span> <span class="mi">1024</span><span class="p">,</span>
     <span class="nx">height</span><span class="o">:</span> <span class="mi">768</span><span class="p">,</span>
     <span class="nx">scale</span><span class="o">:</span> <span class="p">{</span>
@@ -4378,8 +4430,18 @@
 </ul>
 </li>
 </ul>
+<h3 id="resize-canvas-element">Resize canvas element<a class="headerlink" href="#resize-canvas-element" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">resize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+</pre></div>
+
+<p>Modify the size of the Phaser canvas element directly. You should only use this if you are using the <code>NO_SCALE</code> scale mode,</p>
+<h3 id="set-game-size">Set game size<a class="headerlink" href="#set-game-size" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">setGameSize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+</pre></div>
+
+<p>It should only be used if you're looking to change the base size of your game and are using one of the Scale Manager scaling modes, i.e. <code>FIT</code>. If you're using <code>NO_SCALE</code> and wish to change the game and canvas size directly, then please use the <code>resize</code> method instead.</p>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;resize&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">gameSize</span><span class="p">,</span> <span class="nx">baseSize</span><span class="p">,</span> <span class="nx">displaySize</span><span class="p">,</span> <span class="nx">resolution</span><span class="p">)</span> <span class="p">{});</span>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;resize&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">gameSize</span><span class="p">,</span> <span class="nx">baseSize</span><span class="p">,</span> <span class="nx">displaySize</span><span class="p">,</span> <span class="nx">resolution</span><span class="p">,</span> <span class="nx">previousWidth</span><span class="p">,</span> <span class="nx">previousHeight</span><span class="p">)</span> <span class="p">{});</span>
 </pre></div>
 
 <ul>

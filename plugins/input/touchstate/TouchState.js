@@ -25,6 +25,7 @@ class TouchState {
         this.preY = undefined;
         this.localX = undefined;
         this.localY = undefined;
+        this.justMoved = false;
         this.setEnable(GetValue(o, "enable", true));
         return this;
     }
@@ -35,11 +36,15 @@ class TouchState {
         this.gameObject.on('pointerup', this.onPointOut, this);
         this.gameObject.on('pointerout', this.onPointOut, this);
         this.gameObject.on('pointermove', this.onPointerMove, this);
+        this.scene.events.on('postupdate', this.postupdate, this);
 
         this.gameObject.on('destroy', this.destroy, this);
     }
 
     shutdown() {
+        if (this.scene) { // Scene might be destoryed
+            this.scene.events.off('postupdate', this.postupdate, this);
+        }
         this.destroyEventEmitter();
         this.pointer = undefined;
         this.gameObject = undefined;
@@ -75,10 +80,6 @@ class TouchState {
 
     get isUp() {
         return this.pointer === undefined;
-    }
-
-    get justMoved() {
-        return this.pointer && this.pointer.justMoved;
     }
 
     get dx() {
@@ -149,7 +150,12 @@ class TouchState {
         this.y = pointer.y;
         this.localX = localX;
         this.localY = localY;
+        this.justMoved = true;
         this.emit('touchmove', pointer, localX, localY);
+    }
+
+    preupdate(time, delta) {
+        this.justMoved = false;
     }
 
 }
