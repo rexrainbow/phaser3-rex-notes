@@ -56,7 +56,7 @@ Call `gameObject.setInteractive(...)` to register touch input of Game Object bef
     ```javascript
     gameObject.setInteractive();
     ```
-- Set hit area from shape
+- Set hit area from game object
     ```javascript
     gameObject.setInteractive(shape, callback);
     ```
@@ -81,6 +81,31 @@ Call `gameObject.setInteractive(...)` to register touch input of Game Object bef
     - [Rhombus](geom-rhombus.md)
         - shape : `new Phaser.Geom.rexRhombus(x, y, width, height)`
         - callback : `Phaser.Geom.Polygon.Contains`
+    - Note: `x`, `y` relate to the **top-left** of the gameObject.
+- Set hit area from input plugin
+    ```javascript
+    scene.input.setHitArea(gameObjects, shape, callback);
+    ```
+    - Circle
+        ```javascript
+        scene.input.setHitAreaCircle(gameObjects, x, y, radius);
+        // scene.input.setHitAreaCircle(gameObjects, x, y, radius, callback); // callback = Circle.Contains
+        ```
+    - Ellipse
+        ```javascript
+        scene.input.setHitAreaEllipse(gameObjects, x, y, width, height);
+        // scene.input.setHitAreaEllipse(gameObjects, x, y, width, height, callback); // callback = Ellipse.Contains
+        ```
+    - Rectangle
+        ```javascript
+        scene.input.setHitAreaRectangle(gameObjects, x, y, width, height);
+        // scene.input.setHitAreaRectangle(gameObjects, x, y, width, height, callback); // callback = Rectangle.Contains
+        ```
+    - Triangle
+        ```javascript
+        scene.input.setHitAreaTriangle(gameObjects, x1, y1, x2, y2, x3, y3);
+        // scene.input.setHitAreaTriangle(gameObjects, x1, y1, x2, y2, x3, y3, callback); // callback = Triangle.Contains
+        ```
     - Note: `x`, `y` relate to the **top-left** of the gameObject.
 - Set interactive configuration
     ```javascript

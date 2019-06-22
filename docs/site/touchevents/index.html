@@ -4723,7 +4723,7 @@
 <li>Set hit area from width &amp; height (rectangle) of the texture
     <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setInteractive</span><span class="p">();</span>
 </pre></div></li>
-<li>Set hit area from shape
+<li>Set hit area from game object
     <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setInteractive</span><span class="p">(</span><span class="nx">shape</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
 </pre></div><ul>
 <li><a href="../geom-circle/">Circle</a><ul>
@@ -4761,6 +4761,28 @@
 <li>callback : <code>Phaser.Geom.Polygon.Contains</code></li>
 </ul>
 </li>
+<li>Note: <code>x</code>, <code>y</code> relate to the <strong>top-left</strong> of the gameObject.</li>
+</ul>
+</li>
+<li>Set hit area from input plugin
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">setHitArea</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">shape</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
+</pre></div><ul>
+<li>Circle
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">setHitAreaCircle</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">);</span>
+<span class="c1">// scene.input.setHitAreaCircle(gameObjects, x, y, radius, callback); // callback = Circle.Contains</span>
+</pre></div></li>
+<li>Ellipse
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">setHitAreaEllipse</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+<span class="c1">// scene.input.setHitAreaEllipse(gameObjects, x, y, width, height, callback); // callback = Ellipse.Contains</span>
+</pre></div></li>
+<li>Rectangle
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">setHitAreaRectangle</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+<span class="c1">// scene.input.setHitAreaRectangle(gameObjects, x, y, width, height, callback); // callback = Rectangle.Contains</span>
+</pre></div></li>
+<li>Triangle
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">setHitAreaTriangle</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">x1</span><span class="p">,</span> <span class="nx">y1</span><span class="p">,</span> <span class="nx">x2</span><span class="p">,</span> <span class="nx">y2</span><span class="p">,</span> <span class="nx">x3</span><span class="p">,</span> <span class="nx">y3</span><span class="p">);</span>
+<span class="c1">// scene.input.setHitAreaTriangle(gameObjects, x1, y1, x2, y2, x3, y3, callback); // callback = Triangle.Contains</span>
+</pre></div></li>
 <li>Note: <code>x</code>, <code>y</code> relate to the <strong>top-left</strong> of the gameObject.</li>
 </ul>
 </li>
