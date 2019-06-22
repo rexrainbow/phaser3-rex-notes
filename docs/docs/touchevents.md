@@ -87,7 +87,7 @@ Call `gameObject.setInteractive(...)` to register touch input of Game Object bef
     gameObject.setInteractive({
         hitArea: shape,
         hitAreaCallback: callback,
-        pixelPerfect: true,
+        pixelPerfect: false,
         alphaTolerance: 1,
         draggable: true,
         dropZone: true,

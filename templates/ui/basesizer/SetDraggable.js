@@ -8,7 +8,7 @@ var SetDraggable = function (draggable) {
         this.input.draggable = draggable;
     } else if (draggable) {
         // Register draggable
-        this.setInteractive(interactiveConfig);
+        this.setInteractive();
         this.scene.input.setDraggable(this);
         this.on('drag', onDrag, this);
     } else {
@@ -21,10 +21,6 @@ var onDrag = function (pointer, dragX, dragY) {
     var topmostParent = this.getTopmostSizer();
     topmostParent.x += (dragX - this.x);
     topmostParent.y += (dragY - this.y);
-}
-
-var interactiveConfig = {
-    draggable: true
 }
 
 export default SetDraggable;
