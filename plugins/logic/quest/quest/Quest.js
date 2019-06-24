@@ -11,9 +11,14 @@ class Quest {
         this.questionsManager = questionsManager;
         this.questionKeys = [];
 
-        this.setShuffleQuestionsEnable(GetValue(config, 'shuffleQuestions', false));
-        this.setShuffleOptionsEnable(GetValue(config, 'shuffleOptions', false));
+        this.resetFromJSON(config);
         this.start();
+    }
+
+    resetFromJSON(o) {
+        this.setShuffleQuestionsEnable(GetValue(o, 'shuffleQuestions', false));
+        this.setShuffleOptionsEnable(GetValue(o, 'shuffleOptions', false));
+        return this;
     }
 
     shutdown() {

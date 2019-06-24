@@ -99,28 +99,21 @@ Execute callback when time-out, built-in object of phaser.
     var timeScale = timer.timeScale;
     ```
 
-### Commands of timer
+### Methods of timer
 
 - Pause timer
-
     ```javascript
     timer.paused = true;
     ```
-
 - Resume timer
-
     ```javascript
     timer.paused = false;
     ```
-
 - Remove timer from timeline
-
     ```javascript
     timer.remove();
     ```
-
 - Set time-scale
-
     ```javascript
     timer.timeScale = 2;
     ```

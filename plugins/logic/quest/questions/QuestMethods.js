@@ -8,13 +8,19 @@ export default {
     },
 
     startQuest(config) {
-        if (!IsPlainObject(config)) {
-            config = {};
+        if (this._quest) {
+            this._quest
+                .resetFromJSON(config)
+                .start();
+        } else {
+            if (!IsPlainObject(config)) {
+                config = {};
+            }
+            if (!config.hasOwnProperty('eventEmitter')) {
+                config.eventEmitter = this;
+            }
+            this._quest = this.newQuest(config);
         }
-        if (!config.hasOwnProperty('eventEmitter')) {
-            config.eventEmitter = this;
-        }
-        this._quest = this.newQuest(config);
         return this;
     },
 
