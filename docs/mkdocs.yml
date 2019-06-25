@@ -163,6 +163,7 @@ nav:
     - Wait events: waitevents.md
     - CSV table:
         - Conditions table: conditionstable.md
+    - Quest: quest.md
 - Data:
     - Data manager: 
         - Built-in data: datamanager.md

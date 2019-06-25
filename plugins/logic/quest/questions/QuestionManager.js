@@ -10,8 +10,8 @@ class QuestionManager {
         // Event emitter. Create a private event emitter for private quest task object.
         this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
 
-        this.items = [];
-        this.itemsMap = {};
+        this.questions = [];
+        this.questionMap = {};
         this._quest = undefined;
 
         var questions = GetValue(config, 'questions', undefined);
@@ -36,16 +36,15 @@ class QuestionManager {
         this.shutdown();
     }
 
-    add(item, config) {
-        if (typeof (item) === 'string') {
-            var csvString = item;
-            item = ParseCSV(csvString, config);
+    add(question, config) {
+        if (typeof (question) === 'string') {
+            question = ParseCSV(question, config);
         }
 
-        if (Array.isArray(item)) {
-            var items = item;
-            for (var i = 0, cnt = items.length; i < cnt; i++) {
-                this._add(items[i]);
+        if (Array.isArray(question)) {
+            var questions = question;
+            for (var i = 0, cnt = questions.length; i < cnt; i++) {
+                this._add(questions[i]);
             }
         } else {
             this._add(itme);
@@ -53,8 +52,8 @@ class QuestionManager {
         return this;
     }
 
-    _add(item) {
-        var options = item.options;
+    _add(question) {
+        var options = question.options;
         if (options) {
             // Apply key via serial number
             var option;
@@ -65,45 +64,45 @@ class QuestionManager {
                 }
             }
         }
-        if (!item.hasOwnProperty('key')) {
+        if (!question.hasOwnProperty('key')) {
             // Apply key via serial numbers
-            item.key = `_${this.items.length}`;
+            question.key = `_${this.questions.length}`;
         }
-        var key = item.key;
-        if (this.itemsMap.hasOwnProperty(key)) {
+        var key = question.key;
+        if (this.questionMap.hasOwnProperty(key)) {
             this.remove(key);
         }
-        this.items.push(item);
-        this.itemsMap[key] = item;
+        this.questions.push(question);
+        this.questionMap[key] = question;
     }
 
     remove(key) {
-        if (this.itemsMap.hasOwnProperty(key)) {
-            RemoveItem(this.items, this.itemsMap[key]);
-            delete this.itemsMap[key];
+        if (this.questionMap.hasOwnProperty(key)) {
+            RemoveItem(this.questions, this.questionMap[key]);
+            delete this.questionMap[key];
         }
         return this;
     }
 
     removeAll() {
-        this.items.length = 0;
-        Clear(this.itemsMap);
+        this.questions.length = 0;
+        Clear(this.questionMap);
     }
 
     has(key) {
-        return this.itemsMap.hasOwnProperty(key);
+        return this.questionMap.hasOwnProperty(key);
     }
 
     get(key) {
-        return this.itemsMap[key];
+        return this.questionMap[key];
     }
 
     getKeys(out) {
         if (out === undefined) {
             out = [];
         }
-        for (var i = 0, cnt = this.items.length; i < cnt; i++) {
-            out.push(this.items[i].key);
+        for (var i = 0, cnt = this.questions.length; i < cnt; i++) {
+            out.push(this.questions[i].key);
         }
         return out;
     }

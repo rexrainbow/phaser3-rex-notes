@@ -53,6 +53,7 @@
 1. [Move to](moveto.md): Move game object towards target position with a steady speed.
 1. [Path follower](pathfollower.md): Set position of game object on a path.
 1. [Pop up](popup.md): Scale up game object.
+1. [Quest](quest.md): Question manager.
 1. [Restorable data](restorabledata.md): Restorable data manager.
 1. [Rhombus](geom-rhombus.md): Rhombus shape and methods.
 1. [RotateTo](rotateto.md): Rotate game object towards target position with a steady speed.

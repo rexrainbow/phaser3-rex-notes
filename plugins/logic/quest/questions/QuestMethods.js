@@ -29,18 +29,6 @@ export default {
         return this;
     },
 
-    setNextQuestionKey(key) {
-        this._quest.setNextKey(key);
-        return this;
-    },
-
-    getQuestion(key) {
-        if (key !== undefined) {
-            this.setNextQuestionKey(key);
-        }
-        return this._quest.getQuestion();
-    },
-
     getNextQuestion(key) {
         return this._quest.getNextQuestion(key);
     },

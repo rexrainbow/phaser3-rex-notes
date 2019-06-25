@@ -8,7 +8,7 @@ var ParseCSV = function (csvString, config) {
         delimiter: delimiter,
     }).data;
 
-    var questType = GetValue(config, 'types.quest', 'q');
+    var questionType = GetValue(config, 'types.question', 'q');
     var optionType = GetValue(config, 'types.option', '');
 
     var items = [];
@@ -19,7 +19,7 @@ var ParseCSV = function (csvString, config) {
         rowType = rowObj.type;
         delete rowObj.type;
 
-        if (rowType === questType) {
+        if (rowType === questionType) {
             item = rowObj;
             if (item.key === '') {
                 delete item.key;
