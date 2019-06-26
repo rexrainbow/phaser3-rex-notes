@@ -79,6 +79,9 @@ var gridTable = scene.rexUI.add.gridTable({
 
     clamplChildOY: false,
 
+    header: headerGameObject,
+    footer: footerGameObject,
+
     space: {
         left: 0,
         right: 0,
@@ -91,7 +94,9 @@ var gridTable = scene.rexUI.add.gridTable({
         //    bottom: 0,
         //    left: 0,
         //    right: 0,
-        //}
+        //},
+        header: 0,
+        footer: 0,
     },
 
     createCellContainerCallback: function(cell, cellContainer) {
@@ -166,6 +171,8 @@ var gridTable = scene.rexUI.add.gridTable({
     - `cellContainer` : Cell container picked from object pool for reusing. Set `reuseCellContainer` to `true` to enable this feature.
         - `null` : No cell container available.
         - Game object : Reusable cell container.
+- `header` : Game object of header, optional.
+- `footer` : Game object of footer, optional.
 - `space` : Pads spaces
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
     - `space.table` :
@@ -177,6 +184,8 @@ var gridTable = scene.rexUI.add.gridTable({
             - If `scrollMode` is `1` (horizontal) :
                 - `space.table.left`, `space.table.right` : Left, right padding space of table object.
                 - `space.table.bottom` : Space between table object and slider object.
+    - `space.header` : Space between header and table.
+    - `space.footer` : Space between footer and table.
 - `items` : Array of item data for each cell.
 - `name` : Set name of this gridTable.
 

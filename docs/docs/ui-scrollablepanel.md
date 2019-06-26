@@ -72,6 +72,9 @@ var scrollablePanel = scene.rexUI.add.scrollablePanel({
 
     clamplChildOY: false,
 
+    header: headerGameObject,
+    footer: footerGameObject,
+
     space: {
         left: 0,
         right: 0,
@@ -84,7 +87,9 @@ var scrollablePanel = scene.rexUI.add.scrollablePanel({
         //    bottom: 0,
         //    left: 0,
         //    right: 0,
-        //}
+        //},
+        header: 0,
+        footer: 0,
     },
 
     name: '',
@@ -121,6 +126,8 @@ var scrollablePanel = scene.rexUI.add.scrollablePanel({
         - Set `false` to disable it.
     - Set to `false` to skip creating scroller.
 - `clamplChildOY` : Set `true` to clamp scrolling.
+- `header` : Game object of header, optional.
+- `footer` : Game object of footer, optional.
 - `space` : Pads spaces
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
     - `space.panel` :
@@ -132,6 +139,8 @@ var scrollablePanel = scene.rexUI.add.scrollablePanel({
             - If `scrollMode` is `1` (horizontal) :
                 - `space.panel.left`, `space.panel.right` : Left, right padding space of panel object.
                 - `space.panel.bottom` : Space between panel object and slider object.
+    - `space.header` : Space between header and panel.
+    - `space.footer` : Space between footer and panel.
 - `name` : Set name of this panel.
 
 ### Custom class

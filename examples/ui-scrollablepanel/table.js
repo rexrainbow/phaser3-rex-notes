@@ -18,7 +18,7 @@ class Demo extends Phaser.Scene {
                 x: 400,
                 y: 300,
                 width: 350,
-                height: 400,
+                height: 460,
 
                 scrollMode: 0,
 
@@ -37,6 +37,22 @@ class Demo extends Phaser.Scene {
                     thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 13, COLOR_LIGHT),
                 },
 
+                header: this.rexUI.add.label({
+                    height: 30,
+    
+                    orientation: 0,
+                    background: this.rexUI.add.roundRectangle(0, 0, 20, 20, 0, COLOR_DARK),
+                    text: this.add.text(0, 0, 'Header'),
+                }),
+    
+                footer: this.rexUI.add.label({
+                    height: 30,
+    
+                    orientation: 0,
+                    background: this.rexUI.add.roundRectangle(0, 0, 20, 20, 0, COLOR_DARK),
+                    text: this.add.text(0, 0, 'Footer'),
+                }),
+
                 space: {
                     left: 10,
                     right: 10,
@@ -44,6 +60,8 @@ class Demo extends Phaser.Scene {
                     bottom: 10,
 
                     panel: 10,
+                    header: 10,
+                    footer: 10,
                 }
             })
             .layout()

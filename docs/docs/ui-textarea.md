@@ -67,6 +67,9 @@ var textArea = scene.rexUI.add.textArea({
 
     clamplChildOY: false,
 
+    header: headerGameObject,
+    footer: footerGameObject,
+
     space: {
         left: 0,
         right: 0,
@@ -79,7 +82,9 @@ var textArea = scene.rexUI.add.textArea({
         //    bottom: 0,
         //    left: 0,
         //    right: 0,
-        //}
+        //},
+        header: 0,
+        footer: 0,
     },
 
     content: '',
@@ -113,6 +118,8 @@ var textArea = scene.rexUI.add.textArea({
         - Set `false` to disable it.
     - Set to `false` to skip creating scroller.
 - `clamplChildOY` : Set `true` to clamp scrolling.
+- `header` : Game object of header, optional.
+- `footer` : Game object of footer, optional.
 - `space` : Pads spaces
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
     - `space.text` :
@@ -124,6 +131,8 @@ var textArea = scene.rexUI.add.textArea({
             - If `scrollMode` is `1` (horizontal) :
                 - `space.text.left`, `space.text.right` : Left, right padding space of text object.
                 - `space.text.bottom` : Space between text object and slider object.
+    - `space.header` : Space between header and text object.
+    - `space.footer` : Space between footer and text object.
 - `content` : Content of this text area.
 - `name` : Set name of this textArea.
 
