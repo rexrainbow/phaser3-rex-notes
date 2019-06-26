@@ -135,7 +135,6 @@ var questionManager = scene.plugins.get('rexQuest').add({
                - Empty string : A row of option object belong a question object.
             - `key` : Unique key string. Create a key string `'_' + serialNumber` if this field does not exist.
             - Other fields.
-        - Note: **All values are string type**.
 - `delimiter` : Delimiter of csv string. Default value is `','`
 - `types` : Define value of row type.
     - `types.question` : Define value of question row. Default value is `q`.
