@@ -56,6 +56,7 @@ var questionManager = scene.plugins.get('rexQuest').add({
     //     question: 'q',
     //     option: '',
     // },
+    // convert: true,
 
     quest: undefined,
     // quest: {
@@ -139,6 +140,19 @@ var questionManager = scene.plugins.get('rexQuest').add({
 - `types` : Define value of row type.
     - `types.question` : Define value of question row. Default value is `q`.
     - `types.option` : Define value of option row. Default value is `''` (empty string).
+- `convert` : Convert string values to other types.
+    - Default type converting : Convert string to *number*, *boolean*, *null*, or *string*
+        - `'0'`, `'1'`, ... (number string) -> number
+        - `'true'`, or `'false'` -> `true` or `false`
+        - `''` (empty string) -> `null`
+        - Others : string.
+    - Set `false` to ignore types converting, i.e. all values are string.
+    - A custom type converting function :
+        ```javascript
+        function(stringValue, key) {
+            // return value;
+        }
+        ```
 - `quest` : Create a private quest task object.
    - `undefined` : Don't create a private quest task object.
    - `true` : Create a private quest task object with default configuration.
@@ -154,10 +168,23 @@ questionManager.add(questions, config);
 
 - `questions` : An array of question objects, or a csv string. See `questions` section in [Create question manager instance](quest.md#create-question-manager-instance) section.
 - `config` :
-    - `config.delimiter` : Delimiter of csv string. Default value is `','`
-    - `config.types` : Define value of row type.
-        - `config.types.question` : Define value of question row. Default value is `q`.
-        - `config.types.option` : Define value of option row. Default value is `''` (empty string).
+    - `delimiter` : Delimiter of csv string. Default value is `','`
+    - `types` : Define value of row type.
+        - `types.question` : Define value of question row. Default value is `q`.
+        - `types.option` : Define value of option row. Default value is `''` (empty string).
+    - `convert` : Convert string values to other types.
+        - Default type converting : Convert string to *number*, *boolean*, *null*, or *string*
+            - `'0'`, `'1'`, ... (number string) -> number
+            - `'true'`, or `'false'` -> `true` or `false`
+            - `''` (empty string) -> `null`
+            - Others : string.
+        - Set `false` to ignore types converting, i.e. all values are string.
+        - A custom type converting function :
+            ```javascript
+            function(stringValue, key) {
+                // return value;
+            }
+            ```
 
 #### Remove question
 

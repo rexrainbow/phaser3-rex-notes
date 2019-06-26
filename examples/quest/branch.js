@@ -60,7 +60,7 @@ class Demo extends Phaser.Scene {
             quest: true
         })
             .on('quest', function (question, questionManager, quest) {
-                if (question.end === '1') {
+                if (question.end) {
                     questionManager.setData('endAt', question.key);
                     questionManager.emit('complete', questionManager, quest); // User defined event
                     return;
