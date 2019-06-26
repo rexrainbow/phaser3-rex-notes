@@ -2803,8 +2803,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../array-filter/" title="Filter/Map" class="md-nav__link">
-      Filter/Map
+    <a href="../array-sort/" title="Sort" class="md-nav__link">
+      Sort
     </a>
   </li>
 
@@ -2815,8 +2815,20 @@
 
 
   <li class="md-nav__item">
-    <a href="../random-array/" title="Random" class="md-nav__link">
+    <a href="../array-random/" title="Random" class="md-nav__link">
       Random
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../array-filter/" title="Filter/Map" class="md-nav__link">
+      Filter/Map
     </a>
   </li>
 
@@ -4572,6 +4584,9 @@
 
     <span class="nx">clamplChildOY</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
 
+    <span class="nx">header</span><span class="o">:</span> <span class="nx">headerGameObject</span><span class="p">,</span>
+    <span class="nx">footer</span><span class="o">:</span> <span class="nx">footerGameObject</span><span class="p">,</span>
+
     <span class="nx">space</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">left</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
         <span class="nx">right</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
@@ -4584,7 +4599,9 @@
         <span class="c1">//    bottom: 0,</span>
         <span class="c1">//    left: 0,</span>
         <span class="c1">//    right: 0,</span>
-        <span class="c1">//}</span>
+        <span class="c1">//},</span>
+        <span class="nx">header</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">footer</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="p">},</span>
 
     <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
@@ -4640,6 +4657,8 @@
 </ul>
 </li>
 <li><code>clamplChildOY</code> : Set <code>true</code> to clamp scrolling.</li>
+<li><code>header</code> : Game object of header, optional.</li>
+<li><code>footer</code> : Game object of footer, optional.</li>
 <li><code>space</code> : Pads spaces<ul>
 <li><code>space.left</code>, <code>space.right</code>, <code>space.top</code>, <code>space.bottom</code> : Space of bounds.</li>
 <li><code>space.panel</code> :<ul>
@@ -4659,6 +4678,8 @@
 </li>
 </ul>
 </li>
+<li><code>space.header</code> : Space between header and panel.</li>
+<li><code>space.footer</code> : Space between footer and panel.</li>
 </ul>
 </li>
 <li><code>name</code> : Set name of this panel.</li>
