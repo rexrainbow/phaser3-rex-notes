@@ -22,90 +22,95 @@ class Scrollable extends Sizer {
         var child = GetValue(config, 'child.gameObject', undefined);
         var sliderConfig = GetValue(config, 'slider', undefined);
         var scrollerConfig = GetValue(config, 'scroller', true);
+        var slider;
+        var scroller;
 
         // Space
         var paddingLeft = GetValue(config, 'space.left', 0);
         var paddingRight = GetValue(config, 'space.right', 0);
         var paddingTop = GetValue(config, 'space.top', 0);
         var paddingBottom = GetValue(config, 'space.bottom', 0);
-        var childSpace = GetValue(config, 'space.child', 0);
-        this.childPadding = {};
-        if (typeof (childSpace) !== 'number') {
-            var childPadding = childSpace;
-            if (scrollMode === 0) {
-                childSpace = GetValue(childPadding, 'right', 0);
-                this.childPadding.top = GetValue(childPadding, 'top', 0);
-                this.childPadding.bottom = GetValue(childPadding, 'bottom', 0);
-            } else {
-                childSpace = GetValue(childPadding, 'bottom', 0);
-                this.childPadding.top = GetValue(childPadding, 'left', 0);
-                this.childPadding.bottom = GetValue(childPadding, 'right', 0);
-            }
-        } else {
-            this.childPadding.top = 0;
-            this.childPadding.bottom = 0;
-        }
 
-
+        // Background
         if (background) {
             this.addBackground(background);
         }
 
-        var proportion = GetValue(config, 'child.proportion', 1);
-        var expand = GetValue(config, 'child.expand', true);
-        var padding;
-        if (scrollMode === 0) {
-            padding = {
-                left: paddingLeft,
-                right: (sliderConfig) ? childSpace : paddingRight,
-                top: paddingTop,
-                bottom: paddingBottom
-            };
-        } else {
-            padding = {
-                left: paddingLeft,
-                right: paddingRight,
-                top: paddingTop,
-                bottom: (sliderConfig) ? childSpace : paddingBottom
-            };
-        }
-        this.add(child, proportion, 'center', padding, expand);
+        // Child, slider, scroller
+        if (child) {
+            var childSizer = this;
 
-        var slider;
-        if (sliderConfig) {
-            if (sliderConfig === true) {
-                sliderConfig = {};
+            var childSpace = GetValue(config, 'space.child', 0);
+            this.childPadding = {};
+            if (typeof (childSpace) !== 'number') {
+                var childPadding = childSpace;
+                if (scrollMode === 0) {
+                    childSpace = GetValue(childPadding, 'right', 0);
+                    this.childPadding.top = GetValue(childPadding, 'top', 0);
+                    this.childPadding.bottom = GetValue(childPadding, 'bottom', 0);
+                } else {
+                    childSpace = GetValue(childPadding, 'bottom', 0);
+                    this.childPadding.top = GetValue(childPadding, 'left', 0);
+                    this.childPadding.bottom = GetValue(childPadding, 'right', 0);
+                }
+            } else {
+                this.childPadding.top = 0;
+                this.childPadding.bottom = 0;
             }
-            sliderConfig.orientation = this.orientation;
-            slider = new Slider(scene, sliderConfig);
+
+            var proportion = GetValue(config, 'child.proportion', 1);
+            var expand = GetValue(config, 'child.expand', true);
             var padding;
             if (scrollMode === 0) {
                 padding = {
-                    left: 0,
-                    right: paddingRight,
+                    left: paddingLeft,
+                    right: (sliderConfig) ? childSpace : paddingRight,
                     top: paddingTop,
                     bottom: paddingBottom
-                }
+                };
             } else {
                 padding = {
                     left: paddingLeft,
                     right: paddingRight,
-                    top: 0,
-                    bottom: paddingBottom
+                    top: paddingTop,
+                    bottom: (sliderConfig) ? childSpace : paddingBottom
+                };
+            }
+            childSizer.add(child, proportion, 'center', padding, expand);
+
+            if (sliderConfig) {
+                if (sliderConfig === true) {
+                    sliderConfig = {};
                 }
+                sliderConfig.orientation = this.orientation;
+                slider = new Slider(scene, sliderConfig);
+                var padding;
+                if (scrollMode === 0) {
+                    padding = {
+                        left: 0,
+                        right: paddingRight,
+                        top: paddingTop,
+                        bottom: paddingBottom
+                    }
+                } else {
+                    padding = {
+                        left: paddingLeft,
+                        right: paddingRight,
+                        top: 0,
+                        bottom: paddingBottom
+                    }
+                }
+                childSizer.add(slider, 0, 'center', padding, true);
             }
-            this.add(slider, 0, 'center', padding, true);
-        }
 
-        var scroller;
-        if (scrollerConfig) {
-            if (scrollerConfig === true) {
-                scrollerConfig = {};
+            if (scrollerConfig) {
+                if (scrollerConfig === true) {
+                    scrollerConfig = {};
+                }
+                scrollerConfig.orientation = scrollMode;
+                scroller = new Scroller(child, scrollerConfig);
             }
-            scrollerConfig.orientation = scrollMode;
-            scroller = new Scroller(child, scrollerConfig);
         }
-
 
         // Control
         if (slider) {
