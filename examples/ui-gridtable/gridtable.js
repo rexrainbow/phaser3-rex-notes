@@ -20,12 +20,12 @@ class Demo extends Phaser.Scene {
         var gridTable = this.rexUI.add.gridTable({
             x: 400,
             y: 300,
-            width: (scrollMode === 0) ? 300 : 400,
-            height: (scrollMode === 0) ? 400 : 300,
+            width: (scrollMode === 0) ? 300 : 420,
+            height: (scrollMode === 0) ? 420 : 300,
 
             scrollMode: scrollMode,
 
-            background: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, 0x4e342e),
+            background: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_PRIMARY),
 
             table: {
                 cellWidth: (scrollMode === 0) ? undefined : 60,
@@ -41,9 +41,27 @@ class Demo extends Phaser.Scene {
             },
 
             slider: {
-                track: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, 0x260e04),
-                thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 13, 0x7b5e57),
+                track: this.rexUI.add.roundRectangle(0, 0, 20, 10, 10, COLOR_DARK),
+                thumb: this.rexUI.add.roundRectangle(0, 0, 0, 0, 13, COLOR_LIGHT),
             },
+
+            header: this.rexUI.add.label({
+                width: (scrollMode === 0) ? undefined : 30,
+                height: (scrollMode === 0) ? 30 : undefined,
+
+                orientation: scrollMode,
+                background: this.rexUI.add.roundRectangle(0, 0, 20, 20, 0, COLOR_DARK),
+                text: this.add.text(0, 0, 'Header'),
+            }),
+
+            footer: this.rexUI.add.label({
+                width: (scrollMode === 0) ? undefined : 30,
+                height: (scrollMode === 0) ? 30 : undefined,
+
+                orientation: scrollMode,
+                background: this.rexUI.add.roundRectangle(0, 0, 20, 20, 0, COLOR_DARK),
+                text: this.add.text(0, 0, 'Footer'),
+            }),
 
             space: {
                 left: 20,
@@ -52,6 +70,8 @@ class Demo extends Phaser.Scene {
                 bottom: 20,
 
                 table: 10,
+                header: 10,
+                footer: 10,
             },
 
             createCellContainerCallback: function (cell, cellContainer) {

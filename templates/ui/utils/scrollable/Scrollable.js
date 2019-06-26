@@ -1,7 +1,6 @@
 import Sizer from '../../sizer/Sizer.js';
 import GetScrollMode from '../GetScrollMode.js';
-import Slider from '../../slider/Slider.js';
-import Scroller from '../../../../plugins/scroller.js';
+import CreateScrollableSizer from './CreateScrollableSizer.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -11,19 +10,17 @@ class Scrollable extends Sizer {
             config = {};
         }
 
-        var scrollMode = GetScrollMode(config);
+        var scrollMode = GetScrollMode(config); // Left-to-right, or top-to-bottom
         // Create sizer
-        config.orientation = scrollMode; // Left-to-right, or top-to-bottom
+        config.orientation = (scrollMode === 0) ? 1 : 0;
         super(scene, config);
         this.type = GetValue(config, 'type', 'rexScrollable');
 
         // Add elements
         var background = GetValue(config, 'background', undefined);
-        var child = GetValue(config, 'child.gameObject', undefined);
-        var sliderConfig = GetValue(config, 'slider', undefined);
-        var scrollerConfig = GetValue(config, 'scroller', true);
-        var slider;
-        var scroller;
+        var scrollableSizer = CreateScrollableSizer.call(this, config);
+        var header = GetValue(config, 'header', undefined);
+        var footer = GetValue(config, 'footer', undefined);
 
         // Space
         var paddingLeft = GetValue(config, 'space.left', 0);
@@ -36,98 +33,75 @@ class Scrollable extends Sizer {
             this.addBackground(background);
         }
 
-        // Child, slider, scroller
-        if (child) {
-            var childSizer = this;
-
-            var childSpace = GetValue(config, 'space.child', 0);
-            this.childPadding = {};
-            if (typeof (childSpace) !== 'number') {
-                var childPadding = childSpace;
-                if (scrollMode === 0) {
-                    childSpace = GetValue(childPadding, 'right', 0);
-                    this.childPadding.top = GetValue(childPadding, 'top', 0);
-                    this.childPadding.bottom = GetValue(childPadding, 'bottom', 0);
-                } else {
-                    childSpace = GetValue(childPadding, 'bottom', 0);
-                    this.childPadding.top = GetValue(childPadding, 'left', 0);
-                    this.childPadding.bottom = GetValue(childPadding, 'right', 0);
-                }
-            } else {
-                this.childPadding.top = 0;
-                this.childPadding.bottom = 0;
-            }
-
-            var proportion = GetValue(config, 'child.proportion', 1);
-            var expand = GetValue(config, 'child.expand', true);
+        if (header) {
+            var align = GetValue(config, 'align.header', 'center');
+            var headerSpace = GetValue(config, 'space.header', 0);
             var padding;
             if (scrollMode === 0) {
                 padding = {
                     left: paddingLeft,
-                    right: (sliderConfig) ? childSpace : paddingRight,
+                    right: paddingRight,
                     top: paddingTop,
-                    bottom: paddingBottom
+                    bottom: headerSpace,
                 };
             } else {
                 padding = {
                     left: paddingLeft,
-                    right: paddingRight,
+                    right: headerSpace,
                     top: paddingTop,
-                    bottom: (sliderConfig) ? childSpace : paddingBottom
+                    bottom: paddingBottom,
                 };
             }
-            childSizer.add(child, proportion, 'center', padding, expand);
-
-            if (sliderConfig) {
-                if (sliderConfig === true) {
-                    sliderConfig = {};
-                }
-                sliderConfig.orientation = this.orientation;
-                slider = new Slider(scene, sliderConfig);
-                var padding;
-                if (scrollMode === 0) {
-                    padding = {
-                        left: 0,
-                        right: paddingRight,
-                        top: paddingTop,
-                        bottom: paddingBottom
-                    }
-                } else {
-                    padding = {
-                        left: paddingLeft,
-                        right: paddingRight,
-                        top: 0,
-                        bottom: paddingBottom
-                    }
-                }
-                childSizer.add(slider, 0, 'center', padding, true);
-            }
-
-            if (scrollerConfig) {
-                if (scrollerConfig === true) {
-                    scrollerConfig = {};
-                }
-                scrollerConfig.orientation = scrollMode;
-                scroller = new Scroller(child, scrollerConfig);
-            }
+            var expand = GetValue(config, 'expand.header', true);
+            this.add(header, 0, align, padding, expand);
         }
 
-        // Control
-        if (slider) {
-            slider.on('valuechange', function (newValue) {
-                this.t = newValue;
-            }, this);
+        if (scrollableSizer) {
+            var padding;
+            if (scrollMode === 0) {
+                padding = {
+                    left: paddingLeft,
+                    right: paddingRight,
+                    top: (header) ? 0 : paddingTop,
+                    bottom: (footer) ? 0 : paddingBottom,
+                };
+            } else {
+                padding = {
+                    left: (header) ? 0 : paddingLeft,
+                    right: (footer) ? 0 : paddingRight,
+                    top: paddingTop,
+                    bottom: paddingBottom,
+                };
+            }
+            this.add(scrollableSizer, 1, 'center', padding, true);
         }
-        if (scroller) {
-            scroller.on('valuechange', function (newValue) {
-                this.childOY = newValue;
-            }, this);
+
+        if (footer) {
+            var align = GetValue(config, 'align.footer', 'center');
+            var footerSpace = GetValue(config, 'space.footer', 0);
+            var padding;
+            if (scrollMode === 0) {
+                padding = {
+                    left: paddingLeft,
+                    right: paddingRight,
+                    top: footerSpace,
+                    bottom: paddingBottom,
+                };
+            } else {
+                padding = {
+                    left: footerSpace,
+                    right: paddingRight,
+                    top: paddingTop,
+                    bottom: paddingBottom,
+                };
+            }
+            var expand = GetValue(config, 'expand.footer', true);
+            this.add(footer, 0, align, padding, expand);
         }
 
         this.addChildrenMap('background', background);
-        this.addChildrenMap('child', child);
-        this.addChildrenMap('slider', slider);
-        this.addChildrenMap('scroller', scroller);
+        this.addChildrenMap('header', header);
+        this.addChildrenMap('footer', footer);
 
         // Necessary properties of child object
         // child.t (RW), child.childOY (RW), child.topChildOY (R), child.bottomChildOY (R)
