@@ -92,6 +92,16 @@ var scrollablePanel = scene.rexUI.add.scrollablePanel({
         footer: 0,
     },
 
+    expand: {
+        header: true,
+        footer: true,
+    },
+
+    align: {
+        header: 'center',
+        footer: 'center',
+    },
+
     name: '',
 });
 ```
@@ -141,6 +151,15 @@ var scrollablePanel = scene.rexUI.add.scrollablePanel({
                 - `space.panel.bottom` : Space between panel object and slider object.
     - `space.header` : Space between header and panel.
     - `space.footer` : Space between footer and panel.
+- `expand` : Expand width or height of element
+    - `expand.header` : Set `true` to expand width or height of header game object.
+    - `expand.footer`
+- `align` : Align element
+    - `align.header`
+        - `'center'`, or `Phaser.Display.Align.CENTER` : Align game object at center. Default value.
+        - `'left'`, or `Phaser.Display.Align.LEFT_CENTER` : Align game object at left-center.
+        - `'right'`, or `Phaser.Display.Align.RIGHT_CENTER` : Align game object at right-center.
+    - `align.footer`
 - `name` : Set name of this panel.
 
 ### Custom class
