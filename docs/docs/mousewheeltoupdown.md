@@ -11,7 +11,7 @@ Map mouse-wheeling to (up/down) cursor key state.
 
 ## Usage
 
-[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/cursor-at-bound)
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/mouse-wheel-to-up-down)
 
 User could import class directly, or install it by global plugin.
 
