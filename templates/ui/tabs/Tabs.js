@@ -1,5 +1,6 @@
 import GridSizer from '../gridsizer/GridSizer.js';
 import Buttons from '../buttons/Buttons.js';
+import ButtonMethods from './ButtonMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -148,15 +149,11 @@ class Tabs extends GridSizer {
         this.addChildrenMap('topButtonsSizer', topButtonsSizer);
         this.addChildrenMap('bottomButtonsSizer', bottomButtonsSizer);
     }
-
-    emitButtonClick(groupName, index) {
-        var buttonsSizer = this.childrenMap[groupName + 'ButtonsSizer'];
-        if (!buttonsSizer) {
-            return this;
-        }
-        buttonsSizer.emitButtonClick(index);
-        return this;
-    }
 }
+
+Object.assign(
+    Tabs.prototype,
+    ButtonMethods,
+);
 
 export default Tabs;

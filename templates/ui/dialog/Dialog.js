@@ -1,6 +1,7 @@
 import Sizer from '../sizer/Sizer.js';
 import Buttons from '../buttons/Buttons.js';
 import Space from '../utils/Space.js';
+import ButtonMethods from './ButtonMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -24,10 +25,12 @@ class Dialog extends Sizer {
         }
         var content = GetValue(config, 'content', undefined);
         var description = GetValue(config, 'description', undefined);
+        var choicesSizer;
         var choices = GetValue(config, 'choices', undefined);
         if (choices && choices.length === 0) {
             choices = undefined;
         }
+        var actionsSizer;
         var actions = GetValue(config, 'actions', undefined);
         if (actions && actions.length === 0) {
             actions = undefined;
@@ -153,7 +156,7 @@ class Dialog extends Sizer {
 
         if (choices) {
             var align = GetValue(config, 'align.choices', 'center');
-            var buttonsSizer = new Buttons(scene, {
+            choicesSizer = new Buttons(scene, {
                 groupName: 'choices',
                 buttons: choices,
                 orientation: 1, // Top-Bottom
@@ -169,11 +172,11 @@ class Dialog extends Sizer {
                 bottom: (actions) ? choicesSpace : paddingBottom
             }
             var expand = GetValue(config, 'expand.choices', true);
-            this.add(buttonsSizer, 0, align, padding, expand);
+            this.add(choicesSizer, 0, align, padding, expand);
         }
 
         if (actions) {
-            var buttonsSizer = new Buttons(scene, {
+            actionsSizer = new Buttons(scene, {
                 groupName: 'actions',
                 buttons: actions,
                 orientation: 0, // Left-right
@@ -189,7 +192,7 @@ class Dialog extends Sizer {
                 bottom: paddingBottom
             }
             var expand = GetValue(config, 'expand.actions', true);
-            this.add(buttonsSizer, 0, 'center', padding, expand);
+            this.add(actionsSizer, 0, 'center', padding, expand);
         }
 
         this.addChildrenMap('background', background);
@@ -198,7 +201,14 @@ class Dialog extends Sizer {
         this.addChildrenMap('content', content);
         this.addChildrenMap('choices', choices);
         this.addChildrenMap('actions', actions);
+        this.addChildrenMap('choicesSizer', choicesSizer);
+        this.addChildrenMap('actionsSizer', actionsSizer);
     }
 }
+
+Object.assign(
+    Dialog.prototype,
+    ButtonMethods,
+);
 
 export default Dialog;

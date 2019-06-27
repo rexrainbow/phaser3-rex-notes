@@ -31,8 +31,10 @@ import YoutubePlayerFactory from './youtubeplayer/YoutubePlayerFactory.js';
 import TapFactory from './tap/TapFactory.js';
 import PressFactory from './press/PressFactory.js';
 
-import Hide from './utils/Hide.js';
-import Show from './utils/Show.js';
+import {
+    Show,
+    Hide
+} from './utils/Hide.js';
 import Edit from '../../plugins/behaviors/textedit/Edit.js';
 
 class UIPlugin extends Phaser.Plugins.ScenePlugin {

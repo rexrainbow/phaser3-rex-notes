@@ -21,10 +21,10 @@ var FireEvent = function (eventName, button, pointer) {
     var index;
     if (typeof (button) === 'number') {
         index = button;
-        if (index >= this.childrenMap.buttons.length) {
+        button = this.childrenMap.buttons[index];
+        if (!button) {
             return;
         }
-        button = this.childrenMap.buttons[index];
     } else {
         index = this.childrenMap.buttons.indexOf(button);
         if (index === -1) {

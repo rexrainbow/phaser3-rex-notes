@@ -1,11 +1,20 @@
 import GetSizerConfig from './GetSizerConfig.js';
 
-var Hide = function (gameObject, hidden) {
-    if (hidden === undefined) {
-        hidden = true;
-    }
+var Show = function(gameObject) {
+    _hide(gameObject, false);
+};
+
+var Hide = function(gameObject) {
+    _hide(gameObject, true);
+};
+
+var _hide = function (gameObject, hidden) {
     var config = GetSizerConfig(gameObject);
     config.hidden = hidden;
     gameObject.setVisible(!hidden);
-}
-export default Hide;
+};
+
+export {
+    Show,
+    Hide
+};

@@ -19,44 +19,44 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        var scene = this;
-
         this.txt = this.add.text(0, 0, '');
+        this.input.on('pointerdown', this.runTest, this);
+    }
+
+    runTest() {
+        // Music is playing
+        if (this.music) {
+            return;
+        }
 
         this.music = this.sound.add('fate');
         var soundFadeIn = this.plugins.get('rexSoundFade').fadeIn;
-        soundFadeIn(scene, this.music, 3000);
+        soundFadeIn(this, this.music, 3000);
 
         // or
-        //this.music = soundFadeIn(scene, 'fate', 2000);        
+        //this.music = soundFadeIn(this, 'fate', 2000);        
 
         this.music.on('destroy', function () {
-            scene.music = undefined;
-        });
+            this.music = undefined;
+        }, this);
 
         // fade-out volume then destroy sound instance
         var soundFadeOut = this.plugins.get('rexSoundFade').fadeOut;
-        this.time.delayedCall(4000, soundFadeOut, [scene, this.music, 3000]);
+        this.time.delayedCall(4000, soundFadeOut, [this, this.music, 3000]);
     }
 
     update() {
-        var view;
+        var volume, state, playbackTime
         if (this.music) {
-            view = [
-                this.music.volume,
-                (this.music.isPlaying) ? 'playing' : 'end',
-                this.music.seek
-            ];
+            volume = this.music.volume;
+            state = (this.music.isPlaying) ? 'playing' : 'end';
+            playbackTime = this.music.seek;
         } else {
-            view = [
-                '--',
-                '--',
-                '--'
-            ];
+            volume = '--';
+            state = '--';
+            playbackTime = '--';
         }
-
-        var s = Format('Volume: %1 (%2, %3)', view);
-        this.txt.setText(s);
+        this.txt.text = `Volume: ${volume} (${state}, ${playbackTime})`;
     }
 }
 

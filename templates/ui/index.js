@@ -26,8 +26,10 @@ import Video from './video/Video.js';
 import VideoCanvas from './video/VideoCanvas.js';
 import YoutubePlayer from './youtubeplayer/YoutubePlayer.js';
 
-import Hide from './utils/Hide.js';
-import Show from './utils/Show.js';
+import {
+    Show,
+    Hide
+} from './utils/Hide.js';
 import Edit from '../../plugins/behaviors/textedit/Edit.js';
 
 export default {

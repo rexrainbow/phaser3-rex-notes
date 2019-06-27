@@ -4,6 +4,10 @@ import {
     ButtonSetInteractive,
     FireEvent
 } from './ButtonSetInteractive.js';
+import {
+    Show,
+    Hide
+} from '../utils/Hide.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -81,6 +85,28 @@ class Buttons extends Sizer {
     emitButtonClick(index) {
         // index or button game object
         FireEvent.call(this, 'button.click', index);
+        return this;
+    }
+
+    showButton(button) {
+        if (typeof (button) === 'number') {
+            button = this.childrenMap.buttons[button];
+            if (!button) {
+                return this;
+            }
+        }
+        Show(button);
+        return this;
+    }
+
+    hideButton(button) {
+        if (typeof (button) === 'number') {
+            button = this.childrenMap.buttons[button];
+            if (!button) {
+                return this;
+            }
+        }
+        Hide(button);
         return this;
     }
 }
