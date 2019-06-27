@@ -192,10 +192,29 @@ buttons.emitButtonClick(index);
         ```
         or
         ```javascript
-        var bottons = buttons.getElement('buttons[0]');
+        var button = buttons.getButton(index);
         ```
-        - First button
+        or
+        ```javascript
+        var botton = buttons.getElement('buttons[0]'); // First button
+        ```
 - Get by name
     ```javascript
     var gameObject = buttons.getElement('#' + name);
     ```
+
+### Show/hide button
+
+Hidden elements won't be counted when layouting. 
+Call `buttons.layout()`, or `topSizer.layout()` after show/hide any button.
+
+- Show button
+    ```javascript
+    buttons.showButton(index);
+    ```
+    - `index` : A number index, or a button game object.
+- Hide button.
+    ```javascript
+    buttons.hideButton(index);
+    ```
+    - `index` : A number index, or a button game object.

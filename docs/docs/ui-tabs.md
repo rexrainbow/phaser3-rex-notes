@@ -181,12 +181,20 @@ See [grid sizer object](ui-gridsizer.md), [base-sizer object](ui-basesizer.md).
 
 #### Emit button click event
 
-```javascript
-tabs.emitButtonClick(groupName, index);
-```
-
-- `groupName` : `'left'`, `'right'`, `'top'`, or `'bottom'`.
-- `index` : Index of triggered button game object, or a button game object.
+- Emit button click event in a given group
+    ```javascript
+    tabs.emitButtonClick(groupName, index);
+    ```
+    - `groupName` : `'left'`, `'right'`, `'top'`, or `'bottom'`.
+    - `index` : A number index, or a button game object.
+- Emit left/right/top/bottom button click event
+    ```javascript
+    tabs.emitLeftButtonClick(index);
+    tabs.emitRightButtonClick(index);
+    tabs.emitTopButtonClick(index);
+    tabs.emitBottomButtonClick(index);
+    ```
+    - `index` : A number index, or a button game object.
 
 ### Get element
 
@@ -206,12 +214,20 @@ tabs.emitButtonClick(groupName, index);
             ```
             or
             ```javascript
+            var botton = tabs.getLeftButton(index);
+            ```
+            or
+            ```javascript
             var bottons = tabs.getElement('leftButtons[0]');
             ```
             - First button of left buttons.
         - Right button game objects
             ```javascript
             var bottons = tabs.getElement('rightButtons');
+            ```
+            or
+            ```javascript
+            var botton = tabs.getRightButton(index);
             ```
             or
             ```javascript
@@ -224,12 +240,20 @@ tabs.emitButtonClick(groupName, index);
             ```
             or
             ```javascript
+            var botton = tabs.getTopButton(index);
+            ```
+            or
+            ```javascript
             var bottons = tabs.getElement('topButtons[0]');
             ```
             - First button of top buttons.
         - Bottom button game objects
             ```javascript
             var bottons = tabs.getElement('bottomButtons');
+            ```
+            or
+            ```javascript
+            var botton = tabs.getBottomButton(index);
             ```
             or
             ```javascript
@@ -240,3 +264,37 @@ tabs.emitButtonClick(groupName, index);
     ```javascript
     var gameObject = tabs.getElement('#' + name);
     ```
+
+### Show/hide button
+
+Hidden elements won't be counted when layouting. 
+Call `tabs.layout()`, or `topSizer.layout()` after show/hide any button.
+
+- Show button in a group
+    ```javascript
+    tabs.showButton(groupName, index);
+    ```
+    - `groupName` : `'left'`, `'right'`, `'top'`, or `'bottom'`.
+    - `index` : A number index, or a button game object.
+- Show left/right/top/bottom button
+    ```javascript
+    tabs.showLeftButton(index);
+    tabs.showRightButton(index);
+    tabs.showTopButton(index);
+    tabs.showBottomButton(index);
+    ```
+    - `index` : A number index, or a button game object.
+- Hide button in a group
+    ```javascript
+    tabs.hideButton(groupName, index);
+    ```
+    - `groupName` : `'left'`, `'right'`, `'top'`, or `'bottom'`.
+    - `index` : A number index, or a button game object.
+- Hide left/right/top/bottom button.
+    ```javascript
+    tabs.hideLeftButton(index);
+    tabs.hideRightButton(index);
+    tabs.hideTopButton(index);
+    tabs.hideBottomButton(index);
+    ```
+    - `index` : A number index, or a button game object.

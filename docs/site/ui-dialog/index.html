@@ -3794,11 +3794,31 @@
     Events
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#emit-button-click-event" title="Emit button click event" class="md-nav__link">
+    Emit button click event
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
   <a href="#get-element" title="Get element" class="md-nav__link">
     Get element
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#showhide-button" title="Show/hide button" class="md-nav__link">
+    Show/hide button
   </a>
   
 </li>
@@ -4432,11 +4452,31 @@
     Events
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#emit-button-click-event" title="Emit button click event" class="md-nav__link">
+    Emit button click event
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
   <a href="#get-element" title="Get element" class="md-nav__link">
     Get element
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#showhide-button" title="Show/hide button" class="md-nav__link">
+    Show/hide button
   </a>
   
 </li>
@@ -4705,6 +4745,16 @@
 </ul>
 </li>
 </ul>
+<h4 id="emit-button-click-event">Emit button click event<a class="headerlink" href="#emit-button-click-event" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Emit action/choice button click event
+    <div class="codehilite"><pre><span></span><span class="nx">dialog</span><span class="p">.</span><span class="nx">emitChoiceClick</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+<span class="nx">dialog</span><span class="p">.</span><span class="nx">emitActionClick</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>index</code> : Index of triggered button game object, or a button game object.</li>
+</ul>
+</li>
+</ul>
 <h3 id="get-element">Get element<a class="headerlink" href="#get-element" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get element<ul>
@@ -4717,8 +4767,20 @@
 <li>Content game object
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">content</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">);</span>
 </pre></div></li>
-<li>Button game object
+<li>Choice button game object
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">buttons</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;choices&#39;</span><span class="p">);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">button</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getChoice</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+</pre></div>
+    or
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">button</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;choices[&#39;</span> <span class="o">+</span> <span class="nx">index</span> <span class="o">+</span> <span class="s1">&#39;]&#39;</span><span class="p">);</span>
+</pre></div></li>
+<li>Acrion button game object
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">buttons</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;actions&#39;</span><span class="p">);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">button</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getAction</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
 </pre></div>
     or
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">button</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;actions[&#39;</span> <span class="o">+</span> <span class="nx">index</span> <span class="o">+</span> <span class="s1">&#39;]&#39;</span><span class="p">);</span>
@@ -4728,6 +4790,25 @@
 <li>Get by name
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">dialog</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;#&#39;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">);</span>
 </pre></div></li>
+</ul>
+<h3 id="showhide-button">Show/hide button<a class="headerlink" href="#showhide-button" title="Permanent link">&para;</a></h3>
+<p>Hidden elements won't be counted when layouting. 
+Call <code>dialog.layout()</code>, or <code>topSizer.layout()</code> after show/hide any button.</p>
+<ul>
+<li>Show choice/action button
+    <div class="codehilite"><pre><span></span><span class="nx">dialog</span><span class="p">.</span><span class="nx">showChoice</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+<span class="nx">dialog</span><span class="p">.</span><span class="nx">showAction</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>index</code> : A number index, or a button game object.</li>
+</ul>
+</li>
+<li>Hide action/choice button.
+    <div class="codehilite"><pre><span></span><span class="nx">dialog</span><span class="p">.</span><span class="nx">hideChoice</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+<span class="nx">dialog</span><span class="p">.</span><span class="nx">hideAction</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>index</code> : A number index, or a button game object.</li>
+</ul>
+</li>
 </ul>
                 
                   

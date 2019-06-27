@@ -3840,6 +3840,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#showhide-button" title="Show/hide button" class="md-nav__link">
+    Show/hide button
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4467,6 +4474,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#showhide-button" title="Show/hide button" class="md-nav__link">
+    Show/hide button
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4669,12 +4683,23 @@
 </li>
 </ul>
 <h4 id="emit-button-click-event">Emit button click event<a class="headerlink" href="#emit-button-click-event" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">tabs</span><span class="p">.</span><span class="nx">emitButtonClick</span><span class="p">(</span><span class="nx">groupName</span><span class="p">,</span> <span class="nx">index</span><span class="p">);</span>
-</pre></div>
-
 <ul>
+<li>Emit button click event in a given group
+    <div class="codehilite"><pre><span></span><span class="nx">tabs</span><span class="p">.</span><span class="nx">emitButtonClick</span><span class="p">(</span><span class="nx">groupName</span><span class="p">,</span> <span class="nx">index</span><span class="p">);</span>
+</pre></div><ul>
 <li><code>groupName</code> : <code>'left'</code>, <code>'right'</code>, <code>'top'</code>, or <code>'bottom'</code>.</li>
-<li><code>index</code> : Index of triggered button game object, or a button game object.</li>
+<li><code>index</code> : A number index, or a button game object.</li>
+</ul>
+</li>
+<li>Emit left/right/top/bottom button click event
+    <div class="codehilite"><pre><span></span><span class="nx">tabs</span><span class="p">.</span><span class="nx">emitLeftButtonClick</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+<span class="nx">tabs</span><span class="p">.</span><span class="nx">emitRightButtonClick</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+<span class="nx">tabs</span><span class="p">.</span><span class="nx">emitTopButtonClick</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+<span class="nx">tabs</span><span class="p">.</span><span class="nx">emitBottomButtonClick</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>index</code> : A number index, or a button game object.</li>
+</ul>
+</li>
 </ul>
 <h3 id="get-element">Get element<a class="headerlink" href="#get-element" title="Permanent link">&para;</a></h3>
 <ul>
@@ -4690,6 +4715,9 @@
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bottons</span> <span class="o">=</span> <span class="nx">tabs</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;leftButtons&#39;</span><span class="p">);</span>
 </pre></div>
     or
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">botton</span> <span class="o">=</span> <span class="nx">tabs</span><span class="p">.</span><span class="nx">getLeftButton</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+</pre></div>
+    or
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bottons</span> <span class="o">=</span> <span class="nx">tabs</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;leftButtons[0]&#39;</span><span class="p">);</span>
 </pre></div><ul>
 <li>First button of left buttons.</li>
@@ -4697,6 +4725,9 @@
 </li>
 <li>Right button game objects
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bottons</span> <span class="o">=</span> <span class="nx">tabs</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;rightButtons&#39;</span><span class="p">);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">botton</span> <span class="o">=</span> <span class="nx">tabs</span><span class="p">.</span><span class="nx">getRightButton</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
 </pre></div>
     or
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bottons</span> <span class="o">=</span> <span class="nx">tabs</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;rightButtons[0]&#39;</span><span class="p">);</span>
@@ -4708,6 +4739,9 @@
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bottons</span> <span class="o">=</span> <span class="nx">tabs</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;topButtons&#39;</span><span class="p">);</span>
 </pre></div>
     or
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">botton</span> <span class="o">=</span> <span class="nx">tabs</span><span class="p">.</span><span class="nx">getTopButton</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+</pre></div>
+    or
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bottons</span> <span class="o">=</span> <span class="nx">tabs</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;topButtons[0]&#39;</span><span class="p">);</span>
 </pre></div><ul>
 <li>First button of top buttons.</li>
@@ -4715,6 +4749,9 @@
 </li>
 <li>Bottom button game objects
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bottons</span> <span class="o">=</span> <span class="nx">tabs</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;bottomButtons&#39;</span><span class="p">);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">botton</span> <span class="o">=</span> <span class="nx">tabs</span><span class="p">.</span><span class="nx">getBottomButton</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
 </pre></div>
     or
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bottons</span> <span class="o">=</span> <span class="nx">tabs</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;bottomButtons[0]&#39;</span><span class="p">);</span>
@@ -4729,6 +4766,43 @@
 <li>Get by name
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">tabs</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;#&#39;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">);</span>
 </pre></div></li>
+</ul>
+<h3 id="showhide-button">Show/hide button<a class="headerlink" href="#showhide-button" title="Permanent link">&para;</a></h3>
+<p>Hidden elements won't be counted when layouting. 
+Call <code>tabs.layout()</code>, or <code>topSizer.layout()</code> after show/hide any button.</p>
+<ul>
+<li>Show button in a group
+    <div class="codehilite"><pre><span></span><span class="nx">tabs</span><span class="p">.</span><span class="nx">showButton</span><span class="p">(</span><span class="nx">groupName</span><span class="p">,</span> <span class="nx">index</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>groupName</code> : <code>'left'</code>, <code>'right'</code>, <code>'top'</code>, or <code>'bottom'</code>.</li>
+<li><code>index</code> : A number index, or a button game object.</li>
+</ul>
+</li>
+<li>Show left/right/top/bottom button
+    <div class="codehilite"><pre><span></span><span class="nx">tabs</span><span class="p">.</span><span class="nx">showLeftButton</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+<span class="nx">tabs</span><span class="p">.</span><span class="nx">showRightButton</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+<span class="nx">tabs</span><span class="p">.</span><span class="nx">showTopButton</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+<span class="nx">tabs</span><span class="p">.</span><span class="nx">showBottomButton</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>index</code> : A number index, or a button game object.</li>
+</ul>
+</li>
+<li>Hide button in a group
+    <div class="codehilite"><pre><span></span><span class="nx">tabs</span><span class="p">.</span><span class="nx">hideButton</span><span class="p">(</span><span class="nx">groupName</span><span class="p">,</span> <span class="nx">index</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>groupName</code> : <code>'left'</code>, <code>'right'</code>, <code>'top'</code>, or <code>'bottom'</code>.</li>
+<li><code>index</code> : A number index, or a button game object.</li>
+</ul>
+</li>
+<li>Hide left/right/top/bottom button.
+    <div class="codehilite"><pre><span></span><span class="nx">tabs</span><span class="p">.</span><span class="nx">hideLeftButton</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+<span class="nx">tabs</span><span class="p">.</span><span class="nx">hideRightButton</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+<span class="nx">tabs</span><span class="p">.</span><span class="nx">hideTopButton</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+<span class="nx">tabs</span><span class="p">.</span><span class="nx">hideBottomButton</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>index</code> : A number index, or a button game object.</li>
+</ul>
+</li>
 </ul>
                 
                   

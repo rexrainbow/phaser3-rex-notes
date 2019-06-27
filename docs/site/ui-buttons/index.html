@@ -3792,6 +3792,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#showhide-button" title="Show/hide button" class="md-nav__link">
+    Show/hide button
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4467,6 +4474,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#showhide-button" title="Show/hide button" class="md-nav__link">
+    Show/hide button
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4676,16 +4690,33 @@
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bottons</span> <span class="o">=</span> <span class="nx">buttons</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;buttons&#39;</span><span class="p">);</span>
 </pre></div>
     or
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bottons</span> <span class="o">=</span> <span class="nx">buttons</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;buttons[0]&#39;</span><span class="p">);</span>
-</pre></div><ul>
-<li>First button</li>
-</ul>
-</li>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">button</span> <span class="o">=</span> <span class="nx">buttons</span><span class="p">.</span><span class="nx">getButton</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">botton</span> <span class="o">=</span> <span class="nx">buttons</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;buttons[0]&#39;</span><span class="p">);</span> <span class="c1">// First button</span>
+</pre></div></li>
 </ul>
 </li>
 <li>Get by name
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">buttons</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;#&#39;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">);</span>
 </pre></div></li>
+</ul>
+<h3 id="showhide-button">Show/hide button<a class="headerlink" href="#showhide-button" title="Permanent link">&para;</a></h3>
+<p>Hidden elements won't be counted when layouting. 
+Call <code>buttons.layout()</code>, or <code>topSizer.layout()</code> after show/hide any button.</p>
+<ul>
+<li>Show button
+    <div class="codehilite"><pre><span></span><span class="nx">buttons</span><span class="p">.</span><span class="nx">showButton</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>index</code> : A number index, or a button game object.</li>
+</ul>
+</li>
+<li>Hide button.
+    <div class="codehilite"><pre><span></span><span class="nx">buttons</span><span class="p">.</span><span class="nx">hideButton</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>index</code> : A number index, or a button game object.</li>
+</ul>
+</li>
 </ul>
                 
                   

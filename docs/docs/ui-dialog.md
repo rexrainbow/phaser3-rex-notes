@@ -236,6 +236,15 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
     - `index` : Index of triggered button game object.
     - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
 
+#### Emit button click event
+
+- Emit action/choice button click event
+    ```javascript
+    dialog.emitChoiceClick(index);
+    dialog.emitActionClick(index);
+    ```
+    - `index` : Index of triggered button game object, or a button game object.
+
 ### Get element
 
 - Get element
@@ -251,9 +260,25 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
         ```javascript
         var content = dialog.getElement('content');
         ```
-    - Button game object
+    - Choice button game object
+        ```javascript
+        var buttons = dialog.getElement('choices');
+        ```
+        or
+        ```javascript
+        var button = dialog.getChoice(index);
+        ```
+        or
         ```javascript
         var button = dialog.getElement('choices[' + index + ']');
+        ```
+    - Acrion button game object
+        ```javascript
+        var buttons = dialog.getElement('actions');
+        ```
+        or
+        ```javascript
+        var button = dialog.getAction(index);
         ```
         or
         ```javascript
@@ -263,3 +288,21 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
     ```javascript
     var gameObject = dialog.getElement('#' + name);
     ```
+
+### Show/hide button
+
+Hidden elements won't be counted when layouting. 
+Call `dialog.layout()`, or `topSizer.layout()` after show/hide any button.
+
+- Show choice/action button
+    ```javascript
+    dialog.showChoice(index);
+    dialog.showAction(index);
+    ```
+    - `index` : A number index, or a button game object.
+- Hide action/choice button.
+    ```javascript
+    dialog.hideChoice(index);
+    dialog.hideAction(index);
+    ```
+    - `index` : A number index, or a button game object.
