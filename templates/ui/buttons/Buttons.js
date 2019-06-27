@@ -85,7 +85,7 @@ class Buttons extends Sizer {
     getButton(index) {
         var button;
         if (typeof (index) === 'number') {
-            button = this.childrenMap.buttons[button];
+            button = this.childrenMap.buttons[index];
         } else {
             button = index;
             if (this.childrenMap.buttons.indexOf(button) === -1) {
