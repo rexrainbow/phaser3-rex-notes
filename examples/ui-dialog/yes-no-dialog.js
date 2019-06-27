@@ -8,52 +8,56 @@ class Demo extends Phaser.Scene {
 
     }
 
-    preload() {}
+    preload() { }
 
     create() {
         var dialog = this.rexUI.add.dialog({
-                x: 400,
-                y: 300,
+            x: 400,
+            y: 300,
 
-                background: this.rexUI.add.roundRectangle(0, 0, 100, 100, 20, 0x1565c0),
+            background: this.rexUI.add.roundRectangle(0, 0, 100, 100, 20, 0x1565c0),
 
-                title: this.rexUI.add.label({
-                    background: this.rexUI.add.roundRectangle(0, 0, 100, 40, 20, 0x003c8f),
-                    text: this.add.text(0, 0, 'Title', {
-                        fontSize: '24px'
-                    }),
-                    space: {
-                        left: 15,
-                        right: 15,
-                        top: 10,
-                        bottom: 10
-                    }
-                }),
-
-                content: this.add.text(0, 0, 'Do you want to build a snow man?', {
+            title: this.rexUI.add.label({
+                background: this.rexUI.add.roundRectangle(0, 0, 100, 40, 20, 0x003c8f),
+                text: this.add.text(0, 0, 'Title', {
                     fontSize: '24px'
                 }),
-
-                actions: [
-                    createButton(this, 'Yes'),
-                    createButton(this, 'No')
-                ],
-
                 space: {
-                    title: 25,
-                    content: 25,
-                    action: 15,
-
-                    left: 20,
-                    right: 20,
-                    top: 20,
-                    bottom: 20,
-                },
-
-                align: {
-                    actions: 'right', // 'center'|'left'|'right'
+                    left: 15,
+                    right: 15,
+                    top: 10,
+                    bottom: 10
                 }
-            })
+            }),
+
+            content: this.add.text(0, 0, 'Do you want to build a snow man?', {
+                fontSize: '24px'
+            }),
+
+            actions: [
+                createLabel(this, 'Yes'),
+                createLabel(this, 'No')
+            ],
+
+            space: {
+                title: 25,
+                content: 25,
+                action: 15,
+
+                left: 20,
+                right: 20,
+                top: 20,
+                bottom: 20,
+            },
+
+            align: {
+                actions: 'right', // 'center'|'left'|'right'
+            },
+
+            expand: {
+                content: false,  // Content is a pure text object
+            }
+        })
             .layout()
             // .drawBounds(this.add.graphics(), 0xff0000)
             .popUp(1000);
@@ -71,10 +75,10 @@ class Demo extends Phaser.Scene {
             });
     }
 
-    update() {}
+    update() { }
 }
 
-var createButton = function (scene, text) {
+var createLabel = function (scene, text) {
     return scene.rexUI.add.label({
         // width: 40,
         // height: 40,

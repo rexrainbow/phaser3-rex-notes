@@ -14,31 +14,31 @@ export default {
         return this;
     },
 
-    getChoiceButton(index) {
+    getChoice(index) {
         return this.childrenMap.choices[index];
     },
 
-    getActionButton(index) {
+    getAction(index) {
         return this.childrenMap.actions[index];
     },
 
-    showChoiceButton(index) {
-        Show(this.getChoiceButton(index));
+    showChoice(index) {
+        Show(this.getChoice(index));
         return this;
     },
 
-    showActionButton(index) {
-        Show(this.getActionButton(index));
+    showAction(index) {
+        Show(this.getAction(index));
         return this;
     },
 
-    hideChoiceButton(index) {
-        Hide(this.getChoiceButton(index));
+    hideChoice(index) {
+        Hide(this.getChoice(index));
         return this;
     },
 
-    hideActionButton(index) {
-        Hide(this.getActionButton(index));
+    hideAction(index) {
+        Hide(this.getAction(index));
         return this;
     },
 };

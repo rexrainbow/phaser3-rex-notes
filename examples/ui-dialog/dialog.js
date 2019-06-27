@@ -8,77 +8,77 @@ class Demo extends Phaser.Scene {
 
     }
 
-    preload() {}
+    preload() { }
 
     create() {
         var dialog = this.rexUI.add.dialog({
-                x: 400,
-                y: 300,
-                width: 500,
+            x: 400,
+            y: 300,
+            width: 500,
 
-                background: this.rexUI.add.roundRectangle(0, 0, 100, 100, 20, 0x1565c0),
+            background: this.rexUI.add.roundRectangle(0, 0, 100, 100, 20, 0x1565c0),
 
-                title: createLabel(this, 'Title').setDraggable(),
+            title: createLabel(this, 'Title').setDraggable(),
 
-                toolbar: [
-                    createLabel(this, 'O'),
-                    createLabel(this, 'X')
-                ],
+            toolbar: [
+                createLabel(this, 'O'),
+                createLabel(this, 'X')
+            ],
 
-                content: createLabel(this, 'Content'),
+            content: createLabel(this, 'Content'),
 
-                description: createLabel(this, 'Description'),
+            description: createLabel(this, 'Description'),
 
-                choices: [
-                    createLabel(this, 'Choice0'),
-                    createLabel(this, 'Choice1'),
-                    createLabel(this, 'Choice2')
-                ],
+            choices: [
+                createLabel(this, 'Choice0'),
+                createLabel(this, 'Choice1'),
+                createLabel(this, 'Choice2')
+            ],
 
-                actions: [
-                    createLabel(this, 'Action0'),
-                    createLabel(this, 'Action1')
-                ],
+            actions: [
+                createLabel(this, 'Action0'),
+                createLabel(this, 'Action1')
+            ],
 
-                space: {
-                    left: 20,
-                    right: 20,
-                    top: -20,
-                    bottom: -20,
+            space: {
+                left: 20,
+                right: 20,
+                top: -20,
+                bottom: -20,
 
-                    title: 25,
-                    // titleLeft: 30,
-                    content: 25,
-                    description: 25,
-                    // descriptionLeft: 20,
-                    // descriptionRight: 20,
-                    choices: 25,
+                title: 25,
+                // titleLeft: 30,
+                content: 25,
+                description: 25,
+                // descriptionLeft: 20,
+                // descriptionRight: 20,
+                choices: 25,
 
-                    // toolbarItem: 5,
-                    choice: 15,
-                    action: 15,
-                },
+                // toolbarItem: 5,
+                choice: 15,
+                action: 15,
+            },
 
-                expand: {
-                    title: false,
-                    // content: false,
-                    // description: false,
-                    // choices: false,
-                    // actions: false,
-                },
+            expand: {
+                title: false,
+                // content: false,
+                // description: false,
+                // choices: false,
+                // actions: false,
+            },
 
-                align: {
-                    // title: 'center',
-                    // content: 'right',
-                    // description: 'left',
-                    // choices: 'left',
-                    actions: 'left', // 'center'|'left'|'right'
-                },
+            align: {
+                // title: 'center',
+                // content: 'right',
+                // description: 'left',
+                // choices: 'left',
+                actions: 'left', // 'center'|'left'|'right'
+            },
 
-                click: {
-                    mode: 'release'
-                }
-            })
+            click: {
+                mode: 'release'
+            }
+        })
             .layout()
             // .drawBounds(this.add.graphics(), 0xff0000)
             .popUp(1000);
@@ -96,7 +96,7 @@ class Demo extends Phaser.Scene {
             });
     }
 
-    update() {}
+    update() { }
 }
 
 var createLabel = function (scene, text) {
