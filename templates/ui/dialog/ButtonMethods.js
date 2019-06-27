@@ -1,9 +1,12 @@
-import {
-    Show,
-    Hide
-} from '../utils/Hide.js';
-
 export default {
+    getChoice(index) {
+        return this.childrenMap.choicesSizer.getButton(index);
+    },
+
+    getAction(index) {
+        return this.childrenMap.actionsSizer.getButton(index);
+    },
+
     emitChoiceClick(index) {
         this.childrenMap.choicesSizer.emitButtonClick(index);
         return this;
@@ -14,31 +17,23 @@ export default {
         return this;
     },
 
-    getChoice(index) {
-        return this.childrenMap.choices[index];
-    },
-
-    getAction(index) {
-        return this.childrenMap.actions[index];
-    },
-
     showChoice(index) {
-        Show(this.getChoice(index));
+        this.childrenMap.choicesSizer.showButton(index);
         return this;
     },
 
     showAction(index) {
-        Show(this.getAction(index));
+        this.childrenMap.actionsSizer.showButton(index);
         return this;
     },
 
     hideChoice(index) {
-        Hide(this.getChoice(index));
+        this.childrenMap.choicesSizer.hideButton(index);
         return this;
     },
 
     hideAction(index) {
-        Hide(this.getAction(index));
+        this.childrenMap.actionsSizer.hideButton(index);
         return this;
     },
 };

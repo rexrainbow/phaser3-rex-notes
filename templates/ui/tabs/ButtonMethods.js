@@ -4,8 +4,17 @@ import {
 } from '../utils/Hide.js';
 
 export default {
+    getButtonsSizer(groupName) {
+        return this.childrenMap[groupName + 'ButtonsSizer'];
+    },
+
+    getButton(groupName, index) {
+        var buttonsSizer = this.getButtonsSizer(groupName);
+        return (buttonsSizer) ? buttonsSizer.getButton(index) : undefined;
+    },
+
     emitButtonClick(groupName, index) {
-        var buttonsSizer = this.childrenMap[groupName + 'ButtonsSizer'];
+        var buttonsSizer = this.getButtonsSizer(groupName);
         if (!buttonsSizer) {
             return this;
         }
@@ -33,35 +42,24 @@ export default {
         return this;
     },
 
-    getButton(groupName, index) {
-        var buttons = this.childrenMap[groupName + 'Buttons'];
-        if (!buttons) {
-            return undefined;
-        }
-        return buttons[index];
-    },
-
     getLeftButton(index) {
-        return this.childrenMap.leftButtons[index];
+        return this.childrenMap.leftButtonsSizer.getButton(index);
     },
 
     getRightButton(index) {
-        return this.childrenMap.rightButtons[index];
+        return this.childrenMap.rightButtonsSizer.getButton(index);
     },
 
     getTopButton(index) {
-        return this.childrenMap.topButtons[index];
+        return this.childrenMap.topButtonsSizer.getButton(index);
     },
 
     getBottomButton(index) {
-        return this.childrenMap.bottomButtons[index];
+        return this.childrenMap.bottomButtonsSizer.getButton(index);
     },
 
     showButton(groupName, index) {
-        var button = this.getButton(groupName, index);
-        if (button) {
-            Show(button);
-        }
+        Show(this.getButton(groupName, index));
         return this;
     },
 
@@ -86,10 +84,7 @@ export default {
     },
 
     hideButton(groupName, index) {
-        var button = this.getButton(groupName, index);
-        if (button) {
-            Hide(button);
-        }
+        Hide(this.getButton(groupName, index));
         return this;
     },
 

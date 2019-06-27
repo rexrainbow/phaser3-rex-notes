@@ -82,31 +82,32 @@ class Buttons extends Sizer {
         this.addChildrenMap('buttons', (buttons) ? buttons : []);
     }
 
+    getButton(index) {
+        var button;
+        if (typeof (index) === 'number') {
+            button = this.childrenMap.buttons[button];
+        } else {
+            button = index;
+            if (this.childrenMap.buttons.indexOf(button) === -1) {
+                button = undefined;
+            }
+        }
+        return button;
+    }
+
     emitButtonClick(index) {
         // index or button game object
         FireEvent.call(this, 'button.click', index);
         return this;
     }
 
-    showButton(button) {
-        if (typeof (button) === 'number') {
-            button = this.childrenMap.buttons[button];
-            if (!button) {
-                return this;
-            }
-        }
-        Show(button);
+    showButton(index) {
+        Show(this.getButton(index));
         return this;
     }
 
-    hideButton(button) {
-        if (typeof (button) === 'number') {
-            button = this.childrenMap.buttons[button];
-            if (!button) {
-                return this;
-            }
-        }
-        Hide(button);
+    hideButton(index) {
+        Hide(this.getButton(index));
         return this;
     }
 }
