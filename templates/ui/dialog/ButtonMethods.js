@@ -28,7 +28,6 @@ export default {
     },
 
     hideChoice(index) {
-        debugger
         this.childrenMap.choicesSizer.hideButton(index);
         return this;
     },
