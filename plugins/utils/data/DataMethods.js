@@ -1,5 +1,5 @@
-import GetValue from '../../../utils/object/GetValue.js';
-import Clear from '../../../utils/object/Clear.js';
+import GetValue from '../object/GetValue.js';
+import Clear from '../object/Clear.js';
 
 export default {
     enableData() {

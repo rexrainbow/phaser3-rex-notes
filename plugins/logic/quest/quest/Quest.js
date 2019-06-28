@@ -1,7 +1,7 @@
 import EventEmitterMethods from '../../../utils/eventemitter/EventEmitterMethods.js';
 import GetValue from '../../../utils/object/GetValue.js';
 import Shuffle from '../../../utils/array/Shuffle.js';
-import DataMethods from './DataMethods.js';
+import DataMethods from '../../../utils/data/DataMethods.js';
 
 class Quest {
     constructor(questionsManager, config) {

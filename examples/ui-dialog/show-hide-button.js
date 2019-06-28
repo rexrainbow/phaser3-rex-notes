@@ -2,6 +2,12 @@ import UIPlugin from '../../templates/ui/ui-plugin.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
+const data = {
+    title: 'Question 1',
+    content: '1 + 1 + 1 + 1 = ',
+    choices: [3, 4, 5],
+};
+
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -16,6 +22,7 @@ class Demo extends Phaser.Scene {
         this.print = this.add.text(0, 0, '');
 
         var dialog = createDialog(this)
+            .layout()
             .on('button.click', function (button, groupName, index) {
                 this.print.text += index + ': ' + button.text + '\n';
             }, this)
@@ -26,12 +33,11 @@ class Demo extends Phaser.Scene {
                 button.getElement('background').setStrokeStyle();
             })
 
-        setDialog(dialog, {
-            title: 'Question 1',
-            content: '1 + 1 + 1 + 1 = ',
-            choices: [3, 4, 5],
-        })
-            .layout()
+        this.input.once('pointerdown', function () {
+            setDialog(dialog, data).layout();
+        });
+
+        this.add.text(0, 580, 'Click to reset buttons');
     }
 
     update() { }
@@ -120,11 +126,11 @@ var setDialog = function (dialog, config) {
     var choices = dialog.getElement('choices');
     for (var i = 0, cnt = choices.length; i < cnt; i++) {
         choiceText = choiceTextArray[i];
-        if (choiceText == null) {
-            dialog.hideChoice(i);
-        } else {
+        if (choiceText != null) {
             dialog.showChoice(i);
             choices[i].text = choiceText;
+        } else {
+            dialog.hideChoice(i);
         }
     }
     return dialog;
