@@ -298,3 +298,19 @@ Call `tabs.layout()`, or `topSizer.layout()` after show/hide any button.
     tabs.hideBottomButton(index);
     ```
     - `index` : A number index, or a button game object.
+
+### For each button
+
+```javascript
+tabs.forEachLeftButton(callback, scope);
+tabs.forEachRightButton(callback, scope);
+tabs.forEachTopButton(callback, scope);
+tabs.forEachBottomButton(callback, scope);
+```
+
+- `callback` : 
+    ```javascript
+    function(button, index, buttons) {
+        // ...
+    }
+    ```

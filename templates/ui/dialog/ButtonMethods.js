@@ -36,4 +36,19 @@ export default {
         this.childrenMap.actionsSizer.hideButton(index);
         return this;
     },
+
+    forEachChoice(callback, scope) {
+        this.childrenMap.choicesSizer.forEachButtton(callback, scope);
+        return this;
+    },
+
+    forEachChoice(callback, scope) {
+        this.childrenMap.choicesSizer.forEachButtton(callback, scope);
+        return this;
+    },
+
+    forEachAction(callback, scope) {
+        this.childrenMap.actionsSizer.forEachButtton(callback, scope);
+        return this;
+    }
 };

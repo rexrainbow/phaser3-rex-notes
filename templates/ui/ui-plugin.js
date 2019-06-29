@@ -33,7 +33,8 @@ import PressFactory from './press/PressFactory.js';
 
 import {
     Show,
-    Hide
+    Hide,
+    IsShown,
 } from './utils/Hide.js';
 import Edit from '../../plugins/behaviors/textedit/Edit.js';
 
@@ -48,6 +49,7 @@ class UIPlugin extends Phaser.Plugins.ScenePlugin {
 var methods = {
     hide: Hide,
     show: Show,
+    isShown: IsShown,
     edit: Edit,
 }
 

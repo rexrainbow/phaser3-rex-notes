@@ -218,3 +218,16 @@ Call `buttons.layout()`, or `topSizer.layout()` after show/hide any button.
     buttons.hideButton(index);
     ```
     - `index` : A number index, or a button game object.
+
+### For each button
+
+```javascript
+buttons.forEachButtton(callback, scope);
+```
+
+- `callback` : 
+    ```javascript
+    function(button, index, buttons) {
+        // ...
+    }
+    ```

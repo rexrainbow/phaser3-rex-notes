@@ -306,3 +306,17 @@ Call `dialog.layout()`, or `topSizer.layout()` after show/hide any button.
     dialog.hideAction(index);
     ```
     - `index` : A number index, or a button game object.
+
+### For each button
+
+```javascript
+dialog.forEachChoice(callback, scope);
+dialog.forEachAction(callback, scope);
+```
+
+- `callback` : 
+    ```javascript
+    function(button, index, buttons) {
+        // ...
+    }
+    ```

@@ -107,4 +107,24 @@ export default {
         Hide(this.getBottomButton(index));
         return this;
     },
+
+    forEachLeftButton(callback, scope) {
+        this.childrenMap.leftButtonsSizer.forEachButtton(callback, scope);
+        return this;
+    },
+
+    forEachRightButton(callback, scope) {
+        this.childrenMap.rightButtonsSizer.forEachButtton(callback, scope);
+        return this;
+    },
+
+    forEachTopButton(callback, scope) {
+        this.childrenMap.topButtonsSizer.forEachButtton(callback, scope);
+        return this;
+    },
+
+    forEachBottomButton(callback, scope) {
+        this.childrenMap.bottomButtonsSizer.forEachButtton(callback, scope);
+        return this;
+    },
 };
