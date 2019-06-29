@@ -124,6 +124,7 @@ module.exports = {
         // templates
         'bejeweled': './templates/bejeweled/Bejeweled.js',
         'uiplugin': './templates/ui/ui-plugin.js',
+        'dialogquest': './templates/dialog-quest/DialogQuest.js',
     },
     output: {
         pathinfo: true,
