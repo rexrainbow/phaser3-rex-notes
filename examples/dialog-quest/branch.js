@@ -31,6 +31,7 @@ class Demo extends Phaser.Scene {
             .on('update-choice', function (choice, option) {
                 choice
                     .setText(option.key)
+                    .setData('optionKey', option.key)
                     .setData('nextKey', option.next);
             })
             .on('update-dialog', function (dialog, question) {
@@ -50,11 +51,13 @@ class Demo extends Phaser.Scene {
                 dialog.clearChoices();
                 choice.getElement('background').setStrokeStyle(1, 0xffffff);
                 quest.setData('nextKey', choice.getData('nextKey'));
+                quest.setData('optionKey', choice.getData('optionKey'));
             })
             .on('action', function (action) {
                 if (action.text === 'Next') {
                     var nextKey = quest.getData('nextKey');
-                    print.text += ` --> ${nextKey}\n`;
+                    var optionKey = quest.getData('optionKey');
+                    print.text += ` --> |${optionKey}| ${nextKey}\n`;
                     if (nextKey !== null) {
                         quest.next(nextKey);
                     }
@@ -148,18 +151,18 @@ var CreateButton = function (scene, text, backgroundColor) {
 }
 
 /*
-A --> |Z| B
-A --> |X| C
-B --> |Z| D
-B --> |X| E
-C --> |Z| F
-C --> |X| G
-D --> |Z| H
-D --> |X| I
-E --> |Z| J
-E --> |X| K
-F --> |Z| L
-F --> |X| M
+A --> |R| B
+A --> |L| C
+B --> |R| D
+B --> |L| E
+C --> |R| F
+C --> |L| G
+D --> |R| H
+D --> |L| I
+E --> |R| J
+E --> |L| K
+F --> |R| L
+F --> |L| M
 */
 
 const Questions = `type,key,next,end
