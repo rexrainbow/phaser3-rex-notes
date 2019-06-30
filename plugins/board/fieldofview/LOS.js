@@ -15,7 +15,7 @@ var LOS = function (chessArray, visiblePoints, out) {
             if (!this.isInLOS(chess, visiblePoints)) {
                 continue;
             }
-            out.append(chess)
+            out.push(chess)
         }
         return out;
     }
