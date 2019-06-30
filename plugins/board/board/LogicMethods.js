@@ -52,6 +52,7 @@ import GetNeighborChessDirection from './neighbors/GetNeighborChessDirection.js'
 import AreNeighbors from './neighbors/AreNeighbors.js';
 
 import RingToTileXYArray from './ring/RingToTileXYArray.js';
+import FilledRingToTileXYArray from './ring/FilledRingToTileXYArray.js';
 
 import HasBlocker from './blocker/HasBlocker.js';
 import HasEdgeBlocker from './blocker/HasEdgeBlocker.js';
@@ -113,6 +114,7 @@ export default {
     areNeighbors: AreNeighbors,
 
     ringToTileXYArray: RingToTileXYArray,
+    filledRingToTileXYArray: FilledRingToTileXYArray,
 
     hasBlocker: HasBlocker,
     hasEdgeBlocker: HasEdgeBlocker,
