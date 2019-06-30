@@ -4030,6 +4030,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#ring-tile-position" title="Ring -&gt; tile position" class="md-nav__link">
+    Ring -&gt; tile position
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#angle-between-world-position-of-2-tiles" title="Angle between world position of 2 tiles" class="md-nav__link">
     Angle between world position of 2 tiles
   </a>
@@ -4765,6 +4772,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#ring-tile-position" title="Ring -&gt; tile position" class="md-nav__link">
+    Ring -&gt; tile position
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#angle-between-world-position-of-2-tiles" title="Angle between world position of 2 tiles" class="md-nav__link">
     Angle between world position of 2 tiles
   </a>
@@ -5253,6 +5267,25 @@
 <ul>
 <li><code>startWorldX</code>, <code>startWorldY</code>, <code>endWorldX</code>, <code>endWorldY</code> : Line</li>
 <li><code>out</code> : An array of tile position</li>
+</ul>
+<h3 id="ring-tile-position">Ring -&gt; tile position<a class="headerlink" href="#ring-tile-position" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get array of tile position around a ring.
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">ringToTileXYArray</span><span class="p">(</span><span class="nx">centerTileXY</span><span class="p">,</span> <span class="nx">radius</span><span class="p">);</span>
+<span class="c1">// var out = board.ringToTileXYArray(centerTileXY, radius, out);</span>
+</pre></div><ul>
+<li><code>centerTileXY</code> : Tile position <code>{x, y}</code> of ring center.</li>
+<li><code>radius</code> : Radius of the ring.</li>
+</ul>
+</li>
+<li>Get array of tile position within a filled ring.
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">filledRingToTileXYArray</span><span class="p">(</span><span class="nx">centerTileXY</span><span class="p">,</span> <span class="nx">radius</span><span class="p">);</span>
+<span class="c1">// var out = board.filledRingToTileXYArray(centerTileXY, radius, out);</span>
+</pre></div><ul>
+<li><code>centerTileXY</code> : Tile position <code>{x, y}</code> of ring center.</li>
+<li><code>radius</code> : Radius of the ring.    </li>
+</ul>
+</li>
 </ul>
 <h3 id="angle-between-world-position-of-2-tiles">Angle between world position of 2 tiles<a class="headerlink" href="#angle-between-world-position-of-2-tiles" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">radian</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">angleBetween</span><span class="p">(</span><span class="nx">tileXY0</span><span class="p">,</span> <span class="nx">tileXY1</span><span class="p">);</span>

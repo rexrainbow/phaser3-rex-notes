@@ -322,6 +322,23 @@ var out = board.lineToTileXYArray(startWorldX, startWorldY, endWorldX, endWorldY
 - `startWorldX`, `startWorldY`, `endWorldX`, `endWorldY` : Line
 - `out` : An array of tile position
 
+### Ring -> tile position
+
+- Get array of tile position around a ring.
+    ```javascript
+    var out = board.ringToTileXYArray(centerTileXY, radius);
+    // var out = board.ringToTileXYArray(centerTileXY, radius, out);
+    ```
+    - `centerTileXY` : Tile position `{x, y}` of ring center.
+    - `radius` : Radius of the ring.
+- Get array of tile position within a filled ring.
+    ```javascript
+    var out = board.filledRingToTileXYArray(centerTileXY, radius);
+    // var out = board.filledRingToTileXYArray(centerTileXY, radius, out);
+    ```
+    - `centerTileXY` : Tile position `{x, y}` of ring center.
+    - `radius` : Radius of the ring.    
+
 ### Angle between world position of 2 tiles
 
 ```javascript

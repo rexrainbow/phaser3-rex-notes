@@ -4054,6 +4054,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#filter-visible-tilexy-array" title="Filter visible tileXY array" class="md-nav__link">
+    Filter visible tileXY array
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#face" title="Face" class="md-nav__link">
     Face
   </a>
@@ -4428,6 +4435,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#filter-visible-tilexy-array" title="Filter visible tileXY array" class="md-nav__link">
+    Filter visible tileXY array
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#face" title="Face" class="md-nav__link">
     Face
   </a>
@@ -4592,6 +4606,25 @@ coneMode: 1
 <ul>
 <li><code>visiblePoints</code><ul>
 <li><code>fieldOfView.INFINITY</code> (<em>undefined</em>) : Infinity visible points. Default value.</li>
+</ul>
+</li>
+</ul>
+<h3 id="filter-visible-tilexy-array">Filter visible tileXY array<a class="headerlink" href="#filter-visible-tilexy-array" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Filter visible tileXY array
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">fieldOfView</span><span class="p">.</span><span class="nx">LOS</span><span class="p">(</span><span class="nx">chessArray</span><span class="p">);</span>
+<span class="c1">// var out = fieldOfView.LOS(chessArray, undefined, out);</span>
+</pre></div><ul>
+<li><code>chessArray</code> : Array of chess object or tileXY</li>
+<li><code>out</code> : Array of visible chess object or tileXY</li>
+</ul>
+</li>
+<li>Filter visible tileXY array with visible points
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">fieldOfView</span><span class="p">.</span><span class="nx">LOS</span><span class="p">(</span><span class="nx">chessArray</span><span class="p">,</span> <span class="nx">visiblePoints</span><span class="p">);</span>
+<span class="c1">// var out = fieldOfView.LOS(chessArray, visiblePoints, out);</span>
+</pre></div><ul>
+<li><code>chessArray</code> : Array of chess object or tileXY</li>
+<li><code>out</code> : Array of visible chess object or tileXY</li>
 </ul>
 </li>
 </ul>

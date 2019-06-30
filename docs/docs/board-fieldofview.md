@@ -122,6 +122,23 @@ var tileXYArray = fieldOfView.findFOV();
 - `visiblePoints`
     - `fieldOfView.INFINITY` (*undefined*) : Infinity visible points. Default value.
 
+### Filter visible tileXY array
+
+- Filter visible tileXY array
+    ```javascript
+    var out = fieldOfView.LOS(chessArray);
+    // var out = fieldOfView.LOS(chessArray, undefined, out);
+    ```
+    - `chessArray` : Array of chess object or tileXY
+    - `out` : Array of visible chess object or tileXY
+- Filter visible tileXY array with visible points
+    ```javascript
+    var out = fieldOfView.LOS(chessArray, visiblePoints);
+    // var out = fieldOfView.LOS(chessArray, visiblePoints, out);
+    ```
+    - `chessArray` : Array of chess object or tileXY
+    - `out` : Array of visible chess object or tileXY
+
 ### Face
 
 Face direction
