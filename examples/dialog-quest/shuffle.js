@@ -26,6 +26,10 @@ class Demo extends Phaser.Scene {
         var quest = new DialogQuest({
             dialog: dialog,
             questions: Questions,
+            quest: {
+                shuffleQuestions: true,
+                shuffleOptions: true,
+            },
         })
             .on('update-choice', function (choice, option, quest) {
                 choice
@@ -34,16 +38,14 @@ class Demo extends Phaser.Scene {
             })
             .on('update-dialog', function (dialog, question, quest) {
                 dialog.getElement('title').setText(question.key);
-                dialog.getElement('actions')[0].setText((question.end) ? 'End' : 'Next');
-                quest.setData('nextKey', null);
+                quest
+                    .setData('question', question)
+                    .setData('option', undefined);
                 dialog
                     .clearChoices()
                     .layout();
 
-                print.text += `${question.key}`;
-                if (question.end) {
-                    print.text += ' (End)\n';
-                }
+                print.text += `${question.key}:`;
             })
             .on('click-choice', function (choice, dialog, quest) {
                 dialog.clearChoices();
@@ -51,24 +53,28 @@ class Demo extends Phaser.Scene {
                 quest.setData('option', choice.getData('option'));
             })
             .on('click-action', function (action, dialog, quest) {
-                if (action.text === 'Next') {
-                    var option = quest.getData('option');
-                    var nextKey = option.next;
-                    var optionKey = option.key;
-                    print.text += ` --> |${optionKey}| ${nextKey}\n`;
+                var question = quest.getData('question');
+                if (question === undefined) {
+                    return;
+                }
 
-                    // Clear option reference
-                    quest.setData('option', undefined);
-                    dialog.forEachChoice(function (choice) {
-                        choice.setData('option', undefined);
-                    });
+                var option = quest.getData('option');
+                var isCorrect = (question.answer === option.key);
 
-                    // Next question
-                    if (nextKey !== null) {
-                        quest.next(nextKey);
-                    } else {
-                        quest.emit('complete', quest);
-                    }
+                // Clear option reference
+                quest
+                    .setData('question', undefined)
+                    .setData('option', undefined);
+                dialog.forEachChoice(function (choice) {
+                    choice.setData('option', undefined);
+                });
+                print.text += `${option.key} -> ${(isCorrect) ? 'O' : 'X'}\n`;
+
+                if (!quest.isLastQuestion()) {
+                    quest.next();
+                } else {
+                    print.text += 'Done\n';
+                    quest.emit('complelte', quest);
                 }
             })
             .start();
@@ -158,47 +164,19 @@ var CreateButton = function (scene, text, backgroundColor) {
     });
 }
 
-/*
-A --> |R| B
-A --> |L| C
-B --> |R| D
-B --> |L| E
-C --> |R| F
-C --> |L| G
-D --> |R| H
-D --> |L| I
-E --> |R| J
-E --> |L| K
-F --> |R| L
-F --> |L| M
-*/
-
-const Questions = `type,key,next,end
-q,A,,
-,R,B,
-,L,C,
-q,B,,
-,R,D,
-,L,E,
-q,C,,
-,R,F,
-,L,G,
-q,D,,
-,R,H,
-,L,I,
-q,E,,
-,R,J,
-,L,K,
-q,F,,
-,R,L,
-,L,M,
-q,G,,1
-q,H,,1
-q,I,,1
-q,J,,1
-q,K,,1
-q,L,,1
-q,M,,1`;
+const Questions = `type,key,answer
+q,Q0,A0
+,A0,
+,A1,
+,A2,
+q,Q1,A0
+,A0,
+,A1,
+,A2,
+q,Q2,A0
+,A0,
+,A1,
+,A2,`;
 
 var config = {
     type: Phaser.AUTO,

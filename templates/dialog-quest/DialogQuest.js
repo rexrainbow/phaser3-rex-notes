@@ -37,7 +37,7 @@ class DialogQuest extends EE {
 
         this.dialog
             .on('button.click', function (button, groupName, index) {
-                var eventName = (groupName === 'choices') ? 'choice' : 'action';
+                var eventName = 'click-' + ((groupName === 'choices') ? 'choice' : 'action');
                 this.emit(eventName, button, this.dialog, this);
             }, this)
     }
@@ -53,6 +53,10 @@ class DialogQuest extends EE {
         this.questionManager
             .getNextQuestion(key);
         return this;
+    }
+
+    isLastQuestion() {
+        return this.questionManager.isLastQuestion();
     }
 }
 
