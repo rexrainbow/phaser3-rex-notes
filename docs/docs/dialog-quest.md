@@ -38,6 +38,7 @@ var quest = new DialogQuest({
 - `dialog` : A [dialog](ui-dialog.md) game object.
     - **UI plugin does not included in this template**, [install](ui-dialog.md#install-scene-plugin) it before creating a dialog game object.
     - Reuse/update dialog game object for each question.
+    - The number of choice buttons should be equal or larger than the maximun number of options. 
 - Other parameters : See [quest](quest.md#create-question-manager-instance)
 
 ### Flow chart
