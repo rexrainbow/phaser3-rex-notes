@@ -1,4 +1,5 @@
 import QuestionManager from '../../plugins/logic/quest/questions/QuestionManager.js';
+import QuestMethods from './QuestMethods.js';
 import DataMethods from './DataMethods.js';
 
 const EE = Phaser.Events.EventEmitter;
@@ -20,7 +21,7 @@ class DialogQuest extends EE {
 
         // Attach events
         this.questionManager
-            .on('quest', function (question) {                
+            .on('quest', function (question) {
                 var choices = this.dialog.getElement('choices');
                 var options = question.options, option;
                 for (var i = 0, cnt = choices.length; i < cnt; i++) {
@@ -41,27 +42,11 @@ class DialogQuest extends EE {
                 this.emit(eventName, button, this.dialog, this);
             }, this)
     }
-
-    start(key) {
-        this.questionManager
-            .restartQuest()
-            .getNextQuestion(key);
-        return this;
-    }
-
-    next(key) {
-        this.questionManager
-            .getNextQuestion(key);
-        return this;
-    }
-
-    isLastQuestion() {
-        return this.questionManager.isLastQuestion();
-    }
 }
 
 Object.assign(
     DialogQuest.prototype,
+    QuestMethods,
     DataMethods,
 );
 

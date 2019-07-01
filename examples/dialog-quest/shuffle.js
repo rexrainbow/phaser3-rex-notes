@@ -70,7 +70,7 @@ class Demo extends Phaser.Scene {
                 });
                 print.text += `${option.key} -> ${(isCorrect) ? 'O' : 'X'}\n`;
 
-                if (!quest.isLastQuestion()) {
+                if (!quest.isLast()) {
                     quest.next();
                 } else {
                     print.text += 'Done\n';
