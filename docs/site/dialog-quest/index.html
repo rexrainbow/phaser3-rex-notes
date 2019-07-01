@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/restorabledata/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/dialog-quest/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Restorable data - Notes of Phaser 3</title>
+        <title>Dialog-quest - Notes of Phaser 3</title>
       
     
     
@@ -128,7 +128,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Restorable data
+                Dialog-quest
               </span>
             
           
@@ -2475,10 +2475,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9" checked>
     
     <label class="md-nav__link" for="nav-9">
       Logic
@@ -2674,10 +2676,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-6" type="checkbox" id="nav-9-6">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-6" type="checkbox" id="nav-9-6" checked>
     
     <label class="md-nav__link" for="nav-9-6">
       Quest
@@ -2705,82 +2709,6 @@
           
           
 
-
-  <li class="md-nav__item">
-    <a href="../dialog-quest/" title="Dialog-quest" class="md-nav__link">
-      Dialog-quest
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-  
-
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10" checked>
-    
-    <label class="md-nav__link" for="nav-10">
-      Data
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-10">
-        Data
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-  
-
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10-1" type="checkbox" id="nav-10-1" checked>
-    
-    <label class="md-nav__link" for="nav-10-1">
-      Data manager
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-10-1">
-        Data manager
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../datamanager/" title="Built-in data" class="md-nav__link">
-      Built-in data
-    </a>
-  </li>
-
-        
-          
-          
-          
-
   
 
 
@@ -2790,11 +2718,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        Restorable data
+        Dialog-quest
       </label>
     
-    <a href="./" title="Restorable data" class="md-nav__link md-nav__link--active">
-      Restorable data
+    <a href="./" title="Dialog-quest" class="md-nav__link md-nav__link--active">
+      Dialog-quest
     </a>
     
       
@@ -2828,57 +2756,36 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#import-class" title="Import class" class="md-nav__link">
-    Import class
+  <a href="#create-dialog-quest-object" title="Create dialog-quest object" class="md-nav__link">
+    Create dialog-quest object
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
-    Install global plugin
+  <a href="#flow-chart" title="Flow chart" class="md-nav__link">
+    Flow chart
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
+  <a href="#events" title="Events" class="md-nav__link">
+    Events
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#getsetremove-value" title="Get/set/remove value" class="md-nav__link">
-    Get/set/remove value
+  <a href="#quest-methods" title="Quest methods" class="md-nav__link">
+    Quest methods
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#commit" title="Commit" class="md-nav__link">
-    Commit
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#restore" title="Restore" class="md-nav__link">
-    Restore
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#version" title="Version" class="md-nav__link">
-    Version
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#saveload-status" title="Save/load status" class="md-nav__link">
-    Save/load status
+  <a href="#private-data-methods" title="Private data methods" class="md-nav__link">
+    Private data methods
   </a>
   
 </li>
@@ -2896,6 +2803,78 @@
   
 </nav>
     
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
+    
+    <label class="md-nav__link" for="nav-10">
+      Data
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-10">
+        Data
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10-1" type="checkbox" id="nav-10-1">
+    
+    <label class="md-nav__link" for="nav-10-1">
+      Data manager
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-10-1">
+        Data manager
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../datamanager/" title="Built-in data" class="md-nav__link">
+      Built-in data
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../restorabledata/" title="Restorable data" class="md-nav__link">
+      Restorable data
+    </a>
   </li>
 
         
@@ -4438,57 +4417,36 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#import-class" title="Import class" class="md-nav__link">
-    Import class
+  <a href="#create-dialog-quest-object" title="Create dialog-quest object" class="md-nav__link">
+    Create dialog-quest object
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
-    Install global plugin
+  <a href="#flow-chart" title="Flow chart" class="md-nav__link">
+    Flow chart
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
+  <a href="#events" title="Events" class="md-nav__link">
+    Events
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#getsetremove-value" title="Get/set/remove value" class="md-nav__link">
-    Get/set/remove value
+  <a href="#quest-methods" title="Quest methods" class="md-nav__link">
+    Quest methods
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#commit" title="Commit" class="md-nav__link">
-    Commit
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#restore" title="Restore" class="md-nav__link">
-    Restore
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#version" title="Version" class="md-nav__link">
-    Version
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#saveload-status" title="Save/load status" class="md-nav__link">
-    Save/load status
+  <a href="#private-data-methods" title="Private data methods" class="md-nav__link">
+    Private data methods
   </a>
   
 </li>
@@ -4514,113 +4472,155 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/restorabledata.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/dialog-quest.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Restorable data</h1>
+                  <h1>Dialog-quest</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Restorable data manager, extends from <a href="../datamanager/">built-in data manager</a>.</p>
+<p>Flow control of <a href="../quest/">question manager</a> with a <a href="../ui-dialog/">dialog</a>.</p>
 <ul>
 <li>Author: Rex</li>
-<li>Member of scene</li>
+<li>Template</li>
 </ul>
 <h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/restorabledata-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexrestorabledataplugin.min.js">minify</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/templates/dialog-quest/DialogQuest.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexdialogquest.min.js">minify</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/restorabledata">Sample code</a></p>
-<p>User could import class directly, or install it by global plugin.</p>
-<h3 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">rexRData</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/restorabledata.js&#39;</span><span class="p">;</span>
-</pre></div>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/dialog-quest">Sample code</a></p>
+<h3 id="create-dialog-quest-object">Create dialog-quest object<a class="headerlink" href="#create-dialog-quest-object" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">quest</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DialogQuest</span><span class="p">({</span>
+    <span class="nx">dialog</span><span class="o">:</span> <span class="nx">dialog</span><span class="p">,</span>
 
-<h3 id="install-global-plugin">Install global plugin<a class="headerlink" href="#install-global-plugin" title="Permanent link">&para;</a></h3>
-<p>Install plugin in <a href="../game/#configuration">configuration of game</a></p>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">RDataPlugin</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/restorabledata-plugin.js&#39;</span><span class="p">;</span>
+    <span class="nx">questions</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="c1">// delimiter: &#39;,&#39;,</span>
+    <span class="c1">// types: {</span>
+    <span class="c1">//     question: &#39;q&#39;,</span>
+    <span class="c1">//     option: &#39;&#39;,</span>
+    <span class="c1">// },</span>
+    <span class="c1">// convert: true,</span>
 
-<span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="c1">// ...</span>
-    <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
-            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexRData&#39;</span><span class="p">,</span>
-            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">RDataPlugin</span><span class="p">,</span>
-            <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
-        <span class="p">}</span>
-        <span class="c1">// ...</span>
-        <span class="p">]</span>
-    <span class="p">}</span>
-    <span class="c1">// ...</span>
-<span class="p">};</span>
-<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-</pre></div>
-
-<h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexRData&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">parent</span><span class="p">);</span>
-<span class="c1">// var data = scene.plugins.get(&#39;rexRData&#39;).add(parent, eventEmitter);</span>
+    <span class="nx">quest</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="c1">// quest: {</span>
+    <span class="c1">//     shuffleQuestions: false,</span>
+    <span class="c1">//     shuffleOptions: false,</span>
+    <span class="c1">// }</span>
+<span class="p">});</span>
 </pre></div>
 
 <ul>
-<li><code>parent</code> : The object (a scene, or a game object) that this DataManager belongs to.</li>
-<li><code>eventEmitter</code> : The DataManager's <a href="../eventemitter3/">event emitter</a>.</li>
+<li><code>dialog</code> : A <a href="../ui-dialog/">dialog</a> game object.<ul>
+<li><strong>UI plugin does not included in this template</strong>, <a href="../ui-dialog/#install-scene-plugin">install</a> it before creating a dialog game object.</li>
+<li>Reuse/update dialog game object for each question.</li>
 </ul>
-<h3 id="getsetremove-value">Get/set/remove value<a class="headerlink" href="#getsetremove-value" title="Permanent link">&para;</a></h3>
-<p>See <a href="../datamanager/">built-in data manager</a>.</p>
-<h3 id="commit">Commit<a class="headerlink" href="#commit" title="Permanent link">&para;</a></h3>
-<p>Commit current data status into repository, and increase current version number.</p>
-<div class="codehilite"><pre><span></span><span class="nx">data</span><span class="p">.</span><span class="nx">commit</span><span class="p">();</span>
-</pre></div>
-
-<p>or</p>
-<div class="codehilite"><pre><span></span><span class="nx">data</span><span class="p">.</span><span class="nx">commit</span><span class="p">(</span><span class="nx">alias</span><span class="p">);</span>
-</pre></div>
-
-<ul>
-<li><code>alias</code> : A version alias string.</li>
+</li>
+<li>Other parameters : See <a href="../quest/#create-question-manager-instance">quest</a></li>
 </ul>
-<h3 id="restore">Restore<a class="headerlink" href="#restore" title="Permanent link">&para;</a></h3>
+<h3 id="flow-chart">Flow chart<a class="headerlink" href="#flow-chart" title="Permanent link">&para;</a></h3>
+<pre class="mermaid"><code>graph TB
+
+Start[&quot;quest.start()&quot;] --&gt; EventUpdateChoice[&quot;quest.emit('update-choice', choice, option, quest)&lt;br&gt;----&lt;br&gt;Update each choice button via question.option[i]&quot;]
+
+EventUpdateChoice --&gt; EventUpdateDialog[&quot;quest.emit('update-dialog', dialog, question, quest)&lt;br&gt;----&lt;br&gt;Update dialog, action button via question&quot;]
+
+EventUpdateDialog --&gt; EventClickChoice[&quot;quest.emit('click-choice', choice, dialog, quest)&lt;br&gt;----&lt;br&gt;Click any choice button&quot;]
+
+EventClickChoice --&gt; EventClickAction[&quot;quest.emit('click-action', action, dialog, quest)&lt;br&gt;----&lt;br&gt;Click any action button&quot;]
+
+EventClickAction --&gt; IsLast{&quot;quest.isLast()&quot;}
+EventClickChoice --&gt; IsLast
+
+IsLast --&gt; |No| Next[&quot;quest.next()&quot;]
+IsLast --&gt; |Yes| Complete(&quot;Complete&quot;)
+
+Next --&gt; EventUpdateChoice</code></pre>
+
+<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Restore data status to a specific version.
-    <div class="codehilite"><pre><span></span><span class="nx">data</span><span class="p">.</span><span class="nx">restore</span><span class="p">(</span><span class="nx">version</span><span class="p">);</span>
+<li>Update dialog events<ul>
+<li>Update each choice button via question.option[i]
+    <div class="codehilite"><pre><span></span><span class="nx">quest</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;update-choice&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">choice</span><span class="p">,</span> <span class="nx">option</span><span class="p">,</span> <span class="nx">quest</span><span class="p">){</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>choice</code> : Choice button game object.<ul>
+<li>Unused choice button game object will be hideen.</li>
+</ul>
+</li>
+<li><code>option</code> : Option object.</li>
+<li><code>quest</code> : Quest object.</li>
+</ul>
+</li>
+<li>Update dialog, action buttos via question
+    <div class="codehilite"><pre><span></span><span class="nx">quest</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;update-dialog&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">dialog</span><span class="p">,</span> <span class="nx">question</span><span class="p">,</span> <span class="nx">quest</span><span class="p">){</span>
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>dialog</code> : Dialog game object.<ul>
+<li>Call <code>dialog.layout()</code> if needs.</li>
+</ul>
+</li>
+<li><code>question</code> : Question object.</li>
+<li><code>quest</code> : Quest object.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Button clicking events<ul>
+<li>Click choice button
+    <div class="codehilite"><pre><span></span><span class="nx">quest</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;click-choice&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">choice</span><span class="p">,</span> <span class="nx">dialog</span><span class="p">,</span> <span class="nx">quest</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>choice</code> : Clicked choice button game object.</li>
+<li><code>dialog</code> : Dialog game object.</li>
+<li><code>quest</code> : Quest object.</li>
+</ul>
+</li>
+<li>Click choice button
+    <div class="codehilite"><pre><span></span><span class="nx">quest</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;click-action&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">action</span><span class="p">,</span> <span class="nx">dialog</span><span class="p">,</span> <span class="nx">quest</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>choice</code> : Clicked action button game object.</li>
+<li><code>dialog</code> : Dialog game object.</li>
+<li><code>quest</code> : Quest object.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="quest-methods">Quest methods<a class="headerlink" href="#quest-methods" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Start quest
+    <div class="codehilite"><pre><span></span><span class="nx">quest</span><span class="p">.</span><span class="nx">start</span><span class="p">();</span>
+</pre></div></li>
+<li>Next quest
+    <div class="codehilite"><pre><span></span><span class="nx">quest</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span>
 </pre></div>
     or
-    <div class="codehilite"><pre><span></span><span class="nx">data</span><span class="p">.</span><span class="nx">version</span> <span class="o">=</span> <span class="nx">version</span><span class="p">;</span>
-</pre></div><ul>
-<li><code>version</code> : Version number or version alias string.</li>
-</ul>
-</li>
-<li>Rebuild data status from version <code>0</code> to a specific version.
-    <div class="codehilite"><pre><span></span><span class="nx">data</span><span class="p">.</span><span class="nx">restore</span><span class="p">(</span><span class="nx">version</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
-</pre></div><ul>
-<li><code>version</code> : Version number or version alias string.</li>
-</ul>
-</li>
-<li>Reverse data status to last version.
-    <div class="codehilite"><pre><span></span><span class="nx">data</span><span class="p">.</span><span class="nx">restore</span><span class="p">();</span>
+    <div class="codehilite"><pre><span></span><span class="nx">quest</span><span class="p">.</span><span class="nx">next</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</pre></div></li>
+<li>Is last question
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isLast</span> <span class="o">=</span> <span class="nx">quest</span><span class="p">.</span><span class="nx">isLast</span><span class="p">();</span>
 </pre></div></li>
 </ul>
-<h3 id="version">Version<a class="headerlink" href="#version" title="Permanent link">&para;</a></h3>
+<h3 id="private-data-methods">Private data methods<a class="headerlink" href="#private-data-methods" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Get current version alias string
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">version</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">versionAlias</span><span class="p">;</span>
+<li>Get data
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">quest</span><span class="p">.</span><span class="nx">getData</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">defaultValue</span><span class="p">);</span>
 </pre></div></li>
-<li>Get all version alias strings
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">aliases</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">versionAliases</span><span class="p">;</span>
+<li>Get all data
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">quest</span><span class="p">.</span><span class="nx">getData</span><span class="p">();</span>
 </pre></div></li>
-<li>Get current version number
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">version</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">version</span><span class="p">;</span>
+<li>Set value
+    <div class="codehilite"><pre><span></span><span class="nx">quest</span><span class="p">.</span><span class="nx">setData</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">value</span><span class="p">);</span>
 </pre></div></li>
-<li>Get last version number
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">version</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">lastVersion</span><span class="p">;</span>
+<li>Increase value
+    <div class="codehilite"><pre><span></span><span class="nx">quest</span><span class="p">.</span><span class="nx">incData</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">inc</span><span class="p">,</span> <span class="nx">defaultValue</span><span class="p">);</span>
 </pre></div></li>
-</ul>
-<p>Version starts from <code>0</code> which has no data. Each <code>data.commit()</code> will increase this version number.</p>
-<h3 id="saveload-status">Save/load status<a class="headerlink" href="#saveload-status" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Get current status via JSON string
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<li>Multiple value
+    <div class="codehilite"><pre><span></span><span class="nx">quest</span><span class="p">.</span><span class="nx">mulData</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">inc</span><span class="p">,</span> <span class="nx">defaultValue</span><span class="p">);</span>
 </pre></div></li>
-<li>Load status via JSON string
-    <div class="codehilite"><pre><span></span><span class="nx">data</span><span class="p">.</span><span class="nx">resetFromJSON</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">s</span><span class="p">));</span>
+<li>Clear all data
+    <div class="codehilite"><pre><span></span><span class="nx">quest</span><span class="p">.</span><span class="nx">clearData</span><span class="p">();</span>
 </pre></div></li>
 </ul>
                 
@@ -4643,7 +4643,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../datamanager/" title="Built-in data" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../quest/" title="Quest" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -4652,19 +4652,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Built-in data
+                Quest
               </span>
             </div>
           </a>
         
         
-          <a href="../buffdata/" title="Buff data" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../datamanager/" title="Built-in data" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Buff data
+                Built-in data
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
