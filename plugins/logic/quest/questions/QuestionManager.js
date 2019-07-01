@@ -4,6 +4,7 @@ import ParseCSV from './ParseCSV.js';
 import RemoveItem from '../../../utils/array/Remove.js';
 import Clear from '../../../utils/object/Clear.js';
 import QuestMethods from './QuestMethods.js';
+import DataMethods from './DataMethods.js';
 
 class QuestionManager {
     constructor(config) {
@@ -131,7 +132,8 @@ class QuestionManager {
 Object.assign(
     QuestionManager.prototype,
     EventEmitterMethods,
-    QuestMethods
+    QuestMethods,
+    DataMethods,
 );
 
 export default QuestionManager;
