@@ -54,11 +54,10 @@ class Demo extends Phaser.Scene {
             })
             .on('click-action', function (action, dialog, quest) {
                 var question = quest.getData('question');
-                if (question === undefined) {
+                var option = quest.getData('option');
+                if (option === undefined) {
                     return;
                 }
-
-                var option = quest.getData('option');
                 var isCorrect = (question.answer === option.key);
 
                 // Clear option reference
