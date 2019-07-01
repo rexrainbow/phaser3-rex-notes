@@ -27,18 +27,18 @@ class DialogQuest extends EE {
                     option = options[i];
                     if (option) {
                         this.dialog.showChoice(i);
-                        this.emit('update-choice', choices[i], option);
+                        this.emit('update-choice', choices[i], option, this);
                     } else {
                         this.dialog.hideChoice(i);
                     }
                 }
-                this.emit('update-dialog', this.dialog, question);
+                this.emit('update-dialog', this.dialog, question, this);
             }, this);
 
         this.dialog
             .on('button.click', function (button, groupName, index) {
                 var eventName = (groupName === 'choices') ? 'choice' : 'action';
-                this.emit(eventName, button, this.dialog);
+                this.emit(eventName, button, this.dialog, this);
             }, this)
     }
 

@@ -26,15 +26,13 @@ class Demo extends Phaser.Scene {
         var quest = new DialogQuest({
             dialog: dialog,
             questions: Questions,
-        });
-        quest
-            .on('update-choice', function (choice, option) {
+        })
+            .on('update-choice', function (choice, option, quest) {
                 choice
                     .setText(option.key)
-                    .setData('optionKey', option.key)
-                    .setData('nextKey', option.next);
+                    .setData('option', option);
             })
-            .on('update-dialog', function (dialog, question) {
+            .on('update-dialog', function (dialog, question, quest) {
                 dialog.getElement('title').setText(question.key);
                 dialog.getElement('actions')[0].setText((question.end) ? 'End' : 'Next')
                 quest.setData('nextKey', null);
@@ -47,17 +45,25 @@ class Demo extends Phaser.Scene {
                     print.text += ' (End)\n';
                 }
             })
-            .on('choice', function (choice, dialog) {
+            .on('choice', function (choice, dialog, quest) {
                 dialog.clearChoices();
                 choice.getElement('background').setStrokeStyle(1, 0xffffff);
-                quest.setData('nextKey', choice.getData('nextKey'));
-                quest.setData('optionKey', choice.getData('optionKey'));
+                quest.setData('option', choice.getData('option'));
             })
-            .on('action', function (action) {
+            .on('action', function (action, dialog, quest) {
                 if (action.text === 'Next') {
-                    var nextKey = quest.getData('nextKey');
-                    var optionKey = quest.getData('optionKey');
+                    var option = quest.getData('option');
+                    var nextKey = option.next;
+                    var optionKey = option.key;
                     print.text += ` --> |${optionKey}| ${nextKey}\n`;
+
+                    // Clear option reference
+                    quest.setData('option', undefined);
+                    dialog.forEachChoice(function (choice) {
+                        choice.setData('option', undefined);
+                    })
+
+                    // Next question
                     if (nextKey !== null) {
                         quest.next(nextKey);
                     }
