@@ -39,7 +39,9 @@ export default {
     },
 
     clearData() {
-        Clear(this.data);
+        if (this.data) {
+            Clear(this.data);
+        }
         return this;
     }
 };

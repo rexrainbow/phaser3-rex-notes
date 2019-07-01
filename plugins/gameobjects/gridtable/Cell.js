@@ -1,9 +1,8 @@
-import Clear from '../../utils/object/Clear.js';
+import DataMethods from '../../utils/data/DataMethods.js';
 
 class Cell {
     constructor(parent, config) {
         this.container = null;
-        this.data = null;
         this.setParent(parent);
         this._deltaHeight = 0;
         //this.resetFromJSON(config);
@@ -24,7 +23,7 @@ class Cell {
             table.nonZeroDeltaHeightCount--;
         }
 
-        this.cleanData();
+        this.data = undefined;
         this.destroyContainer();
         this.parent = undefined;
         this.parentContainer = undefined;
@@ -82,34 +81,6 @@ class Cell {
             this.parentContainer.setChildLocalPosition(this.container, x, y);
         }
         return this;
-    }
-
-    setData(key, value) {
-        if (!this.data) {
-            this.data = {};
-        }
-
-        this.data[key] = value;
-        return this;
-    }
-
-    getData(key, defaultValue) {
-        if (!this.data) {
-            this.data = {};
-        }
-
-        var data = this.data;
-        if (data.hasOwnProperty(key)) {
-            return data[key];
-        } else {
-            return defaultValue;
-        }
-    }
-
-    cleanData() {
-        if (this.data) {
-            Clear(this.data);
-        }
     }
 
     get deltaHeight() {
@@ -182,5 +153,12 @@ class Cell {
         return this.parentContainer.scene;
     }
 };
+
+
+Object.assign(
+    Cell.prototype,
+    DataMethods
+);
+
 
 export default Cell;
