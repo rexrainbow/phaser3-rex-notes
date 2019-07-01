@@ -14,7 +14,7 @@ export default {
     },
 
     mulData(key, mul, defaultValue) {
-        this.questionManager.mulData(key, inc, defaultValue);
+        this.questionManager.mulData(key, mul, defaultValue);
         return this;
     },
 

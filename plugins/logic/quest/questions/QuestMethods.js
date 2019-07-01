@@ -52,7 +52,7 @@ export default {
     },
 
     mulData(key, mul, defaultValue) {
-        this._quest.mulData(key, inc, defaultValue);
+        this._quest.mulData(key, mul, defaultValue);
         return this;
     },
 
