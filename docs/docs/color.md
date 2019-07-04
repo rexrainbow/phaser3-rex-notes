@@ -232,3 +232,15 @@ var newColor = color.clone();
 var hexString = Phaser.Display.Color.RGBToString(color.r, color.g, color.b, color.a);
 // var hexString = Phaser.Display.Color.RGBToString(color.r, color.g, color.b, color.a, prefix);
 ```
+
+### Interpolation
+
+Interpolate between 2 colors.
+
+```javascript
+var colorOut = Phaser.Display.Color.Interpolate.RGBWithRGB(r1, g1, b1, r2, g2, b2, length, index);
+var colorOut = Phaser.Display.Color.Interpolate.ColorWithColor(color1, color2, length, index);
+var colorOut = Phaser.Display.Color.Interpolate.ColorWithRGB(color, r, g, b, length, index);
+```
+
+- `length`, `index` : t = `index/length` (0~1)
