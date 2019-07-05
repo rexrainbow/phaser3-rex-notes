@@ -23,10 +23,15 @@ var VideoBase = function (GOClass) {
             if (!this.scene) {
                 return;
             }
-            this.video.pause();
-            this.video.removeAttribute('src'); // empty source
-            this.video.load();
-            this.video = undefined;
+            if (this.video) {
+                this.video.pause();
+                this.video.removeAttribute('src'); // empty source
+                this.video.load();
+                this.video = undefined;
+            }
+            if (super.preDestroy) {
+                super.preDestroy();
+            }
         }
 
         preUpdate(time, delta) {
@@ -47,38 +52,57 @@ var VideoBase = function (GOClass) {
         }
 
         load(src) {
-            Load(this.video, src, this.availableVideoTypes);
+            if (this.video) {
+                Load(this.video, src, this.availableVideoTypes);
+            }
             return this;
         }
 
         play() {
-            this.video.play();
+            if (this.video) {
+                this.video.play();
+            }
             return this;
         }
 
         get isPlaying() {
-            var video = this.video;
-            return (!video.paused) && (!video.ended) && (video.currentTime > 0);
+            if (this.video) {
+                var video = this.video;
+                return (!video.paused) && (!video.ended) && (video.currentTime > 0);
+            } else {
+                return false;
+            }
         }
 
         pause() {
-            this.video.pause();
+            if (this.video) {
+                this.video.pause();
+            }
             return this;
         }
 
         get isPaused() {
-            return this.video.paused;
+            if (this.video) {
+                return this.video.paused;
+            } else {
+                return false;
+            }
         }
 
         get playbackTime() {
-            return this.video.currentTime || 0;
+            if (this.video) {
+                return this.video.currentTime || 0;
+            } else {
+                return 0;
+            }
         }
 
         set playbackTime(value) {
-            try {
-                this.video.currentTime = value;
-            }
-            catch (e) {
+            if (this.video) {
+                try {
+                    this.video.currentTime = value;
+                } catch (e) {
+                }
             }
         }
 
@@ -88,16 +112,26 @@ var VideoBase = function (GOClass) {
         }
 
         get duration() {
-            return this.video.duration || 0;
+            if (this.video) {
+                return this.video.duration || 0;
+            } else {
+                return 0;
+            }
         }
 
         get t() {
-            var duration = this.duration;
-            return (duration === 0) ? 0 : this.playbackTime / duration;
+            if (this.video) {
+                var duration = this.duration;
+                return (duration === 0) ? 0 : this.playbackTime / duration;
+            } else {
+                return 0;
+            }
         }
 
         set t(value) {
-            this.playbackTime = this.duration * Clamp(value, 0, 1);
+            if (this.video) {
+                this.playbackTime = this.duration * Clamp(value, 0, 1);
+            }
         }
 
         setT(value) {
@@ -106,15 +140,25 @@ var VideoBase = function (GOClass) {
         }
 
         get hasEnded() {
-            return this.video.ended;
+            if (this.video) {
+                return this.video.ended;
+            } else {
+                return false;
+            }
         }
 
         get volume() {
-            return this.video.volume || 0;
+            if (this.video) {
+                return this.video.volume || 0;
+            } else {
+                return 0;
+            }
         }
 
         set volume(value) {
-            this.video.volume = value;
+            if (this.video) {
+                this.video.volume = value;
+            }
         }
 
         setVolume(value) {
@@ -123,11 +167,17 @@ var VideoBase = function (GOClass) {
         }
 
         get muted() {
-            return this.video.muted || false;
+            if (this.video) {
+                return this.video.muted || false;
+            } else {
+                return false;
+            }
         }
 
         set muted(value) {
-            this.video.muted = value;
+            if (this.video) {
+                this.video.muted = value;
+            }
         }
 
         setMute(value) {
@@ -139,11 +189,17 @@ var VideoBase = function (GOClass) {
         }
 
         get loop() {
-            return this.video.loop;
+            if (this.video) {
+                return this.video.loop;
+            } else {
+                return false;
+            }
         }
 
         set loop(value) {
-            this.video.loop = value;
+            if (this.video) {
+                this.video.loop = value;
+            }
         }
 
         setLoop(value) {
@@ -155,7 +211,11 @@ var VideoBase = function (GOClass) {
         }
 
         get readyState() {
-            return this.video.readyState;
+            if (this.video) {
+                return this.video.readyState;
+            } else {
+                return undefined;
+            }
         }
     }
 };
