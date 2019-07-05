@@ -4069,6 +4069,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#set-pre-test-function" title="Set pre-test function" class="md-nav__link">
+    Set pre-test function
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#set-cost-function" title="Set cost function" class="md-nav__link">
     Set cost function
   </a>
@@ -4450,6 +4457,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#set-pre-test-function" title="Set pre-test function" class="md-nav__link">
+    Set pre-test function
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#set-cost-function" title="Set cost function" class="md-nav__link">
     Set cost function
   </a>
@@ -4535,13 +4549,16 @@
     <span class="c1">// cone: undefined,</span>
     <span class="c1">// coneMode: 0,</span>
 
+    <span class="c1">// ** pre-test **</span>
     <span class="c1">// occupiedTest: false,</span>
     <span class="c1">// blockerTest: false,</span>
+    <span class="c1">// preTestCallback: undefined,</span>
+    <span class="c1">// preTestCallbackScope: undefined,</span>
 
     <span class="c1">// ** cost **</span>
-    <span class="c1">// cost: 0,   // constant cost</span>
     <span class="c1">// costCallback: undefined,</span>
     <span class="c1">// costCallbackScope: undefined,</span>
+    <span class="c1">// cost: undefined,   // constant cost</span>
 
     <span class="c1">// debug: {</span>
     <span class="c1">//     graphics: undefined,</span>
@@ -4577,9 +4594,20 @@ coneMode: 1
 </pre></div></li>
 </ul>
 </li>
-<li><code>occupiedTest</code> : Set <code>true</code> to test if target tile position is occupied or not, in cost function.</li>
-<li><code>blockerTest</code> : Set <code>true</code> to test <a href="../board-chessdata/#blocker">blocker property</a> in cost function.</li>
-<li>Cost function<ul>
+<li>Pre-test : Test tiles on visible path.<ul>
+<li><code>occupiedTest</code> : Set <code>true</code> to test if target tile position is occupied or not.</li>
+<li><code>blockerTest</code> : Set <code>true</code> to test <a href="../board-chessdata/#blocker">blocker property</a>.</li>
+<li><code>preTestCallback</code>, <code>preTestCallbackScope</code> : Custom pre-test function, return <code>false</code> to discard cost function.
+    <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">tileXYArray</span><span class="p">,</span> <span class="nx">visiblePoints</span><span class="p">,</span> <span class="nx">fieldOfView</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// return false;</span>
+<span class="p">}</span>
+</pre></div><ul>
+<li><code>tileXYArray[0]</code> is current tileXY position of chess.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Cost function of each tile on visible path<ul>
 <li><code>cost</code> : A constant cost for each non-blocked tile</li>
 <li><code>costCallback</code>, <code>costCallbackScope</code> :  Get cost via callback
     <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">curTile</span><span class="p">,</span> <span class="nx">fieldOfView</span><span class="p">,</span> <span class="nx">tileXYArray</span><span class="p">)</span> <span class="p">{</span>
@@ -4597,6 +4625,20 @@ coneMode: 1
 <li><code>debug.graphics</code> : A <a href="../graphics/">graphics</a> object for showing debug messages.</li>
 <li><code>debug.visibleLineColor</code> : Color of visible line. Set <code>undefined</code> to not draw any line.</li>
 <li><code>debug.invisibleLineColor</code> : Color of invisible line. Set <code>undefined</code> to not draw any line.</li>
+</ul>
+</li>
+</ul>
+<h3 id="set-pre-test-function">Set pre-test function<a class="headerlink" href="#set-pre-test-function" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">fieldOfView</span><span class="p">.</span><span class="nx">setPreTestFunction</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div>
+
+<ul>
+<li><code>callback</code>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tileXYArray</span><span class="p">,</span> <span class="nx">visiblePoints</span><span class="p">,</span> <span class="nx">fieldOfView</span><span class="p">)</span> <span class="p">{</span>
+       <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div><ul>
+<li><code>tileXYArray[0]</code> is current tileXY position of chess.</li>
 </ul>
 </li>
 </ul>
@@ -4624,6 +4666,7 @@ coneMode: 1
 <h3 id="is-tilexychess-visible">Is tileXY/chess visible<a class="headerlink" href="#is-tilexychess-visible" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isVisible</span> <span class="o">=</span> <span class="nx">fieldOfView</span><span class="p">.</span><span class="nx">isInLOS</span><span class="p">(</span><span class="nx">chess</span><span class="p">);</span>
 <span class="c1">// var isVisible = fieldOfView.isInLOS(chess, visiblePoints);</span>
+<span class="c1">// var isVisible = fieldOfView.isInLOS(chess, visiblePoints, originTileXY);</span>
 </pre></div>
 
 <ul>
@@ -4632,11 +4675,17 @@ coneMode: 1
 <li><code>fieldOfView.INFINITY</code> (<em>undefined</em>) : Infinity visible points. Default value.</li>
 </ul>
 </li>
+<li><code>originTileXY</code> : Put chess at this tileXY position for visible testing temporary.<ul>
+<li><code>undefined</code> : Use current tileXY position for visible testing.</li>
+</ul>
+</li>
 </ul>
 <h3 id="get-tilexy-array-in-field-of-view">Get tileXY array in field of view<a class="headerlink" href="#get-tilexy-array-in-field-of-view" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tileXYArray</span> <span class="o">=</span> <span class="nx">fieldOfView</span><span class="p">.</span><span class="nx">findFOV</span><span class="p">();</span>
 <span class="c1">// var tileXYArray = fieldOfView.findFOV(visiblePoints);</span>
+<span class="c1">// var tileXYArray = fieldOfView.findFOV(visiblePoints, originTileXY);</span>
 <span class="c1">// var out = fieldOfView.findFOV(visiblePoints, out);</span>
+<span class="c1">// var out = fieldOfView.findFOV(visiblePoints, originTileXY, out);</span>
 </pre></div>
 
 <ul>
@@ -4644,23 +4693,40 @@ coneMode: 1
 <li><code>fieldOfView.INFINITY</code> (<em>undefined</em>) : Infinity visible points. Default value.</li>
 </ul>
 </li>
+<li><code>out</code> : Returned tileXY array.</li>
+<li><code>originTileXY</code> : Put chess at this tileXY position for visible testing temporary.<ul>
+<li><code>undefined</code> : Use current tileXY position for visible testing.</li>
+</ul>
+</li>
 </ul>
 <h3 id="filter-visible-tilexy-array">Filter visible tileXY array<a class="headerlink" href="#filter-visible-tilexy-array" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Filter visible tileXY array
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">fieldOfView</span><span class="p">.</span><span class="nx">LOS</span><span class="p">(</span><span class="nx">chessArray</span><span class="p">);</span>
-<span class="c1">// var out = fieldOfView.LOS(chessArray, undefined, out);</span>
+<span class="c1">// var out = fieldOfView.LOS(chessArray, originTileXY);</span>
+<span class="c1">// var out = fieldOfView.LOS(chessArray, out);</span>
+<span class="c1">// var out = fieldOfView.LOS(chessArray, originTileXY, out);</span>
 </pre></div><ul>
 <li><code>chessArray</code> : Array of chess object or tileXY</li>
 <li><code>out</code> : Array of visible chess object or tileXY</li>
+<li><code>originTileXY</code> : Put chess at this tileXY position for visible testing temporary.<ul>
+<li><code>undefined</code> : Use current tileXY position for visible testing.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>Filter visible tileXY array with visible points
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">fieldOfView</span><span class="p">.</span><span class="nx">LOS</span><span class="p">(</span><span class="nx">chessArray</span><span class="p">,</span> <span class="nx">visiblePoints</span><span class="p">);</span>
+<span class="c1">// var out = fieldOfView.LOS(chessArray, visiblePoints, originTileXY);</span>
 <span class="c1">// var out = fieldOfView.LOS(chessArray, visiblePoints, out);</span>
+<span class="c1">// var out = fieldOfView.LOS(chessArray, visiblePoints, originTileXY, out);</span>
 </pre></div><ul>
 <li><code>chessArray</code> : Array of chess object or tileXY</li>
 <li><code>out</code> : Array of visible chess object or tileXY</li>
+<li><code>originTileXY</code> : Put chess at this tileXY position for visible testing temporary.<ul>
+<li><code>undefined</code> : Use current tileXY position for visible testing.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
