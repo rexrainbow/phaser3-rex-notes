@@ -35,8 +35,8 @@ class FieldOfView {
         this.setOccupiedTest(occupiedTest);
         this.setBlockerTest(blockerTest);
         this.setEdgeBlockerTest(edgeBlockerTest);
-        this.setCostFunction(costCallback, costCallbackScope);
         this.setPreTestFunction(preTestCallback, preTestCallbackScope);
+        this.setCostFunction(costCallback, costCallbackScope);
         this.setDebugGraphics(GetValue(o, 'debug.graphics', undefined));
         this.setDebugLineColor(GetValue(o, 'debug.visibleLineColor', 0x00ff00), GetValue(o, 'debug.invisibleLineColor', 0xff0000));
         this.setDebugLog(GetValue(o, 'debug.log', false));

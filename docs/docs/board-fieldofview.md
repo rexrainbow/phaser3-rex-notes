@@ -91,6 +91,20 @@ var fieldOfView = scene.rexBoard.add.fieldOfView(chess, {
     - `debug.visibleLineColor` : Color of visible line. Set `undefined` to not draw any line.
     - `debug.invisibleLineColor` : Color of invisible line. Set `undefined` to not draw any line.
 
+### Set pre-test function
+
+```javascript
+fieldOfView.setPreTestFunction(callback, scope);
+```
+
+- `callback`
+    ```javascript
+    var callback = function(tileXYArray, visiblePoints, fieldOfView) {
+           return false;
+    }
+    ```
+    - `tileXYArray[0]` is current tileXY position of chess.
+
 ### Set cost function
 
 - Constant cost for each non-blocked tile
