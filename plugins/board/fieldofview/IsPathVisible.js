@@ -5,6 +5,13 @@ const BLOCKER = CONST.BLOCKER;
 const INFINITY = CONST.INFINITY;
 
 var IsPathVisible = function (tileXYArray, visiblePoints) {
+    if (this.preTest(tileXYArray, visiblePoints) === false) {
+        return false;
+    }
+
+    if (this.costCallback === undefined) {
+        return true;
+    }
     var myTileXYZ = this.chessData.tileXYZ;
     var tileXY, cost;
     for (var i = 1, cnt = tileXYArray.length; i < cnt; i++) {

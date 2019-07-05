@@ -25,13 +25,16 @@ var fieldOfView = scene.rexBoard.add.fieldOfView(chess, {
     // cone: undefined,
     // coneMode: 0,
 
+    // ** pre-test **
     // occupiedTest: false,
     // blockerTest: false,
+    // preTestCallback: undefined,
+    // preTestCallbackScope: undefined,
 
     // ** cost **
-    // cost: 0,   // constant cost
     // costCallback: undefined,
     // costCallbackScope: undefined,
+    // cost: undefined,   // constant cost
 
     // debug: {
     //     graphics: undefined,
@@ -62,9 +65,17 @@ var fieldOfView = scene.rexBoard.add.fieldOfView(chess, {
         cone : 120,
         coneMode: 1
         ```
-- `occupiedTest` : Set `true` to test if target tile position is occupied or not, in cost function.
-- `blockerTest` : Set `true` to test [blocker property](board-chessdata.md#blocker) in cost function.
-- Cost function
+- Pre-test : Test tiles on visible path.
+    - `occupiedTest` : Set `true` to test if target tile position is occupied or not.
+    - `blockerTest` : Set `true` to test [blocker property](board-chessdata.md#blocker).
+    - `preTestCallback`, `preTestCallbackScope` : Custom pre-test function, return `false` to discard cost function.
+        ```javascript
+        function(tileXYArray, visiblePoints, fieldOfView) {
+            // return false;
+        }
+        ```
+        - `tileXYArray[0]` is current tileXY position of chess.
+- Cost function of each tile on visible path
     - `cost` : A constant cost for each non-blocked tile
     - `costCallback`, `costCallbackScope` :  Get cost via callback
         ```javascript
