@@ -5,7 +5,7 @@ import AreTileXYArrayEqual from '../utils/AreTileXYArrayEqual.js';
 const INFINITY = CONST.INFINITY;
 const LINEOFFSET = 0.001;
 
-var IsInLOS = function (chess, visiblePoints) {
+var IsInLOS = function (chess, visiblePoints, originTileXY) {
     // chess: chess object or tileXY
     if ((visiblePoints !== INFINITY) && (visiblePoints <= 0)) {
         return false;
@@ -17,12 +17,14 @@ var IsInLOS = function (chess, visiblePoints) {
         return false;
     }
 
-    var myTileXYZ = this.chessData.tileXYZ;
+    if (originTileXY === undefined) {
+        originTileXY = this.chessData.tileXYZ;
+    }
     if (this.debugLog) {
-        console.log('Visible test from (' + myTileXYZ.x + ',' + myTileXYZ.y + ') to (' + targetTileXY.x + ',' + targetTileXY.y + ')');
+        console.log('Visible test from (' + originTileXY.x + ',' + originTileXY.y + ') to (' + targetTileXY.x + ',' + targetTileXY.y + ')');
     }
 
-    var out = board.tileXYToWorldXY(myTileXYZ.x, myTileXYZ.y, true);
+    var out = board.tileXYToWorldXY(originTileXY.x, originTileXY.y, true);
     var startX = out.x,
         startY = out.y;
     out = board.tileXYToWorldXY(targetTileXY.x, targetTileXY.y, true);

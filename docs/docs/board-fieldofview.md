@@ -130,39 +130,55 @@ fieldOfView.setPreTestFunction(callback, scope);
 ```javascript
 var isVisible = fieldOfView.isInLOS(chess);
 // var isVisible = fieldOfView.isInLOS(chess, visiblePoints);
+// var isVisible = fieldOfView.isInLOS(chess, visiblePoints, originTileXY);
 ```
 
 - `chess` : Chess object or tileXY
 - `visiblePoints`
     - `fieldOfView.INFINITY` (*undefined*) : Infinity visible points. Default value.
+- `originTileXY` : Put chess at this tileXY position for visible testing temporary.
+    - `undefined` : Use current tileXY position for visible testing.
 
 ### Get tileXY array in field of view
 
 ```javascript
 var tileXYArray = fieldOfView.findFOV();
 // var tileXYArray = fieldOfView.findFOV(visiblePoints);
+// var tileXYArray = fieldOfView.findFOV(visiblePoints, originTileXY);
 // var out = fieldOfView.findFOV(visiblePoints, out);
+// var out = fieldOfView.findFOV(visiblePoints, originTileXY, out);
 ```
 
 - `visiblePoints`
     - `fieldOfView.INFINITY` (*undefined*) : Infinity visible points. Default value.
+- `out` : Returned tileXY array.
+- `originTileXY` : Put chess at this tileXY position for visible testing temporary.
+    - `undefined` : Use current tileXY position for visible testing.
 
 ### Filter visible tileXY array
 
 - Filter visible tileXY array
     ```javascript
     var out = fieldOfView.LOS(chessArray);
-    // var out = fieldOfView.LOS(chessArray, undefined, out);
+    // var out = fieldOfView.LOS(chessArray, originTileXY);
+    // var out = fieldOfView.LOS(chessArray, out);
+    // var out = fieldOfView.LOS(chessArray, originTileXY, out);
     ```
     - `chessArray` : Array of chess object or tileXY
     - `out` : Array of visible chess object or tileXY
+    - `originTileXY` : Put chess at this tileXY position for visible testing temporary.
+        - `undefined` : Use current tileXY position for visible testing.
 - Filter visible tileXY array with visible points
     ```javascript
     var out = fieldOfView.LOS(chessArray, visiblePoints);
+    // var out = fieldOfView.LOS(chessArray, visiblePoints, originTileXY);
     // var out = fieldOfView.LOS(chessArray, visiblePoints, out);
+    // var out = fieldOfView.LOS(chessArray, visiblePoints, originTileXY, out);
     ```
     - `chessArray` : Array of chess object or tileXY
     - `out` : Array of visible chess object or tileXY
+    - `originTileXY` : Put chess at this tileXY position for visible testing temporary.
+        - `undefined` : Use current tileXY position for visible testing.
 
 ### Face
 
