@@ -12,6 +12,7 @@ import WorldXYToTileY from './worldposition/WorldXYToTileY.js';
 import WorldXYToTileXY from './worldposition/WorldXYToTileXY.js';
 import WorldXYSnapToGrid from './worldposition/WorldXYSnapToGrid.js';
 import AngleBetween from './worldposition/AngleBetween.js';
+import IsAngleInCone from './worldposition/IsAngleInCone.js';
 import AngleToward from './worldposition/AngleToward.js';
 import IsOverlappingPoint from './worldposition/IsOverlappingPoint.js';
 import GridAlign from './worldposition/GridAlign.js';
@@ -36,6 +37,7 @@ import ChessToTileXYZ from './tileposition/ChessToTileXYZ.js';
 import GetOppositeDirection from './tileposition/GetOppositeDirection.js';
 import GetDistance from './tileposition/GetDistance.js';
 import DirectionBetween from './tileposition/DirectionBetween.js';
+import IsDirectionInCone from './tileposition/IsDirectionInCone.js';
 
 import Offset from './transform/Offset.js';
 import Mirror from './transform/Mirror.js';
@@ -74,6 +76,7 @@ export default {
     worldXYToTileXY: WorldXYToTileXY,
     worldXYSnapToGrid: WorldXYSnapToGrid,
     angleBetween: AngleBetween,
+    isAngleInCone: IsAngleInCone,
     angleToward: AngleToward,
     isOverlappingPoint: IsOverlappingPoint,
     gridAlign: GridAlign,
@@ -102,6 +105,7 @@ export default {
     getOppositeDirection: GetOppositeDirection,
     getDistance: GetDistance,
     directionBetween: DirectionBetween,
+    isDirectionInCone: IsDirectionInCone,
     fit: Fit,
 
     getEmptyTileXYArray: GetEmptyTileXYArray,

@@ -17,40 +17,64 @@ class Demo extends Phaser.Scene {
             // grid: getQuadGrid(this),
             width: 24,
             height: 24,
-        });
+        })
 
         // add chess
         var chessA = CreateChessA(board, {
             x: 12,
             y: 12,
 
-            // FOV parameters
-            face: 0,
+            fov: {
+                coneMode: 'direction',
+                face: 0,
+                cone: 2,
 
-            costCallback: function (tileXY, fov) {
-                var board = fov.board;
-                return (board.tileXYZToChess(tileXY.x, tileXY.y, 0)) ? fov.BLOCKER : 1;
+                costCallback: function (tileXY, fov) {
+                    var board = fov.board;
+                    return (board.tileXYZToChess(tileXY.x, tileXY.y, 0)) ? fov.BLOCKER : 1;
+                },
+
+                debug: {
+                    graphics: this.add.graphics().setDepth(10),
+                },
             },
 
-            debug: {
-                // graphics: this.add.graphics().setDepth(10),
-                // invisibleLineColor: undefined,
-                // log: true
-            },
+            pathFinder: {
+                costCallback: function (curTile, preTile, pathFinder) {
+                    var board = pathFinder.board;
+                    var chess = pathFinder.gameObject;
+                    var fov = chess.fov;
+
+                    if (board.contains(curTile.x, curTile.y, 0)) {
+                        return pathFinder.BLOCKER;
+                    }
+                    var tileXYB = { x: curTile.x, y: curTile.y }; // curTile is not a plain object
+                    var isInCone = board.isDirectionInCone(chess, tileXYB, fov.face, fov.cone);
+                    return (isInCone) ? 1 : pathFinder.BLOCKER;
+                }
+            }
         });
 
         // add some blockers
-        // for (var i = 0; i < 50; i++) {
-        //     CreateBlocker(board);
-        // }
+        //for (var i = 0; i < 50; i++) {
+        //    CreateBlocker(board);
+        //}
 
-        var mode = 1;
-        findFOV(chessA, mode);
-
-        this.input.on('pointerdown', function (pointer) {
-            mode = (mode === 1) ? 0 : 1;
-            findFOV(chessA, mode);
-        });
+        // Interactive logic
+        board
+            .setInteractive()
+            .on('tiledown', function (pointer, tileXY) {
+                var chess = board.tileXYZToChess(tileXY.x, tileXY.y, 0);
+                if (!chess) {
+                    ClearResult(board, chessA);
+                    CreateBlocker(board, tileXY);
+                } else if (chess.name === 'blocker') {
+                    ClearResult(board, chessA);
+                    chess.destroy();
+                } else if (chess.name === 'chessA') {
+                    FindFOV(chess);
+                }
+            })
     }
 
     update() { }
@@ -93,7 +117,8 @@ var CreateBlocker = function (board, tileXY) {
         tileXY = board.getRandomEmptyTileXY(0);
     }
     // Shape(board, tileX, tileY, tileZ, fillColor, fillAlpha, addToBoard)
-    var blocker = scene.rexBoard.add.shape(board, tileXY.x, tileXY.y, 0, COLOR_DARK);
+    var blocker = scene.rexBoard.add.shape(board, tileXY.x, tileXY.y, 0, COLOR_DARK)
+        .setName('blocker');
     return blocker;
 }
 
@@ -107,34 +132,30 @@ var CreateChessA = function (board, config) {
     }
     var scene = board.scene;
     var chessA = scene.rexBoard.add.shape(board, tileX, tileY, 0, COLOR_LIGHT)
-        .setDepth(1);
-    chessA.fov = scene.rexBoard.add.fieldOfView(chessA, config);
+        .setDepth(1)
+        .setName('chessA');
+
+    chessA.fov = scene.rexBoard.add.fieldOfView(chessA, GetValue(config, 'fov', undefined));
+    chessA.pathFinder = scene.rexBoard.add.pathFinder(chessA, GetValue(config, 'pathFinder', undefined));
     return chessA;
 }
 
-var clearResult = function (board) {
+var ClearResult = function (board, chessA) {
     var chessArray = board.tileZToChessArray(-1);
     for (var i = 0, cnt = chessArray.length; i < cnt; i++) {
         chessArray[i].destroy();
     }
+    chessA.fov.clearDebugGraphics();
 }
 
-var findFOV = function (chessA, mode) {
+var FindFOV = function (chessA) {
     var board = chessA.rexChess.board;
     var scene = board.scene;
 
-    clearResult(board);
+    ClearResult(board, chessA);
 
-    var tileXYArray;
-    switch (mode) {
-        case 1:
-            tileXYArray = board.filledRingToTileXYArray(chessA.rexChess.tileXYZ, 10);
-            tileXYArray = chessA.fov.clearDebugGraphics().LOS(tileXYArray);
-            break;
-        default:
-            tileXYArray = chessA.fov.clearDebugGraphics().findFOV(10);
-            break;
-    }
+    var tileXYArray = chessA.pathFinder.findArea(10);
+    tileXYArray = chessA.fov.LOS(tileXYArray);
     var tileXY;
     for (var i = 0, cnt = tileXYArray.length; i < cnt; i++) {
         tileXY = tileXYArray[i];

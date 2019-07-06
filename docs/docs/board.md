@@ -345,8 +345,17 @@ var out = board.lineToTileXYArray(startWorldX, startWorldY, endWorldX, endWorldY
 var radian = board.angleBetween(tileXY0, tileXY1);
 ```
 
-- `radian` : Angle between world position of 2 tiles, in radian
+- `radian` : Angle between world position of 2 tiles, in radian.
 - `tileXY0`, `tileXY1` : tile position `{x, y}`
+
+### Is angle in cone
+
+```javascript
+var isInCone = board.isAngleInCone(chessA, chessB, face, cone);
+```
+
+- `chessA`, `chessB` : Direction from chessA to chessB. Chess object, or tileXY. 
+- `face`, `cone` : Range of compared angle is between `face - (cone/2)` to `face + (cone/2)`. Angle in radian.
 
 ### Direction between 2 tiles
 
@@ -364,10 +373,20 @@ var direction = board.directionBetween(srcTileXY, targetTileXY);
 var direction = board.directionBetween(srcTileXY, targetTileXY, false);
 ```
 
-- `direction` : Integer number, or float number
+- `direction` : Integer number, or float number.
     - [Quad grid](board-quadgrid.md#directions) : `0`, `1`, `2`, `3`, or float number between 0~1, 1~2, 2~3, 3~4.
     - [Hexagon grid](board-hexagongrid.md#directions) : `0`, `1`, `2`, `3`, `4`, `5`, or float number between 0~1, 1~2, 2~3, 3~4, 4~5, 5~6.
 
+### Is direction in cone
+
+```javascript
+var isInCone = board.isDirectionInCone(chessA, chessB, face, cone);
+```
+
+- `chessA`, `chessB` : Direction from chessA to chessB. Chess object, or tileXY. 
+- `face`, `cone` : Range of compared direction is between `face - (cone/2)` to `face + (cone/2)`. Integer number, or float number.
+    - [Quad grid](board-quadgrid.md#directions) : `0`, `1`, `2`, `3`, or float number between 0~1, 1~2, 2~3, 3~4.
+    - [Hexagon grid](board-hexagongrid.md#directions) : `0`, `1`, `2`, `3`, `4`, `5`, or float number between 0~1, 1~2, 2~3, 3~4, 4~5, 5~6.
 
 ### Opposite direction
 

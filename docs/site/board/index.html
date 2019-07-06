@@ -4080,8 +4080,22 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#is-angle-in-cone" title="Is angle in cone" class="md-nav__link">
+    Is angle in cone
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#direction-between-2-tiles" title="Direction between 2 tiles" class="md-nav__link">
     Direction between 2 tiles
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is-direction-in-cone" title="Is direction in cone" class="md-nav__link">
+    Is direction in cone
   </a>
   
 </li>
@@ -4822,8 +4836,22 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#is-angle-in-cone" title="Is angle in cone" class="md-nav__link">
+    Is angle in cone
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#direction-between-2-tiles" title="Direction between 2 tiles" class="md-nav__link">
     Direction between 2 tiles
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#is-direction-in-cone" title="Is direction in cone" class="md-nav__link">
+    Is direction in cone
   </a>
   
 </li>
@@ -5328,8 +5356,16 @@
 </pre></div>
 
 <ul>
-<li><code>radian</code> : Angle between world position of 2 tiles, in radian</li>
+<li><code>radian</code> : Angle between world position of 2 tiles, in radian.</li>
 <li><code>tileXY0</code>, <code>tileXY1</code> : tile position <code>{x, y}</code></li>
+</ul>
+<h3 id="is-angle-in-cone">Is angle in cone<a class="headerlink" href="#is-angle-in-cone" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isInCone</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">isAngleInCone</span><span class="p">(</span><span class="nx">chessA</span><span class="p">,</span> <span class="nx">chessB</span><span class="p">,</span> <span class="nx">face</span><span class="p">,</span> <span class="nx">cone</span><span class="p">);</span>
+</pre></div>
+
+<ul>
+<li><code>chessA</code>, <code>chessB</code> : Direction from chessA to chessB. Chess object, or tileXY. </li>
+<li><code>face</code>, <code>cone</code> : Range of compared angle is between <code>face - (cone/2)</code> to <code>face + (cone/2)</code>. Angle in radian.</li>
 </ul>
 <h3 id="direction-between-2-tiles">Direction between 2 tiles<a class="headerlink" href="#direction-between-2-tiles" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">direction</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">directionBetween</span><span class="p">(</span><span class="nx">srcTileXY</span><span class="p">,</span> <span class="nx">targetTileXY</span><span class="p">);</span>
@@ -5348,7 +5384,19 @@
 </pre></div>
 
 <ul>
-<li><code>direction</code> : Integer number, or float number<ul>
+<li><code>direction</code> : Integer number, or float number.<ul>
+<li><a href="../board-quadgrid/#directions">Quad grid</a> : <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, or float number between 0~1, 1~2, 2~3, 3~4.</li>
+<li><a href="../board-hexagongrid/#directions">Hexagon grid</a> : <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, or float number between 0~1, 1~2, 2~3, 3~4, 4~5, 5~6.</li>
+</ul>
+</li>
+</ul>
+<h3 id="is-direction-in-cone">Is direction in cone<a class="headerlink" href="#is-direction-in-cone" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isInCone</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">isDirectionInCone</span><span class="p">(</span><span class="nx">chessA</span><span class="p">,</span> <span class="nx">chessB</span><span class="p">,</span> <span class="nx">face</span><span class="p">,</span> <span class="nx">cone</span><span class="p">);</span>
+</pre></div>
+
+<ul>
+<li><code>chessA</code>, <code>chessB</code> : Direction from chessA to chessB. Chess object, or tileXY. </li>
+<li><code>face</code>, <code>cone</code> : Range of compared direction is between <code>face - (cone/2)</code> to <code>face + (cone/2)</code>. Integer number, or float number.<ul>
 <li><a href="../board-quadgrid/#directions">Quad grid</a> : <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, or float number between 0~1, 1~2, 2~3, 3~4.</li>
 <li><a href="../board-hexagongrid/#directions">Hexagon grid</a> : <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, or float number between 0~1, 1~2, 2~3, 3~4, 4~5, 5~6.</li>
 </ul>
