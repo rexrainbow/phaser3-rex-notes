@@ -16,7 +16,14 @@ import IsAngleInCone from './worldposition/IsAngleInCone.js';
 import AngleToward from './worldposition/AngleToward.js';
 import IsOverlappingPoint from './worldposition/IsOverlappingPoint.js';
 import GridAlign from './worldposition/GridAlign.js';
+
 import LineToTileXYArray from './line/LineToTileXYArray.js';
+import CircleToTileXYArray from './shape/CircleToTileXYArray.js';
+import EllipseToTileXYArray from './shape/EllipseToTileXYArray.js';
+import PolygonToTileXYArray from './shape/PolygonToTileXYArray.js';
+import RectangleToTileXYArray from './shape/RectangleToTileXYArray.js';
+import TriangleToTileXYArray from './shape/TriangleToTileXYArray.js';
+import ShapeToTileXYArray from './shape/ShapeToTileXYArray.js';
 
 import UidToChess from './chess/UidToChess.js';
 import AddChess from './chess/AddChess.js';
@@ -80,7 +87,14 @@ export default {
     angleToward: AngleToward,
     isOverlappingPoint: IsOverlappingPoint,
     gridAlign: GridAlign,
+
     lineToTileXYArray: LineToTileXYArray,
+    circleToTileXYArray: CircleToTileXYArray,
+    ellipseToTileXYArray: EllipseToTileXYArray,
+    polygonToTileXYArray: PolygonToTileXYArray,
+    rectangleToTileXYArray: RectangleToTileXYArray,
+    triangleToTileXYArray: TriangleToTileXYArray,
+    shapeToTileXYArray: ShapeToTileXYArray,
 
     uidToChess: UidToChess,
     addChess: AddChess,
