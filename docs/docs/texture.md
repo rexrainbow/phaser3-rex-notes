@@ -86,3 +86,18 @@ scene.textures.remove(key);
 var s = scene.textures.getBase64(key);  // type= 'image/png', encoderOptions= 0.92
 // var s = scene.textures.getBase64(key, frame, type, encoderOptions);
 ```
+
+### Frame object
+
+####　Get frame
+
+```javascript
+var frame = scene.textures.getFrame(key, frame);
+```
+
+#### Properties
+
+- `frame.cutX` : X position within the source image to cut from.
+- `frame.cutY` : Y position within the source image to cut from.
+- `frame.cutWidth` : The width of the area in the source image to cut.
+- `frame.cutHeight` : The height of the area in the source image to cut.

@@ -786,6 +786,33 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#frame-object" title="Frame object" class="md-nav__link">
+    Frame object
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-frame" title="Get frame" class="md-nav__link">
+    Get frame
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#properties" title="Properties" class="md-nav__link">
+    Properties
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4451,6 +4478,33 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#frame-object" title="Frame object" class="md-nav__link">
+    Frame object
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-frame" title="Get frame" class="md-nav__link">
+    Get frame
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#properties" title="Properties" class="md-nav__link">
+    Properties
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4547,6 +4601,19 @@
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">getBase64</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>  <span class="c1">// type= &#39;image/png&#39;, encoderOptions= 0.92</span>
 <span class="c1">// var s = scene.textures.getBase64(key, frame, type, encoderOptions);</span>
 </pre></div>
+
+<h3 id="frame-object">Frame object<a class="headerlink" href="#frame-object" title="Permanent link">&para;</a></h3>
+<h4 id="get-frame">Get frame<a class="headerlink" href="#get-frame" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">frame</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">textures</span><span class="p">.</span><span class="nx">getFrame</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>
+</pre></div>
+
+<h4 id="properties">Properties<a class="headerlink" href="#properties" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>frame.cutX</code> : X position within the source image to cut from.</li>
+<li><code>frame.cutY</code> : Y position within the source image to cut from.</li>
+<li><code>frame.cutWidth</code> : The width of the area in the source image to cut.</li>
+<li><code>frame.cutHeight</code> : The height of the area in the source image to cut.</li>
+</ul>
                 
                   
                 
