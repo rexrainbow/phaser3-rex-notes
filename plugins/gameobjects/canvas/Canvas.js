@@ -38,10 +38,10 @@ var Canvas = new Phaser.Class({
                 y = 0;
             }
             if (width === undefined) {
-                width = 0;
+                width = 2;
             }
             if (height === undefined) {
-                height = 0;
+                height = 2;
             }
 
             GameObject.call(this, scene, 'rexCanvas');
@@ -189,32 +189,33 @@ var Canvas = new Phaser.Class({
         return this;
     },
 
-    loadTexture: function (key, resize) {
-        var sys = this.scene.sys;
-        if (!sys.textures.exists(key)) {
-            return this;
-        }
-
+    loadTexture: function (key, frame, resize) {
         if (resize === undefined) {
             resize = true;
         }
-        var srcCanvas = sys.textures.get(key).getSourceImage();
-        var srcCtx = srcCanvas.getContext('2d');
-        var destCanvas = this.canvas;
-        if (destCanvas.width !== srcCanvas.width) {
-            destCanvas.width = srcCanvas.width;
-        }
-        if (destCanvas.height !== srcCanvas.height) {
-            destCanvas.height = srcCanvas.height;
-        }
-        var destCtx = destCanvas.getContext('2d');
-        destCtx.clearRect(0, 0, destCanvas.width, destCanvas.height);
-        destCtx.drawImage(srcCanvas, 0, 0, destCanvas.width, destCanvas.height);
-        this.updateTexture();
 
+        var textureFrame = this.scene.textures.getFrame(key, frame);
+        if (!textureFrame) {
+            return this;
+        }
+
+        var destCanvas = this.canvas;
+        if (destCanvas.width !== textureFrame.cutWidth) {
+            destCanvas.width = textureFrame.cutWidth;
+        }
+        if (destCanvas.height !== textureFrame.cutHeight) {
+            destCanvas.height = textureFrame.cutHeight;
+        }
         if (resize) {
             this.setSize(destCanvas.width / this.resolution, destCanvas.height / this.resolution);
         }
+
+        var destCtx = destCanvas.getContext('2d');
+        destCtx.clearRect(0, 0, destCanvas.width, destCanvas.height);
+        destCtx.drawImage(textureFrame.source.image,
+            textureFrame.cutX, textureFrame.cutY, textureFrame.cutWidth, textureFrame.cutHeight,
+            0, 0, destCanvas.width, destCanvas.height);
+        this.dirty = true;
         return this;
     },
 
