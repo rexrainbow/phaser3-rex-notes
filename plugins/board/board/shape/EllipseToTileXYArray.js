@@ -1,8 +1,7 @@
-import ShapeToTileXYArray from './ShapeToTileXYArray.js';
 import Contains from '../../../utils/geom/ellipse/Contains.js';
 
 var EllipseToTileXYArray = function (ellipse, out) {
-    return ShapeToTileXYArray.call(this, ellipse, Contains, out);
+    return this.shapeToTileXYArray(ellipse, Contains, out);
 }
 
 export default EllipseToTileXYArray;

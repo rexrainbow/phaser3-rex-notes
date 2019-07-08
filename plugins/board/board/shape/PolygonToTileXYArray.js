@@ -1,9 +1,11 @@
-import ShapeToTileXYArray from './ShapeToTileXYArray.js';
 import Contains from '../../../utils/geom/polygon/Contains.js';
+import GetAABB from '../../../utils/geom/polygon/GetAABB.js';
 
 var PolygonToTileXYArray = function (polygon, out) {
-    var pointer0 = polygon.points[0];
-    return ShapeToTileXYArray.call(this, polygon, Contains, out);
+    globSearchRectangle = GetAABB(polygon, globSearchRectangle);
+    return this.shapeToTileXYArray(polygon, Contains, globSearchRectangle, out);
 }
+
+var globSearchRectangle;
 
 export default PolygonToTileXYArray;

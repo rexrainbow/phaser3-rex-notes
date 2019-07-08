@@ -1,7 +1,5 @@
 import IsArray from '../../../utils/object/IsArray.js';
 import RectangleShape from '../../../utils/geom/rectangle/Rectangle.js';
-import PolygonShape from '../../../utils/geom/polygon/Polygon.js';
-import GetAABB from '../../../utils/geom/polygon/GetAABB.js';
 import Clamp from '../../../utils/math/Clamp.js';
 
 var ShapeToTileXYArray = function (shape, containsCallback, searchRectangle, out) {
@@ -47,15 +45,11 @@ var ShapeToTileXYArray = function (shape, containsCallback, searchRectangle, out
 };
 
 var ShapeToRectangle = function (shape, rectangle) {
-    if (shape instanceof PolygonShape) {
-        rectangle = GetAABB(shape, rectangle);
-    } else {
-        var left = shape.left,
-            top = shape.top,
-            right = shape.right,
-            bottom = shape.bottom;
-        rectangle.setTo(left, top, right - left, bottom - top);
-    }
+    var left = shape.left,
+        top = shape.top,
+        right = shape.right,
+        bottom = shape.bottom;
+    rectangle.setTo(left, top, right - left, bottom - top);
     return rectangle;
 }
 
