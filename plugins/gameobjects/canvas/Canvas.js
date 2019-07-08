@@ -80,6 +80,8 @@ var Canvas = new Phaser.Class({
                     this.dirty = true;
                 }, this);
             }
+            
+            this.dirty = true;
         },
 
     getCanvas: function (readOnly) {
