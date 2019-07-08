@@ -8,18 +8,16 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('mushroom', 'assets/images/mushroom.png');
         this.load.atlas('characters', 'assets/images/characters/characters.png', 'assets/images/characters/characters.json');
     }
 
     create() {
         var canvas = this.add.rexCanvas(400, 300)
-            .resize(363, 600)
-            .fill('gray')
-        //.loadTexture('mushroom')
-        //.loadTexture('characters', 'A-smile')
+            .loadTexture('characters', 'A-smile')
 
-        // this.add.image(400, 300, 'characters', 'A-smile')
+        this.input.once('pointerdown', function () {
+            canvas.loadTexture('characters', 'B-smile')
+        })
     }
 
     update() { }

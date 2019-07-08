@@ -38,10 +38,10 @@ var Canvas = new Phaser.Class({
                 y = 0;
             }
             if (width === undefined) {
-                width = 2;
+                width = 1;
             }
             if (height === undefined) {
-                height = 2;
+                height = 1;
             }
 
             GameObject.call(this, scene, 'rexCanvas');
@@ -51,7 +51,7 @@ var Canvas = new Phaser.Class({
             this.resolution = scene.sys.game.config.resolution;
             this.canvas = CanvasPool.create(this, this.resolution * width, this.resolution * height);
             this.context = this.canvas.getContext('2d');
-            this.dirty = true;
+            this.dirty = false;
 
             this.setPosition(x, y);
             this.setSize(width, height);
@@ -69,14 +69,10 @@ var Canvas = new Phaser.Class({
             //  Set the resolution
             this.frame.source.resolution = this.resolution;
 
-            if (this.renderer.gl) {
-                if ((width > 0) && (height > 0)) {
-                    this.updateTexture();
-                } else {
-                    //  Clear the default glTexture, as we override it later
-                    this.renderer.deleteTexture(this.frame.source.glTexture);
-                    this.frame.source.glTexture = null;
-                }
+            if (this.renderer && this.renderer.gl) {
+                //  Clear the default 1x1 glTexture, as we override it later
+                this.renderer.deleteTexture(this.frame.source.glTexture);
+                this.frame.source.glTexture = null;
             }
 
             if (scene.sys.game.config.renderType === Phaser.WEBGL) {
@@ -128,8 +124,8 @@ var Canvas = new Phaser.Class({
             }
         }
 
-        if ((this.width !== this.frame.width) || (this.height !== this.frame.height)) {
-            this.frame.setSize(this.width, this.height);
+        if ((this.canvas.width !== this.frame.width) || (this.canvas.height !== this.frame.height)) {
+            this.frame.setSize(this.canvas.width, this.canvas.height);
         }
         if (this.renderer.gl) {
             this.frame.source.glTexture = this.renderer.canvasToTexture(this.canvas, this.frame.source.glTexture, true);
@@ -202,8 +198,7 @@ var Canvas = new Phaser.Class({
             return this;
         }
 
-        debugger
-        if ((this.width !== textureFrame.cutWidth) && (this.height !== textureFrame.cutHeight)) {
+        if ((this.width !== textureFrame.cutWidth) || (this.height !== textureFrame.cutHeight)) {
             this.resize(textureFrame.cutWidth, textureFrame.cutHeight);
         } else {
             this.context.clearRect(0, 0, textureFrame.cutWidth, textureFrame.cutHeight);
@@ -220,11 +215,16 @@ var Canvas = new Phaser.Class({
             return this;
         }
 
-        this.canvas.width = this.resolution * width;
-        this.canvas.height = this.resolution * height;
         this
             .setSize(width, height)
             .updateDisplayOrigin();
+
+        width *= this.resolution;
+        height *= this.resolution;
+        width = Math.max(Math.ceil(width), 1);
+        height = Math.max(Math.ceil(height), 1);
+        this.canvas.width = width;
+        this.canvas.height = height;
 
         this.dirty = true;
         return this;
