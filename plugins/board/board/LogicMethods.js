@@ -17,7 +17,7 @@ import AngleToward from './worldposition/AngleToward.js';
 import IsOverlappingPoint from './worldposition/IsOverlappingPoint.js';
 import GridAlign from './worldposition/GridAlign.js';
 
-import LineToTileXYArray from './line/LineToTileXYArray.js';
+import LineToTileXYArray from './shape/LineToTileXYArray.js';
 import CircleToTileXYArray from './shape/CircleToTileXYArray.js';
 import EllipseToTileXYArray from './shape/EllipseToTileXYArray.js';
 import PolygonToTileXYArray from './shape/PolygonToTileXYArray.js';

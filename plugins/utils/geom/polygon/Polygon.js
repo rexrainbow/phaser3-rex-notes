@@ -4,7 +4,7 @@
  * @license      {@link https://opensource.org/licenses/MIT|MIT License}
  */
 
-var Class = require('../../utils/Class');
+var Class = require('../../object/Class');
 var Contains = require('./Contains');
 var GetPoints = require('./GetPoints');
 

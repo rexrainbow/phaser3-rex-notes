@@ -22,11 +22,10 @@ var FindFOV = function (visiblePoints, originTileXY, out) {
 
     var board = this.board;
     var myTileXYZ = this.chessData.tileXYZ;
-    var isAnyVisible, radius = 0,
+    var isAnyVisible, radius = 1,
         targetTileXY;
     do {
         isAnyVisible = false;
-        radius++;
         board.ringToTileXYArray(myTileXYZ, radius, globRing);
         for (var i = 0, cnt = globRing.length; i < cnt; i++) {
             targetTileXY = globRing[i];
@@ -35,6 +34,7 @@ var FindFOV = function (visiblePoints, originTileXY, out) {
                 out.push(targetTileXY);
             }
         }
+        radius++;
         globRing.length = 0;
     } while (isAnyVisible)
 

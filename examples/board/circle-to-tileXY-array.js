@@ -11,7 +11,7 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {}
+    preload() { }
 
     create() {
         var gridGraphics = this.add.graphics({
@@ -23,60 +23,47 @@ class Demo extends Phaser.Scene {
         });
 
         var graphics = this.add.graphics({
-                lineStyle: {
-                    width: 3,
-                    color: 0xff0000,
-                    alpha: 1
-                }
-            })
+            lineStyle: {
+                width: 3,
+                color: 0xff0000,
+                alpha: 1
+            }
+        })
             .setDepth(2);
 
         var board = this.rexBoard.add.board({
-                grid: getHexagonGrid(this),
-                // grid: getQuadGrid(this),
-                width: 10,
-                height: 10
-            })
+            grid: getHexagonGrid(this),
+            // grid: getQuadGrid(this),
+            width: 10,
+            height: 10
+        })
             .forEachTileXY(function (tileXY, board) {
                 var points = board.getGridPoints(tileXY.x, tileXY.y, true);
                 gridGraphics.strokePoints(points, true);
             }, this);
 
-        var startX, startY, endX, endY;
+        var shape = new Phaser.Geom.Circle();
         this.input
             .on('pointerdown', function (pointer) {
-                var worldXY = board.worldXYSnapToGrid(pointer.x, pointer.y);
-                startX = worldXY.x;
-                startY = worldXY.y;
-                graphics.clear();
                 Phaser.Actions.Call(board.tileZToChessArray(0), function (gameObject) {
                     gameObject.destroy();
                 });
-            })
-            .on('pointermove', function (pointer) {
-                if (!pointer.isDown) {
-                    return;
-                }
-                var worldXY = board.worldXYSnapToGrid(pointer.x, pointer.y);
-                endX = worldXY.x;
-                endY = worldXY.y;
-                graphics.clear().lineBetween(startX, startY, endX, endY);
-            })
-            .on('pointerup', function (pointer) {
-                var worldXY = board.worldXYSnapToGrid(pointer.x, pointer.y);
-                endX = worldXY.x;
-                endY = worldXY.y;
-                graphics.clear().lineBetween(startX, startY, endX, endY);
-                var tileXYArray = board.lineToTileXYArray(startX, startY, endX, endY);
+
+                shape.setTo(pointer.x, pointer.y, 120);
+                var tileXYArray = board.circleToTileXYArray(shape);
                 var tileXY;
                 for (var i = 0, cnt = tileXYArray.length; i < cnt; i++) {
                     tileXY = tileXYArray[i];
                     this.rexBoard.add.shape(board, tileXY.x, tileXY.y, 0, COLOR_LIGHT).setScale(0.7);
                 }
-            }, this);
+
+                graphics
+                    .clear()
+                    .strokeCircleShape(shape);
+            }, this)
     }
 
-    update() {}
+    update() { }
 }
 
 var getQuadGrid = function (scene) {
