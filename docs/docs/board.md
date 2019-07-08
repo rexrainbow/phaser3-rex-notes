@@ -310,18 +310,6 @@ var gridWorldXY = board.worldXYSnapToGrid(worldX, worldY);
 // var out = board.worldXYSnapToGrid(worldX, worldY, out);
 ```
 
-### Line -> tile position
-
-Get array of tile position along a line defined via (`startWorldX`, `startWorldY`) to (`endWorldX`, `endWorldY`)
-
-```javascript
-var out = board.lineToTileXYArray(startWorldX, startWorldY, endWorldX, endWorldY);
-// var out = board.lineToTileXYArray(startWorldX, startWorldY, endWorldX, endWorldY, out);
-```
-
-- `startWorldX`, `startWorldY`, `endWorldX`, `endWorldY` : Line
-- `out` : An array of tile position
-
 ### Ring -> tile position
 
 - Get array of tile position around a ring.
@@ -338,6 +326,80 @@ var out = board.lineToTileXYArray(startWorldX, startWorldY, endWorldX, endWorldY
     ```
     - `centerTileXY` : Tile position `{x, y}` of ring center.
     - `radius` : Radius of the ring.    
+
+### Shape -> tile position
+
+#### Line -> tile position
+
+Get array of tile position along a line defined via (`startWorldX`, `startWorldY`) to (`endWorldX`, `endWorldY`)
+
+```javascript
+var out = board.lineToTileXYArray(startWorldX, startWorldY, endWorldX, endWorldY);
+// var out = board.lineToTileXYArray(startWorldX, startWorldY, endWorldX, endWorldY, out);
+```
+
+- `startWorldX`, `startWorldY`, `endWorldX`, `endWorldY` : Line
+- `out` : An array of tile position
+
+#### Circle -> tile position
+
+Get array of tile position inside a [circle shape](geom-circle.md)
+
+```javascript
+var out = board.circleToTileXYArray(circle);
+// var out = board.circleToTileXYArray(circle, out);
+```
+
+- `circle` : [Circle shape](geom-circle.md)
+- `out` : An array of tile position
+
+#### Rectangle -> tile position
+
+Get array of tile position inside a [rectangle shape](geom-rectangle.md)
+
+```javascript
+var out = board.rectangleToTileXYArray(rectangle);
+// var out = board.rectangleToTileXYArray(rectangle, out);
+```
+
+- `rectangle` : [Rectangle shape](geom-rectangle.md)
+- `out` : An array of tile position
+
+#### Ellipse -> tile position
+
+Get array of tile position inside a [ellipse shape](geom-ellipse.md)
+
+```javascript
+var out = board.ellipseToTileXYArray(ellipse);
+// var out = board.ellipseToTileXYArray(ellipse, out);
+```
+
+- `ellipse` : [Ellipse shape](geom-ellipse.md)
+- `out` : An array of tile position
+
+#### Triangle -> tile position
+
+Get array of tile position inside a [triangle shape](geom-triangle.md)
+
+```javascript
+var out = board.triangleToTileXYArray(triangle);
+// var out = board.triangleToTileXYArray(triangle, out);
+```
+
+- `triangle` : [Triangle shape](geom-triangle.md)
+- `out` : An array of tile position
+
+#### Polygon -> tile position
+
+Get array of tile position inside a [polygon shape](geom-polygon.md)
+
+```javascript
+var out = board.polygonToTileXYArray(polygon);
+// var out = board.polygonToTileXYArray(polygon, out);
+```
+
+- `polygon` : [Polygon shape](geom-polygon.md)
+- `out` : An array of tile position
 
 ### Angle between world position of 2 tiles
 

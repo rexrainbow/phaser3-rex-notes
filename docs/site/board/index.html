@@ -4059,6 +4059,21 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#ring-tile-position" title="Ring -&gt; tile position" class="md-nav__link">
+    Ring -&gt; tile position
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shape-tile-position" title="Shape -&gt; tile position" class="md-nav__link">
+    Shape -&gt; tile position
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#line-tile-position" title="Line -&gt; tile position" class="md-nav__link">
     Line -&gt; tile position
   </a>
@@ -4066,9 +4081,42 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ring-tile-position" title="Ring -&gt; tile position" class="md-nav__link">
-    Ring -&gt; tile position
+  <a href="#circle-tile-position" title="Circle -&gt; tile position" class="md-nav__link">
+    Circle -&gt; tile position
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rectangle-tile-position" title="Rectangle -&gt; tile position" class="md-nav__link">
+    Rectangle -&gt; tile position
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ellipse-tile-position" title="Ellipse -&gt; tile position" class="md-nav__link">
+    Ellipse -&gt; tile position
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#triangle-tile-position" title="Triangle -&gt; tile position" class="md-nav__link">
+    Triangle -&gt; tile position
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#polygon-tile-position" title="Polygon -&gt; tile position" class="md-nav__link">
+    Polygon -&gt; tile position
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -4815,6 +4863,21 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#ring-tile-position" title="Ring -&gt; tile position" class="md-nav__link">
+    Ring -&gt; tile position
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shape-tile-position" title="Shape -&gt; tile position" class="md-nav__link">
+    Shape -&gt; tile position
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#line-tile-position" title="Line -&gt; tile position" class="md-nav__link">
     Line -&gt; tile position
   </a>
@@ -4822,9 +4885,42 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ring-tile-position" title="Ring -&gt; tile position" class="md-nav__link">
-    Ring -&gt; tile position
+  <a href="#circle-tile-position" title="Circle -&gt; tile position" class="md-nav__link">
+    Circle -&gt; tile position
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rectangle-tile-position" title="Rectangle -&gt; tile position" class="md-nav__link">
+    Rectangle -&gt; tile position
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ellipse-tile-position" title="Ellipse -&gt; tile position" class="md-nav__link">
+    Ellipse -&gt; tile position
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#triangle-tile-position" title="Triangle -&gt; tile position" class="md-nav__link">
+    Triangle -&gt; tile position
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#polygon-tile-position" title="Polygon -&gt; tile position" class="md-nav__link">
+    Polygon -&gt; tile position
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -5322,16 +5418,6 @@
 <span class="c1">// var out = board.worldXYSnapToGrid(worldX, worldY, out);</span>
 </pre></div>
 
-<h3 id="line-tile-position">Line -&gt; tile position<a class="headerlink" href="#line-tile-position" title="Permanent link">&para;</a></h3>
-<p>Get array of tile position along a line defined via (<code>startWorldX</code>, <code>startWorldY</code>) to (<code>endWorldX</code>, <code>endWorldY</code>)</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">lineToTileXYArray</span><span class="p">(</span><span class="nx">startWorldX</span><span class="p">,</span> <span class="nx">startWorldY</span><span class="p">,</span> <span class="nx">endWorldX</span><span class="p">,</span> <span class="nx">endWorldY</span><span class="p">);</span>
-<span class="c1">// var out = board.lineToTileXYArray(startWorldX, startWorldY, endWorldX, endWorldY, out);</span>
-</pre></div>
-
-<ul>
-<li><code>startWorldX</code>, <code>startWorldY</code>, <code>endWorldX</code>, <code>endWorldY</code> : Line</li>
-<li><code>out</code> : An array of tile position</li>
-</ul>
 <h3 id="ring-tile-position">Ring -&gt; tile position<a class="headerlink" href="#ring-tile-position" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get array of tile position around a ring.
@@ -5350,6 +5436,67 @@
 <li><code>radius</code> : Radius of the ring.    </li>
 </ul>
 </li>
+</ul>
+<h3 id="shape-tile-position">Shape -&gt; tile position<a class="headerlink" href="#shape-tile-position" title="Permanent link">&para;</a></h3>
+<h4 id="line-tile-position">Line -&gt; tile position<a class="headerlink" href="#line-tile-position" title="Permanent link">&para;</a></h4>
+<p>Get array of tile position along a line defined via (<code>startWorldX</code>, <code>startWorldY</code>) to (<code>endWorldX</code>, <code>endWorldY</code>)</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">lineToTileXYArray</span><span class="p">(</span><span class="nx">startWorldX</span><span class="p">,</span> <span class="nx">startWorldY</span><span class="p">,</span> <span class="nx">endWorldX</span><span class="p">,</span> <span class="nx">endWorldY</span><span class="p">);</span>
+<span class="c1">// var out = board.lineToTileXYArray(startWorldX, startWorldY, endWorldX, endWorldY, out);</span>
+</pre></div>
+
+<ul>
+<li><code>startWorldX</code>, <code>startWorldY</code>, <code>endWorldX</code>, <code>endWorldY</code> : Line</li>
+<li><code>out</code> : An array of tile position</li>
+</ul>
+<h4 id="circle-tile-position">Circle -&gt; tile position<a class="headerlink" href="#circle-tile-position" title="Permanent link">&para;</a></h4>
+<p>Get array of tile position inside a <a href="../geom-circle/">circle shape</a></p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">circleToTileXYArray</span><span class="p">(</span><span class="nx">circle</span><span class="p">);</span>
+<span class="c1">// var out = board.circleToTileXYArray(circle, out);</span>
+</pre></div>
+
+<ul>
+<li><code>circle</code> : <a href="../geom-circle/">Circle shape</a></li>
+<li><code>out</code> : An array of tile position</li>
+</ul>
+<h4 id="rectangle-tile-position">Rectangle -&gt; tile position<a class="headerlink" href="#rectangle-tile-position" title="Permanent link">&para;</a></h4>
+<p>Get array of tile position inside a <a href="../geom-rectangle/">rectangle shape</a></p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">rectangleToTileXYArray</span><span class="p">(</span><span class="nx">rectangle</span><span class="p">);</span>
+<span class="c1">// var out = board.rectangleToTileXYArray(rectangle, out);</span>
+</pre></div>
+
+<ul>
+<li><code>rectangle</code> : <a href="../geom-rectangle/">Rectangle shape</a></li>
+<li><code>out</code> : An array of tile position</li>
+</ul>
+<h4 id="ellipse-tile-position">Ellipse -&gt; tile position<a class="headerlink" href="#ellipse-tile-position" title="Permanent link">&para;</a></h4>
+<p>Get array of tile position inside a <a href="../geom-ellipse/">ellipse shape</a></p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">ellipseToTileXYArray</span><span class="p">(</span><span class="nx">ellipse</span><span class="p">);</span>
+<span class="c1">// var out = board.ellipseToTileXYArray(ellipse, out);</span>
+</pre></div>
+
+<ul>
+<li><code>ellipse</code> : <a href="../geom-ellipse/">Ellipse shape</a></li>
+<li><code>out</code> : An array of tile position</li>
+</ul>
+<h4 id="triangle-tile-position">Triangle -&gt; tile position<a class="headerlink" href="#triangle-tile-position" title="Permanent link">&para;</a></h4>
+<p>Get array of tile position inside a <a href="../geom-triangle/">triangle shape</a></p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">triangleToTileXYArray</span><span class="p">(</span><span class="nx">triangle</span><span class="p">);</span>
+<span class="c1">// var out = board.triangleToTileXYArray(triangle, out);</span>
+</pre></div>
+
+<ul>
+<li><code>triangle</code> : <a href="../geom-triangle/">Triangle shape</a></li>
+<li><code>out</code> : An array of tile position</li>
+</ul>
+<h4 id="polygon-tile-position">Polygon -&gt; tile position<a class="headerlink" href="#polygon-tile-position" title="Permanent link">&para;</a></h4>
+<p>Get array of tile position inside a <a href="../geom-polygon/">polygon shape</a></p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">polygonToTileXYArray</span><span class="p">(</span><span class="nx">polygon</span><span class="p">);</span>
+<span class="c1">// var out = board.polygonToTileXYArray(polygon, out);</span>
+</pre></div>
+
+<ul>
+<li><code>polygon</code> : <a href="../geom-polygon/">Polygon shape</a></li>
+<li><code>out</code> : An array of tile position</li>
 </ul>
 <h3 id="angle-between-world-position-of-2-tiles">Angle between world position of 2 tiles<a class="headerlink" href="#angle-between-world-position-of-2-tiles" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">radian</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">angleBetween</span><span class="p">(</span><span class="nx">tileXY0</span><span class="p">,</span> <span class="nx">tileXY1</span><span class="p">);</span>

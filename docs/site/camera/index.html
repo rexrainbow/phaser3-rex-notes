@@ -4856,9 +4856,17 @@ An invisible camera will not render anything and will skip input tests.</p>
 
 <h3 id="ignore-game-object">Ignore game object<a class="headerlink" href="#ignore-game-object" title="Permanent link">&para;</a></h3>
 <p>Ignored game objects won't show at that camera.</p>
-<div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">ignore</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>  <span class="c1">// a game object, or an array of game objects</span>
+<div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">ignore</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
 </pre></div>
 
+<ul>
+<li><code>gameObject</code> :<ul>
+<li>A game object</li>
+<li>An array of game objects</li>
+<li>A <a href="../group/">group</a></li>
+</ul>
+</li>
+</ul>
 <h3 id="get-world-position">Get world position<a class="headerlink" href="#get-world-position" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">getWorldPoint</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 <span class="c1">// var out = camera.getWorldPoint(x, y, out);</span>
