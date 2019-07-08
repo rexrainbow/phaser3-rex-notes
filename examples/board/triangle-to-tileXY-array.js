@@ -42,15 +42,15 @@ class Demo extends Phaser.Scene {
                 gridGraphics.strokePoints(points, true);
             }, this);
 
-        var shape = new Phaser.Geom.Circle(0, 0, 120);
+        var shape = Phaser.Geom.Triangle.BuildEquilateral(0, 0, 240);
         this.input
             .on('pointerdown', function (pointer) {
                 Phaser.Actions.Call(board.tileZToChessArray(0), function (gameObject) {
                     gameObject.destroy();
                 });
 
-                shape.setPosition(pointer.x, pointer.y);
-                var tileXYArray = board.circleToTileXYArray(shape);
+                Phaser.Geom.Triangle.CenterOn(shape, pointer.x, pointer.y);
+                var tileXYArray = board.triangleToTileXYArray(shape);
                 var tileXY;
                 for (var i = 0, cnt = tileXYArray.length; i < cnt; i++) {
                     tileXY = tileXYArray[i];
@@ -59,7 +59,7 @@ class Demo extends Phaser.Scene {
 
                 graphics
                     .clear()
-                    .strokeCircleShape(shape);
+                    .strokeTriangleShape(shape);
             }, this)
     }
 
