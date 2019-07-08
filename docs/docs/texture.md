@@ -97,6 +97,7 @@ var frame = scene.textures.getFrame(key, frame);
 
 #### Properties
 
+- `frame.source.image` : Image of texture source.
 - `frame.cutX` : X position within the source image to cut from.
 - `frame.cutY` : Y position within the source image to cut from.
 - `frame.cutWidth` : The width of the area in the source image to cut.

@@ -1,30 +1,65 @@
-var ShapeToTileXYArray = function (startWorldX, startWorldY, shape, containsCallback, out) {
+import IsArray from '../../../utils/object/IsArray.js';
+import RectangleShape from '../../../utils/geom/rectangle/Rectangle.js';
+import PolygonShape from '../../../utils/geom/polygon/Polygon.js';
+import GetAABB from '../../../utils/geom/polygon/GetAABB.js';
+import Clamp from '../../../utils/math/Clamp.js';
+
+var ShapeToTileXYArray = function (shape, containsCallback, searchRectangle, out) {
+    if (IsArray(searchRectangle)) {
+        out = searchRectangle;
+        searchRectangle = undefined;
+    }
+
+    if (searchRectangle === undefined) {
+        if (globSearchRectanlge === undefined) {
+            globSearchRectanlge = new RectangleShape();
+        }
+        searchRectangle = ShapeToRectangle(shape, globSearchRectanlge);
+    }
     if (out === undefined) {
         out = [];
     }
 
-    globStartWorldXY = this.worldXYToTileXY(startWorldX, startWorldY, globStartWorldXY);
-    var isAnyInShape, radius = 0,
-        targetTileXY, targetWorldXY;
-    do {
-        isAnyInShape = false;
-        this.ringToTileXYArray(globStartWorldXY, radius, globRing);
-        for (var i = 0, cnt = globRing.length; i < cnt; i++) {
-            targetTileXY = globRing[i];
-            targetWorldXY = this.tileXYToWorldXY(targetTileXY.x, targetTileXY.y, true);
+    globLeftToptileXY = this.worldXYToTileXY(searchRectangle.left, searchRectangle.top, globLeftToptileXY);
+    globRightBottomTileXY = this.worldXYToTileXY(searchRectangle.right, searchRectangle.bottom, globRightBottomTileXY);
+    var left = globLeftToptileXY.x - 1,
+        top = globLeftToptileXY.y - 1,
+        right = globRightBottomTileXY.x + 1,
+        bottom = globRightBottomTileXY.y + 1;
+    if (!this.infinityMode) {
+        left = Clamp(left, 0, this.width - 1);
+        top = Clamp(top, 0, this.height - 1);
+        right = Clamp(right, 0, this.width - 1);
+        bottom = Clamp(bottom, 0, this.height - 1);
+    }
+
+    var targetWorldXY;
+    for (var x = left; x <= right; x++) {
+        for (var y = top; y <= bottom; y++) {
+            targetWorldXY = this.tileXYToWorldXY(x, y, true);
             if (containsCallback(shape, targetWorldXY.x, targetWorldXY.y)) {
-                isAnyInShape = true;
-                out.push(targetTileXY);
+                out.push({ x: x, y: y });
             }
         }
-        radius++;
-        globRing.length = 0;
-    } while (isAnyInShape)
+    }
 
     return out;
 };
 
-var globStartWorldXY;
-var globRing = [];
+var ShapeToRectangle = function (shape, rectangle) {
+    if (shape instanceof PolygonShape) {
+        rectangle = GetAABB(shape, rectangle);
+    } else {
+        var left = shape.left,
+            top = shape.top,
+            right = shape.right,
+            bottom = shape.bottom;
+        rectangle.setTo(left, top, right - left, bottom - top);
+    }
+    return rectangle;
+}
+
+var globSearchRectanlge;
+var globLeftToptileXY, globRightBottomTileXY;
 
 export default ShapeToTileXYArray;

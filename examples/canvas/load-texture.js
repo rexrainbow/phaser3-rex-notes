@@ -14,8 +14,10 @@ class Demo extends Phaser.Scene {
 
     create() {
         var canvas = this.add.rexCanvas(400, 300)
-            // .loadTexture('mushroom')
-            .loadTexture('characters', 'A-smile')
+            .resize(363, 600)
+            .fill('gray')
+        //.loadTexture('mushroom')
+        //.loadTexture('characters', 'A-smile')
 
         // this.add.image(400, 300, 'characters', 'A-smile')
     }

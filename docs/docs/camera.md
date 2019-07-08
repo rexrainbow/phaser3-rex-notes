@@ -243,8 +243,13 @@ camera.setBackgroundColor(color);
 Ignored game objects won't show at that camera.
 
 ```javascript
-camera.ignore(gameObject);  // a game object, or an array of game objects
+camera.ignore(gameObject);
 ```
+
+- `gameObject` :
+    - A game object
+    - An array of game objects
+    - A [group](group.md)
 
 ### Get world position
 

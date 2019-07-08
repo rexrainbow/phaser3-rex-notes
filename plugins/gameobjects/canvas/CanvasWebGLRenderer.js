@@ -8,6 +8,10 @@ var WebGLRenderer = function (renderer, src, interpolationPercentage, camera, pa
         src.dirty = false;
     }
 
+    if ((src.width === 0) || (src.height === 0)) {
+        return;
+    }
+
     var frame = src.frame;
     var width = frame.width;
     var height = frame.height;

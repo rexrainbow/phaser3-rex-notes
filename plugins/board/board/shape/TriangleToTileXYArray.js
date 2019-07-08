@@ -4,7 +4,7 @@ import Contains from '../../../utils/geom/triangle/Contains.js';
 
 var TriangleToTileXYArray = function (triangle, out) {
     globCenterXY = InCenter(triangle, globCenterXY);
-    return ShapeToTileXYArray.call(this, globCenterXY.x, globCenterXY.y, triangle, Contains, out);
+    return ShapeToTileXYArray.call(this, triangle, Contains, out);
 }
 
 var globCenterXY;

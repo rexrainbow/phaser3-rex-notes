@@ -127,14 +127,21 @@ var Canvas = new Phaser.Class({
                 callback(this.canvas, this.context);
             }
         }
+
         if ((this.width !== this.frame.width) || (this.height !== this.frame.height)) {
             this.frame.setSize(this.width, this.height);
         }
         if (this.renderer.gl) {
-            this.renderer.canvasToTexture(this.canvas, this.frame.source.glTexture, true);
+            this.frame.source.glTexture = this.renderer.canvasToTexture(this.canvas, this.frame.source.glTexture, true);
             this.frame.glTexture = this.frame.source.glTexture;
         }
         this.dirty = false;
+
+        var input = this.input;
+        if (input && !input.customHitArea) {
+            input.hitArea.width = this.width;
+            input.hitArea.height = this.height;
+        }
         return this;
     },
 
@@ -189,32 +196,21 @@ var Canvas = new Phaser.Class({
         return this;
     },
 
-    loadTexture: function (key, frame, resize) {
-        if (resize === undefined) {
-            resize = true;
-        }
-
+    loadTexture: function (key, frame) {
         var textureFrame = this.scene.textures.getFrame(key, frame);
         if (!textureFrame) {
             return this;
         }
 
-        var destCanvas = this.canvas;
-        if (destCanvas.width !== textureFrame.cutWidth) {
-            destCanvas.width = textureFrame.cutWidth;
+        debugger
+        if ((this.width !== textureFrame.cutWidth) && (this.height !== textureFrame.cutHeight)) {
+            this.resize(textureFrame.cutWidth, textureFrame.cutHeight);
+        } else {
+            this.context.clearRect(0, 0, textureFrame.cutWidth, textureFrame.cutHeight);
         }
-        if (destCanvas.height !== textureFrame.cutHeight) {
-            destCanvas.height = textureFrame.cutHeight;
-        }
-        if (resize) {
-            this.setSize(destCanvas.width / this.resolution, destCanvas.height / this.resolution);
-        }
-
-        var destCtx = destCanvas.getContext('2d');
-        destCtx.clearRect(0, 0, destCanvas.width, destCanvas.height);
-        destCtx.drawImage(textureFrame.source.image,
+        this.context.drawImage(textureFrame.source.image,
             textureFrame.cutX, textureFrame.cutY, textureFrame.cutWidth, textureFrame.cutHeight,
-            0, 0, destCanvas.width, destCanvas.height);
+            0, 0, this.canvas.width, this.canvas.height);
         this.dirty = true;
         return this;
     },
@@ -229,6 +225,8 @@ var Canvas = new Phaser.Class({
         this
             .setSize(width, height)
             .updateDisplayOrigin();
+
+        this.dirty = true;
         return this;
     }
 });
