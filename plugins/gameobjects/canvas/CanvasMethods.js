@@ -42,6 +42,7 @@ export default {
         imgData.data[2] = b;
         imgData.data[3] = a;
         this.context.putImageData(imgData, x, y);
+        this.dirty = true;
         return this;
     }
 }

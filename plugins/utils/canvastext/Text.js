@@ -3,6 +3,7 @@ import TextStyle from './TextStyle.js'; // extended
 import CanvasTextKlass from './CanvasText.js';
 import PoolKlass from '../../pool.js';
 import CONST from './const.js';
+import GetGlobImageManager from './GetGlobImageManager.js';
 
 const AddToDOM = Phaser.DOM.AddToDOM;
 const CanvasPool = Phaser.Display.Canvas.CanvasPool;
@@ -11,7 +12,6 @@ const GameObject = Phaser.GameObjects.GameObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const RemoveFromDOM = Phaser.DOM.RemoveFromDOM;
 const SPLITREGEXP = CONST.SPLITREGEXP;
-const Rectangle = Phaser.Geom.Rectangle;
 
 var PensPools = {};
 var Text = new Phaser.Class({
@@ -112,6 +112,7 @@ var Text = new Phaser.Class({
             if (!PensPools.hasOwnProperty(type)) {
                 PensPools[type] = new PoolKlass();
             }
+            CANVASTEXT_CONFIG.parent = this;
             CANVASTEXT_CONFIG.context = this.context;
             CANVASTEXT_CONFIG.parser = parser;
             CANVASTEXT_CONFIG.style = this.style;
@@ -409,8 +410,7 @@ var Text = new Phaser.Class({
 
         var input = this.input;
 
-        if (input && !input.customHitArea)
-        {
+        if (input && !input.customHitArea) {
             input.hitArea.width = this.width;
             input.hitArea.height = this.height;
         }
@@ -495,8 +495,18 @@ var Text = new Phaser.Class({
         set: function (value) {
             this.setLineSpacing(value);
         }
-    }
+    },
 
+    imageManager: {
+        get: function () {
+            return GetGlobImageManager(this.scene.textures);
+        }
+    },
+
+    addImage(key, config) {
+        this.imageManager.add(key, config);
+        return this;
+    },
 });
 
 var CANVASTEXT_CONFIG = {};

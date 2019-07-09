@@ -36,7 +36,7 @@ class PenManager {
         this.maxLinesWidth = undefined;
     }
 
-    addPen(text, x, y, width, prop, newLineMode) {
+    addTextPen(text, x, y, width, prop, newLineMode) {
         var pen = this.PensPool.pop();
         if (pen == null) {
             pen = new PenKlass();
@@ -48,7 +48,16 @@ class PenManager {
         PEN_CONFIG.prop = prop;
         PEN_CONFIG.newLineMode = newLineMode;
         pen.resetFromJSON(PEN_CONFIG);
+        this.addPen(pen);
+        return this;
+    }
 
+    addImagePen(x, y, width, prop) {
+        this.addTextPen('', x, y, width, prop, NO_NEWLINE);
+        return this;
+    }
+
+    addPen(pen) {
         var previousPen = this.lastPen;
         if (previousPen == null) {
             pen.startIndex = 0;

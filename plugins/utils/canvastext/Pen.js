@@ -26,7 +26,7 @@ class Pen {
     }
 
     get plainText() {
-        var txt = this.text;
+        var txt = this.text
         if (this.newLineMode === RAW_NEWLINE) {
             txt += "\n";
         }
@@ -57,6 +57,14 @@ class Pen {
 
     get lastX() {
         return this.x + this.width;
+    }
+
+    get isTextPen() {
+        return (this.text !== '');
+    }
+
+    get isImagePen() {
+        return !!this.prop.img;
     }
 };
 

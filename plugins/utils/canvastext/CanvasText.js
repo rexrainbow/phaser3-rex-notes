@@ -15,6 +15,7 @@ const VALIGN_BOTTOM = CONST.vbottom;
 
 class CanvasText {
     constructor(config) {
+        this.parent = config.parent;
         this.context = GetValue(config, 'context', null);
         this.canvas = this.context.canvas;
         this.parser = GetValue(config, 'parser', null);
@@ -54,8 +55,20 @@ class CanvasText {
             plainText = result.plainText;
             curProp = result.prop;
 
-            // wrap text to lines
-            if (plainText !== '') {
+            if (curProp.img) { // Image tag                
+                var imgWidth = this.imageManager.getOuterWidth(curProp.img);
+                if (imgWidth > 0) {
+                    if ((wrapWidth > 0) && (wrapMode !== NO_WRAP)) {  // Wrap mode
+                        if (wrapWidth < (cursorX + imgWidth)) {
+                            cursorY += lineHeight;
+                            cursorX = 0;
+                        }
+                    }
+                    penManager.addImagePen(cursorX, cursorY, imgWidth, Clone(curProp));
+                    cursorX += imgWidth;
+                }
+            } else if (plainText !== '') {
+                // wrap text to lines
                 // Save the current context.
                 this.context.save();
                 curStyle = this.parser.propToContextStyle(
@@ -65,25 +78,12 @@ class CanvasText {
                 curStyle.buildFont();
                 curStyle.syncFont(canvas, context);
                 curStyle.syncStyle(canvas, context);
-                wrapLines = WrapText(
-                    plainText,
-                    this.getTextWidth,
-                    wrapMode,
-                    wrapWidth,
-                    cursorX
-                );
+                wrapLines = WrapText(plainText, this.getTextWidth, wrapMode, wrapWidth, cursorX);
 
                 // add pens
                 for (var j = 0, jLen = wrapLines.length; j < jLen; j++) {
                     var n = wrapLines[j];
-                    penManager.addPen(
-                        n.text,
-                        cursorX,
-                        cursorY,
-                        n.width,
-                        Clone(curProp),
-                        n.newLineMode
-                    );
+                    penManager.addTextPen(n.text, cursorX, cursorY, n.width, Clone(curProp), n.newLineMode);
 
                     if (n.newLineMode !== NO_NEWLINE) {
                         cursorX = 0;
@@ -113,8 +113,8 @@ class CanvasText {
 
         // draw lines
         var defatultStyle = this.defatultStyle;
-        startX += (defatultStyle.strokeThickness / 2);
-        startY += (defatultStyle.strokeThickness / 2) + defatultStyle.metrics.ascent;
+        startX += this.startXOffset;
+        startY += this.startYOffset;
         var halign = defatultStyle.halign,
             valign = defatultStyle.valign;
 
@@ -205,6 +205,9 @@ class CanvasText {
     }
 
     drawPen(pen, offsetX, offsetY) {
+        offsetX += pen.x;
+        offsetY += pen.y;
+
         var canvas = this.canvas;
         var context = this.context;
         context.save();
@@ -217,38 +220,61 @@ class CanvasText {
         curStyle.syncFont(canvas, context);
         curStyle.syncStyle(canvas, context);
 
-        offsetX += pen.x;
-        offsetY += pen.y;
-        if (this.autoRound) {
-            offsetX = Math.round(offsetX);
-            offsetY = Math.round(offsetY);
-        }
-
-        var text = pen.text;
-        var penWidth = pen.width;
-
         // underline
+        var underLineOffsetX = offsetX;
+        var underLineOffsetY = offsetY + curStyle.underlineOffset;
+        if (this.autoRound) {
+            underLineOffsetX = Math.round(underLineOffsetX);
+            underLineOffsetY = Math.round(underLineOffsetY);
+        }
         this.drawUnderline(
-            offsetX, // x
-            (offsetY + curStyle.underlineOffset), // y
-            penWidth, // width
+            underLineOffsetX, // x
+            underLineOffsetY, // y
+            pen.width, // width
             curStyle.underlineThickness, // thinkness
             curStyle.underlineColor // color
         );
 
-        // draw image: TODO
 
-        // draw text
-        if (curStyle.strokeThickness) {
-            curStyle.syncShadow(context, curStyle.shadowStroke);
+        if (pen.isImagePen) {
+            // draw image
+            var imageManager = this.parent.imageManager;
+            var imgKey = pen.prop.img;
+            var imgData = imageManager.get(imgKey);
+            var frame = imageManager.getFrame(imgKey);
 
-            context.strokeText(text, offsetX, offsetY);
-        }
+            var imageOffsetX = offsetX + imgData.left;
+            var imageOffsetY = offsetY - this.startYOffset + imgData.y;
+            if (this.autoRound) {
+                imageOffsetX = Math.round(imageOffsetX);
+                imageOffsetY = Math.round(imageOffsetY);
+            }
 
-        if (curStyle.color && (curStyle.color !== 'none')) {
-            curStyle.syncShadow(context, curStyle.shadowFill);
+            context.drawImage(
+                frame.source.image,
+                frame.cutX, frame.cutY, frame.cutWidth, frame.cutHeight,
+                imageOffsetX, imageOffsetY, imgData.width, imgData.height
+            );
+        } else {
+            var textOffsetX = offsetX;
+            var textOffsetY = offsetY;
+            if (this.autoRound) {
+                textOffsetX = Math.round(textOffsetX);
+                textOffsetY = Math.round(textOffsetY);
+            }
 
-            context.fillText(text, offsetX, offsetY);
+            // draw text
+            if (curStyle.strokeThickness) {
+                curStyle.syncShadow(context, curStyle.shadowStroke);
+
+                context.strokeText(pen.text, textOffsetX, textOffsetY);
+            }
+
+            if (curStyle.color && (curStyle.color !== 'none')) {
+                curStyle.syncShadow(context, curStyle.shadowFill);
+
+                context.fillText(pen.text, textOffsetX, textOffsetY);
+            }
         }
 
         context.restore();
@@ -266,6 +292,16 @@ class CanvasText {
             this._tmpPenManager.destroy();
             this._tmpPenManager = undefined;
         }
+    }
+
+    get startXOffset() {
+        var defatultStyle = this.defatultStyle;
+        return (defatultStyle.strokeThickness / 2);
+    }
+
+    get startYOffset() {
+        var defatultStyle = this.defatultStyle;
+        return (defatultStyle.strokeThickness / 2) + defatultStyle.metrics.ascent;
     }
 
     get lines() {
@@ -292,6 +328,10 @@ class CanvasText {
             linesHeight -= this.defatultStyle.lineSpacing;
         }
         return linesHeight;
+    }
+
+    get imageManager() {
+        return this.parent.imageManager;
     }
 
     newPenManager() {
