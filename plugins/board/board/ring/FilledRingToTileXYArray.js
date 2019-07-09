@@ -1,9 +1,22 @@
-var FilledRingToTileXYArray = function (centerTileXY, radius, out) {
+import IsArray from '../../../utils/object/IsArray.js';
+
+var FilledRingToTileXYArray = function (centerTileXY, radius, nearToFar, out) {
+    if (IsArray(nearToFar)) {
+        out = nearToFar;
+        nearToFar = undefined;
+    }
+
+    if (nearToFar === undefined) {
+        nearToFar = true;
+    }
     if (out === undefined) {
         out = [];
     }
+
+    var level;
     for (var i = 0; i <= radius; i++) {
-        this.ringToTileXYArray(centerTileXY, i, out);
+        level = (nearToFar) ? i : (radius - i);
+        this.ringToTileXYArray(centerTileXY, level, out);
     }
     return out;
 }

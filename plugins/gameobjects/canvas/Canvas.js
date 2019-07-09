@@ -1,6 +1,8 @@
 // copy from Phaser.GameObjects.Text
 
 import Render from './CanvasRender.js';
+import CanvasMethods from './CanvasMethods.js';
+import TextureMethods from './TextureMethods.js';
 
 const CanvasPool = Phaser.Display.Canvas.CanvasPool;
 const Components = Phaser.GameObjects.Components;
@@ -25,7 +27,9 @@ var Canvas = new Phaser.Class({
         Components.Tint,
         Components.Transform,
         Components.Visible,
-        Render
+        Render,
+        CanvasMethods,
+        TextureMethods,
     ],
 
     initialize:
@@ -80,7 +84,7 @@ var Canvas = new Phaser.Class({
                     this.dirty = true;
                 }, this);
             }
-            
+
             this.dirty = true;
         },
 
@@ -96,120 +100,8 @@ var Canvas = new Phaser.Class({
         return this;
     },
 
-    clear: function () {
-        var canvas = this.canvas;
-        var ctx = this.context;
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        this.dirty = true;
-        return this;
-    },
-
-    fill: function (color) {
-        var canvas = this.canvas;
-        var ctx = this.context;
-        ctx.fillStyle = color;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        this.dirty = true;
-        return this;
-    },
-
     preDestroy: function () {
         CanvasPool.remove(this.canvas);
-    },
-
-    updateTexture: function (callback, scope) {
-        if (callback) {
-            if (scope) {
-                callback.call(scope, this.canvas, this.context);
-            } else {
-                callback(this.canvas, this.context);
-            }
-        }
-
-        if ((this.canvas.width !== this.frame.width) || (this.canvas.height !== this.frame.height)) {
-            this.frame.setSize(this.canvas.width, this.canvas.height);
-        }
-        if (this.renderer.gl) {
-            this.frame.source.glTexture = this.renderer.canvasToTexture(this.canvas, this.frame.source.glTexture, true);
-            this.frame.glTexture = this.frame.source.glTexture;
-        }
-        this.dirty = false;
-
-        var input = this.input;
-        if (input && !input.customHitArea) {
-            input.hitArea.width = this.width;
-            input.hitArea.height = this.height;
-        }
-        return this;
-    },
-
-    generateTexture: function (key, x, y, width, height) {
-        var srcCanvas = this.canvas;
-        var sys = this.scene.sys;
-        var renderer = sys.game.renderer;
-        var texture;
-
-        if (x === undefined) {
-            x = 0;
-        }
-
-        if (y === undefined) {
-            y = 0;
-        }
-
-        if (width === undefined) {
-            width = srcCanvas.width;
-        } else {
-            width *= this.resolution;
-        }
-
-        if (height === undefined) {
-            height = srcCanvas.height;
-        } else {
-            height *= this.resolution;
-        }
-
-
-        if (sys.textures.exists(key)) {
-            texture = sys.textures.get(key);
-        } else {
-            texture = sys.textures.createCanvas(key, width, height);
-        }
-
-        var destCanvas = texture.getSourceImage();
-        if (destCanvas.width !== width) {
-            destCanvas.width = width;
-        }
-        if (destCanvas.height !== height) {
-            destCanvas.height = height;
-        }
-
-        var destCtx = destCanvas.getContext('2d');
-        destCtx.clearRect(0, 0, width, height);
-        destCtx.drawImage(srcCanvas, x, y, width, height);
-        if (renderer.gl && texture) {
-            renderer.canvasToTexture(destCanvas, texture.source[0].glTexture, true, 0);
-        }
-
-        return this;
-    },
-
-    loadTexture: function (key, frame) {
-        var textureFrame = this.scene.textures.getFrame(key, frame);
-        if (!textureFrame) {
-            return this;
-        }
-
-        if ((this.width !== textureFrame.cutWidth) || (this.height !== textureFrame.cutHeight)) {
-            this.resize(textureFrame.cutWidth, textureFrame.cutHeight);
-        } else {
-            this.context.clearRect(0, 0, textureFrame.cutWidth, textureFrame.cutHeight);
-        }
-        this.context.drawImage(textureFrame.source.image,
-            textureFrame.cutX, textureFrame.cutY, textureFrame.cutWidth, textureFrame.cutHeight,
-            0, 0, this.canvas.width, this.canvas.height);
-        this.dirty = true;
-        return this;
     },
 
     resize: function (width, height) {

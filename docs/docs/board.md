@@ -322,10 +322,13 @@ var gridWorldXY = board.worldXYSnapToGrid(worldX, worldY);
 - Get array of tile position within a filled ring.
     ```javascript
     var out = board.filledRingToTileXYArray(centerTileXY, radius);
+    var out = board.filledRingToTileXYArray(centerTileXY, radius, nearToFar);
     // var out = board.filledRingToTileXYArray(centerTileXY, radius, out);
+    // var out = board.filledRingToTileXYArray(centerTileXY, radius, nearToFar, out);
     ```
     - `centerTileXY` : Tile position `{x, y}` of ring center.
-    - `radius` : Radius of the ring.    
+    - `radius` : Radius of the ring.
+    - `nearToFar` : From near ring to far ring. Default value is `true`.
 
 ### Shape -> tile position
 
@@ -338,8 +341,17 @@ var out = board.lineToTileXYArray(startWorldX, startWorldY, endWorldX, endWorldY
 // var out = board.lineToTileXYArray(startWorldX, startWorldY, endWorldX, endWorldY, out);
 ```
 
-- `startWorldX`, `startWorldY`, `endWorldX`, `endWorldY` : Line
+- `startWorldX`, `startWorldY`, `endWorldX`, `endWorldY` : Start and end pointer of a line
 - `out` : An array of tile position
+
+or
+
+```javascript
+var out = board.lineToTileXYArray(line);
+// var out = board.lineToTileXYArray(line, out);
+```
+
+- `line` : [Line object](geom-line.md)
 
 #### Circle -> tile position
 

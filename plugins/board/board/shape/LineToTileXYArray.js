@@ -3,6 +3,15 @@ import Linear from '../../../utils/math/Linear.js';
 import AreTileXYEqual from '../../utils/AreTileXYEqual.js';
 
 var LineToTileXYArray = function (startX, startY, endX, endY, out) {
+    if (typeof (startX) !== 'number') {
+        var line = startX;
+        out = startY;
+        startX = line.x1;
+        startY = line.y1;
+        endX = line.x2;
+        endY = line.y2;
+    }
+
     if (out === undefined) {
         out = [];
     }
