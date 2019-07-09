@@ -112,12 +112,13 @@ var Text = new Phaser.Class({
             if (!PensPools.hasOwnProperty(type)) {
                 PensPools[type] = new PoolKlass();
             }
-            CANVASTEXT_CONFIG.parent = this;
-            CANVASTEXT_CONFIG.context = this.context;
-            CANVASTEXT_CONFIG.parser = parser;
-            CANVASTEXT_CONFIG.style = this.style;
-            CANVASTEXT_CONFIG.pensPool = PensPools[type];
-            this.canvasText = new CanvasTextKlass(CANVASTEXT_CONFIG);
+            this.canvasText = new CanvasTextKlass({
+                parent: this,
+                context: this.context,
+                parser: parser,
+                style: this.style,
+                pensPool: PensPools[type]
+            });
 
             //this.initRTL();
 
@@ -508,7 +509,5 @@ var Text = new Phaser.Class({
         return this;
     },
 });
-
-var CANVASTEXT_CONFIG = {};
 
 export default Text;
