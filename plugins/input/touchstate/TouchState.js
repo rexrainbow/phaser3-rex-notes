@@ -154,7 +154,7 @@ class TouchState {
         this.emit('touchmove', pointer, localX, localY);
     }
 
-    preupdate(time, delta) {
+    postupdate(time, delta) {
         this.justMoved = false;
     }
 
