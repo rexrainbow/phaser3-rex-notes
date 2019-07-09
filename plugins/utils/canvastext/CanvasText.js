@@ -57,16 +57,14 @@ class CanvasText {
 
             if (curProp.img) { // Image tag                
                 var imgWidth = this.imageManager.getOuterWidth(curProp.img);
-                if (imgWidth > 0) {
-                    if ((wrapWidth > 0) && (wrapMode !== NO_WRAP)) {  // Wrap mode
-                        if (wrapWidth < (cursorX + imgWidth)) {
-                            cursorY += lineHeight;
-                            cursorX = 0;
-                        }
+                if ((wrapWidth > 0) && (wrapMode !== NO_WRAP)) {  // Wrap mode
+                    if (wrapWidth < (cursorX + imgWidth)) {
+                        cursorY += lineHeight;
+                        cursorX = 0;
                     }
-                    penManager.addImagePen(cursorX, cursorY, imgWidth, Clone(curProp));
-                    cursorX += imgWidth;
                 }
+                penManager.addImagePen(cursorX, cursorY, imgWidth, Clone(curProp));
+                cursorX += imgWidth;
             } else if (plainText !== '') {
                 // wrap text to lines
                 // Save the current context.
@@ -187,21 +185,63 @@ class CanvasText {
         context.fillRect(0, 0, canvas.width, canvas.height);
     }
 
-    drawUnderline(x, y, width, thickness, color) {
-        if (thickness <= 0) {
-            return;
+    drawUnderline(x, y, width, style) {
+        y += style.underlineOffset;
+        if (this.autoRound) {
+            x = Math.round(x);
+            y = Math.round(y);
         }
 
         var context = this.context;
         var savedLineCap = context.lineCap;
         context.lineCap = 'butt';
         context.beginPath();
-        context.strokeStyle = color;
-        context.lineWidth = thickness;
+        context.strokeStyle = style.underlineColor;
+        context.lineWidth = style.underlineThickness;
         context.moveTo(x, y);
         context.lineTo((x + width), y);
         context.stroke();
         context.lineCap = savedLineCap;
+    }
+
+    drawText(x, y, text, style) {
+        if (this.autoRound) {
+            x = Math.round(x);
+            y = Math.round(y);
+        }
+
+        var context = this.context;
+        if (style.strokeThickness) {
+            style.syncShadow(context, style.shadowStroke);
+
+            context.strokeText(text, x, y);
+        }
+
+        if (style.color && (style.color !== 'none')) {
+            style.syncShadow(context, style.shadowFill);
+
+            context.fillText(text, x, y);
+        }
+    }
+
+    drawImage(x, y, imgKey, style) {
+        var imageManager = this.parent.imageManager;
+        var imgData = imageManager.get(imgKey);
+        var frame = imageManager.getFrame(imgKey);
+
+        x += imgData.left;
+        y += - this.startYOffset + imgData.y;
+        if (this.autoRound) {
+            x = Math.round(x);
+            y = Math.round(y);
+        }
+
+        var context = this.context;
+        context.drawImage(
+            frame.source.image,
+            frame.cutX, frame.cutY, frame.cutWidth, frame.cutHeight,
+            x, y, imgData.width, imgData.height
+        );
     }
 
     drawPen(pen, offsetX, offsetY) {
@@ -220,61 +260,19 @@ class CanvasText {
         curStyle.syncFont(canvas, context);
         curStyle.syncStyle(canvas, context);
 
-        // underline
-        var underLineOffsetX = offsetX;
-        var underLineOffsetY = offsetY + curStyle.underlineOffset;
-        if (this.autoRound) {
-            underLineOffsetX = Math.round(underLineOffsetX);
-            underLineOffsetY = Math.round(underLineOffsetY);
+        // Underline
+        if ((curStyle.underlineThickness > 0) && (pen.width > 0)) {
+            this.drawUnderline(offsetX, offsetY, pen.width, curStyle);
         }
-        this.drawUnderline(
-            underLineOffsetX, // x
-            underLineOffsetY, // y
-            pen.width, // width
-            curStyle.underlineThickness, // thinkness
-            curStyle.underlineColor // color
-        );
 
+        // Text
+        if (pen.isTextPen) {
+            this.drawText(offsetX, offsetY, pen.text, curStyle);
+        }
 
+        // Image
         if (pen.isImagePen) {
-            // draw image
-            var imageManager = this.parent.imageManager;
-            var imgKey = pen.prop.img;
-            var imgData = imageManager.get(imgKey);
-            var frame = imageManager.getFrame(imgKey);
-
-            var imageOffsetX = offsetX + imgData.left;
-            var imageOffsetY = offsetY - this.startYOffset + imgData.y;
-            if (this.autoRound) {
-                imageOffsetX = Math.round(imageOffsetX);
-                imageOffsetY = Math.round(imageOffsetY);
-            }
-
-            context.drawImage(
-                frame.source.image,
-                frame.cutX, frame.cutY, frame.cutWidth, frame.cutHeight,
-                imageOffsetX, imageOffsetY, imgData.width, imgData.height
-            );
-        } else {
-            var textOffsetX = offsetX;
-            var textOffsetY = offsetY;
-            if (this.autoRound) {
-                textOffsetX = Math.round(textOffsetX);
-                textOffsetY = Math.round(textOffsetY);
-            }
-
-            // draw text
-            if (curStyle.strokeThickness) {
-                curStyle.syncShadow(context, curStyle.shadowStroke);
-
-                context.strokeText(pen.text, textOffsetX, textOffsetY);
-            }
-
-            if (curStyle.color && (curStyle.color !== 'none')) {
-                curStyle.syncShadow(context, curStyle.shadowFill);
-
-                context.fillText(pen.text, textOffsetX, textOffsetY);
-            }
+            this.drawImage(offsetX, offsetY, pen.prop.img, curStyle);
         }
 
         context.restore();
