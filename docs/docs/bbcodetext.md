@@ -17,15 +17,16 @@ Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
 
 ### BBCode
 
-- bold: `[b]text[/b]`
-- italic: `[i]text[/i]`
-- color: `[color=red]text[/color]`
-- size: `[size=18]text[/size]`
-- stroke: `[stroke]text[/stroke]`
-    - stroke with color setting: `[stroke=red]text[/stroke]`
-- shadow: `[shadow]text[/shadow]`
-- underline: `[u]text[/u]`
-    - underline with color setting: `[u=red]text[/u]`
+- Bold : `[b]text[/b]`
+- Italic : `[i]text[/i]`
+- Color : `[color=red]text[/color]`
+- Size : `[size=18]text[/size]`
+- Stroke : `[stroke]text[/stroke]`
+    - Stroke with color setting : `[stroke=red]text[/stroke]`
+- Shadow : `[shadow]text[/shadow]`
+- Underline : `[u]text[/u]`
+    - Underline with color setting : `[u=red]text[/u]`
+- Image : `[img=imgKey]`
 
 ### Install plugin
 
@@ -295,6 +296,35 @@ txt.setFontStyle(style);
         txt.setShadowStroke(enabled);
         txt.setShadowFill(enabled);
         ```
+
+### Image
+
+- Uses texture key as image key by default.
+- Add image render information
+    ```javascript
+    txt.addImage(imgKey, {
+        key: textureKey,
+        frame: frameName,
+        width: undefined,
+        height: undefined,
+        y: 0,
+        left: 0,
+        right: 0
+    });
+    ```
+    - `imgKey` : Image key used in text content, i.e. `[img=imgKey]`.
+    - `key` : Texture key.
+    - `frame` : Frame name.
+    - `width` : Render width, set `undefined` to use the cut width of frame.
+    - `height` : Render height, set `undefined` to use the cut height of frame.
+    - `y` : Extra offset y.
+    - `left` : Left padding space.
+    - `Right` : Right padding space.
+- Add some image render informations
+    ```javascript
+    txt.addImage(data);
+    ```
+    - `data` : `{imgKey, config}`
 
 ### Line spacing
 
