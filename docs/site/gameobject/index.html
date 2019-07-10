@@ -4726,9 +4726,15 @@
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">alpha</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">alpha</span><span class="p">;</span>  <span class="c1">// 0~1</span>
 </pre></div></li>
 <li>Set
-    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">alpha</span> <span class="o">=</span> <span class="nx">alpha</span><span class="p">;</span>
-<span class="nx">gameObject</span><span class="p">.</span><span class="nx">setAlpha</span><span class="p">(</span><span class="nx">alpha</span><span class="p">);</span>
-<span class="nx">gameObject</span><span class="p">.</span><span class="nx">setAlpha</span><span class="p">(</span><span class="nx">topLeft</span><span class="p">,</span> <span class="nx">topRight</span><span class="p">,</span> <span class="nx">bottomLeft</span><span class="p">,</span> <span class="nx">bottomRight</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setAlpha</span><span class="p">(</span><span class="nx">alpha</span><span class="p">);</span>
+<span class="c1">// gameObject.alpha = alpha;</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setAlpha</span><span class="p">(</span><span class="nx">topLeft</span><span class="p">,</span> <span class="nx">topRight</span><span class="p">,</span> <span class="nx">bottomLeft</span><span class="p">,</span> <span class="nx">bottomRight</span><span class="p">);</span>
+<span class="c1">// gameObject.alphaTopLeft = alpha;</span>
+<span class="c1">// gameObject.alphaTopRight = alpha;</span>
+<span class="c1">// gameObject.alphaBottomLeft = alpha;</span>
+<span class="c1">// gameObject.alphaBottomRight = alpha;</span>
 </pre></div></li>
 </ul>
 <h3 id="flipx-flipy">FlipX, FlipY<a class="headerlink" href="#flipx-flipy" title="Permanent link">&para;</a></h3>

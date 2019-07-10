@@ -1232,6 +1232,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#pixel-color" title="Pixel color" class="md-nav__link">
+    Pixel color
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4486,6 +4493,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#pixel-color" title="Pixel color" class="md-nav__link">
+    Pixel color
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4604,6 +4618,10 @@
 <li>Get canvas elemet
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">canvasElem</span> <span class="o">=</span> <span class="nx">canvas</span><span class="p">.</span><span class="nx">getCanvas</span><span class="p">();</span>
 <span class="kd">var</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">canvasElem</span><span class="p">.</span><span class="nx">getContext</span><span class="p">(</span><span class="s1">&#39;2d&#39;</span><span class="p">);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">canvaesElem</span> <span class="o">=</span> <span class="nx">canvas</span><span class="p">.</span><span class="nx">canvas</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">canvas</span><span class="p">.</span><span class="nx">context</span><span class="p">;</span>
 </pre></div></li>
 <li>Draw on <a href="https://www.w3schools.com/html/html5_canvas.asp">context</a></li>
 </ol>
@@ -4630,18 +4648,37 @@
     <div class="codehilite"><pre><span></span><span class="nx">canvas</span><span class="p">.</span><span class="nx">loadTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">resize</span><span class="p">);</span>
 </pre></div></li>
 </ul>
+<h3 id="pixel-color">Pixel color<a class="headerlink" href="#pixel-color" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get color
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">canvas</span><span class="p">.</span><span class="nx">getPixel</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>color</code> : <a href="../color/">Color object</a><ul>
+<li><code>color.red</code>, <code>color.green</code>, <code>color.blue</code>, <code>color.alpha</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Set color
+    <div class="codehilite"><pre><span></span><span class="nx">canvas</span><span class="p">.</span><span class="nx">setPixel</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">r</span><span class="p">,</span> <span class="nx">g</span><span class="p">,</span> <span class="nx">b</span><span class="p">);</span>
+<span class="c1">// canvas.setPixel(x, y, r, g, b, a);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">canvas</span><span class="p">.</span><span class="nx">setPixel</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">color</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>r</code>, <code>g</code>, <code>b</code>, <code>a</code> : Integer number between 0 ~ 255.</li>
+<li><code>color</code> : <a href="../color/">Color object</a></li>
+</ul>
+</li>
+</ul>
 <h2 id="compare-with-graphics-object">Compare with <a href="../graphics/">Graphics object</a><a class="headerlink" href="#compare-with-graphics-object" title="Permanent link">&para;</a></h2>
 <ul>
-<li>
-<p>Drawing method</p>
-<ul>
+<li>Drawing method<ul>
 <li>This canvas object draws stuff on canvas in WEBGL or CANVAS render mode.  </li>
 <li>Graphics object draws stuff on webgl render pipeline in WEBGL render mode.</li>
 </ul>
 </li>
-<li>
-<p>Size</p>
-<ul>
+<li>Size<ul>
 <li>This canvas object has size (width, height) and origin.  </li>
 <li>Graphics object does not have size and origin.</li>
 </ul>

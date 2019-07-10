@@ -4798,7 +4798,7 @@
 <div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
 </pre></div>
 
-<p>Also destroy all child game objects.</p>
+<p>Also destroy all children.</p>
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
 <p>This container game object inherits from <a href="../zone/">Zone</a>.</p>
 <h3 id="addpin-child">Add(pin) child<a class="headerlink" href="#addpin-child" title="Permanent link">&para;</a></h3>
@@ -4833,13 +4833,20 @@
 </ul>
 </div>
 <h3 id="remove-child">Remove child<a class="headerlink" href="#remove-child" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>  <span class="c1">// child: a game object</span>
-</pre></div>
-
-<p>Or remove all children</p>
-<div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
-</pre></div>
-
+<ul>
+<li>Remove a child
+    <div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
+<span class="c1">// container.remove(child, destroyChild);</span>
+</pre></div><ul>
+<li><code>child</code> : Game object</li>
+<li><code>destroyChild</code> : Set true to destroy child. Default is <code>false</code>.</li>
+</ul>
+</li>
+<li>Remove all children
+    <div class="codehilite"><pre><span></span><span class="nx">container</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
+<span class="c1">// container.clear(destroyChild);</span>
+</pre></div></li>
+</ul>
 <h3 id="get-children">Get children<a class="headerlink" href="#get-children" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get children in this container-lite

@@ -877,6 +877,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#image" title="Image" class="md-nav__link">
+    Image
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#line-spacing" title="Line spacing" class="md-nav__link">
     Line spacing
   </a>
@@ -4524,6 +4531,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#image" title="Image" class="md-nav__link">
+    Image
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#line-spacing" title="Line spacing" class="md-nav__link">
     Line spacing
   </a>
@@ -4590,19 +4604,20 @@
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/bbcodetext">Sample code</a></p>
 <h3 id="bbcode">BBCode<a class="headerlink" href="#bbcode" title="Permanent link">&para;</a></h3>
 <ul>
-<li>bold: <code>[b]text[/b]</code></li>
-<li>italic: <code>[i]text[/i]</code></li>
-<li>color: <code>[color=red]text[/color]</code></li>
-<li>size: <code>[size=18]text[/size]</code></li>
-<li>stroke: <code>[stroke]text[/stroke]</code><ul>
-<li>stroke with color setting: <code>[stroke=red]text[/stroke]</code></li>
+<li>Bold : <code>[b]text[/b]</code></li>
+<li>Italic : <code>[i]text[/i]</code></li>
+<li>Color : <code>[color=red]text[/color]</code></li>
+<li>Size : <code>[size=18]text[/size]</code></li>
+<li>Stroke : <code>[stroke]text[/stroke]</code><ul>
+<li>Stroke with color setting : <code>[stroke=red]text[/stroke]</code></li>
 </ul>
 </li>
-<li>shadow: <code>[shadow]text[/shadow]</code></li>
-<li>underline: <code>[u]text[/u]</code><ul>
-<li>underline with color setting: <code>[u=red]text[/u]</code></li>
+<li>Shadow : <code>[shadow]text[/shadow]</code></li>
+<li>Underline : <code>[u]text[/u]</code><ul>
+<li>Underline with color setting : <code>[u=red]text[/u]</code></li>
 </ul>
 </li>
+<li>Image : <code>[img=imgKey]</code></li>
 </ul>
 <h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
 <p>Install plugin in <a href="../game/#configuration">configuration of game</a></p>
@@ -4864,6 +4879,37 @@
 <span class="nx">txt</span><span class="p">.</span><span class="nx">setShadowStroke</span><span class="p">(</span><span class="nx">enabled</span><span class="p">);</span>
 <span class="nx">txt</span><span class="p">.</span><span class="nx">setShadowFill</span><span class="p">(</span><span class="nx">enabled</span><span class="p">);</span>
 </pre></div></li>
+</ul>
+</li>
+</ul>
+<h3 id="image">Image<a class="headerlink" href="#image" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Uses texture key as image key by default.</li>
+<li>Add image render information
+    <div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">addImage</span><span class="p">(</span><span class="nx">imgKey</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">key</span><span class="o">:</span> <span class="nx">textureKey</span><span class="p">,</span>
+    <span class="nx">frame</span><span class="o">:</span> <span class="nx">frameName</span><span class="p">,</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">left</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">right</span><span class="o">:</span> <span class="mi">0</span>
+<span class="p">});</span>
+</pre></div><ul>
+<li><code>imgKey</code> : Image key used in text content, i.e. <code>[img=imgKey]</code>.</li>
+<li><code>key</code> : Texture key.</li>
+<li><code>frame</code> : Frame name.</li>
+<li><code>width</code> : Render width, set <code>undefined</code> to use the cut width of frame.</li>
+<li><code>height</code> : Render height, set <code>undefined</code> to use the cut height of frame.</li>
+<li><code>y</code> : Extra offset y.</li>
+<li><code>left</code> : Left padding space.</li>
+<li><code>Right</code> : Right padding space.</li>
+</ul>
+</li>
+<li>Add some image render informations
+    <div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">addImage</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>data</code> : <code>{imgKey, config}</code></li>
 </ul>
 </li>
 </ul>

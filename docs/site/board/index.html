@@ -5430,10 +5430,13 @@
 </li>
 <li>Get array of tile position within a filled ring.
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">filledRingToTileXYArray</span><span class="p">(</span><span class="nx">centerTileXY</span><span class="p">,</span> <span class="nx">radius</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">filledRingToTileXYArray</span><span class="p">(</span><span class="nx">centerTileXY</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">nearToFar</span><span class="p">);</span>
 <span class="c1">// var out = board.filledRingToTileXYArray(centerTileXY, radius, out);</span>
+<span class="c1">// var out = board.filledRingToTileXYArray(centerTileXY, radius, nearToFar, out);</span>
 </pre></div><ul>
 <li><code>centerTileXY</code> : Tile position <code>{x, y}</code> of ring center.</li>
-<li><code>radius</code> : Radius of the ring.    </li>
+<li><code>radius</code> : Radius of the ring.</li>
+<li><code>nearToFar</code> : From near ring to far ring. Default value is <code>true</code>.</li>
 </ul>
 </li>
 </ul>
@@ -5445,8 +5448,16 @@
 </pre></div>
 
 <ul>
-<li><code>startWorldX</code>, <code>startWorldY</code>, <code>endWorldX</code>, <code>endWorldY</code> : Line</li>
+<li><code>startWorldX</code>, <code>startWorldY</code>, <code>endWorldX</code>, <code>endWorldY</code> : Start and end pointer of a line</li>
 <li><code>out</code> : An array of tile position</li>
+</ul>
+<p>or</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">lineToTileXYArray</span><span class="p">(</span><span class="nx">line</span><span class="p">);</span>
+<span class="c1">// var out = board.lineToTileXYArray(line, out);</span>
+</pre></div>
+
+<ul>
+<li><code>line</code> : <a href="../geom-line/">Line object</a></li>
 </ul>
 <h4 id="circle-tile-position">Circle -&gt; tile position<a class="headerlink" href="#circle-tile-position" title="Permanent link">&para;</a></h4>
 <p>Get array of tile position inside a <a href="../geom-circle/">circle shape</a></p>
