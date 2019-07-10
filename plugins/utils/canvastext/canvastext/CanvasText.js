@@ -92,11 +92,10 @@ class CanvasText {
                 wrapLines = WrapText(plainText, this.getTextWidth, wrapMode, wrapWidth, cursorX);
 
                 // add pens
-                var n, prop;
+                var n;
                 for (var j = 0, jLen = wrapLines.length; j < jLen; j++) {
                     n = wrapLines[j];
-                    prop = (n.text !== '') ? Clone(curProp) : null;
-                    penManager.addTextPen(n.text, cursorX, cursorY, n.width, prop, n.newLineMode);
+                    penManager.addTextPen(n.text, cursorX, cursorY, n.width, Clone(curProp), n.newLineMode);
 
                     if (n.newLineMode !== NO_NEWLINE) {
                         cursorX = 0;

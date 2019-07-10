@@ -62,7 +62,8 @@ class PenManager {
         var previousPen = this.lastPen;
         var x = (previousPen) ? previousPen.lastX : 0;
         var y = (previousPen) ? previousPen.y : 0;
-        this.addTextPen('', x, y, 0, null, WRAPPED_NEWLINE);
+        var prop = (previousPen) ? Clone(previousPen.prop) : null;
+        this.addTextPen('', x, y, 0, prop, WRAPPED_NEWLINE);
         return this;
     }
 
