@@ -314,11 +314,15 @@ var data = cache.get(key);
 scene.load.plugin(key, url, true); // start plugin when loaded
 ```
 
+- `url` : File url or class instance.
+
 #### Scene plugin
 
 ```javascript
 scene.load.scenePlugin(key, url, systemKey, sceneKey);
 ```
+
+- `url` : File url or class instance.
 
 #### File pack
 
