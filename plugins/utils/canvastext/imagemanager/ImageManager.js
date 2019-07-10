@@ -7,14 +7,18 @@ class ImageManager {
     }
 
     add(key, config) {
-        if (typeof (key) !== 'string') {
+        if (typeof (key) === 'string') {
+            this._add(key, config);
+        } else if (Array.isArray(key)) {
+            var data = key;
+            for (var i = 0, cnt = data.length; i < cnt; i++) {
+                this._add(data[i]);
+            }
+        } else {
             var data = key;
             for (var key in data) {
                 this._add(key, data[key]);
             }
-            return this;
-        } else {
-            this._add(key, config);
         }
         return this;
     }
@@ -62,6 +66,11 @@ class ImageManager {
     }
 
     get(key) {
+        if (!this.images.hasOwnProperty(key)) {
+            if (this.textureManager.exists(key)) {
+                this.add(key);
+            }
+        }
         return this.images[key];
     }
 

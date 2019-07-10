@@ -1,4 +1,4 @@
-import CONST from './const.js';
+import CONST from '../const.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const NO_NEWLINE = CONST.NO_NEWLINE;

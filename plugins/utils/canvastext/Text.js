@@ -1,9 +1,9 @@
-import Render from './TextRender.js';
-import TextStyle from './TextStyle.js'; // extended
-import CanvasTextKlass from './CanvasText.js';
+import Render from './render/TextRender.js';
+import TextStyle from './textstyle/TextStyle.js'; // extended
+import CanvasTextKlass from './canvastext/CanvasText.js';
 import PoolKlass from '../../pool.js';
 import CONST from './const.js';
-import GetGlobImageManager from './GetGlobImageManager.js';
+import GetGlobImageManager from './imagemanager/GetGlobImageManager.js';
 
 const AddToDOM = Phaser.DOM.AddToDOM;
 const CanvasPool = Phaser.Display.Canvas.CanvasPool;

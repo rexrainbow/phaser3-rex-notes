@@ -1,17 +1,12 @@
+import DrawMethods from './DrawMethods.js';
 import PenManagerKlass from './PenManager.js';
-import CONST from './const.js';
+import CONST from '../const.js';
 import WrapText from './WrapText.js';
-import Clone from '../object/Clone.js';
+import Clone from '../../object/Clone.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const NO_WRAP = CONST.NO_WRAP;
 const NO_NEWLINE = CONST.NO_NEWLINE;
-const HALIGN_LEFT = CONST.hleft;
-const HALIGN_CENTER = CONST.hcenter;
-const HALIGN_RIGHT = CONST.hright;
-const VALIGN_TOP = CONST.vtop;
-const VALIGN_CENTER = CONST.vcenter;
-const VALIGN_BOTTOM = CONST.vbottom;
 
 class CanvasText {
     constructor(config) {
@@ -29,6 +24,22 @@ class CanvasText {
         var context = this.context;
         this.getTextWidth = function (text) {
             return context.measureText(text).width;
+        }
+    }
+
+    destroy() {
+        this.context = undefined;
+        this.canvas = undefined;
+        this.parser = undefined;
+        this.defatultStyle = undefined;
+
+        if (this.penManager) {
+            this.penManager.destroy();
+            this.penManager = undefined;
+        }
+        if (this._tmpPenManager) {
+            this._tmpPenManager.destroy();
+            this._tmpPenManager = undefined;
         }
     }
 
@@ -59,12 +70,14 @@ class CanvasText {
                 var imgWidth = this.imageManager.getOuterWidth(curProp.img);
                 if ((wrapWidth > 0) && (wrapMode !== NO_WRAP)) {  // Wrap mode
                     if (wrapWidth < (cursorX + imgWidth)) {
+                        penManager.addNewLinePen();
                         cursorY += lineHeight;
                         cursorX = 0;
                     }
                 }
                 penManager.addImagePen(cursorX, cursorY, imgWidth, Clone(curProp));
                 cursorX += imgWidth;
+
             } else if (plainText !== '') {
                 // wrap text to lines
                 // Save the current context.
@@ -79,9 +92,11 @@ class CanvasText {
                 wrapLines = WrapText(plainText, this.getTextWidth, wrapMode, wrapWidth, cursorX);
 
                 // add pens
+                var n, prop;
                 for (var j = 0, jLen = wrapLines.length; j < jLen; j++) {
-                    var n = wrapLines[j];
-                    penManager.addTextPen(n.text, cursorX, cursorY, n.width, Clone(curProp), n.newLineMode);
+                    n = wrapLines[j];
+                    prop = (n.text !== '') ? Clone(curProp) : null;
+                    penManager.addTextPen(n.text, cursorX, cursorY, n.width, prop, n.newLineMode);
 
                     if (n.newLineMode !== NO_NEWLINE) {
                         cursorX = 0;
@@ -92,204 +107,12 @@ class CanvasText {
 
                 }
                 this.context.restore();
+
             }
 
         }
 
         return penManager;
-    }
-
-    draw(startX, startY, boxWidth, boxHeight, penManager) {
-        if (penManager === undefined) {
-            penManager = this.penManager;
-        }
-        var context = this.context;
-        context.save();
-
-        // this.clear();
-        this.drawBackground();
-
-        // draw lines
-        var defatultStyle = this.defatultStyle;
-        startX += this.startXOffset;
-        startY += this.startYOffset;
-        var halign = defatultStyle.halign,
-            valign = defatultStyle.valign;
-
-        var lineWidth, lineHeight = defatultStyle.lineHeight;
-        var lines = penManager.lines;
-        var totalLinesNum = lines.length,
-            maxLines = defatultStyle.maxLines;
-        var drawLinesNum, drawLineStartIdx, drawLineEndIdx;
-        if ((maxLines > 0) && (totalLinesNum > maxLines)) {
-            drawLinesNum = maxLines;
-            if (valign === VALIGN_CENTER) { // center
-                drawLineStartIdx = Math.floor((totalLinesNum - drawLinesNum) / 2);
-            } else if (valign === VALIGN_BOTTOM) { // bottom
-                drawLineStartIdx = totalLinesNum - drawLinesNum;
-            } else {
-                drawLineStartIdx = 0;
-            }
-        } else {
-            drawLinesNum = totalLinesNum;
-            drawLineStartIdx = 0;
-        }
-        drawLineEndIdx = drawLineStartIdx + drawLinesNum;
-
-        var offsetX, offsetY;
-        if (valign === VALIGN_CENTER) { // center
-            offsetY = Math.max((boxHeight - (drawLinesNum * lineHeight)) / 2, 0);
-        } else if (valign === VALIGN_BOTTOM) { // bottom
-            offsetY = Math.max(boxHeight - (drawLinesNum * lineHeight) - 2, 0);
-        } else {
-            offsetY = 0;
-        }
-        offsetY += startY;
-        for (var lineIdx = drawLineStartIdx; lineIdx < drawLineEndIdx; lineIdx++) {
-            lineWidth = penManager.getLineWidth(lineIdx);
-            if (lineWidth === 0) {
-                continue;
-            }
-
-            if (halign === HALIGN_CENTER) { // center
-                offsetX = (boxWidth - lineWidth) / 2;
-            } else if (halign === HALIGN_RIGHT) { // right
-                offsetX = boxWidth - lineWidth;
-            } else {
-                offsetX = 0;
-            }
-            offsetX += startX;
-
-            var pens = lines[lineIdx];
-            for (var penIdx = 0, pensLen = pens.length; penIdx < pensLen; penIdx++) {
-                this.drawPen(pens[penIdx], offsetX, offsetY);
-            }
-        }
-
-        context.restore();
-    }
-
-    clear() {
-        var canvas = this.canvas;
-        this.context.clearRect(0, 0, canvas.width, canvas.height);
-    }
-
-    drawBackground() {
-        var color = this.defatultStyle.backgroundColor;
-        if (color === null) {
-            return;
-        }
-        var context = this.context;
-        var canvas = this.canvas;
-        context.fillStyle = color;
-        context.fillRect(0, 0, canvas.width, canvas.height);
-    }
-
-    drawUnderline(x, y, width, style) {
-        y += style.underlineOffset;
-        if (this.autoRound) {
-            x = Math.round(x);
-            y = Math.round(y);
-        }
-
-        var context = this.context;
-        var savedLineCap = context.lineCap;
-        context.lineCap = 'butt';
-        context.beginPath();
-        context.strokeStyle = style.underlineColor;
-        context.lineWidth = style.underlineThickness;
-        context.moveTo(x, y);
-        context.lineTo((x + width), y);
-        context.stroke();
-        context.lineCap = savedLineCap;
-    }
-
-    drawText(x, y, text, style) {
-        if (this.autoRound) {
-            x = Math.round(x);
-            y = Math.round(y);
-        }
-
-        var context = this.context;
-        if (style.strokeThickness) {
-            style.syncShadow(context, style.shadowStroke);
-
-            context.strokeText(text, x, y);
-        }
-
-        if (style.color && (style.color !== 'none')) {
-            style.syncShadow(context, style.shadowFill);
-
-            context.fillText(text, x, y);
-        }
-    }
-
-    drawImage(x, y, imgKey, style) {
-        var imageManager = this.parent.imageManager;
-        var imgData = imageManager.get(imgKey);
-        var frame = imageManager.getFrame(imgKey);
-
-        x += imgData.left;
-        y += - this.startYOffset + imgData.y;
-        if (this.autoRound) {
-            x = Math.round(x);
-            y = Math.round(y);
-        }
-
-        var context = this.context;
-        context.drawImage(
-            frame.source.image,
-            frame.cutX, frame.cutY, frame.cutWidth, frame.cutHeight,
-            x, y, imgData.width, imgData.height
-        );
-    }
-
-    drawPen(pen, offsetX, offsetY) {
-        offsetX += pen.x;
-        offsetY += pen.y;
-
-        var canvas = this.canvas;
-        var context = this.context;
-        context.save();
-
-        var curStyle = this.parser.propToContextStyle(
-            this.defatultStyle,
-            pen.prop
-        );
-        curStyle.buildFont();
-        curStyle.syncFont(canvas, context);
-        curStyle.syncStyle(canvas, context);
-
-        // Underline
-        if ((curStyle.underlineThickness > 0) && (pen.width > 0)) {
-            this.drawUnderline(offsetX, offsetY, pen.width, curStyle);
-        }
-
-        // Text
-        if (pen.isTextPen) {
-            this.drawText(offsetX, offsetY, pen.text, curStyle);
-        }
-
-        // Image
-        if (pen.isImagePen) {
-            this.drawImage(offsetX, offsetY, pen.prop.img, curStyle);
-        }
-
-        context.restore();
-    }
-
-    destroy() {
-        this.context = undefined;
-        this.canvas = undefined;
-        this.parser = undefined;
-        this.defatultStyle = undefined;
-
-        this.penManager.destroy();
-        this.penManager = undefined;
-        if (this._tmpPenManager) {
-            this._tmpPenManager.destroy();
-            this._tmpPenManager = undefined;
-        }
     }
 
     get startXOffset() {
@@ -333,10 +156,11 @@ class CanvasText {
     }
 
     newPenManager() {
-        PENSMANAGER_CONFIG.pensPool = this.pensPool;
-        PENSMANAGER_CONFIG.tagToText = this.parser.propToTagText;
-        PENSMANAGER_CONFIG.tagToTextScope = this.parser;
-        return new PenManagerKlass(PENSMANAGER_CONFIG);
+        return new PenManagerKlass({
+            pensPool: this.pensPool,
+            tagToText: this.parser.propToTagText,
+            tagToTextScope: this.parser
+        });
     }
 
     get tmpPenManager() {
@@ -433,6 +257,9 @@ class CanvasText {
     }
 };
 
-var PENSMANAGER_CONFIG = {};
+Object.assign(
+    CanvasText.prototype,
+    DrawMethods
+);
 
 export default CanvasText;

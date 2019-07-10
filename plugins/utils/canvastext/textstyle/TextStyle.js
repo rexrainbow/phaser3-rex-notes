@@ -5,7 +5,7 @@
  */
 
 import MeasureText from './MeasureText.js';
-import CONST from './const.js';
+import CONST from '../const.js';
 
 const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
 const GetValue = Phaser.Utils.Objects.GetValue;

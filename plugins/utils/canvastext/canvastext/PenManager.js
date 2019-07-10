@@ -1,11 +1,12 @@
-import PoolKlass from '../../pool.js';
+import PoolKlass from '../../../pool.js';
 import PenKlass from './Pen.js';
-import CONST from './const.js';
-import Clone from '../object/Clone.js';
-import NOOP from '../object/NOOP.js';
+import CONST from '../const.js';
+import Clone from '../../object/Clone.js';
+import NOOP from '../../object/NOOP.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 const NO_NEWLINE = CONST.NO_NEWLINE;
+const WRAPPED_NEWLINE = CONST.WRAPPED_NEWLINE;
 
 var PensPool = new PoolKlass(); // default pens pool
 var LinesPool = new PoolKlass(); // default lines pool
@@ -54,6 +55,14 @@ class PenManager {
 
     addImagePen(x, y, width, prop) {
         this.addTextPen('', x, y, width, prop, NO_NEWLINE);
+        return this;
+    }
+
+    addNewLinePen() {
+        var previousPen = this.lastPen;
+        var x = (previousPen) ? previousPen.lastX : 0;
+        var y = (previousPen) ? previousPen.y : 0;
+        this.addTextPen('', x, y, 0, null, WRAPPED_NEWLINE);
         return this;
     }
 
@@ -146,8 +155,9 @@ class PenManager {
 
     getLineWidth(i) {
         var line = this.lines[i];
-        if (!line)
+        if (!line) {
             return 0;
+        }
 
         var lastPen = line[line.length - 1];
         if (lastPen == null) {

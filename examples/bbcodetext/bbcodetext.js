@@ -7,14 +7,17 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() {}
+    preload() {
+        this.load.image('key', 'assets/images/key.png');
+    }
 
     create() {
         var s1 = `123456[color=blue]AA[/color]
 [i][color=red]B
 B[/color][b]CC[/b][/i]DD[size=10]D[size=20]D[size=30][u]D[size=40]D[/u][size=50]D[/size]D
-[size=20][u=red]EEE[/u][/size][shadow]FFF[/shadow][color=none][stroke]GGG[/stroke][stroke=blue]GGG[/stroke]`;
-        var text = this.add.rexBBCodeText(100, 100, s1, {
+[size=20][u=red]EEE[/u][/size][shadow]FFF[/shadow][color=none][stroke]GGG[/stroke][stroke=blue]GGG[/stroke]
+[color=white][size=36]This is a [img=key]`;
+        var text = this.add.rexBBCodeText(100, 30, s1, {
             backgroundColor: '#555',
             fontSize: '60px',
             align: 'right',

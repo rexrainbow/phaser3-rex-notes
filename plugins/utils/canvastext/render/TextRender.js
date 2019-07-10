@@ -4,8 +4,8 @@
  * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
  */
 
-var renderWebGL = require('../object/NOOP');
-var renderCanvas = require('../object/NOOP');
+var renderWebGL = require('../../object/NOOP');
+var renderCanvas = require('../../object/NOOP');
 
 if (typeof WEBGL_RENDERER)
 {
