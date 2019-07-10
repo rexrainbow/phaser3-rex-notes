@@ -101,7 +101,7 @@ var container = scene.make.rexContainerLite({
 container.destroy();
 ```
 
-Also destroy all child game objects.
+Also destroy all children.
 
 ### Other properties
 
@@ -138,15 +138,18 @@ These world properties of children will be changed with container.
 
 ### Remove child
 
-```javascript
-container.remove(child);  // child: a game object
-```
-
-Or remove all children
-
-```javascript
-container.clear();
-```
+- Remove a child
+    ```javascript
+    container.remove(child);
+    // container.remove(child, destroyChild);
+    ```
+    - `child` : Game object
+    - `destroyChild` : Set true to destroy child. Default is `false`.
+- Remove all children
+    ```javascript
+    container.clear();
+    // container.clear(destroyChild);
+    ```
 
 ### Get children
 

@@ -1,11 +1,11 @@
 export default {
-    remove(gameObject) {
-        this.children.remove(gameObject);
+    remove(gameObject, destroyChild) {
+        this.children.remove(gameObject, false, destroyChild);
         return this;
     },
 
-    clear() {
-        this.children.clear();
+    clear(destroyChild) {
+        this.children.clear(false, destroyChild);
         return this;
     },
 };

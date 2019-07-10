@@ -17,14 +17,21 @@ class Cell {
     //    return this;
     //}
 
-    destroy() {
-        var table = this.parent;
-        if (this.deltaHeight !== 0) {
-            table.nonZeroDeltaHeightCount--;
+    destroy(fromScene) {
+        if (fromScene === undefined) {
+            fromScene = false;
+        }
+
+        if (!fromScene) {
+            var table = this.parent;
+            if (this.deltaHeight !== 0) {
+                table.nonZeroDeltaHeightCount--;
+            }
+            this.destroyContainer();
         }
 
         this.data = undefined;
-        this.destroyContainer();
+        this.container = null;
         this.parent = undefined;
         this.parentContainer = undefined;
     }
@@ -63,6 +70,7 @@ class Cell {
             this.container.destroy();
             this.container = null;
         }
+        return this;        
     }
 
     popContainer() {

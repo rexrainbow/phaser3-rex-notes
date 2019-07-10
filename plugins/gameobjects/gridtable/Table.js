@@ -23,9 +23,9 @@ class Table {
         return this;
     }
 
-    destroy() {
+    destroy(fromScene) {
         for (var i = 0, cnt = this.cells.length; i < cnt; i++) {
-            this.freeCell(this.cells[i]);
+            this.freeCell(this.cells[i], fromScene);
         }
         this.cells = undefined;
         this.parent = undefined;
@@ -319,7 +319,7 @@ class Table {
         return this.parent;
     }
 
-    freeCell(cell) {
+    freeCell(cell, fromScene) {
         if (typeof (cell) === 'number') {
             cell = this.cells[cell];
         }
@@ -328,7 +328,7 @@ class Table {
             return this;
         }
 
-        cell.destroy();
+        cell.destroy(fromScene);
         CellsPool.push(cell);
         return this;
     }
