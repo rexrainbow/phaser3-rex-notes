@@ -314,6 +314,12 @@ var data = cache.get(key);
 scene.load.plugin(key, url, true); // start plugin when loaded
 ```
 
+#### Scene plugin
+
+```javascript
+scene.load.scenePlugin(key, url, systemKey, sceneKey);
+```
+
 #### File pack
 
 Load files in JSON format.
