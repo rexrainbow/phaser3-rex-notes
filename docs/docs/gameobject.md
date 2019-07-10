@@ -62,9 +62,16 @@ Base class of all game object in phaser.
     ```
 - Set
     ```javascript
-    gameObject.alpha = alpha;
     gameObject.setAlpha(alpha);
+    // gameObject.alpha = alpha;
+    ```
+    or
+    ```javascript
     gameObject.setAlpha(topLeft, topRight, bottomLeft, bottomRight);
+    // gameObject.alphaTopLeft = alpha;
+    // gameObject.alphaTopRight = alpha;
+    // gameObject.alphaBottomLeft = alpha;
+    // gameObject.alphaBottomRight = alpha;
     ```
 
 ### FlipX, FlipY
