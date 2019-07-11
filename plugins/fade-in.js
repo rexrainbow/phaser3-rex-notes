@@ -1,6 +1,6 @@
 import Fade from './fade.js';
 
-var FadeIn = function (gameObject, duration, endAlpha) {
+var FadeIn = function (gameObject, duration, endAlpha, fade) {
     if (endAlpha === undefined) {
         endAlpha = gameObject.alpha;
     }
@@ -8,8 +8,14 @@ var FadeIn = function (gameObject, duration, endAlpha) {
     defaultConfig.start = 0;
     defaultConfig.end = endAlpha;
     defaultConfig.duration = duration;
-    var fade = new Fade(gameObject, defaultConfig);
-    fade.start();
+
+    if (fade === undefined) {
+        fade = new Fade(gameObject, defaultConfig);
+    } else {
+        fade.resetFromJSON(defaultConfig);
+    }
+    fade.restart();
+
     return fade;
 };
 

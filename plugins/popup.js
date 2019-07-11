@@ -26,7 +26,7 @@ var PopUp = function (gameObject, duration, orientation, ease, scale) {
     } else {
         scale.resetFromJSON(defaultConfig);
     }
-    scale.start();
+    scale.restart();
 
     return scale;
 };

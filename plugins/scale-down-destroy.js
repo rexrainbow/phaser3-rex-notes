@@ -10,7 +10,7 @@ var ScaleDownDestroy = function (gameObject, duration, orientation, ease, destro
         destroyMode = true;
     }
 
-    defaultConfig.mode = 1;
+    defaultConfig.mode = (destroyMode) ? 1 : 0;
     switch (orientation) {
         case 'x':
             defaultConfig.end = {
@@ -34,7 +34,7 @@ var ScaleDownDestroy = function (gameObject, duration, orientation, ease, destro
     } else {
         scale.resetFromJSON(defaultConfig);
     }
-    scale.start();
+    scale.restart();
 
     return scale;
 };

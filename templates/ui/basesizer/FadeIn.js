@@ -9,6 +9,6 @@ export default function (duration) {
         duration = GetValue(config, 'duration', undefined);
     }
 
-    FadeIn(this, duration);
+    this._fade = FadeIn(this, duration, this._fade);
     return this;
 }

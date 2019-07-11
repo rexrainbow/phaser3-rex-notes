@@ -71,6 +71,11 @@ class Toast extends Label {
             case Const.fadeIn:
                 callback = FadeInCallback;
                 break;
+            default:
+                if (!callback) {
+                    callback = NOOP;
+                }
+                break;
         }
 
         this.transitInCallback = callback;
@@ -89,6 +94,11 @@ class Toast extends Label {
                 break;
             case Const.fadeOut:
                 callback = FadeOutCallback;
+                break;
+            default:
+                if (!callback) {
+                    callback = NOOP;
+                }
                 break;
         }
 
