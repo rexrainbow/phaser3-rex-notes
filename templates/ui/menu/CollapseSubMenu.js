@@ -6,7 +6,6 @@ var CollapseSubMenu = function () {
     var subMenu = this.childrenMap.subMenu;
     this.childrenMap.subMenu = undefined;
     this.remove(subMenu);
-    subMenu.collapseSubMenu();
     subMenu.collapse();
     return this;
 }

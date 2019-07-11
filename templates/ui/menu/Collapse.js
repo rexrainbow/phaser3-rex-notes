@@ -4,6 +4,7 @@ var Collapse = function () {
     } else {
         this.destroy();
     }
+    this.collapseSubMenu();
     return this;
 }
 export default Collapse;
