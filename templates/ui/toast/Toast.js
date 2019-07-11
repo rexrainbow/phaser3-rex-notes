@@ -27,6 +27,8 @@ class Toast extends Label {
 
         this.player = new Player(this);
         this.messages = [];
+
+        this.setVisible(false);
     }
 
     destroy(fromScene) {
