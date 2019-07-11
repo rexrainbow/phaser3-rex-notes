@@ -1,5 +1,6 @@
 import Clock from '../../../clock.js';
 import Clone from '../../../utils/object/Clone.js';
+import GetEventEmitter from '../../../utils/system/GetEventEmitter.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -27,7 +28,10 @@ class Recorder {
     }
 
     boot() {
-        this.scene.events.on('destroy', this.destroy, this);
+        var parentEE = GetEventEmitter(this.parent);
+        if (parentEE) {
+            parentEE.on('destroy', this.destroy, this);
+        }
     }
 
     shutdown() {

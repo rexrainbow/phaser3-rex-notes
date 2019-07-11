@@ -3,6 +3,8 @@ import GetSceneObject from '../../../utils/system/GetSceneObject.js';
 import GetValue from '../../../utils/object/GetValue.js';
 import ArrayCopy from '../../../utils/array/Copy.js';
 import RunCommands from '../../../runcommands.js';
+import GetEventEmitter from '../../../utils/system/GetEventEmitter.js';
+import IsArray from '../../../utils/object/IsArray.js';
 
 class Player extends TickTask {
     constructor(parent, config) {
@@ -47,7 +49,11 @@ class Player extends TickTask {
 
     boot() {
         super.boot();
-        this.scene.events.on('destroy', this.destroy, this);
+
+        var parentEE = GetEventEmitter(this.parent);
+        if (parentEE) {
+            parentEE.on('destroy', this.destroy, this);
+        }
     }
 
     shutdown() {
@@ -122,6 +128,7 @@ class Player extends TickTask {
         this.state = 1;
         this.nextDt = this.getNextDt(0);
         this.seek(startAt);
+        this.update();
         return this;
     }
 
@@ -163,20 +170,22 @@ class Player extends TickTask {
             return this;
         }
 
-        if ((this.timeScale === 0) || (delta === 0)) {
-            return this;
+        if (time !== undefined) {
+            if ((this.timeScale === 0) || (delta === 0)) {
+                return this;
+            }
+
+            this.now += (delta * this.timeScale);
         }
 
-        this.now += (delta * this.timeScale);
         if (this.nextDt > this.now) {
             return this;
         }
-
         while (1) {
             // run a row
             var item = this.commands[this.index];
             var command = item[1];
-            if (typeof (command) === 'string') { // [dt, fnName, param0, param1, ...]
+            if (!IsArray(command)) { // [dt, fnName, param0, param1, ...]
                 command = ArrayCopy(CMD, item, 1);
             }
             RunCommands(command, this.scope);

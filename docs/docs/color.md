@@ -58,7 +58,7 @@ var rgb = Phaser.Display.Color.IntegerToRGB(color);
 
 ### Color object
 
-#### create color object
+#### Create color object
 
 - Create via r,g,b,a components
     ```javascript

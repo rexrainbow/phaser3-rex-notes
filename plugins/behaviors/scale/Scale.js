@@ -22,7 +22,7 @@ class Scale {
             GetAdvancedValue(o, 'end', 0)
         );
         this.setDelay(GetAdvancedValue(o, 'delay', 0));
-        this.setFadeOutTime(GetAdvancedValue(o, 'duration', 1000));
+        this.setDuration(GetAdvancedValue(o, 'duration', 1000));
         this.setEase(GetValue(o, 'ease', undefined));
         return this;
     }
@@ -86,7 +86,7 @@ class Scale {
         return this;
     }
 
-    setFadeOutTime(time) {
+    setDuration(time) {
         this.duration = time;
         return this;
     }
@@ -121,6 +121,11 @@ class Scale {
         return this;
     }
 
+    restart() {
+        this.stop().start();
+        return this;
+    }
+
     stop() {
         if (!this.tween) {
             return this;
@@ -132,9 +137,11 @@ class Scale {
     }
 
     complete() {
+        this.stop();
         if (this.mode === 1) {
             this.gameObject.destroy();
         }
+        return this;
     }
 
 }

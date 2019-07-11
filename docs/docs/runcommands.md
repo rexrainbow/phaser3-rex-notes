@@ -23,6 +23,10 @@ runCommands(commands, scope);
     ```javascript
     [fnName, param0, param1, ...]
     ```
+    or
+    ```javascript
+    [callback, param0, param1, ...]
+    ```
 - Commands in nested array :
     ```javascript
     [
@@ -37,4 +41,8 @@ runCommands(commands, scope);
 - Run command :
     ```javascript
     scope[fnName].call(scope, param0, param1 ...)
+    ```
+    or
+    ```javascript
+    callback.call(scope, param0, param1 ...)
     ```

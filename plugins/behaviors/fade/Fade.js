@@ -22,7 +22,7 @@ class Fade {
             GetAdvancedValue(o, 'end', 0)
         );
         this.setDelay(GetAdvancedValue(o, 'delay', 0));
-        this.setFadeOutTime(GetAdvancedValue(o, 'duration', 1000));
+        this.setDuration(GetAdvancedValue(o, 'duration', 1000));
         return this;
     }
 
@@ -70,7 +70,7 @@ class Fade {
         this.delay = time;
         return this;
     }
-    setFadeOutTime(time) {
+    setDuration(time) {
         this.duration = time;
         return this;
     }
@@ -103,6 +103,11 @@ class Fade {
         return this;
     }
 
+    restart() {
+        this.stop().start();
+        return this;
+    }
+
     stop() {
         if (!this.tween) {
             return this;
@@ -114,9 +119,11 @@ class Fade {
     }
 
     complete() {
+        this.stop();
         if (this.mode === 1) {
             this.gameObject.destroy();
         }
+        return this;
     }
 
 }

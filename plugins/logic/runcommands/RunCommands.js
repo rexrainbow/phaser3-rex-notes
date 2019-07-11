@@ -1,5 +1,6 @@
 import ArrayCopy from '../../utils/array/Copy.js';
 import TypeConvert from '../../utils/string/TypeConvert.js';
+import IsArray from '../../utils/object/IsArray.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -7,9 +8,7 @@ var runCommands = function (queue, scope, config) {
     var reverse = GetValue(config, 'reverse', false);
 
     var retVal;
-    if (typeof (queue[0]) === 'string') {
-        retVal = runCommand(queue, scope, config);
-    } else {
+    if (IsArray(queue[0])) {
         if (!reverse) {
             for (var i = 0, len = queue.length; i < len; i++) {
                 retVal = runCommands(queue[i], scope, config);
@@ -19,6 +18,8 @@ var runCommands = function (queue, scope, config) {
                 retVal = runCommands(queue[i], scope, config);
             }
         }
+    } else {
+        retVal = runCommand(queue, scope, config);
     }
 
     return retVal;
@@ -46,9 +47,14 @@ var runCommand = function (cmd, scope, config) {
         }
     }
 
-    var fn = scope[fnName];
-    if (fn == null) {
-        fn = GetValue(scope, fnName, null);
+    var fn;
+    if (typeof (fnName) === 'string') {
+        fn = scope[fnName];
+        if (fn == null) {
+            fn = GetValue(scope, fnName, null);
+        }
+    } else {
+        fn = fnName;
     }
 
     var retValue = fn.apply(scope, ARGS);

@@ -23,6 +23,7 @@ import TextBlockFactory from './textblock/TextBlockFactory.js';
 import TextAreaFactory from './textarea/TextAreaFactory.js';
 import ScrollableBlockFactory from './scrollableblock/ScrollableBlockFactory.js';
 import ScrollablePanelFactory from './scrollablepanel/ScrollablePanelFactory.js';
+import ToastFactory from './toast/ToastFactory.js';
 import ChartFactory from './chart/ChartFactory.js';
 import VideoFactory from './video/VideoFactory.js';
 import VideoCanvasFactory from './video/VideoCanvasFactory.js';

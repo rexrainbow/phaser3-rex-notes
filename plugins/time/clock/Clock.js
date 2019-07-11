@@ -1,5 +1,6 @@
 import TickTask from '../../utils/ticktask/TickTask.js';
 import GetSceneObject from '../../utils/system/GetSceneObject.js';
+import GetEventEmitter from '../../utils/system/GetEventEmitter.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -32,8 +33,9 @@ class Clock extends TickTask {
     boot() {
         super.boot();
 
-        if (this.parent.on) {
-            this.parent.on('destroy', this.destroy, this);
+        var parentEE = GetEventEmitter(this.parent);
+        if (parentEE) {
+            parentEE.on('destroy', this.destroy, this);
         }
     }
 

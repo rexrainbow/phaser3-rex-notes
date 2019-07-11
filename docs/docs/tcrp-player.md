@@ -81,9 +81,11 @@ player.load(commands, scope, {
     - Format of each row :
         ```javascript
         [dt, fnName, param0, param1, ...]
+        // [dt, callback, param0, param1, ...]
         ```
         ```javascript
         [dt, [fnName, param0, param1, ...]]
+        // [dt, [callback, param0, param1, ...]]
         ```
         ```javascript
         [dt, [command0, command1, ...]]

@@ -1,8 +1,5 @@
 import TCRPPlugin from '../../plugins/tcrp-plugin.js';
 
-const PlayerPlugin = TCRPPlugin.Player;
-
-
 class ActionKlass {
     constructor(scene) {
         this.scene = scene;
