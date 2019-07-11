@@ -117,12 +117,11 @@ class Toast extends Label {
             .setScale(1)
             .setVisible(true);
         if (typeof (callback) === 'string') {
-            this
-                .setText(callback)
-                .layout();
+            this.setText(callback);
         } else {
             callback(this);
         }
+        this.layout();
 
         var commands = [
             [
