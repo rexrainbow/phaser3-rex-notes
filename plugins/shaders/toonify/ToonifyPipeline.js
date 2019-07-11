@@ -7,7 +7,6 @@ const Color = Phaser.Display.Color;
 
 class ToonifyPipeline extends TextureTintPipeline {
     constructor(scene, key, config) {
-        console.log(frag);
         var game = scene.game;
         super({
             game: game,
