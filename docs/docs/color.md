@@ -8,16 +8,21 @@ Get color value, built-in methods of phaser.
 
 ### Get color integer
 
+- Hex string, or color integer
+    ```javascript
+    var color = Phaser.Display.Color.ValueToColor(input);
+    ```
+    - `input` : Hex string, or color integer
 - RGB to color
     ```javascript
     var color = Phaser.Display.Color.GetColor(red, green, blue);
     ```
-    - red, green, blue : 0 ~ 255
+    - `red`, `green`, `blue` : 0 ~ 255
 - RGBA to color
     ```javascript
     var color = Phaser.Display.Color.GetColor32(red, green, blue, alpha);
     ```
-    - red, green, blue, alpha : 0 ~ 255
+    - `red`, `green`, `blue`, `alpha` : 0 ~ 255
 - Hex string to color
     ```javascript
     var color = Phaser.Display.Color.HexStringToColor(hex).color;
@@ -34,7 +39,7 @@ Get color value, built-in methods of phaser.
     ```javascript
     var color = Phaser.Display.Color.HSVToRGB(h, s, v).color;
     ```
-    - h, s, v : 0 ~ 1
+    - `h`, `s`, `v` : 0 ~ 1
 
 ### Color integer to RGB
 
@@ -42,8 +47,8 @@ Get color value, built-in methods of phaser.
 var rgb = Phaser.Display.Color.IntegerToRGB(color);
 ```
 
-- color : Color integer (`0xAARRGGBB`)
-- rgb : JSON object (`{r, g, b, a}`)
+- `color` : Color integer (`0xAARRGGBB`)
+- `rgb` : JSON object (`{r, g, b, a}`)
 
 ### HSV color wheel
 
@@ -120,6 +125,8 @@ var rgb = Phaser.Display.Color.IntegerToRGB(color);
     ```javascript
     color.random(min, max);
     ```
+    - `min` : 0 ~ 255. Default value is 0.
+    - `max` : 0 ~ 255. Default value is 255.
 - Set to random gray
     ```javascript
     color.randomGray();

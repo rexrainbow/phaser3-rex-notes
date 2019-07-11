@@ -3237,8 +3237,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#create-color-object" title="create color object" class="md-nav__link">
-    create color object
+  <a href="#create-color-object" title="Create color object" class="md-nav__link">
+    Create color object
   </a>
   
 </li>
@@ -4471,8 +4471,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#create-color-object" title="create color object" class="md-nav__link">
-    create color object
+  <a href="#create-color-object" title="Create color object" class="md-nav__link">
+    Create color object
   </a>
   
 </li>
@@ -4551,16 +4551,22 @@
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <h3 id="get-color-integer">Get color integer<a class="headerlink" href="#get-color-integer" title="Permanent link">&para;</a></h3>
 <ul>
+<li>Hex string, or color integer
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Display</span><span class="p">.</span><span class="nx">Color</span><span class="p">.</span><span class="nx">ValueToColor</span><span class="p">(</span><span class="nx">input</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>input</code> : Hex string, or color integer</li>
+</ul>
+</li>
 <li>RGB to color
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Display</span><span class="p">.</span><span class="nx">Color</span><span class="p">.</span><span class="nx">GetColor</span><span class="p">(</span><span class="nx">red</span><span class="p">,</span> <span class="nx">green</span><span class="p">,</span> <span class="nx">blue</span><span class="p">);</span>
 </pre></div><ul>
-<li>red, green, blue : 0 ~ 255</li>
+<li><code>red</code>, <code>green</code>, <code>blue</code> : 0 ~ 255</li>
 </ul>
 </li>
 <li>RGBA to color
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Display</span><span class="p">.</span><span class="nx">Color</span><span class="p">.</span><span class="nx">GetColor32</span><span class="p">(</span><span class="nx">red</span><span class="p">,</span> <span class="nx">green</span><span class="p">,</span> <span class="nx">blue</span><span class="p">,</span> <span class="nx">alpha</span><span class="p">);</span>
 </pre></div><ul>
-<li>red, green, blue, alpha : 0 ~ 255</li>
+<li><code>red</code>, <code>green</code>, <code>blue</code>, <code>alpha</code> : 0 ~ 255</li>
 </ul>
 </li>
 <li>Hex string to color
@@ -4582,7 +4588,7 @@
 <li>HSV to color
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Display</span><span class="p">.</span><span class="nx">Color</span><span class="p">.</span><span class="nx">HSVToRGB</span><span class="p">(</span><span class="nx">h</span><span class="p">,</span> <span class="nx">s</span><span class="p">,</span> <span class="nx">v</span><span class="p">).</span><span class="nx">color</span><span class="p">;</span>
 </pre></div><ul>
-<li>h, s, v : 0 ~ 1</li>
+<li><code>h</code>, <code>s</code>, <code>v</code> : 0 ~ 1</li>
 </ul>
 </li>
 </ul>
@@ -4591,8 +4597,8 @@
 </pre></div>
 
 <ul>
-<li>color : Color integer (<code>0xAARRGGBB</code>)</li>
-<li>rgb : JSON object (<code>{r, g, b, a}</code>)</li>
+<li><code>color</code> : Color integer (<code>0xAARRGGBB</code>)</li>
+<li><code>rgb</code> : JSON object (<code>{r, g, b, a}</code>)</li>
 </ul>
 <h3 id="hsv-color-wheel">HSV color wheel<a class="headerlink" href="#hsv-color-wheel" title="Permanent link">&para;</a></h3>
 <ol>
@@ -4604,7 +4610,7 @@
 </pre></div></li>
 </ol>
 <h3 id="color-object">Color object<a class="headerlink" href="#color-object" title="Permanent link">&para;</a></h3>
-<h4 id="create-color-object">create color object<a class="headerlink" href="#create-color-object" title="Permanent link">&para;</a></h4>
+<h4 id="create-color-object">Create color object<a class="headerlink" href="#create-color-object" title="Permanent link">&para;</a></h4>
 <ul>
 <li>Create via r,g,b,a components
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Display</span><span class="p">.</span><span class="nx">Color</span><span class="p">(</span><span class="nx">red</span><span class="p">,</span> <span class="nx">green</span><span class="p">,</span> <span class="nx">blue</span><span class="p">);</span> <span class="c1">// alpha = 255</span>
@@ -4666,7 +4672,11 @@
 </pre></div>
     or
     <div class="codehilite"><pre><span></span><span class="nx">color</span><span class="p">.</span><span class="nx">random</span><span class="p">(</span><span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">);</span>
-</pre></div></li>
+</pre></div><ul>
+<li><code>min</code> : 0 ~ 255. Default value is 0.</li>
+<li><code>max</code> : 0 ~ 255. Default value is 255.</li>
+</ul>
+</li>
 <li>Set to random gray
     <div class="codehilite"><pre><span></span><span class="nx">color</span><span class="p">.</span><span class="nx">randomGray</span><span class="p">();</span>
 </pre></div>

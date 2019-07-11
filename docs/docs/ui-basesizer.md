@@ -73,25 +73,49 @@ sizer.pushIntoBounds(bounds);
         sizer.popUp(duration, 'x');
         // sizer.popUp(duration, 'x', ease);
         ```
-        - `ease` : [Ease function](tween.md/#ease-equations), default is `'Cubic'`.
     - Pop up height only
         ```javascript
         sizer.popUp(duration, 'y');
         // sizer.popUp(duration, 'y', ease);
         ```
-        - `ease` : [Ease function](tween.md/#ease-equations), default is `'Cubic'`.
+    - Pop up via config
+        ```javascript
+        sizer.popUp({
+            duration: undefined,
+            orientation: undefined,
+            ease: undefined,
+        })
+        ```
+        - `orientation` : `undefined`, `x`, or `y`
 - Scale down destroy
     - Scale down width and height
         ```javascript
         sizer.scaleDownDestroy(duration);
+        // sizer.scaleDownDestroy(duration, undefined, ease);
         ```
+        - `ease` : [Ease function](tween.md/#ease-equations), default is `'Linear'`.
     - Scale down width only
         ```javascript
         sizer.scaleDownDestroy(duration, 'x');
+        // sizer.scaleDownDestroy(duration, 'x', ease);
         ```
     - Scale down height only
         ```javascript
         sizer.scaleDownDestroy(duration, 'y');
+        // sizer.scaleDownDestroy(duration, 'y', ease);
+        ```
+- Scale down without destroy
+    - Scale down width and height
+        ```javascript
+        sizer.scaleDownDestroy(duration, undefined, ease, false);
+        ```
+    - Scale down width only
+        ```javascript
+        sizer.scaleDownDestroy(duration, 'x', ease, false);
+        ```
+    - Scale down height only
+        ```javascript
+        sizer.scaleDownDestroy(duration, 'y', ease, false);
         ```
 
 ### Fade
@@ -103,6 +127,10 @@ sizer.pushIntoBounds(bounds);
 - Fade out destroy
     ```javascript
     sizer.fadeOutDestroy(duration);
+    ```
+- Fade out without destroy
+    ```javascript
+    sizer.fadeOutDestroy(duration, false);
     ```
 
 ### Drag top-most sizer
