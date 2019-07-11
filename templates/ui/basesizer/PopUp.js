@@ -10,6 +10,7 @@ export default function (duration, orientation, ease) {
         orientation = GetValue(config, 'orientation', undefined);
         ease = GetValue(config, 'ease', undefined);
     }
-    PopUp(this, duration, orientation, ease);
+
+    this._scale = PopUp(this, duration, orientation, ease, this._scale);
     return this;
 };

@@ -5,6 +5,7 @@ import ScaleDownCallback from './ScaleDownCallback.js';
 import FadeInCallback from './FadeInCallback.js';
 import FadeOutCallback from './FadeOutCallback.js';
 import Player from '../../../plugins/logic/runcommands/tcrp/Player.js';
+import NOOP from '../../../plugins/utils/object/NOOP.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -25,7 +26,7 @@ class Toast extends Label {
         this.setTransitInCallback(GetValue(config, 'transitIn', Const.popUp));
         this.setTransitOutCallback(GetValue(config, 'transitOut', Const.scaleDown));
 
-        this.player = new Player(this);
+        this.player = new Player(this, { dtMode: 1 });
         this.messages = [];
 
         this.setVisible(false);
@@ -123,17 +124,22 @@ class Toast extends Label {
             callback(this);
         }
 
-        var transitOutStartTime = this.transitInTime + this.displayTime;
-        var endTime = transitOutStartTime + this.transitOutTime;
         var commands = [
-            [0, // time
+            [
+                0, // time
                 [this.transitInCallback, this, this.transitInTime] // [callback, param, ...]
             ],
-            [transitOutStartTime,
+            [
+                this.transitInTime + this.displayTime,
                 [this.transitOutCallback, this, this.transitOutTime]
             ],
-            [endTime,
+            [
+                this.transitOutTime,
                 [this.setVisible, false]
+            ],
+            [
+                10, // Add a small delay before complete
+                [NOOP]
             ]
         ]
         this.player

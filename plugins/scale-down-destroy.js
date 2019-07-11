@@ -1,6 +1,15 @@
 import Scale from './scale.js';
 
-var ScaleDownDestroy = function (gameObject, duration, orientation, ease) {
+var ScaleDownDestroy = function (gameObject, duration, orientation, ease, destroyMode, scale) {
+    if (destroyMode instanceof Scale) {
+        scale = destroyMode;
+        destroyMode = undefined;
+    }
+
+    if (destroyMode === undefined) {
+        destroyMode = true;
+    }
+
     defaultConfig.mode = 1;
     switch (orientation) {
         case 'x':
@@ -19,8 +28,14 @@ var ScaleDownDestroy = function (gameObject, duration, orientation, ease) {
     }
     defaultConfig.duration = duration;
     defaultConfig.ease = (ease === undefined) ? 'Linear' : ease;
-    var scale = new Scale(gameObject, defaultConfig);
+
+    if (scale === undefined) {
+        scale = new Scale(gameObject, defaultConfig);
+    } else {
+        scale.resetFromJSON(defaultConfig);
+    }
     scale.start();
+
     return scale;
 };
 
