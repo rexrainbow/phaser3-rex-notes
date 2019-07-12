@@ -407,7 +407,7 @@ See [data manager](datamanager.md)
         gameObject.setCrop();
         // gameObject.isCropped = false;
         ```
-- Get texture, frame.
+- Get texture, [frame](texture.md#frame-object).
     ```javascript
     var texture = gameObject.texture;
     var frame = gameObject.frame;

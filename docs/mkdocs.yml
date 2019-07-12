@@ -235,6 +235,7 @@ nav:
     - Label: ui-label.md
     - Text box: ui-textbox.md
     - Text area: ui-textarea.md
+    - Toast: ui-toast.md
     - Buttons: ui-buttons.md
     - Slider: ui-slider.md
     - Dialog: ui-dialog.md
