@@ -1,5 +1,5 @@
 var GetDefaultBounds = function (scene) {
-    var gameConfig = scene.sys.game.config;
+    var gameConfig = scene.game.config;
     defaultBounds.setTo(0, 0, gameConfig.width, gameConfig.height);
     return defaultBounds;
 }
