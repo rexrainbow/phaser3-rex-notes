@@ -1,9 +1,6 @@
 import Label from '../label/Label.js';
 import Const from './Const.js';
-import PopUpCallback from './PopUpCallback.js';
-import ScaleDownCallback from './ScaleDownCallback.js';
-import FadeInCallback from './FadeInCallback.js';
-import FadeOutCallback from './FadeOutCallback.js';
+import DefaulttransitCallbacks from './DefaultTransitCallbacks.js';
 import Player from '../../../plugins/logic/runcommands/tcrp/Player.js';
 import NOOP from '../../../plugins/utils/object/NOOP.js';
 
@@ -20,9 +17,9 @@ class Toast extends Label {
         super(scene, config);
         this.type = 'rexToast';
 
-        this.setDisplayTime(GetValue(config, 'displayTime', 1000));
-        this.setTransitInTime(GetValue(config, 'transitInTime', 250));
-        this.setTransitOutTime(GetValue(config, 'transitOutTime', 250));
+        this.setTransitInTime(GetValue(config, 'duration.in', 200));
+        this.setDisplayTime(GetValue(config, 'duration.hold', 1000));
+        this.setTransitOutTime(GetValue(config, 'duration.out', 200));
         this.setTransitInCallback(GetValue(config, 'transitIn', Const.popUp));
         this.setTransitOutCallback(GetValue(config, 'transitOut', Const.scaleDown));
 
@@ -66,10 +63,10 @@ class Toast extends Label {
 
         switch (callback) {
             case Const.popUp:
-                callback = PopUpCallback;
+                callback = DefaulttransitCallbacks.popUp;
                 break;
             case Const.fadeIn:
-                callback = FadeInCallback;
+                callback = DefaulttransitCallbacks.fadeIn;
                 break;
         }
 
@@ -85,10 +82,10 @@ class Toast extends Label {
 
         switch (callback) {
             case Const.scaleDown:
-                callback = ScaleDownCallback;
+                callback = DefaulttransitCallbacks.scaleDown;
                 break;
             case Const.fadeOut:
-                callback = FadeOutCallback;
+                callback = DefaulttransitCallbacks.fadeOut;
                 break;
         }
 
@@ -124,20 +121,24 @@ class Toast extends Label {
         this.layout();
 
         var commands = [
-            [
+            [ // Transit-in
                 0, // time
                 [this.transitInCallback, this, this.transitInTime] // [callback, param, ...]
             ],
-            [
-                this.transitInTime + this.displayTime,
+            [ // Hold
+                this.transitInTime,
+                [NOOP]
+            ],
+            [ // Transit-out
+                this.displayTime,
                 [this.transitOutCallback, this, this.transitOutTime]
             ],
-            [
+            [ // End
                 this.transitOutTime,
                 [this.setVisible, false]
             ],
-            [
-                10, // Add a small delay before complete
+            [ // Complete - show next message
+                30, // Add a small delay before complete
                 [NOOP]
             ]
         ]

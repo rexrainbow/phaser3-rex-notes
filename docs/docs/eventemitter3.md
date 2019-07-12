@@ -8,7 +8,7 @@
 
 - Scene: 
     ```javascript
-    var ee = scene.sys.events;
+    var ee = scene.events;
     ```
 - Game object:
     ```javascript
