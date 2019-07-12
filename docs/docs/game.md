@@ -207,3 +207,16 @@ Instance of [data manager](datamanager.md) in `game.registry`, or `scene.registr
     ```javascript
     var frameCount = game.getFrame();
     ```
+
+## Window size
+
+- Width
+    ```javascript
+    var width = game.config.width;
+    // var width = scene.game.config.width;
+    ```
+- Height
+    ```javascript
+    var height = game.config.height;
+    // var height = scene.game.config.height;
+    ```
