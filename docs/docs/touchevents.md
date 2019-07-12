@@ -132,6 +132,9 @@ Call `gameObject.setInteractive(...)` to register touch input of Game Object bef
                     return hit;  // true/false
                 }
                 ```
+                - `shape` : Hit area object
+                - `x`, `y` : Local position of texture.
+                - `gameObject` : Game object.
     - [Dragging](touchevents.md#dragging)
         - `draggable` : `true`
     - [Drop zone](touchevents.md#drop-zone)
@@ -349,7 +352,7 @@ scene.input.addPointer(num);  // total points = num + 1
     - `1` in desktop
     - `2` in touch device. (`0` for mouse, `1` for 1 touch pointer)
 
-### Properties of point
+### Pointer
 
 - Position
     - Current touching
@@ -402,6 +405,11 @@ scene.input.addPointer(num);  // total points = num + 1
     - Disatance: `pointer.distance`
     - Velocity: `pointer.velocity`
         - `pointer.velocity.x`, ``pointer.velocity.y`
+
+### Game object's input object
+
+- `gameObject.input` : Game object's input object.
+- `gameObject.input.localX`, `gameObject.input.localY` : Pointer to local position of texture.
 
 ### Smooth
 
