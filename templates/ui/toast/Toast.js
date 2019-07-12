@@ -18,7 +18,7 @@ class Toast extends Label {
         this.type = 'rexToast';
 
         this.setTransitInTime(GetValue(config, 'duration.in', 200));
-        this.setDisplayTime(GetValue(config, 'duration.hold', 1000));
+        this.setDisplayTime(GetValue(config, 'duration.hold', 1200));
         this.setTransitOutTime(GetValue(config, 'duration.out', 200));
         this.setTransitInCallback(GetValue(config, 'transitIn', Const.popUp));
         this.setTransitOutCallback(GetValue(config, 'transitOut', Const.scaleDown));

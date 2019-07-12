@@ -17,6 +17,7 @@
 1. [Tabs](ui-tabs.md): A container with 4 groups of buttons around a center panel.
 1. [TextArea](ui-textarea.md): A container with a text, slider, and scroller.
 1. [Textbox](ui-textbox.md): A container with an icon, ([typing](texttyping.md) and [paging](textpage.md)) text, and background.
+1. [Toast](ui-toast.md): Show text message for a short while.
 
 !!! note "Scroll-able table"
     There are 2 kinds of scroll-able tables :

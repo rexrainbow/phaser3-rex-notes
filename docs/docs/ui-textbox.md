@@ -66,6 +66,7 @@ var textBox = scene.rexUI.add.textBox({
     width: undefined,
     height: undefined,
     name: '',
+    draggable: false,
 });
 ```
 
@@ -95,6 +96,7 @@ var textBox = scene.rexUI.add.textBox({
     - `space.icon` : Space between icon game object and text game object.
     - `space.text` : Space between text game object and action icon game object.
 - `name` : Set name of this textBox.
+- `draggable` : Set `true` to drag to-most sizer.
 
 ### Custom class
 

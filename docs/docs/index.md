@@ -93,6 +93,7 @@
 1. [UI/tabs](ui-tabs.md): A container with 4 groups of buttons around a center panel.
 1. [UI/text area](ui-textarea.md): A container with a text, slider, and scroller.
 1. [UI/text box](ui-textbox): A container with an icon, (typing and paging) text, and background.
+1. [UI/toast](ui-toast.md): Show text message for a short while.
 1. [Virtual joystick](virtualjoystick.md): Simulate curosr keys according touch events.
 1. [Video](video.md): Play video on DOM, or on canvas.
 1. [Wait events](waitevents.md): Wait fired events or callbacks.
