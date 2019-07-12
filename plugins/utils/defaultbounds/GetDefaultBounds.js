@@ -1,8 +1,15 @@
-var GetDefaultBounds = function (scene) {
+var GetDefaultBounds = function (scene, out) {
+    if (out === undefined) {
+        if (GlobRectangle === undefined) {
+            GlobRectangle = new Phaser.Geom.Rectangle();
+        }
+        out = GlobRectangle;
+    }
     var gameConfig = scene.game.config;
-    defaultBounds.setTo(0, 0, gameConfig.width, gameConfig.height);
-    return defaultBounds;
+    out.setTo(0, 0, gameConfig.width, gameConfig.height);
+    return out;
 }
-var defaultBounds = new Phaser.Geom.Rectangle();
+
+var GlobRectangle;
 
 export default GetDefaultBounds;
