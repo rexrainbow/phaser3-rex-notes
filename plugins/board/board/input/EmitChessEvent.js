@@ -1,3 +1,5 @@
+import InputCandidate from './InputCandidate.js';
+
 var EmitChessEvent = function (boardEventName, chessEventName, board, tileX, tileY, pointer) {
     var boardEventCallback = (typeof (boardEventName) !== 'string') ? boardEventName : undefined;
     var chessEventCallback = (typeof (chessEventName) !== 'string') ? chessEventName : undefined;
@@ -7,6 +9,10 @@ var EmitChessEvent = function (boardEventName, chessEventName, board, tileX, til
     var gameObject;
     for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
         gameObject = gameObjects[i];
+        if (!InputCandidate(gameObject)) {
+            continue;
+        }
+
         if (gameObject.emit) {
             if (!chessEventCallback) {
                 gameObject.emit(chessEventName, pointer);

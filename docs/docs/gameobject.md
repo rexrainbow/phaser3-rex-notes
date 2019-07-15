@@ -6,6 +6,20 @@ Base class of all game object in phaser.
 
 ## Usage
 
+### Destroy
+
+- Destroy game object
+    ```javascript
+    gameObject.destroy();
+    ```
+- Game object will be destroyed automatically when scene destroyed, if it is in display list, or update list.
+- Event
+    ```javascript
+    gameObject.once('destroy', function(gameObject) {
+    
+    }, scope);
+    ```
+
 ### Position
 
 - Get
@@ -418,6 +432,18 @@ See [data manager](datamanager.md)
     var frameName = gameObject.frame.name;
     ```
 
+### Will render
+
+- Test render flag and camera filter.
+    ```javascript
+    var willRennder = gameObject.willRender(camera);
+    ```
+- Test render flag only
+    ```javascript
+    var willRender = (gameObject.renderFlags === Phaser.GameObjects.GameObject.RENDER_MASK);
+    ```
+    - `Phaser.GameObjects.GameObject.RENDER_MASK` : 15 (Visible, Alpha, Transform and Texture)
+
 ### Name
 
 - Get
@@ -428,20 +454,6 @@ See [data manager](datamanager.md)
     ```javascript
     gameObject.setName(name);
     gameObject.name = name;
-    ```
-
-### Destroy
-
-- Destroy game object
-    ```javascript
-    gameObject.destroy();
-    ```
-- Game object will be destroyed automatically when scene destroyed, if it is in display list, or update list.
-- Event
-    ```javascript
-    gameObject.once('destroy', function(gameObject) {
-    
-    }, scope);
     ```
 
 ### Custom class
