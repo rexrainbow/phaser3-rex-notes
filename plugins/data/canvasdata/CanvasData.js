@@ -4,11 +4,6 @@ class CanvasData {
     constructor(width, height, BufferClass) {
         if (width === undefined) {
             width = 0;
-        } else if (typeof (width) !== 'number') {
-            var canvas = width;
-            BufferClass = height;
-            width = canvas.width;
-            height = canvas.height;
         }
         if (height === undefined) {
             height = width;
@@ -48,15 +43,27 @@ class CanvasData {
         return this;
     }
 
-    fill(canvas, callback, scope) {
+    fill(canvas, x, y, width, height, callback, scope) {
         if (typeof (canvas) === 'number') {
             var value = canvas;
             this.buffer.fill(value);
 
         } else {
-            this.resize(canvas);
+            if (x === undefined) {
+                x = 0;
+            }
+            if (y === undefined) {
+                y = 0;
+            }
+            if (width === undefined) {
+                width = canvas.width - x;
+            }
+            if (height === undefined) {
+                height = canvas.height - y;
+            }
+            this.resize(width, height);
             var context = canvas.getContext('2d');
-            var imgData = context.getImageData(0, 0, this.width, this.height).data;
+            var imgData = context.getImageData(x, y, width, height).data;
             var pixels = imgData.length, imgDataIndex;
             var value;
             for (var i = 0, cnt = pixels / 4; i < cnt; i++) {
@@ -79,11 +86,6 @@ class CanvasData {
     }
 
     resize(width, height) {
-        if (typeof (width) !== 'number') {
-            var canvas = width;
-            width = canvas.width;
-            height = canvas.height;
-        }
         if ((this.width === width) && (this.height === height)) {
             return this;
         }

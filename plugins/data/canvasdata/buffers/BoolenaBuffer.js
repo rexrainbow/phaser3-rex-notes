@@ -26,14 +26,6 @@ class BoolenaBuffer {
         return this;
     }
 
-    flip(offset) {
-        var row = Math.floor(offset / COLS);
-        var col = offset % COLS;
-        var bit = 1 << col;
-        this._bin[row] ^= bit;
-        return this;
-    }
-
     fill(value) {
         value = (value) ? 255 : 0;
         for (var i = 0, cnt = this._rows; i < cnt; i++) {
@@ -53,8 +45,8 @@ class BoolenaBuffer {
     }
 }
 
-BoolenaBuffer.FillCallback = function (imgData, i) {
-    return (imgData[i + 3] > 0);
+BoolenaBuffer.FillCallback = function (imgData, imgDataIndex) {
+    return (imgData[imgDataIndex + 3] > 0);
 }
 
 export default BoolenaBuffer;
