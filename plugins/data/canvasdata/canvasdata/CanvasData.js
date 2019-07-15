@@ -1,5 +1,3 @@
-import BooleanBuffer from './buffers/BoolenaBuffer.js';
-
 class CanvasData {
     constructor(width, height, BufferClass) {
         if (width === undefined) {
@@ -7,9 +5,6 @@ class CanvasData {
         }
         if (height === undefined) {
             height = width;
-        }
-        if (BufferClass === undefined) {
-            BufferClass = BooleanBuffer;
         }
 
         this.width = width;

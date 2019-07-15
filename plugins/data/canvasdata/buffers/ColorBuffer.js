@@ -22,20 +22,18 @@ class ColorBuffer {
     resize(size) {
         if (size !== this._rows) {
             this._rows = size;
-            this._buf = new ArrayBuffer(this._rows);
+            this._buf = new ArrayBuffer(this._rows * 4);
             this._colors = new Uint32Array(this._buf);
         }
         return this;
     }
 }
 
-var globColor;
 ColorBuffer.FillCallback = function (imgData, imgDataIndex) {
-    if (globColor === undefined) {
-        globColor = new Phaser.Display.Color();
-    }
-    globColor.setTo(imgData[0], imgData[1], imgData[2], imgData[3]);
-    return globColor.color;
+    return (imgData[imgDataIndex + 3] << 24) |
+        (imgData[imgDataIndex + 0] << 16) |
+        (imgData[imgDataIndex + 1] << 8) |
+        imgData[imgDataIndex + 2];
 }
 
 export default ColorBuffer;
