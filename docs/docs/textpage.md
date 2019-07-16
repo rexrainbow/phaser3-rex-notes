@@ -1,6 +1,6 @@
 ## Introduction
 
-Display text page by page on text object, [bbcode text object](bbcodetext.md), or [tag text boject](tagtext.md).
+Display text page by page on [text object](text.md), [bbcode text object](bbcodetext.md), or [tag text boject](tagtext.md).
 
 - Author: Rex
 - Behavior of text object

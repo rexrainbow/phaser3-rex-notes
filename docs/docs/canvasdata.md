@@ -44,13 +44,70 @@ var config = {
 var game = new Phaser.Game(config);
 ```
 
-### Convert csv
+### Text object -> bit map
 
 ```javascript
-var arr = scene.plugins.get('rexCanvasData').convert(csvString, {
-    // delimiter: ',',
-    // convert: true
-});
+var canvasData = scene.plugins.get('rexCanvasData').textObjectToBitMap(textObject);
+// var out = scene.plugins.get('rexCanvasData').textObjectToBitMap(textObject, out);
 ```
 
-Values will be converted to *number*, *boolean*, *null*, or *string*, if `convert` is `true`.
+- `textObject` : [text object](text.md), [bbcode text object](bbcodetext.md), or [tag text boject](tagtext.md)
+- For each pixel data
+    ```javascript
+    canvasData.forEach(function(value, x, y, canvasData){
+
+    }, scope);
+    ```
+    - `value` : `true`, or `false`
+
+### Texture -> color map
+
+```javascript
+var canvasData = scene.plugins.get('rexCanvasData').textureTColorMap(textureKey, frameName);
+// var out = scene.plugins.get('rexCanvasData').textObjectToBitMap(textureKey, frameName, out);
+```
+
+- For each pixel data
+    ```javascript
+    canvasData.forEach(function(value, x, y, canvasData){
+
+    }, scope);
+    ```
+    - `value` : Color32 integer = color integer + (alpha << 24)
+        - Get color integer (0 ~ 0xffffff)
+            ```javascript
+            var color = canvasData.color32ToColorInt(value);
+            ```
+        - Get alpha (0 ~ 0xff)
+            ```javascript
+            var alpha = canvasData.color32TAlpha(value);
+            ```
+
+### Canvas data
+
+#### For each pixel
+
+- For each pixel data
+    ```javascript
+    canvasData.forEach(callback, scope);
+    ```
+    - `callback` : Callback for each pixel
+        ```javascript
+        function(value, x, y, canvasData) {
+    
+        }
+        ```
+- For each non zero pixel data
+    ```javascript
+    canvasData.forEachNonZero(callback, scope);
+    ```
+
+#### Get pixel data
+
+```javascript
+var data = canvasData.get(x, y);
+```
+
+- `data` :
+    - `true`, `false` in result of `textObjectToBitMap` method
+    - Color32 in result of `textureTColorMap` method

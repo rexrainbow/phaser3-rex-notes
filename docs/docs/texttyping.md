@@ -1,6 +1,6 @@
 ## Introduction
 
-Typing text on text object, [bbcode text object](bbcodetext.md), or [tag text boject](tagtext.md).
+Typing text on [text object](text.md), [bbcode text object](bbcodetext.md), or [tag text boject](tagtext.md).
 
 - Author: Rex
 - Behavior of text object
