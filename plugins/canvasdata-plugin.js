@@ -12,7 +12,7 @@ class CanvasDataPlugin extends Phaser.Plugins.BasePlugin {
         var eventEmitter = this.game.events;
         eventEmitter.once('destroy', this.destroy, this);
 
-        this._tmpCanvas = CanvasPool.create2D(this, 1, 1);
+        this._tmpCanvas = CanvasPool.create2D(this);
     }
 
     destroy() {
