@@ -16,7 +16,10 @@ var TextureTColorMap = function (key, frameName, out) {
         out = frameName;
     }
 
-    var canvas = CanvasPool.create2D(this, undefined, undefined, undefined, true);
+    var hasDefaultCanvas = (this._tmpCanvas !== undefined);
+    var canvas = (hasDefaultCanvas) ?
+        this._tmpCanvas :
+        CanvasPool.create2D(this, undefined, undefined, undefined, true);
 
     out = CanvasToData(
         DrawFrame(frame, canvas), // canvas
@@ -26,7 +29,12 @@ var TextureTColorMap = function (key, frameName, out) {
         undefined, // fillCallbackScope
         out);
 
-    CanvasPool.remove(canvas);
+    if (!hasDefaultCanvas) {
+        CanvasPool.remove(canvas);
+    } else {
+        canvas.width = 1;
+        canvas.height = 1;
+    }
     return out;
 };
 

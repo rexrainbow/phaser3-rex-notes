@@ -1,4 +1,4 @@
-import Methods from './data/canvasdata/Methods.js';
+import Methods from './canvasdata.js';
 
 class CanvasDataPlugin extends Phaser.Plugins.BasePlugin {
 
@@ -9,6 +9,14 @@ class CanvasDataPlugin extends Phaser.Plugins.BasePlugin {
     start() {
         var eventEmitter = this.game.events;
         eventEmitter.once('destroy', this.destroy, this);
+
+        this._tmpCanvas = CanvasPool.create2D(this, 1, 1);
+    }
+
+    destroy() {
+        CanvasPool.remove(this._tmpCanvas);
+        this._tmpCanvas = undefined;
+        super.destroy();
     }
 
     get textureManager() {
