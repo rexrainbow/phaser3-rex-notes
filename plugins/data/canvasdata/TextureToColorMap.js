@@ -1,5 +1,6 @@
 import CanvasToData from './canvasdata/CanvasToData.js';
 import ColorBuffer from './buffers/ColorBuffer.js';
+import IsGameObject from '../../utils/system/IsGameObject.js';
 
 const CanvasPool = Phaser.Display.Canvas.CanvasPool;
 
@@ -12,7 +13,7 @@ var TextureTColorMap = function (key, frameName, out) {
         }
         frame = this.textureManager.getFrame(key, frameName);
     } else {
-        frame = key;
+        frame = (IsGameObject(key)) ? key.frame : key;
         out = frameName;
     }
 

@@ -18,11 +18,11 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        this.add.image(0, 0, 'mushroom').setOrigin(0);
+        var img = this.add.image(0, 0, 'mushroom').setOrigin(0);
 
         var startX = 250, startY = 100, width = 6, height = 6,
             offsetXY = { x: 0, y: 0 };
-        this.plugins.get('rexCanvasData').textureTColorMap('mushroom')
+        this.plugins.get('rexCanvasData').textureTColorMap(img)
             .forEachNonZero(function (value, x, y, colorMap) {
                 var destinationX = startX + (x * width);
                 var destinationY = startY + (y * height);

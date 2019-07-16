@@ -44,7 +44,7 @@ var config = {
 var game = new Phaser.Game(config);
 ```
 
-### Text object -> bit map
+### Text object -> Bit map
 
 ```javascript
 var canvasData = scene.plugins.get('rexCanvasData').textObjectToBitMap(textObject);
@@ -60,13 +60,18 @@ var canvasData = scene.plugins.get('rexCanvasData').textObjectToBitMap(textObjec
     ```
     - `value` : `true`, or `false`
 
-### Texture -> color map
+### Texture -> Color map
 
-```javascript
-var canvasData = scene.plugins.get('rexCanvasData').textureTColorMap(textureKey, frameName);
-// var out = scene.plugins.get('rexCanvasData').textObjectToBitMap(textureKey, frameName, out);
-```
-
+- Texture -> Color map
+    ```javascript
+    var canvasData = scene.plugins.get('rexCanvasData').textureTColorMap(textureKey, frameName);
+    // var out = scene.plugins.get('rexCanvasData').textObjectToBitMap(textureKey, frameName, out);
+    ```
+- Texture of game object -> Color map
+    ```javascript
+    var canvasData = scene.plugins.get('rexCanvasData').textureTColorMap(gameObject);
+    // var out = scene.plugins.get('rexCanvasData').textObjectToBitMap(gameObject, out);
+    ```
 - For each pixel data
     ```javascript
     canvasData.forEach(function(value, x, y, canvasData){
