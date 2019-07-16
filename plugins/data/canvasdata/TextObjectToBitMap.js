@@ -1,12 +1,12 @@
 import CanvasToData from './canvasdata/CanvasToData.js';
-import BooleanBuffer from './buffers/BoolenaBuffer.js';
+import BitBuffer from '../../utils/arraybuffers/BitBuffer.js';
+import FillAlpha from './fill/FillAlpha.js';
 
 var TextObjectToBitMap = function (textObject, out) {
     return CanvasToData(
         textObject.canvas, // canvas
         undefined, undefined, undefined, undefined, // x, y, width, height
-        BooleanBuffer,  // BufferClass
-        undefined, undefined, // fillCallback, fillCallbackScope
+        BitBuffer, FillAlpha, undefined, // BufferClass, fillCallback, fillCallbackScope
         out);
 };
 

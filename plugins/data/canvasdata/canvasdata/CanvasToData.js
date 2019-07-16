@@ -13,12 +13,8 @@ var CanvasToData = function (canvas, x, y, width, height, BufferClass, fillCallb
     if (height === undefined) {
         height = canvas.height - y;
     }
-    if (fillCallback === undefined) {
-        fillCallback = BufferClass.FillCallback;
-        fillCallbackScope = undefined;
-    }
     if (out === undefined) {
-        out = new CanvasData(width, height, BufferClass);
+        out = new CanvasData(BufferClass, width, height);
     }
 
     out.fill(canvas, x, y, width, height, fillCallback, fillCallbackScope);

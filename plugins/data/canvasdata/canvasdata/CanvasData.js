@@ -1,7 +1,7 @@
-import Color32Methods from '../utils/Color32Methods.js';
+import Color32Methods from '../../../utils/color/Color32Methods.js';
 
 class CanvasData {
-    constructor(width, height, BufferClass) {
+    constructor(BufferClass, width, height) {
         if (width === undefined) {
             width = 0;
         }
@@ -101,8 +101,7 @@ class CanvasData {
         for (var y = 0, h = this.height; y < h; y++) {
             for (var x = 0, w = this.width; x < w; x++) {
                 value = this.get(x, y);
-                if (skipZero &&
-                    ((value === 0) || (value === false))) {
+                if (skipZero && (value === 0)) {
                     continue;
                 }
 

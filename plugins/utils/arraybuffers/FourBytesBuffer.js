@@ -1,4 +1,4 @@
-class ColorBuffer {
+class FourBytesBuffer {
     constructor(size) {
         this.resize(size);
     }
@@ -29,11 +29,4 @@ class ColorBuffer {
     }
 }
 
-ColorBuffer.FillCallback = function (imgData, imgDataIndex) {
-    return (imgData[imgDataIndex + 3] << 24) |
-        (imgData[imgDataIndex + 0] << 16) |
-        (imgData[imgDataIndex + 1] << 8) |
-        imgData[imgDataIndex + 2];
-}
-
-export default ColorBuffer;
+export default FourBytesBuffer;

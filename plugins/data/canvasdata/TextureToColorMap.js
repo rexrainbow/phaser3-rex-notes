@@ -1,5 +1,6 @@
 import CanvasToData from './canvasdata/CanvasToData.js';
-import ColorBuffer from './buffers/ColorBuffer.js';
+import ColorBuffer from '../../utils/arraybuffers/FourBytesBuffer.js';
+import FillColor from './fill/FillColor.js';
 import IsGameObject from '../../utils/system/IsGameObject.js';
 
 const CanvasPool = Phaser.Display.Canvas.CanvasPool;
@@ -25,9 +26,7 @@ var TextureTColorMap = function (key, frameName, out) {
     out = CanvasToData(
         DrawFrame(frame, canvas), // canvas
         undefined, undefined, undefined, undefined, // x, y, width, height
-        ColorBuffer,  // BufferClass
-        undefined, // fillCallback
-        undefined, // fillCallbackScope
+        ColorBuffer, FillColor, undefined, // BufferClass, fillCallback, fillCallbackScope
         out);
 
     if (!hasDefaultCanvas) {

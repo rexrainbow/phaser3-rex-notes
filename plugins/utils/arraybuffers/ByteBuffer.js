@@ -29,8 +29,4 @@ class ByteBuffer {
     }
 }
 
-ByteBuffer.FillCallback = function (imgData, imgDataIndex) {
-    return imgData[imgDataIndex + 3];
-}
-
 export default ByteBuffer;

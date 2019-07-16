@@ -1,7 +1,7 @@
 const COLS = 8;
 const SHIFT = 3;
 
-class BoolenaBuffer {
+class BitBuffer {
     constructor(size) {
         this.resize(size);
     }
@@ -10,7 +10,7 @@ class BoolenaBuffer {
         var row = offset >> SHIFT;
         var col = offset % COLS;
         var bit = 1 << col;
-        return (this._bin[row] & bit) > 0;
+        return (this._bin[row] & bit) ? 1 : 0;
     }
 
     set(offset, value) {
@@ -45,8 +45,4 @@ class BoolenaBuffer {
     }
 }
 
-BoolenaBuffer.FillCallback = function (imgData, imgDataIndex) {
-    return (imgData[imgDataIndex + 3] > 0);
-}
-
-export default BoolenaBuffer;
+export default BitBuffer;
