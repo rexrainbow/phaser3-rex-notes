@@ -96,7 +96,7 @@ module.exports = {
         'csvtohashtableplugin': './plugins/csvtohashtable-plugin.js',
         'restorabledataplugin': './plugins/restorabledata-plugin.js',
         'buffdataplugin': './plugins/buffdata-plugin.js',
-        'canvasdata': './plugins/canvasdata-plugin.js',
+        'canvasdataplugin': './plugins/canvasdata-plugin.js',
 
         // math
         'gashaponplugin': './plugins/gashapon-plugin.js',
