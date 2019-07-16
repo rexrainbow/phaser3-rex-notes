@@ -101,7 +101,9 @@ class CanvasData {
         for (var y = 0, h = this.height; y < h; y++) {
             for (var x = 0, w = this.width; x < w; x++) {
                 value = this.get(x, y);
-                if (skipZero && !value) {
+                if (skipZero &&
+                    ((value === 0) || (value === false))
+                ) {
                     continue;
                 }
 
