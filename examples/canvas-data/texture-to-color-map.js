@@ -32,8 +32,8 @@ class Demo extends Phaser.Scene {
                     (destinationY + offsetXY.y),
                     width,
                     height,
-                    colorMap.color32ToColorInt(value),
-                    (colorMap.color32ToAlpha(value) / 255)
+                    (value & 0xffffff),
+                    ((value >> 24) / 255)
                 )
                 this.tweens.add({
                     targets: gameObject,

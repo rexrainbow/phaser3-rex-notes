@@ -1,5 +1,3 @@
-import Color32Methods from '../utils/Color32Methods.js';
-
 class ColorBuffer {
     constructor(size) {
         this.resize(size);
@@ -31,14 +29,11 @@ class ColorBuffer {
     }
 }
 
-const RgbaToColor32 = Color32Methods.rgbaToColor32;
 ColorBuffer.FillCallback = function (imgData, imgDataIndex) {
-    return RgbaToColor32(
-        imgData[imgDataIndex + 0], // r
-        imgData[imgDataIndex + 1], // g
-        imgData[imgDataIndex + 2], // b
-        imgData[imgDataIndex + 3]  // a
-    );
+    return (imgData[imgDataIndex + 3] << 24) | 
+    (imgData[imgDataIndex + 0] << 16) | 
+    (imgData[imgDataIndex + 1] << 8) | 
+    imgData[imgDataIndex + 2];
 }
 
 export default ColorBuffer;

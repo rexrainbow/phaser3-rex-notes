@@ -76,9 +76,16 @@ var canvasData = scene.plugins.get('rexCanvasData').textureTColorMap(textureKey,
     - `value` : Color32 integer = color integer + (alpha << 24)
         - Get color integer (0 ~ 0xffffff)
             ```javascript
+            var color = value & 0xffffff;
+            ```
+            or
+            ```javascript
             var color = canvasData.color32ToColorInt(value);
             ```
         - Get alpha (0 ~ 0xff)
+            ```javascript
+            var alpha = value >> 24;
+            ```
             ```javascript
             var alpha = canvasData.color32TAlpha(value);
             ```
