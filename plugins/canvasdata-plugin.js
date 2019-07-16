@@ -1,5 +1,7 @@
 import Methods from './canvasdata.js';
 
+const CanvasPool = Phaser.Display.Canvas.CanvasPool;
+
 class CanvasDataPlugin extends Phaser.Plugins.BasePlugin {
 
     constructor(pluginManager) {
