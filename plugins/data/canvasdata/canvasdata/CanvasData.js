@@ -1,3 +1,5 @@
+import Color32Methods from '../utils/Color32Methods.js';
+
 class CanvasData {
     constructor(width, height, BufferClass) {
         if (width === undefined) {
@@ -91,11 +93,18 @@ class CanvasData {
         return this;
     }
 
-    forEach(callback, scope) {
+    forEach(callback, scope, skipZero) {
+        if (skipZero === undefined) {
+            skipZero = false;
+        }
         var value;
         for (var y = 0, h = this.height; y < h; y++) {
             for (var x = 0, w = this.width; x < w; x++) {
                 value = this.get(x, y);
+                if (skipZero && (value === 0)) {
+                    continue;
+                }
+
                 if (scope) {
                     callback.call(scope, value, x, y, this);
                 } else {
@@ -105,6 +114,16 @@ class CanvasData {
         }
         return this;
     }
+
+    forEachNonZero(callback, scope) {
+        this.forEach(callback, scope, true);
+        return this;
+    }
 };
+
+Object.assign(
+    CanvasData.prototype,
+    Color32Methods
+);
 
 export default CanvasData;

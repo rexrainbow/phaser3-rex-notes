@@ -18,7 +18,7 @@ class Demo extends Phaser.Scene {
     create() {
         var txt = this.add.text(0, 0, 'hello');
         this.plugins.get('rexCanvasData').textObjectToBitMap(txt)
-            .forEach(function (value, x, y, bitmap) {
+            .forEach(function (value, x, y, bitMap) {
                 this.add.rectangle(
                     30 + (x * 4),
                     30 + (y * 4),

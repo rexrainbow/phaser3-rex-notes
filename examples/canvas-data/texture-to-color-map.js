@@ -19,16 +19,14 @@ class Demo extends Phaser.Scene {
     create() {
         this.add.image(0, 0, 'mushroom').setOrigin(0);
         this.plugins.get('rexCanvasData').textureTColorMap('mushroom')
-            .forEach(function (value, x, y, bitmap) {
-                var color = value & 0xffffff;
-                var alpha = value >> 24;
+            .forEach(function (value, x, y, colorMap) {
                 this.add.rectangle(
                     100 + (x * 4),
                     100 + (y * 4),
                     4,
                     4,
-                    color,
-                    (alpha / 255)
+                    colorMap.color32ToColorInt(value),
+                    (colorMap.color32ToAlpha(value) / 255)
                 )
             }, this)
     }
