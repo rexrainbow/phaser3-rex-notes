@@ -568,6 +568,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#destroy" title="Destroy" class="md-nav__link">
+    Destroy
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#position" title="Position" class="md-nav__link">
     Position
   </a>
@@ -687,15 +694,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#name" title="Name" class="md-nav__link">
-    Name
+  <a href="#will-render" title="Will render" class="md-nav__link">
+    Will render
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#destroy" title="Destroy" class="md-nav__link">
-    Destroy
+  <a href="#name" title="Name" class="md-nav__link">
+    Name
   </a>
   
 </li>
@@ -3171,6 +3178,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../canvas-data/" title="Canvas image data" class="md-nav__link">
+      Canvas image data
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -4518,6 +4537,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#destroy" title="Destroy" class="md-nav__link">
+    Destroy
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#position" title="Position" class="md-nav__link">
     Position
   </a>
@@ -4637,15 +4663,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#name" title="Name" class="md-nav__link">
-    Name
+  <a href="#will-render" title="Will render" class="md-nav__link">
+    Will render
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#destroy" title="Destroy" class="md-nav__link">
-    Destroy
+  <a href="#name" title="Name" class="md-nav__link">
+    Name
   </a>
   
 </li>
@@ -4689,6 +4715,18 @@
 <li>Author: Richard Davey</li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
+<h3 id="destroy">Destroy<a class="headerlink" href="#destroy" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Destroy game object
+    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
+</pre></div></li>
+<li>Game object will be destroyed automatically when scene destroyed, if it is in display list, or update list.</li>
+<li>Event
+    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;destroy&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+</ul>
 <h3 id="position">Position<a class="headerlink" href="#position" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get
@@ -5086,6 +5124,18 @@
 <span class="kd">var</span> <span class="nx">frameName</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">frame</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
 </pre></div></li>
 </ul>
+<h3 id="will-render">Will render<a class="headerlink" href="#will-render" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Test render flag and camera filter.
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">willRennder</span> <span class="o">=</span> <span class="nx">gameObject</span><span class="p">.</span><span class="nx">willRender</span><span class="p">(</span><span class="nx">camera</span><span class="p">);</span>
+</pre></div></li>
+<li>Test render flag only
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">willRender</span> <span class="o">=</span> <span class="p">(</span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">renderFlags</span> <span class="o">===</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">GameObjects</span><span class="p">.</span><span class="nx">GameObject</span><span class="p">.</span><span class="nx">RENDER_MASK</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>Phaser.GameObjects.GameObject.RENDER_MASK</code> : 15 (Visible, Alpha, Transform and Texture)</li>
+</ul>
+</li>
+</ul>
 <h3 id="name">Name<a class="headerlink" href="#name" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Get
@@ -5094,18 +5144,6 @@
 <li>Set
     <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setName</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
 <span class="nx">gameObject</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
-</pre></div></li>
-</ul>
-<h3 id="destroy">Destroy<a class="headerlink" href="#destroy" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Destroy game object
-    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
-</pre></div></li>
-<li>Game object will be destroyed automatically when scene destroyed, if it is in display list, or update list.</li>
-<li>Event
-    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;destroy&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">)</span> <span class="p">{</span>
-
-<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </pre></div></li>
 </ul>
 <h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>

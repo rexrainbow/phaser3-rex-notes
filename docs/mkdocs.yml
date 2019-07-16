@@ -183,7 +183,7 @@ nav:
     - Database:
         - LokiJs: lokijs.md
     - Configuration data: config-data.md
-    - Canvas image data: canvasdata.md
+    - Canvas image data: canvas-data.md
 - Math:
     - Max, min:
         - Interpolation: interpolation.md

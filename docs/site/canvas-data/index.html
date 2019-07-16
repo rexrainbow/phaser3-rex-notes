@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/fullscreen/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/canvas-data/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Full screen - Notes of Phaser 3</title>
+        <title>Canvas image data - Notes of Phaser 3</title>
       
     
     
@@ -128,7 +128,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Full screen
+                Canvas image data
               </span>
             
           
@@ -255,12 +255,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
     
     <label class="md-nav__link" for="nav-2">
       System
@@ -384,86 +382,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Full screen
-      </label>
-    
-    <a href="./" title="Full screen" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../fullscreen/" title="Full screen" class="md-nav__link">
       Full screen
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#enabledisable" title="Enable/disable" class="md-nav__link">
-    Enable/disable
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#toggle" title="Toggle" class="md-nav__link">
-    Toggle
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#state" title="State" class="md-nav__link">
-    State
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#events" title="Events" class="md-nav__link">
-    Events
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -2804,10 +2727,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10" checked>
     
     <label class="md-nav__link" for="nav-10">
       Data
@@ -3063,11 +2988,120 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../canvas-data/" title="Canvas image data" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Canvas image data
+      </label>
+    
+    <a href="./" title="Canvas image data" class="md-nav__link md-nav__link--active">
       Canvas image data
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#import-class" title="Import class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
+    Install global plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#text-object-bit-map" title="Text object -&gt; Bit map" class="md-nav__link">
+    Text object -&gt; Bit map
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#texture-color-map" title="Texture -&gt; Color map" class="md-nav__link">
+    Texture -&gt; Color map
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#canvas-data" title="Canvas data" class="md-nav__link">
+    Canvas data
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-each-pixel" title="For each pixel" class="md-nav__link">
+    For each pixel
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-pixel-data" title="Get pixel data" class="md-nav__link">
+    Get pixel data
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -4410,6 +4444,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#usage" title="Usage" class="md-nav__link">
     Usage
   </a>
@@ -4418,30 +4459,57 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#enabledisable" title="Enable/disable" class="md-nav__link">
-    Enable/disable
+  <a href="#import-class" title="Import class" class="md-nav__link">
+    Import class
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#toggle" title="Toggle" class="md-nav__link">
-    Toggle
+  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
+    Install global plugin
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#state" title="State" class="md-nav__link">
-    State
+  <a href="#text-object-bit-map" title="Text object -&gt; Bit map" class="md-nav__link">
+    Text object -&gt; Bit map
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#events" title="Events" class="md-nav__link">
-    Events
+  <a href="#texture-color-map" title="Texture -&gt; Color map" class="md-nav__link">
+    Texture -&gt; Color map
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#canvas-data" title="Canvas data" class="md-nav__link">
+    Canvas data
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#for-each-pixel" title="For each pixel" class="md-nav__link">
+    For each pixel
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get-pixel-data" title="Get pixel data" class="md-nav__link">
+    Get pixel data
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -4466,68 +4534,121 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/fullscreen.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/canvas-data.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Full screen</h1>
+                  <h1>Canvas image data</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Enable or disable full screen mode, built-in method of phaser.</p>
+<p>Get image data from texture, or text object.</p>
 <ul>
-<li>Author: Richard Davey</li>
+<li>Author: Rex</li>
+<li>Method only</li>
 </ul>
+<h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/canvasdata-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexcanvasdataplugin.min.js">minify</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<h3 id="enabledisable">Enable/disable<a class="headerlink" href="#enabledisable" title="Permanent link">&para;</a></h3>
-<p>Under any input event (<a href="../touchevents/">touch</a> or <a href="../keyboardevents/">keyboard</a>)</p>
-<div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setInteractive</span><span class="p">().</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerdown&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">isFullscreen</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">stopFullscreen</span><span class="p">();</span>
-        <span class="c1">// On stop fulll screen</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">startFullscreen</span><span class="p">();</span>
-        <span class="c1">// On start fulll screen</span>
-    <span class="p">}</span>
-<span class="p">});</span>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/canvasdata">Sample code</a></p>
+<p>User could import class directly, or install it by global plugin.</p>
+<h3 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">rexCanvasData</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/canvasdata.js&#39;</span><span class="p">;</span>
 </pre></div>
 
-<p>Fire one of these events</p>
-<ul>
-<li><code>'fullscreenunsupported'</code> : Tried to enter fullscreen mode, but it is unsupported by the browser.</li>
-<li><code>'enterfullscreen'</code> : Entered fullscreen mode successfully.</li>
-<li><code>'fullscreenfailed'</code> : Tried to enter fullscreen mode but failed.</li>
-</ul>
-<h3 id="toggle">Toggle<a class="headerlink" href="#toggle" title="Permanent link">&para;</a></h3>
-<p>Under any input event (<a href="../touchevents/">touch</a> or <a href="../keyboardevents/">keyboard</a>)</p>
-<div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setInteractive</span><span class="p">().</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerdown&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">toggleFullscreen</span><span class="p">();</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">isFullscreen</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// On start fulll screen</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="c1">// On stop fulll screen</span>
+<h3 id="install-global-plugin">Install global plugin<a class="headerlink" href="#install-global-plugin" title="Permanent link">&para;</a></h3>
+<p>Install plugin in <a href="../game/#configuration">configuration of game</a></p>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">CanvasDataPlugin</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/canvasdata-plugin.js&#39;</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexCanvasData&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">CanvasDataPlugin</span><span class="p">,</span>
+            <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="p">}</span>
+        <span class="c1">// ...</span>
+        <span class="p">]</span>
     <span class="p">}</span>
-<span class="p">});</span>
+    <span class="c1">// ...</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</pre></div>
+
+<h3 id="text-object-bit-map">Text object -&gt; Bit map<a class="headerlink" href="#text-object-bit-map" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">canvasData</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexCanvasData&#39;</span><span class="p">).</span><span class="nx">textObjectToBitMap</span><span class="p">(</span><span class="nx">textObject</span><span class="p">);</span>
+<span class="c1">// var out = scene.plugins.get(&#39;rexCanvasData&#39;).textObjectToBitMap(textObject, out);</span>
 </pre></div>
 
 <ul>
-<li>Fire <code>'fullscreenunsupported'</code> or <code>'enterfullscreen'</code> event.</li>
+<li><code>textObject</code> : <a href="../text/">text object</a>, <a href="../bbcodetext/">bbcode text object</a>, or <a href="../tagtext/">tag text boject</a></li>
+<li>For each pixel data
+    <div class="codehilite"><pre><span></span><span class="nx">canvasData</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">canvasData</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>value</code> : <code>0</code>, or <code>1</code></li>
 </ul>
-<h3 id="state">State<a class="headerlink" href="#state" title="Permanent link">&para;</a></h3>
+</li>
+</ul>
+<h3 id="texture-color-map">Texture -&gt; Color map<a class="headerlink" href="#texture-color-map" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Is in full screen mode
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isFullScreen</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">isFullscreen</span><span class="p">;</span>
+<li>Texture -&gt; Color map
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">canvasData</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexCanvasData&#39;</span><span class="p">).</span><span class="nx">textureTColorMap</span><span class="p">(</span><span class="nx">textureKey</span><span class="p">,</span> <span class="nx">frameName</span><span class="p">);</span>
+<span class="c1">// var out = scene.plugins.get(&#39;rexCanvasData&#39;).textObjectToBitMap(textureKey, frameName, out);</span>
 </pre></div></li>
-<li>Support full screen
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">supported</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Device</span><span class="p">.</span><span class="nx">Fullscreen</span><span class="p">.</span><span class="nx">available</span><span class="p">;</span>
+<li>Texture of game object -&gt; Color map
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">canvasData</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexCanvasData&#39;</span><span class="p">).</span><span class="nx">textureTColorMap</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+<span class="c1">// var out = scene.plugins.get(&#39;rexCanvasData&#39;).textObjectToBitMap(gameObject, out);</span>
+</pre></div></li>
+<li>For each pixel data
+    <div class="codehilite"><pre><span></span><span class="nx">canvasData</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">canvasData</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>value</code> : Color32 integer = color integer + (alpha &lt;&lt; 24)<ul>
+<li>Get color integer (0 ~ 0xffffff)
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">value</span> <span class="o">&amp;</span> <span class="mh">0xffffff</span><span class="p">;</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">canvasData</span><span class="p">.</span><span class="nx">color32ToColorInt</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+</pre></div></li>
+<li>Get alpha (0 ~ 0xff)
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">alpha</span> <span class="o">=</span> <span class="nx">value</span> <span class="o">&gt;&gt;</span> <span class="mi">24</span><span class="p">;</span>
+</pre></div>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">alpha</span> <span class="o">=</span> <span class="nx">canvasData</span><span class="p">.</span><span class="nx">color32TAlpha</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
 </pre></div></li>
 </ul>
-<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="canvas-data">Canvas data<a class="headerlink" href="#canvas-data" title="Permanent link">&para;</a></h3>
+<h4 id="for-each-pixel">For each pixel<a class="headerlink" href="#for-each-pixel" title="Permanent link">&para;</a></h4>
 <ul>
-<li>Full screen mode unsupported
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;fullscreenunsupported&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{});</span>
+<li>For each pixel data
+    <div class="codehilite"><pre><span></span><span class="nx">canvasData</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>callback</code> : Callback for each pixel
+    <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">canvasData</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="p">}</span>
 </pre></div></li>
-<li>Enter full scren mode
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;enterfullscreen&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{});</span>
+</ul>
+</li>
+<li>For each non zero pixel data
+    <div class="codehilite"><pre><span></span><span class="nx">canvasData</span><span class="p">.</span><span class="nx">forEachNonZero</span><span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">scope</span><span class="p">);</span>
 </pre></div></li>
+</ul>
+<h4 id="get-pixel-data">Get pixel data<a class="headerlink" href="#get-pixel-data" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">canvasData</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</pre></div>
+
+<ul>
+<li><code>data</code> :<ul>
+<li><code>0</code>, <code>1</code> in result of <code>textObjectToBitMap</code> method</li>
+<li>Color32 in result of <code>textureTColorMap</code> method</li>
+</ul>
+</li>
 </ul>
                 
                   
@@ -4549,7 +4670,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../scalemanager/" title="Scale manager" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../config-data/" title="Configuration data" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -4558,19 +4679,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Scale manager
+                Configuration data
               </span>
             </div>
           </a>
         
         
-          <a href="../orientation/" title="Orientation" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../interpolation/" title="Interpolation" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Orientation
+                Interpolation
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

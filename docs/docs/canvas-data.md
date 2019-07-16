@@ -58,7 +58,7 @@ var canvasData = scene.plugins.get('rexCanvasData').textObjectToBitMap(textObjec
 
     }, scope);
     ```
-    - `value` : `true`, or `false`
+    - `value` : `0`, or `1`
 
 ### Texture -> Color map
 
@@ -121,5 +121,5 @@ var data = canvasData.get(x, y);
 ```
 
 - `data` :
-    - `true`, `false` in result of `textObjectToBitMap` method
+    - `0`, `1` in result of `textObjectToBitMap` method
     - Color32 in result of `textureTColorMap` method
