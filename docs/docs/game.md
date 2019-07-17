@@ -199,13 +199,20 @@ Instance of [data manager](datamanager.md) in `game.registry`, or `scene.registr
 
 ## Game time
 
-- The time that the current game step started at
+- The time that the current game step started at.
     ```javascript
     var time = game.getTime();
+    // var time = scene.game.getTime();
     ```
-- The current game frame
+- The current game frame.
     ```javascript
     var frameCount = game.getFrame();
+    // var frameCount = scene.game.getFrame();
+    ```
+- The delta time, since the last game step. This is a clamped and smoothed average value.
+    ```javascript
+    var delta = game.loop.delta;
+    // var delta = scene.game.loop.delta;
     ```
 
 ## Window size

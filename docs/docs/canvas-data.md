@@ -89,7 +89,7 @@ var canvasData = scene.plugins.get('rexCanvasData').textObjectToBitMap(textObjec
             ```
         - Get alpha (0 ~ 0xff)
             ```javascript
-            var alpha = value >> 24;
+            var alpha = value >>> 24;
             ```
             ```javascript
             var alpha = canvasData.color32TAlpha(value);

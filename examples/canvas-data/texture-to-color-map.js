@@ -1,4 +1,5 @@
 import CanvasDataPlugin from '../../plugins/canvasdata-plugin.js';
+import LogMaxDelta from '../../plugins/utils/system/LogMaxDelta.js'
 
 const COLOR_PRIMARY = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
@@ -15,6 +16,7 @@ class Demo extends Phaser.Scene {
 
     preload() {
         this.load.image('mushroom', 'assets/images/mushroom.png');
+        this.load.image('dot', 'assets/images/white-dot.png');
     }
 
     create() {
@@ -27,14 +29,15 @@ class Demo extends Phaser.Scene {
                 var destinationX = startX + (x * width);
                 var destinationY = startY + (y * height);
                 offsetXY = RandomXY(offsetXY, 300);
-                var gameObject = this.add.rectangle(
+                var gameObject = createImage(
+                    this,
                     (destinationX + offsetXY.x),
                     (destinationY + offsetXY.y),
-                    width,
-                    height,
+                    width, height,
                     (value & 0xffffff),
-                    ((value >> 24) / 255)
-                )
+                    ((value >>> 24) / 255)
+                );
+
                 this.tweens.add({
                     targets: gameObject,
                     x: destinationX,
@@ -47,7 +50,20 @@ class Demo extends Phaser.Scene {
             }, this)
     }
 
-    update() { }
+    update(time) {
+        LogMaxDelta(time);
+    }
+}
+
+var createImage = function (scene, x, y, width, height, color, alpha) {
+    return scene.add.image(x, y, 'dot')
+        .setDisplaySize(width, height)
+        .setTintFill(color)
+        .setAlpha(alpha)
+}
+
+var createRectangle = function (scene, x, y, width, height, color, alpha) {
+    return scene.add.rectangle(x, y, width, height, color, alpha)
 }
 
 var config = {

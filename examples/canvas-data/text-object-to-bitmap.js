@@ -1,4 +1,5 @@
 import CanvasDataPlugin from '../../plugins/canvasdata-plugin.js';
+import LogMaxDelta from '../../plugins/utils/system/LogMaxDelta.js'
 
 const COLOR_PRIMARY = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
@@ -46,7 +47,9 @@ class Demo extends Phaser.Scene {
             }, this)
     }
 
-    update() { }
+    update(time) {
+        LogMaxDelta(time);
+    }
 }
 
 var config = {
