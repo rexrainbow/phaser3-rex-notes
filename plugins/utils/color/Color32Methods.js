@@ -10,7 +10,7 @@ export default {
     },
 
     color32ToAlpha(color32) {
-        return color32 >> 24;
+        return color32 >>> 24;
     },
 
     color32ToColorObject(color32, out) {
