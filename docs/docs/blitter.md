@@ -125,7 +125,7 @@ bob.reset(x, y);
 // bob.reset(x, y, frame);
 ```
 
-### Frame
+#### Frame
 
 ```javascript
 bob.setFrame(frame);
