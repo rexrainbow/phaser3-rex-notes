@@ -109,7 +109,7 @@ blitter.clear();
 
 A Bob has a position, alpha value and a frame from a texture that it uses to render with. You can also toggle the flipped and visible state of the Bob.
 
-#### Position, frame
+#### Position
 
 ```javascript
 bob.x = 0;
@@ -118,9 +118,14 @@ bob.y = 0;
 // var y = bob.y;
 ```
 
+or
+
 ```javascript
-bob.reset(x, y, frame);
+bob.reset(x, y);
+// bob.reset(x, y, frame);
 ```
+
+### Frame
 
 ```javascript
 bob.setFrame(frame);
@@ -144,13 +149,15 @@ bob.setFlipX(boolean);
 bob.setFlipY(boolean);
 ```
 
-#### Visible, alpha
+#### Visible
 
 ```javascript
 bob.setVisible(boolean);
 // bob.visible = v;
 // var visible = bob.visible;
 ```
+
+#### Alpha
 
 ```javascript
 bob.setAlpha(v);
