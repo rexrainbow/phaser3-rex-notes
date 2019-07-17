@@ -23,7 +23,8 @@ class Demo extends Phaser.Scene {
         var img = this.add.image(0, 0, 'mushroom').setOrigin(0);
 
         var startX = 250, startY = 100, width = 6, height = 6,
-            offsetXY = { x: 0, y: 0 };
+            offsetXY = { x: 0, y: 0 },
+            count = 0;
         this.plugins.get('rexCanvasData').textureTColorMap(img)
             .forEachNonZero(function (value, x, y, colorMap) {
                 var destinationX = startX + (x * width);
@@ -47,7 +48,10 @@ class Demo extends Phaser.Scene {
                     repeat: 0,            // -1: infinity
                     yoyo: false
                 });
+                count++;
             }, this)
+
+        console.log(count);
     }
 
     update(time) {

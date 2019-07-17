@@ -21,7 +21,8 @@ class Demo extends Phaser.Scene {
         var txt = this.add.text(0, 0, 'hello');
 
         var startX = 250, startY = 200, width = 6, height = 6,
-            offsetXY = { x: 0, y: 0 };
+            offsetXY = { x: 0, y: 0 },
+            count = 0;
         this.plugins.get('rexCanvasData').textObjectToBitMap(txt)
             .forEachNonZero(function (value, x, y, bitMap) {
                 var destinationX = startX + (x * width);
@@ -43,8 +44,10 @@ class Demo extends Phaser.Scene {
                     repeat: 0,            // -1: infinity
                     yoyo: false
                 });
+                count++;
+            }, this);
 
-            }, this)
+        console.log(count);
     }
 
     update(time) {
