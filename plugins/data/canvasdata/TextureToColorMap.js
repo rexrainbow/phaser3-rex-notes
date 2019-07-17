@@ -1,6 +1,6 @@
 import CanvasToData from './canvasdata/CanvasToData.js';
 import ColorBuffer from '../../utils/arraybuffers/FourBytesBuffer.js';
-import FillColor from './fill/FillColor.js';
+import FillColor from './fillcallbacks/color32.js';
 import IsGameObject from '../../utils/system/IsGameObject.js';
 
 const CanvasPool = Phaser.Display.Canvas.CanvasPool;

@@ -1,6 +1,6 @@
 import CanvasToData from './canvasdata/CanvasToData.js';
 import BooleanBuffer from '../../utils/arraybuffers/BooleanBuffer.js';
-import FillAlpha from './fill/FillAlpha.js';
+import FillAlpha from './fillcallbacks/alpha.js';
 
 var TextObjectToBitMap = function (textObject, out) {
     return CanvasToData(
