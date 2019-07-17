@@ -1,4 +1,4 @@
-import Color32Methods from '../../../utils/color/Color32Methods.js';
+import Color32Methods from '../../../utils/math/color/Color32Methods.js';
 
 class CanvasData {
     constructor(BufferClass, width, height) {

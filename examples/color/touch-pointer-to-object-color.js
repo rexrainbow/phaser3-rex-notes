@@ -1,4 +1,4 @@
-import LocalXYToColor from '../../plugins/utils/color/LocalXYToColor.js';
+import LocalXYToColor from '../../plugins/utils/texture/LocalXYToColor.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
