@@ -4713,11 +4713,17 @@
 <p>Instance of <a href="../datamanager/">data manager</a> in <code>game.registry</code>, or <code>scene.registry</code> in each scene.</p>
 <h2 id="game-time">Game time<a class="headerlink" href="#game-time" title="Permanent link">&para;</a></h2>
 <ul>
-<li>The time that the current game step started at
+<li>The time that the current game step started at.
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">time</span> <span class="o">=</span> <span class="nx">game</span><span class="p">.</span><span class="nx">getTime</span><span class="p">();</span>
+<span class="c1">// var time = scene.game.getTime();</span>
 </pre></div></li>
-<li>The current game frame
+<li>The current game frame.
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">frameCount</span> <span class="o">=</span> <span class="nx">game</span><span class="p">.</span><span class="nx">getFrame</span><span class="p">();</span>
+<span class="c1">// var frameCount = scene.game.getFrame();</span>
+</pre></div></li>
+<li>The delta time, since the last game step. This is a clamped and smoothed average value.
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">delta</span> <span class="o">=</span> <span class="nx">game</span><span class="p">.</span><span class="nx">loop</span><span class="p">.</span><span class="nx">delta</span><span class="p">;</span>
+<span class="c1">// var delta = scene.game.loop.delta;</span>
 </pre></div></li>
 </ul>
 <h2 id="window-size">Window size<a class="headerlink" href="#window-size" title="Permanent link">&para;</a></h2>

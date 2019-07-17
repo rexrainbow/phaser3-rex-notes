@@ -4613,7 +4613,7 @@
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">canvasData</span><span class="p">.</span><span class="nx">color32ToColorInt</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
 </pre></div></li>
 <li>Get alpha (0 ~ 0xff)
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">alpha</span> <span class="o">=</span> <span class="nx">value</span> <span class="o">&gt;&gt;</span> <span class="mi">24</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">alpha</span> <span class="o">=</span> <span class="nx">value</span> <span class="o">&gt;&gt;&gt;</span> <span class="mi">24</span><span class="p">;</span>
 </pre></div>
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">alpha</span> <span class="o">=</span> <span class="nx">canvasData</span><span class="p">.</span><span class="nx">color32TAlpha</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
 </pre></div></li>
