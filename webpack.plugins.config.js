@@ -116,6 +116,9 @@ module.exports = {
         'hsladjustpipelineplugin': './plugins/hsladjustpipeline-plugin.js',
         'toonifypipelineplugin': './plugins/toonifypipeline-plugin.js',
 
+        // texture
+        'createcanvastextureplugin': './plugins/createcanvastexture-plugin.js',
+
         // board
         'boardplugin': './plugins/board-plugin.js',
 
