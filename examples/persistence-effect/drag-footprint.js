@@ -1,4 +1,5 @@
 import PersistenceEffectPlugin from '../../plugins/persistenceeffect-plugin.js';
+import CreateCircleTexture from '../../plugins/utils/texture/CreateCircleTexture.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -11,7 +12,7 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        CreateTexture(this, 'dot');
+        CreateCircleTexture(this, 'dot', 8);
         var persistenceEffect = this.add.rexPersistenceEffect('dot', {
             lifespan: 3000
         });
@@ -24,15 +25,6 @@ class Demo extends Phaser.Scene {
     }
 
     update() { }
-}
-
-var CreateTexture = function (scene, key) {
-    var r = 4, w = r * 2;
-    scene.add.graphics()
-        .fillStyle(0xffffff)
-        .fillCircle(r, r, r)
-        .generateTexture(key, w, w)
-        .destroy();
 }
 
 var config = {
