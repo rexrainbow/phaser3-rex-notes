@@ -1,9 +1,7 @@
+import Factory from './gameobjects/shape/roundrectangle/Factory.js';
+import Creator from './gameobjects/shape/roundrectangle/Creator.js';
 import RoundRectangle from './gameobjects/shape/roundrectangle/RoundRectangle.js';
 import SetValue from './utils/object/SetValue.js';
-
-const GetAdvancedValue = Phaser.Utils.Objects.GetAdvancedValue;
-const GetValue = Phaser.Utils.Objects.GetValue;
-const BuildGameObject = Phaser.GameObjects.BuildGameObject;
 
 class RoundRectanglePlugin extends Phaser.Plugins.BasePlugin {
 
@@ -11,33 +9,13 @@ class RoundRectanglePlugin extends Phaser.Plugins.BasePlugin {
         super(pluginManager);
 
         //  Register our new Game Object type
-        pluginManager.registerGameObject('rexRoundRectangle', this.addRoundRectangle, this.makeRoundRectangle);
+        pluginManager.registerGameObject('rexRoundRectangle', Factory, Creator);
     }
 
     start() {
         var eventEmitter = this.game.events;
         eventEmitter.once('destroy', this.destroy, this);
     }
-
-    addRoundRectangle(x, y, width, height, radiusConfig, fillColor, fillAlpha) {
-        var gameObject = new RoundRectangle(this.scene, x, y, width, height, radiusConfig, fillColor, fillAlpha);
-        this.scene.add.existing(gameObject);
-        return gameObject;
-    }
-
-    makeRoundRectangle(config) {
-        var width = GetAdvancedValue(config, 'width', undefined);
-        var height = GetAdvancedValue(config, 'height', width);
-        var radiusConfig = GetValue(config, 'radius', undefined);
-        var fillColor = GetAdvancedValue(config, 'fillColor', undefined);
-        var fillAlpha = GetAdvancedValue(config, 'fillAlpha', undefined);
-        var gameObject = new RoundRectangle(this.scene, 0, 0, width, height, radiusConfig, fillColor, fillAlpha);
-
-        BuildGameObject(this.scene, gameObject, config);
-
-        return gameObject;
-    }
-
 }
 
 SetValue(window, 'RexPlugins.GameObjects.RoundRectangle', RoundRectangle);
