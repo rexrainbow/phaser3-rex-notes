@@ -4746,13 +4746,14 @@
 </pre></div>
 
 <h3 id="get-bob-objects">Get bob objects<a class="headerlink" href="#get-bob-objects" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bobs</span> <span class="o">=</span> <span class="nx">blitter</span><span class="p">.</span><span class="nx">children</span><span class="p">;</span>
-<span class="c1">// bobs = blitter.getRenderList();</span>
-</pre></div>
-
-<div class="codehilite"><pre><span></span><span class="nx">bobs</span> <span class="o">=</span> <span class="nx">blitter</span><span class="p">.</span><span class="nx">getRenderList</span><span class="p">();</span>
-</pre></div>
-
+<ul>
+<li>Get all bob objects
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bobs</span> <span class="o">=</span> <span class="nx">blitter</span><span class="p">.</span><span class="nx">children</span><span class="p">.</span><span class="nx">list</span><span class="p">;</span>
+</pre></div></li>
+<li>Get rendered bob objects
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">bobs</span> <span class="o">=</span> <span class="nx">blitter</span><span class="p">.</span><span class="nx">getRenderList</span><span class="p">();</span>
+</pre></div></li>
+</ul>
 <h3 id="clear-all-bob-objects">Clear all bob objects<a class="headerlink" href="#clear-all-bob-objects" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="nx">blitter</span><span class="p">.</span><span class="nx">clear</span><span class="p">();</span>
 </pre></div>
