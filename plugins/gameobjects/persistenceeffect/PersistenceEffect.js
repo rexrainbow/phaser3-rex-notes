@@ -1,5 +1,3 @@
-import IsGameObject from '../../utils/system/IsGameObject.js';
-
 const Blitter = Phaser.GameObjects.Blitter;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -71,16 +69,6 @@ class PersistenceEffect extends Blitter {
     }
 
     paste(x, y, lifespan, alphaStart, frame) {
-        if (IsGameObject(x)) {
-            // gameObject, lifespan, alphaStart
-            var gameObject = x;
-            alphaStart = lifespan;
-            lifespan = y;
-            x = gameObject.x;
-            y = gameObject.y;
-            frame = gameObject.frame;
-        }
-
         if (lifespan === undefined) {
             lifespan = this.lifespan;
         }
