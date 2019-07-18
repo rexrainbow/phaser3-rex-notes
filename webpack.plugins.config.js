@@ -28,6 +28,8 @@ module.exports = {
         'video': './plugins/video.js',
         'youtubeplayerplugin': './plugins/youtubeplayer-plugin.js',
         'youtubeplayer': './plugins/youtubeplayer.js',
+        'persistenceeffectplugin': './plugins/persistenceeffect-plugin.js',
+        'persistenceeffect': './plugins/persistenceeffect.js',
 
         // custom file loader      
         'webfontloaderplugin': './plugins/webfontloader-plugin.js',
