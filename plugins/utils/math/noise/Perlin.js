@@ -63,7 +63,7 @@ class Noise {
         this.setSeed(seed);
     }
 
-    Seed(seed) {
+    setSeed(seed) {
         var perm = this.perm;
         var gradP = this.gradP;
 

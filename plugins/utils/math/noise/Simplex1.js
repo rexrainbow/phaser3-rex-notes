@@ -19,7 +19,7 @@ class Noise {
         this.perm = new Uint8Array(256);
     }
 
-    setSeed = function (seed) {
+    setSeed(seed) {
         if (seed > 0 && seed < 1) {
             // Scale the seed out
             seed *= 65536;
@@ -43,7 +43,7 @@ class Noise {
         }
     }
 
-    hash = function (i) {
+    hash(i) {
         return this.perm[i & 255];
     }
 
