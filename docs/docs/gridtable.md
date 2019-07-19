@@ -157,6 +157,15 @@ It is equal to `cellVisibleCallback` in configuration.
         var cellWidth = cell.width;
         var cellHeight = cell.height;
         ```
+        - Change size of cell : 
+            - Change cell height in scoll-vertical mode.
+                ```javascript
+                cell.height = newHeight;
+                ```
+            - Change cell width in scroll-horizontal mode.
+                ```javascript
+                cell.width = newWidth;
+                ```
     - Assign cell container. Set origin point of this cell container to (0,0).
         ```javascript
         cell.setContainer(cellContainer);
@@ -324,7 +333,7 @@ table.resize(width, height);
 #### Get cell
 
 ```javascript
-var cell = table.getCell(cellIndxe);
+var cell = table.getCell(cellIndex);
 ```
 
 #### Cell height
@@ -333,14 +342,39 @@ var cell = table.getCell(cellIndxe);
     ```javascript
     var height = cell.height;
     ```
-- Set
+- Set cell height, only worked in scoll-vertical mode.
     ```javascript
     cell.height = height;
+    // cell.setHeight(height);
     ```
     or
     ```javascript
-    cell.setHeight(height);
+    table.setCellHeight(cellIndex, cellHeight);
     ```
+    - Refresh table after the cell size is changed.
+        ```javascript
+        table.updateTable(true);
+        ```
+
+#### Cell width
+
+- Get
+    ```javascript
+    var width = cell.width;
+    ```
+- Set cell width, only worked in scoll-horizontal mode.
+    ```javascript
+    cell.width = width;
+    // cell.setWidth(width);
+    ```
+    or
+    ```javascript
+    table.setCellWidth(cellIndex, cellWidth);
+    ```
+    - Refresh table after the cell size is changed.
+        ```javascript
+        table.updateTable(true);
+        ```
 
 #### Fore each visible cell
 
