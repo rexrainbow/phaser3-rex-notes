@@ -90,14 +90,9 @@ var bobs = blitter.createFromCallback(callback, quantity, frame, visible)
 
 ### Get bob objects
 
-- Get all bob objects
-    ```javascript
-    var bobs = blitter.children.list;
-    ```
-- Get rendered bob objects
-    ```javascript
-    var bobs = blitter.getRenderList();
-    ```
+```javascript
+var bobs = blitter.children.list;
+```
 
 ### Clear all bob objects
 

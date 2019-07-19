@@ -1,5 +1,6 @@
 import CanvasDataPlugin from '../../plugins/canvasdata-plugin.js';
-import LogMaxDelta from '../../plugins/utils/system/LogMaxDelta.js'
+import CreateRectangleTexture from '../../plugins/utils/texture/CreateRectangleTexture.js';
+import MaxDeltaPlugin from '../../plugins/maxdelta-plugin.js'
 
 const COLOR_PRIMARY = 0x4e342e;
 const COLOR_LIGHT = 0x7b5e57;
@@ -18,23 +19,31 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
+        this.plugins.get('rexMaxDelta').reset();
+
         var txt = this.add.text(0, 0, 'hello');
 
         var startX = 250, startY = 200, width = 6, height = 6,
             offsetXY = { x: 0, y: 0 },
             count = 0;
+        CreateRectangleTexture(this, 'dot', width, height, COLOR_LIGHT);
+        var blitter = this.add.blitter(0, 0, 'dot');
         this.plugins.get('rexCanvasData').textObjectToBitMap(txt)
             .forEachNonZero(function (value, x, y, bitMap) {
-                var destinationX = startX + (x * width);
-                var destinationY = startY + (y * height);
+                var destinationX = startX + (x * width),
+                    destinationY = startY + (y * height);
                 offsetXY = RandomXY(offsetXY, 300);
-                var gameObject = this.add.rectangle(
+                var gameObject = blitter.create(
                     (destinationX + offsetXY.x),
-                    (destinationY + offsetXY.y),
-                    width,
-                    height,
-                    COLOR_LIGHT
-                )
+                    (destinationY + offsetXY.y)
+                );
+                // var gameObject = this.add.rectangle(
+                //     (destinationX + offsetXY.x),
+                //     (destinationY + offsetXY.y),
+                //     width,
+                //     height,
+                //     COLOR_LIGHT
+                // )
                 this.tweens.add({
                     targets: gameObject,
                     x: destinationX,
@@ -48,10 +57,10 @@ class Demo extends Phaser.Scene {
             }, this);
 
         console.log(count);
-    }
 
-    update(time) {
-        LogMaxDelta(time);
+        this.input.on('pointerdown', function () {
+            this.scene.restart();
+        }, this)
     }
 }
 
@@ -66,11 +75,18 @@ var config = {
     },
     scene: Demo,
     plugins: {
-        global: [{
-            key: 'rexCanvasData',
-            plugin: CanvasDataPlugin,
-            start: true
-        }]
+        global: [
+            {
+                key: 'rexCanvasData',
+                plugin: CanvasDataPlugin,
+                start: true
+            },
+            {
+                key: 'rexMaxDelta',
+                plugin: MaxDeltaPlugin,
+                start: true
+            },
+        ]
     }
 };
 
