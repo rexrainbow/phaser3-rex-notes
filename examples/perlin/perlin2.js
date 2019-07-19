@@ -1,4 +1,5 @@
-import Noise from '../../plugins/utils/math/noise/Perlin.js';
+import PerlinPlugin from '../../plugins/perlin-plugin.js';
+import CanvasPlugin from '../../plugins/canvas-plugin.js'
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -13,14 +14,12 @@ class Demo extends Phaser.Scene {
 
     create() {
         this.points = [];
-        this.noise = new Noise(Math.random());
-        this.canvas = this.add.renderTexture(0, 0, this.game.config.width, this.game.config.height);
-        this.dot = this.add.rectangle(0, 0, 2, 2);
-        this.colors = Phaser.Display.Color.HSVColorWheel(0.95, 0.8);
+        this.noise = this.plugins.get('rexPerlin').add(Math.random());
+        this.canvas = this.add.rexCanvas(0, 0, this.cameras.main.width, this.cameras.main.height).setOrigin(0);
 
         var width = this.canvas.width,
             height = this.canvas.height;
-        for (var i = 0; i < 500; i++) {
+        for (var i = 0; i < 2000; i++) {
             var p1 = {
                 x: (Math.random() * width),
                 y: (height / 2) + (Math.random() * 50),
@@ -39,23 +38,19 @@ class Demo extends Phaser.Scene {
 
     update(time, delta) {
         var points = this.points, p;
-        var v, a, color, period = delta / 10000;
+        var v, a, period = delta / 5000;
         var noise = this.noise,
-            dot = this.dot,
             canvas = this.canvas,
-            colors = this.colors;
+            ctx = canvas.getCanvas().getContext('2d');
         for (var i = 0, cnt = points.length; i < cnt; i++) {
             p = points[i];
             v = noise.perlin2(p.x * period, p.y * period);
             a = (v * 2 * Math.PI) + p.a;
             p.x += Math.cos(a);
             p.y += Math.sin(a);
-            color = colors[Math.floor(Math.abs(v) * 360)].color;
 
-            dot
-                .setPosition(p.x, p.y)
-                .setFillStyle(color, 0.3)
-            canvas.draw(dot);
+            ctx.fillStyle = `hsla(${Math.floor(v * 360)}, 60%, 50%, 0.1)`;
+            ctx.fillRect(Math.floor(p.x), Math.floor(p.y), 1, 1);
         }
 
         this.fps.text = delta;
@@ -72,6 +67,20 @@ var config = {
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
     scene: Demo,
+    plugins: {
+        global: [
+            {
+                key: 'rexPerlin',
+                plugin: PerlinPlugin,
+                start: true
+            },
+            {
+                key: 'rexCanvas',
+                plugin: CanvasPlugin,
+                start: true
+            }
+        ]
+    }
 };
 
 var game = new Phaser.Game(config);

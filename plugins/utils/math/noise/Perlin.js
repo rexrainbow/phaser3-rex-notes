@@ -53,13 +53,13 @@ var lerp = function (a, b, t) {
 
 class Noise {
     constructor(seed) {
+        if (seed === undefined) {
+            seed = 0;
+        }
+
         // To remove the need for index wrapping, double the permutation table length      
         this.perm = new Array(512);
         this.gradP = new Array(512);
-
-        if (seed == null)
-            seed = 0;
-
         this.setSeed(seed);
     }
 
