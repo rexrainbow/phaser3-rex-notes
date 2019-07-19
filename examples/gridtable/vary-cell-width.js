@@ -17,7 +17,7 @@ class Demo extends Phaser.Scene {
         var onCellVisible = function (cell) {
             var scene = cell.scene;
             var cellIdx = cell.index;
-            // cell.height = (cellIdx % 2) ? 40 : 80;  // Set height of visible cell
+            // cell.width = (cellIdx % 2) ? 40 : 80;  // Set width of visible cell
 
             var color = (cellIdx % 2) ? COLOR_PRIMARY : COLOR_DARK;
             var bg = scene.add.rectangle(0, 0, cell.width, cell.height, color)
@@ -29,9 +29,10 @@ class Demo extends Phaser.Scene {
             cell.setContainer(container);
             //console.log('Cell ' + cell.index + ' visible');
         };
-        var table = this.add.rexGridTable(400, 300, 250, 400, {
-            cellWidth: 240,
-            cellHeight: 60,
+        var table = this.add.rexGridTable(400, 300, 400, 250, {
+            scrollMode: 1,
+            cellWidth: 60,
+            cellHeight: 240,
             cellsCount: 20,
             columns: 1,
             cellVisibleCallback: onCellVisible.bind(this),
@@ -42,8 +43,8 @@ class Demo extends Phaser.Scene {
 
         // Set height of all cells
         for (var i = 0, cnt = table.cellsCount; i < cnt; i++) {
-            var cellHeight = (i % 2) ? 40 : 80;
-            table.setCellHeight(i, cellHeight);
+            var cellWidth = (i % 2) ? 40 : 80;
+            table.setCellWidth(i, cellWidth);
         }
         table.updateTable(true); // Refresh visible cells
 
@@ -61,7 +62,7 @@ class Demo extends Phaser.Scene {
             }
             var dx = pointer.x - pointer.prevPosition.x;
             var dy = pointer.y - pointer.prevPosition.y;
-            table.addTableOXY(dx, dy).updateTable();
+            table.addTableOXY(dy, dx).updateTable();
         });
     }
 

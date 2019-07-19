@@ -331,6 +331,9 @@ class GridTable extends Container {
     }
 
     updateTable(refresh) {
+        if (refresh === undefined) {
+            refresh = false;
+        }
         if (refresh) {
             this.clearVisibleCellIndexes();
             this.hideCells();
