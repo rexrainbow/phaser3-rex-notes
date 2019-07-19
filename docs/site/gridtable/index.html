@@ -1424,6 +1424,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#cell-width" title="Cell width" class="md-nav__link">
+    Cell width
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#fore-each-visible-cell" title="Fore each visible cell" class="md-nav__link">
     Fore each visible cell
   </a>
@@ -4696,6 +4703,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#cell-width" title="Cell width" class="md-nav__link">
+    Cell width
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#fore-each-visible-cell" title="Fore each visible cell" class="md-nav__link">
     Fore each visible cell
   </a>
@@ -4898,7 +4912,18 @@
 <li>Size of cell.
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cellWidth</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
 <span class="kd">var</span> <span class="nx">cellHeight</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+</pre></div><ul>
+<li>Change size of cell : <ul>
+<li>Change cell height in scoll-vertical mode.
+    <div class="codehilite"><pre><span></span><span class="nx">cell</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">newHeight</span><span class="p">;</span>
 </pre></div></li>
+<li>Change cell width in scroll-horizontal mode.
+    <div class="codehilite"><pre><span></span><span class="nx">cell</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">newWidth</span><span class="p">;</span>
+</pre></div></li>
+</ul>
+</li>
+</ul>
+</li>
 <li>Assign cell container. Set origin point of this cell container to (0,0).
     <div class="codehilite"><pre><span></span><span class="nx">cell</span><span class="p">.</span><span class="nx">setContainer</span><span class="p">(</span><span class="nx">cellContainer</span><span class="p">);</span>
 </pre></div></li>
@@ -5041,7 +5066,7 @@
 
 <h3 id="cell">Cell<a class="headerlink" href="#cell" title="Permanent link">&para;</a></h3>
 <h4 id="get-cell">Get cell<a class="headerlink" href="#get-cell" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cell</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">getCell</span><span class="p">(</span><span class="nx">cellIndxe</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cell</span> <span class="o">=</span> <span class="nx">table</span><span class="p">.</span><span class="nx">getCell</span><span class="p">(</span><span class="nx">cellIndex</span><span class="p">);</span>
 </pre></div>
 
 <h4 id="cell-height">Cell height<a class="headerlink" href="#cell-height" title="Permanent link">&para;</a></h4>
@@ -5049,12 +5074,36 @@
 <li>Get
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">height</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
 </pre></div></li>
-<li>Set
+<li>Set cell height, only worked in scoll-vertical mode.
     <div class="codehilite"><pre><span></span><span class="nx">cell</span><span class="p">.</span><span class="nx">height</span> <span class="o">=</span> <span class="nx">height</span><span class="p">;</span>
+<span class="c1">// cell.setHeight(height);</span>
 </pre></div>
     or
-    <div class="codehilite"><pre><span></span><span class="nx">cell</span><span class="p">.</span><span class="nx">setHeight</span><span class="p">(</span><span class="nx">height</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">setCellHeight</span><span class="p">(</span><span class="nx">cellIndex</span><span class="p">,</span> <span class="nx">cellHeight</span><span class="p">);</span>
+</pre></div><ul>
+<li>Refresh table after the cell size is changed.
+    <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">updateTable</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
 </pre></div></li>
+</ul>
+</li>
+</ul>
+<h4 id="cell-width">Cell width<a class="headerlink" href="#cell-width" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">width</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+</pre></div></li>
+<li>Set cell width, only worked in scoll-horizontal mode.
+    <div class="codehilite"><pre><span></span><span class="nx">cell</span><span class="p">.</span><span class="nx">width</span> <span class="o">=</span> <span class="nx">width</span><span class="p">;</span>
+<span class="c1">// cell.setWidth(width);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">setCellWidth</span><span class="p">(</span><span class="nx">cellIndex</span><span class="p">,</span> <span class="nx">cellWidth</span><span class="p">);</span>
+</pre></div><ul>
+<li>Refresh table after the cell size is changed.
+    <div class="codehilite"><pre><span></span><span class="nx">table</span><span class="p">.</span><span class="nx">updateTable</span><span class="p">(</span><span class="kc">true</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+</li>
 </ul>
 <h4 id="fore-each-visible-cell">Fore each visible cell<a class="headerlink" href="#fore-each-visible-cell" title="Permanent link">&para;</a></h4>
 <ul>
