@@ -53,6 +53,7 @@
 1. [Mouse-wheel to up/down](mousewheeltoupdown.md): Map mouse-wheeling to (up/down) cursor key state.
 1. [Move to](moveto.md): Move game object towards target position with a steady speed.
 1. [Path follower](pathfollower.md): Set position of game object on a path.
+1. [Perlin](perlin.md): Perlin2/3 noise and simplex2/3 noise.
 1. [Pop up](popup.md): Scale up game object.
 1. [Quest](quest.md): Question manager.
 1. [Restorable data](restorabledata.md): Restorable data manager.

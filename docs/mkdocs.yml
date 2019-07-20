@@ -196,6 +196,7 @@ nav:
     - Random:
         - Random number: random.md
         - Gashapon: gashapon.md
+        - Perlin: perlin.md
     - Color: color.md
     - Vector:
         - Vector2: vector2.md
