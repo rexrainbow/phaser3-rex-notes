@@ -1,6 +1,6 @@
 ## Introduction
 
-Perlin2/3 noise and simplex2/3 noise. ([Reference](https://github.com/josephg/noisejs/blob/master/perlin.js))
+Perlin2/Perlin3 noise and simplex2/simplex3 noise. ([Reference](https://github.com/josephg/noisejs/blob/master/perlin.js))
 
 - Author: Rex
 - Method only
