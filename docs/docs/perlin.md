@@ -58,10 +58,12 @@ var noise = cene.plugins.get('rexPerlin').add(seed);
     ```javascript
     var value = noise.perlin2(x, y);
     ```
+    - `value` : `-1` ~ `1`
 - Perlin3
     ```javascript
     var value = noise.perlin3(x, y, z);
     ```
+    - `value` : `-1` ~ `1`
 
 ### Simplex
 
@@ -69,10 +71,12 @@ var noise = cene.plugins.get('rexPerlin').add(seed);
     ```javascript
     var value = noise.simplex2(x, y);
     ```
+    - `value` : `-1` ~ `1`    
 - Simplex3
     ```javascript
     var value = noise.simplex3(x, y, z);
     ```
+    - `value` : `-1` ~ `1`
 
 ### Set seed
 
