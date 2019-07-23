@@ -67,10 +67,10 @@ class LoopInTicks extends TickTask {
         return this;
     }
 
-    // addItemsLoop(key, items, reverse) {
-    //     this.loopIndexGenerator.addItemsLoop(key, items, reverse);
-    //     return this;
-    // }
+    addItemsLoop(key, items, reverse) {
+        this.loopIndexGenerator.addItemsLoop(key, items, reverse);
+        return this;
+    }
 
     addLoop(config) {
         this.loopIndexGenerator.addLoop(config);

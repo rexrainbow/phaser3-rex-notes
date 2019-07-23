@@ -25,18 +25,18 @@ class LoopIndexGenerator {
         return this;
     }
 
-    // addItemsLoop(key, items, reverse) {
-    //     if (reverse === undefined) {
-    //         reverse = false;
-    //     }
-    //     var lastIndex = items.length - 1;
-    //     var start = (reverse) ? lastIndex : 0;
-    //     var end = (reverse) ? 0 : lastIndex;
-    //     var step = (reverse) ? -1 : 1,
-    //     this.indexes.push(new LoopIndex(key, start, end, step, items));
-    //     this.length = this._getLength();
-    //     return this;
-    // }
+    addItemsLoop(key, items, reverse) {
+        if (reverse === undefined) {
+            reverse = false;
+        }
+        var lastIndex = items.length - 1;
+        var start = (reverse) ? lastIndex : 0;
+        var end = (reverse) ? 0 : lastIndex;
+        var step = (reverse) ? -1 : 1;
+        this.indexes.push(new LoopIndex(key, start, end, step, items));
+        this.length = this._getLength();
+        return this;
+    }
 
     addLoop(config) {
         this.indexes.push(new LoopIndex(config.key, config.start, config.end, config.step, config.items));
