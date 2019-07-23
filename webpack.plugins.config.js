@@ -87,6 +87,7 @@ module.exports = {
         'achievementsplugin': './plugins/achievements-plugin.js',
         'conditionstableplugin': './plugins/conditionstable-plugin.js',
         'questplugin': './plugins/quest-plugin.js',
+        'loopinticksplugin': './plugins/loopinticks-plugin.js',
 
         // time
         'clockplugin': './plugins/clock-plugin.js',

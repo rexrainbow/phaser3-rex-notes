@@ -85,9 +85,7 @@ class TickTask {
 
     complete() {
         this.isRunning = false;
-        if (this.tickingMode !== 0) {
-            this.emit('complete', this.parent, this);
-        }
+        this.emit('complete', this.parent, this);
     }
 }
 
