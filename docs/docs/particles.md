@@ -192,6 +192,7 @@ Reference: [load image](loader.md#image)
             }
         }
         ```
+    - Immortal particle : Set `lifespan` to `Infinity`.
 
 ### Control
 

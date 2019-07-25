@@ -31,6 +31,10 @@ import YoutubePlayerFactory from './youtubeplayer/YoutubePlayerFactory.js';
 
 import TapFactory from './tap/TapFactory.js';
 import PressFactory from './press/PressFactory.js';
+import SwipeFactory from './swipe/SwipeFactory.js';
+import PanFactory from './pan/PanFactory.js';
+import PinchFactory from './pinch/PinchFactory.js';
+import RotateFactory from './rotate/RotateFactory.js';
 
 import {
     Show,
