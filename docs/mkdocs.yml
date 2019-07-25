@@ -334,8 +334,3 @@ markdown_extensions:
     ]
 - pymdownx.tasklist
 - pymdownx.tilde
-
-plugins:
-    - search
-    - minify:
-        minify_html: true
