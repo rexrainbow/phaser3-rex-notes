@@ -175,6 +175,38 @@
     ```javascript
     var press = new RexPlugins.UI.Press(gameObject, config);
     ```
+1. [Swipe](gesture-swipe.md): Get swipe events of a game object.
+    ```javascript
+    var swipe = scene.rexUI.add.swipe(gameObject, config);
+    ```
+    or
+    ```javascript
+    var swipe = new RexPlugins.UI.Swipe(gameObject, config);
+    ```
+1. [Pan](gesture-pan.md): Get pan events of a game object.
+    ```javascript
+    var pan = scene.rexUI.add.pan(gameObject, config);
+    ```
+    or
+    ```javascript
+    var pan = new RexPlugins.UI.Pan(gameObject, config);
+    ```
+1. [Pinch](gesture-pinch.md): Get scale factor from 2 dragging touch pointers.
+    ```javascript
+    var pinch = scene.rexUI.add.pinch(config);
+    ```
+    or
+    ```javascript
+    var pinch = new RexPlugins.UI.Pinch(config);
+    ```
+1. [Rotste](gesture-rotate.md): Get spin angle from 2 dragging touch pointers.
+    ```javascript
+    var rotate = scene.rexUI.add.rotate(config);
+    ```
+    or
+    ```javascript
+    var rotate = new RexPlugins.UI.Rotate(config);
+    ```
 
 ## Demos
 
