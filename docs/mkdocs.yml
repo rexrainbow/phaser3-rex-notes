@@ -339,6 +339,3 @@ plugins:
     - search
     - minify:
         minify_html: true
-        minify_js: true
-        js_files:
-            - js/umlconvert.js 
