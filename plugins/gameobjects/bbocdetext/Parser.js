@@ -113,6 +113,13 @@ var parser = {
         } else if (RE_IMAGE_CLOSE.test(text)) {
             updateProp(prevProp, PROP_REMOVE, 'img');
             plainText = '';
+        } else if (RE_AREA_OPEN.test(text)) {
+            innerMatch = text.match(RE_AREA_OPEN);
+            updateProp(prevProp, PROP_ADD, 'area', innerMatch[1]);
+            plainText = '';
+        } else if (RE_AREA_CLOSE.test(text)) {
+            updateProp(prevProp, PROP_REMOVE, 'area');
+            plainText = '';            
         } else {
             plainText = text
         }
@@ -276,7 +283,7 @@ var getFontStyle = function (isBold, isItalic) {
     }
 };
 
-var RE_SPLITTEXT = /\[b\]|\[\/b\]|\[i\]|\[\/i\]|\[size=(\d+)\]|\[\/size\]|\[color=([a-z]+|#[0-9abcdef]+)\]|\[\/color\]|\[u\]|\[u=([a-z]+|#[0-9abcdef]+)\]|\[\/u\]|\[shadow\]|\[\/shadow\]|\[stroke\]|\[stroke=([a-z]+|#[0-9abcdef]+)\]|\[\/stroke\]|\[img=([^\]]+)\]|\[\/img\]/ig;
+var RE_SPLITTEXT = /\[b\]|\[\/b\]|\[i\]|\[\/i\]|\[size=(\d+)\]|\[\/size\]|\[color=([a-z]+|#[0-9abcdef]+)\]|\[\/color\]|\[u\]|\[u=([a-z]+|#[0-9abcdef]+)\]|\[\/u\]|\[shadow\]|\[\/shadow\]|\[stroke\]|\[stroke=([a-z]+|#[0-9abcdef]+)\]|\[\/stroke\]|\[img=([^\]]+)\]|\[\/img\]|\[area=([^\]]+)\]|\[\/area\]/ig;
 
 var RE_BLOD_OPEN = /\[b\]/i;
 var RE_BLOD_CLOSE = /\[\/b\]/i;
@@ -296,6 +303,8 @@ var RE_STROKE_OPENC = /\[stroke=([a-z]+|#[0-9abcdef]+)\]/i;
 var RE_STROKE_CLOSE = /\[\/stroke\]/i;
 var RE_IMAGE_OPEN = /\[img=([^\]]+)\]/i;
 var RE_IMAGE_CLOSE = /\[\/img\]/i;
+var RE_AREA_OPEN = /\[area=([^\]]+)\]/i;
+var RE_AREA_CLOSE = /\[\/area\]/i;
 const PROP_REMOVE = false;
 const PROP_ADD = true;
 

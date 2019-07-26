@@ -66,6 +66,10 @@ class Pen {
     get isImagePen() {
         return !!this.prop.img;
     }
+
+    get hasAreaMarker() {
+        return !!this.prop.area;
+    }
 };
 
 export default Pen;

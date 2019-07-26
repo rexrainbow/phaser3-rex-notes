@@ -8,10 +8,10 @@ const VALIGN_CENTER = CONST.vcenter;
 const VALIGN_BOTTOM = CONST.vbottom;
 
 export default {
-    draw(startX, startY, boxWidth, boxHeight, penManager) {
-        if (penManager === undefined) {
-            penManager = this.penManager;
-        }
+    draw(startX, startY, boxWidth, boxHeight) {
+        var penManager = this.penManager;
+        this.hitAreaManager.clear();
+
         var context = this.context;
         context.save();
 
@@ -110,6 +110,13 @@ export default {
         }
 
         context.restore();
+
+        if (pen.hasAreaMarker) {
+            this.hitAreaManager.add(
+                pen.prop.area,
+                offsetX, (offsetY - this.startYOffset),
+                pen.width, this.defatultStyle.lineHeight);
+        }
     },
 
     clear() {

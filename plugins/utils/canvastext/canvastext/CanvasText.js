@@ -1,5 +1,7 @@
 import DrawMethods from './DrawMethods.js';
 import PenManager from './PenManager.js';
+import HitAreaManager from './HitAreaManager.js';
+import SetInteractive from './SetInteractive.js';
 import CONST from '../const.js';
 import WrapText from './WrapText.js';
 import Clone from '../../object/Clone.js';
@@ -21,6 +23,8 @@ class CanvasText {
         this.penManager = this.newPenManager();
         this._tmpPenManager = null;
 
+        this.hitAreaManager = new HitAreaManager();
+
         var context = this.context;
         this.getTextWidth = function (text) {
             return context.measureText(text).width;
@@ -40,6 +44,10 @@ class CanvasText {
         if (this._tmpPenManager) {
             this._tmpPenManager.destroy();
             this._tmpPenManager = undefined;
+        }
+        if (this.hitAreaManager) {
+            this.hitAreaManager.destroy();
+            this.hitAreaManager = undefined;
         }
     }
 
@@ -256,9 +264,14 @@ class CanvasText {
     }
 };
 
+var methods = {
+    setInteractive: SetInteractive,
+}
+
 Object.assign(
     CanvasText.prototype,
-    DrawMethods
+    DrawMethods,
+    methods
 );
 
 export default CanvasText;

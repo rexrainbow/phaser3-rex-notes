@@ -455,6 +455,12 @@ var Text = new Phaser.Class({
         this.canvasText.destroy();
     },
 
+    setInteractive: function (shape, callback, dropZone) {
+        GameObject.prototype.setInteractive.call(this, shape, callback, dropZone);
+        this.canvasText.setInteractive();
+        return this;
+    },
+
     getWrappedText: function (text, start, end) {
         text = this.canvasText.getText(text, start, end, true);
         return text.split(SPLITREGEXP);
@@ -508,6 +514,11 @@ var Text = new Phaser.Class({
         this.imageManager.add(key, config);
         return this;
     },
+
+    drawAreaBounds(graphics, color) {
+        this.canvasText.hitAreaManager.drawBounds(graphics, color, this);
+        return this;
+    }
 });
 
 export default Text;
