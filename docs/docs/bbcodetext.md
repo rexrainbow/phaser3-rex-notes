@@ -27,6 +27,7 @@ Drawing text with [BBCode](https://en.wikipedia.org/wiki/BBCode) protocol.
 - Underline : `[u]text[/u]`
     - Underline with color setting : `[u=red]text[/u]`
 - Image : `[img=imgKey]`
+- Hit area of words : `[area=key]text[/area]`
 
 ### Install plugin
 
@@ -325,6 +326,44 @@ txt.setFontStyle(style);
     txt.addImage(data);
     ```
     - `data` : `{imgKey, config}`
+
+### Hit area of words
+
+#### Hitting events
+
+- Pointer down
+    ```javascript
+    txt.on('areadown', function(key, pointer, localX, localY){
+
+    }, scope)
+    ```
+    or
+    ```javascript
+    txt.on('areadown-' + key, function(pointer, localX, localY){
+
+    }, scope)
+    ```
+- Pointer up
+    ```javascript
+    txt.on('areaup', function(key, pointer, localX, localY){
+
+    }, scope)
+    ```
+    or
+    ```javascript
+    txt.on('areaup-' + key, function(pointer, localX, localY){
+
+    }, scope)
+    ```
+
+#### Draw hit-areas
+
+```javascript
+txt.drawAreaBounds(graphics, color);
+```
+
+- `graphics` : [Graphics game object](graphics.md)
+- `color` : Default value is `0xffffff`
 
 ### Line spacing
 

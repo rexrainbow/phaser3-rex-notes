@@ -36,7 +36,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../images/logo.svg">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-3.0.4">
+      <meta name="generator" content="mkdocs-1.0.3, mkdocs-material-3.0.4">
     
     
       
@@ -880,6 +880,33 @@
   <a href="#image" title="Image" class="md-nav__link">
     Image
   </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hit-area-of-words" title="Hit area of words" class="md-nav__link">
+    Hit area of words
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hitting-events" title="Hitting events" class="md-nav__link">
+    Hitting events
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#draw-hit-areas" title="Draw hit-areas" class="md-nav__link">
+    Draw hit-areas
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -4574,6 +4601,33 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#hit-area-of-words" title="Hit area of words" class="md-nav__link">
+    Hit area of words
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hitting-events" title="Hitting events" class="md-nav__link">
+    Hitting events
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#draw-hit-areas" title="Draw hit-areas" class="md-nav__link">
+    Draw hit-areas
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#line-spacing" title="Line spacing" class="md-nav__link">
     Line spacing
   </a>
@@ -4654,6 +4708,7 @@
 </ul>
 </li>
 <li>Image : <code>[img=imgKey]</code></li>
+<li>Hit area of words : <code>[area=key]text[/area]</code></li>
 </ul>
 <h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
 <p>Install plugin in <a href="../game/#configuration">configuration of game</a></p>
@@ -4949,6 +5004,38 @@
 </ul>
 </li>
 </ul>
+<h3 id="hit-area-of-words">Hit area of words<a class="headerlink" href="#hit-area-of-words" title="Permanent link">&para;</a></h3>
+<h4 id="hitting-events">Hitting events<a class="headerlink" href="#hitting-events" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Pointer down
+    <div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;areadown&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">,</span> <span class="nx">localX</span><span class="p">,</span> <span class="nx">localY</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">)</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;areadown-&#39;</span> <span class="o">+</span> <span class="nx">key</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">localX</span><span class="p">,</span> <span class="nx">localY</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">)</span>
+</pre></div></li>
+<li>Pointer up
+    <div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;areaup&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">,</span> <span class="nx">localX</span><span class="p">,</span> <span class="nx">localY</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">)</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;areaup-&#39;</span> <span class="o">+</span> <span class="nx">key</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">localX</span><span class="p">,</span> <span class="nx">localY</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">)</span>
+</pre></div></li>
+</ul>
+<h4 id="draw-hit-areas">Draw hit-areas<a class="headerlink" href="#draw-hit-areas" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">drawAreaBounds</span><span class="p">(</span><span class="nx">graphics</span><span class="p">,</span> <span class="nx">color</span><span class="p">);</span>
+</pre></div>
+
+<ul>
+<li><code>graphics</code> : <a href="../graphics/">Graphics game object</a></li>
+<li><code>color</code> : Default value is <code>0xffffff</code></li>
+</ul>
 <h3 id="line-spacing">Line spacing<a class="headerlink" href="#line-spacing" title="Permanent link">&para;</a></h3>
 <p>This value is <em>added</em> to the height of the font when calculating the overall line height.</p>
 <ul>
@@ -5073,7 +5160,7 @@
     
       <script src="../assets/javascripts/application.583bbe55.js"></script>
       
-      <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
+      <script>app.initialize({version:"1.0.3",url:{base:".."}})</script>
       
         <script src="../js/mermaid/mermaid.min.js"></script>
       
