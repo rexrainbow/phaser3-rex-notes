@@ -1,5 +1,5 @@
 import DrawMethods from './DrawMethods.js';
-import PenManagerKlass from './PenManager.js';
+import PenManager from './PenManager.js';
 import CONST from '../const.js';
 import WrapText from './WrapText.js';
 import Clone from '../../object/Clone.js';
@@ -155,7 +155,7 @@ class CanvasText {
     }
 
     newPenManager() {
-        return new PenManagerKlass({
+        return new PenManager({
             pensPool: this.pensPool,
             tagToText: this.parser.propToTagText,
             tagToTextScope: this.parser

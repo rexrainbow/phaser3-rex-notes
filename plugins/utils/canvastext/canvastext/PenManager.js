@@ -1,5 +1,5 @@
-import PoolKlass from '../../../pool.js';
-import PenKlass from './Pen.js';
+import Pool from '../../../pool.js';
+import Pen from './Pen.js';
 import CONST from '../const.js';
 import Clone from '../../object/Clone.js';
 import NOOP from '../../object/NOOP.js';
@@ -8,8 +8,8 @@ const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 const NO_NEWLINE = CONST.NO_NEWLINE;
 const WRAPPED_NEWLINE = CONST.WRAPPED_NEWLINE;
 
-var PensPool = new PoolKlass(); // default pens pool
-var LinesPool = new PoolKlass(); // default lines pool
+var PensPool = new Pool(); // default pens pool
+var LinesPool = new Pool(); // default lines pool
 class PenManager {
     constructor(config) {
         this.pens = []; // all pens
@@ -40,7 +40,7 @@ class PenManager {
     addTextPen(text, x, y, width, prop, newLineMode) {
         var pen = this.PensPool.pop();
         if (pen == null) {
-            pen = new PenKlass();
+            pen = new Pen();
         }
         PEN_CONFIG.text = text;
         PEN_CONFIG.x = x;

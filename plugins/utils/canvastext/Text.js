@@ -1,7 +1,7 @@
 import Render from './render/TextRender.js';
 import TextStyle from './textstyle/TextStyle.js'; // extended
 import CanvasTextKlass from './canvastext/CanvasText.js';
-import PoolKlass from '../../pool.js';
+import Pool from '../../pool.js';
 import CONST from './const.js';
 import GetGlobImageManager from './imagemanager/GetGlobImageManager.js';
 
@@ -110,7 +110,7 @@ var Text = new Phaser.Class({
             }
 
             if (!PensPools.hasOwnProperty(type)) {
-                PensPools[type] = new PoolKlass();
+                PensPools[type] = new Pool();
             }
             this.canvasText = new CanvasTextKlass({
                 parent: this,

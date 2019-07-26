@@ -1,4 +1,4 @@
-import PoolKlass from '../../../pool.js';
+import Pool from '../../../pool.js';
 import CONST from '../const.js';
 
 const NO_NEWLINE = CONST.NO_NEWLINE;
@@ -105,7 +105,7 @@ var WrapText = function (text, getTextWidth, wrapMode, wrapWidth, offset) {
     return retLines;
 };
 
-var LinesPool = new PoolKlass();
+var LinesPool = new Pool();
 LinesPool.newline = function (text, width, newLineMode) {
     var l = this.pop();
     if (l === null) {
