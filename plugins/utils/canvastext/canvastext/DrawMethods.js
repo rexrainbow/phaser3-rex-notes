@@ -111,7 +111,7 @@ export default {
 
         context.restore();
 
-        if (pen.hasAreaMarker) {
+        if (pen.hasAreaMarker && (pen.width > 0)) {
             this.hitAreaManager.add(
                 pen.prop.area,
                 offsetX, (offsetY - this.startYOffset),
