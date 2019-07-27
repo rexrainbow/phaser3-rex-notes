@@ -882,6 +882,40 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#image" title="Image" class="md-nav__link">
+    Image
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hit-area-of-words" title="Hit area of words" class="md-nav__link">
+    Hit area of words
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hitting-events" title="Hitting events" class="md-nav__link">
+    Hitting events
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#draw-hit-areas" title="Draw hit-areas" class="md-nav__link">
+    Draw hit-areas
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#line-spacing" title="Line spacing" class="md-nav__link">
     Line spacing
   </a>
@@ -4553,6 +4587,40 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#image" title="Image" class="md-nav__link">
+    Image
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hit-area-of-words" title="Hit area of words" class="md-nav__link">
+    Hit area of words
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hitting-events" title="Hitting events" class="md-nav__link">
+    Hitting events
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#draw-hit-areas" title="Draw hit-areas" class="md-nav__link">
+    Draw hit-areas
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#line-spacing" title="Line spacing" class="md-nav__link">
     Line spacing
   </a>
@@ -4675,7 +4743,8 @@
         <span class="nx">color</span><span class="o">:</span> <span class="s1">&#39;blue&#39;</span><span class="p">,</span>
         <span class="nx">thinkness</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span>
         <span class="nx">offset</span><span class="o">:</span> <span class="o">-</span><span class="mi">1</span>
-    <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="c1">// area: key,</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -4929,6 +4998,69 @@
 </pre></div></li>
 </ul>
 </li>
+</ul>
+<h3 id="image">Image<a class="headerlink" href="#image" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Uses texture key as image key by default.</li>
+<li>Add image render information
+    <div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">addImage</span><span class="p">(</span><span class="nx">imgKey</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">key</span><span class="o">:</span> <span class="nx">textureKey</span><span class="p">,</span>
+    <span class="nx">frame</span><span class="o">:</span> <span class="nx">frameName</span><span class="p">,</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">left</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">right</span><span class="o">:</span> <span class="mi">0</span>
+<span class="p">});</span>
+</pre></div><ul>
+<li><code>imgKey</code> : Image key used in text content, i.e. <code>[img=imgKey]</code>.</li>
+<li><code>key</code> : Texture key.</li>
+<li><code>frame</code> : Frame name.</li>
+<li><code>width</code> : Render width, set <code>undefined</code> to use the cut width of frame.</li>
+<li><code>height</code> : Render height, set <code>undefined</code> to use the cut height of frame.</li>
+<li><code>y</code> : Extra offset y.</li>
+<li><code>left</code> : Left padding space.</li>
+<li><code>Right</code> : Right padding space.</li>
+</ul>
+</li>
+<li>Add some image render informations
+    <div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">addImage</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>data</code> : <code>{imgKey, config}</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="hit-area-of-words">Hit area of words<a class="headerlink" href="#hit-area-of-words" title="Permanent link">&para;</a></h3>
+<h4 id="hitting-events">Hitting events<a class="headerlink" href="#hitting-events" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Pointer down
+    <div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;areadown&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">,</span> <span class="nx">localX</span><span class="p">,</span> <span class="nx">localY</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">)</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;areadown-&#39;</span> <span class="o">+</span> <span class="nx">key</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">localX</span><span class="p">,</span> <span class="nx">localY</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">)</span>
+</pre></div></li>
+<li>Pointer up
+    <div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;areaup&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">,</span> <span class="nx">localX</span><span class="p">,</span> <span class="nx">localY</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">)</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;areaup-&#39;</span> <span class="o">+</span> <span class="nx">key</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">localX</span><span class="p">,</span> <span class="nx">localY</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">)</span>
+</pre></div></li>
+</ul>
+<h4 id="draw-hit-areas">Draw hit-areas<a class="headerlink" href="#draw-hit-areas" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">txt</span><span class="p">.</span><span class="nx">drawAreaBounds</span><span class="p">(</span><span class="nx">graphics</span><span class="p">,</span> <span class="nx">color</span><span class="p">);</span>
+</pre></div>
+
+<ul>
+<li><code>graphics</code> : <a href="../graphics/">Graphics game object</a></li>
+<li><code>color</code> : Default value is <code>0xffffff</code></li>
 </ul>
 <h3 id="line-spacing">Line spacing<a class="headerlink" href="#line-spacing" title="Permanent link">&para;</a></h3>
 <p>This value is <em>added</em> to the height of the font when calculating the overall line height.</p>

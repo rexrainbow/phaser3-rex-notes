@@ -73,7 +73,8 @@ Properties of a tag
         color: 'blue',
         thinkness: 3,
         offset: -1
-    }
+    },
+    // area: key,
 }
 ```
 
@@ -328,6 +329,73 @@ txt.setFontStyle(style);
         txt.setShadowStroke(enabled);
         txt.setShadowFill(enabled);
         ```
+
+### Image
+
+- Uses texture key as image key by default.
+- Add image render information
+    ```javascript
+    txt.addImage(imgKey, {
+        key: textureKey,
+        frame: frameName,
+        width: undefined,
+        height: undefined,
+        y: 0,
+        left: 0,
+        right: 0
+    });
+    ```
+    - `imgKey` : Image key used in text content, i.e. `[img=imgKey]`.
+    - `key` : Texture key.
+    - `frame` : Frame name.
+    - `width` : Render width, set `undefined` to use the cut width of frame.
+    - `height` : Render height, set `undefined` to use the cut height of frame.
+    - `y` : Extra offset y.
+    - `left` : Left padding space.
+    - `Right` : Right padding space.
+- Add some image render informations
+    ```javascript
+    txt.addImage(data);
+    ```
+    - `data` : `{imgKey, config}`
+
+### Hit area of words
+
+#### Hitting events
+
+- Pointer down
+    ```javascript
+    txt.on('areadown', function(key, pointer, localX, localY){
+
+    }, scope)
+    ```
+    or
+    ```javascript
+    txt.on('areadown-' + key, function(pointer, localX, localY){
+
+    }, scope)
+    ```
+- Pointer up
+    ```javascript
+    txt.on('areaup', function(key, pointer, localX, localY){
+
+    }, scope)
+    ```
+    or
+    ```javascript
+    txt.on('areaup-' + key, function(pointer, localX, localY){
+
+    }, scope)
+    ```
+
+#### Draw hit-areas
+
+```javascript
+txt.drawAreaBounds(graphics, color);
+```
+
+- `graphics` : [Graphics game object](graphics.md)
+- `color` : Default value is `0xffffff`
 
 ### Line spacing
 
