@@ -237,7 +237,7 @@ container.setAll(property, value, startIndex, endIndex);
 
 ## Compare with [group object](group.md)
 
-- Container and group objects are all has a children list.
+- Container and group objects are all have a children list.
 - Container has position, angle, alpha, visible, ...etc, but group does not have.
 - Container controls properties of children (position, angle, alpha, visible, ...etc), but group won't.
 - A game object could be added to many group, but it only could be added to a container (`exclusive` mode).
