@@ -3,19 +3,24 @@ class Stack {
         this.items = [];
     }
 
+    destroy() {
+        this.items.length = 0;
+        this.items = undefined;
+    }
+
     pop() {
         return (this.items.length > 0) ? this.items.pop() : null;
     }
 
     push(l) {
         this.items.push(l);
+        return this;
     }
 
     pushMultiple(arr) {
-        for (var i = 0, len = arr.length; i < len; i++) {
-            this.items.push(arr[i]);
-        }
+        this.items.push.apply(this.items, arr);
         arr.length = 0;
+        return this;
     }
 }
 

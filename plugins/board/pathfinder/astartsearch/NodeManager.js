@@ -1,9 +1,9 @@
-import PoolKlass from '../../../pool.js';
+import Pool from '../../../pool.js';
 import TileXYToKey from '../../utils/tilexyzkey/TileXYToKey.js';
 import Node from './Node.js';
 
 // global object
-var NodesPool = new PoolKlass(); // recycle dead nodes
+var NodesPool = new Pool(); // recycle dead nodes
 // global object
 
 class NodeCache {

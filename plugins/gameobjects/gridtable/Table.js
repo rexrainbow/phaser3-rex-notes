@@ -1,10 +1,10 @@
-import CellKlass from './Cell.js';
-import PoolKlass from '../../pool.js';
+import Cell from './Cell.js';
+import Pool from '../../pool.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const SpliceOne = Phaser.Utils.Array.SpliceOne;
 
-var CellsPool = new PoolKlass();
+var CellPool = new Pool();
 class Table {
     constructor(parent, config) {
         this.parent = parent; // parent: GridTable game object (Container)
@@ -289,9 +289,9 @@ class Table {
     }
 
     newCell(cellIdx) {
-        var cell = CellsPool.pop();
+        var cell = CellPool.pop();
         if (cell === null) {
-            cell = new CellKlass(this);
+            cell = new Cell(this);
         } else {
             cell.setParent(this);
         }
@@ -329,7 +329,7 @@ class Table {
         }
 
         cell.destroy(fromScene);
-        CellsPool.push(cell);
+        CellPool.push(cell);
         return this;
     }
 }
