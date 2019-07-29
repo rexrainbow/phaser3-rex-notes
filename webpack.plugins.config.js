@@ -171,6 +171,19 @@ module.exports = {
         }),
         new CleanWebpackPlugin(['./plugins/dist'])
     ],
+    module: {
+        rules: [
+            {
+                test: /\.js$/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env']
+                    }
+                }
+            },
+        ]
+    },
     resolve: {
         alias: {
         },
