@@ -1,4 +1,4 @@
-import BBCodeTextPlugin from '../../plugins/dist/rexbbcodetextplugin.min.js';
+import BBCodeTextPlugin from '../../plugins/bbcodetext-plugin.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
