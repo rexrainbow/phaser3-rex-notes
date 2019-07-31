@@ -28,7 +28,7 @@ var shader = scene.add.shader(key, x, y, width, height, textures);
 Add shader object from JSON
 
 ```javascript
-var image = scene.make.image({
+var shader = scene.make.shader({
     x: 0,
     y: 0,
     key: '',
@@ -120,6 +120,29 @@ var image = scene.make.image({
     // shader.setChannel2(textureKey, textureData);
     // shader.setChannel3(textureKey, textureData);
     ```
+
+### Uniform
+
+- `mouse`, a pointer parameter.
+    - Get
+        ```javascript
+        var pointer = shader.pointer;
+        ```
+    - Set
+        ```javascript
+        shader.setPointer(pointer);
+        ```
+        - `pointer` : `{x, y}`
+- `time`, the elapsed game time, in *seconds*.
+    - Get
+        ```javascript
+        var time = shader.getUniform('time').value;
+        // var time = shader.uniforms.time.value
+        ```
+    - Set
+        ```javascript
+        shader.setUniform('time.value', time);
+        ```
 
 ### Other properties
 
