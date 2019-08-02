@@ -1,5 +1,5 @@
-import RGBToHSL from '../utils/RGBToHSL.js';
-import HSLToRGB from '../utils/HSLToRGB.js';
+import RGBToHSL from '../../utils/RGBToHSL.js';
+import HSLToRGB from '../../utils/HSLToRGB.js';
 
 const frag = `#ifdef GL_FRAGMENT_PRECISION_HIGH
 #define highmedp highp

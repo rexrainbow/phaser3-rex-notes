@@ -1,2 +1,2 @@
-import ToonifyPipeline from './shaders/toonify/ToonifyPipeline.js';
+import ToonifyPipeline from './shaders/pipelines/toonify/ToonifyPipeline.js';
 export default ToonifyPipeline;
