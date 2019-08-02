@@ -698,6 +698,27 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#other-uniforms" title="Other uniforms" class="md-nav__link">
+    Other uniforms
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output" title="Output" class="md-nav__link">
+    Output
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#texture-routing" title="Texture routing" class="md-nav__link">
+    Texture routing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" title="Other properties" class="md-nav__link">
     Other properties
   </a>
@@ -4469,6 +4490,27 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#other-uniforms" title="Other uniforms" class="md-nav__link">
+    Other uniforms
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#output" title="Output" class="md-nav__link">
+    Output
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#texture-routing" title="Texture routing" class="md-nav__link">
+    Texture routing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" title="Other properties" class="md-nav__link">
     Other properties
   </a>
@@ -4517,13 +4559,13 @@
 </pre></div>
 
 <ul>
-<li><code>key</code> : The key of the shader to use from the shader cache, or a BaseShader instance.</li>
+<li><code>key</code> : The key of the shader to use from the <em>shader cache</em>, or a BaseShader instance.</li>
 <li><code>x</code>, <code>y</code> : Position.</li>
 <li><code>width</code>, <code>height</code> : Size.</li>
 <li><code>textures</code> : Optional array of texture keys to bind to the iChannel0, iChannel1, iChannel2, iChannel3 uniforms.</li>
 </ul>
 <p>Add shader object from JSON</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">image</span><span class="p">({</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">shader</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">shader</span><span class="p">({</span>
     <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
@@ -4602,11 +4644,7 @@
 </pre></div></li>
 </ul>
 </li>
-<li>Sets a sampler2D uniform
-    <div class="codehilite"><pre><span></span><span class="nx">shader</span><span class="p">.</span><span class="nx">setSampler2D</span><span class="p">(</span><span class="nx">uniformKey</span><span class="p">,</span> <span class="nx">textureKey</span><span class="p">,</span> <span class="nx">textureIndex</span><span class="p">);</span>
-<span class="c1">// shader.setSampler2D(uniformKey, textureKey, textureIndex, textureData);</span>
-</pre></div></li>
-<li>Set the texture being used by the <code>iChannel0</code>, <code>iChannel1</code>, <code>iChannel2</code>, <code>iChannel3</code> sampler2D uniform.
+<li>Sets a sampler2D uniform from texture manager.
     <div class="codehilite"><pre><span></span><span class="nx">shader</span><span class="p">.</span><span class="nx">setChannel0</span><span class="p">(</span><span class="nx">textureKey</span><span class="p">);</span>
 <span class="nx">shader</span><span class="p">.</span><span class="nx">setChannel1</span><span class="p">(</span><span class="nx">textureKey</span><span class="p">);</span>
 <span class="nx">shader</span><span class="p">.</span><span class="nx">setChannel2</span><span class="p">(</span><span class="nx">textureKey</span><span class="p">);</span>
@@ -4615,8 +4653,89 @@
 <span class="c1">// shader.setChannel1(textureKey, textureData);</span>
 <span class="c1">// shader.setChannel2(textureKey, textureData);</span>
 <span class="c1">// shader.setChannel3(textureKey, textureData);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">shader</span><span class="p">.</span><span class="nx">setSampler2D</span><span class="p">(</span><span class="nx">uniformKey</span><span class="p">,</span> <span class="nx">textureKey</span><span class="p">,</span> <span class="nx">textureIndex</span><span class="p">);</span>
+<span class="c1">// shader.setSampler2D(uniformKey, textureKey, textureIndex, textureData);</span>
+</pre></div><ul>
+<li><code>uniformKey</code> : <code>'iChannel0'</code>, <code>'iChannel1'</code>, <code>'iChannel2'</code>, or <code>'iChannel3'</code>.</li>
+<li><code>textureIndex</code> : <code>0</code>(for iChannel0), <code>1</code>(for iChannel1), <code>2</code>(for iChannel2), <code>3</code>(for iChannel3).</li>
+<li><code>textureData</code> : Additional texture data.</li>
+</ul>
+</li>
+<li>Sets a sampler2D uniform from a webgl texture.
+    <div class="codehilite"><pre><span></span><span class="nx">shader</span><span class="p">.</span><span class="nx">setSampler2DBuffer</span><span class="p">(</span><span class="nx">uniformKey</span><span class="p">,</span> <span class="nx">texture</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">textureIndex</span><span class="p">);</span>
+<span class="c1">// shader.setSampler2DBuffer(uniformKey, texture, width, height, textureIndex, textureData);</span>
+</pre></div><ul>
+<li><code>uniformKey</code> : <code>'iChannel0'</code>, <code>'iChannel1'</code>, <code>'iChannel2'</code>, or <code>'iChannel3'</code>.</li>
+<li><code>width</code>, <code>height</code> : The width, height of the texture.</li>
+<li><code>textureIndex</code> : <code>0</code>(for iChannel0), <code>1</code>(for iChannel1), <code>2</code>(for iChannel2), <code>3</code>(for iChannel3).</li>
+<li><code>textureData</code> : Additional texture data.</li>
+</ul>
+</li>
+</ul>
+<h3 id="other-uniforms">Other uniforms<a class="headerlink" href="#other-uniforms" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>mouse</code>, a pointer parameter.<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">pointer</span> <span class="o">=</span> <span class="nx">shader</span><span class="p">.</span><span class="nx">pointer</span><span class="p">;</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">shader</span><span class="p">.</span><span class="nx">setPointer</span><span class="p">(</span><span class="nx">pointer</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>pointer</code> : <code>{x, y}</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>time</code>, the elapsed game time, in <em>seconds</em>.<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">time</span> <span class="o">=</span> <span class="nx">shader</span><span class="p">.</span><span class="nx">getUniform</span><span class="p">(</span><span class="s1">&#39;time&#39;</span><span class="p">).</span><span class="nx">value</span><span class="p">;</span>
+<span class="c1">// var time = shader.uniforms.time.value</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">shader</span><span class="p">.</span><span class="nx">setUniform</span><span class="p">(</span><span class="s1">&#39;time.value&#39;</span><span class="p">,</span> <span class="nx">time</span><span class="p">);</span>
 </pre></div></li>
 </ul>
+</li>
+</ul>
+<h3 id="output">Output<a class="headerlink" href="#output" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Render to Display list, by default.</li>
+<li>Redirect render result to internal webgl texture
+    <div class="codehilite"><pre><span></span><span class="nx">shader</span><span class="p">.</span><span class="nx">setRenderToTexture</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">texture</span> <span class="o">=</span> <span class="nx">shader</span><span class="p">.</span><span class="nx">glTexture</span><span class="p">;</span>
+</pre></div></li>
+<li>Redirect render result to texture manager, for texture-based game object.
+    <div class="codehilite"><pre><span></span><span class="nx">shader</span><span class="p">.</span><span class="nx">setRenderToTexture</span><span class="p">(</span><span class="nx">textureKey</span><span class="p">);</span>
+<span class="c1">// var texture = shader.glTexture;</span>
+</pre></div></li>
+</ul>
+<h3 id="texture-routing">Texture routing<a class="headerlink" href="#texture-routing" title="Permanent link">&para;</a></h3>
+<pre class="mermaid"><code>graph TB
+
+TextureManagerIn[&quot;Texture manager&quot;] --&gt; |&quot;shader.setSampler2D()&quot;| Sampler2D[&quot;Samplers:&lt;br&gt;iChannel0&lt;br&gt;iChannel1&lt;br&gt;iChannel2&lt;br&gt;iChannel3&quot;]
+Sampler2D--&gt; Shader[&quot;shader&lt;br&gt;Shader game object&quot;]
+Shader --&gt; DisplayList[&quot;Display list&quot;]
+Shader --&gt; |&quot;shader.setRenderToTexture()&quot;| InternalTexture[&quot;shader.glTexture&quot;]
+InternalTexture -.-&gt; |&quot;Texture key&quot;| TextureManagerOut[&quot;Texture manager&quot;]
+TextureManagerOut -.-&gt; GameObject[&quot;Image game object&quot;]
+GameObject -.-&gt; DisplayList
+
+WebGLTexture[&quot;WebGl texture&lt;br&gt;gameObject.glTexture&quot;] --&gt; |&quot;shader.setSampler2DBuffer()&quot;| Sampler2D
+InternalTexture --&gt; WebGLTexture
+
+subgraph Output
+DisplayList
+GameObject
+TextureManagerOut
+end
+
+subgraph Input
+TextureManagerIn
+WebGLTexture
+end</code></pre>
+
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
 <p>See <a href="../gameobject/">game object</a></p>
                 
