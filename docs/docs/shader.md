@@ -20,7 +20,7 @@ Reference: [load glsl](loader.md#glsl)
 var shader = scene.add.shader(key, x, y, width, height, textures);
 ```
 
-- `key` : The key of the shader to use from the shader cache, or a BaseShader instance.
+- `key` : The key of the shader to use from the *shader cache*, or a BaseShader instance.
 - `x`, `y` : Position.
 - `width`, `height` : Size.
 - `textures` : Optional array of texture keys to bind to the iChannel0, iChannel1, iChannel2, iChannel3 uniforms.
@@ -104,12 +104,7 @@ var shader = scene.make.shader({
         var textureKey = shader.getUniform('iChannel2').textureKey;
         var textureKey = shader.getUniform('iChannel3').textureKey;
         ```
-- Sets a sampler2D uniform
-    ```javascript
-    shader.setSampler2D(uniformKey, textureKey, textureIndex);
-    // shader.setSampler2D(uniformKey, textureKey, textureIndex, textureData);
-    ```
-- Set the texture being used by the `iChannel0`, `iChannel1`, `iChannel2`, `iChannel3` sampler2D uniform.
+- Sets a sampler2D uniform from texture manager.
     ```javascript
     shader.setChannel0(textureKey);
     shader.setChannel1(textureKey);
@@ -120,8 +115,25 @@ var shader = scene.make.shader({
     // shader.setChannel2(textureKey, textureData);
     // shader.setChannel3(textureKey, textureData);
     ```
+    or
+    ```javascript
+    shader.setSampler2D(uniformKey, textureKey, textureIndex);
+    // shader.setSampler2D(uniformKey, textureKey, textureIndex, textureData);
+    ```
+    - `uniformKey` : `'iChannel0'`, `'iChannel1'`, `'iChannel2'`, or `'iChannel3'`.
+    - `textureIndex` : `0`(for iChannel0), `1`(for iChannel1), `2`(for iChannel2), `3`(for iChannel3).
+    - `textureData` : Additional texture data.
+- Sets a sampler2D uniform from a webgl texture.
+    ```javascript
+    shader.setSampler2DBuffer(uniformKey, texture, width, height, textureIndex);
+    // shader.setSampler2DBuffer(uniformKey, texture, width, height, textureIndex, textureData);
+    ```
+    - `uniformKey` : `'iChannel0'`, `'iChannel1'`, `'iChannel2'`, or `'iChannel3'`.
+    - `width`, `height` : The width, height of the texture.
+    - `textureIndex` : `0`(for iChannel0), `1`(for iChannel1), `2`(for iChannel2), `3`(for iChannel3).
+    - `textureData` : Additional texture data.
 
-### Uniform
+### Other uniforms
 
 - `mouse`, a pointer parameter.
     - Get
@@ -143,6 +155,48 @@ var shader = scene.make.shader({
         ```javascript
         shader.setUniform('time.value', time);
         ```
+
+### Output
+
+- Render to Display list, by default.
+- Redirect render result to internal webgl texture
+    ```javascript
+    shader.setRenderToTexture();
+    var texture = shader.glTexture;
+    ```
+- Redirect render result to texture manager, for texture-based game object.
+    ```javascript
+    shader.setRenderToTexture(textureKey);
+    // var texture = shader.glTexture;
+    ```
+
+### Texture routing
+
+```mermaid
+graph TB
+
+TextureManagerIn["Texture manager"] --> |"shader.setSampler2D()"| Sampler2D["Samplers:<br>iChannel0<br>iChannel1<br>iChannel2<br>iChannel3"]
+Sampler2D--> Shader["shader<br>Shader game object"]
+Shader --> DisplayList["Display list"]
+Shader --> |"shader.setRenderToTexture()"| InternalTexture["shader.glTexture"]
+InternalTexture -.-> |"Texture key"| TextureManagerOut["Texture manager"]
+TextureManagerOut -.-> GameObject["Image game object"]
+GameObject -.-> DisplayList
+
+WebGLTexture["WebGl texture<br>gameObject.glTexture"] --> |"shader.setSampler2DBuffer()"| Sampler2D
+InternalTexture --> WebGLTexture
+
+subgraph Output
+DisplayList
+GameObject
+TextureManagerOut
+end
+
+subgraph Input
+TextureManagerIn
+WebGLTexture
+end
+```
 
 ### Other properties
 
