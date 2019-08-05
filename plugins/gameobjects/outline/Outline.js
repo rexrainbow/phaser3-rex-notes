@@ -1,6 +1,6 @@
 import frag from './outline-frag.js';
 import GetGLTexture from '../../utils/system/GetGLTexture.js';
-import Shadow from '../../utils/actions/Shadow.js';
+import Sync from './Sync.js';
 
 const Shader = Parse.GameObjects.Shader;
 const baseShader = new Phaser.Display.BaseShader('outline', frag);
@@ -14,12 +14,12 @@ class Outline extends Shader {
     }
 
     renderWebGL(renderer, src, interpolationPercentage, camera, parentMatrix) {
-        Shadow(this.target, this);
+        Sync(this.target, this);
         super.renderWebGL(renderer, src, interpolationPercentage, camera, parentMatrix);
     }
 
     renderCanvas(renderer, src, interpolationPercentage, camera, parentMatrix) {
-        Shadow(this.target, this);
+        Sync(this.target, this);
         super.renderCanvas(renderer, src, interpolationPercentage, camera, parentMatrix);
     }
 }
