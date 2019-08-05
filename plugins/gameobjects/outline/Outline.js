@@ -2,14 +2,20 @@ import frag from './outline-frag.js';
 import GetGLTexture from '../../utils/system/GetGLTexture.js';
 import Sync from './Sync.js';
 
-const Shader = Parse.GameObjects.Shader;
+const Shader = Phaser.GameObjects.Shader;
+const GetValue = Phaser.Utils.Objects.GetValue;
+const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const baseShader = new Phaser.Display.BaseShader('outline', frag);
 
 class Outline extends Shader {
     constructor(target, config) {
+        if (IsPlainObject(target)) {
+            target = GetValue(config, 'target');
+        }
+        debugger
         super(target.scene, baseShader, target.x, target.y, target.width, target.height);
 
-        this.setSampler2DBuffer('iChannel0', GetGLTexture(target), target.width, target.height);
+        this.setSampler2DBuffer('iChannel0', GetGLTexture(target), target.width, target.height, 0);
         this.target = target;
     }
 

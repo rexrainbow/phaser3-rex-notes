@@ -60,7 +60,8 @@ void main (void)
         finalCol = tex;
     }
     
-    gl_FragColor = finalCol;
+    // gl_FragColor = finalCol;
+    gl_FragColor = tex;
 }
 `;
 

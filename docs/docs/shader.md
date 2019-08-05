@@ -123,6 +123,7 @@ var shader = scene.make.shader({
     - `uniformKey` : `'iChannel0'`, `'iChannel1'`, `'iChannel2'`, or `'iChannel3'`.
     - `textureIndex` : `0`(for iChannel0), `1`(for iChannel1), `2`(for iChannel2), `3`(for iChannel3).
     - `textureData` : Additional texture data.
+    - `textureKey`: Key from the Texture Manager cache. It cannot be a single frame from a texture, only the full image. Lots of shaders expect textures to be **power-of-two sized**.
 - Sets a sampler2D uniform from a webgl texture.
     ```javascript
     shader.setSampler2DBuffer(uniformKey, texture, width, height, textureIndex);
