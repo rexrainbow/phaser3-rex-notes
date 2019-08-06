@@ -160,14 +160,24 @@ var shader = scene.make.shader({
 ### Output
 
 - Render to Display list, by default.
-- Redirect render result to internal webgl texture
+- Redirect render result to internal webgl texture.
     ```javascript
     shader.setRenderToTexture();
+    var texture = shader.glTexture;
+    ```
+- Redirect render result to internal webgl texture, and sample2D from buffer.
+    ```javascript
+    shader.setRenderToTexture(undefined, true);
     var texture = shader.glTexture;
     ```
 - Redirect render result to texture manager, for texture-based game object.
     ```javascript
     shader.setRenderToTexture(textureKey);
+    // var texture = shader.glTexture;
+    ```
+- Redirect render result to texture manager, and Sample2D from buffer.
+    ```javascript
+    shader.setRenderToTexture(textureKey, true);
     // var texture = shader.glTexture;
     ```
 
