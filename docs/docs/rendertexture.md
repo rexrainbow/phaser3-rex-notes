@@ -8,9 +8,16 @@ Paste textures, built-in game object of phaser.
 
 ### Add render texture object
 
-```javascript
-var rt = scene.add.renderTexture(x, y, width, height);
-```
+- Create an empty render texture object.
+    ```javascript
+    var rt = scene.add.renderTexture(x, y, width, height);
+    ```
+- Create render texture and load texture.
+    ```javascript
+    var rt = scene.add.renderTexture(x, y, undefined, undefined, key, frame);
+    ```
+    - `key` : The texture key to make the RenderTexture from.
+    - `frame` : The frame to make the RenderTexture from.
 
 Add render texture from JSON
 
@@ -20,6 +27,8 @@ var rt = scene.make.renderTexture({
     y: 0,
     width: 32,
     height: 32,
+    // key: undefined,
+    // frame: undefined,
 
     // angle: 0,
     // alpha: 1
@@ -122,6 +131,7 @@ rt.clear();
 
 ```javascript
 rt.fill(rgb, alpha);
+// rt.fill(rgb, alpha, x, y, width, height);
 ```
 
 ### Set size
