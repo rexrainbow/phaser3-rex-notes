@@ -1,4 +1,4 @@
-import Text from '../canvastext/Text.js';
+import Text from '../textbase/Text.js';
 import ParserKlass from './Parser.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
