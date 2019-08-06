@@ -1,7 +1,7 @@
 import Render from './render/TextRender.js';
 import TextStyle from './textstyle/TextStyle.js'; // extended
 import CanvasTextKlass from './canvastext/CanvasText.js';
-import Pool from '../../pool.js';
+import Pool from '../../../pool.js';
 import CONST from './const.js';
 import GetGlobImageManager from './imagemanager/GetGlobImageManager.js';
 

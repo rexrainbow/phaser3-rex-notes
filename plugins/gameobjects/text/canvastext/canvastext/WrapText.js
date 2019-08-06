@@ -1,4 +1,4 @@
-import Pool from '../../../pool.js';
+import Pool from '../../../../pool.js';
 import CONST from '../const.js';
 
 const NO_NEWLINE = CONST.NO_NEWLINE;

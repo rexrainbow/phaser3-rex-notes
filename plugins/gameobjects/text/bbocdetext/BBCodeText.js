@@ -1,4 +1,4 @@
-import Text from '../../utils/canvastext/Text.js';
+import Text from '../canvastext/Text.js'
 import parser from './Parser.js';
 
 class BBCodeText extends Text {

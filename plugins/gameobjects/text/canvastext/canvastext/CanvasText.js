@@ -1,10 +1,10 @@
 import DrawMethods from './DrawMethods.js';
-import PenManager from './PenManager.js';
-import HitAreaManager from './HitAreaManager.js';
+import PenManager from '../penmanger/PenManager.js';
+import HitAreaManager from '../hitareamanager/HitAreaManager.js';
 import SetInteractive from './SetInteractive.js';
 import CONST from '../const.js';
 import WrapText from './WrapText.js';
-import Clone from '../../object/Clone.js';
+import Clone from '../../../../utils/object/Clone.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const NO_WRAP = CONST.NO_WRAP;

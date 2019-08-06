@@ -1,8 +1,8 @@
-import Pool from '../../../pool.js';
+import Pool from '../../../../pool.js';
 import Pen from './Pen.js';
 import CONST from '../const.js';
-import Clone from '../../object/Clone.js';
-import NOOP from '../../object/NOOP.js';
+import Clone from '../../../../utils/object/Clone.js';
+import NOOP from '../../../../utils/object/NOOP.js';
 
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 const NO_NEWLINE = CONST.NO_NEWLINE;

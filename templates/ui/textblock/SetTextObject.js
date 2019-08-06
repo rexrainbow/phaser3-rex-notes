@@ -1,6 +1,5 @@
 import GetBoundsConfig from '../utils/GetBoundsConfig.js';
 import IsTextGameObject from '../../../plugins/utils/text/IsTextGameObject.js';
-// import IsCanvasTextGameObject from '../../../plugins/utils/canvastext/IsCanvasTextGameObject.js';
 import DefaultMask from '../../../plugins/utils/mask/DefaultMask.js';
 
 const ALIGN_LEFTTOP = Phaser.Display.Align.TOP_LEFT;

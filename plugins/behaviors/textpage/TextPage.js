@@ -1,6 +1,5 @@
 import GetSceneObject from '../../utils/system/GetSceneObject.js';
 import IsTextGameObject from '../../utils/text/IsTextGameObject.js';
-// import IsCanvasTextGameObject from '../../utils/canvastext/IsCanvasTextGameObject.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 const Clamp = Phaser.Math.Clamp;
