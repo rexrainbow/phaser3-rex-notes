@@ -7,147 +7,119 @@ import GetGlobImageManager from './imagemanager/GetGlobImageManager.js';
 
 const AddToDOM = Phaser.DOM.AddToDOM;
 const CanvasPool = Phaser.Display.Canvas.CanvasPool;
-const Components = Phaser.GameObjects.Components;
 const GameObject = Phaser.GameObjects.GameObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 const RemoveFromDOM = Phaser.DOM.RemoveFromDOM;
 const SPLITREGEXP = CONST.SPLITREGEXP;
 
 var PensPools = {};
-var Text = new Phaser.Class({
 
-    Extends: GameObject,
-
-    Mixins: [
-        Components.Alpha,
-        Components.BlendMode,
-        Components.ComputedSize,
-        Components.Crop,
-        Components.Depth,
-        Components.Flip,
-        Components.GetBounds,
-        Components.Mask,
-        Components.Origin,
-        Components.Pipeline,
-        Components.ScrollFactor,
-        Components.Tint,
-        Components.Transform,
-        Components.Visible,
-        Render
-    ],
-
-    initialize:
-
-        function Text(scene, x, y, text, style, type, parser) {
-            if (x === undefined) {
-                x = 0;
-            }
-            if (y === undefined) {
-                y = 0;
-            }
-
-            GameObject.call(this, scene, type);
-
-            this.renderer = scene.sys.game.renderer;
-
-            this.setPosition(x, y);
-            this.setOrigin(0, 0);
-            this.initPipeline();
-
-            this.canvas = CanvasPool.create(this);
-
-            this.context = this.canvas.getContext('2d');
-
-            if (style) {
-                // Override align
-                if (style.hasOwnProperty('align')) {
-                    var halign = style.align;
-                    delete style.align;
-                    style.halign = halign;
-                }
-            }
-            this.style = new TextStyle(this, style);
-
-            this.autoRound = true;
-
-            this._text = undefined;
-
-            this.padding = {
-                left: 0,
-                right: 0,
-                top: 0,
-                bottom: 0
-            };
-
-            this.width = 1;
-
-            this.height = 1;
-
-            this.dirty = false;
-
-            //  If resolution wasn't set, then we get it from the game config
-            if (this.style.resolution === 0) {
-                this.style.resolution = scene.sys.game.config.resolution;
-            }
-
-            this._crop = this.resetCropObject();
-
-            //  Create a Texture for this Text object
-            this.texture = scene.sys.textures.addCanvas(null, this.canvas, true);
-
-            //  Get the frame
-            this.frame = this.texture.get();
-
-            //  Set the resolution
-            this.frame.source.resolution = this.style.resolution;
-
-            if (this.renderer && this.renderer.gl) {
-                //  Clear the default 1x1 glTexture, as we override it later
-
-                this.renderer.deleteTexture(this.frame.source.glTexture);
-
-                this.frame.source.glTexture = null;
-            }
-
-            if (!PensPools.hasOwnProperty(type)) {
-                PensPools[type] = new Pool();
-            }
-            this.canvasText = new CanvasTextKlass({
-                parent: this,
-                context: this.context,
-                parser: parser,
-                style: this.style,
-                pensPool: PensPools[type]
-            });
-
-            //this.initRTL();
-
-            if (style && style.padding) {
-                this.setPadding(style.padding);
-            }
-
-            this.setText(text);
-
-            if (scene.sys.game.config.renderType === Phaser.WEBGL) {
-                scene.sys.game.renderer.onContextRestored(function () {
-                    this.dirty = true;
-                }, this);
-            }
-        },
-
-    text: {
-
-        set: function (value) {
-            this.setText(value);
-        },
-
-        get: function () {
-            return this._text;
+class Text extends GameObject {
+    constructor(scene, x, y, text, style, type, parser) {
+        if (x === undefined) {
+            x = 0;
+        }
+        if (y === undefined) {
+            y = 0;
         }
 
-    },
+        super(scene, type);
 
-    initRTL: function () {
+        this.renderer = scene.sys.game.renderer;
+
+        this.setPosition(x, y);
+        this.setOrigin(0, 0);
+        this.initPipeline();
+
+        this.canvas = CanvasPool.create(this);
+
+        this.context = this.canvas.getContext('2d');
+
+        if (style) {
+            // Override align
+            if (style.hasOwnProperty('align')) {
+                var halign = style.align;
+                delete style.align;
+                style.halign = halign;
+            }
+        }
+        this.style = new TextStyle(this, style);
+
+        this.autoRound = true;
+
+        this._text = undefined;
+
+        this.padding = {
+            left: 0,
+            right: 0,
+            top: 0,
+            bottom: 0
+        };
+
+        this.width = 1;
+
+        this.height = 1;
+
+        this.dirty = false;
+
+        //  If resolution wasn't set, then we get it from the game config
+        if (this.style.resolution === 0) {
+            this.style.resolution = scene.sys.game.config.resolution;
+        }
+
+        this._crop = this.resetCropObject();
+
+        //  Create a Texture for this Text object
+        this.texture = scene.sys.textures.addCanvas(null, this.canvas, true);
+
+        //  Get the frame
+        this.frame = this.texture.get();
+
+        //  Set the resolution
+        this.frame.source.resolution = this.style.resolution;
+
+        if (this.renderer && this.renderer.gl) {
+            //  Clear the default 1x1 glTexture, as we override it later
+
+            this.renderer.deleteTexture(this.frame.source.glTexture);
+
+            this.frame.source.glTexture = null;
+        }
+
+        if (!PensPools.hasOwnProperty(type)) {
+            PensPools[type] = new Pool();
+        }
+        this.canvasText = new CanvasTextKlass({
+            parent: this,
+            context: this.context,
+            parser: parser,
+            style: this.style,
+            pensPool: PensPools[type]
+        });
+
+        //this.initRTL();
+
+        if (style && style.padding) {
+            this.setPadding(style.padding);
+        }
+
+        this.setText(text);
+
+        if (scene.sys.game.config.renderType === Phaser.WEBGL) {
+            scene.sys.game.renderer.onContextRestored(function () {
+                this.dirty = true;
+            }, this);
+        }
+    }
+
+    set text(value) {
+        this.setText(value);
+    }
+    get text() {
+        return this._text;
+    }
+
+    initRTL() {
         if (!this.style.rtl) {
             return;
         }
@@ -169,9 +141,9 @@ var Text = new Phaser.Class({
 
         //  And finally we set the x origin
         this.originX = 1;
-    },
+    }
 
-    setText: function (value) {
+    setText(value) {
         if (!value && value !== 0) {
             value = '';
         }
@@ -187,89 +159,89 @@ var Text = new Phaser.Class({
         }
 
         return this;
-    },
+    }
 
-    setStyle: function (style) {
+    setStyle(style) {
         return this.style.setStyle(style);
-    },
+    }
 
-    setFont: function (font) {
+    setFont(font) {
         return this.style.setFont(font);
-    },
+    }
 
-    setFontFamily: function (family) {
+    setFontFamily(family) {
         return this.style.setFontFamily(family);
-    },
+    }
 
-    setFontSize: function (size) {
+    setFontSize(size) {
         return this.style.setFontSize(size);
-    },
+    }
 
-    setFontStyle: function (style) {
+    setFontStyle(style) {
         return this.style.setFontStyle(style);
-    },
+    }
 
-    setFixedSize: function (width, height) {
+    setFixedSize(width, height) {
         return this.style.setFixedSize(width, height);
-    },
+    }
 
-    setBackgroundColor: function (color) {
+    setBackgroundColor(color) {
         return this.style.setBackgroundColor(color);
-    },
+    }
 
-    setFill: function (color) {
+    setFill(color) {
         return this.style.setFill(color);
-    },
+    }
 
-    setColor: function (color) {
+    setColor(color) {
         return this.style.setColor(color);
-    },
+    }
 
-    setStroke: function (color, thickness) {
+    setStroke(color, thickness) {
         return this.style.setStroke(color, thickness);
-    },
+    }
 
-    setShadow: function (x, y, color, blur, shadowStroke, shadowFill) {
+    setShadow(x, y, color, blur, shadowStroke, shadowFill) {
         return this.style.setShadow(x, y, color, blur, shadowStroke, shadowFill);
-    },
+    }
 
-    setShadowOffset: function (x, y) {
+    setShadowOffset(x, y) {
         return this.style.setShadowOffset(x, y);
-    },
+    }
 
-    setShadowColor: function (color) {
+    setShadowColor(color) {
         return this.style.setShadowColor(color);
-    },
+    }
 
-    setShadowBlur: function (blur) {
+    setShadowBlur(blur) {
         return this.style.setShadowBlur(blur);
-    },
+    }
 
-    setShadowStroke: function (enabled) {
+    setShadowStroke(enabled) {
         return this.style.setShadowStroke(enabled);
-    },
+    }
 
-    setShadowFill: function (enabled) {
+    setShadowFill(enabled) {
         return this.style.setShadowFill(enabled);
-    },
+    }
 
-    setWrapMode: function (mode) {
+    setWrapMode(mode) {
         return this.style.setWrapMode(mode);
-    },
+    }
 
-    setWrapWidth: function (width) {
+    setWrapWidth(width) {
         return this.style.setWrapWidth(width);
-    },
+    }
 
-    setAlign: function (align) {
+    setAlign(align) {
         return this.style.setHAlign(align);
-    },
+    }
 
-    setLineSpacing: function (value) {
+    setLineSpacing(value) {
         return this.style.setLineSpacing(value);
-    },
+    }
 
-    setPadding: function (left, top, right, bottom) {
+    setPadding(left, top, right, bottom) {
         if (typeof left === 'object') {
             var config = left;
 
@@ -314,17 +286,17 @@ var Text = new Phaser.Class({
         this.padding.bottom = bottom;
 
         return this.updateText(false);
-    },
+    }
 
-    setResolution: function (value) {
+    setResolution(value) {
         return this.style.setResolution(value);
-    },
+    }
 
-    setMaxLines: function (max) {
+    setMaxLines(max) {
         return this.style.setMaxLines(max);
-    },
+    }
 
-    updateText: function (runWrap) {
+    updateText(runWrap) {
         if (runWrap === undefined) {
             runWrap = true;
         }
@@ -417,13 +389,13 @@ var Text = new Phaser.Class({
         }
 
         return this;
-    },
+    }
 
-    getTextMetrics: function () {
+    getTextMetrics() {
         return this.style.getTextMetrics();
-    },
+    }
 
-    toJSON: function () {
+    toJSON() {
         var out = Components.ToJSON(this);
 
         //  Extra Text data is added here
@@ -444,81 +416,97 @@ var Text = new Phaser.Class({
         out.data = data;
 
         return out;
-    },
+    }
 
-    preDestroy: function () {
+    preDestroy() {
         if (this.style.rtl) {
             RemoveFromDOM(this.canvas);
         }
 
         CanvasPool.remove(this.canvas);
         this.canvasText.destroy();
-    },
+    }
 
-    setInteractive: function (shape, callback, dropZone) {
+    setInteractive(shape, callback, dropZone) {
         GameObject.prototype.setInteractive.call(this, shape, callback, dropZone);
         this.canvasText.setInteractive();
         return this;
-    },
+    }
 
-    getWrappedText: function (text, start, end) {
+    getWrappedText(text, start, end) {
         text = this.canvasText.getText(text, start, end, true);
         return text.split(SPLITREGEXP);
-    },
+    }
 
-    getPlainText: function (text, start, end) {
+    getPlainText(text, start, end) {
         return this.canvasText.getPlainText(text, start, end);
-    },
+    }
 
-    getText: function (text, start, end) {
+    getText(text, start, end) {
         return this.canvasText.getText(text, start, end, false);
-    },
+    }
 
-    getSubString: function (text, start, end) {
+    getSubString(text, start, end) {
         return this.getText(text, start, end);
-    },
+    }
 
-    copyPenManager: function (penManager) {
+    copyPenManager(penManager) {
         return this.canvasText.copyPenManager(penManager);
-    },
+    }
 
-    getPenManager: function (text, penManager) {
+    getPenManager(text, penManager) {
         return this.canvasText.getPenManager(text, penManager);
-    },
+    }
 
-    setSize: function (width, height) {
+    setSize(width, height) {
         return this.setFixedSize(width, height);
-    },
+    }
 
-    resize: function (width, height) {
+    resize(width, height) {
         return this.setFixedSize(width, height);
-    },
+    }
 
-    lineSpacing: {
-        get: function () {
-            return this.style.lineSpacing;
-        },
+    set lineSpacing(value) {
+        this.setLineSpacing(value);
+    }
+    get lineSpacing() {
+        return this.style.lineSpacing;
+    }
 
-        set: function (value) {
-            this.setLineSpacing(value);
-        }
-    },
-
-    imageManager: {
-        get: function () {
-            return GetGlobImageManager(this.scene.textures);
-        }
-    },
+    get imageManager() {
+        return GetGlobImageManager(this.scene.textures);
+    }
 
     addImage(key, config) {
         this.imageManager.add(key, config);
         return this;
-    },
+    }
 
     drawAreaBounds(graphics, color) {
         this.canvasText.hitAreaManager.drawBounds(graphics, color, this);
         return this;
     }
-});
+}
+
+const Components = Phaser.GameObjects.Components;
+Phaser.Class.mixin(Text,
+    [
+        Components.Alpha,
+        Components.BlendMode,
+        Components.ComputedSize,
+        Components.Crop,
+        Components.Depth,
+        Components.Flip,
+        Components.GetBounds,
+        Components.Mask,
+        Components.Origin,
+        Components.Pipeline,
+        Components.ScrollFactor,
+        Components.Tint,
+        Components.Transform,
+        Components.Visible,
+        Render
+    ]
+);
 
 export default Text;

@@ -1,110 +1,82 @@
-// copy from Phaser.GameObjects.Text
-
 import Render from './render/Render.js';
 import CanvasMethods from './CanvasMethods.js';
 import TextureMethods from './TextureMethods.js';
 
 const CanvasPool = Phaser.Display.Canvas.CanvasPool;
-const Components = Phaser.GameObjects.Components;
 const GameObject = Phaser.GameObjects.GameObject;
 
-var Canvas = new Phaser.Class({
+class Canvas extends GameObject {
+    constructor(scene, x, y, width, height) {
+        if (x === undefined) {
+            x = 0;
+        }
+        if (y === undefined) {
+            y = 0;
+        }
+        if (width === undefined) {
+            width = 1;
+        }
+        if (height === undefined) {
+            height = 1;
+        }
 
-    Extends: GameObject,
+        super(scene, 'rexCanvas');
 
-    Mixins: [
-        Components.Alpha,
-        Components.BlendMode,
-        Components.ComputedSize,
-        Components.Crop,
-        Components.Depth,
-        Components.Flip,
-        Components.GetBounds,
-        Components.Mask,
-        Components.Origin,
-        Components.Pipeline,
-        Components.ScrollFactor,
-        Components.Tint,
-        Components.Transform,
-        Components.Visible,
-        Render,
-        CanvasMethods,
-        TextureMethods,
-    ],
+        this.renderer = scene.sys.game.renderer;
 
-    initialize:
+        this.resolution = scene.sys.game.config.resolution;
+        this.canvas = CanvasPool.create(this, this.resolution * width, this.resolution * height);
+        this.context = this.canvas.getContext('2d');
+        this.dirty = false;
 
-        function Canvas(scene, x, y, width, height) {
-            if (x === undefined) {
-                x = 0;
-            }
-            if (y === undefined) {
-                y = 0;
-            }
-            if (width === undefined) {
-                width = 1;
-            }
-            if (height === undefined) {
-                height = 1;
-            }
+        this.setPosition(x, y);
+        this.setSize(width, height);
+        this.setOrigin(0.5, 0.5);
+        this.initPipeline();
 
-            GameObject.call(this, scene, 'rexCanvas');
+        this._crop = this.resetCropObject();
 
-            this.renderer = scene.sys.game.renderer;
+        //  Create a Texture for this Text object
+        this.texture = scene.sys.textures.addCanvas(null, this.canvas, true);
 
-            this.resolution = scene.sys.game.config.resolution;
-            this.canvas = CanvasPool.create(this, this.resolution * width, this.resolution * height);
-            this.context = this.canvas.getContext('2d');
-            this.dirty = false;
+        //  Get the frame
+        this.frame = this.texture.get();
 
-            this.setPosition(x, y);
-            this.setSize(width, height);
-            this.setOrigin(0.5, 0.5);
-            this.initPipeline();
+        //  Set the resolution
+        this.frame.source.resolution = this.resolution;
 
-            this._crop = this.resetCropObject();
+        if (this.renderer && this.renderer.gl) {
+            //  Clear the default 1x1 glTexture, as we override it later
+            this.renderer.deleteTexture(this.frame.source.glTexture);
+            this.frame.source.glTexture = null;
+        }
 
-            //  Create a Texture for this Text object
-            this.texture = scene.sys.textures.addCanvas(null, this.canvas, true);
+        if (scene.sys.game.config.renderType === Phaser.WEBGL) {
+            scene.sys.game.renderer.onContextRestored(function () {
+                this.dirty = true;
+            }, this);
+        }
 
-            //  Get the frame
-            this.frame = this.texture.get();
+        this.dirty = true;
+    }
 
-            //  Set the resolution
-            this.frame.source.resolution = this.resolution;
-
-            if (this.renderer && this.renderer.gl) {
-                //  Clear the default 1x1 glTexture, as we override it later
-                this.renderer.deleteTexture(this.frame.source.glTexture);
-                this.frame.source.glTexture = null;
-            }
-
-            if (scene.sys.game.config.renderType === Phaser.WEBGL) {
-                scene.sys.game.renderer.onContextRestored(function () {
-                    this.dirty = true;
-                }, this);
-            }
-
-            this.dirty = true;
-        },
-
-    getCanvas: function (readOnly) {
+    getCanvas(readOnly) {
         if (!readOnly) {
             this.dirty = true;
         }
         return this.canvas;
-    },
+    }
 
-    needRedraw: function () {
+    needRedraw() {
         this.dirty = true;
         return this;
-    },
+    }
 
-    preDestroy: function () {
+    preDestroy() {
         CanvasPool.remove(this.canvas);
-    },
+    }
 
-    resize: function (width, height) {
+    resize(width, height) {
         if ((this.width === width) && (this.height === height)) {
             return this;
         }
@@ -123,6 +95,29 @@ var Canvas = new Phaser.Class({
         this.dirty = true;
         return this;
     }
-});
+}
+
+const Components = Phaser.GameObjects.Components;
+Phaser.Class.mixin(Canvas,
+    [
+        Components.Alpha,
+        Components.BlendMode,
+        Components.ComputedSize,
+        Components.Crop,
+        Components.Depth,
+        Components.Flip,
+        Components.GetBounds,
+        Components.Mask,
+        Components.Origin,
+        Components.Pipeline,
+        Components.ScrollFactor,
+        Components.Tint,
+        Components.Transform,
+        Components.Visible,
+        Render,
+        CanvasMethods,
+        TextureMethods,
+    ]
+);
 
 export default Canvas;
