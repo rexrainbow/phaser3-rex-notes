@@ -4,8 +4,8 @@
  * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
  */
 
-var FillPathWebGL = require('../utils/FillPathWebGL');
-var StrokePathWebGL = require('../utils/StrokePathWebGL');
+var FillPathWebGL = require('../../utils/FillPathWebGL');
+var StrokePathWebGL = require('../../utils/StrokePathWebGL');
 
 /**
  * Renders this Game Object with the WebGL Renderer to the given Camera.

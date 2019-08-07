@@ -1,4 +1,4 @@
-import Render from './render/TextRender.js';
+import Render from './render/Render.js';
 import TextStyle from './textstyle/TextStyle.js'; // extended
 import CanvasTextKlass from './canvastext/CanvasText.js';
 import Pool from '../../../pool.js';

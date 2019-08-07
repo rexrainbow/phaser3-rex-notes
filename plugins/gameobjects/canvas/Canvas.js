@@ -1,6 +1,6 @@
 // copy from Phaser.GameObjects.Text
 
-import Render from './CanvasRender.js';
+import Render from './render/Render.js';
 import CanvasMethods from './CanvasMethods.js';
 import TextureMethods from './TextureMethods.js';
 
