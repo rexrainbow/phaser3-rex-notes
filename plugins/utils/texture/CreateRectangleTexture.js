@@ -1,4 +1,7 @@
 var CreateRectangleTexture = function (scene, key, width, height, color) {
+    if (height === undefined) {
+        height = width;
+    }
     if (color === undefined) {
         color = 0xffffff;
     }
