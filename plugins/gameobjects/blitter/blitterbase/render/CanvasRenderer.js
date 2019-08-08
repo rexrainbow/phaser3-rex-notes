@@ -1,5 +1,5 @@
-var BlitterCanvasRenderer = function (renderer, src, interpolationPercentage, camera, parentMatrix) {
-    var list = src.getRenderList();
+var BlitterCanvasRenderer = function (renderer, blitter, interpolationPercentage, camera, parentMatrix) {
+    var list = blitter.getRenderList();
 
     if (list.length === 0) {
         return;
@@ -7,7 +7,7 @@ var BlitterCanvasRenderer = function (renderer, src, interpolationPercentage, ca
 
     var ctx = renderer.currentContext;
 
-    var alpha = camera.alpha * src.alpha;
+    var alpha = camera.alpha * blitter.alpha;
 
     if (alpha === 0) {
         //  Nothing to see, so abort early
@@ -15,76 +15,68 @@ var BlitterCanvasRenderer = function (renderer, src, interpolationPercentage, ca
     }
 
     //  Blend Mode
-    ctx.globalCompositeOperation = renderer.blendModes[src.blendMode];
+    ctx.globalCompositeOperation = renderer.blendModes[blitter.blendMode];
 
-    var cameraScrollX = src.x - camera.scrollX * src.scrollFactorX;
-    var cameraScrollY = src.y - camera.scrollY * src.scrollFactorY;
+    var camMatrix = renderer._tempMatrix1.copyFrom(camera.matrix);
+    var calcMatrix = renderer._tempMatrix2;
+    var bobMatrix = renderer._tempMatrix3;
+    var blitterMatrix = renderer._tempMatrix4.applyITRS(blitter.x, blitter.y, blitter.rotation, blitter.scaleX, blitter.scaleY);
 
-    ctx.save();
+    camMatrix.multiply(blitterMatrix);
+
+    var scrollX = camera.scrollX * blitter.scrollFactorX;
+    var scrollY = camera.scrollY * blitter.scrollFactorY;
 
     if (parentMatrix) {
-        parentMatrix.copyToContext(ctx);
+        //  Multiply the camera by the parent matrix
+        camMatrix.multiplyWithOffset(parentMatrix, -scrollX, -scrollY);
+
+        scrollX = 0;
+        scrollY = 0;
     }
 
     var roundPixels = camera.roundPixels;
 
     //  Render bobs
-    for (var i = 0; i < list.length; i++) {
-        var bob = list[i];
-        var flip = (bob.flipX || bob.flipY);
+    for (var index = 0; index < list.length; index++) {
+        var bob = list[index];
         var frame = bob.frame;
         var cd = frame.canvasData;
-        var dx = frame.x;
-        var dy = frame.y;
-        var fx = 1;
-        var fy = 1;
-
         var bobAlpha = bob.alpha * alpha;
 
         if (bobAlpha === 0) {
             continue;
         }
 
-        ctx.globalAlpha = bobAlpha;
+        var x = -(frame.halfWidth);
+        var y = -(frame.halfHeight);
+        var flipX = (bob.flipX) ? -1 : 1;
+        var flipY = (bob.flipY) ? -1 : 1;
 
-        if (!flip) {
-            if (roundPixels) {
-                dx = Math.round(dx);
-                dy = Math.round(dy);
-            }
+        bobMatrix.applyITRS(0, 0, bob.rotation, bob.scaleX * flipX, bob.scaleY * flipY);
 
-            ctx.drawImage(
-                frame.source.image,
-                cd.x,
-                cd.y,
-                cd.width,
-                cd.height,
-                dx + bob.x + cameraScrollX,
-                dy + bob.y + cameraScrollY,
-                cd.width,
-                cd.height
-            );
+        bobMatrix.e = bob.x - scrollX;
+        bobMatrix.f = bob.y - scrollY;
+
+        camMatrix.multiply(bobMatrix, calcMatrix);
+
+        ctx.save();
+
+        calcMatrix.setToContext(ctx);
+
+        ctx.globalCompositeOperation = renderer.blendModes[blitter.blendMode];
+
+        ctx.globalAlpha = alpha;
+
+        if (roundPixels) {
+            x = Math.round(x);
+            y = Math.round(y);
         }
-        else {
-            if (bob.flipX) {
-                fx = -1;
-                dx -= cd.width;
-            }
 
-            if (bob.flipY) {
-                fy = -1;
-                dy -= cd.height;
-            }
+        ctx.drawImage(frame.source.image, cd.x, cd.y, cd.width, cd.height, x, y, cd.width, cd.height);
 
-            ctx.save();
-            ctx.translate(bob.x + cameraScrollX, bob.y + cameraScrollY);
-            ctx.scale(fx, fy);
-            ctx.drawImage(frame.source.image, cd.x, cd.y, cd.width, cd.height, dx, dy, cd.width, cd.height);
-            ctx.restore();
-        }
+        ctx.restore();
     }
-
-    ctx.restore();
 };
 
 export default BlitterCanvasRenderer;

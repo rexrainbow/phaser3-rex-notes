@@ -1,3 +1,5 @@
+const Clamp = Phaser.Math.Clamp;
+
 class Bob {
     constructor(blitter, x, y, frame, visible) {
         this.parent = blitter;
@@ -128,6 +130,7 @@ class Bob {
     }
 
     set alpha(value) {
+        value = Clamp(value, 0, 1);
         this.parent.dirty |= (this._alpha > 0) !== (value > 0);
         this._alpha = value;
     }

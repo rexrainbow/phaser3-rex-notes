@@ -1,7 +1,7 @@
 import Blitter from '../../plugins/gameobjects/blitter/blitterbase/Blitter.js';
 import CreateRectangleTexture from '../../plugins/utils/texture/CreateRectangleTexture.js';
+import LogMaxDelta from '../../plugins/utils/system/LogMaxDelta.js'
 
-const RandomBetween = Phaser.Math.Between;
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -16,16 +16,26 @@ class Demo extends Phaser.Scene {
         CreateRectangleTexture(this, 'dot', 16);
         var blitter = new Blitter(this, 400, 300, 'dot');
         this.add.existing(blitter);
-        for (var i = 0; i < 100; i++) {
-            blitter.create(RandomBetween(0, 800) - blitter.x, RandomBetween(0, 600) - blitter.y)
-                .setTint(RandomBetween(0, 0xffffff));
+
+        var points = [
+            { x: 400, y: 300, color: 0xff0000, scale: 1 },
+            { x: 200, y: 200, color: 0x00ff00, scale: 2 },
+            { x: 600, y: 400, color: 0x0000ff, scale: 3 },
+        ]
+
+        for (var i = 0, cnt = points.length; i < cnt; i++) {
+            var point = points[i];
+            blitter.create(point.x - blitter.x, point.y - blitter.y)
+                .setTint(point.color)
+                .setScale(point.scale)
         }
 
         this.blitter = blitter;
     }
 
-    update() {
-        // this.blitter.rotation += 0.01;
+    update(time) {
+        this.blitter.rotation += 0.01;
+        LogMaxDelta(time);
     }
 }
 
