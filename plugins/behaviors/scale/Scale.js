@@ -104,12 +104,10 @@ class Scale {
             return this;
         }
 
-        this.gameObject.scaleX = this.scaleStart.x;
-        this.gameObject.scaleY = this.scaleStart.y;
         this.tween = this.scene.tweens.add({
             targets: this.gameObject,
-            scaleX: this.scaleEnd.x,
-            scaleY: this.scaleEnd.y,
+            scaleX: { from: this.scaleStart.x, to: this.scaleEnd.x },
+            scaleY: { from: this.scaleStart.y, to: this.scaleEnd.y },
 
             duration: this.duration,
             ease: this.ease,

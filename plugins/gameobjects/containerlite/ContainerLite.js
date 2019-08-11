@@ -51,11 +51,6 @@ class ContainerLite extends Zone {
             return;
         }
 
-        if (fromScene) {
-            // Remove destroy event hook here
-            this.children.clear(false, false); // Remove this line in next phaser version
-        }
-
         this.children.destroy(!fromScene);
         this.children = undefined;
         super.destroy(fromScene);

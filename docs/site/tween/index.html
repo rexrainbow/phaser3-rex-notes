@@ -2563,6 +2563,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#events" title="Events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#state" title="State" class="md-nav__link">
+    State
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tween-value" title="Tween value" class="md-nav__link">
     Tween value
   </a>
@@ -2579,6 +2593,13 @@
           <li class="md-nav__item">
   <a href="#flow-chart" title="Flow chart" class="md-nav__link">
     Flow chart
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tween-data" title="Tween data" class="md-nav__link">
+    Tween data
   </a>
   
 </li>
@@ -4573,6 +4594,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#events" title="Events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#state" title="State" class="md-nav__link">
+    State
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#tween-value" title="Tween value" class="md-nav__link">
     Tween value
   </a>
@@ -4589,6 +4624,13 @@
           <li class="md-nav__item">
   <a href="#flow-chart" title="Flow chart" class="md-nav__link">
     Flow chart
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tween-data" title="Tween data" class="md-nav__link">
+    Tween data
   </a>
   
 </li>
@@ -4628,8 +4670,10 @@
 <h3 id="create-tween-task">Create tween task<a class="headerlink" href="#create-tween-task" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tween</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">tweens</span><span class="p">.</span><span class="nx">add</span><span class="p">({</span>
     <span class="nx">targets</span><span class="o">:</span> <span class="nx">gameObject</span><span class="p">,</span>
-    <span class="nx">x</span><span class="o">:</span> <span class="mi">400</span><span class="p">,</span>               <span class="c1">// &#39;+=100&#39;</span>
-    <span class="nx">y</span><span class="o">:</span> <span class="mi">300</span><span class="p">,</span>               <span class="c1">// &#39;+=100&#39;</span>
+    <span class="nx">alpha</span><span class="o">:</span> <span class="p">{</span> <span class="nx">from</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">to</span><span class="o">:</span> <span class="mi">1</span> <span class="p">},</span>
+    <span class="c1">// alpha: { start: 0, to: 1 },</span>
+    <span class="c1">// alpha: 1,</span>
+    <span class="c1">// alpha: &#39;+=1&#39;,</span>
     <span class="nx">ease</span><span class="o">:</span> <span class="s1">&#39;Linear&#39;</span><span class="p">,</span>       <span class="c1">// &#39;Cubic&#39;, &#39;Elastic&#39;, &#39;Bounce&#39;, &#39;Back&#39;</span>
     <span class="nx">duration</span><span class="o">:</span> <span class="mi">1000</span><span class="p">,</span>
     <span class="nx">repeat</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>            <span class="c1">// -1: infinity</span>
@@ -4637,6 +4681,13 @@
 <span class="p">});</span>
 </pre></div>
 
+<ul>
+<li><code>key: { from: value1, to: value2 }</code> : Set the property to <code>1</code> when tween started after delay, then tween to <code>value2</code>.</li>
+<li><code>key: { start: value0, to: value2 }</code> : Set the property to <code>value0</code> immediately, then tween to <code>value2</code>.</li>
+<li><code>key: { start: value0, from: value1, to: value2 }</code> : Set the property to <code>value0</code> immediately, then set to <code>value1</code> when tween started after delay, then tween to <code>value2</code>.</li>
+<li><code>key: value2</code> : Tween to <code>value2</code>.</li>
+<li><code>key: '+=deltaValue'</code> : Tween to current value + deltaValue</li>
+</ul>
 <p>or</p>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tween</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">tweens</span><span class="p">.</span><span class="nx">add</span><span class="p">({</span>
     <span class="nx">targets</span><span class="o">:</span> <span class="nx">gameObject</span><span class="p">,</span>
@@ -4656,6 +4707,7 @@
     <span class="nx">ease</span><span class="o">:</span> <span class="s1">&#39;Linear&#39;</span><span class="p">,</span>
     <span class="nx">easeParams</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
 
+    <span class="nx">onActive</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{},</span>
     <span class="nx">onUpdate</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{},</span>
     <span class="nx">onUpdateScope</span><span class="o">:</span> <span class="nx">callbackScope</span><span class="p">,</span>
     <span class="nx">onUpdateParams</span><span class="o">:</span> <span class="p">[],</span>
@@ -4752,11 +4804,13 @@
 <li><code>paused</code> : Does the tween start in a paused state, or playing?</li>
 <li><code>useFrames</code> : Use frames or milliseconds?</li>
 <li><code>props</code> : The properties being tweened by the tween</li>
-<li><code>onStart</code> : callback which fired when tween task started</li>
-<li><code>onUpdate</code> : callback which fired when tween task updated</li>
-<li><code>onComplete</code> : callback which fired when tween task done</li>
-<li><code>onYoyo</code> : callback which fired when tween reversed (yoyo)</li>
-<li><code>onRepeat</code> : callback which fired when repeat started</li>
+<li><code>onActive</code> : </li>
+<li><code>onStart</code> : Callback which fired when tween task started</li>
+<li><code>onUpdate</code> : Callback which fired when tween task updated</li>
+<li><code>onComplete</code> : Callback which fired when tween task done</li>
+<li><code>onYoyo</code> : Callback which fired when tween reversed (yoyo)</li>
+<li><code>onLoop</code> : </li>
+<li><code>onRepeat</code> : Callback which fired when repeat started</li>
 </ul>
 <h4 id="ease-equations">Ease equations<a class="headerlink" href="#ease-equations" title="Permanent link">&para;</a></h4>
 <ul>
@@ -4812,10 +4866,6 @@
 <div class="codehilite"><pre><span></span><span class="nx">tween</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
 </pre></div>
 
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isPlaying</span> <span class="o">=</span> <span class="nx">tween</span><span class="p">.</span><span class="nx">isPlaying</span><span class="p">();</span>
-<span class="kd">var</span> <span class="nx">isPaused</span> <span class="o">=</span> <span class="nx">tween</span><span class="p">.</span><span class="nx">isPaused</span><span class="p">();</span>
-</pre></div>
-
 <h3 id="stop-task">Stop task<a class="headerlink" href="#stop-task" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="nx">tween</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
 </pre></div>
@@ -4848,6 +4898,56 @@
 <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">tweens</span><span class="p">.</span><span class="nx">timeScale</span> <span class="o">=</span> <span class="nx">timescale</span><span class="p">;</span>
 </pre></div>
 
+<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Tween becomes active within the Tween Manager.
+    <div class="codehilite"><pre><span></span><span class="nx">tween</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;active&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">targets</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+<li>Tween completes or is stopped.
+    <div class="codehilite"><pre><span></span><span class="nx">tween</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">targets</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+<li>A tween loops, after any loop delay expires.
+    <div class="codehilite"><pre><span></span><span class="nx">tween</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;loop&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">targets</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+<li>A tween property repeats, after any repeat delay expires.
+    <div class="codehilite"><pre><span></span><span class="nx">tween</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;repeat&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">targets</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+<li>A tween starts.
+    <div class="codehilite"><pre><span></span><span class="nx">tween</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;start&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">targets</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+<li>A tween property updates.
+    <div class="codehilite"><pre><span></span><span class="nx">tween</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;update&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">targets</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+<li>A tween property yoyos
+    <div class="codehilite"><pre><span></span><span class="nx">tween</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;yoyo&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">targets</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h3 id="state">State<a class="headerlink" href="#state" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Is playing
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isPlaying</span> <span class="o">=</span> <span class="nx">tween</span><span class="p">.</span><span class="nx">isPlaying</span><span class="p">();</span>
+</pre></div></li>
+<li>Is paused
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isPaused</span> <span class="o">=</span> <span class="nx">tween</span><span class="p">.</span><span class="nx">isPaused</span><span class="p">();</span>
+</pre></div></li>
+<li>Is actively and not just in a delayed state
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">hasStarted</span> <span class="o">=</span> <span class="nx">tween</span><span class="p">.</span><span class="nx">hasStarted</span><span class="p">;</span>
+</pre></div></li>
+</ul>
 <h3 id="tween-value">Tween value<a class="headerlink" href="#tween-value" title="Permanent link">&para;</a></h3>
 <ol>
 <li>Create tween task
@@ -4912,6 +5012,15 @@ LoopDelay --&gt; DurationForward
 IsLoop --&gt; |No| CompleteDelay
 CompleteDelay[&quot;completeDelay&quot;] --&gt; CallbackOnComplete&gt;&quot;Callback: onComplete&quot;]
 CallbackOnComplete --&gt; End((End))</code></pre>
+
+<h3 id="tween-data">Tween data<a class="headerlink" href="#tween-data" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>tween.data</code> : An array of TweenData objects, each containing a unique property and target being tweened.<ul>
+<li><code>tween.data[i].key</code> : The property of the target to tween.</li>
+<li><code>tween.data[i].start</code>, <code>tween.data[i].end</code>, <code>tween.data[i].current</code> : Ease Value Data.</li>
+</ul>
+</li>
+</ul>
                 
                   
                 

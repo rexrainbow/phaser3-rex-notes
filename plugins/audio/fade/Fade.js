@@ -75,17 +75,9 @@ class Fade {
             return;
         }
 
-        var volume = this.volume;
         this.tween = this.scene.tweens.add({
             targets: this.sound,
-            volume: {
-                getStart: function () {
-                    return volume.start;
-                },
-                getEnd: function () {
-                    return volume.end;
-                }
-            },
+            volume: { from: this.volume.start, to: this.volume.end },
 
             delay: this.delay,
             duration: this.duration,
@@ -108,6 +100,7 @@ class Fade {
     }
 
     complete() {
+        this.stop();
         switch (this.mode) {
             case 1:
                 this.sound.stop();

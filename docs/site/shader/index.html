@@ -4562,7 +4562,7 @@
 <li><code>key</code> : The key of the shader to use from the <em>shader cache</em>, or a BaseShader instance.</li>
 <li><code>x</code>, <code>y</code> : Position.</li>
 <li><code>width</code>, <code>height</code> : Size.</li>
-<li><code>textures</code> : Optional array of texture keys to bind to the iChannel0, iChannel1, iChannel2, iChannel3 uniforms.</li>
+<li><code>textures</code> : Optional array of texture keys to bind to the iChannel0, iChannel1, iChannel2, iChannel3 uniforms. Lots of shaders expect textures to be <strong>power-of-two sized</strong>.</li>
 </ul>
 <p>Add shader object from JSON</p>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">shader</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">shader</span><span class="p">({</span>
@@ -4661,6 +4661,7 @@
 <li><code>uniformKey</code> : <code>'iChannel0'</code>, <code>'iChannel1'</code>, <code>'iChannel2'</code>, or <code>'iChannel3'</code>.</li>
 <li><code>textureIndex</code> : <code>0</code>(for iChannel0), <code>1</code>(for iChannel1), <code>2</code>(for iChannel2), <code>3</code>(for iChannel3).</li>
 <li><code>textureData</code> : Additional texture data.</li>
+<li><code>textureKey</code>: Key from the Texture Manager cache. It cannot be a single frame from a texture, only the full image. Lots of shaders expect textures to be <strong>power-of-two sized</strong>.</li>
 </ul>
 </li>
 <li>Sets a sampler2D uniform from a webgl texture.
@@ -4702,12 +4703,20 @@
 <h3 id="output">Output<a class="headerlink" href="#output" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Render to Display list, by default.</li>
-<li>Redirect render result to internal webgl texture
+<li>Redirect render result to internal webgl texture.
     <div class="codehilite"><pre><span></span><span class="nx">shader</span><span class="p">.</span><span class="nx">setRenderToTexture</span><span class="p">();</span>
+<span class="kd">var</span> <span class="nx">texture</span> <span class="o">=</span> <span class="nx">shader</span><span class="p">.</span><span class="nx">glTexture</span><span class="p">;</span>
+</pre></div></li>
+<li>Redirect render result to internal webgl texture, and sample2D from buffer.
+    <div class="codehilite"><pre><span></span><span class="nx">shader</span><span class="p">.</span><span class="nx">setRenderToTexture</span><span class="p">(</span><span class="kc">undefined</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">texture</span> <span class="o">=</span> <span class="nx">shader</span><span class="p">.</span><span class="nx">glTexture</span><span class="p">;</span>
 </pre></div></li>
 <li>Redirect render result to texture manager, for texture-based game object.
     <div class="codehilite"><pre><span></span><span class="nx">shader</span><span class="p">.</span><span class="nx">setRenderToTexture</span><span class="p">(</span><span class="nx">textureKey</span><span class="p">);</span>
+<span class="c1">// var texture = shader.glTexture;</span>
+</pre></div></li>
+<li>Redirect render result to texture manager, and Sample2D from buffer.
+    <div class="codehilite"><pre><span></span><span class="nx">shader</span><span class="p">.</span><span class="nx">setRenderToTexture</span><span class="p">(</span><span class="nx">textureKey</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
 <span class="c1">// var texture = shader.glTexture;</span>
 </pre></div></li>
 </ul>

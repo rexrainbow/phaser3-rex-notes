@@ -11,14 +11,22 @@ Change properties by tween equations, built-in object of phaser.
 ```javascript
 var tween = scene.tweens.add({
     targets: gameObject,
-    x: 400,               // '+=100'
-    y: 300,               // '+=100'
+    alpha: { from: 0, to: 1 },
+    // alpha: { start: 0, to: 1 },
+    // alpha: 1,
+    // alpha: '+=1',
     ease: 'Linear',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
     duration: 1000,
     repeat: 0,            // -1: infinity
     yoyo: false
 });
 ```
+
+- `key: { from: value1, to: value2 }` : Set the property to `1` when tween started after delay, then tween to `value2`.
+- `key: { start: value0, to: value2 }` : Set the property to `value0` immediately, then tween to `value2`.
+- `key: { start: value0, from: value1, to: value2 }` : Set the property to `value0` immediately, then set to `value1` when tween started after delay, then tween to `value2`.
+- `key: value2` : Tween to `value2`.
+- `key: '+=deltaValue'` : Tween to current value + deltaValue
 
 or
 
@@ -41,6 +49,7 @@ var tween = scene.tweens.add({
     ease: 'Linear',
     easeParams: null,
 
+    onActive: function () {},
     onUpdate: function () {},
     onUpdateScope: callbackScope,
     onUpdateParams: [],
@@ -136,11 +145,13 @@ var tween = scene.tweens.add({
 - `paused` : Does the tween start in a paused state, or playing?
 - `useFrames` : Use frames or milliseconds?
 - `props` : The properties being tweened by the tween
-- `onStart` : callback which fired when tween task started
-- `onUpdate` : callback which fired when tween task updated
-- `onComplete` : callback which fired when tween task done
-- `onYoyo` : callback which fired when tween reversed (yoyo)
-- `onRepeat` : callback which fired when repeat started
+- `onActive` : 
+- `onStart` : Callback which fired when tween task started
+- `onUpdate` : Callback which fired when tween task updated
+- `onComplete` : Callback which fired when tween task done
+- `onYoyo` : Callback which fired when tween reversed (yoyo)
+- `onLoop` : 
+- `onRepeat` : Callback which fired when repeat started
 
 #### Ease equations
 
@@ -199,11 +210,6 @@ tween.pause();
 tween.resume();
 ```
 
-```javascript
-var isPlaying = tween.isPlaying();
-var isPaused = tween.isPaused();
-```
-
 ### Stop task
 
 ```javascript
@@ -249,6 +255,66 @@ var timeScale = scene.tweens.timeScale;
 ```javascript
 scene.tweens.timeScale = timescale;
 ```
+
+### Events
+
+- Tween becomes active within the Tween Manager.
+    ```javascript
+    tween.on('active', function(tween, targets){
+
+    }, scope);
+    ```
+- Tween completes or is stopped.
+    ```javascript
+    tween.on('complete', function(tween, targets){
+
+    }, scope);
+    ```
+- A tween loops, after any loop delay expires.
+    ```javascript
+    tween.on('loop', function(tween, targets){
+
+    }, scope);
+    ```
+- A tween property repeats, after any repeat delay expires.
+    ```javascript
+    tween.on('repeat', function(tween, key, targets){
+
+    }, scope);
+    ```
+- A tween starts.
+    ```javascript
+    tween.on('start', function(tween, targets){
+
+    }, scope);
+    ```
+- A tween property updates.
+    ```javascript
+    tween.on('update', function(tween, key, targets){
+
+    }, scope);
+    ```
+- A tween property yoyos
+    ```javascript
+    tween.on('yoyo', function(tween, key, targets){
+
+    }, scope);
+    ```
+
+### State
+
+- Is playing
+    ```javascript
+    var isPlaying = tween.isPlaying();
+    ```
+- Is paused
+    ```javascript
+    var isPaused = tween.isPaused();
+    ```
+- Is actively and not just in a delayed state
+    ```javascript
+    var hasStarted = tween.hasStarted;
+    ```
 
 ### Tween value
 
@@ -322,3 +388,9 @@ IsLoop --> |No| CompleteDelay
 CompleteDelay["completeDelay"] --> CallbackOnComplete>"Callback: onComplete"]
 CallbackOnComplete --> End((End))
 ```
+
+### Tween data
+
+- `tween.data` : An array of TweenData objects, each containing a unique property and target being tweened.
+    - `tween.data[i].key` : The property of the target to tween.
+    - `tween.data[i].start`, `tween.data[i].end`, `tween.data[i].current` : Ease Value Data.

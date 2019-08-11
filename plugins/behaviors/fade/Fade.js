@@ -87,10 +87,9 @@ class Fade {
             return this;
         }
 
-        this.gameObject.alpha = this.alphaStart;
         this.tween = this.scene.tweens.add({
             targets: this.gameObject,
-            alpha: this.alphaEnd,
+            alpha: { from: this.alphaStart, to: this.alphaEnd },
 
             delay: this.delay,
             duration: this.duration,

@@ -4630,15 +4630,26 @@
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <h3 id="add-render-texture-object">Add render texture object<a class="headerlink" href="#add-render-texture-object" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">renderTexture</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
-</pre></div>
-
+<ul>
+<li>Create an empty render texture object.
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">renderTexture</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+</pre></div></li>
+<li>Create render texture and load texture.
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">renderTexture</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>key</code> : The texture key to make the RenderTexture from.</li>
+<li><code>frame</code> : The frame to make the RenderTexture from.</li>
+</ul>
+</li>
+</ul>
 <p>Add render texture from JSON</p>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rt</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">make</span><span class="p">.</span><span class="nx">renderTexture</span><span class="p">({</span>
     <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="nx">width</span><span class="o">:</span> <span class="mi">32</span><span class="p">,</span>
     <span class="nx">height</span><span class="o">:</span> <span class="mi">32</span><span class="p">,</span>
+    <span class="c1">// key: undefined,</span>
+    <span class="c1">// frame: undefined,</span>
 
     <span class="c1">// angle: 0,</span>
     <span class="c1">// alpha: 1</span>
@@ -4732,6 +4743,7 @@
 
 <h3 id="fill">Fill<a class="headerlink" href="#fill" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="nx">rt</span><span class="p">.</span><span class="nx">fill</span><span class="p">(</span><span class="nx">rgb</span><span class="p">,</span> <span class="nx">alpha</span><span class="p">);</span>
+<span class="c1">// rt.fill(rgb, alpha, x, y, width, height);</span>
 </pre></div>
 
 <h3 id="set-size">Set size<a class="headerlink" href="#set-size" title="Permanent link">&para;</a></h3>
