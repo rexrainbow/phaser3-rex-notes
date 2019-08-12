@@ -105,11 +105,9 @@ class Text extends GameObject {
 
         this.setText(text);
 
-        if (scene.sys.game.config.renderType === Phaser.WEBGL) {
-            scene.sys.game.renderer.onContextRestored(function () {
-                this.dirty = true;
-            }, this);
-        }
+        scene.sys.game.events.on('contextrestored', function () {
+            this.dirty = true;
+        }, this);
     }
 
     set text(value) {

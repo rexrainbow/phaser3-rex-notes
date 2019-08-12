@@ -168,6 +168,23 @@ Internal camera `rt.camera`
     rt.camera.setAngle(angle);  // angle in degrees
     ```
 
+### Snapshot
+
+- Takes a snapshot of the whole of this Render Texture.
+    ```javascript
+    rt.snapshot(callback);
+    // rt.snapshot(callback, type, encoderOptions);
+    ```
+- Takes a snapshot of the given area of this Render Texture.
+    ```javascript
+    rt.snapshotArea(x, y, width, height, callback);
+    // rt.snapshotArea(x, y, width, height, callback, type, encoderOptions);
+    ```
+- Takes a snapshot of the given pixel from this Render Texture.
+    ```javascript
+    rt.snapshotPixel(x, y, callback);
+    ```
+
 ### Other properties
 
 See [game object](gameobject.md)

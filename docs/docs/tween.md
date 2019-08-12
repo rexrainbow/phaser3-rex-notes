@@ -42,10 +42,10 @@ var tween = scene.tweens.add({
     onStartParams: [],
 
     // initial delay
-    delay: 0,
+    delay: 0,  // function(target, targetKey, value, targetIndex, totalTargets, tween) { },
 
     // tween duration
-    duration: 1000,
+    duration: 1000,  // function(target, targetKey, value, targetIndex, totalTargets, tween) { },
     ease: 'Linear',
     easeParams: null,
 
@@ -55,7 +55,7 @@ var tween = scene.tweens.add({
     onUpdateParams: [],
 
     // delay between tween and yoyo
-    hold: 0,
+    hold: 0,  // function(target, targetKey, value, targetIndex, totalTargets, tween) { },
     yoyo: false,  // true to tween backward
     flipX: false,
     flipY: false,
@@ -64,12 +64,12 @@ var tween = scene.tweens.add({
     onYoyoParams: [],
 
     // repeat count (-1: infinite)
-    repeat: 0,
+    repeat: 0,  // function(target, targetKey, value, targetIndex, totalTargets, tween) { },
     onRepeat: function () {},
     onRepeatScope: callbackScope,
     onRepeatParams: [],
     // delay to next pass
-    repeatDelay: 0,
+    repeatDelay: 0,  // function(target, targetKey, value, targetIndex, totalTargets, tween) { },
 
     // loop count (-1: infinite)
     loop: 0,
@@ -102,24 +102,28 @@ var tween = scene.tweens.add({
 
     // or
     props: {
-       x: {
-           duration: 400,
-           yoyo: true,
-           repeat: 8,
-           ease: 'Sine.easeInOut',
-           value: {
-               getEnd: function (target, key, value)
-               {
-                   destX -= 30;
-                   return destX;
-               },
-               getStart: function (target, key, value)
-               {
-                   return value + 30;
-               }
-           }
-       },
-       ....
+        x: {
+            duration: 400,
+            yoyo: true,
+            repeat: 8,
+            ease: 'Sine.easeInOut',
+            value: {
+                getActive: function (target, key, value, targetIndex, totalTargets, tween)
+                {
+                    return value;
+                },
+                getStart: function (target, key, value, targetIndex, totalTargets, tween)
+                {
+                    return value + 30;
+                },
+                getEnd: function (target, key, value, targetIndex, totalTargets, tween)
+                {
+                    destX -= 30;
+                    return destX;
+                }
+            }
+        },
+        ....
     },
 
     offset: null,
@@ -129,12 +133,55 @@ var tween = scene.tweens.add({
 
 - `targets` : The targets the tween is updating.
 - `delay` : The time the tween will wait before it first starts
+    - A number, for all targets
+    - A callback function : `function(target, targetKey, value, targetIndex, totalTargets, tween) { }`
+    - A callback function, built via stagger builder :
+        - From `0` to `endValue` : 
+            - `scene.tweens.stagger(endValue)`
+        - From `startValue` to `endValue` : 
+            - `scene.tweens.stagger([startValue, endValue])`
+        - From `0` to `endValue`, with specific ease function : 
+            - `scene.tweens.stagger(endValue, {ease: 'cubic.inout'})`
+        - From `startValue` to `endValue`, with specific ease function : 
+            - `scene.tweens.stagger([startValue, endValue], {ease: 'cubic.inout'})`
+        - From `0` to `endValue`, with specific start index :
+            - `scene.tweens.stagger(endValue, {from: 'last'})`
+            - `scene.tweens.stagger(endValue, {from: 'center'})`
+            - `scene.tweens.stagger(endValue, {from: index})`
+        - From `startValue` to `endValue`, , with specific start index :
+            - `scene.tweens.stagger([startValue, endValue], {from: 'last'})`
+            - `scene.tweens.stagger([startValue, endValue], {from: 'center'})`
+            - `scene.tweens.stagger([startValue, endValue], {from: index})`
+        - From `0` to `endValue`, with specific ease function, with specific start index : 
+            - `scene.tweens.stagger(endValue, {from: 'last', ease: 'cubic.inout'})`
+        - From `startValue` to `endValue`, with specific ease function , with specific start index :
+            - `scene.tweens.stagger([startValue, endValue], {from: 'last', ease: 'cubic.inout'})`
+        - Grid mode. From `0` to `endValue`.
+            - `scene.tweens.stagger(endValue, {grid: [gridWidth, gridHeight], })`
+            - `scene.tweens.stagger(endValue, {grid: [gridWidth, gridHeight], from: 'center'})`
+            - `scene.tweens.stagger(endValue, {grid: [gridWidth, gridHeight], from: 'center', ease: 'cubic.inout'})`
+        - Grid mode. From `startValue` to `endValue`.
+            - `scene.tweens.stagger([startValue, endValue], {grid: [gridWidth, gridHeight], })`
+            - `scene.tweens.stagger([startValue, endValue], {grid: [gridWidth, gridHeight], from: 'center'})`
+            - `scene.tweens.stagger([startValue, endValue], {grid: [gridWidth, gridHeight], from: 'center', ease: 'cubic.inout'})`
 - `duration` : The duration of the tween
+    - A number, for all targets
+    - A callback function : `function(target, targetKey, value, targetIndex, totalTargets, tween) { }`
+    - A callback function, built via stagger builder
 - `ease` : The ease function used by the tween
 - `easeParams` : The parameters to go with the ease function (if any)
 - `hold` : The time the tween will pause before running a yoyo
+    - A number, for all targets
+    - A callback function : `function(target, targetKey, value, targetIndex, totalTargets, tween) { }`
+    - A callback function, built via stagger builder
 - `repeat` : The number of times the tween will repeat itself (a value of 1 means the tween will play twice, as it repeated once)
+    - A number, for all targets
+    - A callback function : `function(target, targetKey, value, targetIndex, totalTargets, tween) { }`
+    - A callback function, built via stagger builder
 - `repeatDelay` : The time the tween will pause for before starting a repeat. The tween holds in the start state.
+    - A number, for all targets
+    - A callback function : `function(target, targetKey, value, targetIndex, totalTargets, tween) { }`
+    - A callback function, built via stagger builder
 - `yoyo` : boolean - Does the tween reverse itself (yoyo) when it reaches the end?
 - `flipX` : flip X the GameObject on tween end
 - `flipY` : flip Y the GameObject on tween end

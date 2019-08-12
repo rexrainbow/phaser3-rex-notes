@@ -51,13 +51,11 @@ class Canvas extends GameObject {
             this.frame.source.glTexture = null;
         }
 
-        if (scene.sys.game.config.renderType === Phaser.WEBGL) {
-            scene.sys.game.renderer.onContextRestored(function () {
-                this.dirty = true;
-            }, this);
-        }
-
         this.dirty = true;
+
+        scene.sys.game.events.on('contextrestored', function () {
+            this.dirty = true;
+        }, this);
     }
 
     getCanvas(readOnly) {
