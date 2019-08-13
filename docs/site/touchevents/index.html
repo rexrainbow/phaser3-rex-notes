@@ -2001,8 +2001,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#game-objects-input-object" title="Game object's input object" class="md-nav__link">
-    Game object's input object
+  <a href="#input-object" title="Input object" class="md-nav__link">
+    Input object
   </a>
   
 </li>
@@ -2010,6 +2010,13 @@
           <li class="md-nav__item">
   <a href="#smooth" title="Smooth" class="md-nav__link">
     Smooth
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debug" title="Debug" class="md-nav__link">
+    Debug
   </a>
   
 </li>
@@ -3310,6 +3317,18 @@
   <li class="md-nav__item">
     <a href="../wrap/" title="Wrap" class="md-nav__link">
       Wrap
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ease-function/" title="Ease" class="md-nav__link">
+      Ease
     </a>
   </li>
 
@@ -4746,8 +4765,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#game-objects-input-object" title="Game object's input object" class="md-nav__link">
-    Game object's input object
+  <a href="#input-object" title="Input object" class="md-nav__link">
+    Input object
   </a>
   
 </li>
@@ -4755,6 +4774,13 @@
           <li class="md-nav__item">
   <a href="#smooth" title="Smooth" class="md-nav__link">
     Smooth
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#debug" title="Debug" class="md-nav__link">
+    Debug
   </a>
   
 </li>
@@ -5197,7 +5223,7 @@ If set to <code>false</code> it will emit events from all Game Objects below a P
 </ul>
 </li>
 </ul>
-<h3 id="game-objects-input-object">Game object's input object<a class="headerlink" href="#game-objects-input-object" title="Permanent link">&para;</a></h3>
+<h3 id="input-object">Input object<a class="headerlink" href="#input-object" title="Permanent link">&para;</a></h3>
 <ul>
 <li><code>gameObject.input</code> : Game object's input object.</li>
 <li><code>gameObject.input.localX</code>, <code>gameObject.input.localY</code> : Pointer to local position of texture.</li>
@@ -5223,6 +5249,16 @@ If set to <code>false</code> it will emit events from all Game Objects below a P
 <span class="kd">var</span> <span class="nx">worldY</span> <span class="o">=</span> <span class="nx">pointer</span><span class="p">.</span><span class="nx">worldY</span><span class="p">;</span>
 </pre></div></li>
 </ol>
+<h3 id="debug">Debug<a class="headerlink" href="#debug" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Enable, draw shape of hit area.
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">enableDebug</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+<span class="c1">// scene.input.enableDebug(gameObject, color);</span>
+</pre></div></li>
+<li>Disable
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">removeDebug</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+</pre></div></li>
+</ul>
                 
                   
                 

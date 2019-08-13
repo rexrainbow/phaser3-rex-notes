@@ -6,6 +6,8 @@ Get ease function, built-in method of phaser.
 
 ## Usage
 
+### Get ease function
+
 ```javascript
 var easeFunction = Phaser.Tweens.Builders.GetEaseFunction(ease);
 // var easeFunction = Phaser.Tweens.Builders.GetEaseFunction(ease, easeParams);
@@ -69,3 +71,11 @@ var easeFunction = Phaser.Tweens.Builders.GetEaseFunction(ease);
         }
         ```
         - `v` : `0` ~ `1`
+
+### Get result
+
+```javascript
+var result = easeFunction(t);
+```
+
+- `t` : `0` ~ `1`
