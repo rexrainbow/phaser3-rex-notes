@@ -69,6 +69,10 @@ graphics.fillPointShape(point, size);
     var x = point.x;
     var y = point.y;
     ```
+- Type:
+    ```javascript
+    var type = point.type; // 3
+    ```
 
 ### Equal
 

@@ -406,7 +406,7 @@ scene.input.addPointer(num);  // total points = num + 1
     - Velocity: `pointer.velocity`
         - `pointer.velocity.x`, ``pointer.velocity.y`
 
-### Game object's input object
+### Input object
 
 - `gameObject.input` : Game object's input object.
 - `gameObject.input.localX`, `gameObject.input.localY` : Pointer to local position of texture.
@@ -434,4 +434,16 @@ Touch-position = (current-touch-position * smooth-factor) + (previous-touch-posi
     var y = pointer.y;
     var worldX = pointer.worldX;
     var worldY = pointer.worldY;
+    ```
+
+### Debug
+
+- Enable, draw shape of hit area.
+    ```javascript
+    scene.input.enableDebug(gameObject);
+    // scene.input.enableDebug(gameObject, color);
+    ```
+- Disable
+    ```javascript
+    scene.input.removeDebug(gameObject);
     ```

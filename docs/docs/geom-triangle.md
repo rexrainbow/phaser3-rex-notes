@@ -159,6 +159,10 @@ var out = Phaser.Geom.Triangle.BuildFromPolygon(data);
     var out = Phaser.Geom.Triangle.CircumCircle(triangle);  // out: a circle object
     // var out = Phaser.Geom.Triangle.CircumCircle(triangle, out);
     ```
+- Type:
+    ```javascript
+    var type = triangle.type; // 6
+    ```
 
 ### Point(s) & shape
 

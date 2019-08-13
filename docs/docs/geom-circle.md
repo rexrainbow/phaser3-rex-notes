@@ -107,6 +107,10 @@ var circle1 = Phaser.Geom.Circle.Clone(circle0);
     ```javascript
     var circumference = Phaser.Geom.Circle.Circumference(circle);
     ```
+- Type:
+    ```javascript
+    var type = circle.type; // 0
+    ```
 
 ### Point(s) & shape
 

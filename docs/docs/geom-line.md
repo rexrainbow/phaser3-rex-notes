@@ -174,6 +174,10 @@ graphics.strokeLineShape(line);
         ```javascript
         var reflectAngle = Phaser.Geom.Line.ReflectAngle(aimLine, reflectingLine);
         ```
+- Type:
+    ```javascript
+    var type = line.type; // 2
+    ```
 
 ### Point(s) & shape
 

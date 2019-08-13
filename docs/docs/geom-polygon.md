@@ -76,6 +76,10 @@ polygon.setTo(points);
     // var out = Phaser.Geom.Polygon.GetAABB(polygon, out);
     ```
     - `out` : A [rectangle object](geom-rectangle.md)
+- Type:
+    ```javascript
+    var type = polygon.type; // 4
+    ```
 
 ### Point(s) & shape
 

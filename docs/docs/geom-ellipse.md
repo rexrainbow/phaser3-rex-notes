@@ -104,6 +104,10 @@ var ellipse1 = Phaser.Geom.Ellipse.Clone(ellipse0);
     ```javascript
     var circumference = Phaser.Geom.Ellipse.Circumference(ellipse);
     ```
+- Type:
+    ```javascript
+    var type = ellipse.type; // 1
+    ```
 
 ### Point(s) & shape
 
