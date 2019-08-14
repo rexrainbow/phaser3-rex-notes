@@ -96,7 +96,7 @@ Arcade physics Image/Sprite/Group object.
     ```
     - `disableGameObject` : Also deactivate this Game Object.
     - `hideGameObject` : Also hide this Game Object.
-  
+
 ### Movement
 
 #### Velocity

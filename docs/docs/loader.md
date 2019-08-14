@@ -24,6 +24,12 @@ scene.load.once('complete', callback);  // add callback of 'complete' event
 scene.load.start();                     // start loading
 ```
 
+### Set path
+
+```javascript
+scene.loader.setPath(path)
+```
+
 ### Events
 
 - Start loading

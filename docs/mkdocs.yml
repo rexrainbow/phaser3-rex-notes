@@ -100,6 +100,10 @@ nav:
             - 8 direction: eightdirection.md
             - Bullet: bullet.md
             - Ship: ship.md
+        - Matter.js:
+            - Engine:
+                - World: matterjs-world.md
+                - Game object: matterjs-gameobject.md
     - Display:
         - Mask: mask.md
 - Input:

@@ -16,8 +16,8 @@ var config = {
         arcade: {
         //    x: 0,
         //    y: 0,
-        //    width: scene.sys.game.config.width,
-        //    height: scene.sys.game.config.height,
+        //    width: scene.sys.scale.width,
+        //    height: scene.sys.scale.height,
         //    gravity: {
         //        x: 0,
         //        y: 0
