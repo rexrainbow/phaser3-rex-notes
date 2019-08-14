@@ -1068,6 +1068,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#snapshot" title="Snapshot" class="md-nav__link">
+    Snapshot
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" title="Other properties" class="md-nav__link">
     Other properties
   </a>
@@ -3233,6 +3240,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../ease-function/" title="Ease" class="md-nav__link">
+      Ease
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -4584,6 +4603,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#snapshot" title="Snapshot" class="md-nav__link">
+    Snapshot
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" title="Other properties" class="md-nav__link">
     Other properties
   </a>
@@ -4768,6 +4794,20 @@
 </pre></div></li>
 <li>Rotate
     <div class="codehilite"><pre><span></span><span class="nx">rt</span><span class="p">.</span><span class="nx">camera</span><span class="p">.</span><span class="nx">setAngle</span><span class="p">(</span><span class="nx">angle</span><span class="p">);</span>  <span class="c1">// angle in degrees</span>
+</pre></div></li>
+</ul>
+<h3 id="snapshot">Snapshot<a class="headerlink" href="#snapshot" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Takes a snapshot of the whole of this Render Texture.
+    <div class="codehilite"><pre><span></span><span class="nx">rt</span><span class="p">.</span><span class="nx">snapshot</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
+<span class="c1">// rt.snapshot(callback, type, encoderOptions);</span>
+</pre></div></li>
+<li>Takes a snapshot of the given area of this Render Texture.
+    <div class="codehilite"><pre><span></span><span class="nx">rt</span><span class="p">.</span><span class="nx">snapshotArea</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
+<span class="c1">// rt.snapshotArea(x, y, width, height, callback, type, encoderOptions);</span>
+</pre></div></li>
+<li>Takes a snapshot of the given pixel from this Render Texture.
+    <div class="codehilite"><pre><span></span><span class="nx">rt</span><span class="p">.</span><span class="nx">snapshotPixel</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
 </pre></div></li>
 </ul>
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
