@@ -19,6 +19,10 @@ var config = {
         //    velocityIterations: 4,
         //    constraintIterations: 2,
         //    enableSleeping: false,
+        //    plugins: {
+        //        attractors: false,
+        //        wrap: false,
+        //    },
         //    gravity: {
         //        x: 0,
         //        y: 0,
@@ -95,3 +99,13 @@ scene.matter.add.mouseSpring();
         ```
         - `thickness` : The thickness of each wall, in pixels.
         - `left`, `right`, `top`, `bottom` : If true will create the left/right/top/bottom bounds wall.
+
+### Collision
+
+```javascript
+scene.matter.world.on('collisionstart', function (event, bodyA, bodyB) {
+});
+```
+
+- `bodyA`, `bodyB` : Matter body object.
+    - `bodyA.gameObject`, `bodyB.gameObject` : Game object of matter body.

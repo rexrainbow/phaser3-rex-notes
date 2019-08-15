@@ -37,11 +37,29 @@ var gameObject = scene.matter.add.gameObject(gameObject);
 
 - `config` : [Config object](matterjs-gameobject.md#config)
 
+#### Image composite
+
+Create a new composite containing Matter Image objects created in a grid arrangement.
+
+```javascript
+var composite = scene.matter.add.imageStack(key, frame, x, y, columns, rows);
+// var composite = scene.matter.add.imageStack(key, frame, x, y, columns, rows, columnGap, rowGap, options);
+```
+
+- `key`, `frame` : Texture key and frame name.
+- `x`, `y` : Top-left position of these game objects.
+- `columns`, `rows` : The number of columns/rows in the grid.
+- `columnGap`, `rowGap` : The distance between each column/row.
+- `config` : [Config object](matterjs-gameobject.md#config)
+- `composite` : Composite matter object.
+    - `composite.bodies` : An array of bodies.
+
 #### Config
 
 ```javascript
 {
     shape: 'rectangle',
+    chamfer: null,
 
     isStatic: false,
     isSensor: false,
@@ -65,13 +83,58 @@ var gameObject = scene.matter.add.gameObject(gameObject);
         category: 0x0001,
         mask: 0xFFFFFFFF,
     },
+
+    // plugin: {
+    //     attractors: [
+    //         (function(bodyA, bodyB) { return {x, y}}),
+    //     ]
+    // },
+
     slop: 0.05,
 
     timeScale: 1,
 }
 ```
 
-- `shape` : `'rectangle'`, `'circle'`, `'trapezoid'`, `'polygon'`, `'fromVertices'`, `'fromPhysicsEditor'`
+- `shape` : 
+    - A string : `'rectangle'`, `'circle'`, `'trapezoid'`, `'polygon'`, `'fromVertices'`, `'fromPhysicsEditor'`
+    - An object : 
+        - Rectangle shape
+            ```javascript
+            {
+                type: 'rectangle',
+                // width: gameObject.width
+                // height: gameObject.height
+            }
+            ```
+        - Circle shape
+            ```javascript
+            {
+                type: 'circle',
+                // radius: (Math.max(gameObject.width, gameObject.height) / 2),
+                // maxSides: 25
+            }
+            ```
+        - Trapezoid shape
+            ```javascript
+            {
+                type: 'trapezoid',
+                // slope: 0.5,
+            }
+            ```
+        - Polygon shape
+            ```javascript
+            {
+                type: 'polygon',
+                // radius: (Math.max(gameObject.width, gameObject.height) / 2),
+                // sides: 5,
+            }
+            ```
+- `chamfer` : 
+    - `null`
+    - A number
+    - `{radius: value}`
+    - `{radius: [topLeft, topRight, bottomRight, bottomLeft]}`
 - `isStatic` : A flag that indicates whether a body is considered static. A static body can never change position or angle and is completely fixed.
 - `isSensor` : A flag that indicates whether a body is a sensor. Sensor triggers collision events, but doesn't react with colliding body physically.
 - `isSleeping` : A flag that indicates whether the body is considered sleeping. A sleeping body acts similar to a static body, except it is only temporary and can be awoken.
@@ -181,6 +244,12 @@ gameObject.setFrictionStatic(v);
 
 ### Rotation
 
+#### Fixed rotation
+
+```javascript
+gameObject.setFixedRotation();
+```
+
 #### Angular velocity
 
 ```javascript
@@ -248,3 +317,166 @@ gameObject.setMass(v);
 ```javascript
 gameObject.setDensity(v);
 ```
+
+### Constraint
+
+#### Constraint of 2 game objects
+
+```javascript
+scene.matter.add.constraint(gameObjectA, gameObjectB);
+// scene.matter.add.constraint(gameObjectA, gameObjectB, length, stiffness, options);
+```
+
+- `gameObjectA`, `gameObjectB` : Matter game object, or matter body object.
+- `length` : The target resting length of the constraint.
+    - `undefined` : Current distance between gameObjectA and gameObjectB. (Default value)
+- `stiffness` : The stiffness of the constraint.
+    - `1` : Very stiff. (Default value)
+    - `0.2` : Acts as a soft spring.
+- `options` :
+    ```javascript
+    {
+        pointA: {
+            x: 0,
+            y: 0,
+        },
+        pointB: {
+            x: 0,
+            y: 0,
+        },
+        damping: 0,
+        angularStiffness: 0,
+        // render: {
+        //     visible: true
+        // }
+    }
+    ```
+    - `pointA`, `pointB` : Offset position of `gameObjectA`, `gameObjectB`.
+
+Alias:
+
+```javascript
+scene.matter.add.spring(gameObjectA, gameObjectB, length, stiffness, options);
+scene.matter.add.joint(gameObjectA, gameObjectB, length, stiffness, options);
+```
+
+#### Constraint to world position
+
+```javascript
+scene.matter.add.worldConstraint(gameObjectB, length, stiffness, options);
+```
+
+- `gameObjectB` : Matter game object, or matter body object.
+- `length` : The target resting length of the constraint.
+    - `undefined` : Current distance between gameObjectA and gameObjectB. (Default value)
+- `stiffness` : The stiffness of the constraint.
+    - `1` : Very stiff. (Default value)
+    - `0.2` : Acts as a soft spring.
+- `options` :
+    ```javascript
+    {
+        pointA: {
+            x: 0,
+            y: 0,
+        },
+        pointB: {
+            x: 0,
+            y: 0,
+        },
+        damping: 0,
+        angularStiffness: 0,
+        // render: {
+        //     visible: true
+        // }
+    }
+    ```
+    - `pointA` : World position.
+    - `pointB` : Offset position of `gameObjectB`.
+
+#### Chain game objects
+
+```javascript
+var composite = scene.matter.add.chain(composite, xOffsetA, yOffsetA, xOffsetB, yOffsetB, options);
+```
+
+- `composite` : [Image composite](matterjs-gameobject.md#image-composite)
+- `xOffsetA`, `yOffsetA` : Offset position of gameObjectA, in scale.
+    - xOffset = (Offset distance / width)
+    - yOffset = (Offset distance / height)
+- `xOffsetB`, `yOffsetB` : Offset position of gameObjectB, in scale.
+- `options` : 
+    ```javascript
+    {
+        length: undefined,
+        stiffness: 1,
+        damping: 0,
+        angularStiffness: 0,
+        // render: {
+        //     visible: true
+        // }
+    }
+    ```
+    - `length` : The target resting length of the constraint.
+        - `undefined` : Current distance between gameObjectA and gameObjectB. (Default value)
+    - `stiffness` : The stiffness of the constraint.
+        - `1` : Very stiff. (Default value)
+        - `0.2` : Acts as a soft spring.
+- `composite`
+    - `composite.bodies` : An array of bodies.
+    - `composite.constraints` : An array of constraints
+
+### Plugins
+
+#### Attractors
+
+##### Enable
+
+- Game config
+    ```javascript
+    var config = {
+        // ...
+        physics: {
+            default: 'matter',
+            matter: {
+                // ...
+                plugins: {
+                    attractors: true,
+                    // ...
+                }
+                // ...
+            }
+        }
+        // ...
+    }
+    var game = new Phaser.Game(config);
+    ```
+- Runtime
+    ```javascript
+    scene.matter.system.enableAttractorPlugin();
+    ```
+
+##### Attractor matter object
+
+- Attractor Matter object config
+    ```javascript
+    var config = {
+        // ...
+        plugin: {
+            attractors: [
+                (function(bodyA, bodyB) { return {x, y}}),
+            ]
+        },
+        // ...
+    }
+    ```
+- Attractor force
+    ```javascript
+    function(bodyA, bodyB) {
+        return {x, y}; // Force
+    }
+    ```
+    - `bodyA` : Attractor matter object.
+    - `bodyB` : Other matter object
+    - Return a force in vector2 (`{x,y}`) format, apply to bodyB.
+
+#### Wrap
