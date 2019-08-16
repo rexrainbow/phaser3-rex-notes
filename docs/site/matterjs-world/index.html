@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/matterjs/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/matterjs-world/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Matterjs - Notes of Phaser 3</title>
+        <title>World - Notes of Phaser 3</title>
       
     
     
@@ -128,7 +128,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Matterjs
+                World
               </span>
             
           
@@ -507,10 +507,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
     
     <label class="md-nav__link" for="nav-4">
       Game object
@@ -1378,10 +1380,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-10" type="checkbox" id="nav-4-10">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-10" type="checkbox" id="nav-4-10" checked>
     
     <label class="md-nav__link" for="nav-4-10">
       Behaviors
@@ -1685,6 +1689,262 @@
     <a href="../ship/" title="Ship" class="md-nav__link">
       Ship
     </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-10-13" type="checkbox" id="nav-4-10-13" checked>
+    
+    <label class="md-nav__link" for="nav-4-10-13">
+      Matter.js
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-10-13">
+        Matter.js
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-10-13-1" type="checkbox" id="nav-4-10-13-1" checked>
+    
+    <label class="md-nav__link" for="nav-4-10-13-1">
+      Engine
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
+      <label class="md-nav__title" for="nav-4-10-13-1">
+        Engine
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        World
+      </label>
+    
+    <a href="./" title="World" class="md-nav__link md-nav__link--active">
+      World
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuration" title="Configuration" class="md-nav__link">
+    Configuration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#control" title="Control" class="md-nav__link">
+    Control
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pause" title="Pause" class="md-nav__link">
+    Pause
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resume" title="Resume" class="md-nav__link">
+    Resume
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drag-object" title="Drag object" class="md-nav__link">
+    Drag object
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#world-bounds" title="World bounds" class="md-nav__link">
+    World bounds
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#enable" title="Enable" class="md-nav__link">
+    Enable
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gravity" title="Gravity" class="md-nav__link">
+    Gravity
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#constraint" title="Constraint" class="md-nav__link">
+    Constraint
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constraint-of-2-game-objects" title="Constraint of 2 game objects" class="md-nav__link">
+    Constraint of 2 game objects
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#constraint-to-world-position" title="Constraint to world position" class="md-nav__link">
+    Constraint to world position
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chain-game-objects" title="Chain game objects" class="md-nav__link">
+    Chain game objects
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-constraint" title="Remove constraint" class="md-nav__link">
+    Remove constraint
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../matterjs-gameobject/" title="Game object" class="md-nav__link">
+      Game object
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../matterjs-wrap/" title="Wrap" class="md-nav__link">
+      Wrap
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../matterjs-attractor/" title="Attractor" class="md-nav__link">
+      Attractor
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
   </li>
 
         
@@ -4372,23 +4632,30 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-physics-object" title="Add physics object" class="md-nav__link">
-    Add physics object
+  <a href="#control" title="Control" class="md-nav__link">
+    Control
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#image-object" title="Image object" class="md-nav__link">
-    Image object
+  <a href="#pause" title="Pause" class="md-nav__link">
+    Pause
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#sprite-object" title="Sprite object" class="md-nav__link">
-    Sprite object
+  <a href="#resume" title="Resume" class="md-nav__link">
+    Resume
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#drag-object" title="Drag object" class="md-nav__link">
+    Drag object
   </a>
   
 </li>
@@ -4399,38 +4666,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#methods-of-game-object" title="Methods of game object" class="md-nav__link">
-    Methods of game object
+  <a href="#world-bounds" title="World bounds" class="md-nav__link">
+    World bounds
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#size" title="Size" class="md-nav__link">
-    Size
+  <a href="#enable" title="Enable" class="md-nav__link">
+    Enable
   </a>
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#velocity" title="Velocity" class="md-nav__link">
-    Velocity
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#mass" title="Mass" class="md-nav__link">
-    Mass
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#acceleration" title="Acceleration" class="md-nav__link">
-    Acceleration
-  </a>
+      </ul>
+    </nav>
   
 </li>
         
@@ -4442,22 +4693,37 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#friction" title="Friction" class="md-nav__link">
-    Friction
+  <a href="#constraint" title="Constraint" class="md-nav__link">
+    Constraint
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#constraint-of-2-game-objects" title="Constraint of 2 game objects" class="md-nav__link">
+    Constraint of 2 game objects
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#angular" title="Angular" class="md-nav__link">
-    Angular
+  <a href="#constraint-to-world-position" title="Constraint to world position" class="md-nav__link">
+    Constraint to world position
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#bounce" title="Bounce" class="md-nav__link">
-    Bounce
+  <a href="#chain-game-objects" title="Chain game objects" class="md-nav__link">
+    Chain game objects
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-constraint" title="Remove constraint" class="md-nav__link">
+    Remove constraint
   </a>
   
 </li>
@@ -4488,10 +4754,10 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/matterjs.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/matterjs-world.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Matterjs</h1>
+                  <h1>World</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
 <p><a href="http://brm.io/matter-js/">Matter</a> physics engine in phaser.</p>
@@ -4505,7 +4771,52 @@
     <span class="nx">physics</span><span class="o">:</span> <span class="p">{</span>
         <span class="k">default</span><span class="o">:</span> <span class="s1">&#39;matter&#39;</span><span class="p">,</span>
         <span class="nx">matter</span><span class="o">:</span> <span class="p">{</span>
-            <span class="nx">enableSleeping</span><span class="o">:</span> <span class="kc">false</span>
+        <span class="c1">//    enabled: true,</span>
+        <span class="c1">//    positionIterations: 6,</span>
+        <span class="c1">//    velocityIterations: 4,</span>
+        <span class="c1">//    constraintIterations: 2,</span>
+        <span class="c1">//    enableSleeping: false,</span>
+        <span class="c1">//    plugins: {</span>
+        <span class="c1">//        attractors: false,</span>
+        <span class="c1">//        wrap: false,</span>
+        <span class="c1">//    },</span>
+        <span class="c1">//    gravity: {</span>
+        <span class="c1">//        x: 0,</span>
+        <span class="c1">//        y: 0,</span>
+        <span class="c1">//    }</span>
+        <span class="c1">//    setBounds: {</span>
+        <span class="c1">//        x: 0,</span>
+        <span class="c1">//        y: 0,</span>
+        <span class="c1">//        width: scene.sys.scale.width,</span>
+        <span class="c1">//        height: scene.sys.scale.height,</span>
+        <span class="c1">//        thickness: 64,</span>
+        <span class="c1">//        left: true,</span>
+        <span class="c1">//        right: true,</span>
+        <span class="c1">//        top: true,</span>
+        <span class="c1">//        bottom: true,</span>
+        <span class="c1">//    },</span>
+        <span class="c1">//    timing: {</span>
+        <span class="c1">//        timestamp: 0,</span>
+        <span class="c1">//        timeScale: 1,</span>
+        <span class="c1">//    },</span>
+        <span class="c1">//    correction: 1,</span>
+        <span class="c1">//    getDelta: (function() { return 1000 / 60; }),</span>
+        <span class="c1">//    autoUpdate: true,</span>
+        <span class="c1">//    debug: false,</span>
+        <span class="c1">//    debugShowBody: true,</span>
+        <span class="c1">//    debugShowStaticBody: true,</span>
+        <span class="c1">//    debugShowVelocity: true,</span>
+        <span class="c1">//    debugBodyColor: 0xff00ff,</span>
+        <span class="c1">//    debugBodyFillColor: 0xe3a7e3,</span>
+        <span class="c1">//    debugStaticBodyColor: 0x0000ff,</span>
+        <span class="c1">//    debugVelocityColor: 0x00ff00,</span>
+        <span class="c1">//    debugShowJoint: true,</span>
+        <span class="c1">//    debugJointColor: 0x000000,</span>
+        <span class="c1">//    debugWireframes: true,</span>
+        <span class="c1">//    debugShowInternalEdges: false,</span>
+        <span class="c1">//    debugShowConvexHulls: false,</span>
+        <span class="c1">//    debugConvexHullColor: 0xaaaaaa,</span>
+        <span class="c1">//    debugShowSleeping: false,</span>
         <span class="p">}</span>
     <span class="p">}</span>
     <span class="c1">// ...</span>
@@ -4513,77 +4824,185 @@
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </pre></div>
 
-<h3 id="add-physics-object">Add physics object<a class="headerlink" href="#add-physics-object" title="Permanent link">&para;</a></h3>
-<h4 id="image-object">Image object<a class="headerlink" href="#image-object" title="Permanent link">&para;</a></h4>
-<p>Static object</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">matter</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">imag</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="p">{</span> <span class="nx">isStatic</span><span class="o">:</span> <span class="kc">true</span> <span class="p">});</span>
+<h3 id="control">Control<a class="headerlink" href="#control" title="Permanent link">&para;</a></h3>
+<h4 id="pause">Pause<a class="headerlink" href="#pause" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">matter</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
 </pre></div>
 
-<p>Dynamic object</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">matter</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">imag</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>
+<h4 id="resume">Resume<a class="headerlink" href="#resume" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">matter</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">resume</span><span class="p">();</span>
 </pre></div>
 
-<h4 id="sprite-object">Sprite object<a class="headerlink" href="#sprite-object" title="Permanent link">&para;</a></h4>
-<p>Static object</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">matter</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">sprite</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">,</span> <span class="p">{</span> <span class="nx">isStatic</span><span class="o">:</span> <span class="kc">true</span> <span class="p">});</span>
+<h4 id="drag-object">Drag object<a class="headerlink" href="#drag-object" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">matter</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">mouseSpring</span><span class="p">();</span>
+<span class="c1">// scene.matter.add.mouseSpring(options);</span>
 </pre></div>
 
-<p>Dynamic object</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">image</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">matter</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">sprite</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>
+<ul>
+<li><code>options</code>
+    <div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nx">length</span><span class="o">:</span> <span class="mf">0.01</span><span class="p">,</span>
+    <span class="nx">stiffness</span><span class="o">:</span> <span class="mf">0.1</span><span class="p">,</span>
+    <span class="nx">damping</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">angularStiffness</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nx">collisionFilter</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">category</span><span class="o">:</span> <span class="mh">0x0001</span><span class="p">,</span>
+        <span class="nx">mask</span><span class="o">:</span> <span class="mh">0xFFFFFFFF</span><span class="p">,</span>
+        <span class="nx">group</span><span class="o">:</span> <span class="mi">0</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div><ul>
+<li><code>collisionFilter</code> : Drag filter, see <a href="../matterjs-gameobject/#collision">collision</a>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="world-bounds">World bounds<a class="headerlink" href="#world-bounds" title="Permanent link">&para;</a></h3>
+<h4 id="enable">Enable<a class="headerlink" href="#enable" title="Permanent link">&para;</a></h4>
+<ul>
+<li>World :<ul>
+<li>Set bounds
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">matter</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">setBounds</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+<span class="c1">// scene.matter.world.setBounds(x, y, width, height, thickness, left, right, top, bottom);</span>
+</pre></div><ul>
+<li><code>thickness</code> : The thickness of each wall, in pixels.</li>
+<li><code>left</code>, <code>right</code>, <code>top</code>, <code>bottom</code> : If true will create the left/right/top/bottom bounds wall.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="gravity">Gravity<a class="headerlink" href="#gravity" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">matter</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">setGravity</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+<span class="c1">// scene.matter.world.setGravity(x, y, scale);</span>
+</pre></div></li>
+<li>Disalbe
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">matter</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">disableGravity</span><span class="p">();</span>
+</pre></div></li>
+</ul>
+<h3 id="constraint">Constraint<a class="headerlink" href="#constraint" title="Permanent link">&para;</a></h3>
+<h4 id="constraint-of-2-game-objects">Constraint of 2 game objects<a class="headerlink" href="#constraint-of-2-game-objects" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">constraint</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">matter</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">constraint</span><span class="p">(</span><span class="nx">gameObjectA</span><span class="p">,</span> <span class="nx">gameObjectB</span><span class="p">);</span>
+<span class="c1">// var constraint = scene.matter.add.constraint(gameObjectA, gameObjectB, length, stiffness, options);</span>
 </pre></div>
 
-<h3 id="methods-of-game-object">Methods of game object<a class="headerlink" href="#methods-of-game-object" title="Permanent link">&para;</a></h3>
-<h4 id="size">Size<a class="headerlink" href="#size" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setRectangle</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
+<ul>
+<li><code>gameObjectA</code>, <code>gameObjectB</code> : Matter game object, or matter body object.</li>
+<li><code>length</code> : The target resting length of the constraint.<ul>
+<li><code>undefined</code> : Current distance between gameObjectA and gameObjectB. (Default value)</li>
+</ul>
+</li>
+<li><code>stiffness</code> : The stiffness of the constraint.<ul>
+<li><code>1</code> : Very stiff. (Default value)</li>
+<li><code>0.2</code> : Acts as a soft spring.</li>
+</ul>
+</li>
+<li><code>options</code> :
+    <div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nx">pointA</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="nx">pointB</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="nx">damping</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">angularStiffness</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="c1">// render: {</span>
+    <span class="c1">//     visible: true</span>
+    <span class="c1">// }</span>
+<span class="p">}</span>
+</pre></div><ul>
+<li><code>pointA</code>, <code>pointB</code> : Offset position of <code>gameObjectA</code>, <code>gameObjectB</code>.</li>
+</ul>
+</li>
+</ul>
+<p>Alias:</p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">constraint</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">matter</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">spring</span><span class="p">(</span><span class="nx">gameObjectA</span><span class="p">,</span> <span class="nx">gameObjectB</span><span class="p">,</span> <span class="nx">length</span><span class="p">,</span> <span class="nx">stiffness</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">constraint</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">matter</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">joint</span><span class="p">(</span><span class="nx">gameObjectA</span><span class="p">,</span> <span class="nx">gameObjectB</span><span class="p">,</span> <span class="nx">length</span><span class="p">,</span> <span class="nx">stiffness</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
 </pre></div>
 
-<div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setCircle</span><span class="p">(</span><span class="nx">radius</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
+<h4 id="constraint-to-world-position">Constraint to world position<a class="headerlink" href="#constraint-to-world-position" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">constraint</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">matter</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">worldConstraint</span><span class="p">(</span><span class="nx">gameObjectB</span><span class="p">,</span> <span class="nx">length</span><span class="p">,</span> <span class="nx">stiffness</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
 </pre></div>
 
-<div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setPolygon</span><span class="p">(</span><span class="nx">radius</span><span class="p">,</span> <span class="nx">sides</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
+<ul>
+<li><code>gameObjectB</code> : Matter game object, or matter body object.</li>
+<li><code>length</code> : The target resting length of the constraint.<ul>
+<li><code>undefined</code> : Current distance between gameObjectA and gameObjectB. (Default value)</li>
+</ul>
+</li>
+<li><code>stiffness</code> : The stiffness of the constraint.<ul>
+<li><code>1</code> : Very stiff. (Default value)</li>
+<li><code>0.2</code> : Acts as a soft spring.</li>
+</ul>
+</li>
+<li><code>options</code> :
+    <div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nx">pointA</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="nx">pointB</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="nx">damping</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">angularStiffness</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="c1">// render: {</span>
+    <span class="c1">//     visible: true</span>
+    <span class="c1">// }</span>
+<span class="p">}</span>
+</pre></div><ul>
+<li><code>pointA</code> : World position.</li>
+<li><code>pointB</code> : Offset position of <code>gameObjectB</code>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="chain-game-objects">Chain game objects<a class="headerlink" href="#chain-game-objects" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">composite</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">matter</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">chain</span><span class="p">(</span><span class="nx">composite</span><span class="p">,</span> <span class="nx">xOffsetA</span><span class="p">,</span> <span class="nx">yOffsetA</span><span class="p">,</span> <span class="nx">xOffsetB</span><span class="p">,</span> <span class="nx">yOffsetB</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
 </pre></div>
 
-<div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setTrapezoid</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">slope</span><span class="p">,</span> <span class="nx">options</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="velocity">Velocity<a class="headerlink" href="#velocity" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setVelocity</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
-</pre></div>
-
-<div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setVelocityX</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
-</pre></div>
-
-<div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setVelocityY</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="mass">Mass<a class="headerlink" href="#mass" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setMass</span><span class="p">(</span><span class="nx">v</span><span class="p">);</span>
-</pre></div>
-
-<div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setDensity</span><span class="p">(</span><span class="nx">v</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="acceleration">Acceleration<a class="headerlink" href="#acceleration" title="Permanent link">&para;</a></h4>
-<h4 id="gravity">Gravity<a class="headerlink" href="#gravity" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setGravity</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="friction">Friction<a class="headerlink" href="#friction" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setFriction</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">air</span><span class="p">,</span> <span class="nx">fstatic</span><span class="p">);</span>
-</pre></div>
-
-<div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setFrictionAir</span><span class="p">(</span><span class="nx">v</span><span class="p">);</span>
-</pre></div>
-
-<div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setFrictionStatic</span><span class="p">(</span><span class="nx">v</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="angular">Angular<a class="headerlink" href="#angular" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setAngularVelocity</span><span class="p">(</span><span class="nx">v</span><span class="p">);</span>
-</pre></div>
-
-<h4 id="bounce">Bounce<a class="headerlink" href="#bounce" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setBounce</span><span class="p">(</span><span class="nx">v</span><span class="p">);</span>
+<ul>
+<li><code>composite</code> : <a href="../matterjs-gameobject/#image-composite">Image composite</a></li>
+<li><code>xOffsetA</code>, <code>yOffsetA</code> : Offset position of gameObjectA, in scale.<ul>
+<li>xOffset = (Offset distance / width)</li>
+<li>yOffset = (Offset distance / height)</li>
+</ul>
+</li>
+<li><code>xOffsetB</code>, <code>yOffsetB</code> : Offset position of gameObjectB, in scale.</li>
+<li><code>options</code> : 
+    <div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nx">length</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">stiffness</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nx">damping</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">angularStiffness</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="c1">// render: {</span>
+    <span class="c1">//     visible: true</span>
+    <span class="c1">// }</span>
+<span class="p">}</span>
+</pre></div><ul>
+<li><code>length</code> : The target resting length of the constraint.<ul>
+<li><code>undefined</code> : Current distance between gameObjectA and gameObjectB. (Default value)</li>
+</ul>
+</li>
+<li><code>stiffness</code> : The stiffness of the constraint.<ul>
+<li><code>1</code> : Very stiff. (Default value)</li>
+<li><code>0.2</code> : Acts as a soft spring.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>composite</code><ul>
+<li><code>composite.bodies</code> : An array of bodies.</li>
+<li><code>composite.constraints</code> : An array of constraints</li>
+</ul>
+</li>
+</ul>
+<h4 id="remove-constraint">Remove constraint<a class="headerlink" href="#remove-constraint" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">matter</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">removeConstraint</span><span class="p">(</span><span class="nx">constraint</span><span class="p">);</span>
 </pre></div>
                 
                   
@@ -4601,6 +5020,41 @@
       
         
 <footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../ship/" title="Ship" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Ship
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../matterjs-gameobject/" title="Game object" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Game object
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
