@@ -58,6 +58,7 @@ var composite = scene.matter.add.imageStack(key, frame, x, y, columns, rows);
 
 ```javascript
 {
+    label: 'Body',
     shape: 'rectangle',
     chamfer: null,
 
@@ -84,6 +85,8 @@ var composite = scene.matter.add.imageStack(key, frame, x, y, columns, rows);
         mask: 0xFFFFFFFF,
     },
 
+    // parts: [],
+
     // plugin: {
     //     attractors: [
     //         (function(bodyA, bodyB) { return {x, y}}),
@@ -96,6 +99,7 @@ var composite = scene.matter.add.imageStack(key, frame, x, y, columns, rows);
 }
 ```
 
+- `label` : An arbitrary `String` name to help the user identify and manage bodies.
 - `shape` : 
     - A string : `'rectangle'`, `'circle'`, `'trapezoid'`, `'polygon'`, `'fromVertices'`, `'fromPhysicsEditor'`
     - An object : 
@@ -130,6 +134,19 @@ var composite = scene.matter.add.imageStack(key, frame, x, y, columns, rows);
                 // sides: 5,
             }
             ```
+        - Vertices
+            ```javascript
+            {
+                type: 'fromVertices',
+                verts: points,
+                // flagInternal: false,
+                // removeCollinear: 0.01,
+                // minimumArea: 10,
+            }
+            ```
+            - `points` :
+                - A string : `'x0 y0 x1 y1 ...'`
+                - An array of points : `[{x:x0, y:y0}, {x:x1, y:y1}, ...]`
 - `chamfer` : 
     - `null`
     - A number
@@ -155,13 +172,21 @@ var composite = scene.matter.add.imageStack(key, frame, x, y, columns, rows);
 - `force` : The force to apply in the current step.
 - `angle` : Angle of the body, in radians.
 - `torque` : the torque (turning force) to apply in the current step.
-- `collisionFilter` : An `Object` that specifies the collision filtering properties of this body. Collisions between two bodies will obey the following rules: 
-    - If the two bodies have the same non-zero value of `collisionFilter.group`, they will always collide if the value is positive, and they will never collide if the value is negative.
-    - If the two bodies have different values of `collisionFilter.group` or if one (or both) of the bodies has a value of `0`, then the category/mask rules apply as follows: `(categoryA & maskB) !== 0` and `(categoryB & maskA) !== 0`
-        - `collisionFilter.category` : A bit field that specifies the collision category this body belongs to.
-        - `collisionFilter.mask` : A bit mask that specifies the collision categories this body may collide with.
+- `collisionFilter` : An `Object` that specifies the collision filtering properties of this body.
+    - `collisionFilter.group`
+    - `collisionFilter.category` : A bit field that specifies the collision category this body belongs to.
+    - `collisionFilter.mask` : A bit mask that specifies the collision categories this body may collide with.
 - `slop` : A tolerance on how far a body is allowed to 'sink' or rotate into other bodies.
     - The default should generally suffice, although very large bodies may require larger values for stable stacking.
+
+##### Collision
+
+Collisions between two bodies will obey the following rules: 
+
+- (grpupA > 0) && (groupB > 0) :
+    - Collision = (groupA == groupB)
+- (grpupA == 0) || (groupB == 0) :
+    - Collision = ((categoryA & maskB) !== 0) && ((categoryB & maskA) !== 0)
 
 ### Movement
 
@@ -270,35 +295,96 @@ gameObject.setAngularVelocity(v);
     ```
     - `value` : Set `true` to enable senser.
 
-#### collision group
+#### Collision group
 
 - Collision grpup
     ```javascript
     gameObject.setCollisionGroup(value);
     ```
 - Collision category
-    ```javascript
-    gameObject.setCollisionCategory(value);
-    gameObject.setCollidesWith(mask);
-    ```
+    1. Get new collision category
+        ```javascript
+        var category = scene.matter.world.nextCategory();
+        ```
+        - `category` : An one-shot number (1, 2, 4, 8, ...., 2147483648 (1<<31))
+    1. Set collision category of game object
+        ```javascript
+        gameObject.setCollisionCategory(category);
+        ```
+    1. Set category mask
+        ```javascript
+        gameObject.setCollidesWith([categoryA, categoryB, ...]);
+        // gameObject.setCollidesWith(categoryA);
+        ```
+
+#### Collision event
+
+```javascript
+scene.matter.world.on('collisionstart', function (event, bodyA, bodyB) {
+    // var pairs = event.pairs;
+});
+```
+
+- `event` : 
+    - `event.pairs` : An array of collision pairs
+        - `event.pairs[i].bodyA`, `event.pairs[i].bodyB` : Matter body object.
+            - `body.gameObject` : Game object of matter body.
+- `bodyA`, `bodyB` : Equal to `event.pairs[0].bodyA`, `event.pairs[0].bodyB`.
 
 #### Collision bound
 
-```javascript
-gameObject.setRectangle(width, height, options);
-```
-
-```javascript
-gameObject.setCircle(radius, options);
-```
-
-```javascript
-gameObject.setPolygon(radius, sides, options);
-```
-
-```javascript
-gameObject.setTrapezoid(width, height, slope, options);
-```
+- Rectangle
+    ```javascript
+    gameObject.setRectangle(width, height, options);
+    ```
+- Circle
+    ```javascript
+    gameObject.setCircle(radius, options);
+    ```
+- Polygon
+    ```javascript
+    gameObject.setPolygon(radius, sides, options);
+    ```
+- Trapezoid
+    ```javascript
+    gameObject.setTrapezoid(width, height, slope, options);
+    ```
+- Any
+    ```javascript
+    gameObject.setBody(config, options);
+    ```
+    - `config` : 
+        - Rectangle shape
+            ```javascript
+            {
+                type: 'rectangle',
+                // width: gameObject.width
+                // height: gameObject.height
+            }
+            ```
+        - Circle shape
+            ```javascript
+            {
+                type: 'circle',
+                // radius: (Math.max(gameObject.width, gameObject.height) / 2),
+                // maxSides: 25
+            }
+            ```
+        - Trapezoid shape
+            ```javascript
+            {
+                type: 'trapezoid',
+                // slope: 0.5,
+            }
+            ```
+        - Polygon shape
+            ```javascript
+            {
+                type: 'polygon',
+                // radius: (Math.max(gameObject.width, gameObject.height) / 2),
+                // sides: 5,
+            }
+            ```
 
 #### Bounce
 
@@ -318,165 +404,39 @@ gameObject.setMass(v);
 gameObject.setDensity(v);
 ```
 
-### Constraint
+### Sleep
 
-#### Constraint of 2 game objects
-
-```javascript
-scene.matter.add.constraint(gameObjectA, gameObjectB);
-// scene.matter.add.constraint(gameObjectA, gameObjectB, length, stiffness, options);
-```
-
-- `gameObjectA`, `gameObjectB` : Matter game object, or matter body object.
-- `length` : The target resting length of the constraint.
-    - `undefined` : Current distance between gameObjectA and gameObjectB. (Default value)
-- `stiffness` : The stiffness of the constraint.
-    - `1` : Very stiff. (Default value)
-    - `0.2` : Acts as a soft spring.
-- `options` :
-    ```javascript
-    {
-        pointA: {
-            x: 0,
-            y: 0,
-        },
-        pointB: {
-            x: 0,
-            y: 0,
-        },
-        damping: 0,
-        angularStiffness: 0,
-        // render: {
-        //     visible: true
-        // }
-    }
-    ```
-    - `pointA`, `pointB` : Offset position of `gameObjectA`, `gameObjectB`.
-
-Alias:
+#### Enable
 
 ```javascript
-scene.matter.add.spring(gameObjectA, gameObjectB, length, stiffness, options);
-scene.matter.add.joint(gameObjectA, gameObjectB, length, stiffness, options);
-```
-
-#### Constraint to world position
-
-```javascript
-scene.matter.add.worldConstraint(gameObjectB, length, stiffness, options);
-```
-
-- `gameObjectB` : Matter game object, or matter body object.
-- `length` : The target resting length of the constraint.
-    - `undefined` : Current distance between gameObjectA and gameObjectB. (Default value)
-- `stiffness` : The stiffness of the constraint.
-    - `1` : Very stiff. (Default value)
-    - `0.2` : Acts as a soft spring.
-- `options` :
-    ```javascript
-    {
-        pointA: {
-            x: 0,
-            y: 0,
-        },
-        pointB: {
-            x: 0,
-            y: 0,
-        },
-        damping: 0,
-        angularStiffness: 0,
-        // render: {
-        //     visible: true
-        // }
-    }
-    ```
-    - `pointA` : World position.
-    - `pointB` : Offset position of `gameObjectB`.
-
-#### Chain game objects
-
-```javascript
-var composite = scene.matter.add.chain(composite, xOffsetA, yOffsetA, xOffsetB, yOffsetB, options);
-```
-
-- `composite` : [Image composite](matterjs-gameobject.md#image-composite)
-- `xOffsetA`, `yOffsetA` : Offset position of gameObjectA, in scale.
-    - xOffset = (Offset distance / width)
-    - yOffset = (Offset distance / height)
-- `xOffsetB`, `yOffsetB` : Offset position of gameObjectB, in scale.
-- `options` : 
-    ```javascript
-    {
-        length: undefined,
-        stiffness: 1,
-        damping: 0,
-        angularStiffness: 0,
-        // render: {
-        //     visible: true
-        // }
-    }
-    ```
-    - `length` : The target resting length of the constraint.
-        - `undefined` : Current distance between gameObjectA and gameObjectB. (Default value)
-    - `stiffness` : The stiffness of the constraint.
-        - `1` : Very stiff. (Default value)
-        - `0.2` : Acts as a soft spring.
-- `composite`
-    - `composite.bodies` : An array of bodies.
-    - `composite.constraints` : An array of constraints
-
-### Plugins
-
-#### Attractors
-
-##### Enable
-
-- Game config
-    ```javascript
-    var config = {
-        // ...
+var config = {
+    // ...
         physics: {
-            default: 'matter',
             matter: {
                 // ...
-                plugins: {
-                    attractors: true,
-                    // ...
-                }
+                enableSleeping: true
                 // ...
             }
         }
-        // ...
-    }
-    var game = new Phaser.Game(config);
-    ```
-- Runtime
-    ```javascript
-    scene.matter.system.enableAttractorPlugin();
-    ```
 
-##### Attractor matter object
+}
+```
 
-- Attractor Matter object config
-    ```javascript
-    var config = {
-        // ...
-        plugin: {
-            attractors: [
-                (function(bodyA, bodyB) { return {x, y}}),
-            ]
-        },
-        // ...
-    }
-    ```
-- Attractor force
-    ```javascript
-    function(bodyA, bodyB) {
-        return {x, y}; // Force
-    }
-    ```
-    - `bodyA` : Attractor matter object.
-    - `bodyB` : Other matter object
-    - Return a force in vector2 (`{x,y}`) format, apply to bodyB.
+#### Sleep threshold
 
-#### Wrap
+```javascript
+gameObject.setSleepThreshold(value);
+```
+
+#### Sleep events
+
+- Sleeping start
+    ```javascript
+    scene.matter.world.on('sleepstart', function (event, body) {
+    });
+    ```
+- Sleeping end
+    ```javascript
+    scene.matter.world.on('sleepend', function (event, body) {
+    });
+    ```

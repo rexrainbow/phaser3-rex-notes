@@ -15,6 +15,11 @@ var polygon = scene.add.polygon(x, y, points, fillColor);
 // var polygon = scene.add.polygon(x, y, points, fillColor, fillAlpha);
 ```
 
+- `points` : 
+    - An array of number : `[x0, y0, x1, y1, ...]`
+    - An array of points : `[{x:x0, y:y0}, {x:x1, y:y1}, ...]`
+    - A string : `'x0 y0 x1 y1 ...'`
+
 !!! note
     Shift given points to align position **(0, 0)**
 

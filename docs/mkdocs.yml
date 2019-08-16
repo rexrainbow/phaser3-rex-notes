@@ -104,6 +104,9 @@ nav:
             - Engine:
                 - World: matterjs-world.md
                 - Game object: matterjs-gameobject.md
+            - Plugins:
+                - Wrap: matterjs-wrap.md
+                - Attractor: matterjs-attractor.md
     - Display:
         - Mask: mask.md
 - Input:

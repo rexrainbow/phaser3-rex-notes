@@ -9,24 +9,13 @@ Polygon shape and methods, built-in methods of phaser.
 ### Create shape
 
 ```javascript
-var polygon = new Phaser.Geom.Polygon([
-    x0, y0,
-    x1, y1,
-    x2, y2,
-    // ...
-]);
+var polygon = new Phaser.Geom.Polygon(points);
 ```
 
-or
-
-```javascript
-var polygon = new Phaser.Geom.Polygon([
-    point0,    // {x, y}
-    point1,    // {x, y}
-    point2,    // {x, y}
-    // ...
-]);
-```
+- `points` : 
+    - An array of number : `[x0, y0, x1, y1, ...]`
+    - An array of points : `[{x:x0, y:y0}, {x:x1, y:y1}, ...]`
+    - A string : `'x0 y0 x1 y1 ...'`
 
 #### Clone shape
 

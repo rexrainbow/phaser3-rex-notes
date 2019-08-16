@@ -85,7 +85,24 @@ scene.matter.world.resume();
 
 ```javascript
 scene.matter.add.mouseSpring();
+// scene.matter.add.mouseSpring(options);
 ```
+
+- `options`
+    ```javascript
+    {
+        length: 0.01,
+        stiffness: 0.1,
+        damping: 0,
+        angularStiffness: 1,
+        collisionFilter: {
+            category: 0x0001,
+            mask: 0xFFFFFFFF,
+            group: 0
+        }
+    }
+    ```
+    - `collisionFilter` : Drag filter, see [collision](matterjs-gameobject.md#collision).
 
 ### World bounds
 
@@ -100,12 +117,127 @@ scene.matter.add.mouseSpring();
         - `thickness` : The thickness of each wall, in pixels.
         - `left`, `right`, `top`, `bottom` : If true will create the left/right/top/bottom bounds wall.
 
-### Collision
+### Gravity
+
+- Set
+    ```javascript
+    scene.matter.world.setGravity(x, y);
+    // scene.matter.world.setGravity(x, y, scale);
+    ```
+- Disalbe
+    ```javascript
+    scene.matter.world.disableGravity();
+    ```
+
+### Constraint
+
+#### Constraint of 2 game objects
 
 ```javascript
-scene.matter.world.on('collisionstart', function (event, bodyA, bodyB) {
-});
+var constraint = scene.matter.add.constraint(gameObjectA, gameObjectB);
+// var constraint = scene.matter.add.constraint(gameObjectA, gameObjectB, length, stiffness, options);
 ```
 
-- `bodyA`, `bodyB` : Matter body object.
-    - `bodyA.gameObject`, `bodyB.gameObject` : Game object of matter body.
+- `gameObjectA`, `gameObjectB` : Matter game object, or matter body object.
+- `length` : The target resting length of the constraint.
+    - `undefined` : Current distance between gameObjectA and gameObjectB. (Default value)
+- `stiffness` : The stiffness of the constraint.
+    - `1` : Very stiff. (Default value)
+    - `0.2` : Acts as a soft spring.
+- `options` :
+    ```javascript
+    {
+        pointA: {
+            x: 0,
+            y: 0,
+        },
+        pointB: {
+            x: 0,
+            y: 0,
+        },
+        damping: 0,
+        angularStiffness: 0,
+        // render: {
+        //     visible: true
+        // }
+    }
+    ```
+    - `pointA`, `pointB` : Offset position of `gameObjectA`, `gameObjectB`.
+
+Alias:
+
+```javascript
+var constraint = scene.matter.add.spring(gameObjectA, gameObjectB, length, stiffness, options);
+var constraint = scene.matter.add.joint(gameObjectA, gameObjectB, length, stiffness, options);
+```
+
+#### Constraint to world position
+
+```javascript
+var constraint = scene.matter.add.worldConstraint(gameObjectB, length, stiffness, options);
+```
+
+- `gameObjectB` : Matter game object, or matter body object.
+- `length` : The target resting length of the constraint.
+    - `undefined` : Current distance between gameObjectA and gameObjectB. (Default value)
+- `stiffness` : The stiffness of the constraint.
+    - `1` : Very stiff. (Default value)
+    - `0.2` : Acts as a soft spring.
+- `options` :
+    ```javascript
+    {
+        pointA: {
+            x: 0,
+            y: 0,
+        },
+        pointB: {
+            x: 0,
+            y: 0,
+        },
+        damping: 0,
+        angularStiffness: 0,
+        // render: {
+        //     visible: true
+        // }
+    }
+    ```
+    - `pointA` : World position.
+    - `pointB` : Offset position of `gameObjectB`.
+
+#### Chain game objects
+
+```javascript
+var composite = scene.matter.add.chain(composite, xOffsetA, yOffsetA, xOffsetB, yOffsetB, options);
+```
+
+- `composite` : [Image composite](matterjs-gameobject.md#image-composite)
+- `xOffsetA`, `yOffsetA` : Offset position of gameObjectA, in scale.
+    - xOffset = (Offset distance / width)
+    - yOffset = (Offset distance / height)
+- `xOffsetB`, `yOffsetB` : Offset position of gameObjectB, in scale.
+- `options` : 
+    ```javascript
+    {
+        length: undefined,
+        stiffness: 1,
+        damping: 0,
+        angularStiffness: 0,
+        // render: {
+        //     visible: true
+        // }
+    }
+    ```
+    - `length` : The target resting length of the constraint.
+        - `undefined` : Current distance between gameObjectA and gameObjectB. (Default value)
+    - `stiffness` : The stiffness of the constraint.
+        - `1` : Very stiff. (Default value)
+        - `0.2` : Acts as a soft spring.
+- `composite`
+    - `composite.bodies` : An array of bodies.
+    - `composite.constraints` : An array of constraints
+
+#### Remove constraint
+
+```javascript
+scene.matter.world.removeConstraint(constraint);
+```
