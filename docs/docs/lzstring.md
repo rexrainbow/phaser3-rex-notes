@@ -18,7 +18,7 @@ User could import class directly, or install it by global plugin.
 ### Import class
 
 ```javascript
-import rexXOR from './plugins/xor.js';
+import rexXOR from './plugins/lzstring.js';
 ```
 
 ### Install global plugin

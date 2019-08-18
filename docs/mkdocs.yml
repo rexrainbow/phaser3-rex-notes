@@ -155,7 +155,7 @@ nav:
             - Pixelation: shader-pixelation.md
 - Tween:
     - Tween task: tween.md
-    - Timeline of tween tasks: tween-timeline.md
+    - Timeline: tween-timeline.md
 - Logic:
     - Event emitter: eventemitter3.md
     - Run commands:
