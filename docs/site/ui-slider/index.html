@@ -4704,6 +4704,7 @@
     <span class="nx">input</span><span class="o">:</span> <span class="s1">&#39;drag&#39;</span><span class="p">,</span>
 
     <span class="nx">value</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">gap</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="nx">valuechangeCallback</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">newValue</span><span class="p">,</span> <span class="nx">oldValue</span><span class="p">,</span> <span class="nx">slider</span><span class="p">)</span> <span class="p">{</span>
     <span class="p">},</span>
 
@@ -4747,6 +4748,10 @@
 </ul>
 </li>
 <li><code>value</code> : Initial value (0 ~ 1).</li>
+<li><code>gap</code> : Snap a value to nearest grid slice, using rounding.<ul>
+<li><code>undefined</code> : Disalbe this feature.</li>
+</ul>
+</li>
 <li><code>valuechangeCallback</code> : callback function when value changed.</li>
 <li><code>space</code> : Pads spaces<ul>
 <li><code>space.left</code>, <code>space.right</code>, <code>space.top</code>, <code>space.bottom</code> : Space of bounds.</li>

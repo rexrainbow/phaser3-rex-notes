@@ -4716,7 +4716,8 @@
         <span class="nx">track</span><span class="o">:</span> <span class="nx">sliderTrackGameObject</span><span class="p">,</span>
         <span class="nx">indicator</span><span class="o">:</span> <span class="nx">sliderIndicatorGameObject</span><span class="p">,</span>
         <span class="nx">thumb</span><span class="o">:</span> <span class="nx">sliderThumbGameObject</span><span class="p">,</span>
-        <span class="nx">input</span><span class="o">:</span> <span class="s1">&#39;none&#39;</span>
+        <span class="nx">input</span><span class="o">:</span> <span class="s1">&#39;none&#39;</span><span class="p">,</span>
+        <span class="nx">gap</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
     <span class="p">}</span>
     <span class="nx">text</span><span class="o">:</span> <span class="nx">textGameObject</span><span class="p">,</span>
 
@@ -4762,6 +4763,10 @@
 <li><code>'drag'</code> : Control slider by dragging thumb game object.</li>
 <li><code>'click'</code> : Control slider by touching track game object.</li>
 <li><code>'none'</code> : Disable sider controlling. Default setting.</li>
+</ul>
+</li>
+<li><code>slider.gap</code> : Snap a value to nearest grid slice, using rounding.<ul>
+<li><code>undefined</code> : Disable this feature.</li>
 </ul>
 </li>
 </ul>
