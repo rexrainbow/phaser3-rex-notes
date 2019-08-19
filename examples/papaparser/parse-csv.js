@@ -1,4 +1,4 @@
-import Papa from '../../plugins/utils/papaparser/papaparse.js';
+import Papa from 'papaparse/papaparse.js';
 
 class Demo extends Phaser.Scene {
     constructor() {

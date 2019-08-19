@@ -45,6 +45,7 @@
         "firebase": "^5.0.4",
         "parse": "^2.1.0",
         "papaparse": "^4.6.3",
+        "lokijs": "^1.5.7",
         "chart.js": "^2.8.0",
         "eventemitter3": "^3.1.0"
     }

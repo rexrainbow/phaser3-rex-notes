@@ -1,5 +1,5 @@
 import UIPlugin from '../../templates/ui/ui-plugin.js';
-import loki from '../../plugins/utils/lokijs/lokijs.min.js';
+import loki from 'lokijs/src/lokijs.js';
 
 const Random = Phaser.Math.Between;
 
