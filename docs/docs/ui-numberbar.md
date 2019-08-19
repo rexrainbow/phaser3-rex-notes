@@ -50,7 +50,8 @@ var numberBar = scene.rexUI.add.numberBar({
         track: sliderTrackGameObject,
         indicator: sliderIndicatorGameObject,
         thumb: sliderThumbGameObject,
-        input: 'none'
+        input: 'none',
+        gap: undefined,
     }
     text: textGameObject,
 
@@ -93,6 +94,8 @@ var numberBar = scene.rexUI.add.numberBar({
         - `'drag'` : Control slider by dragging thumb game object.
         - `'click'` : Control slider by touching track game object.
         - `'none'` : Disable sider controlling. Default setting.
+    - `slider.gap` : Snap a value to nearest grid slice, using rounding.
+        - `undefined` : Disable this feature.
 - `text` : Game object of text, optional.
 - `space` : Pads spaces
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds

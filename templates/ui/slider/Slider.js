@@ -10,6 +10,7 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 const Clamp = Phaser.Math.Clamp;
 const Linear = Phaser.Math.Linear;
 const Percent = Phaser.Math.Percent;
+const SnapTo = Phaser.Math.Snap.To;
 
 class Slider extends Sizer {
     constructor(scene, config) {
@@ -84,6 +85,7 @@ class Slider extends Sizer {
             this.eventEmitter.on('valuechange', callback, scope);
         }
         this.setEnable(GetValue(config, 'enable', undefined));
+        this.setGap(GetValue(config, 'gap', undefined));
         this.setValue(GetValue(config, 'value', 0));
     }
 
@@ -95,11 +97,19 @@ class Slider extends Sizer {
         return this;
     }
 
+    setGap(gap) {
+        this.gap = gap;
+        return this;
+    }
+
     get value() {
         return this._value;
     }
 
     set value(value) {
+        if (this.gap !== undefined) {
+            value = SnapTo(value, this.gap);
+        }
         var oldValue = this._value;
         this._value = Clamp(value, 0, 1);
 

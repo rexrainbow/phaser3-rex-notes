@@ -52,6 +52,7 @@ var slider = scene.rexUI.add.slider({
     input: 'drag',
 
     value: 0,
+    gap: undefined,
     valuechangeCallback: function(newValue, oldValue, slider) {
     },
 
@@ -88,6 +89,8 @@ var slider = scene.rexUI.add.slider({
     - `'click'`, or `1` : Control slider by touching track game object.
     - `'none'`, or `-1` : Disable sider controlling.
 - `value` : Initial value (0 ~ 1).
+- `gap` : Snap a value to nearest grid slice, using rounding.
+    - `undefined` : Disalbe this feature.
 - `valuechangeCallback` : callback function when value changed.
 - `space` : Pads spaces
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.

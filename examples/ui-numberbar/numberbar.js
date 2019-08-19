@@ -28,6 +28,7 @@ class Demo extends Phaser.Scene {
                     track: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_PRIMARY),
                     indicator: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_LIGHT),
                     input: 'click',
+                    // gap: 0.1,
                 },
 
                 text: this.add.text(0, 0, '').setFixedSize(35, 0),
@@ -45,6 +46,8 @@ class Demo extends Phaser.Scene {
                 valuechangeCallback: function (newValue, oldValue, numberBar) {
                     numberBar.text = Math.round(Phaser.Math.Linear(0, 100, newValue));
                 },
+
+                gap: 0.2,
             })
             .layout();
 
