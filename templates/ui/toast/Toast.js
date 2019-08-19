@@ -1,6 +1,6 @@
 import Label from '../label/Label.js';
 import Const from './Const.js';
-import DefaulttransitCallbacks from './DefaultTransitCallbacks.js';
+import DefaultTransitCallbacks from './DefaultTransitCallbacks.js';
 import Player from '../../../plugins/logic/runcommands/tcrp/Player.js';
 import NOOP from '../../../plugins/utils/object/NOOP.js';
 
@@ -63,10 +63,10 @@ class Toast extends Label {
 
         switch (callback) {
             case Const.popUp:
-                callback = DefaulttransitCallbacks.popUp;
+                callback = DefaultTransitCallbacks.popUp;
                 break;
             case Const.fadeIn:
-                callback = DefaulttransitCallbacks.fadeIn;
+                callback = DefaultTransitCallbacks.fadeIn;
                 break;
         }
 
@@ -82,10 +82,10 @@ class Toast extends Label {
 
         switch (callback) {
             case Const.scaleDown:
-                callback = DefaulttransitCallbacks.scaleDown;
+                callback = DefaultTransitCallbacks.scaleDown;
                 break;
             case Const.fadeOut:
-                callback = DefaulttransitCallbacks.fadeOut;
+                callback = DefaultTransitCallbacks.fadeOut;
                 break;
         }
 
