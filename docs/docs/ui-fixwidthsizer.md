@@ -177,6 +177,17 @@ Arrange position of all children.
 sizer.layout();
 ```
 
+### Remove child
+
+- Remove a child
+    ```javascript
+    sizer.remove(child);
+    ```
+- Remove all children
+    ```javascript
+    sizer.clear(destroyChild);
+    ```
+
 ### Other properties
 
 See [base-sizer object](ui-basesizer.md).

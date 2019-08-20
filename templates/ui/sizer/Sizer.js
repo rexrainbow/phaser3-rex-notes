@@ -118,6 +118,15 @@ class Sizer extends BaseSizer {
         return this;
     }
 
+    clear(destroyChild) {
+        for (var i = 0, cnt = this.sizerChildren.length; i < cnt; i++) {
+            this.getSizerConfig(this.sizerChildren[i]).parent = undefined;
+        }
+        this.sizerChildren.length = 0;
+        super.clear(destroyChild);
+        return this;
+    }
+
     get childrenProportion() {
         if (this._childrenProportion === undefined) {
             this._childrenProportion = this.getChildrenProportion();

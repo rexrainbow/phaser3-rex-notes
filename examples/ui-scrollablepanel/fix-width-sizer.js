@@ -14,6 +14,8 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
+        this.print = this.add.text(0, 0, '');
+
         var scrollablePanel = this.rexUI.add.scrollablePanel({
             x: 400,
             y: 300,
@@ -25,7 +27,16 @@ class Demo extends Phaser.Scene {
             background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 10, COLOR_PRIMARY),
 
             panel: {
-                child: createPanel(this, content),
+                child: this.rexUI.add.fixWidthSizer({
+                    space: {
+                        left: 3,
+                        right: 3,
+                        top: 3,
+                        bottom: 3,
+                        item: 8,
+                        line: 8,
+                    }
+                }),
 
                 mask: {
                     padding: 1
@@ -48,24 +59,18 @@ class Demo extends Phaser.Scene {
         })
             .layout()
         //.drawBounds(this.add.graphics(), 0xff0000);
+
+        updatePanel(scrollablePanel, content);
     }
 
     update() { }
 }
 
-var createPanel = function (scene, content) {
-    var sizer = scene.rexUI.add.fixWidthSizer({
-        space: {
-            left: 3,
-            right: 3,
-            top: 3,
-            bottom: 3,
-            item: 8,
-            line: 8,
-        }
-    })
+var updatePanel = function (panel, content) {
+    var sizer = panel.getElement('panel');
+    var scene = panel.scene;
 
-    var print = scene.add.text(0, 0, '');
+    sizer.clear(true);
     var words = content.split(' ');
     for (var i = 0, cnt = words.length; i < cnt; i++) {
         let word = words[i];
@@ -75,11 +80,13 @@ var createPanel = function (scene, content) {
             })
                 .setInteractive()
                 .on('pointerdown', function () {
-                    print.text = word;
-                })
+                    scene.print.text = word;
+                }, scene)
         );
     }
-    return sizer;
+
+    panel.layout();
+    return panel;
 }
 
 var content = `Phaser is a fast, free, and fun open source HTML5 game framework that offers WebGL and Canvas rendering across desktop and mobile web browsers. Games can be compiled to iOS, Android and native apps by using 3rd party tools. You can use JavaScript or TypeScript for development.`;

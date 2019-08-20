@@ -43,7 +43,7 @@ class ScrollablePanel extends Scrollable {
         }
         super(scene, config);
 
-        this.addChildrenMap('panel', this.childrenMap.child);
+        this.addChildrenMap('panel', this.childrenMap.child.child);
     }
 }
 

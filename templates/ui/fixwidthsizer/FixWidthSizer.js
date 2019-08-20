@@ -113,6 +113,15 @@ class FixWidthSizer extends BaseSizer {
         return this;
     }
 
+    clear(destroyChild) {
+        for (var i = 0, cnt = this.sizerChildren.length; i < cnt; i++) {
+            this.getSizerConfig(this.sizerChildren[i]).parent = undefined;
+        }
+        this.sizerChildren.length = 0;
+        super.clear(destroyChild);
+        return this;
+    }
+
     get maxChildWidth() {
         if (this._maxChildWidth === undefined) {
             this._maxChildWidth = GetMaxChildWidth.call(this);
