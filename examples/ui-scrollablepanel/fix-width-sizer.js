@@ -81,6 +81,7 @@ var updatePanel = function (panel, content) {
                 .setInteractive()
                 .on('pointerdown', function () {
                     scene.print.text = word;
+                    this.setTint(Phaser.Math.Between(0, 0xffffff))
                 }, scene)
         );
     }
