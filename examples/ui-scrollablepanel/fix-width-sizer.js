@@ -73,14 +73,13 @@ var updatePanel = function (panel, content) {
     sizer.clear(true);
     var words = content.split(' ');
     for (var i = 0, cnt = words.length; i < cnt; i++) {
-        let word = words[i];
         sizer.add(
-            scene.add.text(0, 0, word, {
+            scene.add.text(0, 0, words[i], {
                 fontSize: 18
             })
                 .setInteractive()
                 .on('pointerdown', function () {
-                    scene.print.text = word;
+                    this.scene.print.text = this.text;
                     this.setTint(Phaser.Math.Between(0, 0xffffff))
                 }, scene)
         );
