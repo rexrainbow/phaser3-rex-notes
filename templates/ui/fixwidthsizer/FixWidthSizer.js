@@ -82,8 +82,12 @@ class FixWidthSizer extends BaseSizer {
     }
 
     add(gameObject, paddingConfig) {
-        super.add(gameObject);
+        if (gameObject === '\n') {
+            this.addNewLine();
+            return this;
+        }
 
+        super.add(gameObject);
         if (paddingConfig === undefined) {
             paddingConfig = 0;
         }
@@ -93,6 +97,11 @@ class FixWidthSizer extends BaseSizer {
         config.align = ALIGN_CENTER;
         config.padding = GetBoundsConfig(paddingConfig);
         this.sizerChildren.push(gameObject);
+        return this;
+    }
+
+    addNewLine() {
+        this.sizerChildren.push('\n');
         return this;
     }
 
@@ -114,10 +123,15 @@ class FixWidthSizer extends BaseSizer {
     }
 
     clear(destroyChild) {
-        for (var i = 0, cnt = this.sizerChildren.length; i < cnt; i++) {
-            this.getSizerConfig(this.sizerChildren[i]).parent = undefined;
+        var children = this.sizerChildren, child;
+        for (var i = 0, cnt = children.length; i < cnt; i++) {
+            child = children[i];
+            if (child === '\n') {
+                continue;
+            }
+            this.getSizerConfig(child).parent = undefined;
         }
-        this.sizerChildren.length = 0;
+        children.length = 0;
         super.clear(destroyChild);
         return this;
     }

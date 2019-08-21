@@ -5,8 +5,13 @@ var GetMaxChildWidth = function (children) {
         children = this.sizerChildren;
     }
     var result = 0;
+    var child;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
-        result = Math.max(result, GetChildWidth(children[i]));
+        child = children[i];
+        if (child === '\n') {
+            continue;
+        }
+        result = Math.max(result, GetChildWidth(child));
     }
     return result;
 }

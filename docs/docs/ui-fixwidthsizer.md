@@ -169,6 +169,18 @@ sizer.add(child, paddingConfig);
         }
         ```
 
+### Add new line
+
+```javascript
+sizer.addNewLine();
+```
+
+or
+
+```javascript
+sizer.add('\n');
+```
+
 ### Layout children
 
 Arrange position of all children.

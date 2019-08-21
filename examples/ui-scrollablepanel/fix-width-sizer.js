@@ -71,25 +71,34 @@ var updatePanel = function (panel, content) {
     var scene = panel.scene;
 
     sizer.clear(true);
-    var words = content.split(' ');
-    for (var i = 0, cnt = words.length; i < cnt; i++) {
-        sizer.add(
-            scene.add.text(0, 0, words[i], {
-                fontSize: 18
-            })
-                .setInteractive()
-                .on('pointerdown', function () {
-                    this.scene.print.text = this.text;
-                    this.setTint(Phaser.Math.Between(0, 0xffffff))
-                }, scene)
-        );
+    var lines = content.split('\n');
+    for (var li = 0, lcnt = lines.length; li < lcnt; li++) {
+        var words = lines[li].split(' ');
+        for (var wi = 0, wcnt = words.length; wi < wcnt; wi++) {
+            sizer.add(
+                scene.add.text(0, 0, words[wi], {
+                    fontSize: 18
+                })
+                    .setInteractive()
+                    .on('pointerdown', function () {
+                        this.scene.print.text = this.text;
+                        this.setTint(Phaser.Math.Between(0, 0xffffff))
+                    })
+            );
+        }
+        if (li < (lcnt - 1)) {
+            sizer.addNewLine();
+        }
     }
+
 
     panel.layout();
     return panel;
 }
 
-var content = `Phaser is a fast, free, and fun open source HTML5 game framework that offers WebGL and Canvas rendering across desktop and mobile web browsers. Games can be compiled to iOS, Android and native apps by using 3rd party tools. You can use JavaScript or TypeScript for development.`;
+var content = `Phaser is a fast, free, and fun open source HTML5 game framework that offers WebGL and Canvas rendering across desktop and mobile web browsers. Games can be compiled to iOS, Android and native apps by using 3rd party tools. You can use JavaScript or TypeScript for development.
+Along with the fantastic open source community, Phaser is actively developed and maintained by Photon Storm. As a result of rapid support, and a developer friendly API, Phaser is currently one of the most starred game frameworks on GitHub.
+Thousands of developers from indie and multi-national digital agencies, and universities worldwide use Phaser. You can take a look at their incredible games.`;
 
 var config = {
     type: Phaser.AUTO,

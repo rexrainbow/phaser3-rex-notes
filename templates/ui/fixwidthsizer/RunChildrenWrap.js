@@ -9,20 +9,27 @@ var RunChildrenWrap = function (lineWidth) {
     };
     var children = this.sizerChildren;
     var child, childWidth, remainder = 0;
-    var lastLine, lines = result.lines;
+    var lastLine, lines = result.lines, newLine;
     for (var i = 0, cnt = children.length; i < cnt; i++) {
         child = children[i];
-        if (child.rexSizer.hidden) {
-            continue;
-        }
+        if (child === '\n') {
+            child = undefined;
+            childWidth = 0;
+            newLine = true;
+        } else {
+            if (child.rexSizer.hidden) {
+                continue;
+            }
 
-        if (child.isRexSizer) {
-            child.layout(); // Use original size
-        }
+            if (child.isRexSizer) {
+                child.layout(); // Use original size
+            }
 
-        childWidth = GetChildWidth(child, this.orientation);
+            childWidth = GetChildWidth(child, this.orientation);
+            newLine = (remainder < childWidth);
+        }
         // New line
-        if (remainder < childWidth) {
+        if (newLine) {
             if (lastLine) {
                 var curLineWidth = lineWidth - (remainder + this.itemSpacing);
                 result.width = Math.max(result.width, curLineWidth);
@@ -39,9 +46,11 @@ var RunChildrenWrap = function (lineWidth) {
         }
 
         remainder -= childWidth + this.itemSpacing;
-        lastLine.children.push(child);
         lastLine.remainder = remainder;
-        lastLine.height = Math.max(lastLine.height, GeChildHeight(child, this.orientation));
+        if (child) {
+            lastLine.children.push(child);
+            lastLine.height = Math.max(lastLine.height, GeChildHeight(child, this.orientation));
+        }
     }
 
     if (lastLine) {
