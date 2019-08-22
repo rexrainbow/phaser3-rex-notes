@@ -1,4 +1,4 @@
-import PerspectiveCardPlugin from '../../plugins/perspectivecard-plugin.js';
+import PerspectiveQuadPlugin from '../../plugins/perspectivequad-plugin.js';
 import CreateRectangleTexture from '../../plugins/utils/texture/CreateRectangleTexture.js';
 
 class Demo extends Phaser.Scene {
@@ -12,7 +12,7 @@ class Demo extends Phaser.Scene {
 
     create() {
         CreateRectangleTexture(this, 'rect', 200);
-        var card = this.add.rexPerspectiveCard(400, 300, 'rect');
+        var card = this.add.rexPerspectiveQuad(400, 300, 'rect');
         card.topLeftColor = 0x800000;
         card.topRightColor = 0x008000;
         card.bottomLeftColor = 0x000080;
@@ -41,8 +41,8 @@ var config = {
     scene: Demo,
     plugins: {
         global: [{
-            key: 'rexPerspectiveCard',
-            plugin: PerspectiveCardPlugin,
+            key: 'rexPerspectiveQuad',
+            plugin: PerspectiveQuadPlugin,
             start: true
         }]
     }
