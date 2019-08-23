@@ -112,12 +112,12 @@ class Flip {
     }
 
     setFrontFaceCallback(key, frame) {
-        this.frontFaceCallback = GetFaceUpdatingCallback(key, frame);
+        this.frontFaceCallback = GetFaceUpdatingCallback(key, frame, this.gameObject);
         return this;
     }
 
     setBackFaceCallback(key, frame) {
-        this.backFaceCallback = GetFaceUpdatingCallback(key, frame);
+        this.backFaceCallback = GetFaceUpdatingCallback(key, frame, this.gameObject);
         return this;
     }
 

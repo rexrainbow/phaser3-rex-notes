@@ -1,6 +1,7 @@
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
+const GetValue = Phaser.Utils.Objects.GetValue;
 
-var GetFaceUpdatingCallback = function (key, frame) {
+var GetFaceUpdatingCallback = function (key, frame, gameObject) {
     if (key === undefined) {
         return undefined;
     }
@@ -9,8 +10,8 @@ var GetFaceUpdatingCallback = function (key, frame) {
     if (typeof (key) === 'string') {
     } else if (IsPlainObject(key)) {
         var config = key;
-        key = config.key;
-        frame = config.frame;
+        key = GetValue(config, 'key', gameObject.texture.key);
+        frame = GetValue(config, 'frame', gameObject.frame.name);
     } else {
         callback = key;
     }

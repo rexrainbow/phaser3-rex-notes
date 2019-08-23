@@ -20,8 +20,8 @@ class Demo extends Phaser.Scene {
             let flip = this.plugins.get('rexFlip').add(card, {
                 duration: 500,
                 face: 'back',
-                front: { key: 'poker', frame: card.frame.name },
-                back: { key: 'poker', frame: 'bg-2' },
+                front: { frame: card.frame.name },
+                back: { frame: 'bg-2' },
             });
 
             card
