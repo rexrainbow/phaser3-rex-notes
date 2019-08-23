@@ -56,6 +56,7 @@ module.exports = {
         // member of game object
         'fadeplugin': './plugins/fade-plugin.js',
         'scaleplugin': './plugins/scale-plugin.js',
+        'flipplugin': './plugins/flip-plugin.js',
         'pathfollowerplugin': './plugins/pathfollower-plugin.js',
         'movetoplugin': './plugins/moveto-plugin.js',
         'rotatetoplugin': './plugins/rotateto-plugin.js',
