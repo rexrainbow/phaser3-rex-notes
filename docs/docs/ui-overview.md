@@ -208,6 +208,17 @@
     var rotate = new RexPlugins.UI.Rotate(config);
     ```
 
+### Behaviors
+
+1. [Flip](flip.md): Flip game object to another face by scaling width/height.
+    ```javascript
+    var flip = scene.rexUI.add.flip(gameObject, config);
+    ```
+    or
+    ```javascript
+    var flip = new RexPlugins.UI.Flip(gameObject, config);
+    ```
+
 ## Demos
 
 - [Dialog](https://codepen.io/rexrainbow/pen/oQjMWE)

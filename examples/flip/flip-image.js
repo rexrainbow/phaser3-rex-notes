@@ -18,16 +18,17 @@ class Demo extends Phaser.Scene {
             let frame = `diamonds-${i+1}`;
             let card = this.add.image(x, y, 'poker', frame);
             let flip = this.plugins.get('rexFlip').add(card, {
-                duration: 500,
                 face: 'back',
                 front: { frame: card.frame.name },
                 back: { frame: 'bg-2' },
+
+                duration: 500,
             });
 
             card
                 .setInteractive()
                 .on('pointerdown', function () {
-                    flip.start();
+                    flip.flip();
                 });
         }
     }

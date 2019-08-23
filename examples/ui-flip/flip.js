@@ -34,7 +34,6 @@ class Demo extends Phaser.Scene {
         }).layout();
 
         var flip = this.rexUI.add.flip(card, {
-            duration: 500,
             face: 'front',
             front: function (gameObject) {
                 var children = gameObject.getChildren(), child;
@@ -60,12 +59,14 @@ class Demo extends Phaser.Scene {
                     }
                 }
             },
+
+            duration: 500,
         });
 
         card
             .setInteractive()
             .on('pointerdown', function () {
-                flip.start();
+                flip.flip();
             });
     }
 

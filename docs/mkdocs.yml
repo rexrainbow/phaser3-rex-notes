@@ -88,6 +88,7 @@ nav:
         - Fade out destroy: fadeoutdestroy.md
         - Pop up: popup.md
         - Scale down destroy: scaledowndestroy.md
+        - Flip: flip.md
         - Path follower: pathfollower.md
         - Anchor: anchor.md
         - Interception: interception.md

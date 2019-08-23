@@ -119,7 +119,7 @@ class Flip {
         return this;
     }
 
-    start() {
+    flip() {
         if (this.tween) {
             return this;
         }
