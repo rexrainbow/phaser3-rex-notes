@@ -1,6 +1,4 @@
 import GetSceneObject from '../../utils/system/GetSceneObject.js';
-import ORIENTATIONMODE from './OrientationConst.js';
-import FACEMODE from './FaceConst.js';
 import GetFaceUpdatingCallback from './GetFaceUpdatingCallback.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -160,6 +158,18 @@ class Flip {
         this.tween = undefined;
         return this;
     }
+}
+
+const ORIENTATIONMODE = {
+    x : 0,
+    horizontal: 0,
+    y : 1,
+    vertical: 1,
+}
+
+const FACEMODE = {
+    front: 0,
+    back: 1,
 }
 
 export default Flip;
