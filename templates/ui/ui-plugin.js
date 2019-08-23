@@ -35,6 +35,7 @@ import SwipeFactory from './swipe/SwipeFactory.js';
 import PanFactory from './pan/PanFactory.js';
 import PinchFactory from './pinch/PinchFactory.js';
 import RotateFactory from './rotate/RotateFactory.js';
+import FlipFactory from './flip/FlipFactory.js';
 
 import {
     Show,
