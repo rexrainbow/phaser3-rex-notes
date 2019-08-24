@@ -64,6 +64,7 @@ var flip = scene.plugins.get('rexFlip').add(gameObject, {
     - `1`, `'back'` : Back face.
 - `front`, `back` : Texture of front/back face.
     - `undefined` : Use current texture key, or frame name
+    - `key` : A string for texture key.
     - `{key, frame}`, or `{frame}` : A texture key and frame name
     - `callback` : Configure game object via callback.
         ```javascript
