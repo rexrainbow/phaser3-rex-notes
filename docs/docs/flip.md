@@ -112,8 +112,8 @@ flip.setDuration(duration);
     ```javascript
     flip.setFace(face);
     ```
-    - `0` : Front face
-    - `1` : Back face
+    - `0`, `'front'` : Front face.
+    - `1`, `'back'` : Back face.
 - Toggle face
     ```javascript
     flip.toggleFace();
