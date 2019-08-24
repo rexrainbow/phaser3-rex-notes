@@ -1,6 +1,6 @@
 ## Introduction
 
-Flip game object to another face by scaling width/height.
+Flipping game object to another face by scaling width/height.
 
 - Author: Rex
 - Behavior of game object
@@ -65,7 +65,7 @@ var flip = scene.plugins.get('rexFlip').add(gameObject, {
 - `front`, `back` : Texture of front/back face.
     - `undefined` : Use current texture key, or frame name
     - `{key, frame}` : A texture key and frame name
-    - `callback` : Set texture via callback.
+    - `callback` : Configure game object via callback.
         ```javascript
         function(gameObject) {
         }
@@ -81,6 +81,7 @@ var flip = scene.plugins.get('rexFlip').add(gameObject, {
 
 ```javascript
 flip.flip();
+// flip.flip(duration);
 ```
 
 ### Stop flipping
@@ -95,3 +96,10 @@ flip.stop();
 flip.setDuration(duration);
 // flip.duration = duration;
 ```
+
+### Status
+
+- Is flipping
+    ```javascript
+    var isRunning = flash.isRunning;
+    ```

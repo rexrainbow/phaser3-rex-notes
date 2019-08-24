@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/timeline/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/flip/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Timeline - Notes of Phaser 3</title>
+        <title>Flip - Notes of Phaser 3</title>
       
     
     
@@ -128,7 +128,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Timeline
+                Flip
               </span>
             
           
@@ -507,10 +507,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
     
     <label class="md-nav__link" for="nav-4">
       Game object
@@ -1378,10 +1380,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-10" type="checkbox" id="nav-4-10">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-10" type="checkbox" id="nav-4-10" checked>
     
     <label class="md-nav__link" for="nav-4-10">
       Behaviors
@@ -1529,11 +1533,114 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../flip/" title="Flip" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Flip
+      </label>
+    
+    <a href="./" title="Flip" class="md-nav__link md-nav__link--active">
       Flip
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#import-class" title="Import class" class="md-nav__link">
+    Import class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
+    Install global plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-instance" title="Create instance" class="md-nav__link">
+    Create instance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#start-flipping" title="Start flipping" class="md-nav__link">
+    Start flipping
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stop-flipping" title="Stop flipping" class="md-nav__link">
+    Stop flipping
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-duration" title="Set duration" class="md-nav__link">
+    Set duration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#status" title="Status" class="md-nav__link">
+    Status
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -3663,12 +3770,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-13" type="checkbox" id="nav-13" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-13" type="checkbox" id="nav-13">
     
     <label class="md-nav__link" for="nav-13">
       Time
@@ -3708,86 +3813,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Timeline
-      </label>
-    
-    <a href="./" title="Timeline" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../timeline/" title="Timeline" class="md-nav__link">
       Timeline
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#time-scale" title="Time-scale" class="md-nav__link">
-    Time-scale
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pause-or-resume" title="Pause or resume" class="md-nav__link">
-    Pause or resume
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-current-game-time" title="Get current game-time" class="md-nav__link">
-    Get current game-time
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#create-timeline-object" title="Create timeline object" class="md-nav__link">
-    Create timeline object
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -4542,6 +4572,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#usage" title="Usage" class="md-nav__link">
     Usage
   </a>
@@ -4550,29 +4587,50 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#time-scale" title="Time-scale" class="md-nav__link">
-    Time-scale
+  <a href="#import-class" title="Import class" class="md-nav__link">
+    Import class
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#pause-or-resume" title="Pause or resume" class="md-nav__link">
-    Pause or resume
+  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
+    Install global plugin
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-current-game-time" title="Get current game-time" class="md-nav__link">
-    Get current game-time
+  <a href="#create-instance" title="Create instance" class="md-nav__link">
+    Create instance
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-timeline-object" title="Create timeline object" class="md-nav__link">
-    Create timeline object
+  <a href="#start-flipping" title="Start flipping" class="md-nav__link">
+    Start flipping
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stop-flipping" title="Stop flipping" class="md-nav__link">
+    Stop flipping
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-duration" title="Set duration" class="md-nav__link">
+    Set duration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#status" title="Status" class="md-nav__link">
+    Status
   </a>
   
 </li>
@@ -4598,55 +4656,103 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/timeline.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/flip.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Timeline</h1>
+                  <h1>Flip</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Update timers, built-in object of phaser. Each scene has a timeline (<code>scene.time</code>) already.</p>
+<p>Flipping game object to another face by scaling width/height.</p>
 <ul>
-<li>Author: Richard Davey</li>
+<li>Author: Rex</li>
+<li>Behavior of game object</li>
 </ul>
+<h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/flip-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexflipplugin.min.js">minify</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<h3 id="time-scale">Time-scale<a class="headerlink" href="#time-scale" title="Permanent link">&para;</a></h3>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/flip">Sample code</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/ui-flip">Sample code-2</a></p>
+<p>User could import class directly, or install it by global plugin.</p>
+<h3 id="import-class">Import class<a class="headerlink" href="#import-class" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">rexFlip</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/flip.js&#39;</span><span class="p">;</span>
+</pre></div>
+
+<h3 id="install-global-plugin">Install global plugin<a class="headerlink" href="#install-global-plugin" title="Permanent link">&para;</a></h3>
+<p>Install plugin in <a href="../game/#configuration">configuration of game</a></p>
+<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">FlipPlugin</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/flip-plugin.js&#39;</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexFlip&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">FlipPlugin</span><span class="p">,</span>
+            <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="p">},</span>
+        <span class="c1">// ...</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</pre></div>
+
+<h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">flip</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexFlip&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="p">{</span>
+    <span class="nx">face</span><span class="o">:</span> <span class="s1">&#39;back&#39;</span><span class="p">,</span>
+    <span class="nx">front</span><span class="o">:</span> <span class="p">{</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span> <span class="p">},</span> <span class="c1">// key, or callback</span>
+    <span class="nx">back</span><span class="o">:</span> <span class="p">{</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span> <span class="p">},</span>  <span class="c1">// key, or callback</span>
+
+    <span class="c1">// orientation: 0, // 0|&#39;x&#39;|1|&#39;y&#39;</span>
+    <span class="c1">// duration: 500,</span>
+    <span class="c1">// delay: 0,</span>
+    <span class="c1">// ease: &#39;Sine&#39;,</span>
+<span class="p">});</span>
+</pre></div>
+
 <ul>
-<li>
-<p>Get time-scale</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">timeScale</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">time</span><span class="p">.</span><span class="nx">timeScale</span><span class="p">;</span>
-</pre></div>
-
-</li>
-<li>
-<p>Set time-scale</p>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">time</span><span class="p">.</span><span class="nx">timeScale</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
-</pre></div>
-
-</li>
+<li><code>face</code> : Initial face.<ul>
+<li><code>0</code>, <code>'front'</code> : Front face.</li>
+<li><code>1</code>, <code>'back'</code> : Back face.</li>
 </ul>
-<h3 id="pause-or-resume">Pause or resume<a class="headerlink" href="#pause-or-resume" title="Permanent link">&para;</a></h3>
+</li>
+<li><code>front</code>, <code>back</code> : Texture of front/back face.<ul>
+<li><code>undefined</code> : Use current texture key, or frame name</li>
+<li><code>{key, frame}</code> : A texture key and frame name</li>
+<li><code>callback</code> : Configure game object via callback.
+    <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">}</span>
+</pre></div></li>
+</ul>
+</li>
+<li><code>orientation</code> : Flipping orientation.<ul>
+<li><code>0</code>, <code>'x'</code>, or <code>'horizontal'</code> : Horizontal flipping.</li>
+<li><code>1</code>, <code>'y'</code>, or <code>'vertical'</code> : Vertical flipping.</li>
+</ul>
+</li>
+<li><code>duration</code> : Duration of flipping, in millisecond.</li>
+<li><code>delay</code> : Initial delay</li>
+<li><code>ease</code> Ease function. Default value is <code>'Sine'</code>.</li>
+</ul>
+<h3 id="start-flipping">Start flipping<a class="headerlink" href="#start-flipping" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">flip</span><span class="p">.</span><span class="nx">flip</span><span class="p">();</span>
+<span class="c1">// flip.flip(duration);</span>
+</pre></div>
+
+<h3 id="stop-flipping">Stop flipping<a class="headerlink" href="#stop-flipping" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">flip</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
+</pre></div>
+
+<h3 id="set-duration">Set duration<a class="headerlink" href="#set-duration" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">flip</span><span class="p">.</span><span class="nx">setDuration</span><span class="p">(</span><span class="nx">duration</span><span class="p">);</span>
+<span class="c1">// flip.duration = duration;</span>
+</pre></div>
+
+<h3 id="status">Status<a class="headerlink" href="#status" title="Permanent link">&para;</a></h3>
 <ul>
-<li>
-<p>Pause</p>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">time</span><span class="p">.</span><span class="nx">paused</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-</pre></div>
-
-</li>
-<li>
-<p>Resume</p>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">time</span><span class="p">.</span><span class="nx">paused</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-</pre></div>
-
-</li>
+<li>Is flipping
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isRunning</span> <span class="o">=</span> <span class="nx">flash</span><span class="p">.</span><span class="nx">isRunning</span><span class="p">;</span>
+</pre></div></li>
 </ul>
-<h3 id="get-current-game-time">Get current game-time<a class="headerlink" href="#get-current-game-time" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">time</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">time</span><span class="p">.</span><span class="nx">now</span><span class="p">;</span>
-</pre></div>
-
-<p>Game-time is not system time.</p>
-<h3 id="create-timeline-object">Create timeline object<a class="headerlink" href="#create-timeline-object" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">timeline</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Time</span><span class="p">.</span><span class="nx">Clock</span><span class="p">(</span><span class="nx">scene</span><span class="p">);</span>
-</pre></div>
                 
                   
                 
@@ -4667,7 +4773,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../timer/" title="Timer" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../scaledowndestroy/" title="Scale down destroy" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -4676,19 +4782,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Timer
+                Scale down destroy
               </span>
             </div>
           </a>
         
         
-          <a href="../clock/" title="Clock" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../pathfollower/" title="Path follower" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Clock
+                Path follower
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

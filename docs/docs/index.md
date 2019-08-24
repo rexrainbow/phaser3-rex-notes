@@ -35,6 +35,7 @@
 1. [Fade-out-destroy](fadeoutdestroy.md): Fade out game object then destroy it.
 1. [Fade-volume](fadevolume.md): Fade-in/fade-out volume of sound.
 1. [Flash](flash.md): Flashing (set invisible then visible) game object.
+1. [Flip](flip.md): Flipping game object to another face by scaling width/height.
 1. [FSM](fsm.md): Finite state machine.
 1. [Gashapon](gashapon.md): Pick random item from box.
 1. [Gesture/Pan](gesture-pan.md): Get pan events of a game object.

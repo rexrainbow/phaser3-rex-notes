@@ -119,8 +119,8 @@ class Flip {
         return this;
     }
 
-    flip() {
-        if (this.tween) {
+    start() {
+        if (this.isRunning) {
             return this;
         }
 
@@ -142,10 +142,21 @@ class Flip {
 
         this.tween = this.scene.tweens.add(config);
         return this;
-    }
+    }    
 
     restart() {
         this.stop().start();
+        return this;
+    }
+
+    flip(duration) {
+        if (this.isRunning) {
+            return this;
+        }
+        if (duration !== undefined) {
+            this.setDuration(duration);
+        }
+        this.start();
         return this;
     }
 
@@ -157,6 +168,10 @@ class Flip {
         this.tween.remove();
         this.tween = undefined;
         return this;
+    }
+
+    get isRunning() {
+        return (!!this.tween);
     }
 }
 
