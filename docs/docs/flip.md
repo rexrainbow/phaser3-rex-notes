@@ -98,6 +98,58 @@ flip.setDuration(duration);
 // flip.duration = duration;
 ```
 
+### Faces
+
+#### Current face
+
+- Get
+    ```javascript
+    var face = flip.face;
+    ```
+    - `0` : Front face
+    - `1` : Back face
+- Set
+    ```javascript
+    flip.setFace(face);
+    ```
+    - `0` : Front face
+    - `1` : Back face
+- Toggle face
+    ```javascript
+    flip.toggleFace();
+    ```
+
+#### Set texture of face
+
+- Front face
+    ```javascript
+    flip.setFrontFace(key, frame);
+    ```
+    or
+    ```javascript
+    flip.setFrontFace(callback);
+    ```
+    - `callback` : 
+        ```javascript
+        function(gameObject) {
+            // ...            
+        }
+        ```
+- Back face
+    ```javascript
+    flip.setBackFace(key, frame);
+    ```
+    or
+    ```javascript
+    flip.setBackFace(callback);
+    ```
+    - `callback` : 
+        ```javascript
+        function(gameObject) {
+            // ...            
+        }
+        ```
+
 ### Status
 
 - Is flipping

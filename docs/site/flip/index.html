@@ -1622,6 +1622,33 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#faces" title="Faces" class="md-nav__link">
+    Faces
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#current-face" title="Current face" class="md-nav__link">
+    Current face
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-texture-of-face" title="Set texture of face" class="md-nav__link">
+    Set texture of face
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#status" title="Status" class="md-nav__link">
     Status
   </a>
@@ -4629,6 +4656,33 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#faces" title="Faces" class="md-nav__link">
+    Faces
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#current-face" title="Current face" class="md-nav__link">
+    Current face
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-texture-of-face" title="Set texture of face" class="md-nav__link">
+    Set texture of face
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#status" title="Status" class="md-nav__link">
     Status
   </a>
@@ -4748,6 +4802,56 @@
 <span class="c1">// flip.duration = duration;</span>
 </pre></div>
 
+<h3 id="faces">Faces<a class="headerlink" href="#faces" title="Permanent link">&para;</a></h3>
+<h4 id="current-face">Current face<a class="headerlink" href="#current-face" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">face</span> <span class="o">=</span> <span class="nx">flip</span><span class="p">.</span><span class="nx">face</span><span class="p">;</span>
+</pre></div><ul>
+<li><code>0</code> : Front face</li>
+<li><code>1</code> : Back face</li>
+</ul>
+</li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">flip</span><span class="p">.</span><span class="nx">setFace</span><span class="p">(</span><span class="nx">face</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>0</code> : Front face</li>
+<li><code>1</code> : Back face</li>
+</ul>
+</li>
+<li>Toggle face
+    <div class="codehilite"><pre><span></span><span class="nx">flip</span><span class="p">.</span><span class="nx">toggleFace</span><span class="p">();</span>
+</pre></div></li>
+</ul>
+<h4 id="set-texture-of-face">Set texture of face<a class="headerlink" href="#set-texture-of-face" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Front face
+    <div class="codehilite"><pre><span></span><span class="nx">flip</span><span class="p">.</span><span class="nx">setFrontFace</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">flip</span><span class="p">.</span><span class="nx">setFrontFace</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>callback</code> : 
+    <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...            </span>
+<span class="p">}</span>
+</pre></div></li>
+</ul>
+</li>
+<li>Back face
+    <div class="codehilite"><pre><span></span><span class="nx">flip</span><span class="p">.</span><span class="nx">setBackFace</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">flip</span><span class="p">.</span><span class="nx">setBackFace</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>callback</code> : 
+    <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...            </span>
+<span class="p">}</span>
+</pre></div></li>
+</ul>
+</li>
+</ul>
 <h3 id="status">Status<a class="headerlink" href="#status" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Is flipping

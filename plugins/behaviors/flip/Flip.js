@@ -22,8 +22,8 @@ class Flip {
         this.setDuration(GetAdvancedValue(o, 'duration', 500));
         this.setEase(GetValue(o, 'ease', 'Sine'));
 
-        this.setFrontFaceCallback(GetValue(o, 'front', undefined));
-        this.setBackFaceCallback(GetValue(o, 'back', undefined));
+        this.setFrontFace(GetValue(o, 'front', undefined));
+        this.setBackFace(GetValue(o, 'back', undefined));
         this.setFace(GetValue(o, 'face', 0));
         return this;
     }
@@ -109,12 +109,12 @@ class Flip {
         return this;
     }
 
-    setFrontFaceCallback(key, frame) {
+    setFrontFace(key, frame) {
         this.frontFaceCallback = GetFaceUpdatingCallback(key, frame, this.gameObject);
         return this;
     }
 
-    setBackFaceCallback(key, frame) {
+    setBackFace(key, frame) {
         this.backFaceCallback = GetFaceUpdatingCallback(key, frame, this.gameObject);
         return this;
     }
