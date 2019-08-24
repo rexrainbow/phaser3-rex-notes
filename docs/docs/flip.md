@@ -150,9 +150,16 @@ flip.setDuration(duration);
         }
         ```
 
+### Events
+
+- On flipping complete
+    ```javascript
+    flip.on('complete', function(flip, gameObject){});
+    ```
+
 ### Status
 
 - Is flipping
     ```javascript
-    var isRunning = flash.isRunning;
+    var isRunning = flip.isRunning;
     ```

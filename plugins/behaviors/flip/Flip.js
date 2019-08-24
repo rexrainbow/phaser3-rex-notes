@@ -1,3 +1,4 @@
+import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
 import GetSceneObject from '../../utils/system/GetSceneObject.js';
 import GetFaceUpdatingCallback from './GetFaceUpdatingCallback.js';
 
@@ -8,6 +9,8 @@ class Flip {
     constructor(gameObject, config) {
         this.gameObject = gameObject;
         this.scene = GetSceneObject(gameObject);
+        // Event emitter
+        this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
 
         this.scaleStart = {};
         this.scaleEnd = {};
@@ -28,16 +31,6 @@ class Flip {
         return this;
     }
 
-    toJSON() {
-        return {
-            mode: this.mode,
-            start: this.scaleStart,
-            end: this.scaleEnd,
-            delay: this.delay,
-            duration: this.duration
-        };
-    }
-
     boot() {
         if (this.gameObject.on) { // oops, bob object does not have event emitter
             this.gameObject.on('destroy', this.destroy, this);
@@ -45,6 +38,7 @@ class Flip {
     }
 
     shutdown() {
+        this.destroyEventEmitter();
         this.stop();
         this.gameObject = undefined;
         this.scene = undefined;
@@ -80,6 +74,10 @@ class Flip {
         }
         this.ease = ease;
         return this;
+    }
+
+    get isRunning() {
+        return (!!this.tween);
     }
 
     get face() {
@@ -133,7 +131,7 @@ class Flip {
 
             onYoyo: this.toggleFace,
             onYoyoScope: this,
-            onComplete: this.stop,
+            onComplete: this.complete,
             onCompleteScope: this
         }
 
@@ -142,7 +140,7 @@ class Flip {
 
         this.tween = this.scene.tweens.add(config);
         return this;
-    }    
+    }
 
     restart() {
         this.stop().start();
@@ -170,15 +168,23 @@ class Flip {
         return this;
     }
 
-    get isRunning() {
-        return (!!this.tween);
+    complete() {
+        this.stop();
+        this.emit('complete', this, this.gameObject);
+        return this;
     }
+
 }
 
+Object.assign(
+    Flip.prototype,
+    EventEmitterMethods
+);
+
 const ORIENTATIONMODE = {
-    x : 0,
+    x: 0,
     horizontal: 0,
-    y : 1,
+    y: 1,
     vertical: 1,
 }
 
