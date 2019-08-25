@@ -9,10 +9,10 @@ class CircleMaskImage extends Canvas {
 
         this.type = 'rexCircleMaskImage';
         var maskType = GetValue(config, 'maskType', 0);
-        this.loadTexture(key, frame, maskType);
+        this.setTexture(key, frame, maskType);
     }
 
-    loadTexture(key, frame, maskType) {
+    setTexture(key, frame, maskType) {
         if (maskType === undefined) {
             maskType = 0;
         } else if (typeof (maskType) === 'string') {
@@ -21,7 +21,7 @@ class CircleMaskImage extends Canvas {
 
         this._textureKey = key;
         this._frameName = frame;
-        super.loadTexture(key, frame);
+        this.loadTexture(key, frame);
 
         if (maskType !== null) {
             ApplyCircleMask(this.canvas, maskType);

@@ -49,10 +49,10 @@ var image = scene.add.rexCircleMaskImage(x, y, key, frame, config);
         - `1`, or `'ellipse'` : Ellipse mask.
 
 
-Add circlemaskimage from JSON
+Add image from JSON
 
 ```javascript
-var circlemaskimage = scene.make.rexCircleMaskImage({
+var image = scene.make.rexCircleMaskImage({
     x: 0,
     y: 0,
     key: key,
@@ -66,7 +66,7 @@ var circlemaskimage = scene.make.rexCircleMaskImage({
 
 - Define class
     ```javascript
-    class MyCircleMaskImage extends CircleMaskImage {
+    class MyImage extends CircleMaskImage {
         constructor(scene, x, y, key, frame, config) {
             super(scene, x, y, key, frame, config);
             // ...
@@ -82,14 +82,14 @@ var circlemaskimage = scene.make.rexCircleMaskImage({
         - If it has a `preUpdate` method, it will be added to the Update List.
 - Create instance
     ```javascript
-    var image = new MyCircleMaskImage(scene, key, frame, config);
+    var image = new MyImage(scene, key, frame, config);
     ```
 
 ### Set texture
 
 ```javascript
-image.loadTexture(key, frame);
-// image.loadTexture(key, frame, maskType);
+image.setTexture(key, frame);
+// image.setTexture(key, frame, maskType);
 ```
 
 - `maskType` : Type of mask
