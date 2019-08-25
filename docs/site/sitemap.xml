@@ -96,6 +96,11 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
+     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/circlemaskimage/</loc>
+     <lastmod>2019-08-25</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
      <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/shader/</loc>
      <lastmod>2019-08-25</lastmod>
      <changefreq>daily</changefreq>
@@ -237,11 +242,6 @@
     </url>
     <url>
      <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/canvas/</loc>
-     <lastmod>2019-08-25</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    <url>
-     <loc>https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/circlemaskimage/</loc>
      <lastmod>2019-08-25</lastmod>
      <changefreq>daily</changefreq>
     </url>
