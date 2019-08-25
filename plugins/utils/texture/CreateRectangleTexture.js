@@ -8,7 +8,7 @@ var CreateRectangleTexture = function (scene, key, width, height, color) {
     scene.add.graphics()
         .fillStyle(color)
         .fillRect(0, 0, width, height)
-        .generateTexture(key, width, width)
+        .generateTexture(key, width, height)
         .destroy();
 }
 export default CreateRectangleTexture;

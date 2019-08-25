@@ -16,6 +16,8 @@ module.exports = {
         'tagtext': './plugins/tagtext.js',
         'canvasplugin': './plugins/canvas-plugin.js',
         'canvas': './plugins/canvas.js',
+        'circlemaskimageplugin': './plugins/circlemaskimage-plugin.js',
+        'circlemaskimage': './plugins/circlemaskimage.js',
         'containerliteplugin': './plugins/containerlite-plugin.js',
         'containerlite': './plugins/containerlite.js',
         'gridtableplugin': './plugins/gridtable-plugin.js',

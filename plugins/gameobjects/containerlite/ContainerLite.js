@@ -21,10 +21,10 @@ class ContainerLite extends Zone {
             width = undefined;
         }
         if (width === undefined) {
-            width = 2;
+            width = 1;
         }
         if (height === undefined) {
-            height = 2;
+            height = 1;
         }
         super(scene, x, y, width, height);
         this.children = scene.add.group();
