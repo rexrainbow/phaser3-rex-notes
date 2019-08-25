@@ -62,6 +62,7 @@ nav:
             - Iso triangle: shape-isotriangle.md
             - Round Rectangle: shape-roundrectangle.md
         - Canvas: canvas.md
+        - Circle mask image: circlemaskimage.md
         - Canvas texture: canvas-texture.md
     - Tile map:
         - Tile map: tilemap.md

@@ -23,6 +23,7 @@
 1. [Button](button.md): Fires 'click' event when touch releasd after pressed.
 1. [Canvas](canvas.md): Drawing on [canvas](https://www.w3schools.com/html/html5_canvas.asp).
 1. [Canvas image data](canvas-data.md): Get image data from texture, or text object.
+1. [Circle mask image](circlemaskimage.md): Load a texture, then apply a circle mask.
 1. [Clock](clock.md): A clock to count elapsed time.
 1. [Conditions table](conditionstable.md): Check conditions to find passed tests listed in a csv table.
 1. [ContainerLite](containerlite.md): Control the position and angle of children game objects.

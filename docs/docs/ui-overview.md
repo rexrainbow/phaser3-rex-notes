@@ -63,6 +63,22 @@
 
 ### Canvas objects
 
+1. [Circle mask image](circlemaskimage.md): Load a texture, then apply a circle mask.
+    ```javascript
+    var image = scene.rexUI.add.circleMaskImage(x, y, key, frame);
+    // var image = scene.rexUI.add.circleMaskImage(x, y, key, frame, config);
+    ```
+    or
+    ```javascript
+    class MyImage extends RexPlugins.UI.CircleMaskImage {
+        constructor(scene, x, y, key, frame, config) {
+            super(scene, x, y, key, frame, config);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
 1. [Chart](ui-chart.md): Draw [chart](https://www.chartjs.org/) on [canvas](canvas.md).
 
 ### Colored text objects
