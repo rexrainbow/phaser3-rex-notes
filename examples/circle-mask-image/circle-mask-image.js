@@ -1,5 +1,4 @@
 import CircleMaskImagePlugin from '../../plugins/circlemaskimage-plugin.js';
-import CreateRectangleTexture from '../../plugins/utils/texture/CreateRectangleTexture.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
