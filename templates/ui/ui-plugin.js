@@ -1,42 +1,42 @@
 import ObjectFactory from './ObjectFactory.js';
 
-import RoundRectangleFactory from './roundrectangle/RoundRectangleFactory.js';
-import BBCodeTextFactory from './bbcodetext/BBCodeTextFactory.js';
-import TagTextFactory from './tagtext/TagTextFactory.js';
-import ContainerFactory from './container/ContainerFactory.js';
-import ChartFactory from './chart/ChartFactory.js';
-import CircleMaskImage from './circlemaskimage/CircleMaskImage.js';
-import VideoFactory from './video/VideoFactory.js';
-import VideoCanvasFactory from './video/VideoCanvasFactory.js';
-import YoutubePlayerFactory from './youtubeplayer/YoutubePlayerFactory.js';
+import RoundRectangleFactory from './roundrectangle/Factory.js';
+import BBCodeTextFactory from './bbcodetext/Factory.js';
+import TagTextFactory from './tagtext/Factory.js';
+import ContainerFactory from './container/Factory.js';
+import ChartFactory from './chart/Factory.js';
+import CircleMaskImageFactory from './circlemaskimage/Factory.js';
+import VideoFactory from './video/Factory.js';
+import VideoCanvasFactory from './video/Factory.js';
+import YoutubePlayerFactory from './youtubeplayer/Factory.js';
 
-import SizerFactory from './sizer/SizerFactory.js';
-import GridSizerFactory from './gridsizer/GridSizerFactory.js';
-import FixWidthSizerFactory from './fixwidthsizer/FixWidthSizerFactory.js';
+import SizerFactory from './sizer/Factory.js';
+import GridSizerFactory from './gridsizer/Factory.js';
+import FixWidthSizerFactory from './fixwidthsizer/Factory.js';
 
-import LabelFactory from './label/LabelFactory.js';
-import ButtonsFactory from './buttons/ButtonsFactory.js';
-import DialogFactory from './dialog/DialogFactory.js';
-import TabsFactory from './tabs/TabsFactory.js';
-import SliderFactory from './slider/SliderFactory.js';
-import GridTableFactory from './gridtable/GridTableFactory.js';
-import MenuFactory from './menu/MenuFactory.js';
-import TextBoxFactory from './textbox/TextboxFactory.js';
-import NumberBarFactory from './numberbar/NumberBarFactory.js';
-import PagesFactory from './pages/PagesFactory.js';
-import TextBlockFactory from './textblock/TextBlockFactory.js';
-import TextAreaFactory from './textarea/TextAreaFactory.js';
-import ScrollableBlockFactory from './scrollableblock/ScrollableBlockFactory.js';
-import ScrollablePanelFactory from './scrollablepanel/ScrollablePanelFactory.js';
-import ToastFactory from './toast/ToastFactory.js';
+import LabelFactory from './label/Factory.js';
+import ButtonsFactory from './buttons/Factory.js';
+import DialogFactory from './dialog/Factory.js';
+import TabsFactory from './tabs/Factory.js';
+import SliderFactory from './slider/Factory.js';
+import GridTableFactory from './gridtable/Factory.js';
+import MenuFactory from './menu/Factory.js';
+import TextBoxFactory from './textbox/Factory.js';
+import NumberBarFactory from './numberbar/Factory.js';
+import PagesFactory from './pages/Factory.js';
+import TextBlockFactory from './textblock/Factory.js';
+import TextAreaFactory from './textarea/Factory.js';
+import ScrollableBlockFactory from './scrollableblock/Factory.js';
+import ScrollablePanelFactory from './scrollablepanel/Factory.js';
+import ToastFactory from './toast/Factory.js';
 
-import TapFactory from './tap/TapFactory.js';
-import PressFactory from './press/PressFactory.js';
-import SwipeFactory from './swipe/SwipeFactory.js';
-import PanFactory from './pan/PanFactory.js';
-import PinchFactory from './pinch/PinchFactory.js';
-import RotateFactory from './rotate/RotateFactory.js';
-import FlipFactory from './flip/FlipFactory.js';
+import TapFactory from './tap/Factory.js';
+import PressFactory from './press/Factory.js';
+import SwipeFactory from './swipe/Factory.js';
+import PanFactory from './pan/Factory.js';
+import PinchFactory from './pinch/Factory.js';
+import RotateFactory from './rotate/Factory.js';
+import FlipFactory from './flip/Factory.js';
 
 import {
     Show,
