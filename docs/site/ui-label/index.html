@@ -4774,12 +4774,18 @@
 </li>
 <li><code>background</code> : Game object of background, optional. This background game object will be resized to fit the size of label.</li>
 <li><code>icon</code> : Game object of icon, optional.</li>
-<li><code>iconMask</code> : Set true to add a <em>circle</em> mask on icon game object.</li>
+<li><code>iconMask</code> : Set true to add a <em>circle</em> mask on icon game object.<ul>
+<li><em>Phaser 3 engine does not support nested mask</em>, uses <a href="../circlemaskimage/">circle mask image</a> instead.</li>
+</ul>
+</li>
 <li><code>text</code> : Game object of text, optional.</li>
 <li><code>expandTextWidth</code> : Set <code>true</code> to expand width of text object.</li>
 <li><code>expandTextHeight</code> : Set <code>true</code> to expand height of text object.</li>
 <li><code>action</code> : Game object of action icon, optional.</li>
-<li><code>actionMask</code> : Set true to add a <em>circle</em> mask on action icon game object.</li>
+<li><code>actionMask</code> : Set true to add a <em>circle</em> mask on action icon game object.<ul>
+<li><em>Phaser 3 engine does not support nested mask</em>, uses <a href="../circlemaskimage/">circle mask image</a> instead.</li>
+</ul>
+</li>
 <li><code>space</code> : Pads spaces<ul>
 <li><code>space.left</code>, <code>space.right</code>, <code>space.top</code>, <code>space.bottom</code> : Space of bounds.</li>
 <li><code>space.icon</code> : Space between icon game object and text game object.</li>
