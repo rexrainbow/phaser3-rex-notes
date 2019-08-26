@@ -82,11 +82,13 @@ var label = scene.rexUI.add.label({
 - `background` : Game object of background, optional. This background game object will be resized to fit the size of label.
 - `icon` : Game object of icon, optional.
 - `iconMask` : Set true to add a *circle* mask on icon game object.
+    - *Phaser 3 engine does not support nested mask*, uses [circle mask image](circlemaskimage.md) instead.
 - `text` : Game object of text, optional.
 - `expandTextWidth` : Set `true` to expand width of text object.
 - `expandTextHeight` : Set `true` to expand height of text object.
 - `action` : Game object of action icon, optional.
 - `actionMask` : Set true to add a *circle* mask on action icon game object.
+    - *Phaser 3 engine does not support nested mask*, uses [circle mask image](circlemaskimage.md) instead.
 - `space` : Pads spaces
     - `space.left`, `space.right`, `space.top`, `space.bottom` : Space of bounds.
     - `space.icon` : Space between icon game object and text game object.

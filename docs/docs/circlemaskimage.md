@@ -1,6 +1,6 @@
 ## Introduction
 
-Load a texture, then apply a circle mask. Extended from [canvas](canvas.md).
+Load a texture, then apply a circle mask. Extended from [canvas plugin](canvas.md).
 
 - Author: Rex
 - Game object
