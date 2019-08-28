@@ -37,8 +37,8 @@ var grid = scene.rexBoard.add.quadGrid({
     - `0`, or `orthogonal`
     - `1`, or `isometric`
 - `dir` :
-    - `4` or `'4dir'` : Up/left/down/right
-    - `8` or `'8dir'` : Up/left/down/right/up-left/up-right/down-left/dowm-right
+    - `4` or `'4dir'` : Left/Down/Right/Up
+    - `8` or `'8dir'` : Left/Down/Right/Up/Left-down/Down-right/Right-up/Up-left
 
 ### Set world position of tile (0, 0)
 
