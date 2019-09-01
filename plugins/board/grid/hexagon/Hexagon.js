@@ -20,14 +20,9 @@ class HexagonGrid extends Hexagon {
         this.sides = 6;
     }
 
-    resetFromJSON(o) {
-        super.resetFromJSON(o);
-        this.directions = 6;
-    }
-
-    setDirectionMode(mode) {
-        return this;
-    }
+    // resetFromJSON(o) {
+    //     super.resetFromJSON(o);
+    // }
 
     // Direction of neighbors
     get allDirections() {

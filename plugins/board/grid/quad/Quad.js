@@ -20,9 +20,9 @@ class QuadGrid extends Quad {
         this.sides = 4;
     }
 
-    resetFromJSON(o) {
-        super.resetFromJSON(o);
-    }
+    // resetFromJSON(o) {
+    //     super.resetFromJSON(o);
+    // }
 
     // Direction of neighbors
     get allDirections() {

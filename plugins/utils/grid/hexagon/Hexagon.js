@@ -23,6 +23,7 @@ class Hexagon {
 
     resetFromJSON(o) {
         this.setType(GetValue(o, 'staggeraxis', 1), GetValue(o, 'staggerindex', 1));
+        this.setDirectionMode();
         this.setOriginPosition(GetValue(o, 'x', 0), GetValue(o, 'y', 0));
         this.size = GetValue(o, 'size', undefined);
         if (this.size !== undefined) {
@@ -53,6 +54,11 @@ class Hexagon {
         } else { // pointy
             this.mode = (staggerindex === 0) ? EVEN_R : ODD_R;
         }
+        return this;
+    }
+
+    setDirectionMode() {
+        this.directions = 6;
         return this;
     }
 
