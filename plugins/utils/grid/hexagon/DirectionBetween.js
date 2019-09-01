@@ -2,7 +2,11 @@ import {
     cr2cube
 } from './CubeTransfer.js';
 
-var DirectionBetween = function (tileA, tileB) {
+var DirectionBetween = function (tileA, tileB, nearest) {
+    if (nearest === undefined) {
+        nearest = true;
+    }
+
     var direction;
     cr2cube(this.mode, tileA.x, tileA.y, globCubeA);
     cr2cube(this.mode, tileB.x, tileB.y, globCubeB);
@@ -27,6 +31,10 @@ var DirectionBetween = function (tileA, tileB) {
         direction = 4 + (dx / (-dz));
     } else { // ((dx > 0) && (dy < 0) && (dz < 0)) // 5~0
         direction = 5 + ((-dy) / dx);
+    }
+
+    if (nearest) {
+        direction = Math.round(direction);
     }
     return direction;
 }

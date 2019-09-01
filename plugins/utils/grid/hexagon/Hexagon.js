@@ -38,6 +38,24 @@ class Hexagon {
         }
     }
 
+    setType(staggeraxis, staggerindex) {
+        if (typeof (staggeraxis) === 'string') {
+            staggeraxis = STAGGERAXIS[staggeraxis]
+        }
+        if (typeof (staggerindex) === 'string') {
+            staggerindex = STAGGERINDEX[staggerindex]
+        }
+        this.staggeraxis = staggeraxis; // 0|y(flat), or 1|x(pointy)
+        this.staggerindex = staggerindex; // even, or odd
+
+        if (staggeraxis === 0) { // flat
+            this.mode = (staggerindex === 0) ? EVEN_Q : ODD_Q;
+        } else { // pointy
+            this.mode = (staggerindex === 0) ? EVEN_R : ODD_R;
+        }
+        return this;
+    }
+
     setOriginPosition(x, y) {
         this.x = x;
         this.y = y;
@@ -83,31 +101,13 @@ class Hexagon {
     set cellHieght(value) {
         this.height = value;
     }
-
-    setType(staggeraxis, staggerindex) {
-        if (typeof (staggeraxis) === 'string') {
-            staggeraxis = STAGGERAXIS[staggeraxis]
-        }
-        if (typeof (staggerindex) === 'string') {
-            staggerindex = STAGGERINDEX[staggerindex]
-        }
-        this.staggeraxis = staggeraxis; // 0|y(flat), or 1|x(pointy)
-        this.staggerindex = staggerindex; // even, or odd
-
-        if (staggeraxis === 0) { // flat
-            this.mode = (staggerindex === 0) ? EVEN_Q : ODD_Q;
-        } else { // pointy
-            this.mode = (staggerindex === 0) ? EVEN_R : ODD_R;
-        }
-        return this;
-    }
 }
 
 var methods = {
     getWorldXY: GetWorldXY,
     getWorldX: GetWorldX,
     getWorldY: GetWorldY,
-    getTileXY:GetTileXY,
+    getTileXY: GetTileXY,
     getTileX: GetTileX,
     getTileY: GetTileY,
 }

@@ -18,12 +18,12 @@ var RingToTileXYArray = function (centerTileXY, radius, out) {
     }
     // Bottom-left to top-left
     i = -radius;
-    for (j = radius - 1; j <= -radius; j--) {
+    for (j = radius - 1; j >= -radius; j--) {
         out.push(Offset(centerTileXY, i, j));
     }
     // Top-left to top-right
     j = -radius;
-    for (i = -radius; i <= radius - 1; i++) {
+    for (i = -radius + 1; i <= radius - 1; i++) {
         out.push(Offset(centerTileXY, i, j));
     }
 

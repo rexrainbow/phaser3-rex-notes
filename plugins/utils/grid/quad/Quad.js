@@ -12,9 +12,27 @@ class Quad {
     }
 
     resetFromJSON(o) {
-        this.setType(GetValue(o, 'type', 0));        
+        this.setType(GetValue(o, 'type', 0));
+        this.setDirectionMode(GetValue(o, 'dir', 4));
         this.setOriginPosition(GetValue(o, 'x', 0), GetValue(o, 'y', 0));
         this.setCellSize(GetValue(o, 'cellWidth', 0), GetValue(o, 'cellHeight', 0));
+    }
+
+    setType(type) {
+        if (typeof (type) === 'string') {
+            type = ORIENTATIONTYPE[type]
+        }
+        this.mode = type; // orthogonal, isometric, or staggered
+        return this;
+    }
+
+    setDirectionMode(mode) {
+        if (typeof (mode) === 'string') {
+            mode = DIRMODE[mode];
+        }
+
+        this.directions = mode;
+        return this;
     }
 
     setOriginPosition(x, y) {
@@ -62,21 +80,13 @@ class Quad {
     set cellHieght(value) {
         this.height = value;
     }
-
-    setType(type) {
-        if (typeof (type) === 'string') {
-            type = ORIENTATIONTYPE[type]
-        }
-        this.mode = type; // orthogonal, isometric, or staggered
-        return this;
-    }
 }
 
 var methods = {
     getWorldXY: GetWorldXY,
     getWorldX: GetWorldX,
     getWorldY: GetWorldY,
-    getTileXY:GetTileXY,
+    getTileXY: GetTileXY,
     getTileX: GetTileX,
     getTileY: GetTileY,
 }
@@ -90,5 +100,10 @@ const ORIENTATIONTYPE = {
     'isometric': 1,
     'staggered': 2
 };
+
+const DIRMODE = {
+    '4dir': 4,
+    '8dir': 8
+}
 
 export default Quad;

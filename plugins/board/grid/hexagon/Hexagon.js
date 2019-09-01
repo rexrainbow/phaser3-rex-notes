@@ -17,11 +17,12 @@ import RingToTileXYArray from '../../../utils/grid/hexagon/RingToTileXYArray.js'
 class HexagonGrid extends Hexagon {
     constructor(config) {
         super(config);
+        this.sides = 6;
     }
 
     resetFromJSON(o) {
         super.resetFromJSON(o);
-        this.directions = 6; // Faces
+        this.directions = 6;
     }
 
     setDirectionMode(mode) {
