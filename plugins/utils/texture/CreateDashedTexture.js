@@ -1,12 +1,12 @@
-var CreateDashedLineTexture = function (scene, key, width, color, k) {
+var CreateDashedTexture = function (scene, key, width, k, color) {
     if (width === undefined) {
         width = 10;
     }
-    if (color === undefined) {
-        color = 0xffffff;
-    }
     if (k === undefined) {
         k = 0.5;
+    }
+    if (color === undefined) {
+        color = 0xffffff;
     }
 
     var height = 2;
@@ -16,4 +16,4 @@ var CreateDashedLineTexture = function (scene, key, width, color, k) {
         .generateTexture(key, width, height)
         .destroy();
 }
-export default CreateDashedLineTexture;
+export default CreateDashedTexture;

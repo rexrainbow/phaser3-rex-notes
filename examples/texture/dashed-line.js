@@ -1,4 +1,4 @@
-import CreateDashedLineTexture from '../../plugins/utils/texture/CreateDashedLineTexture.js';
+import CreateDashedTexture from '../../plugins/utils/texture/CreateDashedTexture.js';
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -11,7 +11,7 @@ class Demo extends Phaser.Scene {
     }
 
     create() {
-        CreateDashedLineTexture(this, 'dashed', 10, 0xff0000, 0.25);
+        CreateDashedTexture(this, 'dashed', 10, 0.25, 0xff0000);
         var dashedLine = this.add.tileSprite(400, 300, 10, 3, 'dashed').setOrigin(0, 0.5);
         this.input.on('pointermove', function (pointer) {
             dashedLine.width = Phaser.Math.Distance.Between(dashedLine.x, dashedLine.y, pointer.x, pointer.y);
