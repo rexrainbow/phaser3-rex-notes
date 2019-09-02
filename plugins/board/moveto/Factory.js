@@ -1,6 +1,6 @@
 import MoveTo from './MoveTo.js';
-import MiniBoardMoveTo from './../miniboard/moveto/MoveTo.js';
-import IsMiniBoardObject from './../miniboard/IsMiniBoardObject.js';
+import MiniBoardMoveTo from '../miniboard/moveto/MoveTo.js';
+import IsMiniBoardObject from '../miniboard/IsMiniBoardObject.js';
 import ObjectFactory from '../ObjectFactory.js';
 import SetValue from '../../utils/object/SetValue.js';
 

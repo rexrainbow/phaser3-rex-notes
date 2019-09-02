@@ -4,7 +4,7 @@ var IsDirectionInCone = function (chessA, chessB, face, cone) {
 
     var savedDirections = this.grid.directions;  // Save directions
     this.grid.setDirectionMode(this.sides);
-    var direction = this.directionBetween(tileXYA, tileXYB, false);
+    var direction = this.grid.directionBetween(tileXYA, tileXYB, false);
     this.grid.setDirectionMode(savedDirections);  // Restore directions
 
     var deltaDirection = Math.abs(direction - face);

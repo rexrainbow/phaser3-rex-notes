@@ -1,7 +1,9 @@
-var DirectionBetween = function (tileA, tileB, nearest) {
-    if (nearest === undefined) {
-        nearest = true;
+var DirectionBetween = function (chessA, chessB, round) {
+    if (round === undefined) {
+        round = true;
     }
-    return this.grid.directionBetween(tileA, tileB, nearest);
+    var tileA = this.chessToTileXYZ(chessA);
+    var tileB = this.chessToTileXYZ(chessB);
+    return this.grid.directionBetween(tileA, tileB, round);
 }
 export default DirectionBetween;

@@ -1,17 +1,17 @@
 import ObjectFactory from './board/ObjectFactory.js';
 
-import BoardFactory from './board/board/BoardFactory.js';
-import HexagonFactory from './board/grid/hexagon/HexagonFactory.js';
-import QuadFactory from './board/grid/quad/QuadFactory.js';
-import ShapeFactory from './board/shape/ShapeFactory.js';
+import BoardFactory from './board/board/Factory.js';
+import HexagonFactory from './board/grid/hexagon/Factory.js';
+import QuadFactory from './board/grid/quad/Factory.js';
+import ShapeFactory from './board/shape/Factory.js';
 
-import MoveToFactory from './board/moveto/MoveToFactory.js';
-import MatchFactory from './board/match/MatchFactory.js';
-import PathFinderFactory from './board/pathfinder/PathFinderFactory.js';
-import FieldOfViewFactory from './board/fieldofview/FieldOfViewFactory.js';
-import MonopolyFactory from './board/monopoly/MonopolyFactory.js';
+import MoveToFactory from './board/moveto/Factory.js';
+import MatchFactory from './board/match/Factory.js';
+import PathFinderFactory from './board/pathfinder/Factory.js';
+import FieldOfViewFactory from './board/fieldofview/Factory.js';
+import MonopolyFactory from './board/monopoly/Factory.js';
 
-import MiniBoardFactory from './board/miniboard/MiniBoardFactory.js';
+import MiniBoardFactory from './board/miniboard/Factory.js';
 
 import HexagonMap from './board/hexagonmap/index.js';
 

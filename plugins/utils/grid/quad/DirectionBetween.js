@@ -1,9 +1,9 @@
 import GetAngle from '../../math/angle/Between.js';
 import RadToDegree from '../../math/RadToDeg.js';
 
-var DirectionBetween = function (tileA, tileB, nearest) {
-    if (nearest === undefined) {
-        nearest = true;
+var DirectionBetween = function (tileA, tileB, round) {
+    if (round === undefined) {
+        round = true;
     }
 
     var direction;
@@ -20,7 +20,7 @@ var DirectionBetween = function (tileA, tileB, nearest) {
                     angle += 360;
                 }
                 direction = angle / 90;
-                if (nearest) {
+                if (round) {
                     direction = Math.round(direction);
                 }
             } else { // this.directions === 8
@@ -36,7 +36,7 @@ var DirectionBetween = function (tileA, tileB, nearest) {
                         angle += 360;
                     }
                     var steps = angle / 45;
-                    if (nearest) {
+                    if (round) {
                         steps = Math.round(steps);
                     }
 

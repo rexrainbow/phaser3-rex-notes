@@ -14,6 +14,8 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
+        var print = this.add.text(0, 0, '');
+
         var gridGraphics = this.add.graphics({
             lineStyle: {
                 width: 1,
@@ -22,18 +24,9 @@ class Demo extends Phaser.Scene {
             }
         });
 
-        var graphics = this.add.graphics({
-            lineStyle: {
-                width: 3,
-                color: 0xff0000,
-                alpha: 1
-            }
-        })
-            .setDepth(2);
-
         var board = this.rexBoard.add.board({
-            grid: getHexagonGrid(this),
-            // grid: getQuadGrid(this),
+            // grid: getHexagonGrid(this),
+            grid: getQuadGrid(this),
             width: 10,
             height: 10
         })
@@ -42,30 +35,21 @@ class Demo extends Phaser.Scene {
                 gridGraphics.strokePoints(points, true);
             }, this);
 
-        var triangle = Phaser.Geom.Triangle.BuildEquilateral(0, 0, 240);
-        this.input
-            .on('pointerdown', function (pointer) {
-                Phaser.Actions.Call(board.tileZToChessArray(0), function (gameObject) {
-                    gameObject.destroy();
-                });
+        var chess0 = this.rexBoard.add.shape(board, 5, 5, 0, COLOR_LIGHT).setScale(0.7);
+        var chess1 = this.rexBoard.add.shape(board, 6, 5, 0, COLOR_PRIMARY).setScale(0.7);
+        print.text = board.directionBetween(chess0, chess1, false);
 
-                Phaser.Geom.Triangle.CenterOn(triangle, pointer.x, pointer.y);
-                var polygon = new Phaser.Geom.Polygon([
-                    triangle.x1, triangle.y1,
-                    triangle.x2, triangle.y2,
-                    triangle.x3, triangle.y3,
-                ])
-                var tileXYArray = board.polygonToTileXYArray(polygon);
-                var tileXY;
-                for (var i = 0, cnt = tileXYArray.length; i < cnt; i++) {
-                    tileXY = tileXYArray[i];
-                    this.rexBoard.add.shape(board, tileXY.x, tileXY.y, 0, COLOR_LIGHT).setScale(0.7);
+        board
+            .setInteractive()
+            .on('tiledown', function (pointer, tileXY) {
+                if (board.contains(tileXY.x, tileXY.y, 0)) {
+                    return;
                 }
 
-                graphics
-                    .clear()
-                    .strokePoints(polygon.points, true);
+                board.addChess(chess1, tileXY.x, tileXY.y, 0);
+                print.text = board.directionBetween(chess0, chess1, false);
             }, this)
+
     }
 
     update() { }
@@ -73,11 +57,12 @@ class Demo extends Phaser.Scene {
 
 var getQuadGrid = function (scene) {
     var grid = scene.rexBoard.add.quadGrid({
-        x: 400,
+        x: 100,
         y: 100,
-        cellWidth: 100,
+        cellWidth: 50,
         cellHeight: 50,
-        type: 1
+        type: 0,
+        dir: 8,
     });
     return grid;
 }
@@ -88,9 +73,8 @@ var getHexagonGrid = function (scene) {
     var grid = scene.rexBoard.add.hexagonGrid({
         x: 100,
         y: 100,
-        size: 30,
-        //cellWidth: 36,
-        //cellHeight: 36,
+        cellWidth: 36,
+        cellHeight: 36,
         staggeraxis: staggeraxis,
         staggerindex: staggerindex
     })

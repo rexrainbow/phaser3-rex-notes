@@ -434,21 +434,20 @@ var isInCone = board.isAngleInCone(chessA, chessB, face, cone);
 ### Direction between 2 tiles
 
 ```javascript
-var direction = board.directionBetween(srcTileXY, targetTileXY);
+var direction = board.directionBetween(chessA, chessB);
 ```
 
-- `srcTileXY` : Tile position `{x, y}` of source.
-- `targetTileXY` : Tile position `{x, y}` of target.
+- `chessA`, `chessB` : A chess object, or tile position `{x,y}`.
 - `direction` : Integer number.
-    - [Quad grid](board-quadgrid.md#directions) : `0`, `1`, `2`, `3`.
+    - [Quad grid](board-quadgrid.md#directions) : `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`.
     - [Hexagon grid](board-hexagongrid.md#directions) : `0`, `1`, `2`, `3`, `4`, `5`.
 
 ```javascript
-var direction = board.directionBetween(srcTileXY, targetTileXY, false);
+var direction = board.directionBetween(chessA, chessB, false);
 ```
 
 - `direction` : Integer number, or float number.
-    - [Quad grid](board-quadgrid.md#directions) : `0`, `1`, `2`, `3`, or float number between 0~1, 1~2, 2~3, 3~4.
+    - [Quad grid](board-quadgrid.md#directions) : `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`, or float number between 0~1, 1~2, 2~3, 3~4, 4~5, 5~6, 6~7.
     - [Hexagon grid](board-hexagongrid.md#directions) : `0`, `1`, `2`, `3`, `4`, `5`, or float number between 0~1, 1~2, 2~3, 3~4, 4~5, 5~6.
 
 ### Is direction in cone
