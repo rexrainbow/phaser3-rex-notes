@@ -1,4 +1,7 @@
 var RemoveChess = function (gameObject, tileX, tileY, tileZ, destroy, fromBoardRemove) {
+    if (destroy === undefined) {
+        destroy = false;
+    }
     if (fromBoardRemove === undefined) {
         fromBoardRemove = false;
     }
