@@ -1,8 +1,10 @@
 import EdgeMethods from './EdgeMethods.js';
 import VertexMethods from './VertexMethods.js';
+import GetObjUID from '../obj/GetObjUID.js';
 
 class Graph {
-    constructor() {
+    constructor(scene) {
+        this.scene = scene;
         this.vertices = {}; // {vertex: {edge:true, ...} }
         this.edges = {}; // {edge: {vA:vertex, vB:vertex, dir:1,2,3} }
     }
@@ -23,6 +25,10 @@ class Graph {
     clear(destroy) {
         this.removeAllVertices(destroy);
         return this;
+    }
+
+    getObjUID(gameObject) {
+        return GetObjUID(gameObject);
     }
 }
 

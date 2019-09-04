@@ -1,4 +1,3 @@
-import GetObjUID from '../obj/GetObjUID.js';
 import UidToObj from '../obj/UidToObj.js';
 import GetGraphData from '../obj/GetGraphData.js';
 import DistanceBetween from '../../utils/math/distance/DistanceBetween.js';
@@ -14,14 +13,22 @@ const DIRMODE = {
 
 export default {
     addEdge(edgeGO, vAGO, vBGO, dir) {
-        var edgeUid = GetObjUID(edgeGO);
-        var edge = this.GetEdge(edgeUid, true);
-        edge.dir = dir;
-        edge.vA = GetObjUID(vAGO);
-        edge.vB = GetObjUID(vBGO);
+        if (dir === undefined) {
+            dir = 3;
+        }
 
-        var vA = this.GetVertex(vAGO, true);
-        var vB = this.GetVertex(vBGO, true);
+        // Configure edge
+        var edgeUid = this.getObjUID(edgeGO);
+        var edge = this.getEdge(edgeUid, true);
+        edge.dir = dir;
+        edge.vA = this.getObjUID(vAGO);
+        edge.vB = this.getObjUID(vBGO);
+        GetGraphData(edgeGO).setGraph(this);
+
+        // Configure vertice
+        this.addVertex(vAGO).addVertex(vBGO);
+        var vA = this.getVertex(vAGO, true);
+        var vB = this.getVertex(vBGO, true);
         if (typeof (dir) === 'string') {
             dir = DIRMODE(dir);
         }
@@ -39,7 +46,7 @@ export default {
             destroy = false;
         }
 
-        var uid = GetObjUID(gameObejct);
+        var uid = this.getObjUID(gameObejct);
         if (!this.edges.hasOwnProperty(uid)) {
             return this;
         }
@@ -60,7 +67,7 @@ export default {
         }
 
         // uid or game object
-        var uid = GetObjUID(gameObejct);
+        var uid = this.getObjUID(gameObejct);
         if (createIfNotExisted && !this.edges.hasOwnProperty(uid)) {
             this.edges[uid] = {};
         }
@@ -89,7 +96,7 @@ export default {
 
     isEdge(gameObejct) {
         // uid or game object
-        var uid = GetObjUID(gameObejct);
+        var uid = this.getObjUID(gameObejct);
         return this.edges.hasOwnProperty(uid);
     },
 

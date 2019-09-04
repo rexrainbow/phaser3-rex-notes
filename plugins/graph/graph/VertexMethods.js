@@ -1,9 +1,21 @@
-import GetObjUID from '../obj/GetObjUID.js';
 import UidToObj from '../obj/UidToObj.js';
+import GetGraphData from '../obj/GetGraphData.js';
 
 export default {
     addVertex(gameObejct) {
+        if (this.isVertex(gameObejct)) {
+            return this;
+        }
+
         this.getVertex(gameObejct, true);
+        GetGraphData(gameObejct).setGraph(this);
+        return this;
+    },
+
+    addVertices(gameObjects) {
+        for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+            this.addVertex(gameObjects[i]);
+        }
         return this;
     },
 
@@ -15,7 +27,7 @@ export default {
             removeEdge = true;
         }
 
-        var uid = GetObjUID(gameObejct);
+        var uid = this.getObjUID(gameObejct);
         if (!this.vertices.hasOwnProperty(uid)) {
             return this;
         }
@@ -47,7 +59,7 @@ export default {
 
     isVertex(gameObejct) {
         // uid or game object
-        var uid = GetObjUID(gameObejct);
+        var uid = this.getObjUID(gameObejct);
         return this.vertices.hasOwnProperty(uid);
     },
 
@@ -57,7 +69,7 @@ export default {
         }
 
         // uid or game object
-        var uid = GetObjUID(gameObejct);
+        var uid = this.getObjUID(gameObejct);
         if (createIfNotExisted && !this.vertices.hasOwnProperty(uid)) {
             this.vertices[uid] = {};
         }
@@ -71,7 +83,7 @@ export default {
             return undefined;
         }
 
-        var vertexUid = GetObjUID(vertexGameObject);
+        var vertexUid = this.getObjUID(vertexGameObject);
         var oppositeVertexUid;
         if (vertexUid === edge.vA) {
             oppositeVertexUid = edge.vB;
@@ -120,6 +132,19 @@ export default {
             }
         }
         return out;
+    },
+
+    areNeighborVertices(vertexGOA, vertexGOB) {
+        var vertexA = this.getVertex(vertexGOA),
+            vertexB = this.getVertex(vertexGOB);
+        if (vertexA && vertexB) {
+            for (var edgeUid in vertexA) {
+                if (vertexB[edgeUid]) {
+                    return true;
+                }
+            }
+        }
+        return false;
     },
 
     getAllVertices(out) {
