@@ -5,30 +5,41 @@ const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const Circle = Phaser.Geom.Circle;
 const CircleToCircle = Phaser.Geom.Intersects.CircleToCircle;
 
-var RandomPlace = function (gameObjects, options) {
-    if (gameObjects.length === 0) {
-        return gameObjects;
+var RandomPlace = function (items, options) {
+    if (items.length === 0) {
+        return items;
     }
 
     var getPositionCallback = GetValue(options, 'getPositionCallback', undefined);
     if (getPositionCallback === undefined) {
         var area = GetValue(options, 'area', undefined);
         if (area === undefined) {
-            var scene = gameObjects[0].scene;
-            area = GetDefaultBounds(scene);
+            var item0 = items[0], gameObject;
+            if (IsPlainObject(item0)) {
+                gameObject = item0.gameObject;
+            } else {
+                gameObject = item0;
+            }
+            area = GetDefaultBounds(gameObject.scene);
         }
         getPositionCallback = area.getRandomPoint.bind(area);
     }
     var defaultRadius = GetValue(options, 'radius', 0);
 
-    var gameObject, radius, collisionCircles = [];
-    for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
-        gameObject = gameObjects[i];
-        if (IsPlainObject(gameObject)) {
-            radius = GetValue(gameObject, 'radius', defaultRadius);
-            gameObject = GetValue(gameObject, 'gameObject', undefined);
+    var item, gameObject, radius;
+    var collisionCircles = [];
+    for (var i = 0, cnt = items.length; i < cnt; i++) {
+        item = items[i];
+        if (IsPlainObject(item)) {
+            gameObject = GetValue(item, 'gameObject', undefined);
+            radius = GetValue(item, 'radius', defaultRadius);
         } else {
+            gameObject = item;
             radius = defaultRadius;
+        }
+
+        if (!gameObject) {
+            continue;
         }
 
         if (radius <= 0) {
@@ -52,7 +63,7 @@ var RandomPlace = function (gameObjects, options) {
         }
     }
 
-    return gameObjects;
+    return items;
 }
 
 export default RandomPlace;
