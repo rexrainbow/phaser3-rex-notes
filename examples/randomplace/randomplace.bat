@@ -1,5 +1,5 @@
 @echo off
-set main=./examples/random-place/random-place.js
+set main=./examples/randomplace/randomplace.js
 cd ..
 cd ..
 webpack --config webpack.config.js

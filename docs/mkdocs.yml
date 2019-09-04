@@ -82,6 +82,7 @@ nav:
         - Actions:
             - Group actions: groupactions.md
             - Quad/Hexagon grid align: gridalign.md    
+            - Random place: randomplace.md
         - Move to: moveto.md
         - Rotate to: rotateto.md
         - Flash: flash.md

@@ -5,39 +5,37 @@ const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const Circle = Phaser.Geom.Circle;
 const CircleToCircle = Phaser.Geom.Intersects.CircleToCircle;
 
-var RandomPlace = function (items, options) {
-    if (items.length === 0) {
-        return;
+var RandomPlace = function (gameObjects, options) {
+    if (gameObjects.length === 0) {
+        return gameObjects;
     }
 
-    var getPositionCallback = GetValue(options, 'getPosition', undefined);
+    var getPositionCallback = GetValue(options, 'getPositionCallback', undefined);
     if (getPositionCallback === undefined) {
         var area = GetValue(options, 'area', undefined);
         if (area === undefined) {
-            var scene = items[0].scene;
+            var scene = gameObjects[0].scene;
             area = GetDefaultBounds(scene);
         }
         getPositionCallback = area.getRandomPoint.bind(area);
     }
     var defaultRadius = GetValue(options, 'radius', 0);
 
-    var item;
-    var radius, collisionCircles = [];
-    for (var i = 0, cnt = items.length; i < cnt; i++) {
-        item = items[i];
-        if (IsPlainObject(item)) {
-            radius = GetValue(item, 'radius', defaultRadius);
-            item = GetValue(item, 'radius', undefined);
+    var gameObject, radius, collisionCircles = [];
+    for (var i = 0, cnt = gameObjects.length; i < cnt; i++) {
+        gameObject = gameObjects[i];
+        if (IsPlainObject(gameObject)) {
+            radius = GetValue(gameObject, 'radius', defaultRadius);
+            gameObject = GetValue(gameObject, 'gameObject', undefined);
         } else {
             radius = defaultRadius;
         }
 
         if (radius <= 0) {
-            getPositionCallback(item);
+            getPositionCallback(gameObject);
         } else {
             var circle = new Circle(0, 0, radius);
             var isOverlapping;
-
             do {
                 getPositionCallback(circle);
                 isOverlapping = false;
@@ -50,11 +48,11 @@ var RandomPlace = function (items, options) {
             } while (isOverlapping)
 
             collisionCircles.push(circle);
-            item.setPosition(circle.x, circle.y);
+            gameObject.setPosition(circle.x, circle.y);
         }
     }
 
-    return items;
+    return gameObjects;
 }
 
 export default RandomPlace;
