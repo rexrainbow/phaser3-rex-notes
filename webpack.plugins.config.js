@@ -39,6 +39,7 @@ module.exports = {
 
         // actions                    
         'gridalignplugin': './plugins/gridalign-plugin.js',
+        'randomplaceplugin': './plugins/randomplace-plugin.js',
 
         // input
         'touchstateplugin': './plugins/touchstate-plugin.js',

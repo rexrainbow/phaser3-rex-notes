@@ -14,12 +14,12 @@ class GridAlignPlugin extends Phaser.Plugins.BasePlugin {
         eventEmitter.once('destroy', this.destroy, this);
     }
 
-    hexagon(items, config) {
-        return HexagonGridAlign(items, config);
+    hexagon(items, options) {
+        return HexagonGridAlign(items, options);
     }
 
-    quad(items, config) {
-        return QuadGridAlign(items, config);
+    quad(items, options) {
+        return QuadGridAlign(items, options);
     }
 }
 

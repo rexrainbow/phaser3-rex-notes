@@ -5,8 +5,6 @@ class Demo extends Phaser.Scene {
         super({
             key: 'examples'
         })
-        this.clock;
-        this.text;
     }
 
     preload() {}
