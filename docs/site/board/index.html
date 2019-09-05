@@ -1448,6 +1448,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../randomplace/" title="Random place" class="md-nav__link">
+      Random place
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -5694,24 +5706,23 @@
 <li><code>face</code>, <code>cone</code> : Range of compared angle is between <code>face - (cone/2)</code> to <code>face + (cone/2)</code>. Angle in radian.</li>
 </ul>
 <h3 id="direction-between-2-tiles">Direction between 2 tiles<a class="headerlink" href="#direction-between-2-tiles" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">direction</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">directionBetween</span><span class="p">(</span><span class="nx">srcTileXY</span><span class="p">,</span> <span class="nx">targetTileXY</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">direction</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">directionBetween</span><span class="p">(</span><span class="nx">chessA</span><span class="p">,</span> <span class="nx">chessB</span><span class="p">);</span>
 </pre></div>
 
 <ul>
-<li><code>srcTileXY</code> : Tile position <code>{x, y}</code> of source.</li>
-<li><code>targetTileXY</code> : Tile position <code>{x, y}</code> of target.</li>
+<li><code>chessA</code>, <code>chessB</code> : A chess object, or tile position <code>{x,y}</code>.</li>
 <li><code>direction</code> : Integer number.<ul>
-<li><a href="../board-quadgrid/#directions">Quad grid</a> : <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>.</li>
+<li><a href="../board-quadgrid/#directions">Quad grid</a> : <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>.</li>
 <li><a href="../board-hexagongrid/#directions">Hexagon grid</a> : <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>.</li>
 </ul>
 </li>
 </ul>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">direction</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">directionBetween</span><span class="p">(</span><span class="nx">srcTileXY</span><span class="p">,</span> <span class="nx">targetTileXY</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">direction</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">directionBetween</span><span class="p">(</span><span class="nx">chessA</span><span class="p">,</span> <span class="nx">chessB</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
 </pre></div>
 
 <ul>
 <li><code>direction</code> : Integer number, or float number.<ul>
-<li><a href="../board-quadgrid/#directions">Quad grid</a> : <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, or float number between 0~1, 1~2, 2~3, 3~4.</li>
+<li><a href="../board-quadgrid/#directions">Quad grid</a> : <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, <code>6</code>, <code>7</code>, or float number between 0~1, 1~2, 2~3, 3~4, 4~5, 5~6, 6~7.</li>
 <li><a href="../board-hexagongrid/#directions">Hexagon grid</a> : <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, or float number between 0~1, 1~2, 2~3, 3~4, 4~5, 5~6.</li>
 </ul>
 </li>
