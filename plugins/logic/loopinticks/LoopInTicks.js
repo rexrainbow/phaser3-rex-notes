@@ -27,7 +27,7 @@ class LoopInTicks extends TickTask {
 
     boot() {
         super.boot();
-        this.scene.events.once('destroy', this.destroy, this);
+        this.scene.events.once('shutdown', this.destroy, this);
     }
 
     shutdown() {

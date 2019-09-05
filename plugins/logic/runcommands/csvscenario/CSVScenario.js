@@ -49,7 +49,7 @@ class CSVScenario {
     }
 
     boot() {
-        this.scene.events.once('destroy', this.destroy, this);
+        this.scene.events.once('shutdown', this.destroy, this);
     }
 
     shutdown() {

@@ -11,7 +11,7 @@ import IsVertex from './vertex/IsVertex.js';
 import AddVertex from './vertex/AddVertex.js';
 import AddVertices from './vertex/AddVertices.js';
 import RemoveVertex from './vertex/RemoveVertex.js';
-import RemoveAllVertices from './vertex/RemoveVertex.js';
+import RemoveAllVertices from './vertex/RemoveAllVertices.js';
 import GetAllVertices from './vertex/GetAllVertices.js';
 import GetVerticesOfEdge from './vertex/GetVerticesOfEdge.js';
 import GetOppositeVertex from './vertex/GetOppositeVertex.js';

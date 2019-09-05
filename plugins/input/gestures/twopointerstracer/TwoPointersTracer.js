@@ -36,7 +36,7 @@ class TwoPointersTracer {
         this.scene.input.on('pointerdown', this.onPointerDown, this);
         this.scene.input.on('pointerup', this.onPointerUp, this);
         this.scene.input.on('pointermove', this.onPointerMove, this);
-        this.scene.events.once('destroy', this.destroy, this);
+        this.scene.events.once('shutdown', this.destroy, this);
     }
 
     shutdown() {

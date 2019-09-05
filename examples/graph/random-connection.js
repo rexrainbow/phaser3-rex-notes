@@ -71,6 +71,10 @@ class Demo extends Phaser.Scene {
             }
         }
         wander.call(chess);
+
+        this.input.on('pointerdown', function () {
+            this.scene.restart();
+        }, this);
     }
 
     update() {

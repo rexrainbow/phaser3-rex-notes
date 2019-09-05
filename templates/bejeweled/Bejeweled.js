@@ -23,7 +23,7 @@ class Bejeweled extends EE {
             .onPointerMove(this.selectChess, this)
             .onPointerUp(this.cancelSelecting, this);
 
-        this.scene.events.once('destroy', this.destroy, this);
+        this.scene.events.once('shutdown', this.destroy, this);
     }
 
     shutdown() {

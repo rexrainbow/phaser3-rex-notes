@@ -33,7 +33,7 @@ class Fade {
     }
 
     boot() {
-        this.scene.events.once('destroy', this.destroy, this);
+        this.scene.events.once('shutdown', this.destroy, this);
         this.sound.once('destroy', this.destroy, this);
     }
 

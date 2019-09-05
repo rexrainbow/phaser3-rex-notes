@@ -15,7 +15,7 @@ class Graph extends EE {
 
     boot() {
         if (this.scene) {
-            this.scene.events.once('destroy', this.destroy, this);
+            this.scene.events.once('shutdown', this.destroy, this);
         }
     }
 

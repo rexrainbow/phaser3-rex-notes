@@ -11,7 +11,7 @@ class MouseWheelToUpDown extends CursorKeys {
     boot() {
         this.scene.input.on('wheel', this.onWheeling, this);
         this.scene.events.on('postupdate', this.clearAllKeysState, this);
-        this.scene.events.once('destroy', this.destroy, this);
+        this.scene.events.once('shutdown', this.destroy, this);
     }
 
     shutdown() {

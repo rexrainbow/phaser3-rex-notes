@@ -218,6 +218,7 @@ Preserve word in a scene.
         ```javascript
         scene.events.on('shutdown', function(){});
         ```
+        - **Free-up any resources that may be in use by this scene**
 - Destroy (from `scene.scene.remove()`)
     ```javascript
     scene.events.on('destroy', function(){});
