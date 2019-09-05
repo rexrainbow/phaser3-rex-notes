@@ -9,6 +9,8 @@ class Graph extends EE {
         this.scene = scene;
         this.vertices = {}; // {vertex: {edge:true, ...} }
         this.edges = {}; // {edge: {vA:vertex, vB:vertex, dir:1,2,3} }
+        this.vertexCount = 0;
+        this.edgeCount = 0;
 
         this.boot();
     }
@@ -26,6 +28,8 @@ class Graph extends EE {
         this.scene = undefined;
         this.vertices = undefined;
         this.edges = undefined;
+        this.vertexCount = 0;
+        this.edgeCount = 0;
         return this;
     }
 

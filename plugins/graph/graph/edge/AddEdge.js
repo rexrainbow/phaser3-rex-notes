@@ -24,6 +24,7 @@ var AddEdge = function (edgeGO, vAGO, vBGO, dir) {
     edge.vA = this.getObjUID(vAGO);
     edge.vB = this.getObjUID(vBGO);
     GetGraphItem(edgeGO).setGraph(this);
+    this.edgeCount++;
 
     // Configure vertice
     this.addVertex(vAGO).addVertex(vBGO);

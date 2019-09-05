@@ -7,6 +7,7 @@ var AddVertex = function (gameObejct) {
 
     this.getVertexData(gameObejct, true);
     GetGraphItem(gameObejct).setGraph(this);
+    this.vertexCount++;
     return this;
 };
 
