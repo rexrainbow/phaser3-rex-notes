@@ -1,5 +1,5 @@
 import ObjBank from './ObjBank.js';
-import GraphData from './GraphData.js';
+import GraphItemData from './GraphItemData.js';
 import IsUID from './IsUID.js';
 
 var GetGraphItem = function (gameObject) {
@@ -10,7 +10,7 @@ var GetGraphItem = function (gameObject) {
     } else {
         // game object
         if (!gameObject.hasOwnProperty('rexGraphItem')) {
-            gameObject.rexGraphItem = new GraphData(gameObject);
+            gameObject.rexGraphItem = new GraphItemData(gameObject);
         }
         return gameObject.rexGraphItem;
     }

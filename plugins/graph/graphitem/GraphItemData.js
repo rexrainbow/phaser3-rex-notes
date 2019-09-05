@@ -2,7 +2,7 @@ import ObjBank from './ObjBank.js';
 
 const uidKey = ObjBank.uidKey;
 
-class GraphData {
+class GraphItemData {
     constructor(parent, uid) {
         this.parent = parent;
         ObjBank.add(this, uid); // uid is stored in `this.$uid`
@@ -56,7 +56,7 @@ class GraphData {
 var methods = {
 };
 Object.assign(
-    GraphData.prototype,
+    GraphItemData.prototype,
     methods
 );
 
@@ -64,4 +64,4 @@ const OBJTYPE = {
     vertex: 0,
     edge: 1,
 }
-export default GraphData;
+export default GraphItemData;
