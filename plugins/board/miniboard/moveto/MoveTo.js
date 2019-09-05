@@ -50,8 +50,8 @@ class MoveTo extends TickTask {
 
     boot() {
         super.boot();
-        if (this.miniBoard.on) { // oops, bob object does not have event emitter
-            this.miniBoard.on('destroy', this.destroy, this);
+        if (this.miniBoard.once) { // oops, bob object does not have event emitter
+            this.miniBoard.once('destroy', this.destroy, this);
         }
     }
 

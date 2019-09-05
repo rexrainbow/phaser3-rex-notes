@@ -21,7 +21,7 @@ class CursorAtBound extends CursorKeys {
 
     boot() {
         this.scene.input.on('pointermove', this.onPointerMove, this);
-        this.scene.events.on('destroy', this.destroy, this);
+        this.scene.events.once('destroy', this.destroy, this);
     }
 
     shutdown() {

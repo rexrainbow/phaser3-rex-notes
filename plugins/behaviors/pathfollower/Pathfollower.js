@@ -41,8 +41,8 @@ class PathFollower {
     }
 
     boot() {
-        if (this.gameObject.on) { // oops, bob object does not have event emitter
-            this.gameObject.on('destroy', this.destroy, this);
+        if (this.gameObject.once) { // oops, bob object does not have event emitter
+            this.gameObject.once('destroy', this.destroy, this);
         }
     }
 

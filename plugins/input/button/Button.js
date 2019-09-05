@@ -30,7 +30,7 @@ class Button {
         this.gameObject.on('pointerup', this.onRelease, this);
         this.gameObject.on('pointerout', this.onPointOut, this);
         this.gameObject.on('pointermove', this.onMove, this);
-        this.gameObject.on('destroy', this.destroy, this);
+        this.gameObject.once('destroy', this.destroy, this);
     }
 
     shutdown() {

@@ -36,7 +36,7 @@ class Drag {
         gameObject.on('dragstart', this.onDragStart, this);
         gameObject.on('drag', this.onDrag, this);
         gameObject.on('dragend', this.onDragEnd, this);
-        gameObject.on('destroy', this.destroy, this);
+        gameObject.once('destroy', this.destroy, this);
     }
 
     shutdown() {

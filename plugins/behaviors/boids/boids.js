@@ -21,8 +21,9 @@ class Boids {
     }
 
     boot() {
-        var gameObject = this.gameObject;
-        gameObject.on('destroy', this.destroy, this);
+        if (this.gameObject.once) { // oops, bob object does not have event emitter
+            this.gameObject.once('destroy', this.destroy, this);
+        }
     }
 
     shutdown() {

@@ -27,7 +27,7 @@ class Board extends EE {
 
     boot() {
         if (this.scene) {
-            this.scene.events.on('destroy', this.destroy, this);
+            this.scene.events.once('destroy', this.destroy, this);
         }
     }
 
@@ -35,9 +35,6 @@ class Board extends EE {
         this.removeAllChess(true, true);
         super.shutdown();
         this.boardData.shutdown();
-        if (this.scene) {
-            this.scene.events.off('destroy', this.destroy, this);
-        }
 
         this.scene = undefined;
         this.boardData = undefined;
@@ -89,6 +86,15 @@ class Board extends EE {
 
     get chessCount() {
         return this.boardData.chessCount;
+    }
+
+    clear(destroy) {
+        if (destroy === undefined) {
+            destroy = true;
+        }
+        this.removeAllChess(destroy, true);
+        this.boardData.clear();
+        return this;
     }
 }
 

@@ -16,9 +16,7 @@ class TextEdit {
     }
 
     boot() {
-        if (this.gameObject.on) { // oops, bob object does not have event emitter
-            this.gameObject.on('destroy', this.destroy, this);
-        }
+        this.gameObject.once('destroy', this.destroy, this);
 
         return this;
     }

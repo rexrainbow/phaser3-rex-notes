@@ -5,7 +5,7 @@ class BoardData {
     constructor() {
         this.XYZToUID = {}; // [x][y][z] : uid
         this.UIDToXYZ = {}; // uid : xyz
-        this.reset();
+        this.clear();
     }
 
     shutdown() {
@@ -19,8 +19,11 @@ class BoardData {
         return this;
     }
 
-    reset() {
-        this.removeAll();
+    clear() {
+        Clear(this.UIDToXYZ);
+        Clear(this.XYZToUID);
+        this.chessCount = 0;
+        this.clearBounds();
         return this;
     }
 
@@ -29,14 +32,6 @@ class BoardData {
         this._xMin = undefined;
         this._yMax = undefined;
         this._yMin = undefined;
-        return this;
-    }
-
-    removeAll() {
-        Clear(this.UIDToXYZ);
-        Clear(this.XYZToUID);
-        this.chessCount = 0;
-        this.clearBounds();
         return this;
     }
 
