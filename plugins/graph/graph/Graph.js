@@ -1,11 +1,38 @@
+import EE from '../../utils/eventemitter/EventEmitter.js';
 import Methods from './Methods.js';
 import GetObjUID from '../graphitem/GetObjUID.js';
 
-class Graph {
+class Graph extends EE {
     constructor(scene) {
+        super();
+
         this.scene = scene;
         this.vertices = {}; // {vertex: {edge:true, ...} }
         this.edges = {}; // {edge: {vA:vertex, vB:vertex, dir:1,2,3} }
+
+        this.boot();
+    }
+
+    boot() {
+        if (this.scene) {
+            this.scene.events.once('destroy', this.destroy, this);
+        }
+    }
+
+    shutdown() {
+        this.clear();
+        super.shutdown();
+
+        this.scene = undefined;
+        this.vertices = undefined;
+        this.edges = undefined;
+        return this;
+    }
+
+    destroy() {
+        this.emit('destroy');
+        this.shutdown();
+        return this;
     }
 
     exists(gameObject) {
@@ -22,6 +49,9 @@ class Graph {
     }
 
     clear(destroy) {
+        if (destroy === undefined) {
+            destroy = true;
+        }
         this.removeAllVertices(destroy);
         return this;
     }

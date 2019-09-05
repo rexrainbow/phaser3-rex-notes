@@ -13,8 +13,8 @@ class GraphItemData {
 
     boot() {
         var type = typeof (this.parent);
-        if ((type !== 'number') && (type !== 'string') && this.parent.on) {
-            this.parent.on('destroy', this.destroy, this);
+        if ((type !== 'number') && (type !== 'string') && this.parent.once) {
+            this.parent.once('destroy', this.destroy, this);
         }
     }
 
