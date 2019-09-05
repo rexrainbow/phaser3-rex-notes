@@ -127,6 +127,9 @@ module.exports = {
         // board
         'boardplugin': './plugins/board-plugin.js',
 
+        // graph
+        'graphplugin': './plugins/graph-plugin.js',
+
         // parse
         'parse': './plugins/parse.js',
 

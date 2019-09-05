@@ -1,6 +1,5 @@
-import EdgeMethods from './EdgeMethods.js';
-import VertexMethods from './VertexMethods.js';
-import GetObjUID from '../obj/GetObjUID.js';
+import Methods from './Methods.js';
+import GetObjUID from '../graphitem/GetObjUID.js';
 
 class Graph {
     constructor(scene) {
@@ -34,8 +33,7 @@ class Graph {
 
 Object.assign(
     Graph.prototype,
-    EdgeMethods,
-    VertexMethods
+    Methods,
 );
 
 export default Graph;

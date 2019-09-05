@@ -1,4 +1,4 @@
-import GetGraphData from './GetGraphData.js';
+import GetGraphItem from './GetGraphItem.js';
 import ObjBank from './ObjBank.js';
 import IsUID from './IsUID.js';
 
@@ -9,7 +9,7 @@ var GetObjUID = function (gameObject) {
     if (IsUID(gameObject)) {
         uid = gameObject;
     } else {
-        uid = GetGraphData(gameObject)[uidKey];
+        uid = GetGraphItem(gameObject)[uidKey];
     }
     return uid;
 }
