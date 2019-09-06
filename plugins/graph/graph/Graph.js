@@ -7,7 +7,7 @@ class Graph extends EE {
         super();
 
         this.scene = scene;
-        this.vertices = {}; // {vertex: {edge:true, ...} }
+        this.vertices = {}; // {vertex: {edge:vertexUidB, ...} }
         this.edges = {}; // {edge: {vA:vertex, vB:vertex, dir:1,2,3} }
         this.vertexCount = 0;
         this.edgeCount = 0;

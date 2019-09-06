@@ -1,15 +1,17 @@
-var GetNeighborVertices = function (gameObject, out) {
+import UidToObj from '../../graphitem/UidToObj.js';
+
+var GetNeighborVertices = function (vAGO, out) {
     if (out === undefined) {
         out = [];
     }
 
-    var vertex = this.getVertexData(gameObject),
-        vGO;
+    var vertex = this.getVertexData(vAGO),
+        vBGO;
     if (vertex) {
         for (var edgeUid in vertex) {
-            vGO = this.getOppositeVertex(gameObject, edgeUid);
-            if (vGO) {
-                out.push(vGO);
+            vBGO = UidToObj(vertex[edgeUid]);
+            if (vBGO) {
+                out.push(vBGO);
             }
         }
     }

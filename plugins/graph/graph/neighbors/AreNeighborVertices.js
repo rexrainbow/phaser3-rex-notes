@@ -1,9 +1,11 @@
 var AreNeighborVertices = function (vertexGOA, vertexGOB) {
-    var vertexA = this.getVertexData(vertexGOA),
-        vertexB = this.getVertexData(vertexGOB);
-    if (vertexA && vertexB) {
+    var vUidA = this.getObjUID(vertexGOA),
+        vUidB = this.getObjUID(vertexGOB);
+    if ((vUidA != null) && (vUidB != null)) {
+        var vertexA = this.getVertexData(vertexGOA);
+        vUidB = parseInt(vUidB);
         for (var edgeUid in vertexA) {
-            if (vertexB[edgeUid]) {
+            if (vertexA[edgeUid] === vUidB) {
                 return true;
             }
         }

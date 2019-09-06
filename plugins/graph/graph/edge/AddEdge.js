@@ -34,10 +34,10 @@ var AddEdge = function (edgeGO, vAGO, vBGO, dir) {
         dir = DIRMODE(dir);
     }
     if (dir & DIRAtoB) {
-        vA[edgeUid] = true;
+        vA[edgeUid] = edge.vB;
     }
     if (dir & DIRBtoA) {
-        vB[edgeUid] = true;
+        vB[edgeUid] = edge.vA;
     }
     return this;
 }

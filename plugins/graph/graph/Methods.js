@@ -5,6 +5,7 @@ import RemoveEdge from './edge/RemoveEdge.js';
 import GetAllEdges from './edge/GetAllEdges.js';
 import GetEdgesOfVertex from './edge/GetEdgesOfVertex.js';
 import GetEdgeLength from './edge/GetEdgeLength.js';
+import IsInLoop from './edge/IsInLoop.js';
 
 import GetVertexData from './vertex/GetVertexData.js';
 import IsVertex from './vertex/IsVertex.js';
@@ -28,6 +29,7 @@ export default {
     getAllEdges: GetAllEdges,
     getEdgesOfVertex: GetEdgesOfVertex,
     getEdgeLength: GetEdgeLength,
+    isInLoop: IsInLoop,
 
     getVertexData: GetVertexData,
     isVertex: IsVertex,

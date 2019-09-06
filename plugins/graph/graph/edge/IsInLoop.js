@@ -24,7 +24,7 @@ var IsInLoop = function (vertexGO) {
                 continue;
             }
 
-            // nextVUid = this.getOppositeVertex(edgeUID, curVUid); // TODO: Fix vertices data
+            nextVUid = edges[edgeUID];
             queue.push([nextVUid, edgeUID]);
         }
     }
