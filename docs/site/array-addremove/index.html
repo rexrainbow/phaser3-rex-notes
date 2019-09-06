@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/touchevents/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/array-addremove/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Touch events - Notes of Phaser 3</title>
+        <title>Add/remove - Notes of Phaser 3</title>
       
     
     
@@ -128,7 +128,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                Touch events
+                Add/remove
               </span>
             
           
@@ -1875,12 +1875,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
     
     <label class="md-nav__link" for="nav-5">
       Input
@@ -1908,12 +1906,10 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2" type="checkbox" id="nav-5-2" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5-2" type="checkbox" id="nav-5-2">
     
     <label class="md-nav__link" for="nav-5-2">
       Touch
@@ -1929,243 +1925,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Touch events
-      </label>
-    
-    <a href="./" title="Touch events" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../touchevents/" title="Touch events" class="md-nav__link">
       Touch events
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#quick-start" title="Quick start" class="md-nav__link">
-    Quick start
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#register-interactive" title="Register interactive" class="md-nav__link">
-    Register interactive
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#disable-interactive" title="Disable interactive" class="md-nav__link">
-    Disable interactive
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#top-only" title="Top only" class="md-nav__link">
-    Top only
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#touch-events" title="Touch events" class="md-nav__link">
-    Touch events
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#dragging" title="Dragging" class="md-nav__link">
-    Dragging
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#enable-dragging" title="Enable dragging" class="md-nav__link">
-    Enable dragging
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#disable-dragging" title="Disable dragging" class="md-nav__link">
-    Disable dragging
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#dragging-events" title="Dragging events" class="md-nav__link">
-    Dragging events
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#dragging-properties" title="Dragging properties" class="md-nav__link">
-    Dragging properties
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#drop-zone" title="Drop zone" class="md-nav__link">
-    Drop zone
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#enable-drop-zone" title="Enable drop zone" class="md-nav__link">
-    Enable drop zone
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#disable-drop-zone" title="Disable drop zone" class="md-nav__link">
-    Disable drop zone
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#dropping-events" title="Dropping events" class="md-nav__link">
-    Dropping events
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#single-touch" title="Single touch" class="md-nav__link">
-    Single touch
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#pointer" title="Pointer" class="md-nav__link">
-    Pointer
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#multi-touch" title="Multi-touch" class="md-nav__link">
-    Multi-touch
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#amount-of-active-pointers" title="Amount of active pointers" class="md-nav__link">
-    Amount of active pointers
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pointers" title="Pointers" class="md-nav__link">
-    Pointers
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pointer_1" title="Pointer" class="md-nav__link">
-    Pointer
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#input-object" title="Input object" class="md-nav__link">
-    Input object
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#smooth" title="Smooth" class="md-nav__link">
-    Smooth
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#debug" title="Debug" class="md-nav__link">
-    Debug
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -3095,10 +2859,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10" checked>
     
     <label class="md-nav__link" for="nav-10">
       Data
@@ -3186,10 +2952,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10-3" type="checkbox" id="nav-10-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10-3" type="checkbox" id="nav-10-3" checked>
     
     <label class="md-nav__link" for="nav-10-3">
       Array
@@ -3205,11 +2973,107 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../array-addremove/" title="Add/remove" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Add/remove
+      </label>
+    
+    <a href="./" title="Add/remove" class="md-nav__link md-nav__link--active">
       Add/remove
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-item" title="Add item" class="md-nav__link">
+    Add item
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#insert-item-at" title="Insert item at" class="md-nav__link">
+    Insert item at
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-item" title="Remove item" class="md-nav__link">
+    Remove item
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-item-at" title="Remove item at" class="md-nav__link">
+    Remove item at
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-items-between" title="Remove items between" class="md-nav__link">
+    Remove items between
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remove-random-item" title="Remove random item" class="md-nav__link">
+    Remove random item
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#replace-item" title="Replace item" class="md-nav__link">
+    Replace item
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -4745,186 +4609,50 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#quick-start" title="Quick start" class="md-nav__link">
-    Quick start
+  <a href="#add-item" title="Add item" class="md-nav__link">
+    Add item
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#register-interactive" title="Register interactive" class="md-nav__link">
-    Register interactive
+  <a href="#insert-item-at" title="Insert item at" class="md-nav__link">
+    Insert item at
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#disable-interactive" title="Disable interactive" class="md-nav__link">
-    Disable interactive
+  <a href="#remove-item" title="Remove item" class="md-nav__link">
+    Remove item
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#top-only" title="Top only" class="md-nav__link">
-    Top only
+  <a href="#remove-item-at" title="Remove item at" class="md-nav__link">
+    Remove item at
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#touch-events" title="Touch events" class="md-nav__link">
-    Touch events
+  <a href="#remove-items-between" title="Remove items between" class="md-nav__link">
+    Remove items between
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#dragging" title="Dragging" class="md-nav__link">
-    Dragging
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#enable-dragging" title="Enable dragging" class="md-nav__link">
-    Enable dragging
+  <a href="#remove-random-item" title="Remove random item" class="md-nav__link">
+    Remove random item
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#disable-dragging" title="Disable dragging" class="md-nav__link">
-    Disable dragging
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#dragging-events" title="Dragging events" class="md-nav__link">
-    Dragging events
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#dragging-properties" title="Dragging properties" class="md-nav__link">
-    Dragging properties
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#drop-zone" title="Drop zone" class="md-nav__link">
-    Drop zone
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#enable-drop-zone" title="Enable drop zone" class="md-nav__link">
-    Enable drop zone
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#disable-drop-zone" title="Disable drop zone" class="md-nav__link">
-    Disable drop zone
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#dropping-events" title="Dropping events" class="md-nav__link">
-    Dropping events
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#single-touch" title="Single touch" class="md-nav__link">
-    Single touch
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#pointer" title="Pointer" class="md-nav__link">
-    Pointer
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#multi-touch" title="Multi-touch" class="md-nav__link">
-    Multi-touch
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#amount-of-active-pointers" title="Amount of active pointers" class="md-nav__link">
-    Amount of active pointers
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pointers" title="Pointers" class="md-nav__link">
-    Pointers
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pointer_1" title="Pointer" class="md-nav__link">
-    Pointer
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#input-object" title="Input object" class="md-nav__link">
-    Input object
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#smooth" title="Smooth" class="md-nav__link">
-    Smooth
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#debug" title="Debug" class="md-nav__link">
-    Debug
+  <a href="#replace-item" title="Replace item" class="md-nav__link">
+    Replace item
   </a>
   
 </li>
@@ -4950,458 +4678,85 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/touchevents.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/array-addremove.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Touch events</h1>
+                  <h1>Add/remove</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Built-in touch/mouse events of phaser.</p>
+<p>Add/insert/remove item(s) of an array, built-in methods of phaser.</p>
 <ul>
 <li>Author: Richard Davey</li>
 </ul>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<h3 id="quick-start">Quick start<a class="headerlink" href="#quick-start" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Is touching
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">pointer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">activePointer</span><span class="p">;</span>
-<span class="k">if</span> <span class="p">(</span><span class="nx">pointer</span><span class="p">.</span><span class="nx">isDown</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">touchX</span> <span class="o">=</span> <span class="nx">pointer</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
-    <span class="kd">var</span> <span class="nx">touchY</span> <span class="o">=</span> <span class="nx">pointer</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
-    <span class="c1">// ...</span>
-<span class="p">}</span>
-</pre></div></li>
-<li>On any touching start
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerdown&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">){</span>
-    <span class="kd">var</span> <span class="nx">touchX</span> <span class="o">=</span> <span class="nx">pointer</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
-    <span class="kd">var</span> <span class="nx">touchY</span> <span class="o">=</span> <span class="nx">pointer</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
-    <span class="c1">// ...</span>
- <span class="p">});</span>
-</pre></div></li>
-<li>On any touching end
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerup&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">){</span>
-    <span class="kd">var</span> <span class="nx">touchX</span> <span class="o">=</span> <span class="nx">pointer</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
-    <span class="kd">var</span> <span class="nx">touchY</span> <span class="o">=</span> <span class="nx">pointer</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
-    <span class="c1">// ...</span>
- <span class="p">});</span>
-</pre></div></li>
-<li>On touch game object start
-    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setInteractive</span><span class="p">().</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerdown&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">localX</span><span class="p">,</span> <span class="nx">localY</span><span class="p">,</span> <span class="nx">event</span><span class="p">){</span>
-    <span class="c1">// ...</span>
-<span class="p">});</span>
-</pre></div></li>
-<li>On touch game object end
-    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setInteractive</span><span class="p">().</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerup&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">localX</span><span class="p">,</span> <span class="nx">localY</span><span class="p">,</span> <span class="nx">event</span><span class="p">){</span>
-    <span class="c1">// ...</span>
-<span class="p">})</span>
-</pre></div></li>
-</ul>
-<p>Reference : <a href="./#properties-of-point">Properties of point</a></p>
-<h3 id="register-interactive">Register interactive<a class="headerlink" href="#register-interactive" title="Permanent link">&para;</a></h3>
-<p>Call <code>gameObject.setInteractive(...)</code> to register touch input of Game Object before listening touching events.</p>
-<ul>
-<li>Set hit area from width &amp; height (rectangle) of the texture
-    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setInteractive</span><span class="p">();</span>
-</pre></div></li>
-<li>Set hit area from game object
-    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setInteractive</span><span class="p">(</span><span class="nx">shape</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
-</pre></div><ul>
-<li><a href="../geom-circle/">Circle</a><ul>
-<li>shape : <code>new Phaser.Geom.Circle(x, y, radius)</code></li>
-<li>callback : <code>Phaser.Geom.Circle.Contains</code></li>
-</ul>
-</li>
-<li><a href="../geom-ellipse/">Ellipse</a><ul>
-<li>shape : <code>new Phaser.Geom.Ellipse(x, y, width, height)</code></li>
-<li>callback : <code>Phaser.Geom.Ellipse.Contains</code></li>
-</ul>
-</li>
-<li><a href="../geom-rectangle/">Rectangle</a><ul>
-<li>shape : <code>new Phaser.Geom.Rectangle(x, y, width, height)</code></li>
-<li>callback : <code>Phaser.Geom.Rectangle.Contains</code></li>
-</ul>
-</li>
-<li><a href="../geom-triangle/">Triangle</a><ul>
-<li>shape : <code>new Phaser.Geom.Triangle(x1, y1, x2, y2, x3, y3)</code></li>
-<li>callback : <code>Phaser.Geom.Triangle.Contains</code></li>
-</ul>
-</li>
-<li><a href="../geom-polygon/">Polygon</a><ul>
-<li>shape : <code>new Phaser.Geom.Polygon(points)</code></li>
-<li>callback : <code>Phaser.Geom.Polygon.Contains</code></li>
-</ul>
-</li>
-<li><a href="../geom-hexagon/">Hexagon</a><ul>
-<li>shape : <code>new Phaser.Geom.rexHexagon(x, y, size, type)</code></li>
-<li>callback : <code>Phaser.Geom.Polygon.Contains</code></li>
-</ul>
-</li>
-<li><a href="../geom-rhombus/">Rhombus</a><ul>
-<li>shape : <code>new Phaser.Geom.rexRhombus(x, y, width, height)</code></li>
-<li>callback : <code>Phaser.Geom.Polygon.Contains</code></li>
-</ul>
-</li>
-<li>Note: <code>x</code>, <code>y</code> relate to the <strong>top-left</strong> of the gameObject.</li>
-</ul>
-</li>
-<li>Set hit area from input plugin
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">setHitArea</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">shape</span><span class="p">,</span> <span class="nx">callback</span><span class="p">);</span>
-</pre></div><ul>
-<li>Circle
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">setHitAreaCircle</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">);</span>
-<span class="c1">// scene.input.setHitAreaCircle(gameObjects, x, y, radius, callback); // callback = Circle.Contains</span>
-</pre></div></li>
-<li>Ellipse
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">setHitAreaEllipse</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
-<span class="c1">// scene.input.setHitAreaEllipse(gameObjects, x, y, width, height, callback); // callback = Ellipse.Contains</span>
-</pre></div></li>
-<li>Rectangle
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">setHitAreaRectangle</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
-<span class="c1">// scene.input.setHitAreaRectangle(gameObjects, x, y, width, height, callback); // callback = Rectangle.Contains</span>
-</pre></div></li>
-<li>Triangle
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">setHitAreaTriangle</span><span class="p">(</span><span class="nx">gameObjects</span><span class="p">,</span> <span class="nx">x1</span><span class="p">,</span> <span class="nx">y1</span><span class="p">,</span> <span class="nx">x2</span><span class="p">,</span> <span class="nx">y2</span><span class="p">,</span> <span class="nx">x3</span><span class="p">,</span> <span class="nx">y3</span><span class="p">);</span>
-<span class="c1">// scene.input.setHitAreaTriangle(gameObjects, x1, y1, x2, y2, x3, y3, callback); // callback = Triangle.Contains</span>
-</pre></div></li>
-<li>Note: <code>x</code>, <code>y</code> relate to the <strong>top-left</strong> of the gameObject.</li>
-</ul>
-</li>
-<li>Set interactive configuration
-    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setInteractive</span><span class="p">({</span>
-    <span class="nx">hitArea</span><span class="o">:</span> <span class="nx">shape</span><span class="p">,</span>
-    <span class="nx">hitAreaCallback</span><span class="o">:</span> <span class="nx">callback</span><span class="p">,</span>
-    <span class="nx">pixelPerfect</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
-    <span class="nx">alphaTolerance</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="nx">draggable</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="nx">dropZone</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="nx">cursor</span><span class="o">:</span> <span class="nx">CSSString</span><span class="p">,</span>
-    <span class="nx">useHandCursor</span><span class="o">:</span> <span class="kc">true</span>
-<span class="p">});</span>
-</pre></div><ul>
-<li>Hit area<ul>
-<li>shape</li>
-<li>Pixel alpha<ul>
-<li><code>pixelPerfect</code> : <code>true</code></li>
-<li><code>alphaTolerance</code> : <code>1</code> (0-255)</li>
-</ul>
-</li>
-<li>Custom hit-testing function<ul>
-<li><code>hitAreaCallback</code>
-    <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">shape</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">hit</span><span class="p">;</span>  <span class="c1">// true/false</span>
-<span class="p">}</span>
-</pre></div><ul>
-<li><code>shape</code> : Hit area object</li>
-<li><code>x</code>, <code>y</code> : Local position of texture.</li>
-<li><code>gameObject</code> : Game object.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="./#dragging">Dragging</a><ul>
-<li><code>draggable</code> : <code>true</code></li>
-</ul>
-</li>
-<li><a href="./#drop-zone">Drop zone</a><ul>
-<li><code>dropZone</code> : <code>true</code></li>
-</ul>
-</li>
-<li><a href="../cursor/">Cursor</a><ul>
-<li><code>cursor</code> : CSS string</li>
-<li><code>useHandCursor</code> : <code>true</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<div class="admonition warning">
-<p class="admonition-title">Pixel perfect hit-testing</p>
-<p>This is an expensive process, should only be enabled on Game Objects that really need it.</p>
-</div>
-<h3 id="disable-interactive">Disable interactive<a class="headerlink" href="#disable-interactive" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Disable temporary
-    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">disableInteractive</span><span class="p">();</span>
-</pre></div></li>
-<li>Remove interaction
-    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">removeInteractive</span><span class="p">();</span>
-</pre></div></li>
-</ul>
-<h3 id="top-only">Top only<a class="headerlink" href="#top-only" title="Permanent link">&para;</a></h3>
-<p>When set to <code>true</code> this Input Plugin will emulate DOM behavior by only emitting events from the top-most Game Objects in the Display List.
-If set to <code>false</code> it will emit events from all Game Objects below a Pointer, not just the top one.</p>
-<ul>
-<li>Get
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">topOnly</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">topOnly</span><span class="p">;</span>
-</pre></div></li>
-<li>Set
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">topOnly</span> <span class="o">=</span> <span class="nx">topOnly</span><span class="p">;</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">setTopOnly</span><span class="p">(</span><span class="nx">topOnly</span><span class="p">);</span>
-</pre></div></li>
-</ul>
-<h3 id="touch-events">Touch events<a class="headerlink" href="#touch-events" title="Permanent link">&para;</a></h3>
-<p>Trigger these events from top scene to bottom scene.</p>
-<ol>
-<li>Events on touched Game object
-    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerdown&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">localX</span><span class="p">,</span> <span class="nx">localY</span><span class="p">,</span> <span class="nx">event</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-<span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerup&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">localX</span><span class="p">,</span> <span class="nx">localY</span><span class="p">,</span> <span class="nx">event</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-<span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointermove&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">localX</span><span class="p">,</span> <span class="nx">localY</span><span class="p">,</span> <span class="nx">event</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-<span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerover&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">localX</span><span class="p">,</span> <span class="nx">localY</span><span class="p">,</span> <span class="nx">event</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-<span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerout&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">event</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-</pre></div><ul>
-<li>Cancel remaining touched events
-    <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">localX</span><span class="p">,</span> <span class="nx">localY</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">event</span><span class="p">.</span><span class="nx">stopPropagation</span><span class="p">();</span>
-<span class="p">}</span>
-</pre></div></li>
-</ul>
-</li>
-<li>Event on input plugin for each touched Game object
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;gameobjectdown&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">,</span> <span class="nx">event</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;gameobjectup&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">,</span> <span class="nx">event</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;gameobjectmove&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">,</span> <span class="nx">event</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;gameobjectover&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">,</span> <span class="nx">event</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;gameobjectout&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">,</span> <span class="nx">event</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-</pre></div><ul>
-<li>Cancel remaining touched events
-    <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">event</span><span class="p">.</span><span class="nx">stopPropagation</span><span class="p">();</span>
-<span class="p">}</span>
-</pre></div></li>
-</ul>
-</li>
-<li>Events to get <strong>all</strong> touched Game Objects
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerdown&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">currentlyOver</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerdownoutside&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerup&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">currentlyOver</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerupoutside&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointermove&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">currentlyOver</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerover&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">justOver</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pointerout&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">justOut</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-</pre></div></li>
-</ol>
-<h3 id="dragging">Dragging<a class="headerlink" href="#dragging" title="Permanent link">&para;</a></h3>
-<h4 id="enable-dragging">Enable dragging<a class="headerlink" href="#enable-dragging" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Enable dragging when <a href="./#register-interactive">registering interactive</a>
-    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setInteractive</span><span class="p">({</span> <span class="nx">draggable</span><span class="o">:</span> <span class="kc">true</span> <span class="p">});</span>
-</pre></div></li>
-<li>Enable dragging and add it to dragging detecting list after registered interactive
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">setDraggable</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
-</pre></div></li>
-<li>Enable dragging
-    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">draggable</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-</pre></div></li>
-</ul>
-<h4 id="disable-dragging">Disable dragging<a class="headerlink" href="#disable-dragging" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Remove Game Object from dragging detecting list
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">setDraggable</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-</pre></div></li>
-<li>Disable dragging but keep it in dragging detecting list
-    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">draggable</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-</pre></div></li>
-</ul>
-<h4 id="dragging-events">Dragging events<a class="headerlink" href="#dragging-events" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;dragstart&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">dragX</span><span class="p">,</span> <span class="nx">dragY</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-<span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;drag&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">dragX</span><span class="p">,</span> <span class="nx">dragY</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-<span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;dragend&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">dragX</span><span class="p">,</span> <span class="nx">dragY</span><span class="p">,</span> <span class="nx">dropped</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
+<h3 id="add-item">Add item<a class="headerlink" href="#add-item" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Utils</span><span class="p">.</span><span class="nb">Array</span><span class="p">.</span><span class="nx">Add</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="nx">item</span><span class="p">);</span>
+<span class="c1">// Phaser.Utils.Array.Add(arr, item, limit, callback, context);</span>
 </pre></div>
 
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;dragstart&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;drag&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">,</span> <span class="nx">dragX</span><span class="p">,</span> <span class="nx">dragY</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;dragend&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">,</span> <span class="nx">dropped</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-</pre></div>
-
-<h4 id="dragging-properties">Dragging properties<a class="headerlink" href="#dragging-properties" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">dragDistanceThreshold</span> <span class="o">=</span> <span class="mi">16</span><span class="p">;</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">dragTimeThreshold</span> <span class="o">=</span> <span class="mi">500</span><span class="p">;</span>
-</pre></div>
-
-<h3 id="drop-zone">Drop zone<a class="headerlink" href="#drop-zone" title="Permanent link">&para;</a></h3>
-<h4 id="enable-drop-zone">Enable drop zone<a class="headerlink" href="#enable-drop-zone" title="Permanent link">&para;</a></h4>
 <ul>
-<li>Enable dropping when <a href="./#register-interactive">registering interactive</a>
-    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setInteractive</span><span class="p">({</span> <span class="nx">dropZone</span><span class="o">:</span> <span class="kc">true</span> <span class="p">});</span>
-</pre></div></li>
-<li>Enable dropping after registered interactive
-    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">dropZone</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-</pre></div></li>
+<li><code>item</code> : An item, or an array of items.</li>
+<li><code>limit</code> : Optional limit which caps the size of the array.</li>
+<li><code>callback</code> : A callback to be invoked for each item successfully added to the array.</li>
+<li><code>context</code> : The context in which the callback is invoked.</li>
 </ul>
-<h4 id="disable-drop-zone">Disable drop zone<a class="headerlink" href="#disable-drop-zone" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">dropZone</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+<h3 id="insert-item-at">Insert item at<a class="headerlink" href="#insert-item-at" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Utils</span><span class="p">.</span><span class="nb">Array</span><span class="p">.</span><span class="nx">AddAt</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="nx">item</span><span class="p">,</span> <span class="nx">index</span><span class="p">);</span>
+<span class="c1">// Phaser.Utils.Array.AddAt(arr, item, index, limit, callback, context);</span>
 </pre></div>
 
-<h4 id="dropping-events">Dropping events<a class="headerlink" href="#dropping-events" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;drop&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">target</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-
-<span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;dragenter&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">target</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-<span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;dragover&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">target</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-<span class="nx">gameObject</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;dragleave&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">target</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-</pre></div>
-
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;drop&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">,</span> <span class="nx">target</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-
-<span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;dragenter&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">,</span> <span class="nx">target</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;dragover&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">,</span> <span class="nx">target</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-<span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;dragleave&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">pointer</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">,</span> <span class="nx">target</span><span class="p">){</span> <span class="cm">/* ... */</span> <span class="p">});</span>
-</pre></div>
-
-<h3 id="single-touch">Single touch<a class="headerlink" href="#single-touch" title="Permanent link">&para;</a></h3>
-<h4 id="pointer">Pointer<a class="headerlink" href="#pointer" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">pointer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">activePointer</span><span class="p">;</span>
-</pre></div>
-
-<h3 id="multi-touch">Multi-touch<a class="headerlink" href="#multi-touch" title="Permanent link">&para;</a></h3>
-<h4 id="amount-of-active-pointers">Amount of active pointers<a class="headerlink" href="#amount-of-active-pointers" title="Permanent link">&para;</a></h4>
-<p>Set amount of active pointers in game configuration</p>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="c1">// ...</span>
-    <span class="nx">input</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">activePointers</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-        <span class="c1">// ...</span>
-    <span class="p">}</span>
-<span class="p">};</span>
-<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
-</pre></div>
-
-<p>Or add pointers in run-time.</p>
-<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">addPointer</span><span class="p">(</span><span class="nx">num</span><span class="p">);</span>  <span class="c1">// total points = num + 1</span>
-</pre></div>
-
-<h4 id="pointers">Pointers<a class="headerlink" href="#pointers" title="Permanent link">&para;</a></h4>
 <ul>
-<li>pointer 1 ~ 10
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">pointer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">pointer1</span><span class="p">;</span>
-<span class="c1">// ...</span>
-<span class="kd">var</span> <span class="nx">pointer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">pointer10</span><span class="p">;</span>
-</pre></div></li>
-<li>pointer n
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">pointer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">manager</span><span class="p">.</span><span class="nx">pointers</span><span class="p">[</span><span class="nx">n</span><span class="p">];</span>
-</pre></div></li>
-<li>Amount of total pointers
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">amount</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">manager</span><span class="p">.</span><span class="nx">pointersTotal</span><span class="p">;</span>
-</pre></div><ul>
-<li><code>1</code> in desktop</li>
-<li><code>2</code> in touch device. (<code>0</code> for mouse, <code>1</code> for 1 touch pointer)</li>
+<li><code>index</code> : The index in the array where the item will be inserted.</li>
+<li><code>item</code> : An item, or an array of items.</li>
+<li><code>limit</code> : Optional limit which caps the size of the array.</li>
+<li><code>callback</code> : A callback to be invoked for each item successfully added to the array.</li>
+<li><code>context</code> : The context in which the callback is invoked.</li>
 </ul>
-</li>
-</ul>
-<h3 id="pointer_1">Pointer<a class="headerlink" href="#pointer_1" title="Permanent link">&para;</a></h3>
-<ul>
-<li>Position<ul>
-<li>Current touching<ul>
-<li>Position in screen : <code>pointer.x</code> , <code>pointer.y</code></li>
-<li>Position in camera : <code>pointer.worldX</code> , <code>pointer.worldY</code><ul>
-<li>Get world position in a camera
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">getWorldPoint</span><span class="p">(</span><span class="nx">pointer</span><span class="p">.</span><span class="nx">x</span><span class="p">,</span> <span class="nx">pointer</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
-<span class="c1">// var out = camera.getWorldPoint(pointer.x, pointer.y, out);</span>
-</pre></div></li>
-</ul>
-</li>
-<li>Position of previous moving : <code>pointer.prevPosition.x</code> , <code>pointer.prevPosition.y</code><ul>
-<li>Updating when pointer-down, potiner-move, or pointer-up.</li>
-</ul>
-</li>
-<li>Interpolated position :
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="nx">pointer</span><span class="p">.</span><span class="nx">getInterpolatedPosition</span><span class="p">(</span><span class="nx">step</span><span class="p">);</span>
-<span class="c1">// var out = pointer.getInterpolatedPosition(step, out);</span>
-</pre></div></li>
-</ul>
-</li>
-<li>Drag<ul>
-<li>Touching start : <code>pointer.downX</code>, <code>pointer.downY</code></li>
-<li>Touching end : <code>pointer.upX</code>, <code>pointer.upY</code></li>
-<li>Drag distance between pointer-down to latest pointer : <code>pointer.getDistance()</code><ul>
-<li>Horizontal drag distance : <code>pointer.getDistanceX()</code></li>
-<li>Vertical drag distance : <code>pointer.getDistanceY()</code></li>
-</ul>
-</li>
-<li>Drag angle : <code>pointer.getAngle()</code></li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Time<ul>
-<li>Touching start : <code>pointer.downTime</code></li>
-<li>Touching end : <code>pointer.upTime</code></li>
-<li>Drag : <code>pointer.getDuration()</code></li>
-</ul>
-</li>
-<li>Touch state<ul>
-<li>Is touching/any button down :  <code>pointer.isDown</code></li>
-<li>Is primary button down : <code>pointer.primaryDown</code></li>
-</ul>
-</li>
-<li>Button state : <code>pointer.button</code><ul>
-<li>On Touch devices the value is always <code>0</code>.</li>
-</ul>
-</li>
-<li>Button down<ul>
-<li>No button down : <code>pointer.noButtonDown()</code></li>
-<li>Is primary (left) button down : <code>pointer.leftButtonDown()</code></li>
-<li>Is secondary (right) button down : <code>pointer.rightButtonDown()</code></li>
-<li>Is middle (mouse wheel) button down : <code>pointer.middleButtonDown()</code></li>
-<li>Is back button down : <code>pointer.backButtonDown()</code></li>
-<li>Is forward button down : <code>pointer.forwardButtonDown()</code></li>
-</ul>
-</li>
-<li>Button released<ul>
-<li>Is primary (left) button released : <code>pointer.leftButtonReleased()</code></li>
-<li>Is secondary (right) button released : <code>pointer.rightButtonReleased()</code></li>
-<li>Is middle (mouse wheel) button released : <code>pointer.middleButtonReleased()</code></li>
-<li>Is back button released : <code>pointer.backButtonReleased()</code></li>
-<li>Is forward button released : <code>pointer.forwardButtonReleased()</code></li>
-</ul>
-</li>
-<li>Index in <code>scene.input.manager.pointers</code> : <code>pointer.id</code></li>
-<li>Motion<ul>
-<li>Angle: <code>pointer.angle</code></li>
-<li>Disatance: <code>pointer.distance</code></li>
-<li>Velocity: <code>pointer.velocity</code><ul>
-<li><code>pointer.velocity.x</code>, <code>`pointer.velocity.y</code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="input-object">Input object<a class="headerlink" href="#input-object" title="Permanent link">&para;</a></h3>
-<ul>
-<li><code>gameObject.input</code> : Game object's input object.</li>
-<li><code>gameObject.input.localX</code>, <code>gameObject.input.localY</code> : Pointer to local position of texture.</li>
-</ul>
-<h3 id="smooth">Smooth<a class="headerlink" href="#smooth" title="Permanent link">&para;</a></h3>
-<p>Get touch position from interpolation of previous touch position and current touch position.</p>
-<div class="codehilite"><pre><span></span>Touch-position = (current-touch-position * smooth-factor) + (previous-touch-position * (1 - smooth-factor))
+<h3 id="remove-item">Remove item<a class="headerlink" href="#remove-item" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Utils</span><span class="p">.</span><span class="nb">Array</span><span class="p">.</span><span class="nx">Remove</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="nx">item</span><span class="p">);</span>
+<span class="c1">// Phaser.Utils.Array.Remove(arr, item, callback, context);</span>
 </pre></div>
 
-<ol>
-<li>Set smooth factor. In <a href="../game/#configuration">game configuration</a>
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="c1">// ....</span>
-    <span class="nx">input</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">smoothFactor</span><span class="o">:</span> <span class="mi">0</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre></div></li>
-<li>Get touch position
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">pointer</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">pointer</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">worldX</span> <span class="o">=</span> <span class="nx">pointer</span><span class="p">.</span><span class="nx">worldX</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">worldY</span> <span class="o">=</span> <span class="nx">pointer</span><span class="p">.</span><span class="nx">worldY</span><span class="p">;</span>
-</pre></div></li>
-</ol>
-<h3 id="debug">Debug<a class="headerlink" href="#debug" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Enable, draw shape of hit area.
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">enableDebug</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
-<span class="c1">// scene.input.enableDebug(gameObject, color);</span>
-</pre></div></li>
-<li>Disable
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">input</span><span class="p">.</span><span class="nx">removeDebug</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
-</pre></div></li>
+<li><code>item</code> : An item, or an array of items.</li>
+<li><code>callback</code> : A callback to be invoked for each item successfully removed from the array.</li>
+<li><code>context</code> : The context in which the callback is invoked.</li>
+</ul>
+<h3 id="remove-item-at">Remove item at<a class="headerlink" href="#remove-item-at" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">removed</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Utils</span><span class="p">.</span><span class="nb">Array</span><span class="p">.</span><span class="nx">RemoveAt</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="nx">index</span><span class="p">);</span>
+<span class="c1">// var removed = Phaser.Utils.Array.RemoveAt(arr, index, callback, context);</span>
+</pre></div>
+
+<ul>
+<li><code>removed</code> : Removed item.</li>
+<li><code>index</code> : The array index to remove the item from. The index must be in bounds or it will throw an error.</li>
+<li><code>callback</code> : A callback to be invoked for each item successfully removed from the array.</li>
+<li><code>context</code> : The context in which the callback is invoked.</li>
+</ul>
+<h3 id="remove-items-between">Remove items between<a class="headerlink" href="#remove-items-between" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">removed</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Utils</span><span class="p">.</span><span class="nb">Array</span><span class="p">.</span><span class="nx">RemoveBetween</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="nx">startIndex</span><span class="p">,</span> <span class="nx">endIndex</span><span class="p">);</span>
+<span class="c1">// var removed = Phaser.Utils.Array.RemoveBetween(arr, startIndex, endIndex, callback, context);</span>
+</pre></div>
+
+<ul>
+<li><code>removed</code> : Removed items.</li>
+<li><code>startIndex</code> : The start index to remove from.</li>
+<li><code>callback</code> : The end index to remove to.</li>
+<li><code>callback</code> : A callback to be invoked for each item successfully removed from the array.</li>
+<li><code>context</code> : The context in which the callback is invoked.</li>
+</ul>
+<h3 id="remove-random-item">Remove random item<a class="headerlink" href="#remove-random-item" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Utils</span><span class="p">.</span><span class="nb">Array</span><span class="p">.</span><span class="nx">RemoveRandomElement</span><span class="p">(</span><span class="nx">arr</span><span class="p">);</span>
+</pre></div>
+
+<h3 id="replace-item">Replace item<a class="headerlink" href="#replace-item" title="Permanent link">&para;</a></h3>
+<p>Replaces an element of the array with the new element. The new element cannot already be a member of the array.</p>
+<div class="codehilite"><pre><span></span><span class="nx">Phaser</span><span class="p">.</span><span class="nx">Utils</span><span class="p">.</span><span class="nb">Array</span><span class="p">.</span><span class="nx">Replace</span><span class="p">(</span><span class="nx">arr</span><span class="p">,</span> <span class="nx">oldItem</span><span class="p">,</span> <span class="nx">newItem</span><span class="p">);</span>
+</pre></div>
+
+<ul>
+<li><code>oldItem</code> : An item in array.</li>
+<li><code>newItem</code> : Another item, which is not in array.</li>
 </ul>
                 
                   
@@ -5423,7 +4778,7 @@ If set to <code>false</code> it will emit events from all Game Objects below a P
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../input/" title="Input" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../structs-set/" title="Set" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -5432,19 +4787,19 @@ If set to <code>false</code> it will emit events from all Game Objects below a P
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Input
+                Set
               </span>
             </div>
           </a>
         
         
-          <a href="../cursor/" title="Cursor" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../array-sort/" title="Sort" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Cursor
+                Sort
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
