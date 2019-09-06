@@ -8,6 +8,7 @@ const COLOR_DARK = 0x49599a;
 
 const GetRandomItem = Phaser.Utils.Array.GetRandom;
 const DistanceBetween = Phaser.Math.Distance.Between;
+const RemoveItem = Phaser.Utils.Array.Remove;
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -54,21 +55,37 @@ class Demo extends Phaser.Scene {
         // Add a chess at a random node
         var nodeA = GetRandomItem(nodes);
         var chess = this.add.circle(nodeA.x, nodeA.y, 8, 0xe57373)
-            .setData('node', nodeA);
+            .setData('node', nodeA)
+            .setData('preNode', undefined);
         chess.moveTo = this.plugins.get('rexMoveTo').add(chess, {
             speed: 300,
             rotateToTarget: true
         });
         // Wander to a random neighbor node
         var wander = function () {
-            var neighborNodes = graph.getNeighborVertices(this.getData('node'));
-            var nextNode = GetRandomItem(neighborNodes);
-            if (nextNode) {
-                this.setData('node', nextNode);
-                this.moveTo
-                    .once('complete', wander, this)
-                    .moveTo(nextNode.x, nextNode.y);
+            var curNode = this.getData('node');
+            var neighborNodes = graph.getNeighborVertices(curNode);
+            switch (neighborNodes.length) {
+                case 0: return;
+                case 1: break;
+                default:
+                    RemoveItem(neighborNodes, this.getData('preNode'));
+                    break;
             }
+
+            var nextNode;
+            if (neighborNodes.length === 1) {
+                nextNode = neighborNodes[0];
+            } else {
+                nextNode = GetRandomItem(neighborNodes);
+            }
+
+            this
+                .setData('preNode', curNode)
+                .setData('node', nextNode);
+            this.moveTo
+                .once('complete', wander, this)
+                .moveTo(nextNode.x, nextNode.y);
         }
         wander.call(chess);
 
