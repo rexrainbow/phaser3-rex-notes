@@ -182,6 +182,7 @@ nav:
         - Buff data: buffdata.md
     - Set: structs-set.md
     - Array:
+        - Add/remove: array-addremove.md
         - Sort: array-sort.md
         - Random: array-random.md
         - Filter/Map: array-filter.md
