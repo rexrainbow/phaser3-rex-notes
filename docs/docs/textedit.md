@@ -65,6 +65,7 @@ var editor = scene.plugins.get('rexTextEdit').edit(textObject, config);
     - `config.type` : 
         - `text` (default), or 
         - `password`
+        - `number`
     - `config.text` : Initial string content.
     - `config.onTextChanged` : Callback invoked when input text changed.
         ```javascript
