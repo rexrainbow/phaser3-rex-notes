@@ -29,9 +29,11 @@ class Demo extends Phaser.Scene {
                 bottom: 20,
             },
 
-            // displayTime: 1000,
-            // transitInTime: 250,
-            // transitOutTime: 250
+            duration: {
+                in: 250,
+                hold: 1000,
+                out: 250,
+            },
         })
             .show('Hello world')
             .show('Phaser 3 is good')

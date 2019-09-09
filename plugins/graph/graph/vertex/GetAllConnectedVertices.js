@@ -47,7 +47,9 @@ var GetAllConnectedVertices = function (vertexGO, out, travelMode) {
 
 const TRAVELMODE = {
     'breadth-first': 0,
+    'bfs': 0,
     'depth-first': 1,
+    'dfs': 1,
 }
 
 export default GetAllConnectedVertices;
