@@ -166,7 +166,6 @@ class Player extends TickTask {
     }
 
     update(time, delta) {
-        debugger
         if (!this.isRunning) {
             return this;
         }
