@@ -55,6 +55,7 @@ var gashapon = scene.plugins.get('rexGashapon').add({
         c:3 
     },
     reload: true,     // true|false
+    rnd: undefined,
 });
 ```
 
@@ -63,6 +64,9 @@ var gashapon = scene.plugins.get('rexGashapon').add({
     - `'random'`, or `1` : pick item from box then put it back.
 - `reload` : set `true` to reload items when box is empty for `shuffle` mode.
 - `items` : initial items in box
+- `rnd` : Use [random data generator](random-data-generator.md) to generate result.
+    - `undefined` : Use `Math.random()` to generate result.
+    - `Phaser.Math.RND` : Use pre-defined random data generator.
 
 ### Pick item
 
@@ -156,3 +160,13 @@ gashapon.eachItem(function(name, count){
 ```javascript
 var items = gashapon.getItems();
 ```
+
+### Set random generator
+
+```javascript
+gashapon.setRND(rnd);
+```
+
+- `rnd` : Use [random data generator](random-data-generator.md) to generate result.
+    - `undefined` : Use `Math.random()` to generate result.
+    - `Phaser.Math.RND` : Use pre-defined random data generator.
