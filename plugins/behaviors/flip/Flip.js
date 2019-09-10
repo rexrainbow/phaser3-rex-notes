@@ -122,6 +122,13 @@ class Flip {
             return this;
         }
 
+        if (this.duration === 0) {
+            this
+                .toggleFace()
+                .complete();
+            return this;
+        }
+
         var config = {
             targets: this.gameObject,
             duration: this.duration / 2,

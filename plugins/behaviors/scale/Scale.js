@@ -104,10 +104,17 @@ class Scale {
             return this;
         }
 
+        if (this.duration === 0) {
+            this.sound.setScale(this.scaleEnd.x, this.scaleEnd.y);
+            this.complete();
+            return this;
+        }
+
+        this.gameObject.setScale(this.scaleStart.x, this.scaleStart.y);
         this.tween = this.scene.tweens.add({
             targets: this.gameObject,
-            scaleX: { from: this.scaleStart.x, to: this.scaleEnd.x },
-            scaleY: { from: this.scaleStart.y, to: this.scaleEnd.y },
+            scaleX: this.scaleEnd.x,
+            scaleY: this.scaleEnd.y,
 
             duration: this.duration,
             ease: this.ease,

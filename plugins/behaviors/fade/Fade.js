@@ -81,15 +81,15 @@ class Fade {
         }
 
         if (this.duration === 0) {
-            this.gameObject.alpha = this.alphaEnd;
-            this.stop();
+            this.gameObject.setAlpha(this.alphaEnd);
             this.complete();
             return this;
         }
 
+        this.gameObject.setAlpha(this.alphaStart);
         this.tween = this.scene.tweens.add({
             targets: this.gameObject,
-            alpha: { from: this.alphaStart, to: this.alphaEnd },
+            alpha: this.alphaEnd,
 
             delay: this.delay,
             duration: this.duration,

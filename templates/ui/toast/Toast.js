@@ -109,9 +109,6 @@ class Toast extends Label {
             return this;
         }
 
-        // Save last scale state
-        var scaleXSave = this.scaleX,
-            scaleYSave = this.scaleY;
         // Recover to initial state
         this
             .setScale(1, 1)
@@ -122,8 +119,6 @@ class Toast extends Label {
             callback(this);
         }
         this.layout();
-        // Back to last scale state
-        this.setScale(scaleXSave, scaleYSave);
 
         var commands = [
             [ // Transit-in

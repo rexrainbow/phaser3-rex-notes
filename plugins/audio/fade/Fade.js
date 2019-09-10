@@ -75,9 +75,16 @@ class Fade {
             return;
         }
 
+        if (this.duration === 0) {
+            this.sound.setVolume(this.volume.end);
+            this.complete();
+            return this;
+        }
+
+        this.sound.setVolume(this.volume.start);
         this.tween = this.scene.tweens.add({
             targets: this.sound,
-            volume: { from: this.volume.start, to: this.volume.end },
+            volume: this.volume.end,
 
             delay: this.delay,
             duration: this.duration,
