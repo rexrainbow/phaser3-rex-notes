@@ -3321,6 +3321,18 @@
           
           
 
+
+  <li class="md-nav__item">
+    <a href="../random-data-generator/" title="Random data generator" class="md-nav__link">
+      Random data generator
+    </a>
+  </li>
+
+        
+          
+          
+          
+
   
 
 
@@ -3534,6 +3546,13 @@
         
       </ul>
     </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-random-generator" title="Set random generator" class="md-nav__link">
+    Set random generator
+  </a>
   
 </li>
         
@@ -4913,6 +4932,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#set-random-generator" title="Set random generator" class="md-nav__link">
+    Set random generator
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4983,6 +5009,7 @@
         <span class="nx">c</span><span class="o">:</span><span class="mi">3</span> 
     <span class="p">},</span>
     <span class="nx">reload</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>     <span class="c1">// true|false</span>
+    <span class="nx">rnd</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
 <span class="p">});</span>
 </pre></div>
 
@@ -4994,6 +5021,11 @@
 </li>
 <li><code>reload</code> : set <code>true</code> to reload items when box is empty for <code>shuffle</code> mode.</li>
 <li><code>items</code> : initial items in box</li>
+<li><code>rnd</code> : Use <a href="../random-data-generator/">random data generator</a> to generate result.<ul>
+<li><code>undefined</code> : Use <code>Math.random()</code> to generate result.</li>
+<li><code>Phaser.Math.RND</code> : Use pre-defined random data generator.</li>
+</ul>
+</li>
 </ul>
 <h3 id="pick-item">Pick item<a class="headerlink" href="#pick-item" title="Permanent link">&para;</a></h3>
 <h4 id="pick-a-random-item">Pick a random item<a class="headerlink" href="#pick-a-random-item" title="Permanent link">&para;</a></h4>
@@ -5060,6 +5092,18 @@
 <h4 id="get-items_1">Get items<a class="headerlink" href="#get-items_1" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">items</span> <span class="o">=</span> <span class="nx">gashapon</span><span class="p">.</span><span class="nx">getItems</span><span class="p">();</span>
 </pre></div>
+
+<h3 id="set-random-generator">Set random generator<a class="headerlink" href="#set-random-generator" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">gashapon</span><span class="p">.</span><span class="nx">setRND</span><span class="p">(</span><span class="nx">rnd</span><span class="p">);</span>
+</pre></div>
+
+<ul>
+<li><code>rnd</code> : Use <a href="../random-data-generator/">random data generator</a> to generate result.<ul>
+<li><code>undefined</code> : Use <code>Math.random()</code> to generate result.</li>
+<li><code>Phaser.Math.RND</code> : Use pre-defined random data generator.</li>
+</ul>
+</li>
+</ul>
                 
                   
                 
@@ -5080,7 +5124,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../random/" title="Random number" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../random-data-generator/" title="Random data generator" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -5089,7 +5133,7 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Random number
+                Random data generator
               </span>
             </div>
           </a>
