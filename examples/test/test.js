@@ -1,5 +1,4 @@
 import UIPlugin from '../../templates/ui/ui-plugin.js';
-import GesturesPlugin from '../../plugins/gestures-plugin.js';
 
 
 const COLOR_PRIMARY = 0x4e342e;
@@ -39,7 +38,7 @@ class Demo extends Phaser.Scene {
         });
 
 
-        this.rexGestures.add.press()
+        this.rexUI.add.press()
             .on('pressstart', function (press) {
                 toast
                     .show('Hello world')
@@ -68,11 +67,6 @@ var config = {
                 plugin: UIPlugin,
                 mapping: 'rexUI'
             },
-            {
-                key: 'rexGestures',
-                plugin: GesturesPlugin,
-                mapping: 'rexGestures'
-            }
         ]
     }
 };
