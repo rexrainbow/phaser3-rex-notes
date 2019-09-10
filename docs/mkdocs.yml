@@ -206,6 +206,7 @@ nav:
     - Angle: angle.md
     - Random:
         - Random number: random.md
+        - Random data generator: random-data-generator.md
         - Gashapon: gashapon.md
         - Perlin: perlin.md
     - Color: color.md

@@ -3,7 +3,6 @@ import IsEmpty from '../../utils/object/IsEmpty.js';
 import Clear from '../../utils/object/Clear.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
-const Shuffle = Phaser.Utils.Array.Shuffle;
 
 class Gashapon {
     constructor(config) {
@@ -23,6 +22,7 @@ class Gashapon {
 
         this.setMode(GetValue(o, 'mode', 0));
         this.setReload(GetValue(o, 'reload', true));
+        this.setRND(GetValue(o, 'rnd', undefined));
 
         // data
 
@@ -52,6 +52,7 @@ class Gashapon {
             // configuration
             mode: this.mode,
             reload: this.reload,
+            rnd: this.rnd,
 
             // data
             items: Clone(this.items),
@@ -76,8 +77,9 @@ class Gashapon {
         // init remainder items
         for (name in this.items) {
             var count = this.items[name];
-            if (count > 0)
+            if (count > 0) {
                 this.remainder[name] = count;
+            }
         }
 
         if (this.mode === 1) { // random mode
@@ -99,6 +101,11 @@ class Gashapon {
 
     setReload(isReload) {
         this.reload = !!isReload;
+        return this;
+    }
+
+    setRND(rnd) {
+        this.rnd = rnd;
         return this;
     }
 
@@ -202,15 +209,18 @@ class Gashapon {
         if (this.mode === 1) // random mode
             return;
 
-        if (!this.items.hasOwnProperty(name))
+        if (!this.items.hasOwnProperty(name)) {
             return;
+        }
 
-        if ((this.mode === 2) && this.restartGenFlg)
+        if ((this.mode === 2) && this.restartGenFlg) {
             return;
+        }
 
         // generator had started  
-        if (!this.remainder.hasOwnProperty(name))
+        if (!this.remainder.hasOwnProperty(name)) {
             this.remainder[name] = 0;
+        }
 
         this.addShadowPattern(name, count, this.items[name]);
         return this;
@@ -225,10 +235,10 @@ class Gashapon {
         if (name == null) {
             if (this.mode === 0) { // shuffle mode
                 this.resetItemList(this.remainder);
-                result = Shuffle(this._list);
+                result = this.getRndItem(this._list);
                 this.addRemainItem(result, -1);
             } else { // random mode
-                result = Shuffle(this._list);
+                result = this.getRndItem(this._list);
             }
 
         } else { // force pick
@@ -287,24 +297,47 @@ class Gashapon {
 
     /** @private */
     addRemainItem(name, inc, maxCount) {
-        if ((name == null) || (inc === 0))
+        if ((name == null) || (inc === 0)) {
             return this;
+        }
 
-        if (!this.remainder.hasOwnProperty(name))
+        if (!this.remainder.hasOwnProperty(name)) {
             this.remainder[name] = 0;
+        }
 
         this.remainder[name] += inc;
-        if ((maxCount != null) && (this.remainder[name] > maxCount))
+        if ((maxCount != null) && (this.remainder[name] > maxCount)) {
             this.remainder[name] = maxCount
+        }
 
-        if (this.remainder[name] <= 0)
+        if (this.remainder[name] <= 0) {
             delete this.remainder[name];
+        }
 
-        if ((this.mode === 0) && this.reload && IsEmpty(this.remainder))
+        if ((this.mode === 0) && this.reload && IsEmpty(this.remainder)) {
             this._restartFlag = true;
+        }
 
         return this;
     }
+
+    /** @private */
+    getRndItem(list) {
+        var value = (this.rnd) ? this.rnd.frac() : Math.random();
+        var result = null,
+            i, cnt = list.length,
+            item
+        for (i = 0; i < cnt; i++) {
+            item = list[i];
+            value -= item[1];
+            if (value < 0) {
+                result = item[0];
+                break;
+            }
+        }
+        return result;
+    }
+
 }
 
 const MODE = {
