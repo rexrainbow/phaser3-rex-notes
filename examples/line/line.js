@@ -21,13 +21,11 @@ class Demo extends Phaser.Scene {
         var line = this.add.rexLine({
             start: {
                 x: 400, y: 300,
-                key: 'circle',
-                origin: 0.5,
+                key: 'circle', origin: 0.5,
             },
             end: {
                 x: 600, y: 300,
-                key: 'triangle',
-                origin: 1,
+                key: 'triangle', origin: 1,
             },
 
             body: {
