@@ -1,4 +1,4 @@
-var CreateDashedTexture = function (scene, key, width, k, color) {
+var CreateDashedTexture = function (scene, key, width, k, color, height) {
     if (width === undefined) {
         width = 10;
     }
@@ -8,8 +8,10 @@ var CreateDashedTexture = function (scene, key, width, k, color) {
     if (color === undefined) {
         color = 0xffffff;
     }
+    if (height === undefined) {
+        height = 2;
+    }
 
-    var height = 2;
     scene.add.graphics()
         .fillStyle(color)
         .fillRect(0, 0, (width * k), height)

@@ -1,10 +1,3 @@
-import UIPlugin from '../../templates/ui/ui-plugin.js';
-
-
-const COLOR_PRIMARY = 0x4e342e;
-const COLOR_LIGHT = 0x7b5e57;
-const COLOR_DARK = 0x260e04;
-
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -12,63 +5,24 @@ class Demo extends Phaser.Scene {
         })
     }
 
-    preload() { }
+    preload() {}
 
     create() {
-        var toast = this.rexUI.add.toast({
-            x: 400,
-            y: 300,
-
-            background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_PRIMARY),
-            text: this.add.text(0, 0, '', {
-                fontSize: '24px'
-            }),
-            space: {
-                left: 20,
-                right: 20,
-                top: 20,
-                bottom: 20,
-            },
-
-            duration: {
-                in: 250,
-                hold: 1000,
-                out: 250,
-            },
-        });
-
-
-        this.rexUI.add.press()
-            .on('pressstart', function (press) {
-                toast
-                    .show('Hello world')
-                    .show('Phaser 3 is good')
-                    .show('See you next time')
-            })
+        var rect = this.add.rectangle(300, 300, 64, 64, 0x888888).setOrigin(0);
+      
+        var rt = this.add.renderTexture(400, 300, 300, 300)
+        rt.setSize(rect.width, rect.height);
+        rt.draw(rect, 0, 0);
     }
 
-    update() { }
+    update() {}
 }
 
 var config = {
-    type: Phaser.AUTO,
-    parent: 'phaser-example',
+    type: Phaser.WEBGL, // Works fine in *Phaser.CANVAS* mode
     width: 800,
     height: 600,
-    scale: {
-        mode: Phaser.Scale.FIT,
-        autoCenter: Phaser.Scale.CENTER_BOTH,
-    },
     scene: Demo,
-    plugins: {
-        scene: [
-            {
-                key: 'rexUI',
-                plugin: UIPlugin,
-                mapping: 'rexUI'
-            },
-        ]
-    }
 };
 
 var game = new Phaser.Game(config);

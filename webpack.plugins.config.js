@@ -32,6 +32,8 @@ module.exports = {
         'youtubeplayer': './plugins/youtubeplayer.js',
         'persistenceeffectplugin': './plugins/persistenceeffect-plugin.js',
         'persistenceeffect': './plugins/persistenceeffect.js',
+        'lineplugin': './plugins/line-plugin.js',
+        'line': './plugins/line.js',
 
         // custom file loader      
         'webfontloaderplugin': './plugins/webfontloader-plugin.js',

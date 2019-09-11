@@ -25,9 +25,7 @@ class Line extends RenderTexture {
     }
 
     set x0(value) {
-        if (this._x0 !== value) {
-            this.redraw = true;
-        }
+        this.redraw |= (this._x0 !== value);
         this._x0 = value;
     }
 
@@ -36,9 +34,7 @@ class Line extends RenderTexture {
     }
 
     set y0(value) {
-        if (this._y0 !== value) {
-            this.redraw = true;
-        }
+        this.redraw |= (this._y0 !== value);
         this._y0 = value;
     }
 
@@ -47,9 +43,7 @@ class Line extends RenderTexture {
     }
 
     set x1(value) {
-        if (this._x1 !== value) {
-            this.redraw = true;
-        }
+        this.redraw |= (this._x1 !== value);
         this._x1 = value;
     }
 
@@ -58,9 +52,7 @@ class Line extends RenderTexture {
     }
 
     set y1(value) {
-        if (this._y1 !== value) {
-            this.redraw = true;
-        }
+        this.redraw |= (this._y1 !== value);
         this._y1 = value;
     }
 
@@ -118,12 +110,15 @@ class Line extends RenderTexture {
             height = Math.max(height, lineEndFrame.cutHeight);
         }
         if (lineBodyFrame) {
-            var tileSpriteHeight = (this.lineBodyWidth !== undefined) ? this.lineBodyWidth : lineBodyFrame.cutHieght;
+            var tileSpriteHeight = (this.lineBodyWidth !== undefined) ? this.lineBodyWidth : lineBodyFrame.cutWidth;
             height = Math.max(height, tileSpriteHeight);
         }
 
+        width = Math.floor(width);
+        height = Math.floor(height);
+
         // no line
-        if ((width === 0) || (height === 0)) {
+        if ((width <= 0) || (height <= 0)) {
             this
                 .setPosition(this.x0, this.y0)
                 .setSize(1, 1)
@@ -135,6 +130,7 @@ class Line extends RenderTexture {
             .setPosition(this.x0, this.y0)
             .setSize(width, height)
             .setRotation(rotation)
+            .setOrigin(0, 0); // Set origin to (0,0) before pasting textures
 
         var offsetX, offsetY;
         var remainderWidth = this.width;
@@ -154,7 +150,7 @@ class Line extends RenderTexture {
         }
 
         // Draw line body
-        if (lineBodyFrame) {
+        if (lineBodyFrame && (remainderWidth > 0) && (tileSpriteHeight > 0)) {
             if (!globTileSprite) {
                 globTileSprite = this.scene.make.tileSprite({
                     add: false,
@@ -171,6 +167,7 @@ class Line extends RenderTexture {
             this.draw(globTileSprite, offsetX, offsetY);
         }
 
+        this.setOrigin(0, 0.5); // Set origin back to (0,0.5)
         return this;
     }
 
