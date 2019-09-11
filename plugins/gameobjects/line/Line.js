@@ -14,8 +14,10 @@ class Line extends RenderTexture {
             .setOrigin(0, 0.5)
             .setLineStartPosition(GetValue(lineStart, 'x', 0), GetValue(lineStart, 'y', 0))
             .setLineEndPosition(GetValue(lineEnd, 'x', 0), GetValue(lineEnd, 'y', 0))
-            .setLineStartTexture(GetValue(lineStart, 'key', lineStart), GetValue(lineStart, 'frame', undefined), GetValue(lineStart, 'origin', undefined))
-            .setLineEndTexture(GetValue(lineEnd, 'key', lineEnd), GetValue(lineEnd, 'frame', undefined), GetValue(lineEnd, 'origin', undefined))
+            .setLineStartTexture(GetValue(lineStart, 'key', lineStart), GetValue(lineStart, 'frame', undefined))
+            .setLineStartOrigin(GetValue(lineStart, 'origin', undefined))
+            .setLineEndTexture(GetValue(lineEnd, 'key', lineEnd), GetValue(lineEnd, 'frame', undefined))
+            .setLineEndOrigin(GetValue(lineEnd, 'origin', undefined))
             .setLineBodyTexture(GetValue(lineBody, 'key', lineBody), GetValue(lineBody, 'frame', undefined), GetValue(lineBody, 'width', undefined))
 
         this._tileSprite = undefined;
@@ -78,12 +80,17 @@ class Line extends RenderTexture {
         return this;
     }
 
-    setLineStartTexture(key, frame, origin) {
-        if (origin === undefined) {
-            origin = 0.5;
-        }
+    setLineStartTexture(key, frame) {
         this.lineStartTexture = key;
         this.lineStartFrameName = frame;
+        this.redraw = true;
+        return this;
+    }
+
+    setLineStartOrigin(origin) {
+        if (origin === undefined) {
+            origin = 0;
+        }
         this.lineStartOrigin = origin;
         this.redraw = true;
         return this;
@@ -93,12 +100,17 @@ class Line extends RenderTexture {
         return this.scene.textures.getFrame(this.lineStartTexture, this.lineStartFrameName);
     }
 
-    setLineEndTexture(key, frame, origin) {
+    setLineEndTexture(key, frame) {
+        this.lineEndTexture = key;
+        this.lineEndFrameName = frame;
+        this.redraw = true;
+        return this;
+    }
+
+    setLineEndOrigin(origin) {
         if (origin === undefined) {
             origin = 1;
         }
-        this.lineEndTexture = key;
-        this.lineEndFrameName = frame;
         this.lineEndOrigin = origin;
         this.redraw = true;
         return this;
