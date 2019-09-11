@@ -22,10 +22,12 @@ class Demo extends Phaser.Scene {
             start: {
                 x: 400, y: 300,
                 key: 'circle',
+                origin: 0.5,
             },
             end: {
                 x: 600, y: 300,
                 key: 'triangle',
+                origin: 1,
             },
 
             body: {
