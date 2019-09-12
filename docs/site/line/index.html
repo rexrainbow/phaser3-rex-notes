@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/fsm/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/line/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>FSM - Notes of Phaser 3</title>
+        <title>Line - Notes of Phaser 3</title>
       
     
     
@@ -128,7 +128,7 @@
                 Notes of Phaser 3
               </span>
               <span class="md-header-nav__topic">
-                FSM
+                Line
               </span>
             
           
@@ -507,10 +507,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
     
     <label class="md-nav__link" for="nav-4">
       Game object
@@ -922,10 +924,12 @@
           
           
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-4" type="checkbox" id="nav-4-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-4" type="checkbox" id="nav-4-4" checked>
     
     <label class="md-nav__link" for="nav-4-4">
       Graphics
@@ -1169,11 +1173,100 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../line/" title="Line" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Line
+      </label>
+    
+    <a href="./" title="Line" class="md-nav__link md-nav__link--active">
       Line
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" title="Introduction" class="md-nav__link">
+    Introduction
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#source-code" title="Source code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" title="Usage" class="md-nav__link">
+    Usage
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#install-plugin" title="Install plugin" class="md-nav__link">
+    Install plugin
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-instance" title="Create instance" class="md-nav__link">
+    Create instance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-class" title="Custom class" class="md-nav__link">
+    Custom class
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#position-of-line-startline-end" title="Position of line-start/line-end" class="md-nav__link">
+    Position of line-start/line-end
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-textures" title="Set textures" class="md-nav__link">
+    Set textures
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -2619,12 +2712,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
     
     <label class="md-nav__link" for="nav-9">
       Logic
@@ -2760,174 +2851,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        FSM
-      </label>
-    
-    <a href="./" title="FSM" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../fsm/" title="FSM" class="md-nav__link">
       FSM
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#source-code" title="Source code" class="md-nav__link">
-    Source code
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#new-class" title="New class" class="md-nav__link">
-    New class
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#import-fsm-class" title="Import FSM class" class="md-nav__link">
-    Import FSM class
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#create-new-class" title="Create new class" class="md-nav__link">
-    Create new class
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#create-instance" title="Create instance" class="md-nav__link">
-    Create instance
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#create-by-config" title="Create by config" class="md-nav__link">
-    Create by config
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
-    Install global plugin
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#create-instance_1" title="Create instance" class="md-nav__link">
-    Create instance
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#read-state" title="Read state" class="md-nav__link">
-    Read state
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#start-at-state" title="Start at state" class="md-nav__link">
-    Start at state
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#next-state" title="Next state" class="md-nav__link">
-    Next state
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#request" title="Request" class="md-nav__link">
-    Request
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#state-changing" title="State-changing" class="md-nav__link">
-    State-changing
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#enable" title="Enable" class="md-nav__link">
-    Enable
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -4705,23 +4633,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#new-class" title="New class" class="md-nav__link">
-    New class
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#import-fsm-class" title="Import FSM class" class="md-nav__link">
-    Import FSM class
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#create-new-class" title="Create new class" class="md-nav__link">
-    Create new class
+  <a href="#install-plugin" title="Install plugin" class="md-nav__link">
+    Install plugin
   </a>
   
 </li>
@@ -4733,82 +4646,23 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-        
           <li class="md-nav__item">
-  <a href="#create-by-config" title="Create by config" class="md-nav__link">
-    Create by config
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#install-global-plugin" title="Install global plugin" class="md-nav__link">
-    Install global plugin
+  <a href="#custom-class" title="Custom class" class="md-nav__link">
+    Custom class
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-instance_1" title="Create instance" class="md-nav__link">
-    Create instance
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#read-state" title="Read state" class="md-nav__link">
-    Read state
+  <a href="#position-of-line-startline-end" title="Position of line-start/line-end" class="md-nav__link">
+    Position of line-start/line-end
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#start-at-state" title="Start at state" class="md-nav__link">
-    Start at state
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#next-state" title="Next state" class="md-nav__link">
-    Next state
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#request" title="Request" class="md-nav__link">
-    Request
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#state-changing" title="State-changing" class="md-nav__link">
-    State-changing
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#enable" title="Enable" class="md-nav__link">
-    Enable
+  <a href="#set-textures" title="Set textures" class="md-nav__link">
+    Set textures
   </a>
   
 </li>
@@ -4834,61 +4688,30 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/fsm.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/line.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>FSM</h1>
+                  <h1>Line</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p><a href="https://en.wikipedia.org/wiki/Finite-state_machine">Finite state machine</a>.</p>
+<p>Draw a line with start/end/body textures.</p>
 <ul>
 <li>Author: Rex</li>
-<li>Object</li>
+<li>Game object</li>
 </ul>
 <h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/fsm-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexfsmplugin.min.js">minify</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/line-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexlineplugin.min.js">minify</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/line.js">Class</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/fsm">Sample code</a></p>
-<h3 id="new-class">New class<a class="headerlink" href="#new-class" title="Permanent link">&para;</a></h3>
-<h4 id="import-fsm-class">Import FSM class<a class="headerlink" href="#import-fsm-class" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">FSM</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/fsm.js&#39;</span><span class="p">;</span>
-</pre></div>
-
-<h4 id="create-new-class">Create new class<a class="headerlink" href="#create-new-class" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">State</span> <span class="kr">extends</span> <span class="nx">FSM</span> <span class="p">{</span>
-    <span class="nx">constructor</span><span class="p">()</span> <span class="p">{</span>
-        <span class="kr">super</span><span class="p">();</span>
-    <span class="p">}</span>
-
-    <span class="nx">next_A</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="s1">&#39;B&#39;</span> <span class="p">}</span>
-
-    <span class="nx">enter_A</span><span class="p">()</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
-
-    <span class="nx">exit_A</span><span class="p">()</span> <span class="p">{</span> <span class="cm">/* ... */</span> <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-
-<p>Members:</p>
-<ul>
-<li><code>next_</code> + stateName: Callback to get next state.</li>
-<li><code>enter_</code> + stateName: Callback when enter state.</li>
-<li><code>exit_</code> + stateName: Callback when exit state.</li>
-</ul>
-<h4 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">State</span><span class="p">();</span>
-</pre></div>
-
-<h3 id="create-by-config">Create by config<a class="headerlink" href="#create-by-config" title="Permanent link">&para;</a></h3>
-<h4 id="install-global-plugin">Install global plugin<a class="headerlink" href="#install-global-plugin" title="Permanent link">&para;</a></h4>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/line">Sample code</a></p>
+<h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
 <p>Install plugin in <a href="../game/#configuration">configuration of game</a></p>
-<div class="codehilite"><pre><span></span><span class="kr">import</span> <span class="nx">FSMPlugin</span> <span class="nx">from</span> <span class="s1">&#39;./plugins/fsm-plugin.js&#39;</span><span class="p">;</span>
-
-<span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// ...</span>
     <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
-            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexFSM&#39;</span><span class="p">,</span>
-            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">FSMPlugin</span><span class="p">,</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexLinePlugin&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">LinePlugin</span><span class="p">,</span>
             <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
         <span class="p">},</span>
         <span class="c1">// ...</span>
@@ -4899,144 +4722,141 @@
 <span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </pre></div>
 
-<h4 id="create-instance_1">Create instance<a class="headerlink" href="#create-instance_1" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="nx">start</span><span class="o">:</span> <span class="s1">&#39;A&#39;</span><span class="p">,</span>   <span class="c1">// default: undefined</span>
-    <span class="nx">states</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">A</span><span class="o">:</span> <span class="p">{</span>
-            <span class="nx">next</span><span class="o">:</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span>  <span class="c1">// function() { return &#39;B&#39;; }</span>
-            <span class="nx">enter</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{},</span>
-            <span class="nx">exit</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{}</span>
-        <span class="p">},</span>
-        <span class="c1">// ...</span>
+<h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">line</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexLine</span><span class="p">({</span>
+    <span class="nx">start</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">key</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span> <span class="nx">frame</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span> <span class="nx">origin</span><span class="o">:</span> <span class="mf">0.5</span><span class="p">,</span>
     <span class="p">},</span>
-    <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{},</span>
-    <span class="nx">extend</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">i</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;abc&#39;</span>
-        <span class="c1">// ...</span>
+    <span class="c1">// start: key,</span>
+    <span class="c1">// start: undefined,</span>
+
+    <span class="nx">end</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="nx">key</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span> <span class="nx">frame</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span> <span class="nx">origin</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
     <span class="p">},</span>
-    <span class="nx">enable</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-    <span class="nx">eventEmitter</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="c1">// end: key,</span>
+    <span class="c1">// end: undefined,</span>
+
+    <span class="nx">body</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">key</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span> <span class="nx">frame</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+        <span class="nx">width</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="p">},</span>
+    <span class="c1">// body: key,</span>
+<span class="p">});</span>
+</pre></div>
+
+<ul>
+<li><code>start</code> : Configuration of line-start. Or texture key of line-start.<ul>
+<li><code>start.x</code>, <code>start.y</code> : Position of line-start.</li>
+<li><code>start.key</code>, <code>start.frame</code> : Texrure of line-start.</li>
+<li><code>start.origin</code> : Origin of line-start. Default is <code>0.5</code>.</li>
+</ul>
+</li>
+<li><code>end</code> : Configuration of line-end. Or texture key of line-end.<ul>
+<li><code>end.x</code>, <code>end.y</code> : Position of line-end.</li>
+<li><code>end.key</code>, <code>end.frame</code> : Texrure of line-end.</li>
+<li><code>end.origin</code> : Origin of line-end. Default is <code>1</code>.</li>
+</ul>
+</li>
+<li><code>body</code> : Configuration of line-body. Or texture key of line-body.<ul>
+<li><code>body.key</code>, <code>body.frame</code> : Texrure of line-body. Line-body will be drawn repeatedly.</li>
+<li><code>body.width</code> : Line width.</li>
+</ul>
+</li>
+</ul>
+<h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Define class
+    <div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">MyLine</span> <span class="kr">extends</span> <span class="nx">Line</span> <span class="p">{</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+        <span class="c1">// ...</span>
+        <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+
+    <span class="c1">// preUpdate(time, delta) {}</span>
 <span class="p">}</span>
-<span class="kd">var</span> <span class="nx">state</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">plugins</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;rexFSM&#39;</span><span class="p">).</span><span class="nx">add</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span>
-</pre></div>
-
-<ul>
-<li><code>start</code>: Initial state.</li>
-<li><code>states</code>: Define states.<ul>
-<li>stateName<ul>
-<li><code>next</code>: String of next state, or a callback to get next state.</li>
-<li><code>enter</code>: Callback when enter state.</li>
-<li><code>exit</code>: Callback when exit state.</li>
+</pre></div><ul>
+<li><code>scene.add.existing(gameObject)</code> : Adds an existing Game Object to this Scene.<ul>
+<li>If the Game Object renders, it will be added to the Display List.</li>
+<li>If it has a <code>preUpdate</code> method, it will be added to the Update List.</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><code>init</code>: Initial callback when creating instance.</li>
-<li><code>extend</code>: Inject key-value pairs into instance.</li>
-<li><code>enable</code>: Set <code>false</code> to block any state changing.</li>
-<li><code>eventEmitter</code><ul>
-<li><code>undefined</code> : Create a private event emitter, default value.</li>
-<li><code>false</code> : Don't add any event emitter, i.e. no event will be fired.</li>
-<li><a href="../eventemitter3/">Event emitter object</a> : Fire event through this event emitter.</li>
+<li>Create instance
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">line</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyLine</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h3 id="position-of-line-startline-end">Position of line-start/line-end<a class="headerlink" href="#position-of-line-startline-end" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Line start<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">x0</span> <span class="o">=</span> <span class="nx">line</span><span class="p">.</span><span class="nx">x0</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">y0</span> <span class="o">=</span> <span class="nx">line</span><span class="p">.</span><span class="nx">y0</span><span class="p">;</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">line</span><span class="p">.</span><span class="nx">setLineStartPosition</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">line</span><span class="p">.</span><span class="nx">x0</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
+<span class="nx">line</span><span class="p">.</span><span class="nx">y0</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
+</pre></div></li>
+</ul>
+</li>
+<li>Line end<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">x1</span> <span class="o">=</span> <span class="nx">line</span><span class="p">.</span><span class="nx">x1</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">y1</span> <span class="o">=</span> <span class="nx">line</span><span class="p">.</span><span class="nx">y1</span><span class="p">;</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">line</span><span class="p">.</span><span class="nx">setLineEndPosition</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">line</span><span class="p">.</span><span class="nx">x1</span> <span class="o">=</span> <span class="nx">x</span><span class="p">;</span>
+<span class="nx">line</span><span class="p">.</span><span class="nx">y1</span> <span class="o">=</span> <span class="nx">y</span><span class="p">;</span>
+</pre></div></li>
 </ul>
 </li>
 </ul>
-<h3 id="read-state">Read state<a class="headerlink" href="#read-state" title="Permanent link">&para;</a></h3>
+<h3 id="set-textures">Set textures<a class="headerlink" href="#set-textures" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Current state
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">curState</span> <span class="o">=</span> <span class="nx">state</span><span class="p">.</span><span class="nx">state</span><span class="p">;</span>
+<li>Line-start<ul>
+<li>Set line-start texture
+    <div class="codehilite"><pre><span></span><span class="nx">line</span><span class="p">.</span><span class="nx">setLineStartTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">frameName</span><span class="p">);</span>
 </pre></div></li>
-<li>Previous state
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">preState</span> <span class="o">=</span> <span class="nx">state</span><span class="p">.</span><span class="nx">prevState</span><span class="p">;</span>
+<li>Set origin of line-start texture
+    <div class="codehilite"><pre><span></span><span class="nx">line</span><span class="p">.</span><span class="nx">setLineStartOrigin</span><span class="p">(</span><span class="nx">origin</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>origin</code> : <code>0</code>~<code>1</code>. Default is <code>0</code>, to align the left side of line-start texture with start position.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Line-end<ul>
+<li>Set line-end texture
+    <div class="codehilite"><pre><span></span><span class="nx">line</span><span class="p">.</span><span class="nx">setLineEndTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">frameName</span><span class="p">);</span>
+</pre></div></li>
+<li>Set origin of line-end texture
+    <div class="codehilite"><pre><span></span><span class="nx">line</span><span class="p">.</span><span class="nx">setLineEndOrigin</span><span class="p">(</span><span class="nx">origin</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>origin</code> : <code>0</code>~<code>1</code>. Default is <code>1</code>, to align the right side of line-end texture with end position.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Line-body<ul>
+<li>Set line-body texture
+    <div class="codehilite"><pre><span></span><span class="nx">line</span><span class="p">.</span><span class="nx">setLineBodyTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">frameName</span><span class="p">);</span>
+</pre></div></li>
+<li>Set line-body width
+    <div class="codehilite"><pre><span></span><span class="nx">line</span><span class="p">.</span><span class="nx">setLineBodyWidth</span><span class="p">(</span><span class="nx">width</span><span class="p">);</span>
 </pre></div></li>
 </ul>
-<h3 id="start-at-state">Start at state<a class="headerlink" href="#start-at-state" title="Permanent link">&para;</a></h3>
-<p>Set new state without triggering any <a href="./#state-changing">state-changing</a> callbacks or events.</p>
-<div class="codehilite"><pre><span></span><span class="nx">state</span><span class="p">.</span><span class="nx">start</span><span class="p">(</span><span class="nx">newState</span><span class="p">);</span>
-</pre></div>
-
-<h3 id="next-state">Next state<a class="headerlink" href="#next-state" title="Permanent link">&para;</a></h3>
-<pre class="mermaid"><code>graph TB
-
-next[&quot;state.next()&quot;] --&gt; next_A[&quot;state.next_A()&lt;br&gt;return 'B'&quot;]
-
-next_A --&gt; eventStateChange[&quot;state.emit('statechange', state)&lt;br&gt;state.prevState -&gt; state.state&quot;]
-
-subgraph State changing
-
-eventStateChange --&gt; exit_A[&quot;state.exit_A()&quot;]
-exit_A --&gt; eventExitA[&quot;state.emit('exit_A', state)&quot;]
-
-eventExitA --&gt; enter_B[&quot;state.enter_B()&quot;]
-enter_B --&gt; eventEnterB[&quot;state.emit('enter_B', state)&quot;]
-
-subgraph Exit
-exit_A
-eventExitA
-end
-
-subgraph Enter
-enter_B
-eventEnterB
-end
-
-end
-
-goto[&quot;state.goto('B')&quot;] --&gt; eventStateChange
-
-subgraph Request
-
-subgraph Next
-next
-next_A
-end
-
-subgraph Goto
-goto
-end
-
-end</code></pre>
-
-<h4 id="request">Request<a class="headerlink" href="#request" title="Permanent link">&para;</a></h4>
-<ul>
-<li>Get next state by callback
-    <div class="codehilite"><pre><span></span><span class="nx">state</span><span class="p">.</span><span class="nx">next</span><span class="p">();</span>    <span class="c1">// nextState = state.next_A()    </span>
-</pre></div></li>
-<li>Goto state
-    <div class="codehilite"><pre><span></span><span class="nx">state</span><span class="p">.</span><span class="kr">goto</span><span class="p">(</span><span class="nx">nextState</span><span class="p">);</span>
-<span class="c1">// state.state = nextState;</span>
-</pre></div></li>
+</li>
 </ul>
-<h4 id="state-changing">State-changing<a class="headerlink" href="#state-changing" title="Permanent link">&para;</a></h4>
-<p>These callbacks or events will be triggered if state is changing.</p>
-<p>For example, state is changing from 'A' to 'B'.</p>
-<ol>
-<li>event <code>statechange</code>
-    <div class="codehilite"><pre><span></span><span class="nx">state</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;statechange&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">state</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">state</span><span class="p">.</span><span class="nx">prevState</span> <span class="o">+</span> <span class="s1">&#39;-&gt;&#39;</span> <span class="o">+</span> <span class="nx">state</span><span class="p">.</span><span class="nx">state</span> <span class="p">);</span>
-<span class="p">});</span>
-</pre></div></li>
-<li>callback <code>state.exit_A</code></li>
-<li>event <code>exit_A</code>
-    <div class="codehilite"><pre><span></span><span class="nx">state</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;exit_A&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">state</span><span class="p">)</span> <span class="p">{</span>
-    <span class="cm">/*...*/</span>
-<span class="p">});</span>
-</pre></div></li>
-<li>callback <code>state.enter_B</code></li>
-<li>event <code>enter_B</code>
-    <div class="codehilite"><pre><span></span><span class="nx">state</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;enter_B&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">state</span><span class="p">)</span> <span class="p">{</span>
-    <span class="cm">/*...*/</span>
-<span class="p">});</span>
-</pre></div></li>
-</ol>
-<h3 id="enable">Enable<a class="headerlink" href="#enable" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="nx">state</span><span class="p">.</span><span class="nx">setEnable</span><span class="p">();</span>
-<span class="c1">// state.setEnable(false); // disable</span>
-</pre></div>
-
-<p><code>state.next()</code> and <code>state.goto()</code> will be ignored if disabled.</p>
                 
                   
                 
@@ -5057,7 +4877,7 @@ end</code></pre>
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../tcrp-player/" title="Player" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../canvas-texture/" title="Canvas texture" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -5066,19 +4886,19 @@ end</code></pre>
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Player
+                Canvas texture
               </span>
             </div>
           </a>
         
         
-          <a href="../waitevents/" title="Wait events" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../tilemap/" title="Tile map" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Wait events
+                Tile map
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
