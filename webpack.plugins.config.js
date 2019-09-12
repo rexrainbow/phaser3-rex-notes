@@ -34,6 +34,8 @@ module.exports = {
         'persistenceeffect': './plugins/persistenceeffect.js',
         'lineplugin': './plugins/line-plugin.js',
         'line': './plugins/line.js',
+        'ninepatchplugin': './plugins/ninepatch-plugin.js',
+        'ninepatch': './plugins/ninepatch.js',
 
         // custom file loader      
         'webfontloaderplugin': './plugins/webfontloader-plugin.js',

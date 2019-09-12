@@ -87,6 +87,38 @@ var s = scene.textures.getBase64(key);  // type= 'image/png', encoderOptions= 0.
 // var s = scene.textures.getBase64(key, frame, type, encoderOptions);
 ```
 
+### Texture
+
+#### Get texture
+
+```javascript
+var texture = scene.textures.get(key);
+```
+
+#### Has frame
+
+```javascript
+var hasFrame = texture.has(frameName);
+```
+
+#### Add frame
+
+```javascript
+var frame = texture.add(frameName, sourceIndex, x, y, width, height);
+```
+
+- `key` : Texture key.
+- `frameName` : The name of this Frame. The name is unique within the Texture.
+- `sourceIndex` : The index of the TextureSource that this Frame is a part of.
+- `x`, `y` : The x/y coordinate of the top-left of this Frame.
+- `width`, `height` : The width/height of this Frame.
+
+#### Remove frame
+
+```javascript
+var removed = texture.remove(frameName);
+```
+
 ### Frame object
 
 ####　Get frame
