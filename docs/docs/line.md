@@ -55,7 +55,7 @@ var line = scene.add.rexLine({
     // end: undefined,
 
     body: {
-        key: undefined, frame: undefined,
+        key: undefined, frame: undefined, extendMode: 0,
         width: undefined,
     },
     // body: key,
@@ -72,6 +72,9 @@ var line = scene.add.rexLine({
     - `end.origin` : Origin of line-end. Default is `1`.
 - `body` : Configuration of line-body. Or texture key of line-body.
     - `body.key`, `body.frame` : Texrure of line-body. Line-body will be drawn repeatedly.
+    - `body.extendMode` : Extend mode of line-body.
+        - `0`, or `'scale'` : Draw line-body with scaled image game object.
+        - `1`, or `'repeat'` : Draw line-body with tile-sprute game object.
     - `body.width` : Line width.
 
 ### Custom class
@@ -157,6 +160,13 @@ var line = scene.add.rexLine({
         ```javascript
         line.setLineBodyTexture(key, frameName);
         ```
+    - Set line-body extend mode
+        ```javascript
+        line.setLineBodyExtendMode(mode);
+        ```
+        - `mode` : 
+            - `0`, or `'scale'` : Draw line-body with scaled image game object.
+            - `1`, or `'repeat'` : Draw line-body with tile-sprute game object.        
     - Set line-body width
         ```javascript
         line.setLineBodyWidth(width);

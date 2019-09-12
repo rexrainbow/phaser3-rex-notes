@@ -1,4 +1,5 @@
 import SetTexture from './SetTexture.js';
+import ExtendModeMethods from './ExtendModeMethods.js';
 import UpdateTexture from './UpdateTexture.js';
 
 const RenderTexture = Phaser.GameObjects.RenderTexture;
@@ -6,9 +7,9 @@ const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class NinePatch extends RenderTexture {
-    constructor(scene, x, y, width, height, key, columns, rows) {
+    constructor(scene, x, y, width, height, key, columns, rows, config) {
         if (IsPlainObject(x)) {
-            var config = x;
+            config = x;
             x = GetValue(config, 'x', 0);
             y = GetValue(config, 'y', 0);
             width = GetValue(config, 'width', 1);
@@ -17,14 +18,14 @@ class NinePatch extends RenderTexture {
             columns = GetValue(config, 'columns', undefined);
             rows = GetValue(config, 'rows', undefined);
         } else if (IsPlainObject(width)) {
-            var config = width;
+            config = width;
             width = GetValue(config, 'width', 1);
             height = GetValue(config, 'height', 1);
             key = GetValue(config, 'key', undefined);
             columns = GetValue(config, 'columns', undefined);
             rows = GetValue(config, 'rows', undefined);
         } else if (IsPlainObject(key)) {
-            var config = key;
+            config = key;
             key = GetValue(config, 'key', undefined);
             columns = GetValue(config, 'columns', undefined);
             rows = GetValue(config, 'rows', undefined);
@@ -33,22 +34,24 @@ class NinePatch extends RenderTexture {
         super(scene, x, y, width, height);
         this.columns = {};
         this.rows = {};
+        this.extendMode = {};
         this.redraw = false;
-        this._tileSprite = undefined;
         this._image = undefined;
+        this._tileSprite = undefined;
 
         this.setTexture(key, columns, rows);
         this.setOrigin(0.5, 0.5);
+        this.setExtendMode(GetValue(config, 'extendMode', 0))
     }
 
     preDestroy() {
-        if (this._tileSprite) {
-            this._tileSprite.destroy();
-            this._tileSprite = undefined;
-        }
         if (this._image) {
             this._image.destroy();
             this._image = undefined;
+        }
+        if (this._tileSprite) {
+            this._tileSprite.destroy();
+            this._tileSprite = undefined;
         }
         super.preDestroy();
     }
@@ -78,18 +81,15 @@ class NinePatch extends RenderTexture {
     }
 }
 
-const EXTENDMODE = {
-    scale: 0,
-    repeat: 1,
-}
-
 var methods = {
     setTexture: SetTexture,
     updateTexture: UpdateTexture,
 }
+
 Object.assign(
     NinePatch.prototype,
     methods,
+    ExtendModeMethods
 );
 
 export default NinePatch;

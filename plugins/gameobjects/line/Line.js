@@ -8,23 +8,47 @@ class Line extends RenderTexture {
         super(scene);
         this.redraw = false;
         this._tileSprite = undefined;
+        this._image = undefined;
 
         var lineStart = GetValue(config, 'start', undefined);
-        this.setLineStartPosition(GetValue(lineStart, 'x', 0), GetValue(lineStart, 'y', 0));
-        this.setLineStartTexture(GetValue(lineStart, 'key', lineStart), GetValue(lineStart, 'frame', undefined));
-        this.setLineStartOrigin(GetValue(lineStart, 'origin', undefined));
+        if (typeof (lineStart) === 'string') {
+            this.setLineStartPosition(0, 0);
+            this.setLineStartTexture(lineStart, undefined);
+            this.setLineStartOrigin(undefined);
+        } else {
+            this.setLineStartPosition(GetValue(lineStart, 'x', 0), GetValue(lineStart, 'y', 0));
+            this.setLineStartTexture(GetValue(lineStart, 'key', undefined), GetValue(lineStart, 'frame', undefined));
+            this.setLineStartOrigin(GetValue(lineStart, 'origin', undefined));
+        }
 
         var lineEnd = GetValue(config, 'end', undefined);
-        this.setLineEndPosition(GetValue(lineEnd, 'x', 0), GetValue(lineEnd, 'y', 0));
-        this.setLineEndTexture(GetValue(lineEnd, 'key', lineEnd), GetValue(lineEnd, 'frame', undefined));
-        this.setLineEndOrigin(GetValue(lineEnd, 'origin', undefined));
+        if (typeof (lineEnd) === 'string') {
+            this.setLineEndPosition(0, 0);
+            this.setLineEndTexture(lineEnd, undefined);
+            this.setLineEndOrigin(undefined);
+        } else {
+            this.setLineEndPosition(GetValue(lineEnd, 'x', 0), GetValue(lineEnd, 'y', 0));
+            this.setLineEndTexture(GetValue(lineEnd, 'key', undefined), GetValue(lineEnd, 'frame', undefined));
+            this.setLineEndOrigin(GetValue(lineEnd, 'origin', undefined));
+        }
 
         var lineBody = GetValue(config, 'body', undefined);
-        this.setLineBodyTexture(GetValue(lineBody, 'key', lineBody), GetValue(lineBody, 'frame', undefined));
-        this.setLineBodyWidth(GetValue(lineBody, 'width', undefined));
+        if (typeof (lineBody) === 'string') {
+            this.setLineBodyTexture(lineBody, undefined);
+            this.setLineBodyExtendMode(0);
+            this.setLineBodyWidth(undefined);
+        } else {
+            this.setLineBodyTexture(GetValue(lineBody, 'key', undefined), GetValue(lineBody, 'frame', undefined));
+            this.setLineBodyExtendMode(GetValue(lineBody, 'extendMode', 0));
+            this.setLineBodyWidth(GetValue(lineBody, 'width', undefined));
+        }
     }
 
     preDestroy() {
+        if (this._image) {
+            this._image.destroy();
+            this._image = undefined;
+        }
         if (this._tileSprite) {
             this._tileSprite.destroy();
             this._tileSprite = undefined;
@@ -133,6 +157,14 @@ class Line extends RenderTexture {
         return this;
     }
 
+    setLineBodyExtendMode(mode) {
+        if (typeof (mode) === 'string') {
+            mode = EXTENDMODE[mode];
+        }
+        this.lineBodyExtendMode = mode;
+        return this;
+    }
+
     get lineBodyFrame() {
         return this.scene.textures.getFrame(this.lineBodyTexture, this.lineBodyFrameName);
     }
@@ -146,6 +178,11 @@ class Line extends RenderTexture {
         this.updateTexture();
         super.renderCanvas(renderer, src, interpolationPercentage, camera, parentMatrix);
     }
+}
+
+const EXTENDMODE = {
+    scale: 0,
+    repeat: 1,
 }
 
 var methods = {

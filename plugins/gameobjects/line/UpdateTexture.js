@@ -25,10 +25,10 @@ var UpdateTexture = function () {
         height = Math.max(height, lineEndFrame.cutHeight);
     }
     if (lineBodyFrame) {
-        var tileSpriteHeight = (this.lineBodyWidth !== undefined) ? this.lineBodyWidth : lineBodyFrame.cutHeight;
-        height = Math.max(height, tileSpriteHeight);
+        var lineBodyHeight = (this.lineBodyWidth !== undefined) ? this.lineBodyWidth : lineBodyFrame.cutHeight;
+        height = Math.max(height, lineBodyHeight);
     }
-    
+
     width = Math.floor(width);
     height = Math.floor(height);
 
@@ -65,21 +65,34 @@ var UpdateTexture = function () {
     }
 
     // Draw line body
-    if (lineBodyFrame && (remainderWidth > 0) && (tileSpriteHeight > 0)) {
-        if (this._tileSprite === undefined) {
-            this._tileSprite = this.scene.make.tileSprite({
-                add: false,
-                origin: { x: 0, y: 0 },
-            });
+    if (lineBodyFrame && (remainderWidth > 0) && (lineBodyHeight > 0)) {
+        var lineBody;
+        if (this.lineBodyExtendMode === 0) {
+            if (this._image === undefined) {
+                this._image = this.scene.make.image({
+                    add: false,
+                    origin: { x: 0, y: 0 },
+                });
+            }
+            lineBody = this._image;
+            lineBody
+                .setTexture(this.lineBodyTexture, this.lineBodyFrameName)
+                .setDisplaySize(remainderWidth, lineBodyHeight);
+        } else {
+            if (this._tileSprite === undefined) {
+                this._tileSprite = this.scene.make.tileSprite({
+                    add: false,
+                    origin: { x: 0, y: 0 },
+                });
+            }
+            lineBody = this._tileSprite;
+            lineBody
+                .setTexture(this.lineBodyTexture, this.lineBodyFrameName)
+                .setSize(remainderWidth, lineBodyHeight);
         }
-
-        this._tileSprite
-            .setSize(remainderWidth, tileSpriteHeight)
-            .setTexture(this.lineBodyTexture, this.lineBodyFrameName);
-
         offsetX = (lineStartFrame) ? lineStartFrame.cutWidth : 0;
-        offsetY = (this.height - this._tileSprite.height) / 2;
-        this.draw(this._tileSprite, offsetX, offsetY);
+        offsetY = (this.height - lineBody.displayHeight) / 2;
+        this.draw(lineBody, offsetX, offsetY);
     }
 
     var originX = 1 - ((width - lineStartOffset) / width);

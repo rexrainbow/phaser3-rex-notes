@@ -21,14 +21,13 @@ var SetTexture = function (key, columns, rows) {
         return this;
     }
 
-    var nineCellsMode = (columns.length === 3) && (rows.length === 3);
     var row, col, rowHeight, colWidth;
     var offsetX = 0, offsetY = 0;
     for (var j = 0, jcnt = rows.length; j < jcnt; j++) {
-        if (nineCellsMode && (typeof (rows[j]) === 'number')) {
+        if (typeof (rows[j]) === 'number') {
             rows[j] = {
                 height: rows[j],
-                extend: ((j === 1) ? 1 : 0),
+                extend: (j % 2),
             }
         }
 
@@ -40,10 +39,10 @@ var SetTexture = function (key, columns, rows) {
 
         offsetX = 0;
         for (var i = 0, icnt = columns.length; i < icnt; i++) {
-            if (nineCellsMode && (typeof (columns[i]) === 'number')) {
+            if (typeof (columns[i]) === 'number') {
                 columns[i] = {
                     width: columns[i],
-                    extend: ((i === 1) ? 1 : 0),
+                    extend: (i % 2),
                 }
             }
 
