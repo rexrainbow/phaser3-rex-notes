@@ -39,7 +39,7 @@ class Line extends RenderTexture {
             this.setLineBodyWidth(undefined);
         } else {
             this.setLineBodyTexture(GetValue(lineBody, 'key', undefined), GetValue(lineBody, 'frame', undefined));
-            this.setLineBodyExtendMode(GetValue(lineBody, 'extendMode', 0));
+            this.setLineBodyExtendMode(GetValue(lineBody, 'extendMode', 1));
             this.setLineBodyWidth(GetValue(lineBody, 'width', undefined));
         }
     }

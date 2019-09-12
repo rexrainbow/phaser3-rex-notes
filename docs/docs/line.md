@@ -55,7 +55,7 @@ var line = scene.add.rexLine({
     // end: undefined,
 
     body: {
-        key: undefined, frame: undefined, extendMode: 0,
+        key: undefined, frame: undefined, extendMode: 1,
         width: undefined,
     },
     // body: key,
@@ -74,7 +74,7 @@ var line = scene.add.rexLine({
     - `body.key`, `body.frame` : Texrure of line-body. Line-body will be drawn repeatedly.
     - `body.extendMode` : Extend mode of line-body.
         - `0`, or `'scale'` : Draw line-body with scaled image game object.
-        - `1`, or `'repeat'` : Draw line-body with tile-sprute game object.
+        - `1`, or `'repeat'` : Draw line-body with tile-sprute game object. (Default value)
     - `body.width` : Line width.
 
 ### Custom class
