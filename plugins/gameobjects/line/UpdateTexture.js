@@ -25,7 +25,7 @@ var UpdateTexture = function () {
         height = Math.max(height, lineEndFrame.cutHeight);
     }
     if (lineBodyFrame) {
-        var tileSpriteHeight = (this.lineBodyWidth !== undefined) ? this.lineBodyWidth : lineBodyFrame.cutWidth;
+        var tileSpriteHeight = (this.lineBodyWidth !== undefined) ? this.lineBodyWidth : lineBodyFrame.cutHeight;
         height = Math.max(height, tileSpriteHeight);
     }
     

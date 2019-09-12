@@ -5,23 +5,23 @@ const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Line extends RenderTexture {
     constructor(scene, config) {
-        var lineStart = GetValue(config, 'start', undefined);
-        var lineEnd = GetValue(config, 'end', undefined);
-        var lineBody = GetValue(config, 'body', undefined);
-
         super(scene);
-        this
-            .setOrigin(0, 0.5)
-            .setLineStartPosition(GetValue(lineStart, 'x', 0), GetValue(lineStart, 'y', 0))
-            .setLineEndPosition(GetValue(lineEnd, 'x', 0), GetValue(lineEnd, 'y', 0))
-            .setLineStartTexture(GetValue(lineStart, 'key', lineStart), GetValue(lineStart, 'frame', undefined))
-            .setLineStartOrigin(GetValue(lineStart, 'origin', undefined))
-            .setLineEndTexture(GetValue(lineEnd, 'key', lineEnd), GetValue(lineEnd, 'frame', undefined))
-            .setLineEndOrigin(GetValue(lineEnd, 'origin', undefined))
-            .setLineBodyTexture(GetValue(lineBody, 'key', lineBody), GetValue(lineBody, 'frame', undefined), GetValue(lineBody, 'width', undefined))
-
+        this.redraw = false;
         this._tileSprite = undefined;
 
+        var lineStart = GetValue(config, 'start', undefined);
+        this.setLineStartPosition(GetValue(lineStart, 'x', 0), GetValue(lineStart, 'y', 0));
+        this.setLineStartTexture(GetValue(lineStart, 'key', lineStart), GetValue(lineStart, 'frame', undefined));
+        this.setLineStartOrigin(GetValue(lineStart, 'origin', undefined));
+
+        var lineEnd = GetValue(config, 'end', undefined);
+        this.setLineEndPosition(GetValue(lineEnd, 'x', 0), GetValue(lineEnd, 'y', 0));
+        this.setLineEndTexture(GetValue(lineEnd, 'key', lineEnd), GetValue(lineEnd, 'frame', undefined));
+        this.setLineEndOrigin(GetValue(lineEnd, 'origin', undefined));
+
+        var lineBody = GetValue(config, 'body', undefined);
+        this.setLineBodyTexture(GetValue(lineBody, 'key', lineBody), GetValue(lineBody, 'frame', undefined));
+        this.setLineBodyWidth(GetValue(lineBody, 'width', undefined));
     }
 
     preDestroy() {
@@ -120,9 +120,14 @@ class Line extends RenderTexture {
         return this.scene.textures.getFrame(this.lineEndTexture, this.lineEndFrameName);
     }
 
-    setLineBodyTexture(key, frame, width) {
+    setLineBodyTexture(key, frame) {
         this.lineBodyTexture = key;
         this.lineBodyFrameName = frame;
+        this.redraw = true;
+        return this;
+    }
+
+    setLineBodyWidth(width) {
         this.lineBodyWidth = width;
         this.redraw = true;
         return this;
