@@ -1,5 +1,3 @@
-import GetFrameName from './GetFrameName.js';
-
 var UpdateTexture = function () {
     if (!this.redraw) {
         return this;
@@ -23,7 +21,7 @@ var UpdateTexture = function () {
             col = this.columns.data[i];
             colWidth = (col.extend === 0) ? col.width : (proportionWidth * col.extend);
 
-            frameName = GetFrameName(i, j);
+            frameName = this.getFrameNameCallback(i, j);
             if ((row.extend === 0) && (col.extend === 0)) { // Draw frame
                 this.drawFrame(this.textureKey, frameName, offsetX, offsetY);
             } else {

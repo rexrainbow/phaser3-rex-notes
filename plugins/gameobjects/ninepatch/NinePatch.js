@@ -1,6 +1,5 @@
-import SetTexture from './SetTexture.js';
-import ExtendModeMethods from './ExtendModeMethods.js';
-import UpdateTexture from './UpdateTexture.js';
+import TextureMethods from './texture/TextureMethods.js';
+import DefaultGetFrameNameCallback from './utils/DefaultGetFrameNameCallback.js';
 
 const RenderTexture = Phaser.GameObjects.RenderTexture;
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
@@ -39,9 +38,10 @@ class NinePatch extends RenderTexture {
         this._image = undefined;
         this._tileSprite = undefined;
 
+        this.setGetFrameNameCallback(GetValue(config, 'getFrameNameCallback', undefined));
         this.setTexture(key, columns, rows);
         this.setOrigin(0.5, 0.5);
-        this.setExtendMode(GetValue(config, 'extendMode', 0))
+        this.setExtendMode(GetValue(config, 'extendMode', 0));
     }
 
     preDestroy() {
@@ -54,6 +54,14 @@ class NinePatch extends RenderTexture {
             this._tileSprite = undefined;
         }
         super.preDestroy();
+    }
+
+    setGetFrameNameCallback(callback) {
+        if (callback === undefined) {
+            callback = DefaultGetFrameNameCallback;
+        }
+        this.getFrameNameCallback = callback;
+        return this;
     }
 
     get minWidth() {
@@ -81,15 +89,9 @@ class NinePatch extends RenderTexture {
     }
 }
 
-var methods = {
-    setTexture: SetTexture,
-    updateTexture: UpdateTexture,
-}
-
 Object.assign(
     NinePatch.prototype,
-    methods,
-    ExtendModeMethods
+    TextureMethods,
 );
 
 export default NinePatch;

@@ -1,5 +1,3 @@
-import GetFrameName from './GetFrameName.js';
-
 var SetTexture = function (key, columns, rows) {
     this.textureKey = key;
     this.columns.data = columns;
@@ -55,7 +53,12 @@ var SetTexture = function (key, columns, rows) {
             }
 
             if ((colWidth >= 1) && (rowHeight >= 1)) {
-                texture.add(GetFrameName(i, j), 0, offsetX, offsetY, colWidth, rowHeight); // Do nothing if frameName is existed
+                texture.add(
+                    this.getFrameNameCallback(i, j), 0,
+                    offsetX, offsetY,
+                    colWidth, rowHeight
+                );
+                // Do nothing if frameName is existed
             }
             offsetX += colWidth;
         }

@@ -6,6 +6,7 @@ import TagTextFactory from './tagtext/Factory.js';
 import ContainerFactory from './container/Factory.js';
 import ChartFactory from './chart/Factory.js';
 import CircleMaskImageFactory from './circlemaskimage/Factory.js';
+import NinePatchFactory from './ninepatch/Factory.js';
 import VideoFactory from './video/Factory.js';
 import VideoCanvasFactory from './video/Factory.js';
 import YoutubePlayerFactory from './youtubeplayer/Factory.js';
