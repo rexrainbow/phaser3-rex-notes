@@ -32,6 +32,8 @@ nav:
             - Blitter: blitter.md
             - Particles: particles.md        
             - Tile sprite: tilesprite.md
+            - Nine patch: ninepatch.md
+            - Line: line.md            
         - Texture: texture.md        
     - Text:
         - Canvas text:
@@ -64,7 +66,6 @@ nav:
             - Round Rectangle: shape-roundrectangle.md
         - Canvas: canvas.md
         - Canvas texture: canvas-texture.md
-        - Line: line.md
     - Tile map:
         - Tile map: tilemap.md
     - Container:

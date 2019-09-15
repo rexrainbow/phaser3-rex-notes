@@ -52,8 +52,26 @@
     or
     ```javascript
     class MyRoundRectangle extends RexPlugins.UI.RoundRectangle {
-        constructor(x, y, width, height, radius, fillColor, fillAlpha) {
-            super(x, y, width, height, radius, fillColor, fillAlpha);
+        constructor(scene, x, y, width, height, radius, fillColor, fillAlpha) {
+            super(scene, x, y, width, height, radius, fillColor, fillAlpha);
+            // ...
+            scene.add.existing(this);
+        }
+        // ...
+    }
+    ```
+
+### Stretchable imaage
+
+1. [Nine-patch](ninepatch.md): Stretchable imaage.
+    ```javascript
+    var ninePatch = scene.rexUI.add.ninePatch(x, y, width, height, key, columns, rows, config);
+    ```
+    or
+    ```javascript
+    class MyNinePatch extends RexPlugins.UI.NinePatch {
+        constructor(scene, x, y, width, height, key, columns, rows, config) {
+            super(scene, x, y, width, height, key, columns, rows, config);
             // ...
             scene.add.existing(this);
         }

@@ -55,6 +55,7 @@
 1. [LZ-string](lzstring.md): Compress string using LZ-based compression algorithm.
 1. [Mouse-wheel to up/down](mousewheeltoupdown.md): Map mouse-wheeling to (up/down) cursor key state.
 1. [Move to](moveto.md): Move game object towards target position with a steady speed.
+1. [Nine patch](ninepatch.md): Stretchable image.
 1. [Path follower](pathfollower.md): Set position of game object on a path.
 1. [Perlin](perlin.md): Perlin2/Perlin3 noise and simplex2/simplex3 noise.
 1. [Pop up](popup.md): Scale up game object.

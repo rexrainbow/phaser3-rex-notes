@@ -38,9 +38,9 @@ class NinePatch extends RenderTexture {
         this._image = undefined;
         this._tileSprite = undefined;
 
+        this.setOrigin(0.5, 0.5);
         this.setGetFrameNameCallback(GetValue(config, 'getFrameNameCallback', undefined));
         this.setTexture(key, columns, rows);
-        this.setOrigin(0.5, 0.5);
         this.setStretchMode(GetValue(config, 'stretchMode', 0));
     }
 
@@ -75,6 +75,7 @@ class NinePatch extends RenderTexture {
     resize(width, height) {
         this.redraw = true;
         super.resize(width, height);
+        this.updateDisplayOrigin(); // Add this code into RenderTexture
         return this;
     }
 
@@ -84,6 +85,7 @@ class NinePatch extends RenderTexture {
     }
 
     renderCanvas(renderer, src, interpolationPercentage, camera, parentMatrix) {
+        debugger
         this.updateTexture();
         super.renderCanvas(renderer, src, interpolationPercentage, camera, parentMatrix);
     }
