@@ -16,6 +16,7 @@ class Demo extends Phaser.Scene {
 
     create() {
         CreateTexture1(this, 'bg1');
+        this.add.image(0, 0, 'bg1').setOrigin(0);
 
         this.rexUI.add.label({
             x: 400, y: 300,

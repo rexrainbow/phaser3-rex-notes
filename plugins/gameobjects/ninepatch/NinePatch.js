@@ -85,7 +85,6 @@ class NinePatch extends RenderTexture {
     }
 
     renderCanvas(renderer, src, interpolationPercentage, camera, parentMatrix) {
-        debugger
         this.updateTexture();
         super.renderCanvas(renderer, src, interpolationPercentage, camera, parentMatrix);
     }
