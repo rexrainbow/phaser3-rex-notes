@@ -128,3 +128,43 @@ var ninePatch = scene.add.rexNinePatch({
     ```javascript
     var ninePatch = new MyNinePatch(scene, x, y, width, height, key, columns, rows, config);
     ```
+
+### Resize
+
+```javascript
+ninePatch.resize(width, height);
+```
+
+### Set texture of source image
+
+```javascript
+ninePatch.setTexture(key, columns, rows);
+```
+
+- `key` : Texture key of source image.
+- `columns` : Configuration of columns.
+    - A number array, like `[20, 20, 20]` : Width of each column. 
+        - Width of column `0`, `2`, ... will be origin width. 
+        - Width of column `1`, `3`, ... will be stretched.
+- `rows` : Configuration of rows. 
+    - A number array, like `[20, 20, 20]` : Height of each row. 
+        - Height of row `0`, `2`, ... will be origin height. 
+        - Height of row `1`, `3`, ... will be stretched.
+
+### Set stretch mode
+
+```javascript
+ninePatch.setStretchMode(mode);
+```
+
+- `mode` :
+    - A number (`0`, or `1`), or a string (`'scale'`, or `'repeat'`): 
+        - `0`, or `'scale'` : Stretch each edge and internal cell by scaled image. Default value.
+        - `1`, or `'repeat'` : Stretch each edge and internal cell by repeated image (tile-sprite).
+    - An object : 
+        ```javascript
+        {
+            edge: 0, // 'scale', or 1, 'repeat'
+            internal: 0, // 'scale', or 1, 'repeat'
+        }
+        ```

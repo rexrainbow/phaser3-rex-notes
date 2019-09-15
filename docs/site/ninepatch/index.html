@@ -781,6 +781,27 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#resize" title="Resize" class="md-nav__link">
+    Resize
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-texture-of-source-image" title="Set texture of source image" class="md-nav__link">
+    Set texture of source image
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-stretch-mode" title="Set stretch mode" class="md-nav__link">
+    Set stretch mode
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4653,6 +4674,27 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#resize" title="Resize" class="md-nav__link">
+    Resize
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-texture-of-source-image" title="Set texture of source image" class="md-nav__link">
+    Set texture of source image
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-stretch-mode" title="Set stretch mode" class="md-nav__link">
+    Set stretch mode
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4806,6 +4848,53 @@
 <li>Create instance
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">ninePatch</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyNinePatch</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">columns</span><span class="p">,</span> <span class="nx">rows</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </pre></div></li>
+</ul>
+<h3 id="resize">Resize<a class="headerlink" href="#resize" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">ninePatch</span><span class="p">.</span><span class="nx">resize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+</pre></div>
+
+<h3 id="set-texture-of-source-image">Set texture of source image<a class="headerlink" href="#set-texture-of-source-image" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">ninePatch</span><span class="p">.</span><span class="nx">setTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">columns</span><span class="p">,</span> <span class="nx">rows</span><span class="p">);</span>
+</pre></div>
+
+<ul>
+<li><code>key</code> : Texture key of source image.</li>
+<li><code>columns</code> : Configuration of columns.<ul>
+<li>A number array, like <code>[20, 20, 20]</code> : Width of each column. <ul>
+<li>Width of column <code>0</code>, <code>2</code>, ... will be origin width. </li>
+<li>Width of column <code>1</code>, <code>3</code>, ... will be stretched.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>rows</code> : Configuration of rows. <ul>
+<li>A number array, like <code>[20, 20, 20]</code> : Height of each row. <ul>
+<li>Height of row <code>0</code>, <code>2</code>, ... will be origin height. </li>
+<li>Height of row <code>1</code>, <code>3</code>, ... will be stretched.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="set-stretch-mode">Set stretch mode<a class="headerlink" href="#set-stretch-mode" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">ninePatch</span><span class="p">.</span><span class="nx">setStretchMode</span><span class="p">(</span><span class="nx">mode</span><span class="p">);</span>
+</pre></div>
+
+<ul>
+<li><code>mode</code> :<ul>
+<li>A number (<code>0</code>, or <code>1</code>), or a string (<code>'scale'</code>, or <code>'repeat'</code>): <ul>
+<li><code>0</code>, or <code>'scale'</code> : Stretch each edge and internal cell by scaled image. Default value.</li>
+<li><code>1</code>, or <code>'repeat'</code> : Stretch each edge and internal cell by repeated image (tile-sprite).</li>
+</ul>
+</li>
+<li>An object : 
+    <div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nx">edge</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="c1">// &#39;scale&#39;, or 1, &#39;repeat&#39;</span>
+    <span class="nx">internal</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="c1">// &#39;scale&#39;, or 1, &#39;repeat&#39;</span>
+<span class="p">}</span>
+</pre></div></li>
+</ul>
+</li>
 </ul>
                 
                   
