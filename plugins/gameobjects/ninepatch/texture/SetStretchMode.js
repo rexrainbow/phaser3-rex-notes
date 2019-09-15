@@ -1,14 +1,14 @@
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-var SetExtendMode = function(mode) {
+var SetStretchMode = function(mode) {
     if (IsPlainObject(mode)) {
-        this.extendMode.edge = parseMode(GetValue(mode, 'edge', 0));
-        this.extendMode.inside = parseMode(GetValue(mode, 'inside', 0));
+        this.stretchMode.edge = parseMode(GetValue(mode, 'edge', 0));
+        this.stretchMode.internal = parseMode(GetValue(mode, 'internal', 0));
     } else {
         mode = parseMode(mode);
-        this.extendMode.edge = mode;
-        this.extendMode.inside = mode;
+        this.stretchMode.edge = mode;
+        this.stretchMode.internal = mode;
     }
     return this;
 };
@@ -25,4 +25,4 @@ const EXTENDMODE = {
     repeat: 1,
 }
 
-export default SetExtendMode;
+export default SetStretchMode;

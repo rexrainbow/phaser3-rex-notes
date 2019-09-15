@@ -33,7 +33,7 @@ class NinePatch extends RenderTexture {
         super(scene, x, y, width, height);
         this.columns = {};
         this.rows = {};
-        this.extendMode = {};
+        this.stretchMode = {};
         this.redraw = false;
         this._image = undefined;
         this._tileSprite = undefined;
@@ -41,7 +41,7 @@ class NinePatch extends RenderTexture {
         this.setGetFrameNameCallback(GetValue(config, 'getFrameNameCallback', undefined));
         this.setTexture(key, columns, rows);
         this.setOrigin(0.5, 0.5);
-        this.setExtendMode(GetValue(config, 'extendMode', 0));
+        this.setStretchMode(GetValue(config, 'stretchMode', 0));
     }
 
     preDestroy() {

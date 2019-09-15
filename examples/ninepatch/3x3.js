@@ -29,9 +29,9 @@ class Demo extends Phaser.Scene {
             key: 'bg1',
             columns: [10, 10, 10],
             rows: [10, 10, 10],
-            extendMode: {
+            stretchMode: {
                 edge: 'repeat',
-                inner: 'scale'
+                internal: 'scale'
             }
         })
     }
@@ -64,10 +64,10 @@ var CreateTexture1 = function (scene, key) {
     var width = 30, height = 30;
     scene.add.graphics()
         .fillStyle(COLOR_PRIMARY)
-        .fillRect(0, 0, 9, 9)
-        .fillRect(width - 10, 0, 9, 9)
-        .fillRect(0, height - 10, 9, 9)
-        .fillRect(width - 10, height - 10, 9, 9)
+        .fillRect(0, 0, 10, 10)
+        .fillRect(width - 10, 0, 10, 10)
+        .fillRect(0, height - 10, 10, 10)
+        .fillRect(width - 10, height - 10, 10, 10)
         .fillCircle(15, 5, 4)
         .fillCircle(5, 15, 4)
         .fillCircle(15, 25, 4)

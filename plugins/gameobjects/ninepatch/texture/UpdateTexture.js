@@ -7,26 +7,26 @@ var UpdateTexture = function () {
 
     var remainderWidth = this.width - this.columns.minWidth;
     var remainderHeight = this.height - this.rows.minHeight;
-    var proportionWidth = (this.columns.extend > 0) ? (remainderWidth / this.columns.extend) : 0;
-    var proportionHeight = (this.rows.extend > 0) ? (remainderHeight / this.rows.extend) : 0;
+    var proportionWidth = (this.columns.stretch > 0) ? (remainderWidth / this.columns.stretch) : 0;
+    var proportionHeight = (this.rows.stretch > 0) ? (remainderHeight / this.rows.stretch) : 0;
 
     var frameName, col, row, colWidth, rowHeight;
     var offsetX = 0, offsetY = 0;
     for (var j = 0, jcnt = this.rows.count; j < jcnt; j++) {
         row = this.rows.data[j];
-        rowHeight = (row.extend === 0) ? row.height : (proportionHeight * row.extend);
+        rowHeight = (row.stretch === 0) ? row.height : (proportionHeight * row.stretch);
 
         offsetX = 0;
         for (var i = 0, icnt = this.columns.count; i < icnt; i++) {
             col = this.columns.data[i];
-            colWidth = (col.extend === 0) ? col.width : (proportionWidth * col.extend);
+            colWidth = (col.stretch === 0) ? col.width : (proportionWidth * col.stretch);
 
             frameName = this.getFrameNameCallback(i, j);
-            if ((row.extend === 0) && (col.extend === 0)) { // Draw frame
+            if ((row.stretch === 0) && (col.stretch === 0)) { // Draw frame
                 this.drawFrame(this.textureKey, frameName, offsetX, offsetY);
             } else {
                 var gameObject;
-                if (this.getExtendMode(i, j) === 0) { // Scaled image
+                if (this.getStretchMode(i, j) === 0) { // Scaled image
                     // Draw scaled image
                     if (this._image === undefined) {
                         this._image = this.scene.make.image({
