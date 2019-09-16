@@ -43,7 +43,7 @@
     }
     ```
 
-### Shape objects
+### Background objects
 
 1. [Round-rectangle](shape-roundrectangle.md): Round rectangle shape.
     ```javascript
@@ -60,9 +60,6 @@
         // ...
     }
     ```
-
-### Stretchable imaage
-
 1. [Nine-patch](ninepatch.md): Stretchable imaage.
     ```javascript
     var ninePatch = scene.rexUI.add.ninePatch(x, y, width, height, key, columns, rows, config);
