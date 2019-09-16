@@ -46,7 +46,7 @@ or install it in previous scene (i.e. a preload scene).
 In preload stage:
 
 ```javascript
-this.load.rexWebfont({
+this.load.rexWebFont({
     google: {
         families: ['Bangers']
     }
