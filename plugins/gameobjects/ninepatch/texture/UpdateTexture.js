@@ -52,7 +52,7 @@ var UpdateTexture = function () {
                             .setSize(colWidth, rowHeight);
                     }
                     this.draw(gameObject, offsetX, offsetY);
-                }                
+                }
             }
             offsetX += colWidth;
         }
