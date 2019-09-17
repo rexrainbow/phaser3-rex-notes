@@ -802,6 +802,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#set-get-frame-name-callback" title="Set get-frame-name callback" class="md-nav__link">
+    Set get-frame-name callback
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4695,6 +4702,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#set-get-frame-name-callback" title="Set get-frame-name callback" class="md-nav__link">
+    Set get-frame-name callback
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4753,6 +4767,7 @@
 <h3 id="create-instance">Create instance<a class="headerlink" href="#create-instance" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">ninePatch</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexNinePatch</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">columns</span><span class="p">,</span> <span class="nx">rows</span><span class="p">,</span> <span class="p">{</span>
     <span class="nx">stretchMode</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">getFrameNameCallback</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
 <span class="p">});</span>
 </pre></div>
 
@@ -4763,6 +4778,7 @@
     <span class="nx">rows</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
 
     <span class="nx">stretchMode</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">getFrameNameCallback</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
 <span class="p">});</span>
 </pre></div>
 
@@ -4774,6 +4790,7 @@
     <span class="nx">rows</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
 
     <span class="nx">stretchMode</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">getFrameNameCallback</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
 <span class="p">});</span>
 </pre></div>
 
@@ -4786,6 +4803,7 @@
     <span class="nx">rows</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
 
     <span class="nx">stretchMode</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">getFrameNameCallback</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
 <span class="p">});</span>
 </pre></div>
 
@@ -4819,6 +4837,15 @@
     <div class="codehilite"><pre><span></span><span class="p">{</span>
     <span class="nx">edge</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="c1">// &#39;scale&#39;, or 1, &#39;repeat&#39;</span>
     <span class="nx">internal</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="c1">// &#39;scale&#39;, or 1, &#39;repeat&#39;</span>
+<span class="p">}</span>
+</pre></div></li>
+</ul>
+</li>
+<li><code>getFrameNameCallback</code> : Callback to get frame name of each cell.<ul>
+<li><code>undefined</code> : Use default callback, which will return <code>${colIndex},${rowIndex}</code>.</li>
+<li>Function object : Return a string, or <code>undefined</code>.
+    <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">colIndex</span><span class="p">,</span> <span class="nx">rowIndex</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="sb">`</span><span class="si">${</span><span class="nx">colIndex</span><span class="si">}</span><span class="sb">,</span><span class="si">${</span><span class="nx">rowIndex</span><span class="si">}</span><span class="sb">`</span>
 <span class="p">}</span>
 </pre></div></li>
 </ul>
@@ -4895,6 +4922,17 @@
 </pre></div></li>
 </ul>
 </li>
+</ul>
+<h3 id="set-get-frame-name-callback">Set get-frame-name callback<a class="headerlink" href="#set-get-frame-name-callback" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">ninePatch</span><span class="p">.</span><span class="nx">setGetFrameNameCallback</span><span class="p">(</span><span class="nx">callback</span><span class="p">);</span>
+</pre></div>
+
+<ul>
+<li><code>callback</code> : Return a string, or <code>undefined</code>.
+    <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">colIndex</span><span class="p">,</span> <span class="nx">rowIndex</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="sb">`</span><span class="si">${</span><span class="nx">colIndex</span><span class="si">}</span><span class="sb">,</span><span class="si">${</span><span class="nx">rowIndex</span><span class="si">}</span><span class="sb">`</span>
+<span class="p">}</span>
+</pre></div></li>
 </ul>
                 
                   
