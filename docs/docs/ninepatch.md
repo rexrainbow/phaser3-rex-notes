@@ -41,6 +41,7 @@ var game = new Phaser.Game(config);
 ```javascript
 var ninePatch = scene.add.rexNinePatch(x, y, width, height, key, columns, rows, {
     stretchMode: 0,
+    getFrameNameCallback: undefined,
 });
 ```
 
@@ -53,6 +54,7 @@ var ninePatch = scene.add.rexNinePatch(x, y, width, height, {
     rows: undefined,
 
     stretchMode: 0,
+    getFrameNameCallback: undefined,
 });
 ```
 
@@ -66,6 +68,7 @@ var ninePatch = scene.add.rexNinePatch(x, y, {
     rows: undefined,
 
     stretchMode: 0,
+    getFrameNameCallback: undefined,
 });
 ```
 
@@ -80,6 +83,7 @@ var ninePatch = scene.add.rexNinePatch({
     rows: undefined,
 
     stretchMode: 0,
+    getFrameNameCallback: undefined,
 });
 ```
 
@@ -103,6 +107,14 @@ var ninePatch = scene.add.rexNinePatch({
         {
             edge: 0, // 'scale', or 1, 'repeat'
             internal: 0, // 'scale', or 1, 'repeat'
+        }
+        ```
+- `getFrameNameCallback` : Callback to get frame name of each cell.
+    - `undefined` : Use default callback, which will return `${colIndex},${rowIndex}`.
+    - Function object : Return a string, or `undefined`.
+        ```javascript
+        function(colIndex, rowIndex) {
+            return `${colIndex},${rowIndex}`
         }
         ```
 
@@ -168,3 +180,16 @@ ninePatch.setStretchMode(mode);
             internal: 0, // 'scale', or 1, 'repeat'
         }
         ```
+
+### Set get-frame-name callback
+
+```javascript
+ninePatch.setGetFrameNameCallback(callback);
+```
+
+- `callback` : Return a string, or `undefined`.
+    ```javascript
+    function(colIndex, rowIndex) {
+        return `${colIndex},${rowIndex}`
+    }
+    ```

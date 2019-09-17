@@ -19,7 +19,7 @@ var SetTexture = function (key, columns, rows) {
         return this;
     }
 
-    var row, col, rowHeight, colWidth;
+    var row, col, rowHeight, colWidth, frameName;
     var offsetX = 0, offsetY = 0;
     for (var j = 0, jcnt = rows.length; j < jcnt; j++) {
         if (typeof (rows[j]) === 'number') {
@@ -53,12 +53,15 @@ var SetTexture = function (key, columns, rows) {
             }
 
             if ((colWidth >= 1) && (rowHeight >= 1)) {
-                texture.add(
-                    this.getFrameNameCallback(i, j), 0,
-                    offsetX, offsetY,
-                    colWidth, rowHeight
-                );
-                // Do nothing if frameName is existed
+                frameName = this.getFrameNameCallback(i, j);
+                if (frameName) {
+                    texture.add(
+                        this.getFrameNameCallback(i, j), 0,
+                        offsetX, offsetY,
+                        colWidth, rowHeight
+                    );
+                    // Do nothing if frameName is existed
+                }
             }
             offsetX += colWidth;
         }
