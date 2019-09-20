@@ -2,7 +2,7 @@
 
 
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="no-js">
   <head>
     
@@ -36,7 +36,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../images/logo.svg">
-      <meta name="generator" content="mkdocs-1.0.3, mkdocs-material-3.0.4">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.2">
     
     
       
@@ -44,9 +44,9 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application.451f80e5.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application.30686662.css">
       
-        <link rel="stylesheet" href="../assets/stylesheets/application-palette.22915126.css">
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.a8b3c06d.css">
       
       
         
@@ -55,16 +55,45 @@
       
     
     
-      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
+      <script src="../assets/javascripts/modernizr.74668098.js"></script>
     
     
       
         <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
     <link rel="stylesheet" href="../assets/fonts/material-icons.css">
+    
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-119804412-1", "auto")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
     
     
   </head>
@@ -77,24 +106,7 @@
       <defs>
         
         
-          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
-    viewBox="0 0 416 448" id="__github">
-  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
-        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
-        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
-        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
-        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
-        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
-        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
-        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
-        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
-        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
-        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
-        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
-        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
-        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
-        99.5z" />
-</svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
         
       </defs>
     </svg>
@@ -102,7 +114,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="../#introduction" tabindex="1" class="md-skip">
+      <a href="#introduction" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -123,22 +135,21 @@
       <div class="md-flex__cell md-flex__cell--stretch">
         <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
           
-            
-              <span class="md-header-nav__topic">
-                Notes of Phaser 3
-              </span>
-              <span class="md-header-nav__topic">
+            <span class="md-header-nav__topic">
+              Notes of Phaser 3
+            </span>
+            <span class="md-header-nav__topic">
+              
                 LokiJs
-              </span>
-            
+              
+            </span>
           
         </div>
       </div>
       <div class="md-flex__cell md-flex__cell--shrink">
         
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
           
-            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
-            
 <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
@@ -161,7 +172,6 @@
     </div>
   </div>
 </div>
-          
         
       </div>
       
@@ -172,20 +182,18 @@
 
   
 
-
-  <a href="https://github.com/rexrainbow/phaser3-rex-notes/" title="Go to repository" class="md-source" data-md-source="github">
-    
-      <div class="md-source__icon">
-        <svg viewBox="0 0 24 24" width="24" height="24">
-          <use xlink:href="#__github" width="24" height="24"></use>
-        </svg>
-      </div>
-    
-    <div class="md-source__repository">
-      phaser3-rex-notes
+<a href="https://github.com/rexrainbow/phaser3-rex-notes/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
     </div>
-  </a>
-
+  
+  <div class="md-source__repository">
+    phaser3-rex-notes
+  </div>
+</a>
           </div>
         </div>
       
@@ -198,7 +206,7 @@
         
       
       
-      <main class="md-main">
+      <main class="md-main" role="main">
         <div class="md-main__inner md-grid" data-md-component="container">
           
             
@@ -221,20 +229,18 @@
 
   
 
-
-  <a href="https://github.com/rexrainbow/phaser3-rex-notes/" title="Go to repository" class="md-source" data-md-source="github">
-    
-      <div class="md-source__icon">
-        <svg viewBox="0 0 24 24" width="24" height="24">
-          <use xlink:href="#__github" width="24" height="24"></use>
-        </svg>
-      </div>
-    
-    <div class="md-source__repository">
-      phaser3-rex-notes
+<a href="https://github.com/rexrainbow/phaser3-rex-notes/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
     </div>
-  </a>
-
+  
+  <div class="md-source__repository">
+    phaser3-rex-notes
+  </div>
+</a>
     </div>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -3154,14 +3160,14 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
+  <a href="#introduction" class="md-nav__link">
     Introduction
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
+  <a href="#usage" class="md-nav__link">
     Usage
   </a>
   
@@ -3169,21 +3175,21 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#create-database" title="Create database" class="md-nav__link">
+  <a href="#create-database" class="md-nav__link">
     Create database
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-collection" title="Create collection" class="md-nav__link">
+  <a href="#create-collection" class="md-nav__link">
     Create collection
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#insert-document" title="Insert document" class="md-nav__link">
+  <a href="#insert-document" class="md-nav__link">
     Insert document
   </a>
   
@@ -3191,7 +3197,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#insert-documents" title="Insert documents" class="md-nav__link">
+  <a href="#insert-documents" class="md-nav__link">
     Insert documents
   </a>
   
@@ -3203,7 +3209,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#query" title="Query" class="md-nav__link">
+  <a href="#query" class="md-nav__link">
     Query
   </a>
   
@@ -3211,77 +3217,77 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#get-document-by-id" title="Get document by id" class="md-nav__link">
+  <a href="#get-document-by-id" class="md-nav__link">
     Get document by id
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#filter-documents" title="Filter documents" class="md-nav__link">
+  <a href="#filter-documents" class="md-nav__link">
     Filter documents
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#find-one-document" title="Find one document" class="md-nav__link">
+  <a href="#find-one-document" class="md-nav__link">
     Find one document
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#filter-by-function" title="Filter by function" class="md-nav__link">
+  <a href="#filter-by-function" class="md-nav__link">
     Filter by function
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#sort" title="Sort" class="md-nav__link">
+  <a href="#sort" class="md-nav__link">
     Sort
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#pagination" title="Pagination" class="md-nav__link">
+  <a href="#pagination" class="md-nav__link">
     Pagination
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#update" title="Update" class="md-nav__link">
+  <a href="#update" class="md-nav__link">
     Update
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#remove" title="Remove" class="md-nav__link">
+  <a href="#remove" class="md-nav__link">
     Remove
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#map" title="Map" class="md-nav__link">
+  <a href="#map" class="md-nav__link">
     Map
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#map-reduce" title="Map-reduce" class="md-nav__link">
+  <a href="#map-reduce" class="md-nav__link">
     Map-reduce
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#clone-result-set" title="Clone result set" class="md-nav__link">
+  <a href="#clone-result-set" class="md-nav__link">
     Clone result set
   </a>
   
@@ -3293,14 +3299,14 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#dynamic-view" title="Dynamic view" class="md-nav__link">
+  <a href="#dynamic-view" class="md-nav__link">
     Dynamic view
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#speed-up-quering" title="Speed-up quering" class="md-nav__link">
+  <a href="#speed-up-quering" class="md-nav__link">
     Speed-up quering
   </a>
   
@@ -3308,14 +3314,14 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#custom-unique-index" title="Custom unique index" class="md-nav__link">
+  <a href="#custom-unique-index" class="md-nav__link">
     Custom unique index
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#binary-indices" title="Binary indices" class="md-nav__link">
+  <a href="#binary-indices" class="md-nav__link">
     Binary indices
   </a>
   
@@ -3327,14 +3333,14 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#methods-of-collection" title="Methods of collection" class="md-nav__link">
+  <a href="#methods-of-collection" class="md-nav__link">
     Methods of collection
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#serialize-deserialize" title="Serialize &amp; Deserialize" class="md-nav__link">
+  <a href="#serialize-deserialize" class="md-nav__link">
     Serialize &amp; Deserialize
   </a>
   
@@ -4753,14 +4759,14 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
+  <a href="#introduction" class="md-nav__link">
     Introduction
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
+  <a href="#usage" class="md-nav__link">
     Usage
   </a>
   
@@ -4768,21 +4774,21 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#create-database" title="Create database" class="md-nav__link">
+  <a href="#create-database" class="md-nav__link">
     Create database
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-collection" title="Create collection" class="md-nav__link">
+  <a href="#create-collection" class="md-nav__link">
     Create collection
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#insert-document" title="Insert document" class="md-nav__link">
+  <a href="#insert-document" class="md-nav__link">
     Insert document
   </a>
   
@@ -4790,7 +4796,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#insert-documents" title="Insert documents" class="md-nav__link">
+  <a href="#insert-documents" class="md-nav__link">
     Insert documents
   </a>
   
@@ -4802,7 +4808,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#query" title="Query" class="md-nav__link">
+  <a href="#query" class="md-nav__link">
     Query
   </a>
   
@@ -4810,77 +4816,77 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#get-document-by-id" title="Get document by id" class="md-nav__link">
+  <a href="#get-document-by-id" class="md-nav__link">
     Get document by id
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#filter-documents" title="Filter documents" class="md-nav__link">
+  <a href="#filter-documents" class="md-nav__link">
     Filter documents
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#find-one-document" title="Find one document" class="md-nav__link">
+  <a href="#find-one-document" class="md-nav__link">
     Find one document
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#filter-by-function" title="Filter by function" class="md-nav__link">
+  <a href="#filter-by-function" class="md-nav__link">
     Filter by function
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#sort" title="Sort" class="md-nav__link">
+  <a href="#sort" class="md-nav__link">
     Sort
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#pagination" title="Pagination" class="md-nav__link">
+  <a href="#pagination" class="md-nav__link">
     Pagination
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#update" title="Update" class="md-nav__link">
+  <a href="#update" class="md-nav__link">
     Update
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#remove" title="Remove" class="md-nav__link">
+  <a href="#remove" class="md-nav__link">
     Remove
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#map" title="Map" class="md-nav__link">
+  <a href="#map" class="md-nav__link">
     Map
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#map-reduce" title="Map-reduce" class="md-nav__link">
+  <a href="#map-reduce" class="md-nav__link">
     Map-reduce
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#clone-result-set" title="Clone result set" class="md-nav__link">
+  <a href="#clone-result-set" class="md-nav__link">
     Clone result set
   </a>
   
@@ -4892,14 +4898,14 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#dynamic-view" title="Dynamic view" class="md-nav__link">
+  <a href="#dynamic-view" class="md-nav__link">
     Dynamic view
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#speed-up-quering" title="Speed-up quering" class="md-nav__link">
+  <a href="#speed-up-quering" class="md-nav__link">
     Speed-up quering
   </a>
   
@@ -4907,14 +4913,14 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#custom-unique-index" title="Custom unique index" class="md-nav__link">
+  <a href="#custom-unique-index" class="md-nav__link">
     Custom unique index
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#binary-indices" title="Binary indices" class="md-nav__link">
+  <a href="#binary-indices" class="md-nav__link">
     Binary indices
   </a>
   
@@ -4926,14 +4932,14 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#methods-of-collection" title="Methods of collection" class="md-nav__link">
+  <a href="#methods-of-collection" class="md-nav__link">
     Methods of collection
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#serialize-deserialize" title="Serialize &amp; Deserialize" class="md-nav__link">
+  <a href="#serialize-deserialize" class="md-nav__link">
     Serialize &amp; Deserialize
   </a>
   
@@ -5317,7 +5323,6 @@
           Material for MkDocs</a>
       </div>
       
-        
   <div class="md-footer-social">
     <link rel="stylesheet" href="../assets/fonts/font-awesome.css">
     
@@ -5327,25 +5332,19 @@
     
   </div>
 
-      
     </div>
   </div>
 </footer>
       
     </div>
     
-      <script src="../assets/javascripts/application.583bbe55.js"></script>
+      <script src="../assets/javascripts/application.c648116f.js"></script>
       
-      <script>app.initialize({version:"1.0.3",url:{base:".."}})</script>
+      <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
       
         <script src="../js/mermaid/mermaid.min.js"></script>
       
         <script src="../js/umlconvert.js"></script>
-      
-    
-    
-      
-        <script>!function(e,a,t,n,o,c,i){e.GoogleAnalyticsObject=o,e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=1*new Date,c=a.createElement(t),i=a.getElementsByTagName(t)[0],c.async=1,c.src="https://www.google-analytics.com/analytics.js",i.parentNode.insertBefore(c,i)}(window,document,"script",0,"ga"),ga("create","UA-119804412-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview");var links=document.getElementsByTagName("a");if(Array.prototype.map.call(links,function(e){e.host!=document.location.host&&e.addEventListener("click",function(){var a=e.getAttribute("data-md-action")||"follow";ga("send","event","outbound",a,e.href)})}),document.forms.search){var query=document.forms.search.query;query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}</script>
       
     
   </body>

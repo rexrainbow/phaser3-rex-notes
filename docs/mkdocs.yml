@@ -326,13 +326,17 @@ google_analytics:
 
 markdown_extensions:
 - admonition
-- codehilite(guess_lang=false,linenums=false)
-- toc(permalink=true)
+- codehilite:
+    guess_lang: false
+    linenums: false
+- toc:
+    permalink: true
 - footnotes
 - meta
 - def_list
 - pymdownx.arithmatex
-- pymdownx.betterem(smart_enable=all)
+- pymdownx.betterem:
+    smart_enable: all
 - pymdownx.caret
 - pymdownx.critic
 - pymdownx.details

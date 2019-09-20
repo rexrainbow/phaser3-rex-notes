@@ -2,7 +2,7 @@
 
 
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="no-js">
   <head>
     
@@ -36,7 +36,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../images/logo.svg">
-      <meta name="generator" content="mkdocs-1.0.3, mkdocs-material-3.0.4">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.2">
     
     
       
@@ -44,9 +44,9 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application.451f80e5.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application.30686662.css">
       
-        <link rel="stylesheet" href="../assets/stylesheets/application-palette.22915126.css">
+        <link rel="stylesheet" href="../assets/stylesheets/application-palette.a8b3c06d.css">
       
       
         
@@ -55,16 +55,45 @@
       
     
     
-      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
+      <script src="../assets/javascripts/modernizr.74668098.js"></script>
     
     
       
         <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono&display=fallback">
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
     <link rel="stylesheet" href="../assets/fonts/material-icons.css">
+    
+    
+    
+      
+        
+<script>
+  window.ga = window.ga || function() {
+    (ga.q = ga.q || []).push(arguments)
+  }
+  ga.l = +new Date
+  /* Setup integration and send page view */
+  ga("create", "UA-119804412-1", "auto")
+  ga("set", "anonymizeIp", true)
+  ga("send", "pageview")
+  /* Register handler to log search on blur */
+  document.addEventListener("DOMContentLoaded", () => {
+    if (document.forms.search) {
+      var query = document.forms.search.query
+      query.addEventListener("blur", function() {
+        if (this.value) {
+          var path = document.location.pathname;
+          ga("send", "pageview", path + "?q=" + this.value)
+        }
+      })
+    }
+  })
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
     
     
   </head>
@@ -77,24 +106,7 @@
       <defs>
         
         
-          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448"
-    viewBox="0 0 416 448" id="__github">
-  <path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19-18.125
-        8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19 18.125-8.5
-        18.125 8.5 10.75 19 3.125 20.5zM320 304q0 10-3.125 20.5t-10.75
-        19-18.125 8.5-18.125-8.5-10.75-19-3.125-20.5 3.125-20.5 10.75-19
-        18.125-8.5 18.125 8.5 10.75 19 3.125 20.5zM360
-        304q0-30-17.25-51t-46.75-21q-10.25 0-48.75 5.25-17.75 2.75-39.25
-        2.75t-39.25-2.75q-38-5.25-48.75-5.25-29.5 0-46.75 21t-17.25 51q0 22 8
-        38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0
-        37.25-1.75t35-7.375 30.5-15 20.25-25.75 8-38.375zM416 260q0 51.75-15.25
-        82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5-41.75
-        1.125q-19.5 0-35.5-0.75t-36.875-3.125-38.125-7.5-34.25-12.875-30.25-20.25-21.5-28.75q-15.5-30.75-15.5-82.75
-        0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25
-        30.875q36.75-8.75 77.25-8.75 37 0 70 8 26.25-20.5
-        46.75-30.25t47.25-9.75q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34
-        99.5z" />
-</svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
         
       </defs>
     </svg>
@@ -102,7 +114,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="../#introduction" tabindex="1" class="md-skip">
+      <a href="#introduction" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -123,22 +135,21 @@
       <div class="md-flex__cell md-flex__cell--stretch">
         <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
           
-            
-              <span class="md-header-nav__topic">
-                Notes of Phaser 3
-              </span>
-              <span class="md-header-nav__topic">
+            <span class="md-header-nav__topic">
+              Notes of Phaser 3
+            </span>
+            <span class="md-header-nav__topic">
+              
                 Board
-              </span>
-            
+              
+            </span>
           
         </div>
       </div>
       <div class="md-flex__cell md-flex__cell--shrink">
         
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
           
-            <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
-            
 <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
@@ -161,7 +172,6 @@
     </div>
   </div>
 </div>
-          
         
       </div>
       
@@ -172,20 +182,18 @@
 
   
 
-
-  <a href="https://github.com/rexrainbow/phaser3-rex-notes/" title="Go to repository" class="md-source" data-md-source="github">
-    
-      <div class="md-source__icon">
-        <svg viewBox="0 0 24 24" width="24" height="24">
-          <use xlink:href="#__github" width="24" height="24"></use>
-        </svg>
-      </div>
-    
-    <div class="md-source__repository">
-      phaser3-rex-notes
+<a href="https://github.com/rexrainbow/phaser3-rex-notes/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
     </div>
-  </a>
-
+  
+  <div class="md-source__repository">
+    phaser3-rex-notes
+  </div>
+</a>
           </div>
         </div>
       
@@ -198,7 +206,7 @@
         
       
       
-      <main class="md-main">
+      <main class="md-main" role="main">
         <div class="md-main__inner md-grid" data-md-component="container">
           
             
@@ -221,20 +229,18 @@
 
   
 
-
-  <a href="https://github.com/rexrainbow/phaser3-rex-notes/" title="Go to repository" class="md-source" data-md-source="github">
-    
-      <div class="md-source__icon">
-        <svg viewBox="0 0 24 24" width="24" height="24">
-          <use xlink:href="#__github" width="24" height="24"></use>
-        </svg>
-      </div>
-    
-    <div class="md-source__repository">
-      phaser3-rex-notes
+<a href="https://github.com/rexrainbow/phaser3-rex-notes/" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
     </div>
-  </a>
-
+  
+  <div class="md-source__repository">
+    phaser3-rex-notes
+  </div>
+</a>
     </div>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -4141,21 +4147,21 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
+  <a href="#introduction" class="md-nav__link">
     Introduction
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#source-code" title="Source code" class="md-nav__link">
+  <a href="#source-code" class="md-nav__link">
     Source code
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
+  <a href="#usage" class="md-nav__link">
     Usage
   </a>
   
@@ -4163,35 +4169,35 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#install-scene-plugin" title="Install scene plugin" class="md-nav__link">
+  <a href="#install-scene-plugin" class="md-nav__link">
     Install scene plugin
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-board-object" title="Add board object" class="md-nav__link">
+  <a href="#add-board-object" class="md-nav__link">
     Add board object
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#custom-class" title="Custom class" class="md-nav__link">
+  <a href="#custom-class" class="md-nav__link">
     Custom class
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#board-size" title="Board size" class="md-nav__link">
+  <a href="#board-size" class="md-nav__link">
     Board size
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-chess" title="Add chess" class="md-nav__link">
+  <a href="#add-chess" class="md-nav__link">
     Add chess
   </a>
   
@@ -4199,7 +4205,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#kick-out-event" title="Kick-out event" class="md-nav__link">
+  <a href="#kick-out-event" class="md-nav__link">
     Kick-out event
   </a>
   
@@ -4211,63 +4217,63 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#remove-chess" title="Remove chess" class="md-nav__link">
+  <a href="#remove-chess" class="md-nav__link">
     Remove chess
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#move-chess" title="Move chess" class="md-nav__link">
+  <a href="#move-chess" class="md-nav__link">
     Move chess
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#swap-chess" title="Swap chess" class="md-nav__link">
+  <a href="#swap-chess" class="md-nav__link">
     Swap chess
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#chess-tile-position" title="Chess -&gt; tile position" class="md-nav__link">
+  <a href="#chess-tile-position" class="md-nav__link">
     Chess -&gt; tile position
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#tile-position-chess" title="Tile position -&gt; chess" class="md-nav__link">
+  <a href="#tile-position-chess" class="md-nav__link">
     Tile position -&gt; chess
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#contains" title="Contains" class="md-nav__link">
+  <a href="#contains" class="md-nav__link">
     Contains
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#for-each-tile" title="For each tile" class="md-nav__link">
+  <a href="#for-each-tile" class="md-nav__link">
     For each tile
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#tile-position-world-position" title="Tile position -&gt; world position" class="md-nav__link">
+  <a href="#tile-position-world-position" class="md-nav__link">
     Tile position -&gt; world position
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#world-position-tile-position" title="World position -&gt; tile position" class="md-nav__link">
+  <a href="#world-position-tile-position" class="md-nav__link">
     World position -&gt; tile position
   </a>
   
@@ -4275,7 +4281,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#world-position-grid-world-position" title="World position -&gt; Grid world position" class="md-nav__link">
+  <a href="#world-position-grid-world-position" class="md-nav__link">
     World position -&gt; Grid world position
   </a>
   
@@ -4287,14 +4293,14 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ring-tile-position" title="Ring -&gt; tile position" class="md-nav__link">
+  <a href="#ring-tile-position" class="md-nav__link">
     Ring -&gt; tile position
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#shape-tile-position" title="Shape -&gt; tile position" class="md-nav__link">
+  <a href="#shape-tile-position" class="md-nav__link">
     Shape -&gt; tile position
   </a>
   
@@ -4302,42 +4308,42 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#line-tile-position" title="Line -&gt; tile position" class="md-nav__link">
+  <a href="#line-tile-position" class="md-nav__link">
     Line -&gt; tile position
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#circle-tile-position" title="Circle -&gt; tile position" class="md-nav__link">
+  <a href="#circle-tile-position" class="md-nav__link">
     Circle -&gt; tile position
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#rectangle-tile-position" title="Rectangle -&gt; tile position" class="md-nav__link">
+  <a href="#rectangle-tile-position" class="md-nav__link">
     Rectangle -&gt; tile position
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#ellipse-tile-position" title="Ellipse -&gt; tile position" class="md-nav__link">
+  <a href="#ellipse-tile-position" class="md-nav__link">
     Ellipse -&gt; tile position
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#triangle-tile-position" title="Triangle -&gt; tile position" class="md-nav__link">
+  <a href="#triangle-tile-position" class="md-nav__link">
     Triangle -&gt; tile position
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#polygon-tile-position" title="Polygon -&gt; tile position" class="md-nav__link">
+  <a href="#polygon-tile-position" class="md-nav__link">
     Polygon -&gt; tile position
   </a>
   
@@ -4349,56 +4355,56 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#angle-between-world-position-of-2-tiles" title="Angle between world position of 2 tiles" class="md-nav__link">
+  <a href="#angle-between-world-position-of-2-tiles" class="md-nav__link">
     Angle between world position of 2 tiles
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#is-angle-in-cone" title="Is angle in cone" class="md-nav__link">
+  <a href="#is-angle-in-cone" class="md-nav__link">
     Is angle in cone
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#direction-between-2-tiles" title="Direction between 2 tiles" class="md-nav__link">
+  <a href="#direction-between-2-tiles" class="md-nav__link">
     Direction between 2 tiles
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#is-direction-in-cone" title="Is direction in cone" class="md-nav__link">
+  <a href="#is-direction-in-cone" class="md-nav__link">
     Is direction in cone
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#opposite-direction" title="Opposite direction" class="md-nav__link">
+  <a href="#opposite-direction" class="md-nav__link">
     Opposite direction
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#align-world-position-to-grid" title="Align world position to grid" class="md-nav__link">
+  <a href="#align-world-position-to-grid" class="md-nav__link">
     Align world position to grid
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#is-overlapping-with-world-position" title="Is overlapping with world position" class="md-nav__link">
+  <a href="#is-overlapping-with-world-position" class="md-nav__link">
     Is overlapping with world position
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#neighbors" title="Neighbors" class="md-nav__link">
+  <a href="#neighbors" class="md-nav__link">
     Neighbors
   </a>
   
@@ -4406,14 +4412,14 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#neighbor-tile-position" title="Neighbor tile position" class="md-nav__link">
+  <a href="#neighbor-tile-position" class="md-nav__link">
     Neighbor tile position
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#neighbor-chess" title="Neighbor chess" class="md-nav__link">
+  <a href="#neighbor-chess" class="md-nav__link">
     Neighbor chess
   </a>
   
@@ -4425,35 +4431,35 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#empty-tile-position" title="Empty tile position" class="md-nav__link">
+  <a href="#empty-tile-position" class="md-nav__link">
     Empty tile position
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-all-chess" title="Get all chess" class="md-nav__link">
+  <a href="#get-all-chess" class="md-nav__link">
     Get all chess
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#fit" title="Fit" class="md-nav__link">
+  <a href="#fit" class="md-nav__link">
     Fit
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#blocker" title="Blocker" class="md-nav__link">
+  <a href="#blocker" class="md-nav__link">
     Blocker
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#touch-events" title="Touch events" class="md-nav__link">
+  <a href="#touch-events" class="md-nav__link">
     Touch events
   </a>
   
@@ -4461,42 +4467,42 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#set-interactive" title="Set interactive" class="md-nav__link">
+  <a href="#set-interactive" class="md-nav__link">
     Set interactive
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#pointer-down" title="Pointer down" class="md-nav__link">
+  <a href="#pointer-down" class="md-nav__link">
     Pointer down
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#pointer-up" title="Pointer up" class="md-nav__link">
+  <a href="#pointer-up" class="md-nav__link">
     Pointer up
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#pointer-move" title="Pointer move" class="md-nav__link">
+  <a href="#pointer-move" class="md-nav__link">
     Pointer move
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#tap" title="Tap" class="md-nav__link">
+  <a href="#tap" class="md-nav__link">
     Tap
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#press" title="Press" class="md-nav__link">
+  <a href="#press" class="md-nav__link">
     Press
   </a>
   
@@ -4508,14 +4514,14 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#grid-points" title="Grid points" class="md-nav__link">
+  <a href="#grid-points" class="md-nav__link">
     Grid points
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#other-properties" title="Other properties" class="md-nav__link">
+  <a href="#other-properties" class="md-nav__link">
     Other properties
   </a>
   
@@ -4945,21 +4951,21 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#introduction" title="Introduction" class="md-nav__link">
+  <a href="#introduction" class="md-nav__link">
     Introduction
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#source-code" title="Source code" class="md-nav__link">
+  <a href="#source-code" class="md-nav__link">
     Source code
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#usage" title="Usage" class="md-nav__link">
+  <a href="#usage" class="md-nav__link">
     Usage
   </a>
   
@@ -4967,35 +4973,35 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#install-scene-plugin" title="Install scene plugin" class="md-nav__link">
+  <a href="#install-scene-plugin" class="md-nav__link">
     Install scene plugin
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-board-object" title="Add board object" class="md-nav__link">
+  <a href="#add-board-object" class="md-nav__link">
     Add board object
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#custom-class" title="Custom class" class="md-nav__link">
+  <a href="#custom-class" class="md-nav__link">
     Custom class
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#board-size" title="Board size" class="md-nav__link">
+  <a href="#board-size" class="md-nav__link">
     Board size
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-chess" title="Add chess" class="md-nav__link">
+  <a href="#add-chess" class="md-nav__link">
     Add chess
   </a>
   
@@ -5003,7 +5009,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#kick-out-event" title="Kick-out event" class="md-nav__link">
+  <a href="#kick-out-event" class="md-nav__link">
     Kick-out event
   </a>
   
@@ -5015,63 +5021,63 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#remove-chess" title="Remove chess" class="md-nav__link">
+  <a href="#remove-chess" class="md-nav__link">
     Remove chess
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#move-chess" title="Move chess" class="md-nav__link">
+  <a href="#move-chess" class="md-nav__link">
     Move chess
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#swap-chess" title="Swap chess" class="md-nav__link">
+  <a href="#swap-chess" class="md-nav__link">
     Swap chess
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#chess-tile-position" title="Chess -&gt; tile position" class="md-nav__link">
+  <a href="#chess-tile-position" class="md-nav__link">
     Chess -&gt; tile position
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#tile-position-chess" title="Tile position -&gt; chess" class="md-nav__link">
+  <a href="#tile-position-chess" class="md-nav__link">
     Tile position -&gt; chess
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#contains" title="Contains" class="md-nav__link">
+  <a href="#contains" class="md-nav__link">
     Contains
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#for-each-tile" title="For each tile" class="md-nav__link">
+  <a href="#for-each-tile" class="md-nav__link">
     For each tile
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#tile-position-world-position" title="Tile position -&gt; world position" class="md-nav__link">
+  <a href="#tile-position-world-position" class="md-nav__link">
     Tile position -&gt; world position
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#world-position-tile-position" title="World position -&gt; tile position" class="md-nav__link">
+  <a href="#world-position-tile-position" class="md-nav__link">
     World position -&gt; tile position
   </a>
   
@@ -5079,7 +5085,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#world-position-grid-world-position" title="World position -&gt; Grid world position" class="md-nav__link">
+  <a href="#world-position-grid-world-position" class="md-nav__link">
     World position -&gt; Grid world position
   </a>
   
@@ -5091,14 +5097,14 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#ring-tile-position" title="Ring -&gt; tile position" class="md-nav__link">
+  <a href="#ring-tile-position" class="md-nav__link">
     Ring -&gt; tile position
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#shape-tile-position" title="Shape -&gt; tile position" class="md-nav__link">
+  <a href="#shape-tile-position" class="md-nav__link">
     Shape -&gt; tile position
   </a>
   
@@ -5106,42 +5112,42 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#line-tile-position" title="Line -&gt; tile position" class="md-nav__link">
+  <a href="#line-tile-position" class="md-nav__link">
     Line -&gt; tile position
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#circle-tile-position" title="Circle -&gt; tile position" class="md-nav__link">
+  <a href="#circle-tile-position" class="md-nav__link">
     Circle -&gt; tile position
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#rectangle-tile-position" title="Rectangle -&gt; tile position" class="md-nav__link">
+  <a href="#rectangle-tile-position" class="md-nav__link">
     Rectangle -&gt; tile position
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#ellipse-tile-position" title="Ellipse -&gt; tile position" class="md-nav__link">
+  <a href="#ellipse-tile-position" class="md-nav__link">
     Ellipse -&gt; tile position
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#triangle-tile-position" title="Triangle -&gt; tile position" class="md-nav__link">
+  <a href="#triangle-tile-position" class="md-nav__link">
     Triangle -&gt; tile position
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#polygon-tile-position" title="Polygon -&gt; tile position" class="md-nav__link">
+  <a href="#polygon-tile-position" class="md-nav__link">
     Polygon -&gt; tile position
   </a>
   
@@ -5153,56 +5159,56 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#angle-between-world-position-of-2-tiles" title="Angle between world position of 2 tiles" class="md-nav__link">
+  <a href="#angle-between-world-position-of-2-tiles" class="md-nav__link">
     Angle between world position of 2 tiles
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#is-angle-in-cone" title="Is angle in cone" class="md-nav__link">
+  <a href="#is-angle-in-cone" class="md-nav__link">
     Is angle in cone
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#direction-between-2-tiles" title="Direction between 2 tiles" class="md-nav__link">
+  <a href="#direction-between-2-tiles" class="md-nav__link">
     Direction between 2 tiles
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#is-direction-in-cone" title="Is direction in cone" class="md-nav__link">
+  <a href="#is-direction-in-cone" class="md-nav__link">
     Is direction in cone
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#opposite-direction" title="Opposite direction" class="md-nav__link">
+  <a href="#opposite-direction" class="md-nav__link">
     Opposite direction
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#align-world-position-to-grid" title="Align world position to grid" class="md-nav__link">
+  <a href="#align-world-position-to-grid" class="md-nav__link">
     Align world position to grid
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#is-overlapping-with-world-position" title="Is overlapping with world position" class="md-nav__link">
+  <a href="#is-overlapping-with-world-position" class="md-nav__link">
     Is overlapping with world position
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#neighbors" title="Neighbors" class="md-nav__link">
+  <a href="#neighbors" class="md-nav__link">
     Neighbors
   </a>
   
@@ -5210,14 +5216,14 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#neighbor-tile-position" title="Neighbor tile position" class="md-nav__link">
+  <a href="#neighbor-tile-position" class="md-nav__link">
     Neighbor tile position
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#neighbor-chess" title="Neighbor chess" class="md-nav__link">
+  <a href="#neighbor-chess" class="md-nav__link">
     Neighbor chess
   </a>
   
@@ -5229,35 +5235,35 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#empty-tile-position" title="Empty tile position" class="md-nav__link">
+  <a href="#empty-tile-position" class="md-nav__link">
     Empty tile position
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#get-all-chess" title="Get all chess" class="md-nav__link">
+  <a href="#get-all-chess" class="md-nav__link">
     Get all chess
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#fit" title="Fit" class="md-nav__link">
+  <a href="#fit" class="md-nav__link">
     Fit
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#blocker" title="Blocker" class="md-nav__link">
+  <a href="#blocker" class="md-nav__link">
     Blocker
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#touch-events" title="Touch events" class="md-nav__link">
+  <a href="#touch-events" class="md-nav__link">
     Touch events
   </a>
   
@@ -5265,42 +5271,42 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#set-interactive" title="Set interactive" class="md-nav__link">
+  <a href="#set-interactive" class="md-nav__link">
     Set interactive
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#pointer-down" title="Pointer down" class="md-nav__link">
+  <a href="#pointer-down" class="md-nav__link">
     Pointer down
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#pointer-up" title="Pointer up" class="md-nav__link">
+  <a href="#pointer-up" class="md-nav__link">
     Pointer up
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#pointer-move" title="Pointer move" class="md-nav__link">
+  <a href="#pointer-move" class="md-nav__link">
     Pointer move
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#tap" title="Tap" class="md-nav__link">
+  <a href="#tap" class="md-nav__link">
     Tap
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#press" title="Press" class="md-nav__link">
+  <a href="#press" class="md-nav__link">
     Press
   </a>
   
@@ -5312,14 +5318,14 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#grid-points" title="Grid points" class="md-nav__link">
+  <a href="#grid-points" class="md-nav__link">
     Grid points
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#other-properties" title="Other properties" class="md-nav__link">
+  <a href="#other-properties" class="md-nav__link">
     Other properties
   </a>
   
@@ -6207,7 +6213,6 @@
           Material for MkDocs</a>
       </div>
       
-        
   <div class="md-footer-social">
     <link rel="stylesheet" href="../assets/fonts/font-awesome.css">
     
@@ -6217,25 +6222,19 @@
     
   </div>
 
-      
     </div>
   </div>
 </footer>
       
     </div>
     
-      <script src="../assets/javascripts/application.583bbe55.js"></script>
+      <script src="../assets/javascripts/application.c648116f.js"></script>
       
-      <script>app.initialize({version:"1.0.3",url:{base:".."}})</script>
+      <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
       
         <script src="../js/mermaid/mermaid.min.js"></script>
       
         <script src="../js/umlconvert.js"></script>
-      
-    
-    
-      
-        <script>!function(e,a,t,n,o,c,i){e.GoogleAnalyticsObject=o,e.ga=e.ga||function(){(e.ga.q=e.ga.q||[]).push(arguments)},e.ga.l=1*new Date,c=a.createElement(t),i=a.getElementsByTagName(t)[0],c.async=1,c.src="https://www.google-analytics.com/analytics.js",i.parentNode.insertBefore(c,i)}(window,document,"script",0,"ga"),ga("create","UA-119804412-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview");var links=document.getElementsByTagName("a");if(Array.prototype.map.call(links,function(e){e.host!=document.location.host&&e.addEventListener("click",function(){var a=e.getAttribute("data-md-action")||"follow";ga("send","event","outbound",a,e.href)})}),document.forms.search){var query=document.forms.search.query;query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}</script>
       
     
   </body>
