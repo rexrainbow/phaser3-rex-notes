@@ -137,7 +137,7 @@ var amount = container.count(property, value, startIndex, endIndex);
 // value: the value to test the property against. Must pass a strict (`===`) comparison check.
 ```
 
-#### Sort choldren
+#### Sort children
 
 ```javascript
 container.sort(property);
