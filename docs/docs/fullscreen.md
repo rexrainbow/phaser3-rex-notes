@@ -62,7 +62,7 @@ gameObject.setInteractive().on('pointerdown', function() {
     ```javascript
     scene.scale.on('fullscreenunsupported', function() {});
     ```
-- Enter full scren mode
+- Enter full screen mode
     ```javascript
     scene.scale.on('enterfullscreen', function() {});
     ```
