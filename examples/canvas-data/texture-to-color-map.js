@@ -1,4 +1,5 @@
 import CanvasDataPlugin from '../../plugins/canvasdata-plugin.js';
+import CreateRectangleTexture from '../../plugins/utils/texture/CreateRectangleTexture.js';
 import LogMaxDelta from '../../plugins/utils/system/LogMaxDelta.js'
 
 const COLOR_PRIMARY = 0x4e342e;
@@ -16,7 +17,6 @@ class Demo extends Phaser.Scene {
 
     preload() {
         this.load.image('mushroom', 'assets/images/mushroom.png');
-        this.load.image('dot', 'assets/images/white-dot.png');
     }
 
     create() {
@@ -25,6 +25,7 @@ class Demo extends Phaser.Scene {
         var startX = 250, startY = 100, width = 6, height = 6,
             offsetXY = { x: 0, y: 0 },
             count = 0;
+        CreateRectangleTexture(this, 'dot', width, height);
         this.plugins.get('rexCanvasData').textureTColorMap(img)
             .forEachNonZero(function (value, x, y, colorMap) {
                 var destinationX = startX + (x * width);
