@@ -1,4 +1,4 @@
-import Parse from 'parse';
+import Parse from 'parse/dist/parse.min.js';
 import ItemTable from './parse/itemtable/ItemTable.js';
 import QuickLogin from './parse/quicklogin/QuickLogin.js';
 

@@ -1,8 +1,12 @@
 {
     "name": "phaser3-rex-plugins",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "Plugins of phaser3",
     "author": "Rex",
+    "files": [
+        "plugins",
+        "templates"
+    ],
     "main": "./plugins/index.js",
     "scripts": {
         "dev": "webpack",
@@ -21,6 +25,9 @@
     },
     "homepage": "https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html",
     "devDependencies": {
+        "phaser": "3.19.0",
+        "firebase": "^5.0.4",
+        "chart.js": "^2.8.0",
         "@babel/core": "^7.4.5",
         "@babel/polyfill": "^7.0.0",
         "@babel/preset-env": "^7.3.4",
@@ -37,16 +44,20 @@
         "raw-loader": "^0.5.1",
         "webpack": "^4.37.0",
         "webpack-cli": "^3.3.6",
-        "uglifyjs-webpack-plugin": "^1.2.5"
+        "uglifyjs-webpack-plugin": "^1.2.5",
+        "rollup": "^1.21.1",
+        "rollup-plugin-commonjs": "^10.1.0",
+        "rollup-plugin-node-resolve": "^5.2.0",
+        "rollup-plugin-node-globals": "^1.4.0",
+        "rollup-plugin-node-builtins": "^2.1.2",
+        "rollup-plugin-uglify": "^6.0.3",
+        "rollup-plugin-terser": "^5.1.1",
+        "rollup-plugin-babel": "^4.3.3"
     },
     "dependencies": {
-        "phaser": "3.19.0",
-        "phaser3-nineslice": "jdotrjs/phaser3-nineslice",
-        "firebase": "^5.0.4",
         "parse": "^2.1.0",
         "papaparse": "^4.6.3",
         "lokijs": "^1.5.7",
-        "chart.js": "^2.8.0",
         "eventemitter3": "^3.1.0"
     }
 }

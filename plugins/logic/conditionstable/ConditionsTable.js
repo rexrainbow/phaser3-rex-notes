@@ -1,5 +1,5 @@
 import GetValue from '../../utils/object/GetValue.js';
-import CSVParser from 'papaparse/papaparse.js';
+import CSVParser from 'papaparse/papaparse.min.js';
 import Clear from '../../utils/object/Clear.js';
 import CreateTestFunction from './CreateTestFunction.js';
 

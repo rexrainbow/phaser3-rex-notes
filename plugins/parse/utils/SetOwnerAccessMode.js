@@ -1,4 +1,4 @@
-import Parse from 'parse';
+import Parse from 'parse/dist/parse.min.js';
 
 var SetOwnerAccessMode = function (item, ownerRead, ownerWrite) {
     if (!ownerRead && !ownerWrite) {

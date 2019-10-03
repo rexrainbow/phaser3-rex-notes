@@ -1,4 +1,4 @@
-import CSVParser from 'papaparse/papaparse.js';
+import CSVParser from 'papaparse/papaparse.min.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 

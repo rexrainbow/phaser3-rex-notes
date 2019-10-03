@@ -1,4 +1,4 @@
-import Parse from 'parse';
+import Parse from 'parse/dist/parse.min.js';
 import DataToItem from '../utils/DataToItem.js';
 import SetOwnerAccessMode from '../utils/SetOwnerAccessMode.js';
 

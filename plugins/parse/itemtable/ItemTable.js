@@ -1,4 +1,4 @@
-import Parse from 'parse';
+import Parse from 'parse/dist/parse.min.js';
 import GetValue from '../../utils/object/GetValue.js';
 import PageLoader from '../utils/PageLoader.js';
 import Copy from '../../utils/array/Copy.js'

@@ -1,6 +1,6 @@
 import EventEmitterMethods from '../../../utils/eventemitter/EventEmitterMethods.js';
 import GetValue from '../../../utils/object/GetValue.js';
-import CSVParser from 'papaparse/papaparse.js';
+import CSVParser from 'papaparse/papaparse.min.js';
 import InstMem from './InstMem.js';
 import CmdHandlers from './commands/CmdHandlers.js';
 

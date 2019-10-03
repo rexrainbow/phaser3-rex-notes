@@ -1,4 +1,4 @@
-import Parse from 'parse';
+import Parse from 'parse/dist/parse.min.js';
 
 var QuickLogin = function (userName, password) {
     return new Promise(function (resolve, reject) {
