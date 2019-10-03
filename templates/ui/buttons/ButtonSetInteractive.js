@@ -4,20 +4,20 @@ var ButtonSetInteractive = function (button, clickConfig) {
     //Default: Fire 'click' event when touch released after pressed.
     button._buttonBehavior = new ButtonBehavior(button, clickConfig);
 
-    button._buttonBehavior.on('click', function (buttonBehavior, gameObject, pointer) {
-        FireEvent.call(this, 'button.click', button, pointer);
+    button._buttonBehavior.on('click', function (buttonBehavior, gameObject, pointer, event) {
+        FireEvent.call(this, 'button.click', button, pointer, event);
     }, this);
 
     button
-        .on('pointerover', function (pointer) {
-            FireEvent.call(this, 'button.over', button, pointer);
+        .on('pointerover', function (pointer, localX, localY, event) {
+            FireEvent.call(this, 'button.over', button, pointer, event);
         }, this)
-        .on('pointerout', function (pointer) {
-            FireEvent.call(this, 'button.out', button, pointer);
+        .on('pointerout', function (pointer, event) {
+            FireEvent.call(this, 'button.out', button, pointer, event);
         }, this)
 }
 
-var FireEvent = function (eventName, button, pointer) {
+var FireEvent = function (eventName, button, pointer, event) {
     var index;
     if (typeof (button) === 'number') {
         index = button;
@@ -33,9 +33,9 @@ var FireEvent = function (eventName, button, pointer) {
     }
 
     if (this.groupName !== undefined) {
-        this.eventEmitter.emit(eventName, button, this.groupName, index, pointer);
+        this.eventEmitter.emit(eventName, button, this.groupName, index, pointer, event);
     } else {
-        this.eventEmitter.emit(eventName, button, index, pointer);
+        this.eventEmitter.emit(eventName, button, index, pointer, event);
     }
 }
 

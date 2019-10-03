@@ -64,13 +64,13 @@ class Demo extends Phaser.Scene {
 
         this.print = this.add.text(0, 0, '');
         dialog
-            .on('button.click', function (button, groupName, index) {
+            .on('button.click', function (button, groupName, index, pointer, event) {
                 this.print.text += index + ': ' + button.text + '\n';
             }, this)
-            .on('button.over', function (button, groupName, index) {
+            .on('button.over', function (button, groupName, index, pointer, event) {
                 button.getElement('background').setStrokeStyle(1, 0xffffff);
             })
-            .on('button.out', function (button, groupName, index) {
+            .on('button.out', function (button, groupName, index, pointer, event) {
                 button.getElement('background').setStrokeStyle();
             });
     }

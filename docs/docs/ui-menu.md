@@ -136,25 +136,31 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
 
 - Click button
     ```javascript
-    menu.on('button.click', function(button, index) {
+    menu.on('button.click', function(button, index, pointer, event) {
         // ...
     }, scope);
     ```
     - `button` : Game object of triggered button.
     - `index` : Index of triggered button.
+    - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
+    - Cancel remaining touched events : `event.stopPropagation()`
 - Pointer-over button
     ```javascript
-    menu.on('button.over', function(button, index) {
+    menu.on('button.over', function(button, index, pointer, event) {
         // ...
     }, scope);
     ```
     - `button` : Game object of triggered button.
     - `index` : Index of triggered button.
+    - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
+    - Cancel remaining touched events : `event.stopPropagation()`
 - Pointer-out button
     ```javascript
-    menu.on('button.out', function(button, index) {
+    menu.on('button.out', function(button, index, pointer, event) {
         // ...
     }, scope);
     ```
     - `button` : Game object of triggered button.
     - `index` : Index of triggered button.
+    - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
+    - Cancel remaining touched events : `event.stopPropagation()`

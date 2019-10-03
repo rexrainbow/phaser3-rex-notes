@@ -82,13 +82,13 @@ var createDialog = function (scene, x, y, onClick) {
         .popUp(500);
 
     dialog
-        .on('button.click', function (button, groupName, index) {
+        .on('button.click', function (button, groupName, index, pointer, event) {
             onClick(button.fillColor);
         })
-        .on('button.over', function (button, groupName, index) {
+        .on('button.over', function (button, groupName, index, pointer, event) {
             button.setStrokeStyle(2, 0xffffff);
         })
-        .on('button.out', function (button, groupName, index) {
+        .on('button.out', function (button, groupName, index, pointer, event) {
             button.setStrokeStyle();
         });
 

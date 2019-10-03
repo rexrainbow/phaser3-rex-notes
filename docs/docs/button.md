@@ -63,10 +63,12 @@ var button = scene.plugins.get('rexButton').add(gameObject, {
 ### Events
 
 ```javascript
-button.on('click', function (button, gameObject, pointer) {
+button.on('click', function (button, gameObject, pointer, event) {
     // ...
 }, scope);
 ```
+
+- Cancel remaining touched events : `event.stopPropagation()`
 
 ### Enable
 

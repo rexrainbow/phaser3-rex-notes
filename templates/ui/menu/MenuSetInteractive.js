@@ -13,29 +13,29 @@ var MenuSetInteractive = function (menu) {
             }
         }, menu)
         // Click any button
-        .on('button.click', function (button, index) {
+        .on('button.click', function (button, index, pointer, event) {
             // Pass event to root menu object
             if (this !== this.root) {
                 this.root.isPassedEvent = true;
-                this.root.emit('button.click', button, index);
+                this.root.emit('button.click', button, index, pointer, event);
                 this.root.isPassedEvent = false;
             }
         }, menu)
         //Pointer over any button
-        .on('button.over', function (button, index) {
+        .on('button.over', function (button, index, pointer, event) {
             // Pass event to root menu object
             if (this !== this.root) {
                 this.root.isPassedEvent = true;
-                this.root.emit('button.over', button, index);
+                this.root.emit('button.over', button, index, pointer, event);
                 this.root.isPassedEvent = false;
             }
         }, menu)
         //Pointer out any button
-        .on('button.out', function (button, index) {
+        .on('button.out', function (button, index, pointer, event) {
             // Pass event to root menu object
             if (this !== this.root) {
                 this.root.isPassedEvent = true;
-                this.root.emit('button.out', button, index);
+                this.root.emit('button.out', button, index, pointer, event);
                 this.root.isPassedEvent = false;
             }
         }, menu);

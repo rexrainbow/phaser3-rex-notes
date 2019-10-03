@@ -81,34 +81,34 @@ class Button {
     }
 
     // internal
-    onPress(pointer) {
+    onPress(pointer, localX, localY, event) {
         if (this.pointer !== undefined) {
             return;
         }
         this.pointer = pointer;
         if (this.mode === 0) {
-            this.click(pointer.downTime, pointer);
+            this.click(pointer.downTime, pointer, event);
         }
     }
 
-    onRelease(pointer) {
+    onRelease(pointer, localX, localY, event) {
         if (this.pointer !== pointer) {
             return;
         }
         if (this.mode === 1) {
-            this.click(pointer.upTime, pointer);
+            this.click(pointer.upTime, pointer, event);
         }
         this.pointer = undefined;
     }
 
-    onPointOut(pointer) {
+    onPointOut(pointer, event) {
         if (this.pointer !== pointer) {
             return;
         }
         this.cancel();
     }
 
-    onMove(pointer) {
+    onMove(pointer, localX, localY, event) {
         if (this.pointer !== pointer) {
             return;
         }
@@ -122,10 +122,10 @@ class Button {
         }
     }
 
-    click(nowTime, pointer) {
+    click(nowTime, pointer, event) {
         if (nowTime === undefined) {
             // fires 'click' event manually
-            this.emit('click', this, this.gameObject, pointer);
+            this.emit('click', this, this.gameObject, pointer, event);
             return this;
         }
 
@@ -136,7 +136,7 @@ class Button {
             return this;
         }
         this.lastClickTime = nowTime;
-        this.emit('click', this, this.gameObject, pointer);
+        this.emit('click', this, this.gameObject, pointer, event);
         return this;
     }
 

@@ -32,7 +32,7 @@ class Demo extends Phaser.Scene {
             .drawBounds(this.add.graphics(), 0xff0000)
 
         buttons
-            .on('button.click', function (button, pointer) {
+            .on('button.click', function (button, index, pointer, event) {
                 console.log(`Click button-${button.text}`);
             })
 

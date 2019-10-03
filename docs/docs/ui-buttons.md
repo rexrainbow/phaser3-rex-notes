@@ -124,13 +124,13 @@ See [sizer object](ui-sizer.md)
 
 - Click button
     ```javascript
-    buttons.on('button.click', function(button, groupName, index, pointer) {
+    buttons.on('button.click', function(button, groupName, index, pointer, event) {
         // ...
     }, scope);
     ```
     or
     ```javascript
-    buttons.on('button.click', function(button, index, pointer) {
+    buttons.on('button.click', function(button, index, pointer, event) {
         // ...
     }, scope);
     ```
@@ -138,15 +138,16 @@ See [sizer object](ui-sizer.md)
     - `groupName` : Group name defined in constructor configuration. Set to `undefined` to ignore this parameter in event callback.
     - `index` : Index of triggered button game object.
     - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
+    - Cancel remaining touched events : `event.stopPropagation()`
 - Pointer-over button
     ```javascript
-    buttons.on('button.over', function(button, groupName, index, pointer) {
+    buttons.on('button.over', function(button, groupName, index, pointer, event) {
         // ...
     }, scope);
     ```
     or
     ```javascript
-    buttons.on('button.over', function(button, index, pointer) {
+    buttons.on('button.over', function(button, index, pointer, event) {
         // ...
     }, scope);
     ```
@@ -154,15 +155,16 @@ See [sizer object](ui-sizer.md)
     - `groupName` : Group name defined in constructor configuration. Set to `undefined` to ignore this parameter in event callback.
     - `index` : Index of triggered button game object.
     - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
+    - Cancel remaining touched events : `event.stopPropagation()`
 - Pointer-out button
     ```javascript
-    buttons.on('button.out', function(button, groupName, index, pointer) {
+    buttons.on('button.out', function(button, groupName, index, pointer, event) {
         // ...
     }, scope);
     ```
     or
     ```javascript
-    buttons.on('button.out', function(button, index, pointer) {
+    buttons.on('button.out', function(button, index, pointer, event) {
         // ...
     }, scope);
     ```
@@ -170,6 +172,7 @@ See [sizer object](ui-sizer.md)
     - `groupName` : Group name defined in constructor configuration. Set to `undefined` to ignore this parameter in event callback.
     - `index` : Index of triggered button game object.
     - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
+    - Cancel remaining touched events : `event.stopPropagation()`
 
 #### Emit button click event
 

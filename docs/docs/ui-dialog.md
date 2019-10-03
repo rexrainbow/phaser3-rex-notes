@@ -207,7 +207,7 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
 
 - Click button
     ```javascript
-    dialog.on('button.click', function(button, groupName, index, pointer) {
+    dialog.on('button.click', function(button, groupName, index, pointer, event) {
         // ...
     }, scope);
     ```
@@ -215,9 +215,10 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
     - `groupName` : `'choices'`, `'actions'`, or `'toolbar'`.
     - `index` : Index of triggered button game object.
     - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
+    - Cancel remaining touched events : `event.stopPropagation()`
 - Pointer-over button
     ```javascript
-    dialog.on('button.over', function(button, groupName, index, pointer) {
+    dialog.on('button.over', function(button, groupName, index, pointer, event) {
         // ...
     }, scope);
     ```
@@ -225,9 +226,10 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
     - `groupName` : `'choices'`, `'actions'`, or `'toolbar'`.
     - `index` : Index of triggered button game object.
     - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
+    - Cancel remaining touched events : `event.stopPropagation()`
 - Pointer-out button
     ```javascript
-    dialog.on('button.out', function(button, groupName, index, pointer) {
+    dialog.on('button.out', function(button, groupName, index, pointer, event) {
         // ...
     }, scope);
     ```
@@ -235,6 +237,7 @@ See [sizer object](ui-sizer.md), [base sizer object](ui-basesizer.md).
     - `groupName` : `'choices'`, `'actions'`, or `'toolbar'`.
     - `index` : Index of triggered button game object.
     - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
+    - Cancel remaining touched events : `event.stopPropagation()`
 
 #### Emit button click event
 
