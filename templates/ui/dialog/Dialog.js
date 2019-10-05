@@ -208,7 +208,7 @@ class Dialog extends Sizer {
 
 Object.assign(
     Dialog.prototype,
-    ButtonMethods,
+    ButtonMethods
 );
 
 export default Dialog;

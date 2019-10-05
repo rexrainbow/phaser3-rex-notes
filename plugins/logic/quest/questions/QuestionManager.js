@@ -133,7 +133,7 @@ Object.assign(
     QuestionManager.prototype,
     EventEmitterMethods,
     QuestMethods,
-    DataMethods,
+    DataMethods
 );
 
 export default QuestionManager;

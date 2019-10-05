@@ -82,7 +82,7 @@ class Buttons extends Sizer {
 
 Object.assign(
     Buttons.prototype,
-    ButtonMethods,
+    ButtonMethods
 );
 
 export default Buttons;

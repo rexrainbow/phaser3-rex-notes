@@ -21,7 +21,8 @@ var Build = function (gameObject, isStatic) {
         gameObject.scene.physics.add.existing(gameObject, isStatic);
     }
 
-    Object.assign(gameObject,
+    Object.assign(
+        gameObject,
         Components.Acceleration,
         Components.Angular,
         Components.Bounce,
@@ -33,7 +34,7 @@ var Build = function (gameObject, isStatic) {
         Components.Immovable,
         Components.Mass,
         Components.Size,
-        Components.Velocity,
+        Components.Velocity
     );
 
     return gameObject;

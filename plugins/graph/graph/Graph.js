@@ -67,7 +67,7 @@ class Graph extends EE {
 
 Object.assign(
     Graph.prototype,
-    Methods,
+    Methods
 );
 
 export default Graph;

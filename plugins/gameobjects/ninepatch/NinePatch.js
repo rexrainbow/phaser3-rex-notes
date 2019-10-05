@@ -92,7 +92,7 @@ class NinePatch extends RenderTexture {
 
 Object.assign(
     NinePatch.prototype,
-    TextureMethods,
+    TextureMethods
 );
 
 export default NinePatch;

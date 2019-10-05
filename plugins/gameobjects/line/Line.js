@@ -190,7 +190,7 @@ var methods = {
 }
 Object.assign(
     Line.prototype,
-    methods,
+    methods
 );
 
 export default Line;

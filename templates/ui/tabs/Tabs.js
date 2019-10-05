@@ -153,7 +153,7 @@ class Tabs extends GridSizer {
 
 Object.assign(
     Tabs.prototype,
-    ButtonMethods,
+    ButtonMethods
 );
 
 export default Tabs;

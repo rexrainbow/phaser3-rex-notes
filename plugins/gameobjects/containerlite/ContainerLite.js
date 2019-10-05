@@ -260,7 +260,7 @@ Object.assign(
     Children,
 
     Components.Alpha,
-    Components.Flip,
+    Components.Flip
 );
 
 export default ContainerLite;

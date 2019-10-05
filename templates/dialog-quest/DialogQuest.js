@@ -47,7 +47,7 @@ class DialogQuest extends EE {
 Object.assign(
     DialogQuest.prototype,
     QuestMethods,
-    DataMethods,
+    DataMethods
 );
 
 

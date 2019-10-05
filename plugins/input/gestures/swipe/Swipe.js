@@ -126,7 +126,7 @@ class Swipe extends OnePointerTracer {
 
 Object.assign(
     Swipe.prototype,
-    VelocityMethods,
+    VelocityMethods
 );
 
 const IDLE = 'IDLE';
