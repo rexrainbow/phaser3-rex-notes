@@ -1,4 +1,5 @@
 import WebFont from '../../utils/webfontloader/webfontloader.js';
+import TestFont from './TestFont.js';
 
 const FILE_POPULATED = Phaser.Loader.FILE_POPULATED;
 
@@ -14,6 +15,10 @@ class WebFontFile extends Phaser.Loader.File {
         } else {
             // start loading task
             var config = this.config;
+            if (config.hasOwnProperty('testString')) {
+                this.testString = config.testString;
+                delete config.testString;
+            }
             config.active = this.onLoad.bind(this);
             config.inactive = this.onError.bind(this);
             config.fontactive = this.onFontActive.bind(this);
@@ -31,11 +36,14 @@ class WebFontFile extends Phaser.Loader.File {
     }
 
     onFontActive(familyName, fvd) {
-        this.loader.emit('webfontactive', this, familyName);
+        if (this.testString) {
+            console.log(TestFont.call(this, familyName, this.testString));
+        }
+        this.loader.emit('webfontactive', this, familyName, fvd);
     }
 
     onFontInactive(familyName, fvd) {
-        this.loader.emit('webfontinactive', this, familyName);
+        this.loader.emit('webfontinactive', this, familyName, fvd);
     }
 }
 
