@@ -553,6 +553,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#test-string" class="md-nav__link">
+    Test string
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4655,6 +4662,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#test-string" class="md-nav__link">
+    Test string
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4720,10 +4734,21 @@
 <div class="codehilite"><pre><span></span><span class="k">this</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">rexWebFont</span><span class="p">({</span>
     <span class="nx">google</span><span class="o">:</span> <span class="p">{</span>
         <span class="nx">families</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;Bangers&#39;</span><span class="p">]</span>
-    <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="c1">// testString: undefined,</span>
+    <span class="c1">// testInterval: 20,</span>
 <span class="p">});</span>
 </pre></div>
 
+<ul>
+<li><a href="./#test-string"><code>testString</code></a> : To test if the font is loaded completed or not.<ul>
+<li><code>undefined</code> : No testing. Default value.</li>
+<li>A string : A test string for all fonts</li>
+<li>An object, <code>{fontFamily: testString}</code> : Test string for a specific font family.</li>
+</ul>
+</li>
+<li><code>testInterval</code> : Retry interval.</li>
+</ul>
 <p>or load font in pack</p>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">sceneConfig</span> <span class="o">=</span> <span class="p">{</span>
     <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;...&#39;</span><span class="p">,</span>
@@ -4734,7 +4759,9 @@
                 <span class="nx">config</span><span class="o">:</span> <span class="p">{</span>
                     <span class="nx">google</span><span class="o">:</span> <span class="p">{</span>
                         <span class="nx">families</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;Bangers&#39;</span><span class="p">]</span>
-                    <span class="p">}</span>
+                    <span class="p">},</span>
+                    <span class="c1">// testString: undefined,</span>
+                    <span class="c1">// testInterval: 20,</span>
                 <span class="p">}</span>
             <span class="p">}</span>
         <span class="p">]</span>
@@ -4799,6 +4826,13 @@
 
 </li>
 </ul>
+<h3 id="test-string">Test string<a class="headerlink" href="#test-string" title="Permanent link">&para;</a></h3>
+<p>Add string parameter <code>testString</code> into config, to test if the font is loaded completed or not.</p>
+<ol>
+<li>Fill <code>0</code> within an internal canvas.</li>
+<li>Draw <code>testString</code>.</li>
+<li>Check if any pixel has non-zero value.</li>
+</ol>
                 
                   
                 
