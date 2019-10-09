@@ -49,9 +49,17 @@ In preload stage:
 this.load.rexWebFont({
     google: {
         families: ['Bangers']
-    }
+    },
+    // testString: undefined,
+    // testInterval: 20,
 });
 ```
+
+- [`testString`](webfontloader.md#test-string) : To test if the font is loaded completed or not.
+    - `undefined` : No testing. Default value.
+    - A string : A test string for all fonts
+    - An object, `{fontFamily: testString}` : Test string for a specific font family.
+- `testInterval` : Retry interval.
 
 or load font in pack
 
@@ -65,7 +73,9 @@ var sceneConfig = {
                 config: {
                     google: {
                         families: ['Bangers']
-                    }
+                    },
+                    // testString: undefined,
+                    // testInterval: 20,
                 }
             }
         ]
@@ -131,3 +141,11 @@ Configuration of loading fonts
     ```javascript
     this.load.on('webfontinactive', function(fileObj, familyName){});
     ```
+
+### Test string
+
+Add string parameter `testString` into config, to test if the font is loaded completed or not.
+
+1. Fill `0` within an internal canvas.
+1. Draw `testString`.
+1. Check if any pixel has non-zero value.
