@@ -1,7 +1,8 @@
-import WebFont from '../../utils/webfontloader/webfontloader.js';
+import WebFont from 'webfontloader';
 import TestFont from './TestFont.js';
 
 const FILE_POPULATED = Phaser.Loader.FILE_POPULATED;
+const GetValue = Phaser.Utils.Objects.GetValue;
 
 class WebFontFile extends Phaser.Loader.File {
     constructor(loader, fileConfig) {
@@ -15,10 +16,15 @@ class WebFontFile extends Phaser.Loader.File {
         } else {
             // start loading task
             var config = this.config;
-            if (config.hasOwnProperty('testString')) {
-                this.testString = config.testString;
+
+            this.testString = GetValue(config, 'testString', undefined);
+            if (this.testString !== undefined) {
+                this.testInterval = GetValue(config, 'testInterval', 30);
+                this.fontTests = {};
                 delete config.testString;
+                delete config.testInterval;
             }
+
             config.active = this.onLoad.bind(this);
             config.inactive = this.onError.bind(this);
             config.fontactive = this.onFontActive.bind(this);
@@ -28,7 +34,18 @@ class WebFontFile extends Phaser.Loader.File {
     }
 
     onLoad() {
-        this.loader.nextFile(this, true);
+        if (this.testString === undefined) {
+            this.loader.nextFile(this, true);
+        } else {
+            var testFonts = (function () {
+                if (this.testFonts()) {
+                    this.loader.nextFile(this, true);
+                } else {
+                    setTimeout(testFonts, this.testInterval);
+                }
+            }).bind(this);
+            testFonts();
+        }
     }
 
     onError() {
@@ -36,14 +53,35 @@ class WebFontFile extends Phaser.Loader.File {
     }
 
     onFontActive(familyName, fvd) {
-        if (this.testString) {
-            console.log(TestFont.call(this, familyName, this.testString));
+        if (this.testString !== undefined) {
+            var testString;
+            if (typeof (this.testString) === 'string') {
+                testString = this.testString;
+            } else {
+                testString = this.testString[familyName];
+            }
+            if (testString !== undefined) {
+                this.fontTests[familyName] = testString;
+            }
         }
         this.loader.emit('webfontactive', this, familyName, fvd);
     }
 
     onFontInactive(familyName, fvd) {
         this.loader.emit('webfontinactive', this, familyName, fvd);
+    }
+
+    testFonts() {
+        var allPass = true;
+        for (var familyName in this.fontTests) {
+            if (TestFont(familyName, this.fontTests[familyName])) {
+                delete this.fontTests[familyName];
+            } else {
+                allPass = false;
+            }
+        }
+
+        return allPass;
     }
 }
 

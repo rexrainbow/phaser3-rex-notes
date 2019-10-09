@@ -1,9 +1,9 @@
 import WebFontLoaderPlugin from '../../plugins/webfontloader-plugin.js';
 
-class Demo extends Phaser.Scene {
+class LoadFont extends Phaser.Scene {
     constructor() {
         super({
-            key: 'examples'
+            key: 'load-font'
         })
     }
 
@@ -12,32 +12,42 @@ class Demo extends Phaser.Scene {
             google: {
                 families: ['Noto Sans Hebrew']
             },
-            testString: 'שלום עולם!'
+            testString: 'ש'
+            // testString: { 'Noto Sans Hebrew': 'ש' }
         };
         this.load.rexWebFont(config);
-        this.load.on('webfontactive', function (fileObj, familyName) {
-            console.log('font-active: ' + familyName)
-        });
-        this.load.on('webfontinactive', function (fileObj, familyName) {
-            console.log('font-inactive: ' + familyName)
-        })
     }
 
     create() {
         this.add.text(100, 0, 'Default ', {
             fontSize: '64px'
-        });      
+        });
         this.add.text(100, 100, 'Hello', {
             fontFamily: 'Noto Sans Hebrew',
             fontSize: '64px'
-        });      
+        });
         this.add.text(100, 200, 'שלום עולם!', {
             fontFamily: 'Noto Sans Hebrew',
             fontSize: '64px',
         });
     }
 
-    update() {}
+    update() { }
+}
+
+class StartScene extends Phaser.Scene {
+    constructor() {
+        super({
+            key: 'start'
+        })
+    }
+
+    create() {
+        this.add.text(400, 300, 'Click to load font').setOrigin(0.5);
+        this.input.on('pointerup', function () {
+            this.scene.start('load-font')
+        }, this)
+    }
 }
 
 var config = {
@@ -49,7 +59,7 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo,
+    scene: [StartScene, LoadFont],
     plugins: {
         global: [{
             key: 'WebFontLoader',

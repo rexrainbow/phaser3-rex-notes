@@ -55,6 +55,7 @@
         "rollup-plugin-babel": "^4.3.3"
     },
     "dependencies": {
+        "webfontloader": "1.6.28",
         "parse": "^2.1.0",
         "papaparse": "^4.6.3",
         "lokijs": "^1.5.7",
