@@ -19,7 +19,7 @@ class WebFontFile extends Phaser.Loader.File {
 
             this.testString = GetValue(config, 'testString', undefined);
             if (this.testString !== undefined) {
-                this.testInterval = GetValue(config, 'testInterval', 30);
+                this.testInterval = GetValue(config, 'testInterval', 20);
                 this.fontTests = {};
                 delete config.testString;
                 delete config.testInterval;
