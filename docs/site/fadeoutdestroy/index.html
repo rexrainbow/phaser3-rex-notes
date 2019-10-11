@@ -1594,6 +1594,26 @@
     Usage
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fade-out" class="md-nav__link">
+    Fade-out
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
       
@@ -4606,6 +4626,26 @@
     Usage
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fade-out" class="md-nav__link">
+    Fade-out
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
       
@@ -4639,8 +4679,19 @@
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/fade-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexfadeplugin.min.js">minify</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
 <p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/fade/fadeout-destroy.js">Sample code</a></p>
-<div class="codehilite"><pre><span></span><span class="nx">fadeOutDestroy</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">duration</span><span class="p">);</span>
+<h3 id="fade-out">Fade-out<a class="headerlink" href="#fade-out" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">fade</span> <span class="o">=</span> <span class="nx">fadeOutDestroy</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">duration</span><span class="p">);</span>
 </pre></div>
+
+<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
+<p>See <a href="../tween/#events">Events of tween task</a></p>
+<ul>
+<li>Scale completes or is stopped.
+    <div class="codehilite"><pre><span></span><span class="nx">fade</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fade</span><span class="p">,</span> <span class="nx">gameObject</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+</ul>
                 
                   
                 

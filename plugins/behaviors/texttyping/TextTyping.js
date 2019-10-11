@@ -1,15 +1,14 @@
+import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
 import GetSceneObject from '../../utils/system/GetSceneObject.js';
 
-const EE = Phaser.Events.EventEmitter;
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
 const GetValue = Phaser.Utils.Objects.GetValue;
 
-class TextTyping extends EE {
+class TextTyping {
     constructor(gameObject, config) {
-        super();
-
         this.gameObject = gameObject;
-        this.scene = GetSceneObject(gameObject);
+        this.scene = GetSceneObject(gameObject);        
+        this.setEventEmitter(GetValue(config, 'eventEmitter', undefined));
         
         this.timer = null;
         this.resetFromJSON(config);
@@ -76,7 +75,7 @@ class TextTyping extends EE {
     }
 
     shutdown() {
-        super.shutdown();
+        this.destroyEventEmitter();
         this.freeTimer();
         this.gameObject = undefined;
         this.scene = undefined;
@@ -312,6 +311,11 @@ class TextTyping extends EE {
         return result;
     }
 }
+
+Object.assign(
+    TextTyping.prototype,
+    EventEmitterMethods
+);
 
 var transferText = function (text) {
     if (Array.isArray(text)) {

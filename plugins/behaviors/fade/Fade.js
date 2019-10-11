@@ -1,3 +1,4 @@
+import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
 import GetSceneObject from '../../utils/system/GetSceneObject.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -99,6 +100,7 @@ class Fade {
             onComplete: this.complete,
             onCompleteScope: this
         });
+        this.setEventEmitter(this.tween);
         return this;
     }
 
@@ -112,6 +114,7 @@ class Fade {
             return this;
         }
 
+        this.setEventEmitter(false);
         this.tween.remove();
         this.tween = undefined;
         return this;
@@ -126,6 +129,11 @@ class Fade {
     }
 
 }
+
+Object.assign(
+    Fade.prototype,
+    EventEmitterMethods
+);
 
 const MODE = {
     stop: 0,

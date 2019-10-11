@@ -13,6 +13,19 @@ Fade out game object then destroy it.
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/fade/fadeout-destroy.js)
 
+### Fade-out
+
 ```javascript
-fadeOutDestroy(gameObject, duration);
+var fade = fadeOutDestroy(gameObject, duration);
 ```
+
+### Events
+
+See [Events of tween task](tween.md#events)
+
+- Scale completes or is stopped.
+    ```javascript
+    fade.on('complete', function(fade, gameObject){
+
+    }, scope);
+    ```

@@ -13,15 +13,28 @@ Scale down (i.e. ease scaleX, scaleY to `0`) game object then destroy it.
 
 [Sample code](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/scale/scaledown-destroy.js)
 
+### Scale down
+
 - Scale down width and height
     ```javascript
-    scaleDownDestroy(gameObject, duration);
+    var scale = scaleDownDestroy(gameObject, duration);
     ```
 - Scale down width only
     ```javascript
-    scaleDownDestroy(gameObject, duration, 'x');
+    var scale = scaleDownDestroy(gameObject, duration, 'x');
     ```
 - Scale down height only
     ```javascript
-    scaleDownDestroy(gameObject, duration, 'y');
+    var scale = scaleDownDestroy(gameObject, duration, 'y');
+    ```
+
+### Events
+
+See [Events of tween task](tween.md#events)
+
+- Scale completes or is stopped.
+    ```javascript
+    scale.on('complete', function(scale, gameObject){
+
+    }, scope);
     ```

@@ -1,3 +1,4 @@
+import EventEmitterMethods from '../../utils/eventemitter/EventEmitterMethods.js';
 import GetSceneObject from '../../utils/system/GetSceneObject.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -123,6 +124,7 @@ class Scale {
             onComplete: this.complete,
             onCompleteScope: this
         });
+        this.setEventEmitter(this.tween);
         return this;
     }
 
@@ -136,6 +138,7 @@ class Scale {
             return this;
         }
 
+        this.setEventEmitter(false);
         this.tween.remove();
         this.tween = undefined;
         return this;
@@ -150,6 +153,11 @@ class Scale {
     }
 
 }
+
+Object.assign(
+    Scale.prototype,
+    EventEmitterMethods
+);
 
 const MODE = {
     stop: 0,
