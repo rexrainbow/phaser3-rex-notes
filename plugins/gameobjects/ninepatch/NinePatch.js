@@ -75,7 +75,6 @@ class NinePatch extends RenderTexture {
     resize(width, height) {
         this.redraw = true;
         super.resize(width, height);
-        this.updateDisplayOrigin(); // Add this code into RenderTexture
         return this;
     }
 
