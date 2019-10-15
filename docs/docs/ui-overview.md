@@ -139,7 +139,7 @@
 
 ### Video objects
 
-1. [Video DOM](video.md): Create a video dom to play video.
+1. [Video DOM](rexvideo.md): Create a video dom to play video.
     ```javascript
     var video = scene.rexUI.add.video(x, y, width, height, config);
     // var video = scene.rexUI.add.video(config);
@@ -155,7 +155,7 @@
         // ...
     }
     ```
-1. [Video canvas](video.md): Create a canvas to play video.
+1. [Video canvas](rexvideo.md): Create a canvas to play video.
     ```javascript
     var video = scene.rexUI.add.videoCanvas(x, y, width, height, config);
     // var video = scene.rexUI.add.videoCanvas(config);
