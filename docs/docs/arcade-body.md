@@ -395,7 +395,12 @@ var hit = body.hitTest(x, y);
 
 #### World bounds
 
-- [World bounds](arcade-world.md#world-bounds)
+- [Default world bounds](arcade-world.md#world-bounds)
+- Custom world bounds :
+    ```javascript
+    body.setBoundsRectangle(bounds);
+    ```
+    - `bounds` : A [rectangle object](geom-rectangle.md).
 - Enable
     ```javascript
     body.setCollideWorldBounds();

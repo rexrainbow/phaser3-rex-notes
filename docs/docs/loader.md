@@ -160,6 +160,19 @@ var data = cache.get(key);
 scene.load.audioSprite(key, urls, json, config);
 ```
 
+#### Video
+
+```javascript
+scene.load.video(key, url, loadEvent, asBlob, noAudio);
+```
+
+- `loadEvent` : The load event to listen for when *not* loading as a blob.
+    - `'loadeddata'` : Data for the current frame is available. Default value.
+    - `'canplay'` : The video is ready to start playing.
+    - `'canplaythrough'` : The video can be played all the way through, without stopping.
+- `asBlob` : Load the video as a data blob, or via the Video element? Default value is `false`.
+- `noAudio` : Does the video have an audio track? If not you can enable auto-playing on it. Default value is `false`.
+
 #### Bitmap font
 
 ```javascript
@@ -391,7 +404,6 @@ File type:
 - `tilemapCSV`
 - `tilemapJSON`
 - `xml`
-
 
 ### Release data
 

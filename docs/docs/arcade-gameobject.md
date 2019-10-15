@@ -50,6 +50,7 @@ Arcade physics Image/Sprite/Group object.
             classType: ArcadeSprite,
             enable: true,
             setCollideWorldBounds: false,
+            setBoundsRectangle: null,
             setAccelerationX: 0,
             setAccelerationY: 0,
             allowDrag: true,

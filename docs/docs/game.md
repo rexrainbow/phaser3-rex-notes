@@ -84,11 +84,13 @@ or
         gamepad: false,
         windowEvents: true,
     },
+    disableContextMenu: false,
 
     backgroundColor: 0,
 
     render: {
         antialias: true,
+        antialiasGL: true,
         pixelArt: false,
         roundPixels: false,
         transparent: false,

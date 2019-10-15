@@ -106,59 +106,91 @@ A Bob has a position, alpha value and a frame from a texture that it uses to ren
 
 #### Position
 
-```javascript
-bob.x = 0;
-bob.y = 0;
-// var x = bob.x;
-// var y = bob.y;
-```
-
-or
-
-```javascript
-bob.reset(x, y);
-// bob.reset(x, y, frame);
-```
+- Get
+    ```javascript
+    var x = bob.x;
+    var y = bob.y;
+    ```
+- Set
+    ```javascript
+    bob.setPosition(x, y);
+    // bob.x = 0;
+    // bob.y = 0;
+    ```
+    or
+    ```javascript
+    bob.reset(x, y);
+    // bob.reset(x, y, frame);
+    ```
 
 #### Frame
 
-```javascript
-bob.setFrame(frame);
-```
+- Get
+    ```javascript
+    var frame = bob.frame;
+    ```
+    - `frame` : [Frame object](texture.md#frame-object).
+- Set
+    ```javascript
+    bob.setFrame(frame);
+    ```
 
 #### Flip
 
-```javascript
-bob.resetFlip();
-```
-
-```javascript
-bob.setFlip(boolX, boolY);
-```
-
-```javascript
-bob.setFlipX(boolean);
-```
-
-```javascript
-bob.setFlipY(boolean);
-```
+- Get
+    ```javascript
+    var flipX = bob.flipX;
+    var flipY = bob.flipY;
+    ```
+- Set
+    ```javascript
+    bob.setFlip(boolX, boolY);
+    // bob.setFlipX(boolean);
+    // bob.setFlipY(boolean);
+    // bob.flipX = flipX;
+    // bob.flipY = flipY;
+    ```
+    or
+    ```javascript
+    bob.resetFlip(); // bob.setFlip(false, false)
+    ```
 
 #### Visible
 
-```javascript
-bob.setVisible(boolean);
-// bob.visible = v;
-// var visible = bob.visible;
-```
+- Get
+    ```javascript
+    var visible = bob.visible;
+    ```
+- Set
+    ```javascript
+    bob.setVisible(boolean);
+    // bob.visible = v;
+    ```
 
 #### Alpha
 
-```javascript
-bob.setAlpha(v);
-// bob.aplha = v;
-// var alpha = bob.alpha;
-```
+- Get
+    ```javascript
+    var alpha = bob.alpha;
+    ```
+- Set
+    ```javascript
+    bob.setAlpha(v);
+    // bob.aplha = v;
+    ```
+
+#### Tint
+
+- Get
+    ```javascript
+    var tint = bob.tint;
+    ```
+- Set
+    ```javascript
+    bob.setTint(tint);
+    // bob.tint = tint;
+    ```
+    - `tint` : Tint value, between `0` and `0xffffff`.
 
 #### Destroy
 

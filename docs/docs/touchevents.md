@@ -112,12 +112,12 @@ Call `gameObject.setInteractive(...)` to register touch input of Game Object bef
     gameObject.setInteractive({
         hitArea: shape,
         hitAreaCallback: callback,
-        pixelPerfect: false,
-        alphaTolerance: 1,
-        draggable: true,
-        dropZone: true,
+        draggable: false,
+        dropZone: false,
+        useHandCursor: false,
         cursor: CSSString,
-        useHandCursor: true
+        pixelPerfect: false,
+        alphaTolerance: 1
     });
     ```
     - Hit area
@@ -142,7 +142,6 @@ Call `gameObject.setInteractive(...)` to register touch input of Game Object bef
     - [Cursor](cursor.md)
         - `cursor` : CSS string
         - `useHandCursor` : `true`
-
 
 !!! warning "Pixel perfect hit-testing"
     This is an expensive process, should only be enabled on Game Objects that really need it.
@@ -410,6 +409,10 @@ scene.input.addPointer(num);  // total points = num + 1
 
 - `gameObject.input` : Game object's input object.
 - `gameObject.input.localX`, `gameObject.input.localY` : Pointer to local position of texture.
+- Always receive input events, even if it's invisible or won't render :
+    ```javascript
+    gameObject.input.alwaysEnabled = true;
+    ```
 
 ### Smooth
 
