@@ -72,6 +72,10 @@ class NinePatch extends RenderTexture {
     }
 
     resize(width, height) {
+        if ((this.width === width) && (this.height === height)) {
+            return this;
+        }
+
         super.resize(width, height);
         this.updateTexture();
         return this;
