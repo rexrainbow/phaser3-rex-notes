@@ -11,11 +11,11 @@ var SetTexture = function (key, columns, rows) {
 
     var texture = this.scene.textures.get(key);
     if (!texture) {
-        this.redraw = true;
+        this.clear();
         return this;
     }
     if (!columns || !rows) {
-        this.redraw = true;
+        this.clear();
         return this;
     }
 
@@ -68,7 +68,7 @@ var SetTexture = function (key, columns, rows) {
         offsetY += rowHeight;
     }
 
-    this.redraw = true;
+    this.updateTexture();
     return this;
 }
 

@@ -34,7 +34,6 @@ class NinePatch extends RenderTexture {
         this.columns = {};
         this.rows = {};
         this.stretchMode = {};
-        this.redraw = false;
         this._image = undefined;
         this._tileSprite = undefined;
 
@@ -73,19 +72,9 @@ class NinePatch extends RenderTexture {
     }
 
     resize(width, height) {
-        this.redraw = true;
         super.resize(width, height);
+        this.updateTexture();
         return this;
-    }
-
-    renderWebGL(renderer, src, interpolationPercentage, camera, parentMatrix) {
-        this.updateTexture();
-        super.renderWebGL(renderer, src, interpolationPercentage, camera, parentMatrix);
-    }
-
-    renderCanvas(renderer, src, interpolationPercentage, camera, parentMatrix) {
-        this.updateTexture();
-        super.renderCanvas(renderer, src, interpolationPercentage, camera, parentMatrix);
     }
 }
 

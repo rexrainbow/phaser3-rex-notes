@@ -1,9 +1,9 @@
 var UpdateTexture = function () {
-    if (!this.redraw) {
+    this.clear();
+
+    if ((this.textureKey === undefined) || (!this.scene.textures.get(this.textureKey))) {
         return this;
     }
-    this.redraw = false;
-    this.clear();
 
     var remainderWidth = this.width - this.columns.minWidth;
     var remainderHeight = this.height - this.rows.minHeight;
