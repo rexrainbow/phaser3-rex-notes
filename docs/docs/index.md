@@ -102,11 +102,14 @@
 1. [UI/text box](ui-textbox): A container with an icon, (typing and paging) text, and background.
 1. [UI/toast](ui-toast.md): Show text message for a short while.
 1. [Virtual joystick](virtualjoystick.md): Simulate curosr keys according touch events.
-1. [Video](rexvideo.md): Play video on DOM, or on canvas.
 1. [Wait events](waitevents.md): Wait fired events or callbacks.
 1. [Webfont-loader](webfontloader.md): Load web font by google webfont loader in preload stage.
 1. [XOR](xor.md): Encrypt or decrypt string by XOR algorithm.
 1. [Youtube player](youtubeplayer.md): Play youtube video on iframe.
+
+## Deprecated
+
+1. [Video](rexvideo.md): Play video on DOM, or on canvas.
 
 ## Links
 

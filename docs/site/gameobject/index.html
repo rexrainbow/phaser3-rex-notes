@@ -828,6 +828,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../video/" title="Video" class="md-nav__link">
+      Video
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../circlemaskimage/" title="Circle mask image" class="md-nav__link">
       Circle mask image
     </a>
@@ -1579,18 +1591,6 @@
   <li class="md-nav__item">
     <a href="../inputtext/" title="Input text" class="md-nav__link">
       Input text
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../video/" title="Video" class="md-nav__link">
-      Video
     </a>
   </li>
 
@@ -5303,9 +5303,17 @@
 </div>
 <h3 id="texture">Texture<a class="headerlink" href="#texture" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Set texture
-    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">frame</span><span class="p">);</span>
+<li>Set texture via key string
+    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+<span class="c1">// gameObject.setTexture(key, frame);</span>
 </pre></div></li>
+<li>Set texture via texture object
+    <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setTexture</span><span class="p">(</span><span class="nx">texture</span><span class="p">);</span>
+<span class="c1">// gameObject.setTexture(texture, frame);</span>
+</pre></div><ul>
+<li><code>texture</code> : <a href="../texture/#get-texture">Texture object</a>, or <a href="../canvas-texture/">canvas texture object</a></li>
+</ul>
+</li>
 <li>Set frame
     <div class="codehilite"><pre><span></span><span class="nx">gameObject</span><span class="p">.</span><span class="nx">setFrame</span><span class="p">(</span><span class="nx">frame</span><span class="p">);</span>
 <span class="nx">gameObject</span><span class="p">.</span><span class="nx">setFrame</span><span class="p">(</span><span class="nx">frame</span><span class="p">,</span> <span class="nx">updateSize</span><span class="p">,</span> <span class="nx">updateOrigin</span><span class="p">);</span>

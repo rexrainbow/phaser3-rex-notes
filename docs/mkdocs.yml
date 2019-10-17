@@ -26,6 +26,7 @@ nav:
             - Sprite: sprite.md
             - Animation: animation.md
             - Quad: quad.md
+            - Video: video.md
             - Circle mask image: circlemaskimage.md            
             - Shader: shader.md
         - Multiple images: 
@@ -78,7 +79,6 @@ nav:
     - DOM element:
         - DOM element: domelement.md
         - Input text: inputtext.md
-        - Video: rexvideo.md
         - Youtube player: youtubeplayer.md
     - Behaviors:
         - Actions:

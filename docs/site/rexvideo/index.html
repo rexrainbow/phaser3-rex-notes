@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/shape-arc/">
+        <link rel="canonical" href="https://rexrainbow.github.io/phaser3-rex-notes/docs/site/index.html/rexvideo/">
       
       
         <meta name="author" content="rexrainbow">
@@ -40,7 +40,7 @@
     
     
       
-        <title>Arc - Notes of Phaser 3</title>
+        <title>Rexvideo - Notes of Phaser 3</title>
       
     
     
@@ -140,7 +140,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                Arc
+                Rexvideo
               
             </span>
           
@@ -513,12 +513,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
     
     <label class="md-nav__link" for="nav-4">
       Game object
@@ -966,12 +964,10 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-4" type="checkbox" id="nav-4-4" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-4" type="checkbox" id="nav-4-4">
     
     <label class="md-nav__link" for="nav-4-4">
       Graphics
@@ -1011,12 +1007,10 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-4-3" type="checkbox" id="nav-4-4-3" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-4-3" type="checkbox" id="nav-4-4-3">
     
     <label class="md-nav__link" for="nav-4-4-3">
       Shape
@@ -1056,100 +1050,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Arc
-      </label>
-    
-    <a href="./" title="Arc" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../shape-arc/" title="Arc" class="md-nav__link">
       Arc
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#introduction" class="md-nav__link">
-    Introduction
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#usage" class="md-nav__link">
-    Usage
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#create-shape" class="md-nav__link">
-    Create shape
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#add-shape-object" class="md-nav__link">
-    Add shape object
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#custom-class" class="md-nav__link">
-    Custom class
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#color" class="md-nav__link">
-    Color
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#propertirs" class="md-nav__link">
-    Propertirs
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#other-properties" class="md-nav__link">
-    Other properties
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -4638,6 +4543,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#source-code" class="md-nav__link">
+    Source code
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#usage" class="md-nav__link">
     Usage
   </a>
@@ -4646,16 +4558,29 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#create-shape" class="md-nav__link">
-    Create shape
+  <a href="#install-plugin" class="md-nav__link">
+    Install plugin
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#add-shape-object" class="md-nav__link">
-    Add shape object
+  <a href="#add-video-object" class="md-nav__link">
+    Add video object
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#different-between-rexvideo-and-rexvideocanvas" class="md-nav__link">
+    Different between rexVideo and rexVideoCanvas
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -4667,22 +4592,90 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#color" class="md-nav__link">
-    Color
+  <a href="#load" class="md-nav__link">
+    Load
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#propertirs" class="md-nav__link">
-    Propertirs
+  <a href="#play" class="md-nav__link">
+    Play
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#other-properties" class="md-nav__link">
-    Other properties
+  <a href="#pause" class="md-nav__link">
+    Pause
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#playback-time" class="md-nav__link">
+    Playback time
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#duration" class="md-nav__link">
+    Duration
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#volume" class="md-nav__link">
+    Volume
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mute" class="md-nav__link">
+    Mute
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loop" class="md-nav__link">
+    Loop
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resize" class="md-nav__link">
+    Resize
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#status" class="md-nav__link">
+    Status
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
   </a>
   
 </li>
@@ -4708,35 +4701,146 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/shape-arc.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/rexrainbow/phaser3-rex-notes/edit/master/docs/rexvideo.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                  <h1>Arc</h1>
+                  <h1>Rexvideo</h1>
                 
                 <h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
-<p>Arc shape, built-in game object of phaser.</p>
+<p>Play video on <a href="https://www.w3schools.com/html/html5_video.asp">DOM</a>, or on canvas.</p>
 <ul>
-<li>Author: Richard Davey</li>
+<li>Author: Rex</li>
+<li><a href="../domelement/">DOM Game object</a>, or <a href="../canvas/">Canvas Game object</a></li>
 </ul>
+<h2 id="source-code">Source code<a class="headerlink" href="#source-code" title="Permanent link">&para;</a></h2>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/video-plugin.js">Plugin</a>, <a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexvideoplugin.min.js">minify</a></p>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/video.js">Class</a></p>
 <h2 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<h3 id="create-shape">Create shape<a class="headerlink" href="#create-shape" title="Permanent link">&para;</a></h3>
-<h3 id="add-shape-object">Add shape object<a class="headerlink" href="#add-shape-object" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">arc</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">arc</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">startAngle</span><span class="p">,</span> <span class="nx">endAngle</span><span class="p">,</span> <span class="nx">anticlockwise</span><span class="p">,</span> <span class="nx">fillColor</span><span class="p">);</span>
-<span class="c1">// var arc = scene.add.arc(x, y, radius, startAngle, endAngle, anticlockwise, fillColor, fillAlpha);</span>
+<p><a href="https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/video">Sample code</a></p>
+<h3 id="install-plugin">Install plugin<a class="headerlink" href="#install-plugin" title="Permanent link">&para;</a></h3>
+<p>Install plugin in <a href="../game/#configuration">configuration of game</a></p>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+    <span class="nx">parent</span><span class="o">:</span> <span class="nx">divId</span><span class="p">,</span>
+    <span class="nx">dom</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">createContainer</span><span class="o">:</span> <span class="kc">true</span>
+    <span class="p">},</span>
+    <span class="nx">plugins</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">global</span><span class="o">:</span> <span class="p">[{</span>
+            <span class="nx">key</span><span class="o">:</span> <span class="s1">&#39;rexVideoPlugin&#39;</span><span class="p">,</span>
+            <span class="nx">plugin</span><span class="o">:</span> <span class="nx">VideoPlugin</span><span class="p">,</span>
+            <span class="nx">start</span><span class="o">:</span> <span class="kc">true</span>
+        <span class="p">},</span>
+        <span class="c1">// ...</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">};</span>
+<span class="kd">var</span> <span class="nx">game</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Game</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
 </pre></div>
 
+<ul>
+<li>To play video on DOM<ul>
+<li>Set <code>parent</code> to divId</li>
+<li>Set <code>dom.createContainer</code> to <code>true</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="add-video-object">Add video object<a class="headerlink" href="#add-video-object" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Video on DOM
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">video</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexVideo</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+<span class="c1">// var video = scene.add.rexVideo(x, y, config);</span>
+<span class="c1">// var video = scene.add.rexVideo(config);</span>
+</pre></div></li>
+<li>Video on canvas
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">video</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">rexVideoCanvas</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+<span class="c1">// var video = scene.add.rexVideoCanvas(x, y, config);</span>
+<span class="c1">// var video = scene.add.rexVideoCanvas(config);</span>
+</pre></div></li>
+</ul>
+<p>Default configuration</p>
+<div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+
+    <span class="c1">// Element properties</span>
+    <span class="nx">src</span><span class="o">:</span> <span class="nx">url</span><span class="p">,</span>
+    <span class="c1">// src: {</span>
+    <span class="c1">//     webm: webmFileURL,</span>
+    <span class="c1">//     ogg: oggFileURL,</span>
+    <span class="c1">//     mp4: mp4FileURL,</span>
+    <span class="c1">//     h264: h264FileURL,</span>
+    <span class="c1">// }</span>
+    <span class="nx">id</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">autoPlay</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">controls</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">loop</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">muted</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">playsInline</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">crossOrigin</span><span class="o">:</span> <span class="s1">&#39;anonymous&#39;</span><span class="p">,</span>
+    <span class="nx">playbackTimeChangeEventEnable</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+
+<ul>
+<li><code>x</code>, <code>y</code> : Position</li>
+<li><code>width</code>, <code>height</code> : Size of element</li>
+<li>Element properties<ul>
+<li><code>src</code> : Specifies the URL of the video file.<ul>
+<li>A string : url of the video file.</li>
+<li>A plain object : <code>{ videoType: fileURL }</code><ol>
+<li>Get <code>webmFileURL</code> if browser supports webm video format.</li>
+<li>Get <code>oggFileURL</code> if browser supports ogg video format.</li>
+<li>Get <code>mp4FileURL</code> if browser supports mp4 video format.</li>
+<li>Get <code>h264FileURL</code> if browser supports h264 video format.</li>
+</ol>
+</li>
+</ul>
+</li>
+<li><code>id</code> : <code>id</code> element property.</li>
+<li><code>autoPlay</code> : <code>autoplay</code> element property.</li>
+<li><code>controls</code> : <code>controls</code> element property.</li>
+<li><code>loop</code> : <code>loop</code> element property.</li>
+<li><code>muted</code> : <code>muted</code> element property.</li>
+<li><code>playsInline</code> : <code>playsInline</code> element property.</li>
+<li><code>crossOrigin</code> : <code>crossOrigin</code> element property.</li>
+</ul>
+</li>
+<li><code>playbackTimeChangeEventEnable</code> : Set <code>false</code> to disable <code>playbacktimechange</code> event.</li>
+</ul>
+<h4 id="different-between-rexvideo-and-rexvideocanvas">Different between rexVideo and rexVideoCanvas<a class="headerlink" href="#different-between-rexvideo-and-rexvideocanvas" title="Permanent link">&para;</a></h4>
+<ul>
+<li><code>rexVideo</code> plays video on DOM.<ul>
+<li>DOM object always above game canvas.</li>
+<li>Won't be affected by webgl shader.</li>
+<li>Right clicks to pop up a menu.    </li>
+</ul>
+</li>
+<li><code>rexVideoCanvas</code> plays video on canvas.<ul>
+<li>Can be placed between game objects via depth setting.</li>
+<li>Can be affected by webgl shader.</li>
+</ul>
+</li>
+</ul>
 <h3 id="custom-class">Custom class<a class="headerlink" href="#custom-class" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Define class
-    <div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">MyArc</span> <span class="kr">extends</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">GameObjects</span><span class="p">.</span><span class="nx">Arc</span> <span class="p">{</span>
-    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">startAngle</span><span class="p">,</span> <span class="nx">endAngle</span><span class="p">,</span> <span class="nx">anticlockwise</span><span class="p">,</span> <span class="nx">fillColor</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">startAngle</span><span class="p">,</span> <span class="nx">endAngle</span><span class="p">,</span> <span class="nx">anticlockwise</span><span class="p">,</span> <span class="nx">fillColor</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">MyVideo</span> <span class="kr">extends</span> <span class="nx">Video</span> <span class="p">{</span>  <span class="c1">// or VideoCanvas</span>
+    <span class="nx">constructor</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">super</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// ...</span>
         <span class="nx">scene</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">existing</span><span class="p">(</span><span class="k">this</span><span class="p">);</span>
     <span class="p">}</span>
     <span class="c1">// ...</span>
 
-    <span class="c1">// preUpdate(time, delta) {}</span>
+    <span class="c1">// preUpdate(time, delta) {</span>
+    <span class="c1">//     if (super.preUpdate) {</span>
+    <span class="c1">//         super.preUpdate(time, delta)</span>
+    <span class="c1">//     }</span>
+    <span class="c1">// }</span>
 <span class="p">}</span>
 </pre></div><ul>
 <li><code>scene.add.existing(gameObject)</code> : Adds an existing Game Object to this Scene.<ul>
@@ -4747,94 +4851,142 @@
 </ul>
 </li>
 <li>Create instance
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">arc</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyArc</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">startAngle</span><span class="p">,</span> <span class="nx">endAngle</span><span class="p">,</span> <span class="nx">anticlockwise</span><span class="p">,</span> <span class="nx">fillColor</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">video</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyVideo</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </pre></div></li>
 </ul>
-<h3 id="color">Color<a class="headerlink" href="#color" title="Permanent link">&para;</a></h3>
+<h3 id="load">Load<a class="headerlink" href="#load" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">video</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="nx">src</span><span class="p">);</span>
+</pre></div>
+
 <ul>
-<li>Fill color<ul>
-<li>Get
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">fillColor</span><span class="p">;</span>
-</pre></div></li>
-<li>Set
-    <div class="codehilite"><pre><span></span><span class="nx">arc</span><span class="p">.</span><span class="nx">setFillStyle</span><span class="p">(</span><span class="nx">color</span><span class="p">,</span> <span class="nx">alpha</span><span class="p">);</span>
-</pre></div></li>
-</ul>
+<li><code>src</code> : Specifies the URL of the video file.<ul>
+<li>A string : url of the video file.</li>
+<li>A plain object : <code>{ videoType: fileURL }</code><ol>
+<li>Get <code>webmFileURL</code> if browser supports webm video format.</li>
+<li>Get <code>oggFileURL</code> if browser supports ogg video format.</li>
+<li>Get <code>mp4FileURL</code> if browser supports mp4 video format.</li>
+<li>Get <code>h264FileURL</code> if browser supports h264 video format.</li>
+</ol>
 </li>
-<li>Stroke color<ul>
-<li>Get
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">strokeColor</span><span class="p">;</span>
-</pre></div></li>
-<li>Set
-    <div class="codehilite"><pre><span></span><span class="nx">arc</span><span class="p">.</span><span class="nx">setStrokeStyle</span><span class="p">(</span><span class="nx">lineWidth</span><span class="p">,</span> <span class="nx">color</span><span class="p">,</span> <span class="nx">alpha</span><span class="p">);</span>
-</pre></div></li>
 </ul>
 </li>
 </ul>
-<div class="admonition warning">
-<p class="admonition-title">No tint methods</p>
-<p>Uses <code>arc.setFillStyle(color, alpha)</code> to change color.</p>
-</div>
-<h3 id="propertirs">Propertirs<a class="headerlink" href="#propertirs" title="Permanent link">&para;</a></h3>
+<h3 id="play">Play<a class="headerlink" href="#play" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">video</span><span class="p">.</span><span class="nx">play</span><span class="p">();</span>
+</pre></div>
+
+<h3 id="pause">Pause<a class="headerlink" href="#pause" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">video</span><span class="p">.</span><span class="nx">pause</span><span class="p">();</span>
+</pre></div>
+
+<h3 id="playback-time">Playback time<a class="headerlink" href="#playback-time" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Radius<ul>
 <li>Get
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">radius</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">radius</span><span class="p">;</span>
-</pre></div></li>
-<li>Set
-    <div class="codehilite"><pre><span></span><span class="nx">arc</span><span class="p">.</span><span class="nx">setRadius</span><span class="p">(</span><span class="nx">radius</span><span class="p">);</span>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">playbackTime</span> <span class="o">=</span> <span class="nx">video</span><span class="p">.</span><span class="nx">playbackTime</span><span class="p">;</span> <span class="c1">// time in seconds</span>
 </pre></div>
-    or
-    <div class="codehilite"><pre><span></span><span class="nx">arc</span><span class="p">.</span><span class="nx">radius</span> <span class="o">=</span> <span class="nx">radius</span><span class="p">;</span>
-</pre></div></li>
-</ul>
-</li>
-<li>Start angle, in degrees.<ul>
-<li>Get
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">startAngle</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">startAngle</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">t</span> <span class="o">=</span> <span class="nx">video</span><span class="p">.</span><span class="nx">t</span><span class="p">;</span> <span class="c1">// t: 0~1</span>
 </pre></div></li>
 <li>Set
-    <div class="codehilite"><pre><span></span><span class="nx">arc</span><span class="p">.</span><span class="nx">setStartAngle</span><span class="p">(</span><span class="nx">startAngle</span><span class="p">);</span>
-<span class="c1">// arc.setStartAngle(startAngle, anticlockwise);</span>
+    <div class="codehilite"><pre><span></span><span class="nx">video</span><span class="p">.</span><span class="nx">setPlaybackTime</span><span class="p">(</span><span class="nx">time</span><span class="p">);</span> <span class="c1">// time in seconds</span>
+<span class="c1">// video.playbackTime = time;</span>
 </pre></div>
-    or
-    <div class="codehilite"><pre><span></span><span class="nx">arc</span><span class="p">.</span><span class="nx">startAngle</span> <span class="o">=</span> <span class="nx">startAngle</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><span class="nx">video</span><span class="p">.</span><span class="nx">setT</span><span class="p">(</span><span class="nx">t</span><span class="p">);</span> <span class="c1">// t: 0~1</span>
+<span class="c1">// video.t = t;</span>
 </pre></div></li>
 </ul>
-</li>
-<li>End angle, in degrees.<ul>
-<li>Get
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">endAngle</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">endAngle</span><span class="p">;</span>
-</pre></div></li>
-<li>Set
-    <div class="codehilite"><pre><span></span><span class="nx">arc</span><span class="p">.</span><span class="nx">seEndAngle</span><span class="p">(</span><span class="nx">endAngle</span><span class="p">);</span>
+<h3 id="duration">Duration<a class="headerlink" href="#duration" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">duration</span> <span class="o">=</span> <span class="nx">video</span><span class="p">.</span><span class="nx">duration</span><span class="p">;</span>  <span class="c1">// time in seconds</span>
 </pre></div>
-    or
-    <div class="codehilite"><pre><span></span><span class="nx">arc</span><span class="p">.</span><span class="nx">endAngle</span> <span class="o">=</span> <span class="nx">endAngle</span><span class="p">;</span>
-</pre></div></li>
-</ul>
-</li>
-<li>Anticlockwise (<code>true</code>, or <code>false</code>)<ul>
+
+<h3 id="volume">Volume<a class="headerlink" href="#volume" title="Permanent link">&para;</a></h3>
+<ul>
 <li>Get
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">anticlockwise</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">anticlockwise</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">volume</span> <span class="o">=</span> <span class="nx">video</span><span class="p">.</span><span class="nx">volume</span><span class="p">;</span>  <span class="c1">// volume: 0~1</span>
 </pre></div></li>
 <li>Set
-    <div class="codehilite"><pre><span></span><span class="nx">arc</span><span class="p">.</span><span class="nx">anticlockwise</span> <span class="o">=</span> <span class="nx">anticlockwise</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><span class="nx">video</span><span class="p">.</span><span class="nx">setVolume</span><span class="p">(</span><span class="nx">volume</span><span class="p">);</span>  <span class="c1">// volume: 0~1</span>
+<span class="c1">// video.volume = volume;</span>
 </pre></div></li>
 </ul>
-</li>
-<li>Iterations: Increase this value for smoother arcs, at the cost of more polygons being rendered. Default is <code>0.01</code><ul>
+<h4 id="mute">Mute<a class="headerlink" href="#mute" title="Permanent link">&para;</a></h4>
+<ul>
 <li>Get
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">iterations</span> <span class="o">=</span> <span class="nx">arc</span><span class="p">.</span><span class="nx">iterations</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">muted</span> <span class="o">=</span> <span class="nx">video</span><span class="p">.</span><span class="nx">muted</span><span class="p">;</span>  <span class="c1">// muted: true/false</span>
 </pre></div></li>
 <li>Set
-    <div class="codehilite"><pre><span></span><span class="nx">arc</span><span class="p">.</span><span class="nx">iterations</span> <span class="o">=</span> <span class="nx">iterations</span><span class="p">;</span>
+    <div class="codehilite"><pre><span></span><span class="nx">video</span><span class="p">.</span><span class="nx">setMute</span><span class="p">(</span><span class="nx">muted</span><span class="p">);</span>  <span class="c1">// muted: true/false</span>
+<span class="c1">// video.muted = muted;</span>
 </pre></div></li>
+</ul>
+<h3 id="loop">Loop<a class="headerlink" href="#loop" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">loop</span> <span class="o">=</span> <span class="nx">video</span><span class="p">.</span><span class="nx">loop</span><span class="p">;</span>  <span class="c1">// loop: true/false</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">video</span><span class="p">.</span><span class="nx">setLoop</span><span class="p">(</span><span class="nx">loop</span><span class="p">);</span>  <span class="c1">// loop: true/false</span>
+<span class="c1">// video.loop = loop;</span>
+</pre></div></li>
+</ul>
+<h3 id="resize">Resize<a class="headerlink" href="#resize" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">video</span><span class="p">.</span><span class="nx">resize</span><span class="p">(</span><span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
+</pre></div>
+
+<h4 id="status">Status<a class="headerlink" href="#status" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Is playing
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isPlaying</span> <span class="o">=</span> <span class="nx">video</span><span class="p">.</span><span class="nx">isPlaying</span><span class="p">;</span>
+</pre></div></li>
+<li>Is paused
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isPaused</span> <span class="o">=</span> <span class="nx">video</span><span class="p">.</span><span class="nx">isPaused</span><span class="p">;</span>
+</pre></div></li>
+<li>Has end
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">hasEnded</span> <span class="o">=</span> <span class="nx">video</span><span class="p">.</span><span class="nx">hasEnded</span><span class="p">;</span>
+</pre></div></li>
+<li>Ready state
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">readyState</span> <span class="o">=</span> <span class="nx">video</span><span class="p">.</span><span class="nx">readyState</span><span class="p">;</span>
+</pre></div><ul>
+<li><code>0</code> = HAVE_NOTHING - no information whether or not the audio/video is ready</li>
+<li><code>1</code> = HAVE_METADATA - metadata for the audio/video is ready</li>
+<li><code>2</code> = HAVE_CURRENT_DATA - data for the current playback position is available, but not enough data to play next frame/millisecond</li>
+<li><code>3</code> = HAVE_FUTURE_DATA - data for the current and at least the next frame is available</li>
+<li><code>4</code> = HAVE_ENOUGH_DATA - enough data available to start playing</li>
 </ul>
 </li>
 </ul>
-<h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
-<p>See <a href="../gameobject/">game object</a></p>
+<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Load start
+    <div class="codehilite"><pre><span></span><span class="nx">video</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;loadstart&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">video</span><span class="p">){</span> <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+<li>Can play
+    <div class="codehilite"><pre><span></span><span class="nx">video</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;canplay&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">video</span><span class="p">){</span> <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+<li>Can play through
+    <div class="codehilite"><pre><span></span><span class="nx">video</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;canplaythrough&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">video</span><span class="p">){</span> <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+<li>Playing
+    <div class="codehilite"><pre><span></span><span class="nx">video</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;playing&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">video</span><span class="p">){</span> <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+<li>Pause
+    <div class="codehilite"><pre><span></span><span class="nx">video</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;pause&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">video</span><span class="p">){</span> <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+<li>Stalled
+    <div class="codehilite"><pre><span></span><span class="nx">video</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;stalled&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">video</span><span class="p">){</span> <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+<li>Ended
+    <div class="codehilite"><pre><span></span><span class="nx">video</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;ended&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">video</span><span class="p">){</span> <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+<li>Error
+    <div class="codehilite"><pre><span></span><span class="nx">video</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">video</span><span class="p">){</span> <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+<li>Playback time changed
+    <div class="codehilite"><pre><span></span><span class="nx">video</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;playbacktimechange&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">video</span><span class="p">){</span> <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div><ul>
+<li>Set <code>playbackTimeChangeEventEnable</code> to <code>true</code> to enable this event.</li>
+</ul>
+</li>
+</ul>
                 
                   
                 
@@ -4851,41 +5003,6 @@
       
         
 <footer class="md-footer">
-  
-    <div class="md-footer-nav">
-      <nav class="md-footer-nav__inner md-grid">
-        
-          <a href="../shape-circle/" title="Circle" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
-            </div>
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
-                  Previous
-                </span>
-                Circle
-              </span>
-            </div>
-          </a>
-        
-        
-          <a href="../shape-line/" title="Line" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
-                  Next
-                </span>
-                Line
-              </span>
-            </div>
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
-            </div>
-          </a>
-        
-      </nav>
-    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">

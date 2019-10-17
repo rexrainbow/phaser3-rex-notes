@@ -636,6 +636,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../video/" title="Video" class="md-nav__link">
+      Video
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../circlemaskimage/" title="Circle mask image" class="md-nav__link">
       Circle mask image
     </a>
@@ -824,6 +836,13 @@
           <li class="md-nav__item">
   <a href="#alpha" class="md-nav__link">
     Alpha
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tint" class="md-nav__link">
+    Tint
   </a>
   
 </li>
@@ -1560,18 +1579,6 @@
   <li class="md-nav__item">
     <a href="../inputtext/" title="Input text" class="md-nav__link">
       Input text
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../video/" title="Video" class="md-nav__link">
-      Video
     </a>
   </li>
 
@@ -4833,6 +4840,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tint" class="md-nav__link">
+    Tint
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#destroy" class="md-nav__link">
     Destroy
   </a>
@@ -4966,46 +4980,83 @@
 <h3 id="bob-object">Bob object<a class="headerlink" href="#bob-object" title="Permanent link">&para;</a></h3>
 <p>A Bob has a position, alpha value and a frame from a texture that it uses to render with. You can also toggle the flipped and visible state of the Bob.</p>
 <h4 id="position">Position<a class="headerlink" href="#position" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">bob</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="nx">bob</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="c1">// var x = bob.x;</span>
-<span class="c1">// var y = bob.y;</span>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">bob</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">bob</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">bob</span><span class="p">.</span><span class="nx">setPosition</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+<span class="c1">// bob.x = 0;</span>
+<span class="c1">// bob.y = 0;</span>
 </pre></div>
-
-<p>or</p>
-<div class="codehilite"><pre><span></span><span class="nx">bob</span><span class="p">.</span><span class="nx">reset</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">bob</span><span class="p">.</span><span class="nx">reset</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
 <span class="c1">// bob.reset(x, y, frame);</span>
-</pre></div>
-
+</pre></div></li>
+</ul>
 <h4 id="frame">Frame<a class="headerlink" href="#frame" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">bob</span><span class="p">.</span><span class="nx">setFrame</span><span class="p">(</span><span class="nx">frame</span><span class="p">);</span>
-</pre></div>
-
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">frame</span> <span class="o">=</span> <span class="nx">bob</span><span class="p">.</span><span class="nx">frame</span><span class="p">;</span>
+</pre></div><ul>
+<li><code>frame</code> : <a href="../texture/#frame-object">Frame object</a>.</li>
+</ul>
+</li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">bob</span><span class="p">.</span><span class="nx">setFrame</span><span class="p">(</span><span class="nx">frame</span><span class="p">);</span>
+</pre></div></li>
+</ul>
 <h4 id="flip">Flip<a class="headerlink" href="#flip" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">bob</span><span class="p">.</span><span class="nx">resetFlip</span><span class="p">();</span>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">flipX</span> <span class="o">=</span> <span class="nx">bob</span><span class="p">.</span><span class="nx">flipX</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">flipY</span> <span class="o">=</span> <span class="nx">bob</span><span class="p">.</span><span class="nx">flipY</span><span class="p">;</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">bob</span><span class="p">.</span><span class="nx">setFlip</span><span class="p">(</span><span class="nx">boolX</span><span class="p">,</span> <span class="nx">boolY</span><span class="p">);</span>
+<span class="c1">// bob.setFlipX(boolean);</span>
+<span class="c1">// bob.setFlipY(boolean);</span>
+<span class="c1">// bob.flipX = flipX;</span>
+<span class="c1">// bob.flipY = flipY;</span>
 </pre></div>
-
-<div class="codehilite"><pre><span></span><span class="nx">bob</span><span class="p">.</span><span class="nx">setFlip</span><span class="p">(</span><span class="nx">boolX</span><span class="p">,</span> <span class="nx">boolY</span><span class="p">);</span>
-</pre></div>
-
-<div class="codehilite"><pre><span></span><span class="nx">bob</span><span class="p">.</span><span class="nx">setFlipX</span><span class="p">(</span><span class="kr">boolean</span><span class="p">);</span>
-</pre></div>
-
-<div class="codehilite"><pre><span></span><span class="nx">bob</span><span class="p">.</span><span class="nx">setFlipY</span><span class="p">(</span><span class="kr">boolean</span><span class="p">);</span>
-</pre></div>
-
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">bob</span><span class="p">.</span><span class="nx">resetFlip</span><span class="p">();</span> <span class="c1">// bob.setFlip(false, false)</span>
+</pre></div></li>
+</ul>
 <h4 id="visible">Visible<a class="headerlink" href="#visible" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">bob</span><span class="p">.</span><span class="nx">setVisible</span><span class="p">(</span><span class="kr">boolean</span><span class="p">);</span>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">visible</span> <span class="o">=</span> <span class="nx">bob</span><span class="p">.</span><span class="nx">visible</span><span class="p">;</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">bob</span><span class="p">.</span><span class="nx">setVisible</span><span class="p">(</span><span class="kr">boolean</span><span class="p">);</span>
 <span class="c1">// bob.visible = v;</span>
-<span class="c1">// var visible = bob.visible;</span>
-</pre></div>
-
+</pre></div></li>
+</ul>
 <h4 id="alpha">Alpha<a class="headerlink" href="#alpha" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">bob</span><span class="p">.</span><span class="nx">setAlpha</span><span class="p">(</span><span class="nx">v</span><span class="p">);</span>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">alpha</span> <span class="o">=</span> <span class="nx">bob</span><span class="p">.</span><span class="nx">alpha</span><span class="p">;</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">bob</span><span class="p">.</span><span class="nx">setAlpha</span><span class="p">(</span><span class="nx">v</span><span class="p">);</span>
 <span class="c1">// bob.aplha = v;</span>
-<span class="c1">// var alpha = bob.alpha;</span>
-</pre></div>
-
+</pre></div></li>
+</ul>
+<h4 id="tint">Tint<a class="headerlink" href="#tint" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">tint</span> <span class="o">=</span> <span class="nx">bob</span><span class="p">.</span><span class="nx">tint</span><span class="p">;</span>
+</pre></div></li>
+<li>Set
+    <div class="codehilite"><pre><span></span><span class="nx">bob</span><span class="p">.</span><span class="nx">setTint</span><span class="p">(</span><span class="nx">tint</span><span class="p">);</span>
+<span class="c1">// bob.tint = tint;</span>
+</pre></div><ul>
+<li><code>tint</code> : Tint value, between <code>0</code> and <code>0xffffff</code>.</li>
+</ul>
+</li>
+</ul>
 <h4 id="destroy">Destroy<a class="headerlink" href="#destroy" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><span class="nx">bob</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
 </pre></div>

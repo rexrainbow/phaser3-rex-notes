@@ -725,6 +725,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../video/" title="Video" class="md-nav__link">
+      Video
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../circlemaskimage/" title="Circle mask image" class="md-nav__link">
       Circle mask image
     </a>
@@ -1476,18 +1488,6 @@
   <li class="md-nav__item">
     <a href="../inputtext/" title="Input text" class="md-nav__link">
       Input text
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../video/" title="Video" class="md-nav__link">
-      Video
     </a>
   </li>
 
@@ -4728,7 +4728,82 @@
 </pre></div>
 
 <ul>
-<li><code>pack</code> : See <a href="../loader/#file-pack">file pack</a></li>
+<li><code>key</code> : The unique key of this Scene. Must be unique within the entire Game instance.</li>
+<li><code>active</code> : Does the Scene start as active or not? An active Scene updates each step.</li>
+<li><code>visible</code> : Does the Scene start as visible or not? A visible Scene renders each step.</li>
+<li><code>pack</code> : An optional <a href="../loader/#file-pack">Loader Packfile</a> to be loaded before the Scene begins.</li>
+<li><code>cameras</code> : An optional <a href="../camera/#create-cameras-from-json">Camera configuration object</a>.
+    <div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">sys</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">sys</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">height</span><span class="p">,</span>
+    <span class="nx">zoom</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nx">rotation</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">scrollX</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">scrollY</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">roundPixels</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">visible</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">backgroundColor</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">bounds</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="c1">// {x, y, width, height}</span>
+<span class="p">}</span>
+</pre></div></li>
+<li><code>map</code> : Overwrites the default injection map for a scene.</li>
+<li><code>physics</code> : The physics configuration object for the Scene.
+    <div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="k">default</span><span class="o">:</span> <span class="s1">&#39;arcade&#39;</span><span class="p">,</span> <span class="c1">// &#39;impact&#39;, or &#39;matter&#39;</span>
+    <span class="nx">arcade</span><span class="o">:</span> <span class="p">{...},</span>
+    <span class="nx">matter</span><span class="o">:</span> <span class="p">{...}</span>
+<span class="p">}</span>
+</pre></div><ul>
+<li><code>arcade</code> : <a href="../arcade-world/#configuration">Arcade Physics configuration</a>.</li>
+<li><code>matter</code> : <a href="../matterjs-world/#configuration">Matter Physics configuration</a>.</li>
+</ul>
+</li>
+<li><code>loader</code> : The loader configuration object for the Scene.
+    <div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nx">baseURL</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="nx">path</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="nx">enableParallel</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">maxParallelDownloads</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="nx">crossOrigin</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="nx">responseType</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="nx">async</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">user</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="nx">password</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="nx">timeout</span><span class="o">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+</pre></div></li>
+<li><code>plugins</code> : The plugin configuration object for the Scene.
+    <div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nx">global</span><span class="o">:</span> <span class="p">[</span>
+        <span class="c1">//{key, plugin, start}</span>
+    <span class="p">],</span>
+    <span class="nx">scene</span><span class="o">:</span> <span class="p">[</span>
+        <span class="c1">// ...</span>
+    <span class="p">]</span>
+<span class="p">}</span>    
+</pre></div></li>
+<li><code>input</code> : The input configuration object for the Scene.
+    <div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nx">keyboard</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">target</span><span class="o">:</span> <span class="nb">window</span>
+    <span class="p">},</span>
+    <span class="nx">mouse</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">target</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nx">capture</span><span class="o">:</span> <span class="kc">true</span>
+    <span class="p">},</span>
+    <span class="nx">activePointers</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nx">touch</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">target</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span>
+        <span class="nx">capture</span><span class="o">:</span> <span class="kc">true</span>
+    <span class="p">},</span>
+    <span class="nx">smoothFactor</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">gamepad</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">windowEvents</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div></li>
 </ul>
 <h3 id="es6-class">ES6 class<a class="headerlink" href="#es6-class" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kr">class</span> <span class="nx">MyScene</span> <span class="kr">extends</span> <span class="nx">Phaser</span><span class="p">.</span><span class="nx">Scene</span> <span class="p">{</span>

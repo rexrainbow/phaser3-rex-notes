@@ -632,6 +632,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../video/" title="Video" class="md-nav__link">
+      Video
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../circlemaskimage/" title="Circle mask image" class="md-nav__link">
       Circle mask image
     </a>
@@ -1383,18 +1395,6 @@
   <li class="md-nav__item">
     <a href="../inputtext/" title="Input text" class="md-nav__link">
       Input text
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../video/" title="Video" class="md-nav__link">
-      Video
     </a>
   </li>
 
@@ -2412,6 +2412,13 @@
           <li class="md-nav__item">
   <a href="#get-camera" class="md-nav__link">
     Get camera
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-cameras-from-json" class="md-nav__link">
+    Create cameras from JSON
   </a>
   
 </li>
@@ -4738,6 +4745,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#create-cameras-from-json" class="md-nav__link">
+    Create cameras from JSON
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#remove-camera" class="md-nav__link">
     Remove camera
   </a>
@@ -4899,16 +4913,36 @@
 <li>Main camera
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">camera</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cameras</span><span class="p">.</span><span class="nx">main</span><span class="p">;</span>
 </pre></div></li>
-<li>
-<p>Add new camera
+<li>Add new camera
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">camera</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cameras</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">);</span>
-</pre></div></p>
-</li>
-<li>
-<p>Add existed camera
+</pre></div></li>
+<li>Add existed camera
     <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">cameras</span><span class="p">.</span><span class="nx">addExisting</span><span class="p">(</span><span class="nx">camera</span><span class="p">);</span>
-</pre></div></p>
-</li>
+</pre></div></li>
+</ul>
+<h3 id="create-cameras-from-json">Create cameras from JSON<a class="headerlink" href="#create-cameras-from-json" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">cameras</span><span class="p">.</span><span class="nx">fromJSON</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+<span class="c1">// scene.cameras.fromJSON(configArray);</span>
+</pre></div>
+
+<ul>
+<li><code>config</code> :
+    <div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">width</span><span class="o">:</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">sys</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span>
+    <span class="nx">height</span><span class="o">:</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">sys</span><span class="p">.</span><span class="nx">scale</span><span class="p">.</span><span class="nx">height</span><span class="p">,</span>
+    <span class="nx">zoom</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nx">rotation</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">scrollX</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">scrollY</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">roundPixels</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">visible</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">backgroundColor</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+    <span class="nx">bounds</span><span class="o">:</span> <span class="kc">null</span><span class="p">,</span> <span class="c1">// {x, y, width, height}</span>
+<span class="p">}</span>
+</pre></div></li>
 </ul>
 <h3 id="remove-camera">Remove camera<a class="headerlink" href="#remove-camera" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">cameras</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">camera</span><span class="p">);</span>

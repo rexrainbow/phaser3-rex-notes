@@ -613,6 +613,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#video" class="md-nav__link">
+    Video
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#bitmap-font" class="md-nav__link">
     Bitmap font
   </a>
@@ -907,6 +914,18 @@
   <li class="md-nav__item">
     <a href="../quad/" title="Quad" class="md-nav__link">
       Quad
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../video/" title="Video" class="md-nav__link">
+      Video
     </a>
   </li>
 
@@ -1668,18 +1687,6 @@
   <li class="md-nav__item">
     <a href="../inputtext/" title="Input text" class="md-nav__link">
       Input text
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../video/" title="Video" class="md-nav__link">
-      Video
     </a>
   </li>
 
@@ -4935,6 +4942,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#video" class="md-nav__link">
+    Video
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#bitmap-font" class="md-nav__link">
     Bitmap font
   </a>
@@ -5217,6 +5231,20 @@
 <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">audioSprite</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">urls</span><span class="p">,</span> <span class="nx">json</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </pre></div>
 
+<h4 id="video">Video<a class="headerlink" href="#video" title="Permanent link">&para;</a></h4>
+<div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">video</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">url</span><span class="p">,</span> <span class="nx">loadEvent</span><span class="p">,</span> <span class="nx">asBlob</span><span class="p">,</span> <span class="nx">noAudio</span><span class="p">);</span>
+</pre></div>
+
+<ul>
+<li><code>loadEvent</code> : The load event to listen for when <em>not</em> loading as a blob.<ul>
+<li><code>'loadeddata'</code> : Data for the current frame is available. Default value.</li>
+<li><code>'canplay'</code> : The video is ready to start playing.</li>
+<li><code>'canplaythrough'</code> : The video can be played all the way through, without stopping.</li>
+</ul>
+</li>
+<li><code>asBlob</code> : Load the video as a data blob, or via the Video element? Default value is <code>false</code>.</li>
+<li><code>noAudio</code> : Does the video have an audio track? If not you can enable auto-playing on it. Default value is <code>false</code>.</li>
+</ul>
 <h4 id="bitmap-font">Bitmap font<a class="headerlink" href="#bitmap-font" title="Permanent link">&para;</a></h4>
 <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">load</span><span class="p">.</span><span class="nx">bitmapFont</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">textureURL</span><span class="p">,</span> <span class="nx">xmlURL</span><span class="p">);</span>
 </pre></div>
