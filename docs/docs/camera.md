@@ -18,10 +18,35 @@ Each scene has one or more cameras.
     ```javascript
     var camera = scene.cameras.add(x, y, width, height);
     ```
-
 - Add existed camera
     ```javascript
     scene.cameras.addExisting(camera);
+    ```
+
+### Create cameras from JSON
+
+```javascript
+scene.cameras.fromJSON(config);
+// scene.cameras.fromJSON(configArray);
+```
+
+- `config` :
+    ```javascript
+    {
+        name: '',
+        x: 0,
+        y: 0,
+        width: scene.sys.scale.width,
+        height: scene.sys.scale.height,
+        zoom: 1,
+        rotation: 0,
+        scrollX: 0,
+        scrollY: 0,
+        roundPixels: false,
+        visible: true,
+        backgroundColor: false,
+        bounds: null, // {x, y, width, height}
+    }
     ```
 
 ### Remove camera

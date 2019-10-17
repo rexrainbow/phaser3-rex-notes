@@ -1,7 +1,3 @@
-import BoardPlugin from '../../plugins/board-plugin.js';
-
-const Random = Phaser.Math.Between;
-
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -12,57 +8,40 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var board = this.rexBoard.add.board({
-            grid: getHexagonGrid(this),
-            // grid: getQuadGrid(this),
-            width: 20,
-            height: 20
-        })
-            .forEachTileXY(function (tileXY, board) {
-                var chess = this.rexBoard.add.shape(board, tileXY.x, tileXY.y, 0, 0x26418f, 0.7).setStrokeStyle(2, 0x8e99f3);
-                this.add.text(chess.x, chess.y, tileXY.x + ',' + tileXY.y)
-                    .setOrigin(0.5)
-            }, this);
+        var textureKey = 'img';
+        CreateTexture(this, textureKey);
+        this.add.image(0, 0, textureKey).setOrigin(0);
 
-        board
-            .setInteractive()
-            .on('tiledown', function (pointer, tileXY) {
-                console.log('down ' + tileXY.x + ',' + tileXY.y);
-                var worldXY = board.tileXYToWorldXY(tileXY.x, tileXY.y, true);
-                this.cameras.main.pan(worldXY.x, worldXY.y, 1000);
-            }, this)
+        var frameName = '1,1';
+        this.textures.get(textureKey).add(
+            frameName, 0,
+            10, 10,
+            10, 10
+        );
+        this.add.image(0, 30, textureKey, frameName).setOrigin(0);
 
-        this.board = board;
-        this.print = this.add.text(0, 0, '').setScrollFactor(0);
+        this.add.renderTexture(400, 300, 100, 100)
+            .setOrigin(0.5)
+            .clear
+            .drawFrame(textureKey, frameName, 100 - 10, 100 - 10)
     }
 
     update(time, delta) {
     }
 }
 
-var getQuadGrid = function (scene) {
-    var grid = scene.rexBoard.add.quadGrid({
-        x: 400,
-        y: 100,
-        cellWidth: 100,
-        cellHeight: 50,
-        type: 1
-    });
-    return grid;
+const COLOR_PRIMARY = 0x9575cd;
+const COLOR_LIGHT = 0xc7a4ff;
+const COLOR_DARK = 0x65499c;
+var CreateTexture = function (scene, key) {
+    var width = 20, height = 20;
+    scene.add.graphics()
+        .lineStyle(3, COLOR_DARK)
+        .strokeRect(1, 1, width - 2, height - 2)
+        .generateTexture(key, width, height)
+        .destroy();
 }
 
-var getHexagonGrid = function (scene) {
-    var staggeraxis = 'x';
-    var staggerindex = 'odd';
-    var grid = scene.rexBoard.add.hexagonGrid({
-        x: 50,
-        y: 50,
-        size: 50,
-        staggeraxis: staggeraxis,
-        staggerindex: staggerindex
-    })
-    return grid;
-};
 
 var config = {
     type: Phaser.AUTO,
@@ -73,14 +52,7 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: Demo,
-    plugins: {
-        scene: [{
-            key: 'rexBoard',
-            plugin: BoardPlugin,
-            mapping: 'rexBoard'
-        }]
-    }
+    scene: Demo
 };
 
 var game = new Phaser.Game(config);

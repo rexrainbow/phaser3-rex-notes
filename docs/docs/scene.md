@@ -17,7 +17,85 @@ var config = {
 };
 ```
 
-- `pack` : See [file pack](loader.md#file-pack)
+- `key` : The unique key of this Scene. Must be unique within the entire Game instance.
+- `active` : Does the Scene start as active or not? An active Scene updates each step.
+- `visible` : Does the Scene start as visible or not? A visible Scene renders each step.
+- `pack` : An optional [Loader Packfile](loader.md#file-pack) to be loaded before the Scene begins.
+- `cameras` : An optional [Camera configuration object](camera.md#create-cameras-from-json).
+    ```javascript
+    {
+        name: '',
+        x: 0,
+        y: 0,
+        width: scene.sys.scale.width,
+        height: scene.sys.scale.height,
+        zoom: 1,
+        rotation: 0,
+        scrollX: 0,
+        scrollY: 0,
+        roundPixels: false,
+        visible: true,
+        backgroundColor: false,
+        bounds: null, // {x, y, width, height}
+    }
+    ```
+- `map` : Overwrites the default injection map for a scene.
+- `physics` : The physics configuration object for the Scene.
+    ```javascript
+    {
+        default: 'arcade', // 'impact', or 'matter'
+        arcade: {...},
+        matter: {...}
+    }
+    ```
+    - `arcade` : [Arcade Physics configuration](arcade-world.md#configuration).
+    - `matter` : [Matter Physics configuration](matterjs-world.md#configuration).
+- `loader` : The loader configuration object for the Scene.
+    ```javascript
+    {
+        baseURL: '',
+        path: '',
+        enableParallel: true,
+        maxParallelDownloads: 4,
+        crossOrigin: undefined,
+        responseType: '',
+        async: true,
+        user: '',
+        password: '',
+        timeout: 0
+    }
+    ```
+- `plugins` : The plugin configuration object for the Scene.
+    ```javascript
+    {
+        global: [
+            //{key, plugin, start}
+        ],
+        scene: [
+            // ...
+        ]
+    }    
+    ```
+- `input` : The input configuration object for the Scene.
+    ```javascript
+    {
+        keyboard: {
+            target: window
+        },
+        mouse: {
+            target: null,
+            capture: true
+        },
+        activePointers: 1,
+        touch: {
+            target: null,
+            capture: true
+        },
+        smoothFactor: 0,
+        gamepad: false,
+        windowEvents: true,
+    }
+    ```
 
 ### ES6 class
 

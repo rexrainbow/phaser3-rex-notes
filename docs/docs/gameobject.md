@@ -399,10 +399,17 @@ See [data manager](datamanager.md)
 
 ### Texture
 
-- Set texture
+- Set texture via key string
     ```javascript
-    gameObject.setTexture(key, frame);
+    gameObject.setTexture(key);
+    // gameObject.setTexture(key, frame);
     ```
+- Set texture via texture object
+    ```javascript
+    gameObject.setTexture(texture);
+    // gameObject.setTexture(texture, frame);
+    ```
+    - `texture` : [Texture object](texture.md#get-texture), or [canvas texture object](canvas-texture.md)
 - Set frame
     ```javascript
     gameObject.setFrame(frame);
