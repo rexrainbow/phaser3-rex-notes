@@ -711,6 +711,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#stop" class="md-nav__link">
+    Stop
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#is-playing" class="md-nav__link">
     Is playing
   </a>
@@ -760,6 +767,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#video-key" class="md-nav__link">
+    Video key
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#marks" class="md-nav__link">
     Marks
   </a>
@@ -776,6 +790,13 @@
           <li class="md-nav__item">
   <a href="#save-texture" class="md-nav__link">
     Save texture
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
   </a>
   
 </li>
@@ -4744,6 +4765,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#stop" class="md-nav__link">
+    Stop
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#is-playing" class="md-nav__link">
     Is playing
   </a>
@@ -4793,6 +4821,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#video-key" class="md-nav__link">
+    Video key
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#marks" class="md-nav__link">
     Marks
   </a>
@@ -4809,6 +4844,13 @@
           <li class="md-nav__item">
   <a href="#save-texture" class="md-nav__link">
     Save texture
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#events" class="md-nav__link">
+    Events
   </a>
   
 </li>
@@ -4896,6 +4938,11 @@
     <div class="codehilite"><pre><span></span><span class="nx">video</span><span class="p">.</span><span class="nx">setPaused</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
 </pre></div></li>
 </ul>
+<h3 id="stop">Stop<a class="headerlink" href="#stop" title="Permanent link">&para;</a></h3>
+<p>Stops the video playing and clears all internal event listeners.</p>
+<div class="codehilite"><pre><span></span><span class="nx">video</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
+</pre></div>
+
 <h3 id="is-playing">Is playing<a class="headerlink" href="#is-playing" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Is playing
@@ -4919,7 +4966,12 @@
 </pre></div>
     or
     <div class="codehilite"><pre><span></span><span class="nx">video</span><span class="p">.</span><span class="nx">seekTo</span><span class="p">(</span><span class="nx">t</span><span class="p">);</span> <span class="c1">// t: 0~1</span>
+</pre></div><ul>
+<li>Is seeking
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isSeeking</span> <span class="o">=</span> <span class="nx">video</span><span class="p">.</span><span class="nx">isSeeking</span><span class="p">();</span>
 </pre></div></li>
+</ul>
+</li>
 <li>Forward
     <div class="codehilite"><pre><span></span><span class="nx">video</span><span class="p">.</span><span class="nx">setCurrentTime</span><span class="p">(</span><span class="s1">&#39;+&#39;</span> <span class="o">+</span> <span class="nx">time</span><span class="p">);</span>  <span class="c1">// time in seconds</span>
 <span class="c1">// video.setCurrentTime(&#39;+2&#39;);</span>
@@ -4971,6 +5023,21 @@
     <div class="codehilite"><pre><span></span><span class="nx">video</span><span class="p">.</span><span class="nx">setLoop</span><span class="p">(</span><span class="nx">loop</span><span class="p">);</span>  <span class="c1">// loop: true/false</span>
 </pre></div></li>
 </ul>
+<h3 id="video-key">Video key<a class="headerlink" href="#video-key" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">key</span> <span class="o">=</span> <span class="nx">video</span><span class="p">.</span><span class="nx">getVideoKey</span><span class="p">();</span>
+</pre></div></li>
+<li>Change video key (video source)
+    <div class="codehilite"><pre><span></span><span class="nx">video</span><span class="p">.</span><span class="nx">changeSource</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+<span class="c1">// video.changeSource(key, autoplay, loop, markerIn, markerOut);</span>
+</pre></div><ul>
+<li><code>autoplay</code> : Should the video start playing immediately, once the swap is complete?</li>
+<li><code>loop</code> : Should the video loop automatically when it reaches the end? <strong>Not all browsers support <em>seamless</em> video looping for all encoding formats</strong>.</li>
+<li><code>markerIn</code>, <code>markerOut</code> : Optional in/out marker time, in <em>seconds</em>, for playback of a sequence of the video.</li>
+</ul>
+</li>
+</ul>
 <h3 id="marks">Marks<a class="headerlink" href="#marks" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Add mark
@@ -4988,6 +5055,10 @@
 </pre></div></li>
 </ul>
 <h3 id="snapshot">Snapshot<a class="headerlink" href="#snapshot" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">canvasTexture</span> <span class="o">=</span> <span class="nx">video</span><span class="p">.</span><span class="nx">saveSnapshotTexture</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+</pre></div>
+
+<p>or</p>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">canvasTexture</span> <span class="o">=</span> <span class="nx">video</span><span class="p">.</span><span class="nx">snapshot</span><span class="p">();</span>
 <span class="c1">// var canvasTexture = video.snapshot(width, height);</span>
 </pre></div>
@@ -5001,7 +5072,12 @@
 <li><code>x</code>, <code>y</code> : The horizontal/vertical location of the top-left of the area to grab from.</li>
 <li><code>srcWidth</code>, <code>srcHeight</code> : The width/height of area to grab from the video.</li>
 <li><code>destWidth</code>, <code>destHeight</code> : The destination width/height of the grab, allowing you to resize it.</li>
-<li><code>canvasTexture</code> : <a href="../canvas-texture/">Canvas texture object</a>.</li>
+<li><code>canvasTexture</code> : <a href="../canvas-texture/">Canvas texture object</a>.<ul>
+<li>Get key of texture
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">key</span> <span class="o">=</span> <span class="nx">canvasTexture</span><span class="p">.</span><span class="nx">key</span><span class="p">;</span>
+</pre></div></li>
+</ul>
+</li>
 </ul>
 <h3 id="save-texture">Save texture<a class="headerlink" href="#save-texture" title="Permanent link">&para;</a></h3>
 <p>The saved texture is automatically updated as the video plays. If you pause this video, or change its source, then the saved texture updates instantly.</p>
@@ -5011,6 +5087,59 @@
 
 <ul>
 <li><code>flipY</code> : Set to <code>true</code> if use it as the input for a Shader.</li>
+</ul>
+<h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
+<ul>
+<li>A Video is unlocked by a user gesture.
+    <div class="codehilite"><pre><span></span><span class="nx">video</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;unlocked&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">video</span><span class="p">,</span> <span class="nx">error</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+<li>A Video tries to play a source that does not exist, or is the wrong file type.
+    <div class="codehilite"><pre><span></span><span class="nx">video</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">video</span><span class="p">,</span> <span class="nx">error</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+<li>A Video has exhausted its allocated time while trying to connect to a video source to start playback.
+    <div class="codehilite"><pre><span></span><span class="nx">video</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;timeout&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">video</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+<li>A Video begins playback.
+    <div class="codehilite"><pre><span></span><span class="nx">video</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;play&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">video</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+<li>A Video finishes playback by reaching the end of its duration, or <code>markerOut</code>.
+    <div class="codehilite"><pre><span></span><span class="nx">video</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;complete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">video</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+<li>A Video that is currently playing has looped.
+    <div class="codehilite"><pre><span></span><span class="nx">video</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;loop&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">video</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+<li>A Video <em>begins</em> seeking to a new point in its timeline.
+    <div class="codehilite"><pre><span></span><span class="nx">video</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;seeking&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">video</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+<li>A Video completes seeking to a new point in its timeline.
+    <div class="codehilite"><pre><span></span><span class="nx">video</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;seeked&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">video</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+<li>Enough of the video source has been loaded, that the browser is able to render a frame from it.
+    <div class="codehilite"><pre><span></span><span class="nx">video</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;created&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">video</span><span class="p">,</span> <span class="nx">width</span><span class="p">,</span> <span class="nx">height</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
+<li>A Video is stopped from playback via a call to the <code>Video.stop</code> method,
+    <div class="codehilite"><pre><span></span><span class="nx">video</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;stop&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">video</span><span class="p">){</span>
+
+<span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
+</pre></div></li>
 </ul>
                 
                   

@@ -2686,6 +2686,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#analyser" class="md-nav__link">
+    Analyser
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5249,6 +5256,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#analyser" class="md-nav__link">
+    Analyser
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5625,6 +5639,63 @@
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">rate</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">sound</span><span class="p">.</span><span class="nx">rate</span><span class="p">;</span>
 </pre></div></li>
 </ul>
+<h3 id="analyser">Analyser<a class="headerlink" href="#analyser" title="Permanent link">&para;</a></h3>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Visualizations_with_Web_Audio_API">Analyser node</a> is only available in <strong>Web audio mode</strong>.</p>
+<ol>
+<li>Create analyser node
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">analyser</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">sound</span><span class="p">.</span><span class="nx">context</span><span class="p">.</span><span class="nx">createAnalyser</span><span class="p">();</span>
+</pre></div></li>
+<li>Configure analyser node
+    <div class="codehilite"><pre><span></span><span class="nx">analyser</span><span class="p">.</span><span class="nx">smoothingTimeConstant</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="nx">analyser</span><span class="p">.</span><span class="nx">fftSize</span> <span class="o">=</span> <span class="mi">8192</span><span class="p">;</span>
+<span class="nx">analyser</span><span class="p">.</span><span class="nx">minDecibels</span> <span class="o">=</span> <span class="o">-</span><span class="mi">90</span><span class="p">;</span>
+<span class="nx">analyser</span><span class="p">.</span><span class="nx">maxDecibels</span> <span class="o">=</span> <span class="o">-</span><span class="mi">10</span><span class="p">;</span>
+</pre></div><ul>
+<li><code>smoothingTimeConstant</code> : Averaging constant with the last analysis frame.<ul>
+<li><code>0</code>(no time averaging) ~ <code>1</code>. Default value is <code>0.8</code>.</li>
+</ul>
+</li>
+<li><code>fftSize</code> : Window size. <ul>
+<li><code>32</code>, <code>64</code>, <code>128</code>, <code>256</code>, <code>512</code>, <code>1024</code>, <code>2048</code>, <code>4096</code>, <code>8192</code>, <code>16384</code>, and <code>32768</code>. Defaults to <code>2048</code>.</li>
+</ul>
+</li>
+<li><code>minDecibels</code> : Minimum <em>decibel</em> value for scaling the FFT analysis data.<ul>
+<li><code>0</code> dB is the loudest possible sound, <code>-10</code> dB is a 10<sup>th</sup> of that, etc. The default value is <code>-100</code> dB</li>
+</ul>
+</li>
+<li><code>maxDecibels</code> : Maximum <em>decibel</em> value for scaling the FFT analysis data.<ul>
+<li>The default value is <code>-30</code> dB.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Set source of analyser node<ul>
+<li>Global volume nodee -&gt; analyser node
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">sound</span><span class="p">.</span><span class="nx">masterVolumeNode</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">analyser</span><span class="p">);</span>
+</pre></div></li>
+<li>A sound instance -&gt; analyser node
+    <div class="codehilite"><pre><span></span><span class="nx">music</span><span class="p">.</span><span class="nx">volumeNode</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">analyser</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+</li>
+<li>Ouput analyser node to audio context
+    <div class="codehilite"><pre><span></span><span class="nx">analyser</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">scene</span><span class="p">.</span><span class="nx">sound</span><span class="p">.</span><span class="nx">context</span><span class="p">.</span><span class="nx">destination</span><span class="p">);</span>
+</pre></div></li>
+<li>Create output data array
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">dataArrayLength</span> <span class="o">=</span> <span class="nx">analyser</span><span class="p">.</span><span class="nx">frequencyBinCount</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">dataArray</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Uint8Array</span><span class="p">(</span><span class="nx">dataArrayLength</span><span class="p">);</span>
+</pre></div></li>
+<li>Get output data
+    <div class="codehilite"><pre><span></span><span class="nx">analyser</span><span class="p">.</span><span class="nx">getByteTimeDomainData</span><span class="p">(</span><span class="nx">dataArray</span><span class="p">);</span>
+</pre></div><ul>
+<li>Retrieve output data
+    <div class="codehilite"><pre><span></span><span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">dataArrayLength</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">dataArray</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+<span class="p">}</span>
+</pre></div></li>
+</ul>
+</li>
+</ol>
                 
                   
                 
