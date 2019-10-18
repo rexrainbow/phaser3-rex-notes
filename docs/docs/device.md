@@ -64,10 +64,10 @@ Get information of device, built-in properties of phaser.
 ### Video
 
 ```javascript
-var h264Video = scene.sys.game.device.video.h264Video;  // Can this device play h264 mp4 video files?
-var hlsVideo = scene.sys.game.device.video.hlsVideo;    // Can this device play hls video files?
-var mp4Video = scene.sys.game.device.video.mp4Video;    // Can this device play h264 mp4 video files?
-var oggVideo = scene.sys.game.device.video.oggVideo;    // Can this device play ogg video files?
-var vp9Video = scene.sys.game.device.video.vp9Video;    // Can this device play vp9 video files?
-var webmVideo = scene.sys.game.device.video.webmVideo;  // Can this device play webm video files?
+var h264Video = scene.sys.game.device.video.h264;  // Can this device play h264 mp4 video files?
+var hlsVideo = scene.sys.game.device.video.hls;    // Can this device play hls video files?
+var mp4Video = scene.sys.game.device.video.mp4;    // Can this device play h264 mp4 video files?
+var oggVideo = scene.sys.game.device.video.ogg;    // Can this device play ogg video files?
+var vp9Video = scene.sys.game.device.video.vp9;    // Can this device play vp9 video files?
+var webmVideo = scene.sys.game.device.video.webm;  // Can this device play webm video files?
 ```

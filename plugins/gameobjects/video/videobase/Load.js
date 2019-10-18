@@ -5,7 +5,7 @@ var Load = function (video, src, availableVideoTypes) {
         var videoType;
         for (var i = 0, cnt = VideoTypes.length; i < cnt; i++) {
             videoType = VideoTypes[i];
-            if (availableVideoTypes[videoType + 'Video'] && src.hasOwnProperty(videoType)) {
+            if (availableVideoTypes[videoType] && src.hasOwnProperty(videoType)) {
                 src = src[videoType];
                 break;
             }
