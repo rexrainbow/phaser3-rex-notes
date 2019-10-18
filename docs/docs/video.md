@@ -62,6 +62,14 @@ video.play();
     video.setPaused(false);
     ```
 
+### Stop
+
+Stops the video playing and clears all internal event listeners.
+
+```javascript
+video.stop();
+```
+
 ### Is playing
 
 - Is playing
@@ -92,6 +100,10 @@ video.play();
         ```javascript
         video.seekTo(t); // t: 0~1
         ```
+        - Is seeking
+            ```javascript
+            var isSeeking = video.isSeeking();
+            ```
     - Forward
         ```javascript
         video.setCurrentTime('+' + time);  // time in seconds
@@ -153,6 +165,21 @@ var duration = video.getDuration();  // time in seconds
     video.setLoop(loop);  // loop: true/false
     ```
 
+### Video key
+
+- Get
+    ```javascript
+    var key = video.getVideoKey();
+    ```
+- Change video key (video source)
+    ```javascript
+    video.changeSource(key);
+    // video.changeSource(key, autoplay, loop, markerIn, markerOut);
+    ```
+    - `autoplay` : Should the video start playing immediately, once the swap is complete?
+    - `loop` : Should the video loop automatically when it reaches the end? **Not all browsers support _seamless_ video looping for all encoding formats**.
+    - `markerIn`, `markerOut` : Optional in/out marker time, in *seconds*, for playback of a sequence of the video.
+
 ### Marks
 
 - Add mark
@@ -173,6 +200,12 @@ var duration = video.getDuration();  // time in seconds
 ### Snapshot
 
 ```javascript
+var canvasTexture = video.saveSnapshotTexture(key);
+```
+
+or
+
+```javascript
 var canvasTexture = video.snapshot();
 // var canvasTexture = video.snapshot(width, height);
 ```
@@ -188,6 +221,10 @@ var canvasTexture = video.snapshotArea(x, y, srcWidth, srcHeight);
 - `srcWidth`, `srcHeight` : The width/height of area to grab from the video.
 - `destWidth`, `destHeight` : The destination width/height of the grab, allowing you to resize it.
 - `canvasTexture` : [Canvas texture object](canvas-texture.md).
+    - Get key of texture
+        ```javascript
+        var key = canvasTexture.key;
+        ```
 
 ### Save texture
 
@@ -199,3 +236,66 @@ var texture = video.saveTexture(key);
 ```
 
 - `flipY` : Set to `true` if use it as the input for a Shader.
+
+### Events
+
+- A Video is unlocked by a user gesture.
+    ```javascript
+    video.on('unlocked', function(video, error){
+
+    }, scope);
+    ```
+- A Video tries to play a source that does not exist, or is the wrong file type.
+    ```javascript
+    video.on('error', function(video, error){
+
+    }, scope);
+    ```
+- A Video has exhausted its allocated time while trying to connect to a video source to start playback.
+    ```javascript
+    video.on('timeout', function(video){
+
+    }, scope);
+    ```
+- A Video begins playback.
+    ```javascript
+    video.on('play', function(video){
+
+    }, scope);
+    ```
+- A Video finishes playback by reaching the end of its duration, or `markerOut`.
+    ```javascript
+    video.on('complete', function(video){
+
+    }, scope);
+    ```
+- A Video that is currently playing has looped.
+    ```javascript
+    video.on('loop', function(video){
+
+    }, scope);
+    ```
+- A Video _begins_ seeking to a new point in its timeline.
+    ```javascript
+    video.on('seeking', function(video){
+
+    }, scope);
+    ```
+- A Video completes seeking to a new point in its timeline.
+    ```javascript
+    video.on('seeked', function(video){
+
+    }, scope);
+    ```
+- Enough of the video source has been loaded, that the browser is able to render a frame from it.
+    ```javascript
+    video.on('created', function(video, width, height){
+
+    }, scope);
+    ```
+- A Video is stopped from playback via a call to the `Video.stop` method,
+    ```javascript
+    video.on('stop', function(video){
+
+    }, scope);
+    ```

@@ -439,3 +439,55 @@ music.play(markerName, config);
     ```javascript
     var rate = scene.sound.rate;
     ```
+
+### Analyser
+
+[Analyser node](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API/Visualizations_with_Web_Audio_API) is only available in **Web audio mode**.
+
+1. Create analyser node
+    ```javascript
+    var analyser = scene.sound.context.createAnalyser();
+    ```
+1. Configure analyser node
+    ```javascript
+    analyser.smoothingTimeConstant = 1;
+    analyser.fftSize = 8192;
+    analyser.minDecibels = -90;
+    analyser.maxDecibels = -10;
+    ```
+    - `smoothingTimeConstant` : Averaging constant with the last analysis frame.
+        - `0`(no time averaging) ~ `1`. Default value is `0.8`.
+    - `fftSize` : Window size. 
+        - `32`, `64`, `128`, `256`, `512`, `1024`, `2048`, `4096`, `8192`, `16384`, and `32768`. Defaults to `2048`.
+    - `minDecibels` : Minimum *decibel* value for scaling the FFT analysis data.
+        - `0` dB is the loudest possible sound, `-10` dB is a 10th of that, etc. The default value is `-100` dB
+    - `maxDecibels` : Maximum *decibel* value for scaling the FFT analysis data.
+        - The default value is `-30` dB.
+1. Set source of analyser node
+    - Global volume nodee -> analyser node
+        ```javascript
+        scene.sound.masterVolumeNode.connect(analyser);
+        ```
+    - A sound instance -> analyser node
+        ```javascript
+        music.volumeNode.connect(analyser);
+        ```
+1. Ouput analyser node to audio context
+    ```javascript
+    analyser.connect(scene.sound.context.destination);
+    ```
+1. Create output data array
+    ```javascript
+    var dataArrayLength = analyser.frequencyBinCount;
+    var dataArray = new Uint8Array(dataArrayLength);
+    ```
+1. Get output data
+    ```javascript
+    analyser.getByteTimeDomainData(dataArray);
+    ```
+    - Retrieve output data
+        ```javascript
+        for(var i= 0; i < dataArrayLength; i++) {
+            var data = dataArray[i];
+        }
+        ```
