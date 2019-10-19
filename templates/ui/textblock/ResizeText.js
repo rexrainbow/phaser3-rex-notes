@@ -1,6 +1,7 @@
 import TextHeightToLinesCount from './TextHeightToLinesCount.js';
 
 var ResizeText = function (textObject, width, height) {
+    height += this.textLineHeight + this.textLineSpacing; // Add 1 text line
     if ((textObject.width === width) && (textObject.height === height)) {
         return;
     }

@@ -4,20 +4,17 @@ import DefaultMask from '../../../plugins/utils/mask/DefaultMask.js';
 
 const ALIGN_LEFTTOP = Phaser.Display.Align.TOP_LEFT;
 
-var SetTextObject = function (gameObject, paddingConfig, maskEnable) {
+var SetTextObject = function (gameObject, maskEnable) {
     if (maskEnable === undefined) {
         maskEnable = true;
     }
 
     this.add(gameObject);
-    if (paddingConfig === undefined) {
-        paddingConfig = 0;
-    }
 
     var config = this.getSizerConfig(gameObject);
     config.parent = this;
     config.align = ALIGN_LEFTTOP;
-    config.padding = GetBoundsConfig(paddingConfig);
+    config.padding = GetBoundsConfig(0);
     config.expand = true;
     this.textObject = gameObject;
     this.textObjectType = (IsTextGameObject(gameObject)) ? 0 : 1;
@@ -27,7 +24,7 @@ var SetTextObject = function (gameObject, paddingConfig, maskEnable) {
 
     // Create mask of text object
     if (maskEnable) {
-        this.textMask = new DefaultMask(this.textObject);
+        this.textMask = new DefaultMask(this);
         this.textObject.setMask(this.textMask.createGeometryMask());
         this.add(this.textMask);
     }

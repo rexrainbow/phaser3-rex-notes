@@ -41,14 +41,14 @@ var Layout = function (parent, newWidth, newHeight) {
         GlobZone.setPosition(x, y).setSize(width, height);
         AlignIn(child, GlobZone, childConfig.align);
 
-        // Layout text mask before reset text position
+        childConfig.preOffsetY = 0; // Clear preOffsetY
+        ResetTextObjectPosition.call(this);
+
         if (this.textMask) {
             this.textMask.setPosition().resize();
             this.resetChildPositionState(this.textMask);
         }
 
-        childConfig.preOffsetY = 0; // Clear preOffsetY
-        ResetTextObjectPosition.call(this);
     }
 
     // Layout background children

@@ -42,14 +42,11 @@ class TextBlock extends BaseSizer {
         }
         var textMaskEnable = GetValue(config, 'textMask', true);
 
-        // Space
-        var paddingConfig = GetValue(config, 'space', undefined);
-
         if (background) {
             this.addBackground(background);
         }
 
-        this.setTextObject(textObject, paddingConfig, textMaskEnable);
+        this.setTextObject(textObject, textMaskEnable);
     }
 
     destroy(fromScene) {
@@ -112,7 +109,7 @@ class TextBlock extends BaseSizer {
     }
 
     get textObjectHeight() {
-        return this.textObject.height;
+        return this.textObject.height - this.textLineHeight - this.textLineSpacing; // Remove 1 text line
     }
 
     get textVisibleHeight() {
