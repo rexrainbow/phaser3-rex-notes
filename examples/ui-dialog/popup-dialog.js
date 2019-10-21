@@ -21,7 +21,7 @@ class Demo extends Phaser.Scene {
 
             if (dialog === undefined) {
                 dialog = createDialog(this, x, y, function (color) {
-                    scene.rexUI.add.roundRectangle(x, y, 0, 0, 20, color)
+                    scene.add.circle(x, y, 20, color);
                     scene.print.text = 'Add object at (' + x + ',' + y + ')';
                     dialog.scaleDownDestroy(100);
                     dialog = undefined;
