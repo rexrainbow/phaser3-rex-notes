@@ -1,5 +1,3 @@
-import CountMatching from '../../../utils/object/CountMatching.js';
-
 var SetTexture = function (key, columns, rows) {
     this.textureKey = key;
     this.columns.data = columns;
@@ -22,39 +20,36 @@ var SetTexture = function (key, columns, rows) {
     }
 
     // Get remainder width/height for unknown width/height
-    var unknownColumnWidthCount = CountMatching(columns, undefined);
-    if (unknownColumnWidthCount > 0) {
-        var remainderTextureWidth = texture.width;
-        for (var i = 0, cnt = columns.length; i < cnt; i++) {
-            if (columns[i] === undefined) {
-
-            } else if (typeof (columns[i]) === 'number') {
-                remainderTextureWidth -= columns[i];
-            } else {
-                remainderTextureWidth -= columns[i].width;
-            }
+    var remainderTextureWidth = texture.width;
+    var unknownColumnWidthCount = 0;
+    for (var i = 0, cnt = columns.length; i < cnt; i++) {
+        if (columns[i] === undefined) {
+            unknownColumnWidthCount++;
+        } else if (typeof (columns[i]) === 'number') {
+            remainderTextureWidth -= columns[i];
+        } else {
+            remainderTextureWidth -= columns[i].width;
         }
-        var unknownColumnWidth = remainderTextureWidth / unknownColumnWidthCount;
     }
-    var unknownRowHeightCount = CountMatching(rows, undefined);
-    if (unknownRowHeightCount > 0) {
-        var remainderTextureHeight = texture.height;
-        for (var i = 0, cnt = rows.length; i < cnt; i++) {
-            if (rows[i] === undefined) {
+    var unknownColumnWidth = remainderTextureWidth / unknownColumnWidthCount;
 
-            } else if (typeof (rows[i]) === 'number') {
-                remainderTextureHeight -= rows[i];
-            } else {
-                remainderTextureHeight -= rows[i].width;
-            }
+    var remainderTextureHeight = texture.height;
+    var unknownRowHeightCount = 0;
+    for (var i = 0, cnt = rows.length; i < cnt; i++) {
+        if (rows[i] === undefined) {
+            unknownRowHeightCount++;
+        } else if (typeof (rows[i]) === 'number') {
+            remainderTextureHeight -= rows[i];
+        } else {
+            remainderTextureHeight -= rows[i].width;
         }
-        var unknownRowHeight = remainderTextureHeight / unknownRowHeightCount;
     }
+    var unknownRowHeight = remainderTextureHeight / unknownRowHeightCount;
 
     var row, col, rowHeight, colWidth, frameName;
     var offsetX = 0, offsetY = 0;
     for (var j = 0, jcnt = rows.length; j < jcnt; j++) {
-        // Unknow height
+        // Unknown height
         if (rows[j] === undefined) {
             rows[j] = unknownRowHeight;
         }
@@ -74,7 +69,7 @@ var SetTexture = function (key, columns, rows) {
 
         offsetX = 0;
         for (var i = 0, icnt = columns.length; i < icnt; i++) {
-            // Unknow width
+            // Unknown width
             if (columns[i] === undefined) {
                 columns[i] = unknownColumnWidth;
             }
