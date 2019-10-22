@@ -8,6 +8,7 @@ class Demo extends Phaser.Scene {
     }
 
     preload() {
+        this.load.image('bg2', 'assets/images/nine-patch.png');
     }
 
     create() {
@@ -33,6 +34,14 @@ class Demo extends Phaser.Scene {
                 edge: 'repeat',
                 internal: 'scale'
             }
+        })
+
+        this.add.rexNinePatch({
+            x: 200, y: 430,
+            width: 250, height: 200,
+            key: 'bg2',
+            columns: [30, undefined, 30],
+            rows: [30, undefined, 20],
         })
     }
 

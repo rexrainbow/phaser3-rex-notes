@@ -20,7 +20,8 @@ var SetTexture = function (key, columns, rows) {
     }
 
     // Get remainder width/height for unknown width/height
-    var remainderTextureWidth = texture.width;
+    var srcFrame = texture.frames.__BASE;
+    var remainderTextureWidth = srcFrame.width;
     var unknownColumnWidthCount = 0;
     for (var i = 0, cnt = columns.length; i < cnt; i++) {
         if (columns[i] === undefined) {
@@ -33,7 +34,7 @@ var SetTexture = function (key, columns, rows) {
     }
     var unknownColumnWidth = remainderTextureWidth / unknownColumnWidthCount;
 
-    var remainderTextureHeight = texture.height;
+    var remainderTextureHeight = srcFrame.height;
     var unknownRowHeightCount = 0;
     for (var i = 0, cnt = rows.length; i < cnt; i++) {
         if (rows[i] === undefined) {
