@@ -40,8 +40,8 @@ class Demo extends Phaser.Scene {
             x: 200, y: 430,
             width: 250, height: 200,
             key: 'bg2',
-            columns: [30, undefined, 30],
-            rows: [30, undefined, 20],
+            columns: [20, undefined, 20],
+            rows: [20, undefined, 20],
         })
     }
 
