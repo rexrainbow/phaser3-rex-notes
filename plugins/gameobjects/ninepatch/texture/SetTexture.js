@@ -1,3 +1,5 @@
+import CountMatching from '../../../utils/object/CountMatching.js';
+
 var SetTexture = function (key, columns, rows) {
     this.textureKey = key;
     this.columns.data = columns;
@@ -19,9 +21,44 @@ var SetTexture = function (key, columns, rows) {
         return this;
     }
 
+    // Get remainder width/height for unknown width/height
+    var unknownColumnWidthCount = CountMatching(columns, undefined);
+    if (unknownColumnWidthCount > 0) {
+        var remainderTextureWidth = texture.width;
+        for (var i = 0, cnt = columns.length; i < cnt; i++) {
+            if (columns[i] === undefined) {
+
+            } else if (typeof (columns[i]) === 'number') {
+                remainderTextureWidth -= columns[i];
+            } else {
+                remainderTextureWidth -= columns[i].width;
+            }
+        }
+        var unknownColumnWidth = remainderTextureWidth / unknownColumnWidthCount;
+    }
+    var unknownRowHeightCount = CountMatching(rows, undefined);
+    if (unknownRowHeightCount > 0) {
+        var remainderTextureHeight = texture.height;
+        for (var i = 0, cnt = rows.length; i < cnt; i++) {
+            if (rows[i] === undefined) {
+
+            } else if (typeof (rows[i]) === 'number') {
+                remainderTextureHeight -= rows[i];
+            } else {
+                remainderTextureHeight -= rows[i].width;
+            }
+        }
+        var unknownRowHeight = remainderTextureHeight / unknownRowHeightCount;
+    }
+
     var row, col, rowHeight, colWidth, frameName;
     var offsetX = 0, offsetY = 0;
     for (var j = 0, jcnt = rows.length; j < jcnt; j++) {
+        // Unknow height
+        if (rows[j] === undefined) {
+            rows[j] = unknownRowHeight;
+        }
+
         if (typeof (rows[j]) === 'number') {
             rows[j] = {
                 height: rows[j],
@@ -37,6 +74,11 @@ var SetTexture = function (key, columns, rows) {
 
         offsetX = 0;
         for (var i = 0, icnt = columns.length; i < icnt; i++) {
+            // Unknow width
+            if (columns[i] === undefined) {
+                columns[i] = unknownColumnWidth;
+            }
+
             if (typeof (columns[i]) === 'number') {
                 columns[i] = {
                     width: columns[i],

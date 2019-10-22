@@ -214,8 +214,10 @@ var hasTile = layer.hasTileAtWorldXY(worldX, worldY);  // true/false
 #### Enable collision
 
 ```javascript
-map.setCollision(index);   // indexes: tile index
+map.setCollision(index);   // index: tile index
+// map.setCollision(index, true, recalculateFaces, updateLayer);
 map.setCollision(indexes); // indexes: an array of tile index
+// map.setCollision(indexes, true, recalculateFaces, updateLayer);
 map.setCollisionBetween(start, stop); // indexes from `start` to `stop`
 map.setCollisionByExclusion(indexes); // indexes: an array of tile index
 map.setCollisionByProperty({key:value});  // enable collision if value of tile property 'key' is equal to 'value'

@@ -17,8 +17,8 @@ class Demo extends Phaser.Scene {
             x: 200, y: 200,
             width: 250, height: 200,
             key: 'bg0',
-            columns: [20, 10, 20],
-            rows: [20, 10, 20],
+            columns: [20, undefined, 20],
+            rows: [20, undefined, 20],
         })
 
         CreateTexture1(this, 'bg1');
