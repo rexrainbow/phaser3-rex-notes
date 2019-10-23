@@ -20,7 +20,7 @@ var GetChildrenHeight = function (minimumMode) {
 
             childHeight = (child.isRexSizer) ?
                 Math.max(child.minHeight, child.childrenHeight) :
-                child.height;
+                child.displayHeight;
 
             padding = child.rexSizer.padding;
             childHeight += (padding.top + padding.bottom);
@@ -43,7 +43,7 @@ var GetChildrenHeight = function (minimumMode) {
             ) {
                 childHeight = (child.isRexSizer) ?
                     Math.max(child.minHeight, child.childrenHeight) :
-                    child.height;
+                    child.displayHeight;
             } else {
                 childHeight = 0;
             }

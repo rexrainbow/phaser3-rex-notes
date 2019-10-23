@@ -74,11 +74,11 @@ class ScrollableBlock extends BaseSizer {
     }
 
     get childHeight() {
-        return (this.scrollMode === 0) ? this.child.height : this.child.width;
+        return (this.scrollMode === 0) ? this.child.displayHeight : this.child.displayWidth;
     }
 
     get childWidth() {
-        return (this.scrollMode === 0) ? this.child.width : this.child.height;
+        return (this.scrollMode === 0) ? this.child.displayWidth : this.child.displayHeight;
     }
 
     get topChildOY() {

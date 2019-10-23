@@ -1,3 +1,5 @@
+import Align from '../../plugins/utils/align/align/index.js';
+
 class Demo extends Phaser.Scene {
     constructor() {
         super({
@@ -8,38 +10,16 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        var textureKey = 'img';
-        CreateTexture(this, textureKey);
-        this.add.image(0, 0, textureKey).setOrigin(0);
+        var bg = this.add.rectangle(0, 0, 10, 10, 0x880088).setDisplaySize(300, 300).setOrigin(1);
+        var obj = this.add.rectangle(0, 0, 10, 10, 0x008800).setDisplaySize(40, 40).setOrigin(1);
 
-        var frameName = '1,1';
-        this.textures.get(textureKey).add(
-            frameName, 0,
-            10, 10,
-            10, 10
-        );
-        this.add.image(0, 30, textureKey, frameName).setOrigin(0);
+        Align.In.Center(bg, this.add.zone(400, 300, 800, 600));
 
-        this.add.renderTexture(400, 300, 100, 100)
-            .setOrigin(0.5)
-            .clear
-            .drawFrame(textureKey, frameName, 100 - 10, 100 - 10)
+        Align.In.TopLeft(obj, bg);
     }
 
     update(time, delta) {
     }
-}
-
-const COLOR_PRIMARY = 0x9575cd;
-const COLOR_LIGHT = 0xc7a4ff;
-const COLOR_DARK = 0x65499c;
-var CreateTexture = function (scene, key) {
-    var width = 20, height = 20;
-    scene.add.graphics()
-        .lineStyle(3, COLOR_DARK)
-        .strokeRect(1, 1, width - 2, height - 2)
-        .generateTexture(key, width, height)
-        .destroy();
 }
 
 

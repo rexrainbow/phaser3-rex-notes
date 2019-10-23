@@ -22,7 +22,7 @@ class Demo extends Phaser.Scene {
             text: this.add.text(0, 0, 'Left-to-right', {
                 fontSize: '24px'
             }),
-            icon: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_DARK),
+            icon: this.add.rectangle(0, 0, 4, 4, COLOR_DARK).setDisplaySize(40, 40),
             action: this.add.image(0, 0, 'close').setTint(COLOR_LIGHT),
             space: {
                 left: 20,

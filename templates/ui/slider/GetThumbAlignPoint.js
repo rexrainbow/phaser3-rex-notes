@@ -1,4 +1,4 @@
-const AlignIn = Phaser.Display.Align.In.QuickSet;
+import AlignIn from '../../../plugins/utils/align/align/in/QuickSet.js';
 
 var GetThumbAlignPoint = function (align, out) {
     if (out === undefined) {

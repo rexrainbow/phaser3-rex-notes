@@ -23,7 +23,7 @@ var GetChildrenWidth = function () {
 
                 childWidth = (child.isRexSizer) ?
                     Math.max(child.minWidth, child.childrenWidth) :
-                    child.width;
+                    child.displayWidth;
                 padding = child.rexSizer.padding;
                 childWidth += (padding.left + padding.right);
                 columnWidth = Math.max(columnWidth, childWidth);

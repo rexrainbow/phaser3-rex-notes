@@ -13,7 +13,7 @@ var GetChildrenHeight = function () {
     } else { // scroll x
         result = (child.isRexSizer) ?
             Math.max(child.minHeight, child.childrenHeight) :
-            child.height;
+            child.displayHeight;
     }
 
     return result;

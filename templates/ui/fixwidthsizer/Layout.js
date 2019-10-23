@@ -1,7 +1,6 @@
 import RunChildrenWrap from './RunChildrenWrap.js';
 import GlobZone from '../../../plugins/utils/actions/GlobZone.js';
-
-const AlignIn = Phaser.Display.Align.In.QuickSet;
+import AlignIn from '../../../plugins/utils/align/align/in/QuickSet.js';
 
 var Layout = function (parent, newWidth, newHeight) {
     if (this.rexSizer.hidden) {
@@ -69,9 +68,9 @@ var Layout = function (parent, newWidth, newHeight) {
                 }
 
                 y = (itemY + padding.top);
-                width = child.width;
-                height = child.height;
-                itemX = x + child.width + padding.right;
+                width = child.displayWidth;
+                height = child.displayHeight;
+                itemX = x + child.displayWidth + padding.right;
             } else { // y
                 x = (itemX + padding.left);
 
@@ -82,9 +81,9 @@ var Layout = function (parent, newWidth, newHeight) {
                     y += this.itemSpacing;
                 }
 
-                width = child.width;
-                height = child.height;
-                itemY = y + child.height + padding.bottom;
+                width = child.displayWidth;
+                height = child.displayHeight;
+                itemY = y + child.displayHeight + padding.bottom;
             }
 
             GlobZone.setPosition(x, y).setSize(width, height);

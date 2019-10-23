@@ -10,7 +10,7 @@ var GetChildrenHeight = function () {
         child = children[key];
         childHeight = (child.isRexSizer) ?
             Math.max(child.minHeight, child.childrenHeight) :
-            child.height;
+            child.displayHeight;
 
         padding = child.rexSizer.padding;
         childHeight += (padding.top + padding.bottom);

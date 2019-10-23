@@ -11,7 +11,7 @@ var GetChildrenWidth = function () {
     } else if (this.scrollMode === 0) { // scroll y
         result = (child.isRexSizer) ?
             Math.max(child.minWidth, child.childrenWidth) :
-            child.width;
+            child.displayWidth;
     } else { // scroll x
         result = 0;
     }

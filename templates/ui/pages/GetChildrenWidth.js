@@ -10,7 +10,7 @@ var GetChildrenWidth = function () {
         child = children[key];
         childWidth = (child.isRexSizer) ?
             Math.max(child.minWidth, child.childrenWidth) :
-            child.width;
+            child.displayWidth;
 
         padding = child.rexSizer.padding;
         childWidth += (padding.left + padding.right);
