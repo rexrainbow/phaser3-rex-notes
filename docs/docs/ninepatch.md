@@ -91,11 +91,11 @@ var ninePatch = scene.add.rexNinePatch({
 - `width`, `height` : Size of this object.
 - `key` : Texture key of source image.
 - `columns` : Configuration of columns.
-    - A number array, like `[20, 20, 20]` : Width of each column.
+    - A number array, like `[20, 20, 20]`, or `[20, undefined, 20]` : Width of each column. `undefined` value will be replaced by remainder value from texture width.
         - Width of odd columns (column `0`, column `2`, ...) will be origin width.
         - Width of even columns (column `1`, column `3`, ...) will be stretched.
 - `rows` : Configuration of rows. 
-    - A number array, like `[20, 20, 20]` : Height of each row.
+    - A number array, like `[20, 20, 20]`, or `[20, undefined, 20]` : Height of each row. `undefined` value will be replaced by remainder value from texture width.
         - Height of odd rows (row `0`, row `2`, ...) will be origin height.
         - Height of odd rows (row `1`, row `3`, ...) will be stretched.
 - `stretchMode` : Stretch mode of edges and internal cells.
