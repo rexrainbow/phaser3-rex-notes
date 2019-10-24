@@ -1,3 +1,5 @@
+import FSMPlugin from '../../plugins/fsm-plugin.js';
+
 class SceneController extends Phaser.Scene {
     constructor() {
         super({
@@ -5,38 +7,49 @@ class SceneController extends Phaser.Scene {
         })
     }
     create() {
+        var scene = this,
+            btn0, btn1;
+        var stateConfig = {
+            states: {
+                '0': {
+                    enter: function () {
+                        scene.scene.launch('0');
+                        btn0.setBackgroundColor('#6d4c41');
+                    },
+
+                    exit: function () {
+                        scene.scene.stop('0');
+                        btn0.setBackgroundColor('#40241a');
+                    }
+                },
+                '1': {
+                    enter: function () {
+                        scene.scene.launch('1');
+                        btn1.setBackgroundColor('#6d4c41');
+                    },
+
+                    exit: function () {
+                        scene.scene.stop('1');
+                        btn1.setBackgroundColor('#40241a');
+                    }
+                },
+            }
+        };
+        var state = this.plugins.get('rexFSM').add(stateConfig)
+
+
         var textConfig = {
             backgroundColor: '#40241a'
         }
-
-        var scene = this;
-        var btn0 = this.add.text(0, 0, 'Scene-0', textConfig)
+        btn0 = this.add.text(0, 0, 'Scene-0', textConfig)
             .setInteractive()
-            .on('pointerup', function () {
-                scene.scene.launch('0')
-                scene.scene.stop('1')
+            .on('pointerdown', function () {
+                state.goto('0');
             })
-        var btn1 = this.add.text(120, 0, 'Scene-1', textConfig)
+        btn1 = this.add.text(120, 0, 'Scene-1', textConfig)
             .setInteractive()
-            .on('pointerup', function () {
-                scene.scene.stop('0')
-                scene.scene.launch('1')
-            })
-
-
-        this.scene.get('0').events
-            .on('start', function () {
-                btn0.setBackgroundColor('#6d4c41')
-            })
-            .on('shutdown', function () {
-                btn0.setBackgroundColor('#40241a')
-            })
-        this.scene.get('1').events
-            .on('start', function () {
-                btn1.setBackgroundColor('#6d4c41')
-            })
-            .on('shutdown', function () {
-                btn1.setBackgroundColor('#40241a')
+            .on('pointerdown', function () {
+                state.goto('1');
             })
     }
 }
@@ -71,7 +84,7 @@ class Scene1 extends Phaser.Scene {
 
     create() {
         console.log('scene-1: create');
-    }    
+    }
 }
 
 var config = {
@@ -83,7 +96,14 @@ var config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
-    scene: [SceneController, Scene0, Scene1]
+    scene: [SceneController, Scene0, Scene1],
+    plugins: {
+        global: [{
+            key: 'rexFSM',
+            plugin: FSMPlugin,
+            start: true
+        }]
+    }
 };
 
 var game = new Phaser.Game(config);
