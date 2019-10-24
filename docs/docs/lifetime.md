@@ -7,11 +7,11 @@ Destroy game object when time-out.
 
 ## Source code
 
-[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/lifeTime-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexlifeTimeplugin.min.js)
+[Plugin](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/lifetime-plugin.js), [minify](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/plugins/dist/rexlifetimeplugin.min.js)
 
 ## Usage
 
-[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/lifeTime)
+[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/tree/master/examples/lifetime)
 
 User could import class directly, or install it by global plugin.
 

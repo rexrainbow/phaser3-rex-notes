@@ -4818,7 +4818,7 @@
 <li><code>width</code>, <code>height</code> : Size of this object.</li>
 <li><code>key</code> : Texture key of source image.</li>
 <li><code>columns</code> : Configuration of columns.<ul>
-<li>A number array, like <code>[20, 20, 20]</code> : Width of each column.<ul>
+<li>A number array, like <code>[20, 20, 20]</code>, or <code>[20, undefined, 20]</code> : Width of each column. <code>undefined</code> value will be replaced by remainder value from texture width.<ul>
 <li>Width of odd columns (column <code>0</code>, column <code>2</code>, ...) will be origin width.</li>
 <li>Width of even columns (column <code>1</code>, column <code>3</code>, ...) will be stretched.</li>
 </ul>
@@ -4826,7 +4826,7 @@
 </ul>
 </li>
 <li><code>rows</code> : Configuration of rows. <ul>
-<li>A number array, like <code>[20, 20, 20]</code> : Height of each row.<ul>
+<li>A number array, like <code>[20, 20, 20]</code>, or <code>[20, undefined, 20]</code> : Height of each row. <code>undefined</code> value will be replaced by remainder value from texture width.<ul>
 <li>Height of odd rows (row <code>0</code>, row <code>2</code>, ...) will be origin height.</li>
 <li>Height of odd rows (row <code>1</code>, row <code>3</code>, ...) will be stretched.</li>
 </ul>

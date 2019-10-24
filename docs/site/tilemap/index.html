@@ -5323,8 +5323,10 @@
 
 <h3 id="collision">Collision<a class="headerlink" href="#collision" title="Permanent link">&para;</a></h3>
 <h4 id="enable-collision">Enable collision<a class="headerlink" href="#enable-collision" title="Permanent link">&para;</a></h4>
-<div class="codehilite"><pre><span></span><span class="nx">map</span><span class="p">.</span><span class="nx">setCollision</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>   <span class="c1">// indexes: tile index</span>
+<div class="codehilite"><pre><span></span><span class="nx">map</span><span class="p">.</span><span class="nx">setCollision</span><span class="p">(</span><span class="nx">index</span><span class="p">);</span>   <span class="c1">// index: tile index</span>
+<span class="c1">// map.setCollision(index, true, recalculateFaces, updateLayer);</span>
 <span class="nx">map</span><span class="p">.</span><span class="nx">setCollision</span><span class="p">(</span><span class="nx">indexes</span><span class="p">);</span> <span class="c1">// indexes: an array of tile index</span>
+<span class="c1">// map.setCollision(indexes, true, recalculateFaces, updateLayer);</span>
 <span class="nx">map</span><span class="p">.</span><span class="nx">setCollisionBetween</span><span class="p">(</span><span class="nx">start</span><span class="p">,</span> <span class="nx">stop</span><span class="p">);</span> <span class="c1">// indexes from `start` to `stop`</span>
 <span class="nx">map</span><span class="p">.</span><span class="nx">setCollisionByExclusion</span><span class="p">(</span><span class="nx">indexes</span><span class="p">);</span> <span class="c1">// indexes: an array of tile index</span>
 <span class="nx">map</span><span class="p">.</span><span class="nx">setCollisionByProperty</span><span class="p">({</span><span class="nx">key</span><span class="o">:</span><span class="nx">value</span><span class="p">});</span>  <span class="c1">// enable collision if value of tile property &#39;key&#39; is equal to &#39;value&#39;</span>
