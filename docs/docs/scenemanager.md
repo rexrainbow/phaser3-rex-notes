@@ -138,7 +138,7 @@ var isVisible = scene.scene.isVisible(key);
 ## Get scene
 
 ```javascript
-var scene = scene.scene.get(key);
+var scene = scene.scene.getScene(key);
 ```
 
 ## Order of scenes
