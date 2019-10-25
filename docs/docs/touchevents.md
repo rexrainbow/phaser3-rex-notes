@@ -213,6 +213,8 @@ Trigger these events from top scene to bottom scene.
     scene.input.on('pointermove', function(pointer, currentlyOver){ /* ... */ });
     scene.input.on('pointerover', function(pointer, justOver){ /* ... */ });
     scene.input.on('pointerout', function(pointer, justOut){ /* ... */ });
+    scene.input.on('gameout', function(timeStamp, domEvent){ /* ... */ });
+    scene.input.on('gameover', function(timeStamp, domEvent){ /* ... */ });
     ```
 
 ### Dragging
