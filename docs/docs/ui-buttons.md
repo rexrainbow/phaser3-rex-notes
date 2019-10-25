@@ -56,7 +56,6 @@ var buttons = scene.rexUI.add.buttons({
         buttonGameObject,
         // ...
     ],
-    groupName: undefined,
     align: undefined,
     click: {
         mode: 'pointerup',
@@ -78,7 +77,6 @@ var buttons = scene.rexUI.add.buttons({
     - `'top-to-bottom'`, `'vertical'`,`'v'`, `'y'`, or `1` : Arrange button game objects from top to bottom.
 - `background` : Game object of background, optional. This background game object will be resized to fit the size of grid table.
 - `buttons` : Array of button game objects.
-- `groupName` : Group name of these button game objects, used in triggered events. Set to `undefined` to ignore this parameter in event callback.
 - `align` : Alignment of these button game objects.
     - `undefined`, or `'left'`, or `'top'` : Align game object at left, or top.
     - `'center'` : Align game object at center.
@@ -124,52 +122,31 @@ See [sizer object](ui-sizer.md)
 
 - Click button
     ```javascript
-    buttons.on('button.click', function(button, groupName, index, pointer, event) {
-        // ...
-    }, scope);
-    ```
-    or
-    ```javascript
     buttons.on('button.click', function(button, index, pointer, event) {
         // ...
     }, scope);
     ```
     - `button` : Triggered button game object.
-    - `groupName` : Group name defined in constructor configuration. Set to `undefined` to ignore this parameter in event callback.
     - `index` : Index of triggered button game object.
     - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
     - Cancel remaining touched events : `event.stopPropagation()`
 - Pointer-over button
-    ```javascript
-    buttons.on('button.over', function(button, groupName, index, pointer, event) {
-        // ...
-    }, scope);
-    ```
-    or
     ```javascript
     buttons.on('button.over', function(button, index, pointer, event) {
         // ...
     }, scope);
     ```
     - `button` : Triggered button game object
-    - `groupName` : Group name defined in constructor configuration. Set to `undefined` to ignore this parameter in event callback.
     - `index` : Index of triggered button game object.
     - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
     - Cancel remaining touched events : `event.stopPropagation()`
 - Pointer-out button
-    ```javascript
-    buttons.on('button.out', function(button, groupName, index, pointer, event) {
-        // ...
-    }, scope);
-    ```
-    or
     ```javascript
     buttons.on('button.out', function(button, index, pointer, event) {
         // ...
     }, scope);
     ```
     - `button` : Triggered button game object.
-    - `groupName` : Group name defined in constructor configuration. Set to `undefined` to ignore this parameter in event callback.
     - `index` : Index of triggered button game object.
     - `pointer` : [Pointer](touchevents.md#properties-of-point) object.
     - Cancel remaining touched events : `event.stopPropagation()`
