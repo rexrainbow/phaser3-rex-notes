@@ -54,6 +54,7 @@ var menu = scene.rexUI.add.menu({
         // container = ...
         return container;
     },
+
     createBackgroundCallbackScope: undefined,
     createButtonCallback: function(item, index) {
         var scene = item.scene;
@@ -86,7 +87,7 @@ var menu = scene.rexUI.add.menu({
 - `items` : Array of item data for each button. Each item has
     - `children` : An array of items for sub-menu, optional.
     - Other custom properties
-- `createBackgroundCallbackScope` : Callback to return container object of menu's bckground.
+- `createBackgroundCallback` : Callback to return container object of menu's bckground.
     - Properties of `items` parameter
         - `items.scene` : Scene of this menu object.
 - `createButtonCallback` : Callback to return container object of each item.
