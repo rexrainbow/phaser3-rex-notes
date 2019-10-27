@@ -7,9 +7,9 @@ var CreateButtons = function (scene, items, callback, scope) {
             item = items[i];
             item.scene = scene;
             if (scope) {
-                button = callback.call(scope, item, i);
+                button = callback.call(scope, item, i, items);
             } else {
-                button = callback(item, i);
+                button = callback(item, i, items);
             }
             item.scene = undefined;
             buttons.push(button);

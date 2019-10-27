@@ -56,7 +56,7 @@ var menu = scene.rexUI.add.menu({
     },
 
     createBackgroundCallbackScope: undefined,
-    createButtonCallback: function(item, index) {
+    createButtonCallback: function(item, index, items) {
         var scene = item.scene;
         // container = ...
         return container;

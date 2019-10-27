@@ -87,7 +87,7 @@ var createMenu = function (scene, x, y, items, onClick) {
         y: y,
 
         items: items,
-        createButtonCallback: function (item, i) {
+        createButtonCallback: function (item, i, items) {
             return scene.rexUI.add.label({
                 background: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 0, COLOR_PRIMARY),
                 text: scene.add.text(0, 0, item.name, {
