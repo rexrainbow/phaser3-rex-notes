@@ -58,6 +58,8 @@ var menu = scene.rexUI.add.menu({
     createBackgroundCallbackScope: undefined,
     createButtonCallback: function(item, index, items) {
         var scene = item.scene;
+        // var isFirstButton = (index === 0);
+        // var isLastButton = (index === (items.length - 1));
         // container = ...
         return container;
     },
