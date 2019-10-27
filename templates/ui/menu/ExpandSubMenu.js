@@ -3,6 +3,9 @@ var ExpandSubMenu = function (parentButton, items) {
     var subMenu = new this.constructor(this.scene, {
         items: items,
         orientation: this.orientation,
+
+        createBackgroundCallback: this.root.createBackgroundCallback,
+        createBackgroundCallbackScope: this.root.createBackgroundCallbackScope,
         createButtonCallback: this.root.createButtonCallback,
         createButtonCallbackScope: this.root.createButtonCallbackScope,
         easeIn: this.root.easeIn,
@@ -12,7 +15,7 @@ var ExpandSubMenu = function (parentButton, items) {
         parent: parentButton
     });
     this.add(subMenu, null);
-    this.childrenMap.subMenu = subMenu;    
+    this.childrenMap.subMenu = subMenu;
     return this;
 }
 

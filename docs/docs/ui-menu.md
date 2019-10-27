@@ -38,7 +38,7 @@ var config = {
 var game = new Phaser.Game(config);
 ```
 
-### Add grid table object
+### Add menu object
 
 ```javascript
 var menu = scene.rexUI.add.menu({
@@ -48,6 +48,13 @@ var menu = scene.rexUI.add.menu({
 
     // orientation: 1,
     items: [],
+
+    createBackgroundCallback: function(items) {
+        var scene = items.scene;
+        // container = ...
+        return container;
+    },
+    createBackgroundCallbackScope: undefined,
     createButtonCallback: function(item, index) {
         var scene = item.scene;
         // container = ...
@@ -79,6 +86,9 @@ var menu = scene.rexUI.add.menu({
 - `items` : Array of item data for each button. Each item has
     - `children` : An array of items for sub-menu, optional.
     - Other custom properties
+- `createBackgroundCallbackScope` : Callback to return container object of menu's bckground.
+    - Properties of `items` parameter
+        - `items.scene` : Scene of this menu object.
 - `createButtonCallback` : Callback to return container object of each item.
     - Properties of `item` parameter
         - `item.scene` : Scene of this menu object.
