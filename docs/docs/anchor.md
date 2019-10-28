@@ -63,10 +63,10 @@ var anchor = scene.plugins.get('rexAnchor').add(gameObject, {
 ```
 
 - `x`, `y`, `left`, `right`, `centerX`, `top`, `bottom`, `centerY` : Position based on visible window, which composed of
-    - Percentage of visible width/height : `'p%'`, p: 0~100
+    - Percentage of visible width/height : `'p%'`, p: `0` ~ `100`.
         - `'left'`(=0%), `'center'`(=50%), `'right'`(=100%)
         - `'top'`(=0%), `'center'`(=50%), `'bottom'`(=100%)
-    - Offset : `'+n'`, or `'-n'`
+    - Offset : `'+n'`, or `'-n'`.
 
 For example
 

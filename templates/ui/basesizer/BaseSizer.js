@@ -1,19 +1,10 @@
 import Container from '../container/Container.js';
 import Methods from './Methods.js';
-import Anchor from '../../../plugins/behaviors/anchor/Anchor.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
 class Base extends Container {
     constructor(scene, x, y, minWidth, minHeight, config) {
-        var anchorX, anchorY;
-        if (typeof (x) === 'string') {
-            anchorX = x;
-            anchorY = y;
-            x = 0;
-            y = 0;
-        }
-
         super(scene, x, y, 2, 2);
 
         this.isRexSizer = true;
@@ -22,11 +13,9 @@ class Base extends Container {
         this.rexSizer = {};
         this.backgroundChildren = undefined;
 
-        if (anchorX !== undefined) {
-            this._anchor = new Anchor(this, {
-                x: anchorX,
-                y: anchorY,
-            });;
+        var anchorConfig = GetValue(config, 'anchor', undefined);
+        if (anchorConfig) {
+            this.setAnchor(anchorConfig);
         }
 
         this.setDraggable(GetValue(config, 'draggable', false));

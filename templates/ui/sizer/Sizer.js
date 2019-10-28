@@ -10,8 +10,7 @@ const RemoveItem = Phaser.Utils.Array.Remove;
 const ALIGN_CENTER = Phaser.Display.Align.CENTER;
 
 class Sizer extends BaseSizer {
-    constructor(scene, x, y, minWidth, minHeight, orientation) {
-        var config;
+    constructor(scene, x, y, minWidth, minHeight, orientation, config) {
         if (IsPlainObject(x)) {
             config = x;
             x = GetValue(config, 'x', 0);

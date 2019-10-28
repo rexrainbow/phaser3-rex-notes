@@ -10,7 +10,7 @@ var Layout = function (parent, newWidth, newHeight) {
         return this;
     }
 
-    this.layoutInit(parent);
+    this.preLayout(parent);
 
     var totalColumnProportions = this.totalColumnProportions;
     var totalRowProportions = this.totalRowProportions;
@@ -102,7 +102,7 @@ var Layout = function (parent, newWidth, newHeight) {
     // Layout background children
     this.layoutBackgrounds();
 
-    return this;
+    return this.postLayout();
 }
 
 export default Layout;

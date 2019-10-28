@@ -13,31 +13,31 @@ class Anchor {
 
     resetFromJSON(o) {
         var alignX, configX;
-        if (o.hasOwnProperty('x')) {
+        if (o.x !== undefined) {
             alignX = null;
             configX = o.x;
-        } else if (o.hasOwnProperty('left')) {
+        } else if (o.left !== undefined) {
             alignX = 0;
             configX = o.left;
-        } else if (o.hasOwnProperty('right')) {
+        } else if (o.right !== undefined) {
             alignX = 1;
             configX = o.right;
-        } else if (o.hasOwnProperty('centerX')) {
+        } else if (o.centerX !== undefined) {
             alignX = 0.5;
             configX = o.centerX;
         }
 
         var alignY, configY;
-        if (o.hasOwnProperty('y')) {
+        if (o.y !== undefined) {
             alignY = null;
             configY = o.y;
-        } else if (o.hasOwnProperty('top')) {
+        } else if (o.top !== undefined) {
             alignY = 0;
             configY = o.top;
-        } else if (o.hasOwnProperty('bottom')) {
+        } else if (o.bottom !== undefined) {
             alignY = 1;
             configY = o.bottom;
-        } else if (o.hasOwnProperty('centerY')) {
+        } else if (o.centerY !== undefined) {
             alignY = 0.5;
             configY = o.centerY;
         }

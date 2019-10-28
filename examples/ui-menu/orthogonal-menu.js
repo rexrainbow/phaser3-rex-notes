@@ -78,8 +78,10 @@ class Demo extends Phaser.Scene {
 
 var createMenu = function (scene, x, y, items, onClick) {
     var menu = scene.rexUI.add.menu({
-        x: 'left',
-        y: 'center',
+        anchor: {
+            left: 'left',
+            centerY: 'center'
+        },
         orientation: 'y',
         toggleOrientation: true,
 

@@ -7,10 +7,12 @@ import GetChildrenWidth from './GetChildrenWidth.js';
 import GetChildrenHeight from './GetChildrenHeight.js';
 import GetAllChildrenSizers from './GetAllChildrenSizers.js';
 import GetChildrenSizers from './GetChildrenSizers.js';
+import PreLayout from './PreLayout.js';
 import Layout from './Layout.js';
-import LayoutInit from './LayoutInit.js';
+import PostLayout from './PostLayout.js';
 import _layoutInit from './_layoutInit.js';
 
+import SetAnchor from './SetAnchor.js';
 import PopUp from './PopUp.js';
 import ScaleDownDestroy from './ScaleDownDestroy.js';
 import FadeIn from './FadeIn.js';
@@ -31,11 +33,13 @@ export default {
     getElement: GetElement,
     getAllChildrenSizers: GetAllChildrenSizers,
     getChildrenSizers: GetChildrenSizers,
+    preLayout: PreLayout,
+    _layoutInit: _layoutInit,
     layout: Layout,
     layoutBackgrounds: LayoutBackgrounds,
-    layoutInit: LayoutInit,
-    _layoutInit: _layoutInit,
+    postLayout: PostLayout,
 
+    setAnchor: SetAnchor,
     popUp: PopUp,
     scaleDownDestroy: ScaleDownDestroy,
     fadeIn: FadeIn,

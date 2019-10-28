@@ -42,6 +42,12 @@ var game = new Phaser.Game(config);
 
 ```javascript
 var slider = scene.rexUI.add.slider({
+    // x: 0,
+    // y: 0,
+    // anchor: undefined,
+    // width: undefined,
+    // height: undefined,
+
     orientation: 0,
 
     background: backgroundGameObject,
@@ -65,17 +71,18 @@ var slider = scene.rexUI.add.slider({
 
     enable: true,
 
-    x: 0,
-    y: 0,
-    width: undefined,
-    height: undefined,
-    name: '',
+    // name: '',
+    // draggable: false
 });
 ```
 
 - `x`, `y` : Position of this object, it is valid when this object is the top object.
-    - Number : World position in pixels.
-    - String (`'p%+n'`) : Position based on visible window. See [anchor](anchor.md#create-instance).
+- `anchor` : See [anchor](anchor.md#create-instance).
+    - `x`, `y`, `left`, `right`, `centerX`, `top`, `bottom`, `centerY` : Position based on visible window, which composed of
+        - Percentage of visible width/height : `'p%'`, p: `0` ~ `100`.
+            - `'left'`(=0%), `'center'`(=50%), `'right'`(=100%)
+            - `'top'`(=0%), `'center'`(=50%), `'bottom'`(=100%)
+        - Offset : `'+n'`, or `'-n'`.
 - `width`, `height` : Minimum width, minimum height.
 - `orientation` :
     - `'left-to-right'`, `'horizontal'`,`'h'`, `'x'`, or `0` : Horizontal slider.

@@ -165,6 +165,36 @@ sizer.drawBounds(graphics, color);
 - `graphics` : [Graphics game object](graphics.md)
 - `color` : Default value is `0xffffff`
 
+### Anchor
+
+```javascript
+sizer.setAnchor({
+    // x: '0%+0',
+    // y: '0%+0',
+    // left: '0%+0',
+    // right: '0%+0',
+    // centerX: '0%+0',
+    // top: '0%+0',
+    // bottom: '0%+0',
+    // centerY: '0%+0'
+})
+```
+
+- `x`, `y`, `left`, `right`, `centerX`, `top`, `bottom`, `centerY` : Position based on visible window, which composed of
+    - Percentage of visible width/height : `'p%'`, p: 0~100
+        - `'left'`(=0%), `'center'`(=50%), `'right'`(=100%)
+        - `'top'`(=0%), `'center'`(=50%), `'bottom'`(=100%)
+    - Offset : `'+n'`, or `'-n'`
+
+For example
+
+```javascript
+{
+    left: 'left+10',
+    centerY: 'center'
+}
+```
+
 ### Other properties
 
 This game object inherits from [ContainerLite](containerlite.md).

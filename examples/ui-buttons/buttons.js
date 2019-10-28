@@ -16,8 +16,10 @@ class Demo extends Phaser.Scene {
 
     create() {
         var buttons = this.rexUI.add.buttons({
-            x: 'left+10',
-            y: 'center',
+            anchor: {
+                left: 'left+10',
+                centerY: 'center'
+            },
 
             orientation: 'y',
 
@@ -27,7 +29,6 @@ class Demo extends Phaser.Scene {
             ],
 
         })
-            .setOrigin(0, 0.5)
             .layout()
             .drawBounds(this.add.graphics(), 0xff0000)
 
@@ -62,7 +63,7 @@ var config = {
     width: 800,
     height: 600,
     scale: {
-        mode: Phaser.Scale.FIT,
+        mode: Phaser.Scale.ENVELOP,
         autoCenter: Phaser.Scale.CENTER_BOTH,
     },
     scene: Demo,
