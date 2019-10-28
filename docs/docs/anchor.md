@@ -68,7 +68,7 @@ var anchor = scene.plugins.get('rexAnchor').add(gameObject, {
         - `'top'`(=0%), `'center'`(=50%), `'bottom'`(=100%)
     - Offset : `'+n'`, or `'-n'`.
 
-For example
+For example, anchor game object's left bound to viewport's left+10, and centerY to viewport's center :
 
 ```javascript
 {
