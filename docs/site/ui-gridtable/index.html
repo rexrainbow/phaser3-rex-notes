@@ -4866,10 +4866,11 @@
 
 <h3 id="add-grid-table-object">Add grid table object<a class="headerlink" href="#add-grid-table-object" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gridTable</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">gridTable</span><span class="p">({</span>
-    <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">width</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
-    <span class="nx">height</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
+    <span class="c1">// x: 0,</span>
+    <span class="c1">// y: 0,</span>
+    <span class="c1">// anchor: undefined,</span>
+    <span class="c1">// width: undefined,</span>
+    <span class="c1">// height: undefined,</span>
 
     <span class="nx">scrollMode</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
 
@@ -4948,14 +4949,23 @@
 
     <span class="nx">items</span><span class="o">:</span> <span class="p">[],</span>
 
-    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="c1">// name: &#39;&#39;,</span>
+    <span class="c1">// draggable: false</span>
 <span class="p">});</span>
 </pre></div>
 
 <ul>
-<li><code>x</code>, <code>y</code> : Position of this object, it is valid when this object is the top object.<ul>
-<li>Number : World position in pixels.</li>
-<li>String (<code>'p%+n'</code>) : Position based on visible window. See <a href="../anchor/#create-instance">anchor</a>.</li>
+<li><code>x</code>, <code>y</code> : Position of this object, it is valid when this object is the top object.</li>
+<li><code>anchor</code> : See <a href="../anchor/#create-instance">anchor</a>.<ul>
+<li><code>x</code>, <code>y</code>, <code>left</code>, <code>right</code>, <code>centerX</code>, <code>top</code>, <code>bottom</code>, <code>centerY</code> : Position based on visible window, which composed of<ul>
+<li>Percentage of visible width/height : <code>'p%'</code>, p: <code>0</code> ~ <code>100</code>.<ul>
+<li><code>'left'</code>(=0%), <code>'center'</code>(=50%), <code>'right'</code>(=100%)</li>
+<li><code>'top'</code>(=0%), <code>'center'</code>(=50%), <code>'bottom'</code>(=100%)</li>
+</ul>
+</li>
+<li>Offset : <code>'+n'</code>, or <code>'-n'</code>.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><code>width</code>, <code>height</code> : Minimum width, minimum height.<ul>

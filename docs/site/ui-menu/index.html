@@ -4082,6 +4082,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#collapse" class="md-nav__link">
+    Collapse
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#layout-children" class="md-nav__link">
     Layout children
   </a>
@@ -4677,6 +4684,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#collapse" class="md-nav__link">
+    Collapse
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#layout-children" class="md-nav__link">
     Layout children
   </a>
@@ -4756,9 +4770,9 @@
 
 <h3 id="add-menu-object">Add menu object<a class="headerlink" href="#add-menu-object" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">menu</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">add</span><span class="p">.</span><span class="nx">menu</span><span class="p">({</span>
-    <span class="c1">// Position</span>
-    <span class="nx">x</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="nx">y</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="c1">// x: 0,</span>
+    <span class="c1">// y: 0,</span>
+    <span class="c1">// anchor: undefined,</span>
 
     <span class="c1">// orientation: 1,</span>
     <span class="nx">items</span><span class="o">:</span> <span class="p">[],</span>
@@ -4779,25 +4793,35 @@
     <span class="p">},</span>
     <span class="nx">createButtonCallbackScope</span><span class="o">:</span> <span class="kc">undefined</span><span class="p">,</span>
 
-    <span class="nx">easeIn</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">duration</span><span class="o">:</span> <span class="mi">500</span><span class="p">,</span>
-        <span class="nx">orientation</span><span class="o">:</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span>
-        <span class="c1">// ease: &#39;Cubic&#39;</span>
-    <span class="p">}</span>
-    <span class="nx">easeOut</span><span class="o">:</span> <span class="p">{</span>
-        <span class="nx">duration</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span>
-        <span class="nx">orientation</span><span class="o">:</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span>
-        <span class="c1">// ease: &#39;Linear&#39;</span>
-    <span class="p">},</span>
+    <span class="nx">easeIn</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="c1">// easeIn: {</span>
+    <span class="c1">//     duration: 500,</span>
+    <span class="c1">//     ease: &#39;Cubic&#39;</span>
+    <span class="c1">// },</span>
+
+    <span class="nx">easeOut</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="c1">// easeOut: {</span>
+    <span class="c1">//     duration: 100,</span>
+    <span class="c1">//     ease: &#39;Linear&#39;</span>
+    <span class="c1">// },</span>
     <span class="c1">// expandEvent: &#39;button.click&#39;</span>
-    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+
+    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;&#39;</span>
 <span class="p">});</span>
 </pre></div>
 
 <ul>
-<li><code>x</code>, <code>y</code> : Position of this object, it is valid when this object is the top object.<ul>
-<li>Number : World position in pixels.</li>
-<li>String (<code>'p%+n'</code>) : Position based on visible window. See <a href="../anchor/#create-instance">anchor</a>.</li>
+<li><code>x</code>, <code>y</code> : Position of this object, it is valid when this object is the top object.</li>
+<li><code>anchor</code> : See <a href="../anchor/#create-instance">anchor</a>.<ul>
+<li><code>x</code>, <code>y</code>, <code>left</code>, <code>right</code>, <code>centerX</code>, <code>top</code>, <code>bottom</code>, <code>centerY</code> : Position based on visible window, which composed of<ul>
+<li>Percentage of visible width/height : <code>'p%'</code>, p: <code>0</code> ~ <code>100</code>.<ul>
+<li><code>'left'</code>(=0%), <code>'center'</code>(=50%), <code>'right'</code>(=100%)</li>
+<li><code>'top'</code>(=0%), <code>'center'</code>(=50%), <code>'bottom'</code>(=100%)</li>
+</ul>
+</li>
+<li>Offset : <code>'+n'</code>, or <code>'-n'</code>.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><code>orientation</code> : Main orientation of the menu, default is <code>1</code> (top to bottom)<ul>
@@ -4826,25 +4850,21 @@
 </ul>
 </li>
 <li><code>easeIn</code> : Scale up size when extend menu.<ul>
+<li>A number : Duration of ease, in milliseconds.</li>
+<li>An object :<ul>
 <li><code>easeIn.duration</code> : Duration of ease, in milliseconds.</li>
-<li><code>easeIn.orientation</code> :<ul>
-<li><code>'y'</code> : Scale up height.</li>
-<li><code>'x'</code> : Scale up width.</li>
-<li>Others: Scale up width and height.</li>
-</ul>
-</li>
 <li><code>easeIn.ease</code> : Ease function, default is <code>'Cubic'</code></li>
 </ul>
 </li>
-<li><code>easeOut</code> : Scale down size when extend menu.<ul>
-<li><code>easeOut.duration</code> : Duration of ease, in milliseconds.</li>
-<li><code>easeOut.orientation</code> :<ul>
-<li><code>'y'</code> : Scale up height.</li>
-<li><code>'x'</code> : Scale up width.</li>
-<li>Others: Scale up width and height.</li>
 </ul>
 </li>
+<li><code>easeOut</code> : Scale down size when extend menu.<ul>
+<li>A number : Duration of ease, in milliseconds.</li>
+<li>An object :<ul>
+<li><code>easeOut.duration</code> : Duration of ease, in milliseconds.</li>
 <li><code>easeOut.ease</code> : Ease function, default is <code>'Linear'</code></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><code>expandEvent</code> : Event name of expanding sub-menu.<ul>
@@ -4867,6 +4887,15 @@
 </pre></div></li>
 <li>Create instance
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">menu</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MyMenu</span><span class="p">(</span><span class="nx">scene</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h3 id="collapse">Collapse<a class="headerlink" href="#collapse" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Collapse menu
+    <div class="codehilite"><pre><span></span><span class="nx">menu</span><span class="p">.</span><span class="nx">collapse</span><span class="p">();</span>
+</pre></div></li>
+<li>Collapse sub-menu
+    <div class="codehilite"><pre><span></span><span class="nx">menu</span><span class="p">.</span><span class="nx">collapseSubMenu</span><span class="p">();</span>
 </pre></div></li>
 </ul>
 <h3 id="layout-children">Layout children<a class="headerlink" href="#layout-children" title="Permanent link">&para;</a></h3>
