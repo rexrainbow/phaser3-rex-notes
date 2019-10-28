@@ -3,11 +3,13 @@ import Scale from './scale.js';
 var PopUp = function (gameObject, duration, orientation, ease, scale) {
     defaultConfig.mode = 0;
     switch (orientation) {
+        case 0:
         case 'x':
             defaultConfig.start = {
                 x: 0
             };
             break;
+        case 1:
         case 'y':
             defaultConfig.start = {
                 y: 0

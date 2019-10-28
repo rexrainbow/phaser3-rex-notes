@@ -1,9 +1,8 @@
+import GetEaseConfig from './GetEaseConfig.js';
+
 var Collapse = function () {
-    if (this.root.easeOut) {
-        this.scaleDownDestroy(this.root.easeOut);
-    } else {
-        this.destroy();
-    }
+    var easeOut = GetEaseConfig(this, this.root.easeOut);
+    this.scaleDownDestroy(easeOut);
     this.collapseSubMenu();
     return this;
 }

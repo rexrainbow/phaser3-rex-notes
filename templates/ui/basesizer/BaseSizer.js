@@ -92,7 +92,7 @@ class Base extends Container {
     }
 
     get right() {
-        return (this.x - (this.displayWidth * this.originX)) + this.displayWidth;
+        return this.left + this.displayWidth;
     }
 
     set right(value) {
@@ -105,7 +105,7 @@ class Base extends Container {
     }
 
     get centerX() {
-        return (this.left + this.right) / 2;
+        return this.left + (this.displayWidth / 2);
     }
 
     set centerX(value) {
@@ -131,7 +131,7 @@ class Base extends Container {
     }
 
     get bottom() {
-        return (this.y - (this.displayHeight * this.originY)) + this.displayHeight;
+        return this.top + this.displayHeight;
     }
 
     set bottom(value) {
@@ -144,7 +144,7 @@ class Base extends Container {
     }
 
     get centerY() {
-        return (this.top + this.bottom) / 2;
+        return this.top + (this.displayHeight / 2);
     }
 
     set centerY(value) {

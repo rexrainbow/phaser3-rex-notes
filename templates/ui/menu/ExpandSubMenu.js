@@ -1,8 +1,16 @@
 var ExpandSubMenu = function (parentButton, items) {
     this.collapseSubMenu();
+
+    var orientation
+    if (this.root.toggleOrientation) {
+        orientation = (this.orientation === 0) ? 1 : 0;
+    } else {
+        orientation = this.orientation;
+    }
+
     var subMenu = new this.constructor(this.scene, {
         items: items,
-        orientation: this.orientation,
+        orientation: orientation,
 
         createBackgroundCallback: this.root.createBackgroundCallback,
         createBackgroundCallbackScope: this.root.createBackgroundCallbackScope,

@@ -13,41 +13,44 @@ class Demo extends Phaser.Scene {
 
     create() {
         var bg = this.add.image(400, 300, 'classroom');
+
         var leftTopPanel = this.add.rectangle(400, 300, 50, 100, 0xffffff)
             .setStrokeStyle(4, 0xff0000)
-            .setOrigin(0, 0);
         this.plugins.get('rexAnchor').add(leftTopPanel, {
-            x: 'left+10',
-            y: 'top+10'
+            left: 'left+10',
+            top: 'top+10'
         });
-
 
         var rightTopPanel = this.add.rectangle(400, 300, 50, 100, 0xffffff)
             .setStrokeStyle(4, 0x00ff00)
-            .setOrigin(1, 0);
         this.plugins.get('rexAnchor').add(rightTopPanel, {
-            x: 'right-10',
-            y: 'top+10'
+            right: 'right-10',
+            top: 'top+10'
         });
 
         var leftBottomPanel = this.add.rectangle(400, 300, 50, 100, 0xffffff)
             .setStrokeStyle(4, 0x0000ff)
-            .setOrigin(0, 1);
         this.plugins.get('rexAnchor').add(leftBottomPanel, {
-            x: 'left+10',
-            y: 'bottom-10'
+            left: 'left+10',
+            bottom: 'bottom-10'
         });
 
         var rightBottomPanel = this.add.rectangle(400, 300, 50, 100, 0xffffff)
             .setStrokeStyle(4, 0x888888)
-            .setOrigin(1, 1);
         this.plugins.get('rexAnchor').add(rightBottomPanel, {
-            x: 'right-10',
-            y: 'bottom-10'
+            right: 'right-10',
+            bottom: 'bottom-10'
+        });
+
+        var leftCenterPanel = this.add.rectangle(400, 300, 50, 100, 0xffffff)
+            .setStrokeStyle(4, 0xff8888)
+        this.plugins.get('rexAnchor').add(leftCenterPanel, {
+            left: 'left+10',
+            centerY: 'center+10'
         });
     }
 
-    update() {}
+    update() { }
 }
 
 var config = {

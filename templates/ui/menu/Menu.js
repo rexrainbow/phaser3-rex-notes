@@ -4,6 +4,7 @@ import CreateBackground from './CreateBackground.js';
 import CreateButtons from './CreateButtons.js';
 import GetDefaultBounds from '../../../plugins/utils/defaultbounds/GetDefaultBounds.js';
 import MenuSetInteractive from './MenuSetInteractive.js';
+import GetEaseConfig from './GetEaseConfig.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
 
@@ -17,6 +18,8 @@ class Menu extends Buttons {
         if (!config.hasOwnProperty('orientation')) {
             config.orientation = 1;
         }
+        // parent button
+        var parent = GetValue(config, 'parent', undefined);
         // items
         var items = GetValue(config, 'items', undefined);
         // background
@@ -34,8 +37,14 @@ class Menu extends Buttons {
         this.root = GetValue(config, 'root', this);
         if (this.root === this) {
             this.expandEventName = GetValue(config, 'expandEvent', 'button.click');
-            this.easeIn = GetValue(config, 'easeIn', undefined);
-            this.easeOut = GetValue(config, 'easeOut', undefined);
+            this.easeIn = GetValue(config, 'easeIn', 0);
+            if (typeof (this.easeIn) === 'number') {
+                this.easeIn = { duration: this.easeIn };
+            }
+            this.easeOut = GetValue(config, 'easeOut', 0);
+            if (typeof (this.easeOut) === 'number') {
+                this.easeOut = { duration: this.easeOut };
+            }
             this.bounds = GetValue(config, 'bounds', undefined);
             this.expandOrientation = GetValue(config, 'expandOrientation', undefined);
             if (this.expandOrientation === undefined) {
@@ -51,6 +60,7 @@ class Menu extends Buttons {
                     this.expandOrientation = (this.x < bounds.centerX) ? 0 : 2;
                 }
             }
+            this.toggleOrientation = GetValue(config, 'toggleOrientation', false);
             this.createBackgroundCallback = createBackgroundCallback;
             this.createBackgroundCallbackScope = createBackgroundCallbackScope;
             this.createButtonCallback = createButtonCallback;
@@ -62,7 +72,6 @@ class Menu extends Buttons {
             .layout();
 
         // Set position to align parent
-        var parent = GetValue(config, 'parent', undefined);
         if (parent) {
             switch (this.root.expandOrientation) {
                 case 0: //Expand right
@@ -84,9 +93,8 @@ class Menu extends Buttons {
         MenuSetInteractive(this);
 
         // Ease in menu
-        if (this.root.easeIn) {
-            this.popUp(this.root.easeIn);
-        }
+        var easeIn = GetEaseConfig(this, this.root.easeIn);
+        this.popUp(easeIn);
     }
 
     isInTouching(pointer) {

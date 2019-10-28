@@ -106,7 +106,7 @@ class Scale {
         }
 
         if (this.duration === 0) {
-            this.sound.setScale(this.scaleEnd.x, this.scaleEnd.y);
+            this.gameObject.setScale(this.scaleEnd.x, this.scaleEnd.y);
             this.complete();
             return this;
         }

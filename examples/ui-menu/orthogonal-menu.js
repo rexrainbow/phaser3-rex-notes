@@ -1,8 +1,8 @@
 import UIPlugin from '../../templates/ui/ui-plugin.js';
 
-const COLOR_PRIMARY = 0x4e342e;
-const COLOR_LIGHT = 0x7b5e57;
-const COLOR_DARK = 0x260e04;
+const COLOR_PRIMARY = 0x8d6e63;
+const COLOR_LIGHT = 0xbe9c91;
+const COLOR_DARK = 0x5f4339;
 
 class Demo extends Phaser.Scene {
     constructor() {
@@ -62,20 +62,15 @@ class Demo extends Phaser.Scene {
             },
         ];
 
-        var scene = this,
-            menu = undefined;
-        this.print = this.add.text(0, 0, '');
+        var menu = createMenu(this, 0, 0, items, function (button) {
+
+        });
+
         this.input.on('pointerdown', function (pointer) {
-            if (menu === undefined) {
-                menu = createMenu(scene, pointer.x, pointer.y, items, function (button) {
-                    scene.print.text += 'Click ' + button.text + '\n';
-                });
-            } else if (!menu.isInTouching(pointer)) {
-                menu.collapse();
-                menu = undefined;
-                scene.print.text = '';
+            if (!menu.isInTouching(pointer)) {
+                menu.collapseSubMenu();
             }
-        }, this);
+        });
     }
 
     update() { }
@@ -83,8 +78,10 @@ class Demo extends Phaser.Scene {
 
 var createMenu = function (scene, x, y, items, onClick) {
     var menu = scene.rexUI.add.menu({
-        x: x,
-        y: y,
+        x: 'left',
+        y: 'center',
+        orientation: 'y',
+        toggleOrientation: true,
 
         createBackgroundCallback: function (items) {
             return scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_DARK);
@@ -107,16 +104,8 @@ var createMenu = function (scene, x, y, items, onClick) {
             })
         },
 
-        easeIn: {
-            duration: 500,
-            orientation: 'y'
-        },
-
-        easeOut: {
-            duration: 100,
-            orientation: 'y'
-        },
-
+        easeIn: 500,
+        easeOut: 100,
         // expandEvent: 'button.over'
     });
 

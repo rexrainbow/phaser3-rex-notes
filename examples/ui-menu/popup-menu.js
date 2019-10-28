@@ -104,16 +104,8 @@ var createMenu = function (scene, x, y, items, onClick) {
             })
         },
 
-        easeIn: {
-            duration: 500,
-            orientation: 'y'
-        },
-
-        easeOut: {
-            duration: 100,
-            orientation: 'y'
-        },
-
+        easeIn: 500,
+        easeOut: 100,
         // expandEvent: 'button.over'
     });
 

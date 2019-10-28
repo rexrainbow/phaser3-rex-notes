@@ -65,16 +65,17 @@ var menu = scene.rexUI.add.menu({
     },
     createButtonCallbackScope: undefined,
 
-    easeIn: {
-        duration: 500,
-        orientation: 'y',
-        // ease: 'Cubic'
-    }
-    easeOut: {
-        duration: 100,
-        orientation: 'y',
-        // ease: 'Linear'
-    },
+    easeIn: 0,
+    // easeIn: {
+    //     duration: 500,
+    //     ease: 'Cubic'
+    // },
+
+    easeOut: 0,
+    // easeOut: {
+    //     duration: 100,
+    //     ease: 'Linear'
+    // },
     // expandEvent: 'button.click'
     name: '',
 });
@@ -97,19 +98,15 @@ var menu = scene.rexUI.add.menu({
         - `item.scene` : Scene of this menu object.
         - Other custom properties
 - `easeIn` : Scale up size when extend menu.
-    - `easeIn.duration` : Duration of ease, in milliseconds.
-    - `easeIn.orientation` :
-        - `'y'` : Scale up height.
-        - `'x'` : Scale up width.
-        - Others: Scale up width and height.
-    - `easeIn.ease` : Ease function, default is `'Cubic'`
+    - A number : Duration of ease, in milliseconds.
+    - An object :
+        - `easeIn.duration` : Duration of ease, in milliseconds.
+        - `easeIn.ease` : Ease function, default is `'Cubic'`
 - `easeOut` : Scale down size when extend menu.
-    - `easeOut.duration` : Duration of ease, in milliseconds.
-    - `easeOut.orientation` :
-        - `'y'` : Scale up height.
-        - `'x'` : Scale up width.
-        - Others: Scale up width and height.
-    - `easeOut.ease` : Ease function, default is `'Linear'`
+    - A number : Duration of ease, in milliseconds.
+    - An object :
+        - `easeOut.duration` : Duration of ease, in milliseconds.
+        - `easeOut.ease` : Ease function, default is `'Linear'`
 - `expandEvent` : Event name of expanding sub-menu.
     - `'button.click'` : Default value
     - `'button.over'`
@@ -130,6 +127,17 @@ var menu = scene.rexUI.add.menu({
 - Create instance
     ```javascript
     var menu = new MyMenu(scene, config);
+    ```
+
+### Collapse
+
+- Collapse menu
+    ```javascript
+    menu.collapse();
+    ```
+- Collapse sub-menu
+    ```javascript
+    menu.collapseSubMenu();
     ```
 
 ### Layout children

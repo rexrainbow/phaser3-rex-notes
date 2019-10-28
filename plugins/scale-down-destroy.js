@@ -12,11 +12,13 @@ var ScaleDownDestroy = function (gameObject, duration, orientation, ease, destro
 
     defaultConfig.mode = (destroyMode) ? 1 : 0;
     switch (orientation) {
+        case 0:
         case 'x':
             defaultConfig.end = {
                 x: 0
             };
             break;
+        case 1:
         case 'y':
             defaultConfig.end = {
                 y: 0
