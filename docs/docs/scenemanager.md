@@ -198,10 +198,18 @@ scene.scene.transition({
     // sleep: false,          // set true to sleep this scene, set false to stop this scene
     // allowInput: false,     // set true to enable input system of current scene and target scene
 
-    // onUpdate: null,
+    // onUpdate: null,        //  transition callback
     // onUpdateScope: scene
 })
 ```
+
+- `onUpdate` ,`onUpdateScope` : Transition callback in each tick.
+    ```javascript
+    var callback = function(progress) {
+
+    }
+    ```
+    - `progress` : `0` ~ `1`
 
 ### Events
 
