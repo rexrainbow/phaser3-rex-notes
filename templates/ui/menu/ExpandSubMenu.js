@@ -19,11 +19,13 @@ var ExpandSubMenu = function (parentButton, items) {
         easeIn: this.root.easeIn,
         easeOut: this.root.easeOut,
 
-        root: this.root,
-        parent: parentButton
+        _rootMenu: this.root,
+        _parentMenu: this,
+        _parentButton: parentButton
     });
-    this.add(subMenu, null);
+    this.pin(subMenu);
     this.childrenMap.subMenu = subMenu;
+    this.root.emit('expand', subMenu, parentButton, this);
     return this;
 }
 

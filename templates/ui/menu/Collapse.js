@@ -1,8 +1,8 @@
 import GetEaseConfig from './GetEaseConfig.js';
 
 var Collapse = function () {
-    var easeOut = GetEaseConfig(this, this.root.easeOut);
-    this.scaleDownDestroy(easeOut);
+    this.root.emit('collapse', this, this.parentButton, this.parentMenu);
+    this.scaleDownDestroy(GetEaseConfig(this, this.root.easeOut));
     this.collapseSubMenu();
     return this;
 }

@@ -14,29 +14,47 @@ class Menu extends Buttons {
             config = {};
         }
 
-        // orientation
+        // Orientation
         if (!config.hasOwnProperty('orientation')) {
-            config.orientation = 1;
+            config.orientation = 1; // y
         }
-        // parent button
-        var parent = GetValue(config, 'parent', undefined);
-        // items
+
+        // Parent
+        var rootMenu = config._rootMenu;
+        var parentMenu = config._parentMenu;
+        var parentButton = config._parentButton;
+        // Items
         var items = GetValue(config, 'items', undefined);
-        // background
+        // Background
         var createBackgroundCallback = GetValue(config, 'createBackgroundCallback', undefined);
         var createBackgroundCallbackScope = GetValue(config, 'createBackgroundCallbackScope', undefined);
         config.background = CreateBackground(scene, items, createBackgroundCallback, createBackgroundCallbackScope);
-        // buttons
-        var items = GetValue(config, 'items', undefined);
+        // Buttons
         var createButtonCallback = GetValue(config, 'createButtonCallback', undefined);
         var createButtonCallbackScope = GetValue(config, 'createButtonCallbackScope', undefined);
         config.buttons = CreateButtons(scene, items, createButtonCallback, createButtonCallbackScope);
+
         super(scene, config);
         this.type = 'rexMenu';
-        this.items = items;
-        this.root = GetValue(config, 'root', this);
-        if (this.root === this) {
+
+        this.items = items;        
+        this.root = (rootMenu === undefined) ? this : rootMenu;
+        this.parentMenu = parentMenu;
+        this.parentButton = parentButton;
+        var isRootMenu = (this.root === this);
+        if (isRootMenu) {
+            // Bounds
+            var bounds = config.bounds;
+            if (bounds === undefined) {
+                bounds = GetDefaultBounds(scene);
+            }
+            this.bounds = bounds;
+
+            // Expand mode
             this.expandEventName = GetValue(config, 'expandEvent', 'button.click');
+            // toggleOrientation mode
+            this.toggleOrientation = GetValue(config, 'toggleOrientation', false);
+            // Transition
             this.easeIn = GetValue(config, 'easeIn', 0);
             if (typeof (this.easeIn) === 'number') {
                 this.easeIn = { duration: this.easeIn };
@@ -45,56 +63,50 @@ class Menu extends Buttons {
             if (typeof (this.easeOut) === 'number') {
                 this.easeOut = { duration: this.easeOut };
             }
-            this.bounds = GetValue(config, 'bounds', undefined);
-            this.expandOrientation = GetValue(config, 'expandOrientation', undefined);
-            if (this.expandOrientation === undefined) {
-                var bounds = this.bounds;
-                if (bounds === undefined) {
-                    bounds = GetDefaultBounds(scene);
-                }
-                if (this.orientation === 0) { // x
-                    // Expand down(1)/up(3)
-                    this.expandOrientation = (this.y < bounds.centerY) ? 1 : 3;
-                } else {
-                    // Expand right(0)/left(2)
-                    this.expandOrientation = (this.x < bounds.centerX) ? 0 : 2;
-                }
-            }
-            this.toggleOrientation = GetValue(config, 'toggleOrientation', false);
+            // Callbacks
             this.createBackgroundCallback = createBackgroundCallback;
             this.createBackgroundCallbackScope = createBackgroundCallbackScope;
             this.createButtonCallback = createButtonCallback;
             this.createButtonCallbackScope = createButtonCallbackScope;
-            this.isPassedEvent = false;
+
+            // Event flag
+            this._isPassedEvent = false;
         }
         this
             .setOrigin(0)
             .layout();
 
-        // Set position to align parent
-        if (parent) {
-            switch (this.root.expandOrientation) {
+        var bounds = this.root.bounds;
+        // Align to parentButton
+        if (isRootMenu) {
+            this.expandOrientation = [
+                ((this.y < bounds.centerY) ? 1 : 3), // Expand down(1)/up(3)
+                ((this.x < bounds.centerX) ? 0 : 2)  // Expand right(0)/left(2)
+            ];
+
+        } else { // Sub-menu, align to parent button
+            var expandOrientation = this.root.expandOrientation[parentMenu.orientation];
+            switch (expandOrientation) {
                 case 0: //Expand right
-                    this.alignTop(parent.top).alignLeft(parent.right);
+                    this.alignTop(parentButton.top).alignLeft(parentButton.right);
                     break;
                 case 1: //Expand down
-                    this.alignLeft(parent.left).alignTop(parent.bottom);
+                    this.alignLeft(parentButton.left).alignTop(parentButton.bottom);
                     break;
                 case 2: //Expand left
-                    this.alignTop(parent.top).alignRight(parent.left);
+                    this.alignTop(parentButton.top).alignRight(parentButton.left);
                     break;
                 case 3: //Expand up
-                    this.alignLeft(parent.left).alignBottom(parent.top);
+                    this.alignLeft(parentButton.left).alignBottom(parentButton.top);
                     break;
             }
         }
-        this.pushIntoBounds(this.root.bounds);
+        this.pushIntoBounds(bounds);
 
         MenuSetInteractive(this);
 
         // Ease in menu
-        var easeIn = GetEaseConfig(this, this.root.easeIn);
-        this.popUp(easeIn);
+        this.popUp(GetEaseConfig(this, this.root.easeIn));
     }
 
     isInTouching(pointer) {

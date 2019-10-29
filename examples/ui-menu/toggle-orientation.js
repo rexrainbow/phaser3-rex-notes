@@ -64,7 +64,13 @@ class Demo extends Phaser.Scene {
 
         var menu = createMenu(this, 0, 0, items, function (button) {
 
-        });
+        })
+            .on('expand', function (menu, parentButton, parentMenu) {
+
+            })
+            .on('collapse', function (menu, parentButton, parentMenu) {
+
+            })
 
         this.input.on('pointerdown', function (pointer) {
             if (!menu.isInTouching(pointer)) {

@@ -3,9 +3,9 @@ var CreateBackground = function (scene, items, callback, scope) {
     if (callback) {
         items.scene = scene;
         if (scope) {
-            background = callback.call(scope, scene);
+            background = callback.call(scope, items);
         } else {
-            background = callback(scene);
+            background = callback(items);
         }
         items.scene = undefined;
     }
