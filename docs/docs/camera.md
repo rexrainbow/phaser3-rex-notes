@@ -100,30 +100,6 @@ camera.destroy();
         var displayHeight = camera.displayHeight;
         ```
 
-#### World coordinates
-
-- World view, a [rectangle object](geom-rectangle.md)
-    ```javascript
-    var worldView = camera.worldView;
-    var x = worldView.x;
-    var y = worldView.y;
-    var width = worldView.width;  // displayWidth
-    var height = worldView.height; // displayHeight
-    var left = worldView.left;  // x
-    var right = worldView.right;  // x + width
-    var top = worldView.top;  // y
-    var bottom = worldView.bottom;  // y + height
-    var centerX = worldView.centerX;
-    var centerY = worldView.centerY;
-    var isInside = worldView.contains(x, y);
-    var randPoint = worldView.getRandomPoint(point); // point: {x, y}
-    ```
-- Middle point
-    ```javascript
-    var x = camera.midPoint.x;
-    var y = camera.midPoint.y;
-    ```
-
 ### Zoom
 
 - Set
@@ -257,6 +233,38 @@ See [Scroll factor](gameobject.md#scroll-factor) in game object.
     // var out = camera.getBounds(out);
     ```
 
+### World coordinates
+
+- World view, a [rectangle object](geom-rectangle.md)
+    ```javascript
+    var worldView = camera.worldView;
+    var x = worldView.x;
+    var y = worldView.y;
+    var width = worldView.width;  // displayWidth
+    var height = worldView.height; // displayHeight
+    var left = worldView.left;  // x
+    var right = worldView.right;  // x + width
+    var top = worldView.top;  // y
+    var bottom = worldView.bottom;  // y + height
+    var centerX = worldView.centerX;
+    var centerY = worldView.centerY;
+    var isInside = worldView.contains(x, y);
+    var randPoint = worldView.getRandomPoint(point); // point: {x, y}
+    ```
+- Middle point
+    ```javascript
+    var x = camera.midPoint.x;
+    var y = camera.midPoint.y;
+    ```
+-  Get world position
+    ```javascript
+    var out = camera.getWorldPoint(x, y);
+    // var out = camera.getWorldPoint(x, y, out);
+    ```
+    - `x` , `y` : Position of camera.
+    - `out` : World position `{x, y}`
+    - Works for zoom of 1 with any resolution, but **resolution > 1 and zoom !== 1 breaks**
+
 ### Set background color
 
 ```javascript
@@ -275,19 +283,6 @@ camera.ignore(gameObject);
     - A game object
     - An array of game objects
     - A [group](group.md)
-
-### Get world position
-
-```javascript
-var out = camera.getWorldPoint(x, y);
-// var out = camera.getWorldPoint(x, y, out);
-```
-
-- `x` , `y` : Position of camera.
-- `out` : World position `{x, y}`
-
-!!! warning
-    Works for zoom of 1 with any resolution, but **resolution > 1 and zoom !== 1 breaks**
 
 ### Get cameras below pointer
 
