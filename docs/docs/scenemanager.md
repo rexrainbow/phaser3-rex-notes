@@ -188,21 +188,29 @@ scene.scene.sendToBack(keyA);
 
 ```javascript
 scene.scene.transition({
-    target: nextSceneClass,   // the Scene key to transition to
-    // data: null,            // an object containing any data you wish to be passed to the target scenes init / create methods.
-    // moveAbove: false,      // move the target Scene to be above this current scene before the transition starts
-    // moveBelow: false,      // move the target Scene to be below this current scene before the transition starts
+    target: key,
+    // data: null,
+    // moveAbove: false,
+    // moveBelow: false,
 
-    duration: 1000,           // the duration, in ms
+    duration: 1000,
 
-    // sleep: false,          // set true to sleep this scene, set false to stop this scene
-    // allowInput: false,     // set true to enable input system of current scene and target scene
+    // remove: false,
+    // sleep: false,
+    // allowInput: false,
 
-    // onUpdate: null,        //  transition callback
+    // onUpdate: null,
     // onUpdateScope: scene
 })
 ```
 
+- `target` : The Scene key to transition to.
+- `data` : An object containing any data you wish to be passed to the target scenes init / create methods.
+- `moveAbove`. `moveBelow` : Move the target Scene to be above/below this current scene before the transition starts.
+- `duration` : Transition duration, in ms.
+- `remove` : Set true to remove this scene.
+- `sleep` : Set true to sleep this scene, set false to stop this scene.
+- `allowInput` : Set true to enable input system of current scene and target scene.
 - `onUpdate` ,`onUpdateScope` : Transition callback in each tick.
     ```javascript
     var callback = function(progress) {
@@ -211,25 +219,50 @@ scene.scene.transition({
     ```
     - `progress` : `0` ~ `1`
 
+### Execution flow
+
+1. Invoke `scene.scene.transition` method.
+    - Current scene : 
+        - Fire `'transitionout'` event.
+            ```javascript
+            fromScene.events.on('transitionout', function(targetScene, duration){ });
+            ```
+        - Run transition's `onUpdate` callback every tick.
+        - Current scene's `update` method is still running every tick.
+    - Target scene :
+        - Start target scene immediately.
+        - Fire target scene's `'transitionstart'` event. (Register this event in `create` stage)
+            ```javascript
+            targetScene.events.on('transitionstart', function(fromScene, duration){ });
+            ```
+1. When transition completed.
+    - Current scene : 
+        - Remove or sleep current scene after transition completed.
+    - Target scene : 
+        - Fire target scene's `transitioncomplete` event.
+            ```javascript
+            targetScene.events.on('transitioncomplete', function(fromScene){ });
+            ```
+
 ### Events
 
 - boot
     ```javascript
-    scene.events.on('transitioninit', function(fromScene, duration)){});
+    scene.events.on('transitioninit', function(fromScene, duration)){ });
     ```
 - start
     ```javascript
-    scene.events.on('transitionstart', function(fromScene, duration){});
+    scene.events.on('transitionstart', function(fromScene, duration){ });
     ```
 - transition-out
     ```javascript
-    scene.events.on('transitionout', function(targetScene){});
+    scene.events.on('transitionout', function(targetScene){ });
     ```
 - complete
     ```javascript
-    scene.events.on('transitioncomplete', function(scene){});
+    scene.events.on('transitioncomplete', function(fromScene){ });
     ```
 - wake : wake-up target scene if it was previously asleep
     ```javascript
-    scene.events.on('transitionwake', function(fromScene, duration){});
+    scene.events.on('transitionwake', function(fromScene, duration){ });
     ```
