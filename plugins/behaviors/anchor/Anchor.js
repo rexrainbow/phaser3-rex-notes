@@ -1,6 +1,5 @@
 import GetViewport from './GetViewport.js';
 
-const GetValue = Phaser.Utils.Objects.GetValue;
 const Rectangle = Phaser.Geom.Rectangle;
 
 class Anchor {
@@ -62,14 +61,14 @@ class Anchor {
     }
 
     boot() {
-        this.scaleManamger.on('resize', this.onResize, this);
+        this.scaleManamger.on('resize', this.anchor, this);
         this.gameObject.once('destroy', this.destroy, this);
 
-        this.onResize();
+        this.anchor();
     }
 
     shutdown() {
-        this.scaleManamger.off('resize', this.onResize, this);
+        this.scaleManamger.off('resize', this.anchor, this);
         this.gameObject = undefined;
     }
 
@@ -95,9 +94,10 @@ class Anchor {
         return this;
     }
 
-    onResize() {
+    anchor() {
         GetViewport(this.scaleManamger, this.viewport);
         this.updatePosition();
+        return this;
     }
 
     updatePosition() {
