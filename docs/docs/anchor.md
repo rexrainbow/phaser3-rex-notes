@@ -51,18 +51,19 @@ var game = new Phaser.Game(config);
 
 ```javascript
 var anchor = scene.plugins.get('rexAnchor').add(gameObject, {
-    // x: '0%+0',
-    // y: '0%+0',
     // left: '0%+0',
     // right: '0%+0',
     // centerX: '0%+0',
+    // x: '0%+0',
+
     // top: '0%+0',
     // bottom: '0%+0',
-    // centerY: '0%+0'
+    // centerY: '0%+0',
+    // y: '0%+0'
 });
 ```
 
-- `x`, `y`, `left`, `right`, `centerX`, `top`, `bottom`, `centerY` : Position based on visible window, which composed of
+- `left`, `right`, `centerX`, `x`, `top`, `bottom`, `centerY`, `y` : Position based on visible window, which composed of
     - Percentage of visible width/height : `'p%'`, p: `0` ~ `100`.
         - `'left'`(=0%), `'center'`(=50%), `'right'`(=100%)
         - `'top'`(=0%), `'center'`(=50%), `'bottom'`(=100%)
@@ -81,18 +82,19 @@ For example, anchor game object's left bound to viewport's left+10, and centerY 
 
 ```javascript
 anchor.resetFromJSON({
-    // x: '0%+0',
-    // y: '0%+0',
     // left: '0%+0',
     // right: '0%+0',
     // centerX: '0%+0',
+    // x: '0%+0',
+
     // top: '0%+0',
     // bottom: '0%+0',
-    // centerY: '0%+0'
+    // centerY: '0%+0',
+    // y: '0%+0'
 })
 ```
 
-- `x`, `y`, `left`, `right`, `centerX`, `top`, `bottom`, `centerY` : Position based on visible window, which composed of
+- `left`, `right`, `centerX`, `x`, `top`, `bottom`, `centerY`, `y` : Position based on visible window, which composed of
     - Percentage of visible width/height : `'p%'`, p: 0~100
         - `'left'`(=0%), `'center'`(=50%), `'right'`(=100%)
         - `'top'`(=0%), `'center'`(=50%), `'bottom'`(=100%)
