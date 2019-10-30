@@ -93,7 +93,7 @@ scene.scene.run(key, data);
 
 ## Stop scene
 
-Stop : shutdown the Scene, clearing display list, timers, etc.
+Shutdown the Scene, clearing display list, timers, etc.
 
 ```javascript
 scene.scene.stop(key);
@@ -134,6 +134,11 @@ var isVisible = scene.scene.isVisible(key);
 | Run   | :heavy_check_mark: | :heavy_check_mark: |
 | Pause |                    | :heavy_check_mark: |
 | Sleep |                    |                    |
+
+!!! note "Pause/Sleep/Stop"
+    - Pause: Pause `update` stage.
+    - Sleep: Pause `update` stage, and set scene invisible.
+    - Stop: Shoutdown, clearing display list, timers, etc. 
 
 ## Get scene
 
