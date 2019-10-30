@@ -2442,19 +2442,6 @@
     View port
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#world-coordinates" class="md-nav__link">
-    World coordinates
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
           <li class="md-nav__item">
@@ -2520,6 +2507,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#world-coordinates" class="md-nav__link">
+    World coordinates
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#set-background-color" class="md-nav__link">
     Set background color
   </a>
@@ -2529,13 +2523,6 @@
           <li class="md-nav__item">
   <a href="#ignore-game-object" class="md-nav__link">
     Ignore game object
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-world-position" class="md-nav__link">
-    Get world position
   </a>
   
 </li>
@@ -4770,19 +4757,6 @@
     View port
   </a>
   
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#world-coordinates" class="md-nav__link">
-    World coordinates
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
           <li class="md-nav__item">
@@ -4848,6 +4822,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#world-coordinates" class="md-nav__link">
+    World coordinates
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#set-background-color" class="md-nav__link">
     Set background color
   </a>
@@ -4857,13 +4838,6 @@
           <li class="md-nav__item">
   <a href="#ignore-game-object" class="md-nav__link">
     Ignore game object
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#get-world-position" class="md-nav__link">
-    Get world position
   </a>
   
 </li>
@@ -4988,28 +4962,6 @@
 </ul>
 </li>
 </ul>
-<h4 id="world-coordinates">World coordinates<a class="headerlink" href="#world-coordinates" title="Permanent link">&para;</a></h4>
-<ul>
-<li>World view, a <a href="../geom-rectangle/">rectangle object</a>
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">worldView</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">worldView</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">worldView</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">worldView</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">width</span> <span class="o">=</span> <span class="nx">worldView</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>  <span class="c1">// displayWidth</span>
-<span class="kd">var</span> <span class="nx">height</span> <span class="o">=</span> <span class="nx">worldView</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span> <span class="c1">// displayHeight</span>
-<span class="kd">var</span> <span class="nx">left</span> <span class="o">=</span> <span class="nx">worldView</span><span class="p">.</span><span class="nx">left</span><span class="p">;</span>  <span class="c1">// x</span>
-<span class="kd">var</span> <span class="nx">right</span> <span class="o">=</span> <span class="nx">worldView</span><span class="p">.</span><span class="nx">right</span><span class="p">;</span>  <span class="c1">// x + width</span>
-<span class="kd">var</span> <span class="nx">top</span> <span class="o">=</span> <span class="nx">worldView</span><span class="p">.</span><span class="nx">top</span><span class="p">;</span>  <span class="c1">// y</span>
-<span class="kd">var</span> <span class="nx">bottom</span> <span class="o">=</span> <span class="nx">worldView</span><span class="p">.</span><span class="nx">bottom</span><span class="p">;</span>  <span class="c1">// y + height</span>
-<span class="kd">var</span> <span class="nx">centerX</span> <span class="o">=</span> <span class="nx">worldView</span><span class="p">.</span><span class="nx">centerX</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">centerY</span> <span class="o">=</span> <span class="nx">worldView</span><span class="p">.</span><span class="nx">centerY</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">isInside</span> <span class="o">=</span> <span class="nx">worldView</span><span class="p">.</span><span class="nx">contains</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">randPoint</span> <span class="o">=</span> <span class="nx">worldView</span><span class="p">.</span><span class="nx">getRandomPoint</span><span class="p">(</span><span class="nx">point</span><span class="p">);</span> <span class="c1">// point: {x, y}</span>
-</pre></div></li>
-<li>Middle point
-    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">midPoint</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">midPoint</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
-</pre></div></li>
-</ul>
 <h3 id="zoom">Zoom<a class="headerlink" href="#zoom" title="Permanent link">&para;</a></h3>
 <ul>
 <li>Set
@@ -5118,6 +5070,37 @@ An invisible camera will not render anything and will skip input tests.</p>
 <span class="c1">// var out = camera.getBounds(out);</span>
 </pre></div></li>
 </ul>
+<h3 id="world-coordinates">World coordinates<a class="headerlink" href="#world-coordinates" title="Permanent link">&para;</a></h3>
+<ul>
+<li>World view, a <a href="../geom-rectangle/">rectangle object</a>
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">worldView</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">worldView</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">worldView</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">worldView</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">width</span> <span class="o">=</span> <span class="nx">worldView</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>  <span class="c1">// displayWidth</span>
+<span class="kd">var</span> <span class="nx">height</span> <span class="o">=</span> <span class="nx">worldView</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span> <span class="c1">// displayHeight</span>
+<span class="kd">var</span> <span class="nx">left</span> <span class="o">=</span> <span class="nx">worldView</span><span class="p">.</span><span class="nx">left</span><span class="p">;</span>  <span class="c1">// x</span>
+<span class="kd">var</span> <span class="nx">right</span> <span class="o">=</span> <span class="nx">worldView</span><span class="p">.</span><span class="nx">right</span><span class="p">;</span>  <span class="c1">// x + width</span>
+<span class="kd">var</span> <span class="nx">top</span> <span class="o">=</span> <span class="nx">worldView</span><span class="p">.</span><span class="nx">top</span><span class="p">;</span>  <span class="c1">// y</span>
+<span class="kd">var</span> <span class="nx">bottom</span> <span class="o">=</span> <span class="nx">worldView</span><span class="p">.</span><span class="nx">bottom</span><span class="p">;</span>  <span class="c1">// y + height</span>
+<span class="kd">var</span> <span class="nx">centerX</span> <span class="o">=</span> <span class="nx">worldView</span><span class="p">.</span><span class="nx">centerX</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">centerY</span> <span class="o">=</span> <span class="nx">worldView</span><span class="p">.</span><span class="nx">centerY</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">isInside</span> <span class="o">=</span> <span class="nx">worldView</span><span class="p">.</span><span class="nx">contains</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">randPoint</span> <span class="o">=</span> <span class="nx">worldView</span><span class="p">.</span><span class="nx">getRandomPoint</span><span class="p">(</span><span class="nx">point</span><span class="p">);</span> <span class="c1">// point: {x, y}</span>
+</pre></div></li>
+<li>Middle point
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">midPoint</span><span class="p">.</span><span class="nx">x</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">midPoint</span><span class="p">.</span><span class="nx">y</span><span class="p">;</span>
+</pre></div></li>
+<li>Get world position
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">getWorldPoint</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+<span class="c1">// var out = camera.getWorldPoint(x, y, out);</span>
+</pre></div><ul>
+<li><code>x</code> , <code>y</code> : Position of camera.</li>
+<li><code>out</code> : World position <code>{x, y}</code></li>
+<li>Works for zoom of 1 with any resolution, but <strong>resolution &gt; 1 and zoom !== 1 breaks</strong></li>
+</ul>
+</li>
+</ul>
 <h3 id="set-background-color">Set background color<a class="headerlink" href="#set-background-color" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="nx">camera</span><span class="p">.</span><span class="nx">setBackgroundColor</span><span class="p">(</span><span class="nx">color</span><span class="p">);</span>
 </pre></div>
@@ -5135,19 +5118,6 @@ An invisible camera will not render anything and will skip input tests.</p>
 </ul>
 </li>
 </ul>
-<h3 id="get-world-position">Get world position<a class="headerlink" href="#get-world-position" title="Permanent link">&para;</a></h3>
-<div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">getWorldPoint</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
-<span class="c1">// var out = camera.getWorldPoint(x, y, out);</span>
-</pre></div>
-
-<ul>
-<li><code>x</code> , <code>y</code> : Position of camera.</li>
-<li><code>out</code> : World position <code>{x, y}</code></li>
-</ul>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Works for zoom of 1 with any resolution, but <strong>resolution &gt; 1 and zoom !== 1 breaks</strong></p>
-</div>
 <h3 id="get-cameras-below-pointer">Get cameras below pointer<a class="headerlink" href="#get-cameras-below-pointer" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">cameras</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">cameras</span><span class="p">.</span><span class="nx">getCamerasBelowPointer</span><span class="p">(</span><span class="nx">pointer</span><span class="p">);</span>
 </pre></div>

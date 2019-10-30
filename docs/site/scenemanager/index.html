@@ -479,6 +479,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#execution-flow" class="md-nav__link">
+    Execution flow
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#events" class="md-nav__link">
     Events
   </a>
@@ -4761,6 +4768,13 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#execution-flow" class="md-nav__link">
+    Execution flow
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#events" class="md-nav__link">
     Events
   </a>
@@ -4879,7 +4893,7 @@ If not running at all, it will be started.</p>
 </pre></div>
 
 <h2 id="stop-scene">Stop scene<a class="headerlink" href="#stop-scene" title="Permanent link">&para;</a></h2>
-<p>Stop : shutdown the Scene, clearing display list, timers, etc.</p>
+<p>Shutdown the Scene, clearing display list, timers, etc.</p>
 <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">stop</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 <span class="c1">// scene.scene.stop();  // stop myself</span>
 </pre></div>
@@ -4932,6 +4946,14 @@ If not running at all, it will be started.</p>
 </tr>
 </tbody>
 </table>
+<div class="admonition note">
+<p class="admonition-title">Pause/Sleep/Stop</p>
+<ul>
+<li>Pause: Pause <code>update</code> stage.</li>
+<li>Sleep: Pause <code>update</code> stage, and set scene invisible.</li>
+<li>Stop: Shoutdown, clearing display list, timers, etc. </li>
+</ul>
+</div>
 <h2 id="get-scene">Get scene<a class="headerlink" href="#get-scene" title="Permanent link">&para;</a></h2>
 <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">scene</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
 </pre></div>
@@ -4970,37 +4992,89 @@ If not running at all, it will be started.</p>
 
 <h2 id="transition">Transition<a class="headerlink" href="#transition" title="Permanent link">&para;</a></h2>
 <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">scene</span><span class="p">.</span><span class="nx">transition</span><span class="p">({</span>
-    <span class="nx">target</span><span class="o">:</span> <span class="nx">nextSceneClass</span><span class="p">,</span>   <span class="c1">// the Scene key to transition to</span>
-    <span class="c1">// data: null,            // an object containing any data you wish to be passed to the target scenes init / create methods.</span>
-    <span class="c1">// moveAbove: false,      // move the target Scene to be above this current scene before the transition starts</span>
-    <span class="c1">// moveBelow: false,      // move the target Scene to be below this current scene before the transition starts</span>
+    <span class="nx">target</span><span class="o">:</span> <span class="nx">key</span><span class="p">,</span>
+    <span class="c1">// data: null,</span>
+    <span class="c1">// moveAbove: false,</span>
+    <span class="c1">// moveBelow: false,</span>
 
-    <span class="nx">duration</span><span class="o">:</span> <span class="mi">1000</span><span class="p">,</span>           <span class="c1">// the duration, in ms</span>
+    <span class="nx">duration</span><span class="o">:</span> <span class="mi">1000</span><span class="p">,</span>
 
-    <span class="c1">// sleep: false,          // set true to sleep this scene, set false to stop this scene</span>
-    <span class="c1">// allowInput: false,     // set true to enable input system of current scene and target scene</span>
+    <span class="c1">// remove: false,</span>
+    <span class="c1">// sleep: false,</span>
+    <span class="c1">// allowInput: false,</span>
 
     <span class="c1">// onUpdate: null,</span>
     <span class="c1">// onUpdateScope: scene</span>
 <span class="p">})</span>
 </pre></div>
 
+<ul>
+<li><code>target</code> : The Scene key to transition to.</li>
+<li><code>data</code> : An object containing any data you wish to be passed to the target scenes init / create methods.</li>
+<li><code>moveAbove</code>. <code>moveBelow</code> : Move the target Scene to be above/below this current scene before the transition starts.</li>
+<li><code>duration</code> : Transition duration, in ms.</li>
+<li><code>remove</code> : Set true to remove this scene.</li>
+<li><code>sleep</code> : Set true to sleep this scene, set false to stop this scene.</li>
+<li><code>allowInput</code> : Set true to enable input system of current scene and target scene.</li>
+<li><code>onUpdate</code> ,<code>onUpdateScope</code> : Transition callback in each tick.
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">callback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">progress</span><span class="p">)</span> <span class="p">{</span>
+
+<span class="p">}</span>
+</pre></div><ul>
+<li><code>progress</code> : <code>0</code> ~ <code>1</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="execution-flow">Execution flow<a class="headerlink" href="#execution-flow" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Invoke <code>scene.scene.transition</code> method.<ul>
+<li>Current scene : <ul>
+<li>Fire <code>'transitionout'</code> event.
+    <div class="codehilite"><pre><span></span><span class="nx">fromScene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;transitionout&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">targetScene</span><span class="p">,</span> <span class="nx">duration</span><span class="p">){</span> <span class="p">});</span>
+</pre></div></li>
+<li>Run transition's <code>onUpdate</code> callback every tick.</li>
+<li>Current scene's <code>update</code> method is still running every tick.</li>
+</ul>
+</li>
+<li>Target scene :<ul>
+<li>Start target scene immediately.</li>
+<li>Fire target scene's <code>'transitionstart'</code> event. (Register this event in <code>create</code> stage)
+    <div class="codehilite"><pre><span></span><span class="nx">targetScene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;transitionstart&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fromScene</span><span class="p">,</span> <span class="nx">duration</span><span class="p">){</span> <span class="p">});</span>
+</pre></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>When transition completed.<ul>
+<li>Current scene : <ul>
+<li>Remove or sleep current scene after transition completed.</li>
+</ul>
+</li>
+<li>Target scene : <ul>
+<li>Fire target scene's <code>transitioncomplete</code> event.
+    <div class="codehilite"><pre><span></span><span class="nx">targetScene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;transitioncomplete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fromScene</span><span class="p">){</span> <span class="p">});</span>
+</pre></div></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>
 <ul>
 <li>boot
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;transitioninit&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fromScene</span><span class="p">,</span> <span class="nx">duration</span><span class="p">)){});</span>
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;transitioninit&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fromScene</span><span class="p">,</span> <span class="nx">duration</span><span class="p">)){</span> <span class="p">});</span>
 </pre></div></li>
 <li>start
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;transitionstart&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fromScene</span><span class="p">,</span> <span class="nx">duration</span><span class="p">){});</span>
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;transitionstart&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fromScene</span><span class="p">,</span> <span class="nx">duration</span><span class="p">){</span> <span class="p">});</span>
 </pre></div></li>
 <li>transition-out
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;transitionout&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">targetScene</span><span class="p">){});</span>
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;transitionout&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">targetScene</span><span class="p">){</span> <span class="p">});</span>
 </pre></div></li>
 <li>complete
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;transitioncomplete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">scene</span><span class="p">){});</span>
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;transitioncomplete&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fromScene</span><span class="p">){</span> <span class="p">});</span>
 </pre></div></li>
 <li>wake : wake-up target scene if it was previously asleep
-    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;transitionwake&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fromScene</span><span class="p">,</span> <span class="nx">duration</span><span class="p">){});</span>
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">events</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;transitionwake&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">fromScene</span><span class="p">,</span> <span class="nx">duration</span><span class="p">){</span> <span class="p">});</span>
 </pre></div></li>
 </ul>
                 
