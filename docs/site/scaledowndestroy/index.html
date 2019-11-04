@@ -4683,12 +4683,18 @@
 <ul>
 <li>Scale down width and height
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">scale</span> <span class="o">=</span> <span class="nx">scaleDownDestroy</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">duration</span><span class="p">);</span>
-</pre></div></li>
+<span class="c1">// var scale = scaleDownDestroy(gameObject, duration, undefined, ease);</span>
+</pre></div><ul>
+<li><code>ease</code> : <a href="tween.md/#ease-equations">Ease function</a>, default is <code>'Linear'</code>.</li>
+</ul>
+</li>
 <li>Scale down width only
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">scale</span> <span class="o">=</span> <span class="nx">scaleDownDestroy</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">duration</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">);</span>
+<span class="c1">// var scale = scaleDownDestroy(gameObject, duration, &#39;x&#39;, ease);</span>
 </pre></div></li>
 <li>Scale down height only
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">scale</span> <span class="o">=</span> <span class="nx">scaleDownDestroy</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">duration</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">);</span>
+<span class="c1">// var scale = scaleDownDestroy(gameObject, duration, &#39;y&#39;, ease);</span>
 </pre></div></li>
 </ul>
 <h3 id="events">Events<a class="headerlink" href="#events" title="Permanent link">&para;</a></h3>

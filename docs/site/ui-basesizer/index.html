@@ -4888,13 +4888,33 @@
 </ul>
 <h3 id="drag-top-most-sizer">Drag top-most sizer<a class="headerlink" href="#drag-top-most-sizer" title="Permanent link">&para;</a></h3>
 <ul>
-<li>Draggable
+<li>Draggable child<ul>
+<li>Enable
+    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">setDraggable</span><span class="p">(</span><span class="nx">child</span><span class="p">);</span>
+<span class="c1">// sizer.setDraggable(child, true)</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">setDraggable</span><span class="p">(</span><span class="nx">elementName</span><span class="p">);</span>
+<span class="c1">// sizer.setDraggable(elementName, true)</span>
+</pre></div></li>
+<li>Disable
+    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">setDraggable</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</pre></div>
+    or
+    <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">setDraggable</span><span class="p">(</span><span class="nx">elementName</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+</li>
+<li>Draggable sizer object<ul>
+<li>Enable
     <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">setDraggable</span><span class="p">();</span>
 <span class="c1">// sizer.setDraggable(true);</span>
 </pre></div></li>
-<li>Disable
+<li>Disalbe
     <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">setDraggable</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
 </pre></div></li>
+</ul>
+</li>
 </ul>
 <h3 id="pin-game-object">Pin game object<a class="headerlink" href="#pin-game-object" title="Permanent link">&para;</a></h3>
 <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">pin</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>

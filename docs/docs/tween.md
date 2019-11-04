@@ -192,13 +192,34 @@ var tween = scene.tweens.add({
 - `paused` : Does the tween start in a paused state, or playing?
 - `useFrames` : Use frames or milliseconds?
 - `props` : The properties being tweened by the tween
-- `onActive` : 
-- `onStart` : Callback which fired when tween task started
+- `onActive` : Tween becomes active within the Tween Manager.
+    ```javascript
+    function(tween, targets) { }
+    ```
+- `onStart` : A tween starts.
+    ```javascript
+    function(tween, targets) { }
+    ```
 - `onUpdate` : Callback which fired when tween task updated
-- `onComplete` : Callback which fired when tween task done
-- `onYoyo` : Callback which fired when tween reversed (yoyo)
-- `onLoop` : 
-- `onRepeat` : Callback which fired when repeat started
+    ```javascript
+    function(tween, targets) { }
+    ```
+- `onComplete` : Tween completes or is stopped.
+    ```javascript
+    function(tween, targets) { }
+    ```
+- `onYoyo` : A tween property yoyos.
+    ```javascript
+    function(tween, key, targets) { }
+    ```
+- `onLoop` : A tween loops, after any loop delay expires.
+    ```javascript
+    function(tween, targets) { }
+    ```
+- `onRepeat` : A tween property repeats, after any repeat delay expires.
+    ```javascript
+    function(tween, targets) { }
+    ```
 
 #### Ease equations
 
@@ -341,7 +362,7 @@ scene.tweens.timeScale = timescale;
 
     }, scope);
     ```
-- A tween property yoyos
+- A tween property yoyos.
     ```javascript
     tween.on('yoyo', function(tween, key, targets){
 

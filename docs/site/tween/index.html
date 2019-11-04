@@ -5081,13 +5081,27 @@
 <li><code>paused</code> : Does the tween start in a paused state, or playing?</li>
 <li><code>useFrames</code> : Use frames or milliseconds?</li>
 <li><code>props</code> : The properties being tweened by the tween</li>
-<li><code>onActive</code> : </li>
-<li><code>onStart</code> : Callback which fired when tween task started</li>
-<li><code>onUpdate</code> : Callback which fired when tween task updated</li>
-<li><code>onComplete</code> : Callback which fired when tween task done</li>
-<li><code>onYoyo</code> : Callback which fired when tween reversed (yoyo)</li>
-<li><code>onLoop</code> : </li>
-<li><code>onRepeat</code> : Callback which fired when repeat started</li>
+<li><code>onActive</code> : Tween becomes active within the Tween Manager.
+    <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">targets</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+</pre></div></li>
+<li><code>onStart</code> : A tween starts.
+    <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">targets</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+</pre></div></li>
+<li><code>onUpdate</code> : Callback which fired when tween task updated
+    <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">targets</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+</pre></div></li>
+<li><code>onComplete</code> : Tween completes or is stopped.
+    <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">targets</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+</pre></div></li>
+<li><code>onYoyo</code> : A tween property yoyos.
+    <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">targets</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+</pre></div></li>
+<li><code>onLoop</code> : A tween loops, after any loop delay expires.
+    <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">targets</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+</pre></div></li>
+<li><code>onRepeat</code> : A tween property repeats, after any repeat delay expires.
+    <div class="codehilite"><pre><span></span><span class="kd">function</span><span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">targets</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+</pre></div></li>
 </ul>
 <h4 id="ease-equations">Ease equations<a class="headerlink" href="#ease-equations" title="Permanent link">&para;</a></h4>
 <ul>
@@ -5207,7 +5221,7 @@
 
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
 </pre></div></li>
-<li>A tween property yoyos
+<li>A tween property yoyos.
     <div class="codehilite"><pre><span></span><span class="nx">tween</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;yoyo&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tween</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">targets</span><span class="p">){</span>
 
 <span class="p">},</span> <span class="nx">scope</span><span class="p">);</span>
