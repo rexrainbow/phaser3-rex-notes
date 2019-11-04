@@ -135,16 +135,6 @@ sizer.pushIntoBounds(bounds);
 
 ### Drag top-most sizer
 
-- Draggable sizer object
-    - Enable
-        ```javascript
-        sizer.setDraggable();
-        // sizer.setDraggable(true);
-        ```
-    - Disalbe
-        ```javascript
-        sizer.setDraggable(false);
-        ```
 - Draggable child
     - Enable
         ```javascript
@@ -164,6 +154,16 @@ sizer.pushIntoBounds(bounds);
         ```javascript
         sizer.setDraggable(elementName, false);
         ```
+- Draggable sizer object
+    - Enable
+        ```javascript
+        sizer.setDraggable();
+        // sizer.setDraggable(true);
+        ```
+    - Disalbe
+        ```javascript
+        sizer.setDraggable(false);
+        ```        
 
 ### Pin game object
 
