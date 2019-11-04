@@ -1,7 +1,5 @@
 var SetDraggable = function (senser, draggable) {
-    debugger
     var senserType = typeof (senser);
-
     if (senserType === 'string') {
         senser = this.getElement(senser);
     } else if ((senser === undefined) || (senserType != 'object')) {
@@ -11,7 +9,6 @@ var SetDraggable = function (senser, draggable) {
     if (draggable === undefined) {
         draggable = true;
     }
-
 
     if (senser.input && senser.input.hasOwnProperty('draggable')) {
         // Draggable is already registered
