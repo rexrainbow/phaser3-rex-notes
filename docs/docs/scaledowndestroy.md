@@ -18,14 +18,18 @@ Scale down (i.e. ease scaleX, scaleY to `0`) game object then destroy it.
 - Scale down width and height
     ```javascript
     var scale = scaleDownDestroy(gameObject, duration);
+    // var scale = scaleDownDestroy(gameObject, duration, undefined, ease);
     ```
+    - `ease` : [Ease function](tween.md/#ease-equations), default is `'Linear'`.
 - Scale down width only
     ```javascript
     var scale = scaleDownDestroy(gameObject, duration, 'x');
+    // var scale = scaleDownDestroy(gameObject, duration, 'x', ease);
     ```
 - Scale down height only
     ```javascript
     var scale = scaleDownDestroy(gameObject, duration, 'y');
+    // var scale = scaleDownDestroy(gameObject, duration, 'y', ease);
     ```
 
 ### Events

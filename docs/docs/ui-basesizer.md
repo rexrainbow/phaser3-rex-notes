@@ -135,15 +135,35 @@ sizer.pushIntoBounds(bounds);
 
 ### Drag top-most sizer
 
-- Draggable
-    ```javascript
-    sizer.setDraggable();
-    // sizer.setDraggable(true);
-    ```
-- Disable
-    ```javascript
-    sizer.setDraggable(false);
-    ```
+- Draggable sizer object
+    - Enable
+        ```javascript
+        sizer.setDraggable();
+        // sizer.setDraggable(true);
+        ```
+    - Disalbe
+        ```javascript
+        sizer.setDraggable(false);
+        ```
+- Draggable child
+    - Enable
+        ```javascript
+        sizer.setDraggable(child);
+        // sizer.setDraggable(child, true)
+        ```
+        or
+        ```javascript
+        sizer.setDraggable(elementName);
+        // sizer.setDraggable(elementName, true)
+        ```
+    - Disable
+        ```javascript
+        sizer.setDraggable(child, false);
+        ```
+        or
+        ```javascript
+        sizer.setDraggable(elementName, false);
+        ```
 
 ### Pin game object
 
