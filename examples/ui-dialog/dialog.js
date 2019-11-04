@@ -79,6 +79,7 @@ class Demo extends Phaser.Scene {
                 mode: 'release'
             }
         })
+            .setDraggable('background')   // Draggable-background
             .layout()
             // .drawBounds(this.add.graphics(), 0xff0000)
             .popUp(1000);

@@ -90,26 +90,14 @@ class RoundRectangle extends Phaser.GameObjects.Shape {
         return this.geom.width;
     }
     set width(value) {
-        // Change width value
-        if (this.width === value) {
-            return;
-        }
-        this.geom.width = value;
-        this.updateDisplayOrigin();
-        this.updateData();
+        this.resize(value, this.height);
     }
 
     get height() {
         return this.geom.height;
     }
     set height(value) {
-        // Change height value
-        if (this.height === value) {
-            return;
-        }
-        this.geom.height = value;
-        this.updateDisplayOrigin();
-        this.updateData();
+        this.resize(this.width, value);
     }
 
     resize(width, height) {
@@ -123,6 +111,12 @@ class RoundRectangle extends Phaser.GameObjects.Shape {
         this.geom.width = width
         this.updateDisplayOrigin();
         this.updateData();
+
+        var input = this.input;
+        if (input && !input.customHitArea) {
+            input.hitArea.width = width;
+            input.hitArea.height = height;
+        }
         return this;
     }
 

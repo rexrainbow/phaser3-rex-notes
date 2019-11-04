@@ -1,16 +1,26 @@
-var SetDraggable = function (draggable) {
+var SetDraggable = function (senser, draggable) {
+    debugger
+    var senserType = typeof (senser);
+
+    if (senserType === 'string') {
+        senser = this.getElement(senser);
+    } else if ((senser === undefined) || (senserType != 'object')) {
+        draggable = senser;
+        senser = this;
+    }
     if (draggable === undefined) {
         draggable = true;
     }
 
-    if (this.input && this.input.hasOwnProperty('draggable')) {
+
+    if (senser.input && senser.input.hasOwnProperty('draggable')) {
         // Draggable is already registered
-        this.input.draggable = draggable;
+        senser.input.draggable = draggable;
     } else if (draggable) {
         // Register draggable
-        this.setInteractive();
-        this.scene.input.setDraggable(this);
-        this.on('drag', onDrag, this);
+        senser.setInteractive();
+        senser.scene.input.setDraggable(senser);
+        senser.on('drag', onDrag, this);
     } else {
         // Not draggable and draggable is not registered yet, do nothing
     }
