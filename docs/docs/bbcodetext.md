@@ -100,6 +100,12 @@ Default style
         mode: 'none'     // 0|'none'|1|'word'|2|'char'|'character'
         width: null
     },
+    metrics: false
+    // metrics: {
+    //     ascent: 0,
+    //     descent: 0,
+    //     fontSize: 0
+    // }    
     // resolution: 1
 }
 ```

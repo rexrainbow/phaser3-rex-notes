@@ -74,6 +74,12 @@ Properties of a tag
         thinkness: 3,
         offset: -1
     },
+    metrics: false
+    // metrics: {
+    //     ascent: 0,
+    //     descent: 0,
+    //     fontSize: 0
+    // }    
     // area: key,
 }
 ```
