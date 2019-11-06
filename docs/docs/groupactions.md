@@ -9,7 +9,9 @@ Set properties of game objects, built-in methods of phaser.
 ### Call function
 
 ```javascript
-Phaser.Actions.Call(gameObjects, callback, context);
+Phaser.Actions.Call(gameObjects, function(gameObject) {
+
+}, scope);
 ```
 
 ### Set any property
@@ -109,7 +111,7 @@ Phaser.Actions.GridAlign(gameObjects, {
     - `8`, or `Phaser.Display.Align.RIGHT_CENTER`
     - `9`, or `Phaser.Display.Align.RIGHT_BOTTOM`
     - `10`, or `Phaser.Display.Align.BOTTOM_LEFT`
-    - `11`, or `Phaser.Display.Align.BOTTOM_CENTER`    
+    - `11`, or `Phaser.Display.Align.BOTTOM_CENTER`
     - `12`, or `Phaser.Display.Align.BOTTOM_RIGHT`
 - `x`, `y` : Position of first item.
 
