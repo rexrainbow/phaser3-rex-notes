@@ -163,7 +163,7 @@ sizer.pushIntoBounds(bounds);
     - Disalbe
         ```javascript
         sizer.setDraggable(false);
-        ```        
+        ```
 
 ### Pin game object
 
@@ -214,6 +214,12 @@ For example, anchor game object's left bound to viewport's left+10, and centerY 
     left: 'left+10',
     centerY: 'center'
 }
+```
+
+### Is in touching
+
+```javascript
+var isTouching = sizer.isInTouching();
 ```
 
 ### Other properties
