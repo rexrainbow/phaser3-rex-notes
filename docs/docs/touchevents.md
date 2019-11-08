@@ -452,3 +452,18 @@ Touch-position = (current-touch-position * smooth-factor) + (previous-touch-posi
     ```javascript
     scene.input.removeDebug(gameObject);
     ```
+
+### Poll rate
+
+- Poll when touches moved, or updated. Default behavior.
+    ```javascript
+    scene.input.setPollOnMove();
+    ```
+- Poll every tick.
+    ```javascript
+    scene.input.setPollAlways();
+    ```
+- Set poll rate.
+    ```javascript
+    scene.input.setPollRate(rate);
+    ```
