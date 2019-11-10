@@ -1,5 +1,3 @@
-import IsArray from '../object/IsArray.js';
-
 var HitTest = function (scene, topOnly, gameObjects, pointers, out) {
     var inputPlugin = scene.input;
     var inputManager = inputPlugin.manager;
@@ -18,9 +16,6 @@ var HitTest = function (scene, topOnly, gameObjects, pointers, out) {
     if (pointers === undefined) {
         pointers = inputManager.pointers;
         pointersTotal = inputManager.pointersTotal;
-    }
-    if (!IsArray(pointers)) {
-        pointers = [pointers];
     }
     if (pointersTotal === undefined) {
         pointersTotal = pointers.length;
