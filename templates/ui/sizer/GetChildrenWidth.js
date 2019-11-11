@@ -20,7 +20,7 @@ var GetChildrenWidth = function (minimumMode) {
 
             if (
                 (child.rexSizer.proportion === 0) ||
-                (minimumMode && (child.rexSizer.proportion > 0))
+                (minimumMode && (!child.isRexSpace) && (child.rexSizer.proportion > 0))
             ) {
                 childWidth = (child.isRexSizer) ?
                     Math.max(child.minWidth, child.childrenWidth) :

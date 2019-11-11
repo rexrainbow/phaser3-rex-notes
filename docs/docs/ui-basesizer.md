@@ -216,6 +216,17 @@ For example, anchor game object's left bound to viewport's left+10, and centerY 
 }
 ```
 
+### Get child
+
+1. Add child
+    ```javascript
+    sizer.addChildrenMap(key, child);
+    ```
+1. Get child
+    ```javascript
+    var child = sizer.getElement(key);
+    ```
+
 ### Is in touching
 
 ```javascript

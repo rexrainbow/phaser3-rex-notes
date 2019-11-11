@@ -1,5 +1,4 @@
 import Sizer from '../sizer/Sizer.js';
-import Space from '../utils/Space.js';
 import {
     ButtonSetInteractive,
     FireEvent
@@ -43,7 +42,7 @@ class Buttons extends Sizer {
                 (buttonsAlign === 'bottom') ||
                 (buttonsAlign === 'center')
             ) {
-                this.add(Space(scene), 1, 'center', 0, false);
+                this.addSpace();
             }
 
             var button, padding;
@@ -71,7 +70,7 @@ class Buttons extends Sizer {
 
             // Add space
             if (buttonsAlign === 'center') {
-                this.add(Space(scene), 1, 'center', 0, false);
+                this.addSpace();
             }
         }
 

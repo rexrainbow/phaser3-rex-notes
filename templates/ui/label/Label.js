@@ -51,7 +51,7 @@ class Label extends Sizer {
             if (iconMask) {
                 iconMask = new DefaultMask(icon, 1); // Circle mask
                 icon.setMask(iconMask.createGeometryMask());
-                this.add(iconMask, null);
+                this.pin(iconMask);
             }
         }
 
@@ -103,7 +103,7 @@ class Label extends Sizer {
             if (actionMask) {
                 actionMask = new DefaultMask(action, 1); // Circle mask
                 icon.setMask(actionMask.createGeometryMask());
-                this.add(actionMask, null);
+                this.pin(actionMask);
             }
         }
 

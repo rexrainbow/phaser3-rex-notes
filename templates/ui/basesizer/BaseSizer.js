@@ -150,7 +150,7 @@ class Base extends Container {
         return this;
     }
 
-    addBackground(gameObject) {
+    addBackground(gameObject, childKey) {
         if (this.backgroundChildren === undefined) {
             this.backgroundChildren = [];
         }
@@ -160,6 +160,10 @@ class Base extends Container {
         var config = this.getSizerConfig(gameObject);
         config.parent = this;
         this.backgroundChildren.push(gameObject);
+
+        if (childKey !== undefined) {
+            this.addChildrenMap(childKey, gameObject)
+        }
         return this;
     }
 }

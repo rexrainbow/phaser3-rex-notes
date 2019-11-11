@@ -68,15 +68,24 @@ var containsPoints = function (rectA, rectB) {
 };
 
 var showAll = function (child, mask) {
-    child.setVisible(true).clearMask();
+    child.setVisible(true);
+    if (child.clearMask) {
+        child.clearMask();
+    }
 }
 
 var showSome = function (child, mask) {
-    child.setVisible(true).setMask(mask);
+    child.setVisible(true);
+    if (child.setMask) {
+        child.setMask(mask);
+    }
 }
 
 var showNone = function (child, mask) {
-    child.setVisible(false).clearMask();
+    child.setVisible(false);
+    if (child.clearMask) {
+        child.clearMask();
+    }
 }
 
 export default MaskChildren;

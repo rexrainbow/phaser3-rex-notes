@@ -1,6 +1,5 @@
 import Sizer from '../sizer/Sizer.js';
 import Buttons from '../buttons/Buttons.js';
-import Space from '../utils/Space.js';
 import ButtonMethods from './ButtonMethods.js';
 
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -99,7 +98,7 @@ class Dialog extends Sizer {
                 !expand &&
                 ((align === 'right') || (align === 'center'))
             ) {
-                titleSizer.add(Space(scene), 1, 'center', 0, false);
+                titleSizer.addSpace();
             }
             var padding = {
                 left: GetValue(config, 'space.titleLeft', 0),
@@ -113,7 +112,7 @@ class Dialog extends Sizer {
                 !expand &&
                 ((align === 'left') || (align === 'center'))
             ) {
-                titleSizer.add(Space(scene), 1, 'center', 0, false);
+                titleSizer.addSpace();
             }
             // Add toolbar
             titleSizer.add(toolbarSizer, 0, 'right', 0, false);

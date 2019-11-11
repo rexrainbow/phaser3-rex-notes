@@ -72,7 +72,7 @@ class GridSizer extends BaseSizer {
         return this;
     }
 
-    add(gameObject, columnIndex, rowIndex, align, paddingConfig, expand) {
+    add(gameObject, columnIndex, rowIndex, align, paddingConfig, expand, childKey) {
         super.add(gameObject);
         if (IsPlainObject(columnIndex)) {
             var config = columnIndex;
@@ -81,6 +81,7 @@ class GridSizer extends BaseSizer {
             align = GetValue(config, 'align', ALIGN_CENTER);
             paddingConfig = GetValue(config, 'padding', 0);
             expand = GetValue(config, 'expand', false);
+            childKey = GetValue(config, 'key', undefined);
         }
         if (typeof (align) === 'string') {
             align = ALIGNMODE[align];
@@ -101,6 +102,10 @@ class GridSizer extends BaseSizer {
         config.padding = GetBoundsConfig(paddingConfig);
         config.expand = expand;
         this.gridChildren[(rowIndex * this.columnCount) + columnIndex] = gameObject;
+
+        if (childKey !== undefined) {
+            this.addChildrenMap(childKey, gameObject)
+        }
         return this;
     }
 

@@ -39,7 +39,7 @@ var GetChildrenHeight = function (minimumMode) {
 
             if (
                 (child.rexSizer.proportion === 0) ||
-                (minimumMode && (child.rexSizer.proportion > 0))
+                (minimumMode && (!child.isRexSpace) && (child.rexSizer.proportion > 0))
             ) {
                 childHeight = (child.isRexSizer) ?
                     Math.max(child.minHeight, child.childrenHeight) :
