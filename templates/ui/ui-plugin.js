@@ -4,7 +4,6 @@ import RoundRectangleFactory from './roundrectangle/Factory.js';
 import BBCodeTextFactory from './bbcodetext/Factory.js';
 import TagTextFactory from './tagtext/Factory.js';
 import ContainerFactory from './container/Factory.js';
-import Space from './space/Factory.js';
 import ChartFactory from './chart/Factory.js';
 import CircleMaskImageFactory from './circlemaskimage/Factory.js';
 import NinePatchFactory from './ninepatch/Factory.js';

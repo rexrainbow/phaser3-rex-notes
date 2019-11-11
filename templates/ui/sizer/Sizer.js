@@ -3,7 +3,7 @@ import Methods from './Methods.js';
 import GetBoundsConfig from '../utils/GetBoundsConfig.js';
 import ORIENTATIONMODE from '../utils/OrientationConst.js';
 import ALIGNMODE from '../utils/AlignConst.js';
-import Space from '../space/Space.js';
+import Space from '../utils/Space.js';
 
 const IsPlainObject = Phaser.Utils.Objects.IsPlainObject;
 const GetValue = Phaser.Utils.Objects.GetValue;
@@ -110,7 +110,7 @@ class Sizer extends BaseSizer {
         if (proportion === undefined) {
             proportion = 1;
         }
-        this.add(new Space(this.scene), proportion);
+        this.add(Space(this.scene), proportion);
         return this;
     }
 
