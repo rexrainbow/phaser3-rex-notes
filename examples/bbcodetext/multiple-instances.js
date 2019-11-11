@@ -10,17 +10,34 @@ class Demo extends Phaser.Scene {
     preload() { }
 
     create() {
-        this.add.rexBBCodeText(200, 300, '[b]AAA[/b]\nBBB', {
-            fontSize: 20,
-            backgroundColor: '#333333'
+        var t1 = this.add.rexBBCodeText(100, 300, 'Hello how are you my dear friend?', {
+            fixedWidth: 200,
+            fixedHeight: 200,
+            backgroundColor: '#333333',
+            fontSize: '20px',
+            wrap: {
+                mode: 'word',
+                width: 200,
+            },
+            maxLines: 5,
         })
-            .setOrigin(0.5)
 
-        this.add.rexBBCodeText(600, 300, '[b]AAA[/b]\nBBB', {
-            fontSize: 40,
-            backgroundColor: '#333333'
+        var t2 = this.add.rexBBCodeText(500, 300, 'Hello how are you my dear friend?', {
+            fixedWidth: 200,
+            fixedHeight: 200,
+            backgroundColor: '#333333',
+            fontSize: '40px',
+            wrap: {
+                mode: 'word',
+                width: 200,
+            },
+            maxLines: 5,
         })
-            .setOrigin(0.5)
+
+        setTimeout(() => {
+            debugger
+            t1.setText('Hello how are you my dear friend? SET VIA SETTEXT')
+        }, 1500)
     }
 
     update() { }

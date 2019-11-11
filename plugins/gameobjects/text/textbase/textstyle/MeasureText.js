@@ -43,7 +43,11 @@ var MeasureText = function (textStyle) {
     context.fillStyle = '#000';
     context.fillText(textStyle.testString, 0, baseline);
 
-    var output = MEASURETEXT_RESULT;
+    var output = {
+        ascent: 0,
+        descent: 0,
+        fontSize: 0
+    };
 
     if (!context.getImageData(0, 0, width, height)) {
         output.ascent = baseline;
@@ -107,7 +111,5 @@ var MeasureText = function (textStyle) {
 
     return output;
 };
-
-var MEASURETEXT_RESULT = {};
 
 export default MeasureText;
