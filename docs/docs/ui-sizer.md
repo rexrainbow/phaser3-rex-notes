@@ -159,7 +159,9 @@ sizer.add(child, proportion, align, paddingConfig, expand, childKey);
 - `childKey` : Add this child into childMap, which could be read back by `sizer.getElement(key)`.
     - `undefined` : Don't add this child. Default value.
 
-### Add a stretchable space
+### Add space
+
+Add a stretchable space.
 
 ```javascript
 sizer.addSpace();
