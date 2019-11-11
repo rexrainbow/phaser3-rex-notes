@@ -85,7 +85,7 @@ var gridSizer = scene.rexUI.add.gridSizer(x, y, width, height, {
 or
 
 ```javascript
-var gridSizer = scene.rexUI.add.gridSizer(x, y, width, height, column, row);
+var gridSizer = scene.rexUI.add.gridSizer(x, y, width, height, column, row, childKey);
 ```
 
 - `x`, `y` : Position of this object, it is valid when this object is the top object.
@@ -102,6 +102,8 @@ var gridSizer = scene.rexUI.add.gridSizer(x, y, width, height, column, row);
 - `columnProportions`, `rowProportions` : Proportion of each column/row.
     - Number : Apply this number proportion to each column/row
     - Number array : Apply proportion of column/row through elements of this number array.
+- `childKey` : Add this child into childMap, which could be read back by `sizer.getElement(key)`.
+    - `undefined` : Don't add this child. Default value.
 
 ### Custom class
 

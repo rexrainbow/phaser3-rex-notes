@@ -3952,6 +3952,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#add-a-stretchable-space" class="md-nav__link">
+    Add a stretchable space
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#layout-children" class="md-nav__link">
     Layout children
   </a>
@@ -4705,6 +4712,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#add-a-stretchable-space" class="md-nav__link">
+    Add a stretchable space
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#layout-children" class="md-nav__link">
     Layout children
   </a>
@@ -4863,7 +4877,7 @@
 </pre></div>
 
 <p>or</p>
-<div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">proportion</span><span class="p">,</span> <span class="nx">align</span><span class="p">,</span> <span class="nx">paddingConfig</span><span class="p">,</span> <span class="nx">expand</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">proportion</span><span class="p">,</span> <span class="nx">align</span><span class="p">,</span> <span class="nx">paddingConfig</span><span class="p">,</span> <span class="nx">expand</span><span class="p">,</span> <span class="nx">childKey</span><span class="p">);</span>
 </pre></div>
 
 <ul>
@@ -4899,7 +4913,16 @@
 <li>Expand width when <code>orientation</code> is <code>1</code> (<code>top-to-bottom</code>)</li>
 </ul>
 </li>
+<li><code>childKey</code> : Add this child into childMap, which could be read back by <code>sizer.getElement(key)</code>.<ul>
+<li><code>undefined</code> : Don't add this child. Default value.</li>
 </ul>
+</li>
+</ul>
+<h3 id="add-a-stretchable-space">Add a stretchable space<a class="headerlink" href="#add-a-stretchable-space" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">addSpace</span><span class="p">();</span>
+<span class="c1">// sizer.addSpace(proportion);</span>
+</pre></div>
+
 <h3 id="layout-children">Layout children<a class="headerlink" href="#layout-children" title="Permanent link">&para;</a></h3>
 <p>Arrange position of all children.</p>
 <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">layout</span><span class="p">();</span>

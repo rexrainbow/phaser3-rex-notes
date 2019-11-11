@@ -128,7 +128,7 @@ sizer.add(child);
 or
 
 ```javascript
-sizer.add(child, proportion, align, paddingConfig, expand);
+sizer.add(child, proportion, align, paddingConfig, expand, childKey);
 ```
 
 - `child` : A game object.
@@ -156,6 +156,15 @@ sizer.add(child, proportion, align, paddingConfig, expand);
 - `expand` : Set `true` to
     - Expand height when `orientation` is `0` (`left-to-right`), or
     - Expand width when `orientation` is `1` (`top-to-bottom`)
+- `childKey` : Add this child into childMap, which could be read back by `sizer.getElement(key)`.
+    - `undefined` : Don't add this child. Default value.
+
+### Add a stretchable space
+
+```javascript
+sizer.addSpace();
+// sizer.addSpace(proportion);
+```
 
 ### Layout children
 
