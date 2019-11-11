@@ -39,10 +39,13 @@ class Demo extends Phaser.Scene {
                 reuseCellContainer: true,
             },
 
-            header: createMyLabel(this,
-                'Id', 'Score',
-                this.rexUI.add.roundRectangle(0, 0, 20, 20, 0, COLOR_DARK),
-                undefined, 30
+            header: createRowItem(this,
+                {
+                    background: this.rexUI.add.roundRectangle(0, 0, 20, 20, 0, COLOR_DARK),
+                    id: this.add.text(0, 0, 'Id'),
+                    score: this.add.text(0, 0, 'Score'),
+                    height: 30
+                }
             ),
 
             footer: this.rexUI.add.label({
@@ -71,7 +74,7 @@ class Demo extends Phaser.Scene {
                     item = cell.item,
                     index = cell.index;
                 if (cellContainer === null) {
-                    cellContainer = createMyLabel(scene);
+                    cellContainer = createRowItem(scene);
                     console.log(cell.index + ': create new cell-container');
                 } else {
                     console.log(cell.index + ': reuse cell-container');
@@ -93,26 +96,30 @@ class Demo extends Phaser.Scene {
     update() { }
 }
 
-var createMyLabel = function (scene, id, score, background, width, height) {
-    if (id === undefined) {
-        id = '';
-    }
-    if (score === undefined) {
-        score = '';
-    }
+const GetValue = Phaser.Utils.Objects.GetValue;
+var createRowItem = function (scene, config) {
+    var background = GetValue(config, 'background', undefined);
     if (background === undefined) {
         background = scene.rexUI.add.roundRectangle(0, 0, 20, 20, 0).setStrokeStyle(2, COLOR_DARK)
     }
+    var id = GetValue(config, 'id', undefined);
+    if (id === undefined) {
+        id = scene.add.text(0, 0, id);
+    }
+    var score = GetValue(config, 'score', undefined);
+    if (score === undefined) {
+        score = scene.add.text(0, 0, score);
+    }
     return scene.rexUI.add.sizer({
-        width: width,
-        height: height,
+        width: GetValue(config, 'width', undefined),
+        height: GetValue(config, 'height', undefined),
         orientation: 'x',
     })
         .addBackground(
             background
         )
         .add(
-            scene.add.text(0, 0, id),    // child
+            id,    // child
             0,                           // proportion, fixed width
             'center',                    // align vertically
             { left: 10 },                // padding
@@ -121,7 +128,7 @@ var createMyLabel = function (scene, id, score, background, width, height) {
         )
         .addSpace()
         .add(
-            scene.add.text(0, 0, score), // child
+            score, // child
             0,                           // proportion, fixed width
             'center',                    // align vertically
             { right: 10 },               // padding
