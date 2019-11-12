@@ -34,9 +34,9 @@ class Demo extends Phaser.Scene {
             maxLines: 5,
         })
 
-        setTimeout(function () {
+        this.time.delayedCall(1500, function () {
             t1.setText('Hello how are you my dear friend? SET VIA SETTEXT')
-        }, 1500)
+        });
     }
 
     update() { }
