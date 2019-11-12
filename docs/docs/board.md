@@ -49,7 +49,7 @@ var game = new Phaser.Game(config);
             y: 0,
             cellWidth: 0,
             cellHeight: 0,
-            type: 'orthogonal'  // 'orthogonal'|'isometric'|'staggered'
+            type: 'orthogonal'  // 'orthogonal'|'isometric'
         },
         width: 0,
         height: 0
@@ -94,7 +94,7 @@ Configuration
                     y: 0,
                     cellWidth: 0,
                     cellHeight: 0,
-                    type: 'orthogonal'  // 'orthogonal'|'isometric'|'staggered'
+                    type: 'orthogonal'  // 'orthogonal'|'isometric'
                 },
                 width: 0,
                 height: 0
