@@ -180,7 +180,7 @@ sizer.add(child, paddingConfig, childKey);
         ```
 - `childKey` : Add this child into childMap, which could be read back by `sizer.getElement(key)`.
     - `undefined` : Don't add this child. Default value.
-    - `items` : Reserved key, which is used to store all children item.
+    - `items` : Reserved key, for all children item.
 
 ### Add new line
 

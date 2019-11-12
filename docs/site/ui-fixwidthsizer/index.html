@@ -3997,6 +3997,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#get-element" class="md-nav__link">
+    Get element
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" class="md-nav__link">
     Other properties
   </a>
@@ -4733,6 +4740,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#get-element" class="md-nav__link">
+    Get element
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#other-properties" class="md-nav__link">
     Other properties
   </a>
@@ -4915,7 +4929,7 @@
 </pre></div>
 
 <p>or</p>
-<div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">paddingConfig</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">child</span><span class="p">,</span> <span class="nx">paddingConfig</span><span class="p">,</span> <span class="nx">childKey</span><span class="p">);</span>
 </pre></div>
 
 <ul>
@@ -4930,6 +4944,11 @@
     <span class="nx">bottom</span><span class="o">:</span> <span class="mi">0</span>
 <span class="p">}</span>
 </pre></div></li>
+</ul>
+</li>
+<li><code>childKey</code> : Add this child into childMap, which could be read back by <code>sizer.getElement(key)</code>.<ul>
+<li><code>undefined</code> : Don't add this child. Default value.</li>
+<li><code>items</code> : Reserved key, for all children item.</li>
 </ul>
 </li>
 </ul>
@@ -4953,6 +4972,18 @@
 </pre></div></li>
 <li>Remove all children
     <div class="codehilite"><pre><span></span><span class="nx">sizer</span><span class="p">.</span><span class="nx">clear</span><span class="p">(</span><span class="nx">destroyChild</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+<h3 id="get-element">Get element<a class="headerlink" href="#get-element" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get element<ul>
+<li>All children items
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">items</span> <span class="o">=</span> <span class="nx">label</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;items&#39;</span><span class="p">);</span>
+</pre></div></li>
+</ul>
+</li>
+<li>Get by name
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">gameObject</span> <span class="o">=</span> <span class="nx">label</span><span class="p">.</span><span class="nx">getElement</span><span class="p">(</span><span class="s1">&#39;#&#39;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">);</span>
 </pre></div></li>
 </ul>
 <h3 id="other-properties">Other properties<a class="headerlink" href="#other-properties" title="Permanent link">&para;</a></h3>
