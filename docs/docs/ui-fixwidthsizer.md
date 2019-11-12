@@ -163,7 +163,7 @@ sizer.add(child);
 or
 
 ```javascript
-sizer.add(child, paddingConfig);
+sizer.add(child, paddingConfig, childKey);
 ```
 
 - `child` : A game object
@@ -178,6 +178,9 @@ sizer.add(child, paddingConfig);
             bottom: 0
         }
         ```
+- `childKey` : Add this child into childMap, which could be read back by `sizer.getElement(key)`.
+    - `undefined` : Don't add this child. Default value.
+    - `items` : Reserved key, which is used to store all children item.
 
 ### Add new line
 
@@ -213,7 +216,7 @@ sizer.layout();
 ### Get element
 
 - Get element
-    - children
+    - All children items
         ```javascript
         var items = label.getElement('items');
         ```

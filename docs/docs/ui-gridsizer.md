@@ -85,7 +85,7 @@ var gridSizer = scene.rexUI.add.gridSizer(x, y, width, height, {
 or
 
 ```javascript
-var gridSizer = scene.rexUI.add.gridSizer(x, y, width, height, column, row, childKey);
+var gridSizer = scene.rexUI.add.gridSizer(x, y, width, height, column, row);
 ```
 
 - `x`, `y` : Position of this object, it is valid when this object is the top object.
@@ -102,8 +102,6 @@ var gridSizer = scene.rexUI.add.gridSizer(x, y, width, height, column, row, chil
 - `columnProportions`, `rowProportions` : Proportion of each column/row.
     - Number : Apply this number proportion to each column/row
     - Number array : Apply proportion of column/row through elements of this number array.
-- `childKey` : Add this child into childMap, which could be read back by `sizer.getElement(key)`.
-    - `undefined` : Don't add this child. Default value.
 
 ### Custom class
 
@@ -139,7 +137,7 @@ gridSizer.add(child, columnIndex, rowIndex);
 or
 
 ```javascript
-gridSizer.add(child, columnIndex, rowIndex, align, paddingConfig, expand);
+gridSizer.add(child, columnIndex, rowIndex, align, paddingConfig, expand, childKey);
 ```
 
 - `child` : A game object
@@ -162,6 +160,8 @@ gridSizer.add(child, columnIndex, rowIndex, align, paddingConfig, expand);
         }
         ```
 - `expand` : Set `true` to height and width.
+- `childKey` : Add this child into childMap, which could be read back by `sizer.getElement(key)`.
+    - `undefined` : Don't add this child. Default value.
 
 ### Proportion
 
