@@ -93,7 +93,7 @@ class FixWidthSizer extends BaseSizer {
 
         if (IsPlainObject(paddingConfig)) {
             var config = paddingConfig;
-            paddingConfig = GetValue(config, 'paddingConfig', undefined);
+            paddingConfig = GetValue(config, 'padding', 0);
             childKey = GetValue(config, 'key', undefined);
         }
         if (paddingConfig === undefined) {
