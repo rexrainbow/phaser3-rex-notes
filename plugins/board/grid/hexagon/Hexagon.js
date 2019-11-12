@@ -1,8 +1,7 @@
 import Hexagon from '../../../utils/grid/hexagon/Hexagon.js';
 import SaveOrigin from '../utils/SaveOrigin.js';
 import RestoreOrigin from '../utils/RestoreOrigin.js';
-import GetNeighborTileX from '../../../utils/grid/hexagon/GetNeighborTileX.js';
-import GetNeighborTileY from '../../../utils/grid/hexagon/GetNeighborTileY.js';
+import GetNeighborTileXY from '../../../utils/grid/quad/GetNeighborTileXY.js';
 import GetNeighborTileDirection from '../../../utils/grid/hexagon/GetNeighborTileDirection.js';
 import GetOppositeDirection from '../../../utils/grid/hexagon/GetOppositeDirection.js';
 import Offset from '../../../utils/grid/hexagon/Offset.js';
@@ -47,8 +46,7 @@ const HALFDIR = [0, 1, 2];
 var methods = {
     saveOrigin: SaveOrigin,
     restoreOrigin: RestoreOrigin,
-    getNeighborTileX: GetNeighborTileX,
-    getNeighborTileY: GetNeighborTileY,
+    getNeighborTileXY: GetNeighborTileXY,
     getNeighborTileDirection: GetNeighborTileDirection,
     getOppositeDirection: GetOppositeDirection,
     offset: Offset,

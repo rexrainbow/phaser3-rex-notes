@@ -1,7 +1,7 @@
 // Not included in Base Gird object.
 // Delta tileXY to direction
 
-import NeighborToDeltaTileXY from './NeighborToDeltaTileXY.js';
+import DirectionToDeltaTileXY from './DirectionToDeltaTileXY.js';
 
 var ReverseDirMap = function (dirMap) {
     var out = {},
@@ -20,20 +20,20 @@ var ReverseDirMap = function (dirMap) {
 
 const Neighbors = [
     [
-        ReverseDirMap(NeighborToDeltaTileXY[0][0]),
-        ReverseDirMap(NeighborToDeltaTileXY[0][1])
+        ReverseDirMap(DirectionToDeltaTileXY[0][0]),
+        ReverseDirMap(DirectionToDeltaTileXY[0][1])
     ],
     [
-        ReverseDirMap(NeighborToDeltaTileXY[1][0]),
-        ReverseDirMap(NeighborToDeltaTileXY[1][1])
+        ReverseDirMap(DirectionToDeltaTileXY[1][0]),
+        ReverseDirMap(DirectionToDeltaTileXY[1][1])
     ],
     [
-        ReverseDirMap(NeighborToDeltaTileXY[2][0]),
-        ReverseDirMap(NeighborToDeltaTileXY[2][1])
+        ReverseDirMap(DirectionToDeltaTileXY[2][0]),
+        ReverseDirMap(DirectionToDeltaTileXY[2][1])
     ],
     [
-        ReverseDirMap(NeighborToDeltaTileXY[3][0]),
-        ReverseDirMap(NeighborToDeltaTileXY[3][1])
+        ReverseDirMap(DirectionToDeltaTileXY[3][0]),
+        ReverseDirMap(DirectionToDeltaTileXY[3][1])
     ]
 ];
 

@@ -15,15 +15,10 @@ var GetNeighborTileXY = function (srcTileXY, directions, out) {
             out = globTileXY;
         }
 
-        var tileX = this.grid.getNeighborTileX(srcTileXY.x, srcTileXY.y, dir);
-        var tileY = this.grid.getNeighborTileY(srcTileXY.x, srcTileXY.y, dir);
-        var wrapTileX = this.getWrapTileX(tileX, tileY);
-        var wrapTileY = this.getWrapTileY(tileX, tileY);
-        if ((wrapTileX == null) || (wrapTileY == null)) {
+        this.grid.getNeighborTileXY(srcTileXY.x, srcTileXY.y, dir, out);
+        this.getWrapTileXY(out.x, out.y, out);
+        if ((out.x == null) || (out.y == null)) {
             out = null;
-        } else {
-            out.x = wrapTileX;
-            out.y = wrapTileY;
         }
         return out;
 

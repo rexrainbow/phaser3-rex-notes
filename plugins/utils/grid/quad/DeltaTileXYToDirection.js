@@ -4,7 +4,7 @@
 import {
     OrthogonalMap,
     StaggeredMap
-} from './NeighborToDeltaTileXY.js';
+} from './DistanceToDeltaTileXY.js';
 
 var ReverseDirMap = function (dirMap) {
     var out = {},
@@ -23,13 +23,8 @@ var ReverseDirMap = function (dirMap) {
 
 const OrthogonalMapOut = ReverseDirMap(OrthogonalMap);
 const IsometricMapOut = OrthogonalMapOut;
-const StaggeredMapOut = [
-    ReverseDirMap(StaggeredMap[0]),
-    ReverseDirMap(StaggeredMap[1])
-];
 
 export {
     OrthogonalMapOut as OrthogonalMap,
-    IsometricMapOut as IsometricMap,
-    StaggeredMapOut as StaggeredMap
+    IsometricMapOut as IsometricMap
 };

@@ -34,8 +34,7 @@ import GetAllChess from './chess/GetAllChess.js';
 
 import Contains from './tileposition/Contains.js';
 import ForEachTileXY from './tileposition/ForEachTileXY.js';
-import GetWrapTileX from './tileposition/GetWrapTileX.js';
-import GetWrapTileY from './tileposition/GetWrapTileY.js';
+import GetWrapTileXY from './tileposition/GetWrapTileXY.js';
 import TileXYZToChess from './tileposition/TileXYZToChess.js';
 import TileXYToChessArray from './tileposition/TileXYToChessArray.js';
 import TileZToChessArray from './tileposition/TileZToChessArray.js';
@@ -106,8 +105,7 @@ export default {
 
     contains: Contains,
     forEachTileXY: ForEachTileXY,
-    getWrapTileX: GetWrapTileX,
-    getWrapTileY: GetWrapTileY,
+    getWrapTileXY: GetWrapTileXY,
     tileXYZToChess: TileXYZToChess,
     tileXYToChessArray: TileXYToChessArray,
     tileZToChessArray: TileZToChessArray,

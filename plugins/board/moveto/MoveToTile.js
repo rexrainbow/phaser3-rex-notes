@@ -46,17 +46,16 @@ var MoveToTile = function (tileX, tileY, direction) {
     this.destinationDirection = direction;
 
     if (board.wrapMode && (direction !== null)) {
-        var originNeighborTileX = board.grid.getNeighborTileX(myTileXYZ.x, myTileXYZ.y, direction);
-        var originNeighborTileY = board.grid.getNeighborTileY(myTileXYZ.x, myTileXYZ.y, direction);
+        this.grid.getNeighborTileXY(myTileXYZ.x, myTileXYZ.y, direction, neighborTileXY);
         // wrap mode && neighbor
-        if ((originNeighborTileX === tileX) && (originNeighborTileY === tileY)) {
+        if ((neighborTileXY.x === tileX) && (neighborTileXY.y === tileY)) {
             // not a wrapped neighbor
             var out = board.tileXYToWorldXY(tileX, tileY, true);
             this.moveAlongLine(undefined, undefined, out.x, out.y);
         } else {
             // wrapped neighbor
             // line 0
-            var out = board.tileXYToWorldXY(originNeighborTileX, originNeighborTileY, true);
+            var out = board.tileXYToWorldXY(neighborTileXY.x, neighborTileXY.y, true);
             var originNeighborWorldX = out.x;
             var originNeighborWorldY = out.y;
             out = board.tileXYToWorldXY(myTileXYZ.x, myTileXYZ.y, true);
@@ -67,9 +66,8 @@ var MoveToTile = function (tileX, tileY, direction) {
             this.moveAlongLine(undefined, undefined, endX, endY);
             // line 1
             var oppositeDirection = board.getOppositeDirection(tileX, tileY, direction);
-            originNeighborTileX = board.grid.getNeighborTileX(tileX, tileY, oppositeDirection);
-            originNeighborTileY = board.grid.getNeighborTileY(tileX, tileY, oppositeDirection);
-            out = board.tileXYToWorldXY(originNeighborTileX, originNeighborTileY, true);
+            this.grid.getNeighborTileXY(tileX, tileY, oppositeDirection, neighborTileXY);
+            out = board.tileXYToWorldXY(neighborTileXY.x, neighborTileXY.y, true);
             originNeighborWorldX = out.x;
             originNeighborWorldY = out.y;
             out = board.tileXYToWorldXY(tileX, tileY, true);
@@ -91,5 +89,6 @@ var MoveToTile = function (tileX, tileY, direction) {
 }
 
 var globTileXYZ = {};
+var neighborTileXY = {};
 
 export default MoveToTile;
