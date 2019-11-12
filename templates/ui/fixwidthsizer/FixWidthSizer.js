@@ -47,6 +47,8 @@ class FixWidthSizer extends BaseSizer {
         this.setPadding(space);
         this.setItemSpacing(GetValue(space, 'item', 0));
         this.setLineSpacing(GetValue(space, 'line', 0));
+
+        this.addChildrenMap('items', this.sizerChildren);
     }
 
     destroy(fromScene) {

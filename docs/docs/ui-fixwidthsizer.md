@@ -210,6 +210,18 @@ sizer.layout();
     sizer.clear(destroyChild);
     ```
 
+### Get element
+
+- Get element
+    - children
+        ```javascript
+        var items = label.getElement('items');
+        ```
+- Get by name
+    ```javascript
+    var gameObject = label.getElement('#' + name);
+    ```
+
 ### Other properties
 
 See [base-sizer object](ui-basesizer.md).
