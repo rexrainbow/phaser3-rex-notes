@@ -39,6 +39,8 @@ import PinchFactory from './pinch/Factory.js';
 import RotateFactory from './rotate/Factory.js';
 import FlipFactory from './flip/Factory.js';
 
+import GetParentSizer from './basesizer/GetParentSizer.js';
+import GetTopmostSizer from './basesizer/GetTopmostSizer.js';
 import {
     Show,
     Hide,
@@ -55,6 +57,8 @@ class UIPlugin extends Phaser.Plugins.ScenePlugin {
 }
 
 var methods = {
+    getParentSizer: GetParentSizer,
+    getTopmostSizer: GetTopmostSizer,
     hide: Hide,
     show: Show,
     isShown: IsShown,

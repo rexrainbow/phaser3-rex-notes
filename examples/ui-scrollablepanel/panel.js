@@ -220,11 +220,11 @@ var createIcon = function (scene, item, iconWidth, iconHeight) {
     label.getElement('icon')
         .setInteractive()
         .on('pointerdown', function () {
-            if (!label.getTopmostSizer().isInTouching()) {
+            if (!scene.rexUI.getTopmostSizer(this).isInTouching()) {
                 return;
             }
-            this.print.text += `${category}:${name}\n`;
-        }, scene);
+            scene.print.text += `${category}:${name}\n`;
+        });
 
     return label;
 };
