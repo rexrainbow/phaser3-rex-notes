@@ -1,13 +1,13 @@
-import GetSizerConfig from '../utils/GetSizerConfig.js';
+import GetParentSizer from './GetParentSizer.js';
 
 var GetTopmostSizer = function (gameObject) {
     if (gameObject === undefined) {
         gameObject = this;
     }
-    var parent = GetSizerConfig(gameObject).parent;
+    var parent = GetParentSizer(gameObject);
     while (parent) {
         gameObject = parent;
-        parent = GetSizerConfig(gameObject).parent;
+        parent = GetParentSizer(parent);
     }
     return gameObject;
 }

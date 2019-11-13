@@ -18,6 +18,7 @@ import ScaleDownDestroy from './ScaleDownDestroy.js';
 import FadeIn from './FadeIn.js';
 import FadeOutDestroy from './FadeOutDestroy.js';
 import IsInTouching from './IsInTouching.js';
+import GetParentSizer from './GetParentSizer.js';
 import GetTopmostSizer from './GetTopmostSizer.js';
 import LayoutBackgrounds from './LayoutBackgrounds.js';
 import SetDraggable from './SetDraggable.js';
@@ -45,6 +46,7 @@ export default {
     fadeIn: FadeIn,
     fadeOutDestroy: FadeOutDestroy,
     isInTouching: IsInTouching,
+    getParentSizer: GetParentSizer,
     getTopmostSizer: GetTopmostSizer,
     setDraggable: SetDraggable,
 };

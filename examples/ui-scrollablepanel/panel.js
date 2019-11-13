@@ -41,6 +41,7 @@ class Demo extends Phaser.Scene {
 
         };
 
+        this.print = this.add.text(0, 0, '');
         var scrollablePanel = this.rexUI.add.scrollablePanel({
             x: 400,
             y: 300,
@@ -170,6 +171,7 @@ var createTable = function (scene, data, key, rows) {
         item = items[i];
         r = i % rows;
         c = (i - r) / rows;
+        item.category = key;
         table.add(
             createIcon(scene, item, iconSize, iconSize),
             c,
@@ -178,6 +180,7 @@ var createTable = function (scene, data, key, rows) {
             2,
             true
         );
+        delete item.category;
     }
 
     return scene.rexUI.add.sizer({
@@ -202,7 +205,7 @@ var createTable = function (scene, data, key, rows) {
 }
 
 var createIcon = function (scene, item, iconWidth, iconHeight) {
-    return scene.rexUI.add.label({
+    var label = scene.rexUI.add.label({
         orientation: 'y',
         icon: scene.rexUI.add.roundRectangle(0, 0, iconWidth, iconHeight, 5, COLOR_LIGHT),
         text: scene.add.text(0, 0, item.name),
@@ -210,7 +213,20 @@ var createIcon = function (scene, item, iconWidth, iconHeight) {
         space: {
             icon: 10,
         }
-    })
+    });
+
+    let category = item.category;
+    let name = item.name;
+    label.getElement('icon')
+        .setInteractive()
+        .on('pointerdown', function () {
+            if (!label.getTopmostSizer().isInTouching()) {
+                return;
+            }
+            this.print.text += `${category}:${name}\n`;
+        }, scene);
+
+    return label;
 };
 
 var config = {
