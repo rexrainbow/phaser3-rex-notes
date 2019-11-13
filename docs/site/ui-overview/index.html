@@ -3959,6 +3959,33 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#helper-methods" class="md-nav__link">
+    Helper methods
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-parent" class="md-nav__link">
+    Get parent
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#showhide" class="md-nav__link">
+    Show/hide
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4730,6 +4757,33 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#helper-methods" class="md-nav__link">
+    Helper methods
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get-parent" class="md-nav__link">
+    Get parent
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#showhide" class="md-nav__link">
+    Show/hide
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4983,6 +5037,36 @@
     <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">flip</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">RexPlugins</span><span class="p">.</span><span class="nx">UI</span><span class="p">.</span><span class="nx">Flip</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">,</span> <span class="nx">config</span><span class="p">);</span>
 </pre></div></li>
 </ol>
+<h3 id="helper-methods">Helper methods<a class="headerlink" href="#helper-methods" title="Permanent link">&para;</a></h3>
+<h4 id="get-parent">Get parent<a class="headerlink" href="#get-parent" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Get parent sizer
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">parentSizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">getParentSizer</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>gameObject</code> : Any game object added to sizer.</li>
+</ul>
+</li>
+<li>Get topmost sizer
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">topmostSizer</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">getTopmostSizer</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+</pre></div><ul>
+<li><code>gameObject</code> : Any game object added to sizer.</li>
+</ul>
+</li>
+</ul>
+<h4 id="showhide">Show/hide<a class="headerlink" href="#showhide" title="Permanent link">&para;</a></h4>
+<ul>
+<li>Show
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">show</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">getTopmostSizer</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">).</span><span class="nx">layout</span><span class="p">();</span>
+</pre></div></li>
+<li>Hide
+    <div class="codehilite"><pre><span></span><span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">hide</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+<span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">getTopmostSizer</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">).</span><span class="nx">layout</span><span class="p">();</span>
+</pre></div></li>
+<li>Is shown
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">isShown</span> <span class="o">=</span> <span class="nx">scene</span><span class="p">.</span><span class="nx">rexUI</span><span class="p">.</span><span class="nx">isShown</span><span class="p">(</span><span class="nx">gameObject</span><span class="p">);</span>
+</pre></div></li>
+</ul>
 <h2 id="demos">Demos<a class="headerlink" href="#demos" title="Permanent link">&para;</a></h2>
 <ul>
 <li><a href="https://codepen.io/rexrainbow/pen/oQjMWE">Dialog</a><ul>

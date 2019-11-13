@@ -250,6 +250,38 @@
     var flip = new RexPlugins.UI.Flip(gameObject, config);
     ```
 
+### Helper methods
+
+#### Get parent
+
+- Get parent sizer
+    ```javascript
+    var parentSizer = scene.rexUI.getParentSizer(gameObject);
+    ```
+    - `gameObject` : Any game object added to sizer.
+- Get topmost sizer
+    ```javascript
+    var topmostSizer = scene.rexUI.getTopmostSizer(gameObject);
+    ```
+    - `gameObject` : Any game object added to sizer.
+
+#### Show/hide
+
+- Show
+    ```javascript
+    scene.rexUI.show(gameObject);
+    scene.rexUI.getTopmostSizer(gameObject).layout();
+    ```
+- Hide
+    ```javascript
+    scene.rexUI.hide(gameObject);
+    scene.rexUI.getTopmostSizer(gameObject).layout();
+    ```
+- Is shown
+    ```javascript
+    var isShown = scene.rexUI.isShown(gameObject);
+    ```
+
 ## Demos
 
 - [Dialog](https://codepen.io/rexrainbow/pen/oQjMWE)
