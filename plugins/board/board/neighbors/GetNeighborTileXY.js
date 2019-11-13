@@ -7,7 +7,8 @@ var GetNeighborTileXY = function (srcTileXY, directions, out) {
         }
     }
 
-    if (typeof (directions) === 'number') {
+    var isNumberDirection = (typeof (directions) === 'number');
+    if (isNumberDirection) {
         var dir = directions;
         if (out === undefined) {
             out = {};
@@ -20,7 +21,6 @@ var GetNeighborTileXY = function (srcTileXY, directions, out) {
         if ((out.x == null) || (out.y == null)) {
             out = null;
         }
-        return out;
 
     } else {
         var dir, neighborTileXY;
@@ -35,13 +35,13 @@ var GetNeighborTileXY = function (srcTileXY, directions, out) {
         for (var i = 0, cnt = directions.length; i < cnt; i++) {
             dir = directions[i];
             neighborTileXY = this.getNeighborTileXY(srcTileXY, dir);
-            if (neighborTileXY === null) {
-                continue;
+            if (neighborTileXY !== null) {
+                out.push(neighborTileXY);
             }
-            out.push(neighborTileXY);
         }
-        return out;
     }
+
+    return out;
 };
 
 var globTileXY = {};

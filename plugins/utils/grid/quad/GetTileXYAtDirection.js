@@ -2,7 +2,6 @@ import {
     OrthogonalMap,
     IsometricMap
 } from './DistanceToDeltaTileXY.js';
-import Offset from './Offset.js';
 
 var GetTileXAtDirection = function (tileX, tileY, direction, distance, out) {
     if (out === undefined) {
@@ -22,12 +21,14 @@ var GetTileXAtDirection = function (tileX, tileY, direction, distance, out) {
             deltaTileY = IsometricMap[direction][1];
             break;
     }
-    deltaTileX *= distance;
-    deltaTileY *= distance;
 
-    out.x = tileX;
-    out.y = tileY;
-    Offset.call(this, out, deltaTileX, deltaTileY, out);
+    if (distance === 1) { // Neighbor
+        out.x = tileX + deltaTileX;
+        out.y = tileY + deltaTileY;
+    } else {
+        out.x = tileX + (distance * deltaTileX);
+        out.y = tileY + (distance * deltaTileY);
+    }
     return out;
 }
 

@@ -53,6 +53,7 @@ import Fit from './transform/Fit.js';
 import GetEmptyTileXYArray from './empty/GetEmptyTileXYArray.js';
 import GetRandomEmptyTileXY from './empty/GetRandomEmptyTileXY.js';
 
+import GetTileXYAtDirection from './neighbors/GetTileXYAtDirection.js';
 import GetNeighborTileXY from './neighbors/GetNeighborTileXY.js';
 import GetNeighborChess from './neighbors/GetNeighborChess.js';
 import GetNeighborTileDirection from './neighbors/GetNeighborTileDirection.js';
@@ -123,6 +124,7 @@ export default {
     getEmptyTileXYArray: GetEmptyTileXYArray,
     getRandomEmptyTileXY: GetRandomEmptyTileXY,
 
+    getTileXYAtDirection: GetTileXYAtDirection,
     getNeighborTileXY: GetNeighborTileXY,
     getNeighborChess: GetNeighborChess,
     getNeighborTileDirection: GetNeighborTileDirection,
