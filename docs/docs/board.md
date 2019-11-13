@@ -567,6 +567,51 @@ var isOverlapping = board.isOverlappingPoint(worldX, worldY, tileZ);
    ```
    - `areNeighbor` : Return `true` if `chessA` and `chessB` are neighbors.
 
+### Tile at direction
+
+- Get tile position at 1 direction
+    ```javascript
+    var out = board.getTileXYAtDirection(srcTileXY, direction, distance);
+    // var out = board.getTileXYAtDirection(srcTileXY, direction, distance, out);
+    ```
+    - `srcTileXY` : Tile position `{x, y}` of source.
+    - `direction` : Number, or string number.
+        - `0` ~ `3` : [Quad grid](board-quadgrid.md#directions) in 4 directions mode.
+        - `0` ~ `7` : [Quad grid](board-quadgrid.md#directions) in 8 directions mode.
+        - `0` ~ `5` : [Hexagon grid](board-hexagongrid.md#directions).
+    - `distance` : A JSON, number, or number array.
+        - JSON : Range of distances. `{end: 3}` is equal to `[1,2,3]`.
+            ```javascript
+            {
+                start: 1,
+                end: 1,
+                step: 1
+            }
+            ```
+            - `start` : Start distance. Default value is `1`.
+            - `end` : End distance. Default value is `1`.
+            - `step` : Step. Default value is `1`.
+        - Number, `3`.
+        - Array of numbers, `[2, 3, 5]` : Array of distances.
+    - `out` :
+        - A single tile position, if `distance` is a number.
+        - Tile position `{x, y}` array, if `distance` is a JSON or an array.
+- Get tile positions at directions
+    ```javascript
+    var neighborTileXY = board.getTileXYAtDirection(srcTileXY, directions, distance);
+    // var out = board.getTileXYAtDirection(srcTileXY, directions, distance, out);
+    ```
+    - `directions`
+        - Array of numbers, `[0, 2, 4]`.
+        - String number concatenated via `,`, `'0,2,4'`.
+    - `out` : Tile position `{x, y}` array.
+- Get tile positions at all directions
+    ```javascript
+    var out = board.getTileXYAtDirection(srcTileXY, null, distance);
+    // var out = board.getTileXYAtDirection(srcTileXY, null, distance, out);
+    ```
+    - `out` : Tile position `{x, y}` array.
+
 ### Empty tile position
 
 - Get a random tile position which does not have any chess
