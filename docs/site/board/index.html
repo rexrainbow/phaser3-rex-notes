@@ -4431,6 +4431,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tile-at-direction" class="md-nav__link">
+    Tile at direction
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#empty-tile-position" class="md-nav__link">
     Empty tile position
   </a>
@@ -5235,6 +5242,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#tile-at-direction" class="md-nav__link">
+    Tile at direction
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#empty-tile-position" class="md-nav__link">
     Empty tile position
   </a>
@@ -5904,6 +5918,63 @@
    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">areNeighbor</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">areNeighbors</span><span class="p">(</span><span class="nx">chessA</span><span class="p">,</span> <span class="nx">chessB</span><span class="p">);</span>
 </pre></div></li>
 <li><code>areNeighbor</code> : Return <code>true</code> if <code>chessA</code> and <code>chessB</code> are neighbors.</li>
+</ul>
+<h3 id="tile-at-direction">Tile at direction<a class="headerlink" href="#tile-at-direction" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Get tile position at 1 direction
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getTileXYAtDirection</span><span class="p">(</span><span class="nx">srcTileXY</span><span class="p">,</span> <span class="nx">direction</span><span class="p">,</span> <span class="nx">distance</span><span class="p">);</span>
+<span class="c1">// var out = board.getTileXYAtDirection(srcTileXY, direction, distance, out);</span>
+</pre></div><ul>
+<li><code>srcTileXY</code> : Tile position <code>{x, y}</code> of source.</li>
+<li><code>direction</code> : Number, or string number.<ul>
+<li><code>0</code> ~ <code>3</code> : <a href="../board-quadgrid/#directions">Quad grid</a> in 4 directions mode.</li>
+<li><code>0</code> ~ <code>7</code> : <a href="../board-quadgrid/#directions">Quad grid</a> in 8 directions mode.</li>
+<li><code>0</code> ~ <code>5</code> : <a href="../board-hexagongrid/#directions">Hexagon grid</a>.</li>
+</ul>
+</li>
+<li><code>distance</code> : A JSON, number, or number array.<ul>
+<li>JSON : Range of distances. <code>{end: 3}</code> is equal to <code>[1,2,3]</code>.
+    <div class="codehilite"><pre><span></span><span class="p">{</span>
+    <span class="nx">start</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nx">end</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="nx">step</span><span class="o">:</span> <span class="mi">1</span>
+<span class="p">}</span>
+</pre></div><ul>
+<li><code>start</code> : Start distance. Default value is <code>1</code>.</li>
+<li><code>end</code> : End distance. Default value is <code>1</code>.</li>
+<li><code>step</code> : Step. Default value is <code>1</code>.</li>
+</ul>
+</li>
+<li>Number, <code>3</code>.</li>
+<li>Array of numbers, <code>[2, 3, 5]</code> : Array of distances.</li>
+</ul>
+</li>
+<li><code>out</code> :<ul>
+<li>A single tile position, if <code>distance</code> is a number.</li>
+<li>Tile position <code>{x, y}</code> array, if <code>distance</code> is a JSON or an array.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Get tile positions at directions
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">neighborTileXY</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getTileXYAtDirection</span><span class="p">(</span><span class="nx">srcTileXY</span><span class="p">,</span> <span class="nx">directions</span><span class="p">,</span> <span class="nx">distance</span><span class="p">);</span>
+<span class="c1">// var out = board.getTileXYAtDirection(srcTileXY, directions, distance, out);</span>
+</pre></div><ul>
+<li><code>directions</code><ul>
+<li>Array of numbers, <code>[0, 2, 4]</code>.</li>
+<li>String number concatenated via <code>,</code>, <code>'0,2,4'</code>.</li>
+</ul>
+</li>
+<li><code>out</code> : Tile position <code>{x, y}</code> array.</li>
+</ul>
+</li>
+<li>Get tile positions at all directions
+    <div class="codehilite"><pre><span></span><span class="kd">var</span> <span class="nx">out</span> <span class="o">=</span> <span class="nx">board</span><span class="p">.</span><span class="nx">getTileXYAtDirection</span><span class="p">(</span><span class="nx">srcTileXY</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">distance</span><span class="p">);</span>
+<span class="c1">// var out = board.getTileXYAtDirection(srcTileXY, null, distance, out);</span>
+</pre></div><ul>
+<li><code>out</code> : Tile position <code>{x, y}</code> array.</li>
+</ul>
+</li>
 </ul>
 <h3 id="empty-tile-position">Empty tile position<a class="headerlink" href="#empty-tile-position" title="Permanent link">&para;</a></h3>
 <ul>
