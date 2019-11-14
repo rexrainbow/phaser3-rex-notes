@@ -282,6 +282,13 @@
     var isShown = scene.rexUI.isShown(gameObject);
     ```
 
+### Is pointer in bounds
+
+```javascript
+var isInBounds = scene.rexUI.isInTouching(gameObject);
+// var isInBounds = scene.rexUI.isInTouching(gameObject, pointer);
+```
+
 ## Demos
 
 - [Dialog](https://codepen.io/rexrainbow/pen/oQjMWE)
