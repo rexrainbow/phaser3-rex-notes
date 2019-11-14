@@ -49,8 +49,14 @@ var CanMoveToTile = function (tileX, tileY, direction) {
 
     // Occupied test
     if (this.occupiedTest && !this.sneakMode) {
-        if (board.contains(tileX, tileY, myTileZ)) {
-            return false;
+        var occupiedChess = board.tileXYZToChess(tileX, tileY, myTileZ);
+        if (occupiedChess) {            
+            this.emit('occupy', occupiedChess, this.parent, this);
+            // Try to move occupiedChess away in this event
+            // Still ooccupied?
+            if (board.contains(tileX, tileY, myTileZ)) {
+                return false;
+            }
         }
     }
 

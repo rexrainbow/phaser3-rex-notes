@@ -46,7 +46,7 @@ var MoveToTile = function (tileX, tileY, direction) {
     this.destinationDirection = direction;
 
     if (board.wrapMode && (direction !== null)) {
-        this.grid.getNeighborTileXY(myTileXYZ.x, myTileXYZ.y, direction, neighborTileXY);
+        board.grid.getNeighborTileXY(myTileXYZ.x, myTileXYZ.y, direction, neighborTileXY);
         // wrap mode && neighbor
         if ((neighborTileXY.x === tileX) && (neighborTileXY.y === tileY)) {
             // not a wrapped neighbor
@@ -66,7 +66,7 @@ var MoveToTile = function (tileX, tileY, direction) {
             this.moveAlongLine(undefined, undefined, endX, endY);
             // line 1
             var oppositeDirection = board.getOppositeDirection(tileX, tileY, direction);
-            this.grid.getNeighborTileXY(tileX, tileY, oppositeDirection, neighborTileXY);
+            board.grid.getNeighborTileXY(tileX, tileY, oppositeDirection, neighborTileXY);
             out = board.tileXYToWorldXY(neighborTileXY.x, neighborTileXY.y, true);
             originNeighborWorldX = out.x;
             originNeighborWorldY = out.y;

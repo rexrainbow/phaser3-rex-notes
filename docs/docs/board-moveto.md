@@ -151,6 +151,12 @@ moveTo.setRotateToTarget(rotateToTarget);
 
 ### Events
 
+- Try to move on an occupied tile position
+    ```javascript
+    moveTo.on('occupy', function(occupiedChess, gameObject, moveTo){
+        // Move away occupiedChess
+    });
+    ```
 - On reached target
     ```javascript
     moveTo.on('complete', function(moveTo, gameObject){});
