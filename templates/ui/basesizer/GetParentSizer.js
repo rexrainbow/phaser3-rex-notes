@@ -1,10 +1,5 @@
-import GetSizerConfig from '../utils/GetSizerConfig.js';
+import GetParentSizer from '../utils/GetParentSizer.js';
 
-var GetParentSizer = function (gameObject) {
-    if (gameObject === undefined) {
-        gameObject = this;
-    }
-    return GetSizerConfig(gameObject).parent;
+export default function () {
+    return GetParentSizer(this);
 }
-
-export default GetParentSizer;

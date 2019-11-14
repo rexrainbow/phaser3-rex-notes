@@ -1,15 +1,5 @@
-import GetParentSizer from './GetParentSizer.js';
+import GetTopmostSizer from '../utils/GetTopmostSizer.js';
 
-var GetTopmostSizer = function (gameObject) {
-    if (gameObject === undefined) {
-        gameObject = this;
-    }
-    var parent = GetParentSizer(gameObject);
-    while (parent) {
-        gameObject = parent;
-        parent = GetParentSizer(parent);
-    }
-    return gameObject;
+export default function () {
+    return GetTopmostSizer(this);
 }
-
-export default GetTopmostSizer;

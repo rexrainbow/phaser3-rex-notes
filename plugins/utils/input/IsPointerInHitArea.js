@@ -1,32 +1,33 @@
-var IsObjectBelowPointer = function (gameObject, pointer, preTest, postTest) {
-    var isHit = false;
+var IsPointerInHitArea = function (gameObject, pointer, preTest, postTest) {
     if (pointer) {
         if (preTest && !preTest(gameObject, pointer)) {
             return false;
         }
-        isHit = HitTest(gameObject, pointer);
-        if (isHit && postTest && !postTest(gameObject, pointer)) {
+        if (!HitTest(gameObject, pointer)) {
             return false;
         }
-        return isHit;
+        if (postTest && !postTest(gameObject, pointer)) {
+            return false;
+        }
+        return true;
+
     } else {
         var inputManager = gameObject.scene.input.manager;
         var pointersTotal = inputManager.pointersTotal;
         var pointers = inputManager.pointers,
             pointer;
         for (var i = 0; i < pointersTotal; i++) {
-            isHit = false;
             pointer = pointers[i];
             if (preTest && !preTest(gameObject, pointer)) {
                 continue;
             }
-            isHit = HitTest(gameObject, pointer);
-            if (isHit && postTest && !postTest(gameObject, pointer)) {
+            if (!HitTest(gameObject, pointer)) {
                 continue;
             }
-            if (isHit) {
-                return true;
+            if (postTest && !postTest(gameObject, pointer)){
+                continue;
             }
+            return true;
         }
 
         return false;
@@ -50,4 +51,4 @@ var HitTest = function (gameObject, pointer) {
     return false;
 }
 
-export default IsObjectBelowPointer;
+export default IsPointerInHitArea;

@@ -59,6 +59,7 @@ module.exports = {
         'pinchplugin': './plugins/pinch-plugin.js',
         'dragrotateplugin': './plugins/dragrotate-plugin.js',
         'gesturesplugin': './plugins/gestures-plugin.js',
+        'touchhelperplugin': './plugins/touchhelper-plugin.js',
 
         // member of game object
         'fadeplugin': './plugins/fade-plugin.js',
