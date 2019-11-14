@@ -107,8 +107,6 @@ drag.setAxisMode(axis);
 
 ### Try drag
 
-[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/drag/try-drag.js)
-
 Game object will be dragged if there is any point above it.
 
 ```javascript
@@ -116,8 +114,6 @@ drag.drag();
 ```
 
 ### Drop
-
-[Sample code](https://github.com/rexrainbow/phaser3-rex-notes/blob/master/examples/drag/dragend.js)
 
 Game object will be dropped(dragend) manually.
 
