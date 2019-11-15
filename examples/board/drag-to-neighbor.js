@@ -55,8 +55,7 @@ class Demo extends Phaser.Scene {
                 if (!chessA) {
                     return;
                 }
-                var direction = board.angleSnapToDirection(chessA, pointer.getAngle());
-                var neighborTileXY = board.getNeighborTileXY(chessA, direction);
+                var neighborTileXY = board.getNeighborTileXYAtAngle(chessA, pointer.getAngle());
                 if (neighborTileXY) {
                     neighobrChess = this.rexBoard.add.shape(board, neighborTileXY.x, neighborTileXY.y, 0, COLOR_PRIMARY);
                 }

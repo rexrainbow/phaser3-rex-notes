@@ -95,14 +95,10 @@ class Board {
     }
 
     getNeighborChessAtAngle(chess, angle) {
-        var direction = this.board.angleSnapToDirection(chess, angle);
-        var neighborTileXY = this.board.getNeighborTileXY(chess, direction);
-        var neighborChess;
-        if (neighborTileXY) {
-            neighborChess = this.board.tileXYZToChess(neighborTileXY.x, neighborTileXY.y, this.chessTileZ);
-        } else {
-            neighborChess = null;
-        }
+        var neighborTileXY = this.board.getNeighborTileXYAtAngle(chess, angle);
+        var neighborChess = (neighborTileXY) ?
+            this.board.tileXYZToChess(neighborTileXY.x, neighborTileXY.y, this.chessTileZ) :
+            null;
         return neighborChess;
     }
 }

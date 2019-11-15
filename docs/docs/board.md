@@ -537,6 +537,14 @@ var isOverlapping = board.isOverlappingPoint(worldX, worldY, tileZ);
     var direction = board.getNeighborTileDirection(srcTile, neighborTileXY);
     ```
     - `direction` : Return `null` if these 2 tile positions are not neighbors.
+- Get neighbor tile position at angle
+    ```javascript
+    var neighborTileXY = board.getNeighborTileXYAtAngle(srcTileXY, angle);
+    // var out = board.getNeighborTileXY(srcTileXY, angle, out);
+    ```
+    - `srcTileXY` : Tile position `{x, y}` of source.
+    - `angle` : Angle in radius.
+    - `neighborTileXY` : Tile position `{x, y}` of neighbor. Retrun `null` if no neighbor there (i.e. source chess is at the edge of board.)
 
 #### Neighbor chess
 

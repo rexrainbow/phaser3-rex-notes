@@ -56,6 +56,7 @@ import GetRandomEmptyTileXY from './empty/GetRandomEmptyTileXY.js';
 
 import GetTileXYAtDirection from './neighbors/GetTileXYAtDirection.js';
 import GetNeighborTileXY from './neighbors/GetNeighborTileXY.js';
+import GetNeighborTileXYAtAngle from './neighbors/GetNeighborTileXYAtAngle.js';
 import GetNeighborChess from './neighbors/GetNeighborChess.js';
 import GetNeighborTileDirection from './neighbors/GetNeighborTileDirection.js';
 import GetNeighborChessDirection from './neighbors/GetNeighborChessDirection.js';
@@ -128,6 +129,7 @@ export default {
 
     getTileXYAtDirection: GetTileXYAtDirection,
     getNeighborTileXY: GetNeighborTileXY,
+    getNeighborTileXYAtAngle: GetNeighborTileXYAtAngle,
     getNeighborChess: GetNeighborChess,
     getNeighborTileDirection: GetNeighborTileDirection,
     getNeighborChessDirection: GetNeighborChessDirection,
