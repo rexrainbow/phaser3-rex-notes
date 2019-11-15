@@ -59,9 +59,7 @@ class Bejeweled extends EE {
     selectChess(pointer) {
         if (pointer.isDown) {
             var chess = this.board.worldXYToChess(pointer.worldX, pointer.worldY);
-            if (chess) {
-                this.mainState.selectChess(chess);
-            }
+            this.mainState.selectChess(chess);
         } else { // pointer-up
             var chess1 = this.mainState.selectedChess1;
             if (chess1) {
