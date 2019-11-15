@@ -85,30 +85,25 @@ class Board {
         return this;
     }
 
-    onPointerDown(callback, scope) {
-        this.board
-            .setInteractive()
-            .on('gameobjectdown', callback, scope);
-        return this;
+    worldXYToChess(worldX, worldY) {
+        var tileXY = this.board.worldXYToTileXY(worldX, worldY, true);
+        return this.tileXYToChess(tileXY.x, tileXY.y);
     }
 
-    onPointerMove(callback, scope) {
-        this.board
-            .setInteractive()
-            .on('gameobjectmove', function (pointer, gameObject) {
-                if (!pointer.isDown) {
-                    return;
-                }
-                callback.call(scope, pointer, gameObject);
-            });
-        return this;
+    tileXYToChess(tileX, tileY) {
+        return this.board.tileXYZToChess(tileX, tileY, this.chessTileZ);
     }
 
-    onPointerUp(callback, scope) {
-        this.board
-            .setInteractive()
-            .on('gameobjectup', callback, scope);
-        return this;
+    getNeighborChessAtAngle(chess, angle) {
+        var direction = this.board.angleSnapToDirection(chess, angle);
+        var neighborTileXY = this.board.getNeighborTileXY(chess, direction);
+        var neighborChess;
+        if (neighborTileXY) {
+            neighborChess = this.board.tileXYZToChess(neighborTileXY.x, neighborTileXY.y, this.chessTileZ);
+        } else {
+            neighborChess = null;
+        }
+        return neighborChess;
     }
 }
 

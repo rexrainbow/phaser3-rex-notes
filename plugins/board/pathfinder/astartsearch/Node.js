@@ -53,9 +53,7 @@ class Node {
     }
 
     getNeighborNodes() {
-        globTileXY.x = this.x;
-        globTileXY.y = this.y;
-        var neighborsLXY = this.board.getNeighborTileXY(globTileXY);
+        var neighborsLXY = this.board.getNeighborTileXY(this);
         if (this.pathFinder.shuffleNeighbors) {
             Shuffle(neighborsLXY);
         }
@@ -110,5 +108,4 @@ class Node {
     }
 }
 
-var globTileXY = {};
 export default Node;

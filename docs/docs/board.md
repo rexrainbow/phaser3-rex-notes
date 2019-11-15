@@ -467,6 +467,18 @@ var isInCone = board.isDirectionInCone(chessA, chessB, face, cone);
 var direction = board.getOppositeDirection(tileX, tileY, direction);
 ```
 
+### Angle snap to direction
+
+```javascript
+var direction = board.angleSnapToDirection(chess, angle);
+```
+
+- `chess` : Chess object, or tileXY, or `undefined`.
+- `angle` : Angle in radius.
+- `direction` : Integer number.
+    - [Quad grid](board-quadgrid.md#directions) : `0`, `1`, `2`, `3`, `4`, `5`, `6`, `7`.
+    - [Hexagon grid](board-hexagongrid.md#directions) : `0`, `1`, `2`, `3`, `4`, `5`.
+
 ### Align world position to grid
 
 - Align one chess object

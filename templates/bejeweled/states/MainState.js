@@ -79,7 +79,7 @@ class State extends FSM {
     }
     next_SELECT1() {
         var nextState;
-        if (this.selectedChess1 !== undefined) {
+        if (this.selectedChess1) {
             nextState = 'SELECT2';
         }
         return nextState;
@@ -90,7 +90,7 @@ class State extends FSM {
     // SELECT2    
     next_SELECT2() {
         var nextState;
-        if ((this.selectedChess2 !== undefined) &&
+        if (this.selectedChess2 &&
             this.board.board.areNeighbors(this.selectedChess1, this.selectedChess2)) {
             nextState = 'SWAP';
         } else {

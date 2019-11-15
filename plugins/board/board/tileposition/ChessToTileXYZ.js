@@ -4,13 +4,16 @@ import GetChessUID from '../../chess/GetChessUID.js';
 import IsTileXY from '../../utils/IsTileXY.js';
 
 var ChessToTileXYZ = function (chess) {
+    if (!chess) {
+        return null;
+    }
+
     // chess: chess object, UID, or tileXYZ
     if (IsUID(chess) || IsChess(chess)) { // UID, or game object
         var uid = GetChessUID(chess);
         return this.boardData.getXYZ(uid);
     } else if (IsTileXY(chess)) { // {x, y}, or {x, y, z}
-        var tileXYZ = chess;
-        return tileXYZ;
+        return chess;
     } else {
         return null;
     }

@@ -1,4 +1,7 @@
 var AngleToward = function (tileXY, direction) {
+    if (tileXY === undefined) {
+        tileXY = zeroTileXY;
+    }
     // Save wrapMode, infinityMode and clear them
     var wrapModeSave = this.wrapMode;
     var infinityModeSave = this.infinityMode;
@@ -11,7 +14,9 @@ var AngleToward = function (tileXY, direction) {
     // Restore wrapMode, infinityMode and clear them
     this.wrapMode = wrapModeSave;
     this.infinityMode = infinityModeSave;
-    return this.angleBetween(tileXY, neighborTileXY);
+    return this.angleBetween(tileXY, neighborTileXY); // -PI~PI
 }
+
+var zeroTileXY = { x: 0, y: 0 };
 
 export default AngleToward;

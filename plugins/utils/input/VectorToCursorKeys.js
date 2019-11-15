@@ -140,7 +140,7 @@ class VectorToCursorKeys extends CursorKeys {
     }
 
     get angle() {
-        return RadToDeg(this.rotation);; // -180 ~ 180
+        return RadToDeg(this.rotation); // -180 ~ 180
     }
 
     get octant() {

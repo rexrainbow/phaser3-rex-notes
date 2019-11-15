@@ -18,15 +18,18 @@ class Bejeweled extends EE {
 
     boot() {
         // touch control
-        this.board
-            .onPointerDown(this.selectChess, this)
-            .onPointerMove(this.selectChess, this)
-            .onPointerUp(this.cancelSelecting, this);
+        this.scene.input
+            .on('pointerdown', this.selectChess, this)
+            .on('pointerup', this.selectChess, this);
 
         this.scene.events.once('shutdown', this.destroy, this);
     }
 
     shutdown() {
+        this.scene.input
+            .off('pointerdown', this.selectChess, this)
+            .off('pointerup', this.selectChess, this);
+
         super.shutdown();
         this.board.shutdown();
         this.mainState.shutdown();
@@ -53,12 +56,19 @@ class Bejeweled extends EE {
         return this;
     }
 
-    selectChess(pointer, chess) {
-        this.mainState.selectChess(chess);
-    }
-
-    cancelSelecting() {
-        this.mainState.selectChess();
+    selectChess(pointer) {
+        if (pointer.isDown) {
+            var chess = this.board.worldXYToChess(pointer.worldX, pointer.worldY);
+            if (chess) {
+                this.mainState.selectChess(chess);
+            }
+        } else { // pointer-up
+            var chess1 = this.mainState.selectedChess1;
+            if (chess1) {
+                var chess2 = this.board.getNeighborChessAtAngle(chess1, pointer.getAngle());
+                this.mainState.selectChess(chess2);
+            }
+        }
     }
 }
 

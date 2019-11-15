@@ -14,6 +14,7 @@ import WorldXYSnapToGrid from './worldposition/WorldXYSnapToGrid.js';
 import AngleBetween from './worldposition/AngleBetween.js';
 import IsAngleInCone from './worldposition/IsAngleInCone.js';
 import AngleToward from './worldposition/AngleToward.js';
+import AngleSnapToDirection from './worldposition/AngleSnapToDirection.js';
 import IsOverlappingPoint from './worldposition/IsOverlappingPoint.js';
 import GridAlign from './worldposition/GridAlign.js';
 
@@ -85,6 +86,7 @@ export default {
     angleBetween: AngleBetween,
     isAngleInCone: IsAngleInCone,
     angleToward: AngleToward,
+    angleSnapToDirection: AngleSnapToDirection,
     isOverlappingPoint: IsOverlappingPoint,
     gridAlign: GridAlign,
 

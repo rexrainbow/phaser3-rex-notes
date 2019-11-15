@@ -1,7 +1,5 @@
-import IsPlainObject from '../../utils/object/IsPlainObject.js';
-
 var IsTileXYZ = function (tileXY) {
-    return IsPlainObject(tileXY) &&
+    return (!!tileXY) &&
         tileXY.hasOwnProperty('x') &&
         tileXY.hasOwnProperty('y');
 }
